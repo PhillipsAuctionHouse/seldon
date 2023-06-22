@@ -12,11 +12,13 @@
   "files": ["dist"],
   "scripts": {
     "dev": "vite",
-    "build": "rimraf './dist' && tsc && vite build && rimraf --glob './public/scss'",
+    "clean": "rimraf './dist'rimraf",
+    "clean:stories": "rimraf ./storybook-static'",
+    "build": "npm run clean && tsc && vite build && rimraf --glob './public/scss'",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "start": "storybook dev -p 6006",
+    "build-storybook": "npm run clean:stories && storybook build"
   },
   "dependencies": {
     "react": "^18.2.0",
