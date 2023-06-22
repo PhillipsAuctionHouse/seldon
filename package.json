@@ -1,11 +1,18 @@
 {
   "name": "seldon",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "rimraf './dist' && tsc && vite build && rimraf --glob './public/scss'",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
@@ -34,12 +41,14 @@
     "eslint-plugin-react-refresh": "^0.3.4",
     "eslint-plugin-storybook": "^0.6.12",
     "prop-types": "^15.8.1",
+    "rimraf": "^5.0.1",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "sass": "^1.63.4",
     "storybook": "^7.0.22",
     "typescript": "^5.0.2",
-    "vite": "^4.3.9"
+    "vite": "^4.3.9",
+    "vite-plugin-dts": "^2.3.0"
   },
   "peerDependencies": {
     "react": "^18.2.0",
