@@ -1,10 +1,12 @@
+import classnames from 'classnames';
 
+import { px } from '../../utils';
 
 interface ButtonProps {
   /**
    * Is this the principal call to action on the page?
    */
-  primary?: boolean;
+  primary?: boolean ;
   /**
    * What background color to use
    */
@@ -16,7 +18,7 @@ interface ButtonProps {
   /**
    * Button contents
    */
-  label: string;
+  label: React.ReactElement | string;
   /**
    * Optional click handler
    */
@@ -26,6 +28,7 @@ interface ButtonProps {
 /**
  * Primary UI component for user interaction
  */
+
 const Button = ({
   primary = false,
   size = 'medium',
@@ -33,11 +36,10 @@ const Button = ({
   label,
   ...props
 }: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
   return (
     <button
       type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
+      className={classnames(`${px}-button`,`${px}-button--${size}`, {[`${px}-button--secondary`]: !primary})}
       style={{ backgroundColor }}
       {...props}
     >

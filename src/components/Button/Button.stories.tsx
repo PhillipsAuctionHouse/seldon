@@ -15,11 +15,15 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+
+
+const labelComponent = <p>hey</p>
+
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Primary: Story = {
   args: {
     primary: true,
-    label: 'Button',
+    label: labelComponent,
   },
 };
 
