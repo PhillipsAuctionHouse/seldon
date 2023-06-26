@@ -20,25 +20,14 @@ type Story = StoryObj<typeof meta>;
 const labelComponent = <p>hey</p>
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-export const Primary: Story = {
+export const Playground: Story = {
   args: {
     primary: true,
-    label: labelComponent,
+    label: "Button",
   },
 };
 
-export const Secondary: Story = {
-  args: {
-    label: 'Button',
-  },
-};
 
-export const Large: Story = {
-  args: {
-    size: 'large',
-    label: 'Button',
-  },
-};
 
 export const Small: Story = {
   args: {

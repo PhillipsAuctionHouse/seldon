@@ -1,0 +1,207 @@
+import { Meta } from '@storybook/blocks';
+import Code from '../assets/code-brackets.svg';
+import Colors from '../assets/colors.svg';
+import Comments from '../assets/comments.svg';
+import Direction from '../assets/direction.svg';
+import Flow from '../assets/flow.svg';
+import Plugin from '../assets/plugin.svg';
+import Repo from '../assets/repo.svg';
+import StackAlt from '../assets/stackalt.svg';
+import ColorCard from './ColorCard';
+
+<Meta title="Design/Color Tokens" />
+
+<style>
+  {`
+    #colors-gradients-and-transparencies- {
+      display: flex;
+      margin-bottom: 4rem;
+    }
+
+    #colors-gradients-and-transparencies- img {
+      margin-left: 1rem;
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    .color__h2 {
+      font-size: 1rem;
+      color: #4a90e2;
+      display: inline-block;
+      letter-spacing: 0.375rem;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    .color__h3 {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    .color__p p{
+      margin-bottom: 2rem;
+    }
+
+    .color__list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 1fr;
+      grid-column-gap: 1rem;
+      grid-row-gap: 1rem;
+      margin-bottom: 4rem;
+    }
+
+    .phillips-color-card {
+
+    }
+
+    .tip {
+      display: inline-block;
+      border-radius: 1em;
+      font-size: 11px;
+      line-height: 12px;
+      font-weight: 700;
+      background: #E7FDD8;
+      color: #66BF3C;
+      padding: 4px 12px;
+      margin-right: 10px;
+      vertical-align: top;
+    }
+
+    .tip-wrapper {
+      font-size: 13px;
+      line-height: 20px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .tip-wrapper code {
+      font-size: 12px;
+      display: inline-block;
+    }
+  `}
+</style>
+
+<main className="sb-unstyled">
+# Colors, Gradients, and Transparencies <img src={Colors} alt="colors" />
+
+## <span className="color__h2">Primary Color Palette</span>
+
+<h3 className="color__h3">Black ﹡ White</h3>
+<span className="color__p">
+  We utilize black and white as our primary palette as the PHILLIPS brand relies
+  heavily on the gallery presentation - i.e. allowing the Art to stand out. It
+  tends to skew to 75% white, 25% black. Pure black is used on Fills, logo, and
+  wordmarks for a more luxurious depth; our Primary Black value is used on
+  Titles/Headers and Button elements. White is predominantly use to offer
+  breathable and clean-presenting negative spacing.
+</span>
+
+<div className="color__list">
+  <ColorCard
+    label="Pure Black"
+    hex="#000000"
+    usage="BG Fills, Logo, Wordmarks"
+  />
+  <ColorCard
+    label="Primary Black"
+    hex="#323232"
+    usage="Headers, Buttons' Fill & Stroke"
+  />
+  <ColorCard
+    label="Pure White"
+    hex="#ffffff"
+    usage="Negative Space, Text on Dark BG"
+  />
+</div>
+
+## <span className="color__h2">Secondary Color Palette</span>
+
+<h3 className="color__h3">Dark Grays</h3>
+<span className="color__p">
+  In order to create depth and add levels of heirarchy, we utilize Soft Black
+  and Dark Gray for body blocks or varying importances.
+</span>
+
+<div className="color__list">
+  <ColorCard label="Soft Black" hex="#545454" usage="body/Text Blocks" />
+  <ColorCard label="Dark Gray" hex="#75716f" usage="Labels & Badges" />
+</div>
+
+## <span className="color__h2">Utilitarian Color Palette</span>
+
+<h3 className="color__h3">Keylines ﹡ Med & Lite Grays</h3>
+<span className="color__p">
+  These are used for utilitarian purposes - keylines, disabled states, inactive
+  states, BG fills for Banners, Sections, and Cards
+</span>
+
+<div className="color__list">
+  <ColorCard
+    label="Keyline Gray"
+    hex="#949494"
+    usage="All keylines, strokes, and HRs"
+  />
+  <ColorCard
+    label="Medium Gray"
+    hex="#c3bebb"
+    usage="Disabled/Inactive Buttons"
+  />
+  <ColorCard label="Light Gray" hex="#eceae7" usage="BG fills" />
+  <ColorCard label="Off White" hex="#f4f2f1" usage="BG fills" />
+</div>
+
+## <span className="color__h2">Notification Color Palette</span>
+
+<h3 className="color__h3">Cyan ﹡ Reds ﹡ Magenta ﹡ Green</h3>
+<span className="color__p">
+  We utiilize black and white as our primary palette as the PHILLIPS brand
+  relies heavily on the gallery presentation - i.e. allowing the Art to stand
+  out. It tends to skew to 75% white, 25% black. Pure black is used on Fills,
+  logo, and wordmarks for a more luxurious depth; our Primary Black value is
+  used on Titles/Headers and Button elements. White is predominantly use to
+  offer breathable and clean-presenting negative spacing.
+</span>
+
+<div className="color__list">
+
+  <ColorCard
+    label="Error Red"
+    hex="#ff0000"
+    usage="Error Messaging"
+  />
+  <ColorCard
+    label="Post-Sale Magenta"
+    hex="#ff0086"
+    usage="Sold Price, Concluded Labels"
+  />
+  <ColorCard
+    label="Color Widget Blue"
+    hex="#4a90e2"
+    usage="'Bid is with you'"
+  />
+  <ColorCard
+    label="Clock Widget Green"
+    hex="#6a9c53"
+    usage="'Live'"
+  />
+  <ColorCard
+    label="Clock Widget Maroon"
+    hex="#6b0000"
+    usage="'Countdown"
+  />
+  <ColorCard
+    label="Clock Widget Red"
+    hex="#b00000"
+    usage="'Closing' 'You've Been Outbid'"
+  />
+</div>
+
+<div className="tip-wrapper">
+  <span className="tip">Tip</span>Click on the pallet tiles to copy the token
+</div>
+</main>

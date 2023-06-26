@@ -1,6 +1,5 @@
-// .storybook/YourTheme.js
-
 import { create } from '@storybook/theming/create';
+// @ts-ignore
 import Logo from './assets/LogoBlack.svg';
 
 export default create({
@@ -15,11 +14,11 @@ export default create({
   brandTarget: '_self',
 
   //
-  colorPrimary: '#ff0000',
-  colorSecondary: '#eeeeee',
+  colorPrimary: '#4A90e2',
+  colorSecondary: '#ff0086',
 
   // UI
-  appBg: '#ffffff',
+  appBg: 'rgb(244 242 241 / 12%)',
   appContentBg: '#ffffff',
   appBorderColor: '#585C6D',
   appBorderRadius: 4,

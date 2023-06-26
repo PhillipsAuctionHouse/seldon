@@ -1,0 +1,69 @@
+import { Meta } from '@storybook/blocks';
+import Code from './assets/code-brackets.svg';
+import Colors from './assets/colors.svg';
+import Comments from './assets/comments.svg';
+import Direction from './assets/direction.svg';
+import Flow from './assets/flow.svg';
+import Plugin from './assets/plugin.svg';
+import Repo from './assets/repo.svg';
+import StackAlt from './assets/stackalt.svg';
+
+<Meta title="Welcome" />
+
+<style>
+  {`
+    .subheading {
+      --mediumdark: '#999999';
+      font-weight: 700;
+      font-size: 13px;
+      color: #999;
+      letter-spacing: 6px;
+      line-height: 24px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      margin-top: 40px;
+    }
+
+    .welcome-header-text {
+      font-size: 3rem;
+    }
+
+    .welcome-header-blurb  {
+      display: inline-flex;
+    }
+
+    .welcome-hero-text p{
+      font-size: 1.5rem;
+      line-height: 1.25
+    }
+  `}
+</style>
+
+# <span className="welcome-header-text">Easel Design System 🎨 </span><span className="welcome-header-blurb">by Phillips Auction House</span>
+
+<span className="welcome-hero-text">
+  This is your one stop shop to find our design guidelines, component
+  documentation, and resources for building apps with Phillips.com’s design
+  system.
+</span>
+
+<div className="subheading">Configure</div>
+
+    <img src={Plugin} alt="plugin" />
+
+    <img src={StackAlt} alt="Build" />
+
+
+    <img src={Colors} alt="colors" />
+
+    <img src={Flow} alt="flow" />
+
+
+    <img src={Repo} alt="repo" />
+
+
+    <img src={Direction} alt="direction" />
+
+    <img src={Code} alt="code" />
+
+    <img src={Comments} alt="comments" />

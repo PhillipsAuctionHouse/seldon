@@ -1,5 +1,7 @@
 import type { Preview } from "@storybook/react";
 import '../src/styles.scss';
+import '../src/story-styles.scss';
+
 
 const preview: Preview = {
   parameters: {
@@ -8,6 +10,11 @@ const preview: Preview = {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/,
+      },
+    },
+    options: {
+      storySort: {
+        order: ['Welcome', 'Design', 'Components', 'Pages'],
       },
     },
   },
