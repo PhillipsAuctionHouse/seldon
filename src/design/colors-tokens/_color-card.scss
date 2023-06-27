@@ -17,6 +17,7 @@
     background-color: var(--hex-value);
     border-bottom: 1px solid $primary-black;
     content: '';
+    cursor: pointer;
     height: 6rem;
     position: absolute;
     right: 0;
@@ -26,7 +27,7 @@
 
   &__token.#{$px}-color-card__token {
     color: $primary-black;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 700;
     line-height: 1.5;
   }
@@ -48,5 +49,35 @@
     display: block;
     font-weight: 700;
     line-height: 1.625;
+  }
+
+  &__copied {
+    animation: show-and-hide 2s ease-in-out;
+    color: $pure-white;
+    font-weight: bold;
+    left: 50%;
+    position: absolute;
+    top: 2.5rem;
+    transform: translateX(-55%);
+    white-space: nowrap;
+
+    &--light {
+      color: $pure-black;
+    }
+  }
+}
+
+@keyframes show-and-hide {
+  0% {
+    opacity: 0;
+    transform: translate(-55%, 0.75rem);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-55%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-55%, 0);
   }
 }

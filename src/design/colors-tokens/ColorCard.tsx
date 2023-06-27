@@ -1,5 +1,7 @@
 
 import React from 'react';
+import Color from 'color';
+import classnames from 'classnames';
 
 import { px } from '../../utils';
 
@@ -38,7 +40,7 @@ const ColorCard = ({
     () => {
       const timer = setTimeout(() => {
         setCopied(false);
-      }, 500);
+      }, 2000);
 
       return () => clearTimeout(timer);
     }, [copied]
@@ -66,7 +68,7 @@ const ColorCard = ({
     >
       {
         copied ?
-        <span className={`${baseClass}__copied`}>Copied!</span>
+        <span className={classnames(`${baseClass}__copied`, {[`${baseClass}__copied--light`]: Color(hex).isLight()})}>Copied '{`$${label.replace(/\s+/g, '-').toLowerCase()}`}'</span>
         : null
       }
       <span id={`token-${label}`} className={`${baseClass}__token`}>{label}</span>

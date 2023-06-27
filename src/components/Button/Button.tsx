@@ -20,6 +20,10 @@ interface ButtonProps {
    */
   label: React.ReactElement | string;
   /**
+  * Unique id for component
+  */
+  id?: string ;
+  /**
    * Optional click handler
    */
   onClick?: () => void;
@@ -34,10 +38,12 @@ const Button = ({
   size = 'medium',
   backgroundColor,
   label,
+  id,
   ...props
 }: ButtonProps) => {
   return (
     <button
+      data-testid={id ? `button-${id}` : `button`}
       type="button"
       className={classnames(`${px}-button`,`${px}-button--${size}`, {[`${px}-button--secondary`]: !primary})}
       style={{ backgroundColor }}
