@@ -22,16 +22,7 @@ const labelComponent = <p>hey</p>
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Playground: Story = {
   args: {
-    primary: true,
+    primary: false,
     label: "Button",
-  },
-};
-
-
-
-export const Small: Story = {
-  args: {
-    size: 'small',
-    label: 'Button',
   },
 };

@@ -15,10 +15,12 @@ export default create({
 
   //
   colorPrimary: '#4A90e2',
-  colorSecondary: '#ff0086',
+  // colorSecondary: '#ff0086',
+  colorSecondary: '#000000',
 
   // UI
-  appBg: 'rgb(244 242 241 / 12%)',
+  // appBg: 'rgb(244 242 241 / 12%)',
+  appBg: '#ffffff',
   appContentBg: '#ffffff',
   appBorderColor: '#585C6D',
   appBorderRadius: 4,
@@ -29,7 +31,8 @@ export default create({
 
   // Toolbar default and active colors
   barTextColor: '#9E9E9E',
-  barSelectedColor: '#585C6D',
+  barSelectedColor: '#000000',
+  // barSelectedColor: '#585C6D',
   barBg: '#ffffff',
 
   // Form colors

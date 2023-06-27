@@ -1,5 +1,6 @@
 
 import React from 'react';
+
 import { px } from '../../utils';
 
 interface ColorCardProps {
@@ -33,6 +34,16 @@ const ColorCard = ({
 }: ColorCardProps) => {
   const [copied, setCopied] = React.useState(false);
 
+  React.useEffect(
+    () => {
+      const timer = setTimeout(() => {
+        setCopied(false);
+      }, 500);
+
+      return () => clearTimeout(timer);
+    }, [copied]
+  )
+
   const handleOnClick = function (str: string): void {
     if (navigator && navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(str)
@@ -53,6 +64,11 @@ const ColorCard = ({
       onClick={() => handleOnClick(`$${label.replace(/\s+/g, '-').toLowerCase()}`)}
       style={{['--hex-value' as any]: hex}}
     >
+      {
+        copied ?
+        <span className={`${baseClass}__copied`}>Copied!</span>
+        : null
+      }
       <span id={`token-${label}`} className={`${baseClass}__token`}>{label}</span>
       <span className={`${baseClass}__hex`}>{hex}</span>
       <span className={`${baseClass}__usage`}>
