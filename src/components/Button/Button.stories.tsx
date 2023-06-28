@@ -17,7 +17,7 @@ type Story = StoryObj<typeof meta>;
 
 
 
-const labelComponent = <p>hey</p>
+// const labelComponent = <p>hey</p>
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Playground: Story = {
