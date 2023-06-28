@@ -24,5 +24,3 @@ jobs:
         run: npm ci
 
       - run: npm run build
-      # currently no unit tests
-      # - run: npm test
