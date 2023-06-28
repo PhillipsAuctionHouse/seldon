@@ -19,13 +19,13 @@ yarn add @phillips/seldon
 The project contains a `scss` folder. Here you will find the main export of our sass styles. This will include all the styles bundled with this package, including resets and typography styles.
 
 ```scss
-@use '@phillips/scss/styles';
+@use '@phillips/seldon/scss/styles';
 ```
 
 If you wish to only import specific component styles you can find them in their respective directories inside the `scss` folder.
 
 ```scss
-@use '@phillips/scss/components/Button/button';
+@use '@phillips/seldon/scss/components/Button/button';
 ```
 
 ### Components
@@ -33,11 +33,11 @@ If you wish to only import specific component styles you can find them in their 
 Each component can be imported in your project by referencing the component name inside the `components` directory.
 
 ```js
-import Button from '@phillips/components/Button/Button';
+import Button from '@phillips/seldon/components/Button/Button';
 ```
 
 You can also use named exports for multiple component imports from main index file.
 
 ```js
-import { Button } from '@phillips';
+import { Button } from '@phillips/seldon';
 ```
