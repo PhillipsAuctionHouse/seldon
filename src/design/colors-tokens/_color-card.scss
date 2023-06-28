@@ -14,7 +14,7 @@
   width: 100%;
 
   &::before {
-    background-color: var(--hex-value);
+    background: var(--hex-value);
     border-bottom: 1px solid $primary-black;
     content: '';
     cursor: pointer;

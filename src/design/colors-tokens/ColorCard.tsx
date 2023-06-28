@@ -72,7 +72,7 @@ const ColorCard = ({
         : null
       }
       <span id={`token-${label}`} className={`${baseClass}__token`}>{label}</span>
-      <span className={`${baseClass}__hex`}>{hex}</span>
+      <span className={`${baseClass}__hex`}>{hex.replace(/linear-gradient/g, '')}</span>
       <span className={`${baseClass}__usage`}>
         <span>Usage:</span>
         {usage}
