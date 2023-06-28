@@ -1,5 +1,5 @@
 {
-  "name": "seldon",
+  "name": "@phillips/seldon",
   "version": "0.0.0",
   "type": "module",
   "module": "./dist/index.js",
