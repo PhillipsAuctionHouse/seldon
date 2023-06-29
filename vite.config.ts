@@ -46,7 +46,7 @@ export default defineConfig({
 
             // Sass components
             {
-              src: ['src/components/**/*.scss', 'src/pages/**/*.scss'],
+              src: ['src/components/**/*.scss', 'src/pages/**/*.scss', 'src/utils/**/*.scss'],
               dest: ['dist/scss', 'public/scss'],
             },
           ],
