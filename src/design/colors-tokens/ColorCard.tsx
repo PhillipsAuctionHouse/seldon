@@ -28,6 +28,15 @@ interface ColorCardProps {
  * Primary UI component for user interaction
  */
 
+const isColorLight = (color: string): boolean => {
+  if (color.includes('gradient')) {
+    const start = color.indexOf('#');
+    const end = color.indexOf(',');
+    return Color(color.substring(start,end)).isLight();
+  }
+  return Color(color).isLight();
+};
+
 const ColorCard = ({
   label,
   hex,
@@ -58,7 +67,7 @@ const ColorCard = ({
     }
 
   };
-  const baseClass = `${px}-color-card`
+  const baseClass = `${px}-color-card`;
   return (
     <button
       type="button"
@@ -68,7 +77,7 @@ const ColorCard = ({
     >
       {
         copied ?
-        <span className={classnames(`${baseClass}__copied`, {[`${baseClass}__copied--light`]: Color(hex).isLight()})}>Copied '{`$${label.replace(/\s+/g, '-').toLowerCase()}`}'</span>
+        <span className={classnames(`${baseClass}__copied`, {[`${baseClass}__copied--light`]: isColorLight(hex)})}>Copied '{`$${label.replace(/\s+/g, '-').toLowerCase()}`}'</span>
         : null
       }
       <span id={`token-${label}`} className={`${baseClass}__token`}>{label}</span>
