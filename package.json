@@ -2,21 +2,30 @@
   "name": "@phillips/seldon",
   "version": "1.1.5",
   "type": "module",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.js",
+        "default": "./dist/index.d.ts"
+      }
+    },
+    "./dist/": {
+      "import": "./dist/"
     }
   },
   "files": [
-    "dist/**"
+    "dist/**",
+    "!dist/src"
   ],
   "scripts": {
     "dev": "vite",
     "clean": "rimraf './dist'rimraf",
     "clean:stories": "rimraf ./storybook-static'",
     "build": "npm run clean && tsc && vite build && rimraf --glob './public/scss'",
+    "postbuild": "cp package.json dist",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "start": "storybook dev -p 6006",
@@ -64,6 +73,7 @@
     "react-dom": "^18.2.0"
   },
   "release": {
+    "pkgRoot": "dist",
     "branches": [
       "main"
     ],
