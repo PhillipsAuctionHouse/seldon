@@ -9,6 +9,9 @@
       "import": "./dist/index.js"
     }
   },
+  "files": [
+    "dist/**"
+  ],
   "scripts": {
     "dev": "vite",
     "clean": "rimraf './dist'rimraf",
@@ -67,10 +70,17 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
       [
-        "@semantic-release/npm",
+        "@semantic-release/github",
         {
-          "pkgRoot": ["./dist"]
+          "assets": [
+            "./dist/**",
+            "package.json",
+            "package-lock.json",
+            "README.md",
+            "CHANGELOG.md"
+          ]
         }
       ],
       [
@@ -78,9 +88,9 @@
         {
           "assets": [
             "package.json",
+            "package-lock.json",
             "README.md",
-            "CHANGELOG.md",
-            "dist/**/*.{js}"
+            "CHANGELOG.md"
           ],
           "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
         }
