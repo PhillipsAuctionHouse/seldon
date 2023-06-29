@@ -22,19 +22,22 @@
   ],
   "scripts": {
     "dev": "vite",
+    "build": "npm run clean && tsc && vite build && rimraf --glob './public/scss'",
+    "build:storybook": "storybook build",
     "clean": "rimraf './dist'rimraf",
     "clean:stories": "rimraf './storybook-static'",
-    "build": "npm run clean && tsc && vite build && rimraf --glob './public/scss'",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "npx http-server storybook-static",
     "start": "storybook dev -p 6006",
-    "build:storybook": "storybook build"
+    "preview": "npx http-server storybook-static",
+    "prepare": "husky install"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
     "@semantic-release/git": "^10.0.1",
     "@storybook/addon-essentials": "^7.0.22",
     "@storybook/addon-interactions": "^7.0.22",
@@ -56,6 +59,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
     "eslint-plugin-storybook": "^0.6.12",
+    "husky": "^8.0.3",
     "prop-types": "^15.8.1",
     "rimraf": "^5.0.1",
     "rollup-plugin-copy": "^3.4.0",
@@ -92,5 +96,11 @@
         }
       ]
     ]
-  }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "helpUrl": "https://www.conventionalcommits.org/en/v1.0.0/"
+ }
 }
