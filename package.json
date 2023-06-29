@@ -23,12 +23,12 @@
   "scripts": {
     "dev": "vite",
     "clean": "rimraf './dist'rimraf",
-    "clean:stories": "rimraf ./storybook-static'",
+    "clean:stories": "rimraf './storybook-static'",
     "build": "npm run clean && tsc && vite build && rimraf --glob './public/scss'",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
+    "preview": "npx http-server storybook-static",
     "start": "storybook dev -p 6006",
-    "build:storybook": "npm run clean:stories && storybook build"
+    "build:storybook": "storybook build"
   },
   "dependencies": {
     "react": "^18.2.0",
