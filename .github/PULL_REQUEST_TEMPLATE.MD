@@ -26,3 +26,4 @@ Closes #
 - [ ] Unit test should be written and should have a coverage of 90% or higher in all areas.
 - [ ] Changes or new components should either write new or update existing documentation.
 - [ ] PR should link and close out an existing issue
+- [ ] Make sure all commits messages follow convention and are appropriate for the changes
