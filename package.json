@@ -1,6 +1,6 @@
 {
   "name": "@phillips/seldon",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -85,20 +85,28 @@
       "@semantic-release/release-notes-generator",
       [
         "@semantic-release/changelog",
-        {"changelogFile": "CHANGELOG.md"}
+        {
+          "changelogFile": "CHANGELOG.md"
+        }
       ],
       "@semantic-release/npm",
       [
         "@semantic-release/git",
         {
-          "assets": ["package.json", "dist/**/*.{js,scss}", "CHANGELOG.md"],
+          "assets": [
+            "package.json",
+            "dist/**/*.{js,scss}",
+            "CHANGELOG.md"
+          ],
           "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
         }
       ]
     ]
   },
   "commitlint": {
-    "extends": ["@commitlint/config-conventional"],
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
     "helpUrl": "https://www.conventionalcommits.org/en/v1.0.0/"
   }
 }

@@ -1,0 +1,35 @@
+
+// prefix
+$px: phillips;
+
+
+// Primary color palette
+$pure-black: #000000;
+$primary-black: #323232;
+$pure-white: #ffffff;
+
+// Secondary color palette
+$soft-black: #545454;
+$dark-gray: #75715f;
+
+// Utilititarian color palette
+$keyline-gray: #949494;
+$medium-gray: #c3bebb;
+$light-gray: #eceae7;
+$off-white: #f4f2f1;
+
+// Notification color palette
+$error-red: #ff0000;
+$post-sale-magenta: #ff0085;
+$clock-widget-blue: #4a90e2;
+$clock-widget-green: #6a9c53;
+$clock-widget-maroon: #6b0000;
+$clock-widget-red: #b00000;
+
+// Articker color palette
+$articker-red: #fc1e2b;
+$articker-orange: #ff8201;
+$articker-red-orange-gradient: linear-gradient(90deg, #fc1e2b, #ff8201);
+
+
+$text-color: $pure-black;
