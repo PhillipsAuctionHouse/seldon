@@ -40,30 +40,21 @@
         }
     }
 
-    &__heading {
+    & .#{$px}-hero-banner__heading {
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        font-size: 2rem;
+        line-height: 1;
         margin: 1.875rem 0;
+        text-align: center;
 
-        h1,
-        h1 span {
-            align-self: stretch;
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            text-transform: uppercase;
+        @media (min-width: 28.8125rem) {
+            font-size: 2.375rem;
         }
 
-        h1 {
-            font-size: 2rem;
-            line-height: 1;
-
-            @media (min-width: 28.8125rem) {
-                font-size: 2.375rem;
-            }
-
-            span {
-                font-size: 1.625rem;
-            }
+        span {
+            font-size: 1.625rem;
         }
-
     }
 }

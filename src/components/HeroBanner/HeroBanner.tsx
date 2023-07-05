@@ -62,9 +62,9 @@ const HeroBanner = ({
       }
       {
         headerText
-        ? <div className={`${baseClass}__heading`}>
-            <h1>{headerText}{ subHeadText ? <span>{subHeadText}</span> : null }</h1>
-          </div>
+        ?
+            <h1 className={`${baseClass}__heading`}>{headerText}{ subHeadText ? <span>{subHeadText}</span> : null }</h1>
+
         : null
       }
       {
