@@ -7,7 +7,7 @@ import * as packageJson from './package.json'
 
 const plugins = [
   react(),
-  dts({insertTypesEntry: true, outputDir: './dist'}),
+  dts({entryRoot: 'src'}),
 ]
 
 // https://vitejs.dev/config/
@@ -18,36 +18,38 @@ export default defineConfig({
     reportCompressedSize: true,
     lib: {
       // Could also be a dictionary or array of multiple entry points
-      entry: ['src/index.ts'],
+      entry: ['index.ts'],
       name: 'seldon',
       formats: ['es'],
     },
 
     rollupOptions: {
       input: 'src/index.ts',
-      output: [
+      output:
         {
           dir: 'dist',
+          preserveModules: true,
           preserveModulesRoot: 'src',
           chunkFileNames: '[name].js',
           entryFileNames: '[name].js'
         }
-      ],
-      preserveModules: true,
+      ,
+
       // make sure to externalize deps that shouldn't be bundled
       // into your library
       external: [...Object.keys(packageJson.peerDependencies)],
       plugins: [
         copy({
+          hook: 'writeBundle',
           flatten: false,
           targets: [
             // Sass entrypoint
-            { src: 'src/styles.scss', dest: ['dist/scss', 'public/scss'] },
+            { src: 'src/styles.scss', dest: ['dist/scss'] },
 
             // Sass components
             {
               src: ['src/components/**/*.scss', 'src/pages/**/*.scss', 'src/utils/**/*.scss'],
-              dest: ['dist/scss', 'public/scss'],
+              dest: ['dist/scss'],
             },
           ],
         }),
