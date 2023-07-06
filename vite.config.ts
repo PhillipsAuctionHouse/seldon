@@ -7,7 +7,7 @@ import * as packageJson from './package.json'
 
 const plugins = [
   react(),
-  dts(),
+  dts({insertTypesEntry: true, outputDir: './dist'}),
 ]
 
 // https://vitejs.dev/config/
@@ -22,7 +22,7 @@ export default defineConfig({
       name: 'seldon',
       formats: ['es'],
     },
-    outDir: 'dist',
+
     rollupOptions: {
       input: 'src/index.ts',
       output: [
