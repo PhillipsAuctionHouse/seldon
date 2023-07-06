@@ -24,8 +24,8 @@ p {
 /** Fonts **/
 @font-face {
   font-family: 'DistinctDisplay';
-  src: url('../../public/Distinct-Display.woff') format('woff');
-  src: url('../../public/Distinct-Display.woff2') format('woff2');
+  src: url('../../public/fonts/Distinct-Display.woff') format('woff');
+  src: url('../../public/fonts/Distinct-Display.woff2') format('woff2');
 }
 @mixin DistinctDisplay {
   font-family: $DistinctDisplay;
@@ -33,8 +33,8 @@ p {
 
 @font-face {
   font-family: 'DistinctDisplayItalic';
-  src: url('../../public/Distinct-DisplayItalic.woff') format('woff');
-  src: url('../../public/Distinct-DisplayItalic.woff2') format('woff2');
+  src: url('../../public/fonts/Distinct-DisplayItalic.woff') format('woff');
+  src: url('../../public/fonts/Distinct-DisplayItalic.woff2') format('woff2');
 }
 @mixin DistinctDisplayItalic {
   font-family: $DistinctDisplayItalic;
@@ -42,8 +42,8 @@ p {
 
 @font-face {
   font-family: 'DistinctItalic';
-  src: url('../../public/Distinct-Italic.woff') format('woff');
-  src: url('../../public/Distinct-Italic.woff2') format('woff2');
+  src: url('../../public/fonts/Distinct-Italic.woff') format('woff');
+  src: url('../../public/fonts/Distinct-Italic.woff2') format('woff2');
 }
 @mixin DistinctItalic {
   font-family: $DistinctItalic;
@@ -51,8 +51,8 @@ p {
 
 @font-face {
   font-family: 'DistinctText';
-  src: url('../../public/Distinct-Text.woff') format('woff');
-  src: url('../../public/Distinct-Text.woff2') format('woff2');
+  src: url('../../public/fonts/Distinct-Text.woff') format('woff');
+  src: url('../../public/fonts/Distinct-Text.woff2') format('woff2');
 }
 @mixin DistinctText {
   font-family: $DistinctText;
