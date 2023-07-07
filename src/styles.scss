@@ -1,7 +1,7 @@
 @use 'utils/vars';
 // @TODO: add styles when we can do a site wide regressions QA
 // @use 'utils/reset';
-// @use 'utils/typography';
+@use 'utils/typography';
 @use 'components/Button/button';
 @use 'components/Header/header';
 @use 'components/HeroBanner/heroBanner';

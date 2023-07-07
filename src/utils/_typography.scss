@@ -1,7 +1,7 @@
 @use './vars' as *;
 
 body {
-  font-family: "Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: SeroWebPro,"Helvetica Neue",Helvetica,-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 16px;
     margin: 0;
     -webkit-font-smoothing: antialiased;
@@ -24,8 +24,8 @@ p {
 /** Fonts **/
 @font-face {
   font-family: 'DistinctDisplay';
-  src: url('../../public/fonts/Distinct-Display.woff') format('woff');
-  src: url('../../public/fonts/Distinct-Display.woff2') format('woff2');
+  src: url('../../fonts/Distinct-Display.woff') format('woff');
+  src: url('../../fonts/Distinct-Display.woff2') format('woff2');
 }
 @mixin DistinctDisplay {
   font-family: $DistinctDisplay;
@@ -33,8 +33,8 @@ p {
 
 @font-face {
   font-family: 'DistinctDisplayItalic';
-  src: url('../../public/fonts/Distinct-DisplayItalic.woff') format('woff');
-  src: url('../../public/fonts/Distinct-DisplayItalic.woff2') format('woff2');
+  src: url('../../fonts/Distinct-DisplayItalic.woff') format('woff');
+  src: url('../../fonts/Distinct-DisplayItalic.woff2') format('woff2');
 }
 @mixin DistinctDisplayItalic {
   font-family: $DistinctDisplayItalic;
@@ -42,8 +42,8 @@ p {
 
 @font-face {
   font-family: 'DistinctItalic';
-  src: url('../../public/fonts/Distinct-Italic.woff') format('woff');
-  src: url('../../public/fonts/Distinct-Italic.woff2') format('woff2');
+  src: url('../../fonts/Distinct-Italic.woff') format('woff');
+  src: url('../../fonts/Distinct-Italic.woff2') format('woff2');
 }
 @mixin DistinctItalic {
   font-family: $DistinctItalic;
@@ -51,8 +51,8 @@ p {
 
 @font-face {
   font-family: 'DistinctText';
-  src: url('../../public/fonts/Distinct-Text.woff') format('woff');
-  src: url('../../public/fonts/Distinct-Text.woff2') format('woff2');
+  src: url('../../fonts/Distinct-Text.woff') format('woff');
+  src: url('../../fonts/Distinct-Text.woff2') format('woff2');
 }
 @mixin DistinctText {
   font-family: $DistinctText;
