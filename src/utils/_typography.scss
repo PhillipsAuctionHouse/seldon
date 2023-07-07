@@ -1,7 +1,7 @@
 @use './vars' as *;
 
 body {
-  font-family: "Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: SeroWebPro,"Helvetica Neue",Helvetica,-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 16px;
     margin: 0;
     -webkit-font-smoothing: antialiased;
@@ -19,4 +19,41 @@ h4 {
 
 p {
   color: $soft-black;
+}
+
+/** Fonts **/
+@font-face {
+  font-family: 'DistinctDisplay';
+  src: url('../../fonts/Distinct-Display.woff') format('woff');
+  src: url('../../fonts/Distinct-Display.woff2') format('woff2');
+}
+@mixin DistinctDisplay {
+  font-family: $DistinctDisplay;
+}
+
+@font-face {
+  font-family: 'DistinctDisplayItalic';
+  src: url('../../fonts/Distinct-DisplayItalic.woff') format('woff');
+  src: url('../../fonts/Distinct-DisplayItalic.woff2') format('woff2');
+}
+@mixin DistinctDisplayItalic {
+  font-family: $DistinctDisplayItalic;
+}
+
+@font-face {
+  font-family: 'DistinctItalic';
+  src: url('../../fonts/Distinct-Italic.woff') format('woff');
+  src: url('../../fonts/Distinct-Italic.woff2') format('woff2');
+}
+@mixin DistinctItalic {
+  font-family: $DistinctItalic;
+}
+
+@font-face {
+  font-family: 'DistinctText';
+  src: url('../../fonts/Distinct-Text.woff') format('woff');
+  src: url('../../fonts/Distinct-Text.woff2') format('woff2');
+}
+@mixin DistinctText {
+  font-family: $DistinctText;
 }
