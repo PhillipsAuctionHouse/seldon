@@ -25,6 +25,10 @@ export default defineConfig({
         replacement: resolve(__dirname, './src/scss/vars')
       },
       {
+        find: '../../vars',
+        replacement: resolve(__dirname, './src/scss/vars')
+      },
+      {
         find: './typography',
         replacement: resolve(__dirname, './src/scss/typography')
       },
