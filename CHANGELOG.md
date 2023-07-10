@@ -1,3 +1,12 @@
+## [1.2.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.2.0...v1.2.1) (2023-07-10)
+
+
+### Bug Fixes
+
+* **config:** added one more alias for component sass resolution ([87539e8](https://github.com/PhillipsAuctionHouse/seldon/commit/87539e8e98f6ae0d5944f1a15eae65c3fdf838f1))
+* **config:** updated config for font resolution ([7c1b69c](https://github.com/PhillipsAuctionHouse/seldon/commit/7c1b69cd61b999d849b40db7fff0ffe721544b5d))
+* **fonts:** fix build locations of sass files ([989073b](https://github.com/PhillipsAuctionHouse/seldon/commit/989073b75701300f44a58fe56a51c68a89219363))
+
 # [1.2.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.1.9...v1.2.0) (2023-07-07)
 
 
