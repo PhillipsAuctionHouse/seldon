@@ -1,5 +1,5 @@
 import type { Preview } from "@storybook/react";
-import '../src/scss/styles.scss';
+import '../src/styles.scss';
 import '../src/story-styles.scss';
 
 
