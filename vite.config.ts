@@ -41,14 +41,22 @@ export default defineConfig({
       plugins: [
         copy({
           hook: 'writeBundle',
+          flatten: true,
+          targets: [
+            // Sass entrypoint and utils
+            {
+              src: ['src/scss/styles.scss', 'src/scss/**/*.scss'],
+              dest: ['dist/scss'],
+            },
+          ],
+        }),
+        copy({
+          hook: 'writeBundle',
           flatten: false,
           targets: [
-            // Sass entrypoint
-            { src: 'src/styles.scss', dest: ['dist/scss'] },
-
             // Sass components
             {
-              src: ['src/components/**/*.scss', 'src/pages/**/*.scss', 'src/utils/**/*.scss'],
+              src: ['src/components/**/*.scss', 'src/pages/**/*.scss'],
               dest: ['dist/scss'],
             },
           ],
