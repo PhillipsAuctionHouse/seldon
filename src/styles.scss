@@ -1,8 +1,8 @@
-@use 'utils/vars';
+@import './vars';
 // @TODO: add styles when we can do a site wide regressions QA
-// @use 'utils/reset';
-@use 'utils/typography';
-@use 'components/Button/button';
-@use 'components/Header/header';
-@use 'components/HeroBanner/heroBanner';
-@use 'pages/page';
+// @use 'reset';
+@import './typography';
+@import 'components/Button/button';
+@import 'components/Header/header';
+@import 'components/HeroBanner/heroBanner';
+@import 'pages/page';

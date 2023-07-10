@@ -2,6 +2,7 @@
   "name": "@phillips/seldon",
   "version": "1.2.0",
   "type": "module",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -16,12 +17,11 @@
     }
   },
   "files": [
-    "dist/**",
-    "!dist/src"
+    "dist/**"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "npm run clean && tsc && vite build && rimraf --glob './public/scss'",
+    "build": "npm run clean && tsc && vite build",
     "build:storybook": "storybook build",
     "clean": "rimraf './dist'",
     "clean:stories": "rimraf './storybook-static'",
