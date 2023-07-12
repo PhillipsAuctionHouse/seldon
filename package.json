@@ -1,6 +1,6 @@
 {
   "name": "@phillips/seldon",
-  "version": "1.1.9",
+  "version": "1.2.1",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -17,14 +17,13 @@
     }
   },
   "files": [
-    "dist/**",
-    "!dist/src"
+    "dist/**"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "npm run clean && tsc && vite build && rimraf --glob './public/scss'",
+    "build": "npm run clean && tsc && vite build",
     "build:storybook": "storybook build",
-    "clean": "rimraf './dist'rimraf",
+    "clean": "rimraf './dist'",
     "clean:stories": "rimraf './storybook-static'",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "start": "storybook dev -p 6006",
@@ -95,7 +94,6 @@
         {
           "assets": [
             "package.json",
-            "dist/**/*.{js,scss}",
             "CHANGELOG.md"
           ],
           "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
