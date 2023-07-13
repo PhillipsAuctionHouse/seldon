@@ -145,7 +145,7 @@ The items below are high level points of guidance for writing tests:
 - Write tests using queries directly from the `screen` object rather than
   destructuring them from `render` result,
   [read more from the `prefer-screen-queries` eslint rule](https://github.com/testing-library/eslint-plugin-testing-library/blob/master/docs/rules/prefer-screen-queries.md)
--
+- For more information look at our [Testing-Best-Practices](./testing-best-practices.md) guide.
 
 ### Minimum code coverage
 

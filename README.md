@@ -67,3 +67,7 @@ Each component can be imported in your project by referencing the named exports 
 ```js
 import { Button } from '@phillips/seldon';
 ```
+
+### Contributing Guidelines
+
+Before you start contributing to this project please check out our guidelines found [here](/src/docs/CONTRIBUTING.md)
