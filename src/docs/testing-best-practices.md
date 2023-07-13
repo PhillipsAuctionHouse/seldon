@@ -1,6 +1,4 @@
----
-title: Testing best practices
----
+# Testing best practices
 
 Robust testing is crucial for a dev team's agility and velocity. Having a comprehensive test suite allows us to deliver capabilities to our sites faster and with less regressions. Quality test also help ensure that the code we deliver is on par with the standards of Phillips Auction House. Because of this, it is imperative to keep testing in mind when developing new features.
 
