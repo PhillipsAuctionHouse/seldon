@@ -44,6 +44,7 @@ const Button = ({
   return (
     <button
       data-testid={id ? `button-${id}` : `button`}
+      id={id}
       type="button"
       className={classnames(`${px}-button`,`${px}-button--${size}`, {[`${px}-button--secondary`]: !primary})}
       style={{ backgroundColor }}

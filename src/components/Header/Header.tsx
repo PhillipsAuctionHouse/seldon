@@ -1,15 +1,16 @@
 
 import Button  from '../Button/Button';
 
+// Try to not pass complex objects into components
 type User = {
   name: string;
 };
 
 interface HeaderProps {
   user?: User;
-  onLogin: () => void;
-  onLogout: () => void;
-  onCreateAccount: () => void;
+  onLogin?: () => void;
+  onLogout?: () => void;
+  onCreateAccount?: () => void;
 }
 
 const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps) => (
