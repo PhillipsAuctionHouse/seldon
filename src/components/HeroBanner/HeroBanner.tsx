@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { px } from '../../utils';
 
 interface HeroBannerProps {
@@ -22,7 +23,11 @@ interface HeroBannerProps {
   */
   association?: string;
   /**
-  * What background image or color to use
+  * Image url for mobile view
+  */
+  mobileImageUrl?: string;
+  /**
+  * Background value with any parameters
   */
   background?: string;
   /**
@@ -36,6 +41,7 @@ interface HeroBannerProps {
  */
 
 const baseClass = `${px}-hero-banner`;
+const isMobile = window.innerWidth < 376 ? true : false;
 
 const HeroBanner = ({
   prehead,
@@ -44,14 +50,20 @@ const HeroBanner = ({
   subHeadText,
   association,
   background,
+  mobileImageUrl,
   id
 }: HeroBannerProps) => {
   return (
     <header
       data-testid={id ? `hero-banner-${id}` : `hero-banner`}
       className={baseClass}
-      style={{ '--background': background } as React.CSSProperties}
+      style={{ '--background': isMobile ? '#000000' : `${background}`} as React.CSSProperties}
     >
+      {
+        isMobile 
+        ? <img className={`${baseClass}__mobile-image`} src={`${mobileImageUrl}`} />
+        : null
+      }
       {
         (prehead || date)
         ? <p className={`${baseClass}__pre-head`}>
