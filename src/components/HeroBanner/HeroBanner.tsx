@@ -30,7 +30,7 @@ interface HeroBannerProps {
   */
   background?: string;
   /**
-  * Unique id for component
+  * Unique id for component testing
   */
   id?: string ;
 }
@@ -55,6 +55,7 @@ const HeroBanner = ({
   return (
     <header
       data-testid={id ? `hero-banner-${id}` : `hero-banner`}
+      id={id}
       className={baseClass}
       style={{ '--background': isMobile ? '#000000' : `${background}`} as React.CSSProperties}
     >
@@ -71,13 +72,7 @@ const HeroBanner = ({
           </p>
         : null
       }
-      {
-        headerText
-        ?
-            <h1 className={`${baseClass}__heading`}>{headerText}{ subHeadText ? <span>{subHeadText}</span> : null }</h1>
-
-        : null
-      }
+      <h1 className={`${baseClass}__heading`}>{headerText}{ subHeadText ? <span>{subHeadText}</span> : null }</h1>
       {
         association ? <p>{association}</p> : null
       }
