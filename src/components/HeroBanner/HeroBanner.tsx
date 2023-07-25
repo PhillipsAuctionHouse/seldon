@@ -27,7 +27,7 @@ interface HeroBannerProps {
   */
   mobileImageUrl?: string;
   /**
-  * Background value with any parameters
+  * What background image or color to use
   */
   background?: string;
   /**
