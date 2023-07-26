@@ -20,7 +20,6 @@ export const Playground: Story = {
     headerText: "20th Century & Contemporary Art",
     subHeadText: "Day Sales — Morning Session",
     association: "In Association with BACS & RUSSO",
-    mobileImageUrl: "https://assets.phillips.com/image/upload/t_Website_DepartmentHero/v1685035132/website/department/hero-12.jpg",
     background: "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://assets.phillips.com/image/upload/t_Website_DepartmentHero/v1685035132/website/department/hero-12.jpg)"
   },
 };
