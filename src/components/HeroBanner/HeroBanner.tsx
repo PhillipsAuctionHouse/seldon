@@ -51,7 +51,7 @@ const HeroBanner = ({
       data-testid={id ? `hero-banner-${id}` : `hero-banner`}
       id={id}
       className={baseClass}
-      style={{ '--background': background } as React.CSSProperties }
+      style={{ '--background': background } as React.CSSProperties}
     >
       {
         (prehead || date)
