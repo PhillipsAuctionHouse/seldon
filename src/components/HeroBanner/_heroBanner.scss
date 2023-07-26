@@ -19,6 +19,17 @@
         gap: 1.875rem;
         align-self: stretch;
         padding: 1.875rem 0.9375rem;
+        background: $pure-black;
+
+        &::before{
+            content: '';
+            background: var(--background);
+            width: 100%;
+            height: 12rem;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
     }
 
     h1,

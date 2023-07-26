@@ -22,10 +22,6 @@ interface HeroBannerProps {
   */
   association?: string;
   /**
-  * Image url for mobile view
-  */
-  mobileImageUrl?: string;
-  /**
   * What background image or color to use
   */
   background?: string;
@@ -40,7 +36,6 @@ interface HeroBannerProps {
  */
 
 const baseClass = `${px}-hero-banner`;
-const isMobile = window.innerWidth < 376 ? true : false;
 
 const HeroBanner = ({
   prehead,
@@ -49,7 +44,6 @@ const HeroBanner = ({
   subHeadText,
   association,
   background,
-  mobileImageUrl,
   id
 }: HeroBannerProps) => {
   return (
@@ -57,13 +51,8 @@ const HeroBanner = ({
       data-testid={id ? `hero-banner-${id}` : `hero-banner`}
       id={id}
       className={baseClass}
-      style={{ '--background': isMobile ? '#000000' : `${background}`} as React.CSSProperties}
+      style={{ '--background': background } as React.CSSProperties }
     >
-      {
-        isMobile 
-        ? <img className={`${baseClass}__mobile-image`} src={`${mobileImageUrl}`} />
-        : null
-      }
       {
         (prehead || date)
         ? <p className={`${baseClass}__pre-head`}>
