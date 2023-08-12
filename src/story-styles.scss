@@ -1,3 +1,28 @@
+@use 'scss/vars';
 @use 'scss/reset';
 @use 'scss/typography';
 @use 'design/colors-tokens/color-card';
+
+body {
+  font-family: 'DistinctText';
+}
+
+#storybook-root > .phillips-header-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+
+  &::before {
+    background: rgba(50,50,50,0.6);
+    content: '';
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+  }
+}
+.phillips-nav__list-item {
+  list-style: none;
+}

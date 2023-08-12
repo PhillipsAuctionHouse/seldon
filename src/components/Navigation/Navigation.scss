@@ -1,0 +1,173 @@
+@import '../../vars';
+
+.#{$px}-nav {
+  background: $pure-white;
+  color: $soft-black;
+  height: 100%;
+  width: 307px;
+  padding-top: 4.5rem;
+  position: relative;
+  overflow: hidden;
+
+  // Nav h2 styles
+  &__label {
+    font-size: 1.25rem;
+    visibility: var(--visible);
+    padding-left: 0.625rem;
+    animation: 1s linear fade-in-out2 forwards;
+  }
+
+  &--expanded &__label {
+    animation: 1s linear fade-in-out forwards;
+  }
+
+  & &__close-btn {
+    cursor: pointer;
+    font-size: 2.5rem;
+    font-weight: normal;
+    position: absolute;
+    top: 0.25rem;
+    height: 42px;
+    width: 42px;
+    text-align: center;
+    left: 0;
+    line-height: 1;
+  }
+
+  // Back button
+  & &__back-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    opacity: 0;
+    transition: opacity 0s linear;
+    width: auto;
+  }
+
+  &--expanded &__back-btn {
+    opacity: 1;
+    transition: opacity 0.5s linear 0.25s;
+  }
+
+
+  // Zero out default styles for possible children
+  a,
+  button,
+  p {
+    border: none;
+    color: inherit;
+    display: block;
+    font-size: 0.75rem;
+    font-weight: normal;
+    letter-spacing: 0.025rem;
+    line-height: 1.8;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    text-transform: uppercase;
+    width: 100%;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  button{
+    appearance: none;
+    background: none;
+  }
+
+  // ul
+  &__list,
+  .#{$px}-nav__list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    * {
+      cursor: pointer;
+    }
+  }
+
+  &__list {
+    position: relative;
+    width: 614px;
+    transform: translateX(0%);
+    transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1) 0.1s;
+
+    &--expanded {
+      transform: translateX(-50%);
+    }
+  }
+
+
+  &__list-item {
+    max-width: 307px;
+
+    ul {
+      background: $pure-white;
+      opacity: 0;;
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: calc(100vh - 70px);
+      overflow: hidden;
+      width: 307px;
+      z-index: -10;
+      transition: opacity 0.6s ease-in 0s;
+    }
+
+    button,
+    a,
+    p {
+      background: #fff;
+      border-bottom: 1px solid #787878;
+      padding: 0.625rem;
+      position: relative;
+
+    }
+
+    .#{$px}-nav__list-item-trigger::after {
+      content: '\203A';
+      display: inline-block;
+      font-size: 1.75rem;
+      font-weight: normal;
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      // transition: transform 0.35s ease-in-out;
+    }
+
+    &.#{$px}-nav__list-item--expanded ul {
+      opacity: 1;
+      z-index: 0;
+      transition: opacity 0.6s ease-in 0.25s;
+    }
+  }
+}
+
+@keyframes fade-in-out {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-out2 {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
