@@ -9,6 +9,14 @@
   position: relative;
   overflow: hidden;
 
+  @media (min-width: 1021px) {
+    display: flex;
+    overflow: visible;
+    padding-top: 0;
+    position: unset;
+    width: auto;
+  }
+
   // Nav h2 styles
   &__label {
     font-size: 1.25rem;
@@ -48,6 +56,15 @@
   &--expanded &__back-btn {
     opacity: 1;
     transition: opacity 0.5s linear 0.25s;
+  }
+
+  // Remove label and mobile buttons on larger screens
+  @media (min-width: 1021px) {
+    .#{$px}-nav__back-btn,
+    .#{$px}-nav__close-btn,
+    .#{$px}-nav__label  {
+      display: none;
+    }
   }
 
 
@@ -92,18 +109,56 @@
 
   &__list {
     position: relative;
-    width: 614px;
-    transform: translateX(0%);
-    transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1) 0.1s;
+
+    @media (max-width: 1020px) {
+      width: 614px;
+      transform: translateX(0%);
+      transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1) 0.1s;
+    }
 
     &--expanded {
-      transform: translateX(-50%);
+      @media (max-width: 1020px) {
+        transform: translateX(-50%);
+      }
+    }
+  }
+
+  @media (min-width: 1021px) {
+    & > .#{$px}-nav__list  {
+      display: flex;
     }
   }
 
 
   &__list-item {
     max-width: 307px;
+
+    @media (min-width: 1021px) {
+      align-items: center;
+      display: flex;
+
+      .#{$px}-nav__list {
+        background: #f4f4f4;
+        left: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-auto-flow: row dense;
+        gap: 0 1rem;
+        justify-content: space-around;
+    align-content: center;
+        height: auto;
+        min-height: 210px;
+        top: 60px;
+        transition: opacity 0.1s cubic-bezier(0.65, 0, 0.35, 1) 0s;
+        width: 100vw
+      }
+
+      &:hover ul {
+        opacity: 1;
+        transition: opacity 0.3s cubic-bezier(0.65, 0, 0.35, 1) 0s;
+        z-index: 1;
+      }
+    }
 
     ul {
       background: $pure-white;
@@ -121,10 +176,14 @@
     button,
     a,
     p {
-      background: #fff;
+      // background: #fff;
       border-bottom: 1px solid #787878;
       padding: 0.625rem;
       position: relative;
+
+      @media (min-width: 1021px) {
+        border: none;
+      }
 
     }
 
@@ -138,7 +197,11 @@
       top: 50%;
       transform: translateY(-50%);
       // transition: transform 0.35s ease-in-out;
+      @media (min-width: 1021px) {
+          display: none;
+      }
     }
+
 
     &.#{$px}-nav__list-item--expanded ul {
       opacity: 1;

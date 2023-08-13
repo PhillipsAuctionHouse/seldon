@@ -42,8 +42,8 @@ const HeaderComponent = () => {
           <NavigationListItem element="p">Test-p</NavigationListItem>
           <NavigationListItemTrigger label="Test-subnav" expandedItem={expandedItem} onClick={() => setExpandedItem('Test-subnav')}>
             <NavigationList>
-              <NavigationListItem href="#">Test-subnav-1</NavigationListItem>
-              <NavigationListItem href="#">Test-subnav-2</NavigationListItem>
+              <NavigationListItem href="#" tabIndex={expandedItem === 'Test-subnav' ? 0 : -1}>Test-subnav-1</NavigationListItem>
+              <NavigationListItem href="#" tabIndex={expandedItem === 'Test-subnav' ? 0 : -1}>Test-subnav-2</NavigationListItem>
             </NavigationList>
           </NavigationListItemTrigger>
         </NavigationList>
