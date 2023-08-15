@@ -30,13 +30,14 @@
   }
 
   & &__close-btn {
+    background-color: transparent;
     cursor: pointer;
     font-size: 2.5rem;
     font-weight: normal;
     position: absolute;
-    top: 0.25rem;
-    height: 42px;
-    width: 42px;
+    top: 0;
+    height: 53px;
+    width: 53px;
     text-align: center;
     left: 0;
     line-height: 1;
@@ -44,18 +45,21 @@
 
   // Back button
   & &__back-btn {
+    background-color: transparent;
     cursor: pointer;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+    font-weight: 200;
     opacity: 0;
-    transition: opacity 0s linear;
+    position: absolute;
+    padding: 1rem;
+    right: 0;
+    top: 0;
+    transition: opacity 0s linear, background-color 0.5s;
     width: auto;
   }
 
   &--expanded &__back-btn {
     opacity: 1;
-    transition: opacity 0.5s linear 0.25s;
+    transition: opacity 0.5s linear 0.25s, background-color 0.5s;
   }
 
   // Remove label and mobile buttons on larger screens
@@ -96,8 +100,7 @@
   }
 
   // ul
-  &__list,
-  .#{$px}-nav__list ul {
+  &__list {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -137,26 +140,8 @@
       align-items: center;
       display: flex;
 
-      .#{$px}-nav__list {
-        background: #f4f4f4;
-        left: 0;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-auto-flow: row dense;
-        gap: 0 1rem;
-        justify-content: space-around;
-    align-content: center;
-        height: auto;
-        min-height: 210px;
-        top: 60px;
-        transition: opacity 0.1s cubic-bezier(0.65, 0, 0.35, 1) 0s;
-        width: 100vw
-      }
-
-      &:hover ul {
-        opacity: 1;
-        transition: opacity 0.3s cubic-bezier(0.65, 0, 0.35, 1) 0s;
-        z-index: 1;
+      & & {
+        border-bottom: 1px solid #ccc;
       }
     }
 
@@ -171,6 +156,60 @@
       width: 307px;
       z-index: -10;
       transition: opacity 0.6s ease-in 0s;
+
+    }
+    @media (min-width: 1021px) {
+      ul {
+        background: #f4f4f4;
+        left: 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        grid-gap: 0.5em;
+        justify-content: end;
+        align-content: center;
+        height: auto;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        padding: 0;
+        position: fixed;
+        top: 60px;
+        transition: opacity 0.5s linear 0.2s, max-height 0.5s cubic-bezier(0.65, 0, 0.35, 1) 0s, padding 0.5s linear;
+        width: 100vw;
+        z-index: 1;
+
+        li {
+          opacity: 0;
+          transition: opacity 0.5s linear;
+        }
+
+        .#{$px}-nav__list-item:nth-child(1) { grid-area: 1 / 3 / 2 / 4; }
+        .#{$px}-nav__list-item:nth-child(2)  { grid-area: 2 / 3 / 3 / 4; }
+        .#{$px}-nav__list-item:nth-child(3)  { grid-area: 3 / 3 / 4 / 4; }
+        .#{$px}-nav__list-item:nth-child(4)  { grid-area: 4 / 3 / 5 / 4; }
+        .#{$px}-nav__list-item:nth-child(5) { grid-area: 1 / 2 / 2 / 3; }
+        .#{$px}-nav__list-item:nth-child(6)  { grid-area: 2 / 2 / 3 / 3; }
+        .#{$px}-nav__list-item:nth-child(7)  { grid-area: 3 / 2 / 4 / 3; }
+        .#{$px}-nav__list-item:nth-child(8)  { grid-area: 4 / 2 / 5 / 3; }
+        .#{$px}-nav__list-item:nth-child(9) { grid-area: 1 / 1 / 2 / 2; }
+        .#{$px}-nav__list-item:nth-child(10)  { grid-area: 2 / 1 / 3 / 2; }
+        .#{$px}-nav__list-item:nth-child(11)  { grid-area: 3 / 1 / 4 / 2; }
+        .#{$px}-nav__list-item:nth-child(12)  { grid-area: 4 / 1 / 5 / 2; }
+      }
+
+
+      &:hover ul {
+        opacity: 1;
+
+        padding: 1rem;
+        max-height: 227px;
+        transition: opacity 0.5s linear 0s, max-height 0.5s cubic-bezier(0.65, 0, 0.35, 1) 0s, padding 0.5s linear;
+
+        li {
+          opacity: 1;
+        }
+      }
     }
 
     button,
@@ -210,6 +249,100 @@
     }
   }
 }
+
+// Hover styles
+
+.#{$px}-nav__list-item {
+  @media (max-width: 1020px) {
+    & > a,
+    & > button,
+    & > p {
+      font-weight: 200;
+      background-color: transparent;
+      transition:  background-color 0.5s
+    }
+
+    &:hover {
+      & > a,
+      & > button,
+      & > p {
+        background-color: #f4f4f4;
+      }
+    }
+
+  }
+
+  &:hover {
+    & > a,
+    & > button,
+    & > p {
+      font-weight: 800;
+    }
+  }
+
+  @media (min-width: 1021px) {
+    position: relative;
+
+    &:not(ul ul li):hover::before {
+      content: '';
+      background: #f4f4f4;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+    }
+
+    &:not(ul ul li)::after {
+        content: '';
+        background: rgb(84, 84, 84);
+        width: 0;
+        height: 2px;
+        left: 50%;
+        opacity: 0;
+        position: absolute;
+        transform: translateX(-50%);
+        transition: width 0.25s, opacity 0.25s;
+        top: 70%;
+    }
+
+    &:not(ul ul li):hover::after {
+      opacity: 1;
+      width: 80%;
+    }
+
+    .#{$px}-nav__list-item{
+      position: static;
+      z-index: 1;
+    }
+
+    & > .#{$px}-nav__list-item-trigger::before {
+      content: '';
+      background: #f4f4f4;
+      width: 100%;
+      height: 2px;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      transition: opacity 0.25s linear .25s;
+      top: 100%;
+    }
+
+    &:hover > .#{$px}-nav__list-item-trigger::before {
+      opacity: 1;
+    }
+  }
+}
+
+
+
+.#{$px}-nav__back-btn:hover,
+.#{$px}-nav__close-btn:hover {
+  font-weight: 800;
+  background-color: #f4f4f4;
+}
+
+
+// Animations
 
 @keyframes fade-in-out {
   0% {
