@@ -7,7 +7,11 @@ body {
   font-family: 'DistinctText';
 }
 
-#storybook-root > .phillips-header-nav {
+[title="Easel by Phillips"] {
+  width: 150px;
+}
+
+#storybook-root > .phillips-header__nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -19,19 +23,19 @@ body {
     border-bottom: 1px solid #ddd;
   }
 
-  &::before {
-    background: rgba(50,50,50,0.6);
-    content: '';
-    height: 100vh;
-    left: 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: -1;
-    // @media (min-width: 1021px) {
-    //   display: none;
-    // }
-  }
+  // &::before {
+  //   background: rgba(50,50,50,0.6);
+  //   content: '';
+  //   height: 100vh;
+  //   left: 0;
+  //   position: fixed;
+  //   top: 0;
+  //   width: 100%;
+  //   z-index: -1;
+  //   // @media (min-width: 1021px) {
+  //   //   display: none;
+  //   // }
+  // }
 }
 .phillips-nav__list-item {
   list-style: none;

@@ -8,6 +8,10 @@ interface NavigationListItemTriggerProps extends Record<string, unknown>{
    */
   children?: React.ReactNode;
   /**
+   * Are any navigation links expanded
+   */
+  expanded?: boolean;
+  /**
    * ID of expanded subnav
    */
   expandedItem?: string;
@@ -23,6 +27,7 @@ interface NavigationListItemTriggerProps extends Record<string, unknown>{
 
 const NavigationListItemTrigger = ({
   children,
+  expanded,
   expandedItem,
   label,
   onClick,
@@ -34,7 +39,7 @@ const NavigationListItemTrigger = ({
     className={classnames(`${px}-nav__list-item`, {[`${px}-nav__list-item--expanded`]: expandedItem===label})}
     onClick={onClick}
   >
-    <button className={`${px}-nav__list-item-trigger`} type="button" aria-expanded={expandedItem===label} {...props}>
+    <button className={`${px}-nav__list-item-trigger`} type="button" tabIndex={!expanded ? 0 : -1} aria-expanded={expandedItem === label} {...props}>
       {label}
     </button>
     {children}

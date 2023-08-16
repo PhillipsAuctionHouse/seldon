@@ -7,11 +7,11 @@ import NavigationListItem from './NavigationListItem';
 import NavigationListItemTrigger from './NavigationListItemTrigger';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
-const HeaderComponent = () => {
+export const HeaderComponent = () => {
   const [expandedItem, setExpandedItem] = React.useState("Main Menu");
   const expanded = expandedItem !== "Main Menu"
   return (
-    <div className="phillips-header-nav">
+    <div className="phillips-header__nav">
       <Navigation id="main-nav" label={expandedItem} backBtnLabel="← Back" onBack={() => setExpandedItem('Main Menu')}  expanded={expanded}>
         <NavigationList expanded={expanded}>
           <NavigationListItemTrigger label="Auctions" expandedItem={expandedItem} onClick={() => setExpandedItem('Auctions')}>
@@ -58,24 +58,8 @@ const meta = {
 } satisfies Meta<typeof Navigation>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
 
 const TestRouter = () => {
   return <a>Test-router</a>
 }
-
-
-
-
-
-
-// const labelComponent = <p>hey</p>
-
-// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-export const Playground: Story = {
-  args: {
-    className: undefined,
-    label: undefined
-  },
-};

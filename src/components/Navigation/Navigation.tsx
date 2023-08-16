@@ -60,7 +60,7 @@ const Navigation = ({
       id={id}
       className={classnames(`${px}-nav`, className,  {[`${px}-nav--expanded`]: expanded})}
     >
-      <button className={`${px}-nav__close-btn`} onClick={onClose}>⊗</button>
+      {/* <button className={`${px}-nav__close-btn`} onClick={onClose}>⊗</button> */}
       <button tabIndex={expanded? 0 : -1} className={`${px}-nav__back-btn`} onClick={onBack}>{backBtnLabel}</button>
       <h2
         id={`${id}-label`}
