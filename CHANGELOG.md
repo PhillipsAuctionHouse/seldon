@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.2.1...v1.3.0) (2023-07-27)
+
+
+### Features
+
+* **herobanner:** revised mobile layout implementation ([5b729cf](https://github.com/PhillipsAuctionHouse/seldon/commit/5b729cff8fdaf905f07e36bdeacc1f265c9019a3))
+* **herobanner:** Updates to the Hero Banner component to account for mobile design ([483d79c](https://github.com/PhillipsAuctionHouse/seldon/commit/483d79c8290ba6ab7e79fb2bb440cefd0deed603))
+
 ## [1.2.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.2.0...v1.2.1) (2023-07-10)
 
 
