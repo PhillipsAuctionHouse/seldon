@@ -32,6 +32,15 @@
         }
     }
 
+    h1 {
+        font-family: 'DistinctDisplay', sans-serif;
+    }
+
+    h1 span,
+    p {
+        font-family: 'DistinctText', sans-serif;        
+    }
+
     h1,
     h1 span,
     p {
@@ -39,7 +48,6 @@
         font-weight: 400;
         margin: 0;
         text-transform: uppercase;
-        font-family: 'DistinctText';
     }
 
     p {
