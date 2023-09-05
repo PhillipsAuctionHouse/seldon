@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.3.1...v1.4.0) (2023-09-05)
+
+
+### Features
+
+* **herobanner:** added content wrapper for setting max-width on the content in the hero banner ([943a31c](https://github.com/PhillipsAuctionHouse/seldon/commit/943a31cc62b406f0625eb0d5b34c09718312b740))
+
 ## [1.3.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.3.0...v1.3.1) (2023-08-17)
 
 
