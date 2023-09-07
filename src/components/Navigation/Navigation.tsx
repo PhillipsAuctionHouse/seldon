@@ -33,10 +33,6 @@ interface NavigationProps {
    */
   onBack?: () => void;
   /**
-   * Event handler on mobile for closing menu
-   */
-  onClose?: () => void;
-  /**
   * Boolean to dictate the label visibility
   */
   visible?: boolean;
@@ -48,8 +44,7 @@ const Navigation = ({
   className,
   expanded,
   id,
-  label = "MainMenu",
-  onClose,
+  label = "Main Menu",
   onBack,
   visible = true
 }: NavigationProps) => {
@@ -60,7 +55,6 @@ const Navigation = ({
       id={id}
       className={classnames(`${px}-nav`, className,  {[`${px}-nav--expanded`]: expanded})}
     >
-      {/* <button className={`${px}-nav__close-btn`} onClick={onClose}>⊗</button> */}
       <button tabIndex={expanded? 0 : -1} className={`${px}-nav__back-btn`} onClick={onBack}>{backBtnLabel}</button>
       <h2
         id={`${id}-label`}

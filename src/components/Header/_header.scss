@@ -18,9 +18,11 @@
     justify-content: center;
     position: absolute;
     left: 0;
+    overflow: hidden;
     top: 0;
     width: 60px;
     z-index: 1;
+    transition: background-color 0.25s;
 
     @media (min-width: 1021px) {
       display: none;
@@ -30,7 +32,7 @@
       background-color: #707070;
       color: transparent;
       display: block;
-      width: 2rem;
+      width: 1.65rem;
       height: 2px;
       position: relative;
       transition: background-color 0.25s ease 0.5s;
@@ -44,7 +46,7 @@
         left: 0;
         position: absolute;
         top: 0;
-        width: 2rem;
+        width: 1.65rem;
         transition: transform 0.25s ease 0.25s;
       }
 
@@ -71,6 +73,10 @@
         transform: rotate(-45deg);
       }
     }
+
+    &:hover {
+      background-color: #f4f4f4;
+    }
   }
 
 
@@ -83,12 +89,13 @@
   }
 
   &__nav {
+    border-right: 1px solid #ccc;
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     transform: translateX(-100%);
-    transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1) 0.1s;
+    transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1) 0.1s;
 
     @media (min-width: 1021px) {
       position: relative;

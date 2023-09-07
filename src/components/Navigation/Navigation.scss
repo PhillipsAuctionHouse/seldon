@@ -115,9 +115,11 @@
     position: relative;
 
     @media (max-width: 1020px) {
-      width: 614px;
+      height: calc(100vh - 102px);
+      overflow: scroll;
       transform: translateX(0%);
-      transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1) 0.1s;
+      transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1) 0.1s;
+      width: 614px;
     }
 
     &--expanded {
@@ -152,11 +154,11 @@
       position: absolute;
       top: 0;
       right: 0;
-      height: calc(100vh - 70px);
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: scroll;
       width: 307px;
       z-index: -10;
-      transition: opacity 0.6s ease-in 0s;
+      transition: opacity 0.4s ease-in 0s;
 
     }
     @media (min-width: 1021px) {
@@ -200,7 +202,8 @@
       }
 
 
-      &:hover ul   {
+      &:hover ul,
+      &--expanded:focus-within ul   {
         opacity: 1;
 
         padding: 1rem;
@@ -250,7 +253,7 @@
     &.#{$px}-nav__list-item--expanded ul {
       opacity: 1;
       z-index: 0;
-      transition: opacity 0.6s ease-in 0.25s;
+      transition: opacity 0.4s ease-in 0.25s;
     }
   }
 }

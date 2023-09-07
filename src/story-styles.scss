@@ -40,3 +40,9 @@ body {
 .phillips-nav__list-item {
   list-style: none;
 }
+
+.sb-story {
+  .phillips-nav__list ul {
+    display: none;
+  }
+}

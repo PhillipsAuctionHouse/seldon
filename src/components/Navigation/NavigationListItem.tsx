@@ -24,22 +24,26 @@ interface NavigationListItemProps extends Record<string, unknown>{
   /**
    * Optional click handler
    */
-  onClick?: () => void;
+  handleOnClick?: () => void;
+  /**
+   *  Blur handler for keyboard a11y for nested list
+   */
+  onBlur?: (e: React.FocusEvent) => void
 }
 
 const NavigationListItem = ({
   children,
   className,
   element: Element = 'a',
+  handleOnClick,
   href,
-  onClick,
   ...props // Used to spread props needed for 3rd party elements or a11y attributes
 }: NavigationListItemProps) => {
   return (
     <li
       data-testid={`nav-list-item`}
       className={classnames(`${px}-nav__list-item`, {className})}
-      onClick={onClick}
+      onClick={handleOnClick}
     >
       <Element href={href} {...props}>{children}</Element>
     </li>

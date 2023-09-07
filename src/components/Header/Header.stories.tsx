@@ -70,6 +70,8 @@ type Story = StoryObj<typeof meta>;
 
 
 
-export const LoggedIn: Story = {};
+export const Playground: Story = {
+  decorators: [StatefulHeader]
+};
 
 
