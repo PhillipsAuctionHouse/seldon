@@ -53,18 +53,20 @@ const HeroBanner = ({
       className={baseClass}
       style={{ '--background': background } as React.CSSProperties}
     >
-      {
-        (prehead || date)
-        ? <p className={`${baseClass}__pre-head`}>
-            {prehead ? <span>{prehead}</span> : null}
-            {date ? <span>{date}</span> : null}
-          </p>
-        : null
-      }
-      <h1 className={`${baseClass}__heading`}>{headerText}{ subHeadText ? <span>{subHeadText}</span> : null }</h1>
-      {
-        association ? <p>{association}</p> : null
-      }
+      <span className={`${baseClass}__content-wrapper`}>
+        {
+          (prehead || date)
+          ? <p className={`${baseClass}__pre-head`}>
+              {prehead ? <span>{prehead}</span> : null}
+              {date ? <span>{date}</span> : null}
+            </p>
+          : null
+        }
+        <h1 className={`${baseClass}__heading`}>{headerText}{ subHeadText ? <span>{subHeadText}</span> : null }</h1>
+        {
+          association ? <p>{association}</p> : null
+        }
+      </span>
     </header>
   );
 };
