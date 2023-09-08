@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.4.0...v1.4.1) (2023-09-08)
+
+
+### Bug Fixes
+
+* **herobanner:** removed unnecessary media query affecting margin on mobile ([67e10be](https://github.com/PhillipsAuctionHouse/seldon/commit/67e10be6bdf04383ceeca1ca94b10cec8b28dd1a))
+
 # [1.4.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.3.1...v1.4.0) (2023-09-05)
 
 
