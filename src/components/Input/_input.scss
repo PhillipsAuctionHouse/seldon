@@ -1,0 +1,54 @@
+@import '../../vars';
+@import '../../_utils';
+
+// Shared Input styles
+.#{$px}-input {
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    margin-bottom: 0.5rem;
+
+    &--hidden {
+      @include hidden();
+    }
+  }
+
+  &__input {
+    border: 3px solid currentColor;
+    // box-sizing: content-box;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  &__validation {
+    line-height: 1.25;
+  }
+
+
+  // Small input size
+  &--sm {
+    .#{$px}-input__input {
+      padding: 0.25rem 0.5rem;
+    }
+  }
+
+  // Large input size
+  &--lg {
+    .#{$px}-input__input {
+      padding: 0.75rem 0.5rem;
+    }
+  }
+
+  // Large input size
+  &--inline {
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+
+    .#{$px}-input__input {
+      flex: 1;
+    }
+  }
+}
+

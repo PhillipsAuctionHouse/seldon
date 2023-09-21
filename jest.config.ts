@@ -7,7 +7,7 @@ export default {
     "^.+\\.tsx?$": "ts-jest"
   },
   collectCoverage: true,
-  collectCoverageFrom: ['src/components/**/*.ts?(x)', '!src/**/*.stories.ts?(x)',],
+  collectCoverageFrom: ['src/components/**/*.ts?(x)', '!src/**/*.stories.ts?(x)', 'src/utils/*.ts?(x)'],
   coveragePathIgnorePatterns: ['/node_modules/', '/lib/', '/coverage/'],
   coverageThreshold: {
     global: {
