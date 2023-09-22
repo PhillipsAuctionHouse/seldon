@@ -52,7 +52,7 @@ export interface InputProps extends Record<string, unknown> {
   /**
    * Optional `onChange` handler that is called whenever `<input>` is updated
    */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void;
 
   /**
    * Optional `onClick` handler that is called whenever the `<input>` is clicked
@@ -95,7 +95,7 @@ export interface InputProps extends Record<string, unknown> {
   warnText?: React.ReactNode;
 }
 
-const TextInput = React.forwardRef((
+const Input = React.forwardRef((
   {
     className,
     defaultValue,
@@ -131,8 +131,8 @@ const TextInput = React.forwardRef((
         [`${px}-input--inline`]: inline,
         [`${px}-input--readonly`]: readOnly,
         [`${px}-input--disabled`]: inputProps.disabled,
-        [`${px}-input--invalid`]: !inputProps.disabled && !readOnly && inputProps.invalid,
-        [`${px}-input--warn`]: !inputProps.disabled && !readOnly && !inputProps.invalid && inputProps.warn,
+        [`${px}-input--invalid`]: inputProps.invalid,
+        [`${px}-input--warn`]: inputProps.warn,
         [`${className}__wrapper`]: className,
       }
     );
@@ -162,4 +162,4 @@ const TextInput = React.forwardRef((
     )
 })
 
-export default TextInput;
+export default Input;
