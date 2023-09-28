@@ -41,6 +41,7 @@ interface NormalizedProps  {
   disabled?: boolean;
   invalid?: boolean;
   invalidId?: string;
+  type?: string;
   warn?: boolean;
   warnId?: string;
   validation: JSX.Element | null;
@@ -69,6 +70,7 @@ export function useNormalizedInputProps({
     disabled: !readOnly && disabled,
     invalid: !readOnly && !disabled && invalid,
     invalidId: `${id}-error-msg`,
+    type: type === "toggle" ? "checkbox" : type,
     warn: !readOnly && !disabled && !invalid && warn,
     warnId: `${id}-warn-msg`,
     validation: null,

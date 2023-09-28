@@ -2,13 +2,9 @@ import * as React from 'react';
 import classnames from 'classnames';
 
 import { px, useNormalizedInputProps } from '../../utils';
+import {InputProps} from '../Input/Input';
 
-export interface InputProps extends Record<string, unknown> {
-  /**
-   * Optional className to be applied to the `<input>` node
-   */
-  className?: string;
-
+export interface ToggleProps extends InputProps {
   /**
    * Optionally provide the default value of the `<input>`. Should not be passed into controlled input!
    */
@@ -95,7 +91,7 @@ export interface InputProps extends Record<string, unknown> {
   warnText?: React.ReactNode;
 }
 
-const Input = React.forwardRef((
+const Toggle = React.forwardRef((
   {
     className,
     defaultValue,
@@ -153,7 +149,7 @@ const Input = React.forwardRef((
           placeholder={placeholder}
           readOnly={readOnly}
           ref={ref}
-          type={inputProps.type}
+          type={type}
           value={value}
           {...rest}
         />
@@ -162,4 +158,4 @@ const Input = React.forwardRef((
     )
 })
 
-export default Input;
+export default Toggle;
