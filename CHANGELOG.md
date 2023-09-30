@@ -1,3 +1,13 @@
+# [1.5.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.4.1...v1.5.0) (2023-09-30)
+
+
+### Features
+
+* **input:** built component and wrote test ([4b8a374](https://github.com/PhillipsAuctionHouse/seldon/commit/4b8a374575c041f6ebb7beecc03160116e9812b5))
+* **inputs:** added a select input and wrote test ([5855ab0](https://github.com/PhillipsAuctionHouse/seldon/commit/5855ab04b2493d030b4962b560f6965ff74dbb66))
+* **input:** styled different states ([dfe3e79](https://github.com/PhillipsAuctionHouse/seldon/commit/dfe3e7977815fc85ab3651d008defe23fc36af4b))
+* **toggle:** build out toggle version of checkbox ([3e85fc5](https://github.com/PhillipsAuctionHouse/seldon/commit/3e85fc57b06f47c816f3758e746b9ab7168d2a81))
+
 ## [1.4.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.4.0...v1.4.1) (2023-09-08)
 
 
