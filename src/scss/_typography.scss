@@ -10,16 +10,7 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
-h1,
-h2,
-h3,
-h4 {
-  color: $primary-black;
-}
 
-p {
-  color: $soft-black;
-}
 
 /** Fonts **/
 @font-face {
@@ -56,4 +47,22 @@ p {
 }
 @mixin DistinctText {
   font-family: $DistinctText;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: $primary-black;
+  @include DistinctDisplay();
+}
+
+p,
+input,
+label,
+div,
+a,
+button {
+  color: $soft-black;
+  @include DistinctText();
 }

@@ -1,0 +1,179 @@
+@import '../../vars';
+@import '../../_utils';
+
+$toggleBaseWidth: 3rem;
+$inline: #{$px}-input--inline;
+$disabled: #{$px}-input--disabled;
+$invalid: #{$px}-input--invalid;
+$warn: #{$px}-input--warn;
+$md: #{$px}-input--md;
+$lg: #{$px}-input--lg;
+// Shared Input styles
+.#{$px}-toggle-input {
+  position: relative;
+  transition: padding 0.25s;
+
+  .#{$px}-input__label {
+    line-height: 1;
+    margin-bottom: 2.5rem;
+    // margin-left: 66px;
+    position: relative;
+
+    &::after,
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 1.85rem;
+    }
+
+    &::before {
+      background-color: rgba(0,0,0, .4);
+      border-radius: 1rem;
+      width: $toggleBaseWidth;
+      height: 1rem;
+      left: 0;
+      transition: background-color 0.25s, color 0.25s;
+    }
+
+    &::after {
+      // background-color: transparent;
+      background: #fff linear-gradient(transparent,rgba($pure-black, 0.05));
+      border-radius: 50%;
+      box-shadow: 0 1px 2px 0 rgba($pure-black,.15), 0 0 0 1px rgba($pure-black,.15) inset;
+      color: white;
+      height: 1rem;
+      left: 0;
+      width: 1rem;
+      transform: translate(0, 0);
+      transition: transform 0.25s;
+    }
+  }
+
+  &.#{$inline} {
+
+    .#{$px}-input__label {
+      margin-bottom: 0.5rem;
+      margin-left: 66px;
+
+      &::before {
+        left: unset;
+        right: calc(1rem + 100%);
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+
+      &::after {
+        left: unset;
+        right: calc($toggleBaseWidth + 100%);
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+    }
+  }
+
+  // Hide actual checkbox input
+  .#{$px}-input__input {
+    @include hidden;
+    margin-bottom: 0;
+  }
+
+  &.#{$invalid}.#{$inline} {
+    padding-top: 2rem;
+  }
+
+
+  // Height changes
+  &.#{$md},
+  &.#{$lg} {
+    .#{$px}-input__label::after {
+      right: calc($toggleBaseWidth - 0.5rem + 100%);
+    }
+  }
+  &.#{$md} {
+    .#{$px}-input__label {
+      margin-bottom: 3rem;
+
+      &::before {
+        height: 1.5rem;
+      }
+
+      &::after {
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+    }
+
+    &.#{$inline} {
+      .#{$px}-input__label {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+  &.#{$lg} {
+    .#{$px}-input__label {
+      margin-bottom: 3.5rem;
+
+      &::before {
+        width: 3.5rem;
+        height: 2rem;
+      }
+
+      &::after {
+        height: 2rem;
+        width: 2rem;
+      }
+    }
+
+    &.#{$inline} {
+      .#{$px}-input__label {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  &.#{$lg}.#{$inline} {
+    .#{$px}-input__label {
+      margin-left: 4.375rem;
+    }
+  }
+
+  // When in checked state
+  &:has(input:checked) {
+
+    .#{$px}-input__label {
+      &::before {
+        background-color: $pure-black;
+      }
+
+      &::after {
+        transform: translate($toggleBaseWidth - 1rem, 0)
+      }
+    }
+
+    &.#{$md} .#{$px}-input__label::after,
+    &.#{$lg} .#{$px}-input__label::after {
+      transform: translate($toggleBaseWidth - 1.5rem, 0)
+    }
+
+
+    &.#{$inline} .#{$px}-input__label::after { transform: translate($toggleBaseWidth - 1rem, -50%); }
+
+    &.#{$md}.#{$inline} .#{$px}-input__label::after,
+    &.#{$lg}.#{$inline} .#{$px}-input__label::after {
+      transform: translate($toggleBaseWidth - 1.5rem, -50%);
+    }
+
+    // Error state checked
+    &.#{$invalid} .#{$px}-input__label::before { background-color: $error-red; }
+
+    // warn state checked
+    &.#{$warn} .#{$px}-input__label::before { background-color: $warn-yellow; }
+  }
+  &.#{$warn} {
+    &.#{$md},
+    &.#{$lg} {
+      padding-top: 3.5rem;
+    }
+  }
+}

@@ -1,0 +1,160 @@
+@import '../../vars';
+@import '../../_utils';
+
+$md: #{$px}-input--md;
+$lg: #{$px}-input--lg;
+
+// Shared Input styles
+.#{$px}-input {
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    margin-bottom: 0.5rem;
+
+    &--hidden {
+      @include hidden();
+    }
+  }
+
+  &__input {
+    accent-color: $pure-black;
+    border: 3px solid currentColor;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    // width: 100%;
+  }
+
+  &__validation {
+    display: -webkit-box;
+    line-height: 1.25;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  // Small input size
+  &--sm {
+    .#{$px}-input__input {
+      padding: 0.25rem 0.5rem;
+    }
+  }
+
+  // Large input size
+  &--lg {
+    .#{$px}-input__input {
+      padding: 0.75rem 0.5rem;
+    }
+  }
+
+  // Inline
+  &--inline {
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .#{$px}-input__input {
+      align-self: center;
+      width: unset;
+    }
+
+    .#{$px}-input__label {
+      max-width: 8.75rem;
+    }
+  }
+
+  // Disabled
+  &--disabled {
+    color: $keyline-gray;
+
+    .#{$px}-input__label,
+    .#{$px}-input__input {
+      color: inherit;
+      cursor: not-allowed;
+    }
+  }
+
+  // Read only
+  &--readonly {
+    pointer-events: none;
+
+    .#{$px}-input__label,
+    .#{$px}-input__input {
+      cursor: default;
+    }
+  }
+
+  // Invalid
+  &--invalid {
+    color: $error-red;
+
+    .#{$px}-input__label,
+    .#{$px}-input__input,
+    .#{$px}-input__validation {
+      color: inherit;
+    }
+  }
+
+  // warn
+  &--warn {
+    .#{$px}-input__label {
+      position: relative;
+    }
+  }
+
+  .#{$px}-input__validation {
+    animation: reveal 0.45s linear forwards;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.#{$px}-radio-input,
+.#{$px}-checkbox-input {
+  .#{$px}-input__input {
+    align-self: flex-start;
+  }
+
+  &.#{$px}-input--inline {
+    .#{$px}-input__input {
+      align-self: center;
+    }
+  }
+}
+
+.#{$px}-input--inline.#{$px}-radio-input,
+.#{$px}-input--inline.#{$px}-checkbox-input,
+.#{$px}-input--inline.#{$px}-toggle-input  {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  position: relative;
+  transition: padding 0.25s;
+
+  &.#{$px}-input--invalid,
+  &.#{$px}-input--warn {
+    padding-top: 1.5rem;
+
+    .#{$px}-input__validation {
+      left: 0;
+      position: absolute;
+      top: 0
+    }
+  }
+
+  &.#{$px}-input--warn {
+    padding-top: 2.75rem;
+  }
+}
+
+.#{$px}-select-input .#{$px}-input__input {
+  flex: 1;
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
