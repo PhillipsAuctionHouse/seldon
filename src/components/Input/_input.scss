@@ -83,6 +83,10 @@ $lg: #{$px}-input--lg;
     .#{$px}-input__input {
       cursor: default;
     }
+
+    .#{$px}-input__input {
+      background-color: rgba(239, 239, 239, 0.3);
+    }
   }
 
   // Invalid

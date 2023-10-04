@@ -1,10 +1,14 @@
+// 🌎 Globals
 @import './vars';
 // @TODO: add styles when we can do a site wide regressions QA
 // @use 'reset';
 @import './typography';
+// ⚛️ Components
 @import 'components/Button/button';
+@import 'components/DateRangePicker/dateRangePicker';
 @import 'components/Header/header';
 @import 'components/HeroBanner/heroBanner';
 @import 'components/Input/input';
 @import 'components/Toggle/toggle';
+// 📑 Pages
 @import 'pages/page';
