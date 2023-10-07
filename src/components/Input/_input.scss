@@ -95,6 +95,7 @@ $lg: #{$px}-input--lg;
 
     .#{$px}-input__label,
     .#{$px}-input__input,
+    .#{$px}-input__input::placeholder,
     .#{$px}-input__validation {
       color: inherit;
     }
