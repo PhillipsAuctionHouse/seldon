@@ -9,7 +9,8 @@ describe('A DatePicker', () => {
 
   it('will render a default value if passed', () => {
     const testRef = React.createRef<HTMLInputElement>();
-    render(<DatePicker ref={testRef} {...reqProps} defaultValue={[new Date('2023-06-01T08:30'), new Date('2023-06-05T08:30')]}/>)
+    render(<DatePicker ref={testRef} {...reqProps} defaultValue={['2023-06-01T08:30', '2023-06-05T08:30']}/>)
     expect(testRef?.current?.value).toEqual('2023-06-01 to 2023-06-05');
   });
 });
+

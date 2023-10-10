@@ -127,7 +127,7 @@ const DatePicker = React.forwardRef((
   {
     allowInput = false,
     className,
-    defaultValue,
+    defaultValue = [],
     disabled,
     enableTime = false,
     hideLabel,

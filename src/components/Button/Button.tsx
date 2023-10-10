@@ -2,7 +2,7 @@ import classnames from 'classnames';
 
 import { px } from '../../utils';
 
-interface ButtonProps {
+export interface ButtonProps {
   /**
    * Is this the principal call to action on the page?
    */
@@ -15,10 +15,11 @@ interface ButtonProps {
    * How large should the button be?
    */
   size?: 'sm' | 'md' | 'lg';
+
   /**
    * Button contents
    */
-  label: React.ReactElement | string;
+  children: React.ReactNode
   /**
   * Unique id for component
   */
@@ -34,10 +35,10 @@ interface ButtonProps {
  */
 
 const Button = ({
-  primary = false,
-  size = 'medium',
+  primary = true,
+  size = 'md',
   backgroundColor,
-  label,
+  children,
   id,
   ...props
 }: ButtonProps) => {
@@ -50,7 +51,7 @@ const Button = ({
       style={{ backgroundColor }}
       {...props}
     >
-      {label}
+      {children}
     </button>
   );
 };
