@@ -2,6 +2,7 @@ import type { Meta } from '@storybook/react';
 import * as React from 'react';
 
 import DatePicker, { DatePickerProps } from './DatePicker';
+import { Instance } from 'flatpickr/dist/types/instance';
 
 
 const meta = {
@@ -28,6 +29,11 @@ const argTypes = {
     },
   },
   disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  enableTime: {
     control: {
       type: 'boolean',
     },
@@ -104,20 +110,16 @@ const argTypes = {
 const PickerWithRef = (props: DatePickerProps) => {
   const inputRef = React.useRef() as React.Ref<HTMLInputElement> | undefined;
 
-  const handleOnChange = (val: [Date, Date]) => {
+  const handleOnChange = (dates:Date[], dateStr: string, Instance: Instance) => {
     if (typeof inputRef === 'object') {
       console.log("StoryOBject" , inputRef?.current?.value)
     }
 
     if (props && typeof props.onChange === 'function') {
-      props.onChange(val)
+      props.onChange(dates, dateStr, Instance)
     }
   }
-  return (
-    <>
-      <DatePicker ref={inputRef} key={`${props.defaultValue}`} {...props} id="DatePicker-1" onChange={handleOnChange} />
-    </>
-    )
+  return <DatePicker ref={inputRef} key={`${props.defaultValue}`} {...props} id="DatePicker-1" onChange={handleOnChange} />
 }
 
 export const WithDefaultDates = ({playgroundWidth, ...args}: StoryProps) => (
@@ -129,7 +131,7 @@ export const WithDefaultDates = ({playgroundWidth, ...args}: StoryProps) => (
 WithDefaultDates.args = {
   playgroundWidth: 300,
   className: 'DatePicker-test-class',
-  defaultValue: ['2023-06-01T08:30', '2023-06-05T08:30'],
+  defaultValue: [new Date('2023-06-01T08:30'), new Date('2023-06-05T08:30')],
   disabled: false,
   invalid: false,
   invalidText: 'Error message',
@@ -143,6 +145,31 @@ WithDefaultDates.args = {
 }
 
 WithDefaultDates.argTypes = argTypes;
+
+export const WithTimePicker = ({playgroundWidth, ...args}: StoryProps) => (
+  <div style={{ width: playgroundWidth, margin: '1rem' }}>
+    <DatePicker  key={`${args.defaultValue}${args.locale}`} {...args}  id="DatePicker-1" />
+  </div>
+);
+
+WithTimePicker.args = {
+  playgroundWidth: 300,
+  className: 'DatePicker-test-class',
+  defaultValue: undefined,
+  disabled: false,
+  enableTime: true,
+  invalid: false,
+  invalidText: 'Error message',
+  labelText: 'Label text',
+  placeholder: "yyyy-mm-dd - yyyy-mm-dd",
+  readOnly: false,
+  size: 'md',
+  warn: false,
+  warnText:
+    'Warning message that is really long can wrap to more lines.',
+}
+
+WithTimePicker.argTypes = argTypes;
 
 export const Playground = ({playgroundWidth, ...args}: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>

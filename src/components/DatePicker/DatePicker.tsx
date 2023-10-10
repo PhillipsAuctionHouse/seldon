@@ -2,10 +2,15 @@ import * as React from 'react';
 import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
 
+
 import { noOP, useNormalizedInputProps } from '../../utils';
 import Input, { InputProps } from '../Input/Input';
 
 export interface DatePickerProps extends Omit<InputProps, 'defaultValue'>, Record<string, unknown> {
+  /**
+   * Optionally allow manual entry to the date input
+   */
+  allowInput?: boolean;
 
   /**
    * Optionally provide the default value of the `<input>`. Should not be passed into controlled input!
@@ -20,7 +25,7 @@ export interface DatePickerProps extends Omit<InputProps, 'defaultValue'>, Recor
   /**
    * Render time picker on dropdown
    */
-  enableTime?: boolean | undefined;
+  enableTime?: boolean;
 
   /**
    * Boolean to specify whether you want the underlying label to be visually hidden
@@ -120,6 +125,7 @@ l10n.en.weekdays.shorthand.forEach((_day, index) => {
 
 const DatePicker = React.forwardRef((
   {
+    allowInput = false,
     className,
     defaultValue,
     disabled,
@@ -151,13 +157,13 @@ const DatePicker = React.forwardRef((
     () => {
       // Config for flatpickr
       const config: flatpickr.Options.Options = {
+        allowInput,
         clickOpens: !inputProps.disabled,
         defaultDate: defaultValue,
         enableTime,
         locale: l10n[locale as keyof typeof l10n],
         mode: type,
-        onChange
-        // onChange: ((dates: []) =>  onChange(dates)) as typeof onChange,
+        onChange,
       }
       // if Ref is provided use
       if(typeof ref === 'object' && ref?.current) {
@@ -174,7 +180,7 @@ const DatePicker = React.forwardRef((
           fp.current.destroy();
         }
       }
-    },[inputProps.disabled, locale, defaultValue, enableTime, onChange, ref, type, id]
+    },[allowInput, defaultValue, inputProps.disabled, enableTime, id, locale, onChange, ref, type]
   )
 
   return (
