@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import Button, {ButtonProps} from './Button';
 import Calendar from '../../assets/calendar.svg';
@@ -20,7 +20,6 @@ const meta = {
 } satisfies Meta<typeof Button>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
 
 
