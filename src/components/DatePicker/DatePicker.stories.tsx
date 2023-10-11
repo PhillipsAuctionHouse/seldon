@@ -111,10 +111,6 @@ const PickerWithRef = (props: DatePickerProps) => {
   const inputRef = React.useRef() as React.Ref<HTMLInputElement> | undefined;
 
   const handleOnChange = (dates:Date[], dateStr: string, Instance: Instance) => {
-    if (typeof inputRef === 'object') {
-      console.log("StoryOBject" , inputRef?.current?.value)
-    }
-
     if (props && typeof props.onChange === 'function') {
       props.onChange(dates, dateStr, Instance)
     }

@@ -153,6 +153,7 @@ const DatePicker = React.forwardRef((
   const inputProps = useNormalizedInputProps({disabled, id, invalid, invalidText, readOnly, type, warn, warnText})
   const fp = React.useRef() as React.MutableRefObject<flatpickr.Instance>;
   const inputRef = React.useRef() as React.Ref<HTMLInputElement> | undefined;
+  const manualValue = React.useRef<Date[]>()
   React.useEffect(
     () => {
       // Config for flatpickr
@@ -183,6 +184,32 @@ const DatePicker = React.forwardRef((
     },[allowInput, defaultValue, inputProps.disabled, enableTime, id, locale, onChange, ref, type]
   )
 
+
+  const handleKeyPress = (e: KeyboardEvent) => {
+    if (allowInput && (/[0-9-/:]+/g).test(e.key) ) {
+      manualValue.current = fp?.current?.selectedDates
+    }
+  }
+  const handOnBlur = (e: FocusEvent) => {
+    if (
+      !allowInput ||
+      e.relatedTarget instanceof HTMLElement
+      && e.relatedTarget?.classList.value.includes('flatpickr')
+    ) {
+      return;
+    }
+    if (
+      'current' in manualValue
+      && manualValue?.current?.length
+      && manualValue?.current?.length > 0
+      && manualValue?.current?.join().toString() !== fp?.current?.selectedDates.join().toString()
+      ) {
+      const element = fp.current?.element as HTMLInputElement
+      manualValue.current = []
+      onChange(fp.current?.selectedDates, element?.value, fp.current)
+    }
+  }
+
   return (
     <Input
       className={`${className} flatpickr`}
@@ -202,6 +229,8 @@ const DatePicker = React.forwardRef((
       value={value}
       warn={warn}
       warnText={warnText}
+      onKeyUp={handleKeyPress}
+      onBlur={handOnBlur}
       {...rest}
     />
   )
