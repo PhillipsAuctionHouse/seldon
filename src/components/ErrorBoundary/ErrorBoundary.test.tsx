@@ -2,8 +2,7 @@ import { render, screen } from '@testing-library/react';
 import * as React from 'react';
 
 import Input from "../Input/Input";
-import ErrorBoundary, {ErrorBoundaryProps} from './ErrorBoudary';
-
+import ErrorBoundary, {ErrorBoundaryProps} from './ErrorBoundary'
 interface WrappedProps {
   throwError?: () => void
 }
