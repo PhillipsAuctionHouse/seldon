@@ -1,4 +1,5 @@
 @import '../../vars';
+@import '../../_utils';
 
 .#{$px}-button {
   @include bodyText;
@@ -14,9 +15,21 @@
   padding: 0.5em 1.75em;
   transition: color 0.25s, background-color 0.25s, font-weight 0.25s;
 
+  svg:nth-child(1) {
+
+  }
+
   &:hover,
   &:focus {
-    background-color: $soft-black;
+    background-color: $primary-black;
+  }
+
+  &__helper {
+    @include hidden;
+
+    & + svg  {
+      margin-inline-end: 0.5rem;
+    }
   }
 
   &--secondary {

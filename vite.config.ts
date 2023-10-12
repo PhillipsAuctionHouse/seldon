@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react'
 import copy from 'rollup-plugin-copy';
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import { resolve } from 'path'
+import svgr from "vite-plugin-svgr";
 
 import * as packageJson from './package.json'
 
@@ -12,6 +13,7 @@ import * as packageJson from './package.json'
 const plugins = [
   react(),
   dts({entryRoot: 'src'}),
+  svgr(),
 
 ]
 
@@ -42,11 +44,11 @@ export default defineConfig({
       },
       {
         find: './_utils',
-        replacement: resolve(__dirname, './src/scss/utils')
+        replacement: resolve(__dirname, './src/scss/_utils')
       },
       {
         find: '../../_utils',
-        replacement: resolve(__dirname, './src/scss/utils')
+        replacement: resolve(__dirname, './src/scss/_utils')
       },
     ]
   },
