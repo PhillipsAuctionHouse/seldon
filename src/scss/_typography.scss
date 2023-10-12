@@ -49,20 +49,31 @@ body {
   font-family: $DistinctText;
 }
 
-h1,
-h2,
-h3,
-h4 {
+@mixin headerText {
   color: $primary-black;
   @include DistinctDisplay();
 }
 
-p,
-input,
-label,
-div,
-a,
-button {
+@mixin bodyText {
   color: $soft-black;
   @include DistinctText();
 }
+
+// @TODO: uncomment when site is able to be refactored
+// h1,
+// h2,
+// h3,
+// h4 {
+//   color: $primary-black;
+//   @include DistinctDisplay();
+// }
+
+// p,
+// input,
+// label,
+// div,
+// a,
+// button {
+//   color: $soft-black;
+//   @include DistinctText();
+// }

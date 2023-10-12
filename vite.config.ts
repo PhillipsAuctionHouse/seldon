@@ -33,6 +33,10 @@ export default defineConfig({
         replacement: resolve(__dirname, './src/scss/typography')
       },
       {
+        find: '../../typography',
+        replacement: resolve(__dirname, './src/scss/typography')
+      },
+      {
         find: './reset',
         replacement: resolve(__dirname, './src/scss/reset')
       },

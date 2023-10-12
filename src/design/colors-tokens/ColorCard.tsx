@@ -73,7 +73,7 @@ const ColorCard = ({
       type="button"
       className={`${className} ${baseClass}`}
       onClick={() => handleOnClick(`$${label.replace(/\s+/g, '-').toLowerCase()}`)}
-      style={{['--hex-value' as any]: hex}}
+      style={{['--hex-value' as string]: hex}}
     >
       {
         copied ?

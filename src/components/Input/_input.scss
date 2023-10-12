@@ -83,6 +83,10 @@ $lg: #{$px}-input--lg;
     .#{$px}-input__input {
       cursor: default;
     }
+
+    .#{$px}-input__input {
+      background-color: rgba(239, 239, 239, 0.3);
+    }
   }
 
   // Invalid
@@ -91,6 +95,7 @@ $lg: #{$px}-input--lg;
 
     .#{$px}-input__label,
     .#{$px}-input__input,
+    .#{$px}-input__input::placeholder,
     .#{$px}-input__validation {
       color: inherit;
     }
