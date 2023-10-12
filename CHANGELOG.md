@@ -1,3 +1,12 @@
+# [1.6.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.5.0...v1.6.0) (2023-10-12)
+
+
+### Features
+
+* **datepicker:** cleaned up and renamed picker ([517dfb1](https://github.com/PhillipsAuctionHouse/seldon/commit/517dfb1c557a96e42e6eaa438b1ff8a48f287b5e))
+* **datepicker:** finalize the component ([3b08453](https://github.com/PhillipsAuctionHouse/seldon/commit/3b084530b65bf64441271da4938e562b12ff8a70))
+* **datepicker:** first pass at date picker ([1675e8a](https://github.com/PhillipsAuctionHouse/seldon/commit/1675e8ab4ff39e8df4aa15f44b384068bb78f223))
+
 # [1.5.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.4.1...v1.5.0) (2023-09-30)
 
 
