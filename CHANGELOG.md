@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.7.0...v1.7.1) (2023-10-12)
+
+
+### Bug Fixes
+
+* **datepicker:** remove export until we can figure out flatpickr error ([134dd37](https://github.com/PhillipsAuctionHouse/seldon/commit/134dd374640c6c624105683ecea6b83b1c8951fc))
+
 # [1.7.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.6.0...v1.7.0) (2023-10-12)
 
 
