@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.6.0...v1.7.0) (2023-10-12)
+
+
+### Features
+
+* **errorboundary:** created component and test for error boundary ([19efe9c](https://github.com/PhillipsAuctionHouse/seldon/commit/19efe9c4ece21a061ba2686f1344453113da74e1))
+
 # [1.6.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.5.0...v1.6.0) (2023-10-12)
 
 
