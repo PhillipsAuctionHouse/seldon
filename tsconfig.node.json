@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "composite": true,
-    "skipLibCheck": true,
     "module": "ESNext",
     "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
+    "skipLibCheck": true
   },
   "include": ["vite.config.ts","package.json"]
 }

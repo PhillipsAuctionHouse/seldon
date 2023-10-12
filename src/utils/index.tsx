@@ -2,6 +2,9 @@ import * as React from 'react';
 
 export const px = 'phillips';
 
+/* eslint-disable @typescript-eslint/no-empty-function */
+export const noOP = () => {};
+
 export interface InputProps  {
   /**
    * Specify whether the `<input>` should be disabled

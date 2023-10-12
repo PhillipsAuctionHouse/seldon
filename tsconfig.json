@@ -13,13 +13,15 @@
     },
 
     /* Bundler mode */
-    "moduleResolution": "Node",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "Node",
+    "noEmit": true,
+    "resolveJsonModule": true,
 
 
     /* Linting */
