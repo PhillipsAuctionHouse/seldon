@@ -44,7 +44,6 @@ const Button = ({ primary = true, size = 'md', backgroundColor, children, id, ..
       style={{ backgroundColor }}
       {...props}
     >
-      <span className={`${px}-button__helper`} /> {/* CSS selection helper */}
       {children}
     </button>
   );

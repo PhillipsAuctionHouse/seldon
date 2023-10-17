@@ -63,21 +63,21 @@ export default defineConfig({
       output: [
         {
           dir: 'dist',
-          format: "cjs",
+          format: 'cjs',
           preserveModulesRoot: 'src',
           chunkFileNames: '[name].cjs.js',
           entryFileNames: '[name].cjs.js',
         },
         {
           dir: 'dist',
-          format: "es",
+          format: 'es',
           preserveModules: true,
           preserveModulesRoot: 'src',
           chunkFileNames: '[name].js',
           entryFileNames: '[name].js',
           globals: {
-            flatpickr: 'flatpickr'
-          }
+            flatpickr: 'flatpickr',
+          },
         },
       ],
 
