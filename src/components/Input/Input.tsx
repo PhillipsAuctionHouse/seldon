@@ -72,7 +72,7 @@ export interface InputProps extends Record<string, unknown> {
   /**
    * Enum to determine the height of the Text Input. Currently supports the following:
    */
-  size?: 'sm' | 'md' | 'lg' ;
+  size?: 'sm' | 'md' | 'lg';
 
   /**
    * String that determines  the type of the `<input>` (e.g 'text', 'date', 'numeber', etc.)
@@ -95,55 +95,49 @@ export interface InputProps extends Record<string, unknown> {
   warnText?: React.ReactNode;
 }
 
-const Input = React.forwardRef((
-  {
-    className,
-    defaultValue,
-    disabled,
-    hideLabel,
-    id,
-    inline,
-    invalid,
-    invalidText,
-    labelText,
-    onChange,
-    onClick,
-    placeholder,
-    readOnly,
-    size = 'md',
-    type = 'text',
-    value,
-    warn,
-    warnText,
-    ...rest
-  }: InputProps,
-  ref:React.ForwardedRef<HTMLInputElement>
+const Input = React.forwardRef(
+  (
+    {
+      className,
+      defaultValue,
+      disabled,
+      hideLabel,
+      id,
+      inline,
+      invalid,
+      invalidText,
+      labelText,
+      onChange,
+      onClick,
+      placeholder,
+      readOnly,
+      size = 'md',
+      type = 'text',
+      value,
+      warn,
+      warnText,
+      ...rest
+    }: InputProps,
+    ref: React.ForwardedRef<HTMLInputElement>,
   ) => {
+    const inputProps = useNormalizedInputProps({ disabled, id, invalid, invalidText, readOnly, type, warn, warnText });
 
-    const inputProps = useNormalizedInputProps({disabled, id, invalid, invalidText, readOnly, type, warn, warnText})
-
-
-    const wrapperClassnames = classnames(
-      `${px}-${type}-input`,
-      `${px}-input`,
-      `${px}-input--${size}`,
-      {
-        [`${px}-input--inline`]: inline,
-        [`${px}-input--readonly`]: readOnly,
-        [`${px}-input--disabled`]: inputProps.disabled,
-        [`${px}-input--invalid`]: inputProps.invalid,
-        [`${px}-input--warn`]: inputProps.warn,
-        [`${className}__wrapper`]: className,
-      }
-    );
+    const wrapperClassnames = classnames(`${px}-${type}-input`, `${px}-input`, `${px}-input--${size}`, {
+      [`${px}-input--inline`]: inline,
+      [`${px}-input--readonly`]: readOnly,
+      [`${px}-input--disabled`]: inputProps.disabled,
+      [`${px}-input--invalid`]: inputProps.invalid,
+      [`${px}-input--warn`]: inputProps.warn,
+      [`${className}__wrapper`]: className,
+    });
 
     return (
       <div className={wrapperClassnames}>
-        <label htmlFor={id} className={classnames(`${px}-input__label`, {[`${px}-input__label--hidden`]: hideLabel})}>
+        <label htmlFor={id} className={classnames(`${px}-input__label`, { [`${px}-input__label--hidden`]: hideLabel })}>
           {labelText}
         </label>
         <input
-          className={classnames(`${px}-input__input`,{className})}
+          className={classnames(`${px}-input__input`, { className })}
           data-testid={id}
           defaultValue={defaultValue}
           disabled={inputProps.disabled}
@@ -157,11 +151,12 @@ const Input = React.forwardRef((
           value={value}
           {...rest}
         />
-        { inputProps.validation }
+        {inputProps.validation}
       </div>
-    )
-})
+    );
+  },
+);
 
-Input.displayName = "Input"
+Input.displayName = 'Input';
 
 export default Input;

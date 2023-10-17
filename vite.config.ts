@@ -1,21 +1,16 @@
-import { defineConfig } from 'vite'
-import dts from 'vite-plugin-dts'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
+import react from '@vitejs/plugin-react';
 import copy from 'rollup-plugin-copy';
-import peerDepsExternal from "rollup-plugin-peer-deps-external";
-import { resolve } from 'path'
-import svgr from "vite-plugin-svgr";
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import { resolve } from 'path';
+import svgr from 'vite-plugin-svgr';
 
-import * as packageJson from './package.json'
+import * as packageJson from './package.json';
 
 // const isDev = process.env.NODE_ENV;
 
-const plugins = [
-  react(),
-  dts({entryRoot: 'src'}),
-  svgr(),
-
-]
+const plugins = [react(), dts({ entryRoot: 'src' }), svgr()];
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -24,33 +19,33 @@ export default defineConfig({
     alias: [
       {
         find: './vars',
-        replacement: resolve(__dirname, './src/scss/vars')
+        replacement: resolve(__dirname, './src/scss/vars'),
       },
       {
         find: '../../vars',
-        replacement: resolve(__dirname, './src/scss/vars')
+        replacement: resolve(__dirname, './src/scss/vars'),
       },
       {
         find: './typography',
-        replacement: resolve(__dirname, './src/scss/typography')
+        replacement: resolve(__dirname, './src/scss/typography'),
       },
       {
         find: '../../typography',
-        replacement: resolve(__dirname, './src/scss/typography')
+        replacement: resolve(__dirname, './src/scss/typography'),
       },
       {
         find: './reset',
-        replacement: resolve(__dirname, './src/scss/reset')
+        replacement: resolve(__dirname, './src/scss/reset'),
       },
       {
         find: './_utils',
-        replacement: resolve(__dirname, './src/scss/_utils')
+        replacement: resolve(__dirname, './src/scss/_utils'),
       },
       {
         find: '../../_utils',
-        replacement: resolve(__dirname, './src/scss/_utils')
+        replacement: resolve(__dirname, './src/scss/_utils'),
       },
-    ]
+    ],
   },
   build: {
     minify: true,
@@ -59,20 +54,32 @@ export default defineConfig({
       // Could also be a dictionary or array of multiple entry points
       entry: ['index.ts'],
       name: 'seldon',
-      formats: ['es'],
+      formats: ['es', 'cjs'],
+      fileName: (format, fileName) => `${fileName}.${format}.js`,
     },
 
     rollupOptions: {
       input: 'src/index.ts',
-      output:
+      output: [
         {
           dir: 'dist',
+          format: "cjs",
+          preserveModulesRoot: 'src',
+          chunkFileNames: '[name].cjs.js',
+          entryFileNames: '[name].cjs.js',
+        },
+        {
+          dir: 'dist',
+          format: "es",
           preserveModules: true,
           preserveModulesRoot: 'src',
           chunkFileNames: '[name].js',
-          entryFileNames: '[name].js'
-        }
-      ,
+          entryFileNames: '[name].js',
+          globals: {
+            flatpickr: 'flatpickr'
+          }
+        },
+      ],
 
       // make sure to externalize deps that shouldn't be bundled
       // into your library
@@ -100,8 +107,8 @@ export default defineConfig({
             },
           ],
         }),
-        peerDepsExternal()
+        peerDepsExternal(),
       ],
     },
   },
-})
+});

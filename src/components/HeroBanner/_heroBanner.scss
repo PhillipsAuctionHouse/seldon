@@ -1,101 +1,101 @@
 @import '../../vars';
 
 .#{$px}-hero-banner {
+  align-items: center;
+  background: var(--background);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  min-height: 25rem;
+  padding: 1rem;
+  width: 100%;
+
+  @media (max-width: 28.8125rem) {
+    flex-direction: column;
     align-items: center;
-    background: var(--background);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
+    gap: 1.875rem;
+    align-self: stretch;
+    padding: 1.875rem 0.9375rem;
+    background: $pure-black;
+
+    &::before {
+      content: '';
+      background: var(--background);
+      width: 100%;
+      height: 12rem;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+  }
+
+  h1 {
+    font-family: 'DistinctDisplay', sans-serif;
+  }
+
+  h1 span,
+  p {
+    font-family: 'DistinctText', sans-serif;
+  }
+
+  h1,
+  h1 span,
+  p {
+    color: $pure-white;
+    font-weight: 400;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  p {
+    font-size: 0.875rem;
+    line-height: 1;
+    letter-spacing: 0.125rem;
+    text-align: center;
+  }
+
+  & .#{$px}-hero-banner__content-wrapper {
+    max-width: 1082px;
     display: flex;
-    flex-flow: column;
-    justify-content: center;
-    min-height: 25rem;
-    padding: 1rem;
-    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  & .#{$px}-hero-banner__pre-head {
+    align-items: flex-start;
+    display: flex;
+    font-size: 0.75rem;
+    gap: 1.875rem;
+
+    @media (min-width: 28.8125rem) {
+      font-size: 0.875rem;
+    }
 
     @media (max-width: 28.8125rem) {
-        flex-direction: column;
-        align-items: center;
-        gap: 1.875rem;
-        align-self: stretch;
-        padding: 1.875rem 0.9375rem;
-        background: $pure-black;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+  }
 
-        &::before{
-            content: '';
-            background: var(--background);
-            width: 100%;
-            height: 12rem;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center center;
-        }
+  & .#{$px}-hero-banner__heading {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    font-size: 2rem;
+    line-height: 1;
+    margin: 1.875rem 0;
+    text-align: center;
+
+    @media (min-width: 28.8125rem) {
+      font-size: 2.375rem;
     }
 
-    h1 {
-        font-family: 'DistinctDisplay', sans-serif;
+    span {
+      font-size: 1.625rem;
     }
-
-    h1 span,
-    p {
-        font-family: 'DistinctText', sans-serif;        
-    }
-
-    h1,
-    h1 span,
-    p {
-        color: $pure-white;
-        font-weight: 400;
-        margin: 0;
-        text-transform: uppercase;
-    }
-
-    p {
-        font-size: 0.875rem;
-        line-height: 1;
-        letter-spacing: 0.125rem;
-        text-align: center;
-    }
-
-    & .#{$px}-hero-banner__content-wrapper {
-        max-width: 1082px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    & .#{$px}-hero-banner__pre-head {
-        align-items: flex-start;
-        display: flex;
-        font-size: 0.75rem;
-        gap: 1.875rem;
-
-        @media (min-width: 28.8125rem) {
-            font-size: 0.875rem;
-        }
-
-        @media (max-width: 28.8125rem) { 
-            flex-direction: column;
-            gap: 1rem;
-            align-items: center;
-        }
-    }
-
-    & .#{$px}-hero-banner__heading {
-        align-self: stretch;
-        display: flex;
-        flex-direction: column;
-        font-size: 2rem;
-        line-height: 1;
-        margin: 1.875rem 0;
-        text-align: center;
-
-        @media (min-width: 28.8125rem) {
-            font-size: 2.375rem;
-        }
-
-        span {
-            font-size: 1.625rem;
-        }
-    }
+  }
 }

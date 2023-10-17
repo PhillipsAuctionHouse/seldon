@@ -4,7 +4,6 @@ import * as React from 'react';
 import DatePicker, { DatePickerProps } from './DatePicker';
 import { Instance } from 'flatpickr/dist/types/instance';
 
-
 const meta = {
   title: 'Components/DatePicker',
   component: DatePicker,
@@ -14,7 +13,7 @@ const meta = {
 export default meta;
 
 interface StoryProps extends DatePickerProps {
-  playgroundWidth: string
+  playgroundWidth: string;
 }
 
 const argTypes = {
@@ -75,8 +74,8 @@ const argTypes = {
   },
   readOnly: {
     control: {
-      type: 'boolean'
-    }
+      type: 'boolean',
+    },
   },
   size: {
     options: ['sm', 'md', 'lg'],
@@ -110,17 +109,19 @@ const argTypes = {
 const PickerWithRef = (props: DatePickerProps) => {
   const inputRef = React.useRef() as React.Ref<HTMLInputElement> | undefined;
 
-  const handleOnChange = (dates:Date[], dateStr: string, Instance: Instance) => {
+  const handleOnChange = (dates: Date[], dateStr: string, Instance: Instance) => {
     if (props && typeof props.onChange === 'function') {
-      props.onChange(dates, dateStr, Instance)
+      props.onChange(dates, dateStr, Instance);
     }
-  }
-  return <DatePicker ref={inputRef} key={`${props.defaultValue}`} {...props} id="DatePicker-1" onChange={handleOnChange} />
-}
+  };
+  return (
+    <DatePicker ref={inputRef} key={`${props.defaultValue}`} {...props} id="DatePicker-1" onChange={handleOnChange} />
+  );
+};
 
-export const WithDefaultDates = ({playgroundWidth, ...args}: StoryProps) => (
-  <div style={{ width: playgroundWidth, margin: '1rem'}}>
-    <PickerWithRef key={`${args.defaultValue}`} {...args}  id="DatePicker-1" />
+export const WithDefaultDates = ({ playgroundWidth, ...args }: StoryProps) => (
+  <div style={{ width: playgroundWidth, margin: '1rem' }}>
+    <PickerWithRef key={`${args.defaultValue}`} {...args} id="DatePicker-1" />
   </div>
 );
 
@@ -132,19 +133,18 @@ WithDefaultDates.args = {
   invalid: false,
   invalidText: 'Error message',
   labelText: 'Label text',
-  placeholder: "yyyy-mm-dd - yyyy-mm-dd",
+  placeholder: 'yyyy-mm-dd - yyyy-mm-dd',
   readOnly: false,
   size: 'md',
   warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines.',
-}
+  warnText: 'Warning message that is really long can wrap to more lines.',
+};
 
 WithDefaultDates.argTypes = argTypes;
 
-export const WithTimePicker = ({playgroundWidth, ...args}: StoryProps) => (
+export const WithTimePicker = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <DatePicker  key={`${args.defaultValue}${args.locale}`} {...args}  id="DatePicker-1" />
+    <DatePicker key={`${args.defaultValue}${args.locale}`} {...args} id="DatePicker-1" />
   </div>
 );
 
@@ -157,19 +157,18 @@ WithTimePicker.args = {
   invalid: false,
   invalidText: 'Error message',
   labelText: 'Label text',
-  placeholder: "yyyy-mm-dd - yyyy-mm-dd",
+  placeholder: 'yyyy-mm-dd - yyyy-mm-dd',
   readOnly: false,
   size: 'md',
   warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines.',
-}
+  warnText: 'Warning message that is really long can wrap to more lines.',
+};
 
 WithTimePicker.argTypes = argTypes;
 
-export const Playground = ({playgroundWidth, ...args}: StoryProps) => (
+export const Playground = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <DatePicker  key={`${args.defaultValue}${args.locale}`} {...args}  id="DatePicker-1" />
+    <DatePicker key={`${args.defaultValue}${args.locale}`} {...args} id="DatePicker-1" />
   </div>
 );
 
@@ -181,15 +180,11 @@ Playground.args = {
   invalid: false,
   invalidText: 'Error message',
   labelText: 'Label text',
-  placeholder: "yyyy-mm-dd - yyyy-mm-dd",
+  placeholder: 'yyyy-mm-dd - yyyy-mm-dd',
   readOnly: false,
   size: 'md',
   warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines.',
-}
+  warnText: 'Warning message that is really long can wrap to more lines.',
+};
 
 Playground.argTypes = argTypes;
-
-
-

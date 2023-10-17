@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react';
 
-import Button, {ButtonProps} from './Button';
+import Button, { ButtonProps } from './Button';
 import Calendar from '../../assets/calendar.svg?react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
@@ -15,18 +15,16 @@ const meta = {
       control: {
         type: 'select',
       },
-    }
+    },
   },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 
-
-
 export const ButtonWithIcon = (props: ButtonProps) => (
-  <Button {...props} id="Input-1" >
-      This is the title
-      <Calendar />
+  <Button {...props} id="Input-1">
+    This is the title
+    <Calendar />
   </Button>
 );
 
@@ -34,6 +32,6 @@ export const ButtonWithIcon = (props: ButtonProps) => (
 export const Playground = {
   args: {
     primary: false,
-    children: "Button",
+    children: 'Button',
   },
 };
