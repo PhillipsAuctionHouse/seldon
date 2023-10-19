@@ -1,50 +1,40 @@
 import classnames from 'classnames';
 
-import { px } from '../../utils';
+import { CommonProps, px } from '../../utils';
 
-export interface ButtonProps {
+export interface ButtonProps extends CommonProps {
   /**
-   * Is this the principal call to action on the page?
-   */
-  primary?: boolean;
-  /**
-   * What background color to use
-   */
-  backgroundColor?: string;
-  /**
-   * How large should the button be?
-   */
-  size?: 'sm' | 'md' | 'lg';
-
-  /**
-   * Button contents
-   */
+  * Button contents
+  */
   children: React.ReactNode;
   /**
-   * Unique id for component
-   */
-  id?: string;
+   * True if button comes after text
+  */
+  iconLast?: boolean;
   /**
    * Optional click handler
-   */
+  */
   onClick?: () => void;
+  /**
+   * Is this the principal call to action on the page?
+  */
+  primary?: boolean;
+  /**
+   * How large should the button be?
+  */
+  size?: 'sm' | 'md' | 'lg';
 }
 
-/**
- * Primary UI component for user interaction
- */
-
-const Button = ({ primary = true, size = 'md', backgroundColor, children, id, ...props }: ButtonProps) => {
+const Button = ({ primary = true, size = 'md', children, iconLast = false, id, ...props }: ButtonProps) => {
   return (
     <button
       data-testid={id ? `button-${id}` : `button`}
       id={id}
       type="button"
-      className={classnames(`${px}-button`, `${px}-button--${size}`, { [`${px}-button--secondary`]: !primary })}
-      style={{ backgroundColor }}
+      className={classnames(`${px}-button`, `${px}-button--${size}`, { [`${px}-button--secondary`]: !primary,  [`${px}-button--icon-last`]: iconLast})}
       {...props}
     >
-      {children}
+      { children }
     </button>
   );
 };

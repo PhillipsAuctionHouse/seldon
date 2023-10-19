@@ -18,15 +18,44 @@
     background-color 0.25s,
     font-weight 0.25s;
 
+
   &:hover,
   &:focus {
     background-color: $primary-black;
+
+    svg {
+      fill: $pure-white;
+    }
+  }
+  svg {
+    fill: $pure-white;
+    transition: fill 0.25s;
+    margin-inline-end: 0.5rem;
+    width: 1em;
   }
 
   &--secondary {
     color: $text-color;
     background-color: transparent;
     box-shadow: rgba(0, 0, 0, 0.5) 0 0 0 1px inset;
+
+    &:hover,
+    &:focus {
+      color: $pure-white;
+
+      svg {
+        fill: $pure-white;
+      }
+    }
+
+    svg {
+      fill: $text-color;
+    }
+  }
+
+  &.#{$px}-button--icon-last  svg {
+    margin-inline-end: unset;
+    margin-inline-start: 0.5rem;
   }
 
   &--sm {

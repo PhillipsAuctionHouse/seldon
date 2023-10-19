@@ -1,6 +1,7 @@
 import * as React from 'react';
 import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
+import classnames from 'classnames';
 
 import { noOP, useNormalizedInputProps } from '../../utils';
 import Input, { InputProps } from '../Input/Input';
@@ -206,7 +207,7 @@ const DatePicker = React.forwardRef(
 
     return (
       <Input
-        className={`${className} flatpickr`}
+        className={classnames(`flatpickr`, {[`${className}`]: className})}
         data-testid={id}
         disabled={inputProps.disabled}
         hideLabel={hideLabel}

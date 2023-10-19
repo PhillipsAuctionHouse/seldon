@@ -9,22 +9,23 @@ const meta = {
   component: Button,
   tags: ['autodocs'],
   argTypes: {
-    backgroundColor: { control: 'color' },
     size: {
       options: ['sm', 'md', 'lg'],
       control: {
         type: 'select',
       },
     },
+    iconLast: { control: 'boolean'}
   },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 
 export const ButtonWithIcon = (props: ButtonProps) => (
-  <Button {...props} id="Input-1">
+  <Button {...props} >
+    {!props.iconLast ? <Calendar /> : null}
     This is the title
-    <Calendar />
+    {props.iconLast ? <Calendar /> : null}
   </Button>
 );
 

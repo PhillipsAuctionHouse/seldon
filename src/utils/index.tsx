@@ -5,6 +5,17 @@ export const px = 'phillips';
 /* eslint-disable @typescript-eslint/no-empty-function */
 export const noOP = () => {};
 
+export interface CommonProps {
+  /**
+   * Optional className to be applied to the outer most element
+   */
+  className?: string;
+  /**
+   * A custom `id`
+   */
+  id: string;
+}
+
 export interface InputProps {
   /**
    * Specify whether the `<input>` should be disabled
