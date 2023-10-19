@@ -15,14 +15,14 @@ const meta = {
         type: 'select',
       },
     },
-    iconLast: { control: 'boolean'}
+    iconLast: { control: 'boolean' },
   },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 
 export const ButtonWithIcon = (props: ButtonProps) => (
-  <Button {...props} >
+  <Button {...props}>
     {!props.iconLast ? <Calendar /> : null}
     This is the title
     {props.iconLast ? <Calendar /> : null}

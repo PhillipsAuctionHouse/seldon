@@ -13,7 +13,7 @@ export interface CommonProps {
   /**
    * A custom `id`
    */
-  id: string;
+  id?: string;
 }
 
 export interface InputProps {

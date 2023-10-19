@@ -18,7 +18,6 @@
     background-color 0.25s,
     font-weight 0.25s;
 
-
   &:hover,
   &:focus {
     background-color: $primary-black;
@@ -53,7 +52,7 @@
     }
   }
 
-  &.#{$px}-button--icon-last  svg {
+  &.#{$px}-button--icon-last svg {
     margin-inline-end: unset;
     margin-inline-start: 0.5rem;
   }

@@ -207,7 +207,7 @@ const DatePicker = React.forwardRef(
 
     return (
       <Input
-        className={classnames(`flatpickr`, {[`${className}`]: className})}
+        className={classnames(`flatpickr`, { [`${className}`]: className })}
         data-testid={id}
         disabled={inputProps.disabled}
         hideLabel={hideLabel}
