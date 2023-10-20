@@ -6,7 +6,7 @@ export interface ViewingsListCardProps {
   /**
    * Is this the principal call to action on the page?
    */
-  primary?: boolean ;
+  primary?: boolean;
   /**
    * What background color to use
    */
@@ -19,11 +19,11 @@ export interface ViewingsListCardProps {
   /**
    * Button contents
    */
-  children: React.ReactNode
+  children: React.ReactNode;
   /**
-  * Unique id for component
-  */
-  id?: string ;
+   * Unique id for component
+   */
+  id?: string;
   /**
    * Optional click handler
    */
@@ -47,7 +47,7 @@ const ViewingsListCard = ({
       data-testid={id ? `button-${id}` : `button`}
       id={id}
       type="button"
-      className={classnames(`${px}-button`,`${px}-button--${size}`, {[`${px}-button--secondary`]: !primary})}
+      className={classnames(`${px}-button`, `${px}-button--${size}`, { [`${px}-button--secondary`]: !primary })}
       style={{ backgroundColor }}
       {...props}
     >
@@ -56,4 +56,4 @@ const ViewingsListCard = ({
   );
 };
 
-export default ViewingsListCard
+export default ViewingsListCard;
