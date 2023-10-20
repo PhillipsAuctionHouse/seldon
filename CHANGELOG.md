@@ -1,3 +1,12 @@
+## [1.7.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.7.1...v1.7.2) (2023-10-20)
+
+
+### Bug Fixes
+
+* **button:** change styles to deal with svgs ([9279d4e](https://github.com/PhillipsAuctionHouse/seldon/commit/9279d4e4fa046c142ea1e6f94c2a50bd7b390e47))
+* **button:** remove unused markup and styles ([26ee20c](https://github.com/PhillipsAuctionHouse/seldon/commit/26ee20c98ffc8698921d54c60934cba7a51176da))
+* **commmonprops:** make id optional ([e95c949](https://github.com/PhillipsAuctionHouse/seldon/commit/e95c94908487a13d8e4fb6b568c3ee6d227b518b))
+
 ## [1.7.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.7.0...v1.7.1) (2023-10-12)
 
 ### Bug Fixes
