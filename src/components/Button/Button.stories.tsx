@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/react';
 
-import Button, {ButtonProps} from './Button';
-import Calendar from '../../assets/calendar.svg';
+import Button, { ButtonProps } from './Button';
+import Calendar from '../../assets/calendar.svg?react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -9,26 +9,23 @@ const meta = {
   component: Button,
   tags: ['autodocs'],
   argTypes: {
-    backgroundColor: { control: 'color' },
     size: {
       options: ['sm', 'md', 'lg'],
       control: {
         type: 'select',
       },
-    }
+    },
+    iconLast: { control: 'boolean' },
   },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 
-
-
 export const ButtonWithIcon = (props: ButtonProps) => (
-  <Button {...props} id="Input-1" >
-    <>
-      <img src={Calendar} className="calendar" alt="calendar" style={{marginRight: '0.75rem'}} />
-      This is the title
-    </>
+  <Button {...props}>
+    {!props.iconLast ? <Calendar /> : null}
+    This is the title
+    {props.iconLast ? <Calendar /> : null}
   </Button>
 );
 
@@ -36,6 +33,6 @@ export const ButtonWithIcon = (props: ButtonProps) => (
 export const Playground = {
   args: {
     primary: false,
-    label: "Button",
+    children: 'Button',
   },
 };

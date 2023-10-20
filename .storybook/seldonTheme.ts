@@ -30,10 +30,10 @@ export default create({
   textInverseColor: '#ffffff',
 
   // Toolbar default and active colors
-  barTextColor: '#9E9E9E',
+  barTextColor: '#000000', //'#9E9E9E',
   barSelectedColor: '#000000',
   // barSelectedColor: '#585C6D',
-  barBg: '#ffffff',
+  barBg: '#f7f7f7',
 
   // Form colors
   inputBg: '#ffffff',

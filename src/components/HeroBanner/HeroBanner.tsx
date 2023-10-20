@@ -4,7 +4,7 @@ interface HeroBannerProps {
   /**
    * informational text above the header (e.g. region label or "buy now")
    */
-  prehead?: string ;
+  prehead?: string;
   /**
    * When is this sale taking place?
    */
@@ -18,17 +18,17 @@ interface HeroBannerProps {
    */
   subHeadText?: string;
   /**
-  * Is there an association related to this sale?
-  */
+   * Is there an association related to this sale?
+   */
   association?: string;
   /**
-  * What background image or color to use
-  */
+   * What background image or color to use
+   */
   background?: string;
   /**
-  * Unique id for component testing
-  */
-  id?: string ;
+   * Unique id for component testing
+   */
+  id?: string;
 }
 
 /**
@@ -37,15 +37,7 @@ interface HeroBannerProps {
 
 const baseClass = `${px}-hero-banner`;
 
-const HeroBanner = ({
-  prehead,
-  date,
-  headerText,
-  subHeadText,
-  association,
-  background,
-  id
-}: HeroBannerProps) => {
+const HeroBanner = ({ prehead, date, headerText, subHeadText, association, background, id }: HeroBannerProps) => {
   return (
     <header
       data-testid={id ? `hero-banner-${id}` : `hero-banner`}
@@ -54,21 +46,20 @@ const HeroBanner = ({
       style={{ '--background': background } as React.CSSProperties}
     >
       <span className={`${baseClass}__content-wrapper`}>
-        {
-          (prehead || date)
-          ? <p className={`${baseClass}__pre-head`}>
-              {prehead ? <span>{prehead}</span> : null}
-              {date ? <span>{date}</span> : null}
-            </p>
-          : null
-        }
-        <h1 className={`${baseClass}__heading`}>{headerText}{ subHeadText ? <span>{subHeadText}</span> : null }</h1>
-        {
-          association ? <p>{association}</p> : null
-        }
+        {prehead || date ? (
+          <p className={`${baseClass}__pre-head`}>
+            {prehead ? <span>{prehead}</span> : null}
+            {date ? <span>{date}</span> : null}
+          </p>
+        ) : null}
+        <h1 className={`${baseClass}__heading`}>
+          {headerText}
+          {subHeadText ? <span>{subHeadText}</span> : null}
+        </h1>
+        {association ? <p>{association}</p> : null}
       </span>
     </header>
   );
 };
 
-export default HeroBanner
+export default HeroBanner;

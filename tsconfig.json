@@ -9,7 +9,7 @@
       "./vars": ["./src/scss/vars"],
       "./typography": ["./src/scss/typography"],
       "./reset": ["./src/scss/reset"],
-      "./utils": ["./src/scss/utils"],
+      "./utils": ["./src/scss/utils"]
     },
 
     /* Bundler mode */
@@ -22,7 +22,6 @@
     "moduleResolution": "Node",
     "noEmit": true,
     "resolveJsonModule": true,
-
 
     /* Linting */
     "strict": true,

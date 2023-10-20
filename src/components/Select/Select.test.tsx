@@ -5,7 +5,7 @@ import * as React from 'react';
 import Select from './Select';
 
 describe('A Select', () => {
-  const reqProps = {labelText: 'My Test Label', id: "test-id"}
+  const reqProps = { labelText: 'My Test Label', id: 'test-id' };
 
   it('will render a default value if passed', () => {
     const testRef = React.createRef<HTMLSelectElement>();
@@ -13,8 +13,8 @@ describe('A Select', () => {
       <Select ref={testRef} {...reqProps} defaultValue="option two">
         <option>option one</option>
         <option>option two</option>
-      </Select>
-      )
+      </Select>,
+    );
     expect(testRef?.current?.value).toEqual('option two');
   });
 
@@ -22,14 +22,14 @@ describe('A Select', () => {
     const testRef = React.createRef<HTMLSelectElement>();
     const mockedOnClick = jest.fn();
     const mockedOnChange = jest.fn();
-    const {rerender} = render(
+    const { rerender } = render(
       <Select ref={testRef} {...reqProps} defaultValue="option two" onChange={mockedOnChange} onClick={mockedOnClick}>
         <option>option one</option>
         <option>option two</option>
-      </Select>
-      )
+      </Select>,
+    );
 
-    userEvent.selectOptions(screen.getByTestId('test-id'), ['option one'])
+    userEvent.selectOptions(screen.getByTestId('test-id'), ['option one']);
     await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(2));
     await waitFor(() => expect(mockedOnChange.mock.calls).toHaveLength(1));
     expect(testRef?.current?.value).toEqual('option one');
@@ -39,9 +39,9 @@ describe('A Select', () => {
       <Select ref={testRef} {...reqProps} defaultValue="option two" onClick={mockedOnClick} disabled>
         <option>option one</option>
         <option>option two</option>
-      </Select>
-      )
-    userEvent.selectOptions(screen.getByTestId('test-id'), ['option one'])
+      </Select>,
+    );
+    userEvent.selectOptions(screen.getByTestId('test-id'), ['option one']);
     await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(0));
     await waitFor(() => expect(mockedOnChange.mock.calls).toHaveLength(0));
 
@@ -49,11 +49,10 @@ describe('A Select', () => {
       <Select ref={testRef} {...reqProps} defaultValue="option two" onClick={mockedOnClick} readOnly>
         <option>option one</option>
         <option>option two</option>
-      </Select>
-      )
-      userEvent.selectOptions(screen.getByTestId('test-id'), ['option one'])
-      await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(0));
-      await waitFor(() => expect(mockedOnChange.mock.calls).toHaveLength(0));
+      </Select>,
+    );
+    userEvent.selectOptions(screen.getByTestId('test-id'), ['option one']);
+    await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(0));
+    await waitFor(() => expect(mockedOnChange.mock.calls).toHaveLength(0));
   });
-
 });

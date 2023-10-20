@@ -2,7 +2,6 @@
 @import '../../vars';
 @import '../../typography';
 
-
 .flatpickr-calendar {
   @include DistinctText;
 
@@ -67,9 +66,9 @@
     padding: 0.65rem 0 0 0;
   }
 
-  .flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n+1)),
-  .flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n+1)),
-  .flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n+1)) {
+  .flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n + 1)),
+  .flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n + 1)),
+  .flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n + 1)) {
     -webkit-box-shadow: -10px 0 0 #e6e6e6;
     box-shadow: -10px 0 0 #e6e6e6;
   }

@@ -5,7 +5,18 @@ export const px = 'phillips';
 /* eslint-disable @typescript-eslint/no-empty-function */
 export const noOP = () => {};
 
-export interface InputProps  {
+export interface CommonProps {
+  /**
+   * Optional className to be applied to the outer most element
+   */
+  className?: string;
+  /**
+   * A custom `id`
+   */
+  id?: string;
+}
+
+export interface InputProps {
   /**
    * Specify whether the `<input>` should be disabled
    */
@@ -40,7 +51,7 @@ export interface InputProps  {
   warnText?: React.ReactNode;
 }
 
-interface NormalizedProps  {
+interface NormalizedProps {
   disabled?: boolean;
   invalid?: boolean;
   invalidId?: string;
@@ -73,17 +84,15 @@ export function useNormalizedInputProps({
     disabled: !readOnly && disabled,
     invalid: !readOnly && !disabled && invalid,
     invalidId: `${id}-error-msg`,
-    type: type === "toggle" ? "checkbox" : type,
+    type: type === 'toggle' ? 'checkbox' : type,
     warn: !readOnly && !disabled && !invalid && warn,
     warnId: `${id}-warn-msg`,
     validation: null,
   };
 
   if (normalizedProps.invalid) {
-    normalizedProps.validation  = (
-      <div
-        className={`${px}-input__validation ${px}-${type}-input--invalid`}
-        id={normalizedProps.invalidId}>
+    normalizedProps.validation = (
+      <div className={`${px}-input__validation ${px}-${type}-input--invalid`} id={normalizedProps.invalidId}>
         {invalidText}
       </div>
     );
@@ -91,9 +100,7 @@ export function useNormalizedInputProps({
 
   if (normalizedProps.warn) {
     normalizedProps.validation = (
-      <div
-        className={`${px}-input__validation ${px}-${type}-input--warn`}
-        id={normalizedProps.warnId}>
+      <div className={`${px}-input__validation ${px}-${type}-input--warn`} id={normalizedProps.warnId}>
         {warnText}
       </div>
     );

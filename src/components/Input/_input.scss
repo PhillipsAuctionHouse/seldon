@@ -129,7 +129,7 @@ $lg: #{$px}-input--lg;
 
 .#{$px}-input--inline.#{$px}-radio-input,
 .#{$px}-input--inline.#{$px}-checkbox-input,
-.#{$px}-input--inline.#{$px}-toggle-input  {
+.#{$px}-input--inline.#{$px}-toggle-input {
   flex-direction: row-reverse;
   justify-content: flex-end;
   position: relative;
@@ -142,7 +142,7 @@ $lg: #{$px}-input--lg;
     .#{$px}-input__validation {
       left: 0;
       position: absolute;
-      top: 0
+      top: 0;
     }
   }
 

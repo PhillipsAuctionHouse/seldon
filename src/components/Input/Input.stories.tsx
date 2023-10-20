@@ -11,7 +11,7 @@ const meta = {
 export default meta;
 
 interface StoryProps extends InputProps {
-  playgroundWidth: string
+  playgroundWidth: string;
 }
 
 const argTypes = {
@@ -87,7 +87,7 @@ const argTypes = {
   },
 };
 
-export const DateTimeInput = ({playgroundWidth, ...args}: StoryProps) => (
+export const DateTimeInput = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
     <Input key={args.defaultValue} {...args} id="Input-1" />
   </div>
@@ -102,16 +102,22 @@ DateTimeInput.args = {
   invalidText: 'Error message',
   labelText: 'Label text',
   warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines.',
+  warnText: 'Warning message that is really long can wrap to more lines.',
   size: 'md',
   type: 'datetime-local',
-}
+};
 
-export const RadioInput = ({playgroundWidth, ...args}: StoryProps) => (
+export const RadioInput = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, backgroundColor: '#dddddd', margin: '1rem' }}>
-    <Input key={args.defaultValue} {...args} id="Input-1"  labelText='Label text 1' defaultChecked={true} name="radios"/>
-    <Input key={args.defaultValue} {...args} id="Input-2" labelText='Label text 2' name="radios" />
+    <Input
+      key={args.defaultValue}
+      {...args}
+      id="Input-1"
+      labelText="Label text 1"
+      defaultChecked={true}
+      name="radios"
+    />
+    <Input key={args.defaultValue} {...args} id="Input-2" labelText="Label text 2" name="radios" />
   </div>
 );
 
@@ -124,17 +130,15 @@ RadioInput.args = {
   invalidText: 'Error message',
   disabled: false,
   warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines.',
+  warnText: 'Warning message that is really long can wrap to more lines.',
   size: 'md',
   type: 'radio',
-}
+};
 
-
-export const CheckboxInput = ({playgroundWidth, ...args}: StoryProps) => (
+export const CheckboxInput = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <Input key={args.defaultValue} {...args} id="Input-1"  labelText='Label text 1' defaultChecked={true} />
-    <Input key={args.defaultValue} {...args} id="Input-2" labelText='Label text 2' />
+    <Input key={args.defaultValue} {...args} id="Input-1" labelText="Label text 1" defaultChecked={true} />
+    <Input key={args.defaultValue} {...args} id="Input-2" labelText="Label text 2" />
   </div>
 );
 
@@ -147,15 +151,14 @@ CheckboxInput.args = {
   invalidText: 'Error message',
   disabled: false,
   warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines.',
+  warnText: 'Warning message that is really long can wrap to more lines.',
   size: 'md',
   type: 'checkbox',
-}
+};
 
 CheckboxInput.argTypes = argTypes;
 
-export const RangeInput = ({playgroundWidth, ...args}: StoryProps) => (
+export const RangeInput = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
     <Input key={args.defaultValue} {...args} id="Input-1" />
   </div>
@@ -177,17 +180,15 @@ RangeInput.args = {
   type: 'range',
   warn: false,
   warnText: 'Warning message that is really long can wrap to more lines.',
-}
+};
 
 RangeInput.argTypes = argTypes;
 
-export const Playground = ({playgroundWidth, ...args}: StoryProps) => (
+export const Playground = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
     <Input key={args.defaultValue} {...args} id="Input-1" />
   </div>
 );
-
-
 
 Playground.args = {
   playgroundWidth: 300,
@@ -199,8 +200,7 @@ Playground.args = {
   defaultValue: 'My values',
   labelText: 'Label text',
   warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines.',
+  warnText: 'Warning message that is really long can wrap to more lines.',
   size: 'md',
 };
 

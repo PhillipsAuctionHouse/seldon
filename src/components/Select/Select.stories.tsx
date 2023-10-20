@@ -11,7 +11,7 @@ const meta = {
 export default meta;
 
 interface StoryProps extends SelectProps {
-  playgroundWidth: string
+  playgroundWidth: string;
 }
 
 const argTypes = {
@@ -77,9 +77,9 @@ const argTypes = {
   },
 };
 
-export const Playground = ({playgroundWidth, ...args}: StoryProps) => (
+export const Playground = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <Select key={args.defaultValue} {...args} id="Input-1" >
+    <Select key={args.defaultValue} {...args} id="Input-1">
       <option>Option 1</option>
       <option>Option 2</option>
       <option disabled>Option 3</option>
@@ -98,8 +98,7 @@ Playground.args = {
   readOnly: false,
   size: 'md',
   warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines.',
-}
+  warnText: 'Warning message that is really long can wrap to more lines.',
+};
 
 Playground.argTypes = argTypes;

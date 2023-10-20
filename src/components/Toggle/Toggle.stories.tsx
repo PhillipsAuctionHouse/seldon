@@ -11,7 +11,7 @@ const meta = {
 export default meta;
 
 interface StoryProps extends InputProps {
-  playgroundWidth: string
+  playgroundWidth: string;
 }
 
 const argTypes = {
@@ -85,12 +85,9 @@ const argTypes = {
   },
 };
 
-
-
-
-export const CheckboxInput = ({playgroundWidth, ...args}: StoryProps) => (
+export const CheckboxInput = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <Input key={args.defaultValue} {...args} id="Input-1"  labelText="Label text 1" type="toggle" />
+    <Input key={args.defaultValue} {...args} id="Input-1" labelText="Label text 1" type="toggle" />
   </div>
 );
 
@@ -103,10 +100,8 @@ CheckboxInput.args = {
   invalidText: 'Error message',
   disabled: false,
   warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines.',
+  warnText: 'Warning message that is really long can wrap to more lines.',
   size: 'md',
-}
+};
 
 CheckboxInput.argTypes = argTypes;
-
