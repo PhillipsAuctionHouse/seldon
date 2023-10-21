@@ -1,0 +1,32 @@
+@import '../../vars';
+@import '../../_utils';
+
+
+// viewings-list-card-form
+.#{$px}-viewings-list-card-form {
+  align-items: flex-start;
+  align-self: stretch;
+  border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 34rem;
+  padding: 2rem 1rem;
+  width: 100%;
+
+  h2 {
+    color: $soft-black;
+  }
+
+  .#{$px}-input__input {
+    margin-bottom: 0;
+  }
+
+  &__preview-set {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-inline-start: 1rem;
+    width: 100%;
+  }
+}

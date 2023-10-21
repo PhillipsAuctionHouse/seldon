@@ -10,7 +10,7 @@ import * as packageJson from './package.json';
 
 // const isDev = process.env.NODE_ENV;
 
-const plugins = [react(), dts({ entryRoot: 'src' }), svgr()];
+const plugins = [svgr(), react(), dts({ entryRoot: 'src' })];
 
 // https://vitejs.dev/config/
 export default defineConfig({
