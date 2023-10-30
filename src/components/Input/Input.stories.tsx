@@ -137,8 +137,8 @@ RadioInput.args = {
 
 export const CheckboxInput = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <Input key={args.defaultValue} {...args} id="Input-1" labelText="Label text 1" defaultChecked={true} value={true}/>
-    <Input key={args.defaultValue} {...args} id="Input-2" labelText="Label text 2"  value={true} />
+    <Input key={args.defaultValue} {...args} id="Input-1" labelText="Label text 1" defaultChecked={true} value={true} />
+    <Input key={args.defaultValue} {...args} id="Input-2" labelText="Label text 2" value={true} />
   </div>
 );
 

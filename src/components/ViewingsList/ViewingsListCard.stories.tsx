@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import ViewingsListCard, {ViewingsListCardProps} from './ViewingsListCard';
+import ViewingsListCard, { ViewingsListCardProps } from './ViewingsListCard';
 
 const meta = {
   title: 'Components/ViewingsListCard',
@@ -7,13 +7,13 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     cardTitle: { control: 'string' },
-    enableOnSite: { control: 'boolean'},
+    enableOnSite: { control: 'boolean' },
     onDelete: {
-      control: 'action'
+      control: 'action',
     },
     onSave: {
-      control: 'action'
-    }
+      control: 'action',
+    },
   },
 } satisfies Meta<typeof ViewingsListCard>;
 
@@ -27,30 +27,35 @@ const args = {
   onSave: (e: React.MouseEvent<HTMLElement>) => {
     const targ = e?.target as HTMLElement;
     const form = targ?.closest('form');
-    const data = form && new FormData(form as HTMLFormElement)
+    const data = form && new FormData(form as HTMLFormElement);
     const formJson = data && Object.fromEntries(data.entries());
-    console.log(formJson)
-    const inputs = targ.parentNode?.querySelectorAll('input')
-    inputs?.forEach(input => console.log(`${input.name}:${input.value}`));
-  }
-}
+    console.log(formJson);
+    const inputs = targ.parentNode?.querySelectorAll('input');
+    inputs?.forEach((input) => console.log(`${input.name}:${input.value}`));
+  },
+};
 
 export const ViewingsListCardStory = (props: ViewingsListCardProps) => (
-  <form onSubmit={(e) => {
-    e.preventDefault();
-    const data = new FormData(e.target as HTMLFormElement)
-    const formJson = Object.fromEntries(data.entries());
-    console.log("THIS IS E:", formJson)}}>
+  <form
+    onSubmit={(e) => {
+      e.preventDefault();
+      const data = new FormData(e.target as HTMLFormElement);
+      const formJson = Object.fromEntries(data.entries());
+      console.log('THIS IS E:', formJson);
+    }}
+  >
     <ViewingsListCard key={`${props.location}${props.previewOn}${props.defaultEditState}`} {...props} />
   </form>
 );
 ViewingsListCardStory.args = {
   ...args,
   defaultEditState: true,
-}
+};
 
-export const Playground = (props: ViewingsListCardProps) => <ViewingsListCard  key={`${props.enableOnSite}${props.previewOn}`} {...props} />;
+export const Playground = (props: ViewingsListCardProps) => (
+  <ViewingsListCard key={`${props.enableOnSite}${props.previewOn}`} {...props} />
+);
 
 Playground.args = {
-  ...args
-}
+  ...args,
+};

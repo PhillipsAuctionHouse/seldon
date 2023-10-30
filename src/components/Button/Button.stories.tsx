@@ -39,6 +39,6 @@ export const ButtonWithIcon = (props: ButtonProps) => (
 export const Playground = {
   args: {
     children: 'Button',
-    buttonType: 'primary'
+    buttonType: 'primary',
   },
 };
