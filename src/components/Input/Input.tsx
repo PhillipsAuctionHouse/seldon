@@ -129,19 +129,20 @@ const Input = React.forwardRef(
       [`${px}-input--invalid`]: inputProps.invalid,
       [`${px}-input--warn`]: inputProps.warn,
       [`${className}__wrapper`]: className,
+      [`${px}-input--hidden`]: rest.hidden,
     });
-
     return (
       <div className={wrapperClassnames}>
         <label htmlFor={id} className={classnames(`${px}-input__label`, { [`${px}-input__label--hidden`]: hideLabel })}>
           {labelText}
         </label>
         <input
-          className={classnames(`${px}-input__input`, { className })}
+          className={classnames(`${px}-input__input`, { className})}
           data-testid={id}
           defaultValue={defaultValue}
           disabled={inputProps.disabled}
           id={id}
+          name={rest.name as string}
           onChange={onChange}
           onClick={onClick}
           placeholder={placeholder}

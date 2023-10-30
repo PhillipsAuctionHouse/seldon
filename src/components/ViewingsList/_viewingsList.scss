@@ -1,11 +1,25 @@
 @import '../../vars';
 @import '../../_utils';
+@import '../../typography';
 
+.#{$px}-viewings-list {
+  align-items: center;
+  background-color: $off-white;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 1rem;
+  width: 38rem;
+
+  &__title {
+    @include headerText;
+  }
+}
 
 // viewings-list-card-form
-.#{$px}-viewings-list-card-form {
+.#{$px}-viewings-list-card {
   align-items: flex-start;
-  align-self: stretch;
+  background-color: $pure-white;
   border: 1px solid;
   display: flex;
   flex-direction: column;
@@ -14,7 +28,8 @@
   padding: 2rem 1rem;
   width: 100%;
 
-  h2 {
+  &__title {
+    @include headerText;
     color: $soft-black;
   }
 
@@ -22,11 +37,25 @@
     margin-bottom: 0;
   }
 
-  &__preview-set {
+  &-form__preview-set {
     display: flex;
     flex-direction: column;
     gap: 2rem;
     padding-inline-start: 1rem;
+    width: 100%;
+
+    &--hidden {
+      @include hidden;
+    }
+  }
+
+  hr {
+    width: 100%;
+  }
+
+  &__btn-group {
+    display: flex;
+    justify-content: center;
     width: 100%;
   }
 }

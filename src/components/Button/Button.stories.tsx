@@ -15,6 +15,12 @@ const meta = {
         type: 'select',
       },
     },
+    buttonType: {
+      options: ['primary', 'secondary', 'ghost'],
+      control: {
+        type: 'select',
+      },
+    },
     iconLast: { control: 'boolean' },
   },
 } satisfies Meta<typeof Button>;
@@ -32,7 +38,7 @@ export const ButtonWithIcon = (props: ButtonProps) => (
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Playground = {
   args: {
-    primary: false,
     children: 'Button',
+    buttonType: 'primary'
   },
 };

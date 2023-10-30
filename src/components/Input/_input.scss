@@ -10,12 +10,17 @@ $lg: #{$px}-input--lg;
   flex-direction: column;
   width: 100%;
 
+  &--hidden {
+    @include hidden();
+  }
+
   &__label {
     color: $keyline-gray;
     font-size: 0.8125rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
     text-transform: uppercase;
+    word-break: break-word;
 
     &--hidden {
       @include hidden();
