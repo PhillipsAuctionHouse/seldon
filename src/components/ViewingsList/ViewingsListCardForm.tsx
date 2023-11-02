@@ -45,21 +45,21 @@ export interface ViewingsListCardFormProps {
    * Validation error message object
    */
   invalidFields?: {
-    address1: string | undefined;
-    address1Url: string | undefined;
-    address2: string | undefined;
-    address3: string | undefined;
-    location: string | undefined;
-    previewDates: string | undefined;
-    previewHours1: string | undefined;
-    previewHours2: string | undefined;
-    previewLabelValue: string | undefined;
-    previewOn: string | undefined;
-    viewingLabelValue: string | undefined;
-    viewingDates: string | undefined;
-    viewingHours1: string | undefined;
-    viewingHours2: string | undefined;
-  };
+    address1?: string | undefined;
+    addressUrl?: string | undefined;
+    address2?: string | undefined;
+    address3?: string | undefined;
+    location?: string | undefined;
+    previewDates?: string | undefined;
+    previewHours1?: string | undefined;
+    previewHours2?: string | undefined;
+    previewLabelValue?: string | undefined;
+    previewOn?: string | undefined;
+    viewingLabelValue?: string | undefined;
+    viewingDates?: string | undefined;
+    viewingHours1?: string | undefined;
+    viewingHours2?: string | undefined;
+  } | undefined;
   /**
    * Label for preview label input
    */
@@ -297,13 +297,13 @@ const ViewingsListCardForm = ({
       />
       <Input
         id={`addressUrl-${id}`}
-        name="addressURL"
+        name="addressUrl"
         defaultValue={addressUrl}
         labelText={addressUrlLabel}
         size="sm"
         type="url"
-        invalid={invalidFields?.address1Url}
-        invalidText={invalidFields?.address1Url}
+        invalid={invalidFields?.addressUrl}
+        invalidText={invalidFields?.addressUrl}
       />
     </>
   );

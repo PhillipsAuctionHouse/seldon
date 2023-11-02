@@ -1,6 +1,7 @@
 import * as React from 'react';
+import classnames from 'classnames';
 
-import { px, noOp } from '../../utils';
+import { px } from '../../utils';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import ViewingsListCardForm, { ViewingsListCardFormProps } from './ViewingsListCardForm';
@@ -17,7 +18,7 @@ export interface ViewingsListCardProps extends ViewingsListCardFormProps, Record
   /**
    * Default boolean to determine whether viewing is enabled on site
    */
-  enableOnSite?: boolean;
+  enableOnSite?: string;
   /**
    * Label for enable on site toggle
    */
@@ -42,84 +43,83 @@ export interface ViewingsListCardProps extends ViewingsListCardFormProps, Record
    * Validation error message object
    */
   invalidFields?: {
-    address1: string | undefined;
-    address1Url: string | undefined;
-    address2: string | undefined;
-    address3: string | undefined;
-    location: string | undefined;
-    previewDates: string | undefined;
-    previewHours1: string | undefined;
-    previewHours2: string | undefined;
-    previewLabelValue: string | undefined;
-    previewOn: string | undefined;
-    viewingLabelValue: string | undefined;
-    viewingDates: string | undefined;
-    viewingHours1: string | undefined;
-    viewingHours2: string | undefined;
-  };
+    address1?: string | undefined;
+    address1Url?: string | undefined;
+    address2?: string | undefined;
+    address3?: string | undefined;
+    location?: string | undefined;
+    previewDates?: string | undefined;
+    previewHours1?: string | undefined;
+    previewHours2?: string | undefined;
+    previewLabelValue?: string | undefined;
+    previewOn?: string | undefined;
+    viewingLabelValue?: string | undefined;
+    viewingDates?: string | undefined;
+    viewingHours1?: string | undefined;
+    viewingHours2?: string | undefined;
+  } | undefined;
   /**
    * Callback for when Viewings edits are cancelled
    */
-  onCancel?: () => void;
+  onCancel?: () => void | unknown;
   /**
    * Callback for when Viewings item is deleted
    */
-  onDelete?: (id: string) => void;
+  onDelete?: (id: string) => void | unknown;
   /**
    * Callback for when Viewings item is placed in an editable mode
    */
-  onEdit?: () => void;
+  onEdit?: () => void | unknown;
   /**
    * Callback for when form is saved/submitted
    */
-  onSave?: (e: React.MouseEvent<HTMLElement>) => void;
+  onSave?: (e: React.MouseEvent<HTMLElement>) => void | unknown;
 }
 
 const baseClass = `${px}-viewings-list-card`;
 
 const ViewingsListCard = ({
   address1,
-  address1Label = "Address ('432 Park Ave', ETC)",
+  address1Label,
   addressUrl,
-  addressUrlLabel = "URL for map link ('http://www.website.com')",
+  addressUrlLabel,
   address2,
-  address2Label = "City, State, Zip ('New York, NY 10019')",
+  address2Label,
   address3,
-  address3Label = 'Country (United States)',
+  address3Label,
   cardTitle = 'Add New Viewing',
-  enableOnSite = false,
+  enableOnSite = 'false',
   enableOnSiteToggleLabel = 'Enabled on website',
   hasUnsavedData,
   id,
   invalidFields,
   location,
   locationLabel = 'Location',
-  onCancel = noOp,
-  onEdit = noOp,
-  onDelete = noOp,
-  onSave = noOp,
+  onCancel,
+  onEdit,
+  onDelete,
+  onSave,
   previewDates,
-  previewDatesLabel = 'Date(s)',
+  previewDatesLabel,
   previewHours1,
-  previewHours1Label = 'Hours1',
+  previewHours1Label,
   previewHours2,
-  previewHours2Label = 'Hours2',
-  previewLabel = "Label ('Preview', 'Opening NIght', etc)",
+  previewHours2Label,
+  previewLabel,
   previewLabelValue,
-  previewOn = 'false',
-  previewToggleLabel = 'Preview/ Reception',
-  viewingLabel = "Label ('Open to public')",
+  previewOn,
+  previewToggleLabel,
+  viewingLabel,
   viewingLabelValue,
   viewingDates,
-  viewingDatesLabel = 'Date(s)',
+  viewingDatesLabel,
   viewingHours1,
-  viewingHours1Label = 'Hours1',
+  viewingHours1Label,
   viewingHours2,
-  viewingHours2Label = 'Hours2',
-  ...props
+  viewingHours2Label,
 }: ViewingsListCardProps) => {
   const [editState, setEditState] = React.useState(hasUnsavedData);
-  const [enableOnSiteState, setEnableOnSiteState] = React.useState(enableOnSite);
+  const [enableOnSiteState, setEnableOnSiteState] = React.useState(enableOnSite === 'true');
   const firstInput = React.useRef<HTMLInputElement>(null);
   React.useEffect(() => {
     if (editState && firstInput.current) {
@@ -128,30 +128,44 @@ const ViewingsListCard = ({
   }, [editState]);
 
   React.useEffect(() => {
-    setEnableOnSiteState(enableOnSite);
+    if (invalidFields && firstInput.current) {
+      console.log(
+        'THIS IS THE HIGHEST ELEMENT: ',
+        firstInput.current.closest('.phillips-viewings-list-card')?.querySelector('.phillips-input--invalid input'),
+      );
+      firstInput.current.parentNode?.parentNode
+        ?.querySelector<HTMLInputElement>('.phillips-input--invalid input')
+        ?.focus();
+    }
+  }, [invalidFields]);
+
+  React.useEffect(() => {
+    setEnableOnSiteState(enableOnSite === 'true');
   }, [enableOnSite]);
+
+  React.useEffect(() => {
+    setEditState(hasUnsavedData);
+  }, [hasUnsavedData]);
 
   const handleOnCancel = () => {
     setEditState(false);
-    onCancel();
+    typeof onCancel === 'function' && onCancel();
   };
 
   const handleOnEdit = () => {
     setEditState(true);
-    // onEdit();
+    typeof onEdit === 'function' && onEdit();
   };
 
   const handleOnSave = (e: React.MouseEvent<HTMLElement>) => {
-    setEditState(false);
-    onSave(e);
+    typeof onSave === 'function' && onSave(e);
   };
 
   return (
     <section
-      data-testid={`ViewingsListCard-${id}`}
+      data-testid={`viewings-list-card-${id}`}
       id={id}
-      className={`${baseClass}`}
-      // {...props}
+      className={classnames(`${baseClass}`, { [`${baseClass}--edit-state`]: editState })}
     >
       <h3 className={`${baseClass}__title`}>{cardTitle}</h3>
       <input type="hidden" name="id" value={id} />
@@ -162,44 +176,46 @@ const ViewingsListCard = ({
         labelText={locationLabel}
         size="sm"
         name="location"
+        invalid={invalidFields?.location}
+        invalidText={invalidFields?.location}
         readOnly={!editState}
       />
       {editState ? (
         <ViewingsListCardForm
-          address1={address1}
-          address1Label={address1Label}
-          addressUrl={addressUrl}
-          addressUrlLabel={addressUrlLabel}
-          address2={address2}
-          address2Label={address2Label}
-          address3={address3}
-          address3Label={address3Label}
-          id={id}
-          invalidFields={invalidFields}
-          previewDates={previewDates}
-          previewDatesLabel={previewDatesLabel}
-          previewHours1={previewHours1}
-          previewHours1Label={previewHours1Label}
-          previewHours2={previewHours2}
-          previewHours2Label={previewHours2Label}
-          previewLabel={previewLabel}
-          previewLabelValue={previewLabelValue}
-          previewOn={previewOn}
-          previewToggleLabel={previewToggleLabel}
-          viewingLabel={viewingLabel}
-          viewingLabelValue={viewingLabelValue}
-          viewingDates={viewingDates}
-          viewingDatesLabel={viewingDatesLabel}
-          viewingHours1={viewingHours1}
-          viewingHours1Label={viewingHours1Label}
-          viewingHours2={viewingHours2}
-          viewingHours2Label={viewingHours2Label}
-        />
+            address1={address1}
+            address1Label={address1Label}
+            addressUrl={addressUrl}
+            addressUrlLabel={addressUrlLabel}
+            address2={address2}
+            address2Label={address2Label}
+            address3={address3}
+            address3Label={address3Label}
+            id={id}
+            invalidFields={invalidFields}
+            previewDates={previewDates}
+            previewDatesLabel={previewDatesLabel}
+            previewHours1={previewHours1}
+            previewHours1Label={previewHours1Label}
+            previewHours2={previewHours2}
+            previewHours2Label={previewHours2Label}
+            previewLabel={previewLabel}
+            previewLabelValue={previewLabelValue}
+            previewOn={previewOn}
+            previewToggleLabel={previewToggleLabel}
+            viewingLabel={viewingLabel}
+            viewingLabelValue={viewingLabelValue}
+            viewingDates={viewingDates}
+            viewingDatesLabel={viewingDatesLabel}
+            viewingHours1={viewingHours1}
+            viewingHours1Label={viewingHours1Label}
+            viewingHours2={viewingHours2}
+            viewingHours2Label={viewingHours2Label}
+          />
       ) : null}
       <Input
         id={`enableOnSite-${id}`}
         type="toggle"
-        defaultChecked={enableOnSite}
+        defaultChecked={enableOnSite === 'true'}
         labelText={enableOnSiteToggleLabel}
         size="md"
         inline
@@ -225,7 +241,13 @@ const ViewingsListCard = ({
             <Button id={`vlc-edit-btn-${id}`} buttonType="ghost" type="button" size="sm" onClick={handleOnEdit}>
               EDIT
             </Button>
-            <Button id={`vlc-delete-btn-${id}`} buttonType="ghost" type="button" size="sm" onClick={() => onDelete(id)}>
+            <Button
+              id={`vlc-delete-btn-${id}`}
+              buttonType="ghost"
+              type="button"
+              size="sm"
+              onClick={() => typeof onDelete === 'function' && onDelete(id)}
+            >
               DELETE
             </Button>
           </>

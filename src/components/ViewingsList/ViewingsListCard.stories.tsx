@@ -26,12 +26,8 @@ const args = {
   locationLabel: 'Tour Location',
   onSave: (e: React.MouseEvent<HTMLElement>) => {
     const targ = e?.target as HTMLElement;
-    const form = targ?.closest('form');
-    const data = form && new FormData(form as HTMLFormElement);
-    const formJson = data && Object.fromEntries(data.entries());
-    console.log(formJson);
-    const inputs = targ.parentNode?.querySelectorAll('input');
-    inputs?.forEach((input) => console.log(`${input.name}:${input.value}`));
+    const inputs = targ.closest('.phillips-viewings-list-card')?.querySelectorAll('input');
+    inputs?.forEach((input) => console.log('onClick Submission: ',`${input.name}: ${input.value}`));
   },
 };
 
@@ -41,10 +37,13 @@ export const ViewingsListCardStory = (props: ViewingsListCardProps) => (
       e.preventDefault();
       const data = new FormData(e.target as HTMLFormElement);
       const formJson = Object.fromEntries(data.entries());
-      console.log('THIS IS E:', formJson);
+      console.log('Form Submission:', formJson);
     }}
   >
-    <ViewingsListCard key={`${props.location}${props.previewOn}${props.defaultEditState}`} {...props} />
+    <ViewingsListCard
+      key={`${props.enableOnSite}${props.location}${props.previewOn}${props.defaultEditState}`}
+      {...props}
+    />
   </form>
 );
 ViewingsListCardStory.args = {
@@ -53,7 +52,7 @@ ViewingsListCardStory.args = {
 };
 
 export const Playground = (props: ViewingsListCardProps) => (
-  <ViewingsListCard key={`${props.enableOnSite}${props.previewOn}`} {...props} />
+  <ViewingsListCard key={`${props.enableOnSite}${props.location}${props.previewOn}`} {...props} />
 );
 
 Playground.args = {
