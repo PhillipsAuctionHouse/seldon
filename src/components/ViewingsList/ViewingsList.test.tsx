@@ -3,7 +3,7 @@ import { userEvent } from '@testing-library/user-event';
 
 import StatefulViewingsList from './StatefulViewingsList';
 import { defaultViewing, validate, handleOnSave } from './utils';
-import { ViewingsListCardProps } from './ViewingsListCard'
+import { ViewingsListCardProps } from './ViewingsListCard';
 
 describe('ViewingsList', () => {
   const reqProps = { title: 'Tour Viewing(s) on Overview Tab', id: 'test-id', validate, onSave: handleOnSave };
@@ -15,7 +15,7 @@ describe('ViewingsList', () => {
 
   it('will create a new ViewingsListCard when I click "Add Viewing" and persist when I save', async () => {
     const user = userEvent.setup();
-    render(<StatefulViewingsList {...reqProps} defaultViewing={defaultViewing}/>);
+    render(<StatefulViewingsList {...reqProps} defaultViewing={defaultViewing} />);
     expect(screen.queryByText(/Viewing Details 2/)).not.toBeInTheDocument();
     await user.click(screen.getByText(/ADD VIEWING/));
     await user.keyboard('France');
@@ -25,7 +25,7 @@ describe('ViewingsList', () => {
 
   it('will delete a new ViewingsListCard when I click "DELETE"', async () => {
     const user = userEvent.setup();
-    render(<StatefulViewingsList {...reqProps} defaultViewing={defaultViewing}/>);
+    render(<StatefulViewingsList {...reqProps} defaultViewing={defaultViewing} />);
     expect(screen.getByText(/Viewing Details 1/)).toBeInTheDocument();
     await user.click(screen.getByText(/DELETE/));
     expect(screen.queryByText(/Viewing Details 1/)).not.toBeInTheDocument();
@@ -33,7 +33,7 @@ describe('ViewingsList', () => {
 
   it('will show preview fields when preview toggle is on', async () => {
     const user = userEvent.setup();
-    render(<StatefulViewingsList {...reqProps} defaultViewing={defaultViewing}/>);
+    render(<StatefulViewingsList {...reqProps} defaultViewing={defaultViewing} />);
     await user.click(screen.getByText(/EDIT/));
     const firstPreviewItem = screen.getByTestId<HTMLInputElement>('previewLabel-test-id').parentElement;
     expect(firstPreviewItem?.classList?.contains('phillips-input--hidden')).toBeFalsy();
@@ -52,7 +52,13 @@ describe('ViewingsList', () => {
 
   it('will cancel changes made to veiwing when I click "CANCEL" and persist when I click "SAVE', async () => {
     const user = userEvent.setup();
-    render(<StatefulViewingsList title='Tour Viewing(s) on Overview Tab' defaultViewing={defaultViewing} onSave={handleOnSave}/>);
+    render(
+      <StatefulViewingsList
+        title="Tour Viewing(s) on Overview Tab"
+        defaultViewing={defaultViewing}
+        onSave={handleOnSave}
+      />,
+    );
     await user.click(screen.getByText(/EDIT/));
     await user.keyboard('{backspace}{backspace}{backspace}');
     await user.click(screen.getByText(/CANCEL/));
@@ -79,16 +85,16 @@ describe('ViewingsList', () => {
           const unique = prevViewings.filter((view) => {
             return view?.id !== el.id;
           });
-           returnValue = [...unique, el as ViewingsListCardProps];
+          returnValue = [...unique, el as ViewingsListCardProps];
         } else {
-          returnValue = [el as ViewingsListCardProps]
+          returnValue = [el as ViewingsListCardProps];
         }
 
         return returnValue;
       });
       return el;
-     });
-    render(<StatefulViewingsList  title='Tour Viewing(s) on Overview Tab' id='test-id' onSave={mockedHandleOnSave} />);
+    });
+    render(<StatefulViewingsList title="Tour Viewing(s) on Overview Tab" id="test-id" onSave={mockedHandleOnSave} />);
     await user.click(screen.getByText(/ADD VIEWING/));
 
     await user.keyboard('One title');
@@ -120,22 +126,24 @@ describe('ViewingsList', () => {
     await user.click(screen.getByTestId(/^(enableOnSite-)[a-zA-z0-9]+/).previousSibling as Element);
 
     await user.click(screen.getByText(/SAVE DETAILS/));
-    expect(mockedHandleOnSave).toReturnWith(expect.objectContaining({
-      address1: '432 PARK AVE',
-      address2: 'Coral Springs, FL 07677',
-      address3: 'United States',
-      addressUrl: 'HTTP://WWW.WEBSITE.COM',
-      enableOnSite: 'true',
-      location: 'One title',
-      previewDates: '3-6 November',
-      previewHours1: '8am - 9pm',
-      previewHours2: 'After closing',
-      previewLabelValue: 'Opening Night',
-      previewOn: 'true',
-      viewingDates: '3-6 December',
-      viewingHours1: '7am - 8pm',
-      viewingHours2: '9:30pm - 10pm',
-      viewingLabelValue: 'Open to the public'
-    }));
+    expect(mockedHandleOnSave).toReturnWith(
+      expect.objectContaining({
+        address1: '432 PARK AVE',
+        address2: 'Coral Springs, FL 07677',
+        address3: 'United States',
+        addressUrl: 'HTTP://WWW.WEBSITE.COM',
+        enableOnSite: 'true',
+        location: 'One title',
+        previewDates: '3-6 November',
+        previewHours1: '8am - 9pm',
+        previewHours2: 'After closing',
+        previewLabelValue: 'Opening Night',
+        previewOn: 'true',
+        viewingDates: '3-6 December',
+        viewingHours1: '7am - 8pm',
+        viewingHours2: '9:30pm - 10pm',
+        viewingLabelValue: 'Open to the public',
+      }),
+    );
   });
 });

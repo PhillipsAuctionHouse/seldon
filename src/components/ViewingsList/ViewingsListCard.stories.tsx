@@ -27,7 +27,7 @@ const args = {
   onSave: (e: React.MouseEvent<HTMLElement>) => {
     const targ = e?.target as HTMLElement;
     const inputs = targ.closest('.phillips-viewings-list-card')?.querySelectorAll('input');
-    inputs?.forEach((input) => console.log('onClick Submission: ',`${input.name}: ${input.value}`));
+    inputs?.forEach((input) => console.log('onClick Submission: ', `${input.name}: ${input.value}`));
   },
 };
 

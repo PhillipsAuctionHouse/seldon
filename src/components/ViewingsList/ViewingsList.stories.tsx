@@ -20,7 +20,7 @@ const meta = {
 export default meta;
 
 export const Playground = (props: ViewingsListProps) => (
-  <StatefulViewingsList {...props}  validate={validate} onSave={handleOnSave} />
+  <StatefulViewingsList {...props} validate={validate} onSave={handleOnSave} />
 );
 
 Playground.args = {
@@ -30,7 +30,7 @@ Playground.args = {
 };
 
 export const WithViewing = (props: ViewingsListProps) => (
-  <StatefulViewingsList {...props}  validate={validate} onSave={handleOnSave} defaultViewing={defaultViewing}/>
+  <StatefulViewingsList {...props} validate={validate} onSave={handleOnSave} defaultViewing={defaultViewing} />
 );
 
 WithViewing.args = {

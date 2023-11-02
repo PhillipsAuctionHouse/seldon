@@ -38,7 +38,7 @@ export const defaultViewing = [
 export const handleOnSave = (
   e: React.MouseEvent<HTMLElement>,
   cb: React.Dispatch<React.SetStateAction<ViewingsListCardProps[]>>,
-  validateCb: (e: ViewingsListCardProps) => object | undefined
+  validateCb: (e: ViewingsListCardProps) => object | undefined,
 ) => {
   const targ = e?.target as HTMLElement;
   const inputs = targ.closest('.phillips-viewings-list-card')?.querySelectorAll('input');
@@ -53,12 +53,12 @@ export const handleOnSave = (
 
   cb((prevViewings) => {
     if (prevViewings) {
-      if(prevViewings.find(view => view.id === el.id)) {
-        const index = prevViewings.findIndex(view => view.id === el.id);
+      if (prevViewings.find((view) => view.id === el.id)) {
+        const index = prevViewings.findIndex((view) => view.id === el.id);
         prevViewings.splice(index, 1, el);
-        return [...prevViewings]
+        return [...prevViewings];
       }
-      return [...prevViewings, el]
+      return [...prevViewings, el];
     }
     return [el];
   });

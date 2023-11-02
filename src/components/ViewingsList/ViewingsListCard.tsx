@@ -42,22 +42,24 @@ export interface ViewingsListCardProps extends ViewingsListCardFormProps, Record
   /**
    * Validation error message object
    */
-  invalidFields?: {
-    address1?: string | undefined;
-    address1Url?: string | undefined;
-    address2?: string | undefined;
-    address3?: string | undefined;
-    location?: string | undefined;
-    previewDates?: string | undefined;
-    previewHours1?: string | undefined;
-    previewHours2?: string | undefined;
-    previewLabelValue?: string | undefined;
-    previewOn?: string | undefined;
-    viewingLabelValue?: string | undefined;
-    viewingDates?: string | undefined;
-    viewingHours1?: string | undefined;
-    viewingHours2?: string | undefined;
-  } | undefined;
+  invalidFields?:
+    | {
+        address1?: string | undefined;
+        address1Url?: string | undefined;
+        address2?: string | undefined;
+        address3?: string | undefined;
+        location?: string | undefined;
+        previewDates?: string | undefined;
+        previewHours1?: string | undefined;
+        previewHours2?: string | undefined;
+        previewLabelValue?: string | undefined;
+        previewOn?: string | undefined;
+        viewingLabelValue?: string | undefined;
+        viewingDates?: string | undefined;
+        viewingHours1?: string | undefined;
+        viewingHours2?: string | undefined;
+      }
+    | undefined;
   /**
    * Callback for when Viewings edits are cancelled
    */
@@ -182,35 +184,35 @@ const ViewingsListCard = ({
       />
       {editState ? (
         <ViewingsListCardForm
-            address1={address1}
-            address1Label={address1Label}
-            addressUrl={addressUrl}
-            addressUrlLabel={addressUrlLabel}
-            address2={address2}
-            address2Label={address2Label}
-            address3={address3}
-            address3Label={address3Label}
-            id={id}
-            invalidFields={invalidFields}
-            previewDates={previewDates}
-            previewDatesLabel={previewDatesLabel}
-            previewHours1={previewHours1}
-            previewHours1Label={previewHours1Label}
-            previewHours2={previewHours2}
-            previewHours2Label={previewHours2Label}
-            previewLabel={previewLabel}
-            previewLabelValue={previewLabelValue}
-            previewOn={previewOn}
-            previewToggleLabel={previewToggleLabel}
-            viewingLabel={viewingLabel}
-            viewingLabelValue={viewingLabelValue}
-            viewingDates={viewingDates}
-            viewingDatesLabel={viewingDatesLabel}
-            viewingHours1={viewingHours1}
-            viewingHours1Label={viewingHours1Label}
-            viewingHours2={viewingHours2}
-            viewingHours2Label={viewingHours2Label}
-          />
+          address1={address1}
+          address1Label={address1Label}
+          addressUrl={addressUrl}
+          addressUrlLabel={addressUrlLabel}
+          address2={address2}
+          address2Label={address2Label}
+          address3={address3}
+          address3Label={address3Label}
+          id={id}
+          invalidFields={invalidFields}
+          previewDates={previewDates}
+          previewDatesLabel={previewDatesLabel}
+          previewHours1={previewHours1}
+          previewHours1Label={previewHours1Label}
+          previewHours2={previewHours2}
+          previewHours2Label={previewHours2Label}
+          previewLabel={previewLabel}
+          previewLabelValue={previewLabelValue}
+          previewOn={previewOn}
+          previewToggleLabel={previewToggleLabel}
+          viewingLabel={viewingLabel}
+          viewingLabelValue={viewingLabelValue}
+          viewingDates={viewingDates}
+          viewingDatesLabel={viewingDatesLabel}
+          viewingHours1={viewingHours1}
+          viewingHours1Label={viewingHours1Label}
+          viewingHours2={viewingHours2}
+          viewingHours2Label={viewingHours2Label}
+        />
       ) : null}
       <Input
         id={`enableOnSite-${id}`}

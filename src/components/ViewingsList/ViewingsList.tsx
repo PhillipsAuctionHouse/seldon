@@ -32,14 +32,7 @@ export interface ViewingsListProps {
   onSave: (e: React.MouseEvent<HTMLElement>) => boolean;
 }
 
-const ViewingsList = ({
-  cardTitle = 'Viewing Details',
-  id,
-  onDelete,
-  onSave,
-  title,
-  viewings,
-}: ViewingsListProps) => {
+const ViewingsList = ({ cardTitle = 'Viewing Details', id, onDelete, onSave, title, viewings }: ViewingsListProps) => {
   const [viewingList, setViewingsList] = React.useState(viewings);
   const [hasUnsavedData, setHasUnsavedData] = React.useState('');
   const random = Math.floor(Math.random() * 100) + Date.now();
@@ -88,7 +81,7 @@ const ViewingsList = ({
             if (prevList) {
               return [...prevList, { id: uuid }];
             }
-            return [{ id: uuid }]
+            return [{ id: uuid }];
           })
         }
       >
