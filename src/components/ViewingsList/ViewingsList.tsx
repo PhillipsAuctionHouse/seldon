@@ -49,11 +49,6 @@ const ViewingsList = ({
 }: ViewingsListProps) => {
   const [viewingList, setViewingsList] = React.useState(viewings);
   const [hasUnsavedData, setHasUnsavedData] = React.useState('');
-  // React.useEffect(
-  //   () => {
-  //     console.log("hasUnsavedData changing")
-  //   }, [hasUnsavedData]
-  // )
 
   React.useEffect(() => {
     setViewingsList(viewings);

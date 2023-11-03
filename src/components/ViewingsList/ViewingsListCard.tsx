@@ -114,7 +114,6 @@ const ViewingsListCard = ({
   viewingHours2,
   viewingHours2Label,
 }: ViewingsListCardProps) => {
-  // const [editState, setEditState] = React.useState(hasUnsavedData);
   const [enableOnSiteState, setEnableOnSiteState] = React.useState(enableOnSite === 'true');
   const firstInput = React.useRef<HTMLInputElement>(null);
   // Focus on first input when in edit mode
@@ -134,21 +133,11 @@ const ViewingsListCard = ({
     }
   }, [invalidFields]);
 
-  // React.useEffect(() => {
-  //     setEnableOnSiteState(enableOnSite === 'true');
-  // }, [enableOnSite]);
-
-  // if (hasUnsavedData !== editState) {
-  //   setEditState(hasUnsavedData);
-  // }
-
   const handleOnCancel = () => {
-    // setEditState(false);
     typeof onCancel === 'function' && onCancel();
   };
 
   const handleOnEdit = () => {
-    // setEditState(true);
     typeof onEdit === 'function' && onEdit();
   };
 
