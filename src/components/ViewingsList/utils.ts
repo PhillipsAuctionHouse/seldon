@@ -53,15 +53,14 @@ export const handleOnSave = (
 
   cb((prevViewings) => {
     // if (prevViewings) {
-      if (prevViewings.find((view) => view.id === el.id)) {
-        const index = prevViewings.findIndex((view) => view.id === el.id);
-        prevViewings.splice(index, 1, el);
-        // Persist to database
-        return [...prevViewings];
-      }
+    if (prevViewings.find((view) => view.id === el.id)) {
+      const index = prevViewings.findIndex((view) => view.id === el.id);
+      prevViewings.splice(index, 1, el);
       // Persist to database
-      return [...prevViewings, el];
-
+      return [...prevViewings];
+    }
+    // Persist to database
+    return [...prevViewings, el];
   });
 
   return el.invalidFields ? false : true;

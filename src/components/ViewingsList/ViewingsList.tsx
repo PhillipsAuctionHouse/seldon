@@ -36,9 +36,17 @@ export interface ViewingsListProps {
   onSave: (e: React.MouseEvent<HTMLElement>) => boolean;
 }
 
-const getRandomNum = () => Math.floor(Math.random() * 100) + Date.now()
+const getRandomNum = () => Math.floor(Math.random() * 100) + Date.now();
 
-const ViewingsList = ({ cardTitle = 'Viewing Details', id, onAdd, onDelete, onSave, title, viewings }: ViewingsListProps) => {
+const ViewingsList = ({
+  cardTitle = 'Viewing Details',
+  id,
+  onAdd,
+  onDelete,
+  onSave,
+  title,
+  viewings,
+}: ViewingsListProps) => {
   const [viewingList, setViewingsList] = React.useState(viewings);
   const [hasUnsavedData, setHasUnsavedData] = React.useState('');
   // React.useEffect(
@@ -49,14 +57,13 @@ const ViewingsList = ({ cardTitle = 'Viewing Details', id, onAdd, onDelete, onSa
 
   React.useEffect(() => {
     setViewingsList(viewings);
-  },[viewings])
+  }, [viewings]);
 
   const handleOnAdd = () => {
     const uuid = `${getRandomNum()}${viewingList ? '-' + viewingList.length : ''}`;
     setHasUnsavedData(uuid);
-    if(onAdd)
-    onAdd(uuid)
-  }
+    if (onAdd) onAdd(uuid);
+  };
 
   const handleOnDelete = (viewingId: string) => {
     setHasUnsavedData('');
@@ -89,11 +96,7 @@ const ViewingsList = ({ cardTitle = 'Viewing Details', id, onAdd, onDelete, onSa
           editState={hasUnsavedData === item.id}
         />
       ))}
-      <Button
-        id={`viewings-list-add-btn-${id || getRandomNum()}`}
-        size="sm"
-        onClick={handleOnAdd}
-      >
+      <Button id={`viewings-list-add-btn-${id || getRandomNum()}`} size="sm" onClick={handleOnAdd}>
         ADD VIEWING
       </Button>
     </div>

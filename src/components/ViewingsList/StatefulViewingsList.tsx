@@ -3,7 +3,7 @@ import * as React from 'react';
 import ViewingsList from './ViewingsList';
 import { ViewingsListCardProps } from './ViewingsListCard';
 
-export interface StatefulViewingsListProps extends  Record<string, unknown>{
+export interface StatefulViewingsListProps extends Record<string, unknown> {
   /**
    * Existing viewings to populate the list
    */
@@ -46,8 +46,8 @@ const StatefulViewingsList = ({
         return [...prevViewings, { id }];
       }
       return [{ id }];
-    })
-  }
+    });
+  };
 
   return (
     <ViewingsList

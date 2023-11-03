@@ -6,20 +6,20 @@ const meta = {
   component: ViewingsListCard,
   tags: ['autodocs'],
   parameters: {
-    controls: { sort: 'alpha',}
+    controls: { sort: 'alpha' },
   },
   argTypes: {
     enableOnSite: {
       options: ['true', 'false'],
       control: {
         type: 'select',
-      }
+      },
     },
     previewOn: {
       options: ['true', 'false'],
       control: {
         type: 'select',
-      }
+      },
     },
     onDelete: {
       control: 'action',
@@ -56,7 +56,7 @@ export const ViewingsListCardStory = (props: ViewingsListCardProps) => (
     <ViewingsListCard
       key={`${props.enableOnSite}${props.location}${props.previewOn}`}
       {...props}
-      enableOnSite={props.enableOnSite ? "true" : "false"}
+      enableOnSite={props.enableOnSite ? 'true' : 'false'}
     />
   </form>
 );

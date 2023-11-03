@@ -127,7 +127,8 @@ const ViewingsListCard = ({
   // If invalid fields focus on the first input in invalid state
   React.useEffect(() => {
     if (invalidFields && firstInput.current) {
-      firstInput.current.closest('.phillips-viewings-list-card')
+      firstInput.current
+        .closest('.phillips-viewings-list-card')
         ?.querySelector<HTMLInputElement>('.phillips-input--invalid input')
         ?.focus();
     }
@@ -136,7 +137,6 @@ const ViewingsListCard = ({
   // React.useEffect(() => {
   //     setEnableOnSiteState(enableOnSite === 'true');
   // }, [enableOnSite]);
-
 
   // if (hasUnsavedData !== editState) {
   //   setEditState(hasUnsavedData);
