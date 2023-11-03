@@ -12,6 +12,18 @@ export interface ViewingsListCardProps extends ViewingsListCardFormProps, Record
    */
   cardTitle?: string;
   /**
+   * Optional string to pass for cancel button
+   */
+  cancelBtnLabel?: string;
+  /**
+   * Optional string to pass for delete button
+   */
+  deleteBtnLabel?: string;
+  /**
+   * Optional string to pass for edit button
+   */
+  editBtnLabel?: string;
+  /**
    * Location of viewing
    */
   editState?: boolean;
@@ -70,6 +82,10 @@ export interface ViewingsListCardProps extends ViewingsListCardFormProps, Record
    * Callback for when form is saved/submitted
    */
   onSave?: (e: React.MouseEvent<HTMLElement>) => void | unknown;
+  /**
+   * Optional string to pass for edit button
+   */
+  saveBtnLabel?: string;
 }
 
 const baseClass = `${px}-viewings-list-card`;
@@ -83,7 +99,10 @@ const ViewingsListCard = ({
   address2Label,
   address3,
   address3Label,
+  cancelBtnLabel = 'CANCEL',
   cardTitle = 'Add New Viewing',
+  deleteBtnLabel = 'DELETE',
+  editBtnLabel = 'EDIT',
   editState,
   enableOnSite = 'false',
   enableOnSiteToggleLabel = 'Enabled on website',
@@ -105,6 +124,7 @@ const ViewingsListCard = ({
   previewLabelValue,
   previewOn,
   previewToggleLabel,
+  saveBtnLabel = 'SAVE DETAILS',
   viewingLabel,
   viewingLabelValue,
   viewingDates,
@@ -214,16 +234,16 @@ const ViewingsListCard = ({
         {editState ? (
           <>
             <Button id={`vlc-save-btn-${id}`} buttonType="ghost" type="submit" size="sm" onClick={handleOnSave}>
-              SAVE DETAILS
+              { saveBtnLabel }
             </Button>
             <Button id={`vlc-cancel-btn-${id}`} buttonType="ghost" type="button" size="sm" onClick={handleOnCancel}>
-              CANCEL
+            { cancelBtnLabel }
             </Button>
           </>
         ) : (
           <>
             <Button id={`vlc-edit-btn-${id}`} buttonType="ghost" type="button" size="sm" onClick={handleOnEdit}>
-              EDIT
+            { editBtnLabel }
             </Button>
             <Button
               id={`vlc-delete-btn-${id}`}
@@ -232,7 +252,7 @@ const ViewingsListCard = ({
               size="sm"
               onClick={() => typeof onDelete === 'function' && onDelete(id)}
             >
-              DELETE
+              { deleteBtnLabel }
             </Button>
           </>
         )}

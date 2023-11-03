@@ -6,7 +6,7 @@ const meta = {
   component: ViewingsListCard,
   tags: ['autodocs'],
   parameters: {
-    controls: { sort: 'alpha' },
+    controls: { sort: 'alpha', expanded: true },
   },
   argTypes: {
     enableOnSite: {

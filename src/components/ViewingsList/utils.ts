@@ -34,6 +34,30 @@ export const defaultViewing = [
     viewingLabelValue: 'Open to the public',
   },
 ];
+
+export const i18n = {
+  address1Label: '_address1Label_',
+  addressUrlLabel: '_addressUrlLabel_',
+  address2Label: '_address2Label_',
+  address3Label: '_address3Label_',
+  addViewingsBtnLabel: '_addVeiwingsBtnLabel_',
+  cancelBtnLabel: '_cancelBtnLabel_',
+  deleteBtnLabel: '_deleteBtnLabel_',
+  editBtnLabel: '_editBtnLabel_',
+  enableOnSiteToggleLabel: '_enableOnSiteToggleLabel_',
+  locationLabel: '_locationLabel_',
+  saveBtnLabel: '_saveBtnLabel_',
+  previewDatesLabel: '_previewDatesLabel_',
+  previewHours1Label: '_previewHours1Label_',
+  previewHours2Label: '_previewHours2Label_',
+  previewLabel: '_previewLabel_',
+  previewToggleLabel: '_previewToggleLabel_',
+  viewingLabel: '_viewingLabel_',
+  viewingDatesLabel: '_viewingDatesLabel_',
+  viewingHours1Label: '_viewingHours1Label_',
+  viewingHours2Label: '_viewingHours2Label_',
+};
+
 /* istanbul ignore next */
 export const handleOnSave = (
   e: React.MouseEvent<HTMLElement>,

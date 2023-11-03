@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 
 import StatefulViewingsList from './StatefulViewingsList';
-import { defaultViewing, validate, handleOnSave } from './utils';
+import { defaultViewing, i18n, validate, handleOnSave } from './utils';
 import { ViewingsListCardProps } from './ViewingsListCard';
 
 describe('ViewingsList', () => {
@@ -48,6 +48,15 @@ describe('ViewingsList', () => {
     await user.keyboard('london');
     await user.click(screen.getByText(/SAVE DETAILS/));
     expect(screen.getByText(/Can't be london!/)).toBeInTheDocument();
+  });
+
+  it('will render translated strings when passed an i18n prop', async () => {
+    render(<StatefulViewingsList {...reqProps} defaultViewing={defaultViewing} i18n={i18n} />);
+    expect(screen.getByText('_locationLabel_')).toBeInTheDocument();
+    expect(screen.getByText('_enableOnSiteToggleLabel_')).toBeInTheDocument();
+    expect(screen.getByText('_editBtnLabel_')).toBeInTheDocument();
+    expect(screen.getByText('_deleteBtnLabel_')).toBeInTheDocument();
+    expect(screen.getByText('_addVeiwingsBtnLabel_')).toBeInTheDocument();
   });
 
   it('will cancel changes made to veiwing when I click "CANCEL" and persist when I click "SAVE', async () => {

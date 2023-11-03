@@ -1,40 +1,59 @@
 import type { Meta } from '@storybook/react';
 
-import ViewingsList, { ViewingsListProps } from './ViewingsList';
-import StatefulViewingsList from './StatefulViewingsList';
-import { defaultViewing, handleOnSave, validate } from './utils';
+import StatefulViewingsList, { StatefulViewingsListProps } from './StatefulViewingsList';
+import { defaultViewing, i18n, handleOnSave, validate } from './utils';
 
 const meta = {
   title: 'Components/ViewingsList',
-  component: ViewingsList,
+  component: StatefulViewingsList,
   tags: ['autodocs'],
   argTypes: {
-    title: { control: 'string' },
-    id: { control: 'string' },
+    defaultViewing: {
+      control: "array"
+    },
+    title: {
+      control: { type:  'text' }
+    },
+    id: {
+      control: { type:  'text' }
+    },
     onSave: {
       control: 'action',
     },
   },
-} satisfies Meta<typeof ViewingsList>;
+} satisfies Meta<typeof StatefulViewingsList>;
 
 export default meta;
 
-export const Playground = (props: ViewingsListProps) => (
+export const Playground = (props: StatefulViewingsListProps) => (
   <StatefulViewingsList {...props} validate={validate} onSave={handleOnSave} />
 );
 
 Playground.args = {
-  title: 'Tour Viewing(s) on Overview Tab',
-  id: 'myViewingsListId',
   cardTitle: 'Viewing Details',
+  id: 'myViewingsListId',
+  title: 'Tour Viewing(s) on Overview Tab',
 };
 
-export const WithViewing = (props: ViewingsListProps) => (
-  <StatefulViewingsList {...props} validate={validate} onSave={handleOnSave} defaultViewing={defaultViewing} />
+export const WithViewing = (props: StatefulViewingsListProps) => (
+  <StatefulViewingsList {...props} validate={validate} onSave={handleOnSave} />
 );
 
 WithViewing.args = {
-  title: 'Tour Viewing(s) on Overview Tab',
-  id: 'myViewingsListId',
   cardTitle: 'Viewing Details',
+  defaultViewing,
+  id: 'myViewingsListId',
+  title: 'Tour Viewing(s) on Overview Tab',
+};
+
+export const WithTranslatedStrings = (props: StatefulViewingsListProps) => (
+  <StatefulViewingsList {...props} validate={validate} onSave={handleOnSave} />
+);
+
+WithTranslatedStrings.args = {
+  cardTitle: 'Viewing Details',
+  defaultViewing,
+  id: 'myViewingsListId',
+  i18n,
+  title: 'Tour Viewing(s) on Overview Tab',
 };

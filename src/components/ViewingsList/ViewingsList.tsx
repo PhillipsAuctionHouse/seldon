@@ -5,6 +5,29 @@ import { px } from '../../utils';
 import ViewingsListCard, { ViewingsListCardProps } from './ViewingsListCard';
 import Button from '../Button/Button';
 
+export interface I18nObject {
+  address1Label?: string;
+  addressUrlLabel?: string;
+  address2Label?: string;
+  address3Label?: string;
+  addViewingsBtnLabel?: string;
+  cancelBtnLabel?: string;
+  deleteBtnLabel?: string;
+  editBtnLabel?: string;
+  enableOnSiteToggleLabel?: string;
+  locationLabel?: string;
+  previewDatesLabel?: string;
+  previewHours1Label?: string;
+  previewHours2Label?: string;
+  previewLabel?: string;
+  previewToggleLabel?: string;
+  saveBtnLabel?: string;
+  viewingLabel?: string;
+  viewingDatesLabel?: string;
+  viewingHours1Label?: string;
+  viewingHours2Label?: string;
+}
+
 export interface ViewingsListProps {
   /**
    * String for Viewing cards that gets nuber appended. EX: 'Title {x}`
@@ -14,6 +37,10 @@ export interface ViewingsListProps {
    * Unique id for component
    */
   id?: string;
+  /**
+   * Optional strings to pass for the form and button labels
+   */
+  i18n?: I18nObject;
   /**
    * Title for Viewings list
    */
@@ -41,6 +68,7 @@ const getRandomNum = () => Math.floor(Math.random() * 100) + Date.now();
 const ViewingsList = ({
   cardTitle = 'Viewing Details',
   id,
+  i18n = {},
   onAdd,
   onDelete,
   onSave,
@@ -49,11 +77,10 @@ const ViewingsList = ({
 }: ViewingsListProps) => {
   const [viewingList, setViewingsList] = React.useState(viewings);
   const [hasUnsavedData, setHasUnsavedData] = React.useState('');
-
   React.useEffect(() => {
     setViewingsList(viewings);
   }, [viewings]);
-
+  const { addViewingsBtnLabel = 'ADD VIEWINGS' } = i18n;
   const handleOnAdd = () => {
     const uuid = `${getRandomNum()}${viewingList ? '-' + viewingList.length : ''}`;
     setHasUnsavedData(uuid);
@@ -83,16 +110,17 @@ const ViewingsList = ({
         <ViewingsListCard
           key={`${item.id}`}
           {...item}
+          {...i18n}
           cardTitle={!item.location ? undefined : `${cardTitle} ${index + 1}`}
+          editState={hasUnsavedData === item.id}
           onCancel={handleOnCancel}
           onDelete={handleOnDelete}
           onEdit={() => setHasUnsavedData(item.id)}
           onSave={handleOnSave}
-          editState={hasUnsavedData === item.id}
         />
       ))}
       <Button id={`viewings-list-add-btn-${id || getRandomNum()}`} size="sm" onClick={handleOnAdd}>
-        ADD VIEWING
+        { addViewingsBtnLabel }
       </Button>
     </div>
   );
