@@ -7,5 +7,6 @@ export { default as HeroBanner } from './components/HeroBanner/HeroBanner';
 export { default as Input } from './components/Input/Input';
 export { default as Select } from './components/Select/Select';
 export { default as ViewingsList } from './components/ViewingsList/ViewingsList';
+export { default as StatefulViewingsList } from './components/ViewingsList/StatefulViewingsList';
 // 📑 Pages
 export { default as Page } from './pages/Page';
