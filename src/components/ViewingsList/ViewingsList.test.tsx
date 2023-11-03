@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 
 import StatefulViewingsList from './StatefulViewingsList';
@@ -9,7 +9,7 @@ describe('ViewingsList', () => {
   const reqProps = { title: 'Tour Viewing(s) on Overview Tab', id: 'test-id', validate, onSave: handleOnSave };
   it('renders a list of ViewingsList cards when passed an array of viewing list objects', async () => {
     render(<StatefulViewingsList {...reqProps} defaultViewing={defaultViewing} />);
-    expect(screen.getByText(/One title/)).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByDisplayValue('One title')).toBeInTheDocument());
     expect(screen.getByTestId<HTMLInputElement>('enableOnSite-test-id').value).toEqual('true');
   });
 
@@ -62,11 +62,11 @@ describe('ViewingsList', () => {
     await user.click(screen.getByText(/EDIT/));
     await user.keyboard('{backspace}{backspace}{backspace}');
     await user.click(screen.getByText(/CANCEL/));
-    expect(screen.getByText(/One title/)).toBeInTheDocument();
+    expect(screen.getByDisplayValue(/One title/)).toBeInTheDocument();
     await user.click(screen.getByText(/EDIT/));
     await user.keyboard('{backspace}{backspace}{backspace}');
     await user.click(screen.getByText(/SAVE DETAILS/));
-    expect(screen.getByText(/One ti/)).toBeInTheDocument();
+    expect(screen.getByDisplayValue(/One ti/)).toBeInTheDocument();
   });
 
   it('will save all values of the form and return them as part of the "handleOnSave" callback', async () => {

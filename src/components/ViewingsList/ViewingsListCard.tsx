@@ -12,9 +12,9 @@ export interface ViewingsListCardProps extends ViewingsListCardFormProps, Record
    */
   cardTitle?: string;
   /**
-   * Default state determining if in edit mode
+   * Location of viewing
    */
-  defaultEditState?: boolean;
+  editState?: boolean;
   /**
    * Default boolean to determine whether viewing is enabled on site
    */
@@ -32,34 +32,28 @@ export interface ViewingsListCardProps extends ViewingsListCardFormProps, Record
    */
   locationLabel?: string;
   /**
-   * Location of viewing
-   */
-  hasUnsavedData?: boolean;
-  /**
    * Unique id for component
    */
   id: string;
   /**
    * Validation error message object
    */
-  invalidFields?:
-    | {
-        address1?: string | undefined;
-        address1Url?: string | undefined;
-        address2?: string | undefined;
-        address3?: string | undefined;
-        location?: string | undefined;
-        previewDates?: string | undefined;
-        previewHours1?: string | undefined;
-        previewHours2?: string | undefined;
-        previewLabelValue?: string | undefined;
-        previewOn?: string | undefined;
-        viewingLabelValue?: string | undefined;
-        viewingDates?: string | undefined;
-        viewingHours1?: string | undefined;
-        viewingHours2?: string | undefined;
-      }
-    | undefined;
+  invalidFields?: {
+    address1?: string | undefined;
+    address1Url?: string | undefined;
+    address2?: string | undefined;
+    address3?: string | undefined;
+    location?: string | undefined;
+    previewDates?: string | undefined;
+    previewHours1?: string | undefined;
+    previewHours2?: string | undefined;
+    previewLabelValue?: string | undefined;
+    previewOn?: string | undefined;
+    viewingLabelValue?: string | undefined;
+    viewingDates?: string | undefined;
+    viewingHours1?: string | undefined;
+    viewingHours2?: string | undefined;
+  };
   /**
    * Callback for when Viewings edits are cancelled
    */
@@ -90,9 +84,9 @@ const ViewingsListCard = ({
   address3,
   address3Label,
   cardTitle = 'Add New Viewing',
+  editState,
   enableOnSite = 'false',
   enableOnSiteToggleLabel = 'Enabled on website',
-  hasUnsavedData,
   id,
   invalidFields,
   location,
@@ -120,42 +114,41 @@ const ViewingsListCard = ({
   viewingHours2,
   viewingHours2Label,
 }: ViewingsListCardProps) => {
-  const [editState, setEditState] = React.useState(hasUnsavedData);
+  // const [editState, setEditState] = React.useState(hasUnsavedData);
   const [enableOnSiteState, setEnableOnSiteState] = React.useState(enableOnSite === 'true');
   const firstInput = React.useRef<HTMLInputElement>(null);
+  // Focus on first input when in edit mode
   React.useEffect(() => {
     if (editState && firstInput.current) {
       firstInput.current.focus();
     }
   }, [editState]);
 
+  // If invalid fields focus on the first input in invalid state
   React.useEffect(() => {
     if (invalidFields && firstInput.current) {
-      console.log(
-        'THIS IS THE HIGHEST ELEMENT: ',
-        firstInput.current.closest('.phillips-viewings-list-card')?.querySelector('.phillips-input--invalid input'),
-      );
-      firstInput.current.parentNode?.parentNode
+      firstInput.current.closest('.phillips-viewings-list-card')
         ?.querySelector<HTMLInputElement>('.phillips-input--invalid input')
         ?.focus();
     }
   }, [invalidFields]);
 
-  React.useEffect(() => {
-    setEnableOnSiteState(enableOnSite === 'true');
-  }, [enableOnSite]);
+  // React.useEffect(() => {
+  //     setEnableOnSiteState(enableOnSite === 'true');
+  // }, [enableOnSite]);
 
-  React.useEffect(() => {
-    setEditState(hasUnsavedData);
-  }, [hasUnsavedData]);
+
+  // if (hasUnsavedData !== editState) {
+  //   setEditState(hasUnsavedData);
+  // }
 
   const handleOnCancel = () => {
-    setEditState(false);
+    // setEditState(false);
     typeof onCancel === 'function' && onCancel();
   };
 
   const handleOnEdit = () => {
-    setEditState(true);
+    // setEditState(true);
     typeof onEdit === 'function' && onEdit();
   };
 

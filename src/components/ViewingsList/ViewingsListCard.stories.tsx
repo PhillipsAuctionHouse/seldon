@@ -5,9 +5,22 @@ const meta = {
   title: 'Components/ViewingsListCard',
   component: ViewingsListCard,
   tags: ['autodocs'],
+  parameters: {
+    controls: { sort: 'alpha',}
+  },
   argTypes: {
-    cardTitle: { control: 'string' },
-    enableOnSite: { control: 'boolean' },
+    enableOnSite: {
+      options: ['true', 'false'],
+      control: {
+        type: 'select',
+      }
+    },
+    previewOn: {
+      options: ['true', 'false'],
+      control: {
+        type: 'select',
+      }
+    },
     onDelete: {
       control: 'action',
     },
@@ -41,14 +54,15 @@ export const ViewingsListCardStory = (props: ViewingsListCardProps) => (
     }}
   >
     <ViewingsListCard
-      key={`${props.enableOnSite}${props.location}${props.previewOn}${props.defaultEditState}`}
+      key={`${props.enableOnSite}${props.location}${props.previewOn}`}
       {...props}
+      enableOnSite={props.enableOnSite ? "true" : "false"}
     />
   </form>
 );
 ViewingsListCardStory.args = {
   ...args,
-  defaultEditState: true,
+  id: 'storyid',
 };
 
 export const Playground = (props: ViewingsListCardProps) => (

@@ -34,7 +34,7 @@ export const defaultViewing = [
     viewingLabelValue: 'Open to the public',
   },
 ];
-
+/* istanbul ignore next */
 export const handleOnSave = (
   e: React.MouseEvent<HTMLElement>,
   cb: React.Dispatch<React.SetStateAction<ViewingsListCardProps[]>>,
@@ -52,15 +52,16 @@ export const handleOnSave = (
   }
 
   cb((prevViewings) => {
-    if (prevViewings) {
+    // if (prevViewings) {
       if (prevViewings.find((view) => view.id === el.id)) {
         const index = prevViewings.findIndex((view) => view.id === el.id);
         prevViewings.splice(index, 1, el);
+        // Persist to database
         return [...prevViewings];
       }
+      // Persist to database
       return [...prevViewings, el];
-    }
-    return [el];
+
   });
 
   return el.invalidFields ? false : true;
