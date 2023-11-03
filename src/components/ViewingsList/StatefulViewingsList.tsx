@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import ViewingsList from './ViewingsList';
 import { ViewingsListCardProps } from './ViewingsListCard';
-import { I18nObject } from './ViewingsList'
+import { I18nObject } from './ViewingsList';
 
 export interface StatefulViewingsListProps extends Record<string, unknown> {
   /**

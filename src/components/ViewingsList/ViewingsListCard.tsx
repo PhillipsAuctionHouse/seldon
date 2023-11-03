@@ -234,16 +234,16 @@ const ViewingsListCard = ({
         {editState ? (
           <>
             <Button id={`vlc-save-btn-${id}`} buttonType="ghost" type="submit" size="sm" onClick={handleOnSave}>
-              { saveBtnLabel }
+              {saveBtnLabel}
             </Button>
             <Button id={`vlc-cancel-btn-${id}`} buttonType="ghost" type="button" size="sm" onClick={handleOnCancel}>
-            { cancelBtnLabel }
+              {cancelBtnLabel}
             </Button>
           </>
         ) : (
           <>
             <Button id={`vlc-edit-btn-${id}`} buttonType="ghost" type="button" size="sm" onClick={handleOnEdit}>
-            { editBtnLabel }
+              {editBtnLabel}
             </Button>
             <Button
               id={`vlc-delete-btn-${id}`}
@@ -252,7 +252,7 @@ const ViewingsListCard = ({
               size="sm"
               onClick={() => typeof onDelete === 'function' && onDelete(id)}
             >
-              { deleteBtnLabel }
+              {deleteBtnLabel}
             </Button>
           </>
         )}

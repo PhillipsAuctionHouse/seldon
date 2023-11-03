@@ -1,5 +1,5 @@
-import classnames from 'classnames';
 import * as React from 'react';
+import classnames from 'classnames';
 
 import { px } from '../../utils';
 import ViewingsListCard, { ViewingsListCardProps } from './ViewingsListCard';
@@ -120,7 +120,7 @@ const ViewingsList = ({
         />
       ))}
       <Button id={`viewings-list-add-btn-${id || getRandomNum()}`} size="sm" onClick={handleOnAdd}>
-        { addViewingsBtnLabel }
+        {addViewingsBtnLabel}
       </Button>
     </div>
   );

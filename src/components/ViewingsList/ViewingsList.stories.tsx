@@ -9,13 +9,13 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     defaultViewing: {
-      control: "array"
+      control: 'array',
     },
     title: {
-      control: { type:  'text' }
+      control: { type: 'text' },
     },
     id: {
-      control: { type:  'text' }
+      control: { type: 'text' },
     },
     onSave: {
       control: 'action',
