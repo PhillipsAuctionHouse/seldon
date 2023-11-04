@@ -79,14 +79,13 @@ const ViewingsList = ({
   const [hasUnsavedData, setHasUnsavedData] = React.useState('');
   const [oldState, setOldState] = React.useState<ViewingsListCardProps | string>();
   React.useEffect(() => {
-    console.log("viewings from viewings effect", viewings)
     setViewingsList(viewings);
   }, [viewings]);
   const { addViewingsBtnLabel = 'ADD VIEWINGS' } = i18n;
   const handleOnAdd = () => {
     const uuid = `${getRandomNum()}${viewingList ? '-' + viewingList.length : ''}`;
     setHasUnsavedData(uuid);
-    setOldState(uuid)
+    setOldState(uuid);
     if (onAdd) onAdd(uuid);
   };
 
@@ -96,8 +95,8 @@ const ViewingsList = ({
   };
 
   const handleOnEdit = (viewingId: string) => {
-    setHasUnsavedData(viewingId)
-    setOldState(viewingList?.find((view) => view.id === viewingId))
+    setHasUnsavedData(viewingId);
+    setOldState(viewingList?.find((view) => view.id === viewingId));
   };
 
   const handleOnSave = (e: React.MouseEvent<HTMLElement>) => {
@@ -108,9 +107,9 @@ const ViewingsList = ({
 
   const handleOnCancel = () => {
     if (typeof oldState === 'string') {
-      typeof onDelete === 'function' && onDelete(oldState)
+      typeof onDelete === 'function' && onDelete(oldState);
     } else if (hasUnsavedData === oldState?.id) {
-      setViewingsList(prevViewings => prevViewings?.map(el => el.id === oldState.id ? oldState : el));
+      setViewingsList((prevViewings) => prevViewings?.map((el) => (el.id === oldState.id ? oldState : el)));
     }
     setHasUnsavedData('');
   };
