@@ -76,7 +76,6 @@ export const handleOnSave = (
   }
 
   cb((prevViewings) => {
-    // if (prevViewings) {
     if (prevViewings.find((view) => view.id === el.id)) {
       const index = prevViewings.findIndex((view) => view.id === el.id);
       prevViewings.splice(index, 1, el);

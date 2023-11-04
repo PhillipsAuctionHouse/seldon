@@ -76,6 +76,10 @@ describe('ViewingsList', () => {
     await user.keyboard('{backspace}{backspace}{backspace}');
     await user.click(screen.getByText(/SAVE DETAILS/));
     expect(screen.getByDisplayValue(/One ti/)).toBeInTheDocument();
+    await user.click(screen.getByText(/ADD VIEWING/));
+    await user.keyboard('New location');
+    await user.click(screen.getByText(/CANCEL/));
+    expect(screen.queryByDisplayValue(/New location/)).not.toBeInTheDocument();
   });
 
   it('will save all values of the form and return them as part of the "handleOnSave" callback', async () => {
