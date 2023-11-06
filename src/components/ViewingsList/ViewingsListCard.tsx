@@ -230,7 +230,7 @@ const ViewingsListCard = ({
       />
       {!enableOnSiteState ? <input type="hidden" name="enableOnSite" value={'false'} /> : null}
       <hr />
-      <div className={`${baseClass}__btn-group`}>
+      <div className={`${baseClass}__btn-group ${px}-button__group`}>
         {editState ? (
           <>
             <Button id={`vlc-save-btn-${id}`} buttonType="ghost" type="submit" size="sm" onClick={handleOnSave}>
