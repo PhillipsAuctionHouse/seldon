@@ -60,8 +60,9 @@ body {
 }
 
 @mixin headerText {
-  color: $primary-black;
   @include DistinctDisplay();
+  color: $primary-black;
+  font-weight: 400;
 }
 
 @mixin bodyText {

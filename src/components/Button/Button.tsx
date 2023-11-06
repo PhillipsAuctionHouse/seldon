@@ -2,7 +2,7 @@ import classnames from 'classnames';
 
 import { CommonProps, px } from '../../utils';
 
-export interface ButtonProps extends CommonProps {
+export interface ButtonProps extends CommonProps, Record<string, unknown> {
   /**
    * Button contents
    */
@@ -14,25 +14,24 @@ export interface ButtonProps extends CommonProps {
   /**
    * Optional click handler
    */
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void | unknown;
   /**
    * Is this the principal call to action on the page?
    */
-  primary?: boolean;
+  buttonType?: 'primary' | 'secondary' | 'ghost';
   /**
    * How large should the button be?
    */
   size?: 'sm' | 'md' | 'lg';
 }
 
-const Button = ({ primary = true, size = 'md', children, iconLast = false, id, ...props }: ButtonProps) => {
+const Button = ({ buttonType = 'primary', size = 'md', children, iconLast = false, id, ...props }: ButtonProps) => {
   return (
     <button
       data-testid={id ? `button-${id}` : `button`}
       id={id}
       type="button"
-      className={classnames(`${px}-button`, `${px}-button--${size}`, {
-        [`${px}-button--secondary`]: !primary,
+      className={classnames(`${px}-button`, `${px}-button--${size}`, `${px}-button--${buttonType}`, {
         [`${px}-button--icon-last`]: iconLast,
       })}
       {...props}

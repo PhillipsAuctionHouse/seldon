@@ -8,9 +8,19 @@ $lg: #{$px}-input--lg;
 .#{$px}-input {
   display: flex;
   flex-direction: column;
+  width: 100%;
+
+  &--hidden {
+    @include hidden();
+  }
 
   &__label {
+    color: $keyline-gray;
+    font-size: 0.8125rem;
+    font-weight: 600;
     margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    word-break: break-word;
 
     &--hidden {
       @include hidden();
@@ -18,8 +28,10 @@ $lg: #{$px}-input--lg;
   }
 
   &__input {
-    accent-color: $pure-black;
-    border: 3px solid currentColor;
+    accent-color: $soft-black;
+    border: 1px solid $keyline-gray;
+    border-radius: 0.1875rem;
+    font-size: 0.8125rem;
     margin-bottom: 0.5rem;
     padding: 0.5rem;
     // width: 100%;
@@ -60,7 +72,7 @@ $lg: #{$px}-input--lg;
     }
 
     .#{$px}-input__label {
-      max-width: 8.75rem;
+      // max-width: 8.75rem;
     }
   }
 

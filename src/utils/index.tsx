@@ -3,7 +3,7 @@ import * as React from 'react';
 export const px = 'phillips';
 
 /* eslint-disable @typescript-eslint/no-empty-function */
-export const noOP = () => {};
+export const noOp = () => {};
 
 export interface CommonProps {
   /**

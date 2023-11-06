@@ -3,7 +3,7 @@ import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
 import classnames from 'classnames';
 
-import { noOP, useNormalizedInputProps } from '../../utils';
+import { noOp, useNormalizedInputProps } from '../../utils';
 import Input, { InputProps } from '../Input/Input';
 
 export interface DatePickerProps extends Omit<InputProps, 'defaultValue'>, Record<string, unknown> {
@@ -136,8 +136,8 @@ const DatePicker = React.forwardRef(
       invalidText,
       labelText,
       locale = 'en',
-      onChange = noOP,
-      onClick = noOP,
+      onChange = noOp,
+      onClick = noOp,
       placeholder,
       readOnly,
       size = 'md',

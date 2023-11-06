@@ -182,4 +182,11 @@ $lg: #{$px}-input--lg;
       padding-top: 3.5rem;
     }
   }
+
+  &:has(.#{$px}-input__input:focus) label:before {
+    outline: 2px solid AccentColor;
+    outline: 2px solid Highlight;
+    outline: 2px solid -webkit-focus-ring-color;
+    outline-offset: 1px;
+  }
 }
