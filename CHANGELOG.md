@@ -1,3 +1,18 @@
+# [1.8.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.7.2...v1.8.0) (2023-11-06)
+
+
+### Features
+
+* **statefulviwingscard:** added to export ([9d75fa5](https://github.com/PhillipsAuctionHouse/seldon/commit/9d75fa51b4991ce4ee24cef4aef6f492f7f03e57))
+* **viewgingslist:** first pass at component ([7fe114b](https://github.com/PhillipsAuctionHouse/seldon/commit/7fe114ba33a7e8e9778554aff3b6a387fcb060d3))
+* **viewingcard:** add gap between card buttons ([aef1dee](https://github.com/PhillipsAuctionHouse/seldon/commit/aef1deeac55340f17d48944971716d421528112c))
+* **viewinglist:** fix bug with canceling changes ([35548d0](https://github.com/PhillipsAuctionHouse/seldon/commit/35548d042671a5d2c04f6e68d4eacad796d4b97a))
+* **viewingscard:** build rest of fields ([492da20](https://github.com/PhillipsAuctionHouse/seldon/commit/492da20c717b21079f01186589af4929ae0c2bc8))
+* **viewingscard:** first pass ([c950f19](https://github.com/PhillipsAuctionHouse/seldon/commit/c950f19b874d2f7347b3f9f7b3d99b6a15e1aa90))
+* **viewingslist:** add ability to translate strings ([df84d30](https://github.com/PhillipsAuctionHouse/seldon/commit/df84d305012388a15f2bb2756e268ac4a94b5ff2))
+* **viewingslist:** finished test and cleaned up viewings code ([eded869](https://github.com/PhillipsAuctionHouse/seldon/commit/eded869f90af00ebcc74a1a2604d1cf12e390a23))
+* **viewlist:** fix bugs and get test working ([8b6b46b](https://github.com/PhillipsAuctionHouse/seldon/commit/8b6b46b74a57f533a660ec8e99cdb14eadcab5e2))
+
 ## [1.7.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.7.1...v1.7.2) (2023-10-20)
 
 
