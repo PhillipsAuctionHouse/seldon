@@ -23,7 +23,7 @@ interface HeaderProps {
   /**
   * Method for toggling open the menu on small screen sizes
   */
-  onMenuToggle: () => void;
+  onMenuToggle?: () => void;
   /**
    * Toggle open text
    */
