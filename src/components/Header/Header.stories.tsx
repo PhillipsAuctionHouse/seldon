@@ -6,7 +6,7 @@ import * as React from 'react';
 // import NavigationListItem from '../Navigation/NavigationListItem';
 // import NavigationListItemTrigger from '../Navigation/NavigationListItemTrigger';
 import Header from './Header';
-import Logo from '../../PhillipsLogo.svg'
+import Logo from '../../PhillipsLogo.svg';
 import { HeaderComponent } from '../Navigation/Navigation.stories';
 import StatefulHeader from './StatefulHeader';
 
@@ -67,11 +67,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-
-
-
 export const Playground: Story = {
-  decorators: [StatefulHeader]
+  decorators: [StatefulHeader],
 };
-
-

@@ -15,14 +15,14 @@ interface HeaderProps {
   /**
    * Any children to render inside of header
    */
-  children: React.ReactNode| JSX.Element;
+  children: React.ReactNode | JSX.Element;
   /**
-  * Optional class for component
-  */
+   * Optional class for component
+   */
   className?: string;
   /**
-  * Method for toggling open the menu on small screen sizes
-  */
+   * Method for toggling open the menu on small screen sizes
+   */
   onMenuToggle?: () => void;
   /**
    * Toggle open text
@@ -39,19 +39,29 @@ const Header = ({
   children,
   className,
   onMenuToggle,
-  toggleOpenText = "Open Menu",
-  toggleCloseText = "Close Menu"
+  toggleOpenText = 'Open Menu',
+  toggleCloseText = 'Close Menu',
 }: HeaderProps) => {
   const [toggleText, setToggleText] = React.useState(toggleOpenText);
-  const handleMenuToggle = function() {
-    onMenuToggle();
-    setToggleText(prev => prev === toggleOpenText ? toggleCloseText : toggleOpenText);
-  }
+  const handleMenuToggle = function () {
+    typeof onMenuToggle === 'function' &&  onMenuToggle();
+    setToggleText((prev) => (prev === toggleOpenText ? toggleCloseText : toggleOpenText));
+  };
   return (
     <header className={classnames(`${px}-header`, className)}>
-        <button type="button" onClick={handleMenuToggle}  className={classnames(`${px}-header__toggle-btn`, {[`${px}-header__toggle-btn--open`]: toggleText === toggleCloseText})}><span>{toggleText}</span></button>
-        <h1 className={`${px}-header__logo`}><img src={logo} width="228" height="18" alt={logoText}/></h1>
-        {children}
+      <button
+        type="button"
+        onClick={handleMenuToggle}
+        className={classnames(`${px}-header__toggle-btn`, {
+          [`${px}-header__toggle-btn--open`]: toggleText === toggleCloseText,
+        })}
+      >
+        <span>{toggleText}</span>
+      </button>
+      <h1 className={`${px}-header__logo`}>
+        <img src={logo} width="228" height="18" alt={logoText} />
+      </h1>
+      {children}
     </header>
   );
 };

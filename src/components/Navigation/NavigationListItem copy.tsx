@@ -1,10 +1,9 @@
 import * as React from 'react';
-import classnames from 'classnames'
+import classnames from 'classnames';
 
 import { px } from '../../utils';
 
-
-interface NavigationListItemProps extends Record<string, unknown>{
+interface NavigationListItemProps extends Record<string, unknown> {
   /**
    * Optional href link
    */
@@ -22,8 +21,8 @@ interface NavigationListItemProps extends Record<string, unknown>{
    */
   children?: React.ReactNode;
   /**
-  * Optional element to render in place of a button e.g. React-Router, etc
-  */
+   * Optional element to render in place of a button e.g. React-Router, etc
+   */
   element?: keyof JSX.IntrinsicElements | React.ComponentType;
 }
 
@@ -31,40 +30,49 @@ const NavigationListItem = ({
   href,
   onClick,
   children,
-  element: Element ='a',
+  element: Element = 'a',
   ...props // Used to spread props needed for 3rd party elements or a11y attributes
 }: NavigationListItemProps) => {
   const [expanded, setExpanded] = React.useState(false);
   // console.log(typeof children, children)
 
   const render = React.useMemo(() => {
-
-    if(typeof children === 'string') {
-      return <Element href={href} {...props}>{children}</Element>
+    if (typeof children === 'string') {
+      return (
+        <Element href={href} {...props}>
+          {children}
+        </Element>
+      );
     } else {
-      const renderItems:(string | React.ReactNode)[] = [];
+      const renderItems: (string | React.ReactNode)[] = [];
       React.Children.forEach(children, (child, index) => {
-        const item = child as React.ReactElement<React.PropsWithChildren>
+        const item = child as React.ReactElement<React.PropsWithChildren>;
         // console.log("type is string - ", typeof children === 'string', item)
-        console.log(`${Math.random()}-${index}`)
-        if(index === 0) {
+        console.log(`${Math.random()}-${index}`);
+        if (index === 0) {
           renderItems.push(
-            <button key={`${Math.random()}-${index}`} className={`${px}-nav__list-item-trigger`} type="button" aria-expanded={expanded} onClick={() => setExpanded(prev => !prev)}>
+            <button
+              key={`${Math.random()}-${index}`}
+              className={`${px}-nav__list-item-trigger`}
+              type="button"
+              aria-expanded={expanded}
+              onClick={() => setExpanded((prev) => !prev)}
+            >
               {item}
-            </button>
-          )
+            </button>,
+          );
         } else {
           renderItems.push(item);
         }
-      })
+      });
       return renderItems;
     }
-  },[setExpanded, Element, children, href, props])
+  }, [setExpanded, Element, children, href, props]);
 
   return (
     <li
       data-testid={`nav-list-item`}
-      className={classnames(`${px}-nav__list-item`, {[`${px}-nav__list-item--expanded`]: expanded})}
+      className={classnames(`${px}-nav__list-item`, { [`${px}-nav__list-item--expanded`]: expanded })}
       onClick={onClick}
     >
       {render}
@@ -76,4 +84,4 @@ const NavigationListItem = ({
   );
 };
 
-export default NavigationListItem
+export default NavigationListItem;

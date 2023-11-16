@@ -13,28 +13,28 @@ interface NavigationProps {
    */
   children: React.ReactNode;
   /**
-  * Optional class for component
-  */
+   * Optional class for component
+   */
   className?: string;
   /**
    * Boolean for when a sub nav is open
    */
   expanded?: boolean;
   /**
-  * Optional unique id for component
-  */
+   * Optional unique id for component
+   */
   id?: string;
   /**
-  * Label for navigation
-  */
+   * Label for navigation
+   */
   label?: string;
   /**
    * Event handler on mobile for going back to main menu
    */
   onBack?: () => void;
   /**
-  * Boolean to dictate the label visibility
-  */
+   * Boolean to dictate the label visibility
+   */
   visible?: boolean;
 }
 
@@ -44,22 +44,24 @@ const Navigation = ({
   className,
   expanded,
   id,
-  label = "Main Menu",
+  label = 'Main Menu',
   onBack,
-  visible = true
+  visible = true,
 }: NavigationProps) => {
   return (
     <nav
       aria-labelledby={`${id}-label`}
       data-testid={id ? `nav-${id}` : `nav`}
       id={id}
-      className={classnames(`${px}-nav`, className,  {[`${px}-nav--expanded`]: expanded})}
+      className={classnames(`${px}-nav`, className, { [`${px}-nav--expanded`]: expanded })}
     >
-      <button tabIndex={expanded? 0 : -1} className={`${px}-nav__back-btn`} onClick={onBack}>{backBtnLabel}</button>
+      <button tabIndex={expanded ? 0 : -1} className={`${px}-nav__back-btn`} onClick={onBack}>
+        {backBtnLabel}
+      </button>
       <h2
         id={`${id}-label`}
         className={`${px}-nav__label`}
-        style={{'--visible': visible ? "visible" : "hidden"}  as React.CSSProperties}
+        style={{ '--visible': visible ? 'visible' : 'hidden' } as React.CSSProperties}
       >
         {label}
       </h2>
@@ -68,4 +70,4 @@ const Navigation = ({
   );
 };
 
-export default Navigation
+export default Navigation;

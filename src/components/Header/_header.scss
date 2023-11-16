@@ -57,8 +57,6 @@
       &::after {
         transform: translateY(8px);
       }
-
-
     }
 
     &.#{$px}-header__toggle-btn--open span {
@@ -78,7 +76,6 @@
       background-color: #f4f4f4;
     }
   }
-
 
   &__logo {
     margin: auto;
@@ -111,8 +108,6 @@
       }
     }
 
-
-
     // &::before {
     //   background: rgba(50,50,50,0.6);
     //   content: '';
@@ -126,9 +121,5 @@
     //     display: none;
     //   }
     // }
-
   }
-
-
-
 }

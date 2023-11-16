@@ -3,8 +3,7 @@ import classnames from 'classnames';
 
 import { px } from '../../utils';
 
-
-interface NavigationListItemProps extends Record<string, unknown>{
+interface NavigationListItemProps extends Record<string, unknown> {
   /**
    * Optional label if not part of the element props
    */
@@ -14,8 +13,8 @@ interface NavigationListItemProps extends Record<string, unknown>{
    */
   className?: string;
   /**
-  * Optional element to render in place of a button e.g. React-Router, etc
-  */
+   * Optional element to render in place of a button e.g. React-Router, etc
+   */
   element?: keyof JSX.IntrinsicElements | React.ComponentType;
   /**
    * Optional href link
@@ -28,7 +27,7 @@ interface NavigationListItemProps extends Record<string, unknown>{
   /**
    *  Blur handler for keyboard a11y for nested list
    */
-  onBlur?: (e: React.FocusEvent) => void
+  onBlur?: (e: React.FocusEvent) => void;
 }
 
 const NavigationListItem = ({
@@ -42,12 +41,14 @@ const NavigationListItem = ({
   return (
     <li
       data-testid={`nav-list-item`}
-      className={classnames(`${px}-nav__list-item`, {className})}
+      className={classnames(`${px}-nav__list-item`, { className })}
       onClick={handleOnClick}
     >
-      <Element href={href} {...props}>{children}</Element>
+      <Element href={href} {...props}>
+        {children}
+      </Element>
     </li>
   );
 };
 
-export default NavigationListItem
+export default NavigationListItem;

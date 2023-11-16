@@ -1,8 +1,7 @@
 import { px } from '../../utils';
 import classnames from 'classnames';
 
-
-interface NavigationListItemTriggerProps extends Record<string, unknown>{
+interface NavigationListItemTriggerProps extends Record<string, unknown> {
   /**
    * Optional label if not part of the element props
    */
@@ -30,16 +29,21 @@ const NavigationListItemTrigger = ({
 }: NavigationListItemTriggerProps) => {
   return (
     <li
-    data-testid={`nav-list-item`}
-    className={classnames(`${px}-nav__list-item`, {[`${px}-nav__list-item--expanded`]: expandedItem===label})}
-    onClick={handleOnClick}
-  >
-    <button className={`${px}-nav__list-item-trigger`} type="button"  aria-expanded={expandedItem === label} {...props}>
-      {label}
-    </button>
-    {children}
-  </li>
+      data-testid={`nav-list-item`}
+      className={classnames(`${px}-nav__list-item`, { [`${px}-nav__list-item--expanded`]: expandedItem === label })}
+      onClick={handleOnClick}
+    >
+      <button
+        className={`${px}-nav__list-item-trigger`}
+        type="button"
+        aria-expanded={expandedItem === label}
+        {...props}
+      >
+        {label}
+      </button>
+      {children}
+    </li>
   );
 };
 
-export default NavigationListItemTrigger
+export default NavigationListItemTrigger;

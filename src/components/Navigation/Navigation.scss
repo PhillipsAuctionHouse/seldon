@@ -54,24 +54,27 @@
     padding: 1rem;
     right: 0;
     top: 0;
-    transition: opacity 0s linear, background-color 0.5s;
+    transition:
+      opacity 0s linear,
+      background-color 0.5s;
     width: auto;
   }
 
   &--expanded &__back-btn {
     opacity: 1;
-    transition: opacity 0.5s linear 0.25s, background-color 0.5s;
+    transition:
+      opacity 0.5s linear 0.25s,
+      background-color 0.5s;
   }
 
   // Remove label and mobile buttons on larger screens
   @media (min-width: 1021px) {
     .#{$px}-nav__back-btn,
     .#{$px}-nav__close-btn,
-    .#{$px}-nav__label  {
+    .#{$px}-nav__label {
       display: none;
     }
   }
-
 
   // Zero out default styles for possible children
   a,
@@ -95,7 +98,7 @@
     text-decoration: none;
   }
 
-  button{
+  button {
     appearance: none;
     background: none;
   }
@@ -130,11 +133,10 @@
   }
 
   @media (min-width: 1021px) {
-    & > .#{$px}-nav__list  {
+    & > .#{$px}-nav__list {
       display: flex;
     }
   }
-
 
   &__list-item {
     max-width: 307px;
@@ -150,7 +152,7 @@
 
     ul {
       background: $pure-white;
-      opacity: 0;;
+      opacity: 0;
       position: absolute;
       top: 0;
       right: 0;
@@ -159,7 +161,6 @@
       width: 307px;
       z-index: -10;
       transition: opacity 0.4s ease-in 0s;
-
     }
     @media (min-width: 1021px) {
       ul {
@@ -178,7 +179,10 @@
         padding: 0 1rem;
         position: fixed;
         top: 60px;
-        transition: opacity 0.5s linear 0.2s, max-height 0.5s cubic-bezier(0.65, 0, 0.35, 1) 0s, padding 0.5s linear 0.2s;
+        transition:
+          opacity 0.5s linear 0.2s,
+          max-height 0.5s cubic-bezier(0.65, 0, 0.35, 1) 0s,
+          padding 0.5s linear 0.2s;
         width: 100vw;
         z-index: 1;
 
@@ -201,14 +205,16 @@
         // .#{$px}-nav__list-item:nth-child(12)  { grid-area: 4 / 1 / 5 / 2; }
       }
 
-
       &:hover ul,
-      &--expanded:focus-within ul   {
+      &--expanded:focus-within ul {
         opacity: 1;
 
         padding: 1rem;
         max-height: 227px;
-        transition: opacity 0.5s linear 0s, max-height 0.5s cubic-bezier(0.65, 0, 0.35, 1) 0s, padding 0.5s linear;
+        transition:
+          opacity 0.5s linear 0s,
+          max-height 0.5s cubic-bezier(0.65, 0, 0.35, 1) 0s,
+          padding 0.5s linear;
 
         li {
           opacity: 1;
@@ -230,7 +236,6 @@
       @media (min-width: 1021px) {
         border: none;
       }
-
     }
 
     .#{$px}-nav__list-item-trigger::after {
@@ -245,10 +250,9 @@
       // transition: transform 0.35s ease-in-out;
       @media (min-width: 1021px) {
         content: '';
-          // display: none;
+        // display: none;
       }
     }
-
 
     &.#{$px}-nav__list-item--expanded ul {
       opacity: 1;
@@ -267,7 +271,7 @@
     & > p {
       font-weight: 200;
       background-color: transparent;
-      transition:  background-color 0.5s
+      transition: background-color 0.5s;
     }
 
     & > a:focus,
@@ -283,7 +287,6 @@
         background-color: #f4f4f4;
       }
     }
-
   }
 
   & {
@@ -323,16 +326,18 @@
     &:not(ul ul li) a:focus::after,
     &:not(ul ul li) button:focus::after,
     &:not(ul ul li) p:focus::after {
-        content: '';
-        background: rgb(84, 84, 84);
-        width: 0;
-        height: 2px;
-        left: 50%;
-        opacity: 0;
-        position: absolute;
-        transform: translateX(-50%);
-        transition: width 0.25s, opacity 0.25s;
-        top: 70%;
+      content: '';
+      background: rgb(84, 84, 84);
+      width: 0;
+      height: 2px;
+      left: 50%;
+      opacity: 0;
+      position: absolute;
+      transform: translateX(-50%);
+      transition:
+        width 0.25s,
+        opacity 0.25s;
+      top: 70%;
     }
 
     &:not(ul ul li):hover::after,
@@ -343,7 +348,7 @@
       width: 80%;
     }
 
-    .#{$px}-nav__list-item{
+    .#{$px}-nav__list-item {
       position: static;
       z-index: 1;
     }
@@ -367,8 +372,6 @@
   }
 }
 
-
-
 .#{$px}-nav__back-btn:hover,
 .#{$px}-nav__back-btn:focus,
 .#{$px}-nav__close-btn:hover,
@@ -376,7 +379,6 @@
   font-weight: 800;
   background-color: #f4f4f4;
 }
-
 
 // Animations
 
