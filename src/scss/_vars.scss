@@ -1,7 +1,5 @@
-
 // prefix
 $px: phillips;
-
 
 // Primary color palette
 $pure-black: #000000;
@@ -20,6 +18,7 @@ $off-white: #f4f2f1;
 
 // Notification color palette
 $error-red: #ff0000;
+$warn-yellow: #d6d141;
 $post-sale-magenta: #ff0085;
 $clock-widget-blue: #4a90e2;
 $clock-widget-green: #6a9c53;
@@ -31,5 +30,14 @@ $articker-red: #fc1e2b;
 $articker-orange: #ff8201;
 $articker-red-orange-gradient: linear-gradient(90deg, #fc1e2b, #ff8201);
 
+// Font-variables
+$DistinctDisplay: 'DistinctDisplay';
+$DistinctDisplayItalic: 'DistinctDisplayItalic';
+$DistinctItalic: 'DistinctItalic';
+$DistinctText: 'DistinctText';
 
-$text-color: $pure-black;
+// Text variables
+$header-color: $pure-black;
+$header-family: $DistinctDisplay;
+$text-color: $soft-black;
+$text-family: $DistinctText;

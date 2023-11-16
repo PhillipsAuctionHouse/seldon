@@ -1,0 +1,38 @@
+@mixin hidden {
+  position: absolute;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  block-size: 1px;
+  clip-path: inset(100%);
+  inline-size: 1px;
+  visibility: inherit;
+  white-space: nowrap;
+}
+
+@mixin warning-icon-before {
+  border-left: 0.75rem solid transparent;
+  border-right: 0.75rem solid transparent;
+  border-bottom: 1.25rem solid #d6d141;
+  content: '';
+  height: 0;
+  position: absolute;
+  right: 14px;
+  top: 45px;
+  width: 0;
+}
+
+@mixin warning-icon-after {
+  color: $pure-black;
+  content: '!';
+  font-family: arial;
+  font-size: 0.85vrem;
+  height: 2rem;
+  width: 2rem;
+  position: absolute;
+  right: 10px;
+  top: 50px;
+  text-align: center;
+  line-height: 1;
+}

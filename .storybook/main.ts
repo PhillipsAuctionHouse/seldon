@@ -15,5 +15,15 @@ const config: StorybookConfig = {
     autodocs: "tag",
     defaultName: "Overview"
   },
+  typescript: {
+    reactDocgen: 'react-docgen',
+    reactDocgenTypescriptOptions: {
+      compilerOptions: {
+        allowSyntheticDefaultImports: false,
+        esModuleInterop: false,
+      },
+      propFilter: () => true,
+    },
+  },
 };
 export default config;

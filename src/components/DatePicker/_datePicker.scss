@@ -1,0 +1,80 @@
+@import 'flatpickr/dist/flatpickr.css';
+@import '../../vars';
+@import '../../typography';
+
+.flatpickr-calendar {
+  @include DistinctText;
+
+  .flatpickr-day,
+  .flatpickr-day.selected,
+  .flatpickr-day:hover,
+  .flatpickr-day:focus,
+  .flatpickr-day.startRange,
+  .flatpickr-day.endRange {
+    border-radius: 0;
+  }
+  .flatpickr-day.selected,
+  .flatpickr-day:hover,
+  .flatpickr-day:focus,
+  .flatpickr-day.startRange,
+  .flatpickr-day.endRange {
+    background: $pure-black;
+    border-color: $pure-black;
+    color: $pure-white;
+  }
+
+  .flatpickr-day.today {
+    border-color: transparent;
+    @include DistinctDisplay;
+    font-weight: bold;
+    position: relative;
+
+    &::after {
+      background-color: $pure-black;
+      bottom: 2px;
+      content: '';
+      height: 0.25rem;
+      width: 0.25rem;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  .flatpickr-months .flatpickr-prev-month:hover,
+  .flatpickr-months .flatpickr-next-month:hover {
+    background-color: $pure-black;
+    svg {
+      fill: $pure-white;
+    }
+  }
+
+  .flatpickr-current-month,
+  .flatpickr-monthDropdown-months,
+  .flatpickr-current-month input.cur-year {
+    @include DistinctDisplay;
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+
+  .flatpickr-weekday {
+    @include DistinctDisplay;
+    font-weight: bold;
+  }
+
+  .flatpickr-current-month {
+    padding: 0.65rem 0 0 0;
+  }
+
+  .flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n + 1)),
+  .flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n + 1)),
+  .flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n + 1)) {
+    -webkit-box-shadow: -10px 0 0 #e6e6e6;
+    box-shadow: -10px 0 0 #e6e6e6;
+  }
+
+  &.arrowTop:before,
+  &.arrowTop:after {
+    content: unset;
+  }
+}

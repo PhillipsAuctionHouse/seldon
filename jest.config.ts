@@ -4,10 +4,10 @@ export default {
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/config/jest/setupTest.ts'],
   transform: {
-    "^.+\\.tsx?$": "ts-jest"
+    '^.+\\.tsx?$': 'ts-jest',
   },
   collectCoverage: true,
-  collectCoverageFrom: ['src/components/**/*.ts?(x)', '!src/**/*.stories.ts?(x)',],
+  collectCoverageFrom: ['src/components/**/*.ts?(x)', '!src/**/*.stories.ts?(x)', 'src/utils/*.ts?(x)'],
   coveragePathIgnorePatterns: ['/node_modules/', '/lib/', '/coverage/'],
   coverageThreshold: {
     global: {
@@ -16,5 +16,5 @@ export default {
       lines: 90,
       statements: 90,
     },
-  }
-}
+  },
+};

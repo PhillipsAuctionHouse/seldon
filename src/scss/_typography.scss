@@ -1,24 +1,25 @@
 @import './vars';
 
 body {
-  font-family: SeroWebPro,"Helvetica Neue",Helvetica,-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 16px;
-    margin: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-overflow-scrolling: touch;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  color: $primary-black;
-}
-
-p {
-  color: $soft-black;
+  font-family:
+    SeroWebPro,
+    'Helvetica Neue',
+    Helvetica,
+    -apple-system,
+    '.SFNSText-Regular',
+    'San Francisco',
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Helvetica Neue',
+    Helvetica,
+    Arial,
+    sans-serif;
+  font-size: 16px;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-overflow-scrolling: touch;
 }
 
 /** Fonts **/
@@ -57,3 +58,32 @@ p {
 @mixin DistinctText {
   font-family: $DistinctText;
 }
+
+@mixin headerText {
+  @include DistinctDisplay();
+  color: $primary-black;
+  font-weight: 400;
+}
+
+@mixin bodyText {
+  color: $soft-black;
+}
+
+// @TODO: uncomment when site is able to be refactored
+// h1,
+// h2,
+// h3,
+// h4 {
+//   color: $primary-black;
+//   @include DistinctDisplay();
+// }
+
+// p,
+// input,
+// label,
+// div,
+// a,
+// button {
+//   color: $soft-black;
+//   @include DistinctText();
+// }

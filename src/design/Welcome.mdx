@@ -25,16 +25,19 @@ import StackAlt from './assets/stackalt.svg';
     }
 
     .welcome-header-text {
+      font-family: "DistinctDisplay", sans-serif;
       font-size: 3rem;
+      text-transform: uppercase;
     }
 
     .welcome-header-blurb  {
-      display: inline-flex;
+      display: block;
     }
 
     .welcome-hero-text p{
       font-size: 1.5rem;
-      line-height: 1.25
+      line-height: 1.25;
+      max-width: 688px;
     }
   `}
 </style>
@@ -42,27 +45,26 @@ import StackAlt from './assets/stackalt.svg';
 # <span className="welcome-header-text">Easel Design System 🎨 </span><span className="welcome-header-blurb">by Phillips Auction House</span>
 
 <span className="welcome-hero-text">
-  Look around to find our design guidelines, component documentation, and
-  resources for building apps with Phillips.com’s design system.
+  Design guidelines, component documentation, and resources for building apps with Phillips.com’s design system.
 </span>
 
 <div className="subheading">Configure</div>
 
-    <img src={Plugin} alt="plugin" />
+    <img src={Plugin} alt="plugin" style={{display: 'inline-block',}}/>
 
-    <img src={StackAlt} alt="Build" />
-
-
-    <img src={Colors} alt="colors" />
-
-    <img src={Flow} alt="flow" />
+    <img src={StackAlt} alt="Build" style={{display: 'inline-block',}}/>
 
 
-    <img src={Repo} alt="repo" />
+    <img src={Colors} alt="colors" style={{display: 'inline-block',}}/>
+
+    <img src={Flow} alt="flow" style={{display: 'inline-block',}}/>
 
 
-    <img src={Direction} alt="direction" />
+    <img src={Repo} alt="repo" style={{display: 'inline-block',}}/>
 
-    <img src={Code} alt="code" />
 
-    <img src={Comments} alt="comments" />
+    <img src={Direction} alt="direction" style={{display: 'inline-block',}}/>
+
+    <img src={Code} alt="code" style={{display: 'inline-block',}}/>
+
+    <img src={Comments} alt="comments" style={{display: 'inline-block',}}/>

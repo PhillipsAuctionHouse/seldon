@@ -1,19 +1,16 @@
-import { defineConfig } from 'vite'
-import dts from 'vite-plugin-dts'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
+import react from '@vitejs/plugin-react';
 import copy from 'rollup-plugin-copy';
-import peerDepsExternal from "rollup-plugin-peer-deps-external";
-import { resolve } from 'path'
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import { resolve } from 'path';
+import svgr from 'vite-plugin-svgr';
 
-import * as packageJson from './package.json'
+import * as packageJson from './package.json';
 
 // const isDev = process.env.NODE_ENV;
 
-const plugins = [
-  react(),
-  dts({entryRoot: 'src'}),
-
-]
+const plugins = [svgr(), react(), dts({ entryRoot: 'src' })];
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -22,21 +19,33 @@ export default defineConfig({
     alias: [
       {
         find: './vars',
-        replacement: resolve(__dirname, './src/scss/vars')
+        replacement: resolve(__dirname, './src/scss/vars'),
       },
       {
         find: '../../vars',
-        replacement: resolve(__dirname, './src/scss/vars')
+        replacement: resolve(__dirname, './src/scss/vars'),
       },
       {
         find: './typography',
-        replacement: resolve(__dirname, './src/scss/typography')
+        replacement: resolve(__dirname, './src/scss/typography'),
+      },
+      {
+        find: '../../typography',
+        replacement: resolve(__dirname, './src/scss/typography'),
       },
       {
         find: './reset',
-        replacement: resolve(__dirname, './src/scss/reset')
+        replacement: resolve(__dirname, './src/scss/reset'),
       },
-    ]
+      {
+        find: './_utils',
+        replacement: resolve(__dirname, './src/scss/_utils'),
+      },
+      {
+        find: '../../_utils',
+        replacement: resolve(__dirname, './src/scss/_utils'),
+      },
+    ],
   },
   build: {
     minify: true,
@@ -50,16 +59,13 @@ export default defineConfig({
 
     rollupOptions: {
       input: 'src/index.ts',
-      output:
-        {
-          dir: 'dist',
-          preserveModules: true,
-          preserveModulesRoot: 'src',
-          chunkFileNames: '[name].js',
-          entryFileNames: '[name].js'
-        }
-      ,
-
+      output: {
+        dir: 'dist',
+        preserveModules: true,
+        preserveModulesRoot: 'src',
+        chunkFileNames: '[name].js',
+        entryFileNames: '[name].js',
+      },
       // make sure to externalize deps that shouldn't be bundled
       // into your library
       external: [...Object.keys(packageJson.peerDependencies)],
@@ -86,8 +92,8 @@ export default defineConfig({
             },
           ],
         }),
-        peerDepsExternal()
+        peerDepsExternal(),
       ],
     },
   },
-})
+});

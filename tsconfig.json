@@ -9,17 +9,19 @@
       "./vars": ["./src/scss/vars"],
       "./typography": ["./src/scss/typography"],
       "./reset": ["./src/scss/reset"],
+      "./_utils": ["./src/scss/utils"]
     },
 
     /* Bundler mode */
-    "moduleResolution": "Node",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
-
+    "allowImportingTsExtensions": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "Node",
+    "noEmit": true,
+    "resolveJsonModule": true,
 
     /* Linting */
     "strict": true,

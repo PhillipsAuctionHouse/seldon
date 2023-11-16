@@ -102,7 +102,7 @@ const { container, rerender } = render(
   <Accordion id="accordion1" autoNumberChildren={true}>
     <AccordionItem id="accordionItem1">...</AccordionItem>
     <AccordionItem id="accordionItem2">...</AccordionItem>
-  </Accordion>
+  </Accordion>,
 );
 ```
 
