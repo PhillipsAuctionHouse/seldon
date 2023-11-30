@@ -44,7 +44,7 @@ const Header = ({
 }: HeaderProps) => {
   const [toggleText, setToggleText] = React.useState(toggleOpenText);
   const handleMenuToggle = function () {
-    typeof onMenuToggle === 'function' &&  onMenuToggle();
+    typeof onMenuToggle === 'function' && onMenuToggle();
     setToggleText((prev) => (prev === toggleOpenText ? toggleCloseText : toggleOpenText));
   };
   return (
@@ -58,7 +58,7 @@ const Header = ({
       >
         <span>{toggleText}</span>
       </button>
-      <h1 className={`${px}-header__logo`}>
+      <h1 className={`${px}-header__logo`} tabIndex={toggleText === toggleOpenText ? 0 : -1}>
         <img src={logo} width="228" height="18" alt={logoText} />
       </h1>
       {children}
