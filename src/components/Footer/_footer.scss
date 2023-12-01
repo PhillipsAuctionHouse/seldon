@@ -1,0 +1,43 @@
+@import '../../vars';
+@import '../../_utils';
+@import '../../typography';
+
+.#{$px}-footer {
+  display: flex;
+  flex-direction: column;
+
+  // @TODO: Extract into a navigation partial when header is being worked on
+  &__navigation {
+    padding: 1rem;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.875rem;
+      justify-content: center;
+    }
+
+    a {
+      font-size: 0.875rem;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+  }
+
+  &__content {
+    background-color: $off-white;
+    padding: 3.75rem 1rem;
+  }
+
+  &__copyright {
+    align-items: center;
+    display: flex;
+    font-size: 0.875rem;
+    font-weight: 400;
+    height: 2.125rem;
+    justify-content: center;
+    line-height: 1.25;
+  }
+}
