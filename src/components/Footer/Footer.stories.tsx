@@ -23,14 +23,26 @@ export const Playground = (props: FooterProps) => (
       <h3>Subscribe to Newsletter</h3>
       <p>Receive exclusive content about our auctions, exhibitions, and special events.</p>
       <Input id="footer-newsletter" type="email" placeholder="example@email.com" labelText="Email*" />
-      <Button buttonType='secondary'>Sign Up</Button>
+      <Button buttonType="secondary">Sign Up</Button>
     </section>
     <div className={`${px}-social`}>
       <p>Follow on Social</p>
       <ul>
-        <li><a><Youtube /></a></li>
-        <li><a><Instagram /></a></li>
-        <li><a><Wechat /></a></li>
+        <li>
+          <a>
+            <Youtube />
+          </a>
+        </li>
+        <li>
+          <a>
+            <Instagram />
+          </a>
+        </li>
+        <li>
+          <a>
+            <Wechat />
+          </a>
+        </li>
       </ul>
     </div>
   </Footer>
@@ -38,17 +50,29 @@ export const Playground = (props: FooterProps) => (
 
 const navigation = (
   <ul>
-    <li><a>Locations</a></li>
-    <li><a>Press</a></li>
-    <li><a>Careers</a></li>
-    <li><a>Privacy policy</a></li>
-    <li><a>Cookie policy</a></li>
-    <li><a>Modern Slavery Policy</a></li>
+    <li>
+      <a>Locations</a>
+    </li>
+    <li>
+      <a>Press</a>
+    </li>
+    <li>
+      <a>Careers</a>
+    </li>
+    <li>
+      <a>Privacy policy</a>
+    </li>
+    <li>
+      <a>Cookie policy</a>
+    </li>
+    <li>
+      <a>Modern Slavery Policy</a>
+    </li>
   </ul>
-)
+);
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
   copyright: '© 2024 Phillips Auctioneers, LLC',
-  navigation
+  navigation,
 };
