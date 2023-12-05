@@ -25,7 +25,15 @@ export interface ButtonProps extends CommonProps, Record<string, unknown> {
   size?: 'sm' | 'md' | 'lg';
 }
 
-const Button = ({ buttonType = 'primary', size = 'md', children, className, iconLast = false, id, ...props }: ButtonProps) => {
+const Button = ({
+  buttonType = 'primary',
+  size = 'md',
+  children,
+  className,
+  iconLast = false,
+  id,
+  ...props
+}: ButtonProps) => {
   return (
     <button
       data-testid={id ? `button-${id}` : `button`}

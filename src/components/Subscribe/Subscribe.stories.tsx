@@ -10,12 +10,9 @@ const meta = {
 
 export default meta;
 
-export const Playground = (props: SubscribeProps) => (
-  <Subscribe {...props} />
-);
+export const Playground = (props: SubscribeProps) => <Subscribe {...props} />;
 
 Playground.args = {
   id: 'mySubscribeComponent',
   title: 'Subscribe to Newsletter',
 };
-

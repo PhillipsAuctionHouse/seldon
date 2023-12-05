@@ -24,7 +24,11 @@ export const Playground = (props: FooterProps) => (
       <Input id="footer-newsletter" type="email" placeholder="example@email.com" labelText="Email*" />
       <Button buttonType="secondary">Sign Up</Button>
     </section> */}
-    <Subscribe className={`${px}-newsletter`} title="Subscribe to Newsletter" blurb="Receive exclusive content about our auctions, exhibitions, and special events." />
+    <Subscribe
+      className={`${px}-newsletter`}
+      title="Subscribe to Newsletter"
+      blurb="Receive exclusive content about our auctions, exhibitions, and special events."
+    />
     <div className={`${px}-social`}>
       <p>Follow on Social</p>
       <ul>
