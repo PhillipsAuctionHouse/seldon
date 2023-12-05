@@ -25,7 +25,7 @@ export interface ButtonProps extends CommonProps, Record<string, unknown> {
   size?: 'sm' | 'md' | 'lg';
 }
 
-const Button = ({ buttonType = 'primary', size = 'md', children, iconLast = false, id, ...props }: ButtonProps) => {
+const Button = ({ buttonType = 'primary', size = 'md', children, className, iconLast = false, id, ...props }: ButtonProps) => {
   return (
     <button
       data-testid={id ? `button-${id}` : `button`}
@@ -33,6 +33,7 @@ const Button = ({ buttonType = 'primary', size = 'md', children, iconLast = fals
       type="button"
       className={classnames(`${px}-button`, `${px}-button--${size}`, `${px}-button--${buttonType}`, {
         [`${px}-button--icon-last`]: iconLast,
+        [`${className}`]: className,
       })}
       {...props}
     >

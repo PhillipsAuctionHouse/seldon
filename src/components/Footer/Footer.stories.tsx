@@ -1,12 +1,11 @@
 import type { Meta } from '@storybook/react';
 
 import Footer, { FooterProps } from './Footer';
+import Subscribe from '../Subscribe/Subscribe';
 import { px } from '../../utils';
 import Youtube from '../../assets/youtube.svg?react';
 import Instagram from '../../assets/instagram.svg?react';
 import Wechat from '../../assets/wechat.svg?react';
-import Input from '../Input/Input';
-import Button from '../Button/Button';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -19,12 +18,13 @@ export default meta;
 
 export const Playground = (props: FooterProps) => (
   <Footer {...props}>
-    <section className={`${px}-newsletter`}>
+    {/* <section className={`${px}-newsletter`}>
       <h3>Subscribe to Newsletter</h3>
       <p>Receive exclusive content about our auctions, exhibitions, and special events.</p>
       <Input id="footer-newsletter" type="email" placeholder="example@email.com" labelText="Email*" />
       <Button buttonType="secondary">Sign Up</Button>
-    </section>
+    </section> */}
+    <Subscribe className={`${px}-newsletter`} title="Subscribe to Newsletter" blurb="Receive exclusive content about our auctions, exhibitions, and special events." />
     <div className={`${px}-social`}>
       <p>Follow on Social</p>
       <ul>

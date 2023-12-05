@@ -1,0 +1,22 @@
+@import '../../vars';
+@import '../../_utils';
+@import '../../typography';
+
+.#{$px}-subscribe {
+  display: grid;
+  place-content: center;
+
+  &__title {
+    @include headerText;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    margin-bottom: 0.31rem;
+    text-align: center;
+  }
+
+  &__blurb,
+  .#{$px}-input__input {
+    margin-bottom: 1.88rem;
+  }
+
+}
