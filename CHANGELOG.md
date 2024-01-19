@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.8.0...v1.9.0) (2024-01-19)
+
+
+### Features
+
+* add commonjs build ([a914808](https://github.com/PhillipsAuctionHouse/seldon/commit/a9148080193b1ca377c563a38faa4b94c1228f7f))
+
 # [1.8.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.7.2...v1.8.0) (2023-11-06)
 
 
