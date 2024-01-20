@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.9.0...v1.9.1) (2024-01-20)
+
+
+### Bug Fixes
+
+* tweak build settings to stop bundling classnames ([c26106c](https://github.com/PhillipsAuctionHouse/seldon/commit/c26106cd74a3aab4e3e09bb72611f34fc84ed20f))
+
 # [1.9.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.8.0...v1.9.0) (2024-01-19)
 
 
