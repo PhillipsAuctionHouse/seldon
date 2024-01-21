@@ -60,24 +60,24 @@ export default defineConfig({
       input: 'src/index.ts',
       output: [
         {
-        dir: 'dist',
-        format: 'es',
-        preserveModules: true,
-        preserveModulesRoot: 'src',
-        chunkFileNames: '[name].js',
-        entryFileNames: '[name].js',
-      },
-      // {
-      //   dir: 'dist',
-      //   format: 'cjs',
-      //   preserveModulesRoot: 'src',
-      //   chunkFileNames: '[name].cjs',
-      //   entryFileNames: '[name].cjs',
-      // },
+          dir: 'dist',
+          format: 'es',
+          preserveModules: true,
+          preserveModulesRoot: 'src',
+          chunkFileNames: '[name].mjs',
+          entryFileNames: '[name].mjs',
+        },
+        // {
+        //   dir: 'dist',
+        //   format: 'cjs',
+        //   preserveModulesRoot: 'src',
+        //   chunkFileNames: '[name].cjs',
+        //   entryFileNames: '[name].cjs',
+        // },
       ],
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: [...Object.keys(packageJson.peerDependencies), ...Object.keys(packageJson.dependencies)],
+      external: [...Object.keys(packageJson.peerDependencies)],
       plugins: [
         copy({
           hook: 'writeBundle',
