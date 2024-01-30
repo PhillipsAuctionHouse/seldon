@@ -48,9 +48,6 @@ export default defineConfig({
     ],
   },
 
-  optimizeDeps: {
-    include: ['classnames'],
-  },
   build: {
     minify: true,
     reportCompressedSize: true,
