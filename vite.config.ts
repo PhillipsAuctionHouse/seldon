@@ -49,7 +49,7 @@ export default defineConfig({
   },
 
   optimizeDeps: {
-    include: ["classnames"],
+    include: ['classnames'],
   },
   build: {
     minify: true,
