@@ -47,15 +47,18 @@ export default defineConfig({
       },
     ],
   },
+
+  optimizeDeps: {
+    include: ["classnames"],
+  },
   build: {
     minify: true,
     reportCompressedSize: true,
     lib: {
       // Could also be a dictionary or array of multiple entry points
-      entry: ['index.ts'],
+      entry: ['src/index.ts'],
       name: 'seldon',
     },
-
     rollupOptions: {
       input: 'src/index.ts',
       output: [
@@ -64,16 +67,9 @@ export default defineConfig({
           format: 'es',
           preserveModules: true,
           preserveModulesRoot: 'src',
-          chunkFileNames: '[name].mjs',
-          entryFileNames: '[name].mjs',
+          chunkFileNames: '[name].js',
+          entryFileNames: '[name].js',
         },
-        // {
-        //   dir: 'dist',
-        //   format: 'cjs',
-        //   preserveModulesRoot: 'src',
-        //   chunkFileNames: '[name].cjs',
-        //   entryFileNames: '[name].cjs',
-        // },
       ],
       // make sure to externalize deps that shouldn't be bundled
       // into your library
