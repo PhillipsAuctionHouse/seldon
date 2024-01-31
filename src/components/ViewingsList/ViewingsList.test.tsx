@@ -111,7 +111,7 @@ describe('ViewingsList', () => {
     await user.click(screen.getByText(/ADD VIEWING/));
 
     await user.keyboard('One title');
-    await user.click(screen.getByTestId(/^(previewOn-)[a-zA-z-1-9]+/).previousSibling as Element);
+    await user.click(screen.getByTestId(/^(previewOn-)[a-zA-z0-9]+/).previousSibling as Element);
     await user.click(screen.getByTestId(/^(previewLabel-)[a-zA-z0-9]+/));
     await user.keyboard('Opening Night');
     await user.click(screen.getByTestId(/^(previewDates-)[a-zA-z0-9]+/));
