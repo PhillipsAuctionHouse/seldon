@@ -149,7 +149,7 @@ export interface ViewingsListCardFormProps {
   emailToggleLabel?: string;
   /**
    * Label for email input:
-  */
+   */
   emailLabel?: string;
   /**
    * EmailLink value
@@ -157,7 +157,7 @@ export interface ViewingsListCardFormProps {
   emailLink?: string;
   /**
    * Label for email Link input:
-  */
+   */
   emailLinkLabel?: string;
 }
 
@@ -244,7 +244,6 @@ const ViewingsListCardForm = ({
         invalidText={invalidFields?.viewingHours2}
       />
 
-
       <Input
         id={`previewOn-${id}`}
         type="toggle"
@@ -304,7 +303,7 @@ const ViewingsListCardForm = ({
           hidden={!previewOnState}
         />
       </div>
-        
+
       <Input
         id={`address1-${id}`}
         name="address1"
@@ -379,7 +378,7 @@ const ViewingsListCardForm = ({
           size="sm"
           invalid={invalidFields?.address3}
           invalidText={invalidFields?.address3}
-        /> 
+        />
       </div>
     </>
   );
