@@ -369,6 +369,7 @@ const ViewingsListCardForm = ({
           size="sm"
           invalid={invalidFields?.address2}
           invalidText={invalidFields?.address2}
+          hidden={!emailOnState}
         />
         <Input
           id={`emailLink-${id}`}
@@ -378,6 +379,7 @@ const ViewingsListCardForm = ({
           size="sm"
           invalid={invalidFields?.address3}
           invalidText={invalidFields?.address3}
+          hidden={!emailOnState}
         />
       </div>
     </>
