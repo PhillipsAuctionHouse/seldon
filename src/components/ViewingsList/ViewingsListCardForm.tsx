@@ -360,7 +360,7 @@ const ViewingsListCardForm = ({
       {!emailOnState ? <input type="hidden" name="emailOn" value={'false'} /> : null}
 
       <div
-        className={classnames(`${baseClass}__email-set`, { [`${baseClass}__email-set--hidden`]: !emailOnState })}
+        className={classnames(`${baseClass}__preview-set`, { [`${baseClass}__preview-set--hidden`]: !emailOnState })}
       >
         <Input
           id={`email-${id}`}
@@ -372,7 +372,7 @@ const ViewingsListCardForm = ({
           invalidText={invalidFields?.address2}
         />
         <Input
-          id={`email-link-${id}`}
+          id={`emailLink-${id}`}
           name="emailLink"
           defaultValue={emailLink}
           labelText={emailLinkLabel}
