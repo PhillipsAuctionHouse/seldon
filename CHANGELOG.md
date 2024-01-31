@@ -1,10 +1,9 @@
 ## [1.9.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.9.2...v1.9.3) (2024-01-30)
 
-
 ### Bug Fixes
 
-* remove config changes that were unnecessary and remove datepicker from exported styles ([3d82a8f](https://github.com/PhillipsAuctionHouse/seldon/commit/3d82a8f4329ae1ac0b48ffbe02a7d7cab13fbe8d))
-* remove unused config change ([e2c876f](https://github.com/PhillipsAuctionHouse/seldon/commit/e2c876fdd39413688251bb20bb676d6e368be2e1))
+- remove config changes that were unnecessary and remove datepicker from exported styles ([3d82a8f](https://github.com/PhillipsAuctionHouse/seldon/commit/3d82a8f4329ae1ac0b48ffbe02a7d7cab13fbe8d))
+- remove unused config change ([e2c876f](https://github.com/PhillipsAuctionHouse/seldon/commit/e2c876fdd39413688251bb20bb676d6e368be2e1))
 
 ## [1.9.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.9.1...v1.9.2) (2024-01-21)
 

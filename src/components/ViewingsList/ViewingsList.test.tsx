@@ -136,6 +136,11 @@ describe('ViewingsList', () => {
     await user.keyboard('United States');
     await user.click(screen.getByTestId(/^(addressUrl-)[a-zA-z0-9]+/));
     await user.keyboard('HTTP://WWW.WEBSITE.COM');
+    await user.click(screen.getByTestId(/^(emailOn-)[a-zA-z0-9]+/));
+    await user.click(screen.getByTestId(/^(email-)[a-zA-z0-9]+/));
+    await user.keyboard('contact');
+    await user.click(screen.getByTestId(/^(emailLink-)[a-zA-z0-9]+/));
+    await user.keyboard('contact@phillips.com');
     await user.click(screen.getByTestId(/^(enableOnSite-)[a-zA-z0-9]+/).previousSibling as Element);
 
     await user.click(screen.getByText(/SAVE DETAILS/));
@@ -156,6 +161,9 @@ describe('ViewingsList', () => {
         viewingHours1: '7am - 8pm',
         viewingHours2: '9:30pm - 10pm',
         viewingLabelValue: 'Open to the public',
+        emailOn: 'true',
+        email: 'contact',
+        emailLink: 'contact@phillips.com',
       }),
     );
   });
