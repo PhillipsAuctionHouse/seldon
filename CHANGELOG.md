@@ -1,3 +1,15 @@
+# [1.11.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.10.0...v1.11.0) (2024-02-12)
+
+
+### Bug Fixes
+
+* prettier formatting edits ([a294852](https://github.com/PhillipsAuctionHouse/seldon/commit/a294852b187da6f82a97125df133c563d44413cd))
+
+
+### Features
+
+* updated error styling for input component ([a430611](https://github.com/PhillipsAuctionHouse/seldon/commit/a4306115050560d2daea9302c64e960884ea2051))
+
 # [1.10.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.9.3...v1.10.0) (2024-01-31)
 
 
