@@ -105,11 +105,15 @@ $lg: #{$px}-input--lg;
   &--invalid {
     color: $error-red;
 
-    .#{$px}-input__label,
     .#{$px}-input__input,
     .#{$px}-input__input::placeholder,
     .#{$px}-input__validation {
       color: inherit;
+    }
+
+    .#{$px}-input__input {
+      border: 1px solid $error-red;
+      box-shadow: inset 0px 0px 3px 3px $error-pink;
     }
   }
 
