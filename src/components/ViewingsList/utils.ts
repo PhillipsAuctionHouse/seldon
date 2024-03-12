@@ -27,11 +27,15 @@ export const defaultViewing = [
     previewHours1: '8am - 9pm',
     previewHours2: 'After closing',
     previewLabelValue: 'Opening Night',
+    previewToggleLabel: 'Additional Hours',
     previewOn: 'true',
     viewingDates: '3-6 December',
     viewingHours1: '7am - 8pm',
     viewingHours2: '9:30pm - 10pm',
     viewingLabelValue: 'Open to the public',
+    emailLabel: 'Email',
+    emailLinkLabel: 'Email Address',
+    emailToggleLabel: 'Include Email Address',
   },
 ];
 
@@ -56,6 +60,9 @@ export const i18n = {
   viewingDatesLabel: '_viewingDatesLabel_',
   viewingHours1Label: '_viewingHours1Label_',
   viewingHours2Label: '_viewingHours2Label_',
+  emailLabel: '_emailLabel_',
+  emailLinkLabel: '_emailLinkLabel_',
+  emailToggleLabel: '_emailToggleLabel_',
 };
 
 /* istanbul ignore next */
