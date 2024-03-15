@@ -157,7 +157,7 @@ export interface ViewingsListCardFormProps {
   emailLink?: string;
   /**
    * Label for email Link input:
-   */
+  */
   emailLinkLabel?: string;
 }
 
@@ -172,6 +172,12 @@ const ViewingsListCardForm = ({
   address2Label = "City, State, Zip ('New York, NY 10019')",
   address3,
   address3Label = 'Country (United States)',
+  emailOn = 'false',
+  emailToggleLabel = 'Include Email Address',
+  email,
+  emailLabel = 'Email',
+  emailLink,
+  emailLinkLabel = 'Email Address',
   id,
   invalidFields,
   previewDates,
@@ -192,12 +198,6 @@ const ViewingsListCardForm = ({
   viewingHours1Label = 'Hours1',
   viewingHours2,
   viewingHours2Label = 'Hours2',
-  emailOn = 'false',
-  emailToggleLabel = 'Include Email Address',
-  email,
-  emailLabel = 'Email',
-  emailLink,
-  emailLinkLabel = 'Email Address',
 }: ViewingsListCardFormProps) => {
   const [previewOnState, setPreviewOnState] = React.useState(previewOn === 'true');
   const [emailOnState, setEmailOnState] = React.useState(emailOn === 'true');

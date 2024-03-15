@@ -86,6 +86,30 @@ export interface ViewingsListCardProps extends ViewingsListCardFormProps, Record
    * Optional string to pass for edit button
    */
   saveBtnLabel?: string;
+   /**
+   * Email toggle
+   */
+  emailOn?: string;
+  /**
+   * Email value:
+   */
+  email?: string;
+  /**
+   * Label for email toggle
+   */
+  emailToggleLabel?: string;
+  /**
+   * Label for email input:
+   */
+  emailLabel?: string;
+  /**
+   * EmailLink value
+   */
+  emailLink?: string;
+  /**
+   * Label for email Link input:
+   */
+  emailLinkLabel?: string;
 }
 
 const baseClass = `${px}-viewings-list-card`;
@@ -106,6 +130,12 @@ const ViewingsListCard = ({
   editState,
   enableOnSite = 'false',
   enableOnSiteToggleLabel = 'Enabled on website',
+  emailOn = 'false',
+  emailToggleLabel = 'Include Email Address',
+  email,
+  emailLabel = 'Email',
+  emailLink,
+  emailLinkLabel = 'Email Address',
   id,
   invalidFields,
   location,
@@ -133,6 +163,7 @@ const ViewingsListCard = ({
   viewingHours1Label,
   viewingHours2,
   viewingHours2Label,
+
 }: ViewingsListCardProps) => {
   const [enableOnSiteState, setEnableOnSiteState] = React.useState(enableOnSite === 'true');
   const firstInput = React.useRef<HTMLInputElement>(null);
