@@ -157,7 +157,7 @@ export interface ViewingsListCardFormProps {
   emailLink?: string;
   /**
    * Label for email Link input:
-  */
+   */
   emailLinkLabel?: string;
 }
 

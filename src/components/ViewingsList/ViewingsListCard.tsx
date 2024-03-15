@@ -86,7 +86,7 @@ export interface ViewingsListCardProps extends ViewingsListCardFormProps, Record
    * Optional string to pass for edit button
    */
   saveBtnLabel?: string;
-   /**
+  /**
    * Email toggle
    */
   emailOn?: string;
@@ -163,7 +163,6 @@ const ViewingsListCard = ({
   viewingHours1Label,
   viewingHours2,
   viewingHours2Label,
-
 }: ViewingsListCardProps) => {
   const [enableOnSiteState, setEnableOnSiteState] = React.useState(enableOnSite === 'true');
   const firstInput = React.useRef<HTMLInputElement>(null);
