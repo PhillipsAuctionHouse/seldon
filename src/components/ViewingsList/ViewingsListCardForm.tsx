@@ -38,6 +38,30 @@ export interface ViewingsListCardFormProps {
    */
   address3Label?: string;
   /**
+   * Email toggle
+   */
+  emailOn?: string;
+  /**
+   * Email value:
+   */
+  email?: string;
+  /**
+   * Label for email toggle
+   */
+  emailToggleLabel?: string;
+  /**
+   * Label for email input:
+   */
+  emailLabel?: string;
+  /**
+   * EmailLink value
+   */
+  emailLink?: string;
+  /**
+   * Label for email Link input:
+   */
+  emailLinkLabel?: string;
+  /**
    * Unique id for ViewingListCard component
    */
   id: string;
@@ -135,30 +159,7 @@ export interface ViewingsListCardFormProps {
    * Label for viewing Hours1 input
    */
   viewingHours2Label?: string;
-  /**
-   * Email toggle
-   */
-  emailOn?: string;
-  /**
-   * Email value:
-   */
-  email?: string;
-  /**
-   * Label for email toggle
-   */
-  emailToggleLabel?: string;
-  /**
-   * Label for email input:
-   */
-  emailLabel?: string;
-  /**
-   * EmailLink value
-   */
-  emailLink?: string;
-  /**
-   * Label for email Link input:
-   */
-  emailLinkLabel?: string;
+
 }
 
 const baseClass = `${px}-viewings-list-card-form`;
