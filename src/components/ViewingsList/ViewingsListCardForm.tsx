@@ -73,19 +73,19 @@ export interface ViewingsListCardFormProps {
     addressUrl?: string | undefined;
     address2?: string | undefined;
     address3?: string | undefined;
+    emailLabel?: string | undefined;
+    emailOn?: string | undefined;
+    emailToggleLabel?: string | undefined;
     location?: string | undefined;
     previewDates?: string | undefined;
     previewHours1?: string | undefined;
     previewHours2?: string | undefined;
     previewLabelValue?: string | undefined;
     previewOn?: string | undefined;
-    emailOn?: string | undefined;
     viewingLabelValue?: string | undefined;
     viewingDates?: string | undefined;
     viewingHours1?: string | undefined;
     viewingHours2?: string | undefined;
-    emailLabel?: string | undefined;
-    emailToggleLabel?: string | undefined;
   };
   /**
    * Label for preview label input

@@ -36,6 +36,30 @@ export interface ViewingsListCardProps extends ViewingsListCardFormProps, Record
    */
   enableOnSiteToggleLabel?: string;
   /**
+   * Email value:
+   */
+  email?: string;
+  /**
+   * Label for email input:
+   */
+  emailLabel?: string;
+  /**
+   * EmailLink value
+   */
+  emailLink?: string;
+  /**
+   * Label for email Link input:
+   */
+  emailLinkLabel?: string;
+  /**
+  * Email toggle
+  */
+  emailOn?: string;
+  /**
+  * Label for email toggle
+  */
+  emailToggleLabel?: string;
+  /**
    * Location of viewing
    */
   location?: string;
@@ -55,6 +79,9 @@ export interface ViewingsListCardProps extends ViewingsListCardFormProps, Record
     address1Url?: string | undefined;
     address2?: string | undefined;
     address3?: string | undefined;
+    emailLabel?: string | undefined;
+    emailOn?: string | undefined;
+    emailToggleLabel?: string | undefined;
     location?: string | undefined;
     previewDates?: string | undefined;
     previewHours1?: string | undefined;
@@ -86,30 +113,6 @@ export interface ViewingsListCardProps extends ViewingsListCardFormProps, Record
    * Optional string to pass for edit button
    */
   saveBtnLabel?: string;
-  /**
-   * Email toggle
-   */
-  emailOn?: string;
-  /**
-   * Email value:
-   */
-  email?: string;
-  /**
-   * Label for email toggle
-   */
-  emailToggleLabel?: string;
-  /**
-   * Label for email input:
-   */
-  emailLabel?: string;
-  /**
-   * EmailLink value
-   */
-  emailLink?: string;
-  /**
-   * Label for email Link input:
-   */
-  emailLinkLabel?: string;
 }
 
 const baseClass = `${px}-viewings-list-card`;
@@ -130,12 +133,12 @@ const ViewingsListCard = ({
   editState,
   enableOnSite = 'false',
   enableOnSiteToggleLabel = 'Enabled on website',
-  emailOn = 'false',
-  emailToggleLabel = 'Include Email Address',
   email,
   emailLabel = 'Email',
   emailLink,
   emailLinkLabel = 'Email Address',
+  emailOn = 'false',
+  emailToggleLabel = 'Include Email Address',
   id,
   invalidFields,
   location,
@@ -224,6 +227,12 @@ const ViewingsListCard = ({
           address2Label={address2Label}
           address3={address3}
           address3Label={address3Label}
+          email={email}
+          emailLabel={emailLabel}
+          emailLink={emailLink}
+          emailLinkLabel={emailLinkLabel}
+          emailOn={emailOn}
+          emailToggleLabel={emailToggleLabel}
           id={id}
           invalidFields={invalidFields}
           previewDates={previewDates}
