@@ -159,7 +159,6 @@ export interface ViewingsListCardFormProps {
    * Label for viewing Hours1 input
    */
   viewingHours2Label?: string;
-
 }
 
 const baseClass = `${px}-viewings-list-card-form`;
