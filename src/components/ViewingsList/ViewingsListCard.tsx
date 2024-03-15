@@ -52,12 +52,12 @@ export interface ViewingsListCardProps extends ViewingsListCardFormProps, Record
    */
   emailLinkLabel?: string;
   /**
-  * Email toggle
-  */
+   * Email toggle
+   */
   emailOn?: string;
   /**
-  * Label for email toggle
-  */
+   * Label for email toggle
+   */
   emailToggleLabel?: string;
   /**
    * Location of viewing
