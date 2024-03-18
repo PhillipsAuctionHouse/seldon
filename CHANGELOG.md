@@ -1,3 +1,56 @@
+# [1.12.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.11.0...v1.12.0) (2024-03-14)
+
+### Features
+
+- adding missing i18n fields, new defaults ([9b19b6e](https://github.com/PhillipsAuctionHouse/seldon/commit/9b19b6e26d794551b82912e57763d377da58b823))
+- changelog ([1940c3d](https://github.com/PhillipsAuctionHouse/seldon/commit/1940c3d29602f313249a86754477bf3166cf50c9))
+
+# [1.11.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.10.0...v1.11.0) (2024-02-12)
+
+### Bug Fixes
+
+- prettier formatting edits ([a294852](https://github.com/PhillipsAuctionHouse/seldon/commit/a294852b187da6f82a97125df133c563d44413cd))
+
+### Features
+
+- updated error styling for input component ([a430611](https://github.com/PhillipsAuctionHouse/seldon/commit/a4306115050560d2daea9302c64e960884ea2051))
+
+# [1.10.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.9.3...v1.10.0) (2024-01-31)
+
+### Features
+
+- adding email fields to form ([230512e](https://github.com/PhillipsAuctionHouse/seldon/commit/230512e19081e77c6373b8568870715cff70ea9c))
+- adding emailOnState to email fields ([39eff1f](https://github.com/PhillipsAuctionHouse/seldon/commit/39eff1f4dd0578952ee77ef25641a848feee49e8))
+- css fixes, test cases ([9872fb0](https://github.com/PhillipsAuctionHouse/seldon/commit/9872fb0da9e28f0f9b7064d54f5412764a058efa))
+- css fixes, test cases ([2ee9400](https://github.com/PhillipsAuctionHouse/seldon/commit/2ee94007ab9483afc3685b93ba46f97b0f72f88f))
+- fixing accidental typo in test ([98aeffa](https://github.com/PhillipsAuctionHouse/seldon/commit/98aeffac30a5dcf7c1da8a5360f3230a42fa3ea1))
+- pulling package-lock ([cd947c1](https://github.com/PhillipsAuctionHouse/seldon/commit/cd947c12509f6d94dd6d0c9dd6e551d1a273fdae))
+
+## [1.9.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.9.2...v1.9.3) (2024-01-30)
+
+### Bug Fixes
+
+- remove config changes that were unnecessary and remove datepicker from exported styles ([3d82a8f](https://github.com/PhillipsAuctionHouse/seldon/commit/3d82a8f4329ae1ac0b48ffbe02a7d7cab13fbe8d))
+- remove unused config change ([e2c876f](https://github.com/PhillipsAuctionHouse/seldon/commit/e2c876fdd39413688251bb20bb676d6e368be2e1))
+
+## [1.9.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.9.1...v1.9.2) (2024-01-21)
+
+### Bug Fixes
+
+- still troublshooting build ([486dfc7](https://github.com/PhillipsAuctionHouse/seldon/commit/486dfc7c6baa228dc56eb158c1e89459485fd57a))
+
+## [1.9.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.9.0...v1.9.1) (2024-01-20)
+
+### Bug Fixes
+
+- tweak build settings to stop bundling classnames ([c26106c](https://github.com/PhillipsAuctionHouse/seldon/commit/c26106cd74a3aab4e3e09bb72611f34fc84ed20f))
+
+# [1.9.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.8.0...v1.9.0) (2024-01-19)
+
+### Features
+
+- add commonjs build ([a914808](https://github.com/PhillipsAuctionHouse/seldon/commit/a9148080193b1ca377c563a38faa4b94c1228f7f))
+
 # [1.8.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.7.2...v1.8.0) (2023-11-06)
 
 ### Features

@@ -47,25 +47,27 @@ export default defineConfig({
       },
     ],
   },
+
   build: {
     minify: true,
     reportCompressedSize: true,
     lib: {
       // Could also be a dictionary or array of multiple entry points
-      entry: ['index.ts'],
+      entry: ['src/index.ts'],
       name: 'seldon',
-      formats: ['es'],
     },
-
     rollupOptions: {
       input: 'src/index.ts',
-      output: {
-        dir: 'dist',
-        preserveModules: true,
-        preserveModulesRoot: 'src',
-        chunkFileNames: '[name].js',
-        entryFileNames: '[name].js',
-      },
+      output: [
+        {
+          dir: 'dist',
+          format: 'es',
+          preserveModules: true,
+          preserveModulesRoot: 'src',
+          chunkFileNames: '[name].js',
+          entryFileNames: '[name].js',
+        },
+      ],
       // make sure to externalize deps that shouldn't be bundled
       // into your library
       external: [...Object.keys(packageJson.peerDependencies)],
