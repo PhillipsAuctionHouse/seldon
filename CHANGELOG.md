@@ -1,3 +1,15 @@
+# [1.13.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.12.0...v1.13.0) (2024-03-20)
+
+
+### Features
+
+* alphabetizing interface in ViewingsListCardForm ([31cb8ff](https://github.com/PhillipsAuctionHouse/seldon/commit/31cb8ff82868ac25a1dc9a7eb7716562b31d2c22))
+* filling out missing email fields from previous edits ([4ead7fd](https://github.com/PhillipsAuctionHouse/seldon/commit/4ead7fd54034bc5f6a50df234abeff2384f444d0))
+* fixing missing usage, making tests pass ([ad5064f](https://github.com/PhillipsAuctionHouse/seldon/commit/ad5064f09baf953c437a025565383a56d5aaf415))
+* updating Changelog ([28c2f10](https://github.com/PhillipsAuctionHouse/seldon/commit/28c2f10f9bd4798da86cce440e184b8d0e11b50c))
+* updating Changelog ([fa41bcc](https://github.com/PhillipsAuctionHouse/seldon/commit/fa41bcc66ba5286d27b049a0103562fb450c42ea))
+* updating Changelog ([6799bae](https://github.com/PhillipsAuctionHouse/seldon/commit/6799baeb87129caf2d0833cdfa463ba0aaa8cd24))
+
 # [1.12.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.11.0...v1.12.0) (2024-03-14)
 
 ### Features
