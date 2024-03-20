@@ -1,10 +1,9 @@
 # [1.12.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.11.0...v1.12.0) (2024-03-14)
 
-
 ### Features
 
-* adding missing i18n fields, new defaults ([9b19b6e](https://github.com/PhillipsAuctionHouse/seldon/commit/9b19b6e26d794551b82912e57763d377da58b823))
-* changelog ([1940c3d](https://github.com/PhillipsAuctionHouse/seldon/commit/1940c3d29602f313249a86754477bf3166cf50c9))
+- adding missing i18n fields, new defaults ([9b19b6e](https://github.com/PhillipsAuctionHouse/seldon/commit/9b19b6e26d794551b82912e57763d377da58b823))
+- changelog ([1940c3d](https://github.com/PhillipsAuctionHouse/seldon/commit/1940c3d29602f313249a86754477bf3166cf50c9))
 
 # [1.11.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.10.0...v1.11.0) (2024-02-12)
 
