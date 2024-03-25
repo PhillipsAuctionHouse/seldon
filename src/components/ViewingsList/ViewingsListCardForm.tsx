@@ -186,10 +186,10 @@ const ViewingsListCardForm = ({
   previewHours1Label = 'Hours1',
   previewHours2,
   previewHours2Label = 'Hours2',
-  previewLabel = "Label ('Preview', 'Opening NIght', etc)",
+  previewLabel = "Label ('Preview', 'Opening Night', etc)",
   previewLabelValue,
   previewOn = 'false',
-  previewToggleLabel = 'Preview/ Reception',
+  previewToggleLabel = 'Additional Hours',
   viewingLabel = "Label ('Open to public')",
   viewingLabelValue,
   viewingDates,
@@ -207,15 +207,6 @@ const ViewingsListCardForm = ({
   }, [previewOn]);
   return (
     <>
-      <Input
-        id={`viewingLabel-${id}`}
-        name="viewingLabelValue"
-        defaultValue={viewingLabelValue}
-        labelText={viewingLabel}
-        size="sm"
-        invalid={invalidFields?.viewingLabelValue}
-        invalidText={invalidFields?.viewingLabelValue}
-      />
       <Input
         id={`viewingDates-${id}`}
         name="viewingDates"
@@ -242,6 +233,15 @@ const ViewingsListCardForm = ({
         size="sm"
         invalid={invalidFields?.viewingHours2}
         invalidText={invalidFields?.viewingHours2}
+      />
+      <Input
+        id={`viewingLabel-${id}`}
+        name="viewingLabelValue"
+        defaultValue={viewingLabelValue}
+        labelText={viewingLabel}
+        size="sm"
+        invalid={invalidFields?.viewingLabelValue}
+        invalidText={invalidFields?.viewingLabelValue}
       />
 
       <Input
