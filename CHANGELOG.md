@@ -1,10 +1,9 @@
 # [1.14.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.13.0...v1.14.0) (2024-03-25)
 
-
 ### Features
 
-* moving label field for primary viewings, renaming preview label ([3d85ad0](https://github.com/PhillipsAuctionHouse/seldon/commit/3d85ad008a5e21420a52fc462643af9d9ab4e485))
-* updating changelog ([5431006](https://github.com/PhillipsAuctionHouse/seldon/commit/54310063e3866c0813df9e3c733a3ee573a1a2bf))
+- moving label field for primary viewings, renaming preview label ([3d85ad0](https://github.com/PhillipsAuctionHouse/seldon/commit/3d85ad008a5e21420a52fc462643af9d9ab4e485))
+- updating changelog ([5431006](https://github.com/PhillipsAuctionHouse/seldon/commit/54310063e3866c0813df9e3c733a3ee573a1a2bf))
 
 # [1.13.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.12.0...v1.13.0) (2024-03-20)
 
