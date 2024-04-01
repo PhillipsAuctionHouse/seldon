@@ -1,9 +1,17 @@
+// import * as React from 'react';
+import classnames from 'classnames';
+
+import { px } from '../../utils';
 import Button from '../Button/Button';
 
 // Try to not pass complex objects into components
 type User = {
   name: string;
 };
+
+// export interface I18nObject {
+//
+// }
 
 interface NavProps {
   user?: User;
@@ -12,11 +20,17 @@ interface NavProps {
   onCreateAccount?: () => void;
 }
 
-const Navbar = ({ user, onLogin, onLogout, onCreateAccount }: NavProps) => (
-  <header>
-    <div className="phillips-nav">
-      <div className="phillips-nav__topbar">
-        <div className="phillips-nav__topbar__right">
+const Navbar = ({ 
+  user,
+  onLogin,
+  onLogout,
+  onCreateAccount
+}: NavProps) => {
+
+  return (
+    <div className={classnames(`${px}-navbar`)}>
+      <div className={classnames(`${px}-navbar__topbar`)}>
+        <div className={classnames(`${px}-navbar__topbar__right`)}>
           {user ? (
             <>
               <span>{user.name}</span>
@@ -29,28 +43,28 @@ const Navbar = ({ user, onLogin, onLogout, onCreateAccount }: NavProps) => (
             </>
           )}
         </div>
-        <div className="phillips-nav__topbar__left">
+        <div className={classnames(`${px}-navbar__topbar__left`)}>
           <a href="/">Home</a>
         </div>
       </div>
-      <div className="phillips-nav__bottombar">
-        <div className="phillips-nav__bottombar__logo">
+      <div className={classnames(`${px}-navbar__bottombar`)}>
+        <div className={classnames(`${px}-navbar__bottombar__logo`)}>
           <a href="/">
-            <img src="/images/logo.svg" alt="Phillips" />
+            <img src="/images/LogoBlack.svg" alt="Phillips" />
           </a>
         </div>
-        <div className="phillips-nav__bottombar__navitems">
-          <div className="phillips-nav__bottombar__navitems__item">
+        <div className={classnames(`${px}-navbar__bottombar__navitems`)}>
+          <div className={classnames(`${px}-navbar__bottombar__navitems__item`)}>
             <a href="/">Auctions</a>
           </div>
         </div>
-        <div className="phillips-nav__bottombar__search">
+        <div className={classnames(`${px}-navbar__bottombar__search`)}>
           <input type="search" placeholder="Search" />
           <button>Search</button>
         </div>
       </div>
     </div>
-  </header>
-);
+  );
+};
 
 export default Navbar;
