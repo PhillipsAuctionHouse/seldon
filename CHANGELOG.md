@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.14.0...v1.15.0) (2024-04-02)
+
+
+### Features
+
+* add type tokens ([4104554](https://github.com/PhillipsAuctionHouse/seldon/commit/41045541eb0b1fd4d60f0d3767a4c70c87e77ae4))
+
 # [1.14.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.13.0...v1.14.0) (2024-03-25)
 
 
