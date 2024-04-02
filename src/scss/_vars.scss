@@ -1,21 +1,22 @@
 // prefix
 $px: phillips;
 
+////////////////////////
+/// COlORS:
+///////////////////////
+
 // Primary color palette
 $pure-black: #000000;
 $primary-black: #323232;
 $pure-white: #ffffff;
-
 // Secondary color palette
 $soft-black: #545454;
 $dark-gray: #75715f;
-
 // Utilititarian color palette
 $keyline-gray: #949494;
 $medium-gray: #c3bebb;
 $light-gray: #eceae7;
 $off-white: #f4f2f1;
-
 // Notification color palette
 $error-red: #ff0000;
 $error-pink: rgba(255, 229, 229, 0.9);
@@ -25,20 +26,124 @@ $clock-widget-blue: #4a90e2;
 $clock-widget-green: #6a9c53;
 $clock-widget-maroon: #6b0000;
 $clock-widget-red: #b00000;
-
 // Articker color palette
 $articker-red: #fc1e2b;
 $articker-orange: #ff8201;
 $articker-red-orange-gradient: linear-gradient(90deg, #fc1e2b, #ff8201);
+// Text variables
+$header-color: $pure-black;
+$text-color: $soft-black;
 
+////////////////////////
+/// FONTS:
+///////////////////////
 // Font-variables
 $DistinctDisplay: 'DistinctDisplay';
 $DistinctDisplayItalic: 'DistinctDisplayItalic';
 $DistinctItalic: 'DistinctItalic';
 $DistinctText: 'DistinctText';
-
-// Text variables
-$header-color: $pure-black;
+$Distinct: 'Distinct';
 $header-family: $DistinctDisplay;
-$text-color: $soft-black;
 $text-family: $DistinctText;
+
+////////////////////////
+/// LABEL TOKENS:
+///////////////////////
+
+// Used with the labelText mixin
+// @include labelText($label)
+$button: 'button';
+$cta-sm: 'cta-sm';
+$cta-lg: 'cta-lg';
+$email: 'email';
+$text: 'text';
+$text-badge: 'text-badge';
+
+$display0: 'display0';
+$display1: 'display1';
+$display2: 'display2';
+$display3: 'display3';
+$display4: 'display4';
+
+$heading1: 'heading1';
+$heading2: 'heading2';
+$heading3: 'heading3';
+$heading4: 'heading4';
+
+$body1: 'body1';
+$body2: 'body2';
+$body3: 'body3';
+
+////////////////////////
+/// FONT SIZE TOKENS:
+///////////////////////
+
+:root {
+  --heading-size0: 3.25rem;
+  --heading-size1: 2.44rem;
+  --heading-size2: 1.95rem;
+  --heading-size3: 1.56rem;
+  --heading-size4: 1.56rem;
+
+  --body-size1: 1.25rem;
+  --body-size2: 1rem;
+  --body-size3: 0.75rem;
+
+  --label-size1: 1.25rem;
+  --label-size2: 1rem;
+  --label-size2: 0.75rem;
+
+  @media (max-width: 960px) {
+    --heading-size0: 2.59rem;
+    --heading-size1: 1.83rem;
+    --heading-size2: 1.46rem;
+    --heading-size3: 1.17rem;
+    --heading-size4: 0.94rem;
+
+    --body-size1: 0.94rem;
+    --body-size2: 0.75rem;
+    --body-size3: 0.56rem;
+
+    --label-size1: 1rem;
+    --label-size2: 0.75rem;
+    --label-size2: 0.56rem;
+  }
+
+  @media (min-width: 1800px) {
+    --heading-size0: 4.06rem;
+    --heading-size1: 3.05rem;
+    --heading-size2: 2.44rem;
+    --heading-size3: 1.95rem;
+
+    --body-size1: 1.56rem;
+    --body-size2: 1.25rem;
+    --body-size3: 0.94rem;
+
+    --label-size1: 1.56rem;
+    --label-size2: 1.25rem;
+    --label-size3: 1rem;
+  }
+}
+
+// DISPLAY
+$display-size0: var(--heading-size0);
+$display-size1: var(--heading-size1);
+$display-size2: var(--heading-size2);
+$display-size3: var(--heading-size3);
+$display-size4: var(--heading-size4);
+// HEADING
+$heading-size1: var(--heading-size1);
+$heading-size2: var(--heading-size2);
+$heading-size3: var(--heading-size3);
+$heading-size4: var(--heading-size4);
+// BODY
+$body-size1: var(--body-size1);
+$body-size2: var(--body-size2);
+$body-size3: var(--body-size3);
+// LABELS
+$button-label-size: var(--label-size2);
+$cta-sm-label-size: var(--label-size2);
+$email-label-size: var(--label-size2);
+$cta-lg-label-size: var(--label-size1);
+$text-label-size: var(--label-size3);
+$text-badge-label-size: var(--label-size3);
