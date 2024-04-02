@@ -1,0 +1,101 @@
+@use '../../scss/vars' as *;
+@use '../../scss/type' as *;
+
+.exp {
+  @include pText($body-size1);
+  color: $keyline-gray;
+}
+
+.property {
+  // @include pText($body-size2);
+  // font-weight: 400;
+  color: $post-sale-magenta;
+}
+li:not(li strong) {
+  font-family: monospace;
+  color: $clock-widget-green;
+  font-weight: 600;
+}
+li strong {
+  color: $clock-widget-blue;
+}
+
+.example {
+  background: #efefef;
+  display: block;
+  margin-top: 1rem;
+  padding: 1.5rem;
+  text-align: center;
+
+  &--d0 {
+    @include text($display0);
+  }
+
+  &--d1 {
+    @include text($display1);
+  }
+
+  &--d2 {
+    @include text($display2);
+  }
+
+  &--d3 {
+    @include text($display3);
+  }
+
+  &--d4 {
+    @include text($display4);
+  }
+
+  &--h1 {
+    @include text($heading1);
+  }
+
+  &--h2 {
+    @include text($heading2);
+  }
+
+  &--h3 {
+    @include text($heading3);
+  }
+
+  &--h4 {
+    @include text($heading4);
+  }
+
+  &--p1 {
+    @include text($body1);
+  }
+
+  &--p2 {
+    @include text($body2);
+  }
+
+  &--p3 {
+    @include text($body3);
+  }
+
+  &--button {
+    @include text($button);
+  }
+
+  &--cta-sm {
+    @include text($cta-sm);
+  }
+
+  &--cta-lg {
+    @include text($cta-lg);
+  }
+
+  &--email {
+    @include text($email);
+  }
+
+  &--text {
+    @include text($text);
+  }
+
+  &--text-badge {
+    @include text($text-badge);
+  }
+}

@@ -11,88 +11,13 @@ import ColorCard from './ColorCard';
 
 <Meta title="Design/Color Tokens" />
 
-<style>
-  {`
-    #colors-gradients-and-transparencies- {
-      display: flex;
-      margin-bottom: 2.5rem;
-    }
-
-    #colors-gradients-and-transparencies- img {
-      margin-left: 1rem;
-    }
-
-    h2 {
-      margin: 0;
-    }
-
-    .color__h2 {
-      font-size: 1rem;
-      color: #4a90e2;
-      display: inline-block;
-      letter-spacing: 0.275rem;
-      line-height: 1.5;
-      text-transform: uppercase;
-    }
-
-    .color__h3 {
-      font-size: 1rem;
-      line-height: 1.5;
-      margin: 0;
-      margin-bottom: 0.5rem;
-    }
-
-    .color__p p{
-      margin-bottom: 2rem;
-    }
-
-    .color__list {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: 1fr;
-      grid-column-gap: 0.75rem;
-      grid-row-gap: 0.75rem;
-      margin-bottom: 4rem;
-    }
-
-    .phillips-color-card {
-
-    }
-
-    .tip {
-      display: inline-block;
-      border-radius: 1em;
-      font-size: 11px;
-      line-height: 12px;
-      font-weight: 700;
-      background: #E7FDD8;
-      color: #66BF3C;
-      padding: 4px 12px;
-      margin-right: 10px;
-      vertical-align: top;
-    }
-
-    .tip-wrapper {
-      font-size: 13px;
-      line-height: 20px;
-      margin-top: 40px;
-      margin-bottom: 40px;
-    }
-
-    .tip-wrapper code {
-      font-size: 12px;
-      display: inline-block;
-    }
-  `}
-</style>
-
 <main className="sb-unstyled">
-# Colors, Gradients, and Transparencies <img src={Colors} alt="colors" />
+<h1 className="h1">Colors and Gradients <img src={Colors} alt="colors" /></h1>
 
-## <span className="color__h2">Primary Color Palette</span>
+## <span className="h2">Primary Color Palette</span>
 
-<h3 className="color__h3">Black ﹡ White</h3>
-<span className="color__p">
+<h3 className="h3">Black ﹡ White</h3>
+<span className="p">
   We utilize black and white as our primary palette as the PHILLIPS brand relies heavily on the gallery presentation -
   i.e. allowing the Art to stand out. It tends to skew to 75% white, 25% black. Pure black is used on Fills, logo, and
   wordmarks for a more luxurious depth; our Primary Black value is used on Titles/Headers and Button elements. White is
@@ -105,10 +30,10 @@ import ColorCard from './ColorCard';
   <ColorCard label="Pure White" hex="#ffffff" usage="Negative Space, Text on Dark BG" />
 </div>
 
-## <span className="color__h2">Secondary Color Palette</span>
+## <span className="h2">Secondary Color Palette</span>
 
-<h3 className="color__h3">Dark Grays</h3>
-<span className="color__p">
+<h3 className="h3">Dark Grays</h3>
+<span className="p">
   In order to create depth and add levels of heirarchy, we utilize Soft Black and Dark Gray for body blocks or varying
   importances.
 </span>
@@ -118,10 +43,10 @@ import ColorCard from './ColorCard';
   <ColorCard label="Dark Gray" hex="#75716f" usage="Labels & Badges" />
 </div>
 
-## <span className="color__h2">Utilitarian Color Palette</span>
+## <span className="h2">Utilitarian Color Palette</span>
 
-<h3 className="color__h3">Keylines ﹡ Med & Lite Grays</h3>
-<span className="color__p">
+<h3 className="h3">Keylines ﹡ Med & Lite Grays</h3>
+<span className="p">
   These are used for utilitarian purposes - keylines, disabled states, inactive states, BG fills for Banners, Sections,
   and Cards
 </span>
@@ -133,10 +58,10 @@ import ColorCard from './ColorCard';
   <ColorCard label="Off White" hex="#f4f2f1" usage="BG fills" />
 </div>
 
-## <span className="color__h2">Notification Color Palette</span>
+## <span className="h2">Notification Color Palette</span>
 
-<h3 className="color__h3">Cyan ﹡ Reds ﹡ Magenta ﹡ Green</h3>
-<span className="color__p">
+<h3 className="h3">Cyan ﹡ Reds ﹡ Magenta ﹡ Green</h3>
+<span className="p">
   We utiilize black and white as our primary palette as the PHILLIPS brand relies heavily on the gallery presentation -
   i.e. allowing the Art to stand out. It tends to skew to 75% white, 25% black. Pure black is used on Fills, logo, and
   wordmarks for a more luxurious depth; our Primary Black value is used on Titles/Headers and Button elements. White is
@@ -177,10 +102,10 @@ import ColorCard from './ColorCard';
   />
 </div>
 
-## <span className="color__h2">CTA and Hover</span>
+## <span className="h2">CTA and Hover</span>
 
-<h3 className="color__h3">Cyan ﹡ Gradients</h3>
-<span className="color__p">
+<h3 className="h3">Cyan ﹡ Gradients</h3>
+<span className="p">
   The Cyan value is used not only for our CTA interactions, but also in select cases of hover, such as our Tab Buttons.
   All CTA's, Links, and tertiary style buttons employ the cyan for hover state. The hover gradient is used on all
   enclosed buttons. i.e. Primary & Secondary, Standard, Micro & Simple Icons.
