@@ -158,8 +158,6 @@ const HeaderComponent = () => {
           </NavigationList>
         </Navigation>
       </div>
-
-      <input type="search" />
     </Header>
   );
 };
