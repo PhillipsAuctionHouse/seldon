@@ -148,7 +148,6 @@ $cta-lg-label-size: var(--label-size1);
 $text-label-size: var(--label-size3);
 $text-badge-label-size: var(--label-size3);
 
-
 ////////////////////////
 /// SPACING TOKENS:
 ///////////////////////
@@ -160,7 +159,6 @@ $text-badge-label-size: var(--label-size3);
   --spacing-medium: 2rem;
   --spacing-large: 3rem;
   --spacing-xl: 6rem;
-
 
   @media (max-width: 960px) {
     --spacing-micro: 0.19rem;
