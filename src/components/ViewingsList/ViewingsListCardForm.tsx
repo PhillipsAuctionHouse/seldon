@@ -38,6 +38,30 @@ export interface ViewingsListCardFormProps {
    */
   address3Label?: string;
   /**
+   * Email toggle
+   */
+  emailOn?: string;
+  /**
+   * Email value:
+   */
+  email?: string;
+  /**
+   * Label for email toggle
+   */
+  emailToggleLabel?: string;
+  /**
+   * Label for email input:
+   */
+  emailLabel?: string;
+  /**
+   * EmailLink value
+   */
+  emailLink?: string;
+  /**
+   * Label for email Link input:
+   */
+  emailLinkLabel?: string;
+  /**
    * Unique id for ViewingListCard component
    */
   id: string;
@@ -49,6 +73,9 @@ export interface ViewingsListCardFormProps {
     addressUrl?: string | undefined;
     address2?: string | undefined;
     address3?: string | undefined;
+    emailLabel?: string | undefined;
+    emailOn?: string | undefined;
+    emailToggleLabel?: string | undefined;
     location?: string | undefined;
     previewDates?: string | undefined;
     previewHours1?: string | undefined;
@@ -145,6 +172,12 @@ const ViewingsListCardForm = ({
   address2Label = "City, State, Zip ('New York, NY 10019')",
   address3,
   address3Label = 'Country (United States)',
+  emailOn = 'false',
+  emailToggleLabel = 'Include Email Address',
+  email,
+  emailLabel = 'Email',
+  emailLink,
+  emailLinkLabel = 'Email Address',
   id,
   invalidFields,
   previewDates,
@@ -153,10 +186,10 @@ const ViewingsListCardForm = ({
   previewHours1Label = 'Hours1',
   previewHours2,
   previewHours2Label = 'Hours2',
-  previewLabel = "Label ('Preview', 'Opening NIght', etc)",
+  previewLabel = "Label ('Preview', 'Opening Night', etc)",
   previewLabelValue,
   previewOn = 'false',
-  previewToggleLabel = 'Preview/ Reception',
+  previewToggleLabel = 'Additional Hours',
   viewingLabel = "Label ('Open to public')",
   viewingLabelValue,
   viewingDates,
@@ -167,11 +200,50 @@ const ViewingsListCardForm = ({
   viewingHours2Label = 'Hours2',
 }: ViewingsListCardFormProps) => {
   const [previewOnState, setPreviewOnState] = React.useState(previewOn === 'true');
+  const [emailOnState, setEmailOnState] = React.useState(emailOn === 'true');
+
   React.useEffect(() => {
     setPreviewOnState(previewOn === 'true');
   }, [previewOn]);
   return (
     <>
+      <Input
+        id={`viewingDates-${id}`}
+        name="viewingDates"
+        defaultValue={viewingDates}
+        labelText={viewingDatesLabel}
+        size="sm"
+        invalid={invalidFields?.viewingDates}
+        invalidText={invalidFields?.viewingDates}
+      />
+      <Input
+        id={`viewingHours1-${id}`}
+        name="viewingHours1"
+        defaultValue={viewingHours1}
+        labelText={viewingHours1Label}
+        size="sm"
+        invalid={invalidFields?.viewingHours1}
+        invalidText={invalidFields?.viewingHours1}
+      />
+      <Input
+        id={`viewingHours2-${id}`}
+        name="viewingHours2"
+        defaultValue={viewingHours2}
+        labelText={viewingHours2Label}
+        size="sm"
+        invalid={invalidFields?.viewingHours2}
+        invalidText={invalidFields?.viewingHours2}
+      />
+      <Input
+        id={`viewingLabel-${id}`}
+        name="viewingLabelValue"
+        defaultValue={viewingLabelValue}
+        labelText={viewingLabel}
+        size="sm"
+        invalid={invalidFields?.viewingLabelValue}
+        invalidText={invalidFields?.viewingLabelValue}
+      />
+
       <Input
         id={`previewOn-${id}`}
         type="toggle"
@@ -190,16 +262,6 @@ const ViewingsListCardForm = ({
       <div
         className={classnames(`${baseClass}__preview-set`, { [`${baseClass}__preview-set--hidden`]: !previewOnState })}
       >
-        <Input
-          id={`previewLabel-${id}`}
-          name="previewLabelValue"
-          defaultValue={previewLabelValue}
-          labelText={previewLabel}
-          size="sm"
-          invalid={invalidFields?.previewLabelValue}
-          invalidText={invalidFields?.previewLabelValue}
-          hidden={!previewOnState}
-        />
         <Input
           id={`previewDates-${id}`}
           name="previewDates"
@@ -230,44 +292,18 @@ const ViewingsListCardForm = ({
           invalidText={invalidFields?.previewHours2}
           hidden={!previewOnState}
         />
+        <Input
+          id={`previewLabel-${id}`}
+          name="previewLabelValue"
+          defaultValue={previewLabelValue}
+          labelText={previewLabel}
+          size="sm"
+          invalid={invalidFields?.previewLabelValue}
+          invalidText={invalidFields?.previewLabelValue}
+          hidden={!previewOnState}
+        />
       </div>
 
-      <Input
-        id={`viewingLabel-${id}`}
-        name="viewingLabelValue"
-        defaultValue={viewingLabelValue}
-        labelText={viewingLabel}
-        size="sm"
-        invalid={invalidFields?.viewingLabelValue}
-        invalidText={invalidFields?.viewingLabelValue}
-      />
-      <Input
-        id={`viewingDates-${id}`}
-        name="viewingDates"
-        defaultValue={viewingDates}
-        labelText={viewingDatesLabel}
-        size="sm"
-        invalid={invalidFields?.viewingDates}
-        invalidText={invalidFields?.viewingDates}
-      />
-      <Input
-        id={`viewingHours1-${id}`}
-        name="viewingHours1"
-        defaultValue={viewingHours1}
-        labelText={viewingHours1Label}
-        size="sm"
-        invalid={invalidFields?.viewingHours1}
-        invalidText={invalidFields?.viewingHours1}
-      />
-      <Input
-        id={`viewingHours2-${id}`}
-        name="viewingHours2"
-        defaultValue={viewingHours2}
-        labelText={viewingHours2Label}
-        size="sm"
-        invalid={invalidFields?.viewingHours2}
-        invalidText={invalidFields?.viewingHours2}
-      />
       <Input
         id={`address1-${id}`}
         name="address1"
@@ -276,24 +312,6 @@ const ViewingsListCardForm = ({
         size="sm"
         invalid={invalidFields?.address1}
         invalidText={invalidFields?.address1}
-      />
-      <Input
-        id={`address2-${id}`}
-        name="address2"
-        defaultValue={address2}
-        labelText={address2Label}
-        size="sm"
-        invalid={invalidFields?.address2}
-        invalidText={invalidFields?.address2}
-      />
-      <Input
-        id={`address3-${id}`}
-        name="address3"
-        defaultValue={address3}
-        labelText={address3Label}
-        size="sm"
-        invalid={invalidFields?.address3}
-        invalidText={invalidFields?.address3}
       />
       <Input
         id={`addressUrl-${id}`}
@@ -305,6 +323,65 @@ const ViewingsListCardForm = ({
         invalid={invalidFields?.addressUrl}
         invalidText={invalidFields?.addressUrl}
       />
+      <Input
+        id={`address2-${id}`}
+        name="address2"
+        defaultValue={address2}
+        labelText={address2Label}
+        size="sm"
+        invalid={invalidFields?.address2}
+        invalidText={invalidFields?.address2}
+      />
+
+      <Input
+        id={`address3-${id}`}
+        name="address3"
+        defaultValue={address3}
+        labelText={address3Label}
+        size="sm"
+        invalid={invalidFields?.address3}
+        invalidText={invalidFields?.address3}
+      />
+
+      <Input
+        id={`emailOn-${id}`}
+        type="toggle"
+        labelText={emailToggleLabel}
+        size="md"
+        defaultChecked={emailOnState}
+        inline
+        invalid={invalidFields?.emailOn}
+        invalidText={invalidFields?.emailOn}
+        value={true}
+        name="emailOn"
+        onChange={() => setEmailOnState((oldState) => !oldState)}
+      />
+      {!emailOnState ? <input type="hidden" name="emailOn" value={'false'} /> : null}
+
+      <div
+        className={classnames(`${baseClass}__preview-set`, { [`${baseClass}__preview-set--hidden`]: !emailOnState })}
+      >
+        <Input
+          id={`email-${id}`}
+          name="email"
+          defaultValue={email}
+          labelText={emailLabel}
+          size="sm"
+          invalid={invalidFields?.address2}
+          invalidText={invalidFields?.address2}
+          hidden={!emailOnState}
+        />
+        <Input
+          id={`emailLink-${id}`}
+          name="emailLink"
+          defaultValue={emailLink}
+          labelText={emailLinkLabel}
+          size="sm"
+          invalid={invalidFields?.address3}
+          invalidText={invalidFields?.address3}
+          hidden={!emailOnState}
+        />
+      </div>
     </>
   );
 };

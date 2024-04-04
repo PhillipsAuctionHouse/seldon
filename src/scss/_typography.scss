@@ -1,18 +1,21 @@
 @import './vars';
 
+html,
 body {
   font-family:
-    SeroWebPro,
-    'Helvetica Neue',
-    Helvetica,
+    'Montserrat',
     -apple-system,
-    '.SFNSText-Regular',
-    'San Francisco',
     BlinkMacSystemFont,
-    'Segoe UI',
-    'Helvetica Neue',
-    Helvetica,
-    Arial,
+    avenir next,
+    avenir,
+    segoe ui,
+    helvetica neue,
+    helvetica,
+    Cantarell,
+    Ubuntu,
+    roboto,
+    noto,
+    arial,
     sans-serif;
   font-size: 16px;
   margin: 0;
@@ -29,61 +32,48 @@ body {
   src: url('../fonts/Distinct-Display.woff2') format('woff2');
 }
 @mixin DistinctDisplay {
-  font-family: $DistinctDisplay;
+  font-family: 'DistinctDisplay';
 }
 
 @font-face {
-  font-family: 'DistinctDisplayItalic';
+  font-family: 'DistinctDisplay';
   src: url('../fonts/Distinct-DisplayItalic.woff') format('woff');
   src: url('../fonts/Distinct-DisplayItalic.woff2') format('woff2');
+  font-style: italic;
 }
+
 @mixin DistinctDisplayItalic {
-  font-family: $DistinctDisplayItalic;
+  font-family: 'DistinctDisplay';
+  font-style: italic;
 }
 
 @font-face {
-  font-family: 'DistinctItalic';
-  src: url('../fonts/Distinct-Italic.woff') format('woff');
-  src: url('../fonts/Distinct-Italic.woff2') format('woff2');
-}
-@mixin DistinctItalic {
-  font-family: $DistinctItalic;
-}
-
-@font-face {
-  font-family: 'DistinctText';
+  font-family: 'Distinct';
   src: url('../fonts/Distinct-Text.woff') format('woff');
   src: url('../fonts/Distinct-Text.woff2') format('woff2');
 }
 @mixin DistinctText {
-  font-family: $DistinctText;
+  font-family: 'Distinct';
+}
+@font-face {
+  font-family: 'Distinct';
+  src: url('../fonts/Distinct-Italic.woff') format('woff');
+  src: url('../fonts/Distinct-Italic.woff2') format('woff2');
+  font-style: italic;
+}
+
+@mixin DistinctItalic {
+  font-family: 'Distinct';
+  font-style: italic;
 }
 
 @mixin headerText {
   @include DistinctDisplay();
   color: $primary-black;
   font-weight: 400;
+  font-style: italic;
 }
 
 @mixin bodyText {
   color: $soft-black;
 }
-
-// @TODO: uncomment when site is able to be refactored
-// h1,
-// h2,
-// h3,
-// h4 {
-//   color: $primary-black;
-//   @include DistinctDisplay();
-// }
-
-// p,
-// input,
-// label,
-// div,
-// a,
-// button {
-//   color: $soft-black;
-//   @include DistinctText();
-// }

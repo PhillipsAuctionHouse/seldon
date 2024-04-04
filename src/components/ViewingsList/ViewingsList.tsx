@@ -15,6 +15,10 @@ export interface I18nObject {
   deleteBtnLabel?: string;
   editBtnLabel?: string;
   enableOnSiteToggleLabel?: string;
+  emailLabel?: string;
+  emailLink?: string;
+  emailLinkLabel?: string;
+  emailToggleLabel?: string;
   locationLabel?: string;
   previewDatesLabel?: string;
   previewHours1Label?: string;
