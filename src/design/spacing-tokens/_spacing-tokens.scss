@@ -1,0 +1,83 @@
+@use '../../scss/vars' as *;
+
+.example {
+  text-align: left;
+
+  &--spacing-micro {
+    border: $spacing-micro solid $primary-black;
+    padding: $spacing-micro;
+  }
+
+  &--spacing-xsm {
+    border: $spacing-xsm solid $primary-black;
+    padding: $spacing-xsm;
+  }
+
+  &--spacing-small {
+    border: $spacing-small solid $primary-black;
+    padding: $spacing-small;
+  }
+
+  &--spacing-medium {
+    border: $spacing-medium solid $primary-black;
+    padding: $spacing-medium;
+  }
+
+  &--spacing-large {
+    border: $spacing-large solid $primary-black;
+    padding: $spacing-large;
+  }
+
+  &--spacing-xl {
+    border: $spacing-xl solid $primary-black;
+    padding: $spacing-xl;
+  }
+}
+
+.spacing-detail {
+  padding-inline-start: 0;
+
+  &-wrapper {
+    margin-bottom: $spacing-medium;
+  }
+}
+
+.token-table {
+  border: 1px solid $keyline-gray;
+  border-collapse: collapse;
+  margin-bottom: $spacing-medium;
+
+  th {
+    background-color: $light-gray;
+    border: 1px solid $keyline-gray;
+    min-width: 9rem;
+    padding: $spacing-small;
+  }
+
+  tr:nth-child(2n) {
+    background-color: $off-white;
+  }
+
+  td {
+    border: 1px solid $keyline-gray;
+    padding: $spacing-small;
+    text-align: center;
+
+    *:first-child {
+      text-align: right;
+    }
+  }
+}
+
+.example-wrapper {
+  display: flex;
+  /* flex-wrap: wrap; */
+  gap: 3rem;
+  justify-content: center;
+
+  & > span {
+    /* flex: 0; */
+    width: 50%;
+    display: block;
+  }
+}

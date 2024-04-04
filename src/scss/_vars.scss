@@ -147,3 +147,59 @@ $email-label-size: var(--label-size2);
 $cta-lg-label-size: var(--label-size1);
 $text-label-size: var(--label-size3);
 $text-badge-label-size: var(--label-size3);
+
+
+////////////////////////
+/// SPACING TOKENS:
+///////////////////////
+
+:root {
+  --spacing-micro: 0.25rem;
+  --spacing-xsm: 0.5rem;
+  --spacing-small: 1rem;
+  --spacing-medium: 2rem;
+  --spacing-large: 3rem;
+  --spacing-xl: 6rem;
+
+
+  @media (max-width: 960px) {
+    --spacing-micro: 0.19rem;
+    --spacing-xsm: 0.38rem;
+    --spacing-small: 0.75rem;
+    --spacing-medium: 1.5rem;
+    --spacing-large: 2.25rem;
+    --spacing-xl: 4.8rem;
+  }
+
+  @media (min-width: 1800px) {
+    --spacing-micro: 0.31rem;
+    --spacing-xsm: 0.63rem;
+    --spacing-small: 1.25rem;
+    --spacing-medium: 2.5rem;
+    --spacing-large: 3.75rem;
+    --spacing-xl: 7.5rem;
+  }
+}
+
+$spacing-micro: var(--spacing-micro);
+$spacing-xsm: var(--spacing-xsm);
+$spacing-small: var(--spacing-small);
+$spacing-medium: var(--spacing-medium);
+$spacing-large: var(--spacing-large);
+$spacing-xl: var(--spacing-xl);
+
+// PADDING
+$padding-micro: var(--spacing-micro);
+$padding-xsm: var(--spacing-xsm);
+$padding-small: var(--spacing-small);
+$padding-medium: var(--spacing-medium);
+$padding-large: var(--spacing-large);
+$padding-xl: var(--spacing-xl);
+
+// MARGIN
+$margin-micro: var(--spacing-micro);
+$margin-xsm: var(--spacing-xsm);
+$margin-small: var(--spacing-small);
+$margin-medium: var(--spacing-medium);
+$margin-large: var(--spacing-large);
+$margin-xl: var(--spacing-xl);
