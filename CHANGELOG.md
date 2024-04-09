@@ -1,3 +1,15 @@
+# [1.16.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.15.0...v1.16.0) (2024-04-09)
+
+
+### Features
+
+* add grid mixins, stories, and styles ([defa0b9](https://github.com/PhillipsAuctionHouse/seldon/commit/defa0b980e97ea09b85a04b26177638cae915840))
+* add Grid to input export ([a93590a](https://github.com/PhillipsAuctionHouse/seldon/commit/a93590a4bff7fe58c1ab96ef4f6744355373ece1))
+* add spacing tokens ([7132567](https://github.com/PhillipsAuctionHouse/seldon/commit/71325678a1362f866ff0b7477fde00041cfafff1))
+* removing min-width ([93a6e9c](https://github.com/PhillipsAuctionHouse/seldon/commit/93a6e9c8ea9e152f817529b8b97e0d9d60f5ec4a))
+* updating changelog ([78ec7b8](https://github.com/PhillipsAuctionHouse/seldon/commit/78ec7b8c9c9e2f10bd66a50dafc5041c681d8576))
+* updating type tokens ([c757dbf](https://github.com/PhillipsAuctionHouse/seldon/commit/c757dbff9cea2be7c9ab714c485778952e12c230))
+
 # [1.15.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.14.0...v1.15.0) (2024-04-02)
 
 ### Features
