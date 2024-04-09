@@ -16,7 +16,6 @@ export default meta;
 
 export const Playground = (props: GridProps) => (
   <>
-
     <div className="grid-example__layout">
       <Grid {...props}>
         <h1>Example Layout using Grid</h1>
