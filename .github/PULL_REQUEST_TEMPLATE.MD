@@ -1,4 +1,11 @@
-Closes #
+**Jira ticket**
+
+Paste link to Jira ticket
+
+**Screenshots**
+| Before | After |
+| ------ | ----- |
+| Paste Before Image | Paste After Image |
 
 **Summary**
 
