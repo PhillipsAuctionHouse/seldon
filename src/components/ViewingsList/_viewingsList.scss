@@ -9,7 +9,7 @@
   flex-direction: column;
   gap: 2.5rem;
   padding: 1rem;
-  width: 38rem;
+  max-width: 38rem;
 
   &__title {
     @include headerText;

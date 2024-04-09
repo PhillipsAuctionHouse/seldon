@@ -1,3 +1,38 @@
+# [1.16.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.15.0...v1.16.0) (2024-04-09)
+
+### Features
+
+* add grid mixins, stories, and styles ([defa0b9](https://github.com/PhillipsAuctionHouse/seldon/commit/defa0b980e97ea09b85a04b26177638cae915840))
+* add Grid to input export ([a93590a](https://github.com/PhillipsAuctionHouse/seldon/commit/a93590a4bff7fe58c1ab96ef4f6744355373ece1))
+* add spacing tokens ([7132567](https://github.com/PhillipsAuctionHouse/seldon/commit/71325678a1362f866ff0b7477fde00041cfafff1))
+* removing min-width ([93a6e9c](https://github.com/PhillipsAuctionHouse/seldon/commit/93a6e9c8ea9e152f817529b8b97e0d9d60f5ec4a))
+* updating changelog ([78ec7b8](https://github.com/PhillipsAuctionHouse/seldon/commit/78ec7b8c9c9e2f10bd66a50dafc5041c681d8576))
+* updating type tokens ([c757dbf](https://github.com/PhillipsAuctionHouse/seldon/commit/c757dbff9cea2be7c9ab714c485778952e12c230))
+
+# [1.15.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.14.0...v1.15.0) (2024-04-02)
+
+### Features
+
+- add type tokens ([4104554](https://github.com/PhillipsAuctionHouse/seldon/commit/41045541eb0b1fd4d60f0d3767a4c70c87e77ae4))
+
+# [1.14.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.13.0...v1.14.0) (2024-03-25)
+
+### Features
+
+- moving label field for primary viewings, renaming preview label ([3d85ad0](https://github.com/PhillipsAuctionHouse/seldon/commit/3d85ad008a5e21420a52fc462643af9d9ab4e485))
+- updating changelog ([5431006](https://github.com/PhillipsAuctionHouse/seldon/commit/54310063e3866c0813df9e3c733a3ee573a1a2bf))
+
+# [1.13.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.12.0...v1.13.0) (2024-03-20)
+
+### Features
+
+- alphabetizing interface in ViewingsListCardForm ([31cb8ff](https://github.com/PhillipsAuctionHouse/seldon/commit/31cb8ff82868ac25a1dc9a7eb7716562b31d2c22))
+- filling out missing email fields from previous edits ([4ead7fd](https://github.com/PhillipsAuctionHouse/seldon/commit/4ead7fd54034bc5f6a50df234abeff2384f444d0))
+- fixing missing usage, making tests pass ([ad5064f](https://github.com/PhillipsAuctionHouse/seldon/commit/ad5064f09baf953c437a025565383a56d5aaf415))
+- updating Changelog ([28c2f10](https://github.com/PhillipsAuctionHouse/seldon/commit/28c2f10f9bd4798da86cce440e184b8d0e11b50c))
+- updating Changelog ([fa41bcc](https://github.com/PhillipsAuctionHouse/seldon/commit/fa41bcc66ba5286d27b049a0103562fb450c42ea))
+- updating Changelog ([6799bae](https://github.com/PhillipsAuctionHouse/seldon/commit/6799baeb87129caf2d0833cdfa463ba0aaa8cd24))
+
 # [1.12.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.11.0...v1.12.0) (2024-03-14)
 
 ### Features

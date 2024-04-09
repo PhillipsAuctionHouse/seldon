@@ -1,28 +1,86 @@
 @use 'scss/reset';
+@use 'scss/vars' as *;
+@use 'scss/type' as *;
 @use 'scss/typography';
 @use 'design/colors-tokens/color-card';
+@use 'design/type-tokens/text-showcase';
+@use 'design/spacing-tokens/spacing-tokens';
+@use 'design/grid-tokens/grid-tokens';
+@use 'components/DatePicker/datePicker';
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,500;0,600;0,700;1,400&display=swap');
 
-body {
-  font-family:
-    'Montserrat',
-    SeroWebPro,
-    'Helvetica Neue',
-    Helvetica,
-    -apple-system,
-    '.SFNSText-Regular',
-    'San Francisco',
-    BlinkMacSystemFont,
-    'Segoe UI',
-    'Helvetica Neue',
-    Helvetica,
-    Arial,
-    sans-serif;
-  font-size: 16px;
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-overflow-scrolling: touch;
+// Design markdown styles
+.h1 {
+  @include hText($heading-size1, null, uppercase);
+  display: flex;
+  margin-bottom: 1.5rem;
+
+  & img {
+    margin-left: 1rem;
+    transform: translateY(-0.25rem);
+  }
+}
+
+.h2 {
+  @include hText($heading-size2);
+  color: $clock-widget-blue;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.h3 {
+  @include hText($heading-size3);
+  display: block;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.h4 {
+  @include pText($body-size2);
+  // color: $clock-widget-green;
+  display: block;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.p {
+  @include pText($body-size2);
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+details {
+  margin: 1rem 0;
+  padding-inline-start: 1.75rem;
+
+  summary {
+    color: $keyline-gray;
+    @include labelText($cta-sm);
+  }
+}
+
+.tip {
+  display: inline-block;
+  border-radius: 1em;
+  font-size: 11px;
+  line-height: 12px;
+  font-weight: 700;
+  background: #e7fdd8;
+  color: #66bf3c;
+  padding: 4px 12px;
+  margin-right: 10px;
+  vertical-align: top;
+}
+
+.tip-wrapper {
+  font-size: 13px;
+  line-height: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.tip-wrapper code {
+  font-size: 12px;
+  display: inline-block;
 }

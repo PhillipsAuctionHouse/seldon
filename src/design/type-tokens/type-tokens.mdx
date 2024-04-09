@@ -1,0 +1,477 @@
+import { Meta, Source } from '@storybook/blocks';
+import Comments from '../assets/comments.svg';
+
+<Meta title="Design/Type Tokens" />
+
+<main className="sb-unstyled">
+<h1 className="h1">Typescale, Tokens, and Mixins<img src={Comments} alt="Text" /></h1>
+
+<span className="p">
+  The Easel design system's default type scale is based on the Major-Third approach, measured in `rem`. Each `rem` being
+  equal to `16px`. In typography, a major third refers to a difference in font size of `1.250rem`.
+</span>
+<span className="p">
+We have 3
+Classifications of Text Styling: Display, Heading and Body (Labels are a sub-set of Body). Each classification has a
+set of tokens that are used to style the text. These tokens are used in conjunction with our Mixins to create a
+consistent and scalable design system.
+
+</span>
+
+## <span className="h2">Font Tokens</span>
+
+### <span className="h3">Display</span>
+
+<span className="p">
+  This styling utilizes Distinct Display in Upper Case. Typically these are used within{' '}
+  <strong>Banners, Cards & Interstitials</strong>
+  for brand/Auction titling. There are five sizes in this scale:
+</span>
+<h4 className="h4">
+  Display 0: <span className="token">`$display0`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 3.25rem; <span className="property">
+  line-height:
+    </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
+text-transform:
+</span> uppercase;
+- **BP1**: <span className="property">font-size:</span> 2.59rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 4.06rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($display0);
+```
+
+  <span className="example example--d0">example</span>
+</details>
+
+<h4 className="h4">
+  Display 1: <span className="token">`$display1`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 2.44rem; <span className="property">
+  line-height:
+  </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
+  text-transform:
+  </span> uppercase;
+- **BP1**: <span className="property">font-size:</span> 1.83rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 3.05rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($display1);
+```
+
+  <span className="example example--d1">example</span>
+</details>
+
+<h4 className="h4">
+  Display 2: <span className="token">`$display2`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 1.95rem; <span className="property">
+  line-height:
+  </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
+  text-transform:
+  </span> uppercase;
+- **BP1**: <span className="property">font-size:</span> 1.46rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 2.44rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($display2);
+```
+
+  <span className="example example--d2">example</span>
+</details>
+
+<h4 className="h4">
+  Display 3: <span className="token">`$display3`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 1.56rem; <span className="property">
+  line-height:
+  </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
+  text-transform:
+  </span> uppercase;
+- **BP1**: <span className="property">font-size:</span> 1.17rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 1.95rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($display3);
+```
+
+  <span className="example example--d3">example</span>
+</details>
+
+<h4 id="display-size-4" className="h4">
+  Display 4: <span className="token">`$display4`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 1.56rem; <span className="property">
+  line-height:
+  </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
+  text-transform:
+  </span> uppercase;
+- **BP1**: <span className="property">font-size:</span> 0.94rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 1.56rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($display4);
+```
+
+  <span className="example example--d4">example</span>
+</details>
+
+## <span className="h3">Heading</span>
+
+<span className="p">
+  This styling utilizes Distinct Display in title case. Typically used within <strong>layouts</strong> for hierarchy
+  flow; also used within <strong>Cards</strong> & <strong>Interstitials</strong>. There are four sizes in this scale:
+</span>
+
+<h4 className="h4">
+  header 1: <span className="token">`$header1`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 2.44rem; <span className="property">
+  line-height:
+  </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
+  text-transform:
+  </span> uppercase;
+- **BP1**: <span className="property">font-size:</span> 1.83rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 3.05rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($header1);
+```
+
+  <span className="example example--h1">example</span>
+</details>
+
+<h4 className="h4">
+  header 2: <span className="token">`$header2`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 1.95rem; <span className="property">
+  line-height:
+  </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
+  text-transform:
+  </span> uppercase;
+- **BP1**: <span className="property">font-size:</span> 1.46rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 2.44rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($header2);
+```
+
+  <span className="example example--h2">example</span>
+</details>
+
+<h4 className="h4">
+  header 3: <span className="token">`$header3`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 1.56rem; <span className="property">
+  line-height:
+  </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
+  text-transform:
+  </span> uppercase;
+- **BP1**: <span className="property">font-size:</span> 1.17rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 1.95rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($header3);
+```
+
+  <span className="example example--h3">example</span>
+</details>
+
+<h4 id="header-size-4" className="h4">
+  header 4: <span className="token">`$header4`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 1.56rem; <span className="property">
+  line-height:
+  </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
+  text-transform:
+  </span> uppercase;
+- **BP1**: <span className="property">font-size:</span> 0.94rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 1.56rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($header4);
+```
+
+  <span className="example example--h4">example</span>
+</details>
+
+## <span className="h3">Body</span>
+
+<span className="p">
+  This styling utilizes Montserrat Reg & Semibold in Sentence Case. Typically used within <strong>layouts</strong> for
+  text-body blocks; also used for text strings in <strong>lists</strong> and <strong>tables</strong>. There are three
+  sizes in this scale:
+</span>
+
+<h4 className="h4">
+  Body 1: <span className="token">`$body1`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 1.25rem; <span className="property">
+  line-height:
+  </span> 1.5; <span className="property">font-weight:</span> 400 or 600;
+- **BP1**: <span className="property">font-size:</span> 0.94rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 1.56rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($body);
+```
+
+  <span className="example example--p1">example</span>
+</details>
+
+<h4 className="h4">
+  body 2: <span className="token">`$body2`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 1.00rem; <span className="property">
+  line-height:
+  </span> 1.5; <span className="property">font-weight:</span> 400 or 600;
+- **BP1**: <span className="property">font-size:</span> 0.75rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 1.25rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($body2);
+```
+
+  <span className="example example--p2">example</span>
+</details>
+
+<h4 className="h4">
+  body 3: <span className="token">`$body3`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 0.75rem; <span className="property">
+  line-height:
+  </span> 1.5; <span className="property">font-weight:</span> 400 or 600;
+- **BP1**: <span className="property">font-size:</span> 0.56rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 0.94rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($body3);
+```
+
+  <span className="example example--p3">example</span>
+</details>
+
+## <span className="h3">Labels</span>
+
+<span className="p">
+  This styling utilizes a subset of Montserrat, Medium, Semibold, Bold. Specifically used for purposeful labels across
+  UI and Content needs. There are six variations in this scale:
+</span>
+
+<h4 className="h4">
+  button: <span className="token">`$button`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 1.00rem; <span className="property">
+  line-height:
+  </span> auto; <span className="property">letter-spacing:</span> 1px; <span className="property">font-weight:</span> 500; <span className="property">text-transform:</span> capitalize;
+- **BP1**: <span className="property">font-size:</span> 0.75rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 1.25rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($button);
+```
+
+  <span className="example example--button">example</span>
+</details>
+
+<h4 className="h4">
+  CTA Small: <span className="token">`$cta-sm`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 1.00rem; <span className="property">
+  line-height:
+  </span> 1.25; <span className="property">letter-spacing:</span> 1px; <span className="property">font-weight:</span> 600; <span className="property">text-transform:</span> uppercase;
+- **BP1**: <span className="property">font-size:</span> 0.75rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 1.25rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($cta-sm);
+```
+
+  <span className="example example--cta-sm">example</span>
+</details>
+
+<h4 className="h4">
+  CTA Large: <span className="token">`$cta-lg`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 1.25rem; <span className="property">
+  line-height:
+  </span> 1.25; <span className="property">letter-spacing:</span> 2px; <span className="property">font-weight:</span> 700; <span className="property">text-transform:</span> uppercase;
+- **BP1**: <span className="property">font-size:</span> 1.00rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 1.56rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($cta-lg);
+```
+
+  <span className="example example--cta-lg">example</span>
+</details>
+
+<h4 className="h4">
+  Email: <span className="token">`$email`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 1.00rem; <span className="property">
+  line-height:
+  </span> 1.25; <span className="property">letter-spacing:</span> 1px; <span className="property">font-weight:</span> 600; <span className="property">text-transform:</span> lowercase;
+- **BP1**: <span className="property">font-size:</span> 0.75rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 1.25rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($email);
+```
+
+  <span className="example example--email">JDoe@Phillips.com</span>
+</details>
+
+<h4 className="h4">
+  Text: <span className="token">`$text`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 0.75rem; <span className="property">
+  line-height:
+  </span> 1.25; <span className="property">letter-spacing:</span> 1px; <span className="property">font-weight:</span> 700;
+- **BP1**: <span className="property">font-size:</span> 0.56rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 1.00rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($text);
+```
+
+  <span className="example example--text">example</span>
+</details>
+
+<h4 className="h4">
+  Text Badge: <span className="token">`$text-badge`</span>
+</h4>
+
+- **Default**: <span className="property">font-size:</span> 0.75rem; <span className="property">
+  line-height:
+  </span> 1.25; <span className="property">letter-spacing:</span> 3px; <span className="property">font-weight:</span> 500; <span className="property">text-transform:</span> uppercase;
+- **BP1**: <span className="property">font-size:</span> 0.56rem;
+- **BP4**: <span className="property">
+  font-size:
+  </span> 1.00rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($text-badge);
+```
+
+  <span className="example example--text-badge">example</span>
+</details>
+
+### <span className="h2">Using the tokens</span>
+
+Use the above tokens along with the `text` mixin to apply the display text styling to an element. The text mixin is found in the `_type.scss` partial file.
+
+<Source code={`
+.pah-card__title {
+  @include text($display0);
+}
+
+`} dark language="scss" />
+
+</main>

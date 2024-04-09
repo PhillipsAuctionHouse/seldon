@@ -36,3 +36,36 @@
   text-align: center;
   line-height: 1;
 }
+
+@mixin grid($columns: 2) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $spacing-medium;
+}
+
+@mixin gridContainer($margins-on: true) {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-medium;
+
+  @if $margins-on {
+    margin: 0 $spacing-medium;
+  }
+
+  @media (min-width: $breakpoint2) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (min-width: $breakpoint3) {
+    grid-template-columns: repeat(12, 1fr);
+    @if $margins-on {
+      margin: 0 $spacing-large;
+    }
+  }
+
+  @media (min-width: $breakpoint4) {
+    @if $margins-on {
+      margin: 0 $spacing-xl;
+    }
+  }
+}
