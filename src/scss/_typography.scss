@@ -71,7 +71,6 @@ body {
   @include DistinctDisplay();
   color: $primary-black;
   font-weight: 400;
-  font-style: italic;
 }
 
 @mixin bodyText {

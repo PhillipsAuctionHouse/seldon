@@ -108,7 +108,7 @@ DateTimeInput.args = {
 };
 
 export const RadioInput = ({ playgroundWidth, ...args }: StoryProps) => (
-  <div style={{ width: playgroundWidth, backgroundColor: '#dddddd', margin: '1rem' }}>
+  <div style={{ width: playgroundWidth, margin: '1rem' }}>
     <Input
       key={args.defaultValue}
       {...args}

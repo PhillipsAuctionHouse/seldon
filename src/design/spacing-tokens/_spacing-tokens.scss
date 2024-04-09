@@ -1,8 +1,6 @@
 @use '../../scss/vars' as *;
 
 .example {
-  text-align: left;
-
   &--spacing-micro {
     border: $spacing-micro solid $primary-black;
     padding: $spacing-micro;
@@ -46,6 +44,7 @@
   border: 1px solid $keyline-gray;
   border-collapse: collapse;
   margin-bottom: $spacing-medium;
+  width: 100%;
 
   th {
     background-color: $light-gray;
