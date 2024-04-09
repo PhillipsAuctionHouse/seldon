@@ -1,6 +1,6 @@
 **Jira ticket**
 
-Paste link to Jira ticket
+[Jira Ticket ID](https://phillipsauctions.atlassian.net/browse/TICKET-ID)
 
 **Screenshots**
 | Before | After |
@@ -9,19 +9,23 @@ Paste link to Jira ticket
 
 **Summary**
 
-- summary_here
+- High-level overview of the changes that were made and explanation of WHY they were made
 
 **Change List (describe the changes made to the files)**
 
-- items_here
+- Addtions, Changes, and Removals
 
 **Acceptance Test (how to verify the PR)**
 
-- tests here
+- Add step by step instructions on how to verify the change
 
-**Regression Test (how to make sure this PR doesn't break old functionality)**
+**Regression Test**
 
-- tests here
+- (Optional) Add verification steps to make sure this PR doesn't break old functionality
+
+**Evidence of testing**
+
+- Post logs, screenshots, etc
 
 <!-- For reviewers: do not remove -->
 
