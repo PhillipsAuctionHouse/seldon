@@ -1,0 +1,114 @@
+import { Meta } from '@storybook/blocks';
+import StackAlt from '../assets/stackalt.svg';
+
+<Meta title="Design/Spacing Tokens" />
+
+<main className="sb-unstyled">
+<h1 className="h1">Spacing<img src={StackAlt} alt="Text" /></h1>
+
+<span className="p">
+  Our default spacing conventions are based off of 16px. This is the base unit of measurement for all spacing, generally
+  scales in half or doubling in size of small & large breakpoints. We have 3 Classifications of Spacing: Padding,
+  Margins and Grid. Each classification utilizes these six spacing tokens.
+</span>
+
+## <span className="h2">Spacing Tokens</span>
+
+<table className="token-table">
+  <thead>
+    <tr>
+      <th>Token</th>
+      <th>Value</th>
+      <th>BP1</th>
+      <th>BP4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <span className="token">`$spacing-micro`</span>
+      </td>
+      <td>
+        <span className="property">0.25rem</span>
+      </td>
+      <td>
+        <span className="property">0.19rem</span>
+      </td>
+      <td>
+        <span className="property">0.31rem</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span className="token">`$spacing-xsm`</span>
+      </td>
+      <td>
+        <span className="property">0.5rem</span>
+      </td>
+      <td>
+        <span className="property">0.38rem</span>
+      </td>
+      <td>
+        <span className="property">0.63rem</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span className="token">`$spacing-small`</span>
+      </td>
+      <td>
+        <span className="property">1rem</span>
+      </td>
+      <td>
+        <span className="property">0.75rem</span>
+      </td>
+      <td>
+        <span className="property">1.25rem</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span className="token">`$spacing-medium`</span>
+      </td>
+      <td>
+        <span className="property">2rem</span>
+      </td>
+      <td>
+        <span className="property">1.5rem</span>
+      </td>
+      <td>
+        <span className="property">2.5rem</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span className="token">`$spacing-large`</span>
+      </td>
+      <td>
+        <span className="property">4rem</span>
+      </td>
+      <td>
+        <span className="property">3rem</span>
+      </td>
+      <td>
+        <span className="property">5rem</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span className="token">`$spacing-xlg`</span>
+      </td>
+      <td>
+        <span className="property">8rem</span>
+      </td>
+      <td>
+        <span className="property">6rem</span>
+      </td>
+      <td>
+        <span className="property">10rem</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</main>
