@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/blocks';
+import { Meta, Source } from '@storybook/blocks';
 import Comments from '../assets/comments.svg';
 
 <Meta title="Design/Type Tokens" />
@@ -18,9 +18,9 @@ consistent and scalable design system.
 
 </span>
 
-### <span className="h2">Font Tokens</span>
+## <span className="h2">Font Tokens</span>
 
-## <span className="h3">Display</span>
+### <span className="h3">Display</span>
 
 <span className="p">
   This styling utilizes Distinct Display in Upper Case. Typically these are used within{' '}
@@ -33,9 +33,9 @@ consistent and scalable design system.
 
 - **Default**: <span className="property">font-size:</span> 3.25rem; <span className="property">
   line-height:
-  </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
-  text-transform:
-  </span> uppercase;
+    </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
+text-transform:
+</span> uppercase;
 - **BP1**: <span className="property">font-size:</span> 2.59rem;
 - **BP4**: <span className="property">
   font-size:
@@ -58,8 +58,8 @@ consistent and scalable design system.
 - **Default**: <span className="property">font-size:</span> 2.44rem; <span className="property">
   line-height:
   </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
-text-transform:
-</span> uppercase;
+  text-transform:
+  </span> uppercase;
 - **BP1**: <span className="property">font-size:</span> 1.83rem;
 - **BP4**: <span className="property">
   font-size:
@@ -82,8 +82,8 @@ text-transform:
 - **Default**: <span className="property">font-size:</span> 1.95rem; <span className="property">
   line-height:
   </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
-text-transform:
-</span> uppercase;
+  text-transform:
+  </span> uppercase;
 - **BP1**: <span className="property">font-size:</span> 1.46rem;
 - **BP4**: <span className="property">
   font-size:
@@ -106,8 +106,8 @@ text-transform:
 - **Default**: <span className="property">font-size:</span> 1.56rem; <span className="property">
   line-height:
   </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
-text-transform:
-</span> uppercase;
+  text-transform:
+  </span> uppercase;
 - **BP1**: <span className="property">font-size:</span> 1.17rem;
 - **BP4**: <span className="property">
   font-size:
@@ -130,8 +130,8 @@ text-transform:
 - **Default**: <span className="property">font-size:</span> 1.56rem; <span className="property">
   line-height:
   </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
-text-transform:
-</span> uppercase;
+  text-transform:
+  </span> uppercase;
 - **BP1**: <span className="property">font-size:</span> 0.94rem;
 - **BP4**: <span className="property">
   font-size:
@@ -161,8 +161,8 @@ text-transform:
 - **Default**: <span className="property">font-size:</span> 2.44rem; <span className="property">
   line-height:
   </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
-text-transform:
-</span> uppercase;
+  text-transform:
+  </span> uppercase;
 - **BP1**: <span className="property">font-size:</span> 1.83rem;
 - **BP4**: <span className="property">
   font-size:
@@ -185,8 +185,8 @@ text-transform:
 - **Default**: <span className="property">font-size:</span> 1.95rem; <span className="property">
   line-height:
   </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
-text-transform:
-</span> uppercase;
+  text-transform:
+  </span> uppercase;
 - **BP1**: <span className="property">font-size:</span> 1.46rem;
 - **BP4**: <span className="property">
   font-size:
@@ -209,8 +209,8 @@ text-transform:
 - **Default**: <span className="property">font-size:</span> 1.56rem; <span className="property">
   line-height:
   </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
-text-transform:
-</span> uppercase;
+  text-transform:
+  </span> uppercase;
 - **BP1**: <span className="property">font-size:</span> 1.17rem;
 - **BP4**: <span className="property">
   font-size:
@@ -233,8 +233,8 @@ text-transform:
 - **Default**: <span className="property">font-size:</span> 1.56rem; <span className="property">
   line-height:
   </span> 1.25; <span className="property">font-weight:</span> 400; <span className="property">
-text-transform:
-</span> uppercase;
+  text-transform:
+  </span> uppercase;
 - **BP1**: <span className="property">font-size:</span> 0.94rem;
 - **BP4**: <span className="property">
   font-size:
@@ -467,10 +467,11 @@ text-transform:
 
 Use the above tokens along with the `text` mixin to apply the display text styling to an element. The text mixin is found in the `_type.scss` partial file.
 
-```scss
+<Source code={`
 .pah-card__title {
   @include text($display0);
 }
-```
+
+`} dark language="scss" />
 
 </main>

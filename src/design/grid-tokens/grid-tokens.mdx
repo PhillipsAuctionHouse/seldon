@@ -1,0 +1,127 @@
+import { Meta, Source } from '@storybook/blocks';
+import Grid from '../../components/Grid/Grid';
+
+<Meta title="Design/Grid Tokens" />
+
+<main className="sb-unstyled">
+<h1 className="h1">Grids</h1>
+
+<span className="p">
+  Our grid system is based on a 12 column layout that transitions down to 4 and 2 columns over a series of four
+  breakpoints. These breakpoints have been-stress tested to produce a streamlined scale that targets the primary devices
+  our clients are using. There are 4 breakpoints we are confident cover a bevy of devices:
+</span>
+
+<Grid hasMargins={false}>
+  <div className="grid-example"></div>
+  <div className="grid-example"></div>
+  <div className="grid-example"></div>
+  <div className="grid-example"></div>
+  <div className="grid-example"></div>
+  <div className="grid-example"></div>
+  <div className="grid-example"></div>
+  <div className="grid-example"></div>
+  <div className="grid-example"></div>
+  <div className="grid-example"></div>
+  <div className="grid-example"></div>
+  <div className="grid-example"></div>
+
+</Grid>
+
+## <span className="h2">Breakpoints, Columns, & Gutters</span>
+
+<table className="token-table">
+  <thead>
+    <tr>
+      <th>Breakpoint</th>
+      <th>Screen Size</th>
+      <th>Columns</th>
+      <th>Gutter</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <span className="token">`$breakpoint1` - Mobile</span>
+      </td>
+      <td>
+        <span className="property">360 - 960px</span>
+      </td>
+      <td>
+        <span className="property">2</span>
+      </td>
+      <td>
+        <span className="property">`$spacing-medium`(`1.5rem`)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span className="token">`$breakpoint2` - Tablet</span>
+      </td>
+      <td>
+        <span className="property">961 - 1400px</span>
+      </td>
+      <td>
+        <span className="property">4</span>
+      </td>
+      <td>
+        <span className="property">`$spacing-medium`(`2rem`)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span className="token">`$breakpoint3` - Desktop</span>
+      </td>
+      <td>
+        <span className="property">1401 - 1800px</span>
+      </td>
+      <td>
+        <span className="property">12</span>
+      </td>
+      <td>
+        <span className="property">`$spacing-medium`(`2rem`)</span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span className="token">`$breakpoint4` - XL Display</span>
+      </td>
+      <td>
+        <span className="property">1801 - 2560px</span>
+      </td>
+      <td>
+        <span className="property">12</span>
+      </td>
+      <td>
+        <span className="property">`$spacing-medium`(`2.5rem`)</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## <span className="h2">Grid Mixins</span>
+
+<span className="p">
+  There are two mixins that are used to create the grid system. The first is the `gridContainer` mixin which is used to implement the grid system outlined above. There is an optional argument that you can pass this mixin to remove the default margins set on all grids. The [`Grid` component](?path=/story/components-grid--playground), which utilizes this mixin, should be used to layout your sections.
+
+<Source code={`@include gridContainer;`} dark language="scss" />
+
+</span>
+
+<span className="p">
+  The other is a general grid mixin helper. You can use this mixin to define any grid you want by passing in the number of columns you want to span. When applied to an element this mixin turns the display to grid, sets the grid template columns to the number of columns you want to span, and sets the gap between the columns to the gutter size.
+
+<Source code={`
+@include grid(6);
+
+// This will return the following styles
+
+display: grid;
+grid-template-columns: repeat(6, 1fr);
+gap: $spacing-medium;
+
+`} dark language="scss" />
+
+</span>
+
+</main>

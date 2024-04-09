@@ -1,0 +1,20 @@
+@import '../../vars';
+@import '../../_utils';
+
+.#{$px}-grid {
+  &__container {
+    @include gridContainer(false);
+  }
+
+  &__container--has-margins {
+    margin: 0 $spacing-medium;
+
+    @media (min-width: 1401px) {
+      margin: 0 $spacing-large;
+    }
+
+    @media (min-width: 1801px) {
+      margin: 0 $spacing-xl;
+    }
+  }
+}

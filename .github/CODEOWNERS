@@ -17,7 +17,7 @@
 # These users own any files in the following directory at the root of
 # the repository and any of its subdirectories.
 
-* @davidicus @Sisawat @adietrich3074
+* @davidicus @Sisawat @adietrich3074 @scottdickerson
 
 #####
 # Admin should be notified of changes to build/test/deploy
