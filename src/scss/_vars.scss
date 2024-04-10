@@ -8,10 +8,11 @@ $px: phillips;
 // Primary color palette
 $pure-black: #000000;
 $primary-black: #323232;
-$pure-white: #ffffff;
+$white: #ffffff;
+
 // Secondary color palette
 $soft-black: #545454;
-$dark-gray: #75715f;
+$dark-gray: #7b7474;
 // Utilititarian color palette
 $keyline-gray: #949494;
 $medium-gray: #c3bebb;
@@ -21,15 +22,25 @@ $off-white: #f4f2f1;
 $error-red: #ff0000;
 $error-pink: rgba(255, 229, 229, 0.9);
 $warn-yellow: #d6d141;
-$post-sale-magenta: #ff0085;
-$clock-widget-blue: #4a90e2;
-$clock-widget-green: #6a9c53;
-$clock-widget-maroon: #6b0000;
-$clock-widget-red: #b00000;
+$post-sale-pink: #ff0086;
+$cta-blue: #4a90e2;
+// AM color palette
+$widget-blue: #4a90e2;
+$widget-green: #6a9c53;
+$widget-maroon: #6b0000;
+$widget-red: #b00000;
+$clock-widget-blue: $widget-blue;
+$clock-widget-green: $widget-green;
+$clock-widget-maroon: $widget-maroon;
+$clock-widget-red: $widget-red;
 // Articker color palette
 $articker-red: #fc1e2b;
 $articker-orange: #ff8201;
 $articker-red-orange-gradient: linear-gradient(90deg, #fc1e2b, #ff8201);
+// Legacy mapping
+$pure-white: $white;
+$post-sale-magenta: $post-sale-pink;
+
 // Text variables
 $header-color: $pure-black;
 $text-color: $soft-black;

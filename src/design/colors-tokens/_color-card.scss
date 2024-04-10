@@ -58,7 +58,7 @@
     opacity: 0;
     position: absolute;
     top: 2.5rem;
-    transform: translateX(-55%);
+    transform: translateX(-50%);
     white-space: nowrap;
 
     &--light {
@@ -79,14 +79,14 @@
 @keyframes show-and-hide {
   0% {
     opacity: 0;
-    transform: translate(-55%, 0.75rem);
+    transform: translate(-50%, 0.75rem);
   }
   50% {
     opacity: 1;
-    transform: translate(-55%, 0);
+    transform: translate(-50%, 0);
   }
   100% {
     opacity: 0;
-    transform: translate(-55%, 0);
+    transform: translate(-50%, 0);
   }
 }
