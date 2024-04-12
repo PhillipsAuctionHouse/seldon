@@ -1,6 +1,6 @@
 @import 'flatpickr/dist/flatpickr.css';
-@import '../../vars';
-@import '../../typography';
+@import '#scss/vars';
+@import '#scss/typography';
 
 .flatpickr-calendar {
   @include DistinctText;

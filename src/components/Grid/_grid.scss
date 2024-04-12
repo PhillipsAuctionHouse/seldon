@@ -1,5 +1,5 @@
-@import '../../vars';
-@import '../../_utils';
+@import '#scss/vars';
+@import '#scss/utils';
 
 .#{$px}-grid {
   &__container {

@@ -1,6 +1,7 @@
-@import '../../vars';
-@import '../../_utils';
-@import '../../typography';
+@import '#scss/vars';
+@import '#scss/utils';
+@import '#scss/type';
+@import '#scss/typography';
 
 .#{$px}-subscribe {
   display: grid;
@@ -11,6 +12,11 @@
     font-size: 1.25rem;
     line-height: 1.2;
     margin-bottom: 0.31rem;
+    text-align: center;
+  }
+
+  &__blurb {
+    @include text($body3);
     text-align: center;
   }
 

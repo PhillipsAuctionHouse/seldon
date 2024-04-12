@@ -71,7 +71,7 @@
     "prettier": "3.0.3",
     "prop-types": "^15.8.1",
     "rimraf": "^5.0.1",
-    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "sass": "^1.63.4",
     "semantic-release": "^21.0.5",
@@ -81,7 +81,8 @@
     "typescript": "^5.0.2",
     "vite": "^4.3.9",
     "vite-plugin-dts": "^2.3.0",
-    "vite-plugin-svgr": "^4.1.0"
+    "vite-plugin-svgr": "^4.1.0",
+    "vite-tsconfig-paths": "^4.3.2"
   },
   "peerDependencies": {
     "react": "^18.2.0",

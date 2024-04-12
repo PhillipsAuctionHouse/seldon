@@ -1,10 +1,15 @@
-@import '../../vars';
-@import '../../_utils';
-@import '../../typography';
+@import '#scss/vars';
+@import '#scss/utils';
+@import '#scss/typography';
 
 .#{$px}-footer {
   display: flex;
   flex-direction: column;
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
 
   // @TODO: Extract into a navigation partial when header is being worked on
   &__navigation {
