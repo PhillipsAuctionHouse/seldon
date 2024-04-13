@@ -2,6 +2,7 @@
 @import '#scss/type';
 
 // Grid story styles
+.doc-wrapper {
 .phillips-grid__container {
   margin-bottom: $spacing-medium;
   margin-top: $spacing-medium;
@@ -192,4 +193,6 @@
   h1 {
     transform: translateY(-0.25rem);
   }
+}
+
 }

@@ -1,5 +1,6 @@
 @import '#scss/vars';
 
+.doc-wrapper {
 .#{$px}-color-card {
   background: $pure-white;
   border: 1px solid $primary-black;
@@ -89,4 +90,5 @@
     opacity: 0;
     transform: translate(-55%, 0);
   }
+}
 }

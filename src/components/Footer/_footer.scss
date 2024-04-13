@@ -1,8 +1,11 @@
 @import '#scss/vars';
 @import '#scss/utils';
+@import '#scss/type';
 @import '#scss/typography';
 
 .#{$px}-footer {
+  background-color: $off-white;
+  border: 1px solid $keyline-gray;
   display: flex;
   flex-direction: column;
 
@@ -13,6 +16,7 @@
 
   // @TODO: Extract into a navigation partial when header is being worked on
   &__navigation {
+    background-color: $white;
     padding: 1rem;
 
     ul {
@@ -20,24 +24,72 @@
       padding: 0;
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem 1.875rem;
+      gap: 0 1.875rem;
       justify-content: center;
     }
 
     a {
-      font-size: 0.875rem;
-      font-weight: 400;
-      text-transform: uppercase;
+      @include text('cta-sm');
+      cursor: pointer;
+      // font-size: 0.875rem;
+      // font-weight: 400;
+      // text-transform: uppercase;
     }
   }
 
   &__content {
-    background-color: $off-white;
-    padding: 3.75rem 1rem;
+    // align-items: center;
+    // display: flex;
+    // flex-direction: column;
+    padding: 3.75rem $spacing-medium;
+    place-content: center;
+
+    @include media('md') {
+      padding: 3.75rem $spacing-large;
+    }
+
+    @include media('lg') {
+      padding: 3.75rem $spacing-xl;
+    }
+
+    @include media('sm') {
+      // align-items: flex-start;
+      // flex-direction: row;
+      // justify-content: space-between;
+      // padding: 3.75rem 1rem;
+    }
+  }
+
+  &__newsletter {
+    grid-column: 1 / -1;
+    margin-bottom: 1.88rem;
+  }
+
+  &__social {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    grid-column: 1 / -1;
+    margin-bottom: 1.88rem;
+
+    h3 {
+      @include text('heading3');
+      margin-bottom: 1.88rem;
+    }
+
+    ul {
+      display: flex;
+      gap: 0 1.25rem;
+    }
+
+    a {
+      display: inline-block;
+    }
   }
 
   &__copyright {
     align-items: center;
+    background-color: $white;
     display: flex;
     font-size: 0.875rem;
     font-weight: 400;

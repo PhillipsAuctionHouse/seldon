@@ -1,5 +1,6 @@
 @import '#scss/vars';
 
+.doc-wrapper {
 .example {
   &--spacing-micro {
     border: $spacing-micro solid $primary-black;
@@ -79,4 +80,5 @@
     width: 50%;
     display: block;
   }
+}
 }

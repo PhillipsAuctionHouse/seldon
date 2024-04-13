@@ -6,11 +6,13 @@
 .#{$px}-subscribe {
   display: grid;
   place-content: center;
+  max-width: 460px;
 
   &__title {
-    @include headerText;
-    font-size: 1.25rem;
-    line-height: 1.2;
+    // @include headerText;
+    // font-size: 1.25rem;
+    // line-height: 1.2;
+    @include text($heading3);
     margin-bottom: 0.31rem;
     text-align: center;
   }
@@ -21,8 +23,12 @@
   }
 
   &__blurb,
-  &__button,
   .#{$px}-input__input {
     margin-bottom: 1.88rem;
+  }
+
+  &__button {
+    margin: 0 auto 1.88rem;
+    max-width: 7rem;
   }
 }

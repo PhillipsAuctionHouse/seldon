@@ -2,6 +2,11 @@ import type { Meta } from '@storybook/react';
 
 import Footer, { FooterProps } from './Footer';
 
+import Youtube from '../../assets/youtube.svg?react';
+import Instagram from '../../assets/instagram.svg?react';
+import Wechat from '../../assets/wechat.svg?react';
+import Spotify from '../../assets/spotify.svg?react';
+
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
   title: 'Components/Footer',
@@ -45,8 +50,34 @@ const navigation = (
   </ul>
 );
 
+const socialIcons = (
+  <ul>
+    <li>
+      <a>
+        <Youtube />
+      </a>
+    </li>
+    <li>
+      <a>
+        <Instagram />
+      </a>
+    </li>
+    <li>
+      <a>
+        <Wechat />
+      </a>
+    </li>
+    <li>
+      <a>
+        <Spotify />
+      </a>
+    </li>
+  </ul>
+);
+
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
   copyright: '© 2024 Phillips Auctioneers, LLC',
   navigation,
+  socialIcons,
 };
