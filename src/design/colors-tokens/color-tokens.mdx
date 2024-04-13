@@ -26,8 +26,8 @@ import ColorCard from './ColorCard';
 
 <div className="color__list">
   <ColorCard label="Pure Black" hex="#000000" usage="BG Fills, Logo, Wordmarks" />
-  <ColorCard label="Primary Black" hex="#323232" usage="Headers, Buttons' Fill & Stroke" />
-  <ColorCard label="Pure White" hex="#ffffff" usage="Negative Space, Text on Dark BG" />
+  <ColorCard label="Primary Black" hex="#323232" usage="Headers & Display Copy" />
+  <ColorCard label="White" hex="#ffffff" usage="Negative Space, Text on Dark BG" />
 </div>
 
 ## <span className="h2">Secondary Color Palette</span>
@@ -39,8 +39,8 @@ import ColorCard from './ColorCard';
 </span>
 
 <div className="color__list">
-  <ColorCard label="Soft Black" hex="#545454" usage="body/Text Blocks" />
-  <ColorCard label="Dark Gray" hex="#75716f" usage="Labels & Badges" />
+  <ColorCard label="Soft Black" hex="#545454" usage="Body/Text Blocks" />
+  <ColorCard label="Dark Gray" hex="#7b7474" usage="Labels & Badges" />
 </div>
 
 ## <span className="h2">Utilitarian Color Palette</span>
@@ -52,8 +52,8 @@ import ColorCard from './ColorCard';
 </span>
 
 <div className="color__list">
-  <ColorCard label="Keyline Gray" hex="#949494" usage="All keylines, strokes, and HRs" />
-  <ColorCard label="Medium Gray" hex="#c3bebb" usage="Disabled/Inactive Buttons" />
+  <ColorCard label="Keyline Gray" hex="#949494" usage="Keylines, strokes, and HRs" />
+  <ColorCard label="Medium Gray" hex="#c3bebb" usage="Disabled/inactive buttons" />
   <ColorCard label="Light Gray" hex="#eceae7" usage="BG fills" />
   <ColorCard label="Off White" hex="#f4f2f1" usage="BG fills" />
 </div>
@@ -70,36 +70,18 @@ import ColorCard from './ColorCard';
 
 <div className="color__list">
 
-  <ColorCard
-    label="Error Red"
-    hex="#ff0000"
-    usage="Error Messaging"
-  />
-  <ColorCard
-    label="Post-Sale Magenta"
-    hex="#ff0086"
-    usage="Sold Price, Concluded Labels"
-  />
-  <ColorCard
-    label="Color Widget Blue"
-    hex="#4a90e2"
-    usage="'Bid is with you'"
-  />
-  <ColorCard
-    label="Clock Widget Green"
-    hex="#6a9c53"
-    usage="'Live'"
-  />
-  <ColorCard
-    label="Clock Widget Maroon"
-    hex="#6b0000"
-    usage="'Countdown"
-  />
-  <ColorCard
-    label="Clock Widget Red"
-    hex="#b00000"
-    usage="'Closing' 'You've Been Outbid'"
-  />
+{' '}
+
+<ColorCard label="Error Red" hex="#ff0000" usage="Error Messaging" />
+<ColorCard label="Post-Sale Pink" hex="#ff0086" usage="Sold Price, Concluded Labels" />
+
+</div>
+<h3 className="h3">AM color palette</h3>
+<div className="color__list">
+  <ColorCard label="Widget Blue" hex="#4a90e2" usage="‘Bid is with You’" />
+  <ColorCard label="Widget Green" hex="#6a9c53" usage="'Live'" />
+  <ColorCard label="Widget Maroon" hex="#6b0000" usage="'Countdown" />
+  <ColorCard label="Widget Red" hex="#b00000" usage="'Closing' 'You've Been Outbid'" />
 </div>
 
 ## <span className="h2">CTA and Hover</span>
