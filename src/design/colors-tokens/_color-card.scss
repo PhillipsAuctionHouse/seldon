@@ -1,94 +1,94 @@
 @import '#scss/vars';
 
 .doc-wrapper {
-.#{$px}-color-card {
-  background: $pure-white;
-  border: 1px solid $primary-black;
-  color: $dark-gray;
-  display: flex;
-  flex-direction: column;
-  min-height: 13rem;
-  padding: 7rem 1rem 1rem;
-  position: relative;
-  text-align: left;
-  width: 100%;
-
-  &::before {
-    background: var(--hex-value);
-    border-bottom: 1px solid $primary-black;
-    content: '';
-    cursor: pointer;
-    height: 6rem;
-    position: absolute;
-    right: 0;
-    top: 0;
+  .#{$px}-color-card {
+    background: $pure-white;
+    border: 1px solid $primary-black;
+    color: $dark-gray;
+    display: flex;
+    flex-direction: column;
+    min-height: 13rem;
+    padding: 7rem 1rem 1rem;
+    position: relative;
+    text-align: left;
     width: 100%;
-  }
 
-  &__token.#{$px}-color-card__token {
-    color: $primary-black;
-    font-size: 1.25rem;
-    font-weight: 700;
-    line-height: 1.5;
-  }
+    &::before {
+      background: var(--hex-value);
+      border-bottom: 1px solid $primary-black;
+      content: '';
+      cursor: pointer;
+      height: 6rem;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100%;
+    }
 
-  &__hex.#{$px}-color-card__hex {
-    color: $soft-black;
-    font-size: 0.875rem;
-    margin-bottom: 1rem;
-    line-height: 1.25;
-    letter-spacing: 0.125rem;
-    text-transform: uppercase;
-  }
+    &__token.#{$px}-color-card__token {
+      color: $primary-black;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
 
-  &__usage {
-    line-height: 1.625;
-  }
+    &__hex.#{$px}-color-card__hex {
+      color: $soft-black;
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      line-height: 1.25;
+      letter-spacing: 0.125rem;
+      text-transform: uppercase;
+    }
 
-  &__usage span {
-    display: block;
-    font-weight: 700;
-    line-height: 1.625;
-  }
+    &__usage {
+      line-height: 1.625;
+    }
 
-  &__copied {
-    animation: show-and-hide 2s ease-in-out;
-    color: $pure-white;
-    font-weight: bold;
-    left: 50%;
-    opacity: 0;
-    position: absolute;
-    top: 2.5rem;
-    transform: translateX(-55%);
-    white-space: nowrap;
+    &__usage span {
+      display: block;
+      font-weight: 700;
+      line-height: 1.625;
+    }
 
-    &--light {
-      color: $pure-black;
+    &__copied {
+      animation: show-and-hide 2s ease-in-out;
+      color: $pure-white;
+      font-weight: bold;
+      left: 50%;
+      opacity: 0;
+      position: absolute;
+      top: 2.5rem;
+      transform: translateX(-55%);
+      white-space: nowrap;
+
+      &--light {
+        color: $pure-black;
+      }
     }
   }
-}
 
-.color__list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr;
-  grid-column-gap: 0.75rem;
-  grid-row-gap: 0.75rem;
-  margin-bottom: 4rem;
-}
+  .color__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0.75rem;
+    grid-row-gap: 0.75rem;
+    margin-bottom: 4rem;
+  }
 
-@keyframes show-and-hide {
-  0% {
-    opacity: 0;
-    transform: translate(-55%, 0.75rem);
+  @keyframes show-and-hide {
+    0% {
+      opacity: 0;
+      transform: translate(-55%, 0.75rem);
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-55%, 0);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-55%, 0);
+    }
   }
-  50% {
-    opacity: 1;
-    transform: translate(-55%, 0);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-55%, 0);
-  }
-}
 }
