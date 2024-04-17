@@ -208,6 +208,15 @@ const ViewingsListCardForm = ({
   return (
     <>
       <Input
+        id={`viewingLabel-${id}`}
+        name="viewingLabelValue"
+        defaultValue={viewingLabelValue}
+        labelText={viewingLabel}
+        size="sm"
+        invalid={invalidFields?.viewingLabelValue}
+        invalidText={invalidFields?.viewingLabelValue}
+      />
+      <Input
         id={`viewingDates-${id}`}
         name="viewingDates"
         defaultValue={viewingDates}
@@ -234,15 +243,6 @@ const ViewingsListCardForm = ({
         invalid={invalidFields?.viewingHours2}
         invalidText={invalidFields?.viewingHours2}
       />
-      <Input
-        id={`viewingLabel-${id}`}
-        name="viewingLabelValue"
-        defaultValue={viewingLabelValue}
-        labelText={viewingLabel}
-        size="sm"
-        invalid={invalidFields?.viewingLabelValue}
-        invalidText={invalidFields?.viewingLabelValue}
-      />
 
       <Input
         id={`previewOn-${id}`}
@@ -262,6 +262,16 @@ const ViewingsListCardForm = ({
       <div
         className={classnames(`${baseClass}__preview-set`, { [`${baseClass}__preview-set--hidden`]: !previewOnState })}
       >
+        <Input
+          id={`previewLabel-${id}`}
+          name="previewLabelValue"
+          defaultValue={previewLabelValue}
+          labelText={previewLabel}
+          size="sm"
+          invalid={invalidFields?.previewLabelValue}
+          invalidText={invalidFields?.previewLabelValue}
+          hidden={!previewOnState}
+        />
         <Input
           id={`previewDates-${id}`}
           name="previewDates"
@@ -290,16 +300,6 @@ const ViewingsListCardForm = ({
           size="sm"
           invalid={invalidFields?.previewHours2}
           invalidText={invalidFields?.previewHours2}
-          hidden={!previewOnState}
-        />
-        <Input
-          id={`previewLabel-${id}`}
-          name="previewLabelValue"
-          defaultValue={previewLabelValue}
-          labelText={previewLabel}
-          size="sm"
-          invalid={invalidFields?.previewLabelValue}
-          invalidText={invalidFields?.previewLabelValue}
           hidden={!previewOnState}
         />
       </div>
