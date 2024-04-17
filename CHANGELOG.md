@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.16.0...v1.17.0) (2024-04-17)
+
+
+### Features
+
+* moving label fields back to top ([fc22c7b](https://github.com/PhillipsAuctionHouse/seldon/commit/fc22c7b0a93b6a16034ceb7a538be0d9c9c637cb))
+
 # [1.16.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.15.0...v1.16.0) (2024-04-09)
 
 
