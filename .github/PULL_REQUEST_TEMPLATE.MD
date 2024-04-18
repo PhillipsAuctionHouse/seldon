@@ -9,11 +9,11 @@
 
 **Summary**
 
-- High-level overview of the changes that were made and explanation of WHY they were made
+Add high-level overview of the changes that were made and explanation of WHY they were made
 
 **Change List (describe the changes made to the files)**
 
-- Addtions, Changes, and Removals
+- Additions, Changes, and Removals
 
 **Acceptance Test (how to verify the PR)**
 
