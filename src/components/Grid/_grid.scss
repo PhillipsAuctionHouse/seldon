@@ -9,11 +9,11 @@
   &__container--has-margins {
     margin: 0 $spacing-medium;
 
-    @media (min-width: 1401px) {
+    @media (width >= 1401px) {
       margin: 0 $spacing-large;
     }
 
-    @media (min-width: 1801px) {
+    @media (width >= 1801px) {
       margin: 0 $spacing-xl;
     }
   }

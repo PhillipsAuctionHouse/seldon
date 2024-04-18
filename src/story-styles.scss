@@ -7,12 +7,12 @@
 @use 'design/spacing-tokens/spacing-tokens';
 @use 'design/grid-tokens/grid-tokens';
 @use 'components/DatePicker/datePicker';
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,500;0,600;0,700;1,400&display=swap');
+@import 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,500;0,600;0,700;1,400&display=swap';
 
 // Design markdown styles
 .h1 {
   @include hText($heading-size1, null, uppercase);
+
   display: flex;
   margin-bottom: 1.5rem;
 
@@ -24,6 +24,7 @@
 
 .h2 {
   @include hText($heading-size2);
+
   color: $clock-widget-blue;
   display: block;
   margin-bottom: 1rem;
@@ -31,6 +32,7 @@
 
 .h3 {
   @include hText($heading-size3);
+
   display: block;
   margin-bottom: 1rem;
   margin-top: 2rem;
@@ -38,6 +40,7 @@
 
 .h4 {
   @include pText($body-size2);
+
   color: $clock-widget-green;
   display: block;
   margin-bottom: 1rem;
@@ -46,6 +49,7 @@
 
 .p {
   @include pText($body-size2);
+
   display: block;
   margin-bottom: 1.5rem;
 }
@@ -56,31 +60,32 @@ details {
 
   summary {
     color: $keyline-gray;
+
     @include labelText($cta-sm);
   }
 }
 
 .tip {
-  display: inline-block;
-  border-radius: 1em;
-  font-size: 11px;
-  line-height: 12px;
-  font-weight: 700;
   background: #e7fdd8;
+  border-radius: 1em;
   color: #66bf3c;
-  padding: 4px 12px;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 12px;
   margin-right: 10px;
+  padding: 4px 12px;
   vertical-align: top;
 }
 
 .tip-wrapper {
   font-size: 13px;
   line-height: 20px;
-  margin-top: 40px;
   margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 .tip-wrapper code {
-  font-size: 12px;
   display: inline-block;
+  font-size: 12px;
 }

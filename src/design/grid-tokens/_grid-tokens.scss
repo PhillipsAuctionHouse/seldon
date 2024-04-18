@@ -8,8 +8,7 @@
 
   h1,
   p {
-    grid-column-start: 1;
-    grid-column-end: -1;
+    grid-column: 1 / -1;
   }
 
   h1 {
@@ -26,19 +25,21 @@
   .grid-example__aside,
   .grid-example__footer {
     @include text($body-size2);
+
     background: $light-gray;
     border-radius: 0.5rem;
     color: $post-sale-magenta;
     padding: 1rem;
     text-align: center;
   }
+
   .grid-example::after {
     content: '12';
     display: block;
     margin: 0 auto;
   }
 
-  @media (max-width: 960px) {
+  @media (width <= 960px) {
     .grid-example:nth-child(n + 3) {
       display: none;
     }
@@ -48,10 +49,11 @@
     }
   }
 
-  @media (min-width: 960px) and (max-width: 1400px) {
+  @media (width >= 960px) and (width <= 1400px) {
     .grid-example:nth-child(n + 5) {
       display: none;
     }
+
     .grid-example::after {
       content: '4';
     }
@@ -60,75 +62,90 @@
   .grid-example__header {
     grid-column: 1 / -1;
   }
+
   .grid-example__header code::after {
     content: 'grid-column: 1 / -1;';
   }
+
   .grid-example__section {
     grid-column: 1 / -1;
   }
+
   .grid-example__section code::after {
     content: 'grid-column: 1 / -1;';
   }
+
   .grid-example__aside {
     grid-column: 1 / -1;
   }
+
   .grid-example__aside code::after {
     content: 'grid-column: 1 / -1;';
   }
+
   .grid-example__footer {
     grid-column: 1 / -1;
   }
+
   .grid-example__footer code::after {
     content: 'grid-column: 1 / -1;';
   }
 
-  @media (min-width: 961px) {
+  @media (width >= 961px) {
     .grid-example__header {
       grid-column: 1 / -1;
     }
+
     .grid-example__section {
       grid-column: 1 / 3;
     }
+
     .grid-example__section code::after {
       content: 'grid-column: 1 / 3;';
     }
+
     .grid-example__aside {
       grid-column: 3 / -1;
     }
+
     .grid-example__aside code::after {
       content: 'grid-column: 3 / -1; ';
     }
+
     .grid-example__footer {
       grid-column: 1 / -1;
     }
   }
 
-  @media (min-width: 1401px) {
+  @media (width >= 1401px) {
     .grid-example__header {
-      grid-column-start: 1;
-      grid-column-end: -1;
+      grid-column: 1 / -1;
     }
+
     .grid-example__header code::after {
       content: 'header { grid-column: 1 / -1; }';
     }
+
     .grid-example__section {
-      grid-column-start: 1;
-      grid-column-end: 9;
+      grid-column: 1 / 9;
     }
+
     .grid-example__section code::after {
       content: 'section { grid-column: 1 / 9; }';
     }
+
     .grid-example__aside {
-      grid-column-start: 9;
-      grid-column-end: -1;
+      grid-column: 9 / -1;
     }
+
     .grid-example__aside code::after {
       content: 'aside { grid-column:9 / -1; }';
     }
+
     .grid-example__footer {
-      grid-column-start: 1;
-      grid-column-end: -1;
+      grid-column: 1 / -1;
     }
+
     .grid-example__footer code::after {
       content: 'footer { grid-column: 1 / -1; }';
     }
@@ -148,25 +165,25 @@
     top: 0;
     transform: translate($spacing-medium, 1.5rem);
 
-    @media (min-width: 961px) {
+    @media (width >= 961px) {
       content: '@media (min-width: 961px)';
       transform: translate($spacing-medium, 2.1875rem);
     }
 
-    @media (min-width: 1401px) {
+    @media (width >= 1401px) {
       content: '@media (min-width: 1401px)';
       transform: translate($spacing-large, 2.1875rem);
     }
 
-    @media (min-width: 1801px) {
+    @media (width >= 1801px) {
       content: '@media (min-width: 1801px)';
       transform: translate($spacing-xl, 2.75rem);
     }
   }
 
   &::before {
-    content: '';
     border: 1px solid $clock-widget-blue;
+    content: '';
     height: calc(100% - 1rem);
     left: 50%;
     position: absolute;
@@ -174,16 +191,16 @@
     transform: translate(-50%, 2.25rem);
     width: calc(100% - 1rem);
 
-    @media (min-width: 961px) {
+    @media (width >= 961px) {
       height: calc(100% - 1.75rem);
       transform: translate(-50%, 3rem);
     }
 
-    @media (min-width: 1401px) {
+    @media (width >= 1401px) {
       width: calc(100% - 3rem);
     }
 
-    @media (min-width: 1801px) {
+    @media (width >= 1801px) {
       transform: translate(-50%, 3.55rem);
       width: calc(100% - 11rem);
     }
