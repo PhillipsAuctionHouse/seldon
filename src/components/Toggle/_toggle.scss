@@ -1,5 +1,5 @@
 @import '../../vars';
-@import '../../_utils';
+@import '../../utils';
 
 $toggleBaseWidth: 3rem;
 $inline: #{$px}-input--inline;
@@ -130,13 +130,8 @@ $lg: #{$px}-input--lg;
     &.#{$inline} {
       .#{$px}-input__label {
         margin-bottom: 0.5rem;
+        margin-left: 4.375rem;
       }
-    }
-  }
-
-  &.#{$lg}.#{$inline} {
-    .#{$px}-input__label {
-      margin-left: 4.375rem;
     }
   }
 

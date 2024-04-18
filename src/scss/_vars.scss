@@ -102,7 +102,7 @@ $body3: 'body3';
 
   --label-size1: 1.25rem;
   --label-size2: 1rem;
-  --label-size2: 0.75rem;
+  --label-size3: 0.75rem;
 
   @media (max-width: 960px) {
     --heading-size0: 2.59rem;
@@ -117,7 +117,7 @@ $body3: 'body3';
 
     --label-size1: 1rem;
     --label-size2: 0.75rem;
-    --label-size2: 0.56rem;
+    --label-size3: 0.56rem;
   }
 
   @media (min-width: 1800px) {
@@ -162,7 +162,7 @@ $text-badge-label-size: var(--label-size3);
 ////////////////////////
 /// SPACING TOKENS:
 ///////////////////////
-
+/* stylelint-disable-next-line no-duplicate-selectors */
 :root {
   --spacing-micro: 0.25rem;
   --spacing-xsm: 0.5rem;

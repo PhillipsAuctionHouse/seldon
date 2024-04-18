@@ -2,7 +2,7 @@
 
 @mixin hText($size: $heading-size1, $color: $primary-black, $transform-style: capitalize) {
   color: $color;
-  font-family: 'DistinctDisplay';
+  font-family: 'DistinctDisplay', sans-serif;
   font-size: $size;
   font-weight: 400;
   line-height: 1.25;
@@ -11,14 +11,14 @@
 
 @mixin pText($size: $body-size1, $color: $soft-black) {
   color: $color;
-  font-family: 'Montserrat';
+  font-family: 'Montserrat', sans-serif;
   font-size: $size;
   line-height: 1.5;
   letter-spacing: 0.0625rem;
 }
 
 @mixin labelText($label) {
-  font-family: 'Montserrat';
+  font-family: 'Montserrat', sans-serif;
 
   @if $label == 'button' {
     font-size: $button-label-size;

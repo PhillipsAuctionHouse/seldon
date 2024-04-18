@@ -1,5 +1,5 @@
 @import '../../vars';
-@import '../../_utils';
+@import '../../utils';
 
 .#{$px}-button {
   @include bodyText;

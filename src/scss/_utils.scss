@@ -26,8 +26,8 @@
 @mixin warning-icon-after {
   color: $pure-black;
   content: '!';
-  font-family: arial;
-  font-size: 0.85vrem;
+  font-family: arial, sans-serif;
+  font-size: 0.85rem;
   height: 2rem;
   width: 2rem;
   position: absolute;
