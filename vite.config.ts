@@ -38,12 +38,12 @@ export default defineConfig({
         replacement: resolve(__dirname, './src/scss/reset'),
       },
       {
-        find: './utils',
-        replacement: resolve(__dirname, './src/scss/utils'),
+        find: './_utils',
+        replacement: resolve(__dirname, './src/scss/_utils'),
       },
       {
-        find: '../../utils',
-        replacement: resolve(__dirname, './src/scss/utils'),
+        find: '../../_utils',
+        replacement: resolve(__dirname, './src/scss/_utils'),
       },
     ],
   },
