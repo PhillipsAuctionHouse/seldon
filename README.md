@@ -1,6 +1,8 @@
 # Easel Design System 🎨 by Phillips Auction House
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/45a31dc9-7c19-482a-ae3d-be6bb2533cef/deploy-status)](https://app.netlify.com/sites/snazzy-liger-5606f7/deploys)
+![tests](https://github.com/phillipsauctionhouse/seldon/actions/workflows/test.yml/badge.svg)
+[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+[![published](https://api.netlify.com/api/v1/badges/45a31dc9-7c19-482a-ae3d-be6bb2533cef/deploy-status)](https://app.netlify.com/sites/snazzy-liger-5606f7/deploys)
 
 Seldon is the source for design guidelines, component documentation, and resources for building apps with the Phillips.com Design System.
 
