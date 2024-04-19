@@ -1,6 +1,6 @@
 import { px } from '../../utils';
 
-interface HeroBannerProps {
+export interface HeroBannerProps {
   /**
    * informational text above the header (e.g. region label or "buy now")
    */
