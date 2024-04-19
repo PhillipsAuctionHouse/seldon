@@ -1,3 +1,10 @@
+## [1.17.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.17.0...v1.17.1) (2024-04-19)
+
+
+### Bug Fixes
+
+* export typescript types from components ([6e659fb](https://github.com/PhillipsAuctionHouse/seldon/commit/6e659fbfca35148a2e60fbcaa71fa77e423ea546))
+
 # [1.17.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.16.0...v1.17.0) (2024-04-17)
 
 
