@@ -1,3 +1,10 @@
+## [1.17.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.17.2...v1.17.3) (2024-04-23)
+
+
+### Bug Fixes
+
+* **contributing:** trigger new release after update ([c54b6b0](https://github.com/PhillipsAuctionHouse/seldon/commit/c54b6b09e076889ee435bc76689521e7173834ff)), closes [#L3-1840](https://github.com/PhillipsAuctionHouse/seldon/issues/L3-1840)
+
 ## [1.17.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.17.1...v1.17.2) (2024-04-23)
 
 
