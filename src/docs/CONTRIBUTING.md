@@ -61,7 +61,7 @@ show examples of the format and how it's generally used.
 
 For more information on what type of change commit should be labeled a
 `BREAKING CHANGE`, `feat`, or `fix`, please read
-[the versioning documentation](https://github.com/carbon-design-system/carbon-addons-iot-react/blob/master/docs/guides/versioning.md).
+[the versioning documentation](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#-commit-message-format).
 
 Commits are preferred but not required to contain a link to an issue. If you
 choose to link commits to an issue, the 72 character limit can be avoided by
@@ -70,6 +70,10 @@ placing the link in the body of the commit. Example:
 ```sh
 git commit -m "fix(table): columns need unique ids" -m "#123"
 ```
+
+## Release process
+
+We use `semantic-release` to publish new releases when a commit of type `feat` or `fix` is merged to the `main` branch. This is done automatically by this [GitHub Workflow](https://github.com/PhillipsAuctionHouse/seldon/blob/main/.github/workflows/publish.yml). The version number is determined by the commit messages.
 
 ## Styling new components
 
