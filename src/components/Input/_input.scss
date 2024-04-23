@@ -11,7 +11,7 @@ $lg: #{$px}-input--lg;
   width: 100%;
 
   &--hidden {
-    @include hidden();
+    @include hidden;
   }
 
   &__label {
@@ -23,7 +23,7 @@ $lg: #{$px}-input--lg;
     word-break: break-word;
 
     &--hidden {
-      @include hidden();
+      @include hidden;
     }
   }
 
@@ -34,15 +34,16 @@ $lg: #{$px}-input--lg;
     font-size: 0.8125rem;
     margin-bottom: 0.5rem;
     padding: 0.5rem;
+
     // width: 100%;
   }
 
   &__validation {
+    -webkit-box-orient: vertical;
     display: -webkit-box;
+    -webkit-line-clamp: 2;
     line-height: 1.25;
     overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
   }
 
   // Small input size
@@ -62,8 +63,7 @@ $lg: #{$px}-input--lg;
   // Inline
   &--inline {
     align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     gap: 1rem;
 
     .#{$px}-input__input {
@@ -97,7 +97,7 @@ $lg: #{$px}-input--lg;
     }
 
     .#{$px}-input__input {
-      background-color: rgba(239, 239, 239, 0.3);
+      background-color: rgb(239 239 239 / 30%);
     }
   }
 
@@ -113,7 +113,7 @@ $lg: #{$px}-input--lg;
 
     .#{$px}-input__input {
       border: 1px solid $error-red;
-      box-shadow: inset 0px 0px 3px 3px $error-pink;
+      box-shadow: inset 0 0 3px 3px $error-pink;
     }
   }
 
@@ -175,6 +175,7 @@ $lg: #{$px}-input--lg;
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }

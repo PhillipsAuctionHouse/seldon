@@ -2,7 +2,7 @@
 
 @mixin hText($size: $heading-size1, $color: $primary-black, $transform-style: capitalize) {
   color: $color;
-  font-family: 'DistinctDisplay';
+  font-family: DistinctDisplay, sans-serif;
   font-size: $size;
   font-weight: 400;
   line-height: 1.25;
@@ -11,14 +11,14 @@
 
 @mixin pText($size: $body-size1, $color: $soft-black) {
   color: $color;
-  font-family: 'Montserrat';
+  font-family: Montserrat, sans-serif;
   font-size: $size;
-  line-height: 1.5;
   letter-spacing: 0.0625rem;
+  line-height: 1.5;
 }
 
 @mixin labelText($label) {
-  font-family: 'Montserrat';
+  font-family: Montserrat, sans-serif;
 
   @if $label == 'button' {
     font-size: $button-label-size;
@@ -26,6 +26,7 @@
     letter-spacing: 0.0625rem;
     text-transform: capitalize;
   }
+
   @if $label == 'cta-sm' {
     font-size: $cta-sm-label-size;
     font-weight: 600;
@@ -33,6 +34,7 @@
     line-height: 1.25;
     text-transform: uppercase;
   }
+
   @if $label == 'cta-lg' {
     font-size: $cta-lg-label-size;
     font-weight: 700;
@@ -40,6 +42,7 @@
     line-height: 1.25;
     text-transform: uppercase;
   }
+
   @if $label == 'email' {
     font-size: $email-label-size;
     font-weight: 600;
@@ -47,12 +50,14 @@
     line-height: 1.25;
     text-transform: lowercase;
   }
+
   @if $label == 'text' {
     font-size: $text-label-size;
     font-weight: 500;
     letter-spacing: 0.0625rem;
     line-height: 1.25;
   }
+
   @if $label == 'text-badge' {
     font-size: $text-badge-label-size;
     font-weight: 500;
@@ -67,57 +72,74 @@
   @if $token == 'button' {
     @include labelText($button);
   }
+
   @if $token == 'cta-sm' {
     @include labelText($cta-sm);
   }
+
   @if $token == 'cta-lg' {
     @include labelText($cta-lg);
   }
+
   @if $token == 'email' {
     @include labelText($email);
   }
+
   @if $token == 'text' {
     @include labelText($text);
   }
+
   @if $token == 'text-badge' {
     @include labelText($text-badge);
   }
+
   // Displays
   @if $token == 'display0' {
     @include hText($display-size0, null, uppercase);
   }
+
   @if $token == 'display1' {
     @include hText($display-size1, null, uppercase);
   }
+
   @if $token == 'display2' {
     @include hText($display-size2, null, uppercase);
   }
+
   @if $token == 'display3' {
     @include hText($display-size3, null, uppercase);
   }
+
   @if $token == 'display4' {
     @include hText($display-size4, null, uppercase);
   }
+
   // Headings
   @if $token == 'heading1' {
     @include hText($heading-size1);
   }
+
   @if $token == 'heading2' {
     @include hText($heading-size2);
   }
+
   @if $token == 'heading3' {
     @include hText($heading-size3);
   }
+
   @if $token == 'heading4' {
     @include hText($heading-size4);
   }
+
   // Body
   @if $token == 'body1' {
     @include pText($body-size1);
   }
+
   @if $token == 'body2' {
     @include pText($body-size2);
   }
+
   @if $token == 'body3' {
     @include pText($body-size3);
   }

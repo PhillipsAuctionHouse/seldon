@@ -1,4 +1,4 @@
-name: Test
+name: Lint
 
 on: [push, pull_request]
 
@@ -7,7 +7,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,4 +23,4 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - run: npm run test
+      - run: npm run lint

@@ -9,7 +9,7 @@
       "./vars": ["./src/scss/vars"],
       "./typography": ["./src/scss/typography"],
       "./reset": ["./src/scss/reset"],
-      "./_utils": ["./src/scss/utils"]
+      "./_utils": ["./src/scss/_utils"]
     },
 
     /* Bundler mode */
