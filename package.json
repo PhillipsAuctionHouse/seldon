@@ -1,6 +1,10 @@
 {
   "name": "@phillips/seldon",
   "version": "1.17.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PhillipsAuctionHouse/seldon"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
