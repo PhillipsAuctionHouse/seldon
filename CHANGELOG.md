@@ -1,3 +1,11 @@
+## [1.17.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.17.1...v1.17.2) (2024-04-23)
+
+
+### Bug Fixes
+
+* **package.json:** use double quotes for stylelint ([2b45c1a](https://github.com/PhillipsAuctionHouse/seldon/commit/2b45c1a22804bc6ab2ac5dd4d28796838228acd6))
+* **scss:** update styles to fix stylelint issues ([9842ac5](https://github.com/PhillipsAuctionHouse/seldon/commit/9842ac5b84aea5f24fa2f041ff0cc941ab72b84a))
+
 ## [1.17.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.17.0...v1.17.1) (2024-04-19)
 
 
