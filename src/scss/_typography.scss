@@ -3,13 +3,13 @@
 html,
 body {
   font-family:
-    'Montserrat',
+    Montserrat,
     -apple-system,
     BlinkMacSystemFont,
-    avenir next,
+    'avenir next',
     avenir,
-    segoe ui,
-    helvetica neue,
+    'segoe ui',
+    'helvetica neue',
     helvetica,
     Cantarell,
     Ubuntu,
@@ -18,57 +18,61 @@ body {
     arial,
     sans-serif;
   font-size: 16px;
-  margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  margin: 0;
   -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
 }
 
 /** Fonts **/
 @font-face {
-  font-family: 'DistinctDisplay';
+  font-family: DistinctDisplay;
   src: url('../fonts/Distinct-Display.woff') format('woff');
   src: url('../fonts/Distinct-Display.woff2') format('woff2');
 }
+
 @mixin DistinctDisplay {
-  font-family: 'DistinctDisplay';
+  font-family: DistinctDisplay, sans-serif;
 }
 
 @font-face {
-  font-family: 'DistinctDisplay';
+  font-family: DistinctDisplay;
+  font-style: italic;
   src: url('../fonts/Distinct-DisplayItalic.woff') format('woff');
   src: url('../fonts/Distinct-DisplayItalic.woff2') format('woff2');
-  font-style: italic;
 }
 
 @mixin DistinctDisplayItalic {
-  font-family: 'DistinctDisplay';
+  font-family: DistinctDisplay, sans-serif;
   font-style: italic;
 }
 
 @font-face {
-  font-family: 'Distinct';
+  font-family: Distinct;
   src: url('../fonts/Distinct-Text.woff') format('woff');
   src: url('../fonts/Distinct-Text.woff2') format('woff2');
 }
+
 @mixin DistinctText {
-  font-family: 'Distinct';
+  font-family: Distinct, sans-serif;
 }
+
 @font-face {
-  font-family: 'Distinct';
+  font-family: Distinct;
+  font-style: italic;
   src: url('../fonts/Distinct-Italic.woff') format('woff');
   src: url('../fonts/Distinct-Italic.woff2') format('woff2');
-  font-style: italic;
 }
 
 @mixin DistinctItalic {
-  font-family: 'Distinct';
+  font-family: Distinct, sans-serif;
   font-style: italic;
 }
 
 @mixin headerText {
-  @include DistinctDisplay();
+  @include DistinctDisplay;
+
   color: $primary-black;
   font-weight: 400;
 }

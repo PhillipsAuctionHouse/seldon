@@ -61,7 +61,7 @@ show examples of the format and how it's generally used.
 
 For more information on what type of change commit should be labeled a
 `BREAKING CHANGE`, `feat`, or `fix`, please read
-[the versioning documentation](https://github.com/carbon-design-system/carbon-addons-iot-react/blob/master/docs/guides/versioning.md).
+[the versioning documentation](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#-commit-message-format).
 
 Commits are preferred but not required to contain a link to an issue. If you
 choose to link commits to an issue, the 72 character limit can be avoided by
@@ -70,6 +70,10 @@ placing the link in the body of the commit. Example:
 ```sh
 git commit -m "fix(table): columns need unique ids" -m "#123"
 ```
+
+## Release process
+
+We use `semantic-release` to publish new releases when a commit of type `feat` or `fix` is merged to the `main` branch. This is done automatically by this [GitHub Workflow](https://github.com/PhillipsAuctionHouse/seldon/blob/main/.github/workflows/publish.yml). The version number is determined by the commit messages.
 
 ## Styling new components
 
@@ -85,7 +89,7 @@ If you follow the convention seen in existing stories the documentation is auto 
 This is a typescript project so all props are defined using [interfaces](https://www.typescriptlang.org/docs/handbook/2/objects.html). Be sure to add comments as these become the documentation for the component in our storybook. Default props should be written as part of the prop destructing.
 
 ```js
-interface ButtonProps {
+export interface ButtonProps {
   /**
    * Is this the principal call to action on the page?
    */
@@ -128,6 +132,14 @@ const Button = ({
 };
 ```
 
+## Exporting components
+
+After adding a component make sure that the component is exported from the main `index.ts` file. This will allow the component to be imported from the main package. Please also export any Typescript types that should be available to consumers of the package.
+
+```js
+export { Button, type ButtonProps } from './components/Button/Button';
+```
+
 ## Testing
 
 Unit test must be written for all JavaScript files. We utlize [`Jest.js`](https://jestjs.io/) and the [`@testing-library`](https://testing-library.com/docs/react-testing-library/intro) packages to author test.
@@ -156,3 +168,21 @@ the code coverage threshold to get around this constraint._
 
 To understand what lines of code are NOT covered by the current testcases, open
 the coverage/index.html file in a browser and investigate.
+
+## Testing changes in downstream consumers
+
+Often times changes to the library are being made to add features to an application. To test these changes you can link the library to the consuming application. This is done by running the following commands to add the library to the global npm registry:
+
+```sh
+npm run build
+cd dist
+npm link
+```
+
+Then you will point the application to the `seldon` published in the global npm registry not the one installed locally in `application/node_modules`. To link the application in to the global npm registry run the following command in the application directory:
+
+```sh
+npm link "@phillips/seldon"
+```
+
+Future rebuilds of the library will be reflected in the application without having to publish the library again to the npm registry. If you perform a full `npm install` or add a new library in the consuming application you will need to re-link the library.

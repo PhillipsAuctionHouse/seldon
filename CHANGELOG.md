@@ -1,3 +1,32 @@
+## [1.17.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.17.2...v1.17.3) (2024-04-23)
+
+
+### Bug Fixes
+
+* **contributing:** trigger new release after update ([c54b6b0](https://github.com/PhillipsAuctionHouse/seldon/commit/c54b6b09e076889ee435bc76689521e7173834ff)), closes [#L3-1840](https://github.com/PhillipsAuctionHouse/seldon/issues/L3-1840)
+
+## [1.17.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.17.1...v1.17.2) (2024-04-23)
+
+
+### Bug Fixes
+
+* **package.json:** use double quotes for stylelint ([2b45c1a](https://github.com/PhillipsAuctionHouse/seldon/commit/2b45c1a22804bc6ab2ac5dd4d28796838228acd6))
+* **scss:** update styles to fix stylelint issues ([9842ac5](https://github.com/PhillipsAuctionHouse/seldon/commit/9842ac5b84aea5f24fa2f041ff0cc941ab72b84a))
+
+## [1.17.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.17.0...v1.17.1) (2024-04-19)
+
+
+### Bug Fixes
+
+* export typescript types from components ([6e659fb](https://github.com/PhillipsAuctionHouse/seldon/commit/6e659fbfca35148a2e60fbcaa71fa77e423ea546))
+
+# [1.17.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.16.0...v1.17.0) (2024-04-17)
+
+
+### Features
+
+* moving label fields back to top ([fc22c7b](https://github.com/PhillipsAuctionHouse/seldon/commit/fc22c7b0a93b6a16034ceb7a538be0d9c9c637cb))
+
 # [1.16.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.15.0...v1.16.0) (2024-04-09)
 
 ### Features

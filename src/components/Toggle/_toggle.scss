@@ -8,6 +8,7 @@ $invalid: #{$px}-input--invalid;
 $warn: #{$px}-input--warn;
 $md: #{$px}-input--md;
 $lg: #{$px}-input--lg;
+
 // Shared Input styles
 .#{$px}-toggle-input {
   position: relative;
@@ -16,6 +17,7 @@ $lg: #{$px}-input--lg;
   .#{$px}-input__label {
     line-height: 1;
     margin-bottom: 2.5rem;
+
     // margin-left: 66px;
     position: relative;
 
@@ -28,14 +30,14 @@ $lg: #{$px}-input--lg;
     }
 
     &::before {
-      background-color: rgba(0, 0, 0, 0.4);
+      background-color: rgb(0 0 0 / 40%);
       border-radius: 1rem;
-      width: $toggleBaseWidth;
       height: 1rem;
       left: 0;
       transition:
         background-color 0.25s,
         color 0.25s;
+      width: $toggleBaseWidth;
     }
 
     &::after {
@@ -48,9 +50,9 @@ $lg: #{$px}-input--lg;
       color: white;
       height: 1rem;
       left: 0;
-      width: 1rem;
       transform: translate(0, 0);
       transition: transform 0.25s;
+      width: 1rem;
     }
   }
 
@@ -78,6 +80,7 @@ $lg: #{$px}-input--lg;
   // Hide actual checkbox input
   .#{$px}-input__input {
     @include hidden;
+
     margin-bottom: 0;
   }
 
@@ -117,8 +120,8 @@ $lg: #{$px}-input--lg;
       margin-bottom: 3.5rem;
 
       &::before {
-        width: 3.5rem;
         height: 2rem;
+        width: 3.5rem;
       }
 
       &::after {
@@ -130,13 +133,8 @@ $lg: #{$px}-input--lg;
     &.#{$inline} {
       .#{$px}-input__label {
         margin-bottom: 0.5rem;
+        margin-left: 4.375rem;
       }
-    }
-  }
-
-  &.#{$lg}.#{$inline} {
-    .#{$px}-input__label {
-      margin-left: 4.375rem;
     }
   }
 

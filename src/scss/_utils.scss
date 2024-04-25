@@ -1,20 +1,20 @@
 @mixin hidden {
-  position: absolute;
-  overflow: hidden;
-  padding: 0;
-  border: 0;
-  margin: -1px;
   block-size: 1px;
+  border: 0;
   clip-path: inset(100%);
   inline-size: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
   visibility: inherit;
   white-space: nowrap;
 }
 
 @mixin warning-icon-before {
+  border-bottom: 1.25rem solid #d6d141;
   border-left: 0.75rem solid transparent;
   border-right: 0.75rem solid transparent;
-  border-bottom: 1.25rem solid #d6d141;
   content: '';
   height: 0;
   position: absolute;
@@ -26,27 +26,27 @@
 @mixin warning-icon-after {
   color: $pure-black;
   content: '!';
-  font-family: arial;
-  font-size: 0.85vrem;
+  font-family: arial, sans-serif;
+  font-size: 0.85rem;
   height: 2rem;
-  width: 2rem;
+  line-height: 1;
   position: absolute;
   right: 10px;
-  top: 50px;
   text-align: center;
-  line-height: 1;
+  top: 50px;
+  width: 2rem;
 }
 
 @mixin grid($columns: 2) {
   display: grid;
-  grid-template-columns: repeat($columns, 1fr);
   gap: $spacing-medium;
+  grid-template-columns: repeat($columns, 1fr);
 }
 
 @mixin gridContainer($margins-on: true) {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   gap: $spacing-medium;
+  grid-template-columns: repeat(2, 1fr);
 
   @if $margins-on {
     margin: 0 $spacing-medium;
@@ -58,6 +58,7 @@
 
   @media (min-width: $breakpoint3) {
     grid-template-columns: repeat(12, 1fr);
+
     @if $margins-on {
       margin: 0 $spacing-large;
     }

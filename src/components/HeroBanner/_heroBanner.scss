@@ -3,9 +3,9 @@
 .#{$px}-hero-banner {
   align-items: center;
   background: var(--background);
+  background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center center;
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -13,32 +13,32 @@
   padding: 1rem;
   width: 100%;
 
-  @media (max-width: 28.8125rem) {
-    flex-direction: column;
+  @media (width <= 28.8125rem) {
     align-items: center;
-    gap: 1.875rem;
     align-self: stretch;
-    padding: 1.875rem 0.9375rem;
     background: $pure-black;
+    flex-direction: column;
+    gap: 1.875rem;
+    padding: 1.875rem 0.9375rem;
 
     &::before {
-      content: '';
       background: var(--background);
-      width: 100%;
-      height: 12rem;
-      background-size: cover;
-      background-repeat: no-repeat;
       background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      content: '';
+      height: 12rem;
+      width: 100%;
     }
   }
 
   h1 {
-    font-family: 'DistinctDisplay', sans-serif;
+    font-family: DistinctDisplay, sans-serif;
   }
 
   h1 span,
   p {
-    font-family: 'DistinctText', sans-serif;
+    font-family: DistinctText, sans-serif;
   }
 
   h1,
@@ -52,16 +52,16 @@
 
   p {
     font-size: 0.875rem;
-    line-height: 1;
     letter-spacing: 0.125rem;
+    line-height: 1;
     text-align: center;
   }
 
   & .#{$px}-hero-banner__content-wrapper {
-    max-width: 1082px;
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    max-width: 1082px;
   }
 
   & .#{$px}-hero-banner__pre-head {
@@ -70,14 +70,14 @@
     font-size: 0.75rem;
     gap: 1.875rem;
 
-    @media (min-width: 28.8125rem) {
+    @media (width >= 28.8125rem) {
       font-size: 0.875rem;
     }
 
-    @media (max-width: 28.8125rem) {
+    @media (width <= 28.8125rem) {
+      align-items: center;
       flex-direction: column;
       gap: 1rem;
-      align-items: center;
     }
   }
 
@@ -90,7 +90,7 @@
     margin: 1.875rem 0;
     text-align: center;
 
-    @media (min-width: 28.8125rem) {
+    @media (width >= 28.8125rem) {
       font-size: 2.375rem;
     }
 

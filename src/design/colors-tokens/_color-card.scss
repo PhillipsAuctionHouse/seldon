@@ -80,9 +80,9 @@
   &__hex.#{$px}-color-card__hex {
     color: $soft-black;
     font-size: 0.875rem;
-    margin-bottom: 1rem;
-    line-height: 1.25;
     letter-spacing: 0.125rem;
+    line-height: 1.25;
+    margin-bottom: 1rem;
     text-transform: uppercase;
   }
 
@@ -115,10 +115,9 @@
 
 .color__list {
   display: grid;
+  grid-gap: 0.75rem;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr;
-  grid-column-gap: 0.75rem;
-  grid-row-gap: 0.75rem;
   margin-bottom: 4rem;
 }
 
@@ -127,10 +126,12 @@
     opacity: 0;
     transform: translate(-50%, 0.75rem);
   }
+
   50% {
     opacity: 1;
     transform: translate(-50%, 0);
   }
+
   100% {
     opacity: 0;
     transform: translate(-50%, 0);
