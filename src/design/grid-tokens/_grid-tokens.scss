@@ -2,6 +2,65 @@
 @import '#scss/type';
 
 // Grid story styles
+.grid-example__layout {
+  position: relative;
+
+  &::after {
+    background-color: $pure-white;
+    color: $clock-widget-blue;
+    content: 'Base styles';
+    font-family: monospace;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform: translate($spacing-medium, 1.5rem);
+
+    @media (width >= 961px) {
+      content: '@media (min-width: 961px)';
+      transform: translate($spacing-medium, 2.1875rem);
+    }
+
+    @media (width >= 1401px) {
+      content: '@media (min-width: 1401px)';
+      transform: translate($spacing-large, 2.1875rem);
+    }
+
+    @media (width >= 1801px) {
+      content: '@media (min-width: 1801px)';
+      transform: translate($spacing-xl, 2.75rem);
+    }
+  }
+
+  &::before {
+    border: 1px solid $clock-widget-blue;
+    content: '';
+    height: calc(100% - 1rem);
+    left: 50%;
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, 2.25rem);
+    width: calc(100% - 1rem);
+
+    @media (width >= 961px) {
+      height: calc(100% - 1.75rem);
+      transform: translate(-50%, 3rem);
+    }
+
+    @media (width >= 1401px) {
+      width: calc(100% - 3rem);
+    }
+
+    @media (width >= 1801px) {
+      transform: translate(-50%, 3.55rem);
+      width: calc(100% - 11rem);
+    }
+  }
+
+  h1 {
+    transform: translateY(-0.25rem);
+  }
+}
+
 .doc-wrapper {
   .phillips-grid__container {
     margin-bottom: $spacing-medium;
@@ -151,64 +210,5 @@
         content: 'footer { grid-column: 1 / -1; }';
       }
     }
-  }
-}
-
-.grid-example__layout {
-  position: relative;
-
-  &::after {
-    background-color: $pure-white;
-    color: $clock-widget-blue;
-    content: 'Base styles';
-    font-family: monospace;
-    left: 0;
-    position: absolute;
-    top: 0;
-    transform: translate($spacing-medium, 1.5rem);
-
-    @media (width >= 961px) {
-      content: '@media (min-width: 961px)';
-      transform: translate($spacing-medium, 2.1875rem);
-    }
-
-    @media (width >= 1401px) {
-      content: '@media (min-width: 1401px)';
-      transform: translate($spacing-large, 2.1875rem);
-    }
-
-    @media (width >= 1801px) {
-      content: '@media (min-width: 1801px)';
-      transform: translate($spacing-xl, 2.75rem);
-    }
-  }
-
-  &::before {
-    border: 1px solid $clock-widget-blue;
-    content: '';
-    height: calc(100% - 1rem);
-    left: 50%;
-    position: absolute;
-    top: 0;
-    transform: translate(-50%, 2.25rem);
-    width: calc(100% - 1rem);
-
-    @media (width >= 961px) {
-      height: calc(100% - 1.75rem);
-      transform: translate(-50%, 3rem);
-    }
-
-    @media (width >= 1401px) {
-      width: calc(100% - 3rem);
-    }
-
-    @media (width >= 1801px) {
-      transform: translate(-50%, 3.55rem);
-      width: calc(100% - 11rem);
-    }
-  }
-
-  h1 {
-    transform: translateY(-0.25rem);
   }
 }
