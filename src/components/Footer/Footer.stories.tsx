@@ -16,9 +16,7 @@ const meta = {
 
 export default meta;
 
-export const Playground = (props: FooterProps) => (
-  <Footer {...props} />
-);
+export const Playground = (props: FooterProps) => <Footer {...props} />;
 
 const navigation = (
   <ul>

@@ -19,7 +19,6 @@
     padding: $spacing-medium $spacing-medium $spacing-small;
     text-align: right;
 
-
     ul {
       display: inline-flex;
       flex-wrap: wrap;
@@ -55,7 +54,6 @@
     @include media('lg') {
       padding: 3.75rem $spacing-xl;
     }
-
   }
 
   &__newsletter {

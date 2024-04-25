@@ -30,8 +30,8 @@ export interface SubscribeProps extends CommonProps {
    */
   title: string;
   /**
-    * Subscribe http method
-    */
+   * Subscribe http method
+   */
   method?: 'post' | 'get' | 'dialog';
 }
 
