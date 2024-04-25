@@ -2,7 +2,6 @@ import classnames from 'classnames';
 
 import { CommonProps, px } from '../../utils';
 import Subscribe from '../Subscribe/Subscribe';
-import Grid from '../Grid/Grid';
 
 export interface FooterProps extends CommonProps {
   /**
@@ -18,27 +17,56 @@ export interface FooterProps extends CommonProps {
    */
   socialIcons: React.ReactNode;
   /**
-   * footer contents
-   */
-  children: React.ReactNode;
+   * Header text for social icons
+  */
+  socialText?: string;
+  /**
+    * Subscribe blurb text
+    */
+  subscribeBlurb?: string;
+  /**
+    * Subscribe callback function
+    */
+  subscribeCallback: () => void;
+  /**
+    * Subscribe method type
+    */
+  subscribeMethod?: 'post' | 'get' | 'dialog';
+  /**
+    * Subscribe title text
+    */
+  subscribeTitle?: string;
 }
 
-const Footer = ({ copyright, className, id, socialIcons, navigation }: FooterProps) => {
+const Footer = ({
+  className,
+  copyright,
+  id,
+  navigation,
+  socialIcons,
+  socialText = "Follow on Social",
+  subscribeBlurb = "Receive exclusive content about our auctions, exhibitions, and special events.",
+  subscribeCallback,
+  subscribeTitle = "Subscribe to Newsletter",
+  subscribeMethod = 'post',
+}: FooterProps) => {
   return (
     <footer data-testid={id ? `footer-${id}` : `footer`} id={id} className={classnames(`${px}-footer`, { className })}>
-      <div className={`${px}-footer__navigation`}>{navigation}</div>
-      <Grid className={`${px}-footer__content`} hasMargins={false}>
+      <nav className={`${px}-footer__navigation`}>{navigation}</nav>
+      <div className={`${px}-footer__content`}>
         <Subscribe
           className={`${px}-footer__newsletter`}
-          title="Subscribe to Newsletter"
-          blurb="Receive exclusive content about our auctions, exhibitions, and special events."
+          title={subscribeTitle}
+          blurb={subscribeBlurb}
+          buttonProps={{size: 'sm', onClick: subscribeCallback}}
+          method={subscribeMethod}
         />
         <div className={`${px}-footer__social`}>
-          <h3>Follow on Social</h3>
+          <h3 className={`${px}-footer__social-header`}>{socialText}</h3>
           {socialIcons}
         </div>
-      </Grid>
-      <div className={`${px}-footer__copyright`}>{copyright}</div>
+      </div>
+      <p className={`${px}-footer__copyright`}>{copyright}</p>
     </footer>
   );
 };

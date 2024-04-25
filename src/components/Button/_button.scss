@@ -11,8 +11,7 @@
   cursor: pointer;
   display: inline-flex;
   justify-content: center;
-  min-width: 9rem;
-  padding: 0.5em 1.75em;
+  padding: 0.5em $spacing-medium;
   transition:
     color 0.25s,
     background-color 0.25s,

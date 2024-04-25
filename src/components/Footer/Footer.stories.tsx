@@ -17,14 +17,7 @@ const meta = {
 export default meta;
 
 export const Playground = (props: FooterProps) => (
-  <Footer {...props}>
-    {/* <section className={`${px}-newsletter`}>
-      <h3>Subscribe to Newsletter</h3>
-      <p>Receive exclusive content about our auctions, exhibitions, and special events.</p>
-      <Input id="footer-newsletter" type="email" placeholder="example@email.com" labelText="Email*" />
-      <Button buttonType="secondary">Sign Up</Button>
-    </section> */}
-  </Footer>
+  <Footer {...props} />
 );
 
 const navigation = (
@@ -75,9 +68,16 @@ const socialIcons = (
   </ul>
 );
 
-// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
   copyright: '© 2024 Phillips Auctioneers, LLC',
   navigation,
   socialIcons,
+  subscribeCallback: (e: React.MouseEvent) => {
+    e.preventDefault();
+    const inputElement = (e.target as HTMLElement).closest('form')?.querySelector('input');
+    if (inputElement) {
+      console.log(`subscribe ${inputElement.value}`);
+      inputElement.value = '';
+    }
+  },
 };

@@ -4,31 +4,32 @@
 @import '#scss/typography';
 
 .#{$px}-subscribe {
-  display: grid;
-  place-content: center;
-  max-width: 460px;
+  max-width: 30rem;
 
   &__title {
-    // @include headerText;
-    // font-size: 1.25rem;
-    // line-height: 1.2;
     @include text($heading3);
-    margin-bottom: 0.31rem;
+    margin-bottom: $spacing-xsm;
     text-align: center;
   }
 
   &__blurb {
-    @include text($body3);
+    @include text($body2);
     text-align: center;
+  }
+
+  @include media('sm') {
+    &__title,
+    &__blurb {
+      text-align: left;
+    }
   }
 
   &__blurb,
   .#{$px}-input__input {
-    margin-bottom: 1.88rem;
+    margin-bottom: $spacing-medium;
   }
 
   &__button {
-    margin: 0 auto 1.88rem;
-    max-width: 7rem;
+    margin: 0 0 $spacing-medium;
   }
 }

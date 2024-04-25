@@ -102,7 +102,7 @@ $body3: 'body3';
 
   --label-size1: 1.25rem;
   --label-size2: 1rem;
-  --label-size2: 0.75rem;
+  --label-size3: 0.75rem;
 
   @media (max-width: 960px) {
     --heading-size0: 2.59rem;
@@ -117,7 +117,7 @@ $body3: 'body3';
 
     --label-size1: 1rem;
     --label-size2: 0.75rem;
-    --label-size2: 0.56rem;
+    --label-size3: 0.56rem;
   }
 
   @media (min-width: 1800px) {
@@ -180,7 +180,7 @@ $text-badge-label-size: var(--label-size3);
     --spacing-xl: 4.8rem;
   }
 
-  @media (min-width: 1800px) {
+  @media (min-width: 1801px) {
     --spacing-micro: 0.31rem;
     --spacing-xsm: 0.63rem;
     --spacing-small: 1.25rem;

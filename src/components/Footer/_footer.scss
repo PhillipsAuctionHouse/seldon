@@ -5,9 +5,8 @@
 
 .#{$px}-footer {
   background-color: $off-white;
-  border: 1px solid $keyline-gray;
-  display: flex;
-  flex-direction: column;
+  border-top: 1px solid $keyline-gray;
+  width: 100%;
 
   ul {
     list-style: none;
@@ -17,32 +16,37 @@
   // @TODO: Extract into a navigation partial when header is being worked on
   &__navigation {
     background-color: $white;
-    padding: 1rem;
+    padding: $spacing-medium $spacing-medium $spacing-small;
+    text-align: right;
+
 
     ul {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: $spacing-medium;
+      justify-content: center;
       list-style: none;
       padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0 1.875rem;
-      justify-content: center;
     }
 
     a {
       @include text('cta-sm');
       cursor: pointer;
-      // font-size: 0.875rem;
-      // font-weight: 400;
-      // text-transform: uppercase;
     }
   }
 
   &__content {
-    // align-items: center;
-    // display: flex;
-    // flex-direction: column;
-    padding: 3.75rem $spacing-medium;
-    place-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: $spacing-large $spacing-medium;
+
+    @include media('sm') {
+      align-items: flex-start;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-bottom: 0;
+    }
 
     @include media('md') {
       padding: 3.75rem $spacing-large;
@@ -52,34 +56,37 @@
       padding: 3.75rem $spacing-xl;
     }
 
-    @include media('sm') {
-      // align-items: flex-start;
-      // flex-direction: row;
-      // justify-content: space-between;
-      // padding: 3.75rem 1rem;
-    }
   }
 
   &__newsletter {
-    grid-column: 1 / -1;
-    margin-bottom: 1.88rem;
+    margin-bottom: $spacing-medium;
+
+    @include media('sm') {
+      margin-bottom: 0;
+    }
   }
 
   &__social {
     align-items: center;
     display: flex;
     flex-direction: column;
-    grid-column: 1 / -1;
-    margin-bottom: 1.88rem;
 
-    h3 {
-      @include text('heading3');
-      margin-bottom: 1.88rem;
+    &-header {
+      @include text($heading3);
+      margin-bottom: $spacing-xsm;
     }
 
     ul {
       display: flex;
       gap: 0 1.25rem;
+
+      @include media('sm') {
+        gap: 0 1rem;
+      }
+
+      li {
+        cursor: pointer;
+      }
     }
 
     a {
@@ -88,13 +95,13 @@
   }
 
   &__copyright {
+    @include text($body3);
     align-items: center;
     background-color: $white;
     display: flex;
-    font-size: 0.875rem;
-    font-weight: 400;
-    height: 2.125rem;
+    // font-size: 0.875rem;
+    // height: 2.125rem;
     justify-content: center;
-    line-height: 1.25;
+    padding: $spacing-xsm 0;
   }
 }
