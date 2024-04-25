@@ -27,11 +27,7 @@ export interface FooterProps extends CommonProps {
   /**
    * Subscribe callback function
    */
-  subscribeCallback: () => void;
-  /**
-   * Subscribe method type
-   */
-  subscribeMethod?: 'post' | 'get' | 'dialog';
+  subscribeCallback: (e: React.MouseEvent) => void;
   /**
    * Subscribe title text
    */
@@ -48,7 +44,6 @@ const Footer = ({
   subscribeBlurb = 'Receive exclusive content about our auctions, exhibitions, and special events.',
   subscribeCallback,
   subscribeTitle = 'Subscribe to Newsletter',
-  subscribeMethod = 'post',
 }: FooterProps) => {
   return (
     <footer data-testid={id ? `footer-${id}` : `footer`} id={id} className={classnames(`${px}-footer`, { className })}>
@@ -59,7 +54,6 @@ const Footer = ({
           title={subscribeTitle}
           blurb={subscribeBlurb}
           buttonProps={{ size: 'sm', onClick: subscribeCallback }}
-          method={subscribeMethod}
         />
         <div className={`${px}-footer__social`}>
           <h3 className={`${px}-footer__social-header`}>{socialText}</h3>

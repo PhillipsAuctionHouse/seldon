@@ -29,10 +29,6 @@ export interface SubscribeProps extends CommonProps {
    * Subscibe title text
    */
   title: string;
-  /**
-   * Subscribe http method
-   */
-  method?: 'post' | 'get' | 'dialog';
 }
 
 const Subscribe = ({
@@ -44,20 +40,18 @@ const Subscribe = ({
   inputLabelText = 'Email*',
   inputPlaceholder = 'example@email.com',
   title,
-  method = 'post',
 }: SubscribeProps) => {
   return (
     <form
       data-testid={id ? `subscribe-${id}` : `subscribe`}
       id={id}
       className={classnames(`${px}-subscribe`, { [`${className}`]: className })}
-      method={method}
     >
       <h3 className={`${px}-subscribe__title`}>{title}</h3>
       {blurb ? <p className={`${px}-subscribe__blurb`}>{blurb}</p> : null}
       <Input
         className={`${px}-subscribe__input`}
-        id="footer-newsletter"
+        data-testid={id ? `subscribe-email-${id}` : `subscribe-email`}
         type="email"
         placeholder={inputPlaceholder}
         labelText={inputLabelText}

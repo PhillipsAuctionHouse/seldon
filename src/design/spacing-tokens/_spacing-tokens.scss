@@ -71,14 +71,16 @@
 
   .example-wrapper {
     display: flex;
+
     /* flex-wrap: wrap; */
     gap: 3rem;
     justify-content: center;
 
     & > span {
+      display: block;
+
       /* flex: 0; */
       width: 50%;
-      display: block;
     }
   }
 }

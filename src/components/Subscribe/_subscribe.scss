@@ -8,12 +8,14 @@
 
   &__title {
     @include text($heading3);
+
     margin-bottom: $spacing-xsm;
     text-align: center;
   }
 
   &__blurb {
     @include text($body2);
+
     text-align: center;
   }
 

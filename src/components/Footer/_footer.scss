@@ -30,6 +30,7 @@
 
     a {
       @include text('cta-sm');
+
       cursor: pointer;
     }
   }
@@ -71,6 +72,7 @@
 
     &-header {
       @include text($heading3);
+
       margin-bottom: $spacing-xsm;
     }
 
@@ -94,9 +96,11 @@
 
   &__copyright {
     @include text($body3);
+
     align-items: center;
     background-color: $white;
     display: flex;
+
     // font-size: 0.875rem;
     // height: 2.125rem;
     justify-content: center;
