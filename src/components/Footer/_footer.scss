@@ -30,6 +30,7 @@
 
     a {
       @include text('cta-sm');
+      @include bodyText;
 
       cursor: pointer;
     }
