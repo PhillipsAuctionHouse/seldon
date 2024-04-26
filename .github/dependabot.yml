@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+    commit-message:
+      prefix: fix # https://dev.to/kengotoda/a-complete-guide-to-use-dependabot-with-semantic-release-and-vercel-ncc-for-github-actions-230p
+      prefix-development: chore
+      include: 'scope'
