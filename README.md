@@ -6,6 +6,8 @@
 
 Seldon is the source for design guidelines, component documentation, and resources for building apps with the Phillips.com Design System.
 
+We use Storybook to document the components. Our storybook is hosted in Netlify at [here](https://phillips-seldon.netlify.app/?path=/docs/welcome--overview).
+
 ## Installation
 
 ```

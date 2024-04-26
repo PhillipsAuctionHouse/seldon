@@ -37,15 +37,14 @@ body {
 }
 
 @font-face {
-  font-family: DistinctDisplay;
+  font-family: DistinctDisplayItalic;
   font-style: italic;
   src: url('../fonts/Distinct-DisplayItalic.woff') format('woff');
   src: url('../fonts/Distinct-DisplayItalic.woff2') format('woff2');
 }
 
 @mixin DistinctDisplayItalic {
-  font-family: DistinctDisplay, sans-serif;
-  font-style: italic;
+  font-family: DistinctDisplayItalic, sans-serif;
 }
 
 @font-face {
@@ -59,15 +58,25 @@ body {
 }
 
 @font-face {
-  font-family: Distinct;
+  font-family: DistinctItalic;
   font-style: italic;
   src: url('../fonts/Distinct-Italic.woff') format('woff');
   src: url('../fonts/Distinct-Italic.woff2') format('woff2');
 }
 
 @mixin DistinctItalic {
-  font-family: Distinct, sans-serif;
+  font-family: DistinctItalic, sans-serif;
   font-style: italic;
+}
+
+@font-face {
+  font-family: MontserratSemiBold;
+  src: url('../fonts/Montserrat-SemiBold.woff') format('woff');
+  src: url('../fonts/Montserrat-SemiBold.woff2') format('woff2');
+}
+
+@mixin MontserratSemiBold {
+  font-family: MontserratSemiBold, sans-serif;
 }
 
 @mixin headerText {
@@ -79,4 +88,10 @@ body {
 
 @mixin bodyText {
   color: $soft-black;
+}
+
+@mixin linkText {
+  @include MontserratSemiBold;
+
+  color: $dark-gray;
 }

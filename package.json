@@ -46,6 +46,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
+    "@figma/code-connect": "^0.1.1",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^10.0.3",
@@ -76,6 +77,7 @@
     "jest-environment-jsdom": "^29.6.1",
     "prettier": "3.0.3",
     "prop-types": "^15.8.1",
+    "react-docgen-typescript": "^2.2.2",
     "rimraf": "^5.0.1",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",

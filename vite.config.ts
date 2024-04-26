@@ -47,10 +47,13 @@ export default defineConfig({
       },
     ],
   },
-
+  css: {
+    devSourcemap: true,
+  },
   build: {
     minify: true,
     reportCompressedSize: true,
+    cssCodeSplit: true,
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: ['src/index.ts'],

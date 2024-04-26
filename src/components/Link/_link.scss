@@ -1,0 +1,12 @@
+@import '../../vars';
+@import '../../_utils';
+
+.#{$px}-link {
+  @include linkText;
+
+  &:hover,
+  &:focus {
+    color: $widget-blue;
+    text-decoration: underline;
+  }
+}
