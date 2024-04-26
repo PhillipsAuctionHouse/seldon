@@ -1,9 +1,10 @@
 // 🌎 Globals
-@import 'scss/vars';
+@import '#scss/vars';
 
 // @TODO: add styles when we can do a site wide regressions QA
+
 // @use 'reset';
-@import 'scss/typography';
+@import '#scss/typography';
 
 // ⚛️ Components
 @import 'components/Button/button';
