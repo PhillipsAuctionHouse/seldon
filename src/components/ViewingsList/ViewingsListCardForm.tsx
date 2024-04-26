@@ -314,16 +314,6 @@ const ViewingsListCardForm = ({
         invalidText={invalidFields?.address1}
       />
       <Input
-        id={`addressUrl-${id}`}
-        name="addressUrl"
-        defaultValue={addressUrl}
-        labelText={addressUrlLabel}
-        size="sm"
-        type="url"
-        invalid={invalidFields?.addressUrl}
-        invalidText={invalidFields?.addressUrl}
-      />
-      <Input
         id={`address2-${id}`}
         name="address2"
         defaultValue={address2}
@@ -341,6 +331,17 @@ const ViewingsListCardForm = ({
         size="sm"
         invalid={invalidFields?.address3}
         invalidText={invalidFields?.address3}
+      />
+
+      <Input
+        id={`addressUrl-${id}`}
+        name="addressUrl"
+        defaultValue={addressUrl}
+        labelText={addressUrlLabel}
+        size="sm"
+        type="url"
+        invalid={invalidFields?.addressUrl}
+        invalidText={invalidFields?.addressUrl}
       />
 
       <Input
