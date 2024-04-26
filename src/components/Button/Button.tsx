@@ -39,10 +39,15 @@ const Button = ({
       data-testid={id ? `button-${id}` : `button`}
       id={id}
       type="button"
-      className={classnames(`${px}-button`, `${px}-button--${size}`, `${px}-button--${buttonType}`, {
-        [`${px}-button--icon-last`]: iconLast,
-        [`${className}`]: className,
-      })}
+      className={classnames(
+        `${px}-button`,
+        `${px}-button--${size}`,
+        `${px}-button--${buttonType}`,
+        {
+          [`${px}-button--icon-last`]: iconLast,
+        },
+        className,
+      )}
       {...props}
     >
       {children}
