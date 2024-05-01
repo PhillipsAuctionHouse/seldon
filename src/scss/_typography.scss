@@ -69,12 +69,6 @@ body {
   font-style: italic;
 }
 
-@font-face {
-  font-family: MontserratSemiBold;
-  src: url('../fonts/Montserrat-SemiBold.woff') format('woff');
-  src: url('../fonts/Montserrat-SemiBold.woff2') format('woff2');
-}
-
 @mixin headerText {
   @include DistinctDisplay;
 
