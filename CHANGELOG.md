@@ -1,3 +1,18 @@
+## [1.17.5](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.17.4...v1.17.5) (2024-04-26)
+
+
+### Bug Fixes
+
+* **deps:** bump react and @types/react ([1f822aa](https://github.com/PhillipsAuctionHouse/seldon/commit/1f822aa5b3fe4e23f53bb062323edf535d567f83))
+* **errorboundary:** fix type error for console log ([45816c7](https://github.com/PhillipsAuctionHouse/seldon/commit/45816c7b61c0906a1aed51e4766d61b11e38f09b))
+
+## [1.17.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.17.3...v1.17.4) (2024-04-26)
+
+
+### Bug Fixes
+
+* **viewingsListCardForm:** change input order ([5217115](https://github.com/PhillipsAuctionHouse/seldon/commit/521711551c76ab67bb265a71f7316685f5b44e05))
+
 ## [1.17.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.17.2...v1.17.3) (2024-04-23)
 
 

@@ -1,0 +1,17 @@
+name: auto merge dependabot minor and patch updates
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  auto-merge:
+    name: Auto-merge dependabot PRs
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: auto-merge if minor or patch
+        uses: ahmadnassri/action-dependabot-auto-merge@v2
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}

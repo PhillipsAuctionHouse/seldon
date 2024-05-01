@@ -23,15 +23,15 @@
 # Admin should be notified of changes to build/test/deploy
 
 # Core dependencies
-/package-lock.json  @davidicus
-/package.json       @davidicus
+/package-lock.json  @davidicus @scottdickerson
+/package.json       @davidicus @scottdickerson
 
 # Configuration files
-tsconfig.node.json  @davidicus
-vite.config.ts      @davidicus
-tsconfig.json       @davidicus
-/.nvmrc             @davidicus
+tsconfig.node.json  @davidicus @scottdickerson
+vite.config.ts      @davidicus @scottdickerson
+tsconfig.json       @davidicus @scottdickerson
+/.nvmrc             @davidicus @scottdickerson
 
 # Deploy configuration
-**/.storybook/      @davidicus
-/.github/           @davidicus
+**/.storybook/      @davidicus @scottdickerson
+/.github/           @davidicus @scottdickerson
