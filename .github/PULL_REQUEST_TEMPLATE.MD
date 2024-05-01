@@ -33,6 +33,8 @@ Add high-level overview of the changes that were made and explanation of WHY the
 
 - [ ] Make sure all references to `phillips` class prefix is using the prefix variable
 - [ ] All major areas have a `data-testid` attribute.
+- [ ] Document all props with jsdoc comments
+- [ ] Create a jsdoc comment for the component that has an Overview section and a link to the Figma design for the component
 - [ ] All strings should be translatable.
 - [ ] Unit test should be written and should have a coverage of 90% or higher in all areas.
 - [ ] Changes or new components should either write new or update existing documentation.

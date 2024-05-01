@@ -45,6 +45,14 @@ export default defineConfig({
         find: '../../_utils',
         replacement: resolve(__dirname, './src/scss/_utils'),
       },
+      {
+        find: './type',
+        replacement: resolve(__dirname, './src/scss/type'),
+      },
+      {
+        find: '../../type',
+        replacement: resolve(__dirname, './src/scss/type'),
+      },
     ],
   },
   css: {

@@ -1,12 +1,33 @@
-@import '../../vars';
-@import '../../_utils';
+@use '../../scss/type' as *;
 
 .#{$px}-link {
-  @include linkText;
+  @include text($cta-sm);
+
+  color: $cta-blue;
+  text-decoration: none;
+
+  &:hover:not(&--list),
+  &:focus:not(&--list) {
+    @include underline;
+  }
 
   &:hover,
   &:focus {
-    color: $widget-blue;
-    text-decoration: underline;
+    color: $cta-blue;
+    outline: unset;
+  }
+
+  &--inline {
+    font-size: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+  }
+
+  &--list {
+    color: $dark-gray;
+  }
+
+  &--email {
+    @include text($email);
   }
 }

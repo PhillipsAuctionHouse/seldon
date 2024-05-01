@@ -75,10 +75,6 @@ body {
   src: url('../fonts/Montserrat-SemiBold.woff2') format('woff2');
 }
 
-@mixin MontserratSemiBold {
-  font-family: MontserratSemiBold, sans-serif;
-}
-
 @mixin headerText {
   @include DistinctDisplay;
 
@@ -88,10 +84,4 @@ body {
 
 @mixin bodyText {
   color: $soft-black;
-}
-
-@mixin linkText {
-  @include MontserratSemiBold;
-
-  color: $dark-gray;
 }

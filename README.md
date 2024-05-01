@@ -18,38 +18,6 @@ npm install @phillips/seldon
 yarn add @phillips/seldon
 ```
 
-## What's included
-
-```
-@phillips/seldon/
-├── components
-│   └── HeroBanner
-│       └── HeroBanner.d.ts
-│       └── HeroBanner.js
-│   └── ...
-├── Pages
-│   └── HomePage
-│       └── HomePage.d.ts
-│       └── HomePage.js
-│   └── ...
-├── scss
-│   └── components
-│       └── HeroBanner
-│           └── _HeroBanner.scss
-│       └── ...
-│   └── Pages
-│       └── HomePage
-│           └── _HomePage.scss
-│       └── ...
-│   └── _reset.scss
-│   └── _typography_.scss
-│   └── _vars.scss
-│   └── styles.scss (sass entrypoint)
-├── utils
-├── index.d.ts
-├── index.js
-```
-
 ### Styling
 
 The project contains a `scss` folder. Here you will find the main export of our sass styles. This will include all the styles bundled with this package, including resets and typography styles.

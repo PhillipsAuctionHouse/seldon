@@ -1,5 +1,10 @@
 @use './vars' as *;
 
+@mixin underline($padding: 0, $width: 0.0625rem, $color: $cta-blue) {
+  border-bottom: $width solid $color;
+  padding-bottom: $padding;
+}
+
 @mixin hText($size: $heading-size1, $color: $primary-black, $transform-style: capitalize) {
   color: $color;
   font-family: DistinctDisplay, sans-serif;
@@ -31,7 +36,7 @@
     font-size: $cta-sm-label-size;
     font-weight: 600;
     letter-spacing: 0.0625rem;
-    line-height: 1.25;
+    line-height: calc(1.25 * $cta-sm-label-size);
     text-transform: uppercase;
   }
 
@@ -39,7 +44,7 @@
     font-size: $cta-lg-label-size;
     font-weight: 700;
     letter-spacing: 0.125rem;
-    line-height: 1.25;
+    line-height: calc(1.25 * $cta-lg-label-size);
     text-transform: uppercase;
   }
 
