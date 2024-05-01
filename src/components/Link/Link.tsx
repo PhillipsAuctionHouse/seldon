@@ -35,7 +35,7 @@ export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
    * Can be used to render alternative link components like the prefetching `Link` from `@remix-run/react`.
    * If you implement this you should handle the `children`, `dataTestId`, `id`, `className`, and `href` props.
    */
-  component?: React.FunctionComponent<LinkProps & { 'data-testid': string }>;
+  component?: React.ElementType<LinkProps & { 'data-testid': string }>;
 }
 
 /**
@@ -50,15 +50,20 @@ const Link = ({ children, id, className, component: Component, variant, href, ..
   const dataTestId = id ? `link-${id}` : `link`;
   const isExternal = href.match(/https?/);
 
-  return React.createElement(Component ?? 'a', {
-    ...props,
-    children,
-    href,
-    ['data-testid']: dataTestId,
-    id,
-    className: classNames,
-    ...(isExternal && !Component ? { rel: 'noopener noreferrer', target: '_blank' } : {}),
-  });
+  const RootComponent = Component ?? 'a';
+
+  return (
+    <RootComponent
+      {...props}
+      href={href}
+      data-testid={dataTestId}
+      id={id}
+      className={classNames}
+      {...(isExternal && RootComponent === 'a' ? { rel: 'noopener noreferrer', target: '_blank' } : {})}
+    >
+      {children}
+    </RootComponent>
+  );
 };
 
 export default Link;
