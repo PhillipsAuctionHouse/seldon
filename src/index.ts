@@ -6,6 +6,7 @@ export { default as Grid, type GridProps } from './components/Grid/Grid';
 export { default as Header, type HeaderProps } from './components/Header/Header';
 export { default as HeroBanner, type HeroBannerProps } from './components/HeroBanner/HeroBanner';
 export { default as Input, type InputProps } from './components/Input/Input';
+export { default as Link, type LinkProps } from './components/Link/Link';
 export { default as Select, type SelectProps } from './components/Select/Select';
 export { default as ViewingsList, type ViewingsListProps } from './components/ViewingsList/ViewingsList';
 export {
