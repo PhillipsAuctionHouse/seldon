@@ -73,18 +73,21 @@
 
 @mixin media($breakpoint) {
   @if $breakpoint == 'sm' {
+    // $breakpoint2: 961px;
     @media (min-width: $breakpoint2) {
       @content;
     }
   }
 
   @if $breakpoint == 'md' {
+    // $breakpoint3: 1401px;
     @media (min-width: $breakpoint3) {
       @content;
     }
   }
 
   @if $breakpoint == 'lg' {
+    // $breakpoint4: 1801px;
     @media (min-width: $breakpoint4) {
       @content;
     }

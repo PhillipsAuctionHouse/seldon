@@ -1,11 +1,14 @@
 import type { Meta } from '@storybook/react';
 
 import Footer, { FooterProps } from './Footer';
+import Subscribe from '../Subscribe/Subscribe';
+import { px } from '../../utils';
 
 import Youtube from '../../assets/youtube.svg?react';
 import Instagram from '../../assets/instagram.svg?react';
 import Wechat from '../../assets/wechat.svg?react';
 import Spotify from '../../assets/spotify.svg?react';
+import Social from '../Social/Social';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -18,7 +21,7 @@ export default meta;
 
 export const Playground = (props: FooterProps) => <Footer {...props} />;
 
-const navigation = (
+const navigationComponent = (
   <ul>
     <li>
       <a>Locations</a>
@@ -66,16 +69,30 @@ const socialIcons = (
   </ul>
 );
 
+const leftComponent = (
+  <Subscribe
+    className={`${px}-footer__newsletter`}
+    title="Subscribe to Newsletter"
+    blurb="Receive exclusive content about our auctions, exhibitions, and special events."
+    buttonText="Sign Up"
+    buttonProps={{
+      size: 'sm',
+      onClick: (e: React.MouseEvent) => {
+        e.preventDefault();
+        const inputElement = (e.target as HTMLElement).closest('form')?.querySelector('input');
+        if (inputElement) {
+          console.log(`subscribe ${inputElement.value}`);
+          inputElement.value = '';
+        }
+      },
+    }}
+  />
+);
+
+const rightComponent = <Social className={`${px}-footer__social`}>{socialIcons}</Social>;
+
 Playground.args = {
-  copyright: '© 2024 Phillips Auctioneers, LLC',
-  navigation,
-  socialIcons,
-  subscribeCallback: (e: React.MouseEvent) => {
-    e.preventDefault();
-    const inputElement = (e.target as HTMLElement).closest('form')?.querySelector('input');
-    if (inputElement) {
-      console.log(`subscribe ${inputElement.value}`);
-      inputElement.value = '';
-    }
-  },
+  leftComponent,
+  navigationComponent,
+  rightComponent,
 };

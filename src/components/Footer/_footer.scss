@@ -13,11 +13,18 @@
     padding: 0;
   }
 
-  // @TODO: Extract into a navigation partial when header is being worked on
   &__navigation {
     background-color: $white;
     padding: $spacing-medium $spacing-medium $spacing-small;
     text-align: right;
+
+    @include media('md') {
+      padding: $spacing-medium $spacing-large $spacing-small;
+    }
+
+    @include media('lg') {
+      padding: $spacing-medium $spacing-xl $spacing-small;
+    }
 
     ul {
       display: inline-flex;
@@ -28,7 +35,8 @@
       padding: 0;
     }
 
-    a {
+    a,
+    button {
       @include text('cta-sm');
       @include bodyText;
 
@@ -66,33 +74,8 @@
     }
   }
 
-  &__social {
-    align-items: center;
+  & .#{$px}-footer__social {
     display: flex;
-    flex-direction: column;
-
-    &-header {
-      @include text($heading3);
-
-      margin-bottom: $spacing-xsm;
-    }
-
-    ul {
-      display: flex;
-      gap: 0 1.25rem;
-
-      @include media('sm') {
-        gap: 0 1rem;
-      }
-
-      li {
-        cursor: pointer;
-      }
-    }
-
-    a {
-      display: inline-block;
-    }
   }
 
   &__copyright {

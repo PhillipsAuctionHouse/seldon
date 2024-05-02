@@ -1,12 +1,12 @@
 import classnames from 'classnames';
 
-import { CommonProps, px } from '../../utils';
+import { px } from '../../utils';
 
-export interface ButtonProps extends CommonProps, Record<string, unknown> {
+export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * Button contents
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /**
    * True if button comes after text
    */
@@ -14,7 +14,7 @@ export interface ButtonProps extends CommonProps, Record<string, unknown> {
   /**
    * Optional click handler
    */
-  onClick?: (e: React.MouseEvent<HTMLElement>) => void | unknown;
+  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   /**
    * Is this the principal call to action on the page?
    */
@@ -23,6 +23,10 @@ export interface ButtonProps extends CommonProps, Record<string, unknown> {
    * How large should the button be?
    */
   size?: 'sm' | 'md' | 'lg';
+  /**
+   * The type of the button.
+   */
+  type?: 'button' | 'submit' | 'reset';
 }
 
 const Button = ({
@@ -32,13 +36,14 @@ const Button = ({
   className,
   iconLast = false,
   id,
+  type = 'button',
   ...props
 }: ButtonProps) => {
   return (
     <button
       data-testid={id ? `button-${id}` : `button`}
       id={id}
-      type="button"
+      type={type}
       className={classnames(
         `${px}-button`,
         `${px}-button--${size}`,

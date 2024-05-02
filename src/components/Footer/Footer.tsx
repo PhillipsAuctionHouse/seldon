@@ -1,65 +1,52 @@
 import classnames from 'classnames';
 
-import { CommonProps, px } from '../../utils';
-import Subscribe from '../Subscribe/Subscribe';
+import { defaultYear, px } from '../../utils';
+import SplitPanel from '../SplitPanel/SplitPanel';
 
-export interface FooterProps extends CommonProps {
+export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Copyright data added to bottom of site
    */
-  copyright: string;
+  copyright?: string;
+  /**
+   * Optional Content that will be displayed on the left side of the footer on large screens and top on small screens
+   */
+  leftComponent?: React.ReactElement;
   /**
    * Navigation items
    */
-  navigation: React.ReactNode;
+  navigationComponent: React.ReactElement;
   /**
-   * Social icons
+   * Optional Content that will be displayed on the right side of the footer on large screens and bottom on small screens
    */
-  socialIcons: React.ReactNode;
-  /**
-   * Header text for social icons
-   */
-  socialText?: string;
-  /**
-   * Subscribe blurb text
-   */
-  subscribeBlurb?: string;
-  /**
-   * Subscribe callback function
-   */
-  subscribeCallback: (e: React.MouseEvent) => void;
-  /**
-   * Subscribe title text
-   */
-  subscribeTitle?: string;
+  rightComponent?: React.ReactElement;
 }
+
+/**
+ * ## Overview
+ *
+ * A component for adding a footer to the bottom of the site.
+ *
+ * [Figma Link](https://www.figma.com/file/npS5ECbNut8hevUkGWSzUN/Site-Furniture-(Navigation)---SP24?type=design&node-id=4346-1981&mode=design&t=D7PpghvLOEpBYd3n-0)
+ */
 
 const Footer = ({
   className,
-  copyright,
+  copyright = `© ${defaultYear} Phillips Auctioneers, LLC`,
   id,
-  navigation,
-  socialIcons,
-  socialText = 'Follow on Social',
-  subscribeBlurb = 'Receive exclusive content about our auctions, exhibitions, and special events.',
-  subscribeCallback,
-  subscribeTitle = 'Subscribe to Newsletter',
+  leftComponent,
+  navigationComponent,
+  rightComponent,
 }: FooterProps) => {
   return (
     <footer data-testid={id ? `footer-${id}` : `footer`} id={id} className={classnames(`${px}-footer`, { className })}>
-      <nav className={`${px}-footer__navigation`}>{navigation}</nav>
-      <div className={`${px}-footer__content`}>
-        <Subscribe
-          className={`${px}-footer__newsletter`}
-          title={subscribeTitle}
-          blurb={subscribeBlurb}
-          buttonProps={{ size: 'sm', onClick: subscribeCallback }}
-        />
-        <div className={`${px}-footer__social`}>
-          <h3 className={`${px}-footer__social-header`}>{socialText}</h3>
-          {socialIcons}
-        </div>
-      </div>
+      <nav className={`${px}-footer__navigation`}>{navigationComponent}</nav>
+      <SplitPanel
+        className={`${px}-footer__content`}
+        hasBorder={false}
+        leftComponent={leftComponent}
+        rightComponent={rightComponent}
+      />
       <p className={`${px}-footer__copyright`}>{copyright}</p>
     </footer>
   );

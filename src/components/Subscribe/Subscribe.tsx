@@ -1,51 +1,65 @@
 import classnames from 'classnames';
 
-import { CommonProps, px } from '../../utils';
+import { px } from '../../utils';
 import Input from '../Input/Input';
-import Button from '../Button/Button';
+import Button, { ButtonProps } from '../Button/Button';
 
-export interface SubscribeProps extends CommonProps {
+export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
   /**
-   * Subscibe blurb
+   * Subscribe blurb
    */
   blurb?: string;
   /**
-   * Subscibe button extra props to spread
+   * Subscribe button extra props to spread
    */
-  buttonProps?: object;
+  buttonProps?: ButtonProps;
   /**
-   * Subscibe button text
+   * Subscribe button text
    */
   buttonText?: string;
   /**
-   * Subscibe input label
+   * Optional element to render in place of a form e.g. Remix Form, etc
+   */
+  element?: React.ElementType;
+  /**
+   * Subscribe input label
    */
   inputLabelText?: string;
   /**
-   * Subscibe input label
+   * Subscribe input label
    */
   inputPlaceholder?: string;
   /**
-   * Subscibe title text
+   * Subscribe title text
    */
   title: string;
 }
 
+/**
+ * ## Overview
+ *
+ * A component for adding an email signup form.
+ *
+ * [Figma Link](https://www.figma.com/file/npS5ECbNut8hevUkGWSzUN/Site-Furniture-(Navigation)---SP24?node-id=4347%3A4194&mode=dev)
+ */
 const Subscribe = ({
   blurb,
   buttonText = 'Sign Up',
   buttonProps,
   className,
+  element: Element = 'form',
   id,
   inputLabelText = 'Email*',
   inputPlaceholder = 'example@email.com',
   title,
+  ...props
 }: SubscribeProps) => {
   return (
-    <form
-      data-testid={id ? `subscribe-${id}` : `subscribe`}
+    <Element
+      data-testid={id ? id : `subscribe`}
       id={id}
-      className={classnames(`${px}-subscribe`, { [`${className}`]: className })}
+      className={classnames(`${px}-subscribe`, className)}
+      {...props}
     >
       <h3 className={`${px}-subscribe__title`}>{title}</h3>
       {blurb ? <p className={`${px}-subscribe__blurb`}>{blurb}</p> : null}
@@ -56,10 +70,10 @@ const Subscribe = ({
         placeholder={inputPlaceholder}
         labelText={inputLabelText}
       />
-      <Button className={`${px}-subscribe__button`} buttonType="secondary" type="submit" {...buttonProps}>
+      <Button className={`${px}-subscribe__button ${className}`} buttonType="secondary" type="submit" {...buttonProps}>
         {buttonText}
       </Button>
-    </form>
+    </Element>
   );
 };
 
