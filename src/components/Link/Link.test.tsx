@@ -32,7 +32,11 @@ describe('Link', () => {
   });
 
   it('opens a new window for external links', () => {
-    render(<Link href="https://example.com">Example Link</Link>);
+    render(
+      <Link href="https://example.com" isExternal>
+        Example Link
+      </Link>,
+    );
     const linkElement = getLinkElement('Example Link');
     expect(linkElement).toHaveAttribute('target', '_blank');
     expect(linkElement).toHaveAttribute('rel', 'noopener noreferrer');

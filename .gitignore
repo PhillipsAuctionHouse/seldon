@@ -28,5 +28,6 @@ coverage
 
 
 *.notes.md
+vite.config.ts.timestamp*
 
 

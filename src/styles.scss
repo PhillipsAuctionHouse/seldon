@@ -1,8 +1,6 @@
 // 🌎 Globals
+@import './reset';
 @import './vars';
-
-// @TODO: add styles when we can do a site wide regressions QA
-// @use 'reset';
 @import './typography';
 
 // ⚛️ Components
@@ -16,6 +14,7 @@
 @import 'components/ViewingsList/viewingsList';
 @import 'components/Grid/grid';
 @import 'components/Link/link';
+@import 'components/LinkBlock/linkBlock';
 
 // 📑 Pages
 @import 'pages/page';

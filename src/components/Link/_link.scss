@@ -1,10 +1,11 @@
-@use '../../scss/type' as *;
+@import '../../type';
 
 .#{$px}-link {
   @include text($cta-sm);
 
   color: $cta-blue;
   text-decoration: none;
+  white-space: nowrap;
 
   &:hover:not(&--list),
   &:focus:not(&--list) {
@@ -24,7 +25,7 @@
   }
 
   &--list {
-    color: $dark-gray;
+    color: $soft-black;
   }
 
   &--email {

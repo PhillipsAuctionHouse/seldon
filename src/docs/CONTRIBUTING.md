@@ -182,7 +182,6 @@ Often times changes to the library are being made to add features to an applicat
 
 ```sh
 npm run build
-cd dist
 npm link
 ```
 

@@ -36,6 +36,11 @@ export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
    * If you implement this you should handle the `children`, `dataTestId`, `id`, `className`, and `href` props.
    */
   component?: React.ElementType<LinkProps & { 'data-testid': string }>;
+
+  /**
+   * Does the link point to an external website? If true, the link will open in a new tab.
+   */
+  isExternal?: boolean;
 }
 
 /**
@@ -45,10 +50,9 @@ export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
  *
  * [Figma Link](https://www.figma.com/file/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=5736%3A13364&mode=dev)
  */
-const Link = ({ children, id, className, component: Component, variant, href, ...props }: LinkProps) => {
+const Link = ({ children, id, className, component: Component, variant, href, isExternal, ...props }: LinkProps) => {
   const classNames = classnames(`${px}-link`, getLinkVariantClassName(variant ?? LinkVariants.standalone), className);
   const dataTestId = id ? `link-${id}` : `link`;
-  const isExternal = href.match(/https?/);
 
   const RootComponent = Component ?? 'a';
 
