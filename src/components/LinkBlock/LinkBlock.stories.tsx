@@ -3,7 +3,7 @@ import Link, { LinkProps } from '../Link/Link';
 import LinkBlock, { LinkBlockProps } from './LinkBlock';
 
 const meta = {
-  title: 'Components/LinkBlock',
+  title: 'Components/Links/LinkBlock',
   component: LinkBlock,
   tags: ['autodocs'],
 } satisfies Meta<typeof LinkBlock>;

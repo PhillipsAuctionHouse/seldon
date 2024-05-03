@@ -3,7 +3,7 @@ import type { Meta } from '@storybook/react';
 import Link, { LinkProps, LinkVariants } from './Link';
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
-  title: 'Components/Link',
+  title: 'Components/Links/Link',
   component: Link,
   tags: ['autodocs'],
 } satisfies Meta<typeof Link>;
