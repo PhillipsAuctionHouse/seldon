@@ -1,0 +1,9 @@
+@import '../../_utils';
+
+.#{$px}-link-list {
+  @include grid(3);
+
+  @media (width <= $breakpoint2) {
+    @include grid(1);
+  }
+}
