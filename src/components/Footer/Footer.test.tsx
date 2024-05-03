@@ -75,21 +75,4 @@ describe('Footer', () => {
     expect(screen.queryByTestId(/subscribe/)).toBeInTheDocument();
     expect(screen.queryByTestId(/social/)).toBeInTheDocument();
   });
-
-  // const mockedCallback = jest.fn((e) => {
-  //   e.preventDefault();
-  //   const inputElement = (e.target as HTMLElement).closest('form')?.querySelector('input');
-
-  //   return inputElement?.value;
-  // });
-  // it('passes the subscribe callback to the subscribe component', async () => {
-  //   const user = userEvent.setup();
-  //   render(<Footer {...commonProps} />);
-  //   await user.click(screen.getByPlaceholderText(/example@email.com/));
-
-  //   await user.keyboard('test@test.com');
-
-  //   await user.click(screen.getByText('Sign Up'));
-  //   expect(mockedCallback).toHaveBeenCalled();
-  // });
 });
