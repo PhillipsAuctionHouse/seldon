@@ -5,8 +5,8 @@ import Subscribe from './Subscribe';
 
 describe('Subscribe', () => {
   it('is selectable by the test id', () => {
-    render(<Subscribe id="test" title="Subscribe to Email" />);
-    expect(screen.queryByTestId(/subscribe-test/)).toBeInTheDocument();
+    render(<Subscribe id="test" />);
+    expect(screen.queryByTestId('test')).toBeInTheDocument();
   });
 
   it('it will render a blurb if one is passed in', () => {

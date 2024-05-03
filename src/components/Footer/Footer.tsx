@@ -39,7 +39,7 @@ const Footer = ({
   rightComponent,
 }: FooterProps) => {
   return (
-    <footer data-testid={id ? `footer-${id}` : `footer`} id={id} className={classnames(`${px}-footer`, { className })}>
+    <footer data-testid={id ? id : `footer`} id={id} className={classnames(`${px}-footer`, { className })}>
       <nav className={`${px}-footer__navigation`}>{navigationComponent}</nav>
       <SplitPanel
         className={`${px}-footer__content`}

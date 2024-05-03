@@ -32,7 +32,7 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
   /**
    * Subscribe title text
    */
-  title: string;
+  title?: string;
 }
 
 /**
@@ -51,12 +51,12 @@ const Subscribe = ({
   id,
   inputLabelText = 'Email*',
   inputPlaceholder = 'example@email.com',
-  title,
+  title = 'Subscribe to Newsletter',
   ...props
 }: SubscribeProps) => {
   return (
     <Element
-      data-testid={id ? id : `subscribe`}
+      data-testid={id ? id : `subscribe-form`}
       id={id}
       className={classnames(`${px}-subscribe`, className)}
       {...props}
@@ -65,7 +65,6 @@ const Subscribe = ({
       {blurb ? <p className={`${px}-subscribe__blurb`}>{blurb}</p> : null}
       <Input
         className={`${px}-subscribe__input`}
-        data-testid={id ? `subscribe-email-${id}` : `subscribe-email`}
         type="email"
         placeholder={inputPlaceholder}
         labelText={inputLabelText}

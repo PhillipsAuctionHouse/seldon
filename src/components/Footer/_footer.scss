@@ -66,7 +66,7 @@
     }
   }
 
-  &__newsletter {
+  &__content-split-panel__left {
     margin-bottom: $spacing-medium;
 
     @include media('sm') {
@@ -74,8 +74,12 @@
     }
   }
 
-  & .#{$px}-footer__social {
+  &__content-split-panel__right {
     display: flex;
+
+    @include media('sm') {
+      justify-content: flex-end;
+    }
   }
 
   &__copyright {

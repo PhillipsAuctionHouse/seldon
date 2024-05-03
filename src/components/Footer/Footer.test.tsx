@@ -1,7 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import { userEvent } from '@testing-library/user-event';
+// import { userEvent } from '@testing-library/user-event';
 
 import Footer from './Footer';
+import Social from '../Social/Social';
+import Subscribe from '../Subscribe/Subscribe';
 
 describe('Footer', () => {
   const socialIcons = (
@@ -21,7 +23,18 @@ describe('Footer', () => {
     </ul>
   );
 
-  const navigation = (
+  const leftComponent = (
+    <Subscribe
+      id="subscribe"
+      title="Subscribe to Email"
+      blurb="This blurb will be rendered"
+      buttonProps={{ onClick: jest.fn() }}
+    />
+  );
+
+  const rightComponent = <Social id="social">{socialIcons}</Social>;
+
+  const navigationComponent = (
     <ul>
       <li>
         <a>Locations</a>
@@ -43,34 +56,40 @@ describe('Footer', () => {
       </li>
     </ul>
   );
-  const mockedCallback = jest.fn((e) => {
-    e.preventDefault();
-    const inputElement = (e.target as HTMLElement).closest('form')?.querySelector('input');
-
-    return inputElement?.value;
-  });
 
   const commonProps = {
-    navigation,
-    socialIcons,
-    copyright: '© 2024 Phillips Auctioneers, LLC',
-    subscribeCallback: mockedCallback,
+    leftComponent,
+    navigationComponent,
+    rightComponent,
   };
+
   it('is selectable by the test id', () => {
     const { rerender } = render(<Footer {...commonProps} />);
     expect(screen.queryByTestId(/footer/)).toBeInTheDocument();
     rerender(<Footer id="test" {...commonProps} />);
-    expect(screen.queryByTestId(/footer-test/)).toBeInTheDocument();
+    expect(screen.queryByTestId(/test/)).toBeInTheDocument();
   });
 
-  it('passes the subscribe callback to the subscribe component', async () => {
-    const user = userEvent.setup();
+  it('renders the components we pass to it', () => {
     render(<Footer {...commonProps} />);
-    await user.click(screen.getByPlaceholderText(/example@email.com/));
-
-    await user.keyboard('test@test.com');
-
-    await user.click(screen.getByText('Sign Up'));
-    expect(mockedCallback).toHaveBeenCalled();
+    expect(screen.queryByTestId(/subscribe/)).toBeInTheDocument();
+    expect(screen.queryByTestId(/social/)).toBeInTheDocument();
   });
+
+  // const mockedCallback = jest.fn((e) => {
+  //   e.preventDefault();
+  //   const inputElement = (e.target as HTMLElement).closest('form')?.querySelector('input');
+
+  //   return inputElement?.value;
+  // });
+  // it('passes the subscribe callback to the subscribe component', async () => {
+  //   const user = userEvent.setup();
+  //   render(<Footer {...commonProps} />);
+  //   await user.click(screen.getByPlaceholderText(/example@email.com/));
+
+  //   await user.keyboard('test@test.com');
+
+  //   await user.click(screen.getByText('Sign Up'));
+  //   expect(mockedCallback).toHaveBeenCalled();
+  // });
 });
