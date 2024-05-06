@@ -30,7 +30,7 @@ Playground.args = {
 
 export const CustomLink = ({ playgroundWidth, children, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <Link {...args} component={(props) => <a {...props}>{<>Custom Link: {props.children}</>}</a>}>
+    <Link {...args} element={(props) => <a {...props}>{<>Custom Link: {props.children}</>}</a>}>
       {children}
     </Link>
   </div>
