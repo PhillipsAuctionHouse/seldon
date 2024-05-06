@@ -19,7 +19,7 @@ const LinkList = ({ children, id, ...props }: LinkListProps) => {
   const baseClassName = `${px}-link-list`;
 
   return (
-    <Grid {...props} data-testid={dataTestId} id={id} className={baseClassName} element="ul">
+    <Grid {...props} data-testid={dataTestId} id={id} className={baseClassName} element="ul" role="list">
       {children.map((LinkBlockComponent) => {
         if (React.isValidElement(LinkBlockComponent) && LinkBlockComponent.type !== LinkBlock) {
           console.warn('LinkList only accepts LinkBlock children');
