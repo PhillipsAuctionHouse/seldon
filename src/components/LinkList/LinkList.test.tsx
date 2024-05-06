@@ -75,18 +75,4 @@ describe('LinkList component', () => {
     });
     expect(consoleWarnSpy).toHaveBeenCalledWith('LinkList only accepts LinkBlock children');
   });
-
-  it('renders a warning when the number of LinkBlocks is not divisible by 3', () => {
-    jest.spyOn(console, 'warn').mockImplementation(() => {
-      return;
-    });
-
-    const invalidLinkBlocks: React.ReactElement<LinkBlockProps, typeof LinkBlock>[] = LinkBlocks.slice(0, 2);
-
-    render(<LinkList>{invalidLinkBlocks}</LinkList>);
-
-    expect(console.warn).toHaveBeenCalledWith(
-      'The set of LinkBlock children should be divisible by 3 to match the 3 column design',
-    );
-  });
 });

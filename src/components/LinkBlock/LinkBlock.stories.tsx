@@ -24,14 +24,14 @@ Playground.args = {
 export const CustomLinkBlock = (props: LinkBlockProps) => <LinkBlock {...props} />;
 
 CustomLinkBlock.args = {
-  linkComponent: (props: LinkProps) => (
-    <Link {...props}>
-      <>Custom Link: {props.children}</>
-    </Link>
-  ),
   linkProps: {
     children: 'Custom Link',
     href: '/?path=/docs/components-button--overview',
+    component: (props: LinkProps) => (
+      <Link {...props}>
+        <>Custom Link: {props.children}</>
+      </Link>
+    ),
   },
   description: 'This is a description of the link',
 };

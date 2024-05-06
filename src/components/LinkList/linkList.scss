@@ -1,9 +1,11 @@
 @import '../../_utils';
 
 .#{$px}-link-list {
-  @include grid(3);
+  &--item {
+    grid-column: span 4;
 
-  @media (width <= $breakpoint2) {
-    @include grid(1);
+    @media (width <= $breakpoint2) {
+      grid-column: span 2;
+    }
   }
 }
