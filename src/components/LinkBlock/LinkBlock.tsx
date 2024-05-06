@@ -7,8 +7,6 @@ export interface LinkBlockProps extends React.HTMLAttributes<HTMLDivElement> {
   linkProps: Omit<LinkProps, 'variant'>;
   /** Renders description under link */
   description: string;
-
-  linkComponent?: LinkProps['component'];
 }
 
 /**
@@ -19,17 +17,10 @@ export interface LinkBlockProps extends React.HTMLAttributes<HTMLDivElement> {
  * [Figma Link](https://www.figma.com/file/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?type=design&node-id=5709-8035&mode=design&t=CTNssP89Nrnt6Jkw-0)
  *
  */
-const LinkBlock = ({
-  linkComponent: Component,
-  linkProps,
-  description,
-  className: classNameProp,
-  id,
-  ...props
-}: LinkBlockProps) => {
+const LinkBlock = ({ linkProps, description, className: classNameProp, id, ...props }: LinkBlockProps) => {
   const baseClassName = `${px}-link-block`;
   const className = classnames(baseClassName, classNameProp);
-  const LinkComponent = Component ?? Link;
+  const LinkComponent = linkProps.element ?? Link;
   const dataTestId = id ? `link-block-${id}` : `link-block`;
 
   return (

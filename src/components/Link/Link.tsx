@@ -2,7 +2,7 @@ import classnames from 'classnames';
 
 import { px } from '../../utils';
 import React, { HTMLAttributes } from 'react';
-import { getLinkVariantClassName } from './utils';
+import { getLinkVariantClassName, isLinkExternal } from './utils';
 
 export const LinkVariants = {
   /** Default variant, used */
@@ -48,9 +48,7 @@ export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
 const Link = ({ children, id, className, element: Component = 'a', variant, href, ...props }: LinkProps) => {
   const classNames = classnames(`${px}-link`, getLinkVariantClassName(variant ?? LinkVariants.standalone), className);
   const dataTestId = id ? `link-${id}` : `link`;
-  const isExternal = href.match(
-    /(http[s]?:\/\/)(?!.*phillips\.com)([a-zA-Z0-9\-.]+)(:[0-9]{1,4})?([a-zA-Z0-9/\-._~:?#[\]@!$&'()*+,;=]*)/g,
-  );
+  const isExternal = isLinkExternal(href);
 
   return (
     <Component

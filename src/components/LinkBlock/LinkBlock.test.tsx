@@ -9,9 +9,10 @@ describe('LinkBlock', () => {
       href: 'https://example.com',
       target: '_blank',
       children: 'My Link',
+      element: Link,
     };
 
-    render(<LinkBlock linkComponent={Link} linkProps={linkProps} description="This is a link block" />);
+    render(<LinkBlock linkProps={linkProps} description="This is a link block" />);
 
     const linkElement = screen.getByRole('link', { name: 'My Link' });
     expect(linkElement).toBeInTheDocument();
@@ -29,9 +30,10 @@ describe('LinkBlock', () => {
     const linkProps = {
       href: 'https://customlink.com',
       children: 'Link',
+      element: CustomLink,
     };
 
-    render(<LinkBlock linkComponent={CustomLink} linkProps={linkProps} description="This is a custom link block" />);
+    render(<LinkBlock linkProps={linkProps} description="This is a custom link block" />);
 
     const linkElement = screen.getByRole('link', { name: 'Custom Link: Link' });
     expect(linkElement).toBeInTheDocument();
