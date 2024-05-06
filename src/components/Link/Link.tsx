@@ -45,22 +45,30 @@ export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
  *
  * [Figma Link](https://www.figma.com/file/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=5736%3A13364&mode=dev)
  */
-const Link = ({ children, id, className, element: Component = 'a', variant, href, ...props }: LinkProps) => {
-  const classNames = classnames(`${px}-link`, getLinkVariantClassName(variant ?? LinkVariants.standalone), className);
+const Link = ({
+  children,
+  id,
+  className,
+  element: Element = 'a',
+  variant = LinkVariants.standalone,
+  href,
+  ...props
+}: LinkProps) => {
+  const classNames = classnames(`${px}-link`, getLinkVariantClassName(variant), className);
   const dataTestId = id ? `link-${id}` : `link`;
   const isExternal = isLinkExternal(href);
 
   return (
-    <Component
+    <Element
       {...props}
       href={href}
       data-testid={dataTestId}
       id={id}
       className={classNames}
-      {...(isExternal && Component === 'a' ? { rel: 'noopener noreferrer', target: '_blank' } : {})}
+      {...(isExternal && Element === 'a' ? { rel: 'noopener noreferrer', target: '_blank' } : {})}
     >
       {children}
-    </Component>
+    </Element>
   );
 };
 
