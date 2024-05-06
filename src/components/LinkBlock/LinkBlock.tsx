@@ -6,7 +6,7 @@ export interface LinkBlockProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Props for the Link component */
   linkProps: Omit<LinkProps, 'variant'>;
   /** Renders description under link */
-  description: React.ReactNode;
+  description: string;
 }
 
 /**
@@ -20,7 +20,7 @@ export interface LinkBlockProps extends React.HTMLAttributes<HTMLDivElement> {
 const LinkBlock = ({ linkProps, description, className: classNameProp, id, ...props }: LinkBlockProps) => {
   const baseClassName = `${px}-link-block`;
   const className = classnames(baseClassName, classNameProp);
-  const LinkComponent = linkProps?.component ?? Link;
+  const LinkComponent = linkProps.element ?? Link;
   const dataTestId = id ? `link-block-${id}` : `link-block`;
 
   return (

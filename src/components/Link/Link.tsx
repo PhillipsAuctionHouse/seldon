@@ -2,7 +2,7 @@ import classnames from 'classnames';
 
 import { px } from '../../utils';
 import React, { HTMLAttributes } from 'react';
-import { getLinkVariantClassName } from './utils';
+import { getLinkVariantClassName, isLinkExternal } from './utils';
 
 export const LinkVariants = {
   /** Default variant, used */
@@ -33,9 +33,9 @@ export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
   href: string;
   /**
    * Can be used to render alternative link components like the prefetching `Link` from `@remix-run/react`.
-   * If you implement this you should handle the `children`, `dataTestId`, `id`, `className`, and `href` props.
+   * This component should handle the `children`, `data-testid`, `id`, `className`, and `href` props.
    */
-  component?: React.ElementType<LinkProps & { 'data-testid': string }>;
+  element?: React.ElementType<LinkProps & { 'data-testid': string }>;
 }
 
 /**
@@ -45,26 +45,30 @@ export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
  *
  * [Figma Link](https://www.figma.com/file/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=5736%3A13364&mode=dev)
  */
-const Link = ({ children, id, className, component: Component, variant, href, ...props }: LinkProps) => {
-  const classNames = classnames(`${px}-link`, getLinkVariantClassName(variant ?? LinkVariants.standalone), className);
+const Link = ({
+  children,
+  id,
+  className,
+  element: Element = 'a',
+  variant = LinkVariants.standalone,
+  href,
+  ...props
+}: LinkProps) => {
+  const classNames = classnames(`${px}-link`, getLinkVariantClassName(variant), className);
   const dataTestId = id ? `link-${id}` : `link`;
-  const isExternal = href.match(
-    /(http[s]?:\/\/)(?!.*phillips\.com)([a-zA-Z0-9\-.]+)(:[0-9]{1,4})?([a-zA-Z0-9/\-._~:?#[\]@!$&'()*+,;=]*)/g,
-  );
-
-  const RootComponent = Component ?? 'a';
+  const isExternal = isLinkExternal(href);
 
   return (
-    <RootComponent
+    <Element
       {...props}
       href={href}
       data-testid={dataTestId}
       id={id}
       className={classNames}
-      {...(isExternal && RootComponent === 'a' ? { rel: 'noopener noreferrer', target: '_blank' } : {})}
+      {...(isExternal && Element === 'a' ? { rel: 'noopener noreferrer', target: '_blank' } : {})}
     >
       {children}
-    </RootComponent>
+    </Element>
   );
 };
 

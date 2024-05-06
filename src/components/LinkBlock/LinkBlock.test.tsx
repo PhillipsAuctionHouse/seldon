@@ -9,7 +9,7 @@ describe('LinkBlock', () => {
       href: 'https://example.com',
       target: '_blank',
       children: 'My Link',
-      component: Link,
+      element: Link,
     };
 
     render(<LinkBlock linkProps={linkProps} description="This is a link block" />);
@@ -30,7 +30,7 @@ describe('LinkBlock', () => {
     const linkProps = {
       href: 'https://customlink.com',
       children: 'Link',
-      component: CustomLink,
+      element: CustomLink,
     };
 
     render(<LinkBlock linkProps={linkProps} description="This is a custom link block" />);

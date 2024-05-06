@@ -24,9 +24,8 @@
     "dist/**"
   ],
   "scripts": {
-    "dev": "vite",
-    "test": "jest",
     "start": "storybook dev -p 6006",
+    "test": "jest",
     "build": "npm run clean && tsc && vite build",
     "build:storybook": "storybook build",
     "preview": "npx http-server storybook-static",
