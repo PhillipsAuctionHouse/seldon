@@ -37,14 +37,15 @@ body {
 }
 
 @font-face {
-  font-family: DistinctDisplayItalic;
+  font-family: DistinctDisplay;
   font-style: italic;
   src: url('../fonts/Distinct-DisplayItalic.woff') format('woff');
   src: url('../fonts/Distinct-DisplayItalic.woff2') format('woff2');
 }
 
 @mixin DistinctDisplayItalic {
-  font-family: DistinctDisplayItalic, sans-serif;
+  font-family: DistinctDisplay, sans-serif;
+  font-style: italic;
 }
 
 @font-face {
@@ -58,14 +59,14 @@ body {
 }
 
 @font-face {
-  font-family: DistinctItalic;
+  font-family: Distinct;
   font-style: italic;
   src: url('../fonts/Distinct-Italic.woff') format('woff');
   src: url('../fonts/Distinct-Italic.woff2') format('woff2');
 }
 
 @mixin DistinctItalic {
-  font-family: DistinctItalic, sans-serif;
+  font-family: Distinct, sans-serif;
   font-style: italic;
 }
 

@@ -32,7 +32,7 @@ export const CustomLink = ({ playgroundWidth, children, ...args }: StoryProps) =
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
     <Link
       {...args}
-      component={(props) => (
+      element={(props) => (
         <li>
           <a {...props}></a>
         </li>

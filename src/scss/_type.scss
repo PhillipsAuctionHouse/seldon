@@ -36,7 +36,7 @@
     font-size: $cta-sm-label-size;
     font-weight: 600;
     letter-spacing: 0.0625rem;
-    line-height: calc(1.25 * $cta-sm-label-size);
+    line-height: 1.25;
     text-transform: uppercase;
   }
 
@@ -44,7 +44,7 @@
     font-size: $cta-lg-label-size;
     font-weight: 700;
     letter-spacing: 0.125rem;
-    line-height: calc(1.25 * $cta-lg-label-size);
+    line-height: 1.25;
     text-transform: uppercase;
   }
 
