@@ -2,7 +2,7 @@ import classnames from 'classnames';
 
 import { px } from '../../utils';
 import React, { HTMLAttributes } from 'react';
-import { getLinkVariantClassName } from './utils';
+import { getLinkVariantClassName, isLinkExternal } from './utils';
 
 export const LinkVariants = {
   /** Default variant, used */
@@ -56,7 +56,7 @@ const Link = ({
 }: LinkProps) => {
   const classNames = classnames(`${px}-link`, getLinkVariantClassName(variant), className);
   const dataTestId = id ? `link-${id}` : `link`;
-  const isExternal = href.match(/https?/);
+  const isExternal = isLinkExternal(href);
 
   return (
     <Element

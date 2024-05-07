@@ -3,7 +3,7 @@ import type { Meta } from '@storybook/react';
 import Link, { LinkProps, LinkVariants } from './Link';
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
-  title: 'Components/Link',
+  title: 'Components/Links/Link',
   component: Link,
   tags: ['autodocs'],
 } satisfies Meta<typeof Link>;
@@ -16,13 +16,13 @@ interface StoryProps extends LinkProps {
   playgroundWidth: string;
 }
 
-export const StandardLink = ({ playgroundWidth, children, ...args }: StoryProps) => (
+export const Playground = ({ playgroundWidth, children, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
     <Link {...args}>{children}</Link>
   </div>
 );
 
-StandardLink.args = {
+Playground.args = {
   children: 'My Link',
   href: internalHref,
   variant: LinkVariants.standalone,
@@ -30,14 +30,7 @@ StandardLink.args = {
 
 export const CustomLink = ({ playgroundWidth, children, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <Link
-      {...args}
-      element={(props) => (
-        <li>
-          <a {...props}></a>
-        </li>
-      )}
-    >
+    <Link {...args} element={(props) => <a {...props}>{<>Custom Link: {props.children}</>}</a>}>
       {children}
     </Link>
   </div>

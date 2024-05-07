@@ -1,0 +1,14 @@
+@import '../../type';
+@import '../../vars';
+
+.#{$px}-link-block {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xsm;
+  text-align: center;
+
+  &__description {
+    @include text($body2);
+  }
+}
