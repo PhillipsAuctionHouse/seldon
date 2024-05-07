@@ -1,9 +1,9 @@
 import classnames from 'classnames';
-import { ElementType } from 'react';
+import { ElementType, HTMLAttributes } from 'react';
 
 import { CommonProps, px } from '../../utils';
 
-export interface GridProps extends CommonProps {
+export interface GridProps extends HTMLAttributes<HTMLElement>, CommonProps {
   /**
    * Button contents
    */
