@@ -1,4 +1,4 @@
-@use './vars' as *;
+@import './vars';
 
 @mixin hText($size: $heading-size1, $color: $primary-black, $transform-style: capitalize) {
   color: $color;

@@ -1,17 +1,16 @@
 import classnames from 'classnames';
-import { ElementType } from 'react';
 
-import { CommonProps, px } from '../../utils';
+import { px } from '../../utils';
 
-export interface GridProps extends CommonProps {
+export interface GridProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Button contents
    */
   children: React.ReactNode;
   /**
-   * Optional element to render in place of a button e.g. React-Router, etc
+   * Optional element to render in place of a button e.g. 'div', 'span', CustomComponent, etc
    */
-  element?: ElementType;
+  element?: React.ElementType<GridProps>;
   /**
    * Optional boolean to dictate if the grid has left and right margins
    */
@@ -30,8 +29,7 @@ export function Grid({
     <Element
       data-testid={id ? `grid-container-${id}` : `grid-container`}
       id={id}
-      className={classnames(`${px}-grid__container`, {
-        [`${className}`]: className,
+      className={classnames(`${px}-grid__container`, className, {
         [`${px}-grid__container--has-margins`]: hasMargins,
       })}
       {...props}

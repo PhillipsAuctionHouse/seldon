@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-vite";
+import path from "path";
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
@@ -14,6 +15,17 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
     defaultName: "Overview"
+  },
+  viteFinal: (config) => {
+    if (config && config.resolve) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        '#scss': path.resolve(__dirname, '../src/scss/'),
+      };
+    }
+    return {
+      ...config,
+    };
   },
   typescript: {
     reactDocgen: 'react-docgen',

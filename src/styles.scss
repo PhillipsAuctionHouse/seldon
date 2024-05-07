@@ -1,20 +1,25 @@
 // 🌎 Globals
-@import './vars';
+@import '#scss/vars';
 
 // @TODO: add styles when we can do a site wide regressions QA
+
 // @use 'reset';
-@import './typography';
+@import '#scss/typography';
 
 // ⚛️ Components
 @import 'components/Button/button';
 
 // @import 'components/DatePicker/datePicker';
+@import 'components/Footer/footer';
+@import 'components/Grid/grid';
 @import 'components/Header/header';
 @import 'components/HeroBanner/heroBanner';
 @import 'components/Input/input';
+@import 'components/Social/social';
+@import 'components/SplitPanel/splitPanel';
+@import 'components/Subscribe/subscribe';
 @import 'components/Toggle/toggle';
 @import 'components/ViewingsList/viewingsList';
-@import 'components/Grid/grid';
 
 // 📑 Pages
 @import 'pages/page';

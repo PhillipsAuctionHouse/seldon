@@ -3,51 +3,18 @@ import dts from 'vite-plugin-dts';
 import react from '@vitejs/plugin-react';
 import copy from 'rollup-plugin-copy';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import { resolve } from 'path';
 import svgr from 'vite-plugin-svgr';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 import * as packageJson from './package.json';
 
 // const isDev = process.env.NODE_ENV;
 
-const plugins = [svgr(), react(), dts({ entryRoot: 'src' })];
+const plugins = [svgr(), react(), tsconfigPaths(), dts({ entryRoot: 'src' })];
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: plugins,
-  resolve: {
-    alias: [
-      {
-        find: './vars',
-        replacement: resolve(__dirname, './src/scss/vars'),
-      },
-      {
-        find: '../../vars',
-        replacement: resolve(__dirname, './src/scss/vars'),
-      },
-      {
-        find: './typography',
-        replacement: resolve(__dirname, './src/scss/typography'),
-      },
-      {
-        find: '../../typography',
-        replacement: resolve(__dirname, './src/scss/typography'),
-      },
-      {
-        find: './reset',
-        replacement: resolve(__dirname, './src/scss/reset'),
-      },
-      {
-        find: './_utils',
-        replacement: resolve(__dirname, './src/scss/_utils'),
-      },
-      {
-        find: '../../_utils',
-        replacement: resolve(__dirname, './src/scss/_utils'),
-      },
-    ],
-  },
-
   build: {
     minify: true,
     reportCompressedSize: true,
@@ -80,6 +47,7 @@ export default defineConfig({
             {
               src: ['src/styles.scss', 'src/scss/**/*.scss'],
               dest: ['dist/scss'],
+              transform: (contents) => contents.toString().replace(/#scss/g, '.'),
             },
           ],
         }),
@@ -91,6 +59,7 @@ export default defineConfig({
             {
               src: ['src/components/**/*.scss', 'src/pages/**/*.scss'],
               dest: ['dist/scss'],
+              transform: (contents) => contents.toString().replace(/#scss/g, '../..'),
             },
           ],
         }),

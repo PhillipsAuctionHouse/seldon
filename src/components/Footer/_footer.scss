@@ -1,0 +1,96 @@
+@import '#scss/vars';
+@import '#scss/utils';
+@import '#scss/type';
+@import '#scss/typography';
+
+.#{$px}-footer {
+  background-color: $off-white;
+  border-top: 1px solid $keyline-gray;
+  width: 100%;
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  &__navigation {
+    background-color: $white;
+    padding: $spacing-medium $spacing-medium $spacing-small;
+    text-align: right;
+
+    @include media('md') {
+      padding: $spacing-medium $spacing-large $spacing-small;
+    }
+
+    @include media('lg') {
+      padding: $spacing-medium $spacing-xl $spacing-small;
+    }
+
+    ul {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: $spacing-medium;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+    }
+
+    a,
+    button {
+      @include text('cta-sm');
+      @include bodyText;
+
+      cursor: pointer;
+    }
+  }
+
+  &__content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: $spacing-large $spacing-medium 0;
+
+    @include media('sm') {
+      align-items: flex-start;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    @include media('md') {
+      padding: 3.75rem $spacing-large;
+    }
+
+    @include media('lg') {
+      padding: 3.75rem $spacing-xl;
+    }
+  }
+
+  &__content-split-panel__left {
+    margin-bottom: $spacing-medium;
+
+    @include media('sm') {
+      margin-bottom: 0;
+    }
+  }
+
+  &__content-split-panel__right {
+    display: flex;
+
+    @include media('sm') {
+      justify-content: flex-end;
+    }
+  }
+
+  &__copyright {
+    @include text($body3);
+
+    align-items: center;
+    background-color: $white;
+    display: flex;
+
+    // font-size: 0.875rem;
+    // height: 2.125rem;
+    justify-content: center;
+    padding: $spacing-xsm 0;
+  }
+}

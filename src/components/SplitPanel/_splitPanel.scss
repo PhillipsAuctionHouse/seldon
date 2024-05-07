@@ -1,0 +1,39 @@
+@import '#scss/vars';
+@import '#scss/utils';
+
+.#{$px}-split-panel {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-medium;
+
+  &:not(.#{$px}-split-panel--borderless) {
+    padding: 2.5rem $spacing-medium;
+  }
+
+  > * {
+    flex: 1 1 0px;
+  }
+
+  @include media('sm') {
+    align-items: stretch;
+    flex-direction: row;
+
+    & > :first-child,
+    & > :last-child {
+      width: 50%;
+    }
+
+    & > :not(:last-child) {
+      border-right: 1px solid $medium-gray;
+      padding-right: $spacing-medium;
+    }
+
+    &--borderless {
+      & > :not(:last-child) {
+        border-right: none;
+        padding-right: 0;
+      }
+    }
+  }
+}

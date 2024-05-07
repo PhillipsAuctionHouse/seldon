@@ -44,7 +44,6 @@
 
 # [1.16.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.15.0...v1.16.0) (2024-04-09)
 
-
 ### Features
 
 * add grid mixins, stories, and styles ([defa0b9](https://github.com/PhillipsAuctionHouse/seldon/commit/defa0b980e97ea09b85a04b26177638cae915840))

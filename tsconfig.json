@@ -6,10 +6,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "paths": {
-      "./vars": ["./src/scss/vars"],
-      "./typography": ["./src/scss/typography"],
-      "./reset": ["./src/scss/reset"],
-      "./_utils": ["./src/scss/_utils"]
+      "#scss/*": ["./src/scss/*"]
     },
 
     /* Bundler mode */

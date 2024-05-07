@@ -35,3 +35,4 @@ coverage
 *.notes.md
 
 CHANGELOG.md
+src/design/type-tokens/type-tokens.mdx

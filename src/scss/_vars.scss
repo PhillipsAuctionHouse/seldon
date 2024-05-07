@@ -118,7 +118,7 @@ $body3: 'body3';
     --label-size3: 0.56rem;
   }
 
-  @media (width >= 1800px) {
+  @media (width >= 1801px) {
     --heading-size0: 4.06rem;
     --heading-size1: 3.05rem;
     --heading-size2: 2.44rem;
@@ -179,7 +179,7 @@ $text-badge-label-size: var(--label-size3);
     --spacing-xl: 4.8rem;
   }
 
-  @media (width >= 1800px) {
+  @media (width >= 1801px) {
     --spacing-micro: 0.31rem;
     --spacing-xsm: 0.63rem;
     --spacing-small: 1.25rem;
@@ -219,3 +219,16 @@ $margin-xl: var(--spacing-xl);
 $breakpoint2: 961px;
 $breakpoint3: 1401px;
 $breakpoint4: 1801px;
+
+////////////////////////
+/// max-site-width TOKEN:
+///////////////////////
+$max-site-width: 1560px;
+
+////////////////////////////
+/// Media breakpoint tokens:
+///////////////////////////
+
+$sm: 'sm';
+$md: 'md';
+$lg: 'lg';
