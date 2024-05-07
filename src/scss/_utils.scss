@@ -1,3 +1,5 @@
+@import './vars';
+
 @mixin hidden {
   block-size: 1px;
   border: 0;
@@ -72,21 +74,21 @@
 }
 
 @mixin media($breakpoint) {
-  @if $breakpoint == 'sm' {
+  @if $breakpoint == $sm {
     // $breakpoint2: 961px;
     @media (min-width: $breakpoint2) {
       @content;
     }
   }
 
-  @if $breakpoint == 'md' {
+  @if $breakpoint == $md {
     // $breakpoint3: 1401px;
     @media (min-width: $breakpoint3) {
       @content;
     }
   }
 
-  @if $breakpoint == 'lg' {
+  @if $breakpoint == $lg {
     // $breakpoint4: 1801px;
     @media (min-width: $breakpoint4) {
       @content;

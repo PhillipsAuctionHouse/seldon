@@ -25,7 +25,7 @@
     }
 
     & > :not(:last-child) {
-      border-right: 1px solid;
+      border-right: 1px solid $medium-gray;
       padding-right: $spacing-medium;
     }
 

@@ -48,13 +48,12 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    padding: $spacing-large $spacing-medium;
+    padding: $spacing-large $spacing-medium 0;
 
     @include media('sm') {
       align-items: flex-start;
       flex-direction: row;
       justify-content: space-between;
-      padding-bottom: 0;
     }
 
     @include media('md') {
