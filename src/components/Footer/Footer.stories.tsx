@@ -19,12 +19,6 @@ const meta = {
 
 export default meta;
 
-export const Playground = (props: FooterProps) => (
-  <Footer {...props}>
-    {leftComponent} {rightComponent}
-  </Footer>
-);
-
 const navigationComponent = (
   <ul>
     <li>
@@ -96,8 +90,13 @@ const leftComponent = (
 
 const rightComponent = <Social className={`${px}-footer__social`}>{socialIcons}</Social>;
 
+export const Playground = (props: FooterProps) => (
+  <Footer {...props}>
+    {leftComponent}
+    {rightComponent}
+  </Footer>
+);
+
 Playground.args = {
-  leftComponent,
   navigationComponent,
-  rightComponent,
 };
