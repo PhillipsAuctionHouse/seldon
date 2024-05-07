@@ -18,11 +18,11 @@
     padding: $spacing-medium $spacing-medium $spacing-small;
     text-align: right;
 
-    @include media('md') {
+    @include media($breakpoint-md) {
       padding: $spacing-medium $spacing-large $spacing-small;
     }
 
-    @include media('lg') {
+    @include media($breakpoint-lg) {
       padding: $spacing-medium $spacing-xl $spacing-small;
     }
 
@@ -50,17 +50,17 @@
     flex-direction: column;
     padding: $spacing-large $spacing-medium 0;
 
-    @include media('sm') {
+    @include media($breakpoint-sm) {
       align-items: flex-start;
       flex-direction: row;
       justify-content: space-between;
     }
 
-    @include media('md') {
+    @include media($breakpoint-md) {
       padding: 3.75rem $spacing-large;
     }
 
-    @include media('lg') {
+    @include media($breakpoint-lg) {
       padding: 3.75rem $spacing-xl;
     }
   }
@@ -68,7 +68,7 @@
   &__content-split-panel__left {
     margin-bottom: $spacing-medium;
 
-    @include media('sm') {
+    @include media($breakpoint-sm) {
       margin-bottom: 0;
     }
   }
@@ -76,7 +76,7 @@
   &__content-split-panel__right {
     display: flex;
 
-    @include media('sm') {
+    @include media($breakpoint-sm) {
       justify-content: flex-end;
     }
   }

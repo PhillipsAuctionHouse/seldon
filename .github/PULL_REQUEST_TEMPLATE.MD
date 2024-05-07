@@ -33,8 +33,14 @@ Add high-level overview of the changes that were made and explanation of WHY the
 
 - [ ] Make sure all references to `phillips` class prefix is using the prefix variable
 - [ ] All major areas have a `data-testid` attribute.
+- [ ] Document all props with jsdoc comments
 - [ ] All strings should be translatable.
 - [ ] Unit test should be written and should have a coverage of 90% or higher in all areas.
-- [ ] Changes or new components should either write new or update existing documentation.
 - [ ] PR should link and close out an existing issue
 - [ ] Make sure all commits messages follow convention and are appropriate for the changes
+
+New Components
+
+- [ ] Default story called "Playground" should be created for all new components
+- [ ] Create a jsdoc comment that has an Overview section and a link to the Figma design for the component
+- [ ] Export the component and its typescript type from the `index.ts` file

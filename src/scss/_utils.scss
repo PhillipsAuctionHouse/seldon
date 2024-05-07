@@ -39,10 +39,26 @@
   width: 2rem;
 }
 
-@mixin grid($columns: 2) {
+@mixin gridMargins {
+  margin: 0 $spacing-medium;
+
+  @media (min-width: $breakpoint3) {
+    margin: 0 $spacing-large;
+  }
+
+  @media (min-width: $breakpoint4) {
+    margin: 0 $spacing-xl;
+  }
+}
+
+@mixin grid($columns: 2, $margins-on: true) {
   display: grid;
   gap: $spacing-medium;
   grid-template-columns: repeat($columns, 1fr);
+
+  @if $margins-on {
+    @include gridMargins;
+  }
 }
 
 @mixin gridContainer($margins-on: true) {
@@ -50,45 +66,35 @@
   gap: $spacing-medium;
   grid-template-columns: repeat(2, 1fr);
 
-  @if $margins-on {
-    margin: 0 $spacing-medium;
-  }
-
   @media (min-width: $breakpoint2) {
     grid-template-columns: repeat(4, 1fr);
   }
 
   @media (min-width: $breakpoint3) {
     grid-template-columns: repeat(12, 1fr);
-
-    @if $margins-on {
-      margin: 0 $spacing-large;
-    }
   }
 
-  @media (min-width: $breakpoint4) {
-    @if $margins-on {
-      margin: 0 $spacing-xl;
-    }
+  @if $margins-on {
+    @include gridMargins;
   }
 }
 
 @mixin media($breakpoint) {
-  @if $breakpoint == $sm {
+  @if $breakpoint == $breakpoint-sm {
     // $breakpoint2: 961px;
     @media (min-width: $breakpoint2) {
       @content;
     }
   }
 
-  @if $breakpoint == $md {
+  @if $breakpoint == $breakpoint-md {
     // $breakpoint3: 1401px;
     @media (min-width: $breakpoint3) {
       @content;
     }
   }
 
-  @if $breakpoint == $lg {
+  @if $breakpoint == $breakpoint-lg {
     // $breakpoint4: 1801px;
     @media (min-width: $breakpoint4) {
       @content;

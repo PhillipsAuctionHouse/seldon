@@ -1,5 +1,10 @@
 @import './vars';
 
+@mixin underline($padding: 0, $width: 0.0625rem, $color: $cta-blue) {
+  border-bottom: $width solid $color;
+  padding-bottom: $padding;
+}
+
 @mixin hText($size: $heading-size1, $color: $primary-black, $transform-style: capitalize) {
   color: $color;
   font-family: DistinctDisplay, sans-serif;

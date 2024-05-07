@@ -1,6 +1,7 @@
 @import '#scss/vars';
 @import '#scss/type';
 
+.type-tokens,
 .doc-wrapper {
   .exp {
     @include pText($body-size1);

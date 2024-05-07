@@ -7,7 +7,7 @@
   display: inline-flex;
   flex-direction: column;
 
-  @include media('sm') {
+  @include media($breakpoint-sm) {
     align-items: flex-end;
   }
 
@@ -25,7 +25,7 @@
     margin: 0 0 $spacing-medium;
     padding: 0;
 
-    @include media('sm') {
+    @include media($breakpoint-sm) {
       gap: 0 1rem;
     }
 

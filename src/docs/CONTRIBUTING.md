@@ -140,6 +140,13 @@ After adding a component make sure that the component is exported from the main 
 export { Button, type ButtonProps } from './components/Button/Button';
 ```
 
+## Styling
+
+We create css variables on the :root element. This allows for downstream usage within non-SASS applications. If you are adding a new component please make sure to add the css variables to the `:root` element in the `_vars.scss` file with media queries for the different breakpoints.
+
+These css variables are then used in our `_vars.scss` to create SCSS variables.
+We use scss variables within the components themselves as style property values.
+
 ## Testing
 
 Unit test must be written for all JavaScript files. We utlize [`Jest.js`](https://jestjs.io/) and the [`@testing-library`](https://testing-library.com/docs/react-testing-library/intro) packages to author test.
@@ -175,7 +182,6 @@ Often times changes to the library are being made to add features to an applicat
 
 ```sh
 npm run build
-cd dist
 npm link
 ```
 

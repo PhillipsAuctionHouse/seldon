@@ -39,6 +39,20 @@ h6 {
   overflow-wrap: break-word;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
 #root {
   isolation: isolate;
 }

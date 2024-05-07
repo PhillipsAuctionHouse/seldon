@@ -1,0 +1,34 @@
+@import '#scss/type';
+
+.#{$px}-link {
+  @include text($cta-sm);
+
+  color: $cta-blue;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover:not(&--list),
+  &:focus:not(&--list) {
+    @include underline;
+  }
+
+  &:hover,
+  &:focus {
+    color: $cta-blue;
+    outline: unset;
+  }
+
+  &--inline {
+    font-size: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+  }
+
+  &--list {
+    color: $soft-black;
+  }
+
+  &--email {
+    @include text($email);
+  }
+}

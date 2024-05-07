@@ -8,6 +8,10 @@ When to write your unit test often comes down to personal preference. [Test driv
 
 Regardless of if you write your test before, during, or after, **each piece of functionality should have coverage**. Otherwise, there is no way to know, with confidence, that the changes we make are not going to break things for our consumers.
 
+## Autogenerate testcases
+
+Starting from a blank slate can be daunting. GitHub Copilot can help you get started with your test. Be sure to review the test that Copilot generates to ensure that it is testing the correct functionality. To have it autogenerate a testcase go to the file you're trying to test, hit `Command + I` and ask it to write a testcase for the file. You can add comments to the testcase to get it to generate more, or highlight the testcase and continue to ask Copilot to refine the testcase.
+
 ## Code coverage
 
 Code coverage is a metric that allows us to quickly assess how much of our functionality is being tested. While PR coverage thresholds can be frustrating, it is the best tool we have to get a snapshot of areas of our code that need more unit test. Any project in production should have coverage thresholds as part of the acceptance criteria for taking in new code. While **100% coverage is ideal**, each project should assess what level of coverage is acceptable for them. A threshold around 90% is a good balance. At this level you are getting a high level of confidence while not requiring perfection.
