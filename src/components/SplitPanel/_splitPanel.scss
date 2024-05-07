@@ -11,22 +11,26 @@
     padding: 2.5rem $spacing-medium;
   }
 
+  > * {
+    flex: 1 1 0px;
+  }
+
   @include media('sm') {
-    align-items: flex-start;
+    align-items: stretch;
     flex-direction: row;
 
-    &__left,
-    &__right {
+    & > :first-child,
+    & > :last-child {
       width: 50%;
     }
 
-    &__left {
+    & > :not(:last-child) {
       border-right: 1px solid;
       padding-right: $spacing-medium;
     }
 
     &--borderless {
-      .#{$px}-split-panel__left {
+      & > :not(:last-child) {
         border-right: none;
         padding-right: 0;
       }

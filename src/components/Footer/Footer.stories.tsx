@@ -19,7 +19,11 @@ const meta = {
 
 export default meta;
 
-export const Playground = (props: FooterProps) => <Footer {...props} />;
+export const Playground = (props: FooterProps) => (
+  <Footer {...props}>
+    {leftComponent} {rightComponent}
+  </Footer>
+);
 
 const navigationComponent = (
   <ul>
@@ -75,6 +79,7 @@ const leftComponent = (
     title="Subscribe to Newsletter"
     blurb="Receive exclusive content about our auctions, exhibitions, and special events."
     buttonText="Sign Up"
+    element="form"
     buttonProps={{
       size: 'sm',
       onClick: (e: React.MouseEvent) => {

@@ -12,10 +12,7 @@
     line-height: 1.125rem; /* 150% */
   }
 
-  .#{$px}-split-panel__left,
-  .#{$px}-split-panel__right {
-    *:not(:last-child) {
-      margin-bottom: $spacing-medium;
-    }
+  & .split-panel-story__text:not(:last-child) {
+    margin-bottom: $spacing-medium;
   }
 }

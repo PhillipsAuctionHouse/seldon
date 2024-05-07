@@ -2,7 +2,7 @@ import classnames from 'classnames';
 
 import { px } from '../../utils';
 
-export interface SplitPanelProps extends React.HTMLAttributes<HTMLFormElement> {
+export interface SplitPanelProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Optional element to render in place of a section e.g. div, span, etc
    */
@@ -11,14 +11,6 @@ export interface SplitPanelProps extends React.HTMLAttributes<HTMLFormElement> {
    * Boolean that will determine if the split panel has a border between panels at large screens
    */
   hasBorder?: boolean;
-  /**
-   * Component to render in the left side of the split panel
-   */
-  leftComponent?: React.ReactElement;
-  /**
-   * Component to render in the right side of the split panel
-   */
-  rightComponent?: React.ReactElement;
 }
 
 /**
@@ -29,12 +21,11 @@ export interface SplitPanelProps extends React.HTMLAttributes<HTMLFormElement> {
  * [Figma Link](https://www.figma.com/file/Hp2FyltbOmRxTuw9kSwBAd/EPIC-About-Us?type=design&node-id=635-34713&mode=design&t=wKZW1vKP8WePUjrH-0)
  */
 const SplitPanel = ({
+  children,
   className,
   element: Element = 'section',
   hasBorder = true,
   id,
-  leftComponent,
-  rightComponent,
   ...props
 }: SplitPanelProps) => {
   return (
@@ -44,12 +35,7 @@ const SplitPanel = ({
       className={classnames(`${px}-split-panel`, className, { [`${px}-split-panel--borderless`]: !hasBorder })}
       {...props}
     >
-      <div className={classnames(`${px}-split-panel__left`, { [`${className}-split-panel__left`]: className })}>
-        {leftComponent}
-      </div>
-      <div className={classnames(`${px}-split-panel__right`, { [`${className}-split-panel__right`]: className })}>
-        {rightComponent}
-      </div>
+      {children}
     </Element>
   );
 };
