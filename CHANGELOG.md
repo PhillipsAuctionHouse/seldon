@@ -1,3 +1,26 @@
+# [1.19.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.18.0...v1.19.0) (2024-05-07)
+
+
+### Bug Fixes
+
+* **index:** need to export link component ([87e0fa8](https://github.com/PhillipsAuctionHouse/seldon/commit/87e0fa876cc6171c8308ce786b4431b33012b149))
+* **linkblock:** rename component to element ([82caff4](https://github.com/PhillipsAuctionHouse/seldon/commit/82caff47c859b38a3e69b3a3e37c63db32cf1a9e))
+* **link:** fix to handle internal links like dropship.phillips.com ([049600e](https://github.com/PhillipsAuctionHouse/seldon/commit/049600e020a2632bd9a7aaacde1574f864a754bc))
+* **link:** handle pr updates on scss ([54fd8c3](https://github.com/PhillipsAuctionHouse/seldon/commit/54fd8c365ffdb5dff0908dc7ce8b66eb99106156))
+* **linklist:** update to use standard 12 column grid ([9aabbc1](https://github.com/PhillipsAuctionHouse/seldon/commit/9aabbc1b2ab2e99a5900ee26d4ed9bbd7e6116db))
+* **link:** rename property ([5b66ec0](https://github.com/PhillipsAuctionHouse/seldon/commit/5b66ec01c7ee9fe1a5545c139b7e3879ed819145))
+* **list:** fix the aria role ([4fc05a5](https://github.com/PhillipsAuctionHouse/seldon/commit/4fc05a523a8f25ab2cf44e1ef1f130d7ebe47f5b))
+* **montserrat:** remove unnecessary font ([f15dd22](https://github.com/PhillipsAuctionHouse/seldon/commit/f15dd225d749beef047748db157fe2520e6dbe7a))
+* **styles:** undo reset for phillips-public compatibility ([87c2bde](https://github.com/PhillipsAuctionHouse/seldon/commit/87c2bdea4ae88a83c0d31b2dc16ec8b7a2b9ec66))
+
+
+### Features
+
+* **cta:** first drop CTA components ([aa6d309](https://github.com/PhillipsAuctionHouse/seldon/commit/aa6d309d2446e36b52125e7c58759fc774bc6817)), closes [#L3-1468](https://github.com/PhillipsAuctionHouse/seldon/issues/L3-1468)
+* **linkblock:** add new link block component ([e3d001b](https://github.com/PhillipsAuctionHouse/seldon/commit/e3d001b201fa3eef5455ca69ebe66000be549266))
+* **link:** create variations of link component ([4797ac7](https://github.com/PhillipsAuctionHouse/seldon/commit/4797ac707e1e5f23acd41fc7299cc9951c8af21c))
+* **linklist:** new link list component ([7e6108a](https://github.com/PhillipsAuctionHouse/seldon/commit/7e6108a61acb730feaf6aeaaebefd232e7b4091a))
+
 # [1.18.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.17.5...v1.18.0) (2024-05-07)
 
 
