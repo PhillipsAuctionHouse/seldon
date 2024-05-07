@@ -1,3 +1,22 @@
+# [1.18.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.17.5...v1.18.0) (2024-05-07)
+
+
+### Bug Fixes
+
+* **footer:** address feedback for pr ([f495691](https://github.com/PhillipsAuctionHouse/seldon/commit/f4956917418a57d2831af627bbb006d9702a1427))
+* **footer:** changes from feedback ([9f734f0](https://github.com/PhillipsAuctionHouse/seldon/commit/9f734f0c54efbf133bb96149469245485db84683))
+* **social:** center align icons ([771058b](https://github.com/PhillipsAuctionHouse/seldon/commit/771058b325404d024c1bb125ec2d5093d1d21fdb))
+
+
+### Features
+
+* add footer styles ([8f51859](https://github.com/PhillipsAuctionHouse/seldon/commit/8f51859b90b8c4cbcc3c6732f15301bd5b6b8a1b))
+* **footer:** add styles for larger screens ([50a10a3](https://github.com/PhillipsAuctionHouse/seldon/commit/50a10a34aed190018ae133a0be79e1fe562c7d73))
+* **footer:** added social, subscribe components ([9da4c64](https://github.com/PhillipsAuctionHouse/seldon/commit/9da4c64e5abd7874797f26580ff922285b264262))
+* **footer:** create foundation and structure for footer ([53710fb](https://github.com/PhillipsAuctionHouse/seldon/commit/53710fbb60df62edfcf711c2983d6ca13e41e6b5))
+* **splitpanel:** change from render prop to children ([c96a340](https://github.com/PhillipsAuctionHouse/seldon/commit/c96a34093e5598041e81c97071ffa3a67fe15a6a))
+* **subscribe:** create subscribe component to be used in footer ([021b005](https://github.com/PhillipsAuctionHouse/seldon/commit/021b0056c197beaa4b1e60c50437e657ab7b8321))
+
 ## [1.17.5](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.17.4...v1.17.5) (2024-04-26)
 
 
