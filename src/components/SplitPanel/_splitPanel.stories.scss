@@ -1,0 +1,18 @@
+@import '#scss/vars';
+
+.split-panel-story {
+  background-color: #f4f2f1;
+
+  &__text {
+    font-family: Montserrat, serif;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0.0625rem;
+    line-height: 1.125rem; /* 150% */
+  }
+
+  & .split-panel-story__text:not(:last-child) {
+    margin-bottom: $spacing-medium;
+  }
+}

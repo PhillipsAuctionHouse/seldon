@@ -1,6 +1,6 @@
-@import '../../vars';
-@import '../../_utils';
-@import '../../typography';
+@import '#scss/vars';
+@import '#scss/utils';
+@import '#scss/typography';
 
 .#{$px}-viewings-list {
   align-items: center;

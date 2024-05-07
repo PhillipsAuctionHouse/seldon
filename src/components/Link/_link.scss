@@ -1,4 +1,4 @@
-@import '../../type';
+@import '#scss/type';
 
 .#{$px}-link {
   @include text($cta-sm);

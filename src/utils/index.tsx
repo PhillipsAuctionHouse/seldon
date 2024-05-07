@@ -108,3 +108,5 @@ export function useNormalizedInputProps({
 
   return normalizedProps;
 }
+
+export const defaultYear = new Date().getFullYear();

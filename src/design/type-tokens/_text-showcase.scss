@@ -1,7 +1,8 @@
-@import '../../scss/vars';
-@import '../../scss/type';
+@import '#scss/vars';
+@import '#scss/type';
 
-.type-tokens {
+.type-tokens,
+.doc-wrapper {
   .exp {
     @include pText($body-size1);
 
@@ -35,72 +36,100 @@
       @include text($display0);
     }
 
-    &--d1 {
-      @include text($display1);
+    .property {
+      // @include pText($body-size2);
+      // font-weight: 400;
+      color: $post-sale-magenta;
     }
 
-    &--d2 {
-      @include text($display2);
+    .h4 + ul li:not(li strong) {
+      color: $clock-widget-green;
+      font-family: monospace;
+      font-weight: 600;
     }
 
-    &--d3 {
-      @include text($display3);
+    .h4 + ul li strong {
+      color: $clock-widget-blue;
     }
 
-    &--d4 {
-      @include text($display4);
-    }
+    .example {
+      background: #efefef;
+      display: block;
+      margin-top: 1rem;
+      padding: 1.5rem;
+      text-align: center;
 
-    &--h1 {
-      @include text($heading1);
-    }
+      &--d0 {
+        @include text($display0);
+      }
 
-    &--h2 {
-      @include text($heading2);
-    }
+      &--d1 {
+        @include text($display1);
+      }
 
-    &--h3 {
-      @include text($heading3);
-    }
+      &--d2 {
+        @include text($display2);
+      }
 
-    &--h4 {
-      @include text($heading4);
-    }
+      &--d3 {
+        @include text($display3);
+      }
 
-    &--p1 {
-      @include text($body1);
-    }
+      &--d4 {
+        @include text($display4);
+      }
 
-    &--p2 {
-      @include text($body2);
-    }
+      &--h1 {
+        @include text($heading1);
+      }
 
-    &--p3 {
-      @include text($body3);
-    }
+      &--h2 {
+        @include text($heading2);
+      }
 
-    &--button {
-      @include text($button);
-    }
+      &--h3 {
+        @include text($heading3);
+      }
 
-    &--cta-sm {
-      @include text($cta-sm);
-    }
+      &--h4 {
+        @include text($heading4);
+      }
 
-    &--cta-lg {
-      @include text($cta-lg);
-    }
+      &--p1 {
+        @include text($body1);
+      }
 
-    &--email {
-      @include text($email);
-    }
+      &--p2 {
+        @include text($body2);
+      }
 
-    &--text {
-      @include text($text);
-    }
+      &--p3 {
+        @include text($body3);
+      }
 
-    &--text-badge {
-      @include text($text-badge);
+      &--button {
+        @include text($button);
+      }
+
+      &--cta-sm {
+        @include text($cta-sm);
+      }
+
+      &--cta-lg {
+        @include text($cta-lg);
+      }
+
+      &--email {
+        @include text($email);
+      }
+
+      &--text {
+        @include text($text);
+      }
+
+      &--text-badge {
+        @include text($text-badge);
+      }
     }
   }
 }

@@ -1,0 +1,40 @@
+@import '#scss/vars';
+@import '#scss/utils';
+@import '#scss/type';
+
+.#{$px}-social {
+  align-items: center;
+  display: inline-flex;
+  flex-direction: column;
+
+  @include media($breakpoint-sm) {
+    align-items: flex-end;
+  }
+
+  &__header {
+    @include text($heading3);
+
+    margin-bottom: $spacing-xsm;
+  }
+
+  ul {
+    align-items: center;
+    display: flex;
+    gap: 0 1.25rem;
+    list-style: none;
+    margin: 0 0 $spacing-medium;
+    padding: 0;
+
+    @include media($breakpoint-sm) {
+      gap: 0 1rem;
+    }
+
+    li {
+      cursor: pointer;
+    }
+  }
+
+  a {
+    display: inline-block;
+  }
+}
