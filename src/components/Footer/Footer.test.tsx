@@ -33,6 +33,12 @@ describe('Footer', () => {
   );
 
   const rightComponent = <Social id="social">{socialIcons}</Social>;
+  const child = (
+    <>
+      {leftComponent}
+      {rightComponent}
+    </>
+  );
 
   const navigationComponent = (
     <ul>
@@ -58,9 +64,8 @@ describe('Footer', () => {
   );
 
   const commonProps = {
-    leftComponent,
+    children: child,
     navigationComponent,
-    rightComponent,
   };
 
   it('is selectable by the test id', () => {

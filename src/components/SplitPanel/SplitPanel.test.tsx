@@ -14,7 +14,12 @@ describe('SplitPanel', () => {
   });
 
   it('it will render the contents of the left and right component', () => {
-    render(<SplitPanel leftComponent={<div>Left</div>} rightComponent={<div>Right</div>} />);
+    render(
+      <SplitPanel>
+        <div>Left</div>
+        <div>Right</div>
+      </SplitPanel>,
+    );
     expect(screen.queryByText(/Left/)).toBeInTheDocument();
     expect(screen.queryByText(/Right/)).toBeInTheDocument();
   });
