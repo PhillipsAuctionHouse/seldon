@@ -1,3 +1,10 @@
+## [1.19.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.19.0...v1.19.1) (2024-05-08)
+
+
+### Bug Fixes
+
+* **linklist:** fix incorrect responsive layout ([cdc97a6](https://github.com/PhillipsAuctionHouse/seldon/commit/cdc97a600fa79c8217938bfcbd8db4394d6e80e5))
+
 # [1.19.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.18.0...v1.19.0) (2024-05-07)
 
 
