@@ -1,6 +1,7 @@
 import type { Meta } from '@storybook/react';
 
-import Link, { LinkProps, LinkVariants } from './Link';
+import Link, { LinkProps } from './Link';
+import { LinkVariants } from './utils';
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
   title: 'Components/Links/Link',

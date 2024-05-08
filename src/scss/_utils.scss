@@ -79,25 +79,50 @@
   }
 }
 
-@mixin media($breakpoint) {
+@mixin media($breakpoint, $type: 'min') {
   @if $breakpoint == $breakpoint-sm {
     // $breakpoint2: 961px;
-    @media (min-width: $breakpoint2) {
-      @content;
+    @if $type == 'min' {
+      @media (min-width: $breakpoint2) {
+        @content;
+      }
+    }
+
+    @if $type == 'max' {
+      @media (max-width: $breakpoint2) {
+        @content;
+      }
     }
   }
 
   @if $breakpoint == $breakpoint-md {
     // $breakpoint3: 1401px;
-    @media (min-width: $breakpoint3) {
-      @content;
+
+    @if $type == 'min' {
+      @media (min-width: $breakpoint3) {
+        @content;
+      }
+    }
+
+    @if type == 'max' {
+      @media (max-width: $breakpoint3) {
+        @content;
+      }
     }
   }
 
   @if $breakpoint == $breakpoint-lg {
     // $breakpoint4: 1801px;
-    @media (min-width: $breakpoint4) {
-      @content;
+    @if type == 'min' {
+      @media (min-width: $breakpoint4) {
+        @content;
+      }
+    }
+
+    @if type == 'max' {
+      @media (max-width: $breakpoint4) {
+        @content;
+      }
     }
   }
 }
