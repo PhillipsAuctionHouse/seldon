@@ -3,17 +3,7 @@ import classnames from 'classnames';
 import { px } from '../../utils';
 import React, { HTMLAttributes } from 'react';
 import { getLinkVariantClassName, isLinkExternal } from './utils';
-
-export enum LinkVariants {
-  /** Default variant, used */
-  standalone = 'standalone',
-  /** link rendering emailto: */
-  email = 'email',
-  /** these links are being rendered in a list */
-  list = 'list',
-  /** link is being rendered within body copy */
-  inline = 'inline',
-}
+import { LinkVariants } from './utils';
 
 export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
   /**

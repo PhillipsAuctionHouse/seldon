@@ -1,5 +1,5 @@
 import { getLinkVariantClassName, isLinkExternal } from './utils';
-import { LinkVariants } from './Link';
+import { LinkVariants } from './utils';
 
 describe('getLinkVariantClassName', () => {
   it('should return the correct variant class name', () => {

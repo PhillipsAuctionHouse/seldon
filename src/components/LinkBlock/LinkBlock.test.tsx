@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import LinkBlock from './LinkBlock';
-import Link, { LinkProps, LinkVariants } from '../Link/Link';
+import Link, { LinkProps } from '../Link/Link';
+import { LinkVariants } from '../Link/utils';
 import { getLinkVariantClassName } from '../Link/utils';
 
 describe('LinkBlock', () => {

@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import { px } from '../../utils';
-import Link, { LinkProps, LinkVariants } from '../Link/Link';
+import Link, { LinkProps } from '../Link/Link';
+import { LinkVariants } from '../Link/utils';
 
 export interface LinkBlockProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Props for the Link component */
