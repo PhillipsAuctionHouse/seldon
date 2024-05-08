@@ -6,10 +6,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "paths": {
-      "./vars": ["./src/scss/vars"],
-      "./typography": ["./src/scss/typography"],
-      "./reset": ["./src/scss/reset"],
-      "./_utils": ["./src/scss/_utils"]
+      "#scss/*": ["./src/scss/*"]
     },
 
     /* Bundler mode */
@@ -29,6 +26,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "custom.d.ts"],
+  // https://github.com/microsoft/TypeScript/issues/56749 Have to exclude *.mdx files
+  "include": ["custom.d.ts", "src/**/*.ts", "src/**/*.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

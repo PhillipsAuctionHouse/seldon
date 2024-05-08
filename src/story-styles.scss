@@ -1,12 +1,14 @@
 @use 'scss/reset';
-@use 'scss/vars' as *;
-@use 'scss/type' as *;
 @use 'scss/typography';
 @use 'design/colors-tokens/color-card';
 @use 'design/type-tokens/text-showcase';
 @use 'design/spacing-tokens/spacing-tokens';
 @use 'design/grid-tokens/grid-tokens';
 @use 'components/DatePicker/datePicker';
+@use 'components/SplitPanel/splitPanel.stories';
+@import 'scss/vars';
+@import 'scss/type';
+@import 'scss/utils';
 @import 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,500;0,600;0,700;1,400&display=swap';
 
 // Design markdown styles

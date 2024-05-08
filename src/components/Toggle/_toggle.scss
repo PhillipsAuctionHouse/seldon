@@ -1,5 +1,5 @@
-@import '../../vars';
-@import '../../_utils';
+@import '#scss/vars';
+@import '#scss/utils';
 
 $toggleBaseWidth: 3rem;
 $inline: #{$px}-input--inline;

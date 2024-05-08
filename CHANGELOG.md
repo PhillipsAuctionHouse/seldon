@@ -1,3 +1,52 @@
+## [1.19.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.19.0...v1.19.1) (2024-05-08)
+
+
+### Bug Fixes
+
+* **linklist:** fix incorrect responsive layout ([cdc97a6](https://github.com/PhillipsAuctionHouse/seldon/commit/cdc97a600fa79c8217938bfcbd8db4394d6e80e5))
+
+# [1.19.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.18.0...v1.19.0) (2024-05-07)
+
+
+### Bug Fixes
+
+* **index:** need to export link component ([87e0fa8](https://github.com/PhillipsAuctionHouse/seldon/commit/87e0fa876cc6171c8308ce786b4431b33012b149))
+* **linkblock:** rename component to element ([82caff4](https://github.com/PhillipsAuctionHouse/seldon/commit/82caff47c859b38a3e69b3a3e37c63db32cf1a9e))
+* **link:** fix to handle internal links like dropship.phillips.com ([049600e](https://github.com/PhillipsAuctionHouse/seldon/commit/049600e020a2632bd9a7aaacde1574f864a754bc))
+* **link:** handle pr updates on scss ([54fd8c3](https://github.com/PhillipsAuctionHouse/seldon/commit/54fd8c365ffdb5dff0908dc7ce8b66eb99106156))
+* **linklist:** update to use standard 12 column grid ([9aabbc1](https://github.com/PhillipsAuctionHouse/seldon/commit/9aabbc1b2ab2e99a5900ee26d4ed9bbd7e6116db))
+* **link:** rename property ([5b66ec0](https://github.com/PhillipsAuctionHouse/seldon/commit/5b66ec01c7ee9fe1a5545c139b7e3879ed819145))
+* **list:** fix the aria role ([4fc05a5](https://github.com/PhillipsAuctionHouse/seldon/commit/4fc05a523a8f25ab2cf44e1ef1f130d7ebe47f5b))
+* **montserrat:** remove unnecessary font ([f15dd22](https://github.com/PhillipsAuctionHouse/seldon/commit/f15dd225d749beef047748db157fe2520e6dbe7a))
+* **styles:** undo reset for phillips-public compatibility ([87c2bde](https://github.com/PhillipsAuctionHouse/seldon/commit/87c2bdea4ae88a83c0d31b2dc16ec8b7a2b9ec66))
+
+
+### Features
+
+* **cta:** first drop CTA components ([aa6d309](https://github.com/PhillipsAuctionHouse/seldon/commit/aa6d309d2446e36b52125e7c58759fc774bc6817)), closes [#L3-1468](https://github.com/PhillipsAuctionHouse/seldon/issues/L3-1468)
+* **linkblock:** add new link block component ([e3d001b](https://github.com/PhillipsAuctionHouse/seldon/commit/e3d001b201fa3eef5455ca69ebe66000be549266))
+* **link:** create variations of link component ([4797ac7](https://github.com/PhillipsAuctionHouse/seldon/commit/4797ac707e1e5f23acd41fc7299cc9951c8af21c))
+* **linklist:** new link list component ([7e6108a](https://github.com/PhillipsAuctionHouse/seldon/commit/7e6108a61acb730feaf6aeaaebefd232e7b4091a))
+
+# [1.18.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.17.5...v1.18.0) (2024-05-07)
+
+
+### Bug Fixes
+
+* **footer:** address feedback for pr ([f495691](https://github.com/PhillipsAuctionHouse/seldon/commit/f4956917418a57d2831af627bbb006d9702a1427))
+* **footer:** changes from feedback ([9f734f0](https://github.com/PhillipsAuctionHouse/seldon/commit/9f734f0c54efbf133bb96149469245485db84683))
+* **social:** center align icons ([771058b](https://github.com/PhillipsAuctionHouse/seldon/commit/771058b325404d024c1bb125ec2d5093d1d21fdb))
+
+
+### Features
+
+* add footer styles ([8f51859](https://github.com/PhillipsAuctionHouse/seldon/commit/8f51859b90b8c4cbcc3c6732f15301bd5b6b8a1b))
+* **footer:** add styles for larger screens ([50a10a3](https://github.com/PhillipsAuctionHouse/seldon/commit/50a10a34aed190018ae133a0be79e1fe562c7d73))
+* **footer:** added social, subscribe components ([9da4c64](https://github.com/PhillipsAuctionHouse/seldon/commit/9da4c64e5abd7874797f26580ff922285b264262))
+* **footer:** create foundation and structure for footer ([53710fb](https://github.com/PhillipsAuctionHouse/seldon/commit/53710fbb60df62edfcf711c2983d6ca13e41e6b5))
+* **splitpanel:** change from render prop to children ([c96a340](https://github.com/PhillipsAuctionHouse/seldon/commit/c96a34093e5598041e81c97071ffa3a67fe15a6a))
+* **subscribe:** create subscribe component to be used in footer ([021b005](https://github.com/PhillipsAuctionHouse/seldon/commit/021b0056c197beaa4b1e60c50437e657ab7b8321))
+
 ## [1.17.5](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.17.4...v1.17.5) (2024-04-26)
 
 
@@ -43,7 +92,6 @@
 * moving label fields back to top ([fc22c7b](https://github.com/PhillipsAuctionHouse/seldon/commit/fc22c7b0a93b6a16034ceb7a538be0d9c9c637cb))
 
 # [1.16.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.15.0...v1.16.0) (2024-04-09)
-
 
 ### Features
 

@@ -1,104 +1,135 @@
-@use '../../scss/vars' as *;
-@use '../../scss/type' as *;
+@import '#scss/vars';
+@import '#scss/type';
 
-.exp {
-  @include pText($body-size1);
+.type-tokens,
+.doc-wrapper {
+  .exp {
+    @include pText($body-size1);
 
-  color: $keyline-gray;
-}
-
-.property {
-  // @include pText($body-size2);
-  // font-weight: 400;
-  color: $post-sale-magenta;
-}
-
-li:not(li strong) {
-  color: $clock-widget-green;
-  font-family: monospace;
-  font-weight: 600;
-}
-
-li strong {
-  color: $clock-widget-blue;
-}
-
-.example {
-  background: #efefef;
-  display: block;
-  margin-top: 1rem;
-  padding: 1.5rem;
-  text-align: center;
-
-  &--d0 {
-    @include text($display0);
+    color: $keyline-gray;
   }
 
-  &--d1 {
-    @include text($display1);
+  .property {
+    // @include pText($body-size2);
+    // font-weight: 400;
+    color: $post-sale-magenta;
   }
 
-  &--d2 {
-    @include text($display2);
+  li:not(li strong) {
+    color: $clock-widget-green;
+    font-family: monospace;
+    font-weight: 600;
   }
 
-  &--d3 {
-    @include text($display3);
+  li strong {
+    color: $clock-widget-blue;
   }
 
-  &--d4 {
-    @include text($display4);
-  }
+  .example {
+    background: #efefef;
+    display: block;
+    margin-top: 1rem;
+    padding: 1.5rem;
+    text-align: center;
 
-  &--h1 {
-    @include text($heading1);
-  }
+    &--d0 {
+      @include text($display0);
+    }
 
-  &--h2 {
-    @include text($heading2);
-  }
+    .property {
+      // @include pText($body-size2);
+      // font-weight: 400;
+      color: $post-sale-magenta;
+    }
 
-  &--h3 {
-    @include text($heading3);
-  }
+    .h4 + ul li:not(li strong) {
+      color: $clock-widget-green;
+      font-family: monospace;
+      font-weight: 600;
+    }
 
-  &--h4 {
-    @include text($heading4);
-  }
+    .h4 + ul li strong {
+      color: $clock-widget-blue;
+    }
 
-  &--p1 {
-    @include text($body1);
-  }
+    .example {
+      background: #efefef;
+      display: block;
+      margin-top: 1rem;
+      padding: 1.5rem;
+      text-align: center;
 
-  &--p2 {
-    @include text($body2);
-  }
+      &--d0 {
+        @include text($display0);
+      }
 
-  &--p3 {
-    @include text($body3);
-  }
+      &--d1 {
+        @include text($display1);
+      }
 
-  &--button {
-    @include text($button);
-  }
+      &--d2 {
+        @include text($display2);
+      }
 
-  &--cta-sm {
-    @include text($cta-sm);
-  }
+      &--d3 {
+        @include text($display3);
+      }
 
-  &--cta-lg {
-    @include text($cta-lg);
-  }
+      &--d4 {
+        @include text($display4);
+      }
 
-  &--email {
-    @include text($email);
-  }
+      &--h1 {
+        @include text($heading1);
+      }
 
-  &--text {
-    @include text($text);
-  }
+      &--h2 {
+        @include text($heading2);
+      }
 
-  &--text-badge {
-    @include text($text-badge);
+      &--h3 {
+        @include text($heading3);
+      }
+
+      &--h4 {
+        @include text($heading4);
+      }
+
+      &--p1 {
+        @include text($body1);
+      }
+
+      &--p2 {
+        @include text($body2);
+      }
+
+      &--p3 {
+        @include text($body3);
+      }
+
+      &--button {
+        @include text($button);
+      }
+
+      &--cta-sm {
+        @include text($cta-sm);
+      }
+
+      &--cta-lg {
+        @include text($cta-lg);
+      }
+
+      &--email {
+        @include text($email);
+      }
+
+      &--text {
+        @include text($text);
+      }
+
+      &--text-badge {
+        @include text($text-badge);
+      }
+    }
   }
 }
