@@ -79,7 +79,7 @@
     "rimraf": "^5.0.5",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "sass": "^1.75.0",
+    "sass": "^1.77.0",
     "semantic-release": "^23.0.8",
     "storybook": "^7.6.18",
     "stylelint": "^16.4.0",
