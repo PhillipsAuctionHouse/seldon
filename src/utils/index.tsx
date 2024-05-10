@@ -110,7 +110,3 @@ export function useNormalizedInputProps({
 }
 
 export const defaultYear = new Date().getFullYear();
-
-// Nullish coalescing operator '??' polyfill
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export const nullishCoalescing = (a: any, b: any) => (a !== null && a !== undefined ? a : b);

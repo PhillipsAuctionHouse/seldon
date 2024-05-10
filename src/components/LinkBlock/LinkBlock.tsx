@@ -2,7 +2,6 @@ import classnames from 'classnames';
 import { px } from '../../utils';
 import Link, { LinkProps } from '../Link/Link';
 import { LinkVariants } from '../Link/utils';
-import { nullishCoalescing } from '../../utils';
 
 export interface LinkBlockProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Props for the Link component */
@@ -22,7 +21,7 @@ export interface LinkBlockProps extends React.HTMLAttributes<HTMLDivElement> {
 const LinkBlock = ({ linkProps, description, className: classNameProp, id, ...props }: LinkBlockProps) => {
   const baseClassName = `${px}-link-block`;
   const className = classnames(baseClassName, classNameProp);
-  const LinkComponent = nullishCoalescing(linkProps.element, Link);
+  const LinkComponent = linkProps.element ?? Link;
   const dataTestId = id ? `link-block-${id}` : `link-block`;
 
   return (
