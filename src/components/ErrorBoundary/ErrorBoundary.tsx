@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { nullishCoalescing } from '../../utils';
 
 export interface ErrorBoundaryProps {
   /**
@@ -36,7 +37,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, State> {
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
     // Swap out for logging service
-    this.props?.logger(error, info.componentStack ?? 'ErrorBoundary caught an error');
+    this.props?.logger(error, nullishCoalescing(info.componentStack, 'ErrorBoundary caught an error'));
   }
 
   render() {
