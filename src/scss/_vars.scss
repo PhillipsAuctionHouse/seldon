@@ -22,7 +22,7 @@ $off-white: #f4f2f1;
 
 // Notification color palette
 $error-red: #f00;
-$error-pink: rgb(255 229 229 / 90%);
+$error-pink: rgba(255, 229, 229, 90%);
 $warn-yellow: #d6d141;
 $post-sale-pink: #ff0086;
 $cta-blue: #4a90e2;
@@ -104,7 +104,7 @@ $body3: 'body3';
   --label-size2: 1rem;
   --label-size3: 0.75rem;
 
-  @media (width <= 960px) {
+  @media (max-width: 960px) {
     --heading-size0: 2.59rem;
     --heading-size1: 1.83rem;
     --heading-size2: 1.46rem;
@@ -118,7 +118,7 @@ $body3: 'body3';
     --label-size3: 0.56rem;
   }
 
-  @media (width >= 1801px) {
+  @media (min-width: 1801px) {
     --heading-size0: 4.06rem;
     --heading-size1: 3.05rem;
     --heading-size2: 2.44rem;
@@ -170,7 +170,7 @@ $text-badge-label-size: var(--label-size3);
   --spacing-large: 3rem;
   --spacing-xl: 6rem;
 
-  @media (width <= 960px) {
+  @media (max-width: 960px) {
     --spacing-micro: 0.19rem;
     --spacing-xsm: 0.38rem;
     --spacing-small: 0.75rem;
@@ -179,7 +179,7 @@ $text-badge-label-size: var(--label-size3);
     --spacing-xl: 4.8rem;
   }
 
-  @media (width >= 1801px) {
+  @media (min-width: 1801px) {
     --spacing-micro: 0.31rem;
     --spacing-xsm: 0.63rem;
     --spacing-small: 1.25rem;

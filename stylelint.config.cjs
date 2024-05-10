@@ -7,10 +7,11 @@ module.exports = {
     'order/properties-alphabetical-order': true,
     // we're fine with _utils imports
     'scss/load-no-partial-leading-underscore': null,
-
     // Relax optionated naming conventions
     'scss/dollar-variable-pattern': null,
     'scss/at-mixin-pattern': null,
+    'media-feature-range-notation': 'prefix',
+    'color-function-notation': 'legacy',
     'selector-class-pattern': [
       '^[a-z]([-]?[a-z0-9]+)*(__[a-z0-9]([-]?[a-z0-9]+)*)?(--[a-z0-9]([-]?[a-z0-9]+)*)?$',
       {
