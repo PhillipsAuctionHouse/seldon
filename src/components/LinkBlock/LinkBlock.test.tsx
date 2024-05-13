@@ -26,7 +26,10 @@ describe('LinkBlock', () => {
   });
 
   it('renders a custom link and description correctly', () => {
-    const CustomLink = ({ children, ...props }: LinkProps) => <a {...props}>{<>Custom Link: {children}</>}</a>;
+    const CustomLink = ({ children, ...props }: LinkProps) => {
+      const { href } = props;
+      return <a href={href}>{<>Custom Link: {children}</>}</a>;
+    };
 
     const linkProps = {
       href: 'https://customlink.com',
