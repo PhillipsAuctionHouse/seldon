@@ -1,3 +1,12 @@
+## [1.19.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.19.2...v1.19.3) (2024-05-13)
+
+
+### Bug Fixes
+
+* refactored test console error ([da2e784](https://github.com/PhillipsAuctionHouse/seldon/commit/da2e7849eb28e8cab9ddb90eb1673d42411ed15c))
+* remove polyfill Nullish Coalescing Operators ([46cb5b5](https://github.com/PhillipsAuctionHouse/seldon/commit/46cb5b52d1a9a23112221ce1b1d7cbf5ded20012))
+* vite.config ([7dd327e](https://github.com/PhillipsAuctionHouse/seldon/commit/7dd327e7c2524058b155177295601382257346e0))
+
 ## [1.19.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.19.1...v1.19.2) (2024-05-13)
 
 
