@@ -1,3 +1,10 @@
+## [1.19.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.19.1...v1.19.2) (2024-05-13)
+
+
+### Bug Fixes
+
+* nullishCoalescing polyfill ([6150a06](https://github.com/PhillipsAuctionHouse/seldon/commit/6150a067555e1a3a844381973966328d75c125dd))
+
 ## [1.19.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.19.0...v1.19.1) (2024-05-08)
 
 
