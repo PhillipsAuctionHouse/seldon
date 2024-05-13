@@ -16,6 +16,7 @@ const plugins = [svgr(), react(), tsconfigPaths(), dts({ entryRoot: 'src' })];
 export default defineConfig({
   plugins: plugins,
   build: {
+    target: ['es2019'],
     minify: true,
     reportCompressedSize: true,
     cssCodeSplit: true,
