@@ -7,10 +7,6 @@
   flex-direction: column;
   gap: $spacing-md;
 
-  &:not(.#{$px}-split-panel--borderless) {
-    padding: 2.5rem $spacing-md;
-  }
-
   > * {
     flex: 1 1 0px;
   }
