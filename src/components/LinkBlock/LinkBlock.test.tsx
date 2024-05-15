@@ -25,7 +25,8 @@ describe('LinkBlock', () => {
   });
 
   it('renders a custom link and description correctly', () => {
-    const CustomLink = ({ children, ...props }: LinkProps) => <a {...props}>{<>Custom Link: {children}</>}</a>;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const CustomLink = ({ children, element, ...props }: LinkProps) => <a {...props}>{<>Custom Link: {children}</>}</a>;
 
     const linkProps = {
       href: 'https://customlink.com',

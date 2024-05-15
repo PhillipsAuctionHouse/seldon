@@ -102,7 +102,7 @@ describe('An Input', () => {
   });
 
   it('will fire the onClick handler when clicked', async () => {
-    const mockedOnClick = jest.fn();
+    const mockedOnClick = vi.fn();
     render(<Input {...reqProps} onClick={mockedOnClick} />);
     userEvent.click(screen.getByTestId('test-id'));
     await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(1));

@@ -28,7 +28,7 @@ describe('Footer', () => {
       id="subscribe"
       title="Subscribe to Email"
       blurb="This blurb will be rendered"
-      buttonProps={{ onClick: jest.fn() }}
+      buttonProps={{ onClick: vi.fn() }}
     />
   );
 

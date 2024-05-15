@@ -27,10 +27,10 @@ describe('An ErrorBoundary', () => {
   });
 
   it('will render a default fallback component if an error is thrown', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {
       return;
     });
-    const log = jest.spyOn(console, 'log').mockImplementation(() => {
+    const log = vi.spyOn(console, 'log').mockImplementation(() => {
       return;
     });
     render(
@@ -50,10 +50,10 @@ describe('An ErrorBoundary', () => {
   });
 
   it('will render a provided fallback component if an error is thrown', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {
       return;
     });
-    const log = jest.spyOn(console, 'log').mockImplementation(() => {
+    const log = vi.spyOn(console, 'log').mockImplementation(() => {
       return;
     });
     render(
@@ -77,13 +77,13 @@ describe('An ErrorBoundary', () => {
   });
 
   it('will call the logger method that is passed in with the error details', () => {
-    const error = jest.spyOn(console, 'error').mockImplementation(() => {
+    const error = vi.spyOn(console, 'error').mockImplementation(() => {
       return;
     });
-    const log = jest.spyOn(console, 'log').mockImplementation(() => {
+    const log = vi.spyOn(console, 'log').mockImplementation(() => {
       return 'logger mock';
     });
-    const mockedLogger = jest.fn().mockImplementation(() => {
+    const mockedLogger = vi.fn().mockImplementation(() => {
       return 'logger mock';
     });
     render(
