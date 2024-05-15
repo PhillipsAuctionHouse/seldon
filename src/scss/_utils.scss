@@ -1,3 +1,4 @@
+@use 'sass:string';
 @import './vars';
 
 @mixin hidden {
@@ -40,10 +41,10 @@
 }
 
 @mixin gridMargins {
-  margin: 0 $spacing-medium;
+  margin: 0 $spacing-md;
 
   @media (min-width: $breakpoint3) {
-    margin: 0 $spacing-large;
+    margin: 0 $spacing-lg;
   }
 
   @media (min-width: $breakpoint4) {
@@ -53,7 +54,7 @@
 
 @mixin grid($columns: 2, $margins-on: true) {
   display: grid;
-  gap: $spacing-medium;
+  gap: $spacing-md;
   grid-template-columns: repeat($columns, 1fr);
 
   @if $margins-on {
@@ -63,7 +64,7 @@
 
 @mixin gridContainer($margins-on: true) {
   display: grid;
-  gap: $spacing-medium;
+  gap: $spacing-md;
   grid-template-columns: repeat(2, 1fr);
 
   @media (min-width: $breakpoint2) {
@@ -122,6 +123,40 @@
     @if type == 'max' {
       @media (max-width: $breakpoint4) {
         @content;
+      }
+    }
+  }
+}
+
+// prepends the parent class name to the child class name for BEM
+@mixin padding($padding: $padding-lg, $direction: 'all', $side: 'both') {
+  $parsed-padding: string.slice(#{$padding}, 15, -2); // Parse the padding value by removing "-var(--spacing-" and ")".
+
+  .#{$px}-padding-#{$direction}-#{$parsed-padding}-#{$side} {
+    // Use the parsed padding value.
+    @if $direction == 'all' {
+      @if $side == 'both' {
+        padding: $padding;
+      }
+    }
+
+    @if $direction == 'vertical' {
+      @if $side == 'start' or $side == 'both' {
+        padding-top: $padding;
+      }
+
+      @if $side == 'end' or $side == 'both' {
+        padding-bottom: $padding;
+      }
+    }
+
+    @if $direction == 'horizontal' {
+      @if $side == 'start' or $side == 'both' {
+        padding-left: $padding;
+      }
+
+      @if $side == 'end' or $side == 'both' {
+        padding-right: $padding;
       }
     }
   }

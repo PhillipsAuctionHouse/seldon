@@ -7,10 +7,10 @@
   }
 
   &__container--has-margins {
-    margin: 0 $spacing-medium;
+    margin: 0 $spacing-md;
 
     @media (min-width: 1401px) {
-      margin: 0 $spacing-large;
+      margin: 0 $spacing-lg;
     }
 
     @media (min-width: 1801px) {

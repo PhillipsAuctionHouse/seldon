@@ -10,7 +10,7 @@ export interface LinkListProps extends React.HTMLAttributes<HTMLUListElement> {
 /**
  * ## Overview
  *
- * The LinkList component is used to display a list of LinkBlocks in a 3 column list on some breakpoints and 1 column list on others.  Because of the 3 column design, the set of LinkBlocks should be divisible by 3.
+ * The LinkList component is used to display a list of LinkBlocks in a 3 column list on some breakpoints and 1 column list on others.
  *
  * [Figma Link](https://www.figma.com/file/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?type=design&node-id=5709-8035&mode=design&t=jOnrmrqnE8lCQvGR-4)
  */

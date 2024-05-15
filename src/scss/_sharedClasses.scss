@@ -1,0 +1,10 @@
+@import '#scss/_utils';
+
+// I think this is pretty tailwindy to generate these common classes
+@each $direction in 'vertical', 'horizontal' {
+  @each $padding in $padding-tokens {
+    @each $side in 'start', 'end', 'both' {
+      @include padding($padding, $direction, $side);
+    }
+  }
+}

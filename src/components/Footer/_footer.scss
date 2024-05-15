@@ -15,21 +15,21 @@
 
   &__navigation {
     background-color: $white;
-    padding: $spacing-medium $spacing-medium $spacing-small;
+    padding: $spacing-md $spacing-md $spacing-sm;
     text-align: right;
 
     @include media($breakpoint-md) {
-      padding: $spacing-medium $spacing-large $spacing-small;
+      padding: $spacing-md $spacing-lg $spacing-sm;
     }
 
     @include media($breakpoint-lg) {
-      padding: $spacing-medium $spacing-xl $spacing-small;
+      padding: $spacing-md $spacing-xl $spacing-sm;
     }
 
     ul {
       display: inline-flex;
       flex-wrap: wrap;
-      gap: $spacing-medium;
+      gap: $spacing-md;
       justify-content: center;
       list-style: none;
       padding: 0;
@@ -48,7 +48,7 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    padding: $spacing-large $spacing-medium 0;
+    padding: $spacing-lg $spacing-md 0;
 
     @include media($breakpoint-sm) {
       align-items: flex-start;
@@ -57,7 +57,7 @@
     }
 
     @include media($breakpoint-md) {
-      padding: 3.75rem $spacing-large;
+      padding: 3.75rem $spacing-lg;
     }
 
     @include media($breakpoint-lg) {
@@ -66,7 +66,7 @@
   }
 
   &__content-split-panel__left {
-    margin-bottom: $spacing-medium;
+    margin-bottom: $spacing-md;
 
     @include media($breakpoint-sm) {
       margin-bottom: 0;
