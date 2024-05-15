@@ -4,6 +4,19 @@ import Link, { LinkProps, LinkVariants } from '../Link/Link';
 import { getLinkVariantClassName } from '../Link/utils';
 
 describe('LinkBlock', () => {
+  it('renders with data-testid when id prop is passed', () => {
+    const linkProps = {
+      href: 'https://example.com',
+      target: '_blank',
+      children: 'My Link',
+      element: Link,
+    };
+    const id = 'test-id';
+    render(<LinkBlock linkProps={linkProps} description="This is a link block" id={id} />);
+
+    expect(screen.queryByTestId('link-block-test-id')).toBeInTheDocument();
+  });
+
   it('renders the link and description correctly', () => {
     const linkProps = {
       href: 'https://example.com',
