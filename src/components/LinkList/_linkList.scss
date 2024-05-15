@@ -2,10 +2,11 @@
 
 .#{$px}-link-list {
   &--item {
-    grid-column: span 4;
+    // mobile first
+    grid-column: span 2;
 
-    @include media($breakpoint-lg) {
-      grid-column: span 2;
+    @include media($breakpoint-sm) {
+      grid-column: span 4;
     }
   }
 }

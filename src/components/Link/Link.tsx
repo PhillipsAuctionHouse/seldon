@@ -3,17 +3,7 @@ import classnames from 'classnames';
 import { px } from '../../utils';
 import React, { HTMLAttributes } from 'react';
 import { getLinkVariantClassName, isLinkExternal } from './utils';
-
-export const LinkVariants = {
-  /** Default variant, used */
-  standalone: 'standalone',
-  /** link rendering emailto: */
-  email: 'email',
-  /** these links are being rendered in a list */
-  list: 'list',
-  /** link is being rendered within body copy */
-  inline: 'inline',
-} as const;
+import { LinkVariants } from './utils';
 
 export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
   /**
@@ -22,7 +12,7 @@ export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
    * @default standalone
    * @see LinkVariants
    */
-  variant?: keyof typeof LinkVariants;
+  variant?: LinkVariants;
   /**
    * The text of the link
    */

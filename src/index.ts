@@ -8,6 +8,7 @@ export { default as Header, type HeaderProps } from './components/Header/Header'
 export { default as HeroBanner, type HeroBannerProps } from './components/HeroBanner/HeroBanner';
 export { default as Input, type InputProps } from './components/Input/Input';
 export { default as Link, type LinkProps } from './components/Link/Link';
+export { LinkVariants } from './components/Link/utils';
 export { default as LinkBlock, type LinkBlockProps } from './components/LinkBlock/LinkBlock';
 export { default as LinkList, type LinkListProps } from './components/LinkList/LinkList';
 

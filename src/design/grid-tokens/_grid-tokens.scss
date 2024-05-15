@@ -15,17 +15,17 @@
     top: 0;
     transform: translate($spacing-medium, 1.5rem);
 
-    @media (width >= 961px) {
+    @media (min-width: 961px) {
       content: '@media (min-width: 961px)';
       transform: translate($spacing-medium, 2.1875rem);
     }
 
-    @media (width >= 1401px) {
+    @media (min-width: 1401px) {
       content: '@media (min-width: 1401px)';
       transform: translate($spacing-large, 2.1875rem);
     }
 
-    @media (width >= 1801px) {
+    @media (min-width: 1801px) {
       content: '@media (min-width: 1801px)';
       transform: translate($spacing-xl, 2.75rem);
     }
@@ -41,16 +41,16 @@
     transform: translate(-50%, 2.25rem);
     width: calc(100% - 1rem);
 
-    @media (width >= 961px) {
+    @media (min-width: 961px) {
       height: calc(100% - 1.75rem);
       transform: translate(-50%, 3rem);
     }
 
-    @media (width >= 1401px) {
+    @media (min-width: 1401px) {
       width: calc(100% - 3rem);
     }
 
-    @media (width >= 1801px) {
+    @media (min-width: 1801px) {
       transform: translate(-50%, 3.55rem);
       width: calc(100% - 11rem);
     }
@@ -99,7 +99,7 @@
       margin: 0 auto;
     }
 
-    @media (width <= 960px) {
+    @media (max-width: 960px) {
       .grid-example:nth-child(n + 3) {
         display: none;
       }
@@ -109,7 +109,7 @@
       }
     }
 
-    @media (width >= 960px) and (width <= 1400px) {
+    @media (min-width: 960px) and (max-width: 1400px) {
       .grid-example:nth-child(n + 5) {
         display: none;
       }
@@ -151,7 +151,7 @@
       content: 'grid-column: 1 / -1;';
     }
 
-    @media (width >= 961px) {
+    @media (min-width: 961px) {
       .grid-example__header {
         grid-column: 1 / -1;
       }
@@ -177,7 +177,7 @@
       }
     }
 
-    @media (width >= 1401px) {
+    @media (min-width: 1401px) {
       .grid-example__header {
         grid-column: 1 / -1;
       }

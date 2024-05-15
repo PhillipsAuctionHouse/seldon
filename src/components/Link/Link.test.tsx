@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import Link, { LinkVariants } from './Link';
+import Link from './Link';
+import { LinkVariants } from './utils';
 import { getLinkVariantClassName } from './utils';
 
 const getLinkElement = (text: string) => screen.getByRole('link', { name: text });

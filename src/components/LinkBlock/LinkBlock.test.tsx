@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import LinkBlock from './LinkBlock';
-import Link, { LinkProps, LinkVariants } from '../Link/Link';
+import Link, { LinkProps } from '../Link/Link';
+import { LinkVariants } from '../Link/utils';
 import { getLinkVariantClassName } from '../Link/utils';
 
 describe('LinkBlock', () => {
@@ -38,8 +39,10 @@ describe('LinkBlock', () => {
   });
 
   it('renders a custom link and description correctly', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const CustomLink = ({ children, element, ...props }: LinkProps) => <a {...props}>{<>Custom Link: {children}</>}</a>;
+    const CustomLink = ({ children, ...props }: LinkProps) => {
+      const { href } = props;
+      return <a href={href}>{<>Custom Link: {children}</>}</a>;
+    };
 
     const linkProps = {
       href: 'https://customlink.com',
