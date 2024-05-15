@@ -54,7 +54,7 @@
     "@storybook/blocks": "^7.6.19",
     "@storybook/react": "^7.0.22",
     "@storybook/react-vite": "^7.6.19",
-    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/color": "^3.0.6",
