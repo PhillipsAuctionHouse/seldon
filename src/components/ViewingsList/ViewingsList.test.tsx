@@ -84,7 +84,7 @@ describe('ViewingsList', () => {
 
   it('will save all values of the form and return them as part of the "handleOnSave" callback', async () => {
     const user = userEvent.setup();
-    const mockedHandleOnSave = jest.fn().mockImplementation((e, cb) => {
+    const mockedHandleOnSave = vi.fn().mockImplementation((e, cb) => {
       const targ = e?.target as HTMLElement;
       const inputs = targ.closest('.phillips-viewings-list-card')?.querySelectorAll('input');
 

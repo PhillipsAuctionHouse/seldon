@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import react from '@vitejs/plugin-react';
@@ -67,6 +68,26 @@ export default defineConfig({
         }),
         peerDepsExternal(),
       ],
+    },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    include: ['**/*.test.{js,jsx,ts,tsx}'],
+    setupFiles: ['./config/vitest/setupTest.ts'],
+    restoreMocks: true,
+    coverage: {
+      include: ['src/components/**/*.{ts,tsx}', 'src/utils/**/*.{ts,tsx}'],
+      exclude: ['**/*.test.{ts,tsx}', '**/*.stories.{ts,tsx}'],
+      reporter: ['text', 'json', 'html'],
+      provider: 'v8',
+      thresholds: {
+        branches: 90,
+        lines: 90,
+        functions: 90,
+        statements: 90,
+      },
+      all: true,
     },
   },
 });

@@ -19,7 +19,7 @@ describe('A DatePicker', () => {
   });
 
   it('will update the input with a newly selected date', async () => {
-    const mockedOnChange = jest.fn();
+    const mockedOnChange = vi.fn();
     render(
       <DatePicker {...reqProps} onChange={mockedOnChange} defaultValue={['2023-06-01T08:30', '2023-06-05T08:30']} />,
     );
@@ -45,7 +45,7 @@ describe('A DatePicker', () => {
   });
 
   it('will call onChange callback if input is manually entered', async () => {
-    const mockedOnChange = jest.fn();
+    const mockedOnChange = vi.fn();
     render(
       <DatePicker
         {...reqProps}
