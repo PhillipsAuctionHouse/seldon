@@ -16,7 +16,7 @@ describe('Subscribe', () => {
 
   it('it will call the callback function on submit', async () => {
     const user = userEvent.setup();
-    const mockCallback = jest.fn((e) => {
+    const mockCallback = vi.fn((e) => {
       e.preventDefault();
       const inputElement = (e.target as HTMLElement).closest('form')?.querySelector('input');
 

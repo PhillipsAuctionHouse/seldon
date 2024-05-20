@@ -149,7 +149,7 @@ We use scss variables within the components themselves as style property values.
 
 ## Testing
 
-Unit test must be written for all JavaScript files. We utlize [`Jest.js`](https://jestjs.io/) and the [`@testing-library`](https://testing-library.com/docs/react-testing-library/intro) packages to author test.
+Unit test must be written for all JavaScript files. We utlize [`Vitest.js`](https://vitest.dev/) and the [`@testing-library`](https://testing-library.com/docs/react-testing-library/intro) packages to author test.
 
 ### Writing tests
 

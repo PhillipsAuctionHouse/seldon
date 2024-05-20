@@ -32,7 +32,7 @@ const LinkBlocks: React.ReactElement<LinkBlockProps, typeof LinkBlock>[] = [
 
 describe('LinkList component', () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
   it('check testid', () => {
     render(<LinkList id="test">{LinkBlocks}</LinkList>);
@@ -57,10 +57,10 @@ describe('LinkList component', () => {
   });
 
   it('renders only LinkBlock components and logs a warning for non-LinkBlock children', () => {
-    jest.spyOn(console, 'error').mockImplementation(() => {
+    vi.spyOn(console, 'error').mockImplementation(() => {
       return;
     });
-    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {
+    const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {
       return;
     });
 

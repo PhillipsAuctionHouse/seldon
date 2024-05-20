@@ -22,7 +22,7 @@ Test are also a good way to audit our own coding styles. If your code is hard to
 
 ## Writing test for Phillips
 
-In this project, we use [Jest](https://jestjs.io/docs/29.x/api) as the test runner for our unit test. For selections and interactions in jest we are using the [React Testing library](https://testing-library.com/docs/react-testing-library/api). With these two libraries we are able to use modern testing best practices to interact with our code in ways that are similar to how an end user would.
+In this project, we use [Vitest](https://vitest.dev/) as the test runner for our unit test. For selections and interactions in Vitest we are using the [React Testing library](https://testing-library.com/docs/react-testing-library/api). With these two libraries we are able to use modern testing best practices to interact with our code in ways that are similar to how an end user would.
 
 Each test file should be collocated in the same directory with the file that the test are ran against. The test runner will attempt to run any file that has the `.test.js` extension.
 
@@ -41,7 +41,7 @@ describe('HeroBanner', () => {
 });
 ```
 
-Jest places `describe`, `it`, `expect`, and all assertions (`toEqual`, etc.) in the global scope and they are available without import.
+We have placed Vitest's `describe`, `it`, `expect`, and all assertions (`toEqual`, etc.) in the global scope and they are available without import.
 
 By convention, the `describe` block title argument should be the name of the component or file that you are testing. This helps organize the file and makes for a nicer console output when reading test results. By using `describe` we also encapsulate variables and setup code needed for our test so that these values do not leak into other test runs.
 
@@ -51,7 +51,7 @@ Each `it` block title component should be descriptive of what we are trying to t
 
 ## Setup and teardown
 
-Many times we may need additional setup code ran before we can test all functionality. Jest comes with a few [helpers](https://jestjs.io/docs/setup-teardown) to allow us to run our setup without having to repeat code or create our own helpers. The `beforeEach` and `beforeAll` methods allow control over when our setup code is ran while the `afterEach` and `afterAll` methods allows us to clean up after our test finish
+Many times we may need additional setup code ran before we can test all functionality. Vitest comes with a few [helpers](https://vitest.dev/api/#setup-and-teardown) to allow us to run our setup without having to repeat code or create our own helpers. The `beforeEach` and `beforeAll` methods allow control over when our setup code is ran while the `afterEach` and `afterAll` methods allows us to clean up after our test finish
 
 ```js
 // This one will be ran for ALL test in the file
@@ -62,7 +62,7 @@ beforeEach(() => {
 
 describe('Accordion', () => {
   let emitter;
-  const mockedMethod = jest.fn();
+  const mockedMethod = vi.fn();
   // This is ran just for the test in this describe block.
   beforeEach(() => {
     emitter = new EventEmitter();
@@ -282,7 +282,7 @@ it('will only auto number each child when autoNumberChildren is true', () => { .
 
 ```js
 // Bad - If not testing a function or a prop do not add them
-const myFunc = jest.fn();
+const myFunc = vi.fn();
 <Accordion id='accordion1' autoNumberChildren={true} onClick={myFunc} someOtherProp={value}>...</Accordion>
 // Good
 <Accordion id='accordion1' autoNumberChildren={true}>...</Accordion>
@@ -300,4 +300,4 @@ await expect(container).toBeAccessible();
 - [Types of queries available from React Testing Library](https://testing-library.com/docs/queries/about/#types-of-queries)
 - [Priority of queries (what is the best query for the job?)](https://testing-library.com/docs/queries/about/#priority)
 - [Common mistakes when using React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
-- [Expect Matchers](https://jestjs.io/docs/27.x/expect)
+- [Expect Matchers](https://vitest.dev/api/expect.html)

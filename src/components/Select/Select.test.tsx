@@ -20,8 +20,8 @@ describe('A Select', () => {
 
   it('will not be interactive if disabled or readonly', async () => {
     const testRef = React.createRef<HTMLSelectElement>();
-    const mockedOnClick = jest.fn();
-    const mockedOnChange = jest.fn();
+    const mockedOnClick = vi.fn();
+    const mockedOnChange = vi.fn();
     const { rerender } = render(
       <Select ref={testRef} {...reqProps} defaultValue="option two" onChange={mockedOnChange} onClick={mockedOnClick}>
         <option>option one</option>
@@ -33,7 +33,7 @@ describe('A Select', () => {
     await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(2));
     await waitFor(() => expect(mockedOnChange.mock.calls).toHaveLength(1));
     expect(testRef?.current?.value).toEqual('option one');
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     rerender(
       <Select ref={testRef} {...reqProps} defaultValue="option two" onClick={mockedOnClick} disabled>
