@@ -5,7 +5,7 @@ import Grid from '../Grid/Grid';
 
 describe('Row', () => {
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
   it('renders children correctly', () => {
     render(
