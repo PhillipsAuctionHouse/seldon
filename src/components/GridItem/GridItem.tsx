@@ -47,7 +47,7 @@ const GridItem = ({
     return [
       `${px}-grid-item`, // figure out the class names for each breakpoint
       Object.entries(columnSpansPerBreakpoint).map(([key, value]) =>
-        determineColumnSpanClassName(key as 'sm' | 'xs' | 'md' | 'lg', value, align),
+        determineColumnSpanClassName(key as GridItemAlign, value, align),
       ),
     ];
   }, [align, columnSpansPerBreakpoint]);

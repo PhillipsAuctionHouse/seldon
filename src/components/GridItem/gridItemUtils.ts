@@ -3,7 +3,7 @@ import { GridItemProps } from './GridItem';
 import { GridItemAlign } from './types';
 
 export const determineColumnSpanClassName = (
-  breakpoint: 'xs' | 'sm' | 'md' | 'lg',
+  breakpoint: GridItemAlign,
   columnSpan: number,
   align: GridItemProps['align'] = GridItemAlign.center,
 ): string => {
