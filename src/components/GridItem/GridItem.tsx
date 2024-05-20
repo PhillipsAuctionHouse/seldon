@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { px } from '../../utils';
 import classNames from 'classnames';
-import { GridItemAlign, determineColumnSpanClassName, validateColumnSpans } from './gridItemUtils';
+import { determineColumnSpanClassName, validateColumnSpans } from './gridItemUtils';
+import { GridItemAlign } from './types';
 
 export interface GridItemProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -41,23 +42,22 @@ const GridItem = ({
 }: GridItemProps) => {
   const dataTestId = id ? `grid-item-${id}` : `grid-item`;
 
-  if (!validateColumnSpans(xs, sm, md, lg)) {
+  const columnSpansPerBreakpoint = useMemo(() => ({ xs, sm, md, lg }) as const, [xs, sm, md, lg]);
+  const gridItemClasses = useMemo(() => {
+    return [
+      `${px}-grid-item`, // figure out the class names for each breakpoint
+      Object.entries(columnSpansPerBreakpoint).map(([key, value]) =>
+        determineColumnSpanClassName(key as 'sm' | 'xs' | 'md' | 'lg', value, align),
+      ),
+    ];
+  }, [align, columnSpansPerBreakpoint]);
+
+  if (!validateColumnSpans(Object.values(columnSpansPerBreakpoint))) {
     return null;
   }
 
   return (
-    <Element
-      {...props}
-      data-testid={dataTestId}
-      id={id}
-      className={classNames(
-        `${px}-grid-item`, // figure out the class names for each breakpoint
-        determineColumnSpanClassName('xs', xs, align),
-        determineColumnSpanClassName('sm', sm, align),
-        determineColumnSpanClassName('md', md, align),
-        determineColumnSpanClassName('lg', lg, align),
-      )}
-    >
+    <Element {...props} data-testid={dataTestId} id={id} className={classNames(gridItemClasses)}>
       {children}
     </Element>
   );

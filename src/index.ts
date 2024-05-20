@@ -13,6 +13,7 @@ export { default as LinkBlock, type LinkBlockProps } from './components/LinkBloc
 export { default as LinkList, type LinkListProps } from './components/LinkList/LinkList';
 export { default as Row, type RowProps } from './components/Row/Row';
 export { default as GridItem, type GridItemProps } from './components/GridItem/GridItem';
+export { GridItemAlign } from './components/GridItem/types';
 export { default as Select, type SelectProps } from './components/Select/Select';
 export { default as SplitPanel, type SplitPanelProps } from './components/SplitPanel/SplitPanel';
 export { default as Subscribe, type SubscribeProps } from './components/Subscribe/Subscribe';

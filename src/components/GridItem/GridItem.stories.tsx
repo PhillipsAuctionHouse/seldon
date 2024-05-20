@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 import GridItem, { type GridItemProps } from './GridItem';
-import { GridItemAlign } from './gridItemUtils';
 import Grid from '../Grid/Grid';
+import { GridItemAlign } from './types';
 
 const meta = {
   title: 'Components/Layouts/GridItem',

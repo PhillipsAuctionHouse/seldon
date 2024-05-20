@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import GridItem from './GridItem';
-import { GridItemAlign } from './gridItemUtils';
+import { GridItemAlign } from './types';
 
 describe('GridItem', () => {
   it('renders children correctly', () => {
