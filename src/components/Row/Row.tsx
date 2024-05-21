@@ -27,6 +27,7 @@ const Row = ({
   id,
   element: CustomElement,
   padding = { top: PaddingTokens.lg, bottom: PaddingTokens.lg },
+  className,
   ...props
 }: RowProps) => {
   const dataTestId = id ? `row-${id}` : `row`;
@@ -43,6 +44,7 @@ const Row = ({
         baseClassName,
         padding.top && generatePaddingClassName(padding.top, 'start'),
         padding.bottom && generatePaddingClassName(padding.bottom, 'end'),
+        className,
       )}
     >
       {children}
