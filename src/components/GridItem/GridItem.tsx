@@ -38,6 +38,7 @@ const GridItem = ({
   align = GridItemAlign.center,
   id,
   element: Element = 'div',
+  className,
   ...props
 }: GridItemProps) => {
   const dataTestId = id ? `grid-item-${id}` : `grid-item`;
@@ -49,8 +50,9 @@ const GridItem = ({
       Object.entries(columnSpansPerBreakpoint).map(([key, value]) =>
         determineColumnSpanClassName(key as GridItemAlign, value, align),
       ),
+      className,
     ];
-  }, [align, columnSpansPerBreakpoint]);
+  }, [align, columnSpansPerBreakpoint, className]);
 
   if (!validateColumnSpans(Object.values(columnSpansPerBreakpoint))) {
     return null;
