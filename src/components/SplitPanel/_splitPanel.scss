@@ -5,11 +5,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: $spacing-medium;
-
-  &:not(.#{$px}-split-panel--borderless) {
-    padding: 2.5rem $spacing-medium;
-  }
+  gap: $spacing-md;
 
   > * {
     flex: 1 1 0px;
@@ -26,7 +22,7 @@
 
     & > :not(:last-child) {
       border-right: 1px solid $medium-gray;
-      padding-right: $spacing-medium;
+      padding-right: $spacing-md;
     }
 
     &--borderless {

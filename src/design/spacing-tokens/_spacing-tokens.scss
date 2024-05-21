@@ -12,19 +12,19 @@
       padding: $spacing-xsm;
     }
 
-    &--spacing-small {
-      border: $spacing-small solid $primary-black;
-      padding: $spacing-small;
+    &--spacing-sm {
+      border: $spacing-sm solid $primary-black;
+      padding: $spacing-sm;
     }
 
-    &--spacing-medium {
-      border: $spacing-medium solid $primary-black;
-      padding: $spacing-medium;
+    &--spacing-md {
+      border: $spacing-md solid $primary-black;
+      padding: $spacing-md;
     }
 
-    &--spacing-large {
-      border: $spacing-large solid $primary-black;
-      padding: $spacing-large;
+    &--spacing-lg {
+      border: $spacing-lg solid $primary-black;
+      padding: $spacing-lg;
     }
 
     &--spacing-xl {
@@ -37,21 +37,21 @@
     padding-inline-start: 0;
 
     &-wrapper {
-      margin-bottom: $spacing-medium;
+      margin-bottom: $spacing-md;
     }
   }
 
   .token-table {
     border: 1px solid $keyline-gray;
     border-collapse: collapse;
-    margin-bottom: $spacing-medium;
+    margin-bottom: $spacing-md;
     width: 100%;
 
     th {
       background-color: $light-gray;
       border: 1px solid $keyline-gray;
       min-width: 9rem;
-      padding: $spacing-small;
+      padding: $spacing-sm;
     }
 
     tr:nth-child(2n) {
@@ -60,7 +60,7 @@
 
     td {
       border: 1px solid $keyline-gray;
-      padding: $spacing-small;
+      padding: $spacing-sm;
       text-align: center;
 
       *:first-child {

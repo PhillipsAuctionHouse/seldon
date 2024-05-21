@@ -165,51 +165,52 @@ $text-badge-label-size: var(--label-size3);
 :root {
   --spacing-micro: 0.25rem;
   --spacing-xsm: 0.5rem;
-  --spacing-small: 1rem;
-  --spacing-medium: 2rem;
-  --spacing-large: 3rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 3rem;
   --spacing-xl: 6rem;
 
   @media (max-width: 960px) {
     --spacing-micro: 0.19rem;
     --spacing-xsm: 0.38rem;
-    --spacing-small: 0.75rem;
-    --spacing-medium: 1.5rem;
-    --spacing-large: 2.25rem;
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2.25rem;
     --spacing-xl: 4.8rem;
   }
 
   @media (min-width: 1801px) {
     --spacing-micro: 0.31rem;
     --spacing-xsm: 0.63rem;
-    --spacing-small: 1.25rem;
-    --spacing-medium: 2.5rem;
-    --spacing-large: 3.75rem;
+    --spacing-sm: 1.25rem;
+    --spacing-md: 2.5rem;
+    --spacing-lg: 3.75rem;
     --spacing-xl: 7.5rem;
   }
 }
 
 $spacing-micro: var(--spacing-micro);
 $spacing-xsm: var(--spacing-xsm);
-$spacing-small: var(--spacing-small);
-$spacing-medium: var(--spacing-medium);
-$spacing-large: var(--spacing-large);
+$spacing-sm: var(--spacing-sm);
+$spacing-md: var(--spacing-md);
+$spacing-lg: var(--spacing-lg);
 $spacing-xl: var(--spacing-xl);
 
 // PADDING
 $padding-micro: var(--spacing-micro);
 $padding-xsm: var(--spacing-xsm);
-$padding-small: var(--spacing-small);
-$padding-medium: var(--spacing-medium);
-$padding-large: var(--spacing-large);
+$padding-sm: var(--spacing-sm);
+$padding-md: var(--spacing-md);
+$padding-lg: var(--spacing-lg);
 $padding-xl: var(--spacing-xl);
+$padding-tokens: $padding-micro, $padding-xsm, $padding-sm, $padding-md, $padding-lg, $padding-xl;
 
 // MARGIN
 $margin-micro: var(--spacing-micro);
 $margin-xsm: var(--spacing-xsm);
-$margin-small: var(--spacing-small);
-$margin-medium: var(--spacing-medium);
-$margin-large: var(--spacing-large);
+$margin-sm: var(--spacing-sm);
+$margin-md: var(--spacing-md);
+$margin-lg: var(--spacing-lg);
 $margin-xl: var(--spacing-xl);
 
 ////////////////////////
@@ -229,6 +230,8 @@ $max-site-width: 1560px;
 /// Media breakpoint tokens:
 ///////////////////////////
 
+$breakpoint-xs: 'xs';
 $breakpoint-sm: 'sm';
 $breakpoint-md: 'md';
 $breakpoint-lg: 'lg';
+$breakpoint-xl: 'xl';

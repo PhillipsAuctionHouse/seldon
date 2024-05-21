@@ -7,7 +7,7 @@ export interface LinkBlockProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Props for the Link component */
   linkProps: Omit<LinkProps, 'variant'>;
   /** Renders description under link */
-  description: string;
+  description: React.ReactNode;
 }
 
 /**

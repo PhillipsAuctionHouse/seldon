@@ -4,7 +4,7 @@ import Grid, { GridProps } from './Grid';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
-  title: 'Components/Grid',
+  title: 'Components/Layouts/Grid',
   component: Grid,
   tags: ['autodocs'],
   argTypes: {

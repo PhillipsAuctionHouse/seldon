@@ -5,6 +5,7 @@
 
 // @use 'reset';
 @import '#scss/typography';
+@import '#scss/sharedClasses';
 
 // ⚛️ Components
 @import 'components/Button/button';
@@ -15,6 +16,8 @@
 @import 'components/Header/header';
 @import 'components/HeroBanner/heroBanner';
 @import 'components/Input/input';
+@import 'components/Row/row';
+@import 'components/GridItem/gridItem';
 @import 'components/Social/social';
 @import 'components/SplitPanel/splitPanel';
 @import 'components/Subscribe/subscribe';

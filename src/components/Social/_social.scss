@@ -22,7 +22,7 @@
     display: flex;
     gap: 0 1.25rem;
     list-style: none;
-    margin: 0 0 $spacing-medium;
+    margin: 0 0 $spacing-md;
     padding: 0;
 
     @include media($breakpoint-sm) {
