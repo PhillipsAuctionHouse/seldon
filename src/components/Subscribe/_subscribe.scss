@@ -26,12 +26,11 @@
     }
   }
 
-  &__blurb,
-  .#{$px}-input__input {
-    margin-bottom: $spacing-md;
+  &__input__wrapper {
+    margin-top: $spacing-md;
   }
 
   &__button {
-    margin: 0 0 $spacing-md;
+    margin: $spacing-md 0 $spacing-md;
   }
 }

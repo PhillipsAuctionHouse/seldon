@@ -33,6 +33,22 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
    * Subscribe title text
    */
   title?: string;
+  /**
+   * Subscribe loading text
+   */
+  loadingText?: string;
+  /**
+   * Subscribe error text
+   */
+  invalidText?: string;
+  /**
+   * Subscribe state for loading or error
+   */
+  subscriptionState?: 'loading' | 'invalid' | null;
+  /**
+   * Subscribe input change handler
+   */
+  onInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 /**
@@ -52,8 +68,15 @@ const Subscribe = ({
   inputLabelText = 'Email*',
   inputPlaceholder = 'example@email.com',
   title = 'Subscribe to Newsletter',
+  loadingText = 'Loading...',
+  invalidText = '',
+  subscriptionState = null,
+  onInputChange = () => ({}),
   ...props
 }: SubscribeProps) => {
+  const isInvalid = subscriptionState === 'invalid';
+  const isLoading = subscriptionState === 'loading';
+
   return (
     <Element
       data-testid={id ? id : `subscribe-form`}
@@ -63,11 +86,18 @@ const Subscribe = ({
     >
       <h3 className={`${px}-subscribe__title`}>{title}</h3>
       {blurb ? <p className={`${px}-subscribe__blurb`}>{blurb}</p> : null}
+      {isLoading ? <p className={`${px}-subscribe__loading`}>{loadingText}</p> : null}
+
       <Input
         className={`${px}-subscribe__input`}
         type="email"
+        name="email"
         placeholder={inputPlaceholder}
         labelText={inputLabelText}
+        invalid={isInvalid}
+        invalidText={invalidText}
+        required
+        onChange={onInputChange}
       />
       <Button className={`${px}-subscribe__button ${className}`} buttonType="secondary" type="submit" {...buttonProps}>
         {buttonText}

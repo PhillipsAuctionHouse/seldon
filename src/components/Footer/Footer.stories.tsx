@@ -76,15 +76,19 @@ const leftComponent = (
     element="form"
     buttonProps={{
       size: 'sm',
-      onClick: (e: React.MouseEvent) => {
-        e.preventDefault();
-        const inputElement = (e.target as HTMLElement).closest('form')?.querySelector('input');
-        if (inputElement) {
-          console.log(`subscribe ${inputElement.value}`);
-          inputElement.value = '';
-        }
-      },
     }}
+    onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+      const target = e.target as HTMLFormElement;
+      e.preventDefault();
+
+      const nativeData = new FormData(target);
+      const data = Object.fromEntries(nativeData.entries());
+      console.log('Form submitted for email -', data?.email);
+
+      target.reset();
+    }}
+    subscriptionState={null}
+    invalidText="Please enter a valid email address."
   />
 );
 

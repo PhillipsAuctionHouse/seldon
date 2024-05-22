@@ -13,6 +13,14 @@ describe('Subscribe', () => {
     render(<Subscribe title="Subscribe to Email" blurb="This blurb will be rendered" />);
     expect(screen.queryByText(/This blurb will be rendered/)).toBeInTheDocument();
   });
+  it('it will render a loading if subscriptionState=loading', () => {
+    render(<Subscribe title="Subscribe to Email" subscriptionState="loading" />);
+    expect(screen.queryByText(/Loading.../)).toBeInTheDocument();
+  });
+  it('it will render an error if subscriptionState=invalid and invalidText passed', () => {
+    render(<Subscribe title="Subscribe to Email" subscriptionState="invalid" invalidText="Invalid input" />);
+    expect(screen.queryByText(/Invalid input/)).toBeInTheDocument();
+  });
 
   it('it will call the callback function on submit', async () => {
     const user = userEvent.setup();

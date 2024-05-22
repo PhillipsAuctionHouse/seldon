@@ -15,4 +15,17 @@ export const Playground = (props: SubscribeProps) => <Subscribe {...props} />;
 Playground.args = {
   id: 'mySubscribeComponent',
   title: 'Subscribe to Newsletter',
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => {
+    const target = e.target as HTMLFormElement;
+    e.preventDefault();
+
+    const nativeData = new FormData(target);
+    const data = Object.fromEntries(nativeData.entries());
+    console.log('Form submitted for email -', data?.email);
+
+    target.reset();
+  },
+  blurb: 'Receive exclusive content about our auctions, exhibitions, and special events.',
+  subscriptionState: null,
+  invalidText: 'Please enter a valid email address.',
 };
