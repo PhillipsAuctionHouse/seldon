@@ -50,7 +50,11 @@ export default defineConfig({
             {
               src: ['src/styles.scss', 'src/scss/**/*.scss'],
               dest: ['dist/scss'],
-              transform: (contents) => contents.toString().replace(/#scss/g, '.'),
+              transform: (contents) =>
+                contents
+                  .toString()
+                  .replace(/#scss/g, '.')
+                  .replace(/\.\.\/fonts/g, '@phillips/seldon/dist/fonts'),
             },
           ],
         }),
