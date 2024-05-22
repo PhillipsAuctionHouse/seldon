@@ -1,6 +1,7 @@
 import type { Meta } from '@storybook/react';
 
 import Subscribe, { SubscribeProps } from './Subscribe';
+import { SubscriptionState } from './types';
 
 const meta = {
   title: 'Components/Subscribe',
@@ -26,6 +27,8 @@ Playground.args = {
     target.reset();
   },
   blurb: 'Receive exclusive content about our auctions, exhibitions, and special events.',
-  subscriptionState: null,
+  subscriptionState: SubscriptionState.Default,
   invalidText: 'Please enter a valid email address.',
+  warn: true,
+  successText: 'Thank you for subscribing!',
 };

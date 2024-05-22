@@ -9,6 +9,7 @@ import Instagram from '../../assets/instagram.svg?react';
 import Wechat from '../../assets/wechat.svg?react';
 import Spotify from '../../assets/spotify.svg?react';
 import Social from '../Social/Social';
+import { SubscriptionState } from '../Subscribe/types';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -87,7 +88,7 @@ const leftComponent = (
 
       target.reset();
     }}
-    subscriptionState={null}
+    subscriptionState={SubscriptionState.Default}
     invalidText="Please enter a valid email address."
   />
 );

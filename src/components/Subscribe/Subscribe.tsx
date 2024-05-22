@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { px } from '../../utils';
 import Input from '../Input/Input';
 import Button, { ButtonProps } from '../Button/Button';
+import { SubscriptionState } from './types';
 
 export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
   /**
@@ -42,9 +43,13 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
    */
   invalidText?: string;
   /**
+   * Subscribe success text
+   */
+  successText?: string;
+  /**
    * Subscribe state for loading or error
    */
-  subscriptionState?: 'loading' | 'invalid' | null;
+  subscriptionState?: SubscriptionState;
   /**
    * Subscribe input change handler
    */
@@ -70,12 +75,23 @@ const Subscribe = ({
   title = 'Subscribe to Newsletter',
   loadingText = 'Loading...',
   invalidText = '',
-  subscriptionState = null,
+  successText,
+  subscriptionState = SubscriptionState.Default,
   onInputChange = () => ({}),
   ...props
 }: SubscribeProps) => {
   const isInvalid = subscriptionState === 'invalid';
   const isLoading = subscriptionState === 'loading';
+  const isSuccess = subscriptionState === 'success';
+
+  const textsCondition = {
+    invalid: invalidText,
+    success: successText,
+    loading: loadingText,
+  };
+
+  const warnText = subscriptionState !== 'default' ? textsCondition[subscriptionState] : '';
+  const warn = isSuccess || isLoading;
 
   return (
     <Element
@@ -86,7 +102,6 @@ const Subscribe = ({
     >
       <h3 className={`${px}-subscribe__title`}>{title}</h3>
       {blurb ? <p className={`${px}-subscribe__blurb`}>{blurb}</p> : null}
-      {isLoading ? <p className={`${px}-subscribe__loading`}>{loadingText}</p> : null}
 
       <Input
         className={`${px}-subscribe__input`}
@@ -96,6 +111,8 @@ const Subscribe = ({
         labelText={inputLabelText}
         invalid={isInvalid}
         invalidText={invalidText}
+        warn={warn}
+        warnText={warnText}
         required
         onChange={onInputChange}
       />
