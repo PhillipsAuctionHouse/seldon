@@ -6,7 +6,6 @@ const config: StorybookConfig = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    "@storybook/addon-styling",
     "@storybook/addon-mdx-gfm",
     "@chromatic-com/storybook"
   ],
