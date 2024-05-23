@@ -8,7 +8,6 @@ $lg: #{$px}-input--lg;
 .#{$px}-input {
   display: flex;
   flex-direction: column;
-  position: relative;
   width: 100%;
 
   &--hidden {
@@ -40,13 +39,11 @@ $lg: #{$px}-input--lg;
   }
 
   &__validation {
-    bottom: -1.75rem;
     -webkit-box-orient: vertical;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-height: 1.25;
     overflow: hidden;
-    position: absolute;
   }
 
   // Small input size
