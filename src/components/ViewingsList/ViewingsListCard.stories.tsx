@@ -21,12 +21,6 @@ const meta = {
         type: 'select',
       },
     },
-    onDelete: {
-      control: 'action',
-    },
-    onSave: {
-      control: 'action',
-    },
   },
 } satisfies Meta<typeof ViewingsListCard>;
 
