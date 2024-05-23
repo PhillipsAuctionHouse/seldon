@@ -1,0 +1,9 @@
+@import '#scss/_vars';
+
+.#{$px}-text {
+  @each $variant in $text-tokens {
+    &--#{$variant} {
+      @include text($variant);
+    }
+  }
+}

@@ -1,3 +1,4 @@
+@use 'sass:math';
 @import '#scss/_utils';
 
 @mixin gridItemColumnSpan($span: 1, $total-cols: 12) {
@@ -9,7 +10,7 @@
   }
 
   &-align-center {
-    grid-column: calc((#{$total-cols} + 1 - #{$span}) / 2) / span #{$span};
+    grid-column: math.ceil(math.div($total-cols + 1 - $span, 2)) / span #{$span};
   }
 }
 
@@ -20,14 +21,14 @@
 
   @for $i from 1 through 2 {
     &--span-xs-#{$i} {
-      @include gridItemColumnSpan(#{$i}, 2);
+      @include gridItemColumnSpan($i, 2);
     }
   }
 
   @include media($breakpoint-sm) {
     @for $i from 1 through 4 {
       &--span-sm-#{$i} {
-        @include gridItemColumnSpan(#{$i}, 4);
+        @include gridItemColumnSpan($i, 4);
       }
     }
   }
@@ -35,7 +36,7 @@
   @include media($breakpoint-md) {
     @for $i from 1 through 12 {
       &--span-md-#{$i} {
-        @include gridItemColumnSpan(#{$i}, 12);
+        @include gridItemColumnSpan($i, 12);
       }
     }
   }
@@ -43,7 +44,7 @@
   @include media($breakpoint-lg) {
     @for $i from 1 through 12 {
       &--span-lg-#{$i} {
-        @include gridItemColumnSpan(#{$i}, 12);
+        @include gridItemColumnSpan($i, 12);
       }
     }
   }

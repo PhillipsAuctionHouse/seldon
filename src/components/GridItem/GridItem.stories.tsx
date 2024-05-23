@@ -22,9 +22,18 @@ Playground.args = {
   children: <div>Grid Item</div>,
 };
 
-export const CenteredGridItem = () => (
+Playground.argTypes = {
+  align: {
+    options: GridItemAlign,
+    control: {
+      type: 'select',
+    },
+  },
+};
+
+export const CenteredGridItem = (props: GridItemProps) => (
   <Grid>
-    <GridItem style={{ backgroundColor: 'gray' }} sm={2} md={8} lg={8} align={GridItemAlign.center}>
+    <GridItem style={{ backgroundColor: 'gray' }} {...props} align={GridItemAlign.center}>
       <p>
         Harry Phillips founded the auction house in 1796 in Westminster, London. Phillips gained international
         recognition by selling paintings from the estate of Queen Marie Antoinette and household items from Napoleon
@@ -33,7 +42,7 @@ export const CenteredGridItem = () => (
         receptions before auctions – a standard practice in the auction business today.
       </p>
     </GridItem>
-    <GridItem style={{ backgroundColor: 'gray' }} sm={2} md={8} lg={8} align={GridItemAlign.center}>
+    <GridItem style={{ backgroundColor: 'gray' }} {...props} align={GridItemAlign.center}>
       <p>
         Harry Phillips founded the auction house in 1796 in Westminster, London. Phillips gained international
         recognition by selling paintings from the estate of Queen Marie Antoinette and household items from Napoleon
@@ -44,6 +53,12 @@ export const CenteredGridItem = () => (
     </GridItem>
   </Grid>
 );
+
+CenteredGridItem.args = {
+  sm: 2,
+  md: 8,
+  lg: 8,
+};
 
 export const LeftAndRightGridItems = () => (
   <Grid>

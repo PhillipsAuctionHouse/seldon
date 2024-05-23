@@ -23,5 +23,7 @@ export {
   default as StatefulViewingsList,
   type StatefulViewingsListProps,
 } from './components/ViewingsList/StatefulViewingsList';
+export * from './components/Text';
+
 // 📑 Pages
 export { default as Page } from './pages/Page';

@@ -29,6 +29,15 @@ Playground.args = {
   variant: LinkVariants.standalone,
 };
 
+Playground.argTypes = {
+  variant: {
+    options: LinkVariants,
+    control: {
+      type: 'select',
+    },
+  },
+};
+
 export const CustomLink = ({ playgroundWidth, children, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
     <Link {...args} element={(props) => <a {...props}>{<>Custom Link: {props.children}</>}</a>}>
