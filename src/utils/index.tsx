@@ -2,6 +2,14 @@ import * as React from 'react';
 
 export const px = 'phillips';
 
+export enum PaddingTokens {
+  xs = 'xs',
+  sm = 'sm',
+  md = 'md',
+  lg = 'lg',
+  xl = 'xl',
+}
+
 /* eslint-disable @typescript-eslint/no-empty-function */
 export const noOp = () => {};
 
@@ -110,3 +118,11 @@ export function useNormalizedInputProps({
 }
 
 export const defaultYear = new Date().getFullYear();
+
+export const generatePaddingClassName = (
+  padding: PaddingTokens,
+  side: 'start' | 'end' = 'end',
+  direction: 'vertical' | 'horizontal' = 'vertical',
+) => {
+  return `${px}-padding-${direction}-${padding}-${side}`;
+};

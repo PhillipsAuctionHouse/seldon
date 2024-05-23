@@ -1,0 +1,7 @@
+@import '#scss/_vars';
+
+.#{$px}-row {
+  // horizontal padding is fixed
+  padding-left: $spacing-lg;
+  padding-right: $spacing-lg;
+}

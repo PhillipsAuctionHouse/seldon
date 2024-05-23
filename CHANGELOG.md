@@ -1,3 +1,19 @@
+# [1.20.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.19.3...v1.20.0) (2024-05-21)
+
+
+### Bug Fixes
+
+* **griditem:** support classname ([094acc9](https://github.com/PhillipsAuctionHouse/seldon/commit/094acc9a156613dd212dfee4c4fd2376eafd73cc))
+* **linkblock:** allow any node to be passed to description ([c3b032e](https://github.com/PhillipsAuctionHouse/seldon/commit/c3b032e1373b1b082c33cacf3eecf3a4c8778976))
+* **row:** pass through classname ([8766601](https://github.com/PhillipsAuctionHouse/seldon/commit/876660149fc248ebc2d99dbb4cadd438efa562e2))
+* **splitpane:** change breakpoint from new mockup ([2157ea3](https://github.com/PhillipsAuctionHouse/seldon/commit/2157ea3db05e7873a93059961156e06acbd94835))
+* **splitpane:** remove the padding in favor of the row padding ([4370565](https://github.com/PhillipsAuctionHouse/seldon/commit/4370565b7fe2cedf8a3f6cc6ec6e250a09838208))
+
+
+### Features
+
+* **row:** adds row component and griditem to seldon ([f0737e7](https://github.com/PhillipsAuctionHouse/seldon/commit/f0737e7a28d551748895105969998b8b0b727f4f)), closes [#L3-2023](https://github.com/PhillipsAuctionHouse/seldon/issues/L3-2023)
+
 ## [1.19.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.19.2...v1.19.3) (2024-05-13)
 
 

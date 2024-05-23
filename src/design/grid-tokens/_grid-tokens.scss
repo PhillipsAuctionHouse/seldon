@@ -13,16 +13,16 @@
     left: 0;
     position: absolute;
     top: 0;
-    transform: translate($spacing-medium, 1.5rem);
+    transform: translate($spacing-md, 1.5rem);
 
     @media (min-width: 961px) {
       content: '@media (min-width: 961px)';
-      transform: translate($spacing-medium, 2.1875rem);
+      transform: translate($spacing-md, 2.1875rem);
     }
 
     @media (min-width: 1401px) {
       content: '@media (min-width: 1401px)';
-      transform: translate($spacing-large, 2.1875rem);
+      transform: translate($spacing-lg, 2.1875rem);
     }
 
     @media (min-width: 1801px) {
@@ -63,8 +63,8 @@
 
 .doc-wrapper {
   .phillips-grid__container {
-    margin-bottom: $spacing-medium;
-    margin-top: $spacing-medium;
+    margin-bottom: $spacing-md;
+    margin-top: $spacing-md;
 
     h1,
     p {

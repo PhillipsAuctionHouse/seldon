@@ -8,30 +8,17 @@ export interface GridProps extends React.HTMLAttributes<HTMLElement> {
    */
   children: React.ReactNode;
   /**
-   * Optional element to render in place of a button e.g. 'div', 'span', CustomComponent, etc
+   * Optional element to render as the top-level component e.g. 'div', 'span', CustomComponent, etc.  Defaults to 'section'.
    */
   element?: React.ElementType<GridProps>;
-  /**
-   * Optional boolean to dictate if the grid has left and right margins
-   */
-  hasMargins?: boolean;
 }
 
-export function Grid({
-  children,
-  className,
-  element: Element = 'section',
-  hasMargins = true,
-  id,
-  ...props
-}: GridProps) {
+export function Grid({ children, className, element: Element = 'section', id, ...props }: GridProps) {
   return (
     <Element
       data-testid={id ? `grid-container-${id}` : `grid-container`}
       id={id}
-      className={classnames(`${px}-grid__container`, className, {
-        [`${px}-grid__container--has-margins`]: hasMargins,
-      })}
+      className={classnames(`${px}-grid__container`, className)}
       {...props}
     >
       {children}
