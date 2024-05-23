@@ -9,16 +9,13 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     defaultViewing: {
-      control: 'array',
+      control: 'object',
     },
     title: {
       control: { type: 'text' },
     },
     id: {
       control: { type: 'text' },
-    },
-    onSave: {
-      control: 'action',
     },
   },
 } satisfies Meta<typeof StatefulViewingsList>;
