@@ -50,10 +50,6 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
    * Subscribe state for loading or error
    */
   subscriptionState?: SubscriptionState;
-  /**
-   * Subscribe input change handler
-   */
-  onInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 /**
@@ -77,7 +73,6 @@ const Subscribe = ({
   invalidText = '',
   successText,
   subscriptionState = SubscriptionState.Default,
-  onInputChange = () => ({}),
   ...props
 }: SubscribeProps) => {
   const isInvalid = subscriptionState === 'invalid';
@@ -98,6 +93,7 @@ const Subscribe = ({
       data-testid={id ? id : `subscribe-form`}
       id={id}
       className={classnames(`${px}-subscribe`, className)}
+      noValidate
       {...props}
     >
       <h3 className={`${px}-subscribe__title`}>{title}</h3>
@@ -114,7 +110,6 @@ const Subscribe = ({
         warn={warn}
         warnText={warnText}
         required
-        onChange={onInputChange}
       />
       <Button className={`${px}-subscribe__button ${className}`} buttonType="secondary" type="submit" {...buttonProps}>
         {buttonText}
