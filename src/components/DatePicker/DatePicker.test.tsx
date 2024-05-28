@@ -23,7 +23,7 @@ describe('A DatePicker', () => {
     render(
       <DatePicker {...reqProps} onChange={mockedOnChange} defaultValue={['2023-06-01T08:30', '2023-06-05T08:30']} />,
     );
-    userEvent.click(screen.getByTestId('test-id'));
+    await userEvent.click(screen.getByTestId('test-id'));
     const seven = await screen.findAllByText('7');
     await userEvent.click(seven[0]);
     const eight = await screen.findAllByText('8');
@@ -37,10 +37,10 @@ describe('A DatePicker', () => {
   it('will render a time input if `enableTime` is passed', async () => {
     const { rerender } = render(<DatePicker {...reqProps} />);
     const input = screen.getByTestId('test-id');
-    userEvent.click(input);
+    await userEvent.click(input);
     expect(await screen.queryByText('PM')).not.toBeInTheDocument();
     rerender(<DatePicker {...reqProps} enableTime />);
-    userEvent.click(input);
+    await userEvent.click(input);
     expect(await screen.findByText('PM')).toBeInTheDocument();
   });
 
@@ -55,7 +55,7 @@ describe('A DatePicker', () => {
       />,
     );
     const input = screen.getByTestId('test-id');
-    userEvent.click(input);
+    await userEvent.click(input);
     await userEvent.type(input, '{backspace}6');
     await waitFor(() => expect((input as HTMLInputElement).value).toEqual('2023-06-01 to 2023-06-06'));
     // fireEvent.blur(input)
@@ -66,15 +66,15 @@ describe('A DatePicker', () => {
   it('will revert to old value if user input is not a valid date', async () => {
     render(<DatePicker {...reqProps} defaultValue={['2023-06-01T08:30', '2023-06-05T08:30']} allowInput />);
     const input = screen.getByTestId('test-id');
-    userEvent.click(input);
+    await userEvent.click(input);
     userEvent.type(input, '{backspace}adbadfd');
     await waitFor(() => expect((input as HTMLInputElement).value).toEqual('2023-06-01 to 2023-06-05'));
   });
 
-  it('will render calendar in another language if correct language string is passed', () => {
+  it('will render calendar in another language if correct language string is passed', async () => {
     render(<DatePicker {...reqProps} locale="ru" />);
     const input = screen.getByTestId('test-id');
-    userEvent.click(input);
+    await userEvent.click(input);
     expect(screen.getByText('Пн')).toBeInTheDocument();
   });
 });
