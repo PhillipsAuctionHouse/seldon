@@ -6,7 +6,6 @@ import { LinkVariants } from './utils';
 const meta = {
   title: 'Components/Links/Link',
   component: Link,
-  tags: ['autodocs'],
 } satisfies Meta<typeof Link>;
 
 export default meta;

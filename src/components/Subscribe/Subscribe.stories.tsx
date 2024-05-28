@@ -5,7 +5,6 @@ import Subscribe, { SubscribeProps } from './Subscribe';
 const meta = {
   title: 'Components/Subscribe',
   component: Subscribe,
-  tags: ['autodocs'],
 } satisfies Meta<typeof Subscribe>;
 
 export default meta;

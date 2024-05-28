@@ -5,7 +5,6 @@ import LinkBlock, { LinkBlockProps } from './LinkBlock';
 const meta = {
   title: 'Components/Links/LinkBlock',
   component: LinkBlock,
-  tags: ['autodocs'],
 } satisfies Meta<typeof LinkBlock>;
 
 export default meta;

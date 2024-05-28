@@ -6,7 +6,7 @@ import { defaultViewing, i18n, handleOnSave, validate } from './utils';
 const meta = {
   title: 'Components/ViewingsList',
   component: StatefulViewingsList,
-  tags: ['autodocs'],
+
   argTypes: {
     defaultViewing: {
       control: 'object',

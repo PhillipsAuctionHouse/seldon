@@ -4,7 +4,7 @@ import ViewingsListCard, { ViewingsListCardProps } from './ViewingsListCard';
 const meta = {
   title: 'Components/ViewingsListCard',
   component: ViewingsListCard,
-  tags: ['autodocs'],
+
   parameters: {
     controls: { sort: 'alpha', expanded: true },
   },

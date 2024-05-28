@@ -5,7 +5,6 @@ import { TextVariants } from './types';
 const meta = {
   title: 'Components/Text',
   component: Text,
-  tags: ['autodocs'],
 } satisfies Meta<typeof Text>;
 
 export default meta;

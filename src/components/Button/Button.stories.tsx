@@ -7,7 +7,7 @@ import Calendar from '../../assets/calendar.svg?react';
 const meta = {
   title: 'Components/Button',
   component: Button,
-  tags: ['autodocs'],
+
   argTypes: {
     size: {
       options: ['sm', 'md', 'lg'],
