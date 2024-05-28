@@ -2,6 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 
 import Subscribe from './Subscribe';
+import { SubscriptionState } from './types';
 
 describe('Subscribe', () => {
   it('is selectable by the test id', () => {
@@ -12,6 +13,26 @@ describe('Subscribe', () => {
   it('it will render a blurb if one is passed in', () => {
     render(<Subscribe title="Subscribe to Email" blurb="This blurb will be rendered" />);
     expect(screen.queryByText(/This blurb will be rendered/)).toBeInTheDocument();
+  });
+  it('it will render a loading if subscriptionState=loading', () => {
+    render(<Subscribe title="Subscribe to Email" subscriptionState={SubscriptionState.Loading} />);
+    expect(screen.queryByText(/Loading.../)).toBeInTheDocument();
+  });
+  it('it will render an error if subscriptionState=invalid and invalidText passed', () => {
+    render(
+      <Subscribe
+        title="Subscribe to Email"
+        subscriptionState={SubscriptionState.Invalid}
+        invalidText="Invalid input"
+      />,
+    );
+    expect(screen.queryByText(/Invalid input/)).toBeInTheDocument();
+  });
+  it('it will render an success text if subscriptionState=success', () => {
+    render(
+      <Subscribe title="Subscribe to Email" subscriptionState={SubscriptionState.Success} successText="Success" />,
+    );
+    expect(screen.queryByText(/Success/)).toBeInTheDocument();
   });
 
   it('it will call the callback function on submit', async () => {

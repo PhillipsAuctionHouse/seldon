@@ -1,3 +1,13 @@
+# [1.21.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.20.0...v1.21.0) (2024-05-23)
+
+
+### Features
+
+* **subscribe:** added validation and error to subscribe ([228916f](https://github.com/PhillipsAuctionHouse/seldon/commit/228916ff2fe0427f7e0dcb4d97c2e9229b113ade))
+* **subscribe:** changed state message and added success state ([f0b75c6](https://github.com/PhillipsAuctionHouse/seldon/commit/f0b75c6cfb76e7b3bf8082e69dddd5ddcbf3f2c4))
+* **subscribe:** removed css shift changes ([cb2c24f](https://github.com/PhillipsAuctionHouse/seldon/commit/cb2c24fc35b8ae26d5009ebcf073fd37010f2577))
+* **subscribe:** updated subscribe validation and added email util ([78d8091](https://github.com/PhillipsAuctionHouse/seldon/commit/78d809169bf6525a096cdc79a2dee47b355c6475))
+
 # [1.20.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.19.3...v1.20.0) (2024-05-21)
 
 
