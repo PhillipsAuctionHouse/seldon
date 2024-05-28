@@ -11,6 +11,7 @@
 
   &-align-center {
     grid-column: math.ceil(math.div($total-cols + 1 - $span, 2)) / span #{$span};
+    text-align: center;
   }
 }
 

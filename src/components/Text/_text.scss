@@ -7,3 +7,21 @@
     }
   }
 }
+
+h1.#{$px}-text,
+blockquote.#{$px}-text {
+  margin-bottom: $spacing-xl;
+}
+
+h2.#{$px}-text {
+  margin-bottom: $spacing-lg;
+}
+h3.#{$px}-text {
+  margin-bottom: $spacing-md;
+}
+h4.#{$px}-text {
+  margin-bottom: $spacing-sm;
+}
+p.#{$px}-text {
+  margin-bottom: $spacing-md;
+}

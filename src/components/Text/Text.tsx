@@ -25,7 +25,7 @@ const Text = ({
   children,
   id,
   element: CustomElement,
-  variant = TextVariants.bodyMd,
+  variant = TextVariants.body1,
   className,
   ...props
 }: TextProps) => {
