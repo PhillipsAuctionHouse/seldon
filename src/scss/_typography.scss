@@ -60,18 +60,6 @@ body {
 }
 
 @font-face {
-  font-family: MontserratItalic;
-  font-style: italic;
-  src: url('../fonts/Montserrat-Italic.woff') format('woff');
-  src: url('../fonts/Montserrat-Italic.woff2') format('woff2');
-}
-
-@mixin MontserratItalic {
-  font-family: MontserratItalic, sans-serif;
-  font-style: italic;
-}
-
-@font-face {
   font-family: Distinct;
   src: url('../fonts/Distinct-Text.woff') format('woff');
   src: url('../fonts/Distinct-Text.woff2') format('woff2');
