@@ -1,6 +1,6 @@
 import React from 'react';
 import { px } from '../../utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import { TextVariants } from './types';
 import { determineDefaultTextElement, determineTextClassName } from './utils';
 
@@ -39,7 +39,7 @@ const Text = ({
       {...props}
       data-testid={dataTestId}
       id={id}
-      className={classNames(baseClassName, determineTextClassName(variant), className)}
+      className={classnames(baseClassName, determineTextClassName(variant), className)}
     >
       {children}
     </Component>
