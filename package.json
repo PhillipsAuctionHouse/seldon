@@ -42,7 +42,7 @@
     "flatpickr": "^4.6.13"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^1.4.0",
+    "@chromatic-com/storybook": "^1.5.0",
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@figma/code-connect": "^0.1.2",
