@@ -1,3 +1,11 @@
+# [1.22.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.21.0...v1.22.0) (2024-05-30)
+
+
+### Features
+
+* **text:** add margin bottom for text positioning ([4ff4eb9](https://github.com/PhillipsAuctionHouse/seldon/commit/4ff4eb98e5e6595f7d200dca025cda694b08643f))
+* **text:** new text component ([ef0c987](https://github.com/PhillipsAuctionHouse/seldon/commit/ef0c98718b235322d8109f9df2bfe36788b96d48))
+
 # [1.21.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.20.0...v1.21.0) (2024-05-23)
 
 
