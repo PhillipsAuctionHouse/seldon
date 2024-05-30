@@ -1,3 +1,13 @@
+## [1.22.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.22.0...v1.22.1) (2024-05-30)
+
+
+### Bug Fixes
+
+* **fonts:** update font locations to use full seldon path ([d9d4683](https://github.com/PhillipsAuctionHouse/seldon/commit/d9d4683b9fd0e47eea10f74f9a32e04135042f19))
+* **font:** use variable weight montserrat ([5e35209](https://github.com/PhillipsAuctionHouse/seldon/commit/5e3520975640a5223fd3f044c6d789bed0c815a7))
+* **montserrat:** package the official montserrat fonts ([fab9134](https://github.com/PhillipsAuctionHouse/seldon/commit/fab9134e59bce5ccd1b3f6bc2982b81c7c6ee06f))
+* **text:** fix text tokens story ([2527bcc](https://github.com/PhillipsAuctionHouse/seldon/commit/2527bcc6db08d75b3d1155f2e48899ed77bbc1e1))
+
 # [1.22.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.21.0...v1.22.0) (2024-05-30)
 
 
