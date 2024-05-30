@@ -5,7 +5,6 @@ import Input, { InputProps } from '../Input/Input';
 const meta = {
   title: 'Components/Toggle',
   component: Input,
-  tags: ['autodocs'],
 } satisfies Meta<typeof Input>;
 
 export default meta;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { PaddingTokens, generatePaddingClassName, px } from '../../utils';
 import GridItem, { GridItemProps } from '../GridItem/GridItem';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 export interface RowProps extends React.HTMLAttributes<HTMLElement> {
   /** These children can be an array of GridItem components */
@@ -40,7 +40,7 @@ const Row = ({
       {...props}
       data-testid={dataTestId}
       id={id}
-      className={classNames(
+      className={classnames(
         baseClassName,
         padding.top && generatePaddingClassName(padding.top, 'start'),
         padding.bottom && generatePaddingClassName(padding.bottom, 'end'),

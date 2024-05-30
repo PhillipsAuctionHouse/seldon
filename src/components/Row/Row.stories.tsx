@@ -7,7 +7,6 @@ import { GridItemAlign } from '../GridItem/types';
 const meta = {
   title: 'Components/Layouts/Row',
   component: Row,
-  tags: ['autodocs'],
 } satisfies Meta<typeof Row>;
 
 export default meta;

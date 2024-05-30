@@ -7,7 +7,6 @@ import { Instance } from 'flatpickr/dist/types/instance';
 const meta = {
   title: 'Components/DatePicker',
   component: DatePicker,
-  tags: ['autodocs'],
 } satisfies Meta<typeof DatePicker>;
 
 export default meta;

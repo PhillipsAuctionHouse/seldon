@@ -32,10 +32,6 @@
     padding: 1.5rem;
     text-align: center;
 
-    &--d0 {
-      @include text($display0);
-    }
-
     .property {
       // @include pText($body-size2);
       // font-weight: 400;
@@ -52,84 +48,76 @@
       color: $clock-widget-blue;
     }
 
-    .example {
-      background: #efefef;
-      display: block;
-      margin-top: 1rem;
-      padding: 1.5rem;
-      text-align: center;
+    &--d0 {
+      @include text($display0);
+    }
 
-      &--d0 {
-        @include text($display0);
-      }
+    &--d1 {
+      @include text($display1);
+    }
 
-      &--d1 {
-        @include text($display1);
-      }
+    &--d2 {
+      @include text($display2);
+    }
 
-      &--d2 {
-        @include text($display2);
-      }
+    &--d3 {
+      @include text($display3);
+    }
 
-      &--d3 {
-        @include text($display3);
-      }
+    &--d4 {
+      @include text($display4);
+    }
 
-      &--d4 {
-        @include text($display4);
-      }
+    &--h1 {
+      @include text($heading1);
+    }
 
-      &--h1 {
-        @include text($heading1);
-      }
+    &--h2 {
+      @include text($heading2);
+    }
 
-      &--h2 {
-        @include text($heading2);
-      }
+    &--h3 {
+      @include text($heading3);
+    }
 
-      &--h3 {
-        @include text($heading3);
-      }
+    &--h4 {
+      @include text($heading4);
+    }
 
-      &--h4 {
-        @include text($heading4);
-      }
+    &--p1 {
+      @include text($body1);
+    }
 
-      &--p1 {
-        @include text($body1);
-      }
+    &--p2 {
+      @include text($body2);
+    }
 
-      &--p2 {
-        @include text($body2);
-      }
+    &--p3 {
+      @include text($body3);
+    }
 
-      &--p3 {
-        @include text($body3);
-      }
+    &--button {
+      @include text($button);
+    }
 
-      &--button {
-        @include text($button);
-      }
+    &--cta-sm {
+      @include text($cta-sm);
+    }
 
-      &--cta-sm {
-        @include text($cta-sm);
-      }
+    &--cta-lg {
+      @include text($cta-lg);
+    }
 
-      &--cta-lg {
-        @include text($cta-lg);
-      }
+    &--email {
+      @include text($email);
+    }
 
-      &--email {
-        @include text($email);
-      }
+    &--label {
+      @include text($label);
+    }
 
-      &--text {
-        @include text($text);
-      }
-
-      &--text-badge {
-        @include text($text-badge);
-      }
+    &--text-badge {
+      @include text($text-badge);
     }
   }
 }
