@@ -56,7 +56,7 @@
     text-transform: lowercase;
   }
 
-  @if $label == 'text' {
+  @if $label == 'label' {
     font-size: $text-label-size;
     font-weight: 500;
     letter-spacing: 0.0625rem;
@@ -90,8 +90,8 @@
     @include labelText($email);
   }
 
-  @if $token == 'text' {
-    @include labelText($text);
+  @if $token == 'label' {
+    @include labelText($label);
   }
 
   @if $token == 'text-badge' {

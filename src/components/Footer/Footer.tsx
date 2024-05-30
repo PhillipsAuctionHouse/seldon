@@ -4,7 +4,6 @@ import { defaultYear, px } from '../../utils';
 import SplitPanel from '../SplitPanel/SplitPanel';
 
 export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
-  chidlren?: React.ReactNode;
   /**
    * Copyright data added to bottom of site
    */

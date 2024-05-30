@@ -6,7 +6,7 @@ import Grid, { GridProps } from './Grid';
 const meta = {
   title: 'Components/Layouts/Grid',
   component: Grid,
-  tags: ['autodocs'],
+
   argTypes: {
     element: { control: 'text' },
   },

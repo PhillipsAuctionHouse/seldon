@@ -1,3 +1,21 @@
+# [1.22.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.21.0...v1.22.0) (2024-05-30)
+
+
+### Features
+
+* **text:** add margin bottom for text positioning ([4ff4eb9](https://github.com/PhillipsAuctionHouse/seldon/commit/4ff4eb98e5e6595f7d200dca025cda694b08643f))
+* **text:** new text component ([ef0c987](https://github.com/PhillipsAuctionHouse/seldon/commit/ef0c98718b235322d8109f9df2bfe36788b96d48))
+
+# [1.21.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.20.0...v1.21.0) (2024-05-23)
+
+
+### Features
+
+* **subscribe:** added validation and error to subscribe ([228916f](https://github.com/PhillipsAuctionHouse/seldon/commit/228916ff2fe0427f7e0dcb4d97c2e9229b113ade))
+* **subscribe:** changed state message and added success state ([f0b75c6](https://github.com/PhillipsAuctionHouse/seldon/commit/f0b75c6cfb76e7b3bf8082e69dddd5ddcbf3f2c4))
+* **subscribe:** removed css shift changes ([cb2c24f](https://github.com/PhillipsAuctionHouse/seldon/commit/cb2c24fc35b8ae26d5009ebcf073fd37010f2577))
+* **subscribe:** updated subscribe validation and added email util ([78d8091](https://github.com/PhillipsAuctionHouse/seldon/commit/78d809169bf6525a096cdc79a2dee47b355c6475))
+
 # [1.20.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.19.3...v1.20.0) (2024-05-21)
 
 

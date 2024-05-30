@@ -1,0 +1,45 @@
+import { render, screen } from '@testing-library/react';
+import Text, { TextProps } from './Text';
+import { TextVariants } from './types';
+
+describe('Text', () => {
+  const renderText = (props: TextProps) => {
+    render(<Text {...props} />);
+  };
+
+  it('renders with data-testid attribute', () => {
+    renderText({ children: 'Test ID', id: 'id' });
+    expect(screen.getByTestId('text-id')).toBeInTheDocument();
+  });
+
+  it('renders children correctly', () => {
+    renderText({ children: 'Hello World' });
+
+    expect(screen.getByText('Hello World')).toBeInTheDocument();
+  });
+
+  it('applies the default variant correctly', () => {
+    renderText({ children: 'Default Variant' });
+
+    expect(screen.getByText('Default Variant')).toHaveClass('phillips-text--body2');
+  });
+
+  it('applies the custom variant correctly', () => {
+    renderText({ children: 'Custom Variant', variant: TextVariants.body1 });
+
+    expect(screen.getByText('Custom Variant')).toHaveClass('phillips-text--body1');
+  });
+
+  it('applies additional className correctly', () => {
+    renderText({ children: 'Additional Class', className: 'custom-class' });
+
+    expect(screen.getByText('Additional Class')).toHaveClass('custom-class');
+  });
+
+  it('renders with custom element correctly', () => {
+    renderText({ children: 'Custom Element', element: 'span' });
+
+    expect(screen.getByText('Custom Element')).toBeInTheDocument();
+    expect(screen.getByText('Custom Element').tagName).toBe('SPAN');
+  });
+});

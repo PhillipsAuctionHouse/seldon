@@ -6,7 +6,6 @@ import HeroBanner from './HeroBanner';
 const meta = {
   title: 'Components/HeroBanner',
   component: HeroBanner,
-  tags: ['autodocs'],
 } satisfies Meta<typeof HeroBanner>;
 
 export default meta;

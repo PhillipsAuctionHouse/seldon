@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { px } from '../../utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import { determineColumnSpanClassName, validateColumnSpans } from './gridItemUtils';
 import { GridItemAlign } from './types';
 
@@ -59,7 +59,7 @@ const GridItem = ({
   }
 
   return (
-    <Element {...props} data-testid={dataTestId} id={id} className={classNames(gridItemClasses)}>
+    <Element {...props} data-testid={dataTestId} id={id} className={classnames(gridItemClasses)}>
       {children}
     </Element>
   );

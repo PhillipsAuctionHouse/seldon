@@ -9,7 +9,6 @@ import Spotify from '../../assets/spotify.svg?react';
 const meta = {
   title: 'Components/Social',
   component: Social,
-  tags: ['autodocs'],
 } satisfies Meta<typeof Social>;
 
 export default meta;

@@ -112,8 +112,8 @@
       @include text($email);
     }
 
-    &--text {
-      @include text($text);
+    &--label {
+      @include text($label);
     }
 
     &--text-badge {

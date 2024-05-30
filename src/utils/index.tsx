@@ -126,3 +126,16 @@ export const generatePaddingClassName = (
 ) => {
   return `${px}-padding-${direction}-${padding}-${side}`;
 };
+
+/**
+ * Return true if the email is valid, false otherwise.
+ * 
+ * true: some@some.com
+ * 
+ * false: some@some, some@.com, some@some.
+
+ */
+export const emailValidation = (email: string) => {
+  const emailRegex = /(.+)@(.+){2,}\.(.+){2,}/i;
+  return emailRegex.test(email);
+};

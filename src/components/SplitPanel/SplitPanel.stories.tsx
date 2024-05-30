@@ -5,7 +5,6 @@ import SplitPanel, { SplitPanelProps } from './SplitPanel';
 const meta = {
   title: 'Components/SplitPanel',
   component: SplitPanel,
-  tags: ['autodocs'],
 } satisfies Meta<typeof SplitPanel>;
 
 export default meta;
