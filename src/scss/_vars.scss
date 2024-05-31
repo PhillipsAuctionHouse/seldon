@@ -73,21 +73,21 @@ $cta-sm: 'cta-sm';
 $cta-lg: 'cta-lg';
 $email: 'email';
 $label: 'label';
-$text-badge: 'text-badge';
+$badge: 'badge';
 $display0: 'display0';
 $display1: 'display1';
 $display2: 'display2';
 $display3: 'display3';
 $display4: 'display4';
-$heading1: 'heading1';
+$blockquote: 'blockquote';
 $heading2: 'heading2';
 $heading3: 'heading3';
 $heading4: 'heading4';
 $body1: 'body1';
 $body2: 'body2';
 $body3: 'body3';
-$text-tokens: $button, $cta-sm, $cta-lg, $email, $label, $text-badge, $display0, $display1, $display2, $display3,
-  $display4, $heading1, $heading2, $heading3, $heading4, $body1, $body2, $body3;
+$text-tokens: $button, $cta-sm, $cta-lg, $email, $label, $badge, $display0, $display1, $display2, $display3, $display4,
+  $blockquote, $heading2, $heading3, $heading4, $body1, $body2, $body3;
 
 ////////////////////////
 /// FONT SIZE TOKENS:
@@ -158,7 +158,7 @@ $cta-sm-label-size: var(--label-size2);
 $email-label-size: var(--label-size2);
 $cta-lg-label-size: var(--label-size1);
 $text-label-size: var(--label-size3);
-$text-badge-label-size: var(--label-size3);
+$badge-label-size: var(--label-size3);
 
 ////////////////////////
 /// SPACING TOKENS:
@@ -216,24 +216,22 @@ $margin-lg: var(--spacing-lg);
 $margin-xl: var(--spacing-xl);
 
 ////////////////////////
-/// Breakpoint TOKENS:
+/// Breakpoint TOKENS that map to minimum pixels
 ///////////////////////
-
-$breakpoint2: 961px;
-$breakpoint3: 1401px;
-$breakpoint4: 1801px;
+$breakpoint-sm: 461px;
+$breakpoint-md: 961px;
+$breakpoint-lg: 1401px;
+$breakpoint-xl: 1801px;
 
 ////////////////////////
 /// max-site-width TOKEN:
 ///////////////////////
 $max-site-width: 1560px;
 
-////////////////////////////
-/// Media breakpoint tokens:
-///////////////////////////
-
-$breakpoint-xs: 'xs';
-$breakpoint-sm: 'sm';
-$breakpoint-md: 'md';
-$breakpoint-lg: 'lg';
-$breakpoint-xl: 'xl';
+////////////////////////
+/// Our tokens usually support at least 4 sizes.
+///////////////////////
+$size-sm: 'sm';
+$size-md: 'md';
+$size-lg: 'lg';
+$size-xl: 'xl';

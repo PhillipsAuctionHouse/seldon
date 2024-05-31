@@ -1,8 +1,6 @@
 @import '#scss/type';
 
 .#{$px}-link {
-  @include text($cta-sm);
-
   color: $cta-blue;
   text-decoration: none;
   white-space: nowrap;
@@ -26,9 +24,5 @@
 
   &--list {
     color: $soft-black;
-  }
-
-  &--email {
-    @include text($email);
   }
 }

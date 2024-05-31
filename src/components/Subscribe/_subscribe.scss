@@ -19,7 +19,7 @@
     text-align: center;
   }
 
-  @include media($breakpoint-sm) {
+  @include media($size-sm) {
     &__title,
     &__blurb {
       text-align: left;

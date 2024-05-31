@@ -13,8 +13,8 @@ describe('determineTextClassName', () => {
   });
 
   it('should return the correct class name for heading variant', () => {
-    const className = determineTextClassName(TextVariants.heading1);
-    expect(className).toBe('phillips-text--heading1');
+    const className = determineTextClassName(TextVariants.blockquote);
+    expect(className).toBe('phillips-text--blockquote');
   });
 
   it('should return the correct class name for ctaSm variant', () => {
@@ -39,9 +39,25 @@ describe('determineDefaultTextElement', () => {
     expect(element).toBe('label');
   });
 
-  it('should return "h1" for heading1 variant', () => {
-    const element = determineDefaultTextElement(TextVariants.heading1);
-    expect(element).toBe('h1');
+  it('should return "blockquote" for blockquote variant', () => {
+    const element = determineDefaultTextElement(TextVariants.blockquote);
+    expect(element).toBe('blockquote');
+  });
+
+  it('should return "h1" for display 0 and display 1', () => {
+    const displayVariants = [TextVariants.display0, TextVariants.display1];
+    displayVariants.forEach((variant) => {
+      const element = determineDefaultTextElement(variant);
+      expect(element).toBe('h1');
+    });
+  });
+
+  it('should return "h3" for display 2 and display 3 and display 4', () => {
+    const displayVariants = [TextVariants.display2, TextVariants.display3, TextVariants.display4];
+    displayVariants.forEach((variant) => {
+      const element = determineDefaultTextElement(variant);
+      expect(element).toBe('h3');
+    });
   });
 
   it('should return "h2" for heading2 variant', () => {

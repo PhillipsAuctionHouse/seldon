@@ -18,11 +18,11 @@
     padding: $spacing-md $spacing-md $spacing-sm;
     text-align: right;
 
-    @include media($breakpoint-md) {
+    @include media($size-md) {
       padding: $spacing-md $spacing-lg $spacing-sm;
     }
 
-    @include media($breakpoint-lg) {
+    @include media($size-lg) {
       padding: $spacing-md $spacing-xl $spacing-sm;
     }
 
@@ -50,17 +50,17 @@
     flex-direction: column;
     padding: $spacing-lg $spacing-md 0;
 
-    @include media($breakpoint-sm) {
+    @include media($size-sm) {
       align-items: flex-start;
       flex-direction: row;
       justify-content: space-between;
     }
 
-    @include media($breakpoint-md) {
+    @include media($size-md) {
       padding: 3.75rem $spacing-lg;
     }
 
-    @include media($breakpoint-lg) {
+    @include media($size-lg) {
       padding: 3.75rem $spacing-xl;
     }
   }
@@ -68,7 +68,7 @@
   &__content-split-panel__left {
     margin-bottom: $spacing-md;
 
-    @include media($breakpoint-sm) {
+    @include media($size-sm) {
       margin-bottom: 0;
     }
   }
@@ -76,7 +76,7 @@
   &__content-split-panel__right {
     display: flex;
 
-    @include media($breakpoint-sm) {
+    @include media($size-sm) {
       justify-content: flex-end;
     }
   }

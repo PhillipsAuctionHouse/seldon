@@ -4,6 +4,7 @@ import { px } from '../../utils';
 import React, { HTMLAttributes } from 'react';
 import { getLinkVariantClassName, isLinkExternal } from './utils';
 import { LinkVariants } from './utils';
+import { Text, TextVariants } from '../Text';
 
 export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
   /**
@@ -57,7 +58,7 @@ const Link = ({
       className={classNames}
       {...(isExternal && Element === 'a' ? { rel: 'noopener noreferrer', target: '_blank' } : {})}
     >
-      {children}
+      <Text variant={variant === LinkVariants.email ? TextVariants.email : TextVariants.ctaSm}>{children}</Text>
     </Element>
   );
 };
