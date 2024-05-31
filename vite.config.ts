@@ -27,7 +27,7 @@ export default defineConfig({
       name: 'seldon',
     },
     rollupOptions: {
-      input: 'src/index.ts',
+      input: ['src/index.ts', 'src/utils/index.tsx'],
       output: [
         {
           dir: 'dist',
