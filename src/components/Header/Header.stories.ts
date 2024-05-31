@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Header from './Header';
+import Logo from '../../assets/PhillipsLogo.svg';
 
 const meta = {
   title: 'Components/Header',
@@ -15,12 +16,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const LoggedIn: Story = {
+export const Playground: Story = {
   args: {
-    user: {
-      name: 'Jane Doe',
-    },
+    logo: Logo,
+    logoText: 'Phillips Auctioneers',
   },
 };
-
-export const LoggedOut: Story = {};

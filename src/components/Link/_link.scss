@@ -7,8 +7,8 @@
   text-decoration: none;
   white-space: nowrap;
 
-  &:hover:not(&--list),
-  &:focus:not(&--list) {
+  &:hover:not(&--list, &--nav-main, &--navLinkLg, &--navLinkSm),
+  &:focus:not(&--list, &--nav-main, &--navLinkLg, &--navLinkSm) {
     @include underline;
   }
 
@@ -30,5 +30,56 @@
 
   &--email {
     @include text($email);
+  }
+
+  &--navLinkSm {
+    color: $soft-black;
+    width: 100%;
+
+    &:hover {
+      span {
+        color: $cta-blue;
+      }
+    }
+
+    span {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.125rem;
+      line-height: 0.8125rem;
+      text-align: right;
+      text-transform: uppercase;
+    }
+  }
+
+  &--navLinkLg {
+    color: $soft-black;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    &:hover {
+      .#{$px}-nav__item--label {
+        color: $cta-blue;
+      }
+    }
+
+    span {
+      @include pText(1.0625rem);
+
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-transform: capitalize;
+      text-wrap: nowrap;
+      width: 100%;
+
+      @media (max-width: 960px) {
+        font-size: 0.8rem;
+        font-weight: 400;
+        text-overflow: unset;
+        text-wrap: wrap;
+      }
+    }
   }
 }

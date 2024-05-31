@@ -1,32 +1,112 @@
-.storybook-header {
+@import '#scss/vars';
+
+.#{$px}-header {
   align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 10%);
   display: flex;
-  font-family: Montserrat, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  justify-content: space-between;
-  padding: 15px 20px;
-}
+  height: 60px;
+  padding: 0 2rem;
+  position: relative;
 
-.storybook-header svg {
-  display: inline-block;
-  vertical-align: top;
-}
+  &__toggle-btn {
+    align-items: center;
+    appearance: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    height: 60px;
+    justify-content: center;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    transition: background-color 0.25s;
+    width: 60px;
+    z-index: 1;
 
-.storybook-header h1 {
-  display: inline-block;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1;
-  margin: 6px 0 6px 10px;
-  vertical-align: top;
-}
+    @media (min-width: 961px) {
+      display: none;
+    }
 
-.storybook-header button + button {
-  margin-left: 10px;
-}
+    span {
+      background-color: #707070;
+      color: transparent;
+      display: block;
+      height: 2px;
+      position: relative;
+      transition: background-color 0.25s ease 0.5s;
+      width: 1.65rem;
 
-.storybook-header .welcome {
-  color: #333;
-  font-size: 14px;
-  margin-right: 10px;
+      &::before,
+      &::after {
+        background-color: #707070;
+        content: '';
+        display: block;
+        height: 2px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        transition: transform 0.25s ease 0.25s;
+        width: 1.65rem;
+      }
+
+      &::before {
+        transform: translateY(-8px);
+      }
+
+      &::after {
+        transform: translateY(8px);
+      }
+    }
+
+    &.#{$px}-header__toggle-btn--open span {
+      background: transparent;
+      transition: background-color 0.25s ease 0.1s;
+
+      &::before {
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        transform: rotate(-45deg);
+      }
+    }
+
+    &:hover {
+      background-color: #f4f4f4;
+    }
+  }
+
+  &__logo {
+    margin: auto;
+
+    @media (min-width: 961px) {
+      margin: unset;
+    }
+  }
+
+  &__nav {
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1) 0.1s;
+
+    @media (min-width: 961px) {
+      height: 60px;
+      position: relative;
+      transform: unset;
+      width: 100%;
+    }
+
+    &.#{$px}-header__nav--open {
+      transform: translateX(0);
+
+      @media (min-width: 961px) {
+        transform: unset;
+      }
+    }
+  }
 }

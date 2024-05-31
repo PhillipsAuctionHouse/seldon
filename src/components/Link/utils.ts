@@ -15,4 +15,10 @@ export enum LinkVariants {
   list = 'list',
   /** link is being rendered within body copy */
   inline = 'inline',
+  /** link is being rendered in the main nav bar */
+  navMain = 'navMain',
+  /** link is being rendered in a nav bar flyout*/
+  navLinkLg = 'navLinkLg',
+  /** link is being rendered in a nav bar flyout*/
+  navLinkSm = 'navLinkSm',
 }
