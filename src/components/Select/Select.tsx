@@ -12,6 +12,16 @@ export interface SelectProps extends InputProps {
   children: React.ReactNode;
 }
 
+/**
+ * ## Overview
+ *
+ * A component for adding a Select component.
+ *
+ * [Figma Link](https://www.figma.com/design/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=5608-57898&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-select--overview)
+ */
+
 const Select = React.forwardRef(
   (
     {

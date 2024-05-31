@@ -33,8 +33,11 @@ export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
  *
  * A component that can be used to navigate to different pages or external websites. Renders a standard anchor tag by default.
  *
- * [Figma Link](https://www.figma.com/file/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=5736%3A13364&mode=dev)
+ * [Figma Link](https://www.figma.com/design/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=4612-79026&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-links-link--overview)
  */
+
 const Link = ({
   children,
   id,
