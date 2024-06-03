@@ -258,8 +258,7 @@
         line-height: 0.8125rem;
         text-align: right;
         text-transform: uppercase;
-
-        // max-width: 20%;
+        max-width: 25%;
         @include pText(0.8125rem, $keyline-gray);
 
         &:hover {
@@ -270,6 +269,7 @@
           align-items: flex-start;
           font-size: 0.6rem;
           letter-spacing: 0.125rem;
+          min-width: 35%;
         }
       }
     }
