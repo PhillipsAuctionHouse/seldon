@@ -3,7 +3,7 @@ import { Meta } from '@storybook/blocks';
 <Meta title="Design/Breakpoint Tokens" />
 
 <main className="sb-unstyled doc-wrapper">
-# <h1 className="h1">Breakpoint Tokens</h1>
+<h1 className="h1">Breakpoint Tokens</h1>
 
 <span className="p">
   There are 4 breakpoint tokens defined that can be used in your stylesheets to target specific screen sizes. These
@@ -52,4 +52,27 @@ import { Meta } from '@storybook/blocks';
     </tr>
   </tbody>
 </table>
+
+<span className="p">
+  A mixin called `@media` exists that takes a breakpoint size parameter and applies the styles to the element at that
+  breakpoint. The mixin is used like this:
+</span>
+
+```scss
+@include media($size-md) {
+  // Styles to apply at the md breakpoint.  Default is min-width, and it uses the smallest size so in this case anything greater than 961px
+}
+```
+
+<span className="p">
+  The mixin can also take a second parameter that specifies the type of media query to use. It defaults to `min` which
+  uses `min-width` but can be set to use `max-width` like this.
+</span>
+
+```scss
+@include media($size-sm, 'max') {
+  // Styles to only apply when less than the sm breakpoint
+}
+```
+
 </main>
