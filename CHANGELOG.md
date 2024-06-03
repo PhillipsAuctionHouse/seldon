@@ -1,3 +1,11 @@
+## [1.22.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.22.1...v1.22.2) (2024-05-31)
+
+
+### Bug Fixes
+
+* **build:** add entry for utils ([7c8d844](https://github.com/PhillipsAuctionHouse/seldon/commit/7c8d844e7c62d752c14d1a148a1948b5f590bf03))
+* **vite.config:** add util to main index.ts entry file ([9bc76c2](https://github.com/PhillipsAuctionHouse/seldon/commit/9bc76c27e5f2c2bae53f06c8534c4af0701d2bd1))
+
 ## [1.22.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.22.0...v1.22.1) (2024-05-30)
 
 
