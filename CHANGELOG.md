@@ -1,3 +1,10 @@
+# [1.23.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.22.2...v1.23.0) (2024-06-04)
+
+
+### Features
+
+* **text:** L3-378 update text component and text and breakpoint tokens ([#159](https://github.com/PhillipsAuctionHouse/seldon/issues/159)) ([a21d067](https://github.com/PhillipsAuctionHouse/seldon/commit/a21d067614f7567d2db1b865f4e136283bb104bb))
+
 ## [1.22.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.22.1...v1.22.2) (2024-05-31)
 
 
