@@ -4,7 +4,7 @@ export enum TextVariants {
   display2 = 'display2',
   display3 = 'display3',
   display4 = 'display4',
-  heading1 = 'heading1',
+  blockquote = 'blockquote',
   heading2 = 'heading2',
   heading3 = 'heading3',
   heading4 = 'heading4',
@@ -16,5 +16,5 @@ export enum TextVariants {
   ctaSm = 'ctaSm',
   email = 'email',
   label = 'label',
-  textBadge = 'textBadge',
+  badge = 'badge',
 }
