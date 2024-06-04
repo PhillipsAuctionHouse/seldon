@@ -18,6 +18,7 @@
 
   & > button,
   &--label {
+    /* TODO: Create token to handle these styles dynamically */
     color: $soft-black;
     display: block;
     font-size: 0.8125rem;
@@ -114,7 +115,6 @@
         min-height 0.5s cubic-bezier(0.65, 0, 0.35, 1) 0s;
       z-index: 1;
 
-      // padding 0.5s linear;
       li {
         opacity: 1;
       }
@@ -131,14 +131,10 @@
       right: 0;
       top: 35%;
       transform: translateY(-50%);
-
-      // transition: transform 0.35s ease-in-out;
     }
 
     @media (min-width: 961px) {
       content: '';
-
-      // display: none;
     }
   }
 
@@ -213,7 +209,7 @@
     &:not(ul ul li) button:focus::after,
     &:not(ul ul li) p:focus::after {
       opacity: 1;
-      width: 80%;
+      width: 85%;
     }
 
     .#{$px}-nav__list-item {
@@ -249,6 +245,7 @@
     }
     .#{$px}-nav__item {
       &--badge {
+        /* TODO: Create token to handle these styles dynamically */
         align-items: center;
         display: flex;
         flex-wrap: wrap;
@@ -256,9 +253,10 @@
         justify-content: flex-end;
         letter-spacing: 0.25rem;
         line-height: 0.8125rem;
+        max-width: 25%;
         text-align: right;
         text-transform: uppercase;
-        max-width: 25%;
+
         @include pText(0.8125rem, $keyline-gray);
 
         &:hover {
@@ -266,6 +264,7 @@
         }
 
         @media (max-width: 960px) {
+          /* TODO: Create token to handle these styles dynamically */
           align-items: flex-start;
           font-size: 0.6rem;
           letter-spacing: 0.125rem;

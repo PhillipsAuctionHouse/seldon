@@ -7,8 +7,8 @@
   text-decoration: none;
   white-space: nowrap;
 
-  &:hover:not(&--list, &--nav-main, &--navLinkLg, &--navLinkSm),
-  &:focus:not(&--list, &--nav-main, &--navLinkLg, &--navLinkSm) {
+  &:hover:not(&--list, &--navMain, &--navLinkLg, &--navLinkSm),
+  &:focus:not(&--list, &--navMain, &--navLinkLg, &--navLinkSm) {
     @include underline;
   }
 
@@ -32,6 +32,12 @@
     @include text($email);
   }
 
+  &--navMain {
+    span {
+      text-align: center;
+    }
+  }
+
   &--navLinkSm {
     color: $soft-black;
     width: 100%;
@@ -43,6 +49,7 @@
     }
 
     span {
+      /* TODO: Create token to handle these styles dynamically */
       font-size: 0.8125rem;
       font-weight: 500;
       letter-spacing: 0.125rem;
@@ -65,6 +72,7 @@
     }
 
     span {
+      /* TODO: Create token to handle these styles dynamically */
       @include pText(1.0625rem);
 
       font-weight: 600;
@@ -75,6 +83,7 @@
       width: 100%;
 
       @media (max-width: 960px) {
+        /* TODO: Create token to handle these styles dynamically */
         font-size: 0.8rem;
         font-weight: 400;
         text-overflow: unset;

@@ -23,6 +23,7 @@
     @media (max-width: 960px) {
       &:not(li ul) {
         transform: translateX(-50%);
+        width: 200%;
       }
     }
   }

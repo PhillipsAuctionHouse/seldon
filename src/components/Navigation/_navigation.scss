@@ -10,11 +10,11 @@
   width: 100%;
 
   @media (min-width: 961px) {
-    place-content: center right;
     display: flex;
     flex-wrap: wrap;
     overflow: visible;
     padding-top: 0;
+    place-content: center right;
     position: unset;
     width: auto;
   }
@@ -65,7 +65,8 @@
   // Zero out default styles for possible children
   button,
   p {
-    // @include text('text');
+    @include text('text');
+
     border: none;
     color: inherit;
     display: block;

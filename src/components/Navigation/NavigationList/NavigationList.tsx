@@ -2,15 +2,12 @@ import * as React from 'react';
 import { px } from '../../../utils';
 import classNames from 'classnames';
 import { NavigationItemProps } from '../NavigationItem/NavigationItem';
+import { HeaderContext } from '../../Header/Header';
 
-export interface NavigationListProps extends React.HTMLAttributes<HTMLElement> {
-  /**
-   * Boolean to determine if the navigation list is expanded
-   */
-  expanded?: boolean;
-}
+export type NavigationListProps = React.HTMLAttributes<HTMLElement>;
 
-const NavigationList = ({ children, expanded }: React.PropsWithChildren<NavigationListProps>) => {
+const NavigationList = ({ children }: React.PropsWithChildren<NavigationListProps>) => {
+  const { expanded } = React.useContext(HeaderContext);
   const largeCtaItems: React.ReactNode[] = [];
   const smallCtaItems: React.ReactNode[] = [];
   React.Children.map(
@@ -23,6 +20,7 @@ const NavigationList = ({ children, expanded }: React.PropsWithChildren<Navigati
       }
     },
   );
+
   return (
     <ul
       id="nav-list"

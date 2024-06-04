@@ -3,8 +3,13 @@ import { px } from '../../../utils';
 import classNames from 'classnames';
 import Link from '../../Link/Link';
 import { LinkVariants } from '../../Link/utils';
+import { HeaderContext } from '../../Header/Header';
 
 export interface NavigationItemProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Optional badge for navigation item. Used currently for location of auctions
+   */
+  badge?: string;
   /**
    * href link
    */
@@ -21,32 +26,31 @@ export interface NavigationItemProps extends React.HTMLAttributes<HTMLElement> {
    * Optional type for navigation item
    */
   navType?: LinkVariants;
-  /**
-   * Optional click handler
-   */
-  handleOnClick?: () => void;
-  /**
-   *  Blur handler for keyboard a11y for nested list
-   */
-  onBlur?: (e: React.FocusEvent) => void;
 }
 
 const NavigationItem = ({
-  children,
+  badge,
   className = '',
-  handleOnClick,
   href,
   label,
   navGroup,
   navType,
   ...props
-}: React.PropsWithChildren<NavigationItemProps>) => (
-  <li data-testid={`nav-item`} className={classNames(`${px}-nav__item`, navGroup, className)} onClick={handleOnClick}>
-    <Link {...props} href={href} variant={navType ? navType : LinkVariants.navMain}>
-      <span className={`${px}-nav__item--label`}>{label}</span>
-      {children}
-    </Link>
-  </li>
-);
+}: React.PropsWithChildren<NavigationItemProps>) => {
+  const { expandedItem } = React.useContext(HeaderContext);
+  return (
+    <li data-testid={`nav-item`} className={classNames(`${px}-nav__item`, navGroup, className)}>
+      <Link
+        {...props}
+        href={href}
+        variant={navType ? navType : LinkVariants.navMain}
+        tabIndex={expandedItem === '' ? 0 : -1}
+      >
+        <span className={`${px}-nav__item--label`}>{label}</span>
+        {badge ? <span className={`${px}-nav__item--badge `}>{badge}</span> : null}
+      </Link>
+    </li>
+  );
+};
 
 export default NavigationItem;

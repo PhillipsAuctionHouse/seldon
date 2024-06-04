@@ -28,6 +28,7 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
 }
 type HeaderContextType = {
   expandedItem: string;
+  setExpandedItem: (item: string) => void;
   expanded: boolean;
   handleSelection: (label: string) => void;
   handleFocusEvent: (e: React.FocusEvent) => void;
@@ -36,6 +37,8 @@ type HeaderContextType = {
 const defaultMobileMenuLabel = 'Main Menu';
 export const HeaderContext = React.createContext({
   expandedItem: defaultMobileMenuLabel,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+  setExpandedItem: (_item: string) => {},
   expanded: false,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   handleSelection: (_label: string) => {},
@@ -89,7 +92,15 @@ const Header = ({
       </h1>
       <div className={classnames(`${px}-header__nav`, { [`${px}-header__nav--open`]: toggleState })}>
         <HeaderContext.Provider
-          value={{ expandedItem, expanded, handleSelection, handleFocusEvent } as HeaderContextType}
+          value={
+            {
+              expandedItem,
+              setExpandedItem: (item: string) => setExpandedItem(item),
+              expanded,
+              handleSelection: (label: string) => handleSelection(label),
+              handleFocusEvent: (e: React.FocusEvent) => handleFocusEvent(e),
+            } as HeaderContextType
+          }
         >
           {children}
         </HeaderContext.Provider>
