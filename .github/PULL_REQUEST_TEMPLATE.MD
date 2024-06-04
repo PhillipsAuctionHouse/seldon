@@ -31,13 +31,13 @@ Add high-level overview of the changes that were made and explanation of WHY the
 
 **Things to look for during review**
 
-- [ ] Make sure all references to `phillips` class prefix is using the prefix variable
+- [ ] PR title should correctly describe the most significant type of commit. I.e. `feat(scope): ...` if a `minor` release should be triggered.
+- [ ] All commit messages follow convention and are appropriate for the changes
+- [ ] All references to `phillips` class prefix are using the prefix variable
 - [ ] All major areas have a `data-testid` attribute.
 - [ ] Document all props with jsdoc comments
 - [ ] All strings should be translatable.
-- [ ] Unit test should be written and should have a coverage of 90% or higher in all areas.
-- [ ] PR should link and close out an existing issue
-- [ ] Make sure all commits messages follow convention and are appropriate for the changes
+- [ ] Unit tests should be written and should have a coverage of 90% or higher in all areas.
 
 New Components
 
