@@ -63,8 +63,8 @@
     line-height: 1.25;
   }
 
-  @if $label == 'text-badge' {
-    font-size: $text-badge-label-size;
+  @if $label == 'badge' {
+    font-size: $badge-label-size;
     font-weight: 500;
     letter-spacing: 0.1875rem;
     line-height: 1.25;
@@ -94,8 +94,8 @@
     @include labelText($label);
   }
 
-  @if $token == 'text-badge' {
-    @include labelText($text-badge);
+  @if $token == 'badge' {
+    @include labelText($badge);
   }
 
   // Displays
@@ -120,8 +120,8 @@
   }
 
   // Headings
-  @if $token == 'heading1' {
-    @include hText($heading-size1);
+  @if $token == 'blockquote' {
+    @include hText($heading-size1, $color: $primary-black, $transform-style: initial);
   }
 
   @if $token == 'heading2' {

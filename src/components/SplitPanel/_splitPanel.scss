@@ -11,7 +11,7 @@
     flex: 1 1 0px;
   }
 
-  @include media($breakpoint-sm) {
+  @include media($size-sm) {
     align-items: stretch;
     flex-direction: row;
 

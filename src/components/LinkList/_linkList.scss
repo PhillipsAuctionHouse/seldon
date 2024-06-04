@@ -5,7 +5,7 @@
     // mobile first
     grid-column: span 2;
 
-    @include media($breakpoint-md) {
+    @include media($size-md) {
       grid-column: span 4;
     }
   }
