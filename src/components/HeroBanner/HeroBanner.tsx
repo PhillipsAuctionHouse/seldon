@@ -31,11 +31,17 @@ export interface HeroBannerProps {
   id?: string;
 }
 
-/**
- * Hero Banner UI component
- */
-
 const baseClass = `${px}-hero-banner`;
+
+/**
+ * ## Overview
+ *
+ * Hero Banner UI component
+ *
+ * [Figma Link](https://www.figma.com/design/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=6532-691&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-herobanner--overview)
+ */
 
 const HeroBanner = ({ prehead, date, headerText, subHeadText, association, background, id }: HeroBannerProps) => {
   return (

@@ -27,7 +27,9 @@ export interface GridItemProps extends React.HTMLAttributes<HTMLDivElement> {
  * This item can be placed in a Grid and appropriately sized for the current breakpoint.  It can also be aligned within the grid cell.
  * If you center multiple GridItems in a Grid, they will wrap to the next line and be centered on that line.
  *
- * [Figma Link](https://www.figma.com/design/Hp2FyltbOmRxTuw9kSwBAd/EPIC-About-Us?node-id=912-5904&t=WzvEYp5zbnGnRFUf-4)
+ * [Figma Link](https://www.figma.com/design/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=6226-1330&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-layouts-griditem--overview)
  */
 const GridItem = ({
   children,

@@ -19,7 +19,9 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
  *
  * All text rendered in the UI can be wrapped in this component to enforce consistent styling and semantic HTML.
  *
- * [Figma Link](https://www.figma.com/design/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=6344-139&t=BUiWETQbkkWoDZ5V-4)
+ * [Figma Link](https://www.figma.com/design/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=7263-1361&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-text--overview)
  */
 const Text = ({
   children,

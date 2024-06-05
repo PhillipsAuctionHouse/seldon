@@ -15,7 +15,9 @@ export interface LinkBlockProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * The LinkBlock component is used to render a link with a description underneath it. Usually this is used in a list of links.
  *
- * [Figma Link](https://www.figma.com/file/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?type=design&node-id=5709-8035&mode=design&t=CTNssP89Nrnt6Jkw-0)
+ * [Figma Link](https://www.figma.com/design/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=4612-79026&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-links-linkblock--overview)
  *
  */
 const LinkBlock = ({ linkProps, description, className: classNameProp, id, ...props }: LinkBlockProps) => {
