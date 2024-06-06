@@ -13,14 +13,14 @@ const meta = {
 export default meta;
 
 export const Playground = () => {
-  const [open, setOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const onClose = () => {
-    setOpen(false);
+    setIsOpen(false);
   };
 
   const onOpen = () => {
-    setOpen(true);
+    setIsOpen(true);
   };
 
   return (
@@ -30,7 +30,7 @@ export const Playground = () => {
       </Button>
 
       <PlaygroundSplitPanel />
-      <Modal open={open} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose}>
         <img src="https://www.dev.phillips.com/Content/homepage/wechat_qr_mobile.png" alt="placeholder" />
       </Modal>
     </>

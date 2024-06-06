@@ -19,6 +19,7 @@ export { default as SplitPanel, type SplitPanelProps } from './components/SplitP
 export { default as Subscribe, type SubscribeProps } from './components/Subscribe/Subscribe';
 export { default as Social, type SocialProps } from './components/Social/Social';
 export { default as ViewingsList, type ViewingsListProps } from './components/ViewingsList/ViewingsList';
+export { default as Modal, type ModalProps } from './components/Modal/Modal';
 export {
   default as StatefulViewingsList,
   type StatefulViewingsListProps,

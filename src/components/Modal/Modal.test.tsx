@@ -2,53 +2,46 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import Modal from './Modal';
 
 describe('Modal', () => {
-  it('renders the modal when open prop is true', () => {
-    render(
-      <Modal open={true}>
-        <div>Modal Content</div>
-      </Modal>,
-    );
+  const onCloseMock = vi.fn();
 
-    const modalContent = screen.getByText('Modal Content');
-    expect(modalContent).toBeInTheDocument();
+  afterEach(() => {
+    vi.clearAllMocks();
   });
 
-  it('does not render the modal when open prop is false', () => {
+  it('renders the modal when isOpen is true', () => {
     render(
-      <Modal open={false}>
+      <Modal isOpen={true} onClose={onCloseMock}>
         <div>Modal Content</div>
       </Modal>,
     );
 
-    const modalContent = screen.queryByText('Modal Content');
-    expect(modalContent).not.toBeInTheDocument();
+    expect(screen.getByTestId('modal-button')).toBeInTheDocument();
+    expect(screen.getByLabelText('Close Modal')).toBeInTheDocument();
+    expect(screen.getByText('Modal Content')).toBeInTheDocument();
+  });
+
+  it('does not render the modal when isOpen is false', () => {
+    render(
+      <Modal isOpen={false} onClose={onCloseMock}>
+        <div>Modal Content</div>
+      </Modal>,
+    );
+
+    expect(screen.queryByTestId('modal-button')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Close Modal')).not.toBeInTheDocument();
+    expect(screen.queryByText('Modal Content')).not.toBeInTheDocument();
   });
 
   it('calls the onClose function when the close button is clicked', () => {
-    const onCloseMock = vi.fn();
     render(
-      <Modal open={true} onClose={onCloseMock}>
+      <Modal isOpen={true} onClose={onCloseMock}>
         <div>Modal Content</div>
       </Modal>,
     );
 
-    const closeButton = screen.getByTestId('modal-button');
+    const closeButton = screen.getByLabelText('Close Modal');
     fireEvent.click(closeButton);
 
-    expect(onCloseMock).toHaveBeenCalled();
-  });
-
-  it('calls the onClose function when the background is clicked', () => {
-    const onCloseMock = vi.fn();
-    render(
-      <Modal open={true} onClose={onCloseMock}>
-        <div>Modal Content</div>
-      </Modal>,
-    );
-
-    const modalBackground = screen.getByTestId('modal-background');
-    fireEvent.click(modalBackground);
-
-    expect(onCloseMock).toHaveBeenCalled();
+    expect(onCloseMock).toHaveBeenCalledTimes(1);
   });
 });

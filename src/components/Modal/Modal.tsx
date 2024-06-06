@@ -1,22 +1,15 @@
 import classnames from 'classnames';
-import { px } from '../../utils';
+import { noOp, px } from '../../utils';
 import CloseIcon from '../../assets/close.svg?react';
 import Button from '../Button/Button';
+import ReactModal from 'react-modal';
 
-export interface ModalProps extends React.HTMLAttributes<HTMLElement> {
-  /**
-   * Boolean that will determine if the modal is open
-   */
-  open?: boolean;
+export interface ModalProps extends ReactModal.Props {
   /**
    * Function to close the modal
    */
   onClose?: () => void;
 }
-
-const onClosePlaceholder = () => {
-  console.log('On close clicked');
-};
 
 /**
  * ## Overview
@@ -25,8 +18,8 @@ const onClosePlaceholder = () => {
  *
  */
 
-const Modal = ({ children, open = false, onClose = onClosePlaceholder, ...props }: ModalProps) => {
-  if (!open) {
+const Modal = ({ children, className, isOpen = false, onClose = noOp, ...props }: ModalProps) => {
+  if (!isOpen) {
     return null;
   }
 
@@ -36,19 +29,25 @@ const Modal = ({ children, open = false, onClose = onClosePlaceholder, ...props 
   };
 
   return (
-    <div className={classnames(`${px}-modal`)} onClick={onClose} data-testid="modal-background">
-      <div className={classnames(`${px}-modal__container`)} data-testid="modal-container" {...props}>
-        <Button
-          className={classnames(`${px}-modal__close`)}
-          data-testid="modal-button"
-          buttonType="icon"
-          onClick={buttonClick}
-        >
-          <CloseIcon />
-        </Button>
-        {children}
-      </div>
-    </div>
+    <ReactModal
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      className={classnames(`${px}-modal`, className)}
+      overlayClassName={classnames(`${px}-modal__overlay`)}
+      ariaHideApp={false}
+      {...props}
+    >
+      <Button
+        data-testid="modal-button"
+        buttonType="icon"
+        onClick={buttonClick}
+        aria-label="Close Modal"
+        className={classnames(`${px}-modal__close`)}
+      >
+        <CloseIcon />
+      </Button>
+      {children}
+    </ReactModal>
   );
 };
 
