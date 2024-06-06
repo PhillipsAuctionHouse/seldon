@@ -60,6 +60,21 @@
     border-color: transparent;
   }
 
+  &--icon {
+    background-color: unset;
+    border: unset;
+    min-width: unset;
+
+    & > svg {
+      margin-inline-end: unset;
+      width: unset;
+    }
+
+    &:hover {
+      background-color: unset;
+    }
+  }
+
   &.#{$px}-button--icon-last svg {
     margin-inline-end: unset;
     margin-inline-start: 0.5rem;
