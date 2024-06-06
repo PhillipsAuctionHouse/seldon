@@ -75,6 +75,10 @@ git commit -m "fix(table): columns need unique ids" -m "#123"
 
 We use `semantic-release` to publish new releases when a commit of type `feat` or `fix` is merged to the `main` branch. This is done automatically by this [GitHub Workflow](https://github.com/PhillipsAuctionHouse/seldon/blob/main/.github/workflows/publish.yml). The version number is determined by the commit messages.
 
+## Starting a new component
+
+We would like our components to be created with accessibility support. Please check the [RadixUI](https://www.radix-ui.com/primitives/docs/overview/introduction) library of components first to see if there's a component that you can start from. It sets all the `aria-roles` correctly so screenreaders and other assistive technologies can read the elements. It also covers standard UX patterns and accessibility best practices like keyboard navigation that are quite expensive to implement. If we do have to build a component from scratch, please review the patterns [here](https://www.w3.org/WAI/ARIA/apg/patterns/) to make sure you cover accessibility.
+
 ## Styling new components
 
 Components should have their own sass partial in which the corresponding styles
