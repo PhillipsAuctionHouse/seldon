@@ -20,7 +20,9 @@ export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
  *
  * A component for adding a footer to the bottom of the site.
  *
- * [Figma Link](https://www.figma.com/file/npS5ECbNut8hevUkGWSzUN/Site-Furniture-(Navigation)---SP24?type=design&node-id=4346-1981&mode=design&t=D7PpghvLOEpBYd3n-0)
+ * [Figma Link](https://www.figma.com/design/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=6651-2641&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-footer--overview)
  */
 
 const Footer = ({

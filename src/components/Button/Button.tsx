@@ -29,6 +29,16 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset';
 }
 
+/**
+ * ## Overview
+ *
+ * A component for adding a button component.
+ *
+ * [Figma Link](https://www.figma.com/design/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=4433-163014&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-button--overview)
+ */
+
 const Button = ({
   buttonType = 'primary',
   size = 'md',

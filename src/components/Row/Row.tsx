@@ -15,13 +15,17 @@ export interface RowProps extends React.HTMLAttributes<HTMLElement> {
    */
   padding?: { top: PaddingTokens; bottom: PaddingTokens };
 }
+
 /**
  * ## Overview
  *
  * A page will usually contain multiple Rows.  The Row component will apply paddings to the contents within it.  Usually a Grid will be rendered within a Row to align to the grid, but other elements are supported.
  *
- * [Figma Link](https://www.figma.com/design/Hp2FyltbOmRxTuw9kSwBAd/EPIC-About-Us?node-id=912-5904&t=WzvEYp5zbnGnRFUf-4)
+ * [Figma Link](https://www.figma.com/design/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=6741-6223&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-layouts-row--overview)
  */
+
 const Row = ({
   children,
   id,

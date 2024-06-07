@@ -14,7 +14,9 @@ export interface SocialProps extends React.HTMLAttributes<HTMLElement> {
  *
  * A component for displaying our social icons. Expects children to be an unordered list of social icons.
  *
- * [Figma Link](https://www.figma.com/file/npS5ECbNut8hevUkGWSzUN/Site-Furniture-(Navigation)---SP24?type=design&node-id=4357-7418&mode=design&t=D7PpghvLOEpBYd3n-0)
+ * [Figma Link](https://www.figma.com/design/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=6651-2641&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-social--overview)
  */
 
 const Social = ({ className, children, id, titleText = 'Follow on Social' }: SocialProps) => (

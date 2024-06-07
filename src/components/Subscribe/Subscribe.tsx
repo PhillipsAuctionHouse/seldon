@@ -57,8 +57,11 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
  *
  * A component for adding an email signup form.
  *
- * [Figma Link](https://www.figma.com/file/npS5ECbNut8hevUkGWSzUN/Site-Furniture-(Navigation)---SP24?node-id=4347%3A4194&mode=dev)
+ * [Figma Link](https://www.figma.com/design/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=6651-2641&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-subscribe--overview)
  */
+
 const Subscribe = ({
   blurb,
   buttonText = 'Sign Up',
