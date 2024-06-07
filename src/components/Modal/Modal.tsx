@@ -6,6 +6,10 @@ import ReactModal from 'react-modal';
 
 export interface ModalProps extends ReactModal.Props {
   /**
+   * Boolean to determine if the modal is open
+   */
+  isOpen: boolean;
+  /**
    * Function to close the modal
    */
   onClose?: () => void;

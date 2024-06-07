@@ -1,5 +1,6 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Modal from './Modal';
+import userEvent from '@testing-library/user-event';
 
 describe('Modal', () => {
   const onCloseMock = vi.fn();
@@ -32,7 +33,7 @@ describe('Modal', () => {
     expect(screen.queryByText('Modal Content')).not.toBeInTheDocument();
   });
 
-  it('calls the onClose function when the close button is clicked', () => {
+  it('calls the onClose function when the close button is clicked', async () => {
     render(
       <Modal isOpen={true} onClose={onCloseMock}>
         <div>Modal Content</div>
@@ -40,7 +41,7 @@ describe('Modal', () => {
     );
 
     const closeButton = screen.getByLabelText('Close Modal');
-    fireEvent.click(closeButton);
+    await userEvent.click(closeButton);
 
     expect(onCloseMock).toHaveBeenCalledTimes(1);
   });
