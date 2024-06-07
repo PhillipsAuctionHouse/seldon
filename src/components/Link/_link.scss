@@ -31,22 +31,23 @@
   }
 
   &--navMain {
-    span {
+    .#{$px}-nav__item--label {
+      color: $soft-black;
       text-align: center;
     }
   }
 
   &--navLinkSm {
     color: $soft-black;
-    width: 100%;
+    justify-content: flex-end;
 
     &:hover {
-      span {
+      .#{$px}-nav__item--label {
         color: $cta-blue;
       }
     }
 
-    span {
+    .#{$px}-nav__item--label {
       /* TODO: Create token to handle these styles dynamically */
       font-size: 0.8125rem;
       font-weight: 500;
@@ -63,13 +64,12 @@
     justify-content: space-between;
     width: 100%;
 
-    &:hover {
-      .#{$px}-nav__item--label {
-        color: $cta-blue;
-      }
+    > span {
+      display: flex;
+      width: 100%;
     }
 
-    span {
+    .#{$px}-nav__item--label {
       /* TODO: Create token to handle these styles dynamically */
       @include pText(1.0625rem);
 
@@ -79,6 +79,10 @@
       text-transform: capitalize;
       text-wrap: nowrap;
       width: 100%;
+
+      &:hover {
+        color: $cta-blue;
+      }
 
       @media (max-width: 960px) {
         /* TODO: Create token to handle these styles dynamically */

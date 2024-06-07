@@ -7,6 +7,7 @@ import NavigationItemTrigger from '../Navigation/NavigationItemTrigger/Navigatio
 import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
 import { LinkVariants } from '../Link/utils';
 import { px } from '../../utils';
+import UserManagement from '../UserManagement/UserManagement';
 
 const meta = {
   title: 'Components/Header',
@@ -230,6 +231,7 @@ export const Playground = (props: HeaderProps) => (
             <NavigationItem navGroup={'nav-link-sm'} navType={LinkVariants.navLinkSm} href="#" label={`Careers`} />
           </NavigationList>
         </NavigationItemTrigger>
+        <UserManagement></UserManagement>
       </NavigationList>
     </Navigation>
   </Header>

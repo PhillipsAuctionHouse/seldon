@@ -10,12 +10,17 @@ export interface NavigationItemTriggerProps extends React.HTMLAttributes<HTMLEle
   label: string;
 }
 
-const NavigationItemTrigger = ({ label, children, ...props }: React.PropsWithChildren<NavigationItemTriggerProps>) => {
+const NavigationItemTrigger = ({
+  label,
+  children,
+  className,
+  ...props
+}: React.PropsWithChildren<NavigationItemTriggerProps>) => {
   const { expandedItem, handleSelection } = React.useContext(HeaderContext);
   const handleOnClick = () => handleSelection(label);
   return (
     <li
-      className={classNames(`${px}-nav__item`, { [`${px}-nav__item--expanded`]: expandedItem === label })}
+      className={classNames(className, `${px}-nav__item`, { [`${px}-nav__item--expanded`]: expandedItem === label })}
       onClick={handleOnClick}
     >
       <button className={`${px}-nav__item-trigger`} type="button" aria-expanded={expandedItem === label} {...props}>

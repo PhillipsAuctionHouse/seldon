@@ -63,10 +63,9 @@
   }
 
   // Zero out default styles for possible children
-  button,
-  p {
-    @include text('text');
-
+  button {
+    appearance: none;
+    background: none;
     border: none;
     color: inherit;
     display: block;
@@ -74,11 +73,6 @@
     padding: 0;
     text-align: left;
     width: 100%;
-  }
-
-  button {
-    appearance: none;
-    background: none;
   }
 
   &__back-btn:hover,

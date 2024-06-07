@@ -6,7 +6,7 @@ import { HeaderContext } from '../../Header/Header';
 
 export type NavigationListProps = React.HTMLAttributes<HTMLElement>;
 
-const NavigationList = ({ children }: React.PropsWithChildren<NavigationListProps>) => {
+const NavigationList = ({ children, className }: React.PropsWithChildren<NavigationListProps>) => {
   const { expanded } = React.useContext(HeaderContext);
   const largeCtaItems: React.ReactNode[] = [];
   const smallCtaItems: React.ReactNode[] = [];
@@ -25,7 +25,7 @@ const NavigationList = ({ children }: React.PropsWithChildren<NavigationListProp
     <ul
       id="nav-list"
       data-testid="nav-list"
-      className={classNames(`${px}-nav__list`, { [`${px}-nav__list--expanded`]: expanded })}
+      className={classNames(className, `${px}-nav__list`, { [`${px}-nav__list--expanded`]: expanded })}
     >
       {largeCtaItems.length > 0 ? (
         <div className={classNames(`${px}-nav__list__section`, `${px}-nav__list__section--large-cta`)}>

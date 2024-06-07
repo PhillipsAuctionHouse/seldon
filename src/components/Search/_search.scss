@@ -57,15 +57,20 @@
     overflow: hidden;
     position: absolute;
     right: 0;
-    top: 60px;
+    top: 90px;
     transition: 0.5s ease;
     width: 0;
     z-index: 3;
+
+    @media (max-width: 960px) {
+      top: 60px;
+    }
 
     &--active {
       width: 50%;
 
       @media (max-width: 960px) {
+        top: 60px;
         width: 100%;
       }
     }

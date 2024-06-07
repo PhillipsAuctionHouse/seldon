@@ -4,12 +4,22 @@
 .#{$px}-nav__item {
   @media (max-width: 960px) {
     border-bottom: 1px solid #ccc;
+    max-width: 320px;
+    width: 100%;
   }
 
   @media (min-width: 961px) {
     align-items: center;
     display: flex;
     max-width: unset;
+
+    &:hover,
+    &:focus,
+    &:focus-within {
+      .#{$px}-nav__item--label {
+        color: $pure-black;
+      }
+    }
 
     & & {
       border-bottom: 1px solid #ccc;
@@ -67,7 +77,7 @@
       opacity: 0;
       overflow: hidden;
       position: fixed;
-      top: 60px;
+      top: 90px;
       transition:
         opacity 0.75s linear 0.2s,
         max-height 0.75s cubic-bezier(0.65, 0, 0.35, 1) 0s,
@@ -117,6 +127,10 @@
 
       li {
         opacity: 1;
+
+        ul li::after {
+          opacity: 0;
+        }
       }
     }
   }
@@ -187,9 +201,8 @@
     }
 
     &:not(ul ul li)::after,
-    &:not(ul ul li) a:focus::after,
-    &:not(ul ul li) button:focus::after,
-    &:not(ul ul li) p:focus::after {
+    &:not(ul ul li a):focus::after,
+    &:not(ul ul li button):focus::after {
       background: rgb(84, 84, 84);
       content: '';
       height: 2px;
@@ -253,7 +266,7 @@
         justify-content: flex-end;
         letter-spacing: 0.25rem;
         line-height: 0.8125rem;
-        max-width: 25%;
+        min-width: 25%;
         text-align: right;
         text-transform: uppercase;
 
