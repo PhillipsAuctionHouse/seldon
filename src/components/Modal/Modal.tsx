@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 import { noOp, px } from '../../utils';
 import CloseIcon from '../../assets/close.svg?react';
-import Button from '../Button/Button';
 import ReactModal from 'react-modal';
+import IconButton from '../IconButton/IconButton';
 
 export interface ModalProps extends ReactModal.Props {
   /**
@@ -14,6 +14,9 @@ export interface ModalProps extends ReactModal.Props {
    */
   onClose?: () => void;
 }
+
+ReactModal.setAppElement('body');
+// resolves the following error: App element is not defined. Please use `Modal.setAppElement(el)` or set `appElement={el}`. This is needed so screen readers don't see main content when modal is opened. It is not recommended, but you can opt-out by setting `ariaHideApp={false}`.
 
 /**
  * ## Overview
@@ -27,29 +30,22 @@ const Modal = ({ children, className, isOpen = false, onClose = noOp, ...props }
     return null;
   }
 
-  const buttonClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    onClose();
-  };
-
   return (
     <ReactModal
       isOpen={isOpen}
       onRequestClose={onClose}
       className={classnames(`${px}-modal`, className)}
       overlayClassName={classnames(`${px}-modal__overlay`)}
-      ariaHideApp={false}
       {...props}
     >
-      <Button
+      <IconButton
         data-testid="modal-button"
-        buttonType="icon"
-        onClick={buttonClick}
+        onClick={onClose}
         aria-label="Close Modal"
         className={classnames(`${px}-modal__close`)}
       >
         <CloseIcon />
-      </Button>
+      </IconButton>
       {children}
     </ReactModal>
   );

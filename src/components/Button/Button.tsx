@@ -18,7 +18,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * Is this the principal call to action on the page?
    */
-  buttonType?: 'primary' | 'secondary' | 'ghost' | 'icon';
+  buttonType?: 'primary' | 'secondary' | 'ghost';
   /**
    * How large should the button be?
    */

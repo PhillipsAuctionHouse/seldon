@@ -1,0 +1,47 @@
+.#{$px}-icon-button {
+  background-color: unset;
+  border: unset;
+  color: $text-color;
+  min-width: unset;
+  padding: unset;
+
+  & > svg {
+    fill: $pure-black;
+    height: 100%;
+    margin-inline-end: unset;
+    width: 100%;
+  }
+
+  &:hover {
+    background-color: unset;
+    opacity: 0.75;
+
+    & > svg {
+      fill: $pure-black;
+    }
+  }
+
+  &:focus {
+    background-color: unset;
+    fill: $pure-black;
+
+    & > svg {
+      fill: $pure-black;
+    }
+  }
+
+  &--sm {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  &--md {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  &--lg {
+    height: 2rem;
+    width: 2rem;
+  }
+}

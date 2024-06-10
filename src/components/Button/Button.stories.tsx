@@ -16,7 +16,7 @@ const meta = {
       },
     },
     buttonType: {
-      options: ['primary', 'secondary', 'ghost', 'icon'],
+      options: ['primary', 'secondary', 'ghost'],
       control: {
         type: 'select',
       },
