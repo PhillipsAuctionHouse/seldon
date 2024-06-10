@@ -12,7 +12,7 @@ const UserManagement = ({ children }: React.PropsWithChildren<UserManagementProp
   const [language, setLanguage] = React.useState('English');
 
   return (
-    <div className={`${px}-user-management`}>
+    <div data-testid="user-management" className={`${px}-user-management`}>
       <span className={`${px}-user-management__account-wrapper`}>
         <AccountCircleGrey className={`${px}-user-management__account-icon`} />
         <NavigationItem href="#login" label={`Login`} />
@@ -27,7 +27,7 @@ const UserManagement = ({ children }: React.PropsWithChildren<UserManagementProp
               value="en"
               inline
               name="languages"
-              checked
+              defaultChecked
               onClick={() => setLanguage('English')}
             />
           </li>

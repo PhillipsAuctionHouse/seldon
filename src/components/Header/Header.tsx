@@ -12,11 +12,11 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Logo src
    */
-  logo: string;
+  logo?: string;
   /**
    * Logo alt text
    */
-  logoText: string;
+  logoText?: string;
   /**
    * Toggle open text
    */
