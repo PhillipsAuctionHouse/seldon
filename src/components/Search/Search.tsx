@@ -27,7 +27,11 @@ const Search = ({ altText = 'Search', useIcon = true }: React.PropsWithChildren<
         {useIcon ? <SearchIcon className={`${px}-search__button__icon`} /> : `Search`}
       </button>
       <div
-        className={classnames(`${px}-search__input-wrapper`, { [`${px}-search__input-wrapper--use-icon`]: useIcon })}
+        className={classnames(
+          `${px}-search__input-wrapper`,
+          { [`${px}-search__input-wrapper--active`]: overlayEnabled },
+          { [`${px}-search__input-wrapper--use-icon`]: useIcon },
+        )}
       >
         {useIcon ? <SearchIcon className={`${px}-search__input-wrapper__icon`} /> : null}
         <Input
