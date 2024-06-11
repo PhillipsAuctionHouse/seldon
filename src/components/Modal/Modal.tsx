@@ -3,7 +3,7 @@ import { noOp, px } from '../../utils';
 import CloseIcon from '../../assets/close.svg?react';
 import ReactModal from 'react-modal';
 import IconButton from '../IconButton/IconButton';
-import { useEffect } from 'react';
+import { useMemo } from 'react';
 
 export interface ModalProps extends ReactModal.Props {
   /**
@@ -17,7 +17,7 @@ export interface ModalProps extends ReactModal.Props {
   /**
    * The selector for aria-hide
    */
-  appElementSelector?: string | HTMLElement;
+  appElementSelector?: string;
 }
 
 /**
@@ -35,12 +35,11 @@ const Modal = ({
   appElementSelector = 'main',
   ...props
 }: ModalProps) => {
-  useEffect(() => {
-    ReactModal.setAppElement(appElementSelector);
-    // resolves the following error: App element is not defined. Please use `Modal.setAppElement(el)` or set `appElement={el}`. This is needed so screen readers don't see main content when modal is opened. It is not recommended, but you can opt-out by setting `ariaHideApp={false}`.
+  const appElement = useMemo(() => {
+    return document.querySelector(appElementSelector);
   }, [appElementSelector]);
 
-  if (!isOpen) {
+  if (!isOpen || !appElement) {
     return null;
   }
 
@@ -50,6 +49,8 @@ const Modal = ({
       onRequestClose={onClose}
       className={classnames(`${px}-modal`, className)}
       overlayClassName={classnames(`${px}-modal__overlay`)}
+      appElement={(appElement as HTMLElement) ?? undefined}
+      ariaHideApp={!appElement}
       {...props}
     >
       <IconButton

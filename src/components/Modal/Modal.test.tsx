@@ -11,7 +11,7 @@ describe('Modal', () => {
 
   it('renders the modal when isOpen is true', () => {
     render(
-      <Modal isOpen={true} onClose={onCloseMock}>
+      <Modal isOpen={true} onClose={onCloseMock} appElementSelector="body">
         <div>Modal Content</div>
       </Modal>,
     );
