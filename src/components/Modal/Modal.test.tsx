@@ -23,7 +23,7 @@ describe('Modal', () => {
 
   it('does not render the modal when isOpen is false', () => {
     render(
-      <Modal isOpen={false} onClose={onCloseMock}>
+      <Modal isOpen={false} onClose={onCloseMock} appElementSelector="body">
         <div>Modal Content</div>
       </Modal>,
     );
@@ -35,7 +35,7 @@ describe('Modal', () => {
 
   it('calls the onClose function when the close button is clicked', async () => {
     render(
-      <Modal isOpen={true} onClose={onCloseMock}>
+      <Modal isOpen={true} onClose={onCloseMock} appElementSelector="body">
         <div>Modal Content</div>
       </Modal>,
     );
