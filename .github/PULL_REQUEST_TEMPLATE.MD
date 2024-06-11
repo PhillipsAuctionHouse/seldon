@@ -41,6 +41,7 @@ Add high-level overview of the changes that were made and explanation of WHY the
 
 New Components
 
+- [ ] Are there any [accessibility considerations](https://www.w3.org/WAI/ARIA/apg/patterns/) that need to be taken into account and tested?
 - [ ] Default story called "Playground" should be created for all new components
 - [ ] Create a jsdoc comment that has an Overview section and a link to the Figma design for the component
 - [ ] Export the component and its typescript type from the `index.ts` file
