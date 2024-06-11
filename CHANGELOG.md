@@ -1,3 +1,10 @@
+# [1.24.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.23.0...v1.24.0) (2024-06-11)
+
+
+### Features
+
+* **modal:** L3-2144 added modal and updated button ([#167](https://github.com/PhillipsAuctionHouse/seldon/issues/167)) ([f42784b](https://github.com/PhillipsAuctionHouse/seldon/commit/f42784bd94c2d5703fb8839f09bc685ef091221f))
+
 # [1.23.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.22.2...v1.23.0) (2024-06-04)
 
 
