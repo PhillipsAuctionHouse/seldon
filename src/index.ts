@@ -1,5 +1,6 @@
 // ⚛️ Components
 export { default as Button, type ButtonProps } from './components/Button/Button';
+export { default as IconButton } from './components/IconButton/IconButton';
 // export { default as DatePicker, type DatePickerProps } from './components/DatePicker/DatePicker';
 export { default as ErrorBoundary, type ErrorBoundaryProps } from './components/ErrorBoundary/ErrorBoundary';
 export { default as Footer, type FooterProps } from './components/Footer/Footer';
@@ -33,6 +34,7 @@ export { default as SplitPanel, type SplitPanelProps } from './components/SplitP
 export { default as Subscribe, type SubscribeProps } from './components/Subscribe/Subscribe';
 export { default as Social, type SocialProps } from './components/Social/Social';
 export { default as ViewingsList, type ViewingsListProps } from './components/ViewingsList/ViewingsList';
+export { default as Modal, type ModalProps } from './components/Modal/Modal';
 export {
   default as StatefulViewingsList,
   type StatefulViewingsListProps,
