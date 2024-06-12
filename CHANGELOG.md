@@ -1,3 +1,10 @@
+# [1.25.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.24.0...v1.25.0) (2024-06-12)
+
+
+### Features
+
+* **modal:** L3-2144 changed modal appElementSelector ([#170](https://github.com/PhillipsAuctionHouse/seldon/issues/170)) ([bb4a318](https://github.com/PhillipsAuctionHouse/seldon/commit/bb4a318ed1520e6908e275758007e7565f2679ca))
+
 # [1.24.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.23.0...v1.24.0) (2024-06-11)
 
 
