@@ -16,6 +16,7 @@ describe('Modal', () => {
       </Modal>,
     );
 
+    expect(document.body).toHaveAttribute('aria-hidden', 'true');
     expect(screen.getByTestId('modal-button')).toBeInTheDocument();
     expect(screen.getByLabelText('Close Modal')).toBeInTheDocument();
     expect(screen.getByText('Modal Content')).toBeInTheDocument();
@@ -28,6 +29,7 @@ describe('Modal', () => {
       </Modal>,
     );
 
+    expect(document.body).not.toHaveAttribute('aria-hidden');
     expect(screen.queryByTestId('modal-button')).not.toBeInTheDocument();
     expect(screen.queryByLabelText('Close Modal')).not.toBeInTheDocument();
     expect(screen.queryByText('Modal Content')).not.toBeInTheDocument();

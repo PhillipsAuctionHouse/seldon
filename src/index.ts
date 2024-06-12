@@ -18,6 +18,7 @@ export { GridItemAlign } from './components/GridItem/types';
 export { default as Select, type SelectProps } from './components/Select/Select';
 export { default as SplitPanel, type SplitPanelProps } from './components/SplitPanel/SplitPanel';
 export { default as Subscribe, type SubscribeProps } from './components/Subscribe/Subscribe';
+export { type SubscriptionState } from './components/Subscribe/types';
 export { default as Social, type SocialProps } from './components/Social/Social';
 export { default as ViewingsList, type ViewingsListProps } from './components/ViewingsList/ViewingsList';
 export { default as Modal, type ModalProps } from './components/Modal/Modal';
