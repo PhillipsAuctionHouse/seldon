@@ -3,7 +3,6 @@ import { noOp, px } from '../../utils';
 import CloseIcon from '../../assets/close.svg?react';
 import ReactModal from 'react-modal';
 import IconButton from '../IconButton/IconButton';
-import { useMemo } from 'react';
 
 export interface ModalProps extends ReactModal.Props {
   /**
@@ -18,6 +17,10 @@ export interface ModalProps extends ReactModal.Props {
    * The selector for aria-hide
    */
   appElementSelector?: string;
+  /**
+   * The children of the modal
+   */
+  children: React.ReactNode;
 }
 
 /**
@@ -35,13 +38,11 @@ const Modal = ({
   appElementSelector = 'main',
   ...props
 }: ModalProps) => {
-  const appElement = useMemo(() => {
-    return document.querySelector(appElementSelector);
-  }, [appElementSelector]);
-
-  if (!isOpen || !appElement) {
+  if (!isOpen) {
     return null;
   }
+
+  ReactModal.setAppElement(appElementSelector);
 
   return (
     <ReactModal
@@ -49,8 +50,7 @@ const Modal = ({
       onRequestClose={onClose}
       className={classnames(`${px}-modal`, className)}
       overlayClassName={classnames(`${px}-modal__overlay`)}
-      appElement={(appElement as HTMLElement) ?? undefined}
-      ariaHideApp={!appElement}
+      ariaHideApp={isOpen}
       {...props}
     >
       <IconButton
