@@ -1,3 +1,10 @@
+## [1.25.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.25.0...v1.25.1) (2024-06-13)
+
+
+### Bug Fixes
+
+* **index.ts:** L3-2144 changed export type of subscription state ([#171](https://github.com/PhillipsAuctionHouse/seldon/issues/171)) ([3cdbada](https://github.com/PhillipsAuctionHouse/seldon/commit/3cdbadab84ef952e05b614d2c9cd837f08e7fe15))
+
 # [1.25.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.24.0...v1.25.0) (2024-06-12)
 
 
