@@ -1,8 +1,8 @@
 import React from 'react';
-import { px } from '../../utils';
-import classnames from 'classnames';
+import { determineDefaultComponentProps } from '../../utils';
 import { TextVariants } from './types';
 import { determineDefaultTextElement, determineTextClassName } from './utils';
+import classNames from 'classnames';
 
 export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -23,26 +23,12 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-text--overview)
  */
-const Text = ({
-  children,
-  id,
-  element: CustomElement,
-  variant = TextVariants.body2,
-  className,
-  ...props
-}: TextProps) => {
-  const dataTestId = id ? `text-${id}` : `text`;
-  const baseClassName = `${px}-text`;
-
+const Text = ({ children, element: CustomElement, variant = TextVariants.body2, ...props }: TextProps) => {
   const Component = CustomElement || determineDefaultTextElement(variant);
+  const { className: defaultClassName, ...defaultProps } = determineDefaultComponentProps(props, 'Text');
 
   return (
-    <Component
-      {...props}
-      data-testid={dataTestId}
-      id={id}
-      className={classnames(baseClassName, determineTextClassName(variant), className)}
-    >
+    <Component {...props} {...defaultProps} className={classNames(defaultClassName, determineTextClassName(variant))}>
       {children}
     </Component>
   );

@@ -1,8 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import Text, { TextProps } from './Text';
 import { TextVariants } from './types';
+import { runCommonTests } from '../../utils/testUtils';
 
 describe('Text', () => {
+  runCommonTests(Text, 'Text');
   const renderText = (props: TextProps) => {
     render(<Text {...props} />);
   };

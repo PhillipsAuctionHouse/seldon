@@ -1,6 +1,21 @@
+import classNames from 'classnames';
 import * as React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 export const px = 'phillips';
+
+export const determineDefaultComponentProps = (
+  { id, className, ...props }: Record<string, unknown>,
+  componentName: string,
+) => {
+  const lowerCaseComponentName = componentName.toLowerCase();
+  return {
+    ...props,
+    id,
+    'data-testid': id ? `${lowerCaseComponentName}-${id}` : `${lowerCaseComponentName}-${uuidv4()}`,
+    className: classNames(`${px}-${lowerCaseComponentName}`, className ?? ''),
+  };
+};
 
 export enum PaddingTokens {
   xs = 'xs',

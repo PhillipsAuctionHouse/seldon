@@ -7,11 +7,12 @@
 @import '#scss/typography';
 @import '#scss/sharedClasses';
 
+// 📑 Pages
+@import 'pages/page';
+
 // ⚛️ Components
 @import 'components/Button/button';
 @import 'components/IconButton/iconButton';
-
-// @import 'components/DatePicker/datePicker';
 @import 'components/Footer/footer';
 @import 'components/Grid/grid';
 @import 'components/Header/header';
@@ -29,6 +30,3 @@
 @import 'components/LinkList/linkList';
 @import 'components/Text/text';
 @import 'components/Modal/modal';
-
-// 📑 Pages
-@import 'pages/page';
