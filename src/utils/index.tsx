@@ -1,3 +1,4 @@
+import { kebabCase } from 'change-case';
 import classNames from 'classnames';
 import * as React from 'react';
 import { v4 as uuidv4 } from 'uuid';
@@ -8,12 +9,12 @@ export const determineDefaultComponentProps = (
   { id, className, ...props }: Record<string, unknown>,
   componentName: string,
 ) => {
-  const lowerCaseComponentName = componentName.toLowerCase();
+  const kebabCaseComponentName = kebabCase(componentName);
   return {
     ...props,
     id,
-    'data-testid': id ? `${lowerCaseComponentName}-${id}` : `${lowerCaseComponentName}-${uuidv4()}`,
-    className: classNames(`${px}-${lowerCaseComponentName}`, className ?? ''),
+    'data-testid': id ? `${kebabCaseComponentName}-${id}` : `${kebabCaseComponentName}-${uuidv4()}`,
+    className: classNames(`${px}-${kebabCaseComponentName}`, className ?? ''),
   };
 };
 

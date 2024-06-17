@@ -79,6 +79,12 @@ We use `semantic-release` to publish new releases when a commit of type `feat` o
 
 We would like our components to be created with accessibility support. Please check the [RadixUI](https://www.radix-ui.com/primitives/docs/overview/introduction) library of components first to see if there's a component that you can start from. It sets all the `aria-roles` correctly so screenreaders and other assistive technologies can read the elements. It also covers standard UX patterns and accessibility best practices like keyboard navigation that are quite expensive to implement. If we do have to build a component from scratch, please review the patterns [here](https://www.w3.org/WAI/ARIA/apg/patterns/) to make sure you cover accessibility.
 
+We have a helper script to start new component development in a consistent way. To use it, run:
+
+```sh
+npm run create-component <componentName>
+```
+
 ## Styling new components
 
 Components should have their own sass partial in which the corresponding styles
