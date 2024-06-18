@@ -1,3 +1,24 @@
+# [1.26.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.25.1...v1.26.0) (2024-06-18)
+
+
+### Features
+
+* **footer:** L3-2144 added margin ([#183](https://github.com/PhillipsAuctionHouse/seldon/issues/183)) ([8cee0fd](https://github.com/PhillipsAuctionHouse/seldon/commit/8cee0fdf6c081192340a7fd627a0c96fb1f62db2))
+
+## [1.25.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.25.0...v1.25.1) (2024-06-13)
+
+
+### Bug Fixes
+
+* **index.ts:** L3-2144 changed export type of subscription state ([#171](https://github.com/PhillipsAuctionHouse/seldon/issues/171)) ([3cdbada](https://github.com/PhillipsAuctionHouse/seldon/commit/3cdbadab84ef952e05b614d2c9cd837f08e7fe15))
+
+# [1.25.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.24.0...v1.25.0) (2024-06-12)
+
+
+### Features
+
+* **modal:** L3-2144 changed modal appElementSelector ([#170](https://github.com/PhillipsAuctionHouse/seldon/issues/170)) ([bb4a318](https://github.com/PhillipsAuctionHouse/seldon/commit/bb4a318ed1520e6908e275758007e7565f2679ca))
+
 # [1.24.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.23.0...v1.24.0) (2024-06-11)
 
 
