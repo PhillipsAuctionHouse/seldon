@@ -32,7 +32,7 @@
     "preview": "npx http-server storybook-static",
     "clean": "rimraf './dist'",
     "clean:stories": "rimraf './storybook-static'",
-    "createComponent": "node --no-warnings --loader ts-node/esm .template/scripts/createComponent.ts",
+    "create-component": "node --no-warnings --loader ts-node/esm .template/scripts/createComponent.ts",
     "format": "prettier . --write",
     "lint": "tsc --noEmit && eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 && npm run lint:styles",
     "lint:styles": "stylelint \"src/**/*.scss\" --fix",

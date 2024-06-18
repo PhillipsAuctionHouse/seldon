@@ -1,13 +1,8 @@
 import React from 'react';
-import { determineDefaultComponentProps } from '../../utils';
+import { getCommonProps } from '../../utils';
 
-// Be as specific as you can about the top-level element type
-export interface ComponentNameProps extends React.HTMLAttributes<HTMLElement> {
-  /**
-   * Optional element to render as the top-level component e.g. 'div', 'span', CustomComponent, etc.  Defaults to the appropriate HTML based on the variant.
-   */
-  element?: React.ElementType;
-}
+// You'll need to change the HTMLDivElement to match the top-level element of your component
+export interface ComponentNameProps extends React.HTMLAttributes<HTMLDivElement> {}
 /**
  * ## Overview
  *
@@ -17,14 +12,8 @@ export interface ComponentNameProps extends React.HTMLAttributes<HTMLElement> {
  *
  * [Storybook Link](Point back to yourself here)
  */
-const ComponentName = ({ children, element: CustomElement, ...props }: ComponentNameProps) => {
-  const Component = CustomElement || 'div';
-
-  return (
-    <Component {...props} {...determineDefaultComponentProps(props, 'ComponentName')}>
-      {children}
-    </Component>
-  );
+const ComponentName = ({ ...props }: ComponentNameProps) => {
+  return <div {...props} {...getCommonProps(props, 'ComponentName')}></div>;
 };
 
 export default ComponentName;

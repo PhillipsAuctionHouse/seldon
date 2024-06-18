@@ -5,8 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const px = 'phillips';
 
-export const determineDefaultComponentProps = (
-  { id, className, ...props }: Record<string, unknown>,
+export const getCommonProps = (
+  { id, className, ...props }: { id?: string; className?: string },
   componentName: string,
 ) => {
   const kebabCaseComponentName = kebabCase(componentName);

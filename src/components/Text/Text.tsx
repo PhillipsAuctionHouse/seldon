@@ -1,5 +1,5 @@
 import React from 'react';
-import { determineDefaultComponentProps } from '../../utils';
+import { getCommonProps } from '../../utils';
 import { TextVariants } from './types';
 import { determineDefaultTextElement, determineTextClassName } from './utils';
 import classNames from 'classnames';
@@ -25,7 +25,7 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
  */
 const Text = ({ children, element: CustomElement, variant = TextVariants.body2, ...props }: TextProps) => {
   const Component = CustomElement || determineDefaultTextElement(variant);
-  const { className: defaultClassName, ...defaultProps } = determineDefaultComponentProps(props, 'Text');
+  const { className: defaultClassName, ...defaultProps } = getCommonProps(props, 'Text');
 
   return (
     <Component {...props} {...defaultProps} className={classNames(defaultClassName, determineTextClassName(variant))}>
