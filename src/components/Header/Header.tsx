@@ -1,14 +1,13 @@
 import classnames from 'classnames';
 import * as React from 'react';
 import { px } from '../../utils';
-// import Navigation from '../Navigation/Navigation';
-// import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
-// import NavigationItemTrigger from '../Navigation/NavigationItemTrigger/NavigationItemTrigger';
-// import NavigationList from '../Navigation/NavigationList/NavigationList';
 import Search from '../Search/Search';
-// import { LinkVariants } from '../Link/utils';
 
 export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Default mobile menu label
+   */
+  defaultMobileMenuLabel?: string;
   /**
    * Logo src
    */
@@ -27,58 +26,55 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   toggleCloseText?: string;
 }
 type HeaderContextType = {
+  defaultMobileMenuLabel: string;
   expandedItem: string;
   setExpandedItem: (item: string) => void;
-  expanded: boolean;
-  handleSelection: (label: string) => void;
-  handleFocusEvent: (e: React.FocusEvent) => void;
+  isExpanded: boolean;
+  onSelect: (label: string) => void;
 };
 
-const defaultMobileMenuLabel = 'Main Menu';
 export const HeaderContext = React.createContext({
-  expandedItem: defaultMobileMenuLabel,
+  defaultMobileMenuLabel: '',
+  expandedItem: '',
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   setExpandedItem: (_item: string) => {},
-  expanded: false,
+  isExpanded: false,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  handleSelection: (_label: string) => {},
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  handleFocusEvent: (_e: React.FocusEvent) => {},
+  onSelect: (_label: string) => {},
 });
 
 const Header = ({
+  defaultMobileMenuLabel = 'Main Menu',
   logo,
   logoText,
   className,
   children,
   toggleOpenText = 'Open Menu',
   toggleCloseText = 'Close Menu',
+  ...props
 }: React.PropsWithChildren<HeaderProps>) => {
-  const [toggleText, setToggleText] = React.useState(toggleOpenText);
   const [toggleState, setToggleState] = React.useState(false);
   const [expandedItem, setExpandedItem] = React.useState(defaultMobileMenuLabel);
-  const expanded = expandedItem !== defaultMobileMenuLabel;
+  const toggleText = toggleState ? toggleCloseText : toggleOpenText;
+  const isExpanded = expandedItem !== defaultMobileMenuLabel;
   const handleMenuToggle = function () {
-    console.log('handleMenuToggle');
     setToggleState((prev) => !prev);
-    setToggleText((prev) => (prev === toggleOpenText ? toggleCloseText : toggleOpenText));
     setExpandedItem(defaultMobileMenuLabel);
   };
-  const handleSelection = function (label: string) {
-    console.log('handleSelection', label);
+  const onSelect = function (label: string) {
     setExpandedItem((prev) => (prev === defaultMobileMenuLabel ? label : defaultMobileMenuLabel));
   };
-  const handleFocusEvent = (e: React.FocusEvent) => {
-    console.log('handleFocusEvent', e.target, e.relatedTarget);
-    console.log(e.target.parentNode !== e.relatedTarget?.parentNode, e.target);
-    if (e.target.parentNode?.parentNode !== e.relatedTarget?.parentNode?.parentNode) {
-      console.log('Something happened', e.target.parentNode, e.relatedTarget?.parentNode);
-      setExpandedItem(defaultMobileMenuLabel);
-    }
-  };
+
   return (
-    <header className={classnames(`${px}-header`, className)}>
+    <header {...props} className={classnames(`${px}-header`, className)}>
+      <div
+        className={classnames(`${px}-header__overlay`, { [`${px}-header__overlay--active`]: toggleState })}
+        data-testid="header-overlay"
+        onClick={handleMenuToggle}
+      />
       <button
+        aria-label={toggleText}
+        data-testid="mobile-menu-toggle"
         type="button"
         onClick={handleMenuToggle}
         className={classnames(`${px}-header__toggle-btn`, {
@@ -88,17 +84,17 @@ const Header = ({
         <span>{toggleText}</span>
       </button>
       <h1 className={`${px}-header__logo`} tabIndex={toggleText === toggleOpenText ? 0 : -1}>
-        <img src={logo} height="14" alt={logoText} />
+        <img data-testid="header-logo" src={logo} height="14" alt={logoText} />
       </h1>
       <div className={classnames(`${px}-header__nav`, { [`${px}-header__nav--open`]: toggleState })}>
         <HeaderContext.Provider
           value={
             {
+              defaultMobileMenuLabel,
               expandedItem,
               setExpandedItem: (item: string) => setExpandedItem(item),
-              expanded,
-              handleSelection: (label: string) => handleSelection(label),
-              handleFocusEvent: (e: React.FocusEvent) => handleFocusEvent(e),
+              isExpanded,
+              onSelect: (label: string) => onSelect(label),
             } as HeaderContextType
           }
         >

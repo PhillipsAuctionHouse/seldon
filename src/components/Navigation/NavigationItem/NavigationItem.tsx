@@ -5,7 +5,7 @@ import Link from '../../Link/Link';
 import { LinkVariants } from '../../Link/utils';
 import { HeaderContext } from '../../Header/Header';
 
-export interface NavigationItemProps extends React.HTMLAttributes<HTMLElement> {
+export interface NavigationItemProps extends React.HTMLAttributes<HTMLLIElement> {
   /**
    * Optional badge for navigation item. Used currently for location of auctions
    */
@@ -39,13 +39,8 @@ const NavigationItem = ({
 }: React.PropsWithChildren<NavigationItemProps>) => {
   const { expandedItem } = React.useContext(HeaderContext);
   return (
-    <li data-testid={`nav-item`} className={classNames(`${px}-nav__item`, navGroup, className)}>
-      <Link
-        {...props}
-        href={href}
-        variant={navType ? navType : LinkVariants.navMain}
-        tabIndex={expandedItem === '' ? 0 : -1}
-      >
+    <li {...props} data-testid={`nav-item-${label}`} className={classNames(`${px}-nav__item`, navGroup, className)}>
+      <Link href={href} variant={navType ? navType : LinkVariants.navMain} tabIndex={expandedItem === '' ? 0 : -1}>
         <span className={`${px}-nav__item--label`}>{label}</span>
         {badge ? <span className={`${px}-nav__item--badge `}>{badge}</span> : null}
       </Link>

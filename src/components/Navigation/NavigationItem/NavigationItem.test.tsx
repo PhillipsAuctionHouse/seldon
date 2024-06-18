@@ -21,7 +21,7 @@ describe('NavigationItem', () => {
   it('renders the navigation item with custom class name correctly', () => {
     render(<NavigationItem href="/" label="Home" className="custom-class" />);
 
-    const navigationItem = screen.getByTestId('nav-item');
+    const navigationItem = screen.getByTestId('nav-item-Home');
     expect(navigationItem).toBeInTheDocument();
     expect(navigationItem).toHaveClass('custom-class');
   });

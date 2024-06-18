@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { px } from '../../utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import { HeaderContext } from '../Header/Header';
 
 export interface NavigationProps extends React.HTMLAttributes<HTMLElement> {
@@ -18,20 +18,27 @@ const Navigation = ({
   id,
   visible = true,
 }: React.PropsWithChildren<NavigationProps>) => {
-  const { expanded, expandedItem, setExpandedItem } = React.useContext(HeaderContext);
-  const onBack = () => setExpandedItem(expandedItem === 'Main Menu' ? expandedItem : 'Main Menu');
+  const { defaultMobileMenuLabel, isExpanded, expandedItem, setExpandedItem } = React.useContext(HeaderContext);
+  const onBack = () => setExpandedItem(expandedItem === defaultMobileMenuLabel ? expandedItem : defaultMobileMenuLabel);
   return (
     <nav
+      role="navigation"
       aria-labelledby={`${id}-label`}
-      data-testid={id ? `nav-${id}` : `nav`}
+      data-testid={id}
       id={id}
-      className={classNames(`${px}-nav`, className, { [`${px}-nav--expanded`]: expanded })}
+      className={classnames(`${px}-nav`, className, { [`${px}-nav--expanded`]: isExpanded })}
     >
-      <button tabIndex={expanded ? 0 : -1} className={`${px}-nav__back-btn`} onClick={onBack}>
+      <button
+        data-testid={`${id}-back-btn`}
+        tabIndex={isExpanded ? 0 : -1}
+        className={`${px}-nav__back-btn`}
+        onClick={onBack}
+      >
         {backBtnLabel}
       </button>
       <h2
         id={`${id}-label`}
+        data-testid={`${id}-label`}
         className={`${px}-nav__label`}
         style={{ '--visible': visible ? 'visible' : 'hidden' } as React.CSSProperties}
       >

@@ -17,23 +17,30 @@ const Search = ({ altText = 'Search', useIcon = true }: React.PropsWithChildren<
   };
 
   return (
-    <div className={`${px}-search`}>
+    <div data-testid="header-search" className={`${px}-search`} role="search">
       <div
         data-testid="search-overlay"
         className={classnames(`${px}-search__overlay`, { [`${px}-search__overlay--active`]: overlayEnabled })}
         onClick={showSearch}
       />
       <button data-testid="search-button" className={`${px}-search__button`} onClick={showSearch}>
-        {useIcon ? <SearchIcon className={`${px}-search__button__icon`} /> : `Search`}
+        {useIcon ? (
+          <SearchIcon data-testid={`search-button-icon`} className={`${px}-search__button__icon`} />
+        ) : (
+          `Search`
+        )}
       </button>
-      <div
+      <form
+        data-testid="search-form"
         className={classnames(
           `${px}-search__input-wrapper`,
           { [`${px}-search__input-wrapper--active`]: overlayEnabled },
           { [`${px}-search__input-wrapper--use-icon`]: useIcon },
         )}
       >
-        {useIcon ? <SearchIcon className={`${px}-search__input-wrapper__icon`} /> : null}
+        {useIcon ? (
+          <SearchIcon data-testid={`search-form-icon`} className={`${px}-search__input-wrapper__icon`} />
+        ) : null}
         <Input
           className={`${px}-search__input`}
           alt={altText}
@@ -41,7 +48,7 @@ const Search = ({ altText = 'Search', useIcon = true }: React.PropsWithChildren<
           placeholder={`Type to search`}
           type="text"
         />
-      </div>
+      </form>
     </div>
   );
 };

@@ -6,39 +6,34 @@ import { HeaderContext } from '../../Header/Header';
 
 export type NavigationListProps = React.HTMLAttributes<HTMLElement>;
 
-const NavigationList = ({ children, className }: React.PropsWithChildren<NavigationListProps>) => {
-  const { expanded } = React.useContext(HeaderContext);
-  const largeCtaItems: React.ReactNode[] = [];
-  const smallCtaItems: React.ReactNode[] = [];
-  React.Children.map(
-    children as React.ReactElement<NavigationItemProps>[],
-    (child: React.ReactElement<NavigationItemProps>) => {
-      if (child && child.props.navGroup === 'nav-link-lg') {
-        largeCtaItems.push(child);
-      } else if (child && child.props.navGroup === 'nav-link-sm') {
-        smallCtaItems.push(child);
-      }
-    },
-  );
-
+const NavigationList = ({ id, children, className }: React.PropsWithChildren<NavigationListProps>) => {
+  const { isExpanded } = React.useContext(HeaderContext);
+  const largeCtaItems = React.Children.toArray(children).filter((child) => {
+    if (child && (child as React.ReactElement<NavigationItemProps>).props.navGroup === 'nav-link-lg') {
+      return child;
+    }
+  });
+  const smallCtaItems = React.Children.toArray(children).filter((child) => {
+    if (child && (child as React.ReactElement<NavigationItemProps>).props.navGroup === 'nav-link-sm') {
+      return child;
+    }
+  });
   return (
     <ul
-      id="nav-list"
-      data-testid="nav-list"
-      className={classNames(className, `${px}-nav__list`, { [`${px}-nav__list--expanded`]: expanded })}
+      id={id}
+      data-testid={id}
+      role="list"
+      aria-expanded={isExpanded}
+      className={classNames(className, `${px}-nav__list`, { [`${px}-nav__list--expanded`]: isExpanded })}
     >
       {largeCtaItems.length > 0 ? (
         <div className={classNames(`${px}-nav__list__section`, `${px}-nav__list__section--large-cta`)}>
-          {largeCtaItems.map((item, index) => (
-            <React.Fragment key={index}>{item}</React.Fragment>
-          ))}
+          {largeCtaItems.map((item: React.ReactNode) => item)}
         </div>
       ) : null}
       {smallCtaItems.length > 0 ? (
         <div className={classNames(`${px}-nav__list__section`, `${px}-nav__list__section--small-cta`)}>
-          {smallCtaItems.map((item, index) => (
-            <React.Fragment key={index}>{item}</React.Fragment>
-          ))}
+          {smallCtaItems.map((item: React.ReactNode) => item)}
         </div>
       ) : null}
       {!largeCtaItems.length && !smallCtaItems.length ? children : null}

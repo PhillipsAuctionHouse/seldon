@@ -92,5 +92,11 @@
         text-wrap: wrap;
       }
     }
+
+    .#{$px}-link--navLinkSm {
+      .#{$px}-nav__item--label {
+        color: $cta-blue;
+      }
+    }
   }
 }

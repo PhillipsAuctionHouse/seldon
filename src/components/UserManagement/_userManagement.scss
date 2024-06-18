@@ -25,6 +25,13 @@
 
   > li {
     border: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+    > button {
+      width: auto;
+    }
   }
 
   &__account-wrapper {
@@ -55,7 +62,7 @@
     &:focus,
     &:focus-within {
       path {
-        fill: #5b5b5b;
+        fill: $soft-black;
       }
     }
 
@@ -83,11 +90,12 @@
           background: #f4f4f4;
           box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 85%);
           display: block;
-          left: -2.75rem;
+          left: unset;
           min-height: unset;
           min-width: 130px;
           padding: 0;
           position: absolute;
+          right: 0;
           top: 30px;
           width: 100%;
 

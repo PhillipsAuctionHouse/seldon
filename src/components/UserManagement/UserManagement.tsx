@@ -1,7 +1,7 @@
 import React from 'react';
 import { px } from '../../utils';
 import Input from '../Input/Input';
-import AccountCircleGrey from '../../assets/account_circle_grey.svg?react';
+import AccountCircle from '../../assets/account_circle.svg?react';
 import NavigationItemTrigger from '../Navigation/NavigationItemTrigger/NavigationItemTrigger';
 import NavigationList from '../Navigation/NavigationList/NavigationList';
 import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
@@ -14,11 +14,11 @@ const UserManagement = ({ children }: React.PropsWithChildren<UserManagementProp
   return (
     <div data-testid="user-management" className={`${px}-user-management`}>
       <span className={`${px}-user-management__account-wrapper`}>
-        <AccountCircleGrey className={`${px}-user-management__account-icon`} />
+        <AccountCircle className={`${px}-user-management__account-icon`} />
         <NavigationItem href="#login" label={`Login`} />
       </span>
       <NavigationItemTrigger className={`${px}-user-management__language`} label={language}>
-        <NavigationList className={`${px}-user-management__language__selections`}>
+        <NavigationList id={`${px}-langauge-selection-list`} className={`${px}-user-management__language__selections`}>
           <li>
             <Input
               type="radio"

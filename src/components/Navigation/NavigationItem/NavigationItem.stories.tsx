@@ -6,7 +6,6 @@ import NavigationItem from './NavigationItem';
 const meta = {
   title: 'Components/NavigationItem',
   component: NavigationItem,
-  tags: ['autodocs'],
 } satisfies Meta<typeof NavigationItem>;
 
 export default meta;

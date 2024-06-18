@@ -1,4 +1,5 @@
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Navigation, { NavigationProps } from './Navigation';
 import NavigationItemTrigger from './NavigationItemTrigger/NavigationItemTrigger';
 
@@ -15,22 +16,22 @@ describe('Navigation', () => {
   });
 
   it('renders with back button label', () => {
-    const { getByText } = render(<Navigation {...defaultProps} />);
-    expect(getByText('Back')).toBeInTheDocument();
+    const { getByTestId } = render(<Navigation {...defaultProps} />);
+    expect(getByTestId('phillips-nav-back-btn')).toBeInTheDocument();
   });
 
   it('renders mobile menu with default value', () => {
-    const { getByText } = render(<Navigation {...defaultProps} />);
-    expect(getByText('Main Menu')).toBeInTheDocument();
+    const { getByTestId } = render(<Navigation {...defaultProps} />);
+    expect(getByTestId('phillips-nav-label')).toBeInTheDocument();
   });
 
-  it('renders mobile menu with expanded item value', () => {
-    const { getByText } = render(
+  it('renders mobile menu with expanded item value', async () => {
+    const { getByText, getByTestId } = render(
       <Navigation {...defaultProps}>
-        <NavigationItemTrigger label="Auctions"></NavigationItemTrigger>
+        <NavigationItemTrigger id="auctions" label="Auctions"></NavigationItemTrigger>
       </Navigation>,
     );
-    fireEvent.click(getByText('Auctions'));
+    await userEvent.click(getByTestId('nav-item-trigger-auctions'));
     expect(getByText(expandedItem)).toBeInTheDocument();
   });
 });
