@@ -23,12 +23,16 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-text--overview)
  */
-const Text = ({ children, element: CustomElement, variant = TextVariants.body2, ...props }: TextProps) => {
+const Text = ({ children, className, element: CustomElement, variant = TextVariants.body2, ...props }: TextProps) => {
   const Component = CustomElement || determineDefaultTextElement(variant);
-  const { className: defaultClassName, ...defaultProps } = getCommonProps(props, 'Text');
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Text');
 
   return (
-    <Component {...props} {...defaultProps} className={classNames(defaultClassName, determineTextClassName(variant))}>
+    <Component
+      {...props}
+      {...commonProps}
+      className={classNames(baseClassName, className, determineTextClassName(variant))}
+    >
       {children}
     </Component>
   );

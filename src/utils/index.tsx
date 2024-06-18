@@ -1,20 +1,18 @@
 import { kebabCase } from 'change-case';
-import classNames from 'classnames';
 import * as React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 export const px = 'phillips';
 
-export const getCommonProps = (
-  { id, className, ...props }: { id?: string; className?: string },
-  componentName: string,
-) => {
+/**
+ * Returns standard props values incorporating the component name into the class name and data-testid
+ */
+export const getCommonProps = ({ id, ...props }: { id?: string }, componentName: string) => {
   const kebabCaseComponentName = kebabCase(componentName);
   return {
     ...props,
-    id,
     'data-testid': id ? `${kebabCaseComponentName}-${id}` : `${kebabCaseComponentName}-${uuidv4()}`,
-    className: classNames(`${px}-${kebabCaseComponentName}`, className ?? ''),
+    className: `${px}-${kebabCaseComponentName}`,
   };
 };
 
