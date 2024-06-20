@@ -2,11 +2,9 @@
 @import '#scss/utils';
 
 .#{$px}-grid {
-  &__container {
-    @include gridContainer(false);
-  }
+  @include gridContainer(false);
 
-  &__container--has-margins {
+  &--has-margins {
     margin: 0 $spacing-md;
 
     @media (min-width: 1401px) {

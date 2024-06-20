@@ -1,6 +1,7 @@
 import LinkBlock, { type LinkBlockProps } from '../LinkBlock/LinkBlock';
 import React from 'react';
-import { px } from '../../utils';
+import { getCommonProps } from '../../utils';
+import classnames from 'classnames';
 import Grid from '../Grid/Grid';
 
 export interface LinkListProps extends React.HTMLAttributes<HTMLUListElement> {
@@ -17,12 +18,11 @@ export interface LinkListProps extends React.HTMLAttributes<HTMLUListElement> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-links-linklist--overview)
  */
 
-const LinkList = ({ children, id, ...props }: LinkListProps) => {
-  const dataTestId = id ? `link-list-${id}` : `link-list`;
-  const baseClassName = `${px}-link-list`;
+const LinkList = ({ children, className, ...props }: LinkListProps) => {
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'LinkList');
 
   return (
-    <Grid {...props} data-testid={dataTestId} id={id} className={baseClassName} element="ul" role="list">
+    <Grid {...commonProps} className={classnames(baseClassName, className)} element="ul" role="list" {...props}>
       {children.map((LinkBlockComponent) => {
         if (React.isValidElement(LinkBlockComponent) && LinkBlockComponent.type !== LinkBlock) {
           console.warn('LinkList only accepts LinkBlock children');

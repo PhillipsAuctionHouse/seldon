@@ -1,8 +1,11 @@
 import { render, screen } from '@testing-library/react';
 
 import SplitPanel from './SplitPanel';
+import { runCommonTests } from '../../utils/testUtils';
 
 describe('SplitPanel', () => {
+  runCommonTests(SplitPanel, 'SplitPanel');
+
   it('is selectable by the test id', () => {
     render(<SplitPanel id="SplitPanel-test" />);
     expect(screen.queryByTestId(/SplitPanel-test/)).toBeInTheDocument();

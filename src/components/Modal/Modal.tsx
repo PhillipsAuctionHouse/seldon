@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { noOp, px } from '../../utils';
+import { getCommonProps, noOp } from '../../utils';
 import CloseIcon from '../../assets/close.svg?react';
 import ReactModal from 'react-modal';
 import IconButton from '../IconButton/IconButton';
@@ -42,22 +42,26 @@ const Modal = ({
     return null;
   }
 
+  const { className: baseClassName, 'data-testid': testId, ...commonProps } = getCommonProps(props, 'Modal');
+
   ReactModal.setAppElement(appElementSelector);
 
   return (
     <ReactModal
+      {...commonProps}
       isOpen={isOpen}
       onRequestClose={onClose}
-      className={classnames(`${px}-modal`, className)}
-      overlayClassName={classnames(`${px}-modal__overlay`)}
+      className={classnames(baseClassName, className)}
+      overlayClassName={classnames(`${baseClassName}__overlay`)}
       ariaHideApp={isOpen}
+      testId={testId}
       {...props}
     >
       <IconButton
-        data-testid="modal-button"
+        id="modal-button"
         onClick={onClose}
         aria-label="Close Modal"
-        className={classnames(`${px}-modal__close`)}
+        className={classnames(`${baseClassName}__close`)}
       >
         <CloseIcon />
       </IconButton>

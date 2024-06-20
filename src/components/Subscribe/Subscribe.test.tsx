@@ -3,20 +3,23 @@ import { userEvent } from '@testing-library/user-event';
 
 import Subscribe from './Subscribe';
 import { SubscriptionState } from './types';
+import { runCommonTests } from '../../utils/testUtils';
 
 describe('Subscribe', () => {
+  runCommonTests(Subscribe, 'Subscribe');
+
   it('is selectable by the test id', () => {
     render(<Subscribe id="test" />);
-    expect(screen.queryByTestId('test')).toBeInTheDocument();
+    expect(screen.getByTestId('subscribe-test')).toBeInTheDocument();
   });
 
   it('it will render a blurb if one is passed in', () => {
     render(<Subscribe title="Subscribe to Email" blurb="This blurb will be rendered" />);
-    expect(screen.queryByText(/This blurb will be rendered/)).toBeInTheDocument();
+    expect(screen.getByText(/This blurb will be rendered/)).toBeInTheDocument();
   });
   it('it will render a loading if subscriptionState=loading', () => {
     render(<Subscribe title="Subscribe to Email" subscriptionState={SubscriptionState.Loading} />);
-    expect(screen.queryByText(/Loading.../)).toBeInTheDocument();
+    expect(screen.getByText(/Loading.../)).toBeInTheDocument();
   });
   it('it will render an error if subscriptionState=invalid and invalidText passed', () => {
     render(
@@ -26,13 +29,13 @@ describe('Subscribe', () => {
         invalidText="Invalid input"
       />,
     );
-    expect(screen.queryByText(/Invalid input/)).toBeInTheDocument();
+    expect(screen.getByText(/Invalid input/)).toBeInTheDocument();
   });
   it('it will render an success text if subscriptionState=success', () => {
     render(
       <Subscribe title="Subscribe to Email" subscriptionState={SubscriptionState.Success} successText="Success" />,
     );
-    expect(screen.queryByText(/Success/)).toBeInTheDocument();
+    expect(screen.getByText(/Success/)).toBeInTheDocument();
   });
 
   it('it will call the callback function on submit', async () => {

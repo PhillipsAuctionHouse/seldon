@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
 
-import { px } from '../../utils';
+import { getCommonProps } from '../../utils';
 import ViewingsListCard, { ViewingsListCardProps } from './ViewingsListCard';
 import Button from '../Button/Button';
 
@@ -32,7 +32,7 @@ export interface I18nObject {
   viewingHours2Label?: string;
 }
 
-export interface ViewingsListProps {
+export interface ViewingsListProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * String for Viewing cards that gets nuber appended. EX: 'Title {x}`
    */
@@ -71,17 +71,21 @@ const getRandomNum = () => Math.floor(Math.random() * 100) + Date.now();
 
 const ViewingsList = ({
   cardTitle = 'Viewing Details',
-  id,
+  className,
   i18n = {},
   onAdd,
   onDelete,
   onSave,
   title,
   viewings,
+  ...props
 }: ViewingsListProps) => {
   const [viewingList, setViewingsList] = React.useState(viewings);
   const [hasUnsavedData, setHasUnsavedData] = React.useState('');
   const [oldState, setOldState] = React.useState<ViewingsListCardProps | string>();
+
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ViewingsList');
+
   React.useEffect(() => {
     setViewingsList(viewings);
   }, [viewings]);
@@ -119,8 +123,8 @@ const ViewingsList = ({
   };
 
   return (
-    <div className={classnames(`${px}-viewings-list`)} id={id} key={hasUnsavedData}>
-      <h2 className={classnames(`${px}-viewings-list__title`)}>{title}</h2>
+    <div {...commonProps} className={classnames(baseClassName, className)} key={hasUnsavedData} {...props}>
+      <h2 className={classnames(`${baseClassName}__title`)}>{title}</h2>
       {viewingList?.map((item, index) => (
         <ViewingsListCard
           key={`${item.id}`}
@@ -134,7 +138,7 @@ const ViewingsList = ({
           onSave={handleOnSave}
         />
       ))}
-      <Button id={`viewings-list-add-btn-${id || getRandomNum()}`} size="sm" onClick={handleOnAdd}>
+      <Button id={`viewings-list-add-btn-${props.id || getRandomNum()}`} size="sm" onClick={handleOnAdd}>
         {addViewingsBtnLabel}
       </Button>
     </div>

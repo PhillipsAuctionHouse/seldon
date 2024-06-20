@@ -1,6 +1,5 @@
 import { kebabCase } from 'change-case';
 import * as React from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 export const px = 'phillips';
 
@@ -11,7 +10,7 @@ export const getCommonProps = ({ id, ...props }: { id?: string }, componentName:
   const kebabCaseComponentName = kebabCase(componentName);
   return {
     ...props,
-    'data-testid': id ? `${kebabCaseComponentName}-${id}` : `${kebabCaseComponentName}-${uuidv4()}`,
+    'data-testid': id ? `${kebabCaseComponentName}-${id}` : `${kebabCaseComponentName}`,
     className: `${px}-${kebabCaseComponentName}`,
   };
 };
@@ -26,17 +25,6 @@ export enum PaddingTokens {
 
 /* eslint-disable @typescript-eslint/no-empty-function */
 export const noOp = () => {};
-
-export interface CommonProps {
-  /**
-   * Optional className to be applied to the outer most element
-   */
-  className?: string;
-  /**
-   * A custom `id`
-   */
-  id?: string;
-}
 
 export interface InputProps {
   /**
