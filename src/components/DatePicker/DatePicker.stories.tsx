@@ -16,6 +16,11 @@ interface StoryProps extends DatePickerProps {
 }
 
 const argTypes = {
+  allowInput: {
+    control: {
+      type: 'boolean',
+    },
+  },
   className: {
     control: {
       type: 'text',
@@ -175,6 +180,7 @@ Playground.args = {
   playgroundWidth: 300,
   className: 'DatePicker-test-class',
   defaultValue: undefined,
+  allowInput: true,
   disabled: false,
   invalid: false,
   invalidText: 'Error message',

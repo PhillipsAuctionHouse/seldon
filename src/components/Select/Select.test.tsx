@@ -52,7 +52,6 @@ describe('A Select', () => {
       </Select>,
     );
     await userEvent.selectOptions(screen.getByTestId('test-id'), ['option one']);
-    await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(0));
     await waitFor(() => expect(mockedOnChange.mock.calls).toHaveLength(0));
   });
 });

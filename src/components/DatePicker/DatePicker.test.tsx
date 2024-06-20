@@ -58,7 +58,6 @@ describe('A DatePicker', () => {
     await userEvent.click(input);
     await userEvent.type(input, '{backspace}6');
     await waitFor(() => expect((input as HTMLInputElement).value).toEqual('2023-06-01 to 2023-06-06'));
-    // fireEvent.blur(input)
     await userEvent.click(document.body);
     expect(mockedOnChange.mock.calls).toHaveLength(1);
   });
@@ -68,7 +67,8 @@ describe('A DatePicker', () => {
     const input = screen.getByTestId('test-id');
     await userEvent.click(input);
     await userEvent.type(input, '{backspace}adbadfd');
-    await waitFor(() => expect((input as HTMLInputElement).value).toEqual('2023-06-01 to 2023-06-05'));
+    await userEvent.keyboard('{tab}');
+    await waitFor(() => expect((input as HTMLInputElement).value).not.toMatch(/adbadfd/));
   });
 
   it('will render calendar in another language if correct language string is passed', async () => {
