@@ -1,3 +1,10 @@
+# [1.26.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.25.1...v1.26.0) (2024-06-18)
+
+
+### Features
+
+* **footer:** L3-2144 added margin ([#183](https://github.com/PhillipsAuctionHouse/seldon/issues/183)) ([8cee0fd](https://github.com/PhillipsAuctionHouse/seldon/commit/8cee0fdf6c081192340a7fd627a0c96fb1f62db2))
+
 ## [1.25.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.25.0...v1.25.1) (2024-06-13)
 
 
