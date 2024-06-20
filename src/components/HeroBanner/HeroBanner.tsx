@@ -1,6 +1,8 @@
-import { px } from '../../utils';
+import { HTMLAttributes } from 'react';
+import { getCommonProps } from '../../utils';
+import classnames from 'classnames';
 
-export interface HeroBannerProps {
+export interface HeroBannerProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * informational text above the header (e.g. region label or "buy now")
    */
@@ -31,8 +33,6 @@ export interface HeroBannerProps {
   id?: string;
 }
 
-const baseClass = `${px}-hero-banner`;
-
 /**
  * ## Overview
  *
@@ -43,13 +43,24 @@ const baseClass = `${px}-hero-banner`;
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-herobanner--overview)
  */
 
-const HeroBanner = ({ prehead, date, headerText, subHeadText, association, background, id }: HeroBannerProps) => {
+const HeroBanner = ({
+  prehead,
+  date,
+  headerText,
+  subHeadText,
+  association,
+  background,
+  className,
+  ...props
+}: HeroBannerProps) => {
+  const { className: baseClass, ...commonProps } = getCommonProps(props, 'HeroBanner');
+
   return (
     <header
-      data-testid={id ? `hero-banner-${id}` : `hero-banner`}
-      id={id}
-      className={baseClass}
+      {...commonProps}
+      className={classnames(baseClass, className)}
       style={{ '--background': background } as React.CSSProperties}
+      {...props}
     >
       <span className={`${baseClass}__content-wrapper`}>
         {prehead || date ? (

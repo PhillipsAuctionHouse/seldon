@@ -1,8 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import GridItem from './GridItem';
 import { GridItemAlign } from './types';
+import { runCommonTests } from '../../utils/testUtils';
 
 describe('GridItem', () => {
+  runCommonTests(GridItem, 'GridItem');
+
   it('renders children correctly', () => {
     render(<GridItem>Child</GridItem>);
     expect(screen.getByText('Child')).toBeInTheDocument();

@@ -2,10 +2,13 @@ import { render, screen } from '@testing-library/react';
 import Link from './Link';
 import { LinkVariants } from './utils';
 import { getLinkVariantClassName } from './utils';
+import { runCommonTests } from '../../utils/testUtils';
 
 const getLinkElement = (text: string) => screen.getByRole('link', { name: text });
 
 describe('Link', () => {
+  runCommonTests((props) => <Link {...props} href="test" />, 'Link');
+
   it('renders a link with the provided href', () => {
     render(<Link href="https://example.com">Example Link</Link>);
     const linkElement = getLinkElement('Example Link');

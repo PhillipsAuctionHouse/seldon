@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import Modal from './Modal';
 import userEvent from '@testing-library/user-event';
+import { runCommonTests } from '../../utils/testUtils';
 
 describe('Modal', () => {
   const onCloseMock = vi.fn();
@@ -8,16 +9,17 @@ describe('Modal', () => {
   afterEach(() => {
     vi.clearAllMocks();
   });
+  runCommonTests((props) => <Modal {...props} isOpen appElementSelector="body"></Modal>, 'Modal');
 
   it('renders the modal when isOpen is true', () => {
     render(
-      <Modal isOpen={true} onClose={onCloseMock} appElementSelector="body">
+      <Modal isOpen onClose={onCloseMock} appElementSelector="body">
         <div>Modal Content</div>
       </Modal>,
     );
 
     expect(document.body).toHaveAttribute('aria-hidden', 'true');
-    expect(screen.getByTestId('modal-button')).toBeInTheDocument();
+    expect(screen.getByTestId('icon-button-modal-button')).toBeInTheDocument();
     expect(screen.getByLabelText('Close Modal')).toBeInTheDocument();
     expect(screen.getByText('Modal Content')).toBeInTheDocument();
   });
@@ -30,14 +32,14 @@ describe('Modal', () => {
     );
 
     expect(document.body).not.toHaveAttribute('aria-hidden');
-    expect(screen.queryByTestId('modal-button')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('icon-button-modal-button')).not.toBeInTheDocument();
     expect(screen.queryByLabelText('Close Modal')).not.toBeInTheDocument();
     expect(screen.queryByText('Modal Content')).not.toBeInTheDocument();
   });
 
   it('calls the onClose function when the close button is clicked', async () => {
     render(
-      <Modal isOpen={true} onClose={onCloseMock} appElementSelector="body">
+      <Modal isOpen onClose={onCloseMock} appElementSelector="body">
         <div>Modal Content</div>
       </Modal>,
     );

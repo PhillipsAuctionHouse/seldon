@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 
-import { px } from '../../utils';
+import { getCommonProps } from '../../utils';
 
-export interface SocialProps extends React.HTMLAttributes<HTMLElement> {
+export interface SocialProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Title text for the social section
    */
@@ -19,11 +19,14 @@ export interface SocialProps extends React.HTMLAttributes<HTMLElement> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-social--overview)
  */
 
-const Social = ({ className, children, id, titleText = 'Follow on Social' }: SocialProps) => (
-  <div data-testid={id ? id : `social`} className={classnames(`${px}-social`, className)}>
-    <h3 className={`${px}-social__header`}>{titleText}</h3>
-    {children}
-  </div>
-);
+const Social = ({ className, children, titleText = 'Follow on Social', ...props }: SocialProps) => {
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Social');
+  return (
+    <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
+      <h3 className={`${baseClassName}__header`}>{titleText}</h3>
+      {children}
+    </div>
+  );
+};
 
 export default Social;

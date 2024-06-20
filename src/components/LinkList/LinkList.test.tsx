@@ -2,6 +2,7 @@ import LinkBlock, { LinkBlockProps } from '../LinkBlock/LinkBlock';
 import { render, screen } from '@testing-library/react';
 import LinkList from './LinkList';
 import Button from '../Button/Button';
+import { runCommonTests } from '../../utils/testUtils';
 
 const LinkBlocks: React.ReactElement<LinkBlockProps, typeof LinkBlock>[] = [
   <LinkBlock
@@ -34,6 +35,8 @@ describe('LinkList component', () => {
   afterEach(() => {
     vi.clearAllMocks();
   });
+  runCommonTests((props) => <LinkList {...props}>{LinkBlocks}</LinkList>, 'LinkList');
+
   it('check testid', () => {
     render(<LinkList id="test">{LinkBlocks}</LinkList>);
 

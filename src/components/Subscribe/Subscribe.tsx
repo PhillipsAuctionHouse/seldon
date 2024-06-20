@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 
-import { px } from '../../utils';
+import { getCommonProps } from '../../utils';
 import Input from '../Input/Input';
 import Button, { ButtonProps } from '../Button/Button';
 import { SubscriptionState } from './types';
@@ -68,7 +68,6 @@ const Subscribe = ({
   buttonProps,
   className,
   element: Element = 'form',
-  id,
   inputLabelText = 'Email*',
   inputPlaceholder = 'example@email.com',
   title = 'Subscribe to Newsletter',
@@ -78,6 +77,8 @@ const Subscribe = ({
   subscriptionState = SubscriptionState.Default,
   ...props
 }: SubscribeProps) => {
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Subscribe');
+
   const isInvalid = subscriptionState === 'invalid';
   const isLoading = subscriptionState === 'loading';
   const isSuccess = subscriptionState === 'success';
@@ -92,18 +93,12 @@ const Subscribe = ({
   const warn = isSuccess || isLoading;
 
   return (
-    <Element
-      data-testid={id ? id : `subscribe-form`}
-      id={id}
-      className={classnames(`${px}-subscribe`, className)}
-      noValidate
-      {...props}
-    >
-      <h3 className={`${px}-subscribe__title`}>{title}</h3>
-      {blurb ? <p className={`${px}-subscribe__blurb`}>{blurb}</p> : null}
+    <Element {...commonProps} className={classnames(baseClassName, className)} noValidate {...props}>
+      <h3 className={`${baseClassName}__title`}>{title}</h3>
+      {blurb ? <p className={`${baseClassName}__blurb`}>{blurb}</p> : null}
 
       <Input
-        className={`${px}-subscribe__input`}
+        className={`${baseClassName}__input`}
         type="email"
         name="email"
         placeholder={inputPlaceholder}
@@ -114,7 +109,7 @@ const Subscribe = ({
         warnText={warnText}
         required
       />
-      <Button className={`${px}-subscribe__button ${className}`} buttonType="secondary" type="submit" {...buttonProps}>
+      <Button className={`${baseClassName}__button ${className}`} buttonType="secondary" type="submit" {...buttonProps}>
         {buttonText}
       </Button>
     </Element>
