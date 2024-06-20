@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
 import Social from './Social';
+import { runCommonTests } from '../../utils/testUtils';
 
 const children = (
   <ul>
@@ -19,6 +20,8 @@ const children = (
   </ul>
 );
 describe('Social', () => {
+  runCommonTests(Social, 'Social');
+
   it('is selectable by the test id', () => {
     render(<Social id="test">{children}</Social>);
     expect(screen.queryByTestId(/test/)).toBeInTheDocument();

@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import Button from '../Button/Button';
-import { px } from '../../utils';
+import { getCommonProps } from '../../utils';
 
 export interface IconButtonProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'children'> {
   /**
@@ -14,10 +14,12 @@ export interface IconButtonProps extends Omit<React.HTMLAttributes<HTMLButtonEle
 }
 
 const IconButton = ({ children, size = 'md', className, ...props }: IconButtonProps) => {
+  const { className: baseClass, ...commonProps } = getCommonProps(props, 'IconButton');
   return (
     <Button
+      {...commonProps}
       buttonType="primary"
-      className={classnames(`${px}-icon-button`, `${px}-icon-button--${size}`, className)}
+      className={classnames(baseClass, `${baseClass}--${size}`, className)}
       {...props}
     >
       {children}

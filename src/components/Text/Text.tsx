@@ -29,9 +29,9 @@ const Text = ({ children, className, element: CustomElement, variant = TextVaria
 
   return (
     <Component
-      {...props}
       {...commonProps}
       className={classNames(baseClassName, className, determineTextClassName(variant))}
+      {...props}
     >
       {children}
     </Component>

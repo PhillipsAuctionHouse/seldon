@@ -1,10 +1,10 @@
 import classnames from 'classnames';
 
-import { px } from '../../utils';
+import { getCommonProps } from '../../utils';
 
 export interface GridProps extends React.HTMLAttributes<HTMLElement> {
   /**
-   * Button contents
+   * A Grid must have children
    */
   children: React.ReactNode;
   /**
@@ -23,14 +23,10 @@ export interface GridProps extends React.HTMLAttributes<HTMLElement> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-layouts-grid--overview)
  */
 
-export function Grid({ children, className, element: Element = 'section', id, ...props }: GridProps) {
+export function Grid({ children, className, element: Element = 'section', ...props }: GridProps) {
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Grid');
   return (
-    <Element
-      data-testid={id ? `grid-container-${id}` : `grid-container`}
-      id={id}
-      className={classnames(`${px}-grid__container`, className)}
-      {...props}
-    >
+    <Element {...commonProps} className={classnames(baseClassName, className)} {...props}>
       {children}
     </Element>
   );

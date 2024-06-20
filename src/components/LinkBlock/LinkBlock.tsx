@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { px } from '../../utils';
+import { getCommonProps } from '../../utils';
 import Link, { LinkProps } from '../Link/Link';
 import { LinkVariants } from '../Link/utils';
 
@@ -20,15 +20,14 @@ export interface LinkBlockProps extends React.HTMLAttributes<HTMLDivElement> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-links-linkblock--overview)
  *
  */
-const LinkBlock = ({ linkProps, description, className: classNameProp, id, ...props }: LinkBlockProps) => {
-  const baseClassName = `${px}-link-block`;
+const LinkBlock = ({ linkProps, description, className: classNameProp, ...props }: LinkBlockProps) => {
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'LinkBlock');
   const className = classnames(baseClassName, classNameProp);
   const LinkComponent = linkProps.element ?? Link;
-  const dataTestId = id ? `link-block-${id}` : `link-block`;
 
   return (
-    <div {...props} className={className} id={id} data-testid={dataTestId}>
-      <LinkComponent {...linkProps} data-testid={`${dataTestId}-link`} variant={LinkVariants.list} />
+    <div {...commonProps} className={className} {...props}>
+      <LinkComponent {...linkProps} data-testid={`${commonProps['data-testid']}-link`} variant={LinkVariants.list} />
       <p className={`${baseClassName}__description`}>{description}</p>
     </div>
   );

@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 
-import { px } from '../../utils';
+import { getCommonProps } from '../../utils';
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
@@ -45,21 +45,20 @@ const Button = ({
   children,
   className,
   isIconLast: iconLast = false,
-  id,
   type = 'button',
   ...props
 }: ButtonProps) => {
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Button');
   return (
     <button
-      data-testid={id ? `button-${id}` : `button`}
-      id={id}
+      {...commonProps}
       type={type}
       className={classnames(
-        `${px}-button`,
-        `${px}-button--${size}`,
-        `${px}-button--${buttonType}`,
+        `${baseClassName}`,
+        `${baseClassName}--${size}`,
+        `${baseClassName}--${buttonType}`,
         {
-          [`${px}-button--icon-last`]: iconLast,
+          [`${baseClassName}--icon-last`]: iconLast,
         },
         className,
       )}

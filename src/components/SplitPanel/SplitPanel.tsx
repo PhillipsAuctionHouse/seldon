@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 
-import { px } from '../../utils';
+import { getCommonProps } from '../../utils';
 
 export interface SplitPanelProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -25,14 +25,13 @@ const SplitPanel = ({
   className,
   element: Element = 'section',
   hasBorder = true,
-  id,
   ...props
 }: SplitPanelProps) => {
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SplitPanel');
   return (
     <Element
-      data-testid={id ? id : `split-panel`}
-      id={id}
-      className={classnames(`${px}-split-panel`, className, { [`${px}-split-panel--borderless`]: !hasBorder })}
+      {...commonProps}
+      className={classnames(baseClassName, className, { [`${baseClassName}--borderless`]: !hasBorder })}
       {...props}
     >
       {children}

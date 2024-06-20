@@ -1,11 +1,14 @@
 import { render, screen } from '@testing-library/react';
 
 import HeroBanner from './HeroBanner';
+import { runCommonTests } from '../../utils/testUtils';
 
 describe('HeroBanner', () => {
+  runCommonTests(HeroBanner, 'HeroBanner');
+
   it('is selectable by the test id', () => {
     const { rerender } = render(<HeroBanner headerText="This is my text" />);
-    expect(screen.getByTestId('hero-banner')).toBeInTheDocument();
+    expect(screen.getByTestId(/hero-banner/)).toBeInTheDocument();
     rerender(<HeroBanner headerText="This is my text" id="testbanner" />);
     expect(screen.getByTestId('hero-banner-testbanner')).toBeInTheDocument();
   });
