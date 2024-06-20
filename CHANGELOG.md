@@ -1,3 +1,10 @@
+## [1.26.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.26.1...v1.26.2) (2024-06-20)
+
+
+### Bug Fixes
+
+* **booleanProps:** L3-2356 eslint rules to enforce boolean props ([#190](https://github.com/PhillipsAuctionHouse/seldon/issues/190)) ([c5c39d9](https://github.com/PhillipsAuctionHouse/seldon/commit/c5c39d9610b236359f7e61be327d895f690b1d02))
+
 ## [1.26.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.26.0...v1.26.1) (2024-06-20)
 
 
