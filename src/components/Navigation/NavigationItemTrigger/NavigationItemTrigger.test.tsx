@@ -9,13 +9,6 @@ describe('NavigationItemTrigger', () => {
     vi.clearAllMocks();
   });
 
-  it('should call handleSelection when clicked', () => {
-    //TODO: Fix this test
-    // const { getByText } = render(<NavigationItemTrigger label={mockLabel} handleSelection={mockHandleSelection} />);
-    // fireEvent.click(getByText(mockLabel));
-    // expect(mockHandleSelection).toHaveBeenCalledWith(mockLabel);
-  });
-
   it('should render the label correctly', () => {
     const { getByText } = render(<NavigationItemTrigger label={mockLabel} />);
 

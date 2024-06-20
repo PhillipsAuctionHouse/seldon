@@ -1,7 +1,8 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Navigation, { NavigationProps } from './Navigation';
 import NavigationItemTrigger from './NavigationItemTrigger/NavigationItemTrigger';
+import { px } from '../../utils';
 
 describe('Navigation', () => {
   const defaultProps: NavigationProps = {
@@ -13,6 +14,20 @@ describe('Navigation', () => {
 
   it('renders without error', () => {
     render(<Navigation {...defaultProps} />);
+  });
+
+  it('does not render mobile nav label when visible is false', () => {
+    render(<Navigation id="phillips-nav" backBtnLabel="Back" visible={false} />);
+    const navLabel = screen.getByTestId('phillips-nav-label');
+    expect(navLabel).toHaveClass(`${px}-nav__label--hidden`);
+  });
+
+  it('renders mobile nav label when visible is true', async () => {
+    render(<Navigation id="phillips-nav" backBtnLabel="Back" />);
+
+    const navLabel = screen.getByTestId('phillips-nav-label');
+    expect(navLabel).not.toHaveClass(`${px}-nav__label--hidden`);
+    expect(navLabel).toHaveTextContent('Main Menu');
   });
 
   it('renders with back button label', () => {
@@ -33,5 +48,7 @@ describe('Navigation', () => {
     );
     await userEvent.click(getByTestId('nav-item-trigger-auctions'));
     expect(getByText(expandedItem)).toBeInTheDocument();
+    await userEvent.click(getByTestId('phillips-nav-back-btn'));
+    expect(getByText('Main Menu')).toBeInTheDocument();
   });
 });

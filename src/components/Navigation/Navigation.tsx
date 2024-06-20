@@ -39,10 +39,10 @@ const Navigation = ({
       <h2
         id={`${id}-label`}
         data-testid={`${id}-label`}
-        className={`${px}-nav__label`}
+        className={classnames(`${px}-nav__label`, { [`${px}-nav__label--hidden`]: !visible })}
         style={{ '--visible': visible ? 'visible' : 'hidden' } as React.CSSProperties}
       >
-        {expandedItem}
+        {expandedItem ? expandedItem : 'Main Menu'}
       </h2>
       {children}
     </nav>

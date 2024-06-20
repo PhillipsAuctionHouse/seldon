@@ -23,7 +23,7 @@ export default meta;
 
 export const Playground = (props: HeaderProps) => (
   <Header {...props}>
-    <Navigation id={`${px}-main-nav`} backBtnLabel="← Back">
+    <Navigation id={`${px}-main-nav`} backBtnLabel="← Back" visible={false}>
       <NavigationList id={`${px}-main-nav-list`}>
         <NavigationItemTrigger id="auctions" label={`Auctions`}>
           <NavigationList id={`${px}-auctions-nav-list`}>

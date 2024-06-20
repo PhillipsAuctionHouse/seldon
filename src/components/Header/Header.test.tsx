@@ -59,9 +59,12 @@ describe('Header', () => {
     render(renderHeader());
     const navItemTrigger = screen.getByTestId(`nav-item-trigger-auctions`);
     const backBtn = screen.getByText(`Back`);
+    const navLabel = screen.getByTestId('phillips-main-nav-label');
     await userEvent.click(navItemTrigger);
     expect(navItemTrigger).toHaveClass(`${px}-nav__item--expanded`);
+    expect(navLabel).toHaveTextContent('Auctions');
     await userEvent.click(backBtn);
     expect(navItemTrigger).not.toHaveClass(`${px}-nav__item--expanded`);
+    expect(navLabel).toHaveTextContent('Main Menu');
   });
 });
