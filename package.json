@@ -32,15 +32,18 @@
     "preview": "npx http-server storybook-static",
     "clean": "rimraf './dist'",
     "clean:stories": "rimraf './storybook-static'",
+    "create-component": "node --no-warnings --loader ts-node/esm .template/scripts/createComponent.ts",
     "format": "prettier . --write",
     "lint": "tsc --noEmit && eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 && npm run lint:styles",
     "lint:styles": "stylelint \"src/**/*.scss\" --fix",
     "prepare": "husky install"
   },
   "dependencies": {
+    "change-case": "^5.4.4",
     "classnames": "^2.5.1",
     "flatpickr": "^4.6.13",
-    "react-modal": "^3.16.1"
+    "react-modal": "^3.16.1",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.5.0",

@@ -78,11 +78,12 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     include: ['**/*.test.{js,jsx,ts,tsx}'],
+    exclude: ['node_modules', 'dist', 'build', 'coverage', 'public', 'scripts', 'storybook', '.template/**/*.{ts,tsx}'],
     setupFiles: ['./config/vitest/setupTest.ts'],
     restoreMocks: true,
     coverage: {
       include: ['src/components/**/*.{ts,tsx}', 'src/utils/**/*.{ts,tsx}'],
-      exclude: ['**/*.test.{ts,tsx}', '**/*.stories.{ts,tsx}'],
+      exclude: ['**/*.test.{ts,tsx}', '**/*.stories.{ts,tsx}', '.template/**/*.{ts,tsx}'],
       reporter: ['text', 'json', 'html'],
       provider: 'v8',
       thresholds: {
