@@ -54,7 +54,7 @@ describe('ViewingsList', () => {
     expect(screen.getByText(/Can't be london!/)).toBeInTheDocument();
   });
 
-  it('will render translated strings when passed an i18n prop', async () => {
+  it('will render translated strings when passed an i18n prop', () => {
     render(<StatefulViewingsList {...reqProps} defaultViewing={defaultViewing} i18n={i18n} />);
     expect(screen.getByText('_locationLabel_')).toBeInTheDocument();
     expect(screen.getByText('_enableOnSiteToggleLabel_')).toBeInTheDocument();

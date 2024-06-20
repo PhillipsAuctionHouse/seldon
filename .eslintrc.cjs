@@ -6,17 +6,32 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
     'plugin:storybook/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    project: './tsconfig.json',
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
   plugins: ['react-refresh'],
   rules: {
     'react-refresh/only-export-components': 'warn',
+    'react/boolean-prop-naming': ['warn', {}],
+    'require-await': 'warn',
+    '@typescript-eslint/no-floating-promises': ['error'],
+  },
+  settings: {
+    react: {
+      version: 'detect', // React version. "detect" automatically picks the version you have installed.
+    },
+    linkComponents: [
+      // Components used as alternatives to <a> for linking, eg. <Link to={ url } />
+      { name: 'Link', linkAttribute: ['href'] }, // allows specifying multiple properties if necessary
+    ],
   },
 };

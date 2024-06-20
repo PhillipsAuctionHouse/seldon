@@ -26,7 +26,7 @@ export interface ViewingsListCardProps extends ViewingsListCardFormProps, Record
   /**
    * Location of viewing
    */
-  editState?: boolean;
+  isEditState?: boolean;
   /**
    * Default boolean to determine whether viewing is enabled on site
    */
@@ -130,7 +130,7 @@ const ViewingsListCard = ({
   cardTitle = 'Add New Viewing',
   deleteBtnLabel = 'DELETE',
   editBtnLabel = 'EDIT',
-  editState,
+  isEditState: editState,
   enableOnSite = 'false',
   enableOnSiteToggleLabel = 'Enabled on website',
   email,

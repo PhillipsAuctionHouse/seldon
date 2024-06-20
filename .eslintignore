@@ -1,3 +1,4 @@
 /dist
 /storybook-static
+vite.config.ts
 .template

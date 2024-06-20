@@ -20,7 +20,7 @@ describe('Button', () => {
 
   it('renders with type and size classnames', () => {
     render(
-      <Button buttonType="secondary" size="lg" iconLast>
+      <Button buttonType="secondary" size="lg" isIconLast>
         Cancel
       </Button>,
     );
