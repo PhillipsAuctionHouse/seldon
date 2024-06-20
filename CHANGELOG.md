@@ -1,3 +1,10 @@
+## [1.26.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.26.0...v1.26.1) (2024-06-20)
+
+
+### Bug Fixes
+
+* **components:** L3-2030 common approach to className and data-testid ([#189](https://github.com/PhillipsAuctionHouse/seldon/issues/189)) ([3dc25fa](https://github.com/PhillipsAuctionHouse/seldon/commit/3dc25fafd36f40aca22aa9e36138edc3dd372de1))
+
 # [1.26.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.25.1...v1.26.0) (2024-06-18)
 
 
