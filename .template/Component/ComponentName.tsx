@@ -16,7 +16,7 @@ export interface ComponentNameProps extends React.HTMLAttributes<HTMLDivElement>
 const ComponentName = ({ className, ...props }: ComponentNameProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ComponentName');
 
-  return <div {...props} {...commonProps} className={classnames(baseClassName, className)}></div>;
+  return <div {...commonProps} className={classnames(baseClassName, className)} {...props}></div>;
 };
 
 export default ComponentName;
