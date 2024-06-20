@@ -10,7 +10,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * True if button comes after text
    */
-  iconLast?: boolean;
+  isIconLast?: boolean;
   /**
    * Optional click handler
    */
@@ -44,7 +44,7 @@ const Button = ({
   size = 'md',
   children,
   className,
-  iconLast = false,
+  isIconLast: iconLast = false,
   id,
   type = 'button',
   ...props

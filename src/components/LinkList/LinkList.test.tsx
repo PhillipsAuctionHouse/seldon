@@ -64,7 +64,7 @@ describe('LinkList component', () => {
       return;
     });
 
-    render(<LinkList>{[...LinkBlocks, <Button>Not a LinkBlock</Button>]}</LinkList>);
+    render(<LinkList>{[...LinkBlocks, <Button key="my-button">Not a LinkBlock</Button>]}</LinkList>);
     const linkList = screen.getByRole('list');
     expect(linkList).toBeInTheDocument();
     const linkItems = screen.getAllByRole('listitem');

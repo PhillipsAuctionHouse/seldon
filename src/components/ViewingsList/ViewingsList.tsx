@@ -127,7 +127,7 @@ const ViewingsList = ({
           {...item}
           {...i18n}
           cardTitle={!item.location ? undefined : `${cardTitle} ${index + 1}`}
-          editState={hasUnsavedData === item.id}
+          isEditState={hasUnsavedData === item.id}
           onCancel={handleOnCancel}
           onDelete={handleOnDelete}
           onEdit={() => handleOnEdit(item.id)}

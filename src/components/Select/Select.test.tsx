@@ -29,7 +29,7 @@ describe('A Select', () => {
       </Select>,
     );
 
-    userEvent.selectOptions(screen.getByTestId('test-id'), ['option one']);
+    await userEvent.selectOptions(screen.getByTestId('test-id'), ['option one']);
     await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(2));
     await waitFor(() => expect(mockedOnChange.mock.calls).toHaveLength(1));
     expect(testRef?.current?.value).toEqual('option one');
@@ -41,7 +41,7 @@ describe('A Select', () => {
         <option>option two</option>
       </Select>,
     );
-    userEvent.selectOptions(screen.getByTestId('test-id'), ['option one']);
+    await userEvent.selectOptions(screen.getByTestId('test-id'), ['option one']);
     await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(0));
     await waitFor(() => expect(mockedOnChange.mock.calls).toHaveLength(0));
 
@@ -51,7 +51,7 @@ describe('A Select', () => {
         <option>option two</option>
       </Select>,
     );
-    userEvent.selectOptions(screen.getByTestId('test-id'), ['option one']);
+    await userEvent.selectOptions(screen.getByTestId('test-id'), ['option one']);
     await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(0));
     await waitFor(() => expect(mockedOnChange.mock.calls).toHaveLength(0));
   });

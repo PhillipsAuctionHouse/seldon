@@ -67,7 +67,7 @@ describe('A DatePicker', () => {
     render(<DatePicker {...reqProps} defaultValue={['2023-06-01T08:30', '2023-06-05T08:30']} allowInput />);
     const input = screen.getByTestId('test-id');
     await userEvent.click(input);
-    userEvent.type(input, '{backspace}adbadfd');
+    await userEvent.type(input, '{backspace}adbadfd');
     await waitFor(() => expect((input as HTMLInputElement).value).toEqual('2023-06-01 to 2023-06-05'));
   });
 

@@ -15,6 +15,8 @@ const TestInput = React.forwardRef(
   },
 );
 
+TestInput.displayName = 'TestInput';
+
 describe('An Input', () => {
   const reqProps = { labelText: 'My Test Label', id: 'test-id' };
 
@@ -27,21 +29,21 @@ describe('An Input', () => {
   it('will remain uncontrolled input even with a default Value', async () => {
     const testRef = React.createRef<HTMLInputElement>();
     render(<Input ref={testRef} {...reqProps} defaultValue="Default Value" />);
-    userEvent.type(screen.getByTestId('test-id'), 's');
+    await userEvent.type(screen.getByTestId('test-id'), 's');
     await waitFor(() => expect(testRef?.current?.value).toEqual('Default Values'));
   });
 
   it('will update the value when used as controlled input', async () => {
     const testRef = React.createRef<HTMLInputElement>();
     render(<TestInput ref={testRef} {...reqProps} />);
-    userEvent.type(screen.getByTestId('test-id'), 'Controlled Value');
+    await userEvent.type(screen.getByTestId('test-id'), 'Controlled Value');
     await waitFor(() => expect(testRef?.current?.value).toEqual('Controlled Value'));
   });
 
   it('will update the value when used as controlled input and given a defaultValue', async () => {
     const testRef = React.createRef<HTMLInputElement>();
     render(<TestInput ref={testRef} {...reqProps} defaultValue="Default Value" />);
-    userEvent.type(screen.getByTestId('test-id'), 's');
+    await userEvent.type(screen.getByTestId('test-id'), 's');
     await waitFor(() => expect(testRef?.current?.value).toEqual('Default Values'));
   });
 
@@ -104,7 +106,7 @@ describe('An Input', () => {
   it('will fire the onClick handler when clicked', async () => {
     const mockedOnClick = vi.fn();
     render(<Input {...reqProps} onClick={mockedOnClick} />);
-    userEvent.click(screen.getByTestId('test-id'));
+    await userEvent.click(screen.getByTestId('test-id'));
     await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(1));
   });
 });
