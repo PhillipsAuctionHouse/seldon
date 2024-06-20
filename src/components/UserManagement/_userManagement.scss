@@ -13,7 +13,7 @@
   top: 0;
   width: 100%;
 
-  @media (max-width: 960px) {
+  @media (max-width: #{$breakpoint-md - 1}) {
     align-items: flex-start;
     background: transparent;
     flex-direction: column;
@@ -28,10 +28,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
-
-    > button {
-      width: auto;
-    }
   }
 
   &__account-wrapper {
@@ -39,12 +35,12 @@
     display: flex;
     gap: 1rem;
 
-    @media (max-width: 960px) {
+    @media (max-width: #{$breakpoint-md - 1}) {
       width: 100%;
     }
 
     .#{$px}-link {
-      @media (max-width: 960px) {
+      @media (max-width: #{$breakpoint-md - 1}) {
         width: 100%;
       }
 
@@ -66,7 +62,7 @@
       }
     }
 
-    @media (max-width: 960px) {
+    @media (max-width: #{$breakpoint-md - 1}) {
       display: none;
     }
   }
@@ -86,8 +82,8 @@
     }
     .#{$px}-user-management__language {
       &__selections {
-        @media (min-width: 961px) {
-          background: #f4f4f4;
+        @media (min-width: $breakpoint-md) {
+          background: $off-white;
           box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 85%);
           display: block;
           left: unset;

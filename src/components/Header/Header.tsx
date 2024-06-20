@@ -11,11 +11,7 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Logo src
    */
-  logo?: string;
-  /**
-   * Logo alt text
-   */
-  logoText?: string;
+  logo?: React.ReactElement<React.Component>;
   /**
    * Toggle open text
    */
@@ -46,7 +42,6 @@ export const HeaderContext = React.createContext({
 const Header = ({
   defaultMobileMenuLabel = 'Main Menu',
   logo,
-  logoText,
   className,
   children,
   toggleOpenText = 'Open Menu',
@@ -64,6 +59,7 @@ const Header = ({
   const onSelect = function (label: string) {
     setExpandedItem((prev) => (prev === defaultMobileMenuLabel ? label : defaultMobileMenuLabel));
   };
+  console.log('LOGO', logo);
 
   return (
     <header {...props} className={classnames(`${px}-header`, className)}>
@@ -83,8 +79,8 @@ const Header = ({
       >
         <span>{toggleText}</span>
       </button>
-      <h1 className={`${px}-header__logo`} tabIndex={toggleText === toggleOpenText ? 0 : -1}>
-        <img data-testid="header-logo" src={logo} height="14" alt={logoText} />
+      <h1 data-testid="header-logo" className={`${px}-header__logo`} tabIndex={toggleText === toggleOpenText ? 0 : -1}>
+        {logo}
       </h1>
       <div className={classnames(`${px}-header__nav`, { [`${px}-header__nav--open`]: toggleState })}>
         <HeaderContext.Provider

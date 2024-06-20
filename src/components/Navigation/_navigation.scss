@@ -9,7 +9,7 @@
   position: relative;
   width: 100%;
 
-  @media (min-width: 961px) {
+  @media (min-width: $breakpoint-md) {
     display: flex;
     flex-wrap: wrap;
     overflow: visible;
@@ -53,7 +53,7 @@
       background-color 0.5s;
   }
 
-  @media (min-width: 961px) {
+  @media (min-width: $breakpoint-md) {
     // Remove label and mobile buttons on larger screens
     .#{$px}-nav__back-btn,
     .#{$px}-nav__close-btn,

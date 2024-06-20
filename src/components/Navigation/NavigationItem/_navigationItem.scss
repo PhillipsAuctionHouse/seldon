@@ -2,13 +2,13 @@
 @import '#scss/typography';
 
 .#{$px}-nav__item {
-  @media (max-width: 960px) {
+  @media (max-width: #{$breakpoint-md - 1}) {
     border-bottom: 1px solid #ccc;
     max-width: 320px;
     width: 100%;
   }
 
-  @media (min-width: 961px) {
+  @media (min-width: $breakpoint-md) {
     align-items: center;
     display: flex;
     max-width: unset;
@@ -38,14 +38,14 @@
     text-transform: uppercase;
     width: 100%;
 
-    @media (max-width: 960px) {
+    @media (max-width: #{$breakpoint-md - 1}) {
       position: relative;
     }
   }
 
   &--expanded ~ & &--label,
   &--expanded ~ & > button {
-    @media (max-width: 960px) {
+    @media (max-width: #{$breakpoint-md - 1}) {
       display: none;
 
       & > span::after {
@@ -66,7 +66,7 @@
     z-index: -10;
   }
 
-  @media (min-width: 961px) {
+  @media (min-width: $breakpoint-md) {
     ul {
       align-content: start;
       background: #f4f4f4;
@@ -95,7 +95,7 @@
         button,
         a,
         p {
-          @media (min-width: 961px) {
+          @media (min-width: $breakpoint-md) {
             border: none;
           }
         }
@@ -136,7 +136,7 @@
   }
 
   .#{$px}-nav__item-trigger > span::after {
-    @media (max-width: 960px) {
+    @media (max-width: #{$breakpoint-md - 1}) {
       content: '\203A';
       display: inline-block;
       font-size: 1.75rem;
@@ -147,7 +147,7 @@
       transform: translateY(-50%);
     }
 
-    @media (min-width: 961px) {
+    @media (min-width: $breakpoint-md) {
       content: '';
     }
   }
@@ -167,7 +167,7 @@
     transition: background-color 0.5s;
   }
 
-  @media (max-width: 960px) {
+  @media (max-width: #{$breakpoint-md - 1}) {
     & > a:focus,
     & > button:focus,
     & > p:focus {
@@ -183,7 +183,7 @@
     }
   }
 
-  @media (min-width: 961px) {
+  @media (min-width: $breakpoint-md) {
     position: relative;
 
     &:not(ul ul li):hover::before {
@@ -253,7 +253,7 @@
   &--large-cta {
     margin-right: 1rem;
 
-    @media (max-width: 960px) {
+    @media (max-width: #{$breakpoint-md - 1}) {
       margin-right: 0;
     }
     .#{$px}-nav__item {
@@ -276,7 +276,7 @@
           color: $keyline-gray;
         }
 
-        @media (max-width: 960px) {
+        @media (max-width: #{$breakpoint-md - 1}) {
           /* TODO: Create token to handle these styles dynamically */
           align-items: flex-start;
           font-size: 0.6rem;
