@@ -1,3 +1,9 @@
+// Utils
+export * from './utils';
+
+// 📑 Pages
+export { default as Page } from './pages/Page';
+
 // ⚛️ Components
 export { default as Button, type ButtonProps } from './components/Button/Button';
 export { default as IconButton } from './components/IconButton/IconButton';
@@ -27,9 +33,3 @@ export {
   type StatefulViewingsListProps,
 } from './components/ViewingsList/StatefulViewingsList';
 export * from './components/Text';
-
-// Utils
-export * from './utils';
-
-// 📑 Pages
-export { default as Page } from './pages/Page';

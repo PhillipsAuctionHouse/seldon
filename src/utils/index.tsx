@@ -1,6 +1,20 @@
+import { kebabCase } from 'change-case';
 import * as React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 export const px = 'phillips';
+
+/**
+ * Returns standard props values incorporating the component name into the class name and data-testid
+ */
+export const getCommonProps = ({ id, ...props }: { id?: string }, componentName: string) => {
+  const kebabCaseComponentName = kebabCase(componentName);
+  return {
+    ...props,
+    'data-testid': id ? `${kebabCaseComponentName}-${id}` : `${kebabCaseComponentName}-${uuidv4()}`,
+    className: `${px}-${kebabCaseComponentName}`,
+  };
+};
 
 export enum PaddingTokens {
   xs = 'xs',
