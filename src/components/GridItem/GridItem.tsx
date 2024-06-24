@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { px } from '../../utils';
+import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { determineColumnSpanClassName, validateColumnSpans } from './gridItemUtils';
 import { GridItemAlign } from './types';
@@ -38,30 +38,29 @@ const GridItem = ({
   md = 12,
   lg = 12,
   align = GridItemAlign.center,
-  id,
   element: Element = 'div',
   className,
   ...props
 }: GridItemProps) => {
-  const dataTestId = id ? `grid-item-${id}` : `grid-item`;
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'GridItem');
 
   const columnSpansPerBreakpoint = useMemo(() => ({ xs, sm, md, lg }) as const, [xs, sm, md, lg]);
   const gridItemClasses = useMemo(() => {
     return [
-      `${px}-grid-item`, // figure out the class names for each breakpoint
+      baseClassName, // figure out the class names for each breakpoint
       Object.entries(columnSpansPerBreakpoint).map(([key, value]) =>
         determineColumnSpanClassName(key as GridItemAlign, value, align),
       ),
       className,
     ];
-  }, [align, columnSpansPerBreakpoint, className]);
+  }, [align, columnSpansPerBreakpoint, baseClassName, className]);
 
   if (!validateColumnSpans(Object.values(columnSpansPerBreakpoint))) {
     return null;
   }
 
   return (
-    <Element {...props} data-testid={dataTestId} id={id} className={classnames(gridItemClasses)}>
+    <Element {...commonProps} className={classnames(gridItemClasses)} {...props}>
       {children}
     </Element>
   );

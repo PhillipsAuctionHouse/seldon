@@ -70,7 +70,7 @@ const ColorCard = ({ label, hex, usage, className }: ColorCardProps) => {
     >
       {copied ? (
         <span className={classnames(`${baseClass}__copied`, { [`${baseClass}__copied--light`]: isColorLight(hex) })}>
-          Copied '{`$${label.replace(/\s+/g, '-').toLowerCase()}`}'
+          Copied &apos;{`$${label.replace(/\s+/g, '-').toLowerCase()}`}&apos;
         </span>
       ) : null}
       <span id={`token-${label}`} className={`${baseClass}__token`}>

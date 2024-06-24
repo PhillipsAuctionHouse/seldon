@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 
-import { px } from '../../utils';
+import { getCommonProps } from '../../utils';
 import React, { HTMLAttributes } from 'react';
 import { getLinkVariantClassName, isLinkExternal } from './utils';
 import { LinkVariants } from './utils';
@@ -21,7 +21,7 @@ export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
   /**
    * URL to navigate to when clicked
    */
-  href: string;
+  href?: string;
   /**
    * Can be used to render alternative link components like the prefetching `Link` from `@remix-run/react`.
    * This component should handle the `children`, `data-testid`, `id`, `className`, and `href` props.
@@ -41,25 +41,24 @@ export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
 
 const Link = ({
   children,
-  id,
   className,
   element: Element = 'a',
   variant = LinkVariants.standalone,
   href,
   ...props
 }: LinkProps) => {
-  const classNames = classnames(`${px}-link`, getLinkVariantClassName(variant), className);
-  const dataTestId = id ? `link-${id}` : `link`;
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Link');
+  const classNames = classnames(baseClassName, getLinkVariantClassName(variant), className);
+
   const isExternal = isLinkExternal(href);
 
   return (
     <Element
-      {...props}
+      {...commonProps}
       href={href}
-      data-testid={dataTestId}
-      id={id}
       className={classNames}
       {...(isExternal && Element === 'a' ? { rel: 'noopener noreferrer', target: '_blank' } : {})}
+      {...props}
     >
       <Text variant={variant === LinkVariants.email ? TextVariants.email : TextVariants.ctaSm}>{children}</Text>
     </Element>

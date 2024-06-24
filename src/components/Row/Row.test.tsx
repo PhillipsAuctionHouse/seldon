@@ -2,11 +2,13 @@ import { render, screen } from '@testing-library/react';
 import Row from './Row';
 import GridItem from '../GridItem/GridItem';
 import Grid from '../Grid/Grid';
+import { runCommonTests } from '../../utils/testUtils';
 
 describe('Row', () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });
+  runCommonTests(Row, 'Row');
   it('renders children correctly', () => {
     render(
       <Row>

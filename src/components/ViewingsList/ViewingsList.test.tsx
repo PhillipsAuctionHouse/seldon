@@ -4,9 +4,13 @@ import { userEvent } from '@testing-library/user-event';
 import StatefulViewingsList from './StatefulViewingsList';
 import { defaultViewing, i18n, validate, handleOnSave } from './utils';
 import { ViewingsListCardProps } from './ViewingsListCard';
+import { runCommonTests } from '../../utils/testUtils';
 
 describe('ViewingsList', () => {
   const reqProps = { title: 'Tour Viewing(s) on Overview Tab', id: 'test-id', validate, onSave: handleOnSave };
+
+  runCommonTests((props) => <StatefulViewingsList {...props} />, 'ViewingsList');
+
   it('renders a list of ViewingsList cards when passed an array of viewing list objects', async () => {
     render(<StatefulViewingsList {...reqProps} defaultViewing={defaultViewing} />);
     await waitFor(() => expect(screen.getByDisplayValue('One title')).toBeInTheDocument());
@@ -50,7 +54,7 @@ describe('ViewingsList', () => {
     expect(screen.getByText(/Can't be london!/)).toBeInTheDocument();
   });
 
-  it('will render translated strings when passed an i18n prop', async () => {
+  it('will render translated strings when passed an i18n prop', () => {
     render(<StatefulViewingsList {...reqProps} defaultViewing={defaultViewing} i18n={i18n} />);
     expect(screen.getByText('_locationLabel_')).toBeInTheDocument();
     expect(screen.getByText('_enableOnSiteToggleLabel_')).toBeInTheDocument();

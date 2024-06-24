@@ -83,4 +83,5 @@ const Select = React.forwardRef(
   },
 );
 
+Select.displayName = 'Select';
 export default Select;

@@ -3,15 +3,19 @@ import LinkBlock from './LinkBlock';
 import Link, { LinkProps } from '../Link/Link';
 import { LinkVariants } from '../Link/utils';
 import { getLinkVariantClassName } from '../Link/utils';
+import { runCommonTests } from '../../utils/testUtils';
+
+const linkProps = {
+  href: 'https://example.com',
+  target: '_blank',
+  children: 'My Link',
+  element: Link,
+};
 
 describe('LinkBlock', () => {
+  runCommonTests((props) => <LinkBlock linkProps={linkProps} {...props} />, 'LinkBlock');
+
   it('renders with data-testid when id prop is passed', () => {
-    const linkProps = {
-      href: 'https://example.com',
-      target: '_blank',
-      children: 'My Link',
-      element: Link,
-    };
     const id = 'test-id';
     render(<LinkBlock linkProps={linkProps} description="This is a link block" id={id} />);
 
@@ -19,13 +23,6 @@ describe('LinkBlock', () => {
   });
 
   it('renders the link and description correctly', () => {
-    const linkProps = {
-      href: 'https://example.com',
-      target: '_blank',
-      children: 'My Link',
-      element: Link,
-    };
-
     render(<LinkBlock linkProps={linkProps} description="This is a link block" />);
 
     const linkElement = screen.getByRole('link', { name: 'My Link' });

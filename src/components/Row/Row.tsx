@@ -1,5 +1,5 @@
 import React from 'react';
-import { PaddingTokens, generatePaddingClassName, px } from '../../utils';
+import { PaddingTokens, generatePaddingClassName, getCommonProps } from '../../utils';
 import GridItem, { GridItemProps } from '../GridItem/GridItem';
 import classnames from 'classnames';
 
@@ -28,28 +28,26 @@ export interface RowProps extends React.HTMLAttributes<HTMLElement> {
 
 const Row = ({
   children,
-  id,
+
   element: CustomElement,
   padding = { top: PaddingTokens.lg, bottom: PaddingTokens.lg },
   className,
   ...props
 }: RowProps) => {
-  const dataTestId = id ? `row-${id}` : `row`;
-  const baseClassName = `${px}-row`;
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Row');
 
   const Component = CustomElement || 'section';
 
   return (
     <Component
-      {...props}
-      data-testid={dataTestId}
-      id={id}
+      {...commonProps}
       className={classnames(
         baseClassName,
         padding.top && generatePaddingClassName(padding.top, 'start'),
         padding.bottom && generatePaddingClassName(padding.bottom, 'end'),
         className,
       )}
+      {...props}
     >
       {children}
     </Component>

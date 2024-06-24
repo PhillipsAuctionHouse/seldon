@@ -1,6 +1,19 @@
+import { kebabCase } from 'change-case';
 import * as React from 'react';
 
 export const px = 'phillips';
+
+/**
+ * Returns standard props values incorporating the component name into the class name and data-testid
+ */
+export const getCommonProps = ({ id, ...props }: { id?: string }, componentName: string) => {
+  const kebabCaseComponentName = kebabCase(componentName);
+  return {
+    ...props,
+    'data-testid': id ? `${kebabCaseComponentName}-${id}` : `${kebabCaseComponentName}`,
+    className: `${px}-${kebabCaseComponentName}`,
+  };
+};
 
 export enum PaddingTokens {
   xs = 'xs',
@@ -12,17 +25,6 @@ export enum PaddingTokens {
 
 /* eslint-disable @typescript-eslint/no-empty-function */
 export const noOp = () => {};
-
-export interface CommonProps {
-  /**
-   * Optional className to be applied to the outer most element
-   */
-  className?: string;
-  /**
-   * A custom `id`
-   */
-  id?: string;
-}
 
 export interface InputProps {
   /**

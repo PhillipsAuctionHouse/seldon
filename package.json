@@ -1,6 +1,6 @@
 {
   "name": "@phillips/seldon",
-  "version": "1.26.0",
+  "version": "1.26.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/PhillipsAuctionHouse/seldon"
@@ -32,12 +32,14 @@
     "preview": "npx http-server storybook-static",
     "clean": "rimraf './dist'",
     "clean:stories": "rimraf './storybook-static'",
+    "create-component": "node --no-warnings --loader ts-node/esm .template/scripts/createComponent.ts",
     "format": "prettier . --write",
     "lint": "tsc --noEmit && eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 && npm run lint:styles",
     "lint:styles": "stylelint \"src/**/*.scss\" --fix",
     "prepare": "husky install"
   },
   "dependencies": {
+    "change-case": "^5.4.4",
     "classnames": "^2.5.1",
     "flatpickr": "^4.6.13",
     "react-modal": "^3.16.1"
@@ -71,6 +73,7 @@
     "@vitest/coverage-v8": "^1.6.0",
     "color": "^4.2.3",
     "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.3",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "eslint-plugin-storybook": "^0.8.0",
@@ -86,12 +89,12 @@
     "semantic-release": "^23.1.1",
     "storybook": "^8.1.4",
     "stylelint": "^16.6.1",
-    "stylelint-config-standard": "^36.0.0",
+    "stylelint-config-standard": "^36.0.1",
     "stylelint-config-standard-scss": "^13.1.0",
     "stylelint-order": "^6.0.4",
-    "stylelint-scss": "^6.3.1",
+    "stylelint-scss": "^6.3.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5",
+    "typescript": "^5.5.2",
     "vite": "^5.3.1",
     "vite-plugin-dts": "^2.3.0",
     "vite-plugin-svgr": "^4.2.0",

@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 
-import { px } from '../../utils';
+import { getCommonProps } from '../../utils';
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
@@ -10,7 +10,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * True if button comes after text
    */
-  iconLast?: boolean;
+  isIconLast?: boolean;
   /**
    * Optional click handler
    */
@@ -44,22 +44,21 @@ const Button = ({
   size = 'md',
   children,
   className,
-  iconLast = false,
-  id,
+  isIconLast: iconLast = false,
   type = 'button',
   ...props
 }: ButtonProps) => {
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Button');
   return (
     <button
-      data-testid={id ? `button-${id}` : `button`}
-      id={id}
+      {...commonProps}
       type={type}
       className={classnames(
-        `${px}-button`,
-        `${px}-button--${size}`,
-        `${px}-button--${buttonType}`,
+        `${baseClassName}`,
+        `${baseClassName}--${size}`,
+        `${baseClassName}--${buttonType}`,
         {
-          [`${px}-button--icon-last`]: iconLast,
+          [`${baseClassName}--icon-last`]: iconLast,
         },
         className,
       )}
