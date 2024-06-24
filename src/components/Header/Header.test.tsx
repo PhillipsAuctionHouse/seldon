@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Header from './Header';
+import LogoSVG from '../../assets/PhillipsLogo.svg?react';
+import LogoIMG from '../../assets/PhillipsLogo.svg';
 import { px } from '../../utils';
 import Navigation from '../Navigation/Navigation';
 import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
@@ -9,8 +11,8 @@ import NavigationList from '../Navigation/NavigationList/NavigationList';
 import { LinkVariants } from '../Link/utils';
 
 describe('Header', () => {
-  const renderHeader = () => (
-    <Header>
+  const headerComponent = () => (
+    <Header logo={LogoIMG}>
       <Navigation id={`${px}-main-nav`} backBtnLabel="Back">
         <NavigationList id={`${px}-main-nav-list`}>
           <NavigationItemTrigger id="auctions" label={`Auctions`}>
@@ -29,7 +31,7 @@ describe('Header', () => {
     </Header>
   );
   it('should render the header component with default props', () => {
-    render(renderHeader());
+    render(headerComponent());
     const toggleButton = screen.getByRole('button', { name: /Open Menu/i });
     const logo = screen.getByTestId('header-logo');
     const nav = screen.getByTestId(`${px}-main-nav`);
@@ -41,7 +43,7 @@ describe('Header', () => {
   });
 
   it('should toggle the menu when the toggle button is clicked', async () => {
-    render(renderHeader());
+    render(headerComponent());
     const nav = screen.getByTestId(`${px}-main-nav`);
     const toggleButton = screen.getByRole('button', { name: /Open Menu/i });
     const navItem = screen.getByTestId('nav-item-trigger-auctions');
@@ -56,7 +58,7 @@ describe('Header', () => {
   });
 
   it('should expand a nav category in the mobile menu when a nav item trigger is selected', async () => {
-    render(renderHeader());
+    render(headerComponent());
     const navItemTrigger = screen.getByTestId(`nav-item-trigger-auctions`);
     const backBtn = screen.getByText(`Back`);
     const navLabel = screen.getByTestId('phillips-main-nav-label');
@@ -66,5 +68,17 @@ describe('Header', () => {
     await userEvent.click(backBtn);
     expect(navItemTrigger).not.toHaveClass(`${px}-nav__item--expanded`);
     expect(navLabel).toHaveTextContent('Main Menu');
+  });
+
+  it('should render the logo as an object', () => {
+    render(<Header logo={<LogoSVG />} />);
+    const logoElement = screen.getByTestId('header-logo-svg');
+    expect(logoElement).toBeInTheDocument();
+  });
+
+  it('should render the logo as an image', () => {
+    render(<Header logo={LogoIMG} />);
+    const logoElement = screen.getByTestId('header-logo');
+    expect(logoElement).toContainHTML(`<img data-testid="header-logo-img" src=${LogoIMG} height="14" />`);
   });
 });

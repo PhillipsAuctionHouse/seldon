@@ -4,7 +4,12 @@ import classNames from 'classnames';
 import { NavigationItemProps } from '../NavigationItem/NavigationItem';
 import { HeaderContext } from '../../Header/Header';
 
-export type NavigationListProps = React.HTMLAttributes<HTMLElement>;
+export interface NavigationListProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * id for the navigation list
+   */
+  id: string;
+}
 
 const NavigationList = ({ id, children, className }: React.PropsWithChildren<NavigationListProps>) => {
   const { isExpanded } = React.useContext(HeaderContext);

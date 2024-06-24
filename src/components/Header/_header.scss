@@ -106,6 +106,10 @@
       height: 100%;
       opacity: 1;
 
+      @media (min-width: #{$breakpoint-md - 1}) {
+        display: none;
+      }
+
       & ~ .#{$px}-header__nav {
         z-index: 1;
       }

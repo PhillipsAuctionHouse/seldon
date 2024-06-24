@@ -6,10 +6,25 @@ import NavigationItemTrigger from '../Navigation/NavigationItemTrigger/Navigatio
 import NavigationList from '../Navigation/NavigationList/NavigationList';
 import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
 
-export type UserManagementProps = React.HTMLAttributes<HTMLElement>;
+export interface UserManagementProps extends React.HTMLAttributes<HTMLElement> {
+  langaugeOptions?: { label: string; value: string }[];
+}
 
-const UserManagement = ({ children }: React.PropsWithChildren<UserManagementProps>) => {
+const UserManagement = ({
+  children,
+  langaugeOptions = [
+    { label: 'English', value: 'en' },
+    { label: '中文', value: 'zh' },
+  ],
+}: React.PropsWithChildren<UserManagementProps>) => {
   const [language, setLanguage] = React.useState('English');
+
+  React.useEffect(() => {
+    const defaultLanguage = langaugeOptions.find((option) => option.value === 'en');
+    if (defaultLanguage) {
+      setLanguage(defaultLanguage.label);
+    }
+  }, [langaugeOptions]);
 
   return (
     <div data-testid="user-management" className={`${px}-user-management`}>
@@ -19,29 +34,20 @@ const UserManagement = ({ children }: React.PropsWithChildren<UserManagementProp
       </span>
       <NavigationItemTrigger className={`${px}-user-management__language`} label={language}>
         <NavigationList id={`${px}-langauge-selection-list`} className={`${px}-user-management__language__selections`}>
-          <li>
-            <Input
-              type="radio"
-              id="radio-en"
-              labelText="English"
-              value="en"
-              inline
-              name="languages"
-              defaultChecked
-              onClick={() => setLanguage('English')}
-            />
-          </li>
-          <li>
-            <Input
-              type="radio"
-              id="radio-zh"
-              labelText="中文"
-              value="zh"
-              inline
-              name="languages"
-              onClick={() => setLanguage('中文')}
-            />
-          </li>
+          {langaugeOptions.map((option) => (
+            <li key={option.value}>
+              <Input
+                type="radio"
+                id={`radio-${option.value}`}
+                labelText={option.label}
+                value={option.value}
+                inline
+                name="languages"
+                defaultChecked={option.value === 'en'}
+                onClick={() => setLanguage(option.label)}
+              />
+            </li>
+          ))}
         </NavigationList>
       </NavigationItemTrigger>
       {children}

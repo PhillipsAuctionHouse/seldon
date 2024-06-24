@@ -22,7 +22,7 @@ describe('Navigation', () => {
     expect(navLabel).toHaveClass(`${px}-nav__label--hidden`);
   });
 
-  it('renders mobile nav label when visible is true', async () => {
+  it('renders mobile nav label when visible is true', () => {
     render(<Navigation id="phillips-nav" backBtnLabel="Back" />);
 
     const navLabel = screen.getByTestId('phillips-nav-label');
