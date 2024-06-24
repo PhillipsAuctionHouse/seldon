@@ -1,0 +1,72 @@
+@import '#scss/_vars';
+
+.#{$px}-accordion {
+  border-bottom: 1px solid $keyline-gray;
+  border-top: 1px solid $keyline-gray;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.#{$px}-accordionItem {
+  padding: 16px;
+
+  &__border_bottom {
+    border-bottom: 1px solid $keyline-gray;
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: row;
+    opacity: 0.75;
+  }
+
+  &__label_hoverable {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &__label_text {
+    flex: auto;
+
+    @include text($body1);
+    @include DistinctDisplay;
+  }
+
+  &__label_icon {
+    flex: initial;
+    height: 24px;
+    width: 24px;
+  }
+
+  &__icon_lg {
+    height: 32px;
+    width: 32px;
+  }
+
+  &__label_lg {
+    @include text($heading3);
+  }
+
+  &__expanded {
+    display: block;
+    font-weight: 400;
+    height: auto;
+    margin: 10px 0;
+    margin-top: 10px;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+  }
+
+  &__collapsed {
+    display: none;
+    height: auto;
+  }
+
+  &__child_text_lg {
+    font-size: 20px;
+    margin: 20px 0;
+  }
+}
