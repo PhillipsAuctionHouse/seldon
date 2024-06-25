@@ -7,24 +7,17 @@ import NavigationList from '../Navigation/NavigationList/NavigationList';
 import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
 
 export interface UserManagementProps extends React.HTMLAttributes<HTMLElement> {
-  langaugeOptions?: { label: string; value: string }[];
+  languageOptions?: { label: string; value: string }[];
 }
 
 const UserManagement = ({
   children,
-  langaugeOptions = [
+  languageOptions = [
     { label: 'English', value: 'en' },
     { label: '中文', value: 'zh' },
   ],
 }: React.PropsWithChildren<UserManagementProps>) => {
   const [language, setLanguage] = React.useState('English');
-
-  React.useEffect(() => {
-    const defaultLanguage = langaugeOptions.find((option) => option.value === 'en');
-    if (defaultLanguage) {
-      setLanguage(defaultLanguage.label);
-    }
-  }, [langaugeOptions]);
 
   return (
     <div data-testid="user-management" className={`${px}-user-management`}>
@@ -34,7 +27,7 @@ const UserManagement = ({
       </span>
       <NavigationItemTrigger className={`${px}-user-management__language`} label={language}>
         <NavigationList id={`${px}-langauge-selection-list`} className={`${px}-user-management__language__selections`}>
-          {langaugeOptions.map((option) => (
+          {languageOptions.map((option) => (
             <li key={option.value}>
               <Input
                 type="radio"
