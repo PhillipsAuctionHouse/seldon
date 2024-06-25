@@ -18,7 +18,7 @@ export const AccordionLarge: Story = {
         locked: false,
         variation: 'lg',
         label: 'What information do I need to provide to submit a consignment?',
-        children: (
+        content: (
           <div style={{ color: 'white', backgroundColor: '#d0d0d0', padding: 20 }}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
@@ -32,7 +32,7 @@ export const AccordionLarge: Story = {
         locked: false,
         variation: 'lg',
         label: 'How long does it take to receive an estimate?',
-        children: (
+        content: (
           <div style={{ color: 'white', backgroundColor: '#d0d0d0', padding: 20 }}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
@@ -59,7 +59,7 @@ export const AccordionSmall: Story = {
         lockedVariation: true,
         variation: 'sm',
         label: 'Condition Report',
-        lockedChildren: (
+        lockedContent: (
           <div
             className={classNames(`${px}-accordionItem__label_text`)}
             style={{ color: '#4A90E2', cursor: 'pointer' }}
@@ -72,7 +72,7 @@ export const AccordionSmall: Story = {
         locked: false,
         variation: 'sm',
         label: 'Provenance',
-        children: (
+        content: (
           <div style={{ color: 'white', backgroundColor: '#d0d0d0', padding: 20 }}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
@@ -86,7 +86,7 @@ export const AccordionSmall: Story = {
         locked: false,
         variation: 'sm',
         label: 'Exhibitied',
-        children: (
+        content: (
           <div style={{ color: 'white', backgroundColor: '#d0d0d0', padding: 20 }}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex

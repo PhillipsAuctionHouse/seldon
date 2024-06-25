@@ -1,12 +1,14 @@
 import React from 'react';
 import classnames from 'classnames';
 import { px } from '../../utils';
+import { getCommonProps } from '../../utils';
 import AccordionItem from './AccordionItem';
 import { AccordionItemType } from './types';
 
 // You'll need to change the HTMLDivElement to match the top-level element of your component
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   // list of accordion items
+  id?: string;
   items: AccordionItemType[];
 }
 /**
@@ -19,12 +21,19 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
  * [Storybook Link](Point back to yourself here)
  */
 const Accordion = ({ className, ...props }: AccordionProps) => {
-  const { items } = props;
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Accordion');
+  const { items, id } = props;
   return (
-    <div data-testid={`accordion`} className={classnames(`${px}-accordion`, { className })}>
-      {items.map((item, index, arr) => (
-        <AccordionItem {...item} isLastItem={arr.length - 1 - index === 0} key={`accordion${index}`} />
-      ))}
+    <div className={classnames(`${px}-accordion`, `${baseClassName}`, className)} {...commonProps} id={id}>
+      {items?.length > 0 &&
+        items.map((item, index, arr) => (
+          <AccordionItem
+            {...item}
+            isLastItem={arr.length - 1 - index === 0}
+            key={`accordion-${index}`}
+            id={`accordion-item-${index}`}
+          />
+        ))}
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { px } from '../../utils';
+import { getCommonProps } from '../../utils';
 import { AccordionItemType } from './types';
 import plusIcon from '../../assets/plus.svg';
 import minusIcon from '../../assets/minus.svg';
@@ -14,12 +15,25 @@ import classNames from 'classnames';
  */
 
 const AccordionItem = ({ ...props }: AccordionItemType) => {
-  const { locked, lockedVariation, lockedChildren, variation, label, children, isLastItem } = props;
+  getCommonProps(props, 'AccordionItem');
+  const { locked, lockedVariation, lockedContent, variation, label, content, isLastItem, id } = props;
   const [contentState, setContentState] = useState('collapsed');
   const isLargeVariation = variation === 'lg';
+  const iconId =
+    `${id}-` +
+    (locked
+      ? 'lockedIcon'
+      : lockedVariation
+        ? 'lockBlueIcon'
+        : contentState === 'collapsed'
+          ? 'plusIcon'
+          : 'minusIcon');
 
   return (
-    <div className={classNames(`${px}-accordionItem`, !isLastItem && `${px}-accordionItem__border_bottom`)}>
+    <div
+      className={classNames(`${px}-accordionItem`, !isLastItem && `${px}-accordionItem__border_bottom`)}
+      data-testid={id}
+    >
       <div
         className={classNames(`${px}-accordionItem__label`, !locked && `${px}-accordionItem__label_hoverable`)}
         onClick={() => !locked && setContentState(contentState === 'collapsed' ? 'expanded' : 'collapsed')}
@@ -34,11 +48,12 @@ const AccordionItem = ({ ...props }: AccordionItemType) => {
           src={
             locked ? (lockedVariation ? lockBlueIcon : lockIcon) : contentState === 'collapsed' ? plusIcon : minusIcon
           }
+          data-testid={iconId}
         />
       </div>
 
-      {locked && lockedChildren ? (
-        <div>{lockedChildren}</div>
+      {locked && lockedContent ? (
+        <div>{lockedContent}</div>
       ) : (
         <div
           className={classNames(
@@ -46,7 +61,7 @@ const AccordionItem = ({ ...props }: AccordionItemType) => {
             isLargeVariation && `${px}-accordionItem__child_text_lg`,
           )}
         >
-          {children}
+          {content}
         </div>
       )}
     </div>
