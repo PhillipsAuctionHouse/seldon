@@ -84,7 +84,7 @@
         color: $cta-blue;
       }
 
-      @media (max-width: 960px) {
+      @media (max-width: #{$breakpoint-md - 1}) {
         /* TODO: Create token to handle these styles dynamically */
         font-size: 0.8rem;
         font-weight: 400;
