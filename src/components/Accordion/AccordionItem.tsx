@@ -30,13 +30,11 @@ const AccordionItem = ({ ...props }: AccordionItemType) => {
           : 'minusIcon');
 
   return (
-    <div
-      className={classNames(`${px}-accordionItem`, !isLastItem && `${px}-accordionItem__border_bottom`)}
-      data-testid={id}
-    >
+    <div className={classNames(`${px}-accordionItem`, !isLastItem && `${px}-accordionItem__border_bottom`)}>
       <div
         className={classNames(`${px}-accordionItem__label`, !locked && `${px}-accordionItem__label_hoverable`)}
         onClick={() => !locked && setContentState(contentState === 'collapsed' ? 'expanded' : 'collapsed')}
+        data-testid={id}
       >
         <div
           className={classNames(`${px}-accordionItem__label_text`, isLargeVariation && `${px}-accordionItem__label_lg`)}
