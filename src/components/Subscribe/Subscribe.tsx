@@ -69,7 +69,7 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
 const Subscribe = ({
   blurb,
   buttonText = 'Sign Up',
-  buttonProps = { name: 'subscribe', value: 'some' },
+  buttonProps,
   className,
   element: Element = 'form',
   inputLabelText = 'Email*',
