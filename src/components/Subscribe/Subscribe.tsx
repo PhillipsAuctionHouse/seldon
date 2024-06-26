@@ -50,6 +50,10 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
    * Subscribe state for loading or error
    */
   subscriptionState?: SubscriptionState;
+  /**
+   * Method for the form submission
+   */
+  method?: string;
 }
 
 /**
@@ -65,7 +69,7 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
 const Subscribe = ({
   blurb,
   buttonText = 'Sign Up',
-  buttonProps,
+  buttonProps = { name: 'subscribe', value: 'some' },
   className,
   element: Element = 'form',
   inputLabelText = 'Email*',

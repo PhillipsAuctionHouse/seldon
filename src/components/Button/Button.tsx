@@ -27,6 +27,14 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
    * The type of the button.
    */
   type?: 'button' | 'submit' | 'reset';
+  /**
+   * Name of the button
+   */
+  name?: string;
+  /**
+   * Value of the button
+   */
+  value?: string;
 }
 
 /**
