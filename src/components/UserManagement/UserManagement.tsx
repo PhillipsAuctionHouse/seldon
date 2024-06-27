@@ -9,7 +9,7 @@ import { LinkProps } from '../Link/Link';
 import { SupportedLanguages } from '../../types/commonTypes';
 import classnames from 'classnames';
 
-export interface UserManagementProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface UserManagementProps extends React.HTMLAttributes<HTMLLIElement> {
   languageOptions?: { label: string; value: SupportedLanguages }[];
   currentLanguage?: SupportedLanguages;
   onLanguageChange?: (language: SupportedLanguages) => void;
@@ -43,15 +43,15 @@ const UserManagement = ({
   const AccountDetailsComponent = accountDetailsLink ?? 'a';
 
   return (
-    <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
-      <span className={`${baseClassName}__account-wrapper`}>
+    <li {...commonProps} className={classnames(baseClassName, className)} {...props}>
+      <ul className={`${baseClassName}__account-wrapper`}>
         {isLoggedIn && (
           <AccountDetailsComponent>
             <AccountCircle className={`${baseClassName}__account-icon`} />
           </AccountDetailsComponent>
         )}
         <NavigationItem onClick={isLoggedIn ? onLogout : onLogin} label={isLoggedIn ? logoutLabel : loginLabel} />
-      </span>
+      </ul>
       <NavigationItemTrigger className={`${baseClassName}__language`} label={languageLabel}>
         <NavigationList id={`${px}-langauge-selection-list`} className={`${baseClassName}__language__selections`}>
           {languageOptions.map((option) => (
@@ -71,7 +71,7 @@ const UserManagement = ({
         </NavigationList>
       </NavigationItemTrigger>
       {children}
-    </div>
+    </li>
   );
 };
 

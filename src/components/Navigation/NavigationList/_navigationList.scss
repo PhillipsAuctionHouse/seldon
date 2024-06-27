@@ -84,7 +84,7 @@
     }
   }
 
-  > li {
+  > li:not(.#{$px}-user-management) {
     @media (min-width: $breakpoint-md) {
       height: 60px;
     }
