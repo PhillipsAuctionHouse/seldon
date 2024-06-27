@@ -2,12 +2,14 @@
 
 .#{$px}-header {
   align-items: center;
+  background-color: $white;
   border-bottom: 1px solid rgba(0, 0, 0, 10%);
   display: flex;
   height: 60px;
   padding: 0 $spacing-md;
-  position: relative;
+  position: fixed;
   top: 30px;
+  width: 100vw;
 
   @media (max-width: #{$breakpoint-md - 1}) {
     top: 0;
@@ -35,7 +37,7 @@
     }
 
     span {
-      background-color: #707070;
+      background-color: $dark-gray;
       color: transparent;
       display: block;
       height: 2px;
@@ -45,7 +47,7 @@
 
       &::before,
       &::after {
-        background-color: #707070;
+        background-color: $dark-gray;
         content: '';
         display: block;
         height: 2px;
@@ -79,7 +81,7 @@
     }
 
     &:hover {
-      background-color: #f4f4f4;
+      background-color: $off-white;
     }
   }
 
