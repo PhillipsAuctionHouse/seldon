@@ -28,7 +28,7 @@ const NavigationItemTrigger = ({
       {...props}
     >
       <button className={`${px}-nav__item-trigger`} type="button">
-        <span className={`${px}-nav__item--label`}>{label}</span>
+        <label className={`${px}-nav__item--label`}>{label}</label>
       </button>
       {children}
     </li>

@@ -48,3 +48,4 @@ export {
 } from './components/ViewingsList/StatefulViewingsList';
 export * from './components/Text';
 export { default as UserManagement, type UserManagementProps } from './components/UserManagement/UserManagement';
+export * from './types/commonTypes';
