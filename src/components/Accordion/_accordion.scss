@@ -8,7 +8,7 @@
 }
 
 .#{$px}-accordionItem {
-  padding: 16px;
+  padding: 1rem;
 
   &__border_bottom {
     border-bottom: 1px solid $keyline-gray;
@@ -37,17 +37,22 @@
 
   &__label_icon {
     flex: initial;
-    height: 24px;
-    width: 24px;
+    height: 1.5rem;
+    width: 1.5rem;
   }
 
   &__icon_lg {
-    height: 32px;
-    width: 32px;
+    height: 2rem;
+    width: 2rem;
   }
 
   &__label_lg {
     @include text($heading3);
+  }
+
+  &__default {
+    display: none;
+    height: auto;
   }
 
   &__expanded {
@@ -55,18 +60,13 @@
     font-weight: 400;
     height: auto;
     margin: 10px 0;
-    margin-top: 10px;
     overflow: hidden;
     transition: all 0.5s ease-in-out;
   }
 
-  &__collapsed {
-    display: none;
-    height: auto;
-  }
-
   &__child_text_lg {
-    font-size: 20px;
-    margin: 20px 0;
+    @include text($body2);
+
+    margin: 1.25rem 0;
   }
 }

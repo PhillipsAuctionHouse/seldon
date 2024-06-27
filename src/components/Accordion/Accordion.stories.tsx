@@ -15,7 +15,7 @@ export const AccordionLarge: Story = {
   args: {
     items: [
       {
-        locked: false,
+        isLocked: false,
         variation: 'lg',
         label: 'What information do I need to provide to submit a consignment?',
         content: (
@@ -29,7 +29,7 @@ export const AccordionLarge: Story = {
         ),
       },
       {
-        locked: false,
+        isLocked: false,
         variation: 'lg',
         label: 'How long does it take to receive an estimate?',
         content: (
@@ -43,7 +43,7 @@ export const AccordionLarge: Story = {
         ),
       },
       {
-        locked: true,
+        isLocked: true,
         variation: 'lg',
         label: 'Do you accept artist submissions?',
       },
@@ -55,8 +55,8 @@ export const AccordionSmall: Story = {
   args: {
     items: [
       {
-        locked: true,
-        lockedVariation: true,
+        isLocked: true,
+        isLockedVariation: true,
         variation: 'sm',
         label: 'Condition Report',
         lockedContent: (
@@ -69,7 +69,7 @@ export const AccordionSmall: Story = {
         ),
       },
       {
-        locked: false,
+        isLocked: false,
         variation: 'sm',
         label: 'Provenance',
         content: (
@@ -83,7 +83,7 @@ export const AccordionSmall: Story = {
         ),
       },
       {
-        locked: false,
+        isLocked: false,
         variation: 'sm',
         label: 'Exhibitied',
         content: (

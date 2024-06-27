@@ -11,7 +11,7 @@ describe('Accordion', () => {
       <Accordion
         items={[
           {
-            locked: false,
+            isLocked: false,
             variation: 'lg',
             label: 'Consignment',
             content: <div>Lorem ipsum</div>,
@@ -30,7 +30,7 @@ describe('Accordion', () => {
       <Accordion
         items={[
           {
-            locked: true,
+            isLocked: true,
             variation: 'lg',
             label: 'Submissions',
             content: <div className="phillips-sign-up-link">Sign Up</div>,
@@ -51,13 +51,13 @@ describe('Accordion', () => {
       <Accordion
         items={[
           {
-            locked: false,
+            isLocked: false,
             variation: 'sm',
             label: 'Provenance',
             content: <div>Lorem ipsum</div>,
           },
           {
-            locked: true,
+            isLocked: true,
             variation: 'sm',
             label: 'Exhibitied',
             content: <div>Log In</div>,
