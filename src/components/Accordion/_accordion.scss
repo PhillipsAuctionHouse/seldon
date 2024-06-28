@@ -69,4 +69,24 @@
 
     margin: 1.25rem 0;
   }
+
+  &__transition__default {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: 300ms grid-template-rows ease;
+  }
+
+  &__transition__default > div {
+    overflow: hidden;
+  }
+
+  &__transition__collapsed > div:first-child {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  &__transition__expanded {
+    grid-template-rows: 1fr;
+    margin: 10px 0;
+  }
 }

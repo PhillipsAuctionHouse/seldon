@@ -18,6 +18,7 @@ export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement>
   label: string;
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   content?: any;
+  hasTransition?: boolean;
 }
 /**
  * ## Overview
@@ -34,6 +35,7 @@ const AccordionItem = ({
   content,
   isLastItem,
   id,
+  hasTransition = false,
 }: AccordionItemProps) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const isLargeVariation = variation === 'lg';
@@ -63,9 +65,13 @@ const AccordionItem = ({
         <div>{lockedContent}</div>
       ) : (
         <div
-          className={classnames(`${px}-accordionItem__default`, !isCollapsed && `${px}-accordionItem__expanded`, {
-            [`${px}-accordionItem__child_text_lg`]: isLargeVariation,
-          })}
+          className={classnames(
+            hasTransition ? `${px}-accordionItem__transition__default` : `${px}-accordionItem__default`,
+            !isCollapsed &&
+              (hasTransition ? `${px}-accordionItem__transition__expanded` : `${px}-accordionItem__expanded`),
+            hasTransition && isCollapsed && `${px}-accordionItem__transition__collapsed`,
+            { [`${px}-accordionItem__child_text_lg`]: isLargeVariation },
+          )}
         >
           {content}
         </div>
