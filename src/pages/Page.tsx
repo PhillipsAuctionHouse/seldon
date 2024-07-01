@@ -1,22 +1,22 @@
 import * as React from 'react';
 
-import Header from '../components/Header/Header';
+// import Header from '../components/Header/Header';
 
-type User = {
-  name: string;
-};
+// type User = {
+//   name: string;
+// };
 
 const Page: React.FC = () => {
-  const [user, setUser] = React.useState<User>();
+  // const [user, setUser] = React.useState<User>();
 
   return (
     <article>
-      <Header
+      {/* <Header
         user={user}
         onLogin={() => setUser({ name: 'Jane Doe' })}
         onLogout={() => setUser(undefined)}
         onCreateAccount={() => setUser({ name: 'Jane Doe' })}
-      />
+      /> */}
 
       <section className="storybook-page">
         <h2>Pages in Storybook</h2>

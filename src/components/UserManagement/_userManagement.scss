@@ -1,0 +1,115 @@
+@import '#scss/_vars';
+
+.#{$px}-user-management {
+  align-items: center;
+  background-color: #f4f4f4;
+  display: flex;
+  height: 30px;
+  justify-content: flex-end;
+  left: 0;
+  padding: 0 $spacing-md;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+
+  @media (max-width: #{$breakpoint-md - 1}) {
+    align-items: flex-start;
+    background: transparent;
+    flex-direction: column;
+    height: unset;
+    margin-top: auto;
+    padding: 0;
+    position: unset;
+  }
+
+  > li {
+    border: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  &__account-wrapper {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+
+    @media (max-width: #{$breakpoint-md - 1}) {
+      width: 100%;
+    }
+
+    .#{$px}-link {
+      @media (max-width: #{$breakpoint-md - 1}) {
+        width: 100%;
+      }
+
+      & > span {
+        color: $soft-black;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        letter-spacing: 0.125rem;
+      }
+    }
+  }
+
+  &__account-icon {
+    &:hover,
+    &:focus,
+    &:focus-within {
+      path {
+        fill: $soft-black;
+      }
+    }
+
+    @media (max-width: #{$breakpoint-md - 1}) {
+      display: none;
+    }
+  }
+
+  .#{$px}-nav__item {
+    &:hover,
+    &:focus,
+    &:focus-within {
+      &::after {
+        opacity: 0;
+      }
+      .#{$px}-user-management__language {
+        &__selections {
+          padding: 0.8125rem;
+        }
+      }
+    }
+    .#{$px}-user-management__language {
+      &__selections {
+        @media (min-width: $breakpoint-md) {
+          background: $off-white;
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 85%);
+          display: block;
+          left: unset;
+          min-height: unset;
+          min-width: 130px;
+          padding: 0;
+          position: absolute;
+          right: 0;
+          top: 30px;
+          width: 100%;
+
+          > li {
+            height: auto;
+          }
+          .#{$px}-input {
+            &--inline {
+              gap: 0.825rem;
+            }
+
+            &__input {
+              height: 18px;
+              width: 18px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
