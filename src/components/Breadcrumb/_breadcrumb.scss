@@ -1,0 +1,35 @@
+@import '#scss/_vars';
+
+.#{$px}-breadcrumb {
+  @include text($body3);
+
+  font-weight: 400;
+
+  ol {
+    display: flex;
+    flex-direction: row;
+
+    li {
+      display: flex;
+      flex-direction: row;
+
+      a {
+        margin: 10px;
+
+        &:hover {
+          color: $widget-blue;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .previous {
+    color: $keyline-gray;
+  }
+
+  .current {
+    color: $primary-black;
+    font-weight: 700;
+  }
+}
