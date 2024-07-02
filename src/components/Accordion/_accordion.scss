@@ -1,0 +1,92 @@
+@import '#scss/_vars';
+
+.#{$px}-accordion {
+  border-bottom: 1px solid $keyline-gray;
+  border-top: 1px solid $keyline-gray;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.#{$px}-accordionItem {
+  padding: 1rem;
+
+  &__border_bottom {
+    border-bottom: 1px solid $keyline-gray;
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: row;
+    opacity: 0.75;
+  }
+
+  &__label_hoverable {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &__label_text {
+    flex: auto;
+
+    @include text($body1);
+    @include DistinctDisplay;
+  }
+
+  &__label_icon {
+    flex: initial;
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  &__icon_lg {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  &__label_lg {
+    @include text($heading3);
+  }
+
+  &__default {
+    display: none;
+    height: auto;
+  }
+
+  &__expanded {
+    display: block;
+    font-weight: 400;
+    height: auto;
+    margin: 10px 0;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+  }
+
+  &__child_text_lg {
+    @include text($body2);
+
+    margin: 1.25rem 0;
+  }
+
+  &__transition__default {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: 300ms grid-template-rows ease;
+  }
+
+  &__transition__default > div {
+    overflow: hidden;
+  }
+
+  &__transition__collapsed > div:first-child {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  &__transition__expanded {
+    grid-template-rows: 1fr;
+    margin: 10px 0;
+  }
+}

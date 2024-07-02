@@ -33,3 +33,4 @@ export {
   type StatefulViewingsListProps,
 } from './components/ViewingsList/StatefulViewingsList';
 export * from './components/Text';
+export * from './components/Accordion';
