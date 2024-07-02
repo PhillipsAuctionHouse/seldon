@@ -25,15 +25,18 @@ const Breadcrumb = ({ className, items, ...props }: BreadcrumbProps) => {
   return (
     <nav aria-label="Breadcrumb" className={classnames(baseClassName, className)} {...commonProps} {...props}>
       <ol>
-        {items &&
+        {items ? (
           items.map((item: BreadcrumbItemProps, index: number) => (
             <BreadcrumbItem
               href={item.href}
               label={item.label}
               isCurrent={items.length - 1 === index}
-              key={`${index}-breadcrumb-item`}
+              key={item.label}
             />
-          ))}
+          ))
+        ) : (
+          <></>
+        )}
       </ol>
     </nav>
   );

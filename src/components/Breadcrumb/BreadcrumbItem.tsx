@@ -21,13 +21,15 @@ export interface BreadcrumbItemProps extends React.HTMLAttributes<HTMLDivElement
 const BreadcrumbItem = ({ className, href, label, isCurrent = false, ...props }: BreadcrumbItemProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Breadcrumb');
   const extraClass = !isCurrent ? 'previous' : 'current';
+  const ariaCurrent = !isCurrent ? false : 'page';
+  const currentHref = !isCurrent ? href : '';
 
   return (
     <li>
       <a
-        aria-current={!isCurrent ? false : 'page'}
+        aria-current={ariaCurrent}
         className={classnames(baseClassName, className, extraClass)}
-        href={!isCurrent ? href : ''}
+        href={currentHref}
         {...commonProps}
       >
         {label}
