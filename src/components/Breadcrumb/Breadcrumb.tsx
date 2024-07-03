@@ -19,24 +19,15 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-breadcrumb--overview)
  */
-const Breadcrumb = ({ className, items, ...props }: BreadcrumbProps) => {
+const Breadcrumb = ({ className, items = [], ...props }: BreadcrumbProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Breadcrumb');
 
   return (
     <nav aria-label="Breadcrumb" className={classnames(baseClassName, className)} {...commonProps} {...props}>
       <ol>
-        {items ? (
-          items.map((item: BreadcrumbItemProps, index: number) => (
-            <BreadcrumbItem
-              href={item.href}
-              label={item.label}
-              isCurrent={items.length - 1 === index}
-              key={item.label}
-            />
-          ))
-        ) : (
-          <></>
-        )}
+        {items.map((item: BreadcrumbItemProps, index: number) => (
+          <BreadcrumbItem href={item.href} label={item.label} isCurrent={items.length - 1 === index} key={item.label} />
+        ))}
       </ol>
     </nav>
   );

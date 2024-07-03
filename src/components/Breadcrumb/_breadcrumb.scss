@@ -3,7 +3,7 @@
 .#{$px}-breadcrumb {
   @include text($body3);
 
-  font-weight: 400;
+  color: $keyline-gray;
 
   ol {
     display: flex;
@@ -14,7 +14,7 @@
       flex-direction: row;
 
       a {
-        margin: 10px;
+        margin: $margin-sm;
 
         &:hover {
           color: $widget-blue;
@@ -24,11 +24,7 @@
     }
   }
 
-  .previous {
-    color: $keyline-gray;
-  }
-
-  .current {
+  &--current {
     color: $primary-black;
     font-weight: 700;
   }
