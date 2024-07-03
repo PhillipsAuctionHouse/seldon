@@ -7,20 +7,65 @@
   width: 100%;
 }
 
-.#{$px}-accordionItem {
-  padding: 1rem;
+.#{$px}-accordion-item {
+  padding: $spacing-sm;
 
-  &__border_bottom {
+  &__border-bottom {
     border-bottom: 1px solid $keyline-gray;
   }
 
-  &__label {
-    display: flex;
-    flex-direction: row;
-    opacity: 0.75;
+  &--expanded {
+    display: block;
+    font-weight: 400;
+    height: auto;
+    margin: 10px 0;
   }
 
-  &__label_hoverable {
+  &__content--lg {
+    @include text($body2);
+
+    margin: 1.25rem 0;
+  }
+
+  &--transition {
+    overflow: hidden;
+  }
+
+  &--transition[data-state='open'] {
+    animation: slide-down 200ms ease-out;
+  }
+
+  &--transition[data-state='closed'] {
+    animation: slide-up 200ms ease-out;
+  }
+
+  @keyframes slide-down {
+    from {
+      height: 0;
+    }
+
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+
+    to {
+      height: 0;
+    }
+  }
+}
+
+.#{$px}-accordion-item-label {
+  display: flex;
+  flex-direction: row;
+  opacity: 0.75;
+
+  &--hoverable {
     cursor: pointer;
 
     &:hover {
@@ -28,65 +73,25 @@
     }
   }
 
-  &__label_text {
+  &__text {
     flex: auto;
 
     @include text($body1);
     @include DistinctDisplay;
   }
 
-  &__label_icon {
+  &__text--lg {
+    @include text($heading3);
+  }
+
+  &__icon {
     flex: initial;
     height: 1.5rem;
     width: 1.5rem;
   }
 
-  &__icon_lg {
+  &__icon--lg {
     height: 2rem;
     width: 2rem;
-  }
-
-  &__label_lg {
-    @include text($heading3);
-  }
-
-  &__default {
-    display: none;
-    height: auto;
-  }
-
-  &__expanded {
-    display: block;
-    font-weight: 400;
-    height: auto;
-    margin: 10px 0;
-    overflow: hidden;
-    transition: all 0.5s ease-in-out;
-  }
-
-  &__child_text_lg {
-    @include text($body2);
-
-    margin: 1.25rem 0;
-  }
-
-  &__transition__default {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: 300ms grid-template-rows ease;
-  }
-
-  &__transition__default > div {
-    overflow: hidden;
-  }
-
-  &__transition__collapsed > div:first-child {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  &__transition__expanded {
-    grid-template-rows: 1fr;
-    margin: 10px 0;
   }
 }

@@ -39,6 +39,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@radix-ui/react-accordion": "^1.2.0",
     "change-case": "^5.4.4",
     "classnames": "^2.5.1",
     "flatpickr": "^4.6.13",

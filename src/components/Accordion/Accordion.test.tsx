@@ -9,19 +9,19 @@ describe('Accordion', () => {
   it('should contain the plus icon and toggles to minus icons on click', async () => {
     render(
       <Accordion
+        id="large"
         items={[
           {
             isLocked: false,
             variation: 'lg',
             label: 'Consignment',
-            content: <div>Lorem ipsum</div>,
+            children: <div>Lorem ipsum</div>,
           },
         ]}
-        id="large-accordion"
       />,
     );
     expect(screen.queryByTestId(/accordion-item-0-plusIcon/)).toBeInTheDocument();
-    await userEvent.click(screen.getByTestId('accordion-item-0'));
+    await userEvent.click(screen.getByTestId('accordion-item-0-trigger'));
     await waitFor(() => expect(screen.queryByTestId(/accordion-item-0-minusIcon/)).toBeInTheDocument());
   });
 
@@ -33,15 +33,14 @@ describe('Accordion', () => {
             isLocked: true,
             variation: 'lg',
             label: 'Submissions',
-            content: <div className="phillips-sign-up-link">Sign Up</div>,
+            children: <div className="phillips-sign-up-link">Sign Up</div>,
           },
         ]}
-        id="large-accordion"
       />,
     );
-    expect(screen.queryByTestId(/accordion-item-0-lockedIcon/)).toBeInTheDocument();
-    await userEvent.click(screen.getByTestId('accordion-item-0'));
-    await waitFor(() => expect(screen.queryByTestId(/accordion-item-0-lockedIcon/)).toBeInTheDocument());
+    expect(screen.queryByTestId('accordion-item-0-lockedIcon')).toBeInTheDocument();
+    await userEvent.click(screen.getByTestId('accordion-item-0-trigger'));
+    await waitFor(() => expect(screen.queryByTestId('accordion-item-0-lockedIcon')).toBeInTheDocument());
     const lockedContentElement = screen.getByText('Sign Up');
     expect(lockedContentElement).toHaveClass('phillips-sign-up-link');
   });
@@ -54,23 +53,22 @@ describe('Accordion', () => {
             isLocked: false,
             variation: 'sm',
             label: 'Provenance',
-            content: <div>Lorem ipsum</div>,
+            children: <div>Lorem ipsum</div>,
           },
           {
             isLocked: true,
             variation: 'sm',
             label: 'Exhibitied',
-            content: <div>Log In</div>,
+            children: <div>Log In</div>,
           },
         ]}
-        id="small-accordion"
       />,
     );
     expect(screen.queryByTestId(/accordion-item-0-plusIcon/)).toBeInTheDocument();
     expect(screen.queryByTestId(/accordion-item-1-lockedIcon/)).toBeInTheDocument();
-    await userEvent.click(screen.getByTestId('accordion-item-0'));
+    await userEvent.click(screen.getByTestId('accordion-item-0-trigger'));
     await waitFor(() => {
-      expect(container.getElementsByClassName('phillips-accordionItem__expanded').length).toBe(1);
+      expect(container.getElementsByClassName('phillips-accordion-item--expanded').length).toBe(1);
     });
   });
 });

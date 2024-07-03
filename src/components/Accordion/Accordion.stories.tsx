@@ -1,7 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
 import Accordion from './Accordion';
-import { px } from '../../utils';
-import classNames from 'classnames';
 
 const meta = {
   title: 'Components/Accordion',
@@ -27,13 +25,13 @@ export const AccordionLarge: Story = {
         isLocked: false,
         variation: 'lg',
         label: 'What information do I need to provide to submit a consignment?',
-        content: largeTextBlock,
+        children: largeTextBlock,
       },
       {
         isLocked: false,
         variation: 'lg',
         label: 'How long does it take to receive an estimate?',
-        content: largeTextBlock,
+        children: largeTextBlock,
       },
       {
         isLocked: true,
@@ -69,12 +67,9 @@ export const AccordionSmall: Story = {
         isLockedVariation: true,
         variation: 'sm',
         label: 'Condition Report',
-        lockedContent: (
-          <div
-            className={classNames(`${px}-accordionItem__label_text`)}
-            style={{ color: '#4A90E2', cursor: 'pointer' }}
-          >
-            Login or Signup
+        children: (
+          <div style={{ color: '#4A90E2', cursor: 'pointer', fontWeight: '500', fontSize: '20px' }}>
+            LOGIN OR SIGNUP
           </div>
         ),
       },
@@ -82,13 +77,13 @@ export const AccordionSmall: Story = {
         isLocked: false,
         variation: 'sm',
         label: 'Provenance',
-        content: smTextBlock,
+        children: smTextBlock,
       },
       {
         isLocked: false,
         variation: 'sm',
         label: 'Exhibitied',
-        content: smTextBlock,
+        children: smTextBlock,
         hasTransition: true,
       },
     ],

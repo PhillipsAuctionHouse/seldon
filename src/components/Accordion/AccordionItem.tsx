@@ -1,82 +1,153 @@
-import { px } from '../../utils';
+import React, { useState } from 'react';
+import { getCommonProps } from '../../utils';
 import plusIcon from '../../assets/plus.svg';
 import minusIcon from '../../assets/minus.svg';
 import lockIcon from '../../assets/lock.svg';
 import lockBlueIcon from '../../assets/lockBlue.svg';
-import { useState } from 'react';
 import classnames from 'classnames';
+import * as Accordion from '@radix-ui/react-accordion';
+import { AccordionHeaderType, AccordionContentType } from './types';
 
 export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
-  id?: string;
-  key?: string;
+  /**
+   * When true, prevents border bottom style from being applied to the item.
+   */
   isLastItem?: boolean;
+  /**
+   * When true, prevents the user from interacting with the item.
+   */
   isLocked: boolean;
+  /**
+   * When true applied the lock variation icon.
+   */
   isLockedVariation?: boolean;
-  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-  lockedContent?: any;
+  /**
+   * Determines whether the variation on text style is large or small.
+   */
   variation: 'lg' | 'sm';
+  /**
+   * Text string for the Accordion header for label.
+   */
   label: string;
-  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-  content?: any;
+  /**
+   * Child element pass in to display as item content.
+   */
+  children?: React.ReactNode;
+  /**
+   * When true applied the transition keyframe animation on item expand. Default as false.
+   */
   hasTransition?: boolean;
 }
 /**
  * ## Overview
  *
- * A single Accordion Item in a list
+ * A single Accordion Item from a list
  */
+
+const AccordionHeader = ({
+  children,
+  className,
+  baseClassName,
+  disable,
+  isCollapsed,
+  setIsCollapsed,
+  isLargeVariation,
+  isLockedVariation,
+  id,
+}: AccordionHeaderType) => (
+  <Accordion.Trigger
+    data-disabled={disable}
+    asChild
+    className={classnames(baseClassName, { [`${baseClassName}--hoverable`]: !disable }, className)}
+  >
+    <div onClick={() => !disable && setIsCollapsed((prevState) => !prevState)} data-testid={`${id}-trigger`}>
+      <div className={classnames(`${baseClassName}__text`, { [`${baseClassName}__text--lg`]: isLargeVariation })}>
+        {children}
+      </div>
+      <img
+        className={classnames(`${baseClassName}__icon`, { [`${baseClassName}__icon--lg`]: isLargeVariation })}
+        src={disable ? (isLockedVariation ? lockBlueIcon : lockIcon) : isCollapsed ? plusIcon : minusIcon}
+        data-testid={
+          `${id}-` +
+          (disable ? 'lockedIcon' : isLockedVariation ? 'lockBlueIcon' : isCollapsed ? 'plusIcon' : 'minusIcon')
+        }
+        aria-hidden
+      />
+    </div>
+  </Accordion.Trigger>
+);
+
+const AccordionContent = ({
+  children,
+  baseClassName,
+  disable,
+  hasTransition,
+  isLargeVariation,
+  isCollapsed,
+  className,
+}: AccordionContentType) => (
+  <>
+    {disable && children ? (
+      <div>{children}</div>
+    ) : (
+      <Accordion.Content
+        asChild
+        className={classnames(
+          { [`${baseClassName}__content--lg`]: isLargeVariation },
+          { [`${baseClassName}--transition`]: hasTransition },
+          { [`${baseClassName}--expanded`]: !isCollapsed },
+          className,
+        )}
+      >
+        {children}
+      </Accordion.Content>
+    )}
+  </>
+);
 
 const AccordionItem = ({
   isLocked,
   isLockedVariation,
-  lockedContent,
   variation,
   label,
-  content,
   isLastItem,
-  id,
   hasTransition = false,
+  children,
+  ...props
 }: AccordionItemProps) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Accordion');
   const isLargeVariation = variation === 'lg';
-  const iconId =
-    `${id}-` + (isLocked ? 'lockedIcon' : isLockedVariation ? 'lockBlueIcon' : isCollapsed ? 'plusIcon' : 'minusIcon');
+  const accordionItemClassName = `${baseClassName}-item`;
 
   return (
-    <div className={classnames(`${px}-accordionItem`, !isLastItem && `${px}-accordionItem__border_bottom`)}>
-      <div
-        className={classnames(`${px}-accordionItem__label`, !isLocked && `${px}-accordionItem__label_hoverable`)}
-        onClick={() => !isLocked && setIsCollapsed((prevState) => !prevState)}
-        data-testid={id}
+    <Accordion.Item
+      disabled={isLocked}
+      value={commonProps['data-testid']}
+      className={classnames(accordionItemClassName, { [`${accordionItemClassName}__border-bottom`]: !isLastItem })}
+    >
+      <AccordionHeader
+        disable={isLocked}
+        isLargeVariation={isLargeVariation}
+        isLockedVariation={isLockedVariation}
+        isCollapsed={isCollapsed}
+        setIsCollapsed={setIsCollapsed}
+        id={props?.id}
+        baseClassName={`${accordionItemClassName}-label`}
       >
-        <div
-          className={classnames(`${px}-accordionItem__label_text`, isLargeVariation && `${px}-accordionItem__label_lg`)}
-        >
-          {label}
-        </div>
-        <img
-          className={classnames(`${px}-accordionItem__label_icon`, isLargeVariation && `${px}-accordionItem__icon_lg`)}
-          src={isLocked ? (isLockedVariation ? lockBlueIcon : lockIcon) : isCollapsed ? plusIcon : minusIcon}
-          data-testid={iconId}
-        />
-      </div>
+        {label}
+      </AccordionHeader>
 
-      {isLocked && lockedContent ? (
-        <div>{lockedContent}</div>
-      ) : (
-        <div
-          className={classnames(
-            hasTransition ? `${px}-accordionItem__transition__default` : `${px}-accordionItem__default`,
-            !isCollapsed &&
-              (hasTransition ? `${px}-accordionItem__transition__expanded` : `${px}-accordionItem__expanded`),
-            hasTransition && isCollapsed && `${px}-accordionItem__transition__collapsed`,
-            { [`${px}-accordionItem__child_text_lg`]: isLargeVariation },
-          )}
-        >
-          {content}
-        </div>
-      )}
-    </div>
+      <AccordionContent
+        disable={isLocked}
+        hasTransition={hasTransition}
+        isLargeVariation={isLargeVariation}
+        isCollapsed={isCollapsed}
+        baseClassName={accordionItemClassName}
+      >
+        {children}
+      </AccordionContent>
+    </Accordion.Item>
   );
 };
 

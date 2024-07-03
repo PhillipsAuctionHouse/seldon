@@ -1,12 +1,22 @@
 import React from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
+import * as Accordion from '@radix-ui/react-accordion';
 import AccordionItem, { AccordionItemProps } from './AccordionItem';
 
 // You'll need to change the HTMLDivElement to match the top-level element of your component
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
-  // list of accordion items
+  /**
+   * Unique id for component testing
+   */
   id?: string;
+  /**
+   * Determines whether one or multiple items can be opened at the same time. Default as single.
+   */
+  type?: 'single' | 'multiple';
+  /**
+   * List of items objects looped by Accordion.Root to render as AccordionItems
+   */
   items: AccordionItemProps[];
 }
 /**
@@ -18,22 +28,29 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * [Storybook Link](Point back to yourself here)
  */
-const Accordion = ({ className, ...props }: AccordionProps) => {
+const AccordionComponent = ({ className, items, type = 'single', ...props }: AccordionProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Accordion');
-  const { items, id } = props;
   return (
-    <div className={classnames(`${baseClassName}`, className)} {...commonProps} id={id}>
+    <Accordion.Root
+      className={classnames(`${baseClassName}`, className)}
+      type={type}
+      {...commonProps}
+      id={props?.id}
+      collapsible
+    >
       {items?.length > 0 &&
-        items.map((item, index, arr) => (
+        items.map((item, index) => (
           <AccordionItem
             {...item}
-            isLastItem={arr.length - 1 - index === 0}
-            key={`accordion-${index}`}
-            id={`accordion-item-${index}`}
-          />
+            isLastItem={index === items?.length - 1}
+            key={`accordion-key-${index}`}
+            id={type === 'single' ? `accordion-item-${index}` : undefined}
+          >
+            {item?.children}
+          </AccordionItem>
         ))}
-    </div>
+    </Accordion.Root>
   );
 };
 
-export default Accordion;
+export default AccordionComponent;
