@@ -3,7 +3,11 @@
 .#{$px}-breadcrumb {
   @include text($body3);
 
-  color: $keyline-gray;
+  color: $soft-black-2;
+
+  @media (max-width: $breakpoint-sm) {
+    display: none;
+  }
 
   ol {
     display: flex;
@@ -15,6 +19,8 @@
 
       a {
         margin: $margin-sm;
+        overflow: hidden;
+        text-wrap: nowrap;
 
         &:hover {
           color: $widget-blue;
