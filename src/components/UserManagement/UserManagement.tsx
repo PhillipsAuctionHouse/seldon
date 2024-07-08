@@ -9,7 +9,7 @@ import { LinkProps } from '../Link/Link';
 import { SupportedLanguages } from '../../types/commonTypes';
 import classnames from 'classnames';
 
-export interface UserManagementProps extends React.HTMLAttributes<HTMLLIElement> {
+export interface UserManagementProps extends React.HTMLAttributes<HTMLDivElement> {
   languageOptions?: { label: string; value: SupportedLanguages }[];
   currentLanguage?: SupportedLanguages;
   onLanguageChange?: (language: SupportedLanguages) => void;
@@ -43,7 +43,7 @@ const UserManagement = ({
   const AccountDetailsComponent = accountDetailsLink ?? 'a';
 
   return (
-    <li {...commonProps} className={classnames(baseClassName, className)} {...props}>
+    <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
       <ul className={`${baseClassName}__account-wrapper`}>
         {isLoggedIn && (
           <AccountDetailsComponent>
@@ -71,7 +71,7 @@ const UserManagement = ({
         </NavigationList>
       </NavigationItemTrigger>
       {children}
-    </li>
+    </div>
   );
 };
 
