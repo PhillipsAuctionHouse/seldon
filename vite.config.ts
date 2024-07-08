@@ -66,7 +66,7 @@ export default defineConfig({
             {
               src: ['src/components/**/*.scss', 'src/pages/**/*.scss'],
               dest: ['dist/scss'],
-              transform: (contents) => contents.toString().replace(/#scss/g, '../..'),
+              transform: (contents) => contents.toString().replace(/#scss/g, '@phillips/seldon/dist/scss'),
             },
           ],
         }),

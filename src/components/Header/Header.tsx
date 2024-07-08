@@ -1,53 +1,104 @@
-import Button from '../Button/Button';
+import classnames from 'classnames';
+import * as React from 'react';
+import { px } from '../../utils';
+import Search from '../Search/Search';
 
-// Try to not pass complex objects into components
-type User = {
-  name: string;
+export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Default mobile menu label
+   */
+  defaultMobileMenuLabel?: string;
+  /**
+   * Logo src
+   */
+  logo?: React.ReactElement<React.Component> | string;
+  /**
+   * Toggle open text
+   */
+  toggleOpenText?: string;
+  /**
+   * Toggle close text
+   */
+  toggleCloseText?: string;
+}
+type HeaderContextType = {
+  defaultMobileMenuLabel: string;
+  expandedItem: string;
+  setExpandedItem: (item: string) => void;
+  isExpanded: boolean;
+  onSelect: (label: string) => void;
 };
 
-export interface HeaderProps {
-  user?: User;
-  onLogin?: () => void;
-  onLogout?: () => void;
-  onCreateAccount?: () => void;
-}
+export const HeaderContext = React.createContext({
+  defaultMobileMenuLabel: '',
+  expandedItem: '',
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+  setExpandedItem: (_item: string) => {},
+  isExpanded: false,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+  onSelect: (_label: string) => {},
+});
 
-const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps) => (
-  <header>
-    <div className="storybook-header">
-      <div>
-        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-          <g fill="none" fillRule="evenodd">
-            <path d="M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z" fill="#FFF" />
-            <path d="M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z" fill="#555AB9" />
-            <path d="M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z" fill="#91BAF8" />
-          </g>
-        </svg>
-        <h1>Acme</h1>
+const Header = ({
+  defaultMobileMenuLabel = 'Main Menu',
+  logo,
+  className,
+  children,
+  toggleOpenText = 'Open Menu',
+  toggleCloseText = 'Close Menu',
+  ...props
+}: React.PropsWithChildren<HeaderProps>) => {
+  const [toggleState, setToggleState] = React.useState(false);
+  const [expandedItem, setExpandedItem] = React.useState(defaultMobileMenuLabel);
+  const toggleText = toggleState ? toggleCloseText : toggleOpenText;
+  const isExpanded = expandedItem !== defaultMobileMenuLabel;
+  const handleMenuToggle = function () {
+    setToggleState((prev) => !prev);
+    setExpandedItem(defaultMobileMenuLabel);
+  };
+  const onSelect = function (label: string) {
+    setExpandedItem((prev) => (prev === defaultMobileMenuLabel ? label : defaultMobileMenuLabel));
+  };
+
+  return (
+    <header {...props} className={classnames(`${px}-header`, className)}>
+      <div
+        className={classnames(`${px}-header__overlay`, { [`${px}-header__overlay--active`]: toggleState })}
+        data-testid="header-overlay"
+        onClick={handleMenuToggle}
+      />
+      <button
+        aria-label={toggleText}
+        data-testid="mobile-menu-toggle"
+        type="button"
+        onClick={handleMenuToggle}
+        className={classnames(`${px}-header__toggle-btn`, {
+          [`${px}-header__toggle-btn--open`]: toggleText === toggleCloseText,
+        })}
+      >
+        <span>{toggleText}</span>
+      </button>
+      <h1 data-testid="header-logo" className={`${px}-header__logo`} tabIndex={toggleText === toggleOpenText ? 0 : -1}>
+        {typeof logo === 'object' ? logo : <img data-testid="header-logo-img" src={logo as string} height="14" />}
+      </h1>
+      <div className={classnames(`${px}-header__nav`, { [`${px}-header__nav--open`]: toggleState })}>
+        <HeaderContext.Provider
+          value={
+            {
+              defaultMobileMenuLabel,
+              expandedItem,
+              setExpandedItem: (item: string) => setExpandedItem(item),
+              isExpanded,
+              onSelect: (label: string) => onSelect(label),
+            } as HeaderContextType
+          }
+        >
+          {children}
+        </HeaderContext.Provider>
       </div>
-      <div>
-        {user ? (
-          <>
-            <span className="welcome">
-              Welcome, <b>{user.name}</b>!
-            </span>
-            <Button size="sm" onClick={onLogout}>
-              Log out
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button size="sm" onClick={onLogin}>
-              Log in
-            </Button>
-            <Button size="sm" onClick={onCreateAccount}>
-              Sign up
-            </Button>
-          </>
-        )}
-      </div>
-    </div>
-  </header>
-);
+      <Search />
+    </header>
+  );
+};
 
 export default Header;
