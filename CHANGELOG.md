@@ -1,3 +1,10 @@
+# [1.27.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.26.2...v1.27.0) (2024-07-08)
+
+
+### Features
+
+* **header:** L3-376 Added Header component ([#168](https://github.com/PhillipsAuctionHouse/seldon/issues/168)) ([7e196c5](https://github.com/PhillipsAuctionHouse/seldon/commit/7e196c5ef0671c3a71d81247748207585e3bd0e1))
+
 ## [1.26.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.26.1...v1.26.2) (2024-06-20)
 
 
