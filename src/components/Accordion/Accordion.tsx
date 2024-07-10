@@ -38,17 +38,16 @@ const AccordionComponent = ({ className, items, type = 'single', ...props }: Acc
       id={props?.id}
       collapsible
     >
-      {items?.length > 0 &&
-        items.map((item, index) => (
-          <AccordionItem
-            {...item}
-            isLastItem={index === items?.length - 1}
-            key={`accordion-key-${index}`}
-            id={type === 'single' ? `accordion-item-${index}` : undefined}
-          >
-            {item?.children}
-          </AccordionItem>
-        ))}
+      {items.map((item, index) => (
+        <AccordionItem
+          {...item}
+          isLastItem={index === items?.length - 1}
+          key={`accordion-key-${item?.label}`}
+          id={type === 'single' ? `accordion-item-${index}` : undefined}
+        >
+          {item?.children}
+        </AccordionItem>
+      ))}
     </Accordion.Root>
   );
 };

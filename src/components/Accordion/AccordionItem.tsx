@@ -54,28 +54,31 @@ const AccordionHeader = ({
   isLargeVariation,
   isLockedVariation,
   id,
-}: AccordionHeaderType) => (
-  <Accordion.Trigger
-    data-disabled={disable}
-    asChild
-    className={classnames(baseClassName, { [`${baseClassName}--hoverable`]: !disable }, className)}
-  >
-    <div onClick={() => !disable && setIsCollapsed((prevState) => !prevState)} data-testid={`${id}-trigger`}>
-      <div className={classnames(`${baseClassName}__text`, { [`${baseClassName}__text--lg`]: isLargeVariation })}>
-        {children}
+}: AccordionHeaderType) => {
+  const handleClick = () => !disable && setIsCollapsed((prevState) => !prevState);
+  const icon = disable ? (isLockedVariation ? lockBlueIcon : lockIcon) : isCollapsed ? plusIcon : minusIcon;
+  const dataTestId =
+    `${id}-` + (disable ? 'lockedIcon' : isLockedVariation ? 'lockBlueIcon' : isCollapsed ? 'plusIcon' : 'minusIcon');
+  return (
+    <Accordion.Trigger
+      data-disabled={disable}
+      asChild
+      className={classnames(baseClassName, { [`${baseClassName}--hoverable`]: !disable }, className)}
+    >
+      <div onClick={handleClick} data-testid={`${id}-trigger`}>
+        <div className={classnames(`${baseClassName}__text`, { [`${baseClassName}__text--lg`]: isLargeVariation })}>
+          {children}
+        </div>
+        <img
+          className={classnames(`${baseClassName}__icon`, { [`${baseClassName}__icon--lg`]: isLargeVariation })}
+          src={icon}
+          data-testid={dataTestId}
+          aria-hidden
+        />
       </div>
-      <img
-        className={classnames(`${baseClassName}__icon`, { [`${baseClassName}__icon--lg`]: isLargeVariation })}
-        src={disable ? (isLockedVariation ? lockBlueIcon : lockIcon) : isCollapsed ? plusIcon : minusIcon}
-        data-testid={
-          `${id}-` +
-          (disable ? 'lockedIcon' : isLockedVariation ? 'lockBlueIcon' : isCollapsed ? 'plusIcon' : 'minusIcon')
-        }
-        aria-hidden
-      />
-    </div>
-  </Accordion.Trigger>
-);
+    </Accordion.Trigger>
+  );
+};
 
 const AccordionContent = ({
   children,
