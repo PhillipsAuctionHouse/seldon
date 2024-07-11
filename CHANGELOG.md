@@ -1,3 +1,10 @@
+# [1.28.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.27.0...v1.28.0) (2024-07-11)
+
+
+### Features
+
+* **herobanner:** L3-2178 - swap image placement on smaller breakpoints ([#217](https://github.com/PhillipsAuctionHouse/seldon/issues/217)) ([c6b71ae](https://github.com/PhillipsAuctionHouse/seldon/commit/c6b71ae80b0b6f14768b5dff302170be7d9e3105))
+
 # [1.27.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.26.2...v1.27.0) (2024-07-08)
 
 
