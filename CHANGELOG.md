@@ -1,3 +1,10 @@
+# [1.29.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.28.0...v1.29.0) (2024-07-11)
+
+
+### Features
+
+* **types:** L3-2525 added error type to SubscriptionState ([#218](https://github.com/PhillipsAuctionHouse/seldon/issues/218)) ([f7e63d3](https://github.com/PhillipsAuctionHouse/seldon/commit/f7e63d3f16ceef80a06c45aa31345039aa0178e3))
+
 # [1.28.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.27.0...v1.28.0) (2024-07-11)
 
 
