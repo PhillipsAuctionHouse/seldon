@@ -31,6 +31,12 @@ describe('Subscribe', () => {
     );
     expect(screen.getByText(/Invalid input/)).toBeInTheDocument();
   });
+  it('it will render an error if subscriptionState=error and errorText passed', () => {
+    render(
+      <Subscribe title="Subscribe to Email" subscriptionState={SubscriptionState.Error} errorText="Network error" />,
+    );
+    expect(screen.getByText(/Network error/)).toBeInTheDocument();
+  });
   it('it will render an success text if subscriptionState=success', () => {
     render(
       <Subscribe title="Subscribe to Email" subscriptionState={SubscriptionState.Success} successText="Success" />,

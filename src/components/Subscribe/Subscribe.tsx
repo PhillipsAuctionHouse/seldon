@@ -43,6 +43,10 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
    */
   invalidText?: string;
   /**
+   * Subscribe invalid text
+   */
+  errorText?: string;
+  /**
    * Subscribe success text
    */
   successText?: string;
@@ -73,24 +77,28 @@ const Subscribe = ({
   title = 'Subscribe to Newsletter',
   loadingText = 'Loading...',
   invalidText = '',
+  errorText = 'An error occurred. Please try again.',
   successText,
   subscriptionState = SubscriptionState.Default,
   ...props
 }: SubscribeProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Subscribe');
 
-  const isInvalid = subscriptionState === 'invalid';
-  const isLoading = subscriptionState === 'loading';
-  const isSuccess = subscriptionState === 'success';
+  const isInvalid = subscriptionState === SubscriptionState.Invalid;
+  const isLoading = subscriptionState === SubscriptionState.Loading;
+  const isSuccess = subscriptionState === SubscriptionState.Success;
+  const isError = subscriptionState === SubscriptionState.Error;
 
   const textsCondition = {
     invalid: invalidText,
     success: successText,
     loading: loadingText,
+    error: errorText,
   };
 
-  const warnText = subscriptionState !== 'default' ? textsCondition[subscriptionState] : '';
+  const text = subscriptionState !== SubscriptionState.Default ? textsCondition[subscriptionState] : '';
   const warn = isSuccess || isLoading;
+  const invalid = isInvalid || isError;
 
   return (
     <Element {...commonProps} className={classnames(baseClassName, className)} noValidate {...props}>
@@ -103,10 +111,10 @@ const Subscribe = ({
         name="email"
         placeholder={inputPlaceholder}
         labelText={inputLabelText}
-        invalid={isInvalid}
-        invalidText={invalidText}
+        invalid={invalid}
+        invalidText={text}
         warn={warn}
-        warnText={warnText}
+        warnText={text}
         required
       />
       <Button className={`${baseClassName}__button ${className}`} buttonType="secondary" type="submit" {...buttonProps}>
