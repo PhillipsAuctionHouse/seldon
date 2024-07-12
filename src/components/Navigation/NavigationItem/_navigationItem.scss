@@ -173,14 +173,6 @@
   @media (min-width: $breakpoint-md) {
     position: relative;
 
-    &:not(ul ul li):hover::before {
-      content: '';
-      height: 100%;
-      position: absolute;
-      top: 0;
-      width: 100%;
-    }
-
     &:not(ul ul li) a:focus,
     &:not(ul ul li) button:focus,
     &:not(ul ul li) p:focus {
