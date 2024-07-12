@@ -1,0 +1,37 @@
+@import '#scss/_vars';
+
+.#{$px}-breadcrumb {
+  @include text($body3);
+
+  color: $soft-black-2;
+
+  @media (max-width: $breakpoint-sm) {
+    display: none;
+  }
+
+  ol {
+    display: flex;
+    flex-direction: row;
+
+    li {
+      display: flex;
+      flex-direction: row;
+
+      a {
+        margin: $margin-sm;
+        overflow: hidden;
+        text-wrap: nowrap;
+
+        &:hover {
+          color: $widget-blue;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  &--current {
+    color: $primary-black;
+    font-weight: 700;
+  }
+}
