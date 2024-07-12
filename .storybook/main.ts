@@ -14,7 +14,7 @@ const config: StorybookConfig = {
     options: {},
   },
   docs: {
-    defaultName: "Overview"
+    defaultName: "Overview", 
   },
   viteFinal: (config) => {
     if (config && config.resolve) {

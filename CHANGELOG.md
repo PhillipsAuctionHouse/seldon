@@ -1,3 +1,31 @@
+## [1.29.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.29.0...v1.29.1) (2024-07-11)
+
+
+### Bug Fixes
+
+* **header:** L3-2823 Fix For Direct Nav Links ([#219](https://github.com/PhillipsAuctionHouse/seldon/issues/219)) ([71dcb92](https://github.com/PhillipsAuctionHouse/seldon/commit/71dcb92f0f37c768ef75b31b7c562e8593965455))
+
+# [1.29.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.28.0...v1.29.0) (2024-07-11)
+
+
+### Features
+
+* **types:** L3-2525 added error type to SubscriptionState ([#218](https://github.com/PhillipsAuctionHouse/seldon/issues/218)) ([f7e63d3](https://github.com/PhillipsAuctionHouse/seldon/commit/f7e63d3f16ceef80a06c45aa31345039aa0178e3))
+
+# [1.28.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.27.0...v1.28.0) (2024-07-11)
+
+
+### Features
+
+* **herobanner:** L3-2178 - swap image placement on smaller breakpoints ([#217](https://github.com/PhillipsAuctionHouse/seldon/issues/217)) ([c6b71ae](https://github.com/PhillipsAuctionHouse/seldon/commit/c6b71ae80b0b6f14768b5dff302170be7d9e3105))
+
+# [1.27.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.26.2...v1.27.0) (2024-07-08)
+
+
+### Features
+
+* **header:** L3-376 Added Header component ([#168](https://github.com/PhillipsAuctionHouse/seldon/issues/168)) ([7e196c5](https://github.com/PhillipsAuctionHouse/seldon/commit/7e196c5ef0671c3a71d81247748207585e3bd0e1))
+
 ## [1.26.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.26.1...v1.26.2) (2024-06-20)
 
 

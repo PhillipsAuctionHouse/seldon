@@ -1,0 +1,101 @@
+@import '#scss/vars';
+@import '#scss/typography';
+
+.#{$px}-search {
+  align-items: center;
+  display: flex;
+  height: 60px;
+  justify-content: center;
+  padding: 0.47rem;
+
+  &__overlay {
+    background-color: rgba(0, 0, 0, 50%);
+    display: none;
+    height: 100%;
+    inset: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+
+    &--active {
+      display: block;
+      & + .#{$px}-search__button {
+        z-index: 3;
+      }
+    }
+  }
+
+  &__button {
+    background: transparent;
+    border: none;
+    height: 18px;
+    margin: 0;
+    padding: 0;
+    width: 18px;
+
+    @media (max-width: #{$breakpoint-md - 1}) {
+      border: 2px solid black;
+      border-radius: 50%;
+      height: 35px;
+      padding: 0.125rem;
+      position: absolute;
+      right: 1rem;
+      width: 35px;
+    }
+
+    &__icon {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &__input-wrapper {
+    background: #323232;
+    color: $white;
+    display: flex;
+    height: 100px;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 60px;
+    transition: 0.5s ease;
+    width: 0;
+    z-index: 3;
+
+    @media (max-width: #{$breakpoint-md - 1}) {
+      top: 60px;
+    }
+
+    &--active {
+      width: 50%;
+
+      @media (max-width: #{$breakpoint-md - 1}) {
+        top: 60px;
+        width: 100%;
+      }
+    }
+
+    &__icon {
+      height: 24px;
+      left: 35px;
+      position: absolute;
+      top: 30px;
+      width: 24px;
+
+      path {
+        fill: $white;
+      }
+    }
+    .#{$px}-input__input {
+      background: #323232;
+      border-bottom: 1px solid white;
+      border-left: 0;
+      border-radius: unset;
+      border-right: 0;
+      border-top: 0;
+      color: white;
+      margin: 1rem 2rem;
+      padding: 1rem 2rem;
+    }
+  }
+}
