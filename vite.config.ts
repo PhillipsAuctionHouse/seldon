@@ -6,9 +6,9 @@ import copy from 'rollup-plugin-copy';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import { transformScssAlias } from './config/build/buildUtils';
 
 import * as packageJson from './package.json';
-
 // const isDev = process.env.NODE_ENV;
 
 const plugins = [svgr(), react(), tsconfigPaths(), dts({ entryRoot: 'src' })];
@@ -66,7 +66,7 @@ export default defineConfig({
             {
               src: ['src/components/**/*.scss', 'src/pages/**/*.scss'],
               dest: ['dist/scss'],
-              transform: (contents) => contents.toString().replace(/#scss/g, '../..'),
+              transform: transformScssAlias,
             },
           ],
         }),
