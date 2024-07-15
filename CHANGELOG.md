@@ -1,3 +1,10 @@
+## [1.30.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.30.0...v1.30.1) (2024-07-15)
+
+
+### Bug Fixes
+
+* **scss:** L3-2832 scss alias map support any level of nesting ([#226](https://github.com/PhillipsAuctionHouse/seldon/issues/226)) ([1c13322](https://github.com/PhillipsAuctionHouse/seldon/commit/1c13322a3afccb72e56975260f681745134b3b49))
+
 # [1.30.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.29.1...v1.30.0) (2024-07-12)
 
 
