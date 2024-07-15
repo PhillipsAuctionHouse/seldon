@@ -1,3 +1,17 @@
+# [1.30.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.29.1...v1.30.0) (2024-07-12)
+
+
+### Features
+
+* **components:** L3-2507 build breadcrumb component ([#205](https://github.com/PhillipsAuctionHouse/seldon/issues/205)) ([bd57473](https://github.com/PhillipsAuctionHouse/seldon/commit/bd574734c0cddf15bd969aa88e3a413df3d6c05c))
+
+## [1.29.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.29.0...v1.29.1) (2024-07-11)
+
+
+### Bug Fixes
+
+* **header:** L3-2823 Fix For Direct Nav Links ([#219](https://github.com/PhillipsAuctionHouse/seldon/issues/219)) ([71dcb92](https://github.com/PhillipsAuctionHouse/seldon/commit/71dcb92f0f37c768ef75b31b7c562e8593965455))
+
 # [1.29.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.28.0...v1.29.0) (2024-07-11)
 
 

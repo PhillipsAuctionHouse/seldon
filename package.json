@@ -1,6 +1,6 @@
 {
   "name": "@phillips/seldon",
-  "version": "1.29.0",
+  "version": "1.30.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/PhillipsAuctionHouse/seldon"
@@ -52,14 +52,14 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^10.1.0",
-    "@storybook/addon-essentials": "^8.1.11",
+    "@storybook/addon-essentials": "^8.2.1",
     "@storybook/addon-interactions": "^8.1.4",
     "@storybook/addon-links": "^8.1.4",
     "@storybook/addon-mdx-gfm": "^8.1.11",
     "@storybook/blocks": "^8.1.4",
     "@storybook/react": "^8.1.4",
     "@storybook/react-vite": "^8.1.4",
-    "@storybook/theming": "^8.1.11",
+    "@storybook/theming": "^8.2.2",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.5.2",

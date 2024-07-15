@@ -6,7 +6,7 @@ import copy from 'rollup-plugin-copy';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { transformScssAlias } from './config/build/buildUtils';
+import { transformScssAlias } from './src/build/buildUtils';
 
 import * as packageJson from './package.json';
 // const isDev = process.env.NODE_ENV;
