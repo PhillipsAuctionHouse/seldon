@@ -50,7 +50,11 @@ const UserManagement = ({
             <AccountCircle className={`${baseClassName}__account-icon`} />
           </AccountDetailsComponent>
         )}
-        <NavigationItem onClick={isLoggedIn ? onLogout : onLogin} label={isLoggedIn ? logoutLabel : loginLabel} />
+        <NavigationItem
+          className={`${baseClassName}__login`}
+          onClick={isLoggedIn ? onLogout : onLogin}
+          label={isLoggedIn ? logoutLabel : loginLabel}
+        />
       </ul>
       <NavigationItemTrigger className={`${baseClassName}__language`} label={languageLabel}>
         <NavigationList id={`${px}-langauge-selection-list`} className={`${baseClassName}__language__selections`}>

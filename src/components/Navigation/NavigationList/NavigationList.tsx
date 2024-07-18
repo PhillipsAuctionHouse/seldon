@@ -33,12 +33,12 @@ const NavigationList = ({ id, children, className }: React.PropsWithChildren<Nav
     >
       {largeCtaItems.length > 0 ? (
         <div className={classNames(`${px}-nav__list__section`, `${px}-nav__list__section--large-cta`)}>
-          {largeCtaItems.map((item: React.ReactNode) => item)}
+          {largeCtaItems}
         </div>
       ) : null}
       {smallCtaItems.length > 0 ? (
         <div className={classNames(`${px}-nav__list__section`, `${px}-nav__list__section--small-cta`)}>
-          {smallCtaItems.map((item: React.ReactNode) => item)}
+          {smallCtaItems}
         </div>
       ) : null}
       {!largeCtaItems.length && !smallCtaItems.length ? children : null}

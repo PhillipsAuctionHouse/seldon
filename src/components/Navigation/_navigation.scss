@@ -1,7 +1,8 @@
 @import '#scss/vars';
+@import '#scss/utils';
 
 .#{$px}-nav {
-  background: $pure-white;
+  background: $off-white;
   color: $soft-black;
   height: 100%;
   overflow: hidden;
@@ -9,7 +10,8 @@
   position: relative;
   width: 100%;
 
-  @media (min-width: $breakpoint-md) {
+  @include isHeaderDesktop {
+    background: $pure-white;
     display: flex;
     flex-wrap: wrap;
     overflow: visible;
@@ -53,7 +55,7 @@
       background-color 0.5s;
   }
 
-  @media (min-width: $breakpoint-md) {
+  @include isHeaderDesktop {
     // Remove label and mobile buttons on larger screens
     .#{$px}-nav__back-btn,
     .#{$px}-nav__close-btn,

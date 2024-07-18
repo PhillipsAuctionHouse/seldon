@@ -161,3 +161,15 @@
     }
   }
 }
+
+@mixin isHeaderMobile() {
+  @media (max-width: #{$breakpoint-md - 1}) {
+    @content;
+  }
+}
+
+@mixin isHeaderDesktop() {
+  @media (min-width: $breakpoint-md) {
+    @content;
+  }
+}

@@ -1,10 +1,11 @@
 @import '#scss/_vars';
+@import '#scss/_utils';
 
 .#{$px}-user-management {
   align-items: center;
   background-color: #f4f4f4;
   display: flex;
-  height: 30px;
+  height: $user-management-height;
   justify-content: flex-end;
   left: 0;
   padding: 0 $spacing-md;
@@ -13,7 +14,7 @@
   top: 0;
   width: 100%;
 
-  @media (max-width: #{$breakpoint-md - 1}) {
+  @include isHeaderMobile {
     align-items: flex-start;
     background: transparent;
     flex-direction: column;
@@ -33,14 +34,13 @@
   &__account-wrapper {
     align-items: center;
     display: flex;
-    gap: 1rem;
 
-    @media (max-width: #{$breakpoint-md - 1}) {
+    @include isHeaderMobile {
       width: 100%;
     }
 
     .#{$px}-link {
-      @media (max-width: #{$breakpoint-md - 1}) {
+      @include isHeaderMobile {
         width: 100%;
       }
 
@@ -53,7 +53,13 @@
     }
   }
 
+  &__login {
+    cursor: pointer;
+  }
+
   &__account-icon {
+    cursor: pointer;
+
     &:hover,
     &:focus,
     &:focus-within {
@@ -62,7 +68,7 @@
       }
     }
 
-    @media (max-width: #{$breakpoint-md - 1}) {
+    @include isHeaderMobile {
       display: none;
     }
   }
@@ -82,7 +88,7 @@
     }
     .#{$px}-user-management__language {
       &__selections {
-        @media (min-width: $breakpoint-md) {
+        @include isHeaderDesktop {
           background: $off-white;
           box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 85%);
           display: block;
@@ -92,7 +98,7 @@
           padding: 0;
           position: absolute;
           right: 0;
-          top: 30px;
+          top: $user-management-height;
           width: 100%;
 
           > li {

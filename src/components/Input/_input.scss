@@ -130,10 +130,16 @@ $lg: #{$px}-input--lg;
   }
 }
 
+.#{$px}-input__label:has(+ input[type='radio']),
+.#{$px}-input__label:has(+ input[type='checkbox']) {
+  cursor: pointer;
+}
+
 .#{$px}-radio-input,
 .#{$px}-checkbox-input {
   .#{$px}-input__input {
     align-self: flex-start;
+    cursor: pointer;
   }
 
   &.#{$px}-input--inline {
