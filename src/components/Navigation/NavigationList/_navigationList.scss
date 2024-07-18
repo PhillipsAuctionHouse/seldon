@@ -86,7 +86,7 @@
   }
 
   > li:not(.#{$px}-user-management) {
-    @include isHeaderMobile {
+    @include isHeaderDesktop {
       height: 60px;
     }
   }
