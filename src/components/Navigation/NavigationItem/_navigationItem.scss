@@ -47,8 +47,6 @@
   &--expanded ~ & &--label,
   &--expanded ~ & > button {
     @include isHeaderMobile {
-      // display: none;
-
       & > span::after {
         content: '';
       }
