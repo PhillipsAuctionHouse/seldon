@@ -1,6 +1,5 @@
 import type { Meta } from '@storybook/react';
 import Header, { HeaderProps } from './Header';
-import Logo from '../../assets/PhillipsLogo.svg?react';
 import Navigation from '../Navigation/Navigation';
 import NavigationList from '../Navigation/NavigationList/NavigationList';
 import NavigationItemTrigger from '../Navigation/NavigationItemTrigger/NavigationItemTrigger';
@@ -227,7 +226,3 @@ export const Playground = (props: HeaderProps) => (
     </main>
   </div>
 );
-
-Playground.args = {
-  logo: typeof Logo === 'string' ? Logo : <Logo />,
-};

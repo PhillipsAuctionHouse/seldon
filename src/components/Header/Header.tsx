@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 import { px } from '../../utils';
 import Search from '../Search/Search';
+import Logo from '../../assets/PhillipsLogo.svg?react';
 
 export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -45,7 +46,7 @@ export const HeaderContext = React.createContext({
 
 const Header = ({
   defaultMobileMenuLabel = 'Main Menu',
-  logo,
+  logo = <Logo />,
   className,
   children,
   toggleOpenText = 'Open Menu',
