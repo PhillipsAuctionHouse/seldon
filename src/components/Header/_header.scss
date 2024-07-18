@@ -9,7 +9,6 @@
   padding: $user-management-height $spacing-md 0; // save space for the user management
   position: sticky;
   top: 0;
-  width: 100vw;
 
   @include isHeaderMobile {
     padding: 0;
