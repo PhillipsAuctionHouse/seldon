@@ -27,6 +27,10 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
    * The type of the button.
    */
   type?: 'button' | 'submit' | 'reset';
+  /**
+   * Should the button be disabled?
+   */
+  isDisabled?: boolean;
 }
 
 /**
@@ -46,6 +50,7 @@ const Button = ({
   className,
   isIconLast: iconLast = false,
   type = 'button',
+  isDisabled = false,
   ...props
 }: ButtonProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Button');
@@ -62,6 +67,7 @@ const Button = ({
         },
         className,
       )}
+      disabled={isDisabled}
       {...props}
     >
       {children}

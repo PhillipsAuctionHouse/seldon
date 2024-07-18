@@ -78,6 +78,17 @@
     padding: 0.75em 1.75em;
   }
 
+  &:disabled {
+    background-color: $white;
+    border: 1px solid $medium-gray;
+    color: $medium-gray;
+    cursor: default;
+
+    svg {
+      fill: $medium-gray;
+    }
+  }
+
   * {
     margin: 0;
   }
