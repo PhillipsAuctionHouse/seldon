@@ -1,3 +1,10 @@
+## [1.30.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.30.1...v1.30.2) (2024-07-19)
+
+
+### Bug Fixes
+
+* **header:** L3-2815 fix minor header style issues ([#234](https://github.com/PhillipsAuctionHouse/seldon/issues/234)) ([e13214c](https://github.com/PhillipsAuctionHouse/seldon/commit/e13214cf513d2b31dc85c021033615c4a58e3efa))
+
 ## [1.30.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.30.0...v1.30.1) (2024-07-15)
 
 
