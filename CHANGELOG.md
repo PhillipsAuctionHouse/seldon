@@ -1,3 +1,10 @@
+# [1.31.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.30.2...v1.31.0) (2024-07-19)
+
+
+### Features
+
+* **button:** L3-2287 add disabled state for button ([#231](https://github.com/PhillipsAuctionHouse/seldon/issues/231)) ([ca16459](https://github.com/PhillipsAuctionHouse/seldon/commit/ca16459e515693110eb64316796e0f593185bd20))
+
 ## [1.30.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.30.1...v1.30.2) (2024-07-19)
 
 
