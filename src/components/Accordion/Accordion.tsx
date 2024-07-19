@@ -2,7 +2,6 @@ import React from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import * as Accordion from '@radix-ui/react-accordion';
-import AccordionItem, { AccordionItemProps } from './AccordionItem';
 
 // You'll need to change the HTMLDivElement to match the top-level element of your component
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -15,9 +14,9 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   type?: 'single' | 'multiple';
   /**
-   * List of items objects looped by Accordion.Root to render as AccordionItems
+   * Child element pass in to display as item content.
    */
-  items: AccordionItemProps[] | [];
+  children?: React.ReactNode;
 }
 /**
  * ## Overview
@@ -28,7 +27,7 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * [Storybook Link](Point back to yourself here)
  */
-const AccordionComponent = ({ className, items = [], type = 'single', ...props }: AccordionProps) => {
+const AccordionComponent = ({ className, type = 'single', children, ...props }: AccordionProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Accordion');
   return (
     <Accordion.Root
@@ -38,16 +37,7 @@ const AccordionComponent = ({ className, items = [], type = 'single', ...props }
       id={props?.id}
       collapsible
     >
-      {items.map((item, index) => (
-        <AccordionItem
-          {...item}
-          isLastItem={index === items?.length - 1}
-          key={`accordion-key-${item?.label}`}
-          id={type === 'single' ? `accordion-item-${index}` : undefined}
-        >
-          {item?.children}
-        </AccordionItem>
-      ))}
+      {children}
     </Accordion.Root>
   );
 };

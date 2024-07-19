@@ -24,7 +24,7 @@ export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement>
   /**
    * Determines whether the variation on text style is large or small.
    */
-  variation: 'lg' | 'sm';
+  variation: string;
   /**
    * Text string for the Accordion header for label.
    */
@@ -33,6 +33,10 @@ export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement>
    * Child element pass in to display as item content.
    */
   children?: React.ReactNode;
+  /**
+   * Determines whether one or multiple items can be opened at the same time. Default as single.
+   */
+  type?: 'single' | 'multiple';
   /**
    * When true applied the transition keyframe animation on item expand. Default as false.
    */
@@ -116,13 +120,13 @@ const AccordionItem = ({
   isLastItem,
   hasTransition = false,
   children,
+  type = 'single',
   ...props
 }: AccordionItemProps) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Accordion');
   const isLargeVariation = variation === 'lg';
   const accordionItemClassName = `${baseClassName}-item`;
-
   return (
     <Accordion.Item
       disabled={isLocked}
@@ -135,7 +139,7 @@ const AccordionItem = ({
         isLockedVariation={isLockedVariation}
         isCollapsed={isCollapsed}
         setIsCollapsed={setIsCollapsed}
-        id={props?.id}
+        id={type === 'single' ? props?.id : undefined}
         baseClassName={`${accordionItemClassName}-label`}
       >
         {label}

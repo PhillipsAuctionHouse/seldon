@@ -32,11 +32,11 @@
   }
 
   &--transition[data-state='open'] {
-    animation: slide-down 200ms ease-out;
+    animation: slide-down 250ms ease-out;
   }
 
   &--transition[data-state='closed'] {
-    animation: slide-up 200ms ease-out;
+    animation: slide-up 250ms end;
   }
 
   @keyframes slide-down {
@@ -52,10 +52,12 @@
   @keyframes slide-up {
     from {
       height: var(--radix-accordion-content-height);
+      opacity: 1;
     }
 
     to {
       height: 0;
+      opacity: 0;
     }
   }
 }
