@@ -1,10 +1,11 @@
 @import '#scss/vars';
 @import '#scss/typography';
+@import '#scss/utils';
 
 .#{$px}-search {
   align-items: center;
   display: flex;
-  height: 60px;
+  height: $header-height;
   justify-content: center;
   padding: 0.47rem;
 
@@ -33,7 +34,7 @@
     padding: 0;
     width: 18px;
 
-    @media (max-width: #{$breakpoint-md - 1}) {
+    @include isHeaderMobile {
       border: 2px solid black;
       border-radius: 50%;
       height: 35px;
@@ -57,20 +58,20 @@
     overflow: hidden;
     position: absolute;
     right: 0;
-    top: 60px;
+    top: calc($header-height + $user-management-height);
     transition: 0.5s ease;
     width: 0;
     z-index: 3;
 
-    @media (max-width: #{$breakpoint-md - 1}) {
-      top: 60px;
+    @include isHeaderMobile {
+      top: $header-height;
     }
 
     &--active {
       width: 50%;
 
-      @media (max-width: #{$breakpoint-md - 1}) {
-        top: 60px;
+      @include isHeaderMobile {
+        top: $header-height;
         width: 100%;
       }
     }

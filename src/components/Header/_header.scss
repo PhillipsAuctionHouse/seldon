@@ -1,17 +1,17 @@
 @import '#scss/vars';
+@import '#scss/utils';
 
 .#{$px}-header {
   align-items: center;
   background-color: $white;
   border-bottom: 1px solid rgba(0, 0, 0, 10%);
   display: flex;
-  height: 60px;
-  padding: 0 $spacing-md;
-  position: fixed;
-  top: 30px;
-  width: 100vw;
+  padding: $user-management-height $spacing-md 0; // save space for the user management
+  position: sticky;
+  top: 0;
 
-  @media (max-width: #{$breakpoint-md - 1}) {
+  @include isHeaderMobile {
+    padding: 0;
     top: 0;
   }
 
@@ -22,7 +22,7 @@
     border: none;
     cursor: pointer;
     display: flex;
-    height: 60px;
+    height: $header-height;
     justify-content: center;
     left: 0;
     overflow: hidden;
@@ -32,7 +32,7 @@
     width: 60px;
     z-index: 1;
 
-    @media (min-width: $breakpoint-md) {
+    @include isHeaderDesktop {
       display: none;
     }
 
@@ -88,7 +88,7 @@
   &__logo {
     margin: auto;
 
-    @media (min-width: $breakpoint-md) {
+    @include isHeaderDesktop {
       margin: unset;
     }
   }
@@ -108,7 +108,7 @@
       height: 100%;
       opacity: 1;
 
-      @media (min-width: #{$breakpoint-md - 1}) {
+      @include isHeaderDesktop {
         display: none;
       }
 
@@ -134,8 +134,8 @@
     top: 0;
     transform: translateX(-100%);
 
-    @media (min-width: $breakpoint-md) {
-      height: 60px;
+    @include isHeaderDesktop {
+      height: $header-height;
       position: relative;
       transform: unset;
       width: 100%;
@@ -144,7 +144,7 @@
     &.#{$px}-header__nav--open {
       transform: translateX(0);
 
-      @media (min-width: $breakpoint-md) {
+      @include isHeaderDesktop {
         transform: unset;
       }
     }

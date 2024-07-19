@@ -1,4 +1,5 @@
 @import '#scss/vars';
+@import '#scss/utils';
 
 .#{$px}-nav__list {
   display: flex;
@@ -8,19 +9,19 @@
   padding: 0;
   width: 100%;
 
-  @media (max-width: #{$breakpoint-md - 1}) {
+  @include isHeaderMobile {
     flex-direction: column;
     height: calc(100vh - 102px);
     justify-content: left;
     min-width: 330px;
-    overflow: scroll;
+    overflow: auto;
     padding: 0.5rem;
     transform: translateX(0%);
     transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1) 0.1s;
   }
 
   &--expanded {
-    @media (max-width: #{$breakpoint-md - 1}) {
+    @include isHeaderMobile {
       &:not(li ul) {
         transform: translateX(-50%);
         width: 200%;
@@ -32,7 +33,7 @@
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
 
-    @media (max-width: #{$breakpoint-md - 1}) {
+    @include isHeaderMobile {
       display: none;
 
       &--expanded {
@@ -72,7 +73,7 @@
       grid-column: 4 / span 2;
       height: fit-content;
 
-      @media (max-width: #{$breakpoint-md - 1}) {
+      @include isHeaderMobile {
         margin-top: 2rem;
       }
     }
@@ -85,12 +86,8 @@
   }
 
   > li:not(.#{$px}-user-management) {
-    @media (min-width: $breakpoint-md) {
+    @include isHeaderDesktop {
       height: 60px;
     }
-  }
-
-  * {
-    cursor: pointer;
   }
 }

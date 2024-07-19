@@ -69,16 +69,31 @@ describe('Header', () => {
     expect(navItemTrigger).not.toHaveClass(`${px}-nav__item--expanded`);
     expect(navLabel).toHaveTextContent('Main Menu');
   });
+});
 
+describe('Header with logo', () => {
   it('should render the logo as an object', () => {
     render(<Header logo={<LogoSVG />} />);
     const logoElement = screen.getByTestId('header-logo-svg');
     expect(logoElement).toBeInTheDocument();
   });
-
+  it('logo should be clickable', () => {
+    render(<Header logo={<LogoSVG />} />);
+    const logoElement = screen.getByRole('link', { name: 'Home Page' });
+    expect(logoElement).toBeInTheDocument();
+    expect(logoElement).toHaveAttribute('href', '/');
+  });
+  it('logo text should be used', () => {
+    render(<Header logo={<LogoSVG />} logoText="Logo Text" />);
+    const logoElement = screen.getByRole('link', { name: 'Logo Text' });
+    expect(logoElement).toBeInTheDocument();
+    expect(logoElement).toHaveAttribute('href', '/');
+  });
   it('should render the logo as an image', () => {
     render(<Header logo={LogoIMG} />);
     const logoElement = screen.getByTestId('header-logo');
-    expect(logoElement).toContainHTML(`<img data-testid="header-logo-img" src=${LogoIMG} height="14" />`);
+    expect(logoElement).toContainHTML(
+      `<img  alt="Phillips" data-testid="header-logo-img" src=${LogoIMG} height="14" />`,
+    );
   });
 });

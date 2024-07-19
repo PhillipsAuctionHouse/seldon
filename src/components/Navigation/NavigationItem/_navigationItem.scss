@@ -1,14 +1,15 @@
 @import '#scss/vars';
+@import '#scss/utils';
 @import '#scss/typography';
 
 .#{$px}-nav__item {
-  @media (max-width: #{$breakpoint-md - 1}) {
+  @include isHeaderMobile {
     border-bottom: 1px solid #ccc;
     max-width: 320px;
     width: 100%;
   }
 
-  @media (min-width: $breakpoint-md) {
+  @include isHeaderDesktop {
     align-items: center;
     display: flex;
     max-width: unset;
@@ -38,16 +39,14 @@
     text-transform: uppercase;
     width: 100%;
 
-    @media (max-width: #{$breakpoint-md - 1}) {
+    @include isHeaderMobile {
       position: relative;
     }
   }
 
   &--expanded ~ & &--label,
   &--expanded ~ & > button {
-    @media (max-width: #{$breakpoint-md - 1}) {
-      display: none;
-
+    @include isHeaderMobile {
       & > span::after {
         content: '';
       }
@@ -55,8 +54,7 @@
   }
 
   ul {
-    background: $pure-white;
-    opacity: 0;
+    background: $off-white;
     overflow: hidden scroll;
     position: absolute;
     right: 0;
@@ -65,7 +63,7 @@
     z-index: -10;
   }
 
-  @media (min-width: $breakpoint-md) {
+  @include isHeaderDesktop {
     ul {
       align-content: start;
       background: #f4f4f4;
@@ -73,7 +71,6 @@
       left: 0;
       max-height: 0;
       min-height: 0;
-      opacity: 0;
       overflow: hidden;
       position: fixed;
       top: 90px;
@@ -83,12 +80,11 @@
       li {
         display: flex;
         justify-content: end;
-        opacity: 0;
 
         button,
         a,
         p {
-          @media (min-width: $breakpoint-md) {
+          @include isHeaderDesktop {
             border: none;
           }
         }
@@ -110,22 +106,13 @@
     &--expanded:focus-within ul {
       max-height: 100vh;
       min-height: 227px;
-      opacity: 1;
-      padding: 3.75rem;
+      padding: 2rem 3.75rem;
       z-index: 1;
-
-      li {
-        opacity: 1;
-
-        ul li::after {
-          opacity: 0;
-        }
-      }
     }
   }
 
   .#{$px}-nav__item-trigger > label::after {
-    @media (max-width: #{$breakpoint-md - 1}) {
+    @include isHeaderMobile {
       content: '\203A';
       display: inline-block;
       font-size: 1.75rem;
@@ -136,13 +123,12 @@
       transform: translateY(-50%);
     }
 
-    @media (min-width: $breakpoint-md) {
+    @include isHeaderDesktop {
       content: '';
     }
   }
 
   &.#{$px}-nav__item--expanded ul {
-    opacity: 1;
     z-index: 0;
   }
 
@@ -150,11 +136,12 @@
   & > button,
   & > p {
     background-color: transparent;
+    border: 0;
     display: flex;
     padding: 0.625rem;
   }
 
-  @media (max-width: #{$breakpoint-md - 1}) {
+  @include isHeaderMobile {
     & > a:focus,
     & > button:focus,
     & > p:focus {
@@ -170,7 +157,7 @@
     }
   }
 
-  @media (min-width: $breakpoint-md) {
+  @include isHeaderDesktop {
     position: relative;
 
     &:not(ul ul li) a:focus,
@@ -186,7 +173,6 @@
       content: '';
       height: 2px;
       left: 50%;
-      opacity: 0;
       position: absolute;
       top: 70%;
       transform: translateX(-50%);
@@ -197,7 +183,6 @@
     &:not(ul ul li) a:focus::after,
     &:not(ul ul li) button:focus::after,
     &:not(ul ul li) p:focus::after {
-      opacity: 1;
       width: 85%;
     }
 
@@ -211,15 +196,9 @@
       content: '';
       height: 2px;
       left: 0;
-      opacity: 0;
       position: absolute;
       top: 100%;
       width: 100%;
-    }
-
-    &:hover > .#{$px}-nav__item-trigger::before,
-    &:focus > .#{$px}-nav__item-trigger::before {
-      opacity: 1;
     }
   }
 }
@@ -228,7 +207,7 @@
   &--large-cta {
     margin-right: 1rem;
 
-    @media (max-width: #{$breakpoint-md - 1}) {
+    @include isHeaderMobile {
       margin-right: 0;
     }
     .#{$px}-nav__item {
@@ -251,7 +230,7 @@
           color: $keyline-gray;
         }
 
-        @media (max-width: #{$breakpoint-md - 1}) {
+        @include isHeaderMobile {
           /* TODO: Create token to handle these styles dynamically */
           align-items: flex-start;
           font-size: 0.6rem;

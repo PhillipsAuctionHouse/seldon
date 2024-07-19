@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 import { px } from '../../utils';
 import Search from '../Search/Search';
+import Logo from '../../assets/PhillipsLogo.svg?react';
 
 export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -20,6 +21,10 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
    * Toggle close text
    */
   toggleCloseText?: string;
+  /**
+   * label for the Logo link
+   */
+  logoText?: string;
 }
 type HeaderContextType = {
   defaultMobileMenuLabel: string;
@@ -41,11 +46,12 @@ export const HeaderContext = React.createContext({
 
 const Header = ({
   defaultMobileMenuLabel = 'Main Menu',
-  logo,
+  logo = <Logo />,
   className,
   children,
   toggleOpenText = 'Open Menu',
   toggleCloseText = 'Close Menu',
+  logoText = 'Home Page',
   ...props
 }: React.PropsWithChildren<HeaderProps>) => {
   const [toggleState, setToggleState] = React.useState(false);
@@ -79,7 +85,13 @@ const Header = ({
         <span>{toggleText}</span>
       </button>
       <h1 data-testid="header-logo" className={`${px}-header__logo`} tabIndex={toggleText === toggleOpenText ? 0 : -1}>
-        {typeof logo === 'object' ? logo : <img data-testid="header-logo-img" src={logo as string} height="14" />}
+        <a href="/" aria-label={logoText}>
+          {typeof logo === 'object' ? (
+            logo
+          ) : (
+            <img alt="Phillips" data-testid="header-logo-img" src={logo as string} height="14" />
+          )}
+        </a>
       </h1>
       <div className={classnames(`${px}-header__nav`, { [`${px}-header__nav--open`]: toggleState })}>
         <HeaderContext.Provider
