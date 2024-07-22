@@ -3,7 +3,6 @@ import { getCommonProps } from '../../utils';
 import plusIcon from '../../assets/plus.svg';
 import minusIcon from '../../assets/minus.svg';
 import lockIcon from '../../assets/lock.svg';
-import lockBlueIcon from '../../assets/lockBlue.svg';
 import classnames from 'classnames';
 import * as Accordion from '@radix-ui/react-accordion';
 import { AccordionHeaderType, AccordionContentType } from './types';
@@ -60,7 +59,7 @@ const AccordionHeader = ({
   id,
 }: AccordionHeaderType) => {
   const handleClick = () => !disable && setIsCollapsed((prevState) => !prevState);
-  const icon = disable ? (isLockedVariation ? lockBlueIcon : lockIcon) : isCollapsed ? plusIcon : minusIcon;
+  const icon = disable ? lockIcon : isCollapsed ? plusIcon : minusIcon;
   const dataTestId =
     `${id}-` + (disable ? 'lockedIcon' : isLockedVariation ? 'lockBlueIcon' : isCollapsed ? 'plusIcon' : 'minusIcon');
   return (
@@ -74,7 +73,11 @@ const AccordionHeader = ({
           {children}
         </div>
         <img
-          className={classnames(`${baseClassName}__icon`, { [`${baseClassName}__icon--lg`]: isLargeVariation })}
+          className={classnames(
+            `${baseClassName}__icon`,
+            { [`${baseClassName}__icon--lg`]: isLargeVariation },
+            isLockedVariation && `${baseClassName}--blue-fill`,
+          )}
           src={icon}
           data-testid={dataTestId}
           aria-hidden

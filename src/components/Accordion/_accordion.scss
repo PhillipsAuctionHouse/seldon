@@ -96,4 +96,9 @@
     height: 2rem;
     width: 2rem;
   }
+
+  &--blue-fill {
+    filter: brightness(0) saturate(100%) invert(51%) sepia(72%) saturate(1698%) hue-rotate(191deg) brightness(95%)
+      contrast(86%);
+  }
 }
