@@ -95,7 +95,7 @@
     "stylelint-order": "^6.0.4",
     "stylelint-scss": "^6.4.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.3",
+    "typescript": "^5.5.4",
     "vite": "^5.3.3",
     "vite-plugin-dts": "^2.3.0",
     "vite-plugin-svgr": "^4.2.0",
