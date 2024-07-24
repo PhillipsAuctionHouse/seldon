@@ -24,10 +24,6 @@ const LinkList = ({ children, className, ...props }: LinkListProps) => {
   return (
     <Grid {...commonProps} className={classnames(baseClassName, className)} element="ul" role="list" {...props}>
       {children.map((LinkBlockComponent) => {
-        if (React.isValidElement(LinkBlockComponent) && LinkBlockComponent.type !== LinkBlock) {
-          console.warn('LinkList only accepts LinkBlock children');
-          return null;
-        }
         return (
           <li key={LinkBlockComponent?.props?.linkProps?.href} className={`${baseClassName}--item`}>
             {LinkBlockComponent}
