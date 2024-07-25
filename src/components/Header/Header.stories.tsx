@@ -214,7 +214,7 @@ export const Playground = (props: HeaderProps) => (
               <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} href="#" label="Careers" />
             </NavigationList>
           </NavigationItemTrigger>
-          <UserManagement />
+          <UserManagement onLanguageChange={(language) => console.log('languageChange', language)} />
         </NavigationList>
       </Navigation>
     </Header>
