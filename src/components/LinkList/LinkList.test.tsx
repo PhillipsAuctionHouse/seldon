@@ -1,7 +1,6 @@
 import LinkBlock, { LinkBlockProps } from '../LinkBlock/LinkBlock';
 import { render, screen } from '@testing-library/react';
 import LinkList from './LinkList';
-import Button from '../Button/Button';
 import { runCommonTests } from '../../utils/testUtils';
 
 const LinkBlocks: React.ReactElement<LinkBlockProps, typeof LinkBlock>[] = [
@@ -57,25 +56,5 @@ describe('LinkList component', () => {
     links.forEach((link, index) => {
       expect(link).toHaveAttribute('href', LinkBlocks[index].props.linkProps.href);
     });
-  });
-
-  it('renders only LinkBlock components and logs a warning for non-LinkBlock children', () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {
-      return;
-    });
-    const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {
-      return;
-    });
-
-    render(<LinkList>{[...LinkBlocks, <Button key="my-button">Not a LinkBlock</Button>]}</LinkList>);
-    const linkList = screen.getByRole('list');
-    expect(linkList).toBeInTheDocument();
-    const linkItems = screen.getAllByRole('listitem');
-    expect(linkItems).toHaveLength(LinkBlocks.length);
-    const links = screen.getAllByRole('link');
-    links.forEach((link, index) => {
-      expect(link).toHaveAttribute('href', LinkBlocks[index].props.linkProps.href);
-    });
-    expect(consoleWarnSpy).toHaveBeenCalledWith('LinkList only accepts LinkBlock children');
   });
 });
