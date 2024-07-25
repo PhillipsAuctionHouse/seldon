@@ -1,3 +1,10 @@
+## [1.31.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.31.0...v1.31.1) (2024-07-25)
+
+
+### Bug Fixes
+
+* **header:** L3-2945 language overlay should disappear correctly ([#243](https://github.com/PhillipsAuctionHouse/seldon/issues/243)) ([73c954e](https://github.com/PhillipsAuctionHouse/seldon/commit/73c954ef5ba7bc63e9ab2856d12a099abc6326b6))
+
 # [1.31.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.30.2...v1.31.0) (2024-07-19)
 
 
