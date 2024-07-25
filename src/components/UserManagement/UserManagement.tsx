@@ -41,6 +41,10 @@ const UserManagement = ({
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'UserManagement');
   const languageLabel = languageOptions.find((option) => option.value === currentLanguage)?.label ?? 'English';
   const AccountDetailsComponent = accountDetailsLink ?? 'a';
+  const handleLanguageChange = (language: SupportedLanguages) => {
+    (document.activeElement as HTMLElement)?.blur();
+    onLanguageChange(language);
+  };
 
   return (
     <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
@@ -68,7 +72,7 @@ const UserManagement = ({
                 inline
                 name="languages"
                 checked={option.value === currentLanguage}
-                onChange={() => onLanguageChange(option.value)}
+                onChange={() => handleLanguageChange(option.value)}
               />
             </li>
           ))}
