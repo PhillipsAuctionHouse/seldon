@@ -1,3 +1,10 @@
+## [1.31.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.31.1...v1.31.2) (2024-07-25)
+
+
+### Bug Fixes
+
+* **linklist:** L3-2973 relax the linkblock child requirement  ([#242](https://github.com/PhillipsAuctionHouse/seldon/issues/242)) ([b7f81a4](https://github.com/PhillipsAuctionHouse/seldon/commit/b7f81a47bb666e2402bf50331656c9da9705770b))
+
 ## [1.31.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.31.0...v1.31.1) (2024-07-25)
 
 
