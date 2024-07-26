@@ -1,3 +1,10 @@
+# [1.32.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.31.2...v1.32.0) (2024-07-26)
+
+
+### Features
+
+* **components:** L3-2559 Build Accordion component in Seldon library ([#196](https://github.com/PhillipsAuctionHouse/seldon/issues/196)) ([e651415](https://github.com/PhillipsAuctionHouse/seldon/commit/e65141557ecd61e7ef4bb55e5c13041a1091cf32)), closes [#123](https://github.com/PhillipsAuctionHouse/seldon/issues/123) [#123](https://github.com/PhillipsAuctionHouse/seldon/issues/123) [#123](https://github.com/PhillipsAuctionHouse/seldon/issues/123) [#123](https://github.com/PhillipsAuctionHouse/seldon/issues/123) [#123](https://github.com/PhillipsAuctionHouse/seldon/issues/123) [#123](https://github.com/PhillipsAuctionHouse/seldon/issues/123) [#123](https://github.com/PhillipsAuctionHouse/seldon/issues/123) [#123](https://github.com/PhillipsAuctionHouse/seldon/issues/123) [#123](https://github.com/PhillipsAuctionHouse/seldon/issues/123) [#123](https://github.com/PhillipsAuctionHouse/seldon/issues/123) [#123](https://github.com/PhillipsAuctionHouse/seldon/issues/123)
+
 ## [1.31.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.31.1...v1.31.2) (2024-07-25)
 
 
