@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
+    "@radix-ui/react-dialog": "^1.1.1",
     "change-case": "^5.4.4",
     "classnames": "^2.5.1",
     "flatpickr": "^4.6.13",

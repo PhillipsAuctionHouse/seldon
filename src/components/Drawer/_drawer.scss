@@ -1,0 +1,66 @@
+@import '#scss/_vars';
+
+.#{$px}-drawer {
+  align-items: center;
+  animation: content-show 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: $white;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 600px;
+  padding: $padding-md;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+
+  &:focus {
+    outline: none;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    max-width: 100%;
+  }
+
+  &__overlay {
+    animation: overlay-show 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    background-color: $overlay-black;
+    inset: 0;
+    position: fixed;
+    z-index: 10;
+  }
+
+  &__close {
+    align-items: center;
+    border-radius: 100%;
+    color: $pure-black;
+    display: inline-flex;
+    justify-content: center;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
+  @keyframes overlay-show {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes content-show {
+    from {
+      opacity: 0;
+      transform: translateX(12rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
