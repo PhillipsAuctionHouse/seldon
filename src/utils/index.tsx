@@ -141,3 +141,26 @@ export const emailValidation = (email: string) => {
   const emailRegex = /(.+)@(.+){2,}\.(.+){2,}/i;
   return emailRegex.test(email);
 };
+
+/**
+ * Return array of children of a specific type
+ *
+ * @param children - React children
+ * @param componentType - React component type
+ * @param inverse - Return children that are not of the specified type
+ *
+ */
+export const findChildrenOfType = function (
+  children: React.ReactNode,
+  componentType?: React.ElementType,
+  inverse = false,
+) {
+  const foundChildrenOfType = React.Children.toArray(children).filter((child) => {
+    if (child && (child as React.ReactElement).type === componentType && !inverse) {
+      return child;
+    } else {
+      return child && (child as React.ReactElement).type !== componentType && inverse;
+    }
+  });
+  return foundChildrenOfType.length > 0 ? foundChildrenOfType : null;
+};

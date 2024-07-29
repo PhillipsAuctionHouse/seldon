@@ -7,6 +7,7 @@ import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
 import { LinkVariants } from '../Link/utils';
 import { px } from '../../utils';
 import UserManagement from '../UserManagement/UserManagement';
+import Search from '../Search/Search';
 
 const meta = {
   title: 'Components/Header',
@@ -217,6 +218,7 @@ export const Playground = (props: HeaderProps) => (
           <UserManagement onLanguageChange={(language) => console.log('languageChange', language)} />
         </NavigationList>
       </Navigation>
+      <Search />
     </Header>
     <main>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore

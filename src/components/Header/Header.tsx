@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import * as React from 'react';
-import { px } from '../../utils';
+import { findChildrenOfType, px } from '../../utils';
 import Search from '../Search/Search';
 import Logo from '../../assets/PhillipsLogo.svg?react';
 
@@ -54,6 +54,8 @@ const Header = ({
   logoText = 'Home Page',
   ...props
 }: React.PropsWithChildren<HeaderProps>) => {
+  const searchElement = findChildrenOfType(children, Search);
+  const navElements = findChildrenOfType(children, Search, true);
   const [toggleState, setToggleState] = React.useState(false);
   const [expandedItem, setExpandedItem] = React.useState(defaultMobileMenuLabel);
   const toggleText = toggleState ? toggleCloseText : toggleOpenText;
@@ -105,10 +107,10 @@ const Header = ({
             } as HeaderContextType
           }
         >
-          {children}
+          {navElements}
         </HeaderContext.Provider>
       </div>
-      <Search />
+      {searchElement}
     </header>
   );
 };
