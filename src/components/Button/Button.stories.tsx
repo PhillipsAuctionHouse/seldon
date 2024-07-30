@@ -2,6 +2,7 @@ import type { Meta } from '@storybook/react';
 
 import Button, { ButtonProps } from './Button';
 import Calendar from '../../assets/calendar.svg?react';
+import { ButtonVariants } from './types';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -15,8 +16,8 @@ const meta = {
         type: 'select',
       },
     },
-    buttonType: {
-      options: ['primary', 'secondary', 'ghost'],
+    variant: {
+      options: Object.values(ButtonVariants),
       control: {
         type: 'select',
       },
@@ -39,6 +40,6 @@ export const ButtonWithIcon = (props: ButtonProps) => (
 export const Playground = {
   args: {
     children: 'Button',
-    buttonType: 'primary',
+    variant: ButtonVariants.primary,
   },
 };
