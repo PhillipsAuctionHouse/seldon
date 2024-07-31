@@ -6,15 +6,36 @@
   align-items: center;
   display: inline-flex;
   flex-direction: column;
+  padding: $spacing-sm;
+
+  &__button {
+    color: $pure-black;
+    opacity: 1;
+    padding: 0;
+    text-decoration: underline;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: unset;
+      color: unset;
+    }
+
+    &:focus {
+      background-color: unset;
+      color: unset;
+    }
+  }
 
   @include media($size-sm) {
     align-items: flex-end;
   }
 
   &__header {
-    @include text($heading3);
-
-    margin-bottom: $spacing-xsm;
+    color: $pure-black;
+    font-family: $Distinct;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: $spacing-sm;
   }
 
   ul {
@@ -22,7 +43,7 @@
     display: flex;
     gap: 0 1.25rem;
     list-style: none;
-    margin: 0 0 $spacing-md;
+    margin: $spacing-md 0 $spacing-md;
     padding: 0;
 
     @include media($size-sm) {
