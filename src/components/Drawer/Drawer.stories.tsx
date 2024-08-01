@@ -4,6 +4,7 @@ import Button from '../Button/Button';
 import { Playground as PlaygroundSplitPanel } from '../SplitPanel/SplitPanel.stories';
 import Subscribe from '../Subscribe/Subscribe';
 import { useArgs } from '@storybook/preview-api';
+import { useRef } from 'react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -14,8 +15,11 @@ const meta = {
 export default meta;
 export const Playground = (props: DrawerProps) => {
   const [, updateArgs] = useArgs();
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const onClose = () => {
+    // Refocus on button after close for keyboard navigation
+    buttonRef.current?.focus();
     updateArgs({ ...props, isOpen: false });
   };
 
@@ -25,7 +29,7 @@ export const Playground = (props: DrawerProps) => {
 
   return (
     <>
-      <Button className={`modal-story__button`} onClick={onOpen}>
+      <Button className={`modal-story__button`} onClick={onOpen} ref={buttonRef}>
         Open Modal
       </Button>
 

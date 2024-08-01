@@ -21,7 +21,14 @@ const Drawer = ({ className, isOpen = false, onClose = noOp, children = null, ..
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Drawer');
 
   return (
-    <Dialog.Root open={isOpen}>
+    <Dialog.Root
+      open={isOpen}
+      onOpenChange={(open) => {
+        if (!open) {
+          onClose();
+        }
+      }}
+    >
       <Dialog.Portal>
         <Dialog.Overlay
           onClick={onClose}
