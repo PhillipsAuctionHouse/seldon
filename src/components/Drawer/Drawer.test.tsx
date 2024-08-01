@@ -42,6 +42,18 @@ describe('Drawer', () => {
     expect(onClose).toHaveBeenCalled();
   });
 
+  test('calls onClose when Esc is pressed', async () => {
+    const onClose = vi.fn();
+    render(
+      <Drawer isOpen={true} onClose={onClose}>
+        <div>Test Content</div>
+      </Drawer>,
+    );
+
+    await userEvent.keyboard('{Escape}');
+    expect(onClose).toHaveBeenCalled();
+  });
+
   test('calls onClose when close button is clicked', async () => {
     const onClose = vi.fn();
     render(
