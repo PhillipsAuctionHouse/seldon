@@ -7,8 +7,17 @@ import IconButton from '../IconButton/IconButton';
 
 // You'll need to change the HTMLDivElement to match the top-level element of your component
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Whether the drawer is open or not
+   */
   isOpen?: boolean;
+  /**
+   * Callback when the drawer is closed
+   */
   onClose?: () => void;
+  /**
+   * The content of the drawer
+   */
   children?: React.ReactNode;
 }
 /**
@@ -17,7 +26,7 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
  * A component for displaying a drawer.
  *
  */
-const Drawer = ({ className, isOpen = false, onClose = noOp, children = null, ...props }: DrawerProps) => {
+const Drawer = ({ className, isOpen = false, onClose = noOp, children, ...props }: DrawerProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Drawer');
 
   return (
@@ -28,7 +37,7 @@ const Drawer = ({ className, isOpen = false, onClose = noOp, children = null, ..
           className={classnames(`${baseClassName}__overlay`)}
           data-testid="drawer-overlay"
         />
-        <Dialog.Content className={classnames(baseClassName, className)} {...commonProps} id={props?.id}>
+        <Dialog.Content className={classnames(baseClassName, className)} id={props.id} {...commonProps}>
           <Dialog.Title />
           <Dialog.Description />
           <Dialog.Close asChild>

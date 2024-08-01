@@ -2,7 +2,7 @@
 
 .#{$px}-drawer {
   align-items: center;
-  animation: content-show 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation: content-show $default-transition;
   background-color: $white;
   display: flex;
   flex-direction: column;
@@ -24,7 +24,7 @@
   }
 
   &__overlay {
-    animation: overlay-show 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    animation: overlay-show $default-transition;
     background-color: $overlay-black;
     inset: 0;
     position: fixed;
