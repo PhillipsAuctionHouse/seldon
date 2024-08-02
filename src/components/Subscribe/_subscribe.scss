@@ -5,6 +5,7 @@
 
 .#{$px}-subscribe {
   max-width: 30rem;
+  width: 100%;
 
   &__title {
     @include text($heading3);
