@@ -8,17 +8,6 @@ export interface SearchResultsProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 const SearchResults = ({ autoCompleteResults = [], children }: React.PropsWithChildren<SearchResultsProps>) => {
-  React.useEffect(() => {
-    console.log('AUTO COMPLETE RESULTS', autoCompleteResults);
-  }, [autoCompleteResults]);
-
-  const slugifyString = (str: string) => {
-    return str
-      .toLowerCase()
-      .replace(/ /g, '-')
-      .replace(/[^\w-]+/g, '');
-  };
-
   return (
     <ul data-testid="search-results" className={`${px}-search__results`}>
       {Array.isArray(autoCompleteResults) &&
@@ -26,7 +15,7 @@ const SearchResults = ({ autoCompleteResults = [], children }: React.PropsWithCh
         autoCompleteResults.map((result) => {
           return (
             <li key={result.id} className={`${px}-search__result`}>
-              <Link href={`/artist/${result.id}/${slugifyString(result.url)}`}>
+              <Link href={result.url}>
                 <p>{result.label}</p>
               </Link>
             </li>

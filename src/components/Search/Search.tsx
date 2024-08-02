@@ -55,13 +55,12 @@ const Search = ({
           <Input
             className={`${px}-search__input`}
             alt={altText}
-            hideLabel={true}
+            hideLabel
             placeholder={`Type to search`}
             type="text"
             onChange={
               onSearch
                 ? (e: { target: { value: string } }) => {
-                    console.log('e.target.value', e.target.value);
                     onSearch(e.target.value);
                   }
                 : undefined
