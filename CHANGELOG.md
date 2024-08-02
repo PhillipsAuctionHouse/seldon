@@ -1,3 +1,10 @@
+# [1.33.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.32.0...v1.33.0) (2024-08-02)
+
+
+### Features
+
+* **drawer:** L3-3071 added drawer component ([#249](https://github.com/PhillipsAuctionHouse/seldon/issues/249)) ([6d9e9eb](https://github.com/PhillipsAuctionHouse/seldon/commit/6d9e9eb0b0ab156d018179b89e2c5060ebbd4342))
+
 # [1.32.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.31.2...v1.32.0) (2024-07-26)
 
 
