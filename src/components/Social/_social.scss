@@ -1,6 +1,6 @@
-@import '#scss/vars';
-@import '#scss/utils';
-@import '#scss/type';
+@use '#scss/vars' as *;
+@use '#scss/utils' as *;
+@use '#scss/type' as *;
 
 .#{$px}-social {
   align-items: center;

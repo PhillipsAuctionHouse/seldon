@@ -1,4 +1,5 @@
-@import '#scss/_vars';
+@use '#scss/vars' as *;
+@use '#scss/type' as *;
 
 .#{$px}-text {
   @each $variant in $text-tokens {

@@ -1,5 +1,5 @@
-@import '#scss/vars';
-@import '#scss/utils';
+@use '#scss/vars' as *;
+@use '#scss/utils' as *;
 
 $md: #{$px}-input--md;
 $lg: #{$px}-input--lg;

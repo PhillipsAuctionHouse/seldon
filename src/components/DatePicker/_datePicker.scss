@@ -1,7 +1,7 @@
 /* stylelint-disable selector-class-pattern */
+@use '#scss/vars' as *;
+@use '#scss/typography' as *;
 @import 'flatpickr/dist/flatpickr.css';
-@import '#scss/vars';
-@import '#scss/typography';
 
 .flatpickr-calendar {
   @include DistinctText;

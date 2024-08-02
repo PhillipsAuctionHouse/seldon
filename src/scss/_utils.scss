@@ -1,5 +1,5 @@
 @use 'sass:string';
-@import './vars';
+@use './vars' as *;
 
 @mixin hidden {
   block-size: 1px;

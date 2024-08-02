@@ -1,4 +1,5 @@
-@import '#scss/_utils';
+@use './vars' as *;
+@use './utils' as *;
 
 // I think this is pretty tailwindy to generate these common classes
 @each $direction in 'vertical', 'horizontal' {

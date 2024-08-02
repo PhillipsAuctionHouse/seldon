@@ -1,4 +1,6 @@
-@import '#scss/_vars';
+@use '#scss/vars' as *;
+@use '#scss/type' as *;
+@use '#scss/typography' as *;
 
 .#{$px}-accordion {
   border-bottom: 1px solid $keyline-gray;

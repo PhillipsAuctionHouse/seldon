@@ -1,4 +1,4 @@
-@import '#scss/vars';
+@use '#scss/vars' as *;
 
 .split-panel-story {
   background-color: #f4f2f1;

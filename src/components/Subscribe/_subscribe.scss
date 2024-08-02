@@ -1,7 +1,7 @@
-@import '#scss/vars';
-@import '#scss/utils';
-@import '#scss/type';
-@import '#scss/typography';
+@use '#scss/vars' as *;
+@use '#scss/utils' as *;
+@use '#scss/typography' as *;
+@use '#scss/type' as *;
 
 .#{$px}-subscribe {
   max-width: 30rem;

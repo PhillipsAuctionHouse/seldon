@@ -1,5 +1,5 @@
-@use 'scss/reset';
-@use 'scss/typography';
+@use 'scss/reset' as *;
+@use 'scss/typography' as *;
 @use 'design/colors-tokens/color-card';
 @use 'design/type-tokens/text-showcase';
 @use 'design/spacing-tokens/spacing-tokens';
@@ -7,9 +7,12 @@
 @use 'components/DatePicker/datePicker';
 @use 'components/SplitPanel/splitPanel.stories';
 @use 'components/Modal/modal.stories';
-@import 'scss/vars';
-@import 'scss/type';
-@import 'scss/utils';
+@use 'scss/vars' as *;
+@use 'scss/type' as *;
+@use 'scss/utils' as *;
+
+// 📑 Pages
+@import 'pages/page';
 
 // Design markdown styles
 .h1 {

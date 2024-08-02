@@ -1,3 +1,5 @@
+@use '#scss/vars' as *;
+
 .#{$px}-icon-button {
   background-color: unset;
   border: unset;
