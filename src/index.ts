@@ -42,6 +42,7 @@ export { SubscriptionState } from './components/Subscribe/types';
 export { default as Social, type SocialProps } from './components/Social/Social';
 export { default as ViewingsList, type ViewingsListProps } from './components/ViewingsList/ViewingsList';
 export { default as Modal, type ModalProps } from './components/Modal/Modal';
+export { default as Drawer } from './components/Drawer/Drawer';
 export {
   default as StatefulViewingsList,
   type StatefulViewingsListProps,
