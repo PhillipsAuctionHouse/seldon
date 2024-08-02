@@ -1,5 +1,4 @@
-@use '#scss/utils' as *;
-@use '#scss/vars' as *;
+@use '#scss/main' as *;
 
 .#{$px}-link-list {
   &--item {

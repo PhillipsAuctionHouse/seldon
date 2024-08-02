@@ -1,5 +1,4 @@
-@use '#scss/vars' as *;
-@use '#scss/utils' as *;
+@use '#scss/main' as *;
 
 $toggleBaseWidth: 3rem;
 $inline: #{$px}-input--inline;

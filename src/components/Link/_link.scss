@@ -1,5 +1,4 @@
-@use '#scss/type' as *;
-@use '#scss/vars' as *;
+@use '#scss/main' as *;
 
 .#{$px}-link {
   color: $cta-blue;

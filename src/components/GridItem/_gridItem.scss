@@ -1,6 +1,5 @@
 @use 'sass:math';
-@use '#scss/utils' as *;
-@use '#scss/vars' as *;
+@use '#scss/main' as *;
 
 @mixin gridItemColumnSpan($span: 1, $total-cols: 12) {
   grid-column: span $span;

@@ -1,6 +1,4 @@
-@use '#scss/vars' as *;
-@use '#scss/typography' as *;
-@use '#scss/utils' as *;
+@use '#scss/main' as *;
 
 .#{$px}-search {
   align-items: center;

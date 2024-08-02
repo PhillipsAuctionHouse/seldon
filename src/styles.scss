@@ -1,12 +1,7 @@
 // 🌎 Globals
-@forward '#scss/sharedClasses';
-@forward '#scss/type';
-@forward '#scss/typography';
-@forward '#scss/utils';
-@forward '#scss/vars';
 
 // @TODO: reset styles when we can do a site wide regressions QA in phillips-public
-// @forward 'reset';
+// @use 'reset';
 
 // ⚛️ Components
 @use 'components/Button/button';

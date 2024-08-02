@@ -1,5 +1,4 @@
-@use '#scss/vars' as *;
-@use '#scss/utils' as *;
+@use '#scss/main' as *;
 
 .#{$px}-nav {
   background: $off-white;
