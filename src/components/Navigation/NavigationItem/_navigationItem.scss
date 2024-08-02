@@ -1,4 +1,4 @@
-@use '#scss/main' as *;
+@use '#scss/allPartials' as *;
 
 .#{$px}-nav__item {
   @include isHeaderMobile {

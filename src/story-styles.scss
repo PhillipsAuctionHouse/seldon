@@ -1,6 +1,6 @@
 @use 'scss/reset' as *;
-@use 'scss/main' as *;
-@use 'styles';
+@use 'scss/allPartials' as *;
+@use 'componentStyles';
 @use 'design/colors-tokens/color-card';
 @use 'design/type-tokens/text-showcase';
 @use 'design/spacing-tokens/spacing-tokens';

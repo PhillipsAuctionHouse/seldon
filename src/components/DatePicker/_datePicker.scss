@@ -1,5 +1,5 @@
 /* stylelint-disable selector-class-pattern */
-@use '#scss/main' as *;
+@use '#scss/allPartials' as *;
 @import 'flatpickr/dist/flatpickr.css';
 
 .flatpickr-calendar {
