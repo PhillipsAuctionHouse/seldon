@@ -2,6 +2,7 @@ import classnames from 'classnames';
 
 import { getCommonProps } from '../../utils';
 import { ButtonVariants } from './types';
+import { forwardRef } from 'react';
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
@@ -44,36 +45,43 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-button--overview)
  */
 
-const Button = ({
-  variant = ButtonVariants.primary,
-  size = 'md',
-  children,
-  className,
-  isIconLast: iconLast = false,
-  type = 'button',
-  isDisabled = false,
-  ...props
-}: ButtonProps) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Button');
-  return (
-    <button
-      {...commonProps}
-      type={type}
-      className={classnames(
-        `${baseClassName}`,
-        `${baseClassName}--${size}`,
-        `${baseClassName}--${variant}`,
-        {
-          [`${baseClassName}--icon-last`]: iconLast,
-        },
-        className,
-      )}
-      disabled={isDisabled}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-};
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      variant = ButtonVariants.primary,
+      size = 'md',
+      children,
+      className,
+      isIconLast: iconLast = false,
+      type = 'button',
+      isDisabled = false,
+      ...props
+    },
+    ref,
+  ) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Button');
+    return (
+      <button
+        {...commonProps}
+        ref={ref}
+        type={type}
+        className={classnames(
+          `${baseClassName}`,
+          `${baseClassName}--${size}`,
+          `${baseClassName}--${variant}`,
+          {
+            [`${baseClassName}--icon-last`]: iconLast,
+          },
+          className,
+        )}
+        disabled={isDisabled}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  },
+);
 
+Button.displayName = 'Button';
 export default Button;
