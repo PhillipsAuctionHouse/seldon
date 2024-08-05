@@ -2,6 +2,7 @@ import classnames from 'classnames';
 
 import { defaultYear, px } from '../../utils';
 import SplitPanel from '../SplitPanel/SplitPanel';
+import Logo from '../../assets/PhillipsLogo.svg?react';
 
 export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -30,15 +31,21 @@ const Footer = ({
   className,
   copyright = `© ${defaultYear} Phillips Auctioneers, LLC`,
   id,
-  navigationComponent,
 }: FooterProps) => {
   return (
     <footer data-testid={id ? id : `footer`} id={id} className={classnames(`${px}-footer`, { className })}>
-      <nav className={`${px}-footer__navigation`}>{navigationComponent}</nav>
       <SplitPanel className={`${px}-footer__content`} hasBorder={false}>
         {children}
       </SplitPanel>
-      <p className={`${px}-footer__copyright`}>{copyright}</p>
+
+      <div className={`${px}-footer__copyright`}>
+        <h1 data-testid="header-logo" className={`${px}-header__logo`}>
+          <a href="/" aria-label={'logo'}>
+            <Logo />
+          </a>
+        </h1>
+        {copyright}
+      </div>
     </footer>
   );
 };
