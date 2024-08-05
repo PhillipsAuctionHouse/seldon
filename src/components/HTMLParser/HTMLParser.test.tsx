@@ -50,4 +50,23 @@ describe('HTMLParser', () => {
     const scriptElement = screen.queryByText('Hello, World!');
     expect(scriptElement).toBeNull();
   });
+
+  it("will render an anchor's attributes but will remove a class name when present", () => {
+    const html = '<a href="#" class="my-class" data-url="some-value">Link</a>';
+    render(<HTMLParser html={html} />);
+    const aElement = screen.getByRole('link');
+    screen.debug(aElement);
+    expect(aElement).not.toHaveClass('my-class');
+    expect(aElement).toHaveAttribute('data-url', 'some-value');
+    expect(aElement).toHaveAttribute('href', '#');
+  });
+
+  it('renders and transforms nested tags', () => {
+    const html = '<p>This is some text<a href="#">Hello</a></p>';
+    render(<HTMLParser html={html} />);
+    const pElement = screen.getByText('This is some text');
+    const aElement = screen.getByRole('link');
+    expect(pElement).toHaveClass('phillips-text');
+    expect(aElement).toHaveClass('phillips-link');
+  });
 });

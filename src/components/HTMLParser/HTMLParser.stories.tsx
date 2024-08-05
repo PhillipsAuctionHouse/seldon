@@ -15,9 +15,11 @@ export const Playground = {
   args: {
     html: `
       <div>
-        <h1>Heading <span>span</span></h1>
+        <h1>Heading One <span>span</span></h1>
         <blockquote>Blockquote</blockquote>
-        <hr />
+        <h2>Heading 2</h2>
+        <p> We really want to show that <a class="SomeClass" href="/link/to/somewhere" data-url="disurl">this is an inline link</a> lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum.;</p>
+        <img src="https://via.placeholder.com/150" alt="placeholder" />
       </div>
     `,
   },
