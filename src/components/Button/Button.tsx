@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 
 import { getCommonProps } from '../../utils';
+import { ButtonVariants } from './types';
 import { forwardRef } from 'react';
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -19,7 +20,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * Is this the principal call to action on the page?
    */
-  buttonType?: 'primary' | 'secondary' | 'ghost';
+  variant?: ButtonVariants;
   /**
    * How large should the button be?
    */
@@ -47,7 +48,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      buttonType = 'primary',
+      variant = ButtonVariants.primary,
       size = 'md',
       children,
       className,
@@ -67,7 +68,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={classnames(
           `${baseClassName}`,
           `${baseClassName}--${size}`,
-          `${baseClassName}--${buttonType}`,
+          `${baseClassName}--${variant}`,
           {
             [`${baseClassName}--icon-last`]: iconLast,
           },

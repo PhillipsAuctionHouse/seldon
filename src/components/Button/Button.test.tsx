@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import Button from './Button';
 import { runCommonTests } from '../../utils/testUtils';
+import { ButtonVariants } from './types';
 
 describe('Button', () => {
   runCommonTests(Button, 'Button');
@@ -20,7 +21,7 @@ describe('Button', () => {
 
   it('renders with type and size classnames', () => {
     render(
-      <Button buttonType="secondary" size="lg" isIconLast>
+      <Button variant={ButtonVariants.secondary} size="lg" isIconLast>
         Cancel
       </Button>,
     );
