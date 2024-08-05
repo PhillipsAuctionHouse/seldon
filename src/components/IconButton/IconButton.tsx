@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import Button from '../Button/Button';
 import { getCommonProps } from '../../utils';
+import { ButtonVariants } from '../Button/types';
 
 export interface IconButtonProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'children'> {
   /**
@@ -18,7 +19,7 @@ const IconButton = ({ children, size = 'md', className, ...props }: IconButtonPr
   return (
     <Button
       {...commonProps}
-      buttonType="primary"
+      variant={ButtonVariants.primary}
       className={classnames(baseClass, `${baseClass}--${size}`, className)}
       {...props}
     >

@@ -1,12 +1,23 @@
 import classnames from 'classnames';
 
 import { getCommonProps } from '../../utils';
+import Button from '../Button/Button';
+import { MouseEventHandler } from 'react';
+import { ButtonVariants } from '../Button/types';
 
 export interface SocialProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Title text for the social section
    */
   titleText?: string;
+  /**
+   * Text for the subscribe button
+   */
+  buttonText?: string;
+  /**
+   * Function for when the subscribe button is clicked
+   */
+  onSubscribeClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 /**
@@ -19,11 +30,21 @@ export interface SocialProps extends React.HTMLAttributes<HTMLDivElement> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-social--overview)
  */
 
-const Social = ({ className, children, titleText = 'Follow on Social', ...props }: SocialProps) => {
+const Social = ({
+  className,
+  children,
+  titleText = 'Never Miss A Moment',
+  buttonText = 'Subscribe To Our Newsletter',
+  onSubscribeClick,
+  ...props
+}: SocialProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Social');
   return (
     <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
       <h3 className={`${baseClassName}__header`}>{titleText}</h3>
+      <Button onClick={onSubscribeClick} variant={ButtonVariants.ghost} className={`${baseClassName}__button`}>
+        {buttonText}
+      </Button>
       {children}
     </div>
   );

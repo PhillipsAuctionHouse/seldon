@@ -4,6 +4,7 @@ import { getCommonProps } from '../../utils';
 import Input from '../Input/Input';
 import Button, { ButtonProps } from '../Button/Button';
 import { SubscriptionState } from './types';
+import { ButtonVariants } from '../Button/types';
 
 export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
   /**
@@ -117,7 +118,12 @@ const Subscribe = ({
         warnText={text}
         required
       />
-      <Button className={`${baseClassName}__button ${className}`} buttonType="secondary" type="submit" {...buttonProps}>
+      <Button
+        className={`${baseClassName}__button ${className}`}
+        variant={ButtonVariants.secondary}
+        type="submit"
+        {...buttonProps}
+      >
         {buttonText}
       </Button>
     </Element>

@@ -42,6 +42,7 @@ $clock-widget-red: $widget-red;
 $articker-red: #fc1e2b;
 $articker-orange: #ff8201;
 $articker-red-orange-gradient: linear-gradient(90deg, #fc1e2b, #ff8201);
+$overlay-black: rgba(0, 0, 0, 80%);
 
 // Legacy mapping
 $pure-white: $white;
@@ -242,3 +243,4 @@ $size-sm: 'sm';
 $size-md: 'md';
 $size-lg: 'lg';
 $size-xl: 'xl';
+$default-transition: 150ms cubic-bezier(0.16, 1, 0.3, 1);
