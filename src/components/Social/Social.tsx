@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import Button from '../Button/Button';
 import { MouseEventHandler } from 'react';
+import { ButtonVariants } from '../Button/types';
 
 export interface SocialProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -41,7 +42,7 @@ const Social = ({
   return (
     <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
       <h3 className={`${baseClassName}__header`}>{titleText}</h3>
-      <Button onClick={onSubscribeClick} buttonType="ghost" className={`${baseClassName}__button`}>
+      <Button onClick={onSubscribeClick} variant={ButtonVariants.ghost} className={`${baseClassName}__button`}>
         {buttonText}
       </Button>
       {children}
