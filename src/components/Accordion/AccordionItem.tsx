@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getCommonProps } from '../../utils';
+import { getCommonProps, noOp } from '../../utils';
 import plusIcon from '../../assets/plus.svg';
 import minusIcon from '../../assets/minus.svg';
 import lockIcon from '../../assets/lock.svg';
@@ -40,6 +40,10 @@ export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement>
    * When true applied the transition keyframe animation on item expand. Default as false.
    */
   hasTransition?: boolean;
+  /**
+   * When true, isCollapsed won't be toggled.
+   */
+  isControlled?: boolean;
 }
 /**
  * ## Overview
@@ -124,16 +128,17 @@ const AccordionItem = ({
   hasTransition = false,
   children,
   type = 'single',
+  isControlled = true,
   ...props
 }: AccordionItemProps) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Accordion');
+  const { className: baseClassName } = getCommonProps(props, 'Accordion');
   const isLargeVariation = variation === 'lg';
   const accordionItemClassName = `${baseClassName}-item`;
   return (
     <Accordion.Item
       disabled={isLocked}
-      value={commonProps['data-testid']}
+      value={label}
       className={classnames(accordionItemClassName, { [`${accordionItemClassName}__border-bottom`]: !isLastItem })}
     >
       <AccordionHeader
@@ -141,7 +146,7 @@ const AccordionItem = ({
         isLargeVariation={isLargeVariation}
         isLockedVariation={isLockedVariation}
         isCollapsed={isCollapsed}
-        setIsCollapsed={setIsCollapsed}
+        setIsCollapsed={isControlled ? setIsCollapsed : noOp}
         id={type === 'single' ? props?.id : undefined}
         baseClassName={`${accordionItemClassName}-label`}
       >
