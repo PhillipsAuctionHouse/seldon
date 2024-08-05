@@ -1,4 +1,4 @@
-@import '#scss/_vars';
+@use '#scss/allPartials' as *;
 
 .#{$px}-row {
   // horizontal padding is fixed

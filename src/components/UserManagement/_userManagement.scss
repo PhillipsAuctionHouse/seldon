@@ -1,5 +1,4 @@
-@import '#scss/_vars';
-@import '#scss/_utils';
+@use '#scss/allPartials' as *;
 
 .#{$px}-user-management {
   align-items: center;

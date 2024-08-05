@@ -1,7 +1,6 @@
 /* stylelint-disable selector-class-pattern */
+@use '#scss/allPartials' as *;
 @import 'flatpickr/dist/flatpickr.css';
-@import '#scss/vars';
-@import '#scss/typography';
 
 .flatpickr-calendar {
   @include DistinctText;

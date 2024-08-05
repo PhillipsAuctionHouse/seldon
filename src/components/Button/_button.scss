@@ -1,6 +1,4 @@
-@import '#scss/vars';
-@import '#scss/typography';
-@import '#scss/utils';
+@use '#scss/allPartials' as *;
 
 .#{$px}-button {
   @include bodyText;

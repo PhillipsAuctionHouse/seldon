@@ -1,4 +1,4 @@
-@import './vars';
+@use './vars' as *;
 
 @mixin underline($padding: 0, $width: 0.0625rem, $color: $cta-blue) {
   border-bottom: $width solid $color;

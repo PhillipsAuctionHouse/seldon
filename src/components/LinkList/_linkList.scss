@@ -1,4 +1,4 @@
-@import '#scss/_utils';
+@use '#scss/allPartials' as *;
 
 .#{$px}-link-list {
   &--item {

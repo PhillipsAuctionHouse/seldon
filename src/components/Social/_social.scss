@@ -1,6 +1,4 @@
-@import '#scss/vars';
-@import '#scss/utils';
-@import '#scss/type';
+@use '#scss/allPartials' as *;
 
 .#{$px}-social {
   display: inline-flex;

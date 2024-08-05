@@ -1,4 +1,4 @@
-@import '#scss/vars';
+@use '#scss/vars' as *;
 
 .doc-wrapper {
   .example {
