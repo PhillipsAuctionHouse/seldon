@@ -26,7 +26,7 @@ export interface HTMLParserProps extends React.HTMLAttributes<HTMLDivElement> {
  * A component for taking in rich text content from CMS and safely rendering the content in a consistent manner.
  *
  *
- * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-button--overview)
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-htmlparser--overview)
  */
 
 const HTMLParser = ({ className, html, isOnlySanitize = false, ...props }: HTMLParserProps) => {
