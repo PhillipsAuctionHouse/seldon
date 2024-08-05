@@ -4,12 +4,18 @@ import Link from '../../Link/Link';
 
 export interface SearchResultsProps extends React.HTMLAttributes<HTMLElement> {
   autoCompleteResults?: { id: string; url: string; label: string }[];
+  resultsPending?: boolean;
   children?: React.ReactNode;
 }
 
-const SearchResults = ({ autoCompleteResults = [], children }: React.PropsWithChildren<SearchResultsProps>) => {
+const SearchResults = ({
+  autoCompleteResults = [],
+  resultsPending,
+  children,
+}: React.PropsWithChildren<SearchResultsProps>) => {
   return (
     <ul data-testid="search-results" className={`${px}-search__results`}>
+      {resultsPending ? <li className={`${px}-search__result`}>Loading...</li> : null}
       {Array.isArray(autoCompleteResults) &&
         autoCompleteResults.length > 0 &&
         autoCompleteResults.map((result) => {

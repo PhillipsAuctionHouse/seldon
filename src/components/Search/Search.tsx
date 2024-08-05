@@ -11,6 +11,7 @@ export interface SearchProps extends React.HTMLAttributes<HTMLElement> {
   useIcon?: boolean;
   onSearch?: (searchQuery: string) => void;
   searchResults?: SearchResultsProps['autoCompleteResults'];
+  resultsPending?: boolean;
 }
 
 const Search = ({
@@ -18,6 +19,7 @@ const Search = ({
   useIcon = true,
   onSearch,
   searchResults = [],
+  resultsPending = false,
 }: React.PropsWithChildren<SearchProps>) => {
   const [overlayEnabled, setOverlayEnabled] = React.useState(false);
   const searchInputRef = React.useRef<HTMLInputElement>(null);
@@ -68,7 +70,7 @@ const Search = ({
             ref={searchInputRef}
           />
           {searchInputRef.current?.value && searchInputRef.current?.value.length > 2 ? (
-            <SearchResults autoCompleteResults={searchResults}>
+            <SearchResults autoCompleteResults={searchResults} resultsPending={resultsPending}>
               <li key="viewAllSearchResults" className={`${px}-search__result`}>
                 <Link href={`/Search?Search=${encodeURIComponent(searchInputRef.current?.value)}`}>
                   <p>{`View all results for ${searchInputRef.current?.value}`}</p>
