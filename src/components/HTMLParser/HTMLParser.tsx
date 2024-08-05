@@ -35,7 +35,7 @@ const HTMLParser = ({ className, html, isOnlySanitize = false, ...props }: HTMLP
   const cleanReact = parse(cleanHtml, options as HTMLReactParserOptions);
   return (
     <>
-      {typeof html === 'string' ? (
+      {typeof html === 'string' && html.length > 0 ? (
         isOnlySanitize ? (
           <div
             {...commonProps}

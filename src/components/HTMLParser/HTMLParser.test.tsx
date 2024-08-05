@@ -69,4 +69,10 @@ describe('HTMLParser', () => {
     expect(pElement).toHaveClass('phillips-text');
     expect(aElement).toHaveClass('phillips-link');
   });
+
+  it('will not render if html is not provided', () => {
+    render(<HTMLParser html={''} />);
+    const element = screen.queryByTestId('HTMLParser');
+    expect(element).toBeNull();
+  });
 });
