@@ -22,12 +22,11 @@ const fetchData = async (searchQuery: string) => {
   return searchResults;
 };
 
-const StatefulSearch = ({ value, ...props }: SearchProps) => {
+const StatefulSearch = (props: SearchProps) => {
   const [autoCompleteResults, setAutoCompleteResults] = React.useState(
     [] as Array<{ id: string; label: string; url: string }>,
   );
   const [state, setState] = React.useState<SearchProps['state']>('idle');
-  const [searchValue, setSearchValue] = React.useState(value);
   const onSearch = (searchQuery: string) => {
     if (searchQuery?.includes('?')) {
       setState('invalid');
@@ -47,10 +46,8 @@ const StatefulSearch = ({ value, ...props }: SearchProps) => {
   return (
     <Search
       {...props}
-      value={searchValue}
       onSearch={(value) => {
         onSearch(value);
-        setSearchValue(value);
       }}
       searchResults={autoCompleteResults}
       state={state}
@@ -71,7 +68,7 @@ type Story = StoryObj<typeof meta>;
 export const Playground: Story = {
   args: {
     useIcon: true,
-    value: '',
+    defaultValue: '',
     onSearch: () => {
       return;
     },

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { encodeURLSearchParams, getCommonProps, px } from '../../utils';
+import { encodeURLSearchParams, getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import Input from '../Input/Input';
 import SearchIcon from '../../assets/search.svg?react';
@@ -11,10 +11,7 @@ export interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {
    * If true will show an icon instead of text in the button
    */
   useIcon?: boolean;
-  /**
-   * The current search input value
-   */
-  value: string;
+
   /**
    *
    * @param searchQuery called when the search input changes
@@ -57,10 +54,10 @@ export interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Search = ({
   useIcon = true,
-  value = '',
   onSearch,
   searchResults = [],
   state = 'idle',
+  defaultValue = '',
   className,
   placeholder = 'Type to search',
   searchButtonText = 'Search',
@@ -74,6 +71,7 @@ const Search = ({
   const [overlayEnabled, setOverlayEnabled] = React.useState(false);
   const searchInputRef = React.useRef<HTMLInputElement>(null);
 
+  const value = searchInputRef.current?.value;
   const showSearch = () => {
     setOverlayEnabled(!overlayEnabled);
     // means we're opening search
@@ -129,7 +127,7 @@ const Search = ({
             labelText={searchButtonText}
             placeholder={placeholder}
             type="text"
-            defaultValue={value}
+            defaultValue={defaultValue}
             invalid={state === 'invalid'}
             invalidText={invalidText}
             onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
