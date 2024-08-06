@@ -4,7 +4,7 @@ import SearchResults from './SearchResults';
 
 describe('SearchResults', () => {
   it('renders loading message when results are pending', () => {
-    render(<SearchResults resultsPending={true} />);
+    render(<SearchResults isLoading={true} />);
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 

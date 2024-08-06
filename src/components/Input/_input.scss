@@ -126,7 +126,8 @@ $lg: #{$px}-input--lg;
 
   .#{$px}-input__validation {
     animation: reveal 0.45s linear forwards;
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 2rem;
   }
 }
 

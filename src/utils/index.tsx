@@ -164,3 +164,12 @@ export const findChildrenOfType = function (
   });
   return foundChildrenOfType.length > 0 ? foundChildrenOfType : null;
 };
+
+export const encodeURLSearchParams = (url: string) => {
+  const urlSections = url.split('?');
+  const searchParams = new URLSearchParams(urlSections[1]);
+  const encodedParams = Array.from(searchParams.entries()).map(([key, value]) => [key, encodeURIComponent(value)]);
+  const encodedQueryString = encodedParams.map(([key, value]) => `${key}=${value}`).join('&');
+  const encodedLink = `${urlSections[0]}?${encodedQueryString}`;
+  return encodedLink;
+};

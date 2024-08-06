@@ -22,19 +22,40 @@ const fetchData = async (searchQuery: string) => {
   return searchResults;
 };
 
-const StatefulSearch = (props: SearchProps) => {
+const StatefulSearch = ({ value, ...props }: SearchProps) => {
   const [autoCompleteResults, setAutoCompleteResults] = React.useState(
     [] as Array<{ id: string; label: string; url: string }>,
   );
+  const [state, setState] = React.useState<SearchProps['state']>('idle');
+  const [searchValue, setSearchValue] = React.useState(value);
   const onSearch = (searchQuery: string) => {
+    if (searchQuery?.includes('?')) {
+      setState('invalid');
+      return;
+    }
     // Call to get auto complete results
     if (searchQuery.length > 2) {
+      setState('loading');
       fetchData(searchQuery)
-        .then((data) => setAutoCompleteResults(data.makers))
+        .then((data) => {
+          setAutoCompleteResults(data.makers);
+          setState('idle');
+        })
         .catch((error) => console.error(error));
     }
   };
-  return <Search {...props} onSearch={onSearch} searchResults={autoCompleteResults} />;
+  return (
+    <Search
+      {...props}
+      value={searchValue}
+      onSearch={(value) => {
+        onSearch(value);
+        setSearchValue(value);
+      }}
+      searchResults={autoCompleteResults}
+      state={state}
+    />
+  );
 };
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
@@ -50,6 +71,11 @@ type Story = StoryObj<typeof meta>;
 export const Playground: Story = {
   args: {
     useIcon: true,
-    altText: 'Search',
+    value: '',
+    onSearch: () => {
+      return;
+    },
+    searchResults: [],
+    state: 'loading',
   },
 };
