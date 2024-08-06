@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
 import { px } from '../../utils';
-import HTMLParser from './HTMLParser';
+import { HTMLParser } from './';
 import { runCommonTests } from '../../utils/testUtils';
 
 describe('HTMLParser', () => {
