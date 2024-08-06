@@ -1,3 +1,10 @@
+# [1.35.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.34.0...v1.35.0) (2024-08-06)
+
+
+### Features
+
+* **search:** L3-2524 search autocomplete api ([#247](https://github.com/PhillipsAuctionHouse/seldon/issues/247)) ([fc62136](https://github.com/PhillipsAuctionHouse/seldon/commit/fc62136ef2f4ddac5260f15d129f4984909eb5bf))
+
 # [1.34.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.33.0...v1.34.0) (2024-08-05)
 
 
