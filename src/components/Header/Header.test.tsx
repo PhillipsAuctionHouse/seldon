@@ -37,7 +37,7 @@ describe('Header', () => {
     const toggleButton = screen.getByRole('button', { name: /Open Menu/i });
     const logo = screen.getByTestId('header-logo');
     const nav = screen.getByTestId(`${px}-main-nav`);
-    const search = screen.getByTestId('header-search');
+    const search = screen.getByTestId(`search`);
     expect(toggleButton).toBeInTheDocument();
     expect(logo).toBeInTheDocument();
     expect(nav).toBeInTheDocument();
