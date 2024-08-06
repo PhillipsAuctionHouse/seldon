@@ -141,3 +141,35 @@ export const emailValidation = (email: string) => {
   const emailRegex = /(.+)@(.+){2,}\.(.+){2,}/i;
   return emailRegex.test(email);
 };
+
+/**
+ * Return array of children of a specific type
+ *
+ * @param children - React children
+ * @param componentType - React component type
+ * @param inverse - Return children that are not of the specified type
+ *
+ */
+export const findChildrenOfType = function (
+  children: React.ReactNode,
+  componentType?: React.ElementType,
+  inverse = false,
+) {
+  const foundChildrenOfType = React.Children.toArray(children).filter((child) => {
+    if (child && (child as React.ReactElement).type === componentType && !inverse) {
+      return child;
+    } else {
+      return child && (child as React.ReactElement).type !== componentType && inverse;
+    }
+  });
+  return foundChildrenOfType.length > 0 ? foundChildrenOfType : null;
+};
+
+export const encodeURLSearchParams = (url: string) => {
+  const urlSections = url.split('?');
+  const searchParams = new URLSearchParams(urlSections[1]);
+  const encodedParams = Array.from(searchParams.entries()).map(([key, value]) => [key, encodeURIComponent(value)]);
+  const encodedQueryString = encodedParams.map(([key, value]) => `${key}=${value}`).join('&');
+  const encodedLink = `${urlSections[0]}?${encodedQueryString}`;
+  return encodedLink;
+};

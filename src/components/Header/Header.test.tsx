@@ -9,6 +9,7 @@ import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
 import NavigationItemTrigger from '../Navigation/NavigationItemTrigger/NavigationItemTrigger';
 import NavigationList from '../Navigation/NavigationList/NavigationList';
 import { LinkVariants } from '../Link/utils';
+import Search from '../Search/Search';
 
 describe('Header', () => {
   const headerComponent = () => (
@@ -28,6 +29,7 @@ describe('Header', () => {
           </NavigationItemTrigger>
         </NavigationList>
       </Navigation>
+      <Search />
     </Header>
   );
   it('should render the header component with default props', () => {
@@ -35,7 +37,7 @@ describe('Header', () => {
     const toggleButton = screen.getByRole('button', { name: /Open Menu/i });
     const logo = screen.getByTestId('header-logo');
     const nav = screen.getByTestId(`${px}-main-nav`);
-    const search = screen.getByTestId('header-search');
+    const search = screen.getByTestId(`search`);
     expect(toggleButton).toBeInTheDocument();
     expect(logo).toBeInTheDocument();
     expect(nav).toBeInTheDocument();
