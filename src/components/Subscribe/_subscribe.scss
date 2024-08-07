@@ -4,27 +4,31 @@
 @import '#scss/typography';
 
 .#{$px}-subscribe {
-  max-width: 30rem;
+  max-width: 600px;
   width: 100%;
+
+  .#{$px}-input {
+    &__label {
+      color: $pure-black;
+      font-size: 0.75rem;
+      text-transform: none;
+    }
+
+    &__validation {
+      padding-left: 0;
+    }
+  }
 
   &__title {
     @include text($heading3);
 
     margin-bottom: $spacing-xsm;
-    text-align: center;
   }
 
   &__blurb {
     @include text($body2);
 
-    text-align: center;
-  }
-
-  @include media($size-sm) {
-    &__title,
-    &__blurb {
-      text-align: left;
-    }
+    color: $pure-black;
   }
 
   &__input__wrapper {
@@ -32,6 +36,25 @@
   }
 
   &__button {
-    margin: $spacing-md 0 $spacing-md;
+    height: 36px;
+    margin: $spacing-sm 0 $spacing-md;
+    width: 100%;
+
+    @include media($size-sm) {
+      width: 240px;
+    }
+  }
+
+  &__privacy {
+    @include text($body3);
+
+    // margin-top: $spacing-sm;
+    background-color: yellow;
+    color: $pure-black;
+    font-size: 0.75rem;
+
+    @include media($size-sm) {
+      // margin-top: $spacing-xl;
+    }
   }
 }
