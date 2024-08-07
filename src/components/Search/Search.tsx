@@ -25,7 +25,7 @@ export interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * additional state information
    */
-  state?: 'loading' | 'invalid' | 'idle';
+  state?: 'loading' | 'submitting' | 'invalid' | 'idle';
   /**
    * allows override of the default placeholder (i.e. for internationalization)
    */
