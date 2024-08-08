@@ -104,6 +104,10 @@ $lg: #{$px}-input--lg;
   &--invalid {
     color: $error-red;
 
+    label {
+      color: $error-red;
+    }
+
     .#{$px}-input__input,
     .#{$px}-input__input::placeholder,
     .#{$px}-input__validation {
