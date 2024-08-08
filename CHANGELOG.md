@@ -1,3 +1,10 @@
+# [1.37.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.36.0...v1.37.0) (2024-08-08)
+
+
+### Features
+
+* **footer:** L3-2980 footer mobile redesign ([#265](https://github.com/PhillipsAuctionHouse/seldon/issues/265)) ([4ad0f38](https://github.com/PhillipsAuctionHouse/seldon/commit/4ad0f388147b41d521078e52ed1dc67a07a0b902))
+
 # [1.36.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.35.0...v1.36.0) (2024-08-08)
 
 
