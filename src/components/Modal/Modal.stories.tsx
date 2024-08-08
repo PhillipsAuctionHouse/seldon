@@ -30,7 +30,7 @@ export const Playground = () => {
       </Button>
 
       <PlaygroundSplitPanel />
-      <Modal isOpen={isOpen} onClose={onClose} appElementSelector={'body'}>
+      <Modal isOpen={isOpen} onClose={onClose} appElementSelector="body">
         <img src="https://www.dev.phillips.com/Content/homepage/wechat_qr_mobile.png" alt="placeholder" />
       </Modal>
     </>

@@ -123,31 +123,31 @@ const leftComponent = (
     <Accordion type="multiple" className={`${px}-footer-mobile`}>
       <AccordionItem
         isLocked={false}
-        variation={''}
-        label={'About Us'}
-        key={`accordion-key-about-us`}
-        id={`accordion-item-about-us`}
+        variation=""
+        label="About Us"
+        key="accordion-key-about-us"
+        id="accordion-item-about-us"
       >
         {aboutUsLinks}
       </AccordionItem>
 
       <AccordionItem
         isLocked={false}
-        variation={''}
-        label={'Our Services'}
-        key={`accordion-key-our-services`}
-        id={`accordion-item-our-services`}
+        variation=""
+        label="Our Services"
+        key="accordion-key-our-services"
+        id="accordion-item-our-services"
       >
         {ourServicesLinks}
       </AccordionItem>
 
       <AccordionItem
         isLocked={false}
-        variation={''}
-        label={'Policies'}
+        variation=""
+        label="Policies"
         isLastItem={true}
-        key={`accordion-key-policies`}
-        id={`accordion-item-policies`}
+        key="accordion-key-policies"
+        id="accordion-item-policies"
       >
         {policyLinks}
       </AccordionItem>

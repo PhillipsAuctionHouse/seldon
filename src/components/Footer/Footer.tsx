@@ -40,7 +40,7 @@ const Footer = ({
 
       <div className={`${px}-footer__copyright`}>
         <h1 data-testid="header-logo" className={`${px}-header__logo`}>
-          <a href="/" aria-label={'logo'}>
+          <a href="/" aria-label="logo">
             <Logo />
           </a>
         </h1>
