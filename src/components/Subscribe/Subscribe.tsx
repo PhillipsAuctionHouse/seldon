@@ -52,6 +52,10 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
    */
   successText?: string;
   /**
+   * Subscribe privacy text
+   */
+  privacyText?: string;
+  /**
    * Subscribe state for loading or error
    */
   subscriptionState?: SubscriptionState;
@@ -73,13 +77,14 @@ const Subscribe = ({
   buttonProps,
   className,
   element: Element = 'form',
-  inputLabelText = 'Email*',
+  inputLabelText = 'Enter Your Email Address To Sign Up*',
   inputPlaceholder = 'example@email.com',
-  title = 'Subscribe to Newsletter',
+  title = 'Never Miss A Moment',
   loadingText = 'Loading...',
   invalidText = '',
   errorText = 'An error occurred. Please try again.',
   successText,
+  privacyText = 'By signing up, you agree to receive email communications from Phillips.',
   subscriptionState = SubscriptionState.Default,
   ...props
 }: SubscribeProps) => {
@@ -121,11 +126,14 @@ const Subscribe = ({
       <Button
         className={`${baseClassName}__button ${className}`}
         variant={ButtonVariants.secondary}
+        size="sm"
         type="submit"
         {...buttonProps}
       >
         {buttonText}
       </Button>
+
+      {privacyText ? <p className={`${baseClassName}__privacy`}>{privacyText}</p> : null}
     </Element>
   );
 };
