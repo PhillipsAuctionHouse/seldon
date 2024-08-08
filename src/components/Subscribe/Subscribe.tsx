@@ -126,13 +126,14 @@ const Subscribe = ({
       <Button
         className={`${baseClassName}__button ${className}`}
         variant={ButtonVariants.secondary}
+        size="sm"
         type="submit"
         {...buttonProps}
       >
         {buttonText}
       </Button>
 
-      <p className={`${baseClassName}__privacy`}>{privacyText}</p>
+      {privacyText ? <p className={`${baseClassName}__privacy`}>{privacyText}</p> : null}
     </Element>
   );
 };

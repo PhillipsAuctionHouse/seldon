@@ -7,18 +7,6 @@
   max-width: 600px;
   width: 100%;
 
-  .#{$px}-input {
-    &__label {
-      color: $pure-black;
-      font-size: 0.75rem;
-      text-transform: none;
-    }
-
-    &__validation {
-      padding-left: 0;
-    }
-  }
-
   &__title {
     @include text($heading3);
 
@@ -36,7 +24,6 @@
   }
 
   &__button {
-    height: 36px;
     margin: $spacing-sm 0 $spacing-md;
     width: 100%;
 
@@ -48,13 +35,12 @@
   &__privacy {
     @include text($body3);
 
-    // margin-top: $spacing-sm;
-    background-color: yellow;
     color: $pure-black;
     font-size: 0.75rem;
+    margin-top: $spacing-sm;
 
     @include media($size-sm) {
-      // margin-top: $spacing-xl;
+      margin-top: $spacing-xl;
     }
   }
 }
