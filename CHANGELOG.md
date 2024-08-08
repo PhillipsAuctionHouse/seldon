@@ -1,3 +1,10 @@
+# [1.36.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.35.0...v1.36.0) (2024-08-08)
+
+
+### Features
+
+* **subscribe:** L4-3126 changed styles ([#264](https://github.com/PhillipsAuctionHouse/seldon/issues/264)) ([5845945](https://github.com/PhillipsAuctionHouse/seldon/commit/584594515e3d8b2f802a16d367ac65f91bbaa94c))
+
 # [1.35.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.34.0...v1.35.0) (2024-08-06)
 
 
