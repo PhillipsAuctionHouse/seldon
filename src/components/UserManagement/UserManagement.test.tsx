@@ -3,6 +3,7 @@ import UserManagement from './UserManagement';
 import userEvent from '@testing-library/user-event';
 import { SupportedLanguages } from '../../types/commonTypes';
 import { runCommonTests } from '../../utils/testUtils';
+import { AuthState } from './types';
 
 describe('UserManagement', () => {
   runCommonTests(UserManagement, 'UserManagement');
@@ -41,7 +42,7 @@ describe('UserManagement', () => {
 
   it('calls onLogout when logout link is clicked', async () => {
     const onLogoutMock = vitest.fn();
-    render(<UserManagement isLoggedIn onLogout={onLogoutMock} />);
+    render(<UserManagement authState={AuthState.LoggedIn} onLogout={onLogoutMock} />);
     const logoutLinkElement = screen.getByText('Logout');
     await userEvent.click(logoutLinkElement);
     expect(onLogoutMock).toHaveBeenCalled();
@@ -71,8 +72,15 @@ describe('UserManagement', () => {
 
   it('displays the correct login and logout labels when isLoggedIn is true', () => {
     const logoutLabel = 'Sign Out';
-    render(<UserManagement isLoggedIn logoutLabel={logoutLabel} />);
+    render(<UserManagement authState={AuthState.LoggedIn} logoutLabel={logoutLabel} />);
     const logoutLinkElement = screen.getByText(logoutLabel);
     expect(logoutLinkElement).toBeInTheDocument();
+  });
+  it('AuthState not loaded does not show logout or login text', () => {
+    render(<UserManagement authState={AuthState.Loading} />);
+    const logoutLinkElement = screen.queryByText('Logout');
+    expect(logoutLinkElement).not.toBeInTheDocument();
+    const loginLinkElement = screen.queryByText('Login');
+    expect(loginLinkElement).not.toBeInTheDocument();
   });
 });
