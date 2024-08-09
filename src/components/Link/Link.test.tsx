@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import Link from './Link';
-import { LinkVariants } from './utils';
+import { LinkVariants } from './types';
 import { getLinkVariantClassName } from './utils';
 import { runCommonTests } from '../../utils/testUtils';
 

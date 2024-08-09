@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import React, { HTMLAttributes } from 'react';
 import { getLinkVariantClassName, isLinkExternal } from './utils';
-import { LinkVariants } from './utils';
+import { LinkVariants } from './types';
 import { Text, TextVariants } from '../Text';
 
 export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
