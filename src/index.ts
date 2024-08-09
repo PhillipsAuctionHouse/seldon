@@ -51,5 +51,6 @@ export {
 export * from './components/Text';
 export * from './components/Accordion';
 export { default as UserManagement, type UserManagementProps } from './components/UserManagement/UserManagement';
+export { AuthState } from './components/UserManagement/types';
 export * from './types/commonTypes';
 export { Breadcrumb, type BreadcrumbProps } from './components/Breadcrumb';

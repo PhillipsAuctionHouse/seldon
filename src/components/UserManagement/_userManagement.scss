@@ -78,6 +78,10 @@
   }
 
   .#{$px}-nav__item {
+    > a {
+      padding: 0.5rem;
+    }
+
     &:hover,
     &:focus,
     &:focus-within {
