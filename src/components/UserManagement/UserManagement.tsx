@@ -45,23 +45,25 @@ const UserManagement = ({
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'UserManagement');
   const languageLabel = languageOptions.find((option) => option.value === currentLanguage)?.label ?? 'English';
   const AccountDetailsComponent = accountDetailsLink ?? 'a';
+  const isLoggedIn = authState === AuthState.LoggedIn;
+  const shouldShowAccountDetails = authState !== AuthState.Loading;
+
   const handleLanguageChange = (language: SupportedLanguages) => {
     (document.activeElement as HTMLElement)?.blur();
     onLanguageChange(language);
   };
-
   return (
     <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
       <ul className={`${baseClassName}__account-wrapper`}>
-        {authState !== AuthState.Loading && (
+        {shouldShowAccountDetails && (
           <>
             <AccountDetailsComponent>
               <AccountCircle className={`${baseClassName}__account-icon`} />
             </AccountDetailsComponent>
             <NavigationItem
               className={`${baseClassName}__login`}
-              onClick={authState === AuthState.LoggedIn ? onLogout : onLogin}
-              label={authState === AuthState.LoggedIn ? logoutLabel : loginLabel}
+              onClick={isLoggedIn ? onLogout : onLogin}
+              label={isLoggedIn ? logoutLabel : loginLabel}
             />
           </>
         )}
