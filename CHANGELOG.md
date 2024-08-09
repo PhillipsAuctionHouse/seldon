@@ -1,3 +1,10 @@
+# [1.38.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.37.0...v1.38.0) (2024-08-09)
+
+
+### Features
+
+* **htmlparser:** L3-3194 - create a safe parser for rich text ([#260](https://github.com/PhillipsAuctionHouse/seldon/issues/260)) ([bb60a66](https://github.com/PhillipsAuctionHouse/seldon/commit/bb60a66d26958aa675e07cbf4ce53e516c883251))
+
 # [1.37.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.36.0...v1.37.0) (2024-08-08)
 
 
