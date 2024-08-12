@@ -1,3 +1,10 @@
+## [1.38.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.1...v1.38.2) (2024-08-12)
+
+
+### Bug Fixes
+
+* **css:** L3-2387 rename scss files and refactor into separate files so the partials can be imported separately ([#257](https://github.com/PhillipsAuctionHouse/seldon/issues/257)) ([48d1dfd](https://github.com/PhillipsAuctionHouse/seldon/commit/48d1dfd1c2b4de3e3e740226d48aa01065269970))
+
 ## [1.38.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.0...v1.38.1) (2024-08-12)
 
 
