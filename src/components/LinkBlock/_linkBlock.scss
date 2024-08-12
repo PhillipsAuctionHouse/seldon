@@ -1,5 +1,4 @@
-@import '#scss/type';
-@import '#scss/vars';
+@use '#scss/allPartials' as *;
 
 .#{$px}-link-block {
   align-items: center;

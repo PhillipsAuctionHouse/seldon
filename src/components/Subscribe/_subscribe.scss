@@ -1,7 +1,4 @@
-@import '#scss/vars';
-@import '#scss/utils';
-@import '#scss/type';
-@import '#scss/typography';
+@use '#scss/allPartials' as *;
 
 .#{$px}-subscribe {
   max-width: 600px;

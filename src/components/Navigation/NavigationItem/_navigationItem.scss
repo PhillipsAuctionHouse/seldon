@@ -1,6 +1,4 @@
-@import '#scss/vars';
-@import '#scss/utils';
-@import '#scss/typography';
+@use '#scss/allPartials' as *;
 
 .#{$px}-nav__item {
   @include isHeaderMobile {

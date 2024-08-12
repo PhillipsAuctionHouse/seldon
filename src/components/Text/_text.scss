@@ -1,4 +1,4 @@
-@import '#scss/_vars';
+@use '#scss/allPartials' as *;
 
 .#{$px}-text {
   @each $variant in $text-tokens {

@@ -1,3 +1,5 @@
+@use '#scss/allPartials' as *;
+
 .#{$px}-icon-button {
   background-color: unset;
   border: unset;

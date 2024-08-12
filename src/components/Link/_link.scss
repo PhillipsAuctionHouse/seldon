@@ -1,4 +1,4 @@
-@import '#scss/type';
+@use '#scss/allPartials' as *;
 
 .#{$px}-link {
   color: $cta-blue;

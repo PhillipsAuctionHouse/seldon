@@ -1,5 +1,4 @@
-@import '#scss/vars';
-@import '#scss/utils';
+@use '#scss/allPartials' as *;
 
 .#{$px}-nav__list {
   display: flex;

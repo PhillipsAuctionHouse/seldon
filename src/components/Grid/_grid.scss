@@ -1,5 +1,4 @@
-@import '#scss/vars';
-@import '#scss/utils';
+@use '#scss/allPartials' as *;
 
 .#{$px}-grid {
   @include gridContainer(false);

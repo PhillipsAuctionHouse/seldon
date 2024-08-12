@@ -38,7 +38,7 @@ async function copyComponentFiles(componentName: string) {
       await fs.promises.writeFile(targetFile, updatedContent);
     }
 
-    const stylesFilePath = path.join(__dirname, '..', '../', 'src', 'styles.scss');
+    const stylesFilePath = path.join(__dirname, '..', '../', 'src', 'componentStyles.scss');
     const importStatement = `@import 'components/${componentName}/${newCamelCaseComponentName}';\n`;
     await fs.promises.appendFile(stylesFilePath, importStatement);
 

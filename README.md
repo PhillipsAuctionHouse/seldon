@@ -20,10 +20,11 @@ yarn add @phillips/seldon
 
 ### Styling
 
-The project contains a `scss` folder. Here you will find the main export of our sass styles. This will include all the styles bundled with this package, including resets and typography styles.
+The project contains a `scss` folder. Here you will find the main export of our sass styles for our components. There's also a scss export that contains our mixins, tokens, and other utilities.
 
 ```scss
-@use '@phillips/seldon/dist/scss/styles';
+@use '@phillips/seldon/dist/scss/componentStyles'; // our component tyles
+@use '@phillips/seldon/dist/scss/allPartials'; // our scss utilities
 ```
 
 If you wish to only import specific component styles you can find them in their respective directories inside the `scss` folder.

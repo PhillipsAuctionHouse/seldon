@@ -1,4 +1,4 @@
-@import '#scss/vars';
+@use '#scss/allPartials' as *;
 
 .doc-wrapper {
   .#{$px}-color-card {

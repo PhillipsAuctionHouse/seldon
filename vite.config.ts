@@ -48,7 +48,7 @@ export default defineConfig({
           targets: [
             // Sass entrypoint and utils
             {
-              src: ['src/styles.scss', 'src/scss/**/*.scss'],
+              src: ['src/componentStyles.scss', 'src/scss/**/*.scss'],
               dest: ['dist/scss'],
               transform: (contents) =>
                 contents

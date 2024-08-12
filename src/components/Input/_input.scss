@@ -1,5 +1,4 @@
-@import '#scss/vars';
-@import '#scss/utils';
+@use '#scss/allPartials' as *;
 
 $md: #{$px}-input--md;
 $lg: #{$px}-input--lg;
