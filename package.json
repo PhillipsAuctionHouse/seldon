@@ -1,6 +1,6 @@
 {
   "name": "@phillips/seldon",
-  "version": "1.33.0",
+  "version": "1.38.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/PhillipsAuctionHouse/seldon"
@@ -41,9 +41,12 @@
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-dialog": "^1.1.1",
+    "@types/dompurify": "^3.0.5",
     "change-case": "^5.4.4",
     "classnames": "^2.5.1",
+    "dompurify": "^3.1.6",
     "flatpickr": "^4.6.13",
+    "html-react-parser": "^5.1.12",
     "react-modal": "^3.16.1"
   },
   "devDependencies": {
@@ -54,7 +57,7 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^10.1.0",
-    "@storybook/addon-essentials": "^8.2.5",
+    "@storybook/addon-essentials": "^8.2.7",
     "@storybook/addon-interactions": "^8.1.4",
     "@storybook/addon-links": "^8.1.4",
     "@storybook/addon-mdx-gfm": "^8.2.4",
@@ -76,6 +79,7 @@
     "@vitest/coverage-v8": "^1.6.0",
     "color": "^4.2.3",
     "eslint": "^8.57.0",
+    "eslint-plugin-local-rules": "^3.0.2",
     "eslint-plugin-react": "^7.34.3",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.9",

@@ -48,11 +48,7 @@
     }
   }
 
-  &__input-wrapper {
-    background: #323232;
-    color: $white;
-    display: flex;
-    height: 100px;
+  &__form {
     overflow: hidden;
     position: absolute;
     right: 0;
@@ -66,13 +62,28 @@
     }
 
     &--active {
+      overflow: visible;
       width: 50%;
 
       @include isHeaderMobile {
         top: $header-height;
         width: 100%;
       }
+
+      .#{$px}-search__results {
+        display: flex;
+        flex-direction: column;
+      }
     }
+  }
+
+  &__input-wrapper {
+    background: #323232;
+    color: $white;
+    display: flex;
+    height: 100px;
+    position: relative;
+    z-index: 3;
 
     &__icon {
       height: 24px;
@@ -95,6 +106,44 @@
       color: white;
       margin: 1rem 2rem;
       padding: 1rem 2rem;
+    }
+  }
+
+  &__results {
+    background: $soft-black;
+    display: none;
+    padding: 1rem 2rem;
+    position: absolute;
+    top: 100px;
+    width: 100%;
+  }
+
+  &__result {
+    border-bottom: 1px solid $white;
+    display: flex;
+    padding: 0.625rem 0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .phillips-link {
+      &:hover {
+        border-bottom: none;
+      }
+    }
+
+    p {
+      @include text($body3);
+
+      color: $white;
+      text-transform: none;
+    }
+
+    &:hover {
+      p {
+        color: $cta-blue;
+      }
     }
   }
 }

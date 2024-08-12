@@ -1,30 +1,69 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-social {
-  align-items: center;
   display: inline-flex;
   flex-direction: column;
+  padding: 0;
+  width: 100%;
+
+  @include media($size-sm) {
+    align-items: center;
+    padding: $spacing-sm;
+    width: unset;
+  }
+
+  &__button {
+    color: $pure-black;
+    font-size: 0.875rem;
+    justify-content: flex-start;
+    opacity: 1;
+    padding: 0;
+    text-decoration: underline;
+    white-space: nowrap;
+
+    @include media($size-sm) {
+      justify-content: center;
+    }
+
+    &:hover {
+      background-color: unset;
+      color: unset;
+    }
+
+    &:focus {
+      background-color: unset;
+      color: unset;
+    }
+  }
 
   @include media($size-sm) {
     align-items: flex-end;
   }
 
   &__header {
-    @include text($heading3);
-
-    margin-bottom: $spacing-xsm;
+    color: $pure-black;
+    font-family: $Distinct;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.0625rem;
+    margin-bottom: 0.75rem;
   }
 
   ul {
     align-items: center;
+    border-top: 1px solid #eae8e4;
     display: flex;
     gap: 0 1.25rem;
     list-style: none;
-    margin: 0 0 $spacing-md;
-    padding: 0;
+    margin: $spacing-md 0 $spacing-md;
+    padding: $spacing-md 0 0;
 
     @include media($size-sm) {
       gap: 0 1rem;
+      justify-content: flex-end;
+      margin: $spacing-sm 0 $spacing-md;
+      padding: $spacing-sm 0 0;
+      width: 100%;
     }
 
     li {

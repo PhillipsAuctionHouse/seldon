@@ -6,6 +6,7 @@ export { default as Page } from './pages/Page';
 
 // ⚛️ Components
 export { default as Button, type ButtonProps } from './components/Button/Button';
+export { ButtonVariants } from './components/Button/types';
 export { default as IconButton } from './components/IconButton/IconButton';
 // export { default as DatePicker, type DatePickerProps } from './components/DatePicker/DatePicker';
 export { default as ErrorBoundary, type ErrorBoundaryProps } from './components/ErrorBoundary/ErrorBoundary';
@@ -48,7 +49,9 @@ export {
   type StatefulViewingsListProps,
 } from './components/ViewingsList/StatefulViewingsList';
 export * from './components/Text';
+export * from './components/HTMLParser';
 export * from './components/Accordion';
 export { default as UserManagement, type UserManagementProps } from './components/UserManagement/UserManagement';
+export { AuthState } from './components/UserManagement/types';
 export * from './types/commonTypes';
 export { Breadcrumb, type BreadcrumbProps } from './components/Breadcrumb';

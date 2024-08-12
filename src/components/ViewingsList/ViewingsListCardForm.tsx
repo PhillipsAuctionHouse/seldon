@@ -257,7 +257,7 @@ const ViewingsListCardForm = ({
         name="previewOn"
         onChange={() => setPreviewOnState((oldState) => !oldState)}
       />
-      {!previewOnState ? <input type="hidden" name="previewOn" value={'false'} /> : null}
+      {!previewOnState ? <input type="hidden" name="previewOn" value="false" /> : null}
 
       <div
         className={classnames(`${baseClass}__preview-set`, { [`${baseClass}__preview-set--hidden`]: !previewOnState })}
@@ -357,7 +357,7 @@ const ViewingsListCardForm = ({
         name="emailOn"
         onChange={() => setEmailOnState((oldState) => !oldState)}
       />
-      {!emailOnState ? <input type="hidden" name="emailOn" value={'false'} /> : null}
+      {!emailOnState ? <input type="hidden" name="emailOn" value="false" /> : null}
 
       <div
         className={classnames(`${baseClass}__preview-set`, { [`${baseClass}__preview-set--hidden`]: !emailOnState })}

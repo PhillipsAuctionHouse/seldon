@@ -14,11 +14,10 @@ $lg: #{$px}-input--lg;
   }
 
   &__label {
-    color: $keyline-gray;
-    font-size: 0.8125rem;
+    color: $pure-black;
+    font-size: 0.75rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
-    text-transform: uppercase;
     word-break: break-word;
 
     &--hidden {
@@ -104,6 +103,10 @@ $lg: #{$px}-input--lg;
   &--invalid {
     color: $error-red;
 
+    label {
+      color: $error-red;
+    }
+
     .#{$px}-input__input,
     .#{$px}-input__input::placeholder,
     .#{$px}-input__validation {
@@ -125,7 +128,7 @@ $lg: #{$px}-input--lg;
 
   .#{$px}-input__validation {
     animation: reveal 0.45s linear forwards;
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 }
 

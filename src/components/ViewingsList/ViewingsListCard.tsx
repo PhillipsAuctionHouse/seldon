@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { px } from '../../utils';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
+import { ButtonVariants } from '../Button/types';
 import ViewingsListCardForm, { ViewingsListCardFormProps } from './ViewingsListCardForm';
 
 export interface ViewingsListCardProps extends ViewingsListCardFormProps, Record<string, unknown> {
@@ -267,26 +268,44 @@ const ViewingsListCard = ({
         onChange={() => setEnableOnSiteState((oldState) => !oldState)}
         readOnly={!editState}
       />
-      {!enableOnSiteState ? <input type="hidden" name="enableOnSite" value={'false'} /> : null}
+      {!enableOnSiteState ? <input type="hidden" name="enableOnSite" value="false" /> : null}
       <hr />
       <div className={`${baseClass}__btn-group ${px}-button__group`}>
         {editState ? (
           <>
-            <Button id={`vlc-save-btn-${id}`} buttonType="ghost" type="submit" size="sm" onClick={handleOnSave}>
+            <Button
+              id={`vlc-save-btn-${id}`}
+              variant={ButtonVariants.ghost}
+              type="submit"
+              size="sm"
+              onClick={handleOnSave}
+            >
               {saveBtnLabel}
             </Button>
-            <Button id={`vlc-cancel-btn-${id}`} buttonType="ghost" type="button" size="sm" onClick={handleOnCancel}>
+            <Button
+              id={`vlc-cancel-btn-${id}`}
+              variant={ButtonVariants.ghost}
+              type="button"
+              size="sm"
+              onClick={handleOnCancel}
+            >
               {cancelBtnLabel}
             </Button>
           </>
         ) : (
           <>
-            <Button id={`vlc-edit-btn-${id}`} buttonType="ghost" type="button" size="sm" onClick={handleOnEdit}>
+            <Button
+              id={`vlc-edit-btn-${id}`}
+              variant={ButtonVariants.ghost}
+              type="button"
+              size="sm"
+              onClick={handleOnEdit}
+            >
               {editBtnLabel}
             </Button>
             <Button
               id={`vlc-delete-btn-${id}`}
-              buttonType="ghost"
+              variant={ButtonVariants.ghost}
               type="button"
               size="sm"
               onClick={() => typeof onDelete === 'function' && onDelete(id)}

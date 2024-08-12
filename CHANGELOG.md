@@ -1,3 +1,38 @@
+# [1.38.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.37.0...v1.38.0) (2024-08-09)
+
+
+### Features
+
+* **htmlparser:** L3-3194 - create a safe parser for rich text ([#260](https://github.com/PhillipsAuctionHouse/seldon/issues/260)) ([bb60a66](https://github.com/PhillipsAuctionHouse/seldon/commit/bb60a66d26958aa675e07cbf4ce53e516c883251))
+
+# [1.37.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.36.0...v1.37.0) (2024-08-08)
+
+
+### Features
+
+* **footer:** L3-2980 footer mobile redesign ([#265](https://github.com/PhillipsAuctionHouse/seldon/issues/265)) ([4ad0f38](https://github.com/PhillipsAuctionHouse/seldon/commit/4ad0f388147b41d521078e52ed1dc67a07a0b902))
+
+# [1.36.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.35.0...v1.36.0) (2024-08-08)
+
+
+### Features
+
+* **subscribe:** L4-3126 changed styles ([#264](https://github.com/PhillipsAuctionHouse/seldon/issues/264)) ([5845945](https://github.com/PhillipsAuctionHouse/seldon/commit/584594515e3d8b2f802a16d367ac65f91bbaa94c))
+
+# [1.35.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.34.0...v1.35.0) (2024-08-06)
+
+
+### Features
+
+* **search:** L3-2524 search autocomplete api ([#247](https://github.com/PhillipsAuctionHouse/seldon/issues/247)) ([fc62136](https://github.com/PhillipsAuctionHouse/seldon/commit/fc62136ef2f4ddac5260f15d129f4984909eb5bf))
+
+# [1.34.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.33.0...v1.34.0) (2024-08-05)
+
+
+### Features
+
+* **footer:** L3-2980 footer redesign ([#254](https://github.com/PhillipsAuctionHouse/seldon/issues/254)) ([177c24b](https://github.com/PhillipsAuctionHouse/seldon/commit/177c24b9c484f9c3c6feff7130fa5318f25be0b7))
+
 # [1.33.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.32.0...v1.33.0) (2024-08-02)
 
 

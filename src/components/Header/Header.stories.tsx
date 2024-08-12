@@ -7,6 +7,8 @@ import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
 import { LinkVariants } from '../Link/utils';
 import { px } from '../../utils';
 import UserManagement from '../UserManagement/UserManagement';
+import Search from '../Search/Search';
+import { AuthState } from '../UserManagement/types';
 
 const meta = {
   title: 'Components/Header',
@@ -19,11 +21,15 @@ const meta = {
     },
     layout: 'fullscreen',
   },
-} satisfies Meta<typeof Header>;
+  args: {
+    authState: AuthState.LoggedOut,
+  },
+  argTypes: { authState: { control: { type: 'select' }, options: Object.values(AuthState) } },
+} satisfies Meta<typeof Header & typeof UserManagement>;
 
 export default meta;
 
-export const Playground = (props: HeaderProps) => (
+export const Playground = ({ authState, ...props }: HeaderProps & { authState?: AuthState }) => (
   <div>
     <Header {...props}>
       <Navigation id={`${px}-main-nav`} backBtnLabel="← Back">
@@ -214,9 +220,13 @@ export const Playground = (props: HeaderProps) => (
               <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} href="#" label="Careers" />
             </NavigationList>
           </NavigationItemTrigger>
-          <UserManagement onLanguageChange={(language) => console.log('languageChange', language)} />
+          <UserManagement
+            authState={authState}
+            onLanguageChange={(language) => console.log('languageChange', language)}
+          />
         </NavigationList>
       </Navigation>
+      <Search />
     </Header>
     <main>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
