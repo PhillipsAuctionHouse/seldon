@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import UserManagement from './UserManagement';
 import { SupportedLanguages } from '../../types/commonTypes';
+import { AuthState } from './types';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -26,7 +27,7 @@ export const Playground: Story = {
     onLanguageChange: (language) => console.log('Language Change', language),
     onLogin: () => console.log('Login'),
     onLogout: () => console.log('Logout'),
-    isLoggedIn: false,
+    authState: AuthState.LoggedOut,
     loginLabel: 'Login',
     logoutLabel: 'Logout',
   },
@@ -37,5 +38,6 @@ export const Playground: Story = {
         type: 'select',
       },
     },
+    authState: { control: { type: 'select' }, options: Object.values(AuthState) },
   },
 };

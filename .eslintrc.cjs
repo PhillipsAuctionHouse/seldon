@@ -11,14 +11,21 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
     'plugin:storybook/recommended',
+    'plugin:local-rules/all',
   ],
+  // ... other configurations
+  rules: {
+    'no-equals-word-string': 'error',
+    'no-template-curly-in-string': 'error',
+  },
+  settings: {},
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: ['./tsconfig.json', './tsconfig.node.json'],
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', 'local-rules'],
   rules: {
     'react-refresh/only-export-components': 'warn',
     'react/boolean-prop-naming': ['warn', {}],

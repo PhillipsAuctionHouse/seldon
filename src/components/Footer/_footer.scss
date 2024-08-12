@@ -8,6 +8,50 @@
   margin: $spacing-lg 0 0;
   width: 100%;
 
+  &-desktop {
+    display: none;
+
+    div {
+      flex: 1;
+      max-width: 18rem;
+      padding: 1rem;
+
+      h4 {
+        color: $pure-black;
+        font-family: $Distinct;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.0625rem;
+        margin-bottom: 0;
+        padding-bottom: 0.5rem;
+      }
+
+      ul {
+        li {
+          a {
+            font-size: 0.875rem;
+            font-weight: 500;
+            line-height: 1.875rem;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @include media($size-sm) {
+    &-desktop {
+      display: flex;
+    }
+
+    &-mobile {
+      display: none;
+    }
+  }
+
   .#{$px}-accordion {
     border-bottom: 1px solid #eae8e4;
     border-top: 1px solid #eae8e4;
@@ -56,7 +100,6 @@
     .#{$px}-accordion {
       border-bottom: 0;
       border-top: 0;
-      display: flex;
       width: 100%;
 
       &-item {

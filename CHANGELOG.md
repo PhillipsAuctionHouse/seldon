@@ -1,3 +1,24 @@
+# [1.38.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.37.0...v1.38.0) (2024-08-09)
+
+
+### Features
+
+* **htmlparser:** L3-3194 - create a safe parser for rich text ([#260](https://github.com/PhillipsAuctionHouse/seldon/issues/260)) ([bb60a66](https://github.com/PhillipsAuctionHouse/seldon/commit/bb60a66d26958aa675e07cbf4ce53e516c883251))
+
+# [1.37.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.36.0...v1.37.0) (2024-08-08)
+
+
+### Features
+
+* **footer:** L3-2980 footer mobile redesign ([#265](https://github.com/PhillipsAuctionHouse/seldon/issues/265)) ([4ad0f38](https://github.com/PhillipsAuctionHouse/seldon/commit/4ad0f388147b41d521078e52ed1dc67a07a0b902))
+
+# [1.36.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.35.0...v1.36.0) (2024-08-08)
+
+
+### Features
+
+* **subscribe:** L4-3126 changed styles ([#264](https://github.com/PhillipsAuctionHouse/seldon/issues/264)) ([5845945](https://github.com/PhillipsAuctionHouse/seldon/commit/584594515e3d8b2f802a16d367ac65f91bbaa94c))
+
 # [1.35.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.34.0...v1.35.0) (2024-08-06)
 
 

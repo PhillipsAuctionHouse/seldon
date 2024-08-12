@@ -9,18 +9,18 @@ describe('NavigationList', () => {
   const reqProps = { id: 'test-id' };
   const renderNavList = () => (
     <NavigationList {...reqProps}>
-      <NavigationItemTrigger id="auctions" label={`Auctions`}>
+      <NavigationItemTrigger id="auctions" label="Auctions">
         <NavigationList id={`${px}-auction-nav-list`}>
           <NavigationItem
-            badge={'New York'}
+            badge="New York"
             href="#"
-            navGroup={'nav-link-lg'}
+            navGroup="nav-link-lg"
             navType={LinkVariants.navLinkLg}
-            label={`Editions & Works on Paper`}
+            label="Editions & Works on Paper"
           />
         </NavigationList>
       </NavigationItemTrigger>
-      <NavigationItem href="#" label={`Departments`} />
+      <NavigationItem href="#" label="Departments" />
     </NavigationList>
   );
   it('renders without error', () => {

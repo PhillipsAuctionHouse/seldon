@@ -268,7 +268,7 @@ const ViewingsListCard = ({
         onChange={() => setEnableOnSiteState((oldState) => !oldState)}
         readOnly={!editState}
       />
-      {!enableOnSiteState ? <input type="hidden" name="enableOnSite" value={'false'} /> : null}
+      {!enableOnSiteState ? <input type="hidden" name="enableOnSite" value="false" /> : null}
       <hr />
       <div className={`${baseClass}__btn-group ${px}-button__group`}>
         {editState ? (

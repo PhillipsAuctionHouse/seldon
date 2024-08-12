@@ -166,7 +166,11 @@ const Input = React.forwardRef(
           value={value}
           {...rest}
         />
-        {inputProps.validation}
+        {inputProps.validation ? (
+          inputProps.validation
+        ) : (
+          <p className={classnames(`${px}-input__validation`)}>&nbsp;</p>
+        )}
       </div>
     );
   },

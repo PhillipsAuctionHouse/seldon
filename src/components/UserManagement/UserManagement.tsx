@@ -8,12 +8,16 @@ import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
 import { LinkProps } from '../Link/Link';
 import { SupportedLanguages } from '../../types/commonTypes';
 import classnames from 'classnames';
+import { AuthState } from './types';
 
 export interface UserManagementProps extends React.HTMLAttributes<HTMLDivElement> {
   languageOptions?: { label: string; value: SupportedLanguages }[];
   currentLanguage?: SupportedLanguages;
   onLanguageChange?: (language: SupportedLanguages) => void;
-  isLoggedIn?: boolean;
+  /**
+   * The authentication state for the current user
+   */
+  authState?: AuthState;
   onLogin?: () => void;
   onLogout?: () => void;
   accountDetailsLink?: React.ElementType<LinkProps>;
@@ -31,9 +35,9 @@ const UserManagement = ({
     { label: '中文', value: SupportedLanguages.zh },
   ],
   onLanguageChange = noOp,
-  isLoggedIn = false,
   onLogin = noOp,
   onLogout = noOp,
+  authState = AuthState.LoggedOut,
   loginLabel = 'Login',
   logoutLabel = 'Logout',
   ...props
@@ -41,24 +45,28 @@ const UserManagement = ({
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'UserManagement');
   const languageLabel = languageOptions.find((option) => option.value === currentLanguage)?.label ?? 'English';
   const AccountDetailsComponent = accountDetailsLink ?? 'a';
+  const isLoggedIn = authState === AuthState.LoggedIn;
+  const shouldShowAccountDetails = authState !== AuthState.Loading;
+
   const handleLanguageChange = (language: SupportedLanguages) => {
     (document.activeElement as HTMLElement)?.blur();
     onLanguageChange(language);
   };
-
   return (
     <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
       <ul className={`${baseClassName}__account-wrapper`}>
-        {isLoggedIn && (
-          <AccountDetailsComponent>
-            <AccountCircle className={`${baseClassName}__account-icon`} />
-          </AccountDetailsComponent>
+        {shouldShowAccountDetails && (
+          <>
+            <AccountDetailsComponent>
+              <AccountCircle className={`${baseClassName}__account-icon`} />
+            </AccountDetailsComponent>
+            <NavigationItem
+              className={`${baseClassName}__login`}
+              onClick={isLoggedIn ? onLogout : onLogin}
+              label={isLoggedIn ? logoutLabel : loginLabel}
+            />
+          </>
         )}
-        <NavigationItem
-          className={`${baseClassName}__login`}
-          onClick={isLoggedIn ? onLogout : onLogin}
-          label={isLoggedIn ? logoutLabel : loginLabel}
-        />
       </ul>
       <NavigationItemTrigger className={`${baseClassName}__language`} label={languageLabel}>
         <NavigationList id={`${px}-langauge-selection-list`} className={`${baseClassName}__language__selections`}>
