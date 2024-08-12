@@ -1,3 +1,5 @@
+@use '#scss/allPartials' as *;
+
 .#{$px}-html-parser {
   width: 100%;
 }
