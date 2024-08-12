@@ -71,7 +71,7 @@ describe('HTMLParser', () => {
   });
 
   it('will not render if html is not provided', () => {
-    render(<HTMLParser html={''} />);
+    render(<HTMLParser html="" />);
     const element = screen.queryByTestId('HTMLParser');
     expect(element).toBeNull();
   });
