@@ -10,10 +10,6 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   id?: string;
   /**
-   * Determines whether one or multiple items can be opened at the same time. Default as single.
-   */
-  type?: 'single' | 'multiple';
-  /**
    * Child element pass in to display as item content.
    */
   children?: React.ReactNode;
@@ -27,15 +23,15 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * [Storybook Link](Point back to yourself here)
  */
-const AccordionComponent = ({ className, type = 'single', children, ...props }: AccordionProps) => {
+const accrdionType = 'multiple';
+const AccordionComponent = ({ className, children, ...props }: AccordionProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Accordion');
   return (
     <Accordion.Root
       className={classnames(`${baseClassName}`, className)}
-      type={type}
+      type={accrdionType}
       {...commonProps}
       id={props?.id}
-      collapsible
     >
       {children}
     </Accordion.Root>

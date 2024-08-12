@@ -71,7 +71,6 @@ const smallTextBlock = (
 const smallTextItems = [
   {
     isLocked: true,
-    isLockedVariation: true,
     variation: 'sm',
     label: 'Condition Report',
     children: (
