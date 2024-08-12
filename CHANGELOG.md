@@ -1,3 +1,10 @@
+## [1.38.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.0...v1.38.1) (2024-08-12)
+
+
+### Bug Fixes
+
+* **search:** L3-2524 Search API ([#269](https://github.com/PhillipsAuctionHouse/seldon/issues/269)) ([67310c7](https://github.com/PhillipsAuctionHouse/seldon/commit/67310c780953f9a4501b8aaacb51ffbe7c0086bf))
+
 # [1.38.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.37.0...v1.38.0) (2024-08-09)
 
 
