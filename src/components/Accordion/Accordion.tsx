@@ -23,7 +23,7 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * [Storybook Link](Point back to yourself here)
  */
-const accrdionType = 'multiple';
+const accordionType = 'multiple';
 const AccordionComponent = ({ className, children, ...props }: AccordionProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Accordion');
   return (
