@@ -29,7 +29,7 @@ const AccordionComponent = ({ className, children, ...props }: AccordionProps) =
   return (
     <Accordion.Root
       className={classnames(`${baseClassName}`, className)}
-      type={accrdionType}
+      type={accordionType}
       {...commonProps}
       id={props?.id}
     >
