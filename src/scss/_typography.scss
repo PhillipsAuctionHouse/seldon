@@ -32,20 +32,11 @@ body {
   src: url('../fonts/Distinct-Display.woff2') format('woff2');
 }
 
-@mixin DistinctDisplay {
-  font-family: DistinctDisplay, sans-serif;
-}
-
 @font-face {
   font-family: DistinctDisplay;
   font-style: italic;
   src: url('../fonts/Distinct-DisplayItalic.woff') format('woff');
   src: url('../fonts/Distinct-DisplayItalic.woff2') format('woff2');
-}
-
-@mixin DistinctDisplayItalic {
-  font-family: DistinctDisplay, sans-serif;
-  font-style: italic;
 }
 
 /** Fonts **/
@@ -55,18 +46,10 @@ body {
   src: url('../fonts/Montserrat.woff2') format('woff2');
 }
 
-@mixin Montserrat {
-  font-family: Montserrat, sans-serif;
-}
-
 @font-face {
   font-family: Distinct;
   src: url('../fonts/Distinct-Text.woff') format('woff');
   src: url('../fonts/Distinct-Text.woff2') format('woff2');
-}
-
-@mixin DistinctText {
-  font-family: Distinct, sans-serif;
 }
 
 @font-face {
@@ -74,20 +57,4 @@ body {
   font-style: italic;
   src: url('../fonts/Distinct-Italic.woff') format('woff');
   src: url('../fonts/Distinct-Italic.woff2') format('woff2');
-}
-
-@mixin DistinctItalic {
-  font-family: Distinct, sans-serif;
-  font-style: italic;
-}
-
-@mixin headerText {
-  @include DistinctDisplay;
-
-  color: $primary-black;
-  font-weight: 400;
-}
-
-@mixin bodyText {
-  color: $soft-black;
 }
