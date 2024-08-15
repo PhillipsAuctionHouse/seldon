@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import * as Accordion from '@radix-ui/react-accordion';
 
-// You'll need to change the HTMLDivElement to match the top-level element of your component
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Unique id for component testing
@@ -27,12 +26,7 @@ const accordionType = 'multiple';
 const AccordionComponent = ({ className, children, ...props }: AccordionProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Accordion');
   return (
-    <Accordion.Root
-      className={classnames(`${baseClassName}`, className)}
-      type={accordionType}
-      {...commonProps}
-      id={props?.id}
-    >
+    <Accordion.Root className={classnames(`${baseClassName}`, className)} type={type} {...commonProps} id={props?.id}>
       {children}
     </Accordion.Root>
   );
