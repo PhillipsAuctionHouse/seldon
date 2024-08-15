@@ -1,3 +1,10 @@
+## [1.38.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.2...v1.38.3) (2024-08-15)
+
+
+### Bug Fixes
+
+* **Accordion:** L3-2559 Build Accordion component QA test fix ([#270](https://github.com/PhillipsAuctionHouse/seldon/issues/270)) ([fe08239](https://github.com/PhillipsAuctionHouse/seldon/commit/fe08239052d8666f26250f2737bda2a51ad25148))
+
 ## [1.38.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.1...v1.38.2) (2024-08-12)
 
 
