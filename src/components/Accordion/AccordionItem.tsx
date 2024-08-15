@@ -17,10 +17,6 @@ export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement>
    */
   isLocked: boolean;
   /**
-   * When true applied the lock variation icon.
-   */
-  isLockedVariation?: boolean;
-  /**
    * Determines whether the variation on text style is large or small.
    */
   variation: string;
@@ -32,10 +28,6 @@ export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement>
    * Child element pass in to display as item content.
    */
   children?: React.ReactNode;
-  /**
-   * Determines whether one or multiple items can be opened at the same time. Default as single.
-   */
-  type?: 'single' | 'multiple';
   /**
    * When true applied the transition keyframe animation on item expand. Default as false.
    */
@@ -59,13 +51,11 @@ const AccordionHeader = ({
   isCollapsed,
   setIsCollapsed,
   isLargeVariation,
-  isLockedVariation,
   id,
 }: AccordionHeaderType) => {
   const handleClick = () => !disable && setIsCollapsed((prevState) => !prevState);
   const icon = disable ? lockIcon : isCollapsed ? plusIcon : minusIcon;
-  const dataTestId =
-    `${id}-` + (disable ? 'lockedIcon' : isLockedVariation ? 'lockBlueIcon' : isCollapsed ? 'plusIcon' : 'minusIcon');
+  const dataTestId = `${id}-` + (disable ? 'lockedIcon' : isCollapsed ? 'plusIcon' : 'minusIcon');
   return (
     <Accordion.Trigger
       data-disabled={disable}
@@ -77,11 +67,7 @@ const AccordionHeader = ({
           {children}
         </div>
         <img
-          className={classnames(
-            `${baseClassName}__icon`,
-            { [`${baseClassName}__icon--lg`]: isLargeVariation },
-            isLockedVariation && `${baseClassName}--blue-fill`,
-          )}
+          className={classnames(`${baseClassName}__icon`, { [`${baseClassName}__icon--lg`]: isLargeVariation })}
           src={icon}
           data-testid={dataTestId}
           aria-hidden
@@ -121,13 +107,11 @@ const AccordionContent = ({
 
 const AccordionItem = ({
   isLocked,
-  isLockedVariation,
   variation,
   label,
   isLastItem,
   hasTransition = false,
   children,
-  type = 'single',
   isControlled = true,
   ...props
 }: AccordionItemProps) => {
@@ -135,6 +119,7 @@ const AccordionItem = ({
   const { className: baseClassName } = getCommonProps(props, 'Accordion');
   const isLargeVariation = variation === 'lg';
   const accordionItemClassName = `${baseClassName}-item`;
+
   return (
     <Accordion.Item
       disabled={isLocked}
@@ -144,10 +129,9 @@ const AccordionItem = ({
       <AccordionHeader
         disable={isLocked}
         isLargeVariation={isLargeVariation}
-        isLockedVariation={isLockedVariation}
         isCollapsed={isCollapsed}
         setIsCollapsed={isControlled ? setIsCollapsed : noOp}
-        id={type === 'single' ? props?.id : undefined}
+        id={props?.id}
         baseClassName={`${accordionItemClassName}-label`}
       >
         {label}

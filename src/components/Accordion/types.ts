@@ -28,10 +28,6 @@ export interface AccordionHeaderType {
    * When true, shows the large variation text style.
    */
   isLargeVariation: boolean;
-  /*
-   * When true, shows the locked icon variation.
-   */
-  isLockedVariation?: boolean;
   /**
    * Unique id for icon component testing
    */
