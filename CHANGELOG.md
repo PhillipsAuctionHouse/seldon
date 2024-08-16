@@ -1,3 +1,10 @@
+## [1.38.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.3...v1.38.4) (2024-08-16)
+
+
+### Bug Fixes
+
+* **styles:** L3-3127 need to import fonts from the main componentStyles ([#272](https://github.com/PhillipsAuctionHouse/seldon/issues/272)) ([c56e192](https://github.com/PhillipsAuctionHouse/seldon/commit/c56e192f8fad76689db226c53b8d166bed35d233))
+
 ## [1.38.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.2...v1.38.3) (2024-08-15)
 
 
