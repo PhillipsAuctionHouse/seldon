@@ -3,6 +3,8 @@
 // @TODO: reset styles when we can do a site wide regressions QA in phillips-public
 // @use 'reset';
 
+@use '#scss/typography' as *;
+
 // ⚛️ Components
 @use 'components/Button/button';
 @use 'components/IconButton/iconButton';

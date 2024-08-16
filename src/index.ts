@@ -49,7 +49,7 @@ export {
   type StatefulViewingsListProps,
 } from './components/ViewingsList/StatefulViewingsList';
 export * from './components/Text';
-export * from './components/HTMLParser';
+// export * from './components/HTMLParser';
 export * from './components/Accordion';
 export { default as UserManagement, type UserManagementProps } from './components/UserManagement/UserManagement';
 export { AuthState } from './components/UserManagement/types';

@@ -1,0 +1,4 @@
+{
+    "jest.enable": false,
+    "vitest.configSearchPatternExclude": "{**/node_modules/**,**/.*/**,**/*.d.ts,vite.config.ts.timestamp*}"
+}
