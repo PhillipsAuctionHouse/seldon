@@ -1,41 +1,10 @@
-import { AccordionVariantKey, AccordionVariants } from './types';
+import { AccordionVariantKey } from './types';
 
 import React from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import * as Accordion from '@radix-ui/react-accordion';
-
-interface AccordionVariantProps {
-  /**
-   * Determines whether multiple elements can be opened at the same time or not.
-   */
-  type: 'single' | 'multiple';
-  /**
-   * Determines if an open element can be closed by clicking on it.
-   * Only applicable to the `single` variants.
-   */
-  collapsible?: boolean;
-}
-
-/**
- * Sets the type and collapsible props based on the variant prop
- * The collapsible prop should only be passed when the variant is single
- */
-const getAccordionVariantProps = (variant?: AccordionVariantKey): AccordionVariantProps => {
-  const variantProps: AccordionVariantProps = { type: 'multiple' };
-
-  if (variant === AccordionVariants.singleCollapsible) {
-    variantProps.type = 'single';
-    variantProps.collapsible = true;
-  }
-
-  if (variant === AccordionVariants.singleNonCollapsible) {
-    variantProps.type = 'single';
-    variantProps.collapsible = false;
-  }
-
-  return variantProps;
-};
+import { getAccordionVariantProps } from './utils';
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
