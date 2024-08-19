@@ -5,8 +5,8 @@
   text-decoration: none;
   white-space: nowrap;
 
-  &:hover:not(&--list, &--navMain, &--navLinkLg, &--navLinkSm),
-  &:focus:not(&--list, &--navMain, &--navLinkLg, &--navLinkSm) {
+  &:hover:not(&--list, &--navMain, &--navLinkLg, &--navLinkSm, &--link, &--snwHeaderLink, &--snwFlyoutLink),
+  &:focus:not(&--list, &--navMain, &--navLinkLg, &--navLinkSm, &--link, &--snwHeaderLink, &--snwFlyoutLink) {
     @include underline;
   }
 
@@ -97,6 +97,64 @@
       .#{$px}-nav__item--label {
         color: $cta-blue;
       }
+    }
+  }
+
+  &--link {
+    border-bottom: 0;
+    font-size: $link-button-label-size;
+    font-weight: 600;
+    letter-spacing: 1px;
+    line-height: $link-label-line-height;
+    text-decoration: underline;
+
+    &:hover {
+      border-bottom: 0;
+    }
+  }
+
+  &--snwHeaderLink {
+    color: $pure-black;
+    font-size: $snw-header-link-size;
+    letter-spacing: 1px;
+    line-height: $snw-header-link-line-height;
+    text-transform: uppercase;
+
+    &:hover {
+      color: $pure-black;
+    }
+  }
+
+  &--snwHeaderLink {
+    color: $pure-black;
+    font-family: $Distinct;
+    font-size: $snw-header-link-size;
+    letter-spacing: 1px;
+    line-height: $snw-header-link-line-height;
+    text-transform: uppercase;
+
+    span {
+      font-family: $Distinct;
+    }
+
+    &:hover {
+      color: $pure-black;
+    }
+  }
+
+  &--snwFlyoutLink {
+    color: $pure-black;
+    font-size: $snw-flyout-link-size;
+    letter-spacing: 1px;
+    line-height: $snw-flyout-link-line-height;
+    text-transform: uppercase;
+
+    span {
+      font-family: $Distinct;
+    }
+
+    &:hover {
+      color: $pure-black;
     }
   }
 }

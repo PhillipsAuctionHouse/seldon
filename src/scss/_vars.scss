@@ -95,44 +95,79 @@ $text-tokens: $button, $cta-sm, $cta-lg, $email, $label, $badge, $display0, $dis
 /// FONT SIZE TOKENS:
 ///////////////////////
 
-:root {
-  --heading-size0: 3.25rem;
-  --heading-size1: 2.44rem;
-  --heading-size2: 1.95rem;
-  --heading-size3: 1.56rem;
-  --heading-size4: 1.56rem;
-  --body-size1: 1.25rem;
-  --body-size2: 1rem;
-  --body-size3: 0.75rem;
-  --label-size1: 1.25rem;
-  --label-size2: 1rem;
-  --label-size3: 0.75rem;
+@mixin font-size($to, $name, $font-start, $line-start, $step: 0.25) {
+  @for $i from 1 through $to {
+    --#{$name}-size#{$i}: #{$font-start - ($i - 1) * $step}rem;
+    --#{$name}-line-height-size#{$i}: #{$line-start - ($i - 1) * $step}rem;
+  }
+}
 
+:root {
   @media (max-width: 960px) {
     --heading-size0: 2.59rem;
-    --heading-size1: 1.83rem;
-    --heading-size2: 1.46rem;
-    --heading-size3: 1.17rem;
-    --heading-size4: 0.94rem;
-    --body-size1: 0.94rem;
-    --body-size2: 0.75rem;
-    --body-size3: 0.56rem;
+    --quote-size: 1.5rem;
+    --quote-line-height: 2rem;
+
+    @include font-size(4, 'heading', 1.5, 1.75);
+    @include font-size(3, 'string', 1, 1.25);
+    @include font-size(3, 'body', 1, 1.5);
+
     --label-size1: 1rem;
     --label-size2: 0.75rem;
     --label-size3: 0.56rem;
+    --link-button-label-size: 0.75rem;
+    --link-label-line-height: 0.75rem;
+    --button-label-line-height: 1rem;
+    --badge-label-size: 0.5rem;
+    --badge-label-line-height: 0.67rem;
+    --snw-header-link-size: 1rem;
+    --snw-header-link-line-height: 1.5rem;
+    --snw-flyout-link-size: 1rem;
+    --snw-flyout-link-line-height: 1.75rem;
   }
+
+  --heading-size0: 3.25rem;
+  --quote-size: 1.75rem;
+  --quote-line-height: 2.25rem;
+
+  @include font-size(4, 'heading', 1.75, 2);
+  @include font-size(3, 'string', 1.25, 1.5);
+  @include font-size(3, 'body', 1.25, 1.75);
+
+  --label-size1: 1.25rem;
+  --label-size2: 1rem;
+  --label-size3: 0.75rem;
+  --link-button-label-size: 1rem;
+  --link-label-line-height: 1rem;
+  --button-label-line-height: 1.25rem;
+  --badge-label-size: 0.75rem;
+  --badge-label-line-height: 1rem;
+  --snw-header-link-size: 1.5rem;
+  --snw-header-link-line-height: 1.5rem;
+  --snw-flyout-link-size: 1rem;
+  --snw-flyout-link-line-height: 1.875rem;
 
   @media (min-width: 1801px) {
     --heading-size0: 4.06rem;
-    --heading-size1: 3.05rem;
-    --heading-size2: 2.44rem;
-    --heading-size3: 1.95rem;
-    --body-size1: 1.56rem;
-    --body-size2: 1.25rem;
-    --body-size3: 0.94rem;
+    --quote-size: 2rem;
+    --quote-line-height: 2.5rem;
+
+    @include font-size(4, 'heading', 1.75, 2);
+    @include font-size(3, 'string', 1.5, 1.75);
+    @include font-size(3, 'body', 1.5, 2);
+
     --label-size1: 1.56rem;
     --label-size2: 1.25rem;
     --label-size3: 1rem;
+    --link-button-label-size: 1rem;
+    --link-label-line-height: 1rem;
+    --button-label-line-height: 1.25rem;
+    --badge-label-size: 1rem;
+    --badge-label-line-height: 1rem;
+    --snw-header-link-size: 1.125rem;
+    --snw-header-link-line-height: 1.75rem;
+    --snw-flyout-link-size: 1.125rem;
+    --snw-flyout-link-line-height: 2.125rem;
   }
 }
 
@@ -145,14 +180,29 @@ $display-size4: var(--heading-size4);
 
 // HEADING
 $heading-size1: var(--heading-size1);
+$heading-line-height-size1: var(--heading-line-height-size1);
 $heading-size2: var(--heading-size2);
+$heading-line-height-size2: var(--heading-line-height-size2);
 $heading-size3: var(--heading-size3);
+$heading-line-height-size3: var(--heading-line-height-size3);
 $heading-size4: var(--heading-size4);
+$heading-line-height-size4: var(--heading-line-height-size4);
 
 // BODY
 $body-size1: var(--body-size1);
+$body-line-height-size1: var(--body-line-height-size1);
 $body-size2: var(--body-size2);
+$body-line-height-size2: var(--body-line-height-size2);
 $body-size3: var(--body-size3);
+$body-line-height-size3: var(--body-line-height-size3);
+
+// STRING
+$string-size1: var(--string-size1);
+$string-line-height-size1: var(--string-line-height-size1);
+$string-size2: var(--string-size2);
+$string-line-height-size2: var(--string-line-height-size2);
+$string-size3: var(--string-size3);
+$string-line-height-size3: var(--string-line-height-size3);
 
 // LABELS
 $button-label-size: var(--label-size2);
@@ -161,35 +211,44 @@ $email-label-size: var(--label-size2);
 $cta-lg-label-size: var(--label-size1);
 $text-label-size: var(--label-size3);
 $badge-label-size: var(--label-size3);
+$link-button-label-size: var(--link-button-label-size);
+$link-label-line-height: var(--link-label-line-height);
+$button-label-line-height: var(--button-label-line-height);
+$badge-label-size: var(--badge-label-size);
+$badge-label-line-height: var(--badge-label-line-height);
+$snw-header-link-size: var(--snw-header-link-size);
+$snw-header-link-line-height: var(--snw-header-link-line-height);
+$snw-flyout-link-size: var(--snw-flyout-link-size);
+$snw-flyout-link-line-height: var(--snw-flyout-link-line-height);
 
 ////////////////////////
 /// SPACING TOKENS:
 ///////////////////////
 /* stylelint-disable-next-line no-duplicate-selectors */
 :root {
+  @media (max-width: 960px) {
+    --spacing-micro: 0.25;
+    --spacing-xsm: 0.5rem;
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1.75rem;
+    --spacing-lg: 2.75rem;
+    --spacing-xl: 3.75rem;
+  }
+
   --spacing-micro: 0.25rem;
   --spacing-xsm: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 2rem;
   --spacing-lg: 3rem;
-  --spacing-xl: 6rem;
-
-  @media (max-width: 960px) {
-    --spacing-micro: 0.19rem;
-    --spacing-xsm: 0.38rem;
-    --spacing-sm: 0.75rem;
-    --spacing-md: 1.5rem;
-    --spacing-lg: 2.25rem;
-    --spacing-xl: 4.8rem;
-  }
+  --spacing-xl: 4rem;
 
   @media (min-width: 1801px) {
-    --spacing-micro: 0.31rem;
-    --spacing-xsm: 0.63rem;
+    --spacing-micro: 0.5rem;
+    --spacing-xsm: 0.75rem;
     --spacing-sm: 1.25rem;
     --spacing-md: 2.5rem;
     --spacing-lg: 3.75rem;
-    --spacing-xl: 7.5rem;
+    --spacing-xl: 5rem;
   }
 }
 
