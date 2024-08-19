@@ -1,3 +1,10 @@
+## [1.38.5](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.4...v1.38.5) (2024-08-19)
+
+
+### Bug Fixes
+
+* **accordion:** L3-3274 add "variant" prop to Accordion ([#276](https://github.com/PhillipsAuctionHouse/seldon/issues/276)) ([f04964a](https://github.com/PhillipsAuctionHouse/seldon/commit/f04964a461d179086e04a50976d4d5fd5fb5d893))
+
 ## [1.38.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.3...v1.38.4) (2024-08-16)
 
 
