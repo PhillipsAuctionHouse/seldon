@@ -120,7 +120,7 @@ const leftComponent = (
       </div>
     </div>
 
-    <Accordion className={`${px}-footer-mobile`}>
+    <Accordion variant="multiple" className={`${px}-footer-mobile`}>
       <AccordionItem
         isLocked={false}
         variation=""

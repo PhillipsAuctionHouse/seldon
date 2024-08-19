@@ -65,3 +65,20 @@ export interface AccordionContentType {
    */
   isCollapsed: boolean;
 }
+
+export enum AccordionVariants {
+  /*
+   * Allows multiple elements to be opened at the same time.
+   */
+  multiple = 'multiple',
+  /*
+   * Only allows one element opened at a time and allows users to close an open element by clicking on it.
+   */
+  singleCollapsible = 'singleCollapsible',
+  /*
+   * Only allows one element opened at a time. Elements cannot be closed by clicking on them.
+   */
+  singleNonCollapsible = 'singleNonCollapsible',
+}
+
+export type AccordionVariantKey = keyof typeof AccordionVariants;
