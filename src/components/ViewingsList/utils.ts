@@ -1,4 +1,5 @@
 import { ViewingsListCardProps } from './ViewingsListCard';
+import { px } from '../../utils';
 
 /* istanbul ignore next */
 export const validate = (values: ViewingsListCardProps) => {
@@ -72,7 +73,7 @@ export const handleOnSave = (
   validateCb: (e: ViewingsListCardProps) => object | undefined,
 ) => {
   const targ = e?.target as HTMLElement;
-  const inputs = targ.closest('.phillips-viewings-list-card')?.querySelectorAll('input');
+  const inputs = targ.closest(`.${px}-viewings-list-card`)?.querySelectorAll('input');
 
   const el: ViewingsListCardProps = { id: '' };
   inputs?.forEach((input) => {

@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import SplitPanel from './SplitPanel';
 import { runCommonTests } from '../../utils/testUtils';
+import { px } from '../../utils';
 
 describe('SplitPanel', () => {
   runCommonTests(SplitPanel, 'SplitPanel');
@@ -29,6 +30,6 @@ describe('SplitPanel', () => {
 
   it('it will add a class if hasBorder is false', () => {
     render(<SplitPanel hasBorder={false} />);
-    expect(screen.queryByTestId(/split-panel/)).toHaveClass('phillips-split-panel--borderless');
+    expect(screen.queryByTestId(/split-panel/)).toHaveClass(`${px}-split-panel--borderless`);
   });
 });

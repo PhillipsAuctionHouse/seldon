@@ -6,6 +6,7 @@ import { defaultViewing, i18n, validate, handleOnSave } from './utils';
 import { ViewingsListCardProps } from './ViewingsListCard';
 import { runCommonTests } from '../../utils/testUtils';
 import { INCREASED_TEST_TIMEOUT } from '../../utils/constants';
+import { px } from '../../utils';
 
 describe('ViewingsList', () => {
   const reqProps = { title: 'Tour Viewing(s) on Overview Tab', id: 'test-id', validate, onSave: handleOnSave };
@@ -41,9 +42,9 @@ describe('ViewingsList', () => {
     render(<StatefulViewingsList {...reqProps} defaultViewing={defaultViewing} />);
     await user.click(screen.getByText(/EDIT/));
     const firstPreviewItem = screen.getByTestId<HTMLInputElement>('previewLabel-test-id').parentElement;
-    expect(firstPreviewItem?.classList?.contains('phillips-input--hidden')).toBeFalsy();
+    expect(firstPreviewItem?.classList?.contains(`${px}-input--hidden`)).toBeFalsy();
     await user.click(screen.getByTestId('previewOn-test-id').previousSibling as Element);
-    expect(firstPreviewItem?.classList?.contains('phillips-input--hidden')).toBeTruthy();
+    expect(firstPreviewItem?.classList?.contains(`${px}-input--hidden`)).toBeTruthy();
   });
 
   it('will validate when passed a validation function', async () => {
@@ -93,7 +94,7 @@ describe('ViewingsList', () => {
       const user = userEvent.setup();
       const mockedHandleOnSave = vi.fn().mockImplementation((e, cb) => {
         const targ = e?.target as HTMLElement;
-        const inputs = targ.closest('.phillips-viewings-list-card')?.querySelectorAll('input');
+        const inputs = targ.closest(`.${px}-viewings-list-card`)?.querySelectorAll('input');
 
         const el: ViewingsListCardProps = { id: '' };
         inputs?.forEach((input) => {

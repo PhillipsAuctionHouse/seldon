@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import Text, { TextProps } from './Text';
 import { TextVariants } from './types';
 import { runCommonTests } from '../../utils/testUtils';
+import { px } from '../../utils';
 
 describe('Text', () => {
   runCommonTests(Text, 'Text');
@@ -23,13 +24,13 @@ describe('Text', () => {
   it('applies the default variant correctly', () => {
     renderText({ children: 'Default Variant' });
 
-    expect(screen.getByText('Default Variant')).toHaveClass('phillips-text--body2');
+    expect(screen.getByText('Default Variant')).toHaveClass(`${px}-text--body2`);
   });
 
   it('applies the custom variant correctly', () => {
     renderText({ children: 'Custom Variant', variant: TextVariants.body1 });
 
-    expect(screen.getByText('Custom Variant')).toHaveClass('phillips-text--body1');
+    expect(screen.getByText('Custom Variant')).toHaveClass(`${px}-text--body1`);
   });
 
   it('applies additional className correctly', () => {

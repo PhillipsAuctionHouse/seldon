@@ -1,30 +1,31 @@
 import { determineTextClassName, determineDefaultTextElement } from './utils';
 import { TextVariants } from './types';
+import { px } from '../../utils';
 
 describe('determineTextClassName', () => {
   it('should return the correct class name for body variant', () => {
     const className = determineTextClassName(TextVariants.body1);
-    expect(className).toBe('phillips-text--body1');
+    expect(className).toBe(`${px}-text--body1`);
   });
 
   it('should return the correct class name for label variant', () => {
     const className = determineTextClassName(TextVariants.label);
-    expect(className).toBe('phillips-text--label');
+    expect(className).toBe(`${px}-text--label`);
   });
 
   it('should return the correct class name for heading variant', () => {
     const className = determineTextClassName(TextVariants.blockquote);
-    expect(className).toBe('phillips-text--blockquote');
+    expect(className).toBe(`${px}-text--blockquote`);
   });
 
   it('should return the correct class name for ctaSm variant', () => {
     const className = determineTextClassName(TextVariants.ctaSm);
-    expect(className).toBe('phillips-text--cta-sm');
+    expect(className).toBe(`${px}-text--cta-sm`);
   });
 
   it('should return the correct class name for ctaLg variant', () => {
     const className = determineTextClassName(TextVariants.ctaLg);
-    expect(className).toBe('phillips-text--cta-lg');
+    expect(className).toBe(`${px}-text--cta-lg`);
   });
 });
 

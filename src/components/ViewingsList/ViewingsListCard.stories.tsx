@@ -1,5 +1,6 @@
 import type { Meta } from '@storybook/react';
 import ViewingsListCard, { ViewingsListCardProps } from './ViewingsListCard';
+import { px } from '../../utils';
 
 const meta = {
   title: 'Components/ViewingsListCard',
@@ -33,7 +34,7 @@ const args = {
   locationLabel: 'Tour Location',
   onSave: (e: React.MouseEvent<HTMLElement>) => {
     const targ = e?.target as HTMLElement;
-    const inputs = targ.closest('.phillips-viewings-list-card')?.querySelectorAll('input');
+    const inputs = targ.closest(`.${px}-viewings-list-card`)?.querySelectorAll('input');
     inputs?.forEach((input) => console.log('onClick Submission: ', `${input.name}: ${input.value}`));
   },
 };

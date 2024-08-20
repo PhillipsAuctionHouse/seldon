@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { Accordion, AccordionItem } from './';
 import { runCommonTests } from '../../utils/testUtils';
 import { getAccordionVariantProps } from './utils';
+import { px } from '../../utils';
 
 describe('Accordion', () => {
   runCommonTests(Accordion, 'Accordion');
@@ -42,7 +43,7 @@ describe('Accordion', () => {
             isLocked: true,
             variation: 'lg',
             label: 'Submissions',
-            children: <div className="phillips-sign-up-link">Sign Up</div>,
+            children: <div className={`${px}-sign-up-link`}>Sign Up</div>,
           },
         ].map((item, index, arr) => (
           <AccordionItem
@@ -60,7 +61,7 @@ describe('Accordion', () => {
     await userEvent.click(screen.getByTestId('accordion-item-0-trigger'));
     await waitFor(() => expect(screen.queryByTestId('accordion-item-0-lockedIcon')).toBeInTheDocument());
     const lockedContentElement = screen.getByText('Sign Up');
-    expect(lockedContentElement).toHaveClass('phillips-sign-up-link');
+    expect(lockedContentElement).toHaveClass(`${px}-sign-up-link`);
   });
 
   it('should contain the contents and expand once the label is clicked', async () => {
@@ -95,7 +96,7 @@ describe('Accordion', () => {
     expect(screen.queryByTestId(/accordion-item-1-lockedIcon/)).toBeInTheDocument();
     await userEvent.click(screen.getByTestId('accordion-item-0-trigger'));
     await waitFor(() => {
-      expect(container.getElementsByClassName('phillips-accordion-item--expanded').length).toBe(1);
+      expect(container.getElementsByClassName(`${px}-accordion-item--expanded`).length).toBe(1);
     });
   });
 

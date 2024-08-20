@@ -127,7 +127,7 @@
       border-bottom: none;
     }
 
-    .phillips-link {
+    .#{$px}-link {
       &:hover {
         border-bottom: none;
       }

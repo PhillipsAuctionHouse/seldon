@@ -1,10 +1,11 @@
 import { getLinkVariantClassName, isLinkExternal } from './utils';
 import { LinkVariants } from './types';
+import { px } from '../../utils';
 
 describe('getLinkVariantClassName', () => {
   it('should return the correct variant class name', () => {
     const className = getLinkVariantClassName(LinkVariants.email);
-    expect(className).toBe('phillips-link--email');
+    expect(className).toBe(`${px}-link--email`);
   });
 });
 
