@@ -72,10 +72,19 @@
 @mixin labelText($label) {
   @include Montserrat;
 
+  @if $label == 'link' {
+    font-size: $link-button-label-size;
+    line-height: $link-label-line-height;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+  }
+
   @if $label == 'button' {
-    font-size: $button-label-size;
-    font-weight: 500;
-    letter-spacing: 0.0625rem;
+    font-size: $link-button-label-size;
+    line-height: $button-label-line-height;
+    font-weight: 600;
+    letter-spacing: 0;
     text-transform: capitalize;
   }
 
@@ -112,9 +121,9 @@
 
   @if $label == 'badge' {
     font-size: $badge-label-size;
+    line-height: $badge-label-line-height;
     font-weight: 500;
-    letter-spacing: 0.1875rem;
-    line-height: 1.25;
+    letter-spacing: 0;
     text-transform: uppercase;
   }
 }
@@ -123,6 +132,10 @@
   // Labels
   @if $token == 'button' {
     @include labelText($button);
+  }
+
+  @if $token == 'link' {
+    @include labelText($link);
   }
 
   @if $token == 'cta-sm' {
@@ -181,15 +194,31 @@
   }
 
   @if $token == 'heading2' {
-    @include hText($heading-size2, $line-height: $heading-line-height-size2);
+    @include hText($heading-size2, $line-height: $heading-line-height-size2, $transform-style: capitalize);
   }
 
   @if $token == 'heading3' {
-    @include hText($heading-size3, $line-height: $heading-line-height-size3);
+    @include hText($heading-size3, $line-height: $heading-line-height-size3, $transform-style: capitalize);
   }
 
   @if $token == 'heading4' {
-    @include hText($heading-size4, $line-height: $heading-line-height-size4);
+    @include hText($heading-size4, $line-height: $heading-line-height-size4, $transform-style: capitalize);
+  }
+
+  @if $token == 'title1' {
+    @include hText($heading-size1, $line-height: $heading-line-height-size1, $transform-style: uppercase);
+  }
+
+  @if $token == 'title2' {
+    @include hText($heading-size2, $line-height: $heading-line-height-size2, $transform-style: uppercase);
+  }
+
+  @if $token == 'title3' {
+    @include hText($heading-size3, $line-height: $heading-line-height-size3, $transform-style: uppercase);
+  }
+
+  @if $token == 'title4' {
+    @include hText($heading-size4, $line-height: $heading-line-height-size4, $transform-style: uppercase);
   }
 
   // Body
@@ -216,5 +245,24 @@
 
   @if $token == 'string3' {
     @include pText($string-size3, $line-height: $string-line-height-size3);
+  }
+
+  // SNW
+  @if $token == 'snwHeaderLink' {
+    font-family: $DistinctDisplay;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-size: $snw-header-link-size;
+    line-height: $snw-header-link-line-height;
+    text-transform: uppercase;
+  }
+
+  @if $token == 'snwFlyoutLink' {
+    font-family: $DistinctDisplay;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-size: $snw-flyout-link-size;
+    line-height: $snw-flyout-link-line-height;
+    text-transform: capitalize;
   }
 }

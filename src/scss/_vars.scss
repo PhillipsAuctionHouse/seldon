@@ -71,6 +71,8 @@ $text-family: $DistinctText;
 // Used with the labelText mixin
 // @include labelText($label)
 $button: 'button';
+$link: 'link';
+$badge: 'badge';
 $cta-sm: 'cta-sm';
 $cta-lg: 'cta-lg';
 $email: 'email';
@@ -86,33 +88,87 @@ $heading1: 'heading1';
 $heading2: 'heading2';
 $heading3: 'heading3';
 $heading4: 'heading4';
+$title1: 'title1';
+$title2: 'title2';
+$title3: 'title3';
+$title4: 'title4';
 $body1: 'body1';
 $body2: 'body2';
 $body3: 'body3';
+$string1: 'string1';
+$string2: 'string2';
+$string3: 'string3';
+$snwHeaderLink: 'snwHeaderLink';
+$snwFlyoutLink: 'snwFlyoutLink';
 $text-tokens: $button, $cta-sm, $cta-lg, $email, $label, $badge, $display0, $display1, $display2, $display3, $display4,
-  $blockquote, $heading1, $heading2, $heading3, $heading4, $body1, $body2, $body3;
+  $blockquote, $heading1, $heading2, $heading3, $heading4, $title1, $title2, $title3, $title4, $body1, $body2, $body3,
+  $string1, $string2, $string3;
 
 ////////////////////////
 /// FONT SIZE TOKENS:
 ///////////////////////
 
-@mixin font-size($to, $name, $font-start, $line-start, $step: 0.25) {
-  @for $i from 1 through $to {
-    --#{$name}-size#{$i}: #{$font-start - ($i - 1) * $step}rem;
-    --#{$name}-line-height-size#{$i}: #{$line-start - ($i - 1) * $step}rem;
-  }
-}
-
 :root {
+  --heading-size0: 3.25rem;
+  --quote-size: 1.75rem;
+  --quote-line-height: 2.25rem;
+  --heading-size1: 1.75rem;
+  --heading-line-height-size1: 2rem;
+  --heading-size2: 1.5rem;
+  --heading-line-height-size2: 1.75rem;
+  --heading-size3: 1.25rem;
+  --heading-line-height-size3: 1.5rem;
+  --heading-size4: 1rem;
+  --heading-line-height-size4: 1.25rem;
+  --string-size1: 1.25rem;
+  --string-line-height-size1: 1.5rem;
+  --string-size2: 1rem;
+  --string-line-height-size2: 1.25rem;
+  --string-size3: 0.75rem;
+  --string-line-height-size3: 1rem;
+  --body-size1: 1.25rem;
+  --body-line-height-size1: 1.75rem;
+  --body-size2: 1rem;
+  --body-line-height-size2: 1.5rem;
+  --body-size3: 0.75rem;
+  --body-line-height-size3: 1.25rem;
+  --label-size1: 1.25rem;
+  --label-size2: 1rem;
+  --label-size3: 0.75rem;
+  --link-button-label-size: 1rem;
+  --link-label-line-height: 1rem;
+  --button-label-line-height: 1.25rem;
+  --badge-label-size: 0.75rem;
+  --badge-label-line-height: 1rem;
+  --snw-header-link-size: 0.875rem;
+  --snw-header-link-line-height: 1.5rem;
+  --snw-flyout-link-size: 0.875rem;
+  --snw-flyout-link-line-height: 1.75rem;
+
   @media (max-width: 960px) {
     --heading-size0: 2.59rem;
     --quote-size: 1.5rem;
     --quote-line-height: 2rem;
-
-    @include font-size(4, 'heading', 1.5, 1.75);
-    @include font-size(3, 'string', 1, 1.25);
-    @include font-size(3, 'body', 1, 1.5);
-
+    --heading-size1: 1.5rem;
+    --heading-line-height-size1: 1.75rem;
+    --heading-size2: 1.25rem;
+    --heading-line-height-size2: 1.5rem;
+    --heading-size3: 1rem;
+    --heading-line-height-size3: 1.25rem;
+    --heading-size4: 0.75rem;
+    --heading-line-height-size4: 1rem;
+    --string-size1: 1rem;
+    --string-line-height-size1: 1.25rem;
+    --string-size2: 0.75rem;
+    --string-line-height-size2: 1rem;
+    --string-size3: 0.5rem;
+    --string-line-height-size3: 0.75rem;
+    --body-size1: 1rem;
+    --body-line-height-size1: 1.5rem;
+    --body-size2: 0.75rem;
+    --body-line-height-size2: 1.25rem;
+    --body-size3: 0.5rem;
+    --body-line-height-size3: 1rem;
     --label-size1: 1rem;
     --label-size2: 0.75rem;
     --label-size3: 0.56rem;
@@ -127,44 +183,38 @@ $text-tokens: $button, $cta-sm, $cta-lg, $email, $label, $badge, $display0, $dis
     --snw-flyout-link-line-height: 1.75rem;
   }
 
-  --heading-size0: 3.25rem;
-  --quote-size: 1.75rem;
-  --quote-line-height: 2.25rem;
-
-  @include font-size(4, 'heading', 1.75, 2);
-  @include font-size(3, 'string', 1.25, 1.5);
-  @include font-size(3, 'body', 1.25, 1.75);
-
-  --label-size1: 1.25rem;
-  --label-size2: 1rem;
-  --label-size3: 0.75rem;
-  --link-button-label-size: 1rem;
-  --link-label-line-height: 1rem;
-  --button-label-line-height: 1.25rem;
-  --badge-label-size: 0.75rem;
-  --badge-label-line-height: 1rem;
-  --snw-header-link-size: 1.5rem;
-  --snw-header-link-line-height: 1.5rem;
-  --snw-flyout-link-size: 1rem;
-  --snw-flyout-link-line-height: 1.875rem;
-
   @media (min-width: 1801px) {
     --heading-size0: 4.06rem;
     --quote-size: 2rem;
     --quote-line-height: 2.5rem;
-
-    @include font-size(4, 'heading', 1.75, 2);
-    @include font-size(3, 'string', 1.5, 1.75);
-    @include font-size(3, 'body', 1.5, 2);
-
+    --heading-size1: 2rem;
+    --heading-line-height-size1: 2.25rem;
+    --heading-size2: 1.75rem;
+    --heading-line-height-size2: 2rem;
+    --heading-size3: 1.5rem;
+    --heading-line-height-size3: 1.75rem;
+    --heading-size4: 1.25rem;
+    --heading-line-height-size4: 1.5rem;
+    --string-size1: 1.5rem;
+    --string-line-height-size1: 1.75rem;
+    --string-size2: 1.25rem;
+    --string-line-height-size2: 1.5rem;
+    --string-size3: 1rem;
+    --string-line-height-size3: 1.25rem;
+    --body-size1: 1.5rem;
+    --body-line-height-size1: 2rem;
+    --body-size2: 1.25rem;
+    --body-line-height-size2: 1.75rem;
+    --body-size3: 1rem;
+    --body-line-height-size3: 1.5rem;
     --label-size1: 1.56rem;
     --label-size2: 1.25rem;
     --label-size3: 1rem;
-    --link-button-label-size: 1rem;
-    --link-label-line-height: 1rem;
-    --button-label-line-height: 1.25rem;
+    --link-button-label-size: 1.25rem;
+    --link-label-line-height: 1.25rem;
+    --button-label-line-height: 1.5rem;
     --badge-label-size: 1rem;
-    --badge-label-line-height: 1rem;
+    --badge-label-line-height: 1.5rem;
     --snw-header-link-size: 1.125rem;
     --snw-header-link-line-height: 1.75rem;
     --snw-flyout-link-size: 1.125rem;
@@ -227,6 +277,13 @@ $snw-flyout-link-line-height: var(--snw-flyout-link-line-height);
 ///////////////////////
 /* stylelint-disable-next-line no-duplicate-selectors */
 :root {
+  --spacing-micro: 0.25rem;
+  --spacing-xsm: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 3rem;
+  --spacing-xl: 4rem;
+
   @media (max-width: 960px) {
     --spacing-micro: 0.25;
     --spacing-xsm: 0.5rem;
@@ -235,13 +292,6 @@ $snw-flyout-link-line-height: var(--snw-flyout-link-line-height);
     --spacing-lg: 2.75rem;
     --spacing-xl: 3.75rem;
   }
-
-  --spacing-micro: 0.25rem;
-  --spacing-xsm: 0.5rem;
-  --spacing-sm: 1rem;
-  --spacing-md: 2rem;
-  --spacing-lg: 3rem;
-  --spacing-xl: 4rem;
 
   @media (min-width: 1801px) {
     --spacing-micro: 0.5rem;
