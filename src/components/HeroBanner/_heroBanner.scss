@@ -2,7 +2,7 @@
 
 .#{$px}-hero-banner {
   align-items: center;
-  background: var(--background);
+  background: linear-gradient(rgba(0, 0, 0, 60%), rgba(0, 0, 0, 60%)), var(--background);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -46,6 +46,7 @@
   h2,
   p {
     color: $pure-white;
+    text-align: center;
 
     @media (max-width: $breakpoint-sm) {
       color: $pure-black;

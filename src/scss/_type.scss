@@ -46,26 +46,31 @@
   $size: $heading-size1,
   $color: $pure-black,
   $transform-style: capitalize,
-  $line-height: $heading-line-height-size1
+  $line-height: $heading-line-height-size1,
+  $margin-bottom: $spacing-lg
 ) {
+  @include DistinctDisplay;
+
   color: $color;
-  font-family: DistinctDisplay, sans-serif;
   font-size: $size;
   font-weight: 400;
   line-height: $line-height;
+  margin-bottom: $margin-bottom;
   text-decoration: none;
   text-transform: $transform-style;
 }
 
-@mixin pText($size: $body-size1, $color: $pure-black, $line-height: 1.5) {
+@mixin pText($size: $body-size1, $color: $pure-black, $line-height: 1.5, $margin-bottom: $spacing-md) {
+  @include Montserrat;
+
   color: $color;
-  font-family: Montserrat, sans-serif;
   font-size: $size;
   line-height: $line-height;
+  margin-bottom: $margin-bottom;
 }
 
 @mixin labelText($label) {
-  font-family: Montserrat, sans-serif;
+  @include Montserrat;
 
   @if $label == 'button' {
     font-size: $button-label-size;
@@ -189,7 +194,7 @@
 
   // Body
   @if $token == 'body1' {
-    @include pText($body-size1, $line-height: $body-line-height-size1);
+    @include pText($body-size1, $line-height: $body-line-height-size1, $margin-bottom: $spacing-lg);
   }
 
   @if $token == 'body2' {
