@@ -1,5 +1,42 @@
 @use './vars' as *;
 
+@mixin headerText {
+  @include DistinctDisplay;
+
+  color: $primary-black;
+  font-weight: 400;
+}
+
+@mixin titleText {
+  @include DistinctDisplay;
+}
+
+@mixin bodyText {
+  color: $soft-black;
+}
+
+@mixin DistinctItalic {
+  font-family: Distinct, sans-serif;
+  font-style: italic;
+}
+
+@mixin DistinctDisplay {
+  font-family: DistinctDisplay, sans-serif;
+}
+
+@mixin DistinctDisplayItalic {
+  font-family: DistinctDisplay, sans-serif;
+  font-style: italic;
+}
+
+@mixin Montserrat {
+  font-family: Montserrat, sans-serif;
+}
+
+@mixin DistinctText {
+  font-family: Distinct, sans-serif;
+}
+
 @mixin underline($padding: 0, $width: 0.0625rem, $color: $cta-blue) {
   border-bottom: $width solid $color;
   padding-bottom: $padding;
