@@ -69,7 +69,7 @@
     }
 
     &--h1 {
-      @include text($blockquote);
+      @include text($heading1);
     }
 
     &--h2 {
@@ -84,6 +84,24 @@
       @include text($heading4);
     }
 
+    &-title {
+      &--h1 {
+        @include text($title1);
+      }
+
+      &--h2 {
+        @include text($title2);
+      }
+
+      &--h3 {
+        @include text($title3);
+      }
+
+      &--h4 {
+        @include text($title4);
+      }
+    }
+
     &--p1 {
       @include text($body1);
     }
@@ -96,8 +114,26 @@
       @include text($body3);
     }
 
+    &-string {
+      &--p1 {
+        @include text($body1);
+      }
+
+      &--p2 {
+        @include text($body2);
+      }
+
+      &--p3 {
+        @include text($body3);
+      }
+    }
+
     &--button {
       @include text($button);
+    }
+
+    &--link {
+      @include text($link);
     }
 
     &--cta-sm {
@@ -118,6 +154,14 @@
 
     &--badge {
       @include text($badge);
+    }
+
+    &-snw-header-link {
+      @include text($snwHeaderLink);
+    }
+
+    &-snw-flyout-link {
+      @include text($snwFlyoutLink);
     }
   }
 }
