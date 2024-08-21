@@ -1,3 +1,10 @@
+# [1.39.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.6...v1.39.0) (2024-08-21)
+
+
+### Features
+
+* **styles:** L3-3261 updated new tokens ([#278](https://github.com/PhillipsAuctionHouse/seldon/issues/278)) ([d2c0696](https://github.com/PhillipsAuctionHouse/seldon/commit/d2c0696419f0c151435b54bab476f9673c699b98))
+
 ## [1.38.6](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.5...v1.38.6) (2024-08-20)
 
 
