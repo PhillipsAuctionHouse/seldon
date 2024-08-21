@@ -37,6 +37,7 @@ import Grid from '../../components/Grid/Grid';
       <th>Screen Size</th>
       <th>Columns</th>
       <th>Gutter</th>
+      <th>Vertical Spacing</th>
     </tr>
   </thead>
   <tbody>
@@ -53,6 +54,9 @@ import Grid from '../../components/Grid/Grid';
       <td>
         <span className="property">`$spacing-md`(`1.5rem`)</span>
       </td>
+      <td>
+        <span className="property">`$spacing-lg`(`3rem`)</span>
+      </td>
     </tr>
     <tr>
       <td>
@@ -66,6 +70,9 @@ import Grid from '../../components/Grid/Grid';
       </td>
       <td>
         <span className="property">`$spacing-md`(`2rem`)</span>
+      </td>
+      <td>
+        <span className="property">`$spacing-lg`(`4rem`)</span>
       </td>
     </tr>
     <tr>
@@ -81,6 +88,9 @@ import Grid from '../../components/Grid/Grid';
       <td>
         <span className="property">`$spacing-md`(`2rem`)</span>
       </td>
+      <td>
+        <span className="property">`$spacing-lg`(`4rem`)</span>
+      </td>
     </tr>
     <tr>
       <td>
@@ -94,6 +104,9 @@ import Grid from '../../components/Grid/Grid';
       </td>
       <td>
         <span className="property">`$spacing-md`(`2.5rem`)</span>
+      </td>
+      <td>
+        <span className="property">`$spacing-lg`(`5rem`)</span>
       </td>
     </tr>
   </tbody>
@@ -119,6 +132,7 @@ import Grid from '../../components/Grid/Grid';
 display: grid;
 grid-template-columns: repeat(6, 1fr);
 gap: $spacing-md;
+row-gap: $spacing-lg;
 
 `} dark language="scss" />
 

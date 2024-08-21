@@ -1,3 +1,17 @@
+# [1.39.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.6...v1.39.0) (2024-08-21)
+
+
+### Features
+
+* **styles:** L3-3261 updated new tokens ([#278](https://github.com/PhillipsAuctionHouse/seldon/issues/278)) ([d2c0696](https://github.com/PhillipsAuctionHouse/seldon/commit/d2c0696419f0c151435b54bab476f9673c699b98))
+
+## [1.38.6](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.5...v1.38.6) (2024-08-20)
+
+
+### Bug Fixes
+
+* **grid:** L3-2994 updates needed to grid styles ([#279](https://github.com/PhillipsAuctionHouse/seldon/issues/279)) ([4a2dd8c](https://github.com/PhillipsAuctionHouse/seldon/commit/4a2dd8cf1729b4a2dbd1ce2919d85267b6da8260))
+
 ## [1.38.5](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.4...v1.38.5) (2024-08-19)
 
 

@@ -13,4 +13,10 @@ export enum LinkVariants {
   navLinkLg = 'navLinkLg',
   /** link is being rendered in a nav bar flyout*/
   navLinkSm = 'navLinkSm',
+  /** link is being rendered in a footer */
+  link = 'link',
+  /** link is being rendered in a footer|header */
+  snwHeaderLink = 'snwHeaderLink',
+  /** link is being rendered in a footer|header */
+  snwFlyoutLink = 'snwFlyoutLink',
 }
