@@ -8,7 +8,7 @@ import Navigation from '../Navigation/Navigation';
 import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
 import NavigationItemTrigger from '../Navigation/NavigationItemTrigger/NavigationItemTrigger';
 import NavigationList from '../Navigation/NavigationList/NavigationList';
-import { LinkVariants } from '../Link/utils';
+import { LinkVariants } from '../Link/types';
 import Search from '../Search/Search';
 
 describe('Header', () => {
@@ -22,7 +22,7 @@ describe('Header', () => {
                 badge="New York"
                 href="#"
                 navGroup="nav-link-lg"
-                navType={LinkVariants.navLinkLg}
+                navType={LinkVariants.snwFlyoutLink}
                 label="Editions & Works on Paper"
               />
             </NavigationList>

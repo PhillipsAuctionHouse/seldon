@@ -43,7 +43,7 @@ const Link = ({
   children,
   className,
   element: Element = 'a',
-  variant = LinkVariants.standalone,
+  variant = LinkVariants.link,
   href,
   ...props
 }: LinkProps) => {
@@ -60,7 +60,7 @@ const Link = ({
       {...(isExternal && Element === 'a' ? { rel: 'noopener noreferrer', target: '_blank' } : {})}
       {...props}
     >
-      <Text variant={variant === LinkVariants.email ? TextVariants.email : TextVariants.ctaSm}>{children}</Text>
+      <Text variant={variant as unknown as TextVariants}>{children}</Text>
     </Element>
   );
 };

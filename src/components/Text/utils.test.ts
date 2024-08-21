@@ -17,14 +17,14 @@ describe('determineTextClassName', () => {
     expect(className).toBe('phillips-text--blockquote');
   });
 
-  it('should return the correct class name for ctaSm variant', () => {
-    const className = determineTextClassName(TextVariants.ctaSm);
-    expect(className).toBe('phillips-text--cta-sm');
+  it('should return the correct class name for link variant', () => {
+    const className = determineTextClassName(TextVariants.link);
+    expect(className).toBe('phillips-text--link');
   });
 
-  it('should return the correct class name for ctaLg variant', () => {
-    const className = determineTextClassName(TextVariants.ctaLg);
-    expect(className).toBe('phillips-text--cta-lg');
+  it('should return the correct class name for button variant', () => {
+    const className = determineTextClassName(TextVariants.button);
+    expect(className).toBe('phillips-text--button');
   });
 });
 
@@ -44,19 +44,11 @@ describe('determineDefaultTextElement', () => {
     expect(element).toBe('blockquote');
   });
 
-  it('should return "h1" for display 0 and display 1', () => {
-    const displayVariants = [TextVariants.display0, TextVariants.display1];
+  it('should return "h1" for heading', () => {
+    const displayVariants = [TextVariants.heading1, TextVariants.heading1];
     displayVariants.forEach((variant) => {
       const element = determineDefaultTextElement(variant);
       expect(element).toBe('h1');
-    });
-  });
-
-  it('should return "h3" for display 2 and display 3 and display 4', () => {
-    const displayVariants = [TextVariants.display2, TextVariants.display3, TextVariants.display4];
-    displayVariants.forEach((variant) => {
-      const element = determineDefaultTextElement(variant);
-      expect(element).toBe('h3');
     });
   });
 
@@ -73,5 +65,9 @@ describe('determineDefaultTextElement', () => {
   it('should return "h4" for heading4 variant', () => {
     const element = determineDefaultTextElement(TextVariants.heading4);
     expect(element).toBe('h4');
+  });
+  it('should return "h4" for heading4 variant', () => {
+    const element = determineDefaultTextElement(TextVariants.heading5);
+    expect(element).toBe('h5');
   });
 });

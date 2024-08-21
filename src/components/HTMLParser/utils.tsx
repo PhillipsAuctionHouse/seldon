@@ -6,7 +6,7 @@ export const options = {
   replace({ attribs, children, name }: { attribs: Record<string, string>; children: React.ReactNode; name: string }) {
     if (name === 'h1') {
       return (
-        <Text variant={TextVariants.display1}>
+        <Text variant={TextVariants.heading1}>
           {domToReact(children as DOMNode[], options as HTMLReactParserOptions)}
         </Text>
       );
@@ -56,7 +56,7 @@ export const options = {
       const { class: className, ...rest } = attribs;
       const props = attributesToProps(rest);
       return (
-        <Link variant={LinkVariants.inline} {...props}>
+        <Link variant={LinkVariants.link} {...props}>
           {domToReact(children as DOMNode[], options as HTMLReactParserOptions)}
         </Link>
       );

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { px } from '../../../utils';
 import classNames from 'classnames';
 import Link, { LinkProps } from '../../Link/Link';
-import { LinkVariants } from '../../Link/utils';
+import { LinkVariants } from '../../Link/types';
 import { HeaderContext } from '../../Header/Header';
 
 export interface NavigationItemProps extends Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> {
@@ -56,7 +56,11 @@ const NavigationItem = ({
       data-testid={`nav-item-${label}`}
       className={classNames(`${px}-nav__item`, navGroup, className)}
     >
-      <Component href={href} variant={navType ? navType : LinkVariants.navMain} tabIndex={expandedItem === '' ? 0 : -1}>
+      <Component
+        href={href}
+        variant={navType ? navType : LinkVariants.snwHeaderLink}
+        tabIndex={expandedItem === '' ? 0 : -1}
+      >
         <span className={`${px}-nav__item--label`}>{label}</span>
         {badge ? <span className={`${px}-nav__item--badge `}>{badge}</span> : null}
       </Component>

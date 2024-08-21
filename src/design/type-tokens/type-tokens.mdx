@@ -20,128 +20,11 @@ consistent and scalable design system.
 
 ## <span className="h2">Font Tokens</span>
 
-### <span className="h3">Display</span>
-
-<span className="p">
-  This styling utilizes Distinct Display in Upper Case. Typically these are used within{' '}
-  <strong>Banners, Cards & Interstitials</strong>
-  for brand/Auction titling. There are five sizes in this scale:
-</span>
-<h4 className="h4">
-  Display 0: <span className="token">`$display0`</span>
-</h4>
-
-- **Default**:
-  <span className="property">font-size:</span> 3.25rem;
-  <span className="property">line-height:</span> 1.25;
-  <span className="property">font-weight:</span> 400;
-  <span className="property">text-transform:</span> uppercase;
-- **BP1**: <span className="property">font-size:</span> 2.59rem;
-- **BP4**: <span className="property">font-size:</span> 4.06rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($display0);
-```
-
-  <span className="example example--d0">example</span>
-</details>
-
-<h4 className="h4">
-  Display 1: <span className="token">`$display1`</span>
-</h4>
-
-- **Default**:
-  <span className="property">font-size:</span> 2.44rem;
-  <span className="property"> line-height:</span> 1.25;
-  <span className="property">font-weight:</span> 400;
-  <span className="property"> text-transform:</span> uppercase;
-- **BP1**: <span className="property">font-size:</span> 1.83rem;
-- **BP4**: <span className="property">font-size:</span> 3.05rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($display1);
-```
-
-  <span className="example example--d1">example</span>
-</details>
-
-<h4 className="h4">
-  Display 2: <span className="token">`$display2`</span>
-</h4>
-
-- **Default**:
-  <span className="property">font-size:</span> 1.95rem;
-  <span className="property"> line-height:</span> 1.25;
-  <span className="property">font-weight:</span> 400;
-  <span className="property">text-transform:</span> uppercase;
-- **BP1**: <span className="property">font-size:</span> 1.46rem;
-- **BP4**: <span className="property">font-size:</span> 2.44rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($display2);
-```
-
-  <span className="example example--d2">example</span>
-</details>
-
-<h4 className="h4">
-  Display 3: <span className="token">`$display3`</span>
-</h4>
-
-- **Default**:
-  <span className="property">font-size:</span> 1.56rem;
-  <span className="property"> line-height:</span> 1.25;
-  <span className="property">font-weight:</span> 400;
-  <span className="property">text-transform:</span> uppercase;
-- **BP1**: <span className="property">font-size:</span> 1.17rem;
-- **BP4**: <span className="property">font-size:</span> 1.95rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($display3);
-```
-
-  <span className="example example--d3">example</span>
-</details>
-
-<h4 id="display-size-4" className="h4">
-  Display 4: <span className="token">`$display4`</span>
-</h4>
-
-- **Default**:
-  <span className="property">font-size:</span> 1.56rem;
-  <span className="property">line-height:</span> 1.25;
-  <span className="property">font-weight:</span> 400;
-  <span className="property">text-transform:</span> uppercase;
-- **BP1**: <span className="property">font-size:</span> 0.94rem;
-- **BP4**: <span className="property">font-size:</span> 1.56rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($display4);
-```
-
-  <span className="example example--d4">Example</span>
-</details>
-
 ## <span className="h3">Heading</span>
 
 <span className="p">
   This styling utilizes Distinct Display in title case. Typically used within <strong>layouts</strong> for hierarchy
-  flow; also used within <strong>Cards</strong> & <strong>Interstitials</strong>. There are four sizes in this scale:
+  flow; There are four sizes in this scale:
 </span>
 
 <h4 className="h4">
@@ -158,25 +41,24 @@ consistent and scalable design system.
 
 <details>
   <summary>Example</summary>
+</details>
 
 ```scss
 @include text($heading1);
 ```
 
-  <span className="example example--h1">example</span>
-</details>
-
 <h4 className="h4">
   Heading 2: <span className="token">`$heading2`</span>
+  This is currently the same as the heading 1 token but might be different in the future.
 </h4>
 
 - **Default**:
-  <span className="property">font-size:</span> 1.5rem;
-  <span className="property">line-height: </span>1.75rem;
-  <span className="property">font-weight:</span> 400;
+  <span className="property">font-size:</span> 1.75rem;
+  <span className="property">line-height: </span>2rem;
+  <span className="property">font-weight:</span>400;
   <span className="property">text-transform:</span> capitalize;
-- **BP1**: <span className="property">font-size:</span> 1.25rem; <span className="property">line-height:</span> 1.5rem;
-- **BP4**: <span className="property">font-size:</span> 1.75rem; <span className="property">line-height:</span> 2rem;
+- **BP1**: <span className="property">font-size:</span> 1.5rem; <span className="property">line-height:</span> 1.75rem;
+- **BP4**: <span className="property">font-size:</span> 2rem; <span className="property">line-height:</span> 2.25rem;
 
 <details>
   <summary>Example</summary>
@@ -193,6 +75,28 @@ consistent and scalable design system.
 </h4>
 
 - **Default**:
+  <span className="property">font-size:</span> 1.5rem;
+  <span className="property">line-height: </span>1.75rem;
+  <span className="property">font-weight:</span> 400;
+  <span className="property">text-transform:</span> capitalize;
+- **BP1**: <span className="property">font-size:</span> 1.25rem; <span className="property">line-height:</span> 1.5rem;
+- **BP4**: <span className="property">font-size:</span> 1.75rem; <span className="property">line-height:</span> 2rem;
+
+<details>
+  <summary>Example</summary>
+
+```scss
+@include text($heading3);
+```
+
+  <span className="example example--h3">example</span>
+</details>
+
+<h4 className="h4">
+  Heading 4: <span className="token">`$heading4`</span>
+</h4>
+
+- **Default**:
   <span className="property">font-size:</span> 1.25rem;
   <span className="property"> line-height:</span> 1.5rem;
   <span className="property">font-weight:</span> 400;
@@ -204,14 +108,14 @@ consistent and scalable design system.
   <summary>Example</summary>
 
 ```scss
-@include text($heading3);
+@include text($heading4);
 ```
 
-  <span className="example example--h3">example</span>
+  <span className="example example--h4">example</span>
 </details>
  
 <h4 id="header-size-4" className="h4">
-  Heading 4: <span className="token">`$heading4`</span>
+  Heading 5: <span className="token">`$heading5`</span>
 </h4>
 
 - **Default**:
@@ -226,10 +130,10 @@ consistent and scalable design system.
   <summary>Example</summary>
 
 ```scss
-@include text($heading4);
+@include text($heading5);
 ```
 
-  <span className="example example--h4">example</span>
+  <span className="example example--h5">example</span>
 </details>
 
 ## <span className="h3">Title</span>
@@ -520,29 +424,6 @@ line-height:</span> 1.5rem; <span className="property">font-weight:</span> 400 o
   <span className="example example--badge">example</span>
 </details>
 
-<h4 className="h4">
-  CTA Small: <span className="token">`$cta-sm`</span>
-</h4>
-
-- **Default**: <span className="property">font-size:</span> 1rem; <span className="property">
-  line-height:</span> 1.25; <span className="property">letter-spacing:</span> 1px; <span className="property">font-weight:</span> 600; <span className="property">text-transform:</span> uppercase;
-- **BP1**: <span className="property">font-size:</span> 0.75rem;
-- **BP4**: <span className="property">font-size:</span> 1.25rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($cta-sm);
-```
-
-  <span className="example example--cta-sm">example</span>
-</details>
-
-<h4 className="h4">
-  CTA Large: <span className="token">`$cta-lg`</span>
-</h4>
-
 - **Default**: <span className="property">font-size:</span> 1.25rem; <span className="property">
   line-height:</span> 1.25; <span className="property">letter-spacing:</span> 2px; <span className="property">font-weight:</span> 700; <span className="property">text-transform:</span> uppercase;
 - **BP1**: <span className="property">font-size:</span> 1rem;
@@ -661,7 +542,7 @@ Use the above tokens along with the `text` mixin to apply the display text styli
 
 <Source code={`
 .pah-card__title {
-  @include text($display0);
+  @include text($title1);
 }
 
 `} dark language="scss" />
