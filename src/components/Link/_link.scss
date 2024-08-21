@@ -125,23 +125,6 @@
     }
   }
 
-  &--snwHeaderLink {
-    color: $pure-black;
-    font-family: $Distinct;
-    font-size: $snw-header-link-size;
-    letter-spacing: 1px;
-    line-height: $snw-header-link-line-height;
-    text-transform: uppercase;
-
-    span {
-      font-family: $Distinct;
-    }
-
-    &:hover {
-      color: $pure-black;
-    }
-  }
-
   &--snwFlyoutLink {
     color: $pure-black;
     font-size: $snw-flyout-link-size;
