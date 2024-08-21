@@ -23,8 +23,7 @@ export interface VideoProps extends ComponentProps<'div'> {
  *
  * A component for rendering a video iframe with a specified aspect ratio and height.
  *
- * TODO: Add Figma link. Is there a design for this component?
- * [Figma Link](Add Figma URL here)
+ * [Figma Link](https://www.figma.com/design/Hp2FyltbOmRxTuw9kSwBAd/EPIC-About-Us?node-id=1103-5014)
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-video--overview)
  */
