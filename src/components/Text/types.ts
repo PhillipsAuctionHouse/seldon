@@ -5,6 +5,7 @@ export enum TextVariants {
   display3 = 'display3',
   display4 = 'display4',
   blockquote = 'blockquote',
+  heading1 = 'heading1',
   heading2 = 'heading2',
   heading3 = 'heading3',
   heading4 = 'heading4',

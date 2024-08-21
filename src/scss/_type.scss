@@ -134,6 +134,10 @@
     );
   }
 
+  @if $token == 'heading1' {
+    @include hText($heading-size1, $line-height: $heading-line-height-size1);
+  }
+
   @if $token == 'heading2' {
     @include hText($heading-size2, $line-height: $heading-line-height-size2);
   }
