@@ -1,3 +1,24 @@
+## [1.38.6](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.5...v1.38.6) (2024-08-20)
+
+
+### Bug Fixes
+
+* **grid:** L3-2994 updates needed to grid styles ([#279](https://github.com/PhillipsAuctionHouse/seldon/issues/279)) ([4a2dd8c](https://github.com/PhillipsAuctionHouse/seldon/commit/4a2dd8cf1729b4a2dbd1ce2919d85267b6da8260))
+
+## [1.38.5](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.4...v1.38.5) (2024-08-19)
+
+
+### Bug Fixes
+
+* **accordion:** L3-3274 add "variant" prop to Accordion ([#276](https://github.com/PhillipsAuctionHouse/seldon/issues/276)) ([f04964a](https://github.com/PhillipsAuctionHouse/seldon/commit/f04964a461d179086e04a50976d4d5fd5fb5d893))
+
+## [1.38.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.3...v1.38.4) (2024-08-16)
+
+
+### Bug Fixes
+
+* **styles:** L3-3127 need to import fonts from the main componentStyles ([#272](https://github.com/PhillipsAuctionHouse/seldon/issues/272)) ([c56e192](https://github.com/PhillipsAuctionHouse/seldon/commit/c56e192f8fad76689db226c53b8d166bed35d233))
+
 ## [1.38.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.2...v1.38.3) (2024-08-15)
 
 

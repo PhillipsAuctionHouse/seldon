@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { px } from '../../../utils';
 import classNames from 'classnames';
-import Link from '../../Link/Link';
+import Link, { LinkProps } from '../../Link/Link';
 import { LinkVariants } from '../../Link/utils';
 import { HeaderContext } from '../../Header/Header';
 
@@ -30,6 +30,10 @@ export interface NavigationItemProps extends Omit<React.HTMLAttributes<HTMLLIEle
    * Optional type for navigation item
    */
   navType?: LinkVariants;
+  /**
+   * Element to render within the navigation item, renders <Link> by default
+   */
+  element?: React.ElementType<LinkProps>;
 }
 
 const NavigationItem = ({
@@ -40,9 +44,11 @@ const NavigationItem = ({
   navGroup,
   navType,
   onClick,
+  element: Component = Link,
   ...props
 }: React.PropsWithChildren<NavigationItemProps>) => {
   const { expandedItem } = React.useContext(HeaderContext);
+
   return (
     <li
       {...props}
@@ -50,10 +56,10 @@ const NavigationItem = ({
       data-testid={`nav-item-${label}`}
       className={classNames(`${px}-nav__item`, navGroup, className)}
     >
-      <Link href={href} variant={navType ? navType : LinkVariants.navMain} tabIndex={expandedItem === '' ? 0 : -1}>
+      <Component href={href} variant={navType ? navType : LinkVariants.navMain} tabIndex={expandedItem === '' ? 0 : -1}>
         <span className={`${px}-nav__item--label`}>{label}</span>
         {badge ? <span className={`${px}-nav__item--badge `}>{badge}</span> : null}
-      </Link>
+      </Component>
     </li>
   );
 };

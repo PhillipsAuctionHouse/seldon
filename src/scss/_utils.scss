@@ -56,6 +56,7 @@
   display: grid;
   gap: $spacing-md;
   grid-template-columns: repeat($columns, 1fr);
+  row-gap: $spacing-lg;
 
   @if $margins-on {
     @include gridMargins;
@@ -66,6 +67,7 @@
   display: grid;
   gap: $spacing-md;
   grid-template-columns: repeat(2, 1fr);
+  row-gap: $spacing-lg;
 
   @media (min-width: $breakpoint-md) {
     grid-template-columns: repeat(4, 1fr);
