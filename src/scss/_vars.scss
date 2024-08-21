@@ -131,8 +131,9 @@ $text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $h
   --label-size1: 1.25rem;
   --label-size2: 1rem;
   --label-size3: 0.75rem;
-  --link-button-label-size: 1rem;
+  --link-label-size: 1rem;
   --link-label-line-height: 1rem;
+  --button-label-size: 1rem;
   --button-label-line-height: 1.25rem;
   --badge-label-size: 0.75rem;
   --badge-label-line-height: 1rem;
@@ -169,8 +170,9 @@ $text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $h
     --label-size1: 1rem;
     --label-size2: 0.75rem;
     --label-size3: 0.56rem;
-    --link-button-label-size: 0.75rem;
+    --link-label-size: 0.75rem;
     --link-label-line-height: 0.75rem;
+    --button-label-size: 0.75rem;
     --button-label-line-height: 1rem;
     --badge-label-size: 0.5rem;
     --badge-label-line-height: 0.67rem;
@@ -208,8 +210,9 @@ $text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $h
     --label-size1: 1.56rem;
     --label-size2: 1.25rem;
     --label-size3: 1rem;
-    --link-button-label-size: 1.25rem;
+    --link-label-size: 1.25rem;
     --link-label-line-height: 1.25rem;
+    --button-label-size: 1.25rem;
     --button-label-line-height: 1.5rem;
     --badge-label-size: 1rem;
     --badge-label-line-height: 1.5rem;
@@ -255,11 +258,11 @@ $string-size3: var(--string-size3);
 $string-line-height-size3: var(--string-line-height-size3);
 
 // LABELS
-$button-label-size: var(--label-size2);
 $email-label-size: var(--label-size2);
 $text-label-size: var(--label-size3);
 $badge-label-size: var(--label-size3);
-$link-label-size: var(--link-button-label-size);
+$link-label-size: var(--link-label-size);
+$button-label-size: var(--button-label-size);
 $link-label-line-height: var(--link-label-line-height);
 $button-label-line-height: var(--button-label-line-height);
 $badge-label-size: var(--badge-label-size);

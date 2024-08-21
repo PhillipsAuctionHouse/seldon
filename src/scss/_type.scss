@@ -78,7 +78,7 @@
   }
 
   @if $label == 'button' {
-    font-size: $link-label-size;
+    font-size: $button-label-size;
     font-weight: 600;
     letter-spacing: 0;
     line-height: $button-label-line-height;
@@ -142,7 +142,7 @@
   }
 
   @if $token == 'heading1' {
-    @include hText($heading-size1, $line-height: $heading-line-height-size1);
+    @include hText($heading-size1, $line-height: $heading-line-height-size1, $transform-style: capitalize);
   }
 
   @if $token == 'heading2' {
