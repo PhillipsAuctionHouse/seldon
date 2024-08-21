@@ -1,10 +1,20 @@
 import { Meta } from '@storybook/react';
 import Accordion, { AccordionProps } from './Accordion';
 import AccordionItem from './AccordionItem';
+import { AccordionVariants } from './types';
 
 const meta = {
   title: 'Components/Accordion',
   component: Accordion,
+
+  argTypes: {
+    variant: {
+      options: Object.values(AccordionVariants),
+      control: {
+        type: 'select',
+      },
+    },
+  },
 } satisfies Meta<typeof Accordion>;
 
 export default meta;
