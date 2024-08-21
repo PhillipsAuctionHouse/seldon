@@ -115,10 +115,10 @@
 
   &--snwHeaderLink {
     color: $pure-black;
-    font-size: $snw-header-link-size;
-    letter-spacing: 1px;
-    line-height: $snw-header-link-line-height;
-    text-transform: uppercase;
+
+    span {
+      @include text($snwHeaderLink);
+    }
 
     &:hover {
       color: $pure-black;
@@ -127,13 +127,9 @@
 
   &--snwFlyoutLink {
     color: $pure-black;
-    font-size: $snw-flyout-link-size;
-    letter-spacing: 1px;
-    line-height: $snw-flyout-link-line-height;
-    text-transform: uppercase;
 
     span {
-      font-family: $Distinct;
+      @include text($snwFlyoutLink);
     }
 
     &:hover {
