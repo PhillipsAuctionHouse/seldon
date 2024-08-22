@@ -29,9 +29,6 @@
   }
 
   & .#{$px}-nav__item > & {
-    display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
-
     @include isHeaderMobile {
       display: none;
 
@@ -43,28 +40,6 @@
   }
 
   &__section {
-    &--large-cta {
-      grid-column: 1 / span 4;
-      height: fit-content;
-
-      .#{$px}-nav__item:first-child {
-        a {
-          padding-top: 0;
-        }
-      }
-
-      .#{$px}-nav__item:last-child {
-        justify-content: flex-end;
-        &:has(> .#{$px}-link--snwFlyoutLink) {
-          border-bottom: none;
-          padding-bottom: 0;
-        }
-        .#{$px}-link--snwFlyoutLink {
-          .#{$px}-nav__item--label {
-            color: $cta-blue;
-          }
-        }
-      }
-    }
+    width: 100%;
   }
 }

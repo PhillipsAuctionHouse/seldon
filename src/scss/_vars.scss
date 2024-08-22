@@ -349,10 +349,9 @@ $max-site-width: 1560px;
 ////////////////////////
 /// height Tokens
 ///////////////////////
-$header-height: 33px;
+$header-height: 42px;
 $user-management-height: 30px;
-$header-bottom-padding: 5px; // needed so that the button underlines show
-$header-submenu-top: calc($header-height + $user-management-height + $header-bottom-padding + 1px);
+$header-submenu-top: calc($header-height + $user-management-height + 1px);
 
 ////////////////////////
 /// Our tokens usually support at least 4 sizes.

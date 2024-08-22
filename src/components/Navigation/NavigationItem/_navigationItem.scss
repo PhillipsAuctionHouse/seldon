@@ -27,7 +27,7 @@
       left: 0;
       position: absolute;
       right: 0;
-      top: 35px;
+      top: $header-height;
     }
   }
 
@@ -122,26 +122,28 @@
     z-index: 0;
   }
 
-  & > a,
-  & > button,
-  & > p {
+  & > button {
     background-color: transparent;
     border: 0;
     display: flex;
-    padding: 0 0.625rem;
+    padding: 0.5rem 0.625rem calc(0.5rem + 2px); // 1 px so that the bottom border of the nav counts as part of the button
   }
 
   @include isHeaderMobile {
+    & > a,
+    & > button {
+      display: flex;
+      padding: 0.5rem 0.625rem;
+    }
+
     & > a:focus,
-    & > button:focus,
-    & > p:focus {
+    & > button:focus {
       background-color: #f4f4f4;
     }
 
     &:hover {
       & > a,
-      & > button,
-      & > p {
+      & > button {
         background-color: #f4f4f4;
       }
     }
