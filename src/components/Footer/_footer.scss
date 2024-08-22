@@ -30,9 +30,8 @@
 
     @include media($size-sm) {
       flex-direction: row;
-      margin: 0 $spacing-md;
       max-width: $desktop-max-width;
-      padding: $spacing-lg 0 $spacing-lg 0;
+      padding: $spacing-lg $spacing-md $spacing-lg $spacing-md;
     }
 
     div {
