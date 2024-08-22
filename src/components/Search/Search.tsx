@@ -11,11 +11,6 @@ import { Text, TextVariants } from '../Text';
 
 export interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * If true will show an icon instead of text in the button
-   */
-  useIcon?: boolean;
-
-  /**
    *
    * @param searchQuery called when the search input changes
    * @returns void
@@ -56,7 +51,6 @@ export interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Search = ({
-  useIcon = true,
   onSearch,
   searchResults = [],
   state = 'idle',
@@ -85,6 +79,13 @@ const Search = ({
     }
   };
 
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Escape') {
+      setSearchEnabled(false);
+      searchFormRef.current?.reset();
+    }
+  };
+
   return (
     <div
       {...commonProps}
@@ -96,7 +97,7 @@ const Search = ({
       <Text variant={TextVariants.heading3} className={`${baseClassName}__label`}>
         {searchButtonText}
       </Text>
-      {useIcon && !searchEnabled ? (
+      {!searchEnabled ? (
         <button
           type="button"
           data-testid={`${baseTestId}-button`}
@@ -130,13 +131,7 @@ const Search = ({
         aria-hidden={!searchEnabled}
         ref={searchFormRef}
       >
-        <div
-          className={classnames(`${baseClassName}__content-wrapper`, {
-            [`${baseClassName}__input-wrapper--use-icon`]: useIcon,
-          })}
-          role="combobox"
-          aria-haspopup="listbox"
-        >
+        <div className={classnames(`${baseClassName}__content-wrapper`)} role="combobox" aria-haspopup="listbox">
           <Input
             className={`${baseClassName}__input`}
             id="search-input"
@@ -147,11 +142,7 @@ const Search = ({
             defaultValue={defaultValue}
             invalid={state === 'invalid'}
             invalidText={invalidText}
-            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-              if (e.key === 'Escape') {
-                setSearchEnabled(false);
-              }
-            }}
+            onKeyDown={onKeyDown}
             onChange={
               onSearch
                 ? (e: { target: { value: string } }) => {
