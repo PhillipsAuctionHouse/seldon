@@ -21,6 +21,7 @@ const config: StorybookConfig = {
       config.resolve.alias = {
         ...config.resolve.alias,
         '#scss': path.resolve(__dirname, '../src/scss/'),
+        '../fonts': path.resolve(__dirname, '../public/fonts/'),
       };
     }
     return {
