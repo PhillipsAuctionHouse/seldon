@@ -101,39 +101,14 @@
   }
 
   &--link {
-    border-bottom: 0;
-    font-size: $link-button-label-size;
-    font-weight: 600;
-    letter-spacing: 1px;
-    line-height: $link-label-line-height;
-    text-decoration: underline;
-
-    &:hover {
-      border-bottom: 0;
-    }
+    @include labelText('link');
   }
 
   &--snwHeaderLink {
-    color: $pure-black;
-
-    span {
-      @include text($snwHeaderLink);
-    }
-
-    &:hover {
-      color: $pure-black;
-    }
+    @include labelText('snwHeaderLink');
   }
 
   &--snwFlyoutLink {
-    color: $pure-black;
-
-    span {
-      @include text($snwFlyoutLink);
-    }
-
-    &:hover {
-      color: $pure-black;
-    }
+    @include labelText('snwFlyoutLink');
   }
 }

@@ -1,19 +1,14 @@
 import classnames from 'classnames';
 
 import { defaultYear, px } from '../../utils';
-import SplitPanel from '../SplitPanel/SplitPanel';
 import Logo from '../../assets/PhillipsLogo.svg?react';
+import { Text, TextVariants } from '../Text';
 
 export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Copyright data added to bottom of site
    */
   copyright?: string;
-
-  /**
-   * Navigation items
-   */
-  navigationComponent: React.ReactElement;
 }
 
 /**
@@ -34,17 +29,15 @@ const Footer = ({
 }: FooterProps) => {
   return (
     <footer data-testid={id ? id : `footer`} id={id} className={classnames(`${px}-footer`, { className })}>
-      <SplitPanel className={`${px}-footer__content`} hasBorder={false}>
-        {children}
-      </SplitPanel>
+      <div className={`${px}-footer__links`}>{children}</div>
 
       <div className={`${px}-footer__copyright`}>
-        <h1 data-testid="header-logo" className={`${px}-header__logo`}>
+        <h3 data-testid="header-logo" className={`${px}-header__logo`}>
           <a href="/" aria-label="logo">
             <Logo />
           </a>
-        </h1>
-        {copyright}
+        </h3>
+        <Text variant={TextVariants.body3}>{copyright}</Text>
       </div>
     </footer>
   );

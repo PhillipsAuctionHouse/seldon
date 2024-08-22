@@ -19,6 +19,84 @@ const meta = {
 
 export default meta;
 
+export const Playground = (props: FooterProps) => (
+  <Footer {...props}>
+    {/* desktop version of footer */}
+    <div className={`${px}-footer-desktop`}>
+      <Text variant={TextVariants.heading3}>About Us</Text>
+      {aboutUsLinks}
+    </div>
+    <div className={`${px}-footer-desktop`}>
+      <Text variant={TextVariants.heading3}>Our Services</Text>
+      {ourServicesLinks}
+    </div>
+    <div className={`${px}-footer-desktop`}>
+      <Text variant={TextVariants.heading3}>Policies</Text>
+      {policyLinks}
+    </div>
+
+    {/* mobile version of footer */}
+    <Accordion className={`${px}-footer-mobile`}>
+      <AccordionItem
+        isLocked={false}
+        variation=""
+        label="About Us"
+        key="accordion-key-about-us"
+        id="accordion-item-about-us"
+      >
+        {aboutUsLinks}
+      </AccordionItem>
+
+      <AccordionItem
+        isLocked={false}
+        variation=""
+        label="Our Services"
+        key="accordion-key-our-services"
+        id="accordion-item-our-services"
+      >
+        {ourServicesLinks}
+      </AccordionItem>
+
+      <AccordionItem
+        isLocked={false}
+        variation=""
+        label="Policies"
+        isLastItem={true}
+        key="accordion-key-policies"
+        id="accordion-item-policies"
+      >
+        {policyLinks}
+      </AccordionItem>
+    </Accordion>
+
+    {/* subscription button/icons component */}
+    <Social>
+      <ul>
+        <li>
+          <a>
+            <Youtube />
+          </a>
+        </li>
+        <li>
+          <a>
+            <Instagram />
+          </a>
+        </li>
+        <li>
+          <a>
+            <Wechat />
+          </a>
+        </li>
+        <li>
+          <a>
+            <Spotify />
+          </a>
+        </li>
+      </ul>
+    </Social>
+  </Footer>
+);
+
 const aboutUsLinks = (
   <ul>
     <li>
@@ -75,95 +153,3 @@ const policyLinks = (
     </li>
   </ul>
 );
-
-const socialIcons = (
-  <ul>
-    <li>
-      <a>
-        <Youtube />
-      </a>
-    </li>
-    <li>
-      <a>
-        <Instagram />
-      </a>
-    </li>
-    <li>
-      <a>
-        <Wechat />
-      </a>
-    </li>
-    <li>
-      <a>
-        <Spotify />
-      </a>
-    </li>
-  </ul>
-);
-
-const leftComponent = (
-  <>
-    <div className={`${px}-footer-desktop`}>
-      <div>
-        <Text variant={TextVariants.heading4}>About Us</Text>
-        {aboutUsLinks}
-      </div>
-
-      <div>
-        <Text variant={TextVariants.heading4}>Our Services</Text>
-        {ourServicesLinks}
-      </div>
-
-      <div>
-        <Text variant={TextVariants.heading4}>Policies</Text>
-        {policyLinks}
-      </div>
-    </div>
-
-    <Accordion variant="multiple" className={`${px}-footer-mobile`}>
-      <AccordionItem
-        isLocked={false}
-        variation=""
-        label="About Us"
-        key="accordion-key-about-us"
-        id="accordion-item-about-us"
-      >
-        {aboutUsLinks}
-      </AccordionItem>
-
-      <AccordionItem
-        isLocked={false}
-        variation=""
-        label="Our Services"
-        key="accordion-key-our-services"
-        id="accordion-item-our-services"
-      >
-        {ourServicesLinks}
-      </AccordionItem>
-
-      <AccordionItem
-        isLocked={false}
-        variation=""
-        label="Policies"
-        isLastItem={true}
-        key="accordion-key-policies"
-        id="accordion-item-policies"
-      >
-        {policyLinks}
-      </AccordionItem>
-    </Accordion>
-  </>
-);
-
-const rightComponent = <Social className={`${px}-footer__social`}>{socialIcons}</Social>;
-
-export const Playground = (props: FooterProps) => (
-  <Footer {...props}>
-    {leftComponent}
-    {rightComponent}
-  </Footer>
-);
-
-Playground.args = {
-  // navigationComponent,
-};

@@ -64,11 +64,13 @@
   font-family: Montserrat, sans-serif;
 
   @if $label == 'link' {
+    color: $pure-black;
     font-size: $link-button-label-size;
     line-height: $link-label-line-height;
     font-weight: 600;
     letter-spacing: 1px;
-    text-transform: capitalize;
+    text-transform: uppercase;
+    text-decoration: underline;
   }
 
   @if $label == 'button' {
@@ -249,7 +251,6 @@
   }
 
   @if $token == 'snwFlyoutLink' {
-    font-family: $DistinctDisplay;
     font-weight: 400;
     letter-spacing: 1px;
     font-size: $snw-flyout-link-size;

@@ -108,6 +108,7 @@ $text-tokens: $button, $cta-sm, $cta-lg, $email, $label, $badge, $display0, $dis
 ///////////////////////
 
 :root {
+  --desktop-max-width: 120rem;
   --heading-size0: 3.25rem;
   --quote-size: 1.75rem;
   --quote-line-height: 2.25rem;
@@ -220,6 +221,8 @@ $text-tokens: $button, $cta-sm, $cta-lg, $email, $label, $badge, $display0, $dis
     --snw-flyout-link-line-height: 2.125rem;
   }
 }
+
+$desktop-max-width: var(--desktop-max-width);
 
 // DISPLAY
 $display-size0: var(--heading-size0);
