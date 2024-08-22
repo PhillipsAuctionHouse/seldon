@@ -9,10 +9,6 @@ export interface VideoProps extends ComponentProps<'div'> {
    */
   aspectRatio?: number;
   /**
-   * Height of the video (pixels)
-   */
-  height: number;
-  /**
    * The url of the video source
    */
   videoSource: string;
@@ -26,19 +22,13 @@ export interface VideoProps extends ComponentProps<'div'> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-video--overview)
  */
-const Video = ({
-  aspectRatio = 16 / 9,
-  className,
-  height,
-  videoSource,
-  ...props
-}: React.PropsWithChildren<VideoProps>) => {
+const Video = ({ aspectRatio = 16 / 9, className, videoSource, ...props }: React.PropsWithChildren<VideoProps>) => {
   const { className: baseClassName, 'data-testid': dataTestId, ...commonProps } = getCommonProps(props, 'Video');
 
   const componentProps = {
     className: classnames(baseClassName, className),
     'data-testid': dataTestId,
-    style: { '--aspect-ratio': aspectRatio, height },
+    style: { '--aspect-ratio': aspectRatio } as React.CSSProperties,
     ...commonProps,
     ...props,
   };
@@ -52,6 +42,7 @@ const Video = ({
           src={videoSource}
           allowFullScreen
           allow="encrypted-media"
+          referrerPolicy="no-referrer"
         />
       </div>
     </div>

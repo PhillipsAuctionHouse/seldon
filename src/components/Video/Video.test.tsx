@@ -6,7 +6,6 @@ describe('Video', () => {
   runCommonTests(Video, 'Video');
 
   const testProps = {
-    height: 400,
     videoSource: 'https://www.example.com',
   };
 
@@ -30,14 +29,6 @@ describe('Video', () => {
     const iframe = screen.getByTestId('video-iframe');
     expect(iframe).toBeInTheDocument();
     expect(iframe).toHaveAttribute('src', testProps.videoSource);
-  });
-
-  it('should render a div with the correct height', () => {
-    renderVideo({ ...testProps });
-
-    const div = screen.getByTestId('video');
-    expect(div).toBeInTheDocument();
-    expect(div.style.height).toBe(`${testProps.height}px`);
   });
 
   it('should render a div with the correct aspect ratio', () => {
