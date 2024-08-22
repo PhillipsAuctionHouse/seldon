@@ -5,7 +5,9 @@ import * as DropdownSelect from '@radix-ui/react-select';
 import ChevronDownIcon from '../../assets/chevronDown.svg?react';
 import ChevronUpIcon from '../../assets/chevronUp.svg?react';
 
-export interface DropdownProps extends Omit<DropdownSelect.SelectProps, 'defaultValue' | 'dir'>, ComponentProps<'div'> {
+export interface DropdownProps
+  extends Omit<DropdownSelect.SelectProps, 'defaultValue' | 'dir'>,
+    Omit<ComponentProps<'div'>, 'ref'> {
   /**
    * All options to be listed in the dropdown
    */
@@ -36,13 +38,13 @@ export interface DropdownProps extends Omit<DropdownSelect.SelectProps, 'default
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-dropdown--overview)
  */
-const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
+const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
   ({ options, value, onValueChange, label, className, id, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'Dropdown');
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-      <div className={classnames(baseClassName, className)} id={id} {...commonProps} {...props} ref={ref}>
+      <div className={classnames(baseClassName, className)} id={id} {...commonProps} {...props}>
         <DropdownSelect.Root
           defaultValue={value}
           onValueChange={(value) => {
@@ -50,16 +52,18 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
           }}
           onOpenChange={setIsOpen}
         >
-          <DropdownSelect.Trigger className={classnames(`${baseClassName}__trigger`)} aria-label={label}>
+          <DropdownSelect.Trigger className={`${baseClassName}__trigger`} aria-label={label} ref={ref}>
             <DropdownSelect.Value placeholder={value} />
-            <DropdownSelect.Icon>{isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}</DropdownSelect.Icon>
+            <DropdownSelect.Icon>
+              {<ChevronDownIcon className={isOpen ? `${baseClassName}__trigger-icon-expanded` : ''} />}
+            </DropdownSelect.Icon>
           </DropdownSelect.Trigger>
           <DropdownSelect.Portal>
-            <DropdownSelect.Content className={classnames(`${baseClassName}__content`)} position="popper">
-              <DropdownSelect.ScrollUpButton className={classnames(`${baseClassName}__scroll-button`)}>
+            <DropdownSelect.Content className={`${baseClassName}__content`} position="popper">
+              <DropdownSelect.ScrollUpButton className={`${baseClassName}__scroll-button`}>
                 <ChevronUpIcon />
               </DropdownSelect.ScrollUpButton>
-              <DropdownSelect.Viewport className={classnames(`${baseClassName}__viewport`)}>
+              <DropdownSelect.Viewport className={`${baseClassName}__viewport`}>
                 {options.map((option) => {
                   return (
                     <DropdownItem
@@ -73,7 +77,7 @@ const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(
                   );
                 })}
               </DropdownSelect.Viewport>
-              <DropdownSelect.ScrollDownButton className={classnames(`${baseClassName}__scroll-button`)}>
+              <DropdownSelect.ScrollDownButton className={`${baseClassName}__scroll-button`}>
                 <ChevronDownIcon />
               </DropdownSelect.ScrollDownButton>
             </DropdownSelect.Content>
@@ -89,7 +93,7 @@ Dropdown.displayName = 'Dropdown';
 const DropdownItem = React.forwardRef<HTMLDivElement, DropdownSelect.SelectItemProps>(
   ({ children, className, ...props }, forwardedRef) => {
     return (
-      <DropdownSelect.Item className={classnames(`${className}__item`)} {...props} ref={forwardedRef}>
+      <DropdownSelect.Item className={`${className}__item`} {...props} ref={forwardedRef}>
         <DropdownSelect.ItemText>{children}</DropdownSelect.ItemText>
       </DropdownSelect.Item>
     );

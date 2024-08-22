@@ -11,11 +11,15 @@
     gap: 10px;
     height: 24px;
     justify-content: center;
-    padding: var(--spacing-xsm);
+    padding: $spacing-xsm;
 
     svg {
       height: 16px;
       width: 16px;
+    }
+
+    &-icon-expanded {
+      transform: rotateX(180deg);
     }
 
     &:hover {
@@ -52,7 +56,7 @@
     display: flex;
     flex-direction: column;
     gap: $spacing-xsm;
-    padding: var(--spacing-xsm) 0;
+    padding: $spacing-sm 0;
   }
 
   &__item {
