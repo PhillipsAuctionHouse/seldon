@@ -3,8 +3,11 @@ import { encodeURLSearchParams, getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import Input from '../Input/Input';
 import SearchIcon from '../../assets/search.svg?react';
+import CloseIcon from '../../assets/close.svg?react';
+import LoadingSpinner from '../../assets/loading_spinner.svg?react';
 import Link from '../Link/Link';
 import SearchResults, { type SearchResultsProps } from './SearchResults/SearchResults';
+import { Text, TextVariants } from '../Text';
 
 export interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -59,24 +62,26 @@ const Search = ({
   state = 'idle',
   defaultValue = '',
   className,
-  placeholder = 'Type to search',
+  placeholder,
   searchButtonText = 'Search',
-  loadingText = 'Loading...',
+  loadingText = 'Search In Progress...',
   invalidText = 'Invalid search',
   getAllResultsText = (searchValue) => `View all results for ${searchValue}`,
   getAllResultsLink = (searchValue) => `/Search?Search=${searchValue}`,
   ...props
 }: React.PropsWithChildren<SearchProps>) => {
   const { className: baseClassName, 'data-testid': baseTestId, ...commonProps } = getCommonProps(props, 'Search');
-  const [overlayEnabled, setOverlayEnabled] = React.useState(false);
+  const [searchEnabled, setSearchEnabled] = React.useState(false);
   const searchInputRef = React.useRef<HTMLInputElement>(null);
-
+  const searchFormRef = React.useRef<HTMLFormElement>(null);
   const value = searchInputRef.current?.value;
   const showSearch = () => {
-    setOverlayEnabled(!overlayEnabled);
+    setSearchEnabled(!searchEnabled);
     // means we're opening search
-    if (!overlayEnabled) {
+    if (!searchEnabled) {
       searchInputRef.current?.focus();
+    } else {
+      searchFormRef.current?.reset();
     }
   };
 
@@ -88,51 +93,63 @@ const Search = ({
       role="search"
       {...props}
     >
-      <div
-        data-testid={`${baseTestId}-overlay`}
-        className={classnames(`${baseClassName}__overlay`, { [`${baseClassName}__overlay--active`]: overlayEnabled })}
-        onClick={showSearch}
-      />
-      <button
-        data-testid={`${baseTestId}-button`}
-        aria-label={searchButtonText}
-        className={`${baseClassName}__button`}
-        onClick={showSearch}
-      >
-        {useIcon ? (
+      <Text variant={TextVariants.heading3} className={`${baseClassName}__label`}>
+        {searchButtonText}
+      </Text>
+      {useIcon && !searchEnabled ? (
+        <button
+          type="button"
+          data-testid={`${baseTestId}-button`}
+          aria-label={searchButtonText}
+          className={`${baseClassName}__button ${baseClassName}__button--search`}
+          onClick={showSearch}
+        >
           <SearchIcon data-testid={`${baseTestId}-button-icon`} className={`${baseClassName}__button__icon`} />
-        ) : (
-          searchButtonText
-        )}
-      </button>
+        </button>
+      ) : null}
+      {searchEnabled && state === 'idle' ? (
+        <button
+          type="button"
+          data-testid={`${baseTestId}-close-button`}
+          aria-label="Close Search"
+          className={`${baseClassName}__button ${baseClassName}__button--close`}
+          onClick={showSearch}
+        >
+          <CloseIcon data-testid={`${baseTestId}-form-icon`} className={`${baseClassName}__button__icon`} />
+        </button>
+      ) : null}
+      {searchEnabled && (state === 'loading' || state === 'submitting') ? (
+        <LoadingSpinner
+          data-testid={`${baseTestId}-form-icon`}
+          className={`${baseClassName}__button__icon ${baseClassName}__input-status-icon`}
+        />
+      ) : null}
       <form
         data-testid={`${baseTestId}-form`}
-        className={classnames(`${baseClassName}__form`, { [`${baseClassName}__form--active`]: overlayEnabled })}
-        aria-hidden={!overlayEnabled}
+        className={classnames(`${baseClassName}__form`, { [`${baseClassName}__form--active`]: searchEnabled })}
+        aria-hidden={!searchEnabled}
+        ref={searchFormRef}
       >
         <div
-          className={classnames(`${baseClassName}__input-wrapper`, {
+          className={classnames(`${baseClassName}__content-wrapper`, {
             [`${baseClassName}__input-wrapper--use-icon`]: useIcon,
           })}
           role="combobox"
           aria-haspopup="listbox"
         >
-          {useIcon ? (
-            <SearchIcon data-testid={`${baseTestId}-form-icon`} className={`${baseClassName}__input-wrapper__icon`} />
-          ) : null}
           <Input
             className={`${baseClassName}__input`}
             id="search-input"
             hideLabel
             labelText={searchButtonText}
-            placeholder={placeholder}
+            placeholder={placeholder ? placeholder : ''}
             type="text"
             defaultValue={defaultValue}
             invalid={state === 'invalid'}
             invalidText={invalidText}
             onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
               if (e.key === 'Escape') {
-                setOverlayEnabled(false);
+                setSearchEnabled(false);
               }
             }}
             onChange={

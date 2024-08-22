@@ -11,7 +11,7 @@ const fetchData = async (searchQuery: string) => {
       () =>
         resolve({
           makers: [
-            { id: 'result1', label: 'Name', url: 'http://www.cnn.com' },
+            { id: 'result1', label: 'Name', url: 'http://www.example.com' },
             { id: 'result2', label: 'Another Name', url: 'http://www.example.com' },
             { id: 'result3', label: 'Yet Another Name', url: 'http://www.example.com' },
           ],
@@ -59,6 +59,14 @@ const StatefulSearch = (props: SearchProps) => {
 const meta = {
   title: 'Components/Search',
   component: StatefulSearch,
+  parameters: {
+    docs: {
+      story: {
+        height: '300px',
+      },
+    },
+    layout: 'fullscreen',
+  },
 } satisfies Meta<typeof Search>;
 
 export default meta;

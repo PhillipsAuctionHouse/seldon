@@ -1,74 +1,86 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-search {
-  align-items: center;
+  align-content: center;
   display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
   height: $header-height;
-  justify-content: center;
-  padding: 0.47rem;
+  padding: $spacing-sm $spacing-sm;
+  position: relative;
 
-  &__overlay {
-    background-color: rgba(0, 0, 0, 50%);
+  &__input-status-icon {
+    height: $header-height;
+    position: absolute;
+    right: $spacing-sm;
+    top: 0;
+    width: 2rem;
+    z-index: 4;
+
+    svg {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .#{$px}-text--heading3 {
     display: none;
-    height: 100%;
-    inset: 0;
-    position: fixed;
-    width: 100%;
-    z-index: 2;
 
-    &--active {
-      display: block;
-      & + .#{$px}-search__button {
-        z-index: 3;
-      }
+    @include isHeaderMobile {
+      align-self: flex-start;
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0;
     }
   }
 
   &__button {
     background: transparent;
     border: none;
-    height: 18px;
+    height: $header-height;
     margin: 0;
     padding: 0;
-    width: 18px;
+    position: absolute;
+    right: $spacing-sm;
+    top: 0;
+    width: 1.5rem;
+    z-index: 4;
 
-    @include isHeaderMobile {
-      border: 2px solid black;
-      border-radius: 50%;
-      height: 35px;
-      padding: 0.125rem;
-      position: absolute;
-      right: 1rem;
-      width: 35px;
+    svg {
+      height: 100%;
+      width: 100%;
+    }
+
+    &:hover,
+    &:focus,
+    &:focus-within,
+    &:active {
+      border-bottom: 1px solid $pure-black;
+      cursor: pointer;
     }
 
     &__icon {
-      height: 100%;
-      width: 100%;
+      pointer-events: none;
+
+      path {
+        fill: $pure-black;
+      }
     }
   }
 
   &__form {
+    display: flex;
     overflow: hidden;
     position: absolute;
-    right: 0;
-    top: calc($header-height + $user-management-height);
+    right: $spacing-sm;
+    top: 0; // calc($header-height + $user-management-height);
     transition: 0.5s ease;
     width: 0;
     z-index: 3;
 
-    @include isHeaderMobile {
-      top: $header-height;
-    }
-
     &--active {
       overflow: visible;
-      width: 50%;
-
-      @include isHeaderMobile {
-        top: $header-height;
-        width: 100%;
-      }
+      width: calc(100% - (2 * $spacing-sm));
 
       .#{$px}-search__results {
         display: flex;
@@ -77,72 +89,39 @@
     }
   }
 
-  &__input-wrapper {
-    background: #323232;
-    color: $white;
+  &__content-wrapper {
+    background: $white;
+    color: $soft-black;
     display: flex;
-    height: 100px;
     position: relative;
+    width: 100%;
     z-index: 3;
 
-    &__icon {
-      height: 24px;
-      left: 35px;
-      position: absolute;
-      top: 30px;
-      width: 24px;
-
-      path {
-        fill: $white;
+    .#{$px}-input {
+      &__validation {
+        display: none;
       }
-    }
-    .#{$px}-input__input {
-      background: #323232;
-      border-bottom: 1px solid white;
-      border-left: 0;
-      border-radius: unset;
-      border-right: 0;
-      border-top: 0;
-      color: white;
-      margin: 1rem 2rem;
-      padding: 1rem 2rem;
-    }
-  }
 
-  &__results {
-    background: $soft-black;
-    display: none;
-    padding: 1rem 2rem;
-    position: absolute;
-    top: 100px;
-    width: 100%;
-  }
+      &__input {
+        background: $white;
+        border: 0;
+        border-bottom: 1px solid $pure-black;
+        border-radius: unset;
+        color: $pure-black;
+        font-family: DistinctDisplay, sans-serif;
 
-  &__result {
-    border-bottom: 1px solid $white;
-    display: flex;
-    padding: 0.625rem 0;
+        // Tokenize later
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 400;
+        height: $header-height;
+        line-height: 1.5rem;
+        margin: 0;
+        padding: $spacing-sm 0;
 
-    &:last-child {
-      border-bottom: none;
-    }
-
-    .phillips-link {
-      &:hover {
-        border-bottom: none;
-      }
-    }
-
-    p {
-      @include text($body3);
-
-      color: $white;
-      text-transform: none;
-    }
-
-    &:hover {
-      p {
-        color: $cta-blue;
+        &:focus {
+          outline: none;
+        }
       }
     }
   }

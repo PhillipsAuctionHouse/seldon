@@ -16,21 +16,23 @@ const SearchResults = ({
   loadingText = 'Loading...',
 }: React.PropsWithChildren<SearchResultsProps>) => {
   return (
-    <ul data-testid="search-results" className={`${px}-search__results`}>
-      {isLoading ? <li className={`${px}-search__result`}>{loadingText}</li> : null}
-      {Array.isArray(autoCompleteResults) &&
-        autoCompleteResults.length > 0 &&
-        autoCompleteResults.map((result) => {
-          return (
-            <li key={result.id} className={`${px}-search__result`}>
-              <Link href={result.url}>
-                <p>{result.label}</p>
-              </Link>
-            </li>
-          );
-        })}
-      {children}
-    </ul>
+    <div className={`${px}-search__results`}>
+      <ul data-testid="search-results" className={`${px}-search__results-container`}>
+        {isLoading ? <li className={`${px}-search__result`}>{loadingText}</li> : null}
+        {Array.isArray(autoCompleteResults) &&
+          autoCompleteResults.length > 0 &&
+          autoCompleteResults.map((result) => {
+            return (
+              <li key={result.id} className={`${px}-search__result`}>
+                <Link href={result.url}>
+                  <p>{result.label}</p>
+                </Link>
+              </li>
+            );
+          })}
+        {children}
+      </ul>
+    </div>
   );
 };
 
