@@ -52,7 +52,7 @@
     overflow: hidden;
     position: absolute;
     right: 0;
-    top: calc($header-height + $user-management-height);
+    top: $header-submenu-top;
     transition: 0.5s ease;
     width: 0;
     z-index: 3;

@@ -137,9 +137,9 @@ $text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $h
   --button-label-line-height: 1.25rem;
   --badge-label-size: 0.75rem;
   --badge-label-line-height: 1rem;
-  --snw-header-link-size: 0.875rem;
+  --snw-header-link-size: 1rem;
   --snw-header-link-line-height: 1.5rem;
-  --snw-flyout-link-size: 0.875rem;
+  --snw-flyout-link-size: 1rem;
   --snw-flyout-link-line-height: 1.75rem;
 
   @media (max-width: 960px) {
@@ -349,8 +349,10 @@ $max-site-width: 1560px;
 ////////////////////////
 /// height Tokens
 ///////////////////////
-$header-height: 60px;
+$header-height: 33px;
 $user-management-height: 30px;
+$header-bottom-padding: 5px; // needed so that the button underlines show
+$header-submenu-top: calc($header-height + $user-management-height + $header-bottom-padding + 1px);
 
 ////////////////////////
 /// Our tokens usually support at least 4 sizes.

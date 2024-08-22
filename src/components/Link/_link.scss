@@ -1,126 +1,53 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-link {
-  @include underline;
-
+  color: $pure-black;
   text-decoration: none;
   white-space: nowrap;
 
-  &:hover,
-  &:focus {
-    @include underline($color: $dark-gray);
+  &--email,
+  &--link {
+    @include underline;
+  }
 
-    color: $dark-gray;
+  &--email,
+  &--link,
+  &--snwFlyoutLink {
+    &:hover,
+    &:focus {
+      @include underline($color: $dark-gray);
+
+      color: $dark-gray;
+    }
   }
 
   &--email {
     @include text($email);
   }
 
-  &--snwHeaderLink {
-    .#{$px}-nav__item--label {
-      color: $soft-black;
-      text-align: center;
-    }
-  }
-
-  &--snwFlyoutLink {
-    color: $soft-black;
-    justify-content: flex-end;
-
-    &:hover {
-      .#{$px}-nav__item--label {
-        color: $dark-gray;
-      }
-    }
-
-    .#{$px}-nav__item--label {
-      /* TODO: Create token to handle these styles dynamically */
-      font-size: 0.8125rem;
-      font-weight: 500;
-      letter-spacing: 0.125rem;
-      line-height: 0.8125rem;
-      text-align: right;
-      text-transform: uppercase;
-    }
-  }
-
-  &--snwFlyoutLink {
-    color: $soft-black;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-
-    > span {
-      display: flex;
-      width: 100%;
-    }
-
-    .#{$px}-nav__item--label {
-      /* TODO: Create token to handle these styles dynamically */
-      @include pText(1.0625rem);
-
-      font-weight: 600;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-transform: capitalize;
-      text-wrap: nowrap;
-      width: 100%;
-
-      &:hover {
-        color: $cta-blue;
-      }
-
-      @media (max-width: #{$breakpoint-md - 1}) {
-        /* TODO: Create token to handle these styles dynamically */
-        font-size: 0.8rem;
-        font-weight: 400;
-        text-overflow: unset;
-        text-wrap: wrap;
-      }
-    }
-
-    .#{$px}-link--snwFlyoutLink {
-      .#{$px}-nav__item--label {
-        color: $cta-blue;
-      }
-    }
-  }
-
   &--link {
-    border-bottom: 0;
-    font-size: $link-label-size;
-    font-weight: 600;
-    letter-spacing: 1px;
-    line-height: $link-label-line-height;
-    text-decoration: underline;
-
-    &:hover {
-      border-bottom: 0;
-    }
+    @include text($link);
   }
 
   &--snwHeaderLink {
-    color: $pure-black;
+    @include text($snwHeaderLink);
 
-    span {
-      @include text($snwHeaderLink);
-    }
+    position: relative;
+    text-align: center;
 
-    &:hover {
-      color: $pure-black;
+    &:hover::after,
+    &:focus::after {
+      background: $pure-black;
+      content: '';
+      height: 1px;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 35px;
     }
   }
 
   &--snwFlyoutLink {
-    color: $pure-black;
-
-    span {
-      @include text($snwFlyoutLink);
-    }
-
-    &:hover {
-      color: $pure-black;
-    }
+    @include text($snwFlyoutLink);
   }
 }

@@ -206,7 +206,8 @@
 
   // SNW
   @if $token == 'snwHeaderLink' {
-    font-family: $DistinctDisplay;
+    @include DistinctDisplay;
+
     font-size: $snw-header-link-size;
     font-weight: 400;
     letter-spacing: 1px;
@@ -215,7 +216,8 @@
   }
 
   @if $token == 'snwFlyoutLink' {
-    font-family: $DistinctDisplay;
+    @include Montserrat;
+
     font-size: $snw-flyout-link-size;
     font-weight: 400;
     letter-spacing: 1px;

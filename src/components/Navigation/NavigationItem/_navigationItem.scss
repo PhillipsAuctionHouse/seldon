@@ -1,8 +1,9 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-nav__item {
+  background: $pure-white;
+
   @include isHeaderMobile {
-    border-bottom: 1px solid #ccc;
     max-width: 320px;
     width: 100%;
   }
@@ -11,30 +12,32 @@
     align-items: center;
     display: flex;
     max-width: unset;
+  }
 
-    &:hover,
-    &:focus,
-    &:focus-within {
-      .#{$px}-nav__item--label {
-        color: $pure-black;
-      }
-    }
+  & > button {
+    @include DistinctDisplay;
 
-    & & {
-      border-bottom: 1px solid #ccc;
+    text-transform: uppercase;
+
+    &:hover::after,
+    &:focus::after {
+      background: $pure-black;
+      content: '';
+      height: 1px;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 35px;
     }
   }
 
-  & > button,
-  &--label {
-    /* TODO: Create token to handle these styles dynamically */
-    color: $soft-black;
+  & > button {
+    @include DistinctDisplay;
+    @include text($snwHeaderLink);
+
     display: block;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    letter-spacing: 0.125rem;
-    line-height: 0.8125rem;
-    text-transform: uppercase;
+    position: relative;
+    white-space: nowrap;
     width: 100%;
 
     @include isHeaderMobile {
@@ -51,8 +54,9 @@
     }
   }
 
+  // Submenu
   ul {
-    background: $off-white;
+    background: $pure-white;
     overflow: hidden scroll;
     position: absolute;
     right: 0;
@@ -64,37 +68,25 @@
   @include isHeaderDesktop {
     ul {
       align-content: start;
-      background: #f4f4f4;
       height: auto;
       left: 0;
       max-height: 0;
       min-height: 0;
       overflow: hidden;
       position: fixed;
-      top: 90px;
+      top: $header-submenu-top;
       width: 100%;
       z-index: -1;
 
       li {
-        display: flex;
-        justify-content: end;
+        display: inline;
+        white-space: nowrap;
 
         button,
         a,
         p {
           @include isHeaderDesktop {
             border: none;
-          }
-        }
-
-        span {
-          &--badge {
-            display: flex;
-            justify-content: flex-end;
-          }
-
-          &--label {
-            text-wrap: nowrap;
           }
         }
       }
@@ -136,7 +128,7 @@
     background-color: transparent;
     border: 0;
     display: flex;
-    padding: 0.625rem;
+    padding: 0 0.625rem;
   }
 
   @include isHeaderMobile {
@@ -164,26 +156,6 @@
       background: #f4f4f4;
     }
 
-    &:not(ul ul li)::after,
-    &:not(ul ul li a):focus::after,
-    &:not(ul ul li button):focus::after {
-      background: rgb(84, 84, 84);
-      content: '';
-      height: 2px;
-      left: 50%;
-      position: absolute;
-      top: 70%;
-      transform: translateX(-50%);
-      width: 0;
-    }
-
-    &:not(ul ul li):hover::after,
-    &:not(ul ul li) a:focus::after,
-    &:not(ul ul li) button:focus::after,
-    &:not(ul ul li) p:focus::after {
-      width: 85%;
-    }
-
     .#{$px}-nav__list-item {
       position: static;
       z-index: 1;
@@ -202,40 +174,15 @@
 }
 
 .#{$px}-nav__list__section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
   &--large-cta {
     margin-right: 1rem;
 
     @include isHeaderMobile {
       margin-right: 0;
-    }
-    .#{$px}-nav__item {
-      &--badge {
-        /* TODO: Create token to handle these styles dynamically */
-        align-items: center;
-        display: flex;
-        flex-wrap: wrap;
-        font-weight: 400;
-        justify-content: flex-end;
-        letter-spacing: 0.25rem;
-        line-height: 0.8125rem;
-        min-width: 25%;
-        text-align: right;
-        text-transform: uppercase;
-
-        @include pText(0.8125rem, $keyline-gray);
-
-        &:hover {
-          color: $keyline-gray;
-        }
-
-        @include isHeaderMobile {
-          /* TODO: Create token to handle these styles dynamically */
-          align-items: flex-start;
-          font-size: 0.6rem;
-          letter-spacing: 0.125rem;
-          min-width: 35%;
-        }
-      }
     }
   }
 }

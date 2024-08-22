@@ -62,7 +62,7 @@ const NavigationItem = ({
         tabIndex={expandedItem === '' ? 0 : -1}
       >
         <span className={`${px}-nav__item--label`}>{label}</span>
-        {badge ? <span className={`${px}-nav__item--badge `}>{badge}</span> : null}
+        {badge ? <span className={`${px}-nav__item--badge `}>{` • ${badge}`}</span> : null}
       </Component>
     </li>
   );

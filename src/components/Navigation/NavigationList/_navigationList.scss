@@ -2,7 +2,6 @@
 
 .#{$px}-nav__list {
   display: flex;
-  justify-content: right;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -65,28 +64,6 @@
           }
         }
       }
-    }
-
-    &--small-cta {
-      display: grid;
-      grid-column: 4 / span 2;
-      height: fit-content;
-
-      @include isHeaderMobile {
-        margin-top: 2rem;
-      }
-    }
-
-    &--large-cta + &--small-cta {
-      display: grid;
-      grid-column: 5 / span 1;
-      height: fit-content;
-    }
-  }
-
-  > li:not(.#{$px}-user-management) {
-    @include isHeaderDesktop {
-      height: 60px;
     }
   }
 }
