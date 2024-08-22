@@ -10,9 +10,8 @@ export interface VideoProps extends ComponentProps<'div'> {
   aspectRatio?: number;
   /**
    * Height of the video (pixels)
-   * Defaults to 800
    */
-  height?: number;
+  height: number;
   /**
    * The url of the video source
    */
@@ -28,27 +27,28 @@ export interface VideoProps extends ComponentProps<'div'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-video--overview)
  */
 const Video = ({
-  className,
   aspectRatio = 16 / 9,
-  height = 800,
+  className,
+  height,
   videoSource,
   ...props
 }: React.PropsWithChildren<VideoProps>) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Video');
+  const { className: baseClassName, 'data-testid': dataTestId, ...commonProps } = getCommonProps(props, 'Video');
 
   const componentProps = {
     className: classnames(baseClassName, className),
-    style: { aspectRatio, height },
+    'data-testid': dataTestId,
+    style: { '--aspect-ratio': aspectRatio, height },
     ...commonProps,
     ...props,
   };
 
   return (
-    <div className={classnames(`${baseClassName}__container`)}>
+    <div className={`${baseClassName}__container`}>
       <div {...componentProps}>
         <iframe
-          data-testid={`${commonProps[`data-testid`]}-iframe`}
-          className={classnames(`${baseClassName}__iframe`)}
+          data-testid={`${dataTestId}-iframe`}
+          className={`${baseClassName}__iframe`}
           src={videoSource}
           allowFullScreen
           allow="encrypted-media"

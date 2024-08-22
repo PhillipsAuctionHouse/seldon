@@ -1,8 +1,8 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-video {
+  aspect-ratio: var(--aspect-ratio);
   display: block;
-  height: auto;
   position: relative;
   width: auto;
 
