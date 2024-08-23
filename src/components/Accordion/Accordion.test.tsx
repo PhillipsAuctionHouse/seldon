@@ -1,8 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Accordion from './Accordion';
-import AccordionItem from './AccordionItem';
+import { Accordion, AccordionItem } from './';
 import { runCommonTests } from '../../utils/testUtils';
+import { getAccordionVariantProps } from './utils';
 
 describe('Accordion', () => {
   runCommonTests(Accordion, 'Accordion');
@@ -97,5 +97,33 @@ describe('Accordion', () => {
     await waitFor(() => {
       expect(container.getElementsByClassName('phillips-accordion-item--expanded').length).toBe(1);
     });
+  });
+
+  it('should get the correct variant props for the "singleCollapsible" variant', () => {
+    const variantProps = getAccordionVariantProps('singleCollapsible');
+
+    expect(variantProps.type).toBe('single');
+    expect(variantProps.collapsible).toBe(true);
+  });
+
+  it('should get the correct variant props for the "singleNonCollapsible" variant', () => {
+    const variantProps = getAccordionVariantProps('singleNonCollapsible');
+
+    expect(variantProps.type).toBe('single');
+    expect(variantProps.collapsible).toBe(false);
+  });
+
+  it('should get the correct variant props for the "multiple" variant', () => {
+    const variantProps = getAccordionVariantProps('multiple');
+
+    expect(variantProps.type).toBe('multiple');
+    expect(variantProps.collapsible).toBeUndefined();
+  });
+
+  it('should default to the variant props for "multiple" if no variant is passed in', () => {
+    const variantProps = getAccordionVariantProps();
+
+    expect(variantProps.type).toBe('multiple');
+    expect(variantProps.collapsible).toBeUndefined();
   });
 });

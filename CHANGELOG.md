@@ -1,3 +1,45 @@
+# [1.40.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.39.0...v1.40.0) (2024-08-22)
+
+
+### Features
+
+* **footer:** L3-3126 3rd footer update ([#284](https://github.com/PhillipsAuctionHouse/seldon/issues/284)) ([297554a](https://github.com/PhillipsAuctionHouse/seldon/commit/297554a93e99cd1f555812fa2c5d72b711240b24))
+
+# [1.39.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.6...v1.39.0) (2024-08-21)
+
+
+### Features
+
+* **styles:** L3-3261 updated new tokens ([#278](https://github.com/PhillipsAuctionHouse/seldon/issues/278)) ([d2c0696](https://github.com/PhillipsAuctionHouse/seldon/commit/d2c0696419f0c151435b54bab476f9673c699b98))
+
+## [1.38.6](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.5...v1.38.6) (2024-08-20)
+
+
+### Bug Fixes
+
+* **grid:** L3-2994 updates needed to grid styles ([#279](https://github.com/PhillipsAuctionHouse/seldon/issues/279)) ([4a2dd8c](https://github.com/PhillipsAuctionHouse/seldon/commit/4a2dd8cf1729b4a2dbd1ce2919d85267b6da8260))
+
+## [1.38.5](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.4...v1.38.5) (2024-08-19)
+
+
+### Bug Fixes
+
+* **accordion:** L3-3274 add "variant" prop to Accordion ([#276](https://github.com/PhillipsAuctionHouse/seldon/issues/276)) ([f04964a](https://github.com/PhillipsAuctionHouse/seldon/commit/f04964a461d179086e04a50976d4d5fd5fb5d893))
+
+## [1.38.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.3...v1.38.4) (2024-08-16)
+
+
+### Bug Fixes
+
+* **styles:** L3-3127 need to import fonts from the main componentStyles ([#272](https://github.com/PhillipsAuctionHouse/seldon/issues/272)) ([c56e192](https://github.com/PhillipsAuctionHouse/seldon/commit/c56e192f8fad76689db226c53b8d166bed35d233))
+
+## [1.38.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.2...v1.38.3) (2024-08-15)
+
+
+### Bug Fixes
+
+* **Accordion:** L3-2559 Build Accordion component QA test fix ([#270](https://github.com/PhillipsAuctionHouse/seldon/issues/270)) ([fe08239](https://github.com/PhillipsAuctionHouse/seldon/commit/fe08239052d8666f26250f2737bda2a51ad25148))
+
 ## [1.38.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.38.1...v1.38.2) (2024-08-12)
 
 

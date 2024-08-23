@@ -5,8 +5,8 @@
   text-decoration: none;
   white-space: nowrap;
 
-  &:hover:not(&--list, &--navMain, &--navLinkLg, &--navLinkSm),
-  &:focus:not(&--list, &--navMain, &--navLinkLg, &--navLinkSm) {
+  &:hover:not(&--list, &--navMain, &--navLinkLg, &--navLinkSm, &--link, &--snwHeaderLink, &--snwFlyoutLink),
+  &:focus:not(&--list, &--navMain, &--navLinkLg, &--navLinkSm, &--link, &--snwHeaderLink, &--snwFlyoutLink) {
     @include underline;
   }
 
@@ -98,5 +98,17 @@
         color: $cta-blue;
       }
     }
+  }
+
+  &--link {
+    @include labelText('link');
+  }
+
+  &--snwHeaderLink {
+    @include labelText('snwHeaderLink');
+  }
+
+  &--snwFlyoutLink {
+    @include labelText('snwFlyoutLink');
   }
 }

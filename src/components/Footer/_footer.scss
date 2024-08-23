@@ -1,49 +1,59 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-footer {
+  align-items: center;
   background-color: $off-white;
+  display: flex;
+  flex-direction: column;
   margin: $spacing-lg 0 0;
-  width: 100%;
+  max-width: 100%;
 
-  &-desktop {
-    display: none;
+  ul {
+    li {
+      a {
+        @include text('snwFlyoutLink');
 
-    div {
-      flex: 1;
-      max-width: 18rem;
-      padding: 1rem;
-
-      h4 {
-        color: $pure-black;
-        font-family: $Distinct;
-        font-size: 1rem;
-        font-weight: 600;
-        letter-spacing: 0.0625rem;
-        margin-bottom: 0;
-        padding-bottom: 0.5rem;
-      }
-
-      ul {
-        li {
-          a {
-            font-size: 0.875rem;
-            font-weight: 500;
-            line-height: 1.875rem;
-
-            &:hover {
-              text-decoration: underline;
-            }
-          }
+        &:hover {
+          text-decoration: underline;
         }
       }
     }
   }
 
-  @include media($size-sm) {
-    &-desktop {
-      display: flex;
+  &__links {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 30rem;
+    padding: $spacing-lg $spacing-md $spacing-md $spacing-md;
+    width: 100%;
+
+    @include media($size-sm) {
+      flex-direction: row;
+      max-width: $desktop-max-width;
+      padding: $spacing-lg $spacing-md $spacing-lg $spacing-md;
     }
 
+    div {
+      flex: 1;
+    }
+  }
+
+  &-desktop {
+    display: none;
+
+    @include media($size-sm) {
+      display: block;
+    }
+
+    h3.#{$px}-text {
+      @include media($size-sm) {
+        margin-bottom: $spacing-sm;
+      }
+    }
+  }
+
+  @include media($size-sm) {
     &-mobile {
       display: none;
     }
@@ -52,38 +62,28 @@
   .#{$px}-accordion {
     border-bottom: 1px solid #eae8e4;
     border-top: 1px solid #eae8e4;
+    margin-bottom: $spacing-md;
     width: 100%;
 
     &-item {
-      padding: $spacing-sm 0 0;
+      padding: 0;
 
-      ul {
-        li {
-          a {
-            font-size: 0.875rem;
-            font-weight: 500;
-            line-height: 1.875rem;
-
-            &:hover {
-              text-decoration: underline;
-            }
-          }
-        }
+      &--expanded {
+        margin-bottom: $spacing-md;
+        margin-top: 0;
+        padding: 0;
       }
 
       &-label {
         opacity: 1;
-        padding: 0 0 0.5rem;
+        padding: $spacing-sm 0;
 
         @include media($size-sm) {
           cursor: unset;
         }
 
         &__text {
-          color: $pure-black;
-          font-family: $Distinct;
-          font-size: 1rem;
-          font-weight: 600;
+          @include text('snwHeaderLink');
         }
       }
 
@@ -93,92 +93,16 @@
     }
   }
 
-  @include media($size-sm) {
-    .#{$px}-accordion {
-      border-bottom: 0;
-      border-top: 0;
-      width: 100%;
-
-      &-item {
-        border-bottom: 0;
-        flex: 1;
-        max-width: 18rem;
-        padding: $spacing-sm;
-
-        &-label__icon {
-          display: none;
-        }
-      }
-    }
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  &__content {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    padding: $spacing-lg $spacing-md 0;
-
-    @include media($size-sm) {
-      align-items: flex-start;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-
-    @include media($size-md) {
-      padding: 3.75rem $spacing-lg;
-    }
-
-    @include media($size-lg) {
-      padding: 3.75rem $spacing-xl;
-    }
-  }
-
-  &__content-split-panel__left {
-    margin-bottom: $spacing-md;
-
-    @include media($size-sm) {
-      margin-bottom: 0;
-    }
-  }
-
-  &__content-split-panel__right {
-    display: flex;
-
-    @include media($size-sm) {
-      justify-content: flex-end;
-    }
-  }
-
   &__copyright {
-    @include text($body3);
-
     align-items: center;
     background-color: $white;
     display: flex;
     flex-direction: column;
-    font-size: 1rem;
-    gap: 1rem;
+    width: 100%;
 
-    // height: 2.125rem;
-    justify-content: center;
-    padding: $spacing-xsm 0;
-
-    h1 {
+    h3 {
+      margin-bottom: $spacing-sm;
       margin-top: $spacing-md;
-    }
-  }
-
-  .#{$px}-split-panel {
-    @include media($size-sm) {
-      & > :last-child {
-        flex: unset;
-        width: unset;
-      }
     }
   }
 }

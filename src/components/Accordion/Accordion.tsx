@@ -1,18 +1,23 @@
+import { AccordionVariantKey } from './types';
+
 import React from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import * as Accordion from '@radix-ui/react-accordion';
+import { getAccordionVariantProps } from './utils';
 
-// You'll need to change the HTMLDivElement to match the top-level element of your component
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Unique id for component testing
    */
   id?: string;
   /**
-   * Determines whether one or multiple items can be opened at the same time. Default as single.
+   * Determines the Accordion variant to use. `multiple` allows multiple elements to be opened at the same time.
+   * The `single` variants only allow one element opened at a time.
+   * `singleCollapsible` allows users to close an open element by clicking on it, while `singleNonCollapsible` does not.
+   * Defaults to `multiple`.
    */
-  type?: 'single' | 'multiple';
+  variant?: AccordionVariantKey;
   /**
    * Child element pass in to display as item content.
    */
@@ -25,17 +30,18 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * [Figma Link](https://www.figma.com/design/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=4433-163013&t=lhB2YjBptvQ97UWF-0)
  *
- * [Storybook Link](Point back to yourself here)
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-accordion--overview)
  */
-const AccordionComponent = ({ className, type = 'single', children, ...props }: AccordionProps) => {
+const AccordionComponent = ({ className, children, ...props }: AccordionProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Accordion');
+  const variantProps = getAccordionVariantProps(props.variant);
+
   return (
     <Accordion.Root
       className={classnames(`${baseClassName}`, className)}
-      type={type}
       {...commonProps}
+      {...variantProps}
       id={props?.id}
-      collapsible
     >
       {children}
     </Accordion.Root>
