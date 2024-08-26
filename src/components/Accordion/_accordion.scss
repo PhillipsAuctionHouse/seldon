@@ -14,7 +14,7 @@
     border-bottom: 1px solid $keyline-gray;
   }
 
-  &--expanded {
+  &[data-state='open'] {
     display: block;
     font-weight: 400;
     height: auto;
@@ -37,6 +37,26 @@
 
   &--transition[data-state='closed'] {
     animation: slide-up 250ms end;
+  }
+
+  &[data-state='open'] {
+    .phillips-accordion-item-label-plus__icon {
+      display: none;
+    }
+
+    .phillips-accordion-item-label-minus__icon {
+      display: block;
+    }
+  }
+
+  &[data-state='closed'] {
+    .phillips-accordion-item-label-plus__icon {
+      display: block;
+    }
+
+    .phillips-accordion-item-label-minus__icon {
+      display: none;
+    }
   }
 
   @keyframes slide-down {
