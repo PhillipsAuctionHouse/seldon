@@ -123,7 +123,7 @@ const form = screen.getByTestId('phillips-form');
 const submit = screen.getByLabelText(/Submit/);
 ```
 
-> **<span style="text-shadow: 0 0 1.5px #000;">💡</span> TIP:** For convenience `screen` also comes with a few helpful [debugging](https://testing-library.com/docs/queries/about/#debugging) methods. `screen.debug()` will pretty print out the rendered DOM into the console. This is especially convenient when your queries are not returning what's expected. `screen.debug()` supports debugging the document, a single element, or an array of elements. If the output is longer than the character limit `debug takes a second argument (e.g. `screen.debug(null, Infinity)`). [docs](https://testing-library.com/docs/dom-testing-library/api-debugging/#prettydom)
+> **<span style="text-shadow: 0 0 1.5px #000;">💡</span> TIP:** For convenience `screen` also comes with a few helpful [debugging](https://testing-library.com/docs/queries/about/#debugging) methods. `screen.debug()` will pretty print out the rendered DOM into the console. This is especially convenient when your queries are not returning what's expected. `screen.debug()` supports debugging the document, a single element, or an array of elements. If the output is longer than the character limit `debug takes a second argument (e.g.`screen.debug(null, Infinity)`). [docs](https://testing-library.com/docs/dom-testing-library/api-debugging/#prettydom)
 
 ### Asynchronous code
 
@@ -152,7 +152,7 @@ describe('ComponentThatNeedsData', () => {
 
 If you have tested React components before you may be familiar with [`act`](https://legacy.reactjs.org/docs/test-utils.html#act) or you may have been puzzled with this error in your console,
 
-```
+```bash
 Warning: An update to MyComponent inside a test was not wrapped in act(...).
 ```
 
@@ -202,7 +202,7 @@ it('My component updates title when "title-update" event is emitted', () => {
 
 Using React Testing Library and wrapping our own methods in `act` fix our first warning but there is one more act error that can be confusing to new users of these libraries.
 
-```
+```bash
 Warning: You seem to have overlapping act() calls, this is not supported. Be sure to await previous act() calls ...
 ```
 
@@ -294,7 +294,7 @@ const myFunc = vi.fn();
 await expect(container).toBeAccessible();
 ```
 
-## Learn more:
+## Learn more
 
 - [React Testing Library guiding principals](https://testing-library.com/docs/guiding-principles/)
 - [Types of queries available from React Testing Library](https://testing-library.com/docs/queries/about/#types-of-queries)
