@@ -1,0 +1,17 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-video {
+  aspect-ratio: var(--aspect-ratio);
+  display: block;
+  height: auto;
+  position: relative;
+  width: 100%;
+
+  &__iframe {
+    border: 0;
+    height: 100%;
+    inset: 0;
+    position: absolute;
+    width: 100%;
+  }
+}
