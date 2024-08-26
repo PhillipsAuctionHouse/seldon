@@ -2,12 +2,13 @@ import * as React from 'react';
 import { encodeURLSearchParams, getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import Input from '../Input/Input';
-import SearchIcon from '../../assets/search.svg?react';
-import CloseIcon from '../../assets/close.svg?react';
-import LoadingSpinner from '../../assets/loading_spinner.svg?react';
+
 import Link from '../Link/Link';
 import SearchResults, { type SearchResultsProps } from './SearchResults/SearchResults';
 import { Text, TextVariants } from '../Text';
+import { useOnClickOutside } from 'usehooks-ts';
+import { HeaderContext } from '../Header/Header';
+import { SearchButton } from './SearchButton';
 
 export interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -65,20 +66,14 @@ const Search = ({
   ...props
 }: React.PropsWithChildren<SearchProps>) => {
   const { className: baseClassName, 'data-testid': baseTestId, ...commonProps } = getCommonProps(props, 'Search');
-  const [searchEnabled, setSearchEnabled] = React.useState(false);
+  const { isSearchExpanded, setIsSearchExpanded } = React.useContext(HeaderContext);
+
   const searchInputRef = React.useRef<HTMLInputElement>(null);
   const searchFormRef = React.useRef<HTMLFormElement>(null);
+
+  useOnClickOutside(searchFormRef, () => setIsSearchExpanded(false));
+
   const value = searchInputRef.current?.value;
-  const renderSpinner = state === 'loading' || state === 'submitting';
-  const showSearch = () => {
-    setSearchEnabled(!searchEnabled);
-    // means we're opening search
-    if (searchEnabled) {
-      searchFormRef.current?.reset();
-      return;
-    }
-    searchInputRef.current?.focus();
-  };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLAnchorElement>) => {
     e.stopPropagation();
@@ -93,9 +88,19 @@ const Search = ({
       }
     }
     if (e.key === 'Escape') {
-      setSearchEnabled(false);
+      setIsSearchExpanded(false);
       searchFormRef.current?.reset();
     }
+  };
+
+  const showSearch: typeof setIsSearchExpanded = (isSearchExpanded) => {
+    setIsSearchExpanded(!isSearchExpanded);
+    // means we're opening search
+    if (isSearchExpanded) {
+      searchFormRef.current?.reset();
+      return;
+    }
+    searchInputRef.current?.focus();
   };
 
   return (
@@ -109,38 +114,11 @@ const Search = ({
       <Text variant={TextVariants.heading3} className={`${baseClassName}__label`}>
         {searchButtonText}
       </Text>
-      {!searchEnabled ? (
-        <button
-          type="button"
-          data-testid={`${baseTestId}-button`}
-          aria-label={searchButtonText}
-          className={`${baseClassName}__button ${baseClassName}__button--search`}
-          onClick={showSearch}
-        >
-          <SearchIcon data-testid={`${baseTestId}-button-icon`} className={`${baseClassName}__button__icon`} />
-        </button>
-      ) : null}
-      {searchEnabled && state === 'idle' ? (
-        <button
-          type="button"
-          data-testid={`${baseTestId}-close-button`}
-          aria-label="Close Search"
-          className={`${baseClassName}__button ${baseClassName}__button--close`}
-          onClick={showSearch}
-        >
-          <CloseIcon data-testid={`${baseTestId}-form-icon`} className={`${baseClassName}__button__icon`} />
-        </button>
-      ) : null}
-      {searchEnabled && renderSpinner ? (
-        <LoadingSpinner
-          data-testid={`${baseTestId}-form-icon`}
-          className={`${baseClassName}__button__icon ${baseClassName}__input-status-icon`}
-        />
-      ) : null}
+
       <form
         data-testid={`${baseTestId}-form`}
-        className={classnames(`${baseClassName}__form`, { [`${baseClassName}__form--active`]: searchEnabled })}
-        aria-hidden={!searchEnabled}
+        className={classnames(`${baseClassName}__form`, { [`${baseClassName}__form--active`]: isSearchExpanded })}
+        aria-hidden={!isSearchExpanded}
         ref={searchFormRef}
       >
         <div className={classnames(`${baseClassName}__content-wrapper`)} role="combobox" aria-haspopup="listbox">
@@ -163,6 +141,14 @@ const Search = ({
                 : undefined
             }
             ref={searchInputRef}
+          />
+          <SearchButton
+            className={baseClassName}
+            searchButtonText={searchButtonText}
+            state={state}
+            testId={baseTestId}
+            isSearchExpanded={isSearchExpanded}
+            setIsSearchExpanded={showSearch}
           />
           {value && value.length > 2 ? (
             <SearchResults

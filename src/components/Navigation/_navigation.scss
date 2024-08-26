@@ -10,10 +10,9 @@
 
   @include isHeaderDesktop {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: center;
     overflow: visible;
     padding-top: 0;
-    place-content: center right;
     position: unset;
     width: auto;
   }

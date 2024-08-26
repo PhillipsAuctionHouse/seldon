@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import * as React from 'react';
-import { findChildrenOfType, px } from '../../utils';
+import { findChildrenOfType, noOp, px } from '../../utils';
 import Search from '../Search/Search';
 import Logo from '../../assets/PhillipsLogo.svg?react';
 
@@ -26,23 +26,32 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
    */
   logoText?: string;
 }
-type HeaderContextType = {
+export type HeaderContextType = {
   defaultMobileMenuLabel: string;
   expandedItem: string;
   setExpandedItem: (item: string) => void;
   isExpanded: boolean;
   onSelect: (label: string) => void;
+  /**
+   * Is the user within the search input and searching
+   */
+  isSearchExpanded: boolean;
+  /**
+   * Set the search expanded state
+   */
+  setIsSearchExpanded: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const HeaderContext = React.createContext({
+export const defaultHeaderContext = {
   defaultMobileMenuLabel: '',
   expandedItem: '',
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  setExpandedItem: (_item: string) => {},
+  setExpandedItem: noOp,
   isExpanded: false,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  onSelect: (_label: string) => {},
-});
+  onSelect: noOp,
+  isSearchExpanded: false,
+  setIsSearchExpanded: noOp,
+};
+export const HeaderContext = React.createContext<HeaderContextType>(defaultHeaderContext);
 
 const Header = ({
   defaultMobileMenuLabel = 'Main Menu',
@@ -58,6 +67,7 @@ const Header = ({
   const navElements = findChildrenOfType(children, Search, true);
   const [toggleState, setToggleState] = React.useState(false);
   const [expandedItem, setExpandedItem] = React.useState(defaultMobileMenuLabel);
+  const [isSearchExpanded, setIsSearchExpanded] = React.useState(false);
   const toggleText = toggleState ? toggleCloseText : toggleOpenText;
   const isExpanded = expandedItem !== defaultMobileMenuLabel;
   const handleMenuToggle = function () {
@@ -68,8 +78,21 @@ const Header = ({
     setExpandedItem((prev) => (prev === defaultMobileMenuLabel ? label : defaultMobileMenuLabel));
   };
 
+  const onSearchExpanded = (prev: boolean) => {
+    setIsSearchExpanded(prev);
+  };
+
   return (
     <header {...props} className={classnames(`${px}-header`, className)}>
+      <h1 data-testid="header-logo" className={`${px}-header__logo`} tabIndex={toggleText === toggleOpenText ? 0 : -1}>
+        <a href="/" aria-label={logoText}>
+          {typeof logo === 'object' ? (
+            logo
+          ) : (
+            <img alt="Phillips" data-testid="header-logo-img" src={logo as string} height="14" />
+          )}
+        </a>
+      </h1>
       <div
         className={classnames(`${px}-header__overlay`, { [`${px}-header__overlay--active`]: toggleState })}
         data-testid="header-overlay"
@@ -86,15 +109,7 @@ const Header = ({
       >
         <span>{toggleText}</span>
       </button>
-      <h1 data-testid="header-logo" className={`${px}-header__logo`} tabIndex={toggleText === toggleOpenText ? 0 : -1}>
-        <a href="/" aria-label={logoText}>
-          {typeof logo === 'object' ? (
-            logo
-          ) : (
-            <img alt="Phillips" data-testid="header-logo-img" src={logo as string} height="14" />
-          )}
-        </a>
-      </h1>
+
       <div className={classnames(`${px}-header__nav`, { [`${px}-header__nav--open`]: toggleState })}>
         <HeaderContext.Provider
           value={
@@ -104,6 +119,8 @@ const Header = ({
               setExpandedItem: (item: string) => setExpandedItem(item),
               isExpanded,
               onSelect: (label: string) => onSelect(label),
+              isSearchExpanded,
+              setIsSearchExpanded: onSearchExpanded,
             } as HeaderContextType
           }
         >

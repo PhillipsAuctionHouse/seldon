@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import Search, { type SearchProps } from './Search';
 import { SearchResult } from './SearchResults/SearchResults';
+import { defaultHeaderContext, HeaderContext } from '../Header/Header';
 
 const fetchData = async (searchQuery: string) => {
   console.log('searchQuery', searchQuery);
@@ -26,6 +27,8 @@ const fetchData = async (searchQuery: string) => {
 const StatefulSearch = (props: SearchProps) => {
   const [autoCompleteResults, setAutoCompleteResults] = React.useState([] as Array<SearchResult>);
   const [state, setState] = React.useState<SearchProps['state']>('idle');
+  const [isSearchExpanded, setIsSearchExpanded] = React.useState(false);
+
   const onSearch = (searchQuery: string) => {
     if (searchQuery?.includes('?')) {
       setState('invalid');
@@ -43,14 +46,16 @@ const StatefulSearch = (props: SearchProps) => {
     }
   };
   return (
-    <Search
-      {...props}
-      onSearch={(value) => {
-        onSearch(value);
-      }}
-      searchResults={autoCompleteResults}
-      state={state}
-    />
+    <HeaderContext.Provider value={{ ...defaultHeaderContext, isSearchExpanded, setIsSearchExpanded }}>
+      <Search
+        {...props}
+        onSearch={(value) => {
+          onSearch(value);
+        }}
+        searchResults={autoCompleteResults}
+        state={state}
+      />
+    </HeaderContext.Provider>
   );
 };
 

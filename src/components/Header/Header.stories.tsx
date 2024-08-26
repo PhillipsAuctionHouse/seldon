@@ -159,109 +159,17 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
               />
             </NavigationList>
           </NavigationItemTrigger>
-          <NavigationItemTrigger id="exhibitions" label="Exhibitions">
-            <NavigationList id={`${px}-exhibitions-nav-list`}>
-              <NavigationItem
-                badge="New York"
-                href="#"
-                navGroup="nav-link-lg"
-                navType={LinkVariants.snwFlyoutLink}
-                label="Written in the Sky: Works by Ed Ruscha"
-              />
-              <NavigationItem
-                badge="Paris"
-                href="#"
-                navGroup="nav-link-lg"
-                navType={LinkVariants.snwFlyoutLink}
-                label="Modeler le papier // Shapes On Paper"
-              />
-              <NavigationItem
-                badge="New York"
-                href="#"
-                navGroup="nav-link-lg"
-                navType={LinkVariants.snwFlyoutLink}
-                label="ALT POP: An Alternative History to American Pop Art"
-              />
-              <NavigationItem
-                badge="New York"
-                href="#"
-                navGroup="nav-link-lg"
-                navType={LinkVariants.snwFlyoutLink}
-                label="New Terrains: Contemporary Native American Art"
-              />
-              <NavigationItem
-                navGroup="nav-link-sm"
-                navType={LinkVariants.snwFlyoutLink}
-                href="#"
-                label="Past Exhibitions"
-              />
-            </NavigationList>
-          </NavigationItemTrigger>
+          <NavigationItem href="#" label="Perpetual" />
           <NavigationItem href="#" label="Perpetual" />
           <NavigationItem href="#" label="Dropshop" />
-          <NavigationItemTrigger id="buy-sell" label="Buy & Sell">
-            <NavigationList id={`${px}-buy-sell-nav-list`}>
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} href="#" label="How To Buy" />
-              <NavigationItem
-                navGroup="nav-link-sm"
-                navType={LinkVariants.snwFlyoutLink}
-                href="#"
-                label="How To Sell"
-              />
-              <NavigationItem
-                navGroup="nav-link-sm"
-                navType={LinkVariants.snwFlyoutLink}
-                href="#"
-                label="Remote Bidding"
-              />
-              <NavigationItem
-                navGroup="nav-link-sm"
-                navType={LinkVariants.snwFlyoutLink}
-                href="#"
-                label="Private Services"
-              />
-              <NavigationItem
-                navGroup="nav-link-sm"
-                navType={LinkVariants.snwFlyoutLink}
-                href="#"
-                label="Trusts, Estates & Valuations"
-              />
-              <NavigationItem
-                navGroup="nav-link-sm"
-                navType={LinkVariants.snwFlyoutLink}
-                href="#"
-                label="Fiduciary Services"
-              />
-              <NavigationItem
-                navGroup="nav-link-sm"
-                navType={LinkVariants.snwFlyoutLink}
-                href="#"
-                label="Buy Catalogues"
-              />
-            </NavigationList>
-          </NavigationItemTrigger>
           <NavigationItem href="#" label="Editorial" />
-          <NavigationItemTrigger id="about-us" label="About Us">
-            <NavigationList id={`${px}-about-us-nav-list`}>
-              <NavigationItem
-                navGroup="nav-link-sm"
-                navType={LinkVariants.snwFlyoutLink}
-                href="#"
-                label="Our History"
-              />
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} href="#" label="Our Team" />
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} href="#" label="Locations" />
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} href="#" label="Press" />
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} href="#" label="Careers" />
-            </NavigationList>
-          </NavigationItemTrigger>
-          <UserManagement
+          {/* <UserManagement
             authState={authState}
             onLanguageChange={(language) => console.log('languageChange', language)}
-          />
+          /> */}
         </NavigationList>
+        <Search />
       </Navigation>
-      <Search />
     </Header>
     <main>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
