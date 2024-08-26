@@ -69,14 +69,15 @@ const Search = ({
   const searchInputRef = React.useRef<HTMLInputElement>(null);
   const searchFormRef = React.useRef<HTMLFormElement>(null);
   const value = searchInputRef.current?.value;
+  const renderSpinner = state === 'loading' || state === 'submitting';
   const showSearch = () => {
     setSearchEnabled(!searchEnabled);
     // means we're opening search
-    if (!searchEnabled) {
-      searchInputRef.current?.focus();
-    } else {
+    if (searchEnabled) {
       searchFormRef.current?.reset();
+      return;
     }
+    searchInputRef.current?.focus();
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -119,7 +120,7 @@ const Search = ({
           <CloseIcon data-testid={`${baseTestId}-form-icon`} className={`${baseClassName}__button__icon`} />
         </button>
       ) : null}
-      {searchEnabled && (state === 'loading' || state === 'submitting') ? (
+      {searchEnabled && renderSpinner ? (
         <LoadingSpinner
           data-testid={`${baseTestId}-form-icon`}
           className={`${baseClassName}__button__icon ${baseClassName}__input-status-icon`}
@@ -137,7 +138,7 @@ const Search = ({
             id="search-input"
             hideLabel
             labelText={searchButtonText}
-            placeholder={placeholder ? placeholder : ''}
+            placeholder={placeholder ?? null}
             type="text"
             defaultValue={defaultValue}
             invalid={state === 'invalid'}

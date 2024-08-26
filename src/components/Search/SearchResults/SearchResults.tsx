@@ -15,12 +15,12 @@ const SearchResults = ({
   children,
   loadingText = 'Loading...',
 }: React.PropsWithChildren<SearchResultsProps>) => {
+  const hasResults = Array.isArray(autoCompleteResults) && autoCompleteResults.length > 0;
   return (
     <div className={`${px}-search__results`}>
       <ul data-testid="search-results" className={`${px}-search__results-container`}>
         {isLoading ? <li className={`${px}-search__result`}>{loadingText}</li> : null}
-        {Array.isArray(autoCompleteResults) &&
-          autoCompleteResults.length > 0 &&
+        {hasResults &&
           autoCompleteResults.map((result) => {
             return (
               <li key={result.id} className={`${px}-search__result`}>
