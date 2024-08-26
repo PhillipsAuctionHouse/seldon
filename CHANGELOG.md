@@ -1,3 +1,10 @@
+# [1.42.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.41.0...v1.42.0) (2024-08-26)
+
+
+### Features
+
+* **header-ux-updates:** L3-3366 header ux updates search ([#286](https://github.com/PhillipsAuctionHouse/seldon/issues/286)) ([372468c](https://github.com/PhillipsAuctionHouse/seldon/commit/372468cdb2957e2a30879c79937e07cc07af22a6))
+
 # [1.41.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.40.0...v1.41.0) (2024-08-26)
 
 
