@@ -22,7 +22,7 @@ export interface VideoProps extends ComponentProps<'div'> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-video--overview)
  */
-const Video = ({ aspectRatio = 16 / 9, className, videoSource, ...props }: React.PropsWithChildren<VideoProps>) => {
+const Video = ({ aspectRatio = 16 / 9, className, videoSource, ...props }: VideoProps) => {
   const { className: baseClassName, 'data-testid': dataTestId, ...commonProps } = getCommonProps(props, 'Video');
 
   const componentProps = {
@@ -34,17 +34,15 @@ const Video = ({ aspectRatio = 16 / 9, className, videoSource, ...props }: React
   };
 
   return (
-    <div className={`${baseClassName}__container`}>
-      <div {...componentProps}>
-        <iframe
-          data-testid={`${dataTestId}-iframe`}
-          className={`${baseClassName}__iframe`}
-          src={videoSource}
-          allowFullScreen
-          allow="encrypted-media"
-          referrerPolicy="no-referrer"
-        />
-      </div>
+    <div {...componentProps}>
+      <iframe
+        data-testid={`${dataTestId}-iframe`}
+        className={`${baseClassName}__iframe`}
+        src={videoSource}
+        allowFullScreen
+        allow="encrypted-media"
+        referrerPolicy="no-referrer"
+      />
     </div>
   );
 };
