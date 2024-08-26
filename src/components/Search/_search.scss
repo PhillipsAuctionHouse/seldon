@@ -35,8 +35,9 @@
   }
 
   &__button {
-    background: transparent;
+    background: $pure-white;
     border: none;
+    border-bottom: 1px solid transparent;
     height: $header-height;
     margin: 0;
     padding: 0;
@@ -45,6 +46,10 @@
     top: 0;
     width: 1.5rem;
     z-index: 4;
+
+    &--close {
+      border-bottom: 1px solid $pure-black;
+    }
 
     svg {
       height: 100%;

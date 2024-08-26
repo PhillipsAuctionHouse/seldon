@@ -80,5 +80,6 @@ export const Playground: Story = {
     },
     searchResults: [],
     state: 'loading',
+    placeholder: 'Search for a maker',
   },
 };
