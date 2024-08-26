@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import Link, { LinkProps } from '../Link/Link';
-import { LinkVariants } from '../Link/utils';
+import { LinkVariants } from '../Link/types';
 
 export interface LinkBlockProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Props for the Link component */
@@ -27,7 +27,7 @@ const LinkBlock = ({ linkProps, description, className: classNameProp, ...props 
 
   return (
     <div {...commonProps} className={className} {...props}>
-      <LinkComponent {...linkProps} data-testid={`${commonProps['data-testid']}-link`} variant={LinkVariants.list} />
+      <LinkComponent {...linkProps} data-testid={`${commonProps['data-testid']}-link`} variant={LinkVariants.link} />
       <p className={`${baseClassName}__description`}>{description}</p>
     </div>
   );

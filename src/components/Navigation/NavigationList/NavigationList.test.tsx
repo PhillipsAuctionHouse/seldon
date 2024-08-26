@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import NavigationList from './NavigationList';
 import NavigationItem from '../NavigationItem/NavigationItem';
-import { LinkVariants } from '../../Link/utils';
+import { LinkVariants } from '../../Link/types';
 import NavigationItemTrigger from '../NavigationItemTrigger/NavigationItemTrigger';
 import { px } from '../../../utils';
 
@@ -15,7 +15,7 @@ describe('NavigationList', () => {
             badge="New York"
             href="#"
             navGroup="nav-link-lg"
-            navType={LinkVariants.navLinkLg}
+            navType={LinkVariants.snwFlyoutLink}
             label="Editions & Works on Paper"
           />
         </NavigationList>

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import LinkBlock from './LinkBlock';
 import Link, { LinkProps } from '../Link/Link';
-import { LinkVariants } from '../Link/utils';
+import { LinkVariants } from '../Link/types';
 import { getLinkVariantClassName } from '../Link/utils';
 import { runCommonTests } from '../../utils/testUtils';
 
@@ -27,7 +27,7 @@ describe('LinkBlock', () => {
 
     const linkElement = screen.getByRole('link', { name: 'My Link' });
     expect(linkElement).toBeInTheDocument();
-    expect(linkElement).toHaveClass(getLinkVariantClassName(LinkVariants.list));
+    expect(linkElement).toHaveClass(getLinkVariantClassName(LinkVariants.link ?? 'link'));
     expect(linkElement).toHaveAttribute('href', 'https://example.com');
     expect(linkElement).toHaveAttribute('target', '_blank');
 
