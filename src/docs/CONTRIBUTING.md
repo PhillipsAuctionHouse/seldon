@@ -41,7 +41,7 @@ making to components in our react components Storybook.
 
 Once it's done building, you can edit source code or create new components. The
 system is set up to automatically bundle your changes/additions. Visit
-http://localhost:6006 to see the changes happen on the fly.
+<http://localhost:6006> to see the changes happen on the fly.
 
 ## Dependencies
 

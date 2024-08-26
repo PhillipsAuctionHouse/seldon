@@ -1,114 +1,54 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-link {
-  color: $cta-blue;
+  color: $pure-black;
   text-decoration: none;
   white-space: nowrap;
 
-  &:hover:not(&--list, &--navMain, &--navLinkLg, &--navLinkSm, &--link, &--snwHeaderLink, &--snwFlyoutLink),
-  &:focus:not(&--list, &--navMain, &--navLinkLg, &--navLinkSm, &--link, &--snwHeaderLink, &--snwFlyoutLink) {
+  &--email,
+  &--link {
     @include underline;
   }
 
-  &:hover,
-  &:focus {
-    color: $cta-blue;
-    outline: unset;
-  }
+  &--email,
+  &--link,
+  &--snwFlyoutLink {
+    &:hover,
+    &:focus {
+      @include underline($color: $dark-gray);
 
-  &--inline {
-    font-size: inherit;
-    letter-spacing: inherit;
-    line-height: inherit;
-  }
-
-  &--list {
-    color: $soft-black;
+      color: $dark-gray;
+    }
   }
 
   &--email {
     @include text($email);
   }
 
-  &--navMain {
-    .#{$px}-nav__item--label {
-      color: $soft-black;
-      text-align: center;
-    }
-  }
-
-  &--navLinkSm {
-    color: $soft-black;
-    justify-content: flex-end;
-
-    &:hover {
-      .#{$px}-nav__item--label {
-        color: $cta-blue;
-      }
-    }
-
-    .#{$px}-nav__item--label {
-      /* TODO: Create token to handle these styles dynamically */
-      font-size: 0.8125rem;
-      font-weight: 500;
-      letter-spacing: 0.125rem;
-      line-height: 0.8125rem;
-      text-align: right;
-      text-transform: uppercase;
-    }
-  }
-
-  &--navLinkLg {
-    color: $soft-black;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-
-    > span {
-      display: flex;
-      width: 100%;
-    }
-
-    .#{$px}-nav__item--label {
-      /* TODO: Create token to handle these styles dynamically */
-      @include pText(1.0625rem);
-
-      font-weight: 600;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-transform: capitalize;
-      text-wrap: nowrap;
-      width: 100%;
-
-      &:hover {
-        color: $cta-blue;
-      }
-
-      @media (max-width: #{$breakpoint-md - 1}) {
-        /* TODO: Create token to handle these styles dynamically */
-        font-size: 0.8rem;
-        font-weight: 400;
-        text-overflow: unset;
-        text-wrap: wrap;
-      }
-    }
-
-    .#{$px}-link--navLinkSm {
-      .#{$px}-nav__item--label {
-        color: $cta-blue;
-      }
-    }
-  }
-
   &--link {
-    @include labelText('link');
+    @include text($link);
   }
 
   &--snwHeaderLink {
-    @include labelText('snwHeaderLink');
+    @include text($snwHeaderLink);
+
+    padding: 0.5rem 0.625rem calc(0.5rem + 2px); // 1 px so that the bottom border of the nav counts as part of the button
+    position: relative;
+    text-align: center;
+
+    &:hover::after,
+    &:focus::after {
+      background: $pure-black;
+      bottom: -1px;
+      content: '';
+      height: 1px;
+      left: 0;
+      position: absolute;
+      right: 0;
+    }
   }
 
   &--snwFlyoutLink {
-    @include labelText('snwFlyoutLink');
+    @include text($snwFlyoutLink);
   }
 }
