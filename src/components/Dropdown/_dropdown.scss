@@ -9,7 +9,6 @@
     border: none;
     display: inline-flex;
     gap: 10px;
-    height: 24px;
     justify-content: center;
     padding: $spacing-xsm;
 
@@ -40,7 +39,8 @@
     overflow: hidden;
   }
 
-  &__scroll-button {
+  &__scroll-button,
+  &__scroll-button__up {
     align-items: center;
     cursor: default;
     display: flex;
@@ -50,6 +50,10 @@
       height: 16px;
       width: 16px;
     }
+  }
+
+  &__scroll-button__up {
+    transform: rotateX(180deg);
   }
 
   &__viewport {
@@ -69,7 +73,7 @@
     user-select: none;
 
     &[data-disabled] {
-      color: $light-gray;
+      color: $medium-gray;
       pointer-events: none;
     }
 

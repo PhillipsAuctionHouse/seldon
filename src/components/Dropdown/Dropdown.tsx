@@ -3,7 +3,7 @@ import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import * as DropdownSelect from '@radix-ui/react-select';
 import ChevronDownIcon from '../../assets/chevronDown.svg?react';
-import ChevronUpIcon from '../../assets/chevronUp.svg?react';
+import { DropdownItem } from './types';
 
 export interface DropdownProps
   extends Omit<DropdownSelect.SelectProps, 'defaultValue' | 'dir'>,
@@ -11,10 +11,7 @@ export interface DropdownProps
   /**
    * All options to be listed in the dropdown
    */
-  options: {
-    label: string;
-    value: string;
-  }[];
+  options: DropdownItem[];
   /**
    * Current selected value
    */
@@ -24,7 +21,7 @@ export interface DropdownProps
    */
   onValueChange: (value: string) => void;
   /**
-   * Aria-label for specific dropdown use
+   * Aria-label for specific dropdown use, e.g. Select your language
    */
   label: string;
 }
@@ -55,27 +52,25 @@ const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
           <DropdownSelect.Trigger className={`${baseClassName}__trigger`} aria-label={label} ref={ref}>
             <DropdownSelect.Value placeholder={value} />
             <DropdownSelect.Icon>
-              {<ChevronDownIcon className={isOpen ? `${baseClassName}__trigger-icon-expanded` : ''} />}
+              {<ChevronDownIcon className={classnames({ [`${baseClassName}__trigger-icon-expanded`]: isOpen })} />}
             </DropdownSelect.Icon>
           </DropdownSelect.Trigger>
           <DropdownSelect.Portal>
             <DropdownSelect.Content className={`${baseClassName}__content`} position="popper">
-              <DropdownSelect.ScrollUpButton className={`${baseClassName}__scroll-button`}>
-                <ChevronUpIcon />
+              <DropdownSelect.ScrollUpButton className={`${baseClassName}__scroll-button__up`}>
+                <ChevronDownIcon />
               </DropdownSelect.ScrollUpButton>
               <DropdownSelect.Viewport className={`${baseClassName}__viewport`}>
-                {options.map((option) => {
-                  return (
-                    <DropdownItem
-                      key={option.value}
-                      value={option.value}
-                      disabled={option.value === value}
-                      className={baseClassName}
-                    >
-                      {option.label}
-                    </DropdownItem>
-                  );
-                })}
+                {options.map((option) => (
+                  <DropdownSelectItem
+                    key={option.value}
+                    value={option.value}
+                    disabled={option.value === value}
+                    className={baseClassName}
+                  >
+                    {option.label}
+                  </DropdownSelectItem>
+                ))}
               </DropdownSelect.Viewport>
               <DropdownSelect.ScrollDownButton className={`${baseClassName}__scroll-button`}>
                 <ChevronDownIcon />
@@ -90,16 +85,14 @@ const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
 
 Dropdown.displayName = 'Dropdown';
 
-const DropdownItem = React.forwardRef<HTMLDivElement, DropdownSelect.SelectItemProps>(
-  ({ children, className, ...props }, forwardedRef) => {
-    return (
-      <DropdownSelect.Item className={`${className}__item`} {...props} ref={forwardedRef}>
-        <DropdownSelect.ItemText>{children}</DropdownSelect.ItemText>
-      </DropdownSelect.Item>
-    );
-  },
+const DropdownSelectItem = React.forwardRef<HTMLDivElement, DropdownSelect.SelectItemProps>(
+  ({ children, className, ...props }, forwardedRef) => (
+    <DropdownSelect.Item className={`${className}__item`} {...props} ref={forwardedRef}>
+      <DropdownSelect.ItemText>{children}</DropdownSelect.ItemText>
+    </DropdownSelect.Item>
+  ),
 );
 
-DropdownItem.displayName = 'DropdownItem';
+DropdownSelectItem.displayName = 'DropdownSelectItem';
 
 export default Dropdown;

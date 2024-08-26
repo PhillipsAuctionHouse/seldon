@@ -14,14 +14,18 @@ export default meta;
 const languages = [
   { label: 'English', value: SupportedLanguages.en },
   { label: '中文', value: SupportedLanguages.zh },
+  { label: 'Español', value: 'es' },
+  { label: 'Français', value: 'fr' },
+  { label: 'Deutsch', value: 'de' },
 ];
 
 export const Playground = (props: DropdownProps) => {
-  const [defaultValue, setDefaultValue] = useState('en');
-  return <Dropdown {...props} options={languages} value={defaultValue} onValueChange={setDefaultValue} id="test" />;
+  const [value, setValue] = useState('en');
+  return <Dropdown {...props} options={languages} value={value} onValueChange={setValue} id="test" />;
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-Playground.args = {};
-
-Playground.argTypes = {};
+Playground.args = {
+  options: languages,
+  value: 'en',
+};
