@@ -1,3 +1,10 @@
+# [1.41.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.40.0...v1.41.0) (2024-08-26)
+
+
+### Features
+
+* **video:** L3-2993 Create Video component ([#283](https://github.com/PhillipsAuctionHouse/seldon/issues/283)) ([7dcceac](https://github.com/PhillipsAuctionHouse/seldon/commit/7dcceac43de28abd30e747f40271ec7fd608e003))
+
 # [1.40.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.39.0...v1.40.0) (2024-08-22)
 
 ### Features
