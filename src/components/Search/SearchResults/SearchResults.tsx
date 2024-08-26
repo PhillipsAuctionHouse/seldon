@@ -7,6 +7,7 @@ export interface SearchResultsProps extends React.HTMLAttributes<HTMLElement> {
   isLoading?: boolean;
   children?: React.ReactNode;
   loadingText?: string;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLAnchorElement>) => void;
 }
 
 const SearchResults = ({
@@ -14,8 +15,10 @@ const SearchResults = ({
   isLoading,
   children,
   loadingText = 'Loading...',
+  onKeyDown,
 }: React.PropsWithChildren<SearchResultsProps>) => {
   const hasResults = Array.isArray(autoCompleteResults) && autoCompleteResults.length > 0;
+
   return (
     <div className={`${px}-search__results`}>
       <ul data-testid="search-results" className={`${px}-search__results-container`}>
@@ -24,7 +27,7 @@ const SearchResults = ({
           autoCompleteResults.map((result) => {
             return (
               <li key={result.id} className={`${px}-search__result`}>
-                <Link href={result.url}>
+                <Link href={result.url} onKeyDown={onKeyDown}>
                   <p>{result.label}</p>
                 </Link>
               </li>

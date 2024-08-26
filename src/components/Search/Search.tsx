@@ -80,7 +80,7 @@ const Search = ({
     searchInputRef.current?.focus();
   };
 
-  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLAnchorElement>) => {
     if (e.key === 'Escape') {
       setSearchEnabled(false);
       searchFormRef.current?.reset();
@@ -158,6 +158,7 @@ const Search = ({
               autoCompleteResults={searchResults}
               isLoading={state === 'loading'}
               loadingText={loadingText}
+              onKeyDown={onKeyDown}
             >
               <li key="viewAllSearchResults" className={`${baseClassName}__result`}>
                 <Link
