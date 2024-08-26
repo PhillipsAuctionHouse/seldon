@@ -81,6 +81,17 @@ const Search = ({
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLAnchorElement>) => {
+    e.stopPropagation();
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (value && value.length > 2) {
+        const allResultsLink = encodeURLSearchParams(getAllResultsLink(value));
+        window.location.href = allResultsLink;
+      }
+      if (e.currentTarget instanceof HTMLAnchorElement) {
+        e.currentTarget.click();
+      }
+    }
     if (e.key === 'Escape') {
       setSearchEnabled(false);
       searchFormRef.current?.reset();

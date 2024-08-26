@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import Search, { type SearchProps } from './Search';
+import { SearchResult } from './SearchResults/SearchResults';
 
 const fetchData = async (searchQuery: string) => {
   console.log('searchQuery', searchQuery);
-  let searchResults: { makers: Array<{ id: string; label: string; url: string }> } = { makers: [] };
+  let searchResults: { makers: Array<SearchResult> } = { makers: [] };
   // Call to get search results
   searchResults = await new Promise((resolve) => {
     setTimeout(
@@ -23,9 +24,7 @@ const fetchData = async (searchQuery: string) => {
 };
 
 const StatefulSearch = (props: SearchProps) => {
-  const [autoCompleteResults, setAutoCompleteResults] = React.useState(
-    [] as Array<{ id: string; label: string; url: string }>,
-  );
+  const [autoCompleteResults, setAutoCompleteResults] = React.useState([] as Array<SearchResult>);
   const [state, setState] = React.useState<SearchProps['state']>('idle');
   const onSearch = (searchQuery: string) => {
     if (searchQuery?.includes('?')) {

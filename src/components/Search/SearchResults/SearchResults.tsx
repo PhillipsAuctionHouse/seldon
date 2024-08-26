@@ -2,8 +2,14 @@ import * as React from 'react';
 import { px } from '../../../utils';
 import Link from '../../Link/Link';
 
+export interface SearchResult {
+  id: string;
+  url: string;
+  label: string;
+}
+
 export interface SearchResultsProps extends React.HTMLAttributes<HTMLElement> {
-  autoCompleteResults?: { id: string; url: string; label: string }[];
+  autoCompleteResults?: SearchResult[];
   isLoading?: boolean;
   children?: React.ReactNode;
   loadingText?: string;
