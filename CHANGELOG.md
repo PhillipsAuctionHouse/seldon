@@ -1,3 +1,10 @@
+# [1.44.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.43.0...v1.44.0) (2024-08-27)
+
+
+### Features
+
+* **dropdown:** L3-3342 add new dropdown component ([#280](https://github.com/PhillipsAuctionHouse/seldon/issues/280)) ([97718d9](https://github.com/PhillipsAuctionHouse/seldon/commit/97718d9a4516b7a942b34042847d86b286fb3e13))
+
 # [1.43.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.42.1...v1.43.0) (2024-08-27)
 
 
