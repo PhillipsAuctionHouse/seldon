@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import { AccordionVariantKey, AccordionVariants } from './types';
 
 export interface AccordionVariantProps {
@@ -31,3 +32,15 @@ export const getAccordionVariantProps = (variant?: AccordionVariantKey): Accordi
 
   return variantProps;
 };
+
+/**
+ * A helper for getting the classes of the Accordion icons
+ * @param className - The className of the component
+ * @param isLargeVariation - Determines whether the variation on text style is large or small.
+ * @param iconName - The name of the icon to be displayed
+ * @returns the classes that should be applied for the icon
+ */
+export const getIconClasses = (className: string, isLargeVariation: boolean, iconName: string) =>
+  classnames(`${className}__icon`, `${className}-${iconName}__icon`, {
+    [`${className}__icon--lg`]: isLargeVariation,
+  });

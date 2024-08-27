@@ -91,12 +91,20 @@ describe('Accordion', () => {
         ))}
       </Accordion>,
     );
-    expect(screen.queryByTestId(/accordion-item-0-plusIcon/)).toBeInTheDocument();
-    expect(screen.queryByTestId(/accordion-item-1-lockedIcon/)).toBeInTheDocument();
+
+    // Should have 2 closed items
+    expect(container.querySelectorAll(`.phillips-accordion-item[data-state="open"]`)).toHaveLength(0);
+    expect(container.querySelectorAll(`.phillips-accordion-item[data-state="closed"]`)).toHaveLength(2);
+
+    // After clicking first item, we should have 1 open and 1 closed item
     await userEvent.click(screen.getByTestId('accordion-item-0-trigger'));
-    await waitFor(() => {
-      expect(container.getElementsByClassName('phillips-accordion-item--expanded').length).toBe(1);
-    });
+    expect(container.querySelectorAll(`.phillips-accordion-item[data-state="open"]`)).toHaveLength(1);
+    expect(container.querySelectorAll(`.phillips-accordion-item[data-state="closed"]`)).toHaveLength(1);
+
+    // After clicking second item, we should have both items open and none closed
+    await userEvent.click(screen.getByTestId('accordion-item-1-trigger'));
+    expect(container.querySelectorAll(`.phillips-accordion-item[data-state="open"]`)).toHaveLength(2);
+    expect(container.querySelectorAll(`.phillips-accordion-item[data-state="closed"]`)).toHaveLength(0);
   });
 
   it('should get the correct variant props for the "singleCollapsible" variant', () => {

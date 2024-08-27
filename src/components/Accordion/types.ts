@@ -17,14 +17,6 @@ export interface AccordionHeaderType {
    */
   disable: boolean;
   /*
-   * When true, shows the locked icon.
-   */
-  isCollapsed: boolean;
-  /*
-   * When called it toggles the icon svg displayed.
-   */
-  setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
-  /*
    * When true, shows the large variation text style.
    */
   isLargeVariation: boolean;
@@ -60,10 +52,6 @@ export interface AccordionContentType {
    * When true, shows the large variation text style.
    */
   isLargeVariation: boolean;
-  /*
-   * When true, and not disabled, hide the children passed in.
-   */
-  isCollapsed: boolean;
 }
 
 export enum AccordionVariants {

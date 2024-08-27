@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { getCommonProps, noOp } from '../../utils';
+import React from 'react';
+import { getCommonProps } from '../../utils';
 import plusIcon from '../../assets/plus.svg';
 import minusIcon from '../../assets/minus.svg';
 import lockIcon from '../../assets/lock.svg';
 import classnames from 'classnames';
 import * as Accordion from '@radix-ui/react-accordion';
 import { AccordionHeaderType, AccordionContentType } from './types';
+import { getIconClasses } from './utils';
 
 export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -32,10 +33,6 @@ export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement>
    * When true applied the transition keyframe animation on item expand. Default as false.
    */
   hasTransition?: boolean;
-  /**
-   * When true, isCollapsed won't be toggled.
-   */
-  isControlled?: boolean;
 }
 /**
  * ## Overview
@@ -48,30 +45,52 @@ const AccordionHeader = ({
   className,
   baseClassName,
   disable,
-  isCollapsed,
-  setIsCollapsed,
   isLargeVariation,
   id,
 }: AccordionHeaderType) => {
-  const handleClick = () => !disable && setIsCollapsed((prevState) => !prevState);
-  const icon = disable ? lockIcon : isCollapsed ? plusIcon : minusIcon;
-  const dataTestId = `${id}-` + (disable ? 'lockedIcon' : isCollapsed ? 'plusIcon' : 'minusIcon');
+  const showLock = disable;
+
+  // Render all icons and use css to conditionally show/hide the correct one
+  const lockIconComponent = (
+    <img
+      className={getIconClasses(baseClassName, isLargeVariation, 'lock')}
+      src={lockIcon}
+      data-testid={`${id}-lockedIcon`}
+      aria-hidden
+    />
+  );
+
+  const plusIconComponent = (
+    <img
+      className={getIconClasses(baseClassName, isLargeVariation, 'plus')}
+      src={plusIcon}
+      data-testid={`${id}-plusIcon`}
+      aria-hidden
+    />
+  );
+
+  const minusIconComponent = (
+    <img
+      className={getIconClasses(baseClassName, isLargeVariation, 'minus')}
+      src={minusIcon}
+      data-testid={`${id}-minusIcon`}
+      aria-hidden
+    />
+  );
+
   return (
     <Accordion.Trigger
       data-disabled={disable}
       asChild
       className={classnames(baseClassName, { [`${baseClassName}--hoverable`]: !disable }, className)}
     >
-      <div onClick={handleClick} data-testid={`${id}-trigger`}>
+      <div data-testid={`${id}-trigger`}>
         <div className={classnames(`${baseClassName}__text`, { [`${baseClassName}__text--lg`]: isLargeVariation })}>
           {children}
         </div>
-        <img
-          className={classnames(`${baseClassName}__icon`, { [`${baseClassName}__icon--lg`]: isLargeVariation })}
-          src={icon}
-          data-testid={dataTestId}
-          aria-hidden
-        />
+        {showLock && lockIconComponent}
+        {!showLock && plusIconComponent}
+        {!showLock && minusIconComponent}
       </div>
     </Accordion.Trigger>
   );
@@ -83,7 +102,6 @@ const AccordionContent = ({
   disable,
   hasTransition,
   isLargeVariation,
-  isCollapsed,
   className,
 }: AccordionContentType) => (
   <>
@@ -95,7 +113,6 @@ const AccordionContent = ({
         className={classnames(
           { [`${baseClassName}__content--lg`]: isLargeVariation },
           { [`${baseClassName}--transition`]: hasTransition },
-          { [`${baseClassName}--expanded`]: !isCollapsed },
           className,
         )}
       >
@@ -112,10 +129,8 @@ const AccordionItem = ({
   isLastItem,
   hasTransition = false,
   children,
-  isControlled = true,
   ...props
 }: AccordionItemProps) => {
-  const [isCollapsed, setIsCollapsed] = useState(true);
   const { className: baseClassName } = getCommonProps(props, 'Accordion');
   const isLargeVariation = variation === 'lg';
   const accordionItemClassName = `${baseClassName}-item`;
@@ -129,8 +144,6 @@ const AccordionItem = ({
       <AccordionHeader
         disable={isLocked}
         isLargeVariation={isLargeVariation}
-        isCollapsed={isCollapsed}
-        setIsCollapsed={isControlled ? setIsCollapsed : noOp}
         id={props?.id}
         baseClassName={`${accordionItemClassName}-label`}
       >
@@ -141,7 +154,6 @@ const AccordionItem = ({
         disable={isLocked}
         hasTransition={hasTransition}
         isLargeVariation={isLargeVariation}
-        isCollapsed={isCollapsed}
         baseClassName={accordionItemClassName}
       >
         {children}
