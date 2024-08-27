@@ -29,7 +29,10 @@ const meta = {
 
 export default meta;
 
-export const Playground = ({ authState, ...props }: HeaderProps & { authState?: AuthState }) => (
+export const Playground = ({
+  // authState,
+  ...props
+}: HeaderProps & { authState?: AuthState }) => (
   <div>
     <Header {...props}>
       <Navigation id={`${px}-main-nav`} backBtnLabel="← Back">

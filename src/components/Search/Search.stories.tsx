@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import Search, { type SearchProps } from './Search';
 import { SearchResult } from './SearchResults/SearchResults';
-import { defaultHeaderContext, HeaderContext } from '../Header/Header';
+import { HeaderContext } from '../Header/Header';
+import { defaultHeaderContext } from '../Header/utils';
 
 const fetchData = async (searchQuery: string) => {
   console.log('searchQuery', searchQuery);

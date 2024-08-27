@@ -1,11 +1,10 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-search {
-  align-content: center;
+  place-content: center flex-end;
   display: flex;
   gap: $spacing-md;
   height: $header-height;
-  justify-content: flex-end;
   position: relative;
 
   &--active {

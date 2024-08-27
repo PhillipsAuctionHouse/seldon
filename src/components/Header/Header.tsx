@@ -1,8 +1,9 @@
 import classnames from 'classnames';
 import * as React from 'react';
-import { findChildrenOfType, noOp, px } from '../../utils';
+import { findChildrenOfType, px } from '../../utils';
 import Search from '../Search/Search';
 import Logo from '../../assets/PhillipsLogo.svg?react';
+import { defaultHeaderContext } from './utils';
 
 export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -42,15 +43,6 @@ export type HeaderContextType = {
   setIsSearchExpanded: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const defaultHeaderContext = {
-  defaultMobileMenuLabel: '',
-  expandedItem: '',
-  setExpandedItem: noOp,
-  isExpanded: false,
-  onSelect: noOp,
-  isSearchExpanded: false,
-  setIsSearchExpanded: noOp,
-};
 export const HeaderContext = React.createContext<HeaderContextType>(defaultHeaderContext);
 
 const Header = ({
