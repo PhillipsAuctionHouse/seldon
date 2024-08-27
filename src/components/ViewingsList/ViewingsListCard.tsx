@@ -181,8 +181,8 @@ const ViewingsListCard = ({
   React.useEffect(() => {
     if (invalidFields && firstInput.current) {
       firstInput.current
-        .closest('.phillips-viewings-list-card')
-        ?.querySelector<HTMLInputElement>('.phillips-input--invalid input')
+        .closest(`.${px}-viewings-list-card`)
+        ?.querySelector<HTMLInputElement>(`.${px}-input--invalid input`)
         ?.focus();
     }
   }, [invalidFields]);

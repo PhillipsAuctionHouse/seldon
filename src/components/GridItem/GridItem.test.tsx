@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import GridItem from './GridItem';
 import { GridItemAlign } from './types';
 import { runCommonTests } from '../../utils/testUtils';
+import { px } from '../../utils';
 
 describe('GridItem', () => {
   runCommonTests(GridItem, 'GridItem');
@@ -10,7 +11,7 @@ describe('GridItem', () => {
     render(<GridItem>Child</GridItem>);
     expect(screen.getByText('Child')).toBeInTheDocument();
     const GridItemElement = screen.getByTestId('grid-item');
-    expect(GridItemElement).toHaveClass('phillips-grid-item');
+    expect(GridItemElement).toHaveClass(`${px}-grid-item`);
   });
   it('validates column span values', () => {
     render(<GridItem xs={0} />);
@@ -24,20 +25,20 @@ describe('GridItem', () => {
     it('applies breakpoint column classes correctly', () => {
       render(<GridItem />);
       const GridItemElement = screen.getByTestId('grid-item');
-      expect(GridItemElement).toHaveClass('phillips-grid-item--span-xs-2');
-      expect(GridItemElement).toHaveClass('phillips-grid-item--span-sm-4');
-      expect(GridItemElement).toHaveClass('phillips-grid-item--span-md-12');
-      expect(GridItemElement).toHaveClass('phillips-grid-item--span-lg-12');
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-xs-2`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-sm-4`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-md-12`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-lg-12`);
     });
 
     it('applies custom col spans correctly', () => {
       render(<GridItem xs={3} sm={6} md={8} lg={10} />);
 
       const GridItemElement = screen.getByTestId('grid-item');
-      expect(GridItemElement).toHaveClass('phillips-grid-item--span-xs-3');
-      expect(GridItemElement).toHaveClass('phillips-grid-item--span-sm-6');
-      expect(GridItemElement).toHaveClass('phillips-grid-item--span-md-8');
-      expect(GridItemElement).toHaveClass('phillips-grid-item--span-lg-10');
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-xs-3`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-sm-6`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-md-8`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-lg-10`);
     });
   });
   describe('alignment classes', () => {
@@ -45,19 +46,19 @@ describe('GridItem', () => {
       render(<GridItem />);
 
       const GridItemElement = screen.getByTestId('grid-item');
-      expect(GridItemElement).toHaveClass('phillips-grid-item--span-xs-2-align-center');
-      expect(GridItemElement).toHaveClass('phillips-grid-item--span-sm-4-align-center');
-      expect(GridItemElement).toHaveClass('phillips-grid-item--span-md-12-align-center');
-      expect(GridItemElement).toHaveClass('phillips-grid-item--span-lg-12-align-center');
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-xs-2-align-center`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-sm-4-align-center`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-md-12-align-center`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-lg-12-align-center`);
     });
     it('default position classes', () => {
       render(<GridItem align={GridItemAlign.left} />);
 
       const GridItemElement = screen.getByTestId('grid-item');
-      expect(GridItemElement).toHaveClass('phillips-grid-item--span-xs-2-align-left');
-      expect(GridItemElement).toHaveClass('phillips-grid-item--span-sm-4-align-left');
-      expect(GridItemElement).toHaveClass('phillips-grid-item--span-md-12-align-left');
-      expect(GridItemElement).toHaveClass('phillips-grid-item--span-lg-12-align-left');
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-xs-2-align-left`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-sm-4-align-left`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-md-12-align-left`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-lg-12-align-left`);
     });
   });
 });

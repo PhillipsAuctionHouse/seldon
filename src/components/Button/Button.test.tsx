@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { px } from '../../utils';
 
 import Button from './Button';
 import { runCommonTests } from '../../utils/testUtils';
@@ -13,10 +14,10 @@ describe('Button', () => {
   it('renders with default class names', () => {
     render(<Button>Submit</Button>);
     const buttonElement = screen.getByText('Submit');
-    expect(buttonElement).toHaveClass('phillips-button');
-    expect(buttonElement).toHaveClass('phillips-button--md');
-    expect(buttonElement).toHaveClass('phillips-button--primary');
-    expect(buttonElement).not.toHaveClass('phillips-button--icon-last');
+    expect(buttonElement).toHaveClass(`${px}-button`);
+    expect(buttonElement).toHaveClass(`${px}-button--md`);
+    expect(buttonElement).toHaveClass(`${px}-button--primary`);
+    expect(buttonElement).not.toHaveClass(`${px}-button--icon-last`);
   });
 
   it('renders with type and size classnames', () => {
@@ -26,9 +27,9 @@ describe('Button', () => {
       </Button>,
     );
     const buttonElement = screen.getByText('Cancel');
-    expect(buttonElement).toHaveClass('phillips-button');
-    expect(buttonElement).toHaveClass('phillips-button--lg');
-    expect(buttonElement).toHaveClass('phillips-button--secondary');
-    expect(buttonElement).toHaveClass('phillips-button--icon-last');
+    expect(buttonElement).toHaveClass(`${px}-button`);
+    expect(buttonElement).toHaveClass(`${px}-button--lg`);
+    expect(buttonElement).toHaveClass(`${px}-button--secondary`);
+    expect(buttonElement).toHaveClass(`${px}-button--icon-last`);
   });
 });
