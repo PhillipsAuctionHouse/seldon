@@ -20,8 +20,8 @@ const languages = [
 ];
 
 export const Playground = (props: DropdownProps) => {
-  const [value, setValue] = useState('en');
-  return <Dropdown {...props} options={languages} value={value} onValueChange={setValue} id="test" />;
+  const [value, setValue] = useState(props.value);
+  return <Dropdown {...props} options={props.options} value={value} onValueChange={setValue} id="test" />;
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
