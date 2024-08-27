@@ -1,3 +1,10 @@
+## [1.44.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.44.0...v1.44.1) (2024-08-27)
+
+
+### Bug Fixes
+
+* **scss:** L3-3439 use prefix for accordion classes ([#288](https://github.com/PhillipsAuctionHouse/seldon/issues/288)) ([23724f1](https://github.com/PhillipsAuctionHouse/seldon/commit/23724f1f22b1384af66bb91e9394f6e269dfb665))
+
 # [1.44.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.43.0...v1.44.0) (2024-08-27)
 
 
