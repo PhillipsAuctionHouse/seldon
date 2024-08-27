@@ -55,4 +55,5 @@ export { default as UserManagement, type UserManagementProps } from './component
 export { AuthState } from './components/UserManagement/types';
 export * from './types/commonTypes';
 export { Breadcrumb, type BreadcrumbProps } from './components/Breadcrumb';
+export * from './components/Dropdown';
 export { default as Video, type VideoProps } from './components/Video/Video';
