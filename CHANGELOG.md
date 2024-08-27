@@ -1,3 +1,10 @@
+# [1.43.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.42.1...v1.43.0) (2024-08-27)
+
+
+### Features
+
+* **prefix:** L3-3379 - change prefix and update any hard coded references ([#281](https://github.com/PhillipsAuctionHouse/seldon/issues/281)) ([617418e](https://github.com/PhillipsAuctionHouse/seldon/commit/617418e9d76372dae5179f600548de97d02ff9cf))
+
 ## [1.42.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.42.0...v1.42.1) (2024-08-27)
 
 
