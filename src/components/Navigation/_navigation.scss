@@ -1,8 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-nav {
-  background: $off-white;
-  color: $soft-black;
+  background: $pure-white;
   height: 100%;
   overflow: hidden;
   padding-top: 4.5rem;
@@ -10,7 +9,6 @@
   width: 100%;
 
   @include isHeaderDesktop {
-    background: $pure-white;
     display: flex;
     flex-wrap: wrap;
     overflow: visible;

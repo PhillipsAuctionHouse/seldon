@@ -72,21 +72,17 @@ $text-family: $DistinctText;
 // @include labelText($label)
 $button: 'button';
 $link: 'link';
-$badge: 'badge';
-$cta-sm: 'cta-sm';
-$cta-lg: 'cta-lg';
 $email: 'email';
 $label: 'label';
-$display0: 'display0';
-$display1: 'display1';
-$display2: 'display2';
-$display3: 'display3';
-$display4: 'display4';
+$badge: 'badge';
+
+// Used with the hText mixin
 $blockquote: 'blockquote';
 $heading1: 'heading1';
 $heading2: 'heading2';
 $heading3: 'heading3';
 $heading4: 'heading4';
+$heading5: 'heading5';
 $title1: 'title1';
 $title2: 'title2';
 $title3: 'title3';
@@ -99,26 +95,28 @@ $string2: 'string2';
 $string3: 'string3';
 $snwHeaderLink: 'snwHeaderLink';
 $snwFlyoutLink: 'snwFlyoutLink';
-$text-tokens: $button, $cta-sm, $cta-lg, $email, $label, $badge, $display0, $display1, $display2, $display3, $display4,
-  $blockquote, $heading1, $heading2, $heading3, $heading4, $title1, $title2, $title3, $title4, $body1, $body2, $body3,
-  $string1, $string2, $string3;
+$text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $heading2, $heading3, $heading4, $heading5,
+  $title1, $title2, $title3, $title4, $body1, $body2, $body3, $string1, $string2, $string3, $snwFlyoutLink,
+  $snwHeaderLink;
 
 ////////////////////////
 /// FONT SIZE TOKENS:
 ///////////////////////
 
 :root {
-  --heading-size0: 3.25rem;
+  --desktop-max-width: 120rem;
   --quote-size: 1.75rem;
   --quote-line-height: 2.25rem;
   --heading-size1: 1.75rem;
   --heading-line-height-size1: 2rem;
-  --heading-size2: 1.5rem;
-  --heading-line-height-size2: 1.75rem;
-  --heading-size3: 1.25rem;
-  --heading-line-height-size3: 1.5rem;
-  --heading-size4: 1rem;
-  --heading-line-height-size4: 1.25rem;
+  --heading-size2: 1.75rem;
+  --heading-line-height-size2: 2rem;
+  --heading-size3: 1.5rem;
+  --heading-line-height-size3: 1.75rem;
+  --heading-size4: 1.25rem;
+  --heading-line-height-size4: 1.5rem;
+  --heading-size5: 1rem;
+  --heading-line-height-size5: 1.25rem;
   --string-size1: 1.25rem;
   --string-line-height-size1: 1.5rem;
   --string-size2: 1rem;
@@ -134,28 +132,30 @@ $text-tokens: $button, $cta-sm, $cta-lg, $email, $label, $badge, $display0, $dis
   --label-size1: 1.25rem;
   --label-size2: 1rem;
   --label-size3: 0.75rem;
-  --link-button-label-size: 1rem;
+  --link-label-size: 1rem;
   --link-label-line-height: 1rem;
+  --button-label-size: 1rem;
   --button-label-line-height: 1.25rem;
   --badge-label-size: 0.75rem;
   --badge-label-line-height: 1rem;
-  --snw-header-link-size: 0.875rem;
+  --snw-header-link-size: 1rem;
   --snw-header-link-line-height: 1.5rem;
-  --snw-flyout-link-size: 0.875rem;
+  --snw-flyout-link-size: 1rem;
   --snw-flyout-link-line-height: 1.75rem;
 
   @media (max-width: 960px) {
-    --heading-size0: 2.59rem;
     --quote-size: 1.5rem;
     --quote-line-height: 2rem;
     --heading-size1: 1.5rem;
     --heading-line-height-size1: 1.75rem;
-    --heading-size2: 1.25rem;
-    --heading-line-height-size2: 1.5rem;
-    --heading-size3: 1rem;
-    --heading-line-height-size3: 1.25rem;
-    --heading-size4: 0.75rem;
-    --heading-line-height-size4: 1rem;
+    --heading-size2: 1.5rem;
+    --heading-line-height-size2: 1.75rem;
+    --heading-size3: 1.25rem;
+    --heading-line-height-size3: 1.5rem;
+    --heading-size4: 1rem;
+    --heading-line-height-size4: 1.25rem;
+    --heading-size5: 0.75rem;
+    --heading-line-height-size5: 1rem;
     --string-size1: 1rem;
     --string-line-height-size1: 1.25rem;
     --string-size2: 0.75rem;
@@ -171,8 +171,9 @@ $text-tokens: $button, $cta-sm, $cta-lg, $email, $label, $badge, $display0, $dis
     --label-size1: 1rem;
     --label-size2: 0.75rem;
     --label-size3: 0.56rem;
-    --link-button-label-size: 0.75rem;
+    --link-label-size: 0.75rem;
     --link-label-line-height: 0.75rem;
+    --button-label-size: 0.75rem;
     --button-label-line-height: 1rem;
     --badge-label-size: 0.5rem;
     --badge-label-line-height: 0.67rem;
@@ -183,17 +184,18 @@ $text-tokens: $button, $cta-sm, $cta-lg, $email, $label, $badge, $display0, $dis
   }
 
   @media (min-width: 1801px) {
-    --heading-size0: 4.06rem;
     --quote-size: 2rem;
     --quote-line-height: 2.5rem;
     --heading-size1: 2rem;
     --heading-line-height-size1: 2.25rem;
-    --heading-size2: 1.75rem;
-    --heading-line-height-size2: 2rem;
-    --heading-size3: 1.5rem;
-    --heading-line-height-size3: 1.75rem;
-    --heading-size4: 1.25rem;
-    --heading-line-height-size4: 1.5rem;
+    --heading-size2: 2rem;
+    --heading-line-height-size2: 2.25rem;
+    --heading-size3: 1.75rem;
+    --heading-line-height-size3: 2rem;
+    --heading-size4: 1.5rem;
+    --heading-line-height-size4: 1.75rem;
+    --heading-size5: 1.25rem;
+    --heading-line-height-size5: 1.5rem;
     --string-size1: 1.5rem;
     --string-line-height-size1: 1.75rem;
     --string-size2: 1.25rem;
@@ -209,8 +211,9 @@ $text-tokens: $button, $cta-sm, $cta-lg, $email, $label, $badge, $display0, $dis
     --label-size1: 1.56rem;
     --label-size2: 1.25rem;
     --label-size3: 1rem;
-    --link-button-label-size: 1.25rem;
+    --link-label-size: 1.25rem;
     --link-label-line-height: 1.25rem;
+    --button-label-size: 1.25rem;
     --button-label-line-height: 1.5rem;
     --badge-label-size: 1rem;
     --badge-label-line-height: 1.5rem;
@@ -221,12 +224,11 @@ $text-tokens: $button, $cta-sm, $cta-lg, $email, $label, $badge, $display0, $dis
   }
 }
 
-// DISPLAY
-$display-size0: var(--heading-size0);
-$display-size1: var(--heading-size1);
-$display-size2: var(--heading-size2);
-$display-size3: var(--heading-size3);
-$display-size4: var(--heading-size4);
+// TITLE
+$title-size1: var(--heading-size1);
+$title-size2: var(--heading-size2);
+$title-size3: var(--heading-size3);
+$title-size4: var(--heading-size4);
 
 // HEADING
 $heading-size1: var(--heading-size1);
@@ -237,6 +239,8 @@ $heading-size3: var(--heading-size3);
 $heading-line-height-size3: var(--heading-line-height-size3);
 $heading-size4: var(--heading-size4);
 $heading-line-height-size4: var(--heading-line-height-size4);
+$heading-size5: var(--heading-size5);
+$heading-line-height-size5: var(--heading-line-height-size5);
 
 // BODY
 $body-size1: var(--body-size1);
@@ -255,13 +259,11 @@ $string-size3: var(--string-size3);
 $string-line-height-size3: var(--string-line-height-size3);
 
 // LABELS
-$button-label-size: var(--label-size2);
-$cta-sm-label-size: var(--label-size2);
 $email-label-size: var(--label-size2);
-$cta-lg-label-size: var(--label-size1);
 $text-label-size: var(--label-size3);
 $badge-label-size: var(--label-size3);
-$link-button-label-size: var(--link-button-label-size);
+$link-label-size: var(--link-label-size);
+$button-label-size: var(--button-label-size);
 $link-label-line-height: var(--link-label-line-height);
 $button-label-line-height: var(--button-label-line-height);
 $badge-label-size: var(--badge-label-size);
@@ -282,6 +284,7 @@ $snw-flyout-link-line-height: var(--snw-flyout-link-line-height);
   --spacing-md: 2rem;
   --spacing-lg: 3rem;
   --spacing-xl: 4rem;
+  --spacing-xxl: 5rem;
 
   @media (max-width: 960px) {
     --spacing-micro: 0.25;
@@ -290,6 +293,7 @@ $snw-flyout-link-line-height: var(--snw-flyout-link-line-height);
     --spacing-md: 1.75rem;
     --spacing-lg: 2.75rem;
     --spacing-xl: 3.75rem;
+    --spacing-xxl: 4.75rem;
   }
 
   @media (min-width: 1801px) {
@@ -299,6 +303,7 @@ $snw-flyout-link-line-height: var(--snw-flyout-link-line-height);
     --spacing-md: 2.5rem;
     --spacing-lg: 3.75rem;
     --spacing-xl: 5rem;
+    --spacing-xxl: 5.25rem;
   }
 }
 
@@ -308,6 +313,7 @@ $spacing-sm: var(--spacing-sm);
 $spacing-md: var(--spacing-md);
 $spacing-lg: var(--spacing-lg);
 $spacing-xl: var(--spacing-xl);
+$spacing-xxl: var(--spacing-xl);
 
 // PADDING
 $padding-micro: var(--spacing-micro);
@@ -316,7 +322,8 @@ $padding-sm: var(--spacing-sm);
 $padding-md: var(--spacing-md);
 $padding-lg: var(--spacing-lg);
 $padding-xl: var(--spacing-xl);
-$padding-tokens: $padding-micro, $padding-xsm, $padding-sm, $padding-md, $padding-lg, $padding-xl;
+$padding-xxl: var(--spacing-xxl);
+$padding-tokens: $padding-micro, $padding-xsm, $padding-sm, $padding-md, $padding-lg, $padding-xl, $padding-xxl;
 
 // MARGIN
 $margin-micro: var(--spacing-micro);
@@ -325,6 +332,7 @@ $margin-sm: var(--spacing-sm);
 $margin-md: var(--spacing-md);
 $margin-lg: var(--spacing-lg);
 $margin-xl: var(--spacing-xl);
+$margin-xxl: var(--spacing-xxl);
 
 ////////////////////////
 /// Breakpoint TOKENS that map to minimum pixels
@@ -342,8 +350,10 @@ $max-site-width: 1560px;
 ////////////////////////
 /// height Tokens
 ///////////////////////
-$header-height: 60px;
+$header-height: 42px;
 $user-management-height: 30px;
+$header-submenu-top: calc($header-height + $user-management-height + 1px);
+$desktop-max-width: var(--desktop-max-width);
 
 ////////////////////////
 /// Our tokens usually support at least 4 sizes.
@@ -352,4 +362,5 @@ $size-sm: 'sm';
 $size-md: 'md';
 $size-lg: 'lg';
 $size-xl: 'xl';
+$size-xxl: 'xxl';
 $default-transition: 150ms cubic-bezier(0.16, 1, 0.3, 1);

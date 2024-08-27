@@ -48,26 +48,6 @@
       color: $clock-widget-blue;
     }
 
-    &--d0 {
-      @include text($display0);
-    }
-
-    &--d1 {
-      @include text($display1);
-    }
-
-    &--d2 {
-      @include text($display2);
-    }
-
-    &--d3 {
-      @include text($display3);
-    }
-
-    &--d4 {
-      @include text($display4);
-    }
-
     &--h1 {
       @include text($heading1);
     }
@@ -134,14 +114,6 @@
 
     &--link {
       @include text($link);
-    }
-
-    &--cta-sm {
-      @include text($cta-sm);
-    }
-
-    &--cta-lg {
-      @include text($cta-lg);
     }
 
     &--email {

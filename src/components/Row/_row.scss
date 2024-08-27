@@ -4,4 +4,8 @@
   // horizontal padding is fixed
   padding-left: $spacing-lg;
   padding-right: $spacing-lg;
+
+  * .#{$px}-text:last-child {
+    margin-bottom: 0;
+  }
 }

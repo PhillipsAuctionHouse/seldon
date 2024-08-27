@@ -1,6 +1,6 @@
 {
   "name": "@phillips/seldon",
-  "version": "1.39.0",
+  "version": "1.42.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/PhillipsAuctionHouse/seldon"
@@ -34,8 +34,9 @@
     "clean:stories": "rimraf './storybook-static'",
     "create-component": "node --no-warnings --loader ts-node/esm .template/scripts/createComponent.ts",
     "format": "prettier . --write",
-    "lint": "tsc --noEmit && eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 && npm run lint:styles",
+    "lint": "tsc --noEmit && eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 && npm run lint:styles && npm run lint:md",
     "lint:styles": "stylelint \"src/**/*.scss\" --fix",
+    "lint:md": "markdownlint \"src/**/*.{md,mdx}\" --fix",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -85,6 +86,7 @@
     "eslint-plugin-react-refresh": "^0.4.9",
     "eslint-plugin-storybook": "^0.8.0",
     "husky": "^9.1.4",
+    "markdownlint-cli": "^0.41.0",
     "prettier": "3.3.3",
     "react": "^18.3.1",
     "react-docgen-typescript": "^2.2.2",

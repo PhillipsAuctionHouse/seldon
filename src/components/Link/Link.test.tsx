@@ -1,7 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import Link from './Link';
-import { LinkVariants } from './types';
-import { getLinkVariantClassName } from './utils';
 import { runCommonTests } from '../../utils/testUtils';
 
 const getLinkElement = (text: string) => screen.getByRole('link', { name: text });
@@ -51,46 +49,6 @@ describe('Link', () => {
       );
       const linkElement = getLinkElement('Example Link');
       expect(linkElement).toHaveClass('custom-link');
-    });
-
-    it('applies the correct className for standalone variant', () => {
-      render(
-        <Link href="https://example.com" variant={LinkVariants.standalone}>
-          Example Link
-        </Link>,
-      );
-      const linkElement = getLinkElement('Example Link');
-      expect(linkElement).toHaveClass(getLinkVariantClassName(LinkVariants.standalone));
-    });
-
-    it('applies the correct className for email variant', () => {
-      render(
-        <Link href="mailto:example@example.com" variant={LinkVariants.email}>
-          Example Link
-        </Link>,
-      );
-      const linkElement = getLinkElement('Example Link');
-      expect(linkElement).toHaveClass(getLinkVariantClassName(LinkVariants.email));
-    });
-
-    it('applies the correct className for list variant', () => {
-      render(
-        <Link href="https://example.com" variant={LinkVariants.list}>
-          Example Link
-        </Link>,
-      );
-      const linkElement = getLinkElement('Example Link');
-      expect(linkElement).toHaveClass(getLinkVariantClassName(LinkVariants.list));
-    });
-
-    it('applies the correct className for inline variant', () => {
-      render(
-        <Link href="https://example.com" variant={LinkVariants.inline}>
-          Example Link
-        </Link>,
-      );
-      const linkElement = getLinkElement('Example Link');
-      expect(linkElement).toHaveClass(getLinkVariantClassName(LinkVariants.inline));
     });
   });
 });

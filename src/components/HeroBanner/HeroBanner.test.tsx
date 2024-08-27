@@ -22,7 +22,7 @@ describe('HeroBanner', () => {
 
   it('Renders subHeadText as part of the header', () => {
     render(<HeroBanner headerText="This is my text" subHeadText="Subtext text" />);
-    expect(screen.getByText(/This is my text/).innerHTML.includes('Subtext text')).toBeTruthy();
+    expect(screen.getByText('Subtext text')).toBeInTheDocument();
   });
 
   it('Renders prehead and/or date when passed in', () => {

@@ -12,7 +12,7 @@ describe('HTMLParser', () => {
       '<h1>Hello, <strong>World!</strong></h1><h2>Heading 2</h2><h3>Heading 3</h3><h4>Heading 4</h4><blockquote>Blockquote</blockquote>';
     render(<HTMLParser html={html} />);
     const h1Element = screen.getByRole('heading', { level: 1 });
-    expect(h1Element).toHaveClass(`${px}-text--display1`);
+    expect(h1Element).toHaveClass(`${px}-text--heading1`);
     const h2Element = screen.getByRole('heading', { level: 2 });
     expect(h2Element).toHaveClass(`${px}-text--heading2`);
     const h3Element = screen.getByRole('heading', { level: 3 });
@@ -38,7 +38,7 @@ describe('HTMLParser', () => {
       '<h1>Hello, <strong>World!</strong></h1><h2>Heading 2</h2><h3>Heading 3</h3><h4>Heading 4</h4><blockquote>Blockquote</blockquote> <script>alert("Hello, World!")</script>';
     render(<HTMLParser html={html} isOnlySanitize={true} />);
     const h1Element = screen.getByRole('heading', { level: 1 });
-    expect(h1Element).not.toHaveClass(`${px}-text--display1`);
+    expect(h1Element).not.toHaveClass(`${px}-text--title1`);
     const h2Element = screen.getByRole('heading', { level: 2 });
     expect(h2Element).not.toHaveClass(`${px}-text--heading2`);
     const h3Element = screen.getByRole('heading', { level: 3 });
