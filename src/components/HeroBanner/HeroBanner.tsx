@@ -1,6 +1,7 @@
 import { HTMLAttributes } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
+import { Text, TextVariants } from '../Text';
 
 export interface HeroBannerProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -69,10 +70,8 @@ const HeroBanner = ({
             {date ? <span>{date}</span> : null}
           </p>
         ) : null}
-        <h1 className={`${baseClass}__heading`}>
-          {headerText}
-          {subHeadText ? <span>{subHeadText}</span> : null}
-        </h1>
+        <Text variant={TextVariants.heading1}>{headerText}</Text>
+        {subHeadText ? <Text variant={TextVariants.heading2}>{subHeadText}</Text> : null}
         {association ? <p>{association}</p> : null}
       </span>
     </header>

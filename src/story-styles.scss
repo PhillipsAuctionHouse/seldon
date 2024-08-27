@@ -64,7 +64,7 @@ details {
   summary {
     color: $keyline-gray;
 
-    @include labelText($cta-sm);
+    @include labelText($label);
   }
 }
 

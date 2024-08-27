@@ -4,7 +4,7 @@ import Navigation from '../Navigation/Navigation';
 import NavigationList from '../Navigation/NavigationList/NavigationList';
 import NavigationItemTrigger from '../Navigation/NavigationItemTrigger/NavigationItemTrigger';
 import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
-import { LinkVariants } from '../Link/utils';
+import { LinkVariants } from '../Link/types';
 import { px } from '../../utils';
 import UserManagement from '../UserManagement/UserManagement';
 import Search from '../Search/Search';
@@ -40,91 +40,96 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
                 badge="New York"
                 href="#"
                 navGroup="nav-link-lg"
-                navType={LinkVariants.navLinkLg}
+                navType={LinkVariants.snwFlyoutLink}
                 label="Editions & Works on Paper"
               />
               <NavigationItem
                 badge="London"
                 href="#"
                 navGroup="nav-link-lg"
-                navType={LinkVariants.navLinkLg}
+                navType={LinkVariants.snwFlyoutLink}
                 label="Casa Fornaroli"
               />
               <NavigationItem
                 badge="Geneva"
                 href="#"
                 navGroup="nav-link-lg"
-                navType={LinkVariants.navLinkLg}
+                navType={LinkVariants.snwFlyoutLink}
                 label="The Geneva Watch Auction: XVII"
               />
               <NavigationItem
                 badge="New York"
                 href="#"
                 navGroup="nav-link-lg"
-                navType={LinkVariants.navLinkLg}
+                navType={LinkVariants.snwFlyoutLink}
                 label="Modern & Contemporary Art Day Sale—Morning Session"
               />
               <NavigationItem
                 badge="New York"
                 href="#"
                 navGroup="nav-link-lg"
-                navType={LinkVariants.navLinkLg}
+                navType={LinkVariants.snwFlyoutLink}
                 label="Modern & Contemporary Art Day Sale—Afternoon Session"
               />
               <NavigationItem
                 badge="New York"
                 href="#"
                 navGroup="nav-link-lg"
-                navType={LinkVariants.navLinkLg}
+                navType={LinkVariants.snwFlyoutLink}
                 label="Modern & Contemporary Art Evening Sale"
               />
               <NavigationItem
                 badge="London"
                 href="#"
                 navGroup="nav-link-lg"
-                navType={LinkVariants.navLinkLg}
+                navType={LinkVariants.snwFlyoutLink}
                 label="Wired: Online Auction"
               />
               <NavigationItem
                 badge="Hong Kong "
                 href="#"
                 navGroup="nav-link-lg"
-                navType={LinkVariants.navLinkLg}
+                navType={LinkVariants.snwFlyoutLink}
                 label="The Imperial Patek Philippe Sale"
               />
               <NavigationItem
                 badge="Hong Kong"
                 href="#"
                 navGroup="nav-link-lg"
-                navType={LinkVariants.navLinkLg}
+                navType={LinkVariants.snwFlyoutLink}
                 label="Disruptors: Evening Sale of Modern & Contemporary Art, Design and Watches"
               />
               <NavigationItem
                 href="#"
                 navGroup="nav-link-lg"
-                navType={LinkVariants.navLinkSm}
+                navType={LinkVariants.snwFlyoutLink}
                 label="Browse Full Auction Calendar"
               />
               <NavigationItem
                 href="#"
                 navGroup="nav-link-sm"
-                navType={LinkVariants.navLinkSm}
+                navType={LinkVariants.snwFlyoutLink}
                 label="Auction Calendar"
               />
               <NavigationItem
                 href="#"
                 navGroup="nav-link-sm"
-                navType={LinkVariants.navLinkSm}
+                navType={LinkVariants.snwFlyoutLink}
                 label="Auction Results"
               />
               <NavigationItem
                 href="#"
                 navGroup="nav-link-sm"
-                navType={LinkVariants.navLinkSm}
+                navType={LinkVariants.snwFlyoutLink}
                 label="Artists & Makers"
               />
-              <NavigationItem href="#" navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} label="How To Buy" />
-              <NavigationItem href="#" navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} label="Remote Bidding" />
+              <NavigationItem href="#" navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} label="How To Buy" />
+              <NavigationItem
+                href="#"
+                navGroup="nav-link-sm"
+                navType={LinkVariants.snwFlyoutLink}
+                label="Remote Bidding"
+              />
             </NavigationList>
           </NavigationItemTrigger>
           <NavigationItem href="#" label="Calendar" />
@@ -133,15 +138,25 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
               <NavigationItem
                 href="#"
                 navGroup="nav-link-sm"
-                navType={LinkVariants.navLinkSm}
+                navType={LinkVariants.snwFlyoutLink}
                 label="Modern & Contemporary Art"
               />
-              <NavigationItem href="#" navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} label="Design" />
-              <NavigationItem href="#" navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} label="Editions" />
-              <NavigationItem href="#" navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} label="Jewels" />
-              <NavigationItem href="#" navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} label="Photographs" />
-              <NavigationItem href="#" navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} label="Watches" />
-              <NavigationItem href="#" navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} label="Private Sales" />
+              <NavigationItem href="#" navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} label="Design" />
+              <NavigationItem href="#" navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} label="Editions" />
+              <NavigationItem href="#" navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} label="Jewels" />
+              <NavigationItem
+                href="#"
+                navGroup="nav-link-sm"
+                navType={LinkVariants.snwFlyoutLink}
+                label="Photographs"
+              />
+              <NavigationItem href="#" navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} label="Watches" />
+              <NavigationItem
+                href="#"
+                navGroup="nav-link-sm"
+                navType={LinkVariants.snwFlyoutLink}
+                label="Private Sales"
+              />
             </NavigationList>
           </NavigationItemTrigger>
           <NavigationItemTrigger id="exhibitions" label="Exhibitions">
@@ -150,33 +165,33 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
                 badge="New York"
                 href="#"
                 navGroup="nav-link-lg"
-                navType={LinkVariants.navLinkLg}
+                navType={LinkVariants.snwFlyoutLink}
                 label="Written in the Sky: Works by Ed Ruscha"
               />
               <NavigationItem
                 badge="Paris"
                 href="#"
                 navGroup="nav-link-lg"
-                navType={LinkVariants.navLinkLg}
+                navType={LinkVariants.snwFlyoutLink}
                 label="Modeler le papier // Shapes On Paper"
               />
               <NavigationItem
                 badge="New York"
                 href="#"
                 navGroup="nav-link-lg"
-                navType={LinkVariants.navLinkLg}
+                navType={LinkVariants.snwFlyoutLink}
                 label="ALT POP: An Alternative History to American Pop Art"
               />
               <NavigationItem
                 badge="New York"
                 href="#"
                 navGroup="nav-link-lg"
-                navType={LinkVariants.navLinkLg}
+                navType={LinkVariants.snwFlyoutLink}
                 label="New Terrains: Contemporary Native American Art"
               />
               <NavigationItem
                 navGroup="nav-link-sm"
-                navType={LinkVariants.navLinkSm}
+                navType={LinkVariants.snwFlyoutLink}
                 href="#"
                 label="Past Exhibitions"
               />
@@ -186,38 +201,58 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
           <NavigationItem href="#" label="Dropshop" />
           <NavigationItemTrigger id="buy-sell" label="Buy & Sell">
             <NavigationList id={`${px}-buy-sell-nav-list`}>
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} href="#" label="How To Buy" />
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} href="#" label="How To Sell" />
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} href="#" label="Remote Bidding" />
+              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} href="#" label="How To Buy" />
               <NavigationItem
                 navGroup="nav-link-sm"
-                navType={LinkVariants.navLinkSm}
+                navType={LinkVariants.snwFlyoutLink}
+                href="#"
+                label="How To Sell"
+              />
+              <NavigationItem
+                navGroup="nav-link-sm"
+                navType={LinkVariants.snwFlyoutLink}
+                href="#"
+                label="Remote Bidding"
+              />
+              <NavigationItem
+                navGroup="nav-link-sm"
+                navType={LinkVariants.snwFlyoutLink}
                 href="#"
                 label="Private Services"
               />
               <NavigationItem
                 navGroup="nav-link-sm"
-                navType={LinkVariants.navLinkSm}
+                navType={LinkVariants.snwFlyoutLink}
                 href="#"
                 label="Trusts, Estates & Valuations"
               />
               <NavigationItem
                 navGroup="nav-link-sm"
-                navType={LinkVariants.navLinkSm}
+                navType={LinkVariants.snwFlyoutLink}
                 href="#"
                 label="Fiduciary Services"
               />
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} href="#" label="Buy Catalogues" />
+              <NavigationItem
+                navGroup="nav-link-sm"
+                navType={LinkVariants.snwFlyoutLink}
+                href="#"
+                label="Buy Catalogues"
+              />
             </NavigationList>
           </NavigationItemTrigger>
           <NavigationItem href="#" label="Editorial" />
           <NavigationItemTrigger id="about-us" label="About Us">
             <NavigationList id={`${px}-about-us-nav-list`}>
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} href="#" label="Our History" />
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} href="#" label="Our Team" />
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} href="#" label="Locations" />
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} href="#" label="Press" />
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.navLinkSm} href="#" label="Careers" />
+              <NavigationItem
+                navGroup="nav-link-sm"
+                navType={LinkVariants.snwFlyoutLink}
+                href="#"
+                label="Our History"
+              />
+              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} href="#" label="Our Team" />
+              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} href="#" label="Locations" />
+              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} href="#" label="Press" />
+              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} href="#" label="Careers" />
             </NavigationList>
           </NavigationItemTrigger>
           <UserManagement

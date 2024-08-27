@@ -21,6 +21,7 @@ export enum PaddingTokens {
   md = 'md',
   lg = 'lg',
   xl = 'xl',
+  xxl = 'xxl',
 }
 
 /* eslint-disable @typescript-eslint/no-empty-function */

@@ -13,7 +13,7 @@ describe('NavigationItem', () => {
     render(<NavigationItem href="/" label="Home" badge="New" />);
 
     const navigationItem = screen.getByText('Home');
-    const badge = screen.getByText('New');
+    const badge = screen.getByText('• New');
     expect(navigationItem).toBeInTheDocument();
     expect(badge).toBeInTheDocument();
   });
