@@ -43,7 +43,7 @@ const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
     return (
       <div className={classnames(baseClassName, className)} id={id} {...commonProps} {...props}>
         <DropdownSelect.Root
-          defaultValue={value}
+          value={value}
           onValueChange={(value) => {
             onValueChange(value);
           }}

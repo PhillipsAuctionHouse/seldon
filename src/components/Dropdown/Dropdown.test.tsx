@@ -50,6 +50,25 @@ describe('Dropdown', () => {
     expect(within(trigger).getByText('English')).toBeInTheDocument();
   });
 
+  it('should render the initial value in the trigger', () => {
+    render(
+      <Dropdown
+        options={languages}
+        value={SupportedLanguages.zh}
+        label="Select a language"
+        id="test"
+        onValueChange={vitest.fn()}
+      />,
+    );
+
+    const trigger = screen.getByRole('combobox', {
+      name: 'Select a language',
+    });
+
+    expect(trigger).toBeInTheDocument();
+    expect(within(trigger).getByText('中文')).toBeInTheDocument();
+  });
+
   it('should render the dropdown list after cliking the trigger', async () => {
     render(
       <Dropdown

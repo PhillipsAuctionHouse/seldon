@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 import Dropdown, { DropdownProps } from './Dropdown';
-import { useState } from 'react';
+import { useMemo } from 'react';
 import { SupportedLanguages } from '../../types/commonTypes';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
@@ -19,13 +19,30 @@ const languages = [
   { label: 'Deutsch', value: 'de' },
 ];
 
-export const Playground = (props: DropdownProps) => {
-  const [value, setValue] = useState(props.value);
-  return <Dropdown {...props} options={props.options} value={value} onValueChange={setValue} id="test" />;
+export const Playground = ({ value, ...props }: DropdownProps) => {
+  const newValue = useMemo(() => value, [value]);
+  return (
+    <Dropdown
+      {...props}
+      options={props.options}
+      value={newValue}
+      onValueChange={(value) => console.log('value changed', value)}
+      id="test"
+    />
+  );
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
   options: languages,
   value: 'en',
+};
+
+Playground.argTypes = {
+  value: {
+    options: languages.map((lang) => lang.value),
+    control: {
+      type: 'select',
+    },
+  },
 };
