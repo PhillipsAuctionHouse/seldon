@@ -47,14 +47,17 @@ const StatefulSearch = (props: SearchProps) => {
   };
   return (
     <HeaderContext.Provider value={{ ...defaultHeaderContext, isSearchExpanded, setIsSearchExpanded }}>
-      <Search
-        {...props}
-        onSearch={(value) => {
-          onSearch(value);
-        }}
-        searchResults={autoCompleteResults}
-        state={state}
-      />
+      {/* This emulates the header width so the search Results and input work correctly*/}
+      <div style={{ minWidth: '100%', display: 'flex', justifyContent: 'flex-end', position: 'relative' }}>
+        <Search
+          {...props}
+          onSearch={(value) => {
+            onSearch(value);
+          }}
+          searchResults={autoCompleteResults}
+          state={state}
+        />
+      </div>
     </HeaderContext.Provider>
   );
 };

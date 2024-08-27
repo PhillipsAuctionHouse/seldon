@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { px } from '../../utils';
+import { findChildrenOfType, px } from '../../utils';
 import classnames from 'classnames';
 import { HeaderContext } from '../Header/Header';
+import NavigationList, { NavigationListProps } from './NavigationList/NavigationList';
 
 export interface NavigationProps extends React.HTMLAttributes<HTMLElement> {
   backBtnLabel?: string;
@@ -18,8 +19,13 @@ const Navigation = ({
   id,
   visible = true,
 }: React.PropsWithChildren<NavigationProps>) => {
-  const { defaultMobileMenuLabel, isExpanded, expandedItem, setExpandedItem } = React.useContext(HeaderContext);
+  const { defaultMobileMenuLabel, isExpanded, expandedItem, setExpandedItem, isSearchExpanded } =
+    React.useContext(HeaderContext);
   const onBack = () => setExpandedItem(expandedItem === defaultMobileMenuLabel ? expandedItem : defaultMobileMenuLabel);
+
+  const childNavList = findChildrenOfType<NavigationListProps>(children, NavigationList);
+  const otherChildren = findChildrenOfType(children, NavigationList, true);
+
   return (
     <nav
       role="navigation"
@@ -44,7 +50,10 @@ const Navigation = ({
       >
         {expandedItem ? expandedItem : 'Main Menu'}
       </h2>
-      {children}
+      {React.isValidElement(childNavList?.[0])
+        ? React.cloneElement<NavigationListProps>(childNavList[0], { isOffScreen: isSearchExpanded })
+        : undefined}
+      {otherChildren}
     </nav>
   );
 };

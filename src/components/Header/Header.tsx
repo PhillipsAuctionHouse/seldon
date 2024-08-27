@@ -84,15 +84,21 @@ const Header = ({
 
   return (
     <header {...props} className={classnames(`${px}-header`, className)}>
-      <h1 data-testid="header-logo" className={`${px}-header__logo`} tabIndex={toggleText === toggleOpenText ? 0 : -1}>
-        <a href="/" aria-label={logoText}>
-          {typeof logo === 'object' ? (
-            logo
-          ) : (
-            <img alt="Phillips" data-testid="header-logo-img" src={logo as string} height="14" />
-          )}
-        </a>
-      </h1>
+      <div className={`${px}-header__top-row`}>
+        <h1
+          data-testid="header-logo"
+          className={`${px}-header__logo`}
+          tabIndex={toggleText === toggleOpenText ? 0 : -1}
+        >
+          <a href="/" aria-label={logoText}>
+            {typeof logo === 'object' ? (
+              logo
+            ) : (
+              <img alt="Phillips" data-testid="header-logo-img" src={logo as string} height="14" />
+            )}
+          </a>
+        </h1>
+      </div>
       <div
         className={classnames(`${px}-header__overlay`, { [`${px}-header__overlay--active`]: toggleState })}
         data-testid="header-overlay"

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { encodeURLSearchParams, getCommonProps } from '../../utils';
+import { encodeURLSearchParams, getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
 import Input from '../Input/Input';
 
@@ -9,6 +9,7 @@ import { Text, TextVariants } from '../Text';
 import { useOnClickOutside } from 'usehooks-ts';
 import { HeaderContext } from '../Header/Header';
 import { SearchButton } from './SearchButton';
+import { CSSTransition } from 'react-transition-group';
 
 export interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -94,7 +95,7 @@ const Search = ({
   };
 
   const showSearch: typeof setIsSearchExpanded = (isSearchExpanded) => {
-    setIsSearchExpanded(!isSearchExpanded);
+    setIsSearchExpanded(isSearchExpanded);
     // means we're opening search
     if (isSearchExpanded) {
       searchFormRef.current?.reset();
@@ -106,7 +107,7 @@ const Search = ({
   return (
     <div
       {...commonProps}
-      className={classnames(baseClassName, className)}
+      className={classnames(baseClassName, className, { [`${baseClassName}--active`]: isSearchExpanded })}
       data-testid={baseTestId}
       role="search"
       {...props}
@@ -121,27 +122,42 @@ const Search = ({
         aria-hidden={!isSearchExpanded}
         ref={searchFormRef}
       >
-        <div className={classnames(`${baseClassName}__content-wrapper`)} role="combobox" aria-haspopup="listbox">
-          <Input
-            className={`${baseClassName}__input`}
-            id="search-input"
-            hideLabel
-            labelText={searchButtonText}
-            placeholder={placeholder ?? null}
-            type="text"
-            defaultValue={defaultValue}
-            invalid={state === 'invalid'}
-            invalidText={invalidText}
-            onKeyDown={onKeyDown}
-            onChange={
-              onSearch
-                ? (e: { target: { value: string } }) => {
-                    onSearch(e.target.value);
-                  }
-                : undefined
-            }
-            ref={searchInputRef}
-          />
+        <div
+          className={classnames(`${baseClassName}__content-wrapper`, {
+            [`${baseClassName}__content-wrapper--active`]: isSearchExpanded,
+          })}
+          role="combobox"
+          aria-haspopup="listbox"
+        >
+          <CSSTransition
+            in={isSearchExpanded}
+            ref={searchInputRef as unknown as React.LegacyRef<CSSTransition<HTMLElement | undefined>>}
+            classNames={`${px}-input`}
+            addEndListener={() => {
+              return;
+            }}
+          >
+            <Input
+              className={`${baseClassName}__input`}
+              id="search-input"
+              hideLabel
+              labelText={searchButtonText}
+              placeholder={placeholder ?? null}
+              type="text"
+              defaultValue={defaultValue}
+              invalid={state === 'invalid'}
+              invalidText={invalidText}
+              onKeyDown={onKeyDown}
+              onChange={
+                onSearch
+                  ? (e: { target: { value: string } }) => {
+                      onSearch(e.target.value);
+                    }
+                  : undefined
+              }
+              ref={searchInputRef}
+            />
+          </CSSTransition>
           <SearchButton
             className={baseClassName}
             searchButtonText={searchButtonText}

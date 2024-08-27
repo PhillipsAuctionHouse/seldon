@@ -159,7 +159,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
               />
             </NavigationList>
           </NavigationItemTrigger>
-          <NavigationItem href="#" label="Perpetual" />
+          <NavigationItem href="#" label="Exhibitions" />
           <NavigationItem href="#" label="Perpetual" />
           <NavigationItem href="#" label="Dropshop" />
           <NavigationItem href="#" label="Editorial" />
@@ -168,7 +168,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
             onLanguageChange={(language) => console.log('languageChange', language)}
           /> */}
         </NavigationList>
-        <Search />
+        <Search placeholder="Search for makers" />
       </Navigation>
     </Header>
     <main>

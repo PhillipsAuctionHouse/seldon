@@ -1,0 +1,42 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-search__button {
+  background: $pure-white;
+  border: none;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  height: $header-height;
+  margin: 0;
+  padding: 0;
+  width: 1.5rem;
+  z-index: 4; // I'm not sure why we need this
+
+  &--close {
+    border-bottom: 1px solid $pure-black;
+  }
+
+  &:hover {
+    path {
+      fill: $keyline-gray;
+    }
+  }
+
+  svg {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  &:hover,
+  &:focus-visible,
+  &:active {
+    border-bottom: 1px solid $pure-black;
+  }
+
+  &__icon {
+    pointer-events: none;
+
+    path {
+      fill: $pure-black;
+    }
+  }
+}

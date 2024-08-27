@@ -2,6 +2,7 @@
 
 .#{$px}-nav {
   background: $pure-white;
+  flex-wrap: wrap;
   height: 100%;
   overflow: hidden;
   padding-top: 4.5rem;
@@ -58,19 +59,6 @@
     .#{$px}-nav__label {
       display: none;
     }
-  }
-
-  // Zero out default styles for possible children
-  button {
-    appearance: none;
-    background: none;
-    border: none;
-    color: inherit;
-    display: block;
-    margin: 0;
-    padding: 0;
-    text-align: left;
-    width: 100%;
   }
 
   &__back-btn:hover,
