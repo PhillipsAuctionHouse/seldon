@@ -1,3 +1,10 @@
+## [1.42.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.42.0...v1.42.1) (2024-08-27)
+
+
+### Bug Fixes
+
+* **accordion:** L3-3439 accordion fixes ([#287](https://github.com/PhillipsAuctionHouse/seldon/issues/287)) ([82080a0](https://github.com/PhillipsAuctionHouse/seldon/commit/82080a0341eb19289129453a3e4fef02ec0fc03d))
+
 # [1.42.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.41.0...v1.42.0) (2024-08-26)
 
 
