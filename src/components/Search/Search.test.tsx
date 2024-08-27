@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Search from './Search';
 import { runCommonTests } from '../../utils/testUtils';
+import { px } from '../../utils';
 
 describe('Search component', () => {
   runCommonTests((props) => <Search {...props} />, 'Search');
@@ -31,11 +32,11 @@ describe('Search component', () => {
     expect(searchButton).not.toBeInTheDocument();
     expect(searchInput).toBeVisible();
     expect(searchInput).toHaveFocus();
-    expect(searchForm).toHaveClass('phillips-search__form--active');
+    expect(searchForm).toHaveClass(`${px}-search__form--active`);
     await userEvent.click(closeButton);
     expect(closeButton).not.toBeInTheDocument();
     expect(searchInput).not.toHaveFocus();
-    expect(searchForm).not.toHaveClass('phillips-search__form--active');
+    expect(searchForm).not.toHaveClass(`${px}-search__form--active`);
   });
   it('should close form when esc key is pressed', async () => {
     render(<Search />);
@@ -47,7 +48,7 @@ describe('Search component', () => {
     await userEvent.type(closeButton, '{esc}');
     expect(closeButton).not.toBeInTheDocument();
     expect(searchInput).not.toHaveFocus();
-    expect(searchForm).not.toHaveClass('phillips-search__form--active');
+    expect(searchForm).not.toHaveClass(`${px}-search__form--active`);
   });
   it('should reset form when close button is clicked', async () => {
     render(<Search />);

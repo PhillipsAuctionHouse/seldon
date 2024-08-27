@@ -1,3 +1,24 @@
+# [1.44.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.43.0...v1.44.0) (2024-08-27)
+
+
+### Features
+
+* **dropdown:** L3-3342 add new dropdown component ([#280](https://github.com/PhillipsAuctionHouse/seldon/issues/280)) ([97718d9](https://github.com/PhillipsAuctionHouse/seldon/commit/97718d9a4516b7a942b34042847d86b286fb3e13))
+
+# [1.43.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.42.1...v1.43.0) (2024-08-27)
+
+
+### Features
+
+* **prefix:** L3-3379 - change prefix and update any hard coded references ([#281](https://github.com/PhillipsAuctionHouse/seldon/issues/281)) ([617418e](https://github.com/PhillipsAuctionHouse/seldon/commit/617418e9d76372dae5179f600548de97d02ff9cf))
+
+## [1.42.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.42.0...v1.42.1) (2024-08-27)
+
+
+### Bug Fixes
+
+* **accordion:** L3-3439 accordion fixes ([#287](https://github.com/PhillipsAuctionHouse/seldon/issues/287)) ([82080a0](https://github.com/PhillipsAuctionHouse/seldon/commit/82080a0341eb19289129453a3e4fef02ec0fc03d))
+
 # [1.42.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.41.0...v1.42.0) (2024-08-26)
 
 

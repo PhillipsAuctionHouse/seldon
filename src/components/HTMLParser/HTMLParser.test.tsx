@@ -66,8 +66,8 @@ describe('HTMLParser', () => {
     render(<HTMLParser html={html} />);
     const pElement = screen.getByText('This is some text');
     const aElement = screen.getByRole('link');
-    expect(pElement).toHaveClass('phillips-text');
-    expect(aElement).toHaveClass('phillips-link');
+    expect(pElement).toHaveClass(`${px}-text`);
+    expect(aElement).toHaveClass(`${px}-link`);
   });
 
   it('will not render if html is not provided', () => {

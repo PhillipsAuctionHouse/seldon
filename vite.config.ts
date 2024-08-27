@@ -83,7 +83,7 @@ export default defineConfig({
     restoreMocks: true,
     coverage: {
       include: ['src/components/**/*.{ts,tsx}', 'src/utils/**/*.{ts,tsx}'],
-      exclude: ['**/*.test.{ts,tsx}', '**/*.stories.{ts,tsx}', '.template/**/*.{ts,tsx}'],
+      exclude: ['**/*.test.{ts,tsx}', '**/*.stories.{ts,tsx}', '.template/**/*.{ts,tsx}', '**/index.ts'], // ignore barrel files
       reporter: ['text', 'json', 'html'],
       provider: 'v8',
       thresholds: {

@@ -1,7 +1,7 @@
 import { kebabCase } from 'change-case';
 import * as React from 'react';
 
-export const px = 'phillips';
+export const px = 'seldon';
 
 /**
  * Returns standard props values incorporating the component name into the class name and data-testid
@@ -132,9 +132,9 @@ export const generatePaddingClassName = (
 
 /**
  * Return true if the email is valid, false otherwise.
- * 
+ *
  * true: some@some.com
- * 
+ *
  * false: some@some, some@.com, some@some.
 
  */
