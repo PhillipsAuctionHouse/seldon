@@ -70,9 +70,9 @@ describe('Footer', () => {
 
   it('is selectable by the test id', () => {
     const { rerender } = render(<Footer {...commonProps} />);
-    expect(screen.queryByTestId(/footer/)).toBeInTheDocument();
+    expect(screen.queryByTestId('footer')).toBeInTheDocument();
     rerender(<Footer id="test" {...commonProps} />);
-    expect(screen.queryByTestId(/test/)).toBeInTheDocument();
+    expect(screen.queryByTestId('test')).toBeInTheDocument();
   });
 
   it('renders the components we pass to it', () => {
