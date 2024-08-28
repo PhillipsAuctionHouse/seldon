@@ -8,19 +8,19 @@
   padding: 0;
   width: 100%;
 
-  @include media($size-sm) {
+  @include media($size-md) {
     margin-top: 0;
   }
 
   .#{$px}-text {
     margin-bottom: $spacing-sm;
 
-    @include media($size-sm) {
+    @include media($size-md) {
       margin-bottom: $spacing-sm;
     }
   }
 
-  @include media($size-sm) {
+  @include media($size-md) {
     align-items: flex-start;
   }
 
@@ -52,7 +52,7 @@
     padding: $spacing-sm 0 0;
     width: 100%;
 
-    @include media($size-sm) {
+    @include media($size-md) {
       gap: 0 1rem;
       justify-content: flex-start;
       margin: $spacing-sm 0 $spacing-md;

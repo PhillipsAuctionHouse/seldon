@@ -24,7 +24,7 @@
     margin: $spacing-sm 0 $spacing-md;
     width: 100%;
 
-    @include media($size-sm) {
+    @include media($size-md) {
       width: 240px;
     }
   }
@@ -36,7 +36,7 @@
     font-size: 0.75rem;
     margin-top: $spacing-sm;
 
-    @include media($size-sm) {
+    @include media($size-md) {
       margin-top: $spacing-xl;
     }
   }

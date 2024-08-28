@@ -23,15 +23,15 @@ export const Playground = (props: FooterProps) => (
   <Footer {...props}>
     {/* desktop version of footer */}
     <div className={`${px}-footer-desktop`}>
-      <Text variant={TextVariants.heading3}>About Us</Text>
+      <Text variant={TextVariants.heading4}>About Us</Text>
       {aboutUsLinks}
     </div>
     <div className={`${px}-footer-desktop`}>
-      <Text variant={TextVariants.heading3}>Our Services</Text>
+      <Text variant={TextVariants.heading4}>Our Services</Text>
       {ourServicesLinks}
     </div>
     <div className={`${px}-footer-desktop`}>
-      <Text variant={TextVariants.heading3}>Policies</Text>
+      <Text variant={TextVariants.heading4}>Policies</Text>
       {policyLinks}
     </div>
 

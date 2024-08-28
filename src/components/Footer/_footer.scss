@@ -20,6 +20,10 @@
     }
   }
 
+  &__logo svg {
+    height: 10px;
+  }
+
   &__links {
     display: flex;
     flex-direction: column;
@@ -28,10 +32,21 @@
     padding: $spacing-lg $spacing-md $spacing-md $spacing-md;
     width: 100%;
 
-    @include media($size-sm) {
-      flex-direction: row;
+    @include media($size-md) {
+      flex-flow: row wrap;
+      gap: $spacing-lg;
       max-width: $desktop-max-width;
       padding: $spacing-lg $spacing-md $spacing-lg $spacing-md;
+
+      .#{$px}-social {
+        flex-basis: 100%; // force this to wrap
+      }
+    }
+
+    @include media($size-lg) {
+      .#{$px}-social {
+        flex-basis: 0;
+      }
     }
 
     div {
@@ -42,18 +57,18 @@
   &-desktop {
     display: none;
 
-    @include media($size-sm) {
+    @include media($size-md) {
       display: block;
     }
 
     h3.#{$px}-text {
-      @include media($size-sm) {
+      @include media($size-md) {
         margin-bottom: $spacing-sm;
       }
     }
   }
 
-  @include media($size-sm) {
+  @include media($size-md) {
     &-mobile {
       display: none;
     }
@@ -78,7 +93,7 @@
         opacity: 1;
         padding: $spacing-sm 0;
 
-        @include media($size-sm) {
+        @include media($size-md) {
           cursor: unset;
         }
 

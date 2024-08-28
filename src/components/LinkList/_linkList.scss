@@ -6,6 +6,10 @@
     grid-column: span 2;
 
     @include media($size-md) {
+      grid-column: span 3;
+    }
+
+    @include media($size-lg) {
       grid-column: span 4;
     }
   }
