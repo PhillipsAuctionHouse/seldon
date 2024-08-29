@@ -26,6 +26,12 @@
       flex: 1;
     }
 
+    h3.#{$px}-text {
+      @include media($size-sm) {
+        margin-bottom: $spacing-sm;
+      }
+    }
+
     div:not(.#{$px}-social) {
       ul {
         li {
@@ -47,12 +53,6 @@
     @include media($size-sm) {
       display: block;
     }
-
-    h3.#{$px}-text {
-      @include media($size-sm) {
-        margin-bottom: $spacing-sm;
-      }
-    }
   }
 
   @include media($size-sm) {
@@ -69,6 +69,10 @@
 
     &-item {
       padding: 0;
+
+      ul {
+        padding-bottom: $spacing-md;
+      }
 
       &--expanded {
         margin-bottom: $spacing-md;
