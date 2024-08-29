@@ -8,18 +8,6 @@
   margin: $spacing-lg 0 0;
   max-width: 100%;
 
-  ul {
-    li {
-      a {
-        @include text('snwFlyoutLink');
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-  }
-
   &__links {
     display: flex;
     flex-direction: column;
@@ -36,6 +24,20 @@
 
     div {
       flex: 1;
+    }
+
+    div:not(.#{$px}-social) {
+      ul {
+        li {
+          a {
+            @include text('snwFlyoutLink');
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
     }
   }
 
