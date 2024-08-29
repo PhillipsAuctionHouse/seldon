@@ -1,3 +1,10 @@
+# [1.45.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.44.1...v1.45.0) (2024-08-29)
+
+
+### Features
+
+* **footer:** L3-3126 footer fixes and animation updates ([#289](https://github.com/PhillipsAuctionHouse/seldon/issues/289)) ([3f51900](https://github.com/PhillipsAuctionHouse/seldon/commit/3f51900e5da1a0b4d26580306c236fe69f376e4f))
+
 ## [1.44.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.44.0...v1.44.1) (2024-08-27)
 
 
