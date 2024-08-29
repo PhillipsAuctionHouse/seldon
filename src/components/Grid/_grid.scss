@@ -14,4 +14,15 @@
       margin: 0 $spacing-xl;
     }
   }
+
+  // Generate unique classes for column and row gaps with all spacings
+  @each $spacing-size in $spacing-sizes {
+    &--column-gap-#{$spacing-size} {
+      column-gap: var(--spacing-#{$spacing-size});
+    }
+
+    &--row-gap-#{$spacing-size} {
+      row-gap: var(--spacing-#{$spacing-size});
+    }
+  }
 }
