@@ -8,18 +8,6 @@
   margin: $spacing-lg 0 0;
   max-width: 100%;
 
-  ul {
-    li {
-      a {
-        @include text('snwFlyoutLink');
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-  }
-
   &__logo svg {
     height: 10px;
   }
@@ -52,6 +40,26 @@
     div {
       flex: 1;
     }
+
+    h3.#{$px}-text {
+      @include media($size-sm) {
+        margin-bottom: $spacing-sm;
+      }
+    }
+
+    div:not(.#{$px}-social) {
+      ul {
+        li {
+          a {
+            @include text('snwFlyoutLink');
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
   }
 
   &-desktop {
@@ -59,12 +67,6 @@
 
     @include media($size-md) {
       display: block;
-    }
-
-    h3.#{$px}-text {
-      @include media($size-md) {
-        margin-bottom: $spacing-sm;
-      }
     }
   }
 
@@ -82,6 +84,10 @@
 
     &-item {
       padding: 0;
+
+      ul {
+        padding-bottom: $spacing-md;
+      }
 
       &--expanded {
         margin-bottom: $spacing-md;

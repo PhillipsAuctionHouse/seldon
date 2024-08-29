@@ -365,3 +365,5 @@ $size-lg: 'lg';
 $size-xl: 'xl';
 $size-xxl: 'xxl';
 $default-transition: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+$drawer-content-transition: 350ms cubic-bezier(0, 0, 0.2, 1);
+$default-overlay-transition: 350ms cubic-bezier(0.4, 0, 0.2, 1);
