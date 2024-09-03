@@ -42,7 +42,7 @@ const Social = ({
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Social');
   return (
     <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
-      <Text variant={TextVariants.heading3} className={`${baseClassName}__header`}>
+      <Text variant={TextVariants.heading4} className={`${baseClassName}__header`}>
         {titleText}
       </Text>
       <Button onClick={onSubscribeClick} variant={ButtonVariants.ghost} className={`${baseClassName}__button`}>

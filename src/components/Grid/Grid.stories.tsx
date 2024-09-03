@@ -1,18 +1,21 @@
 import type { Meta } from '@storybook/react';
 
 import Grid, { GridProps } from './Grid';
+import { SpacingTokens } from '../../utils';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
-const meta = {
+const meta: Meta<typeof Grid> = {
   title: 'Components/Layouts/Grid',
   component: Grid,
-
   argTypes: {
     element: { control: 'text' },
+    columnGap: { control: 'select', options: Object.values(SpacingTokens) },
+    rowGap: { control: 'select', options: Object.values(SpacingTokens) },
   },
-} satisfies Meta<typeof Grid>;
+};
 
 export default meta;
+
 interface MyFuncProps {
   children: React.ReactNode;
 }

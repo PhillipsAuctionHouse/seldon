@@ -2,9 +2,9 @@ import LinkBlock, { type LinkBlockProps } from '../LinkBlock/LinkBlock';
 import React from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
-import Grid from '../Grid/Grid';
+import Grid, { GridProps } from '../Grid/Grid';
 
-export interface LinkListProps extends React.HTMLAttributes<HTMLUListElement> {
+export interface LinkListProps extends GridProps<HTMLUListElement> {
   /** These children should be an array of LinkBlock components */
   children: React.ReactElement<LinkBlockProps, typeof LinkBlock>[];
 }

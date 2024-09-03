@@ -48,25 +48,6 @@ export const Playground = (props: SplitPanelProps) => (
           collaborators, and brands defining contemporary culture.
         </p>
       </div>
-
-      <div id="child-3">
-        <p className="split-panel-story__text">
-          In July 2014, Chief Executive Officer Edward Dolman joined Phillips after a 27-year career at Christie’s.
-          Bringing a wealth of experience, Mr. Dolman attracted highly qualified senior leaders from across the
-          industry. Shortly after the start of Mr. Dolman’s tenure, the firm launched Phillips in Association with Bacs
-          & Russo in November 2014, which has become the global market leader for the finest collectors’ watches at
-          auction, under the leadership of Aurel Bacs and Livia Russo. Phillips expanded to Asia and held its first
-          auctions in Hong Kong in 2015, and it currently presents all categories including art, design, jewels and
-          watches, in the fast-growing Asian market.
-        </p>
-        <p className="split-panel-story__text">
-          In 2021, Phillips moved its New York headquarters to new state-of-the-art galleries at 432 Park Avenue and, in
-          2023, the company opened the first purpose-built auction space in Hong Kong with the opening of its new Asia
-          headquarters in West Kowloon. The same year, the company also launched Dropshop, the innovative digital
-          platform offering limited-edition releases of primary market art and objects in partnership with the artists,
-          collaborators, and brands defining contemporary culture.
-        </p>
-      </div>
     </SplitPanel>
   </div>
 );

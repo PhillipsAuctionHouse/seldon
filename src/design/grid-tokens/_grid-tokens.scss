@@ -7,7 +7,7 @@
   &::after {
     background-color: $pure-white;
     color: $clock-widget-blue;
-    content: 'Base styles';
+    content: '@media (min-width: 360px) -- 2 columns';
     font-family: monospace;
     left: 0;
     position: absolute;
@@ -15,17 +15,17 @@
     transform: translate($spacing-md, 1.5rem);
 
     @media (min-width: 961px) {
-      content: '@media (min-width: 961px)';
+      content: '@media (min-width: 961px) -- 6 columns';
       transform: translate($spacing-md, 2.1875rem);
     }
 
     @media (min-width: 1401px) {
-      content: '@media (min-width: 1401px)';
+      content: '@media (min-width: 1401px) -- 12 columns';
       transform: translate($spacing-lg, 2.1875rem);
     }
 
     @media (min-width: 1801px) {
-      content: '@media (min-width: 1801px)';
+      content: '@media (min-width: 1801px) -- 12 columns';
       transform: translate($spacing-xl, 2.75rem);
     }
   }
@@ -109,12 +109,12 @@
     }
 
     @media (min-width: 960px) and (max-width: 1400px) {
-      .grid-example:nth-child(n + 5) {
+      .grid-example:nth-child(n + 7) {
         display: none;
       }
 
       .grid-example::after {
-        content: '4';
+        content: '6';
       }
     }
 
@@ -123,23 +123,23 @@
     }
 
     .grid-example__header code::after {
-      content: 'grid-column: 1 / -1;';
+      content: 'header { grid-column: 1 / -1; }';
     }
 
     .grid-example__section {
-      grid-column: 1 / -1;
+      grid-column: 1 / 2;
     }
 
     .grid-example__section code::after {
-      content: 'grid-column: 1 / -1;';
+      content: 'section { grid-column: 1 / 2; }';
     }
 
     .grid-example__aside {
-      grid-column: 1 / -1;
+      grid-column: 2 / -1;
     }
 
     .grid-example__aside code::after {
-      content: 'grid-column: 1 / -1;';
+      content: 'aside { grid-column: 2 / -1;}';
     }
 
     .grid-example__footer {
@@ -147,7 +147,7 @@
     }
 
     .grid-example__footer code::after {
-      content: 'grid-column: 1 / -1;';
+      content: 'footer { grid-column: 1 / -1; }';
     }
 
     @media (min-width: 961px) {
@@ -156,19 +156,19 @@
       }
 
       .grid-example__section {
-        grid-column: 1 / 3;
+        grid-column: 1 / 5;
       }
 
       .grid-example__section code::after {
-        content: 'grid-column: 1 / 3;';
+        content: 'section { grid-column: 1 / 5;} ';
       }
 
       .grid-example__aside {
-        grid-column: 3 / -1;
+        grid-column: 5 / -1;
       }
 
       .grid-example__aside code::after {
-        content: 'grid-column: 3 / -1; ';
+        content: 'aside { grid-column: 5 / -1;} ';
       }
 
       .grid-example__footer {
