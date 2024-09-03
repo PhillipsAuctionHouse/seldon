@@ -7,7 +7,6 @@
   overflow: hidden;
   padding-top: 4.5rem;
   position: relative;
-  width: 100%;
 
   @include isHeaderDesktop {
     display: flex;
@@ -16,6 +15,10 @@
     padding-top: 0;
     position: unset;
     width: auto;
+  }
+
+  &__list-container {
+    position: relative;
   }
 
   &--expanded &__label {

@@ -50,10 +50,12 @@ const Navigation = ({
       >
         {expandedItem ? expandedItem : 'Main Menu'}
       </h2>
-      {React.isValidElement(childNavList?.[0])
-        ? React.cloneElement<NavigationListProps>(childNavList[0], { isOffScreen: isSearchExpanded })
-        : undefined}
-      {otherChildren}
+      <div className={`${px}-nav__list-container`}>
+        {React.isValidElement(childNavList?.[0])
+          ? React.cloneElement<NavigationListProps>(childNavList[0], { isOffScreen: isSearchExpanded })
+          : undefined}
+        {otherChildren}
+      </div>
     </nav>
   );
 };
