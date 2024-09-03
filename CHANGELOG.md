@@ -1,3 +1,10 @@
+# [1.47.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.46.0...v1.47.0) (2024-09-03)
+
+
+### Features
+
+* **grid:** L3-2981 grid component needs configurable column and row gaps ([#291](https://github.com/PhillipsAuctionHouse/seldon/issues/291)) ([2a87821](https://github.com/PhillipsAuctionHouse/seldon/commit/2a8782181e5abc255a744eea74919519da30bce9))
+
 # [1.46.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.45.0...v1.46.0) (2024-08-29)
 
 
