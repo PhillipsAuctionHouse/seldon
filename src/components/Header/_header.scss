@@ -3,46 +3,38 @@
 .#{$px}-header {
   align-items: center;
   background-color: $white;
-  border-bottom: 1px solid rgba(0, 0, 0, 10%);
+  border-bottom: 1px solid $light-gray;
   display: flex;
-  padding: $user-management-height $spacing-md 0; // save space for the user management
+  flex-direction: column;
   position: sticky;
   top: 0;
 
-  @include isHeaderMobile {
-    padding: 0;
-    top: 0;
-  }
-
   &__toggle-btn {
     align-items: center;
-    appearance: none;
     background: none;
     border: none;
     cursor: pointer;
     display: flex;
-    height: $header-height;
-    justify-content: center;
-    left: 0;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    transition: background-color 0.25s;
-    width: 60px;
-    z-index: 1;
+    height: 2.5rem;
+    width: 2.5rem;
+
+    &:hover {
+      background-color: $off-white;
+    }
 
     @include isHeaderDesktop {
       display: none;
     }
 
+    /* This is a pseudo icon shown within the button, so we can do fancy transitions */
     span {
       background-color: $dark-gray;
       color: transparent;
       display: block;
       height: 2px;
       position: relative;
-      transition: background-color 0.25s ease 0.5s;
-      width: 1.65rem;
+      transition-delay: background-color 0.25s ease 0.25s;
+      width: 1.5rem;
 
       &::before,
       &::after {
@@ -53,8 +45,8 @@
         left: 0;
         position: absolute;
         top: 0;
-        transition: transform 0.25s ease 0.25s;
-        width: 1.65rem;
+        transition: transform 0.25s ease;
+        width: 1.5rem;
       }
 
       &::before {
@@ -68,7 +60,7 @@
 
     &.#{$px}-header__toggle-btn--open span {
       background: transparent;
-      transition: background-color 0.25s ease 0.1s;
+      transition: background-color 0.25s ease;
 
       &::before {
         transform: rotate(45deg);
@@ -78,74 +70,73 @@
         transform: rotate(-45deg);
       }
     }
-
-    &:hover {
-      background-color: $off-white;
-    }
   }
 
   &__logo {
-    margin: auto;
+    align-self: center;
 
     @include isHeaderDesktop {
-      margin: unset;
+      align-self: flex-end;
+
+      svg {
+        height: 28px;
+        width: 100%;
+      }
     }
   }
 
-  &__overlay {
-    background-color: rgba(0, 0, 0, 50%);
-    height: 0;
-    inset: 0;
-    opacity: 0;
-    position: fixed;
-    transition: opacity 0.5s ease-in-out;
+  &__top-row {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: $padding-sm;
     width: 100%;
-    z-index: -1;
 
-    &--active {
-      display: block;
-      height: 100%;
-      opacity: 1;
+    /** There are actually two language selectors in the DOM, show this one in desktop */
+    .#{$px}-language-selector {
+      display: none;
 
       @include isHeaderDesktop {
-        display: none;
-      }
-
-      & ~ .#{$px}-header__nav {
-        z-index: 1;
-      }
-      & ~ .#{$px}-header__toggle-btn {
-        z-index: 2;
-      }
-
-      & ~ .#{$px}-search {
-        .#{$px}-search__button {
-          z-index: -1;
-        }
+        display: flex;
       }
     }
   }
 
   &__nav {
-    height: 100%;
-    left: 0;
-    position: fixed;
-    top: 0;
-    transform: translateX(-100%);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 0 $padding-md;
 
-    @include isHeaderDesktop {
-      height: $header-height;
-      position: relative;
-      transform: unset;
-      width: 100%;
+    &--closed {
+      display: none;
     }
 
-    &.#{$px}-header__nav--open {
-      transform: translateX(0);
+    /** The language selector inside the nav only shows on mobile, otherwise it uses the one in the header__top-row */
+    .#{$px}-language-selector.#{$px}-dropdown {
+      @include text($snwHeaderLink);
 
-      @include isHeaderDesktop {
-        transform: unset;
+      padding-top: $padding-lg;
+
+      button {
+        padding: 0.5rem 0.65rem;
+        text-transform: unset;
+      }
+    }
+
+    @include isHeaderDesktop {
+      display: flex;
+      height: unset;
+      width: 100%;
+
+      .#{$px}-language-selector {
+        display: none;
       }
     }
   }
+}
+
+/** This is kind of dangerous as it will change all of them.  It's possible that we get rid of this*/
+.#{$px}-dropdown__content .#{$px}-dropdown__item {
+  @include text($snwHeaderLink);
 }

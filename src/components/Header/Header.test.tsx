@@ -14,7 +14,7 @@ import Search from '../Search/Search';
 describe('Header', () => {
   const headerComponent = () => (
     <Header logo={LogoIMG}>
-      <Navigation id={`${px}-main-nav`} backBtnLabel="Back">
+      <Navigation id={`${px}-main-nav`}>
         <NavigationList id={`${px}-main-nav-list`}>
           <NavigationItemTrigger id="auctions" label={`Auctions`}>
             <NavigationList id={`${px}-auction-nav-list`}>

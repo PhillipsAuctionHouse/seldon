@@ -10,11 +10,10 @@
 
   @include isHeaderMobile {
     flex-direction: column;
-    height: calc(100vh - 102px);
     justify-content: left;
     min-width: 330px;
     overflow: auto;
-    padding: 0.5rem;
+    padding: $spacing-md 0;
     transform: translateX(0%);
     transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1) 0.1s;
   }

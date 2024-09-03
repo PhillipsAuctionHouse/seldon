@@ -1,52 +1,37 @@
-import * as React from 'react';
 import { px } from '../../utils';
 import classnames from 'classnames';
-import { HeaderContext } from '../Header/Header';
+import { ComponentProps, CSSProperties, forwardRef } from 'react';
 
-export interface NavigationProps extends React.HTMLAttributes<HTMLElement> {
-  backBtnLabel?: string;
+export interface NavigationProps extends ComponentProps<'nav'> {
   /**
    * Optional visible state
    */
   visible?: boolean;
 }
 
-const Navigation = ({
-  backBtnLabel,
-  children,
-  className,
-  id,
-  visible = true,
-}: React.PropsWithChildren<NavigationProps>) => {
-  const { defaultMobileMenuLabel, isExpanded, expandedItem, setExpandedItem } = React.useContext(HeaderContext);
-  const onBack = () => setExpandedItem(expandedItem === defaultMobileMenuLabel ? expandedItem : defaultMobileMenuLabel);
+/**
+ * ## Overview
+ *
+ * This is used within the Header component and displays the site navigation links.  It support both mobile and desktop.
+ *
+ * [Figma Link](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/EASEL-Compendium%3A-Tokens%2C-Components-%26-Patterns?node-id=10570-5784&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-navigation--overview)
+ */
+const Navigation = forwardRef<HTMLElement, NavigationProps>(({ children, className, id, visible = true }) => {
   return (
     <nav
       role="navigation"
-      aria-labelledby={`${id}-label`}
       data-testid={id}
       id={id}
-      className={classnames(`${px}-nav`, className, { [`${px}-nav--expanded`]: isExpanded })}
+      style={{ '--visible': visible ? 'visible' : 'hidden' } as CSSProperties}
+      className={classnames(`${px}-nav`, className)}
     >
-      <button
-        data-testid={`${id}-back-btn`}
-        tabIndex={isExpanded ? 0 : -1}
-        className={`${px}-nav__back-btn`}
-        onClick={onBack}
-      >
-        {backBtnLabel}
-      </button>
-      <h2
-        id={`${id}-label`}
-        data-testid={`${id}-label`}
-        className={classnames(`${px}-nav__label`, { [`${px}-nav__label--hidden`]: !visible })}
-        style={{ '--visible': visible ? 'visible' : 'hidden' } as React.CSSProperties}
-      >
-        {expandedItem ? expandedItem : 'Main Menu'}
-      </h2>
       {children}
     </nav>
   );
-};
+});
+
+Navigation.displayName = 'Navigation';
 
 export default Navigation;

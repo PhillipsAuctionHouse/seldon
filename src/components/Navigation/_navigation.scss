@@ -1,113 +1,15 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-nav {
-  background: $pure-white;
-  height: 100%;
-  overflow: hidden;
-  padding-top: 4.5rem;
-  position: relative;
-  width: 100%;
-
   @include isHeaderDesktop {
-    display: flex;
-    flex-wrap: wrap;
-    overflow: visible;
-    padding-top: 0;
-    place-content: center right;
-    position: unset;
-    width: auto;
-  }
-
-  &--expanded &__label {
-    animation: 1s linear fade-in-out forwards;
-  }
-
-  &__label {
-    animation: 1s linear fade-in-out2 forwards;
-    font-size: 1.25rem;
-    padding-left: 0.625rem;
-    visibility: var(--visible);
-  }
-
-  & &__back-btn {
-    background-color: transparent;
-    cursor: pointer;
-    font-weight: 800;
-    height: 60px;
-    opacity: 0;
-    padding: 1rem;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition:
-      opacity 0s linear,
-      background-color 0.5s;
-    width: auto;
-  }
-
-  &--expanded &__back-btn {
-    opacity: 1;
-    transition:
-      opacity 0.5s linear 0.25s,
-      background-color 0.5s;
-  }
-
-  @include isHeaderDesktop {
-    // Remove label and mobile buttons on larger screens
-    .#{$px}-nav__back-btn,
-    .#{$px}-nav__close-btn,
-    .#{$px}-nav__label {
+    // Remove mobile button on larger screens
+    .#{$px}-nav__close-btn {
       display: none;
     }
   }
 
-  // Zero out default styles for possible children
-  button {
-    appearance: none;
-    background: none;
-    border: none;
-    color: inherit;
-    display: block;
-    margin: 0;
-    padding: 0;
-    text-align: left;
-    width: 100%;
-  }
-
-  &__back-btn:hover,
-  &__back-btn:focus,
   &__close-btn:hover,
   &__close-btn:focus {
     background-color: #f4f4f4;
-  }
-}
-
-// Animations
-
-@keyframes fade-in-out {
-  0% {
-    opacity: 0;
-  }
-
-  30% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-in-out2 {
-  0% {
-    opacity: 0;
-  }
-
-  30% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
   }
 }

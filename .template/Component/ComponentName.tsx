@@ -1,9 +1,9 @@
-import React from 'react';
+import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 
-// You'll need to change the HTMLDivElement to match the top-level element of your component
-export interface ComponentNameProps extends React.HTMLAttributes<HTMLDivElement> {}
+// You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
+export interface ComponentNameProps extends ComponentProps<'div'> {}
 /**
  * ## Overview
  *
@@ -13,10 +13,12 @@ export interface ComponentNameProps extends React.HTMLAttributes<HTMLDivElement>
  *
  * [Storybook Link](Point back to yourself here)
  */
-const ComponentName = ({ className, ...props }: ComponentNameProps) => {
+const ComponentName = forwardRef<HTMLDivElement, ComponentNameProps>(({ className, ...props }, ref) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ComponentName');
 
-  return <div {...commonProps} className={classnames(baseClassName, className)} {...props}></div>;
-};
+  return <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}></div>;
+});
+
+ComponentName.displayName = 'ComponentName';
 
 export default ComponentName;

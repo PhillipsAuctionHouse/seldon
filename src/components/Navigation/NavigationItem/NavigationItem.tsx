@@ -1,27 +1,23 @@
-import * as React from 'react';
 import { px } from '../../../utils';
 import classNames from 'classnames';
 import Link, { LinkProps } from '../../Link/Link';
 import { LinkVariants } from '../../Link/types';
 import { HeaderContext } from '../../Header/Header';
+import { ComponentProps, ElementType, forwardRef, ReactNode, useContext } from 'react';
 
-export interface NavigationItemProps extends Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> {
+export interface NavigationItemProps extends ComponentProps<'li'> {
   /**
    * Optional badge for navigation item. Used currently for location of auctions
    */
-  badge?: React.ReactNode;
+  badge?: ReactNode;
   /**
    * href link
    */
   href?: string;
   /**
-   * Optional listen to onClick event
-   */
-  onClick?: (event: React.MouseEvent<HTMLLIElement>) => void;
-  /**
    * Label for the navigation item
    */
-  label?: React.ReactNode;
+  label?: ReactNode;
   /**
    * Optional group for navigation items
    */
@@ -33,39 +29,43 @@ export interface NavigationItemProps extends Omit<React.HTMLAttributes<HTMLLIEle
   /**
    * Element to render within the navigation item, renders <Link> by default
    */
-  element?: React.ElementType<LinkProps>;
+  element?: ElementType<LinkProps>;
 }
 
-const NavigationItem = ({
-  badge,
-  className = '',
-  href,
-  label,
-  navGroup,
-  navType,
-  onClick,
-  element: Component = Link,
-  ...props
-}: React.PropsWithChildren<NavigationItemProps>) => {
-  const { expandedItem } = React.useContext(HeaderContext);
+/**
+ * ## Overview
+ *
+ * Renders a styled link within the Header->Navigation component.  It supports both mobile and desktop layouts.  It can be used with Remix links as well.
+ *
+ * [Figma Link](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/EASEL-Compendium%3A-Tokens%2C-Components-%26-Patterns?node-id=10570-6295&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-languageselector--overview)
+ */
+const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
+  ({ badge, className = '', href, label, navGroup, navType, onClick, element: Component = Link, ...props }, ref) => {
+    const { expandedItem } = useContext(HeaderContext);
 
-  return (
-    <li
-      {...props}
-      onClick={onClick}
-      data-testid={`nav-item-${label}`}
-      className={classNames(`${px}-nav__item`, navGroup, className)}
-    >
-      <Component
-        href={href}
-        variant={navType ? navType : LinkVariants.snwHeaderLink}
-        tabIndex={expandedItem === '' ? 0 : -1}
+    return (
+      <li
+        {...props}
+        onClick={onClick}
+        data-testid={`nav-item-${label}`}
+        className={classNames(`${px}-nav__item`, navGroup, className)}
+        ref={ref}
       >
-        <span className={`${px}-nav__item--label`}>{label}</span>
-        {badge ? <span className={`${px}-nav__item--badge `}>{` • ${badge}`}</span> : null}
-      </Component>
-    </li>
-  );
-};
+        <Component
+          href={href}
+          variant={navType ? navType : LinkVariants.snwHeaderLink}
+          tabIndex={expandedItem === '' ? 0 : -1}
+        >
+          <span className={`${px}-nav__item--label`}>{label}</span>
+          {badge ? <span className={`${px}-nav__item--badge `}>{` • ${badge}`}</span> : null}
+        </Component>
+      </li>
+    );
+  },
+);
+
+NavigationItem.displayName = 'NavigationItem';
 
 export default NavigationItem;

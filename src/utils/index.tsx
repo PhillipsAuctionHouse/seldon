@@ -176,6 +176,20 @@ export const findChildrenOfType = function (
   return foundChildrenOfType.length > 0 ? foundChildrenOfType : null;
 };
 
+/**
+ * Return array of children of a specific type
+ *
+ * @param children - React children
+ * @param componentTypes - React component types
+ *
+ */
+export const excludeChildrenOfTypes = function (children: React.ReactNode, componentTypes: React.ElementType[]) {
+  const foundChildrenExcludingTypes = React.Children.toArray(children).filter((child) => {
+    return !componentTypes.find((componentType) => findChildrenOfType(child, componentType, true));
+  });
+  return foundChildrenExcludingTypes.length > 0 ? foundChildrenExcludingTypes : null;
+};
+
 export const encodeURLSearchParams = (url: string) => {
   const urlSections = url.split('?');
   const searchParams = new URLSearchParams(urlSections[1]);
