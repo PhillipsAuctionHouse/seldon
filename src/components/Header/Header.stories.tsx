@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import Header, { HeaderProps } from './Header';
+import Header, { HeaderContext, HeaderProps } from './Header';
 import Navigation from '../Navigation/Navigation';
 import NavigationList from '../Navigation/NavigationList/NavigationList';
 import NavigationItemTrigger from '../Navigation/NavigationItemTrigger/NavigationItemTrigger';
@@ -7,12 +7,71 @@ import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
 import { LinkVariants } from '../Link/types';
 import { px } from '../../utils';
 import UserManagement from '../UserManagement/UserManagement';
-import Search from '../Search/Search';
+import Search, { SearchProps } from '../Search/Search';
 import { AuthState } from '../UserManagement/types';
+import { SearchResult } from '../Search/SearchResults/SearchResults';
+import React from 'react';
+import { defaultHeaderContext } from './utils';
+
+const fetchData = async (searchQuery: string) => {
+  console.log('searchQuery', searchQuery);
+  let searchResults: { makers: Array<SearchResult> } = { makers: [] };
+  // Call to get search results
+  searchResults = await new Promise((resolve) => {
+    setTimeout(
+      () =>
+        resolve({
+          makers: [
+            { id: 'result1', label: 'Name', url: 'http://www.example.com' },
+            { id: 'result2', label: 'Another Name', url: 'http://www.example.com' },
+            { id: 'result3', label: 'Yet Another Name', url: 'http://www.example.com' },
+          ],
+        }),
+      2000,
+    );
+  });
+  return searchResults;
+};
+
+const StatefulSearch = (props: SearchProps) => {
+  const [autoCompleteResults, setAutoCompleteResults] = React.useState([] as Array<SearchResult>);
+  const [state, setState] = React.useState<SearchProps['state']>('idle');
+  // const [isSearchExpanded, setIsSearchExpanded] = React.useState(false);
+
+  const onSearch = (searchQuery: string) => {
+    if (searchQuery?.includes('?')) {
+      setState('invalid');
+      return;
+    }
+    // Call to get auto complete results
+    if (searchQuery.length > 2) {
+      setState('loading');
+      fetchData(searchQuery)
+        .then((data) => {
+          setAutoCompleteResults(data.makers);
+          setState('idle');
+        })
+        .catch((error) => console.error(error));
+    }
+  };
+  return (
+    <HeaderContext.Provider value={{ ...defaultHeaderContext }}>
+      <Search
+        {...props}
+        onSearch={(value) => {
+          onSearch(value);
+        }}
+        searchResults={autoCompleteResults}
+        state={state}
+      />
+    </HeaderContext.Provider>
+  );
+};
 
 const meta = {
   title: 'Components/Header',
   component: Header,
+  subcomponents: { Search: Search as React.ComponentType<unknown> },
   parameters: {
     docs: {
       story: {
@@ -25,7 +84,7 @@ const meta = {
     authState: AuthState.LoggedOut,
   },
   argTypes: { authState: { control: { type: 'select' }, options: Object.values(AuthState) } },
-} satisfies Meta<typeof Header & typeof UserManagement>;
+} satisfies Meta<typeof Header & typeof Search & typeof UserManagement>;
 
 export default meta;
 
@@ -171,7 +230,12 @@ export const Playground = ({
             onLanguageChange={(language) => console.log('languageChange', language)}
           /> */}
         </NavigationList>
-        <Search placeholder="Search for makers" />
+        <Search
+          placeholder="Search for makers"
+          onSearch={() => {
+            return;
+          }}
+        />
       </Navigation>
     </Header>
     <main>

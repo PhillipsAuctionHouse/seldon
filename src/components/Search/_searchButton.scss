@@ -5,20 +5,19 @@
   border: none;
   border-bottom: 1px solid transparent;
   cursor: pointer;
-  height: $header-height;
+  height: $nav-height;
+  width: $nav-height;
   margin: 0;
   padding: 0;
-  width: 1.5rem;
-  z-index: 4; // I'm not sure why we need this
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  top: 0;
 
   &--close {
     border-bottom: 1px solid $pure-black;
-  }
-
-  &:hover {
-    path {
-      fill: $keyline-gray;
-    }
   }
 
   svg {

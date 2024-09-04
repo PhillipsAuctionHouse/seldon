@@ -9,6 +9,7 @@
   position: relative;
 
   @include isHeaderDesktop {
+    align-content: center;
     display: flex;
     justify-content: center;
     overflow: visible;

@@ -338,7 +338,7 @@ $margin-xxl: var(--spacing-xxl);
 /// Breakpoint TOKENS that map to minimum pixels
 ///////////////////////
 $breakpoint-sm: 461px;
-$breakpoint-md: 1301px;
+$breakpoint-md: 1081px;
 $breakpoint-lg: 1401px;
 $breakpoint-xl: 1801px;
 
@@ -351,6 +351,9 @@ $max-site-width: 1560px;
 /// height Tokens
 ///////////////////////
 $header-height: 42px;
+$nav-height: 3.5rem;
+$top-row-height: 3.75rem;
+$desktop-header-height: calc($nav-height + $top-row-height + 1px);
 $user-management-height: 30px;
 $header-submenu-top: calc($header-height + $user-management-height + 1px);
 $desktop-max-width: var(--desktop-max-width);

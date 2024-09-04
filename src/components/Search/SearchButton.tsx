@@ -28,7 +28,7 @@ export const SearchButton = ({
         data-testid={`${testId}-button`}
         aria-label={searchButtonText}
         className={`${className}__button ${className}__button--search`}
-        onClick={() => setIsSearchExpanded((isSearchExpanded) => !isSearchExpanded)}
+        onClick={() => setIsSearchExpanded(true)}
       >
         <SearchIcon data-testid={`${testId}-button-icon`} className={`${className}__button__icon`} />
       </button>
@@ -43,7 +43,7 @@ export const SearchButton = ({
         data-testid={`${testId}-close-button`}
         aria-label="Close Search"
         className={`${className}__button ${className}__button--close`}
-        onClick={() => setIsSearchExpanded((isSearchExpanded) => !isSearchExpanded)}
+        onClick={() => setIsSearchExpanded(false)}
       >
         <CloseIcon data-testid={`${testId}-form-icon`} className={`${className}__button__icon`} />
       </button>

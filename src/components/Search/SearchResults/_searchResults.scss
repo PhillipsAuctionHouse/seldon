@@ -2,13 +2,14 @@
 
 .#{$px}-search__results {
   align-items: flex-start;
+  background: $white;
   border-bottom: 1px solid $light-gray;
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
-  padding: 0.75rem 0 1.5625rem;
+  padding: $spacing-sm;
   position: absolute;
-  top: $header-height;
+  top: $nav-height;
   width: 100%;
 
   &-container {
@@ -33,29 +34,19 @@
       }
     }
 
+    .#{$px}-link {
+      &--link {
+        border-bottom: 1px transparent solid;
+        color: $pure-black;
+      }
+    }
+
     p {
       @include pText(0.875rem, $pure-black);
 
       font-weight: 400;
       line-height: 1.25rem;
       text-transform: capitalize;
-    }
-
-    &:hover,
-    &:focus,
-    &:focus-within,
-    &:active {
-      p {
-        color: $pure-black;
-        text-decoration: underline;
-      }
-
-      .phillips-link {
-        &--standalone {
-          border-bottom: none !important;
-          color: $pure-black;
-        }
-      }
     }
   }
 }

@@ -3,19 +3,23 @@
 .#{$px}-search {
   display: flex;
   gap: $spacing-md;
-  height: $header-height;
+  height: $nav-height;
   position: absolute;
   right: 0;
   top: 0;
+  left: calc(100% - $nav-height);
+  transition: left 0.25s ease-in;
+  min-width: 2.625rem;
 
   &--active {
-    width: 100%;
+    left: 0;
+    transition: left 0.25s ease-in 0.2s;
   }
 
   &__input-status-icon {
     border-bottom: 1px solid $pure-black;
-    height: $header-height;
-
+    height: $nav-height;
+    width: $nav-height;
     svg {
       height: 100%;
       width: 100%;
@@ -49,29 +53,24 @@
   }
 
   &__content-wrapper {
-    background: $white;
     color: $soft-black;
     display: flex;
     justify-content: flex-end;
     width: 100%;
 
     .#{$px}-input {
-      position: relative;
-      transition: width 0.5s ease-in;
-      width: 0;
-
-      &-enter,
-      &-enter-active {
-        width: 100%;
-        z-index: 0;
-      }
+      width: 100%;
 
       &__validation {
         display: none;
       }
 
-      &__input {
+      &-enter-active input {
         background: $white;
+      }
+
+      &__input {
+        background: transparent;
         border: 0;
         border-bottom: 1px solid $pure-black;
         border-radius: unset;
@@ -82,7 +81,7 @@
         font-size: 0.875rem;
         font-style: normal;
         font-weight: 400;
-        height: $header-height;
+        height: $nav-height;
         line-height: 1.5rem;
         margin: 0;
         padding: $spacing-sm 0 $spacing-sm $spacing-sm;

@@ -5,10 +5,11 @@
   justify-content: center;
   list-style: none;
   margin: 0;
-  padding: 0 1.5rem 0 0;
+  padding: 0;
   position: relative;
   top: 0;
-  transition: top 0.4s ease-in 0.1s;
+  transition: top 0.25s ease-in 0.1s;
+  opacity: 1;
 
   @include isHeaderMobile {
     flex-direction: column;
@@ -33,6 +34,10 @@
   &--offscreen {
     top: -100%;
     z-index: 5;
+    opacity: 0;
+    transition:
+      top 0.25s ease-in 0.1s,
+      opacity 0.25s ease-in;
   }
 
   & .#{$px}-nav__item > & {

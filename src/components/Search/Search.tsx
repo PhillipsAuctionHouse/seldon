@@ -58,7 +58,7 @@ const Search = ({
   state = 'idle',
   defaultValue = '',
   className,
-  placeholder,
+  placeholder = '',
   searchButtonText = 'Search',
   loadingText = 'Search In Progress...',
   invalidText = 'Invalid search',
@@ -67,14 +67,13 @@ const Search = ({
   ...props
 }: React.PropsWithChildren<SearchProps>) => {
   const { className: baseClassName, 'data-testid': baseTestId, ...commonProps } = getCommonProps(props, 'Search');
-  const { isSearchExpanded, setIsSearchExpanded } = React.useContext(HeaderContext);
-
+  const headerContext = React.useContext(HeaderContext);
   const searchInputRef = React.useRef<HTMLInputElement>(null);
   const searchFormRef = React.useRef<HTMLFormElement>(null);
-
-  useOnClickOutside(searchFormRef, () => setIsSearchExpanded(false));
-
+  const isSearchExpanded = headerContext.isSearchExpanded;
   const value = searchInputRef.current?.value;
+
+  useOnClickOutside(searchFormRef, () => showSearch(false));
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLAnchorElement>) => {
     e.stopPropagation();
@@ -89,19 +88,19 @@ const Search = ({
       }
     }
     if (e.key === 'Escape') {
-      setIsSearchExpanded(false);
+      headerContext.setIsSearchExpanded(false);
       searchFormRef.current?.reset();
     }
   };
 
-  const showSearch: typeof setIsSearchExpanded = (isSearchExpanded) => {
-    setIsSearchExpanded(isSearchExpanded);
+  const showSearch: typeof headerContext.setIsSearchExpanded = (isSearchExpanded) => {
+    headerContext.setIsSearchExpanded(isSearchExpanded);
     // means we're opening search
     if (isSearchExpanded) {
-      searchFormRef.current?.reset();
+      searchInputRef.current?.focus();
       return;
     }
-    searchInputRef.current?.focus();
+    searchFormRef.current?.reset();
   };
 
   return (
@@ -118,7 +117,9 @@ const Search = ({
 
       <form
         data-testid={`${baseTestId}-form`}
-        className={classnames(`${baseClassName}__form`, { [`${baseClassName}__form--active`]: isSearchExpanded })}
+        className={classnames(`${baseClassName}__form`, {
+          [`${baseClassName}__form--active`]: isSearchExpanded,
+        })}
         aria-hidden={!isSearchExpanded}
         ref={searchFormRef}
       >
@@ -131,7 +132,6 @@ const Search = ({
         >
           <CSSTransition
             in={isSearchExpanded}
-            ref={searchInputRef as unknown as React.LegacyRef<CSSTransition<HTMLElement | undefined>>}
             classNames={`${px}-input`}
             addEndListener={() => {
               return;
@@ -142,7 +142,7 @@ const Search = ({
               id="search-input"
               hideLabel
               labelText={searchButtonText}
-              placeholder={placeholder ?? null}
+              placeholder={isSearchExpanded ? placeholder : ''}
               type="text"
               defaultValue={defaultValue}
               invalid={state === 'invalid'}
@@ -166,25 +166,25 @@ const Search = ({
             isSearchExpanded={isSearchExpanded}
             setIsSearchExpanded={showSearch}
           />
-          {value && value.length > 2 ? (
-            <SearchResults
-              autoCompleteResults={searchResults}
-              isLoading={state === 'loading'}
-              loadingText={loadingText}
-              onKeyDown={onKeyDown}
-            >
-              <li key="viewAllSearchResults" className={`${baseClassName}__result`}>
-                <Link
-                  href={((value: string) => {
-                    return encodeURLSearchParams(getAllResultsLink(value));
-                  })(value)}
-                >
-                  <p>{getAllResultsText(value)}</p>
-                </Link>
-              </li>
-            </SearchResults>
-          ) : null}
         </div>
+        {value && value.length > 2 ? (
+          <SearchResults
+            autoCompleteResults={searchResults}
+            isLoading={state === 'loading'}
+            loadingText={loadingText}
+            onKeyDown={onKeyDown}
+          >
+            <li key="viewAllSearchResults" className={`${baseClassName}__result`}>
+              <Link
+                href={((value: string) => {
+                  return encodeURLSearchParams(getAllResultsLink(value));
+                })(value)}
+              >
+                <p>{getAllResultsText(value)}</p>
+              </Link>
+            </li>
+          </SearchResults>
+        ) : null}
       </form>
     </div>
   );
