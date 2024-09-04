@@ -8,6 +8,7 @@
   flex-direction: column;
   position: sticky;
   top: 0;
+  z-index: 1;
 
   &__toggle-btn {
     align-items: center;
@@ -106,7 +107,6 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    padding: 0 $padding-md;
 
     &--closed {
       display: none;
@@ -134,9 +134,4 @@
       }
     }
   }
-}
-
-/** This is kind of dangerous as it will change all of them.  It's possible that we get rid of this*/
-.#{$px}-dropdown__content .#{$px}-dropdown__item {
-  @include text($snwHeaderLink);
 }

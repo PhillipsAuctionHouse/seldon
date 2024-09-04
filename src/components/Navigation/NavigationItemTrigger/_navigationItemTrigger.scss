@@ -1,1 +1,77 @@
 @use '#scss/allPartials' as *;
+
+.#{$px}-navigation-item-trigger {
+  flex-direction: column;
+
+  & > button {
+    &:hover::after,
+    &:focus::after {
+      background: $pure-black;
+      bottom: -1px;
+      content: '';
+      height: 1px;
+      left: 0;
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  & > button {
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    white-space: nowrap;
+    width: 100%;
+
+    @include isHeaderDesktop {
+      justify-content: center;
+    }
+  }
+
+  @include isHeaderDesktop {
+    &--hovered &__submenu {
+      // This relies on the top-header itself being the only absolute parent
+      bottom: -1px;
+      left: 0;
+      position: absolute;
+      right: 0;
+
+      /** submenu */
+      .#{$px}-nav__list {
+        max-height: unset;
+        padding: $padding-md;
+      }
+    }
+  }
+
+  // Submenu
+  ul {
+    position: static;
+  }
+
+  @include isHeaderDesktop {
+    ul {
+      background-color: $pure-white;
+      height: auto;
+      left: 0;
+      max-height: 0;
+      min-height: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: 10;
+
+      li {
+        display: inline;
+        white-space: nowrap;
+
+        button,
+        a,
+        p {
+          @include isHeaderDesktop {
+            border: none;
+          }
+        }
+      }
+    }
+  }
+}

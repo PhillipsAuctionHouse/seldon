@@ -18,7 +18,7 @@ export interface NavigationProps extends ComponentProps<'nav'> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-navigation--overview)
  */
-const Navigation = forwardRef<HTMLElement, NavigationProps>(({ children, className, id, visible = true }) => {
+const Navigation = forwardRef<HTMLElement, NavigationProps>(({ children, className, id, visible = true, ...props }) => {
   return (
     <nav
       role="navigation"
@@ -26,6 +26,7 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(({ children, classNa
       id={id}
       style={{ '--visible': visible ? 'visible' : 'hidden' } as CSSProperties}
       className={classnames(`${px}-nav`, className)}
+      {...props}
     >
       {children}
     </nav>

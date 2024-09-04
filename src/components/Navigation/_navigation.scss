@@ -1,6 +1,9 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-nav {
+  overflow-x: hidden;
+  overflow-y: auto;
+
   @include isHeaderDesktop {
     // Remove mobile button on larger screens
     .#{$px}-nav__close-btn {

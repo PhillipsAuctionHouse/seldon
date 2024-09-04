@@ -1,7 +1,7 @@
-import { px } from '../../../utils';
+import { getCommonProps, px } from '../../../utils';
 import classNames from 'classnames';
-import { HeaderContext } from '../../Header/Header';
-import { ComponentProps, forwardRef, MouseEvent, useContext } from 'react';
+import { ComponentProps, forwardRef, MouseEvent, useState } from 'react';
+import { Text, TextVariants } from '../../Text';
 
 export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
   /**
@@ -10,28 +10,43 @@ export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
   label: string;
 }
 
+/**
+ * ## Overview
+ *
+ * Supports clicking in mobile mode and hovering in desktop mode to expand the child navigation lists
+ *
+ * [Figma Link](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/EASEL-Compendium%3A-Tokens%2C-Components-%26-Patterns?node-id=10570-6295&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-languageselector--overview)
+ */
 const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerProps>(
   ({ id, label, children, className, onClick, ...props }, ref) => {
-    // This should be handled by the accordion context
-    const { expandedItem, setExpandedItem } = useContext(HeaderContext);
+    const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'NavigationItemTrigger');
+    const [isSubmenuOpened, setIsSubmenuOpened] = useState(false);
 
     const handleClick = (event: MouseEvent<HTMLLIElement>) => {
       onClick?.(event);
-      setExpandedItem(expandedItem === label ? '' : label);
+      setIsSubmenuOpened(true);
     };
     return (
       <li
+        {...commonProps}
         ref={ref}
-        aria-expanded={expandedItem === label}
-        data-testid={`nav-item-trigger-${id}`}
-        className={classNames(className, `${px}-nav__item`, { [`${px}-nav__item--expanded`]: expandedItem === label })}
+        aria-expanded={isSubmenuOpened}
+        className={classNames(className, baseClassName, `${px}-nav__item`, {
+          [`${baseClassName}--hovered`]: isSubmenuOpened,
+        })}
         onClick={handleClick}
+        onMouseOver={() => setIsSubmenuOpened(true)}
+        onMouseOut={() => setIsSubmenuOpened(false)}
         {...props}
       >
         <button className={`${px}-nav__item-trigger`} type="button">
-          <label className={`${px}-nav__item--label`}>{label}</label>
+          <label className={`${px}-nav__item--label`}>
+            <Text variant={TextVariants.snwHeaderLink}>{label}</Text>
+          </label>
         </button>
-        {children}
+        <div className={`${baseClassName}__submenu`}>{children}</div>
       </li>
     );
   },

@@ -87,11 +87,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
           >
             <span /> {/** this is here so we can do transitions with pseudo icons */}
           </button>
-          <h1
-            data-testid="header-logo"
-            className={`${px}-header__logo`}
-            tabIndex={toggleText === toggleOpenText ? 0 : -1}
-          >
+          <h1 data-testid="header-logo" className={`${px}-header__logo`}>
             <a href="/" aria-label={logoText}>
               {typeof logo === 'object' ? (
                 logo

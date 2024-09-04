@@ -37,6 +37,8 @@
     // following will add additional arrows if list is near edge of viewport
     max-height: var(--radix-select-content-available-height);
     overflow: hidden;
+    position: relative;
+    z-index: 10;
   }
 
   &__scroll-button,

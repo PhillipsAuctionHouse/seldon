@@ -2,7 +2,6 @@ import * as React from 'react';
 import { px } from '../../../utils';
 import classNames from 'classnames';
 import { NavigationItemProps } from '../NavigationItem/NavigationItem';
-import { HeaderContext } from '../../Header/Header';
 
 export interface NavigationListProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -12,7 +11,6 @@ export interface NavigationListProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 const NavigationList = ({ id, children, className }: React.PropsWithChildren<NavigationListProps>) => {
-  const { isExpanded } = React.useContext(HeaderContext);
   const largeCtaItems = React.Children.toArray(children).filter((child) => {
     if (child && (child as React.ReactElement<NavigationItemProps>).props.navGroup === 'nav-link-lg') {
       return child;
@@ -24,13 +22,7 @@ const NavigationList = ({ id, children, className }: React.PropsWithChildren<Nav
     }
   });
   return (
-    <ul
-      id={id}
-      data-testid={id}
-      role="list"
-      aria-expanded={isExpanded}
-      className={classNames(className, `${px}-nav__list`, { [`${px}-nav__list--expanded`]: isExpanded })}
-    >
+    <ul id={id} data-testid={id} role="list" className={classNames(className, `${px}-nav__list`)}>
       {largeCtaItems.length > 0 ? (
         <div className={classNames(`${px}-nav__list__section`, `${px}-nav__list__section--large-cta`)}>
           {largeCtaItems}

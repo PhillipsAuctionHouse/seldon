@@ -2,8 +2,7 @@ import { px } from '../../../utils';
 import classNames from 'classnames';
 import Link, { LinkProps } from '../../Link/Link';
 import { LinkVariants } from '../../Link/types';
-import { HeaderContext } from '../../Header/Header';
-import { ComponentProps, ElementType, forwardRef, ReactNode, useContext } from 'react';
+import { ComponentProps, ElementType, forwardRef, ReactNode } from 'react';
 
 export interface NavigationItemProps extends ComponentProps<'li'> {
   /**
@@ -43,8 +42,6 @@ export interface NavigationItemProps extends ComponentProps<'li'> {
  */
 const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
   ({ badge, className = '', href, label, navGroup, navType, onClick, element: Component = Link, ...props }, ref) => {
-    const { expandedItem } = useContext(HeaderContext);
-
     return (
       <li
         {...props}
@@ -53,11 +50,7 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
         className={classNames(`${px}-nav__item`, navGroup, className)}
         ref={ref}
       >
-        <Component
-          href={href}
-          variant={navType ? navType : LinkVariants.snwHeaderLink}
-          tabIndex={expandedItem === '' ? 0 : -1}
-        >
+        <Component href={href} variant={navType ? navType : LinkVariants.snwHeaderLink}>
           <span className={`${px}-nav__item--label`}>{label}</span>
           {badge ? <span className={`${px}-nav__item--badge `}>{` • ${badge}`}</span> : null}
         </Component>

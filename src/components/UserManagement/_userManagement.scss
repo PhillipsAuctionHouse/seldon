@@ -4,6 +4,7 @@
   align-items: center;
   cursor: pointer;
   display: flex;
+  gap: 0 $spacing-xsm;
   justify-content: flex-end;
   min-width: 75px; // needed to handle the loading states and language swapping
 
@@ -16,9 +17,32 @@
 
     > p.#{$px}-text {
       margin: 0;
+    }
 
-      @include isHeaderMobile {
-        display: none;
+    @include isHeaderMobile {
+      display: none;
+    }
+  }
+
+  &__account-icon {
+    height: 24px;
+    width: 24px;
+
+    a {
+      align-items: center;
+      display: flex;
+      height: $mobile-minimum-clickable-area;
+      justify-content: center;
+      width: $mobile-minimum-clickable-area;
+    }
+
+    @include isHeaderDesktop {
+      height: 16px;
+      width: 16px;
+
+      a {
+        height: 24px;
+        width: 24px;
       }
     }
   }

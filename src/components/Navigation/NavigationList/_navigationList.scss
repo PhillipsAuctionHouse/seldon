@@ -18,23 +18,9 @@
     transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1) 0.1s;
   }
 
-  &--expanded {
-    @include isHeaderMobile {
-      &:not(li ul) {
-        transform: translateX(-50%);
-        width: 200%;
-      }
-    }
-  }
-
   & .#{$px}-nav__item > & {
     @include isHeaderMobile {
       display: none;
-
-      &--expanded {
-        display: flex;
-        flex-direction: column;
-      }
     }
   }
 
