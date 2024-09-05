@@ -13,7 +13,6 @@
     position: relative;
 
     @include isHeaderDesktop {
-      height: $header-height;
       padding-right: $search-size;
     }
   }

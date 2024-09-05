@@ -1,6 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-nav__list {
+  align-items: center;
   display: flex;
   justify-content: center;
   list-style: none;
@@ -12,6 +13,7 @@
   transition: top 0.25s ease-in 0.1s;
 
   @include isHeaderMobile {
+    align-items: flex-start;
     flex-direction: column;
     justify-content: left;
     min-width: 330px;

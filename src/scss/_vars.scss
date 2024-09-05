@@ -344,11 +344,25 @@ $margin-xl: var(--spacing-xl);
 $margin-xxl: var(--spacing-xxl);
 
 ////////////////////////
+/// HEADER TOKENS:
+///////////////////////
+/* stylelint-disable-next-line no-duplicate-selectors */
+:root {
+  --header-height: 69px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
+
+  @media (min-width: $breakpoint-md) {
+    --header-height: 103px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
+  }
+
+  @media (min-width: $breakpoint-xl) {
+    --header-height: 115px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
+  }
+}
+
+////////////////////////
 /// height Tokens
 ///////////////////////
-$header-height: 42px;
-$user-management-height: 30px;
-$header-submenu-top: calc($header-height + $user-management-height + 1px);
+$header-height: var(--header-height);
 
 ////////////////////////
 /// max-site-width TOKEN:

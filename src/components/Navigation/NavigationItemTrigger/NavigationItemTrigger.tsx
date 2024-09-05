@@ -40,9 +40,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
         {...props}
       >
         <button className={`${px}-nav__item-trigger`} type="button">
-          <label className={`${px}-nav__item--label`}>
-            <Text variant={TextVariants.snwHeaderLink}>{label}</Text>
-          </label>
+          <Text variant={TextVariants.snwHeaderLink}>{label}</Text>
         </button>
         {navListElement ? React.cloneElement(navListElement[0], { className: `${baseClassName}__submenu` }) : undefined}
       </li>

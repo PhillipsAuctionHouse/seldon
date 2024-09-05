@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import Header, { HeaderContext, HeaderProps } from './Header';
+import Header, { HeaderProps } from './Header';
 import Navigation from '../Navigation/Navigation';
 import NavigationList from '../Navigation/NavigationList/NavigationList';
 import NavigationItemTrigger from '../Navigation/NavigationItemTrigger/NavigationItemTrigger';
@@ -16,7 +16,6 @@ import { useState } from 'react';
 import { faker } from '@faker-js/faker';
 import { SearchResult } from '../Search/SearchResults/SearchResults';
 import React from 'react';
-import { defaultHeaderContext } from './utils';
 
 const generateLoremIpsum = (numOfParagraphs = 10) => {
   let loremIpsum = '';
@@ -49,7 +48,6 @@ const fetchData = async (searchQuery: string) => {
 const StatefulSearch = (props: SearchProps) => {
   const [autoCompleteResults, setAutoCompleteResults] = React.useState([] as Array<SearchResult>);
   const [state, setState] = React.useState<SearchProps['state']>('idle');
-  const [isSearchExpanded, setIsSearchExpanded] = React.useState(false);
 
   const onSearch = (searchQuery: string) => {
     if (searchQuery?.includes('?')) {
@@ -68,16 +66,14 @@ const StatefulSearch = (props: SearchProps) => {
     }
   };
   return (
-    <HeaderContext.Provider value={{ ...defaultHeaderContext, isSearchExpanded, setIsSearchExpanded }}>
-      <Search
-        {...props}
-        onSearch={(value) => {
-          onSearch(value);
-        }}
-        searchResults={autoCompleteResults}
-        state={state}
-      />
-    </HeaderContext.Provider>
+    <Search
+      {...props}
+      onSearch={(value) => {
+        onSearch(value);
+      }}
+      searchResults={autoCompleteResults}
+      state={state}
+    />
   );
 };
 
