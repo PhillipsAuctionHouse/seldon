@@ -1,6 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-nav {
+  border-top: 1px solid $light-gray;
   display: flex;
   height: fit-content;
   justify-content: center;
@@ -18,6 +19,7 @@
   }
 
   @include isHeaderDesktop {
+    border: unset;
     width: fit-content;
 
     // Remove mobile button on larger screens
