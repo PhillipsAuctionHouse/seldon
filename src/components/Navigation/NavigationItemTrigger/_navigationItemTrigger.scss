@@ -2,19 +2,7 @@
 
 .#{$px}-navigation-item-trigger {
   flex-direction: column;
-
-  & > button {
-    &:hover::after,
-    &:focus::after {
-      background: $pure-black;
-      bottom: -1px;
-      content: '';
-      height: 1px;
-      left: 0;
-      position: absolute;
-      right: 0;
-    }
-  }
+  justify-content: center;
 
   & > button {
     display: flex;
@@ -29,24 +17,33 @@
   }
 
   @include isHeaderDesktop {
+    &--hovered button::after {
+      background-color: $pure-black;
+      bottom: 1px;
+      content: '';
+      height: 1px;
+      left: 0;
+      position: absolute; // This relies on the top-header itself being the only absolute parent
+      right: 0;
+    }
+
+    &__submenu {
+      transform: translateY(-100%);
+    }
+
     &--hovered &__submenu {
       // This relies on the top-header itself being the only absolute parent
-      bottom: -1px;
+      height: fit-content;
       left: 0;
-      position: absolute;
+      max-height: unset;
+      opacity: 1;
+      padding: $padding-md;
+      position: fixed; // has to bust out of the box containing it
       right: 0;
-
-      /** submenu */
-      .#{$px}-nav__list {
-        max-height: unset;
-        padding: $padding-md;
-      }
+      top: calc(var(--header-height) + 4px);
+      transform: translateY(0);
+      transition: none; // remove this when implementing submenu transitions
     }
-  }
-
-  // Submenu
-  ul {
-    position: static;
   }
 
   @include isHeaderDesktop {
@@ -54,11 +51,10 @@
       background-color: $pure-white;
       height: auto;
       left: 0;
-      max-height: 0;
-      min-height: 0;
+      opacity: 0;
       overflow: hidden;
       position: absolute;
-      z-index: 10;
+      z-index: -1;
 
       li {
         display: inline;

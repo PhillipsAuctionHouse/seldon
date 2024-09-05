@@ -8,7 +8,7 @@
   flex-direction: column;
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 10;
 
   &__toggle-btn {
     align-items: center;
@@ -76,6 +76,11 @@
   &__logo {
     align-self: center;
 
+    svg {
+      height: 24px;
+      width: 100%;
+    }
+
     @include isHeaderDesktop {
       align-self: flex-end;
 
@@ -96,10 +101,6 @@
     /** There are actually two language selectors in the DOM, show this one in desktop */
     .#{$px}-language-selector {
       display: none;
-
-      @include isHeaderDesktop {
-        display: flex;
-      }
     }
   }
 
@@ -107,30 +108,27 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    overflow-y: auto;
 
     &--closed {
       display: none;
     }
 
-    /** The language selector inside the nav only shows on mobile, otherwise it uses the one in the header__top-row */
-    .#{$px}-language-selector.#{$px}-dropdown {
-      @include text($snwHeaderLink);
-
-      padding-top: $padding-lg;
-
-      button {
-        padding: 0.5rem 0.65rem;
-        text-transform: unset;
-      }
-    }
-
     @include isHeaderDesktop {
       display: flex;
       height: unset;
+      overflow-y: hidden;
       width: 100%;
 
-      .#{$px}-language-selector {
-        display: none;
+      div.#{$px}-language-selector {
+        display: none; // hide this one on mobile
+      }
+    }
+
+    .#{$px}-nav__item {
+      .#{$px}-link--snwHeaderLink {
+        align-content: center;
+        height: 100%;
       }
     }
   }

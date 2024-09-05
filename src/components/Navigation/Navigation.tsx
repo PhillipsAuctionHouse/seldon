@@ -1,6 +1,8 @@
-import { px } from '../../utils';
+import React, { ComponentProps, CSSProperties, forwardRef } from 'react';
+import { findChildrenOfType, px } from '../../utils';
 import classnames from 'classnames';
-import { ComponentProps, CSSProperties, forwardRef } from 'react';
+import { HeaderContext } from '../Header/Header';
+import NavigationList, { NavigationListProps } from './NavigationList/NavigationList';
 
 export interface NavigationProps extends ComponentProps<'nav'> {
   /**
@@ -18,20 +20,31 @@ export interface NavigationProps extends ComponentProps<'nav'> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-navigation--overview)
  */
-const Navigation = forwardRef<HTMLElement, NavigationProps>(({ children, className, id, visible = true, ...props }) => {
-  return (
-    <nav
-      role="navigation"
-      data-testid={id}
-      id={id}
-      style={{ '--visible': visible ? 'visible' : 'hidden' } as CSSProperties}
-      className={classnames(`${px}-nav`, className)}
-      {...props}
-    >
-      {children}
-    </nav>
-  );
-});
+const Navigation = forwardRef<HTMLElement, NavigationProps>(
+  ({ children, className, id, visible = true, ...props }, ref) => {
+    const { isSearchExpanded } = React.useContext(HeaderContext);
+    const childNavList = findChildrenOfType<NavigationListProps>(children, NavigationList);
+    const otherChildren = findChildrenOfType(children, NavigationList, true);
+    return (
+      <nav
+        role="navigation"
+        data-testid={id}
+        id={id}
+        style={{ '--visible': visible ? 'visible' : 'hidden' } as CSSProperties}
+        className={classnames(`${px}-nav`, className)}
+        {...props}
+        ref={ref}
+      >
+        <div className={`${px}-nav__list-container`}>
+          {React.isValidElement(childNavList?.[0])
+            ? React.cloneElement<NavigationListProps>(childNavList[0], { isOffScreen: isSearchExpanded })
+            : undefined}
+          {otherChildren}
+        </div>
+      </nav>
+    );
+  },
+);
 
 Navigation.displayName = 'Navigation';
 

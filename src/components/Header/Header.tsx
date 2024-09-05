@@ -1,11 +1,13 @@
 import classnames from 'classnames';
-import { findChildrenOfType, noOp, px } from '../../utils';
+import { findChildrenOfType, px } from '../../utils';
 import Search from '../Search/Search';
 import Logo from '../../assets/PhillipsLogo.svg?react';
 import UserManagement from '../UserManagement/UserManagement';
 import { LanguageSelector } from '../LanguageSelector';
 import Navigation from '../Navigation/Navigation';
-import { Component, ComponentProps, forwardRef, ReactElement, useState, createContext } from 'react';
+import { Component, ComponentProps, forwardRef, ReactElement, useState, createContext, useRef, useEffect } from 'react';
+import { defaultHeaderContext } from './utils';
+import mergeRefs from 'merge-refs';
 
 export interface HeaderProps extends ComponentProps<'header'> {
   /**
@@ -28,14 +30,17 @@ export interface HeaderProps extends ComponentProps<'header'> {
 type HeaderContextType = {
   expandedItem: string;
   setExpandedItem: (item: string) => void;
-  isMenuOpen: boolean;
+  /**
+   * Is the user within the search input and searching
+   */
+  isSearchExpanded: boolean;
+  /**
+   * Set the search expanded state
+   */
+  setIsSearchExpanded: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const HeaderContext = createContext<HeaderContextType>({
-  expandedItem: '',
-  setExpandedItem: noOp,
-  isMenuOpen: false,
-});
+export const HeaderContext = createContext<HeaderContextType>(defaultHeaderContext);
 
 /**
  * ## Overview
@@ -64,16 +69,37 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     const searchElement = findChildrenOfType(children, Search);
     const userManagementElement = findChildrenOfType(children, UserManagement);
     const languageSelectorElement = findChildrenOfType(children, LanguageSelector);
+    const [isSearchExpanded, setIsSearchExpanded] = useState(false);
     const navElements = findChildrenOfType(children, Navigation);
     const [isOpen, setIsOpen] = useState(false);
     const [expandedItem, setExpandedItem] = useState('');
     const toggleText = isOpen ? toggleCloseText : toggleOpenText;
+    const [headerHeight, setHeight] = useState(0);
     const handleMenuToggle = function () {
       setIsOpen((prev) => !prev);
     };
+    const headerRef = useRef<HTMLElement>(null);
+    const handleResize = () => {
+      if (headerRef.current) {
+        setHeight(headerRef.current.offsetHeight);
+      }
+    };
+
+    useEffect(() => {
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
 
     return (
-      <header {...props} className={classnames(`${px}-header`, className)} ref={ref}>
+      <header
+        {...props}
+        style={{ '--header-height': `${headerHeight}px` } as React.CSSProperties}
+        className={classnames(`${px}-header`, className)}
+        ref={mergeRefs(ref, headerRef)}
+      >
         <div className={`${px}-header__top-row`}>
           {languageSelectorElement}
           <button
@@ -99,7 +125,17 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
           {userManagementElement}
         </div>
         <div className={classnames(`${px}-header__nav`, { [`${px}-header__nav--closed`]: !isOpen })}>
-          <HeaderContext.Provider value={{ isMenuOpen: isOpen, expandedItem, setExpandedItem } as HeaderContextType}>
+          <HeaderContext.Provider
+            value={
+              {
+                isMenuOpen: isOpen,
+                expandedItem,
+                setExpandedItem,
+                isSearchExpanded,
+                setIsSearchExpanded,
+              } as HeaderContextType
+            }
+          >
             {navElements}
             {languageSelectorElement} {/* This is not visible through css when in desktop breakpoint */}
           </HeaderContext.Provider>

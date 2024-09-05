@@ -1,7 +1,8 @@
-import { getCommonProps, px } from '../../../utils';
+import { findChildrenOfType, getCommonProps, px } from '../../../utils';
 import classNames from 'classnames';
-import { ComponentProps, forwardRef, MouseEvent, useState } from 'react';
+import React, { ComponentProps, forwardRef, MouseEvent, useState } from 'react';
 import { Text, TextVariants } from '../../Text';
+import NavigationList, { NavigationListProps } from '../NavigationList/NavigationList';
 
 export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
   /**
@@ -23,11 +24,8 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
   ({ id, label, children, className, onClick, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'NavigationItemTrigger');
     const [isSubmenuOpened, setIsSubmenuOpened] = useState(false);
+    const navListElement = findChildrenOfType<NavigationListProps>(children, NavigationList);
 
-    const handleClick = (event: MouseEvent<HTMLLIElement>) => {
-      onClick?.(event);
-      setIsSubmenuOpened(true);
-    };
     return (
       <li
         {...commonProps}
@@ -36,7 +34,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
         className={classNames(className, baseClassName, `${px}-nav__item`, {
           [`${baseClassName}--hovered`]: isSubmenuOpened,
         })}
-        onClick={handleClick}
+        onClick={onClick}
         onMouseOver={() => setIsSubmenuOpened(true)}
         onMouseOut={() => setIsSubmenuOpened(false)}
         {...props}
@@ -46,7 +44,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
             <Text variant={TextVariants.snwHeaderLink}>{label}</Text>
           </label>
         </button>
-        <div className={`${baseClassName}__submenu`}>{children}</div>
+        {navListElement ? React.cloneElement(navListElement[0], { className: `${baseClassName}__submenu` }) : undefined}
       </li>
     );
   },

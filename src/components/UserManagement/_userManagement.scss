@@ -25,8 +25,8 @@
   }
 
   &__account-icon {
-    height: 24px;
-    width: 24px;
+    height: 1.5rem;
+    width: 1.5rem;
 
     a {
       align-items: center;
@@ -36,14 +36,9 @@
       width: $mobile-minimum-clickable-area;
     }
 
-    @include isHeaderDesktop {
-      height: 16px;
-      width: 16px;
-
-      a {
-        height: 24px;
-        width: 24px;
-      }
+    @mixin isHeaderDesktop {
+      height: 1.5rem;
+      width: 1.5rem;
     }
   }
 }

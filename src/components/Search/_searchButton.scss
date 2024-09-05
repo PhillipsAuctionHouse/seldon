@@ -1,0 +1,41 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-search__button {
+  align-items: center;
+  background: $pure-white;
+  border: none;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  display: flex;
+  height: $search-size;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: $search-size;
+
+  &--close {
+    border-bottom: 1px solid $pure-black;
+  }
+
+  svg {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  &:hover,
+  &:focus-visible,
+  &:active {
+    border-bottom: 1px solid $pure-black;
+  }
+
+  &__icon {
+    pointer-events: none;
+
+    path {
+      fill: $pure-black;
+    }
+  }
+}

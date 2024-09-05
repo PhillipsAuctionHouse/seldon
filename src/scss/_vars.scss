@@ -344,16 +344,16 @@ $margin-xl: var(--spacing-xl);
 $margin-xxl: var(--spacing-xxl);
 
 ////////////////////////
-/// max-site-width TOKEN:
-///////////////////////
-$max-site-width: 1560px;
-
-////////////////////////
 /// height Tokens
 ///////////////////////
 $header-height: 42px;
 $user-management-height: 30px;
 $header-submenu-top: calc($header-height + $user-management-height + 1px);
+
+////////////////////////
+/// max-site-width TOKEN:
+///////////////////////
+$max-site-width: 1560px;
 $desktop-max-width: var(--desktop-max-width);
 
 ////////////////////////
@@ -372,3 +372,8 @@ $default-overlay-transition: 350ms cubic-bezier(0.4, 0, 0.2, 1);
 /// Mobile-specific tokens
 ///////////////////////
 $mobile-minimum-clickable-area: 44px;
+
+////////////////////////
+/// Header Tokens
+///
+$search-size: 2.625rem;

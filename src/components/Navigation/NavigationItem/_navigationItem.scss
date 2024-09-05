@@ -1,6 +1,8 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-nav__item {
+  cursor: pointer;
+
   @include isHeaderMobile {
     max-width: 320px;
     width: 100%;
@@ -42,27 +44,9 @@
       display: flex;
       padding: 0.5rem 0.625rem;
     }
-
-    & > a:focus,
-    & > button:focus {
-      background-color: #f4f4f4;
-    }
-
-    &:hover {
-      & > a,
-      & > button {
-        background-color: #f4f4f4;
-      }
-    }
   }
 
   @include isHeaderDesktop {
-    &:not(ul ul li) a:focus,
-    &:not(ul ul li) button:focus,
-    &:not(ul ul li) p:focus {
-      background: #f4f4f4;
-    }
-
     & > .#{$px}-nav__list-item-trigger::before {
       background: #f4f4f4;
       content: '';

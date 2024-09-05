@@ -1,8 +1,17 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-nav {
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden auto;
+
+  &__list-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    @include isHeaderDesktop {
+      height: $header-height;
+    }
+  }
 
   @include isHeaderDesktop {
     // Remove mobile button on larger screens

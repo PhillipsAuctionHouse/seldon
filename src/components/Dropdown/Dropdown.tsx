@@ -1,4 +1,4 @@
-import React, { useState, ComponentProps } from 'react';
+import React, { useState, ComponentProps, ComponentPropsWithoutRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import * as DropdownSelect from '@radix-ui/react-select';
@@ -7,7 +7,7 @@ import { DropdownItem } from './types';
 
 export interface DropdownProps
   extends Omit<DropdownSelect.SelectProps, 'defaultValue' | 'dir'>,
-    Omit<ComponentProps<'div'>, 'ref'> {
+    ComponentPropsWithoutRef<'div'> {
   /**
    * All options to be listed in the dropdown
    */
@@ -56,11 +56,16 @@ const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
             </DropdownSelect.Icon>
           </DropdownSelect.Trigger>
           <DropdownSelect.Portal>
-            <DropdownSelect.Content className={`${baseClassName}__content`} position="popper">
+            <DropdownSelect.Content
+              className={classnames(`${baseClassName}__content`, `${baseClassName}__content-${id}`)}
+              position="popper"
+            >
               <DropdownSelect.ScrollUpButton className={`${baseClassName}__scroll-button__up`}>
                 <ChevronDownIcon />
               </DropdownSelect.ScrollUpButton>
-              <DropdownSelect.Viewport className={`${baseClassName}__viewport`}>
+              <DropdownSelect.Viewport
+                className={classnames(`${baseClassName}__viewport`, `${baseClassName}__viewport-${id}`)}
+              >
                 {options.map((option) => (
                   <DropdownSelectItem
                     key={option.value}
