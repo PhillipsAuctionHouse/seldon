@@ -1,6 +1,8 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-nav {
+  display: flex;
+  justify-content: center;
   overflow: hidden auto;
 
   &__list-container {
@@ -10,6 +12,7 @@
 
     @include isHeaderDesktop {
       height: $header-height;
+      padding-right: $search-size;
     }
   }
 
