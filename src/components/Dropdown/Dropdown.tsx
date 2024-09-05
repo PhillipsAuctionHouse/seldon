@@ -1,4 +1,4 @@
-import React, { useState, ComponentProps, ComponentPropsWithoutRef } from 'react';
+import React, { useState, ComponentPropsWithoutRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import * as DropdownSelect from '@radix-ui/react-select';

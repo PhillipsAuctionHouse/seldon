@@ -1,6 +1,6 @@
 import { findChildrenOfType, getCommonProps, px } from '../../../utils';
 import classNames from 'classnames';
-import React, { ComponentProps, forwardRef, MouseEvent, useState } from 'react';
+import React, { ComponentProps, forwardRef, useState } from 'react';
 import { Text, TextVariants } from '../../Text';
 import NavigationList, { NavigationListProps } from '../NavigationList/NavigationList';
 

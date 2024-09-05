@@ -49,7 +49,7 @@ const fetchData = async (searchQuery: string) => {
 const StatefulSearch = (props: SearchProps) => {
   const [autoCompleteResults, setAutoCompleteResults] = React.useState([] as Array<SearchResult>);
   const [state, setState] = React.useState<SearchProps['state']>('idle');
-  // const [isSearchExpanded, setIsSearchExpanded] = React.useState(false);
+  const [isSearchExpanded, setIsSearchExpanded] = React.useState(false);
 
   const onSearch = (searchQuery: string) => {
     if (searchQuery?.includes('?')) {
@@ -68,7 +68,7 @@ const StatefulSearch = (props: SearchProps) => {
     }
   };
   return (
-    <HeaderContext.Provider value={{ ...defaultHeaderContext }}>
+    <HeaderContext.Provider value={{ ...defaultHeaderContext, isSearchExpanded, setIsSearchExpanded }}>
       <Search
         {...props}
         onSearch={(value) => {
@@ -245,12 +245,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
             <NavigationItem href="#" label="Dropshop" />
             <NavigationItem href="#" label="Editorial" />
           </NavigationList>
-          <Search
-            placeholder="Search for makers"
-            onSearch={() => {
-              console.log('onSearch');
-            }}
-          />
+          <StatefulSearch placeholder="Search for makers" />
         </Navigation>
         <LanguageSelector onLanguageChange={setCurrentLanguage} currentLanguage={currentLanguage} />
         <UserManagement

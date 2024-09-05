@@ -136,7 +136,7 @@ const AccordionItem = ({
   children,
   ...props
 }: AccordionItemProps) => {
-  const { className: baseClassName } = getCommonProps(props, 'Accordion');
+  const { className: baseClassName } = getCommonProps({ id }, 'Accordion');
   const isLargeVariation = variation === 'lg';
   const accordionItemClassName = `${baseClassName}-item`;
 
@@ -145,6 +145,7 @@ const AccordionItem = ({
       disabled={isLocked}
       value={id}
       className={classnames(accordionItemClassName, { [`${accordionItemClassName}__border-bottom`]: !isLastItem })}
+      {...props}
     >
       <AccordionHeader
         disable={isLocked}

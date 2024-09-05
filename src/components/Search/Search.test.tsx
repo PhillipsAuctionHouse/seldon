@@ -31,7 +31,7 @@ describe('Search component', () => {
     await waitFor(() => expect(screen.queryByTestId('search-close-button')).toBeInTheDocument());
     await new Promise((resolve) => setTimeout(resolve, 2000));
     screen.debug();
-    const closeButton = screen.queryByTestId('search-close-button');
+    const closeButton = screen.getByTestId('search-close-button');
     expect(closeButton).toBeInTheDocument();
     expect(searchButton).not.toBeInTheDocument();
     expect(searchInput).toBeVisible();

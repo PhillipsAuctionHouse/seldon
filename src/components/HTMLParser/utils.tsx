@@ -51,8 +51,6 @@ export const options = {
     }
 
     if (name === 'a') {
-      // why do I have to do this?
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { class: className, ...rest } = attribs;
       const props = attributesToProps(rest);
       return (
