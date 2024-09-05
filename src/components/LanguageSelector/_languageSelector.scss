@@ -4,6 +4,7 @@
 .#{$px}-language-selector {
   display: flex;
   min-width: 87px; // needed to handle English vs Chinese option.  Arguably this should be determined by the Dropdown component the longest element in the dropdown
+  padding-bottom: 10rem; // needed for bottom accordion
 
   &.#{$px}-dropdown {
     display: none;

@@ -40,7 +40,7 @@
       padding: $padding-md;
       position: fixed; // has to bust out of the box containing it
       right: 0;
-      top: calc(var(--header-height) + 4px);
+      top: calc($header-submenu-top + 4px);
       transform: translateY(0);
       transition: none; // remove this when implementing submenu transitions
     }

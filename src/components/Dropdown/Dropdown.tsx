@@ -56,16 +56,11 @@ const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
             </DropdownSelect.Icon>
           </DropdownSelect.Trigger>
           <DropdownSelect.Portal>
-            <DropdownSelect.Content
-              className={classnames(`${baseClassName}__content`, `${baseClassName}__content-${id}`)}
-              position="popper"
-            >
+            <DropdownSelect.Content className={`${baseClassName}__content`} position="popper">
               <DropdownSelect.ScrollUpButton className={`${baseClassName}__scroll-button__up`}>
                 <ChevronDownIcon />
               </DropdownSelect.ScrollUpButton>
-              <DropdownSelect.Viewport
-                className={classnames(`${baseClassName}__viewport`, `${baseClassName}__viewport-${id}`)}
-              >
+              <DropdownSelect.Viewport className={`${baseClassName}__viewport`}>
                 {options.map((option) => (
                   <DropdownSelectItem
                     key={option.value}

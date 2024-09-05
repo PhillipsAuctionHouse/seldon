@@ -2,12 +2,14 @@
 
 .#{$px}-nav {
   display: flex;
+  height: fit-content;
   justify-content: center;
-  overflow: hidden auto;
+  width: 100vw;
 
   &__list-container {
     display: flex;
     justify-content: center;
+    padding: 0 $spacing-sm;
     position: relative;
 
     @include isHeaderDesktop {
@@ -17,6 +19,8 @@
   }
 
   @include isHeaderDesktop {
+    width: fit-content;
+
     // Remove mobile button on larger screens
     .#{$px}-nav__close-btn {
       display: none;

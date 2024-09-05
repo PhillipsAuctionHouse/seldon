@@ -26,7 +26,7 @@ export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement>
    */
   id: string;
   /**
-   * Accordion header for label.
+   * Accordion item label.
    */
   label: React.ReactNode;
   /**

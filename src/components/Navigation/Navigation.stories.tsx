@@ -28,7 +28,7 @@ export default meta;
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Playground = () => {
   return (
-    <Navigation style={{ position: 'relative', '--header-height': '42px' } as CSSProperties}>
+    <Navigation style={{ position: 'relative' } as CSSProperties}>
       {/* emulates the header that does the absolute positioning for submenus*/}
       <NavigationList id="topmenu">
         <NavigationItemTrigger label="Auctions">

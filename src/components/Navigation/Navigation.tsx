@@ -36,8 +36,8 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
         ref={ref}
       >
         <div className={`${px}-nav__list-container`}>
-          {React.isValidElement(childNavList?.[0])
-            ? React.cloneElement<NavigationListProps>(childNavList[0], { isOffScreen: isSearchExpanded })
+          {React.isValidElement(childNavList?.[0]) && childNavList
+            ? React.cloneElement<NavigationListProps>(childNavList?.[0], { isOffScreen: isSearchExpanded })
             : undefined}
           {otherChildren}
         </div>

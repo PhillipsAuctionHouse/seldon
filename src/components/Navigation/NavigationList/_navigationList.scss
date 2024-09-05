@@ -16,8 +16,6 @@
     justify-content: left;
     min-width: 330px;
     padding: $spacing-md 0;
-    transform: translateX(0%);
-    transition: transform 0.3s ease-in 0.1s;
   }
 
   &--offscreen {

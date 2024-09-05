@@ -5,9 +5,8 @@ import Logo from '../../assets/PhillipsLogo.svg?react';
 import UserManagement from '../UserManagement/UserManagement';
 import { LanguageSelector } from '../LanguageSelector';
 import Navigation from '../Navigation/Navigation';
-import { Component, ComponentProps, forwardRef, ReactElement, useState, createContext, useRef, useEffect } from 'react';
+import { Component, ComponentProps, forwardRef, ReactElement, useState, createContext } from 'react';
 import { defaultHeaderContext } from './utils';
-import mergeRefs from 'merge-refs';
 
 export interface HeaderProps extends ComponentProps<'header'> {
   /**
@@ -28,8 +27,6 @@ export interface HeaderProps extends ComponentProps<'header'> {
   logoText?: string;
 }
 type HeaderContextType = {
-  expandedItem: string;
-  setExpandedItem: (item: string) => void;
   /**
    * Is the user within the search input and searching
    */
@@ -72,34 +69,13 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     const [isSearchExpanded, setIsSearchExpanded] = useState(false);
     const navElements = findChildrenOfType(children, Navigation);
     const [isOpen, setIsOpen] = useState(false);
-    const [expandedItem, setExpandedItem] = useState('');
     const toggleText = isOpen ? toggleCloseText : toggleOpenText;
-    const [headerHeight, setHeight] = useState(0);
     const handleMenuToggle = function () {
       setIsOpen((prev) => !prev);
     };
-    const headerRef = useRef<HTMLElement>(null);
-    const handleResize = () => {
-      if (headerRef.current) {
-        setHeight(headerRef.current.offsetHeight);
-      }
-    };
-
-    useEffect(() => {
-      handleResize();
-      window.addEventListener('resize', handleResize);
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }, []);
 
     return (
-      <header
-        {...props}
-        style={{ '--header-height': `${headerHeight}px` } as React.CSSProperties}
-        className={classnames(`${px}-header`, className)}
-        ref={mergeRefs(ref, headerRef)}
-      >
+      <header {...props} className={classnames(`${px}-header`, className)} ref={ref}>
         <div className={`${px}-header__top-row`}>
           {languageSelectorElement}
           <button
@@ -129,15 +105,15 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
             value={
               {
                 isMenuOpen: isOpen,
-                expandedItem,
-                setExpandedItem,
                 isSearchExpanded,
                 setIsSearchExpanded,
               } as HeaderContextType
             }
           >
-            {navElements}
-            {languageSelectorElement} {/* This is not visible through css when in desktop breakpoint */}
+            <div className={`${px}-header__scrollable-area`}>
+              {navElements}
+              {languageSelectorElement} {/* This is not visible through css when in desktop breakpoint */}
+            </div>
           </HeaderContext.Provider>
         </div>
         {searchElement}
