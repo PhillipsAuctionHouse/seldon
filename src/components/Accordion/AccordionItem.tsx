@@ -150,7 +150,6 @@ const AccordionItem = ({
       <AccordionHeader
         disable={isLocked}
         isLargeVariation={isLargeVariation}
-        id={`${id}-accordion-header`}
         baseClassName={`${accordionItemClassName}-label`}
       >
         {label}
