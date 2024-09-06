@@ -119,13 +119,14 @@ const Pagination = React.forwardRef(
           isDisabled={inputProps.disabled}
           aria-label="Previous"
         >
-          <img src={chevronRight} />
+          <img src={chevronRight} className={`${px}-button-icon`} />
         </Button>
 
         <Select
-          className={variant === 'inline' && `${px}__pagination`}
+          className={variant === 'inline' && `${px}--inline-pagination`}
           value={selectedValue || ''}
           onChange={paginationSelect}
+          data-testid={`${id}-select-button`}
           hideLabel
           ref={selectRef}
           disabled={inputProps.disabled}
@@ -140,7 +141,7 @@ const Pagination = React.forwardRef(
           isDisabled={inputProps.disabled}
           aria-label="Next"
         >
-          <img src={chevronRight} />
+          <img src={chevronRight} className={`${px}-button-icon`} />
         </Button>
       </div>
     );
