@@ -17,7 +17,6 @@
   width: $search-size;
 
   @include media($size-xl) {
-    height: $search-size-xl;
     padding: 0 0 0.125rem;
   }
 

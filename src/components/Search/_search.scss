@@ -11,10 +11,6 @@
   top: 0;
   transition: left 0.25s ease-in;
 
-  @include media($size-xl) {
-    height: $search-size-xl;
-  }
-
   &--active {
     left: 0;
     transition: left 0.25s ease-in 0.2s;

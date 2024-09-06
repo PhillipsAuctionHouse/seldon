@@ -107,8 +107,7 @@ const Search = ({
   };
 
   return (
-    // <div className={`${baseClassName}__container`}>
-    <>
+    <div className={`${baseClassName}__container`}>
       <Text variant={TextVariants.heading4} className={`${baseClassName}__container__label`}>
         {searchButtonText}
       </Text>
@@ -191,8 +190,7 @@ const Search = ({
           ) : null}
         </form>
       </div>
-    </>
-    // </div>
+    </div>
   );
 };
 

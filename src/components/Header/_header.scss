@@ -120,6 +120,7 @@
       display: flex;
       height: unset;
       justify-content: center;
+      overflow: visible; // this is needed for the search results
       position: relative;
       top: 0;
       width: 100%;
