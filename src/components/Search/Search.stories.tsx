@@ -49,7 +49,7 @@ const StatefulSearch = (props: SearchProps) => {
   return (
     <HeaderContext.Provider value={{ ...defaultHeaderContext, isSearchExpanded, setIsSearchExpanded }}>
       {/* This emulates the header width so the search Results and input work correctly*/}
-      <div style={{ minWidth: '100%', display: 'flex', justifyContent: 'flex-end', position: 'relative' }}>
+      <div style={{ minWidth: '100%', position: 'relative' }}>
         <Search
           {...props}
           onSearch={(value) => {

@@ -27,11 +27,10 @@ describe('Search component', () => {
     const searchButton = screen.getByTestId('search-button');
     const searchInput = screen.getByTestId('search-input');
     const searchForm = screen.getByTestId('search-form');
-    await act(() => userEvent.click(searchButton));
-    await waitFor(() => expect(screen.queryByTestId('search-close-button')).toBeInTheDocument());
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await userEvent.click(searchButton);
     screen.debug();
-    const closeButton = screen.queryByTestId('search-close-button');
+    expect(searchButton).not.toBeInTheDocument();
+    const closeButton = screen.getByTestId('search-close-button');
     expect(closeButton).toBeInTheDocument();
     expect(searchButton).not.toBeInTheDocument();
     expect(searchInput).toBeVisible();
