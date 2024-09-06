@@ -4,12 +4,12 @@
   display: flex;
   gap: $spacing-md;
   height: $nav-height;
+  left: calc(100% - $nav-height);
+  min-width: 2.625rem;
   position: absolute;
   right: 0;
   top: 0;
-  left: calc(100% - $nav-height);
   transition: left 0.25s ease-in;
-  min-width: 2.625rem;
 
   &--active {
     left: 0;
@@ -20,6 +20,7 @@
     border-bottom: 1px solid $pure-black;
     height: $nav-height;
     width: $nav-height;
+
     svg {
       height: 100%;
       width: 100%;
@@ -58,8 +59,8 @@
         background: $white;
 
         &::placeholder {
-          transition: opacity 0.75s ease-in;
           opacity: 1;
+          transition: opacity 0.75s ease-in;
         }
       }
 
@@ -99,8 +100,8 @@
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    margin: 0;
     height: $nav-height;
+    margin: 0;
     padding: 0 $spacing-sm;
   }
 }

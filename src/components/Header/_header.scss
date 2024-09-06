@@ -13,11 +13,11 @@
     align-items: center;
     background-color: $pure-white;
     display: flex;
+    height: $top-row-height;
     justify-content: center;
     padding-top: 1rem;
     width: 100%;
     z-index: 10;
-    height: $top-row-height;
 
     @include isHeaderMobile {
       height: $nav-height;
@@ -155,9 +155,9 @@
       width: 100%;
     }
     .#{$px}-nav__list-container {
-      padding-right: $nav-height;
-      height: $nav-height;
       display: flex;
+      height: $nav-height;
+      padding-right: $nav-height;
     }
 
     &.#{$px}-header__nav--open {
@@ -170,8 +170,8 @@
 
     .#{$px}-nav__item {
       .#{$px}-link--snwHeaderLink {
-        height: 100%;
         align-content: center;
+        height: 100%;
       }
     }
   }

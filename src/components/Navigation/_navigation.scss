@@ -9,9 +9,8 @@
   position: relative;
 
   @include isHeaderDesktop {
-    align-content: center;
+    place-content: center center;
     display: flex;
-    justify-content: center;
     overflow: visible;
     padding-top: 0;
     position: unset;
