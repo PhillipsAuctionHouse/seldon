@@ -1,8 +1,9 @@
-import React, { ComponentProps, CSSProperties, forwardRef } from 'react';
-import { findChildrenOfType, px } from '../../utils';
+import React, { ComponentProps, CSSProperties, forwardRef, ReactElement } from 'react';
+import { findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
 import classnames from 'classnames';
 import { HeaderContext } from '../Header/Header';
 import NavigationList, { NavigationListProps } from './NavigationList/NavigationList';
+import { LanguageSelector, LanguageSelectorProps } from '../LanguageSelector';
 
 export interface NavigationProps extends ComponentProps<'nav'> {
   /**
@@ -23,8 +24,10 @@ export interface NavigationProps extends ComponentProps<'nav'> {
 const Navigation = forwardRef<HTMLElement, NavigationProps>(
   ({ children, className, id, visible = true, ...props }, ref) => {
     const { isSearchExpanded } = React.useContext(HeaderContext);
-    const childNavList = findChildrenOfType<NavigationListProps>(children, NavigationList);
-    const otherChildren = findChildrenOfType(children, NavigationList, true);
+    const childNavList = findChildrenOfType<NavigationListProps>(children, NavigationList)?.[0];
+    const searchComponent = findChildrenExcludingTypes(children, [NavigationList, LanguageSelector]);
+    const languageSelectorElement = findChildrenOfType<LanguageSelectorProps>(children, LanguageSelector)?.[0];
+
     return (
       <nav
         role="navigation"
@@ -36,10 +39,18 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
         ref={ref}
       >
         <div className={`${px}-nav__list-container`}>
-          {otherChildren}
-          {React.isValidElement(childNavList?.[0]) && childNavList
-            ? React.cloneElement<NavigationListProps>(childNavList?.[0], { isOffScreen: isSearchExpanded })
+          {searchComponent}
+          {React.isValidElement(childNavList)
+            ? React.cloneElement<NavigationListProps>(childNavList, { isOffScreen: isSearchExpanded })
             : undefined}
+          {
+            /* This is not visible through css when in desktop breakpoint */
+            React.isValidElement(languageSelectorElement) && languageSelectorElement
+              ? React.cloneElement(languageSelectorElement as ReactElement<LanguageSelectorProps>, {
+                  isHidden: isSearchExpanded,
+                })
+              : undefined
+          }
         </div>
       </nav>
     );

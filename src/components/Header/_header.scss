@@ -113,7 +113,10 @@
     }
     .#{$px}-nav__list-container {
       display: flex;
-      padding-right: $search-size;
+
+      @include isHeaderDesktop {
+        padding-right: $search-size;
+      }
     }
 
     @include isHeaderDesktop {

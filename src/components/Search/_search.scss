@@ -8,8 +8,12 @@
   min-width: $search-size;
   position: absolute;
   right: 0;
-  top: 0;
+  top: $padding-md;
   transition: left 0.25s ease-in;
+
+  @include isHeaderDesktop {
+    top: 0;
+  }
 
   &--active {
     left: 0;
@@ -100,9 +104,15 @@
 .#{$px}-search__container {
   display: flex;
   justify-content: space-between;
+  padding: $padding-md 0;
+
+  @include isHeaderDesktop {
+    padding: 0;
+  }
 
   &__label {
     display: none;
+    margin: 0;
 
     @include isHeaderMobile {
       align-items: center;

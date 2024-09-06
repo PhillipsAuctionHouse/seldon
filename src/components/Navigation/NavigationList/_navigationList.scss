@@ -10,8 +10,8 @@
 
   &--offscreen {
     opacity: 0;
+    pointer-events: none;
     top: -100%;
-    transition: opacity 0.25 ease-in;
   }
 
   @include isHeaderDesktop {

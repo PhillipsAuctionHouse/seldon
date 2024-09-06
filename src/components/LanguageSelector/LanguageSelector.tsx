@@ -52,6 +52,8 @@ export interface LanguageSelectorProps extends ComponentProps<'div'> {
   languageOptions?: LanguageOption[];
   currentLanguage?: SupportedLanguages;
   onLanguageChange?: (language: SupportedLanguages) => void;
+  /** hide or show with an opacity transition */
+  isHidden?: boolean;
 }
 /**
  * ## Overview
@@ -73,6 +75,7 @@ const LanguageSelector = forwardRef<HTMLElement, LanguageSelectorProps>(
       ],
       onLanguageChange = noOp,
       id,
+      isHidden,
       ...props
     },
     ref,
@@ -83,8 +86,11 @@ const LanguageSelector = forwardRef<HTMLElement, LanguageSelectorProps>(
     const selectorProps = {
       ...commonProps,
       ...props,
+      'aria-hidden': isHidden,
       id,
-      className: classnames(baseClassName, className),
+      className: classnames(baseClassName, className, {
+        [`${baseClassName}--hidden`]: isHidden,
+      }),
       options: languageOptions,
       value: currentLanguage,
       onValueChange: (languageId: string) => onLanguageChange(languageId as SupportedLanguages),

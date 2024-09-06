@@ -28,7 +28,8 @@
     }
 
     & > &__submenu {
-      transform: translateY(-120%);
+      pointer-events: none;
+      transform: translateY(-100%);
       transition: none; // remove this when implementing submenu transitions
     }
 
@@ -38,6 +39,7 @@
       max-height: unset;
       opacity: 1;
       padding: $padding-md;
+      pointer-events: all;
       position: fixed; // has to bust out of the box containing it on desktop
       right: 0;
       top: calc($header-height);

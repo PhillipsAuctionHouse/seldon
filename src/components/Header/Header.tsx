@@ -1,3 +1,4 @@
+import React, { PropsWithChildren } from 'react';
 import classnames from 'classnames';
 import { findChildrenOfType, px } from '../../utils';
 import Logo from '../../assets/PhillipsLogo.svg?react';
@@ -69,7 +70,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     const userManagementElement = findChildrenOfType(children, UserManagement);
     const languageSelectorElement = findChildrenOfType(children, LanguageSelector);
     const [isSearchExpanded, setIsSearchExpanded] = useState(false);
-    const navElements = findChildrenOfType(children, Navigation);
+    const navigationElement = findChildrenOfType(children, Navigation);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleText = isMenuOpen ? toggleCloseText : toggleOpenText;
     const handleMenuToggle = function () {
@@ -112,9 +113,17 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
               } as HeaderContextType
             }
           >
-            {navElements}
+            {React.Children.map(navigationElement, (child) =>
+              React.isValidElement(child)
+                ? React.cloneElement<PropsWithChildren>(child as ReactElement<PropsWithChildren>, {
+                    children: [
+                      ...React.Children.toArray((child.props as PropsWithChildren).children),
+                      languageSelectorElement,
+                    ],
+                  })
+                : child,
+            )}
           </HeaderContext.Provider>
-          {languageSelectorElement} {/* This is not visible through css when in desktop breakpoint */}
         </div>
       </header>
     );
