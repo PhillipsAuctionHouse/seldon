@@ -70,7 +70,7 @@
   row-gap: $spacing-lg;
 
   @media (min-width: $breakpoint-md) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
 
   @media (min-width: $breakpoint-lg) {
@@ -84,6 +84,21 @@
 
 @mixin media($breakpoint, $type: 'min') {
   @if $breakpoint == $size-sm {
+    // $breakpoint-sm: 360px;
+    @if $type == 'min' {
+      @media (min-width: $breakpoint-sm) {
+        @content;
+      }
+    }
+
+    @if $type == 'max' {
+      @media (max-width: calc($breakpoint-sm - 1px)) {
+        @content;
+      }
+    }
+  }
+
+  @if $breakpoint == $size-md {
     // $breakpoint-md: 961px;
     @if $type == 'min' {
       @media (min-width: $breakpoint-md) {
@@ -92,13 +107,13 @@
     }
 
     @if $type == 'max' {
-      @media (max-width: $breakpoint-md) {
+      @media (max-width: calc($breakpoint-md - 1px)) {
         @content;
       }
     }
   }
 
-  @if $breakpoint == $size-md {
+  @if $breakpoint == $size-lg {
     // $breakpoint-lg: 1401px;
 
     @if $type == 'min' {
@@ -108,13 +123,13 @@
     }
 
     @if type == 'max' {
-      @media (max-width: $breakpoint-lg) {
+      @media (max-width: calc($breakpoint-lg - 1px)) {
         @content;
       }
     }
   }
 
-  @if $breakpoint == $size-lg {
+  @if $breakpoint == $size-xl {
     // $breakpoint-xl: 1801px;
     @if type == 'min' {
       @media (min-width: $breakpoint-xl) {
@@ -123,7 +138,7 @@
     }
 
     @if type == 'max' {
-      @media (max-width: $breakpoint-xl) {
+      @media (max-width: calc($breakpoint-xl - 1px)) {
         @content;
       }
     }

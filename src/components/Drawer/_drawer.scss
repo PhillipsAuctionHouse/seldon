@@ -2,7 +2,6 @@
 
 .#{$px}-drawer {
   align-items: center;
-  animation: content-show $default-transition;
   background-color: $white;
   display: flex;
   flex-direction: column;
@@ -24,7 +23,6 @@
   }
 
   &__overlay {
-    animation: overlay-show $default-transition;
     background-color: $overlay-black;
     inset: 0;
     position: fixed;
@@ -41,26 +39,64 @@
     right: 10px;
     top: 10px;
   }
+}
 
-  @keyframes overlay-show {
-    from {
-      opacity: 0;
-    }
+.#{$px}-drawer[data-state='open'] {
+  animation: content-show $drawer-content-transition;
+}
 
-    to {
-      opacity: 1;
-    }
+.#{$px}-drawer[data-state='closed'] {
+  animation: content-close $drawer-content-transition;
+}
+
+.#{$px}__overlay[data-state='open'] {
+  animation: overlay-show $default-overlay-transition;
+}
+
+.#{$px}__overlay[data-state='closed'] {
+  animation: overlay-close $default-overlay-transition;
+}
+
+@keyframes content-show {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
   }
 
-  @keyframes content-show {
-    from {
-      opacity: 0;
-      transform: translateX(12rem);
-    }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+@keyframes content-close {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes overlay-show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes overlay-close {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
   }
 }

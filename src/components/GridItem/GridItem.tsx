@@ -34,8 +34,8 @@ export interface GridItemProps extends React.HTMLAttributes<HTMLDivElement> {
 const GridItem = ({
   children,
   xs = 2,
-  sm = 4,
-  md = 12,
+  sm = 2,
+  md = 6,
   lg = 12,
   align = GridItemAlign.center,
   element: Element = 'div',

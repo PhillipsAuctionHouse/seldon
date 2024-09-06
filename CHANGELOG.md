@@ -1,3 +1,31 @@
+# [1.47.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.46.0...v1.47.0) (2024-09-03)
+
+
+### Features
+
+* **grid:** L3-2981 grid component needs configurable column and row gaps ([#291](https://github.com/PhillipsAuctionHouse/seldon/issues/291)) ([2a87821](https://github.com/PhillipsAuctionHouse/seldon/commit/2a8782181e5abc255a744eea74919519da30bce9))
+
+# [1.46.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.45.0...v1.46.0) (2024-08-29)
+
+
+### Features
+
+* **footer:** L3-3126 footer adjustments ([#290](https://github.com/PhillipsAuctionHouse/seldon/issues/290)) ([d3dd916](https://github.com/PhillipsAuctionHouse/seldon/commit/d3dd9168dad5c900c3ef9fbf5122463aae0ec85c))
+
+# [1.45.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.44.1...v1.45.0) (2024-08-29)
+
+
+### Features
+
+* **footer:** L3-3126 footer fixes and animation updates ([#289](https://github.com/PhillipsAuctionHouse/seldon/issues/289)) ([3f51900](https://github.com/PhillipsAuctionHouse/seldon/commit/3f51900e5da1a0b4d26580306c236fe69f376e4f))
+
+## [1.44.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.44.0...v1.44.1) (2024-08-27)
+
+
+### Bug Fixes
+
+* **scss:** L3-3439 use prefix for accordion classes ([#288](https://github.com/PhillipsAuctionHouse/seldon/issues/288)) ([23724f1](https://github.com/PhillipsAuctionHouse/seldon/commit/23724f1f22b1384af66bb91e9394f6e269dfb665))
+
 # [1.44.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.43.0...v1.44.0) (2024-08-27)
 
 

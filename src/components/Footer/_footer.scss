@@ -8,16 +8,8 @@
   margin: $spacing-lg 0 0;
   max-width: 100%;
 
-  ul {
-    li {
-      a {
-        @include text('snwFlyoutLink');
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
+  &__logo svg {
+    height: 10px;
   }
 
   &__links {
@@ -28,22 +20,25 @@
     padding: $spacing-lg $spacing-md $spacing-md $spacing-md;
     width: 100%;
 
-    @include media($size-sm) {
-      flex-direction: row;
+    @include media($size-md) {
+      flex-flow: row wrap;
+      gap: $spacing-lg;
       max-width: $desktop-max-width;
       padding: $spacing-lg $spacing-md $spacing-lg $spacing-md;
+
+      .#{$px}-social {
+        flex-basis: 100%; // force this to wrap
+      }
+    }
+
+    @include media($size-lg) {
+      .#{$px}-social {
+        flex-basis: 0;
+      }
     }
 
     div {
       flex: 1;
-    }
-  }
-
-  &-desktop {
-    display: none;
-
-    @include media($size-sm) {
-      display: block;
     }
 
     h3.#{$px}-text {
@@ -51,9 +46,31 @@
         margin-bottom: $spacing-sm;
       }
     }
+
+    div:not(.#{$px}-social) {
+      ul {
+        li {
+          a {
+            @include text('snwFlyoutLink');
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
   }
 
-  @include media($size-sm) {
+  &-desktop {
+    display: none;
+
+    @include media($size-md) {
+      display: block;
+    }
+  }
+
+  @include media($size-md) {
     &-mobile {
       display: none;
     }
@@ -68,6 +85,10 @@
     &-item {
       padding: 0;
 
+      ul {
+        padding-bottom: $spacing-md;
+      }
+
       &--expanded {
         margin-bottom: $spacing-md;
         margin-top: 0;
@@ -78,7 +99,7 @@
         opacity: 1;
         padding: $spacing-sm 0;
 
-        @include media($size-sm) {
+        @include media($size-md) {
           cursor: unset;
         }
 

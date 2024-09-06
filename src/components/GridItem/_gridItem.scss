@@ -27,17 +27,17 @@
   }
 
   @include media($size-sm) {
-    @for $i from 1 through 4 {
+    @for $i from 1 through 2 {
       &--span-sm-#{$i} {
-        @include gridItemColumnSpan($i, 4);
+        @include gridItemColumnSpan($i, 2);
       }
     }
   }
 
   @include media($size-md) {
-    @for $i from 1 through 12 {
+    @for $i from 1 through 6 {
       &--span-md-#{$i} {
-        @include gridItemColumnSpan($i, 12);
+        @include gridItemColumnSpan($i, 6);
       }
     }
   }

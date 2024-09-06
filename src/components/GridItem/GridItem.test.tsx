@@ -26,8 +26,8 @@ describe('GridItem', () => {
       render(<GridItem />);
       const GridItemElement = screen.getByTestId('grid-item');
       expect(GridItemElement).toHaveClass(`${px}-grid-item--span-xs-2`);
-      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-sm-4`);
-      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-md-12`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-sm-2`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-md-6`);
       expect(GridItemElement).toHaveClass(`${px}-grid-item--span-lg-12`);
     });
 
@@ -47,8 +47,8 @@ describe('GridItem', () => {
 
       const GridItemElement = screen.getByTestId('grid-item');
       expect(GridItemElement).toHaveClass(`${px}-grid-item--span-xs-2-align-center`);
-      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-sm-4-align-center`);
-      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-md-12-align-center`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-sm-2-align-center`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-md-6-align-center`);
       expect(GridItemElement).toHaveClass(`${px}-grid-item--span-lg-12-align-center`);
     });
     it('default position classes', () => {
@@ -56,8 +56,8 @@ describe('GridItem', () => {
 
       const GridItemElement = screen.getByTestId('grid-item');
       expect(GridItemElement).toHaveClass(`${px}-grid-item--span-xs-2-align-left`);
-      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-sm-4-align-left`);
-      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-md-12-align-left`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-sm-2-align-left`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-md-6-align-left`);
       expect(GridItemElement).toHaveClass(`${px}-grid-item--span-lg-12-align-left`);
     });
   });

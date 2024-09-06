@@ -100,90 +100,98 @@ $text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $h
   $snwHeaderLink;
 
 ////////////////////////
+/// Breakpoint TOKENS to be used for min-width comparisons
+///////////////////////
+$breakpoint-sm: 361px;
+$breakpoint-md: 961px;
+$breakpoint-lg: 1401px;
+$breakpoint-xl: 1801px;
+
+////////////////////////
 /// FONT SIZE TOKENS:
 ///////////////////////
 
 :root {
   --desktop-max-width: 120rem;
-  --quote-size: 1.75rem;
-  --quote-line-height: 2.25rem;
-  --heading-size1: 1.75rem;
-  --heading-line-height-size1: 2rem;
-  --heading-size2: 1.75rem;
-  --heading-line-height-size2: 2rem;
-  --heading-size3: 1.5rem;
-  --heading-line-height-size3: 1.75rem;
-  --heading-size4: 1.25rem;
-  --heading-line-height-size4: 1.5rem;
-  --heading-size5: 1rem;
-  --heading-line-height-size5: 1.25rem;
-  --string-size1: 1.25rem;
-  --string-line-height-size1: 1.5rem;
-  --string-size2: 1rem;
-  --string-line-height-size2: 1.25rem;
-  --string-size3: 0.75rem;
-  --string-line-height-size3: 1rem;
-  --body-size1: 1.25rem;
-  --body-line-height-size1: 1.75rem;
-  --body-size2: 1rem;
-  --body-line-height-size2: 1.5rem;
-  --body-size3: 0.75rem;
-  --body-line-height-size3: 1.25rem;
-  --label-size1: 1.25rem;
-  --label-size2: 1rem;
-  --label-size3: 0.75rem;
-  --link-label-size: 1rem;
-  --link-label-line-height: 1rem;
-  --button-label-size: 1rem;
-  --button-label-line-height: 1.25rem;
-  --badge-label-size: 0.75rem;
-  --badge-label-line-height: 1rem;
+  --quote-size: 1.5rem;
+  --quote-line-height: 2rem;
+  --heading-size1: 1.5rem;
+  --heading-line-height-size1: 1.75rem;
+  --heading-size2: 1.5rem;
+  --heading-line-height-size2: 1.75rem;
+  --heading-size3: 1.25rem;
+  --heading-line-height-size3: 1.5rem;
+  --heading-size4: 1rem;
+  --heading-line-height-size4: 1.25rem;
+  --heading-size5: 0.75rem;
+  --heading-line-height-size5: 1rem;
+  --string-size1: 1rem;
+  --string-line-height-size1: 1.25rem;
+  --string-size2: 0.75rem;
+  --string-line-height-size2: 1rem;
+  --string-size3: 0.5rem;
+  --string-line-height-size3: 0.75rem;
+  --body-size1: 1rem;
+  --body-line-height-size1: 1.5rem;
+  --body-size2: 0.75rem;
+  --body-line-height-size2: 1.25rem;
+  --body-size3: 0.5rem;
+  --body-line-height-size3: 1rem;
+  --label-size1: 1rem;
+  --label-size2: 0.75rem;
+  --label-size3: 0.56rem;
+  --link-label-size: 0.75rem;
+  --link-label-line-height: 0.75rem;
+  --button-label-size: 0.75rem;
+  --button-label-line-height: 1rem;
+  --badge-label-size: 0.5rem;
+  --badge-label-line-height: 0.67rem;
   --snw-header-link-size: 1rem;
   --snw-header-link-line-height: 1.5rem;
   --snw-flyout-link-size: 1rem;
   --snw-flyout-link-line-height: 1.75rem;
 
-  @media (max-width: 960px) {
-    --quote-size: 1.5rem;
-    --quote-line-height: 2rem;
-    --heading-size1: 1.5rem;
-    --heading-line-height-size1: 1.75rem;
-    --heading-size2: 1.5rem;
-    --heading-line-height-size2: 1.75rem;
-    --heading-size3: 1.25rem;
-    --heading-line-height-size3: 1.5rem;
-    --heading-size4: 1rem;
-    --heading-line-height-size4: 1.25rem;
-    --heading-size5: 0.75rem;
-    --heading-line-height-size5: 1rem;
-    --string-size1: 1rem;
-    --string-line-height-size1: 1.25rem;
-    --string-size2: 0.75rem;
-    --string-line-height-size2: 1rem;
-    --string-size3: 0.5rem;
-    --string-line-height-size3: 0.75rem;
-    --body-size1: 1rem;
-    --body-line-height-size1: 1.5rem;
-    --body-size2: 0.75rem;
-    --body-line-height-size2: 1.25rem;
-    --body-size3: 0.5rem;
-    --body-line-height-size3: 1rem;
-    --label-size1: 1rem;
-    --label-size2: 0.75rem;
-    --label-size3: 0.56rem;
-    --link-label-size: 0.75rem;
-    --link-label-line-height: 0.75rem;
-    --button-label-size: 0.75rem;
-    --button-label-line-height: 1rem;
-    --badge-label-size: 0.5rem;
-    --badge-label-line-height: 0.67rem;
+  @media (min-width: $breakpoint-md) {
+    --quote-size: 1.75rem;
+    --quote-line-height: 2.25rem;
+    --heading-size1: 1.75rem;
+    --heading-line-height-size1: 2rem;
+    --heading-size2: 1.75rem;
+    --heading-line-height-size2: 2rem;
+    --heading-size3: 1.5rem;
+    --heading-line-height-size3: 1.75rem;
+    --heading-size4: 1.25rem;
+    --heading-line-height-size4: 1.5rem;
+    --heading-size5: 1rem;
+    --heading-line-height-size5: 1.25rem;
+    --string-size1: 1.25rem;
+    --string-line-height-size1: 1.5rem;
+    --string-size2: 1rem;
+    --string-line-height-size2: 1.25rem;
+    --string-size3: 0.75rem;
+    --string-line-height-size3: 1rem;
+    --body-size1: 1.25rem;
+    --body-line-height-size1: 1.75rem;
+    --body-size2: 1rem;
+    --body-line-height-size2: 1.5rem;
+    --body-size3: 0.75rem;
+    --body-line-height-size3: 1.25rem;
+    --label-size1: 1.25rem;
+    --label-size2: 1rem;
+    --label-size3: 0.75rem;
+    --link-label-size: 1rem;
+    --link-label-line-height: 1rem;
+    --button-label-size: 1rem;
+    --button-label-line-height: 1.25rem;
+    --badge-label-size: 0.75rem;
+    --badge-label-line-height: 1rem;
     --snw-header-link-size: 1rem;
     --snw-header-link-line-height: 1.5rem;
     --snw-flyout-link-size: 1rem;
-    --snw-flyout-link-line-height: 1.75rem;
+    --snw-flyout-link-line-height: 1.875rem;
   }
 
-  @media (min-width: 1801px) {
+  @media (min-width: $breakpoint-xl) {
     --quote-size: 2rem;
     --quote-line-height: 2.5rem;
     --heading-size1: 2rem;
@@ -280,23 +288,23 @@ $snw-flyout-link-line-height: var(--snw-flyout-link-line-height);
 :root {
   --spacing-micro: 0.25rem;
   --spacing-xsm: 0.5rem;
-  --spacing-sm: 1rem;
-  --spacing-md: 2rem;
-  --spacing-lg: 3rem;
-  --spacing-xl: 4rem;
-  --spacing-xxl: 5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1.75rem;
+  --spacing-lg: 2.75rem;
+  --spacing-xl: 3.75rem;
+  --spacing-xxl: 4.75rem;
 
-  @media (max-width: 960px) {
-    --spacing-micro: 0.25;
+  @media (min-width: $breakpoint-md) {
+    --spacing-micro: 0.25rem;
     --spacing-xsm: 0.5rem;
-    --spacing-sm: 0.75rem;
-    --spacing-md: 1.75rem;
-    --spacing-lg: 2.75rem;
-    --spacing-xl: 3.75rem;
-    --spacing-xxl: 4.75rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 3rem;
+    --spacing-xl: 4rem;
+    --spacing-xxl: 5rem;
   }
 
-  @media (min-width: 1801px) {
+  @media (min-width: $breakpoint-xl) {
     --spacing-micro: 0.5rem;
     --spacing-xsm: 0.75rem;
     --spacing-sm: 1.25rem;
@@ -314,6 +322,7 @@ $spacing-md: var(--spacing-md);
 $spacing-lg: var(--spacing-lg);
 $spacing-xl: var(--spacing-xl);
 $spacing-xxl: var(--spacing-xl);
+$spacing-sizes: micro, xsm, sm, md, lg, xl, xxl;
 
 // PADDING
 $padding-micro: var(--spacing-micro);
@@ -333,14 +342,6 @@ $margin-md: var(--spacing-md);
 $margin-lg: var(--spacing-lg);
 $margin-xl: var(--spacing-xl);
 $margin-xxl: var(--spacing-xxl);
-
-////////////////////////
-/// Breakpoint TOKENS that map to minimum pixels
-///////////////////////
-$breakpoint-sm: 461px;
-$breakpoint-md: 1081px;
-$breakpoint-lg: 1401px;
-$breakpoint-xl: 1801px;
 
 ////////////////////////
 /// max-site-width TOKEN:
@@ -367,3 +368,5 @@ $size-lg: 'lg';
 $size-xl: 'xl';
 $size-xxl: 'xxl';
 $default-transition: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+$drawer-content-transition: 350ms cubic-bezier(0, 0, 0.2, 1);
+$default-overlay-transition: 350ms cubic-bezier(0.4, 0, 0.2, 1);

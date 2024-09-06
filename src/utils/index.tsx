@@ -24,6 +24,16 @@ export enum PaddingTokens {
   xxl = 'xxl',
 }
 
+export enum SpacingTokens {
+  micro = 'micro',
+  xs = 'xs',
+  sm = 'sm',
+  md = 'md',
+  lg = 'lg',
+  xl = 'xl',
+  xxl = 'xxl',
+}
+
 /* eslint-disable @typescript-eslint/no-empty-function */
 export const noOp = () => {};
 

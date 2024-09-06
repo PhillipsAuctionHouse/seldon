@@ -18,7 +18,6 @@
     display: block;
     font-weight: 400;
     height: auto;
-    margin: 10px 0;
   }
 
   &__content--lg {
@@ -40,21 +39,21 @@
   }
 
   &[data-state='open'] {
-    .phillips-accordion-item-label-plus__icon {
+    .#{$px}-accordion-item-label-plus__icon {
       display: none;
     }
 
-    .phillips-accordion-item-label-minus__icon {
+    .#{$px}-accordion-item-label-minus__icon {
       display: block;
     }
   }
 
   &[data-state='closed'] {
-    .phillips-accordion-item-label-plus__icon {
+    .#{$px}-accordion-item-label-plus__icon {
       display: block;
     }
 
-    .phillips-accordion-item-label-minus__icon {
+    .#{$px}-accordion-item-label-minus__icon {
       display: none;
     }
   }
