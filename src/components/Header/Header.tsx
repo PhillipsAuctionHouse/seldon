@@ -107,25 +107,24 @@ const Header = ({
       >
         <span>{toggleText}</span>
       </button>
-
-      <div className={classnames(`${px}-header__nav`, { [`${px}-header__nav--open`]: toggleState })}>
-        <HeaderContext.Provider
-          value={
-            {
-              defaultMobileMenuLabel,
-              expandedItem,
-              setExpandedItem: (item: string) => setExpandedItem(item),
-              isExpanded,
-              onSelect: (label: string) => onSelect(label),
-              isSearchExpanded,
-              setIsSearchExpanded: onSearchExpanded,
-            } as HeaderContextType
-          }
-        >
+      <HeaderContext.Provider
+        value={
+          {
+            defaultMobileMenuLabel,
+            expandedItem,
+            setExpandedItem: (item: string) => setExpandedItem(item),
+            isExpanded,
+            onSelect: (label: string) => onSelect(label),
+            isSearchExpanded,
+            setIsSearchExpanded: onSearchExpanded,
+          } as HeaderContextType
+        }
+      >
+        <div className={classnames(`${px}-header__nav`, { [`${px}-header__nav--open`]: toggleState })}>
           {navElements}
-        </HeaderContext.Provider>
-      </div>
-      {searchElement}
+        </div>
+        {searchElement}
+      </HeaderContext.Provider>
     </header>
   );
 };

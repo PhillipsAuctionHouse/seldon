@@ -120,7 +120,6 @@ const Search = ({
           className={classnames(`${baseClassName}__form`, {
             [`${baseClassName}__form--active`]: isSearchExpanded,
           })}
-          aria-hidden={!isSearchExpanded}
           ref={searchFormRef}
         >
           <div
@@ -138,6 +137,7 @@ const Search = ({
               }}
             >
               <Input
+                aria-hidden={!isSearchExpanded}
                 className={`${baseClassName}__input`}
                 id="search-input"
                 hideLabel
