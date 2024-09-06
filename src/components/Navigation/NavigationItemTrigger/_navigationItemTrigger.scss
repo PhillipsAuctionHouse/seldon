@@ -27,8 +27,9 @@
       right: 0;
     }
 
-    &__submenu {
+    & > &__submenu {
       transform: translateY(-100%);
+      transition: none; // remove this when implementing submenu transitions
     }
 
     &--hovered &__submenu {
@@ -41,7 +42,6 @@
       right: 0;
       top: calc($header-height);
       transform: translateY(0);
-      transition: none; // remove this when implementing submenu transitions
     }
   }
 

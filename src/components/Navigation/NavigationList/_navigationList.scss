@@ -1,35 +1,44 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-nav__list {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  margin: 0;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: left;
+  min-width: 330px;
   opacity: 1;
-  padding: 0;
-  position: relative;
-  top: 0;
-  transition: top 0.25s ease-in 0.1s;
-
-  @include isHeaderMobile {
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: left;
-    min-width: 330px;
-    padding: $spacing-md 0;
-  }
+  padding: $spacing-md 0;
+  transition: opacity 0.25s ease-in;
 
   &--offscreen {
     opacity: 0;
     top: -100%;
-    transition:
-      top 0.25s ease-in 0.1s,
-      opacity 0.25s ease-in;
-    z-index: 5;
+    transition: opacity 0.25 ease-in;
   }
 
-  &__section {
-    width: 100%;
+  @include isHeaderDesktop {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 0;
+    transition:
+      top 0.25s ease-in 0.1s,
+      opacity 0.25s ease-in 0.25s;
+
+    &--offscreen {
+      top: -100%;
+      transition:
+        top 0.25s ease-in 0.1s,
+        opacity 0.25s ease-in;
+      z-index: 5;
+    }
+
+    &__section {
+      width: 100%;
+    }
   }
 }

@@ -5,7 +5,6 @@ import Input from '../Input/Input';
 
 import Link from '../Link/Link';
 import SearchResults, { type SearchResultsProps } from './SearchResults/SearchResults';
-import { Text, TextVariants } from '../Text';
 import { useOnClickOutside } from 'usehooks-ts';
 import { HeaderContext } from '../Header/Header';
 import { SearchButton } from './SearchButton';
@@ -111,9 +110,9 @@ const Search = ({
       role="search"
       {...props}
     >
-      <Text variant={TextVariants.heading3} className={`${baseClassName}__label`}>
+      {/* <Text variant={TextVariants.heading3} className={`${baseClassName}__label`}>
         {searchButtonText}
-      </Text>
+      </Text> */}
 
       <form
         data-testid={`${baseTestId}-form`}

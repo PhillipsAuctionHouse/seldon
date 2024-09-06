@@ -15,6 +15,10 @@
     cursor: pointer;
     display: flex;
 
+    &:hover {
+      @include underline;
+    }
+
     > p.#{$px}-text {
       margin: 0;
     }
