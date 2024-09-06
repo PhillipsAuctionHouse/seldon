@@ -68,23 +68,23 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     const languageSelectorElement = findChildrenOfType(children, LanguageSelector);
     const [isSearchExpanded, setIsSearchExpanded] = useState(false);
     const navElements = findChildrenOfType(children, Navigation);
-    const [isOpen, setIsOpen] = useState(false);
-    const toggleText = isOpen ? toggleCloseText : toggleOpenText;
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const toggleText = isMenuOpen ? toggleCloseText : toggleOpenText;
     const handleMenuToggle = function () {
-      setIsOpen((prev) => !prev);
+      setIsMenuOpen((prev) => !prev);
     };
 
     return (
       <header {...props} className={classnames(`${px}-header`, className)} ref={ref}>
         <div className={`${px}-header__top-row`}>
-          {languageSelectorElement}
+          {languageSelectorElement} {/** Not rendered on mobile */}
           <button
             aria-label={toggleText}
             data-testid="mobile-menu-toggle"
             type="button"
             onClick={handleMenuToggle}
             className={classnames(`${px}-header__toggle-btn`, {
-              [`${px}-header__toggle-btn--open`]: isOpen,
+              [`${px}-header__toggle-btn--open`]: isMenuOpen,
             })}
           >
             <span /> {/** this is here so we can do transitions with pseudo icons */}
@@ -100,20 +100,18 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
           </h1>
           {userManagementElement}
         </div>
-        <div className={classnames(`${px}-header__nav`, { [`${px}-header__nav--closed`]: !isOpen })}>
+        <div className={classnames(`${px}-header__nav`, { [`${px}-header__nav--closed`]: !isMenuOpen })}>
           <HeaderContext.Provider
             value={
               {
-                isMenuOpen: isOpen,
+                isMenuOpen,
                 isSearchExpanded,
                 setIsSearchExpanded,
               } as HeaderContextType
             }
           >
-            <div className={`${px}-header__scrollable-area`}>
-              {navElements}
-              {languageSelectorElement} {/* This is not visible through css when in desktop breakpoint */}
-            </div>
+            {navElements}
+            {languageSelectorElement} {/* This is not visible through css when in desktop breakpoint */}
           </HeaderContext.Provider>
         </div>
         {searchElement}

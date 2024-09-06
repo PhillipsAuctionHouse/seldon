@@ -6,12 +6,6 @@
   min-width: 87px; // needed to handle English vs Chinese option.  Arguably this should be determined by the Dropdown component the longest element in the dropdown
   padding-bottom: 10rem; // needed for bottom accordion
 
-  &.#{$px}-dropdown {
-    display: none;
-  }
-
-  @include buttonReset;
-
   @include isHeaderDesktop {
     &.#{$px}-accordion {
       display: none;
@@ -19,6 +13,7 @@
   }
 
   &.#{$px}-dropdown {
+    display: none;
     padding: $padding-lg 0 $padding-xxl;
 
     button {

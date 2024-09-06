@@ -13,7 +13,7 @@
   &--email,
   &--link {
     &:hover,
-    &:focus {
+    &:focus-visible {
       @include underline($color: $dark-gray);
 
       color: $dark-gray;
@@ -36,7 +36,7 @@
     text-align: center;
 
     &:hover::after,
-    &:focus::after {
+    &:focus-visible::after {
       background: $pure-black;
       bottom: 0;
       content: '';
@@ -53,7 +53,7 @@
     @include text($snwFlyoutLink);
 
     &:hover,
-    &:focus {
+    &:focus-visible {
       @include underline(
         $color: $dark-gray,
         $padding: 0.5rem 0.625rem calc(0.5rem + 2px)

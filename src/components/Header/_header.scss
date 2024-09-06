@@ -10,16 +10,16 @@
   top: 0;
   z-index: 10;
 
-  &__scrollable-area {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  // &__scrollable-area {
+  //   align-items: center;
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: center;
 
-    @include isHeaderDesktop {
-      overflow: hidden;
-    }
-  }
+  //   @include isHeaderDesktop {
+  //     overflow: hidden;
+  //   }
+  // }
 
   &__toggle-btn {
     align-items: center;

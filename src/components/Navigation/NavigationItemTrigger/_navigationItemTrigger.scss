@@ -23,7 +23,7 @@
       content: '';
       height: 1px;
       left: 0;
-      position: absolute; // This relies on the top-header itself being the only absolute parent
+      position: absolute;
       right: 0;
     }
 
@@ -32,13 +32,12 @@
     }
 
     &--hovered &__submenu {
-      // This relies on the top-header itself being the only absolute parent
       height: fit-content;
       left: 0;
       max-height: unset;
       opacity: 1;
       padding: $padding-md;
-      position: fixed; // has to bust out of the box containing it
+      position: fixed; // has to bust out of the box containing it on desktop
       right: 0;
       top: calc($header-height);
       transform: translateY(0);

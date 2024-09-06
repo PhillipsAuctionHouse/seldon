@@ -10,7 +10,6 @@ import { Text, TextVariants } from '../Text';
 import NavigationList from '../Navigation/NavigationList/NavigationList';
 
 interface DropdownSelectorProps extends ComponentProps<'div'> {
-  id: string;
   value: string;
   onValueChange: (value: string) => void;
   label: string;
@@ -27,7 +26,11 @@ const MobileLanguageSelector = ({
 }: DropdownSelectorProps) => {
   return (
     <Accordion {...props}>
-      <AccordionItem variation="sm" id={id} label={<Text variant={TextVariants.snwHeaderLink}>{label}</Text>}>
+      <AccordionItem
+        variation="sm"
+        id={id ?? 'language-selector-accordion'}
+        label={<Text variant={TextVariants.snwHeaderLink}>{label}</Text>}
+      >
         <NavigationList id={`${id}-navlist`}>
           {options.map((option) => (
             <NavigationItem
@@ -43,8 +46,10 @@ const MobileLanguageSelector = ({
   );
 };
 
+export type LanguageOption = { label: string; value: SupportedLanguages };
+
 export interface LanguageSelectorProps extends ComponentProps<'div'> {
-  languageOptions?: { label: string; value: SupportedLanguages }[];
+  languageOptions?: LanguageOption[];
   currentLanguage?: SupportedLanguages;
   onLanguageChange?: (language: SupportedLanguages) => void;
 }
@@ -67,17 +72,18 @@ const LanguageSelector = forwardRef<HTMLElement, LanguageSelectorProps>(
         { label: '中文', value: SupportedLanguages.zh },
       ],
       onLanguageChange = noOp,
+      id,
       ...props
     },
     ref,
   ) => {
-    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'LanguageSelector');
+    const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'LanguageSelector');
     const languageLabel = languageOptions.find((option) => option.value === currentLanguage)?.label ?? 'English';
 
     const selectorProps = {
       ...commonProps,
       ...props,
-      id: 'language-selector',
+      id,
       className: classnames(baseClassName, className),
       options: languageOptions,
       value: currentLanguage,
