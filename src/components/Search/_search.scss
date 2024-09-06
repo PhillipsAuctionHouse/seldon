@@ -11,6 +11,10 @@
   top: 0;
   transition: left 0.25s ease-in;
 
+  @include media($size-xl) {
+    height: $search-size-xl;
+  }
+
   &--active {
     left: 0;
     transition: left 0.25s ease-in 0.2s;
@@ -24,17 +28,6 @@
     svg {
       height: 100%;
       width: 100%;
-    }
-  }
-
-  .#{$px}-text--heading3 {
-    display: none;
-
-    @include isHeaderMobile {
-      align-self: flex-start;
-      display: flex;
-      flex-wrap: wrap;
-      margin: 0;
     }
   }
 
@@ -68,6 +61,11 @@
 
       &-enter-active input {
         background: $white;
+
+        &::placeholder {
+          opacity: 1;
+          transition: opacity 0.75s ease-in;
+        }
       }
 
       &__input {
@@ -87,10 +85,36 @@
         margin: 0;
         padding: $spacing-sm 0 $spacing-sm $spacing-sm;
 
+        @include media($size-xl) {
+          height: 2.875rem;
+        }
+
         &:focus {
           outline: none;
         }
+
+        &::placeholder {
+          opacity: 0;
+        }
       }
+    }
+  }
+}
+
+.#{$px}-search__container {
+  display: flex;
+  justify-content: space-between;
+
+  &__label {
+    display: none;
+
+    @include isHeaderMobile {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      height: $search-size;
+      margin: 0;
+      padding: 0 $spacing-sm;
     }
   }
 }

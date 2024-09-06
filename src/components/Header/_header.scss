@@ -10,17 +10,6 @@
   top: 0;
   z-index: 10;
 
-  // &__scrollable-area {
-  //   align-items: center;
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: center;
-
-  //   @include isHeaderDesktop {
-  //     overflow: hidden;
-  //   }
-  // }
-
   &__toggle-btn {
     align-items: center;
     background: none;
@@ -122,6 +111,10 @@
     &--closed {
       display: none;
     }
+    .#{$px}-nav__list-container {
+      display: flex;
+      padding-right: $search-size;
+    }
 
     @include isHeaderDesktop {
       display: flex;
@@ -133,6 +126,13 @@
 
       div.#{$px}-language-selector {
         display: none; // hide this one on mobile
+      }
+    }
+
+    .#{$px}-nav__item {
+      .#{$px}-link--snwHeaderLink {
+        align-content: center;
+        height: 100%;
       }
     }
 

@@ -1,3 +1,10 @@
+# [1.48.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.47.0...v1.48.0) (2024-09-06)
+
+
+### Features
+
+* **search-integration:** L3-3366 Header UX Search Integration ([#294](https://github.com/PhillipsAuctionHouse/seldon/issues/294)) ([b8139a0](https://github.com/PhillipsAuctionHouse/seldon/commit/b8139a09212e28764f0da1ee7e0bcdc12b7ad95d))
+
 # [1.47.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.46.0...v1.47.0) (2024-09-03)
 
 

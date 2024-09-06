@@ -1,6 +1,5 @@
 import classnames from 'classnames';
 import { findChildrenOfType, px } from '../../utils';
-import Search from '../Search/Search';
 import Logo from '../../assets/PhillipsLogo.svg?react';
 import UserManagement from '../UserManagement/UserManagement';
 import { LanguageSelector } from '../LanguageSelector';
@@ -26,7 +25,11 @@ export interface HeaderProps extends ComponentProps<'header'> {
    */
   logoText?: string;
 }
-type HeaderContextType = {
+export type HeaderContextType = {
+  /**
+   * Used for mobile navigation menu hiding and showing
+   */
+  isMenuOpen: boolean;
   /**
    * Is the user within the search input and searching
    */
@@ -63,7 +66,6 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     },
     ref,
   ) => {
-    const searchElement = findChildrenOfType(children, Search);
     const userManagementElement = findChildrenOfType(children, UserManagement);
     const languageSelectorElement = findChildrenOfType(children, LanguageSelector);
     const [isSearchExpanded, setIsSearchExpanded] = useState(false);
@@ -111,10 +113,9 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
             }
           >
             {navElements}
-            {languageSelectorElement} {/* This is not visible through css when in desktop breakpoint */}
           </HeaderContext.Provider>
+          {languageSelectorElement} {/* This is not visible through css when in desktop breakpoint */}
         </div>
-        {searchElement}
       </header>
     );
   },

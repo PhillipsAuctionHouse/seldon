@@ -1,7 +1,6 @@
 import { SearchProps } from './Search';
 import SearchIcon from '../../assets/search.svg?react';
 import CloseIcon from '../../assets/close.svg?react';
-import LoadingSpinner from '../../assets/loading_spinner.svg?react';
 import { ComponentProps } from 'react';
 
 export const SearchButton = ({
@@ -18,8 +17,6 @@ export const SearchButton = ({
   setIsSearchExpanded: React.Dispatch<React.SetStateAction<boolean>>;
 } & Pick<SearchProps, 'state' | 'searchButtonText'> &
   ComponentProps<'button'>) => {
-  const renderSpinner = state === 'loading' || state === 'submitting';
-
   if (!isSearchExpanded) {
     return (
       <button
@@ -35,7 +32,7 @@ export const SearchButton = ({
     );
   }
 
-  if (isSearchExpanded && state === 'idle') {
+  if (isSearchExpanded) {
     return (
       <button
         {...props}
@@ -47,15 +44,6 @@ export const SearchButton = ({
       >
         <CloseIcon data-testid={`${testId}-form-icon`} className={`${className}__button__icon`} />
       </button>
-    );
-  }
-
-  if (isSearchExpanded && renderSpinner) {
-    return (
-      <LoadingSpinner
-        data-testid={`${testId}-form-icon`}
-        className={`${className}__button__icon ${className}__input-status-icon`}
-      />
     );
   }
   return null;

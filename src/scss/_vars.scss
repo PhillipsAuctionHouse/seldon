@@ -360,11 +360,6 @@ $margin-xxl: var(--spacing-xxl);
 }
 
 ////////////////////////
-/// height Tokens
-///////////////////////
-$header-height: var(--header-height);
-
-////////////////////////
 /// max-site-width TOKEN:
 ///////////////////////
 $max-site-width: 1560px;
@@ -390,4 +385,6 @@ $mobile-minimum-clickable-area: 44px;
 ////////////////////////
 /// Header Tokens
 ///
-$search-size: 2.625rem;
+$search-size: 2.625rem; // This should be calculated from the scaling text and scaling spacing tokens instead of hardcoding in case they change
+$search-size-xl: 2.875rem;
+$header-height: var(--header-height);

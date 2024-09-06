@@ -9,11 +9,13 @@
 
   &__list-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding: 0 $spacing-sm;
     position: relative;
 
     @include isHeaderDesktop {
+      flex-direction: row;
       padding-right: $search-size;
     }
   }

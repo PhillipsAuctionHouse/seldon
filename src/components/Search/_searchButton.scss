@@ -16,6 +16,11 @@
   top: 0;
   width: $search-size;
 
+  @include media($size-xl) {
+    height: $search-size-xl;
+    padding: 0 0 0.125rem;
+  }
+
   &--close {
     border-bottom: 1px solid $pure-black;
   }

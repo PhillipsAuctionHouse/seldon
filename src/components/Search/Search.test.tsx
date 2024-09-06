@@ -1,13 +1,19 @@
-import { render, screen, waitFor, act } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import { ReactNode } from 'react';
 import userEvent from '@testing-library/user-event';
 import Search from './Search';
 import { runCommonTests } from '../../utils/testUtils';
 import { px } from '../../utils';
+import Header from '../Header/Header';
+
+const renderWithContext = (component: ReactNode) => {
+  return render(<Header>{component}</Header>);
+};
 
 describe('Search component', () => {
   runCommonTests((props) => <Search {...props} />, 'Search');
   it('check is loading state', async () => {
-    render(<Search state="loading" loadingText="Pending..." defaultValue="My Value" />);
+    renderWithContext(<Search state="loading" loadingText="Pending..." defaultValue="My Value" />);
     await userEvent.click(screen.getByTestId('search-button'));
     expect(screen.getByText('Pending...')).toBeInTheDocument();
   });
@@ -22,40 +28,37 @@ describe('Search component', () => {
     await userEvent.click(button);
     expect(searchInput).toHaveFocus();
   });
-  it.only('should close form when close button is clicked', async () => {
-    render(<Search />);
+  it('should close form when close button is clicked', async () => {
+    renderWithContext(<Search />);
     const searchButton = screen.getByTestId('search-button');
     const searchInput = screen.getByTestId('search-input');
     const searchForm = screen.getByTestId('search-form');
-    await act(() => userEvent.click(searchButton));
-    await waitFor(() => expect(screen.queryByTestId('search-close-button')).toBeInTheDocument());
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    screen.debug();
+    await userEvent.click(searchButton);
     const closeButton = screen.getByTestId('search-close-button');
     expect(closeButton).toBeInTheDocument();
-    expect(searchButton).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Search' })).not.toBeInTheDocument();
     expect(searchInput).toBeVisible();
     expect(searchInput).toHaveFocus();
     expect(searchForm).toHaveClass(`${px}-search__form--active`);
     await userEvent.click(closeButton);
-    expect(closeButton).not.toBeInTheDocument();
+    expect(screen.queryByTestId('search-close-button')).not.toBeInTheDocument();
     expect(searchInput).not.toHaveFocus();
     expect(searchForm).not.toHaveClass(`${px}-search__form--active`);
   });
   it('should close form when esc key is pressed', async () => {
-    render(<Search />);
+    renderWithContext(<Search />);
     const searchButton = screen.getByTestId('search-button');
     const searchInput = screen.getByTestId('search-input');
     const searchForm = screen.getByTestId('search-form');
     await userEvent.click(searchButton);
     const closeButton = screen.getByTestId('search-close-button');
     await userEvent.type(closeButton, '{esc}');
-    expect(closeButton).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Close' })).not.toBeInTheDocument();
     expect(searchInput).not.toHaveFocus();
     expect(searchForm).not.toHaveClass(`${px}-search__form--active`);
   });
   it('should reset form when close button is clicked', async () => {
-    render(<Search />);
+    renderWithContext(<Search />);
     const searchButton = screen.getByTestId('search-button');
     const searchInput = screen.getByTestId('search-input');
     await userEvent.click(searchButton);
@@ -83,7 +86,7 @@ describe('Search component', () => {
   });
   describe('allResults', () => {
     it('should render all results link default', async () => {
-      render(<Search defaultValue="My Value" />);
+      renderWithContext(<Search defaultValue="My Value" />);
       const button = screen.getByTestId('search-button');
       await userEvent.click(button);
       expect(screen.getByRole('link', { name: 'View all results for My Value' })).toHaveAttribute(
@@ -92,7 +95,9 @@ describe('Search component', () => {
       );
     });
     it('should render all results link custom', async () => {
-      render(<Search defaultValue="My Value" getAllResultsLink={(value) => `www.example.com?Search=${value}`} />);
+      renderWithContext(
+        <Search defaultValue="My Value" getAllResultsLink={(value) => `www.example.com?Search=${value}`} />,
+      );
       const button = screen.getByTestId('search-button');
       await userEvent.click(button);
       expect(screen.getByRole('link', { name: 'View all results for My Value' })).toHaveAttribute(
@@ -101,13 +106,13 @@ describe('Search component', () => {
       );
     });
     it('should render all results text default', async () => {
-      render(<Search defaultValue="My Value" />);
+      renderWithContext(<Search defaultValue="My Value" />);
       const button = screen.getByTestId('search-button');
       await userEvent.click(button);
       expect(screen.getByRole('link', { name: 'View all results for My Value' })).toBeInTheDocument();
     });
     it('should render all results text custom', async () => {
-      render(<Search defaultValue="custom" getAllResultsText={(value) => `my custom text: ${value}`} />);
+      renderWithContext(<Search defaultValue="custom" getAllResultsText={(value) => `my custom text: ${value}`} />);
       const button = screen.getByTestId('search-button');
       await userEvent.click(button);
       expect(screen.getByRole('link', { name: 'my custom text: custom' })).toBeInTheDocument();
@@ -115,7 +120,7 @@ describe('Search component', () => {
   });
   describe('otherCustomText', () => {
     it('should render placeholder', async () => {
-      render(<Search defaultValue="My Value" placeholder="My Placeholder" />);
+      renderWithContext(<Search defaultValue="My Value" placeholder="My Placeholder" />);
       const button = screen.getByTestId('search-button');
       await userEvent.click(button);
       expect(screen.getByTestId('search-input')).toHaveAttribute('placeholder', 'My Placeholder');
