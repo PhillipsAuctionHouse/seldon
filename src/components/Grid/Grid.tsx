@@ -1,8 +1,9 @@
 import classnames from 'classnames';
 
-import { getCommonProps } from '../../utils';
+import { getCommonProps, SpacingTokens } from '../../utils';
+import { determineGridClassName } from './utils';
 
-export interface GridProps extends React.HTMLAttributes<HTMLElement> {
+export interface GridProps<ElementType = HTMLElement> extends React.HTMLAttributes<ElementType> {
   /**
    * A Grid must have children
    */
@@ -10,7 +11,15 @@ export interface GridProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Optional element to render as the top-level component e.g. 'div', 'span', CustomComponent, etc.  Defaults to 'section'.
    */
-  element?: React.ElementType<GridProps>;
+  element?: React.ElementType<GridProps<ElementType>>;
+  /**
+   * The gap between the rows in the grid.  Defaults to 'md'.
+   */
+  columnGap?: SpacingTokens;
+  /**
+   * The gap between the columns in the grid.  Defaults to 'lg'.
+   */
+  rowGap?: SpacingTokens;
 }
 
 /**
@@ -23,10 +32,21 @@ export interface GridProps extends React.HTMLAttributes<HTMLElement> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-layouts-grid--overview)
  */
 
-export function Grid({ children, className, element: Element = 'section', ...props }: GridProps) {
+export function Grid({
+  children,
+  className,
+  element: Element = 'section',
+  columnGap = SpacingTokens.md,
+  rowGap = SpacingTokens.lg,
+  ...props
+}: GridProps) {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Grid');
   return (
-    <Element {...commonProps} className={classnames(baseClassName, className)} {...props}>
+    <Element
+      {...commonProps}
+      className={classnames(determineGridClassName(baseClassName, columnGap, rowGap), className)}
+      {...props}
+    >
       {children}
     </Element>
   );

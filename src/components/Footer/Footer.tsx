@@ -32,7 +32,7 @@ const Footer = ({
       <div className={`${px}-footer__links`}>{children}</div>
 
       <div className={`${px}-footer__copyright`}>
-        <h3 data-testid="header-logo" className={`${px}-header__logo`}>
+        <h3 data-testid="footer-logo" className={`${px}-footer__logo`}>
           <a href="/" aria-label="logo">
             <Logo />
           </a>

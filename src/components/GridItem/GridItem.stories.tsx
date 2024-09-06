@@ -55,16 +55,16 @@ export const CenteredGridItem = (props: GridItemProps) => (
 
 CenteredGridItem.args = {
   sm: 2,
-  md: 8,
+  md: 4,
   lg: 8,
 };
 
 export const LeftAndRightGridItems = () => (
   <Grid>
-    <GridItem style={{ backgroundColor: 'gray' }} xs={1} sm={1} md={4} lg={4} align={GridItemAlign.left}>
+    <GridItem style={{ backgroundColor: 'gray' }} xs={1} sm={1} md={2} lg={4} align={GridItemAlign.left}>
       <p>Left align</p>
     </GridItem>
-    <GridItem style={{ backgroundColor: 'gray' }} xs={1} sm={2} md={6} lg={6} align={GridItemAlign.right}>
+    <GridItem style={{ backgroundColor: 'gray' }} xs={1} sm={1} md={4} lg={6} align={GridItemAlign.right}>
       <p>Right align</p>
     </GridItem>
   </Grid>
