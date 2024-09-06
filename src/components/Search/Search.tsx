@@ -70,10 +70,11 @@ const Search = ({
   const headerContext = React.useContext(HeaderContext);
   const searchInputRef = React.useRef<HTMLInputElement>(null);
   const searchFormRef = React.useRef<HTMLFormElement>(null);
+  const searchContainerRef = React.useRef<HTMLDivElement>(null);
   const isSearchExpanded = headerContext.isSearchExpanded;
   const value = searchInputRef.current?.value;
 
-  useOnClickOutside(searchFormRef, () => showSearch(false));
+  useOnClickOutside(searchContainerRef, () => showSearch(false));
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLAnchorElement>) => {
     e.stopPropagation();
@@ -107,7 +108,11 @@ const Search = ({
   };
 
   return (
-    <div className={`${baseClassName}__container`}>
+    <div
+      onClick={() => headerContext.setIsSearchExpanded(true)}
+      className={`${baseClassName}__container`}
+      ref={searchContainerRef}
+    >
       <Text variant={TextVariants.heading4} className={`${baseClassName}__container__label`}>
         {searchButtonText}
       </Text>

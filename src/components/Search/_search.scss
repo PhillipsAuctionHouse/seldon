@@ -102,11 +102,14 @@
 }
 
 .#{$px}-search__container {
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   padding: $padding-md 0;
+  pointer-events: all;
 
   @include isHeaderDesktop {
+    cursor: default;
     padding: 0;
   }
 
@@ -116,11 +119,17 @@
 
     @include isHeaderMobile {
       align-items: center;
+      cursor: pointer;
       display: flex;
       flex-wrap: wrap;
       height: $search-size;
       margin: 0;
       padding: 0 $spacing-sm;
+      pointer-events: all;
+
+      &:hover {
+        @include underline;
+      }
     }
   }
 }
