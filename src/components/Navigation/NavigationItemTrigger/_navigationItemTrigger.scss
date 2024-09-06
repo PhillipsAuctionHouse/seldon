@@ -19,7 +19,7 @@
   @include isHeaderDesktop {
     &--hovered button::after {
       background-color: $pure-black;
-      bottom: 1px;
+      bottom: -1px;
       content: '';
       height: 1px;
       left: 0;
@@ -28,7 +28,7 @@
     }
 
     & > &__submenu {
-      transform: translateY(-100%);
+      transform: translateY(-120%);
       transition: none; // remove this when implementing submenu transitions
     }
 

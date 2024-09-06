@@ -38,7 +38,7 @@
     &:hover::after,
     &:focus-visible::after {
       background: $pure-black;
-      bottom: 0;
+      bottom: -1px;
       content: '';
       height: 1px;
       left: 0;
