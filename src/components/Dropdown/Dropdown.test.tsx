@@ -17,18 +17,27 @@ class MockPointerEvent extends Event {
     this.pointerType = props.pointerType || 'mouse';
   }
 }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-window.PointerEvent = MockPointerEvent as any;
-window.HTMLElement.prototype.scrollIntoView = vi.fn();
-window.HTMLElement.prototype.releasePointerCapture = vi.fn();
-window.HTMLElement.prototype.hasPointerCapture = vi.fn();
 
 const languages = [
   { label: 'English', value: SupportedLanguages.en },
   { label: '中文', value: SupportedLanguages.zh },
 ];
 
+const originalWindow = window;
+
 describe('Dropdown', () => {
+  beforeAll(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    window.PointerEvent = MockPointerEvent as any;
+    window.HTMLElement.prototype.scrollIntoView = vi.fn();
+    window.HTMLElement.prototype.releasePointerCapture = vi.fn();
+    window.HTMLElement.prototype.hasPointerCapture = vi.fn();
+  });
+  afterAll(() => {
+    // eslint-disable-next-line no-global-assign
+    window = originalWindow;
+  });
+
   runCommonTests((props) => <Dropdown {...props} options={languages} value={SupportedLanguages.en} />, 'Dropdown');
 
   it('should render the default value label in the trigger', () => {

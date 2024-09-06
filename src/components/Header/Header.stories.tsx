@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import Header, { HeaderProps } from './Header';
+import Header, { HeaderContext, HeaderProps } from './Header';
 import Navigation from '../Navigation/Navigation';
 import NavigationList from '../Navigation/NavigationList/NavigationList';
 import NavigationItemTrigger from '../Navigation/NavigationItemTrigger/NavigationItemTrigger';
@@ -7,12 +7,71 @@ import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
 import { LinkVariants } from '../Link/types';
 import { px } from '../../utils';
 import UserManagement from '../UserManagement/UserManagement';
-import Search from '../Search/Search';
+import Search, { SearchProps } from '../Search/Search';
 import { AuthState } from '../UserManagement/types';
+import { SearchResult } from '../Search/SearchResults/SearchResults';
+import React from 'react';
+import { defaultHeaderContext } from './utils';
+
+const fetchData = async (searchQuery: string) => {
+  console.log('searchQuery', searchQuery);
+  let searchResults: { makers: Array<SearchResult> } = { makers: [] };
+  // Call to get search results
+  searchResults = await new Promise((resolve) => {
+    setTimeout(
+      () =>
+        resolve({
+          makers: [
+            { id: 'result1', label: 'Name', url: 'http://www.example.com' },
+            { id: 'result2', label: 'Another Name', url: 'http://www.example.com' },
+            { id: 'result3', label: 'Yet Another Name', url: 'http://www.example.com' },
+          ],
+        }),
+      2000,
+    );
+  });
+  return searchResults;
+};
+
+const StatefulSearch = (props: SearchProps) => {
+  const [autoCompleteResults, setAutoCompleteResults] = React.useState([] as Array<SearchResult>);
+  const [state, setState] = React.useState<SearchProps['state']>('idle');
+  const [isSearchExpanded, setIsSearchExpanded] = React.useState(false);
+
+  const onSearch = (searchQuery: string) => {
+    if (searchQuery?.includes('?')) {
+      setState('invalid');
+      return;
+    }
+    // Call to get auto complete results
+    if (searchQuery.length > 2) {
+      setState('loading');
+      fetchData(searchQuery)
+        .then((data) => {
+          setAutoCompleteResults(data.makers);
+          setState('idle');
+        })
+        .catch((error) => console.error(error));
+    }
+  };
+  return (
+    <HeaderContext.Provider value={{ ...defaultHeaderContext, isSearchExpanded, setIsSearchExpanded }}>
+      <Search
+        {...props}
+        onSearch={(value) => {
+          onSearch(value);
+        }}
+        searchResults={autoCompleteResults}
+        state={state}
+      />
+    </HeaderContext.Provider>
+  );
+};
 
 const meta = {
   title: 'Components/Header',
   component: Header,
+  subcomponents: { Search: Search as React.ComponentType<unknown> },
   parameters: {
     docs: {
       story: {
@@ -25,11 +84,14 @@ const meta = {
     authState: AuthState.LoggedOut,
   },
   argTypes: { authState: { control: { type: 'select' }, options: Object.values(AuthState) } },
-} satisfies Meta<typeof Header & typeof UserManagement>;
+} satisfies Meta<typeof Header & typeof Search & typeof UserManagement>;
 
 export default meta;
 
-export const Playground = ({ authState, ...props }: HeaderProps & { authState?: AuthState }) => (
+export const Playground = ({
+  // authState,
+  ...props
+}: HeaderProps & { authState?: AuthState }) => (
   <div>
     <Header {...props}>
       <Navigation id={`${px}-main-nav`} backBtnLabel="← Back">
@@ -159,109 +221,22 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
               />
             </NavigationList>
           </NavigationItemTrigger>
-          <NavigationItemTrigger id="exhibitions" label="Exhibitions">
-            <NavigationList id={`${px}-exhibitions-nav-list`}>
-              <NavigationItem
-                badge="New York"
-                href="#"
-                navGroup="nav-link-lg"
-                navType={LinkVariants.snwFlyoutLink}
-                label="Written in the Sky: Works by Ed Ruscha"
-              />
-              <NavigationItem
-                badge="Paris"
-                href="#"
-                navGroup="nav-link-lg"
-                navType={LinkVariants.snwFlyoutLink}
-                label="Modeler le papier // Shapes On Paper"
-              />
-              <NavigationItem
-                badge="New York"
-                href="#"
-                navGroup="nav-link-lg"
-                navType={LinkVariants.snwFlyoutLink}
-                label="ALT POP: An Alternative History to American Pop Art"
-              />
-              <NavigationItem
-                badge="New York"
-                href="#"
-                navGroup="nav-link-lg"
-                navType={LinkVariants.snwFlyoutLink}
-                label="New Terrains: Contemporary Native American Art"
-              />
-              <NavigationItem
-                navGroup="nav-link-sm"
-                navType={LinkVariants.snwFlyoutLink}
-                href="#"
-                label="Past Exhibitions"
-              />
-            </NavigationList>
-          </NavigationItemTrigger>
+          <NavigationItem href="#" label="Exhibitions" />
           <NavigationItem href="#" label="Perpetual" />
           <NavigationItem href="#" label="Dropshop" />
-          <NavigationItemTrigger id="buy-sell" label="Buy & Sell">
-            <NavigationList id={`${px}-buy-sell-nav-list`}>
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} href="#" label="How To Buy" />
-              <NavigationItem
-                navGroup="nav-link-sm"
-                navType={LinkVariants.snwFlyoutLink}
-                href="#"
-                label="How To Sell"
-              />
-              <NavigationItem
-                navGroup="nav-link-sm"
-                navType={LinkVariants.snwFlyoutLink}
-                href="#"
-                label="Remote Bidding"
-              />
-              <NavigationItem
-                navGroup="nav-link-sm"
-                navType={LinkVariants.snwFlyoutLink}
-                href="#"
-                label="Private Services"
-              />
-              <NavigationItem
-                navGroup="nav-link-sm"
-                navType={LinkVariants.snwFlyoutLink}
-                href="#"
-                label="Trusts, Estates & Valuations"
-              />
-              <NavigationItem
-                navGroup="nav-link-sm"
-                navType={LinkVariants.snwFlyoutLink}
-                href="#"
-                label="Fiduciary Services"
-              />
-              <NavigationItem
-                navGroup="nav-link-sm"
-                navType={LinkVariants.snwFlyoutLink}
-                href="#"
-                label="Buy Catalogues"
-              />
-            </NavigationList>
-          </NavigationItemTrigger>
           <NavigationItem href="#" label="Editorial" />
-          <NavigationItemTrigger id="about-us" label="About Us">
-            <NavigationList id={`${px}-about-us-nav-list`}>
-              <NavigationItem
-                navGroup="nav-link-sm"
-                navType={LinkVariants.snwFlyoutLink}
-                href="#"
-                label="Our History"
-              />
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} href="#" label="Our Team" />
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} href="#" label="Locations" />
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} href="#" label="Press" />
-              <NavigationItem navGroup="nav-link-sm" navType={LinkVariants.snwFlyoutLink} href="#" label="Careers" />
-            </NavigationList>
-          </NavigationItemTrigger>
-          <UserManagement
+          {/* <UserManagement
             authState={authState}
             onLanguageChange={(language) => console.log('languageChange', language)}
-          />
+          /> */}
         </NavigationList>
+        <StatefulSearch
+          placeholder="Search for makers"
+          onSearch={() => {
+            return;
+          }}
+        />
       </Navigation>
-      <Search />
     </Header>
     <main>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore

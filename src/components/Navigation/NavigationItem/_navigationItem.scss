@@ -27,7 +27,7 @@
       left: 0;
       position: absolute;
       right: 0;
-      top: $header-height;
+      top: $nav-height;
     }
   }
 
@@ -74,7 +74,7 @@
       min-height: 0;
       overflow: hidden;
       position: fixed;
-      top: $header-submenu-top;
+      top: $desktop-header-height;
       width: 100%;
       z-index: -1;
 

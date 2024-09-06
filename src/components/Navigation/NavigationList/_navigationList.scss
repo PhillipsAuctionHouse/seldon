@@ -5,8 +5,11 @@
   justify-content: center;
   list-style: none;
   margin: 0;
+  opacity: 1;
   padding: 0;
-  width: 100%;
+  position: relative;
+  top: 0;
+  transition: top 0.25s ease-in 0.1s;
 
   @include isHeaderMobile {
     flex-direction: column;
@@ -16,7 +19,7 @@
     overflow: auto;
     padding: 0.5rem;
     transform: translateX(0%);
-    transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1) 0.1s;
+    transition: transform 0.3s ease-in 0.1s;
   }
 
   &--expanded {
@@ -26,6 +29,15 @@
         width: 200%;
       }
     }
+  }
+
+  &--offscreen {
+    opacity: 0;
+    top: -100%;
+    transition:
+      top 0.25s ease-in 0.1s,
+      opacity 0.25s ease-in;
+    z-index: 5;
   }
 
   & .#{$px}-nav__item > & {
