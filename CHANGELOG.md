@@ -1,3 +1,10 @@
+# [1.49.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.48.0...v1.49.0) (2024-09-09)
+
+
+### Features
+
+* **drawer:** L3-3616 updated spacers ([#296](https://github.com/PhillipsAuctionHouse/seldon/issues/296)) ([906305d](https://github.com/PhillipsAuctionHouse/seldon/commit/906305d239d8dee11cdfd36fdfc94f52af768299))
+
 # [1.48.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.47.0...v1.48.0) (2024-09-06)
 
 
