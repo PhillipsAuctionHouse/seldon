@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import classnames from 'classnames';
-import { findChildrenOfType, px } from '../../utils';
+import { findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
 import Logo from '../../assets/PhillipsLogo.svg?react';
 import UserManagement from '../UserManagement/UserManagement';
 import { LanguageSelector } from '../LanguageSelector';
@@ -71,6 +71,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     const languageSelectorElement = findChildrenOfType(children, LanguageSelector);
     const [isSearchExpanded, setIsSearchExpanded] = useState(false);
     const navigationElement = findChildrenOfType(children, Navigation);
+    const otherChildren = findChildrenExcludingTypes(children, [Navigation]);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleText = isMenuOpen ? toggleCloseText : toggleOpenText;
     const handleMenuToggle = function () {
@@ -123,6 +124,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
                   })
                 : child,
             )}
+            {otherChildren}
           </HeaderContext.Provider>
         </div>
       </header>

@@ -1,53 +1,50 @@
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import Navigation, { NavigationProps } from './Navigation';
-import NavigationItemTrigger from './NavigationItemTrigger/NavigationItemTrigger';
-import { px } from '../../utils';
+import Search from '../Search/Search';
+import NavigationList from './NavigationList/NavigationList';
+import NavigationItem from './NavigationItem/NavigationItem';
+import { LanguageSelector } from '../LanguageSelector';
+import { HeaderContext, HeaderContextType } from '../Header/Header';
+import { defaultHeaderContext } from '../Header/utils';
+
+const defaultProps: NavigationProps = {
+  id: 'phillips-nav',
+  visible: true,
+};
+const renderNavigation = (props: NavigationProps = defaultProps, context?: Partial<HeaderContextType>) =>
+  render(
+    <HeaderContext.Provider value={{ ...defaultHeaderContext, ...context }}>
+      <Navigation {...props}>
+        <Search />
+        <NavigationList id="test-nav">
+          <NavigationItem label="Auctions" />
+        </NavigationList>
+        <LanguageSelector />
+      </Navigation>
+      ,
+    </HeaderContext.Provider>,
+  );
 
 describe('Navigation', () => {
-  const defaultProps: NavigationProps = {
-    id: 'phillips-nav',
-    visible: true,
-  };
-  const expandedItem = 'Auctions';
-
   it('renders without error', () => {
     render(<Navigation {...defaultProps} />);
+    expect(screen.getByRole('navigation')).toBeInTheDocument();
   });
-
-  it('does not render mobile nav label when visible is false', () => {
-    render(<Navigation id="phillips-nav" visible={false} />);
-    const navLabel = screen.getByTestId('phillips-nav-label');
-    expect(navLabel).toHaveClass(`${px}-nav__label--hidden`);
+  it('renders nav list component if passed', () => {
+    renderNavigation();
+    expect(screen.getByRole('list')).toBeInTheDocument();
+    expect(screen.getByText('Auctions')).toBeInTheDocument();
   });
-
-  it('renders mobile nav label when visible is true', () => {
-    render(<Navigation id="phillips-nav" />);
-
-    const navLabel = screen.getByTestId('phillips-nav-label');
-    expect(navLabel).not.toHaveClass(`${px}-nav__label--hidden`);
-    expect(navLabel).toHaveTextContent('Main Menu');
+  it('renders search component if passed', () => {
+    renderNavigation();
+    expect(screen.getAllByLabelText('Search').length).toBeGreaterThanOrEqual(1);
   });
-
-  it('renders with back button label', () => {
-    const { getByTestId } = render(<Navigation {...defaultProps} />);
-    expect(getByTestId('phillips-nav-back-btn')).toBeInTheDocument();
+  it('renders language selector component if passed', () => {
+    renderNavigation();
+    expect(screen.getByRole('combobox', { name: 'English' })).toBeInTheDocument();
   });
-
-  it('renders mobile menu with default value', () => {
-    const { getByTestId } = render(<Navigation {...defaultProps} />);
-    expect(getByTestId('phillips-nav-label')).toBeInTheDocument();
-  });
-
-  it('renders mobile menu with expanded item value', async () => {
-    const { getByText, getByTestId } = render(
-      <Navigation {...defaultProps}>
-        <NavigationItemTrigger id="auctions" label="Auctions"></NavigationItemTrigger>
-      </Navigation>,
-    );
-    await userEvent.click(getByTestId('nav-item-trigger-auctions'));
-    expect(getByText(expandedItem)).toBeInTheDocument();
-    await userEvent.click(getByTestId('phillips-nav-back-btn'));
-    expect(getByText('Main Menu')).toBeInTheDocument();
+  it('hide nav list if search expanded', () => {
+    renderNavigation({}, { isSearchExpanded: true });
+    expect(screen.queryByRole('list')).not.toBeInTheDocument();
   });
 });

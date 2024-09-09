@@ -28,6 +28,7 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
     });
     return (
       <ul
+        aria-hidden={isOffScreen}
         id={id}
         data-testid={id}
         role="list"

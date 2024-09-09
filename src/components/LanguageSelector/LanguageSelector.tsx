@@ -86,7 +86,6 @@ const LanguageSelector = forwardRef<HTMLElement, LanguageSelectorProps>(
     const selectorProps = {
       ...commonProps,
       ...props,
-      'aria-hidden': isHidden,
       id,
       className: classnames(baseClassName, className, {
         [`${baseClassName}--hidden`]: isHidden,
