@@ -11,7 +11,7 @@
   }
 
   &__blurb {
-    @include text($body2);
+    @include text($body1);
 
     color: $pure-black;
   }
@@ -21,23 +21,12 @@
   }
 
   &__button {
-    margin: $spacing-sm 0 $spacing-md;
+    margin: 0.25rem 0 $spacing-sm;
+    max-width: 240px;
     width: 100%;
-
-    @include media($size-md) {
-      width: 240px;
-    }
   }
 
   &__privacy {
     @include text($body3);
-
-    color: $pure-black;
-    font-size: 0.75rem;
-    margin-top: $spacing-sm;
-
-    @include media($size-md) {
-      margin-top: $spacing-xl;
-    }
   }
 }

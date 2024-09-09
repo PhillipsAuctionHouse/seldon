@@ -14,7 +14,7 @@ export const Playground = (props: SubscribeProps) => <Subscribe {...props} />;
 
 Playground.args = {
   id: 'mySubscribeComponent',
-  title: 'Subscribe to Newsletter',
+  title: 'Never Miss A Moment',
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => {
     const target = e.target as HTMLFormElement;
     e.preventDefault();

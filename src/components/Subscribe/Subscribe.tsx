@@ -126,7 +126,6 @@ const Subscribe = ({
       <Button
         className={`${baseClassName}__button ${className}`}
         variant={ButtonVariants.secondary}
-        size="sm"
         type="submit"
         {...buttonProps}
       >
