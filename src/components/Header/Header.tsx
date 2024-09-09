@@ -127,6 +127,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
             {otherChildren}
           </HeaderContext.Provider>
         </div>
+        <div className={classnames(`${px}-header__overlay`, { [`${px}-header__overlay--active`]: isSearchExpanded })} />
       </header>
     );
   },

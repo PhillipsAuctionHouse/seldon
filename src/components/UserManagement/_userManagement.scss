@@ -8,6 +8,11 @@
   justify-content: flex-end;
   min-width: 75px; // needed to handle the loading states and language swapping
 
+  @include isHeaderMobile {
+    justify-content: center;
+    min-width: 44px; // matching the size of mobile menu icon to allow for equal spacing and centering of logo
+  }
+
   &__login {
     align-items: center;
     background-color: unset;
