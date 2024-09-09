@@ -92,16 +92,3 @@
     }
   }
 }
-
-.#{$px}-text--heading3 {
-  display: none;
-
-  @include isHeaderMobile {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    height: $nav-height;
-    margin: 0;
-    padding: 0 $spacing-sm;
-  }
-}
