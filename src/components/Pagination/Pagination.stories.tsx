@@ -51,10 +51,9 @@ Playground.args = {
   playgroundWidth: 200,
   className: 'pagination-test-class',
   value: null,
-  disabled: false,
+  isDisabled: false,
   onChange: (selectedValue: string) => {
-    console.log('selectedValue >', selectedValue);
-    console.log('Make additional function calls here...');
+    console.log('selected value >', selectedValue);
   },
 };
 

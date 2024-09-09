@@ -23,8 +23,9 @@
       &:disabled {
         border: 1px solid $medium-gray;
         margin: auto;
+        max-height: 3.5rem;
         max-width: 5rem;
-        padding: 0 1rem;
+        padding: 0.5rem;
         text-decoration: none;
       }
     }
