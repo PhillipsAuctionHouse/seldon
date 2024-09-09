@@ -64,9 +64,7 @@ const ReadMore = ({
     <Collapsible
       open={isExpanded}
       onOpenChange={toggleExpand}
-      className={classnames(baseClassName, className, {
-        hasOverflow: hasOverflow,
-      })}
+      className={classnames(baseClassName, className)}
       style={
         {
           '--read-more-max-height': `${maxHeight}px`,
@@ -75,21 +73,20 @@ const ReadMore = ({
       {...commonProps}
       id={props?.id}
     >
-      {hasOverflow && (
-        <div className={`${baseClassName}-overlay`}>
-          <div
-            className={classnames(`${baseClassName}-gradient`, {
-              isClosed: !isExpanded,
-            })}
-          />
-          <CollapsibleTrigger asChild>
-            <Button variant={ButtonVariants.secondary}>{isExpanded ? readLessText : readMoreText}</Button>
-          </CollapsibleTrigger>
-        </div>
-      )}
-      <CollapsibleContent className={`${baseClassName}-content`} ref={contentRef} forceMount>
+      <CollapsibleContent
+        className={classnames(`${baseClassName}-content`, {
+          showGradient: hasOverflow && !isExpanded,
+        })}
+        ref={contentRef}
+        forceMount
+      >
         {children}
       </CollapsibleContent>
+      {hasOverflow ? (
+        <CollapsibleTrigger asChild className={`${baseClassName}-trigger`}>
+          <Button variant={ButtonVariants.secondary}>{isExpanded ? readLessText : readMoreText}</Button>
+        </CollapsibleTrigger>
+      ) : null}
     </Collapsible>
   );
 };

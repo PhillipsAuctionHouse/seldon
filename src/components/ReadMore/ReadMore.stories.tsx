@@ -24,13 +24,13 @@ const sampleText = `
   Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 `;
 
-export const Default = (args: ReadMoreProps) => (
+export const Playground = (args: ReadMoreProps) => (
   <>
     <ReadMore {...args}>{sampleText}</ReadMore>
   </>
 );
 
-Default.args = {
+Playground.args = {
   readMoreText: 'Read More',
   readLessText: 'Read Less',
   maxHeight: 100,
@@ -46,16 +46,4 @@ CustomText.args = {
   readMoreText: 'Show More',
   readLessText: 'Show Less',
   maxHeight: 150,
-};
-
-export const LargeMaxHeight = (args: ReadMoreProps) => (
-  <ReadMore {...args}>
-    <p>{sampleText}</p>
-  </ReadMore>
-);
-
-LargeMaxHeight.args = {
-  readMoreText: 'Expand',
-  readLessText: 'Collapse',
-  maxHeight: 300,
 };
