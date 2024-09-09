@@ -7,6 +7,8 @@ import { px } from '../../utils';
 describe('ReadMore', () => {
   runCommonTests(ReadMore, 'ReadMore');
 
+  // Mock scrollHeight property
+  // https://github.com/testing-library/react-testing-library/issues/353#issuecomment-510046921
   const originalScrollHeight = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'scrollHeight');
 
   const setTallScrollHeight = () => {
