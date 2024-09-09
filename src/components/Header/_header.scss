@@ -79,8 +79,6 @@
     }
 
     @include isHeaderDesktop {
-      align-self: flex-end;
-
       svg {
         height: 28px;
         width: 100%;
@@ -92,7 +90,7 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding: $padding-sm;
+    padding: $padding-sm $spacing-md;
     width: 100%;
 
     /** There are actually two language selectors in the DOM, show this one in desktop */
@@ -113,6 +111,7 @@
     }
     .#{$px}-nav__list-container {
       display: flex;
+      padding: 0 $spacing-md;
 
       @include isHeaderDesktop {
         padding-right: $search-size;

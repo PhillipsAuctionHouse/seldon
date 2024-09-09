@@ -40,12 +40,12 @@ describe('UserManagement', () => {
     expect(onLoginMock).toHaveBeenCalled();
   });
 
-  it('calls onLogout when logout link is clicked', async () => {
-    const onLogoutMock = vitest.fn();
-    render(<UserManagement authState={AuthState.LoggedIn} onLogout={onLogoutMock} />);
-    const logoutLinkElement = screen.getByText('Logout');
-    await userEvent.click(logoutLinkElement);
-    expect(onLogoutMock).toHaveBeenCalled();
+  it('renders account link when logged in', () => {
+    const href = '/my-account';
+    render(<UserManagement authState={AuthState.LoggedIn} accountLabel="My Account" href={href} />);
+    const accountLinkElement = screen.getByRole('link', { name: 'My Account' });
+    expect(accountLinkElement).toBeInTheDocument();
+    expect(accountLinkElement).toHaveAttribute('href', href);
   });
 
   // it('changes the language when a different option is selected', async () => {
@@ -71,15 +71,15 @@ describe('UserManagement', () => {
   });
 
   it('displays the correct login and logout labels when isLoggedIn is true', () => {
-    const logoutLabel = 'Sign Out';
-    render(<UserManagement authState={AuthState.LoggedIn} logoutLabel={logoutLabel} />);
-    const logoutLinkElement = screen.getByText(logoutLabel);
-    expect(logoutLinkElement).toBeInTheDocument();
+    const accountLabel = 'My Account';
+    render(<UserManagement authState={AuthState.LoggedIn} accountLabel={accountLabel} />);
+    const accountLinkLabel = screen.getByText(accountLabel);
+    expect(accountLinkLabel).toBeInTheDocument();
   });
   it('AuthState not loaded does not show logout or login text', () => {
     render(<UserManagement authState={AuthState.Loading} />);
-    const logoutLinkElement = screen.queryByText('Logout');
-    expect(logoutLinkElement).not.toBeInTheDocument();
+    const accountLinkLabel = screen.queryByText('Account');
+    expect(accountLinkLabel).not.toBeInTheDocument();
     const loginLinkElement = screen.queryByText('Login');
     expect(loginLinkElement).not.toBeInTheDocument();
   });

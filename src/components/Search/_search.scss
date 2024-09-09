@@ -113,6 +113,10 @@
     padding: 0;
   }
 
+  @include isHeaderMobile {
+    position: relative;
+  }
+
   &__label {
     display: none;
     margin: 0;
@@ -126,10 +130,6 @@
       margin: 0;
       padding: 0 $spacing-sm;
       pointer-events: all;
-
-      &:hover {
-        @include underline;
-      }
     }
   }
 }

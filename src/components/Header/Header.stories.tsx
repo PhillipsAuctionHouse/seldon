@@ -247,8 +247,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
         <UserManagement
           authState={authState}
           onLogin={() => console.log('login')}
-          onLogout={() => console.log('logout')}
-          accountDetailsLink={({ children }) => <a href="#">{children}</a>}
+          accountDetailsLinkComponent={({ children }) => <a href="#">{children}</a>}
         />
       </Header>
       {generateLoremIpsum(200)}

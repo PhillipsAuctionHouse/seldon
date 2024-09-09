@@ -12,42 +12,47 @@ export interface UserManagementProps extends ComponentProps<'div'> {
    */
   authState?: AuthState;
   onLogin?: () => void;
-  onLogout?: () => void;
-  accountDetailsLink?: ElementType<LinkProps>;
+  accountDetailsLinkComponent?: ElementType<LinkProps>;
+  href?: string;
   loginLabel?: ReactNode;
-  logoutLabel?: ReactNode;
+  accountLabel?: ReactNode;
 }
 
 const UserManagement = forwardRef<HTMLDivElement, UserManagementProps>(
   (
     {
-      accountDetailsLink,
+      accountDetailsLinkComponent,
       className,
       onLogin = noOp,
-      onLogout = noOp,
       authState = AuthState.LoggedOut,
       loginLabel = 'Login',
-      logoutLabel = 'Logout',
+      accountLabel = 'Account',
+      href = '/account',
       ...props
     },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'UserManagement');
 
-    const AccountDetailsComponent = accountDetailsLink ?? 'a';
     const isLoggedIn = authState === AuthState.LoggedIn;
     const shouldShowAccountDetails = authState !== AuthState.Loading;
+    const AccountDetailsComponent = accountDetailsLinkComponent ?? 'a';
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         {shouldShowAccountDetails && (
           <>
-            <AccountDetailsComponent>
-              <AccountCircle className={`${baseClassName}__account-icon`} />
-            </AccountDetailsComponent>
-            <button className={`${baseClassName}__login`} onClick={isLoggedIn ? onLogout : onLogin}>
-              <Text variant={TextVariants.body3}> {isLoggedIn ? logoutLabel : loginLabel}</Text>
-            </button>
+            {isLoggedIn ? (
+              <AccountDetailsComponent className={`${baseClassName}__login`} href={href}>
+                <AccountCircle className={`${baseClassName}__account-icon`} />
+                <Text variant={TextVariants.body3}>{accountLabel}</Text>
+              </AccountDetailsComponent>
+            ) : (
+              <button className={`${baseClassName}__login`} onClick={onLogin}>
+                <AccountCircle className={`${baseClassName}__account-icon`} />
+                <Text variant={TextVariants.body3}>{loginLabel}</Text>
+              </button>
+            )}
           </>
         )}
       </div>
