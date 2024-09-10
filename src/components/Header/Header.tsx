@@ -1,19 +1,18 @@
+import React, { PropsWithChildren } from 'react';
 import classnames from 'classnames';
-import * as React from 'react';
-import { findChildrenOfType, px } from '../../utils';
-import Search from '../Search/Search';
+import { findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
 import Logo from '../../assets/PhillipsLogo.svg?react';
+import UserManagement from '../UserManagement/UserManagement';
+import { LanguageSelector } from '../LanguageSelector';
+import Navigation from '../Navigation/Navigation';
+import { Component, ComponentProps, forwardRef, ReactElement, useState, createContext } from 'react';
 import { defaultHeaderContext } from './utils';
 
-export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
-  /**
-   * Default mobile menu label
-   */
-  defaultMobileMenuLabel?: string;
+export interface HeaderProps extends ComponentProps<'header'> {
   /**
    * Logo src
    */
-  logo?: React.ReactElement<React.Component> | string;
+  logo?: ReactElement<Component> | string;
   /**
    * Toggle open text
    */
@@ -28,11 +27,10 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   logoText?: string;
 }
 export type HeaderContextType = {
-  defaultMobileMenuLabel: string;
-  expandedItem: string;
-  setExpandedItem: (item: string) => void;
-  isExpanded: boolean;
-  onSelect: (label: string) => void;
+  /**
+   * Used for mobile navigation menu hiding and showing
+   */
+  isMenuOpen: boolean;
   /**
    * Is the user within the search input and searching
    */
@@ -43,90 +41,98 @@ export type HeaderContextType = {
   setIsSearchExpanded: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const HeaderContext = React.createContext<HeaderContextType>(defaultHeaderContext);
+export const HeaderContext = createContext<HeaderContextType>(defaultHeaderContext);
 
-const Header = ({
-  defaultMobileMenuLabel = 'Main Menu',
-  logo = <Logo />,
-  className,
-  children,
-  toggleOpenText = 'Open Menu',
-  toggleCloseText = 'Close Menu',
-  logoText = 'Home Page',
-  ...props
-}: React.PropsWithChildren<HeaderProps>) => {
-  const searchElement = findChildrenOfType(children, Search);
-  const navElements = findChildrenOfType(children, Search, true);
-  const [toggleState, setToggleState] = React.useState(false);
-  const [expandedItem, setExpandedItem] = React.useState(defaultMobileMenuLabel);
-  const [isSearchExpanded, setIsSearchExpanded] = React.useState(false);
-  const toggleText = toggleState ? toggleCloseText : toggleOpenText;
-  const isExpanded = expandedItem !== defaultMobileMenuLabel;
-  const handleMenuToggle = function () {
-    setToggleState((prev) => !prev);
-    setExpandedItem(defaultMobileMenuLabel);
-  };
-  const onSelect = function (label: string) {
-    setExpandedItem((prev) => (prev === defaultMobileMenuLabel ? label : defaultMobileMenuLabel));
-  };
+/**
+ * ## Overview
+ *
+ * This component allows navigation, search, login/logout, and language selection and supports desktop and mobile layouts
+ *
+ * [Figma Link Mobile](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/EASEL-Compendium%3A-Tokens%2C-Components-%26-Patterns?node-id=10877-33417&node-type=INSTANCE&m=dev)
+ *
+ * [Figma Link Desktop](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/EASEL-Compendium%3A-Tokens%2C-Components-%26-Patterns?node-id=10570-6295&node-type=FRAME&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-header--overview)
+ */
+const Header = forwardRef<HTMLElement, HeaderProps>(
+  (
+    {
+      logo = <Logo />,
+      className,
+      children,
+      toggleOpenText = 'Open Menu',
+      toggleCloseText = 'Close Menu',
+      logoText = 'Home Page',
+      ...props
+    },
+    ref,
+  ) => {
+    const userManagementElement = findChildrenOfType(children, UserManagement);
+    const languageSelectorElement = findChildrenOfType(children, LanguageSelector);
+    const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+    const navigationElement = findChildrenOfType(children, Navigation);
+    const otherChildren = findChildrenExcludingTypes(children, [Navigation, UserManagement, LanguageSelector]);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const toggleText = isMenuOpen ? toggleCloseText : toggleOpenText;
+    const handleMenuToggle = function () {
+      setIsMenuOpen((prev) => !prev);
+    };
 
-  const onSearchExpanded = (prev: boolean) => {
-    setIsSearchExpanded(prev);
-  };
-
-  return (
-    <header {...props} className={classnames(`${px}-header`, className)}>
-      <div className={`${px}-header__top-row`}>
-        <h1
-          data-testid="header-logo"
-          className={`${px}-header__logo`}
-          tabIndex={toggleText === toggleOpenText ? 0 : -1}
-        >
-          <a href="/" aria-label={logoText}>
-            {typeof logo === 'object' ? (
-              logo
-            ) : (
-              <img alt="Phillips" data-testid="header-logo-img" src={logo as string} height="14" />
-            )}
-          </a>
-        </h1>
-      </div>
-      <div
-        className={classnames(`${px}-header__overlay`, { [`${px}-header__overlay--active`]: toggleState })}
-        data-testid="header-overlay"
-        onClick={handleMenuToggle}
-      />
-      <button
-        aria-label={toggleText}
-        data-testid="mobile-menu-toggle"
-        type="button"
-        onClick={handleMenuToggle}
-        className={classnames(`${px}-header__toggle-btn`, {
-          [`${px}-header__toggle-btn--open`]: toggleText === toggleCloseText,
-        })}
-      >
-        <span>{toggleText}</span>
-      </button>
-      <HeaderContext.Provider
-        value={
-          {
-            defaultMobileMenuLabel,
-            expandedItem,
-            setExpandedItem: (item: string) => setExpandedItem(item),
-            isExpanded,
-            onSelect: (label: string) => onSelect(label),
-            isSearchExpanded,
-            setIsSearchExpanded: onSearchExpanded,
-          } as HeaderContextType
-        }
-      >
-        <div className={classnames(`${px}-header__nav`, { [`${px}-header__nav--open`]: toggleState })}>
-          {navElements}
+    return (
+      <header {...props} className={classnames(`${px}-header`, className)} ref={ref}>
+        <div className={`${px}-header__top-row`}>
+          {languageSelectorElement} {/** Not rendered on mobile */}
+          <button
+            aria-label={toggleText}
+            data-testid="mobile-menu-toggle"
+            type="button"
+            onClick={handleMenuToggle}
+            className={classnames(`${px}-header__toggle-btn`, {
+              [`${px}-header__toggle-btn--open`]: isMenuOpen,
+            })}
+          >
+            <span /> {/** this is here so we can do transitions with pseudo icons */}
+          </button>
+          <h1 data-testid="header-logo" className={`${px}-header__logo`}>
+            <a href="/" aria-label={logoText}>
+              {typeof logo === 'object' ? (
+                logo
+              ) : (
+                <img alt="Phillips" data-testid="header-logo-img" src={logo as string} height="14" />
+              )}
+            </a>
+          </h1>
+          {userManagementElement}
         </div>
-        {searchElement}
-      </HeaderContext.Provider>
-    </header>
-  );
-};
+        <div className={classnames(`${px}-header__nav`, { [`${px}-header__nav--closed`]: !isMenuOpen })}>
+          <HeaderContext.Provider
+            value={
+              {
+                isMenuOpen,
+                isSearchExpanded,
+                setIsSearchExpanded,
+              } as HeaderContextType
+            }
+          >
+            {React.Children.map(navigationElement, (child) =>
+              React.isValidElement(child)
+                ? React.cloneElement<PropsWithChildren>(child as ReactElement<PropsWithChildren>, {
+                    children: [
+                      ...React.Children.toArray((child.props as PropsWithChildren).children),
+                      languageSelectorElement,
+                    ],
+                  })
+                : child,
+            )}
+            {otherChildren}
+          </HeaderContext.Provider>
+        </div>
+        <div className={classnames(`${px}-header__overlay`, { [`${px}-header__overlay--active`]: isSearchExpanded })} />
+      </header>
+    );
+  },
+);
+
+Header.displayName = 'Header';
 
 export default Header;

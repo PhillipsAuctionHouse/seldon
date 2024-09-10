@@ -9,6 +9,7 @@
 
 .#{$px}-accordion-item {
   padding: $spacing-sm;
+  width: 100%;
 
   svg {
     max-width: unset;
@@ -86,8 +87,10 @@
 }
 
 .#{$px}-accordion-item-label {
+  align-items: center;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   opacity: 0.75;
 
   &--hoverable {

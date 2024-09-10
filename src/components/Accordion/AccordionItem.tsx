@@ -16,15 +16,19 @@ export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement>
   /**
    * When true, prevents the user from interacting with the item.
    */
-  isLocked: boolean;
+  isLocked?: boolean;
   /**
    * Determines whether the variation on text style is large or small.
    */
   variation: string;
   /**
-   * Text string for the Accordion header for label.
+   * Uniqueid for the Accordion Item.
    */
-  label: string;
+  id: string;
+  /**
+   * Accordion item label.
+   */
+  label: React.ReactNode;
   /**
    * Child element pass in to display as item content.
    */
@@ -126,28 +130,30 @@ const AccordionContent = ({
 );
 
 const AccordionItem = ({
-  isLocked,
+  isLocked = false,
   variation,
+  id,
   label,
   isLastItem,
   hasTransition = false,
   children,
   ...props
 }: AccordionItemProps) => {
-  const { className: baseClassName } = getCommonProps(props, 'Accordion');
+  const { className: baseClassName } = getCommonProps({ id }, 'Accordion');
   const isLargeVariation = variation === 'lg';
   const accordionItemClassName = `${baseClassName}-item`;
 
   return (
     <Accordion.Item
       disabled={isLocked}
-      value={label}
+      value={id}
       className={classnames(accordionItemClassName, { [`${accordionItemClassName}__border-bottom`]: !isLastItem })}
+      {...props}
     >
       <AccordionHeader
         disable={isLocked}
         isLargeVariation={isLargeVariation}
-        id={props?.id}
+        id={id}
         baseClassName={`${accordionItemClassName}-label`}
       >
         {label}

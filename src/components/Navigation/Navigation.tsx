@@ -1,63 +1,62 @@
-import * as React from 'react';
-import { findChildrenOfType, px } from '../../utils';
+import React, { ComponentProps, CSSProperties, forwardRef, ReactElement } from 'react';
+import { findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
 import classnames from 'classnames';
 import { HeaderContext } from '../Header/Header';
 import NavigationList, { NavigationListProps } from './NavigationList/NavigationList';
+import { LanguageSelector, LanguageSelectorProps } from '../LanguageSelector';
 
-export interface NavigationProps extends React.HTMLAttributes<HTMLElement> {
-  backBtnLabel?: string;
+export interface NavigationProps extends ComponentProps<'nav'> {
   /**
    * Optional visible state
    */
   visible?: boolean;
 }
 
-const Navigation = ({
-  backBtnLabel,
-  children,
-  className,
-  id,
-  visible = true,
-}: React.PropsWithChildren<NavigationProps>) => {
-  const { defaultMobileMenuLabel, isExpanded, expandedItem, setExpandedItem, isSearchExpanded } =
-    React.useContext(HeaderContext);
-  const onBack = () => setExpandedItem(expandedItem === defaultMobileMenuLabel ? expandedItem : defaultMobileMenuLabel);
+/**
+ * ## Overview
+ *
+ * This is used within the Header component and displays the site navigation links.  It support both mobile and desktop.
+ *
+ * [Figma Link](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/EASEL-Compendium%3A-Tokens%2C-Components-%26-Patterns?node-id=10570-5784&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-navigation--overview)
+ */
+const Navigation = forwardRef<HTMLElement, NavigationProps>(
+  ({ children, className, id, visible = true, ...props }, ref) => {
+    const { isSearchExpanded } = React.useContext(HeaderContext);
+    const childNavList = findChildrenOfType<NavigationListProps>(children, NavigationList)?.[0];
+    const otherChildren = findChildrenExcludingTypes(children, [NavigationList, LanguageSelector]); // Includes the Search component, needed to do exclusion rather than inclusion so we could support StatefulSearch in our stories
+    const languageSelectorElement = findChildrenOfType<LanguageSelectorProps>(children, LanguageSelector)?.[0];
 
-  const childNavList = findChildrenOfType<NavigationListProps>(children, NavigationList);
-  const otherChildren = findChildrenOfType(children, NavigationList, true);
+    return (
+      <nav
+        role="navigation"
+        data-testid={id}
+        id={id}
+        style={{ '--visible': visible ? 'visible' : 'hidden' } as CSSProperties}
+        className={classnames(`${px}-nav`, className)}
+        {...props}
+        ref={ref}
+      >
+        <div className={`${px}-nav__list-container`}>
+          {otherChildren}
+          {React.isValidElement(childNavList)
+            ? React.cloneElement<NavigationListProps>(childNavList, { isOffScreen: isSearchExpanded })
+            : undefined}
+          {
+            /* This is not visible through css when in desktop breakpoint */
+            React.isValidElement(languageSelectorElement) && languageSelectorElement
+              ? React.cloneElement(languageSelectorElement as ReactElement<LanguageSelectorProps>, {
+                  isHidden: isSearchExpanded,
+                })
+              : undefined
+          }
+        </div>
+      </nav>
+    );
+  },
+);
 
-  return (
-    <nav
-      role="navigation"
-      aria-labelledby={`${id}-label`}
-      data-testid={id}
-      id={id}
-      className={classnames(`${px}-nav`, className, { [`${px}-nav--expanded`]: isExpanded })}
-    >
-      <button
-        data-testid={`${id}-back-btn`}
-        tabIndex={isExpanded ? 0 : -1}
-        className={`${px}-nav__back-btn`}
-        onClick={onBack}
-      >
-        {backBtnLabel}
-      </button>
-      <h2
-        id={`${id}-label`}
-        data-testid={`${id}-label`}
-        className={classnames(`${px}-nav__label`, { [`${px}-nav__label--hidden`]: !visible })}
-        style={{ '--visible': visible ? 'visible' : 'hidden' } as React.CSSProperties}
-      >
-        {expandedItem ? expandedItem : 'Main Menu'}
-      </h2>
-      <div className={`${px}-nav__list-container`}>
-        {React.isValidElement(childNavList?.[0])
-          ? React.cloneElement<NavigationListProps>(childNavList[0], { isOffScreen: isSearchExpanded })
-          : undefined}
-        {otherChildren}
-      </div>
-    </nav>
-  );
-};
+Navigation.displayName = 'Navigation';
 
 export default Navigation;

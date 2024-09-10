@@ -176,6 +176,24 @@ export const findChildrenOfType = <ComponentProps,>(
   return foundChildrenOfType.length > 0 ? (foundChildrenOfType as React.ReactElement<ComponentProps>[]) : null;
 };
 
+export const findChildrenExcludingTypes = <ComponentProps,>(
+  children: React.ReactNode,
+  excludedTypes: React.ElementType[],
+) => {
+  const foundChildrenExcludingTypes = React.Children.toArray(children).filter((child) => {
+    if (
+      child &&
+      (child as React.ReactElement<ComponentProps>).type &&
+      !excludedTypes.includes((child as React.ReactElement).type as React.ElementType)
+    ) {
+      return child;
+    }
+  });
+  return foundChildrenExcludingTypes.length > 0
+    ? (foundChildrenExcludingTypes as React.ReactElement<ComponentProps>[])
+    : null;
+};
+
 export const encodeURLSearchParams = (url: string) => {
   const urlSections = url.split('?');
   const searchParams = new URLSearchParams(urlSections[1]);

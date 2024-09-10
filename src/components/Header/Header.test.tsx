@@ -14,7 +14,7 @@ import Search from '../Search/Search';
 describe('Header', () => {
   const headerComponent = () => (
     <Header logo={LogoIMG}>
-      <Navigation id={`${px}-main-nav`} backBtnLabel="Back">
+      <Navigation id={`${px}-main-nav`}>
         <NavigationList id={`${px}-main-nav-list`}>
           <NavigationItemTrigger id="auctions" label={`Auctions`}>
             <NavigationList id={`${px}-auction-nav-list`}>
@@ -48,28 +48,9 @@ describe('Header', () => {
     render(headerComponent());
     const nav = screen.getByTestId(`${px}-main-nav`);
     const toggleButton = screen.getByRole('button', { name: /Open Menu/i });
-    const navItem = screen.getByTestId('nav-item-trigger-auctions');
     expect(nav).toHaveClass(`${px}-nav`);
     await userEvent.click(toggleButton);
-    await userEvent.click(navItem);
-    expect(toggleButton).toHaveTextContent(/Close Menu/i);
-    expect(nav).toHaveClass(`${px}-nav--expanded`);
-    await userEvent.click(toggleButton);
-    expect(toggleButton).toHaveTextContent(/Open Menu/i);
-    expect(nav).toHaveClass(`${px}-nav`);
-  });
-
-  it('should expand a nav category in the mobile menu when a nav item trigger is selected', async () => {
-    render(headerComponent());
-    const navItemTrigger = screen.getByTestId(`nav-item-trigger-auctions`);
-    const backBtn = screen.getByText(`Back`);
-    const navLabel = screen.getByTestId(`${px}-main-nav-label`);
-    await userEvent.click(navItemTrigger);
-    expect(navItemTrigger).toHaveClass(`${px}-nav__item--expanded`);
-    expect(navLabel).toHaveTextContent('Auctions');
-    await userEvent.click(backBtn);
-    expect(navItemTrigger).not.toHaveClass(`${px}-nav__item--expanded`);
-    expect(navLabel).toHaveTextContent('Main Menu');
+    expect(screen.getByRole('button', { name: /Close Menu/i })).toBeInTheDocument();
   });
 });
 

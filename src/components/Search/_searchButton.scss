@@ -7,14 +7,18 @@
   border-bottom: 1px solid transparent;
   cursor: pointer;
   display: flex;
-  height: $nav-height;
+  height: $search-size;
   justify-content: center;
   margin: 0;
   padding: 0;
   position: absolute;
   right: 0;
   top: 0;
-  width: $nav-height;
+  width: $search-size;
+
+  @include media($size-xl) {
+    padding: 0 0 0.125rem;
+  }
 
   &--close {
     border-bottom: 1px solid $pure-black;

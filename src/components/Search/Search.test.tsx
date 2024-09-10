@@ -22,7 +22,7 @@ describe('Search component', () => {
     expect(screen.getByText('Invalid regex')).toBeInTheDocument();
   });
   it('should focus in input after showing', async () => {
-    render(<Search />);
+    renderWithContext(<Search />);
     const button = screen.getByTestId('search-button');
     const searchInput = screen.getByTestId('search-input');
     await userEvent.click(button);
@@ -78,7 +78,7 @@ describe('Search component', () => {
   });
   it('should callback onSearch', async () => {
     const onSearch = vitest.fn();
-    render(<Search onSearch={onSearch} />);
+    renderWithContext(<Search onSearch={onSearch} />);
     const button = screen.getByTestId('search-button');
     await userEvent.click(button);
     await userEvent.keyboard('My Value');

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { encodeURLSearchParams, getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
 import Input from '../Input/Input';
@@ -70,10 +70,11 @@ const Search = ({
   const headerContext = React.useContext(HeaderContext);
   const searchInputRef = React.useRef<HTMLInputElement>(null);
   const searchFormRef = React.useRef<HTMLFormElement>(null);
+  const searchContainerRef = React.useRef<HTMLDivElement>(null);
   const isSearchExpanded = headerContext.isSearchExpanded;
   const value = searchInputRef.current?.value;
 
-  useOnClickOutside(searchFormRef, () => showSearch(false));
+  useOnClickOutside(searchContainerRef, () => showSearch(false));
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLAnchorElement>) => {
     e.stopPropagation();
@@ -93,19 +94,26 @@ const Search = ({
     }
   };
 
-  const showSearch: typeof headerContext.setIsSearchExpanded = (isSearchExpanded) => {
-    headerContext.setIsSearchExpanded(isSearchExpanded);
+  useEffect(() => {
     // means we're opening search
     if (isSearchExpanded) {
       searchInputRef.current?.focus();
       return;
     }
+  }, [isSearchExpanded]);
+
+  const showSearch: typeof headerContext.setIsSearchExpanded = (isSearchExpanded) => {
+    headerContext.setIsSearchExpanded(isSearchExpanded);
     searchFormRef.current?.reset();
   };
 
   return (
-    <>
-      <Text variant={TextVariants.heading3} className={`${baseClassName}__label`}>
+    <div
+      onClick={() => headerContext.setIsSearchExpanded(true)}
+      className={`${baseClassName}__container`}
+      ref={searchContainerRef}
+    >
+      <Text variant={TextVariants.heading4} className={`${baseClassName}__container__label`}>
         {searchButtonText}
       </Text>
       <div
@@ -187,7 +195,7 @@ const Search = ({
           ) : null}
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

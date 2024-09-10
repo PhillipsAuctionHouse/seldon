@@ -1,57 +1,44 @@
 @use '#scss/allPartials' as *;
 
+$opacity-transition: opacity 0.25s ease-in;
+$top-transition: top 0.25s ease-in 0.1s;
+
 .#{$px}-nav__list {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  margin: 0;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: left;
   opacity: 1;
-  padding: 0;
-  position: relative;
-  top: 0;
-  transition: top 0.25s ease-in 0.1s;
-
-  @include isHeaderMobile {
-    flex-direction: column;
-    height: calc(100vh - 102px);
-    justify-content: left;
-    min-width: 330px;
-    overflow: auto;
-    padding: 0.5rem;
-    transform: translateX(0%);
-    transition: transform 0.3s ease-in 0.1s;
-  }
-
-  &--expanded {
-    @include isHeaderMobile {
-      &:not(li ul) {
-        transform: translateX(-50%);
-        width: 200%;
-      }
-    }
-  }
+  padding: $spacing-md 0;
+  transition: $opacity-transition;
 
   &--offscreen {
     opacity: 0;
+    pointer-events: none;
     top: -100%;
+  }
+
+  @include isHeaderDesktop {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 0;
     transition:
-      top 0.25s ease-in 0.1s,
-      opacity 0.25s ease-in;
-    z-index: 5;
-  }
+      $top-transition,
+      $opacity-transition 0.25s;
 
-  & .#{$px}-nav__item > & {
-    @include isHeaderMobile {
-      display: none;
-
-      &--expanded {
-        display: flex;
-        flex-direction: column;
-      }
+    &--offscreen {
+      top: -100%;
+      transition: $top-transition, $opacity-transition;
+      z-index: 5;
     }
-  }
 
-  &__section {
-    width: 100%;
+    &__section {
+      width: 100%;
+    }
   }
 }

@@ -25,14 +25,17 @@ export const SearchButton = ({
         data-testid={`${testId}-button`}
         aria-label={searchButtonText}
         className={`${className}__button ${className}__button--search`}
-        onClick={() => setIsSearchExpanded(true)}
+        onClick={(event) => {
+          setIsSearchExpanded(true);
+          event.stopPropagation();
+        }}
       >
         <SearchIcon data-testid={`${testId}-button-icon`} className={`${className}__button__icon`} />
       </button>
     );
   }
 
-  if (isSearchExpanded && state === 'idle') {
+  if (isSearchExpanded) {
     return (
       <button
         {...props}
@@ -40,7 +43,10 @@ export const SearchButton = ({
         data-testid={`${testId}-close-button`}
         aria-label="Close Search"
         className={`${className}__button ${className}__button--close`}
-        onClick={() => setIsSearchExpanded(false)}
+        onClick={(event) => {
+          setIsSearchExpanded(false);
+          event.stopPropagation();
+        }}
       >
         <CloseIcon data-testid={`${testId}-form-icon`} className={`${className}__button__icon`} />
       </button>

@@ -1,103 +1,45 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-nav {
-  background: $pure-white;
-  flex-wrap: wrap;
-  height: 100%;
-  overflow: hidden;
-  padding-top: 4.5rem;
-  position: relative;
-
-  @include isHeaderDesktop {
-    display: flex;
-    overflow: visible;
-    padding-top: 0;
-    place-content: center center;
-    position: unset;
-    width: auto;
-  }
+  border-top: 1px solid $light-gray;
+  display: flex;
+  height: fit-content;
+  justify-content: center;
+  width: 100vw;
 
   &__list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 $spacing-sm;
     position: relative;
-  }
 
-  &--expanded &__label {
-    animation: 1s linear fade-in-out forwards;
-  }
+    > .#{$px}-nav__list {
+      border-top: 1px solid $light-gray;
 
-  &__label {
-    animation: 1s linear fade-in-out2 forwards;
-    font-size: 1.25rem;
-    padding-left: 0.625rem;
-    visibility: var(--visible);
-  }
+      @include isHeaderDesktop {
+        border-top: unset;
+      }
+    }
 
-  & &__back-btn {
-    background-color: transparent;
-    cursor: pointer;
-    font-weight: 800;
-    height: 60px;
-    opacity: 0;
-    padding: 1rem;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition:
-      opacity 0s linear,
-      background-color 0.5s;
-    width: auto;
-  }
-
-  &--expanded &__back-btn {
-    opacity: 1;
-    transition:
-      opacity 0.5s linear 0.25s,
-      background-color 0.5s;
+    @include isHeaderDesktop {
+      flex-direction: row;
+      padding-right: $search-size;
+    }
   }
 
   @include isHeaderDesktop {
-    // Remove label and mobile buttons on larger screens
-    .#{$px}-nav__back-btn,
-    .#{$px}-nav__close-btn,
-    .#{$px}-nav__label {
+    border: unset;
+    width: fit-content;
+
+    // Remove mobile button on larger screens
+    .#{$px}-nav__close-btn {
       display: none;
     }
   }
 
-  &__back-btn:hover,
-  &__back-btn:focus,
   &__close-btn:hover,
   &__close-btn:focus {
     background-color: #f4f4f4;
-  }
-}
-
-// Animations
-
-@keyframes fade-in-out {
-  0% {
-    opacity: 0;
-  }
-
-  30% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-in-out2 {
-  0% {
-    opacity: 0;
-  }
-
-  30% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
   }
 }

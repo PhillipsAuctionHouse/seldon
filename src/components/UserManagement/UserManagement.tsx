@@ -1,94 +1,79 @@
-import React, { ReactNode } from 'react';
-import { getCommonProps, noOp, px } from '../../utils';
-import Input from '../Input/Input';
+import { ComponentProps, ElementType, forwardRef, ReactNode } from 'react';
+import { getCommonProps, noOp } from '../../utils';
 import AccountCircle from '../../assets/account_circle.svg?react';
-import NavigationItemTrigger from '../Navigation/NavigationItemTrigger/NavigationItemTrigger';
-import NavigationList from '../Navigation/NavigationList/NavigationList';
-import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
 import { LinkProps } from '../Link/Link';
-import { SupportedLanguages } from '../../types/commonTypes';
 import classnames from 'classnames';
 import { AuthState } from './types';
+import { Text, TextVariants } from '../Text';
 
-export interface UserManagementProps extends React.HTMLAttributes<HTMLDivElement> {
-  languageOptions?: { label: string; value: SupportedLanguages }[];
-  currentLanguage?: SupportedLanguages;
-  onLanguageChange?: (language: SupportedLanguages) => void;
+export interface UserManagementProps extends ComponentProps<'div'> {
   /**
    * The authentication state for the current user
    */
   authState?: AuthState;
+  /**
+   * Triggered when the login button is clicked
+   */
   onLogin?: () => void;
-  onLogout?: () => void;
-  accountDetailsLink?: React.ElementType<LinkProps>;
+  /**
+   * Allows override of the default `<a` element.  Can be used to support Remix `<Link`
+   */
+  accountDetailsLinkComponent?: ElementType<LinkProps>;
+  /**
+   * The href for the account details link
+   */
+  href?: string;
+  /**
+   * The label for the login button
+   */
   loginLabel?: ReactNode;
-  logoutLabel?: ReactNode;
+  /**
+   * The label for the account details link
+   */
+  accountLabel?: ReactNode;
 }
 
-const UserManagement = ({
-  accountDetailsLink,
-  children,
-  className,
-  currentLanguage = SupportedLanguages.en,
-  languageOptions = [
-    { label: 'English', value: SupportedLanguages.en },
-    { label: '中文', value: SupportedLanguages.zh },
-  ],
-  onLanguageChange = noOp,
-  onLogin = noOp,
-  onLogout = noOp,
-  authState = AuthState.LoggedOut,
-  loginLabel = 'Login',
-  logoutLabel = 'Logout',
-  ...props
-}: React.PropsWithChildren<UserManagementProps>) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'UserManagement');
-  const languageLabel = languageOptions.find((option) => option.value === currentLanguage)?.label ?? 'English';
-  const AccountDetailsComponent = accountDetailsLink ?? 'a';
-  const isLoggedIn = authState === AuthState.LoggedIn;
-  const shouldShowAccountDetails = authState !== AuthState.Loading;
+const UserManagement = forwardRef<HTMLDivElement, UserManagementProps>(
+  (
+    {
+      accountDetailsLinkComponent: AccountDetailsComponent = 'a',
+      className,
+      onLogin = noOp,
+      authState = AuthState.LoggedOut,
+      loginLabel = 'Login',
+      accountLabel = 'Account',
+      href = '/account',
+      ...props
+    },
+    ref,
+  ) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'UserManagement');
 
-  const handleLanguageChange = (language: SupportedLanguages) => {
-    (document.activeElement as HTMLElement)?.blur();
-    onLanguageChange(language);
-  };
-  return (
-    <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
-      <ul className={`${baseClassName}__account-wrapper`}>
+    const isLoggedIn = authState === AuthState.LoggedIn;
+    const shouldShowAccountDetails = authState !== AuthState.Loading;
+
+    return (
+      <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         {shouldShowAccountDetails && (
           <>
-            <AccountDetailsComponent>
-              <AccountCircle className={`${baseClassName}__account-icon`} />
-            </AccountDetailsComponent>
-            <NavigationItem
-              className={`${baseClassName}__login`}
-              onClick={isLoggedIn ? onLogout : onLogin}
-              label={isLoggedIn ? logoutLabel : loginLabel}
-            />
+            {isLoggedIn ? (
+              <AccountDetailsComponent className={`${baseClassName}__login`} href={href}>
+                <AccountCircle className={`${baseClassName}__account-icon`} />
+                <Text variant={TextVariants.body3}>{accountLabel}</Text>
+              </AccountDetailsComponent>
+            ) : (
+              <button className={`${baseClassName}__login`} onClick={onLogin}>
+                <AccountCircle className={`${baseClassName}__account-icon`} />
+                <Text variant={TextVariants.body3}>{loginLabel}</Text>
+              </button>
+            )}
           </>
         )}
-      </ul>
-      <NavigationItemTrigger className={`${baseClassName}__language`} label={languageLabel}>
-        <NavigationList id={`${px}-langauge-selection-list`} className={`${baseClassName}__language__selections`}>
-          {languageOptions.map((option) => (
-            <li key={option.value}>
-              <Input
-                type="radio"
-                id={`radio-${option.value}`}
-                labelText={option.label}
-                value={option.value}
-                inline
-                name="languages"
-                checked={option.value === currentLanguage}
-                onChange={() => handleLanguageChange(option.value)}
-              />
-            </li>
-          ))}
-        </NavigationList>
-      </NavigationItemTrigger>
-      {children}
-    </div>
-  );
-};
+      </div>
+    );
+  },
+);
+
+UserManagement.displayName = 'UserManagement';
 
 export default UserManagement;
