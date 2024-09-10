@@ -49,10 +49,22 @@ const MobileLanguageSelector = ({
 export type LanguageOption = { label: string; value: SupportedLanguages };
 
 export interface LanguageSelectorProps extends ComponentProps<'div'> {
+  /**
+   * Available language options to select from
+   */
   languageOptions?: LanguageOption[];
+  /**
+   * The currently selected language, shows in the input
+   */
   currentLanguage?: SupportedLanguages;
+  /**
+   * Called when the language is changed in the dropdown
+   * @param language
+   */
   onLanguageChange?: (language: SupportedLanguages) => void;
-  /** hide or show with an opacity transition */
+  /**
+   * hide or show with an opacity transition
+   */
   isHidden?: boolean;
 }
 /**

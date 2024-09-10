@@ -1,12 +1,15 @@
 @use '#scss/allPartials' as *;
 
+$opacity-transition: opacity 0.25s ease-in;
+$top-transition: top 0.25s ease-in 0.1s;
+
 .#{$px}-nav__list {
   align-items: flex-start;
   flex-direction: column;
   justify-content: left;
   opacity: 1;
   padding: $spacing-md 0;
-  transition: opacity 0.25s ease-in;
+  transition: $opacity-transition;
 
   &--offscreen {
     opacity: 0;
@@ -25,14 +28,12 @@
     position: relative;
     top: 0;
     transition:
-      top 0.25s ease-in 0.1s,
-      opacity 0.25s ease-in 0.25s;
+      $top-transition,
+      $opacity-transition 0.25s;
 
     &--offscreen {
       top: -100%;
-      transition:
-        top 0.25s ease-in 0.1s,
-        opacity 0.25s ease-in;
+      transition: $top-transition, $opacity-transition;
       z-index: 5;
     }
 

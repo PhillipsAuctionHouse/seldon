@@ -244,11 +244,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
           <StatefulSearch placeholder="Search for makers" />
         </Navigation>
         <LanguageSelector onLanguageChange={setCurrentLanguage} currentLanguage={currentLanguage} />
-        <UserManagement
-          authState={authState}
-          onLogin={() => console.log('login')}
-          accountDetailsLinkComponent={({ children }) => <a href="#">{children}</a>}
-        />
+        <UserManagement authState={authState} onLogin={() => console.log('login')} href="/account" />
       </Header>
       {generateLoremIpsum(200)}
     </div>

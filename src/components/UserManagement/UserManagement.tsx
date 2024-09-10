@@ -11,17 +11,32 @@ export interface UserManagementProps extends ComponentProps<'div'> {
    * The authentication state for the current user
    */
   authState?: AuthState;
+  /**
+   * Triggered when the login button is clicked
+   */
   onLogin?: () => void;
+  /**
+   * Allows override of the default `<a` element.  Can be used to support Remix `<Link`
+   */
   accountDetailsLinkComponent?: ElementType<LinkProps>;
+  /**
+   * The href for the account details link
+   */
   href?: string;
+  /**
+   * The label for the login button
+   */
   loginLabel?: ReactNode;
+  /**
+   * The label for the account details link
+   */
   accountLabel?: ReactNode;
 }
 
 const UserManagement = forwardRef<HTMLDivElement, UserManagementProps>(
   (
     {
-      accountDetailsLinkComponent,
+      accountDetailsLinkComponent: AccountDetailsComponent = 'a',
       className,
       onLogin = noOp,
       authState = AuthState.LoggedOut,
@@ -36,7 +51,6 @@ const UserManagement = forwardRef<HTMLDivElement, UserManagementProps>(
 
     const isLoggedIn = authState === AuthState.LoggedIn;
     const shouldShowAccountDetails = authState !== AuthState.Loading;
-    const AccountDetailsComponent = accountDetailsLinkComponent ?? 'a';
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>

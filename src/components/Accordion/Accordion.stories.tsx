@@ -129,7 +129,7 @@ export const AccordionSubmenu = (props: AccordionProps) => {
         id="languageselector"
         label={<NavigationItem label={currentLanguage}></NavigationItem>}
       >
-        <>
+        <div style={{ paddingLeft: 'var(--spacing-sm)' }}>
           <NavigationItem
             label="English"
             onClick={() => setCurrentLanguage('English')}
@@ -140,7 +140,7 @@ export const AccordionSubmenu = (props: AccordionProps) => {
             onClick={() => setCurrentLanguage('Chinese')}
             navType={LinkVariants.snwFlyoutLink}
           ></NavigationItem>
-        </>
+        </div>
       </AccordionItem>
     </Accordion>
   );
