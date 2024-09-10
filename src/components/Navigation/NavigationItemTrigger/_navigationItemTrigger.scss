@@ -5,6 +5,7 @@
   justify-content: center;
 
   & > button {
+    color: $pure-black;
     display: flex;
     justify-content: flex-start;
     position: relative;
@@ -12,6 +13,7 @@
     width: 100%;
 
     @include isHeaderDesktop {
+      color: unset;
       justify-content: center;
     }
   }
