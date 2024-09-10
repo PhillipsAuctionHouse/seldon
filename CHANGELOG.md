@@ -1,3 +1,10 @@
+# [1.50.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.49.0...v1.50.0) (2024-09-09)
+
+
+### Features
+
+* **_modal:** L3-3616 fixed qr modal and heading 3 ([#299](https://github.com/PhillipsAuctionHouse/seldon/issues/299)) ([d3f0334](https://github.com/PhillipsAuctionHouse/seldon/commit/d3f03344d53287c38e8ec33260a77e03362b4d28))
+
 # [1.49.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.48.0...v1.49.0) (2024-09-09)
 
 

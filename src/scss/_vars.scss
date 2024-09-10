@@ -368,6 +368,11 @@ $max-site-width: 1560px;
 $desktop-max-width: var(--desktop-max-width);
 
 ////////////////////////
+/// z-index TOKENS:
+///////////////////////
+$modal-z-index: 30;
+
+////////////////////////
 /// Our tokens usually support at least 4 sizes.
 ///////////////////////
 $size-sm: 'sm';
