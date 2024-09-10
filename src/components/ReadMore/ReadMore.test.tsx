@@ -51,22 +51,22 @@ describe('ReadMore', () => {
     });
 
     const button = screen.getByRole('button');
-    const contentElement = container.querySelector(`.${px}-read-more-content`);
+    const overlayElement = container.querySelector(`.${px}-read-more-overlay`);
 
     expect(button).toHaveTextContent('Read More');
-    expect(contentElement).toHaveClass(`${px}-read-more-content--gradient`);
-    expect(contentElement).toBeVisible();
+    expect(overlayElement).toHaveClass(`${px}-read-more-overlay--gradient`);
+    expect(overlayElement).toBeVisible();
 
     await userEvent.click(button);
     await waitFor(() => {
       expect(button).toHaveTextContent('Read Less');
-      expect(contentElement).not.toHaveClass(`${px}-read-more-content--gradient`);
+      expect(overlayElement).not.toHaveClass(`${px}-read-more-overlay--gradient`);
     });
 
     await userEvent.click(button);
     await waitFor(() => {
       expect(button).toHaveTextContent('Read More');
-      expect(contentElement).toHaveClass(`${px}-read-more-content--gradient`);
+      expect(overlayElement).toHaveClass(`${px}-read-more-overlay--gradient`);
     });
   });
   it('should use custom read more and read less text', async () => {
@@ -96,12 +96,12 @@ describe('ReadMore', () => {
     const readMoreElement = container.firstChild as HTMLElement;
     expect(readMoreElement).toHaveClass(`${px}-read-more`);
 
-    const contentElement = container.querySelector(`.${px}-read-more-content`);
-    expect(contentElement).toHaveClass(`${px}-read-more-content--gradient`);
+    const overlayElement = container.querySelector(`.${px}-read-more-overlay`);
+    expect(overlayElement).toHaveClass(`${px}-read-more-overlay--gradient`);
 
     await userEvent.click(screen.getByRole('button'));
     await waitFor(() => {
-      expect(contentElement).not.toHaveClass(`${px}-read-more-content--gradient`);
+      expect(overlayElement).not.toHaveClass(`${px}-read-more-overlay--gradient`);
     });
   });
 });

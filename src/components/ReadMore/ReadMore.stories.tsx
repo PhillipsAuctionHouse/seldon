@@ -33,7 +33,7 @@ export const Playground = (args: ReadMoreProps) => (
 Playground.args = {
   readMoreText: 'Read More',
   readLessText: 'Read Less',
-  maxHeight: 100,
+  maxHeight: 250,
 };
 
 export const CustomText = (args: ReadMoreProps) => (
@@ -45,5 +45,5 @@ export const CustomText = (args: ReadMoreProps) => (
 CustomText.args = {
   readMoreText: 'Show More',
   readLessText: 'Show Less',
-  maxHeight: 150,
+  maxHeight: 250,
 };

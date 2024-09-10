@@ -10,10 +10,19 @@
 
 .#{$px}-read-more-content {
   overflow: hidden;
-  position: relative;
+}
 
-  &.#{$px}-read-more-content--gradient {
-    &::after {
+.#{$px}-read-more-overlay {
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  &.#{$px}-read-more-overlay--expanded {
+    position: relative;
+  }
+  &.#{$px}-read-more-overlay--gradient {
+    &::before {
       background: linear-gradient(
         180deg,
         rgba(250, 250, 250, 0%) 0%,
@@ -21,15 +30,24 @@
         rgba(255, 255, 255, 75%) 53.65%,
         #fff 90.62%
       );
-      bottom: 0;
       content: '';
       height: 100px;
-      left: 0;
       pointer-events: none;
-      position: absolute;
-      right: 0;
+      width: 100%;
     }
   }
+}
+
+.#{$px}-read-more-overlay-trigger-wrapper {
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  pointer-events: auto;
+  width: 100%;
+}
+
+.#{$px}-read-more-overlay-trigger {
+  width: fit-content;
 }
 
 .#{$px}-read-more-content[data-state='closed'] {

@@ -77,22 +77,25 @@ const ReadMore = ({
       {...commonProps}
       {...props}
     >
-      <CollapsibleContent
-        className={classnames(`${baseClassName}-content`, {
-          [`${baseClassName}-content--gradient`]: hasOverflow && !isExpanded,
-        })}
-        ref={contentRef}
-        forceMount
-      >
+      <CollapsibleContent className={`${baseClassName}-content`} ref={contentRef} forceMount>
         {children}
       </CollapsibleContent>
       {hasOverflow ? (
-        <CollapsibleTrigger asChild>
-          <Button variant={ButtonVariants.secondary}>
-            {isExpanded ? <MinusIcon /> : <PlusIcon />}
-            {isExpanded ? readLessText : readMoreText}
-          </Button>
-        </CollapsibleTrigger>
+        <div
+          className={classnames(`${baseClassName}-overlay`, {
+            [`${baseClassName}-overlay--expanded`]: isExpanded,
+            [`${baseClassName}-overlay--gradient`]: hasOverflow && !isExpanded,
+          })}
+        >
+          <div className={`${baseClassName}-overlay-trigger-wrapper`}>
+            <CollapsibleTrigger asChild className={`${baseClassName}-overlay-trigger`}>
+              <Button variant={ButtonVariants.secondary}>
+                {isExpanded ? <MinusIcon /> : <PlusIcon />}
+                {isExpanded ? readLessText : readMoreText}
+              </Button>
+            </CollapsibleTrigger>
+          </div>
+        </div>
       ) : null}
     </Collapsible>
   );
