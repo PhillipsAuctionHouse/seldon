@@ -4,6 +4,9 @@ import { getCommonProps } from '../../utils';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../Collapsible';
+import PlusIcon from '../../assets/plus.svg?react';
+import MinusIcon from '../../assets/minus.svg?react';
+
 export interface ReadMoreProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Unique id for component testing
@@ -62,6 +65,7 @@ const ReadMore = ({
 
   return (
     <Collapsible
+      id={props?.id}
       open={isExpanded}
       onOpenChange={toggleExpand}
       className={classnames(baseClassName, className)}
@@ -71,11 +75,11 @@ const ReadMore = ({
         } as React.CSSProperties
       }
       {...commonProps}
-      id={props?.id}
+      {...props}
     >
       <CollapsibleContent
         className={classnames(`${baseClassName}-content`, {
-          showGradient: hasOverflow && !isExpanded,
+          [`${baseClassName}-content--gradient`]: hasOverflow && !isExpanded,
         })}
         ref={contentRef}
         forceMount
@@ -83,8 +87,11 @@ const ReadMore = ({
         {children}
       </CollapsibleContent>
       {hasOverflow ? (
-        <CollapsibleTrigger asChild className={`${baseClassName}-trigger`}>
-          <Button variant={ButtonVariants.secondary}>{isExpanded ? readLessText : readMoreText}</Button>
+        <CollapsibleTrigger asChild>
+          <Button variant={ButtonVariants.secondary}>
+            {isExpanded ? <MinusIcon /> : <PlusIcon />}
+            {isExpanded ? readLessText : readMoreText}
+          </Button>
         </CollapsibleTrigger>
       ) : null}
     </Collapsible>

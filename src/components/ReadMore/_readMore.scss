@@ -8,18 +8,11 @@
   position: relative;
 }
 
-.#{$px}-read-more-trigger {
-  left: 50%;
-  position: absolute;
-  top: calc(100% + 12px);
-  transform: translateX(-50%);
-}
-
 .#{$px}-read-more-content {
   overflow: hidden;
   position: relative;
 
-  &.showGradient {
+  &.#{$px}-read-more-content--gradient {
     &::after {
       background: linear-gradient(
         180deg,
