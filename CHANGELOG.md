@@ -1,3 +1,10 @@
+# [1.51.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.50.0...v1.51.0) (2024-09-10)
+
+
+### Features
+
+* **accordion:** L3-3127 fixed accordions for Phillips Public ([#301](https://github.com/PhillipsAuctionHouse/seldon/issues/301)) ([4a5ec58](https://github.com/PhillipsAuctionHouse/seldon/commit/4a5ec58e746ea667de5395bf33fdbddab45262b1))
+
 # [1.50.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.49.0...v1.50.0) (2024-09-09)
 
 
