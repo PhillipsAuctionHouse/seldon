@@ -1,3 +1,10 @@
+# [1.52.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.51.1...v1.52.0) (2024-09-10)
+
+
+### Features
+
+* **languageswitcher:** L3-3371 Update the header with the new language switcher ([#293](https://github.com/PhillipsAuctionHouse/seldon/issues/293)) ([8f01368](https://github.com/PhillipsAuctionHouse/seldon/commit/8f01368d77c8a2982e3267388744f7fea78bbe93))
+
 ## [1.51.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.51.0...v1.51.1) (2024-09-10)
 
 
