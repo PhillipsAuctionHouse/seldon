@@ -122,7 +122,7 @@
       }
     }
 
-    @if type == 'max' {
+    @if $type == 'max' {
       @media (max-width: calc($breakpoint-lg - 1px)) {
         @content;
       }
@@ -131,13 +131,13 @@
 
   @if $breakpoint == $size-xl {
     // $breakpoint-xl: 1801px;
-    @if type == 'min' {
+    @if $type == 'min' {
       @media (min-width: $breakpoint-xl) {
         @content;
       }
     }
 
-    @if type == 'max' {
+    @if $type == 'max' {
       @media (max-width: calc($breakpoint-xl - 1px)) {
         @content;
       }
@@ -188,5 +188,15 @@
 @mixin isHeaderDesktop() {
   @media (min-width: $breakpoint-md) {
     @content;
+  }
+}
+
+@mixin buttonReset() {
+  button {
+    background: unset;
+    border: 0;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
   }
 }

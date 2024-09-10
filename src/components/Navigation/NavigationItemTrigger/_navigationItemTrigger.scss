@@ -1,1 +1,76 @@
 @use '#scss/allPartials' as *;
+
+.#{$px}-navigation-item-trigger {
+  flex-direction: column;
+  justify-content: center;
+
+  & > button {
+    color: $pure-black;
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    white-space: nowrap;
+    width: 100%;
+
+    @include isHeaderDesktop {
+      color: unset;
+      justify-content: center;
+    }
+  }
+
+  @include isHeaderDesktop {
+    &--hovered button::after {
+      background-color: $pure-black;
+      bottom: -1px;
+      content: '';
+      height: 1px;
+      left: 0;
+      position: absolute;
+      right: 0;
+    }
+
+    & > &__submenu {
+      pointer-events: none;
+      transform: translateY(-100%);
+      transition: none; // remove this when implementing submenu transitions
+    }
+
+    &--hovered &__submenu {
+      height: fit-content;
+      left: 0;
+      max-height: unset;
+      opacity: 1;
+      padding: $padding-md;
+      pointer-events: all;
+      position: fixed; // has to bust out of the box containing it on desktop
+      right: 0;
+      top: calc($header-height);
+      transform: translateY(0);
+    }
+  }
+
+  @include isHeaderDesktop {
+    ul {
+      background-color: $pure-white;
+      height: auto;
+      left: 0;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+
+      li {
+        display: inline;
+        white-space: nowrap;
+
+        button,
+        a,
+        p {
+          @include isHeaderDesktop {
+            border: none;
+          }
+        }
+      }
+    }
+  }
+}

@@ -30,7 +30,7 @@ $lg: #{$px}-input--lg;
     border: 1px solid $keyline-gray;
     border-radius: 0.1875rem;
     font-size: 0.8125rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
     padding: 0.5rem;
 
     // width: 100%;
@@ -128,7 +128,6 @@ $lg: #{$px}-input--lg;
 
   .#{$px}-input__validation {
     animation: reveal 0.45s linear forwards;
-    padding-bottom: 0.5rem;
   }
 }
 

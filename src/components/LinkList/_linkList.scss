@@ -1,6 +1,10 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-link-list {
+  @include media($size-sm, $type: max) {
+    max-width: 30rem;
+  }
+
   &--item {
     // mobile first
     grid-column: span 2;

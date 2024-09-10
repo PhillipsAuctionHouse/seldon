@@ -1,91 +1,43 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-search {
-  align-content: center;
   display: flex;
-  flex-wrap: wrap;
   gap: $spacing-md;
-  height: $header-height;
-  padding: $spacing-sm $spacing-sm;
-  position: relative;
+  height: $search-size;
+  left: calc(100% - $search-size);
+  min-width: $search-size;
+  position: absolute;
+  right: 0;
+  top: $padding-md;
+  transition: left 0.25s ease-in;
+
+  @include isHeaderDesktop {
+    top: 0;
+  }
+
+  &--active {
+    left: 0;
+    transition: left 0.25s ease-in 0.2s;
+  }
 
   &__input-status-icon {
-    height: $header-height;
-    position: absolute;
-    right: $spacing-sm;
-    top: 0;
-    width: 2rem;
-    z-index: 4;
+    border-bottom: 1px solid $pure-black;
+    height: $search-size;
+    width: $search-size;
 
     svg {
       height: 100%;
       width: 100%;
-    }
-  }
-
-  .#{$px}-text--heading3 {
-    display: none;
-
-    @include isHeaderMobile {
-      align-self: flex-start;
-      display: flex;
-      flex-wrap: wrap;
-      margin: 0;
-    }
-  }
-
-  &__button {
-    background: $pure-white;
-    border: none;
-    border-bottom: 1px solid transparent;
-    height: $header-height;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    right: $spacing-sm;
-    top: 0;
-    width: 1.5rem;
-    z-index: 4;
-
-    &--close {
-      border-bottom: 1px solid $pure-black;
-    }
-
-    svg {
-      height: 100%;
-      width: 100%;
-    }
-
-    &:hover,
-    &:focus,
-    &:focus-within,
-    &:active {
-      border-bottom: 1px solid $pure-black;
-      cursor: pointer;
-    }
-
-    &__icon {
-      pointer-events: none;
-
-      path {
-        fill: $pure-black;
-      }
     }
   }
 
   &__form {
     display: flex;
     overflow: hidden;
-    position: absolute;
-    right: $spacing-sm;
-    top: 0; // calc($header-height + $user-management-height);
-    transition: 0.5s ease;
-    width: 0;
-    z-index: 3;
+    width: 100%;
 
     &--active {
       overflow: visible;
-      width: calc(100% - (2 * $spacing-sm));
 
       .#{$px}-search__results {
         display: flex;
@@ -95,16 +47,29 @@
   }
 
   &__content-wrapper {
-    background: $white;
     color: $soft-black;
     display: flex;
-    position: relative;
+    justify-content: flex-end;
     width: 100%;
-    z-index: 3;
 
     .#{$px}-input {
-      &__input {
+      width: 100%;
+
+      &__validation {
+        display: none;
+      }
+
+      &-enter-active input {
         background: $white;
+
+        &::placeholder {
+          opacity: 1;
+          transition: opacity 0.75s ease-in;
+        }
+      }
+
+      &__input {
+        background: transparent;
         border: 0;
         border-bottom: 1px solid $pure-black;
         border-radius: unset;
@@ -115,15 +80,56 @@
         font-size: 0.875rem;
         font-style: normal;
         font-weight: 400;
-        height: $header-height;
+        height: $search-size;
         line-height: 1.5rem;
         margin: 0;
-        padding: $spacing-sm 0;
+        padding: $spacing-sm 0 $spacing-sm $spacing-sm;
+
+        @include media($size-xl) {
+          height: 2.875rem;
+        }
 
         &:focus {
           outline: none;
         }
+
+        &::placeholder {
+          opacity: 0;
+        }
       }
+    }
+  }
+}
+
+.#{$px}-search__container {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: $padding-md 0;
+  pointer-events: all;
+
+  @include isHeaderDesktop {
+    cursor: default;
+    padding: 0;
+  }
+
+  @include isHeaderMobile {
+    position: relative;
+  }
+
+  &__label {
+    display: none;
+    margin: 0;
+
+    @include isHeaderMobile {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      flex-wrap: wrap;
+      height: $search-size;
+      margin: 0;
+      padding: 0 $spacing-sm;
+      pointer-events: all;
     }
   }
 }

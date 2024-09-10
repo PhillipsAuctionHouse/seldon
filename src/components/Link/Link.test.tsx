@@ -21,7 +21,9 @@ describe('Link', () => {
   });
 
   it('renders a custom component when component prop is provided', () => {
-    const CustomComponent = ({ children, ...props }: { children: React.ReactNode }) => <div {...props}>{children}</div>;
+    const CustomComponent = ({ children, ...props }: { children?: React.ReactNode }) => (
+      <div {...props}>{children}</div>
+    );
     render(
       <Link href="https://example.com" element={CustomComponent} id="id">
         Example Link

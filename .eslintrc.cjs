@@ -31,6 +31,19 @@ module.exports = {
     'react/boolean-prop-naming': ['warn', {}],
     'require-await': 'warn',
     '@typescript-eslint/no-floating-promises': ['error'],
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        args: 'all',
+        argsIgnorePattern: '^_',
+        caughtErrors: 'all',
+        caughtErrorsIgnorePattern: '^_',
+        destructuredArrayIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        ignoreRestSiblings: true,
+      },
+    ],
   },
   settings: {
     react: {

@@ -1,104 +1,18 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-nav__item {
-  background: $pure-white;
+  cursor: pointer;
 
   @include isHeaderMobile {
-    max-width: 320px;
-    width: 100%;
+    a {
+      white-space: normal;
+    }
   }
 
   @include isHeaderDesktop {
     align-items: center;
     display: flex;
     max-width: unset;
-  }
-
-  & > button {
-    @include DistinctDisplay;
-
-    text-transform: uppercase;
-
-    &:hover::after,
-    &:focus::after {
-      background: $pure-black;
-      content: '';
-      height: 1px;
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: $header-height;
-    }
-  }
-
-  & > button {
-    @include DistinctDisplay;
-    @include text($snwHeaderLink);
-
-    display: block;
-    position: relative;
-    white-space: nowrap;
-    width: 100%;
-
-    @include isHeaderMobile {
-      position: relative;
-    }
-  }
-
-  &--expanded ~ & &--label,
-  &--expanded ~ & > button {
-    @include isHeaderMobile {
-      & > span::after {
-        content: '';
-      }
-    }
-  }
-
-  // Submenu
-  ul {
-    background: $pure-white;
-    overflow: hidden scroll;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 307px;
-    z-index: -1;
-  }
-
-  @include isHeaderDesktop {
-    ul {
-      align-content: start;
-      height: auto;
-      left: 0;
-      max-height: 0;
-      min-height: 0;
-      overflow: hidden;
-      position: fixed;
-      top: $header-submenu-top;
-      width: 100%;
-      z-index: -1;
-
-      li {
-        display: inline;
-        white-space: nowrap;
-
-        button,
-        a,
-        p {
-          @include isHeaderDesktop {
-            border: none;
-          }
-        }
-      }
-    }
-
-    &:hover ul,
-    &--expanded:focus-within ul {
-      max-height: 100vh;
-      min-height: 227px;
-      padding: 2rem 3.75rem;
-      z-index: 1;
-    }
   }
 
   .#{$px}-nav__item-trigger > label::after {
@@ -118,10 +32,6 @@
     }
   }
 
-  &.#{$px}-nav__item--expanded ul {
-    z-index: 0;
-  }
-
   & > button {
     background-color: transparent;
     border: 0;
@@ -135,34 +45,9 @@
       display: flex;
       padding: 0.5rem 0.625rem;
     }
-
-    & > a:focus,
-    & > button:focus {
-      background-color: #f4f4f4;
-    }
-
-    &:hover {
-      & > a,
-      & > button {
-        background-color: #f4f4f4;
-      }
-    }
   }
 
   @include isHeaderDesktop {
-    position: relative;
-
-    &:not(ul ul li) a:focus,
-    &:not(ul ul li) button:focus,
-    &:not(ul ul li) p:focus {
-      background: #f4f4f4;
-    }
-
-    .#{$px}-nav__list-item {
-      position: static;
-      z-index: 1;
-    }
-
     & > .#{$px}-nav__list-item-trigger::before {
       background: #f4f4f4;
       content: '';

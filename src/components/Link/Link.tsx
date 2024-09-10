@@ -1,12 +1,11 @@
 import classnames from 'classnames';
-
 import { getCommonProps } from '../../utils';
-import React, { HTMLAttributes } from 'react';
+import { ComponentProps, ElementType } from 'react';
 import { getLinkVariantClassName, isLinkExternal } from './utils';
 import { LinkVariants } from './types';
 import { Text, TextVariants } from '../Text';
 
-export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
+export interface LinkProps extends ComponentProps<'a'> {
   /**
    * Describes where the link is used. It controls the styling of the link so we apply consistent styles. Defaults to `standalone`.  See the documentation [here](https://www.figma.com/file/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?type=design&node-id=5731-12815) to see where each variant is used.
    *
@@ -15,18 +14,10 @@ export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
    */
   variant?: LinkVariants;
   /**
-   * The text of the link
-   */
-  children: React.ReactNode;
-  /**
-   * URL to navigate to when clicked
-   */
-  href?: string;
-  /**
    * Can be used to render alternative link components like the prefetching `Link` from `@remix-run/react`.
    * This component should handle the `children`, `data-testid`, `id`, `className`, and `href` props.
    */
-  element?: React.ElementType<LinkProps & { 'data-testid': string }>;
+  element?: ElementType<LinkProps & { 'data-testid': string }>;
 }
 
 /**

@@ -3,46 +3,37 @@
 .#{$px}-header {
   align-items: center;
   background-color: $white;
-  border-bottom: 1px solid rgba(0, 0, 0, 10%);
+  border-bottom: 1px solid $light-gray;
   display: flex;
-  padding: $user-management-height $spacing-md 0; // save space for the user management
+  flex-direction: column;
   position: sticky;
   top: 0;
-
-  @include isHeaderMobile {
-    padding: 0;
-    top: 0;
-  }
+  z-index: 10;
 
   &__toggle-btn {
     align-items: center;
-    appearance: none;
     background: none;
     border: none;
     cursor: pointer;
     display: flex;
-    height: $header-height;
+    height: $mobile-minimum-clickable-area;
     justify-content: center;
-    left: 0;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    transition: background-color 0.25s;
-    width: 60px;
-    z-index: 1;
+    padding: 0;
+    width: $mobile-minimum-clickable-area;
 
     @include isHeaderDesktop {
       display: none;
     }
 
+    /* This is a pseudo icon shown within the button, so we can do fancy transitions */
     span {
       background-color: $dark-gray;
       color: transparent;
       display: block;
       height: 2px;
       position: relative;
-      transition: background-color 0.25s ease 0.5s;
-      width: 1.65rem;
+      transition: background-color 0.25s ease 0.25s;
+      width: 1.5rem;
 
       &::before,
       &::after {
@@ -53,8 +44,8 @@
         left: 0;
         position: absolute;
         top: 0;
-        transition: transform 0.25s ease 0.25s;
-        width: 1.65rem;
+        transition: transform 0.25s ease;
+        width: 1.5rem;
       }
 
       &::before {
@@ -68,7 +59,7 @@
 
     &.#{$px}-header__toggle-btn--open span {
       background: transparent;
-      transition: background-color 0.25s ease 0.1s;
+      transition: background-color 0.25s ease;
 
       &::before {
         transform: rotate(45deg);
@@ -78,74 +69,96 @@
         transform: rotate(-45deg);
       }
     }
-
-    &:hover {
-      background-color: $off-white;
-    }
   }
 
   &__logo {
-    margin: auto;
+    align-self: center;
+
+    svg {
+      height: 24px;
+      width: 100%;
+    }
 
     @include isHeaderDesktop {
-      margin: unset;
+      svg {
+        height: 28px;
+        width: 100%;
+      }
     }
   }
 
-  &__overlay {
-    background-color: rgba(0, 0, 0, 50%);
-    height: 0;
-    inset: 0;
-    opacity: 0;
-    position: fixed;
-    transition: opacity 0.5s ease-in-out;
+  &__top-row {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: $padding-sm $spacing-md;
     width: 100%;
-    z-index: -1;
 
-    &--active {
-      display: block;
-      height: 100%;
-      opacity: 1;
-
-      @include isHeaderDesktop {
-        display: none;
-      }
-
-      & ~ .#{$px}-header__nav {
-        z-index: 1;
-      }
-      & ~ .#{$px}-header__toggle-btn {
-        z-index: 2;
-      }
-
-      & ~ .#{$px}-search {
-        .#{$px}-search__button {
-          z-index: -1;
-        }
-      }
+    /** There are actually two language selectors in the DOM, show this one in desktop */
+    .#{$px}-language-selector {
+      display: none;
     }
   }
 
   &__nav {
-    height: 100%;
-    left: 0;
-    position: fixed;
-    top: 0;
-    transform: translateX(-100%);
+    background-color: $pure-white;
+    height: calc(100vh - $header-height);
+    overflow-y: auto;
+    position: relative;
+    z-index: 10;
 
-    @include isHeaderDesktop {
-      height: $header-height;
-      position: relative;
-      transform: unset;
-      width: 100%;
+    &--closed {
+      display: none;
     }
-
-    &.#{$px}-header__nav--open {
-      transform: translateX(0);
+    .#{$px}-nav__list-container {
+      display: flex;
+      padding: 0 $spacing-md;
 
       @include isHeaderDesktop {
-        transform: unset;
+        padding-right: $search-size;
       }
+    }
+
+    @include isHeaderDesktop {
+      display: flex;
+      height: unset;
+      justify-content: center;
+      overflow: visible; // this is needed for the search results
+      position: relative;
+      top: 0;
+      width: 100%;
+
+      div.#{$px}-language-selector {
+        display: none; // hide this one on mobile
+      }
+    }
+
+    .#{$px}-nav__item {
+      .#{$px}-link--snwHeaderLink {
+        align-content: center;
+        height: 100%;
+      }
+    }
+
+    .#{$px}-nav__item {
+      .#{$px}-link--snwHeaderLink {
+        align-content: center;
+        height: 100%;
+      }
+    }
+  }
+
+  &__overlay {
+    display: none;
+
+    &--active {
+      background: rgba(0, 0, 0, 60%);
+      display: block;
+      height: 100vh;
+      left: 0;
+      position: absolute;
+      top: $header-height;
+      width: 100%;
     }
   }
 }

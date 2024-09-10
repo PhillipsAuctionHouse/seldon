@@ -1,8 +1,8 @@
 import React from 'react';
 import { getCommonProps } from '../../utils';
-import plusIcon from '../../assets/plus.svg';
-import minusIcon from '../../assets/minus.svg';
-import lockIcon from '../../assets/lock.svg';
+import PlusIcon from '../../assets/plus.svg?react';
+import MinusIcon from '../../assets/minus.svg?react';
+import LockIcon from '../../assets/lock.svg?react';
 import classnames from 'classnames';
 import * as Accordion from '@radix-ui/react-accordion';
 import { AccordionHeaderType, AccordionContentType } from './types';
@@ -16,15 +16,19 @@ export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement>
   /**
    * When true, prevents the user from interacting with the item.
    */
-  isLocked: boolean;
+  isLocked?: boolean;
   /**
    * Determines whether the variation on text style is large or small.
    */
   variation: string;
   /**
-   * Text string for the Accordion header for label.
+   * Uniqueid for the Accordion Item.
    */
-  label: string;
+  id: string;
+  /**
+   * Accordion item label.
+   */
+  label: React.ReactNode;
   /**
    * Child element pass in to display as item content.
    */
@@ -52,30 +56,33 @@ const AccordionHeader = ({
 
   // Render all icons and use css to conditionally show/hide the correct one
   const lockIconComponent = (
-    <img
-      className={getIconClasses(baseClassName, isLargeVariation, 'lock')}
-      src={lockIcon}
-      data-testid={`${id}-lockedIcon`}
-      aria-hidden
-    />
+    <div>
+      <LockIcon
+        className={getIconClasses(baseClassName, isLargeVariation, 'lock')}
+        data-testid={`${id}-lockedIcon`}
+        aria-hidden
+      />
+    </div>
   );
 
   const plusIconComponent = (
-    <img
-      className={getIconClasses(baseClassName, isLargeVariation, 'plus')}
-      src={plusIcon}
-      data-testid={`${id}-plusIcon`}
-      aria-hidden
-    />
+    <div>
+      <PlusIcon
+        className={getIconClasses(baseClassName, isLargeVariation, 'plus')}
+        data-testid={`${id}-plusIcon`}
+        aria-hidden
+      />
+    </div>
   );
 
   const minusIconComponent = (
-    <img
-      className={getIconClasses(baseClassName, isLargeVariation, 'minus')}
-      src={minusIcon}
-      data-testid={`${id}-minusIcon`}
-      aria-hidden
-    />
+    <div>
+      <MinusIcon
+        className={getIconClasses(baseClassName, isLargeVariation, 'minus')}
+        data-testid={`${id}-minusIcon`}
+        aria-hidden
+      />
+    </div>
   );
 
   return (
@@ -123,28 +130,30 @@ const AccordionContent = ({
 );
 
 const AccordionItem = ({
-  isLocked,
+  isLocked = false,
   variation,
+  id,
   label,
   isLastItem,
   hasTransition = false,
   children,
   ...props
 }: AccordionItemProps) => {
-  const { className: baseClassName } = getCommonProps(props, 'Accordion');
+  const { className: baseClassName } = getCommonProps({ id }, 'Accordion');
   const isLargeVariation = variation === 'lg';
   const accordionItemClassName = `${baseClassName}-item`;
 
   return (
     <Accordion.Item
       disabled={isLocked}
-      value={label}
+      value={id}
       className={classnames(accordionItemClassName, { [`${accordionItemClassName}__border-bottom`]: !isLastItem })}
+      {...props}
     >
       <AccordionHeader
         disable={isLocked}
         isLargeVariation={isLargeVariation}
-        id={props?.id}
+        id={id}
         baseClassName={`${accordionItemClassName}-label`}
       >
         {label}

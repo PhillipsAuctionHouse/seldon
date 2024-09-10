@@ -20,6 +20,7 @@
 @use 'components/Row/row';
 @use 'components/GridItem/gridItem';
 @use 'components/Search/search';
+@use 'components/Search/searchButton';
 @use 'components/Search/SearchResults/searchResults';
 @use 'components/Social/social';
 @use 'components/SplitPanel/splitPanel';
@@ -39,3 +40,4 @@
 @use 'components/Dropdown/dropdown';
 @use 'components/Video/video';
 @use 'components/Pagination/pagination';
+@use 'components/LanguageSelector/languageSelector';
