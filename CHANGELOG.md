@@ -1,3 +1,10 @@
+## [1.51.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.51.0...v1.51.1) (2024-09-10)
+
+
+### Bug Fixes
+
+* **deps:** bump body-parser and express ([#302](https://github.com/PhillipsAuctionHouse/seldon/issues/302)) ([70ad9d4](https://github.com/PhillipsAuctionHouse/seldon/commit/70ad9d4437890c4d8cd5e2145a0d28fc156b3092))
+
 # [1.51.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.50.0...v1.51.0) (2024-09-10)
 
 
