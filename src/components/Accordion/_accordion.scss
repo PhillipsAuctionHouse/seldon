@@ -11,6 +11,10 @@
   padding: $spacing-sm;
   width: 100%;
 
+  svg {
+    max-width: unset;
+  }
+
   &__border-bottom {
     border-bottom: 1px solid $keyline-gray;
   }

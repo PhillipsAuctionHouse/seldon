@@ -23,10 +23,9 @@ type Story = StoryObj<typeof meta>;
 export const Playground: Story = {
   args: {
     onLogin: () => console.log('Login'),
-    onLogout: () => console.log('Logout'),
     authState: AuthState.LoggedOut,
     loginLabel: 'Login',
-    logoutLabel: 'Logout',
+    accountLabel: 'Account',
   },
   argTypes: {
     authState: { control: { type: 'select' }, options: Object.values(AuthState) },

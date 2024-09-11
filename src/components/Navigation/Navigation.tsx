@@ -25,7 +25,7 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
   ({ children, className, id, visible = true, ...props }, ref) => {
     const { isSearchExpanded } = React.useContext(HeaderContext);
     const childNavList = findChildrenOfType<NavigationListProps>(children, NavigationList)?.[0];
-    const searchComponent = findChildrenExcludingTypes(children, [NavigationList, LanguageSelector]);
+    const otherChildren = findChildrenExcludingTypes(children, [NavigationList, LanguageSelector]); // Includes the Search component, needed to do exclusion rather than inclusion so we could support StatefulSearch in our stories
     const languageSelectorElement = findChildrenOfType<LanguageSelectorProps>(children, LanguageSelector)?.[0];
 
     return (
@@ -39,7 +39,7 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
         ref={ref}
       >
         <div className={`${px}-nav__list-container`}>
-          {searchComponent}
+          {otherChildren}
           {React.isValidElement(childNavList)
             ? React.cloneElement<NavigationListProps>(childNavList, { isOffScreen: isSearchExpanded })
             : undefined}

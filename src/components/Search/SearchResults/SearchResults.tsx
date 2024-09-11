@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { px } from '../../../utils';
 import Link from '../../Link/Link';
+import { LinkVariants } from '../../Link';
 
 export interface SearchResult {
   id: string;
@@ -33,8 +34,8 @@ const SearchResults = ({
           autoCompleteResults.map((result) => {
             return (
               <li key={result.id} className={`${px}-search__result`}>
-                <Link href={result.url} onKeyDown={onKeyDown}>
-                  <p>{result.label}</p>
+                <Link href={result.url} onKeyDown={onKeyDown} variant={LinkVariants.snwFlyoutLink}>
+                  {result.label}
                 </Link>
               </li>
             );

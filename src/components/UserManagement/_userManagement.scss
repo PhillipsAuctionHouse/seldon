@@ -6,7 +6,12 @@
   display: flex;
   gap: 0 $spacing-xsm;
   justify-content: flex-end;
-  min-width: 75px; // needed to handle the loading states and language swapping
+  min-height: 42px; // stop bounce after the user is logged in
+  min-width: 92px; // needed to handle the loading states and language swapping
+
+  @include media($size-xl) {
+    min-width: 104px; // stop bounce after the user is logged in
+  }
 
   @include isHeaderMobile {
     justify-content: center;
@@ -17,19 +22,22 @@
     align-items: center;
     background-color: unset;
     border: unset;
+    border-bottom: 1px solid transparent;
     cursor: pointer;
     display: flex;
+    gap: 0 $spacing-xsm;
+    padding-bottom: $padding-xsm;
 
     &:hover {
-      @include underline;
+      @include underline($padding-xsm);
     }
 
     > p.#{$px}-text {
       margin: 0;
-    }
 
-    @include isHeaderMobile {
-      display: none;
+      @include isHeaderMobile {
+        display: none;
+      }
     }
   }
 

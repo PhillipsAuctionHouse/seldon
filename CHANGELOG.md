@@ -1,3 +1,38 @@
+# [1.52.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.51.1...v1.52.0) (2024-09-10)
+
+
+### Features
+
+* **languageswitcher:** L3-3371 Update the header with the new language switcher ([#293](https://github.com/PhillipsAuctionHouse/seldon/issues/293)) ([8f01368](https://github.com/PhillipsAuctionHouse/seldon/commit/8f01368d77c8a2982e3267388744f7fea78bbe93))
+
+## [1.51.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.51.0...v1.51.1) (2024-09-10)
+
+
+### Bug Fixes
+
+* **deps:** bump body-parser and express ([#302](https://github.com/PhillipsAuctionHouse/seldon/issues/302)) ([70ad9d4](https://github.com/PhillipsAuctionHouse/seldon/commit/70ad9d4437890c4d8cd5e2145a0d28fc156b3092))
+
+# [1.51.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.50.0...v1.51.0) (2024-09-10)
+
+
+### Features
+
+* **accordion:** L3-3127 fixed accordions for Phillips Public ([#301](https://github.com/PhillipsAuctionHouse/seldon/issues/301)) ([4a5ec58](https://github.com/PhillipsAuctionHouse/seldon/commit/4a5ec58e746ea667de5395bf33fdbddab45262b1))
+
+# [1.50.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.49.0...v1.50.0) (2024-09-09)
+
+
+### Features
+
+* **_modal:** L3-3616 fixed qr modal and heading 3 ([#299](https://github.com/PhillipsAuctionHouse/seldon/issues/299)) ([d3f0334](https://github.com/PhillipsAuctionHouse/seldon/commit/d3f03344d53287c38e8ec33260a77e03362b4d28))
+
+# [1.49.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.48.0...v1.49.0) (2024-09-09)
+
+
+### Features
+
+* **drawer:** L3-3616 updated spacers ([#296](https://github.com/PhillipsAuctionHouse/seldon/issues/296)) ([906305d](https://github.com/PhillipsAuctionHouse/seldon/commit/906305d239d8dee11cdfd36fdfc94f52af768299))
+
 # [1.48.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.47.0...v1.48.0) (2024-09-06)
 
 

@@ -348,15 +348,15 @@ $margin-xxl: var(--spacing-xxl);
 ///////////////////////
 /* stylelint-disable-next-line no-duplicate-selectors */
 :root {
-  --header-height: 69px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
+  --header-height: 75px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
   --search-size: 2.625rem; // This should be calculated from the scaling text and scaling spacing tokens instead of hardcoding in case they change
 
   @media (min-width: $breakpoint-md) {
-    --header-height: 103px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
+    --header-height: 109px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
   }
 
   @media (min-width: $breakpoint-xl) {
-    --header-height: 115px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
+    --header-height: 121px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
     --search-size: 2.875rem; // This should be calculated from the scaling text and scaling spacing tokens instead of hardcoding in case they change
   }
 }
@@ -366,6 +366,11 @@ $margin-xxl: var(--spacing-xxl);
 ///////////////////////
 $max-site-width: 1560px;
 $desktop-max-width: var(--desktop-max-width);
+
+////////////////////////
+/// z-index TOKENS:
+///////////////////////
+$modal-z-index: 30;
 
 ////////////////////////
 /// Our tokens usually support at least 4 sizes.

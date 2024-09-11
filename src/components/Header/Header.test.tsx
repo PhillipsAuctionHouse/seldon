@@ -21,7 +21,7 @@ describe('Header', () => {
               <NavigationItem
                 badge="New York"
                 href="#"
-                navGroup="nav-link-lg"
+                navGroup="nav-link-left"
                 navType={LinkVariants.snwFlyoutLink}
                 label="Editions & Works on Paper"
               />
@@ -52,13 +52,6 @@ describe('Header', () => {
     await userEvent.click(toggleButton);
     expect(screen.getByRole('button', { name: /Close Menu/i })).toBeInTheDocument();
   });
-
-  // it('should expand a nav category in the mobile menu when a nav item trigger is selected', async () => {
-  //   render(headerComponent());
-  //   const navItemTrigger = screen.getByTestId(`navigation-item-trigger-auctions`);
-  //   await userEvent.click(navItemTrigger);
-  //   expect(navItemTrigger).toHaveClass(`${px}-nav__item--expanded`);
-  // });
 });
 
 describe('Header with logo', () => {
