@@ -1,4 +1,5 @@
 import type { Meta } from '@storybook/react';
+import { useState } from 'react';
 
 import Pagination, { PaginationProps } from './Pagination';
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
@@ -12,6 +13,8 @@ export default meta;
 interface StoryProps extends PaginationProps {
   playgroundWidth: string;
 }
+
+const lotOptions = ['Lot 1', 'Lot 2', 'Lot 3', 'Lot 4', 'Lot 5'];
 
 const argTypes = {
   disabled: {
@@ -28,29 +31,38 @@ const argTypes = {
   playgroundWidth: {
     control: { type: 'range', min: 200, max: 300, step: 50 },
   },
-  value: {
+  defaultValue: {
+    options: lotOptions,
     control: {
-      type: 'text',
+      type: 'select',
     },
   },
 };
 
-export const Playground = ({ playgroundWidth, ...args }: StoryProps) => (
-  <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <Pagination key={args.value} {...args} id="Pagination-1">
-      <option>Lot 1</option>
-      <option>Lot 2</option>
-      <option>Lot 3</option>
-      <option>Lot 4</option>
-      <option>Lot 5</option>
-    </Pagination>
-  </div>
-);
+export const Playground = ({ playgroundWidth, onChange, ...args }: StoryProps) => {
+  // Parent component is in charge of the state management
+  const [value, setValue] = useState<string>(lotOptions[0]);
+
+  return (
+    <div style={{ width: playgroundWidth, margin: '1rem' }}>
+      <Pagination
+        {...args}
+        id="Pagination-1"
+        options={lotOptions}
+        value={value}
+        onChange={(value) => {
+          setValue(value);
+          onChange(value);
+        }}
+      ></Pagination>
+    </div>
+  );
+};
 
 Playground.args = {
   playgroundWidth: 200,
   className: 'pagination-test-class',
-  value: null,
+  defaultValue: lotOptions[0],
   isDisabled: false,
   onChange: (selectedValue: string) => {
     console.log('selected value >', selectedValue);

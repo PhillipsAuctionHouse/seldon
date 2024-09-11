@@ -1,13 +1,13 @@
-import * as React from 'react';
+import React, { ComponentProps } from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { px } from '../../utils';
 
 import Select from '../Select/Select';
 import Button from '../Button/Button';
-import chevronRight from '../../assets/chevronRight.svg';
+import ChevronRight from '../../assets/chevronRight.svg?react';
 
-export interface PaginationProps {
+export interface PaginationProps extends Omit<ComponentProps<'div'>, 'onChange'> {
   /**
    * Unique id for component testing
    */
@@ -17,33 +17,37 @@ export interface PaginationProps {
    */
   className?: string;
   /**
-   * Child element pass in to display as options to select from.
+   * Options Array of string
    */
-  children?: React.ReactNode;
+  options?: string[];
   /**
    * Boolean to specify whether the `<Pagination>` should be disabled
    */
   isDisabled?: boolean;
   /**
-   * Optional text to display when disable is true
+   * Current page of the `<Pagination>` component
    */
-  disabledText?: string;
+  value: string | number;
   /**
-   * Optional `onClick` handler that is called whenever the `<Pagination>` value is clicked
+   * `onChange` handler that is called whenever the `<Pagination>` value is changed
    */
-  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
-  /**
-   * Optional `onChange` handler that is called whenever the `<Pagination>` value is changed
-   */
-  onChange?: (selectedValue: string) => void;
+  onChange: (selectedValue: string, event?: React.ChangeEvent<HTMLSelectElement>) => void;
   /**
    * Specify the value of the `<Pagination>`
    */
-  value?: string | undefined;
+  defaultValue?: string | undefined;
   /**
    * The default Inline style to apply to the `<Pagination>` Select component
    */
   variant?: 'inline';
+  /**
+   * Option previous label
+   */
+  previousLabel?: string;
+  /**
+   * Option next label
+   */
+  nextLabel?: string;
 }
 
 /**
@@ -59,79 +63,59 @@ export interface PaginationProps {
 const Pagination = ({
   className,
   onChange,
-  onClick,
   variant = 'inline',
-  disabledText = 'Lot',
-  children,
+  options = [],
+  value,
+  defaultValue,
+  isDisabled,
+  previousLabel = 'Previous',
+  nextLabel = 'Next',
   ...props
 }: PaginationProps) => {
   const type = 'pagination';
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Pagination');
-  const { id, value, isDisabled } = props;
-  const [selectedValue, setSelectedValue] = React.useState(value);
-  const selectRef = React.useRef<HTMLSelectElement>(null);
-
-  const paginationClick = (e: React.MouseEvent<HTMLElement>) => {
-    const buttonType = e.currentTarget.dataset.testid;
-    const selectedIndex = selectRef.current?.selectedIndex;
-    const firstIndexValue = selectRef.current?.options[0]?.value;
-    const lastIndex = selectRef.current?.childElementCount ? selectRef.current?.childElementCount - 1 : 0;
-    const lastIndexValue = selectRef.current?.options[lastIndex]?.value;
-    if (selectedIndex !== undefined && firstIndexValue && lastIndexValue) {
-      const prevValue = selectRef.current?.options[selectedIndex - 1]?.value;
-      const nextValue = selectRef.current?.options[selectedIndex + 1]?.value;
-      if (buttonType === `${id}-previous-button`)
-        prevValue ? setSelectedValue(prevValue) : setSelectedValue(lastIndexValue);
-      else if (buttonType === `${id}-next-button`)
-        nextValue ? setSelectedValue(nextValue) : setSelectedValue(firstIndexValue);
-    }
-  };
-  const paginationSelect = (e: Event) => {
-    const target = e.target as HTMLSelectElement;
-    setSelectedValue(target.value);
-  };
-
-  React.useEffect(() => {
-    selectedValue && onChange && onChange(selectedValue);
-  }, [onChange, selectedValue]);
+  const { id } = props;
 
   return (
     <div
       className={classnames(`${px}-${type}`, { [`${baseClassName}__wrapper`]: baseClassName }, className)}
       {...commonProps}
-      id={props?.id}
-      onClick={onClick}
+      {...props}
     >
       <Button
         className={classnames(`${px}__pagination-button`, `${px}-left-arrow`)}
-        onClick={(e) => paginationClick(e)}
+        onClick={() => onChange(options.at(options.findIndex((option) => option === value) - 1) || '')}
         data-testid={`${id}-previous-button`}
         isDisabled={isDisabled}
-        aria-label="Previous"
+        aria-label={previousLabel}
       >
-        <img src={chevronRight} className={`${px}-button-icon`} />
+        <ChevronRight />
       </Button>
 
       <Select
         className={variant === 'inline' && `${px}--inline-pagination`}
-        value={selectedValue || ''}
-        onChange={paginationSelect}
+        defaultValue={defaultValue || ''}
+        value={value}
+        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => onChange(event?.currentTarget.value, event)}
         data-testid={`${id}-select-button`}
         hideLabel
-        ref={selectRef}
         disabled={isDisabled}
       >
-        {isDisabled || !children ? <option>{disabledText}</option> : children}
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
       </Select>
 
       <Button
         className={`${px}__pagination-button`}
-        onClick={(e) => paginationClick(e)}
+        onClick={() => onChange(options[(options.findIndex((option) => option === value) + 1) % options.length] || '')}
         data-testid={`${id}-next-button`}
         isDisabled={isDisabled}
-        aria-label="Next"
+        aria-label={nextLabel}
       >
-        <img src={chevronRight} className={`${px}-button-icon`} />
+        <ChevronRight />
       </Button>
     </div>
   );

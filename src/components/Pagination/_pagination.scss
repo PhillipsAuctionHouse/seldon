@@ -8,15 +8,15 @@
 .#{$px} {
   &--inline-pagination__wrapper {
     select {
+      @include pText($body-size2);
+
       appearance: none;
       border: none;
-      font-size: $body-size2;
       font-weight: 600;
       line-height: 2.5rem;
       margin-bottom: 0;
       outline: none;
       text-align: center;
-      text-align-last: center;
       text-decoration: underline;
       text-underline-offset: 10px;
 
@@ -27,6 +27,10 @@
         max-width: 5rem;
         padding: 0.5rem;
         text-decoration: none;
+      }
+
+      &:focus {
+        outline: 1px solid $medium-gray;
       }
     }
 
@@ -43,6 +47,14 @@
   flex-direction: row;
   padding: 0;
 
+  svg {
+    width: 2rem;
+
+    @include media($size-md, $type: 'max') {
+      width: 1rem;
+    }
+  }
+
   &:hover,
   &:focus {
     background: none;
@@ -55,10 +67,4 @@
 
 .#{$px}-left-arrow {
   transform: scaleX(-1);
-}
-
-.#{$px}-button-icon {
-  @include media($size-md, $type: 'max') {
-    width: 1.5rem;
-  }
 }
