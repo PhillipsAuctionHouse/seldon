@@ -65,8 +65,12 @@
   flex-direction: column;
   gap: $spacing-sm;
 
-  &--large-cta {
+  &--left {
     margin-right: 1rem;
+
+    & li:last-child a span {
+      text-transform: uppercase;
+    }
 
     @include isHeaderMobile {
       margin-right: 0;
