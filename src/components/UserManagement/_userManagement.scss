@@ -2,121 +2,60 @@
 
 .#{$px}-user-management {
   align-items: center;
+  cursor: pointer;
   display: flex;
-  height: $user-management-height;
+  gap: 0 $spacing-xsm;
   justify-content: flex-end;
-  left: 0;
-  padding: 0 $spacing-md;
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 100%;
+  min-height: 42px; // stop bounce after the user is logged in
+  min-width: 92px; // needed to handle the loading states and language swapping
+
+  @include media($size-xl) {
+    min-width: 104px; // stop bounce after the user is logged in
+  }
 
   @include isHeaderMobile {
-    align-items: flex-start;
-    background: transparent;
-    flex-direction: column;
-    height: unset;
-    margin-top: auto;
-    padding: 0;
-    position: unset;
-
-    .#{$px}-nav__item-trigger {
-      text-align: unset;
-    }
-  }
-
-  > li {
-    border: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-
-  &__account-wrapper {
-    align-items: center;
-    display: flex;
-
-    @include isHeaderMobile {
-      width: 100%;
-    }
-
-    .#{$px}-link {
-      @include isHeaderMobile {
-        width: 100%;
-      }
-    }
+    justify-content: center;
+    min-width: 44px; // matching the size of mobile menu icon to allow for equal spacing and centering of logo
   }
 
   &__login {
+    align-items: center;
+    background-color: unset;
+    border: unset;
+    border-bottom: 1px solid transparent;
     cursor: pointer;
+    display: flex;
+    gap: 0 $spacing-xsm;
+    padding-bottom: $padding-xsm;
+
+    &:hover {
+      @include underline($padding-xsm);
+    }
+
+    > p.#{$px}-text {
+      margin: 0;
+
+      @include isHeaderMobile {
+        display: none;
+      }
+    }
   }
 
   &__account-icon {
-    cursor: pointer;
+    height: 1.5rem;
+    width: 1.5rem;
 
-    &:hover,
-    &:focus,
-    &:focus-within {
-      path {
-        fill: $soft-black;
-      }
+    a {
+      align-items: center;
+      display: flex;
+      height: $mobile-minimum-clickable-area;
+      justify-content: center;
+      width: $mobile-minimum-clickable-area;
     }
 
-    @include isHeaderMobile {
-      display: none;
-    }
-  }
-
-  .#{$px}-nav__item {
-    > a {
-      padding: 0.5rem;
-    }
-
-    &:hover,
-    &:focus,
-    &:focus-within {
-      &::after {
-        opacity: 0;
-      }
-      .#{$px}-user-management__language {
-        &__selections {
-          padding: 0.8125rem;
-        }
-      }
-    }
-    .#{$px}-user-management__language {
-      &__selections {
-        padding: 0.8125rem;
-
-        @include isHeaderDesktop {
-          background: $off-white;
-          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 85%);
-          display: block;
-          left: unset;
-          min-height: unset;
-          min-width: 130px;
-          padding: 0;
-          position: absolute;
-          right: 0;
-          top: $user-management-height;
-          width: 100%;
-
-          > li {
-            height: auto;
-          }
-          .#{$px}-input {
-            &--inline {
-              gap: 0.825rem;
-            }
-
-            &__input {
-              height: 18px;
-              width: 18px;
-            }
-          }
-        }
-      }
+    @mixin isHeaderDesktop {
+      height: 1.5rem;
+      width: 1.5rem;
     }
   }
 }

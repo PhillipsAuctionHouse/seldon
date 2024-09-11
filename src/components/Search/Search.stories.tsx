@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import Search, { type SearchProps } from './Search';
 import { SearchResult } from './SearchResults/SearchResults';
+import { HeaderContext } from '../Header/Header';
+import { defaultHeaderContext } from '../Header/utils';
 
 const fetchData = async (searchQuery: string) => {
   console.log('searchQuery', searchQuery);
@@ -26,6 +28,8 @@ const fetchData = async (searchQuery: string) => {
 const StatefulSearch = (props: SearchProps) => {
   const [autoCompleteResults, setAutoCompleteResults] = React.useState([] as Array<SearchResult>);
   const [state, setState] = React.useState<SearchProps['state']>('idle');
+  const [isSearchExpanded, setIsSearchExpanded] = React.useState(false);
+
   const onSearch = (searchQuery: string) => {
     if (searchQuery?.includes('?')) {
       setState('invalid');
@@ -43,14 +47,19 @@ const StatefulSearch = (props: SearchProps) => {
     }
   };
   return (
-    <Search
-      {...props}
-      onSearch={(value) => {
-        onSearch(value);
-      }}
-      searchResults={autoCompleteResults}
-      state={state}
-    />
+    <HeaderContext.Provider value={{ ...defaultHeaderContext, isSearchExpanded, setIsSearchExpanded }}>
+      {/* This emulates the header width so the search Results and input work correctly*/}
+      <div style={{ minWidth: '100%', position: 'relative' }}>
+        <Search
+          {...props}
+          onSearch={(value) => {
+            onSearch(value);
+          }}
+          searchResults={autoCompleteResults}
+          state={state}
+        />
+      </div>
+    </HeaderContext.Provider>
   );
 };
 

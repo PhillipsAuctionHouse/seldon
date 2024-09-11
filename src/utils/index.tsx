@@ -161,11 +161,11 @@ export const emailValidation = (email: string) => {
  * @param inverse - Return children that are not of the specified type
  *
  */
-export const findChildrenOfType = function (
+export const findChildrenOfType = <ComponentProps,>(
   children: React.ReactNode,
   componentType?: React.ElementType,
   inverse = false,
-) {
+) => {
   const foundChildrenOfType = React.Children.toArray(children).filter((child) => {
     if (child && (child as React.ReactElement).type === componentType && !inverse) {
       return child;
@@ -173,7 +173,25 @@ export const findChildrenOfType = function (
       return child && (child as React.ReactElement).type !== componentType && inverse;
     }
   });
-  return foundChildrenOfType.length > 0 ? foundChildrenOfType : null;
+  return foundChildrenOfType.length > 0 ? (foundChildrenOfType as React.ReactElement<ComponentProps>[]) : null;
+};
+
+export const findChildrenExcludingTypes = <ComponentProps,>(
+  children: React.ReactNode,
+  excludedTypes: React.ElementType[],
+) => {
+  const foundChildrenExcludingTypes = React.Children.toArray(children).filter((child) => {
+    if (
+      child &&
+      (child as React.ReactElement<ComponentProps>).type &&
+      !excludedTypes.includes((child as React.ReactElement).type as React.ElementType)
+    ) {
+      return child;
+    }
+  });
+  return foundChildrenExcludingTypes.length > 0
+    ? (foundChildrenExcludingTypes as React.ReactElement<ComponentProps>[])
+    : null;
 };
 
 export const encodeURLSearchParams = (url: string) => {

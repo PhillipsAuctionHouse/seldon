@@ -4,25 +4,6 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { SupportedLanguages } from '../../types/commonTypes';
 
-// Need the following to test Radix Select using vitest
-class MockPointerEvent extends Event {
-  button: number;
-  ctrlKey: boolean;
-  pointerType: string;
-
-  constructor(type: string, props: PointerEventInit) {
-    super(type, props);
-    this.button = props.button || 0;
-    this.ctrlKey = props.ctrlKey || false;
-    this.pointerType = props.pointerType || 'mouse';
-  }
-}
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-window.PointerEvent = MockPointerEvent as any;
-window.HTMLElement.prototype.scrollIntoView = vi.fn();
-window.HTMLElement.prototype.releasePointerCapture = vi.fn();
-window.HTMLElement.prototype.hasPointerCapture = vi.fn();
-
 const languages = [
   { label: 'English', value: SupportedLanguages.en },
   { label: '中文', value: SupportedLanguages.zh },

@@ -1,4 +1,4 @@
-import React, { useState, ComponentProps } from 'react';
+import React, { useState, ComponentPropsWithoutRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import * as DropdownSelect from '@radix-ui/react-select';
@@ -7,7 +7,7 @@ import { DropdownItem } from './types';
 
 export interface DropdownProps
   extends Omit<DropdownSelect.SelectProps, 'defaultValue' | 'dir'>,
-    Omit<ComponentProps<'div'>, 'ref'> {
+    ComponentPropsWithoutRef<'div'> {
   /**
    * All options to be listed in the dropdown
    */

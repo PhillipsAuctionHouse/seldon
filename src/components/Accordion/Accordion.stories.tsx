@@ -2,6 +2,9 @@ import { Meta } from '@storybook/react';
 import Accordion, { AccordionProps } from './Accordion';
 import AccordionItem from './AccordionItem';
 import { AccordionVariants } from './types';
+import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
+import { LinkVariants } from '../Link';
+import { useState } from 'react';
 
 const meta = {
   title: 'Components/Accordion',
@@ -96,7 +99,7 @@ const smallTextItems = [
   {
     isLocked: false,
     variation: 'sm',
-    label: 'Exhibitied',
+    label: 'Exhibited',
     children: smallTextBlock,
     hasTransition: true,
   },
@@ -116,3 +119,29 @@ export const AccordionSmall = (props: AccordionProps) => (
     ))}
   </Accordion>
 );
+
+export const AccordionSubmenu = (props: AccordionProps) => {
+  const [currentLanguage, setCurrentLanguage] = useState('English');
+  return (
+    <Accordion {...props} id="accordion-item-submenu">
+      <AccordionItem
+        variation="sm"
+        id="languageselector"
+        label={<NavigationItem label={currentLanguage}></NavigationItem>}
+      >
+        <div style={{ paddingLeft: 'var(--spacing-sm)' }}>
+          <NavigationItem
+            label="English"
+            onClick={() => setCurrentLanguage('English')}
+            navType={LinkVariants.snwFlyoutLink}
+          ></NavigationItem>
+          <NavigationItem
+            label="Chinese"
+            onClick={() => setCurrentLanguage('Chinese')}
+            navType={LinkVariants.snwFlyoutLink}
+          ></NavigationItem>
+        </div>
+      </AccordionItem>
+    </Accordion>
+  );
+};
