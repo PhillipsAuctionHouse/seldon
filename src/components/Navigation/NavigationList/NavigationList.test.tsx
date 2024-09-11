@@ -69,7 +69,7 @@ describe('NavigationList', () => {
     );
 
     expect(getByTestId('test-id')).toBeInTheDocument();
-    expect(getByTestId('test-id').querySelectorAll('.nav-link-sm').length).toBe(2);
+    expect(getByTestId('test-id').querySelectorAll('.nav-link-right').length).toBe(2);
   });
 
   it('renders both left and right section items when present', () => {
