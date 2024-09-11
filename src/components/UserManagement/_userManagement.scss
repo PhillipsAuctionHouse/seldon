@@ -6,7 +6,7 @@
   display: flex;
   gap: 0 $spacing-xsm;
   justify-content: flex-end;
-  min-height: 42px; // stop bounce after the user is logged in
+  min-height: 49px; // stop bounce after the user is logged in
   min-width: 92px; // needed to handle the loading states and language swapping
   padding-top: $padding-xsm;
 
@@ -41,6 +41,7 @@
 
       @include isHeaderMobile {
         display: none;
+        min-height: 2rem;
       }
     }
   }
@@ -57,7 +58,7 @@
       width: $mobile-minimum-clickable-area;
     }
 
-    @mixin isHeaderDesktop {
+    @include isHeaderDesktop {
       height: 1.5rem;
       width: 1.5rem;
     }
