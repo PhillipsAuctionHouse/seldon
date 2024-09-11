@@ -1,3 +1,10 @@
+# [1.53.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.52.0...v1.53.0) (2024-09-11)
+
+
+### Features
+
+* **readmore:** L3-3579 Read More and Collapsible Component ([#295](https://github.com/PhillipsAuctionHouse/seldon/issues/295)) ([ef3e7ca](https://github.com/PhillipsAuctionHouse/seldon/commit/ef3e7ca9b72b08fdeb635b1206274e6f8f0b90c6))
+
 # [1.52.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.51.1...v1.52.0) (2024-09-10)
 
 
