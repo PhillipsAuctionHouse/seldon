@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, forwardRef, useCallback } from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import Button from '../Button/Button';
@@ -40,65 +40,63 @@ export interface ReadMoreProps extends React.HTMLAttributes<HTMLDivElement> {
  * [Figma Link](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/EASEL-Compendium%3A-Tokens%2C-Components-%26-Patterns?node-id=7755-5572&t=JCYbkM8yQcdb51UQ-4)
  *
  */
-const ReadMore = ({
-  className,
-  children,
-  readMoreText = 'Read More',
-  readLessText = 'Read Less',
-  maxHeight = 480,
-  ...props
-}: ReadMoreProps) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'read-more');
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [hasOverflow, setHasOverflow] = useState(false);
-  const contentRef = useRef<HTMLDivElement>(null);
+const ReadMore = forwardRef<HTMLDivElement, ReadMoreProps>(
+  ({ className, children, readMoreText = 'Read More', readLessText = 'Read Less', maxHeight = 480, ...props }, ref) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ReadMore');
+    const [isExpanded, setIsExpanded] = useState(false);
+    const [hasOverflow, setHasOverflow] = useState(false);
+    const contentRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (contentRef.current) {
-      setHasOverflow(contentRef.current.scrollHeight > maxHeight);
-    }
-  }, [children, maxHeight]);
-
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  return (
-    <Collapsible
-      id={props?.id}
-      open={isExpanded}
-      onOpenChange={toggleExpand}
-      className={classnames(baseClassName, className)}
-      style={
-        {
-          '--read-more-max-height': `${maxHeight}px`,
-        } as React.CSSProperties
+    useEffect(() => {
+      if (contentRef.current) {
+        setHasOverflow(contentRef.current.scrollHeight > maxHeight);
       }
-      {...commonProps}
-      {...props}
-    >
-      <CollapsibleContent className={`${baseClassName}-content`} ref={contentRef} forceMount>
-        {children}
-      </CollapsibleContent>
-      {hasOverflow ? (
-        <div
-          className={classnames(`${baseClassName}-overlay`, {
-            [`${baseClassName}-overlay--expanded`]: isExpanded,
-            [`${baseClassName}-overlay--gradient`]: hasOverflow && !isExpanded,
-          })}
-        >
-          <div className={`${baseClassName}-overlay-trigger-wrapper`}>
-            <CollapsibleTrigger asChild className={`${baseClassName}-overlay-trigger`}>
-              <Button variant={ButtonVariants.secondary}>
-                {isExpanded ? <MinusIcon /> : <PlusIcon />}
-                {isExpanded ? readLessText : readMoreText}
-              </Button>
-            </CollapsibleTrigger>
+    }, [children, maxHeight]);
+
+    const toggleExpand = useCallback(() => {
+      setIsExpanded((expanded) => !expanded);
+    }, []);
+
+    return (
+      <Collapsible
+        id={props?.id}
+        open={isExpanded}
+        onOpenChange={toggleExpand}
+        className={classnames(baseClassName, className)}
+        style={
+          {
+            '--read-more-max-height': `${maxHeight}px`,
+          } as React.CSSProperties
+        }
+        ref={ref}
+        {...commonProps}
+        {...props}
+      >
+        <CollapsibleContent className={`${baseClassName}-content`} ref={contentRef} forceMount>
+          {children}
+        </CollapsibleContent>
+        {hasOverflow ? (
+          <div
+            className={classnames(`${baseClassName}-overlay`, {
+              [`${baseClassName}-overlay--expanded`]: isExpanded,
+              [`${baseClassName}-overlay--gradient`]: hasOverflow && !isExpanded,
+            })}
+          >
+            <div className={`${baseClassName}-overlay-trigger-wrapper`}>
+              <CollapsibleTrigger asChild className={`${baseClassName}-overlay-trigger`}>
+                <Button variant={ButtonVariants.secondary}>
+                  {isExpanded ? <MinusIcon /> : <PlusIcon />}
+                  {isExpanded ? readLessText : readMoreText}
+                </Button>
+              </CollapsibleTrigger>
+            </div>
           </div>
-        </div>
-      ) : null}
-    </Collapsible>
-  );
-};
+        ) : null}
+      </Collapsible>
+    );
+  },
+);
+
+ReadMore.displayName = 'ReadMore';
 
 export default ReadMore;
