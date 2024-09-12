@@ -1,3 +1,10 @@
+## [1.53.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.53.0...v1.53.1) (2024-09-12)
+
+
+### Bug Fixes
+
+* **login:** L3-3694 increase mobile icon size ([#306](https://github.com/PhillipsAuctionHouse/seldon/issues/306)) ([18c8977](https://github.com/PhillipsAuctionHouse/seldon/commit/18c8977b3e27ec4a3421664cf9a325867dc943e7))
+
 # [1.53.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.52.0...v1.53.0) (2024-09-11)
 
 
