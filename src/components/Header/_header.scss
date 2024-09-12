@@ -73,6 +73,7 @@
 
   &__logo {
     align-self: center;
+    padding-top: 6px; // small adjustment to center the logo
 
     svg {
       height: 24px;
@@ -80,6 +81,8 @@
     }
 
     @include isHeaderDesktop {
+      padding-top: 0;
+
       svg {
         height: 28px;
         width: 100%;

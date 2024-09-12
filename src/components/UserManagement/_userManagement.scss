@@ -6,8 +6,9 @@
   display: flex;
   gap: 0 $spacing-xsm;
   justify-content: flex-end;
-  min-height: 42px; // stop bounce after the user is logged in
+  min-height: 49px; // stop bounce after the user is logged in
   min-width: 92px; // needed to handle the loading states and language swapping
+  padding-top: $padding-xsm;
 
   @include media($size-xl) {
     min-width: 104px; // stop bounce after the user is logged in
@@ -26,6 +27,9 @@
     cursor: pointer;
     display: flex;
     gap: 0 $spacing-xsm;
+    justify-content: center;
+    min-width: 44px;
+    padding: 0;
     padding-bottom: $padding-xsm;
 
     &:hover {
@@ -37,13 +41,14 @@
 
       @include isHeaderMobile {
         display: none;
+        min-height: 2rem;
       }
     }
   }
 
   &__account-icon {
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 2rem;
+    width: 2rem;
 
     a {
       align-items: center;
@@ -53,7 +58,7 @@
       width: $mobile-minimum-clickable-area;
     }
 
-    @mixin isHeaderDesktop {
+    @include isHeaderDesktop {
       height: 1.5rem;
       width: 1.5rem;
     }
