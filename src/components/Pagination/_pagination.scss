@@ -29,6 +29,10 @@
         text-decoration: none;
       }
 
+      &:hover {
+        cursor: pointer;
+      }
+
       &:focus {
         outline: 1px solid $medium-gray;
       }

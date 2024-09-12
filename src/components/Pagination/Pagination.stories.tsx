@@ -31,12 +31,6 @@ const argTypes = {
   playgroundWidth: {
     control: { type: 'range', min: 200, max: 300, step: 50 },
   },
-  defaultValue: {
-    options: lotOptions,
-    control: {
-      type: 'select',
-    },
-  },
 };
 
 export const Playground = ({ playgroundWidth, onChange, ...args }: StoryProps) => {
@@ -62,7 +56,6 @@ export const Playground = ({ playgroundWidth, onChange, ...args }: StoryProps) =
 Playground.args = {
   playgroundWidth: 200,
   className: 'pagination-test-class',
-  defaultValue: lotOptions[0],
   isDisabled: false,
   onChange: (selectedValue: string) => {
     console.log('selected value >', selectedValue);

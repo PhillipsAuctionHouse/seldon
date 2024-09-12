@@ -25,7 +25,7 @@ export interface PaginationProps extends Omit<ComponentProps<'div'>, 'onChange'>
    */
   isDisabled?: boolean;
   /**
-   * Current page of the `<Pagination>` component
+   * Current value of the `<Pagination>` component
    */
   value: string | number;
   /**
@@ -33,11 +33,7 @@ export interface PaginationProps extends Omit<ComponentProps<'div'>, 'onChange'>
    */
   onChange: (selectedValue: string, event?: React.ChangeEvent<HTMLSelectElement>) => void;
   /**
-   * Specify the value of the `<Pagination>`
-   */
-  defaultValue?: string | undefined;
-  /**
-   * The default Inline style to apply to the `<Pagination>` Select component
+   * Specify the variant style of the `<Pagination>`
    */
   variant?: 'inline';
   /**
@@ -66,7 +62,6 @@ const Pagination = ({
   variant = 'inline',
   options = [],
   value,
-  defaultValue,
   isDisabled,
   previousLabel = 'Previous',
   nextLabel = 'Next',
@@ -94,7 +89,6 @@ const Pagination = ({
 
       <Select
         className={variant === 'inline' && `${px}--inline-pagination`}
-        defaultValue={defaultValue || ''}
         value={value}
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) => onChange(event?.currentTarget.value, event)}
         data-testid={`${id}-select-button`}
