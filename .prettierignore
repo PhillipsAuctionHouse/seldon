@@ -1,6 +1,5 @@
 dist
 .husky
-.storybook
 .vscode
 
 # Logs

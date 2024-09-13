@@ -60,3 +60,4 @@ export { default as Video, type VideoProps } from './components/Video/Video';
 export * from './components/LanguageSelector';
 export * from './components/ReadMore';
 export * from './components/Collapsible';
+export * from './providers/SeldonProvider';
