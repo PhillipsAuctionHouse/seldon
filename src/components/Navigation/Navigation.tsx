@@ -1,9 +1,9 @@
 import React, { ComponentProps, CSSProperties, forwardRef, ReactElement } from 'react';
 import { findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
 import classnames from 'classnames';
-import { HeaderContext } from '../Header/Header';
+import { HeaderContext } from '../../site-furniture/Header/Header';
 import NavigationList, { NavigationListProps } from './NavigationList/NavigationList';
-import { LanguageSelector, LanguageSelectorProps } from '../LanguageSelector';
+import { LanguageSelector, LanguageSelectorProps } from '../../patterns/LanguageSelector';
 import { SSRMediaQuery } from '../../providers/utils';
 
 export interface NavigationProps extends ComponentProps<'nav'> {
