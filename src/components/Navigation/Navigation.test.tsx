@@ -41,7 +41,7 @@ describe('Navigation', () => {
   });
   it('renders language selector component if passed', () => {
     renderNavigation();
-    expect(screen.getByRole('combobox', { name: 'English' })).toBeInTheDocument();
+    expect(screen.getByText('English')).toBeInTheDocument();
   });
   it('hide nav list if search expanded', () => {
     renderNavigation({}, { isSearchExpanded: true });

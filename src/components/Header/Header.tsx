@@ -7,6 +7,7 @@ import { LanguageSelector } from '../LanguageSelector';
 import Navigation from '../Navigation/Navigation';
 import { Component, ComponentProps, forwardRef, ReactElement, useState, createContext } from 'react';
 import { defaultHeaderContext } from './utils';
+import { SSRMediaQuery } from '../../providers/utils';
 
 export interface HeaderProps extends ComponentProps<'header'> {
   /**
@@ -46,7 +47,7 @@ export const HeaderContext = createContext<HeaderContextType>(defaultHeaderConte
 /**
  * ## Overview
  *
- * This component allows navigation, search, login/logout, and language selection and supports desktop and mobile layouts
+ * This component allows navigation, search, login/logout, and language selection and supports desktop and mobile layouts.  It requires the <SeldonProvider> to be wrapped around it to support SSR Media Queries.
  *
  * [Figma Link Mobile](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/EASEL-Compendium%3A-Tokens%2C-Components-%26-Patterns?node-id=10877-33417&node-type=INSTANCE&m=dev)
  *
@@ -81,7 +82,8 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     return (
       <header {...props} className={classnames(`${px}-header`, className)} ref={ref}>
         <div className={`${px}-header__top-row`}>
-          {languageSelectorElement} {/** Not rendered on mobile */}
+          <SSRMediaQuery.Media greaterThanOrEqual="md">{languageSelectorElement}</SSRMediaQuery.Media>
+          {/** only render language selector in this location on desktop */}
           <button
             aria-label={toggleText}
             data-testid="mobile-menu-toggle"

@@ -100,7 +100,7 @@ $text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $h
   $snwHeaderLink;
 
 ////////////////////////
-/// Breakpoint TOKENS to be used for min-width comparisons
+/// Breakpoint TOKENS to be used for min-width comparisons, make sure they match BREAKPOINTS in constants.ts
 ///////////////////////
 $breakpoint-sm: 361px;
 $breakpoint-md: 961px;

@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { HeaderContext } from '../Header/Header';
 import NavigationList, { NavigationListProps } from './NavigationList/NavigationList';
 import { LanguageSelector, LanguageSelectorProps } from '../LanguageSelector';
+import { SSRMediaQuery } from '../../providers/utils';
 
 export interface NavigationProps extends ComponentProps<'nav'> {
   /**
@@ -15,7 +16,7 @@ export interface NavigationProps extends ComponentProps<'nav'> {
 /**
  * ## Overview
  *
- * This is used within the Header component and displays the site navigation links.  It support both mobile and desktop.
+ * This is used within the Header component and displays the site navigation links.  It supports both mobile and desktop. It requires the <SeldonProvider> to be wrapped around it to support SSR Media Queries.
  *
  * [Figma Link](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/EASEL-Compendium%3A-Tokens%2C-Components-%26-Patterns?node-id=10570-5784&m=dev)
  *
@@ -43,14 +44,14 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
           {React.isValidElement(childNavList)
             ? React.cloneElement<NavigationListProps>(childNavList, { isOffScreen: isSearchExpanded })
             : undefined}
-          {
-            /* This is not visible through css when in desktop breakpoint */
-            React.isValidElement(languageSelectorElement) && languageSelectorElement
+          <SSRMediaQuery.Media lessThan="md">
+            {/* This is not visible through css when in desktop breakpoint */}
+            {React.isValidElement(languageSelectorElement) && languageSelectorElement
               ? React.cloneElement(languageSelectorElement as ReactElement<LanguageSelectorProps>, {
                   isHidden: isSearchExpanded,
                 })
-              : undefined
-          }
+              : undefined}
+          </SSRMediaQuery.Media>
         </div>
       </nav>
     );

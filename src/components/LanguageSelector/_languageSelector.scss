@@ -13,35 +13,18 @@
     pointer-events: none;
   }
 
-  @include isHeaderDesktop {
-    &.#{$px}-accordion {
-      display: none;
-    }
-  }
-
   &.#{$px}-dropdown {
-    display: none;
-    padding: $padding-lg 0 $padding-xxl;
+    display: flex;
+    padding: 0;
 
     button {
       border: none;
       box-shadow: unset;
-      justify-content: space-between;
+      justify-content: center;
       outline: none;
-      padding: 0.5rem 0.65rem;
-      text-transform: unset;
-      width: 100%;
-    }
-
-    @include isHeaderDesktop {
-      display: flex;
       padding: 0;
-
-      button {
-        justify-content: center;
-        padding: 0;
-        width: fit-content;
-      }
+      text-transform: unset;
+      width: fit-content;
     }
   }
 }
