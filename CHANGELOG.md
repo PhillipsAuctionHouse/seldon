@@ -1,3 +1,10 @@
+# [1.54.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.53.1...v1.54.0) (2024-09-13)
+
+
+### Features
+
+* **seldonprovider:** L3-3725 add new seldon provider component that provides media query context ([#307](https://github.com/PhillipsAuctionHouse/seldon/issues/307)) ([c5334ef](https://github.com/PhillipsAuctionHouse/seldon/commit/c5334ef79ee5f47a7588a484c7ea70f56de60fd2))
+
 ## [1.53.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.53.0...v1.53.1) (2024-09-12)
 
 
