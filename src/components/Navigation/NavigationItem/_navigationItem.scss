@@ -65,11 +65,37 @@
   flex-direction: column;
   gap: $spacing-sm;
 
+  &--left,
+  &--right {
+    &__title {
+      margin-bottom: 0 !important;
+
+      @include isHeaderMobile {
+        border-bottom: 1px solid $light-gray;
+        padding-bottom: 0.625rem;
+      }
+    }
+  }
+
+  &--right {
+    @include isHeaderMobile {
+      margin-top: $spacing-md;
+    }
+  }
+
   &--left {
     margin-right: 1rem;
 
-    & li:last-child a span {
-      text-transform: uppercase;
+    & li:last-child {
+      a {
+        border-bottom: 0;
+        padding: $spacing-sm 0;
+        text-decoration: underline;
+
+        span {
+          text-transform: uppercase;
+        }
+      }
     }
 
     @include isHeaderMobile {

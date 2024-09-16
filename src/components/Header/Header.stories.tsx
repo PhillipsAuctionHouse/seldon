@@ -175,12 +175,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
                   navType={LinkVariants.snwFlyoutLink}
                   label="Disruptors: Evening Sale of Modern & Contemporary Art, Design and Watches"
                 />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-left"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="View All"
-                />
+                <NavigationItem href="#" navGroup="nav-link-left" navType={LinkVariants.link} label="View All" />
                 <NavigationItem
                   href="#"
                   navGroup="nav-link-right"
@@ -248,12 +243,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
                   navType={LinkVariants.snwFlyoutLink}
                   label="Private Sales"
                 />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-left"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="View All"
-                />
+                <NavigationItem href="#" navGroup="nav-link-left" navType={LinkVariants.link} label="View All" />
               </NavigationList>
             </NavigationItemTrigger>
             <NavigationItem href="#" id="exhibitions" label="Exhibitions" />
