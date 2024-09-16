@@ -102,7 +102,7 @@ export default meta;
 export const Playground = ({ authState, ...props }: HeaderProps & { authState?: AuthState }) => {
   const [currentLanguage, setCurrentLanguage] = useState(SupportedLanguages.en);
   return (
-    <div style={{ maxHeight: '400px' }}>
+    <div style={{ minHeight: '400px' }}>
       <Header {...props} logo={<PhillipsLogo />}>
         <Navigation id={`${px}-main-nav`}>
           <NavigationList id={`${px}-main-nav-list`}>
