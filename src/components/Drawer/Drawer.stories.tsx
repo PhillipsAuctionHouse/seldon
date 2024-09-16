@@ -2,7 +2,7 @@ import { Meta } from '@storybook/react';
 import Drawer, { DrawerProps } from './Drawer';
 import Button from '../Button/Button';
 import { Playground as PlaygroundSplitPanel } from '../SplitPanel/SplitPanel.stories';
-import Subscribe from '../Subscribe/Subscribe';
+import Subscribe from '../../patterns/Subscribe/Subscribe';
 import { useArgs } from '@storybook/preview-api';
 import { useRef } from 'react';
 

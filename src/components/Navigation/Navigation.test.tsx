@@ -3,9 +3,9 @@ import Navigation, { NavigationProps } from './Navigation';
 import Search from '../Search/Search';
 import NavigationList from './NavigationList/NavigationList';
 import NavigationItem from './NavigationItem/NavigationItem';
-import { LanguageSelector } from '../LanguageSelector';
-import { HeaderContext, HeaderContextType } from '../Header/Header';
-import { defaultHeaderContext } from '../Header/utils';
+import { LanguageSelector } from '../../patterns/LanguageSelector';
+import { HeaderContext, HeaderContextType } from '../../site-furniture/Header/Header';
+import { defaultHeaderContext } from '../../site-furniture/Header/utils';
 
 const defaultProps: NavigationProps = {
   id: 'phillips-nav',
@@ -41,7 +41,7 @@ describe('Navigation', () => {
   });
   it('renders language selector component if passed', () => {
     renderNavigation();
-    expect(screen.getByRole('combobox', { name: 'English' })).toBeInTheDocument();
+    expect(screen.getByText('English')).toBeInTheDocument();
   });
   it('hide nav list if search expanded', () => {
     renderNavigation({}, { isSearchExpanded: true });

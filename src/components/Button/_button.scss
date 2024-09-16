@@ -19,7 +19,7 @@
     font-weight 0.25s;
 
   &:hover,
-  &:focus {
+  &:focus-visible {
     background-color: $primary-black;
 
     svg {
@@ -41,7 +41,7 @@
     color: $text-color;
 
     &:hover,
-    &:focus {
+    &:focus-visible {
       color: $pure-white;
 
       svg {
