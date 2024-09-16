@@ -36,7 +36,7 @@
     }
   }
 
-  &:focus {
+  &:focus-visible {
     outline: 0.5px solid $pure-white;
     outline-offset: -4.5px;
 
@@ -111,7 +111,7 @@
       }
     }
 
-    &:focus {
+    &:focus-visible {
       background-color: $pure-white;
       outline-color: $soft-black;
     }
@@ -157,7 +157,7 @@
       }
     }
 
-    &:focus {
+    &:focus-visible {
       background-color: $pure-white;
       border-radius: 0;
       outline-color: $soft-black;

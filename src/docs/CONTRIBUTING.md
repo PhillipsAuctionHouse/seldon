@@ -82,8 +82,10 @@ We would like our components to be created with accessibility support. Please ch
 We have a helper script to start new component development in a consistent way. To use it, run:
 
 ```sh
-npm run create-component <componentName>
+npm run create-component <componentName> <componentType>
 ```
+
+Where `<componentName>` is the name of the component you want to create and `<componentType>` is either `component` or `pattern`. This will create a new directory in `src/<componentType>s` with the necessary files and boilerplate code.
 
 ## Styling new components
 

@@ -1,0 +1,158 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-header {
+  align-items: center;
+  background-color: $white;
+  border-bottom: 1px solid $light-gray;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  &__toggle-btn {
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    height: $mobile-minimum-clickable-area;
+    justify-content: center;
+    padding: 0;
+    width: $mobile-minimum-clickable-area;
+
+    @include isHeaderDesktop {
+      display: none;
+    }
+
+    /* This is a pseudo icon shown within the button, so we can do fancy transitions */
+    span {
+      background-color: $dark-gray;
+      color: transparent;
+      display: block;
+      height: 2px;
+      position: relative;
+      transition: background-color 0.25s ease 0.25s;
+      width: 1.5rem;
+
+      &::before,
+      &::after {
+        background-color: $dark-gray;
+        content: '';
+        display: block;
+        height: 2px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        transition: transform 0.25s ease;
+        width: 1.5rem;
+      }
+
+      &::before {
+        transform: translateY(-8px);
+      }
+
+      &::after {
+        transform: translateY(8px);
+      }
+    }
+
+    &.#{$px}-header__toggle-btn--open span {
+      background: transparent;
+      transition: background-color 0.25s ease;
+
+      &::before {
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  &__logo {
+    align-self: center;
+    padding-top: 6px; // small adjustment to center the logo
+
+    svg {
+      height: 24px;
+      width: 100%;
+    }
+
+    @include isHeaderDesktop {
+      padding-top: 0;
+
+      svg {
+        height: 28px;
+        width: 100%;
+      }
+    }
+  }
+
+  &__top-row {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: $padding-sm $spacing-md;
+    width: 100%;
+  }
+
+  &__nav {
+    background-color: $pure-white;
+    height: calc(100vh - $header-height);
+    overflow-y: auto;
+    position: relative;
+    z-index: 10;
+
+    &--closed {
+      display: none;
+    }
+    .#{$px}-nav__list-container {
+      display: flex;
+      padding: 0 $spacing-md;
+
+      @include isHeaderDesktop {
+        padding-right: $search-size;
+      }
+    }
+
+    @include isHeaderDesktop {
+      display: flex;
+      height: unset;
+      justify-content: center;
+      overflow: visible; // this is needed for the search results
+      position: relative;
+      top: 0;
+      width: 100%;
+    }
+
+    .#{$px}-nav__item {
+      .#{$px}-link--snwHeaderLink {
+        align-content: center;
+        height: 100%;
+      }
+    }
+
+    .#{$px}-nav__item {
+      .#{$px}-link--snwHeaderLink {
+        align-content: center;
+        height: 100%;
+      }
+    }
+  }
+
+  &__overlay {
+    display: none;
+
+    &--active {
+      background: rgba(0, 0, 0, 60%);
+      display: block;
+      height: 100vh;
+      left: 0;
+      position: absolute;
+      top: $header-height;
+      width: 100%;
+    }
+  }
+}

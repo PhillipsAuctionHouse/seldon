@@ -7,7 +7,7 @@ import Link from '../Link/Link';
 import SearchResults, { type SearchResultsProps } from './SearchResults/SearchResults';
 import { Text, TextVariants } from '../Text';
 import { useOnClickOutside } from 'usehooks-ts';
-import { HeaderContext } from '../Header/Header';
+import { HeaderContext } from '../../site-furniture/Header/Header';
 import { SearchButton } from './SearchButton';
 import { CSSTransition } from 'react-transition-group';
 

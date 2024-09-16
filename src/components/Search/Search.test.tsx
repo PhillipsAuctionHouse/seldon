@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import Search from './Search';
 import { runCommonTests } from '../../utils/testUtils';
 import { px } from '../../utils';
-import Header from '../Header/Header';
+import Header from '../../site-furniture/Header/Header';
 
 const renderWithContext = (component: ReactNode) => {
   return render(<Header>{component}</Header>);
