@@ -73,6 +73,7 @@
 
   &__logo {
     align-self: center;
+    padding-top: 6px; // small adjustment to center the logo
 
     svg {
       height: 24px;
@@ -80,6 +81,8 @@
     }
 
     @include isHeaderDesktop {
+      padding-top: 0;
+
       svg {
         height: 28px;
         width: 100%;
@@ -93,11 +96,6 @@
     justify-content: space-between;
     padding: $padding-sm $spacing-md;
     width: 100%;
-
-    /** There are actually two language selectors in the DOM, show this one in desktop */
-    .#{$px}-language-selector {
-      display: none;
-    }
   }
 
   &__nav {
@@ -127,10 +125,6 @@
       position: relative;
       top: 0;
       width: 100%;
-
-      div.#{$px}-language-selector {
-        display: none; // hide this one on mobile
-      }
     }
 
     .#{$px}-nav__item {

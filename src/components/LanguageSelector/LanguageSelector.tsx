@@ -8,6 +8,7 @@ import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
 import { LinkVariants } from '../Link';
 import { Text, TextVariants } from '../Text';
 import NavigationList from '../Navigation/NavigationList/NavigationList';
+import { SSRMediaQuery } from '../../providers/utils';
 
 interface DropdownSelectorProps extends ComponentProps<'div'> {
   value: string;
@@ -110,8 +111,12 @@ const LanguageSelector = forwardRef<HTMLElement, LanguageSelectorProps>(
 
     return (
       <>
-        <Dropdown {...selectorProps} ref={ref as ForwardedRef<HTMLButtonElement>} />
-        <MobileLanguageSelector {...selectorProps} ref={ref as ForwardedRef<HTMLDivElement>} />
+        <SSRMediaQuery.Media greaterThanOrEqual="md">
+          <Dropdown {...selectorProps} ref={ref as ForwardedRef<HTMLButtonElement>} />
+        </SSRMediaQuery.Media>
+        <SSRMediaQuery.Media lessThan="md">
+          <MobileLanguageSelector {...selectorProps} ref={ref as ForwardedRef<HTMLDivElement>} />
+        </SSRMediaQuery.Media>
       </>
     );
   },
