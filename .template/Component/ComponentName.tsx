@@ -7,7 +7,7 @@ export interface ComponentNameProps extends ComponentProps<'div'> {}
 /**
  * ## Overview
  *
- * Overview of this component
+ * Overview of this widget
  *
  * [Figma Link](Add Figma URL here)
  *
