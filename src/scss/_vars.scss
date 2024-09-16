@@ -348,7 +348,7 @@ $margin-xxl: var(--spacing-xxl);
 ///////////////////////
 /* stylelint-disable-next-line no-duplicate-selectors */
 :root {
-  --header-height: 7px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
+  --header-height: 73px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
   --search-size: 2.625rem; // This should be calculated from the scaling text and scaling spacing tokens instead of hardcoding in case they change
 
   @media (min-width: $breakpoint-md) {
