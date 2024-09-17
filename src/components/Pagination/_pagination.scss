@@ -3,6 +3,7 @@
 .#{$px}-pagination {
   display: flex;
   flex-direction: row;
+  gap: $spacing-md;
 }
 
 .#{$px} {
@@ -47,7 +48,6 @@
 
 .#{$px}__pagination-button {
   background: none;
-  flex: 1;
   flex-direction: row;
   padding: 0;
 
