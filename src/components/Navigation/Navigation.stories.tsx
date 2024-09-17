@@ -40,14 +40,14 @@ export const Playground = () => {
               <NavigationItem
                 badge="New York"
                 href="#"
-                navGroup="nav-link-left"
+                navGroup="nav-link-start"
                 navType={LinkVariants.snwFlyoutLink}
                 label="Editions & Works on Paper"
               />
               <NavigationItem
                 badge="London"
                 href="#"
-                navGroup="nav-link-left"
+                navGroup="nav-link-start"
                 navType={LinkVariants.snwFlyoutLink}
                 label="Casa Fornaroli"
               />

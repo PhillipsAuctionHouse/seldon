@@ -20,7 +20,7 @@ export interface NavigationItemProps extends ComponentProps<'li'> {
   /**
    * Optional group for navigation items
    */
-  navGroup?: 'nav-link-left' | 'nav-link-right';
+  navGroup?: 'nav-link-start' | 'nav-link-end';
   /**
    * Optional type for navigation item
    */
