@@ -1,3 +1,10 @@
+# [1.57.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.56.0...v1.57.0) (2024-09-17)
+
+
+### Features
+
+* **button:** L3-3586 Update Button to match new variants from spec ([#310](https://github.com/PhillipsAuctionHouse/seldon/issues/310)) ([e946c7d](https://github.com/PhillipsAuctionHouse/seldon/commit/e946c7d6f328781d5fb82a4407cb49fff28b4091))
+
 # [1.56.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.55.1...v1.56.0) (2024-09-17)
 
 
