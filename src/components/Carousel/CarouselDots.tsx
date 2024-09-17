@@ -69,6 +69,7 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(({ className,
       ref={ref}
       role="group"
       aria-roledescription="pagination"
+      aria-label="pagination"
       className={classNames(`${baseClassName}-pagination`, className)}
       data-orientation={orientation}
       {...props}
@@ -81,7 +82,6 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(({ className,
           overflow: 'hidden',
           justifyContent: 'center',
           width: '100%',
-          //   transition: 'transform 0.2s ease',
           transform: `translateX(${selectedIndex * (6 + 6)}px)`,
         }}
       >
@@ -104,6 +104,7 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(({ className,
             return (
               <button
                 key={actualIndex}
+                role="button"
                 onClick={() => onDotButtonClick(actualIndex)}
                 className={classNames(`${baseClassName}-pagination-dot-container`)}
               >
