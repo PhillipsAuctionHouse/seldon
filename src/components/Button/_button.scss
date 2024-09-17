@@ -5,52 +5,123 @@
 
   align-items: center;
   background-color: $pure-black;
-  border: 0;
-  border-radius: 3em;
-  color: white;
+  border: 1px solid transparent;
+  border-radius: 100px;
+  color: $pure-white;
   cursor: pointer;
   display: inline-flex;
+  font-weight: 600;
+  gap: $margin-xsm;
   justify-content: center;
-  min-width: 3rem;
-  padding: 0.5em $spacing-md;
+  padding: 0 $padding-md;
+  position: relative;
   transition:
     color 0.25s,
-    background-color 0.25s,
-    font-weight 0.25s;
+    background-color 0.25s;
 
-  &:hover,
-  &:focus-visible {
-    background-color: $primary-black;
+  svg {
+    fill: $pure-white;
+
+    path {
+      fill: $pure-white;
+      transition: 0.25s;
+    }
+  }
+
+  &:hover {
+    background-color: $button-hover;
 
     svg {
       fill: $pure-white;
     }
   }
 
-  svg {
-    fill: $pure-white;
-    margin-inline-end: 0.5rem;
-    transition: fill 0.25s;
-    width: 1em;
+  &:focus-visible {
+    outline: 0.5px solid $pure-white;
+    outline-offset: -4.5px;
+
+    svg {
+      fill: $pure-white;
+    }
+  }
+
+  &--sm {
+    font-size: 0.75rem;
+    height: 44px;
+
+    svg {
+      height: 1rem;
+      width: 1rem;
+    }
+  }
+
+  &--md,
+  &--lg {
+    font-size: 1rem;
+    height: 48px;
+
+    svg {
+      height: 1.25rem;
+      width: 1.25rem;
+    }
   }
 
   &--secondary,
   &--ghost {
-    background-color: transparent;
-    border: 1px solid;
-    color: $text-color;
+    background-color: $pure-white;
+    border: 1px solid $pure-black;
+    color: $pure-black;
+    mix-blend-mode: difference;
+    position: relative;
+    transition: border 0.3s ease-out;
 
-    &:hover,
-    &:focus-visible {
+    &::before {
+      border-radius: 100px;
+      box-sizing: border-box;
+      content: '';
+      display: inline-block;
+      height: 0;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transition: all 0.25s ease;
+      width: 0;
+      z-index: -2;
+    }
+
+    &:hover {
+      background-color: transparent;
+      border: 1px solid transparent;
       color: $pure-white;
 
       svg {
         fill: $pure-white;
+
+        path {
+          fill: $pure-white;
+        }
+      }
+
+      &::before {
+        background: $button-hover;
+        height: 100%;
+        left: 0;
+        top: 0;
+        width: 100%;
       }
     }
 
+    &:focus-visible {
+      background-color: $pure-white;
+      outline-color: $soft-black;
+    }
+
     svg {
-      fill: $text-color;
+      fill: $pure-black;
+
+      path {
+        fill: $pure-black;
+      }
     }
   }
 
@@ -58,33 +129,67 @@
     border-color: transparent;
   }
 
-  &.#{$px}-button--icon-last svg {
-    margin-inline-end: unset;
-    margin-inline-start: 0.5rem;
-  }
+  &--tertiary {
+    background-color: transparent;
+    border: 0;
+    color: $pure-black;
+    height: 28px;
+    padding: 0;
 
-  &--sm {
-    font-size: 0.75rem;
-  }
+    svg {
+      fill: $pure-black;
 
-  &--md {
-    font-size: 1rem;
-  }
+      path {
+        fill: $pure-black;
+      }
+    }
 
-  &--lg {
-    font-size: 1.05rem;
-    padding: 0.75em 1.75em;
+    &:hover {
+      background-color: transparent;
+      color: $button-hover;
+
+      svg {
+        fill: $button-hover;
+
+        path {
+          fill: $button-hover;
+        }
+      }
+    }
+
+    &:focus-visible {
+      background-color: $pure-white;
+      border-radius: 0;
+      outline-color: $soft-black;
+      outline-offset: 4.5px;
+      padding: 0 4px;
+    }
   }
 
   &:disabled {
     background-color: $white;
-    border: 1px solid $medium-gray;
-    color: $medium-gray;
+    border: 1px solid $light-gray;
+    color: $light-gray;
     cursor: default;
 
-    svg {
-      fill: $medium-gray;
+    &:hover {
+      &::before {
+        all: unset;
+      }
     }
+
+    svg {
+      fill: $light-gray;
+
+      path {
+        fill: $light-gray;
+      }
+    }
+  }
+
+  &--ghost:disabled,
+  &--tertiary:disabled {
+    border-color: transparent;
   }
 
   * {

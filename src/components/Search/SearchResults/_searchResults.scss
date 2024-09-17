@@ -11,6 +11,10 @@
   top: $search-size;
   width: 100%;
 
+  @include isHeaderMobile {
+    padding: $spacing-sm 0;
+  }
+
   &-container {
     background: $white;
     display: flex;

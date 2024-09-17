@@ -65,8 +65,40 @@
   flex-direction: column;
   gap: $spacing-sm;
 
-  &--large-cta {
+  .#{$px}-text {
+    margin-bottom: 0;
+  }
+
+  &--start,
+  &--end {
+    &__title {
+      @include isHeaderMobile {
+        border-bottom: 1px solid $light-gray;
+        padding-bottom: 0.625rem;
+      }
+    }
+  }
+
+  &--end {
+    @include isHeaderMobile {
+      margin-top: $spacing-md;
+    }
+  }
+
+  &--start {
     margin-right: 1rem;
+
+    & li:last-child {
+      a {
+        border-bottom: 0;
+        padding: $spacing-sm 0;
+        text-decoration: underline;
+
+        span {
+          text-transform: uppercase;
+        }
+      }
+    }
 
     @include isHeaderMobile {
       margin-right: 0;

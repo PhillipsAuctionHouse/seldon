@@ -17,7 +17,7 @@
     cursor: pointer;
     display: flex;
     height: $mobile-minimum-clickable-area;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 0;
     width: $mobile-minimum-clickable-area;
 
@@ -27,7 +27,7 @@
 
     /* This is a pseudo icon shown within the button, so we can do fancy transitions */
     span {
-      background-color: $dark-gray;
+      background-color: $pure-black;
       color: transparent;
       display: block;
       height: 2px;
@@ -37,7 +37,7 @@
 
       &::before,
       &::after {
-        background-color: $dark-gray;
+        background-color: $pure-black;
         content: '';
         display: block;
         height: 2px;
@@ -112,8 +112,18 @@
       display: flex;
       padding: 0 $spacing-md;
 
+      @include isHeaderMobile {
+        flex-direction: column;
+        height: calc(100vh - var(--header-height) - 1px);
+        justify-content: flex-start;
+      }
+
       @include isHeaderDesktop {
         padding-right: $search-size;
+      }
+
+      @media (min-width: $breakpoint-md) and (max-width: calc($breakpoint-md + 40px)) {
+        padding: 0 2rem 0 0;
       }
     }
 

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { px } from '../../../utils';
 import classNames from 'classnames';
 import { NavigationItemProps } from '../NavigationItem/NavigationItem';
+import { Text, TextVariants } from '../../Text';
 
 export interface NavigationListProps extends React.ComponentProps<'ul'> {
   /**
@@ -12,17 +13,25 @@ export interface NavigationListProps extends React.ComponentProps<'ul'> {
    * Is the nav list offscreen?
    */
   isOffScreen?: boolean;
+  /**
+   * Optional left section heading
+   */
+  leftSectionHeading?: string;
+  /**
+   * Optional right section heading
+   */
+  rightSectionHeading?: string;
 }
 
 const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
-  ({ id, children, className, isOffScreen }, ref) => {
-    const largeCtaItems = React.Children.toArray(children).filter((child) => {
-      if (child && (child as React.ReactElement<NavigationItemProps>).props.navGroup === 'nav-link-lg') {
+  ({ id, children, className, isOffScreen, leftSectionHeading, rightSectionHeading }, ref) => {
+    const leftSectionItems = React.Children.toArray(children).filter((child) => {
+      if (child && (child as React.ReactElement<NavigationItemProps>).props.navGroup === 'nav-link-start') {
         return child;
       }
     });
-    const smallCtaItems = React.Children.toArray(children).filter((child) => {
-      if (child && (child as React.ReactElement<NavigationItemProps>).props.navGroup === 'nav-link-sm') {
+    const rightSectionItems = React.Children.toArray(children).filter((child) => {
+      if (child && (child as React.ReactElement<NavigationItemProps>).props.navGroup === 'nav-link-end') {
         return child;
       }
     });
@@ -35,17 +44,27 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
         className={classNames(className, `${px}-nav__list`, { [`${px}-nav__list--offscreen`]: isOffScreen })}
         ref={ref}
       >
-        {largeCtaItems.length > 0 ? (
-          <div className={classNames(`${px}-nav__list__section`, `${px}-nav__list__section--large-cta`)}>
-            {largeCtaItems}
+        {leftSectionItems.length > 0 ? (
+          <div className={classNames(`${px}-nav__list__section`, `${px}-nav__list__section--start`)}>
+            {leftSectionHeading ? (
+              <Text variant={TextVariants.heading4} className={`${px}-nav__list__section--start__title`}>
+                {leftSectionHeading}
+              </Text>
+            ) : null}
+            {leftSectionItems}
           </div>
         ) : null}
-        {smallCtaItems.length > 0 ? (
-          <div className={classNames(`${px}-nav__list__section`, `${px}-nav__list__section--small-cta`)}>
-            {smallCtaItems}
+        {rightSectionItems.length > 0 ? (
+          <div className={classNames(`${px}-nav__list__section`, `${px}-nav__list__section--end`)}>
+            {rightSectionHeading ? (
+              <Text variant={TextVariants.heading4} className={`${px}-nav__list__section--end__title`}>
+                {rightSectionHeading}
+              </Text>
+            ) : null}
+            {rightSectionItems}
           </div>
         ) : null}
-        {!largeCtaItems.length && !smallCtaItems.length ? children : null}
+        {!leftSectionItems.length && !rightSectionItems.length ? children : null}
       </ul>
     );
   },

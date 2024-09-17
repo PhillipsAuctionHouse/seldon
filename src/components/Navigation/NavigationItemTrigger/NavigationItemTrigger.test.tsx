@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import NavigationItemTrigger from './NavigationItemTrigger';
 
 describe('NavigationItemTrigger', () => {
@@ -10,8 +10,9 @@ describe('NavigationItemTrigger', () => {
   });
 
   it('should render the label correctly', () => {
-    const { getByText } = render(<NavigationItemTrigger label={mockLabel} />);
+    render(<NavigationItemTrigger data-testid={`nav-trigger`} label={mockLabel} />);
 
-    expect(getByText(mockLabel)).toBeInTheDocument();
+    expect(screen.queryByTestId(/nav-trigger/)).toBeInTheDocument();
+    expect(screen.queryByTestId(/nav-trigger/)?.textContent).toEqual(mockLabel);
   });
 });

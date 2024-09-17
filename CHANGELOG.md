@@ -1,3 +1,27 @@
+# [1.57.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.56.0...v1.57.0) (2024-09-17)
+
+
+### Features
+
+* **button:** L3-3586 Update Button to match new variants from spec ([#310](https://github.com/PhillipsAuctionHouse/seldon/issues/310)) ([e946c7d](https://github.com/PhillipsAuctionHouse/seldon/commit/e946c7d6f328781d5fb82a4407cb49fff28b4091))
+
+# [1.56.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.55.1...v1.56.0) (2024-09-17)
+
+
+### Features
+
+* **header-submenus:** L3-2818 Header UX Submenu Updates ([#309](https://github.com/PhillipsAuctionHouse/seldon/issues/309)) ([6e0b57d](https://github.com/PhillipsAuctionHouse/seldon/commit/6e0b57de80f9e3271de80fa2e4e82917e7d649d4))
+
+## [1.55.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.55.0...v1.55.1) (2024-09-17)
+
+
+### Bug Fixes
+
+* **deps:** bump debug from 4.1.1 to 4.3.6 ([#316](https://github.com/PhillipsAuctionHouse/seldon/issues/316)) ([1ddb9c4](https://github.com/PhillipsAuctionHouse/seldon/commit/1ddb9c48c45d7a2d45e0f2b78f999437883d8779))
+* **deps:** bump minimatch from 3.0.4 to 3.1.2 ([#314](https://github.com/PhillipsAuctionHouse/seldon/issues/314)) ([94241c2](https://github.com/PhillipsAuctionHouse/seldon/commit/94241c285610639b9d52f8a15f0eddcdf1916185))
+* **deps:** bump node-fetch from 2.6.5 to 2.6.11 ([#315](https://github.com/PhillipsAuctionHouse/seldon/issues/315)) ([e7203d8](https://github.com/PhillipsAuctionHouse/seldon/commit/e7203d8077f1bcb27399c64751d9196d56419c90))
+* **pagination:** L3-2774 Add pagination to seldon export ([#319](https://github.com/PhillipsAuctionHouse/seldon/issues/319)) ([cab3257](https://github.com/PhillipsAuctionHouse/seldon/commit/cab3257eea1913e6c44d8cde15f25eb00d12b552))
+
 # [1.55.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.54.2...v1.55.0) (2024-09-17)
 
 

@@ -15,8 +15,13 @@
     top: 0;
   }
 
+  @include isHeaderMobile {
+    left: calc(100% - $search-size - $spacing-md);
+    right: $spacing-md;
+  }
+
   &--active {
-    left: 0;
+    left: $spacing-md;
     transition: left 0.25s ease-in 0.2s;
   }
 
@@ -85,6 +90,14 @@
         margin: 0;
         padding: $spacing-sm 0 $spacing-sm $spacing-sm;
 
+        @include isHeaderMobile {
+          height: calc(var(--spacing-md) + var(--search-size));
+          line-height: calc(var(--spacing-md) + var(--search-size));
+          padding: $spacing-md 0;
+          position: relative;
+          top: calc($spacing-md * -1);
+        }
+
         @include media($size-xl) {
           height: 2.875rem;
         }
@@ -102,34 +115,50 @@
 }
 
 .#{$px}-search__container {
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  padding: $padding-md 0;
-  pointer-events: all;
-
-  @include isHeaderDesktop {
-    cursor: default;
-    padding: 0;
-  }
-
   @include isHeaderMobile {
+    border-bottom: 1px solid $light-gray;
+    left: 50%;
+    margin-left: -50vw;
     position: relative;
+    width: 100vw;
   }
 
-  &__label {
-    display: none;
-    margin: 0;
+  &__inner {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 $padding-md;
+    pointer-events: all;
+
+    @include isHeaderDesktop {
+      cursor: default;
+      padding: 0;
+    }
 
     @include isHeaderMobile {
       align-items: center;
-      cursor: pointer;
-      display: flex;
-      flex-wrap: wrap;
-      height: $search-size;
-      margin: 0;
-      padding: 0 $spacing-sm;
-      pointer-events: all;
+      height: calc(var(--spacing-md) + var(--search-size));
+      position: relative;
+    }
+
+    .#{$px}-text {
+      margin-bottom: 0;
+      padding-left: 0;
+    }
+
+    &__label {
+      display: none;
+
+      @include isHeaderMobile {
+        align-items: center;
+        cursor: pointer;
+        display: flex;
+        flex-wrap: wrap;
+        height: $search-size;
+        margin: 0;
+        padding: 0 $spacing-sm;
+        pointer-events: all;
+      }
     }
   }
 }

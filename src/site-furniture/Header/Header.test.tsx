@@ -21,7 +21,7 @@ describe('Header', () => {
               <NavigationItem
                 badge="New York"
                 href="#"
-                navGroup="nav-link-lg"
+                navGroup="nav-link-start"
                 navType={LinkVariants.snwFlyoutLink}
                 label="Editions & Works on Paper"
               />
