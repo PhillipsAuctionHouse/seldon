@@ -1,6 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-pagination {
+  align-items: center;
   display: flex;
   flex-direction: row;
   gap: $spacing-md;
@@ -47,25 +48,12 @@
 }
 
 .#{$px}__pagination-button {
-  background: none;
-  flex-direction: row;
-  padding: 0;
-
   svg {
     width: 2rem;
 
     @include media($size-md, $type: 'max') {
       width: 1rem;
     }
-  }
-
-  &:hover,
-  &:focus {
-    background: none;
-  }
-
-  &:disabled {
-    border: none;
   }
 }
 
