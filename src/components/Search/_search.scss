@@ -141,6 +141,11 @@
       position: relative;
     }
 
+    .#{$px}-text {
+      margin-bottom: 0;
+      padding-left: 0;
+    }
+
     &__label {
       display: none;
 

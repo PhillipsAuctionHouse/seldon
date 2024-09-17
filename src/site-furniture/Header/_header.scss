@@ -112,8 +112,22 @@
       display: flex;
       padding: 0 $spacing-md;
 
+      > .fresnel-container {
+        margin-top: auto;
+      }
+
+      @include isHeaderMobile {
+        flex-direction: column;
+        height: calc(100vh - var(--header-height) - 1px);
+        justify-content: flex-start;
+      }
+
       @include isHeaderDesktop {
         padding-right: $search-size;
+      }
+
+      @media (min-width: $breakpoint-md) and (max-width: calc($breakpoint-md + 40px)) {
+        padding: 0 2rem 0 0;
       }
     }
 

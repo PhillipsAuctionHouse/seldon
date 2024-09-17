@@ -26,6 +26,10 @@
     .#{$px}-accordion-item {
       padding: $spacing-sm 0;
 
+      &-label {
+        opacity: 1;
+      }
+
       &__border-bottom {
         border-bottom: 1px solid $light-gray;
       }
