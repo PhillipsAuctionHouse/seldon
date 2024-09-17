@@ -2,12 +2,12 @@ import path from 'path';
 import glob from 'glob';
 
 export const transformScssAlias = (contents: Buffer, name: string) => {
-  const filePath = glob.sync(`**/${name}`, { cwd: path.resolve(__dirname, '../../src/components') })[0];
+  const filePath = glob.sync(`**/${name}`, { cwd: path.resolve(__dirname, '../../src') })[0];
+  console.log('transforming scss alias for file:', filePath);
   if (!filePath) {
     return contents;
   }
-  // console.log('updating scss alias for file:', name);
-  const countOfSubDirectories = filePath.split('/').length;
+  const countOfSubDirectories = filePath.split('/').length - 1;
 
   return contents.toString().replace(
     /#scss/g,

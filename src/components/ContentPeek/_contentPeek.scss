@@ -1,6 +1,6 @@
 @use '#scss/allPartials' as *;
 
-.#{$px}-read-more {
+.#{$px}-content-peek {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -10,7 +10,7 @@
     overflow: hidden;
 
     &[data-state='closed'] {
-      max-height: var(--read-more-max-height);
+      max-height: var(--content-peek-max-height);
     }
   }
 

@@ -13,6 +13,8 @@ import * as packageJson from './package.json';
 
 const plugins = [svgr(), react(), tsconfigPaths(), dts({ entryRoot: 'src' })];
 
+const scssFilesToTransform = ['src/**/*.scss', '!src/scss/**/*.scss', '!src/design/**', '!src/*.scss'];
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: plugins,
@@ -64,7 +66,7 @@ export default defineConfig({
           targets: [
             // Sass components
             {
-              src: ['src/components/**/*.scss', 'src/pages/**/*.scss'],
+              src: scssFilesToTransform,
               dest: ['dist/scss'],
               transform: transformScssAlias,
             },
@@ -82,8 +84,14 @@ export default defineConfig({
     setupFiles: ['./config/vitest/setupTest.ts'],
     restoreMocks: true,
     coverage: {
-      include: ['src/components/**/*.{ts,tsx}', 'src/utils/**/*.{ts,tsx}'],
-      exclude: ['**/*.test.{ts,tsx}', '**/*.stories.{ts,tsx}', '.template/**/*.{ts,tsx}', '**/index.ts'], // ignore barrel files
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: [
+        '**/*.test.{ts,tsx}',
+        '**/*.stories.{ts,tsx}',
+        '**/design/**/*.{ts,tsx}',
+        '.template/**/*.{ts,tsx}',
+        '**/index.ts',
+      ], // ignore barrel files
       reporter: ['text', 'json', 'html'],
       provider: 'v8',
       thresholds: {
