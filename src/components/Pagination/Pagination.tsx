@@ -49,7 +49,7 @@ export interface PaginationProps extends Omit<ComponentProps<'div'>, 'onChange'>
 /**
  * ## Overview
  *
- * A component for adding a Pagination component.
+ * A controlled component that supports selecting a new page and moving next and previous through pages. It expects consumers to keep track of the current value and update it by listening to the `onChange` event.
  *
  * [Figma Link](https://www.figma.com/design/hxqgsE26wM7hII0WaUaDfF/RW---TIMED-Lot-Details-(PDP)?node-id=1-2&node-type=CANVAS&m=dev)
  *
