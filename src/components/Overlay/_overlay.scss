@@ -1,0 +1,15 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-overlay {
+  display: none;
+
+  &--active {
+    background: rgba(0, 0, 0, 60%);
+    display: block;
+    height: 100vh;
+    left: 0;
+    position: absolute;
+    top: $header-height;
+    width: 100%;
+  }
+}

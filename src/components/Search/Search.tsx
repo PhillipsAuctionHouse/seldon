@@ -73,6 +73,11 @@ const Search = ({
   const searchContainerRef = React.useRef<HTMLDivElement>(null);
   const isSearchExpanded = headerContext.isSearchExpanded;
   const value = searchInputRef.current?.value;
+  const onInputChange = onSearch
+    ? (e: { target: { value: string } }) => {
+        onSearch(e.target.value);
+      }
+    : undefined;
 
   useOnClickOutside(searchContainerRef, () => showSearch(false));
 
@@ -157,13 +162,7 @@ const Search = ({
                   invalid={state === 'invalid'}
                   invalidText={invalidText}
                   onKeyDown={onKeyDown}
-                  onChange={
-                    onSearch
-                      ? (e: { target: { value: string } }) => {
-                          onSearch(e.target.value);
-                        }
-                      : undefined
-                  }
+                  onChange={onInputChange}
                   ref={searchInputRef}
                 />
               </CSSTransition>

@@ -27,7 +27,7 @@
 
     /* This is a pseudo icon shown within the button, so we can do fancy transitions */
     span {
-      background-color: $dark-gray;
+      background-color: $pure-black;
       color: transparent;
       display: block;
       height: 2px;
@@ -37,7 +37,7 @@
 
       &::before,
       &::after {
-        background-color: $dark-gray;
+        background-color: $pure-black;
         content: '';
         display: block;
         height: 2px;
