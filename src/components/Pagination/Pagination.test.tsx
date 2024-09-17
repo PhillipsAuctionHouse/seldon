@@ -73,4 +73,20 @@ describe('A Pagination', () => {
     await userEvent.selectOptions(screen.getByTestId('test-id-select-button'), ['Lot 3']);
     expect(result.current.mockState).toEqual('Lot 3');
   });
+  it('renders translated text', () => {
+    render(
+      <Pagination
+        {...reqProps}
+        value="Lot 2"
+        options={lotOptions}
+        onChange={vi.fn()}
+        previousLabel="Prev Lot"
+        nextLabel="Next Lot"
+        selectLabel="Select Lot"
+      />,
+    );
+    expect(screen.getByRole('button', { name: 'Prev Lot' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Next Lot' })).toBeInTheDocument();
+    expect(screen.getByRole('combobox', { name: 'Select Lot' })).toBeInTheDocument();
+  });
 });

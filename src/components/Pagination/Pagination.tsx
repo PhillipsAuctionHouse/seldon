@@ -45,9 +45,9 @@ export interface PaginationProps extends Omit<ComponentProps<'div'>, 'onChange'>
    */
   nextLabel?: string;
   /**
-   * Option select Lot label
+   * Option select aria-label
    */
-  selectLotLabel?: string;
+  selectLabel?: string;
 }
 
 /**
@@ -69,7 +69,7 @@ const Pagination = ({
   isDisabled,
   previousLabel = 'Previous',
   nextLabel = 'Next',
-  selectLotLabel = 'Select',
+  selectLabel = 'Select',
   ...props
 }: PaginationProps) => {
   const type = 'pagination';
@@ -94,7 +94,7 @@ const Pagination = ({
 
       <Select
         className={variant === 'inline' && `${px}--inline-pagination`}
-        aria-label={selectLotLabel}
+        aria-label={selectLabel}
         value={value}
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) => onChange(event?.currentTarget.value, event)}
         data-testid={`${id}-select-button`}
