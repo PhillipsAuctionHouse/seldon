@@ -1,3 +1,10 @@
+## [1.54.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.54.0...v1.54.1) (2024-09-17)
+
+
+### Bug Fixes
+
+* **build:** L3-3777 build process not handling new patterns and site-furniture ([#312](https://github.com/PhillipsAuctionHouse/seldon/issues/312)) ([5396d98](https://github.com/PhillipsAuctionHouse/seldon/commit/5396d98b67b5a792b6b708e67775b10a791a4a37))
+
 # [1.54.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.53.1...v1.54.0) (2024-09-13)
 
 
