@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect, forwardRef, useCallback } from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
-import Button from '../../components/Button/Button';
-import { ButtonVariants } from '../../components/Button/types';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../../components/Collapsible';
+import Button from '../Button/Button';
+import { ButtonVariants } from '../Button/types';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../Collapsible';
 import PlusIcon from '../../assets/plus.svg?react';
 import MinusIcon from '../../assets/minus.svg?react';
 
-export interface ReadMoreProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ContentPeekProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Unique id for component testing
    */
@@ -17,13 +17,13 @@ export interface ReadMoreProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   children?: React.ReactNode;
   /**
-   * Text for the "Read More" button
+   * Text for the "Content Expand" button
    */
-  readMoreText?: string;
+  contentExpandText?: string;
   /**
-   * Text for the "Read Less" button
+   * Text for the "Content Collapse" button
    */
-  readLessText?: string;
+  contentCollapseText?: string;
   /**
    * Maximum height of the content when collapsed
    */
@@ -33,16 +33,26 @@ export interface ReadMoreProps extends React.HTMLAttributes<HTMLDivElement> {
 /**
  * ## Overview
  *
- * A component for displaying expandable content with a "Read More" functionality.
+ * A component for displaying expandable content with a "ContentPeek" functionality allowing you to see the first part of the content and expand to see more.
  *
  * This component is a wrapper around the Collapsible and Button component and uses the CollapsibleTrigger and CollapsibleContent components to control the expand and collapse functionality.
  *
  * [Figma Link](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/EASEL-Compendium%3A-Tokens%2C-Components-%26-Patterns?node-id=7755-5572&t=JCYbkM8yQcdb51UQ-4)
  *
  */
-const ReadMore = forwardRef<HTMLDivElement, ReadMoreProps>(
-  ({ className, children, readMoreText = 'Read More', readLessText = 'Read Less', maxHeight = 480, ...props }, ref) => {
-    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ReadMore');
+const ContentPeek = forwardRef<HTMLDivElement, ContentPeekProps>(
+  (
+    {
+      className,
+      children,
+      contentExpandText = 'Read More',
+      contentCollapseText = 'Read Less',
+      maxHeight = 480,
+      ...props
+    },
+    ref,
+  ) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ContentPeek');
     const [isExpanded, setIsExpanded] = useState(false);
     const [hasOverflow, setHasOverflow] = useState(false);
     const contentRef = useRef<HTMLDivElement>(null);
@@ -65,7 +75,7 @@ const ReadMore = forwardRef<HTMLDivElement, ReadMoreProps>(
         className={classnames(baseClassName, className)}
         style={
           {
-            '--read-more-max-height': `${maxHeight}px`,
+            '--content-peek-max-height': `${maxHeight}px`,
           } as React.CSSProperties
         }
         ref={ref}
@@ -86,7 +96,7 @@ const ReadMore = forwardRef<HTMLDivElement, ReadMoreProps>(
               <CollapsibleTrigger asChild className={`${baseClassName}-overlay-trigger`}>
                 <Button variant={ButtonVariants.secondary}>
                   {isExpanded ? <MinusIcon /> : <PlusIcon />}
-                  {isExpanded ? readLessText : readMoreText}
+                  {isExpanded ? contentCollapseText : contentExpandText}
                 </Button>
               </CollapsibleTrigger>
             </div>
@@ -97,6 +107,6 @@ const ReadMore = forwardRef<HTMLDivElement, ReadMoreProps>(
   },
 );
 
-ReadMore.displayName = 'ReadMore';
+ContentPeek.displayName = 'ContentPeek';
 
-export default ReadMore;
+export default ContentPeek;
