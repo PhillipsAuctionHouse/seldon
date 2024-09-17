@@ -1,0 +1,74 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-pagination {
+  display: flex;
+  flex-direction: row;
+  gap: $spacing-md;
+}
+
+.#{$px} {
+  &--inline-pagination__wrapper {
+    select {
+      @include pText($body-size2);
+
+      appearance: none;
+      border: none;
+      font-weight: 600;
+      line-height: 2.5rem;
+      margin-bottom: 0;
+      outline: none;
+      text-align: center;
+      text-decoration: underline;
+      text-underline-offset: 10px;
+
+      &:disabled {
+        border: 1px solid $medium-gray;
+        margin: auto;
+        max-height: 3.5rem;
+        max-width: 5rem;
+        padding: 0.5rem;
+        text-decoration: none;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:focus {
+        outline: 1px solid $medium-gray;
+      }
+    }
+
+    select::-ms-expand {
+      border: none;
+      display: none;
+    }
+  }
+}
+
+.#{$px}__pagination-button {
+  background: none;
+  flex-direction: row;
+  padding: 0;
+
+  svg {
+    width: 2rem;
+
+    @include media($size-md, $type: 'max') {
+      width: 1rem;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    background: none;
+  }
+
+  &:disabled {
+    border: none;
+  }
+}
+
+.#{$px}-left-arrow {
+  transform: scaleX(-1);
+}
