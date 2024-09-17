@@ -1,0 +1,77 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-carousel {
+  position: relative;
+
+  &-content {
+    overflow: hidden;
+  }
+
+  &-content-inner {
+    display: flex;
+
+    // &[data-orientation="horizontal"] {
+    //     margin-left: -1rem; // Equivalent to -ml-4
+    // }
+  }
+
+  &-item {
+    flex: 0 0 100%;
+    min-width: 0;
+
+    // &[data-orientation="horizontal"] {
+    //     &:not(:first-child) {
+    //         padding-left: 1rem; // Equivalent to pl-4
+    //     }
+    // }
+    // &[data-orientation="vertical"] {
+    //     padding-top: 1rem; // Equivalent to pt-4
+    // }
+  }
+
+  &-pagination {
+    align-items: center;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 1rem;
+
+    button {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    &-dot-container {
+      align-items: center;
+      display: flex;
+      height: 12px;
+      justify-content: center;
+      padding: 0;
+      width: 12px;
+    }
+
+    &-dot {
+      border: 1px solid #adadad;
+      border-radius: 50%;
+      height: 100%;
+      transition: all 0.2s ease;
+      width: 100%;
+
+      &-selected {
+        background-color: #525050;
+        border-color: #525050;
+      }
+
+      // &-neighbor {
+      //     background-color: #D9D9D9;
+      //     border-color: #D9D9D9;
+      // }
+
+      &-edge {
+        height: 8px;
+        width: 8px;
+      }
+    }
+  }
+}
