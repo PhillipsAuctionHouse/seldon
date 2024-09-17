@@ -4,12 +4,15 @@
   flex-direction: column;
   justify-content: center;
 
+  @include isHeaderMobile {
+    display: none;
+  }
+
   & > button {
     color: $pure-black;
     display: flex;
     justify-content: flex-start;
     position: relative;
-    white-space: nowrap;
     width: 100%;
 
     @include isHeaderDesktop {
@@ -30,12 +33,14 @@
     }
 
     & > &__submenu {
+      border-top: 1px solid $light-gray;
       pointer-events: none;
       transform: translateY(-100%);
       transition: none; // remove this when implementing submenu transitions
     }
 
     &--hovered &__submenu {
+      align-items: flex-start;
       height: fit-content;
       left: 0;
       max-height: unset;
@@ -44,7 +49,7 @@
       pointer-events: all;
       position: fixed; // has to bust out of the box containing it on desktop
       right: 0;
-      top: calc($header-height);
+      top: $header-height;
       transform: translateY(0);
     }
   }
@@ -61,7 +66,6 @@
 
       li {
         display: inline;
-        white-space: nowrap;
 
         button,
         a,

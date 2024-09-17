@@ -15,7 +15,6 @@
   }
 
   @include isHeaderMobile {
-    justify-content: center;
     min-width: 44px; // matching the size of mobile menu icon to allow for equal spacing and centering of logo
   }
 
@@ -34,6 +33,10 @@
 
     &:hover {
       @include underline($padding-xsm);
+    }
+
+    @include isHeaderMobile {
+      padding-right: 0;
     }
 
     > p.#{$px}-text {

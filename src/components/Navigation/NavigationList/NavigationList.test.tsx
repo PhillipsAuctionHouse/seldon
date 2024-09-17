@@ -14,7 +14,7 @@ describe('NavigationList', () => {
           <NavigationItem
             badge="New York"
             href="#"
-            navGroup="nav-link-lg"
+            navGroup="nav-link-start"
             navType={LinkVariants.snwFlyoutLink}
             label="Editions & Works on Paper"
           />
@@ -27,7 +27,7 @@ describe('NavigationList', () => {
     render(renderNavList());
   });
 
-  it('renders children when no large or small CTA items are present', () => {
+  it('renders children when no left or right section items are present', () => {
     const { getByTestId } = render(
       <NavigationList {...reqProps}>
         <li>Item 1</li>
@@ -40,52 +40,52 @@ describe('NavigationList', () => {
     expect(getByTestId('test-id').children.length).toBe(3);
   });
 
-  it('renders large CTA items when present', () => {
+  it('renders left section items when present', () => {
     const { getByTestId } = render(
       <NavigationList {...reqProps}>
-        <NavigationItem href="#" navGroup="nav-link-lg">
+        <NavigationItem href="#" navGroup="nav-link-start">
           Large CTA 1
         </NavigationItem>
-        <NavigationItem href="#" navGroup="nav-link-lg">
+        <NavigationItem href="#" navGroup="nav-link-start">
           Large CTA 2
         </NavigationItem>
       </NavigationList>,
     );
 
     expect(getByTestId('test-id')).toBeInTheDocument();
-    expect(getByTestId('test-id').querySelectorAll('.nav-link-lg').length).toBe(2);
+    expect(getByTestId('test-id').querySelectorAll('.nav-link-start').length).toBe(2);
   });
 
-  it('renders small CTA items when present', () => {
+  it('renders right section items when present', () => {
     const { getByTestId } = render(
       <NavigationList {...reqProps}>
-        <NavigationItem href="#" navGroup="nav-link-sm">
+        <NavigationItem href="#" navGroup="nav-link-end">
           Small CTA 1
         </NavigationItem>
-        <NavigationItem href="#" navGroup="nav-link-sm">
+        <NavigationItem href="#" navGroup="nav-link-end">
           Small CTA 2
         </NavigationItem>
       </NavigationList>,
     );
 
     expect(getByTestId('test-id')).toBeInTheDocument();
-    expect(getByTestId('test-id').querySelectorAll('.nav-link-sm').length).toBe(2);
+    expect(getByTestId('test-id').querySelectorAll('.nav-link-end').length).toBe(2);
   });
 
-  it('renders both large and small CTA items when present', () => {
+  it('renders both left and right section items when present', () => {
     const { getByTestId } = render(
       <NavigationList {...reqProps}>
-        <NavigationItem href="#" navGroup="nav-link-lg">
+        <NavigationItem href="#" navGroup="nav-link-start">
           Large CTA 1
         </NavigationItem>
-        <NavigationItem href="#" navGroup="nav-link-sm">
+        <NavigationItem href="#" navGroup="nav-link-end">
           Small CTA 1
         </NavigationItem>
       </NavigationList>,
     );
 
     expect(getByTestId('test-id')).toBeInTheDocument();
-    expect(getByTestId('test-id').querySelectorAll('.nav-link-lg').length).toBe(1);
-    expect(getByTestId('test-id').querySelectorAll('.nav-link-sm').length).toBe(1);
+    expect(getByTestId('test-id').querySelectorAll('.nav-link-start').length).toBe(1);
+    expect(getByTestId('test-id').querySelectorAll('.nav-link-end').length).toBe(1);
   });
 });

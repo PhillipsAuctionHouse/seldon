@@ -13,12 +13,17 @@
     justify-content: center;
     padding: 0 $spacing-sm;
     position: relative;
+    width: 100%;
 
     > .#{$px}-nav__list {
-      border-top: 1px solid $light-gray;
+      padding-top: 0;
 
       @include isHeaderDesktop {
         border-top: unset;
+      }
+
+      .#{$px}-nav__item + .#{$px}-accordion {
+        border-top: 0;
       }
     }
 
