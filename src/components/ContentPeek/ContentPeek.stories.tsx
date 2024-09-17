@@ -1,15 +1,15 @@
 import { Meta } from '@storybook/react';
-import ReadMore, { ReadMoreProps } from './ReadMore';
+import ContentPeek, { ContentPeekProps } from './ContentPeek';
 
 const meta = {
-  title: 'Patterns/ReadMore',
-  component: ReadMore,
+  title: 'Components/ContentPeek',
+  component: ContentPeek,
   argTypes: {
-    readMoreText: { control: 'text' },
-    readLessText: { control: 'text' },
+    contentExpandText: { control: 'text' },
+    contentCollapseText: { control: 'text' },
     maxHeight: { control: 'number' },
   },
-} satisfies Meta<typeof ReadMore>;
+} satisfies Meta<typeof ContentPeek>;
 
 export default meta;
 
@@ -24,26 +24,26 @@ const sampleText = `
   Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 `;
 
-export const Playground = (args: ReadMoreProps) => (
+export const Playground = (args: ContentPeekProps) => (
   <>
-    <ReadMore {...args}>{sampleText}</ReadMore>
+    <ContentPeek {...args}>{sampleText}</ContentPeek>
   </>
 );
 
 Playground.args = {
-  readMoreText: 'Read More',
-  readLessText: 'Read Less',
+  contentExpandText: 'Read More',
+  contentCollapseText: 'Read Less',
   maxHeight: 150,
 };
 
-export const CustomText = (args: ReadMoreProps) => (
-  <ReadMore {...args}>
+export const CustomText = (args: ContentPeekProps) => (
+  <ContentPeek {...args}>
     <p>{sampleText}</p>
-  </ReadMore>
+  </ContentPeek>
 );
 
 CustomText.args = {
-  readMoreText: 'Show More',
-  readLessText: 'Show Less',
+  contentExpandText: 'Show More',
+  contentCollapseText: 'Show Less',
   maxHeight: 150,
 };

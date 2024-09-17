@@ -58,6 +58,6 @@ export { Breadcrumb, type BreadcrumbProps } from './components/Breadcrumb';
 export * from './components/Dropdown';
 export { default as Video, type VideoProps } from './components/Video/Video';
 export * from './patterns/LanguageSelector';
-export * from './patterns/ReadMore';
+export * from './components/ContentPeek';
 export * from './components/Collapsible';
 export * from './providers/SeldonProvider';

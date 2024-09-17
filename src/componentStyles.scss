@@ -33,11 +33,11 @@
 @use 'components/Dropdown/dropdown';
 @use 'components/Video/video';
 @use 'components/Pagination/pagination';
+@use 'components/ContentPeek/contentPeek';
 
 // Patterns
 @use 'patterns/HeroBanner/heroBanner';
 @use 'patterns/LanguageSelector/languageSelector';
-@use 'patterns/ReadMore/readMore';
 @use 'patterns/UserManagement/userManagement';
 @use 'patterns/ViewingsList/viewingsList';
 @use 'patterns/Subscribe/subscribe';
