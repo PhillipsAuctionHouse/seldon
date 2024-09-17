@@ -1,3 +1,10 @@
+## [1.54.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.54.1...v1.54.2) (2024-09-17)
+
+
+### Bug Fixes
+
+* **footer:** L3-3729 footer mobile accordion fix ([#311](https://github.com/PhillipsAuctionHouse/seldon/issues/311)) ([11dd40f](https://github.com/PhillipsAuctionHouse/seldon/commit/11dd40f5ca848fe77de6d0a835ab9dbbbc13e524))
+
 ## [1.54.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.54.0...v1.54.1) (2024-09-17)
 
 
