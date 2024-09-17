@@ -1,3 +1,10 @@
+# [1.55.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.54.2...v1.55.0) (2024-09-17)
+
+
+### Features
+
+* **Pagination:** L3-2774 Build lot pagination component in Seldon library ([#298](https://github.com/PhillipsAuctionHouse/seldon/issues/298)) ([e5ec761](https://github.com/PhillipsAuctionHouse/seldon/commit/e5ec7610b603c05841c417f66ecce3f72b6e6a66))
+
 ## [1.54.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.54.1...v1.54.2) (2024-09-17)
 
 
