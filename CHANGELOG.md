@@ -1,3 +1,10 @@
+# [1.56.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.55.1...v1.56.0) (2024-09-17)
+
+
+### Features
+
+* **header-submenus:** L3-2818 Header UX Submenu Updates ([#309](https://github.com/PhillipsAuctionHouse/seldon/issues/309)) ([6e0b57d](https://github.com/PhillipsAuctionHouse/seldon/commit/6e0b57de80f9e3271de80fa2e4e82917e7d649d4))
+
 ## [1.55.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.55.0...v1.55.1) (2024-09-17)
 
 
