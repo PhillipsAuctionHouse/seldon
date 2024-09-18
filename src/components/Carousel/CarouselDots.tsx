@@ -97,9 +97,6 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
             {visibleDots.map((_, index) => {
               const actualIndex = scrollSnaps.indexOf(visibleDots[index]);
               const isSelected = selectedIndex === actualIndex;
-              const isNeighbor = Math.abs(selectedIndex - actualIndex) === 1;
-              const isLocalEdge = index === 0 || index === visibleDots.length - 1;
-              const isEdge = !isSelected && !isNeighbor && isLocalEdge;
 
               return (
                 <button
@@ -111,8 +108,6 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
                   <span
                     className={classNames(`${baseClassName}-pagination-dot`, {
                       [`${baseClassName}-pagination-dot-selected`]: isSelected,
-                      [`${baseClassName}-pagination-dot-neighbor`]: isNeighbor,
-                      [`${baseClassName}-pagination-dot-edge`]: isEdge || (isLocalEdge && !isSelected),
                     })}
                   />
                 </button>
