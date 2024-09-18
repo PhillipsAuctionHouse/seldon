@@ -54,20 +54,4 @@ describe('Carousel', () => {
     expect(screen.getByText('Slide 3')).toBeInTheDocument();
     expect(screen.getByRole('group', { name: 'pagination' })).toBeInTheDocument();
   });
-
-  // it('renders carousel dots with correct number of dots', () => {
-  //   render(
-  //     <Carousel>
-  //       <CarouselContent>
-  //         <CarouselItem>Slide 1</CarouselItem>
-  //         <CarouselItem>Slide 2</CarouselItem>
-  //         <CarouselItem>Slide 3</CarouselItem>
-  //       </CarouselContent>
-  //       <CarouselDots />
-  //     </Carousel>,
-  //   );
-
-  //   const dots = screen.getAllByRole('button');
-  //   expect(dots).toHaveLength(3);
-  // });
 });

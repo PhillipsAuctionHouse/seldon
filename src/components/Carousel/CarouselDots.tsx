@@ -12,7 +12,7 @@ export interface CarouselDotsProps extends ComponentProps<'div'> {
   /**
    * The position of the dots.
    */
-  position?: 'on-content' | 'below-content';
+  position?: 'on-content' | 'inline';
 }
 
 /**
@@ -24,7 +24,7 @@ export interface CarouselDotsProps extends ComponentProps<'div'> {
  *
  */
 const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
-  ({ className, maxDots = 7, position = 'below-content', ...props }, ref) => {
+  ({ className, maxDots = 7, position = 'inline', ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
     const { api } = useCarousel();
     const [selectedIndex, setSelectedIndex] = useState(0);

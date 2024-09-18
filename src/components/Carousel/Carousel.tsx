@@ -13,13 +13,13 @@ export interface CarouselProps extends ComponentProps<'div'> {
    */
   loop?: boolean;
   /**
-   * The index to start the carousel at.
+   * The index to start the carousel at. Can be used if you want the carousel to be controlled.
    */
   startIndex?: number;
   /**
-   * Function to expose the embla carousel API.
+   * Function to call when the slide changes.
    */
-  setApi?: (api: CarouselApi) => void;
+  onSlideChange?: (index: number) => void;
 }
 
 type CarouselContextProps = {
@@ -49,7 +49,7 @@ export const CarouselContext = createContext<CarouselContextProps | null>(null);
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-carousel--overview)
  */
 const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
-  ({ loop = false, startIndex = 0, setApi, className, children, ...props }, ref) => {
+  ({ loop = false, startIndex = 0, onSlideChange, className, children, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
 
     const [carouselRef, api] = useEmblaCarousel({
@@ -90,12 +90,15 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     );
 
     useEffect(() => {
-      if (!api || !setApi) {
+      if (!api) {
         return;
       }
-
-      setApi(api);
-    }, [api, setApi]);
+      if (onSlideChange) {
+        api.on('select', (embla) => {
+          onSlideChange(embla.selectedScrollSnap());
+        });
+      }
+    }, [api, onSlideChange]);
 
     useEffect(() => {
       if (!api) {
