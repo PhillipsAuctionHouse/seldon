@@ -43,7 +43,7 @@ const Text = ({
       {...props}
     >
       {children}
-      <span className={classNames(`${baseClassName}--super-script`)}>{superScript}</span>
+      {superScript ? <span className={classNames(`${baseClassName}--super-script`)}>{superScript}</span> : null}
     </Component>
   );
 };

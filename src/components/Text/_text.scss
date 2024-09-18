@@ -27,7 +27,7 @@ h6.#{$px}-text {
 p.#{$px}-text {
   margin-bottom: $spacing-md;
 }
-span.#{$px}-text--super-script {
+.#{$px}-text--super-script {
   font-size: 60%;
   margin-left: $spacing-xsm;
   vertical-align: text-bottom;
