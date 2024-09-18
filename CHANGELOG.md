@@ -1,3 +1,10 @@
+## [1.57.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.57.0...v1.57.1) (2024-09-18)
+
+
+### Bug Fixes
+
+* **pagination:** L3-2774 use IconButton in Pagination component ([#320](https://github.com/PhillipsAuctionHouse/seldon/issues/320)) ([e74d254](https://github.com/PhillipsAuctionHouse/seldon/commit/e74d254e9b8e1e0a47c9f8a88b492ff10457475e))
+
 # [1.57.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.56.0...v1.57.0) (2024-09-17)
 
 
