@@ -4,8 +4,8 @@ import { getCommonProps } from '../../utils';
 import { px } from '../../utils';
 
 import Select from '../Select/Select';
-import Button from '../Button/Button';
 import ChevronRight from '../../assets/chevronRight.svg?react';
+import IconButton from '../IconButton/IconButton';
 
 export interface PaginationProps extends Omit<ComponentProps<'div'>, 'onChange'> {
   /**
@@ -44,6 +44,10 @@ export interface PaginationProps extends Omit<ComponentProps<'div'>, 'onChange'>
    * Option next label
    */
   nextLabel?: string;
+  /**
+   * Option select aria-label
+   */
+  selectLabel?: string;
 }
 
 /**
@@ -65,6 +69,7 @@ const Pagination = ({
   isDisabled,
   previousLabel = 'Previous',
   nextLabel = 'Next',
+  selectLabel = 'Select',
   ...props
 }: PaginationProps) => {
   const type = 'pagination';
@@ -77,7 +82,7 @@ const Pagination = ({
       {...commonProps}
       {...props}
     >
-      <Button
+      <IconButton
         className={classnames(`${px}__pagination-button`, `${px}-left-arrow`)}
         onClick={() => onChange(options.at(options.findIndex((option) => option === value) - 1) || '')}
         data-testid={`${id}-previous-button`}
@@ -85,10 +90,11 @@ const Pagination = ({
         aria-label={previousLabel}
       >
         <ChevronRight />
-      </Button>
+      </IconButton>
 
       <Select
         className={variant === 'inline' && `${px}--inline-pagination`}
+        aria-label={selectLabel}
         value={value}
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) => onChange(event?.currentTarget.value, event)}
         data-testid={`${id}-select-button`}
@@ -102,7 +108,7 @@ const Pagination = ({
         ))}
       </Select>
 
-      <Button
+      <IconButton
         className={`${px}__pagination-button`}
         onClick={() => onChange(options[(options.findIndex((option) => option === value) + 1) % options.length] || '')}
         data-testid={`${id}-next-button`}
@@ -110,7 +116,7 @@ const Pagination = ({
         aria-label={nextLabel}
       >
         <ChevronRight />
-      </Button>
+      </IconButton>
     </div>
   );
 };
