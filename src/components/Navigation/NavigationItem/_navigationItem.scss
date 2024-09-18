@@ -77,18 +77,8 @@
         padding-bottom: 0.625rem;
       }
     }
-  }
 
-  &--end {
-    @include isHeaderMobile {
-      margin-top: $spacing-md;
-    }
-  }
-
-  &--start {
-    margin-right: 1rem;
-
-    & li:last-child {
+    & .view-all {
       a {
         border-bottom: 0;
         padding: $spacing-sm 0;
@@ -99,6 +89,16 @@
         }
       }
     }
+  }
+
+  &--end {
+    @include isHeaderMobile {
+      margin-top: $spacing-md;
+    }
+  }
+
+  &--start {
+    margin-right: 1rem;
 
     @include isHeaderMobile {
       margin-right: 0;
