@@ -4,11 +4,21 @@ import classnames from 'classnames';
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
 
 type CarouselApi = UseEmblaCarouselType[1];
-type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
-type CarouselOptions = UseCarouselParameters[0];
 
+// to expose more options from the embla carousel API
+// see what is available in https://www.embla-carousel.com/api/options/
 export interface CarouselProps extends ComponentProps<'div'> {
-  opts?: Omit<CarouselOptions, 'axis'>;
+  /**
+   * Whether the carousel should loop.
+   */
+  loop?: boolean;
+  /**
+   * The index to start the carousel at.
+   */
+  startIndex?: number;
+  /**
+   * Function to expose the embla carousel API.
+   */
   setApi?: (api: CarouselApi) => void;
 }
 
@@ -35,95 +45,95 @@ export const CarouselContext = createContext<CarouselContextProps | null>(null);
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-carousel--overview)
  */
-const Carousel = forwardRef<HTMLDivElement, CarouselProps>(({ opts, setApi, className, children, ...props }, ref) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
+const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
+  ({ loop = false, startIndex = 0, setApi, className, children, ...props }, ref) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
 
-  const [carouselRef, api] = useEmblaCarousel({
-    ...opts,
-    axis: 'x',
-  });
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
+    const [carouselRef, api] = useEmblaCarousel({
+      loop,
+      startIndex,
+    });
+    const [canScrollPrev, setCanScrollPrev] = useState(false);
+    const [canScrollNext, setCanScrollNext] = useState(false);
 
-  const onSelect = useCallback((api: CarouselApi) => {
-    if (!api) {
-      return;
-    }
-
-    setCanScrollPrev(api.canScrollPrev());
-    setCanScrollNext(api.canScrollNext());
-  }, []);
-
-  const scrollPrev = useCallback(() => {
-    api?.scrollPrev();
-  }, [api]);
-
-  const scrollNext = useCallback(() => {
-    api?.scrollNext();
-  }, [api]);
-
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent<HTMLDivElement>) => {
-      if (event.key === 'ArrowLeft') {
-        event.preventDefault();
-        scrollPrev();
-      } else if (event.key === 'ArrowRight') {
-        event.preventDefault();
-        scrollNext();
+    const onSelect = useCallback((api: CarouselApi) => {
+      if (!api) {
+        return;
       }
-    },
-    [scrollPrev, scrollNext],
-  );
 
-  useEffect(() => {
-    if (!api || !setApi) {
-      return;
-    }
+      setCanScrollPrev(api.canScrollPrev());
+      setCanScrollNext(api.canScrollNext());
+    }, []);
 
-    setApi(api);
-  }, [api, setApi]);
+    const scrollPrev = useCallback(() => {
+      api?.scrollPrev();
+    }, [api]);
 
-  useEffect(() => {
-    if (!api) {
-      return;
-    }
+    const scrollNext = useCallback(() => {
+      api?.scrollNext();
+    }, [api]);
 
-    onSelect(api);
-    api.on('reInit', onSelect);
-    api.on('select', onSelect);
+    const handleKeyDown = useCallback(
+      (event: KeyboardEvent<HTMLDivElement>) => {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          scrollPrev();
+        } else if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          scrollNext();
+        }
+      },
+      [scrollPrev, scrollNext],
+    );
 
-    return () => {
-      api?.off('select', onSelect);
-    };
-  }, [api, onSelect]);
+    useEffect(() => {
+      if (!api || !setApi) {
+        return;
+      }
 
-  return (
-    <CarouselContext.Provider
-      value={{
-        carouselRef,
-        api: api,
-        opts,
-        // orientation: orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
-        scrollPrev,
-        scrollNext,
-        canScrollPrev,
-        canScrollNext,
-      }}
-    >
-      <div
-        ref={ref}
-        onKeyDownCapture={handleKeyDown}
-        className={classnames(baseClassName, className)}
-        role="region"
-        aria-roledescription="carousel"
-        {...props}
-        {...commonProps}
+      setApi(api);
+    }, [api, setApi]);
+
+    useEffect(() => {
+      if (!api) {
+        return;
+      }
+
+      onSelect(api);
+      api.on('reInit', onSelect);
+      api.on('select', onSelect);
+
+      return () => {
+        api?.off('select', onSelect);
+      };
+    }, [api, onSelect]);
+
+    return (
+      <CarouselContext.Provider
+        value={{
+          carouselRef,
+          api: api,
+          scrollPrev,
+          scrollNext,
+          canScrollPrev,
+          canScrollNext,
+        }}
       >
-        {children}
-      </div>
-    </CarouselContext.Provider>
-  );
-});
+        <div
+          ref={ref}
+          onKeyDownCapture={handleKeyDown}
+          className={classnames(baseClassName, className)}
+          role="region"
+          aria-roledescription="carousel"
+          {...props}
+          {...commonProps}
+        >
+          {children}
+        </div>
+      </CarouselContext.Provider>
+    );
+  },
+);
 Carousel.displayName = 'Carousel';
 
 export default Carousel;
