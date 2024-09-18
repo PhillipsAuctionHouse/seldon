@@ -37,8 +37,11 @@ export const CarouselContext = createContext<CarouselContextProps | null>(null);
  * ## Overview
  *
  * Carousel component
+ *
  * Combine with CarouselContent, CarouselItem, and CarouselDots to use
+ *
  * API Inspired by https://ui.shadcn.com/docs/components/carousel#api
+ *
  * Built on top of https://github.com/davidjerleke/embla-carousel
  *
  * [Figma Link](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/EASEL-Compendium%3A-Tokens%2C-Components-%26-Patterns?node-id=7068-6007&t=HYwLAd3xkKAOgjpo-1)
