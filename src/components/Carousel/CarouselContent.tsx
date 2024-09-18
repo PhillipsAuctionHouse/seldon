@@ -8,23 +8,17 @@ export type CarouselContentProps = ComponentProps<'div'>;
 /**
  * ## Overview
  *
- * Overview of this component
+ * The wrapper for the carousel content.
  *
  */
 const CarouselContent = forwardRef<HTMLDivElement, CarouselContentProps>(({ className, ...props }, ref) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
 
-  const { carouselRef, orientation } = useCarousel();
+  const { carouselRef } = useCarousel();
 
   return (
     <div ref={carouselRef} className={`${baseClassName}-content`}>
-      <div
-        ref={ref}
-        className={classNames(`${baseClassName}-content-inner`, className)}
-        data-orientation={orientation}
-        {...props}
-        {...commonProps}
-      />
+      <div ref={ref} className={classNames(`${baseClassName}-content-inner`, className)} {...props} {...commonProps} />
     </div>
   );
 });

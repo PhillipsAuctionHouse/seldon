@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { ComponentProps, forwardRef } from 'react';
-import { useCarousel } from './utils';
 import { getCommonProps } from '../../utils';
 
 export type CarouselItemProps = ComponentProps<'div'>;
@@ -8,12 +7,12 @@ export type CarouselItemProps = ComponentProps<'div'>;
 /**
  * ## Overview
  *
- * Overview of this component
+ * An individual item within the carousel.
+ * It will stretch to fill the width of the carousel viewport.
  *
  */
 const CarouselItem = forwardRef<HTMLDivElement, CarouselItemProps>(({ className, ...props }, ref) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
-  const { orientation } = useCarousel();
 
   return (
     <div
@@ -21,7 +20,6 @@ const CarouselItem = forwardRef<HTMLDivElement, CarouselItemProps>(({ className,
       role="group"
       aria-roledescription="slide"
       className={classNames(`${baseClassName}-item`, className)}
-      data-orientation={orientation}
       {...props}
       {...commonProps}
     />

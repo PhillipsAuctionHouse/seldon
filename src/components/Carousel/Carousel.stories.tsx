@@ -23,7 +23,7 @@ export const Playground = (props: CarouselProps) => (
               alignItems: 'center',
               justifyContent: 'center',
               padding: '1.5rem',
-              backgroundColor: '#323232',
+              backgroundColor: '#66BF3B',
               borderRadius: '0.5rem',
             }}
           >
