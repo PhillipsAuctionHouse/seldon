@@ -13,6 +13,11 @@ export interface CarouselDotsProps extends ComponentProps<'div'> {
    * The position of the dots.
    */
   position?: 'on-content' | 'inline';
+  /**
+   * The number of slides (used to pre-calc the number of dots to render before embla API initializes)
+   * otherwise you can get slight layout shift before the number of slides is calculated
+   */
+  numberOfSlides?: number;
 }
 
 /**
@@ -24,11 +29,13 @@ export interface CarouselDotsProps extends ComponentProps<'div'> {
  *
  */
 const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
-  ({ className, maxDots = 7, position = 'inline', ...props }, ref) => {
+  ({ className, maxDots = 7, position = 'inline', numberOfSlides = 0, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
     const { api } = useCarousel();
     const [selectedIndex, setSelectedIndex] = useState(0);
-    const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+    const [scrollSnaps, setScrollSnaps] = useState<number[]>(
+      Array.from({ length: numberOfSlides }, (_, index) => index),
+    );
 
     const onDotButtonClick = useCallback(
       (index: number) => {
@@ -82,18 +89,8 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
         {...props}
         {...commonProps}
       >
-        <div
-          className={`${baseClassName}-pagination-container`}
-          style={{
-            transform: `translateX(${selectedIndex * 20}px)`,
-          }}
-        >
-          <div
-            className={`${baseClassName}-pagination-container-inner`}
-            style={{
-              transform: `translateX(${-selectedIndex * 20}px)`,
-            }}
-          >
+        <div className={`${baseClassName}-pagination-container`}>
+          <div className={`${baseClassName}-pagination-container-inner`}>
             {visibleDots.map((_, index) => {
               const actualIndex = scrollSnaps.indexOf(visibleDots[index]);
               const isSelected = selectedIndex === actualIndex;

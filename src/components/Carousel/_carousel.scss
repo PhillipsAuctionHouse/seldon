@@ -58,15 +58,12 @@
     &-container {
       display: flex;
       justify-content: center;
-      transform: translateX(0);
       width: 100%;
     }
 
     &-container-inner {
       display: flex;
       gap: 12px;
-      transform: translateX(0);
-      transition: transform 0.2s ease;
     }
 
     &-dot-container {
