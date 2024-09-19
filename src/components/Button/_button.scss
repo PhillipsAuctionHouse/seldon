@@ -71,9 +71,8 @@
     background-color: $pure-white;
     border: 1px solid $pure-black;
     color: $pure-black;
-    mix-blend-mode: difference;
-    position: relative;
     transition: border 0.3s ease-out;
+    z-index: 0;
 
     &::before {
       border-radius: 100px;
