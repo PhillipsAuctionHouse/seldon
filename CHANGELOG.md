@@ -1,3 +1,10 @@
+## [1.58.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.1...v1.58.2) (2024-09-19)
+
+
+### Bug Fixes
+
+* **deps:** L3-3828 remove incorrect fresnel dependency ([#325](https://github.com/PhillipsAuctionHouse/seldon/issues/325)) ([6fe7230](https://github.com/PhillipsAuctionHouse/seldon/commit/6fe7230afc3305c1bb4e1f0565176d41bcaf8e38))
+
 ## [1.58.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.0...v1.58.1) (2024-09-19)
 
 
