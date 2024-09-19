@@ -10,6 +10,12 @@ const meta = {
 export default meta;
 export const Playground = (props: TextProps) => <Text {...props} />;
 
+export const SuperScript = (props: TextProps) => (
+  <Text variant={TextVariants.heading3} superScript="ЖΟ◆" {...props}>
+    Lot number 23
+  </Text>
+);
+
 Playground.args = {
   children: 'Hi There',
 };
