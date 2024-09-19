@@ -45,7 +45,7 @@ const Social = ({
       <Text variant={TextVariants.heading4} className={`${baseClassName}__header`}>
         {titleText}
       </Text>
-      <Button onClick={onSubscribeClick} variant={ButtonVariants.ghost} className={`${baseClassName}__button`}>
+      <Button onClick={onSubscribeClick} variant={ButtonVariants.tertiary} className={`${baseClassName}__button`}>
         {buttonText}
       </Button>
       {children}

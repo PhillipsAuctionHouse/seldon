@@ -6,6 +6,7 @@ import { px } from '../../utils';
 import Select from '../Select/Select';
 import ChevronRight from '../../assets/chevronRight.svg?react';
 import IconButton from '../IconButton/IconButton';
+import { ButtonVariants } from '../Button/types';
 
 export interface PaginationProps extends Omit<ComponentProps<'div'>, 'onChange'> {
   /**
@@ -88,6 +89,7 @@ const Pagination = ({
         data-testid={`${id}-previous-button`}
         isDisabled={isDisabled}
         aria-label={previousLabel}
+        variant={ButtonVariants.tertiary}
       >
         <ChevronRight />
       </IconButton>
@@ -114,6 +116,7 @@ const Pagination = ({
         data-testid={`${id}-next-button`}
         isDisabled={isDisabled}
         aria-label={nextLabel}
+        variant={ButtonVariants.tertiary}
       >
         <ChevronRight />
       </IconButton>
