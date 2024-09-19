@@ -26,7 +26,7 @@
 
   .flatpickr-day.today {
     border-color: transparent;
-    font-weight: bold;
+    font-variation-settings: 'wght' 700;
     position: relative;
 
     @include DistinctDisplay;
@@ -64,7 +64,7 @@
   .flatpickr-weekday {
     @include DistinctDisplay;
 
-    font-weight: bold;
+    font-variation-settings: 'wght' 700;
   }
 
   .flatpickr-current-month {

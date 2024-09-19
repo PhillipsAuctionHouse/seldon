@@ -12,6 +12,17 @@
 // 📑 Pages
 @import 'pages/page';
 
+strong,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-variation-settings: 'wght' 700;
+  font-variation-settings: 'wght' unset;
+}
+
 // Design markdown styles
 .h1 {
   @include hText($heading-size1, null, uppercase);
@@ -74,7 +85,7 @@ details {
   color: #66bf3c;
   display: inline-block;
   font-size: 11px;
-  font-weight: 700;
+  font-variation-settings: 'wght' 700;
   line-height: 12px;
   margin-right: 10px;
   padding: 4px 12px;
