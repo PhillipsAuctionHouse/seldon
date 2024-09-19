@@ -7,37 +7,6 @@ import { runCommonTests } from '../../utils/testUtils';
 
 describe('Carousel', () => {
   runCommonTests(Carousel, 'Carousel');
-
-  beforeEach(() => {
-    class MockIntersectionObserver {
-      observe = () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
-      unobserve = () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
-      disconnect = () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
-    }
-
-    Object.defineProperty(window, 'IntersectionObserver', {
-      writable: true,
-      value: MockIntersectionObserver,
-    });
-    Object.defineProperty(window, 'matchMedia', {
-      writable: true,
-      value: () => ({
-        matches: true,
-        addEventListener: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
-        removeEventListener: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
-      }),
-    });
-    class MockResizeObserver {
-      observe = () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
-      unobserve = () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
-      disconnect = () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
-    }
-    Object.defineProperty(window, 'ResizeObserver', {
-      writable: true,
-      value: MockResizeObserver,
-    });
-  });
-
   it('renders carousel with content, items, and dots', () => {
     render(
       <Carousel>

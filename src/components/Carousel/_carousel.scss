@@ -11,11 +11,23 @@
     display: flex;
 
     // margin-left: -1rem; // Equivalent to -ml-4
+
+    @each $spacing-size in $spacing-sizes {
+      &--gap-#{$spacing-size} {
+        margin-left: calc(-1 * var(--spacing-#{$spacing-size}));
+      }
+    }
   }
 
   &-item {
     flex: 0 0 100%;
     min-width: 0;
+
+    @each $spacing-size in $spacing-sizes {
+      &--gap-#{$spacing-size} {
+        padding-left: var(--spacing-#{$spacing-size});
+      }
+    }
 
     // &:not(:first-child) {
     //     padding-left: 1rem; // Equivalent to pl-4

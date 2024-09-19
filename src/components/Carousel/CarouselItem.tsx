@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
+import { useCarousel } from './utils';
 
 export type CarouselItemProps = ComponentProps<'div'>;
 
@@ -13,13 +14,16 @@ export type CarouselItemProps = ComponentProps<'div'>;
  */
 const CarouselItem = forwardRef<HTMLDivElement, CarouselItemProps>(({ className, ...props }, ref) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
+  const { columnGap } = useCarousel();
 
   return (
     <div
       ref={ref}
       role="group"
       aria-roledescription="slide"
-      className={classNames(`${baseClassName}-item`, className)}
+      className={classNames(`${baseClassName}-item`, className, {
+        [`${baseClassName}-item--gap-${columnGap}`]: !!columnGap,
+      })}
       {...props}
       {...commonProps}
     />

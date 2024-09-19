@@ -1,7 +1,8 @@
-import { ComponentProps, forwardRef, createContext, useCallback, useState, useEffect, KeyboardEvent } from 'react';
+import { ComponentProps, forwardRef, createContext, useCallback, useEffect, KeyboardEvent } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
+import { SpacingTokens } from '../../utils';
 
 type CarouselApi = UseEmblaCarouselType[1];
 
@@ -20,6 +21,10 @@ export interface CarouselProps extends ComponentProps<'div'> {
    * Function to call when the slide changes.
    */
   onSlideChange?: (index: number) => void;
+  /**
+   * The horizontal gap between the carousel items.
+   */
+  columnGap?: SpacingTokens;
 }
 
 type CarouselContextProps = {
@@ -49,56 +54,36 @@ export const CarouselContext = createContext<CarouselContextProps | null>(null);
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-carousel--overview)
  */
 const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
-  ({ loop = false, startIndex = 0, onSlideChange, className, children, ...props }, ref) => {
+  ({ loop = false, startIndex = 0, onSlideChange, className, children, columnGap, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
 
     const [carouselRef, api] = useEmblaCarousel({
       loop,
       startIndex,
     });
-    const [canScrollPrev, setCanScrollPrev] = useState(false);
-    const [canScrollNext, setCanScrollNext] = useState(false);
-
-    const onSelect = useCallback((api: CarouselApi) => {
-      if (!api) {
-        return;
-      }
-
-      setCanScrollPrev(api.canScrollPrev());
-      setCanScrollNext(api.canScrollNext());
-    }, []);
-
-    const scrollPrev = useCallback(() => {
-      api?.scrollPrev();
-    }, [api]);
-
-    const scrollNext = useCallback(() => {
-      api?.scrollNext();
-    }, [api]);
 
     const handleKeyDown = useCallback(
       (event: KeyboardEvent<HTMLDivElement>) => {
         if (event.key === 'ArrowLeft') {
           event.preventDefault();
-          scrollPrev();
+          api?.scrollPrev();
         } else if (event.key === 'ArrowRight') {
           event.preventDefault();
-          scrollNext();
+          api?.scrollNext();
         }
       },
-      [scrollPrev, scrollNext],
+      [api],
     );
 
-    useEffect(() => {
-      if (!api) {
-        return;
-      }
-      if (onSlideChange) {
-        api.on('select', (embla) => {
-          onSlideChange(embla.selectedScrollSnap());
-        });
-      }
-    }, [api, onSlideChange]);
+    const onSelect = useCallback(
+      (api: CarouselApi) => {
+        if (!api) {
+          return;
+        }
+        onSlideChange?.(api.selectedScrollSnap());
+      },
+      [onSlideChange],
+    );
 
     useEffect(() => {
       if (!api) {
@@ -111,6 +96,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
 
       return () => {
         api?.off('select', onSelect);
+        api?.off('reInit', onSelect);
       };
     }, [api, onSelect]);
 
@@ -119,10 +105,11 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
         value={{
           carouselRef,
           api: api,
-          scrollPrev,
-          scrollNext,
-          canScrollPrev,
-          canScrollNext,
+          scrollPrev: () => api?.scrollPrev(),
+          scrollNext: () => api?.scrollNext(),
+          canScrollPrev: api?.canScrollPrev() ?? false,
+          canScrollNext: api?.canScrollNext() ?? false,
+          columnGap,
         }}
       >
         <div
