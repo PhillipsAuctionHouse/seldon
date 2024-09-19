@@ -16,12 +16,33 @@ export interface BreadcrumbItemProps extends React.HTMLAttributes<HTMLDivElement
    * Label to display in the breadcrumb
    */
   label?: string;
+  /**
+   * truncate text boolean
+   * */
+  isTruncateText?: boolean;
+
+  /**
+   * Length to which the text should be truncated
+   * */
+  truncateLength?: number;
 }
 
-const BreadcrumbItem = ({ className, href, label, isCurrent = false, ...props }: BreadcrumbItemProps) => {
+const BreadcrumbItem = ({
+  className,
+  href,
+  label,
+  isCurrent = false,
+  isTruncateText = false,
+  truncateLength = 10,
+  ...props
+}: BreadcrumbItemProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Breadcrumb');
   const ariaCurrent = !isCurrent ? false : 'page';
   const currentHref = !isCurrent ? href : '';
+
+  const getTruncatedLabel = () => {
+    return label && label.length > truncateLength ? `${label.slice(0, truncateLength)}...` : label;
+  };
 
   return (
     <li>
@@ -31,7 +52,7 @@ const BreadcrumbItem = ({ className, href, label, isCurrent = false, ...props }:
         href={currentHref}
         {...commonProps}
       >
-        {label}
+        {isTruncateText ? getTruncatedLabel() : label}
       </a>
       {!isCurrent ? <img className={classnames(baseClassName, className, 'chevron')} src={chevronNext} /> : null}
     </li>

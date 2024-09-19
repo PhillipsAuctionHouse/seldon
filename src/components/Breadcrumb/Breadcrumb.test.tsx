@@ -2,10 +2,20 @@ import Breadcrumb from './Breadcrumb';
 import { runCommonTests } from '../../utils/testUtils';
 import { render, screen } from '@testing-library/react';
 
+// Mock window.innerWidth
+const setWindowWidth = (width: number) => {
+  Object.defineProperty(window, 'innerWidth', {
+    writable: true,
+    configurable: true,
+    value: width,
+  });
+  window.dispatchEvent(new Event('resize'));
+};
+
 describe('Breadcrumb component', () => {
   const items = [
     { href: '/modernArt', label: 'Art, Modern to Contemporary' },
-    { href: '/new', label: 'New Now (26 Sep 2023)' },
+    { href: '/new', label: 'Modern & Contemporary Art Evening Sale - Test3' },
     { href: '/lot1', label: 'Lot 1' },
   ];
 
@@ -32,11 +42,39 @@ describe('Breadcrumb component', () => {
     });
   });
 
+  it('truncates specific item based on truncateIndex', () => {
+    render(<Breadcrumb items={items} truncateIndex={1} truncateLength={15} />);
+
+    // Check if the truncated item is displayed correctly
+    const truncatedItem = screen.getByText(/Modern & Contem.../i);
+    expect(truncatedItem).toBeInTheDocument();
+
+    // Check that the full item is not rendered
+    const fullLabelItem = screen.queryByText(/Modern & Contemporary Art Evening Sale - Test3/i);
+    expect(fullLabelItem).not.toBeInTheDocument();
+  });
+
+  it('does not truncate if truncateIndex is not provided', () => {
+    render(<Breadcrumb items={items} />);
+
+    // Check that the full long label is rendered
+    const fullLabelItem = screen.getByText(/Modern & Contemporary Art Evening Sale - Test3/i);
+    expect(fullLabelItem).toBeInTheDocument();
+  });
+
   it('Does not error out Breadcrumb without items', () => {
     render(<Breadcrumb items={[]} />);
     const navElement = screen.queryByRole('navigation', { name: 'Breadcrumb' });
 
     expect(navElement).toBeInTheDocument();
+  });
+
+  test('renders breadcrumb items in desktop view', () => {
+    setWindowWidth(1024); // Simulate desktop width
+    render(<Breadcrumb items={items} />);
+
+    expect(screen.getByText('Art, Modern to Contemporary')).toBeInTheDocument();
+    expect(screen.getByText('Lot 1')).toBeInTheDocument();
   });
 });
 

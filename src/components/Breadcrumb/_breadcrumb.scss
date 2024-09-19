@@ -3,15 +3,23 @@
 .#{$px}-breadcrumb {
   @include text($body3);
 
-  color: $soft-black-2;
+  color: $pure-black;
 
   @media (max-width: $breakpoint-sm) {
     display: none;
   }
 
+  .back-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
   ol {
     display: flex;
     flex-direction: row;
+    padding: 0;
 
     li {
       display: flex;
@@ -31,7 +39,6 @@
   }
 
   &--current {
-    color: $primary-black;
-    font-weight: 700;
+    font-weight: 600;
   }
 }
