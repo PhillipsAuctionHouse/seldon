@@ -1,3 +1,10 @@
+## [1.58.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.0...v1.58.1) (2024-09-19)
+
+
+### Bug Fixes
+
+* **button:** L3-3801 fix button styling issues in other components ([#324](https://github.com/PhillipsAuctionHouse/seldon/issues/324)) ([cc815cc](https://github.com/PhillipsAuctionHouse/seldon/commit/cc815cce50427cea19ebd5a2f1cc1a19b7c7d674))
+
 # [1.58.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.57.1...v1.58.0) (2024-09-18)
 
 
