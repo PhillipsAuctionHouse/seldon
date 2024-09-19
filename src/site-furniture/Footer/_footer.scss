@@ -1,0 +1,131 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-footer {
+  align-items: center;
+  background-color: $off-white;
+  display: flex;
+  flex-direction: column;
+  margin: $spacing-lg 0 0;
+  max-width: 100%;
+
+  &__logo svg {
+    height: 10px;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 30rem;
+    padding: $spacing-lg $spacing-md $spacing-md $spacing-md;
+    width: 100%;
+
+    @include media($size-md) {
+      flex-flow: row wrap;
+      gap: $spacing-lg;
+      max-width: $desktop-max-width;
+      padding: $spacing-lg $spacing-md $spacing-lg $spacing-md;
+
+      .#{$px}-social {
+        flex-basis: 100%; // force this to wrap
+      }
+    }
+
+    @include media($size-lg) {
+      .#{$px}-social {
+        flex-basis: 0;
+      }
+    }
+
+    div {
+      @include media($size-md) {
+        flex: 1;
+      }
+    }
+
+    h3.#{$px}-text {
+      @include media($size-sm) {
+        margin-bottom: $spacing-sm;
+      }
+    }
+
+    div:not(.#{$px}-social) {
+      ul {
+        li {
+          a {
+            @include text('snwFlyoutLink');
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &-desktop {
+    display: none;
+
+    @include media($size-md) {
+      display: block;
+    }
+  }
+
+  @include media($size-md) {
+    &-mobile {
+      display: none;
+    }
+  }
+
+  .#{$px}-accordion {
+    border-bottom: 1px solid #eae8e4;
+    border-top: 1px solid #eae8e4;
+    margin-bottom: $spacing-md;
+    width: 100%;
+
+    &-item {
+      padding: 0;
+
+      ul {
+        padding-bottom: $spacing-md;
+      }
+
+      &--expanded {
+        margin-bottom: $spacing-md;
+        margin-top: 0;
+        padding: 0;
+      }
+
+      &-label {
+        opacity: 1;
+        padding: $spacing-sm 0;
+
+        @include media($size-md) {
+          cursor: unset;
+        }
+
+        &__text {
+          @include text('snwHeaderLink');
+        }
+      }
+
+      &__border-bottom {
+        border-bottom: 1px solid #eae8e4;
+      }
+    }
+  }
+
+  &__copyright {
+    align-items: center;
+    background-color: $white;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    h3 {
+      margin-bottom: $spacing-sm;
+      margin-top: $spacing-md;
+    }
+  }
+}

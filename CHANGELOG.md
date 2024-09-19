@@ -1,3 +1,76 @@
+## [1.58.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.1...v1.58.2) (2024-09-19)
+
+
+### Bug Fixes
+
+* **deps:** L3-3828 remove incorrect fresnel dependency ([#325](https://github.com/PhillipsAuctionHouse/seldon/issues/325)) ([6fe7230](https://github.com/PhillipsAuctionHouse/seldon/commit/6fe7230afc3305c1bb4e1f0565176d41bcaf8e38))
+
+## [1.58.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.0...v1.58.1) (2024-09-19)
+
+
+### Bug Fixes
+
+* **button:** L3-3801 fix button styling issues in other components ([#324](https://github.com/PhillipsAuctionHouse/seldon/issues/324)) ([cc815cc](https://github.com/PhillipsAuctionHouse/seldon/commit/cc815cce50427cea19ebd5a2f1cc1a19b7c7d674))
+
+# [1.58.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.57.1...v1.58.0) (2024-09-18)
+
+
+### Features
+
+* **Text:** L3-3572 added superscript prop ([#323](https://github.com/PhillipsAuctionHouse/seldon/issues/323)) ([e81f400](https://github.com/PhillipsAuctionHouse/seldon/commit/e81f4005dad97d898bbd87aa5d7df7fe0a02bd3c))
+
+## [1.57.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.57.0...v1.57.1) (2024-09-18)
+
+
+### Bug Fixes
+
+* **pagination:** L3-2774 use IconButton in Pagination component ([#320](https://github.com/PhillipsAuctionHouse/seldon/issues/320)) ([e74d254](https://github.com/PhillipsAuctionHouse/seldon/commit/e74d254e9b8e1e0a47c9f8a88b492ff10457475e))
+
+# [1.57.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.56.0...v1.57.0) (2024-09-17)
+
+
+### Features
+
+* **button:** L3-3586 Update Button to match new variants from spec ([#310](https://github.com/PhillipsAuctionHouse/seldon/issues/310)) ([e946c7d](https://github.com/PhillipsAuctionHouse/seldon/commit/e946c7d6f328781d5fb82a4407cb49fff28b4091))
+
+# [1.56.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.55.1...v1.56.0) (2024-09-17)
+
+
+### Features
+
+* **header-submenus:** L3-2818 Header UX Submenu Updates ([#309](https://github.com/PhillipsAuctionHouse/seldon/issues/309)) ([6e0b57d](https://github.com/PhillipsAuctionHouse/seldon/commit/6e0b57de80f9e3271de80fa2e4e82917e7d649d4))
+
+## [1.55.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.55.0...v1.55.1) (2024-09-17)
+
+
+### Bug Fixes
+
+* **deps:** bump debug from 4.1.1 to 4.3.6 ([#316](https://github.com/PhillipsAuctionHouse/seldon/issues/316)) ([1ddb9c4](https://github.com/PhillipsAuctionHouse/seldon/commit/1ddb9c48c45d7a2d45e0f2b78f999437883d8779))
+* **deps:** bump minimatch from 3.0.4 to 3.1.2 ([#314](https://github.com/PhillipsAuctionHouse/seldon/issues/314)) ([94241c2](https://github.com/PhillipsAuctionHouse/seldon/commit/94241c285610639b9d52f8a15f0eddcdf1916185))
+* **deps:** bump node-fetch from 2.6.5 to 2.6.11 ([#315](https://github.com/PhillipsAuctionHouse/seldon/issues/315)) ([e7203d8](https://github.com/PhillipsAuctionHouse/seldon/commit/e7203d8077f1bcb27399c64751d9196d56419c90))
+* **pagination:** L3-2774 Add pagination to seldon export ([#319](https://github.com/PhillipsAuctionHouse/seldon/issues/319)) ([cab3257](https://github.com/PhillipsAuctionHouse/seldon/commit/cab3257eea1913e6c44d8cde15f25eb00d12b552))
+
+# [1.55.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.54.2...v1.55.0) (2024-09-17)
+
+
+### Features
+
+* **Pagination:** L3-2774 Build lot pagination component in Seldon library ([#298](https://github.com/PhillipsAuctionHouse/seldon/issues/298)) ([e5ec761](https://github.com/PhillipsAuctionHouse/seldon/commit/e5ec7610b603c05841c417f66ecce3f72b6e6a66))
+
+## [1.54.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.54.1...v1.54.2) (2024-09-17)
+
+
+### Bug Fixes
+
+* **footer:** L3-3729 footer mobile accordion fix ([#311](https://github.com/PhillipsAuctionHouse/seldon/issues/311)) ([11dd40f](https://github.com/PhillipsAuctionHouse/seldon/commit/11dd40f5ca848fe77de6d0a835ab9dbbbc13e524))
+
+## [1.54.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.54.0...v1.54.1) (2024-09-17)
+
+
+### Bug Fixes
+
+* **build:** L3-3777 build process not handling new patterns and site-furniture ([#312](https://github.com/PhillipsAuctionHouse/seldon/issues/312)) ([5396d98](https://github.com/PhillipsAuctionHouse/seldon/commit/5396d98b67b5a792b6b708e67775b10a791a4a37))
+
 # [1.54.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.53.1...v1.54.0) (2024-09-13)
 
 

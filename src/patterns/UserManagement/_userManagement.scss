@@ -1,0 +1,69 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-user-management {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 0 $spacing-xsm;
+  justify-content: flex-end;
+  min-height: 49px; // stop bounce after the user is logged in
+  min-width: 92px; // needed to handle the loading states and language swapping
+  padding-top: $padding-xsm;
+
+  @include media($size-xl) {
+    min-width: 104px; // stop bounce after the user is logged in
+  }
+
+  @include isHeaderMobile {
+    min-width: 44px; // matching the size of mobile menu icon to allow for equal spacing and centering of logo
+  }
+
+  &__login {
+    align-items: center;
+    background-color: unset;
+    border: unset;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+    display: flex;
+    gap: 0 $spacing-xsm;
+    justify-content: center;
+    min-width: 44px;
+    padding: 0;
+    padding-bottom: $padding-xsm;
+
+    &:hover {
+      @include underline($padding-xsm);
+    }
+
+    @include isHeaderMobile {
+      padding-right: 0;
+    }
+
+    > p.#{$px}-text {
+      margin: 0;
+
+      @include isHeaderMobile {
+        display: none;
+        min-height: 2rem;
+      }
+    }
+  }
+
+  &__account-icon {
+    height: 2rem;
+    width: 2rem;
+
+    a {
+      align-items: center;
+      display: flex;
+      height: $mobile-minimum-clickable-area;
+      justify-content: center;
+      width: $mobile-minimum-clickable-area;
+    }
+
+    @include isHeaderDesktop {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+  }
+}

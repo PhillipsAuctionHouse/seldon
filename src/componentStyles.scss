@@ -8,10 +8,7 @@
 // ⚛️ Components
 @use 'components/Button/button';
 @use 'components/IconButton/iconButton';
-@use 'components/Footer/footer';
 @use 'components/Grid/grid';
-@use 'components/Header/header';
-@use 'components/HeroBanner/heroBanner';
 @use 'components/Navigation/navigation';
 @use 'components/Navigation/NavigationItem/navigationItem';
 @use 'components/Navigation/NavigationItemTrigger/navigationItemTrigger';
@@ -22,12 +19,8 @@
 @use 'components/Search/search';
 @use 'components/Search/searchButton';
 @use 'components/Search/SearchResults/searchResults';
-@use 'components/Social/social';
 @use 'components/SplitPanel/splitPanel';
-@use 'components/Subscribe/subscribe';
 @use 'components/Toggle/toggle';
-@use 'components/UserManagement/userManagement';
-@use 'components/ViewingsList/viewingsList';
 @use 'components/Link/link';
 @use 'components/LinkBlock/linkBlock';
 @use 'components/LinkList/linkList';
@@ -39,5 +32,17 @@
 @use 'components/HTMLParser/htmlParser';
 @use 'components/Dropdown/dropdown';
 @use 'components/Video/video';
-@use 'components/LanguageSelector/languageSelector';
-@use 'components/ReadMore/readMore';
+@use 'components/Pagination/pagination';
+@use 'components/ContentPeek/contentPeek';
+
+// Patterns
+@use 'patterns/HeroBanner/heroBanner';
+@use 'patterns/LanguageSelector/languageSelector';
+@use 'patterns/UserManagement/userManagement';
+@use 'patterns/ViewingsList/viewingsList';
+@use 'patterns/Subscribe/subscribe';
+@use 'patterns/Social/social';
+
+// Site Furniture
+@use 'site-furniture/Header/header';
+@use 'site-furniture/Footer/footer';

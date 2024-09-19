@@ -10,18 +10,19 @@ const readdir = promisify(fs.readdir);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-async function updateFileContent(targetFile: string, componentName: string) {
+async function updateFileContent(targetFile: string, componentName: string, componentType: string) {
   // Update references within the file
   const fileContent = await fs.promises.readFile(targetFile, 'utf-8');
   const updatedContent = fileContent
     .replace(/ComponentName/g, componentName)
-    .replace('-componentName', `-${kebabCase(componentName)}`);
+    .replace('-componentName', `-${kebabCase(componentName)}`)
+    .replace(/'Components\//g, `'${componentType.charAt(0).toUpperCase() + componentType.slice(1)}s/`);
   return updatedContent;
 }
 
-async function copyComponentFiles(componentName: string) {
+async function copyComponentFiles(componentName: string, componentType: 'component' | 'pattern') {
   const componentDir = path.join(__dirname, '..', 'Component');
-  const targetDir = path.join(__dirname, '..', '../', 'src', 'components', componentName);
+  const targetDir = path.join(__dirname, '..', '../', 'src', `${componentType}s`, componentName);
 
   const newCamelCaseComponentName = camelCase(componentName);
   try {
@@ -34,16 +35,16 @@ async function copyComponentFiles(componentName: string) {
         file.replace('ComponentName', componentName).replace('_componentName', `_${newCamelCaseComponentName}`),
       );
       await copyFile(sourceFile, targetFile);
-      const updatedContent = await updateFileContent(targetFile, componentName);
+      const updatedContent = await updateFileContent(targetFile, componentName, componentType);
       await fs.promises.writeFile(targetFile, updatedContent);
     }
 
     const stylesFilePath = path.join(__dirname, '..', '../', 'src', 'componentStyles.scss');
-    const importStatement = `@use 'components/${componentName}/${newCamelCaseComponentName}';\n`;
+    const importStatement = `@use '${componentType}s/${componentName}/${newCamelCaseComponentName}';\n`;
     await fs.promises.appendFile(stylesFilePath, importStatement);
 
     const indexFilePath = path.join(__dirname, '..', '../', 'src', 'index.ts');
-    const exportStatement = `export * from './components/${componentName}';\n`;
+    const exportStatement = `export * from './${componentType}s/${componentName}';\n`;
     await fs.promises.appendFile(indexFilePath, exportStatement);
     console.log(`Component files copied to ${targetDir}`);
   } catch (error) {
@@ -52,11 +53,18 @@ async function copyComponentFiles(componentName: string) {
 }
 
 const componentName = process.argv[2];
+const componentType = process.argv[3];
 
 if (!componentName) {
-  console.error('Please provide a component name as an argument: npm run createComponent <componentName>');
+  console.error(
+    'Please provide a component name and component type as arguments: npm run createComponent <componentName> <componentType>',
+  );
+} else if (!componentType || (componentType !== 'component' && componentType !== 'pattern')) {
+  console.error(
+    'Please provide a component type of either `component` or `pattern` as an argument: npm run createComponent <componentName> <componentType>',
+  );
 } else {
-  copyComponentFiles(componentName);
+  copyComponentFiles(componentName, componentType);
 }
 
 export { copyComponentFiles, updateFileContent };

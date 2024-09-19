@@ -16,6 +16,12 @@
   top: 0;
   width: $search-size;
 
+  @include isHeaderMobile {
+    height: calc($spacing-md + $search-size);
+    justify-content: flex-end;
+    top: calc($spacing-md * -1);
+  }
+
   @include media($size-xl) {
     padding: 0 0 0.125rem;
   }

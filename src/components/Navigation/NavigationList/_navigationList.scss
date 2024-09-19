@@ -38,7 +38,48 @@ $top-transition: top 0.25s ease-in 0.1s;
     }
 
     &__section {
+      display: grid;
+      gap: $spacing-sm;
+      width: 50%;
+
+      &:only-child {
+        width: 100%;
+      }
+    }
+
+    .#{$px}-accordion {
+      display: none;
+    }
+  }
+
+  @include isHeaderMobile {
+    &__section {
       width: 100%;
+    }
+    .#{$px}-accordion {
+      border-bottom: 0;
+      border-top: 0;
+      margin-bottom: 0;
+
+      &-item {
+        padding: $spacing-sm 0;
+
+        &__border-bottom {
+          border-bottom: 1px solid $light-gray;
+        }
+
+        &-label {
+          opacity: 1;
+        }
+      }
+    }
+    .#{$px}-link--snwHeaderLink {
+      border-bottom: 1px solid $light-gray;
+      flex-wrap: wrap;
+      padding: $spacing-sm 0;
+    }
+    .#{$px}-link--snwFlyoutLink {
+      padding: 0;
     }
   }
 }

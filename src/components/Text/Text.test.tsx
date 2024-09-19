@@ -20,6 +20,12 @@ describe('Text', () => {
 
     expect(screen.getByText('Hello World')).toBeInTheDocument();
   });
+  it('renders superscript correctly', () => {
+    renderText({ children: 'Hello World', superScript: 'sup' });
+
+    expect(screen.getByText('Hello World')).toBeInTheDocument();
+    expect(screen.getByText('sup')).toBeInTheDocument();
+  });
 
   it('applies the default variant correctly', () => {
     renderText({ children: 'Default Variant' });

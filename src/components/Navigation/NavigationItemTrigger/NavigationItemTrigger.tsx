@@ -3,6 +3,9 @@ import classNames from 'classnames';
 import React, { ComponentProps, forwardRef, useState } from 'react';
 import { Text, TextVariants } from '../../Text';
 import NavigationList, { NavigationListProps } from '../NavigationList/NavigationList';
+import Accordion from '../../Accordion/Accordion';
+import AccordionItem from '../../Accordion/AccordionItem';
+import { SSRMediaQuery } from '../../../providers/utils';
 
 export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
   /**
@@ -10,6 +13,20 @@ export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
    */
   label: string;
 }
+
+const MobileNavigationItemTrigger = ({ id, label, children }: NavigationItemTriggerProps) => {
+  return (
+    <Accordion>
+      <AccordionItem
+        variation="sm"
+        id={id ?? `${label}-accordion`}
+        label={<Text variant={TextVariants.snwHeaderLink}>{label}</Text>}
+      >
+        {children}
+      </AccordionItem>
+    </Accordion>
+  );
+};
 
 /**
  * ## Overview
@@ -27,23 +44,38 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
     const navListElement = findChildrenOfType<NavigationListProps>(children, NavigationList);
 
     return (
-      <li
-        {...commonProps}
-        ref={ref}
-        aria-expanded={isSubmenuOpened}
-        className={classNames(className, baseClassName, `${px}-nav__item`, {
-          [`${baseClassName}--hovered`]: isSubmenuOpened,
-        })}
-        onClick={onClick}
-        onMouseOver={() => setIsSubmenuOpened(true)}
-        onMouseOut={() => setIsSubmenuOpened(false)}
-        {...props}
-      >
-        <button className={`${px}-nav__item-trigger`} type="button">
-          <Text variant={TextVariants.snwHeaderLink}>{label}</Text>
-        </button>
-        {navListElement ? React.cloneElement(navListElement[0], { className: `${baseClassName}__submenu` }) : undefined}
-      </li>
+      <>
+        <SSRMediaQuery.Media lessThan="md">
+          <MobileNavigationItemTrigger id={id} label={label} {...commonProps}>
+            {navListElement
+              ? React.cloneElement(navListElement[0], {
+                  className: `${baseClassName}__submenu--mobile`,
+                })
+              : undefined}
+          </MobileNavigationItemTrigger>
+        </SSRMediaQuery.Media>
+        <SSRMediaQuery.Media greaterThanOrEqual="md">
+          <li
+            {...commonProps}
+            ref={ref}
+            aria-expanded={isSubmenuOpened}
+            className={classNames(className, baseClassName, `${px}-nav__item`, {
+              [`${baseClassName}--hovered`]: isSubmenuOpened,
+            })}
+            onClick={onClick}
+            onMouseOver={() => setIsSubmenuOpened(true)}
+            onMouseOut={() => setIsSubmenuOpened(false)}
+            {...props}
+          >
+            <button className={`${px}-nav__item-trigger`} type="button">
+              <Text variant={TextVariants.snwHeaderLink}>{label}</Text>
+            </button>
+            {navListElement
+              ? React.cloneElement(navListElement[0], { className: `${baseClassName}__submenu` })
+              : undefined}
+          </li>
+        </SSRMediaQuery.Media>
+      </>
     );
   },
 );

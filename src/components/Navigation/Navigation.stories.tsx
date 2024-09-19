@@ -7,8 +7,8 @@ import NavigationItem from './NavigationItem/NavigationItem';
 import { LinkVariants } from '../Link';
 import Search from '../Search/Search';
 import { CSSProperties, useState } from 'react';
-import { HeaderContext } from '../Header/Header';
-import { defaultHeaderContext } from '../Header/utils';
+import { HeaderContext } from '../../site-furniture/Header/Header';
+import { defaultHeaderContext } from '../../site-furniture/Header/utils';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -40,14 +40,14 @@ export const Playground = () => {
               <NavigationItem
                 badge="New York"
                 href="#"
-                navGroup="nav-link-lg"
+                navGroup="nav-link-start"
                 navType={LinkVariants.snwFlyoutLink}
                 label="Editions & Works on Paper"
               />
               <NavigationItem
                 badge="London"
                 href="#"
-                navGroup="nav-link-lg"
+                navGroup="nav-link-start"
                 navType={LinkVariants.snwFlyoutLink}
                 label="Casa Fornaroli"
               />

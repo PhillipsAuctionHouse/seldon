@@ -31,7 +31,7 @@ $lg: #{$px}-input--lg;
     border-radius: 0.1875rem;
     font-size: 0.8125rem;
     margin-bottom: 0.25rem;
-    padding: 0.5rem;
+    padding: $padding-xsm;
 
     // width: 100%;
   }
@@ -44,20 +44,6 @@ $lg: #{$px}-input--lg;
     overflow: hidden;
   }
 
-  // Small input size
-  &--sm {
-    .#{$px}-input__input {
-      padding: 0.25rem 0.5rem;
-    }
-  }
-
-  // Large input size
-  &--lg {
-    .#{$px}-input__input {
-      padding: 0.75rem 0.5rem;
-    }
-  }
-
   // Inline
   &--inline {
     align-items: center;
@@ -67,10 +53,6 @@ $lg: #{$px}-input--lg;
     .#{$px}-input__input {
       align-self: center;
       width: unset;
-    }
-
-    .#{$px}-input__label {
-      // max-width: 8.75rem;
     }
   }
 
@@ -174,8 +156,11 @@ $lg: #{$px}-input--lg;
   }
 }
 
+.#{$px}-select-input.#{$px}-input {
+  width: fit-content;
+}
 .#{$px}-select-input .#{$px}-input__input {
-  flex: 1;
+  width: fit-content;
 }
 
 @keyframes reveal {
