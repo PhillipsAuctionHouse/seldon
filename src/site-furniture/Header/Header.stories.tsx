@@ -177,7 +177,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
                 />
                 <NavigationItem
                   href="#"
-                  className="view-all"
+                  isViewAllLink
                   navGroup="nav-link-start"
                   navType={LinkVariants.link}
                   label="View All"
@@ -261,7 +261,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
                 />
                 <NavigationItem
                   href="#"
-                  className="view-all"
+                  isViewAllLink
                   navGroup="nav-link-start"
                   navType={LinkVariants.link}
                   label="View All"
