@@ -1,3 +1,10 @@
+## [1.58.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.2...v1.58.3) (2024-09-20)
+
+
+### Bug Fixes
+
+* **boldedFonts:** L3-3693 variable font weight not working in Safari ([#327](https://github.com/PhillipsAuctionHouse/seldon/issues/327)) ([3508415](https://github.com/PhillipsAuctionHouse/seldon/commit/3508415b18aa95cbceee8a4d2b83f59ac2ff324e))
+
 ## [1.58.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.1...v1.58.2) (2024-09-19)
 
 
