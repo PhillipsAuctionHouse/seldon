@@ -20,7 +20,8 @@ h4,
 h5,
 h6 {
   font-variation-settings: 'wght' 700;
-  font-variation-settings: 'wght' unset;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+  font-weight: unset;
 }
 
 // Design markdown styles
