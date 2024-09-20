@@ -31,7 +31,7 @@ export interface CarouselDotsProps extends ComponentProps<'div'> {
 const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
   ({ className, maxDots = 7, position = 'inline', numberOfSlides = 0, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
-    const { api } = useCarousel();
+    const { api, onSlideChange } = useCarousel();
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [scrollSnaps, setScrollSnaps] = useState<number[]>(
       Array.from({ length: numberOfSlides }, (_, index) => index),
@@ -41,8 +41,9 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
       (index: number) => {
         if (!api) return;
         api.scrollTo(index, true);
+        onSlideChange?.(index);
       },
-      [api],
+      [api, onSlideChange],
     );
 
     const onInit = useCallback((emblaApi: EmblaCarouselType) => {
@@ -53,6 +54,13 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
       setSelectedIndex(emblaApi.selectedScrollSnap());
     }, []);
 
+    const onSettle = useCallback(
+      (emblaApi: EmblaCarouselType) => {
+        onSlideChange?.(emblaApi.selectedScrollSnap());
+      },
+      [onSlideChange],
+    );
+
     useEffect(() => {
       if (!api) {
         return;
@@ -60,8 +68,11 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
 
       onInit(api);
       onSelect(api);
-      api.on('reInit', onInit).on('reInit', onSelect).on('select', onSelect);
-    }, [api, onInit, onSelect]);
+      api.on('reInit', onInit).on('reInit', onSelect).on('select', onSelect).on('settle', onSettle);
+      return () => {
+        api.off('reInit', onInit).off('reInit', onSelect).off('select', onSelect).off('settle', onSettle);
+      };
+    }, [api, onInit, onSelect, onSettle]);
 
     const getVisibleDots = () => {
       if (scrollSnaps.length <= maxDots) return scrollSnaps;

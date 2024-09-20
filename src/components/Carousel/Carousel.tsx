@@ -75,7 +75,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       [api],
     );
 
-    const onSelect = useCallback(
+    const onSettle = useCallback(
       (api: CarouselApi) => {
         if (!api) {
           return;
@@ -90,15 +90,15 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
         return;
       }
 
-      onSelect(api);
-      api.on('reInit', onSelect);
-      api.on('select', onSelect);
+      onSettle(api);
+      api.on('reInit', onSettle);
+      api.on('settle', onSettle);
 
       return () => {
-        api?.off('select', onSelect);
-        api?.off('reInit', onSelect);
+        api?.off('settle', onSettle);
+        api?.off('reInit', onSettle);
       };
-    }, [api, onSelect]);
+    }, [api, onSettle]);
 
     return (
       <CarouselContext.Provider
@@ -110,6 +110,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
           canScrollPrev: api?.canScrollPrev() ?? false,
           canScrollNext: api?.canScrollNext() ?? false,
           columnGap,
+          onSlideChange,
         }}
       >
         <div
