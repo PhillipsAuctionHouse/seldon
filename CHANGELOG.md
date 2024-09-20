@@ -1,3 +1,10 @@
+## [1.58.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.3...v1.58.4) (2024-09-20)
+
+
+### Bug Fixes
+
+* **header-submenus:** L3-2818 style fix for view all links in header submenus ([#322](https://github.com/PhillipsAuctionHouse/seldon/issues/322)) ([f1f0b15](https://github.com/PhillipsAuctionHouse/seldon/commit/f1f0b15dab17a8445fdfe23cb84e725809650163))
+
 ## [1.58.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.2...v1.58.3) (2024-09-20)
 
 
