@@ -1,3 +1,45 @@
+## [1.58.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.3...v1.58.4) (2024-09-20)
+
+
+### Bug Fixes
+
+* **header-submenus:** L3-2818 style fix for view all links in header submenus ([#322](https://github.com/PhillipsAuctionHouse/seldon/issues/322)) ([f1f0b15](https://github.com/PhillipsAuctionHouse/seldon/commit/f1f0b15dab17a8445fdfe23cb84e725809650163))
+
+## [1.58.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.2...v1.58.3) (2024-09-20)
+
+
+### Bug Fixes
+
+* **boldedFonts:** L3-3693 variable font weight not working in Safari ([#327](https://github.com/PhillipsAuctionHouse/seldon/issues/327)) ([3508415](https://github.com/PhillipsAuctionHouse/seldon/commit/3508415b18aa95cbceee8a4d2b83f59ac2ff324e))
+
+## [1.58.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.1...v1.58.2) (2024-09-19)
+
+
+### Bug Fixes
+
+* **deps:** L3-3828 remove incorrect fresnel dependency ([#325](https://github.com/PhillipsAuctionHouse/seldon/issues/325)) ([6fe7230](https://github.com/PhillipsAuctionHouse/seldon/commit/6fe7230afc3305c1bb4e1f0565176d41bcaf8e38))
+
+## [1.58.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.0...v1.58.1) (2024-09-19)
+
+
+### Bug Fixes
+
+* **button:** L3-3801 fix button styling issues in other components ([#324](https://github.com/PhillipsAuctionHouse/seldon/issues/324)) ([cc815cc](https://github.com/PhillipsAuctionHouse/seldon/commit/cc815cce50427cea19ebd5a2f1cc1a19b7c7d674))
+
+# [1.58.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.57.1...v1.58.0) (2024-09-18)
+
+
+### Features
+
+* **Text:** L3-3572 added superscript prop ([#323](https://github.com/PhillipsAuctionHouse/seldon/issues/323)) ([e81f400](https://github.com/PhillipsAuctionHouse/seldon/commit/e81f4005dad97d898bbd87aa5d7df7fe0a02bd3c))
+
+## [1.57.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.57.0...v1.57.1) (2024-09-18)
+
+
+### Bug Fixes
+
+* **pagination:** L3-2774 use IconButton in Pagination component ([#320](https://github.com/PhillipsAuctionHouse/seldon/issues/320)) ([e74d254](https://github.com/PhillipsAuctionHouse/seldon/commit/e74d254e9b8e1e0a47c9f8a88b492ff10457475e))
+
 # [1.57.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.56.0...v1.57.0) (2024-09-17)
 
 

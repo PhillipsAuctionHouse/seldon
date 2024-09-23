@@ -3,6 +3,7 @@ import { getCommonProps, noOp } from '../../utils';
 import CloseIcon from '../../assets/close.svg?react';
 import ReactModal from 'react-modal';
 import IconButton from '../IconButton/IconButton';
+import { ButtonVariants } from '../Button/types';
 
 export interface ModalProps extends ReactModal.Props {
   /**
@@ -62,6 +63,7 @@ const Modal = ({
         onClick={onClose}
         aria-label="Close Modal"
         className={classnames(`${baseClassName}__close`)}
+        variant={ButtonVariants.tertiary}
       >
         <CloseIcon />
       </IconButton>

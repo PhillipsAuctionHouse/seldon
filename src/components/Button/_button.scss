@@ -10,7 +10,7 @@
   color: $pure-white;
   cursor: pointer;
   display: inline-flex;
-  font-weight: 600;
+  font-variation-settings: 'wght' 600;
   gap: $margin-xsm;
   justify-content: center;
   padding: 0 $padding-md;
@@ -71,9 +71,8 @@
     background-color: $pure-white;
     border: 1px solid $pure-black;
     color: $pure-black;
-    mix-blend-mode: difference;
-    position: relative;
     transition: border 0.3s ease-out;
+    z-index: 0;
 
     &::before {
       border-radius: 100px;

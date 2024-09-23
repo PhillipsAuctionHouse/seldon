@@ -11,7 +11,7 @@
 .storybook-page h2 {
   display: inline-block;
   font-size: 32px;
-  font-weight: 700;
+  font-variation-settings: 'wght' 700;
   line-height: 1;
   margin: 0 0 4px;
   vertical-align: top;
@@ -41,7 +41,7 @@
   color: #66bf3c;
   display: inline-block;
   font-size: 11px;
-  font-weight: 700;
+  font-variation-settings: 'wght' 700;
   line-height: 12px;
   margin-right: 10px;
   padding: 4px 12px;
