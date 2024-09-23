@@ -16,7 +16,7 @@ export interface PageContentWrapperProps extends ComponentProps<'div'> {
  *
  * This component wraps content on a page to maintain consistent page padding
  *
- * [Figma Link](Add Figma URL here)
+ * [Figma Link](https://www.figma.com/design/hxqgsE26wM7hII0WaUaDfF/RW---TIMED-Lot-Details-(PDP)?node-id=1-1309&node-type=frame&m=dev) points to Lot Details page, which is wrapped in this
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-pagecontentwrapper--overview)
  */
