@@ -36,6 +36,8 @@ h3,
 h4,
 h5,
 h6 {
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+  font-weight: unset;
   overflow-wrap: break-word;
 }
 

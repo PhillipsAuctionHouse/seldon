@@ -7,8 +7,8 @@
     position: absolute;
   }
 
-  &:focus {
-    &:focus {
+  &:focus-visible {
+    &:focus-visible {
       outline: 0.5px solid $soft-black;
       outline-offset: -4.5px;
 
