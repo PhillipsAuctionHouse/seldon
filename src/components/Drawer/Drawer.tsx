@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import * as Dialog from '@radix-ui/react-dialog';
 import CloseIcon from '../../assets/close.svg?react';
 import IconButton from '../IconButton/IconButton';
+import { ButtonVariants } from '../Button/types';
 
 // You'll need to change the HTMLDivElement to match the top-level element of your component
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -53,6 +54,7 @@ const Drawer = ({ className, isOpen = false, onClose = noOp, children, ...props 
               className={classnames(`${baseClassName}__close`)}
               aria-label="Close"
               data-testid="drawer-close"
+              variant={ButtonVariants.tertiary}
             >
               <CloseIcon />
             </IconButton>
