@@ -1,3 +1,10 @@
+# [1.60.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.59.1...v1.60.0) (2024-09-23)
+
+
+### Features
+
+* **carousel:** L3-3145 carousel component in seldon ([#321](https://github.com/PhillipsAuctionHouse/seldon/issues/321)) ([d4a69ea](https://github.com/PhillipsAuctionHouse/seldon/commit/d4a69ea2194d3367430d25a7c23df51fc64fb41a))
+
 ## [1.59.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.59.0...v1.59.1) (2024-09-23)
 
 
