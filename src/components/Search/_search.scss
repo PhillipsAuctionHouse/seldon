@@ -22,8 +22,12 @@
   }
 
   &--active {
-    left: $spacing-md;
+    left: 0;
     transition: left 0.25s ease-in 0.2s;
+
+    @include isHeaderMobile {
+      left: $spacing-md;
+    }
   }
 
   &__input-status-icon {

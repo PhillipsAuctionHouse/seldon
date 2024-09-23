@@ -110,12 +110,13 @@
     }
     .#{$px}-nav__list-container {
       display: flex;
-      padding: 0 $spacing-md;
+      padding: 0;
 
       @include isHeaderMobile {
         flex-direction: column;
         height: calc(100vh - var(--header-height) - 1px);
         justify-content: flex-start;
+        padding: 0 $spacing-md;
       }
 
       @include isHeaderDesktop {
