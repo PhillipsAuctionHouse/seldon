@@ -12,12 +12,25 @@ const setWindowWidth = (width: number) => {
   window.dispatchEvent(new Event('resize'));
 };
 
+const items = [
+  { href: '/modernArt', label: 'Art, Modern to Contemporary' },
+  { href: '/new', label: 'Modern & Contemporary Art Evening Sale - Test3' },
+  { href: '/lot1', label: 'Lot 1' },
+];
+
 describe('Breadcrumb component', () => {
-  const items = [
-    { href: '/modernArt', label: 'Art, Modern to Contemporary' },
-    { href: '/new', label: 'Modern & Contemporary Art Evening Sale - Test3' },
-    { href: '/lot1', label: 'Lot 1' },
-  ];
+  beforeEach(() => {
+    // Resize the window for tests
+    Object.defineProperty(window, 'innerWidth', {
+      configurable: true,
+      value: 1024, // Start as desktop
+    });
+    Object.defineProperty(window, 'innerHeight', {
+      configurable: true,
+      value: 768,
+    });
+    window.dispatchEvent(new Event('resize'));
+  });
 
   it('renders Breadcrumb with items', () => {
     render(<Breadcrumb items={items} />);
@@ -75,6 +88,18 @@ describe('Breadcrumb component', () => {
 
     expect(screen.getByText('Art, Modern to Contemporary')).toBeInTheDocument();
     expect(screen.getByText('Lot 1')).toBeInTheDocument();
+  });
+  it('renders back button image on mobile', () => {
+    // Switch to mobile viewport
+    window.innerWidth = 375; // Mobile viewport width
+    window.dispatchEvent(new Event('resize'));
+
+    render(<Breadcrumb items={items} />);
+
+    const backButton = screen.getByRole('button'); // Back button should be here
+
+    expect(backButton).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: /Back/i })).toBeInTheDocument(); // Ensure the back icon is rendered
   });
 });
 

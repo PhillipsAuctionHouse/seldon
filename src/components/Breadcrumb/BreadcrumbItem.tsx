@@ -1,7 +1,7 @@
 import React from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
-import chevronNext from '../../assets/chevronNext.svg';
+import ChevronNextIcon from '../../assets/chevronNext.svg?react';
 
 export interface BreadcrumbItemProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -25,6 +25,10 @@ export interface BreadcrumbItemProps extends React.HTMLAttributes<HTMLDivElement
    * Length to which the text should be truncated
    * */
   truncateLength?: number;
+  /**
+   * Custom element to render for the link
+   */
+  element?: React.ElementType<React.ComponentProps<'a'>>;
 }
 
 const BreadcrumbItem = ({
@@ -33,7 +37,8 @@ const BreadcrumbItem = ({
   label,
   isCurrent = false,
   isTruncateText = false,
-  truncateLength = 10,
+  truncateLength = 30,
+  element: CustomElement = 'a',
   ...props
 }: BreadcrumbItemProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Breadcrumb');
@@ -46,15 +51,15 @@ const BreadcrumbItem = ({
 
   return (
     <li>
-      <a
+      <CustomElement
         aria-current={ariaCurrent}
         className={classnames(baseClassName, className, { [`${baseClassName}--current`]: isCurrent })}
         href={currentHref}
         {...commonProps}
       >
         {isTruncateText ? getTruncatedLabel() : label}
-      </a>
-      {!isCurrent ? <img className={classnames(baseClassName, className, 'chevron')} src={chevronNext} /> : null}
+      </CustomElement>
+      {!isCurrent ? <ChevronNextIcon /> : null}
     </li>
   );
 };

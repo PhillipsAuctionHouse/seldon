@@ -1,7 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-breadcrumb {
-  @include text($body3);
+  @include text($body2);
 
   color: $pure-black;
 
@@ -10,10 +10,19 @@
   }
 
   .back-button {
+    align-items: center;
     background-color: transparent;
     border: none;
     cursor: pointer;
-    padding: 0;
+    display: flex;
+    height: 44px;
+    justify-content: center;
+    width: 44px;
+
+    svg {
+      height: 24px;
+      width: 24px;
+    }
   }
 
   ol {
@@ -22,8 +31,14 @@
     padding: 0;
 
     li {
+      align-items: center;
       display: flex;
       flex-direction: row;
+
+      svg {
+        height: 16px;
+        width: 16px;
+      }
 
       a {
         margin: $margin-sm;

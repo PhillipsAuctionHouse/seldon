@@ -3,7 +3,7 @@ import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import BreadcrumbItem, { BreadcrumbItemProps } from './BreadcrumbItem';
 import { SSRMediaQuery } from '../../providers/utils';
-import arrowPrev from '../../assets/arrowPrev.svg';
+import ArrowPrevIcon from '../../assets/arrowPrev.svg?react';
 
 export interface BreadcrumbProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -19,6 +19,10 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLDivElement> {
    * Max length for truncation
    */
   truncateLength?: number;
+  /**
+   * Custom element to render for the link
+   */
+  linkElement?: React.ElementType<React.ComponentProps<'a'>>;
 }
 /**
  * ## Overview
@@ -29,16 +33,23 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-breadcrumb--overview)
  */
-const Breadcrumb = ({ className, items = [], truncateIndex, truncateLength = 10, ...props }: BreadcrumbProps) => {
+const Breadcrumb = ({
+  className,
+  items = [],
+  truncateIndex,
+  truncateLength = 10,
+  linkElement: CustomElement = 'a',
+  ...props
+}: BreadcrumbProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Breadcrumb');
 
   return (
     <nav aria-label="Breadcrumb" className={classnames(baseClassName, className)} {...commonProps} {...props}>
       {/* This is not visible when in desktop breakpoint */}
       <SSRMediaQuery.Media lessThan="md">
-        <button onClick={() => (window.location.href = items[1].href ? items[1].href : '')} className="back-button">
-          <img className={classnames(baseClassName, className, 'arrowPrev')} src={arrowPrev} />
-        </button>
+        <CustomElement href={items[1].href ? items[1].href : '/'} className="back-button">
+          <ArrowPrevIcon />
+        </CustomElement>
       </SSRMediaQuery.Media>
       {/* This is not visible when in mobile breakpoint */}
       <SSRMediaQuery.Media greaterThanOrEqual="md">
@@ -47,6 +58,7 @@ const Breadcrumb = ({ className, items = [], truncateIndex, truncateLength = 10,
             <BreadcrumbItem
               href={item.href}
               label={item.label}
+              element={CustomElement}
               isCurrent={items.length - 1 === index}
               key={item.label}
               isTruncateText={truncateIndex === index}
