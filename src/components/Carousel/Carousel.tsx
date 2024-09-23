@@ -1,9 +1,8 @@
 import { ComponentProps, forwardRef, createContext, useCallback, useEffect, KeyboardEvent } from 'react';
-import { getCommonProps } from '../../utils';
+import { getCommonProps, SpacingTokens } from '../../utils';
 import classnames from 'classnames';
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
-import { SpacingTokens } from '../../utils';
 
 export type CarouselApi = UseEmblaCarouselType[1];
 
