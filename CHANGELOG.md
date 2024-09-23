@@ -1,3 +1,10 @@
+# [1.59.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.4...v1.59.0) (2024-09-23)
+
+
+### Features
+
+* **pageContentWrapper:** L3-3860 Create Wrapper component for Seldon ([#328](https://github.com/PhillipsAuctionHouse/seldon/issues/328)) ([b40b59a](https://github.com/PhillipsAuctionHouse/seldon/commit/b40b59aa504472b2fec4cb0197f4aed66c22bcac))
+
 ## [1.58.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.3...v1.58.4) (2024-09-20)
 
 
