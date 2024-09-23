@@ -63,3 +63,4 @@ export * from './patterns/LanguageSelector';
 export * from './components/ContentPeek';
 export * from './components/Collapsible';
 export * from './providers/SeldonProvider';
+export { default as PageContentWrapper } from './components/PageContentWrapper/PageContentWrapper';

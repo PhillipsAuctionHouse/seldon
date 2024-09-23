@@ -1,0 +1,9 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-page-content-wrapper {
+  padding: 0 $padding-md;
+
+  @media (min-width: $breakpoint-xl) {
+    padding: 0 3.25rem;
+  }
+}
