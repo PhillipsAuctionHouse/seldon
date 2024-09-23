@@ -1,3 +1,10 @@
+## [1.59.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.59.0...v1.59.1) (2024-09-23)
+
+
+### Bug Fixes
+
+* **select:** L3-2774 fix small Firefox style issue in the Pagination component ([#329](https://github.com/PhillipsAuctionHouse/seldon/issues/329)) ([cc80141](https://github.com/PhillipsAuctionHouse/seldon/commit/cc801415dfa593217eeea17d96f3649cb733643f))
+
 # [1.59.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.4...v1.59.0) (2024-09-23)
 
 
