@@ -127,6 +127,18 @@
       }
     }
 
+    @include isHeaderMobile {
+      left: 0;
+      position: absolute;
+      top: var(--header-height);
+      transition: left 0.25s ease-in-out;
+
+      &--closed {
+        display: unset;
+        left: -100vw;
+      }
+    }
+
     @include isHeaderDesktop {
       display: flex;
       height: unset;

@@ -14,16 +14,23 @@ export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
   label: string;
 }
 
-const MobileNavigationItemTrigger = ({ id, label, children }: NavigationItemTriggerProps) => {
+const MobileNavigationItemTrigger = ({ label, children }: NavigationItemTriggerProps) => {
+  const accordionProps = [
+    {
+      isLocked: false,
+      variation: 'sm',
+      children: children,
+      hasTransition: true,
+      label: <Text variant={TextVariants.snwHeaderLink}>{label}</Text>,
+    },
+  ];
   return (
     <Accordion>
-      <AccordionItem
-        variation="sm"
-        id={id ?? `${label}-accordion`}
-        label={<Text variant={TextVariants.snwHeaderLink}>{label}</Text>}
-      >
-        {children}
-      </AccordionItem>
+      {accordionProps.map((item, index) => (
+        <AccordionItem {...item} key={`accordion-key-${item?.label}`} id={`accordion-item-${index}`}>
+          {item?.children}
+        </AccordionItem>
+      ))}
     </Accordion>
   );
 };
@@ -45,15 +52,15 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
 
     return (
       <>
-        <SSRMediaQuery.Media lessThan="md">
-          <MobileNavigationItemTrigger id={id} label={label} {...commonProps}>
-            {navListElement
-              ? React.cloneElement(navListElement[0], {
-                  className: `${baseClassName}__submenu--mobile`,
-                })
-              : undefined}
-          </MobileNavigationItemTrigger>
-        </SSRMediaQuery.Media>
+        {/* <SSRMediaQuery.Media lessThan="md"> */}
+        <MobileNavigationItemTrigger id={id} label={label} {...commonProps}>
+          {navListElement
+            ? React.cloneElement(navListElement[0], {
+                className: `${baseClassName}__submenu--mobile`,
+              })
+            : undefined}
+        </MobileNavigationItemTrigger>
+        {/* </SSRMediaQuery.Media> */}
         <SSRMediaQuery.Media greaterThanOrEqual="md">
           <li
             {...commonProps}
