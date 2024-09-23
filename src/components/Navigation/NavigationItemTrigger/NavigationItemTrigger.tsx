@@ -14,23 +14,18 @@ export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
   label: string;
 }
 
-const MobileNavigationItemTrigger = ({ label, children }: NavigationItemTriggerProps) => {
-  const accordionProps = [
-    {
-      isLocked: false,
-      variation: 'sm',
-      children: children,
-      hasTransition: true,
-      label: <Text variant={TextVariants.snwHeaderLink}>{label}</Text>,
-    },
-  ];
+const MobileNavigationItemTrigger = ({ id, label, children }: NavigationItemTriggerProps) => {
   return (
     <Accordion>
-      {accordionProps.map((item, index) => (
-        <AccordionItem {...item} key={`accordion-key-${item?.label}`} id={`accordion-item-${index}`}>
-          {item?.children}
-        </AccordionItem>
-      ))}
+      <AccordionItem
+        variation="sm"
+        hasTransition
+        key={`accordion-key-${label}`}
+        id={`accordion-item-${id}`}
+        label={<Text variant={TextVariants.snwHeaderLink}>{label}</Text>}
+      >
+        {children}
+      </AccordionItem>
     </Accordion>
   );
 };
