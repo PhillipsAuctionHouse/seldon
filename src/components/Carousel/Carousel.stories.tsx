@@ -13,7 +13,7 @@ const meta = {
 
 export default meta;
 export const Playground = (props: CarouselProps) => (
-  <Carousel {...props}>
+  <Carousel {...props} useWheelGestures>
     <CarouselContent>
       {Array.from({ length: 9 }).map((_, index) => (
         <CarouselItem key={index}>
@@ -73,6 +73,7 @@ CarouselWithDots.argTypes = {};
 
 export const ControlledCarousel = (props: CarouselProps & CarouselDotsProps) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  console.log(selectedIndex);
   return (
     <Carousel {...props} startIndex={selectedIndex} onSlideChange={setSelectedIndex}>
       <CarouselContent>

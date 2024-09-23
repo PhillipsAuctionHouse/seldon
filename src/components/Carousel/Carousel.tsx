@@ -2,9 +2,10 @@ import { ComponentProps, forwardRef, createContext, useCallback, useEffect, Keyb
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import { SpacingTokens } from '../../utils';
 
-type CarouselApi = UseEmblaCarouselType[1];
+export type CarouselApi = UseEmblaCarouselType[1];
 
 // to expose more options from the embla carousel API
 // see what is available in https://www.embla-carousel.com/api/options/
@@ -25,6 +26,10 @@ export interface CarouselProps extends ComponentProps<'div'> {
    * The horizontal gap between the carousel items.
    */
   columnGap?: SpacingTokens;
+  /**
+   * Whether the carousel should use wheel gestures.
+   */
+  useWheelGestures?: boolean;
 }
 
 type CarouselContextProps = {
@@ -54,13 +59,27 @@ export const CarouselContext = createContext<CarouselContextProps | null>(null);
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-carousel--overview)
  */
 const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
-  ({ loop = false, startIndex = 0, onSlideChange, className, children, columnGap, ...props }, ref) => {
+  (
+    { loop = false, startIndex = 0, onSlideChange, className, children, columnGap, useWheelGestures = false, ...props },
+    ref,
+  ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
 
-    const [carouselRef, api] = useEmblaCarousel({
-      loop,
-      startIndex,
-    });
+    const [carouselRef, api] = useEmblaCarousel(
+      {
+        loop,
+        startIndex,
+      },
+      [
+        ...(useWheelGestures
+          ? [
+              WheelGesturesPlugin({
+                forceWheelAxis: 'x',
+              }),
+            ]
+          : []),
+      ],
+    );
 
     const handleKeyDown = useCallback(
       (event: KeyboardEvent<HTMLDivElement>) => {
@@ -89,7 +108,6 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       if (!api) {
         return;
       }
-
       onSettle(api);
       api.on('reInit', onSettle);
       api.on('settle', onSettle);
