@@ -1,6 +1,5 @@
 import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
-
 export interface DetailProps extends ComponentProps<'div'> {
   /*
    * Label that appears on the left side of the Detail component
