@@ -1,0 +1,22 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-detail {
+  display: flex;
+  justify-content: space-between;
+
+  &--detail {
+    color: $pure-black;
+    margin-bottom: $spacing-sm;
+    margin-top: $spacing-sm;
+
+    @include text($string2);
+  }
+
+  &--label {
+    font-variation-settings: 'wght' 600;
+  }
+
+  &--value {
+    font-variation-settings: 'wght' 400;
+  }
+}
