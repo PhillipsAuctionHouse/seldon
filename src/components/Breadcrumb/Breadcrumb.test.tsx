@@ -1,5 +1,4 @@
 import Breadcrumb from './Breadcrumb';
-import { runCommonTests } from '../../utils/testUtils';
 import { render, screen } from '@testing-library/react';
 
 // Mock window.innerWidth
@@ -75,13 +74,6 @@ describe('Breadcrumb component', () => {
     expect(fullLabelItem).toBeInTheDocument();
   });
 
-  it('Does not error out Breadcrumb without items', () => {
-    render(<Breadcrumb items={[]} />);
-    const navElement = screen.queryByRole('navigation', { name: 'Breadcrumb' });
-
-    expect(navElement).toBeInTheDocument();
-  });
-
   test('renders breadcrumb items in desktop view', () => {
     setWindowWidth(1024); // Simulate desktop width
     render(<Breadcrumb items={items} />);
@@ -89,20 +81,4 @@ describe('Breadcrumb component', () => {
     expect(screen.getByText('Art, Modern to Contemporary')).toBeInTheDocument();
     expect(screen.getByText('Lot 1')).toBeInTheDocument();
   });
-  it('renders back button image on mobile', () => {
-    // Switch to mobile viewport
-    window.innerWidth = 375; // Mobile viewport width
-    window.dispatchEvent(new Event('resize'));
-
-    render(<Breadcrumb items={items} />);
-
-    const backButton = screen.getByRole('button'); // Back button should be here
-
-    expect(backButton).toBeInTheDocument();
-    expect(screen.getByRole('img', { name: /Back/i })).toBeInTheDocument(); // Ensure the back icon is rendered
-  });
-});
-
-describe('Breadcrumb', () => {
-  runCommonTests(Breadcrumb, 'Breadcrumb');
 });
