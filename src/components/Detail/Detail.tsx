@@ -2,7 +2,6 @@ import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 
-// You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface DetailProps extends ComponentProps<'div'> {
   /*
    * Label that appears on the left side of the Detail component
