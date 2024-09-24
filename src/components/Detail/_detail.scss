@@ -1,6 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-detail {
+  border-top: 1px solid $light-gray;
   display: flex;
   justify-content: space-between;
 
@@ -10,6 +11,10 @@
     margin-top: $spacing-sm;
 
     @include text($string2);
+  }
+
+  &.show-bottom-border {
+    border-bottom: 1px solid $light-gray;
   }
 
   &--label {

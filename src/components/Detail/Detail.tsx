@@ -11,6 +11,10 @@ export interface DetailProps extends ComponentProps<'div'> {
    * Value that appears on the right side of the Detail component
    */
   value: string;
+  /*
+   * If true, a bottom border will be applied
+   */
+  showBottomBorder?: boolean;
 }
 /**
  * ## Overview
@@ -24,9 +28,17 @@ export interface DetailProps extends ComponentProps<'div'> {
  */
 const Detail = forwardRef<HTMLDivElement, DetailProps>(({ className, ...props }, ref) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Detail');
+  const { showBottomBorder } = props;
 
   return (
-    <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
+    <div
+      {...commonProps}
+      className={classnames(baseClassName, className, {
+        'show-bottom-border': showBottomBorder,
+      })}
+      {...props}
+      ref={ref}
+    >
       <span className={classnames(`${baseClassName}--detail`, `${baseClassName}--label`)}>{props.label}</span>
       <span className={classnames(`${baseClassName}--detail`, `${baseClassName}--value`)}>{props.value}</span>
     </div>
