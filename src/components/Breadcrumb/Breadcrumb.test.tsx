@@ -18,6 +18,7 @@ const items = [
 ];
 
 describe('Breadcrumb component', () => {
+  const reqProps = { id: 'test-id' };
   beforeEach(() => {
     // Resize the window for tests
     Object.defineProperty(window, 'innerWidth', {
@@ -80,5 +81,15 @@ describe('Breadcrumb component', () => {
 
     expect(screen.getByText('Art, Modern to Contemporary')).toBeInTheDocument();
     expect(screen.getByText('Lot 1')).toBeInTheDocument();
+  });
+
+  test('renders back button in mobile view', () => {
+    render(<Breadcrumb {...reqProps} items={items} />);
+
+    // Check if back button is rendered
+    const backButton = screen.getByTestId('test-id-back-button');
+    expect(backButton).toBeInTheDocument();
+    expect(backButton).toHaveAttribute('href', '/new'); // Check for default href if no second item
+    expect(backButton.querySelector('svg')).toBeInTheDocument(); // Check if SVG icon is rendered
   });
 });

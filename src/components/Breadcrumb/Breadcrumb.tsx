@@ -7,6 +7,10 @@ import ArrowPrevIcon from '../../assets/arrowPrev.svg?react';
 
 export interface BreadcrumbProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
+   * Unique id for component testing
+   */
+  id?: string;
+  /**
    * The items to be displayed in the Breadcrumb. The items will be displayed left
    * to right in which they are ordered in the array (0 index being the first element)
    */
@@ -42,12 +46,17 @@ const Breadcrumb = ({
   ...props
 }: BreadcrumbProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Breadcrumb');
+  const { id } = props;
 
   return (
     <nav aria-label="Breadcrumb" className={classnames(baseClassName, className)} {...commonProps} {...props}>
       {/* This is not visible when in desktop breakpoint */}
       <SSRMediaQuery.Media lessThan="md">
-        <CustomElement href={items[1].href ? items[1].href : '/'} className="back-button">
+        <CustomElement
+          href={items[1].href ? items[1].href : '/'}
+          className="back-button"
+          data-testid={`${id}-back-button`}
+        >
           <ArrowPrevIcon />
         </CustomElement>
       </SSRMediaQuery.Media>
