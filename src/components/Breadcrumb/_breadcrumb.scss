@@ -43,10 +43,11 @@
       a {
         margin: $margin-sm;
         overflow: hidden;
+        text-decoration: none;
         text-wrap: nowrap;
 
         &:hover {
-          color: $widget-blue;
+          color: $button-hover;
           text-decoration: none;
         }
       }
