@@ -28,7 +28,7 @@
     &__token.#{$px}-color-card__token {
       color: $primary-black;
       font-size: 1.25rem;
-      font-weight: 700;
+      font-variation-settings: 'wght' 700;
       line-height: 1.5;
     }
 
@@ -47,14 +47,14 @@
 
     &__usage span {
       display: block;
-      font-weight: 700;
+      font-variation-settings: 'wght' 700;
       line-height: 1.625;
     }
 
     &__copied {
       animation: show-and-hide 2s ease-in-out;
       color: $pure-white;
-      font-weight: bold;
+      font-variation-settings: 'wght' 700;
       left: 50%;
       opacity: 0;
       position: absolute;
@@ -91,14 +91,14 @@
 
   &__usage span {
     display: block;
-    font-weight: 700;
+    font-variation-settings: 'wght' 700;
     line-height: 1.625;
   }
 
   &__copied {
     animation: show-and-hide 2s ease-in-out;
     color: $pure-white;
-    font-weight: bold;
+    font-variation-settings: 'wght' 700;
     left: 50%;
     opacity: 0;
     position: absolute;

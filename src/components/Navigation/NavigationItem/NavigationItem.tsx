@@ -14,6 +14,10 @@ export interface NavigationItemProps extends ComponentProps<'li'> {
    */
   href?: string;
   /**
+   * Optional value to give the navigation item unique styling
+   */
+  isViewAllLink?: boolean;
+  /**
    * Label for the navigation item
    */
   label?: ReactNode;
@@ -41,13 +45,29 @@ export interface NavigationItemProps extends ComponentProps<'li'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-languageselector--overview)
  */
 const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
-  ({ badge, className = '', href, label, navGroup, navType, onClick, element: Component = Link, ...props }, ref) => {
+  (
+    {
+      badge,
+      className = '',
+      href,
+      isViewAllLink = false,
+      label,
+      navGroup,
+      navType,
+      onClick,
+      element: Component = Link,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <li
         {...props}
         onClick={onClick}
         data-testid={`nav-item-${label}`}
-        className={classNames(`${px}-nav__item`, navGroup, className)}
+        className={classNames(`${px}-nav__item`, navGroup, className, {
+          [`view-all`]: isViewAllLink,
+        })}
         ref={ref}
       >
         <Component href={href} variant={navType ? navType : LinkVariants.snwHeaderLink}>

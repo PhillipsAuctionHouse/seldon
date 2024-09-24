@@ -1,3 +1,50 @@
+# [1.61.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.60.0...v1.61.0) (2024-09-24)
+
+
+### Bug Fixes
+
+* **deps:** bump rollup from 4.21.3 to 4.22.4 ([#332](https://github.com/PhillipsAuctionHouse/seldon/issues/332)) ([8fc1991](https://github.com/PhillipsAuctionHouse/seldon/commit/8fc1991a23255dddeda7ea9fe8de609416e8f6f8))
+
+
+### Features
+
+* **footer:** L3-3865 logo size change ([#331](https://github.com/PhillipsAuctionHouse/seldon/issues/331)) ([f96640e](https://github.com/PhillipsAuctionHouse/seldon/commit/f96640e9dedb08a7dc4375e8560b7b24dc9b5eeb))
+
+# [1.60.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.59.1...v1.60.0) (2024-09-23)
+
+
+### Features
+
+* **carousel:** L3-3145 carousel component in seldon ([#321](https://github.com/PhillipsAuctionHouse/seldon/issues/321)) ([d4a69ea](https://github.com/PhillipsAuctionHouse/seldon/commit/d4a69ea2194d3367430d25a7c23df51fc64fb41a))
+
+## [1.59.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.59.0...v1.59.1) (2024-09-23)
+
+
+### Bug Fixes
+
+* **select:** L3-2774 fix small Firefox style issue in the Pagination component ([#329](https://github.com/PhillipsAuctionHouse/seldon/issues/329)) ([cc80141](https://github.com/PhillipsAuctionHouse/seldon/commit/cc801415dfa593217eeea17d96f3649cb733643f))
+
+# [1.59.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.4...v1.59.0) (2024-09-23)
+
+
+### Features
+
+* **pageContentWrapper:** L3-3860 Create Wrapper component for Seldon ([#328](https://github.com/PhillipsAuctionHouse/seldon/issues/328)) ([b40b59a](https://github.com/PhillipsAuctionHouse/seldon/commit/b40b59aa504472b2fec4cb0197f4aed66c22bcac))
+
+## [1.58.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.3...v1.58.4) (2024-09-20)
+
+
+### Bug Fixes
+
+* **header-submenus:** L3-2818 style fix for view all links in header submenus ([#322](https://github.com/PhillipsAuctionHouse/seldon/issues/322)) ([f1f0b15](https://github.com/PhillipsAuctionHouse/seldon/commit/f1f0b15dab17a8445fdfe23cb84e725809650163))
+
+## [1.58.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.2...v1.58.3) (2024-09-20)
+
+
+### Bug Fixes
+
+* **boldedFonts:** L3-3693 variable font weight not working in Safari ([#327](https://github.com/PhillipsAuctionHouse/seldon/issues/327)) ([3508415](https://github.com/PhillipsAuctionHouse/seldon/commit/3508415b18aa95cbceee8a4d2b83f59ac2ff324e))
+
 ## [1.58.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.58.1...v1.58.2) (2024-09-19)
 
 

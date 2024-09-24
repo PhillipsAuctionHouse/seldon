@@ -11,14 +11,14 @@
 
   .property {
     // @include pText($body-size2);
-    // font-weight: 400;
+    // font-variation-settings: 'wght' 400;
     color: $post-sale-magenta;
   }
 
   li:not(li strong) {
     color: $clock-widget-green;
     font-family: monospace;
-    font-weight: 600;
+    font-variation-settings: 'wght' 600;
   }
 
   li strong {
@@ -34,14 +34,14 @@
 
     .property {
       // @include pText($body-size2);
-      // font-weight: 400;
+      // font-variation-settings: 'wght' 400;
       color: $post-sale-magenta;
     }
 
     .h4 + ul li:not(li strong) {
       color: $clock-widget-green;
       font-family: monospace;
-      font-weight: 600;
+      font-variation-settings: 'wght' 600;
     }
 
     .h4 + ul li strong {

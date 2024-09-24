@@ -54,6 +54,7 @@
   }
 
   &--current {
-    font-weight: 600;
+    color: $primary-black;
+    font-variation-settings: 'wght' 700;
   }
 }

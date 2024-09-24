@@ -12,6 +12,15 @@ module.exports = {
     'scss/at-mixin-pattern': null,
     'media-feature-range-notation': 'prefix',
     'color-function-notation': 'legacy',
+    'declaration-property-value-disallowed-list': [
+      {
+        'font-weight': [/./],
+      },
+      {
+        message:
+          'Font-weight does not work with our variable fonts in Safari. Use "font-variation-settings: "wght" <weight>" instead.',
+      },
+    ],
     'selector-class-pattern': [
       '^[a-z]([-]?[a-z0-9]+)*(__[a-z0-9]([-]?[a-z0-9]+)*)?(--[a-z0-9]([-]?[a-z0-9]+)*)?$',
       {
