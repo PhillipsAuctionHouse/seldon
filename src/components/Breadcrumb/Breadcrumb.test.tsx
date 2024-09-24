@@ -14,7 +14,7 @@ const setWindowWidth = (width: number) => {
 const items = [
   { href: '/modernArt', label: 'Art, Modern to Contemporary' },
   { href: '/new', label: 'Modern & Contemporary Art Evening Sale - Test3' },
-  { href: '/lot1', label: 'Lot 1' },
+  { label: 'Lot 1' },
 ];
 
 describe('Breadcrumb component', () => {
@@ -43,12 +43,9 @@ describe('Breadcrumb component', () => {
 
     items.forEach((item, index) => {
       const linkElement = listItems[index].querySelector('a');
-      expect(linkElement).toHaveTextContent(item.label);
 
-      if (index === 2) {
-        expect(linkElement).toHaveAttribute('aria-current', 'page');
-        expect(linkElement).toHaveAttribute('href', '');
-      } else {
+      if (index !== 2) {
+        expect(linkElement).toHaveTextContent(item.label);
         expect(linkElement).toHaveAttribute('aria-current', 'false');
         expect(linkElement).toHaveAttribute('href', item.href);
       }
@@ -76,7 +73,8 @@ describe('Breadcrumb component', () => {
   });
 
   test('renders breadcrumb items in desktop view', () => {
-    setWindowWidth(1024); // Simulate desktop width
+    // Simulate desktop width
+    setWindowWidth(1024);
     render(<Breadcrumb items={items} />);
 
     expect(screen.getByText('Art, Modern to Contemporary')).toBeInTheDocument();
@@ -89,7 +87,18 @@ describe('Breadcrumb component', () => {
     // Check if back button is rendered
     const backButton = screen.getByTestId('test-id-back-button');
     expect(backButton).toBeInTheDocument();
-    expect(backButton).toHaveAttribute('href', '/new'); // Check for default href if no second item
-    expect(backButton.querySelector('svg')).toBeInTheDocument(); // Check if SVG icon is rendered
+    // Check for default href if no second item
+    expect(backButton).toHaveAttribute('href', '/new');
+    // Check if SVG icon is rendered
+    expect(backButton.querySelector('svg')).toBeInTheDocument();
+  });
+
+  test('last item is not a link', () => {
+    render(<Breadcrumb items={items} />);
+
+    const lastItem = screen.getByText('Lot 1');
+    expect(lastItem).toBeInTheDocument();
+    // Ensure the last item is a <span>, not a link
+    expect(lastItem.tagName).toBe('SPAN');
   });
 });

@@ -51,14 +51,21 @@ const BreadcrumbItem = ({
 
   return (
     <li>
-      <CustomElement
-        aria-current={ariaCurrent}
-        className={classnames(baseClassName, className, { [`${baseClassName}--current`]: isCurrent })}
-        href={currentHref}
-        {...commonProps}
-      >
-        {isTruncateText ? getTruncatedLabel() : label}
-      </CustomElement>
+      {isCurrent ? (
+        <span className={classnames(baseClassName, className, { [`${baseClassName}--current`]: isCurrent })}>
+          {label}
+        </span>
+      ) : (
+        <CustomElement
+          aria-current={ariaCurrent}
+          className={classnames(baseClassName, className, { [`${baseClassName}--current`]: isCurrent })}
+          href={currentHref}
+          {...commonProps}
+        >
+          {isTruncateText ? getTruncatedLabel() : label}
+        </CustomElement>
+      )}
+
       {!isCurrent ? <ChevronNextIcon /> : null}
     </li>
   );
