@@ -1,3 +1,15 @@
+# [1.61.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.60.0...v1.61.0) (2024-09-24)
+
+
+### Bug Fixes
+
+* **deps:** bump rollup from 4.21.3 to 4.22.4 ([#332](https://github.com/PhillipsAuctionHouse/seldon/issues/332)) ([8fc1991](https://github.com/PhillipsAuctionHouse/seldon/commit/8fc1991a23255dddeda7ea9fe8de609416e8f6f8))
+
+
+### Features
+
+* **footer:** L3-3865 logo size change ([#331](https://github.com/PhillipsAuctionHouse/seldon/issues/331)) ([f96640e](https://github.com/PhillipsAuctionHouse/seldon/commit/f96640e9dedb08a7dc4375e8560b7b24dc9b5eeb))
+
 # [1.60.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.59.1...v1.60.0) (2024-09-23)
 
 
