@@ -47,15 +47,15 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
 
     return (
       <>
-        {/* <SSRMediaQuery.Media lessThan="md"> */}
-        <MobileNavigationItemTrigger id={id} label={label} {...commonProps}>
-          {navListElement
-            ? React.cloneElement(navListElement[0], {
-                className: `${baseClassName}__submenu--mobile`,
-              })
-            : undefined}
-        </MobileNavigationItemTrigger>
-        {/* </SSRMediaQuery.Media> */}
+        <SSRMediaQuery.Media lessThan="md">
+          <MobileNavigationItemTrigger id={id} label={label} {...commonProps}>
+            {navListElement
+              ? React.cloneElement(navListElement[0], {
+                  className: `${baseClassName}__submenu--mobile`,
+                })
+              : undefined}
+          </MobileNavigationItemTrigger>
+        </SSRMediaQuery.Media>
         <SSRMediaQuery.Media greaterThanOrEqual="md">
           <li
             {...commonProps}
