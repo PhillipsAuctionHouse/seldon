@@ -19,7 +19,7 @@ const CarouselItem = forwardRef<HTMLDivElement, CarouselItemProps>(({ className,
   return (
     <div
       ref={ref}
-      role="group"
+      role={props.onClick ? 'button' : 'group'}
       aria-roledescription="slide"
       className={classNames(`${baseClassName}-item`, className, {
         [`${baseClassName}-item--gap-${columnGap}`]: !!columnGap,
