@@ -1,7 +1,6 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-accordion {
-  border-bottom: 1px solid $keyline-gray;
   border-top: 1px solid $keyline-gray;
   margin-bottom: 10px;
   width: 100%;
