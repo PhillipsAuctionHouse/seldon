@@ -1,3 +1,10 @@
+# [1.62.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.61.0...v1.62.0) (2024-09-25)
+
+
+### Features
+
+* **header-animations:** L3-3037 Header Animations Transitions ([#330](https://github.com/PhillipsAuctionHouse/seldon/issues/330)) ([5101235](https://github.com/PhillipsAuctionHouse/seldon/commit/5101235f1c4b71452744d8fe0eb6ee1843a8b3cd))
+
 # [1.61.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.60.0...v1.61.0) (2024-09-24)
 
 
