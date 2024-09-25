@@ -1,31 +1,59 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-breadcrumb {
-  @include text($body3);
+  @include text($body2);
 
-  color: $soft-black-2;
+  color: $pure-black;
 
   @media (max-width: $breakpoint-sm) {
     display: none;
   }
 
+  .back-button {
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    height: 44px;
+    justify-content: center;
+    width: 44px;
+
+    svg {
+      height: 24px;
+      width: 24px;
+    }
+  }
+
   ol {
     display: flex;
     flex-direction: row;
+    padding: 0;
 
     li {
+      align-items: center;
       display: flex;
       flex-direction: row;
+
+      svg {
+        height: 16px;
+        width: 16px;
+      }
 
       a {
         margin: $margin-sm;
         overflow: hidden;
+        text-decoration: none;
         text-wrap: nowrap;
 
         &:hover {
-          color: $widget-blue;
+          color: $button-hover;
           text-decoration: none;
         }
+      }
+
+      span {
+        margin: $margin-sm;
       }
     }
   }
