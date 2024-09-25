@@ -32,6 +32,7 @@ const Footer = ({
       <div className={`${px}-footer__links`}>{children}</div>
 
       <div className={`${px}-footer__copyright`}>
+        koss
         <h3 data-testid="footer-logo" className={`${px}-footer__logo`}>
           <a href="/" aria-label="logo">
             <Logo />
