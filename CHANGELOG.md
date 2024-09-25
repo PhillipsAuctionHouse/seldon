@@ -1,3 +1,10 @@
+# [1.65.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.64.0...v1.65.0) (2024-09-25)
+
+
+### Features
+
+* **text:** L3-3572 lifted up superscript  ([#338](https://github.com/PhillipsAuctionHouse/seldon/issues/338)) ([58dc4c5](https://github.com/PhillipsAuctionHouse/seldon/commit/58dc4c55d2f34312dd3355a0d9eb53cade72c546))
+
 # [1.64.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.63.0...v1.64.0) (2024-09-25)
 
 
