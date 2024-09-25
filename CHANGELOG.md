@@ -1,3 +1,10 @@
+# [1.63.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.62.0...v1.63.0) (2024-09-25)
+
+
+### Features
+
+* **Breadcrumb:** L3-3577 build a breadcrumb back button component in seldon ([#326](https://github.com/PhillipsAuctionHouse/seldon/issues/326)) ([1e5bbda](https://github.com/PhillipsAuctionHouse/seldon/commit/1e5bbda5fb41623b90ad9c5d5ddcb5776c4c7570))
+
 # [1.62.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.61.0...v1.62.0) (2024-09-25)
 
 
