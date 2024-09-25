@@ -1,3 +1,10 @@
+# [1.64.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.63.0...v1.64.0) (2024-09-25)
+
+
+### Features
+
+* **social|accordion:** L3-3723 fixed spacing for Footer ([#336](https://github.com/PhillipsAuctionHouse/seldon/issues/336)) ([d568434](https://github.com/PhillipsAuctionHouse/seldon/commit/d5684344edc99b4b83d569f96026a4363f13b6a2))
+
 # [1.63.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.62.0...v1.63.0) (2024-09-25)
 
 
