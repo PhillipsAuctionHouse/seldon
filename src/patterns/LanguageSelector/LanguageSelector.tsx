@@ -29,6 +29,7 @@ const MobileLanguageSelector = ({
     <Accordion {...props}>
       <AccordionItem
         variation="sm"
+        hasTransition
         id={id ?? 'language-selector-accordion'}
         label={<Text variant={TextVariants.snwHeaderLink}>{label}</Text>}
       >

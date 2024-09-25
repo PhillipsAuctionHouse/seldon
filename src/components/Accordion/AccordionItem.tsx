@@ -165,7 +165,7 @@ const AccordionItem = ({
         isLargeVariation={isLargeVariation}
         baseClassName={accordionItemClassName}
       >
-        {children}
+        <div className="radix-accordion-content">{children}</div>
       </AccordionContent>
     </Accordion.Item>
   );

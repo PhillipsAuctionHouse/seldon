@@ -19,7 +19,9 @@ const MobileNavigationItemTrigger = ({ id, label, children }: NavigationItemTrig
     <Accordion>
       <AccordionItem
         variation="sm"
-        id={id ?? `${label}-accordion`}
+        hasTransition
+        key={`accordion-key-${label}`}
+        id={`accordion-item-${id}`}
         label={<Text variant={TextVariants.snwHeaderLink}>{label}</Text>}
       >
         {children}
