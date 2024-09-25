@@ -22,6 +22,10 @@ export interface ModalProps extends ReactModal.Props {
    * The children of the modal
    */
   children: React.ReactNode;
+  /**
+   * className for the modal
+   */
+  className?: string;
 }
 
 /**
@@ -56,6 +60,8 @@ const Modal = ({
       overlayClassName={classnames(`${baseClassName}__overlay`)}
       ariaHideApp={isOpen}
       testId={testId}
+      onAfterOpen={() => (document.body.style.overflow = 'hidden')}
+      onAfterClose={() => (document.body.style.overflow = 'unset')}
       {...props}
     >
       <IconButton
