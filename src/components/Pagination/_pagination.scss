@@ -47,14 +47,6 @@
   }
 }
 
-.#{$px}__pagination-button {
-  svg {
-    fill: $pure-black;
-    height: 2rem;
-    width: 2rem;
-  }
-}
-
 .#{$px}-left-arrow {
   transform: scaleX(-1);
 }
