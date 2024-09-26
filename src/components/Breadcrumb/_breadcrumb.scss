@@ -5,10 +5,6 @@
 
   color: $pure-black;
 
-  @media (max-width: $breakpoint-sm) {
-    display: none;
-  }
-
   .back-button {
     align-items: center;
     background-color: transparent;
