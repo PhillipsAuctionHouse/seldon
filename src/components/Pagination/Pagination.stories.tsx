@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/react';
 import { useState } from 'react';
 
-import Pagination, { PaginationProps } from './Pagination';
+import Pagination, { PaginationOptionValue, PaginationProps } from './Pagination';
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
   title: 'Components/Pagination',
@@ -35,7 +35,7 @@ const argTypes = {
 
 export const Playground = ({ playgroundWidth, onChange, ...args }: StoryProps) => {
   // Parent component is in charge of the state management
-  const [value, setValue] = useState<string>(lotOptions[0]);
+  const [value, setValue] = useState<PaginationOptionValue>(lotOptions[0]);
 
   return (
     <div style={{ width: playgroundWidth, margin: '1rem' }}>

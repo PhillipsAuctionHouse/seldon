@@ -7,6 +7,20 @@ import Select from '../Select/Select';
 import ChevronRight from '../../assets/chevronRight.svg?react';
 import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
+import { determineOptionValue, findOptionFromSelectString } from './utils';
+
+export type PaginationOptionValue = string | number;
+
+export interface PaginationOption {
+  /**
+   * label is translatable
+   */
+  label: string;
+  /*
+   * Each Pagination Option value must be unique within the Pagination
+   */
+  value: string | number;
+}
 
 export interface PaginationProps extends Omit<ComponentProps<'div'>, 'onChange'> {
   /**
@@ -20,7 +34,7 @@ export interface PaginationProps extends Omit<ComponentProps<'div'>, 'onChange'>
   /**
    * Options Array of string
    */
-  options?: string[];
+  options: (PaginationOption | PaginationOptionValue)[];
   /**
    * Boolean to specify whether the `<Pagination>` should be disabled
    */
@@ -28,11 +42,11 @@ export interface PaginationProps extends Omit<ComponentProps<'div'>, 'onChange'>
   /**
    * Current value of the `<Pagination>` component
    */
-  value: string | number;
+  value: PaginationOptionValue;
   /**
    * `onChange` handler that is called whenever the `<Pagination>` value is changed
    */
-  onChange: (selectedValue: string, event?: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (selectedValue: PaginationOptionValue, event?: React.ChangeEvent<HTMLSelectElement>) => void;
   /**
    * Specify the variant style of the `<Pagination>`
    */
@@ -85,7 +99,11 @@ const Pagination = ({
     >
       <IconButton
         className={classnames(`${px}__pagination-button`, `${px}-left-arrow`)}
-        onClick={() => onChange(options.at(options.findIndex((option) => option === value) - 1) || '')}
+        onClick={() => {
+          const prevIndex = options.findIndex((option) => determineOptionValue(option) === value) - 1;
+          const prevOption = options.at(prevIndex) || '';
+          onChange(determineOptionValue(prevOption));
+        }}
         data-testid={`${id}-previous-button`}
         isDisabled={isDisabled}
         aria-label={previousLabel}
@@ -98,21 +116,34 @@ const Pagination = ({
         className={variant === 'inline' && `${px}--inline-pagination`}
         aria-label={selectLabel}
         value={value}
-        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => onChange(event?.currentTarget.value, event)}
+        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+          const selectedOption = findOptionFromSelectString(options, event?.currentTarget.value);
+          if (selectedOption) {
+            onChange(determineOptionValue(selectedOption), event);
+          }
+        }}
         data-testid={`${id}-select-button`}
         hideLabel
         disabled={isDisabled}
       >
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
+        {options.map((option) => {
+          const optionValue = determineOptionValue(option);
+          return (
+            <option key={optionValue} value={optionValue}>
+              {typeof option === 'string' || typeof option === 'number' ? option : option.label}
+            </option>
+          );
+        })}
       </Select>
 
       <IconButton
         className={`${px}__pagination-button`}
-        onClick={() => onChange(options[(options.findIndex((option) => option === value) + 1) % options.length] || '')}
+        onClick={() => {
+          const nextIndex =
+            (options.findIndex((option) => determineOptionValue(option) === value) + 1) % options.length;
+          const nextOption = options[nextIndex];
+          onChange(determineOptionValue(nextOption));
+        }}
         data-testid={`${id}-next-button`}
         isDisabled={isDisabled}
         aria-label={nextLabel}

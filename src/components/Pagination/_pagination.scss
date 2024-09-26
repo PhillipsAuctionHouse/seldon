@@ -49,11 +49,9 @@
 
 .#{$px}__pagination-button {
   svg {
+    fill: $pure-black;
+    height: 2rem;
     width: 2rem;
-
-    @include media($size-md, $type: 'max') {
-      width: 1rem;
-    }
   }
 }
 
