@@ -11,15 +11,11 @@ export interface DetailProps extends ComponentProps<'div'> {
    * Value that appears on the right side of the Detail component
    */
   value: string;
-  /*
-   * If true, a bottom border will be applied
-   */
-  showBottomBorder?: boolean;
 }
 /**
  * ## Overview
  *
- * A simple component for displaying value with a label.
+ * A simple component for displaying value with a label. Layout style is handled by the [DetailsContainer](https://phillips-seldon.netlify.app/?path=/docs/components-detailscontainer--overview)
  *
  * [Figma Link](https://www.figma.com/design/hxqgsE26wM7hII0WaUaDfF/RW---TIMED-Lot-Details-(PDP)?node-id=189-5590&node-type=instance&m=dev)
  *
@@ -28,23 +24,17 @@ export interface DetailProps extends ComponentProps<'div'> {
  */
 const Detail = forwardRef<HTMLDivElement, DetailProps>(({ className, ...props }, ref) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Detail');
-  const { showBottomBorder } = props;
 
   return (
-    <div
-      {...commonProps}
-      className={classnames(baseClassName, className, {
-        'show-bottom-border': showBottomBorder,
-      })}
-      {...props}
-      ref={ref}
-    >
-      <span className={classnames(`${baseClassName}--detail`, `${baseClassName}--label`)}>{props.label}</span>
-      <span className={classnames(`${baseClassName}--detail`, `${baseClassName}--value`)}>{props.value}</span>
+    <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
+      <span className={`${baseClassName}--detail-label`}>{props.label}</span>
+      <span className={`${baseClassName}--detail-value`}>{props.value}</span>
     </div>
   );
 });
 
 Detail.displayName = 'Detail';
+
+export type DetailComponent = ReturnType<typeof Detail>;
 
 export default Detail;
