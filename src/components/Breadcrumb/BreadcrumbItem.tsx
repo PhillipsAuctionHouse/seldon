@@ -20,11 +20,6 @@ export interface BreadcrumbItemProps extends React.HTMLAttributes<HTMLDivElement
    * truncate text boolean
    * */
   isTruncateText?: boolean;
-
-  /**
-   * Length to which the text should be truncated
-   * */
-  truncateLength?: number;
   /**
    * Custom element to render for the link
    */
@@ -37,7 +32,6 @@ const BreadcrumbItem = ({
   label,
   isCurrent = false,
   isTruncateText = false,
-  truncateLength = 30,
   element: CustomElement = 'a',
   ...props
 }: BreadcrumbItemProps) => {
@@ -45,12 +39,11 @@ const BreadcrumbItem = ({
   const ariaCurrent = !isCurrent ? false : 'page';
   const currentHref = !isCurrent ? href : '';
 
-  const getTruncatedLabel = () => {
-    return label && label.length > truncateLength ? `${label.slice(0, truncateLength)}...` : label;
-  };
-
   return (
-    <li>
+    <li
+      aria-label={label}
+      className={classnames(`${baseClassName}__item`, { [`${baseClassName}--truncate`]: isTruncateText })}
+    >
       {isCurrent ? (
         <span className={classnames(baseClassName, className, { [`${baseClassName}--current`]: isCurrent })}>
           {label}
@@ -58,15 +51,17 @@ const BreadcrumbItem = ({
       ) : (
         <CustomElement
           aria-current={ariaCurrent}
-          className={classnames(baseClassName, className, { [`${baseClassName}--current`]: isCurrent })}
+          className={classnames(baseClassName, className, {
+            [`${baseClassName}--current`]: isCurrent,
+          })}
           href={currentHref}
           {...commonProps}
         >
-          {isTruncateText ? getTruncatedLabel() : label}
+          {label}
         </CustomElement>
       )}
 
-      {!isCurrent ? <ChevronNextIcon /> : null}
+      {!isCurrent ? <ChevronNextIcon className={`${baseClassName}__chevron`} /> : null}
     </li>
   );
 };

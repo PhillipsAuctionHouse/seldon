@@ -11,7 +11,7 @@ export default meta;
 const items = [
   {
     href: '',
-    label: 'Art, Modern to Contemporary',
+    label: 'Art, Modern to Contemporary With Really Really Really Really Really ReallyLong Text that forces Truncation',
   },
   {
     href: '',
@@ -22,7 +22,7 @@ const items = [
     label: 'Lot 1',
   },
 ];
-export const Playground = (props: BreadcrumbProps) => <Breadcrumb {...props} />;
+export const Playground = (props: BreadcrumbProps) => <Breadcrumb truncateIndex={0} {...props} />;
 
 Playground.args = {
   items,
