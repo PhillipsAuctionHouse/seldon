@@ -21,11 +21,11 @@ export interface DetailListProps extends ComponentProps<'div'> {
 /**
  * ## Overview
  *
- * A container for displaying a list of Detail components. The alignment prop determines whether each Detail's label and value are aligned in columns or justified. Separators can also be added between each Detail component.
+ * A container for displaying a list of [Detail](/docs/components-detail--overview) components. The alignment prop determines whether each Detail's label and value are aligned in columns or justified. Separators can also be added between each Detail component.
  *
  * [Figma Link](Add Figma URL here)
  *
- * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-detaillist--overview)
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-detaillist--overview)
  *
  */
 const DetailList = forwardRef<HTMLDivElement, DetailListProps>(

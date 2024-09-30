@@ -15,7 +15,7 @@ export interface DetailProps extends ComponentProps<'div'> {
 /**
  * ## Overview
  *
- * A simple component for displaying value with a label. Layout style is handled by the [DetailList](https://phillips-seldon.netlify.app/?path=/docs/components-detaillist--overview)
+ * A simple component for displaying value with a label. Layout style is handled by the [DetailList](/docs/patterns-detaillist--overview)
  *
  * [Figma Link](https://www.figma.com/design/hxqgsE26wM7hII0WaUaDfF/RW---TIMED-Lot-Details-(PDP)?node-id=189-5590&node-type=instance&m=dev)
  *
