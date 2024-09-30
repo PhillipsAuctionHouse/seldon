@@ -11,8 +11,9 @@ const meta = {
 
 export default meta;
 export const Playground = (props: TextSymbolProps) => (
-  <Text variant={TextVariants.heading3} superScript={<TextSymbol {...props} />}>
+  <Text variant={TextVariants.heading3}>
     Lot number 23
+    <TextSymbol {...props} />
   </Text>
 );
 

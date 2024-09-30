@@ -28,8 +28,11 @@ Playground.argTypes = {
 export const SuperScript = (props: TextProps) => <Text variant={TextVariants.heading3} {...props} />;
 
 SuperScript.args = {
-  children: 'Lot number 23',
-  superScript: <TextSymbol variant={TextSymbolVariants.lotNumber}>ЖΟ◆</TextSymbol>,
+  children: (
+    <>
+      Lot number 23<TextSymbol variant={TextSymbolVariants.lotNumber}>ЖΟ◆</TextSymbol>
+    </>
+  ),
   variant: TextVariants.heading3,
 };
 
@@ -40,5 +43,4 @@ SuperScript.argTypes = {
       type: 'select',
     },
   },
-  superScript: 'text',
 };

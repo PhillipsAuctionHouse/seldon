@@ -24,8 +24,11 @@ describe('Text', () => {
   });
   it('renders superscript correctly', () => {
     renderText({
-      children: 'Hello World',
-      superScript: <TextSymbol variant={TextSymbolVariants.lotNumber}>sup</TextSymbol>,
+      children: (
+        <>
+          Hello World<TextSymbol variant={TextSymbolVariants.lotNumber}>sup</TextSymbol>
+        </>
+      ),
     });
 
     expect(screen.getByText('Hello World')).toBeInTheDocument();
