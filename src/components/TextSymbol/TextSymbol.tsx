@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { TextSymbolVariants } from './types';
-import './_textSymbol.scss';
 
 export interface TextSymbolProps extends React.HTMLAttributes<HTMLElement> {
   /**
