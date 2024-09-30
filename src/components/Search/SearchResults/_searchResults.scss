@@ -28,5 +28,9 @@
 .#{$px}-search {
   &__result {
     display: flex;
+
+    &__label {
+      text-transform: initial;
+    }
   }
 }

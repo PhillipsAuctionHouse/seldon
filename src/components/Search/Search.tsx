@@ -181,6 +181,7 @@ const Search = ({
                 isLoading={state === 'loading'}
                 loadingText={loadingText}
                 onKeyDown={onKeyDown}
+                userInputValue={value}
               >
                 <li key="viewAllSearchResults" className={`${baseClassName}__result`}>
                   <Link

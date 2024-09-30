@@ -2,6 +2,7 @@ import * as React from 'react';
 import { px } from '../../../utils';
 import Link from '../../Link/Link';
 import { LinkVariants } from '../../Link';
+import { HTMLParser } from '../../HTMLParser';
 
 export interface SearchResult {
   id: string;
@@ -15,6 +16,7 @@ export interface SearchResultsProps extends React.HTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
   loadingText?: string;
   onKeyDown?: (event: React.KeyboardEvent<HTMLAnchorElement>) => void;
+  userInputValue?: string;
 }
 
 const SearchResults = ({
@@ -23,8 +25,17 @@ const SearchResults = ({
   children,
   loadingText = 'Loading...',
   onKeyDown,
+  userInputValue = '',
 }: React.PropsWithChildren<SearchResultsProps>) => {
   const hasResults = Array.isArray(autoCompleteResults) && autoCompleteResults.length > 0;
+
+  function formatSearchLabel(label: string, searchQuery: string): React.ReactNode {
+    return (
+      <HTMLParser
+        html={`<span class='${px}-search__result__label'>${label.replace(new RegExp(searchQuery, 'gi'), (match) => `<strong>${match}</strong>`)}</span>`}
+      />
+    );
+  }
 
   return (
     <div className={`${px}-search__results`}>
@@ -35,7 +46,7 @@ const SearchResults = ({
             return (
               <li key={result.id} className={`${px}-search__result`}>
                 <Link href={result.url} onKeyDown={onKeyDown} variant={LinkVariants.snwFlyoutLink}>
-                  {result.label}
+                  {formatSearchLabel(result.label, userInputValue)}
                 </Link>
               </li>
             );
