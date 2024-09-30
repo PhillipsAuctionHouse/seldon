@@ -1,0 +1,21 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-pinch-zoom {
+  cursor: pointer;
+  display: flex;
+  flex: 1;
+  max-height: 100%;
+
+  &-zoomed {
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  &-child {
+    flex: 1;
+    object-fit: contain;
+  }
+}

@@ -26,6 +26,10 @@ export interface ModalProps extends ReactModal.Props {
    * className for the modal
    */
   className?: string;
+  /**
+   * style for the modal
+   */
+  style?: ReactModal.Props['style'];
 }
 
 /**
@@ -41,6 +45,7 @@ const Modal = ({
   isOpen = false,
   onClose = noOp,
   appElementSelector = 'main',
+  style,
   ...props
 }: ModalProps) => {
   if (!isOpen) {
@@ -60,6 +65,7 @@ const Modal = ({
       overlayClassName={classnames(`${baseClassName}__overlay`)}
       ariaHideApp={isOpen}
       testId={testId}
+      style={style}
       onAfterOpen={() => (document.body.style.overflow = 'hidden')}
       onAfterClose={() => (document.body.style.overflow = 'unset')}
       {...props}

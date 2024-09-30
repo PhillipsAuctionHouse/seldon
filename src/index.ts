@@ -65,3 +65,4 @@ export * from './components/Collapsible';
 export * from './providers/SeldonProvider';
 export { default as PageContentWrapper } from './components/PageContentWrapper/PageContentWrapper';
 export * from './components/Carousel';
+export * from './components/PinchZoom';

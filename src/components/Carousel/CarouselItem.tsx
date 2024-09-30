@@ -23,6 +23,7 @@ const CarouselItem = forwardRef<HTMLDivElement, CarouselItemProps>(({ className,
       aria-roledescription="slide"
       className={classNames(`${baseClassName}-item`, className, {
         [`${baseClassName}-item--gap-${columnGap}`]: !!columnGap,
+        [`${baseClassName}-item--cursor-pointer`]: !!props.onClick,
       })}
       {...props}
       {...commonProps}

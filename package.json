@@ -54,6 +54,7 @@
     "flatpickr": "^4.6.13",
     "html-react-parser": "^5.1.12",
     "react-modal": "^3.16.1",
+    "react-quick-pinch-zoom": "^5.1.0",
     "react-transition-group": "^4.4.5",
     "usehooks-ts": "^3.1.0"
   },
