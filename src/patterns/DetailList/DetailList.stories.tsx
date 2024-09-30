@@ -1,18 +1,18 @@
 import { Meta } from '@storybook/react';
 import { Detail } from '../../components/Detail';
-import DetailsContainer, { DetailsContainerProps } from './DetailsContainer';
+import DetailList, { DetailListProps } from './DetailList';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
-  title: 'Patterns/DetailsContainer',
-  component: DetailsContainer,
-} satisfies Meta<typeof DetailsContainer>;
+  title: 'Patterns/DetailList',
+  component: DetailList,
+} satisfies Meta<typeof DetailList>;
 
 export default meta;
-export const Playground = (props: DetailsContainerProps) => (
+export const Playground = (props: DetailListProps) => (
   <div style={{ backgroundColor: '#ccc', width: '100%', padding: '24px' }}>
     <div style={{ backgroundColor: 'white', padding: '12px', width: '400px', margin: '0 auto' }}>
-      <DetailsContainer {...props} />
+      <DetailList {...props} />
     </div>
   </div>
 );

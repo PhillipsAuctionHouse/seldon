@@ -1,6 +1,6 @@
 @use '#scss/allPartials' as *;
 
-.#{$px}-details-container {
+.#{$px}-detail-list {
   display: flex;
   flex-direction: column;
   gap: var($spacing-sm, 12px);

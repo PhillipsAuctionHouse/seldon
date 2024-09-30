@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { DetailComponent } from '../../components/Detail';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
-export interface DetailsContainerProps extends ComponentProps<'div'> {
+export interface DetailListProps extends ComponentProps<'div'> {
   /**
    * Determines whether each Details' label and value are aligned in columns or justified
    */
@@ -21,16 +21,16 @@ export interface DetailsContainerProps extends ComponentProps<'div'> {
 /**
  * ## Overview
  *
- * A container for displaying multiple Detail components. The alignment prop determines whether each Detail's label and value are aligned in columns or justified. Separators can also be added between each Detail component.
+ * A container for displaying a list of Detail components. The alignment prop determines whether each Detail's label and value are aligned in columns or justified. Separators can also be added between each Detail component.
  *
  * [Figma Link](Add Figma URL here)
  *
- * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-detailscontainer--overview)
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-detaillist--overview)
  *
  */
-const DetailsContainer = forwardRef<HTMLDivElement, DetailsContainerProps>(
+const DetailList = forwardRef<HTMLDivElement, DetailListProps>(
   ({ alignment, className, children, hasSeparators, ...props }, ref) => {
-    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'DetailsContainer');
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'DetailList');
 
     return (
       <div
@@ -49,7 +49,7 @@ const DetailsContainer = forwardRef<HTMLDivElement, DetailsContainerProps>(
               columns: alignment === 'columns',
               justified: alignment === 'justified',
             })}
-            key={`details-container-wrapper-${index}`}
+            key={`detail-list-wrapper-${index}`}
           >
             {child}
           </div>
@@ -59,6 +59,6 @@ const DetailsContainer = forwardRef<HTMLDivElement, DetailsContainerProps>(
   },
 );
 
-DetailsContainer.displayName = 'DetailsContainer';
+DetailList.displayName = 'DetailList';
 
-export default DetailsContainer;
+export default DetailList;
