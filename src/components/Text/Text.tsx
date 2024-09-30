@@ -13,8 +13,10 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
    * The OOTB style to apply to the text
    */
   variant?: TextVariants;
-
-  superScript?: string;
+  /**
+   * Text to render special symbols
+   */
+  superScript?: React.ReactNode;
 }
 /**
  * ## Overview
@@ -30,7 +32,7 @@ const Text = ({
   className,
   element: CustomElement,
   variant = TextVariants.body2,
-  superScript = '',
+  superScript = null,
   ...props
 }: TextProps) => {
   const Component = CustomElement || determineDefaultTextElement(variant);
@@ -43,7 +45,7 @@ const Text = ({
       {...props}
     >
       {children}
-      {superScript ? <span className={classNames(`${baseClassName}--super-script`)}>{superScript}</span> : null}
+      {superScript}
     </Component>
   );
 };
