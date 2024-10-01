@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 import Accordion, { AccordionProps } from './Accordion';
 import AccordionItem from './AccordionItem';
-import { AccordionVariants } from './types';
+import { AccordionItemVariant, AccordionVariants } from './types';
 import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
 import { LinkVariants } from '../Link';
 import { useState } from 'react';
@@ -33,19 +33,19 @@ const largeTextBlock = (
 const largeTextItems = [
   {
     isLocked: false,
-    variation: 'lg',
+    variant: AccordionItemVariant.lg,
     label: 'What information do I need to provide to submit a consignment?',
     children: largeTextBlock,
   },
   {
     isLocked: false,
-    variation: 'lg',
+    variant: AccordionItemVariant.lg,
     label: 'How long does it take to receive an estimate?',
     children: largeTextBlock,
   },
   {
     isLocked: true,
-    variation: 'lg',
+    variant: AccordionItemVariant.lg,
     label: 'Do you accept artist submissions?',
   },
 ];
@@ -84,7 +84,7 @@ const smallTextBlock = (
 const smallTextItems = [
   {
     isLocked: true,
-    variation: 'sm',
+    variant: AccordionItemVariant.sm,
     label: 'Condition Report',
     children: (
       <div style={{ color: '#4A90E2', cursor: 'pointer', fontWeight: '500', fontSize: '20px' }}>LOGIN OR SIGNUP</div>
@@ -92,13 +92,13 @@ const smallTextItems = [
   },
   {
     isLocked: false,
-    variation: 'sm',
+    variant: AccordionItemVariant.sm,
     label: 'Provenance',
     children: smallTextBlock,
   },
   {
     isLocked: false,
-    variation: 'sm',
+    variant: AccordionItemVariant.sm,
     label: 'Exhibited',
     children: smallTextBlock,
     hasTransition: true,
@@ -125,7 +125,7 @@ export const AccordionSubmenu = (props: AccordionProps) => {
   return (
     <Accordion {...props} id="accordion-item-submenu">
       <AccordionItem
-        variation="sm"
+        variant={AccordionItemVariant.sm}
         id="languageselector"
         label={<NavigationItem label={currentLanguage}></NavigationItem>}
       >

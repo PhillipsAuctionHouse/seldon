@@ -6,6 +6,7 @@ import NavigationList, { NavigationListProps } from '../NavigationList/Navigatio
 import Accordion from '../../Accordion/Accordion';
 import AccordionItem from '../../Accordion/AccordionItem';
 import { SSRMediaQuery } from '../../../providers/utils';
+import { AccordionItemVariant } from '../../Accordion';
 
 export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
   /**
@@ -18,7 +19,7 @@ const MobileNavigationItemTrigger = ({ id, label, children }: NavigationItemTrig
   return (
     <Accordion>
       <AccordionItem
-        variation="sm"
+        variant={AccordionItemVariant.sm}
         hasTransition
         key={`accordion-key-${label}`}
         id={`accordion-item-${id}`}
