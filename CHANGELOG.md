@@ -1,3 +1,10 @@
+# [1.67.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.66.0...v1.67.0) (2024-10-01)
+
+
+### Features
+
+* **header:** L3-3688 Highlight User Input In Search Results ([#347](https://github.com/PhillipsAuctionHouse/seldon/issues/347)) ([bcc1b96](https://github.com/PhillipsAuctionHouse/seldon/commit/bcc1b965f2817cfce87590f5c0d85903ab6d0ca7))
+
 # [1.66.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.65.0...v1.66.0) (2024-10-01)
 
 
