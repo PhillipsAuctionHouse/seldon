@@ -39,7 +39,7 @@ const PinchZoom: FC<PinchZoomProps> = ({ onZoomChange, children, maxZoom = 10, c
   const onUpdate = useCallback(
     ({ x, y, scale }: { x: number; y: number; scale: number }) => {
       if (ref.current) {
-        if (scale === 1) {
+        if (scale > 0.99 && scale < 1.01) {
           setIsZoomed(false);
           onZoomChange?.(false);
         } else {
