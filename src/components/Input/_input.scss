@@ -33,7 +33,9 @@ $lg: #{$px}-input--lg;
     margin-bottom: 0.25rem;
     padding: $padding-xsm;
 
-    // width: 100%;
+    &:focus-within {
+      outline: 1px solid $pure-black;
+    }
   }
 
   &__validation {

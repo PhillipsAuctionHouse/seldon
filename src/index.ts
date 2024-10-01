@@ -51,6 +51,7 @@ export {
   type StatefulViewingsListProps,
 } from './patterns/ViewingsList/StatefulViewingsList';
 export * from './components/Text';
+export * from './components/TextSymbol';
 export * from './components/Accordion';
 export { default as UserManagement, type UserManagementProps } from './patterns/UserManagement/UserManagement';
 export { AuthState } from './patterns/UserManagement/types';

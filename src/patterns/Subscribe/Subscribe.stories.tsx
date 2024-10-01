@@ -13,6 +13,7 @@ export default meta;
 export const Playground = (props: SubscribeProps) => <Subscribe {...props} />;
 
 Playground.args = {
+  autoFocus: true,
   id: 'mySubscribeComponent',
   title: 'Never Miss A Moment',
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => {
