@@ -10,7 +10,6 @@ import Spotify from '../../assets/spotify.svg?react';
 import Social from '../../patterns/Social/Social';
 import { Accordion, AccordionItem } from '../../components/Accordion';
 import { Text, TextVariants } from '../../components/Text';
-import { AccordionItemVariant } from '../../components/Accordion/types';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -38,19 +37,12 @@ export const Playground = (props: FooterProps) => (
 
     {/* mobile version of footer */}
     <Accordion className={`${px}-footer-mobile`}>
-      <AccordionItem
-        isLocked={false}
-        variant={AccordionItemVariant.sm}
-        label="About Us"
-        key="accordion-key-about-us"
-        id="accordion-item-about-us"
-      >
+      <AccordionItem isLocked={false} label="About Us" key="accordion-key-about-us" id="accordion-item-about-us">
         {aboutUsLinks}
       </AccordionItem>
 
       <AccordionItem
         isLocked={false}
-        variant={AccordionItemVariant.sm}
         label="Our Services"
         key="accordion-key-our-services"
         id="accordion-item-our-services"
@@ -60,7 +52,6 @@ export const Playground = (props: FooterProps) => (
 
       <AccordionItem
         isLocked={false}
-        variant={AccordionItemVariant.sm}
         label="Policies"
         isLastItem={true}
         key="accordion-key-policies"

@@ -9,7 +9,6 @@ import { LinkVariants } from '../../components/Link';
 import { Text, TextVariants } from '../../components/Text';
 import NavigationList from '../../components/Navigation/NavigationList/NavigationList';
 import { SSRMediaQuery } from '../../providers/utils';
-import { AccordionItemVariant } from '../../components/Accordion/types';
 
 interface DropdownSelectorProps extends ComponentProps<'div'> {
   value: string;
@@ -29,7 +28,6 @@ const MobileLanguageSelector = ({
   return (
     <Accordion {...props}>
       <AccordionItem
-        variant={AccordionItemVariant.sm}
         hasTransition
         id={id ?? 'language-selector-accordion'}
         label={<Text variant={TextVariants.snwHeaderLink}>{label}</Text>}

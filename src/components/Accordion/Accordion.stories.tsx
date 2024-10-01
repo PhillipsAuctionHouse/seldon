@@ -84,7 +84,6 @@ const smallTextBlock = (
 const smallTextItems = [
   {
     isLocked: true,
-    variant: AccordionItemVariant.sm,
     label: 'Condition Report',
     children: (
       <div style={{ color: '#4A90E2', cursor: 'pointer', fontWeight: '500', fontSize: '20px' }}>LOGIN OR SIGNUP</div>
@@ -92,13 +91,11 @@ const smallTextItems = [
   },
   {
     isLocked: false,
-    variant: AccordionItemVariant.sm,
     label: 'Provenance',
     children: smallTextBlock,
   },
   {
     isLocked: false,
-    variant: AccordionItemVariant.sm,
     label: 'Exhibited',
     children: smallTextBlock,
     hasTransition: true,
@@ -124,11 +121,7 @@ export const AccordionSubmenu = (props: AccordionProps) => {
   const [currentLanguage, setCurrentLanguage] = useState('English');
   return (
     <Accordion {...props} id="accordion-item-submenu">
-      <AccordionItem
-        variant={AccordionItemVariant.sm}
-        id="languageselector"
-        label={<NavigationItem label={currentLanguage}></NavigationItem>}
-      >
+      <AccordionItem id="languageselector" label={<NavigationItem label={currentLanguage}></NavigationItem>}>
         <div style={{ paddingLeft: 'var(--spacing-sm)' }}>
           <NavigationItem
             label="English"
