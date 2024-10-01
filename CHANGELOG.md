@@ -1,3 +1,10 @@
+# [1.68.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.67.2...v1.68.0) (2024-10-01)
+
+
+### Features
+
+* **header:** L3-1663 added onCancel callback ([#350](https://github.com/PhillipsAuctionHouse/seldon/issues/350)) ([be7d6d7](https://github.com/PhillipsAuctionHouse/seldon/commit/be7d6d7f12dc306618721459f31ea9baecfb3837))
+
 ## [1.67.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.67.1...v1.67.2) (2024-10-01)
 
 
