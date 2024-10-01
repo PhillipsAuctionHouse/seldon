@@ -1,3 +1,10 @@
+## [1.67.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.67.0...v1.67.1) (2024-10-01)
+
+
+### Bug Fixes
+
+* **searchresult:** L3-3688 highlight user input in search result breaking Remix with lib is not defined ([#349](https://github.com/PhillipsAuctionHouse/seldon/issues/349)) ([a615084](https://github.com/PhillipsAuctionHouse/seldon/commit/a615084b445062098356263371d68ac0cef24d38))
+
 # [1.67.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.66.0...v1.67.0) (2024-10-01)
 
 
