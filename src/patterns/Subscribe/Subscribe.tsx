@@ -72,6 +72,7 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
  */
 
 const Subscribe = ({
+  autoFocus = true,
   blurb,
   buttonText = 'Sign Up',
   buttonProps,
@@ -112,6 +113,7 @@ const Subscribe = ({
       {blurb ? <p className={`${baseClassName}__blurb`}>{blurb}</p> : null}
 
       <Input
+        autoFocus={autoFocus}
         className={`${baseClassName}__input`}
         type="email"
         name="email"
