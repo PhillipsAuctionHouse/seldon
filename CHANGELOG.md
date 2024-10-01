@@ -1,3 +1,10 @@
+## [1.67.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.67.1...v1.67.2) (2024-10-01)
+
+
+### Bug Fixes
+
+* **accordion:** L3-3154 lot details accordion styles do not match FIGMA ([#348](https://github.com/PhillipsAuctionHouse/seldon/issues/348)) ([6adea4f](https://github.com/PhillipsAuctionHouse/seldon/commit/6adea4fbd6f520cb39c3506a1815ce5af894b59a))
+
 ## [1.67.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.67.0...v1.67.1) (2024-10-01)
 
 
