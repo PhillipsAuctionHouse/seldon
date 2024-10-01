@@ -2,7 +2,6 @@ import * as React from 'react';
 import { px } from '../../../utils';
 import Link from '../../Link/Link';
 import { LinkVariants } from '../../Link';
-import { HTMLParser } from '../../HTMLParser';
 
 export interface SearchResult {
   id: string;
@@ -30,10 +29,9 @@ const SearchResults = ({
   const hasResults = Array.isArray(autoCompleteResults) && autoCompleteResults.length > 0;
 
   function formatSearchLabel(label: string, searchQuery: string): React.ReactNode {
-    return (
-      <HTMLParser
-        html={`<span class='${px}-search__result__label'>${label.replace(new RegExp(searchQuery, 'gi'), (match) => `<strong>${match}</strong>`)}</span>`}
-      />
+    const parts = label.split(new RegExp(`(${searchQuery})`, 'gi'));
+    return parts.map((part, index) =>
+      part.toLocaleLowerCase() === searchQuery.toLocaleLowerCase() ? <strong key={index}>{part}</strong> : part,
     );
   }
 
@@ -46,7 +44,7 @@ const SearchResults = ({
             return (
               <li key={result.id} className={`${px}-search__result`}>
                 <Link href={result.url} onKeyDown={onKeyDown} variant={LinkVariants.snwFlyoutLink}>
-                  {formatSearchLabel(result.label, userInputValue)}
+                  <span className="${px}-search__result__label">{formatSearchLabel(result.label, userInputValue)}</span>
                 </Link>
               </li>
             );
