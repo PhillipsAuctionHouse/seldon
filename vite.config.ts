@@ -22,7 +22,6 @@ export default defineConfig({
     target: ['es2019'],
     minify: true,
     reportCompressedSize: true,
-    commonjsOptions: { transformMixedEsModules: true },
     cssCodeSplit: true,
     lib: {
       // Could also be a dictionary or array of multiple entry points
