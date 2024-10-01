@@ -1,3 +1,11 @@
+# [1.66.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.65.0...v1.66.0) (2024-10-01)
+
+
+### Features
+
+* **subscribe:** L3-3829 add ability to autofocus the input ([#345](https://github.com/PhillipsAuctionHouse/seldon/issues/345)) ([30f52cd](https://github.com/PhillipsAuctionHouse/seldon/commit/30f52cd883cee7e32621d9ac0b90155361d507e1))
+* **text-symbol:** L3-3572 created TextSymbol component ([#344](https://github.com/PhillipsAuctionHouse/seldon/issues/344)) ([5d589af](https://github.com/PhillipsAuctionHouse/seldon/commit/5d589aff803b9df5cb1c5a504dc70ed2a561be4a))
+
 # [1.65.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.64.0...v1.65.0) (2024-09-25)
 
 
