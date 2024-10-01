@@ -23,9 +23,9 @@ export interface PinchZoomProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * Component that allows for zooming and panning of its children.
  *
- * Wraps a subset of the [react-quick-pinch-zoom](https://github.com/retyui/react-quick-pinch-zoom) package.
+ * Wraps a subset of the [react-zoom-pan-pinch](https://github.com/BetterTyped/react-zoom-pan-pinch) package.
  *
- * View [demo](https://react-quick-pinch-zoom.netlify.app/) and [API](https://github.com/retyui/react-quick-pinch-zoom/blob/master/docs/api/README.md) to explore props
+ * View [storybook](https://bettertyped.github.io/react-zoom-pan-pinch/?path=/story/docs-introduction--page) for docs and examples
  *
  * [Figma Link](https://www.figma.com/design/hxqgsE26wM7hII0WaUaDfF/RW---TIMED-Lot-Details-(PDP)?node-id=1394-3984&m=dev)
  *
