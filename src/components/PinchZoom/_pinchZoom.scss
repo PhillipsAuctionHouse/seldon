@@ -6,6 +6,23 @@
   flex: 1;
   max-height: 100%;
 
+  &.important {
+    height: unset;
+    width: unset;
+  }
+
+  &-content {
+    display: flex;
+    flex: 1;
+    max-height: 100%;
+
+    &.important {
+      flex-wrap: unset;
+      height: unset;
+      width: unset;
+    }
+  }
+
   &-zoomed {
     cursor: grab;
 

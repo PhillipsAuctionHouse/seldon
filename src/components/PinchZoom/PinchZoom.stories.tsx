@@ -88,6 +88,7 @@ const images = [
 export const CarouselWithZoomModal = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
 
   return (
     <div style={{ width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -114,11 +115,12 @@ export const CarouselWithZoomModal = () => {
               display: 'flex',
               flexDirection: 'column',
             }}
+            disableDrag={isZoomed}
           >
             <CarouselContent containerStyles={{ display: 'flex', flex: 1 }} style={{ display: 'flex', flex: 1 }}>
               {images.map((image, index) => (
-                <CarouselItem key={index} style={{ height: '100%' }}>
-                  <PinchZoom style={{ height: '100%' }}>
+                <CarouselItem key={index} style={{ display: 'flex', height: '100%' }}>
+                  <PinchZoom onZoomChange={setIsZoomed}>
                     <img
                       style={{ height: '100%', objectFit: 'contain', padding: '2rem 0' }}
                       src={image}
