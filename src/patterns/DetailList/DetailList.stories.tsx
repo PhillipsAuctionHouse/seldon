@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react';
 import { Detail } from '../../components/Detail';
 import DetailList, { DetailListProps } from './DetailList';
+import { DetailListAlignment } from './types';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -24,6 +25,17 @@ Playground.args = {
     <Detail key="2" label="Title" value="Marilyn Monroe" />,
     <Detail key="3" label="Year" value="1967" />,
   ],
+  alignment: DetailListAlignment.columns,
 };
 
-Playground.argTypes = {};
+Playground.argTypes = {
+  alignment: {
+    options: Object.values(DetailListAlignment),
+    control: {
+      type: 'select',
+    },
+  },
+  hasSeparators: {
+    control: 'boolean',
+  },
+};

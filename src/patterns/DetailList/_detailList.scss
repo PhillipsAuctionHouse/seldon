@@ -3,26 +3,27 @@
 .#{$px}-detail-list {
   display: flex;
   flex-direction: column;
-  gap: var($spacing-sm, 12px);
-  width: 100%;
-
-  &.columns {
-    align-items: flex-start;
-  }
-
-  &.justified {
-    justify-content: flex-start;
-  }
+  gap: $spacing-sm;
 
   &-wrapper {
-    width: 100%;
-
     .#{$px}-detail {
       padding: 0;
     }
   }
 
-  &-wrapper.has-separators {
+  .#{$px}-columns {
+    .#{px}-detail {
+      justify-content: start;
+    }
+  }
+
+  .#{$px}-justified {
+    .#{$px}-detail {
+      justify-content: space-between;
+    }
+  }
+
+  .#{$px}-has-separators {
     border-top: 1px solid $light-gray;
 
     &:last-child {
@@ -31,18 +32,6 @@
 
     .#{$px}-detail {
       padding: $spacing-sm 0;
-    }
-  }
-
-  &-wrapper.columns {
-    .#{px}-detail {
-      justify-content: start;
-    }
-  }
-
-  &-wrapper.justified {
-    .#{$px}-detail {
-      justify-content: space-between;
     }
   }
 }

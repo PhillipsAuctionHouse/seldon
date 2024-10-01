@@ -6,8 +6,8 @@ describe('Detail', () => {
   runCommonTests(Detail, 'Detail');
 
   it('should render the label and value', () => {
-    const { getByText } = render(<Detail label="Label" value="Value" />);
-    expect(getByText('Label')).toBeInTheDocument();
-    expect(getByText('Value')).toBeInTheDocument();
+    const { getByRole } = render(<Detail label="Label" value="Value" />);
+    expect(getByRole('term')).toHaveTextContent('Label');
+    expect(getByRole('definition')).toHaveTextContent('Value');
   });
 });

@@ -2,7 +2,7 @@ import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 
-export interface DetailProps extends ComponentProps<'div'> {
+export interface DetailProps extends ComponentProps<'dl'> {
   /*
    * Label that appears on the left side of the Detail component
    */
@@ -22,14 +22,14 @@ export interface DetailProps extends ComponentProps<'div'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-detail--overview)
  *
  */
-const Detail = forwardRef<HTMLDivElement, DetailProps>(({ className, ...props }, ref) => {
+const Detail = forwardRef<HTMLDListElement, DetailProps>(({ className, ...props }, ref) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Detail');
 
   return (
-    <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-      <span className={`${baseClassName}--detail-label`}>{props.label}</span>
-      <span className={`${baseClassName}--detail-value`}>{props.value}</span>
-    </div>
+    <dl {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
+      <dt className={`${baseClassName}__label`}>{props.label}</dt>
+      <dd className={`${baseClassName}__value`}>{props.value}</dd>
+    </dl>
   );
 });
 

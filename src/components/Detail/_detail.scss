@@ -3,21 +3,18 @@
 .#{$px}-detail {
   align-items: center;
   align-self: stretch;
+  color: $pure-black;
   display: flex;
   gap: $spacing-md;
 
-  &--detail {
-    color: $pure-black;
+  @include text($string2);
 
-    @include text($string2);
+  &__label {
+    font-variation-settings: 'wght' 600;
+    width: 96px;
+  }
 
-    &-label {
-      font-variation-settings: 'wght' 600;
-      width: 96px;
-    }
-
-    &-value {
-      font-variation-settings: 'wght' 400;
-    }
+  &__value {
+    font-variation-settings: 'wght' 400;
   }
 }
