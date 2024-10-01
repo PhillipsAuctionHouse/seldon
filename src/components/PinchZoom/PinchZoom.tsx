@@ -70,10 +70,10 @@ const PinchZoom: FC<PinchZoomProps> = ({ onZoomChange, children, maxZoom = 10, c
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         wrapperProps={{ ...commonProps, ...props }}
-        wrapperClass={classNames(baseClassName, `important`, className, {
+        wrapperClass={classNames(baseClassName, className, {
           [`${baseClassName}-zoomed`]: isZoomed,
         })}
-        contentClass={`${baseClassName}-content important`}
+        contentClass={`${baseClassName}-content`}
       >
         {isValidElement<{ className: string }>(children)
           ? cloneElement(children, { className: classNames(`${baseClassName}-child`, children?.props?.className) })
