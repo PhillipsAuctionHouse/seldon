@@ -1,3 +1,10 @@
+# [1.71.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.70.0...v1.71.0) (2024-10-02)
+
+
+### Features
+
+* **search:** L3-1663 fixed closing functionality ([#351](https://github.com/PhillipsAuctionHouse/seldon/issues/351)) ([b946059](https://github.com/PhillipsAuctionHouse/seldon/commit/b9460599791e0127873ca9878e0d247d9c553f4e))
+
 # [1.70.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.69.0...v1.70.0) (2024-10-02)
 
 
