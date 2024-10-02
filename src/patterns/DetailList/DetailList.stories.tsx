@@ -24,6 +24,11 @@ Playground.args = {
     <Detail key="1" label="Artist" value="Andy Warhol" />,
     <Detail key="2" label="Title" value="Marilyn Monroe" />,
     <Detail key="3" label="Year" value="1967" />,
+    <Detail
+      key="4"
+      label="Really Long Label That should wrap"
+      value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    />,
   ],
   alignment: DetailListAlignment.columns,
 };
