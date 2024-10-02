@@ -1,3 +1,10 @@
+# [1.70.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.69.0...v1.70.0) (2024-10-02)
+
+
+### Features
+
+* **lotdetails:** L3-3145 pinch zoom component in seldon ([#346](https://github.com/PhillipsAuctionHouse/seldon/issues/346)) ([c30965a](https://github.com/PhillipsAuctionHouse/seldon/commit/c30965a4eaa5dfcf3b0ca51b6fc3994f5b1977e8))
+
 # [1.69.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.68.1...v1.69.0) (2024-10-02)
 
 
