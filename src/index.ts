@@ -44,7 +44,12 @@ export { default as Social, type SocialProps } from './patterns/Social/Social';
 export { default as ViewingsList, type ViewingsListProps } from './patterns/ViewingsList/ViewingsList';
 export { default as Modal, type ModalProps } from './components/Modal/Modal';
 export { default as Drawer } from './components/Drawer/Drawer';
-export { default as Pagination, type PaginationProps } from './components/Pagination/Pagination';
+export {
+  default as Pagination,
+  type PaginationProps,
+  type PaginationOption,
+  type PaginationOptionValue,
+} from './components/Pagination/Pagination';
 
 export {
   default as StatefulViewingsList,

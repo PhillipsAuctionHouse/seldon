@@ -53,23 +53,22 @@ describe('Breadcrumb component', () => {
   });
 
   it('truncates specific item based on truncateIndex', () => {
-    render(<Breadcrumb items={items} truncateIndex={1} truncateLength={15} />);
-
-    // Check if the truncated item is displayed correctly
-    const truncatedItem = screen.getByText(/Modern & Contem.../i);
+    render(<Breadcrumb items={items} truncateIndex={1} />);
+    // Check that the full item is rendered for screen readers
+    const truncatedItem = screen.getByRole('listitem', { name: 'Modern & Contemporary Art Evening Sale - Test3' });
     expect(truncatedItem).toBeInTheDocument();
-
-    // Check that the full item is not rendered
-    const fullLabelItem = screen.queryByText(/Modern & Contemporary Art Evening Sale - Test3/i);
-    expect(fullLabelItem).not.toBeInTheDocument();
+    expect(truncatedItem).toHaveClass('seldon-breadcrumb--truncate');
+    const fullLabelItem = screen.getByRole('listitem', { name: 'Art, Modern to Contemporary' });
+    expect(fullLabelItem).toBeInTheDocument();
+    expect(fullLabelItem).not.toHaveClass('seldon-breadcrumb--truncate');
   });
 
   it('does not truncate if truncateIndex is not provided', () => {
     render(<Breadcrumb items={items} />);
 
-    // Check that the full long label is rendered
-    const fullLabelItem = screen.getByText(/Modern & Contemporary Art Evening Sale - Test3/i);
-    expect(fullLabelItem).toBeInTheDocument();
+    const truncatedItem = screen.getByRole('listitem', { name: 'Modern & Contemporary Art Evening Sale - Test3' });
+    expect(truncatedItem).toBeInTheDocument();
+    expect(truncatedItem).not.toHaveClass('seldon-breadcrumb--truncate');
   });
 
   test('renders breadcrumb items in desktop view', () => {
