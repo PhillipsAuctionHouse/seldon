@@ -1,0 +1,34 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-detail {
+  align-items: center;
+  align-items: flex-start;
+  align-self: stretch;
+  color: $pure-black;
+  display: flex;
+  gap: $spacing-md;
+
+  @include text($string2);
+
+  &__label {
+    flex-shrink: 0;
+    font-variation-settings: 'wght' 600;
+    width: 160px;
+
+    @media (max-width: $breakpoint-lg) {
+      width: 128px;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      width: 128px;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      width: 96px;
+    }
+  }
+
+  &__value {
+    font-variation-settings: 'wght' 400;
+  }
+}

@@ -48,4 +48,6 @@
 // Site Furniture
 @use 'site-furniture/Header/header';
 @use 'site-furniture/Footer/footer';
+@use 'components/Detail/detail';
+@use 'patterns/DetailList/detailList';
 @use 'components/PinchZoom/pinchZoom';

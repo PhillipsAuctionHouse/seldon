@@ -1,0 +1,37 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  &-wrapper {
+    .#{$px}-detail {
+      padding: 0;
+    }
+  }
+
+  .#{$px}-columns {
+    .#{px}-detail {
+      justify-content: start;
+    }
+  }
+
+  .#{$px}-justified {
+    .#{$px}-detail {
+      justify-content: space-between;
+    }
+  }
+
+  .#{$px}-has-separators {
+    border-top: 1px solid $light-gray;
+
+    &:last-child {
+      border-bottom: 1px solid $light-gray;
+    }
+
+    .#{$px}-detail {
+      padding: $spacing-sm 0;
+    }
+  }
+}
