@@ -62,7 +62,7 @@ export const CarouselWithDots = (props: CarouselProps & CarouselDotsProps) => (
         </CarouselItem>
       ))}
     </CarouselContent>
-    <CarouselDots maxDots={props.maxDots} position={props.position} />
+    <CarouselDots maxDots={props.maxDots} position={props.position} numberOfSlides={9} />
   </Carousel>
 );
 

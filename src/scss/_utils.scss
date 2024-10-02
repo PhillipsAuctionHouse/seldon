@@ -200,3 +200,7 @@
     padding: 0;
   }
 }
+
+@mixin cursorPointer() {
+  cursor: pointer;
+}

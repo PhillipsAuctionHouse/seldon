@@ -55,6 +55,7 @@
     "html-react-parser": "^5.1.12",
     "react-modal": "^3.16.1",
     "react-transition-group": "^4.4.5",
+    "react-zoom-pan-pinch": "^3.6.1",
     "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {

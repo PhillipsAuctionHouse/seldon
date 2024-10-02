@@ -21,6 +21,10 @@
     flex: 0 0 100%;
     min-width: 0;
 
+    &--cursor-pointer {
+      @include cursorPointer;
+    }
+
     @each $spacing-size in $spacing-sizes {
       &--gap-#{$spacing-size} {
         padding-left: var(--spacing-#{$spacing-size});
