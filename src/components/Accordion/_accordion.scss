@@ -104,9 +104,9 @@
 
   &__text {
     flex: auto;
+    font-variation-settings: 'wght' 600;
 
     @include text($body2);
-    @include DistinctDisplay;
   }
 
   &__text--lg {
