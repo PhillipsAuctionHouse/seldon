@@ -81,6 +81,12 @@
     }
   }
 
+  &--tertiary {
+    &:focus-visible {
+      border-radius: 100px;
+    }
+  }
+
   &:disabled {
     background-color: $white;
     border: 1px solid $light-gray;
