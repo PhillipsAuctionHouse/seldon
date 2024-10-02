@@ -54,7 +54,7 @@ const Drawer = ({ className, isOpen = false, onClose = noOp, children, ...props 
               className={classnames(`${baseClassName}__close`)}
               aria-label="Close"
               data-testid="drawer-close"
-              variant={ButtonVariants.tertiary}
+              variant={ButtonVariants.secondary}
             >
               <CloseIcon />
             </IconButton>

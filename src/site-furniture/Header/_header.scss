@@ -110,12 +110,13 @@
     }
     .#{$px}-nav__list-container {
       display: flex;
-      padding: 0 $spacing-md;
+      padding: 0;
 
       @include isHeaderMobile {
         flex-direction: column;
         height: calc(100vh - var(--header-height) - 1px);
         justify-content: flex-start;
+        padding: 0 $spacing-md;
       }
 
       @include isHeaderDesktop {
@@ -124,6 +125,18 @@
 
       @media (min-width: $breakpoint-md) and (max-width: calc($breakpoint-md + 40px)) {
         padding: 0 2rem 0 0;
+      }
+    }
+
+    @include isHeaderMobile {
+      left: 0;
+      position: absolute;
+      top: var(--header-height);
+      transition: left 0.25s ease-in-out;
+
+      &--closed {
+        display: unset;
+        left: -100vw;
       }
     }
 
@@ -161,7 +174,7 @@
       height: 100vh;
       left: 0;
       position: absolute;
-      top: $header-height;
+      top: calc($header-height + 1px);
       width: 100%;
     }
   }

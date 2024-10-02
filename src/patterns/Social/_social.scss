@@ -58,7 +58,7 @@
     @include media($size-md) {
       gap: 0 1rem;
       justify-content: flex-start;
-      margin: $spacing-sm 0 $spacing-md;
+      margin: $spacing-md 0 $spacing-md;
       padding: $spacing-sm 0 0;
       width: 100%;
     }

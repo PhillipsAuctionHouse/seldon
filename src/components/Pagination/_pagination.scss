@@ -35,7 +35,7 @@
         cursor: pointer;
       }
 
-      &:focus {
+      &:focus-visible {
         outline: 1px solid $medium-gray;
       }
     }
@@ -43,16 +43,6 @@
     select::-ms-expand {
       border: none;
       display: none;
-    }
-  }
-}
-
-.#{$px}__pagination-button {
-  svg {
-    width: 2rem;
-
-    @include media($size-md, $type: 'max') {
-      width: 1rem;
     }
   }
 }

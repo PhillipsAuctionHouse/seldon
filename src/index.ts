@@ -44,14 +44,19 @@ export { default as Social, type SocialProps } from './patterns/Social/Social';
 export { default as ViewingsList, type ViewingsListProps } from './patterns/ViewingsList/ViewingsList';
 export { default as Modal, type ModalProps } from './components/Modal/Modal';
 export { default as Drawer } from './components/Drawer/Drawer';
-export { default as Pagination, type PaginationProps } from './components/Pagination/Pagination';
+export {
+  default as Pagination,
+  type PaginationProps,
+  type PaginationOption,
+  type PaginationOptionValue,
+} from './components/Pagination/Pagination';
 
 export {
   default as StatefulViewingsList,
   type StatefulViewingsListProps,
 } from './patterns/ViewingsList/StatefulViewingsList';
 export * from './components/Text';
-// export* from './components/HTMLParser';
+export * from './components/TextSymbol';
 export * from './components/Accordion';
 export { default as UserManagement, type UserManagementProps } from './patterns/UserManagement/UserManagement';
 export { AuthState } from './patterns/UserManagement/types';
@@ -67,3 +72,4 @@ export { default as PageContentWrapper } from './components/PageContentWrapper/P
 export * from './components/Carousel';
 export * from './components/Detail';
 export * from './patterns/DetailList';
+export * from './components/PinchZoom';

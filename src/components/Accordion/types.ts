@@ -68,5 +68,26 @@ export enum AccordionVariants {
    */
   singleNonCollapsible = 'singleNonCollapsible',
 }
-
 export type AccordionVariantKey = keyof typeof AccordionVariants;
+
+export enum AccordionType {
+  single = 'single',
+  multiple = 'multiple',
+}
+
+export interface AccordionVariantProps {
+  /**
+   * Determines whether multiple elements can be opened at the same time or not.
+   */
+  type: AccordionType;
+  /**
+   * Determines if an open element can be closed by clicking on it.
+   * Only applicable to the `single` variants.
+   */
+  collapsible?: boolean;
+}
+
+export enum AccordionItemVariant {
+  lg = 'lg',
+  sm = 'sm',
+}

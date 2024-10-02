@@ -26,10 +26,6 @@
     padding: 0 0 0.125rem;
   }
 
-  &--close {
-    border-bottom: 1px solid $pure-black;
-  }
-
   svg {
     height: 1.5rem;
     width: 1.5rem;
@@ -38,7 +34,21 @@
   &:hover,
   &:focus-visible,
   &:active {
-    border-bottom: 1px solid $pure-black;
+    &::after {
+      border-bottom: 1px solid #000;
+      bottom: 0;
+      content: '';
+      display: flex;
+      margin-bottom: -2px;
+      position: absolute;
+      right: 0;
+      width: 102%;
+
+      @include isHeaderMobile {
+        margin-bottom: -1px;
+        width: 52%;
+      }
+    }
   }
 
   &__icon {

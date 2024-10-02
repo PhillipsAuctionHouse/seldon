@@ -3,6 +3,8 @@ import Text, { TextProps } from './Text';
 import { TextVariants } from './types';
 import { runCommonTests } from '../../utils/testUtils';
 import { px } from '../../utils';
+import TextSymbol from '../TextSymbol/TextSymbol';
+import { TextSymbolVariants } from '../TextSymbol';
 
 describe('Text', () => {
   runCommonTests(Text, 'Text');
@@ -21,7 +23,13 @@ describe('Text', () => {
     expect(screen.getByText('Hello World')).toBeInTheDocument();
   });
   it('renders superscript correctly', () => {
-    renderText({ children: 'Hello World', superScript: 'sup' });
+    renderText({
+      children: (
+        <>
+          Hello World<TextSymbol variant={TextSymbolVariants.lotNumber}>sup</TextSymbol>
+        </>
+      ),
+    });
 
     expect(screen.getByText('Hello World')).toBeInTheDocument();
     expect(screen.getByText('sup')).toBeInTheDocument();

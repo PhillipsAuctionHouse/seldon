@@ -1,7 +1,7 @@
 import React from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
-import chevronNext from '../../assets/chevronNext.svg';
+import ChevronNextIcon from '../../assets/chevronNext.svg?react';
 
 export interface BreadcrumbItemProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -16,24 +16,52 @@ export interface BreadcrumbItemProps extends React.HTMLAttributes<HTMLDivElement
    * Label to display in the breadcrumb
    */
   label?: string;
+  /**
+   * truncate text boolean
+   * */
+  isTruncateText?: boolean;
+  /**
+   * Custom element to render for the link
+   */
+  element?: React.ElementType<React.ComponentProps<'a'>>;
 }
 
-const BreadcrumbItem = ({ className, href, label, isCurrent = false, ...props }: BreadcrumbItemProps) => {
+const BreadcrumbItem = ({
+  className,
+  href,
+  label,
+  isCurrent = false,
+  isTruncateText = false,
+  element: CustomElement = 'a',
+  ...props
+}: BreadcrumbItemProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Breadcrumb');
   const ariaCurrent = !isCurrent ? false : 'page';
   const currentHref = !isCurrent ? href : '';
 
   return (
-    <li>
-      <a
-        aria-current={ariaCurrent}
-        className={classnames(baseClassName, className, { [`${baseClassName}--current`]: isCurrent })}
-        href={currentHref}
-        {...commonProps}
-      >
-        {label}
-      </a>
-      {!isCurrent ? <img className={classnames(baseClassName, className, 'chevron')} src={chevronNext} /> : null}
+    <li
+      aria-label={label}
+      className={classnames(`${baseClassName}__item`, { [`${baseClassName}--truncate`]: isTruncateText })}
+    >
+      {isCurrent ? (
+        <span className={classnames(baseClassName, className, { [`${baseClassName}--current`]: isCurrent })}>
+          {label}
+        </span>
+      ) : (
+        <CustomElement
+          aria-current={ariaCurrent}
+          className={classnames(baseClassName, className, {
+            [`${baseClassName}--current`]: isCurrent,
+          })}
+          href={currentHref}
+          {...commonProps}
+        >
+          {label}
+        </CustomElement>
+      )}
+
+      {!isCurrent ? <ChevronNextIcon className={`${baseClassName}__chevron`} /> : null}
     </li>
   );
 };

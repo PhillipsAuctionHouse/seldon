@@ -27,7 +27,6 @@
     display: flex;
     gap: 0 $spacing-xsm;
     justify-content: center;
-    min-width: 44px;
     padding: 0;
     padding-bottom: $padding-xsm;
 
@@ -36,6 +35,7 @@
     }
 
     @include isHeaderMobile {
+      justify-content: flex-end;
       padding-right: 0;
     }
 

@@ -5,7 +5,7 @@ import MinusIcon from '../../assets/minus.svg?react';
 import LockIcon from '../../assets/lock.svg?react';
 import classnames from 'classnames';
 import * as Accordion from '@radix-ui/react-accordion';
-import { AccordionHeaderType, AccordionContentType } from './types';
+import { AccordionItemVariant, AccordionHeaderType, AccordionContentType } from './types';
 import { getIconClasses } from './utils';
 
 export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -18,9 +18,9 @@ export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement>
    */
   isLocked?: boolean;
   /**
-   * Determines whether the variation on text style is large or small.
+   * Determines whether the variant on text style is large or small.
    */
-  variation: string;
+  variant?: AccordionItemVariant;
   /**
    * Uniqueid for the Accordion Item.
    */
@@ -131,7 +131,7 @@ const AccordionContent = ({
 
 const AccordionItem = ({
   isLocked = false,
-  variation,
+  variant = AccordionItemVariant.sm,
   id,
   label,
   isLastItem,
@@ -140,7 +140,7 @@ const AccordionItem = ({
   ...props
 }: AccordionItemProps) => {
   const { className: baseClassName } = getCommonProps({ id }, 'Accordion');
-  const isLargeVariation = variation === 'lg';
+  const isLargeVariation = variant === AccordionItemVariant.lg;
   const accordionItemClassName = `${baseClassName}-item`;
 
   return (
@@ -165,7 +165,7 @@ const AccordionItem = ({
         isLargeVariation={isLargeVariation}
         baseClassName={accordionItemClassName}
       >
-        {children}
+        <div className="radix-accordion-content">{children}</div>
       </AccordionContent>
     </Accordion.Item>
   );

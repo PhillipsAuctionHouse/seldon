@@ -1,37 +1,70 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-breadcrumb {
-  @include text($body3);
+  @include text($body2);
 
-  color: $soft-black-2;
+  color: $pure-black;
 
-  @media (max-width: $breakpoint-sm) {
-    display: none;
+  &__back-button {
+    svg {
+      height: 1rem;
+      width: 1rem;
+    }
+  }
+
+  &__item {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+
+    a {
+      margin: $margin-sm;
+      outline: none;
+      text-decoration: none;
+      text-wrap: nowrap;
+
+      &:hover {
+        color: $button-hover;
+        text-decoration: none;
+      }
+
+      &:focus-visible {
+        border-radius: 5px;
+        outline: 1px solid $medium-gray;
+      }
+    }
+
+    span {
+      margin: $margin-sm;
+    }
+  }
+
+  &__chevron {
+    height: 1rem;
+    width: 1rem;
   }
 
   ol {
     display: flex;
     flex-direction: row;
+    padding: 0;
+  }
 
-    li {
-      display: flex;
-      flex-direction: row;
+  &--truncate {
+    flex-shrink: 1;
+    overflow: hidden;
 
-      a {
-        margin: $margin-sm;
-        overflow: hidden;
-        text-wrap: nowrap;
-
-        &:hover {
-          color: $widget-blue;
-          text-decoration: none;
-        }
-      }
+    a {
+      flex-shrink: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
   &--current {
     color: $primary-black;
     font-variation-settings: 'wght' 700;
+    white-space: nowrap;
   }
 }

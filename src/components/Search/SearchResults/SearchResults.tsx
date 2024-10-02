@@ -15,6 +15,7 @@ export interface SearchResultsProps extends React.HTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
   loadingText?: string;
   onKeyDown?: (event: React.KeyboardEvent<HTMLAnchorElement>) => void;
+  userInputValue?: string;
 }
 
 const SearchResults = ({
@@ -23,8 +24,16 @@ const SearchResults = ({
   children,
   loadingText = 'Loading...',
   onKeyDown,
+  userInputValue = '',
 }: React.PropsWithChildren<SearchResultsProps>) => {
   const hasResults = Array.isArray(autoCompleteResults) && autoCompleteResults.length > 0;
+
+  function formatSearchLabel(label: string, searchQuery: string): React.ReactNode {
+    const parts = label.split(new RegExp(`(${searchQuery})`, 'gi'));
+    return parts.map((part, index) =>
+      part.toLocaleLowerCase() === searchQuery.toLocaleLowerCase() ? <strong key={index}>{part}</strong> : part,
+    );
+  }
 
   return (
     <div className={`${px}-search__results`}>
@@ -35,7 +44,7 @@ const SearchResults = ({
             return (
               <li key={result.id} className={`${px}-search__result`}>
                 <Link href={result.url} onKeyDown={onKeyDown} variant={LinkVariants.snwFlyoutLink}>
-                  {result.label}
+                  <span className="${px}-search__result__label">{formatSearchLabel(result.label, userInputValue)}</span>
                 </Link>
               </li>
             );

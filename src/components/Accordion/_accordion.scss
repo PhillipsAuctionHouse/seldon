@@ -1,14 +1,13 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-accordion {
-  border-bottom: 1px solid $keyline-gray;
-  border-top: 1px solid $keyline-gray;
+  border-top: 1px solid $light-gray;
   margin-bottom: 10px;
   width: 100%;
 }
 
 .#{$px}-accordion-item {
-  padding: $spacing-sm;
+  padding: $spacing-sm 0;
   width: 100%;
 
   svg {
@@ -16,7 +15,7 @@
   }
 
   &__border-bottom {
-    border-bottom: 1px solid $keyline-gray;
+    border-bottom: 1px solid $light-gray;
   }
 
   &[data-state='open'] {
@@ -36,11 +35,11 @@
   }
 
   &--transition[data-state='open'] {
-    animation: slide-down 250ms ease-out;
+    animation: slide-down 250ms ease-in-out;
   }
 
   &--transition[data-state='closed'] {
-    animation: slide-up 250ms end;
+    animation: slide-up 250ms ease-in-out;
   }
 
   &[data-state='open'] {
@@ -66,10 +65,12 @@
   @keyframes slide-down {
     from {
       height: 0;
+      opacity: 0;
     }
 
     to {
       height: var(--radix-accordion-content-height);
+      opacity: 1;
     }
   }
 
@@ -104,12 +105,12 @@
   &__text {
     flex: auto;
 
-    @include text($body1);
+    @include text($body2);
     @include DistinctDisplay;
   }
 
   &__text--lg {
-    @include text($heading3);
+    @include text($body1);
   }
 
   &__icon {

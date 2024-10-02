@@ -1,3 +1,88 @@
+# [1.70.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.69.0...v1.70.0) (2024-10-02)
+
+
+### Features
+
+* **lotdetails:** L3-3145 pinch zoom component in seldon ([#346](https://github.com/PhillipsAuctionHouse/seldon/issues/346)) ([c30965a](https://github.com/PhillipsAuctionHouse/seldon/commit/c30965a4eaa5dfcf3b0ca51b6fc3994f5b1977e8))
+
+# [1.69.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.68.1...v1.69.0) (2024-10-02)
+
+
+### Features
+
+* **pagination:** L3-3826 support options object with translated label ([#339](https://github.com/PhillipsAuctionHouse/seldon/issues/339)) ([32ec6f9](https://github.com/PhillipsAuctionHouse/seldon/commit/32ec6f9565a8b5d954a5cac2e0214dfad414001b))
+
+## [1.68.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.68.0...v1.68.1) (2024-10-02)
+
+
+### Bug Fixes
+
+* **breadcrumb:** L3-3900 breadcrumb style fixes ([#340](https://github.com/PhillipsAuctionHouse/seldon/issues/340)) ([a6bba93](https://github.com/PhillipsAuctionHouse/seldon/commit/a6bba93d95801ff50b3f4e0d46c1d44b15fdc3a9))
+
+# [1.68.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.67.2...v1.68.0) (2024-10-01)
+
+
+### Features
+
+* **header:** L3-1663 added onCancel callback ([#350](https://github.com/PhillipsAuctionHouse/seldon/issues/350)) ([be7d6d7](https://github.com/PhillipsAuctionHouse/seldon/commit/be7d6d7f12dc306618721459f31ea9baecfb3837))
+
+## [1.67.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.67.1...v1.67.2) (2024-10-01)
+
+
+### Bug Fixes
+
+* **accordion:** L3-3154 lot details accordion styles do not match FIGMA ([#348](https://github.com/PhillipsAuctionHouse/seldon/issues/348)) ([6adea4f](https://github.com/PhillipsAuctionHouse/seldon/commit/6adea4fbd6f520cb39c3506a1815ce5af894b59a))
+
+## [1.67.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.67.0...v1.67.1) (2024-10-01)
+
+
+### Bug Fixes
+
+* **searchresult:** L3-3688 highlight user input in search result breaking Remix with lib is not defined ([#349](https://github.com/PhillipsAuctionHouse/seldon/issues/349)) ([a615084](https://github.com/PhillipsAuctionHouse/seldon/commit/a615084b445062098356263371d68ac0cef24d38))
+
+# [1.67.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.66.0...v1.67.0) (2024-10-01)
+
+
+### Features
+
+* **header:** L3-3688 Highlight User Input In Search Results ([#347](https://github.com/PhillipsAuctionHouse/seldon/issues/347)) ([bcc1b96](https://github.com/PhillipsAuctionHouse/seldon/commit/bcc1b965f2817cfce87590f5c0d85903ab6d0ca7))
+
+# [1.66.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.65.0...v1.66.0) (2024-10-01)
+
+
+### Features
+
+* **subscribe:** L3-3829 add ability to autofocus the input ([#345](https://github.com/PhillipsAuctionHouse/seldon/issues/345)) ([30f52cd](https://github.com/PhillipsAuctionHouse/seldon/commit/30f52cd883cee7e32621d9ac0b90155361d507e1))
+* **text-symbol:** L3-3572 created TextSymbol component ([#344](https://github.com/PhillipsAuctionHouse/seldon/issues/344)) ([5d589af](https://github.com/PhillipsAuctionHouse/seldon/commit/5d589aff803b9df5cb1c5a504dc70ed2a561be4a))
+
+# [1.65.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.64.0...v1.65.0) (2024-09-25)
+
+
+### Features
+
+* **text:** L3-3572 lifted up superscript  ([#338](https://github.com/PhillipsAuctionHouse/seldon/issues/338)) ([58dc4c5](https://github.com/PhillipsAuctionHouse/seldon/commit/58dc4c55d2f34312dd3355a0d9eb53cade72c546))
+
+# [1.64.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.63.0...v1.64.0) (2024-09-25)
+
+
+### Features
+
+* **social|accordion:** L3-3723 fixed spacing for Footer ([#336](https://github.com/PhillipsAuctionHouse/seldon/issues/336)) ([d568434](https://github.com/PhillipsAuctionHouse/seldon/commit/d5684344edc99b4b83d569f96026a4363f13b6a2))
+
+# [1.63.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.62.0...v1.63.0) (2024-09-25)
+
+
+### Features
+
+* **Breadcrumb:** L3-3577 build a breadcrumb back button component in seldon ([#326](https://github.com/PhillipsAuctionHouse/seldon/issues/326)) ([1e5bbda](https://github.com/PhillipsAuctionHouse/seldon/commit/1e5bbda5fb41623b90ad9c5d5ddcb5776c4c7570))
+
+# [1.62.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.61.0...v1.62.0) (2024-09-25)
+
+
+### Features
+
+* **header-animations:** L3-3037 Header Animations Transitions ([#330](https://github.com/PhillipsAuctionHouse/seldon/issues/330)) ([5101235](https://github.com/PhillipsAuctionHouse/seldon/commit/5101235f1c4b71452744d8fe0eb6ee1843a8b3cd))
+
 # [1.61.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.60.0...v1.61.0) (2024-09-24)
 
 

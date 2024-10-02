@@ -33,24 +33,41 @@
     }
 
     & > &__submenu {
+      align-items: flex-start;
       border-top: 1px solid $light-gray;
+      height: fit-content;
+      max-height: 0;
+      opacity: 0;
+      padding: $padding-md;
       pointer-events: none;
-      transform: translateY(-100%);
-      transition: none; // remove this when implementing submenu transitions
+      position: fixed; // has to bust out of the box containing it on desktop
+      right: 0;
+      top: calc($header-height + 1px);
+      transition:
+        max-height 0.2s ease-in-out,
+        opacity 0s ease-in-out 0.2s,
+        z-index 0s ease-in-out 0.2s;
+      width: 100%;
+      z-index: -1;
+      .#{$px}-nav__list__section {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
     }
 
     &--hovered &__submenu {
-      align-items: flex-start;
-      height: fit-content;
       left: 0;
-      max-height: unset;
+      max-height: 700px;
       opacity: 1;
-      padding: $padding-md;
       pointer-events: all;
-      position: fixed; // has to bust out of the box containing it on desktop
-      right: 0;
-      top: $header-height;
-      transform: translateY(0);
+      transition:
+        max-height 0.25s ease-in-out,
+        z-index 0s ease-in-out 0.25s;
+      z-index: 1;
+
+      .#{$px}-nav__list__section {
+        opacity: 1;
+      }
     }
   }
 
@@ -59,10 +76,8 @@
       background-color: $pure-white;
       height: auto;
       left: 0;
-      opacity: 0;
       overflow: hidden;
       position: absolute;
-      z-index: -1;
 
       li {
         display: inline;
