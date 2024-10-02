@@ -1,3 +1,10 @@
+# [1.69.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.68.1...v1.69.0) (2024-10-02)
+
+
+### Features
+
+* **pagination:** L3-3826 support options object with translated label ([#339](https://github.com/PhillipsAuctionHouse/seldon/issues/339)) ([32ec6f9](https://github.com/PhillipsAuctionHouse/seldon/commit/32ec6f9565a8b5d954a5cac2e0214dfad414001b))
+
 ## [1.68.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.68.0...v1.68.1) (2024-10-02)
 
 
