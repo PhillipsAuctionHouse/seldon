@@ -1,3 +1,10 @@
+## [1.68.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.68.0...v1.68.1) (2024-10-02)
+
+
+### Bug Fixes
+
+* **breadcrumb:** L3-3900 breadcrumb style fixes ([#340](https://github.com/PhillipsAuctionHouse/seldon/issues/340)) ([a6bba93](https://github.com/PhillipsAuctionHouse/seldon/commit/a6bba93d95801ff50b3f4e0d46c1d44b15fdc3a9))
+
 # [1.68.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.67.2...v1.68.0) (2024-10-01)
 
 
