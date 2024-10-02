@@ -1,5 +1,5 @@
 import React from 'react';
-import { getCommonProps } from '../../utils';
+import { getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
 import BreadcrumbItem, { BreadcrumbItemProps } from './BreadcrumbItem';
 import { SSRMediaQuery } from '../../providers/utils';
@@ -20,10 +20,6 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   truncateIndex?: number;
   /**
-   * Max length for truncation
-   */
-  truncateLength?: number;
-  /**
    * Custom element to render for the link
    */
   linkElement?: React.ElementType<React.ComponentProps<'a'>>;
@@ -41,7 +37,6 @@ const Breadcrumb = ({
   className,
   items = [],
   truncateIndex,
-  truncateLength = 10,
   linkElement: CustomElement = 'a',
   ...props
 }: BreadcrumbProps) => {
@@ -54,10 +49,10 @@ const Breadcrumb = ({
       <SSRMediaQuery.Media lessThan="md">
         <CustomElement
           href={items[1].href ? items[1].href : '/'}
-          className="back-button"
+          className={`${px}-icon-button ${px}-icon-button--secondary`} // apply button styles though it's a link
           data-testid={`${id}-back-button`}
         >
-          <ArrowPrevIcon />
+          <ArrowPrevIcon className={`${baseClassName}__back-button`} />
         </CustomElement>
       </SSRMediaQuery.Media>
       {/* This is not visible when in mobile breakpoint */}
@@ -71,7 +66,6 @@ const Breadcrumb = ({
               isCurrent={items.length - 1 === index}
               key={item.label}
               isTruncateText={truncateIndex === index}
-              truncateLength={truncateLength}
             />
           ))}
         </ol>

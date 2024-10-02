@@ -1,0 +1,14 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-text-symbol {
+  &--estimation {
+    margin-left: 0.25rem;
+    vertical-align: middle;
+  }
+
+  &--lotNumber {
+    font-size: 60%;
+    margin-left: $spacing-xsm;
+    vertical-align: super;
+  }
+}

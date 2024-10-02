@@ -11,6 +11,18 @@
   top: $padding-md;
   transition: left 0.25s ease-in;
 
+  &::after {
+    border-bottom: 1px solid #000;
+    bottom: 0;
+    content: '';
+    display: flex;
+    margin-bottom: -1px;
+    position: absolute;
+    right: 0;
+    transition: width 0.25s ease-in;
+    width: 0;
+  }
+
   @include isHeaderDesktop {
     top: 0;
   }
@@ -25,13 +37,17 @@
     left: 0;
     transition: left 0.25s ease-in 0.2s;
 
+    &::after {
+      transition: width 0.25s ease-in 0.2s;
+      width: 100%;
+    }
+
     @include isHeaderMobile {
       left: $spacing-md;
     }
   }
 
   &__input-status-icon {
-    border-bottom: 1px solid $pure-black;
     height: $search-size;
     width: $search-size;
 
@@ -81,7 +97,6 @@
       &__input {
         background: transparent;
         border: 0;
-        border-bottom: 1px solid $pure-black;
         border-radius: unset;
         color: $pure-black;
         font-size: $string-size1;

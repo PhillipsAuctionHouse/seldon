@@ -16,7 +16,7 @@ const fetchData = async (searchQuery: string) => {
           makers: [
             { id: 'result1', label: 'Name', url: 'http://www.example.com' },
             { id: 'result2', label: 'Another Name', url: 'http://www.example.com' },
-            { id: 'result3', label: 'Yet Another Name', url: 'http://www.example.com' },
+            { id: 'result3', label: 'Yet Another Name Yet Again', url: 'http://www.example.com' },
           ],
         }),
       2000,

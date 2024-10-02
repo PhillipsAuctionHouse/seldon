@@ -13,8 +13,6 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
    * The OOTB style to apply to the text
    */
   variant?: TextVariants;
-
-  superScript?: string;
 }
 /**
  * ## Overview
@@ -25,14 +23,7 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-text--overview)
  */
-const Text = ({
-  children,
-  className,
-  element: CustomElement,
-  variant = TextVariants.body2,
-  superScript = '',
-  ...props
-}: TextProps) => {
+const Text = ({ children, className, element: CustomElement, variant = TextVariants.body2, ...props }: TextProps) => {
   const Component = CustomElement || determineDefaultTextElement(variant);
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Text');
 
@@ -43,7 +34,6 @@ const Text = ({
       {...props}
     >
       {children}
-      {superScript ? <span className={classNames(`${baseClassName}--super-script`)}>{superScript}</span> : null}
     </Component>
   );
 };

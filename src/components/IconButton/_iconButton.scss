@@ -1,11 +1,10 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-icon-button {
+  align-items: center;
+  display: flex;
+  justify-content: center;
   padding: 0;
-
-  & > svg {
-    position: absolute;
-  }
 
   &:focus-visible {
     &:focus-visible {
@@ -27,11 +26,8 @@
 
     & > svg {
       fill: $pure-black;
-      height: 100%;
       height: 1.5rem;
       margin-inline-end: unset;
-      position: absolute;
-      width: 100%;
       width: 1.5rem;
 
       path {
@@ -67,6 +63,10 @@
     height: 28px;
     padding: $spacing-xsm;
     width: 28px;
+
+    &:focus-visible {
+      border-radius: 100px;
+    }
 
     & > svg {
       fill: $pure-black;

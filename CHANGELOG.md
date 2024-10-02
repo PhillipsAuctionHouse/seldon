@@ -1,3 +1,39 @@
+# [1.68.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.67.2...v1.68.0) (2024-10-01)
+
+
+### Features
+
+* **header:** L3-1663 added onCancel callback ([#350](https://github.com/PhillipsAuctionHouse/seldon/issues/350)) ([be7d6d7](https://github.com/PhillipsAuctionHouse/seldon/commit/be7d6d7f12dc306618721459f31ea9baecfb3837))
+
+## [1.67.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.67.1...v1.67.2) (2024-10-01)
+
+
+### Bug Fixes
+
+* **accordion:** L3-3154 lot details accordion styles do not match FIGMA ([#348](https://github.com/PhillipsAuctionHouse/seldon/issues/348)) ([6adea4f](https://github.com/PhillipsAuctionHouse/seldon/commit/6adea4fbd6f520cb39c3506a1815ce5af894b59a))
+
+## [1.67.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.67.0...v1.67.1) (2024-10-01)
+
+
+### Bug Fixes
+
+* **searchresult:** L3-3688 highlight user input in search result breaking Remix with lib is not defined ([#349](https://github.com/PhillipsAuctionHouse/seldon/issues/349)) ([a615084](https://github.com/PhillipsAuctionHouse/seldon/commit/a615084b445062098356263371d68ac0cef24d38))
+
+# [1.67.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.66.0...v1.67.0) (2024-10-01)
+
+
+### Features
+
+* **header:** L3-3688 Highlight User Input In Search Results ([#347](https://github.com/PhillipsAuctionHouse/seldon/issues/347)) ([bcc1b96](https://github.com/PhillipsAuctionHouse/seldon/commit/bcc1b965f2817cfce87590f5c0d85903ab6d0ca7))
+
+# [1.66.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.65.0...v1.66.0) (2024-10-01)
+
+
+### Features
+
+* **subscribe:** L3-3829 add ability to autofocus the input ([#345](https://github.com/PhillipsAuctionHouse/seldon/issues/345)) ([30f52cd](https://github.com/PhillipsAuctionHouse/seldon/commit/30f52cd883cee7e32621d9ac0b90155361d507e1))
+* **text-symbol:** L3-3572 created TextSymbol component ([#344](https://github.com/PhillipsAuctionHouse/seldon/issues/344)) ([5d589af](https://github.com/PhillipsAuctionHouse/seldon/commit/5d589aff803b9df5cb1c5a504dc70ed2a561be4a))
+
 # [1.65.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.64.0...v1.65.0) (2024-09-25)
 
 
