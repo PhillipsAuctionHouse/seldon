@@ -83,8 +83,7 @@
 }
 
 @mixin media($breakpoint, $type: 'min') {
-  @if $breakpoint == $size-sm {
-    // $breakpoint-sm: 360px;
+  @if $breakpoint == $size-sm or $breakpoint == $breakpoint-sm {
     @if $type == 'min' {
       @media (min-width: $breakpoint-sm) {
         @content;
@@ -98,7 +97,7 @@
     }
   }
 
-  @if $breakpoint == $size-md {
+  @if $breakpoint == $size-md or $breakpoint == $breakpoint-md {
     // $breakpoint-md: 961px;
     @if $type == 'min' {
       @media (min-width: $breakpoint-md) {
@@ -113,7 +112,7 @@
     }
   }
 
-  @if $breakpoint == $size-lg {
+  @if $breakpoint == $size-lg or $breakpoint == $breakpoint-lg {
     // $breakpoint-lg: 1401px;
 
     @if $type == 'min' {
@@ -129,7 +128,7 @@
     }
   }
 
-  @if $breakpoint == $size-xl {
+  @if $breakpoint == $size-xl or $breakpoint == $breakpoint-xl {
     // $breakpoint-xl: 1801px;
     @if $type == 'min' {
       @media (min-width: $breakpoint-xl) {
