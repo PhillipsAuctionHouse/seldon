@@ -1,3 +1,10 @@
+# [1.72.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.71.0...v1.72.0) (2024-10-02)
+
+
+### Features
+
+* **Detail:** L3-3155 create Detail component ([#335](https://github.com/PhillipsAuctionHouse/seldon/issues/335)) ([48eb283](https://github.com/PhillipsAuctionHouse/seldon/commit/48eb283dc993966ff82bfb9d032f83a5534f9ea6))
+
 # [1.71.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.70.0...v1.71.0) (2024-10-02)
 
 
