@@ -103,8 +103,8 @@ const Search = ({
       }
     }
     if (e.key === 'Escape') {
-      headerContext.setIsSearchExpanded(false);
       searchFormRef.current?.reset();
+      headerContext.setIsSearchExpanded(false);
     }
   };
 
@@ -117,8 +117,8 @@ const Search = ({
   }, [isSearchExpanded]);
 
   const showSearch: typeof headerContext.setIsSearchExpanded = (isSearchExpanded) => {
-    headerContext.setIsSearchExpanded(isSearchExpanded);
     searchFormRef.current?.reset();
+    headerContext.setIsSearchExpanded(isSearchExpanded);
   };
 
   return (
