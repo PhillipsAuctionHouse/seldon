@@ -45,7 +45,7 @@ const DetailList = forwardRef<HTMLDListElement, DetailListProps>(
         ref={ref}
       >
         {children?.map((child, index) => (
-          <dl
+          <div
             className={classnames(`${baseClassName}-wrapper`, {
               [`${px}-has-separators`]: hasSeparators,
               [`${px}-columns`]: alignment === DetailListAlignment.columns,
@@ -54,7 +54,7 @@ const DetailList = forwardRef<HTMLDListElement, DetailListProps>(
             key={getDetailKey(child, index)}
           >
             {child}
-          </dl>
+          </div>
         ))}
       </dl>
     );
