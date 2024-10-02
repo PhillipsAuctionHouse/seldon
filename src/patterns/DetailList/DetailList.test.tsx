@@ -1,6 +1,6 @@
-import { DetailList } from '.';
 import { runCommonTests } from '../../utils/testUtils';
 import { render } from '@testing-library/react';
+import { DetailList } from '.';
 import { Detail } from '../../components/Detail';
 import { DetailListAlignment } from './types';
 

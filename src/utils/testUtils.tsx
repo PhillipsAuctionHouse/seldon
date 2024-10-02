@@ -5,7 +5,6 @@ import { kebabCase } from 'change-case';
 export const runCommonTests = (Component: ElementType, componentName: string, props?: object) => {
   it('renders id', () => {
     render(<Component id="componentid" {...props} />);
-    console.log('WEEEEEE:', screen.getAllByTestId(/componentid/));
     expect(screen.getAllByTestId(/componentid/)?.[0]).toHaveAttribute('id', 'componentid');
   });
   it('renders base component className and classname prop', () => {
