@@ -1,8 +1,9 @@
-import { ComponentProps, forwardRef, isValidElement } from 'react';
+import { ComponentProps, forwardRef } from 'react';
 import classnames from 'classnames';
 import { getCommonProps, px } from '../../utils';
 import { DetailListAlignment } from './types';
 import { DetailComponent } from '../../components/Detail';
+import { getDetailKey } from './utils';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface DetailListProps extends ComponentProps<'dl'> {
@@ -44,22 +45,18 @@ const DetailList = forwardRef<HTMLDListElement, DetailListProps>(
         {...props}
         ref={ref}
       >
-        {childrenArray?.map((child) => {
-          const key = isValidElement(child) ? child?.key : null;
-
-          return (
-            <div
-              className={classnames(`${baseClassName}-wrapper`, {
-                [`${px}-has-separators`]: hasSeparators,
-                [`${px}-columns`]: alignment === DetailListAlignment.columns,
-                [`${px}-justified`]: alignment === DetailListAlignment.justified,
-              })}
-              key={key}
-            >
-              {child}
-            </div>
-          );
-        })}
+        {childrenArray?.map((child, index) => (
+          <div
+            className={classnames(`${baseClassName}-wrapper`, {
+              [`${px}-has-separators`]: hasSeparators,
+              [`${px}-columns`]: alignment === DetailListAlignment.columns,
+              [`${px}-justified`]: alignment === DetailListAlignment.justified,
+            })}
+            key={getDetailKey(child, index)}
+          >
+            {child}
+          </div>
+        ))}
       </dl>
     );
   },

@@ -1,3 +1,10 @@
+## [1.72.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.72.1...v1.72.2) (2024-10-03)
+
+
+### Bug Fixes
+
+* **lotdetails:** L3-3145 dont use index key on carousel dots ([#354](https://github.com/PhillipsAuctionHouse/seldon/issues/354)) ([b66d1b7](https://github.com/PhillipsAuctionHouse/seldon/commit/b66d1b71c680de4cd751c7e321b02cef26612d54))
+
 ## [1.72.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.72.0...v1.72.1) (2024-10-03)
 
 
