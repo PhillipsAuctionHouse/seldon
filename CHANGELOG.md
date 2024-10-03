@@ -1,3 +1,10 @@
+## [1.72.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.72.0...v1.72.1) (2024-10-03)
+
+
+### Bug Fixes
+
+* **accordion:** L3-3154 accordion label and icon style fixes ([#352](https://github.com/PhillipsAuctionHouse/seldon/issues/352)) ([9b8727d](https://github.com/PhillipsAuctionHouse/seldon/commit/9b8727dce707205a0ef8a574efe4c209fd40a347))
+
 # [1.72.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.71.0...v1.72.0) (2024-10-02)
 
 
