@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/react';
 import Detail, { DetailProps } from './Detail';
+import { Text, TextVariants } from '../Text';
 
 const meta = {
   title: 'Components/Detail',
@@ -11,7 +12,7 @@ export const Playground = (props: DetailProps) => <Detail {...props} />;
 
 Playground.args = {
   label: 'Label',
-  value: 'Value',
+  value: <Text variant={TextVariants.string2}>Value</Text>,
 };
 
 Playground.argTypes = {};

@@ -10,9 +10,9 @@ describe('DetailList', () => {
   it('should wrap Detail components', () => {
     const { getAllByTestId } = render(
       <DetailList alignment={DetailListAlignment.columns} hasSeparators={false}>
-        <Detail label="Artist" value="Andy Warhol" />
-        <Detail label="Title" value="Marilyn Monroe" />
-        <Detail label="Year" value="1967" />
+        <Detail label="Artist" value="Andy Warhol" key="1" />
+        <Detail label="Title" value="Marilyn Monroe" key="2" />
+        <Detail label="Year" value="1967" key="3" />
       </DetailList>,
     );
 
