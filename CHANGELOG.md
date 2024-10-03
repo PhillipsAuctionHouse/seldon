@@ -1,3 +1,10 @@
+# [1.73.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.72.2...v1.73.0) (2024-10-03)
+
+
+### Features
+
+* **detail:** L3-4057 detail list improvement ([#355](https://github.com/PhillipsAuctionHouse/seldon/issues/355)) ([4e1859a](https://github.com/PhillipsAuctionHouse/seldon/commit/4e1859a71b0564acff42c4f532b6219b40b6ce6b))
+
 ## [1.72.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.72.1...v1.72.2) (2024-10-03)
 
 
