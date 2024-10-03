@@ -31,7 +31,7 @@ export interface DetailListProps extends ComponentProps<'dl'> {
  *
  */
 const DetailList = forwardRef<HTMLDListElement, DetailListProps>(
-  ({ alignment = DetailListAlignment.columns, className, children, hasSeparators = false, ...props }, ref) => {
+  ({ alignment = DetailListAlignment.justified, className, children, hasSeparators = false, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'DetailList');
     const childrenArray = Array.isArray(children) ? children : [children];
 
