@@ -1,24 +1,23 @@
-import { ComponentProps, forwardRef } from 'react';
+import { ComponentProps, forwardRef, isValidElement } from 'react';
 import classnames from 'classnames';
-import { DetailComponent } from '../../components/Detail';
 import { getCommonProps, px } from '../../utils';
 import { DetailListAlignment } from './types';
-import { getDetailKey } from './utils';
+import { DetailComponent } from '../../components/Detail';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface DetailListProps extends ComponentProps<'dl'> {
   /**
    * Determines whether each Details' label and value are aligned in columns or justified
    */
-  alignment: DetailListAlignment;
+  alignment?: DetailListAlignment;
   /**
    * The Detail components to render
    */
-  children: DetailComponent[];
+  children: DetailComponent[] | DetailComponent;
   /**
    * Whether to render separators between each Detail component
    */
-  hasSeparators: boolean;
+  hasSeparators?: boolean;
 }
 /**
  * ## Overview
@@ -31,8 +30,9 @@ export interface DetailListProps extends ComponentProps<'dl'> {
  *
  */
 const DetailList = forwardRef<HTMLDListElement, DetailListProps>(
-  ({ alignment, className, children, hasSeparators, ...props }, ref) => {
+  ({ alignment = DetailListAlignment.columns, className, children, hasSeparators = false, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'DetailList');
+    const childrenArray = Array.isArray(children) ? children : [children];
 
     return (
       <dl
@@ -44,18 +44,22 @@ const DetailList = forwardRef<HTMLDListElement, DetailListProps>(
         {...props}
         ref={ref}
       >
-        {children?.map((child, index) => (
-          <div
-            className={classnames(`${baseClassName}-wrapper`, {
-              [`${px}-has-separators`]: hasSeparators,
-              [`${px}-columns`]: alignment === DetailListAlignment.columns,
-              [`${px}-justified`]: alignment === DetailListAlignment.justified,
-            })}
-            key={getDetailKey(child, index)}
-          >
-            {child}
-          </div>
-        ))}
+        {childrenArray?.map((child) => {
+          const key = isValidElement(child) ? child?.key : null;
+
+          return (
+            <div
+              className={classnames(`${baseClassName}-wrapper`, {
+                [`${px}-has-separators`]: hasSeparators,
+                [`${px}-columns`]: alignment === DetailListAlignment.columns,
+                [`${px}-justified`]: alignment === DetailListAlignment.justified,
+              })}
+              key={key}
+            >
+              {child}
+            </div>
+          );
+        })}
       </dl>
     );
   },

@@ -1,15 +1,16 @@
-import { ComponentProps, forwardRef } from 'react';
+import React, { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
+import classNames from 'classnames';
 
 export interface DetailProps extends ComponentProps<'div'> {
   /*
    * Label that appears on the left side of the Detail component
    */
-  label: string;
+  label?: React.ReactNode;
   /*
    * Value that appears on the right side of the Detail component
    */
-  value: string;
+  value?: React.ReactNode;
 }
 /**
  * ## Overview
@@ -21,16 +22,18 @@ export interface DetailProps extends ComponentProps<'div'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-detail--overview)
  *
  */
-const Detail = forwardRef<HTMLDivElement, DetailProps>(({ className, ...props }, ref) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Detail');
+const Detail = forwardRef<HTMLDivElement, DetailProps>(
+  ({ className = '', label = 'label', value = 'value', ...props }, ref) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Detail');
 
-  return (
-    <div {...commonProps} className={`${baseClassName} ${className}`} {...props} ref={ref}>
-      <dt className={`${baseClassName}__label`}>{props.label}</dt>
-      <dd className={`${baseClassName}__value`}>{props.value}</dd>
-    </div>
-  );
-});
+    return (
+      <div {...commonProps} className={classNames(baseClassName, className)} {...props} ref={ref}>
+        <dt className={`${baseClassName}__label`}>{label}</dt>
+        <dd className={`${baseClassName}__value`}>{value}</dd>
+      </div>
+    );
+  },
+);
 
 Detail.displayName = 'Detail';
 
