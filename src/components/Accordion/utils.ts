@@ -1,32 +1,20 @@
 import classnames from 'classnames';
-import { AccordionVariantKey, AccordionVariants } from './types';
-
-export interface AccordionVariantProps {
-  /**
-   * Determines whether multiple elements can be opened at the same time or not.
-   */
-  type: 'single' | 'multiple';
-  /**
-   * Determines if an open element can be closed by clicking on it.
-   * Only applicable to the `single` variants.
-   */
-  collapsible?: boolean;
-}
+import { AccordionType, AccordionVariantKey, AccordionVariantProps, AccordionVariants } from './types';
 
 /**
  * Sets the type and collapsible props based on the variant prop
  * The collapsible prop should only be passed when the variant is single
  */
 export const getAccordionVariantProps = (variant?: AccordionVariantKey): AccordionVariantProps => {
-  const variantProps: AccordionVariantProps = { type: 'multiple' };
+  const variantProps: AccordionVariantProps = { type: AccordionType.multiple };
 
   if (variant === AccordionVariants.singleCollapsible) {
-    variantProps.type = 'single';
+    variantProps.type = AccordionType.single;
     variantProps.collapsible = true;
   }
 
   if (variant === AccordionVariants.singleNonCollapsible) {
-    variantProps.type = 'single';
+    variantProps.type = AccordionType.single;
     variantProps.collapsible = false;
   }
 

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { EmblaCarouselType } from 'embla-carousel';
-import { ComponentProps, forwardRef, useCallback, useEffect, useState } from 'react';
+import { ComponentProps, forwardRef, useCallback, useEffect, useState, useId } from 'react';
 import { useCarousel } from './utils';
 import { getCommonProps } from '../../utils';
 
@@ -31,6 +31,7 @@ export interface CarouselDotsProps extends ComponentProps<'div'> {
 const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
   ({ className, maxDots = 7, position = 'inline', numberOfSlides = 0, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
+    const componentId = useId();
     const { api, onSlideChange } = useCarousel();
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [scrollSnaps, setScrollSnaps] = useState<number[]>(
@@ -108,7 +109,7 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
 
               return (
                 <button
-                  key={actualIndex}
+                  key={`${componentId}-dot-${index}`}
                   role="button"
                   onClick={() => onDotButtonClick(actualIndex)}
                   className={classNames(`${baseClassName}-pagination-dot-container`)}

@@ -5,61 +5,66 @@
 
   color: $pure-black;
 
-  @media (max-width: $breakpoint-sm) {
-    display: none;
+  &__back-button {
+    svg {
+      height: 1rem;
+      width: 1rem;
+    }
   }
 
-  .back-button {
+  &__item {
     align-items: center;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
     display: flex;
-    height: 44px;
-    justify-content: center;
-    width: 44px;
+    flex-direction: row;
+    flex-shrink: 0;
 
-    svg {
-      height: 24px;
-      width: 24px;
+    a {
+      margin: $margin-sm;
+      outline: none;
+      text-decoration: none;
+      text-wrap: nowrap;
+
+      &:hover {
+        color: $button-hover;
+        text-decoration: none;
+      }
+
+      &:focus-visible {
+        border-radius: 5px;
+        outline: 1px solid $medium-gray;
+      }
     }
+
+    span {
+      margin: $margin-sm;
+    }
+  }
+
+  &__chevron {
+    height: 1rem;
+    width: 1rem;
   }
 
   ol {
     display: flex;
     flex-direction: row;
     padding: 0;
+  }
 
-    li {
-      align-items: center;
-      display: flex;
-      flex-direction: row;
+  &--truncate {
+    flex-shrink: 1;
+    overflow: hidden;
 
-      svg {
-        height: 16px;
-        width: 16px;
-      }
-
-      a {
-        margin: $margin-sm;
-        overflow: hidden;
-        text-decoration: none;
-        text-wrap: nowrap;
-
-        &:hover {
-          color: $button-hover;
-          text-decoration: none;
-        }
-      }
-
-      span {
-        margin: $margin-sm;
-      }
+    a {
+      flex-shrink: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
   &--current {
     color: $primary-black;
     font-variation-settings: 'wght' 700;
+    white-space: nowrap;
   }
 }

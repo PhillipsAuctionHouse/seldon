@@ -19,6 +19,10 @@ export interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onSearch?: (searchQuery: string) => void;
   /**
+   * called when the search is cancelled
+   */
+  onCancel?: () => void;
+  /**
    * The search results to display
    */
   searchResults?: SearchResultsProps['autoCompleteResults'];
@@ -54,6 +58,7 @@ export interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Search = ({
   onSearch,
+  onCancel,
   searchResults = [],
   state = 'idle',
   defaultValue = '',
@@ -79,7 +84,11 @@ const Search = ({
       }
     : undefined;
 
-  useOnClickOutside(searchContainerRef, () => showSearch(false));
+  useOnClickOutside(searchContainerRef, (event) => {
+    onCancel?.();
+    showSearch(false);
+    event.stopPropagation();
+  });
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLAnchorElement>) => {
     e.stopPropagation();
@@ -94,8 +103,8 @@ const Search = ({
       }
     }
     if (e.key === 'Escape') {
-      headerContext.setIsSearchExpanded(false);
       searchFormRef.current?.reset();
+      headerContext.setIsSearchExpanded(false);
     }
   };
 
@@ -108,8 +117,8 @@ const Search = ({
   }, [isSearchExpanded]);
 
   const showSearch: typeof headerContext.setIsSearchExpanded = (isSearchExpanded) => {
-    headerContext.setIsSearchExpanded(isSearchExpanded);
     searchFormRef.current?.reset();
+    headerContext.setIsSearchExpanded(isSearchExpanded);
   };
 
   return (
@@ -173,6 +182,7 @@ const Search = ({
                 testId={baseTestId}
                 isSearchExpanded={isSearchExpanded}
                 setIsSearchExpanded={showSearch}
+                onCancel={onCancel}
               />
             </div>
             {value && value.length > 2 ? (

@@ -10,12 +10,13 @@ export const SearchButton = ({
   searchButtonText,
   className,
   testId,
+  onCancel,
   ...props
 }: {
   testId: string;
   isSearchExpanded: boolean;
   setIsSearchExpanded: React.Dispatch<React.SetStateAction<boolean>>;
-} & Pick<SearchProps, 'state' | 'searchButtonText'> &
+} & Pick<SearchProps, 'state' | 'searchButtonText' | 'onCancel'> &
   ComponentProps<'button'>) => {
   if (!isSearchExpanded) {
     return (
@@ -44,6 +45,7 @@ export const SearchButton = ({
         aria-label="Close Search"
         className={`${className}__button ${className}__button--close`}
         onClick={(event) => {
+          onCancel?.();
           setIsSearchExpanded(false);
           event.stopPropagation();
         }}

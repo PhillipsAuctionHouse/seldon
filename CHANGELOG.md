@@ -1,3 +1,66 @@
+## [1.72.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.72.0...v1.72.1) (2024-10-03)
+
+
+### Bug Fixes
+
+* **accordion:** L3-3154 accordion label and icon style fixes ([#352](https://github.com/PhillipsAuctionHouse/seldon/issues/352)) ([9b8727d](https://github.com/PhillipsAuctionHouse/seldon/commit/9b8727dce707205a0ef8a574efe4c209fd40a347))
+
+# [1.72.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.71.0...v1.72.0) (2024-10-02)
+
+
+### Features
+
+* **Detail:** L3-3155 create Detail component ([#335](https://github.com/PhillipsAuctionHouse/seldon/issues/335)) ([48eb283](https://github.com/PhillipsAuctionHouse/seldon/commit/48eb283dc993966ff82bfb9d032f83a5534f9ea6))
+
+# [1.71.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.70.0...v1.71.0) (2024-10-02)
+
+
+### Features
+
+* **search:** L3-1663 fixed closing functionality ([#351](https://github.com/PhillipsAuctionHouse/seldon/issues/351)) ([b946059](https://github.com/PhillipsAuctionHouse/seldon/commit/b9460599791e0127873ca9878e0d247d9c553f4e))
+
+# [1.70.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.69.0...v1.70.0) (2024-10-02)
+
+
+### Features
+
+* **lotdetails:** L3-3145 pinch zoom component in seldon ([#346](https://github.com/PhillipsAuctionHouse/seldon/issues/346)) ([c30965a](https://github.com/PhillipsAuctionHouse/seldon/commit/c30965a4eaa5dfcf3b0ca51b6fc3994f5b1977e8))
+
+# [1.69.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.68.1...v1.69.0) (2024-10-02)
+
+
+### Features
+
+* **pagination:** L3-3826 support options object with translated label ([#339](https://github.com/PhillipsAuctionHouse/seldon/issues/339)) ([32ec6f9](https://github.com/PhillipsAuctionHouse/seldon/commit/32ec6f9565a8b5d954a5cac2e0214dfad414001b))
+
+## [1.68.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.68.0...v1.68.1) (2024-10-02)
+
+
+### Bug Fixes
+
+* **breadcrumb:** L3-3900 breadcrumb style fixes ([#340](https://github.com/PhillipsAuctionHouse/seldon/issues/340)) ([a6bba93](https://github.com/PhillipsAuctionHouse/seldon/commit/a6bba93d95801ff50b3f4e0d46c1d44b15fdc3a9))
+
+# [1.68.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.67.2...v1.68.0) (2024-10-01)
+
+
+### Features
+
+* **header:** L3-1663 added onCancel callback ([#350](https://github.com/PhillipsAuctionHouse/seldon/issues/350)) ([be7d6d7](https://github.com/PhillipsAuctionHouse/seldon/commit/be7d6d7f12dc306618721459f31ea9baecfb3837))
+
+## [1.67.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.67.1...v1.67.2) (2024-10-01)
+
+
+### Bug Fixes
+
+* **accordion:** L3-3154 lot details accordion styles do not match FIGMA ([#348](https://github.com/PhillipsAuctionHouse/seldon/issues/348)) ([6adea4f](https://github.com/PhillipsAuctionHouse/seldon/commit/6adea4fbd6f520cb39c3506a1815ce5af894b59a))
+
+## [1.67.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.67.0...v1.67.1) (2024-10-01)
+
+
+### Bug Fixes
+
+* **searchresult:** L3-3688 highlight user input in search result breaking Remix with lib is not defined ([#349](https://github.com/PhillipsAuctionHouse/seldon/issues/349)) ([a615084](https://github.com/PhillipsAuctionHouse/seldon/commit/a615084b445062098356263371d68ac0cef24d38))
+
 # [1.67.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.66.0...v1.67.0) (2024-10-01)
 
 

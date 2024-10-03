@@ -29,6 +29,10 @@ export interface CarouselProps extends ComponentProps<'div'> {
    * Whether the carousel should use wheel gestures.
    */
   useWheelGestures?: boolean;
+  /**
+   * Whether the carousel should disable dragging.
+   */
+  disableDrag?: boolean;
 }
 
 type CarouselContextProps = {
@@ -59,7 +63,17 @@ export const CarouselContext = createContext<CarouselContextProps | null>(null);
  */
 const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
   (
-    { loop = false, startIndex = 0, onSlideChange, className, children, columnGap, useWheelGestures = false, ...props },
+    {
+      loop = false,
+      startIndex = 0,
+      onSlideChange,
+      className,
+      children,
+      columnGap,
+      useWheelGestures = false,
+      disableDrag = false,
+      ...props
+    },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
@@ -79,6 +93,18 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
           : []),
       ],
     );
+
+    useEffect(() => {
+      if (disableDrag) {
+        api?.reInit({
+          watchDrag: () => false,
+        });
+      } else {
+        api?.reInit({
+          watchDrag: () => true,
+        });
+      }
+    }, [disableDrag, api]);
 
     const handleKeyDown = useCallback(
       (event: KeyboardEvent<HTMLDivElement>) => {

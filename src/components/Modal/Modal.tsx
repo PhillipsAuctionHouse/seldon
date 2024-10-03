@@ -26,6 +26,14 @@ export interface ModalProps extends ReactModal.Props {
    * className for the modal
    */
   className?: string;
+  /**
+   * className for the modal overlay
+   */
+  overlayClassName?: string;
+  /**
+   * style for the modal
+   */
+  style?: ReactModal.Props['style'];
 }
 
 /**
@@ -38,9 +46,11 @@ export interface ModalProps extends ReactModal.Props {
 const Modal = ({
   children,
   className,
+  overlayClassName,
   isOpen = false,
   onClose = noOp,
   appElementSelector = 'main',
+  style,
   ...props
 }: ModalProps) => {
   if (!isOpen) {
@@ -54,22 +64,23 @@ const Modal = ({
   return (
     <ReactModal
       {...commonProps}
+      {...props}
       isOpen={isOpen}
       onRequestClose={onClose}
       className={classnames(baseClassName, className)}
-      overlayClassName={classnames(`${baseClassName}__overlay`)}
+      overlayClassName={classnames(`${baseClassName}__overlay`, overlayClassName)}
       ariaHideApp={isOpen}
       testId={testId}
+      style={style}
       onAfterOpen={() => (document.body.style.overflow = 'hidden')}
       onAfterClose={() => (document.body.style.overflow = 'unset')}
-      {...props}
     >
       <IconButton
         id="modal-button"
         onClick={onClose}
         aria-label="Close Modal"
         className={classnames(`${baseClassName}__close`)}
-        variant={ButtonVariants.tertiary}
+        variant={ButtonVariants.secondary}
       >
         <CloseIcon />
       </IconButton>
