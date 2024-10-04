@@ -178,4 +178,10 @@
       width: 100%;
     }
   }
+
+  .#{$px}-accordion-item-label__icon {
+    // slightly larger in header mobile than default
+    height: 1rem;
+    width: 1.5rem;
+  }
 }

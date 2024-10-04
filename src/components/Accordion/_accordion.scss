@@ -20,7 +20,6 @@
 
   &[data-state='open'] {
     display: block;
-    font-variation-settings: 'wght' 400;
     height: auto;
   }
 
@@ -92,21 +91,21 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  opacity: 0.75;
 
   &--hoverable {
     cursor: pointer;
 
-    &:hover {
-      opacity: 1;
+    &:hover,
+    &:focus-visible {
+      opacity: 0.75;
     }
   }
 
   &__text {
     flex: auto;
+    font-variation-settings: 'wght' 600;
 
-    @include text($body2);
-    @include DistinctDisplay;
+    @include text($string2);
   }
 
   &__text--lg {
@@ -115,13 +114,39 @@
 
   &__icon {
     flex: initial;
-    height: 1.5rem;
+    height: 0.875rem;
     width: 1.5rem;
   }
 
   &__icon--lg {
-    height: 2rem;
+    height: 1.5rem;
     width: 2rem;
+  }
+
+  @include media($breakpoint-md) {
+    &__icon {
+      flex: initial;
+      height: 1rem;
+      width: 1.5rem;
+    }
+
+    &__icon--lg {
+      height: 1.5rem;
+      width: 2rem;
+    }
+  }
+
+  @include media($breakpoint-xl) {
+    &__icon {
+      flex: initial;
+      height: 1.25rem;
+      width: 1.75rem;
+    }
+
+    &__icon--lg {
+      height: 2rem;
+      width: 3rem;
+    }
   }
 
   &--blue-fill {
