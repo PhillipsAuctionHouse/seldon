@@ -45,6 +45,9 @@
 @use 'patterns/Subscribe/subscribe';
 @use 'patterns/Social/social';
 
+// Providers
+@use 'providers/SeldonProvider/seldonProvider';
+
 // Site Furniture
 @use 'site-furniture/Header/header';
 @use 'site-furniture/Footer/footer';

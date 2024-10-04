@@ -103,13 +103,13 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
       >
         <div className={`${baseClassName}-pagination-container`}>
           <div className={`${baseClassName}-pagination-container-inner`}>
-            {visibleDots.map((_, index) => {
+            {visibleDots.map((snapPoint, index) => {
               const actualIndex = scrollSnaps.indexOf(visibleDots[index]);
               const isSelected = selectedIndex === actualIndex;
 
               return (
                 <button
-                  key={`${componentId}-dot-${index}`}
+                  key={`${componentId}-dot-${snapPoint}`}
                   role="button"
                   onClick={() => onDotButtonClick(actualIndex)}
                   className={classNames(`${baseClassName}-pagination-dot-container`)}

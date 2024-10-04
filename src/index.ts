@@ -67,7 +67,7 @@ export { default as Video, type VideoProps } from './components/Video/Video';
 export * from './patterns/LanguageSelector';
 export * from './components/ContentPeek';
 export * from './components/Collapsible';
-export * from './providers/SeldonProvider';
+export * from './providers/SeldonProvider/SeldonProvider';
 export { default as PageContentWrapper } from './components/PageContentWrapper/PageContentWrapper';
 export * from './components/Carousel';
 export * from './components/Detail';
