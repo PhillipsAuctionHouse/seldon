@@ -1,0 +1,42 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-tabs-component {
+  @include text($body2);
+
+  width: 100%;
+
+  &__tabs-list {
+    border-bottom: 1px solid $light-gray;
+    display: flex;
+  }
+
+  &__tabs-trigger {
+    background: none;
+    border: none;
+    color: $button-hover;
+    cursor: pointer;
+    direction: rtl;
+    margin-inline-start: 1rem;
+    padding: 0 0 $padding-sm;
+    transition: background 0.2s ease;
+    writing-mode: horizontal-tb;
+
+    &:hover {
+      color: $pure-black;
+    }
+  }
+
+  &__tabs-trigger[data-state='active'] {
+    border-bottom: 1px solid $pure-black;
+    color: $pure-black;
+    font-variation-settings: 'wght' 600;
+
+    &:hover {
+      color: $button-hover;
+    }
+  }
+
+  &__tabs-content {
+    padding: 20px 0;
+  }
+}
