@@ -1,3 +1,10 @@
+## [1.73.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.73.1...v1.73.2) (2024-10-04)
+
+
+### Bug Fixes
+
+* **searchresults:** L3-4061 matching text was not highlighting ([#357](https://github.com/PhillipsAuctionHouse/seldon/issues/357)) ([8ff6379](https://github.com/PhillipsAuctionHouse/seldon/commit/8ff6379bb51e0a5d9560561549b256d3265e4588))
+
 ## [1.73.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.73.0...v1.73.1) (2024-10-04)
 
 
