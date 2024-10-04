@@ -1,0 +1,69 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-sale-header-banner {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: $breakpoint-md) {
+    flex-direction: row-reverse;
+  }
+
+  // update when adding image component
+  &__image {
+    aspect-ratio: 16 / 9;
+
+    @media screen and (min-width: $breakpoint-md) {
+      width: 50%;
+    }
+  }
+
+  &__stack {
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    padding: $spacing-md 0;
+  }
+
+  // remove when adding in actual countdown timer
+  &__countdown-container {
+    align-items: center;
+    border-bottom: 1px solid $light-gray;
+    display: flex;
+    gap: $spacing-sm;
+    justify-content: center;
+    margin-bottom: 24px;
+    width: 100%;
+  }
+
+  &__location {
+    font-variation-settings: 'wght' 600;
+    margin: $margin-xsm 0;
+  }
+
+  &__occurance-details,
+  &__occurance-details-closed {
+    display: flex;
+    margin-bottom: 24px;
+
+    &-text {
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+  }
+
+  &__occurance-details-closed {
+    gap: $spacing-md;
+  }
+
+  &__date {
+    font-variation-settings: 'wght' 600;
+  }
+
+  &__cta {
+    margin: $spacing-sm 0;
+  }
+}
