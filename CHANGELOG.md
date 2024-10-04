@@ -1,3 +1,10 @@
+## [1.73.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.73.0...v1.73.1) (2024-10-04)
+
+
+### Bug Fixes
+
+* **accordion:** L3-3154 accordion item style was overriding <strong tags in CMS content ([#356](https://github.com/PhillipsAuctionHouse/seldon/issues/356)) ([3d47512](https://github.com/PhillipsAuctionHouse/seldon/commit/3d475123de1a62c017ae012efbe9f04c46b64ba9))
+
 # [1.73.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.72.2...v1.73.0) (2024-10-03)
 
 
