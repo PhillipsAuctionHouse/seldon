@@ -29,6 +29,12 @@ select {
   font: inherit;
 }
 
+strong {
+  font-variation-settings: 'wght' 700;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+  font-weight: unset;
+}
+
 p,
 h1,
 h2,

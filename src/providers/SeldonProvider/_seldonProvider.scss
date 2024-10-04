@@ -1,0 +1,59 @@
+.seldon-provider {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+  }
+
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  strong {
+    font-variation-settings: 'wght' 700;
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    font-weight: unset;
+  }
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    font-weight: unset;
+    overflow-wrap: break-word;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+  }
+}

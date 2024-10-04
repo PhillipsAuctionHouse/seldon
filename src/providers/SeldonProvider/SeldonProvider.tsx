@@ -1,6 +1,7 @@
 import { PropsWithChildren } from 'react';
-import { SSRMediaQuery, ssrMediaQueryStyle } from './utils';
-
+import { SSRMediaQuery, ssrMediaQueryStyle } from '../../providers/utils';
+import './_seldonProvider.scss';
+import { px } from '../../utils';
 /**
  * The SeldonProvider currently provides the ability for our components to render differently based on different media queries, but in the future it may provide other kinds of context data like common internationalization (i18n) data.
  *
@@ -12,6 +13,6 @@ export const SeldonProvider = ({ children }: PropsWithChildren) => (
       {/* This style tag is required for SSRMediaQuery to work, kinda weird to put it here in the body but it's allowed and makes the component much easier to consume */}
       {ssrMediaQueryStyle}
     </style>
-    {children}
+    <div className={`${px}-provider`}>{children}</div>
   </SSRMediaQuery.MediaContextProvider>
 );
