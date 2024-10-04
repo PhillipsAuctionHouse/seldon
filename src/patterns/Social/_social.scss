@@ -33,6 +33,10 @@
     text-align: left;
     text-decoration: underline;
 
+    &.#{$px}-social__button {
+      font-variation-settings: 'wght' 600;
+    }
+
     &:hover {
       background-color: unset;
       color: unset;
@@ -44,31 +48,39 @@
     }
   }
 
-  ul {
-    align-items: center;
-    border-top: 1px solid #eae8e4;
-    display: flex;
-    gap: 0 1.25rem;
-    justify-content: center;
-    list-style: none;
-    margin: $spacing-md 0 0;
-    padding: $spacing-sm 0 0;
-    width: 100%;
-
-    @include media($size-md) {
-      gap: 0 1rem;
-      justify-content: flex-start;
-      margin: $spacing-md 0 $spacing-md;
+  &.#{$px}-social {
+    ul {
+      align-items: center;
+      border-top: 1px solid #eae8e4;
+      display: flex;
+      gap: 0 1.25rem;
+      justify-content: center;
+      list-style: none;
+      margin: $spacing-md 0 0;
       padding: $spacing-sm 0 0;
       width: 100%;
+
+      @include media($size-md) {
+        gap: 0 2rem;
+        justify-content: flex-start;
+        margin: $spacing-md 0 $spacing-md;
+        padding: $spacing-sm 0 0;
+        width: 100%;
+      }
+
+      li {
+        cursor: pointer;
+        height: 32px;
+
+        svg {
+          height: 32px;
+          width: 32px;
+        }
+      }
     }
 
-    li {
-      cursor: pointer;
+    a {
+      display: inline-block;
     }
-  }
-
-  a {
-    display: inline-block;
   }
 }

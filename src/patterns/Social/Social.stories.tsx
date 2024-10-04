@@ -1,10 +1,11 @@
 import type { Meta } from '@storybook/react';
 
 import Social, { SocialProps } from './Social';
-import Youtube from '../../assets/youtube.svg?react';
-import Instagram from '../../assets/instagram.svg?react';
-import Wechat from '../../assets/wechat.svg?react';
-import Spotify from '../../assets/spotify.svg?react';
+import Instagram from '../../assets/icon-footer-instagram.svg?react';
+import Linkedin from '../../assets/icon-footer-linkedin.svg?react';
+import Wechat from '../../assets/icon-footer-wechat.svg?react';
+import Red from '../../assets/icon-footer-red.svg?react';
+import Facebook from '../../assets/icon-footer-facebook.svg?react';
 
 const meta = {
   title: 'Patterns/Social',
@@ -17,12 +18,12 @@ const socialIcons = (
   <ul>
     <li>
       <a>
-        <Youtube />
+        <Instagram />
       </a>
     </li>
     <li>
       <a>
-        <Instagram />
+        <Linkedin />
       </a>
     </li>
     <li>
@@ -32,7 +33,12 @@ const socialIcons = (
     </li>
     <li>
       <a>
-        <Spotify />
+        <Red />
+      </a>
+    </li>
+    <li>
+      <a>
+        <Facebook />
       </a>
     </li>
   </ul>
