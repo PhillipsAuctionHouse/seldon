@@ -12,7 +12,7 @@ export const Playground = (props: SeldonImageProps) => <SeldonImage {...props} /
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
-  src: 'https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+  src: 'https://whitneymedia.org/assets/artwork/5864/70_1672_cropped.jpeg',
   aspectRatio: '1/1',
 };
 
@@ -22,7 +22,7 @@ export const CircleImage = (props: SeldonImageProps) => <SeldonImage {...props} 
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 CircleImage.args = {
-  src: 'https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+  src: 'https://whitneymedia.org/assets/artwork/21471/70_1558_85_cropped.jpeg',
   aspectRatio: '1/1',
   objectFit: 'cover',
   imageStyle: {
@@ -36,7 +36,7 @@ export const BlurBackground = (props: SeldonImageProps) => <SeldonImage {...prop
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 BlurBackground.args = {
-  src: 'https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+  src: 'https://whitneymedia.org/assets/artwork/5892/70_1419_cropped.jpeg',
   aspectRatio: '1/1',
   objectFit: 'contain',
   hasBlurBackground: true,
