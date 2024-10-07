@@ -1,3 +1,10 @@
+## [1.74.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.0...v1.74.1) (2024-10-07)
+
+
+### Bug Fixes
+
+* **header-animation:** L3-3981 Desktop Header Animation ([#362](https://github.com/PhillipsAuctionHouse/seldon/issues/362)) ([45992cc](https://github.com/PhillipsAuctionHouse/seldon/commit/45992cc69be2f3a4d6bb7061dabe9976e7db4717))
+
 # [1.74.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.73.3...v1.74.0) (2024-10-07)
 
 
