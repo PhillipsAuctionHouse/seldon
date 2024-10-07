@@ -5,10 +5,6 @@
     box-sizing: border-box;
   }
 
-  * {
-    margin: 0;
-  }
-
   img,
   picture,
   video,
@@ -40,6 +36,7 @@
   h6 {
     /* stylelint-disable-next-line declaration-property-value-disallowed-list */
     font-weight: unset;
+    margin-top: 0;
     overflow-wrap: break-word;
   }
 
