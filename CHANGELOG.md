@@ -1,3 +1,10 @@
+# [1.74.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.73.3...v1.74.0) (2024-10-07)
+
+
+### Features
+
+* **social:** L3-4015 fixed icons spacing ([#359](https://github.com/PhillipsAuctionHouse/seldon/issues/359)) ([f672332](https://github.com/PhillipsAuctionHouse/seldon/commit/f672332bb07b86df6cf4688da8f986793d79aa8e))
+
 ## [1.73.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.73.2...v1.73.3) (2024-10-07)
 
 
