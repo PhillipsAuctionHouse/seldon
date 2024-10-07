@@ -24,7 +24,7 @@ export interface SeldonImageProps extends ComponentProps<'div'> {
   /**
    * The alt text of the image.
    */
-  alt?: string;
+  alt: string;
   /**
    * The class name of the child img element.
    */
