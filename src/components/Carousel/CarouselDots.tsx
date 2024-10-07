@@ -47,8 +47,6 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
       [api, onSlideChange],
     );
 
-    console.log(api?.slideNodes());
-
     const onInit = useCallback((emblaApi: EmblaCarouselType) => {
       setScrollSnaps(emblaApi.scrollSnapList());
     }, []);
