@@ -1,3 +1,10 @@
+## [1.74.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.2...v1.74.3) (2024-10-07)
+
+
+### Bug Fixes
+
+* **detaillist:** L3-3155 style fix and undefined child fix ([#364](https://github.com/PhillipsAuctionHouse/seldon/issues/364)) ([8deccdc](https://github.com/PhillipsAuctionHouse/seldon/commit/8deccdc22254f3d4546483cc7445324717f9b0b5))
+
 ## [1.74.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.1...v1.74.2) (2024-10-07)
 
 
