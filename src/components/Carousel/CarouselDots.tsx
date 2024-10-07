@@ -47,6 +47,8 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
       [api, onSlideChange],
     );
 
+    console.log(api?.slideNodes());
+
     const onInit = useCallback((emblaApi: EmblaCarouselType) => {
       setScrollSnaps(emblaApi.scrollSnapList());
     }, []);
@@ -103,13 +105,13 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
       >
         <div className={`${baseClassName}-pagination-container`}>
           <div className={`${baseClassName}-pagination-container-inner`}>
-            {visibleDots.map((snapPoint, index) => {
+            {visibleDots.map((_, index) => {
               const actualIndex = scrollSnaps.indexOf(visibleDots[index]);
               const isSelected = selectedIndex === actualIndex;
 
               return (
                 <button
-                  key={`${componentId}-dot-${snapPoint}`}
+                  key={`${componentId}-dot-${index}`}
                   role="button"
                   onClick={() => onDotButtonClick(actualIndex)}
                   className={classNames(`${baseClassName}-pagination-dot-container`)}
