@@ -1,4 +1,4 @@
-import { ComponentProps, forwardRef } from 'react';
+import React, { ComponentProps, forwardRef } from 'react';
 import classnames from 'classnames';
 import { getCommonProps, px } from '../../utils';
 import { DetailListAlignment } from './types';
@@ -45,18 +45,20 @@ const DetailList = forwardRef<HTMLDListElement, DetailListProps>(
         {...props}
         ref={ref}
       >
-        {childrenArray?.map((child, index) => (
-          <div
-            className={classnames(`${baseClassName}-wrapper`, {
-              [`${px}-has-separators`]: hasSeparators,
-              [`${px}-columns`]: alignment === DetailListAlignment.columns,
-              [`${px}-justified`]: alignment === DetailListAlignment.justified,
-            })}
-            key={getDetailKey(child, index)}
-          >
-            {child}
-          </div>
-        ))}
+        {childrenArray?.map((child, index) =>
+          React.isValidElement(child) ? (
+            <div
+              className={classnames(`${baseClassName}-wrapper`, {
+                [`${px}-has-separators`]: hasSeparators,
+                [`${px}-columns`]: alignment === DetailListAlignment.columns,
+                [`${px}-justified`]: alignment === DetailListAlignment.justified,
+              })}
+              key={getDetailKey(child, index)}
+            >
+              {child}
+            </div>
+          ) : undefined,
+        )}
       </dl>
     );
   },

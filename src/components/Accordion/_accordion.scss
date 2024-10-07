@@ -104,6 +104,7 @@
   &__text {
     flex: auto;
     font-variation-settings: 'wght' 600;
+    text-align: left;
 
     @include text($string2);
   }
