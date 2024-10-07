@@ -11,6 +11,7 @@ export interface SeldonImageProps extends ComponentProps<'div'> {
   imageClassName?: string;
   imageStyle?: React.CSSProperties;
   src: string;
+  alt?: string;
 }
 
 /**
@@ -32,6 +33,7 @@ const SeldonImage = forwardRef<HTMLDivElement, SeldonImageProps>(
       imageClassName,
       imageStyle,
       src,
+      alt,
       ...props
     },
     ref,
@@ -74,6 +76,7 @@ const SeldonImage = forwardRef<HTMLDivElement, SeldonImageProps>(
           style={imageStyle}
           ref={imgRef}
           src={src}
+          alt={alt}
           onLoad={() => {
             imgRef.current?.classList.remove(imgHiddenClass);
             containerRef.current?.classList.remove(containerHiddenClass);
