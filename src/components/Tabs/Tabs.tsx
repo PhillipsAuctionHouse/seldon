@@ -27,6 +27,10 @@ export interface Tab {
  */
 export interface TabsComponentProps extends ComponentProps<'div'> {
   tabs: Tab[];
+  /**
+   * Specify the default tab
+   */
+  defaultValue?: string;
 }
 
 /**
@@ -39,16 +43,21 @@ export interface TabsComponentProps extends ComponentProps<'div'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-tabs--overview)
  */
 
-const TabsComponent = ({ className, tabs = [], ...props }: TabsComponentProps) => {
+const TabsComponent = ({ className, tabs = [], defaultValue, ...props }: TabsComponentProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TabsComponent');
   return (
-    <Tabs.Root defaultValue={tabs[0].value} {...commonProps} className={classnames(`${baseClassName}`, className)}>
+    <Tabs.Root
+      defaultValue={defaultValue || tabs[0].value}
+      {...commonProps}
+      className={classnames(`${baseClassName}`, className)}
+    >
       <Tabs.List aria-label="Tabs" className={`${baseClassName}__tabs-list`}>
         {tabs.map((tab) => (
           <Tabs.Trigger key={tab.value} value={tab.value} className={`${baseClassName}__tabs-trigger`}>
             {tab.label}
           </Tabs.Trigger>
         ))}
+        <div className={`${baseClassName}__full-bleed-underline`} />
       </Tabs.List>
       {tabs.map((tab) => (
         <Tabs.Content key={tab.value} value={tab.value} className={`${baseClassName}__tabs-content`}>

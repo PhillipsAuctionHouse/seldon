@@ -13,7 +13,7 @@ const tabs = [
   { label: 'Browse Lots', value: 'browse', content: <div>Browse Content</div> },
 ];
 
-export const Playground = (props: TabsComponentProps) => <TabsComponent {...props} />;
+export const Playground = (props: TabsComponentProps) => <TabsComponent {...props} defaultValue="browse" />;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
