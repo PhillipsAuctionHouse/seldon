@@ -13,8 +13,8 @@ export const Playground = (props: SaleHeaderBannerProps) => <SaleHeaderBanner {.
 
 Playground.args = {
   auctionTitle: 'Modern & Contemporary Art: Online Auction, New York',
-  auctionStartDateTime: '10:00am EDT, 4 Sep 2024',
-  auctionEndDateTime: '10:00am EDT, 14 Sep 2024',
+  date: '10:00am EDT, 14 Sep 2024',
+  occuranceLabel: 'Begins',
   location: 'New York',
   auctionState: AuctionState.preSale,
   imageSrcUrl:
