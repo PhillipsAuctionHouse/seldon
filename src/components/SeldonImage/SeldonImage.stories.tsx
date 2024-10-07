@@ -39,7 +39,7 @@ BlurBackground.args = {
   src: 'https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
   aspectRatio: '1/1',
   objectFit: 'contain',
-  useBlurBackground: true,
+  hasBlurBackground: true,
 };
 
 BlurBackground.argTypes = {};

@@ -24,8 +24,8 @@ describe('SeldonImage', () => {
     expect(image).toHaveClass(`${px}-seldon-image-img--object-fit-cover`);
   });
 
-  it('renders blur background when useBlurBackground is true', () => {
-    const { container } = render(<SeldonImage src="test-image.jpg" useBlurBackground />);
+  it('renders blur background when hasBlurBackground is true', () => {
+    const { container } = render(<SeldonImage src="test-image.jpg" hasBlurBackground />);
     expect(container.querySelector(`.${px}-seldon-image-blur`)).toBeInTheDocument();
   });
 
