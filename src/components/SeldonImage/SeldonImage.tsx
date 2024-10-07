@@ -96,6 +96,7 @@ const SeldonImage = forwardRef<HTMLDivElement, SeldonImageProps>(
           style={imageStyle}
           src={src}
           alt={alt}
+          role="img"
           ref={imgRef}
           onLoad={() => {
             setLoadingState('loaded');
