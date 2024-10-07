@@ -69,19 +69,19 @@
       display: flex;
       height: 8px;
       justify-content: center;
-      padding: 0;
+      padding: 1px;
       width: 8px;
     }
 
     &-dot {
-      border: 1px solid #adadad;
       border-radius: 50%;
       height: 100%;
+      outline: 1px solid #adadad;
       width: 100%;
 
       &-selected {
         background-color: #525050;
-        border-color: #525050;
+        outline-color: #525050;
       }
     }
   }
