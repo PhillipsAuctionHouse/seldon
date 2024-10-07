@@ -1,4 +1,4 @@
-import { ComponentProps, forwardRef, useRef, useState } from 'react';
+import { ComponentProps, forwardRef, useRef, useState, useEffect } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 
@@ -62,16 +62,16 @@ const SeldonImage = forwardRef<HTMLDivElement, SeldonImageProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SeldonImage');
     const imgRef = useRef<HTMLImageElement>(null);
 
-    const [loadingState, setLoadingState] = useState<'loading' | 'loaded' | 'error'>(() => {
-      // Check if the image is already loaded
-      const img = new Image();
-      img.src = src;
-      return img.complete ? 'loaded' : 'loading';
-    });
+    const [loadingState, setLoadingState] = useState<'loading' | 'loaded' | 'error'>('loading');
+
+    useEffect(() => {
+      if (imgRef.current?.complete) {
+        setLoadingState('loaded');
+      }
+    }, []);
 
     return (
       <div
-        key={src}
         ref={ref}
         className={classnames(baseClassName, className, {
           [`${baseClassName}--hidden`]: loadingState === 'loading',
