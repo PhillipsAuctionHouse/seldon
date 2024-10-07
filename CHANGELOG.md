@@ -1,3 +1,10 @@
+## [1.74.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.1...v1.74.2) (2024-10-07)
+
+
+### Bug Fixes
+
+* **provider:** L3-4079 global reset to margins was too aggressive ([#365](https://github.com/PhillipsAuctionHouse/seldon/issues/365)) ([00da7c1](https://github.com/PhillipsAuctionHouse/seldon/commit/00da7c19a83faa1e585fc1f91f6deecb7458003b))
+
 ## [1.74.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.0...v1.74.1) (2024-10-07)
 
 
