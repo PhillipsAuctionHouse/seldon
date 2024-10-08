@@ -1,3 +1,38 @@
+## [1.74.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.2...v1.74.3) (2024-10-07)
+
+
+### Bug Fixes
+
+* **detaillist:** L3-3155 style fix and undefined child fix ([#364](https://github.com/PhillipsAuctionHouse/seldon/issues/364)) ([8deccdc](https://github.com/PhillipsAuctionHouse/seldon/commit/8deccdc22254f3d4546483cc7445324717f9b0b5))
+
+## [1.74.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.1...v1.74.2) (2024-10-07)
+
+
+### Bug Fixes
+
+* **provider:** L3-4079 global reset to margins was too aggressive ([#365](https://github.com/PhillipsAuctionHouse/seldon/issues/365)) ([00da7c1](https://github.com/PhillipsAuctionHouse/seldon/commit/00da7c19a83faa1e585fc1f91f6deecb7458003b))
+
+## [1.74.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.0...v1.74.1) (2024-10-07)
+
+
+### Bug Fixes
+
+* **header-animation:** L3-3981 Desktop Header Animation ([#362](https://github.com/PhillipsAuctionHouse/seldon/issues/362)) ([45992cc](https://github.com/PhillipsAuctionHouse/seldon/commit/45992cc69be2f3a4d6bb7061dabe9976e7db4717))
+
+# [1.74.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.73.3...v1.74.0) (2024-10-07)
+
+
+### Features
+
+* **social:** L3-4015 fixed icons spacing ([#359](https://github.com/PhillipsAuctionHouse/seldon/issues/359)) ([f672332](https://github.com/PhillipsAuctionHouse/seldon/commit/f672332bb07b86df6cf4688da8f986793d79aa8e))
+
+## [1.73.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.73.2...v1.73.3) (2024-10-07)
+
+
+### Bug Fixes
+
+* **header-animation:** L3-3981 Desktop Header Animation ([#358](https://github.com/PhillipsAuctionHouse/seldon/issues/358)) ([f687cb4](https://github.com/PhillipsAuctionHouse/seldon/commit/f687cb42a733b573aa90f1d1d8403dff918f35f9))
+
 ## [1.73.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.73.1...v1.73.2) (2024-10-04)
 
 
