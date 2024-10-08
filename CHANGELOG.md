@@ -1,3 +1,10 @@
+## [1.74.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.3...v1.74.4) (2024-10-08)
+
+
+### Bug Fixes
+
+* **margins:** L3-4079 remove global margin reset and set explicitly in Text component ([#366](https://github.com/PhillipsAuctionHouse/seldon/issues/366)) ([cfd6fd2](https://github.com/PhillipsAuctionHouse/seldon/commit/cfd6fd21156ecef6da161f96f725070ac1e5a741))
+
 ## [1.74.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.2...v1.74.3) (2024-10-07)
 
 
