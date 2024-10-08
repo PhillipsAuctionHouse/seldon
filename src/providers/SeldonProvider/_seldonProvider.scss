@@ -27,6 +27,7 @@
     font-weight: unset;
   }
 
+  blockquote,
   p,
   h1,
   h2,
@@ -36,7 +37,6 @@
   h6 {
     /* stylelint-disable-next-line declaration-property-value-disallowed-list */
     font-weight: unset;
-    margin-top: 0;
     overflow-wrap: break-word;
   }
 
