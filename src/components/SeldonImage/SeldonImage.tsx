@@ -33,6 +33,10 @@ export interface SeldonImageProps extends ComponentProps<'div'> {
    * The style of the child img element.
    */
   imageStyle?: React.CSSProperties;
+  /**
+   * The text to display when the image fails to load.
+   */
+  errorText?: string;
 }
 
 /**
@@ -55,6 +59,7 @@ const SeldonImage = forwardRef<HTMLDivElement, SeldonImageProps>(
       imageStyle,
       src,
       alt,
+      errorText = 'Error loading image',
       ...props
     },
     ref,
@@ -74,7 +79,7 @@ const SeldonImage = forwardRef<HTMLDivElement, SeldonImageProps>(
       <div
         ref={ref}
         className={classnames(baseClassName, className, {
-          [`${baseClassName}--hidden`]: loadingState === 'loading',
+          [`${baseClassName}--hidden`]: loadingState === 'loading' || loadingState === 'error',
           [`${baseClassName}--aspect-ratio-${aspectRatio.replace('/', '-')}`]: aspectRatio !== 'none',
         })}
         role="img"
@@ -85,14 +90,15 @@ const SeldonImage = forwardRef<HTMLDivElement, SeldonImageProps>(
         {hasBlurBackground && (
           <div
             className={classnames(`${baseClassName}-blur`, {
-              [`${baseClassName}-blur--hidden`]: loadingState === 'loading',
+              [`${baseClassName}-blur--hidden`]: loadingState === 'loading' || loadingState === 'error',
             })}
             style={{ backgroundImage: `url(${src})` }}
           />
         )}
+        {loadingState === 'error' && <div className={`${baseClassName}--error`}>{`${errorText}`}</div>}
         <img
           className={classnames(`${baseClassName}-img`, imageClassName, {
-            [`${baseClassName}-img--hidden`]: loadingState === 'loading',
+            [`${baseClassName}-img--hidden`]: loadingState === 'loading' || loadingState === 'error',
             [`${baseClassName}-img--object-fit-${objectFit}`]: objectFit !== 'none',
           })}
           style={imageStyle}
