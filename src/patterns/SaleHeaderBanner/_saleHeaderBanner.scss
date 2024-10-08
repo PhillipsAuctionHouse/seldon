@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
 
-  @media screen and (min-width: $breakpoint-md) {
+  @include media($size-md, $type: 'min') {
     flex-direction: row-reverse;
   }
 
@@ -12,7 +12,7 @@
   &__image {
     aspect-ratio: 16 / 9;
 
-    @media screen and (min-width: $breakpoint-md) {
+    @include media($size-md, $type: 'min') {
       width: 50%;
     }
   }
@@ -42,8 +42,7 @@
     margin: $margin-xsm 0;
   }
 
-  &__occurance-details,
-  &__occurance-details-closed {
+  &__occurance-details {
     display: flex;
     margin-bottom: 24px;
 
@@ -55,7 +54,7 @@
     }
   }
 
-  &__occurance-details-closed {
+  &__occurance-details--closed {
     gap: $spacing-md;
   }
 

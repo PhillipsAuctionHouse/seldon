@@ -58,7 +58,7 @@ const SaleHeaderBanner = forwardRef<HTMLElement, SaleHeaderBannerProps>(
           alt={auctionTitle}
           className={`${baseClassName}__image`}
           src={imageSrcUrl}
-        ></img>
+        />
         <PageMargin>
           <div className={`${baseClassName}__stack`}>
             {isOpenForBidding && (
@@ -73,9 +73,9 @@ const SaleHeaderBanner = forwardRef<HTMLElement, SaleHeaderBannerProps>(
               {location}
             </Text>
             <div
-              className={
-                isClosed ? `${baseClassName}__occurance-details-closed` : `${baseClassName}__occurance-details`
-              }
+              className={classnames(`${baseClassName}__occurance-details`, {
+                [`${baseClassName}__occurance-details--closed`]: isClosed,
+              })}
             >
               <div className={`${baseClassName}__occurance-details-text`}>
                 <Text variant={TextVariants.string2}>{occuranceLabel}</Text>
