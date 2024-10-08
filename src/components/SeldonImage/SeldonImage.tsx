@@ -77,6 +77,8 @@ const SeldonImage = forwardRef<HTMLDivElement, SeldonImageProps>(
           [`${baseClassName}--hidden`]: loadingState === 'loading',
           [`${baseClassName}--aspect-ratio-${aspectRatio.replace('/', '-')}`]: aspectRatio !== 'none',
         })}
+        role="img"
+        aria-label={alt}
         {...props}
         {...commonProps}
       >
@@ -96,7 +98,7 @@ const SeldonImage = forwardRef<HTMLDivElement, SeldonImageProps>(
           style={imageStyle}
           src={src}
           alt={alt}
-          role="img"
+          data-testid={`${commonProps['data-testid']}-img`}
           ref={imgRef}
           onLoad={() => {
             setLoadingState('loaded');
