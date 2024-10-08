@@ -33,7 +33,7 @@
     display: flex;
     gap: $spacing-sm;
     justify-content: center;
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
     width: 100%;
   }
 
@@ -44,7 +44,7 @@
 
   &__occurance-details {
     display: flex;
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
 
     &-text {
       align-items: flex-start;
