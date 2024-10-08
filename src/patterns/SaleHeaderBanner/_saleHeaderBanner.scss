@@ -6,14 +6,10 @@
 
   @include media($size-md, $type: 'min') {
     flex-direction: row-reverse;
-  }
 
-  // update when adding image component
-  &__image {
-    aspect-ratio: 16 / 9;
-
-    @include media($size-md, $type: 'min') {
-      width: 50%;
+    &__image,
+    &__stack-wrapper {
+      flex: 0 50%;
     }
   }
 

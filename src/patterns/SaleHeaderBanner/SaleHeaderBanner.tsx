@@ -6,6 +6,7 @@ import Button from '../../components/Button/Button';
 import { PageContentWrapper as PageMargin } from '../../components/PageContentWrapper';
 import { Link } from '../../components/Link';
 import { AuctionState } from './types';
+import { SeldonImage } from '../../components/SeldonImage';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface SaleHeaderBannerProps extends ComponentProps<'header'> {
@@ -53,13 +54,14 @@ const SaleHeaderBanner = forwardRef<HTMLElement, SaleHeaderBannerProps>(
 
     return (
       <header {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        <img
-          id="PLACEHOLDER FOR IMAGE COMPONENT"
-          alt={auctionTitle}
-          className={`${baseClassName}__image`}
+        <SeldonImage
+          aspectRatio="16/9"
           src={imageSrcUrl}
+          alt={auctionTitle}
+          objectFit="cover"
+          className={`${baseClassName}__image`}
         />
-        <PageMargin>
+        <PageMargin className={`${baseClassName}__stack-wrapper`}>
           <div className={`${baseClassName}__stack`}>
             {isOpenForBidding && (
               <div id="PLACEHOLDER FOR TIMER COMPONENT" className={`${baseClassName}__countdown-container`}>
