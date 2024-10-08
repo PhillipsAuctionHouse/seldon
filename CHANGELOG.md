@@ -1,3 +1,10 @@
+# [1.75.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.4...v1.75.0) (2024-10-08)
+
+
+### Features
+
+* **imagecomponent:** L3-1466 seldon image component ([#361](https://github.com/PhillipsAuctionHouse/seldon/issues/361)) ([980316f](https://github.com/PhillipsAuctionHouse/seldon/commit/980316f6488de87f53c0b7a421857469e873cfae))
+
 ## [1.74.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.3...v1.74.4) (2024-10-08)
 
 
