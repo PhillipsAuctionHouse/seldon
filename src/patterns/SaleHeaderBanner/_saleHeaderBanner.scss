@@ -48,6 +48,11 @@
       flex-direction: column;
       gap: 4px;
     }
+
+    &-browse {
+      border-left: 1px solid $keyline-gray;
+      padding-left: $spacing-md;
+    }
   }
 
   &__occurance-details--closed {
