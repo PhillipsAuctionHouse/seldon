@@ -2,7 +2,7 @@ import React from 'react';
 import { getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
 import BreadcrumbItem, { BreadcrumbItemProps } from './BreadcrumbItem';
-import { SSRMediaQuery } from '../../providers/utils';
+import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import ArrowPrevIcon from '../../assets/arrowPrev.svg?react';
 
 export interface BreadcrumbProps extends React.HTMLAttributes<HTMLDivElement> {

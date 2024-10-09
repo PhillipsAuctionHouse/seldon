@@ -5,7 +5,7 @@ import { Text, TextVariants } from '../../Text';
 import NavigationList, { NavigationListProps } from '../NavigationList/NavigationList';
 import Accordion from '../../Accordion/Accordion';
 import AccordionItem from '../../Accordion/AccordionItem';
-import { SSRMediaQuery } from '../../../providers/utils';
+import { SSRMediaQuery } from '../../../providers/SeldonProvider/utils';
 
 export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
   /**

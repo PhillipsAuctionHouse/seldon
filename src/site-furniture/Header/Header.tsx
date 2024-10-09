@@ -7,7 +7,7 @@ import { LanguageSelector } from '../../patterns/LanguageSelector';
 import Navigation from '../../components/Navigation/Navigation';
 import { Component, ComponentProps, forwardRef, ReactElement, useState, createContext } from 'react';
 import { defaultHeaderContext } from './utils';
-import { SSRMediaQuery } from '../../providers/utils';
+import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 
 export interface HeaderProps extends ComponentProps<'header'> {
   /**

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { SeldonProvider } from './SeldonProvider';
-import { SSRMediaQuery } from '../../providers/utils';
+import { SSRMediaQuery } from './utils';
 
 describe('SeldonProvider', () => {
   describe('Media Queries', () => {
