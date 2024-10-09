@@ -1,1 +1,1 @@
-export { default as Tabs, type TabsComponentProps } from './Tabs';
+export { default as Tabs, type TabsComponentProps } from './TabsContainer';

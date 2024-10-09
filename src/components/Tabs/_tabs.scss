@@ -16,23 +16,36 @@
   &__tabs-trigger {
     background: none;
     border: none;
-    color: $button-hover;
-    cursor: pointer;
     padding: 0 0 $padding-sm;
     transition: background 0.2s ease;
 
-    &:hover {
-      color: $pure-black;
+    &:focus-visible {
+      outline: 1px solid $medium-gray;
+      outline-offset: 3px;
+    }
+
+    .#{$px}-text {
+      color: $button-hover;
+      cursor: pointer;
+      font-size: $body-size2;
+      line-height: $body-line-height-size2;
+
+      &:hover {
+        color: $pure-black;
+      }
     }
   }
 
   &__tabs-trigger[data-state='active'] {
     border-bottom: 2px solid $pure-black;
     color: $pure-black;
-    font-variation-settings: 'wght' 600;
+    .#{$px}-text {
+      color: $pure-black;
+      font-variation-settings: 'wght' 600;
 
-    &:hover {
-      color: $button-hover;
+      &:hover {
+        color: $button-hover;
+      }
     }
   }
 

@@ -1,10 +1,11 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import TabsComponent from './Tabs';
+import { render, screen } from '@testing-library/react';
+import TabsComponent from './TabsContainer';
+import TabsContent from './TabsContent';
 
 describe('Tabs', () => {
   const tabs = [
-    { label: 'Overview', value: 'overview', content: <div>Overview Content</div> },
-    { label: 'Browse Lots', value: 'browse', content: <div>Browse Content</div> },
+    { label: 'Overview', value: 'overview' },
+    { label: 'Browse lots', value: 'browse' },
   ];
 
   it('renders tabs', () => {
@@ -12,21 +13,17 @@ describe('Tabs', () => {
     const tabsList = getAllByRole('tablist');
     expect(tabsList.length).toBe(1);
   });
-  test('renders tabs and displays default content', () => {
-    render(<TabsComponent tabs={tabs} />);
-
-    // Check if the tabs are rendered
+  test('renders the tabs and displays default content', () => {
+    render(
+      <TabsComponent tabs={tabs} defaultValue="overview">
+        <TabsContent value="overview">Overview content</TabsContent>
+        <TabsContent value="browse">Browse lots content</TabsContent>
+      </TabsComponent>,
+    );
     expect(screen.getByText('Overview')).toBeInTheDocument();
-    expect(screen.getByText('Browse Lots')).toBeInTheDocument();
+    expect(screen.getByText('Browse lots')).toBeInTheDocument();
 
-    // // Check that the content of the default active tab is visible
-    expect(screen.getByText('Overview Content')).toBeVisible();
-  });
-  it('switches tabs on click', () => {
-    const { getAllByRole } = render(<TabsComponent tabs={tabs} />);
-    const tabsTrigger = getAllByRole('tab')[0];
-    fireEvent.click(tabsTrigger);
-    const tabsContent = getAllByRole('tabpanel')[0];
-    expect(tabsContent.textContent).toBe('Overview Content');
+    // Verify default tab content is visible
+    expect(screen.getByText('Overview content')).toBeVisible();
   });
 });

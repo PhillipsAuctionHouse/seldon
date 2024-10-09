@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/react';
-import TabsComponent, { TabsComponentProps } from './Tabs';
+import TabsComponent, { TabsComponentProps } from './TabsContainer';
+import TabsContent, { TabContentProps } from './TabsContent';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -8,16 +9,38 @@ const meta = {
 } satisfies Meta<typeof TabsComponent>;
 
 export default meta;
+
 const tabs = [
-  { label: 'Overview', value: 'overview', content: <div>Overview Content</div> },
-  { label: 'Browse Lots', value: 'browse', content: <div>Browse Content</div> },
+  { label: 'Overview', value: 'overview' },
+  { label: 'Browse lots', value: 'browse' },
 ];
 
-export const Playground = (props: TabsComponentProps) => <TabsComponent {...props} defaultValue="browse" />;
+// Default story for Tabs component
+export const Playground = (props: TabsComponentProps & TabContentProps) => (
+  <TabsComponent {...props} defaultValue="overview">
+    <TabsContent value="overview">
+      <p>This content is for the Overview tab.</p>
+    </TabsContent>
+    <TabsContent value="browse">
+      <p>This content is for the Browse lots tab.</p>
+    </TabsContent>
+  </TabsComponent>
+);
 
-// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
   tabs,
 };
 
 Playground.argTypes = {};
+
+// Story with the Browse tab selected
+export const BrowseTabSelected = () => (
+  <TabsComponent tabs={tabs} defaultValue="browse">
+    <TabsContent value="overview">
+      <p>This content is for the Overview tab.</p>
+    </TabsContent>
+    <TabsContent value="browse">
+      <p>This content is for the Browse lots tab.</p>
+    </TabsContent>
+  </TabsComponent>
+);
