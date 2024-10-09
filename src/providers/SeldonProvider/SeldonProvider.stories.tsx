@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 import { SeldonProvider } from './SeldonProvider';
-import { SSRMediaQuery } from './utils';
+import { SSRMediaQuery } from '../../providers/utils';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {

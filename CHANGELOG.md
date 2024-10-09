@@ -1,3 +1,94 @@
+## [1.75.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.75.0...v1.75.1) (2024-10-09)
+
+
+### Bug Fixes
+
+* **detaillist:** L3-4081 style fix to remove extra padding at bottom of detail items ([#367](https://github.com/PhillipsAuctionHouse/seldon/issues/367)) ([386195a](https://github.com/PhillipsAuctionHouse/seldon/commit/386195a65716e4e26a18cc4ce14142c193c2a326))
+
+# [1.75.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.4...v1.75.0) (2024-10-08)
+
+
+### Features
+
+* **imagecomponent:** L3-1466 seldon image component ([#361](https://github.com/PhillipsAuctionHouse/seldon/issues/361)) ([980316f](https://github.com/PhillipsAuctionHouse/seldon/commit/980316f6488de87f53c0b7a421857469e873cfae))
+
+## [1.74.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.3...v1.74.4) (2024-10-08)
+
+
+### Bug Fixes
+
+* **margins:** L3-4079 remove global margin reset and set explicitly in Text component ([#366](https://github.com/PhillipsAuctionHouse/seldon/issues/366)) ([cfd6fd2](https://github.com/PhillipsAuctionHouse/seldon/commit/cfd6fd21156ecef6da161f96f725070ac1e5a741))
+
+## [1.74.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.2...v1.74.3) (2024-10-07)
+
+
+### Bug Fixes
+
+* **detaillist:** L3-3155 style fix and undefined child fix ([#364](https://github.com/PhillipsAuctionHouse/seldon/issues/364)) ([8deccdc](https://github.com/PhillipsAuctionHouse/seldon/commit/8deccdc22254f3d4546483cc7445324717f9b0b5))
+
+## [1.74.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.1...v1.74.2) (2024-10-07)
+
+
+### Bug Fixes
+
+* **provider:** L3-4079 global reset to margins was too aggressive ([#365](https://github.com/PhillipsAuctionHouse/seldon/issues/365)) ([00da7c1](https://github.com/PhillipsAuctionHouse/seldon/commit/00da7c19a83faa1e585fc1f91f6deecb7458003b))
+
+## [1.74.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.0...v1.74.1) (2024-10-07)
+
+
+### Bug Fixes
+
+* **header-animation:** L3-3981 Desktop Header Animation ([#362](https://github.com/PhillipsAuctionHouse/seldon/issues/362)) ([45992cc](https://github.com/PhillipsAuctionHouse/seldon/commit/45992cc69be2f3a4d6bb7061dabe9976e7db4717))
+
+# [1.74.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.73.3...v1.74.0) (2024-10-07)
+
+
+### Features
+
+* **social:** L3-4015 fixed icons spacing ([#359](https://github.com/PhillipsAuctionHouse/seldon/issues/359)) ([f672332](https://github.com/PhillipsAuctionHouse/seldon/commit/f672332bb07b86df6cf4688da8f986793d79aa8e))
+
+## [1.73.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.73.2...v1.73.3) (2024-10-07)
+
+
+### Bug Fixes
+
+* **header-animation:** L3-3981 Desktop Header Animation ([#358](https://github.com/PhillipsAuctionHouse/seldon/issues/358)) ([f687cb4](https://github.com/PhillipsAuctionHouse/seldon/commit/f687cb42a733b573aa90f1d1d8403dff918f35f9))
+
+## [1.73.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.73.1...v1.73.2) (2024-10-04)
+
+
+### Bug Fixes
+
+* **searchresults:** L3-4061 matching text was not highlighting ([#357](https://github.com/PhillipsAuctionHouse/seldon/issues/357)) ([8ff6379](https://github.com/PhillipsAuctionHouse/seldon/commit/8ff6379bb51e0a5d9560561549b256d3265e4588))
+
+## [1.73.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.73.0...v1.73.1) (2024-10-04)
+
+
+### Bug Fixes
+
+* **accordion:** L3-3154 accordion item style was overriding <strong tags in CMS content ([#356](https://github.com/PhillipsAuctionHouse/seldon/issues/356)) ([3d47512](https://github.com/PhillipsAuctionHouse/seldon/commit/3d475123de1a62c017ae012efbe9f04c46b64ba9))
+
+# [1.73.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.72.2...v1.73.0) (2024-10-03)
+
+
+### Features
+
+* **detail:** L3-4057 detail list improvement ([#355](https://github.com/PhillipsAuctionHouse/seldon/issues/355)) ([4e1859a](https://github.com/PhillipsAuctionHouse/seldon/commit/4e1859a71b0564acff42c4f532b6219b40b6ce6b))
+
+## [1.72.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.72.1...v1.72.2) (2024-10-03)
+
+
+### Bug Fixes
+
+* **lotdetails:** L3-3145 dont use index key on carousel dots ([#354](https://github.com/PhillipsAuctionHouse/seldon/issues/354)) ([b66d1b7](https://github.com/PhillipsAuctionHouse/seldon/commit/b66d1b71c680de4cd751c7e321b02cef26612d54))
+
+## [1.72.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.72.0...v1.72.1) (2024-10-03)
+
+
+### Bug Fixes
+
+* **accordion:** L3-3154 accordion label and icon style fixes ([#352](https://github.com/PhillipsAuctionHouse/seldon/issues/352)) ([9b8727d](https://github.com/PhillipsAuctionHouse/seldon/commit/9b8727dce707205a0ef8a574efe4c209fd40a347))
+
 # [1.72.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.71.0...v1.72.0) (2024-10-02)
 
 

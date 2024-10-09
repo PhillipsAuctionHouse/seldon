@@ -1,6 +1,8 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-text {
+  margin: 0;
+
   @each $variant in $text-tokens {
     &--#{$variant} {
       @include text($variant);

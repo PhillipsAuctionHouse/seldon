@@ -73,6 +73,7 @@
 
   &__logo {
     align-self: center;
+    margin: 0;
     padding-top: 6px; // small adjustment to center the logo
 
     svg {
@@ -177,5 +178,11 @@
       top: calc($header-height + 1px);
       width: 100%;
     }
+  }
+
+  .#{$px}-accordion-item-label__icon {
+    // slightly larger in header mobile than default
+    height: 1rem;
+    width: 1.5rem;
   }
 }

@@ -4,6 +4,7 @@ import { Carousel, CarouselContent, CarouselDots, CarouselItem } from '../Carous
 import { SpacingTokens } from '../../utils';
 import { useState } from 'react';
 import Modal from '../Modal/Modal';
+import { SeldonImage } from '../SeldonImage';
 
 const meta = {
   title: 'Components/PinchZoom',
@@ -27,7 +28,7 @@ export const Playground = (props: PinchZoomProps) => {
       }}
     >
       <PinchZoom {...props}>
-        <img
+        <SeldonImage
           style={{ padding: '20px 0' }}
           src="https://whitneymedia.org/assets/artwork/10980/96_175_cropped.jpeg"
           alt="placeholder"
@@ -48,7 +49,7 @@ export const ZoomCarousel = () => {
       <CarouselContent style={{ alignItems: 'center' }}>
         <CarouselItem>
           <PinchZoom>
-            <img
+            <SeldonImage
               style={{ borderRadius: '10px' }}
               src="https://whitneymedia.org/assets/artwork/6896/70_1164_cropped.jpeg"
               alt="placeholder"
@@ -57,7 +58,7 @@ export const ZoomCarousel = () => {
         </CarouselItem>
         <CarouselItem>
           <PinchZoom>
-            <img
+            <SeldonImage
               style={{ borderRadius: '10px' }}
               src="https://whitneymedia.org/assets/artwork/732/50_8_cropped.jpeg"
               alt="placeholder"
@@ -66,7 +67,7 @@ export const ZoomCarousel = () => {
         </CarouselItem>
         <CarouselItem>
           <PinchZoom>
-            <img
+            <SeldonImage
               style={{ borderRadius: '10px' }}
               src="https://whitneymedia.org/assets/image/828142/large_RS18772_MoMA_NY-Movie_ART162191_web.jpg"
               alt="placeholder"
@@ -121,7 +122,7 @@ export const CarouselWithZoomModal = () => {
               {images.map((image, index) => (
                 <CarouselItem key={index} style={{ display: 'flex', height: '100%' }}>
                   <PinchZoom onZoomChange={setIsZoomed}>
-                    <img
+                    <SeldonImage
                       style={{ height: '100%', objectFit: 'contain', padding: '2rem 0' }}
                       src={image}
                       alt="placeholder"
@@ -151,7 +152,7 @@ export const CarouselWithZoomModal = () => {
                 setModalOpen(true);
               }}
             >
-              <img style={{ borderRadius: '10px' }} src={image} alt="placeholder" />
+              <SeldonImage style={{ borderRadius: '10px' }} src={image} alt="placeholder" />
             </CarouselItem>
           ))}
         </CarouselContent>

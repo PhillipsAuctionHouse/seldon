@@ -45,6 +45,9 @@
 @use 'patterns/Subscribe/subscribe';
 @use 'patterns/Social/social';
 
+// Providers
+@use 'providers/SeldonProvider/seldonProvider';
+
 // Site Furniture
 @use 'site-furniture/Header/header';
 @use 'site-furniture/Footer/footer';
@@ -52,3 +55,4 @@
 @use 'patterns/DetailList/detailList';
 @use 'components/PinchZoom/pinchZoom';
 @use 'components/Tabs/tabs';
+@use 'components/SeldonImage/seldonImage';

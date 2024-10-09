@@ -3,7 +3,7 @@
 .#{$px}-detail-list {
   display: flex;
   flex-direction: column;
-  gap: $spacing-sm;
+  margin: 0;
 
   &-wrapper {
     .#{$px}-detail {
@@ -20,15 +20,20 @@
   .#{$px}-justified {
     .#{$px}-detail {
       justify-content: space-between;
+
+      &__label {
+        text-align: left;
+        width: unset;
+      }
+
+      &__value {
+        text-align: right;
+      }
     }
   }
 
   .#{$px}-has-separators {
     border-top: 1px solid $light-gray;
-
-    &:last-child {
-      border-bottom: 1px solid $light-gray;
-    }
 
     .#{$px}-detail {
       padding: $spacing-sm 0;
