@@ -1,3 +1,10 @@
+## [1.75.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.75.0...v1.75.1) (2024-10-09)
+
+
+### Bug Fixes
+
+* **detaillist:** L3-4081 style fix to remove extra padding at bottom of detail items ([#367](https://github.com/PhillipsAuctionHouse/seldon/issues/367)) ([386195a](https://github.com/PhillipsAuctionHouse/seldon/commit/386195a65716e4e26a18cc4ce14142c193c2a326))
+
 # [1.75.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.74.4...v1.75.0) (2024-10-08)
 
 
