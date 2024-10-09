@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import TabsComponent from './TabsContainer';
 import TabsContent from './TabsContent';
 
@@ -25,5 +25,34 @@ describe('Tabs', () => {
 
     // Verify default tab content is visible
     expect(screen.getByText('Overview content')).toBeVisible();
+  });
+  test('displays correct content when a different tab is selected', () => {
+    render(
+      <TabsComponent tabs={tabs} defaultValue="overview">
+        <TabsContent value="overview">Overview content</TabsContent>
+        <TabsContent value="browse">Browse lots content</TabsContent>
+      </TabsComponent>,
+    );
+
+    fireEvent.click(screen.getByRole('tab', { name: /Overview/i }));
+
+    expect(screen.getByText('Overview content')).toBeVisible();
+  });
+  test('calls onTabClick when a tab is clicked', () => {
+    let clickedTabValue = '';
+
+    const onTabClickMock = (value: string) => {
+      clickedTabValue = value; // Store the clicked tab value
+    };
+
+    render(
+      <TabsComponent tabs={tabs} defaultValue="browse" onTabClick={onTabClickMock}>
+        <TabsContent value="overview">Overview content</TabsContent>
+        <TabsContent value="browse">Browse lots content</TabsContent>
+      </TabsComponent>,
+    );
+
+    fireEvent.click(screen.getByRole('tab', { name: /Overview/i }));
+    expect(clickedTabValue).toBe('overview'); // Validate that the clicked tab value is correct
   });
 });
