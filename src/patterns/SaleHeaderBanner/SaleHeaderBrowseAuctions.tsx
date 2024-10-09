@@ -13,7 +13,7 @@ const SaleHeaderBrowseAuctions = forwardRef<HTMLElement, SaleHeaderBrowseAuction
     const { className: baseClassName } = getCommonProps(props, 'SaleHeaderBanner');
 
     return (
-      <div className={`${baseClassName}__occurance-details-text ${baseClassName}__occurance-details-browse`}>
+      <div className={`${baseClassName}__occurrence-details-text`}>
         <Text variant={TextVariants.string2}>{ctaLabel}</Text>
         <Link href="/calendar">{ctaText}</Link>
       </div>

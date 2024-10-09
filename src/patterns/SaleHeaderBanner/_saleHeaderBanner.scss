@@ -22,7 +22,7 @@
     padding: $spacing-md 0;
   }
 
-  // remove when adding in actual countdown timer
+  // update when adding in actual countdown timer
   &__countdown-container {
     align-items: center;
     border-bottom: 1px solid $light-gray;
@@ -38,7 +38,7 @@
     margin: $margin-xsm 0;
   }
 
-  &__occurance-details {
+  &__occurrence-details {
     display: flex;
     margin-bottom: 1.5rem;
 
@@ -47,16 +47,16 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
-    }
 
-    &-browse {
-      border-left: 1px solid $keyline-gray;
-      padding-left: $spacing-md;
-    }
-  }
+      &:first-child {
+        padding-right: $spacing-md;
+      }
 
-  &__occurance-details--closed {
-    gap: $spacing-md;
+      &:not(:first-child) {
+        border-left: 1px solid $keyline-gray;
+        padding: 0 $spacing-md;
+      }
+    }
   }
 
   &__date {

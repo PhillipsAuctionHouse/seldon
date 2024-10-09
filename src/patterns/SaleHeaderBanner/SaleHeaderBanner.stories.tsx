@@ -15,12 +15,20 @@ export const Playground = (props: SaleHeaderBannerProps) => <SaleHeaderBanner {.
 
 Playground.args = {
   auctionTitle: 'Modern & Contemporary Art: Online Auction, New York',
-  date: '10:00am EDT, 14 Sep 2024',
-  occuranceLabel: 'Begins',
+  occurrenceInformation: [{ occurrenceLabel: 'Begins', date: '10:00am EDT, 14 Sep 2024' }],
   location: 'New York',
   auctionState: AuctionState.preSale,
   imageSrcUrl:
     'https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg',
+};
+
+Playground.argTypes = {
+  auctionState: {
+    options: Object.values(AuctionState),
+    control: {
+      type: 'select',
+    },
+  },
 };
 
 export const PreSale = (props: SaleHeaderBannerProps) => (
@@ -28,8 +36,36 @@ export const PreSale = (props: SaleHeaderBannerProps) => (
     {...props}
     auctionTitle="Modern & Contemporary Art: Online Auction, New York"
     imageSrcUrl="https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg"
-    date="10:00am EDT, 4 Sep 2024"
-    occuranceLabel="Begins"
+    occurrenceInformation={[{ date: '10:00am EDT, 4 Sep 2024', occurrenceLabel: 'Begins' }]}
+    location="New York"
+    auctionState={AuctionState.preSale}
+  />
+);
+
+export const PreSaleTwoOccurrences = (props: SaleHeaderBannerProps) => (
+  <SaleHeaderBanner
+    {...props}
+    auctionTitle="Modern & Contemporary Art: Online Auction, New York"
+    imageSrcUrl="https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg"
+    occurrenceInformation={[
+      { date: '10:00am EDT, 4 Sep 2024', occurrenceLabel: 'Session I' },
+      { date: '10:00am EDT, 5 Sep 2024', occurrenceLabel: 'Session II' },
+    ]}
+    location="New York"
+    auctionState={AuctionState.preSale}
+  />
+);
+
+export const PreSaleThreeOccurrences = (props: SaleHeaderBannerProps) => (
+  <SaleHeaderBanner
+    {...props}
+    auctionTitle="Modern & Contemporary Art: Online Auction, New York"
+    imageSrcUrl="https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg"
+    occurrenceInformation={[
+      { date: '10:00am EDT, 4 Sep 2024', occurrenceLabel: 'Session I' },
+      { date: '10:00am EDT, 5 Sep 2024', occurrenceLabel: 'Session II' },
+      { date: '10:00am EDT, 6 Sep 2024', occurrenceLabel: 'Session III' },
+    ]}
     location="New York"
     auctionState={AuctionState.preSale}
   />
@@ -40,8 +76,7 @@ export const OpenForBidding = (props: SaleHeaderBannerProps) => (
     {...props}
     auctionTitle="Modern & Contemporary Art: Online Auction, New York"
     imageSrcUrl="https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg"
-    date="10:00am EDT, 4 Sep 2024"
-    occuranceLabel="Lots Begin to Close"
+    occurrenceInformation={[{ date: '10:00am EDT, 4 Sep 2024', occurrenceLabel: 'Lots Begin to Close' }]}
     location="New York"
     auctionState={AuctionState.openForBidding}
   >
@@ -54,8 +89,7 @@ export const Closed = (props: SaleHeaderBannerProps) => (
     {...props}
     auctionTitle="Modern & Contemporary Art: Online Auction, New York"
     imageSrcUrl="https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg"
-    date="10:00am EDT, 4 Sep 2024"
-    occuranceLabel="Concluded"
+    occurrenceInformation={[{ date: '4 Sep 2024', occurrenceLabel: 'Concluded' }]}
     location="New York"
     auctionState={AuctionState.past}
   >

@@ -21,14 +21,18 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
    * Where is the auction taking place?
    */
   location: string;
-  /**
-   * Depending on auction state, When does the auction open or close
-   */
-  date: string;
-  /**
-   * Clarifies the date based on the auction state
-   */
-  occuranceLabel: string;
+
+  occurrenceInformation: {
+    /**
+     * Depending on auction state, when does the auction open or close
+     */
+    date: string;
+    /**
+     * Clarifies the date based on the auction state
+     */
+    occurrenceLabel: string;
+  }[];
+
   /**
    * What is the current state of the auction?
    */
@@ -37,6 +41,10 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
    * What text should the CTA button display?
    */
   ctaLabel?: string;
+  /**
+   * What action does the CTA take?
+   */
+  onClick?: () => void;
 }
 /**
  * ## Overview
@@ -53,11 +61,11 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
     {
       auctionTitle,
       imageSrcUrl,
-      date,
       location,
       auctionState,
-      occuranceLabel,
+      occurrenceInformation,
       ctaLabel = 'Register to Bid',
+      onClick,
       children,
       className,
       ...props
@@ -83,20 +91,23 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
             <Text variant={TextVariants.string2} className={`${baseClassName}__location`}>
               {location}
             </Text>
-            <div
-              className={classnames(`${baseClassName}__occurance-details`, {
-                [`${baseClassName}__occurance-details--closed`]: isClosed,
-              })}
-            >
-              <div className={`${baseClassName}__occurance-details-text`}>
-                <Text variant={TextVariants.string2}>{occuranceLabel}</Text>
-                <Text variant={TextVariants.string2} className={`${baseClassName}__date`}>
-                  {date}
-                </Text>
-              </div>
+            <div className={`${baseClassName}__occurrence-details`}>
+              {occurrenceInformation.map(({ date, occurrenceLabel }) => (
+                <div className={`${baseClassName}__occurrence-details-text`} key={date}>
+                  <Text variant={TextVariants.string2}>{occurrenceLabel}</Text>
+                  <Text variant={TextVariants.string2} className={`${baseClassName}__date`}>
+                    {date}
+                  </Text>
+                </div>
+              ))}
+
               {isClosed && children}
             </div>
-            {!isClosed && <Button className={`${baseClassName}__cta`}>{ctaLabel}</Button>}
+            {!isClosed && (
+              <Button className={`${baseClassName}__cta`} onClick={onClick}>
+                {ctaLabel}
+              </Button>
+            )}
           </div>
         </PageMargin>
       </div>
