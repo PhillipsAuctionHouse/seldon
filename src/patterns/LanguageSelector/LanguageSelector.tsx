@@ -8,7 +8,7 @@ import NavigationItem from '../../components/Navigation/NavigationItem/Navigatio
 import { LinkVariants } from '../../components/Link';
 import { Text, TextVariants } from '../../components/Text';
 import NavigationList from '../../components/Navigation/NavigationList/NavigationList';
-import { SSRMediaQuery } from '../../providers/utils';
+import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 
 interface DropdownSelectorProps extends ComponentProps<'div'> {
   value: string;

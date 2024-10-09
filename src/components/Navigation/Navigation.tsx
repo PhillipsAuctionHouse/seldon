@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { HeaderContext } from '../../site-furniture/Header/Header';
 import NavigationList, { NavigationListProps } from './NavigationList/NavigationList';
 import { LanguageSelector, LanguageSelectorProps } from '../../patterns/LanguageSelector';
-import { SSRMediaQuery } from '../../providers/utils';
+import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 
 export interface NavigationProps extends ComponentProps<'nav'> {
   /**

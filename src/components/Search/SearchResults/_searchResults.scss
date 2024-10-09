@@ -22,6 +22,12 @@
     font-family: Montserrat, sans-serif;
     gap: $spacing-sm;
     width: 100%;
+
+    strong {
+      font-variation-settings: 'wght' 700;
+      /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+      font-weight: unset;
+    }
   }
 }
 
