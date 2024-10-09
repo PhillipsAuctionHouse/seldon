@@ -2,7 +2,6 @@ import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import { Text, TextVariants } from '../../components/Text';
 
-// You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface SaleHeaderCountdownProps extends ComponentProps<'div'> {
   label?: string;
   daysLabel?: string;

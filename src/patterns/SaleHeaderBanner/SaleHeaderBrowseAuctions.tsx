@@ -3,13 +3,12 @@ import { getCommonProps } from '../../utils';
 import { Text, TextVariants } from '../../components/Text';
 import { Link } from '../../components/Link';
 
-// You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
-export interface SaleHeaderBrowseOptionsProps extends ComponentProps<'div'> {
+export interface SaleHeaderBrowseAuctionsProps extends ComponentProps<'div'> {
   ctaLabel?: string;
   ctaText?: string;
 }
 
-const SaleHeaderBrowseOptions = forwardRef<HTMLElement, SaleHeaderBrowseOptionsProps>(
+const SaleHeaderBrowseAuctions = forwardRef<HTMLElement, SaleHeaderBrowseAuctionsProps>(
   ({ ctaText = 'View Calendar', ctaLabel = 'Browse Upcoming Sale', className, ...props }, _ref) => {
     const { className: baseClassName } = getCommonProps(props, 'SaleHeaderBanner');
 
@@ -22,6 +21,6 @@ const SaleHeaderBrowseOptions = forwardRef<HTMLElement, SaleHeaderBrowseOptionsP
   },
 );
 
-SaleHeaderBrowseOptions.displayName = 'SaleHeaderBrowseOptions';
+SaleHeaderBrowseAuctions.displayName = 'SaleHeaderBrowseAuctions';
 
-export default SaleHeaderBrowseOptions;
+export default SaleHeaderBrowseAuctions;
