@@ -2,6 +2,8 @@ import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import SaleHeaderBanner, { SaleHeaderBannerProps } from './SaleHeaderBanner';
 import { AuctionState } from './types';
+import SaleHeaderCountdown from './SaleHeaderCountdown';
+import SaleHeaderBrowseAuctions from './SaleHeaderBrowseAuctions';
 
 const defaultProps: SaleHeaderBannerProps = {
   auctionTitle: 'Sample Auction',
@@ -46,12 +48,20 @@ describe('SaleHeaderBanner', () => {
   });
 
   it('renders the countdown timer when auction is open for bidding', () => {
-    render(<SaleHeaderBanner {...defaultProps} auctionState={AuctionState.openForBidding} />);
+    render(
+      <SaleHeaderBanner {...defaultProps} auctionState={AuctionState.openForBidding}>
+        <SaleHeaderCountdown />
+      </SaleHeaderBanner>,
+    );
     expect(screen.getByText('Lots Close in')).toBeInTheDocument();
   });
 
   it('renders the "Browse Upcoming Sale" link when auction is closed', () => {
-    render(<SaleHeaderBanner {...defaultProps} auctionState={AuctionState.past} />);
+    render(
+      <SaleHeaderBanner {...defaultProps} auctionState={AuctionState.past}>
+        <SaleHeaderBrowseAuctions />{' '}
+      </SaleHeaderBanner>,
+    );
     expect(screen.getByText('Browse Upcoming Sale')).toBeInTheDocument();
     expect(screen.getByText('View Calendar')).toBeInTheDocument();
   });
