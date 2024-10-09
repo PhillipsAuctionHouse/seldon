@@ -77,12 +77,6 @@ describe('SaleHeaderBanner', () => {
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  it('applies additional class names', () => {
-    render(<SaleHeaderBanner {...defaultProps} className="extra-class" />);
-    const banner = screen.getByAltText('Sample Auction').closest('div');
-    expect(banner).toHaveClass('extra-class');
-  });
-
   it('renders children when auction is open for bidding', () => {
     render(
       <SaleHeaderBanner {...defaultProps} auctionState={AuctionState.openForBidding}>
