@@ -1,3 +1,10 @@
+## [1.75.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.75.1...v1.75.2) (2024-10-09)
+
+
+### Bug Fixes
+
+* **footer:** L3-3829 fix subscribe drawer ([#368](https://github.com/PhillipsAuctionHouse/seldon/issues/368)) ([c1ce8e7](https://github.com/PhillipsAuctionHouse/seldon/commit/c1ce8e7608ae0d5c1b174d40b679e3333eb3ad05))
+
 ## [1.75.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.75.0...v1.75.1) (2024-10-09)
 
 
