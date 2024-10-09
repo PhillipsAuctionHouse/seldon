@@ -3,7 +3,7 @@
 .#{$px}-detail-list {
   display: flex;
   flex-direction: column;
-  gap: $spacing-sm;
+  margin: 0;
 
   &-wrapper {
     .#{$px}-detail {
