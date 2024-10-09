@@ -14,13 +14,7 @@ interface StoryProps extends PaginationProps {
   playgroundWidth: string;
 }
 
-const lotOptions = [
-  { label: 'Lot 1', value: 1 },
-  { label: 'Lot 2', value: 2 },
-  { label: 'Lot 3', value: 3 },
-  { label: 'Lot 4', value: 4 },
-  { label: 'Lot 5', value: 5 },
-];
+const lotOptions = Array.from({ length: 20 }, (_, i) => ({ label: `${i + 1}`, value: i + 1 }));
 
 const argTypes = {
   disabled: {
