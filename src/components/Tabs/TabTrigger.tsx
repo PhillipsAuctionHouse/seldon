@@ -31,7 +31,7 @@ const TabTrigger = forwardRef<HTMLButtonElement, TabTriggerProps>(({ value, onTa
       onTabClick(value);
     }
   };
-  const { className: baseClassName } = getCommonProps(props, 'TabsComponent');
+  const { className: baseClassName } = getCommonProps(props, 'TabsContainer');
   return (
     <TabsPrimitive.Trigger value={value} className={`${baseClassName}__tabs-trigger`} onClick={handleClick} ref={ref}>
       {children}

@@ -18,12 +18,12 @@ export interface TabLabel {
 }
 
 /**
- * TabsComponent renders a tab interface allowing switching between different content.
+ * TabsContainer renders a tab interface allowing switching between different content.
  *
- * @param {TabsComponentProps} props - The component props containing an array of tabs.
+ * @param {TabsContainerProps} props - The component props containing an array of tabs.
  * @returns {JSX.Element} The rendered tab component.
  */
-export interface TabsComponentProps extends ComponentProps<'div'> {
+export interface TabsContainerProps extends ComponentProps<'div'> {
   tabs: TabLabel[];
   /**
    * Specify the default tab
@@ -53,9 +53,9 @@ export interface TabsComponentProps extends ComponentProps<'div'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-tabs--overview)
  */
 
-const TabsContainer = forwardRef<HTMLDivElement, TabsComponentProps>(
+const TabsContainer = forwardRef<HTMLDivElement, TabsContainerProps>(
   ({ className, tabs = [], tabListLabel = 'Sale Page Tabs', children, defaultValue, onTabClick, ...props }, ref) => {
-    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TabsComponent');
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TabsContainer');
     return (
       <TabsPrimitive.Root
         defaultValue={defaultValue || tabs[0].value}

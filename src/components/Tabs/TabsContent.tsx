@@ -28,7 +28,7 @@ export interface TabContentProps extends ComponentProps<'div'> {
 
 const TabsContent = forwardRef<HTMLDivElement, TabContentProps>(
   ({ className, value, containerClassName, children, ...props }, ref) => {
-    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TabsComponent');
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TabsContainer');
     return (
       <TabsPrimitive.Content
         value={value}

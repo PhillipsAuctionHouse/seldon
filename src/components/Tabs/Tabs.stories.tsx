@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import TabsContainer, { TabsComponentProps } from './TabsContainer';
+import TabsContainer, { TabsContainerProps } from './TabsContainer';
 import TabsContent, { TabContentProps } from './TabsContent';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
@@ -16,7 +16,7 @@ const tabs = [
 ];
 
 // Default story for Tabs component
-export const Playground = (props: TabsComponentProps & TabContentProps) => (
+export const Playground = (props: TabsContainerProps & TabContentProps) => (
   <TabsContainer {...props} defaultValue="overview">
     <TabsContent value="overview">
       <p>This content is for the Overview tab.</p>
