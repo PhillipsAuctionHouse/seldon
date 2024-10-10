@@ -73,5 +73,6 @@ export * from './components/Carousel';
 export * from './components/Detail';
 export * from './patterns/DetailList';
 export * from './components/PinchZoom';
+export * from './components/Tabs';
 export * from './components/SeldonImage';
 export * from './patterns/SaleHeaderBanner';
