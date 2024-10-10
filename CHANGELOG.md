@@ -1,3 +1,10 @@
+## [1.75.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.75.2...v1.75.3) (2024-10-10)
+
+
+### Bug Fixes
+
+* **DetailList:** L3-3296 DetailList improvements ([#371](https://github.com/PhillipsAuctionHouse/seldon/issues/371)) ([cff4dbb](https://github.com/PhillipsAuctionHouse/seldon/commit/cff4dbbe7534d0949a91967e11c47f13a0385512))
+
 ## [1.75.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.75.1...v1.75.2) (2024-10-09)
 
 
