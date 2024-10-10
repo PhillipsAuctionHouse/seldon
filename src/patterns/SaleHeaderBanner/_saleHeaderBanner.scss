@@ -3,6 +3,7 @@
 .#{$px}-sale-header-banner {
   display: flex;
   flex-direction: column;
+  margin-bottom: $spacing-md;
 
   @include media($size-md, $type: 'min') {
     flex-direction: row-reverse;
