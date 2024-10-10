@@ -20,8 +20,8 @@
     transition: background 0.2s ease;
 
     &:focus-visible {
-      outline: 1px solid $medium-gray;
-      outline-offset: 3px;
+      box-shadow: rgb(11, 11, 12) 0 0 0 1px inset;
+      outline: none;
     }
 
     .#{$px}-text {

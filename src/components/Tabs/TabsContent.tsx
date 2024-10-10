@@ -35,6 +35,8 @@ const TabsContent = forwardRef<HTMLDivElement, TabContentProps>(
         className={classNames(`${baseClassName}__tabs-content`, containerClassName)}
         {...commonProps}
         ref={ref}
+        tabIndex={-1}
+        aria-hidden
       >
         {children}
       </TabsPrimitive.Content>
