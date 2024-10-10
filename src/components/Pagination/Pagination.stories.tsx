@@ -86,10 +86,13 @@ StringOptionsPlayground.argTypes = argTypes;
 export const AsyncPlayground = ({ playgroundWidth, onChange, ...args }: StoryProps) => {
   const stringOptions = ['Lot 1', 'Lot 2', 'Lot 3', 'Lot 4', 'Lot 5'];
   const [value, setValue] = useState<string>(stringOptions[0]);
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
   const handleChange = async (value: string) => {
+    setIsDisabled(true);
     await new Promise((resolve) => setTimeout(resolve, 2000));
     setValue(value);
+    setIsDisabled(false);
     onChange(value);
   };
 
@@ -100,6 +103,7 @@ export const AsyncPlayground = ({ playgroundWidth, onChange, ...args }: StoryPro
         id="Pagination-3"
         options={stringOptions}
         value={value}
+        isDisabled={isDisabled}
         onChange={(value) => handleChange(value.toString())}
       />
     </div>
