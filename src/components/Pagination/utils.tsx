@@ -1,10 +1,5 @@
 import { PaginationOption, PaginationOptionValue } from './Pagination';
 
-export enum PaginationState {
-  idle = 'idle',
-  loading = 'loading',
-  submitting = 'submitting',
-}
 export const determineOptionValue = (option: PaginationOption | PaginationOptionValue) => {
   return typeof option === 'string' || typeof option === 'number' ? option : option?.value;
 };

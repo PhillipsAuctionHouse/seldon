@@ -2,7 +2,6 @@ import type { Meta } from '@storybook/react';
 import { useState } from 'react';
 
 import Pagination, { PaginationOptionValue, PaginationProps } from './Pagination';
-import { PaginationState } from './utils';
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
   title: 'Components/Pagination',
@@ -87,12 +86,9 @@ StringOptionsPlayground.argTypes = argTypes;
 export const AsyncPlayground = ({ playgroundWidth, onChange, ...args }: StoryProps) => {
   const stringOptions = ['Lot 1', 'Lot 2', 'Lot 3', 'Lot 4', 'Lot 5'];
   const [value, setValue] = useState<string>(stringOptions[0]);
-  const [paginationState, setPaginationState] = useState<PaginationState>(PaginationState.idle);
 
   const handleChange = async (value: string) => {
-    setPaginationState(PaginationState.loading);
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    setPaginationState(PaginationState.idle);
     setValue(value);
     onChange(value);
   };
@@ -105,7 +101,6 @@ export const AsyncPlayground = ({ playgroundWidth, onChange, ...args }: StoryPro
         options={stringOptions}
         value={value}
         onChange={(value) => handleChange(value.toString())}
-        state={paginationState}
       />
     </div>
   );

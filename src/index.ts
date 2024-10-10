@@ -50,7 +50,6 @@ export {
   type PaginationOption,
   type PaginationOptionValue,
 } from './components/Pagination/Pagination';
-export { PaginationState } from './components/Pagination/utils';
 
 export {
   default as StatefulViewingsList,
