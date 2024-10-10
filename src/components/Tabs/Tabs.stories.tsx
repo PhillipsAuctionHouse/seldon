@@ -1,12 +1,12 @@
 import { Meta } from '@storybook/react';
-import TabsComponent, { TabsComponentProps } from './TabsContainer';
+import TabsContainer, { TabsComponentProps } from './TabsContainer';
 import TabsContent, { TabContentProps } from './TabsContent';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
   title: 'Components/Tabs',
-  component: TabsComponent,
-} satisfies Meta<typeof TabsComponent>;
+  component: TabsContainer,
+} satisfies Meta<typeof TabsContainer>;
 
 export default meta;
 
@@ -17,14 +17,14 @@ const tabs = [
 
 // Default story for Tabs component
 export const Playground = (props: TabsComponentProps & TabContentProps) => (
-  <TabsComponent {...props} defaultValue="overview">
+  <TabsContainer {...props} defaultValue="overview">
     <TabsContent value="overview">
       <p>This content is for the Overview tab.</p>
     </TabsContent>
     <TabsContent value="browse">
       <p>This content is for the Browse lots tab.</p>
     </TabsContent>
-  </TabsComponent>
+  </TabsContainer>
 );
 
 Playground.args = {
@@ -35,12 +35,12 @@ Playground.argTypes = {};
 
 // Story with the Browse tab selected
 export const BrowseTabSelected = () => (
-  <TabsComponent tabs={tabs} defaultValue="browse">
+  <TabsContainer tabs={tabs} defaultValue="browse">
     <TabsContent value="overview">
       <p>This content is for the Overview tab.</p>
     </TabsContent>
     <TabsContent value="browse">
       <p>This content is for the Browse lots tab.</p>
     </TabsContent>
-  </TabsComponent>
+  </TabsContainer>
 );

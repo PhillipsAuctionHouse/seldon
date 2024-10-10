@@ -53,7 +53,7 @@ export interface TabsComponentProps extends ComponentProps<'div'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-tabs--overview)
  */
 
-const TabsComponent = forwardRef<HTMLDivElement, TabsComponentProps>(
+const TabsContainer = forwardRef<HTMLDivElement, TabsComponentProps>(
   ({ className, tabs = [], tabListLabel = 'Sale Page Tabs', children, defaultValue, onTabClick, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TabsComponent');
     return (
@@ -82,6 +82,6 @@ const TabsComponent = forwardRef<HTMLDivElement, TabsComponentProps>(
   },
 );
 
-TabsComponent.displayName = 'TabsComponent';
+TabsContainer.displayName = 'TabsContainer';
 
-export default TabsComponent;
+export default TabsContainer;
