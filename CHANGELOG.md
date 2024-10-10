@@ -1,3 +1,10 @@
+## [1.75.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.75.3...v1.75.4) (2024-10-10)
+
+
+### Bug Fixes
+
+* **pagination:** L3-4096 arrow buttons were too small ([#369](https://github.com/PhillipsAuctionHouse/seldon/issues/369)) ([bcafdf2](https://github.com/PhillipsAuctionHouse/seldon/commit/bcafdf228b5efd05f0111f79a93d6edbaf23b1a9))
+
 ## [1.75.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.75.2...v1.75.3) (2024-10-10)
 
 
