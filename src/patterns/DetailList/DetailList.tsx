@@ -39,6 +39,7 @@ const DetailList = forwardRef<HTMLDListElement, DetailListProps>(
       <dl
         {...commonProps}
         className={classnames(baseClassName, className, {
+          [`${px}-has-separators`]: hasSeparators,
           [`${px}-columns`]: alignment === DetailListAlignment.columns,
           [`${px}-justified`]: alignment === DetailListAlignment.justified,
         })}
