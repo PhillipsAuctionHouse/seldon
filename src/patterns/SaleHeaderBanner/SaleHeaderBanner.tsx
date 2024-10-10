@@ -12,7 +12,7 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
   /**
    * What is the title of the auction?
    */
-  auctionTitle: string;
+  auctionTitle: React.ReactNode;
   /**
    * The URL of the banner image
    */
@@ -20,17 +20,17 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
   /**
    * Where is the auction taking place?
    */
-  location: string;
+  location: React.ReactNode;
 
   occurrenceInformation: {
     /**
      * Depending on auction state, when does the auction open or close
      */
-    date: string;
+    date: React.ReactNode;
     /**
      * Clarifies the date based on the auction state
      */
-    occurrenceLabel: string;
+    occurrenceLabel: React.ReactNode;
   }[];
 
   /**
@@ -40,7 +40,7 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
   /**
    * What text should the CTA button display?
    */
-  ctaLabel?: string;
+  ctaLabel?: React.ReactNode;
   /**
    * What action does the CTA take?
    */
@@ -80,7 +80,7 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
         <SeldonImage
           aspectRatio="16/9"
           src={imageSrcUrl}
-          alt={auctionTitle}
+          alt={String(auctionTitle)}
           objectFit="cover"
           className={`${baseClassName}__image`}
         />
@@ -93,7 +93,7 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
             </Text>
             <div className={`${baseClassName}__occurrence-details`}>
               {occurrenceInformation.map(({ date, occurrenceLabel }) => (
-                <div className={`${baseClassName}__occurrence-details-text`} key={date}>
+                <div className={`${baseClassName}__occurrence-details-text`} key={String(date)}>
                   <Text variant={TextVariants.string2}>{occurrenceLabel}</Text>
                   <Text variant={TextVariants.string2} className={`${baseClassName}__date`}>
                     {date}
