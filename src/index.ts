@@ -50,6 +50,7 @@ export {
   type PaginationOption,
   type PaginationOptionValue,
 } from './components/Pagination/Pagination';
+export { PaginationState } from './components/Pagination/utils';
 
 export {
   default as StatefulViewingsList,
@@ -74,3 +75,6 @@ export * from './components/Detail';
 export * from './patterns/DetailList';
 export * from './components/PinchZoom';
 export * from './components/SeldonImage';
+
+// utils
+export * from './utils/hooks';
