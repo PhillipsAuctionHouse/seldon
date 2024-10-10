@@ -1,6 +1,6 @@
 @use '#scss/allPartials' as *;
 
-.#{$px}-tabs-component {
+.#{$px}-tabs-container {
   @include text($body2);
 
   width: 100%;
