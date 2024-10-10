@@ -3,7 +3,12 @@
 .#{$px}-detail-list {
   display: flex;
   flex-direction: column;
+  gap: $spacing-sm;
   margin: 0;
+
+  &.#{$px}-has-separators {
+    gap: 0;
+  }
 
   &-wrapper {
     .#{$px}-detail {
@@ -23,7 +28,6 @@
 
       &__label {
         text-align: left;
-        width: unset;
       }
 
       &__value {
