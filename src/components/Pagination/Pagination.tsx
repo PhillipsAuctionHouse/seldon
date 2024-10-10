@@ -8,6 +8,7 @@ import ChevronRight from '../../assets/chevronRight.svg?react';
 import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 import { determineOptionValue, findOptionFromSelectString } from './utils';
+import { usePendingState } from '../../utils/hooks';
 
 export type PaginationOptionValue = string | number;
 
@@ -90,6 +91,19 @@ const Pagination = ({
   const type = 'pagination';
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Pagination');
   const { id } = props;
+  // Necessary unfortunately to have the Select value update in realtime, this is needed for slow page transitions since the lot wouldn't update until the page transition is finished
+  const { pendingState, setPendingState } = usePendingState(determineOptionValue(value));
+
+  const valueWithPendingState = pendingState || value;
+
+  const handlePageChange = (
+    option: PaginationOption | PaginationOptionValue,
+    event?: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const newPage = determineOptionValue(option);
+    setPendingState(newPage);
+    onChange(newPage, event);
+  };
 
   return (
     <div
@@ -100,9 +114,9 @@ const Pagination = ({
       <IconButton
         className={classnames(`${px}__pagination-button`, `${px}-left-arrow`)}
         onClick={() => {
-          const prevIndex = options.findIndex((option) => determineOptionValue(option) === value) - 1;
+          const prevIndex = options.findIndex((option) => determineOptionValue(option) === valueWithPendingState) - 1;
           const prevOption = options.at(prevIndex) || '';
-          onChange(determineOptionValue(prevOption));
+          handlePageChange(prevOption);
         }}
         data-testid={`${id}-previous-button`}
         isDisabled={isDisabled}
@@ -115,11 +129,11 @@ const Pagination = ({
       <Select
         className={variant === 'inline' && `${px}--inline-pagination`}
         aria-label={selectLabel}
-        value={value}
+        value={valueWithPendingState}
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
           const selectedOption = findOptionFromSelectString(options, event?.currentTarget.value);
           if (selectedOption) {
-            onChange(determineOptionValue(selectedOption), event);
+            handlePageChange(selectedOption, event);
           }
         }}
         data-testid={`${id}-select-button`}
@@ -140,9 +154,10 @@ const Pagination = ({
         className={`${px}__pagination-button`}
         onClick={() => {
           const nextIndex =
-            (options.findIndex((option) => determineOptionValue(option) === value) + 1) % options.length;
+            (options.findIndex((option) => determineOptionValue(option) === valueWithPendingState) + 1) %
+            options.length;
           const nextOption = options[nextIndex];
-          onChange(determineOptionValue(nextOption));
+          handlePageChange(nextOption);
         }}
         data-testid={`${id}-next-button`}
         isDisabled={isDisabled}

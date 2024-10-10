@@ -8,11 +8,16 @@
 }
 
 .#{$px} {
-  &-icon-button.#{$px}__pagination-button {
-    @include media($breakpoint-md) {
-      > svg {
-        height: 1.75rem;
-        width: 1.75rem;
+  &-icon-button {
+    &:disabled {
+      border: unset;
+    }
+    &.#{$px}__pagination-button {
+      @include media($breakpoint-md) {
+        > svg {
+          height: 1.75rem;
+          width: 1.75rem;
+        }
       }
     }
   }
