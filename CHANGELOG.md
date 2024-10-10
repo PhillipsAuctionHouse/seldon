@@ -1,3 +1,10 @@
+# [1.76.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.75.4...v1.76.0) (2024-10-10)
+
+
+### Features
+
+* **sale header banner:** L3-2394 create sale header banner ([#360](https://github.com/PhillipsAuctionHouse/seldon/issues/360)) ([d36d1b7](https://github.com/PhillipsAuctionHouse/seldon/commit/d36d1b7a5daba9a7d667210522a2dc34be35472e))
+
 ## [1.75.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.75.3...v1.75.4) (2024-10-10)
 
 
