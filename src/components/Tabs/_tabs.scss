@@ -16,8 +16,12 @@
   &__tabs-trigger {
     background: none;
     border: none;
+    border-bottom: 2px solid transparent;
     padding: 0 0 $padding-sm;
-    transition: background 0.2s ease;
+    transition:
+      background 0.2s ease,
+      font-weight 0.2s ease-out,
+      border-bottom 0.2s ease-out;
 
     &:focus-visible {
       box-shadow: rgb(11, 11, 12) 0 0 0 1px inset;
@@ -39,6 +43,11 @@
   &__tabs-trigger[data-state='active'] {
     border-bottom: 2px solid $pure-black;
     color: $pure-black;
+
+    &:focus-visible {
+      box-shadow: rgb(11, 11, 12) 0 0 0 1px inset;
+      outline: none;
+    }
     .#{$px}-text {
       color: $pure-black;
       font-variation-settings: 'wght' 600;
