@@ -1,3 +1,24 @@
+## [1.77.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.77.0...v1.77.1) (2024-10-15)
+
+
+### Bug Fixes
+
+* **accordion:** L3-4103 fix spacing on accordion content ([#374](https://github.com/PhillipsAuctionHouse/seldon/issues/374)) ([2b2863f](https://github.com/PhillipsAuctionHouse/seldon/commit/2b2863f32eb232eba62ccfbabf2ea4d4ce86ebcf))
+
+# [1.77.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.76.0...v1.77.0) (2024-10-15)
+
+
+### Features
+
+* **Tabs:** L3-2396 Create Tabs component ([#363](https://github.com/PhillipsAuctionHouse/seldon/issues/363)) ([ebe371c](https://github.com/PhillipsAuctionHouse/seldon/commit/ebe371c7f79eb685963a9ab4af4672a2039e6e42))
+
+# [1.76.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.75.4...v1.76.0) (2024-10-10)
+
+
+### Features
+
+* **sale header banner:** L3-2394 create sale header banner ([#360](https://github.com/PhillipsAuctionHouse/seldon/issues/360)) ([d36d1b7](https://github.com/PhillipsAuctionHouse/seldon/commit/d36d1b7a5daba9a7d667210522a2dc34be35472e))
+
 ## [1.75.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.75.3...v1.75.4) (2024-10-10)
 
 

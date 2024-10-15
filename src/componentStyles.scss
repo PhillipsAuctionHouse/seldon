@@ -44,6 +44,7 @@
 @use 'patterns/ViewingsList/viewingsList';
 @use 'patterns/Subscribe/subscribe';
 @use 'patterns/Social/social';
+@use 'patterns/SaleHeaderBanner/saleHeaderBanner';
 
 // Site Furniture
 @use 'site-furniture/Header/header';
@@ -51,4 +52,5 @@
 @use 'components/Detail/detail';
 @use 'patterns/DetailList/detailList';
 @use 'components/PinchZoom/pinchZoom';
+@use 'components/Tabs/tabs';
 @use 'components/SeldonImage/seldonImage';

@@ -1,0 +1,75 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-tabs-container {
+  @include text($body2);
+
+  width: 100%;
+
+  &__tabs-list {
+    display: flex;
+    gap: 1rem;
+    overflow: hidden; /* Prevent overflow */
+    padding: 0 $padding-md;
+    position: relative;
+  }
+
+  &__tabs-trigger {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0 0 $padding-sm;
+    transition:
+      background 0.2s ease,
+      font-weight 0.2s ease-out,
+      border-bottom 0.2s ease-out;
+
+    &:focus-visible {
+      box-shadow: rgb(11, 11, 12) 0 0 0 1px inset;
+      outline: none;
+    }
+
+    .#{$px}-text {
+      color: $button-hover;
+      cursor: pointer;
+      font-size: $body-size2;
+      line-height: $body-line-height-size2;
+
+      &:hover {
+        color: $pure-black;
+      }
+    }
+  }
+
+  &__tabs-trigger[data-state='active'] {
+    border-bottom: 2px solid $pure-black;
+    color: $pure-black;
+
+    &:focus-visible {
+      box-shadow: rgb(11, 11, 12) 0 0 0 1px inset;
+      outline: none;
+    }
+    .#{$px}-text {
+      color: $pure-black;
+      font-variation-settings: 'wght' 600;
+
+      &:hover {
+        color: $button-hover;
+      }
+    }
+  }
+
+  /* Underline effect for active tab */
+  &__full-bleed-underline {
+    background: $light-gray;
+    bottom: 0;
+    height: 1px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    transition: transform 0.2s ease; /* Underline animation */
+  }
+
+  &__tabs-content {
+    padding: 20px 0;
+  }
+}
