@@ -147,7 +147,10 @@ const AccordionItem = ({
     <Accordion.Item
       disabled={isLocked}
       value={id}
-      className={classnames(accordionItemClassName, { [`${accordionItemClassName}__border-bottom`]: !isLastItem })}
+      className={classnames(accordionItemClassName, {
+        [`${accordionItemClassName}__border-bottom`]: !isLastItem,
+        [`${accordionItemClassName}--large`]: isLargeVariation,
+      })}
       {...props}
     >
       <AccordionHeader

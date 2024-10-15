@@ -10,6 +10,10 @@
   padding: $spacing-sm 0;
   width: 100%;
 
+  &--large {
+    padding: $spacing-md 0;
+  }
+
   svg {
     max-width: unset;
   }

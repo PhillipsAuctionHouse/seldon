@@ -64,10 +64,6 @@ $top-transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       &-item {
         padding: $spacing-md 0;
 
-        &__border-bottom {
-          border-bottom: 1px solid $light-gray;
-        }
-
         &-label {
           opacity: 1;
         }
