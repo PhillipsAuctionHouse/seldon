@@ -1,3 +1,10 @@
+# [1.77.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.76.0...v1.77.0) (2024-10-15)
+
+
+### Features
+
+* **Tabs:** L3-2396 Create Tabs component ([#363](https://github.com/PhillipsAuctionHouse/seldon/issues/363)) ([ebe371c](https://github.com/PhillipsAuctionHouse/seldon/commit/ebe371c7f79eb685963a9ab4af4672a2039e6e42))
+
 # [1.76.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.75.4...v1.76.0) (2024-10-10)
 
 
