@@ -28,7 +28,7 @@
   }
 
   &__content {
-    margin: $spacing-sm 0;
+    padding: $spacing-sm 0;
   }
 
   &__content--lg {
@@ -71,11 +71,13 @@
     from {
       height: 0;
       opacity: 0;
+      padding: 0;
     }
 
     to {
       height: var(--radix-accordion-content-height);
       opacity: 1;
+      padding: $spacing-sm 0;
     }
   }
 
@@ -83,11 +85,13 @@
     from {
       height: var(--radix-accordion-content-height);
       opacity: 1;
+      padding: $spacing-sm 0;
     }
 
     to {
       height: 0;
       opacity: 0;
+      padding: 0;
     }
   }
 }
