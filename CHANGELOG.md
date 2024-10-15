@@ -1,3 +1,17 @@
+## [1.77.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.77.1...v1.77.2) (2024-10-15)
+
+
+### Bug Fixes
+
+* **pagination:** L3-4039 improve async page navigation ([#370](https://github.com/PhillipsAuctionHouse/seldon/issues/370)) ([8f1a497](https://github.com/PhillipsAuctionHouse/seldon/commit/8f1a497fa972356f2fc1048d8263f69ac221b624))
+
+## [1.77.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.77.0...v1.77.1) (2024-10-15)
+
+
+### Bug Fixes
+
+* **accordion:** L3-4103 fix spacing on accordion content ([#374](https://github.com/PhillipsAuctionHouse/seldon/issues/374)) ([2b2863f](https://github.com/PhillipsAuctionHouse/seldon/commit/2b2863f32eb232eba62ccfbabf2ea4d4ce86ebcf))
+
 # [1.77.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.76.0...v1.77.0) (2024-10-15)
 
 

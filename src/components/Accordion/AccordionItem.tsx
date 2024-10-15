@@ -110,24 +110,22 @@ const AccordionContent = ({
   hasTransition,
   isLargeVariation,
   className,
-}: AccordionContentType) => (
-  <>
-    {disable && children ? (
-      <div>{children}</div>
-    ) : (
-      <Accordion.Content
-        asChild
-        className={classnames(
-          { [`${baseClassName}__content--lg`]: isLargeVariation },
-          { [`${baseClassName}--transition`]: hasTransition },
-          className,
-        )}
-      >
-        {children}
-      </Accordion.Content>
-    )}
-  </>
-);
+}: AccordionContentType) =>
+  disable && children ? (
+    <div>{children}</div>
+  ) : (
+    <Accordion.Content
+      asChild
+      className={classnames(
+        `${baseClassName}__content`,
+        { [`${baseClassName}__content--lg`]: isLargeVariation },
+        { [`${baseClassName}--transition`]: hasTransition },
+        className,
+      )}
+    >
+      {children}
+    </Accordion.Content>
+  );
 
 const AccordionItem = ({
   isLocked = false,

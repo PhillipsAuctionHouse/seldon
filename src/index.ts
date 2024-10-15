@@ -76,3 +76,6 @@ export * from './components/PinchZoom';
 export * from './components/Tabs';
 export * from './components/SeldonImage';
 export * from './patterns/SaleHeaderBanner';
+
+// utils
+export * from './utils/hooks';
