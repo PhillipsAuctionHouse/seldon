@@ -1,3 +1,10 @@
+## [1.77.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.77.0...v1.77.1) (2024-10-15)
+
+
+### Bug Fixes
+
+* **accordion:** L3-4103 fix spacing on accordion content ([#374](https://github.com/PhillipsAuctionHouse/seldon/issues/374)) ([2b2863f](https://github.com/PhillipsAuctionHouse/seldon/commit/2b2863f32eb232eba62ccfbabf2ea4d4ce86ebcf))
+
 # [1.77.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.76.0...v1.77.0) (2024-10-15)
 
 
