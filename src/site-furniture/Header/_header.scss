@@ -137,7 +137,7 @@
 
       &--closed {
         display: unset;
-        left: -100vw;
+        left: -100%;
       }
     }
 
@@ -149,13 +149,6 @@
       position: relative;
       top: 0;
       width: 100%;
-    }
-
-    .#{$px}-nav__item {
-      .#{$px}-link--snwHeaderLink {
-        align-content: center;
-        height: 100%;
-      }
     }
 
     .#{$px}-nav__item {
@@ -184,5 +177,15 @@
     // slightly larger in header mobile than default
     height: 1rem;
     width: 1.5rem;
+  }
+
+  @include isHeaderMobile {
+    .#{$px}-nav__list .#{$px}-nav__item:last-child .#{$px}-link--snwHeaderLink {
+      border-bottom: none;
+    }
+    .#{$px}-language-selector .#{$px}-accordion-item {
+      border-bottom: 1px solid $light-gray;
+      padding: $spacing-md 0;
+    }
   }
 }

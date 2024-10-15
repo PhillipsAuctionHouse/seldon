@@ -62,7 +62,7 @@ $top-transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       margin-bottom: 0;
 
       &-item {
-        padding: $spacing-sm 0;
+        padding: $spacing-md 0;
 
         &__border-bottom {
           border-bottom: 1px solid $light-gray;
@@ -76,7 +76,7 @@ $top-transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     .#{$px}-link--snwHeaderLink {
       border-bottom: 1px solid $light-gray;
       flex-wrap: wrap;
-      padding: $spacing-sm 0;
+      padding: $spacing-md 0;
     }
     .#{$px}-link--snwFlyoutLink {
       padding: 0;
