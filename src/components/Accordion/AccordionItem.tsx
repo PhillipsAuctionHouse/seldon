@@ -112,7 +112,7 @@ const AccordionContent = ({
   className,
 }: AccordionContentType) =>
   disable && children ? (
-    <div>{children}</div>
+    <div className={`${baseClassName}__content--locked`}>{children}</div>
   ) : (
     <Accordion.Content
       asChild

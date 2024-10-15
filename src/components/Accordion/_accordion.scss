@@ -2,12 +2,10 @@
 
 .#{$px}-accordion {
   border-top: 1px solid $light-gray;
-  margin-bottom: 10px;
   width: 100%;
 }
 
 .#{$px}-accordion-item {
-  padding: $spacing-sm 0;
   width: 100%;
 
   svg {
@@ -24,7 +22,11 @@
   }
 
   &__content {
-    margin: $spacing-sm 0;
+    padding-bottom: $spacing-md;
+
+    &--locked {
+      padding-bottom: $spacing-sm;
+    }
   }
 
   &__content--lg {
@@ -93,6 +95,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: $spacing-sm 0;
 
   &--hoverable {
     cursor: pointer;
