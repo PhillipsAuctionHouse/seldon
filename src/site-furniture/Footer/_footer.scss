@@ -81,25 +81,16 @@
   .#{$px}-accordion {
     border-bottom: 1px solid #eae8e4;
     border-top: 1px solid #eae8e4;
-    margin-bottom: $spacing-md;
     width: 100%;
 
     &-item {
-      padding: 0;
-
-      ul {
-        padding-bottom: $spacing-md;
-      }
-
       &--expanded {
-        margin-bottom: $spacing-md;
         margin-top: 0;
         padding: 0;
       }
 
       &-label {
         opacity: 1;
-        padding: $spacing-sm 0;
 
         @include media($size-md) {
           cursor: unset;
