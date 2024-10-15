@@ -93,6 +93,7 @@ const smallTextItems = [
     isLocked: false,
     label: 'Provenance',
     children: smallTextBlock,
+    hasTransition: true,
   },
   {
     isLocked: false,

@@ -27,10 +27,12 @@
     height: auto;
   }
 
+  &__content {
+    margin: $spacing-sm 0;
+  }
+
   &__content--lg {
     @include text($body2);
-
-    margin: 1.25rem 0;
   }
 
   &--transition {
