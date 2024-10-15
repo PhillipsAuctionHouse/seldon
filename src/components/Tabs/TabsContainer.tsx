@@ -6,11 +6,11 @@ import TabTrigger from './TabTrigger';
 import { Text, TextVariants } from '../Text';
 
 // Define the type for each tab, which includes its label, value, and content
-export interface TabLabel {
+export interface Tab {
   /**
    * button label
    */
-  label: string;
+  label: React.ReactNode;
   /**
    * Button value
    */
@@ -24,7 +24,7 @@ export interface TabLabel {
  * @returns {JSX.Element} The rendered tab component.
  */
 export interface TabsContainerProps extends ComponentProps<'div'> {
-  tabs: TabLabel[];
+  tabs: Tab[];
   /**
    * Specify the default tab
    */

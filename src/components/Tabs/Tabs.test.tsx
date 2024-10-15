@@ -1,6 +1,8 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import TabsContainer from './TabsContainer';
 import TabsContent from './TabsContent';
+import { Text } from '../Text';
+import userEvent from '@testing-library/user-event';
 
 describe('Tabs', () => {
   const tabs = [
@@ -26,24 +28,47 @@ describe('Tabs', () => {
     // Verify default tab content is visible
     expect(screen.getByText('Overview content')).toBeVisible();
   });
-  test('displays correct content when a different tab is selected', () => {
+  test('renders ReactNode in tab', () => {
+    const componentTabs = [
+      {
+        label: (
+          <div style={{ display: 'flex' }}>Overview {<Text style={{ color: 'red', marginBottom: '0' }}>*</Text>}</div>
+        ),
+        value: 'overview',
+      },
+      {
+        label: (
+          <div style={{ display: 'flex' }}>Submit {<Text style={{ color: 'blue', marginBottom: '0' }}>+</Text>}</div>
+        ),
+        value: 'Browse',
+      },
+    ];
+    render(
+      <TabsContainer tabs={componentTabs}>
+        <TabsContent value="overview">Overview content</TabsContent>
+        <TabsContent value="browse">Browse lots content</TabsContent>
+      </TabsContainer>,
+    );
+    expect(screen.getByRole('tab', { name: /Overview/ })).toBeInTheDocument();
+    expect(screen.getByText(/\*/)).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: /Submit/ })).toBeInTheDocument();
+    expect(screen.getByText(/\+/)).toBeInTheDocument();
+  });
+  test('displays correct content when a different tab is selected', async () => {
     render(
       <TabsContainer tabs={tabs} defaultValue="overview">
         <TabsContent value="overview">Overview content</TabsContent>
         <TabsContent value="browse">Browse lots content</TabsContent>
       </TabsContainer>,
     );
-
-    fireEvent.click(screen.getByRole('tab', { name: /Overview/i }));
-
     expect(screen.getByText('Overview content')).toBeVisible();
-  });
-  test('calls onTabClick when a tab is clicked', () => {
-    let clickedTabValue = '';
 
-    const onTabClickMock = (value: string) => {
-      clickedTabValue = value; // Store the clicked tab value
-    };
+    await userEvent.click(screen.getByRole('tab', { name: /Browse/i }));
+
+    expect(screen.getByText('Browse lots content')).toBeVisible();
+  });
+  test('calls onTabClick when a tab is clicked', async () => {
+    const onTabClickMock = vitest.fn();
 
     render(
       <TabsContainer tabs={tabs} defaultValue="browse" onTabClick={onTabClickMock}>
@@ -52,7 +77,7 @@ describe('Tabs', () => {
       </TabsContainer>,
     );
 
-    fireEvent.click(screen.getByRole('tab', { name: /Overview/i }));
-    expect(clickedTabValue).toBe('overview'); // Validate that the clicked tab value is correct
+    await userEvent.click(screen.getByRole('tab', { name: /Overview/i }));
+    expect(onTabClickMock).toBeCalledWith('overview'); // Validate that the clicked tab value is correct
   });
 });
