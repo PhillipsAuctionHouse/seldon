@@ -61,11 +61,15 @@ $lg: #{$px}-input--lg;
   // Disabled
   &--disabled {
     color: $keyline-gray;
+    cursor: default;
 
     .#{$px}-input__label,
     .#{$px}-input__input {
       color: inherit;
-      cursor: not-allowed;
+    }
+    .#{$px}-input__label:hover,
+    .#{$px}-input__input:hover {
+      cursor: default;
     }
   }
 
