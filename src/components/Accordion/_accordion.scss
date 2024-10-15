@@ -2,12 +2,10 @@
 
 .#{$px}-accordion {
   border-top: 1px solid $light-gray;
-  margin-bottom: 10px;
   width: 100%;
 }
 
 .#{$px}-accordion-item {
-  padding: $spacing-sm 0;
   width: 100%;
 
   &--large {
@@ -28,7 +26,11 @@
   }
 
   &__content {
-    padding: $spacing-sm 0;
+    padding-bottom: $spacing-md;
+
+    &--locked {
+      padding-bottom: $spacing-sm;
+    }
   }
 
   &__content--lg {
@@ -71,13 +73,11 @@
     from {
       height: 0;
       opacity: 0;
-      padding: 0;
     }
 
     to {
       height: var(--radix-accordion-content-height);
       opacity: 1;
-      padding: $spacing-sm 0;
     }
   }
 
@@ -85,7 +85,6 @@
     from {
       height: var(--radix-accordion-content-height);
       opacity: 1;
-      padding: $spacing-sm 0;
     }
 
     to {
@@ -101,6 +100,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: $spacing-sm 0;
 
   &--hoverable {
     cursor: pointer;
