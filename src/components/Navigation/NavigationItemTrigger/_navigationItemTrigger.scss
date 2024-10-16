@@ -46,6 +46,7 @@
         max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
         opacity 0.2s cubic-bezier(0.65, 0, 0.35, 1);
       width: 100%;
+
       .#{$px}-nav__list__section {
         opacity: 0;
         transition: opacity 0.3s cubic-bezier(0.33, 1, 0.68, 1) 0.2s;
@@ -65,6 +66,10 @@
         opacity: 1;
       }
     }
+  }
+
+  &__submenu--mobile.#{$px}-nav__list {
+    padding: 0;
   }
 
   @include isHeaderDesktop {
