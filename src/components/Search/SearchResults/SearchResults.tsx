@@ -2,6 +2,7 @@ import * as React from 'react';
 import { px } from '../../../utils';
 import Link from '../../Link/Link';
 import { LinkVariants } from '../../Link';
+import { HeaderContext } from '../../../site-furniture/Header/Header';
 
 export interface SearchResult {
   id: string;
@@ -26,6 +27,7 @@ const SearchResults = ({
   onKeyDown,
   userInputValue = '',
 }: React.PropsWithChildren<SearchResultsProps>) => {
+  const headerContext = React.useContext(HeaderContext);
   const hasResults = Array.isArray(autoCompleteResults) && autoCompleteResults.length > 0;
 
   function formatSearchLabel(label: string, searchQuery: string): React.ReactNode {
@@ -43,7 +45,12 @@ const SearchResults = ({
           autoCompleteResults.map((result) => {
             return (
               <li key={result.id} className={`${px}-search__result`}>
-                <Link href={result.url} onKeyDown={onKeyDown} variant={LinkVariants.snwFlyoutLink}>
+                <Link
+                  href={result.url}
+                  onKeyDown={onKeyDown}
+                  variant={LinkVariants.snwFlyoutLink}
+                  onClick={() => headerContext.setIsSearchExpanded(false)}
+                >
                   <span className="${px}-search__result__label">{formatSearchLabel(result.label, userInputValue)}</span>
                 </Link>
               </li>
