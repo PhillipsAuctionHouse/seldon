@@ -1,3 +1,10 @@
+## [1.77.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.77.2...v1.77.3) (2024-10-16)
+
+
+### Bug Fixes
+
+* **header:** L3-4097 - fix padding and transition bug ([#376](https://github.com/PhillipsAuctionHouse/seldon/issues/376)) ([4251d01](https://github.com/PhillipsAuctionHouse/seldon/commit/4251d012cc43a97a3f43e43a02c2f6323467fdac))
+
 ## [1.77.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.77.1...v1.77.2) (2024-10-15)
 
 
