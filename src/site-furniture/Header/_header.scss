@@ -139,6 +139,10 @@
         display: unset;
         left: -100%;
       }
+
+      .#{$px}-nav__list {
+        padding-top: $spacing-md;
+      }
     }
 
     @include isHeaderDesktop {
