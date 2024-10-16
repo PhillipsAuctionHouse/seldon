@@ -89,7 +89,12 @@ const AccordionHeader = ({
     <Accordion.Trigger
       data-disabled={disable}
       asChild
-      className={classnames(baseClassName, { [`${baseClassName}--hoverable`]: !disable }, className)}
+      className={classnames(
+        baseClassName,
+        { [`${baseClassName}--large`]: isLargeVariation },
+        { [`${baseClassName}--hoverable`]: !disable },
+        className,
+      )}
     >
       <div data-testid={`${id}-trigger`}>
         <div className={classnames(`${baseClassName}__text`, { [`${baseClassName}__text--lg`]: isLargeVariation })}>
@@ -112,7 +117,7 @@ const AccordionContent = ({
   className,
 }: AccordionContentType) =>
   disable && children ? (
-    <div>{children}</div>
+    <div className={`${baseClassName}__content--locked`}>{children}</div>
   ) : (
     <Accordion.Content
       asChild
@@ -145,7 +150,9 @@ const AccordionItem = ({
     <Accordion.Item
       disabled={isLocked}
       value={id}
-      className={classnames(accordionItemClassName, { [`${accordionItemClassName}__border-bottom`]: !isLastItem })}
+      className={classnames(accordionItemClassName, {
+        [`${accordionItemClassName}__border-bottom`]: !isLastItem,
+      })}
       {...props}
     >
       <AccordionHeader

@@ -47,7 +47,7 @@ export const HeaderContext = createContext<HeaderContextType>(defaultHeaderConte
 /**
  * ## Overview
  *
- * This component allows navigation, search, login/logout, and language selection and supports desktop and mobile layouts.  It requires the <SeldonProvider> to be wrapped around it to support SSR Media Queries.
+ * This component allows navigation, search, login/logout, and language selection and supports desktop and mobile layouts.  It requires the `<SeldonProvider>` to be wrapped around it to support SSR Media Queries.
  *
  * [Figma Link Mobile](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/EASEL-Compendium%3A-Tokens%2C-Components-%26-Patterns?node-id=10877-33417&node-type=INSTANCE&m=dev)
  *

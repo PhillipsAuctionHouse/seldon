@@ -25,7 +25,9 @@
     }
     .#{$px}-accordion-item {
       border-top: 1px solid $light-gray;
-      padding: $spacing-sm 0;
+      .#{$px}-nav__list {
+        padding: 0;
+      }
 
       &-label {
         opacity: 1;

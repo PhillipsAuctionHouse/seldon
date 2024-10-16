@@ -2,13 +2,15 @@
 
 .#{$px}-accordion {
   border-top: 1px solid $light-gray;
-  margin-bottom: 10px;
   width: 100%;
 }
 
 .#{$px}-accordion-item {
-  padding: $spacing-sm 0;
   width: 100%;
+
+  &--large {
+    padding: $spacing-md 0;
+  }
 
   svg {
     max-width: unset;
@@ -24,7 +26,11 @@
   }
 
   &__content {
-    margin: $spacing-sm 0;
+    padding-bottom: $spacing-md;
+
+    &--locked {
+      padding-bottom: $spacing-sm;
+    }
   }
 
   &__content--lg {
@@ -84,6 +90,7 @@
     to {
       height: 0;
       opacity: 0;
+      padding: 0;
     }
   }
 }
@@ -93,6 +100,11 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: $spacing-sm 0;
+
+  &--large {
+    padding: $spacing-md 0;
+  }
 
   &--hoverable {
     cursor: pointer;
