@@ -1,6 +1,9 @@
 // Utils
 export * from './utils';
 
+// Icons
+export * from './assets/icons';
+
 // 📑 Pages
 export { default as Page } from './pages/Page';
 
