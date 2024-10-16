@@ -89,7 +89,12 @@ const AccordionHeader = ({
     <Accordion.Trigger
       data-disabled={disable}
       asChild
-      className={classnames(baseClassName, { [`${baseClassName}--hoverable`]: !disable }, className)}
+      className={classnames(
+        baseClassName,
+        { [`${baseClassName}--large`]: isLargeVariation },
+        { [`${baseClassName}--hoverable`]: !disable },
+        className,
+      )}
     >
       <div data-testid={`${id}-trigger`}>
         <div className={classnames(`${baseClassName}__text`, { [`${baseClassName}__text--lg`]: isLargeVariation })}>
@@ -147,7 +152,6 @@ const AccordionItem = ({
       value={id}
       className={classnames(accordionItemClassName, {
         [`${accordionItemClassName}__border-bottom`]: !isLastItem,
-        [`${accordionItemClassName}--large`]: isLargeVariation,
       })}
       {...props}
     >
