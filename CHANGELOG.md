@@ -1,3 +1,10 @@
+## [1.77.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.77.3...v1.77.4) (2024-10-16)
+
+
+### Bug Fixes
+
+* **header:** L3-4097 mobile header top padding was missing ([#379](https://github.com/PhillipsAuctionHouse/seldon/issues/379)) ([a9eef9b](https://github.com/PhillipsAuctionHouse/seldon/commit/a9eef9b8c84249b787749ac50594e9bbe4a1e343))
+
 ## [1.77.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.77.2...v1.77.3) (2024-10-16)
 
 
