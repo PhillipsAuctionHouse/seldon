@@ -16,8 +16,9 @@ export interface SearchResultsProps extends React.HTMLAttributes<HTMLElement> {
   loadingText?: string;
   onKeyDown?: (event: React.KeyboardEvent<HTMLAnchorElement>) => void;
   userInputValue?: string;
-  showSearchResults: (value: boolean) => void;
+  closeSearch: (value: boolean) => void;
 }
+
 const SearchResults = ({
   autoCompleteResults = [],
   isLoading,
@@ -25,7 +26,7 @@ const SearchResults = ({
   loadingText = 'Loading...',
   onKeyDown,
   userInputValue = '',
-  showSearchResults,
+  closeSearch,
 }: React.PropsWithChildren<SearchResultsProps>) => {
   const hasResults = Array.isArray(autoCompleteResults) && autoCompleteResults.length > 0;
 
@@ -43,9 +44,14 @@ const SearchResults = ({
         {hasResults &&
           autoCompleteResults.map((result, i) => {
             return (
-              <li key={result.id} className={`${px}-search__result`} onClick={() => showSearchResults(false)}>
-                <Link href={result.url} onKeyDown={onKeyDown} variant={LinkVariants.snwFlyoutLink}>
-                  <span data-testid={`search-result-${i}`} className={`${px}-search__result__label`}>
+              <li key={result.id} className={`${px}-search__result`}>
+                <Link
+                  href={result.url}
+                  onKeyDown={onKeyDown}
+                  onClick={() => closeSearch(false)}
+                  variant={LinkVariants.snwFlyoutLink}
+                >
+                  <span data-testid={`search-result-${i}`} className="${px}-search__result__label">
                     {formatSearchLabel(result.label, userInputValue)}
                   </span>
                 </Link>
