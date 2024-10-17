@@ -1,8 +1,8 @@
 import { Meta } from '@storybook/react';
 import SaleHeaderBanner, { SaleHeaderBannerProps } from './SaleHeaderBanner';
 import { AuctionState } from './types';
-import SaleHeaderCountdown from './SaleHeaderCountdown';
 import SaleHeaderBrowseAuctions from './SaleHeaderBrowseAuctions';
+import { Countdown } from '../../components/Countdown';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -80,7 +80,7 @@ export const OpenForBidding = (props: SaleHeaderBannerProps) => (
     location="New York"
     auctionState={AuctionState.openForBidding}
   >
-    <SaleHeaderCountdown />
+    <Countdown endDate={new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString()} />
   </SaleHeaderBanner>
 );
 

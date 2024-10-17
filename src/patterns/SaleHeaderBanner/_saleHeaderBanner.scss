@@ -23,17 +23,6 @@
     padding: $spacing-md 0;
   }
 
-  // update when adding in actual countdown timer
-  &__countdown-container {
-    align-items: center;
-    border-bottom: 1px solid $light-gray;
-    display: flex;
-    gap: $spacing-sm;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    width: 100%;
-  }
-
   &__location {
     font-variation-settings: 'wght' 600;
     margin: $margin-xsm 0;
