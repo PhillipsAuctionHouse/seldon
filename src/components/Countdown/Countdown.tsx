@@ -109,22 +109,34 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
           <span>{label}</span>
           {timeLeft.days > 0 && (
             <span className={`${baseClassName}__time-item`}>
-              <span>{timeLeft.days}</span> <span>{daysLabel}</span>
+              <span className={`${baseClassName}__time-item--numbers`}>
+                {timeLeft.days.toString().padStart(2, '0')}
+              </span>{' '}
+              <span>{daysLabel}</span>
             </span>
           )}
           {(timeLeft.hours > 0 || (timeLeft.days > 0 && timeLeft.hours === 0)) && (
             <span className={`${baseClassName}__time-item`}>
-              <span>{timeLeft.hours}</span> <span>{hoursLabel}</span>
+              <span className={`${baseClassName}__time-item--numbers`}>
+                {timeLeft.hours.toString().padStart(2, '0')}
+              </span>{' '}
+              <span>{hoursLabel}</span>
             </span>
           )}
           {timeLeft.days <= 0 && (
             <span className={`${baseClassName}__time-item`}>
-              <span>{timeLeft.minutes}</span> <span>{minutesLabel}</span>
+              <span className={`${baseClassName}__time-item--numbers`}>
+                {timeLeft.minutes.toString().padStart(2, '0')}
+              </span>{' '}
+              <span>{minutesLabel}</span>
             </span>
           )}
           {timeLeft.hours <= 0 && timeLeft.days === 0 && (
             <span className={`${baseClassName}__time-item`}>
-              <span>{timeLeft.seconds}</span> <span>{secondsLabel}</span>
+              <span className={`${baseClassName}__time-item--numbers`}>
+                {timeLeft.seconds.toString().padStart(2, '0')}
+              </span>{' '}
+              <span>{secondsLabel}</span>
             </span>
           )}
         </div>

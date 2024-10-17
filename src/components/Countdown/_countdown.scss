@@ -25,5 +25,11 @@
   &__time-item {
     display: flex;
     gap: $spacing-micro;
+
+    &--numbers {
+      display: flex;
+      justify-content: center;
+      width: 0.75rem;
+    }
   }
 }
