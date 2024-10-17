@@ -2,7 +2,6 @@ import * as React from 'react';
 import { px } from '../../../utils';
 import Link from '../../Link/Link';
 import { LinkVariants } from '../../Link';
-import { HeaderContext } from '../../../site-furniture/Header/Header';
 
 export interface SearchResult {
   id: string;
@@ -17,8 +16,8 @@ export interface SearchResultsProps extends React.HTMLAttributes<HTMLElement> {
   loadingText?: string;
   onKeyDown?: (event: React.KeyboardEvent<HTMLAnchorElement>) => void;
   userInputValue?: string;
+  showSearchResults: (value: boolean) => void;
 }
-
 const SearchResults = ({
   autoCompleteResults = [],
   isLoading,
@@ -26,8 +25,8 @@ const SearchResults = ({
   loadingText = 'Loading...',
   onKeyDown,
   userInputValue = '',
+  showSearchResults,
 }: React.PropsWithChildren<SearchResultsProps>) => {
-  const headerContext = React.useContext(HeaderContext);
   const hasResults = Array.isArray(autoCompleteResults) && autoCompleteResults.length > 0;
 
   function formatSearchLabel(label: string, searchQuery: string): React.ReactNode {
@@ -42,16 +41,14 @@ const SearchResults = ({
       <ul data-testid="search-results" className={`${px}-search__results-container`}>
         {isLoading ? <li className={`${px}-search__result`}>{loadingText}</li> : null}
         {hasResults &&
-          autoCompleteResults.map((result) => {
+          autoCompleteResults.map((result, i) => {
+            i++;
             return (
-              <li key={result.id} className={`${px}-search__result`}>
-                <Link
-                  href={result.url}
-                  onKeyDown={onKeyDown}
-                  variant={LinkVariants.snwFlyoutLink}
-                  onClick={() => headerContext.setIsSearchExpanded(false)}
-                >
-                  <span className="${px}-search__result__label">{formatSearchLabel(result.label, userInputValue)}</span>
+              <li key={result.id} className={`${px}-search__result`} onClick={() => showSearchResults(false)}>
+                <Link href={result.url} onKeyDown={onKeyDown} variant={LinkVariants.snwFlyoutLink}>
+                  <span data-testid={`search-result-${i}`} className={`${px}-search__result__label`}>
+                    {formatSearchLabel(result.label, userInputValue)}
+                  </span>
                 </Link>
               </li>
             );

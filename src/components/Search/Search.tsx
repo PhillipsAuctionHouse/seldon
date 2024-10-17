@@ -192,6 +192,7 @@ const Search = ({
                 loadingText={loadingText}
                 onKeyDown={onKeyDown}
                 userInputValue={value}
+                showSearchResults={showSearch}
               >
                 <li key="viewAllSearchResults" className={`${baseClassName}__result`}>
                   <Link
