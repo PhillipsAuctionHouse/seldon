@@ -42,7 +42,6 @@ const SearchResults = ({
         {isLoading ? <li className={`${px}-search__result`}>{loadingText}</li> : null}
         {hasResults &&
           autoCompleteResults.map((result, i) => {
-            i++;
             return (
               <li key={result.id} className={`${px}-search__result`} onClick={() => showSearchResults(false)}>
                 <Link href={result.url} onKeyDown={onKeyDown} variant={LinkVariants.snwFlyoutLink}>

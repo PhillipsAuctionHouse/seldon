@@ -49,5 +49,5 @@ it('formats search label correctly based on user input', () => {
       showSearchResults={showSearchResultsMock}
     />,
   );
-  expect(screen.getByTestId('search-result-1').innerHTML).toContain('<strong>Page</strong> 1');
+  expect(screen.getByTestId('search-result-0').innerHTML).toContain('<strong>Page</strong> 1');
 });
