@@ -123,11 +123,7 @@ const Search = ({
 
   return (
     <div className={`${baseClassName}__container`}>
-      <div
-        onClick={() => headerContext.setIsSearchExpanded(true)}
-        className={`${baseClassName}__container__inner`}
-        ref={searchContainerRef}
-      >
+      <div className={`${baseClassName}__container__inner`} ref={searchContainerRef}>
         <Text variant={TextVariants.heading4} className={`${baseClassName}__container__inner__label`}>
           {searchButtonText}
         </Text>
@@ -192,6 +188,7 @@ const Search = ({
                 loadingText={loadingText}
                 onKeyDown={onKeyDown}
                 userInputValue={value}
+                closeSearch={showSearch}
               >
                 <li key="viewAllSearchResults" className={`${baseClassName}__result`}>
                   <Link
