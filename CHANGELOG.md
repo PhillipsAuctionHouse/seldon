@@ -1,3 +1,10 @@
+## [1.79.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.79.0...v1.79.1) (2024-10-18)
+
+
+### Bug Fixes
+
+* **search:** L3-4161 Search Close On Result Selection ([#380](https://github.com/PhillipsAuctionHouse/seldon/issues/380)) ([626aa19](https://github.com/PhillipsAuctionHouse/seldon/commit/626aa1984a4eaf1e5692670399123c568aea8f2e))
+
 # [1.79.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.78.0...v1.79.0) (2024-10-18)
 
 
