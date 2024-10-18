@@ -1,3 +1,10 @@
+# [1.79.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.78.0...v1.79.0) (2024-10-18)
+
+
+### Features
+
+* **navigationItemTrigger:** L3-4181 added scroll on dropdown ([#382](https://github.com/PhillipsAuctionHouse/seldon/issues/382)) ([dff7e92](https://github.com/PhillipsAuctionHouse/seldon/commit/dff7e92b4cc4bd16136aaa2269de36460664eda6))
+
 # [1.78.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.77.4...v1.78.0) (2024-10-16)
 
 
