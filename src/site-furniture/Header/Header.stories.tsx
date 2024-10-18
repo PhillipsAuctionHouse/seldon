@@ -120,6 +120,46 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
                   label="Editions & Works on Paper"
                 />
                 <NavigationItem
+                  badge="New York"
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.snwFlyoutLink}
+                  label="Design"
+                />
+                <NavigationItem
+                  badge="Geneva"
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.snwFlyoutLink}
+                  label="Reloaded: The Rebirth of Mechanical Watchmaking, 1980-1999"
+                />
+                <NavigationItem
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.snwFlyoutLink}
+                  label="Phillips Watches Online: The Geneva Sessions, Fall 2024"
+                />
+                <NavigationItem
+                  badge="Hong Kong"
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.snwFlyoutLink}
+                  label="Modern & Contemporary Art Evening Sale"
+                />
+                <NavigationItem
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.snwFlyoutLink}
+                  label="Damien Hirst: Online Auction"
+                />
+                <NavigationItem
+                  badge="Hong Kong"
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.snwFlyoutLink}
+                  label="New Now: Modern & Contemporary Art"
+                />
+                <NavigationItem
                   badge="London"
                   href="#"
                   navGroup="nav-link-start"

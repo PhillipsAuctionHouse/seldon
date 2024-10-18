@@ -55,12 +55,19 @@
 
     &--hovered &__submenu {
       left: 0;
-      max-height: 700px;
+      max-height: calc(90vh - #{$header-height});
       opacity: 1;
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+      overflow-y: scroll;
       pointer-events: all;
+      scrollbar-width: none; /* Firefox */
       transition:
         max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
         opacity 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+
+      &::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+      }
 
       .#{$px}-nav__list__section {
         opacity: 1;
