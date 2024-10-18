@@ -15,6 +15,10 @@ export interface HeaderProps extends ComponentProps<'header'> {
    */
   logo?: ReactElement<Component> | string;
   /**
+   * Logo href
+   */
+  logoHref?: string;
+  /**
    * Toggle open text
    */
   toggleOpenText?: string;
@@ -59,6 +63,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
   (
     {
       logo = <Logo />,
+      logoHref = '/',
       className,
       children,
       toggleOpenText = 'Open Menu',
@@ -96,7 +101,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
             <span /> {/** this is here so we can do transitions with pseudo icons */}
           </button>
           <h1 data-testid="header-logo" className={`${px}-header__logo`}>
-            <a href="/" aria-label={logoText}>
+            <a href={logoHref} aria-label={logoText}>
               {typeof logo === 'object' ? (
                 logo
               ) : (
