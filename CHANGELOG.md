@@ -1,3 +1,31 @@
+## [1.79.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.79.0...v1.79.1) (2024-10-18)
+
+
+### Bug Fixes
+
+* **search:** L3-4161 Search Close On Result Selection ([#380](https://github.com/PhillipsAuctionHouse/seldon/issues/380)) ([626aa19](https://github.com/PhillipsAuctionHouse/seldon/commit/626aa1984a4eaf1e5692670399123c568aea8f2e))
+
+# [1.79.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.78.0...v1.79.0) (2024-10-18)
+
+
+### Features
+
+* **navigationItemTrigger:** L3-4181 added scroll on dropdown ([#382](https://github.com/PhillipsAuctionHouse/seldon/issues/382)) ([dff7e92](https://github.com/PhillipsAuctionHouse/seldon/commit/dff7e92b4cc4bd16136aaa2269de36460664eda6))
+
+# [1.78.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.77.4...v1.78.0) (2024-10-16)
+
+
+### Features
+
+* **lotdetails:** L3-3295 heart & share icons, export icons ([#378](https://github.com/PhillipsAuctionHouse/seldon/issues/378)) ([aee88e2](https://github.com/PhillipsAuctionHouse/seldon/commit/aee88e200b1726041058fd12b9c5626f031b6dbf))
+
+## [1.77.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.77.3...v1.77.4) (2024-10-16)
+
+
+### Bug Fixes
+
+* **header:** L3-4097 mobile header top padding was missing ([#379](https://github.com/PhillipsAuctionHouse/seldon/issues/379)) ([a9eef9b](https://github.com/PhillipsAuctionHouse/seldon/commit/a9eef9b8c84249b787749ac50594e9bbe4a1e343))
+
 ## [1.77.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.77.2...v1.77.3) (2024-10-16)
 
 
