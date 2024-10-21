@@ -105,7 +105,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
               {typeof logo === 'object' ? (
                 logo
               ) : (
-                <img alt="Phillips" data-testid="header-logo-img" src={logo as string} height="14" />
+                <img alt="Phillips" data-testid="header-logo-img" src={logo as string} />
               )}
             </a>
           </h1>
