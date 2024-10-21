@@ -1,3 +1,10 @@
+## [1.79.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.79.1...v1.79.2) (2024-10-21)
+
+
+### Bug Fixes
+
+* **textSymbol:** L3-4109 reduce size of estimate symbol ([#390](https://github.com/PhillipsAuctionHouse/seldon/issues/390)) ([ecf5e7f](https://github.com/PhillipsAuctionHouse/seldon/commit/ecf5e7f672e181c331bf7095afab562c535b2abe))
+
 ## [1.79.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.79.0...v1.79.1) (2024-10-18)
 
 
