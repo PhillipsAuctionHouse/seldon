@@ -1,3 +1,31 @@
+## [1.79.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.79.2...v1.79.3) (2024-10-22)
+
+
+### Bug Fixes
+
+* **pagination:** L3-4167 center align select on iOS ([#391](https://github.com/PhillipsAuctionHouse/seldon/issues/391)) ([b75aebb](https://github.com/PhillipsAuctionHouse/seldon/commit/b75aebb4fd4e719a71ac96b2ca8d7d2f0c8bb81e))
+
+## [1.79.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.79.1...v1.79.2) (2024-10-21)
+
+
+### Bug Fixes
+
+* **textSymbol:** L3-4109 reduce size of estimate symbol ([#390](https://github.com/PhillipsAuctionHouse/seldon/issues/390)) ([ecf5e7f](https://github.com/PhillipsAuctionHouse/seldon/commit/ecf5e7f672e181c331bf7095afab562c535b2abe))
+
+## [1.79.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.79.0...v1.79.1) (2024-10-18)
+
+
+### Bug Fixes
+
+* **search:** L3-4161 Search Close On Result Selection ([#380](https://github.com/PhillipsAuctionHouse/seldon/issues/380)) ([626aa19](https://github.com/PhillipsAuctionHouse/seldon/commit/626aa1984a4eaf1e5692670399123c568aea8f2e))
+
+# [1.79.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.78.0...v1.79.0) (2024-10-18)
+
+
+### Features
+
+* **navigationItemTrigger:** L3-4181 added scroll on dropdown ([#382](https://github.com/PhillipsAuctionHouse/seldon/issues/382)) ([dff7e92](https://github.com/PhillipsAuctionHouse/seldon/commit/dff7e92b4cc4bd16136aaa2269de36460664eda6))
+
 # [1.78.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.77.4...v1.78.0) (2024-10-16)
 
 
