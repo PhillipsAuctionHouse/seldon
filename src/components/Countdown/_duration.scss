@@ -1,0 +1,13 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-duration {
+  @include text($heading5);
+
+  display: flex;
+  gap: $spacing-micro;
+
+  &--fixed-width {
+    min-width: 1.75rem;
+    text-align: right;
+  }
+}

@@ -1,5 +1,7 @@
 import { Meta } from '@storybook/react';
 import Countdown, { CountdownProps } from './Countdown';
+import { addDays, addHours, addMinutes } from 'date-fns';
+import { CountdownVariants } from './types';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -8,25 +10,26 @@ const meta = {
 } satisfies Meta<typeof Countdown>;
 
 export default meta;
-export const Playground = (props: CountdownProps) => <Countdown {...props} />;
 
-// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-Playground.args = {
-  children: 'Hi There',
+const daysDate = addDays(new Date(), 3);
+const hoursDate = addHours(new Date(), 5);
+const minutesDate = addMinutes(new Date(), 20);
+
+export const Playground = (props: CountdownProps) => <Countdown {...props} endDateTime={daysDate} />;
+
+Playground.argTypes = {
+  locale: {
+    type: 'select',
+    options: ['en', 'zh'],
+  },
 };
 
-Playground.argTypes = {};
+export const Days = (props: CountdownProps) => <Countdown {...props} endDateTime={daysDate} />;
 
-const daysDate = new Date();
-const hoursDate = new Date();
-const minutesDate = new Date();
+export const Hours = (props: CountdownProps) => <Countdown {...props} endDateTime={hoursDate} />;
 
-const addDays = new Date(daysDate.setDate(daysDate.getDate() + 3)).toISOString();
-const addHours = new Date(hoursDate.setHours(hoursDate.getHours() + 5)).toISOString();
-const addMinutes = new Date(minutesDate.setMinutes(minutesDate.getMinutes() + 20)).toISOString();
+export const Minutes = (props: CountdownProps) => <Countdown {...props} endDateTime={minutesDate} />;
 
-export const Days = (props: CountdownProps) => <Countdown {...props} endDate={addDays} />;
-
-export const Hours = (props: CountdownProps) => <Countdown {...props} endDate={addHours} />;
-
-export const Minutes = (props: CountdownProps) => <Countdown {...props} endDate={addMinutes} />;
+export const Compact = (props: CountdownProps) => (
+  <Countdown {...props} endDateTime={minutesDate} variant={CountdownVariants.compact} />
+);

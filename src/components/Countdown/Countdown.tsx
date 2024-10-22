@@ -1,37 +1,34 @@
-import { ComponentProps, forwardRef, useCallback, useEffect, useState } from 'react';
+import { ComponentProps, forwardRef, useEffect, useState } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
+import { SupportedLanguages } from '../../types/commonTypes';
+import { differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds } from 'date-fns';
+import { zhHK, enUS } from 'date-fns/locale';
+import { CountdownVariants } from './types';
+import { Duration } from './Duration'; // Import the Duration component
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface CountdownProps extends ComponentProps<'div'> {
   /**
    * The date the countdown should end
    */
-  endDate: string;
+  endDateTime: Date;
   /**
    * Any descriptor to appear below the coundown
    */
   intervalDescription?: string;
   /**
-   * Text translation for days
-   */
-  daysLabel?: string;
-  /**
-   * Text translation for hours
-   */
-  hoursLabel?: string;
-  /**
-   * Text translation for minutes
-   */
-  minutesLabel?: string;
-  /**
-   * Text translation for seconds
-   */
-  secondsLabel?: string;
-  /**
    * Text translation for what the countdown is for
    */
   label?: string;
+  /**
+   * Locale to use to format date strings
+   */
+  locale?: SupportedLanguages;
+  /**
+   * Variant of the countdown
+   */
+  variant?: CountdownVariants;
 }
 /**
  * ## Overview
@@ -45,102 +42,50 @@ export interface CountdownProps extends ComponentProps<'div'> {
 const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
   (
     {
-      endDate,
+      endDateTime,
       label = 'Lots Close in',
-      daysLabel = 'Days',
-      hoursLabel = 'Hours',
-      minutesLabel = 'Minutes',
-      secondsLabel = 'Seconds',
-      intervalDescription = 'Lots Close in 2-minute intervals',
+      intervalDescription = 'Lots Close in 1-minute intervals',
       className,
+      locale = 'en',
+      variant = CountdownVariants.default,
       ...props
     },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Countdown');
+    const [currentDateTime, setCurrentDateTime] = useState(new Date());
 
-    const calculateTimeLeft = useCallback(() => {
-      const targetTime = new Date(endDate).getTime();
-      const currentTime = new Date().getTime();
-      const difference = targetTime - currentTime;
+    const dateFnsLocale = locale === SupportedLanguages.zh ? zhHK : enUS;
 
-      // Adjust for GMT offsets and Daylight Saving Time
-      const targetDate = new Date(endDate);
-      const currentDate = new Date();
-
-      const targetOffset = targetDate.getTimezoneOffset();
-      const currentOffset = currentDate.getTimezoneOffset();
-
-      const offsetDifference = (currentOffset - targetOffset) * 60 * 1000;
-      const adjustedDifference = difference + offsetDifference;
-
-      let timeLeft = {
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-      };
-
-      if (adjustedDifference > 0) {
-        timeLeft = {
-          days: Math.floor(adjustedDifference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((adjustedDifference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((adjustedDifference / 1000 / 60) % 60),
-          seconds: Math.floor((adjustedDifference / 1000) % 60),
-        };
-      }
-
-      return timeLeft;
-    }, [endDate]);
-
-    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+    const timeLeft = {
+      days: differenceInDays(endDateTime, currentDateTime),
+      hours: differenceInHours(endDateTime, currentDateTime) % 24,
+      minutes: differenceInMinutes(endDateTime, currentDateTime) % 60,
+      seconds: (differenceInSeconds(endDateTime, currentDateTime) % 60) % 60,
+    };
 
     useEffect(() => {
       const timer = setInterval(() => {
-        setTimeLeft(calculateTimeLeft());
+        setCurrentDateTime(new Date());
       }, 1000);
 
       return () => clearInterval(timer);
-    }, [calculateTimeLeft, endDate]);
+    }, [endDateTime]);
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         <div className={`${baseClassName}__countdown-container`}>
           <span>{label}</span>
-          {timeLeft.days > 0 && (
-            <span className={`${baseClassName}__time-item`}>
-              <span className={`${baseClassName}__time-item--numbers`}>
-                {timeLeft.days.toString().padStart(2, '0')}
-              </span>{' '}
-              <span>{daysLabel}</span>
-            </span>
-          )}
-          {(timeLeft.hours > 0 || (timeLeft.days > 0 && timeLeft.hours === 0)) && (
-            <span className={`${baseClassName}__time-item`}>
-              <span className={`${baseClassName}__time-item--numbers`}>
-                {timeLeft.hours.toString().padStart(2, '0')}
-              </span>{' '}
-              <span>{hoursLabel}</span>
-            </span>
-          )}
-          {timeLeft.days <= 0 && (
-            <span className={`${baseClassName}__time-item`}>
-              <span className={`${baseClassName}__time-item--numbers`}>
-                {timeLeft.minutes.toString().padStart(2, '0')}
-              </span>{' '}
-              <span>{minutesLabel}</span>
-            </span>
-          )}
-          {timeLeft.hours <= 0 && timeLeft.days === 0 && (
-            <span className={`${baseClassName}__time-item`}>
-              <span className={`${baseClassName}__time-item--numbers`}>
-                {timeLeft.seconds.toString().padStart(2, '0')}
-              </span>{' '}
-              <span>{secondsLabel}</span>
-            </span>
-          )}
+          {timeLeft.days > 0 ? <Duration duration={timeLeft} unit="days" locale={dateFnsLocale} /> : undefined}
+          {timeLeft.days > 0 || timeLeft.hours > 0 ? (
+            <Duration duration={timeLeft} unit="hours" locale={dateFnsLocale} />
+          ) : undefined}
+          {timeLeft.days === 0 ? <Duration duration={timeLeft} unit="minutes" locale={dateFnsLocale} /> : undefined}
+          {timeLeft.days === 0 && timeLeft.hours === 0 ? (
+            <Duration duration={timeLeft} unit="seconds" locale={dateFnsLocale} />
+          ) : undefined}
         </div>
-        <span>{intervalDescription}</span>
+        {variant === CountdownVariants.default ? <span>{intervalDescription}</span> : undefined}
       </div>
     );
   },
