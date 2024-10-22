@@ -70,9 +70,9 @@ const HeroBanner = ({
             {date ? <span>{date}</span> : null}
           </p>
         ) : null}
-        <Text variant={TextVariants.heading1}>{headerText}</Text>
-        {subHeadText ? <Text variant={TextVariants.heading2}>{subHeadText}</Text> : null}
-        {association ? <p>{association}</p> : null}
+        <Text variant={TextVariants.snwHeadingHero1}>{headerText}</Text>
+        {subHeadText ? <Text variant={TextVariants.snwHeadingHero2}>{subHeadText}</Text> : null}
+        {association ? <p className={`${baseClass}__after-head`}>{association}</p> : null}
       </span>
     </header>
   );

@@ -135,5 +135,13 @@
     &-snw-flyout-link {
       @include text($snwFlyoutLink);
     }
+
+    &-snw-heading-hero1 {
+      @include text($snwHeadingHero1);
+    }
+
+    &-snw-heading-hero2 {
+      @include text($snwHeadingHero2);
+    }
   }
 }
