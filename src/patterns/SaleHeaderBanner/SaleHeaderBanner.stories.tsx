@@ -3,7 +3,7 @@ import SaleHeaderBanner, { SaleHeaderBannerProps } from './SaleHeaderBanner';
 import { AuctionState } from './types';
 import SaleHeaderBrowseAuctions from './SaleHeaderBrowseAuctions';
 import { Countdown } from '../../components/Countdown';
-import { addDays } from 'date-fns';
+import { addMinutes } from 'date-fns';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -81,7 +81,7 @@ export const OpenForBidding = (props: SaleHeaderBannerProps) => (
     location="New York"
     auctionState={AuctionState.openForBidding}
   >
-    <Countdown endDateTime={addDays(new Date(), 2)} />
+    <Countdown endDateTime={addMinutes(new Date(), 20)} />
   </SaleHeaderBanner>
 );
 

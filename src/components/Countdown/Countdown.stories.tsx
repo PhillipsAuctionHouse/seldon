@@ -15,7 +15,7 @@ const daysDate = addDays(new Date(), 3);
 const hoursDate = addHours(new Date(), 5);
 const minutesDate = addMinutes(new Date(), 20);
 
-export const Playground = (props: CountdownProps) => <Countdown {...props} endDateTime={daysDate} />;
+export const Playground = (props: CountdownProps) => <Countdown {...props} endDateTime={minutesDate} />;
 
 Playground.argTypes = {
   locale: {
