@@ -1,3 +1,10 @@
+## [1.79.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.79.2...v1.79.3) (2024-10-22)
+
+
+### Bug Fixes
+
+* **pagination:** L3-4167 center align select on iOS ([#391](https://github.com/PhillipsAuctionHouse/seldon/issues/391)) ([b75aebb](https://github.com/PhillipsAuctionHouse/seldon/commit/b75aebb4fd4e719a71ac96b2ca8d7d2f0c8bb81e))
+
 ## [1.79.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.79.1...v1.79.2) (2024-10-21)
 
 
