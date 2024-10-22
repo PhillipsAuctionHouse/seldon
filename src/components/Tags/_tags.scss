@@ -1,3 +1,11 @@
 @use '#scss/allPartials' as *;
 
-.#{$px}-tags {}
+.#{$px}-tagsList {
+    display: flex;
+    flex-direction: row;
+    gap: $spacing-sm;
+}
+
+.#{$px}-left-arrow {
+    transform: scaleX(-1);
+}
