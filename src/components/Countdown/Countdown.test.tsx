@@ -27,6 +27,11 @@ describe('Countdown', () => {
     expect(screen.getByText('Closing soon')).toBeInTheDocument();
   });
 
+  it('checks aria-label', () => {
+    render(<Countdown endDateTime={fiveMinutesFromNow} />);
+    expect(screen.getByRole('timer', { name: 'Lots Close in' })).toBeInTheDocument();
+  });
+
   it('renders days and hours when more than a day left', () => {
     render(<Countdown endDateTime={threeDaysFromNow} />);
     expect(screen.getByText('days')).toBeInTheDocument();

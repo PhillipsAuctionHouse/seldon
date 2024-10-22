@@ -74,7 +74,7 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        <div className={`${baseClassName}__countdown-container`}>
+        <div className={`${baseClassName}__countdown-container`} role="timer" aria-label={label}>
           <span>{label}</span>
           {timeLeft.days > 0 ? <Duration duration={timeLeft} unit="days" locale={dateFnsLocale} /> : undefined}
           {timeLeft.days > 0 || timeLeft.hours > 0 ? (
