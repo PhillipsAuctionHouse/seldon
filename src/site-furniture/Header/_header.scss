@@ -83,11 +83,6 @@
 
     @include isHeaderDesktop {
       padding-top: 0;
-
-      svg {
-        height: 25.73px; // 25.73px is the height of the logo's container to make logo 20px
-        width: 100%;
-      }
     }
   }
 

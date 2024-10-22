@@ -2,7 +2,7 @@
 
 .#{$px}-hero-banner {
   align-items: center;
-  background: linear-gradient(rgba(0, 0, 0, 50%), rgba(0, 0, 0, 50%)), var(--background);
+  background: var(--gradient), var(--background);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -25,7 +25,7 @@
     padding: 1.875rem 0.9375rem;
 
     &::before {
-      background: linear-gradient(rgba(0, 0, 0, 50%), rgba(0, 0, 0, 50%)), var(--background);
+      background: var(--gradient), var(--background);
       background-position: center center;
       background-repeat: no-repeat;
       background-size: cover;
