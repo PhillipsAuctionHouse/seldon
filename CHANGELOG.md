@@ -1,3 +1,10 @@
+# [1.80.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.79.3...v1.80.0) (2024-10-22)
+
+
+### Features
+
+* **header:** L3-4227 header changes ([#392](https://github.com/PhillipsAuctionHouse/seldon/issues/392)) ([8c70d16](https://github.com/PhillipsAuctionHouse/seldon/commit/8c70d16d09601f0d2ef44ee5cd69ab20b28af9ff))
+
 ## [1.79.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.79.2...v1.79.3) (2024-10-22)
 
 
