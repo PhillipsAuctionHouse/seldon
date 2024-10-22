@@ -223,4 +223,16 @@
     line-height: $snw-flyout-link-line-height;
     text-transform: capitalize;
   }
+
+  @if $token == 'snwHeadingHero1' {
+    @include hText($snw-heading-hero-size1, $line-height: $snw-heading-hero-line-height1, $transform-style: uppercase);
+
+    text-align: center;
+  }
+
+  @if $token == 'snwHeadingHero2' {
+    @include hText($snw-heading-hero-size2, $line-height: $snw-heading-hero-line-height2, $transform-style: uppercase);
+
+    text-align: center;
+  }
 }

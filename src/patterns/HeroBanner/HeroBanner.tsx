@@ -29,6 +29,10 @@ export interface HeroBannerProps extends HTMLAttributes<HTMLDivElement> {
    */
   background?: string;
   /**
+   * What gradient to use
+   */
+  gradient?: string;
+  /**
    * Unique id for component testing
    */
   id?: string;
@@ -51,6 +55,7 @@ const HeroBanner = ({
   subHeadText,
   association,
   background,
+  gradient = 'linear-gradient(rgba(0, 0, 0, 50%), rgba(0, 0, 0, 50%))',
   className,
   ...props
 }: HeroBannerProps) => {
@@ -60,7 +65,7 @@ const HeroBanner = ({
     <header
       {...commonProps}
       className={classnames(baseClass, className)}
-      style={{ '--background': background } as React.CSSProperties}
+      style={{ '--background': background, '--gradient': gradient } as React.CSSProperties}
       {...props}
     >
       <span className={`${baseClass}__content-wrapper`}>
@@ -70,9 +75,9 @@ const HeroBanner = ({
             {date ? <span>{date}</span> : null}
           </p>
         ) : null}
-        <Text variant={TextVariants.heading1}>{headerText}</Text>
-        {subHeadText ? <Text variant={TextVariants.heading2}>{subHeadText}</Text> : null}
-        {association ? <p>{association}</p> : null}
+        <Text variant={TextVariants.snwHeadingHero1}>{headerText}</Text>
+        {subHeadText ? <Text variant={TextVariants.snwHeadingHero2}>{subHeadText}</Text> : null}
+        {association ? <p className={`${baseClass}__after-head`}>{association}</p> : null}
       </span>
     </header>
   );

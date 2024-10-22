@@ -75,8 +75,6 @@ describe('Header with logo', () => {
   it('should render the logo as an image', () => {
     render(<Header logo={LogoIMG} />);
     const logoElement = screen.getByTestId('header-logo');
-    expect(logoElement).toContainHTML(
-      `<img  alt="Phillips" data-testid="header-logo-img" src=${LogoIMG} height="14" />`,
-    );
+    expect(logoElement).toContainHTML(`<img  alt="Phillips" data-testid="header-logo-img" src=${LogoIMG} />`);
   });
 });
