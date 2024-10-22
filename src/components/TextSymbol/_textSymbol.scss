@@ -1,12 +1,14 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-text-symbol {
+  font-family: Montserrat, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
   &--estimation {
     margin-left: 0.25rem;
   }
 
   &--lotNumber {
-    font-size: 60%;
+    font-size: 65%;
     margin-left: $spacing-xsm;
     vertical-align: super;
   }

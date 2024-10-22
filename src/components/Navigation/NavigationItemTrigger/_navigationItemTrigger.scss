@@ -46,6 +46,7 @@
         max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
         opacity 0.2s cubic-bezier(0.65, 0, 0.35, 1);
       width: 100%;
+
       .#{$px}-nav__list__section {
         opacity: 0;
         transition: opacity 0.3s cubic-bezier(0.33, 1, 0.68, 1) 0.2s;
@@ -54,17 +55,28 @@
 
     &--hovered &__submenu {
       left: 0;
-      max-height: 700px;
+      max-height: calc(90vh - #{$header-height});
       opacity: 1;
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+      overflow-y: scroll;
       pointer-events: all;
+      scrollbar-width: none; /* Firefox */
       transition:
         max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
         opacity 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+
+      &::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+      }
 
       .#{$px}-nav__list__section {
         opacity: 1;
       }
     }
+  }
+
+  &__submenu--mobile.#{$px}-nav__list {
+    padding: 0;
   }
 
   @include isHeaderDesktop {

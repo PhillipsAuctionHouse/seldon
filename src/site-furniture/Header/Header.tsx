@@ -15,6 +15,10 @@ export interface HeaderProps extends ComponentProps<'header'> {
    */
   logo?: ReactElement<Component> | string;
   /**
+   * Logo href
+   */
+  logoHref?: string;
+  /**
    * Toggle open text
    */
   toggleOpenText?: string;
@@ -47,7 +51,7 @@ export const HeaderContext = createContext<HeaderContextType>(defaultHeaderConte
 /**
  * ## Overview
  *
- * This component allows navigation, search, login/logout, and language selection and supports desktop and mobile layouts.  It requires the <SeldonProvider> to be wrapped around it to support SSR Media Queries.
+ * This component allows navigation, search, login/logout, and language selection and supports desktop and mobile layouts.  It requires the `<SeldonProvider>` to be wrapped around it to support SSR Media Queries.
  *
  * [Figma Link Mobile](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/EASEL-Compendium%3A-Tokens%2C-Components-%26-Patterns?node-id=10877-33417&node-type=INSTANCE&m=dev)
  *
@@ -59,6 +63,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
   (
     {
       logo = <Logo />,
+      logoHref = '/',
       className,
       children,
       toggleOpenText = 'Open Menu',
@@ -96,11 +101,11 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
             <span /> {/** this is here so we can do transitions with pseudo icons */}
           </button>
           <h1 data-testid="header-logo" className={`${px}-header__logo`}>
-            <a href="/" aria-label={logoText}>
+            <a href={logoHref} aria-label={logoText}>
               {typeof logo === 'object' ? (
                 logo
               ) : (
-                <img alt="Phillips" data-testid="header-logo-img" src={logo as string} height="14" />
+                <img alt="Phillips" data-testid="header-logo-img" src={logo as string} />
               )}
             </a>
           </h1>

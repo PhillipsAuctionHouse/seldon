@@ -34,15 +34,17 @@
     position: relative;
     text-align: center;
 
-    &:hover::after,
-    &:focus-visible::after {
-      background: $pure-black;
-      bottom: -1px;
-      content: '';
-      height: 1px;
-      left: 0;
-      position: absolute;
-      right: 0;
+    @include media($breakpoint-md) {
+      &:hover::after,
+      &:focus-visible::after {
+        background: $pure-black;
+        bottom: -1px;
+        content: '';
+        height: 1px;
+        left: 0;
+        position: absolute;
+        right: 0;
+      }
     }
   }
 

@@ -58,6 +58,7 @@ export const AccordionLarge = (props: AccordionProps) => (
         isLastItem={index === arr?.length - 1}
         key={`accordion-key-${item?.label}`}
         id={`accordion-item-${index}`}
+        hasTransition
       >
         {item?.children}
       </AccordionItem>
@@ -93,6 +94,7 @@ const smallTextItems = [
     isLocked: false,
     label: 'Provenance',
     children: smallTextBlock,
+    hasTransition: true,
   },
   {
     isLocked: false,
@@ -121,7 +123,11 @@ export const AccordionSubmenu = (props: AccordionProps) => {
   const [currentLanguage, setCurrentLanguage] = useState('English');
   return (
     <Accordion {...props} id="accordion-item-submenu">
-      <AccordionItem id="languageselector" label={<NavigationItem label={currentLanguage}></NavigationItem>}>
+      <AccordionItem
+        variant={AccordionItemVariant.lg}
+        id="languageselector"
+        label={<NavigationItem label={currentLanguage}></NavigationItem>}
+      >
         <div style={{ paddingLeft: 'var(--spacing-sm)' }}>
           <NavigationItem
             label="English"

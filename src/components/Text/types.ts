@@ -22,4 +22,6 @@ export enum TextVariants {
   badge = 'badge',
   snwFlyoutLink = 'snwFlyoutLink',
   snwHeaderLink = 'snwHeaderLink',
+  snwHeadingHero1 = 'snwHeadingHero1',
+  snwHeadingHero2 = 'snwHeadingHero2',
 }

@@ -77,17 +77,12 @@
     padding-top: 6px; // small adjustment to center the logo
 
     svg {
-      height: 24px;
+      height: 25.73px; // 25.73px is the height of the logo's container to make logo 20px
       width: 100%;
     }
 
     @include isHeaderDesktop {
       padding-top: 0;
-
-      svg {
-        height: 28px;
-        width: 100%;
-      }
     }
   }
 
@@ -137,7 +132,11 @@
 
       &--closed {
         display: unset;
-        left: -100vw;
+        left: -100%;
+      }
+
+      .#{$px}-nav__list {
+        padding-top: $spacing-md;
       }
     }
 
@@ -149,13 +148,6 @@
       position: relative;
       top: 0;
       width: 100%;
-    }
-
-    .#{$px}-nav__item {
-      .#{$px}-link--snwHeaderLink {
-        align-content: center;
-        height: 100%;
-      }
     }
 
     .#{$px}-nav__item {
@@ -184,5 +176,11 @@
     // slightly larger in header mobile than default
     height: 1rem;
     width: 1.5rem;
+  }
+
+  @include isHeaderMobile {
+    .#{$px}-nav__list .#{$px}-nav__item:last-child .#{$px}-link--snwHeaderLink {
+      border-bottom: none;
+    }
   }
 }
