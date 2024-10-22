@@ -4,6 +4,7 @@ import { runCommonTests } from '../../utils/testUtils';
 import { vi } from 'vitest';
 import { CountdownVariants } from './types';
 import { addDays, addHours, addMinutes, addSeconds } from 'date-fns';
+import { SupportedLanguages } from '../../types/commonTypes';
 
 const fiveMinutesFromNow = addMinutes(new Date(), 5);
 const fiveHoursFromNow = addHours(new Date(), 5);
@@ -98,6 +99,15 @@ describe('Countdown', () => {
     render(<Countdown endDateTime={tenSecondsFromNow} variant={CountdownVariants.compact} />);
     expect(screen.getByText('minutes')).toBeInTheDocument();
     expect(screen.getByText('seconds')).toBeInTheDocument();
+    expect(screen.queryByText('Lots Close in 2-minute intervals')).not.toBeInTheDocument();
+  });
+  it('renders with chinese minutes', () => {
+    const tenSecondsFromNow = addSeconds(new Date(), 10);
+    render(
+      <Countdown endDateTime={tenSecondsFromNow} variant={CountdownVariants.compact} locale={SupportedLanguages.zh} />,
+    );
+    expect(screen.getByText('分钟')).toBeInTheDocument();
+    expect(screen.getByText('秒')).toBeInTheDocument();
     expect(screen.queryByText('Lots Close in 2-minute intervals')).not.toBeInTheDocument();
   });
 });

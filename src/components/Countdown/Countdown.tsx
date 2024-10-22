@@ -3,7 +3,7 @@ import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { SupportedLanguages } from '../../types/commonTypes';
 import { differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds } from 'date-fns';
-import { zhHK, enUS } from 'date-fns/locale';
+import { zhCN, enUS } from 'date-fns/locale';
 import { CountdownVariants } from './types';
 import { Duration } from './Duration'; // Import the Duration component
 
@@ -55,7 +55,7 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Countdown');
     const [currentDateTime, setCurrentDateTime] = useState(new Date());
 
-    const dateFnsLocale = locale === SupportedLanguages.zh ? zhHK : enUS;
+    const dateFnsLocale = locale === SupportedLanguages.zh ? zhCN : enUS;
 
     const timeLeft = {
       days: differenceInDays(endDateTime, currentDateTime),
