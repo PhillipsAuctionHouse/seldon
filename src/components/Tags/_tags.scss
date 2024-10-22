@@ -4,8 +4,74 @@
     display: flex;
     flex-direction: row;
     gap: $spacing-sm;
+    flex-wrap: wrap;
+
+    .#{$px}-tag-button {
+        border-radius: 6.25rem;
+        border: 1px solid $button-hover;
+        background-color: $pure-white;
+        height: 2rem;
+        padding: 0 0.25rem 0 0.875rem;
+        gap: 0;
+    }
+
+    .#{$px}-tag-text {
+        color: $button-hover;
+        text-align: center;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .#{$px}-tag-x {
+        height: 1.5rem;
+        width: 1.5rem;
+        color: $button-hover;
+        font-size: 0.75rem;
+
+        &:hover {
+            color: $pure-black;
+            background-color: $pure-white;
+        }
+
+        &:focus {
+            color: $pure-black;
+        }
+    }
 }
 
-.#{$px}-left-arrow {
-    transform: scaleX(-1);
+.#{$px}-tagsList-onClear-button {
+    display: flex;
+    margin-top: 0.25rem;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    .#{$px}-left-arrow {
+        transform: scaleX(-1);
+        height: 1.5rem;
+        width: 1.5rem;
+
+        &:hover {
+            background: $pure-white;
+
+            svg {
+                fill: $pure-black;
+
+                path {
+                    fill: $pure-black;
+                }
+            }
+        }
+
+    }
+
+    .#{$px}-tagsList-onClear-text {
+        color: $pure-black;
+        text-align: center;
+        font-size: 0.875rem;
+        font-weight: 600;
+        line-height: 1.5rem;
+    }
+
 }

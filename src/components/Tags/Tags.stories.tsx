@@ -21,7 +21,7 @@ const argTypes = {
         action: 'onClear',
     },
     playgroundWidth: {
-        control: { type: 'range', min: 200, max: 300 },
+        control: { type: 'range', min: 600 },
     },
 };
 export const Playground = ({ playgroundWidth, ...args }: StoryProps) => {
@@ -43,7 +43,7 @@ export const Playground = ({ playgroundWidth, ...args }: StoryProps) => {
 };
 
 Playground.args = {
-    playgroundWidth: 200,
+    playgroundWidth: 600,
     className: 'tags-test-class',
 };
 

@@ -15,6 +15,10 @@ export interface TagsListProps {
     */
     className?: string;
     /**
+    * Individual Tag class 
+    */
+    tagClassName?: string;
+    /**
     * List of tags to render
     */
     tagsList: string[]
@@ -48,11 +52,11 @@ const Tags = ({
     onRemove,
     tag,
 }: TagsProps) => {
-    return <Button className={className}>
+    return <Button className={classnames(`${px}-tag-button`, className)}>
         <>
-            <div>{tag}</div>
+            <div className={`${px}-tag-text`}>{tag}</div>
             <div onClick={() => onRemove(tag)}>
-                <IconButton className={``}>
+                <IconButton className={`${px}-tag-x`}>
                     <span>X</span>
                 </IconButton>
             </div>
@@ -62,6 +66,7 @@ const Tags = ({
 
 const TagsList = ({
     className,
+    tagClassName,
     onRemove,
     onClear,
     tagsList = [],
@@ -71,20 +76,20 @@ const TagsList = ({
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TagsList');
     const { id } = props;
 
-    return <div className={classnames(`${px}-${type}`, { [`${baseClassName}__wrapper`]: baseClassName }, className)}
+    return <div className={classnames(`${px}-${type}`, className)}
         {...commonProps}
         {...props}
         data-testid={`${id}-tagsList`}
     >
         {tagsList.map((tag) => {
-            return <Tags tag={tag} onRemove={onRemove} />
+            return <Tags tag={tag} onRemove={onRemove} key={`${tag}-key`} className={tagClassName} />
         })}
-        <Button onClick={onClear} data-testid={`${id}-onClear-button`}>
+        {tagsList.length > 0 && <div onClick={onClear} data-testid={`${id}-onClear-button`} className={`${px}-${type}-onClear-button`}>
             <IconButton className={`${px}-left-arrow`}>
                 <ChevronRight />
             </IconButton>
-            Clear All
-        </Button>
+            <div className={`${px}-${type}-onClear-text`}>Clear All</div>
+        </div>}
     </div>
 }
 

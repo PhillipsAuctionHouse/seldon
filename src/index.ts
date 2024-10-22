@@ -53,7 +53,7 @@ export {
   type PaginationOption,
   type PaginationOptionValue,
 } from './components/Pagination/Pagination';
-
+export { default as TagsList } from './components/Tags/Tags';
 export {
   default as StatefulViewingsList,
   type StatefulViewingsListProps,
