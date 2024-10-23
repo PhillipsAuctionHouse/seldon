@@ -21,7 +21,7 @@ const argTypes = {
         action: 'onClear',
     },
     playgroundWidth: {
-        control: { type: 'range', min: 600 },
+        control: { type: 'range', min: 700 },
     },
 };
 export const Playground = ({ playgroundWidth, ...args }: StoryProps) => {
@@ -32,10 +32,13 @@ export const Playground = ({ playgroundWidth, ...args }: StoryProps) => {
         <div style={{ width: playgroundWidth, margin: '1rem' }}>
             <TagsList
                 {...args}
-                id="TagsList-1"
+                id="TagsList"
                 tagsList={tagsList}
                 onClear={() => {
                     setTagsList([])
+                }}
+                onRemove={(tag) => {
+                    setTagsList(tagsList.filter(item => item !== tag))
                 }}
             ></TagsList>
         </div>
@@ -43,7 +46,7 @@ export const Playground = ({ playgroundWidth, ...args }: StoryProps) => {
 };
 
 Playground.args = {
-    playgroundWidth: 600,
+    playgroundWidth: 700,
     className: 'tags-test-class',
 };
 
