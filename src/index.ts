@@ -9,6 +9,7 @@ export { default as Page } from './pages/Page';
 
 // utils
 export * from './utils/hooks';
+export * from './providers/SeldonProvider/utils';
 
 // ⚛️ Components
 export { default as Button, type ButtonProps } from './components/Button/Button';
