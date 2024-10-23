@@ -1,3 +1,10 @@
+# [1.81.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.80.0...v1.81.0) (2024-10-23)
+
+
+### Features
+
+* **countdown:** L3-3809 add new countdown component ([#381](https://github.com/PhillipsAuctionHouse/seldon/issues/381)) ([aff22d7](https://github.com/PhillipsAuctionHouse/seldon/commit/aff22d7d5e959bb5ca58e2d47b4393e3bc328b9f))
+
 # [1.80.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.79.3...v1.80.0) (2024-10-22)
 
 
