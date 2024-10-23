@@ -196,10 +196,15 @@ $breakpoint-xl: 1801px;
     --badge-label-line-height: 1rem;
     --snw-header-link-size: 1rem;
     --snw-header-link-line-height: 1.5rem;
-    --snw-flyout-link-size: 1rem;
-    --snw-flyout-link-line-height: 1.875rem;
+    --snw-flyout-link-size: 0.875rem;
+    --snw-flyout-link-line-height: 1.75rem;
     --snw-heading-hero-size1: 2.375rem;
     --snw-heading-hero-line-height-size1: 2.875rem;
+  }
+
+  @media (min-width: $breakpoint-lg) {
+    --snw-flyout-link-size: 0.875rem;
+    --snw-flyout-link-line-height: 1.75rem;
   }
 
   @media (min-width: $breakpoint-xl) {
@@ -367,7 +372,7 @@ $margin-xxl: var(--spacing-xxl);
 ///////////////////////
 /* stylelint-disable-next-line no-duplicate-selectors */
 :root {
-  --header-height: 73px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
+  --header-height: 56px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
   --search-size: 2.625rem; // This should be calculated from the scaling text and scaling spacing tokens instead of hardcoding in case they change
 
   @media (min-width: $breakpoint-md) {
