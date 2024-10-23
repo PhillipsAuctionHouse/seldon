@@ -2,8 +2,9 @@ import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import SaleHeaderBanner, { SaleHeaderBannerProps } from './SaleHeaderBanner';
 import { AuctionState } from './types';
-import SaleHeaderCountdown from './SaleHeaderCountdown';
 import SaleHeaderBrowseAuctions from './SaleHeaderBrowseAuctions';
+import { Countdown } from '../../components/Countdown';
+import { addDays } from 'date-fns';
 
 const defaultProps: SaleHeaderBannerProps = {
   auctionTitle: 'Sample Auction',
@@ -49,7 +50,7 @@ describe('SaleHeaderBanner', () => {
   it('renders the countdown timer when auction is open for bidding', () => {
     render(
       <SaleHeaderBanner {...defaultProps} auctionState={AuctionState.openForBidding}>
-        <SaleHeaderCountdown />
+        <Countdown endDateTime={addDays(new Date(), 2)} />
       </SaleHeaderBanner>,
     );
     expect(screen.getByText('Lots Close in')).toBeInTheDocument();
