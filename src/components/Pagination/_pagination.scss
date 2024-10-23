@@ -36,7 +36,7 @@
       text-align: center;
       text-align-last: center;
       text-decoration: underline;
-      text-underline-offset: $spacing-micro;
+      text-underline-offset: 6px;
 
       @include isHeaderDesktop {
         line-height: 2.5rem;
