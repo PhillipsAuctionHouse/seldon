@@ -1,3 +1,10 @@
+# [1.84.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.83.0...v1.84.0) (2024-10-24)
+
+
+### Features
+
+* **header:** L3-4294 links underline fix ([#401](https://github.com/PhillipsAuctionHouse/seldon/issues/401)) ([47802e7](https://github.com/PhillipsAuctionHouse/seldon/commit/47802e72bcaa2cd714c5eef519773cd26d346a2d))
+
 # [1.83.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.82.1...v1.83.0) (2024-10-24)
 
 
