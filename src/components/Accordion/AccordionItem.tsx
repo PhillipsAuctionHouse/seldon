@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import PlusIcon from '../../assets/plus.svg?react';
 import MinusIcon from '../../assets/minus.svg?react';
@@ -132,48 +132,56 @@ const AccordionContent = ({
     </Accordion.Content>
   );
 
-const AccordionItem = ({
-  isLocked = false,
-  variant = AccordionItemVariant.sm,
-  id,
-  label,
-  isLastItem,
-  hasTransition = false,
-  children,
-  ...props
-}: AccordionItemProps) => {
-  const { className: baseClassName } = getCommonProps({ id }, 'Accordion');
-  const isLargeVariation = variant === AccordionItemVariant.lg;
-  const accordionItemClassName = `${baseClassName}-item`;
+const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
+  (
+    {
+      isLocked = false,
+      variant = AccordionItemVariant.sm,
+      id,
+      label,
+      isLastItem,
+      hasTransition = false,
+      children,
+      ...props
+    },
+    ref,
+  ) => {
+    const { className: baseClassName } = getCommonProps({ id }, 'Accordion');
+    const isLargeVariation = variant === AccordionItemVariant.lg;
+    const accordionItemClassName = `${baseClassName}-item`;
 
-  return (
-    <Accordion.Item
-      disabled={isLocked}
-      value={id}
-      className={classnames(accordionItemClassName, {
-        [`${accordionItemClassName}__border-bottom`]: !isLastItem,
-      })}
-      {...props}
-    >
-      <AccordionHeader
-        disable={isLocked}
-        isLargeVariation={isLargeVariation}
-        id={id}
-        baseClassName={`${accordionItemClassName}-label`}
+    return (
+      <Accordion.Item
+        disabled={isLocked}
+        value={id}
+        className={classnames(accordionItemClassName, {
+          [`${accordionItemClassName}__border-bottom`]: !isLastItem,
+        })}
+        ref={ref}
+        {...props}
       >
-        {label}
-      </AccordionHeader>
+        <AccordionHeader
+          disable={isLocked}
+          isLargeVariation={isLargeVariation}
+          id={id}
+          baseClassName={`${accordionItemClassName}-label`}
+        >
+          {label}
+        </AccordionHeader>
 
-      <AccordionContent
-        disable={isLocked}
-        hasTransition={hasTransition}
-        isLargeVariation={isLargeVariation}
-        baseClassName={accordionItemClassName}
-      >
-        <div className="radix-accordion-content">{children}</div>
-      </AccordionContent>
-    </Accordion.Item>
-  );
-};
+        <AccordionContent
+          disable={isLocked}
+          hasTransition={hasTransition}
+          isLargeVariation={isLargeVariation}
+          baseClassName={accordionItemClassName}
+        >
+          <div className="radix-accordion-content">{children}</div>
+        </AccordionContent>
+      </Accordion.Item>
+    );
+  },
+);
+
+AccordionItem.displayName = 'AccordionItem';
 
 export default AccordionItem;

@@ -36,6 +36,17 @@ export const ButtonWithIcon = (props: ButtonProps) => (
   </Button>
 );
 
+export const ButtonAsLink = (props: ButtonProps) => (
+  <Button {...props} href="https://www.phillips.com" target="_blank">
+    Visit Phillips
+  </Button>
+);
+
+ButtonAsLink.args = {
+  variant: ButtonVariants.tertiary,
+  size: 'md',
+};
+
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Playground = {
   args: {
