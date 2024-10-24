@@ -1,3 +1,10 @@
+## [1.82.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.82.0...v1.82.1) (2024-10-24)
+
+
+### Bug Fixes
+
+* **pagination:** L3-3158 update style so it is shorter on mobile ([#395](https://github.com/PhillipsAuctionHouse/seldon/issues/395)) ([c1eee24](https://github.com/PhillipsAuctionHouse/seldon/commit/c1eee24150fb0a821e226c3d8aeeb04719f1a009))
+
 # [1.82.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.81.0...v1.82.0) (2024-10-23)
 
 
