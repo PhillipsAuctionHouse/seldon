@@ -1,3 +1,15 @@
+# [1.83.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.82.1...v1.83.0) (2024-10-24)
+
+
+### Bug Fixes
+
+* **header:** L3-4294 Dvh Fix for Mobile Scroll Issue Nav Spacing Fix ([#399](https://github.com/PhillipsAuctionHouse/seldon/issues/399)) ([01ea8da](https://github.com/PhillipsAuctionHouse/seldon/commit/01ea8daf494bf154c71f3e26f0993880069e086d))
+
+
+### Features
+
+* **lotdetails:** L3-3327 trigger build for button & accordion updates ([#400](https://github.com/PhillipsAuctionHouse/seldon/issues/400)) ([7237b5d](https://github.com/PhillipsAuctionHouse/seldon/commit/7237b5d8320d63e896fcd3dd925c33c218029514))
+
 ## [1.82.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.82.0...v1.82.1) (2024-10-24)
 
 
