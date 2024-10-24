@@ -38,7 +38,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HT
    */
   href?: string;
   /**
-   * The target of the link (e.g. _blank)
+   * The target of the link (e.g. _blank). To be combined with href.
    */
   target?: string;
 }
