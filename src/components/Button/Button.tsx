@@ -33,6 +33,10 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
    * Should the button be disabled?
    */
   isDisabled?: boolean;
+  /**
+   * The href of the button. This will make the button render as an anchor tag.
+   */
+  href?: string;
 }
 
 /**
@@ -55,6 +59,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       isIconLast: iconLast = false,
       type = 'button',
       isDisabled = false,
+      href,
       ...props
     },
     ref,
