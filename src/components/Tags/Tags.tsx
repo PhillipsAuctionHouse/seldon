@@ -58,7 +58,7 @@ export interface TagsProps {
 
 const Tags = ({ id, index, className, onRemove, label }: TagsProps) => {
   return (
-    <Button className={classnames(`${px}-tag-button`, className)} aria-label="Close Tag">
+    <div className={classnames(`${px}-tag`, `${px}-button`, className)} aria-label="Close Tag">
       <>
         <div className={`${px}-tag-label`}>{label}</div>
         <div
@@ -71,7 +71,7 @@ const Tags = ({ id, index, className, onRemove, label }: TagsProps) => {
           </IconButton>
         </div>
       </>
-    </Button>
+    </div>
   );
 };
 
@@ -100,9 +100,9 @@ const TagsList = ({ className, tagClassName, onRemove, onClear, tagsList = [], .
           aria-label="Clear All"
           variant={ButtonVariants.tertiary}
         >
-          <IconButton className={`${px}-left-arrow`}>
+          <div className={`${px}-left-arrow`}>
             <ChevronRight />
-          </IconButton>
+          </div>
           <div className={`${px}-label`}>Clear All</div>
         </Button>
       )}

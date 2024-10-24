@@ -5,10 +5,11 @@
   flex-flow: row wrap;
   gap: $spacing-sm;
 
-  .#{$px}-tag-button {
+  .#{$px}-tag {
     background-color: $pure-white;
     border: 1px solid $button-hover;
     border-radius: 6.25rem;
+    cursor: default;
     gap: 0;
     height: 2rem;
     padding: 0 0.25rem 0 0.875rem;
@@ -22,6 +23,8 @@
   }
 
   .#{$px}-close-button {
+    padding-left: 0.2rem;
+
     &:hover {
       .#{$px}-tag-x {
         background-color: $pure-white;
@@ -52,6 +55,7 @@
   border-color: $pure-white;
   display: flex;
   gap: 0;
+  height: 2rem;
 
   &:hover {
     cursor: pointer;
