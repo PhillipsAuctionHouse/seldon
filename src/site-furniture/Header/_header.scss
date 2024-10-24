@@ -33,7 +33,7 @@
       height: 2px;
       position: relative;
       transition: background-color 0.25s ease 0.25s;
-      width: 1.5rem;
+      width: 1rem;
 
       &::before,
       &::after {
@@ -45,15 +45,15 @@
         position: absolute;
         top: 0;
         transition: transform 0.25s ease;
-        width: 1.5rem;
+        width: 1rem;
       }
 
       &::before {
-        transform: translateY(-8px);
+        transform: translateY(-6px);
       }
 
       &::after {
-        transform: translateY(8px);
+        transform: translateY(6px);
       }
     }
 
@@ -77,7 +77,7 @@
     padding-top: 6px; // small adjustment to center the logo
 
     svg {
-      height: 24px;
+      height: 20.58px; // 20.58px is the height of the logo's container to make logo 16px
       width: 100%;
     }
 
@@ -85,7 +85,7 @@
       padding-top: 0;
 
       svg {
-        height: 28px;
+        height: 25.73px; // 25.73px is the height of the logo's container to make logo 20px
         width: 100%;
       }
     }
@@ -95,8 +95,12 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding: $padding-sm $spacing-md;
+    padding: 3px $spacing-md;
     width: 100%;
+
+    @include isHeaderDesktop {
+      padding: $padding-sm $spacing-md;
+    }
   }
 
   &__nav {

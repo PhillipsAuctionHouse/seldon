@@ -1,3 +1,31 @@
+## [1.82.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.82.0...v1.82.1) (2024-10-24)
+
+
+### Bug Fixes
+
+* **pagination:** L3-3158 update style so it is shorter on mobile ([#395](https://github.com/PhillipsAuctionHouse/seldon/issues/395)) ([c1eee24](https://github.com/PhillipsAuctionHouse/seldon/commit/c1eee24150fb0a821e226c3d8aeeb04719f1a009))
+
+# [1.82.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.81.0...v1.82.0) (2024-10-23)
+
+
+### Features
+
+* **header:** L3-4228 header fixes ([#396](https://github.com/PhillipsAuctionHouse/seldon/issues/396)) ([464ca88](https://github.com/PhillipsAuctionHouse/seldon/commit/464ca88f8b2239febd184cc08ad74e17e4256cab))
+
+# [1.81.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.80.0...v1.81.0) (2024-10-23)
+
+
+### Features
+
+* **countdown:** L3-3809 add new countdown component ([#381](https://github.com/PhillipsAuctionHouse/seldon/issues/381)) ([aff22d7](https://github.com/PhillipsAuctionHouse/seldon/commit/aff22d7d5e959bb5ca58e2d47b4393e3bc328b9f))
+
+# [1.80.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.79.3...v1.80.0) (2024-10-22)
+
+
+### Features
+
+* **header:** L3-4227 header changes ([#392](https://github.com/PhillipsAuctionHouse/seldon/issues/392)) ([8c70d16](https://github.com/PhillipsAuctionHouse/seldon/commit/8c70d16d09601f0d2ef44ee5cd69ab20b28af9ff))
+
 ## [1.79.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.79.2...v1.79.3) (2024-10-22)
 
 

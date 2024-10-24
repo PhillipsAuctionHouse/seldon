@@ -1,0 +1,25 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-countdown {
+  @include text($body2);
+
+  align-items: center;
+  border-bottom: 1px solid $light-gray;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-micro;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  padding: 0 $spacing-sm $spacing-sm;
+  width: 100%;
+
+  &__countdown-container {
+    @include text($heading5);
+
+    align-items: center;
+    display: flex;
+    gap: $spacing-sm;
+    justify-content: center;
+    text-transform: inherit;
+  }
+}

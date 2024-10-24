@@ -20,7 +20,7 @@ export const Playground: Story = {
     subHeadText: 'Day Sales — Morning Session',
     association: 'In Association with BACS & RUSSO',
     background:
-      'url(https://assets.phillips.com/image/upload/t_Website_DepartmentHero/v1685035132/website/department/hero-12.jpg)',
+      'linear-gradient(rgba(0, 0, 0, 50%), rgba(0, 0, 0, 50%)), url(https://assets.phillips.com/image/upload/t_Website_DepartmentHero/v1685035132/website/department/hero-12.jpg)',
   },
 };
 

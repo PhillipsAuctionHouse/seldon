@@ -98,9 +98,11 @@ $string2: 'string2';
 $string3: 'string3';
 $snwHeaderLink: 'snwHeaderLink';
 $snwFlyoutLink: 'snwFlyoutLink';
+$snwHeadingHero1: 'snwHeadingHero1';
+$snwHeadingHero2: 'snwHeadingHero2';
 $text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $heading2, $heading3, $heading4, $heading5,
   $title1, $title2, $title3, $title4, $body1, $body2, $body3, $string1, $string2, $string3, $snwFlyoutLink,
-  $snwHeaderLink;
+  $snwHeaderLink, $snwHeadingHero1, $snwHeadingHero2;
 
 ////////////////////////
 /// Breakpoint TOKENS to be used for min-width comparisons, make sure they match BREAKPOINTS in constants.ts
@@ -153,6 +155,10 @@ $breakpoint-xl: 1801px;
   --snw-header-link-line-height: 1.5rem;
   --snw-flyout-link-size: 1rem;
   --snw-flyout-link-line-height: 1.75rem;
+  --snw-heading-hero-size1: 2rem;
+  --snw-heading-hero-line-height-size1: 2.375rem;
+  --snw-heading-hero-size2: 1.625rem;
+  --snw-heading-hero-line-height-size2: 1.9375rem;
 
   @media (min-width: $breakpoint-md) {
     --quote-size: 1.75rem;
@@ -190,8 +196,15 @@ $breakpoint-xl: 1801px;
     --badge-label-line-height: 1rem;
     --snw-header-link-size: 1rem;
     --snw-header-link-line-height: 1.5rem;
-    --snw-flyout-link-size: 1rem;
-    --snw-flyout-link-line-height: 1.875rem;
+    --snw-flyout-link-size: 0.875rem;
+    --snw-flyout-link-line-height: 1.75rem;
+    --snw-heading-hero-size1: 2.375rem;
+    --snw-heading-hero-line-height-size1: 2.875rem;
+  }
+
+  @media (min-width: $breakpoint-lg) {
+    --snw-flyout-link-size: 0.875rem;
+    --snw-flyout-link-line-height: 1.75rem;
   }
 
   @media (min-width: $breakpoint-xl) {
@@ -283,10 +296,18 @@ $snw-header-link-size: var(--snw-header-link-size);
 $snw-header-link-line-height: var(--snw-header-link-line-height);
 $snw-flyout-link-size: var(--snw-flyout-link-size);
 $snw-flyout-link-line-height: var(--snw-flyout-link-line-height);
+$snw-heading-hero-size1: var(--snw-heading-hero-size1);
+$snw-heading-hero-line-height1: var(--snw-heading-hero-line-height-size1);
+$snw-heading-hero-size2: var(--snw-heading-hero-size2);
+$snw-heading-hero-line-height2: var(--snw-heading-hero-line-height-size2);
 
 ////////////////////////
 /// SPACING TOKENS:
 ///////////////////////
+
+// SNOWFLAKES
+$snowflake-menu-padding: 1.25rem;
+
 /* stylelint-disable-next-line no-duplicate-selectors */
 :root {
   --spacing-micro: 0.25rem;
@@ -351,7 +372,7 @@ $margin-xxl: var(--spacing-xxl);
 ///////////////////////
 /* stylelint-disable-next-line no-duplicate-selectors */
 :root {
-  --header-height: 73px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
+  --header-height: 56px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
   --search-size: 2.625rem; // This should be calculated from the scaling text and scaling spacing tokens instead of hardcoding in case they change
 
   @media (min-width: $breakpoint-md) {

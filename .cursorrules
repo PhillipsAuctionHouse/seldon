@@ -1,0 +1,78 @@
+Some tools I use regularly include:
+- TypeScript
+- Node.js
+- Vite
+- Remix (the web framework)
+- SCSS
+- Rollup
+- React
+
+
+Typescript rules:
+- I like descriptive TypeScript type names (no one-letter type names for me). I also prefer the Array generic over the bracket syntax.
+- If I'm only importing a type from a module make sure to import it like this:
+import { type AuctionLot } from '~/api/generated/sales-service/types';
+
+
+React Components:
+- When building react components, destructure the props passed to the component.  Use this syntax when generating new components:
+
+const ComponentName = ({
+  prop1,
+  prop2,
+  prop3,
+}:ComponentNameProps) => {
+  return <div>ComponentName</div>;
+};
+- Always prefix the class name with the px variable from `~/utils/constants.ts`.
+- When mapping over an array of objects that will be rendered as React components, never use the index as the key.  Instead use a unique id from the object.
+- I prefer: `thing ? 'whatever' : null` over `thing && 'whatever'` (especially in JSX).
+- This repo contains our design system.  Rely on available components that are exported from the components folder and don't roll your own.  If you must deviate, make sure to document the need to deviate and the reasoning.
+- Always write a testcase in a new file when we generate a new component.
+
+
+CSS:
+- We use the BEM naming convention for CSS classes.  
+- In the SCSS files generated always import the partials from the @use '#scss/allPartials' as *;;
+- Make sure to prefix all the class names with
+the .#{$px} prefix like .#{$px}-lot-cataloging-section
+- In SCSS use the @use with a global scope rather than @import.  
+- Create mixins where appropriate and put in the _utils.scss file.
+- Create variables where appropriate and put in the _vars.scss file. 
+
+Typescript Functions:
+- Destructure object arguments in the function argument section.  For example:
+{details.map(({ value, label }) => (
+<Details key={value} label={label} value={value} />
+))}
+I prefer function expressions over function declarations.
+
+Formatting rules:
+- Make sure you're following the prettier config in the .prettierrc file.
+
+Linting rules:
+- Always check our local eslint config to make sure you're following the rules.
+- Make sure to order the imports correctly according to the eslint rule for order
+
+Testing rules
+- Always use Vitest to mock functions.
+- Never use the response from the testing utils render function, instead use screen methods.  
+- Use the userEvent library instead of the fireEvent from testing library
+
+General rules:
+
+- Be casual unless otherwise specified
+- Be terse
+- Suggest solutions that I didn’t think about—anticipate my needs
+- Treat me as an expert
+- Be accurate and thorough
+- Give the answer immediately. Provide detailed explanations and restate my query in your own words if necessary after giving the answer
+- Value good arguments over authorities, the source is irrelevant
+- Consider new technologies and contrarian ideas, not just the conventional wisdom
+- You may use high levels of speculation or prediction, just flag it for me
+
+If I ask for adjustments to code I have provided you, do not repeat all of my code unnecessarily. Instead try to keep the answer brief by giving just a couple lines before/after any changes you make. Multiple code blocks are ok.
+
+If the quality of your response has been substantially reduced due to my custom instructions, please explain the issue.
+
+

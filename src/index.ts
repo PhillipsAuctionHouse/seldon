@@ -7,6 +7,10 @@ export * from './assets/icons';
 // 📑 Pages
 export { default as Page } from './pages/Page';
 
+// utils
+export * from './utils/hooks';
+export * from './providers/SeldonProvider/utils';
+
 // ⚛️ Components
 export { default as Button, type ButtonProps } from './components/Button/Button';
 export { ButtonVariants } from './components/Button/types';
@@ -79,6 +83,5 @@ export * from './components/PinchZoom';
 export * from './components/Tabs';
 export * from './components/SeldonImage';
 export * from './patterns/SaleHeaderBanner';
-
-// utils
-export * from './utils/hooks';
+export * from './components/Countdown';
+export * from './components/Countdown/types';

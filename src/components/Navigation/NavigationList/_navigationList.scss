@@ -70,7 +70,7 @@ $top-transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     .#{$px}-link--snwHeaderLink {
       border-bottom: 1px solid $light-gray;
       flex-wrap: wrap;
-      padding: $spacing-md 0;
+      padding: $snowflake-menu-padding 0;
     }
     .#{$px}-link--snwFlyoutLink {
       padding: 0;
