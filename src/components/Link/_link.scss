@@ -55,10 +55,7 @@
 
     &:hover,
     &:focus-visible {
-      @include underline(
-        $color: $dark-gray,
-        $padding: 0.5rem 0.625rem calc(0.5rem + 2px)
-      ); // 1 px so that the bottom border of the nav counts as part of the button
+      @include underline($color: $dark-gray); // 1 px so that the bottom border of the nav counts as part of the button
 
       color: $dark-gray;
     }
