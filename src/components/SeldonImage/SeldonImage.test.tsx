@@ -51,4 +51,15 @@ describe('SeldonImage', () => {
     expect(container.firstChild).not.toHaveClass(`${px}-seldon-image--hidden`);
     expect(image).not.toHaveClass(`${px}-seldon-image-img--hidden`);
   });
+
+  it('sets loading state to error when image is invalid', () => {
+    render(<SeldonImage src="broken" alt="" />);
+    const image = screen.getByTestId(`seldon-image-img`);
+    expect(image).toHaveClass(`${px}-seldon-image-img--hidden`);
+    fireEvent.error(image);
+
+    const errorPlaceholder = screen.getByText('Error loading image');
+    expect(errorPlaceholder).toBeInTheDocument();
+    expect(errorPlaceholder).toHaveClass(`${px}-seldon-image--error`);
+  });
 });
