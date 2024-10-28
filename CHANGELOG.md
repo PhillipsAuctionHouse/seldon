@@ -1,3 +1,10 @@
+## [1.84.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.84.0...v1.84.1) (2024-10-28)
+
+
+### Bug Fixes
+
+* **lotdetails:** L3-4323 image carousel SSR error state ([#403](https://github.com/PhillipsAuctionHouse/seldon/issues/403)) ([5d9477e](https://github.com/PhillipsAuctionHouse/seldon/commit/5d9477e6c289738602d65a7b0ac0baa255b1a8de))
+
 # [1.84.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.83.0...v1.84.0) (2024-10-24)
 
 
