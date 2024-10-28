@@ -15,10 +15,8 @@ $lg: #{$px}-input--lg;
 
   &__label {
     color: $pure-black;
-    display: flex;
     font-size: 0.75rem;
     font-variation-settings: 'wght' 600;
-    gap: 0.25rem;
     margin-bottom: 0.5rem;
     word-break: break-word;
 

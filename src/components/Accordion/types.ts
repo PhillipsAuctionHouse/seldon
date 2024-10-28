@@ -24,6 +24,14 @@ export interface AccordionHeaderType {
    * Unique id for icon component testing
    */
   id?: string;
+  /**
+   * Callback function that is called when the header is opened.
+   */
+  onOpen?: () => void;
+  /**
+   * Callback function that is called when the header is closed.
+   */
+  onClose?: () => void;
 }
 
 // AccordionContent Interface

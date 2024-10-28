@@ -1,6 +1,6 @@
 import * as Accordion from '@radix-ui/react-accordion';
 import classnames from 'classnames';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useCallback, useRef } from 'react';
 import LockIcon from '../../assets/lock.svg?react';
 import MinusIcon from '../../assets/minus.svg?react';
 import PlusIcon from '../../assets/plus.svg?react';
@@ -41,6 +41,14 @@ export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement>
    * Number of milliseconds for the expansion transition. Defaults to 250.
    */
   transitionTimeInMs?: number;
+  /**
+   * Callback function that is called when the item is opened.
+   */
+  onOpen?: () => void;
+  /**
+   * Callback function that is called when the item is closed.
+   */
+  onClose?: () => void;
 }
 /**
  * ## Overview
@@ -55,7 +63,10 @@ const AccordionHeader = ({
   disable,
   isLargeVariation,
   id,
+  onOpen,
+  onClose,
 }: AccordionHeaderType) => {
+  const itemRef = useRef<HTMLButtonElement>(null);
   const showLock = disable;
 
   // Render all icons and use css to conditionally show/hide the correct one
@@ -89,6 +100,15 @@ const AccordionHeader = ({
     </div>
   );
 
+  const handleOnToggle = useCallback(() => {
+    const isOpening = itemRef.current?.getAttribute('data-state') === 'closed';
+    if (isOpening) {
+      onOpen?.();
+    } else {
+      onClose?.();
+    }
+  }, [onOpen, onClose]);
+
   return (
     <Accordion.Trigger
       data-disabled={disable}
@@ -99,6 +119,8 @@ const AccordionHeader = ({
         { [`${baseClassName}--hoverable`]: !disable },
         className,
       )}
+      ref={itemRef}
+      onClick={handleOnToggle}
     >
       <div data-testid={`${id}-trigger`}>
         <div className={classnames(`${baseClassName}__text`, { [`${baseClassName}__text--lg`]: isLargeVariation })}>
@@ -148,6 +170,8 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
       children,
       className,
       transitionTimeInMs = 250,
+      onOpen,
+      onClose,
       ...props
     },
     ref,
@@ -172,6 +196,8 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
           isLargeVariation={isLargeVariation}
           id={id}
           baseClassName={`${accordionItemClassName}-label`}
+          onOpen={onOpen}
+          onClose={onClose}
         >
           {label}
         </AccordionHeader>
