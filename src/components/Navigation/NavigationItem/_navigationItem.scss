@@ -69,6 +69,10 @@
     margin-bottom: 0;
   }
 
+  a {
+    display: inline;
+  }
+
   &--start,
   &--end {
     &__title {

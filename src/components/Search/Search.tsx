@@ -127,8 +127,10 @@ const Search = ({
         className={`${baseClassName}__container__inner`}
         ref={searchContainerRef}
         onClick={(event: React.MouseEvent<HTMLElement>) => {
-          showSearch(true);
-          event.stopPropagation();
+          if (!isSearchExpanded) {
+            showSearch(true);
+            event.stopPropagation();
+          }
         }}
       >
         <Text variant={TextVariants.heading4} className={`${baseClassName}__container__inner__label`}>
