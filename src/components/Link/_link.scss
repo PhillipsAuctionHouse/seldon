@@ -2,6 +2,7 @@
 
 .#{$px}-link {
   color: $pure-black;
+  display: inline;
   text-decoration: none;
 
   &--email,

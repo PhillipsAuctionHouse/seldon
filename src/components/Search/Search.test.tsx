@@ -28,6 +28,13 @@ describe('Search component', () => {
     await userEvent.click(button);
     expect(searchInput).toHaveFocus();
   });
+  it('should open input once clicked on input container', async () => {
+    const { container } = renderWithContext(<Search />);
+    const inputContainer = container.getElementsByClassName('seldon-search__container__inner');
+    const searchInput = screen.getByTestId('search-input');
+    await userEvent.click(inputContainer[0]);
+    expect(searchInput).toHaveFocus();
+  });
   it('should close form when close button is clicked', async () => {
     renderWithContext(<Search />);
     const searchButton = screen.getByTestId('search-button');
