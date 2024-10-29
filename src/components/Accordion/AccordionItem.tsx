@@ -37,6 +37,10 @@ export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement>
    * When true applied the transition keyframe animation on item expand. Default as false.
    */
   hasTransition?: boolean;
+  /**
+   * Number of milliseconds for the expansion transition. Defaults to 250.
+   */
+  transitionTimeInMs?: number;
 }
 /**
  * ## Overview
@@ -143,6 +147,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
       hasTransition = false,
       children,
       className,
+      transitionTimeInMs = 250,
       ...props
     },
     ref,
@@ -155,6 +160,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
       <Accordion.Item
         disabled={isLocked}
         value={id}
+        style={{ ['--seldon-accordion-transition-time']: `${transitionTimeInMs}ms` } as React.CSSProperties}
         className={classnames(accordionItemClassName, className, {
           [`${accordionItemClassName}__border-bottom`]: !isLastItem,
         })}
