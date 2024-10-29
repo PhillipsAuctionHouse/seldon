@@ -1,3 +1,10 @@
+# [1.85.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.84.1...v1.85.0) (2024-10-29)
+
+
+### Features
+
+* **accordion:** L3-3296 support custom transition time ([#409](https://github.com/PhillipsAuctionHouse/seldon/issues/409)) ([fa8c465](https://github.com/PhillipsAuctionHouse/seldon/commit/fa8c46575f743652c3cedafe51eb3e885532981e))
+
 ## [1.84.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.84.0...v1.84.1) (2024-10-28)
 
 
