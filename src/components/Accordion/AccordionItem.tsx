@@ -1,11 +1,11 @@
-import React, { forwardRef } from 'react';
-import { getCommonProps } from '../../utils';
-import PlusIcon from '../../assets/plus.svg?react';
-import MinusIcon from '../../assets/minus.svg?react';
-import LockIcon from '../../assets/lock.svg?react';
-import classnames from 'classnames';
 import * as Accordion from '@radix-ui/react-accordion';
-import { AccordionItemVariant, AccordionHeaderType, AccordionContentType } from './types';
+import classnames from 'classnames';
+import React, { forwardRef } from 'react';
+import LockIcon from '../../assets/lock.svg?react';
+import MinusIcon from '../../assets/minus.svg?react';
+import PlusIcon from '../../assets/plus.svg?react';
+import { getCommonProps } from '../../utils';
+import { AccordionContentType, AccordionHeaderType, AccordionItemVariant } from './types';
 import { getIconClasses } from './utils';
 
 export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -142,6 +142,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
       isLastItem,
       hasTransition = false,
       children,
+      className,
       ...props
     },
     ref,
@@ -154,7 +155,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
       <Accordion.Item
         disabled={isLocked}
         value={id}
-        className={classnames(accordionItemClassName, {
+        className={classnames(accordionItemClassName, className, {
           [`${accordionItemClassName}__border-bottom`]: !isLastItem,
         })}
         ref={ref}
