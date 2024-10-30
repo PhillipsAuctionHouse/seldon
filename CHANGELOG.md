@@ -1,3 +1,10 @@
+# [1.86.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.85.1...v1.86.0) (2024-10-30)
+
+
+### Features
+
+* **header:** L3-4326 updated spacing and search click ([#408](https://github.com/PhillipsAuctionHouse/seldon/issues/408)) ([01391e2](https://github.com/PhillipsAuctionHouse/seldon/commit/01391e208746304c3a2079e091f3a2513f69a3c1))
+
 ## [1.85.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.85.0...v1.85.1) (2024-10-30)
 
 
