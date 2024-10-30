@@ -30,8 +30,13 @@ $lg: #{$px}-input--lg;
     border: 1px solid $keyline-gray;
     border-radius: 0.1875rem;
     font-size: 0.8125rem;
+    font-variation-settings: 'wght' 600;
     margin-bottom: 0.25rem;
     padding: $padding-xsm;
+
+    &::placeholder {
+      font-variation-settings: 'wght' 400;
+    }
 
     &:focus-within {
       outline: 1px solid $pure-black;
@@ -98,12 +103,16 @@ $lg: #{$px}-input--lg;
     .#{$px}-input__input,
     .#{$px}-input__input::placeholder,
     .#{$px}-input__validation {
-      color: inherit;
+      color: $pure-black;
     }
 
     .#{$px}-input__input {
       border: 1px solid $error-red;
       box-shadow: inset 0 0 3px 3px $error-pink;
+
+      &:focus-within {
+        outline: 1px solid $error-red;
+      }
     }
   }
 
