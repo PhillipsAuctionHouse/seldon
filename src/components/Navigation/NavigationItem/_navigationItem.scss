@@ -70,7 +70,9 @@
   }
 
   a {
-    display: inline-block;
+    @include isHeaderMobile {
+      display: block;
+    }
   }
 
   &--start,

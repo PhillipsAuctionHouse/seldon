@@ -201,6 +201,7 @@ const Search = ({
               >
                 <li key="viewAllSearchResults" className={`${baseClassName}__result`}>
                   <Link
+                    onClick={() => showSearch(false)}
                     href={((value: string) => {
                       return encodeURLSearchParams(getAllResultsLink(value));
                     })(value)}
