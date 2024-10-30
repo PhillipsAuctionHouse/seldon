@@ -5,6 +5,15 @@ import Button from '../Button/Button';
 import IconButton from '../IconButton/IconButton';
 import ChevronRight from '../../assets/chevronRight.svg?react';
 import { ButtonVariants } from '../Button/types';
+import CloseIcon from '../../assets/close.svg?react';
+
+export interface I18nObject {
+  clearAllLabel?: string;
+}
+
+export const i18n = {
+  clearAllLabel: '_clearAllLabel_',
+};
 
 export interface TagsListProps {
   /**
@@ -16,13 +25,13 @@ export interface TagsListProps {
    */
   className?: string;
   /**
+   * Child element pass in to display as item content.
+   */
+  children?: React.ReactNode;
+  /**
    * Individual Tag class
    */
   tagClassName?: string;
-  /**
-   * List of tags to render
-   */
-  tagsList: string[];
   /**
    * `onRemove` callback removes the clicked tag from the list
    */
@@ -31,6 +40,10 @@ export interface TagsListProps {
    * `onRemove` callback provides the tag that is to be removed as a string
    */
   onClear: () => void;
+  /**
+   * Clear All label is translatable
+   */
+  i18n?: I18nObject;
 }
 
 export interface TagsProps {
@@ -56,29 +69,28 @@ export interface TagsProps {
   label: string;
 }
 
-const Tags = ({ id, index, className, onRemove, label }: TagsProps) => {
+export const Tags = ({ id, index, className, onRemove, label }: TagsProps) => {
   return (
     <div className={classnames(`${px}-tag`, `${px}-button`, className)} aria-label="Close Tag">
-      <>
-        <div className={`${px}-tag-label`}>{label}</div>
-        <div
-          onClick={() => onRemove(label)}
-          className={`${px}-close-button`}
-          data-testid={`${id}-item-${index}-close-button`}
-        >
-          <IconButton className={`${px}-tag-x`}>
-            <span>X</span>
-          </IconButton>
-        </div>
-      </>
+      <div className={`${px}-tag__label`}>{label}</div>
+      <div
+        onClick={() => onRemove(label)}
+        className={`${px}-close-button`}
+        data-testid={`${id}-item-${index}-close-button`}
+      >
+        <IconButton className={`${px}-close-button__close`}>
+          <CloseIcon />
+        </IconButton>
+      </div>
     </div>
   );
 };
 
-const TagsList = ({ className, tagClassName, onRemove, onClear, tagsList = [], ...props }: TagsListProps) => {
+const TagsList = ({ className, children, tagClassName, i18n = {}, onRemove, onClear, ...props }: TagsListProps) => {
   const type = 'tags-list';
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TagsList');
   const { id } = props;
+  const { clearAllLabel = 'Clear All' } = i18n;
 
   return (
     <div
@@ -87,23 +99,19 @@ const TagsList = ({ className, tagClassName, onRemove, onClear, tagsList = [], .
       {...props}
       data-testid={`${type}-${id}`}
     >
-      {tagsList.map((tag, index) => {
-        return (
-          <Tags label={tag} onRemove={onRemove} key={`${tag}-key`} className={tagClassName} id={id} index={index} />
-        );
-      })}
-      {tagsList.length > 0 && (
+      {children}
+      {Array.isArray(children) && children.length > 0 && (
         <Button
           onClick={onClear}
           data-testid={`${id}-clear-all-button`}
-          className={`${px}-${type}-clear-all-button`}
-          aria-label="Clear All"
+          className={`${px}-${type}--clear`}
+          aria-label={clearAllLabel}
           variant={ButtonVariants.tertiary}
         >
           <div className={`${px}-left-arrow`}>
             <ChevronRight />
           </div>
-          <div className={`${px}-label`}>Clear All</div>
+          <div className={`${px}-label`}>{clearAllLabel}</div>
         </Button>
       )}
     </div>

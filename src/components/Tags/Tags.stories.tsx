@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/react';
 import { useState } from 'react';
 
-import TagsList, { TagsListProps } from './Tags';
+import TagsList, { Tags, TagsListProps } from './Tags';
 
 const meta = {
   title: 'Components/Tags',
@@ -15,12 +15,36 @@ interface StoryProps extends TagsListProps {
 }
 
 const tagsListExample = [
-  'Jean-Michel Basquiat',
-  'Cecily Brown',
-  'Roy Lichtenstein',
-  'Amy Sherald',
-  'Cy Twombly',
-  'Andy Warhol',
+  {
+    id: "tagsList",
+    index: 0,
+    label: 'Jean-Michel Basquiat',
+  },
+  {
+    id: "tagsList",
+    index: 1,
+    label: 'Cecily Brown',
+  },
+  {
+    id: "tagsList",
+    index: 2,
+    label: 'Roy Lichtenstein',
+  },
+  {
+    id: "tagsList",
+    index: 3,
+    label: 'Amy Sherald',
+  },
+  {
+    id: "tagsList",
+    index: 4,
+    label: 'Cy Twombly',
+  },
+  {
+    id: "tagsList",
+    index: 5,
+    label: 'Andy Warhol',
+  },
 ];
 
 const argTypes = {
@@ -39,14 +63,26 @@ export const Playground = ({ playgroundWidth, ...args }: StoryProps) => {
       <TagsList
         {...args}
         id="tagsList"
-        tagsList={tagsList}
         onClear={() => {
           setTagsList([]);
         }}
         onRemove={(tag) => {
-          setTagsList(tagsList.filter((item) => item !== tag));
+          setTagsList(tagsList.filter((item) => item.label !== tag));
         }}
-      ></TagsList>
+      >
+        {tagsList.map((item, index) => (
+          <Tags
+            key={item.label}
+            id="tagsList"
+            index={index}
+            label={item.label}
+            onRemove={(tag) => {
+              setTagsList(tagsList.filter((item) => item.label !== tag));
+            }}
+          >
+          </Tags>
+        ))}
+      </TagsList>
     </div>
   );
 };
