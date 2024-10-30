@@ -123,7 +123,16 @@ const Search = ({
 
   return (
     <div className={`${baseClassName}__container`}>
-      <div className={`${baseClassName}__container__inner`} ref={searchContainerRef}>
+      <div
+        className={`${baseClassName}__container__inner`}
+        ref={searchContainerRef}
+        onClick={(event: React.MouseEvent<HTMLElement>) => {
+          if (!isSearchExpanded) {
+            showSearch(true);
+            event.stopPropagation();
+          }
+        }}
+      >
         <Text variant={TextVariants.heading4} className={`${baseClassName}__container__inner__label`}>
           {searchButtonText}
         </Text>
@@ -192,6 +201,7 @@ const Search = ({
               >
                 <li key="viewAllSearchResults" className={`${baseClassName}__result`}>
                   <Link
+                    onClick={() => showSearch(false)}
                     href={((value: string) => {
                       return encodeURLSearchParams(getAllResultsLink(value));
                     })(value)}

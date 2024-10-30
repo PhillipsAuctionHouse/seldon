@@ -7,7 +7,6 @@ $top-transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-direction: column;
   justify-content: left;
   opacity: 1;
-  padding: $spacing-md 0;
 
   &--offscreen {
     opacity: 0;
