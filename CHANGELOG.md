@@ -1,3 +1,10 @@
+## [1.85.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.85.0...v1.85.1) (2024-10-30)
+
+
+### Bug Fixes
+
+* **lotdetails:** L3-3327 minor changes to input and accordion to match compendium ([#404](https://github.com/PhillipsAuctionHouse/seldon/issues/404)) ([0c50b03](https://github.com/PhillipsAuctionHouse/seldon/commit/0c50b03650c956513886cefd21d047f4474863b6))
+
 # [1.85.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.84.1...v1.85.0) (2024-10-29)
 
 
