@@ -33,10 +33,6 @@ export interface TagsListProps {
    */
   tagClassName?: string;
   /**
-   * `onRemove` callback removes the clicked tag from the list
-   */
-  onRemove: (tag: string) => void;
-  /**
    * `onRemove` callback provides the tag that is to be removed as a string
    */
   onClear: () => void;
@@ -52,10 +48,6 @@ export interface TagsProps {
    */
   id: string;
   /**
-   * Unique index for component testing
-   */
-  index: number;
-  /**
    * Base class for TagsList component.
    */
   className?: string;
@@ -69,14 +61,14 @@ export interface TagsProps {
   label: string;
 }
 
-export const Tags = ({ id, index, className, onRemove, label }: TagsProps) => {
+export const Tags = ({ id, className, onRemove, label }: TagsProps) => {
   return (
     <div className={classnames(`${px}-tag`, `${px}-button`, className)} aria-label="Close Tag">
       <div className={`${px}-tag__label`}>{label}</div>
       <div
         onClick={() => onRemove(label)}
         className={`${px}-close-button`}
-        data-testid={`${id}-item-${index}-close-button`}
+        data-testid={`${id}-item-close-button`}
       >
         <IconButton className={`${px}-close-button__close`}>
           <CloseIcon />
@@ -86,7 +78,7 @@ export const Tags = ({ id, index, className, onRemove, label }: TagsProps) => {
   );
 };
 
-const TagsList = ({ className, children, tagClassName, i18n = {}, onRemove, onClear, ...props }: TagsListProps) => {
+const TagsList = ({ className, children, tagClassName, i18n = {}, onClear, ...props }: TagsListProps) => {
   const type = 'tags-list';
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TagsList');
   const { id } = props;

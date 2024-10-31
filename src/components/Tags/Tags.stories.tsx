@@ -16,32 +16,32 @@ interface StoryProps extends TagsListProps {
 
 const tagsListExample = [
   {
-    id: "tagsList",
+    id: "tag-1",
     index: 0,
     label: 'Jean-Michel Basquiat',
   },
   {
-    id: "tagsList",
+    id: "tag-2",
     index: 1,
     label: 'Cecily Brown',
   },
   {
-    id: "tagsList",
+    id: "tag-3",
     index: 2,
     label: 'Roy Lichtenstein',
   },
   {
-    id: "tagsList",
+    id: "tag-4",
     index: 3,
     label: 'Amy Sherald',
   },
   {
-    id: "tagsList",
+    id: "tag-5",
     index: 4,
     label: 'Cy Twombly',
   },
   {
-    id: "tagsList",
+    id: "tag-6",
     index: 5,
     label: 'Andy Warhol',
   },
@@ -66,15 +66,11 @@ export const Playground = ({ playgroundWidth, ...args }: StoryProps) => {
         onClear={() => {
           setTagsList([]);
         }}
-        onRemove={(tag) => {
-          setTagsList(tagsList.filter((item) => item.label !== tag));
-        }}
       >
-        {tagsList.map((item, index) => (
+        {tagsList.map((item) => (
           <Tags
             key={item.label}
-            id="tagsList"
-            index={index}
+            id={item.id}
             label={item.label}
             onRemove={(tag) => {
               setTagsList(tagsList.filter((item) => item.label !== tag));
