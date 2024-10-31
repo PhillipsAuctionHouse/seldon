@@ -21,37 +21,49 @@ describe('Tags', () => {
       id: "tag-1",
       index: 0,
       label: 'Jean-Michel Basquiat',
-      onRemove: () => { }
+      onRemove: () => {
+        console.log("onRmove is passed in")
+      }
     },
     {
       id: "tag-2",
       index: 1,
       label: 'Cecily Brown',
-      onRemove: () => { }
+      onRemove: () => {
+        console.log("onRmove is passed in")
+      }
     },
     {
       id: "tag-3",
       index: 2,
       label: 'Roy Lichtenstein',
-      onRemove: () => { }
+      onRemove: () => {
+        console.log("onRmove is passed in")
+      }
     },
     {
       id: "tag-4",
       index: 3,
       label: 'Amy Sherald',
-      onRemove: () => { }
+      onRemove: () => {
+        console.log("onRmove is passed in")
+      }
     },
     {
       id: "tag-5",
       index: 4,
       label: 'Cy Twombly',
-      onRemove: () => { }
+      onRemove: () => {
+        console.log("onRmove is passed in")
+      }
     },
     {
       id: "tag-6",
       index: 5,
       label: 'Andy Warhol',
-      onRemove: () => { }
+      onRemove: () => {
+        console.log("onRmove is passed in")
+      }
     },
   ];
 
