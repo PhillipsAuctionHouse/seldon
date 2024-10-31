@@ -18,67 +18,63 @@ describe('Tags', () => {
   const reqProps = { id: 'test-id' };
   const tagsListExample = [
     {
-      id: "tag-1",
+      id: 'tag-1',
       index: 0,
       label: 'Jean-Michel Basquiat',
       onRemove: () => {
-        console.log("onRmove is passed in")
-      }
+        console.log('onRmove is passed in');
+      },
     },
     {
-      id: "tag-2",
+      id: 'tag-2',
       index: 1,
       label: 'Cecily Brown',
       onRemove: () => {
-        console.log("onRmove is passed in")
-      }
+        console.log('onRmove is passed in');
+      },
     },
     {
-      id: "tag-3",
+      id: 'tag-3',
       index: 2,
       label: 'Roy Lichtenstein',
       onRemove: () => {
-        console.log("onRmove is passed in")
-      }
+        console.log('onRmove is passed in');
+      },
     },
     {
-      id: "tag-4",
+      id: 'tag-4',
       index: 3,
       label: 'Amy Sherald',
       onRemove: () => {
-        console.log("onRmove is passed in")
-      }
+        console.log('onRmove is passed in');
+      },
     },
     {
-      id: "tag-5",
+      id: 'tag-5',
       index: 4,
       label: 'Cy Twombly',
       onRemove: () => {
-        console.log("onRmove is passed in")
-      }
+        console.log('onRmove is passed in');
+      },
     },
     {
-      id: "tag-6",
+      id: 'tag-6',
       index: 5,
       label: 'Andy Warhol',
       onRemove: () => {
-        console.log("onRmove is passed in")
-      }
+        console.log('onRmove is passed in');
+      },
     },
   ];
 
   it('renders a list of tags', () => {
-    render(<TagsList {...reqProps} onClear={vi.fn()}>
-      {tagsListExample.map((item) => (
-        <Tags
-          key={item.label}
-          id={item.id}
-          label={item.label}
-          onRemove={vi.fn()}
-        >
-        </Tags>
-      ))}
-    </TagsList>);
+    render(
+      <TagsList {...reqProps} onClear={vi.fn()}>
+        {tagsListExample.map((item) => (
+          <Tags key={item.label} id={item.id} label={item.label} onRemove={vi.fn()}></Tags>
+        ))}
+      </TagsList>,
+    );
     expect(screen.getByText('Jean-Michel Basquiat')).toBeInTheDocument();
     expect(screen.getByText('Cecily Brown')).toBeInTheDocument();
     expect(screen.getByText('Roy Lichtenstein')).toBeInTheDocument();
@@ -91,17 +87,13 @@ describe('Tags', () => {
     it('removes all tags with clear all button click', async () => {
       const { result } = renderHook(() => useMockState(tagsListExample));
       const { mockState, setMockState } = result.current;
-      render(<TagsList {...reqProps} onClear={() => setMockState([])}>
-        {mockState.map((item) => (
-          <Tags
-            key={item.label}
-            id={item.id}
-            label={item.label}
-            onRemove={vi.fn()}
-          >
-          </Tags>
-        ))}
-      </TagsList>);
+      render(
+        <TagsList {...reqProps} onClear={() => setMockState([])}>
+          {mockState.map((item) => (
+            <Tags key={item.label} id={item.id} label={item.label} onRemove={vi.fn()}></Tags>
+          ))}
+        </TagsList>,
+      );
       await userEvent.click(screen.getByTestId('test-id-clear-all-button'));
       expect(result.current.mockState).toEqual([]);
     });
@@ -109,10 +101,7 @@ describe('Tags', () => {
       const { result } = renderHook(() => useMockState(tagsListExample));
       const { mockState, setMockState } = result.current;
       render(
-        <TagsList
-          {...reqProps}
-          onClear={vi.fn()}
-        >
+        <TagsList {...reqProps} onClear={vi.fn()}>
           {mockState.map((item) => (
             <Tags
               key={item.label}
@@ -121,18 +110,17 @@ describe('Tags', () => {
               onRemove={(tag) => {
                 setMockState(mockState.filter((item) => item.label !== tag));
               }}
-            >
-            </Tags>
+            ></Tags>
           ))}
         </TagsList>,
       );
       await userEvent.click(screen.getByTestId('tag-6-item-close-button'));
-      expect(result.current.mockState).toHaveLength(5)
-      expect(result.current.mockState[0].label).toBe("Jean-Michel Basquiat")
-      expect(result.current.mockState[1].label).toBe("Cecily Brown")
-      expect(result.current.mockState[2].label).toBe("Roy Lichtenstein")
-      expect(result.current.mockState[3].label).toBe("Amy Sherald")
-      expect(result.current.mockState[4].label).toBe("Cy Twombly")
+      expect(result.current.mockState).toHaveLength(5);
+      expect(result.current.mockState[0].label).toBe('Jean-Michel Basquiat');
+      expect(result.current.mockState[1].label).toBe('Cecily Brown');
+      expect(result.current.mockState[2].label).toBe('Roy Lichtenstein');
+      expect(result.current.mockState[3].label).toBe('Amy Sherald');
+      expect(result.current.mockState[4].label).toBe('Cy Twombly');
     });
   });
 
@@ -140,17 +128,13 @@ describe('Tags', () => {
     it('removes all tags with clear all button focus and enter key', async () => {
       const { result } = renderHook(() => useMockState(tagsListExample));
       const { mockState, setMockState } = result.current;
-      render(<TagsList {...reqProps} onClear={() => setMockState([])}>
-        {mockState.map((item) => (
-          <Tags
-            key={item.label}
-            id={item.id}
-            label={item.label}
-            onRemove={vi.fn()}
-          >
-          </Tags>
-        ))}
-      </TagsList>);
+      render(
+        <TagsList {...reqProps} onClear={() => setMockState([])}>
+          {mockState.map((item) => (
+            <Tags key={item.label} id={item.id} label={item.label} onRemove={vi.fn()}></Tags>
+          ))}
+        </TagsList>,
+      );
       const clearAllButton = screen.getByTestId('test-id-clear-all-button');
       await clearAllButton.focus();
       await userEvent.keyboard('{Enter}');
@@ -160,10 +144,7 @@ describe('Tags', () => {
       const { result } = renderHook(() => useMockState(tagsListExample));
       const { mockState, setMockState } = result.current;
       render(
-        <TagsList
-          {...reqProps}
-          onClear={vi.fn()}
-        >
+        <TagsList {...reqProps} onClear={vi.fn()}>
           {mockState.map((item) => (
             <Tags
               key={item.label}
@@ -172,8 +153,7 @@ describe('Tags', () => {
               onRemove={(tag) => {
                 setMockState(mockState.filter((item) => item.label !== tag));
               }}
-            >
-            </Tags>
+            ></Tags>
           ))}
         </TagsList>,
       );
@@ -183,12 +163,12 @@ describe('Tags', () => {
       await userEvent.keyboard('{Tab}');
       await userEvent.keyboard('{Tab}');
       await userEvent.keyboard('{Enter}');
-      expect(result.current.mockState).toHaveLength(5)
-      expect(result.current.mockState[0].label).toBe("Jean-Michel Basquiat")
-      expect(result.current.mockState[1].label).toBe("Cecily Brown")
-      expect(result.current.mockState[2].label).toBe("Roy Lichtenstein")
-      expect(result.current.mockState[3].label).toBe("Amy Sherald")
-      expect(result.current.mockState[4].label).toBe("Andy Warhol")
+      expect(result.current.mockState).toHaveLength(5);
+      expect(result.current.mockState[0].label).toBe('Jean-Michel Basquiat');
+      expect(result.current.mockState[1].label).toBe('Cecily Brown');
+      expect(result.current.mockState[2].label).toBe('Roy Lichtenstein');
+      expect(result.current.mockState[3].label).toBe('Amy Sherald');
+      expect(result.current.mockState[4].label).toBe('Andy Warhol');
     });
   });
 });

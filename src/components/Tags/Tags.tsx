@@ -61,11 +61,7 @@ export const Tags = ({ id, className, onRemove, label }: TagsProps) => {
   return (
     <div className={classnames(`${px}-tag`, `${px}-button`, className)} aria-label="Close Tag">
       <div className={`${px}-tag__label`}>{label}</div>
-      <div
-        onClick={() => onRemove(label)}
-        className={`${px}-close-button`}
-        data-testid={`${id}-item-close-button`}
-      >
+      <div onClick={() => onRemove(label)} className={`${px}-close-button`} data-testid={`${id}-item-close-button`}>
         <IconButton className={`${px}-close-button__close`}>
           <CloseIcon />
         </IconButton>
@@ -74,7 +70,14 @@ export const Tags = ({ id, className, onRemove, label }: TagsProps) => {
   );
 };
 
-const TagsList = ({ className, children, tagClassName, i18n = { clearAllLabel: 'Clear All' }, onClear, ...props }: TagsListProps) => {
+const TagsList = ({
+  className,
+  children,
+  tagClassName,
+  i18n = { clearAllLabel: 'Clear All' },
+  onClear,
+  ...props
+}: TagsListProps) => {
   const type = 'tags-list';
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TagsList');
   const { id } = props;
