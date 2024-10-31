@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/react';
 import { useState } from 'react';
 
-import TagsList, { Tags, TagsListProps, i18n } from './Tags';
+import TagsList, { Tags, TagsListProps } from './Tags';
 
 const meta = {
   title: 'Components/Tags',
@@ -46,6 +46,9 @@ const tagsListExample = [
     label: 'Andy Warhol',
   },
 ];
+const i18n = {
+  clearAllLabel: 'Clear All',
+};
 
 const argTypes = {
   onClear: {

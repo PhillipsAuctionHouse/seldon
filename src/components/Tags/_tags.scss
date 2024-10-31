@@ -6,16 +6,16 @@
   gap: $spacing-sm;
 
   .#{$px}-tag {
+    align-items: center;
     background-color: $pure-white;
     border: 1px solid $button-hover;
     border-radius: 6.25rem;
     cursor: default;
     display: flex;
-    height: $button-tertiary-height;
-    padding: 0 $spacing-xsm 0 $spacing-sm;
-    justify-content: center;
-    align-items: center;
     gap: 0;
+    height: $button-tertiary-height;
+    justify-content: center;
+    padding: 0 $spacing-xsm 0 $spacing-sm;
 
     &__label {
       color: $button-hover;
@@ -25,12 +25,12 @@
     }
 
     .#{$px}-close-button {
-      display: flex;
-      height: $button-tertiary-height;
-      padding: 0;
-      justify-content: center;
       align-items: center;
+      display: flex;
       gap: $spacing-micro;
+      height: $button-tertiary-height;
+      justify-content: center;
+      padding: 0;
 
       &__close {
         font-size: 0.75rem;

@@ -11,10 +11,6 @@ export interface I18nObject {
   clearAllLabel?: string;
 }
 
-export const i18n = {
-  clearAllLabel: 'Clear All',
-};
-
 export interface TagsListProps {
   /**
    * Unique id for component testing
