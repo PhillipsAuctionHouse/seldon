@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/react';
 import { useState } from 'react';
 
-import TagsList, { Tags, TagsListProps } from './Tags';
+import TagsList, { Tags, TagsListProps, i18n } from './Tags';
 
 const meta = {
   title: 'Components/Tags',
@@ -66,6 +66,7 @@ export const Playground = ({ playgroundWidth, ...args }: StoryProps) => {
         onClear={() => {
           setTagsList([]);
         }}
+        i18n={i18n}
       >
         {tagsList.map((item) => (
           <Tags

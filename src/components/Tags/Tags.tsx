@@ -12,7 +12,7 @@ export interface I18nObject {
 }
 
 export const i18n = {
-  clearAllLabel: '_clearAllLabel_',
+  clearAllLabel: 'Clear All',
 };
 
 export interface TagsListProps {
@@ -78,11 +78,11 @@ export const Tags = ({ id, className, onRemove, label }: TagsProps) => {
   );
 };
 
-const TagsList = ({ className, children, tagClassName, i18n = {}, onClear, ...props }: TagsListProps) => {
+const TagsList = ({ className, children, tagClassName, i18n = { clearAllLabel: 'Clear All' }, onClear, ...props }: TagsListProps) => {
   const type = 'tags-list';
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TagsList');
   const { id } = props;
-  const { clearAllLabel = 'Clear All' } = i18n;
+  const { clearAllLabel } = i18n;
 
   return (
     <div
