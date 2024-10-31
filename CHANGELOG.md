@@ -1,3 +1,10 @@
+# [1.87.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.86.0...v1.87.0) (2024-10-31)
+
+
+### Features
+
+* **tabs:** L3-2396 tabs add controlled state ([#412](https://github.com/PhillipsAuctionHouse/seldon/issues/412)) ([6c9ad7f](https://github.com/PhillipsAuctionHouse/seldon/commit/6c9ad7f398e046801452a208eb8a53d25dfcc0e0))
+
 # [1.86.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.85.1...v1.86.0) (2024-10-30)
 
 
