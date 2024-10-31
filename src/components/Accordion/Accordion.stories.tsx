@@ -10,9 +10,6 @@ import { AccordionItemVariant, AccordionVariants } from './types';
 const meta = {
   title: 'Components/Accordion',
   component: Accordion,
-  args: {
-    transitionTimeInMs: 250,
-  },
   argTypes: {
     variant: {
       options: Object.values(AccordionVariants),
@@ -21,7 +18,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof AccordionLarge>;
+} satisfies Meta<typeof Accordion>;
 
 export default meta;
 
@@ -48,7 +45,7 @@ const largeTextItems = [
   },
 ];
 
-export const AccordionLarge = ({ transitionTimeInMs, ...props }: AccordionProps & AccordionItemProps) => (
+export const AccordionLarge = ({ transitionTimeInMs = 250, ...props }: AccordionProps & AccordionItemProps) => (
   <Accordion {...props}>
     {largeTextItems.map((item, index, arr) => (
       <AccordionItem

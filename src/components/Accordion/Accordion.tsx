@@ -1,6 +1,6 @@
 import { AccordionVariantKey } from './types';
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import * as Accordion from '@radix-ui/react-accordion';
@@ -22,6 +22,14 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    * Child element pass in to display as item content.
    */
   children?: React.ReactNode;
+  /**
+   * Array of values to set the accordion items to.
+   */
+  values?: string[];
+  /**
+   * Callback function to be called when the values change.
+   */
+  onValuesChanged?: (values: string[]) => void;
 }
 /**
  * ## Overview
@@ -32,20 +40,28 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-accordion--overview)
  */
-const AccordionComponent = ({ className, children, ...props }: AccordionProps) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Accordion');
-  const variantProps = getAccordionVariantProps(props.variant);
+const AccordionComponent = forwardRef<HTMLDivElement, AccordionProps>(
+  ({ className, children, values, onValuesChanged, ...props }: AccordionProps, ref) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Accordion');
+    const variantProps = getAccordionVariantProps(props.variant);
 
-  return (
-    <Accordion.Root
-      className={classnames(`${baseClassName}`, className)}
-      {...commonProps}
-      {...variantProps}
-      id={props?.id}
-    >
-      {children}
-    </Accordion.Root>
-  );
-};
+    return (
+      <Accordion.Root
+        className={classnames(`${baseClassName}`, className)}
+        {...commonProps}
+        {...variantProps}
+        id={props?.id}
+        ref={ref}
+        type="multiple"
+        value={values}
+        onValueChange={onValuesChanged}
+      >
+        {children}
+      </Accordion.Root>
+    );
+  },
+);
+
+AccordionComponent.displayName = 'Accordion';
 
 export default AccordionComponent;

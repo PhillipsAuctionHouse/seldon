@@ -23,6 +23,10 @@ $lg: #{$px}-input--lg;
     &--hidden {
       @include hidden;
     }
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 1rem;
+    }
   }
 
   &__input {
@@ -47,7 +51,7 @@ $lg: #{$px}-input--lg;
     -webkit-box-orient: vertical;
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    line-height: 1.25;
+    line-height: $spacing-md;
     overflow: hidden;
   }
 
