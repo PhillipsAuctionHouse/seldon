@@ -1,9 +1,9 @@
+import * as TabsPrimitive from '@radix-ui/react-tabs';
+import classnames from 'classnames';
 import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
-import classnames from 'classnames';
-import * as TabsPrimitive from '@radix-ui/react-tabs';
-import TabTrigger from './TabTrigger';
 import { Text, TextVariants } from '../Text';
+import TabTrigger from './TabTrigger';
 
 // Define the type for each tab, which includes its label, value, and content
 export interface Tab {
@@ -23,7 +23,7 @@ export interface Tab {
  * @param {TabsContainerProps} props - The component props containing an array of tabs.
  * @returns {JSX.Element} The rendered tab component.
  */
-export interface TabsContainerProps extends ComponentProps<'div'> {
+export interface TabsContainerProps extends TabsPrimitive.TabsProps, Omit<ComponentProps<'div'>, 'dir'> {
   tabs: Tab[];
   /**
    * Specify the default tab
@@ -33,6 +33,10 @@ export interface TabsContainerProps extends ComponentProps<'div'> {
    * Aria-label for specific tab list view
    */
   tabListLabel?: string;
+  /**
+   * Optional value for controlled tabs
+   */
+  value?: string;
   /**
    * Optional handler when a tab is clicked
    */
@@ -54,11 +58,16 @@ export interface TabsContainerProps extends ComponentProps<'div'> {
  */
 
 const TabsContainer = forwardRef<HTMLDivElement, TabsContainerProps>(
-  ({ className, tabs = [], tabListLabel = 'Sale Page Tabs', children, defaultValue, onTabClick, ...props }, ref) => {
+  (
+    { className, tabs = [], tabListLabel = 'Sale Page Tabs', children, defaultValue, value, onTabClick, ...props },
+    ref,
+  ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TabsContainer');
     return (
       <TabsPrimitive.Root
+        {...props}
         defaultValue={defaultValue || tabs[0].value}
+        value={value}
         {...commonProps}
         className={classnames(`${baseClassName}`, className)}
         ref={ref}
@@ -69,7 +78,7 @@ const TabsContainer = forwardRef<HTMLDivElement, TabsContainerProps>(
               key={tab.value}
               value={tab.value}
               className={`${baseClassName}__tabs-trigger`}
-              onTabClick={onTabClick}
+              onClick={onTabClick}
             >
               <Text variant={TextVariants.label}>{tab.label}</Text>
             </TabTrigger>

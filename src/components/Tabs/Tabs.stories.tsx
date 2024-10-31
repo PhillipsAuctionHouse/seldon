@@ -1,7 +1,9 @@
 import { Meta } from '@storybook/react';
+import { useState } from 'react';
+import Button from '../Button/Button';
+import { Text, TextVariants } from '../Text';
 import TabsContainer, { TabsContainerProps } from './TabsContainer';
 import TabsContent, { TabContentProps } from './TabsContent';
-import { Text } from '../Text';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -45,6 +47,27 @@ export const BrowseTabSelected = () => (
     </TabsContent>
   </TabsContainer>
 );
+
+// Story with controlled tabs
+export const ControlledTabs = () => {
+  const [value, setValue] = useState('overview');
+
+  return (
+    <>
+      <TabsContainer tabs={tabs} value={value} onTabClick={setValue}>
+        <TabsContent value="overview">
+          <p>This content is for the Overview tab.</p>
+        </TabsContent>
+        <TabsContent value="browse">
+          <p>This content is for the Browse lots tab.</p>
+        </TabsContent>
+      </TabsContainer>
+      <Text variant={TextVariants.heading4}>Control state from outside the component</Text>
+      <Button onClick={() => setValue('browse')}>Change to Browse tab</Button>
+      <Button onClick={() => setValue('overview')}>Change to Overview tab</Button>
+    </>
+  );
+};
 
 const componentTabs = [
   {
