@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { Text } from '../Text';
 import TabsContainer from './TabsContainer';
 import TabsContent from './TabsContent';
-import { Text } from '../Text';
-import userEvent from '@testing-library/user-event';
 
 describe('Tabs', () => {
   const tabs = [
@@ -72,6 +72,19 @@ describe('Tabs', () => {
 
     render(
       <TabsContainer tabs={tabs} defaultValue="browse" onTabClick={onTabClickMock}>
+        <TabsContent value="overview">Overview content</TabsContent>
+        <TabsContent value="browse">Browse lots content</TabsContent>
+      </TabsContainer>,
+    );
+
+    await userEvent.click(screen.getByRole('tab', { name: /Overview/i }));
+    expect(onTabClickMock).toBeCalledWith('overview'); // Validate that the clicked tab value is correct
+  });
+  test('controlled state overrides defaultValue', async () => {
+    const onTabClickMock = vitest.fn();
+
+    render(
+      <TabsContainer tabs={tabs} defaultValue="browse" value="browse" onTabClick={onTabClickMock}>
         <TabsContent value="overview">Overview content</TabsContent>
         <TabsContent value="browse">Browse lots content</TabsContent>
       </TabsContainer>,
