@@ -35,7 +35,7 @@ export interface TagsListProps {
   /**
    * Clear All label is translatable
    */
-  i18n?: I18nObject;
+  clearAllLabel?: string;
 }
 
 export interface TagsProps {
@@ -61,8 +61,8 @@ export const Tags = ({ id, className, onRemove, label }: TagsProps) => {
   return (
     <div className={classnames(`${px}-tag`, `${px}-button`, className)} aria-label="Close Tag">
       <div className={`${px}-tag__label`}>{label}</div>
-      <div onClick={() => onRemove(label)} className={`${px}-close-button`} data-testid={`${id}-item-close-button`}>
-        <IconButton className={`${px}-close-button__close`}>
+      <div onClick={() => onRemove(label)} className={`${px}-tag__button`} data-testid={`${id}-item-close-button`}>
+        <IconButton className={`${px}-tag__button--close`} size="sm">
           <CloseIcon />
         </IconButton>
       </div>
@@ -74,14 +74,13 @@ const TagsList = ({
   className,
   children,
   tagClassName,
-  i18n = { clearAllLabel: 'Clear All' },
+  clearAllLabel = 'Clear All',
   onClear,
   ...props
 }: TagsListProps) => {
   const type = 'tags-list';
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TagsList');
   const { id } = props;
-  const { clearAllLabel } = i18n;
 
   return (
     <div

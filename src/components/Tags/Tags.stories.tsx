@@ -46,9 +46,6 @@ const tagsListExample = [
     label: 'Andy Warhol',
   },
 ];
-const i18n = {
-  clearAllLabel: 'Clear All',
-};
 
 const argTypes = {
   onClear: {
@@ -69,7 +66,6 @@ export const Playground = ({ playgroundWidth, ...args }: StoryProps) => {
         onClear={() => {
           setTagsList([]);
         }}
-        i18n={i18n}
       >
         {tagsList.map((item) => (
           <Tags
