@@ -1,3 +1,5 @@
+import { AccordionMultipleProps, AccordionSingleProps } from '@radix-ui/react-accordion';
+
 // AccordionHeader Interface
 export interface AccordionHeaderType {
   /**
@@ -78,16 +80,11 @@ export enum AccordionVariants {
 }
 export type AccordionVariantKey = keyof typeof AccordionVariants;
 
-export enum AccordionType {
-  single = 'single',
-  multiple = 'multiple',
-}
-
 export interface AccordionVariantProps {
   /**
    * Determines whether multiple elements can be opened at the same time or not.
    */
-  type: AccordionType;
+  type: AccordionSingleProps['type'] | AccordionMultipleProps['type'];
   /**
    * Determines if an open element can be closed by clicking on it.
    * Only applicable to the `single` variants.

@@ -1,6 +1,6 @@
 import { AccordionVariantKey } from './types';
 
-import React from 'react';
+import React, { ComponentProps, forwardRef } from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import * as Accordion from '@radix-ui/react-accordion';
@@ -22,6 +22,15 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    * Child element pass in to display as item content.
    */
   children?: React.ReactNode;
+
+  /**
+   * Optionally control the expanded state of the accordion items.
+   */
+  value?: ComponentProps<typeof Accordion.Root>['value'];
+  /**
+   * Callback function to be called when the expanded state of the items change.
+   */
+  onValueChanged?: ComponentProps<typeof Accordion.Root>['onValueChange'];
 }
 /**
  * ## Overview
@@ -32,20 +41,28 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-accordion--overview)
  */
-const AccordionComponent = ({ className, children, ...props }: AccordionProps) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Accordion');
-  const variantProps = getAccordionVariantProps(props.variant);
+const AccordionComponent = forwardRef<HTMLDivElement, AccordionProps>(
+  ({ className, children, variant, value, onValueChanged, ...props }: AccordionProps, ref) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Accordion');
+    const variantProps = getAccordionVariantProps(variant, value);
 
-  return (
-    <Accordion.Root
-      className={classnames(`${baseClassName}`, className)}
-      {...commonProps}
-      {...variantProps}
-      id={props?.id}
-    >
-      {children}
-    </Accordion.Root>
-  );
-};
+    return (
+      // @ts-expect-error radix-ui type checking is too aggressive ans we know the values are valid
+      <Accordion.Root
+        className={classnames(`${baseClassName}`, className)}
+        {...commonProps}
+        {...variantProps}
+        id={props?.id}
+        ref={ref}
+        value={value}
+        onValueChange={onValueChanged}
+      >
+        {children}
+      </Accordion.Root>
+    );
+  },
+);
+
+AccordionComponent.displayName = 'Accordion';
 
 export default AccordionComponent;

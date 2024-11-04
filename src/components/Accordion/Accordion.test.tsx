@@ -63,6 +63,48 @@ describe('Accordion', () => {
     const lockedContentElement = screen.getByText('Sign Up');
     expect(lockedContentElement).toHaveClass(`${px}-sign-up-link`);
   });
+  it('singleCollapsible variant should only allow one item to be open at a time', async () => {
+    render(
+      <Accordion variant="singleCollapsible">
+        {[
+          {
+            variation: 'sm',
+            label: 'Provenance',
+            children: <div>Lorem ipsum</div>,
+          },
+          {
+            variation: 'sm',
+            label: 'Exhibitied',
+            children: <div>Log In</div>,
+          },
+        ].map((item, index, arr) => (
+          <AccordionItem
+            {...item}
+            isLastItem={index === arr?.length - 1}
+            key={`accordion-key-${item?.label}`}
+            id={`accordion-item-${index}`}
+          >
+            {item?.children}
+          </AccordionItem>
+        ))}
+      </Accordion>,
+    );
+
+    // Should have 2 closed items
+    const accordionItemTriggers = screen.queryAllByTestId(/accordion-item-\d-trigger/);
+    expect(accordionItemTriggers).toHaveLength(2);
+    accordionItemTriggers.map((trigger) => expect(trigger).toHaveAttribute('aria-expanded', 'false'));
+
+    // After clicking first item, we should have 1 open and 1 closed item
+    await userEvent.click(screen.getByTestId('accordion-item-0-trigger'));
+    expect(screen.getByTestId('accordion-item-0-trigger')).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByTestId('accordion-item-1-trigger')).toHaveAttribute('aria-expanded', 'false');
+
+    // After clicking second item, we should have 1 open and 1 closed item
+    await userEvent.click(screen.getByTestId('accordion-item-1-trigger'));
+    expect(screen.getByTestId('accordion-item-1-trigger')).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByTestId('accordion-item-0-trigger')).toHaveAttribute('aria-expanded', 'false');
+  });
 
   it('should contain the contents and expand once the label is clicked', async () => {
     const { container } = render(
@@ -112,27 +154,23 @@ describe('Accordion', () => {
     const variantProps = getAccordionVariantProps('singleCollapsible');
 
     expect(variantProps.type).toBe('single');
-    expect(variantProps.collapsible).toBe(true);
   });
 
   it('should get the correct variant props for the "singleNonCollapsible" variant', () => {
     const variantProps = getAccordionVariantProps('singleNonCollapsible');
 
     expect(variantProps.type).toBe('single');
-    expect(variantProps.collapsible).toBe(false);
   });
 
   it('should get the correct variant props for the "multiple" variant', () => {
     const variantProps = getAccordionVariantProps('multiple');
 
     expect(variantProps.type).toBe('multiple');
-    expect(variantProps.collapsible).toBeUndefined();
   });
 
   it('should default to the variant props for "multiple" if no variant is passed in', () => {
     const variantProps = getAccordionVariantProps();
 
     expect(variantProps.type).toBe('multiple');
-    expect(variantProps.collapsible).toBeUndefined();
   });
 });

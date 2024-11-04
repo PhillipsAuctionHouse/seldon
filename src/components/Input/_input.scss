@@ -14,8 +14,9 @@ $lg: #{$px}-input--lg;
   }
 
   &__label {
+    @include text($string2);
+
     color: $pure-black;
-    font-size: 0.75rem;
     font-variation-settings: 'wght' 600;
     margin-bottom: 0.5rem;
     word-break: break-word;
@@ -47,7 +48,7 @@ $lg: #{$px}-input--lg;
     -webkit-box-orient: vertical;
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    line-height: 1.25;
+    line-height: $spacing-md;
     overflow: hidden;
   }
 
