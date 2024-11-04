@@ -96,9 +96,11 @@ const Search = ({
       e.preventDefault();
       if (value && value.length > 2) {
         const allResultsLink = encodeURLSearchParams(getAllResultsLink(value));
+        showSearch(false);
         window.location.href = allResultsLink;
       }
       if (e.currentTarget instanceof HTMLAnchorElement) {
+        showSearch(false);
         e.currentTarget.click();
       }
     }
