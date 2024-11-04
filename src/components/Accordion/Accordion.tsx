@@ -1,6 +1,6 @@
 import { AccordionVariantKey } from './types';
 
-import React, { forwardRef } from 'react';
+import React, { ComponentProps, forwardRef } from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import * as Accordion from '@radix-ui/react-accordion';
@@ -22,14 +22,15 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
    * Child element pass in to display as item content.
    */
   children?: React.ReactNode;
+
   /**
-   * Array of values to set the accordion items to.
+   * Optionally control the expanded state of the accordion items.
    */
-  values?: string[];
+  value?: ComponentProps<typeof Accordion.Root>['value'];
   /**
-   * Callback function to be called when the values change.
+   * Callback function to be called when the expanded state of the items change.
    */
-  onValuesChanged?: (values: string[]) => void;
+  onValueChanged?: ComponentProps<typeof Accordion.Root>['onValueChange'];
 }
 /**
  * ## Overview
@@ -41,20 +42,20 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-accordion--overview)
  */
 const AccordionComponent = forwardRef<HTMLDivElement, AccordionProps>(
-  ({ className, children, values, onValuesChanged, ...props }: AccordionProps, ref) => {
+  ({ className, children, variant, value, onValueChanged, ...props }: AccordionProps, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Accordion');
-    const variantProps = getAccordionVariantProps(props.variant);
+    const variantProps = getAccordionVariantProps(variant, value);
 
     return (
+      // @ts-expect-error radix-ui type checking is too aggressive ans we know the values are valid
       <Accordion.Root
         className={classnames(`${baseClassName}`, className)}
         {...commonProps}
         {...variantProps}
         id={props?.id}
         ref={ref}
-        type="multiple"
-        value={values}
-        onValueChange={onValuesChanged}
+        value={value}
+        onValueChange={onValueChanged}
       >
         {children}
       </Accordion.Root>

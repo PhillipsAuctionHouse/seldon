@@ -6,6 +6,7 @@ import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
 import Accordion, { AccordionProps } from './Accordion';
 import AccordionItem, { AccordionItemProps } from './AccordionItem';
 import { AccordionItemVariant, AccordionVariants } from './types';
+import Button from '../Button/Button';
 
 const meta = {
   title: 'Components/Accordion',
@@ -140,5 +141,36 @@ export const AccordionSubmenu = ({ transitionTimeInMs, ...props }: AccordionProp
         </div>
       </AccordionItem>
     </Accordion>
+  );
+};
+
+export const ControlledAccordion = ({ items, ...props }: AccordionProps & { items: AccordionItemProps[] }) => {
+  const [expandedAccordionItems, setExpandedAccordionItems] = useState<string[] | undefined>();
+
+  const middleAccordionItemId = 'accordion-item-1';
+  return (
+    <div>
+      <Button
+        onClick={() =>
+          setExpandedAccordionItems(
+            expandedAccordionItems?.includes(middleAccordionItemId)
+              ? expandedAccordionItems?.filter((item) => item !== middleAccordionItemId)
+              : [...(expandedAccordionItems ?? []), middleAccordionItemId],
+          )
+        }
+      >{`${expandedAccordionItems?.includes(middleAccordionItemId) ? 'Collapse' : 'Expand'} middle accordion item`}</Button>
+      <Accordion {...props} value={expandedAccordionItems} onValueChanged={setExpandedAccordionItems}>
+        {smallTextItems.map((item, index, arr) => (
+          <AccordionItem
+            {...item}
+            isLastItem={index === arr?.length - 1}
+            key={`accordion-key-${item?.label}`}
+            id={`accordion-item-${index}`}
+          >
+            {item?.children}
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </div>
   );
 };
