@@ -1,3 +1,10 @@
+# [1.88.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.87.0...v1.88.0) (2024-11-04)
+
+
+### Features
+
+* **search:** L3-4328 onKeyDown fix ([#416](https://github.com/PhillipsAuctionHouse/seldon/issues/416)) ([e395e44](https://github.com/PhillipsAuctionHouse/seldon/commit/e395e4431cfdb477fa9da5619515c117c6813bfb))
+
 # [1.87.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.86.0...v1.87.0) (2024-10-31)
 
 
