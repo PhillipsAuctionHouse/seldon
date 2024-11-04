@@ -1,3 +1,10 @@
+## [1.88.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.88.0...v1.88.1) (2024-11-04)
+
+
+### Bug Fixes
+
+* **lotdetails:** L3-3327 fix input labels on non-mobile breakpoints, … ([#413](https://github.com/PhillipsAuctionHouse/seldon/issues/413)) ([dea513e](https://github.com/PhillipsAuctionHouse/seldon/commit/dea513e14b74edccefe249345791d82e06f7679a))
+
 # [1.88.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.87.0...v1.88.0) (2024-11-04)
 
 
