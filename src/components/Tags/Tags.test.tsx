@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { render, screen, renderHook } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { runCommonTests } from '../../utils/testUtils';
-import TagsList, { Tags, TagsProps } from './Tags';
+import TagsList, { Tag, TagProps } from './Tags';
 
-const useMockState = (tagsList: TagsProps[]) => {
+const useMockState = (tagsList: TagProps[]) => {
   const [mockState, setMockState] = useState(tagsList);
   return {
     mockState,
@@ -71,7 +71,7 @@ describe('Tags', () => {
     render(
       <TagsList {...reqProps} onClear={vi.fn()}>
         {tagsListExample.map((item) => (
-          <Tags key={item.label} id={item.id} label={item.label} onRemove={vi.fn()}></Tags>
+          <Tag key={item.label} id={item.id} label={item.label} onRemove={vi.fn()}></Tag>
         ))}
       </TagsList>,
     );
@@ -90,7 +90,7 @@ describe('Tags', () => {
       render(
         <TagsList {...reqProps} onClear={() => setMockState([])}>
           {mockState.map((item) => (
-            <Tags key={item.label} id={item.id} label={item.label} onRemove={vi.fn()}></Tags>
+            <Tag key={item.label} id={item.id} label={item.label} onRemove={vi.fn()}></Tag>
           ))}
         </TagsList>,
       );
@@ -103,14 +103,14 @@ describe('Tags', () => {
       render(
         <TagsList {...reqProps} onClear={vi.fn()}>
           {mockState.map((item) => (
-            <Tags
+            <Tag
               key={item.label}
               id={item.id}
               label={item.label}
               onRemove={(tag) => {
                 setMockState(mockState.filter((item) => item.label !== tag));
               }}
-            ></Tags>
+            ></Tag>
           ))}
         </TagsList>,
       );
@@ -131,7 +131,7 @@ describe('Tags', () => {
       render(
         <TagsList {...reqProps} onClear={() => setMockState([])}>
           {mockState.map((item) => (
-            <Tags key={item.label} id={item.id} label={item.label} onRemove={vi.fn()}></Tags>
+            <Tag key={item.label} id={item.id} label={item.label} onRemove={vi.fn()}></Tag>
           ))}
         </TagsList>,
       );
@@ -146,14 +146,14 @@ describe('Tags', () => {
       render(
         <TagsList {...reqProps} onClear={vi.fn()}>
           {mockState.map((item) => (
-            <Tags
+            <Tag
               key={item.label}
               id={item.id}
               label={item.label}
               onRemove={(tag) => {
                 setMockState(mockState.filter((item) => item.label !== tag));
               }}
-            ></Tags>
+            ></Tag>
           ))}
         </TagsList>,
       );

@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/react';
 import { useState } from 'react';
 
-import TagsList, { Tags, TagsListProps } from './Tags';
+import TagsList, { Tag, TagsListProps } from './Tags';
 
 const meta = {
   title: 'Components/Tags',
@@ -68,14 +68,14 @@ export const Playground = ({ playgroundWidth, ...args }: StoryProps) => {
         }}
       >
         {tagsList.map((item) => (
-          <Tags
+          <Tag
             key={item.label}
             id={item.id}
             label={item.label}
             onRemove={(tag) => {
               setTagsList(tagsList.filter((item) => item.label !== tag));
             }}
-          ></Tags>
+          ></Tag>
         ))}
       </TagsList>
     </div>

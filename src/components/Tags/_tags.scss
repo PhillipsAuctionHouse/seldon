@@ -1,6 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-tags-list {
+  align-items: center;
   display: flex;
   flex-flow: row wrap;
   gap: $spacing-sm;
