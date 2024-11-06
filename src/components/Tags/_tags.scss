@@ -1,0 +1,137 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-tags-list {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  gap: $spacing-sm;
+
+  .#{$px}-tag {
+    align-items: center;
+    background-color: $pure-white;
+    border: 1px solid $button-hover;
+    border-radius: 6.25rem;
+    cursor: default;
+    display: flex;
+    gap: 0;
+    height: $button-tertiary-height;
+    justify-content: center;
+    padding: 0 $spacing-xsm 0 $spacing-sm;
+
+    &__label {
+      color: $button-hover;
+      font-size: 0.75rem;
+      font-variation-settings: 'wght' 600;
+      text-align: center;
+    }
+
+    &__button {
+      align-items: center;
+      display: flex;
+      gap: $spacing-micro;
+      height: $button-tertiary-height;
+      justify-content: center;
+      padding: 0;
+
+      &--close {
+        height: 1.25rem;
+        width: 1.25rem;
+
+        svg {
+          height: 1rem;
+          width: 1rem;
+
+          path {
+            fill: $button-hover;
+          }
+
+          &:focus {
+            fill: $pure-black;
+          }
+        }
+
+        &:hover {
+          background-color: $pure-white;
+
+          svg {
+            path {
+              fill: $pure-black;
+            }
+          }
+        }
+
+        &:focus {
+          svg {
+            path {
+              fill: $pure-black;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &--clear {
+    align-items: center;
+    border-color: $pure-white;
+    display: flex;
+    gap: 0;
+    height: 2rem;
+
+    &:hover {
+      cursor: pointer;
+
+      .#{$px}-left-arrow {
+        svg {
+          fill: $pure-black;
+
+          path {
+            fill: $pure-black;
+          }
+        }
+      }
+    }
+
+    &:focus-visible {
+      border-color: $button-hover;
+      border-radius: 6.25rem;
+      gap: 0;
+      outline-offset: 0;
+      padding: 0;
+    }
+
+    .#{$px}-left-arrow {
+      transform: rotateX(-1);
+
+      svg {
+        height: 1rem;
+        width: 1rem;
+      }
+
+      &:hover {
+        background: $pure-white;
+
+        svg {
+          fill: $pure-black;
+
+          path {
+            fill: $pure-black;
+          }
+        }
+      }
+
+      &:focus-visible {
+        &:focus-visible {
+          outline: none;
+          outline-offset: none;
+        }
+      }
+    }
+
+    .#{$px}-label {
+      color: $pure-black;
+      font-size: 0.875rem;
+      font-variation-settings: 'wght' 600;
+    }
+  }
+}
