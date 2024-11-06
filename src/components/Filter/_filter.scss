@@ -1,0 +1,72 @@
+@use '#scss/allPartials' as *;
+
+$default-transition-duration: 0.3s;
+$default-easing: ease-in-out;
+$chevron-scale: 0.8;
+
+@keyframes slide {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// temp override while input being fixed
+.#{$px}-input__input {
+  height: 20px;
+  width: 20px;
+}
+
+.#{$px}-filter {
+  &__chevron {
+    transform: scale($chevron-scale);
+  }
+
+  &.#{$px}-has-separators {
+    border-bottom: 1px solid $light-gray;
+    margin-bottom: $spacing-md;
+    padding-bottom: $spacing-sm;
+  }
+
+  &.is-open {
+    animation: slide $default-transition-duration $default-easing forwards;
+  }
+}
+
+.#{$px}-filter-value {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  justify-content: space-between;
+
+  &__label {
+    font-variation-settings: 'wght' 600;
+    width: 70%;
+  }
+
+  .disabled-label {
+    color: $keyline-gray;
+    cursor: default;
+  }
+
+  &__input {
+    &__wrapper {
+      flex-direction: row;
+      justify-content: flex-end;
+      width: 25%;
+    }
+  }
+}
+
+.#{$px}-filter-header {
+  margin-bottom: $spacing-md;
+
+  &__chevron {
+    transform: rotateY(180deg) scale($chevron-scale);
+  }
+}
