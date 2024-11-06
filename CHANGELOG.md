@@ -1,3 +1,10 @@
+# [1.89.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.88.1...v1.89.0) (2024-11-06)
+
+
+### Features
+
+* **Tags:** L3-3816 Create Tags Component ([#398](https://github.com/PhillipsAuctionHouse/seldon/issues/398)) ([9e229e8](https://github.com/PhillipsAuctionHouse/seldon/commit/9e229e860f54b40457d39b866dba0a4f38c67b16))
+
 ## [1.88.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.88.0...v1.88.1) (2024-11-04)
 
 
