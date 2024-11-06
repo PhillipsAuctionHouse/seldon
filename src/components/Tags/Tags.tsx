@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { px } from '../../utils';
@@ -75,35 +76,39 @@ export const Tag = ({ id, className, onRemove, label }: TagProps) => {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-tags--overview)
  */
-const TagsList = ({ className, children, clearAllLabel = 'Clear All', onClear, ...props }: TagsListProps) => {
-  const type = 'tags-list';
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TagsList');
-  const { id } = props;
+const TagsList = forwardRef<HTMLDivElement, TagsListProps>(
+  ({ className, children, clearAllLabel = 'Clear All', onClear, ...props }, ref) => {
+    const type = 'tags-list';
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TagsList');
+    const { id } = props;
+    return (
+      <div
+        className={classnames(`${px}-${type}`, baseClassName, className)}
+        {...commonProps}
+        {...props}
+        data-testid={`${type}-${id}`}
+        ref={ref}
+      >
+        {children}
+        {Array.isArray(children) && children.length > 0 && (
+          <Button
+            onClick={onClear}
+            data-testid={`${id}-clear-all-button`}
+            className={`${px}-${type}--clear`}
+            aria-label={clearAllLabel}
+            variant={ButtonVariants.tertiary}
+          >
+            <div className={`${px}-left-arrow`}>
+              <ChevronRight />
+            </div>
+            <div className={`${px}-label`}>{clearAllLabel}</div>
+          </Button>
+        )}
+      </div>
+    );
+  },
+);
 
-  return (
-    <div
-      className={classnames(`${px}-${type}`, baseClassName, className)}
-      {...commonProps}
-      {...props}
-      data-testid={`${type}-${id}`}
-    >
-      {children}
-      {Array.isArray(children) && children.length > 0 && (
-        <Button
-          onClick={onClear}
-          data-testid={`${id}-clear-all-button`}
-          className={`${px}-${type}--clear`}
-          aria-label={clearAllLabel}
-          variant={ButtonVariants.tertiary}
-        >
-          <div className={`${px}-left-arrow`}>
-            <ChevronRight />
-          </div>
-          <div className={`${px}-label`}>{clearAllLabel}</div>
-        </Button>
-      )}
-    </div>
-  );
-};
+TagsList.displayName = 'Tags';
 
 export default TagsList;
