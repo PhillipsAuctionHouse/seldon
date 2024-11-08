@@ -44,6 +44,10 @@ export type HeaderContextType = {
    * Set the search expanded state
    */
   setIsSearchExpanded: React.Dispatch<React.SetStateAction<boolean>>;
+  /**
+   * Close the mobile menu
+   * */
+  closeMenu?: () => void;
 };
 
 export const HeaderContext = createContext<HeaderContextType>(defaultHeaderContext);
@@ -83,6 +87,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     const handleMenuToggle = function () {
       setIsMenuOpen((prev) => !prev);
     };
+    const closeMenu = () => setIsMenuOpen(false);
 
     return (
       <header {...props} className={classnames(`${px}-header`, className)} ref={ref}>
@@ -118,6 +123,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
                 isMenuOpen,
                 isSearchExpanded,
                 setIsSearchExpanded,
+                closeMenu,
               } as HeaderContextType
             }
           >

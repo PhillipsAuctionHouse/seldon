@@ -45,6 +45,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
     const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'NavigationItemTrigger');
     const [isSubmenuOpened, setIsSubmenuOpened] = useState(false);
     const navListElement = findChildrenOfType<NavigationListProps>(children, NavigationList);
+    const closeSubmenu = () => setIsSubmenuOpened(false);
 
     return (
       <>
@@ -74,7 +75,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
               <Text variant={TextVariants.snwHeaderLink}>{label}</Text>
             </button>
             {navListElement
-              ? React.cloneElement(navListElement[0], { className: `${baseClassName}__submenu` })
+              ? React.cloneElement(navListElement[0], { className: `${baseClassName}__submenu`, closeSubmenu })
               : undefined}
           </li>
         </SSRMediaQuery.Media>

@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import Link, { LinkProps } from '../../Link/Link';
 import { LinkVariants } from '../../Link/types';
 import { ComponentProps, ElementType, forwardRef, ReactNode } from 'react';
+import React from 'react';
+import { HeaderContext } from '../../../site-furniture/Header/Header';
 
 export interface NavigationItemProps extends ComponentProps<'li'> {
   /**
@@ -33,6 +35,10 @@ export interface NavigationItemProps extends ComponentProps<'li'> {
    * Element to render within the navigation item, renders <Link> by default
    */
   element?: ElementType<LinkProps>;
+  /**
+   * Function to close the submenu
+   */
+  closeSubmenu?: () => void;
 }
 
 /**
@@ -55,15 +61,22 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
       navGroup,
       navType,
       onClick,
+      closeSubmenu,
       element: Component = Link,
       ...props
     },
     ref,
   ) => {
+    const { closeMenu } = React.useContext(HeaderContext);
+
     return (
       <li
         {...props}
-        onClick={onClick}
+        onClick={(e) => {
+          closeMenu?.();
+          closeSubmenu?.();
+          onClick?.(e);
+        }}
         data-testid={`nav-item-${label}`}
         className={classNames(`${px}-nav__item`, navGroup, className, {
           [`view-all`]: isViewAllLink,
