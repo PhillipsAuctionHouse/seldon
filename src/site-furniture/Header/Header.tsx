@@ -8,6 +8,7 @@ import Navigation from '../../components/Navigation/Navigation';
 import { Component, ComponentProps, forwardRef, ReactElement, useState, createContext } from 'react';
 import { defaultHeaderContext } from './utils';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
+import { useMobileMenu } from './hooks';
 
 export interface HeaderProps extends ComponentProps<'header'> {
   /**
@@ -82,12 +83,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     const [isSearchExpanded, setIsSearchExpanded] = useState(false);
     const navigationElement = findChildrenOfType(children, Navigation);
     const otherChildren = findChildrenExcludingTypes(children, [Navigation, UserManagement, LanguageSelector]);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const toggleText = isMenuOpen ? toggleCloseText : toggleOpenText;
-    const handleMenuToggle = function () {
-      setIsMenuOpen((prev) => !prev);
-    };
-    const closeMenu = () => setIsMenuOpen(false);
+    const { closeMenu, handleMenuToggle, isMenuOpen, toggleText } = useMobileMenu({ toggleOpenText, toggleCloseText });
 
     return (
       <header {...props} className={classnames(`${px}-header`, className)} ref={ref}>

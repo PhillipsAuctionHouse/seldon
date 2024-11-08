@@ -9,6 +9,7 @@ import { LinkVariants } from '../../components/Link';
 import { Text, TextVariants } from '../../components/Text';
 import NavigationList from '../../components/Navigation/NavigationList/NavigationList';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
+import { getLanguageLabel } from './utils';
 
 interface DropdownSelectorProps extends ComponentProps<'div'> {
   value: string;
@@ -95,7 +96,7 @@ const LanguageSelector = forwardRef<HTMLElement, LanguageSelectorProps>(
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'LanguageSelector');
-    const languageLabel = languageOptions.find((option) => option.value === currentLanguage)?.label ?? 'English';
+    const languageLabel = getLanguageLabel({ languageOptions, currentLanguage });
 
     const selectorProps = {
       ...commonProps,

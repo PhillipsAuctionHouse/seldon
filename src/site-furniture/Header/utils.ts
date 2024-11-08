@@ -5,4 +5,5 @@ export const defaultHeaderContext: HeaderContextType = {
   isMenuOpen: false,
   isSearchExpanded: false,
   setIsSearchExpanded: noOp,
+  closeMenu: noOp,
 };
