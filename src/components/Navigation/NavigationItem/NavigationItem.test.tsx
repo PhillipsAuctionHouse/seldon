@@ -31,12 +31,11 @@ describe('NavigationItem', () => {
 
   it('calls closeMenu, closeSubmenu, and onClick when clicked', async () => {
     const closeMenu = vi.fn();
-    const closeSubmenu = vi.fn();
     const onClick = vi.fn();
 
     render(
       <HeaderContext.Provider value={{ ...defaultHeaderContext, closeMenu }}>
-        <NavigationItem href="/" label="Home" closeSubmenu={closeSubmenu} onClick={onClick} />
+        <NavigationItem href="/" label="Home" onClick={onClick} />
       </HeaderContext.Provider>,
     );
 
@@ -44,7 +43,6 @@ describe('NavigationItem', () => {
     await userEvent.click(navigationItem);
 
     expect(closeMenu).toHaveBeenCalled();
-    expect(closeSubmenu).toHaveBeenCalled();
     expect(onClick).toHaveBeenCalled();
   });
 });

@@ -75,7 +75,13 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
               <Text variant={TextVariants.snwHeaderLink}>{label}</Text>
             </button>
             {navListElement
-              ? React.cloneElement(navListElement[0], { className: `${baseClassName}__submenu`, closeSubmenu })
+              ? React.cloneElement(navListElement[0], {
+                  className: `${baseClassName}__submenu`,
+                  onClick: (e: React.MouseEvent<HTMLElement>) => {
+                    navListElement[0].props?.onClick?.(e);
+                    closeSubmenu?.();
+                  },
+                })
               : undefined}
           </li>
         </SSRMediaQuery.Media>

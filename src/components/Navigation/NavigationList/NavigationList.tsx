@@ -22,20 +22,25 @@ export interface NavigationListProps extends React.ComponentProps<'ul'> {
    */
   rightSectionHeading?: string;
   /**
-   * Function to close the submenu
-   */
-  closeSubmenu?: () => void;
+   * Rewrite the onClick event
+   * */
+  onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
 const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
-  ({ id, children, className, isOffScreen, leftSectionHeading, rightSectionHeading, closeSubmenu }, ref) => {
+  ({ id, children, className, isOffScreen, leftSectionHeading, rightSectionHeading, onClick }, ref) => {
     const leftSectionItems = React.Children.toArray(children)
       .map((child) => {
         if (
           React.isValidElement(child) &&
           (child as React.ReactElement<NavigationItemProps>).props.navGroup === 'nav-link-start'
         ) {
-          return React.cloneElement(child as React.ReactElement<NavigationItemProps>, { closeSubmenu });
+          return React.cloneElement(child as React.ReactElement<NavigationItemProps>, {
+            onClick: (e: React.MouseEvent<HTMLElement>) => {
+              onClick?.(e);
+              child.props?.onClick?.(e);
+            },
+          });
         }
       })
       .filter(Boolean);
@@ -46,7 +51,12 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
           React.isValidElement(child) &&
           (child as React.ReactElement<NavigationItemProps>).props.navGroup === 'nav-link-end'
         ) {
-          return React.cloneElement(child as React.ReactElement<NavigationItemProps>, { closeSubmenu });
+          return React.cloneElement(child as React.ReactElement<NavigationItemProps>, {
+            onClick: (e: React.MouseEvent<HTMLElement>) => {
+              onClick?.(e);
+              child.props?.onClick?.(e);
+            },
+          });
         }
       })
       .filter(Boolean);

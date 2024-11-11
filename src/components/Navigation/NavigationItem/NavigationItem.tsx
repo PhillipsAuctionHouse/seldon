@@ -35,10 +35,6 @@ export interface NavigationItemProps extends ComponentProps<'li'> {
    * Element to render within the navigation item, renders <Link> by default
    */
   element?: ElementType<LinkProps>;
-  /**
-   * Function to close the submenu
-   */
-  closeSubmenu?: () => void;
 }
 
 /**
@@ -61,7 +57,6 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
       navGroup,
       navType,
       onClick,
-      closeSubmenu,
       element: Component = Link,
       ...props
     },
@@ -74,7 +69,6 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
         {...props}
         onClick={(e) => {
           closeMenu?.();
-          closeSubmenu?.();
           onClick?.(e);
         }}
         data-testid={`nav-item-${label}`}
