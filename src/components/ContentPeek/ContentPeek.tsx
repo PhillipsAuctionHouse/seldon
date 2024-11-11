@@ -28,6 +28,10 @@ export interface ContentPeekProps extends React.HTMLAttributes<HTMLDivElement> {
    * Maximum height of the content when collapsed
    */
   maxHeight?: number;
+  /**
+   * Used to set a minimum height for the content before enabling the Peek functionality. Defaults to the same value as maxHeight if not provided.
+   */
+  minHeightThreshold?: number;
 }
 
 /**
@@ -48,6 +52,7 @@ const ContentPeek = forwardRef<HTMLDivElement, ContentPeekProps>(
       contentExpandText = 'Read More',
       contentCollapseText = 'Read Less',
       maxHeight = 480,
+      minHeightThreshold,
       ...props
     },
     ref,
@@ -59,9 +64,10 @@ const ContentPeek = forwardRef<HTMLDivElement, ContentPeekProps>(
 
     useEffect(() => {
       if (contentRef.current) {
-        setHasOverflow(contentRef.current.scrollHeight > maxHeight);
+        const threshold = minHeightThreshold ?? maxHeight;
+        setHasOverflow(contentRef.current.scrollHeight > threshold);
       }
-    }, [children, maxHeight]);
+    }, [children, maxHeight, minHeightThreshold]);
 
     const toggleExpand = useCallback(() => {
       setIsExpanded((expanded) => !expanded);
