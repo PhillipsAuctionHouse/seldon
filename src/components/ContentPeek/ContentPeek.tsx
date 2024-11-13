@@ -6,6 +6,7 @@ import { ButtonVariants } from '../Button/types';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../Collapsible';
 import PlusIcon from '../../assets/plus.svg?react';
 import MinusIcon from '../../assets/minus.svg?react';
+import { HeightUnits } from './utils';
 
 export interface ContentPeekProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -28,6 +29,14 @@ export interface ContentPeekProps extends React.HTMLAttributes<HTMLDivElement> {
    * Maximum height of the content when collapsed
    */
   maxHeight?: number;
+  /**
+   * Used to set a minimum height for the content before enabling the Peek functionality. Defaults to the same value as maxHeight if not provided.
+   */
+  minHeightThreshold?: number;
+  /**
+   * The unit used for setting height values. Defaults to 'px'.
+   */
+  heightUnits?: HeightUnits;
 }
 
 /**
@@ -48,6 +57,8 @@ const ContentPeek = forwardRef<HTMLDivElement, ContentPeekProps>(
       contentExpandText = 'Read More',
       contentCollapseText = 'Read Less',
       maxHeight = 480,
+      minHeightThreshold,
+      heightUnits = HeightUnits.px,
       ...props
     },
     ref,
@@ -59,9 +70,10 @@ const ContentPeek = forwardRef<HTMLDivElement, ContentPeekProps>(
 
     useEffect(() => {
       if (contentRef.current) {
-        setHasOverflow(contentRef.current.scrollHeight > maxHeight);
+        const threshold = minHeightThreshold ?? maxHeight;
+        setHasOverflow(contentRef.current.scrollHeight > threshold);
       }
-    }, [children, maxHeight]);
+    }, [children, maxHeight, minHeightThreshold]);
 
     const toggleExpand = useCallback(() => {
       setIsExpanded((expanded) => !expanded);
@@ -75,7 +87,7 @@ const ContentPeek = forwardRef<HTMLDivElement, ContentPeekProps>(
         className={classnames(baseClassName, className)}
         style={
           {
-            '--content-peek-max-height': `${maxHeight}px`,
+            '--content-peek-max-height': `${maxHeight}${heightUnits}`,
           } as React.CSSProperties
         }
         ref={ref}
