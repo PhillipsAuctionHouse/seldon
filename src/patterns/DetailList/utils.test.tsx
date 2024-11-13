@@ -16,4 +16,8 @@ describe('getDetailKey', () => {
     const child = 'Not a valid element';
     expect(getDetailKey(child, 0)).toBe('detail-0');
   });
+  it('should return a key if passed directly', () => {
+    const child = <Detail {...props} key="custom-key" />;
+    expect(getDetailKey(child, 0)).toBe('custom-key');
+  });
 });

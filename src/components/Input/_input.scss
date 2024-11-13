@@ -14,8 +14,8 @@ $lg: #{$px}-input--lg;
   }
 
   &__label {
-    color: $pure-black;
-    font-size: 0.75rem;
+    @include text($body2);
+
     font-variation-settings: 'wght' 600;
     margin-bottom: 0.5rem;
     word-break: break-word;
@@ -26,10 +26,11 @@ $lg: #{$px}-input--lg;
   }
 
   &__input {
+    @include text($body2);
+
     accent-color: $soft-black;
     border: 1px solid $keyline-gray;
     border-radius: 0.1875rem;
-    font-size: 0.8125rem;
     font-variation-settings: 'wght' 600;
     margin-bottom: 0.25rem;
     padding: $padding-xsm;
