@@ -3,7 +3,7 @@ import NavigationItemTrigger from './NavigationItemTrigger';
 import NavigationItem from '../NavigationItem/NavigationItem';
 import NavigationList from '../NavigationList/NavigationList';
 import userEvent from '@testing-library/user-event';
-import { closeDesktopSubmenu } from './utils';
+import { LinkVariants } from '../../Link';
 
 describe('NavigationItemTrigger', () => {
   // const mockHandleSelection = vi.fn();
@@ -37,11 +37,34 @@ describe('NavigationItemTrigger', () => {
     expect(onClick).toHaveBeenCalledTimes(2);
   });
 
-  it('should set isSubmenuOpened to false', () => {
-    const setIsSubmenuOpened = vi.fn();
+  it('should open on hover and close once a link is clicked', async () => {
+    const onClick = vi.fn();
 
-    closeDesktopSubmenu(setIsSubmenuOpened);
+    render(
+      <NavigationItemTrigger id="test-trigger" label="test-trigger" onClick={onClick}>
+        <NavigationList id="test-list-down">
+          <NavigationItem
+            badge="New York"
+            href="#"
+            navGroup="nav-link-start"
+            navType={LinkVariants.snwFlyoutLink}
+            label="Home"
+          />
+        </NavigationList>
+      </NavigationItemTrigger>,
+    );
 
-    expect(setIsSubmenuOpened).toHaveBeenCalledWith(false);
+    const navigationTrigger = screen.getByTestId('navigation-item-trigger-test-trigger');
+    const navigationItem = screen.getByTestId('nav-item-Home');
+
+    expect(navigationTrigger).toHaveAttribute('aria-expanded', 'false');
+    // Simulate hover to open submenu
+    await userEvent.hover(navigationTrigger as HTMLLIElement);
+    expect(navigationTrigger).toHaveAttribute('aria-expanded', 'true');
+
+    // Simulate click to close submenu
+    await userEvent.click(navigationItem as HTMLLIElement);
+    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(navigationTrigger).toHaveAttribute('aria-expanded', 'false');
   });
 });

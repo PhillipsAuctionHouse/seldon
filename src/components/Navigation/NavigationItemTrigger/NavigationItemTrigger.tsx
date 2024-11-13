@@ -8,7 +8,6 @@ import AccordionItem from '../../Accordion/AccordionItem';
 import { SSRMediaQuery } from '../../../providers/SeldonProvider/utils';
 import { AccordionItemVariant } from '../../Accordion';
 import { HeaderContext } from '../../../site-furniture/Header/Header';
-import { closeDesktopSubmenu } from './utils';
 
 export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
   /**
@@ -58,7 +57,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
                   className: `${baseClassName}__submenu--mobile`,
                   onClick: (e: React.MouseEvent<HTMLElement>) => {
                     navListElement[0].props?.onClick?.(e);
-                    closeDesktopSubmenu?.(setIsSubmenuOpened);
+                    setIsSubmenuOpened?.(false);
                     closeMenu?.();
                   },
                 })
@@ -87,7 +86,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
                   className: `${baseClassName}__submenu`,
                   onClick: (e: React.MouseEvent<HTMLElement>) => {
                     navListElement[0].props?.onClick?.(e);
-                    closeDesktopSubmenu?.(setIsSubmenuOpened);
+                    setIsSubmenuOpened?.(false);
                     closeMenu?.();
                   },
                 })
