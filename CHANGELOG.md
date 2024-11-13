@@ -1,3 +1,10 @@
+# [1.91.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.90.0...v1.91.0) (2024-11-13)
+
+
+### Features
+
+* **ContentPeek:** L3-4299 - add new prop for specifying the minHeightThreshold for showing Peek controls ([#421](https://github.com/PhillipsAuctionHouse/seldon/issues/421)) ([dc435cc](https://github.com/PhillipsAuctionHouse/seldon/commit/dc435cc8d0ba1e6623a016630a92d75b867b0e55))
+
 # [1.90.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.89.1...v1.90.0) (2024-11-13)
 
 
