@@ -1,3 +1,10 @@
+## [1.91.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.91.0...v1.91.1) (2024-11-13)
+
+
+### Bug Fixes
+
+* **ContentPeek:** L3-4299 update content peek component ([#423](https://github.com/PhillipsAuctionHouse/seldon/issues/423)) ([496fb3d](https://github.com/PhillipsAuctionHouse/seldon/commit/496fb3dc96417e0da0ee89f8be48a8d6103b3a14))
+
 # [1.91.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.90.0...v1.91.0) (2024-11-13)
 
 
