@@ -1,3 +1,10 @@
+# [1.90.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.89.1...v1.90.0) (2024-11-13)
+
+
+### Features
+
+* **lotdetails:** L3-3149 tweaks to Video and Carousel to support obj… ([#420](https://github.com/PhillipsAuctionHouse/seldon/issues/420)) ([7c302db](https://github.com/PhillipsAuctionHouse/seldon/commit/7c302db0ad019038b3596b1dd2bf55e021d51c2a))
+
 ## [1.89.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.89.0...v1.89.1) (2024-11-13)
 
 
