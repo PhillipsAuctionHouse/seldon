@@ -1,3 +1,10 @@
+## [1.89.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.89.0...v1.89.1) (2024-11-13)
+
+
+### Bug Fixes
+
+* **input:** L3-4544 input style font size fix and DetailList key fix ([#422](https://github.com/PhillipsAuctionHouse/seldon/issues/422)) ([3e20bf0](https://github.com/PhillipsAuctionHouse/seldon/commit/3e20bf07a0f1915a156e73f4b5a858f0b5ced664))
+
 # [1.89.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.88.1...v1.89.0) (2024-11-06)
 
 
