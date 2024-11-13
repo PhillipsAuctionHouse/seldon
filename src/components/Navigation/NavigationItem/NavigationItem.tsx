@@ -3,8 +3,6 @@ import classNames from 'classnames';
 import Link, { LinkProps } from '../../Link/Link';
 import { LinkVariants } from '../../Link/types';
 import { ComponentProps, ElementType, forwardRef, ReactNode } from 'react';
-import React from 'react';
-import { HeaderContext } from '../../../site-furniture/Header/Header';
 
 export interface NavigationItemProps extends ComponentProps<'li'> {
   /**
@@ -62,15 +60,10 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
     },
     ref,
   ) => {
-    const { closeMenu } = React.useContext(HeaderContext);
-
     return (
       <li
         {...props}
-        onClick={(e) => {
-          closeMenu?.();
-          onClick?.(e);
-        }}
+        onClick={onClick}
         data-testid={`nav-item-${label}`}
         className={classNames(`${px}-nav__item`, navGroup, className, {
           [`view-all`]: isViewAllLink,

@@ -3,6 +3,7 @@ import NavigationItemTrigger from './NavigationItemTrigger';
 import NavigationItem from '../NavigationItem/NavigationItem';
 import NavigationList from '../NavigationList/NavigationList';
 import userEvent from '@testing-library/user-event';
+import { closeDesktopSubmenu } from './utils';
 
 describe('NavigationItemTrigger', () => {
   // const mockHandleSelection = vi.fn();
@@ -34,5 +35,13 @@ describe('NavigationItemTrigger', () => {
     await userEvent.click(navigationItem);
 
     expect(onClick).toHaveBeenCalledTimes(2);
+  });
+
+  it('should set isSubmenuOpened to false', () => {
+    const setIsSubmenuOpened = vi.fn();
+
+    closeDesktopSubmenu(setIsSubmenuOpened);
+
+    expect(setIsSubmenuOpened).toHaveBeenCalledWith(false);
   });
 });
