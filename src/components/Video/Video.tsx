@@ -1,17 +1,24 @@
-import React, { ComponentProps } from 'react';
+import React, { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 
 export interface VideoProps extends ComponentProps<'div'> {
   /**
    * Aspect ratio of the video
-   * Defaults to 1.777 (16/9)
    */
   aspectRatio?: number;
   /**
    * The url of the video source
    */
   videoSource: string;
+  /**
+   * The ref to the iframe
+   */
+  iframeRef?: React.Ref<HTMLIFrameElement>;
+  /**
+   * The class name for the iframe
+   */
+  iframeClassName?: string;
 }
 /**
  * ## Overview
@@ -22,29 +29,34 @@ export interface VideoProps extends ComponentProps<'div'> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-video--overview)
  */
-const Video = ({ aspectRatio = 16 / 9, className, videoSource, ...props }: VideoProps) => {
-  const { className: baseClassName, 'data-testid': dataTestId, ...commonProps } = getCommonProps(props, 'Video');
+const Video = forwardRef<HTMLDivElement, VideoProps>(
+  ({ aspectRatio, className, videoSource, iframeRef, iframeClassName, ...props }, ref) => {
+    const { className: baseClassName, 'data-testid': dataTestId, ...commonProps } = getCommonProps(props, 'Video');
 
-  const componentProps = {
-    className: classnames(baseClassName, className),
-    'data-testid': dataTestId,
-    style: { '--aspect-ratio': aspectRatio } as React.CSSProperties,
-    ...commonProps,
-    ...props,
-  };
+    const componentProps = {
+      className: classnames(baseClassName, className),
+      'data-testid': dataTestId,
+      style: { '--aspect-ratio': aspectRatio } as React.CSSProperties,
+      ...commonProps,
+      ...props,
+    };
 
-  return (
-    <div {...componentProps}>
-      <iframe
-        data-testid={`${dataTestId}-iframe`}
-        className={`${baseClassName}__iframe`}
-        src={videoSource}
-        allowFullScreen
-        allow="encrypted-media"
-        referrerPolicy="no-referrer"
-      />
-    </div>
-  );
-};
+    return (
+      <div {...componentProps} ref={ref}>
+        <iframe
+          ref={iframeRef}
+          data-testid={`${dataTestId}-iframe`}
+          className={classnames(`${baseClassName}__iframe`, iframeClassName)}
+          src={videoSource}
+          allowFullScreen
+          allow="encrypted-media"
+          referrerPolicy="no-referrer"
+        />
+      </div>
+    );
+  },
+);
+
+Video.displayName = 'Video';
 
 export default Video;

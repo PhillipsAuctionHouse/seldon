@@ -27,10 +27,11 @@ $lg: #{$px}-input--lg;
   }
 
   &__input {
+    @include text($string2);
+
     accent-color: $soft-black;
     border: 1px solid $keyline-gray;
     border-radius: 0.1875rem;
-    font-size: 0.8125rem;
     font-variation-settings: 'wght' 600;
     margin-bottom: 0.25rem;
     padding: $padding-xsm;

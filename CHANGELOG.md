@@ -1,3 +1,24 @@
+# [1.91.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.90.0...v1.91.0) (2024-11-13)
+
+
+### Features
+
+* **ContentPeek:** L3-4299 - add new prop for specifying the minHeightThreshold for showing Peek controls ([#421](https://github.com/PhillipsAuctionHouse/seldon/issues/421)) ([dc435cc](https://github.com/PhillipsAuctionHouse/seldon/commit/dc435cc8d0ba1e6623a016630a92d75b867b0e55))
+
+# [1.90.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.89.1...v1.90.0) (2024-11-13)
+
+
+### Features
+
+* **lotdetails:** L3-3149 tweaks to Video and Carousel to support obj… ([#420](https://github.com/PhillipsAuctionHouse/seldon/issues/420)) ([7c302db](https://github.com/PhillipsAuctionHouse/seldon/commit/7c302db0ad019038b3596b1dd2bf55e021d51c2a))
+
+## [1.89.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.89.0...v1.89.1) (2024-11-13)
+
+
+### Bug Fixes
+
+* **input:** L3-4544 input style font size fix and DetailList key fix ([#422](https://github.com/PhillipsAuctionHouse/seldon/issues/422)) ([3e20bf0](https://github.com/PhillipsAuctionHouse/seldon/commit/3e20bf07a0f1915a156e73f4b5a858f0b5ced664))
+
 # [1.89.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.88.1...v1.89.0) (2024-11-06)
 
 

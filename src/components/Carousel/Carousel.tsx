@@ -82,6 +82,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       {
         loop,
         startIndex,
+        inViewThreshold: 0.99,
       },
       [
         ...(useWheelGestures
@@ -119,12 +120,15 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       [api],
     );
 
-    const onSettle = useCallback(
+    const onSlidesInView = useCallback(
       (api: CarouselApi) => {
         if (!api) {
           return;
         }
-        onSlideChange?.(api.selectedScrollSnap());
+        const slideIndex = api.slidesInView()?.[0];
+        if (slideIndex !== undefined) {
+          onSlideChange?.(slideIndex);
+        }
       },
       [onSlideChange],
     );
@@ -133,15 +137,11 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       if (!api) {
         return;
       }
-      onSettle(api);
-      api.on('reInit', onSettle);
-      api.on('settle', onSettle);
-
+      api.on('slidesInView', onSlidesInView);
       return () => {
-        api?.off('settle', onSettle);
-        api?.off('reInit', onSettle);
+        api.off('slidesInView', onSlidesInView);
       };
-    }, [api, onSettle]);
+    }, [api, onSlidesInView]);
 
     return (
       <CarouselContext.Provider
