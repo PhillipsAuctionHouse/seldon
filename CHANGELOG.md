@@ -1,3 +1,24 @@
+# [1.89.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.88.1...v1.89.0) (2024-11-06)
+
+
+### Features
+
+* **Tags:** L3-3816 Create Tags Component ([#398](https://github.com/PhillipsAuctionHouse/seldon/issues/398)) ([9e229e8](https://github.com/PhillipsAuctionHouse/seldon/commit/9e229e860f54b40457d39b866dba0a4f38c67b16))
+
+## [1.88.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.88.0...v1.88.1) (2024-11-04)
+
+
+### Bug Fixes
+
+* **lotdetails:** L3-3327 fix input labels on non-mobile breakpoints, … ([#413](https://github.com/PhillipsAuctionHouse/seldon/issues/413)) ([dea513e](https://github.com/PhillipsAuctionHouse/seldon/commit/dea513e14b74edccefe249345791d82e06f7679a))
+
+# [1.88.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.87.0...v1.88.0) (2024-11-04)
+
+
+### Features
+
+* **search:** L3-4328 onKeyDown fix ([#416](https://github.com/PhillipsAuctionHouse/seldon/issues/416)) ([e395e44](https://github.com/PhillipsAuctionHouse/seldon/commit/e395e4431cfdb477fa9da5619515c117c6813bfb))
+
 # [1.87.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.86.0...v1.87.0) (2024-10-31)
 
 

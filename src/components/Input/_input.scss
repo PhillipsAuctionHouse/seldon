@@ -14,8 +14,9 @@ $lg: #{$px}-input--lg;
   }
 
   &__label {
-    @include text($body2);
+    @include text($string2);
 
+    color: $pure-black;
     font-variation-settings: 'wght' 600;
     margin-bottom: 0.5rem;
     word-break: break-word;
@@ -26,7 +27,7 @@ $lg: #{$px}-input--lg;
   }
 
   &__input {
-    @include text($body2);
+    @include text($string2);
 
     accent-color: $soft-black;
     border: 1px solid $keyline-gray;
@@ -48,7 +49,7 @@ $lg: #{$px}-input--lg;
     -webkit-box-orient: vertical;
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    line-height: 1.25;
+    line-height: $spacing-md;
     overflow: hidden;
   }
 
