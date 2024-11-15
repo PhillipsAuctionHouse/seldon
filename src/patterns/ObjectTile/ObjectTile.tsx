@@ -5,6 +5,7 @@ import { getCommonProps } from '../../utils';
 import { Text, TextVariants } from '../../components/Text';
 import { DetailList } from '../DetailList/index';
 import { Detail } from '../../components/Detail/index';
+import { PhillipsLogo } from '../../assets/icons';
 
 export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
@@ -84,13 +85,22 @@ const ObjectTile = forwardRef<HTMLAnchorElement, ObjectTileProps>(
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ObjectTile');
-    const url = imageUrl || 'https://via.placeholder.com/150';
     Element = (props.href ? 'a' : 'div') as ElementType<
       Omit<ObjectTileProps, 'imageUrl' | 'lotNumber' | 'referenceNumber'> & { 'data-testid': string }
     >;
     return (
       <Element {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        <img className={`${baseClassName}__img`} src={url} alt={titleText ?? `image for lot number ${lotNumber}`} />
+        {imageUrl ? (
+          <img
+            className={`${baseClassName}__img`}
+            src={imageUrl}
+            alt={titleText ?? `image for lot number ${lotNumber}`}
+          />
+        ) : (
+          <div className={`${baseClassName}__img`}>
+            <PhillipsLogo />
+          </div>
+        )}
         {!withdrawnText ? (
           <Text className={`${baseClassName}__badge`} variant={TextVariants.badge}>
             {badgeText}
@@ -151,13 +161,6 @@ const ObjectTile = forwardRef<HTMLAnchorElement, ObjectTileProps>(
                 />
               </DetailList>
             ) : null}
-            {/* { estimate
-                ? <div className={`${baseClassName}__estimate ${baseClassName}__section`}>
-                    <Text className={`${baseClassName}__estimate__label`}>{estimateLabelText}</Text>
-                    <Text className={`${baseClassName}__estimate__value`}>{estimate}</Text>
-                  </div>
-                : null
-              } */}
             <div className={`${baseClassName}__section`}>{children}</div>
           </>
         )}

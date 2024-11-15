@@ -59,4 +59,12 @@ describe('ObjectTile', () => {
     expect(screen.getByText('Estimate')).toBeInTheDocument();
     expect(screen.getByText('1000-2000')).toBeInTheDocument();
   });
+
+  it('renders the PhillipsLogo SVG when no imageUrl is provided', () => {
+    const { rerender } = render(<ObjectTile lotNumber="123" />);
+    const svg = screen.getByTestId('PhillipsLogo');
+    expect(svg).toBeInTheDocument();
+    rerender(<ObjectTile imageUrl="https://via.placeholder.com/150" lotNumber="123" />);
+    expect(screen.queryByTestId('PhillipsLogo')).not.toBeInTheDocument();
+  });
 });

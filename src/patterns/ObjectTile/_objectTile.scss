@@ -17,10 +17,24 @@
 
   &__img {
     aspect-ratio: 1 / 1;
+    background-color: $light-gray;
     margin-bottom: $spacing-sm;
     max-width: 100%;
     object-fit: cover;
+    position: relative;
     width: 100%;
+
+    .phillips-logo {
+      fill: $medium-gray;
+    }
+
+    svg {
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      transform-origin: left;
+    }
   }
 
   &__badge {

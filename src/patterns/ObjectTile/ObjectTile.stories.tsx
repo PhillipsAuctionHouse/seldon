@@ -12,10 +12,8 @@ const meta = {
 } satisfies Meta<typeof ObjectTile>;
 
 export default meta;
-export const Playground = (props: ObjectTileProps) => <ObjectTile {...props} />;
-
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-Playground.args = {
+const args = {
   badgeText: 'No Reserve',
   estimate: '$1,500,000 - $3,000,000',
   children: (
@@ -41,4 +39,8 @@ Playground.args = {
   modelText: 'Nautilus',
 };
 
+export const NoImage = (props: ObjectTileProps) => <ObjectTile {...props} imageUrl={undefined} />;
+NoImage.args = args;
+export const Playground = (props: ObjectTileProps) => <ObjectTile {...props} />;
+Playground.args = args;
 Playground.argTypes = {};
