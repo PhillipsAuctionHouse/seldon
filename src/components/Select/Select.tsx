@@ -2,7 +2,6 @@ import * as React from 'react';
 import classnames from 'classnames';
 import { px, useNormalizedInputProps } from '../../utils';
 import { InputProps } from '../Input/Input';
-import './select.scss';
 import { SelectVariants } from './types';
 
 export interface SelectProps extends InputProps {
