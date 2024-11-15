@@ -6,9 +6,10 @@ export interface DurationProps {
   duration: DurationValue;
   unit: DurationUnit;
   locale: Locale;
+  formatDurationStr?: (duration: string) => string;
 }
 
-export const Duration = ({ duration, unit, locale }: DurationProps) => {
+export const Duration = ({ duration, unit, locale, formatDurationStr = (str) => str }: DurationProps) => {
   const baseClassName = `${px}-duration`;
   const durationParts = formatDuration(duration, { format: [unit], zero: true, locale }).split(' ');
   return (
@@ -16,7 +17,7 @@ export const Duration = ({ duration, unit, locale }: DurationProps) => {
       <span className={classnames(unit === 'seconds' && `${baseClassName}--fixed-width`)}>
         {durationParts[0].padStart(2, '0')}
       </span>
-      <span>{durationParts[1]}</span>
+      <span>{formatDurationStr(durationParts[1])}</span>
     </div>
   );
 };

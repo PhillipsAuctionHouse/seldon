@@ -11,6 +11,9 @@ export { default as Page } from './pages/Page';
 export * from './utils/hooks';
 export * from './providers/SeldonProvider/utils';
 
+// Types, Enums
+export * from './types/commonTypes';
+
 // ⚛️ Components
 export { default as Button, type ButtonProps } from './components/Button/Button';
 export { ButtonVariants } from './components/Button/types';
@@ -85,3 +88,5 @@ export * from './components/SeldonImage';
 export * from './patterns/SaleHeaderBanner';
 export * from './components/Countdown';
 export * from './components/Countdown/types';
+export * from './patterns/ObjectTile';
+export * from './patterns/BidSnapshot';

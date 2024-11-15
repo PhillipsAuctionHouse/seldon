@@ -1,0 +1,26 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-bid-snapshot {
+  border-bottom: 1px solid $light-gray;
+  padding-bottom: $spacing-sm;
+  position: relative;
+
+  &__text .#{$px}-has-separators .#{$px}-detail {
+    flex-wrap: wrap;
+    gap: 0 $spacing-sm;
+    padding-bottom: $spacing-xsm;
+  }
+
+  .#{$px}-countdown {
+    align-items: flex-start;
+    border-bottom: none;
+    padding: 0;
+    position: absolute;
+    top: calc(100% + $spacing-micro);
+  }
+
+  .#{$px}-countdown__countdown-container,
+  .#{$px}-duration {
+    @include Montserrat;
+  }
+}

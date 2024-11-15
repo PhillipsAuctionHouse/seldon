@@ -14,6 +14,10 @@ export interface CountdownProps extends ComponentProps<'div'> {
    */
   endDateTime: Date;
   /**
+   * Function to modify strings coming from date-fns (Minutes -> Mins etc)
+   */
+  formatDurationStr?: (duration: string) => string;
+  /**
    * Any descriptor to appear below the coundown
    */
   intervalDescription?: string;
@@ -43,6 +47,7 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
   (
     {
       endDateTime,
+      formatDurationStr,
       label = 'Lots Close in',
       intervalDescription = 'Lots Close in 1-minute intervals',
       className,
@@ -76,13 +81,17 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         <div className={`${baseClassName}__countdown-container`} role="timer" aria-label={label}>
           <span>{label}</span>
-          {timeLeft.days > 0 ? <Duration duration={timeLeft} unit="days" locale={dateFnsLocale} /> : undefined}
+          {timeLeft.days > 0 ? (
+            <Duration duration={timeLeft} unit="days" locale={dateFnsLocale} formatDurationStr={formatDurationStr} />
+          ) : undefined}
           {timeLeft.days > 0 || timeLeft.hours > 0 ? (
             <Duration duration={timeLeft} unit="hours" locale={dateFnsLocale} />
           ) : undefined}
-          {timeLeft.days === 0 ? <Duration duration={timeLeft} unit="minutes" locale={dateFnsLocale} /> : undefined}
+          {timeLeft.days === 0 ? (
+            <Duration duration={timeLeft} unit="minutes" locale={dateFnsLocale} formatDurationStr={formatDurationStr} />
+          ) : undefined}
           {timeLeft.days === 0 && timeLeft.hours === 0 ? (
-            <Duration duration={timeLeft} unit="seconds" locale={dateFnsLocale} />
+            <Duration duration={timeLeft} unit="seconds" locale={dateFnsLocale} formatDurationStr={formatDurationStr} />
           ) : undefined}
         </div>
         {variant === CountdownVariants.default ? <span>{intervalDescription}</span> : undefined}
