@@ -17,8 +17,10 @@ export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
 }
 
 const MobileNavigationItemTrigger = ({ id, label, children }: NavigationItemTriggerProps) => {
+  const { isMenuOpen } = React.useContext(HeaderContext);
+
   return (
-    <Accordion>
+    <Accordion key={`accordion-key-${label}-${isMenuOpen}`}>
       <AccordionItem
         hasTransition
         key={`accordion-key-${label}`}
