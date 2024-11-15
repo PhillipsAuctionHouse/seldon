@@ -7,6 +7,7 @@ import Accordion from '../../Accordion/Accordion';
 import AccordionItem from '../../Accordion/AccordionItem';
 import { SSRMediaQuery } from '../../../providers/SeldonProvider/utils';
 import { AccordionItemVariant } from '../../Accordion';
+import { HeaderContext } from '../../../site-furniture/Header/Header';
 
 export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
   /**
@@ -16,8 +17,10 @@ export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
 }
 
 const MobileNavigationItemTrigger = ({ id, label, children }: NavigationItemTriggerProps) => {
+  const { isMenuOpen } = React.useContext(HeaderContext);
+
   return (
-    <Accordion>
+    <Accordion key={`accordion-key-${label}-${isMenuOpen}`}>
       <AccordionItem
         hasTransition
         key={`accordion-key-${label}`}
@@ -45,6 +48,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
     const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'NavigationItemTrigger');
     const [isSubmenuOpened, setIsSubmenuOpened] = useState(false);
     const navListElement = findChildrenOfType<NavigationListProps>(children, NavigationList);
+    const { closeMenu } = React.useContext(HeaderContext);
 
     return (
       <>
@@ -53,10 +57,16 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
             {navListElement
               ? React.cloneElement(navListElement[0], {
                   className: `${baseClassName}__submenu--mobile`,
+                  onClick: (e: React.MouseEvent<HTMLElement>) => {
+                    navListElement[0].props?.onClick?.(e);
+                    setIsSubmenuOpened?.(false);
+                    closeMenu?.();
+                  },
                 })
-              : undefined}
+              : null}
           </MobileNavigationItemTrigger>
         </SSRMediaQuery.Media>
+
         <SSRMediaQuery.Media greaterThanOrEqual="md">
           <li
             {...commonProps}
@@ -74,8 +84,15 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
               <Text variant={TextVariants.snwHeaderLink}>{label}</Text>
             </button>
             {navListElement
-              ? React.cloneElement(navListElement[0], { className: `${baseClassName}__submenu` })
-              : undefined}
+              ? React.cloneElement(navListElement[0], {
+                  className: `${baseClassName}__submenu`,
+                  onClick: (e: React.MouseEvent<HTMLElement>) => {
+                    navListElement[0].props?.onClick?.(e);
+                    setIsSubmenuOpened?.(false);
+                    closeMenu?.();
+                  },
+                })
+              : null}
           </li>
         </SSRMediaQuery.Media>
       </>

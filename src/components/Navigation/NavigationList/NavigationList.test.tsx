@@ -1,9 +1,10 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import NavigationList from './NavigationList';
 import NavigationItem from '../NavigationItem/NavigationItem';
 import { LinkVariants } from '../../Link/types';
 import NavigationItemTrigger from '../NavigationItemTrigger/NavigationItemTrigger';
 import { px } from '../../../utils';
+import userEvent from '@testing-library/user-event';
 
 describe('NavigationList', () => {
   const reqProps = { id: 'test-id' };
@@ -87,5 +88,35 @@ describe('NavigationList', () => {
     expect(getByTestId('test-id')).toBeInTheDocument();
     expect(getByTestId('test-id').querySelectorAll('.nav-link-start').length).toBe(1);
     expect(getByTestId('test-id').querySelectorAll('.nav-link-end').length).toBe(1);
+  });
+
+  it('calls onClick handler when left section item is clicked', async () => {
+    const handleClick = vi.fn();
+    render(
+      <NavigationList {...reqProps} onClick={handleClick}>
+        <NavigationItem label="Home" href="#" navGroup="nav-link-start">
+          Large CTA 1
+        </NavigationItem>
+      </NavigationList>,
+    );
+
+    const navigationItem = screen.getByTestId('nav-item-Home');
+    await userEvent.click(navigationItem);
+    expect(handleClick).toHaveBeenCalled();
+  });
+
+  it('calls onClick handler when right section item is clicked', async () => {
+    const handleClick = vi.fn();
+    render(
+      <NavigationList {...reqProps} onClick={handleClick}>
+        <NavigationItem label="Home" href="#" navGroup="nav-link-end">
+          Small CTA 1
+        </NavigationItem>
+      </NavigationList>,
+    );
+
+    const navigationItem = screen.getByTestId('nav-item-Home');
+    await userEvent.click(navigationItem);
+    expect(handleClick).toHaveBeenCalled();
   });
 });
