@@ -1,15 +1,23 @@
 import * as React from 'react';
 import classnames from 'classnames';
-
 import { px, useNormalizedInputProps } from '../../utils';
-
 import { InputProps } from '../Input/Input';
+import './select.scss';
+import { SelectVariants } from './types';
 
 export interface SelectProps extends InputProps {
   /**
    * Option elements that are selectable
    */
   children: React.ReactNode;
+  /**
+   * Determines if you want to show the icon
+   */
+  showCustomIcon?: boolean;
+  /**
+   * Determines the variant of the select
+   */
+  variant: SelectVariants;
 }
 
 /**
@@ -31,6 +39,8 @@ const Select = React.forwardRef(
       disabled,
       hideLabel,
       id,
+      showCustomIcon = false,
+      variant = SelectVariants.default,
       inline,
       invalid,
       invalidText,
@@ -48,6 +58,9 @@ const Select = React.forwardRef(
   ) => {
     const type = 'select';
     const inputProps = useNormalizedInputProps({ disabled, id, invalid, invalidText, readOnly, type, warn, warnText });
+    const [isOpen, setIsOpen] = React.useState(false);
+    const handleIsOpen = () => setIsOpen((prev) => !prev);
+    const closeDropdown = () => setIsOpen(false);
 
     const wrapperClassnames = classnames(`${px}-${type}-input`, `${px}-input`, `${px}-input--${size}`, {
       [`${px}-input--inline`]: inline,
@@ -58,19 +71,32 @@ const Select = React.forwardRef(
       [`${className}__wrapper`]: className,
     });
 
+    const selectClassnames = classnames(`${px}-input__input`, {
+      className,
+      [`${px}-input__select--open`]: isOpen && showCustomIcon,
+      [`${px}-input__select--closed`]: !isOpen && showCustomIcon,
+      [`${px}-input__select--tertiary`]: variant === SelectVariants.tertiary,
+    });
+
+    const handleClick = (e: React.MouseEvent<HTMLSelectElement>) => {
+      handleIsOpen();
+      onClick?.(e);
+    };
+
     return (
       <div className={wrapperClassnames}>
         <label htmlFor={id} className={classnames(`${px}-input__label`, { [`${px}-input__label--hidden`]: hideLabel })}>
           {labelText}
         </label>
         <select
-          className={classnames(`${px}-input__input`, { className })}
+          className={selectClassnames}
           data-testid={id}
           defaultValue={defaultValue}
           disabled={inputProps.disabled}
           id={id}
           onChange={onChange}
-          onClick={onClick}
+          onBlur={closeDropdown}
+          onClick={handleClick}
           ref={ref}
           value={value}
           {...rest}

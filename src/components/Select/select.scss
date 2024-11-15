@@ -1,0 +1,42 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-select-input {
+  select.#{$px}-input {
+    &__select {
+      &--tertiary {
+        border: 0;
+        color: inherit;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        &:focus-visible {
+          background-color: $pure-white;
+          border-radius: 0;
+          outline-color: $soft-black;
+          outline-offset: 4.5px;
+        }
+      }
+
+      &--closed {
+        background: url("data:image/svg+xml,<svg height='16' width='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' clip-rule='evenodd' d='M8.06566 9.12623L12.2097 4.98219C12.3561 4.83574 12.7442 4.80954 12.9673 5.0327C13.1905 5.25585 13.1643 5.64386 13.0178 5.79031L8.42162 10.3865C8.34739 10.4607 8.21109 10.5041 8.06566 10.4997C7.92022 10.5041 7.78392 10.4607 7.70969 10.3865L3.1135 5.79031C2.96705 5.64386 2.94085 5.25585 3.16401 5.0327C3.38716 4.80954 3.77517 4.83574 3.92162 4.98219L8.06566 9.12623Z' fill='black'/></svg>")
+          no-repeat;
+      }
+
+      &--open {
+        background: url("data:image/svg+xml,<svg height='16' width='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' clip-rule='evenodd' d='M8.06566 6.37378L12.2097 10.5178C12.3561 10.6643 12.7442 10.6905 12.9673 10.4673C13.1905 10.2442 13.1643 9.85614 13.0178 9.70969L8.42162 5.1135C8.34739 5.03927 8.21109 4.99593 8.06566 5.00031C7.92022 4.99593 7.78392 5.03927 7.70969 5.1135L3.1135 9.70969C2.96705 9.85614 2.94085 10.2442 3.16401 10.4673C3.38716 10.6905 3.77517 10.6643 3.92162 10.5178L8.06566 6.37378Z' fill='black'/></svg>")
+          no-repeat;
+      }
+
+      &--closed,
+      &--open {
+        appearance: none;
+        appearance: none;
+        appearance: none;
+        background-position: calc(100% - 0.75rem) center;
+        padding-right: $spacing-md;
+      }
+    }
+  }
+}
