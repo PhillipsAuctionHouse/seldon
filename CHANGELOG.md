@@ -1,3 +1,10 @@
+# [1.92.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.91.1...v1.92.0) (2024-11-15)
+
+
+### Features
+
+* **header:** L3-4484 added close menu functionality ([#419](https://github.com/PhillipsAuctionHouse/seldon/issues/419)) ([ba254a8](https://github.com/PhillipsAuctionHouse/seldon/commit/ba254a85527122d31d1aa2eace359cb225290d61))
+
 ## [1.91.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.91.0...v1.91.1) (2024-11-13)
 
 
