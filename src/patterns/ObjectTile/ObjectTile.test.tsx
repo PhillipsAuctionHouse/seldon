@@ -62,9 +62,9 @@ describe('ObjectTile', () => {
 
   it('renders the PhillipsLogo SVG when no imageUrl is provided', () => {
     const { rerender } = render(<ObjectTile lotNumber="123" />);
-    const svg = screen.getByTestId('PhillipsLogo');
+    const svg = screen.getByTestId('header-logo-svg');
     expect(svg).toBeInTheDocument();
     rerender(<ObjectTile imageUrl="https://via.placeholder.com/150" lotNumber="123" />);
-    expect(screen.queryByTestId('PhillipsLogo')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('header-logo-svg')).not.toBeInTheDocument();
   });
 });
