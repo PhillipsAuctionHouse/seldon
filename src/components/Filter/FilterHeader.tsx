@@ -8,13 +8,16 @@ import ChevronNextIcon from '../../assets/chevronNext.svg?react';
 
 export interface FilterHeaderProps extends ComponentProps<'div'> {
   // Text to display as the header
-  label: string;
+  heading: string;
 
   // Whether the show all back button should be displayed (when viewing all filters)
-  showBack?: boolean;
+  isViewingAll?: boolean;
 
-  // Setter function for info to be displayed in View All
-  setViewAllFilter?: Dispatch<SetStateAction<[]>>;
+  // Setter function for name of Filter to be displayed in View All
+  setViewAllFilter?: Dispatch<SetStateAction<null>>;
+
+  // Setter to apply closing transition to view all filter
+  setIsClosing?: Dispatch<SetStateAction<boolean>>;
 }
 /**
  * ## Overview
@@ -22,23 +25,29 @@ export interface FilterHeaderProps extends ComponentProps<'div'> {
  * The header of a filter
  */
 const FilterHeader = forwardRef<HTMLDivElement, FilterHeaderProps>(
-  ({ className, label, showBack = false, setViewAllFilter, ...props }, ref) => {
+  ({ className, heading, isViewingAll = false, setViewAllFilter, setIsClosing, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'FilterHeader');
+
+    const handleClose = () => {
+      setIsClosing?.(true);
+      setTimeout(() => {
+        setViewAllFilter?.(null);
+        setIsClosing?.(false);
+        // if this timeout changes, be sure to change $default-transition-duration in _filter.scss
+      }, 300);
+    };
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        <Text variant={TextVariants.heading4} className={`${baseClassName}__label`}>
-          {label}
-        </Text>
-        {showBack ? (
-          <Button
-            variant={ButtonVariants.tertiary}
-            onClick={() => {
-              setViewAllFilter && setViewAllFilter([]);
-            }}
-          >
+        <Text
+          variant={TextVariants.heading4}
+          className={`${baseClassName}__heading`}
+          element={(props) => <legend {...props}>{heading}</legend>}
+        />
+        {isViewingAll ? (
+          <Button variant={ButtonVariants.tertiary} onClick={handleClose} className={`${baseClassName}__back`}>
             <ChevronNextIcon className={`${baseClassName}__chevron`} />
-            {`Back to all`}
+            Back to all
           </Button>
         ) : null}
       </div>

@@ -1,12 +1,13 @@
 import { Meta } from '@storybook/react';
 import FilterControl from './FilterControl';
 import { useArgs } from '@storybook/preview-api';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from '../../components/Button/Button';
 import { Drawer } from '../../components/Drawer';
 import FilterHeader from '../../components/Filter/FilterHeader';
 import FilterValue from '../../components/Filter/FilterValue';
 import { Filter } from '../../components/Filter';
+import { exampleAuctionLots, lotType } from './utils';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -16,10 +17,15 @@ const meta = {
 
 export default meta;
 
-type FilterDimension = { label: string; disabled?: boolean | undefined };
+type FilterDimension = {
+  label: string;
+  active: boolean;
+  disabled?: boolean | undefined;
+};
 
 type FilterType = {
   label: string;
+  id: string;
   filterDimensions: FilterDimension[];
   inputType: 'checkbox' | 'radio';
 };
@@ -30,66 +36,189 @@ type PropTypes = {
   onClose: () => void;
 };
 
+const FILTER_KEYS = {
+  sortBy: 'sortBy',
+  makers: 'makers',
+  collections: 'collections',
+};
+
 const filters: FilterType[] = [
   {
     label: 'SortBy',
+    id: FILTER_KEYS.sortBy,
     inputType: 'radio',
     filterDimensions: [
-      { label: 'Lot Number' },
-      { label: 'A-Z Artist Maker' },
-      { label: 'Price Low-High' },
-      { label: 'Price High - Low' },
+      { label: 'Lot Number', active: true },
+      { label: 'A-Z Artist Maker', active: false },
+      { label: 'Price Low-High', active: false },
+      { label: 'Price High - Low', active: false },
     ],
   },
   {
     label: 'Artists & Makers',
+    id: FILTER_KEYS.makers,
     inputType: 'checkbox',
-    filterDimensions: [
-      { label: 'Jimmy' },
-      { label: 'Bob' },
-      { label: 'Alan' },
-      { label: 'Nick' },
-      { label: 'Joe' },
-      { label: 'Fred' },
-      { label: 'Rob' },
-      { label: 'Roy' },
-      { label: 'Bill' },
-      { label: 'Ted' },
-      { label: 'Hidden' },
-      { label: 'disabled', disabled: true },
-    ],
+    filterDimensions: [],
+  },
+  {
+    label: 'Collections',
+    id: FILTER_KEYS.collections,
+    inputType: 'checkbox',
+    filterDimensions: [],
   },
 ];
 
-const LotsWithFilter = (props: PropTypes) => {
-  const [results, setResults] = useState(filters[1].filterDimensions);
-  const doFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // When implementing, can add sorting functions when sortBy section present
+const buildFilters = () => {
+  const builtFilters = filters;
+  const makerSet = new Set<string>();
+  const collectionSet = new Set<string>();
+  exampleAuctionLots.forEach((lot) => {
+    makerSet.add(lot.maker);
+    collectionSet.add(lot.collection);
+  });
 
-    // Not a true filter, but this is a bare bones example how onChange can be implemented
-    const rule = e.target.value;
-    const newResults = filters[1].filterDimensions.filter((val) => val.label === rule);
-    setResults(newResults);
+  // Artists (starting off with John Doe select, disabling last lot)
+  builtFilters[1].filterDimensions = Array.from(makerSet).map((maker: string, i: number) => {
+    return { label: maker, active: i === 0, disabled: i === 11 };
+  });
+  builtFilters[2].filterDimensions = Array.from(collectionSet).map((collection: string) => {
+    return { label: collection, active: false };
+  });
+
+  return builtFilters;
+};
+
+const LotsWithFilter = (props: PropTypes) => {
+  const initialFilters = buildFilters();
+  const [results, setResults] = useState(exampleAuctionLots);
+  const [filters, setFilters] = useState(initialFilters);
+  const [filterRules, setFilterRules] = useState<Map<string, Set<string>>>(new Map());
+
+  const updateFilters = (filterId: string, checked: boolean, name: string) => {
+    const updatedFilters = filters.map((filter) => {
+      if (filter.id === filterId) {
+        const updatedFilterDimensions = filter.filterDimensions.map((dimension) => {
+          if (dimension.label === name) {
+            return {
+              ...dimension,
+              active: checked,
+            };
+          } else if (filterId === FILTER_KEYS.sortBy) {
+            return {
+              ...dimension,
+              active: false,
+            };
+          }
+          return dimension;
+        });
+
+        return {
+          ...filter,
+          filterDimensions: updatedFilterDimensions,
+        };
+      }
+      return filter;
+    });
+
+    setFilters(updatedFilters);
   };
+
+  const updateFilterRules = (filterId: string, checked: boolean, name: string) => {
+    const newFilterRules = new Map(filterRules);
+    const rule = newFilterRules.get(filterId) ?? new Set();
+
+    if (checked) {
+      rule.add(name);
+    } else {
+      rule.delete(name);
+    }
+
+    newFilterRules.set(filterId, rule);
+    setFilterRules(newFilterRules);
+    return newFilterRules;
+  };
+
+  useEffect(() => {
+    const initialActiveFilters = initialFilters
+      .map((filter) => {
+        const activeDimensions = filter.filterDimensions.filter((dimension) => dimension.active);
+        const initialSet = new Set();
+        activeDimensions.forEach((dimension) => {
+          initialSet.add(dimension.label);
+        });
+
+        return activeDimensions.length ? { key: filter.id, dimSet: initialSet } : null;
+      })
+      .filter((result) => result !== null);
+
+    const initialFilterRules = new Map();
+    initialActiveFilters.forEach((filter) => {
+      initialFilterRules.set(filter?.key, filter?.dimSet);
+    });
+
+    setFilterRules(initialFilterRules);
+    filterResults(initialFilterRules);
+  }, [initialFilters]);
+
+  const filterResults = (newFilterRules: Map<string, Set<string>>) => {
+    const filterResults: lotType[] = [];
+    const selectedMakers = newFilterRules.get(FILTER_KEYS.makers) ?? new Set();
+    const selectedCollections = newFilterRules.get(FILTER_KEYS.collections);
+
+    exampleAuctionLots.forEach((lot) => {
+      const matchesMaker = selectedMakers === undefined || selectedMakers?.size === 0 || selectedMakers?.has(lot.maker);
+      const matchesCollection =
+        selectedCollections === undefined ||
+        selectedCollections?.size === 0 ||
+        selectedCollections?.has(lot.collection);
+
+      if (matchesMaker && matchesCollection) {
+        filterResults.push(lot);
+      }
+    });
+
+    setResults(filterResults);
+  };
+
+  const handleFilter = (e: React.ChangeEvent<HTMLInputElement>, filterId: string) => {
+    const { name, checked } = e.target;
+
+    const newFilterRules = updateFilterRules(filterId, checked, name);
+    updateFilters(filterId, checked, name);
+    filterResults(newFilterRules);
+  };
+
   return (
     <>
-      <ul>
-        {results.map((value: FilterDimension) => (
-          <li key={value.label}>{value.label}</li>
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        {results.map((lot: lotType) => (
+          <div key={lot.id} style={{ display: 'flex', flexDirection: 'column', justifyContent: '', margin: 15 }}>
+            <img src={lot.imageSrc} height={150} width={150} />
+            <div>
+              <strong>{lot.lotNumber}</strong>
+            </div>
+            <div>
+              <strong>{lot.maker}</strong>
+            </div>
+            <div>{lot.title}</div>
+            <div>{`$${lot.price}`}</div>
+          </div>
         ))}
-      </ul>
+      </div>
       <Drawer isOpen={props.isOpen} onClose={props.onClose}>
-        <FilterControl>
-          {props.filters.map((filter: FilterType, index: number) => (
-            <Filter key={filter.label} isLast={filters.length == index + 1}>
-              <FilterHeader label={filter.label} />
-              {filter.filterDimensions.map((value: FilterDimension) => (
+        <FilterControl action="/example/uri">
+          {filters.map((filter: FilterType, index: number) => (
+            <Filter key={filter.label} name={filter.label} isLast={filters.length == index + 1}>
+              <FilterHeader heading={filter.label} />
+              {Array.from(filter.filterDimensions).map((value: FilterDimension) => (
                 <FilterValue
                   key={value.label}
                   label={value.label}
-                  onChange={doFilter}
+                  onChange={(e) => handleFilter(e, filter.id)}
                   inputType={filter.inputType}
                   disabled={value?.disabled}
+                  name={value.label}
+                  isActive={value.active}
                 />
               ))}
             </Filter>

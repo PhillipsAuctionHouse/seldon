@@ -4,7 +4,7 @@ $default-transition-duration: 0.3s;
 $default-easing: ease-in-out;
 $chevron-scale: 0.8;
 
-@keyframes slide {
+@keyframes slide-in {
   from {
     opacity: 0;
     transform: translateX(100%);
@@ -16,9 +16,22 @@ $chevron-scale: 0.8;
   }
 }
 
+@keyframes slide-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
 // temp override while input being fixed
 .#{$px}-input__input {
   height: 20px;
+  margin-top: 5px;
   width: 20px;
 }
 
@@ -33,8 +46,16 @@ $chevron-scale: 0.8;
     padding-bottom: $spacing-sm;
   }
 
-  &.is-open {
-    animation: slide $default-transition-duration $default-easing forwards;
+  &--hidden {
+    @include hidden;
+  }
+
+  &.is-opening {
+    animation: slide-in $default-transition-duration $default-easing forwards;
+  }
+
+  &.is-closing {
+    animation: slide-out $default-transition-duration $default-easing forwards;
   }
 }
 
@@ -47,11 +68,19 @@ $chevron-scale: 0.8;
   &__label {
     font-variation-settings: 'wght' 600;
     width: 70%;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
-  .disabled-label {
+  &-disabled-label {
     color: $keyline-gray;
-    cursor: default;
+    cursor: default !important;
+  }
+
+  &--hidden {
+    @include hidden;
   }
 
   &__input {
@@ -68,5 +97,9 @@ $chevron-scale: 0.8;
 
   &__chevron {
     transform: rotateY(180deg) scale($chevron-scale);
+  }
+
+  &__back {
+    margin-top: $spacing-sm;
   }
 }

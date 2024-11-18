@@ -2,6 +2,7 @@ import { Meta } from '@storybook/react';
 import Filter from './Filter';
 import FilterHeader from './FilterHeader';
 import FilterValue from './FilterValue';
+import { useState } from 'react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -11,10 +12,11 @@ const meta = {
 
 export default meta;
 
-type FilterDimension = { label: string; disabled?: boolean | undefined };
+type FilterDimension = { label: string; disabled?: boolean | undefined; active: boolean };
 
 type FilterType = {
   label: string;
+  id: string;
   filterDimensions: FilterDimension[];
 };
 
@@ -27,37 +29,69 @@ type PropTypes = {
 
 const filter: FilterType = {
   label: 'Artists & Makers',
+  id: 'makers',
   filterDimensions: [
-    { label: 'Jimmy' },
-    { label: 'Bob' },
-    { label: 'Alan' },
-    { label: 'Nick' },
-    { label: 'Joe' },
-    { label: 'Fred' },
-    { label: 'Rob' },
-    { label: 'Roy' },
-    { label: 'disabled', disabled: true },
+    { label: 'Jimmy', active: true },
+    { label: 'Bob', active: false },
+    { label: 'Alan', active: false },
+    { label: 'Nick', active: false },
+    { label: 'Joe', active: false },
+    { label: 'Fred', active: false },
+    { label: 'Rob', active: false },
+    { label: 'Roy', active: false },
+    { label: 'disabled', disabled: false, active: false },
   ],
 };
 
-export const Playground = (props: PropTypes) => {
-  const { filter, viewAllLimit, isLast, isViewingAll } = props;
+const FilterComponent = (props: PropTypes) => {
+  const { filter: intialFilters, viewAllLimit, isLast, isViewingAll } = props;
+  const [filter, setFilter] = useState(intialFilters);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked, name } = e.target;
+    const updatedFilterDimensions = filter.filterDimensions.map((dimension) => {
+      if (dimension.label === name) {
+        return {
+          ...dimension,
+          active: checked,
+        };
+      }
+      return dimension;
+    });
+
+    const updatedFilter = {
+      ...filter,
+      filterDimensions: updatedFilterDimensions,
+    };
+
+    setFilter(updatedFilter);
+  };
   return (
-    <Filter key={filter.label} isLast={isLast} viewAllLimit={viewAllLimit} viewingAll={isViewingAll}>
-      <FilterHeader label={filter.label} />
+    <Filter
+      key={filter.label}
+      name={filter.label}
+      isLast={isLast}
+      viewAllLimit={viewAllLimit}
+      isViewingAll={isViewingAll}
+    >
+      <FilterHeader heading={filter.label} />
       {filter.filterDimensions.map((value: FilterDimension) => (
         <FilterValue
           key={value.label}
           label={value.label}
-          onChange={(e) => {
-            e;
-          }}
+          onChange={handleChange}
           inputType="checkbox"
           disabled={value?.disabled}
+          name={value.label}
+          isActive={value.active}
         />
       ))}
     </Filter>
   );
+};
+
+export const Playground = (props: PropTypes) => {
+  return <FilterComponent {...props} />;
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args

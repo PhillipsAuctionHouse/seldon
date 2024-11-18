@@ -1,16 +1,21 @@
 import { ComponentProps, forwardRef } from 'react';
-import { getCommonProps } from '../../utils';
+import { getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
 import { Text, TextVariants } from '../Text';
-import Input from '../Input/Input';
+import Input, { InputProps } from '../Input/Input';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
-export interface FilterValueProps extends Omit<ComponentProps<'div'>, 'onChange'> {
+export interface FilterValueProps extends Omit<ComponentProps<'div'>, 'onChange' | 'value'> {
+  name: string;
+
   // Text to be displayed as a label for the neighboring input
   label: string;
 
   // Type of input for this filter
   inputType: 'checkbox' | 'radio';
+
+  // Selected or not
+  isActive: boolean;
 
   // Should this filter be hidden, most common use will be for view all truncation
   isHidden?: boolean;
@@ -20,6 +25,8 @@ export interface FilterValueProps extends Omit<ComponentProps<'div'>, 'onChange'
 
   // Function to trigger when the state of this filter is changed
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+
+  inputProps?: InputProps;
 }
 /**
  * ## Overview
@@ -28,28 +35,52 @@ export interface FilterValueProps extends Omit<ComponentProps<'div'>, 'onChange'
  *
  */
 const FilterValue = forwardRef<HTMLDivElement, FilterValueProps>(
-  ({ className, label, inputType, isHidden = false, onChange, disabled, ...props }, ref) => {
+  (
+    {
+      className,
+      name,
+      label,
+      inputType = 'checkbox',
+      isHidden = false,
+      onChange,
+      disabled,
+      isActive,
+      inputProps,
+      ...props
+    },
+    ref,
+  ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'FilterValue');
-    const disabledLabel = disabled ? 'disabled-label' : '';
+    const disabledClass = disabled ? `${baseClassName}-disabled-label` : '';
     return (
-      <>
-        {isHidden ? null : (
-          <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-            <Text variant={TextVariants.body2} className={`${baseClassName}__label ${disabledLabel}`}>
+      <div
+        {...commonProps}
+        className={classnames(baseClassName, className, { [`${px}-input__label--hidden`]: isHidden })}
+        {...props}
+        ref={ref}
+      >
+        <Text
+          variant={TextVariants.body2}
+          className={`${baseClassName}__label ${disabledClass}`}
+          element={(props) => (
+            <label htmlFor={name} {...props}>
               {label}
-            </Text>
-            <Input
-              disabled={disabled}
-              type={inputType}
-              className={`${baseClassName}__input`}
-              onChange={onChange}
-              hideLabel={true}
-              size="lg"
-              value={label}
-            />
-          </div>
-        )}
-      </>
+            </label>
+          )}
+        />
+        <Input
+          {...inputProps}
+          checked={isActive}
+          disabled={disabled}
+          type={inputType}
+          className={`${baseClassName}__input`}
+          onChange={onChange}
+          hideLabel={true}
+          size="lg"
+          name={name}
+          id={name}
+        />
+      </div>
     );
   },
 );

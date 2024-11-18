@@ -13,14 +13,22 @@ describe('FilterControl', () => {
   runCommonTests(FilterControl, 'FilterControl');
   const handleChange = vi.fn();
   const filters = Array(11).fill(0);
+  const mockAction = '/dummy';
 
   it('should render the "View All" button when there are more than 10 filters', () => {
     render(
-      <FilterControl>
-        <Filter>
-          <FilterHeader label="Test Filter" />
+      <FilterControl action={mockAction}>
+        <Filter name="test">
+          <FilterHeader heading="Test Filter" />
           {filters.map((_, i) => (
-            <FilterValue key={i} label={`Filter ${i + 1}`} inputType="checkbox" onChange={handleChange} />
+            <FilterValue
+              key={i}
+              name={`test[test${i}]`}
+              label={`Filter ${i + 1}`}
+              inputType="checkbox"
+              onChange={handleChange}
+              isActive={true}
+            />
           ))}
         </Filter>
       </FilterControl>,
@@ -29,56 +37,85 @@ describe('FilterControl', () => {
     expect(screen.getByTestId('button')).toBeInTheDocument();
   });
 
-  it('should hide values over viewAllLimit and render those under', () => {
+  it('should hide values over viewAllLimit and display those under', () => {
     render(
-      <FilterControl>
-        <Filter viewAllLimit={3}>
-          <FilterHeader label="Test Filter" />
+      <FilterControl action={mockAction}>
+        <Filter name="test" viewAllLimit={3}>
+          <FilterHeader heading="Test Filter" />
           {filters.map((_, i) => (
-            <FilterValue key={i} label={`Filter ${i + 1}`} inputType="checkbox" onChange={handleChange} />
+            <FilterValue
+              key={i}
+              name={`test[test${i}]`}
+              label={`Filter ${i + 1}`}
+              inputType="checkbox"
+              onChange={handleChange}
+              isActive={true}
+            />
           ))}
         </Filter>
       </FilterControl>,
     );
 
     const values = screen.getAllByTestId('filter-value');
-    expect(values).toHaveLength(3);
+    expect(values[2]).toBeVisible();
+    expect(values[3]).toHaveClass(`${px}-input__label--hidden`);
   });
 
   it('render the child filter', () => {
     render(
-      <FilterControl>
-        <Filter>
-          <FilterHeader label="Test Filter" />
+      <FilterControl action={mockAction}>
+        <Filter name="test">
+          <FilterHeader heading="Test Filter" />
           {filters.map((_, i) => (
-            <FilterValue key={i} label={`Filter ${i + 1}`} inputType="checkbox" onChange={handleChange} />
+            <FilterValue
+              key={i}
+              name={`test[test${i}]`}
+              label={`Filter ${i + 1}`}
+              inputType="checkbox"
+              onChange={handleChange}
+              isActive={true}
+            />
           ))}
         </Filter>
-        <Filter>
-          <FilterHeader label="Test Filter 2" />
-          <FilterValue label={`Filter 1`} inputType="radio" onChange={handleChange} />
+        <Filter name="test2">
+          <FilterHeader heading="Test Filter 2" />
+          <FilterValue
+            isActive={true}
+            name="test2[test1]"
+            label={`Filter 1`}
+            inputType="radio"
+            onChange={handleChange}
+          />
         </Filter>
       </FilterControl>,
     );
 
-    const filter2Value = screen.getByRole('radio');
+    const filter2Value = screen.getAllByTestId('filter')[1];
 
     // View All button
     fireEvent.click(screen.getByTestId('button'));
 
-    // Back button should render
-    expect(screen.getByText(BACK_BUTTON_TEXT)).toBeInTheDocument();
+    // Back button only for first filter should be displayed
+    expect(screen.getAllByText(BACK_BUTTON_TEXT)[0]).toBeVisible();
+
     // Second filter should no longer be displayed
-    expect(filter2Value).not.toBeInTheDocument();
+    expect(filter2Value).toHaveClass(`${px}-filter--hidden`);
   });
 
   it('should handle the back button click', () => {
     render(
-      <FilterControl>
-        <Filter>
-          <FilterHeader label="Test Filter" />
+      <FilterControl action={mockAction}>
+        <Filter name="test">
+          <FilterHeader heading="Test Filter" />
           {filters.map((_, i) => (
-            <FilterValue key={i} label={`Filter ${i + 1}`} inputType="checkbox" onChange={handleChange} />
+            <FilterValue
+              key={i}
+              name={`test[test${i}]`}
+              label={`Filter ${i + 1}`}
+              inputType="checkbox"
+              onChange={handleChange}
+              isActive={true}
+            />
           ))}
         </Filter>
       </FilterControl>,
@@ -87,17 +124,32 @@ describe('FilterControl', () => {
     fireEvent.click(screen.getByText(VIEW_ALL_BUTTON_TEXT));
     fireEvent.click(screen.getByText(BACK_BUTTON_TEXT));
 
-    expect(screen.getByText(VIEW_ALL_BUTTON_TEXT)).toBeInTheDocument();
+    //wait for transition to be done
+    setTimeout(() => {
+      expect(screen.getByText(VIEW_ALL_BUTTON_TEXT)).toBeInTheDocument();
+    }, 500);
   });
 
   it('renders multiple filters and has separators', () => {
     render(
-      <FilterControl>
-        <Filter isLast={false}>
-          <FilterValue label="Filter 1" inputType="checkbox" onChange={handleChange} />
+      <FilterControl action={mockAction}>
+        <Filter name="test" isLast={false}>
+          <FilterValue
+            name="test[test1]"
+            label="Filter 1"
+            inputType="checkbox"
+            onChange={handleChange}
+            isActive={true}
+          />
         </Filter>
-        <Filter isLast={true}>
-          <FilterValue label="Filter 2" inputType="checkbox" onChange={handleChange} />
+        <Filter name="test2" isLast={true}>
+          <FilterValue
+            name="test2[test1]"
+            label="Filter 2"
+            inputType="checkbox"
+            onChange={handleChange}
+            isActive={true}
+          />
         </Filter>
       </FilterControl>,
     );

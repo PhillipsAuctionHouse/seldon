@@ -1,11 +1,13 @@
-import React, { ComponentProps, forwardRef, useState, Children, cloneElement, ReactNode } from 'react';
+import React, { ComponentProps, forwardRef, useState, Children, cloneElement } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
-import Filter, { FilterComponent, FilterProps } from '../../components/Filter/Filter';
+import { FilterComponent, FilterProps } from '../../components/Filter/Filter';
 
 export interface FilterControlProps extends ComponentProps<'div'> {
   // This is a composable component that is expecting a Filter component or an array of
   children: FilterComponent | FilterComponent[];
+
+  action: string;
 }
 /**
  * ## Overview
@@ -16,33 +18,33 @@ export interface FilterControlProps extends ComponentProps<'div'> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-filtercontrol--overview)
  */
-const FilterControl = forwardRef<HTMLDivElement, FilterControlProps>(({ className, children, ...props }, ref) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'FilterControl');
-  const [viewAllFilter, setViewAllFilter] = useState<ReactNode[]>([]);
+const FilterControl = forwardRef<HTMLDivElement, FilterControlProps>(
+  ({ className, children, action, ...props }, ref) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'FilterControl');
 
-  return (
-    <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-      {viewAllFilter.length ? (
-        <Filter
-          viewingAll={true}
-          setViewAllFilter={setViewAllFilter}
-          className={classnames({ 'is-open': viewAllFilter.length })}
-        >
-          {viewAllFilter}
-        </Filter>
-      ) : (
-        Children.map(children, (childElement) =>
-          React.isValidElement(childElement)
-            ? cloneElement(childElement, {
-                setViewAllFilter,
-                className: classnames(childElement.props.className, 'is-open'),
-              } as FilterProps)
-            : childElement,
-        )
-      )}
-    </div>
-  );
-});
+    // this state variable will be set to the filter name when view all has been clicked,
+    // and null as default and when back is clicked
+    const [viewAllFilter, setViewAllFilter] = useState<string | null>(null);
+    const isViewAllSet = viewAllFilter?.length;
+
+    const parsedChildren = Children.map(children, (childElement) =>
+      React.isValidElement(childElement)
+        ? cloneElement(childElement, {
+            setViewAllFilter,
+            isHidden: !isViewAllSet ? false : viewAllFilter !== childElement.props.name,
+            isViewingAll: isViewAllSet,
+            className: isViewAllSet && classnames(childElement.props.className, 'is-opening'),
+          } as FilterProps)
+        : childElement,
+    );
+
+    return (
+      <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
+        <form action={action}>{parsedChildren}</form>
+      </div>
+    );
+  },
+);
 
 FilterControl.displayName = 'FilterControl';
 

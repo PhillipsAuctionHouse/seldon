@@ -1,0 +1,138 @@
+export type lotType = {
+  id: string;
+  lotNumber: number;
+  title: string;
+  imageSrc: string;
+  maker: string;
+  price: number;
+  collection: string;
+};
+
+export const exampleAuctionLots: lotType[] = [
+  {
+    id: 'lot-001',
+    lotNumber: 1,
+    title: 'Sunset Over the Hills',
+    imageSrc: 'https://via.placeholder.com/150',
+    maker: 'John Doe',
+    price: 120000,
+    collection: 'Modern Landscape Collection',
+  },
+  {
+    id: 'lot-002',
+    lotNumber: 2,
+    title: 'The Lady in Blue',
+    imageSrc: 'https://via.placeholder.com/150',
+    maker: 'Jane Smith',
+    price: 80000,
+    collection: 'Classical Portrait Collection',
+  },
+  {
+    id: 'lot-003',
+    lotNumber: 3,
+    title: 'Chaos in Motion',
+    imageSrc: 'https://via.placeholder.com/150',
+    maker: 'Emily Clark',
+    price: 95000,
+    collection: 'Abstract Art Series',
+  },
+  {
+    id: 'lot-004',
+    lotNumber: 4,
+    title: 'Bountiful Harvest',
+    imageSrc: 'https://via.placeholder.com/150',
+    maker: 'Michael Johnson',
+    price: 65000,
+    collection: 'Still Life Masterpieces',
+  },
+  {
+    id: 'lot-005',
+    lotNumber: 5,
+    title: 'The Galloping Stallion',
+    imageSrc: 'https://via.placeholder.com/150',
+    maker: 'Sarah Lee',
+    price: 130000,
+    collection: 'Sculptural Works Collection',
+  },
+  {
+    id: 'lot-006',
+    lotNumber: 6,
+    title: 'Crashing Waves',
+    imageSrc: 'https://via.placeholder.com/150',
+    maker: 'David Wang',
+    price: 95000,
+    collection: 'Coastal Views Series',
+  },
+  {
+    id: 'lot-007',
+    lotNumber: 7,
+    title: 'Urban Dreams',
+    imageSrc: 'https://via.placeholder.com/150',
+    maker: 'Olivia Brown',
+    price: 105000,
+    collection: 'Mixed Media Exploration',
+  },
+  {
+    id: 'lot-008',
+    lotNumber: 8,
+    title: 'Lion King at Dusk',
+    imageSrc: 'https://via.placeholder.com/150',
+    maker: 'Christopher King',
+    price: 140000,
+    collection: 'Wildlife Wonders',
+  },
+  {
+    id: 'lot-009',
+    lotNumber: 9,
+    title: 'City at Night',
+    imageSrc: 'https://via.placeholder.com/150',
+    maker: 'Isabella Lopez',
+    price: 78000,
+    collection: 'Urban Landscapes',
+  },
+  {
+    id: 'lot-010',
+    lotNumber: 10,
+    title: 'Golden Floral Vases',
+    imageSrc: 'https://via.placeholder.com/150',
+    maker: 'Liam Harris',
+    price: 55000,
+    collection: 'Porcelain Artifacts',
+  },
+  {
+    id: 'lot-011',
+    lotNumber: 11,
+    title: 'Fluid Form',
+    imageSrc: 'https://via.placeholder.com/150',
+    maker: 'Ethan Martinez',
+    price: 170000,
+    collection: 'Modern Sculpture Series',
+  },
+  {
+    id: 'lot-012',
+    lotNumber: 12,
+    title: 'The Last Charge',
+    imageSrc: 'https://via.placeholder.com/150',
+    maker: 'Charles Thomas',
+    price: 220000,
+    collection: 'Historical War Art',
+  },
+  {
+    id: 'lot-0013',
+    lotNumber: 13,
+    title: 'Eternal Moment',
+    imageSrc: 'https://via.placeholder.com/150',
+    maker: 'John Doe',
+    price: 140000,
+    collection: 'Modern Landscape Collection',
+  },
+  {
+    id: 'lot-014',
+    lotNumber: 14,
+    title: 'The Balance of Nature',
+    imageSrc: 'https://via.placeholder.com/150',
+    maker: 'Isabella Lopez',
+    price: 200000,
+    collection: 'Urban Landscapes',
+  },
+];

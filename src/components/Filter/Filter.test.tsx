@@ -3,6 +3,7 @@ import { runCommonTests } from '../../utils/testUtils';
 import { render, screen } from '@testing-library/react';
 import FilterHeader from './FilterHeader';
 import FilterValue from './FilterValue';
+import { px } from '../../utils';
 
 describe('Filter', () => {
   runCommonTests(Filter, 'Filter');
@@ -11,9 +12,9 @@ describe('Filter', () => {
     const handleChange = vi.fn();
 
     render(
-      <Filter>
-        <FilterValue label="Filter 1" inputType="checkbox" onChange={handleChange} />
-        <FilterValue label="Filter 2" inputType="radio" onChange={handleChange} />
+      <Filter name="test">
+        <FilterValue name="test[test1]" label="Filter 1" inputType="checkbox" onChange={handleChange} isActive={true} />
+        <FilterValue name="test[test2]" label="Filter 2" inputType="radio" onChange={handleChange} isActive={true} />
       </Filter>,
     );
 
@@ -29,8 +30,8 @@ describe('Filter', () => {
 
   it('renders a filter header', () => {
     render(
-      <Filter>
-        <FilterHeader label="Filter Header 1" />
+      <Filter name="test">
+        <FilterHeader heading="Filter Header 1" />
       </Filter>,
     );
 
@@ -41,13 +42,20 @@ describe('Filter', () => {
     const handleChange = vi.fn();
 
     render(
-      <Filter>
-        <FilterValue label="Filter 1" inputType="checkbox" onChange={handleChange} disabled />
+      <Filter name="test">
+        <FilterValue
+          name="test[test1]"
+          label="Filter 1"
+          inputType="checkbox"
+          onChange={handleChange}
+          disabled
+          isActive={true}
+        />
       </Filter>,
     );
 
     const checkbox = screen.getByRole('checkbox');
-    expect(screen.getByText('Filter 1')).toHaveClass('disabled-label');
+    expect(screen.getByText('Filter 1')).toHaveClass(`${px}-filter-value-disabled-label`);
     expect(checkbox).toBeDisabled();
   });
 });
