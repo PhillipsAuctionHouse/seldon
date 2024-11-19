@@ -4,6 +4,7 @@ import DetailList, { DetailListProps } from './DetailList';
 import { DetailListAlignment } from './types';
 import { createMedia } from '@artsy/fresnel';
 import { BREAKPOINTS } from '../../utils/constants';
+const { Media } = createMedia({ breakpoints: BREAKPOINTS });
 
 interface WrapperProps {
   children: JSX.Element;
@@ -53,7 +54,23 @@ const StoryList = (props: Omit<DetailListProps, 'children'>) => (
   </DetailList>
 );
 
-const { Media } = createMedia({ breakpoints: BREAKPOINTS });
+const PlaygroundStoryLists = () => (
+  <>
+    <Wrapper title="With Separators (Justified)">
+      <StoryList hasSeparators alignment={DetailListAlignment.justified} />
+    </Wrapper>
+    <Wrapper title="With Separators (Columns)">
+      <StoryList hasSeparators alignment={DetailListAlignment.columns} />
+    </Wrapper>
+    <Wrapper title="Without Separators (Justified)">
+      <StoryList hasSeparators={false} alignment={DetailListAlignment.justified} />
+    </Wrapper>
+    <Wrapper title="Without Separators (Columns)">
+      <StoryList hasSeparators={false} alignment={DetailListAlignment.columns} />
+    </Wrapper>
+  </>
+);
+
 export const Playground = () => (
   <>
     <Media lessThan="md">
@@ -63,18 +80,7 @@ export const Playground = () => (
           gridTemplateColumns: '1fr',
         }}
       >
-        <Wrapper title="With Separators (Justified)">
-          <StoryList hasSeparators alignment={DetailListAlignment.justified} />
-        </Wrapper>
-        <Wrapper title="With Separators (Columns)">
-          <StoryList hasSeparators alignment={DetailListAlignment.columns} />
-        </Wrapper>
-        <Wrapper title="Without Separators (Justified)">
-          <StoryList hasSeparators={false} alignment={DetailListAlignment.justified} />
-        </Wrapper>
-        <Wrapper title="Without Separators (Columns)">
-          <StoryList hasSeparators={false} alignment={DetailListAlignment.columns} />
-        </Wrapper>
+        <PlaygroundStoryLists />
       </div>
     </Media>
     <Media greaterThanOrEqual="md">
@@ -84,18 +90,7 @@ export const Playground = () => (
           gridTemplateColumns: 'repeat(2, 1fr)',
         }}
       >
-        <Wrapper title="With Separators (Justified)">
-          <StoryList hasSeparators alignment={DetailListAlignment.justified} />
-        </Wrapper>
-        <Wrapper title="With Separators (Columns)">
-          <StoryList hasSeparators alignment={DetailListAlignment.columns} />
-        </Wrapper>
-        <Wrapper title="Without Separators (Justified)">
-          <StoryList hasSeparators={false} alignment={DetailListAlignment.justified} />
-        </Wrapper>
-        <Wrapper title="Without Separators (Columns)">
-          <StoryList hasSeparators={false} alignment={DetailListAlignment.columns} />
-        </Wrapper>
+        <PlaygroundStoryLists />
       </div>
     </Media>
   </>
