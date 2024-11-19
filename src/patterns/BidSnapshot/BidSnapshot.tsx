@@ -34,6 +34,10 @@ export interface BidSnapshotProps extends ComponentProps<'div'> {
    */
   closingText?: string;
   /**
+   * Function to modify strings coming from date-fns (Minutes -> Mins etc)
+   */
+  formatDurationStr?: (duration: string) => string;
+  /**
    * Language selection for the application
    */
   lang?: keyof typeof SupportedLanguages;
@@ -80,6 +84,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
       className,
       closingText = 'Closes in',
       currentBidText = 'Current bid',
+      formatDurationStr = (str) => str.replace(/seconds?/, 'sec').replace(/minutes?/, 'min'),
       lang = 'en',
       lotCloseDate,
       startingBid,
@@ -126,7 +131,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
             label={closingText}
             variant={CountdownVariants.compact}
             locale={SupportedLanguages[lang]}
-            formatDurationStr={(str) => str.replace(/seconds?/, 'sec').replace(/minutes?/, 'min')}
+            formatDurationStr={formatDurationStr}
           />
         ) : null}
       </div>

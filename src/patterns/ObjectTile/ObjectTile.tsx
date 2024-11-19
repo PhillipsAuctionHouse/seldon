@@ -5,8 +5,11 @@ import { getCommonProps } from '../../utils';
 import { Text, TextVariants } from '../../components/Text';
 import { DetailList } from '../DetailList/index';
 import { Detail } from '../../components/Detail/index';
-import { PhillipsLogo } from '../../assets/icons';
+import { SeldonImage } from '../../components/SeldonImage';
 
+type ObjectTileElement = ElementType<
+Omit<ObjectTileProps, 'imageUrl' | 'lotNumber' | 'referenceNumber'> & { 'data-testid': string }
+>;
 export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
    * Optional Object badge.
@@ -15,9 +18,7 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
    * Optional Element to render at the top level.
    */
-  element?: ElementType<
-    Omit<ObjectTileProps, 'imageUrl' | 'lotNumber' | 'referenceNumber'> & { 'data-testid': string }
-  >;
+  element?: ObjectTileElement;
   /**
    * Estimate for object.
    */
@@ -73,7 +74,7 @@ const ObjectTile = forwardRef<HTMLAnchorElement, ObjectTileProps>(
       element: Element,
       estimate,
       estimateLabelText = 'Estimate',
-      imageUrl,
+      imageUrl = '',
       lotNumber,
       makerText,
       modelText,
@@ -85,22 +86,16 @@ const ObjectTile = forwardRef<HTMLAnchorElement, ObjectTileProps>(
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ObjectTile');
-    Element = (props.href ? 'a' : 'div') as ElementType<
-      Omit<ObjectTileProps, 'imageUrl' | 'lotNumber' | 'referenceNumber'> & { 'data-testid': string }
-    >;
+    const Component = Element ?? (props.href ? 'a' : 'div') as ObjectTileElement;
     return (
-      <Element {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        {imageUrl ? (
-          <img
-            className={`${baseClassName}__img`}
-            src={imageUrl}
-            alt={titleText ?? `image for lot number ${lotNumber}`}
-          />
-        ) : (
-          <div className={`${baseClassName}__img`}>
-            <PhillipsLogo />
-          </div>
-        )}
+      <Component {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
+        <SeldonImage
+          alt={titleText ?? `${lotNumber} - ${makerText}`}
+          aspectRatio='1/1'
+          className={`${baseClassName}__img`}
+          objectFit='cover'
+          src={imageUrl}
+        />
         {!withdrawnText ? (
           <Text className={`${baseClassName}__badge`} variant={TextVariants.badge}>
             {badgeText}
@@ -164,7 +159,7 @@ const ObjectTile = forwardRef<HTMLAnchorElement, ObjectTileProps>(
             <div className={`${baseClassName}__section`}>{children}</div>
           </>
         )}
-      </Element>
+      </Component>
     );
   },
 );
