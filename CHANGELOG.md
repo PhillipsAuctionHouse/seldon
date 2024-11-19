@@ -1,3 +1,10 @@
+# [1.93.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.92.0...v1.93.0) (2024-11-19)
+
+
+### Features
+
+* **objecttile:** L3-4346 - create object tile pattern ([#425](https://github.com/PhillipsAuctionHouse/seldon/issues/425)) ([8b13278](https://github.com/PhillipsAuctionHouse/seldon/commit/8b132780e42565a8ec95f5c9a987277b81841e30))
+
 # [1.92.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.91.1...v1.92.0) (2024-11-15)
 
 
