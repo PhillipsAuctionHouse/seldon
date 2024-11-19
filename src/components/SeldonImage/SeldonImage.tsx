@@ -115,13 +115,11 @@ const SeldonImage = forwardRef<HTMLDivElement, SeldonImageProps>(
             style={{ backgroundImage: `url(${src})` }}
           />
         )}
-        {
-          loadingState === 'error'
-          ? <div className={`${baseClassName}--error`}>
-                <PhillipsLogo aria-label={errorText} />
-            </div>
-          : null
-        }
+        {loadingState === 'error' ? (
+          <div className={`${baseClassName}--error`}>
+            <PhillipsLogo aria-label={errorText} />
+          </div>
+        ) : null}
         <img
           className={classnames(`${baseClassName}-img`, imageClassName, {
             [`${baseClassName}-img--hidden`]: loadingState !== 'loaded',

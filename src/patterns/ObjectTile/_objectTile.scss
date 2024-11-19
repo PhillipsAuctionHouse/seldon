@@ -14,6 +14,17 @@
     color: $widget-red;
   }
 
+  &__lot-number-like {
+    position: relative;
+
+    & > :not(.#{$px}-object-tile__lot-number) {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
   & .#{$px}-object-tile__lot-number {
     margin-bottom: $spacing-xsm;
   }

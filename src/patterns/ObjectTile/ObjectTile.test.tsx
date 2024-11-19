@@ -59,5 +59,4 @@ describe('ObjectTile', () => {
     expect(screen.getByText('Estimate')).toBeInTheDocument();
     expect(screen.getByText('1000-2000')).toBeInTheDocument();
   });
-
 });

@@ -8,7 +8,7 @@ import { Detail } from '../../components/Detail/index';
 import { SeldonImage } from '../../components/SeldonImage';
 
 type ObjectTileElement = ElementType<
-Omit<ObjectTileProps, 'imageUrl' | 'lotNumber' | 'referenceNumber'> & { 'data-testid': string }
+  Omit<ObjectTileProps, 'imageUrl' | 'lotNumber' | 'referenceNumber'> & { 'data-testid': string }
 >;
 export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
@@ -27,6 +27,10 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
    * Estimate label text.
    */
   estimateLabelText?: string;
+  /**
+   * Element used for favoriting object
+   */
+  favoriteElement?: React.ElementType;
   /**
    * Image alt text for the object.
    */
@@ -78,6 +82,7 @@ const ObjectTile = forwardRef<HTMLAnchorElement, ObjectTileProps>(
       element: Element,
       estimate,
       estimateLabelText = 'Estimate',
+      favoriteElement: FavoriteElement,
       imageAlt = 'Brought to you by Phillips',
       imageUrl = '',
       lotNumber,
@@ -91,14 +96,14 @@ const ObjectTile = forwardRef<HTMLAnchorElement, ObjectTileProps>(
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ObjectTile');
-    const Component = Element ?? (props.href ? 'a' : 'div') as ObjectTileElement;
+    const Component = Element ?? ((props.href ? 'a' : 'div') as ObjectTileElement);
     return (
       <Component {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         <SeldonImage
           alt={imageAlt}
-          aspectRatio='1/1'
+          aspectRatio="1/1"
           className={`${baseClassName}__img`}
-          objectFit='cover'
+          objectFit="cover"
           src={imageUrl}
         />
         {!withdrawnText ? (
@@ -110,6 +115,7 @@ const ObjectTile = forwardRef<HTMLAnchorElement, ObjectTileProps>(
           <Text className={`${baseClassName}__lot-number`} variant={TextVariants.heading3} element="p">
             {lotNumber}
           </Text>
+          {FavoriteElement && <FavoriteElement />}
         </div>
         {withdrawnText ? (
           <Text className={`${baseClassName}__withdrawn`} variant={TextVariants.heading4}>
