@@ -2,6 +2,8 @@ import { Meta } from '@storybook/react';
 import { Detail } from '../../components/Detail';
 import DetailList, { DetailListProps } from './DetailList';
 import { DetailListAlignment } from './types';
+import { createMedia } from '@artsy/fresnel';
+import { BREAKPOINTS } from '../../utils/constants';
 
 interface WrapperProps {
   children: JSX.Element;
@@ -51,19 +53,50 @@ const StoryList = (props: Omit<DetailListProps, 'children'>) => (
   </DetailList>
 );
 
+const { Media } = createMedia({ breakpoints: BREAKPOINTS });
 export const Playground = () => (
-  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
-    <Wrapper title="With Separators (Justified)">
-      <StoryList hasSeparators alignment={DetailListAlignment.justified} />
-    </Wrapper>
-    <Wrapper title="With Separators (Columns)">
-      <StoryList hasSeparators alignment={DetailListAlignment.columns} />
-    </Wrapper>
-    <Wrapper title="Without Separators (Justified)">
-      <StoryList hasSeparators={false} alignment={DetailListAlignment.justified} />
-    </Wrapper>
-    <Wrapper title="Without Separators (Columns)">
-      <StoryList hasSeparators={false} alignment={DetailListAlignment.columns} />
-    </Wrapper>
-  </div>
+  <>
+    <Media lessThan="md">
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+        }}
+      >
+        <Wrapper title="With Separators (Justified)">
+          <StoryList hasSeparators alignment={DetailListAlignment.justified} />
+        </Wrapper>
+        <Wrapper title="With Separators (Columns)">
+          <StoryList hasSeparators alignment={DetailListAlignment.columns} />
+        </Wrapper>
+        <Wrapper title="Without Separators (Justified)">
+          <StoryList hasSeparators={false} alignment={DetailListAlignment.justified} />
+        </Wrapper>
+        <Wrapper title="Without Separators (Columns)">
+          <StoryList hasSeparators={false} alignment={DetailListAlignment.columns} />
+        </Wrapper>
+      </div>
+    </Media>
+    <Media greaterThanOrEqual="md">
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, 1fr)',
+        }}
+      >
+        <Wrapper title="With Separators (Justified)">
+          <StoryList hasSeparators alignment={DetailListAlignment.justified} />
+        </Wrapper>
+        <Wrapper title="With Separators (Columns)">
+          <StoryList hasSeparators alignment={DetailListAlignment.columns} />
+        </Wrapper>
+        <Wrapper title="Without Separators (Justified)">
+          <StoryList hasSeparators={false} alignment={DetailListAlignment.justified} />
+        </Wrapper>
+        <Wrapper title="Without Separators (Columns)">
+          <StoryList hasSeparators={false} alignment={DetailListAlignment.columns} />
+        </Wrapper>
+      </div>
+    </Media>
+  </>
 );

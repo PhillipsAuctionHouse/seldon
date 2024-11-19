@@ -30,5 +30,22 @@
 
   &__value {
     font-variation-settings: 'wght' 400;
+    width: 176px;
+
+    @include media($breakpoint-sm) {
+      width: 212px;
+    }
+
+    @include media($breakpoint-md) {
+      width: 176px;
+    }
+
+    @include media($breakpoint-lg) {
+      width: 176px;
+    }
+
+    @include media($breakpoint-xl) {
+      width: 140px;
+    }
   }
 }
