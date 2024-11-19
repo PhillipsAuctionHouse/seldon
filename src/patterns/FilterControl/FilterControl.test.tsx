@@ -113,7 +113,7 @@ describe('FilterControl', () => {
     expect(filter2Value).toHaveClass(`${px}-filter--hidden`);
   });
 
-  it('should handle the back button click', () => {
+  it('should handle the back button click', async () => {
     render(
       <FilterControl>
         <Filter name="test">
@@ -138,10 +138,8 @@ describe('FilterControl', () => {
     fireEvent.click(screen.getByText(VIEW_ALL_BUTTON_TEXT));
     fireEvent.click(screen.getByText(BACK_BUTTON_TEXT));
 
-    //wait for transition to be done
-    setTimeout(() => {
-      expect(screen.getAllByText(VIEW_ALL_BUTTON_TEXT)).toBeInTheDocument();
-    }, 500);
+    const button = await screen.findByText(VIEW_ALL_BUTTON_TEXT);
+    expect(button).toBeInTheDocument();
   });
 
   it('renders multiple filters and has separators', () => {
