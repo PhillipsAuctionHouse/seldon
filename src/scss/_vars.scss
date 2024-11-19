@@ -160,7 +160,6 @@ $breakpoint-xl: 1801px;
   --snw-heading-hero-line-height-size1: 2.375rem;
   --snw-heading-hero-size2: 1.625rem;
   --snw-heading-hero-line-height-size2: 1.9375rem;
-  --select-icon-size: 1rem;
 
   @media (min-width: $breakpoint-md) {
     --quote-size: 1.75rem;
@@ -202,7 +201,6 @@ $breakpoint-xl: 1801px;
     --snw-flyout-link-line-height: 1.75rem;
     --snw-heading-hero-size1: 2.375rem;
     --snw-heading-hero-line-height-size1: 2.875rem;
-    --select-icon-size: 1.25rem;
   }
 
   @media (min-width: $breakpoint-lg) {
@@ -248,7 +246,6 @@ $breakpoint-xl: 1801px;
     --snw-header-link-line-height: 1.75rem;
     --snw-flyout-link-size: 1.125rem;
     --snw-flyout-link-line-height: 2.125rem;
-    --select-icon-size: 1.5rem;
   }
 }
 
@@ -305,7 +302,6 @@ $snw-heading-hero-size1: var(--snw-heading-hero-size1);
 $snw-heading-hero-line-height1: var(--snw-heading-hero-line-height-size1);
 $snw-heading-hero-size2: var(--snw-heading-hero-size2);
 $snw-heading-hero-line-height2: var(--snw-heading-hero-line-height-size2);
-$select-icon-size: var(--select-icon-size);
 
 ////////////////////////
 /// SPACING TOKENS:
@@ -323,8 +319,6 @@ $snowflake-menu-padding: 1.25rem;
   --spacing-lg: 2.75rem;
   --spacing-xl: 3.75rem;
   --spacing-xxl: 4.75rem;
-  --select-icon-padding: 1.55rem;
-  --select-icon-position: 0.35rem;
 
   @media (min-width: $breakpoint-md) {
     --spacing-micro: 0.25rem;
@@ -334,8 +328,6 @@ $snowflake-menu-padding: 1.25rem;
     --spacing-lg: 3rem;
     --spacing-xl: 4rem;
     --spacing-xxl: 5rem;
-    --select-icon-padding: 1.75rem;
-    --select-icon-spacing: 0.5rem;
   }
 
   @media (min-width: $breakpoint-xl) {
@@ -346,8 +338,6 @@ $snowflake-menu-padding: 1.25rem;
     --spacing-lg: 3.75rem;
     --spacing-xl: 5rem;
     --spacing-xxl: 5.25rem;
-    --select-icon-padding: 1.95rem;
-    --select-icon-spacing: 0.55rem;
   }
 }
 
@@ -378,8 +368,6 @@ $margin-md: var(--spacing-md);
 $margin-lg: var(--spacing-lg);
 $margin-xl: var(--spacing-xl);
 $margin-xxl: var(--spacing-xxl);
-$select-icon-padding: var(--select-icon-padding);
-$select-icon-position: var(--select-icon-position);
 
 ////////////////////////
 /// HEADER TOKENS:
