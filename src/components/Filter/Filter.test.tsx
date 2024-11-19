@@ -13,13 +13,31 @@ describe('Filter', () => {
 
     render(
       <Filter name="test">
-        <FilterValue name="test[test1]" label="Filter 1" inputType="checkbox" onChange={handleChange} isActive={true} />
-        <FilterValue name="test[test2]" label="Filter 2" inputType="radio" onChange={handleChange} isActive={true} />
+        <FilterValue
+          inputType="checkbox"
+          inputProps={{
+            onChange: handleChange,
+            id: 'test[test1]',
+            labelText: 'Filter 1',
+            name: 'test[test1]',
+            checked: true,
+          }}
+        />
+        <FilterValue
+          inputType="radio"
+          inputProps={{
+            onChange: handleChange,
+            id: 'test[test2]',
+            labelText: 'Filter 2',
+            name: 'test[test2]',
+            checked: true,
+          }}
+        />
       </Filter>,
     );
 
-    expect(screen.getByText('Filter 1')).toBeInTheDocument();
-    expect(screen.getByText('Filter 2')).toBeInTheDocument();
+    expect(screen.getAllByText('Filter 1')[0]).toBeInTheDocument();
+    expect(screen.getAllByText('Filter 2')[0]).toBeInTheDocument();
 
     const checkbox = screen.getByRole('checkbox');
     const radio = screen.getByRole('radio');
@@ -44,18 +62,21 @@ describe('Filter', () => {
     render(
       <Filter name="test">
         <FilterValue
-          name="test[test1]"
-          label="Filter 1"
           inputType="checkbox"
-          onChange={handleChange}
-          disabled
-          isActive={true}
+          inputProps={{
+            onChange: handleChange,
+            id: 'test[test1]',
+            labelText: 'Filter 1',
+            name: 'test[test1]',
+            checked: true,
+            disabled: true,
+          }}
         />
       </Filter>,
     );
 
     const checkbox = screen.getByRole('checkbox');
-    expect(screen.getByText('Filter 1')).toHaveClass(`${px}-filter-value-disabled-label`);
+    expect(screen.getByTestId('text')).toHaveClass(`${px}-filter-value-disabled-label`);
     expect(checkbox).toBeDisabled();
   });
 });

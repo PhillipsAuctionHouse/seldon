@@ -91,8 +91,7 @@ const Filter = forwardRef<HTMLDivElement, FilterProps>(
         {...props}
         ref={ref}
       >
-        {/* TODO: REMOVE INLINE STYLING */}
-        <fieldset name={name} style={{ border: 'none', padding: 0 }}>
+        <fieldset name={name} className={`${baseClassName}__fieldset`}>
           {parsedFilterChildren}
         </fieldset>
         {childrenArray.length > viewAllLimit && !isViewingAll ? (

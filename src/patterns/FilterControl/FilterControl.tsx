@@ -1,13 +1,14 @@
-import React, { ComponentProps, forwardRef, useState, Children, cloneElement } from 'react';
+import React, { forwardRef, useState, Children, cloneElement } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { FilterComponent, FilterProps } from '../../components/Filter/Filter';
 
-export interface FilterControlProps extends ComponentProps<'div'> {
+export interface FilterControlProps<ElementType = HTMLElement> extends React.HTMLAttributes<ElementType> {
   // This is a composable component that is expecting a Filter component or an array of
   children: FilterComponent | FilterComponent[];
 
-  action: string;
+  //Optional element to render as the top-level component e.g. 'div', Form, CustomComponent, etc. Defaults to 'form'.
+  element?: React.ElementType;
 }
 /**
  * ## Overview
@@ -19,7 +20,7 @@ export interface FilterControlProps extends ComponentProps<'div'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-filtercontrol--overview)
  */
 const FilterControl = forwardRef<HTMLDivElement, FilterControlProps>(
-  ({ className, children, action, ...props }, ref) => {
+  ({ className, children, element: Element = 'form', ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'FilterControl');
 
     // this state variable will be set to the filter name when view all has been clicked,
@@ -40,7 +41,9 @@ const FilterControl = forwardRef<HTMLDivElement, FilterControlProps>(
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        <form action={action}>{parsedChildren}</form>
+        <Element {...commonProps} {...props} className={`${baseClassName}__control`}>
+          {parsedChildren}
+        </Element>
       </div>
     );
   },

@@ -47,8 +47,8 @@ const FilterComponent = (props: PropTypes) => {
   const { filter: intialFilters, viewAllLimit, isLast, isViewingAll } = props;
   const [filter, setFilter] = useState(intialFilters);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { checked, name } = e.target;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { checked, name } = e.target as HTMLInputElement;
     const updatedFilterDimensions = filter.filterDimensions.map((dimension) => {
       if (dimension.label === name) {
         return {
@@ -78,12 +78,15 @@ const FilterComponent = (props: PropTypes) => {
       {filter.filterDimensions.map((value: FilterDimension) => (
         <FilterValue
           key={value.label}
-          label={value.label}
-          onChange={handleChange}
           inputType="checkbox"
-          disabled={value?.disabled}
-          name={value.label}
-          isActive={value.active}
+          inputProps={{
+            onChange: handleChange,
+            id: value.label,
+            labelText: value.label,
+            disabled: value?.disabled,
+            name: value.label,
+            checked: value.active,
+          }}
         />
       ))}
     </Filter>

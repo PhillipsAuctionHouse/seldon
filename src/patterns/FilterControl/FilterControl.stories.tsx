@@ -180,8 +180,8 @@ const LotsWithFilter = (props: PropTypes) => {
     setResults(filterResults);
   };
 
-  const handleFilter = (e: React.ChangeEvent<HTMLInputElement>, filterId: string) => {
-    const { name, checked } = e.target;
+  const handleFilter = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, filterId: string) => {
+    const { name, checked } = e.target as HTMLInputElement;
 
     const newFilterRules = updateFilterRules(filterId, checked, name);
     updateFilters(filterId, checked, name);
@@ -206,19 +206,22 @@ const LotsWithFilter = (props: PropTypes) => {
         ))}
       </div>
       <Drawer isOpen={props.isOpen} onClose={props.onClose}>
-        <FilterControl action="/example/uri">
+        <FilterControl>
           {filters.map((filter: FilterType, index: number) => (
             <Filter key={filter.label} name={filter.label} isLast={filters.length == index + 1}>
               <FilterHeader heading={filter.label} />
               {Array.from(filter.filterDimensions).map((value: FilterDimension) => (
                 <FilterValue
                   key={value.label}
-                  label={value.label}
-                  onChange={(e) => handleFilter(e, filter.id)}
                   inputType={filter.inputType}
-                  disabled={value?.disabled}
-                  name={value.label}
-                  isActive={value.active}
+                  inputProps={{
+                    onChange: (e) => handleFilter(e, filter.id),
+                    id: value.label,
+                    labelText: value.label,
+                    disabled: value?.disabled,
+                    name: value.label,
+                    checked: value.active,
+                  }}
                 />
               ))}
             </Filter>

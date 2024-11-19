@@ -13,21 +13,23 @@ describe('FilterControl', () => {
   runCommonTests(FilterControl, 'FilterControl');
   const handleChange = vi.fn();
   const filters = Array(11).fill(0);
-  const mockAction = '/dummy';
 
   it('should render the "View All" button when there are more than 10 filters', () => {
     render(
-      <FilterControl action={mockAction}>
+      <FilterControl>
         <Filter name="test">
           <FilterHeader heading="Test Filter" />
           {filters.map((_, i) => (
             <FilterValue
               key={i}
-              name={`test[test${i}]`}
-              label={`Filter ${i + 1}`}
               inputType="checkbox"
-              onChange={handleChange}
-              isActive={true}
+              inputProps={{
+                onChange: handleChange,
+                id: `test[test${i}]`,
+                labelText: `Filter ${i + 1}`,
+                name: `test[test${i}]`,
+                checked: true,
+              }}
             />
           ))}
         </Filter>
@@ -39,17 +41,20 @@ describe('FilterControl', () => {
 
   it('should hide values over viewAllLimit and display those under', () => {
     render(
-      <FilterControl action={mockAction}>
+      <FilterControl>
         <Filter name="test" viewAllLimit={3}>
           <FilterHeader heading="Test Filter" />
           {filters.map((_, i) => (
             <FilterValue
               key={i}
-              name={`test[test${i}]`}
-              label={`Filter ${i + 1}`}
               inputType="checkbox"
-              onChange={handleChange}
-              isActive={true}
+              inputProps={{
+                onChange: handleChange,
+                id: `test[test${i}]`,
+                labelText: `Filter ${i + 1}`,
+                name: `test[test${i}]`,
+                checked: true,
+              }}
             />
           ))}
         </Filter>
@@ -63,28 +68,34 @@ describe('FilterControl', () => {
 
   it('render the child filter', () => {
     render(
-      <FilterControl action={mockAction}>
+      <FilterControl>
         <Filter name="test">
           <FilterHeader heading="Test Filter" />
           {filters.map((_, i) => (
             <FilterValue
               key={i}
-              name={`test[test${i}]`}
-              label={`Filter ${i + 1}`}
               inputType="checkbox"
-              onChange={handleChange}
-              isActive={true}
+              inputProps={{
+                onChange: handleChange,
+                id: `test[test${i}]`,
+                labelText: `Filter ${i + 1}`,
+                name: `test[test${i}]`,
+                checked: true,
+              }}
             />
           ))}
         </Filter>
         <Filter name="test2">
           <FilterHeader heading="Test Filter 2" />
           <FilterValue
-            isActive={true}
-            name="test2[test1]"
-            label={`Filter 1`}
             inputType="radio"
-            onChange={handleChange}
+            inputProps={{
+              onChange: handleChange,
+              id: 'test[test2]',
+              labelText: 'Filter 2',
+              name: 'test[test2]',
+              checked: true,
+            }}
           />
         </Filter>
       </FilterControl>,
@@ -104,17 +115,20 @@ describe('FilterControl', () => {
 
   it('should handle the back button click', () => {
     render(
-      <FilterControl action={mockAction}>
+      <FilterControl>
         <Filter name="test">
           <FilterHeader heading="Test Filter" />
           {filters.map((_, i) => (
             <FilterValue
               key={i}
-              name={`test[test${i}]`}
-              label={`Filter ${i + 1}`}
               inputType="checkbox"
-              onChange={handleChange}
-              isActive={true}
+              inputProps={{
+                onChange: handleChange,
+                id: `test[test${i}]`,
+                labelText: `Filter ${i + 1}`,
+                name: `test[test${i}]`,
+                checked: true,
+              }}
             />
           ))}
         </Filter>
@@ -132,23 +146,29 @@ describe('FilterControl', () => {
 
   it('renders multiple filters and has separators', () => {
     render(
-      <FilterControl action={mockAction}>
+      <FilterControl element="form">
         <Filter name="test" isLast={false}>
           <FilterValue
-            name="test[test1]"
-            label="Filter 1"
             inputType="checkbox"
-            onChange={handleChange}
-            isActive={true}
+            inputProps={{
+              onChange: handleChange,
+              id: 'test[test1]',
+              labelText: 'Filter 1',
+              name: 'test[test1]',
+              checked: true,
+            }}
           />
         </Filter>
         <Filter name="test2" isLast={true}>
           <FilterValue
-            name="test2[test1]"
-            label="Filter 2"
             inputType="checkbox"
-            onChange={handleChange}
-            isActive={true}
+            inputProps={{
+              onChange: handleChange,
+              id: 'test2[test1]',
+              labelText: 'Filter 2',
+              name: 'test2[test1]',
+              checked: true,
+            }}
           />
         </Filter>
       </FilterControl>,

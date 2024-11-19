@@ -40,6 +40,11 @@ $chevron-scale: 0.8;
     transform: scale($chevron-scale);
   }
 
+  &__fieldset {
+    border: none;
+    padding: 0;
+  }
+
   &.#{$px}-has-separators {
     border-bottom: 1px solid $light-gray;
     margin-bottom: $spacing-md;
