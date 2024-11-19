@@ -28,6 +28,10 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
    */
   estimateLabelText?: string;
   /**
+   * Image alt text for the object.
+   */
+  imageAlt?: string;
+  /**
    * Image URL for the object.
    */
   imageUrl?: string;
@@ -74,6 +78,7 @@ const ObjectTile = forwardRef<HTMLAnchorElement, ObjectTileProps>(
       element: Element,
       estimate,
       estimateLabelText = 'Estimate',
+      imageAlt = 'Brought to you by Phillips',
       imageUrl = '',
       lotNumber,
       makerText,
@@ -90,7 +95,7 @@ const ObjectTile = forwardRef<HTMLAnchorElement, ObjectTileProps>(
     return (
       <Component {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         <SeldonImage
-          alt={titleText ?? `${lotNumber} - ${makerText}`}
+          alt={imageAlt}
           aspectRatio='1/1'
           className={`${baseClassName}__img`}
           objectFit='cover'

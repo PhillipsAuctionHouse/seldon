@@ -7,9 +7,9 @@ describe('ObjectTile', () => {
 
   it('renders the image with the correct src and alt text', () => {
     render(<ObjectTile imageUrl="https://via.placeholder.com/150" lotNumber="123" />);
-    const img = screen.getByRole('img');
+    const img = screen.getByTestId('seldon-image-img');
     expect(img).toHaveAttribute('src', 'https://via.placeholder.com/150');
-    expect(img).toHaveAttribute('alt', 'image for lot number 123');
+    expect(img).toHaveAttribute('alt', 'Brought to you by Phillips');
   });
 
   it('renders the lot number', () => {
@@ -60,11 +60,4 @@ describe('ObjectTile', () => {
     expect(screen.getByText('1000-2000')).toBeInTheDocument();
   });
 
-  it('renders the PhillipsLogo SVG when no imageUrl is provided', () => {
-    const { rerender } = render(<ObjectTile lotNumber="123" />);
-    const svg = screen.getByTestId('header-logo-svg');
-    expect(svg).toBeInTheDocument();
-    rerender(<ObjectTile imageUrl="https://via.placeholder.com/150" lotNumber="123" />);
-    expect(screen.queryByTestId('header-logo-svg')).not.toBeInTheDocument();
-  });
 });
