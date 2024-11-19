@@ -1,7 +1,6 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-bid-snapshot {
-  border-bottom: 1px solid $light-gray;
   padding-bottom: $spacing-sm;
   position: relative;
 
@@ -22,5 +21,28 @@
   .#{$px}-countdown__countdown-container,
   .#{$px}-duration {
     @include Montserrat;
+  }
+
+  &--live {
+    border-bottom: 1px solid $light-gray;
+  }
+  &--has-bids .#{$px}-detail__value {
+    font-variation-settings: 'wght' 600;
+  }
+}
+
+.#{$px}-bid-message {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+
+  // Override the default text style being too specific
+  &.#{$px}-bid-message {
+    font-variation-settings: 'wght' 600;
+    margin-bottom: 0;
+  }
+
+  &__icon {
+    font-size: 0.5em;
   }
 }

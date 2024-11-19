@@ -7,13 +7,15 @@ describe('BidSnapshot', () => {
   runCommonTests(BidSnapshot, 'BidSnapshot');
 
   it('renders starting bid when there is only one bid and auction is not past', () => {
-    const { getByText } = render(<BidSnapshot bids={['100']} auctionStatus={AuctionStatus.ready} />);
+    const { getByText } = render(<BidSnapshot startingBid="100" bids={[]} auctionStatus={AuctionStatus.ready} />);
     expect(getByText('Starting bid')).toBeInTheDocument();
     expect(getByText('100')).toBeInTheDocument();
   });
 
   it('renders current bid when there are multiple bids and auction is not past', () => {
-    const { getByText } = render(<BidSnapshot bids={['100', '200', '300']} auctionStatus={AuctionStatus.live} />);
+    const { getByText } = render(
+      <BidSnapshot startingBid="100" bids={['100', '200', '300']} auctionStatus={AuctionStatus.live} />,
+    );
     expect(getByText('Current bid')).toBeInTheDocument();
     expect(getByText('300')).toBeInTheDocument();
     expect(getByText('(3 bids)')).toBeInTheDocument();
@@ -21,7 +23,7 @@ describe('BidSnapshot', () => {
 
   it('renders won for when auction is past and active bid is the last bid', () => {
     const { getByText } = render(
-      <BidSnapshot bids={['100', '200', '300']} auctionStatus={AuctionStatus.past} activeBid="300" />,
+      <BidSnapshot startingBid="100" bids={['100', '200', '300']} auctionStatus={AuctionStatus.past} activeBid="300" />,
     );
     expect(getByText('Won for')).toBeInTheDocument();
     expect(getByText('300')).toBeInTheDocument();
@@ -29,7 +31,7 @@ describe('BidSnapshot', () => {
 
   it('renders sold for when auction is past and active bid is not the last bid', () => {
     const { getByText } = render(
-      <BidSnapshot bids={['100', '200', '300']} auctionStatus={AuctionStatus.past} activeBid="200" />,
+      <BidSnapshot startingBid="100" bids={['100', '200', '300']} auctionStatus={AuctionStatus.past} activeBid="200" />,
     );
     expect(getByText('Sold for')).toBeInTheDocument();
     expect(getByText('300')).toBeInTheDocument();
@@ -38,7 +40,7 @@ describe('BidSnapshot', () => {
   it('renders Countdown timer when lotCloseDate prop is passed', () => {
     const lotCloseDate = new Date(Date.now() + 10000); // 10 seconds from now
     const { getByText } = render(
-      <BidSnapshot bids={['100']} auctionStatus={AuctionStatus.live} lotCloseDate={lotCloseDate} />,
+      <BidSnapshot startingBid="100" bids={['100']} auctionStatus={AuctionStatus.live} lotCloseDate={lotCloseDate} />,
     );
     expect(getByText('Closes in')).toBeInTheDocument();
   });

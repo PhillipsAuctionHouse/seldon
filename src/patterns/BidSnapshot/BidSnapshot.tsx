@@ -10,7 +10,7 @@ import { CountdownVariants } from '../../components/Countdown/types';
 
 export interface BidSnapshotProps extends ComponentProps<'div'> {
   /**
-   * Active bid of current user. -  '$1,000'
+   * Active bid of current signed in user. -  '$1,000'
    */
   activeBid?: string;
   /**
@@ -18,7 +18,7 @@ export interface BidSnapshotProps extends ComponentProps<'div'> {
    */
   auctionStatus?: AuctionStatus;
   /**
-   * An array of bids for the Object. Should include starting bid as first element and current bid as last element
+   * An array of bids for the Object. Should include current bid as last element
    */
   bids?: string[];
   /**
@@ -41,6 +41,10 @@ export interface BidSnapshotProps extends ComponentProps<'div'> {
    * End time for this object
    */
   lotCloseDate?: Date;
+  /**
+   * Default Starting bid amount for the object - '$1,000'
+   */
+  startingBid: string;
   /**
    * Starting bid text, a string for label of starting bid detail
    */
@@ -78,6 +82,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
       currentBidText = 'Current bid',
       lang = 'en',
       lotCloseDate,
+      startingBid,
       startingBidText = 'Starting bid',
       soldForText = 'Sold for',
       wonForText = 'Won for',
@@ -86,57 +91,44 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'BidSnapshot');
-    const currentDate = new Date();
+
+    const hasBids = bids.length > 0;
+    const currentBid = hasBids && bids[bids.length - 1];
+    const isTopBid = activeBid === currentBid;
+    const isReady = auctionStatus === AuctionStatus.ready;
+    const isLive = auctionStatus === AuctionStatus.live;
+    const isPast = auctionStatus === AuctionStatus.past;
+    const hasCountdownTimer = isLive && lotCloseDate;
+
+    const classes = classnames(baseClassName, className, {
+      [`${baseClassName}--live`]: isLive,
+      [`${baseClassName}--has-bids`]: hasBids,
+    });
+
+    let label = currentBidText;
+    if (isReady || !hasBids) label = startingBidText;
+    if (isPast && hasBids) label = isTopBid ? wonForText : soldForText;
+
     return (
-      <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        {
-          // auctionStatus is not past (auction is active or upcoming),
-          !(auctionStatus === AuctionStatus.past) ? (
-            // if auction has not started
-            auctionStatus === AuctionStatus.ready ? (
-              // show starting bid
-              <DetailList hasSeparators className={`${baseClassName}__text`}>
-                <Detail label={startingBidText} value={bids[0]} hasWrap={false} />
-              </DetailList>
-            ) : (
-              // otherwise, show current bid
-              <DetailList hasSeparators className={`${baseClassName}__text`}>
-                <Detail
-                  label={currentBidText}
-                  subLabel={bids.length > 0 && `(${bidsLabelText(bids.length)})`}
-                  value={bids[bids.length - 1]}
-                  hasWrap={false}
-                />
-              </DetailList>
-            )
-          ) : // if auctionStatus is past,
-          // if activeBid was the last bid, show won for activeBid
-          activeBid === bids[bids.length - 1] ? (
-            <DetailList hasSeparators className={`${baseClassName}__text`}>
-              <Detail label={wonForText} value={bids[bids.length - 1]} hasWrap={false} />
-            </DetailList>
-          ) : (
-            // if active bid was not last bid show Sold for
-            <DetailList hasSeparators className={`${baseClassName}__text`}>
-              <Detail label={soldForText} value={bids[bids.length - 1]} hasWrap={false} />
-            </DetailList>
-          )
-        }
-
-        {activeBid && auctionStatus !== AuctionStatus.ready ? children : null}
-
-        {
-          // Countdown timer
-          lotCloseDate && lotCloseDate > currentDate ? (
-            <Countdown
-              endDateTime={lotCloseDate}
-              label={closingText}
-              variant={CountdownVariants.compact}
-              locale={SupportedLanguages[lang]}
-              formatDurationStr={(str) => str.replace(/seconds?/, 'sec').replace(/minutes?/, 'min')}
-            />
-          ) : null
-        }
+      <div {...commonProps} {...props} ref={ref} className={classes}>
+        <DetailList hasSeparators className={`${baseClassName}__text`}>
+          <Detail
+            label={label}
+            subLabel={isLive && bids.length > 0 && `(${bidsLabelText(bids.length)})`}
+            value={currentBid || startingBid}
+            hasWrap={false}
+          />
+        </DetailList>
+        {activeBid && !isReady ? children : null}
+        {hasCountdownTimer ? (
+          <Countdown
+            endDateTime={lotCloseDate}
+            label={closingText}
+            variant={CountdownVariants.compact}
+            locale={SupportedLanguages[lang]}
+            formatDurationStr={(str) => str.replace(/seconds?/, 'sec').replace(/minutes?/, 'min')}
+          />
+        ) : null}
       </div>
     );
   },

@@ -3,17 +3,7 @@
 .#{$px}-object-tile {
   display: flex;
   flex-direction: column;
-
-  // max-width: 10.75rem;
   max-width: 24.5rem;
-  transition: scale 0.2s;
-
-  // @include media($breakpoint-md) {
-  // }
-
-  // &[href]:hover {
-  //   scale: 1.01;
-  // }
 
   &__img {
     aspect-ratio: 1 / 1;
@@ -65,9 +55,6 @@
   }
 
   &__section {
-    // border-top: 1px solid $light-gray;
-    // padding-bottom: $spacing-sm;
-    // padding-top: $spacing-sm;
     .#{$px}-has-separators .#{$px}-detail {
       flex-wrap: wrap;
       gap: 0 $spacing-sm;
@@ -76,21 +63,5 @@
         text-align: unset;
       }
     }
-  }
-
-  &__estimate {
-    // display: flex;
-    // flex-wrap: wrap;
-    // justify-content: space-between;
-
-    // .#{$px}-object-tile__estimate__label {
-    //   font-variation-settings: "wght" 600;
-    //   margin-bottom: 0;
-    //   margin-right: 1rem;
-    // }
-
-    // .#{$px}-object-tile__estimate__value {
-    //   margin-bottom: 0;
-    // }
   }
 }

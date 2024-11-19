@@ -5,9 +5,10 @@
 
   display: flex;
   gap: $spacing-micro;
+}
 
-  &--fixed-width {
-    min-width: 1.75rem;
-    text-align: right;
-  }
+.#{$px}-countdown--compact .#{$px}-duration {
+  @include Montserrat;
+
+  color: $countdown-compact;
 }

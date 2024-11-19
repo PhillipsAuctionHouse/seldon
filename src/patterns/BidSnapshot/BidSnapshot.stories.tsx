@@ -3,6 +3,7 @@ import { addMinutes } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 
 import BidSnapshot, { BidSnapshotProps } from './BidSnapshot';
+import BidMessage from './BidMessage';
 import { AuctionStatus } from '../../types/commonTypes';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
@@ -16,17 +17,19 @@ const meta = {
 
 export default meta;
 export const Playground = (props: BidSnapshotProps) => {
-  console.log('Story Number of Bids', props.activeBid, props?.bids?.[props.bids.length - 1]);
+  const { activeBid, auctionStatus, lotCloseDate, bids, ...rest } = props;
   return (
-    <BidSnapshot {...props} bids={props.auctionStatus === 'READY' ? ['$600'] : props.bids}>
-      {props.activeBid === props?.bids?.[props.bids.length - 1] && props.auctionStatus === AuctionStatus.live ? (
-        <p style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.75rem' }}>
-          <span style={{ fontSize: '6px' }}>🟢</span> With You
-        </p>
-      ) : props.activeBid === props?.bids?.[props.bids.length - 1] && props.auctionStatus === AuctionStatus.past ? (
-        <p style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.75rem' }}>
-          <span style={{ fontSize: '6px' }}>🟢</span> Winning Bid not including Buyer Premium
-        </p>
+    <BidSnapshot
+      activeBid={activeBid}
+      auctionStatus={auctionStatus}
+      bids={auctionStatus === AuctionStatus.ready ? [] : bids}
+      lotCloseDate={auctionStatus === AuctionStatus.ready ? undefined : lotCloseDate}
+      {...rest}
+    >
+      {activeBid === props?.bids?.[(bids ?? []).length - 1] && auctionStatus === AuctionStatus.live ? (
+        <BidMessage message="With You" />
+      ) : activeBid === props?.bids?.[(bids ?? []).length - 1] && auctionStatus === AuctionStatus.past ? (
+        <BidMessage message="Winning Bid not including Buyer Premium" />
       ) : null}
     </BidSnapshot>
   );
@@ -39,6 +42,7 @@ Playground.args = {
   bids: ['$600', '$800', '$1,000'],
   lotCloseDate: addMinutes(new Date(), 20),
   lang: enUS,
+  startingBid: '$600',
 };
 
 Playground.argTypes = {};
