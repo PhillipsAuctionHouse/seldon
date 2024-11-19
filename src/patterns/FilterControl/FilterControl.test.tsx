@@ -140,7 +140,7 @@ describe('FilterControl', () => {
 
     //wait for transition to be done
     setTimeout(() => {
-      expect(screen.getByText(VIEW_ALL_BUTTON_TEXT)).toBeInTheDocument();
+      expect(screen.getAllByText(VIEW_ALL_BUTTON_TEXT)).toBeInTheDocument();
     }, 500);
   });
 
