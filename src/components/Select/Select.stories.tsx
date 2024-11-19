@@ -25,7 +25,7 @@ const argTypes = {
       type: 'boolean',
     },
   },
-  showCustomIcon: {
+  showIcon: {
     control: {
       type: 'boolean',
     },
@@ -102,7 +102,7 @@ Playground.args = {
   playgroundWidth: 300,
   className: 'input-test-class',
   defaultValue: 'Option 2',
-  showCustomIcon: false,
+  showIcon: true,
   disabled: false,
   invalid: false,
   invalidText: 'Error message',
@@ -131,7 +131,7 @@ export const Tertiary = ({ playgroundWidth, ...args }: StoryProps) => (
 );
 
 Tertiary.args = {
-  showCustomIcon: true,
+  showIcon: true,
   variant: SelectVariants.tertiary,
 };
 

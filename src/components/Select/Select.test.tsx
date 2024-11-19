@@ -65,23 +65,24 @@ describe('A Select', () => {
 
   it('should toggle --open and --closed classes on click', async () => {
     render(
-      <Select id="test-select" labelText={mockLabel} showCustomIcon>
+      <Select id="test-select" labelText={mockLabel} showIcon>
         {mockOptions}
       </Select>,
     );
 
     const selectElement = screen.getByTestId('test-select');
+    const selectParent = selectElement.parentElement;
 
     // Initial state should be closed
-    expect(selectElement).toHaveClass(`${px}-input__select--closed`);
+    expect(selectParent).toHaveClass(`${px}-select-container--closed`);
 
     // Simulate click to open
     await userEvent.click(selectElement);
-    expect(selectElement).toHaveClass(`${px}-input__select--open`);
+    expect(selectParent).toHaveClass(`${px}-select-container--open`);
 
     // Simulate blur to close
     await userEvent.tab();
-    expect(selectElement).toHaveClass(`${px}-input__select--closed`);
+    expect(selectParent).toHaveClass(`${px}-select-container--closed`);
   });
 
   it('should apply --tertiary class when variant is tertiary', () => {

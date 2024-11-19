@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { px, useNormalizedInputProps } from '../../utils';
 import { InputProps } from '../Input/Input';
 import { SelectVariants } from './types';
+import ChevronDownIcon from '../../assets/chevronDown.svg?react';
 
 export interface SelectProps extends InputProps {
   /**
@@ -12,7 +13,7 @@ export interface SelectProps extends InputProps {
   /**
    * Determines if you want to show the icon
    */
-  showCustomIcon?: boolean;
+  showIcon?: boolean;
   /**
    * Determines the variant of the select
    */
@@ -38,7 +39,7 @@ const Select = React.forwardRef(
       disabled,
       hideLabel,
       id,
-      showCustomIcon = false,
+      showIcon = true,
       variant = SelectVariants.default,
       inline,
       invalid,
@@ -72,9 +73,13 @@ const Select = React.forwardRef(
 
     const selectClassnames = classnames(`${px}-input__input`, {
       className,
-      [`${px}-input__select--open`]: isOpen && showCustomIcon,
-      [`${px}-input__select--closed`]: !isOpen && showCustomIcon,
       [`${px}-input__select--tertiary`]: variant === SelectVariants.tertiary,
+    });
+
+    const selectContainerClassnames = classnames(`${px}-select-container`, {
+      [`${px}-select-container--open`]: isOpen,
+      [`${px}-select-container--closed`]: !isOpen,
+      [`${px}-select-container--show__icon`]: showIcon,
     });
 
     const handleClick = (e: React.MouseEvent<HTMLSelectElement>) => {
@@ -87,21 +92,24 @@ const Select = React.forwardRef(
         <label htmlFor={id} className={classnames(`${px}-input__label`, { [`${px}-input__label--hidden`]: hideLabel })}>
           {labelText}
         </label>
-        <select
-          className={selectClassnames}
-          data-testid={id}
-          defaultValue={defaultValue}
-          disabled={inputProps.disabled}
-          id={id}
-          onChange={onChange}
-          onBlur={closeDropdown}
-          onClick={handleClick}
-          ref={ref}
-          value={value}
-          {...rest}
-        >
-          {children}
-        </select>
+        <div className={selectContainerClassnames}>
+          <select
+            className={selectClassnames}
+            data-testid={id}
+            defaultValue={defaultValue}
+            disabled={inputProps.disabled}
+            id={id}
+            onChange={onChange}
+            onBlur={closeDropdown}
+            onClick={handleClick}
+            ref={ref}
+            value={value}
+            {...rest}
+          >
+            {children}
+          </select>
+          {showIcon ? <ChevronDownIcon /> : null}
+        </div>
         {inputProps.validation}
       </div>
     );
