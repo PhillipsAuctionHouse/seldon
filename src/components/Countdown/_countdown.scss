@@ -22,4 +22,12 @@
     justify-content: center;
     text-transform: inherit;
   }
+
+  &--compact {
+    .#{$px}-countdown__countdown-container {
+      @include Montserrat;
+
+      gap: $spacing-xsm;
+    }
+  }
 }

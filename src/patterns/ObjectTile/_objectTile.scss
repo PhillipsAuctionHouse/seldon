@@ -1,0 +1,61 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-object-tile {
+  display: flex;
+  flex-direction: column;
+  max-width: 24.5rem;
+
+  &__img {
+    margin-bottom: $spacing-sm;
+    max-width: 100%;
+  }
+
+  &__badge {
+    color: $widget-red;
+  }
+
+  &__lot-number-like {
+    position: relative;
+
+    & > :not(.#{$px}-object-tile__lot-number) {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  & .#{$px}-object-tile__lot-number {
+    margin-bottom: $spacing-xsm;
+  }
+
+  & .#{$px}-object-tile__maker,
+  & .#{$px}-object-tile__model,
+  & .#{$px}-object-tile__reference-number {
+    margin-bottom: 0;
+  }
+
+  &__meta {
+    margin-bottom: $spacing-sm;
+  }
+
+  & .#{$px}-object-tile__token-fix {
+    // @Todo: remove when tokens have been updated. heading 4 should have the font sizes of heading 5
+    @include text($heading5);
+  }
+
+  &__withdrawn {
+    font-family: $Distinct;
+  }
+
+  &__section {
+    .#{$px}-has-separators .#{$px}-detail {
+      flex-wrap: wrap;
+      gap: 0 $spacing-sm;
+
+      .#{$px}-detail__value {
+        text-align: unset;
+      }
+    }
+  }
+}

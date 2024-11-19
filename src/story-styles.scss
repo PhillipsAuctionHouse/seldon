@@ -104,3 +104,24 @@ details {
   display: inline-block;
   font-size: 12px;
 }
+
+.#{$px}-object-tile__lot-number-like svg {
+  cursor: pointer;
+  height: 1rem;
+  width: 1rem;
+
+  @media (min-width: $breakpoint-md) {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  path {
+    fill: transparent;
+  }
+
+  &:hover {
+    path {
+      fill: $pure-black;
+    }
+  }
+}

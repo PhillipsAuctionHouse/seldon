@@ -5,6 +5,7 @@ export { default as ChevronDown } from './chevronDown.svg?react';
 export { default as ChevronNext } from './chevronNext.svg?react';
 export { default as ChevronRight } from './chevronRight.svg?react';
 export { default as Close } from './close.svg?react';
+export { default as Favorite } from './favorite.svg?react';
 export { default as FavoriteOutline } from './favoriteOutline.svg?react';
 export { default as Facebook } from './icon-footer-facebook.svg?react';
 export { default as FooterInstagram } from './icon-footer-instagram.svg?react';

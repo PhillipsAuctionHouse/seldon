@@ -55,6 +55,9 @@ $text-color: $soft-black;
 // Interactive Colors
 $button-hover: #75716f;
 
+// Misc. Colors
+$countdown-compact: #b40919;
+
 ////////////////////////
 /// FONTS:
 ///////////////////////
@@ -115,7 +118,8 @@ $breakpoint-xl: 1801px;
 ////////////////////////
 /// FONT SIZE TOKENS:
 ///////////////////////
-
+// @TODO: These tokens need to be aligned with the new values from the design system https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/EASEL-Compendium%3A-Tokens%2C-Components-%26-Patterns?node-id=7263-1361&node-type=canvas&m=dev
+// Once we update ObjectTile and other components will need to be updated to match the new token.
 :root {
   --desktop-max-width: 120rem;
   --quote-size: 1.5rem;

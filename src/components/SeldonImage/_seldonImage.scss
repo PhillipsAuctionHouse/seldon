@@ -17,10 +17,18 @@
   }
 
   &--error {
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    width: 100%;
+
+    .phillips-logo {
+      fill: $medium-gray;
+    }
+
+    svg {
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 
   &-img {

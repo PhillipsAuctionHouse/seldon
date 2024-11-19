@@ -1,12 +1,20 @@
 import React, { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
-import classNames from 'classnames';
+import classnames from 'classnames';
 
 export interface DetailProps extends ComponentProps<'div'> {
+  /*
+   * Whether or not to constrain the width of the label
+   */
+  hasWrap?: boolean;
   /*
    * Label that appears on the left side of the Detail component
    */
   label: React.ReactNode;
+  /*
+   * Sublabel that appears inline to right of label.
+   */
+  subLabel?: React.ReactNode;
   /*
    * Value that appears on the right side of the Detail component
    */
@@ -22,16 +30,20 @@ export interface DetailProps extends ComponentProps<'div'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-detail--overview)
  *
  */
-const Detail = forwardRef<HTMLDivElement, DetailProps>(({ className = '', label, value, ...props }, ref) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Detail');
+const Detail = forwardRef<HTMLDivElement, DetailProps>(
+  ({ className = '', hasWrap = true, label, subLabel, value, ...props }, ref) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Detail');
 
-  return (
-    <div {...commonProps} className={classNames(baseClassName, className)} {...props} ref={ref}>
-      <dt className={`${baseClassName}__label`}>{label}</dt>
-      <dd className={`${baseClassName}__value`}>{value}</dd>
-    </div>
-  );
-});
+    return (
+      <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
+        <dt className={classnames(`${baseClassName}__label`, { [`${baseClassName}__label--no-wrap`]: !hasWrap })}>
+          {label} {subLabel ? <span>{subLabel}</span> : null}
+        </dt>
+        <dd className={`${baseClassName}__value`}>{value}</dd>
+      </div>
+    );
+  },
+);
 
 Detail.displayName = 'Detail';
 

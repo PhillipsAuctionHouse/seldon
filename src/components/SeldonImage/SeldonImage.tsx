@@ -1,6 +1,8 @@
 import { ComponentProps, forwardRef, useRef, useState, useEffect, useCallback } from 'react';
-import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
+
+import { getCommonProps } from '../../utils';
+import { PhillipsLogo } from '../../assets/icons';
 
 type AspectRatio = '16/9' | '1/1' | 'none';
 
@@ -113,7 +115,11 @@ const SeldonImage = forwardRef<HTMLDivElement, SeldonImageProps>(
             style={{ backgroundImage: `url(${src})` }}
           />
         )}
-        {loadingState === 'error' && <div className={`${baseClassName}--error`}>{`${errorText}`}</div>}
+        {loadingState === 'error' ? (
+          <div className={`${baseClassName}--error`}>
+            <PhillipsLogo aria-label={errorText} />
+          </div>
+        ) : null}
         <img
           className={classnames(`${baseClassName}-img`, imageClassName, {
             [`${baseClassName}-img--hidden`]: loadingState !== 'loaded',

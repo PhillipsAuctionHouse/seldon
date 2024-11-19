@@ -58,8 +58,7 @@ describe('SeldonImage', () => {
     expect(image).toHaveClass(`${px}-seldon-image-img--hidden`);
     fireEvent.error(image);
 
-    const errorPlaceholder = screen.getByText('Error loading image');
+    const errorPlaceholder = screen.getByTestId('header-logo-svg');
     expect(errorPlaceholder).toBeInTheDocument();
-    expect(errorPlaceholder).toHaveClass(`${px}-seldon-image--error`);
   });
 });
