@@ -95,12 +95,7 @@ const ObjectTile = forwardRef<HTMLAnchorElement, ObjectTileProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ObjectTile');
     const Component = Element ?? 'a';
     return (
-      <Component
-        {...commonProps}
-        className={classnames(baseClassName, className)}
-        {...props}
-        ref={ref as unknown as string}
-      >
+      <Component {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         <SeldonImage
           alt={imageAlt}
           aspectRatio="1/1"
