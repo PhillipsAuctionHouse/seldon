@@ -88,7 +88,7 @@ const argTypes = {
 
 export const DateTimeInput = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <Input key={args.defaultValue} {...args} id="Input-1" />
+    <Input key={args.defaultValue?.toString()} {...args} id="Input-1" />
   </div>
 );
 
@@ -109,14 +109,14 @@ DateTimeInput.args = {
 export const RadioInput = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
     <Input
-      key={args.defaultValue}
+      key={args.defaultValue?.toString()}
       {...args}
       id="Input-1"
       labelText="Label text 1"
       defaultChecked={true}
       name="radios"
     />
-    <Input key={args.defaultValue} {...args} id="Input-2" labelText="Label text 2" name="radios" />
+    <Input key={args.defaultValue?.toString()} {...args} id="Input-2" labelText="Label text 2" name="radios" />
   </div>
 );
 
@@ -136,8 +136,8 @@ RadioInput.args = {
 
 export const CheckboxInput = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <Input key={args.defaultValue} {...args} id="Input-1" labelText="Label text 1" defaultChecked={true} value={true} />
-    <Input key={args.defaultValue} {...args} id="Input-2" labelText="Label text 2" value={true} />
+    <Input key={args.defaultValue?.toString()} {...args} id="Input-1" labelText="Label text 1" defaultChecked checked />
+    <Input key={args.defaultValue?.toString()} {...args} id="Input-2" labelText="Label text 2" checked />
   </div>
 );
 
@@ -159,7 +159,7 @@ CheckboxInput.argTypes = argTypes;
 
 export const RangeInput = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <Input key={args.defaultValue} {...args} id="Input-1" />
+    <Input key={args.defaultValue?.toString()} {...args} id="Input-1" />
   </div>
 );
 
@@ -185,7 +185,7 @@ RangeInput.argTypes = argTypes;
 
 export const Playground = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <Input key={args.defaultValue} {...args} id="Input-1" />
+    <Input key={args.defaultValue?.toString()} {...args} id="Input-1" />
   </div>
 );
 

@@ -2,8 +2,7 @@ import Filter from './Filter';
 import { runCommonTests } from '../../utils/testUtils';
 import { render, screen } from '@testing-library/react';
 import FilterHeader from './FilterHeader';
-import FilterValue from './FilterValue';
-import { px } from '../../utils';
+import FilterInput from './FilterInput';
 
 describe('Filter', () => {
   runCommonTests(Filter, 'Filter');
@@ -13,25 +12,21 @@ describe('Filter', () => {
 
     render(
       <Filter name="test">
-        <FilterValue
-          inputType="checkbox"
-          inputProps={{
-            onChange: handleChange,
-            id: 'test[test1]',
-            labelText: 'Filter 1',
-            name: 'test[test1]',
-            checked: true,
-          }}
+        <FilterInput
+          type="checkbox"
+          onChange={handleChange}
+          id="test[test1]"
+          labelText="Filter 1"
+          name="test[test1]"
+          checked={true}
         />
-        <FilterValue
-          inputType="radio"
-          inputProps={{
-            onChange: handleChange,
-            id: 'test[test2]',
-            labelText: 'Filter 2',
-            name: 'test[test2]',
-            checked: true,
-          }}
+        <FilterInput
+          type="radio"
+          onChange={handleChange}
+          id="test[test2]"
+          labelText="Filter 2"
+          name="test[test2]"
+          checked={true}
         />
       </Filter>,
     );
@@ -61,22 +56,19 @@ describe('Filter', () => {
 
     render(
       <Filter name="test">
-        <FilterValue
-          inputType="checkbox"
-          inputProps={{
-            onChange: handleChange,
-            id: 'test[test1]',
-            labelText: 'Filter 1',
-            name: 'test[test1]',
-            checked: true,
-            disabled: true,
-          }}
+        <FilterInput
+          type="checkbox"
+          onChange={handleChange}
+          id="test[test1]"
+          labelText="Filter 1"
+          name="test[test1]"
+          checked={true}
+          disabled={true}
         />
       </Filter>,
     );
 
     const checkbox = screen.getByRole('checkbox');
-    expect(screen.getByTestId('text')).toHaveClass(`${px}-filter-value-disabled-label`);
     expect(checkbox).toBeDisabled();
   });
 });

@@ -33,7 +33,7 @@ $lg: #{$px}-input--lg;
     margin-bottom: 0.25rem;
     padding: $padding-xsm;
 
-    &:focus-within {
+    &:focus-visible {
       outline: 1px solid $pure-black;
     }
   }

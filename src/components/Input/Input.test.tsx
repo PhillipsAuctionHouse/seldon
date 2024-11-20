@@ -7,7 +7,7 @@ import Input, { InputProps } from './Input';
 // NOTE: When using default value on controlled input we pass to the state hook and not the input
 const TestInput = React.forwardRef(
   ({ defaultValue, ...props }: InputProps, ref: React.ForwardedRef<HTMLInputElement>) => {
-    const [value, setValue] = React.useState<string | null>((defaultValue as string) ?? '');
+    const [value, setValue] = React.useState<string | undefined>((defaultValue as string) ?? '');
     const handleOnChange = function (e: React.ChangeEvent<HTMLInputElement>) {
       setValue(e?.currentTarget?.value);
     };

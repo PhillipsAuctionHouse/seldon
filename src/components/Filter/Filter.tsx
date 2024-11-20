@@ -12,7 +12,7 @@ import {
 import { getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
 import FilterHeader, { FilterHeaderProps } from './FilterHeader';
-import { FilterValueProps } from './FilterValue';
+import { FilterInputProps } from './FilterInput';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
 import ChevronNextIcon from '../../assets/chevronNext.svg?react';
@@ -37,6 +37,10 @@ export interface FilterProps extends ComponentProps<'div'> {
 
   // Whether this filter is being hidden. Use when sibling is in view all state.
   isHidden?: boolean;
+  /**
+   *  translatable string for view all button
+   */
+  viewAllLabel?: string;
 }
 /**
  * ## Overview
@@ -58,6 +62,7 @@ const Filter = forwardRef<HTMLDivElement, FilterProps>(
       isViewingAll = false,
       isHidden = false,
       setViewAllFilter,
+      viewAllLabel = 'View All',
       ...props
     },
     ref,
@@ -76,7 +81,7 @@ const Filter = forwardRef<HTMLDivElement, FilterProps>(
       isValidElement(child)
         ? child.type === FilterHeader
           ? cloneElement(child, headerProps as FilterHeaderProps)
-          : cloneElement(child, { isHidden: !isViewingAll && index > viewAllLimit } as FilterValueProps)
+          : cloneElement(child, { hidden: !isViewingAll && index > viewAllLimit } as FilterInputProps)
         : child,
     );
 
@@ -101,7 +106,7 @@ const Filter = forwardRef<HTMLDivElement, FilterProps>(
               setViewAllFilter?.(name);
             }}
           >
-            View All
+            {viewAllLabel}
             <ChevronNextIcon className={`${baseClassName}__chevron`} />
           </Button>
         ) : null}

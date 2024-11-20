@@ -213,7 +213,7 @@ const ViewingsListCardForm = ({
         defaultValue={viewingLabelValue}
         labelText={viewingLabel}
         size="sm"
-        invalid={invalidFields?.viewingLabelValue}
+        invalid={!!invalidFields?.viewingLabelValue}
         invalidText={invalidFields?.viewingLabelValue}
       />
       <Input
@@ -222,7 +222,7 @@ const ViewingsListCardForm = ({
         defaultValue={viewingDates}
         labelText={viewingDatesLabel}
         size="sm"
-        invalid={invalidFields?.viewingDates}
+        invalid={!!invalidFields?.viewingDates}
         invalidText={invalidFields?.viewingDates}
       />
       <Input
@@ -231,7 +231,7 @@ const ViewingsListCardForm = ({
         defaultValue={viewingHours1}
         labelText={viewingHours1Label}
         size="sm"
-        invalid={invalidFields?.viewingHours1}
+        invalid={!!invalidFields?.viewingHours1}
         invalidText={invalidFields?.viewingHours1}
       />
       <Input
@@ -240,7 +240,7 @@ const ViewingsListCardForm = ({
         defaultValue={viewingHours2}
         labelText={viewingHours2Label}
         size="sm"
-        invalid={invalidFields?.viewingHours2}
+        invalid={!!invalidFields?.viewingHours2}
         invalidText={invalidFields?.viewingHours2}
       />
 
@@ -251,9 +251,9 @@ const ViewingsListCardForm = ({
         size="md"
         defaultChecked={previewOnState}
         inline
-        invalid={invalidFields?.previewOn}
+        invalid={!!invalidFields?.previewOn}
         invalidText={invalidFields?.previewOn}
-        value={true}
+        checked={true}
         name="previewOn"
         onChange={() => setPreviewOnState((oldState) => !oldState)}
       />
@@ -268,7 +268,7 @@ const ViewingsListCardForm = ({
           defaultValue={previewLabelValue}
           labelText={previewLabel}
           size="sm"
-          invalid={invalidFields?.previewLabelValue}
+          invalid={!!invalidFields?.previewLabelValue}
           invalidText={invalidFields?.previewLabelValue}
           hidden={!previewOnState}
         />
@@ -278,7 +278,7 @@ const ViewingsListCardForm = ({
           defaultValue={previewDates}
           labelText={previewDatesLabel}
           size="sm"
-          invalid={invalidFields?.previewDates}
+          invalid={!!invalidFields?.previewDates}
           invalidText={invalidFields?.previewDates}
           hidden={!previewOnState}
         />
@@ -288,7 +288,7 @@ const ViewingsListCardForm = ({
           defaultValue={previewHours1}
           labelText={previewHours1Label}
           size="sm"
-          invalid={invalidFields?.previewHours1}
+          invalid={!!invalidFields?.previewHours1}
           invalidText={invalidFields?.previewHours1}
           hidden={!previewOnState}
         />
@@ -298,7 +298,7 @@ const ViewingsListCardForm = ({
           defaultValue={previewHours2}
           labelText={previewHours2Label}
           size="sm"
-          invalid={invalidFields?.previewHours2}
+          invalid={!!invalidFields?.previewHours2}
           invalidText={invalidFields?.previewHours2}
           hidden={!previewOnState}
         />
@@ -310,7 +310,7 @@ const ViewingsListCardForm = ({
         defaultValue={address1}
         labelText={address1Label}
         size="sm"
-        invalid={invalidFields?.address1}
+        invalid={!!invalidFields?.address1}
         invalidText={invalidFields?.address1}
       />
       <Input
@@ -319,7 +319,7 @@ const ViewingsListCardForm = ({
         defaultValue={address2}
         labelText={address2Label}
         size="sm"
-        invalid={invalidFields?.address2}
+        invalid={!!invalidFields?.address2}
         invalidText={invalidFields?.address2}
       />
 
@@ -329,7 +329,7 @@ const ViewingsListCardForm = ({
         defaultValue={address3}
         labelText={address3Label}
         size="sm"
-        invalid={invalidFields?.address3}
+        invalid={!!invalidFields?.address3}
         invalidText={invalidFields?.address3}
       />
 
@@ -340,7 +340,7 @@ const ViewingsListCardForm = ({
         labelText={addressUrlLabel}
         size="sm"
         type="url"
-        invalid={invalidFields?.addressUrl}
+        invalid={!!invalidFields?.addressUrl}
         invalidText={invalidFields?.addressUrl}
       />
 
@@ -351,9 +351,9 @@ const ViewingsListCardForm = ({
         size="md"
         defaultChecked={emailOnState}
         inline
-        invalid={invalidFields?.emailOn}
+        invalid={!!invalidFields?.emailOn}
         invalidText={invalidFields?.emailOn}
-        value={true}
+        checked={true}
         name="emailOn"
         onChange={() => setEmailOnState((oldState) => !oldState)}
       />
@@ -368,7 +368,7 @@ const ViewingsListCardForm = ({
           defaultValue={email}
           labelText={emailLabel}
           size="sm"
-          invalid={invalidFields?.address2}
+          invalid={!!invalidFields?.address2}
           invalidText={invalidFields?.address2}
           hidden={!emailOnState}
         />
@@ -378,7 +378,7 @@ const ViewingsListCardForm = ({
           defaultValue={emailLink}
           labelText={emailLinkLabel}
           size="sm"
-          invalid={invalidFields?.address3}
+          invalid={!!invalidFields?.address3}
           invalidText={invalidFields?.address3}
           hidden={!emailOnState}
         />

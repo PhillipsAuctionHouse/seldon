@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import Button from '../../components/Button/Button';
 import { Drawer } from '../../components/Drawer';
 import FilterHeader from '../../components/Filter/FilterHeader';
-import FilterValue from '../../components/Filter/FilterValue';
+import FilterInput from '../../components/Filter/FilterInput';
 import { Filter } from '../../components/Filter';
 import { exampleAuctionLots, lotType } from './utils';
 
@@ -27,7 +27,7 @@ type FilterType = {
   label: string;
   id: string;
   filterDimensions: FilterDimension[];
-  inputType: 'checkbox' | 'radio';
+  type: 'checkbox' | 'radio';
 };
 
 type PropTypes = {
@@ -44,9 +44,9 @@ const FILTER_KEYS = {
 
 const filters: FilterType[] = [
   {
-    label: 'SortBy',
+    label: 'Sort By',
     id: FILTER_KEYS.sortBy,
-    inputType: 'radio',
+    type: 'radio',
     filterDimensions: [
       { label: 'Lot Number', active: true },
       { label: 'A-Z Artist Maker', active: false },
@@ -57,13 +57,13 @@ const filters: FilterType[] = [
   {
     label: 'Artists & Makers',
     id: FILTER_KEYS.makers,
-    inputType: 'checkbox',
+    type: 'checkbox',
     filterDimensions: [],
   },
   {
     label: 'Collections',
     id: FILTER_KEYS.collections,
-    inputType: 'checkbox',
+    type: 'checkbox',
     filterDimensions: [],
   },
 ];
@@ -211,17 +211,15 @@ const LotsWithFilter = (props: PropTypes) => {
             <Filter key={filter.label} name={filter.label} isLast={filters.length == index + 1}>
               <FilterHeader heading={filter.label} />
               {Array.from(filter.filterDimensions).map((value: FilterDimension) => (
-                <FilterValue
+                <FilterInput
+                  id={value.label}
                   key={value.label}
-                  inputType={filter.inputType}
-                  inputProps={{
-                    onChange: (e) => handleFilter(e, filter.id),
-                    id: value.label,
-                    labelText: value.label,
-                    disabled: value?.disabled,
-                    name: value.label,
-                    checked: value.active,
-                  }}
+                  labelText={value.label}
+                  onChange={(e) => handleFilter(e, filter.id)}
+                  type={filter.type}
+                  disabled={value?.disabled}
+                  name={value.label}
+                  checked={value.active}
                 />
               ))}
             </Filter>

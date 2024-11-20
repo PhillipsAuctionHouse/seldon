@@ -3,7 +3,7 @@ import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { FilterComponent, FilterProps } from '../../components/Filter/Filter';
 
-export interface FilterControlProps<ElementType = HTMLElement> extends React.HTMLAttributes<ElementType> {
+export interface FilterControlProps<ElementType = HTMLFormElement> extends React.HTMLAttributes<ElementType> {
   // This is a composable component that is expecting a Filter component or an array of
   children: FilterComponent | FilterComponent[];
 
@@ -19,7 +19,7 @@ export interface FilterControlProps<ElementType = HTMLElement> extends React.HTM
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-filtercontrol--overview)
  */
-const FilterControl = forwardRef<HTMLDivElement, FilterControlProps>(
+const FilterControl = forwardRef<HTMLFormElement, FilterControlProps>(
   ({ className, children, element: Element = 'form', ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'FilterControl');
 
@@ -32,7 +32,7 @@ const FilterControl = forwardRef<HTMLDivElement, FilterControlProps>(
       React.isValidElement(childElement)
         ? cloneElement(childElement, {
             setViewAllFilter,
-            isHidden: !isViewAllSet ? false : viewAllFilter !== childElement.props.name,
+            hidden: !isViewAllSet ? false : viewAllFilter !== childElement.props.name,
             isViewingAll: isViewAllSet,
             className: isViewAllSet && classnames(childElement.props.className, 'is-opening'),
           } as FilterProps)
@@ -40,11 +40,9 @@ const FilterControl = forwardRef<HTMLDivElement, FilterControlProps>(
     );
 
     return (
-      <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        <Element {...commonProps} {...props} className={`${baseClassName}__control`}>
-          {parsedChildren}
-        </Element>
-      </div>
+      <Element {...commonProps} {...props} className={classnames(baseClassName, className)} ref={ref}>
+        {parsedChildren}
+      </Element>
     );
   },
 );

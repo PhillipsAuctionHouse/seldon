@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 import Filter from './Filter';
 import FilterHeader from './FilterHeader';
-import FilterValue from './FilterValue';
+import FilterInput from './FilterInput';
 import { useState } from 'react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
@@ -12,7 +12,7 @@ const meta = {
 
 export default meta;
 
-type FilterDimension = { label: string; disabled?: boolean | undefined; active: boolean };
+type FilterDimension = { label: string; disabled?: boolean | undefined; checked: boolean };
 
 type FilterType = {
   label: string;
@@ -31,15 +31,15 @@ const filter: FilterType = {
   label: 'Artists & Makers',
   id: 'makers',
   filterDimensions: [
-    { label: 'Jimmy', active: true },
-    { label: 'Bob', active: false },
-    { label: 'Alan', active: false },
-    { label: 'Nick', active: false },
-    { label: 'Joe', active: false },
-    { label: 'Fred', active: false },
-    { label: 'Rob', active: false },
-    { label: 'Roy', active: false },
-    { label: 'disabled', disabled: false, active: false },
+    { label: 'Jimmy', checked: true },
+    { label: 'Bob', checked: false },
+    { label: 'Alan', checked: false },
+    { label: 'Nick', checked: false },
+    { label: 'Joe', checked: false },
+    { label: 'Fred', checked: false },
+    { label: 'Rob', checked: false },
+    { label: 'Roy', checked: false },
+    { label: 'disabled', disabled: true, checked: false },
   ],
 };
 
@@ -53,7 +53,7 @@ const FilterComponent = (props: PropTypes) => {
       if (dimension.label === name) {
         return {
           ...dimension,
-          active: checked,
+          checked,
         };
       }
       return dimension;
@@ -66,6 +66,7 @@ const FilterComponent = (props: PropTypes) => {
 
     setFilter(updatedFilter);
   };
+
   return (
     <Filter
       key={filter.label}
@@ -76,17 +77,15 @@ const FilterComponent = (props: PropTypes) => {
     >
       <FilterHeader heading={filter.label} />
       {filter.filterDimensions.map((value: FilterDimension) => (
-        <FilterValue
+        <FilterInput
+          id={value.label}
           key={value.label}
-          inputType="checkbox"
-          inputProps={{
-            onChange: handleChange,
-            id: value.label,
-            labelText: value.label,
-            disabled: value?.disabled,
-            name: value.label,
-            checked: value.active,
-          }}
+          labelText={value.label}
+          onChange={handleChange}
+          type="checkbox"
+          disabled={value?.disabled}
+          name={value.label}
+          checked={value.checked}
         />
       ))}
     </Filter>

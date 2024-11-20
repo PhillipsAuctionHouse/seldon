@@ -127,7 +127,7 @@ const Pagination = ({
       </IconButton>
 
       <Select
-        className={variant === 'inline' && `${px}--inline-pagination`}
+        className={variant === 'inline' ? `${px}--inline-pagination` : undefined}
         aria-label={selectLabel}
         value={valueWithPendingState}
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -138,6 +138,7 @@ const Pagination = ({
         }}
         data-testid={`${id}-select-button`}
         hideLabel
+        labelText={selectLabel}
         disabled={isDisabled}
       >
         {options.map((option) => {

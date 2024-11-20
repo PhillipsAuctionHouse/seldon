@@ -2,7 +2,7 @@ import FilterControl from './FilterControl';
 import { runCommonTests } from '../../utils/testUtils';
 import { render, screen, fireEvent } from '@testing-library/react';
 import FilterHeader from '../../components/Filter/FilterHeader';
-import FilterValue from '../../components/Filter/FilterValue';
+import FilterInput from '../../components/Filter/FilterInput';
 import { Filter } from '../../components/Filter';
 import { px } from '../../utils';
 
@@ -20,16 +20,14 @@ describe('FilterControl', () => {
         <Filter name="test">
           <FilterHeader heading="Test Filter" />
           {filters.map((_, i) => (
-            <FilterValue
+            <FilterInput
               key={i}
-              inputType="checkbox"
-              inputProps={{
-                onChange: handleChange,
-                id: `test[test${i}]`,
-                labelText: `Filter ${i + 1}`,
-                name: `test[test${i}]`,
-                checked: true,
-              }}
+              type="checkbox"
+              onChange={handleChange}
+              id={`test[test${i}]`}
+              labelText={`Filter ${i + 1}`}
+              name={`test[test${i}]`}
+              checked={true}
             />
           ))}
         </Filter>
@@ -45,16 +43,14 @@ describe('FilterControl', () => {
         <Filter name="test" viewAllLimit={3}>
           <FilterHeader heading="Test Filter" />
           {filters.map((_, i) => (
-            <FilterValue
+            <FilterInput
               key={i}
-              inputType="checkbox"
-              inputProps={{
-                onChange: handleChange,
-                id: `test[test${i}]`,
-                labelText: `Filter ${i + 1}`,
-                name: `test[test${i}]`,
-                checked: true,
-              }}
+              type="checkbox"
+              onChange={handleChange}
+              id={`test[test${i}]`}
+              labelText={`Filter ${i + 1}`}
+              name={`test[test${i}]`}
+              checked={true}
             />
           ))}
         </Filter>
@@ -72,30 +68,26 @@ describe('FilterControl', () => {
         <Filter name="test">
           <FilterHeader heading="Test Filter" />
           {filters.map((_, i) => (
-            <FilterValue
+            <FilterInput
               key={i}
-              inputType="checkbox"
-              inputProps={{
-                onChange: handleChange,
-                id: `test[test${i}]`,
-                labelText: `Filter ${i + 1}`,
-                name: `test[test${i}]`,
-                checked: true,
-              }}
+              type="checkbox"
+              onChange={handleChange}
+              id={`test[test${i}]`}
+              labelText={`Filter ${i + 1}`}
+              name={`test[test${i}]`}
+              checked={true}
             />
           ))}
         </Filter>
         <Filter name="test2">
           <FilterHeader heading="Test Filter 2" />
-          <FilterValue
-            inputType="radio"
-            inputProps={{
-              onChange: handleChange,
-              id: 'test[test2]',
-              labelText: 'Filter 2',
-              name: 'test[test2]',
-              checked: true,
-            }}
+          <FilterInput
+            type="radio"
+            onChange={handleChange}
+            id="test[test2]"
+            labelText="Filter 2"
+            name="test[test2]"
+            checked={true}
           />
         </Filter>
       </FilterControl>,
@@ -119,16 +111,14 @@ describe('FilterControl', () => {
         <Filter name="test">
           <FilterHeader heading="Test Filter" />
           {filters.map((_, i) => (
-            <FilterValue
+            <FilterInput
               key={i}
-              inputType="checkbox"
-              inputProps={{
-                onChange: handleChange,
-                id: `test[test${i}]`,
-                labelText: `Filter ${i + 1}`,
-                name: `test[test${i}]`,
-                checked: true,
-              }}
+              type="checkbox"
+              onChange={handleChange}
+              id={`test[test${i}]`}
+              labelText={`Filter ${i + 1}`}
+              name={`test[test${i}]`}
+              checked={true}
             />
           ))}
         </Filter>
@@ -146,27 +136,23 @@ describe('FilterControl', () => {
     render(
       <FilterControl element="form">
         <Filter name="test" isLast={false}>
-          <FilterValue
-            inputType="checkbox"
-            inputProps={{
-              onChange: handleChange,
-              id: 'test[test1]',
-              labelText: 'Filter 1',
-              name: 'test[test1]',
-              checked: true,
-            }}
+          <FilterInput
+            type="checkbox"
+            onChange={handleChange}
+            id="test[test1]"
+            labelText="Filter 1"
+            name="test[test1]"
+            checked={true}
           />
         </Filter>
         <Filter name="test2" isLast={true}>
-          <FilterValue
-            inputType="checkbox"
-            inputProps={{
-              onChange: handleChange,
-              id: 'test2[test1]',
-              labelText: 'Filter 2',
-              name: 'test2[test1]',
-              checked: true,
-            }}
+          <FilterInput
+            type="checkbox"
+            onChange={handleChange}
+            id="test2[test1]"
+            labelText="Filter 2"
+            name="test2[test1]"
+            checked={true}
           />
         </Filter>
       </FilterControl>,

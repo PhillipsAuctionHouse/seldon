@@ -86,7 +86,7 @@ const argTypes = {
 
 export const CheckboxInput = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <Input key={args.defaultValue} {...args} id="Input-1" labelText="Label text 1" type="toggle" />
+    <Input key={args.defaultValue?.toString()} {...args} id="Input-1" labelText="Label text 1" type="toggle" />
   </div>
 );
 
