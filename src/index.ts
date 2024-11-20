@@ -47,6 +47,7 @@ export { default as GridItem, type GridItemProps } from './components/GridItem/G
 export { GridItemAlign } from './components/GridItem/types';
 export { default as Search, type SearchProps } from './components/Search/Search';
 export { default as Select, type SelectProps } from './components/Select/Select';
+export { SelectVariants } from './components/Select/types';
 export { default as SplitPanel, type SplitPanelProps } from './components/SplitPanel/SplitPanel';
 export { default as Subscribe, type SubscribeProps } from './patterns/Subscribe/Subscribe';
 export { SubscriptionState } from './patterns/Subscribe/types';

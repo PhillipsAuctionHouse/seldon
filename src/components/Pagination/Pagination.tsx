@@ -139,6 +139,7 @@ const Pagination = ({
         data-testid={`${id}-select-button`}
         hideLabel
         disabled={isDisabled}
+        showIcon={false}
       >
         {options.map((option) => {
           const optionValue = determineOptionValue(option);
