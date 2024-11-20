@@ -1,3 +1,10 @@
+## [1.95.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.95.0...v1.95.1) (2024-11-20)
+
+
+### Bug Fixes
+
+* **objecttile:** L3-4346 - object tiles fix ([#429](https://github.com/PhillipsAuctionHouse/seldon/issues/429)) ([a103ddf](https://github.com/PhillipsAuctionHouse/seldon/commit/a103ddf70044ac32ebcb782c21a91c619427a17b))
+
 # [1.95.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.94.0...v1.95.0) (2024-11-20)
 
 
