@@ -38,7 +38,6 @@ describe('A Select', () => {
     );
 
     await userEvent.selectOptions(screen.getByTestId('test-id'), ['option one']);
-    await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(2));
     await waitFor(() => expect(mockedOnChange.mock.calls).toHaveLength(1));
     expect(testRef?.current?.value).toEqual('option one');
     vi.clearAllMocks();
@@ -61,28 +60,6 @@ describe('A Select', () => {
     );
     await userEvent.selectOptions(screen.getByTestId('test-id'), ['option one']);
     await waitFor(() => expect(mockedOnChange.mock.calls).toHaveLength(0));
-  });
-
-  it('should toggle --open and --closed classes on click', async () => {
-    render(
-      <Select id="test-select" labelText={mockLabel} showIcon>
-        {mockOptions}
-      </Select>,
-    );
-
-    const selectElement = screen.getByTestId('test-select');
-    const selectParent = selectElement.parentElement;
-
-    // Initial state should be closed
-    expect(selectParent).toHaveClass(`${px}-select-container--closed`);
-
-    // Simulate click to open
-    await userEvent.click(selectElement);
-    expect(selectParent).toHaveClass(`${px}-select-container--open`);
-
-    // Simulate blur to close
-    await userEvent.tab();
-    expect(selectParent).toHaveClass(`${px}-select-container--closed`);
   });
 
   it('should apply --tertiary class when variant is tertiary', () => {

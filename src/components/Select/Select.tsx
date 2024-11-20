@@ -58,9 +58,6 @@ const Select = React.forwardRef(
   ) => {
     const type = 'select';
     const inputProps = useNormalizedInputProps({ disabled, id, invalid, invalidText, readOnly, type, warn, warnText });
-    const [isOpen, setIsOpen] = React.useState(false);
-    const handleIsOpen = () => setIsOpen((prev) => !prev);
-    const closeDropdown = () => setIsOpen(false);
 
     const wrapperClassnames = classnames(`${px}-${type}-input`, `${px}-input`, `${px}-input--${size}`, {
       [`${px}-input--inline`]: inline,
@@ -77,15 +74,8 @@ const Select = React.forwardRef(
     });
 
     const selectContainerClassnames = classnames(`${px}-select-container`, {
-      [`${px}-select-container--open`]: isOpen,
-      [`${px}-select-container--closed`]: !isOpen,
       [`${px}-select-container--show__icon`]: showIcon,
     });
-
-    const handleClick = (e: React.MouseEvent<HTMLSelectElement>) => {
-      handleIsOpen();
-      onClick?.(e);
-    };
 
     return (
       <div className={wrapperClassnames}>
@@ -100,8 +90,6 @@ const Select = React.forwardRef(
             disabled={inputProps.disabled}
             id={id}
             onChange={onChange}
-            onBlur={closeDropdown}
-            onClick={handleClick}
             ref={ref}
             value={value}
             {...rest}

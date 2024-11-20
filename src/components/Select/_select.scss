@@ -6,15 +6,9 @@
   .#{$px}-select-container {
     position: relative;
 
-    &--closed,
-    &--open {
-      select {
-        appearance: none;
-      }
-    }
-
     &--show__icon {
       select {
+        appearance: none;
         padding-right: 1.55rem;
 
         @media (min-width: $breakpoint-md) {
@@ -24,12 +18,6 @@
         @media (min-width: $breakpoint-xl) {
           padding-right: 2.25rem;
         }
-      }
-    }
-
-    &--open {
-      svg {
-        transform: rotate(180deg) translateY(45%);
       }
     }
   }
