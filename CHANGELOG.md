@@ -1,3 +1,10 @@
+# [1.94.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.93.0...v1.94.0) (2024-11-20)
+
+
+### Features
+
+* **salepage:** L3-4564 sale page tweaks ([#427](https://github.com/PhillipsAuctionHouse/seldon/issues/427)) ([2498592](https://github.com/PhillipsAuctionHouse/seldon/commit/2498592628079f576ce3a5b71c51a770f30c4c6b))
+
 # [1.93.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.92.0...v1.93.0) (2024-11-19)
 
 
