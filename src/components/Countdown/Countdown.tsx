@@ -49,7 +49,7 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
       endDateTime,
       formatDurationStr,
       label = 'Lots Close in',
-      intervalDescription = 'Lots Close in 1-minute intervals',
+      intervalDescription,
       className,
       locale = 'en',
       variant = CountdownVariants.default,

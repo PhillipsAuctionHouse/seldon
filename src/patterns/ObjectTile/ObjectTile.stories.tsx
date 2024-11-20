@@ -22,10 +22,10 @@ const args = {
   children: (
     <>
       <BidSnapshot
-        startingBid="$50,000"
-        activeBid="$65,000"
+        startingBid={50000}
+        activeBid={65000}
         auctionStatus={AuctionStatus.live}
-        bids={['$50,000', '$65,000']}
+        numberOfBids={2}
         lotCloseDate={addMinutes(new Date(), 20)}
       >
         <BidMessage message="With You" />
