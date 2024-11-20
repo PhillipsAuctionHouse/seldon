@@ -1,6 +1,7 @@
 export { default as AccountCircle } from './account_circle.svg?react';
 export { default as ArrowPrev } from './arrowPrev.svg?react';
 export { default as Calendar } from './calendar.svg?react';
+export { default as CalendarAlt } from './calendarAlt.svg?react';
 export { default as ChevronDown } from './chevronDown.svg?react';
 export { default as ChevronNext } from './chevronNext.svg?react';
 export { default as ChevronRight } from './chevronRight.svg?react';

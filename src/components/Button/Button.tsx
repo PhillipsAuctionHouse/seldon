@@ -76,9 +76,15 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
           {...commonProps}
           ref={ref as React.ForwardedRef<HTMLAnchorElement>}
           href={href}
-          className={classnames(`${baseClassName}`, `${baseClassName}--${size}`, `${baseClassName}--${variant}`, {
-            [`${baseClassName}--icon-last`]: iconLast,
-          })}
+          className={classnames(
+            `${baseClassName}`,
+            `${baseClassName}--${size}`,
+            `${baseClassName}--${variant}`,
+            {
+              [`${baseClassName}--icon-last`]: iconLast,
+            },
+            className,
+          )}
           target={target}
           rel={target === '_blank' ? 'noopener noreferrer' : undefined}
         >
