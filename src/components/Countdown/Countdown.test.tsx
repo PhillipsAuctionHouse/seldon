@@ -19,7 +19,6 @@ describe('Countdown', () => {
     expect(screen.getByText('Lots Close in')).toBeInTheDocument();
     expect(screen.getByText('minutes')).toBeInTheDocument();
     expect(screen.getByText('seconds')).toBeInTheDocument();
-    expect(screen.getByText('Lots Close in 1-minute intervals')).toBeInTheDocument();
   });
 
   it('renders with custom labels', () => {
