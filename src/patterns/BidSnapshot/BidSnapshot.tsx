@@ -10,21 +10,25 @@ import { CountdownVariants } from '../../components/Countdown/types';
 
 export interface BidSnapshotProps extends ComponentProps<'div'> {
   /**
-   * Active bid of current signed in user. -  '$1,000'
+   * Active bid of current signed in user. -  '1000'
    */
-  activeBid?: string;
+  activeBid?: number | null;
   /**
    * State of the object
    */
   auctionStatus?: AuctionStatus;
   /**
-   * An array of bids for the Object. Should include current bid as last element
-   */
-  bids?: string[];
-  /**
    * Bids label text, a fucntion for label of bids amoutn (2 bids, 3 bids, etc) where the number is the length of the bids array.
    */
   bidsLabelText?: (numberOfBids: number) => string;
+  /**
+   * Currency to use for object - '$'
+   */
+  currency?: string | null;
+  /**
+   * The current highest bid for the object - '1000'
+   */
+  currentBid?: number | null;
   /**
    * Current bid text, a string for label of current bid detail
    */
@@ -44,11 +48,15 @@ export interface BidSnapshotProps extends ComponentProps<'div'> {
   /**
    * End time for this object
    */
-  lotCloseDate?: Date;
+  lotCloseDate?: Date | null;
   /**
-   * Default Starting bid amount for the object - '$1,000'
+   * Number of bids for each lot
    */
-  startingBid: string;
+  numberOfBids?: number;
+  /**
+   * Default Starting bid amount for the object - '1000'
+   */
+  startingBid?: number | null;
   /**
    * Starting bid text, a string for label of starting bid detail
    */
@@ -78,15 +86,17 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
     {
       activeBid,
       auctionStatus = AuctionStatus.ready,
-      bids = [],
       bidsLabelText = bidsTranslation,
       children,
       className,
       closingText = 'Closes in',
+      currency = '$',
+      currentBid,
       currentBidText = 'Current bid',
       formatDurationStr = (str) => str.replace(/seconds?/, 'sec').replace(/minutes?/, 'min'),
       lang = 'en',
       lotCloseDate,
+      numberOfBids = 0,
       startingBid,
       startingBidText = 'Starting bid',
       soldForText = 'Sold for',
@@ -97,8 +107,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'BidSnapshot');
 
-    const hasBids = bids.length > 0;
-    const currentBid = hasBids && bids[bids.length - 1];
+    const hasBids = currentBid !== null && numberOfBids > 0;
     const isTopBid = activeBid === currentBid;
     const isReady = auctionStatus === AuctionStatus.ready;
     const isLive = auctionStatus === AuctionStatus.live;
@@ -119,8 +128,8 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
         <DetailList hasSeparators className={`${baseClassName}__text`}>
           <Detail
             label={label}
-            subLabel={isLive && bids.length > 0 && `(${bidsLabelText(bids.length)})`}
-            value={currentBid || startingBid}
+            subLabel={isLive && currentBid && `(${bidsLabelText(numberOfBids)})`}
+            value={`${currency}${(currentBid || startingBid)?.toLocaleString()}`}
             hasWrap={false}
           />
         </DetailList>

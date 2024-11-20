@@ -1,11 +1,8 @@
 import React from 'react';
 import { PaddingTokens, generatePaddingClassName, getCommonProps } from '../../utils';
-import GridItem, { GridItemProps } from '../GridItem/GridItem';
 import classnames from 'classnames';
 
 export interface RowProps extends React.HTMLAttributes<HTMLElement> {
-  /** These children can be an array of GridItem components */
-  children: React.ReactElement<GridItemProps, typeof GridItem> | React.ReactElement<GridItemProps, typeof GridItem>[];
   /**
    * Optional element to render as the top-level component e.g. 'div', 'span', CustomComponent, etc.  Defaults to 'section'.
    */

@@ -17,18 +17,18 @@ const meta = {
 
 export default meta;
 export const Playground = (props: BidSnapshotProps) => {
-  const { activeBid, auctionStatus, lotCloseDate, bids, ...rest } = props;
+  const { activeBid, auctionStatus, lotCloseDate, currentBid, ...rest } = props;
   return (
     <BidSnapshot
       activeBid={activeBid}
       auctionStatus={auctionStatus}
-      bids={auctionStatus === AuctionStatus.ready ? [] : bids}
+      currentBid={currentBid}
       lotCloseDate={auctionStatus === AuctionStatus.ready ? undefined : lotCloseDate}
       {...rest}
     >
-      {activeBid === props?.bids?.[(bids ?? []).length - 1] && auctionStatus === AuctionStatus.live ? (
+      {activeBid === currentBid && auctionStatus === AuctionStatus.live ? (
         <BidMessage message="With You" />
-      ) : activeBid === props?.bids?.[(bids ?? []).length - 1] && auctionStatus === AuctionStatus.past ? (
+      ) : activeBid === currentBid && auctionStatus === AuctionStatus.past ? (
         <BidMessage message="Winning Bid not including Buyer Premium" />
       ) : null}
     </BidSnapshot>
@@ -37,12 +37,14 @@ export const Playground = (props: BidSnapshotProps) => {
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
-  activeBid: '$1,000',
+  activeBid: 1000,
+  currency: '$',
+  numberOfBids: 3,
   auctionStatus: AuctionStatus.live,
-  bids: ['$600', '$800', '$1,000'],
+  currentBid: 1000,
   lotCloseDate: addMinutes(new Date(), 20),
   lang: enUS,
-  startingBid: '$600',
+  startingBid: 600,
 };
 
 Playground.argTypes = {};

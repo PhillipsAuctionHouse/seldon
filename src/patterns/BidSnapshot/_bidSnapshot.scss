@@ -23,9 +23,10 @@
     @include Montserrat;
   }
 
-  &--live {
+  &--live:has(.#{$px}-countdown) {
     border-bottom: 1px solid $light-gray;
   }
+
   &--has-bids .#{$px}-detail__value {
     font-variation-settings: 'wght' 600;
   }

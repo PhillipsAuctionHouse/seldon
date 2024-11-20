@@ -1,4 +1,4 @@
-import { ComponentProps, ElementType, forwardRef } from 'react';
+import { ComponentProps, forwardRef, ElementType } from 'react';
 import classnames from 'classnames';
 
 import { getCommonProps } from '../../utils';
@@ -7,9 +7,6 @@ import { DetailList } from '../DetailList/index';
 import { Detail } from '../../components/Detail/index';
 import { SeldonImage } from '../../components/SeldonImage';
 
-type ObjectTileElement = ElementType<
-  Omit<ObjectTileProps, 'imageUrl' | 'lotNumber' | 'referenceNumber'> & { 'data-testid': string }
->;
 export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
    * Optional Object badge.
@@ -18,7 +15,7 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
    * Optional Element to render at the top level.
    */
-  element?: ObjectTileElement;
+  element?: ElementType<ComponentProps<'a'>>;
   /**
    * Estimate for object.
    */
@@ -96,9 +93,14 @@ const ObjectTile = forwardRef<HTMLAnchorElement, ObjectTileProps>(
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ObjectTile');
-    const Component = Element ?? ((props.href ? 'a' : 'div') as ObjectTileElement);
+    const Component = Element ?? 'a';
     return (
-      <Component {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
+      <Component
+        {...commonProps}
+        className={classnames(baseClassName, className)}
+        {...props}
+        ref={ref as unknown as string}
+      >
         <SeldonImage
           alt={imageAlt}
           aspectRatio="1/1"
