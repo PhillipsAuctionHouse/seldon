@@ -1,3 +1,10 @@
+# [1.95.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.94.0...v1.95.0) (2024-11-20)
+
+
+### Features
+
+* **select:** L3-3818 updated select ([#424](https://github.com/PhillipsAuctionHouse/seldon/issues/424)) ([419392c](https://github.com/PhillipsAuctionHouse/seldon/commit/419392cea96228fb4f6bc6a64eb6569e116dadc9))
+
 # [1.94.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.93.0...v1.94.0) (2024-11-20)
 
 
