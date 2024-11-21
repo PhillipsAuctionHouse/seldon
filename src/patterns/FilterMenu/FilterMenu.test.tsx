@@ -1,4 +1,4 @@
-import FilterControl from './FilterControl';
+import FilterMenu from './FilterMenu';
 import { runCommonTests } from '../../utils/testUtils';
 import { render, screen, fireEvent } from '@testing-library/react';
 import FilterHeader from '../../components/Filter/FilterHeader';
@@ -9,14 +9,14 @@ import { px } from '../../utils';
 const BACK_BUTTON_TEXT = 'Back to all';
 const VIEW_ALL_BUTTON_TEXT = 'View All';
 
-describe('FilterControl', () => {
-  runCommonTests(FilterControl, 'FilterControl');
+describe('FilterMenu', () => {
+  runCommonTests(FilterMenu, 'FilterMenu');
   const handleChange = vi.fn();
   const filters = Array(11).fill(0);
 
   it('should render the "View All" button when there are more than 10 filters', () => {
     render(
-      <FilterControl>
+      <FilterMenu>
         <Filter name="test">
           <FilterHeader heading="Test Filter" />
           {filters.map((_, i) => (
@@ -31,7 +31,7 @@ describe('FilterControl', () => {
             />
           ))}
         </Filter>
-      </FilterControl>,
+      </FilterMenu>,
     );
 
     expect(screen.getByTestId('button')).toBeInTheDocument();
@@ -39,7 +39,7 @@ describe('FilterControl', () => {
 
   it('should hide values over viewAllLimit and display those under', () => {
     render(
-      <FilterControl>
+      <FilterMenu>
         <Filter name="test" viewAllLimit={3}>
           <FilterHeader heading="Test Filter" />
           {filters.map((_, i) => (
@@ -54,46 +54,49 @@ describe('FilterControl', () => {
             />
           ))}
         </Filter>
-      </FilterControl>,
+      </FilterMenu>,
     );
 
-    const values = screen.getAllByTestId('filter-value');
-    expect(values[2]).toBeVisible();
-    expect(values[3]).toHaveClass(`${px}-input__label--hidden`);
+    const filterCheckboxes = screen.getAllByRole('checkbox', { hidden: true });
+    expect(filterCheckboxes[2]).toBeVisible();
+    expect(filterCheckboxes[3]).toHaveProperty('hidden', true);
   });
 
   it('render the child filter', () => {
     render(
-      <FilterControl>
-        <Filter name="test">
+      <FilterMenu>
+        <Filter name="test" id="filter1">
           <FilterHeader heading="Test Filter" />
           {filters.map((_, i) => (
             <FilterInput
               key={i}
               type="checkbox"
               onChange={handleChange}
-              id={`test[test${i}]`}
+              id={`test[testfilter1${i}]`}
               labelText={`Filter ${i + 1}`}
               name={`test[test${i}]`}
               checked={true}
             />
           ))}
         </Filter>
-        <Filter name="test2">
+        <Filter name="test2" id="filter2">
           <FilterHeader heading="Test Filter 2" />
           <FilterInput
             type="radio"
             onChange={handleChange}
-            id="test[test2]"
+            id="testfilter2[test2]"
             labelText="Filter 2"
             name="test[test2]"
             checked={true}
           />
         </Filter>
-      </FilterControl>,
+      </FilterMenu>,
     );
 
-    const filter2Value = screen.getAllByTestId('filter')[1];
+    const filterCheckboxes = screen.getAllByRole('checkbox', { hidden: true });
+    expect(filterCheckboxes).toHaveLength(11);
+    expect(filterCheckboxes[0]).toBeVisible();
+    expect(filterCheckboxes[10]).toHaveProperty('hidden', true);
 
     // View All button
     fireEvent.click(screen.getByTestId('button'));
@@ -101,13 +104,14 @@ describe('FilterControl', () => {
     // Back button only for first filter should be displayed
     expect(screen.getAllByText(BACK_BUTTON_TEXT)[0]).toBeVisible();
 
-    // Second filter should no longer be displayed
-    expect(filter2Value).toHaveClass(`${px}-filter--hidden`);
+    // Second filter should be hidden
+    const secondFilter = screen.getByTestId('filter-filter2');
+    expect(secondFilter).toHaveProperty('hidden', true);
   });
 
   it('should handle the back button click', async () => {
     render(
-      <FilterControl>
+      <FilterMenu>
         <Filter name="test">
           <FilterHeader heading="Test Filter" />
           {filters.map((_, i) => (
@@ -122,7 +126,7 @@ describe('FilterControl', () => {
             />
           ))}
         </Filter>
-      </FilterControl>,
+      </FilterMenu>,
     );
 
     fireEvent.click(screen.getByText(VIEW_ALL_BUTTON_TEXT));
@@ -134,7 +138,7 @@ describe('FilterControl', () => {
 
   it('renders multiple filters and has separators', () => {
     render(
-      <FilterControl element="form">
+      <FilterMenu element="form">
         <Filter name="test" isLast={false}>
           <FilterInput
             type="checkbox"
@@ -155,7 +159,7 @@ describe('FilterControl', () => {
             checked={true}
           />
         </Filter>
-      </FilterControl>,
+      </FilterMenu>,
     );
 
     const filters = screen.getAllByTestId('filter');

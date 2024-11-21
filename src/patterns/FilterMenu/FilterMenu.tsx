@@ -1,13 +1,17 @@
-import React, { forwardRef, useState, Children, cloneElement } from 'react';
+import React, { forwardRef, useState, Children, cloneElement, ReactNode } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
-import { FilterComponent, FilterProps } from '../../components/Filter/Filter';
+import Filter, { FilterProps } from '../../components/Filter/Filter';
 
-export interface FilterControlProps<ElementType = HTMLFormElement> extends React.HTMLAttributes<ElementType> {
-  // This is a composable component that is expecting a Filter component or an array of
-  children: FilterComponent | FilterComponent[];
+export interface FilterMenuProps<ElementType = HTMLFormElement> extends React.HTMLAttributes<ElementType> {
+  /**
+   * Typically would be a Filter component
+   * */
+  children: ReactNode;
 
-  //Optional element to render as the top-level component e.g. 'div', Form, CustomComponent, etc. Defaults to 'form'.
+  /**
+   * Optional element to render as the top-level component e.g. 'div', Form, CustomComponent, etc. Defaults to 'form'.
+   */
   element?: React.ElementType;
 }
 /**
@@ -19,17 +23,16 @@ export interface FilterControlProps<ElementType = HTMLFormElement> extends React
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-filtercontrol--overview)
  */
-const FilterControl = forwardRef<HTMLFormElement, FilterControlProps>(
+const FilterMenu = forwardRef<HTMLFormElement, FilterMenuProps>(
   ({ className, children, element: Element = 'form', ...props }, ref) => {
-    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'FilterControl');
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'FilterMenu');
 
-    // this state variable will be set to the filter name when view all has been clicked,
-    // and null as default and when back is clicked
+    // The viewAllFilter is the name of the filter that is currently being viewed in the "View All" submenu
     const [viewAllFilter, setViewAllFilter] = useState<string | null>(null);
     const isViewAllSet = viewAllFilter?.length;
 
     const parsedChildren = Children.map(children, (childElement) =>
-      React.isValidElement(childElement)
+      React.isValidElement(childElement) && childElement.type === Filter
         ? cloneElement(childElement, {
             setViewAllFilter,
             hidden: !isViewAllSet ? false : viewAllFilter !== childElement.props.name,
@@ -47,6 +50,6 @@ const FilterControl = forwardRef<HTMLFormElement, FilterControlProps>(
   },
 );
 
-FilterControl.displayName = 'FilterControl';
+FilterMenu.displayName = 'FilterControl';
 
-export default FilterControl;
+export default FilterMenu;

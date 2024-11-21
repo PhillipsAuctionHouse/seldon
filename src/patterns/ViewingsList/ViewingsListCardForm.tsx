@@ -253,7 +253,7 @@ const ViewingsListCardForm = ({
         inline
         invalid={!!invalidFields?.previewOn}
         invalidText={invalidFields?.previewOn}
-        checked={true}
+        value="true"
         name="previewOn"
         onChange={() => setPreviewOnState((oldState) => !oldState)}
       />
@@ -353,7 +353,7 @@ const ViewingsListCardForm = ({
         inline
         invalid={!!invalidFields?.emailOn}
         invalidText={invalidFields?.emailOn}
-        checked={true}
+        value="true"
         name="emailOn"
         onChange={() => setEmailOnState((oldState) => !oldState)}
       />

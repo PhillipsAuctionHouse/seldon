@@ -82,5 +82,5 @@ export * from './patterns/SaleHeaderBanner';
 
 // utils
 export * from './utils/hooks';
-export * from './patterns/FilterControl';
+export * from './patterns/FilterMenu';
 export * from './components/Filter';

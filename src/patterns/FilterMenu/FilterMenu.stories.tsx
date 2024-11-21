@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import FilterControl from './FilterControl';
+import FilterMenu from './FilterMenu';
 import { useArgs } from '@storybook/preview-api';
 import { useEffect, useRef, useState } from 'react';
 import Button from '../../components/Button/Button';
@@ -12,8 +12,8 @@ import { exampleAuctionLots, lotType } from './utils';
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
   title: 'Patterns/FilterControl',
-  component: FilterControl,
-} satisfies Meta<typeof FilterControl>;
+  component: FilterMenu,
+} satisfies Meta<typeof FilterMenu>;
 
 export default meta;
 
@@ -206,7 +206,7 @@ const LotsWithFilter = (props: PropTypes) => {
         ))}
       </div>
       <Drawer isOpen={props.isOpen} onClose={props.onClose}>
-        <FilterControl>
+        <FilterMenu>
           {filters.map((filter: FilterType, index: number) => (
             <Filter key={filter.label} name={filter.label} isLast={filters.length == index + 1}>
               <FilterHeader heading={filter.label} />
@@ -224,7 +224,7 @@ const LotsWithFilter = (props: PropTypes) => {
               ))}
             </Filter>
           ))}
-        </FilterControl>
+        </FilterMenu>
         <Button onClick={() => props.onClose()}>{`Show ${results.length} lots`}</Button>
       </Drawer>
     </>
