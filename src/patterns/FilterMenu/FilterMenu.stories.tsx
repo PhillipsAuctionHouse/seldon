@@ -208,7 +208,7 @@ const LotsWithFilter = (props: PropTypes) => {
       <Drawer isOpen={props.isOpen} onClose={props.onClose}>
         <FilterMenu>
           {filters.map((filter: FilterType, index: number) => (
-            <Filter key={filter.label} name={filter.label} isLast={filters.length == index + 1}>
+            <Filter key={filter.label} name={filter.label} hasSeparator={filters.length !== index + 1}>
               <FilterHeader heading={filter.label} />
               {Array.from(filter.filterDimensions).map((value: FilterDimension) => (
                 <FilterInput

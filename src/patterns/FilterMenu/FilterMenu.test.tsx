@@ -139,7 +139,7 @@ describe('FilterMenu', () => {
   it('renders multiple filters and has separators', () => {
     render(
       <FilterMenu element="form">
-        <Filter name="test" isLast={false}>
+        <Filter name="test" hasSeparator={true}>
           <FilterInput
             type="checkbox"
             onChange={handleChange}
@@ -149,7 +149,7 @@ describe('FilterMenu', () => {
             checked={true}
           />
         </Filter>
-        <Filter name="test2" isLast={true}>
+        <Filter name="test2" hasSeparator={false}>
           <FilterInput
             type="checkbox"
             onChange={handleChange}

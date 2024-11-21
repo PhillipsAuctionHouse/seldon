@@ -23,8 +23,8 @@ export interface FilterProps extends ComponentProps<'div'> {
 
   name: string;
 
-  // If true, do not include bottom border. True by default, do not define if you do not wish to use separators or rendering alone.
-  isLast?: boolean;
+  // Includes bottom border if true, false by default
+  hasSeparator?: boolean;
 
   // Setter for values to display in view all
   setViewAllFilter?: Dispatch<SetStateAction<string>>;
@@ -57,7 +57,7 @@ const Filter = forwardRef<HTMLDivElement, FilterProps>(
       className,
       children,
       name,
-      isLast = true,
+      hasSeparator = false,
       viewAllLimit = 10,
       isViewingAll = false,
       isHidden = false,
@@ -89,7 +89,7 @@ const Filter = forwardRef<HTMLDivElement, FilterProps>(
       <div
         {...commonProps}
         className={classnames(baseClassName, className, {
-          [`${px}-has-separators`]: !isLast && !isViewingAll,
+          [`${px}-has-separators`]: hasSeparator && !isViewingAll,
           [`${px}-filter--hidden`]: isHidden,
           'is-closing': isClosing,
         })}
