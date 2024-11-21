@@ -4,7 +4,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import FilterHeader from '../../components/Filter/FilterHeader';
 import FilterInput from '../../components/Filter/FilterInput';
 import { Filter } from '../../components/Filter';
-import { px } from '../../utils';
 
 const BACK_BUTTON_TEXT = 'Back to all';
 const VIEW_ALL_BUTTON_TEXT = 'View All';
@@ -134,37 +133,5 @@ describe('FilterMenu', () => {
 
     const button = await screen.findByText(VIEW_ALL_BUTTON_TEXT);
     expect(button).toBeInTheDocument();
-  });
-
-  it('renders multiple filters and has separators', () => {
-    render(
-      <FilterMenu element="form">
-        <Filter name="test" hasSeparator={true}>
-          <FilterInput
-            type="checkbox"
-            onChange={handleChange}
-            id="test[test1]"
-            labelText="Filter 1"
-            name="test[test1]"
-            checked={true}
-          />
-        </Filter>
-        <Filter name="test2" hasSeparator={false}>
-          <FilterInput
-            type="checkbox"
-            onChange={handleChange}
-            id="test2[test1]"
-            labelText="Filter 2"
-            name="test2[test1]"
-            checked={true}
-          />
-        </Filter>
-      </FilterMenu>,
-    );
-
-    const filters = screen.getAllByTestId('filter');
-
-    expect(filters[0]).toHaveClass(`${px}-has-separators`);
-    expect(filters[1]).not.toHaveClass(`${px}-has-separators`);
   });
 });

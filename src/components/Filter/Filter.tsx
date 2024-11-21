@@ -4,10 +4,9 @@ import {
   Children,
   cloneElement,
   isValidElement,
-  ReactNode,
+  useState,
   Dispatch,
   SetStateAction,
-  useState,
 } from 'react';
 import { getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
@@ -17,14 +16,9 @@ import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
 import ChevronNextIcon from '../../assets/chevronNext.svg?react';
 
-// You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface FilterProps extends ComponentProps<'div'> {
-  children: ReactNode;
-
+  /** Logical name of this filter */
   name: string;
-
-  // Includes bottom border if true, false by default
-  hasSeparator?: boolean;
 
   // Setter for values to display in view all
   setViewAllFilter?: Dispatch<SetStateAction<string>>;
@@ -57,7 +51,6 @@ const Filter = forwardRef<HTMLDivElement, FilterProps>(
       className,
       children,
       name,
-      hasSeparator = false,
       viewAllLimit = 10,
       isViewingAll = false,
       isHidden = false,
@@ -89,7 +82,6 @@ const Filter = forwardRef<HTMLDivElement, FilterProps>(
       <div
         {...commonProps}
         className={classnames(baseClassName, className, {
-          [`${px}-has-separators`]: hasSeparator && !isViewingAll,
           [`${px}-filter--hidden`]: isHidden,
           'is-closing': isClosing,
         })}

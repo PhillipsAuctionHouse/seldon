@@ -23,7 +23,6 @@ type FilterType = {
 type PropTypes = {
   filter: FilterType;
   viewAllLimit: number;
-  hasSeparator: boolean;
   isViewingAll: boolean;
 };
 
@@ -44,7 +43,7 @@ const filter: FilterType = {
 };
 
 const FilterComponent = (props: PropTypes) => {
-  const { filter: intialFilters, viewAllLimit, hasSeparator, isViewingAll } = props;
+  const { filter: intialFilters, viewAllLimit, isViewingAll } = props;
   const [filter, setFilter] = useState(intialFilters);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -68,13 +67,7 @@ const FilterComponent = (props: PropTypes) => {
   };
 
   return (
-    <Filter
-      key={filter.label}
-      name={filter.label}
-      hasSeparator={hasSeparator}
-      viewAllLimit={viewAllLimit}
-      isViewingAll={isViewingAll}
-    >
+    <Filter key={filter.label} name={filter.label} viewAllLimit={viewAllLimit} isViewingAll={isViewingAll}>
       <FilterHeader heading={filter.label} />
       {filter.filterDimensions.map((value: FilterDimension) => (
         <FilterInput
@@ -100,7 +93,6 @@ export const Playground = (props: PropTypes) => {
 Playground.args = {
   filter,
   viewAllLimit: 10,
-  hasSeparator: false,
   isViewingAll: false,
 };
 

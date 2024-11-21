@@ -58,12 +58,6 @@ $chevron-scale: 0.8;
     }
   }
 
-  &.#{$px}-has-separators {
-    border-bottom: 1px solid $light-gray;
-    margin-bottom: $spacing-md;
-    padding-bottom: $spacing-sm;
-  }
-
   &.is-opening {
     animation: slide-in $default-transition-duration $default-easing forwards;
   }
