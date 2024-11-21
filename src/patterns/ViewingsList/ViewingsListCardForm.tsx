@@ -172,7 +172,7 @@ const ViewingsListCardForm = ({
   address2Label = "City, State, Zip ('New York, NY 10019')",
   address3,
   address3Label = 'Country (United States)',
-  emailOn = 'false',
+  emailOn,
   emailToggleLabel = 'Include Email Address',
   email,
   emailLabel = 'Email',
@@ -188,7 +188,7 @@ const ViewingsListCardForm = ({
   previewHours2Label = 'Hours2',
   previewLabel = "Label ('Preview', 'Opening Night', etc)",
   previewLabelValue,
-  previewOn = 'false',
+  previewOn,
   previewToggleLabel = 'Additional Hours',
   viewingLabel = "Label ('Open to public')",
   viewingLabelValue,
@@ -253,7 +253,6 @@ const ViewingsListCardForm = ({
         inline
         invalid={!!invalidFields?.previewOn}
         invalidText={invalidFields?.previewOn}
-        value="true"
         name="previewOn"
         onChange={() => setPreviewOnState((oldState) => !oldState)}
       />
@@ -353,7 +352,6 @@ const ViewingsListCardForm = ({
         inline
         invalid={!!invalidFields?.emailOn}
         invalidText={invalidFields?.emailOn}
-        value="true"
         name="emailOn"
         onChange={() => setEmailOnState((oldState) => !oldState)}
       />

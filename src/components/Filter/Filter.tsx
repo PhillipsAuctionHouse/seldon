@@ -8,9 +8,9 @@ import {
   Dispatch,
   SetStateAction,
 } from 'react';
-import { getCommonProps, px } from '../../utils';
+import { findChildrenExcludingTypes, findChildrenOfType, getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
-import FilterHeader, { FilterHeaderProps } from './FilterHeader';
+import FilterHeader from './FilterHeader';
 import { FilterInputProps } from './FilterInput';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
@@ -68,13 +68,14 @@ const Filter = forwardRef<HTMLDivElement, FilterProps>(
 
     const headerProps = { isViewingAll, setViewAllFilter, setIsClosing };
 
+    const parsedFilterHeader = findChildrenOfType(childrenArray, FilterHeader)?.[0];
+    const filterHeader = isValidElement(parsedFilterHeader) ? cloneElement(parsedFilterHeader, headerProps) : null;
+
     // this allows the component to be composable, while still passing down props from parent to child
     // taking the children composed in the filter and constructing custom props based on state
-    const parsedFilterChildren = childrenArray.map((child, index) =>
+    const parsedFilterChildren = findChildrenExcludingTypes(childrenArray, [FilterHeader])?.map((child, index) =>
       isValidElement(child)
-        ? child.type === FilterHeader
-          ? cloneElement(child, headerProps as FilterHeaderProps)
-          : cloneElement(child, { hidden: !isViewingAll && index > viewAllLimit } as FilterInputProps)
+        ? cloneElement(child, { hidden: !isViewingAll && index + 1 > viewAllLimit } as FilterInputProps)
         : child,
     );
 
@@ -89,10 +90,12 @@ const Filter = forwardRef<HTMLDivElement, FilterProps>(
         ref={ref}
       >
         <fieldset name={name} className={`${baseClassName}__fieldset`}>
-          {parsedFilterChildren}
+          {filterHeader}
+          <div className={`${baseClassName}__filters`}>{parsedFilterChildren}</div>
         </fieldset>
         {childrenArray.length > viewAllLimit && !isViewingAll ? (
           <Button
+            className={`${baseClassName}__view-all`}
             variant={ButtonVariants.tertiary}
             onClick={() => {
               setViewAllFilter?.(name);

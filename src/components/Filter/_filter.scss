@@ -28,14 +28,25 @@ $chevron-scale: 0.8;
   }
 }
 
-// temp override while input being fixed
-.#{$px}-input__input {
-  height: 20px;
-  margin-top: 5px;
-  width: 20px;
-}
-
 .#{$px}-filter {
+  &-header {
+    margin-bottom: $spacing-md;
+
+    legend {
+      padding-inline: 0; // needed for default browser styles
+    }
+
+    &__back {
+      @include text($body2); // workaround where the tertiary button text is not scaling at different breakpoints
+
+      margin-top: $spacing-sm;
+    }
+
+    &__chevron {
+      transform: rotateY(180deg) scale($chevron-scale);
+    }
+  }
+
   &__chevron {
     transform: scale($chevron-scale);
   }
@@ -46,16 +57,38 @@ $chevron-scale: 0.8;
     padding: 0;
   }
 
-  .#{$px}-input {
-    &__label {
-      @include text($body2);
+  &__filters {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    padding-bottom: $spacing-sm;
 
-      color: inherit;
-    }
+    .#{$px}-input {
+      align-items: center;
+      height: unset;
 
-    &__validation {
-      display: none;
+      &__label {
+        @include text($body2);
+
+        color: inherit;
+        margin-bottom: 0;
+      }
+
+      &__input {
+        align-self: center;
+        height: $body-line-height-size3;
+        margin-bottom: 0;
+        width: $body-line-height-size3;
+      }
+
+      &__validation {
+        display: none;
+      }
     }
+  }
+
+  &__view-all {
+    @include text($body2); // workaround where the tertiary button text is not scaling at different breakpoints
   }
 
   &.is-opening {
@@ -75,17 +108,5 @@ $chevron-scale: 0.8;
       height: 40px;
       justify-content: space-between;
     }
-  }
-}
-
-.#{$px}-filter-header {
-  margin-bottom: $spacing-md;
-
-  &__chevron {
-    transform: rotateY(180deg) scale($chevron-scale);
-  }
-
-  &__back {
-    margin-top: $spacing-sm;
   }
 }
