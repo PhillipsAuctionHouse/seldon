@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   max-width: 24.5rem;
+  text-align: left;
 
   &__img {
     margin-bottom: $spacing-sm;
@@ -12,6 +13,17 @@
 
   &__badge {
     color: $widget-red;
+  }
+
+  &__badge:empty {
+    min-height: 1rem;
+  }
+
+  &__title {
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
   }
 
   &__lot-number-like {
