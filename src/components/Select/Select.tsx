@@ -67,9 +67,7 @@ const Select = React.forwardRef(
       [`${px}-input--warn`]: inputProps.warn,
       [`${className}__wrapper`]: className,
     });
-
-    const selectClassnames = classnames(`${px}-input__input`, {
-      className,
+    const selectClassnames = classnames(className, `${px}-input__input`, {
       [`${px}-input__select--tertiary`]: variant === SelectVariants.tertiary,
     });
 
