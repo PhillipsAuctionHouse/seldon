@@ -166,17 +166,16 @@ const Input = React.forwardRef(
         <input
           className={classnames(`${px}-input__input`, { className })}
           data-testid={id}
-          defaultValue={defaultValue}
           disabled={inputProps.disabled}
           id={id || generatedId}
-          name={rest.name as string}
           onChange={onChange}
           onClick={onClick}
           placeholder={placeholder}
           readOnly={readOnly}
           ref={ref}
           type={inputProps.type}
-          value={value}
+          // can't set values on a checkbox or it breaks
+          {...(inputProps.type !== 'checkbox' && inputProps.type !== 'radio' ? { value, defaultValue } : {})}
           {...rest}
         />
         {inputProps.validation ? (

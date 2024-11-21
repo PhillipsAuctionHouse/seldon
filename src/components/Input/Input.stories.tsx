@@ -1,6 +1,7 @@
 import type { Meta } from '@storybook/react';
 import Input, { InputProps } from './Input';
 import { useState } from 'react';
+import Button from '../Button/Button';
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
   title: 'Components/Input',
@@ -214,11 +215,29 @@ ControlledInput.args = {
 
 ControlledInput.argTypes = argTypes;
 
-export const Playground = ({ playgroundWidth, ...args }: StoryProps) => (
-  <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <Input key={args.defaultValue?.toString()} {...args} id="Input-1" />
-  </div>
-);
+export const Playground = ({ playgroundWidth, ...args }: StoryProps) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const entries: string[] = [];
+    for (const entry of formData.entries()) {
+      entries.push(`${entry[0]}: ${entry[1]}`);
+    }
+    alert(`Form submitted ${entries.join('\n')}`);
+  };
+
+  return (
+    <div style={{ width: playgroundWidth, margin: '1rem' }}>
+      <form onSubmit={handleSubmit}>
+        <Input {...args} labelText="Text Input" id="Input-1" name="stringInput" />
+        <Input type="checkbox" {...args} labelText="Checkbox Input" id="Input-2" name="checkboxInput" />
+        <Input type="radio" {...args} id="Input-3" labelText="Radio Input" name="radioInput" />
+        <Input type="toggle" {...args} id="Input-4" labelText="Toggle Input" name="toggleInput" />
+        <Button type="submit">Submit form</Button>
+      </form>
+    </div>
+  );
+};
 
 Playground.args = {
   playgroundWidth: 300,
@@ -227,7 +246,6 @@ Playground.args = {
   invalid: false,
   invalidText: 'Error message',
   disabled: false,
-  defaultValue: 'My values',
   labelText: 'Label text',
   warn: false,
   warnText: 'Warning message that is really long can wrap to more lines.',
