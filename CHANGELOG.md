@@ -1,3 +1,10 @@
+# [1.96.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.95.1...v1.96.0) (2024-11-21)
+
+
+### Features
+
+* **select:** L3-3818 className fix ([#430](https://github.com/PhillipsAuctionHouse/seldon/issues/430)) ([79ea8bb](https://github.com/PhillipsAuctionHouse/seldon/commit/79ea8bb39cbe056a1f8be2b691c3833b0e944c53))
+
 ## [1.95.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.95.0...v1.95.1) (2024-11-20)
 
 
