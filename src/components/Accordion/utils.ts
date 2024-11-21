@@ -1,21 +1,30 @@
 import classnames from 'classnames';
-import { AccordionType, AccordionVariantKey, AccordionVariantProps, AccordionVariants } from './types';
+import { AccordionVariantKey, AccordionVariants } from './types';
+import { AccordionMultipleProps, AccordionSingleProps } from '@radix-ui/react-accordion';
 
 /**
  * Sets the type and collapsible props based on the variant prop
  * The collapsible prop should only be passed when the variant is single
  */
-export const getAccordionVariantProps = (variant?: AccordionVariantKey): AccordionVariantProps => {
-  const variantProps: AccordionVariantProps = { type: AccordionType.multiple };
+export const getAccordionVariantProps = (
+  variant?: AccordionVariantKey,
+  value?: string[] | string,
+): AccordionSingleProps | AccordionMultipleProps => {
+  const variantProps: AccordionMultipleProps | AccordionSingleProps = { type: 'multiple' };
+
+  if (
+    (variant === AccordionVariants.singleCollapsible || variant === AccordionVariants.singleNonCollapsible) &&
+    Array.isArray(value)
+  ) {
+    console.error('The value prop should not be an array when using a single variant');
+  }
 
   if (variant === AccordionVariants.singleCollapsible) {
-    variantProps.type = AccordionType.single;
-    variantProps.collapsible = true;
+    return { type: 'single' };
   }
 
   if (variant === AccordionVariants.singleNonCollapsible) {
-    variantProps.type = AccordionType.single;
-    variantProps.collapsible = false;
+    return { type: 'single' };
   }
 
   return variantProps;

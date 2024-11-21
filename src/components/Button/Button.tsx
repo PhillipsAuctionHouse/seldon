@@ -4,7 +4,7 @@ import { getCommonProps } from '../../utils';
 import { ButtonVariants } from './types';
 import { forwardRef } from 'react';
 
-export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement> {
   /**
    * Button contents
    */
@@ -33,6 +33,14 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
    * Should the button be disabled?
    */
   isDisabled?: boolean;
+  /**
+   * The href of the button. This will make the button render as an anchor tag.
+   */
+  href?: string;
+  /**
+   * The target of the link (e.g. _blank). To be combined with href.
+   */
+  target?: string;
 }
 
 /**
@@ -45,7 +53,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-button--overview)
  */
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
   (
     {
       variant = ButtonVariants.primary,
@@ -55,31 +63,56 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       isIconLast: iconLast = false,
       type = 'button',
       isDisabled = false,
+      href,
+      target,
       ...props
     },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Button');
-    return (
-      <button
-        {...commonProps}
-        ref={ref}
-        type={type}
-        className={classnames(
-          `${baseClassName}`,
-          `${baseClassName}--${size}`,
-          `${baseClassName}--${variant}`,
-          {
-            [`${baseClassName}--icon-last`]: iconLast,
-          },
-          className,
-        )}
-        disabled={isDisabled}
-        {...props}
-      >
-        {children}
-      </button>
-    );
+    if (href) {
+      return (
+        <a
+          {...commonProps}
+          ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+          href={href}
+          className={classnames(
+            `${baseClassName}`,
+            `${baseClassName}--${size}`,
+            `${baseClassName}--${variant}`,
+            {
+              [`${baseClassName}--icon-last`]: iconLast,
+            },
+            className,
+          )}
+          target={target}
+          rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+        >
+          {children}
+        </a>
+      );
+    } else {
+      return (
+        <button
+          {...commonProps}
+          ref={ref as React.ForwardedRef<HTMLButtonElement>}
+          type={type}
+          className={classnames(
+            `${baseClassName}`,
+            `${baseClassName}--${size}`,
+            `${baseClassName}--${variant}`,
+            {
+              [`${baseClassName}--icon-last`]: iconLast,
+            },
+            className,
+          )}
+          disabled={isDisabled}
+          {...props}
+        >
+          {children}
+        </button>
+      );
+    }
   },
 );
 

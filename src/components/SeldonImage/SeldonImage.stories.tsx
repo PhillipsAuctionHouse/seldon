@@ -43,3 +43,14 @@ BlurBackground.args = {
 };
 
 BlurBackground.argTypes = {};
+
+export const BrokenImage = (props: SeldonImageProps) => <SeldonImage {...props} />;
+
+// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
+BrokenImage.args = {
+  src: 'broken',
+  aspectRatio: '1/1',
+  objectFit: 'contain',
+};
+
+BrokenImage.argTypes = {};

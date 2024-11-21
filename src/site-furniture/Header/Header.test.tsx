@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, renderHook, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Header from './Header';
 import LogoSVG from '../../assets/PhillipsLogo.svg?react';
@@ -10,6 +10,7 @@ import NavigationItemTrigger from '../../components/Navigation/NavigationItemTri
 import NavigationList from '../../components/Navigation/NavigationList/NavigationList';
 import { LinkVariants } from '../../components/Link/types';
 import Search from '../../components/Search/Search';
+import { useMobileMenu } from './hooks';
 
 describe('Header', () => {
   const headerComponent = () => (
@@ -76,5 +77,47 @@ describe('Header with logo', () => {
     render(<Header logo={LogoIMG} />);
     const logoElement = screen.getByTestId('header-logo');
     expect(logoElement).toContainHTML(`<img  alt="Phillips" data-testid="header-logo-img" src=${LogoIMG} />`);
+  });
+});
+
+describe('useMobileMenu', () => {
+  const toggleCloseText = 'Close Menu';
+  const toggleOpenText = 'Open Menu';
+
+  it('should initialize with menu closed', () => {
+    const { result } = renderHook(() => useMobileMenu({ toggleCloseText, toggleOpenText }));
+    expect(result.current.isMenuOpen).toBe(false);
+    expect(result.current.toggleText).toBe(toggleOpenText);
+  });
+
+  it('should toggle menu open and close', () => {
+    const { result } = renderHook(() => useMobileMenu({ toggleCloseText, toggleOpenText }));
+
+    act(() => {
+      result.current.handleMenuToggle();
+    });
+    expect(result.current.isMenuOpen).toBe(true);
+    expect(result.current.toggleText).toBe(toggleCloseText);
+
+    act(() => {
+      result.current.handleMenuToggle();
+    });
+    expect(result.current.isMenuOpen).toBe(false);
+    expect(result.current.toggleText).toBe(toggleOpenText);
+  });
+
+  it('should close menu when closeMenu is called', () => {
+    const { result } = renderHook(() => useMobileMenu({ toggleCloseText, toggleOpenText }));
+
+    act(() => {
+      result.current.handleMenuToggle();
+    });
+    expect(result.current.isMenuOpen).toBe(true);
+
+    act(() => {
+      result.current.closeMenu();
+    });
+    expect(result.current.isMenuOpen).toBe(false);
+    expect(result.current.toggleText).toBe(toggleOpenText);
   });
 });

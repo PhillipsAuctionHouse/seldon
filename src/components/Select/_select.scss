@@ -1,0 +1,74 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-select-input {
+  position: relative;
+
+  .#{$px}-select-container {
+    position: relative;
+
+    &--show__icon {
+      select {
+        appearance: none;
+        padding-right: 1.55rem;
+
+        @media (min-width: $breakpoint-md) {
+          padding-right: 1.95rem;
+        }
+
+        @media (min-width: $breakpoint-xl) {
+          padding-right: 2.25rem;
+        }
+      }
+    }
+  }
+
+  svg {
+    height: 1rem;
+    pointer-events: none;
+    position: absolute;
+    right: 0.35rem;
+    top: 45%;
+    transform: translateY(-45%);
+    width: 1rem;
+
+    @media (min-width: $breakpoint-md) {
+      height: 1.25rem;
+      right: 0.5rem;
+      width: 1.25rem;
+    }
+
+    @media (min-width: $breakpoint-xl) {
+      height: 1.5rem;
+      right: 0.55rem;
+      width: 1.5rem;
+    }
+
+    path {
+      fill: $pure-black;
+    }
+  }
+
+  select.#{$px}-input {
+    &__select {
+      &--tertiary {
+        border: 0;
+        color: inherit;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        &:focus-visible {
+          background-color: $pure-white;
+          border-radius: 0;
+          outline-color: $soft-black;
+          outline-offset: 4.5px;
+        }
+
+        svg {
+          top: 0.625rem;
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,177 @@
+## [1.96.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.96.0...v1.96.1) (2024-11-21)
+
+
+### Bug Fixes
+
+* **deps:** bump cross-spawn from 7.0.3 to 7.0.6 ([#431](https://github.com/PhillipsAuctionHouse/seldon/issues/431)) ([b788a90](https://github.com/PhillipsAuctionHouse/seldon/commit/b788a905e9cc06343ff62a2c6404511208ae2dec))
+* **objecttile:** L3-4346 - ensure objecttile content is left aligned ([#433](https://github.com/PhillipsAuctionHouse/seldon/issues/433)) ([3e0707d](https://github.com/PhillipsAuctionHouse/seldon/commit/3e0707d4661ecae6d0f4fd13d28ee9bfb19dbf98))
+
+# [1.96.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.95.1...v1.96.0) (2024-11-21)
+
+
+### Features
+
+* **select:** L3-3818 className fix ([#430](https://github.com/PhillipsAuctionHouse/seldon/issues/430)) ([79ea8bb](https://github.com/PhillipsAuctionHouse/seldon/commit/79ea8bb39cbe056a1f8be2b691c3833b0e944c53))
+
+## [1.95.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.95.0...v1.95.1) (2024-11-20)
+
+
+### Bug Fixes
+
+* **objecttile:** L3-4346 - object tiles fix ([#429](https://github.com/PhillipsAuctionHouse/seldon/issues/429)) ([a103ddf](https://github.com/PhillipsAuctionHouse/seldon/commit/a103ddf70044ac32ebcb782c21a91c619427a17b))
+
+# [1.95.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.94.0...v1.95.0) (2024-11-20)
+
+
+### Features
+
+* **select:** L3-3818 updated select ([#424](https://github.com/PhillipsAuctionHouse/seldon/issues/424)) ([419392c](https://github.com/PhillipsAuctionHouse/seldon/commit/419392cea96228fb4f6bc6a64eb6569e116dadc9))
+
+# [1.94.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.93.0...v1.94.0) (2024-11-20)
+
+
+### Features
+
+* **salepage:** L3-4564 sale page tweaks ([#427](https://github.com/PhillipsAuctionHouse/seldon/issues/427)) ([2498592](https://github.com/PhillipsAuctionHouse/seldon/commit/2498592628079f576ce3a5b71c51a770f30c4c6b))
+
+# [1.93.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.92.0...v1.93.0) (2024-11-19)
+
+
+### Features
+
+* **objecttile:** L3-4346 - create object tile pattern ([#425](https://github.com/PhillipsAuctionHouse/seldon/issues/425)) ([8b13278](https://github.com/PhillipsAuctionHouse/seldon/commit/8b132780e42565a8ec95f5c9a987277b81841e30))
+
+# [1.92.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.91.1...v1.92.0) (2024-11-15)
+
+
+### Features
+
+* **header:** L3-4484 added close menu functionality ([#419](https://github.com/PhillipsAuctionHouse/seldon/issues/419)) ([ba254a8](https://github.com/PhillipsAuctionHouse/seldon/commit/ba254a85527122d31d1aa2eace359cb225290d61))
+
+## [1.91.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.91.0...v1.91.1) (2024-11-13)
+
+
+### Bug Fixes
+
+* **ContentPeek:** L3-4299 update content peek component ([#423](https://github.com/PhillipsAuctionHouse/seldon/issues/423)) ([496fb3d](https://github.com/PhillipsAuctionHouse/seldon/commit/496fb3dc96417e0da0ee89f8be48a8d6103b3a14))
+
+# [1.91.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.90.0...v1.91.0) (2024-11-13)
+
+
+### Features
+
+* **ContentPeek:** L3-4299 - add new prop for specifying the minHeightThreshold for showing Peek controls ([#421](https://github.com/PhillipsAuctionHouse/seldon/issues/421)) ([dc435cc](https://github.com/PhillipsAuctionHouse/seldon/commit/dc435cc8d0ba1e6623a016630a92d75b867b0e55))
+
+# [1.90.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.89.1...v1.90.0) (2024-11-13)
+
+
+### Features
+
+* **lotdetails:** L3-3149 tweaks to Video and Carousel to support obj… ([#420](https://github.com/PhillipsAuctionHouse/seldon/issues/420)) ([7c302db](https://github.com/PhillipsAuctionHouse/seldon/commit/7c302db0ad019038b3596b1dd2bf55e021d51c2a))
+
+## [1.89.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.89.0...v1.89.1) (2024-11-13)
+
+
+### Bug Fixes
+
+* **input:** L3-4544 input style font size fix and DetailList key fix ([#422](https://github.com/PhillipsAuctionHouse/seldon/issues/422)) ([3e20bf0](https://github.com/PhillipsAuctionHouse/seldon/commit/3e20bf07a0f1915a156e73f4b5a858f0b5ced664))
+
+# [1.89.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.88.1...v1.89.0) (2024-11-06)
+
+
+### Features
+
+* **Tags:** L3-3816 Create Tags Component ([#398](https://github.com/PhillipsAuctionHouse/seldon/issues/398)) ([9e229e8](https://github.com/PhillipsAuctionHouse/seldon/commit/9e229e860f54b40457d39b866dba0a4f38c67b16))
+
+## [1.88.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.88.0...v1.88.1) (2024-11-04)
+
+
+### Bug Fixes
+
+* **lotdetails:** L3-3327 fix input labels on non-mobile breakpoints, … ([#413](https://github.com/PhillipsAuctionHouse/seldon/issues/413)) ([dea513e](https://github.com/PhillipsAuctionHouse/seldon/commit/dea513e14b74edccefe249345791d82e06f7679a))
+
+# [1.88.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.87.0...v1.88.0) (2024-11-04)
+
+
+### Features
+
+* **search:** L3-4328 onKeyDown fix ([#416](https://github.com/PhillipsAuctionHouse/seldon/issues/416)) ([e395e44](https://github.com/PhillipsAuctionHouse/seldon/commit/e395e4431cfdb477fa9da5619515c117c6813bfb))
+
+# [1.87.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.86.0...v1.87.0) (2024-10-31)
+
+
+### Features
+
+* **tabs:** L3-2396 tabs add controlled state ([#412](https://github.com/PhillipsAuctionHouse/seldon/issues/412)) ([6c9ad7f](https://github.com/PhillipsAuctionHouse/seldon/commit/6c9ad7f398e046801452a208eb8a53d25dfcc0e0))
+
+# [1.86.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.85.1...v1.86.0) (2024-10-30)
+
+
+### Features
+
+* **header:** L3-4326 updated spacing and search click ([#408](https://github.com/PhillipsAuctionHouse/seldon/issues/408)) ([01391e2](https://github.com/PhillipsAuctionHouse/seldon/commit/01391e208746304c3a2079e091f3a2513f69a3c1))
+
+## [1.85.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.85.0...v1.85.1) (2024-10-30)
+
+
+### Bug Fixes
+
+* **lotdetails:** L3-3327 minor changes to input and accordion to match compendium ([#404](https://github.com/PhillipsAuctionHouse/seldon/issues/404)) ([0c50b03](https://github.com/PhillipsAuctionHouse/seldon/commit/0c50b03650c956513886cefd21d047f4474863b6))
+
+# [1.85.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.84.1...v1.85.0) (2024-10-29)
+
+
+### Features
+
+* **accordion:** L3-3296 support custom transition time ([#409](https://github.com/PhillipsAuctionHouse/seldon/issues/409)) ([fa8c465](https://github.com/PhillipsAuctionHouse/seldon/commit/fa8c46575f743652c3cedafe51eb3e885532981e))
+
+## [1.84.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.84.0...v1.84.1) (2024-10-28)
+
+
+### Bug Fixes
+
+* **lotdetails:** L3-4323 image carousel SSR error state ([#403](https://github.com/PhillipsAuctionHouse/seldon/issues/403)) ([5d9477e](https://github.com/PhillipsAuctionHouse/seldon/commit/5d9477e6c289738602d65a7b0ac0baa255b1a8de))
+
+# [1.84.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.83.0...v1.84.0) (2024-10-24)
+
+
+### Features
+
+* **header:** L3-4294 links underline fix ([#401](https://github.com/PhillipsAuctionHouse/seldon/issues/401)) ([47802e7](https://github.com/PhillipsAuctionHouse/seldon/commit/47802e72bcaa2cd714c5eef519773cd26d346a2d))
+
+# [1.83.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.82.1...v1.83.0) (2024-10-24)
+
+
+### Bug Fixes
+
+* **header:** L3-4294 Dvh Fix for Mobile Scroll Issue Nav Spacing Fix ([#399](https://github.com/PhillipsAuctionHouse/seldon/issues/399)) ([01ea8da](https://github.com/PhillipsAuctionHouse/seldon/commit/01ea8daf494bf154c71f3e26f0993880069e086d))
+
+
+### Features
+
+* **lotdetails:** L3-3327 trigger build for button & accordion updates ([#400](https://github.com/PhillipsAuctionHouse/seldon/issues/400)) ([7237b5d](https://github.com/PhillipsAuctionHouse/seldon/commit/7237b5d8320d63e896fcd3dd925c33c218029514))
+
+## [1.82.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.82.0...v1.82.1) (2024-10-24)
+
+
+### Bug Fixes
+
+* **pagination:** L3-3158 update style so it is shorter on mobile ([#395](https://github.com/PhillipsAuctionHouse/seldon/issues/395)) ([c1eee24](https://github.com/PhillipsAuctionHouse/seldon/commit/c1eee24150fb0a821e226c3d8aeeb04719f1a009))
+
+# [1.82.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.81.0...v1.82.0) (2024-10-23)
+
+
+### Features
+
+* **header:** L3-4228 header fixes ([#396](https://github.com/PhillipsAuctionHouse/seldon/issues/396)) ([464ca88](https://github.com/PhillipsAuctionHouse/seldon/commit/464ca88f8b2239febd184cc08ad74e17e4256cab))
+
+# [1.81.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.80.0...v1.81.0) (2024-10-23)
+
+
+### Features
+
+* **countdown:** L3-3809 add new countdown component ([#381](https://github.com/PhillipsAuctionHouse/seldon/issues/381)) ([aff22d7](https://github.com/PhillipsAuctionHouse/seldon/commit/aff22d7d5e959bb5ca58e2d47b4393e3bc328b9f))
+
 # [1.80.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.79.3...v1.80.0) (2024-10-22)
 
 

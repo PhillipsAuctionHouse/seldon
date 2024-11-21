@@ -32,10 +32,19 @@
 @use 'components/Drawer/drawer';
 @use 'components/Dropdown/dropdown';
 @use 'components/Video/video';
+@use 'components/Select/select';
 @use 'components/Pagination/pagination';
 @use 'components/ContentPeek/contentPeek';
 @use 'components/PageContentWrapper/pageContentWrapper';
 @use 'components/Carousel/carousel';
+@use 'components/Tags/tags';
+@use 'components/Countdown/countdown';
+@use 'components/Countdown/duration';
+@use 'components/Detail/detail';
+@use 'components/PinchZoom/pinchZoom';
+@use 'components/Tabs/tabs';
+@use 'components/SeldonImage/seldonImage';
+@use 'components/Filter/filter';
 
 // Patterns
 @use 'patterns/HeroBanner/heroBanner';
@@ -45,14 +54,11 @@
 @use 'patterns/Subscribe/subscribe';
 @use 'patterns/Social/social';
 @use 'patterns/SaleHeaderBanner/saleHeaderBanner';
+@use 'patterns/ObjectTile/objectTile';
+@use 'patterns/BidSnapshot/bidSnapshot';
+@use 'patterns/FilterMenu/filterMenu';
+@use 'patterns/DetailList/detailList';
 
 // Site Furniture
 @use 'site-furniture/Header/header';
 @use 'site-furniture/Footer/footer';
-@use 'components/Detail/detail';
-@use 'patterns/DetailList/detailList';
-@use 'components/PinchZoom/pinchZoom';
-@use 'components/Tabs/tabs';
-@use 'components/SeldonImage/seldonImage';
-@use 'patterns/FilterMenu/filterMenu';
-@use 'components/Filter/filter';

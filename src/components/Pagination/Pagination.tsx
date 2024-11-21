@@ -140,6 +140,7 @@ const Pagination = ({
         hideLabel
         labelText={selectLabel}
         disabled={isDisabled}
+        showIcon={false}
       >
         {options.map((option) => {
           const optionValue = determineOptionValue(option);

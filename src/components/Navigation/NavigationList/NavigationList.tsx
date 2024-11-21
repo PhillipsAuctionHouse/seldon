@@ -21,20 +21,46 @@ export interface NavigationListProps extends React.ComponentProps<'ul'> {
    * Optional right section heading
    */
   rightSectionHeading?: string;
+  /**
+   * Rewrite the onClick event
+   * */
+  onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
 const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
-  ({ id, children, className, isOffScreen, leftSectionHeading, rightSectionHeading }, ref) => {
-    const leftSectionItems = React.Children.toArray(children).filter((child) => {
-      if (child && (child as React.ReactElement<NavigationItemProps>).props.navGroup === 'nav-link-start') {
-        return child;
-      }
-    });
-    const rightSectionItems = React.Children.toArray(children).filter((child) => {
-      if (child && (child as React.ReactElement<NavigationItemProps>).props.navGroup === 'nav-link-end') {
-        return child;
-      }
-    });
+  ({ id, children, className, isOffScreen, leftSectionHeading, rightSectionHeading, onClick }, ref) => {
+    const leftSectionItems = React.Children.toArray(children)
+      .map((child) => {
+        if (
+          React.isValidElement(child) &&
+          (child as React.ReactElement<NavigationItemProps>).props.navGroup === 'nav-link-start'
+        ) {
+          return React.cloneElement(child as React.ReactElement<NavigationItemProps>, {
+            onClick: (e: React.MouseEvent<HTMLElement>) => {
+              onClick?.(e);
+              child.props?.onClick?.(e);
+            },
+          });
+        }
+      })
+      .filter(Boolean);
+
+    const rightSectionItems = React.Children.toArray(children)
+      .map((child) => {
+        if (
+          React.isValidElement(child) &&
+          (child as React.ReactElement<NavigationItemProps>).props.navGroup === 'nav-link-end'
+        ) {
+          return React.cloneElement(child as React.ReactElement<NavigationItemProps>, {
+            onClick: (e: React.MouseEvent<HTMLElement>) => {
+              onClick?.(e);
+              child.props?.onClick?.(e);
+            },
+          });
+        }
+      })
+      .filter(Boolean);
+
     return (
       <ul
         aria-hidden={isOffScreen}

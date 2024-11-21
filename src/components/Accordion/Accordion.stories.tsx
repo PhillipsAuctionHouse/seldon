@@ -1,15 +1,16 @@
+import { faker } from '@faker-js/faker';
 import { Meta } from '@storybook/react';
-import Accordion, { AccordionProps } from './Accordion';
-import AccordionItem from './AccordionItem';
-import { AccordionItemVariant, AccordionVariants } from './types';
-import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
-import { LinkVariants } from '../Link';
 import { useState } from 'react';
+import { LinkVariants } from '../Link';
+import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
+import Accordion, { AccordionProps } from './Accordion';
+import AccordionItem, { AccordionItemProps } from './AccordionItem';
+import { AccordionItemVariant, AccordionVariants } from './types';
+import Button from '../Button/Button';
 
 const meta = {
   title: 'Components/Accordion',
   component: Accordion,
-
   argTypes: {
     variant: {
       options: Object.values(AccordionVariants),
@@ -23,12 +24,7 @@ const meta = {
 export default meta;
 
 const largeTextBlock = (
-  <div style={{ color: 'white', backgroundColor: '#d0d0d0', padding: 20 }}>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-    sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </div>
+  <div style={{ color: 'white', backgroundColor: '#d0d0d0', padding: 20 }}>{faker.lorem.paragraphs(20)}</div>
 );
 const largeTextItems = [
   {
@@ -50,7 +46,7 @@ const largeTextItems = [
   },
 ];
 
-export const AccordionLarge = (props: AccordionProps) => (
+export const AccordionLarge = ({ transitionTimeInMs = 250, ...props }: AccordionProps & AccordionItemProps) => (
   <Accordion {...props}>
     {largeTextItems.map((item, index, arr) => (
       <AccordionItem
@@ -59,6 +55,7 @@ export const AccordionLarge = (props: AccordionProps) => (
         key={`accordion-key-${item?.label}`}
         id={`accordion-item-${index}`}
         hasTransition
+        transitionTimeInMs={transitionTimeInMs}
       >
         {item?.children}
       </AccordionItem>
@@ -104,7 +101,7 @@ const smallTextItems = [
   },
 ];
 
-export const AccordionSmall = (props: AccordionProps) => (
+export const AccordionSmall = ({ transitionTimeInMs, ...props }: AccordionProps & AccordionItemProps) => (
   <Accordion {...props}>
     {smallTextItems.map((item, index, arr) => (
       <AccordionItem
@@ -112,6 +109,7 @@ export const AccordionSmall = (props: AccordionProps) => (
         isLastItem={index === arr?.length - 1}
         key={`accordion-key-${item?.label}`}
         id={`accordion-item-${index}`}
+        transitionTimeInMs={transitionTimeInMs}
       >
         {item?.children}
       </AccordionItem>
@@ -119,7 +117,7 @@ export const AccordionSmall = (props: AccordionProps) => (
   </Accordion>
 );
 
-export const AccordionSubmenu = (props: AccordionProps) => {
+export const AccordionSubmenu = ({ transitionTimeInMs, ...props }: AccordionProps & AccordionItemProps) => {
   const [currentLanguage, setCurrentLanguage] = useState('English');
   return (
     <Accordion {...props} id="accordion-item-submenu">
@@ -127,6 +125,7 @@ export const AccordionSubmenu = (props: AccordionProps) => {
         variant={AccordionItemVariant.lg}
         id="languageselector"
         label={<NavigationItem label={currentLanguage}></NavigationItem>}
+        transitionTimeInMs={transitionTimeInMs}
       >
         <div style={{ paddingLeft: 'var(--spacing-sm)' }}>
           <NavigationItem
@@ -142,5 +141,36 @@ export const AccordionSubmenu = (props: AccordionProps) => {
         </div>
       </AccordionItem>
     </Accordion>
+  );
+};
+
+export const ControlledAccordion = ({ items, ...props }: AccordionProps & { items: AccordionItemProps[] }) => {
+  const [expandedAccordionItems, setExpandedAccordionItems] = useState<string[] | undefined>();
+
+  const middleAccordionItemId = 'accordion-item-1';
+  return (
+    <div>
+      <Button
+        onClick={() =>
+          setExpandedAccordionItems(
+            expandedAccordionItems?.includes(middleAccordionItemId)
+              ? expandedAccordionItems?.filter((item) => item !== middleAccordionItemId)
+              : [...(expandedAccordionItems ?? []), middleAccordionItemId],
+          )
+        }
+      >{`${expandedAccordionItems?.includes(middleAccordionItemId) ? 'Collapse' : 'Expand'} middle accordion item`}</Button>
+      <Accordion {...props} value={expandedAccordionItems} onValueChanged={setExpandedAccordionItems}>
+        {smallTextItems.map((item, index, arr) => (
+          <AccordionItem
+            {...item}
+            isLastItem={index === arr?.length - 1}
+            key={`accordion-key-${item?.label}`}
+            id={`accordion-item-${index}`}
+          >
+            {item?.children}
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </div>
   );
 };

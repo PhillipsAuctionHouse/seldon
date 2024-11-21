@@ -32,4 +32,15 @@ describe('Button', () => {
     expect(buttonElement).toHaveClass(`${px}-button--secondary`);
     expect(buttonElement).toHaveClass(`${px}-button--icon-last`);
   });
+  it('should render as an anchor tag if href is passed', () => {
+    render(<Button href="https://example.com">Link</Button>);
+    const anchorElement = screen.getByText('Link');
+    expect(anchorElement.tagName).toBe('A');
+    expect(anchorElement).toHaveAttribute('href', 'https://example.com');
+  });
+  it('should render as a button if no href is passed', () => {
+    render(<Button>Click me</Button>);
+    const buttonElement = screen.getByText('Click me');
+    expect(buttonElement.tagName).toBe('BUTTON');
+  });
 });

@@ -37,9 +37,10 @@
   font-family: Distinct, sans-serif;
 }
 
-@mixin underline($padding: 0, $width: 0.0625rem, $color: $pure-black) {
-  border-bottom: $width solid $color;
-  padding-bottom: $padding;
+@mixin underline($offset: $spacing-xsm, $thickness: 1px, $color: $pure-black) {
+  text-decoration: underline;
+  text-decoration-thickness: $thickness;
+  text-underline-offset: $offset;
 }
 
 @mixin hText(

@@ -7,6 +7,13 @@ export * from './assets/icons';
 // 📑 Pages
 export { default as Page } from './pages/Page';
 
+// utils
+export * from './utils/hooks';
+export * from './providers/SeldonProvider/utils';
+
+// Types, Enums
+export * from './types/commonTypes';
+
 // ⚛️ Components
 export { default as Button, type ButtonProps } from './components/Button/Button';
 export { ButtonVariants } from './components/Button/types';
@@ -40,6 +47,7 @@ export { default as GridItem, type GridItemProps } from './components/GridItem/G
 export { GridItemAlign } from './components/GridItem/types';
 export { default as Search, type SearchProps } from './components/Search/Search';
 export { default as Select, type SelectProps } from './components/Select/Select';
+export { SelectVariants } from './components/Select/types';
 export { default as SplitPanel, type SplitPanelProps } from './components/SplitPanel/SplitPanel';
 export { default as Subscribe, type SubscribeProps } from './patterns/Subscribe/Subscribe';
 export { SubscriptionState } from './patterns/Subscribe/types';
@@ -53,7 +61,7 @@ export {
   type PaginationOption,
   type PaginationOptionValue,
 } from './components/Pagination/Pagination';
-
+export { default as TagsList } from './components/Tags/Tags';
 export {
   default as StatefulViewingsList,
   type StatefulViewingsListProps,
@@ -84,3 +92,7 @@ export * from './patterns/SaleHeaderBanner';
 export * from './utils/hooks';
 export * from './patterns/FilterMenu';
 export * from './components/Filter';
+export * from './components/Countdown';
+export * from './components/Countdown/types';
+export * from './patterns/ObjectTile';
+export * from './patterns/BidSnapshot';

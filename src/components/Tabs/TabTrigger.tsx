@@ -1,8 +1,8 @@
+import * as TabsPrimitive from '@radix-ui/react-tabs';
 import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
-import * as TabsPrimitive from '@radix-ui/react-tabs';
 
-export interface TabTriggerProps extends ComponentProps<'div'> {
+export interface TabTriggerProps extends Omit<ComponentProps<'div'>, 'onClick'> {
   /**
    * Value corresponding to the tab
    */
@@ -12,7 +12,7 @@ export interface TabTriggerProps extends ComponentProps<'div'> {
    * @param value
    * @returns
    */
-  onTabClick?: (value: string) => void;
+  onClick?: (value: string) => void;
   /**
    * Tab label
    */
@@ -25,15 +25,15 @@ export interface TabTriggerProps extends ComponentProps<'div'> {
  * @param {TabTriggerProps} props - The props for the TabTrigger component.
  * @returns {JSX.Element} The rendered TabTrigger component.
  */
-const TabTrigger = forwardRef<HTMLButtonElement, TabTriggerProps>(({ value, onTabClick, children, ...props }, ref) => {
-  const handleClick = () => {
-    if (onTabClick) {
-      onTabClick(value);
-    }
-  };
+const TabTrigger = forwardRef<HTMLButtonElement, TabTriggerProps>(({ value, onClick, children, ...props }, ref) => {
   const { className: baseClassName } = getCommonProps(props, 'TabsContainer');
   return (
-    <TabsPrimitive.Trigger value={value} className={`${baseClassName}__tabs-trigger`} onClick={handleClick} ref={ref}>
+    <TabsPrimitive.Trigger
+      value={value}
+      className={`${baseClassName}__tabs-trigger`}
+      onClick={() => onClick?.(value)}
+      ref={ref}
+    >
       {children}
     </TabsPrimitive.Trigger>
   );

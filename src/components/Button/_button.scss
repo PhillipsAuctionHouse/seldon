@@ -66,6 +66,20 @@
     }
   }
 
+  &--link {
+    background-color: transparent;
+    border: 0;
+    color: $pure-black;
+    height: auto;
+    padding: 0;
+    text-decoration: underline;
+
+    &:hover {
+      background-color: transparent;
+      color: $pure-black;
+    }
+  }
+
   &--secondary,
   &--ghost {
     background-color: $pure-white;
@@ -189,6 +203,10 @@
   &--ghost:disabled,
   &--tertiary:disabled {
     border-color: transparent;
+  }
+
+  &--link:disabled {
+    border: 0;
   }
 
   * {

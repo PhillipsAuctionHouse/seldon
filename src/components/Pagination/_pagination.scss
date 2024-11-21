@@ -29,13 +29,19 @@
       appearance: none;
       border: none;
       font-variation-settings: 'wght' 600;
-      line-height: 2.5rem;
+      line-height: 1.75rem;
       margin-bottom: 0;
       outline: none;
+      padding: 0 $spacing-xsm;
       text-align: center;
       text-align-last: center;
       text-decoration: underline;
-      text-underline-offset: 10px;
+      text-underline-offset: 6px;
+
+      @include isHeaderDesktop {
+        line-height: 2.5rem;
+        text-underline-offset: 10px;
+      }
 
       &:disabled {
         border: 1px solid $medium-gray;

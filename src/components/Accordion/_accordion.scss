@@ -37,16 +37,24 @@
     @include text($body2);
   }
 
+  &--transition[data-state='open'] {
+    animation: slide-down var(--seldon-accordion-transition-time) ease-in-out;
+  }
+
+  &--transition[data-state='closed'] {
+    animation: slide-up var(--seldon-accordion-transition-time) ease-in-out;
+  }
+
   &--transition {
     overflow: hidden;
   }
 
   &--transition[data-state='open'] {
-    animation: slide-down 250ms ease-in-out;
+    animation: slide-down var(--seldon-accordion-transition-time) ease-in-out;
   }
 
   &--transition[data-state='closed'] {
-    animation: slide-up 250ms ease-in-out;
+    animation: slide-up var(--seldon-accordion-transition-time) ease-in-out;
   }
 
   &[data-state='open'] {

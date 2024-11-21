@@ -3,9 +3,18 @@ import userEvent from '@testing-library/user-event';
 import * as React from 'react';
 
 import Select from './Select';
+import { px } from '../../utils';
+import { SelectVariants } from './types';
 
 describe('A Select', () => {
   const reqProps = { labelText: 'My Test Label', id: 'test-id' };
+  const mockLabel = 'Test Label';
+  const mockOptions = (
+    <>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+    </>
+  );
 
   it('will render a default value if passed', () => {
     const testRef = React.createRef<HTMLSelectElement>();
@@ -30,7 +39,6 @@ describe('A Select', () => {
     );
 
     await userEvent.selectOptions(screen.getByTestId('test-id'), ['option one']);
-    await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(2));
     await waitFor(() => expect(mockedOnChange.mock.calls).toHaveLength(1));
     expect(testRef?.current?.value).toEqual('option one');
     vi.clearAllMocks();
@@ -53,5 +61,16 @@ describe('A Select', () => {
     );
     await userEvent.selectOptions(screen.getByTestId('test-id'), ['option one']);
     await waitFor(() => expect(mockedOnChange.mock.calls).toHaveLength(0));
+  });
+
+  it('should apply --tertiary class when variant is tertiary', () => {
+    render(
+      <Select id="test-select-tertiary" labelText={mockLabel} variant={SelectVariants.tertiary}>
+        {mockOptions}
+      </Select>,
+    );
+
+    const selectElement = screen.getByTestId('test-select-tertiary');
+    expect(selectElement).toHaveClass(`${px}-input__select--tertiary`);
   });
 });

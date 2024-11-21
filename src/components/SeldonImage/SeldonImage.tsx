@@ -1,6 +1,8 @@
-import { ComponentProps, forwardRef, useRef, useState, useEffect } from 'react';
-import { getCommonProps } from '../../utils';
+import { ComponentProps, forwardRef, useRef, useState, useEffect, useCallback } from 'react';
 import classnames from 'classnames';
+
+import { getCommonProps } from '../../utils';
+import { PhillipsLogo } from '../../assets/icons';
 
 type AspectRatio = '16/9' | '1/1' | 'none';
 
@@ -39,6 +41,17 @@ export interface SeldonImageProps extends ComponentProps<'div'> {
   errorText?: string;
 }
 
+function isImageValid(src: string) {
+  const promise = new Promise((resolve) => {
+    const img = document.createElement('img');
+    img.onerror = () => resolve(false);
+    img.onload = () => resolve(true);
+    img.src = src;
+  });
+
+  return promise;
+}
+
 /**
  * ## Overview
  *
@@ -69,11 +82,18 @@ const SeldonImage = forwardRef<HTMLDivElement, SeldonImageProps>(
 
     const [loadingState, setLoadingState] = useState<'loading' | 'loaded' | 'error'>('loading');
 
-    useEffect(() => {
-      if (imgRef.current?.complete) {
+    const loadImage = useCallback(async () => {
+      const isValid = await isImageValid(src);
+      if (!isValid) {
+        setLoadingState('error');
+      } else {
         setLoadingState('loaded');
       }
-    }, []);
+    }, [src]);
+
+    useEffect(() => {
+      void loadImage();
+    }, [loadImage]);
 
     return (
       <div
@@ -95,10 +115,14 @@ const SeldonImage = forwardRef<HTMLDivElement, SeldonImageProps>(
             style={{ backgroundImage: `url(${src})` }}
           />
         )}
-        {loadingState === 'error' && <div className={`${baseClassName}--error`}>{`${errorText}`}</div>}
+        {loadingState === 'error' ? (
+          <div className={`${baseClassName}--error`}>
+            <PhillipsLogo aria-label={errorText} />
+          </div>
+        ) : null}
         <img
           className={classnames(`${baseClassName}-img`, imageClassName, {
-            [`${baseClassName}-img--hidden`]: loadingState === 'loading' || loadingState === 'error',
+            [`${baseClassName}-img--hidden`]: loadingState !== 'loaded',
             [`${baseClassName}-img--object-fit-${objectFit}`]: objectFit !== 'none',
           })}
           style={imageStyle}

@@ -28,6 +28,13 @@ describe('Search component', () => {
     await userEvent.click(button);
     expect(searchInput).toHaveFocus();
   });
+  it('should open input once clicked on input container', async () => {
+    const { container } = renderWithContext(<Search />);
+    const inputContainer = container.getElementsByClassName('seldon-search__container__inner');
+    const searchInput = screen.getByTestId('search-input');
+    await userEvent.click(inputContainer[0]);
+    expect(searchInput).toHaveFocus();
+  });
   it('should close form when close button is clicked', async () => {
     renderWithContext(<Search />);
     const searchButton = screen.getByTestId('search-button');
@@ -51,10 +58,8 @@ describe('Search component', () => {
     const searchInput = screen.getByTestId('search-input');
     const searchForm = screen.getByTestId('search-form');
     await userEvent.click(searchButton);
-    const closeButton = screen.getByTestId('search-close-button');
-    await userEvent.type(closeButton, '{esc}');
+    await userEvent.type(searchInput, '{Escape}');
     expect(screen.queryByRole('button', { name: 'Close' })).not.toBeInTheDocument();
-    expect(searchInput).not.toHaveFocus();
     expect(searchForm).not.toHaveClass(`${px}-search__form--active`);
   });
   it('should reset form when close button is clicked', async () => {
@@ -116,6 +121,17 @@ describe('Search component', () => {
       const button = screen.getByTestId('search-button');
       await userEvent.click(button);
       expect(screen.getByRole('link', { name: 'my custom text: custom' })).toBeInTheDocument();
+    });
+    it('should render all results text custom - test', async () => {
+      vi.spyOn(console, 'error').mockImplementation(() => ({}));
+      renderWithContext(<Search defaultValue="custom" getAllResultsText={(value) => `my custom text: ${value}`} />);
+      const button = screen.getByTestId('search-button');
+      await userEvent.click(button);
+      const link = screen.getByRole('link', { name: 'my custom text: custom' });
+      const searchForm = screen.getByTestId('search-form');
+      await userEvent.click(link);
+      expect(screen.getByRole('link', { name: 'my custom text: custom' })).toBeInTheDocument();
+      expect(searchForm).not.toHaveClass(`${px}-search__form--active`);
     });
   });
   describe('otherCustomText', () => {

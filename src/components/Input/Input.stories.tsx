@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react';
-
 import Input, { InputProps } from './Input';
+import { useState } from 'react';
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
   title: 'Components/Input',
@@ -182,6 +182,37 @@ RangeInput.args = {
 };
 
 RangeInput.argTypes = argTypes;
+
+export const ControlledInput = ({ playgroundWidth, ...args }: StoryProps) => {
+  const [value, setValue] = useState(args.defaultValue);
+  return (
+    <div style={{ width: playgroundWidth, margin: '1rem' }}>
+      <Input
+        key={args.defaultValue as string}
+        {...args}
+        id="Input-1"
+        value={value}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
+      />
+    </div>
+  );
+};
+
+ControlledInput.args = {
+  playgroundWidth: 300,
+  className: 'input-test-class',
+  placeholder: 'Placeholder text',
+  invalid: false,
+  invalidText: 'Error message',
+  disabled: false,
+  defaultValue: 'My values',
+  labelText: 'Label text',
+  warn: false,
+  warnText: 'Warning message that is really long can wrap to more lines.',
+  size: 'md',
+};
+
+ControlledInput.argTypes = argTypes;
 
 export const Playground = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>

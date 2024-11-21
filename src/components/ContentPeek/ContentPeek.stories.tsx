@@ -8,6 +8,7 @@ const meta = {
     contentExpandText: { control: 'text' },
     contentCollapseText: { control: 'text' },
     maxHeight: { control: 'number' },
+    minHeightThreshold: { control: 'number' },
   },
 } satisfies Meta<typeof ContentPeek>;
 

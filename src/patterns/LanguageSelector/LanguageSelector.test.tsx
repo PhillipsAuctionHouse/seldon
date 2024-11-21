@@ -3,6 +3,7 @@ import { runCommonTests } from '../../utils/testUtils';
 import { SupportedLanguages } from '../../types/commonTypes';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
+import { getLanguageLabel } from './utils';
 
 describe('LanguageSelector', () => {
   runCommonTests(LanguageSelector, 'LanguageSelector');
@@ -57,4 +58,13 @@ describe('LanguageSelector', () => {
 
     expect(onLanguageChange).toHaveBeenCalledWith('en');
   });
+});
+
+test('getLanguageLabel', () => {
+  const languageOptions: LanguageOption[] = [
+    { label: 'English', value: SupportedLanguages.en },
+    { label: '中文', value: SupportedLanguages.zh },
+  ];
+  const currentLanguage = SupportedLanguages.zh;
+  expect(getLanguageLabel({ languageOptions, currentLanguage })).toBe('中文');
 });

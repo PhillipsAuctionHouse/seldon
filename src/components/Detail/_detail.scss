@@ -26,6 +26,26 @@
     @media (max-width: $breakpoint-sm) {
       width: 96px;
     }
+
+    &--no-wrap {
+      width: unset;
+
+      @media (max-width: $breakpoint-lg) {
+        width: unset;
+      }
+
+      @media (max-width: $breakpoint-md) {
+        width: unset;
+      }
+
+      @media (max-width: $breakpoint-sm) {
+        width: unset;
+      }
+    }
+
+    span {
+      font-variation-settings: 'wght' 400;
+    }
   }
 
   &__value {
