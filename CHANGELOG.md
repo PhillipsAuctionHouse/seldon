@@ -1,3 +1,11 @@
+## [1.96.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.96.0...v1.96.1) (2024-11-21)
+
+
+### Bug Fixes
+
+* **deps:** bump cross-spawn from 7.0.3 to 7.0.6 ([#431](https://github.com/PhillipsAuctionHouse/seldon/issues/431)) ([b788a90](https://github.com/PhillipsAuctionHouse/seldon/commit/b788a905e9cc06343ff62a2c6404511208ae2dec))
+* **objecttile:** L3-4346 - ensure objecttile content is left aligned ([#433](https://github.com/PhillipsAuctionHouse/seldon/issues/433)) ([3e0707d](https://github.com/PhillipsAuctionHouse/seldon/commit/3e0707d4661ecae6d0f4fd13d28ee9bfb19dbf98))
+
 # [1.96.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.95.1...v1.96.0) (2024-11-21)
 
 
