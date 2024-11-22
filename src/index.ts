@@ -87,6 +87,11 @@ export * from './components/PinchZoom';
 export * from './components/Tabs';
 export * from './components/SeldonImage';
 export * from './patterns/SaleHeaderBanner';
+
+// utils
+export * from './utils/hooks';
+export * from './patterns/FilterMenu';
+export * from './components/Filter';
 export * from './components/Countdown';
 export * from './components/Countdown/types';
 export * from './patterns/ObjectTile';

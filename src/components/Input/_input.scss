@@ -40,7 +40,7 @@ $lg: #{$px}-input--lg;
       font-variation-settings: 'wght' 400;
     }
 
-    &:focus-within {
+    &:focus-visible {
       outline: 1px solid $pure-black;
     }
   }

@@ -214,7 +214,7 @@ const ViewingsListCard = ({
         labelText={locationLabel}
         size="sm"
         name="location"
-        invalid={invalidFields?.location}
+        invalid={!!invalidFields?.location}
         invalidText={invalidFields?.location}
         readOnly={!editState}
       />

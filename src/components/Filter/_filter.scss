@@ -1,0 +1,112 @@
+@use '#scss/allPartials' as *;
+
+$default-transition-duration: 0.3s;
+$default-easing: ease-in-out;
+$chevron-scale: 0.8;
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.#{$px}-filter {
+  &-header {
+    margin-bottom: $spacing-md;
+
+    legend {
+      padding-inline: 0; // needed for default browser styles
+    }
+
+    &__back {
+      @include text($body2); // workaround where the tertiary button text is not scaling at different breakpoints
+
+      margin-top: $spacing-sm;
+    }
+
+    &__chevron {
+      transform: rotateY(180deg) scale($chevron-scale);
+    }
+  }
+
+  &__chevron {
+    transform: scale($chevron-scale);
+  }
+
+  &__fieldset {
+    border: 0;
+    margin: 0 3px 0 0; // save room for input borders
+    padding: 0;
+  }
+
+  &__filters {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    padding-bottom: $spacing-sm;
+
+    .#{$px}-input {
+      align-items: center;
+      height: unset;
+
+      &__label {
+        @include text($body2);
+
+        color: inherit;
+        margin-bottom: 0;
+      }
+
+      &__input {
+        align-self: center;
+        height: $body-line-height-size3;
+        margin-bottom: 0;
+        width: $body-line-height-size3;
+      }
+
+      &__validation {
+        display: none;
+      }
+    }
+  }
+
+  &__view-all {
+    @include text($body2); // workaround where the tertiary button text is not scaling at different breakpoints
+  }
+
+  &.is-opening {
+    animation: slide-in $default-transition-duration $default-easing forwards;
+  }
+
+  &.is-closing {
+    animation: slide-out $default-transition-duration $default-easing forwards;
+  }
+}
+
+.#{$px}-filter-input {
+  &__input {
+    &__wrapper {
+      display: flex;
+      flex-direction: row;
+      height: 40px;
+      justify-content: space-between;
+    }
+  }
+}

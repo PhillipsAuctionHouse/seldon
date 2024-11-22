@@ -16,7 +16,7 @@ describe('ViewingsList', () => {
   it('renders a list of ViewingsList cards when passed an array of viewing list objects', async () => {
     render(<StatefulViewingsList {...reqProps} defaultViewing={defaultViewing} />);
     await waitFor(() => expect(screen.getByDisplayValue('One title')).toBeInTheDocument());
-    expect(screen.getByTestId<HTMLInputElement>('enableOnSite-test-id').value).toEqual('true');
+    expect(screen.getByTestId<HTMLInputElement>('enableOnSite-test-id').value).toEqual('on');
   });
 
   it('will create a new ViewingsListCard when I click "Add Viewing" and persist when I save', async () => {
@@ -158,18 +158,18 @@ describe('ViewingsList', () => {
           address2: 'Coral Springs, FL 07677',
           address3: 'United States',
           addressUrl: 'HTTP://WWW.WEBSITE.COM',
-          enableOnSite: 'true',
+          enableOnSite: 'on',
           location: 'One title',
           previewDates: '3-6 November',
           previewHours1: '8am - 9pm',
           previewHours2: 'After closing',
           previewLabelValue: 'Opening Night',
-          previewOn: 'true',
+          previewOn: 'on',
           viewingDates: '3-6 December',
           viewingHours1: '7am - 8pm',
           viewingHours2: '9:30pm - 10pm',
           viewingLabelValue: 'Open to the public',
-          emailOn: 'true',
+          emailOn: 'on',
           email: 'contact',
           emailLink: 'contact@phillips.com',
         }),

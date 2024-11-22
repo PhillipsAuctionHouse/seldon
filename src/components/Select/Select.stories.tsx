@@ -90,7 +90,7 @@ const argTypes = {
 
 export const Playground = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <Select key={args.defaultValue} {...args} id="Input-1">
+    <Select key={args.defaultValue?.toString()} {...args} id="Input-1">
       <option>Option 1</option>
       <option>Option 2</option>
       <option disabled>Option 3</option>
@@ -118,7 +118,7 @@ Playground.argTypes = argTypes;
 
 export const Tertiary = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <Select key={args.defaultValue} {...args} id="Input-1" value="show-lot" hideLabel={true}>
+    <Select key={args.defaultValue?.toString()} {...args} id="Input-1" value="show-lot" hideLabel={true}>
       <option key="0" value="show-lot" hidden>
         Show Lot No.
       </option>

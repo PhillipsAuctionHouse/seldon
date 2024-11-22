@@ -13,7 +13,7 @@ const VolatileComponent = ({ throwError }: WrappedProps) => {
       throwError();
     }
   }, [throwError]);
-  return <Input {...reqProps} defaultValue={['2023-06-01T08:30', '2023-06-05T08:30']} />;
+  return <Input {...reqProps} defaultValue="2023-06-01T08:30" />;
 };
 
 describe('An ErrorBoundary', () => {
