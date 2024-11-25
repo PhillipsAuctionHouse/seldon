@@ -1,6 +1,10 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-sale-header-banner {
+  &__wrapper {
+    display: flex;
+  }
+
   display: flex;
   flex-direction: column;
   margin-bottom: $spacing-md;
