@@ -41,7 +41,6 @@ export const Playground = (props: BidSnapshotProps) => {
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
-  bidStatus: BidStatusEnum.Winning,
   currency: '$',
   numberOfBids: 3,
   auctionStatus: AuctionStatus.live,

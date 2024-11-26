@@ -24,3 +24,5 @@ export { default as Share } from './share.svg?react';
 export { default as Spotify } from './spotify.svg?react';
 export { default as WeChat } from './wechat.svg?react';
 export { default as Youtube } from './youtube.svg?react';
+export { default as GreenCircle } from './icon-green-circle.svg?react';
+export { default as RedCircle } from './icon-red-circle.svg?react';
