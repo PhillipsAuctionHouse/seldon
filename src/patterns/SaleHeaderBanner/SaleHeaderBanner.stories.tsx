@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 import SaleHeaderBanner, { SaleHeaderBannerProps } from './SaleHeaderBanner';
-import { AuctionStatus } from '../../types/commonTypes';
+import { LotStatus } from '../../types/commonTypes';
 import SaleHeaderBrowseAuctions from './SaleHeaderBrowseAuctions';
 import { Countdown } from '../../components/Countdown';
 import { addMinutes } from 'date-fns';
@@ -18,14 +18,14 @@ Playground.args = {
   auctionTitle: 'Modern & Contemporary Art: Online Auction, New York',
   occurrenceInformation: [{ occurrenceLabel: 'Begins', date: '10:00am EDT, 14 Sep 2024' }],
   location: 'New York',
-  auctionState: AuctionStatus.ready,
+  auctionState: LotStatus.ready,
   imageSrcUrl:
     'https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg',
 };
 
 Playground.argTypes = {
   auctionState: {
-    options: Object.values(AuctionStatus),
+    options: Object.values(LotStatus),
     control: {
       type: 'select',
     },
@@ -39,7 +39,7 @@ export const PreSale = (props: SaleHeaderBannerProps) => (
     imageSrcUrl="https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg"
     occurrenceInformation={[{ date: '10:00am EDT, 4 Sep 2024', occurrenceLabel: 'Begins' }]}
     location="New York"
-    auctionState={AuctionStatus.ready}
+    auctionState={LotStatus.ready}
   />
 );
 
@@ -53,7 +53,7 @@ export const PreSaleTwoOccurrences = (props: SaleHeaderBannerProps) => (
       { date: '10:00am EDT, 5 Sep 2024', occurrenceLabel: 'Session II' },
     ]}
     location="New York"
-    auctionState={AuctionStatus.ready}
+    auctionState={LotStatus.ready}
   />
 );
 
@@ -68,7 +68,7 @@ export const PreSaleThreeOccurrences = (props: SaleHeaderBannerProps) => (
       { date: '10:00am EDT, 6 Sep 2024', occurrenceLabel: 'Session III' },
     ]}
     location="New York"
-    auctionState={AuctionStatus.ready}
+    auctionState={LotStatus.ready}
   />
 );
 
@@ -79,7 +79,7 @@ export const OpenForBidding = (props: SaleHeaderBannerProps) => (
     imageSrcUrl="https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg"
     occurrenceInformation={[{ date: '10:00am EDT, 4 Sep 2024', occurrenceLabel: 'Lots Begin to Close' }]}
     location="New York"
-    auctionState={AuctionStatus.live}
+    auctionState={LotStatus.live}
   >
     <Countdown endDateTime={addMinutes(new Date(), 20)} />
   </SaleHeaderBanner>
@@ -92,7 +92,7 @@ export const Closed = (props: SaleHeaderBannerProps) => (
     imageSrcUrl="https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg"
     occurrenceInformation={[{ date: '4 Sep 2024', occurrenceLabel: 'Concluded' }]}
     location="New York"
-    auctionState={AuctionStatus.past}
+    auctionState={LotStatus.past}
   >
     <SaleHeaderBrowseAuctions />
   </SaleHeaderBanner>

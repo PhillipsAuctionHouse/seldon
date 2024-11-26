@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import SaleHeaderBanner, { SaleHeaderBannerProps } from './SaleHeaderBanner';
-import { AuctionStatus } from '../../types/commonTypes';
+import { LotStatus } from '../../types/commonTypes';
 import SaleHeaderBrowseAuctions from './SaleHeaderBrowseAuctions';
 import { Countdown } from '../../components/Countdown';
 import { addDays } from 'date-fns';
@@ -10,7 +10,7 @@ const defaultProps: SaleHeaderBannerProps = {
   auctionTitle: 'Sample Auction',
   location: 'New York',
   occurrenceInformation: [{ date: '2023-12-01', occurrenceLabel: 'Auction Date' }],
-  auctionState: AuctionStatus.ready,
+  auctionState: LotStatus.ready,
   imageSrcUrl: 'https://example.com/image.jpg',
 };
 
@@ -43,13 +43,13 @@ describe('SaleHeaderBanner', () => {
   });
 
   it('does not render the "Register to Bid" button when auction is closed', () => {
-    render(<SaleHeaderBanner {...defaultProps} auctionState={AuctionStatus.past} />);
+    render(<SaleHeaderBanner {...defaultProps} auctionState={LotStatus.past} />);
     expect(screen.queryByText('Register to Bid')).not.toBeInTheDocument();
   });
 
   it('renders the countdown timer when auction is open for bidding', () => {
     render(
-      <SaleHeaderBanner {...defaultProps} auctionState={AuctionStatus.live}>
+      <SaleHeaderBanner {...defaultProps} auctionState={LotStatus.live}>
         <Countdown endDateTime={addDays(new Date(), 2)} />
       </SaleHeaderBanner>,
     );
@@ -58,7 +58,7 @@ describe('SaleHeaderBanner', () => {
 
   it('renders the "Browse Upcoming Sale" link when auction is closed', () => {
     render(
-      <SaleHeaderBanner {...defaultProps} auctionState={AuctionStatus.past}>
+      <SaleHeaderBanner {...defaultProps} auctionState={LotStatus.past}>
         <SaleHeaderBrowseAuctions />
       </SaleHeaderBanner>,
     );
@@ -80,7 +80,7 @@ describe('SaleHeaderBanner', () => {
 
   it('renders children when auction is open for bidding', () => {
     render(
-      <SaleHeaderBanner {...defaultProps} auctionState={AuctionStatus.live}>
+      <SaleHeaderBanner {...defaultProps} auctionState={LotStatus.live}>
         <div>Child Component</div>
       </SaleHeaderBanner>,
     );
@@ -89,7 +89,7 @@ describe('SaleHeaderBanner', () => {
 
   it('renders children when auction is closed', () => {
     render(
-      <SaleHeaderBanner {...defaultProps} auctionState={AuctionStatus.past}>
+      <SaleHeaderBanner {...defaultProps} auctionState={LotStatus.past}>
         <div>Child Component</div>
       </SaleHeaderBanner>,
     );
