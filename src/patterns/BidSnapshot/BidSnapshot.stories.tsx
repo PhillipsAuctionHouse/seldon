@@ -4,7 +4,7 @@ import { enUS } from 'date-fns/locale';
 
 import BidSnapshot, { BidSnapshotProps } from './BidSnapshot';
 import BidMessage from './BidMessage';
-import { LotStatus } from '../../types/commonTypes';
+import { LotAuctionStatus } from '../../types/commonTypes';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -23,12 +23,12 @@ export const Playground = (props: BidSnapshotProps) => {
       activeBid={activeBid}
       lotStatus={lotStatus}
       currentBid={currentBid}
-      lotCloseDate={lotStatus === LotStatus.ready ? undefined : lotCloseDate}
+      lotCloseDate={lotStatus === LotAuctionStatus.ready ? undefined : lotCloseDate}
       {...rest}
     >
-      {activeBid === currentBid && lotStatus === LotStatus.live ? (
+      {activeBid === currentBid && lotStatus === LotAuctionStatus.live ? (
         <BidMessage message="With You" />
-      ) : activeBid === currentBid && lotStatus === LotStatus.past ? (
+      ) : activeBid === currentBid && lotStatus === LotAuctionStatus.past ? (
         <BidMessage message="Winning Bid not including Buyer Premium" />
       ) : null}
     </BidSnapshot>
@@ -40,7 +40,7 @@ Playground.args = {
   activeBid: 1000,
   currency: '$',
   numberOfBids: 3,
-  lotStatus: LotStatus.live,
+  lotStatus: LotAuctionStatus.live,
   currentBid: 1000,
   lotCloseDate: addMinutes(new Date(), 20),
   lang: enUS,

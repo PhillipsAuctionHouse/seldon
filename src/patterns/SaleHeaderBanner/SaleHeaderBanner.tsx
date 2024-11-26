@@ -2,7 +2,7 @@ import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { SeldonImage } from '../../components/SeldonImage';
-import { LotStatus } from '../../types/commonTypes';
+import { LotAuctionStatus } from '../../types/commonTypes';
 import { Text, TextVariants } from '../../components/Text';
 import { PageContentWrapper as PageMargin } from '../../components/PageContentWrapper';
 import Button from '../../components/Button/Button';
@@ -36,7 +36,7 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
   /**
    * What is the current state of the auction?
    */
-  auctionState: LotStatus;
+  auctionState: LotAuctionStatus;
   /**
    * What text should the CTA button display?
    */
@@ -73,8 +73,8 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SaleHeaderBanner');
-    const isOpenForBidding = auctionState === LotStatus.live;
-    const isClosed = auctionState === LotStatus.past;
+    const isOpenForBidding = auctionState === LotAuctionStatus.live;
+    const isClosed = auctionState === LotAuctionStatus.past;
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         <SeldonImage
