@@ -5,7 +5,7 @@ import { enUS } from 'date-fns/locale';
 import BidSnapshot, { BidSnapshotProps } from './BidSnapshot';
 import BidMessage from './BidMessage';
 import { AuctionStatus } from '../../types/commonTypes';
-import { BidStatusEnum } from './types';
+import { BidMessageVariants, BidStatusEnum } from './types';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -19,7 +19,6 @@ const meta = {
 export default meta;
 export const Playground = (props: BidSnapshotProps) => {
   const { bidStatus, auctionStatus, lotCloseDate, currentBid, ...rest } = props;
-  const isHighBid = bidStatus === BidStatusEnum.Winning || bidStatus === BidStatusEnum.Won;
   return (
     <BidSnapshot
       bidStatus={bidStatus}
@@ -28,10 +27,13 @@ export const Playground = (props: BidSnapshotProps) => {
       lotCloseDate={auctionStatus === AuctionStatus.ready ? undefined : lotCloseDate}
       {...rest}
     >
-      {isHighBid && auctionStatus === AuctionStatus.live ? (
-        <BidMessage message="With You" />
-      ) : isHighBid && auctionStatus === AuctionStatus.past ? (
-        <BidMessage message="Winning Bid not including Buyer Premium" />
+      {bidStatus === BidStatusEnum.Winning ? <BidMessage message="With You" /> : null}
+      {bidStatus === BidStatusEnum.Won ? <BidMessage message="Won bid" /> : null}
+      {bidStatus === BidStatusEnum.Losing ? (
+        <BidMessage variant={BidMessageVariants.negative} message="Losing Bid" />
+      ) : null}
+      {bidStatus === BidStatusEnum.Lost ? (
+        <BidMessage variant={BidMessageVariants.negative} message="Lost Bid" />
       ) : null}
     </BidSnapshot>
   );
