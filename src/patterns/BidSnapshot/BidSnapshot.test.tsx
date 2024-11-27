@@ -2,6 +2,7 @@ import BidSnapshot from './BidSnapshot';
 import { runCommonTests } from '../../utils/testUtils';
 import { render, screen } from '@testing-library/react';
 import { AuctionStatus } from '../../types/commonTypes';
+import { BidStatusEnum } from './types';
 
 describe('BidSnapshot', () => {
   runCommonTests(BidSnapshot, 'BidSnapshot');
@@ -26,7 +27,7 @@ describe('BidSnapshot', () => {
         currentBid={300}
         numberOfBids={3}
         auctionStatus={AuctionStatus.past}
-        activeBid={300}
+        bidStatus={BidStatusEnum.Won}
       />,
     );
     expect(screen.getByText('Won for')).toBeInTheDocument();
@@ -40,7 +41,7 @@ describe('BidSnapshot', () => {
         numberOfBids={3}
         currentBid={300}
         auctionStatus={AuctionStatus.past}
-        activeBid={200}
+        bidStatus={BidStatusEnum.Lost}
       />,
     );
     expect(screen.getByText('Sold for')).toBeInTheDocument();

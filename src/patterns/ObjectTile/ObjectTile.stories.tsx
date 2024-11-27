@@ -2,7 +2,7 @@ import { Meta } from '@storybook/react';
 import { addMinutes } from 'date-fns';
 
 import ObjectTile, { ObjectTileProps } from './ObjectTile';
-import { BidMessage, BidSnapshot } from '../BidSnapshot';
+import { BidMessage, BidSnapshot, BidStatusEnum } from '../BidSnapshot';
 import { AuctionStatus } from '../../types/commonTypes';
 import { Favorite } from '../../assets/icons';
 
@@ -23,7 +23,7 @@ const args = {
     <>
       <BidSnapshot
         startingBid={50000}
-        activeBid={65000}
+        bidStatus={BidStatusEnum.Winning}
         auctionStatus={AuctionStatus.live}
         numberOfBids={2}
         lotCloseDate={addMinutes(new Date(), 20)}

@@ -1,18 +1,20 @@
 import { ComponentProps, forwardRef } from 'react';
 import classnames from 'classnames';
 
-import { getCommonProps } from '../../utils';
+import { findChildrenExcludingTypes, findChildrenOfType, getCommonProps } from '../../utils';
 import { DetailList } from '../DetailList/index';
 import { Detail } from '../../components/Detail/index';
 import { AuctionStatus, SupportedLanguages } from '../../types/commonTypes';
 import { Countdown } from '../../components/Countdown/index';
 import { CountdownVariants } from '../../components/Countdown/types';
+import { BidStatusEnum } from './types';
+import BidMessage from './BidMessage';
 
 export interface BidSnapshotProps extends ComponentProps<'div'> {
   /**
-   * Active bid of current signed in user. -  '1000'
+   * The user's current bid state, winning or losing, etc.
    */
-  activeBid?: number | null;
+  bidStatus?: BidStatusEnum;
   /**
    * State of the object
    */
@@ -84,7 +86,7 @@ const bidsTranslation = (numberOfBids: number) => (numberOfBids === 1 ? `${numbe
 const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
   (
     {
-      activeBid,
+      bidStatus,
       auctionStatus = AuctionStatus.ready,
       bidsLabelText = bidsTranslation,
       children,
@@ -108,11 +110,13 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'BidSnapshot');
 
     const hasBids = currentBid !== null && numberOfBids > 0;
-    const isTopBid = activeBid === currentBid;
+    const isTopBid = bidStatus === BidStatusEnum.Winning || bidStatus === BidStatusEnum.Won;
     const isReady = auctionStatus === AuctionStatus.ready;
     const isLive = auctionStatus === AuctionStatus.live;
     const isPast = auctionStatus === AuctionStatus.past;
     const hasCountdownTimer = isLive && lotCloseDate;
+    const bidMessage = findChildrenOfType(children, BidMessage);
+    const otherChildren = findChildrenExcludingTypes(children, [BidMessage]);
 
     const classes = classnames(baseClassName, className, {
       [`${baseClassName}--live`]: isLive,
@@ -133,7 +137,8 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
             hasWrap={false}
           />
         </DetailList>
-        {activeBid && !isReady ? children : null}
+        {bidStatus && !isReady ? bidMessage : null}
+        {otherChildren}
         {hasCountdownTimer ? (
           <Countdown
             endDateTime={lotCloseDate}
