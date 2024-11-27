@@ -30,6 +30,10 @@ export interface CountdownProps extends ComponentProps<'div'> {
    */
   locale?: SupportedLanguages;
   /**
+   * Displays a border below the Countdown if true
+   */
+  showBottomBorder?: boolean;
+  /**
    * Variant of the countdown
    */
   variant?: CountdownVariants;
@@ -52,6 +56,7 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
       intervalDescription,
       className,
       locale = 'en',
+      showBottomBorder = true,
       variant = CountdownVariants.default,
       ...props
     },
@@ -82,6 +87,7 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
         {...commonProps}
         className={classnames(baseClassName, className, {
           [`${baseClassName}--compact`]: variant === CountdownVariants.compact,
+          [`${baseClassName}--show-bottom-border`]: showBottomBorder,
         })}
         {...props}
         ref={ref}
