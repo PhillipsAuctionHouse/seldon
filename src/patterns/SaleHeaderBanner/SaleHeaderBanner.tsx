@@ -82,47 +82,44 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
     const isOpenForBidding = auctionState === AuctionStatus.live;
     const isClosed = auctionState === AuctionStatus.past;
     const showCountdown = isOpenForBidding && auctionEndTime;
-
     return (
-      <div className={`${baseClassName}__wrapper`}>
-        <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-          <SeldonImage
-            aspectRatio="16/9"
-            src={imageSrcUrl}
-            alt={String(auctionTitle)}
-            objectFit="cover"
-            className={`${baseClassName}__image`}
-          />
-          <PageMargin className={`${baseClassName}__stack-wrapper`} {...commonProps} {...props} ref={ref}>
-            {showCountdown && (
-              <Countdown endDateTime={new Date(auctionEndTime)} className={`${baseClassName}__countdown`} />
-            )}
-            <div className={`${baseClassName}__stack`}>
-              {isOpenForBidding && children}
-              <Text variant={TextVariants.title1}>{auctionTitle}</Text>
-              <Text variant={TextVariants.string2} className={`${baseClassName}__location`}>
-                {location}
-              </Text>
-              <div className={`${baseClassName}__occurrence-details`}>
-                {occurrenceInformation.map(({ date, occurrenceLabel }) => (
-                  <div className={`${baseClassName}__occurrence-details-text`} key={String(date)}>
-                    <Text variant={TextVariants.string2}>{occurrenceLabel}</Text>
-                    <Text variant={TextVariants.string2} className={`${baseClassName}__date`}>
-                      {date}
-                    </Text>
-                  </div>
-                ))}
+      <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
+        <SeldonImage
+          aspectRatio="16/9"
+          src={imageSrcUrl}
+          alt={String(auctionTitle)}
+          objectFit="cover"
+          className={`${baseClassName}__image`}
+        />
+        <PageMargin className={`${baseClassName}__stack-wrapper`} {...commonProps} {...props} ref={ref}>
+          {showCountdown && (
+            <Countdown endDateTime={new Date(auctionEndTime)} className={`${baseClassName}__countdown`} />
+          )}
+          <div className={`${baseClassName}__stack`}>
+            {isOpenForBidding && children}
+            <Text variant={TextVariants.title1}>{auctionTitle}</Text>
+            <Text variant={TextVariants.string2} className={`${baseClassName}__location`}>
+              {location}
+            </Text>
+            <div className={`${baseClassName}__occurrence-details`}>
+              {occurrenceInformation.map(({ date, occurrenceLabel }) => (
+                <div className={`${baseClassName}__occurrence-details-text`} key={String(date)}>
+                  <Text variant={TextVariants.string2}>{occurrenceLabel}</Text>
+                  <Text variant={TextVariants.string2} className={`${baseClassName}__date`}>
+                    {date}
+                  </Text>
+                </div>
+              ))}
 
-                {isClosed && children}
-              </div>
-              {!isClosed && (
-                <Button className={`${baseClassName}__cta`} onClick={onClick}>
-                  {ctaLabel}
-                </Button>
-              )}
+              {isClosed && children}
             </div>
-          </PageMargin>
-        </div>
+            {!isClosed && (
+              <Button className={`${baseClassName}__cta`} onClick={onClick}>
+                {ctaLabel}
+              </Button>
+            )}
+          </div>
+        </PageMargin>
       </div>
     );
   },
