@@ -44,7 +44,8 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
 
     const scrollToDot = useCallback((index: number) => {
       if (scrollableContainerRef.current) {
-        scrollableContainerRef.current.scrollTo({
+        scrollableContainerRef.current.scrollTo?.({
+          // 8 + 12 = width of dot plus gap
           left: index * (8 + 12) - scrollableContainerRef.current.offsetWidth / 2 + 10, // Center dot in container
           behavior: 'smooth',
         });
