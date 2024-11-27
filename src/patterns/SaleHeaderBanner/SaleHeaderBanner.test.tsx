@@ -3,7 +3,6 @@ import { describe, it, expect } from 'vitest';
 import SaleHeaderBanner, { SaleHeaderBannerProps } from './SaleHeaderBanner';
 import { AuctionStatus } from '../../types/commonTypes';
 import SaleHeaderBrowseAuctions from './SaleHeaderBrowseAuctions';
-import { Countdown } from '../../components/Countdown';
 import { addDays } from 'date-fns';
 
 const defaultProps: SaleHeaderBannerProps = {
@@ -47,13 +46,13 @@ describe('SaleHeaderBanner', () => {
     expect(screen.queryByText('Register to Bid')).not.toBeInTheDocument();
   });
 
-  it('renders the countdown timer when auction is open for bidding', () => {
+  it('renders the countdown timer when auction is open for bidding and there is an auctionEndTime', () => {
     render(
-      <SaleHeaderBanner {...defaultProps} auctionState={AuctionStatus.live}>
-        <Countdown endDateTime={addDays(new Date(), 2)} />
-      </SaleHeaderBanner>,
+      <SaleHeaderBanner {...defaultProps} auctionState={AuctionStatus.live} auctionEndTime={addDays(new Date(), 2)} />,
     );
-    expect(screen.getByText('Lots Close in')).toBeInTheDocument();
+    // The countdown component is rendered twice, once for mobile and once for desktop
+    // Only one is shown at a time based on the screen size
+    expect(screen.getAllByText('Lots Close in').length).toBeGreaterThan(0);
   });
 
   it('renders the "Browse Upcoming Sale" link when auction is closed', () => {
@@ -76,15 +75,6 @@ describe('SaleHeaderBanner', () => {
     render(<SaleHeaderBanner {...defaultProps} onClick={handleClick} />);
     screen.getByText('Register to Bid').click();
     expect(handleClick).toHaveBeenCalledTimes(1);
-  });
-
-  it('renders children when auction is open for bidding', () => {
-    render(
-      <SaleHeaderBanner {...defaultProps} auctionState={AuctionStatus.live}>
-        <div>Child Component</div>
-      </SaleHeaderBanner>,
-    );
-    expect(screen.getByText('Child Component')).toBeInTheDocument();
   });
 
   it('renders children when auction is closed', () => {
