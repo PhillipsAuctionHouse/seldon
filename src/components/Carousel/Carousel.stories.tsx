@@ -71,6 +71,36 @@ CarouselWithDots.args = { maxDots: 7 } satisfies CarouselProps & CarouselDotsPro
 
 CarouselWithDots.argTypes = {};
 
+export const CarouselWithDotsOverflow = (props: CarouselProps & CarouselDotsProps) => (
+  <Carousel {...props}>
+    <CarouselContent>
+      {Array.from({ length: 20 }).map((_, index) => (
+        <CarouselItem key={index}>
+          <div
+            style={{
+              display: 'flex',
+              aspectRatio: '4 / 1',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '1.5rem',
+              backgroundColor: '#66BF3B',
+              borderRadius: '0.5rem',
+            }}
+          >
+            <span style={{ fontSize: '2.25rem', fontWeight: '600', color: 'white' }}>{index + 1}</span>
+          </div>
+        </CarouselItem>
+      ))}
+    </CarouselContent>
+    <CarouselDots maxDots={props.maxDots} position={props.position} numberOfSlides={9} />
+  </Carousel>
+);
+
+// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
+CarouselWithDotsOverflow.args = { maxDots: 9 } satisfies CarouselProps & CarouselDotsProps;
+
+CarouselWithDotsOverflow.argTypes = {};
+
 export const ControlledCarousel = (props: CarouselProps & CarouselDotsProps) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   console.log(selectedIndex);

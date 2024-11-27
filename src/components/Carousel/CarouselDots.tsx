@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import { EmblaCarouselType } from 'embla-carousel';
-import { ComponentProps, forwardRef, useCallback, useEffect, useState, useId } from 'react';
+import { ComponentProps, forwardRef, useCallback, useEffect, useState, useId, useRef, useMemo } from 'react';
 import { useCarousel } from './utils';
 import { getCommonProps } from '../../utils';
+import { CarouselDot } from './CarouselDot';
 
 export interface CarouselDotsProps extends ComponentProps<'div'> {
   /**
@@ -29,7 +30,7 @@ export interface CarouselDotsProps extends ComponentProps<'div'> {
  *
  */
 const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
-  ({ className, maxDots = 7, position = 'inline', numberOfSlides = 0, ...props }, ref) => {
+  ({ className, maxDots = 9, position = 'inline', numberOfSlides = 0, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
     const componentId = useId();
     const { api, onSlideChange } = useCarousel();
@@ -37,6 +38,18 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
     const [scrollSnaps, setScrollSnaps] = useState<number[]>(
       Array.from({ length: numberOfSlides }, (_, index) => index),
     );
+    const scrollableContainerRef = useRef<HTMLDivElement>(null);
+
+    const [inViewDots, setInViewDots] = useState<number[]>([]);
+
+    const scrollToDot = useCallback((index: number) => {
+      if (scrollableContainerRef.current) {
+        scrollableContainerRef.current.scrollTo({
+          left: index * (8 + 12) - scrollableContainerRef.current.offsetWidth / 2 + 10, // Center dot in container
+          behavior: 'smooth',
+        });
+      }
+    }, []);
 
     const onDotButtonClick = useCallback(
       (index: number) => {
@@ -51,9 +64,13 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
       setScrollSnaps(emblaApi.scrollSnapList());
     }, []);
 
-    const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-      setSelectedIndex(emblaApi.selectedScrollSnap());
-    }, []);
+    const onSelect = useCallback(
+      (emblaApi: EmblaCarouselType) => {
+        setSelectedIndex(emblaApi.selectedScrollSnap());
+        scrollToDot(emblaApi.selectedScrollSnap());
+      },
+      [scrollToDot],
+    );
 
     const onSettle = useCallback(
       (emblaApi: EmblaCarouselType) => {
@@ -75,21 +92,7 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
       };
     }, [api, onInit, onSelect, onSettle]);
 
-    const getVisibleDots = () => {
-      if (scrollSnaps.length <= maxDots) return scrollSnaps;
-
-      const halfMax = Math.floor(maxDots / 2);
-      let start = Math.max(0, selectedIndex - halfMax);
-      const end = Math.min(scrollSnaps.length, start + maxDots);
-
-      if (end - start < maxDots) {
-        start = Math.max(0, end - maxDots);
-      }
-
-      return scrollSnaps.slice(start, end);
-    };
-
-    const visibleDots = getVisibleDots();
+    const sortedInViewDots = useMemo(() => inViewDots.sort((a, b) => a - b), [inViewDots]);
 
     return (
       <div
@@ -102,24 +105,40 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
         {...commonProps}
       >
         <div className={`${baseClassName}-pagination-container`}>
-          <div className={`${baseClassName}-pagination-container-inner`}>
-            {visibleDots.map((_, index) => {
-              const actualIndex = scrollSnaps.indexOf(visibleDots[index]);
-              const isSelected = selectedIndex === actualIndex;
+          <div
+            style={{ '--max-width': `${maxDots * 8 + (maxDots - 1) * 12}px` } as React.CSSProperties}
+            className={`${baseClassName}-pagination-container-inner`}
+            ref={scrollableContainerRef}
+          >
+            {scrollSnaps.map((_, index) => {
+              const isSelected = selectedIndex === index;
+              const indexOfInViewDots = sortedInViewDots.indexOf(index);
+              const isShrinked =
+                indexOfInViewDots !== -1 &&
+                (indexOfInViewDots <= 1 || indexOfInViewDots >= sortedInViewDots.length - 2) &&
+                !(index <= 1 && sortedInViewDots.includes(0) && sortedInViewDots.includes(1)) &&
+                !(
+                  index >= scrollSnaps.length - 2 &&
+                  sortedInViewDots.includes(scrollSnaps.length - 1) &&
+                  sortedInViewDots.includes(scrollSnaps.length - 2)
+                );
 
               return (
-                <button
+                <CarouselDot
                   key={`${componentId}-dot-${index}`}
-                  role="button"
-                  onClick={() => onDotButtonClick(actualIndex)}
-                  className={classNames(`${baseClassName}-pagination-dot-container`)}
-                >
-                  <span
-                    className={classNames(`${baseClassName}-pagination-dot`, {
-                      [`${baseClassName}-pagination-dot-selected`]: isSelected,
-                    })}
-                  />
-                </button>
+                  onClick={() => onDotButtonClick(index)}
+                  isSelected={isSelected}
+                  baseClassName={baseClassName}
+                  scrollableContainerRef={scrollableContainerRef}
+                  onInViewChange={(inView) => {
+                    if (inView) {
+                      setInViewDots((prev) => [...prev, index]);
+                    } else {
+                      setInViewDots((prev) => prev.filter((dot) => dot !== index));
+                    }
+                  }}
+                  isShrinked={isShrinked || !inViewDots.includes(index)}
+                />
               );
             })}
           </div>
