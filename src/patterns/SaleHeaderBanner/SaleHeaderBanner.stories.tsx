@@ -97,17 +97,3 @@ export const Closed = (props: SaleHeaderBannerProps) => (
     <SaleHeaderBrowseAuctions />
   </SaleHeaderBanner>
 );
-
-export const TimedAuction = (props: SaleHeaderBannerProps) => (
-  <SaleHeaderBanner
-    {...props}
-    auctionTitle="Modern & Contemporary Art: Online Auction, New York"
-    imageSrcUrl="https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg"
-    occurrenceInformation={[{ date: '10:00am EDT, 4 Sep 2024', occurrenceLabel: 'Lots Begin to Close' }]}
-    auctionEndTime={addMinutes(new Date(), 24 * 60).toString()}
-    location="New York"
-    auctionState={AuctionStatus.live}
-  >
-    <SaleHeaderBrowseAuctions />
-  </SaleHeaderBanner>
-);

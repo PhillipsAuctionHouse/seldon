@@ -6,7 +6,6 @@ import { AuctionStatus } from '../../types/commonTypes';
 import { Text, TextVariants } from '../../components/Text';
 import { PageContentWrapper as PageMargin } from '../../components/PageContentWrapper';
 import Button from '../../components/Button/Button';
-import { Countdown } from '../../components/Countdown';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
@@ -39,10 +38,6 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
    */
   auctionState: AuctionStatus;
   /**
-   * Used to display a countdown timer to show when the Lots begin to close
-   */
-  auctionEndTime?: string;
-  /**
    * What text should the CTA button display?
    */
   ctaLabel?: React.ReactNode;
@@ -64,7 +59,6 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
 const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
   (
     {
-      auctionEndTime,
       auctionTitle,
       imageSrcUrl,
       location,
@@ -81,7 +75,6 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SaleHeaderBanner');
     const isOpenForBidding = auctionState === AuctionStatus.live;
     const isClosed = auctionState === AuctionStatus.past;
-    const showCountdown = isOpenForBidding && auctionEndTime;
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         <SeldonImage
@@ -92,9 +85,6 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
           className={`${baseClassName}__image`}
         />
         <PageMargin className={`${baseClassName}__stack-wrapper`} {...commonProps} {...props} ref={ref}>
-          {showCountdown && (
-            <Countdown endDateTime={new Date(auctionEndTime)} className={`${baseClassName}__countdown`} />
-          )}
           <div className={`${baseClassName}__stack`}>
             {isOpenForBidding && children}
             <Text variant={TextVariants.title1}>{auctionTitle}</Text>
