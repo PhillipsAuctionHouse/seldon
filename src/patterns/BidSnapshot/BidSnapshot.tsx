@@ -150,7 +150,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
           ) : null}
         </DetailList>
         {
-          bidStatus && isPast ? bidMessage : null // only show bidMessage if the user has bid
+          bidStatus && !isReady ? bidMessage : null // only show bidMessage if the user has bid
         }
         {otherChildren}
         {hasCountdownTimer ? (

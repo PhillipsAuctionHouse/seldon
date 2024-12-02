@@ -80,6 +80,22 @@ describe('BidSnapshot', () => {
     expect(screen.getByText('You lost')).toBeInTheDocument();
   });
 
+  it('renders winning for if in progress', () => {
+    render(
+      <BidSnapshot
+        startingBid={100}
+        numberOfBids={3}
+        currentBid={300}
+        lotStatus={LotStatus.live}
+        bidStatus={BidStatusEnum.Lost}
+      >
+        <BidMessage message="Winning for"></BidMessage>
+      </BidSnapshot>,
+    );
+    expect(screen.getByText('Winning for')).toBeInTheDocument();
+    expect(screen.getByText('$300')).toBeInTheDocument();
+  });
+
   it('does not render sold for if soldPrice not passed, used if auction should hide sold price', () => {
     render(
       <BidSnapshot
