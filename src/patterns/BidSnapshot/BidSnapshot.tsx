@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { DetailList } from '../DetailList/index';
 import { Detail } from '../../components/Detail/index';
-import { LotAuctionStatus, SupportedLanguages } from '../../types/commonTypes';
+import { LotStatus, SupportedLanguages } from '../../types/commonTypes';
 import { Countdown } from '../../components/Countdown/index';
 import { CountdownVariants } from '../../components/Countdown/types';
 
@@ -16,7 +16,7 @@ export interface BidSnapshotProps extends ComponentProps<'div'> {
   /**
    * State of the object
    */
-  lotStatus?: LotAuctionStatus;
+  lotStatus?: LotStatus;
   /**
    * Bids label text, a fucntion for label of bids amoutn (2 bids, 3 bids, etc) where the number is the length of the bids array.
    */
@@ -85,7 +85,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
   (
     {
       activeBid,
-      lotStatus = LotAuctionStatus.ready,
+      lotStatus = LotStatus.ready,
       bidsLabelText = bidsTranslation,
       children,
       className,
@@ -109,9 +109,9 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
 
     const hasBids = currentBid !== null && numberOfBids > 0;
     const isTopBid = activeBid === currentBid;
-    const isReady = lotStatus === LotAuctionStatus.ready;
-    const isLive = lotStatus === LotAuctionStatus.live;
-    const isPast = lotStatus === LotAuctionStatus.past;
+    const isReady = lotStatus === LotStatus.ready;
+    const isLive = lotStatus === LotStatus.live;
+    const isPast = lotStatus === LotStatus.past;
     const hasCountdownTimer = isLive && lotCloseDate;
 
     const classes = classnames(baseClassName, className, {

@@ -3,7 +3,13 @@ export enum SupportedLanguages {
   zh = 'zh',
 }
 
-export enum LotAuctionStatus {
+export enum AuctionStatus {
+  ready = 'READY',
+  live = 'LIVE',
+  past = 'PAST',
+}
+
+export enum LotStatus {
   ready = 'READY',
   live = 'LIVE',
   past = 'PAST',
