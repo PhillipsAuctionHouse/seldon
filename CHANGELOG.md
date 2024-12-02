@@ -1,3 +1,10 @@
+# [1.98.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.97.1...v1.98.0) (2024-12-02)
+
+
+### Features
+
+* **BidSnapshot:** L3-4690 changed prop ([#438](https://github.com/PhillipsAuctionHouse/seldon/issues/438)) ([d1bd326](https://github.com/PhillipsAuctionHouse/seldon/commit/d1bd3268574db6a8105b5f93a5572614be1bf6f5))
+
 ## [1.97.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.97.0...v1.97.1) (2024-11-27)
 
 
