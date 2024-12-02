@@ -48,6 +48,10 @@ Playground.args = {
   lotCloseDate: addMinutes(new Date(), 20),
   lang: enUS,
   startingBid: 600,
+  soldPrice: 2000,
 };
 
-Playground.argTypes = { bidStatus: { options: BidStatusEnum, control: { type: 'select' } } };
+Playground.argTypes = {
+  bidStatus: { options: BidStatusEnum, control: { type: 'select' } },
+  auctionStatus: { options: AuctionStatus, control: { type: 'select' } },
+};

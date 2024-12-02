@@ -64,6 +64,10 @@ export interface BidSnapshotProps extends ComponentProps<'div'> {
    */
   startingBidText?: string;
   /**
+   * Sold For amount
+   * */
+  soldPrice?: number;
+  /**
    * Sold for label text, a string for label of sold for detail
    */
   soldForText?: string;
@@ -101,6 +105,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
       numberOfBids = 0,
       startingBid,
       startingBidText = 'Starting bid',
+      soldPrice,
       soldForText = 'Sold for',
       wonForText = 'Won for',
       ...props
@@ -110,7 +115,6 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'BidSnapshot');
 
     const hasBids = currentBid !== null && numberOfBids > 0;
-    const isTopBid = bidStatus === BidStatusEnum.Winning || bidStatus === BidStatusEnum.Won;
     const isReady = auctionStatus === AuctionStatus.ready;
     const isLive = auctionStatus === AuctionStatus.live;
     const isPast = auctionStatus === AuctionStatus.past;
@@ -123,21 +127,31 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
       [`${baseClassName}--has-bids`]: hasBids,
     });
 
-    let label = currentBidText;
-    if (isReady || !hasBids) label = startingBidText;
-    if (isPast && hasBids) label = isTopBid ? wonForText : soldForText;
-
     return (
       <div {...commonProps} {...props} ref={ref} className={classes}>
         <DetailList hasSeparators className={`${baseClassName}__text`}>
-          <Detail
-            label={label}
-            subLabel={isLive && currentBid && `(${bidsLabelText(numberOfBids)})`}
-            value={`${currency}${(currentBid || startingBid)?.toLocaleString()}`}
-            hasWrap={false}
-          />
+          {isPast && hasBids && soldPrice ? (
+            <Detail
+              label={bidStatus ? wonForText : soldForText} // if the user has bid show wonForText else show soldForText
+              value={`${currency}${soldPrice?.toLocaleString()}`}
+              hasWrap={false}
+            />
+          ) : null}
+          {isLive && hasBids ? (
+            <Detail
+              label={currentBidText}
+              subLabel={`(${bidsLabelText(numberOfBids)})`}
+              value={`${currency}${currentBid?.toLocaleString()}`}
+              hasWrap={false}
+            />
+          ) : null}
+          {isReady || (isLive && !hasBids) ? (
+            <Detail label={startingBidText} value={`${currency}${startingBid?.toLocaleString()}`} hasWrap={false} />
+          ) : null}
         </DetailList>
-        {bidStatus && !isReady ? bidMessage : null}
+        {
+          bidStatus && isPast ? bidMessage : null // only show bidMessage if the user has bid
+        }
         {otherChildren}
         {hasCountdownTimer ? (
           <Countdown
