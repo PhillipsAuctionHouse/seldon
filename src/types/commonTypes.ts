@@ -8,3 +8,9 @@ export enum AuctionStatus {
   live = 'LIVE',
   past = 'PAST',
 }
+
+export enum LotStatus {
+  ready = 'READY',
+  live = 'LIVE',
+  past = 'PAST',
+}

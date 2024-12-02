@@ -4,7 +4,7 @@ import { enUS } from 'date-fns/locale';
 
 import BidSnapshot, { BidSnapshotProps } from './BidSnapshot';
 import BidMessage from './BidMessage';
-import { AuctionStatus } from '../../types/commonTypes';
+import { LotStatus } from '../../types/commonTypes';
 import { BidMessageVariants, BidStatusEnum } from './types';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
@@ -12,19 +12,19 @@ const meta = {
   title: 'Patterns/BidSnapshot',
   component: BidSnapshot,
   argTypes: {
-    auctionStatus: { options: ['READY', 'LIVE', 'PAST'], control: { type: 'select' } },
+    lotStatus: { options: ['READY', 'LIVE', 'PAST'], control: { type: 'select' } },
   },
 } satisfies Meta<typeof BidSnapshot>;
 
 export default meta;
 export const Playground = (props: BidSnapshotProps) => {
-  const { bidStatus, auctionStatus, lotCloseDate, currentBid, ...rest } = props;
+  const { bidStatus, lotStatus, lotCloseDate, currentBid, ...rest } = props;
   return (
     <BidSnapshot
       bidStatus={bidStatus}
-      auctionStatus={auctionStatus}
+      lotStatus={lotStatus}
       currentBid={currentBid}
-      lotCloseDate={auctionStatus === AuctionStatus.ready ? undefined : lotCloseDate}
+      lotCloseDate={lotStatus === LotStatus.ready ? undefined : lotCloseDate}
       {...rest}
     >
       {bidStatus === BidStatusEnum.Winning ? <BidMessage message="With You" /> : null}
@@ -43,7 +43,7 @@ export const Playground = (props: BidSnapshotProps) => {
 Playground.args = {
   currency: '$',
   numberOfBids: 3,
-  auctionStatus: AuctionStatus.live,
+  lotStatus: LotStatus.live,
   currentBid: 1000,
   lotCloseDate: addMinutes(new Date(), 20),
   lang: enUS,
@@ -53,5 +53,5 @@ Playground.args = {
 
 Playground.argTypes = {
   bidStatus: { options: BidStatusEnum, control: { type: 'select' } },
-  auctionStatus: { options: AuctionStatus, control: { type: 'select' } },
+  auctionStatus: { options: LotStatus, control: { type: 'select' } },
 };

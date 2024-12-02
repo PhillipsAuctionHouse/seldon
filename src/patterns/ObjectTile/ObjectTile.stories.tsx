@@ -2,8 +2,8 @@ import { Meta } from '@storybook/react';
 import { addMinutes } from 'date-fns';
 
 import ObjectTile, { ObjectTileProps } from './ObjectTile';
+import { LotStatus } from '../../types/commonTypes';
 import { BidMessage, BidSnapshot, BidStatusEnum } from '../BidSnapshot';
-import { AuctionStatus } from '../../types/commonTypes';
 import { Favorite } from '../../assets/icons';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
@@ -24,7 +24,7 @@ const args = {
       <BidSnapshot
         startingBid={50000}
         bidStatus={BidStatusEnum.Winning}
-        auctionStatus={AuctionStatus.live}
+        lotStatus={LotStatus.live}
         numberOfBids={2}
         lotCloseDate={addMinutes(new Date(), 20)}
       >
