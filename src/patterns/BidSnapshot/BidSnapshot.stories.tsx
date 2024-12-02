@@ -5,6 +5,7 @@ import { enUS } from 'date-fns/locale';
 import BidSnapshot, { BidSnapshotProps } from './BidSnapshot';
 import BidMessage from './BidMessage';
 import { LotStatus } from '../../types/commonTypes';
+import { BidMessageVariants, BidStatusEnum } from './types';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -17,19 +18,22 @@ const meta = {
 
 export default meta;
 export const Playground = (props: BidSnapshotProps) => {
-  const { activeBid, lotStatus, lotCloseDate, currentBid, ...rest } = props;
+  const { bidStatus, lotStatus, lotCloseDate, currentBid, ...rest } = props;
   return (
     <BidSnapshot
-      activeBid={activeBid}
+      bidStatus={bidStatus}
       lotStatus={lotStatus}
       currentBid={currentBid}
       lotCloseDate={lotStatus === LotStatus.ready ? undefined : lotCloseDate}
       {...rest}
     >
-      {activeBid === currentBid && lotStatus === LotStatus.live ? (
-        <BidMessage message="With You" />
-      ) : activeBid === currentBid && lotStatus === LotStatus.past ? (
-        <BidMessage message="Winning Bid not including Buyer Premium" />
+      {bidStatus === BidStatusEnum.Winning ? <BidMessage message="With You" /> : null}
+      {bidStatus === BidStatusEnum.Won ? <BidMessage message="Won bid" /> : null}
+      {bidStatus === BidStatusEnum.Losing ? (
+        <BidMessage variant={BidMessageVariants.negative} message="Losing Bid" />
+      ) : null}
+      {bidStatus === BidStatusEnum.Lost ? (
+        <BidMessage variant={BidMessageVariants.negative} message="Lost Bid" />
       ) : null}
     </BidSnapshot>
   );
@@ -37,7 +41,6 @@ export const Playground = (props: BidSnapshotProps) => {
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
-  activeBid: 1000,
   currency: '$',
   numberOfBids: 3,
   lotStatus: LotStatus.live,
@@ -47,4 +50,4 @@ Playground.args = {
   startingBid: 600,
 };
 
-Playground.argTypes = {};
+Playground.argTypes = { bidStatus: { options: BidStatusEnum, control: { type: 'select' } } };

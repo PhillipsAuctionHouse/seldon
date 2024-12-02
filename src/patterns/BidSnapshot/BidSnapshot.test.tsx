@@ -2,6 +2,7 @@ import BidSnapshot from './BidSnapshot';
 import { runCommonTests } from '../../utils/testUtils';
 import { render, screen } from '@testing-library/react';
 import { LotStatus } from '../../types/commonTypes';
+import { BidStatusEnum } from './types';
 
 describe('BidSnapshot', () => {
   runCommonTests(BidSnapshot, 'BidSnapshot');
@@ -21,7 +22,13 @@ describe('BidSnapshot', () => {
 
   it('renders won for when auction is past and active bid is the last bid', () => {
     render(
-      <BidSnapshot startingBid={100} currentBid={300} numberOfBids={3} lotStatus={LotStatus.past} activeBid={300} />,
+      <BidSnapshot
+        startingBid={100}
+        currentBid={300}
+        numberOfBids={3}
+        lotStatus={LotStatus.past}
+        bidStatus={BidStatusEnum.Won}
+      />,
     );
     expect(screen.getByText('Won for')).toBeInTheDocument();
     expect(screen.getByText('$300')).toBeInTheDocument();
@@ -29,7 +36,13 @@ describe('BidSnapshot', () => {
 
   it('renders sold for when auction is past and active bid is not the last bid', () => {
     render(
-      <BidSnapshot startingBid={100} numberOfBids={3} currentBid={300} lotStatus={LotStatus.past} activeBid={200} />,
+      <BidSnapshot
+        startingBid={100}
+        numberOfBids={3}
+        currentBid={300}
+        lotStatus={LotStatus.past}
+        bidStatus={BidStatusEnum.Lost}
+      />,
     );
     expect(screen.getByText('Sold for')).toBeInTheDocument();
     expect(screen.getByText('$300')).toBeInTheDocument();
