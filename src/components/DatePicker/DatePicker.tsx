@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { noOp, useNormalizedInputProps } from '../../utils';
 import Input, { InputProps } from '../Input/Input';
 
-export interface DatePickerProps extends Omit<InputProps, 'defaultValue'>, Record<string, unknown> {
+export interface DatePickerProps extends Omit<InputProps, 'defaultValue' | 'onChange'>, Record<string, unknown> {
   /**
    * Optionally allow manual entry to the date input
    */
@@ -181,12 +181,12 @@ const DatePicker = React.forwardRef(
       };
     }, [allowInput, defaultValue, inputProps.disabled, enableTime, id, locale, onChange, ref, type]);
 
-    const handleKeyPress = (e: KeyboardEvent) => {
+    const handleKeyPress: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
       if (allowInput && /[0-9-/:]+/g.test(e.key)) {
         manualValue.current = fp?.current?.selectedDates;
       }
     };
-    const handOnBlur = (e: FocusEvent) => {
+    const handOnBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
       if (
         !allowInput ||
         (e.relatedTarget instanceof HTMLElement && e.relatedTarget?.classList.value.includes('flatpickr'))

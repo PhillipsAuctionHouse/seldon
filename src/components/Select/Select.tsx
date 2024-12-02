@@ -2,10 +2,12 @@ import * as React from 'react';
 import classnames from 'classnames';
 import { px, useNormalizedInputProps } from '../../utils';
 import { InputProps } from '../Input/Input';
+import { Merge } from 'type-fest';
+
 import { SelectVariants } from './types';
 import ChevronDownIcon from '../../assets/chevronDown.svg?react';
 
-export interface SelectProps extends InputProps {
+export interface SelectProps extends Merge<InputProps, React.ComponentProps<'select'>> {
   /**
    * Option elements that are selectable
    */
@@ -17,7 +19,7 @@ export interface SelectProps extends InputProps {
   /**
    * Determines the variant of the select
    */
-  variant: SelectVariants;
+  variant?: SelectVariants;
 }
 
 /**
@@ -30,7 +32,7 @@ export interface SelectProps extends InputProps {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-select--overview)
  */
 
-const Select = React.forwardRef(
+const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
       children,
@@ -53,11 +55,21 @@ const Select = React.forwardRef(
       warn,
       warnText,
       ...rest
-    }: SelectProps,
-    ref: React.ForwardedRef<HTMLSelectElement>,
+    },
+    ref,
   ) => {
     const type = 'select';
-    const inputProps = useNormalizedInputProps({ disabled, id, invalid, invalidText, readOnly, type, warn, warnText });
+    const generatedId = React.useId();
+    const inputProps = useNormalizedInputProps({
+      disabled,
+      id: id ?? generatedId,
+      invalid,
+      invalidText,
+      readOnly,
+      type,
+      warn,
+      warnText,
+    });
 
     const wrapperClassnames = classnames(`${px}-${type}-input`, `${px}-input`, `${px}-input--${size}`, {
       [`${px}-input--inline`]: inline,

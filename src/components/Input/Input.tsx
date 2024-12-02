@@ -3,7 +3,7 @@ import classnames from 'classnames';
 
 import { px, useNormalizedInputProps } from '../../utils';
 
-export interface InputProps extends Record<string, unknown> {
+export interface InputProps extends Omit<React.ComponentProps<'input'>, 'size'> {
   /**
    * Optional className to be applied to the `<input>` node
    */
@@ -12,7 +12,7 @@ export interface InputProps extends Record<string, unknown> {
   /**
    * Optionally provide the default value of the `<input>`. Should not be passed into controlled input!
    */
-  defaultValue?: string | number;
+  defaultValue?: string | number | readonly string[];
 
   /**
    * Booolean to specify whether the `<input>` should be disabled
@@ -27,7 +27,7 @@ export interface InputProps extends Record<string, unknown> {
   /**
    * A custom `id` for the `<input>`
    */
-  id: string;
+  id?: string;
 
   /**
    * Boolean to dictate whether input is inline with the label or not. `true` to use the inline version.
@@ -52,7 +52,7 @@ export interface InputProps extends Record<string, unknown> {
   /**
    * Optional `onChange` handler that is called whenever `<input>` is updated
    */
-  onChange?: (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 
   /**
    * Optional `onClick` handler that is called whenever the `<input>` is clicked
@@ -82,7 +82,7 @@ export interface InputProps extends Record<string, unknown> {
   /**
    * Specify the value of the `<input>` for controlled inputs
    */
-  value?: string | number | undefined;
+  value?: string | number | undefined | readonly string[];
 
   /**
    * Boolean to specify whether the control is currently in warning state
@@ -134,7 +134,17 @@ const Input = React.forwardRef(
     }: InputProps,
     ref: React.ForwardedRef<HTMLInputElement>,
   ) => {
-    const inputProps = useNormalizedInputProps({ disabled, id, invalid, invalidText, readOnly, type, warn, warnText });
+    const generatedId = React.useId();
+    const inputProps = useNormalizedInputProps({
+      disabled,
+      id: id || generatedId,
+      invalid,
+      invalidText,
+      readOnly,
+      type,
+      warn,
+      warnText,
+    });
 
     const wrapperClassnames = classnames(`${px}-${type}-input`, `${px}-input`, `${px}-input--${size}`, {
       [`${px}-input--inline`]: inline,
@@ -147,23 +157,25 @@ const Input = React.forwardRef(
     });
     return (
       <div className={wrapperClassnames}>
-        <label htmlFor={id} className={classnames(`${px}-input__label`, { [`${px}-input__label--hidden`]: hideLabel })}>
+        <label
+          htmlFor={id || generatedId}
+          className={classnames(`${px}-input__label`, { [`${px}-input__label--hidden`]: hideLabel })}
+        >
           {labelText}
         </label>
         <input
           className={classnames(`${px}-input__input`, { className })}
           data-testid={id}
-          defaultValue={defaultValue}
           disabled={inputProps.disabled}
-          id={id}
-          name={rest.name as string}
+          id={id || generatedId}
           onChange={onChange}
           onClick={onClick}
           placeholder={placeholder}
           readOnly={readOnly}
           ref={ref}
           type={inputProps.type}
-          value={value}
+          // can't set values on a checkbox or it breaks
+          {...(inputProps.type !== 'checkbox' && inputProps.type !== 'radio' ? { value, defaultValue } : {})}
           {...rest}
         />
         {inputProps.validation ? (

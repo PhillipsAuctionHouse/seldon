@@ -4,6 +4,7 @@ import * as React from 'react';
 
 import Select from './Select';
 import { px } from '../../utils';
+import { SelectVariants } from './types';
 
 describe('A Select', () => {
   const reqProps = { labelText: 'My Test Label', id: 'test-id' };
@@ -64,7 +65,7 @@ describe('A Select', () => {
 
   it('should apply --tertiary class when variant is tertiary', () => {
     render(
-      <Select id="test-select-tertiary" labelText={mockLabel} variant="tertiary">
+      <Select id="test-select-tertiary" labelText={mockLabel} variant={SelectVariants.tertiary}>
         {mockOptions}
       </Select>,
     );

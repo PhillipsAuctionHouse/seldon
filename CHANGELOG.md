@@ -1,3 +1,17 @@
+## [1.97.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.97.0...v1.97.1) (2024-11-27)
+
+
+### Bug Fixes
+
+* **footer:** L3-4461 Update casing on newsletter subscription ([#440](https://github.com/PhillipsAuctionHouse/seldon/issues/440)) ([84e5a98](https://github.com/PhillipsAuctionHouse/seldon/commit/84e5a98d5e20efef82aa9c8db40c759baf0b8e61))
+
+# [1.97.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.96.1...v1.97.0) (2024-11-22)
+
+
+### Features
+
+* **filter:** L3-4114 - create dumb filter component ([#418](https://github.com/PhillipsAuctionHouse/seldon/issues/418)) ([0014771](https://github.com/PhillipsAuctionHouse/seldon/commit/001477125684f081511315ab7c031d1d2efce9e4))
+
 ## [1.96.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.96.0...v1.96.1) (2024-11-21)
 
 

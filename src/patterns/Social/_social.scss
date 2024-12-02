@@ -37,6 +37,7 @@ $social_icon_height: 1.75rem;
 
     &.#{$px}-social__button {
       font-variation-settings: 'wght' 600;
+      text-transform: none;
     }
 
     &:hover {
