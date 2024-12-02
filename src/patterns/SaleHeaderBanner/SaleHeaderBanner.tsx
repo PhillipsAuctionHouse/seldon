@@ -81,13 +81,14 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SaleHeaderBanner');
     const isOpenForBidding = auctionState === AuctionStatus.live;
     const isClosed = auctionState === AuctionStatus.past;
+
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        {isOpenForBidding && auctionEndTime && (
+        {isOpenForBidding && auctionEndTime ? (
           <div className={`${baseClassName}__stack__mobile-countdown`}>
             {<Countdown endDateTime={auctionEndTime} showBottomBorder={false} />}
           </div>
-        )}
+        ) : null}
         <SeldonImage
           aspectRatio="16/9"
           src={imageSrcUrl}
@@ -116,13 +117,13 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
                 </div>
               ))}
 
-              {isClosed && children}
+              {isClosed ? children : null}
             </div>
-            {!isClosed && (
+            {!isClosed ? (
               <Button className={`${baseClassName}__cta`} onClick={onClick}>
                 {ctaLabel}
               </Button>
-            )}
+            ) : null}
           </div>
         </PageMargin>
       </div>
