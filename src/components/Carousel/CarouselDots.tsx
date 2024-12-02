@@ -45,7 +45,7 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
     const scrollToDot = useCallback((index: number) => {
       if (scrollableContainerRef.current) {
         scrollableContainerRef.current.scrollTo?.({
-          // 8 + 12 = width of dot plus gap
+          // 8px width + 12px gap
           left: index * (8 + 12) - scrollableContainerRef.current.offsetWidth / 2 + 10, // Center dot in container
           behavior: 'smooth',
         });
@@ -107,6 +107,7 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
       >
         <div className={`${baseClassName}-pagination-container`}>
           <div
+            // Calculate the max width of the container based on the number of dots and the width of each dot (8px width + 12px gap)
             style={{ '--max-width': `${maxDots * 8 + (maxDots - 1) * 12}px` } as React.CSSProperties}
             className={`${baseClassName}-pagination-container-inner`}
             ref={scrollableContainerRef}
@@ -114,10 +115,15 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
             {scrollSnaps.map((_, index) => {
               const isSelected = selectedIndex === index;
               const indexOfInViewDots = sortedInViewDots.indexOf(index);
+              // Determine if a dot should be visually shrinked based on several conditions:
               const isShrinked =
+                // The dot must be in view
                 indexOfInViewDots !== -1 &&
+                // The dot must be either among the first two or last two visible dots
                 (indexOfInViewDots <= 1 || indexOfInViewDots >= sortedInViewDots.length - 2) &&
+                // Don't shrink if we're showing the first two dots (index 0,1) and both are visible
                 !(index <= 1 && sortedInViewDots.includes(0) && sortedInViewDots.includes(1)) &&
+                // Don't shrink if we're showing the last two dots and both are visible
                 !(
                   index >= scrollSnaps.length - 2 &&
                   sortedInViewDots.includes(scrollSnaps.length - 1) &&

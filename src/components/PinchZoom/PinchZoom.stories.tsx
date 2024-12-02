@@ -2,7 +2,7 @@ import { Meta } from '@storybook/react';
 import PinchZoom, { PinchZoomProps } from './PinchZoom';
 import { Carousel, CarouselContent, CarouselDots, CarouselItem } from '../Carousel';
 import { SpacingTokens } from '../../utils';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Modal from '../Modal/Modal';
 import { SeldonImage } from '../SeldonImage';
 
@@ -44,11 +44,53 @@ Playground.args = {};
 Playground.argTypes = {};
 
 export const ZoomCarousel = () => {
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [isAtLeftEdge, setIsAtLeftEdge] = useState(false);
+  const [isAtRightEdge, setIsAtRightEdge] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const handleZoomChange = useCallback(
+    (zoom: boolean, index: number) => {
+      if (index === currentSlide) {
+        setIsZoomed(zoom);
+      }
+    },
+    [currentSlide],
+  );
+
+  const handleAtLeftEdge = useCallback(
+    (atEdge: boolean, index: number) => {
+      if (index === currentSlide) {
+        setIsAtLeftEdge(atEdge);
+      }
+    },
+    [currentSlide],
+  );
+
+  const handleAtRightEdge = useCallback(
+    (atEdge: boolean, index: number) => {
+      if (index === currentSlide) {
+        setIsAtRightEdge(atEdge);
+      }
+    },
+    [currentSlide],
+  );
+
   return (
-    <Carousel loop columnGap={SpacingTokens.md}>
+    <Carousel
+      loop
+      columnGap={SpacingTokens.md}
+      disableDrag={isZoomed && !isAtLeftEdge && !isAtRightEdge}
+      onSlideChange={setCurrentSlide}
+    >
       <CarouselContent style={{ alignItems: 'center' }}>
         <CarouselItem>
-          <PinchZoom>
+          <PinchZoom
+            isZoomReset={currentSlide !== 0}
+            onZoomChange={(zoom) => handleZoomChange(zoom, 0)}
+            onAtLeftEdge={(atLeftEdge) => handleAtLeftEdge(atLeftEdge, 0)}
+            onAtRightEdge={(atRightEdge) => handleAtRightEdge(atRightEdge, 0)}
+          >
             <SeldonImage
               style={{ borderRadius: '10px' }}
               src="https://whitneymedia.org/assets/artwork/6896/70_1164_cropped.jpeg"
@@ -57,7 +99,12 @@ export const ZoomCarousel = () => {
           </PinchZoom>
         </CarouselItem>
         <CarouselItem>
-          <PinchZoom>
+          <PinchZoom
+            isZoomReset={currentSlide !== 1}
+            onZoomChange={(zoom) => handleZoomChange(zoom, 1)}
+            onAtLeftEdge={(atLeftEdge) => handleAtLeftEdge(atLeftEdge, 1)}
+            onAtRightEdge={(atRightEdge) => handleAtRightEdge(atRightEdge, 1)}
+          >
             <SeldonImage
               style={{ borderRadius: '10px' }}
               src="https://whitneymedia.org/assets/artwork/732/50_8_cropped.jpeg"
@@ -66,7 +113,12 @@ export const ZoomCarousel = () => {
           </PinchZoom>
         </CarouselItem>
         <CarouselItem>
-          <PinchZoom>
+          <PinchZoom
+            isZoomReset={currentSlide !== 2}
+            onZoomChange={(zoom) => handleZoomChange(zoom, 2)}
+            onAtLeftEdge={(atLeftEdge) => handleAtLeftEdge(atLeftEdge, 2)}
+            onAtRightEdge={(atRightEdge) => handleAtRightEdge(atRightEdge, 2)}
+          >
             <SeldonImage
               style={{ borderRadius: '10px' }}
               src="https://whitneymedia.org/assets/image/828142/large_RS18772_MoMA_NY-Movie_ART162191_web.jpg"
@@ -90,6 +142,35 @@ export const CarouselWithZoomModal = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
+  const [isAtLeftEdge, setIsAtLeftEdge] = useState(false);
+  const [isAtRightEdge, setIsAtRightEdge] = useState(false);
+
+  const handleZoomChange = useCallback(
+    (zoom: boolean, index: number) => {
+      if (index === currentSlide) {
+        setIsZoomed(zoom);
+      }
+    },
+    [currentSlide],
+  );
+
+  const handleAtLeftEdge = useCallback(
+    (atLeftEdge: boolean, index: number) => {
+      if (index === currentSlide) {
+        setIsAtLeftEdge(atLeftEdge);
+      }
+    },
+    [currentSlide],
+  );
+
+  const handleAtRightEdge = useCallback(
+    (atRightEdge: boolean, index: number) => {
+      if (index === currentSlide) {
+        setIsAtRightEdge(atRightEdge);
+      }
+    },
+    [currentSlide],
+  );
 
   return (
     <div style={{ width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -116,12 +197,17 @@ export const CarouselWithZoomModal = () => {
               display: 'flex',
               flexDirection: 'column',
             }}
-            disableDrag={isZoomed}
+            disableDrag={isZoomed && !isAtLeftEdge && !isAtRightEdge}
           >
             <CarouselContent containerStyles={{ display: 'flex', flex: 1 }} style={{ display: 'flex', flex: 1 }}>
               {images.map((image, index) => (
                 <CarouselItem key={index} style={{ display: 'flex', height: '100%' }}>
-                  <PinchZoom onZoomChange={setIsZoomed}>
+                  <PinchZoom
+                    isZoomReset={currentSlide !== index}
+                    onZoomChange={(zoom) => handleZoomChange(zoom, index)}
+                    onAtLeftEdge={(atLeftEdge) => handleAtLeftEdge(atLeftEdge, index)}
+                    onAtRightEdge={(atRightEdge) => handleAtRightEdge(atRightEdge, index)}
+                  >
                     <SeldonImage
                       style={{ height: '100%', objectFit: 'contain', padding: '2rem 0' }}
                       src={image}
