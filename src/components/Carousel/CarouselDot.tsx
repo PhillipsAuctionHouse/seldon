@@ -7,7 +7,7 @@ type Props = {
   baseClassName: string;
   scrollableContainerRef: React.RefObject<HTMLDivElement>;
   onInViewChange: (inView: boolean) => void;
-  isShrinked: boolean;
+  variant?: 'sm' | 'md';
 };
 
 export const CarouselDot = ({
@@ -16,7 +16,7 @@ export const CarouselDot = ({
   baseClassName,
   scrollableContainerRef,
   onInViewChange,
-  isShrinked,
+  variant = 'md',
 }: Props) => {
   const { ref } = useInView({
     threshold: 0,
@@ -36,7 +36,7 @@ export const CarouselDot = ({
       <span
         className={classNames(`${baseClassName}-pagination-dot`, {
           [`${baseClassName}-pagination-dot-selected`]: isSelected,
-          [`${baseClassName}-pagination-dot-shrink`]: isShrinked,
+          [`${baseClassName}-pagination-dot-${variant}`]: variant,
         })}
       />
     </button>

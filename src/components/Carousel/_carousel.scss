@@ -88,11 +88,14 @@
 
     &-dot {
       border-radius: 50%;
-      height: 100%;
       outline: 1px solid #adadad;
-      width: 100%;
 
-      &-shrink {
+      &-md {
+        height: 100%;
+        width: 100%;
+      }
+
+      &-sm {
         height: 50%;
         width: 50%;
       }

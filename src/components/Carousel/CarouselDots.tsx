@@ -144,7 +144,7 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
                       setInViewDots((prev) => prev.filter((dot) => dot !== index));
                     }
                   }}
-                  isShrinked={isShrinked || !inViewDots.includes(index)}
+                  variant={isShrinked || !inViewDots.includes(index) ? 'sm' : 'md'}
                 />
               );
             })}
