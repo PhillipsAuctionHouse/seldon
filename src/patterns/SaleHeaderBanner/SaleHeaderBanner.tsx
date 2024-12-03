@@ -1,6 +1,7 @@
 import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
+import { Countdown } from '../../components/Countdown';
 import { SeldonImage } from '../../components/SeldonImage';
 import { AuctionStatus } from '../../types/commonTypes';
 import { Text, TextVariants } from '../../components/Text';
@@ -9,6 +10,10 @@ import Button from '../../components/Button/Button';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
+  /**
+   * The time that lots start to close (for live auctions)
+   */
+  auctionEndTime?: Date;
   /**
    * What is the title of the auction?
    */
@@ -59,6 +64,7 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
 const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
   (
     {
+      auctionEndTime,
       auctionTitle,
       imageSrcUrl,
       location,
@@ -75,8 +81,14 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SaleHeaderBanner');
     const isOpenForBidding = auctionState === AuctionStatus.live;
     const isClosed = auctionState === AuctionStatus.past;
+
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
+        {isOpenForBidding && auctionEndTime ? (
+          <div className={`${baseClassName}__stack__mobile-countdown`}>
+            {<Countdown endDateTime={auctionEndTime} showBottomBorder={false} />}
+          </div>
+        ) : null}
         <SeldonImage
           aspectRatio="16/9"
           src={imageSrcUrl}
@@ -86,7 +98,11 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
         />
         <PageMargin className={`${baseClassName}__stack-wrapper`} {...commonProps} {...props} ref={ref}>
           <div className={`${baseClassName}__stack`}>
-            {isOpenForBidding && children}
+            {isOpenForBidding && auctionEndTime ? (
+              <div className={`${baseClassName}__stack__desktop-countdown`}>
+                {<Countdown endDateTime={auctionEndTime} />}
+              </div>
+            ) : null}
             <Text variant={TextVariants.title1}>{auctionTitle}</Text>
             <Text variant={TextVariants.string2} className={`${baseClassName}__location`}>
               {location}
@@ -101,13 +117,13 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
                 </div>
               ))}
 
-              {isClosed && children}
+              {isClosed ? children : null}
             </div>
-            {!isClosed && (
+            {!isClosed ? (
               <Button className={`${baseClassName}__cta`} onClick={onClick}>
                 {ctaLabel}
               </Button>
-            )}
+            ) : null}
           </div>
         </PageMargin>
       </div>

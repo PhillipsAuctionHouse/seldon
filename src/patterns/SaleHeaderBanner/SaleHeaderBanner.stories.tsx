@@ -2,7 +2,6 @@ import { Meta } from '@storybook/react';
 import SaleHeaderBanner, { SaleHeaderBannerProps } from './SaleHeaderBanner';
 import { AuctionStatus } from '../../types/commonTypes';
 import SaleHeaderBrowseAuctions from './SaleHeaderBrowseAuctions';
-import { Countdown } from '../../components/Countdown';
 import { addMinutes } from 'date-fns';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
@@ -75,14 +74,13 @@ export const PreSaleThreeOccurrences = (props: SaleHeaderBannerProps) => (
 export const OpenForBidding = (props: SaleHeaderBannerProps) => (
   <SaleHeaderBanner
     {...props}
+    auctionEndTime={addMinutes(new Date(), 20)}
     auctionTitle="Modern & Contemporary Art: Online Auction, New York"
     imageSrcUrl="https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg"
     occurrenceInformation={[{ date: '10:00am EDT, 4 Sep 2024', occurrenceLabel: 'Lots Begin to Close' }]}
     location="New York"
     auctionState={AuctionStatus.live}
-  >
-    <Countdown endDateTime={addMinutes(new Date(), 20)} />
-  </SaleHeaderBanner>
+  />
 );
 
 export const Closed = (props: SaleHeaderBannerProps) => (

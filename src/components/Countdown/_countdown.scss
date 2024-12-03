@@ -4,14 +4,19 @@
   @include text($body2);
 
   align-items: center;
-  border-bottom: 1px solid $light-gray;
+  border-bottom: none;
   display: flex;
   flex-direction: column;
   gap: $spacing-micro;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   padding: 0 $spacing-sm $spacing-sm;
   width: 100%;
+
+  &--show-bottom-border {
+    border-bottom: 1px solid $light-gray;
+    margin-bottom: 1.5rem;
+  }
 
   &__countdown-container {
     @include text($heading5);
