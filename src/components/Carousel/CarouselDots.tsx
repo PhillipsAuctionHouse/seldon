@@ -117,18 +117,18 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
               const indexOfInViewDots = sortedInViewDots.indexOf(index);
               // Determine if a dot should be visually shrinked based on several conditions:
               const isShrinked =
-                // The dot must be in view
-                indexOfInViewDots !== -1 &&
+                // The dot is out of view
+                indexOfInViewDots === -1 ||
                 // The dot must be either among the first two or last two visible dots
-                (indexOfInViewDots <= 1 || indexOfInViewDots >= sortedInViewDots.length - 2) &&
-                // Don't shrink if we're showing the first two dots (index 0,1) and both are visible
-                !(index <= 1 && sortedInViewDots.includes(0) && sortedInViewDots.includes(1)) &&
-                // Don't shrink if we're showing the last two dots and both are visible
-                !(
-                  index >= scrollSnaps.length - 2 &&
-                  sortedInViewDots.includes(scrollSnaps.length - 1) &&
-                  sortedInViewDots.includes(scrollSnaps.length - 2)
-                );
+                ((indexOfInViewDots <= 1 || indexOfInViewDots >= sortedInViewDots.length - 2) &&
+                  // Don't shrink if we're showing the first two dots (index 0,1) and both are visible
+                  !(index <= 1 && sortedInViewDots.includes(0) && sortedInViewDots.includes(1)) &&
+                  // Don't shrink if we're showing the last two dots and both are visible
+                  !(
+                    index >= scrollSnaps.length - 2 &&
+                    sortedInViewDots.includes(scrollSnaps.length - 1) &&
+                    sortedInViewDots.includes(scrollSnaps.length - 2)
+                  ));
 
               return (
                 <CarouselDot
@@ -144,7 +144,7 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
                       setInViewDots((prev) => prev.filter((dot) => dot !== index));
                     }
                   }}
-                  variant={isShrinked || !inViewDots.includes(index) ? 'sm' : 'md'}
+                  variant={isShrinked ? 'sm' : 'md'}
                 />
               );
             })}
