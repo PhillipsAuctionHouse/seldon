@@ -1,3 +1,10 @@
+# [1.100.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.99.0...v1.100.0) (2024-12-03)
+
+
+### Features
+
+* **carousel:** L3-4045 carousel overflow and zoom/pan behavior ([#441](https://github.com/PhillipsAuctionHouse/seldon/issues/441)) ([c6b7abc](https://github.com/PhillipsAuctionHouse/seldon/commit/c6b7abc47be052a81b40864d389a1c97a436ec30))
+
 # [1.99.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.98.1...v1.99.0) (2024-12-03)
 
 
