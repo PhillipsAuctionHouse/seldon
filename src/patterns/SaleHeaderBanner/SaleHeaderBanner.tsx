@@ -98,11 +98,11 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
         />
         <PageMargin className={`${baseClassName}__stack-wrapper`} {...commonProps} {...props} ref={ref}>
           <div className={`${baseClassName}__stack`}>
-            {isOpenForBidding && auctionEndTime && (
+            {isOpenForBidding && auctionEndTime ? (
               <div className={`${baseClassName}__stack__desktop-countdown`}>
                 {<Countdown endDateTime={auctionEndTime} />}
               </div>
-            )}
+            ) : null}
             <Text variant={TextVariants.title1}>{auctionTitle}</Text>
             <Text variant={TextVariants.string2} className={`${baseClassName}__location`}>
               {location}
