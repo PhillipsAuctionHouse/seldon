@@ -1,3 +1,10 @@
+## [1.98.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.98.0...v1.98.1) (2024-12-03)
+
+
+### Bug Fixes
+
+* **bidsnapshot:** L3-4378 if i have bid on a lot but lost it should say won for ([#443](https://github.com/PhillipsAuctionHouse/seldon/issues/443)) ([a6145dc](https://github.com/PhillipsAuctionHouse/seldon/commit/a6145dc2b3218a36f3d87e7152f5420df02d1d95))
+
 # [1.98.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.97.1...v1.98.0) (2024-12-02)
 
 
