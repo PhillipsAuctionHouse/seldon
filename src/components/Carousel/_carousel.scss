@@ -60,26 +60,47 @@
     }
 
     &-container-inner {
+      align-items: center;
       display: flex;
       gap: 12px;
+      max-width: var(--max-width);
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none; /* Firefox */
+
+      &::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+      }
     }
 
-    &-dot-container {
+    &-dot__container {
       align-items: center;
       display: flex;
       height: 8px;
       justify-content: center;
+      min-width: 8px;
       padding: 1px;
+      scroll-snap-align: center;
       width: 8px;
     }
 
     &-dot {
       border-radius: 50%;
-      height: 100%;
       outline: 1px solid #adadad;
-      width: 100%;
 
-      &-selected {
+      &--md {
+        height: 100%;
+        width: 100%;
+      }
+
+      &--sm {
+        height: 50%;
+        width: 50%;
+      }
+
+      &--selected {
         background-color: #525050;
         outline-color: #525050;
       }
