@@ -75,7 +75,7 @@
       }
     }
 
-    &-dot-container {
+    &-dot__container {
       align-items: center;
       display: flex;
       height: 8px;
@@ -90,17 +90,17 @@
       border-radius: 50%;
       outline: 1px solid #adadad;
 
-      &-md {
+      &--md {
         height: 100%;
         width: 100%;
       }
 
-      &-sm {
+      &--sm {
         height: 50%;
         width: 50%;
       }
 
-      &-selected {
+      &--selected {
         background-color: #525050;
         outline-color: #525050;
       }

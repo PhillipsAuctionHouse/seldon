@@ -92,7 +92,7 @@ export const CarouselWithDotsOverflow = (props: CarouselProps & CarouselDotsProp
         </CarouselItem>
       ))}
     </CarouselContent>
-    <CarouselDots maxDots={props.maxDots} position={props.position} numberOfSlides={9} />
+    <CarouselDots maxDots={props.maxDots} position={props.position} numberOfSlides={20} />
   </Carousel>
 );
 
@@ -125,7 +125,7 @@ export const ControlledCarousel = (props: CarouselProps & CarouselDotsProps) => 
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselDots maxDots={props.maxDots} position={props.position} />
+      <CarouselDots maxDots={props.maxDots} position={props.position} numberOfSlides={9} />
     </Carousel>
   );
 };

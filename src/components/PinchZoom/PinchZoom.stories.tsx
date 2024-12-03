@@ -217,7 +217,7 @@ export const CarouselWithZoomModal = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselDots numberOfSlides={3} position="on-content" />
+            <CarouselDots numberOfSlides={images.length} position="on-content" />
           </Carousel>
         </Modal>
       )}
@@ -242,7 +242,7 @@ export const CarouselWithZoomModal = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselDots numberOfSlides={3} />
+        <CarouselDots numberOfSlides={images.length} />
       </Carousel>
     </div>
   );
