@@ -1,3 +1,10 @@
+# [1.99.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.98.1...v1.99.0) (2024-12-03)
+
+
+### Features
+
+* **SaleHeaderBanner:** L3-4648 add countdown to sale header banner f… ([#435](https://github.com/PhillipsAuctionHouse/seldon/issues/435)) ([716701e](https://github.com/PhillipsAuctionHouse/seldon/commit/716701ef01ca2c85a1840c7dc70de5c2c37a6544))
+
 ## [1.98.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.98.0...v1.98.1) (2024-12-03)
 
 
