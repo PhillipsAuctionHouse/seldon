@@ -1,3 +1,10 @@
+## [1.100.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.100.0...v1.100.1) (2024-12-04)
+
+
+### Bug Fixes
+
+* **SaleHeaderBanner:** L3-4648 center countdown component in header banner ([#444](https://github.com/PhillipsAuctionHouse/seldon/issues/444)) ([2e16d9e](https://github.com/PhillipsAuctionHouse/seldon/commit/2e16d9e966967440ed15471eb4e89be77cb72ddd))
+
 # [1.100.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.99.0...v1.100.0) (2024-12-03)
 
 
