@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import SeldonImage, { SeldonImageProps } from './SeldonImage';
+import SeldonImage from './SeldonImage';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -8,7 +8,7 @@ const meta = {
 } satisfies Meta<typeof SeldonImage>;
 
 export default meta;
-export const Playground = (props: SeldonImageProps) => <SeldonImage {...props} />;
+export const Playground = (props: React.ComponentProps<typeof SeldonImage>) => <SeldonImage {...props} />;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
@@ -18,7 +18,7 @@ Playground.args = {
 
 Playground.argTypes = {};
 
-export const CircleImage = (props: SeldonImageProps) => <SeldonImage {...props} />;
+export const CircleImage = (props: React.ComponentProps<typeof SeldonImage>) => <SeldonImage {...props} />;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 CircleImage.args = {
@@ -32,7 +32,7 @@ CircleImage.args = {
 
 CircleImage.argTypes = {};
 
-export const BlurBackground = (props: SeldonImageProps) => <SeldonImage {...props} />;
+export const BlurBackground = (props: React.ComponentProps<typeof SeldonImage>) => <SeldonImage {...props} />;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 BlurBackground.args = {
@@ -44,7 +44,7 @@ BlurBackground.args = {
 
 BlurBackground.argTypes = {};
 
-export const BrokenImage = (props: SeldonImageProps) => <SeldonImage {...props} />;
+export const BrokenImage = (props: React.ComponentProps<typeof SeldonImage>) => <SeldonImage {...props} />;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 BrokenImage.args = {
