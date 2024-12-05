@@ -1,3 +1,10 @@
+## [1.100.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.100.1...v1.100.2) (2024-12-05)
+
+
+### Bug Fixes
+
+* **seldonimage:** L3-4753 memoize image component, pass srcset and si… ([#445](https://github.com/PhillipsAuctionHouse/seldon/issues/445)) ([51d6b9a](https://github.com/PhillipsAuctionHouse/seldon/commit/51d6b9aed9deedd1c2bb71487336b2de79521f83))
+
 ## [1.100.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.100.0...v1.100.1) (2024-12-04)
 
 
