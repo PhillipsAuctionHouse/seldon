@@ -37,6 +37,14 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
    */
   imageUrl?: string;
   /**
+   * Image srcset for the object. [https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset]
+   */
+  imageSrcSet?: string;
+  /**
+   * Image sizes for the object. [https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/sizes]
+   */
+  imageSizes?: string;
+  /**
    * Object Lot number.
    */
   lotNumber: string;
@@ -82,6 +90,8 @@ const ObjectTile = forwardRef<HTMLAnchorElement, ObjectTileProps>(
       favoriteElement: FavoriteElement,
       imageAlt = 'Brought to you by Phillips',
       imageUrl = '',
+      imageSrcSet,
+      imageSizes,
       lotNumber,
       makerText,
       modelText,
@@ -102,6 +112,8 @@ const ObjectTile = forwardRef<HTMLAnchorElement, ObjectTileProps>(
           className={`${baseClassName}__img`}
           objectFit="cover"
           src={imageUrl}
+          srcSet={imageSrcSet}
+          sizes={imageSizes}
         />
         {!withdrawnText ? (
           <Text className={`${baseClassName}__badge`} variant={TextVariants.badge}>
