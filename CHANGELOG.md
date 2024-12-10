@@ -1,3 +1,10 @@
+# [1.101.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.100.2...v1.101.0) (2024-12-10)
+
+
+### Features
+
+* **objecttile:** L3-4753 accept srcset & sizes from object tile ([#447](https://github.com/PhillipsAuctionHouse/seldon/issues/447)) ([dfd959f](https://github.com/PhillipsAuctionHouse/seldon/commit/dfd959fbcd3ee97ec927a7b456078ca576757da3))
+
 ## [1.100.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.100.1...v1.100.2) (2024-12-05)
 
 
