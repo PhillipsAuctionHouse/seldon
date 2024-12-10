@@ -32,6 +32,14 @@ export interface SeldonImageProps extends ComponentProps<'div'> {
    */
   sizes?: string;
   /**
+   * The loading attribute of the image. [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-loading]
+   */
+  loading?: ComponentProps<'img'>['loading'];
+  /**
+   * The fetch priority of the image. [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-fetchpriority]
+   */
+  fetchPriority?: ComponentProps<'img'>['fetchPriority'];
+  /**
    * The alt text of the image.
    */
   alt: string;
@@ -83,6 +91,8 @@ const SeldonImage = memo(
         alt,
         srcSet,
         sizes,
+        loading,
+        fetchPriority,
         errorText = 'Error loading image',
         ...props
       },
@@ -143,6 +153,10 @@ const SeldonImage = memo(
             alt={alt}
             data-testid={`${commonProps['data-testid']}-img`}
             ref={imgRef}
+            loading={loading}
+            // @ts-expect-error - React throws error when this is passed as fetchPriority, so we need to disable the rule
+            // let it be known that this is a valid attribute [https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/fetchPriority]
+            fetchpriority={fetchPriority} // eslint-disable-line react/no-unknown-property
             onLoad={() => {
               setLoadingState('loaded');
             }}

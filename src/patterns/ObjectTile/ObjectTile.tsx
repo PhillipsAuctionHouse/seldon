@@ -45,6 +45,14 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
    */
   imageSizes?: string;
   /**
+   * Image loading attribute. [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-loading]
+   */
+  imageLoading?: ComponentProps<'img'>['loading'];
+  /**
+   * Image fetch priority. [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-fetchpriority]
+   */
+  imageFetchPriority?: ComponentProps<'img'>['fetchPriority'];
+  /**
    * Object Lot number.
    */
   lotNumber: string;
@@ -92,6 +100,8 @@ const ObjectTile = forwardRef<HTMLAnchorElement, ObjectTileProps>(
       imageUrl = '',
       imageSrcSet,
       imageSizes,
+      imageLoading,
+      imageFetchPriority,
       lotNumber,
       makerText,
       modelText,
@@ -114,6 +124,8 @@ const ObjectTile = forwardRef<HTMLAnchorElement, ObjectTileProps>(
           src={imageUrl}
           srcSet={imageSrcSet}
           sizes={imageSizes}
+          loading={imageLoading}
+          fetchPriority={imageFetchPriority}
         />
         {!withdrawnText ? (
           <Text className={`${baseClassName}__badge`} variant={TextVariants.badge}>
