@@ -57,16 +57,40 @@ export interface SeldonImageProps extends ComponentProps<'div'> {
   errorText?: string;
 }
 
-function isImageValid(src: string) {
+function isImageValid({
+  img,
+  src,
+  srcSet,
+  sizes,
+}: {
+  img: HTMLImageElement | null;
+  src: string;
+  srcSet?: string;
+  sizes?: string;
+}) {
   const promise = new Promise((resolve) => {
-    const img = document.createElement('img');
-    img.onerror = () => resolve(false);
-    img.onload = () => resolve(true);
-    img.src = src;
+    let imgElement = img;
+    if (!imgElement) {
+      imgElement = document.createElement('img');
+    }
+    imgElement.onerror = () => resolve(false);
+    imgElement.onload = () => resolve(true);
+    if (srcSet) {
+      imgElement.srcset = srcSet;
+    }
+    if (sizes) {
+      imgElement.sizes = sizes;
+    }
+    imgElement.src = src;
+    if (imgElement.complete) {
+      resolve(true);
+    }
   });
 
   return promise;
 }
+
+const isServer = typeof window === 'undefined';
 
 /**
  * ## Overview
@@ -101,16 +125,44 @@ const SeldonImage = memo(
       const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SeldonImage');
       const imgRef = useRef<HTMLImageElement>(null);
 
-      const [loadingState, setLoadingState] = useState<'loading' | 'loaded' | 'error'>('loading');
+      const [loadingState, setLoadingState] = useState<'loading' | 'loaded' | 'error'>(() => {
+        if (isServer) {
+          return 'loading';
+        }
+        const element = document.getElementById(src);
+
+        if (element instanceof HTMLImageElement && !element.classList.contains(`${baseClassName}-img--hidden`)) {
+          return 'loaded';
+        }
+
+        const img = document.createElement('img');
+        if (srcSet) {
+          img.srcset = srcSet;
+        }
+        if (sizes) {
+          img.sizes = sizes;
+        }
+        img.src = src;
+        if (img.complete) {
+          return 'loaded';
+        }
+
+        return 'loading';
+      });
 
       const loadImage = useCallback(async () => {
-        const isValid = await isImageValid(src);
+        const isValid = await isImageValid({
+          img: imgRef.current,
+          src,
+          srcSet,
+          sizes,
+        });
         if (!isValid) {
           setLoadingState('error');
         } else {
           setLoadingState('loaded');
         }
-      }, [src]);
+      }, [src, srcSet, sizes]);
 
       useEffect(() => {
         void loadImage();
@@ -146,6 +198,7 @@ const SeldonImage = memo(
               [`${baseClassName}-img--hidden`]: loadingState !== 'loaded',
               [`${baseClassName}-img--object-fit-${objectFit}`]: objectFit !== 'none',
             })}
+            id={src}
             style={imageStyle}
             src={src}
             srcSet={srcSet}
