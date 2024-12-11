@@ -39,24 +39,11 @@ describe('SeldonImage', () => {
     expect(image).toHaveStyle({ borderRadius: '50%' });
   });
 
-  it('removes hidden classes on image load', async () => {
-    render(<SeldonImage src="test-image.jpg" alt="" />);
-    await waitFor(() => {
-      const image = screen.getByTestId(`seldon-image-img`);
-      expect(image).toHaveClass(`${px}-seldon-image-img--hidden`);
-      fireEvent.load(image);
-      expect(image).not.toHaveClass(`${px}-seldon-image-img--hidden`);
-    });
-  });
-
   it('sets loading state to error when image is invalid', async () => {
     render(<SeldonImage src="broken" alt="" />);
+    const image = screen.getByTestId(`seldon-image-img`);
     await waitFor(() => {
-      const image = screen.getByTestId(`seldon-image-img`);
-      expect(image).toHaveClass(`${px}-seldon-image-img--hidden`);
-
       fireEvent.error(image);
-
       const errorPlaceholder = screen.getByTestId('header-logo-svg');
       expect(errorPlaceholder).toBeInTheDocument();
     });

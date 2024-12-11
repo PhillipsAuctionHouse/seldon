@@ -172,7 +172,6 @@ const SeldonImage = memo(
         <div
           ref={ref}
           className={classnames(baseClassName, className, {
-            [`${baseClassName}--hidden`]: loadingState === 'loading' || loadingState === 'error',
             [`${baseClassName}--aspect-ratio-${aspectRatio.replace('/', '-')}`]: aspectRatio !== 'none',
           })}
           role="img"
@@ -195,7 +194,7 @@ const SeldonImage = memo(
           ) : null}
           <img
             className={classnames(`${baseClassName}-img`, imageClassName, {
-              [`${baseClassName}-img--hidden`]: loadingState !== 'loaded',
+              [`${baseClassName}-img--hidden`]: loadingState === 'error',
               [`${baseClassName}-img--object-fit-${objectFit}`]: objectFit !== 'none',
             })}
             id={src}
