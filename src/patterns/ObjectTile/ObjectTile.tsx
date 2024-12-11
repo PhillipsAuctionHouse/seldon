@@ -1,4 +1,4 @@
-import { ComponentProps, forwardRef, ElementType } from 'react';
+import { ComponentProps, forwardRef, ElementType, memo } from 'react';
 import classnames from 'classnames';
 
 import { getCommonProps } from '../../utils';
@@ -45,6 +45,14 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
    */
   imageSizes?: string;
   /**
+   * Image loading attribute. [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-loading]
+   */
+  imageLoading?: ComponentProps<'img'>['loading'];
+  /**
+   * Image fetch priority. [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-fetchpriority]
+   */
+  imageFetchPriority?: ComponentProps<'img'>['fetchPriority'];
+  /**
    * Object Lot number.
    */
   lotNumber: string;
@@ -78,110 +86,116 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app//?path=/story/patterns-objecttile--playground)
  */
-const ObjectTile = forwardRef<HTMLAnchorElement, ObjectTileProps>(
-  (
-    {
-      badgeText,
-      className,
-      children,
-      element: Element,
-      estimate,
-      estimateLabelText = 'Estimate',
-      favoriteElement: FavoriteElement,
-      imageAlt = 'Brought to you by Phillips',
-      imageUrl = '',
-      imageSrcSet,
-      imageSizes,
-      lotNumber,
-      makerText,
-      modelText,
-      referenceNumber,
-      titleText,
-      withdrawnText,
-      ...props
+const ObjectTile = memo(
+  forwardRef<HTMLAnchorElement, ObjectTileProps>(
+    (
+      {
+        badgeText,
+        className,
+        children,
+        element: Element,
+        estimate,
+        estimateLabelText = 'Estimate',
+        favoriteElement: FavoriteElement,
+        imageAlt = 'Brought to you by Phillips',
+        imageUrl = '',
+        imageSrcSet,
+        imageSizes,
+        imageLoading,
+        imageFetchPriority,
+        lotNumber,
+        makerText,
+        modelText,
+        referenceNumber,
+        titleText,
+        withdrawnText,
+        ...props
+      },
+      ref,
+    ) => {
+      const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ObjectTile');
+      const Component = Element ?? 'a';
+      return (
+        <Component {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
+          <SeldonImage
+            alt={imageAlt}
+            aspectRatio="1/1"
+            className={`${baseClassName}__img`}
+            objectFit="cover"
+            src={imageUrl}
+            srcSet={imageSrcSet}
+            sizes={imageSizes}
+            loading={imageLoading}
+            fetchPriority={imageFetchPriority}
+          />
+          {!withdrawnText ? (
+            <Text className={`${baseClassName}__badge`} variant={TextVariants.badge}>
+              {badgeText}
+            </Text>
+          ) : null}
+          <div className={`${baseClassName}__lot-number-like`}>
+            <Text className={`${baseClassName}__lot-number`} variant={TextVariants.heading3} element="p">
+              {lotNumber}
+            </Text>
+            {FavoriteElement && <FavoriteElement />}
+          </div>
+          {withdrawnText ? (
+            <Text className={`${baseClassName}__withdrawn`} variant={TextVariants.heading4}>
+              {withdrawnText}
+            </Text> // TODO: Design calls for heading 4 but the values they have map to our current heading 5. This should be updated when we update those tokens.
+          ) : (
+            <>
+              <div className={`${baseClassName}__meta`}>
+                {makerText ? (
+                  <Text className={`${baseClassName}__maker`} variant={TextVariants.heading3}>
+                    {makerText}
+                  </Text>
+                ) : null}
+                {titleText ? (
+                  <Text
+                    className={`${baseClassName}__title ${baseClassName}__token-fix`}
+                    variant={TextVariants.heading4}
+                    element="cite"
+                  >
+                    {titleText}
+                  </Text>
+                ) : null}
+                {referenceNumber ? (
+                  <Text
+                    className={`${baseClassName}__reference-number ${baseClassName}__token-fix`}
+                    variant={TextVariants.heading4}
+                    element="p"
+                  >
+                    {referenceNumber}
+                  </Text>
+                ) : null}
+                {modelText ? (
+                  <Text
+                    className={`${baseClassName}__model ${baseClassName}__token-fix`}
+                    variant={TextVariants.heading4}
+                    element="p"
+                  >
+                    {modelText}
+                  </Text>
+                ) : null}
+              </div>
+              {estimate ? (
+                <DetailList hasSeparators className={`${baseClassName}__estimate ${baseClassName}__section`}>
+                  <Detail
+                    className={`${baseClassName}__estimate__label`}
+                    label={estimateLabelText}
+                    value={estimate}
+                    hasWrap={false}
+                  />
+                </DetailList>
+              ) : null}
+              <div className={`${baseClassName}__section`}>{children}</div>
+            </>
+          )}
+        </Component>
+      );
     },
-    ref,
-  ) => {
-    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ObjectTile');
-    const Component = Element ?? 'a';
-    return (
-      <Component {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        <SeldonImage
-          alt={imageAlt}
-          aspectRatio="1/1"
-          className={`${baseClassName}__img`}
-          objectFit="cover"
-          src={imageUrl}
-          srcSet={imageSrcSet}
-          sizes={imageSizes}
-        />
-        {!withdrawnText ? (
-          <Text className={`${baseClassName}__badge`} variant={TextVariants.badge}>
-            {badgeText}
-          </Text>
-        ) : null}
-        <div className={`${baseClassName}__lot-number-like`}>
-          <Text className={`${baseClassName}__lot-number`} variant={TextVariants.heading3} element="p">
-            {lotNumber}
-          </Text>
-          {FavoriteElement && <FavoriteElement />}
-        </div>
-        {withdrawnText ? (
-          <Text className={`${baseClassName}__withdrawn`} variant={TextVariants.heading4}>
-            {withdrawnText}
-          </Text> // TODO: Design calls for heading 4 but the values they have map to our current heading 5. This should be updated when we update those tokens.
-        ) : (
-          <>
-            <div className={`${baseClassName}__meta`}>
-              {makerText ? (
-                <Text className={`${baseClassName}__maker`} variant={TextVariants.heading3}>
-                  {makerText}
-                </Text>
-              ) : null}
-              {titleText ? (
-                <Text
-                  className={`${baseClassName}__title ${baseClassName}__token-fix`}
-                  variant={TextVariants.heading4}
-                  element="cite"
-                >
-                  {titleText}
-                </Text>
-              ) : null}
-              {referenceNumber ? (
-                <Text
-                  className={`${baseClassName}__reference-number ${baseClassName}__token-fix`}
-                  variant={TextVariants.heading4}
-                  element="p"
-                >
-                  {referenceNumber}
-                </Text>
-              ) : null}
-              {modelText ? (
-                <Text
-                  className={`${baseClassName}__model ${baseClassName}__token-fix`}
-                  variant={TextVariants.heading4}
-                  element="p"
-                >
-                  {modelText}
-                </Text>
-              ) : null}
-            </div>
-            {estimate ? (
-              <DetailList hasSeparators className={`${baseClassName}__estimate ${baseClassName}__section`}>
-                <Detail
-                  className={`${baseClassName}__estimate__label`}
-                  label={estimateLabelText}
-                  value={estimate}
-                  hasWrap={false}
-                />
-              </DetailList>
-            ) : null}
-            <div className={`${baseClassName}__section`}>{children}</div>
-          </>
-        )}
-      </Component>
-    );
-  },
+  ),
 );
 
 ObjectTile.displayName = 'ObjectTile';
