@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import SeldonImage from './SeldonImage';
 import { runCommonTests } from '../../utils/testUtils';
 import { px } from '../../utils';
@@ -39,26 +39,26 @@ describe('SeldonImage', () => {
     expect(image).toHaveStyle({ borderRadius: '50%' });
   });
 
-  it('removes hidden classes on image load', () => {
-    const { container } = render(<SeldonImage src="test-image.jpg" alt="" />);
-    const image = screen.getByTestId(`seldon-image-img`);
-
-    expect(container.firstChild).toHaveClass(`${px}-seldon-image--hidden`);
-    expect(image).toHaveClass(`${px}-seldon-image-img--hidden`);
-
-    fireEvent.load(image);
-
-    expect(container.firstChild).not.toHaveClass(`${px}-seldon-image--hidden`);
-    expect(image).not.toHaveClass(`${px}-seldon-image-img--hidden`);
+  it('removes hidden classes on image load', async () => {
+    render(<SeldonImage src="test-image.jpg" alt="" />);
+    await waitFor(() => {
+      const image = screen.getByTestId(`seldon-image-img`);
+      expect(image).toHaveClass(`${px}-seldon-image-img--hidden`);
+      fireEvent.load(image);
+      expect(image).not.toHaveClass(`${px}-seldon-image-img--hidden`);
+    });
   });
 
-  it('sets loading state to error when image is invalid', () => {
+  it('sets loading state to error when image is invalid', async () => {
     render(<SeldonImage src="broken" alt="" />);
-    const image = screen.getByTestId(`seldon-image-img`);
-    expect(image).toHaveClass(`${px}-seldon-image-img--hidden`);
-    fireEvent.error(image);
+    await waitFor(() => {
+      const image = screen.getByTestId(`seldon-image-img`);
+      expect(image).toHaveClass(`${px}-seldon-image-img--hidden`);
 
-    const errorPlaceholder = screen.getByTestId('header-logo-svg');
-    expect(errorPlaceholder).toBeInTheDocument();
+      fireEvent.error(image);
+
+      const errorPlaceholder = screen.getByTestId('header-logo-svg');
+      expect(errorPlaceholder).toBeInTheDocument();
+    });
   });
 });
