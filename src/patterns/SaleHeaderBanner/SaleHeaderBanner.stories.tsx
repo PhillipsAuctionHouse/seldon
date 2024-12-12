@@ -20,6 +20,7 @@ Playground.args = {
   auctionState: AuctionStatus.ready,
   imageSrcUrl:
     'https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg',
+  headerLabel: 'Live Auction',
 };
 
 Playground.argTypes = {
@@ -38,6 +39,7 @@ export const PreSale = (props: SaleHeaderBannerProps) => (
     imageSrcUrl="https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg"
     occurrenceInformation={[{ date: '10:00am EDT, 4 Sep 2024', occurrenceLabel: 'Begins' }]}
     location="New York"
+    headerLabel="Online Auction"
     auctionState={AuctionStatus.ready}
   />
 );
@@ -52,6 +54,7 @@ export const PreSaleTwoOccurrences = (props: SaleHeaderBannerProps) => (
       { date: '10:00am EDT, 5 Sep 2024', occurrenceLabel: 'Session II' },
     ]}
     location="New York"
+    headerLabel="Online Auction"
     auctionState={AuctionStatus.ready}
   />
 );
@@ -66,6 +69,7 @@ export const PreSaleThreeOccurrences = (props: SaleHeaderBannerProps) => (
       { date: '10:00am EDT, 5 Sep 2024', occurrenceLabel: 'Session II' },
       { date: '10:00am EDT, 6 Sep 2024', occurrenceLabel: 'Session III' },
     ]}
+    headerLabel="Online Auction"
     location="New York"
     auctionState={AuctionStatus.ready}
   />
@@ -79,6 +83,7 @@ export const OpenForBidding = (props: SaleHeaderBannerProps) => (
     imageSrcUrl="https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg"
     occurrenceInformation={[{ date: '10:00am EDT, 4 Sep 2024', occurrenceLabel: 'Lots Begin to Close' }]}
     location="New York"
+    headerLabel="Online Auction"
     auctionState={AuctionStatus.live}
   />
 );
@@ -90,6 +95,7 @@ export const Closed = (props: SaleHeaderBannerProps) => (
     imageSrcUrl="https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg"
     occurrenceInformation={[{ date: '4 Sep 2024', occurrenceLabel: 'Concluded' }]}
     location="New York"
+    headerLabel="Online Auction"
     auctionState={AuctionStatus.past}
   >
     <SaleHeaderBrowseAuctions />

@@ -47,6 +47,10 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
    */
   ctaLabel?: React.ReactNode;
   /**
+   * The label for the header
+   */
+  headerLabel: React.ReactNode;
+  /**
    * What action does the CTA take?
    */
   onClick?: () => void;
@@ -74,6 +78,7 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
       onClick,
       children,
       className,
+      headerLabel,
       ...props
     },
     ref,
@@ -103,6 +108,7 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
                 {<Countdown endDateTime={auctionEndTime} />}
               </div>
             ) : null}
+            <Text variant={TextVariants.badge}>{headerLabel}</Text>
             <Text variant={TextVariants.title1}>{auctionTitle}</Text>
             <Text variant={TextVariants.string2} className={`${baseClassName}__location`}>
               {location}

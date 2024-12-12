@@ -1,5 +1,7 @@
 export enum AuctionState {
-  preSale = 'PRESALE',
-  openForBidding = 'OPEN_FOR_BIDDING',
-  past = 'PAST',
+  CALENDAR = 'CALENDAR',
+  HIGHLIGHTS_ONLY = 'HIGHLIGHTS_ONLY',
+  READY = 'READY',
+  LIVE = 'LIVE',
+  PAST = 'PAST',
 }

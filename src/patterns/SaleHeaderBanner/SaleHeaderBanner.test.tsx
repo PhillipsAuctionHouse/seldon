@@ -7,6 +7,7 @@ import { addDays } from 'date-fns';
 
 const defaultProps: SaleHeaderBannerProps = {
   auctionTitle: 'Sample Auction',
+  headerLabel: 'Auction',
   location: 'New York',
   occurrenceInformation: [{ date: '2023-12-01', occurrenceLabel: 'Auction Date' }],
   auctionState: AuctionStatus.ready,
