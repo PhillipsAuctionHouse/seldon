@@ -1,10 +1,11 @@
 import { Meta } from '@storybook/react';
 import { addMinutes } from 'date-fns';
 
-import ObjectTile, { ObjectTileProps } from './ObjectTile';
+import ObjectTile from './ObjectTile';
 import { LotStatus } from '../../types/commonTypes';
 import { BidMessage, BidSnapshot, BidStatusEnum } from '../BidSnapshot';
 import { Favorite } from '../../assets/icons';
+import { ComponentProps } from 'react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -41,8 +42,8 @@ const args = {
   modelText: 'Nautilus',
 };
 
-export const NoImage = (props: ObjectTileProps) => <ObjectTile {...props} imageUrl={undefined} />;
+export const NoImage = (props: ComponentProps<typeof ObjectTile>) => <ObjectTile {...props} imageUrl={undefined} />;
 NoImage.args = args;
-export const Playground = (props: ObjectTileProps) => <ObjectTile {...props} />;
+export const Playground = (props: ComponentProps<typeof ObjectTile>) => <ObjectTile {...props} />;
 Playground.args = args;
 Playground.argTypes = {};

@@ -23,6 +23,22 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
    */
   imageSrcUrl: string;
   /**
+   * The srcset of the banner image [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset]
+   */
+  imageSrcSet?: string;
+  /**
+   * The sizes of the banner image [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-sizes]
+   */
+  imageSizes?: ComponentProps<'img'>['sizes'];
+  /**
+   * Image loading attribute. [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-loading]
+   */
+  imageLoading?: ComponentProps<'img'>['loading'];
+  /**
+   * Image fetch priority. [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-fetchpriority]
+   */
+  imageFetchPriority?: ComponentProps<'img'>['fetchPriority'];
+  /**
    * Where is the auction taking place?
    */
   location: React.ReactNode;
@@ -71,6 +87,10 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
       auctionEndTime,
       auctionTitle,
       imageSrcUrl,
+      imageSrcSet,
+      imageSizes,
+      imageLoading,
+      imageFetchPriority,
       location,
       auctionState,
       occurrenceInformation,
@@ -100,6 +120,10 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
           alt={String(auctionTitle)}
           objectFit="cover"
           className={`${baseClassName}__image`}
+          srcSet={imageSrcSet}
+          sizes={imageSizes}
+          loading={imageLoading}
+          fetchPriority={imageFetchPriority}
         />
         <PageMargin className={`${baseClassName}__stack-wrapper`} {...commonProps} {...props} ref={ref}>
           <div className={`${baseClassName}__stack`}>
