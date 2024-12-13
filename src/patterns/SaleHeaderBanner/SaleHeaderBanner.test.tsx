@@ -4,6 +4,7 @@ import SaleHeaderBanner, { SaleHeaderBannerProps } from './SaleHeaderBanner';
 import { AuctionStatus } from '../../types/commonTypes';
 import SaleHeaderBrowseAuctions from './SaleHeaderBrowseAuctions';
 import { addDays } from 'date-fns';
+import Button from '../../components/Button/Button';
 
 const defaultProps: SaleHeaderBannerProps = {
   auctionTitle: 'Sample Auction',
@@ -37,16 +38,6 @@ describe('SaleHeaderBanner', () => {
     expect(img).toHaveAttribute('src', 'https://example.com/image.jpg');
   });
 
-  it('renders the "Register to Bid" button when auction is not closed', () => {
-    render(<SaleHeaderBanner {...defaultProps} />);
-    expect(screen.getByText('Register to Bid')).toBeInTheDocument();
-  });
-
-  it('does not render the "Register to Bid" button when auction is closed', () => {
-    render(<SaleHeaderBanner {...defaultProps} auctionState={AuctionStatus.past} />);
-    expect(screen.queryByText('Register to Bid')).not.toBeInTheDocument();
-  });
-
   it('renders the countdown timer when auction is open for bidding and there is an auctionEndTime', () => {
     render(
       <SaleHeaderBanner {...defaultProps} auctionState={AuctionStatus.live} auctionEndTime={addDays(new Date(), 2)} />,
@@ -66,14 +57,14 @@ describe('SaleHeaderBanner', () => {
     expect(screen.getByText('View Calendar')).toBeInTheDocument();
   });
 
-  it('renders custom CTA label when provided', () => {
-    render(<SaleHeaderBanner {...defaultProps} ctaLabel="Join Now" />);
-    expect(screen.getByText('Join Now')).toBeInTheDocument();
-  });
-
   it('calls onClick handler when CTA button is clicked', () => {
     const handleClick = vi.fn();
-    render(<SaleHeaderBanner {...defaultProps} onClick={handleClick} />);
+    render(
+      <SaleHeaderBanner {...defaultProps} onClick={handleClick}>
+        <Button onClick={handleClick} />
+        Register to Bid
+      </SaleHeaderBanner>,
+    );
     screen.getByText('Register to Bid').click();
     expect(handleClick).toHaveBeenCalledTimes(1);
   });

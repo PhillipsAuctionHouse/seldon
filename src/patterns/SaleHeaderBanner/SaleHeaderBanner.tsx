@@ -6,7 +6,6 @@ import { SeldonImage } from '../../components/SeldonImage';
 import { AuctionStatus } from '../../types/commonTypes';
 import { Text, TextVariants } from '../../components/Text';
 import { PageContentWrapper as PageMargin } from '../../components/PageContentWrapper';
-import Button from '../../components/Button/Button';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
@@ -59,13 +58,13 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
    */
   auctionState: AuctionStatus;
   /**
-   * What text should the CTA button display?
-   */
-  ctaLabel?: React.ReactNode;
-  /**
    * The label for the header
    */
   headerLabel: React.ReactNode;
+  /**
+   * An element to be rendered at the bottom of the banner
+   */
+  footerElement?: React.ReactNode;
   /**
    * What action does the CTA take?
    */
@@ -94,10 +93,10 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
       location,
       auctionState,
       occurrenceInformation,
-      ctaLabel = 'Register to Bid',
       onClick,
       children,
       className,
+      footerElement,
       headerLabel,
       ...props
     },
@@ -105,7 +104,6 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SaleHeaderBanner');
     const isOpenForBidding = auctionState === AuctionStatus.live;
-    const isClosed = auctionState === AuctionStatus.past;
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
@@ -146,14 +144,9 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
                   </Text>
                 </div>
               ))}
-
-              {isClosed ? children : null}
+              {children}
             </div>
-            {!isClosed ? (
-              <Button className={`${baseClassName}__cta`} onClick={onClick}>
-                {ctaLabel}
-              </Button>
-            ) : null}
+            {footerElement}
           </div>
         </PageMargin>
       </div>
