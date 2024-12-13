@@ -65,7 +65,7 @@ describe('SaleHeaderBanner', () => {
         Register to Bid
       </SaleHeaderBanner>,
     );
-    screen.getByText('Register to Bid').click();
+    screen.getByRole('button').click();
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
