@@ -48,7 +48,6 @@
 
   &__occurrence-details {
     display: flex;
-    margin-bottom: 1.5rem;
 
     &-text {
       align-items: flex-start;
@@ -56,13 +55,20 @@
       flex-direction: column;
       gap: 4px;
 
+      &::before,
+      &::after {
+        content: '';
+        display: block;
+        height: 1rem;
+      }
+
       &:first-child {
-        padding-right: $spacing-md;
+        padding-right: $spacing-xsm;
       }
 
       &:not(:first-child) {
         border-left: 1px solid $keyline-gray;
-        padding: 0 $spacing-md;
+        padding-left: $spacing-xsm;
       }
     }
   }
