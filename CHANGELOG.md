@@ -1,3 +1,10 @@
+# [1.103.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.102.0...v1.103.0) (2024-12-17)
+
+
+### Features
+
+* **SaleHeaderBanner:** L3-4162 sale header banner updates ([#450](https://github.com/PhillipsAuctionHouse/seldon/issues/450)) ([ec08324](https://github.com/PhillipsAuctionHouse/seldon/commit/ec08324421c3a5fffaade18cfcdfa888e43ae9a8))
+
 # [1.102.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.101.0...v1.102.0) (2024-12-11)
 
 
