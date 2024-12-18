@@ -1,3 +1,10 @@
+## [1.103.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.103.0...v1.103.1) (2024-12-18)
+
+
+### Bug Fixes
+
+* **tabpanel:** L3-4919 tab component was hiding the tabpanel role from screen readers ([#451](https://github.com/PhillipsAuctionHouse/seldon/issues/451)) ([0f6e37c](https://github.com/PhillipsAuctionHouse/seldon/commit/0f6e37c2cf45a61f36ccdf7ac5975b8d6d1a164f))
+
 # [1.103.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.102.0...v1.103.0) (2024-12-17)
 
 
