@@ -27,6 +27,8 @@ describe('Tabs', () => {
 
     // Verify default tab content is visible
     expect(screen.getByText('Overview content')).toBeVisible();
+    expect(screen.getByRole('tabpanel', { name: 'Overview' })).toBeInTheDocument();
+    expect(screen.queryByRole('tabpanel', { name: 'Browse lots' })).not.toBeInTheDocument();
   });
   test('renders ReactNode in tab', () => {
     const componentTabs = [
@@ -66,6 +68,8 @@ describe('Tabs', () => {
     await userEvent.click(screen.getByRole('tab', { name: /Browse/i }));
 
     expect(screen.getByText('Browse lots content')).toBeVisible();
+    expect(screen.getByRole('tabpanel', { name: 'Browse lots' })).toBeInTheDocument();
+    expect(screen.queryByRole('tabpanel', { name: 'Overview' })).not.toBeInTheDocument();
   });
   test('calls onTabClick when a tab is clicked', async () => {
     const onTabClickMock = vitest.fn();
