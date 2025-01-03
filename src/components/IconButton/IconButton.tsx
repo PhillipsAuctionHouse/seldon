@@ -9,10 +9,6 @@ export interface IconButtonProps extends Omit<React.HTMLAttributes<HTMLButtonEle
    */
   children?: React.ReactElement<SVGElement>;
   /**
-   * How large should the button be?
-   */
-  size?: 'sm' | 'md' | 'lg';
-  /**
    * Mainly used for styling
    */
   variant?: ButtonVariants;
@@ -24,7 +20,6 @@ export interface IconButtonProps extends Omit<React.HTMLAttributes<HTMLButtonEle
 
 const IconButton = ({
   children,
-  size = 'md',
   variant = ButtonVariants.primary,
   isDisabled = false,
   className,
@@ -35,7 +30,7 @@ const IconButton = ({
     <Button
       {...commonProps}
       variant={variant}
-      className={classnames(baseClass, `${baseClass}--${size}`, `${baseClass}--${variant}`, className)}
+      className={classnames(baseClass, `${baseClass}--${variant}`, className)}
       isDisabled={isDisabled}
       {...props}
     >
