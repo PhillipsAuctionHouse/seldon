@@ -4,21 +4,13 @@
   align-items: center;
   display: flex;
   flex-direction: row;
-  gap: $spacing-sm;
+  gap: $spacing-xsm;
 }
 
 .#{$px} {
   &-icon-button {
     &:disabled {
       border: unset;
-    }
-    &.#{$px}__pagination-button {
-      @include media($breakpoint-md) {
-        > svg {
-          height: 1.75rem;
-          width: 1.75rem;
-        }
-      }
     }
   }
 
@@ -28,6 +20,7 @@
 
       appearance: none;
       border: none;
+      font-style: italic;
       font-variation-settings: 'wght' 600;
       line-height: 1.75rem;
       margin-bottom: 0;
