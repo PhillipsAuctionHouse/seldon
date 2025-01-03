@@ -10,12 +10,6 @@ const meta = {
   component: Button,
 
   argTypes: {
-    size: {
-      options: ['sm', 'md', 'lg'],
-      control: {
-        type: 'select',
-      },
-    },
     variant: {
       options: Object.values(ButtonVariants),
       control: {

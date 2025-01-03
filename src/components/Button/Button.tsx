@@ -22,10 +22,6 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HT
    */
   variant?: ButtonVariants;
   /**
-   * How large should the button be?
-   */
-  size?: 'sm' | 'md' | 'lg';
-  /**
    * The type of the button.
    */
   type?: 'button' | 'submit' | 'reset';
@@ -57,7 +53,6 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
   (
     {
       variant = ButtonVariants.primary,
-      size = 'md',
       children,
       className,
       isIconLast: iconLast = false,
@@ -78,7 +73,6 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
           href={href}
           className={classnames(
             `${baseClassName}`,
-            `${baseClassName}--${size}`,
             `${baseClassName}--${variant}`,
             {
               [`${baseClassName}--icon-last`]: iconLast,
@@ -99,7 +93,6 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
           type={type}
           className={classnames(
             `${baseClassName}`,
-            `${baseClassName}--${size}`,
             `${baseClassName}--${variant}`,
             {
               [`${baseClassName}--icon-last`]: iconLast,
