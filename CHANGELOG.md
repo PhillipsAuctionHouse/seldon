@@ -1,3 +1,10 @@
+## [1.103.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.103.1...v1.103.2) (2025-01-06)
+
+
+### Bug Fixes
+
+* **button:** L3-4918 button font and image sizes are incorrect and non responsive ([#455](https://github.com/PhillipsAuctionHouse/seldon/issues/455)) ([0d4c4e5](https://github.com/PhillipsAuctionHouse/seldon/commit/0d4c4e51859a5eb17f3083c136338dfb80871e76))
+
 ## [1.103.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.103.0...v1.103.1) (2024-12-18)
 
 
