@@ -13,9 +13,8 @@
   display: inline-flex;
   font-variation-settings: 'wght' 600;
   gap: $margin-xsm;
-  height: $spacing-lg;
   justify-content: center;
-  padding: 0 $padding-md;
+  padding: $padding-sm $padding-md;
   position: relative;
   transition:
     color 0.25s,
@@ -129,8 +128,7 @@
     background-color: transparent;
     border: 0;
     color: $pure-black;
-    height: $spacing-md;
-    padding: 0;
+    padding: 0 $spacing-micro;
 
     svg {
       fill: $pure-black;
