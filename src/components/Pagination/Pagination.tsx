@@ -112,7 +112,7 @@ const Pagination = ({
       {...props}
     >
       <IconButton
-        className={`${px}-left-arrow`}
+        className={classnames(`${baseClassName}__button`, `${px}-left-arrow`)}
         onClick={() => {
           const prevIndex = options.findIndex((option) => determineOptionValue(option) === valueWithPendingState) - 1;
           const prevOption = options.at(prevIndex) || '';
@@ -153,6 +153,7 @@ const Pagination = ({
       </Select>
 
       <IconButton
+        className={`${baseClassName}__button`}
         onClick={() => {
           const nextIndex =
             (options.findIndex((option) => determineOptionValue(option) === valueWithPendingState) + 1) %

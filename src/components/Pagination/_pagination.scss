@@ -5,58 +5,58 @@
   display: flex;
   flex-direction: row;
   gap: $spacing-xsm;
+
+  &__button:hover:not(:disabled) {
+    background-color: inherit;
+
+    svg path {
+      fill: $pure-black;
+    }
+  }
 }
 
-.#{$px} {
-  &-icon-button {
+.#{$px}--inline-pagination__wrapper {
+  select {
+    @include pText($body-size2);
+
+    appearance: none;
+    border: none;
+    font-variation-settings: 'wght' 600;
+    line-height: 1.75rem;
+    margin-bottom: 0;
+    outline: none;
+    padding: 0 $spacing-xsm;
+    text-align: center;
+    text-align-last: center;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+
+    @include isHeaderDesktop {
+      line-height: 2.5rem;
+      text-underline-offset: 10px;
+    }
+
     &:disabled {
-      border: unset;
+      border: 1px solid $medium-gray;
+      margin: auto;
+      max-height: 3.5rem;
+      max-width: 5rem;
+      padding: 0.5rem;
+      text-decoration: none;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:focus-visible {
+      outline: 1px solid $medium-gray;
     }
   }
 
-  &--inline-pagination__wrapper {
-    select {
-      @include pText($body-size2);
-
-      appearance: none;
-      border: none;
-      font-variation-settings: 'wght' 600;
-      line-height: 1.75rem;
-      margin-bottom: 0;
-      outline: none;
-      padding: 0 $spacing-xsm;
-      text-align: center;
-      text-align-last: center;
-      text-decoration: underline;
-      text-underline-offset: 6px;
-
-      @include isHeaderDesktop {
-        line-height: 2.5rem;
-        text-underline-offset: 10px;
-      }
-
-      &:disabled {
-        border: 1px solid $medium-gray;
-        margin: auto;
-        max-height: 3.5rem;
-        max-width: 5rem;
-        padding: 0.5rem;
-        text-decoration: none;
-      }
-
-      &:hover {
-        cursor: pointer;
-      }
-
-      &:focus-visible {
-        outline: 1px solid $medium-gray;
-      }
-    }
-
-    select::-ms-expand {
-      border: none;
-      display: none;
-    }
+  select::-ms-expand {
+    border: none;
+    display: none;
   }
 }
 
