@@ -80,7 +80,7 @@ const Modal = ({
         onClick={onClose}
         aria-label="Close Modal"
         className={classnames(`${baseClassName}__close`)}
-        variant={ButtonVariants.secondary}
+        variant={ButtonVariants.tertiary}
       >
         <CloseIcon />
       </IconButton>
