@@ -5,11 +5,8 @@
 
   color: $pure-black;
 
-  &__back-button {
-    svg {
-      height: 1rem;
-      width: 1rem;
-    }
+  &__back-button:hover svg path {
+    fill: $pure-black;
   }
 
   &__item {
