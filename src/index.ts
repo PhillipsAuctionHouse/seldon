@@ -61,7 +61,7 @@ export {
   type PaginationOption,
   type PaginationOptionValue,
 } from './components/Pagination/Pagination';
-export { default as TagsList } from './components/Tags/Tags';
+export { default as TagsList, Tag, type TagsListProps, type TagProps } from './components/Tags/Tags';
 export {
   default as StatefulViewingsList,
   type StatefulViewingsListProps,
