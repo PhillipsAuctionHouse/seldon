@@ -1,3 +1,10 @@
+# [1.104.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.103.3...v1.104.0) (2025-01-06)
+
+
+### Features
+
+* **Tags:** L3-5032 added import for Tags ([#457](https://github.com/PhillipsAuctionHouse/seldon/issues/457)) ([7c7775d](https://github.com/PhillipsAuctionHouse/seldon/commit/7c7775def86781234cdca6028331e430506bbf0b))
+
 ## [1.103.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.103.2...v1.103.3) (2025-01-06)
 
 
