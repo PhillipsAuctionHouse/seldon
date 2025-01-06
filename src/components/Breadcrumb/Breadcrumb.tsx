@@ -49,10 +49,10 @@ const Breadcrumb = ({
       <SSRMediaQuery.Media lessThan="md">
         <CustomElement
           href={items[1].href ? items[1].href : '/'}
-          className={`${px}-icon-button ${px}-icon-button--secondary`} // apply button styles though it's a link
+          className={`${px}-icon-button ${px}-icon-button--primary ${baseClassName}__back-button`} // apply button styles though it's a link
           data-testid={`${id}-back-button`}
         >
-          <ArrowPrevIcon className={`${baseClassName}__back-button`} />
+          <ArrowPrevIcon />
         </CustomElement>
       </SSRMediaQuery.Media>
       {/* This is not visible when in mobile breakpoint */}

@@ -112,7 +112,7 @@ const Pagination = ({
       {...props}
     >
       <IconButton
-        className={classnames(`${px}__pagination-button`, `${px}-left-arrow`)}
+        className={classnames(`${baseClassName}__button`, `${px}-left-arrow`)}
         onClick={() => {
           const prevIndex = options.findIndex((option) => determineOptionValue(option) === valueWithPendingState) - 1;
           const prevOption = options.at(prevIndex) || '';
@@ -121,7 +121,7 @@ const Pagination = ({
         data-testid={`${id}-previous-button`}
         isDisabled={isDisabled}
         aria-label={previousLabel}
-        variant={ButtonVariants.tertiary}
+        variant={ButtonVariants.primary}
       >
         <ChevronRight />
       </IconButton>
@@ -153,7 +153,7 @@ const Pagination = ({
       </Select>
 
       <IconButton
-        className={`${px}__pagination-button`}
+        className={`${baseClassName}__button`}
         onClick={() => {
           const nextIndex =
             (options.findIndex((option) => determineOptionValue(option) === valueWithPendingState) + 1) %
@@ -164,7 +164,7 @@ const Pagination = ({
         data-testid={`${id}-next-button`}
         isDisabled={isDisabled}
         aria-label={nextLabel}
-        variant={ButtonVariants.tertiary}
+        variant={ButtonVariants.primary}
       >
         <ChevronRight />
       </IconButton>

@@ -1,3 +1,24 @@
+# [1.104.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.103.3...v1.104.0) (2025-01-06)
+
+
+### Features
+
+* **Tags:** L3-5032 added import for Tags ([#457](https://github.com/PhillipsAuctionHouse/seldon/issues/457)) ([7c7775d](https://github.com/PhillipsAuctionHouse/seldon/commit/7c7775def86781234cdca6028331e430506bbf0b))
+
+## [1.103.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.103.2...v1.103.3) (2025-01-06)
+
+
+### Bug Fixes
+
+* **pagination:** L3-4826 increase pagination buttons and breadcrumb back button size ([#456](https://github.com/PhillipsAuctionHouse/seldon/issues/456)) ([17384cb](https://github.com/PhillipsAuctionHouse/seldon/commit/17384cbf71eaeb7946ab845e7aca2a63d313f875))
+
+## [1.103.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.103.1...v1.103.2) (2025-01-06)
+
+
+### Bug Fixes
+
+* **button:** L3-4918 button font and image sizes are incorrect and non responsive ([#455](https://github.com/PhillipsAuctionHouse/seldon/issues/455)) ([0d4c4e5](https://github.com/PhillipsAuctionHouse/seldon/commit/0d4c4e51859a5eb17f3083c136338dfb80871e76))
+
 ## [1.103.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.103.0...v1.103.1) (2024-12-18)
 
 
