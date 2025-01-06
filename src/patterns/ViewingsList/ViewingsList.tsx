@@ -138,7 +138,7 @@ const ViewingsList = ({
           onSave={handleOnSave}
         />
       ))}
-      <Button id={`viewings-list-add-btn-${props.id || getRandomNum()}`} size="sm" onClick={handleOnAdd}>
+      <Button id={`viewings-list-add-btn-${props.id || getRandomNum()}`} onClick={handleOnAdd}>
         {addViewingsBtnLabel}
       </Button>
     </div>

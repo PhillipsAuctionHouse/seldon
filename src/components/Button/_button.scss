@@ -2,6 +2,7 @@
 
 .#{$px}-button {
   @include bodyText;
+  @include labelText($button);
 
   align-items: center;
   background-color: $pure-black;
@@ -13,7 +14,7 @@
   font-variation-settings: 'wght' 600;
   gap: $margin-xsm;
   justify-content: center;
-  padding: 0 $padding-md;
+  padding: $padding-sm $padding-md;
   position: relative;
   transition:
     color 0.25s,
@@ -21,6 +22,8 @@
 
   svg {
     fill: $pure-white;
+    height: $button-label-line-height;
+    width: $button-label-line-height;
 
     path {
       fill: $pure-white;
@@ -42,27 +45,6 @@
 
     svg {
       fill: $pure-white;
-    }
-  }
-
-  &--sm {
-    font-size: 0.75rem;
-    height: 44px;
-
-    svg {
-      height: 1rem;
-      width: 1rem;
-    }
-  }
-
-  &--md,
-  &--lg {
-    font-size: 1rem;
-    height: 48px;
-
-    svg {
-      height: 1.25rem;
-      width: 1.25rem;
     }
   }
 
@@ -146,8 +128,7 @@
     background-color: transparent;
     border: 0;
     color: $pure-black;
-    height: 28px;
-    padding: 0;
+    padding: 0 $spacing-micro;
 
     svg {
       fill: $pure-black;

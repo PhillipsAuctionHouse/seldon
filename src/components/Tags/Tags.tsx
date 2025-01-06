@@ -59,7 +59,7 @@ export const Tag = ({ id, className, onRemove, label }: TagProps) => {
     <div className={classnames(`${px}-tag`, `${px}-button`, className)} aria-label="Close Tag">
       <div className={`${px}-tag__label`}>{label}</div>
       <div onClick={() => onRemove(label)} className={`${px}-tag__button`} data-testid={`${id}-item-close-button`}>
-        <IconButton className={`${px}-tag__button--close`} size="sm">
+        <IconButton className={`${px}-tag__button--close`}>
           <CloseIcon />
         </IconButton>
       </div>

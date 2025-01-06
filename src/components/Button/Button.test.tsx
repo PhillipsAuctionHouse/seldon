@@ -15,20 +15,18 @@ describe('Button', () => {
     render(<Button>Submit</Button>);
     const buttonElement = screen.getByText('Submit');
     expect(buttonElement).toHaveClass(`${px}-button`);
-    expect(buttonElement).toHaveClass(`${px}-button--md`);
     expect(buttonElement).toHaveClass(`${px}-button--primary`);
     expect(buttonElement).not.toHaveClass(`${px}-button--icon-last`);
   });
 
   it('renders with type and size classnames', () => {
     render(
-      <Button variant={ButtonVariants.secondary} size="lg" isIconLast>
+      <Button variant={ButtonVariants.secondary} isIconLast>
         Cancel
       </Button>,
     );
     const buttonElement = screen.getByText('Cancel');
     expect(buttonElement).toHaveClass(`${px}-button`);
-    expect(buttonElement).toHaveClass(`${px}-button--lg`);
     expect(buttonElement).toHaveClass(`${px}-button--secondary`);
     expect(buttonElement).toHaveClass(`${px}-button--icon-last`);
   });
