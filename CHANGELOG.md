@@ -1,3 +1,10 @@
+## [1.103.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.103.2...v1.103.3) (2025-01-06)
+
+
+### Bug Fixes
+
+* **pagination:** L3-4826 increase pagination buttons and breadcrumb back button size ([#456](https://github.com/PhillipsAuctionHouse/seldon/issues/456)) ([17384cb](https://github.com/PhillipsAuctionHouse/seldon/commit/17384cbf71eaeb7946ab845e7aca2a63d313f875))
+
 ## [1.103.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.103.1...v1.103.2) (2025-01-06)
 
 
