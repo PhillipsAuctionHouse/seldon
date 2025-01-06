@@ -6,11 +6,17 @@
   flex-direction: row;
   gap: $spacing-xsm;
 
-  &__button:hover:not(:disabled) {
-    background-color: inherit;
+  &__button {
+    &:disabled {
+      border: unset;
+    }
 
-    svg path {
-      fill: $pure-black;
+    &:hover:not(:disabled) {
+      background-color: inherit;
+
+      svg path {
+        fill: $pure-black;
+      }
     }
   }
 }
