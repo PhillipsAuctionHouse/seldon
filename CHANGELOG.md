@@ -1,3 +1,10 @@
+## [1.104.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.104.0...v1.104.1) (2025-01-06)
+
+
+### Bug Fixes
+
+* **modal:** L3-4918 responsive button change made close button the wrong style ([#458](https://github.com/PhillipsAuctionHouse/seldon/issues/458)) ([d4d86c5](https://github.com/PhillipsAuctionHouse/seldon/commit/d4d86c5f23aef3a31cd20f2ab9fee3b8e831b6e8))
+
 # [1.104.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.103.3...v1.104.0) (2025-01-06)
 
 
