@@ -31,7 +31,7 @@ export interface CarouselDotsProps extends ComponentProps<'div'> {
  */
 const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
   ({ className, maxDots = 9, position = 'inline', numberOfSlides = 0, ...props }, ref) => {
-    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'CarouselDots');
     const componentId = useId();
     const { api, onSlideChange } = useCarousel();
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -101,15 +101,15 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
         role="group"
         aria-roledescription="pagination"
         aria-label="pagination"
-        className={classNames(`${baseClassName}-pagination`, className, `${baseClassName}-pagination-${position}`)}
+        className={classNames(`${baseClassName}`, className, `${baseClassName}-${position}`)}
         {...props}
         {...commonProps}
       >
-        <div className={`${baseClassName}-pagination-container`}>
+        <div className={`${baseClassName}-container`}>
           <div
             // Calculate the max width of the container based on the number of dots and the width of each dot (8px width + 12px gap)
             style={{ '--max-width': `${maxDots * 8 + (maxDots - 1) * 12}px` } as React.CSSProperties}
-            className={`${baseClassName}-pagination-container-inner`}
+            className={`${baseClassName}-container-inner`}
             ref={scrollableContainerRef}
           >
             {scrollSnaps.map((_, index) => {
@@ -135,7 +135,6 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
                   key={`${componentId}-dot-${index}`}
                   onClick={() => onDotButtonClick(index)}
                   isSelected={isSelected}
-                  baseClassName={baseClassName}
                   scrollableContainerRef={scrollableContainerRef}
                   onInViewChange={(inView) => {
                     if (inView) {
