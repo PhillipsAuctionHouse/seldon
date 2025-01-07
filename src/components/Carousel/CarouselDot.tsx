@@ -1,13 +1,13 @@
 import classNames from 'classnames';
 import { useInView } from 'react-intersection-observer';
+import { getCommonProps } from '../../utils';
+import { ComponentProps } from 'react';
 
-interface Props {
+interface Props extends ComponentProps<'button'> {
   /** Whether the dot is selected */
   isSelected: boolean;
   /** Callback function when the dot is clicked */
   onClick: () => void;
-  /** Base class name for styling */
-  baseClassName: string;
   /** Reference to the scrollable container */
   scrollableContainerRef: React.RefObject<HTMLDivElement>;
   /** Callback function when the dot comes into view within the scrollable container */
@@ -19,11 +19,12 @@ interface Props {
 export const CarouselDot = ({
   isSelected,
   onClick,
-  baseClassName,
   scrollableContainerRef,
   onInViewChange,
   variant = 'md',
+  ...props
 }: Props) => {
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'CarouselDot');
   const { ref } = useInView({
     threshold: 0,
     root: scrollableContainerRef.current,
@@ -37,12 +38,13 @@ export const CarouselDot = ({
       ref={ref}
       role="button"
       onClick={onClick}
-      className={classNames(`${baseClassName}-pagination-dot__container`)}
+      className={classNames(`${baseClassName}__container`)}
+      {...commonProps}
     >
       <span
-        className={classNames(`${baseClassName}-pagination-dot`, {
-          [`${baseClassName}-pagination-dot--selected`]: isSelected,
-          [`${baseClassName}-pagination-dot--${variant}`]: variant,
+        className={classNames(`${baseClassName}`, {
+          [`${baseClassName}--selected`]: isSelected,
+          [`${baseClassName}--${variant}`]: variant,
         })}
       />
     </button>

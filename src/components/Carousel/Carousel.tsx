@@ -1,6 +1,7 @@
 import { ComponentProps, forwardRef, createContext, useCallback, useEffect, KeyboardEvent } from 'react';
 import { getCommonProps, SpacingTokens } from '../../utils';
 import classnames from 'classnames';
+import ClassNames from 'embla-carousel-class-names';
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 
@@ -92,6 +93,9 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
               }),
             ]
           : []),
+        ClassNames({
+          snapped: 'carousel-item-in-view',
+        }),
       ],
     );
 

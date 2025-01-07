@@ -13,7 +13,7 @@ export type CarouselItemProps = ComponentProps<'div'>;
  *
  */
 const CarouselItem = forwardRef<HTMLDivElement, CarouselItemProps>(({ className, ...props }, ref) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'CarouselItem');
   const { columnGap } = useCarousel();
 
   return (
@@ -21,9 +21,9 @@ const CarouselItem = forwardRef<HTMLDivElement, CarouselItemProps>(({ className,
       ref={ref}
       role={props.onClick ? 'button' : 'group'}
       aria-roledescription="slide"
-      className={classNames(`${baseClassName}-item`, className, {
-        [`${baseClassName}-item--gap-${columnGap}`]: !!columnGap,
-        [`${baseClassName}-item--cursor-pointer`]: !!props.onClick,
+      className={classNames(`${baseClassName}`, className, {
+        [`${baseClassName}--gap-${columnGap}`]: !!columnGap,
+        [`${baseClassName}--cursor-pointer`]: !!props.onClick,
       })}
       {...props}
       {...commonProps}
