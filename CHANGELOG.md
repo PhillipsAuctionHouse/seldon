@@ -1,3 +1,10 @@
+# [1.105.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.104.1...v1.105.0) (2025-01-07)
+
+
+### Features
+
+* **carousel:** L3-5040 add classname for tracking slide in view ([#459](https://github.com/PhillipsAuctionHouse/seldon/issues/459)) ([196c309](https://github.com/PhillipsAuctionHouse/seldon/commit/196c3095623611bc9462d6f9eff96824bad10114))
+
 ## [1.104.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.104.0...v1.104.1) (2025-01-06)
 
 
