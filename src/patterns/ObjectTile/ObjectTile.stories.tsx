@@ -28,6 +28,8 @@ const args = {
         lotStatus={LotStatus.live}
         numberOfBids={2}
         lotCloseDate={addMinutes(new Date(), 20)}
+        saleCloseDate={addMinutes(new Date(), 20)}
+        currentBid={1000000}
       >
         <BidMessage message="With You" />
       </BidSnapshot>
