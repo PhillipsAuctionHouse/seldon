@@ -22,20 +22,16 @@ export interface CarouselContentProps extends ComponentProps<'div'> {
  */
 const CarouselContent = forwardRef<HTMLDivElement, CarouselContentProps>(
   ({ className, containerClassName, containerStyles, ...props }, ref) => {
-    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'CarouselContent');
 
     const { carouselRef, columnGap } = useCarousel();
 
     return (
-      <div
-        ref={carouselRef}
-        className={classNames(`${baseClassName}-content`, containerClassName)}
-        style={containerStyles}
-      >
+      <div ref={carouselRef} className={classNames(`${baseClassName}`, containerClassName)} style={containerStyles}>
         <div
           ref={ref}
-          className={classNames(`${baseClassName}-content-inner`, className, {
-            [`${baseClassName}-content-inner--gap-${columnGap}`]: !!columnGap,
+          className={classNames(`${baseClassName}-inner`, className, {
+            [`${baseClassName}-inner--gap-${columnGap}`]: !!columnGap,
           })}
           {...props}
           {...commonProps}

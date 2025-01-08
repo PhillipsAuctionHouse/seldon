@@ -1,6 +1,6 @@
 {
   "name": "@phillips/seldon",
-  "version": "1.104.1",
+  "version": "1.105.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/PhillipsAuctionHouse/seldon"
@@ -51,7 +51,8 @@
     "classnames": "^2.5.1",
     "date-fns": "^4.1.0",
     "dompurify": "^3.1.6",
-    "embla-carousel-react": "^8.3.0",
+    "embla-carousel-class-names": "^8.5.1",
+    "embla-carousel-react": "^8.5.1",
     "embla-carousel-wheel-gestures": "^8.0.1",
     "flatpickr": "^4.6.13",
     "html-react-parser": "^5.1.12",

@@ -1,3 +1,17 @@
+## [1.105.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.105.0...v1.105.1) (2025-01-08)
+
+
+### Bug Fixes
+
+* **bidsnapshot:** L3-4767 lot timer should only show if the sale starts closing in the next 60 minutes ([#460](https://github.com/PhillipsAuctionHouse/seldon/issues/460)) ([4e8c1d9](https://github.com/PhillipsAuctionHouse/seldon/commit/4e8c1d9e04e4a5db155147533c0426926978ead6))
+
+# [1.105.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.104.1...v1.105.0) (2025-01-07)
+
+
+### Features
+
+* **carousel:** L3-5040 add classname for tracking slide in view ([#459](https://github.com/PhillipsAuctionHouse/seldon/issues/459)) ([196c309](https://github.com/PhillipsAuctionHouse/seldon/commit/196c3095623611bc9462d6f9eff96824bad10114))
+
 ## [1.104.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.104.0...v1.104.1) (2025-01-06)
 
 

@@ -59,4 +59,14 @@ describe('ObjectTile', () => {
     expect(screen.getByText('Estimate')).toBeInTheDocument();
     expect(screen.getByText('1000-2000')).toBeInTheDocument();
   });
+  it('renders estimate on request text when provided', () => {
+    render(
+      <ObjectTile
+        imageUrl="https://via.placeholder.com/150"
+        lotNumber="123"
+        estimateOnRequestText="Estimate on request"
+      />,
+    );
+    expect(screen.getByText('Estimate on request')).toBeInTheDocument();
+  });
 });
