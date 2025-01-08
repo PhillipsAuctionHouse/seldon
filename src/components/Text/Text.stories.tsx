@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 import Text, { TextProps } from './Text';
-import { TextVariants } from './types';
+import { TextAlignments, TextVariants } from './types';
 import { TextSymbolVariants } from '../TextSymbol/types';
 import TextSymbol from '../TextSymbol/TextSymbol';
 
@@ -23,6 +23,12 @@ Playground.argTypes = {
       type: 'select',
     },
   },
+  align: {
+    options: TextAlignments,
+    control: {
+      type: 'select',
+    },
+  },
 };
 
 export const SuperScript = (props: TextProps) => <Text variant={TextVariants.heading3} {...props} />;
@@ -39,6 +45,12 @@ SuperScript.args = {
 SuperScript.argTypes = {
   variant: {
     options: TextVariants,
+    control: {
+      type: 'select',
+    },
+  },
+  align: {
+    options: TextAlignments,
     control: {
       type: 'select',
     },

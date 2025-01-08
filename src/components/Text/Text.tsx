@@ -1,6 +1,6 @@
 import React from 'react';
 import { getCommonProps } from '../../utils';
-import { TextVariants } from './types';
+import { TextAlignments, TextVariants } from './types';
 import { determineDefaultTextElement, determineTextClassName } from './utils';
 import classNames from 'classnames';
 
@@ -13,6 +13,10 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
    * The OOTB style to apply to the text
    */
   variant?: TextVariants;
+  /**
+   * The alignment of the text
+   */
+  align?: TextAlignments;
 }
 /**
  * ## Overview
@@ -23,14 +27,21 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-text--overview)
  */
-const Text = ({ children, className, element: CustomElement, variant = TextVariants.body2, ...props }: TextProps) => {
+const Text = ({
+  children,
+  className,
+  element: CustomElement,
+  variant = TextVariants.body2,
+  align = TextAlignments.left,
+  ...props
+}: TextProps) => {
   const Component = CustomElement || determineDefaultTextElement(variant);
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Text');
 
   return (
     <Component
       {...commonProps}
-      className={classNames(baseClassName, className, determineTextClassName(variant))}
+      className={classNames(baseClassName, className, determineTextClassName(variant), `${baseClassName}--${align}`)}
       {...props}
     >
       {children}
