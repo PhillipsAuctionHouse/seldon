@@ -25,6 +25,10 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
    */
   estimateLabelText?: string;
   /**
+   * Estimate on request text to use when estimate is not available.
+   */
+  estimateOnRequestText?: string;
+  /**
    * Element used for favoriting object
    */
   favoriteElement?: React.ElementType;
@@ -96,6 +100,7 @@ const ObjectTile = memo(
         element: Element,
         estimate,
         estimateLabelText = 'Estimate',
+        estimateOnRequestText,
         favoriteElement: FavoriteElement,
         imageAlt = 'Brought to you by Phillips',
         imageUrl = '',
@@ -115,6 +120,7 @@ const ObjectTile = memo(
     ) => {
       const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ObjectTile');
       const Component = Element ?? 'a';
+      const shouldShowEstimate = estimate || estimateOnRequestText;
       return (
         <Component {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
           <SeldonImage
@@ -179,12 +185,12 @@ const ObjectTile = memo(
                   </Text>
                 ) : null}
               </div>
-              {estimate ? (
+              {shouldShowEstimate ? (
                 <DetailList hasSeparators className={`${baseClassName}__estimate ${baseClassName}__section`}>
                   <Detail
                     className={`${baseClassName}__estimate__label`}
                     label={estimateLabelText}
-                    value={estimate}
+                    value={estimate ? estimate : estimateOnRequestText}
                     hasWrap={false}
                   />
                 </DetailList>
