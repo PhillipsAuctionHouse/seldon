@@ -32,7 +32,7 @@ const Text = ({
   className,
   element: CustomElement,
   variant = TextVariants.body2,
-  align = TextAlignments.left,
+  align,
   ...props
 }: TextProps) => {
   const Component = CustomElement || determineDefaultTextElement(variant);
@@ -41,7 +41,9 @@ const Text = ({
   return (
     <Component
       {...commonProps}
-      className={classNames(baseClassName, className, determineTextClassName(variant), `${baseClassName}--${align}`)}
+      className={classNames(baseClassName, className, determineTextClassName(variant), {
+        [`${baseClassName}--${align}`]: !!align,
+      })}
       {...props}
     >
       {children}
