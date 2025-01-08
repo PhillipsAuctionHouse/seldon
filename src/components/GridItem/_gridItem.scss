@@ -11,13 +11,11 @@
 
   &-align-center {
     grid-column: math.ceil(math.div($total-cols + 1 - $span, 2)) / span #{$span};
-    text-align: center;
   }
 }
 
 .#{$px}-grid-item {
   justify-self: center;
-  text-align: center;
   width: 100%;
 
   @for $i from 1 through 2 {

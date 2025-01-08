@@ -25,3 +25,9 @@ export enum TextVariants {
   snwHeadingHero1 = 'snwHeadingHero1',
   snwHeadingHero2 = 'snwHeadingHero2',
 }
+
+export enum TextAlignments {
+  left = 'left',
+  center = 'center',
+  right = 'right',
+}

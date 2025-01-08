@@ -1,5 +1,5 @@
 import { px } from '../../utils';
-import { TextVariants } from './types';
+import { TextAlignments, TextVariants } from './types';
 
 export const determineTextClassName = (variant: TextVariants = TextVariants.body1): string => {
   // our javascript const doesn't exactly match the tokens
@@ -21,4 +21,8 @@ export const determineDefaultTextElement = (variant: TextVariants = TextVariants
   }
 
   return 'span';
+};
+
+export const determineTextAlignment = (alignment: TextAlignments = TextAlignments.center): string => {
+  return `${px}-text--${alignment}`;
 };
