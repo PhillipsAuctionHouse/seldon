@@ -1,7 +1,7 @@
 import React from 'react';
 import { getCommonProps } from '../../utils';
 import { TextAlignments, TextVariants } from './types';
-import { determineDefaultTextElement, determineTextAlignment, determineTextClassName } from './utils';
+import { determineDefaultTextElement, determineTextClassName } from './utils';
 import classNames from 'classnames';
 
 export interface TextProps extends React.HTMLAttributes<HTMLElement> {
@@ -41,7 +41,7 @@ const Text = ({
   return (
     <Component
       {...commonProps}
-      className={classNames(baseClassName, className, determineTextClassName(variant), determineTextAlignment(align))}
+      className={classNames(baseClassName, className, determineTextClassName(variant), `${baseClassName}--${align}`)}
       {...props}
     >
       {children}
