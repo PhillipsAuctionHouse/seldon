@@ -1,3 +1,10 @@
+# [1.106.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.105.2...v1.106.0) (2025-01-08)
+
+
+### Features
+
+* **text:** L3-3958 grid centering and text alignment ([#462](https://github.com/PhillipsAuctionHouse/seldon/issues/462)) ([2be0791](https://github.com/PhillipsAuctionHouse/seldon/commit/2be07916a2fb111510969a7a1b9825692e68b492))
+
 ## [1.105.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.105.1...v1.105.2) (2025-01-08)
 
 
