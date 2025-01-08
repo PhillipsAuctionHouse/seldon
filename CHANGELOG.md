@@ -1,3 +1,10 @@
+## [1.105.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.105.1...v1.105.2) (2025-01-08)
+
+
+### Bug Fixes
+
+* **ObjectTile:** L3-4791 missing estimate on request option ([#461](https://github.com/PhillipsAuctionHouse/seldon/issues/461)) ([18b4e91](https://github.com/PhillipsAuctionHouse/seldon/commit/18b4e9117e336abcb2d7f019812adaf44665e55d))
+
 ## [1.105.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.105.0...v1.105.1) (2025-01-08)
 
 
