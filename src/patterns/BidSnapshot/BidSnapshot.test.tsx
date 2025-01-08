@@ -4,6 +4,9 @@ import { render, screen } from '@testing-library/react';
 import { LotStatus } from '../../types/commonTypes';
 import { BidStatusEnum } from './types';
 import BidMessage from './BidMessage';
+import { addDays, addMinutes, subHours } from 'date-fns';
+
+const saleCloseDate = addMinutes(new Date(), 50);
 
 describe('BidSnapshot', () => {
   runCommonTests(BidSnapshot, 'BidSnapshot');
@@ -113,21 +116,92 @@ describe('BidSnapshot', () => {
     expect(screen.getByText('You won')).toBeInTheDocument();
   });
 
-  it('renders Countdown timer when lotCloseDate prop is passed', () => {
-    const lotCloseDate = new Date(Date.now() + 10000); // 10 seconds from now
-    render(<BidSnapshot startingBid={100} numberOfBids={1} lotStatus={LotStatus.live} lotCloseDate={lotCloseDate} />);
-    expect(screen.getByText('Closes in')).toBeInTheDocument();
-  });
+  describe('countdown timer', () => {
+    it('renders Countdown timer when lotCloseDate prop is passed', () => {
+      const lotCloseDate = new Date(Date.now() + 10000); // 10 seconds from now
 
-  it('does not render Countdown timer if lot closed', () => {
-    const lotCloseDate = new Date(Date.now() + 10000); // 10 seconds from now
-    render(<BidSnapshot startingBid={100} numberOfBids={1} lotStatus={LotStatus.past} lotCloseDate={lotCloseDate} />);
-    expect(screen.queryByText('Closes in')).not.toBeInTheDocument();
-  });
+      render(
+        <BidSnapshot
+          startingBid={100}
+          numberOfBids={1}
+          lotStatus={LotStatus.live}
+          lotCloseDate={lotCloseDate}
+          saleCloseDate={saleCloseDate}
+        />,
+      );
+      expect(screen.getByText('Closes in')).toBeInTheDocument();
+    });
 
-  it('does not render Countdown timer if lot not started', () => {
-    const lotCloseDate = new Date(Date.now() + 10000); // 10 seconds from now
-    render(<BidSnapshot startingBid={100} numberOfBids={1} lotStatus={LotStatus.ready} lotCloseDate={lotCloseDate} />);
-    expect(screen.queryByText('Closes in')).not.toBeInTheDocument();
+    it('does not render Countdown timer if lot not started', () => {
+      const lotCloseDate = new Date(Date.now() + 10000); // 10 seconds from now
+      render(
+        <BidSnapshot
+          startingBid={100}
+          numberOfBids={1}
+          lotStatus={LotStatus.ready}
+          lotCloseDate={lotCloseDate}
+          saleCloseDate={saleCloseDate}
+        />,
+      );
+      expect(screen.queryByText('Closes in')).not.toBeInTheDocument();
+    });
+
+    it('does not render Countdown timer if lot closed', () => {
+      const lotCloseDate = new Date(Date.now() + 10000); // 10 seconds from now
+      render(
+        <BidSnapshot
+          startingBid={100}
+          numberOfBids={1}
+          lotStatus={LotStatus.past}
+          lotCloseDate={lotCloseDate}
+          saleCloseDate={saleCloseDate}
+        />,
+      );
+      expect(screen.queryByText('Closes in')).not.toBeInTheDocument();
+    });
+
+    it('renders Countdown timer if sale close date is in the next hour', () => {
+      const lotCloseDate = new Date(Date.now() + 10000); // 10 seconds from now
+
+      render(
+        <BidSnapshot
+          startingBid={100}
+          numberOfBids={1}
+          lotStatus={LotStatus.live}
+          lotCloseDate={lotCloseDate}
+          saleCloseDate={addMinutes(new Date(), 55)}
+        />,
+      );
+      expect(screen.getByText('Closes in')).toBeInTheDocument();
+    });
+
+    it('renders Countdown timer if sale close date in the past', () => {
+      const lotCloseDate = new Date(Date.now() + 10000); // 10 seconds from now
+
+      render(
+        <BidSnapshot
+          startingBid={100}
+          numberOfBids={1}
+          lotStatus={LotStatus.live}
+          lotCloseDate={lotCloseDate}
+          saleCloseDate={subHours(new Date(), 6)}
+        />,
+      );
+      expect(screen.getByText('Closes in')).toBeInTheDocument();
+    });
+
+    it('does not render Countdown timer if sale close date is far in the future', () => {
+      const lotCloseDate = new Date(Date.now() + 10000); // 10 seconds from now
+      render(
+        <BidSnapshot
+          startingBid={100}
+          numberOfBids={1}
+          lotStatus={LotStatus.live}
+          lotCloseDate={lotCloseDate}
+          saleCloseDate={addDays(new Date(), 5)}
+        />,
+      );
+      expect(screen.queryByText('Closes in')).not.toBeInTheDocument();
+    });
   });
 });

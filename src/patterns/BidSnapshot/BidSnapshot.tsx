@@ -9,6 +9,7 @@ import { Countdown } from '../../components/Countdown/index';
 import { CountdownVariants } from '../../components/Countdown/types';
 import { BidStatusEnum } from './types';
 import BidMessage from './BidMessage';
+import { differenceInMinutes, isAfter } from 'date-fns';
 
 export interface BidSnapshotProps extends ComponentProps<'div'> {
   /**
@@ -47,6 +48,10 @@ export interface BidSnapshotProps extends ComponentProps<'div'> {
    * Language selection for the application
    */
   lang?: keyof typeof SupportedLanguages;
+  /**
+   * When lots start to close for this sale
+   */
+  saleCloseDate?: Date | null;
   /**
    * End time for this object
    */
@@ -101,6 +106,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
       currentBidText = 'Current bid',
       formatDurationStr = (str) => str.replace(/seconds?/, 'sec').replace(/minutes?/, 'min'),
       lang = 'en',
+      saleCloseDate,
       lotCloseDate,
       numberOfBids = 0,
       startingBid,
@@ -118,7 +124,14 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
     const isReady = lotStatus === LotStatus.ready;
     const isLive = lotStatus === LotStatus.live;
     const isPast = lotStatus === LotStatus.past;
-    const hasCountdownTimer = isLive && lotCloseDate;
+    const now = new Date();
+    const hasCountdownTimer =
+      isLive &&
+      lotCloseDate &&
+      isAfter(lotCloseDate, now) &&
+      saleCloseDate &&
+      (differenceInMinutes(saleCloseDate, now) < 60 || isAfter(now, saleCloseDate)); // only show within the 60 minutes of when the lots start closing or if we're past the close date
+
     const bidMessage = findChildrenOfType(children, BidMessage);
     const otherChildren = findChildrenExcludingTypes(children, [BidMessage]);
 

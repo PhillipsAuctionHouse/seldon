@@ -46,6 +46,7 @@ Playground.args = {
   lotStatus: LotStatus.live,
   currentBid: 1000,
   lotCloseDate: addMinutes(new Date(), 20),
+  saleCloseDate: addMinutes(new Date(), 40),
   lang: enUS,
   startingBid: 600,
   soldPrice: 2000,
