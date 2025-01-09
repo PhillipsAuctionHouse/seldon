@@ -164,7 +164,7 @@ const Input = React.forwardRef(
           {labelText}
         </label>
         <input
-          className={classnames(`${px}-input__input`, { className })}
+          className={classnames(`${px}-input__input`, className)}
           data-testid={id}
           disabled={inputProps.disabled}
           id={id || generatedId}
