@@ -47,8 +47,8 @@
     margin-bottom: 0;
   }
 
-  & .#{$px}-object-tile__reference-number,
-  & .#{$px}-object-tile__model {
+  &__reference-number,
+  &__model {
     font-style: italic;
   }
 
