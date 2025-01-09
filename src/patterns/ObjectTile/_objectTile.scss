@@ -47,6 +47,11 @@
     margin-bottom: 0;
   }
 
+  &__reference-number,
+  &__model {
+    font-style: italic;
+  }
+
   &__meta {
     margin-bottom: $spacing-sm;
   }
