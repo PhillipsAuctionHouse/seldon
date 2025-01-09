@@ -1,3 +1,10 @@
+## [1.106.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.106.0...v1.106.1) (2025-01-09)
+
+
+### Bug Fixes
+
+* **input:** L3-3958 pass className properly to input, export text ali… ([#463](https://github.com/PhillipsAuctionHouse/seldon/issues/463)) ([d43cda2](https://github.com/PhillipsAuctionHouse/seldon/commit/d43cda23be5b1b56b192f7936b2e9d44ccd29bcb))
+
 # [1.106.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.105.2...v1.106.0) (2025-01-08)
 
 
