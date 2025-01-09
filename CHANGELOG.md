@@ -1,3 +1,10 @@
+## [1.106.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.106.1...v1.106.2) (2025-01-09)
+
+
+### Bug Fixes
+
+* **objecttile:** L3-4682 italicize model and referenceNumber ([#464](https://github.com/PhillipsAuctionHouse/seldon/issues/464)) ([821b149](https://github.com/PhillipsAuctionHouse/seldon/commit/821b149523d146ba6b2e13381d4ae7727e23d569))
+
 ## [1.106.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.106.0...v1.106.1) (2025-01-09)
 
 
