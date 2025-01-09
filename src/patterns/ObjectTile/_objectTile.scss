@@ -47,6 +47,11 @@
     margin-bottom: 0;
   }
 
+  & .#{$px}-object-tile__reference-number,
+  & .#{$px}-object-tile__model {
+    font-style: italic;
+  }
+
   &__meta {
     margin-bottom: $spacing-sm;
   }
