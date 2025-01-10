@@ -26,7 +26,7 @@ describe('Text', () => {
     renderText({
       children: (
         <>
-          Hello World<TextSymbol variant={TextSymbolVariants.lotNumber}>sup</TextSymbol>
+          Hello World<TextSymbol variant={TextSymbolVariants.lotNumber} symbols={['sup']}></TextSymbol>
         </>
       ),
     });

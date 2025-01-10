@@ -17,10 +17,7 @@ export const Playground = (props: TextSymbolProps) => (
   </Text>
 );
 
-Playground.args = {
-  children: 'ЖΟ◆',
-  variant: TextSymbolVariants.lotNumber,
-};
+Playground.args = { symbols: 'Ο‡≠♠ΩΔ•†◆Σ܀∞✱▼Ж≌Ø'.split(''), variant: TextSymbolVariants.lotNumber };
 
 Playground.argTypes = {
   variant: {
