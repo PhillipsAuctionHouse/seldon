@@ -4,6 +4,8 @@ import TextSymbol, { TextSymbolProps } from './TextSymbol';
 import { px } from '../../utils';
 import { TextSymbolVariants } from './types';
 
+const symbols = 'Ο‡≠♠ΩΔ•†◆Σ܀∞✱▼Ж≌Ø'.split('');
+
 describe('TextSymbol', () => {
   runCommonTests(TextSymbol, 'TextSymbol');
   const renderTextSymbol = (props: TextSymbolProps) => {
@@ -11,20 +13,25 @@ describe('TextSymbol', () => {
   };
 
   it('renders children correctly', () => {
-    renderTextSymbol({ children: 'Hello World' });
-
-    expect(screen.getByText('Hello World')).toBeInTheDocument();
+    renderTextSymbol({ symbols });
+    symbols.forEach((symbol) => expect(screen.getByText(symbol)).toBeInTheDocument());
   });
 
   it('applies the default variant correctly', () => {
-    renderTextSymbol({ children: 'Default Variant' });
-
-    expect(screen.getByText('Default Variant')).toHaveClass(`${px}-text-symbol--lotNumber`);
+    renderTextSymbol({ symbols });
+    expect(screen.getByTestId('text-symbol')).toHaveClass(`${px}-text-symbol--lotNumber`);
   });
 
   it('applies the estimation variant correctly', () => {
-    renderTextSymbol({ children: 'Estimation Variant', variant: TextSymbolVariants.estimation });
-
-    expect(screen.getByText('Estimation Variant')).toHaveClass(`${px}-text-symbol--estimation`);
+    renderTextSymbol({ symbols, variant: TextSymbolVariants.estimation });
+    expect(screen.getByTestId('text-symbol')).toHaveClass(`${px}-text-symbol--estimation`);
+  });
+  it('applies symbol size correctly', () => {
+    const largeSymbols = 'Ο‡'.split('');
+    renderTextSymbol({ symbols: largeSymbols });
+    largeSymbols.forEach((symbol) => {
+      const symbolElement = screen.getByText(symbol);
+      expect(symbolElement).toHaveClass(`${px}-text-symbol--large-symbol`);
+    });
   });
 });

@@ -8,8 +8,19 @@
   }
 
   &--lotNumber {
-    font-size: 65%;
     margin-left: $spacing-xsm;
     vertical-align: super;
+  }
+
+  &--large-symbol {
+    font-size: 65%;
+  }
+
+  &--medium-symbol {
+    font-size: 85%;
+  }
+
+  &--small-symbol {
+    font-size: 100%;
   }
 }
