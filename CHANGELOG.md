@@ -1,3 +1,11 @@
+## [1.106.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.106.2...v1.106.3) (2025-01-13)
+
+
+### Bug Fixes
+
+* **deps:** bump @radix-ui/react-dialog from 1.1.1 to 1.1.4 ([#466](https://github.com/PhillipsAuctionHouse/seldon/issues/466)) ([5a23b67](https://github.com/PhillipsAuctionHouse/seldon/commit/5a23b67f16af932eeb270147db4465a0601bf840))
+* **textsymbol:** L3-5094 normalize symbol size ([#468](https://github.com/PhillipsAuctionHouse/seldon/issues/468)) ([202ff21](https://github.com/PhillipsAuctionHouse/seldon/commit/202ff216b3b97692df6ae60e5f899fb66968febf))
+
 ## [1.106.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.106.1...v1.106.2) (2025-01-09)
 
 
