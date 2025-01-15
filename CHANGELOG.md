@@ -1,3 +1,10 @@
+## [1.106.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.106.3...v1.106.4) (2025-01-15)
+
+
+### Bug Fixes
+
+* **deps:** bump html-react-parser from 5.1.12 to 5.2.2 ([#469](https://github.com/PhillipsAuctionHouse/seldon/issues/469)) ([a0d3db3](https://github.com/PhillipsAuctionHouse/seldon/commit/a0d3db3e590983bf62ea11b61728e0271a7994d9))
+
 ## [1.106.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.106.2...v1.106.3) (2025-01-13)
 
 
