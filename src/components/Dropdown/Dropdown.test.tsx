@@ -121,7 +121,7 @@ describe('Dropdown', () => {
     await userEvent.click(option);
     expect(onValueChangeMock).toHaveBeenCalled();
   });
-  it('disabled dropdown should not trigger value change', () => {
+  it('disabled dropdown should not pop selection', async () => {
     render(
       <Dropdown
         options={languages}
@@ -138,5 +138,7 @@ describe('Dropdown', () => {
     });
 
     expect(trigger).toBeDisabled();
+    await userEvent.click(trigger);
+    expect(screen.queryByRole('option', { name: '中文' })).not.toBeInTheDocument();
   });
 });
