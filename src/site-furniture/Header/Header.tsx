@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
 import Logo from '../../assets/PhillipsLogo.svg?react';
 import UserManagement from '../../patterns/UserManagement/UserManagement';
-import { LanguageSelector } from '../../patterns/LanguageSelector';
+import { LanguageSelector, LanguageSelectorProps } from '../../patterns/LanguageSelector';
 import Navigation from '../../components/Navigation/Navigation';
 import { Component, ComponentProps, forwardRef, ReactElement, useState, createContext } from 'react';
 import { defaultHeaderContext } from './utils';
@@ -31,6 +31,10 @@ export interface HeaderProps extends ComponentProps<'header'> {
    * label for the Logo link
    */
   logoText?: string;
+  /**
+   * Is the header disabled
+   */
+  isDisabled?: boolean;
 }
 export type HeaderContextType = {
   /**
@@ -74,6 +78,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
       toggleOpenText = 'Open Menu',
       toggleCloseText = 'Close Menu',
       logoText = 'Home Page',
+      isDisabled,
       ...props
     },
     ref,
@@ -88,7 +93,11 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     return (
       <header {...props} className={classnames(`${px}-header`, className)} ref={ref}>
         <div className={`${px}-header__top-row`}>
-          <SSRMediaQuery.Media greaterThanOrEqual="md">{languageSelectorElement}</SSRMediaQuery.Media>
+          <SSRMediaQuery.Media greaterThanOrEqual="md">
+            {React.isValidElement(languageSelectorElement?.[0])
+              ? React.cloneElement(languageSelectorElement?.[0], { isDisabled } as LanguageSelectorProps)
+              : ''}
+          </SSRMediaQuery.Media>
           {/** only render language selector in this location on desktop */}
           <button
             aria-label={toggleText}
@@ -128,7 +137,13 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
                 ? React.cloneElement<PropsWithChildren>(child as ReactElement<PropsWithChildren>, {
                     children: [
                       ...React.Children.toArray((child.props as PropsWithChildren).children),
-                      languageSelectorElement,
+                      ...[
+                        React.isValidElement(languageSelectorElement?.[0]) && languageSelectorElement?.length > 0
+                          ? React.cloneElement(languageSelectorElement[0], {
+                              isDisabled,
+                            } as LanguageSelectorProps)
+                          : '',
+                      ],
                     ],
                   })
                 : child,

@@ -16,6 +16,7 @@ interface DropdownSelectorProps extends ComponentProps<'div'> {
   onValueChange: (value: string) => void;
   label: string;
   options: { label: string; value: string }[];
+  isDisabled?: boolean;
 }
 
 const MobileLanguageSelector = ({
@@ -69,6 +70,10 @@ export interface LanguageSelectorProps extends ComponentProps<'div'> {
    * hide or show with an opacity transition
    */
   isHidden?: boolean;
+  /**
+   * Disable the language selector so it can't be interacted with
+   */
+  isDisabled?: boolean;
 }
 /**
  * ## Overview
@@ -91,6 +96,7 @@ const LanguageSelector = forwardRef<HTMLElement, LanguageSelectorProps>(
       onLanguageChange = noOp,
       id,
       isHidden,
+      isDisabled = false,
       ...props
     },
     ref,
@@ -114,7 +120,7 @@ const LanguageSelector = forwardRef<HTMLElement, LanguageSelectorProps>(
     return (
       <>
         <SSRMediaQuery.Media greaterThanOrEqual="md">
-          <Dropdown {...selectorProps} ref={ref as ForwardedRef<HTMLButtonElement>} />
+          <Dropdown {...selectorProps} isDisabled={isDisabled} ref={ref as ForwardedRef<HTMLButtonElement>} />
         </SSRMediaQuery.Media>
         <SSRMediaQuery.Media lessThan="md">
           <MobileLanguageSelector {...selectorProps} ref={ref as ForwardedRef<HTMLDivElement>} />
