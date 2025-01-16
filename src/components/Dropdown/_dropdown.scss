@@ -12,6 +12,15 @@
     justify-content: center;
     padding: $spacing-xsm;
 
+    &:disabled {
+      color: $medium-gray;
+      opacity: 1;
+
+      svg {
+        stroke: $light-gray;
+      }
+    }
+
     svg {
       height: 16px;
       width: 16px;
