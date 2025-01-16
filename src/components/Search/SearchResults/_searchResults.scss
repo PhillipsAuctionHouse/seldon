@@ -6,9 +6,14 @@
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
+  opacity: 0; /* Initially hidden */
+  overflow: hidden;
   padding: $spacing-sm;
   position: absolute;
   top: $search-size;
+  transition:
+    opacity 0.5s ease,
+    max-height 0.5s ease;
   width: 100%;
 
   @include isHeaderMobile {
@@ -29,6 +34,9 @@
       font-weight: unset;
     }
   }
+}
+.#{$px}-search__results.visible {
+  opacity: 1;
 }
 
 .#{$px}-search {

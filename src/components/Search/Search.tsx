@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { encodeURLSearchParams, getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
 import Input from '../Input/Input';
-
 import Link from '../Link/Link';
 import SearchResults, { type SearchResultsProps } from './SearchResults/SearchResults';
 import { Text, TextVariants } from '../Text';
@@ -96,7 +95,7 @@ const Search = ({
       e.preventDefault();
       if (value && value.length > 2) {
         const allResultsLink = encodeURLSearchParams(getAllResultsLink(value));
-        showSearch(false);
+        // showSearch(false);
         window.location.href = allResultsLink;
       }
       if (e.currentTarget instanceof HTMLAnchorElement) {
@@ -203,7 +202,7 @@ const Search = ({
               >
                 <li key="viewAllSearchResults" className={`${baseClassName}__result`}>
                   <Link
-                    onClick={() => showSearch(false)}
+                    // onClick={() => showSearch(false)}
                     href={((value: string) => {
                       return encodeURLSearchParams(getAllResultsLink(value));
                     })(value)}

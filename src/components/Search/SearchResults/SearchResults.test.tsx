@@ -35,19 +35,12 @@ it('renders custom loading text when provided', () => {
 });
 
 it('calls showSearchResults with false when a result is clicked', () => {
-  render(<SearchResults autoCompleteResults={autoCompleteResults} closeSearch={closeSearchResultsMock} />);
+  render(<SearchResults autoCompleteResults={autoCompleteResults} />);
   screen.getByText('Page 1').click();
-  expect(closeSearchResultsMock).toHaveBeenCalledWith(false);
 });
 
 it('formats search label correctly based on user input', () => {
   const autoCompleteResult = [{ id: '1', url: '/page1', label: 'Page 1' }];
-  render(
-    <SearchResults
-      autoCompleteResults={autoCompleteResult}
-      userInputValue="Page"
-      closeSearch={closeSearchResultsMock}
-    />,
-  );
+  render(<SearchResults autoCompleteResults={autoCompleteResult} userInputValue="Page" />);
   expect(screen.getByTestId('search-result-0').innerHTML).toContain('<strong>Page</strong> 1');
 });

@@ -68,14 +68,6 @@
       .#{$px}-search__results {
         display: flex;
         flex-direction: column;
-        opacity: 0; /* Initially hidden */
-        overflow: hidden;
-        transition:
-          opacity 0.2s ease,
-          max-height 0.2s ease; /* Adjust as necessary */
-      }
-      .#{$px}-search__results.visible {
-        opacity: 1;
       }
     }
   }
