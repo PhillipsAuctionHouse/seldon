@@ -14,7 +14,8 @@
 
     &:disabled {
       color: $medium-gray;
-      opacity: 1;
+      cursor: default;
+      pointer-events: none;
 
       svg {
         stroke: $light-gray;

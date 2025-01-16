@@ -31,6 +31,10 @@ export interface UserManagementProps extends ComponentProps<'div'> {
    * The label for the account details link
    */
   accountLabel?: ReactNode;
+  /**
+   * is the link disabled
+   */
+  disabled?: boolean;
 }
 
 const UserManagement = forwardRef<HTMLDivElement, UserManagementProps>(
@@ -43,6 +47,7 @@ const UserManagement = forwardRef<HTMLDivElement, UserManagementProps>(
       loginLabel = 'Login',
       accountLabel = 'Account',
       href = '/account',
+      disabled = false,
       ...props
     },
     ref,
@@ -57,12 +62,12 @@ const UserManagement = forwardRef<HTMLDivElement, UserManagementProps>(
         {shouldShowAccountDetails && (
           <>
             {isLoggedIn ? (
-              <AccountDetailsComponent className={`${baseClassName}__login`} href={href}>
+              <AccountDetailsComponent className={`${baseClassName}__login`} href={href} disabled={disabled}>
                 <AccountCircle className={`${baseClassName}__account-icon`} />
                 <Text variant={TextVariants.body3}>{accountLabel}</Text>
               </AccountDetailsComponent>
             ) : (
-              <button className={`${baseClassName}__login`} onClick={onLogin}>
+              <button className={`${baseClassName}__login`} onClick={onLogin} disabled={disabled}>
                 <AccountCircle className={`${baseClassName}__account-icon`} />
                 <Text variant={TextVariants.body3}>{loginLabel}</Text>
               </button>

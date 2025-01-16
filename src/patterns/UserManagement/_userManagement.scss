@@ -2,7 +2,6 @@
 
 .#{$px}-user-management {
   align-items: center;
-  cursor: pointer;
   display: flex;
   gap: 0 $spacing-xsm;
   justify-content: flex-end;
@@ -30,7 +29,13 @@
     padding: 0;
     padding-bottom: $padding-xsm;
 
-    &:hover {
+    &:disabled {
+      cursor: default;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    &:hover:not(:disabled) {
       @include underline;
     }
 
