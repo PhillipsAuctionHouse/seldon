@@ -24,6 +24,10 @@ export interface DropdownProps
    * Aria-label for specific dropdown use, e.g. Select your language
    */
   label: string;
+  /**
+   * Is the dropdown disabled
+   */
+  disabled?: boolean;
 }
 
 /**
@@ -36,7 +40,7 @@ export interface DropdownProps
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-dropdown--overview)
  */
 const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
-  ({ options, value, onValueChange, label, className, id, ...props }, ref) => {
+  ({ options, value, onValueChange, label, className, id, disabled, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'Dropdown');
     const [isOpen, setIsOpen] = useState(false);
 
@@ -49,7 +53,12 @@ const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
           }}
           onOpenChange={setIsOpen}
         >
-          <DropdownSelect.Trigger className={`${baseClassName}__trigger`} aria-label={label} ref={ref}>
+          <DropdownSelect.Trigger
+            className={`${baseClassName}__trigger`}
+            aria-label={label}
+            ref={ref}
+            disabled={disabled}
+          >
             <DropdownSelect.Value placeholder={value} />
             <DropdownSelect.Icon>
               {<ChevronDownIcon className={classnames({ [`${baseClassName}__trigger-icon-expanded`]: isOpen })} />}

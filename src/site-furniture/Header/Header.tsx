@@ -2,8 +2,8 @@ import React, { PropsWithChildren } from 'react';
 import classnames from 'classnames';
 import { findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
 import Logo from '../../assets/PhillipsLogo.svg?react';
-import UserManagement from '../../patterns/UserManagement/UserManagement';
-import { LanguageSelector } from '../../patterns/LanguageSelector';
+import UserManagement, { UserManagementProps } from '../../patterns/UserManagement/UserManagement';
+import { LanguageSelector, LanguageSelectorProps } from '../../patterns/LanguageSelector';
 import Navigation from '../../components/Navigation/Navigation';
 import { Component, ComponentProps, forwardRef, ReactElement, useState, createContext } from 'react';
 import { defaultHeaderContext } from './utils';
@@ -31,6 +31,10 @@ export interface HeaderProps extends ComponentProps<'header'> {
    * label for the Logo link
    */
   logoText?: string;
+  /**
+   * Is the header disabled
+   */
+  disabled?: boolean;
 }
 export type HeaderContextType = {
   /**
@@ -74,12 +78,19 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
       toggleOpenText = 'Open Menu',
       toggleCloseText = 'Close Menu',
       logoText = 'Home Page',
+      disabled,
       ...props
     },
     ref,
   ) => {
-    const userManagementElement = findChildrenOfType(children, UserManagement);
-    const languageSelectorElement = findChildrenOfType(children, LanguageSelector);
+    const userManagementChildren = findChildrenOfType(children, UserManagement);
+    const userManagementElement = React.isValidElement(userManagementChildren?.[0])
+      ? React.cloneElement(userManagementChildren[0], { disabled } as UserManagementProps)
+      : '';
+    const languageSelectorChildren = findChildrenOfType(children, LanguageSelector);
+    const languageSelectorElement = React.isValidElement(languageSelectorChildren?.[0])
+      ? React.cloneElement(languageSelectorChildren[0], { disabled } as LanguageSelectorProps)
+      : '';
     const [isSearchExpanded, setIsSearchExpanded] = useState(false);
     const navigationElement = findChildrenOfType(children, Navigation);
     const otherChildren = findChildrenExcludingTypes(children, [Navigation, UserManagement, LanguageSelector]);

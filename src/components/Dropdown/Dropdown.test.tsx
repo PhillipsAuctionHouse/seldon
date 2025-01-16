@@ -121,4 +121,24 @@ describe('Dropdown', () => {
     await userEvent.click(option);
     expect(onValueChangeMock).toHaveBeenCalled();
   });
+  it('disabled dropdown should not pop selection', async () => {
+    render(
+      <Dropdown
+        options={languages}
+        value={SupportedLanguages.zh}
+        label="Select a language"
+        disabled
+        id="test"
+        onValueChange={vitest.fn()}
+      />,
+    );
+
+    const trigger = screen.getByRole('combobox', {
+      name: 'Select a language',
+    });
+
+    expect(trigger).toBeDisabled();
+    await userEvent.click(trigger);
+    expect(screen.queryByRole('option', { name: '中文' })).not.toBeInTheDocument();
+  });
 });

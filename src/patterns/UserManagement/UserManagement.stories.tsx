@@ -26,6 +26,7 @@ export const Playground: Story = {
     authState: AuthState.LoggedOut,
     loginLabel: 'Login',
     accountLabel: 'Account',
+    disabled: false,
   },
   argTypes: {
     authState: { control: { type: 'select' }, options: Object.values(AuthState) },

@@ -32,6 +32,15 @@ describe('UserManagement', () => {
     expect(loginLinkElement).toBeInTheDocument();
   });
 
+  it('disabled if passed', async () => {
+    const onLoginMock = vitest.fn();
+    render(<UserManagement disabled onLogin={onLoginMock} />);
+    const loginLinkElement = screen.getByRole('button', { name: 'Login' });
+    expect(loginLinkElement).toBeDisabled();
+    await userEvent.click(loginLinkElement);
+    expect(onLoginMock).not.toHaveBeenCalled();
+  });
+
   it('calls onLogin when login link is clicked', async () => {
     const onLoginMock = vitest.fn();
     render(<UserManagement onLogin={onLoginMock} />);
