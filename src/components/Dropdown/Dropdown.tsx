@@ -27,7 +27,7 @@ export interface DropdownProps
   /**
    * Is the dropdown disabled
    */
-  isDisabled?: boolean;
+  disabled?: boolean;
 }
 
 /**
@@ -40,7 +40,7 @@ export interface DropdownProps
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-dropdown--overview)
  */
 const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
-  ({ options, value, onValueChange, label, className, id, isDisabled, ...props }, ref) => {
+  ({ options, value, onValueChange, label, className, id, disabled, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'Dropdown');
     const [isOpen, setIsOpen] = useState(false);
 
@@ -57,7 +57,7 @@ const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
             className={`${baseClassName}__trigger`}
             aria-label={label}
             ref={ref}
-            disabled={isDisabled}
+            disabled={disabled}
           >
             <DropdownSelect.Value placeholder={value} />
             <DropdownSelect.Icon>

@@ -34,7 +34,7 @@ export interface HeaderProps extends ComponentProps<'header'> {
   /**
    * Is the header disabled
    */
-  isDisabled?: boolean;
+  disabled?: boolean;
 }
 export type HeaderContextType = {
   /**
@@ -78,7 +78,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
       toggleOpenText = 'Open Menu',
       toggleCloseText = 'Close Menu',
       logoText = 'Home Page',
-      isDisabled,
+      disabled,
       ...props
     },
     ref,
@@ -95,7 +95,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
         <div className={`${px}-header__top-row`}>
           <SSRMediaQuery.Media greaterThanOrEqual="md">
             {React.isValidElement(languageSelectorElement?.[0])
-              ? React.cloneElement(languageSelectorElement?.[0], { isDisabled } as LanguageSelectorProps)
+              ? React.cloneElement(languageSelectorElement?.[0], { disabled } as LanguageSelectorProps)
               : ''}
           </SSRMediaQuery.Media>
           {/** only render language selector in this location on desktop */}
@@ -140,7 +140,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
                       ...[
                         React.isValidElement(languageSelectorElement?.[0]) && languageSelectorElement?.length > 0
                           ? React.cloneElement(languageSelectorElement[0], {
-                              isDisabled,
+                              disabled,
                             } as LanguageSelectorProps)
                           : '',
                       ],

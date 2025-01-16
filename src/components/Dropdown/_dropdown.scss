@@ -21,11 +21,11 @@
       transform: rotateX(180deg);
     }
 
-    &:hover {
+    &:hover:not(:disabled) {
       cursor: pointer;
     }
 
-    &:focus-within {
+    &:focus-within:not(:disabled) {
       box-shadow: 0 0 0 1px $light-gray;
       outline: 1px solid $pure-black;
     }

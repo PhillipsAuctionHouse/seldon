@@ -121,4 +121,22 @@ describe('Dropdown', () => {
     await userEvent.click(option);
     expect(onValueChangeMock).toHaveBeenCalled();
   });
+  it('disabled dropdown should not trigger value change', () => {
+    render(
+      <Dropdown
+        options={languages}
+        value={SupportedLanguages.zh}
+        label="Select a language"
+        disabled
+        id="test"
+        onValueChange={vitest.fn()}
+      />,
+    );
+
+    const trigger = screen.getByRole('combobox', {
+      name: 'Select a language',
+    });
+
+    expect(trigger).toBeDisabled();
+  });
 });

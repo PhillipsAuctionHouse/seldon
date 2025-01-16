@@ -36,7 +36,7 @@ export const Playground = ({ value, ...props }: DropdownProps) => {
 Playground.args = {
   options: languages,
   value: 'en',
-  isDisabled: false,
+  disabled: false,
 };
 
 Playground.argTypes = {
