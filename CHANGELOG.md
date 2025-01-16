@@ -1,3 +1,10 @@
+# [1.107.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.106.4...v1.107.0) (2025-01-16)
+
+
+### Features
+
+* **header:** L3-4289 support disabling top row of header ([#476](https://github.com/PhillipsAuctionHouse/seldon/issues/476)) ([8ce936b](https://github.com/PhillipsAuctionHouse/seldon/commit/8ce936bbf24770520c7271db236ad461b65a61a1))
+
 ## [1.106.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.106.3...v1.106.4) (2025-01-15)
 
 
