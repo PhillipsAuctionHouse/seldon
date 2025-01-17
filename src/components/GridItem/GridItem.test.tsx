@@ -28,7 +28,7 @@ describe('GridItem', () => {
       expect(GridItemElement).toHaveClass(`${px}-grid-item--span-xs-2`);
       expect(GridItemElement).toHaveClass(`${px}-grid-item--span-sm-2`);
       expect(GridItemElement).toHaveClass(`${px}-grid-item--span-md-6`);
-      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-lg-12`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-lg-10`);
     });
 
     it('applies custom col spans correctly', () => {
@@ -49,7 +49,7 @@ describe('GridItem', () => {
       expect(GridItemElement).toHaveClass(`${px}-grid-item--span-xs-2-align-center`);
       expect(GridItemElement).toHaveClass(`${px}-grid-item--span-sm-2-align-center`);
       expect(GridItemElement).toHaveClass(`${px}-grid-item--span-md-6-align-center`);
-      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-lg-12-align-center`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-lg-10-align-center`);
     });
     it('default position classes', () => {
       render(<GridItem align={GridItemAlign.left} />);
@@ -58,7 +58,7 @@ describe('GridItem', () => {
       expect(GridItemElement).toHaveClass(`${px}-grid-item--span-xs-2-align-left`);
       expect(GridItemElement).toHaveClass(`${px}-grid-item--span-sm-2-align-left`);
       expect(GridItemElement).toHaveClass(`${px}-grid-item--span-md-6-align-left`);
-      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-lg-12-align-left`);
+      expect(GridItemElement).toHaveClass(`${px}-grid-item--span-lg-10-align-left`);
     });
   });
 });
