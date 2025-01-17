@@ -78,7 +78,7 @@
   }
 
   @media (min-width: $breakpoint-lg) {
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: repeat(12, 1fr);
   }
 
   @if $margins-on {
