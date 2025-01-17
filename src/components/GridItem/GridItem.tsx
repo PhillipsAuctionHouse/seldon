@@ -36,7 +36,7 @@ const GridItem = ({
   xs = 2,
   sm = 2,
   md = 6,
-  lg = 10,
+  lg = 12,
   align = GridItemAlign.center,
   element: Element = 'div',
   className,

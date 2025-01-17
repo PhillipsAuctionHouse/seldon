@@ -20,12 +20,12 @@
     }
 
     @media (min-width: 1401px) {
-      content: '@media (min-width: 1401px) -- 10 columns';
+      content: '@media (min-width: 1401px) -- 12 columns';
       transform: translate($spacing-lg, 2.1875rem);
     }
 
     @media (min-width: 1801px) {
-      content: '@media (min-width: 1801px) -- 10 columns';
+      content: '@media (min-width: 1801px) -- 12 columns';
       transform: translate($spacing-xl, 2.75rem);
     }
   }
