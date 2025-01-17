@@ -43,6 +43,10 @@
 @mixin gridMargins {
   margin: 0 $spacing-md;
 
+  @media (min-width: $breakpoint-md) {
+    margin: 0 $spacing-xxxl;
+  }
+
   @media (min-width: $breakpoint-lg) {
     margin: 0 $spacing-lg;
   }
@@ -74,7 +78,7 @@
   }
 
   @media (min-width: $breakpoint-lg) {
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(10, 1fr);
   }
 
   @if $margins-on {

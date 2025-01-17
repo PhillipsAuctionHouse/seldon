@@ -323,6 +323,7 @@ $snowflake-menu-padding: 1.25rem;
   --spacing-lg: 2.75rem;
   --spacing-xl: 3.75rem;
   --spacing-xxl: 4.75rem;
+  --spacing-xxxl: 5.75rem;
 
   @media (min-width: $breakpoint-md) {
     --spacing-micro: 0.25rem;
@@ -332,6 +333,7 @@ $snowflake-menu-padding: 1.25rem;
     --spacing-lg: 3rem;
     --spacing-xl: 4rem;
     --spacing-xxl: 5rem;
+    --spacing-xxxl: 6rem;
   }
 
   @media (min-width: $breakpoint-xl) {
@@ -342,6 +344,7 @@ $snowflake-menu-padding: 1.25rem;
     --spacing-lg: 3.75rem;
     --spacing-xl: 5rem;
     --spacing-xxl: 5.25rem;
+    --spacing-xxxl: 6.25rem;
   }
 }
 
@@ -352,7 +355,8 @@ $spacing-md: var(--spacing-md);
 $spacing-lg: var(--spacing-lg);
 $spacing-xl: var(--spacing-xl);
 $spacing-xxl: var(--spacing-xl);
-$spacing-sizes: micro, xsm, sm, md, lg, xl, xxl;
+$spacing-xxxl: var(--spacing-xxxl);
+$spacing-sizes: micro, xsm, sm, md, lg, xl, xxl, xxxl;
 
 // PADDING
 $padding-micro: var(--spacing-micro);

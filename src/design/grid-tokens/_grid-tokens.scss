@@ -20,12 +20,12 @@
     }
 
     @media (min-width: 1401px) {
-      content: '@media (min-width: 1401px) -- 12 columns';
+      content: '@media (min-width: 1401px) -- 10 columns';
       transform: translate($spacing-lg, 2.1875rem);
     }
 
     @media (min-width: 1801px) {
-      content: '@media (min-width: 1801px) -- 12 columns';
+      content: '@media (min-width: 1801px) -- 10 columns';
       transform: translate($spacing-xl, 2.75rem);
     }
   }
@@ -38,20 +38,15 @@
     position: absolute;
     top: 0;
     transform: translate(-50%, 2.25rem);
-    width: calc(100% - 1rem);
+    width: calc(100% + 1.25rem);
 
     @media (min-width: 961px) {
       height: calc(100% - 1.75rem);
       transform: translate(-50%, 3rem);
     }
 
-    @media (min-width: 1401px) {
-      width: calc(100% - 3rem);
-    }
-
     @media (min-width: 1801px) {
       transform: translate(-50%, 3.55rem);
-      width: calc(100% - 11rem);
     }
   }
 
