@@ -43,6 +43,10 @@
 @mixin gridMargins {
   margin: 0 $spacing-md;
 
+  @media (min-width: $breakpoint-md) {
+    margin: 0 $spacing-xxxl;
+  }
+
   @media (min-width: $breakpoint-lg) {
     margin: 0 $spacing-lg;
   }
