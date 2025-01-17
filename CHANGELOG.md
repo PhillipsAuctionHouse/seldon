@@ -1,3 +1,10 @@
+# [1.108.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.107.0...v1.108.0) (2025-01-17)
+
+
+### Features
+
+* **grid:** L3-4300 - grid update ([#477](https://github.com/PhillipsAuctionHouse/seldon/issues/477)) ([a99f354](https://github.com/PhillipsAuctionHouse/seldon/commit/a99f354817caf502287b9c8053861a3b9e1faebf))
+
 # [1.107.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.106.4...v1.107.0) (2025-01-16)
 
 
