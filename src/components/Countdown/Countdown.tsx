@@ -98,7 +98,7 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
             <Duration duration={timeLeft} unit="days" locale={dateFnsLocale} formatDurationStr={formatDurationStr} />
           ) : null}
           {timeLeft.days > 0 || timeLeft.hours > 0 ? (
-            <Duration duration={timeLeft} unit="hours" locale={dateFnsLocale} />
+            <Duration duration={timeLeft} unit="hours" locale={dateFnsLocale} formatDurationStr={formatDurationStr} />
           ) : null}
           {timeLeft.days === 0 ? (
             <Duration duration={timeLeft} unit="minutes" locale={dateFnsLocale} formatDurationStr={formatDurationStr} />
