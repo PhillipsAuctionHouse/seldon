@@ -1,3 +1,10 @@
+## [1.108.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.108.0...v1.108.1) (2025-01-22)
+
+
+### Bug Fixes
+
+* **saleheaderbanner:** L3-4298 support translations for the countdown component ([#481](https://github.com/PhillipsAuctionHouse/seldon/issues/481)) ([45ad2ce](https://github.com/PhillipsAuctionHouse/seldon/commit/45ad2ce59e95369c4c1e5b7d90048086afc7ff43))
+
 # [1.108.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.107.0...v1.108.0) (2025-01-17)
 
 
