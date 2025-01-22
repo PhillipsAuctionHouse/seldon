@@ -100,13 +100,40 @@ describe('Countdown', () => {
     expect(screen.getByText('seconds')).toBeInTheDocument();
     expect(screen.queryByText('Lots Close in 2-minute intervals')).not.toBeInTheDocument();
   });
+
+  const chineseHours = '小时';
+  const chineseMinutes = '分钟';
+  const chineseDays = '天';
+  const chineseSeconds = '秒';
   it('renders with chinese minutes', () => {
     const tenSecondsFromNow = addSeconds(new Date(), 10);
     render(
       <Countdown endDateTime={tenSecondsFromNow} variant={CountdownVariants.compact} locale={SupportedLanguages.zh} />,
     );
-    expect(screen.getByText('分钟')).toBeInTheDocument();
-    expect(screen.getByText('秒')).toBeInTheDocument();
+    expect(screen.getByText(chineseMinutes)).toBeInTheDocument();
+    expect(screen.getByText(chineseSeconds)).toBeInTheDocument();
+    expect(screen.queryByText('Lots Close in 2-minute intervals')).not.toBeInTheDocument();
+  });
+  it('renders with chinese hours', () => {
+    const twentyFourHoursFromNow = addDays(new Date(), 1);
+    render(
+      <Countdown
+        endDateTime={twentyFourHoursFromNow}
+        variant={CountdownVariants.compact}
+        locale={SupportedLanguages.zh}
+      />,
+    );
+    expect(screen.getByText(chineseHours)).toBeInTheDocument();
+    expect(screen.getByText(chineseMinutes)).toBeInTheDocument();
+    expect(screen.queryByText('Lots Close in 2-minute intervals')).not.toBeInTheDocument();
+  });
+  it('renders with chinese days', () => {
+    const twoDaysFromNow = addDays(new Date(), 2);
+    render(
+      <Countdown endDateTime={twoDaysFromNow} variant={CountdownVariants.compact} locale={SupportedLanguages.zh} />,
+    );
+    expect(screen.getByText(chineseDays)).toBeInTheDocument();
+    expect(screen.getByText(chineseHours)).toBeInTheDocument();
     expect(screen.queryByText('Lots Close in 2-minute intervals')).not.toBeInTheDocument();
   });
 });
