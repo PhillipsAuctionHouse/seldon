@@ -7,13 +7,17 @@
 | ------ | ----- |
 | Paste Before Image | Paste After Image |
 
+**Figma link**
+
+[Figma Link](https://www.figma.com/file/FIGMA-LINK)
+
 **Summary**
 
 Add high-level overview of the changes that were made and explanation of WHY they were made
 
 **Change List (describe the changes made to the files)**
 
-- Additions, Changes, and Removals
+- Additions, Changes, and Removals. (You can use [GitHub Copilot PR Summary](https://docs.github.com/en/enterprise-cloud@latest/copilot/using-github-copilot/using-github-copilot-for-pull-requests/creating-a-pull-request-summary-with-github-copilot) to populate this section)
 
 **Acceptance Test (how to verify the PR)**
 
