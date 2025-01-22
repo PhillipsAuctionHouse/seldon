@@ -84,6 +84,8 @@ export const OpenForBidding = (props: SaleHeaderBannerProps) => (
     occurrenceInformation={[{ date: '10:00am EDT, 4 Sep 2024', occurrenceLabel: 'Lots Begin to Close' }]}
     location="New York"
     headerLabel="Online Auction"
+    countdownTimerLabel="Lots Will Close In"
+    countdownFormatDuration={(duration) => duration.replace('minutes', 'mins')}
     auctionState={AuctionStatus.live}
   />
 );

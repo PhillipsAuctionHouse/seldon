@@ -47,6 +47,22 @@ describe('SaleHeaderBanner', () => {
     expect(screen.getAllByText('Lots Close in').length).toBeGreaterThan(0);
   });
 
+  it('renders the countdown timer with custom text when auction is open for bidding and there is an auctionEndTime', () => {
+    render(
+      <SaleHeaderBanner
+        {...defaultProps}
+        countdownTimerLabel="Lots Begin to close in"
+        countdownFormatDuration={(duration) => `${duration}Translated`}
+        auctionState={AuctionStatus.live}
+        auctionEndTime={addDays(new Date(), 2)}
+      />,
+    );
+    // The countdown component is rendered twice, once for mobile and once for desktop
+    // Only one is shown at a time based on the screen size
+    expect(screen.getAllByText('Lots Begin to close in').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('dayTranslated').length).toBeGreaterThan(0);
+  });
+
   it('renders the "Browse Upcoming Sale" link when auction is closed', () => {
     render(
       <SaleHeaderBanner {...defaultProps} auctionState={AuctionStatus.past}>

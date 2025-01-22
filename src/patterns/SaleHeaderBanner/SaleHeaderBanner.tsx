@@ -1,7 +1,7 @@
 import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
-import { Countdown } from '../../components/Countdown';
+import { Countdown, CountdownProps } from '../../components/Countdown';
 import { SeldonImage } from '../../components/SeldonImage';
 import { AuctionStatus } from '../../types/commonTypes';
 import { Text, TextVariants } from '../../components/Text';
@@ -41,6 +41,14 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
    * Where is the auction taking place?
    */
   location: React.ReactNode;
+  /**
+   * Lots close in text
+   */
+  countdownTimerLabel?: CountdownProps['label'];
+  /**
+   * The format of the countdown timer durations, i.e. minutes, hours, days, seconds (this is used for translating the countdown timer
+   */
+  countdownFormatDuration?: CountdownProps['formatDurationStr'];
 
   occurrenceInformation: {
     /**
@@ -91,6 +99,8 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
       imageLoading,
       imageFetchPriority,
       location,
+      countdownTimerLabel,
+      countdownFormatDuration,
       auctionState,
       occurrenceInformation,
       onClick,
@@ -104,12 +114,17 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SaleHeaderBanner');
     const isOpenForBidding = auctionState === AuctionStatus.live;
+    const countdownProps = {
+      endDateTime: auctionEndTime as Date,
+      label: countdownTimerLabel,
+      formatDurationStr: countdownFormatDuration,
+    };
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         {isOpenForBidding && auctionEndTime ? (
           <div className={`${baseClassName}__stack__mobile-countdown`}>
-            {<Countdown endDateTime={auctionEndTime} showBottomBorder={false} />}
+            {<Countdown {...countdownProps} showBottomBorder={false} />}
           </div>
         ) : null}
         <SeldonImage
@@ -126,9 +141,7 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
         <PageMargin className={`${baseClassName}__stack-wrapper`} {...commonProps} {...props} ref={ref}>
           <div className={`${baseClassName}__stack`}>
             {isOpenForBidding && auctionEndTime ? (
-              <div className={`${baseClassName}__stack__desktop-countdown`}>
-                {<Countdown endDateTime={auctionEndTime} />}
-              </div>
+              <div className={`${baseClassName}__stack__desktop-countdown`}>{<Countdown {...countdownProps} />}</div>
             ) : null}
             <Text variant={TextVariants.badge}>{headerLabel}</Text>
             <Text variant={TextVariants.title1}>{auctionTitle}</Text>
