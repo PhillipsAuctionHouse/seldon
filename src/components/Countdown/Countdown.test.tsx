@@ -115,7 +115,7 @@ describe('Countdown', () => {
     expect(screen.queryByText('Lots Close in 2-minute intervals')).not.toBeInTheDocument();
   });
   it('renders with chinese hours', () => {
-    const twentyFourHoursFromNow = addDays(new Date(), 1);
+    const twentyFourHoursFromNow = addHours(new Date(), 23);
     render(
       <Countdown
         endDateTime={twentyFourHoursFromNow}
