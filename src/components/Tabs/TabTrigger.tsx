@@ -32,6 +32,7 @@ const TabTrigger = forwardRef<HTMLButtonElement, TabTriggerProps>(({ value, onCl
       value={value}
       className={`${baseClassName}__tabs-trigger`}
       onClick={() => onClick?.(value)}
+      tabIndex={0}
       ref={ref}
     >
       {children}
