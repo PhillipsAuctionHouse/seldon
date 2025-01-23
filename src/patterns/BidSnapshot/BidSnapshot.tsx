@@ -173,6 +173,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
             variant={CountdownVariants.compact}
             locale={SupportedLanguages[lang]}
             formatDurationStr={formatDurationStr}
+            showBottomBorder={false}
           />
         ) : null}
       </div>

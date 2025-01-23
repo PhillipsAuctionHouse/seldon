@@ -12,10 +12,9 @@
 
   .#{$px}-countdown {
     align-items: flex-start;
-    border-bottom: none;
     padding: 0;
     position: absolute;
-    top: calc(100% + $spacing-micro);
+    top: calc(100% + $spacing-xsm);
   }
 
   .#{$px}-countdown__countdown-container,
@@ -25,6 +24,7 @@
 
   &--live:has(.#{$px}-countdown) {
     border-bottom: 1px solid $light-gray;
+    margin-bottom: $spacing-md;
   }
 
   &--has-bids .#{$px}-detail__value {
