@@ -1,3 +1,10 @@
+## [1.108.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.108.1...v1.108.2) (2025-01-23)
+
+
+### Bug Fixes
+
+* **countdown:** L3-4298 the hours duration was not being translated ([#482](https://github.com/PhillipsAuctionHouse/seldon/issues/482)) ([4b83046](https://github.com/PhillipsAuctionHouse/seldon/commit/4b830464dea6fcdfe622109f7025d765cf116dc8))
+
 ## [1.108.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.108.0...v1.108.1) (2025-01-22)
 
 
