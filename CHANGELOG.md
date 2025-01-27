@@ -1,3 +1,10 @@
+## [1.108.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.108.2...v1.108.3) (2025-01-27)
+
+
+### Bug Fixes
+
+* **SaleHeaderBanner:** L3-5179 fix spacing of sale header banner footer elements ([#487](https://github.com/PhillipsAuctionHouse/seldon/issues/487)) ([b03e323](https://github.com/PhillipsAuctionHouse/seldon/commit/b03e32358aa80bd41a58c60837652ad79754cb89))
+
 ## [1.108.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.108.1...v1.108.2) (2025-01-23)
 
 
