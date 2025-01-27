@@ -63,12 +63,12 @@
       }
 
       &:first-child {
-        padding-right: $spacing-xsm;
+        padding-right: $spacing-sm;
       }
 
       &:not(:first-child) {
         border-left: 1px solid $keyline-gray;
-        padding-left: $spacing-xsm;
+        padding-left: $spacing-sm;
       }
     }
   }
