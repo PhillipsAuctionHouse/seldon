@@ -1,3 +1,11 @@
+## [1.109.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.109.0...v1.109.1) (2025-01-28)
+
+
+### Bug Fixes
+
+* **bidsnapshot:** L3-4432 My Account - Lot Tile Update ([#485](https://github.com/PhillipsAuctionHouse/seldon/issues/485)) ([1bbfe44](https://github.com/PhillipsAuctionHouse/seldon/commit/1bbfe44ce272d01f26b3f27590f7fe526b914cd4))
+* **tabs:** L3-4707 Remove Focus Border From Tabs on Click ([#484](https://github.com/PhillipsAuctionHouse/seldon/issues/484)) ([d49860f](https://github.com/PhillipsAuctionHouse/seldon/commit/d49860fc504eadc7504de757f6528f7a48dd7548))
+
 # [1.109.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.108.3...v1.109.0) (2025-01-28)
 
 
