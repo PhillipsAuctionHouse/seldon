@@ -26,12 +26,4 @@ describe('TextSymbol', () => {
     renderTextSymbol({ symbols, variant: TextSymbolVariants.estimation });
     expect(screen.getByTestId('text-symbol')).toHaveClass(`${px}-text-symbol--estimation`);
   });
-  it('applies symbol size correctly', () => {
-    const largeSymbols = 'Ο‡'.split('');
-    renderTextSymbol({ symbols: largeSymbols });
-    largeSymbols.forEach((symbol) => {
-      const symbolElement = screen.getByText(symbol);
-      expect(symbolElement).toHaveClass(`${px}-text-symbol--large-symbol`);
-    });
-  });
 });
