@@ -1,3 +1,10 @@
+# [1.109.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.108.3...v1.109.0) (2025-01-28)
+
+
+### Features
+
+* **icons:** L3-3337 checkmark icon ([#488](https://github.com/PhillipsAuctionHouse/seldon/issues/488)) ([a111039](https://github.com/PhillipsAuctionHouse/seldon/commit/a11103935b4ae402d8066e7be5fe798bdf0a580b))
+
 ## [1.108.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.108.2...v1.108.3) (2025-01-27)
 
 
