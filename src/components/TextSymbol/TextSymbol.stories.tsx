@@ -16,8 +16,9 @@ export const Playground = (props: TextSymbolProps) => (
     <TextSymbol {...props} />
   </Text>
 );
+const allSymbols = 'Ο‡≠♠ΩΔ•†◆Σ܀∞✱▼Ж≌'.split('');
 
-Playground.args = { symbols: 'Ο‡≠♠ΩΔ•†◆Σ܀∞✱▼Ж≌Ø'.split(''), variant: TextSymbolVariants.lotNumber };
+Playground.args = { symbols: allSymbols, variant: TextSymbolVariants.lotNumber };
 
 Playground.argTypes = {
   variant: {
@@ -27,3 +28,17 @@ Playground.argTypes = {
     },
   },
 };
+
+export const LotSymbol = () => (
+  <Text variant={TextVariants.heading3}>
+    Lot number 23
+    <TextSymbol symbols={allSymbols} variant={TextSymbolVariants.lotNumber} />
+  </Text>
+);
+
+export const EstimateSymbol = () => (
+  <Text variant={TextVariants.body2}>
+    $1,000 - $2,000
+    <TextSymbol symbols={allSymbols} variant={TextSymbolVariants.estimation} />
+  </Text>
+);

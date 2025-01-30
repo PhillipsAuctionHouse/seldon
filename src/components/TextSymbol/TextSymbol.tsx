@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { TextSymbolVariants } from './types';
-import { determineSymbolSize } from './utils';
 
 export interface TextSymbolProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -19,10 +18,8 @@ const TextSymbol = ({ symbols = [], variant = TextSymbolVariants.lotNumber, clas
 
   return (
     <span {...commonProps} className={classNames(baseClassName, className, `${baseClassName}--${variant}`)} {...props}>
-      {symbols.map((symbol, index) => (
-        <span key={index} className={`${baseClassName}--${determineSymbolSize(symbol)}-symbol`}>
-          {symbol}
-        </span>
+      {symbols.map((symbol) => (
+        <span key={symbol}>{symbol}</span>
       ))}
     </span>
   );
