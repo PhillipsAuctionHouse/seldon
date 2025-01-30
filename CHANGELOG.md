@@ -1,3 +1,11 @@
+## [1.109.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.109.1...v1.109.2) (2025-01-30)
+
+
+### Bug Fixes
+
+* **link:** L3-5135 Fix Underline Spacing For Links ([#491](https://github.com/PhillipsAuctionHouse/seldon/issues/491)) ([7f7963b](https://github.com/PhillipsAuctionHouse/seldon/commit/7f7963b606546895f53e0c767799db5797ae3139))
+* **textsymbol:** L3-5094 update to symbol size ([#490](https://github.com/PhillipsAuctionHouse/seldon/issues/490)) ([3d725a2](https://github.com/PhillipsAuctionHouse/seldon/commit/3d725a269db90dc707990fad26770989b5d280b9))
+
 ## [1.109.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.109.0...v1.109.1) (2025-01-28)
 
 
