@@ -3,7 +3,11 @@
 .#{$px}-page-content-wrapper {
   padding: 0 $padding-md;
 
+  @media (min-width: $breakpoint-md) {
+    padding: 0 $padding-lg;
+  }
+
   @media (min-width: $breakpoint-xl) {
-    padding: 0 3.25rem;
+    padding: 0 $padding-xl;
   }
 }
