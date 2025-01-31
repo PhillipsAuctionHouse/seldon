@@ -1,3 +1,10 @@
+# [1.110.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.109.2...v1.110.0) (2025-01-31)
+
+
+### Features
+
+* **_pageContentWrapper.scss:** L3-4620 added new page wrapper and tokens ([#496](https://github.com/PhillipsAuctionHouse/seldon/issues/496)) ([e438b2b](https://github.com/PhillipsAuctionHouse/seldon/commit/e438b2b95f72388d8cd25c887282fccc28073c53))
+
 ## [1.109.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.109.1...v1.109.2) (2025-01-30)
 
 
