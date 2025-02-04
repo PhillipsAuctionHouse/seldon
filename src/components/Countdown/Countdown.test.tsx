@@ -12,7 +12,7 @@ const threeDaysFromNow = addDays(new Date(), 3);
 const fiveSecondsFromNow = addSeconds(new Date(), 5);
 
 describe('Countdown', () => {
-  runCommonTests(Countdown, 'Countdown');
+  runCommonTests(Countdown, 'Countdown', { endDateTime: fiveMinutesFromNow });
 
   it('renders with default labels', () => {
     render(<Countdown endDateTime={fiveMinutesFromNow} />);
@@ -135,5 +135,12 @@ describe('Countdown', () => {
     expect(screen.getByText(chineseDays)).toBeInTheDocument();
     expect(screen.getByText(chineseHours)).toBeInTheDocument();
     expect(screen.queryByText('Lots Close in 2-minute intervals')).not.toBeInTheDocument();
+  });
+  it('should not render when the endDateTime has passed', () => {
+    const now = new Date();
+    render(<Countdown endDateTime={now} />);
+    expect(screen.queryByText('Lots Close in')).not.toBeInTheDocument();
+    expect(screen.queryByText('minutes')).not.toBeInTheDocument();
+    expect(screen.queryByText('seconds')).not.toBeInTheDocument();
   });
 });
