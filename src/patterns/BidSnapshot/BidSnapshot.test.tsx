@@ -65,7 +65,7 @@ describe('BidSnapshot', () => {
     expect(screen.queryByText('You won')).not.toBeInTheDocument();
   });
 
-  it('renders won for instead of sold for when auction is past user lost', () => {
+  it('renders sold for when auction is past and user lost', () => {
     render(
       <BidSnapshot
         startingBid={100}
@@ -78,7 +78,7 @@ describe('BidSnapshot', () => {
         <BidMessage message="You lost"></BidMessage>
       </BidSnapshot>,
     );
-    expect(screen.getByText('Won for')).toBeInTheDocument();
+    expect(screen.getByText('Sold for')).toBeInTheDocument();
     expect(screen.getByText('$300')).toBeInTheDocument();
     expect(screen.getByText('You lost')).toBeInTheDocument();
   });
