@@ -1,3 +1,10 @@
+## [1.110.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.110.0...v1.110.1) (2025-02-04)
+
+
+### Bug Fixes
+
+* **Countdown:** L3-5249 do not display countdown timer after timer ex… ([#497](https://github.com/PhillipsAuctionHouse/seldon/issues/497)) ([e0ac264](https://github.com/PhillipsAuctionHouse/seldon/commit/e0ac26408d1e3ea45b43be60fce464d455a81b94))
+
 # [1.110.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.109.2...v1.110.0) (2025-01-31)
 
 

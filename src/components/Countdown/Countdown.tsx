@@ -82,7 +82,8 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
       return () => clearInterval(timer);
     }, [endDateTime]);
 
-    return (
+    const showTimer = timeLeft.days > 0 || timeLeft.hours > 0 || timeLeft.minutes > 0 || timeLeft.seconds > 0;
+    return showTimer ? (
       <div
         {...commonProps}
         className={classnames(baseClassName, className, {
@@ -109,7 +110,7 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
         </div>
         {variant === CountdownVariants.default ? <span>{intervalDescription}</span> : null}
       </div>
-    );
+    ) : null;
   },
 );
 
