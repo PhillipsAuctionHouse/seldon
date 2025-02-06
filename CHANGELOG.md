@@ -1,3 +1,10 @@
+## [1.110.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.110.1...v1.110.2) (2025-02-06)
+
+
+### Bug Fixes
+
+* **Countdown:** L3-5327 countdown issues ([#500](https://github.com/PhillipsAuctionHouse/seldon/issues/500)) ([6996367](https://github.com/PhillipsAuctionHouse/seldon/commit/69963675f385ce56ee59e9284736390cabfdec9a))
+
 ## [1.110.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.110.0...v1.110.1) (2025-02-04)
 
 
