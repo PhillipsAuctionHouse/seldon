@@ -10,7 +10,7 @@
   gap: $spacing-micro;
   justify-content: center;
   margin-bottom: 0;
-  padding: 0 $spacing-sm $spacing-sm;
+  padding-bottom: $spacing-sm;
   width: 100%;
 
   &--show-bottom-border {
@@ -23,6 +23,7 @@
 
     align-items: center;
     display: flex;
+    flex-shrink: 0;
     gap: $spacing-sm;
     justify-content: center;
     text-transform: inherit;
