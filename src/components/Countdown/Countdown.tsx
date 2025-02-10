@@ -1,4 +1,4 @@
-import { ComponentProps, forwardRef, useEffect, useState } from 'react';
+import { ComponentProps, forwardRef, useEffect, useMemo, useState } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { SupportedLanguages } from '../../types/commonTypes';
@@ -68,10 +68,17 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
     const dateFnsLocale = locale === SupportedLanguages.zh ? zhCN : enUS;
 
     const timeLeft = {
-      days: differenceInDays(endDateTime, currentDateTime),
-      hours: differenceInHours(endDateTime, currentDateTime) % 24,
-      minutes: differenceInMinutes(endDateTime, currentDateTime) % 60,
-      seconds: (differenceInSeconds(endDateTime, currentDateTime) % 60) % 60,
+      days: differenceInDays(endDateTime, currentDateTime) > 0 ? differenceInDays(endDateTime, currentDateTime) : 0,
+      hours:
+        differenceInHours(endDateTime, currentDateTime) > 0 ? differenceInHours(endDateTime, currentDateTime) % 24 : 0,
+      minutes:
+        differenceInMinutes(endDateTime, currentDateTime) > 0
+          ? differenceInMinutes(endDateTime, currentDateTime) % 60
+          : 0,
+      seconds:
+        (differenceInSeconds(endDateTime, currentDateTime) > 0
+          ? differenceInSeconds(endDateTime, currentDateTime) % 60
+          : 0) % 60,
     };
 
     useEffect(() => {
@@ -82,7 +89,10 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
       return () => clearInterval(timer);
     }, [endDateTime]);
 
-    const showTimer = timeLeft.days > 0 || timeLeft.hours > 0 || timeLeft.minutes > 0 || timeLeft.seconds > 0;
+    const showTimer = useMemo(() => {
+      return new Date(endDateTime).getTime() > new Date().getTime();
+    }, [endDateTime]);
+
     return showTimer ? (
       <div
         {...commonProps}
