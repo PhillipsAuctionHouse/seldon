@@ -143,4 +143,17 @@ describe('Countdown', () => {
     expect(screen.queryByText('minutes')).not.toBeInTheDocument();
     expect(screen.queryByText('seconds')).not.toBeInTheDocument();
   });
+  it('should render when the endDateTime is in the future, but then stay at zeros after it passes', () => {
+    const now = new Date();
+    render(<Countdown endDateTime={addSeconds(now, 10)} />);
+    expect(screen.getByText('Lots Close in')).toBeInTheDocument();
+    expect(screen.getByText('minutes')).toBeInTheDocument();
+    expect(screen.getByText('seconds')).toBeInTheDocument();
+
+    vi.useFakeTimers();
+    vi.advanceTimersByTime(10000);
+    expect(screen.getByText('00')).toBeInTheDocument();
+    expect(screen.getByText('00')).toBeInTheDocument();
+    expect(screen.getByText('00')).toBeInTheDocument();
+  });
 });
