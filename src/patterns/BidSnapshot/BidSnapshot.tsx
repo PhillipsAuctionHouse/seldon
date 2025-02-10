@@ -145,7 +145,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
         <DetailList hasSeparators className={`${baseClassName}__text`}>
           {isPast && hasBids && soldPrice ? (
             <Detail
-              label={bidStatus ? wonForText : soldForText} // if the user has bid show wonForText else show soldForText
+              label={bidStatus === BidStatusEnum.Won ? wonForText : soldForText} // if the user has bid show wonForText else show soldForText
               value={`${currency}${soldPrice?.toLocaleString()}`}
               hasWrap={false}
             />
