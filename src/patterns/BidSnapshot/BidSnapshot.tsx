@@ -143,10 +143,10 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
     return (
       <div {...commonProps} {...props} ref={ref} className={classes}>
         <DetailList hasSeparators className={`${baseClassName}__text`}>
-          {isPast && hasBids && soldPrice ? (
+          {isPast && hasBids ? (
             <Detail
-              label={bidStatus === BidStatusEnum.Won ? wonForText : soldForText} // if the user has bid show wonForText else show soldForText
-              value={`${currency}${soldPrice?.toLocaleString()}`}
+              label={bidStatus === BidStatusEnum.Won ? wonForText : soldForText} // if the user has won show wonForText else show soldForText
+              value={soldPrice ? `${currency}${soldPrice?.toLocaleString()}` : ''}
               hasWrap={false}
             />
           ) : null}

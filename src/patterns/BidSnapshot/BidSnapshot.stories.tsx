@@ -18,22 +18,25 @@ const meta = {
 
 export default meta;
 export const Playground = (props: BidSnapshotProps) => {
-  const { bidStatus, lotStatus, lotCloseDate, currentBid, ...rest } = props;
+  const { bidStatus, lotStatus, lotCloseDate, currentBid, soldPrice, soldForText, wonForText, ...rest } = props;
+  const soldForLabel = !soldPrice ? 'Sold' : soldForText;
+  const wonForLabel = !soldPrice ? 'Won' : wonForText;
+
   return (
     <BidSnapshot
       bidStatus={bidStatus}
       lotStatus={lotStatus}
       currentBid={currentBid}
       lotCloseDate={lotStatus === LotStatus.ready ? undefined : lotCloseDate}
+      soldPrice={soldPrice}
+      soldForText={soldForLabel}
+      wonForText={wonForLabel}
       {...rest}
     >
       {bidStatus === BidStatusEnum.Winning ? <BidMessage message="With You" /> : null}
       {bidStatus === BidStatusEnum.Won ? <BidMessage message="Won bid" /> : null}
       {bidStatus === BidStatusEnum.Losing ? (
         <BidMessage variant={BidMessageVariants.negative} message="Losing Bid" />
-      ) : null}
-      {bidStatus === BidStatusEnum.Lost ? (
-        <BidMessage variant={BidMessageVariants.negative} message="Lost Bid" />
       ) : null}
     </BidSnapshot>
   );
@@ -54,5 +57,5 @@ Playground.args = {
 
 Playground.argTypes = {
   bidStatus: { options: BidStatusEnum, control: { type: 'select' } },
-  auctionStatus: { options: LotStatus, control: { type: 'select' } },
+  lotStatus: { options: LotStatus, control: { type: 'select' } },
 };
