@@ -1,3 +1,10 @@
+# [1.111.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.110.4...v1.111.0) (2025-02-10)
+
+
+### Features
+
+* **countdown:** L3-4833 keep countdown on 00s when it closes ([#504](https://github.com/PhillipsAuctionHouse/seldon/issues/504)) ([c72d606](https://github.com/PhillipsAuctionHouse/seldon/commit/c72d6065a327aea24be7e5dac3fa7e24c2064a00))
+
 ## [1.110.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.110.3...v1.110.4) (2025-02-10)
 
 
