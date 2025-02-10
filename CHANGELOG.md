@@ -1,3 +1,10 @@
+## [1.110.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.110.2...v1.110.3) (2025-02-10)
+
+
+### Bug Fixes
+
+* **bidsnapshot:** L3-4833 only show won for text when auction is won ([#501](https://github.com/PhillipsAuctionHouse/seldon/issues/501)) ([f5804b7](https://github.com/PhillipsAuctionHouse/seldon/commit/f5804b7d175e1631e0675992377dcce643c3a854))
+
 ## [1.110.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.110.1...v1.110.2) (2025-02-06)
 
 
