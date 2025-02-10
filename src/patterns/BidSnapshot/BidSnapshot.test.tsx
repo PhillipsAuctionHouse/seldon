@@ -65,7 +65,7 @@ describe('BidSnapshot', () => {
     expect(screen.queryByText('You won')).not.toBeInTheDocument();
   });
 
-  it('renders won for instead of sold for when auction is past user lost', () => {
+  it('renders sold for when auction is past and user lost', () => {
     render(
       <BidSnapshot
         startingBid={100}
@@ -78,7 +78,7 @@ describe('BidSnapshot', () => {
         <BidMessage message="You lost"></BidMessage>
       </BidSnapshot>,
     );
-    expect(screen.getByText('Won for')).toBeInTheDocument();
+    expect(screen.getByText('Sold for')).toBeInTheDocument();
     expect(screen.getByText('$300')).toBeInTheDocument();
     expect(screen.getByText('You lost')).toBeInTheDocument();
   });
@@ -99,7 +99,25 @@ describe('BidSnapshot', () => {
     expect(screen.getByText('$300')).toBeInTheDocument();
   });
 
-  it('does not render sold for if soldPrice not passed, used if auction should hide sold price', () => {
+  it('does not render soldPrice if not passed, user won', () => {
+    render(
+      <BidSnapshot
+        startingBid={100}
+        currentBid={500}
+        numberOfBids={3}
+        lotStatus={LotStatus.past}
+        bidStatus={BidStatusEnum.Won}
+        wonForText="Won"
+      >
+        <BidMessage message="You won" />
+      </BidSnapshot>,
+    );
+    expect(screen.getByText('Won')).toBeInTheDocument();
+    expect(screen.queryByText('$500')).not.toBeInTheDocument();
+    expect(screen.getByText('You won')).toBeInTheDocument();
+  });
+
+  it('does not render soldPrice if not passed, user lost', () => {
     render(
       <BidSnapshot
         startingBid={100}
@@ -107,13 +125,14 @@ describe('BidSnapshot', () => {
         numberOfBids={3}
         lotStatus={LotStatus.past}
         bidStatus={BidStatusEnum.Lost}
+        soldForText="Sold"
       >
-        <BidMessage message="You won" />
+        <BidMessage message="You lost" />
       </BidSnapshot>,
     );
-    expect(screen.queryByText('Sold for')).not.toBeInTheDocument();
+    expect(screen.getByText('Sold')).toBeInTheDocument();
     expect(screen.queryByText('$500')).not.toBeInTheDocument();
-    expect(screen.getByText('You won')).toBeInTheDocument();
+    expect(screen.getByText('You lost')).toBeInTheDocument();
   });
 
   describe('countdown timer', () => {
