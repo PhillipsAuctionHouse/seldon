@@ -1,3 +1,10 @@
+## [1.110.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.110.3...v1.110.4) (2025-02-10)
+
+
+### Bug Fixes
+
+* **bidsnapshot:** L3-5370 sold price should still show text if sold price is hidden ([#503](https://github.com/PhillipsAuctionHouse/seldon/issues/503)) ([d230821](https://github.com/PhillipsAuctionHouse/seldon/commit/d230821488d04a4741ceeff026c28b768358689d))
+
 ## [1.110.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.110.2...v1.110.3) (2025-02-10)
 
 
