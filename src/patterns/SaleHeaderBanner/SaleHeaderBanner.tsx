@@ -6,6 +6,7 @@ import { SeldonImage } from '../../components/SeldonImage';
 import { AuctionStatus } from '../../types/commonTypes';
 import { Text, TextVariants } from '../../components/Text';
 import { PageContentWrapper as PageMargin } from '../../components/PageContentWrapper';
+import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
@@ -74,6 +75,10 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
    */
   footerElement?: React.ReactNode;
   /**
+   * Determines if the countdown timer should be shown (if relevant)
+   */
+  showTimer: boolean;
+  /**
    * What action does the CTA take?
    */
   onClick?: () => void;
@@ -108,6 +113,7 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
       className,
       footerElement,
       headerLabel,
+      showTimer,
       ...props
     },
     ref,
@@ -122,10 +128,12 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        {isOpenForBidding && auctionEndTime ? (
-          <div className={`${baseClassName}__stack__mobile-countdown`}>
-            {<Countdown {...countdownProps} showBottomBorder={false} />}
-          </div>
+        {isOpenForBidding && auctionEndTime && showTimer ? (
+          <SSRMediaQuery.Media lessThan="md">
+            <div className={`${baseClassName}__stack__countdown`}>
+              {<Countdown {...countdownProps} showBottomBorder={false} />}
+            </div>
+          </SSRMediaQuery.Media>
         ) : null}
         <SeldonImage
           aspectRatio="16/9"
@@ -140,8 +148,10 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
         />
         <PageMargin className={`${baseClassName}__stack-wrapper`} {...commonProps} {...props} ref={ref}>
           <div className={`${baseClassName}__stack`}>
-            {isOpenForBidding && auctionEndTime ? (
-              <div className={`${baseClassName}__stack__desktop-countdown`}>{<Countdown {...countdownProps} />}</div>
+            {isOpenForBidding && auctionEndTime && showTimer ? (
+              <SSRMediaQuery.Media greaterThanOrEqual="md">
+                <div className={`${baseClassName}__stack__countdown`}>{<Countdown {...countdownProps} />}</div>
+              </SSRMediaQuery.Media>
             ) : null}
             <Text variant={TextVariants.badge}>{headerLabel}</Text>
             <Text variant={TextVariants.title1}>{auctionTitle}</Text>
