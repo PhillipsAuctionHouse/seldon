@@ -1,0 +1,29 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-article {
+  border-bottom: 1px solid $pure-black;
+  border-top: 1px solid $pure-black;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  padding: $spacing-md;
+
+  @media (min-width: $breakpoint-md) {
+    flex-direction: row;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &-label,
+    &-description {
+      color: $soft-black;
+    }
+
+    &-label {
+      margin-bottom: $spacing-xsm;
+    }
+  }
+}

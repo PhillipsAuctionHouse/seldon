@@ -96,3 +96,4 @@ export * from './components/Countdown';
 export * from './components/Countdown/types';
 export * from './patterns/ObjectTile';
 export * from './patterns/BidSnapshot';
+export * from './components/Article';
