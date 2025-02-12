@@ -64,7 +64,6 @@ export const Playground = ({ playgroundWidth, ...args }: StoryProps) => {
         {...args}
         id="tagsList"
         aria-label={`Applied these filters: ${tagsList.map((item) => item.label).join(', ')}`}
-        tabIndex={0}
         onClear={() => {
           setTagsList([]);
         }}

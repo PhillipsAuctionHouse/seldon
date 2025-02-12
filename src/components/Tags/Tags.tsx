@@ -92,6 +92,7 @@ const TagsList = forwardRef<HTMLUListElement, TagsListProps>(
         className={classnames(`${px}-${type}`, baseClassName, className)}
         {...commonProps}
         {...props}
+        tabIndex={0}
         data-testid={`${type}-${id}`}
         ref={ref}
       >

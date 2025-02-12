@@ -157,6 +157,7 @@ describe('Tags', () => {
           ))}
         </TagsList>,
       );
+      await userEvent.tab(); // tab past the main ul
       await userEvent.keyboard('{Tab}');
       await userEvent.keyboard('{Tab}');
       await userEvent.keyboard('{Tab}');
