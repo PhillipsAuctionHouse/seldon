@@ -1,3 +1,10 @@
+## [1.111.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.111.0...v1.111.1) (2025-02-12)
+
+
+### Bug Fixes
+
+* **SaleHeaderBanner:** L3-5419 add showTimer prop to control display of count… ([#506](https://github.com/PhillipsAuctionHouse/seldon/issues/506)) ([6c49e7f](https://github.com/PhillipsAuctionHouse/seldon/commit/6c49e7f97dcd3c95ff8a9641e6a686d81f8b8ee2))
+
 # [1.111.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.110.4...v1.111.0) (2025-02-10)
 
 
