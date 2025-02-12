@@ -55,7 +55,11 @@
     display: flex;
     gap: $spacing-micro;
     height: 2rem;
-    padding: 0 $spacing-xsm 0 $spacing-sm;
+    padding: 0 $spacing-sm;
+
+    @include media($breakpoint-xl) {
+      padding: $spacing-sm;
+    }
 
     svg {
       fill: $button-hover;
@@ -89,7 +93,7 @@
       outline-offset: unset;
       padding: 0 $spacing-sm;
 
-      @include media($breakpoint-lg) {
+      @include media($breakpoint-xl) {
         padding: $spacing-sm;
       }
     }
