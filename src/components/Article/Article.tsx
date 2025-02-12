@@ -20,9 +20,9 @@ export interface ArticleProps extends ComponentProps<'div'> {
  *
  * Overview of this widget
  *
- * [Figma Link](Add Figma URL here)
+ * [Figma Link](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/EASEL-Compendium%3A-Tokens%2C-Components-%26-Patterns?node-id=20704-18000&p=f&m=dev)
  *
- * [Storybook Link](Point back to yourself here)
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-article--overview)
  */
 const Article = forwardRef<HTMLDivElement, ArticleProps>(
   (
@@ -36,15 +36,23 @@ const Article = forwardRef<HTMLDivElement, ArticleProps>(
         {imageSrc ? <SeldonImage aspectRatio="16/9" src={imageSrc} alt="bull" /> : null}
 
         <div className={`${baseClassName}__content`}>
-          <Text variant={TextVariants.label} className={`${baseClassName}__content-label`}>
-            {label}
-          </Text>
-          <Text variant={TextVariants.heading3} className={`${baseClassName}__content-title`}>
-            {header}
-          </Text>
-          <Text variant={TextVariants.body2} className={`${baseClassName}__content-description`}>
-            {description}
-          </Text>
+          {label ? (
+            <Text variant={TextVariants.label} className={`${baseClassName}__content-label`}>
+              {label}
+            </Text>
+          ) : null}
+
+          {header ? (
+            <Text variant={TextVariants.heading3} className={`${baseClassName}__content-title`}>
+              {header}
+            </Text>
+          ) : null}
+
+          {description ? (
+            <Text variant={TextVariants.body2} className={`${baseClassName}__content-description`}>
+              {description}
+            </Text>
+          ) : null}
 
           {linkLabel ? (
             <Component href={linkHref} className={`${baseClassName}__content-link`}>
