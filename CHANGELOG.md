@@ -1,3 +1,10 @@
+# [1.112.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.111.1...v1.112.0) (2025-02-12)
+
+
+### Features
+
+* **Article:** L3-5116 added Article component ([#507](https://github.com/PhillipsAuctionHouse/seldon/issues/507)) ([7bce936](https://github.com/PhillipsAuctionHouse/seldon/commit/7bce93680e93eb92e64cd01736655117d7abf258))
+
 ## [1.111.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.111.0...v1.111.1) (2025-02-12)
 
 
