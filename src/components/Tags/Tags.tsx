@@ -3,10 +3,9 @@ import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { px } from '../../utils';
 import Button from '../Button/Button';
-import IconButton from '../IconButton/IconButton';
-import ChevronRight from '../../assets/chevronRight.svg?react';
 import { ButtonVariants } from '../Button/types';
 import CloseIcon from '../../assets/close.svg?react';
+import { ArrowPrev } from '../../assets/icons';
 
 export interface I18nObject {
   clearAllLabel?: string;
@@ -52,18 +51,25 @@ export interface TagProps {
    * Tag item label.
    */
   label: string;
+  /**
+   * Tag button aria-label
+   */
+  removeText?: string;
 }
 
-export const Tag = ({ id, className, onRemove, label }: TagProps) => {
+export const Tag = ({ id, className, onRemove, label, removeText = 'Remove' }: TagProps) => {
   return (
-    <div className={classnames(`${px}-tag`, `${px}-button`, className)} aria-label="Close Tag">
+    <Button
+      className={classnames(`${px}-tag`, `${px}-button`, className)}
+      aria-label={`${removeText} ${label}`}
+      onClick={() => onRemove(label)}
+      variant={ButtonVariants.tertiary}
+    >
       <div className={`${px}-tag__label`}>{label}</div>
-      <div onClick={() => onRemove(label)} className={`${px}-tag__button`} data-testid={`${id}-item-close-button`}>
-        <IconButton className={`${px}-tag__button--close`}>
-          <CloseIcon />
-        </IconButton>
+      <div className={`${px}-tag__button`} data-testid={`${id}-item-close-button`}>
+        <CloseIcon />
       </div>
-    </div>
+    </Button>
   );
 };
 
@@ -98,9 +104,7 @@ const TagsList = forwardRef<HTMLDivElement, TagsListProps>(
             aria-label={clearAllLabel}
             variant={ButtonVariants.tertiary}
           >
-            <div className={`${px}-left-arrow`}>
-              <ChevronRight />
-            </div>
+            <ArrowPrev />
             <div className={`${px}-label`}>{clearAllLabel}</div>
           </Button>
         )}
