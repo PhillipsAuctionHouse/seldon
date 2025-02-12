@@ -13,6 +13,7 @@ const defaultProps: SaleHeaderBannerProps = {
   occurrenceInformation: [{ date: '2023-12-01', occurrenceLabel: 'Auction Date' }],
   auctionState: AuctionStatus.ready,
   imageSrcUrl: 'https://example.com/image.jpg',
+  showTimer: true,
 };
 
 describe('SaleHeaderBanner', () => {
@@ -40,11 +41,30 @@ describe('SaleHeaderBanner', () => {
 
   it('renders the countdown timer when auction is open for bidding and there is an auctionEndTime', () => {
     render(
-      <SaleHeaderBanner {...defaultProps} auctionState={AuctionStatus.live} auctionEndTime={addDays(new Date(), 2)} />,
+      <SaleHeaderBanner
+        {...defaultProps}
+        auctionState={AuctionStatus.live}
+        auctionEndTime={addDays(new Date(), 2)}
+        showTimer
+      />,
     );
     // The countdown component is rendered twice, once for mobile and once for desktop
     // Only one is shown at a time based on the screen size
     expect(screen.getAllByText('Lots Close in').length).toBeGreaterThan(0);
+  });
+
+  it('does NOT render the countdown timer when showTimer is false', () => {
+    render(
+      <SaleHeaderBanner
+        {...defaultProps}
+        auctionState={AuctionStatus.live}
+        auctionEndTime={addDays(new Date(), 2)}
+        showTimer={false}
+      />,
+    );
+    // The countdown component is rendered twice, once for mobile and once for desktop
+    // Only one is shown at a time based on the screen size
+    expect(screen.queryByText('Lots Close in')).not.toBeInTheDocument();
   });
 
   it('renders the countdown timer with custom text when auction is open for bidding and there is an auctionEndTime', () => {
@@ -55,6 +75,7 @@ describe('SaleHeaderBanner', () => {
         countdownFormatDuration={(duration) => `${duration}Translated`}
         auctionState={AuctionStatus.live}
         auctionEndTime={addDays(new Date(), 2)}
+        showTimer
       />,
     );
     // The countdown component is rendered twice, once for mobile and once for desktop

@@ -41,6 +41,7 @@ export const PreSale = (props: SaleHeaderBannerProps) => (
     location="New York"
     headerLabel="Online Auction"
     auctionState={AuctionStatus.ready}
+    showTimer
   />
 );
 
@@ -56,6 +57,7 @@ export const PreSaleTwoOccurrences = (props: SaleHeaderBannerProps) => (
     location="New York"
     headerLabel="Online Auction"
     auctionState={AuctionStatus.ready}
+    showTimer
   />
 );
 
@@ -72,6 +74,7 @@ export const PreSaleThreeOccurrences = (props: SaleHeaderBannerProps) => (
     headerLabel="Online Auction"
     location="New York"
     auctionState={AuctionStatus.ready}
+    showTimer
   />
 );
 
@@ -87,6 +90,7 @@ export const OpenForBidding = (props: SaleHeaderBannerProps) => (
     countdownTimerLabel="Lots Will Close In"
     countdownFormatDuration={(duration) => duration.replace('minutes', 'mins')}
     auctionState={AuctionStatus.live}
+    showTimer
   />
 );
 
@@ -99,6 +103,7 @@ export const Closed = (props: SaleHeaderBannerProps) => (
     location="New York"
     headerLabel="Online Auction"
     auctionState={AuctionStatus.past}
+    showTimer
   >
     <SaleHeaderBrowseAuctions />
   </SaleHeaderBanner>

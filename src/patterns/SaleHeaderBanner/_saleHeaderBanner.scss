@@ -22,22 +22,9 @@
     justify-content: center;
     padding: $spacing-md 0;
 
-    &__mobile-countdown {
+    &__countdown {
       display: flex;
       width: 100%;
-
-      @include media($size-md, $type: 'min') {
-        display: none;
-      }
-    }
-
-    &__desktop-countdown {
-      display: none;
-      width: 100%;
-
-      @include media($size-md, $type: 'min') {
-        display: flex;
-      }
     }
   }
 
