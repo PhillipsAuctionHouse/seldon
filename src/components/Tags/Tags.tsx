@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import React, { ComponentProps, forwardRef } from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { px } from '../../utils';
@@ -11,7 +11,7 @@ export interface I18nObject {
   clearAllLabel?: string;
 }
 
-export interface TagsListProps {
+export interface TagsListProps extends ComponentProps<'ul'> {
   /**
    * Unique id for component testing
    */
@@ -82,33 +82,37 @@ export const Tag = ({ id, className, onRemove, label, removeText = 'Remove' }: T
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-tags--overview)
  */
-const TagsList = forwardRef<HTMLDivElement, TagsListProps>(
+const TagsList = forwardRef<HTMLUListElement, TagsListProps>(
   ({ className, children, clearAllLabel = 'Clear All', onClear, ...props }, ref) => {
     const type = 'tags-list';
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TagsList');
     const { id } = props;
     return (
-      <div
+      <ul
         className={classnames(`${px}-${type}`, baseClassName, className)}
         {...commonProps}
         {...props}
         data-testid={`${type}-${id}`}
         ref={ref}
       >
-        {children}
+        {Array.isArray(children)
+          ? React.Children.map(children, (child) => <li key={child.props.id}>{child}</li>)
+          : children}
         {Array.isArray(children) && children.length > 0 && (
-          <Button
-            onClick={onClear}
-            data-testid={`${id}-clear-all-button`}
-            className={`${px}-${type}--clear`}
-            aria-label={clearAllLabel}
-            variant={ButtonVariants.tertiary}
-          >
-            <ArrowPrev />
-            <div className={`${px}-label`}>{clearAllLabel}</div>
-          </Button>
+          <li>
+            <Button
+              onClick={onClear}
+              data-testid={`${id}-clear-all-button`}
+              className={`${px}-${type}--clear`}
+              aria-label={clearAllLabel}
+              variant={ButtonVariants.tertiary}
+            >
+              <ArrowPrev />
+              <div className={`${px}-label`}>{clearAllLabel}</div>
+            </Button>
+          </li>
         )}
-      </div>
+      </ul>
     );
   },
 );

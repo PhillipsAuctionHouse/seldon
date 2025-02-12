@@ -6,6 +6,12 @@
   flex-flow: row wrap;
   gap: $spacing-sm;
 
+  &:focus-visible {
+    border: unset;
+    outline: 1px solid $button-hover;
+    outline-offset: 1px;
+  }
+
   .#{$px}-tag {
     border: 1px solid $button-hover;
     border-radius: 6.25rem;
