@@ -114,7 +114,7 @@ describe('Tags', () => {
           ))}
         </TagsList>,
       );
-      await userEvent.click(screen.getByTestId('tag-6-item-close-button'));
+      await userEvent.click(screen.getByRole('button', { name: 'Remove Andy Warhol' }));
       expect(result.current.mockState).toHaveLength(5);
       expect(result.current.mockState[0].label).toBe('Jean-Michel Basquiat');
       expect(result.current.mockState[1].label).toBe('Cecily Brown');
@@ -135,8 +135,8 @@ describe('Tags', () => {
           ))}
         </TagsList>,
       );
-      const clearAllButton = screen.getByTestId('test-id-clear-all-button');
-      await clearAllButton.focus();
+      const clearAllButton = screen.getByRole('button', { name: 'Clear All' });
+      clearAllButton.focus();
       await userEvent.keyboard('{Enter}');
       expect(result.current.mockState).toEqual([]);
     });
@@ -157,6 +157,7 @@ describe('Tags', () => {
           ))}
         </TagsList>,
       );
+      await userEvent.tab(); // tab past the main ul
       await userEvent.keyboard('{Tab}');
       await userEvent.keyboard('{Tab}');
       await userEvent.keyboard('{Tab}');
