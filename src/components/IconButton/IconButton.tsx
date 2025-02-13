@@ -16,6 +16,18 @@ export interface IconButtonProps extends Omit<React.HTMLAttributes<HTMLButtonEle
    * Should the button be disabled?
    */
   isDisabled?: boolean;
+  /**
+   * The href of the button. This will make the button render as an anchor tag.
+   */
+  href?: string;
+  /**
+   * The target of the link (e.g. _blank). To be combined with href.
+   */
+  target?: string;
+  /**
+   * The prefetch of the link.
+   */
+  prefetch?: 'none' | 'intent' | 'render' | 'viewport';
 }
 
 const IconButton = ({

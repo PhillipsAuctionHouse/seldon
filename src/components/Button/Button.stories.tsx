@@ -31,7 +31,15 @@ export const ButtonWithIcon = (props: ButtonProps) => (
 );
 
 export const ButtonAsLink = (props: ButtonProps) => (
-  <Button {...props} href="https://www.phillips.com" target="_blank">
+  <Button
+    {...props}
+    href="https://www.phillips.com"
+    target="_blank"
+    onClick={(e) => {
+      e.preventDefault();
+      window.alert('Button clicked');
+    }}
+  >
     Visit Phillips
   </Button>
 );

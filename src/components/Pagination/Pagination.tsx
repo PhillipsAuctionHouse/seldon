@@ -1,4 +1,4 @@
-import React, { ComponentProps } from 'react';
+import React, { ComponentProps, useMemo } from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { px } from '../../utils';
@@ -21,6 +21,14 @@ export interface PaginationOption {
    * Each Pagination Option value must be unique within the Pagination
    */
   value: string | number;
+  /**
+   * The href of the button. This will make the button render as an anchor tag. If included, the button will override prevent the default link behavior and leave navigation up to the consumer.
+   */
+  href?: string;
+  /**
+   * The prefetch of the link.
+   */
+  prefetch?: 'none' | 'intent' | 'render' | 'viewport';
 }
 
 export interface PaginationProps extends Omit<ComponentProps<'div'>, 'onChange'> {
@@ -105,6 +113,15 @@ const Pagination = ({
     onChange(newPage, event);
   };
 
+  const [prevOption, nextOption] = useMemo(() => {
+    const prevIndex = options.findIndex((option) => determineOptionValue(option) === valueWithPendingState) - 1;
+    const prevOption = options.at(prevIndex) || '';
+    const nextIndex =
+      (options.findIndex((option) => determineOptionValue(option) === valueWithPendingState) + 1) % options.length;
+    const nextOption = options[nextIndex];
+    return [prevOption, nextOption];
+  }, [options, valueWithPendingState]);
+
   return (
     <div
       className={classnames(`${px}-${type}`, { [`${baseClassName}__wrapper`]: baseClassName }, className)}
@@ -113,15 +130,18 @@ const Pagination = ({
     >
       <IconButton
         className={classnames(`${baseClassName}__button`, `${px}-left-arrow`)}
-        onClick={() => {
-          const prevIndex = options.findIndex((option) => determineOptionValue(option) === valueWithPendingState) - 1;
-          const prevOption = options.at(prevIndex) || '';
+        onClick={(e) => {
+          if (typeof prevOption === 'object' && prevOption.href) {
+            e.preventDefault();
+          }
           handlePageChange(prevOption);
         }}
         data-testid={`${id}-previous-button`}
         isDisabled={isDisabled}
         aria-label={previousLabel}
         variant={ButtonVariants.primary}
+        href={typeof prevOption === 'object' && prevOption.href ? prevOption.href : undefined}
+        prefetch={typeof prevOption === 'object' && prevOption.prefetch ? prevOption.prefetch : undefined}
       >
         <ChevronRight />
       </IconButton>
@@ -154,17 +174,18 @@ const Pagination = ({
 
       <IconButton
         className={`${baseClassName}__button`}
-        onClick={() => {
-          const nextIndex =
-            (options.findIndex((option) => determineOptionValue(option) === valueWithPendingState) + 1) %
-            options.length;
-          const nextOption = options[nextIndex];
+        onClick={(e) => {
+          if (typeof nextOption === 'object' && nextOption.href) {
+            e.preventDefault();
+          }
           handlePageChange(nextOption);
         }}
         data-testid={`${id}-next-button`}
         isDisabled={isDisabled}
         aria-label={nextLabel}
         variant={ButtonVariants.primary}
+        href={typeof nextOption === 'object' && nextOption.href ? nextOption.href : undefined}
+        prefetch={typeof nextOption === 'object' && nextOption.prefetch ? nextOption.prefetch : undefined}
       >
         <ChevronRight />
       </IconButton>
