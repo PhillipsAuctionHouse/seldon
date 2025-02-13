@@ -1,4 +1,114 @@
 {
-    "jest.enable": false,
-    "vitest.configSearchPatternExclude": "{**/node_modules/**,**/.*/**,**/*.d.ts,vite.config.ts.timestamp*}"
+    "workbench.colorCustomizations": {
+      "statusBar.background": "#ff01bb",
+      "statusBar.foreground": "#000000"
+    },
+    "eslint.codeActionsOnSave.rules": null,
+    "editor.accessibilitySupport": "off",
+    "editor.autoClosingBrackets": "never",
+    "editor.autoClosingDelete": "never",
+    "editor.autoClosingOvertype": "never",
+    "editor.autoClosingQuotes": "never",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": false,
+    "editor.guides.bracketPairs": "active",
+    "editor.inlineSuggest.enabled": true,
+    "editor.linkedEditing": true,
+    "editor.minimap.enabled": false,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.stickyScroll.enabled": true,
+    "editor.suggestSelection": "first",
+    "editor.unicodeHighlight.allowedCharacters": {
+      "–": true,
+      "‘": true,
+      "’": true
+    },
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "always",
+      "source.fixAll.stylelint": "always"
+    },
+    "files.associations": {
+      "*.json": "jsonc",
+      "*.jsx": "javascriptreact",
+      "*.mdx": "markdown",
+      "*.tsx": "typescriptreact",
+      ".*": "jsonc",
+      ".eslintignore": "ignore",
+      ".gitignore": "ignore",
+      ".prettierignore": "ignore",
+      ".travis.yml": "yaml"
+    },
+    "vitest.configSearchPatternExclude": "{**/node_modules/**,**/.*/**,**/*.d.ts,vite.config.ts.timestamp*}",
+    "github.copilot.chat.codeGeneration.instructions": [
+      {
+        "file": ".copilot-instructions.md"
+      }
+    ],
+    "github.copilot.chat.testGeneration.instructions": [
+      {
+        "file": ".copilot-test-instructions.md"
+      }
+    ],
+    "github.copilot.editor.enableAutoCompletions": true,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "github.copilot.enable": {
+      "*": true,
+      "markdown": true,
+      "plaintext": true,
+      "scminput": false
+    },
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "px-to-rem.px-per-rem": 16,
+    "gitlens.advanced.repositorySearchDepth": 1,
+    "gitlens.launchpad.indicator.enabled": false,
+    "gitlens.plusFeatures.enabled": false,
+    "gitlens.showWhatsNewAfterUpgrades": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "javascript.validate.enable": true,
+    "liveshare.audio.joinCallBehavior": "accept",
+    "liveshare.featureSet": "stable",
+    "markdownlint.run": "onSave",
+    "search.exclude": {
+      "**/dist": true
+    },
+    "stylelint.validate": [
+      "css",
+      "html",
+      "less",
+      "markdown",
+      "postcss",
+      "sass",
+      "scss",
+      "source.css.styled",
+      "source.markdown.math",
+      "styled-css",
+      "sugarss",
+      "svelte",
+      "typescript",
+      "typescriptreact",
+      "vue",
+      "vue-html",
+      "vue-postcss",
+      "xml",
+      "xsl"
+    ],
+    "typescript.format.enable": false,
+    "typescript.referencesCodeLens.enabled": true,
+    "typescript.referencesCodeLens.showOnAllFunctions": true,
+    "typescript.suggest.completeFunctionCalls": true,
+    "typescript.tsserver.log": "off",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "typescript.validate.enable": true,
+    "workbench.iconTheme": "vscode-icons",
+    "github.copilot.chat.generateTests.codeLens": true,
+    "githubPullRequests.experimental.chat": true,
+    "githubPullRequests.experimental.notificationsView": true,
+    "typescript.preferences.organizeImports": {
+      "accentCollation": true
+    },
+    "github.copilot.chat.editor.temporalContext.enabled": true
 }
+  
