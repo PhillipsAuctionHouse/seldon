@@ -1,3 +1,10 @@
+## [1.112.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.112.0...v1.112.1) (2025-02-13)
+
+
+### Bug Fixes
+
+* **tags:** L3-5077 update tag click behavior and styles for focus and hover state ([#508](https://github.com/PhillipsAuctionHouse/seldon/issues/508)) ([4d912da](https://github.com/PhillipsAuctionHouse/seldon/commit/4d912dadf7db227f2623b5602a3981c69f9cb5b7))
+
 # [1.112.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.111.1...v1.112.0) (2025-02-12)
 
 
