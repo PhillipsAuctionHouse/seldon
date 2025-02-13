@@ -31,20 +31,23 @@ export const ButtonWithIcon = (props: ButtonProps) => (
 );
 
 export const ButtonAsLink = (props: ButtonProps) => (
-  <Button
-    {...props}
-    href="https://www.phillips.com"
-    target="_blank"
-    onClick={(e) => {
-      e.preventDefault();
-      window.alert('Button clicked');
-    }}
-  >
+  <Button {...props} href="https://www.phillips.com" target="_blank">
     Visit Phillips
   </Button>
 );
 
 ButtonAsLink.args = {
+  variant: ButtonVariants.tertiary,
+  size: 'md',
+};
+
+export const ButtonAsLinkWithPrefetch = (props: ButtonProps) => (
+  <Button {...props} href="https://www.phillips.com" target="_blank" prefetch="intent">
+    Visit Phillips
+  </Button>
+);
+
+ButtonAsLinkWithPrefetch.args = {
   variant: ButtonVariants.tertiary,
   size: 'md',
 };

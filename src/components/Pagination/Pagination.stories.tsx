@@ -52,6 +52,30 @@ export const Playground = ({ playgroundWidth, onChange, ...args }: StoryProps) =
   );
 };
 
+export const PlaygroundWithHrefAndPrefetch = ({ playgroundWidth, onChange, ...args }: StoryProps) => {
+  // Parent component is in charge of the state management
+  const [value, setValue] = useState<PaginationOptionValue>(lotOptions[0].value ?? lotOptions[0]);
+
+  return (
+    <div style={{ width: playgroundWidth, margin: '1rem' }}>
+      <Pagination
+        {...args}
+        id="Pagination-1"
+        options={lotOptions.map((option) => ({
+          ...option,
+          href: 'https://www.phillips.com',
+          prefetch: 'intent',
+        }))}
+        value={value}
+        onChange={(value) => {
+          setValue(value);
+          onChange(value);
+        }}
+      ></Pagination>
+    </div>
+  );
+};
+
 export const StringOptionsPlayground = ({ playgroundWidth, onChange, ...args }: StoryProps) => {
   const stringOptions = ['Lot 1', 'Lot 2', 'Lot 3', 'Lot 4', 'Lot 5'];
   const [value, setValue] = useState<string>(stringOptions[0]);
