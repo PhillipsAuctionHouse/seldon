@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import Button from '../Button/Button';
+import Button, { ButtonProps } from '../Button/Button';
 import { getCommonProps } from '../../utils';
 import { ButtonVariants } from '../Button/types';
 
@@ -19,15 +19,15 @@ export interface IconButtonProps extends Omit<React.HTMLAttributes<HTMLButtonEle
   /**
    * The href of the button. This will make the button render as an anchor tag.
    */
-  href?: string;
+  href?: ButtonProps['href'];
   /**
    * The target of the link (e.g. _blank). To be combined with href.
    */
-  target?: string;
+  target?: ButtonProps['target'];
   /**
    * The prefetch of the link.
    */
-  prefetch?: 'none' | 'intent' | 'render' | 'viewport';
+  prefetch?: ButtonProps['prefetch'];
 }
 
 const IconButton = ({

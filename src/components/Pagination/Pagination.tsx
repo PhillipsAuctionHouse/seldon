@@ -9,6 +9,7 @@ import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 import { determineOptionValue, findOptionFromSelectString } from './utils';
 import { usePendingState } from '../../utils/hooks';
+import { ButtonProps } from '../Button/Button';
 
 export type PaginationOptionValue = string | number;
 
@@ -24,11 +25,11 @@ export interface PaginationOption {
   /**
    * The href of the button. This will make the button render as an anchor tag. If included, the button will override prevent the default link behavior and leave navigation up to the consumer.
    */
-  href?: string;
+  href?: ButtonProps['href'];
   /**
    * The prefetch of the link.
    */
-  prefetch?: 'none' | 'intent' | 'render' | 'viewport';
+  prefetch?: ButtonProps['prefetch'];
 }
 
 export interface PaginationProps extends Omit<ComponentProps<'div'>, 'onChange'> {

@@ -88,13 +88,12 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
             target={target}
             rel={target === '_blank' ? 'noopener noreferrer' : undefined}
             onMouseOver={() => setLinkHovered(true)}
-            onMouseLeave={() => setLinkHovered(false)}
             onClick={props.onClick}
           >
             {children}
           </a>
           {prefetch === 'intent' && linkHovered && <link data-testid="prefetch-link" rel="prefetch" href={href} />}
-          {prefetch === 'render' && linkHovered && <link data-testid="prefetch-link" rel="prefetch" href={href} />}
+          {prefetch === 'render' && <link data-testid="prefetch-link" rel="prefetch" href={href} />}
         </>
       );
     } else {
