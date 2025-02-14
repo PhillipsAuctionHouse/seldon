@@ -41,6 +41,17 @@ ButtonAsLink.args = {
   size: 'md',
 };
 
+export const ButtonAsLinkWithPrefetch = (props: ButtonProps) => (
+  <Button {...props} href="https://www.phillips.com" target="_blank" prefetch="intent">
+    Visit Phillips
+  </Button>
+);
+
+ButtonAsLinkWithPrefetch.args = {
+  variant: ButtonVariants.tertiary,
+  size: 'md',
+};
+
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Playground = {
   args: {

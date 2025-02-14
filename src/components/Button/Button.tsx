@@ -1,8 +1,7 @@
 import classnames from 'classnames';
-
 import { getCommonProps } from '../../utils';
 import { ButtonVariants } from './types';
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement> {
   /**
@@ -16,7 +15,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HT
   /**
    * Optional click handler
    */
-  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement> | undefined;
   /**
    * Is this the principal call to action on the page?
    */
@@ -37,6 +36,10 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HT
    * The target of the link (e.g. _blank). To be combined with href.
    */
   target?: string;
+  /**
+   * prefetch the link
+   */
+  prefetch?: 'none' | 'intent' | 'render' | 'viewport';
 }
 
 /**
@@ -60,30 +63,45 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
       isDisabled = false,
       href,
       target,
+      prefetch = 'none',
       ...props
     },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Button');
+    const [linkHovered, setLinkHovered] = useState(false);
+
     if (href) {
+      const PreloadLinks = () => (
+        <>
+          <link data-testid="prefetch-link" rel="prefetch" href={href} />
+          <link data-testid="modulepreload-link" rel="modulepreload" href={href} />
+        </>
+      );
       return (
-        <a
-          {...commonProps}
-          ref={ref as React.ForwardedRef<HTMLAnchorElement>}
-          href={href}
-          className={classnames(
-            `${baseClassName}`,
-            `${baseClassName}--${variant}`,
-            {
-              [`${baseClassName}--icon-last`]: iconLast,
-            },
-            className,
-          )}
-          target={target}
-          rel={target === '_blank' ? 'noopener noreferrer' : undefined}
-        >
-          {children}
-        </a>
+        <>
+          <a
+            {...commonProps}
+            ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+            href={href}
+            className={classnames(
+              `${baseClassName}`,
+              `${baseClassName}--${variant}`,
+              {
+                [`${baseClassName}--icon-last`]: iconLast,
+              },
+              className,
+            )}
+            target={target}
+            rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+            onMouseOver={() => setLinkHovered(true)}
+            onClick={props.onClick}
+          >
+            {children}
+          </a>
+          {prefetch === 'intent' && linkHovered && <PreloadLinks />}
+          {prefetch === 'render' && <PreloadLinks />}
+        </>
       );
     } else {
       return (

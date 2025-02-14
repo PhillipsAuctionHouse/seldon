@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { px } from '../../utils';
 
 import Button from './Button';
@@ -40,5 +40,58 @@ describe('Button', () => {
     render(<Button>Click me</Button>);
     const buttonElement = screen.getByText('Click me');
     expect(buttonElement.tagName).toBe('BUTTON');
+  });
+  it('should add prefetch link when prefetch is "render"', async () => {
+    render(
+      <Button href="https://example.com" prefetch="render">
+        Link
+      </Button>,
+    );
+    const anchorElement = screen.getByText('Link');
+    act(() => {
+      anchorElement.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
+    });
+    await waitFor(() => {
+      expect(screen.getByTestId('prefetch-link')).toHaveAttribute('rel', 'prefetch');
+      expect(screen.getByTestId('prefetch-link')).toHaveAttribute('href', 'https://example.com');
+      expect(screen.getByTestId('modulepreload-link')).toHaveAttribute('rel', 'modulepreload');
+      expect(screen.getByTestId('modulepreload-link')).toHaveAttribute('href', 'https://example.com');
+    });
+  });
+
+  it('should not add prefetch link when prefetch is "none"', async () => {
+    render(
+      <Button href="https://example.com" prefetch="none">
+        Link
+      </Button>,
+    );
+    const anchorElement = screen.getByText('Link');
+    act(() => {
+      anchorElement.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
+    });
+    await waitFor(() => {
+      expect(screen.queryByTestId('prefetch-link')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('modulepreload-link')).not.toBeInTheDocument();
+    });
+  });
+
+  it('should add prefetch link on mouse over for intent prefetch', async () => {
+    render(
+      <Button href="https://example.com" prefetch="intent">
+        Link
+      </Button>,
+    );
+    const anchorElement = screen.getByText('Link');
+    await waitFor(() => {
+      expect(screen.queryByTestId('prefetch-link')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('modulepreload-link')).not.toBeInTheDocument();
+    });
+    act(() => {
+      anchorElement.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
+    });
+    await waitFor(() => {
+      expect(screen.getByTestId('prefetch-link')).toBeInTheDocument();
+      expect(screen.getByTestId('modulepreload-link')).toBeInTheDocument();
+    });
   });
 });
