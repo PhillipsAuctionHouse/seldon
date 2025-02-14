@@ -1,3 +1,10 @@
+# [1.113.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.112.1...v1.113.0) (2025-02-14)
+
+
+### Features
+
+* **paginationlinks:** L3-5393 allow prefetchable links to be used in pagination ([#509](https://github.com/PhillipsAuctionHouse/seldon/issues/509)) ([85249aa](https://github.com/PhillipsAuctionHouse/seldon/commit/85249aa054ec240d94cb9d3e1d62eb2a60bb172c))
+
 ## [1.112.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.112.0...v1.112.1) (2025-02-13)
 
 
