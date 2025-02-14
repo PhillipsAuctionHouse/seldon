@@ -54,6 +54,8 @@ describe('Button', () => {
     await waitFor(() => {
       expect(screen.getByTestId('prefetch-link')).toHaveAttribute('rel', 'prefetch');
       expect(screen.getByTestId('prefetch-link')).toHaveAttribute('href', 'https://example.com');
+      expect(screen.getByTestId('modulepreload-link')).toHaveAttribute('rel', 'modulepreload');
+      expect(screen.getByTestId('modulepreload-link')).toHaveAttribute('href', 'https://example.com');
     });
   });
 
@@ -69,6 +71,7 @@ describe('Button', () => {
     });
     await waitFor(() => {
       expect(screen.queryByTestId('prefetch-link')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('modulepreload-link')).not.toBeInTheDocument();
     });
   });
 
@@ -81,12 +84,14 @@ describe('Button', () => {
     const anchorElement = screen.getByText('Link');
     await waitFor(() => {
       expect(screen.queryByTestId('prefetch-link')).not.toBeInTheDocument();
+      expect(screen.queryByTestId('modulepreload-link')).not.toBeInTheDocument();
     });
     act(() => {
       anchorElement.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
     });
     await waitFor(() => {
       expect(screen.getByTestId('prefetch-link')).toBeInTheDocument();
+      expect(screen.getByTestId('modulepreload-link')).toBeInTheDocument();
     });
   });
 });

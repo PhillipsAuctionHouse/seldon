@@ -70,7 +70,14 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Button');
     const [linkHovered, setLinkHovered] = useState(false);
+
     if (href) {
+      const PreloadLinks = () => (
+        <>
+          <link data-testid="prefetch-link" rel="prefetch" href={href} />
+          <link data-testid="modulepreload-link" rel="modulepreload" href={href} />
+        </>
+      );
       return (
         <>
           <a
@@ -92,8 +99,8 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
           >
             {children}
           </a>
-          {prefetch === 'intent' && linkHovered && <link data-testid="prefetch-link" rel="prefetch" href={href} />}
-          {prefetch === 'render' && <link data-testid="prefetch-link" rel="prefetch" href={href} />}
+          {prefetch === 'intent' && linkHovered && <PreloadLinks />}
+          {prefetch === 'render' && <PreloadLinks />}
         </>
       );
     } else {
