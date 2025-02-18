@@ -1,3 +1,10 @@
+# [1.114.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.113.0...v1.114.0) (2025-02-18)
+
+
+### Features
+
+* **objecttile:** L3-5242 - make title truncate on 1 line ([#513](https://github.com/PhillipsAuctionHouse/seldon/issues/513)) ([9680ce0](https://github.com/PhillipsAuctionHouse/seldon/commit/9680ce08af39ba28e34e7d0fbc2f81d96e33f586))
+
 # [1.113.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.112.1...v1.113.0) (2025-02-14)
 
 
