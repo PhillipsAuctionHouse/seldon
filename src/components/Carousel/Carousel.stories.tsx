@@ -4,6 +4,7 @@ import CarouselContent from './CarouselContent';
 import CarouselItem from './CarouselItem';
 import CarouselDots, { CarouselDotsProps } from './CarouselDots';
 import { useState } from 'react';
+import CarouselArrows from './CarouselArrows';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -40,6 +41,36 @@ export const Playground = (props: CarouselProps) => (
 Playground.args = {} satisfies CarouselProps;
 
 Playground.argTypes = {};
+
+export const CarouselWithArrows = (props: CarouselProps) => (
+  <Carousel {...props}>
+    <CarouselContent>
+      {Array.from({ length: 9 }).map((_, index) => (
+        <CarouselItem key={index}>
+          <div
+            style={{
+              display: 'flex',
+              aspectRatio: '4 / 1',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '1.5rem',
+              backgroundColor: '#66BF3B',
+              borderRadius: '0.5rem',
+            }}
+          >
+            <span style={{ fontSize: '2.25rem', fontWeight: '600', color: 'white' }}>{index + 1}</span>
+          </div>
+        </CarouselItem>
+      ))}
+    </CarouselContent>
+    <CarouselArrows />
+  </Carousel>
+);
+
+// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
+CarouselWithArrows.args = {} satisfies CarouselProps;
+
+CarouselWithArrows.argTypes = {};
 
 export const CarouselWithDots = (props: CarouselProps & CarouselDotsProps) => (
   <Carousel {...props}>
