@@ -79,17 +79,31 @@
   &-dot__container {
     align-items: center;
     display: flex;
-    height: 8px;
+    height: 10px;
     justify-content: center;
-    min-width: 8px;
-    padding: 1px;
+    margin: 2px;
+    min-width: 10px;
+    padding: 2px;
     scroll-snap-align: center;
-    width: 8px;
+    width: 10px;
+
+    &:focus-visible {
+      border-radius: 50%;
+      outline: 0.5px solid #000;
+
+      &-dot {
+        &:hover {
+          background-color: transparent;
+          outline: 1px solid #000;
+        }
+      }
+    }
   }
 
   &-dot {
+    background-color: #eceae7;
     border-radius: 50%;
-    outline: 1px solid #adadad;
+    outline-color: #eceae7;
 
     &--md {
       height: 100%;
@@ -101,9 +115,19 @@
       width: 50%;
     }
 
+    &:hover {
+      background-color: transparent;
+      outline: 1px solid #000;
+    }
+
     &--selected {
-      background-color: #525050;
-      outline-color: #525050;
+      background-color: #000;
+      outline-color: #000;
+
+      &:hover {
+        background-color: #000;
+        outline: none;
+      }
     }
   }
 }
