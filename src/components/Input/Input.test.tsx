@@ -110,6 +110,13 @@ describe('An Input', () => {
     await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(1));
   });
 
+  it('will change the input value', async () => {
+    render(<Input {...reqProps} />);
+    await userEvent.click(screen.getByTestId('test-id'));
+    await userEvent.keyboard('s');
+    expect(screen.getByTestId('test-id')).toHaveValue('s');
+  });
+
   it('will not fire the onClick handler when disabled', async () => {
     const mockedOnClick = vi.fn();
     render(<Input {...reqProps} onClick={mockedOnClick} disabled />);
@@ -119,7 +126,8 @@ describe('An Input', () => {
 
   it('will not change the input when readOnly', async () => {
     render(<Input {...reqProps} readOnly />);
-    await userEvent.type(screen.getByTestId('test-id'), 's');
+    await userEvent.click(screen.getByTestId('test-id'));
+    await userEvent.keyboard('s');
     expect(screen.getByTestId('test-id')).not.toHaveValue('s');
   });
 });
