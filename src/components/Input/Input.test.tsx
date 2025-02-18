@@ -109,4 +109,17 @@ describe('An Input', () => {
     await userEvent.click(screen.getByTestId('test-id'));
     await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(1));
   });
+
+  it('will not fire the onClick handler when disabled', async () => {
+    const mockedOnClick = vi.fn();
+    render(<Input {...reqProps} onClick={mockedOnClick} disabled />);
+    await userEvent.click(screen.getByTestId('test-id'));
+    expect(mockedOnClick).not.toHaveBeenCalled();
+  });
+
+  it('will not change the input when readOnly', async () => {
+    render(<Input {...reqProps} readOnly />);
+    await userEvent.type(screen.getByTestId('test-id'), 's');
+    expect(screen.getByTestId('test-id')).not.toHaveValue('s');
+  });
 });
