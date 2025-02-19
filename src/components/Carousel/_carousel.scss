@@ -45,11 +45,13 @@
     align-content: flex-start;
     flex-wrap: wrap;
     left: 0;
+    padding-left: $spacing-sm;
   }
 
   &-arrows-next-btn {
     align-content: flex-end;
     flex-wrap: wrap;
+    padding-right: $spacing-sm;
     right: 0;
   }
 
