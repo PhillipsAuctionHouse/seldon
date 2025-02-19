@@ -1,3 +1,10 @@
+## [1.115.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.115.0...v1.115.1) (2025-02-19)
+
+
+### Bug Fixes
+
+* **Pagination:** L3-5318 Pagination Dot update to match iOS ([#517](https://github.com/PhillipsAuctionHouse/seldon/issues/517)) ([cc02ab3](https://github.com/PhillipsAuctionHouse/seldon/commit/cc02ab39f188edc3a4fb9eb65fee6358aebf9e60))
+
 # [1.115.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.114.0...v1.115.0) (2025-02-19)
 
 
