@@ -47,7 +47,7 @@ export interface InputProps extends Omit<React.ComponentProps<'input'>, 'size'> 
   /**
    * Text that will be read by a screen reader when visiting this control
    */
-  labelText: string;
+  labelText: React.ReactNode;
 
   /**
    * Optional `onChange` handler that is called whenever `<input>` is updated
