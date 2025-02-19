@@ -89,6 +89,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
         loop,
         startIndex,
         inViewThreshold,
+        breakpoints: { '(min-width: 961px)': { watchDrag: false } },
       },
       [
         ...(useWheelGestures
