@@ -1,3 +1,15 @@
+# [1.115.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.114.0...v1.115.0) (2025-02-19)
+
+
+### Bug Fixes
+
+* **deps:** bump dompurify from 3.1.6 to 3.2.4 ([#514](https://github.com/PhillipsAuctionHouse/seldon/issues/514)) ([8c3760b](https://github.com/PhillipsAuctionHouse/seldon/commit/8c3760bce1849eb5606c4c2480a915e0f7ab0ac0))
+
+
+### Features
+
+* **ObjectTitle:** L3-5386 fixed image fit ([#521](https://github.com/PhillipsAuctionHouse/seldon/issues/521)) ([e15de1d](https://github.com/PhillipsAuctionHouse/seldon/commit/e15de1d6501976393df4d631cc7d25f1f82e6ec9))
+
 # [1.114.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.113.0...v1.114.0) (2025-02-18)
 
 
