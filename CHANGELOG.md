@@ -1,3 +1,10 @@
+# [1.116.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.115.1...v1.116.0) (2025-02-19)
+
+
+### Features
+
+* **button:** L3-5301 - add button explicit height ([#512](https://github.com/PhillipsAuctionHouse/seldon/issues/512)) ([e8de6fb](https://github.com/PhillipsAuctionHouse/seldon/commit/e8de6fb4a812bd63c3788294ecfc62d24db4e933))
+
 ## [1.115.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.115.0...v1.115.1) (2025-02-19)
 
 
