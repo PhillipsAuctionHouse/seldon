@@ -30,7 +30,7 @@ export interface CarouselDotsProps extends ComponentProps<'div'> {
  *
  */
 const dotWidth = 10;
-const dotGap = 12;
+const dotGap = 10;
 const centerDotContainer = 11;
 
 const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
