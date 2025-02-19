@@ -88,7 +88,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       {
         loop,
         startIndex,
-        inViewThreshold: inViewThreshold,
+        inViewThreshold,
       },
       [
         ...(useWheelGestures

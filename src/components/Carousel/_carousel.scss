@@ -10,7 +10,7 @@
     cursor: pointer;
     display: flex;
     flex-flow: column wrap;
-    height: calc(100% - 1.5rem);
+    height: 100%;
     justify-content: center;
     opacity: 0;
     position: absolute;
@@ -30,6 +30,15 @@
       place-content: center center;
       width: 3.25rem;
     }
+
+    @media (max-width: $breakpoint-md) {
+      display: none;
+    }
+  }
+
+  &-dots + &-arrows &-arrows-prev-btn,
+  &-dots + &-arrows &-arrows-next-btn {
+    height: calc(100% - 1.5rem);
   }
 
   &-arrows-prev-btn {
