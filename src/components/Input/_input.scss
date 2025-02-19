@@ -66,8 +66,7 @@ $lg: #{$px}-input--lg;
   }
 
   // Disabled
-  &--disabled,
-  &--readonly {
+  &--disabled {
     color: $keyline-gray;
     cursor: default;
 
@@ -79,10 +78,19 @@ $lg: #{$px}-input--lg;
     .#{$px}-input__input:hover {
       cursor: default;
     }
+  }
+
+  // Read only
+  &--readonly {
+    pointer-events: none;
+
+    .#{$px}-input__label,
+    .#{$px}-input__input {
+      cursor: default;
+    }
 
     .#{$px}-input__input {
       background-color: rgba(239, 239, 239, 30%);
-      pointer-events: none;
     }
   }
 
