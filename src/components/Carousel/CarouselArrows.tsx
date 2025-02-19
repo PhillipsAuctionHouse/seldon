@@ -17,12 +17,12 @@ const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(({ classN
   const { api } = useCarousel();
   const onPrevArrowClick = useCallback(() => {
     if (!api) return;
-    api.scrollPrev();
+    api.scrollPrev(true);
   }, [api]);
 
   const onNextArrowClick = useCallback(() => {
     if (!api) return;
-    api.scrollNext();
+    api.scrollNext(true);
   }, [api]);
 
   return (
