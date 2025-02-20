@@ -143,7 +143,7 @@ describe('An Input', () => {
       />,
     );
 
-    const labelElement = screen.getByTestId('test-select-label-label');
+    const labelElement = screen.getByTestId('label-test-select-label');
     expect(labelElement).toBeInTheDocument();
 
     const wrapperElement = screen.getByText('Test Label');

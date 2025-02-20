@@ -160,7 +160,7 @@ const Input = React.forwardRef(
     return (
       <div className={wrapperClassnames}>
         <label
-          data-testid={`${id}-label`}
+          data-testid={`label-${id || generatedId}`}
           htmlFor={id || generatedId}
           className={classnames(`${px}-input__label`, { [`${px}-input__label--hidden`]: hideLabel })}
         >
