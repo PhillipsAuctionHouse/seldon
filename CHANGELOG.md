@@ -1,3 +1,10 @@
+# [1.117.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.116.0...v1.117.0) (2025-02-20)
+
+
+### Features
+
+* **carousel-arrows:** L3-5188 Carousel Navigation UI Fixes ([#518](https://github.com/PhillipsAuctionHouse/seldon/issues/518)) ([f1fb62f](https://github.com/PhillipsAuctionHouse/seldon/commit/f1fb62fa3f3f522faba15ac9ef6c7a9d955018d8))
+
 # [1.116.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.115.1...v1.116.0) (2025-02-19)
 
 
