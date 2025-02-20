@@ -1,3 +1,10 @@
+# [1.118.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.117.0...v1.118.0) (2025-02-20)
+
+
+### Features
+
+* **_header.scss:** L3-5503 fixed header ([#523](https://github.com/PhillipsAuctionHouse/seldon/issues/523)) ([0e3e904](https://github.com/PhillipsAuctionHouse/seldon/commit/0e3e9042e49f58389359880e5457634e6fccd134))
+
 # [1.117.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.116.0...v1.117.0) (2025-02-20)
 
 
