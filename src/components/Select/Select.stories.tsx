@@ -144,3 +144,41 @@ Tertiary.argTypes = {
     defaultValue: SelectVariants.tertiary,
   },
 };
+
+export const CustomLabel = ({ playgroundWidth, ...args }: StoryProps) => (
+  <div style={{ width: playgroundWidth, margin: '1rem' }}>
+    <Select
+      key={args.defaultValue?.toString()}
+      {...args}
+      id="Input-1"
+      value="show-lot"
+      labelText={
+        <div>
+          Test Label <span style={{ fontVariationSettings: 'normal' }}>(Test Span)</span>
+        </div>
+      }
+    >
+      <option key="0" value="show-lot" hidden>
+        Show Lot No.
+      </option>
+
+      {Array.from({ length: 20 }, (_, i) => (
+        <option key={i}>Option {i + 1}</option>
+      ))}
+    </Select>
+  </div>
+);
+
+CustomLabel.args = {
+  showIcon: true,
+};
+
+CustomLabel.argTypes = {
+  variant: {
+    options: [SelectVariants.default, SelectVariants.tertiary],
+    control: {
+      type: 'select',
+    },
+    defaultValue: SelectVariants.tertiary,
+  },
+};

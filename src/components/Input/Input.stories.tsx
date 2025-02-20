@@ -215,6 +215,27 @@ ControlledInput.args = {
 
 ControlledInput.argTypes = argTypes;
 
+export const CustomLabel = ({ playgroundWidth, ...args }: StoryProps) => (
+  <div style={{ width: playgroundWidth, margin: '1rem' }}>
+    <Input
+      key={args.defaultValue as string}
+      {...args}
+      id="Input-1"
+      labelText={
+        <div>
+          Test Label <span style={{ fontVariationSettings: 'normal' }}>(Test Span)</span>
+        </div>
+      }
+    />
+  </div>
+);
+
+CustomLabel.args = {
+  showIcon: true,
+};
+
+CustomLabel.argTypes = {};
+
 export const Playground = ({ playgroundWidth, ...args }: StoryProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
