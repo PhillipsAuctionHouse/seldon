@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { EmblaCarouselType } from 'embla-carousel';
-import { ComponentProps, forwardRef, useCallback, useEffect, useState, useId, useRef, useMemo } from 'react';
+import { ComponentProps, forwardRef, useCallback, useEffect, useState, useRef, useMemo } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { useCarousel } from './utils';
 import { getCommonProps } from '../../utils';
 import { CarouselDot } from './CarouselDot';
@@ -36,7 +37,7 @@ const centerDotContainer = 11;
 const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
   ({ className, maxDots = 9, position = 'inline', numberOfSlides = 0, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'CarouselDots');
-    const componentId = useId();
+    const componentId = uuidv4();
     const { api, onSlideChange } = useCarousel();
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [scrollSnaps, setScrollSnaps] = useState<number[]>(

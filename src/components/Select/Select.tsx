@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { px, useNormalizedInputProps } from '../../utils';
 import { InputProps } from '../Input/Input';
 import { Merge } from 'type-fest';
+import { v4 as uuidv4 } from 'uuid';
 
 import { SelectVariants } from './types';
 import ChevronDownIcon from '../../assets/chevronDown.svg?react';
@@ -59,7 +60,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     ref,
   ) => {
     const type = 'select';
-    const generatedId = React.useId();
+    const generatedId = uuidv4();
     const inputProps = useNormalizedInputProps({
       disabled,
       id: id ?? generatedId,

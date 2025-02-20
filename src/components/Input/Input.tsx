@@ -1,5 +1,6 @@
 import * as React from 'react';
 import classnames from 'classnames';
+import { v4 as uuidv4 } from 'uuid';
 
 import { px, useNormalizedInputProps } from '../../utils';
 
@@ -136,7 +137,7 @@ const Input = React.forwardRef(
     }: InputProps,
     ref: React.ForwardedRef<HTMLInputElement>,
   ) => {
-    const generatedId = React.useId();
+    const generatedId = uuidv4();
     const inputProps = useNormalizedInputProps({
       disabled,
       id: id || generatedId,
