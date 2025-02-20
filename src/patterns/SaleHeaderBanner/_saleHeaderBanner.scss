@@ -30,7 +30,7 @@
 
   &__location {
     font-variation-settings: 'wght' 600;
-    margin: $margin-xsm 0;
+    margin: $spacing-xsm 0;
   }
 
   &__occurrence-details {
@@ -42,7 +42,6 @@
       flex-direction: column;
       gap: 4px;
 
-      &::before,
       &::after {
         content: '';
         display: block;
