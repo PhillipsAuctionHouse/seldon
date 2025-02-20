@@ -15,7 +15,9 @@ export interface InputProps extends Omit<React.ComponentProps<'input'>, 'size'> 
   defaultValue?: string | number | readonly string[];
 
   /**
-   * Booolean to specify whether the `<input>` should be disabled
+   * Boolean to specify whether the `<input>` should be disabled.
+   * WARNING: disabled field values will NOT be submitted when a form is submitted according to the HTML spec.
+   * Instead use `readOnly` to prevent user input but still submit the value.
    */
   disabled?: boolean;
 
