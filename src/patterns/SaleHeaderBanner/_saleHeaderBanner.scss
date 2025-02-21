@@ -1,6 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-sale-header-banner {
+  border-bottom: 1px solid $light-gray;
   display: flex;
   flex-direction: column;
   margin-bottom: $spacing-md;
