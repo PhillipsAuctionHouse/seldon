@@ -1,3 +1,10 @@
+## [1.118.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.118.1...v1.118.2) (2025-02-21)
+
+
+### Bug Fixes
+
+* **imgsaleheaderbanner:** L3-5191 - add bottom border and fix aspect ratio ([#526](https://github.com/PhillipsAuctionHouse/seldon/issues/526)) ([23cf83b](https://github.com/PhillipsAuctionHouse/seldon/commit/23cf83bcb099c1935f0b79b3f76647c003882b78))
+
 ## [1.118.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.118.0...v1.118.1) (2025-02-21)
 
 
