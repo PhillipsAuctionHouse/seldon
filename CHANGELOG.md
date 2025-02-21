@@ -1,3 +1,10 @@
+## [1.118.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.118.0...v1.118.1) (2025-02-21)
+
+
+### Bug Fixes
+
+* **SaleHeaderBanner:** L3-5344 Padding inconsistent for the label section on the sale page banner ([#524](https://github.com/PhillipsAuctionHouse/seldon/issues/524)) ([ffec98e](https://github.com/PhillipsAuctionHouse/seldon/commit/ffec98e5c7f978b7a0c1aacfe275c2da0fe3e801))
+
 # [1.118.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.117.0...v1.118.0) (2025-02-20)
 
 
