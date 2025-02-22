@@ -10,6 +10,7 @@ import { useOnClickOutside } from 'usehooks-ts';
 import { HeaderContext } from '../../site-furniture/Header/Header';
 import { SearchButton } from './SearchButton';
 import { CSSTransition } from 'react-transition-group';
+import { RemoveScroll } from 'react-remove-scroll';
 
 export interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -124,99 +125,101 @@ const Search = ({
   };
 
   return (
-    <div className={`${baseClassName}__container`}>
-      <div
-        className={`${baseClassName}__container__inner`}
-        ref={searchContainerRef}
-        onClick={(event: React.MouseEvent<HTMLElement>) => {
-          if (!isSearchExpanded) {
-            showSearch(true);
-            event.stopPropagation();
-          }
-        }}
-      >
-        <Text variant={TextVariants.heading4} className={`${baseClassName}__container__inner__label`}>
-          {searchButtonText}
-        </Text>
+    <RemoveScroll enabled={isSearchExpanded} allowPinchZoom removeScrollBar={false}>
+      <div className={`${baseClassName}__container`}>
         <div
-          {...commonProps}
-          className={classnames(baseClassName, className, { [`${baseClassName}--active`]: isSearchExpanded })}
-          data-testid={baseTestId}
-          role="search"
-          {...props}
+          className={`${baseClassName}__container__inner`}
+          ref={searchContainerRef}
+          onClick={(event: React.MouseEvent<HTMLElement>) => {
+            if (!isSearchExpanded) {
+              showSearch(true);
+              event.stopPropagation();
+            }
+          }}
         >
-          <form
-            data-testid={`${baseTestId}-form`}
-            className={classnames(`${baseClassName}__form`, {
-              [`${baseClassName}__form--active`]: isSearchExpanded,
-            })}
-            ref={searchFormRef}
+          <Text variant={TextVariants.heading4} className={`${baseClassName}__container__inner__label`}>
+            {searchButtonText}
+          </Text>
+          <div
+            {...commonProps}
+            className={classnames(baseClassName, className, { [`${baseClassName}--active`]: isSearchExpanded })}
+            data-testid={baseTestId}
+            role="search"
+            {...props}
           >
-            <div
-              className={classnames(`${baseClassName}__content-wrapper`, {
-                [`${baseClassName}__content-wrapper--active`]: isSearchExpanded,
+            <form
+              data-testid={`${baseTestId}-form`}
+              className={classnames(`${baseClassName}__form`, {
+                [`${baseClassName}__form--active`]: isSearchExpanded,
               })}
-              role="combobox"
-              aria-haspopup="listbox"
+              ref={searchFormRef}
             >
-              <CSSTransition
-                in={isSearchExpanded}
-                classNames={`${px}-input`}
-                addEndListener={() => {
-                  return;
-                }}
+              <div
+                className={classnames(`${baseClassName}__content-wrapper`, {
+                  [`${baseClassName}__content-wrapper--active`]: isSearchExpanded,
+                })}
+                role="combobox"
+                aria-haspopup="listbox"
               >
-                <Input
-                  aria-hidden={!isSearchExpanded}
-                  className={`${baseClassName}__input`}
-                  id="search-input"
-                  hideLabel
-                  labelText={searchButtonText}
-                  placeholder={isSearchExpanded ? placeholder : ''}
-                  type="text"
-                  defaultValue={defaultValue}
-                  invalid={state === 'invalid'}
-                  invalidText={invalidText}
-                  onKeyDown={onKeyDown}
-                  onChange={onInputChange}
-                  ref={searchInputRef}
+                <CSSTransition
+                  in={isSearchExpanded}
+                  classNames={`${px}-input`}
+                  addEndListener={() => {
+                    return;
+                  }}
+                >
+                  <Input
+                    aria-hidden={!isSearchExpanded}
+                    className={`${baseClassName}__input`}
+                    id="search-input"
+                    hideLabel
+                    labelText={searchButtonText}
+                    placeholder={isSearchExpanded ? placeholder : ''}
+                    type="text"
+                    defaultValue={defaultValue}
+                    invalid={state === 'invalid'}
+                    invalidText={invalidText}
+                    onKeyDown={onKeyDown}
+                    onChange={onInputChange}
+                    ref={searchInputRef}
+                  />
+                </CSSTransition>
+                <SearchButton
+                  className={baseClassName}
+                  searchButtonText={searchButtonText}
+                  state={state}
+                  testId={baseTestId}
+                  isSearchExpanded={isSearchExpanded}
+                  setIsSearchExpanded={showSearch}
+                  onCancel={onCancel}
                 />
-              </CSSTransition>
-              <SearchButton
-                className={baseClassName}
-                searchButtonText={searchButtonText}
-                state={state}
-                testId={baseTestId}
-                isSearchExpanded={isSearchExpanded}
-                setIsSearchExpanded={showSearch}
-                onCancel={onCancel}
-              />
-            </div>
-            {value && value.length > 2 ? (
-              <SearchResults
-                autoCompleteResults={searchResults}
-                isLoading={state === 'loading'}
-                loadingText={loadingText}
-                onKeyDown={onKeyDown}
-                userInputValue={value}
-                closeSearch={showSearch}
-              >
-                <li key="viewAllSearchResults" className={`${baseClassName}__result`}>
-                  <Link
-                    onClick={() => showSearch(false)}
-                    href={((value: string) => {
-                      return encodeURLSearchParams(getAllResultsLink(value));
-                    })(value)}
-                  >
-                    <p>{getAllResultsText(value)}</p>
-                  </Link>
-                </li>
-              </SearchResults>
-            ) : null}
-          </form>
+              </div>
+              {value && value.length > 2 ? (
+                <SearchResults
+                  autoCompleteResults={searchResults}
+                  isLoading={state === 'loading'}
+                  loadingText={loadingText}
+                  onKeyDown={onKeyDown}
+                  userInputValue={value}
+                  closeSearch={showSearch}
+                >
+                  <li key="viewAllSearchResults" className={`${baseClassName}__result`}>
+                    <Link
+                      onClick={() => showSearch(false)}
+                      href={((value: string) => {
+                        return encodeURLSearchParams(getAllResultsLink(value));
+                      })(value)}
+                    >
+                      <p>{getAllResultsText(value)}</p>
+                    </Link>
+                  </li>
+                </SearchResults>
+              ) : null}
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </RemoveScroll>
   );
 };
 
