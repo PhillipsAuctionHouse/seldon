@@ -1,3 +1,10 @@
+# [1.119.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.118.2...v1.119.0) (2025-02-22)
+
+
+### Features
+
+* **Header:** L3-5503 fixed scroll for header and search ([#527](https://github.com/PhillipsAuctionHouse/seldon/issues/527)) ([e536c9e](https://github.com/PhillipsAuctionHouse/seldon/commit/e536c9ef8fe8657f76916663dd33bb43f3d58979))
+
 ## [1.118.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.118.1...v1.118.2) (2025-02-21)
 
 
