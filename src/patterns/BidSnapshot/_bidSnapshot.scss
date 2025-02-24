@@ -1,7 +1,6 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-bid-snapshot {
-  padding-bottom: $spacing-sm;
   position: relative;
 
   &__text .#{$px}-has-separators .#{$px}-detail {
