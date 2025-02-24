@@ -89,7 +89,11 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     return (
       <div className={wrapperClassnames}>
-        <label htmlFor={id} className={classnames(`${px}-input__label`, { [`${px}-input__label--hidden`]: hideLabel })}>
+        <label
+          data-testid={`${id}-label`}
+          htmlFor={id}
+          className={classnames(`${px}-input__label`, { [`${px}-input__label--hidden`]: hideLabel })}
+        >
           {labelText}
         </label>
         <div className={selectContainerClassnames}>

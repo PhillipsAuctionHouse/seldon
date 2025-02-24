@@ -73,4 +73,28 @@ describe('A Select', () => {
     const selectElement = screen.getByTestId('test-select-tertiary');
     expect(selectElement).toHaveClass(`${px}-input__select--tertiary`);
   });
+
+  it('should render labelText as a ReactNode', () => {
+    render(
+      <Select
+        id="test-select-label"
+        labelText={
+          <div>
+            Test Label<span>Test Span</span>
+          </div>
+        }
+      >
+        {mockOptions}
+      </Select>,
+    );
+
+    const labelElement = screen.getByTestId('test-select-label-label');
+    expect(labelElement).toBeInTheDocument();
+
+    const wrapperElement = screen.getByText('Test Label');
+    expect(wrapperElement).toBeInTheDocument();
+
+    const spanElement = screen.getByText('Test Span');
+    expect(spanElement).toBeInTheDocument();
+  });
 });

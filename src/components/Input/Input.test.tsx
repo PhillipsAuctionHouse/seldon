@@ -130,4 +130,28 @@ describe('An Input', () => {
     await userEvent.keyboard('s');
     expect(screen.getByTestId('test-id')).not.toHaveValue('s');
   });
+
+  it('should render labelText as a ReactNode', () => {
+    render(
+      <Input
+        id="test-select-label"
+        labelText={
+          <div>
+            <p>
+              Test paragraph<span>Test Span</span>
+            </p>
+          </div>
+        }
+      />,
+    );
+
+    const labelElement = screen.getByTestId('label-test-select-label');
+    expect(labelElement).toBeInTheDocument();
+
+    const wrapperElement = screen.getByText('Test paragraph');
+    expect(wrapperElement).toBeInTheDocument();
+
+    const spanElement = screen.getByText('Test Span');
+    expect(spanElement).toBeInTheDocument();
+  });
 });

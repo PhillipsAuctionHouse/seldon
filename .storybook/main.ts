@@ -8,6 +8,7 @@ const config: StorybookConfig = {
     '@storybook/addon-interactions',
     '@storybook/addon-mdx-gfm',
     '@chromatic-com/storybook',
+    '@storybook/addon-a11y',
   ],
   framework: {
     name: '@storybook/react-vite',
