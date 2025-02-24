@@ -223,7 +223,9 @@ export const CustomLabel = ({ playgroundWidth, ...args }: StoryProps) => (
       id="Input-1"
       labelText={
         <div>
-          Test Label <span style={{ fontVariationSettings: 'normal' }}>(Test Span)</span>
+          <p>
+            Test Label <span style={{ fontVariationSettings: 'normal' }}>(Test Span)</span>
+          </p>
         </div>
       }
     />

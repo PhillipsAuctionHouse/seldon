@@ -137,7 +137,9 @@ describe('An Input', () => {
         id="test-select-label"
         labelText={
           <div>
-            Test Label<span>Test Span</span>
+            <p>
+              Test paragraph<span>Test Span</span>
+            </p>
           </div>
         }
       />,
@@ -146,7 +148,7 @@ describe('An Input', () => {
     const labelElement = screen.getByTestId('label-test-select-label');
     expect(labelElement).toBeInTheDocument();
 
-    const wrapperElement = screen.getByText('Test Label');
+    const wrapperElement = screen.getByText('Test paragraph');
     expect(wrapperElement).toBeInTheDocument();
 
     const spanElement = screen.getByText('Test Span');
