@@ -1,3 +1,10 @@
+# [1.120.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.119.0...v1.120.0) (2025-02-24)
+
+
+### Features
+
+* **input:** L3-5461 react node as input label ([#522](https://github.com/PhillipsAuctionHouse/seldon/issues/522)) ([c260dda](https://github.com/PhillipsAuctionHouse/seldon/commit/c260ddaa6f31364499b33905704b51993c18c69c))
+
 # [1.119.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.118.2...v1.119.0) (2025-02-22)
 
 
