@@ -1,3 +1,10 @@
+# [1.121.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.120.0...v1.121.0) (2025-02-25)
+
+
+### Features
+
+* **BadgeSvg:** L3-5604 Update Seldon ObjectTile to be able to display Badge svg ([#528](https://github.com/PhillipsAuctionHouse/seldon/issues/528)) ([3977093](https://github.com/PhillipsAuctionHouse/seldon/commit/39770930012c597b13ead862610762d60fb830c8))
+
 # [1.120.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.119.0...v1.120.0) (2025-02-24)
 
 
