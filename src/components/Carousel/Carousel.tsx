@@ -1,4 +1,4 @@
-import { ComponentProps, forwardRef, createContext, useCallback, useEffect, KeyboardEvent } from 'react';
+import { ComponentProps, forwardRef, createContext, useCallback, useEffect, KeyboardEvent, useMemo } from 'react';
 import { getCommonProps, SpacingTokens } from '../../utils';
 import classnames from 'classnames';
 import ClassNames from 'embla-carousel-class-names';
@@ -88,20 +88,23 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
-    let disableNavigationDragBreakpoint = {};
-    switch (disableNavigationDrag) {
-      case 'mobile':
-        disableNavigationDragBreakpoint = { breakpoints: { '(max-width: 960px)': { watchDrag: false } } };
-        break;
-      case 'desktop':
-        disableNavigationDragBreakpoint = { breakpoints: { '(min-width: 961px)': { watchDrag: false } } };
-        break;
-      case 'all':
-        disableNavigationDragBreakpoint = { watchDrag: false };
-        break;
-      default:
-        disableNavigationDragBreakpoint = {};
-    }
+    const disableNavigationDragBreakpoint = useMemo(() => {
+      let breakpointConfig;
+      switch (disableNavigationDrag) {
+        case 'mobile':
+          breakpointConfig = { breakpoints: { '(max-width: 960px)': { watchDrag: false } } };
+          break;
+        case 'desktop':
+          breakpointConfig = { breakpoints: { '(min-width: 961px)': { watchDrag: false } } };
+          break;
+        case 'all':
+          breakpointConfig = { watchDrag: false };
+          break;
+        default:
+          breakpointConfig = {};
+      }
+      return breakpointConfig as object;
+    }, [disableNavigationDrag]);
 
     const [carouselRef, api] = useEmblaCarousel(
       {
