@@ -4,8 +4,8 @@ import { addMinutes } from 'date-fns';
 import ObjectTile from './ObjectTile';
 import { LotStatus } from '../../types/commonTypes';
 import { BidMessage, BidSnapshot, BidStatusEnum } from '../BidSnapshot';
-import { Favorite, MagificentSeven } from '../../assets/icons';
-
+import { Favorite } from '../../assets/icons';
+import MagificentSeven from '../../assets/magnificent-seven.svg?react';
 import { ComponentProps } from 'react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
