@@ -39,8 +39,8 @@
 
     .#{$px}-object-tile__lot-badge {
       display: inline-block;
-      position: absolute;
       left: 4%;
+      position: absolute;
 
       svg {
         height: 100%;
@@ -50,12 +50,12 @@
           fill: $pure-black;
         }
       }
-    } 
+    }
   }
 
   & .#{$px}-object-tile__lot-number {
-    margin-bottom: $spacing-xsm;
     display: inline-block;
+    margin-bottom: $spacing-xsm;
   }
 
   & .#{$px}-object-tile__maker,

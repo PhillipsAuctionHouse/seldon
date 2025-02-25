@@ -33,12 +33,12 @@ const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(({ classN
       {...props}
       {...commonProps}
     >
-      <button className={`${baseClassName}-prev-btn`} onClick={() => onPrevArrowClick()}>
+      <button data-testid="prev-arrow" className={`${baseClassName}-prev-btn`} onClick={() => onPrevArrowClick()}>
         <div className={`${baseClassName}-prev-btn__icon`}>
           <CarouselArrowPrev />
         </div>
       </button>
-      <button className={`${baseClassName}-next-btn`} onClick={() => onNextArrowClick()}>
+      <button data-testid="next-arrow" className={`${baseClassName}-next-btn`} onClick={() => onNextArrowClick()}>
         <div className={`${baseClassName}-next-btn__icon`}>
           <CarouselArrowNext />
         </div>

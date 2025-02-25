@@ -35,6 +35,10 @@ export interface CarouselProps extends ComponentProps<'div'> {
    */
   disableDrag?: boolean;
   /**
+   * Whether to disable dragging to navigate between slides for different viewports.
+   */
+  disableNavigationDrag?: 'mobile' | 'desktop' | 'all' | null;
+  /**
    *  The threshold for slides to be considered in view. A value of 0.1 means that 10% of the slide must be in view for it to be considered in view.
    */
   inViewThreshold?: number;
@@ -77,19 +81,34 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       columnGap,
       useWheelGestures = false,
       disableDrag = false,
+      disableNavigationDrag = null,
       inViewThreshold = 0.99,
       ...props
     },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
+    let disableNavigationDragBreakpoint = {};
+    switch (disableNavigationDrag) {
+      case 'mobile':
+        disableNavigationDragBreakpoint = { breakpoints: { '(max-width: 960px)': { watchDrag: false } } };
+        break;
+      case 'desktop':
+        disableNavigationDragBreakpoint = { breakpoints: { '(min-width: 961px)': { watchDrag: false } } };
+        break;
+      case 'all':
+        disableNavigationDragBreakpoint = { watchDrag: false };
+        break;
+      default:
+        disableNavigationDragBreakpoint = {};
+    }
 
     const [carouselRef, api] = useEmblaCarousel(
       {
         loop,
         startIndex,
         inViewThreshold,
-        breakpoints: { '(min-width: 961px)': { watchDrag: false } },
+        ...disableNavigationDragBreakpoint,
       },
       [
         ...(useWheelGestures

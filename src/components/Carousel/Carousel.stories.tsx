@@ -68,7 +68,7 @@ export const CarouselWithArrows = (props: CarouselProps) => (
 );
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-CarouselWithArrows.args = {} satisfies CarouselProps;
+CarouselWithArrows.args = { disableNavigationDrag: 'desktop' } satisfies CarouselProps;
 
 CarouselWithArrows.argTypes = {};
 

@@ -148,7 +148,11 @@ const ObjectTile = memo(
             <Text className={`${baseClassName}__lot-number`} variant={TextVariants.heading3} element="p">
               {lotNumber}
             </Text>
-            {BadgeElement && <div className={`${baseClassName}__lot-badge`}><BadgeElement /></div>}
+            {BadgeElement && (
+              <div className={`${baseClassName}__lot-badge`}>
+                <BadgeElement />
+              </div>
+            )}
             {FavoriteElement && <FavoriteElement />}
           </div>
           {withdrawnText ? (
