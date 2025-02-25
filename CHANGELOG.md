@@ -1,3 +1,66 @@
+# [1.121.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.120.0...v1.121.0) (2025-02-25)
+
+
+### Features
+
+* **BadgeSvg:** L3-5604 Update Seldon ObjectTile to be able to display Badge svg ([#528](https://github.com/PhillipsAuctionHouse/seldon/issues/528)) ([3977093](https://github.com/PhillipsAuctionHouse/seldon/commit/39770930012c597b13ead862610762d60fb830c8))
+
+# [1.120.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.119.0...v1.120.0) (2025-02-24)
+
+
+### Features
+
+* **input:** L3-5461 react node as input label ([#522](https://github.com/PhillipsAuctionHouse/seldon/issues/522)) ([c260dda](https://github.com/PhillipsAuctionHouse/seldon/commit/c260ddaa6f31364499b33905704b51993c18c69c))
+
+# [1.119.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.118.2...v1.119.0) (2025-02-22)
+
+
+### Features
+
+* **Header:** L3-5503 fixed scroll for header and search ([#527](https://github.com/PhillipsAuctionHouse/seldon/issues/527)) ([e536c9e](https://github.com/PhillipsAuctionHouse/seldon/commit/e536c9ef8fe8657f76916663dd33bb43f3d58979))
+
+## [1.118.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.118.1...v1.118.2) (2025-02-21)
+
+
+### Bug Fixes
+
+* **imgsaleheaderbanner:** L3-5191 - add bottom border and fix aspect ratio ([#526](https://github.com/PhillipsAuctionHouse/seldon/issues/526)) ([23cf83b](https://github.com/PhillipsAuctionHouse/seldon/commit/23cf83bcb099c1935f0b79b3f76647c003882b78))
+
+## [1.118.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.118.0...v1.118.1) (2025-02-21)
+
+
+### Bug Fixes
+
+* **SaleHeaderBanner:** L3-5344 Padding inconsistent for the label section on the sale page banner ([#524](https://github.com/PhillipsAuctionHouse/seldon/issues/524)) ([ffec98e](https://github.com/PhillipsAuctionHouse/seldon/commit/ffec98e5c7f978b7a0c1aacfe275c2da0fe3e801))
+
+# [1.118.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.117.0...v1.118.0) (2025-02-20)
+
+
+### Features
+
+* **_header.scss:** L3-5503 fixed header ([#523](https://github.com/PhillipsAuctionHouse/seldon/issues/523)) ([0e3e904](https://github.com/PhillipsAuctionHouse/seldon/commit/0e3e9042e49f58389359880e5457634e6fccd134))
+
+# [1.117.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.116.0...v1.117.0) (2025-02-20)
+
+
+### Features
+
+* **carousel-arrows:** L3-5188 Carousel Navigation UI Fixes ([#518](https://github.com/PhillipsAuctionHouse/seldon/issues/518)) ([f1fb62f](https://github.com/PhillipsAuctionHouse/seldon/commit/f1fb62fa3f3f522faba15ac9ef6c7a9d955018d8))
+
+# [1.116.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.115.1...v1.116.0) (2025-02-19)
+
+
+### Features
+
+* **button:** L3-5301 - add button explicit height ([#512](https://github.com/PhillipsAuctionHouse/seldon/issues/512)) ([e8de6fb](https://github.com/PhillipsAuctionHouse/seldon/commit/e8de6fb4a812bd63c3788294ecfc62d24db4e933))
+
+## [1.115.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.115.0...v1.115.1) (2025-02-19)
+
+
+### Bug Fixes
+
+* **Pagination:** L3-5318 Pagination Dot update to match iOS ([#517](https://github.com/PhillipsAuctionHouse/seldon/issues/517)) ([cc02ab3](https://github.com/PhillipsAuctionHouse/seldon/commit/cc02ab39f188edc3a4fb9eb65fee6358aebf9e60))
+
 # [1.115.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.114.0...v1.115.0) (2025-02-19)
 
 

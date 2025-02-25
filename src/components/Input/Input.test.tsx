@@ -109,4 +109,49 @@ describe('An Input', () => {
     await userEvent.click(screen.getByTestId('test-id'));
     await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(1));
   });
+
+  it('will change the input value', async () => {
+    render(<Input {...reqProps} />);
+    await userEvent.click(screen.getByTestId('test-id'));
+    await userEvent.keyboard('s');
+    expect(screen.getByTestId('test-id')).toHaveValue('s');
+  });
+
+  it('will not fire the onClick handler when disabled', async () => {
+    const mockedOnClick = vi.fn();
+    render(<Input {...reqProps} onClick={mockedOnClick} disabled />);
+    await userEvent.click(screen.getByTestId('test-id'));
+    expect(mockedOnClick).not.toHaveBeenCalled();
+  });
+
+  it('will not change the input when readOnly', async () => {
+    render(<Input {...reqProps} readOnly />);
+    await userEvent.click(screen.getByTestId('test-id'));
+    await userEvent.keyboard('s');
+    expect(screen.getByTestId('test-id')).not.toHaveValue('s');
+  });
+
+  it('should render labelText as a ReactNode', () => {
+    render(
+      <Input
+        id="test-select-label"
+        labelText={
+          <div>
+            <p>
+              Test paragraph<span>Test Span</span>
+            </p>
+          </div>
+        }
+      />,
+    );
+
+    const labelElement = screen.getByTestId('label-test-select-label');
+    expect(labelElement).toBeInTheDocument();
+
+    const wrapperElement = screen.getByText('Test paragraph');
+    expect(wrapperElement).toBeInTheDocument();
+
+    const spanElement = screen.getByText('Test Span');
+    expect(spanElement).toBeInTheDocument();
+  });
 });

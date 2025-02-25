@@ -30,15 +30,31 @@
   &__lot-number-like {
     position: relative;
 
-    & > :not(.#{$px}-object-tile__lot-number) {
+    & > :not(.#{$px}-object-tile__lot-number):not(.#{$px}-object-tile__lot-badge) {
       position: absolute;
       right: 0;
       top: 50%;
       transform: translateY(-50%);
     }
+
+    .#{$px}-object-tile__lot-badge {
+      display: inline-block;
+      left: 4%;
+      position: absolute;
+
+      svg {
+        height: 100%;
+        width: 100%;
+
+        path {
+          fill: $pure-black;
+        }
+      }
+    }
   }
 
   & .#{$px}-object-tile__lot-number {
+    display: inline-block;
     margin-bottom: $spacing-xsm;
   }
 

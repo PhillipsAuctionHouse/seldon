@@ -1,6 +1,6 @@
 {
   "name": "@phillips/seldon",
-  "version": "1.117.0",
+  "version": "1.121.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/PhillipsAuctionHouse/seldon"
@@ -58,6 +58,7 @@
     "html-react-parser": "^5.2.2",
     "react-intersection-observer": "^9.13.1",
     "react-modal": "^3.16.1",
+    "react-remove-scroll": "^2.6.3",
     "react-transition-group": "^4.4.5",
     "react-zoom-pan-pinch": "^3.6.1",
     "usehooks-ts": "^3.1.0"
@@ -71,6 +72,7 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^10.1.0",
+    "@storybook/addon-a11y": "^8.5.8",
     "@storybook/addon-essentials": "^8.5.0",
     "@storybook/addon-interactions": "^8.5.0",
     "@storybook/addon-links": "^8.5.0",

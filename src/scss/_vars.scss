@@ -316,6 +316,7 @@ $snowflake-menu-padding: 1.25rem;
 
 /* stylelint-disable-next-line no-duplicate-selectors */
 :root {
+  --snw-button-padding: 0.8125rem;
   --spacing-micro: 0.25rem;
   --spacing-xsm: 0.5rem;
   --spacing-sm: 0.75rem;
@@ -326,6 +327,7 @@ $snowflake-menu-padding: 1.25rem;
   --spacing-xxxl: 5.75rem;
 
   @media (min-width: $breakpoint-md) {
+    --snw-button-padding: 0.9375rem;
     --spacing-micro: 0.25rem;
     --spacing-xsm: 0.5rem;
     --spacing-sm: 1rem;
@@ -337,6 +339,7 @@ $snowflake-menu-padding: 1.25rem;
   }
 
   @media (min-width: $breakpoint-xl) {
+    --snw-button-padding: 1.0625rem;
     --spacing-micro: 0.5rem;
     --spacing-xsm: 0.75rem;
     --spacing-sm: 1.25rem;
@@ -367,6 +370,7 @@ $padding-lg: var(--spacing-lg);
 $padding-xl: var(--spacing-xl);
 $padding-xxl: var(--spacing-xxl);
 $padding-tokens: $padding-micro, $padding-xsm, $padding-sm, $padding-md, $padding-lg, $padding-xl, $padding-xxl;
+$snw-button-padding: var(--snw-button-padding);
 
 // MARGIN
 $margin-micro: var(--spacing-micro);

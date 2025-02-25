@@ -19,7 +19,7 @@ const scssFilesToTransform = ['src/**/*.scss', '!src/scss/**/*.scss', '!src/desi
 export default defineConfig({
   plugins: plugins,
   build: {
-    target: ['es2019'],
+    target: ['es2020'],
     minify: true,
     reportCompressedSize: true,
     cssCodeSplit: true,
@@ -74,6 +74,11 @@ export default defineConfig({
         }),
         peerDepsExternal(),
       ],
+    },
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'es2020',
     },
   },
   test: {

@@ -29,6 +29,10 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
    */
   estimateOnRequestText?: string;
   /**
+   * Element used for badge object
+   */
+  badgeElement?: React.ElementType;
+  /**
    * Element used for favoriting object
    */
   favoriteElement?: React.ElementType;
@@ -101,6 +105,7 @@ const ObjectTile = memo(
         estimate,
         estimateLabelText = 'Estimate',
         estimateOnRequestText,
+        badgeElement: BadgeElement,
         favoriteElement: FavoriteElement,
         imageAlt = 'Brought to you by Phillips',
         imageUrl = '',
@@ -143,6 +148,11 @@ const ObjectTile = memo(
             <Text className={`${baseClassName}__lot-number`} variant={TextVariants.heading3} element="p">
               {lotNumber}
             </Text>
+            {BadgeElement && (
+              <div className={`${baseClassName}__lot-badge`}>
+                <BadgeElement />
+              </div>
+            )}
             {FavoriteElement && <FavoriteElement />}
           </div>
           {withdrawnText ? (

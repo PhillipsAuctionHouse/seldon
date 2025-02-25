@@ -6,10 +6,18 @@
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
+  max-height: calc(90vh - #{$header-height});
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  overflow-y: scroll;
   padding: $spacing-sm;
   position: absolute;
+  scrollbar-width: none; /* Firefox */
   top: $search-size;
   width: 100%;
+
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
 
   @include isHeaderMobile {
     padding: $spacing-sm 0;
