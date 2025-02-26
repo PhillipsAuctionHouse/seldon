@@ -1,3 +1,10 @@
+## [1.122.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.122.1...v1.122.2) (2025-02-26)
+
+
+### Bug Fixes
+
+* **saleheaderbanner:** L3-5595 - countdown fixes ([#533](https://github.com/PhillipsAuctionHouse/seldon/issues/533)) ([3d79096](https://github.com/PhillipsAuctionHouse/seldon/commit/3d79096e5d2206a93e15ef31412a575f3db1ae8c))
+
 ## [1.122.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.122.0...v1.122.1) (2025-02-26)
 
 
