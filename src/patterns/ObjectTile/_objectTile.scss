@@ -39,8 +39,9 @@
 
     .#{$px}-object-tile__lot-badge {
       display: inline-block;
-      left: 4%;
-      position: absolute;
+      position: relative;
+      padding-left: $spacing-xsm;
+      transform: translateY(15%);
 
       svg {
         height: 100%;
