@@ -1,3 +1,10 @@
+## [1.122.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.122.2...v1.122.3) (2025-02-26)
+
+
+### Bug Fixes
+
+* **ObjectTile:** L3-5604 Update Seldon ObjectTile position fix ([#534](https://github.com/PhillipsAuctionHouse/seldon/issues/534)) ([a03fcd3](https://github.com/PhillipsAuctionHouse/seldon/commit/a03fcd3da2afdd512b3ecf993c981cbcb6880073))
+
 ## [1.122.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.122.1...v1.122.2) (2025-02-26)
 
 
