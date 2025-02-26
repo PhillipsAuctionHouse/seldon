@@ -1,7 +1,6 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-bid-snapshot {
-  padding-bottom: $spacing-sm;
   position: relative;
 
   &__text .#{$px}-has-separators .#{$px}-detail {
@@ -29,6 +28,13 @@
 
   &--has-bids .#{$px}-detail__value {
     font-variation-settings: 'wght' 600;
+  }
+
+  // styles that will apply to bid message inside bid snapshot only
+  .#{$px}-bid-message {
+    &.#{$px}-bid-message {
+      margin-bottom: $spacing-sm;
+    }
   }
 }
 

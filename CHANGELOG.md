@@ -1,3 +1,22 @@
+## [1.122.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.122.0...v1.122.1) (2025-02-26)
+
+
+### Bug Fixes
+
+* **carousel:** L3-5318 carousel dots ([#532](https://github.com/PhillipsAuctionHouse/seldon/issues/532)) ([37a9dda](https://github.com/PhillipsAuctionHouse/seldon/commit/37a9ddabf6df3acdc269116eadb2069e28a3d05f))
+
+# [1.122.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.121.0...v1.122.0) (2025-02-25)
+
+
+### Bug Fixes
+
+* **carousel-arrows:** L3-5188 Carousel Dragging Fixes ([#531](https://github.com/PhillipsAuctionHouse/seldon/issues/531)) ([b90631f](https://github.com/PhillipsAuctionHouse/seldon/commit/b90631f0dca19d2539c4fed6b7b5c6a33010783a))
+
+
+### Features
+
+* **_bidSnapshot:** L3-5596 spacing fix ([#529](https://github.com/PhillipsAuctionHouse/seldon/issues/529)) ([20e3a09](https://github.com/PhillipsAuctionHouse/seldon/commit/20e3a09d3035f65aaffff74f8858e1ebaf6957a5))
+
 # [1.121.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.120.0...v1.121.0) (2025-02-25)
 
 
