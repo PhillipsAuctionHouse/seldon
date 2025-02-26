@@ -1,3 +1,10 @@
+## [1.122.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.122.0...v1.122.1) (2025-02-26)
+
+
+### Bug Fixes
+
+* **carousel:** L3-5318 carousel dots ([#532](https://github.com/PhillipsAuctionHouse/seldon/issues/532)) ([37a9dda](https://github.com/PhillipsAuctionHouse/seldon/commit/37a9ddabf6df3acdc269116eadb2069e28a3d05f))
+
 # [1.122.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.121.0...v1.122.0) (2025-02-25)
 
 
