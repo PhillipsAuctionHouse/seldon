@@ -98,7 +98,7 @@ export const CarouselWithDots = (props: CarouselProps & CarouselDotsProps) => (
 );
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-CarouselWithDots.args = { maxDots: 7 } satisfies CarouselProps & CarouselDotsProps;
+CarouselWithDots.args = { maxDots: 9 } satisfies CarouselProps & CarouselDotsProps;
 
 CarouselWithDots.argTypes = {};
 
@@ -129,7 +129,7 @@ export const CarouselWithDotsAndArrows = (props: CarouselProps & CarouselDotsPro
 );
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-CarouselWithDotsAndArrows.args = { maxDots: 7 } satisfies CarouselProps & CarouselDotsProps;
+CarouselWithDotsAndArrows.args = { maxDots: 9 } satisfies CarouselProps & CarouselDotsProps;
 
 CarouselWithDotsAndArrows.argTypes = {};
 

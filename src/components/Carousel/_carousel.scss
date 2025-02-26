@@ -93,7 +93,6 @@
   &-dots {
     align-items: center;
     display: flex;
-    gap: 12px;
     justify-content: center;
     margin-top: 1rem;
 
@@ -120,14 +119,14 @@
     &-container-inner {
       align-items: center;
       display: flex;
-      gap: 10px;
+      gap: 12px;
       max-width: var(--max-width);
       overflow: auto;
       -webkit-overflow-scrolling: touch;
       -ms-overflow-style: none; /* Internet Explorer 10+ */
+      padding: 1px 2px;
       scroll-snap-type: x mandatory;
       scrollbar-width: none; /* Firefox */
-
       &::-webkit-scrollbar {
         display: none; /* Safari and Chrome */
       }
@@ -139,7 +138,6 @@
     display: flex;
     height: 10px;
     justify-content: center;
-    margin: 2px;
     min-width: 10px;
     padding: 1px;
     scroll-snap-align: center;
