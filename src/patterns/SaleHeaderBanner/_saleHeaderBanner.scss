@@ -6,6 +6,14 @@
   flex-direction: column;
   margin-bottom: $spacing-md;
 
+  .fresnel-container {
+    width: 100%;
+  }
+
+  .#{$px}-countdown {
+    padding-top: var(--spacing-sm);
+  }
+
   @include media($size-md, $type: 'min') {
     flex-direction: row-reverse;
 
