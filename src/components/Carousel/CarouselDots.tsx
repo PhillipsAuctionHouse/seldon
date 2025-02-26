@@ -30,8 +30,8 @@ export interface CarouselDotsProps extends ComponentProps<'div'> {
  *
  */
 const dotWidth = 10;
-const dotGap = 10;
-const centerDotContainer = 11;
+const dotGap = 12;
+const centerDotContainer = (dotWidth + dotGap) / 2;
 
 const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
   ({ className, maxDots = 9, position = 'inline', numberOfSlides = 0, ...props }, ref) => {
@@ -49,7 +49,6 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
     const scrollToDot = useCallback((index: number) => {
       if (scrollableContainerRef.current) {
         scrollableContainerRef.current.scrollTo?.({
-          // 8px width + 12px gap
           left: index * (dotWidth + dotGap) - scrollableContainerRef.current.offsetWidth / 2 + centerDotContainer, // Center dot in container
           behavior: 'smooth',
         });
@@ -111,8 +110,8 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
       >
         <div className={`${baseClassName}-container`}>
           <div
-            // Calculate the max width of the container based on the number of dots and the width of each dot (8px width + 12px gap)
-            style={{ '--max-width': `${maxDots * dotWidth + (maxDots - 1) * dotGap}px` } as React.CSSProperties}
+            // Calculate the max width of the container based on the number of dots and the width of each dot and container padding
+            style={{ '--max-width': `${maxDots * dotWidth + (maxDots - 1) * dotGap + 2}px` } as React.CSSProperties}
             className={`${baseClassName}-container-inner`}
             ref={scrollableContainerRef}
           >
