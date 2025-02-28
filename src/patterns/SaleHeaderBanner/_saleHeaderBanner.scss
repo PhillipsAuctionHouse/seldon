@@ -35,6 +35,10 @@
       display: flex;
       width: 100%;
     }
+
+    .#{$px}-text--badge {
+      margin-bottom: $spacing-xsm;
+    }
   }
 
   &__location {
