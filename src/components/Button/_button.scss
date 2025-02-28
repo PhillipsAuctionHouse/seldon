@@ -7,14 +7,15 @@
   align-items: center;
   background-color: $pure-black;
   border: 1px solid transparent;
-  border-radius: 100px;
+  border-radius: 6.25rem;
   color: $pure-white;
   cursor: pointer;
   display: inline-flex;
   font-variation-settings: 'wght' 600;
   gap: $margin-xsm;
+  height: $spacing-lg;
   justify-content: center;
-  padding: $snw-button-padding $padding-md;
+  padding: 0 $padding-md;
   position: relative;
   transition:
     color 0.25s,
