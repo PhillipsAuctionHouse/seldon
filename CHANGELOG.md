@@ -1,3 +1,10 @@
+## [1.123.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.123.0...v1.123.1) (2025-03-01)
+
+
+### Bug Fixes
+
+* **sale-header-banner:** L3-5540 PLP Sale Header Banner Fixes ([#535](https://github.com/PhillipsAuctionHouse/seldon/issues/535)) ([eef568d](https://github.com/PhillipsAuctionHouse/seldon/commit/eef568d82d3a617eff279e5e7f9bc6d9725b5950))
+
 # [1.123.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.122.3...v1.123.0) (2025-03-01)
 
 
