@@ -222,5 +222,11 @@ describe('BidSnapshot', () => {
       );
       expect(screen.queryByText('Closes in')).not.toBeInTheDocument();
     });
+
+    it('render sold price if status is past and sold price present', () => {
+      render(<BidSnapshot startingBid={100} soldPrice={300} lotStatus={LotStatus.past} numberOfBids={0} />);
+      expect(screen.getByText('Sold for')).toBeInTheDocument();
+      expect(screen.getByText('$300')).toBeInTheDocument();
+    });
   });
 });
