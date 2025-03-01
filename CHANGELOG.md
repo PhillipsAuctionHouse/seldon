@@ -1,3 +1,10 @@
+# [1.123.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.122.3...v1.123.0) (2025-03-01)
+
+
+### Features
+
+* **BidSnapshot:** L3-5730 removed numberOfBids condition ([#536](https://github.com/PhillipsAuctionHouse/seldon/issues/536)) ([5f48aa7](https://github.com/PhillipsAuctionHouse/seldon/commit/5f48aa7e1d08783fc29d4c1001576dd807ffa41b))
+
 ## [1.122.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.122.2...v1.122.3) (2025-02-26)
 
 
