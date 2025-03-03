@@ -11,6 +11,11 @@
       border: unset;
     }
 
+    &--is-disabled {
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
     &:hover:not(:disabled) {
       background-color: inherit;
 
@@ -43,10 +48,10 @@
     }
 
     &:disabled {
-      border: 1px solid $medium-gray;
       margin: auto;
       max-height: 3.5rem;
       max-width: 5rem;
+      outline: 1px solid $medium-gray;
       padding: 0.5rem;
       text-decoration: none;
     }
