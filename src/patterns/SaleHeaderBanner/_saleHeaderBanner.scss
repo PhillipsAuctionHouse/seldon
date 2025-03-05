@@ -47,6 +47,7 @@
   }
 
   &__occurrence-details {
+    align-items: center;
     display: flex;
 
     &-text {
@@ -61,7 +62,6 @@
       }
 
       &:first-child {
-        margin-bottom: 1.5rem;
         padding-right: $spacing-sm;
       }
 
