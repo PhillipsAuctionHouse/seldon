@@ -24,6 +24,7 @@ export enum TextVariants {
   snwHeaderLink = 'snwHeaderLink',
   snwHeadingHero1 = 'snwHeadingHero1',
   snwHeadingHero2 = 'snwHeadingHero2',
+  titleCaseAndUnderline = 'titleCaseAndUnderline',
 }
 
 export enum TextAlignments {
