@@ -169,7 +169,7 @@ const ObjectTile = memo(
                 ) : null}
                 {titleText ? (
                   <Text
-                    className={`${baseClassName}__title ${baseClassName}__token-fix`}
+                    className={`${baseClassName}__title ${baseClassName}__token-fix ${baseClassName}__token-fix--no-transform`}
                     variant={TextVariants.heading4}
                     element="cite"
                   >
