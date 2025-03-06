@@ -5,7 +5,7 @@
   background-color: $white;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   max-width: 600px;
   padding: $padding-xl $padding-md $padding-md;
   position: fixed;
@@ -20,6 +20,10 @@
 
   @media (max-width: $breakpoint-sm) {
     max-width: 100%;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding-bottom: $padding-sm;
   }
 
   &__overlay {
