@@ -34,7 +34,7 @@ const Link = ({
   children,
   className,
   element: Element = 'a',
-  variant = LinkVariants.link,
+  variant = LinkVariants.titleCaseAndUnderline,
   href,
   ...props
 }: LinkProps) => {
