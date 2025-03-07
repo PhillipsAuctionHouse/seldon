@@ -1,3 +1,10 @@
+## [1.123.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.123.1...v1.123.2) (2025-03-07)
+
+
+### Bug Fixes
+
+* **ObjectTile:** L3-5831 don't transform lot description text on Obje… ([#542](https://github.com/PhillipsAuctionHouse/seldon/issues/542)) ([5d3e09f](https://github.com/PhillipsAuctionHouse/seldon/commit/5d3e09f70d028d1cdcf5463691fccd105ec59127))
+
 ## [1.123.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.123.0...v1.123.1) (2025-03-01)
 
 
