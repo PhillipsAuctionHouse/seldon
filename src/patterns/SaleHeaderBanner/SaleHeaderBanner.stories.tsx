@@ -104,6 +104,7 @@ export const Closed = (props: SaleHeaderBannerProps) => (
     headerLabel="Online Auction"
     auctionState={AuctionStatus.past}
     showTimer
+    footerElement={<div>Banner footer</div>}
   >
     <SaleHeaderBrowseAuctions />
   </SaleHeaderBanner>
