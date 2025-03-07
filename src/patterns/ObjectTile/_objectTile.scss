@@ -25,6 +25,12 @@
     -webkit-line-clamp: 1;
     line-clamp: 1;
     overflow: hidden;
+    text-transform: none;
+  }
+
+  // Temporary fix until __token-fix class can be removed
+  &__token-fix--no-transform {
+    text-transform: none !important;
   }
 
   &__lot-number-like {

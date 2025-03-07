@@ -41,7 +41,7 @@ const args = {
   imageUrl: 'https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg',
   lotNumber: '1',
   makerText: 'Koichi Sato',
-  titleText: 'Beauty On The Duty',
+  titleText: 'Beauty on the duty',
   referenceNumber: 'Ref. 1728494-c',
   modelText: 'Nautilus',
 };
