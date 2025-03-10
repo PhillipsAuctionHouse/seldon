@@ -1,3 +1,10 @@
+## [1.124.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.124.0...v1.124.1) (2025-03-10)
+
+
+### Bug Fixes
+
+* **drawer:** L3-5822 fix drawer on ios safari ([#543](https://github.com/PhillipsAuctionHouse/seldon/issues/543)) ([d7fdb17](https://github.com/PhillipsAuctionHouse/seldon/commit/d7fdb1719c595a6107d903935855ed6bd21612a4))
+
 # [1.124.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.123.2...v1.124.0) (2025-03-10)
 
 
