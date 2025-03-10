@@ -19,6 +19,7 @@ $lg: #{$px}-input--lg;
     color: $pure-black;
     font-variation-settings: 'wght' 600;
     margin-bottom: 0.5rem;
+    width: fit-content;
     word-break: break-word;
 
     &--hidden {

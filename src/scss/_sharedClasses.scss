@@ -1,3 +1,5 @@
+/* stylelint-disable order/properties-alphabetical-order */
+/* stylelint-disable declaration-empty-line-before */
 @use './vars' as *;
 @use './utils' as *;
 
@@ -7,5 +9,63 @@
     @each $side in 'start', 'end', 'both' {
       @include padding($padding, $direction, $side);
     }
+  }
+}
+
+.#{$px}-skeleton,
+.#{$px}-skeleton::before,
+.#{$px}-skeleton::after {
+  animation: skeleton-pulse 1s infinite alternate-reverse !important;
+  background-image: none !important;
+  background-clip: initial !important;
+  border-radius: 0.1875rem !important;
+
+  border-color: #0000 !important;
+  box-shadow: none !important;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-box-decoration-break: clone !important;
+  box-decoration-break: clone !important;
+  color: #0000 !important;
+  outline: none !important;
+  pointer-events: none !important;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  cursor: default !important;
+}
+
+input[type='checkbox'].#{$px}-skeleton,
+input[type='radio'].#{$px}-skeleton {
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-appearance: none;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0 !important;
+  width: 13px !important;
+  height: 13px !important;
+}
+
+button.#{$px}-skeleton {
+  border-radius: 6.25rem !important;
+}
+
+.#{$px}-toggle-input {
+  .#{$px}-skeleton::before,
+  .#{$px}-skeleton::after {
+    border-radius: 6.25rem !important;
+  }
+  .#{$px}-skeleton::after {
+    display: none !important;
+  }
+}
+
+@keyframes skeleton-pulse {
+  0% {
+    background-color: #0000000f;
+  }
+
+  100% {
+    background-color: #0000001f;
   }
 }

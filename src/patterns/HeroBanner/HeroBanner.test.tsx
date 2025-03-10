@@ -16,7 +16,7 @@ describe('HeroBanner', () => {
   it('Renders the header when headerText is passed in', () => {
     render(<HeroBanner headerText="This is my text" />);
     // Should normally not be testing implementation details. Should try to focus test on the user interaction and rendering UI that the user sees e.g. toBeInTheDocument
-    expect(screen.getByText(/This is my text/).nodeName).toEqual('H1');
+    expect(screen.getByText(/This is my text/)?.parentElement?.nodeName).toEqual('H1');
     expect(screen.getByText(/This is my text/)).toBeInTheDocument();
   });
 

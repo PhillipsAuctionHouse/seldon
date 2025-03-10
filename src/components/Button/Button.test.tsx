@@ -17,6 +17,7 @@ describe('Button', () => {
     expect(buttonElement).toHaveClass(`${px}-button`);
     expect(buttonElement).toHaveClass(`${px}-button--primary`);
     expect(buttonElement).not.toHaveClass(`${px}-button--icon-last`);
+    expect(buttonElement).not.toHaveClass(`${px}-skeleton`);
   });
 
   it('renders with type and size classnames', () => {
@@ -93,5 +94,11 @@ describe('Button', () => {
       expect(screen.getByTestId('prefetch-link')).toBeInTheDocument();
       expect(screen.getByTestId('modulepreload-link')).toBeInTheDocument();
     });
+  });
+
+  it('should render with skeleton class name', () => {
+    render(<Button isSkeletonLoading>Submit</Button>);
+    const buttonElement = screen.getByText('Submit');
+    expect(buttonElement).toHaveClass(`${px}-skeleton`);
   });
 });

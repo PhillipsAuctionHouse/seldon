@@ -95,6 +95,11 @@ export interface InputProps extends Omit<React.ComponentProps<'input'>, 'size'> 
    * Text that is displayed when the control is in warning state
    */
   warnText?: React.ReactNode;
+
+  /**
+   * Boolean to specify whether we need to display skeleton loader
+   */
+  isSkeletonLoading?: boolean;
 }
 
 /**
@@ -132,6 +137,7 @@ const Input = React.forwardRef(
       value,
       warn,
       warnText,
+      isSkeletonLoading,
       ...rest
     }: InputProps,
     ref: React.ForwardedRef<HTMLInputElement>,
@@ -162,18 +168,23 @@ const Input = React.forwardRef(
         <label
           data-testid={`label-${id || generatedId}`}
           htmlFor={id || generatedId}
-          className={classnames(`${px}-input__label`, { [`${px}-input__label--hidden`]: hideLabel })}
+          className={classnames(`${px}-input__label`, {
+            [`${px}-input__label--hidden`]: hideLabel,
+            [`${px}-skeleton`]: isSkeletonLoading,
+          })}
         >
           {labelText}
         </label>
         <input
-          className={classnames(`${px}-input__input`, className)}
+          className={classnames(`${px}-input__input`, className, {
+            [`${px}-skeleton`]: isSkeletonLoading,
+          })}
           data-testid={id}
           disabled={inputProps.disabled}
           id={id || generatedId}
           onChange={onChange}
           onClick={onClick}
-          placeholder={placeholder}
+          placeholder={isSkeletonLoading ? '' : placeholder}
           readOnly={readOnly}
           ref={ref}
           type={inputProps.type}
