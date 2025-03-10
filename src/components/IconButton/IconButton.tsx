@@ -42,7 +42,14 @@ const IconButton = ({
     <Button
       {...commonProps}
       variant={variant}
-      className={classnames(baseClass, `${baseClass}--${variant}`, className)}
+      className={classnames(
+        baseClass,
+        `${baseClass}--${variant}`,
+        {
+          [`${baseClass}--is-disabled`]: isDisabled,
+        },
+        className,
+      )}
       isDisabled={isDisabled}
       {...props}
     >
