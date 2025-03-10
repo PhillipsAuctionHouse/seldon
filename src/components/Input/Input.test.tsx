@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import * as React from 'react';
 
 import Input, { InputProps } from './Input';
+import { px } from '../../utils';
 
 // NOTE: When using default value on controlled input we pass to the state hook and not the input
 const TestInput = React.forwardRef(
@@ -153,5 +154,17 @@ describe('An Input', () => {
 
     const spanElement = screen.getByText('Test Span');
     expect(spanElement).toBeInTheDocument();
+  });
+
+  it('should render with skeleton class name', () => {
+    render(<Input labelText="Text Input" id="Input-1" name="stringInput" isSkeletonLoading />);
+    const inputElement = screen.getByRole('textbox');
+    expect(inputElement).toHaveClass(`${px}-skeleton`);
+  });
+
+  it('should not render with skeleton class name', () => {
+    render(<Input labelText="Text Input" id="Input-1" name="stringInput" />);
+    const inputElement = screen.getByRole('textbox');
+    expect(inputElement).not.toHaveClass(`${px}-skeleton`);
   });
 });

@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { getCommonProps } from '../../utils';
+import { getCommonProps, px } from '../../utils';
 import { ButtonVariants } from './types';
 import { forwardRef, useState } from 'react';
 
@@ -40,6 +40,11 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HT
    * prefetch the link
    */
   prefetch?: 'none' | 'intent' | 'render' | 'viewport';
+
+  /**
+   * Boolean to specify whether we need to display skeleton loader
+   */
+  isSkeletonLoading?: boolean;
 }
 
 /**
@@ -64,6 +69,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
       href,
       target,
       prefetch = 'none',
+      isSkeletonLoading,
       ...props
     },
     ref,
@@ -114,6 +120,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
             `${baseClassName}--${variant}`,
             {
               [`${baseClassName}--icon-last`]: iconLast,
+              [`${px}-skeleton`]: isSkeletonLoading,
             },
             className,
           )}

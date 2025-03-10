@@ -31,6 +31,33 @@ Playground.argTypes = {
   },
 };
 
+export const TextWithSkeleton = (props: TextProps) => <Text {...props} style={{ maxWidth: '300px' }} />;
+
+TextWithSkeleton.args = {
+  children:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget nibh ac turpis molestie ultricies. Morbi placerat rhoncus elit, sed malesuada ante rutrum et.',
+  variant: TextVariants.body2,
+  isSkeletonLoading: true,
+};
+
+TextWithSkeleton.argTypes = {
+  variant: {
+    options: TextVariants,
+    control: {
+      type: 'select',
+    },
+  },
+  align: {
+    options: TextAlignments,
+    control: {
+      type: 'select',
+    },
+  },
+  isSkeletonLoading: {
+    control: 'boolean',
+  },
+};
+
 export const SuperScript = (props: TextProps) => <Text variant={TextVariants.heading3} {...props} />;
 
 SuperScript.args = {

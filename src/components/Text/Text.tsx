@@ -1,5 +1,5 @@
 import React from 'react';
-import { getCommonProps } from '../../utils';
+import { getCommonProps, px } from '../../utils';
 import { TextAlignments, TextVariants } from './types';
 import { determineDefaultTextElement, determineTextClassName } from './utils';
 import classNames from 'classnames';
@@ -17,6 +17,10 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
    * The alignment of the text
    */
   align?: TextAlignments;
+  /**
+   * Boolean to specify whether we need to display skeleton loader
+   */
+  isSkeletonLoading?: boolean;
 }
 /**
  * ## Overview
@@ -33,6 +37,7 @@ const Text = ({
   element: CustomElement,
   variant = TextVariants.body2,
   align,
+  isSkeletonLoading,
   ...props
 }: TextProps) => {
   const Component = CustomElement || determineDefaultTextElement(variant);
@@ -46,7 +51,13 @@ const Text = ({
       })}
       {...props}
     >
-      {children}
+      <span
+        className={classNames({
+          [`${px}-skeleton`]: isSkeletonLoading,
+        })}
+      >
+        {children}
+      </span>
     </Component>
   );
 };

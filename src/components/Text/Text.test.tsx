@@ -38,19 +38,19 @@ describe('Text', () => {
   it('applies the default variant correctly', () => {
     renderText({ children: 'Default Variant' });
 
-    expect(screen.getByText('Default Variant')).toHaveClass(`${px}-text--body2`);
+    expect(screen.getByText('Default Variant').parentElement).toHaveClass(`${px}-text--body2`);
   });
 
   it('applies the custom variant correctly', () => {
     renderText({ children: 'Custom Variant', variant: TextVariants.body1 });
 
-    expect(screen.getByText('Custom Variant')).toHaveClass(`${px}-text--body1`);
+    expect(screen.getByText('Custom Variant').parentElement).toHaveClass(`${px}-text--body1`);
   });
 
   it('applies additional className correctly', () => {
     renderText({ children: 'Additional Class', className: 'custom-class' });
 
-    expect(screen.getByText('Additional Class')).toHaveClass('custom-class');
+    expect(screen.getByText('Additional Class').parentElement).toHaveClass('custom-class');
   });
 
   it('renders with custom element correctly', () => {
@@ -58,5 +58,17 @@ describe('Text', () => {
 
     expect(screen.getByText('Custom Element')).toBeInTheDocument();
     expect(screen.getByText('Custom Element').tagName).toBe('SPAN');
+  });
+
+  it('should render with skeleton class name', () => {
+    render(<Text isSkeletonLoading>Test</Text>);
+    const textElement = screen.getByText('Test');
+    expect(textElement).toHaveClass(`${px}-skeleton`);
+  });
+
+  it('should not render with skeleton class name', () => {
+    render(<Text>Test</Text>);
+    const textElement = screen.getByText('Test');
+    expect(textElement).not.toHaveClass(`${px}-skeleton`);
   });
 });

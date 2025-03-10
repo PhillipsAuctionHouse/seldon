@@ -2,6 +2,7 @@ import type { Meta } from '@storybook/react';
 import Input, { InputProps } from './Input';
 import { useState } from 'react';
 import Button from '../Button/Button';
+import { Text, TextVariants } from '../Text';
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
   title: 'Components/Input',
@@ -239,6 +240,7 @@ CustomLabel.args = {
 CustomLabel.argTypes = {};
 
 export const Playground = ({ playgroundWidth, ...args }: StoryProps) => {
+  const [loading, setLoading] = useState(false);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -251,12 +253,46 @@ export const Playground = ({ playgroundWidth, ...args }: StoryProps) => {
 
   return (
     <div style={{ width: playgroundWidth, margin: '1rem' }}>
+      <Text variant={TextVariants.heading2} isSkeletonLoading={loading}>
+        Form Inputs
+      </Text>
       <form onSubmit={handleSubmit}>
-        <Input {...args} labelText="Text Input" id="Input-1" name="stringInput" />
-        <Input type="checkbox" {...args} labelText="Checkbox Input" id="Input-2" name="checkboxInput" />
-        <Input type="radio" {...args} id="Input-3" labelText="Radio Input" name="radioInput" />
-        <Input type="toggle" {...args} id="Input-4" labelText="Toggle Input" name="toggleInput" />
-        <Button type="submit">Submit form</Button>
+        <Input {...args} labelText="Text Input" id="Input-1" name="stringInput" isSkeletonLoading={loading} />
+        <Input
+          type="checkbox"
+          {...args}
+          labelText="Checkbox Input"
+          id="Input-2"
+          name="checkboxInput"
+          isSkeletonLoading={loading}
+        />
+        <Input
+          type="radio"
+          {...args}
+          id="Input-3"
+          labelText="Radio Input"
+          name="radioInput"
+          isSkeletonLoading={loading}
+        />
+        <Input
+          type="toggle"
+          {...args}
+          id="Input-4"
+          labelText="Toggle Input"
+          name="toggleInput"
+          isSkeletonLoading={loading}
+        />
+        <Text variant={TextVariants.body1} isSkeletonLoading={loading}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget nibh ac turpis molestie ultricies. Morbi
+          placerat rhoncus elit, sed malesuada ante rutrum et.
+        </Text>
+
+        <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', gap: '1rem' }}>
+          <Button type="submit" isSkeletonLoading={loading}>
+            Submit
+          </Button>
+          <Button onClick={() => setLoading((prev) => !prev)}>Loading</Button>
+        </div>
       </form>
     </div>
   );

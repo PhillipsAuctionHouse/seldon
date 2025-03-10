@@ -52,10 +52,28 @@ ButtonAsLinkWithPrefetch.args = {
   size: 'md',
 };
 
+export const ButtonWithSkeleton = (props: ButtonProps) => (
+  <div style={{ display: 'flex', gap: '1rem' }}>
+    <Button {...props} isSkeletonLoading>
+      Visit Phillips
+    </Button>
+    <Button {...props}>Visit Phillips</Button>
+  </div>
+);
+
+ButtonAsLinkWithPrefetch.args = {
+  variant: ButtonVariants.tertiary,
+  size: 'md',
+};
+
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Playground = {
   args: {
     children: 'Button',
     variant: ButtonVariants.primary,
+    isSkeletonLoading: false,
+  },
+  argTypes: {
+    isSkeletonLoading: { control: 'boolean' },
   },
 };
