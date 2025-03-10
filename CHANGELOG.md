@@ -1,3 +1,10 @@
+# [1.124.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.123.2...v1.124.0) (2025-03-10)
+
+
+### Features
+
+* **_saleHeaderBanner:** L3-5794 small spacing fix ([#540](https://github.com/PhillipsAuctionHouse/seldon/issues/540)) ([d590816](https://github.com/PhillipsAuctionHouse/seldon/commit/d590816563415e5829a06f599e85f30f49e6114c))
+
 ## [1.123.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.123.1...v1.123.2) (2025-03-07)
 
 
