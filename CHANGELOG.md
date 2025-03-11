@@ -1,3 +1,10 @@
+# [1.125.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.124.1...v1.125.0) (2025-03-11)
+
+
+### Features
+
+* **Input:** L3-5705 added skeleton ([#546](https://github.com/PhillipsAuctionHouse/seldon/issues/546)) ([ffe7523](https://github.com/PhillipsAuctionHouse/seldon/commit/ffe7523cd28e0198cb7404071552189b8bda1810))
+
 ## [1.124.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.124.0...v1.124.1) (2025-03-10)
 
 
