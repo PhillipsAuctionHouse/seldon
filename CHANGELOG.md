@@ -1,3 +1,10 @@
+# [1.127.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.126.1...v1.127.0) (2025-03-13)
+
+
+### Features
+
+* **_button:** L3-5317 fixed hover for secondary button ([#550](https://github.com/PhillipsAuctionHouse/seldon/issues/550)) ([eea919e](https://github.com/PhillipsAuctionHouse/seldon/commit/eea919ed6a96ea7993b84621bd3d2934cf02632a))
+
 ## [1.126.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.126.0...v1.126.1) (2025-03-13)
 
 
