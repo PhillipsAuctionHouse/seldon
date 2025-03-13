@@ -130,7 +130,9 @@ const Pagination = ({
       {...props}
     >
       <IconButton
-        className={classnames(`${baseClassName}__button`, `${px}-left-arrow`)}
+        className={classnames(`${baseClassName}__button`, `${px}-left-arrow`, {
+          [`${baseClassName}__button--is-disabled`]: isDisabled,
+        })}
         onClick={(e) => {
           if (typeof prevOption === 'object' && prevOption.href) {
             e.preventDefault();
@@ -174,7 +176,9 @@ const Pagination = ({
       </Select>
 
       <IconButton
-        className={`${baseClassName}__button`}
+        className={classnames(`${baseClassName}__button`, {
+          [`${baseClassName}__button--is-disabled`]: isDisabled,
+        })}
         onClick={(e) => {
           if (typeof nextOption === 'object' && nextOption.href) {
             e.preventDefault();
