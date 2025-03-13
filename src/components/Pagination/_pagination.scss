@@ -6,13 +6,18 @@
   flex-direction: row;
   gap: $spacing-xsm;
 
-  &__button {
+  .#{$px}-pagination__button {
     &:disabled {
       border: unset;
     }
 
     &--is-disabled {
+      opacity: 0.15;
       pointer-events: none;
+
+      svg path {
+        fill: $pure-black;
+      }
     }
 
     &:hover:not(:disabled) {
