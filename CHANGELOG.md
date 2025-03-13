@@ -1,3 +1,10 @@
+## [1.126.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.126.0...v1.126.1) (2025-03-13)
+
+
+### Bug Fixes
+
+* **pagination:** L3-5701 fix disabled state on pagination ([#549](https://github.com/PhillipsAuctionHouse/seldon/issues/549)) ([0efd7c8](https://github.com/PhillipsAuctionHouse/seldon/commit/0efd7c880c18572c617656cb4efbce994bea5b71))
+
 # [1.126.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.125.1...v1.126.0) (2025-03-13)
 
 
