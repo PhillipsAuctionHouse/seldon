@@ -1,3 +1,10 @@
+## [1.125.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.125.0...v1.125.1) (2025-03-13)
+
+
+### Bug Fixes
+
+* **seldonimage:** L3-5542 fallback image max width ([#538](https://github.com/PhillipsAuctionHouse/seldon/issues/538)) ([1d77fc8](https://github.com/PhillipsAuctionHouse/seldon/commit/1d77fc832d1f639fc6b46c5d625eef1a49e6d8fb))
+
 # [1.125.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.124.1...v1.125.0) (2025-03-11)
 
 
