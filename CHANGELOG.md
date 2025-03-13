@@ -1,3 +1,10 @@
+# [1.126.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.125.1...v1.126.0) (2025-03-13)
+
+
+### Features
+
+* **buttons:** L3-5701 & L3-4468 lot pagination disabled state & padding updates ([#537](https://github.com/PhillipsAuctionHouse/seldon/issues/537)) ([1552303](https://github.com/PhillipsAuctionHouse/seldon/commit/1552303b280eae50dbfdd377500df8228d5d6788))
+
 ## [1.125.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.125.0...v1.125.1) (2025-03-13)
 
 
