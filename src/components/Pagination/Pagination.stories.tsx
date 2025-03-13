@@ -22,6 +22,11 @@ const argTypes = {
       type: 'boolean',
     },
   },
+  isDisabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
   onChange: {
     action: 'onChange',
   },
