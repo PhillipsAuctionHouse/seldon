@@ -109,3 +109,18 @@ export const Closed = (props: SaleHeaderBannerProps) => (
     <SaleHeaderBrowseAuctions />
   </SaleHeaderBanner>
 );
+
+export const MissingImage = (props: SaleHeaderBannerProps) => (
+  <SaleHeaderBanner
+    {...props}
+    auctionTitle="Modern & Contemporary Art: Online Auction, New York"
+    imageSrcUrl=""
+    occurrenceInformation={[{ date: '4 Sep 2024', occurrenceLabel: 'Concluded' }]}
+    location="New York"
+    headerLabel="Online Auction"
+    auctionState={AuctionStatus.past}
+    showTimer
+  >
+    <SaleHeaderBrowseAuctions />
+  </SaleHeaderBanner>
+);
