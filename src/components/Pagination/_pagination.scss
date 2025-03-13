@@ -6,7 +6,7 @@
   flex-direction: row;
   gap: $spacing-xsm;
 
-  &__button {
+  .#{$px}-pagination__button {
     &:disabled {
       border: unset;
     }
