@@ -1,0 +1,21 @@
+.story-icon-flex-wrapper {
+  background-color: #ccc;
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 24px;
+
+  .icon-set {
+    display: flex;
+    flex-direction: column;
+    margin: 24px 12px;
+  }
+
+  .icon-name {
+    padding: 8px;
+  }
+
+  .icon-wrapper {
+    margin: 0 auto;
+  }
+}
