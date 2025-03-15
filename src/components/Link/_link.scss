@@ -5,12 +5,12 @@
   text-decoration: none;
 
   &--email,
-  &--link {
+  &--titleCaseAndUnderline {
     @include underline;
   }
 
   &--email,
-  &--link {
+  &--titleCaseAndUnderline {
     &:hover,
     &:focus-visible {
       @include underline($color: $dark-gray);
@@ -23,7 +23,7 @@
     @include text($email);
   }
 
-  &--link {
+  &--titleCaseAndUnderline {
     @include text($link);
   }
 
