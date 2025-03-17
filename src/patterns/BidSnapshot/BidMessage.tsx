@@ -39,10 +39,12 @@ const BidMessage = ({
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'BidMessage');
   const icon = variant === BidMessageVariants.positive ? <GreenCircle /> : <RedCircle />;
   return (
-    <Text {...commonProps} className={classnames(baseClassName, className)} {...props} variant={TextVariants.string2}>
+    <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
       {hasIcon ? icon : null}
-      {message}
-    </Text>
+      <Text variant={TextVariants.string2} className={`${baseClassName}-text`}>
+        {message}
+      </Text>
+    </div>
   );
 };
 
