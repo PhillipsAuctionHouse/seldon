@@ -59,7 +59,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     return (
       <div className={classnames(`${baseClassName}__wrapper`)}>
         <label
-          data-testid={`label-${id || generatedId}`}
+          data-testid={`text-area-${id || generatedId}-label`}
           htmlFor={id || generatedId}
           className={classnames(`${px}-input__label`, {
             [`${px}-skeleton`]: isSkeletonLoading,
@@ -77,6 +77,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           maxLength={maxLength}
           name={name}
           ref={ref}
+          data-testid={`text-area-${id || generatedId}-input`}
         ></textarea>
         <div className={`${baseClassName}-resizer__icon`}>
           <Menu />
