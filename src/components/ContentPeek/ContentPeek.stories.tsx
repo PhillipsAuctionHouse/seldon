@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/react';
 import ContentPeek, { ContentPeekProps } from './ContentPeek';
+import { HeightUnits } from './utils';
 
 const meta = {
   title: 'Components/ContentPeek',
@@ -8,7 +9,11 @@ const meta = {
     contentExpandText: { control: 'text' },
     contentCollapseText: { control: 'text' },
     maxHeight: { control: 'number' },
-    minHeightThreshold: { control: 'number' },
+    minHeightThreshold: { control: { type: 'number', step: 20 } },
+    heightUnits: {
+      control: { type: 'select' },
+      options: Object.values(HeightUnits),
+    },
   },
 } satisfies Meta<typeof ContentPeek>;
 
@@ -27,7 +32,9 @@ const sampleText = `
 
 export const Playground = (args: ContentPeekProps) => (
   <>
-    <ContentPeek {...args}>{sampleText}</ContentPeek>
+    <ContentPeek {...args} style={{ maxWidth: '700px', margin: '0 auto' }}>
+      {sampleText}
+    </ContentPeek>
   </>
 );
 
@@ -35,6 +42,8 @@ Playground.args = {
   contentExpandText: 'Read More',
   contentCollapseText: 'Read Less',
   maxHeight: 150,
+  minHeightThreshold: 200,
+  heightUnits: HeightUnits.px,
 };
 
 export const CustomText = (args: ContentPeekProps) => (

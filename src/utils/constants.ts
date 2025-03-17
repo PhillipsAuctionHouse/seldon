@@ -8,3 +8,5 @@ export const BREAKPOINTS = {
   lg: 1401,
   xl: 1801,
 };
+
+export const DEFAULT_REM_SIZE = 16;
