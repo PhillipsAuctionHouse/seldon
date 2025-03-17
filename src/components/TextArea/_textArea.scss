@@ -32,10 +32,6 @@
     }
   }
 
-  &::placeholder {
-    font-variation-settings: 'wght' 400;
-  }
-
   &:focus-visible {
     outline: 1px solid $pure-black;
   }
@@ -48,27 +44,23 @@
     margin-bottom: 0.5rem;
     width: fit-content;
     word-break: break-word;
-
-    &--hidden {
-      @include hidden;
-    }
   }
 
   &::-webkit-resizer {
     bottom: 0;
     height: 28px;
+    opacity: 0;
     position: absolute;
     right: 0;
     width: 28px;
   }
 
   &::-moz-resizer {
-    border: 4px solid pink;
     bottom: 0;
-    height: 24px;
+    height: 28px;
     opacity: 0;
     position: absolute;
     right: 0;
-    width: 24px;
+    width: 28px;
   }
 }
