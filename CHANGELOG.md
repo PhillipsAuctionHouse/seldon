@@ -1,3 +1,10 @@
+# [1.128.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.127.0...v1.128.0) (2025-03-17)
+
+
+### Features
+
+* **drawer:** L3-5957 Update drawer max width ([#548](https://github.com/PhillipsAuctionHouse/seldon/issues/548)) ([667e38c](https://github.com/PhillipsAuctionHouse/seldon/commit/667e38c467b40fc845d5c7e1d31c4d10a408b809))
+
 # [1.127.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.126.1...v1.127.0) (2025-03-13)
 
 
