@@ -18,6 +18,7 @@ export { default as Reddit } from './icon-footer-red.svg?react';
 export { default as FooterWeChat } from './icon-footer-wechat.svg?react';
 export { default as Instagram } from './instagram.svg?react';
 export { default as Lock } from './lock.svg?react';
+export { default as Menu } from './menu.svg?react';
 export { default as Minus } from './minus.svg?react';
 export { default as PhillipsLogo } from './PhillipsLogo.svg?react';
 export { default as Plus } from './plus.svg?react';
