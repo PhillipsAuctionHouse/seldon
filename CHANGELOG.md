@@ -1,3 +1,10 @@
+# [1.129.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.128.0...v1.129.0) (2025-03-17)
+
+
+### Features
+
+* **ContentPeek:** L3-5721 fixed component's logic ([#553](https://github.com/PhillipsAuctionHouse/seldon/issues/553)) ([62a701f](https://github.com/PhillipsAuctionHouse/seldon/commit/62a701fe634d966a5a389297bf701015422649e1))
+
 # [1.128.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.127.0...v1.128.0) (2025-03-17)
 
 
