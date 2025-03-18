@@ -1,8 +1,10 @@
-import { forwardRef, createElement, type CSSProperties } from 'react';
+import { forwardRef } from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { getScssVar } from '../../utils/scssUtils';
-import * as icons from '../../assets/icons';
+import * as iconComponents from '../../assets/formatted';
+
+export type IconName = keyof typeof iconComponents;
 
 export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -18,9 +20,9 @@ export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   color?: string;
   /**
-   * Icon name
+   * Name of Icon to render
    */
-  icon: keyof typeof icons;
+  icon: IconName;
 }
 
 /**
@@ -36,17 +38,14 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
 
     const componentProps = {
       className: classnames(baseClassName, className),
-      style: {
-        '--icon-height': `${height}px`,
-        '--icon-width': `${width}px`,
-        '--icon-fill-color': getScssVar(color ?? '', '$pure-black'),
-      } as CSSProperties,
       ...commonProps,
     };
 
-    return icon ? (
+    const Component = iconComponents[icon];
+
+    return Component ? (
       <div {...componentProps} ref={ref}>
-        {createElement(icons[icon])}
+        <Component height={height} width={width} color={getScssVar(color ?? '', '$pure-black')} {...commonProps} />
       </div>
     ) : null;
   },

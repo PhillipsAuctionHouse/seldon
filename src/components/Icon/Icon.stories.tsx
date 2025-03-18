@@ -1,6 +1,9 @@
 import { Meta } from '@storybook/react';
-import Icon, { IconProps } from './Icon';
-import * as icons from '../../assets/icons';
+import Icon, { IconName, IconProps } from './Icon';
+import * as iconComponents from '../../assets/formatted';
+import { getScssColors } from '../../utils/scssUtils';
+
+const colorOptions = getScssColors();
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -9,7 +12,7 @@ const meta = {
   argTypes: {
     height: { control: 'number' },
     width: { control: 'number' },
-    color: { control: 'select', options: ['$pure-black', '$cta-blue', '$error-red'] },
+    color: { control: 'select', options: colorOptions },
   },
 } satisfies Meta<typeof Icon>;
 
@@ -17,7 +20,7 @@ export default meta;
 
 export const IconGrid = (props: IconProps) => (
   <div className="story-icon-flex-wrapper">
-    {Object.keys(icons).map((icon) => (
+    {Object.keys(iconComponents).map((icon) => (
       <div className="icon-set" key={icon}>
         <div className="icon-wrapper">
           <Icon {...props} icon={icon as IconProps['icon']} />
@@ -28,20 +31,29 @@ export const IconGrid = (props: IconProps) => (
   </div>
 );
 
-export const Playground = (props: IconProps) => <Icon {...props} />;
+export const Playground = (props: IconProps) => (
+  <div className="story-icon-flex-wrapper">
+    <div className="icon-set">
+      <div className="icon-wrapper">
+        <Icon {...props} />
+      </div>
+      <div className="icon-name">{props.icon}</div>
+    </div>
+  </div>
+);
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
   icon: 'AccountCircle',
   height: 24,
   width: 24,
-  color: '$error-red',
-  children: 'Hi There',
+  color: '$pure-black',
 };
 
 Playground.argTypes = {
-  icon: { control: 'select', options: Object.keys(icons) },
+  icon: { control: 'select', options: Object.keys(iconComponents) as IconName[] },
   height: { control: 'number' },
   width: { control: 'number' },
-  color: { control: 'select', options: ['$pure-black', '$cta-blue', '$error-red'] },
+  color: { control: 'select', options: colorOptions },
+  showBorder: { control: 'boolean' },
 };

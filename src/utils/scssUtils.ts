@@ -18,3 +18,20 @@ export const getScssVar = (scssVar: string, defaultValue: string): string => {
 
   return getScssVar(defaultValue, defaultValue);
 };
+
+// Finds all color variables set in _vars.scss and returns the name of each
+export const getScssColors = (): string[] => {
+  const parsedVars = vars.split('\n');
+
+  const colors: string[] = parsedVars
+    .map((_var) => {
+      const [name, value] = _var.split(': ');
+      if (!!name && !!value && value.startsWith('#') && value.length === 8) {
+        return name; // returning only the name of each color variable
+      }
+      return null;
+    })
+    .filter((color): color is string => color !== null);
+
+  return colors;
+};
