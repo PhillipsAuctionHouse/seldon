@@ -44,7 +44,7 @@
   gap: $spacing-micro;
 
   // Override the default text style being too specific
-  &.#{$px}-bid-message {
+  &-text {
     font-variation-settings: 'wght' 600;
     margin-bottom: 0;
   }
