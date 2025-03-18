@@ -57,7 +57,6 @@ describe('Accordion', () => {
         ))}
       </Accordion>,
     );
-    screen.debug();
     expect(screen.queryByTestId(/icon-lock/)).toBeInTheDocument();
     await userEvent.click(screen.getByTestId('accordion-item-0-trigger'));
     await waitFor(() => expect(screen.queryByTestId(/icon-lock/)).toBeInTheDocument());
