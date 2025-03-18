@@ -145,7 +145,7 @@ const ObjectTile = memo(
             </Text>
           ) : null}
           <div className={`${baseClassName}__lot-number-like`}>
-            <Text className={`${baseClassName}__lot-number`} variant={TextVariants.heading3} element="p">
+            <Text className={`${baseClassName}__lot-number`} variant={TextVariants.heading4} element="p">
               {lotNumber}
             </Text>
             {BadgeElement && (
@@ -163,7 +163,7 @@ const ObjectTile = memo(
             <>
               <div className={`${baseClassName}__meta`}>
                 {makerText ? (
-                  <Text className={`${baseClassName}__maker`} variant={TextVariants.heading3}>
+                  <Text className={`${baseClassName}__maker`} variant={TextVariants.heading4}>
                     {makerText}
                   </Text>
                 ) : null}
