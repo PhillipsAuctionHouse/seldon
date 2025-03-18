@@ -1,3 +1,10 @@
+## [1.129.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.129.1...v1.129.2) (2025-03-18)
+
+
+### Bug Fixes
+
+* **objecttile:** L3-5542 object tile style fixes ([#552](https://github.com/PhillipsAuctionHouse/seldon/issues/552)) ([6ee7e7a](https://github.com/PhillipsAuctionHouse/seldon/commit/6ee7e7a7dce037a66eabaa4ca6ffe446736598b3))
+
 ## [1.129.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.129.0...v1.129.1) (2025-03-18)
 
 
