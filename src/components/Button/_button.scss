@@ -84,6 +84,32 @@
       z-index: -2;
     }
 
+    &:focus-visible {
+      background-color: $pure-white;
+      outline-color: $soft-black;
+    }
+
+    svg {
+      fill: $pure-black;
+
+      path {
+        fill: $pure-black;
+      }
+    }
+  }
+
+  &--secondary {
+    transition: box-shadow 0.25s;
+
+    &:hover {
+      background-color: transparent;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 100%);
+    }
+  }
+
+  &--ghost {
+    border-color: transparent;
+
     &:hover {
       background-color: transparent;
       border: 1px solid transparent;
@@ -105,23 +131,6 @@
         width: 100%;
       }
     }
-
-    &:focus-visible {
-      background-color: $pure-white;
-      outline-color: $soft-black;
-    }
-
-    svg {
-      fill: $pure-black;
-
-      path {
-        fill: $pure-black;
-      }
-    }
-  }
-
-  &--ghost {
-    border-color: transparent;
   }
 
   &--tertiary {

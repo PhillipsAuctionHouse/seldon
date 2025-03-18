@@ -34,6 +34,9 @@
   }
 
   &__lot-number-like {
+    align-items: center;
+    display: flex;
+    margin-bottom: $spacing-xsm;
     position: relative;
 
     & > :not(.#{$px}-object-tile__lot-number):not(.#{$px}-object-tile__lot-badge) {
@@ -47,7 +50,6 @@
       display: inline-block;
       padding-left: $spacing-xsm;
       position: relative;
-      transform: translateY(15%);
 
       svg {
         height: 100%;
@@ -62,7 +64,8 @@
 
   & .#{$px}-object-tile__lot-number {
     display: inline-block;
-    margin-bottom: $spacing-xsm;
+    margin-bottom: 0;
+    padding-top: 2px;
   }
 
   & .#{$px}-object-tile__maker,
