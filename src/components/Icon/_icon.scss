@@ -1,7 +1,0 @@
-@use '#scss/allPartials' as *;
-
-.#{$px}-icon {
-  color: var(--icon-fill-color);
-  height: var(--icon-height);
-  width: var(--icon-width);
-}

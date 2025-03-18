@@ -16,7 +16,7 @@ export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   width?: number | string | null;
   /**
-   * Color of the icon. Accepts any valid CSS color value, including seldon color tokens. Defaults to $pure-black
+   * Color of the icon. Only accepts valid seldon color tokens. Defaults to $pure-black
    */
   color?: string;
   /**

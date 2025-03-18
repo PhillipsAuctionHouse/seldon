@@ -10,8 +10,8 @@ const meta = {
   title: 'Components/Icon',
   component: Icon,
   argTypes: {
-    height: { control: 'number' },
-    width: { control: 'number' },
+    height: { control: 'text' },
+    width: { control: 'text' },
     color: { control: 'select', options: colorOptions },
   },
   args: {
@@ -49,7 +49,7 @@ export const Playground = (props: IconProps) => (
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
-  icon: 'AccountCircle',
+  icon: Object.keys(iconComponents)[0] as IconName,
   height: 24,
   width: 24,
   color: '$pure-black',
@@ -57,8 +57,8 @@ Playground.args = {
 
 Playground.argTypes = {
   icon: { control: 'select', options: Object.keys(iconComponents) as IconName[] },
-  height: { control: 'number' },
-  width: { control: 'number' },
+  height: { control: 'text' },
+  width: { control: 'text' },
   color: { control: 'select', options: colorOptions },
   showBorder: { control: 'boolean' },
 };
