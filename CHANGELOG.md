@@ -1,3 +1,10 @@
+## [1.129.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.129.0...v1.129.1) (2025-03-18)
+
+
+### Bug Fixes
+
+* **bidsnapshot:** L3-6073 bid snapshot style fix ([#554](https://github.com/PhillipsAuctionHouse/seldon/issues/554)) ([821cbe7](https://github.com/PhillipsAuctionHouse/seldon/commit/821cbe7b9164556fa99c7fe5a95e52925350a302))
+
 # [1.129.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.128.0...v1.129.0) (2025-03-17)
 
 
