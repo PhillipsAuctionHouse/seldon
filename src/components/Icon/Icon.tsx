@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import classnames from 'classnames';
-import { getCommonProps } from '../../utils';
+import { getCommonProps, px } from '../../utils';
 import { getScssVar } from '../../utils/scssUtils';
 import * as iconComponents from '../../assets/formatted';
 
@@ -8,13 +8,13 @@ export type IconName = keyof typeof iconComponents;
 
 export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Height of the icon in px. Defaults to 24
+   * Height of the icon in px (number) or as a string with units (e.g. '1em')
    */
-  height?: number;
+  height?: number | string | null;
   /**
-   * Width of the icon in px. Defaults to 24
+   * Width of the icon in px (number) or as a string with units (e.g. '1em')
    */
-  width?: number;
+  width?: number | string | null;
   /**
    * Color of the icon. Accepts any valid CSS color value, including seldon color tokens. Defaults to $pure-black
    */
@@ -33,19 +33,20 @@ export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-icon--overview)
  */
 const Icon = forwardRef<HTMLDivElement, IconProps>(
-  ({ className, height = 24, width = 24, color, icon, ...props }: IconProps, ref) => {
+  ({ className, height, width, color, icon, ...props }: IconProps, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, `Icon-${icon}`);
 
+    const Component = iconComponents[icon];
     const componentProps = {
-      className: classnames(baseClassName, className),
+      color: getScssVar(color ?? '', '$pure-black'),
+      ...(height ? { height } : {}),
+      ...(width ? { width } : {}),
       ...commonProps,
     };
 
-    const Component = iconComponents[icon];
-
     return Component ? (
-      <div {...componentProps} ref={ref}>
-        <Component height={height} width={width} color={getScssVar(color ?? '', '$pure-black')} {...commonProps} />
+      <div className={classnames(`${px}-icon`, baseClassName, className)} ref={ref}>
+        <Component {...componentProps} />
       </div>
     ) : null;
   },

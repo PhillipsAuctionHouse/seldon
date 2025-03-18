@@ -14,6 +14,11 @@ const meta = {
     width: { control: 'number' },
     color: { control: 'select', options: colorOptions },
   },
+  args: {
+    height: 24,
+    width: 24,
+    color: '$primary-black',
+  },
 } satisfies Meta<typeof Icon>;
 
 export default meta;

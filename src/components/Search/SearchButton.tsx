@@ -1,6 +1,5 @@
+import { Icon } from '../Icon';
 import { SearchProps } from './Search';
-import SearchIcon from '../../assets/search.svg?react';
-import CloseIcon from '../../assets/close.svg?react';
 import { ComponentProps } from 'react';
 
 export const SearchButton = ({
@@ -31,7 +30,7 @@ export const SearchButton = ({
           event.stopPropagation();
         }}
       >
-        <SearchIcon data-testid={`${testId}-button-icon`} className={`${className}__button__icon`} />
+        <Icon icon="Search" data-testid={`${testId}-button-icon`} className={`${className}__button__icon`} />
       </button>
     );
   }
@@ -50,7 +49,7 @@ export const SearchButton = ({
           event.stopPropagation();
         }}
       >
-        <CloseIcon data-testid={`${testId}-form-icon`} className={`${className}__button__icon`} />
+        <Icon icon="Close" data-testid={`${testId}-form-icon`} className={`${className}__button__icon`} />
       </button>
     );
   }

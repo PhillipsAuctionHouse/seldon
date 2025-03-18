@@ -44,7 +44,7 @@ describe('SeldonImage', () => {
     const image = screen.getByTestId(`seldon-image-img`);
     await waitFor(() => {
       fireEvent.error(image);
-      const errorPlaceholder = screen.getByTestId('header-logo-svg');
+      const errorPlaceholder = screen.getByRole('img', { name: 'Error loading image' });
       expect(errorPlaceholder).toBeInTheDocument();
     });
   });

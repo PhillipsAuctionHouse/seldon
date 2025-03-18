@@ -30,9 +30,9 @@ describe('Accordion', () => {
         ))}
       </Accordion>,
     );
-    expect(screen.queryByTestId(/accordion-item-0-plusIcon/)).toBeInTheDocument();
+    expect(screen.queryByTestId(/icon-plus/)).toBeInTheDocument();
     await userEvent.click(screen.getByTestId('accordion-item-0-trigger'));
-    await waitFor(() => expect(screen.queryByTestId(/accordion-item-0-minusIcon/)).toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByTestId(/icon-minus/)).toBeInTheDocument());
   });
 
   it('should contain the lock icon and lock icon content', async () => {
@@ -57,9 +57,10 @@ describe('Accordion', () => {
         ))}
       </Accordion>,
     );
-    expect(screen.queryByTestId('accordion-item-0-lockedIcon')).toBeInTheDocument();
+    screen.debug();
+    expect(screen.queryByTestId(/icon-lock/)).toBeInTheDocument();
     await userEvent.click(screen.getByTestId('accordion-item-0-trigger'));
-    await waitFor(() => expect(screen.queryByTestId('accordion-item-0-lockedIcon')).toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByTestId(/icon-lock/)).toBeInTheDocument());
     const lockedContentElement = screen.getByText('Sign Up');
     expect(lockedContentElement).toHaveClass(`${px}-sign-up-link`);
   });

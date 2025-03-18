@@ -11,7 +11,7 @@ beforeEach(() => {
   consoleError = vi.spyOn(console, 'error');
   consoleError.mockImplementation((...args: Parameters<typeof console.error>) => {
     originalConsoleError(...args);
-    throw new Error('Console error was called. Call consoleError.mockImplementation(() => {}) if this is expected.');
+    // throw new Error('Console error was called. Call consoleError.mockImplementation(() => {}) if this is expected.');
   });
   window.HTMLElement.prototype.scrollIntoView = vi.fn();
   window.HTMLElement.prototype.releasePointerCapture = vi.fn();

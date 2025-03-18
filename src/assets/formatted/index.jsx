@@ -20,6 +20,7 @@ export { default as IconGreenCircle } from './IconGreenCircle';
 export { default as IconRedCircle } from './IconRedCircle';
 export { default as Instagram } from './Instagram';
 export { default as Lock } from './Lock';
+export { default as MagnificentSeven } from './MagnificentSeven';
 export { default as Minus } from './Minus';
 export { default as PhillipsLogo } from './PhillipsLogo';
 export { default as Plus } from './Plus';

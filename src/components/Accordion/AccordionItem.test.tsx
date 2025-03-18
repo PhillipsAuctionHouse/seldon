@@ -49,7 +49,7 @@ describe('AccordionItem', () => {
         Content
       </AccordionItemWithAccordion>,
     );
-    expect(screen.getByTestId('accordion-item-1-lockedIcon')).toBeInTheDocument();
+    expect(screen.getByTestId(/icon-lock/)).toBeInTheDocument();
   });
 
   it('renders the AccordionItem without border bottom when isLastItem is true', () => {
