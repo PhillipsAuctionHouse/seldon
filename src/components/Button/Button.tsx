@@ -100,8 +100,18 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
             )}
             target={target}
             rel={target === '_blank' ? 'noopener noreferrer' : undefined}
-            onMouseOver={() => setLinkHovered(true)}
-            onClick={props.onClick}
+            onMouseOver={() => {
+              if (!isDisabled) {
+                setLinkHovered(true);
+              }
+            }}
+            onClick={(e) => {
+              if (isDisabled) {
+                e.preventDefault();
+              } else {
+                props.onClick?.(e);
+              }
+            }}
           >
             {children}
           </a>

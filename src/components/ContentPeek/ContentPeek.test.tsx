@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import ContentPeek from './ContentPeek';
 import { runCommonTests } from '../../utils/testUtils';
 import { px } from '../../utils';
+import { HeightUnits } from './utils';
 
 describe('ContentPeek', () => {
   runCommonTests(ContentPeek, 'ContentPeek');
@@ -103,5 +104,28 @@ describe('ContentPeek', () => {
     await waitFor(() => {
       expect(overlayElement).not.toHaveClass(`${px}-content-peek-overlay--gradient`);
     });
+  });
+
+  it('button should not be visible with minHeightThreshold using px', () => {
+    setTallScrollHeight();
+    const { container } = render(
+      <ContentPeek maxHeight={160} minHeightThreshold={1600}>
+        {'Lorem ipsum '.repeat(100)}
+      </ContentPeek>,
+    );
+    const overlayElement = container.querySelector(`.${px}-content-peek-overlay`);
+    expect(overlayElement).toBeNull();
+  });
+
+  it('button should not be visible with minHeightThreshold using rem', () => {
+    setTallScrollHeight();
+    const { container } = render(
+      <ContentPeek maxHeight={10} minHeightThreshold={100} heightUnits={HeightUnits.rem}>
+        {'Lorem ipsum '.repeat(100)}
+      </ContentPeek>,
+    );
+
+    const overlayElement = container.querySelector(`.${px}-content-peek-overlay`);
+    expect(overlayElement).toBeNull();
   });
 });
