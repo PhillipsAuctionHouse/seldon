@@ -31,7 +31,7 @@ describe('Icon', () => {
   it('should apply default color if color prop is not found in vars', () => {
     const { getByTestId } = render(<Icon icon="AccountCircle" height={32} width={32} color="$fake-color" />);
     const icon = getByTestId('icon-account-circle');
-    expect(icon).toHaveAttribute('fill', '$fake-color');
+    expect(icon).toHaveAttribute('fill', '$pure-black');
   });
 
   it('should return null if icon does not exist', () => {
