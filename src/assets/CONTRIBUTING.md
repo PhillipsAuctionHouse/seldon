@@ -20,3 +20,5 @@ Let's say we have an svg that we want to add: new_icon.svg
   - If the icon needs to be recolorable, you will need to make a few more modifications to the jsx component. For svgs that don't need to be recolored (company logos for example), you can skip this step. Otherwise, open the jsx file, find any `fill` or `stroke` properties and set them to `fill={props.color}` or `stroke={props.color}`.
 
 - Your new component should get automatically picked up and displayed in the Storybook Icon/Icon Grid story. Confirm that it shows up and is resizable and/or recolorable as expected.
+
+- In order to use the new svg component, you would import the `Icon` component from `src/components` and pass the name of your icon as the `icon` prop (i.e. `<Icon icon="NewIcon" />`). Additional props for width, height and color can also be passed to the Icon component.
