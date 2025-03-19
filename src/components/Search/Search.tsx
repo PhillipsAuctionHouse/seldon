@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { encodeURLSearchParams, getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
 import Input from '../Input/Input';
@@ -79,6 +79,47 @@ const Search = ({
   const searchContainerRef = React.useRef<HTMLDivElement>(null);
   const isSearchExpanded = headerContext.isSearchExpanded;
   const value = searchInputRef.current?.value;
+
+  const [currentUrl, setCurrentUrl] = useState(window.location.href);
+  useEffect(() => {
+    const handleUrlChange = () => {
+      console.log('URL has changed:', currentUrl);
+      // Add any additional logic you want to execute when the URL changes
+    };
+
+    handleUrlChange(); // Trigger the logic whenever `currentUrl` changes
+  }, [currentUrl]);
+  useEffect(() => {
+    const handleUrlChange = () => {
+      const newUrl = window.location.href;
+      setCurrentUrl(newUrl); // Update the current URL state
+    };
+
+    // Listen for browser navigation (back/forward)
+    window.addEventListener('urlState', handleUrlChange);
+
+    // Override pushState and replaceState to detect programmatic navigation
+    const originalPushState = history.pushState;
+    const originalReplaceState = history.replaceState;
+
+    history.pushState = function (...args) {
+      originalPushState.apply(this, args);
+      handleUrlChange(); // Trigger URL change logic
+    };
+
+    history.replaceState = function (...args) {
+      originalReplaceState.apply(this, args);
+      handleUrlChange(); // Trigger URL change logic
+    };
+
+    // Cleanup event listeners on unmount
+    return () => {
+      window.removeEventListener('urlState', handleUrlChange);
+      history.pushState = originalPushState;
+      history.replaceState = originalReplaceState;
+    };
+  }, []);
+
   const onInputChange = onSearch
     ? (e: { target: { value: string } }) => {
         onSearch(e.target.value);
