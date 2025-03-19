@@ -81,13 +81,26 @@ const Search = ({
   const value = searchInputRef.current?.value;
 
   const [currentUrl, setCurrentUrl] = useState(window.location.href);
+  const clearSearch = () => {
+    // Reset the form
+    searchFormRef.current?.reset();
+
+    // Clear the input value explicitly (optional)
+    if (searchInputRef.current) {
+      searchInputRef.current.value = '';
+    }
+
+    // Close the search dropdown
+    showSearch(false);
+  };
+
   useEffect(() => {
     const handleUrlChange = () => {
-      console.log('URL has changed:', currentUrl);
-      // Add any additional logic you want to execute when the URL changes
+      console.log('close search...');
+      clearSearch();
     };
-
     handleUrlChange(); // Trigger the logic whenever `currentUrl` changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUrl]);
   useEffect(() => {
     const handleUrlChange = () => {
