@@ -13,10 +13,6 @@
   transition: all 0.2s ease-in-out;
   width: 100%;
 
-  span {
-    color: inherit;
-  }
-
   &--lot-in-list {
     border: 1px solid $pure-black;
   }
@@ -24,6 +20,14 @@
   &__text {
     display: flex;
     gap: $spacing-xsm;
+    overflow: hidden;
+
+    span {
+      color: inherit;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 
   &:hover {
