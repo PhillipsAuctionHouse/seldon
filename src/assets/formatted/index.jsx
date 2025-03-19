@@ -1,4 +1,5 @@
 export { default as AccountCircle } from './AccountCircle';
+export { default as AppleAppStoreBadge } from './AppleAppStoreBadge';
 export { default as ArrowPrev } from './ArrowPrev';
 export { default as Calendar } from './Calendar';
 export { default as CalendarAlt } from './CalendarAlt';
@@ -22,6 +23,7 @@ export { default as Instagram } from './Instagram';
 export { default as Lock } from './Lock';
 export { default as MagnificentSeven } from './MagnificentSeven';
 export { default as Minus } from './Minus';
+export { default as PhillipsAppIcon } from './PhillipsAppIcon';
 export { default as PhillipsLogo } from './PhillipsLogo';
 export { default as Plus } from './Plus';
 export { default as React } from './React';
