@@ -8,7 +8,6 @@ export const getScssVar = (scssVar: string, defaultValue: string): string => {
     return { name, value: value?.replace(';', '') };
   });
   const colorIndex = parsedVars.findIndex(({ name }) => name === scssVar);
-  console.log('parsedVars', parsedVars);
 
   if (scssVar && colorIndex > -1) {
     return parsedVars[colorIndex].value;
