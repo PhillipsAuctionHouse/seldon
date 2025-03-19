@@ -3,7 +3,7 @@ import { getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
 import BreadcrumbItem, { BreadcrumbItemProps } from './BreadcrumbItem';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
-import ArrowPrevIcon from '../../assets/arrowPrev.svg?react';
+import { Icon } from '../Icon';
 
 export interface BreadcrumbProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -52,7 +52,7 @@ const Breadcrumb = ({
           className={`${px}-icon-button ${px}-icon-button--primary ${baseClassName}__back-button`} // apply button styles though it's a link
           data-testid={`${id}-back-button`}
         >
-          <ArrowPrevIcon />
+          <Icon icon="ArrowPrev" />
         </CustomElement>
       </SSRMediaQuery.Media>
       {/* This is not visible when in mobile breakpoint */}

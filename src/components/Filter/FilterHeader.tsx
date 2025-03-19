@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { Text, TextVariants } from '../Text';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
-import ChevronNextIcon from '../../assets/chevronNext.svg?react';
+import { Icon } from '../Icon';
 
 export interface FilterHeaderProps extends ComponentProps<'div'> {
   // Text to display as the header
@@ -46,7 +46,7 @@ const FilterHeader = forwardRef<HTMLDivElement, FilterHeaderProps>(
         />
         {isViewingAll ? (
           <Button variant={ButtonVariants.tertiary} onClick={handleClose} className={`${baseClassName}__back`}>
-            <ChevronNextIcon className={`${baseClassName}__chevron`} />
+            <Icon icon="ChevronNext" className={`${baseClassName}__chevron`} />
             Back to all
           </Button>
         ) : null}

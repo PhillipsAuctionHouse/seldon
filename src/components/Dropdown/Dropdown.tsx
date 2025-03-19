@@ -2,8 +2,8 @@ import React, { useState, ComponentPropsWithoutRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import * as DropdownSelect from '@radix-ui/react-select';
-import ChevronDownIcon from '../../assets/chevronDown.svg?react';
 import { DropdownItem } from './types';
+import { Icon } from '../Icon';
 
 export interface DropdownProps
   extends Omit<DropdownSelect.SelectProps, 'defaultValue' | 'dir'>,
@@ -61,13 +61,18 @@ const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
           >
             <DropdownSelect.Value placeholder={value} />
             <DropdownSelect.Icon>
-              {<ChevronDownIcon className={classnames({ [`${baseClassName}__trigger-icon-expanded`]: isOpen })} />}
+              {
+                <Icon
+                  icon="ChevronDown"
+                  className={classnames({ [`${baseClassName}__trigger-icon-expanded`]: isOpen })}
+                />
+              }
             </DropdownSelect.Icon>
           </DropdownSelect.Trigger>
           <DropdownSelect.Portal>
             <DropdownSelect.Content className={`${baseClassName}__content`} position="popper">
               <DropdownSelect.ScrollUpButton className={`${baseClassName}__scroll-button__up`}>
-                <ChevronDownIcon />
+                <Icon icon="ChevronDown" />
               </DropdownSelect.ScrollUpButton>
               <DropdownSelect.Viewport className={`${baseClassName}__viewport`}>
                 {options.map((option) => (
@@ -82,7 +87,7 @@ const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
                 ))}
               </DropdownSelect.Viewport>
               <DropdownSelect.ScrollDownButton className={`${baseClassName}__scroll-button`}>
-                <ChevronDownIcon />
+                <Icon icon="ChevronDown" />
               </DropdownSelect.ScrollDownButton>
             </DropdownSelect.Content>
           </DropdownSelect.Portal>

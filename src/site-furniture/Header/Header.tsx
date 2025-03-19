@@ -1,7 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import classnames from 'classnames';
 import { findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
-import Logo from '../../assets/PhillipsLogo.svg?react';
 import UserManagement, { UserManagementProps } from '../../patterns/UserManagement/UserManagement';
 import { LanguageSelector, LanguageSelectorProps } from '../../patterns/LanguageSelector';
 import Navigation from '../../components/Navigation/Navigation';
@@ -9,6 +8,7 @@ import { Component, ComponentProps, forwardRef, ReactElement, useState, createCo
 import { defaultHeaderContext } from './utils';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import { useMobileMenu } from './hooks';
+import { Icon } from '../../components/Icon';
 
 export interface HeaderProps extends ComponentProps<'header'> {
   /**
@@ -71,7 +71,7 @@ export const HeaderContext = createContext<HeaderContextType>(defaultHeaderConte
 const Header = forwardRef<HTMLElement, HeaderProps>(
   (
     {
-      logo = <Logo />,
+      logo = <Icon icon="PhillipsLogo" />,
       logoHref = '/',
       className,
       children,
