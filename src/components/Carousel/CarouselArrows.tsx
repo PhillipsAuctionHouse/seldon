@@ -2,14 +2,14 @@ import classNames from 'classnames';
 import { ComponentProps, forwardRef, useCallback } from 'react';
 import { getCommonProps } from '../../utils';
 import { useCarousel } from './utils';
-import { CarouselArrowNext, CarouselArrowPrev } from '../../assets/icons';
+import { Icon } from '../Icon';
 
 export type CarouselArrowsProps = ComponentProps<'div'>;
 
 /**
  * ## Overview
  *
- * Arrow naivigation for the carousel.
+ * Arrow navigation for the carousel.
  *
  */
 const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(({ className, ...props }, ref) => {
@@ -35,12 +35,12 @@ const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(({ classN
     >
       <button data-testid="prev-arrow" className={`${baseClassName}-prev-btn`} onClick={() => onPrevArrowClick()}>
         <div className={`${baseClassName}-prev-btn__icon`}>
-          <CarouselArrowPrev />
+          <Icon icon="CarouselArrowPrev" height={32} width={16} />
         </div>
       </button>
       <button data-testid="next-arrow" className={`${baseClassName}-next-btn`} onClick={() => onNextArrowClick()}>
         <div className={`${baseClassName}-next-btn__icon`}>
-          <CarouselArrowNext />
+          <Icon icon="CarouselArrowNext" height={32} width={16} />
         </div>
       </button>
     </div>

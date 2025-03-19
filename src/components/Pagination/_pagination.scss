@@ -15,7 +15,7 @@
       opacity: 0.15;
       pointer-events: none;
 
-      svg path {
+      .#{$px}-icon path {
         fill: $pure-black;
       }
     }
@@ -23,7 +23,7 @@
     &:hover:not(:disabled) {
       background-color: inherit;
 
-      svg path {
+      .#{$px}-icon path {
         fill: $pure-black;
       }
     }
