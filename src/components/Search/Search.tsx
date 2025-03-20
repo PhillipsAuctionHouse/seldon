@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { encodeURLSearchParams, getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
 import Input from '../Input/Input';
@@ -79,59 +79,13 @@ const Search = ({
   const searchContainerRef = React.useRef<HTMLDivElement>(null);
   const isSearchExpanded = headerContext.isSearchExpanded;
   const value = searchInputRef.current?.value;
+  const [isShowResults, setIsShowResults] = React.useState(true);
 
-  const [currentUrl, setCurrentUrl] = useState(window.location.href);
-  const clearSearch = () => {
-    // Reset the form
-    searchFormRef.current?.reset();
-
-    // Clear the input value explicitly (optional)
-    if (searchInputRef.current) {
-      searchInputRef.current.value = '';
-    }
-
-    // Close the search dropdown
-    showSearch(false);
-  };
-
-  useEffect(() => {
-    const handleUrlChange = () => {
-      console.log('close search...');
-      clearSearch();
-    };
-    handleUrlChange(); // Trigger the logic whenever `currentUrl` changes
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUrl]);
-  useEffect(() => {
-    const handleUrlChange = () => {
-      const newUrl = window.location.href;
-      setCurrentUrl(newUrl); // Update the current URL state
-    };
-
-    // Listen for browser navigation (back/forward)
-    window.addEventListener('urlState', handleUrlChange);
-
-    // Override pushState and replaceState to detect programmatic navigation
-    const originalPushState = history.pushState;
-    const originalReplaceState = history.replaceState;
-
-    history.pushState = function (...args) {
-      originalPushState.apply(this, args);
-      handleUrlChange(); // Trigger URL change logic
-    };
-
-    history.replaceState = function (...args) {
-      originalReplaceState.apply(this, args);
-      handleUrlChange(); // Trigger URL change logic
-    };
-
-    // Cleanup event listeners on unmount
-    return () => {
-      window.removeEventListener('urlState', handleUrlChange);
-      history.pushState = originalPushState;
-      history.replaceState = originalReplaceState;
-    };
-  }, []);
+  console.log('headerContext', headerContext);
+  console.log('searchInputRef', searchInputRef);
+  console.log('searchFormRef', searchFormRef);
+  console.log('searchContainerRef', searchContainerRef);
+  console.log('value', value);
 
   const onInputChange = onSearch
     ? (e: { target: { value: string } }) => {
@@ -151,11 +105,11 @@ const Search = ({
       e.preventDefault();
       if (value && value.length > 2) {
         const allResultsLink = encodeURLSearchParams(getAllResultsLink(value));
-        showSearch(false);
+        setIsShowResults(false);
         window.location.href = allResultsLink;
       }
       if (e.currentTarget instanceof HTMLAnchorElement) {
-        showSearch(false);
+        setIsShowResults(false);
         e.currentTarget.click();
       }
     }
@@ -248,18 +202,17 @@ const Search = ({
                   onCancel={onCancel}
                 />
               </div>
-              {value && value.length > 2 ? (
+              {isShowResults && value && value.length > 2 ? (
                 <SearchResults
                   autoCompleteResults={searchResults}
                   isLoading={state === 'loading'}
                   loadingText={loadingText}
                   onKeyDown={onKeyDown}
                   userInputValue={value}
-                  closeSearch={showSearch}
+                  closeSearch={setIsShowResults}
                 >
                   <li key="viewAllSearchResults" className={`${baseClassName}__result`}>
                     <Link
-                      onClick={() => showSearch(false)}
                       href={((value: string) => {
                         return encodeURLSearchParams(getAllResultsLink(value));
                       })(value)}
