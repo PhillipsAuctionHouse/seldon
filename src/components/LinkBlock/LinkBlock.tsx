@@ -28,11 +28,7 @@ const LinkBlock = ({ linkProps, description, className: classNameProp, ...props 
 
   return (
     <div {...commonProps} className={className} {...props}>
-      <LinkComponent
-        {...linkProps}
-        data-testid={`${commonProps['data-testid']}-link`}
-        variant={LinkVariants.titleCaseAndUnderline}
-      />
+      <LinkComponent {...linkProps} data-testid={`${commonProps['data-testid']}-link`} variant={LinkVariants.link} />
       <Text className={`${baseClassName}__description`}>{description}</Text>
     </div>
   );

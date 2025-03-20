@@ -25,7 +25,7 @@ export const Playground = ({ playgroundWidth, children, ...args }: StoryProps) =
 Playground.args = {
   children: 'My Link',
   href: internalHref,
-  variant: LinkVariants.titleCaseAndUnderline,
+  variant: LinkVariants.link,
 };
 
 Playground.argTypes = {

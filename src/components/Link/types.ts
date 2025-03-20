@@ -7,5 +7,5 @@ export enum LinkVariants {
   /** link is being rendered in a footer|header */
   snwFlyoutLink = TextVariants.snwFlyoutLink,
   /** standard link */
-  titleCaseAndUnderline = TextVariants.titleCaseAndUnderline,
+  link = TextVariants.link,
 }
