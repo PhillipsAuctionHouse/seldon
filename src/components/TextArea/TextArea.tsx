@@ -10,14 +10,6 @@ export interface TextAreaProps extends ComponentProps<'textarea'> {
    */
   className?: string;
   /**
-   * Boolean to specify whether the `<textarea>` should be disabled
-   */
-  disabled?: boolean;
-  /**
-   * The id attribute is needed to associate the text area with a label
-   */
-  id?: string;
-  /**
    * Boolean to specify whether we need to display skeleton loader
    */
   isSkeletonLoading?: boolean;
@@ -25,22 +17,6 @@ export interface TextAreaProps extends ComponentProps<'textarea'> {
    * Text that will be read by a screen reader when visiting this control
    */
   labelText: React.ReactNode;
-  /**
-   * Do we want to limit the number of characters that can be entered into the textarea?
-   */
-  maxLength?: number;
-  /**
-   * Specify a name for a textarea
-   * The name attribute is needed to reference the form data after the form is submitted (if you omit the name attribute, no data from the text area will be submitted).
-   */
-  name?: string;
-  /**
-   * The number of rows to show in the textarea
-   */
-  rows?: number;
-  /**
-   * Optional `onChange` handler that is called whenever `<input>` is updated
-   */
 }
 
 /**
@@ -59,8 +35,8 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     return (
       <div className={classnames(`${baseClassName}__wrapper`)}>
         <label
-          data-testid={`text-area-${id || generatedId}-label`}
-          htmlFor={id || generatedId}
+          data-testid={`text-area-${id ?? generatedId}-label`}
+          htmlFor={id ?? generatedId}
           className={classnames(`${px}-input__label`, {
             [`${px}-skeleton`]: isSkeletonLoading,
           })}
@@ -72,13 +48,13 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           className={classnames(baseClassName, className, {
             [`${px}-skeleton`]: isSkeletonLoading,
           })}
-          id={id || generatedId}
+          id={id ?? generatedId}
           rows={rows}
           maxLength={maxLength}
           name={name}
           ref={ref}
-          data-testid={`text-area-${id || generatedId}-input`}
-        ></textarea>
+          data-testid={`text-area-${id ?? generatedId}-input`}
+        />
         <div className={`${baseClassName}-resizer__icon`}>
           <Menu />
         </div>
