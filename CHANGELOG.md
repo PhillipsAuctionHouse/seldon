@@ -1,3 +1,10 @@
+# [1.130.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.129.2...v1.130.0) (2025-03-21)
+
+
+### Features
+
+* **_button:** L3-6070 fixed height of button ([#562](https://github.com/PhillipsAuctionHouse/seldon/issues/562)) ([ede0cdf](https://github.com/PhillipsAuctionHouse/seldon/commit/ede0cdff814123458e2598c545b86a3834196275))
+
 ## [1.129.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.129.1...v1.129.2) (2025-03-18)
 
 
