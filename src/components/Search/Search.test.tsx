@@ -128,10 +128,8 @@ describe('Search component', () => {
       const button = screen.getByTestId('search-button');
       await userEvent.click(button);
       const link = screen.getByRole('link', { name: 'my custom text: custom' });
-      const searchForm = screen.getByTestId('search-form');
       await userEvent.click(link);
       expect(screen.getByRole('link', { name: 'my custom text: custom' })).toBeInTheDocument();
-      expect(searchForm).not.toHaveClass(`${px}-search__form--active`);
     });
   });
   describe('otherCustomText', () => {

@@ -79,6 +79,8 @@ const Search = ({
   const searchContainerRef = React.useRef<HTMLDivElement>(null);
   const isSearchExpanded = headerContext.isSearchExpanded;
   const value = searchInputRef.current?.value;
+  const [isShowResults, setIsShowResults] = React.useState(true);
+
   const onInputChange = onSearch
     ? (e: { target: { value: string } }) => {
         onSearch(e.target.value);
@@ -97,11 +99,11 @@ const Search = ({
       e.preventDefault();
       if (value && value.length > 2) {
         const allResultsLink = encodeURLSearchParams(getAllResultsLink(value));
-        showSearch(false);
+        setIsShowResults(false);
         window.location.href = allResultsLink;
       }
       if (e.currentTarget instanceof HTMLAnchorElement) {
-        showSearch(false);
+        setIsShowResults(false);
         e.currentTarget.click();
       }
     }
@@ -194,18 +196,17 @@ const Search = ({
                   onCancel={onCancel}
                 />
               </div>
-              {value && value.length > 2 ? (
+              {isSearchExpanded && isShowResults && value && value.length > 2 ? (
                 <SearchResults
                   autoCompleteResults={searchResults}
                   isLoading={state === 'loading'}
                   loadingText={loadingText}
                   onKeyDown={onKeyDown}
                   userInputValue={value}
-                  closeSearch={showSearch}
+                  closeSearch={setIsShowResults}
                 >
                   <li key="viewAllSearchResults" className={`${baseClassName}__result`}>
                     <Link
-                      onClick={() => showSearch(false)}
                       href={((value: string) => {
                         return encodeURLSearchParams(getAllResultsLink(value));
                       })(value)}
