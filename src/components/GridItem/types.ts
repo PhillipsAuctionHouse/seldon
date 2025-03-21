@@ -3,3 +3,10 @@ export enum GridItemAlign {
   left = 'left',
   right = 'right',
 }
+
+export enum BreakpointKey {
+  xs = 'xs',
+  sm = 'sm',
+  md = 'md',
+  lg = 'lg',
+}

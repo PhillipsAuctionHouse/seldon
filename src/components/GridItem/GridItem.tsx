@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { determineColumnSpanClassName, validateColumnSpans } from './gridItemUtils';
-import { GridItemAlign } from './types';
+import { BreakpointKey, GridItemAlign } from './types';
 
 export interface GridItemProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -29,6 +29,27 @@ export interface GridItemProps extends React.HTMLAttributes<HTMLDivElement> {
    * Determines how many columns this GridItem spans at the xl breakpoint, defaults to the maximum of 12 columns.  If there are less than 2 columns in the Grid at the xl breakpoint they will be centered.
    */
   xl?: number;
+  /**
+   * The starting column for this GridItem at the xs breakpoint. If omitted, the GridItem will be placed in the next available column. Setting this value will override the alignment setting at the xs breakpoint.
+   */
+  xsColStart?: number;
+  /**
+   * The starting column for this GridItem at the sm breakpoint. If omitted, the GridItem will be placed in the next available column. Setting this value will override the alignment setting at the sm breakpoint.
+   */
+  smColStart?: number;
+  /**
+   * The starting column for this GridItem at the md breakpoint. If omitted, the GridItem will be placed in the next available column. Setting this value will override the alignment setting at the md breakpoint.
+   */
+  mdColStart?: number;
+  /**
+   * The starting column for this GridItem at the lg breakpoint. If omitted, the GridItem will be placed in the next available column. Setting this value will override the alignment setting at the lg breakpoint.
+   */
+  lgColStart?: number;
+  /**
+   * The starting column for this GridItem at the xl breakpoint. If omitted, the GridItem will be placed in the next available column. Setting this value will override the alignment setting at the xl breakpoint.
+   */
+  xlColStart?: number;
+  /**
    * Optional element to render as the top-level component e.g. 'div', 'span', CustomComponent, etc.  Defaults to 'div'.
    */
   element?: React.ElementType;
@@ -50,6 +71,11 @@ const GridItem = ({
   md = 6,
   lg = 12,
   xl = 12,
+  xsColStart,
+  smColStart,
+  mdColStart,
+  lgColStart,
+  xlColStart,
   align = GridItemAlign.center,
   element: Element = 'div',
   className,
@@ -58,15 +84,25 @@ const GridItem = ({
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'GridItem');
 
   const columnSpansPerBreakpoint = useMemo(() => ({ xs, sm, md, lg, xl }) as const, [xs, sm, md, lg, xl]);
+  const columnStartsPerBreakpoint = useMemo(
+    () => ({ xs: xsColStart, sm: smColStart, md: mdColStart, lg: lgColStart, xl: xlColStart }),
+    [xsColStart, smColStart, mdColStart, lgColStart, xlColStart],
+  );
+
   const gridItemClasses = useMemo(() => {
     return [
       baseClassName, // figure out the class names for each breakpoint
       Object.entries(columnSpansPerBreakpoint).map(([key, value]) =>
-        determineColumnSpanClassName(key as GridItemAlign, value, align),
+        determineColumnSpanClassName(
+          key as BreakpointKey,
+          value,
+          columnStartsPerBreakpoint[key as BreakpointKey],
+          align,
+        ),
       ),
       className,
     ];
-  }, [align, columnSpansPerBreakpoint, baseClassName, className]);
+  }, [baseClassName, columnSpansPerBreakpoint, className, columnStartsPerBreakpoint, align]);
 
   if (!validateColumnSpans(Object.values(columnSpansPerBreakpoint))) {
     return null;
