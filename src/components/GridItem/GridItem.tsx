@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { getCommonProps } from '../../utils';
+import { BreakpointTokens, getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { determineColumnSpanClassName, validateColumnSpans } from './gridItemUtils';
-import { BreakpointKey, GridItemAlign } from './types';
+import { GridItemAlign } from './types';
 
 export interface GridItemProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -93,9 +93,9 @@ const GridItem = ({
     return [
       baseClassName, // figure out the class names for each breakpoint
       Object.entries(columnSpansPerBreakpoint).map(([key, columnSpan]) => {
-        const columnStart = columnStartsPerBreakpoint[key as BreakpointKey];
+        const columnStart = columnStartsPerBreakpoint[key as BreakpointTokens];
 
-        return determineColumnSpanClassName(key as BreakpointKey, columnSpan, columnStart, align);
+        return determineColumnSpanClassName(key as BreakpointTokens, columnSpan, columnStart, align);
       }),
       className,
     ];

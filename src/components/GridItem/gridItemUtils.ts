@@ -1,9 +1,9 @@
-import { px } from '../../utils';
+import { BreakpointTokens, px } from '../../utils';
 import { GridItemProps } from './GridItem';
-import { BreakpointKey, GridItemAlign } from './types';
+import { GridItemAlign } from './types';
 
 export const determineColumnSpanClassName = (
-  breakpoint: BreakpointKey,
+  breakpoint: BreakpointTokens,
   columnSpan: number,
   columnStart?: number,
   align: GridItemProps['align'] = GridItemAlign.center,
