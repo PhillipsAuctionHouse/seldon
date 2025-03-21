@@ -81,12 +81,6 @@ const Search = ({
   const value = searchInputRef.current?.value;
   const [isShowResults, setIsShowResults] = React.useState(true);
 
-  console.log('headerContext', headerContext);
-  console.log('searchInputRef', searchInputRef);
-  console.log('searchFormRef', searchFormRef);
-  console.log('searchContainerRef', searchContainerRef);
-  console.log('value', value);
-
   const onInputChange = onSearch
     ? (e: { target: { value: string } }) => {
         onSearch(e.target.value);
@@ -202,7 +196,7 @@ const Search = ({
                   onCancel={onCancel}
                 />
               </div>
-              {isShowResults && value && value.length > 2 ? (
+              {isSearchExpanded && isShowResults && value && value.length > 2 ? (
                 <SearchResults
                   autoCompleteResults={searchResults}
                   isLoading={state === 'loading'}
