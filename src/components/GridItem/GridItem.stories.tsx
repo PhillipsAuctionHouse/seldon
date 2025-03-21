@@ -139,21 +139,108 @@ export const GridWithOffsetColumns = () => (
         mdColStart={4}
         lg={6}
         lgColStart={7}
+        xl={6}
+        xlColStart={7}
         itemNum={1}
         align={GridItemAlign.left}
       />
     </GridWrapper>
     <GridWrapper title="2 Children (2 column layout)">
-      <GridChild xs={1} sm={1} md={2} mdColStart={1} lg={4} lgColStart={2} itemNum={1} align={GridItemAlign.left} />
-      <GridChild xs={1} sm={1} md={2} mdColStart={5} lg={4} lgColStart={8} itemNum={2} align={GridItemAlign.right} />
+      <GridChild
+        xs={1}
+        sm={1}
+        md={2}
+        mdColStart={1}
+        lg={4}
+        lgColStart={2}
+        xl={4}
+        xlColStart={2}
+        itemNum={1}
+        align={GridItemAlign.left}
+      />
+      <GridChild
+        xs={1}
+        sm={1}
+        md={2}
+        mdColStart={5}
+        lg={4}
+        lgColStart={8}
+        xl={4}
+        xlColStart={8}
+        itemNum={2}
+        align={GridItemAlign.right}
+      />
     </GridWrapper>
     <GridWrapper title="6 Children (Funky layout)">
-      <GridChild xs={2} sm={2} md={1} lg={1} lgColStart={2} itemNum={1} align={GridItemAlign.left} />
-      <GridChild xs={1} sm={1} smColStart={2} md={4} lg={1} lgColStart={4} itemNum={2} align={GridItemAlign.left} />
-      <GridChild xs={2} sm={2} md={1} lg={1} lgColStart={6} itemNum={3} align={GridItemAlign.left} />
-      <GridChild xs={1} sm={1} smColStart={2} md={1} lg={1} lgColStart={7} itemNum={4} align={GridItemAlign.left} />
-      <GridChild xs={2} sm={2} md={4} lg={1} lgColStart={9} itemNum={5} align={GridItemAlign.left} />
-      <GridChild xs={1} sm={1} smColStart={2} md={1} lg={1} lgColStart={11} itemNum={6} align={GridItemAlign.left} />
+      <GridChild
+        xs={2}
+        sm={2}
+        md={1}
+        lg={1}
+        lgColStart={2}
+        xl={2}
+        xlColStart={11}
+        itemNum={1}
+        align={GridItemAlign.left}
+      />
+      <GridChild
+        xs={1}
+        sm={1}
+        smColStart={2}
+        md={4}
+        lg={1}
+        lgColStart={4}
+        xl={2}
+        xlColStart={9}
+        itemNum={2}
+        align={GridItemAlign.left}
+      />
+      <GridChild
+        xs={2}
+        sm={2}
+        md={1}
+        lg={1}
+        lgColStart={6}
+        xl={2}
+        xlColStart={7}
+        itemNum={3}
+        align={GridItemAlign.left}
+      />
+      <GridChild
+        xs={1}
+        sm={1}
+        smColStart={2}
+        md={1}
+        lg={1}
+        lgColStart={7}
+        xl={2}
+        xlColStart={5}
+        itemNum={4}
+        align={GridItemAlign.left}
+      />
+      <GridChild
+        xs={2}
+        sm={2}
+        md={4}
+        lg={1}
+        lgColStart={9}
+        xl={2}
+        xlColStart={3}
+        itemNum={5}
+        align={GridItemAlign.left}
+      />
+      <GridChild
+        xs={1}
+        sm={1}
+        smColStart={2}
+        md={1}
+        lg={1}
+        lgColStart={11}
+        xl={2}
+        xlColStart={1}
+        itemNum={6}
+        align={GridItemAlign.left}
+      />
     </GridWrapper>
   </>
 );
