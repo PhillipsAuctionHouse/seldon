@@ -26,6 +26,9 @@ export interface GridItemProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   lg?: number;
   /**
+   * Determines how many columns this GridItem spans at the xl breakpoint, defaults to the maximum of 12 columns.  If there are less than 2 columns in the Grid at the xl breakpoint they will be centered.
+   */
+  xl?: number;
    * Optional element to render as the top-level component e.g. 'div', 'span', CustomComponent, etc.  Defaults to 'div'.
    */
   element?: React.ElementType;
@@ -46,6 +49,7 @@ const GridItem = ({
   sm = 2,
   md = 6,
   lg = 12,
+  xl = 12,
   align = GridItemAlign.center,
   element: Element = 'div',
   className,
@@ -53,7 +57,7 @@ const GridItem = ({
 }: GridItemProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'GridItem');
 
-  const columnSpansPerBreakpoint = useMemo(() => ({ xs, sm, md, lg }) as const, [xs, sm, md, lg]);
+  const columnSpansPerBreakpoint = useMemo(() => ({ xs, sm, md, lg, xl }) as const, [xs, sm, md, lg, xl]);
   const gridItemClasses = useMemo(() => {
     return [
       baseClassName, // figure out the class names for each breakpoint
