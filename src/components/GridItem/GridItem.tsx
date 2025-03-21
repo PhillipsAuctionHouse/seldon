@@ -92,14 +92,11 @@ const GridItem = ({
   const gridItemClasses = useMemo(() => {
     return [
       baseClassName, // figure out the class names for each breakpoint
-      Object.entries(columnSpansPerBreakpoint).map(([key, value]) =>
-        determineColumnSpanClassName(
-          key as BreakpointKey,
-          value,
-          columnStartsPerBreakpoint[key as BreakpointKey],
-          align,
-        ),
-      ),
+      Object.entries(columnSpansPerBreakpoint).map(([key, columnSpan]) => {
+        const columnStart = columnStartsPerBreakpoint[key as BreakpointKey];
+
+        return determineColumnSpanClassName(key as BreakpointKey, columnSpan, columnStart, align);
+      }),
       className,
     ];
   }, [baseClassName, columnSpansPerBreakpoint, className, columnStartsPerBreakpoint, align]);
