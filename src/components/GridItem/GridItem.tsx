@@ -10,11 +10,20 @@ export interface GridItemProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   align?: GridItemAlign;
   /**
-   * column spans at different breakpoints, defaults to all columns.  If less than the total number of columns at the breakpoint it will be centered.
+   * Determines how many columns this GridItem spans at the xs breakpoint, defaults to the maximum of 2 columns.  If there are less than 2 columns in the Grid at the xs breakpoint it will be centered.
    */
   xs?: number;
+  /**
+   * Determines how many columns this GridItem spans at the sm breakpoint, defaults to the maximum of 2 columns.  If there are less than 2 columns in the Grid at the sm breakpoint it will be centered.
+   */
   sm?: number;
+  /**
+   * Determines how many columns this GridItem spans at the md breakpoint, defaults to the maximum of 6 columns.  If there are less than 6 columns in the Grid at the md breakpoint they will be centered.
+   */
   md?: number;
+  /**
+   * Determines how many columns this GridItem spans at the lg breakpoint, defaults to the maximum of 12 columns.  If there are less than 2 columns in the Grid at the lg breakpoint they will be centered.
+   */
   lg?: number;
   /**
    * Optional element to render as the top-level component e.g. 'div', 'span', CustomComponent, etc.  Defaults to 'div'.
