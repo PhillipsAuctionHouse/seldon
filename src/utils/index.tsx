@@ -34,6 +34,14 @@ export enum SpacingTokens {
   xxl = 'xxl',
 }
 
+export enum BreakpointTokens {
+  xs = 'xs',
+  sm = 'sm',
+  md = 'md',
+  lg = 'lg',
+  xl = 'xl',
+}
+
 /* eslint-disable @typescript-eslint/no-empty-function */
 export const noOp = () => {};
 
