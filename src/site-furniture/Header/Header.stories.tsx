@@ -10,12 +10,12 @@ import UserManagement from '../../patterns/UserManagement/UserManagement';
 import Search, { SearchProps } from '../../components/Search/Search';
 import { AuthState } from '../../patterns/UserManagement/types';
 import { LanguageSelector } from '../../patterns/LanguageSelector';
-import PhillipsLogo from '../../assets/PhillipsLogo.svg?react';
 import { SupportedLanguages } from '../../types/commonTypes';
 import { useState } from 'react';
 import { faker } from '@faker-js/faker';
 import { SearchResult } from '../../components/Search/SearchResults/SearchResults';
 import React from 'react';
+import { Icon } from '../../components/Icon';
 
 const generateLoremIpsum = (numOfParagraphs = 10) => {
   let loremIpsum = '';
@@ -112,7 +112,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
   const [currentLanguage, setCurrentLanguage] = useState(SupportedLanguages.en);
   return (
     <div style={{ minHeight: '400px' }}>
-      <Header {...props} logo={<PhillipsLogo />}>
+      <Header {...props} logo={<Icon icon="PhillipsLogo" />}>
         <Navigation id={`${px}-main-nav`}>
           <NavigationList id={`${px}-main-nav-list`}>
             <NavigationItemTrigger id="auctions" label="Auctions">
