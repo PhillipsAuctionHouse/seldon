@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classnames from 'classnames';
-
+import { generateUniqueId } from '../../utils/constants';
 import { px, useNormalizedInputProps } from '../../utils';
 
 export interface InputProps extends Omit<React.ComponentProps<'input'>, 'size'> {
@@ -142,7 +142,7 @@ const Input = React.forwardRef(
     }: InputProps,
     ref: React.ForwardedRef<HTMLInputElement>,
   ) => {
-    const generatedId = React.useId();
+    const generatedId = React.useRef<string>(generateUniqueId()).current;
     const inputProps = useNormalizedInputProps({
       disabled,
       id: id || generatedId,
