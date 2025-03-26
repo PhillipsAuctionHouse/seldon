@@ -76,7 +76,7 @@
     font-size: $link-label-size;
     letter-spacing: 1px;
     line-height: $link-label-line-height;
-    text-transform: uppercase;
+    text-transform: capitalize;
   }
 
   @if $label == 'button' {

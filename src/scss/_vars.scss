@@ -103,9 +103,10 @@ $snwHeaderLink: 'snwHeaderLink';
 $snwFlyoutLink: 'snwFlyoutLink';
 $snwHeadingHero1: 'snwHeadingHero1';
 $snwHeadingHero2: 'snwHeadingHero2';
-$text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $heading2, $heading3, $heading4, $heading5,
-  $title1, $title2, $title3, $title4, $body1, $body2, $body3, $string1, $string2, $string3, $snwFlyoutLink,
-  $snwHeaderLink, $snwHeadingHero1, $snwHeadingHero2;
+$text-tokens:
+  $button, $link, $email, $label, $badge, $blockquote, $heading1, $heading2, $heading3, $heading4, $heading5, $title1,
+  $title2, $title3, $title4, $body1, $body2, $body3, $string1, $string2, $string3, $snwFlyoutLink, $snwHeaderLink,
+  $snwHeadingHero1, $snwHeadingHero2;
 
 ////////////////////////
 /// Breakpoint TOKENS to be used for min-width comparisons, make sure they match BREAKPOINTS in constants.ts
@@ -327,7 +328,7 @@ $snowflake-menu-padding: 1.25rem;
   --spacing-xxxl: 5.75rem;
 
   @media (min-width: $breakpoint-md) {
-    --snw-button-padding: 0.9375rem;
+    --snw-button-padding: 0.8125rem;
     --spacing-micro: 0.25rem;
     --spacing-xsm: 0.5rem;
     --spacing-sm: 1rem;
@@ -339,7 +340,7 @@ $snowflake-menu-padding: 1.25rem;
   }
 
   @media (min-width: $breakpoint-xl) {
-    --snw-button-padding: 1.0625rem;
+    --snw-button-padding: 0.813rem;
     --spacing-micro: 0.5rem;
     --spacing-xsm: 0.75rem;
     --spacing-sm: 1.25rem;

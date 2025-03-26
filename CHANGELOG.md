@@ -1,3 +1,24 @@
+# [1.131.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.130.1...v1.131.0) (2025-03-26)
+
+
+### Features
+
+* **Grid:** L3-6072 Add support for xl breakpoints and colStart props ([#564](https://github.com/PhillipsAuctionHouse/seldon/issues/564)) ([a447d79](https://github.com/PhillipsAuctionHouse/seldon/commit/a447d79f47303770ca21ffc10a56fca88a946e8a))
+
+## [1.130.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.130.0...v1.130.1) (2025-03-26)
+
+
+### Bug Fixes
+
+* **Search:** L3-5572 Search Bar Removing Typed Search ([#563](https://github.com/PhillipsAuctionHouse/seldon/issues/563)) ([9d96b40](https://github.com/PhillipsAuctionHouse/seldon/commit/9d96b4053138727dad46f74fc5423f3bf8cd27d1))
+
+# [1.130.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.129.2...v1.130.0) (2025-03-21)
+
+
+### Features
+
+* **_button:** L3-6070 fixed height of button ([#562](https://github.com/PhillipsAuctionHouse/seldon/issues/562)) ([ede0cdf](https://github.com/PhillipsAuctionHouse/seldon/commit/ede0cdff814123458e2598c545b86a3834196275))
+
 ## [1.129.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.129.1...v1.129.2) (2025-03-18)
 
 
