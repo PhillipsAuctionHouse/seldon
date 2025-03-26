@@ -1,3 +1,10 @@
+## [1.130.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.130.0...v1.130.1) (2025-03-26)
+
+
+### Bug Fixes
+
+* **Search:** L3-5572 Search Bar Removing Typed Search ([#563](https://github.com/PhillipsAuctionHouse/seldon/issues/563)) ([9d96b40](https://github.com/PhillipsAuctionHouse/seldon/commit/9d96b4053138727dad46f74fc5423f3bf8cd27d1))
+
 # [1.130.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.129.2...v1.130.0) (2025-03-21)
 
 
