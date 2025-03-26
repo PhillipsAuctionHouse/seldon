@@ -4,10 +4,9 @@ import { getCommonProps } from '../../utils';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../Collapsible';
-import PlusIcon from '../../assets/plus.svg?react';
-import MinusIcon from '../../assets/minus.svg?react';
 import { HeightUnits } from './utils';
 import { DEFAULT_REM_SIZE } from '../../utils/constants';
+import { Icon } from '../Icon';
 
 export interface ContentPeekProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -113,7 +112,7 @@ const ContentPeek = forwardRef<HTMLDivElement, ContentPeekProps>(
             <div className={`${baseClassName}-overlay-trigger-wrapper`}>
               <CollapsibleTrigger asChild className={`${baseClassName}-overlay-trigger`}>
                 <Button variant={ButtonVariants.secondary}>
-                  {isExpanded ? <MinusIcon /> : <PlusIcon />}
+                  {isExpanded ? <Icon icon="Minus" /> : <Icon icon="Plus" />}
                   {isExpanded ? contentCollapseText : contentExpandText}
                 </Button>
               </CollapsibleTrigger>

@@ -4,8 +4,7 @@ import { getCommonProps } from '../../utils';
 import { px } from '../../utils';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
-import CloseIcon from '../../assets/close.svg?react';
-import { ArrowPrev } from '../../assets/icons';
+import { Icon } from '../Icon';
 
 export interface I18nObject {
   clearAllLabel?: string;
@@ -67,7 +66,7 @@ export const Tag = ({ id, className, onRemove, label, removeText = 'Remove' }: T
     >
       <div className={`${px}-tag__label`}>{label}</div>
       <div className={`${px}-tag__button`} data-testid={`${id}-item-close-button`}>
-        <CloseIcon />
+        <Icon icon="Close" height={24} width={24} />
       </div>
     </Button>
   );
@@ -108,7 +107,7 @@ const TagsList = forwardRef<HTMLUListElement, TagsListProps>(
               aria-label={clearAllLabel}
               variant={ButtonVariants.tertiary}
             >
-              <ArrowPrev />
+              <Icon icon="ArrowPrev" height={24} width={24} />
               <div className={`${px}-label`}>{clearAllLabel}</div>
             </Button>
           </li>
