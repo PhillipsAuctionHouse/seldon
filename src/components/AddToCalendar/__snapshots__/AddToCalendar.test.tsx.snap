@@ -1,0 +1,102 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AddToCalendar component > renders correctly 1`] = `
+<div>
+  <div
+    class="seldon-add-to-calendar"
+    data-testid="add-to-calendar"
+  >
+    <div
+      class="hidden baseClassName"
+      id="add-to-calendar"
+    >
+      <span
+        class="addtocalendar atc-style-icon atc-style-menu-wb"
+      >
+        <a
+          class="atcb-link"
+        >
+          <svg
+            fill="none"
+            height="28"
+            viewBox="0 0 28 28"
+            width="28"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7 12.2505C6.51675 12.2505 6.125 12.6422 6.125 13.1255C6.125 13.6087 6.51675 14.0005 7 14.0005H8.75C9.23325 14.0005 9.625 13.6087 9.625 13.1255C9.625 12.6422 9.23325 12.2505 8.75 12.2505H7Z"
+              fill="black"
+            />
+            <path
+              d="M13.125 12.2505C12.6418 12.2505 12.25 12.6422 12.25 13.1255C12.25 13.6087 12.6418 14.0005 13.125 14.0005H14.875C15.3582 14.0005 15.75 13.6087 15.75 13.1255C15.75 12.6422 15.3582 12.2505 14.875 12.2505H13.125Z"
+              fill="black"
+            />
+            <path
+              d="M19.25 12.2505C18.7668 12.2505 18.375 12.6422 18.375 13.1255C18.375 13.6087 18.7668 14.0005 19.25 14.0005H21C21.4832 14.0005 21.875 13.6087 21.875 13.1255C21.875 12.6422 21.4832 12.2505 21 12.2505H19.25Z"
+              fill="black"
+            />
+            <path
+              d="M7 17.5005C6.51675 17.5005 6.125 17.8922 6.125 18.3755C6.125 18.8587 6.51675 19.2505 7 19.2505H8.75C9.23325 19.2505 9.625 18.8587 9.625 18.3755C9.625 17.8922 9.23325 17.5005 8.75 17.5005H7Z"
+              fill="black"
+            />
+            <path
+              d="M13.125 17.5005C12.6418 17.5005 12.25 17.8922 12.25 18.3755C12.25 18.8587 12.6418 19.2505 13.125 19.2505H14.875C15.3582 19.2505 15.75 18.8587 15.75 18.3755C15.75 17.8922 15.3582 17.5005 14.875 17.5005H13.125Z"
+              fill="black"
+            />
+            <path
+              clip-rule="evenodd"
+              d="M1.75 7.00049C1.75 5.06749 3.317 3.50049 5.25 3.50049H22.75C24.683 3.50049 26.25 5.06749 26.25 7.00049V21.0005C26.25 22.9335 24.683 24.5005 22.75 24.5005H5.25C3.317 24.5005 1.75 22.9335 1.75 21.0005V7.00049ZM24.5 9.62549V21.0005C24.5 21.967 23.7165 22.7505 22.75 22.7505H5.25C4.2835 22.7505 3.5 21.967 3.5 21.0005V9.62549H24.5ZM24.5 7.87549V7.00049C24.5 6.03399 23.7165 5.25049 22.75 5.25049H5.25C4.2835 5.25049 3.5 6.03399 3.5 7.00049V7.87549H24.5Z"
+              fill="black"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </a>
+        <var
+          class="atc_event"
+        >
+          <var
+            class="atc_date_start"
+          >
+            2022-01-01 12:00:00
+          </var>
+          <var
+            class="atc_date_end"
+          >
+            2022-01-01 13:00:00
+          </var>
+          <var
+            class="atc_timezone"
+          >
+            UTC
+          </var>
+          <var
+            class="atc_title"
+          >
+            Test Event
+          </var>
+          <var
+            class="atc_description"
+          >
+            This is a test event
+          </var>
+          <var
+            class="atc_location"
+          >
+            New York
+          </var>
+          <var
+            class="atc_organizer"
+          >
+            John Doe
+          </var>
+          <var
+            class="atc_organizer_email"
+          >
+            johndoe@example.com
+          </var>
+        </var>
+      </span>
+    </div>
+  </div>
+</div>
+`;
