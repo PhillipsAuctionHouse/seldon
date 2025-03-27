@@ -164,6 +164,7 @@ const Pagination = ({
         labelText={selectLabel}
         disabled={isDisabled}
         showIcon={false}
+        id={`${id}-select-button`}
       >
         {options.map((option) => {
           const optionValue = determineOptionValue(option);

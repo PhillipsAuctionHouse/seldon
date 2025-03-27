@@ -124,6 +124,7 @@ const Subscribe = ({
         warn={warn}
         warnText={text}
         required
+        id={`${title}-subscribe-input`}
       />
       <Button
         className={`${baseClassName}__button ${className}`}

@@ -4,9 +4,12 @@ import { ComponentProps, forwardRef, useCallback, useEffect, useState, useRef, u
 import { useCarousel } from './utils';
 import { getCommonProps } from '../../utils';
 import { CarouselDot } from './CarouselDot';
-import { generateUniqueId } from '../../utils/constants';
 
 export interface CarouselDotsProps extends ComponentProps<'div'> {
+  /**
+   * A custom `id` for the `<CarouselDots>`
+   */
+  id: string;
   /**
    * The maximum number of dots to display.
    */
@@ -37,7 +40,7 @@ const centerDotContainer = (dotWidth + dotGap) / 2;
 const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
   ({ className, maxDots = 9, position = 'inline', numberOfSlides = 0, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'CarouselDots');
-    const componentId = useRef(generateUniqueId()).current;
+    const componentId = useRef(props.id).current;
     const { api, onSlideChange } = useCarousel();
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [scrollSnaps, setScrollSnaps] = useState<number[]>(

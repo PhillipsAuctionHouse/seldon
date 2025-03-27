@@ -10,7 +10,3 @@ export const BREAKPOINTS = {
 };
 
 export const DEFAULT_REM_SIZE = 16;
-
-export const generateUniqueId = () => {
-  return `id-${Math.random().toString(36).slice(2, 11)}`;
-};
