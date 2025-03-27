@@ -20,12 +20,12 @@ const getTimeZone = (location: string): string => {
 };
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface AddToCalendarProps extends ComponentProps<'div'> {
-  startDateTimeOffset: string;
-  endDateTimeOffset: string;
-  timeZone: string;
-  title: string;
+  startDateTimeOffset?: string;
+  endDateTimeOffset?: string;
+  timeZone?: string;
+  title?: string;
   description?: string;
-  location: string;
+  location?: string;
   organizer?: string;
   organizerEmail?: string;
 }

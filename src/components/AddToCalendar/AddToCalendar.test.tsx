@@ -59,6 +59,13 @@ describe('AddToCalendar component', () => {
     expect(button).toHaveClass('atc-style-icon');
     expect(button).toHaveClass('atc-style-menu-wb');
   });
+  it('displays the correct time zone', () => {
+    const baseprops = { ...props, location: 'Geneva' };
+    const { container } = render(<AddToCalendar {...baseprops} />);
+    const timeZoneElement = container.querySelector('var.atc_timezone');
+    expect(timeZoneElement).toHaveTextContent('UTC');
+  });
+
   it('renders the correct timezone for a given location', () => {
     const { container } = render(<AddToCalendar {...props} />);
     const timeZoneElement = container.querySelector('var.atc_timezone');
@@ -93,5 +100,62 @@ describe('AddToCalendar component', () => {
       expect(error).toBeInstanceOf(RangeError);
     }
     expect(consoleErrorSpy).toHaveBeenCalledTimes(3);
+  });
+  it('returns null when startDateTimeOffset is falsy', () => {
+    const props = {
+      startDateTimeOffset: '',
+      endDateTimeOffset: '2022-01-01T12:00:00',
+      timeZone: 'UTC',
+      title: 'Test Event',
+      description: 'This is a test event',
+      location: 'New York',
+      organizer: 'John Doe',
+      organizerEmail: 'johndoe@example.com',
+    };
+    const { container } = render(<AddToCalendar {...props} />);
+    expect(container).toBeEmptyDOMElement();
+  });
+
+  it('renders the component when startDateTimeOffset is truthy', () => {
+    const props = {
+      startDateTimeOffset: '2022-01-01T12:00:00',
+      endDateTimeOffset: '2022-01-01T13:00:00',
+      timeZone: 'UTC',
+      title: 'Test Event',
+      description: 'This is a test event',
+      location: 'New York',
+      organizer: 'John Doe',
+      organizerEmail: 'johndoe@example.com',
+    };
+    const { container } = render(<AddToCalendar {...props} />);
+    expect(container).not.toBeEmptyDOMElement();
+  });
+  it('renders correctly with startDateTimeOffset', () => {
+    const props = {
+      startDateTimeOffset: '2022-01-01T12:00:00',
+      endDateTimeOffset: '2022-01-01T13:00:00',
+      timeZone: 'UTC',
+      title: 'Test Event',
+      description: 'This is a test event',
+      location: 'New York',
+      organizer: 'John Doe',
+      organizerEmail: 'johndoe@example.com',
+    };
+    const { container } = render(<AddToCalendar {...props} />);
+    expect(container).toMatchSnapshot();
+  });
+
+  it('renders correctly without startDateTimeOffset', () => {
+    const props = {
+      endDateTimeOffset: '2022-01-01T13:00:00',
+      timeZone: 'UTC',
+      title: 'Test Event',
+      description: 'This is a test event',
+      location: 'New York',
+      organizer: 'John Doe',
+      organizerEmail: 'johndoe@example.com',
+    };
+    const { container } = render(<AddToCalendar {...props} />);
+    expect(container).toBeEmptyDOMElement();
   });
 });
