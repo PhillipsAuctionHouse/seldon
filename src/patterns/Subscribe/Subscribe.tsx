@@ -24,6 +24,10 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
    */
   element?: React.ElementType<SubscribeProps>;
   /**
+   * A custom `id` for the `<Subscribe>`
+   */
+  id: string;
+  /**
    * Subscribe input label
    */
   inputLabelText?: string;
@@ -124,7 +128,7 @@ const Subscribe = ({
         warn={warn}
         warnText={text}
         required
-        id={`${title}-subscribe-input`}
+        id={props.id}
       />
       <Button
         className={`${baseClassName}__button ${className}`}

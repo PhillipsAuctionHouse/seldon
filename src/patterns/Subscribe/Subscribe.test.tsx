@@ -14,16 +14,17 @@ describe('Subscribe', () => {
   });
 
   it('it will render a blurb if one is passed in', () => {
-    render(<Subscribe title="Subscribe to Email" blurb="This blurb will be rendered" />);
+    render(<Subscribe id="test-id" title="Subscribe to Email" blurb="This blurb will be rendered" />);
     expect(screen.getByText(/This blurb will be rendered/)).toBeInTheDocument();
   });
   it('it will render a loading if subscriptionState=loading', () => {
-    render(<Subscribe title="Subscribe to Email" subscriptionState={SubscriptionState.Loading} />);
+    render(<Subscribe id="test-loading" title="Subscribe to Email" subscriptionState={SubscriptionState.Loading} />);
     expect(screen.getByText(/Loading.../)).toBeInTheDocument();
   });
   it('it will render an error if subscriptionState=invalid and invalidText passed', () => {
     render(
       <Subscribe
+        id="test-invalid"
         title="Subscribe to Email"
         subscriptionState={SubscriptionState.Invalid}
         invalidText="Invalid input"
@@ -33,13 +34,23 @@ describe('Subscribe', () => {
   });
   it('it will render an error if subscriptionState=error and errorText passed', () => {
     render(
-      <Subscribe title="Subscribe to Email" subscriptionState={SubscriptionState.Error} errorText="Network error" />,
+      <Subscribe
+        id="test-error"
+        title="Subscribe to Email"
+        subscriptionState={SubscriptionState.Error}
+        errorText="Network error"
+      />,
     );
     expect(screen.getByText(/Network error/)).toBeInTheDocument();
   });
   it('it will render an success text if subscriptionState=success', () => {
     render(
-      <Subscribe title="Subscribe to Email" subscriptionState={SubscriptionState.Success} successText="Success" />,
+      <Subscribe
+        id="test-success"
+        title="Subscribe to Email"
+        subscriptionState={SubscriptionState.Success}
+        successText="Success"
+      />,
     );
     expect(screen.getByText(/Success/)).toBeInTheDocument();
   });
@@ -54,6 +65,7 @@ describe('Subscribe', () => {
     });
     render(
       <Subscribe
+        id="test-submit"
         title="Subscribe to Email"
         blurb="This blurb will be rendered"
         buttonProps={{ onClick: mockCallback }}
