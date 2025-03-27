@@ -128,7 +128,7 @@ const Subscribe = ({
         warn={warn}
         warnText={text}
         required
-        id={props.id}
+        id={`${props.id}-input`}
       />
       <Button
         className={`${baseClassName}__button ${className}`}
