@@ -4,20 +4,8 @@ import classnames from 'classnames';
 import { format } from 'date-fns/format';
 import initializeAddToCalendar from './initializeAddToCalendar';
 import { CalendarAlt } from '../../assets/icons';
+import { getTimeZone } from './utils';
 
-const getTimeZone = (location: string): string => {
-  const locations: { [key: string]: string } = {
-    Geneva: 'Europe/Paris',
-    'Hong Kong': 'Asia/Hong_Kong',
-    London: 'Europe/London',
-    'New York': 'America/New_York',
-    Paris: 'Europe/Paris',
-    Shanghai: 'Europe/London',
-    Singapore: 'Asia/Singapore',
-    Taipei: 'Europe/London',
-  };
-  return locations[location] || '';
-};
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface AddToCalendarProps extends ComponentProps<'div'> {
   startDateTimeOffset?: string;

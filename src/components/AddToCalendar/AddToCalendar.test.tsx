@@ -1,5 +1,6 @@
 import { render, waitFor } from '@testing-library/react';
 import AddToCalendar from './AddToCalendar';
+import { getTimeZone } from './utils';
 
 const props = {
   startDateTimeOffset: '2022-01-01T12:00:00',
@@ -11,6 +12,30 @@ const props = {
   organizer: 'John Doe',
   organizerEmail: 'johndoe@example.com',
 };
+
+describe('getTimeZone', () => {
+  it('should return the correct time zone for a known location', () => {
+    expect(getTimeZone('Geneva')).toBe('Europe/Paris');
+
+    expect(getTimeZone('Hong Kong')).toBe('Asia/Hong_Kong');
+
+    expect(getTimeZone('London')).toBe('Europe/London');
+
+    expect(getTimeZone('New York')).toBe('America/New_York');
+
+    expect(getTimeZone('Paris')).toBe('Europe/Paris');
+
+    expect(getTimeZone('Singapore')).toBe('Asia/Singapore');
+  });
+
+  it('should return an empty string for an unknown location', () => {
+    expect(getTimeZone('Unknown City')).toBe('');
+
+    expect(getTimeZone('')).toBe(''); //test empty string
+
+    expect(getTimeZone(undefined as unknown as string)).toBe(''); //test undefined
+  });
+});
 
 describe('AddToCalendar component', () => {
   it('renders correctly', () => {
