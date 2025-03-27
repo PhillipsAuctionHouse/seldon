@@ -1,34 +1,24 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import AddToCalendar from './AddToCalendar';
+
+const props = {
+  startDateTimeOffset: '2022-01-01T12:00:00',
+  endDateTimeOffset: '2022-01-01T13:00:00',
+  timeZone: 'UTC',
+  title: 'Test Event',
+  description: 'This is a test event',
+  location: 'New York',
+  organizer: 'John Doe',
+  organizerEmail: 'johndoe@example.com',
+};
 
 describe('AddToCalendar component', () => {
   it('renders correctly', () => {
-    const props = {
-      startDateTimeOffset: '2022-01-01T12:00:00',
-      endDateTimeOffset: '2022-01-01T13:00:00',
-      timeZone: 'UTC',
-      title: 'Test Event',
-      description: 'This is a test event',
-      location: 'New York',
-      organizer: 'John Doe',
-      organizerEmail: 'johndoe@example.com',
-    };
-
     const { container } = render(<AddToCalendar {...props} />);
     expect(container).toMatchSnapshot();
   });
 
   it('renders calendar icon with correct SVG paths', () => {
-    const props = {
-      startDateTimeOffset: '2022-01-01T12:00:00',
-      endDateTimeOffset: '2022-01-01T13:00:00',
-      timeZone: 'UTC',
-      title: 'Test Event',
-      description: 'This is a test event',
-      location: 'New York',
-      organizer: 'John Doe',
-      organizerEmail: 'johndoe@example.com',
-    };
     const { container } = render(<AddToCalendar {...props} />);
     const svg = container.querySelector('svg');
     expect(svg).toBeInTheDocument();
@@ -39,18 +29,7 @@ describe('AddToCalendar component', () => {
   });
 
   it('renders event details', () => {
-    const props = {
-      startDateTimeOffset: '2022-01-01T12:00:00',
-      endDateTimeOffset: '2022-01-01T13:00:00',
-      timeZone: 'UTC',
-      title: 'Test Event',
-      description: 'This is a test event',
-      location: 'New York',
-      organizer: 'John Doe',
-      organizerEmail: 'johndoe@example.com',
-    };
     const { container } = render(<AddToCalendar {...props} />);
-
     const eventDetails = container.querySelector('var.atc_event');
     expect(eventDetails).toBeInTheDocument();
     if (eventDetails) {
@@ -74,20 +53,45 @@ describe('AddToCalendar component', () => {
   });
 
   it('renders Add to Calendar button with correct class names', () => {
-    const props = {
-      startDateTimeOffset: '2022-01-01T12:00:00',
-      endDateTimeOffset: '2022-01-01T13:00:00',
-      timeZone: 'UTC',
-      title: 'Test Event',
-      description: 'This is a test event',
-      location: 'New York',
-      organizer: 'John Doe',
-      organizerEmail: 'johndoe@example.com',
-    };
     const { container } = render(<AddToCalendar {...props} />);
     const button = container.querySelector('span.addtocalendar');
     expect(button).toBeInTheDocument();
     expect(button).toHaveClass('atc-style-icon');
     expect(button).toHaveClass('atc-style-menu-wb');
+  });
+  it('renders the correct timezone for a given location', () => {
+    const { container } = render(<AddToCalendar {...props} />);
+    const timeZoneElement = container.querySelector('var.atc_timezone');
+    expect(timeZoneElement).toHaveTextContent('UTC');
+  });
+
+  it('renders the correct date format', () => {
+    const { container } = render(<AddToCalendar {...props} />);
+    const dateElement = container.querySelector('var.atc_date_start');
+    expect(dateElement).toHaveTextContent('2022-01-01 12:00:00');
+  });
+
+  it('initializes the calendar on mount', async () => {
+    const { container } = render(<AddToCalendar {...props} />);
+    await waitFor(() => expect(container.querySelector('div#add-to-calendar')).toBeInTheDocument());
+  });
+
+  it('renders the component with the correct props', () => {
+    const { container } = render(<AddToCalendar {...props} />);
+    expect(container.querySelector('var.atc_date_start')).toHaveTextContent('2022-01-01 12:00:00');
+  });
+  it('handles errors correctly', () => {
+    const consoleErrorSpy = vi.spyOn(console, 'error');
+    consoleErrorSpy.mockImplementation((error) => {
+      console.log('Error occurred:', error);
+    });
+
+    const baseprops = { ...props, startDateTimeOffset: 'invalid-date' };
+    try {
+      render(<AddToCalendar {...baseprops} />);
+    } catch (error) {
+      expect(error).toBeInstanceOf(RangeError);
+    }
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(3);
   });
 });
