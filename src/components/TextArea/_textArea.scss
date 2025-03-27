@@ -6,6 +6,7 @@
   accent-color: $soft-black;
   border: 1px solid $keyline-gray;
   border-radius: 0.1875rem;
+  min-height: 50px; // 50px is the height of 2 rows
   padding: $padding-xsm;
   resize: vertical;
   width: 100%;
