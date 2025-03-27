@@ -177,7 +177,7 @@ const Input = React.forwardRef(
           className={classnames(`${px}-input__input`, className, {
             [`${px}-skeleton`]: isSkeletonLoading,
           })}
-          data-testid={id}
+          data-testid={`${id}-input`}
           disabled={inputProps.disabled}
           id={id}
           onChange={onChange}
