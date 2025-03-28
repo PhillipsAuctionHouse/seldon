@@ -7,7 +7,7 @@ import { CarouselDot } from './CarouselDot';
 
 export interface CarouselDotsProps extends ComponentProps<'div'> {
   /**
-   * A custom `id` for the `<CarouselDots>`
+   * A unique `id` for the `<CarouselDots>`
    */
   id: string;
   /**
