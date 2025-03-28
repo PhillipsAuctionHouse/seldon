@@ -1,8 +1,6 @@
 import { act, render, renderHook, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Header from './Header';
-import LogoSVG from '../../assets/PhillipsLogo.svg?react';
-import LogoIMG from '../../assets/PhillipsLogo.svg';
 import { px } from '../../utils';
 import Navigation from '../../components/Navigation/Navigation';
 import NavigationItem from '../../components/Navigation/NavigationItem/NavigationItem';
@@ -11,10 +9,11 @@ import NavigationList from '../../components/Navigation/NavigationList/Navigatio
 import { LinkVariants } from '../../components/Link/types';
 import Search from '../../components/Search/Search';
 import { useMobileMenu } from './hooks';
+import { Icon } from '../../components/Icon';
 
 describe('Header', () => {
   const headerComponent = () => (
-    <Header logo={LogoIMG}>
+    <Header logo={<Icon icon="PhillipsLogo" />}>
       <Navigation id={`${px}-main-nav`}>
         <NavigationList id={`${px}-main-nav-list`}>
           <NavigationItemTrigger id="auctions" label={`Auctions`}>
@@ -56,27 +55,22 @@ describe('Header', () => {
 });
 
 describe('Header with logo', () => {
-  it('should render the logo as an object', () => {
-    render(<Header logo={<LogoSVG />} />);
-    const logoElement = screen.getByTestId('header-logo-svg');
+  it('should render the logo', () => {
+    render(<Header logo={<Icon icon="PhillipsLogo" />} />);
+    const logoElement = screen.getByTestId('icon-phillips-logo');
     expect(logoElement).toBeInTheDocument();
   });
   it('logo should be clickable', () => {
-    render(<Header logo={<LogoSVG />} />);
+    render(<Header logo={<Icon icon="PhillipsLogo" />} />);
     const logoElement = screen.getByRole('link', { name: 'Home Page' });
     expect(logoElement).toBeInTheDocument();
     expect(logoElement).toHaveAttribute('href', '/');
   });
   it('logo text should be used', () => {
-    render(<Header logo={<LogoSVG />} logoText="Logo Text" />);
+    render(<Header logo={<Icon icon="PhillipsLogo" />} logoText="Logo Text" />);
     const logoElement = screen.getByRole('link', { name: 'Logo Text' });
     expect(logoElement).toBeInTheDocument();
     expect(logoElement).toHaveAttribute('href', '/');
-  });
-  it('should render the logo as an image', () => {
-    render(<Header logo={LogoIMG} />);
-    const logoElement = screen.getByTestId('header-logo');
-    expect(logoElement).toContainHTML(`<img  alt="Phillips" data-testid="header-logo-img" src=${LogoIMG} />`);
   });
 });
 

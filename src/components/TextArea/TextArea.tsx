@@ -2,7 +2,7 @@ import { ComponentProps, forwardRef, useId } from 'react';
 import classnames from 'classnames';
 
 import { px } from '../../utils';
-import { Menu } from '../../assets/icons';
+import { Icon } from '../Icon';
 
 export interface TextAreaProps extends ComponentProps<'textarea'> {
   /**
@@ -56,7 +56,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           data-testid={`text-area-${id ?? generatedId}-input`}
         />
         <div className={`${baseClassName}-resizer__icon`}>
-          <Menu />
+          <Icon icon="Menu" />
         </div>
       </div>
     );

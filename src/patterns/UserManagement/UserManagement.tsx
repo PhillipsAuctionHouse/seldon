@@ -1,10 +1,10 @@
 import { ComponentProps, ElementType, forwardRef, ReactNode } from 'react';
 import { getCommonProps, noOp } from '../../utils';
-import AccountCircle from '../../assets/account_circle.svg?react';
 import { LinkProps } from '../../components/Link/Link';
 import classnames from 'classnames';
 import { AuthState } from './types';
 import { Text, TextVariants } from '../../components/Text';
+import { Icon } from '../../components/Icon';
 
 export interface UserManagementProps extends ComponentProps<'div'> {
   /**
@@ -63,12 +63,22 @@ const UserManagement = forwardRef<HTMLDivElement, UserManagementProps>(
           <>
             {isLoggedIn ? (
               <AccountDetailsComponent className={`${baseClassName}__login`} href={href} disabled={disabled}>
-                <AccountCircle className={`${baseClassName}__account-icon`} />
+                <Icon
+                  icon="AccountCircle"
+                  className={`${baseClassName}__account-icon`}
+                  height="1.5rem"
+                  width="1.5rem"
+                />
                 <Text variant={TextVariants.body3}>{accountLabel}</Text>
               </AccountDetailsComponent>
             ) : (
               <button className={`${baseClassName}__login`} onClick={onLogin} disabled={disabled}>
-                <AccountCircle className={`${baseClassName}__account-icon`} />
+                <Icon
+                  icon="AccountCircle"
+                  className={`${baseClassName}__account-icon`}
+                  height="1.5rem"
+                  width="1.5rem"
+                />
                 <Text variant={TextVariants.body3}>{loginLabel}</Text>
               </button>
             )}

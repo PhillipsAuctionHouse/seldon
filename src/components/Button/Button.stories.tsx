@@ -1,8 +1,8 @@
 import type { Meta } from '@storybook/react';
 
 import Button, { ButtonProps } from './Button';
-import Plus from '../../assets/plus.svg?react';
 import { ButtonVariants } from './types';
+import { Icon } from '../Icon';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -24,9 +24,9 @@ export default meta;
 
 export const ButtonWithIcon = (props: ButtonProps) => (
   <Button {...props}>
-    {!props.isIconLast ? <Plus /> : null}
+    {!props.isIconLast ? <Icon icon="Plus" /> : null}
     This is the title
-    {props.isIconLast ? <Plus /> : null}
+    {props.isIconLast ? <Icon icon="Plus" /> : null}
   </Button>
 );
 

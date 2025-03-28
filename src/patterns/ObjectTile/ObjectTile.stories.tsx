@@ -4,9 +4,8 @@ import { addMinutes } from 'date-fns';
 import ObjectTile from './ObjectTile';
 import { LotStatus } from '../../types/commonTypes';
 import { BidMessage, BidSnapshot, BidStatusEnum } from '../BidSnapshot';
-import { Favorite } from '../../assets/icons';
-import MagificentSeven from './magnificent-seven.svg?react';
 import { ComponentProps } from 'react';
+import { Icon } from '../../components/Icon';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -18,8 +17,8 @@ export default meta;
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 const args = {
   badgeText: 'No Reserve',
-  badgeElement: () => <MagificentSeven />,
-  favoriteElement: () => <Favorite />,
+  badgeElement: () => <Icon icon="MagnificentSeven" width={150} height={24} />,
+  favoriteElement: () => <Icon icon="Favorite" />,
   estimate: '$1,500,000 - $3,000,000',
   element: 'span',
   children: (

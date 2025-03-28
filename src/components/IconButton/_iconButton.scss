@@ -8,7 +8,7 @@
   padding: 0;
   width: $spacing-md;
 
-  & > svg {
+  & svg {
     height: $button-label-line-height;
     width: $button-label-line-height;
   }
@@ -29,7 +29,7 @@
     background: $pure-white;
     color: $pure-black;
 
-    & > svg {
+    & svg {
       fill: $pure-black;
       height: calc($button-label-line-height * 1.5); // design-cheats-for-button-large
       margin-inline-end: unset;
@@ -93,10 +93,9 @@
     &:hover {
       background-color: $button-hover;
 
-      & > svg {
+      & svg {
         fill: $pure-white;
         margin-inline-end: unset;
-        position: absolute;
 
         path {
           fill: $pure-white;

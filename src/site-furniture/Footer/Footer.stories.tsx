@@ -3,14 +3,10 @@ import type { Meta } from '@storybook/react';
 import Footer, { FooterProps } from './Footer';
 import { px } from '../../utils';
 
-import Instagram from '../../assets/icon-footer-instagram.svg?react';
-import Linkedin from '../../assets/icon-footer-linkedin.svg?react';
-import Wechat from '../../assets/icon-footer-wechat.svg?react';
-import Red from '../../assets/icon-footer-red.svg?react';
-import Facebook from '../../assets/icon-footer-facebook.svg?react';
 import Social from '../../patterns/Social/Social';
 import { Accordion, AccordionItem } from '../../components/Accordion';
 import { Text, TextVariants } from '../../components/Text';
+import { Icon } from '../../components/Icon';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -67,27 +63,27 @@ export const Playground = (props: FooterProps) => (
       <ul>
         <li>
           <a>
-            <Instagram />
+            <Icon icon="IconFooterInstagram" />
           </a>
         </li>
         <li>
           <a>
-            <Linkedin />
+            <Icon icon="IconFooterLinkedin" />
           </a>
         </li>
         <li>
           <a>
-            <Wechat />
+            <Icon icon="IconFooterWechat" />
           </a>
         </li>
         <li>
           <a>
-            <Red />
+            <Icon icon="IconFooterRed" />
           </a>
         </li>
         <li>
           <a>
-            <Facebook />
+            <Icon icon="IconFooterFacebook" />
           </a>
         </li>
       </ul>

@@ -35,7 +35,7 @@ describe('UserManagement', () => {
   it('disabled if passed', async () => {
     const onLoginMock = vitest.fn();
     render(<UserManagement disabled onLogin={onLoginMock} />);
-    const loginLinkElement = screen.getByRole('button', { name: 'Login' });
+    const loginLinkElement = screen.getByRole('button', { name: /Login/ });
     expect(loginLinkElement).toBeDisabled();
     await userEvent.click(loginLinkElement);
     expect(onLoginMock).not.toHaveBeenCalled();
@@ -52,7 +52,7 @@ describe('UserManagement', () => {
   it('renders account link when logged in', () => {
     const href = '/my-account';
     render(<UserManagement authState={AuthState.LoggedIn} accountLabel="My Account" href={href} />);
-    const accountLinkElement = screen.getByRole('link', { name: 'My Account' });
+    const accountLinkElement = screen.getByRole('link', { name: /My Account/ });
     expect(accountLinkElement).toBeInTheDocument();
     expect(accountLinkElement).toHaveAttribute('href', href);
   });
