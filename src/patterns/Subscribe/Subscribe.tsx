@@ -24,6 +24,10 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
    */
   element?: React.ElementType<SubscribeProps>;
   /**
+   * A custom `id` for the `<Subscribe>`
+   */
+  id: string;
+  /**
    * Subscribe input label
    */
   inputLabelText?: string;
@@ -90,7 +94,7 @@ const Subscribe = ({
   ...props
 }: SubscribeProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Subscribe');
-
+  const { id } = props;
   const isInvalid = subscriptionState === SubscriptionState.Invalid;
   const isLoading = subscriptionState === SubscriptionState.Loading;
   const isSuccess = subscriptionState === SubscriptionState.Success;
@@ -124,6 +128,7 @@ const Subscribe = ({
         warn={warn}
         warnText={text}
         required
+        id={`${id}-input`}
       />
       <Button
         className={`${baseClassName}__button ${className}`}

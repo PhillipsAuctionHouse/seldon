@@ -77,7 +77,7 @@ describe('Footer', () => {
 
   it('renders the components we pass to it', () => {
     render(<Footer {...commonProps} />);
-    expect(screen.queryByTestId(/subscribe/)).toBeInTheDocument();
+    expect(screen.queryByTestId('subscribe-subscribe')).toBeInTheDocument();
     expect(screen.queryByTestId(/social/)).toBeInTheDocument();
   });
 });

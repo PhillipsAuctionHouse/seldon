@@ -93,12 +93,12 @@ export const CarouselWithDots = (props: CarouselProps & CarouselDotsProps) => (
         </CarouselItem>
       ))}
     </CarouselContent>
-    <CarouselDots maxDots={props.maxDots} position={props.position} numberOfSlides={9} />
+    <CarouselDots maxDots={props.maxDots} position={props.position} numberOfSlides={9} id={props.id} />
   </Carousel>
 );
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-CarouselWithDots.args = { maxDots: 9 } satisfies CarouselProps & CarouselDotsProps;
+CarouselWithDots.args = { maxDots: 9, id: 'carousel-dots' } satisfies CarouselProps & CarouselDotsProps;
 
 CarouselWithDots.argTypes = {};
 
@@ -123,13 +123,13 @@ export const CarouselWithDotsAndArrows = (props: CarouselProps & CarouselDotsPro
         </CarouselItem>
       ))}
     </CarouselContent>
-    <CarouselDots maxDots={props.maxDots} position={props.position} numberOfSlides={9} />
+    <CarouselDots maxDots={props.maxDots} position={props.position} numberOfSlides={9} id={props.id} />
     <CarouselArrows />
   </Carousel>
 );
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-CarouselWithDotsAndArrows.args = { maxDots: 9 } satisfies CarouselProps & CarouselDotsProps;
+CarouselWithDotsAndArrows.args = { maxDots: 9, id: 'carousel-dots-arrows' } satisfies CarouselProps & CarouselDotsProps;
 
 CarouselWithDotsAndArrows.argTypes = {};
 
@@ -154,12 +154,13 @@ export const CarouselWithDotsOverflow = (props: CarouselProps & CarouselDotsProp
         </CarouselItem>
       ))}
     </CarouselContent>
-    <CarouselDots maxDots={props.maxDots} position={props.position} numberOfSlides={20} />
+    <CarouselDots maxDots={props.maxDots} position={props.position} numberOfSlides={20} id={props.id} />
   </Carousel>
 );
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-CarouselWithDotsOverflow.args = { maxDots: 9 } satisfies CarouselProps & CarouselDotsProps;
+CarouselWithDotsOverflow.args = { maxDots: 9, id: 'carousel-dots-overflow' } satisfies CarouselProps &
+  CarouselDotsProps;
 
 CarouselWithDotsOverflow.argTypes = {};
 
@@ -187,12 +188,12 @@ export const ControlledCarousel = (props: CarouselProps & CarouselDotsProps) => 
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselDots maxDots={props.maxDots} position={props.position} numberOfSlides={9} />
+      <CarouselDots maxDots={props.maxDots} position={props.position} numberOfSlides={9} id={props.id} />
     </Carousel>
   );
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-CarouselWithDots.args = {} satisfies CarouselProps & CarouselDotsProps;
+CarouselWithDots.args = { id: 'carousel-dots' } satisfies CarouselProps & CarouselDotsProps;
 
 CarouselWithDots.argTypes = {};
