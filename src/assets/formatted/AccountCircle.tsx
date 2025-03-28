@@ -16,7 +16,7 @@ const SvgAccountCircle = memo(
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        fill="none"
+        fill={color}
         viewBox="0 0 16 16"
         height={height}
         width={width}
@@ -26,7 +26,7 @@ const SvgAccountCircle = memo(
         {...props}
       >
         {title ? <title id={titleId}>{title}</title> : null}
-        <g fill={color} clipPath="url(#account_circle_svg__a)">
+        <g clipPath="url(#account_circle_svg__a)">
           <path
             fillRule="evenodd"
             d="M10.5 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0m-1 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"

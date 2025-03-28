@@ -44,7 +44,8 @@ describe('SeldonImage', () => {
     const image = screen.getByTestId(`seldon-image-img`);
     await waitFor(() => {
       fireEvent.error(image);
-      const errorPlaceholder = screen.getByRole('img', { name: 'Error loading image' });
+      const imgs = screen.getAllByRole('img');
+      const errorPlaceholder = imgs.find((img) => img.getAttribute('aria-label') === 'Error loading image');
       expect(errorPlaceholder).toBeInTheDocument();
     });
   });
