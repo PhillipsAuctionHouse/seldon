@@ -1,3 +1,10 @@
+# [1.132.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.131.0...v1.132.0) (2025-03-28)
+
+
+### Features
+
+* **textarea:** L3-5975 Add textarea component ([#551](https://github.com/PhillipsAuctionHouse/seldon/issues/551)) ([da4847d](https://github.com/PhillipsAuctionHouse/seldon/commit/da4847de26f3a9007b045d3388b057677f65117c))
+
 # [1.131.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.130.1...v1.131.0) (2025-03-26)
 
 
