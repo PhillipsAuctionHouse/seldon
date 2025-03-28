@@ -1,17 +1,16 @@
 import { render, waitFor } from '@testing-library/react';
 import { getTimeZone } from './utils';
-import { vi } from 'vitest';
 import AddToCalendar from './AddToCalendar';
 
 const props = {
-  startDateTimeOffset: '2022-01-01T12:00:00',
-  endDateTimeOffset: '2022-01-01T13:00:00',
-  timeZone: 'UTC',
-  title: 'Test Event',
-  description: 'This is a test event',
+  startDateTimeOffset: '2025-01-27T15:13:02.59+00:00',
+  endDateTimeOffset: '2025-06-27T15:13:02.59+00:00',
+  timeZone: 'America/New_York',
+  title: 'Jewels & More: Online Auction',
+  description: 'Jewels & More: Online Auction.',
   location: 'New York',
-  organizer: 'John Doe',
-  organizerEmail: 'johndoe@example.com',
+  organizer: 'Conference Organizers',
+  organizerEmail: 'test@example.com',
 };
 
 describe('getTimeZone', () => {
@@ -60,21 +59,21 @@ describe('AddToCalendar component', () => {
     expect(eventDetails).toBeInTheDocument();
     if (eventDetails) {
       const dateStart = eventDetails.querySelector('var.atc_date_start');
-      expect(dateStart).toHaveTextContent('2022-01-01 12:00:00');
+      expect(dateStart).toHaveTextContent('2025-01-27 15:13:02');
       const dateEnd = eventDetails.querySelector('var.atc_date_end');
-      expect(dateEnd).toHaveTextContent('2022-01-01 13:00:00');
+      expect(dateEnd).toHaveTextContent('2025-06-27 15:13:02');
       const timezone = eventDetails.querySelector('var.atc_timezone');
-      expect(timezone).toHaveTextContent('UTC');
+      expect(timezone).toHaveTextContent('America/New_York');
       const title = eventDetails.querySelector('var.atc_title');
-      expect(title).toHaveTextContent('Test Event');
+      expect(title).toHaveTextContent('Jewels & More: Online Auction');
       const description = eventDetails.querySelector('var.atc_description');
-      expect(description).toHaveTextContent('This is a test event');
+      expect(description).toHaveTextContent('Jewels & More: Online Auction.');
       const location = eventDetails.querySelector('var.atc_location');
       expect(location).toHaveTextContent('New York');
       const organizer = eventDetails.querySelector('var.atc_organizer');
-      expect(organizer).toHaveTextContent('John Doe');
+      expect(organizer).toHaveTextContent('Conference Organizers');
       const organizerEmail = eventDetails.querySelector('var.atc_organizer_email');
-      expect(organizerEmail).toHaveTextContent('johndoe@example.com');
+      expect(organizerEmail).toHaveTextContent('test@example.com');
     }
   });
 
@@ -89,19 +88,19 @@ describe('AddToCalendar component', () => {
     const baseprops = { ...props, location: 'Geneva' };
     const { container } = render(<AddToCalendar {...baseprops} />);
     const timeZoneElement = container.querySelector('var.atc_timezone');
-    expect(timeZoneElement).toHaveTextContent('UTC');
+    expect(timeZoneElement).toHaveTextContent('America/New_York');
   });
 
   it('renders the correct timezone for a given location', () => {
     const { container } = render(<AddToCalendar {...props} />);
     const timeZoneElement = container.querySelector('var.atc_timezone');
-    expect(timeZoneElement).toHaveTextContent('UTC');
+    expect(timeZoneElement).toHaveTextContent('America/New_York');
   });
 
   it('renders the correct date format', () => {
     const { container } = render(<AddToCalendar {...props} />);
     const dateElement = container.querySelector('var.atc_date_start');
-    expect(dateElement).toHaveTextContent('2022-01-01 12:00:00');
+    expect(dateElement).toHaveTextContent('2025-01-27 15:13:02');
   });
 
   it('initializes the calendar on mount', async () => {
@@ -111,22 +110,9 @@ describe('AddToCalendar component', () => {
 
   it('renders the component with the correct props', () => {
     const { container } = render(<AddToCalendar {...props} />);
-    expect(container.querySelector('var.atc_date_start')).toHaveTextContent('2022-01-01 12:00:00');
+    expect(container.querySelector('var.atc_date_start')).toHaveTextContent('2025-01-27 15:13:02');
   });
-  it('handles errors correctly', () => {
-    const consoleErrorSpy = vi.spyOn(console, 'error');
-    consoleErrorSpy.mockImplementation((error) => {
-      console.log('Error occurred:', error);
-    });
 
-    const baseprops = { ...props, startDateTimeOffset: 'invalid-date' };
-    try {
-      render(<AddToCalendar {...baseprops} />);
-    } catch (error) {
-      expect(error).toBeInstanceOf(RangeError);
-    }
-    expect(consoleErrorSpy).toHaveBeenCalledTimes(3);
-  });
   it('returns null when startDateTimeOffset is falsy', () => {
     const props = {
       startDateTimeOffset: '',

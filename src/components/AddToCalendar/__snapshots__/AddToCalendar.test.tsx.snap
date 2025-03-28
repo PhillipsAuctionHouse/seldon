@@ -57,27 +57,27 @@ exports[`AddToCalendar component > renders correctly 1`] = `
           <var
             class="atc_date_start"
           >
-            2022-01-01 12:00:00
+            2025-01-27 15:13:02
           </var>
           <var
             class="atc_date_end"
           >
-            2022-01-01 13:00:00
+            2025-06-27 15:13:02
           </var>
           <var
             class="atc_timezone"
           >
-            UTC
+            America/New_York
           </var>
           <var
             class="atc_title"
           >
-            Test Event
+            Jewels & More: Online Auction
           </var>
           <var
             class="atc_description"
           >
-            This is a test event
+            Jewels & More: Online Auction.
           </var>
           <var
             class="atc_location"
@@ -87,12 +87,12 @@ exports[`AddToCalendar component > renders correctly 1`] = `
           <var
             class="atc_organizer"
           >
-            John Doe
+            Conference Organizers
           </var>
           <var
             class="atc_organizer_email"
           >
-            johndoe@example.com
+            test@example.com
           </var>
         </var>
       </span>
