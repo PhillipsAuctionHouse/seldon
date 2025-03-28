@@ -133,7 +133,7 @@ export const ZoomCarousel = () => {
 };
 
 const images = [
-  'https://whitneymedia.org/assets/artwork/6896/70_1164_cropped.jpeg',
+  'https://images.pexels.com/photos/1762973/pexels-photo-1762973.jpeg',
   'https://whitneymedia.org/assets/artwork/732/50_8_cropped.jpeg',
   'https://whitneymedia.org/assets/image/828142/large_RS18772_MoMA_NY-Movie_ART162191_web.jpg',
 ];
