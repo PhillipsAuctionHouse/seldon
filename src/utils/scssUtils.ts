@@ -18,7 +18,7 @@ export const getScssVar = (scssVar: string, defaultValue: string): string => {
 
 // Finds all color variables set in _vars.scss and returns the name of each
 export const getScssColors = (): string[] => {
-  const parsedVars = vars.split('\n');
+  const parsedVars = vars.replace(/\r/g, '').split('\n');
 
   const colors: string[] = parsedVars
     .map((_var) => {

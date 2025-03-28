@@ -22,6 +22,7 @@ export { default as IconRedCircle } from './IconRedCircle';
 export { default as Instagram } from './Instagram';
 export { default as Lock } from './Lock';
 export { default as MagnificentSeven } from './MagnificentSeven';
+export { default as Menu } from './Menu';
 export { default as Minus } from './Minus';
 export { default as PhillipsAppIcon } from './PhillipsAppIcon';
 export { default as PhillipsLogo } from './PhillipsLogo';
