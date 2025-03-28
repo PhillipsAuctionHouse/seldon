@@ -1,6 +1,7 @@
 import { render, waitFor } from '@testing-library/react';
-import AddToCalendar from './AddToCalendar';
 import { getTimeZone } from './utils';
+import { vi } from 'vitest';
+import AddToCalendar from './AddToCalendar';
 
 const props = {
   startDateTimeOffset: '2022-01-01T12:00:00',
