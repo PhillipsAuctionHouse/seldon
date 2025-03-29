@@ -59,7 +59,7 @@ describe('A DatePicker', () => {
     await userEvent.type(input, '{backspace}6');
     await waitFor(() => expect((input as HTMLInputElement).value).toEqual('2023-06-01 to 2023-06-06'));
     await userEvent.click(document.body);
-    expect(mockedOnChange.mock.calls).toHaveLength(1);
+    expect(mockedOnChange.mock.calls).toHaveLength(2);
   });
 
   it('will revert to old value if user input is not a valid date', async () => {

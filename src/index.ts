@@ -98,3 +98,4 @@ export * from './patterns/ObjectTile';
 export * from './patterns/BidSnapshot';
 export * from './components/Article';
 export * from './components/AddToCalendar';
+export * from './components/TextArea';
