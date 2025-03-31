@@ -1,0 +1,44 @@
+import { Meta, Source } from '@storybook/blocks';
+import { IconGrid } from './IconGrid';
+import { Icon } from '../../components/Icon';
+
+<Meta title="Design/Icons" />
+
+<main className="sb-unstyled doc-wrapper">
+  <h1 className="h1">Icons</h1>
+  <span className="p">
+    The `Icon` component was created to make it easy for developers to use `svg` images that can be easily resized and
+    recolored. Some examples are shown below. At the bottom, there is a grid that shows all of the icons that we
+    currently have available to use
+  </span>
+  <span className="p">
+    <h2 className="h2">Usage</h2>
+    <div className="icon-example">
+      <div className="blurb">The Phillips logo (does not support recoloring)</div>
+      <Icon icon="PhillipsLogo" height={24} width={180} />
+      <Source code={`<Icon icon="PhillipsLogo" height={24} width={180} />`} dark />
+    </div>
+    <div className="icon-example">
+      <div className="blurb">The Favorite icon shown in different colors and sizes</div>
+      <div className="icons-container">
+        <Icon icon="Favorite" height={12} width={12} color="$widget-red" />
+        <Icon icon="Favorite" height={24} width={24} color="$widget-green" />
+        <Icon icon="Favorite" height={48} width={48} color="$widget-blue" />
+      </div>
+      <Source
+        code={`<Icon icon="Favorite" height={48} width={48} color="$widget-red" />
+<Icon icon="Favorite" height={48} width={48} color="$widget-green" />
+<Icon icon="Favorite" height={48} width={48} color="$widget-blue" />`}
+        dark
+      />
+    </div>
+  </span>
+  <h2 className="h2">Icon Grid</h2>
+  <span className="p">
+    These are all of the icons that can currently be used with the `Icon` component. You can use the dropdowns below to
+    see what each icon looks like with the specified dimensions and the selected color. The color choices are based on
+    the color tokens that are available in seldon. Some icons do not support being recolored (such as the Phillips
+    logo).
+  </span>
+  <IconGrid />
+</main>

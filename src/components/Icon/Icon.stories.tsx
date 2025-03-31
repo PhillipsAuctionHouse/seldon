@@ -23,19 +23,6 @@ const meta = {
 
 export default meta;
 
-export const IconGrid = (props: IconProps) => (
-  <div className="story-icon-flex-wrapper">
-    {Object.keys(iconComponents).map((icon) => (
-      <div className="icon-set" key={icon}>
-        <div className="icon-wrapper">
-          <Icon {...props} icon={icon as IconProps['icon']} />
-        </div>
-        <div className="icon-name">{icon}</div>
-      </div>
-    ))}
-  </div>
-);
-
 export const Playground = (props: IconProps) => (
   <div className="story-icon-flex-wrapper">
     <div className="icon-set">
@@ -60,5 +47,17 @@ Playground.argTypes = {
   height: { control: 'text' },
   width: { control: 'text' },
   color: { control: 'select', options: colorOptions },
-  showBorder: { control: 'boolean' },
 };
+
+export const IconGrid = (props: IconProps) => (
+  <div className="story-icon-flex-wrapper">
+    {Object.keys(iconComponents).map((icon) => (
+      <div className="icon-set" key={icon}>
+        <div className="icon-wrapper">
+          <Icon {...props} icon={icon as IconProps['icon']} />
+        </div>
+        <div className="icon-name">{icon}</div>
+      </div>
+    ))}
+  </div>
+);
