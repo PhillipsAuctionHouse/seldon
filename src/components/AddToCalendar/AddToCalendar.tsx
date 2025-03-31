@@ -7,7 +7,7 @@ import { CalendarAlt } from '../../assets/icons';
 import { getTimeZone } from './utils';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
-export interface AddToCalendarProps extends ComponentProps<'div'> {
+export interface AddToCalendarProps extends ComponentProps<'button'> {
   startDateTimeOffset?: string;
   endDateTimeOffset?: string;
   timeZone?: string;
@@ -26,7 +26,7 @@ export interface AddToCalendarProps extends ComponentProps<'div'> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-addtocalendar--overview)
  */
-const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
+const AddToCalendar = forwardRef<HTMLButtonElement, AddToCalendarProps>(
   (
     {
       className,
@@ -54,6 +54,8 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
         });
     }, []);
 
+    const buttonAriaLabel = title ? `Add ${title} to calendar` : 'Add to calendar';
+
     const statusClassName = classnames({
       hidden: status === 'mounting' || status === 'error',
       baseClassName,
@@ -77,8 +79,15 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
     const endDateTime = endDateTimeOffset ? parseDate(endDateTimeOffset) : null;
 
     return (
-      <div className={classnames(baseClassName, className)} {...commonProps} {...props}>
-        <div id="add-to-calendar" className={statusClassName} ref={ref}>
+      <button
+        className={classnames(baseClassName, className)}
+        {...commonProps}
+        {...props}
+        ref={ref}
+        aria-label={buttonAriaLabel}
+        disabled={status !== 'connected'}
+      >
+        <div id="add-to-calendar" className={statusClassName}>
           <span className="addtocalendar atc-style-icon atc-style-menu-wb">
             <a className="atcb-link">
               <CalendarAlt />
@@ -95,7 +104,7 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
             </var>
           </span>
         </div>
-      </div>
+      </button>
     );
   },
 );

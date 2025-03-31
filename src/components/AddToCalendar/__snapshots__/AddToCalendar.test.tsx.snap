@@ -2,9 +2,11 @@
 
 exports[`AddToCalendar component > renders correctly 1`] = `
 <div>
-  <div
+  <button
+    aria-label="Add Jewels & More: Online Auction to calendar"
     class="seldon-add-to-calendar"
     data-testid="add-to-calendar"
+    disabled=""
   >
     <div
       class="hidden baseClassName"
@@ -97,15 +99,17 @@ exports[`AddToCalendar component > renders correctly 1`] = `
         </var>
       </span>
     </div>
-  </div>
+  </button>
 </div>
 `;
 
 exports[`AddToCalendar component > renders correctly with startDateTimeOffset 1`] = `
 <div>
-  <div
+  <button
+    aria-label="Add Test Event to calendar"
     class="seldon-add-to-calendar"
     data-testid="add-to-calendar"
+    disabled=""
   >
     <div
       class="hidden baseClassName"
@@ -198,6 +202,6 @@ exports[`AddToCalendar component > renders correctly with startDateTimeOffset 1`
         </var>
       </span>
     </div>
-  </div>
+  </button>
 </div>
 `;

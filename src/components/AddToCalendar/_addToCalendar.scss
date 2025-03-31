@@ -1,6 +1,10 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-add-to-calendar {
+  background: none;
+  border: none;
+  outline: none;
+
   .addtocalendar {
     background: transparent;
     display: inline-block;
