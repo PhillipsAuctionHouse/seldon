@@ -5,13 +5,15 @@ interface SvgInstagramProps {
   color?: string;
   height?: number | string;
   width?: number | string;
+  title?: string;
+  titleId?: string;
 }
 
 const SvgInstagram = memo(
   forwardRef((props: SvgInstagramProps, ref: Ref<SVGSVGElement>) => {
-    const { height, width } = props;
-    const title = 'SvgInstagram';
-    const titleId = kebabCase(title);
+    const { height, width, title: propsTitle, titleId: propsTitleId } = props;
+    const title = propsTitle || 'SvgInstagram';
+    const titleId = propsTitleId || kebabCase(title);
 
     return (
       <svg

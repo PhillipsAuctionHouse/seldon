@@ -5,13 +5,15 @@ interface SvgShareProps {
   color?: string;
   height?: number | string;
   width?: number | string;
+  title?: string;
+  titleId?: string;
 }
 
 const SvgShare = memo(
   forwardRef((props: SvgShareProps, ref: Ref<SVGSVGElement>) => {
-    const { color, height, width } = props;
-    const title = 'SvgShare';
-    const titleId = kebabCase(title);
+    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
+    const title = propsTitle || 'SvgShare';
+    const titleId = propsTitleId || kebabCase(title);
 
     return (
       <svg

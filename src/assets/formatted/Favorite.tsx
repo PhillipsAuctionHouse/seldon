@@ -5,13 +5,15 @@ interface SvgFavoriteProps {
   color?: string;
   height?: number | string;
   width?: number | string;
+  title?: string;
+  titleId?: string;
 }
 
 const SvgFavorite = memo(
   forwardRef((props: SvgFavoriteProps, ref: Ref<SVGSVGElement>) => {
-    const { color, height, width } = props;
-    const title = 'SvgFavorite';
-    const titleId = kebabCase(title);
+    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
+    const title = propsTitle || 'SvgFavorite';
+    const titleId = propsTitleId || kebabCase(title);
 
     return (
       <svg

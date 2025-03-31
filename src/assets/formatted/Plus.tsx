@@ -5,13 +5,15 @@ interface SvgPlusProps {
   color?: string;
   height?: number | string;
   width?: number | string;
+  title?: string;
+  titleId?: string;
 }
 
 const SvgPlus = memo(
   forwardRef((props: SvgPlusProps, ref: Ref<SVGSVGElement>) => {
-    const { color, height, width } = props;
-    const title = 'SvgPlus';
-    const titleId = kebabCase(title);
+    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
+    const title = propsTitle || 'SvgPlus';
+    const titleId = propsTitleId || kebabCase(title);
 
     return (
       <svg
@@ -33,7 +35,7 @@ const SvgPlus = memo(
           clipRule="evenodd"
         />
         <path
-          fill={color}
+          fill="currentColor"
           fillRule="evenodd"
           d="M12.107 4.5c.474 0 .857.336.857.75v13.5c0 .414-.383.75-.857.75-.473 0-.857-.336-.857-.75V5.25c0-.414.384-.75.857-.75"
           clipRule="evenodd"

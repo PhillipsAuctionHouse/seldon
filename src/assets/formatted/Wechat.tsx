@@ -5,13 +5,15 @@ interface SvgWechatProps {
   color?: string;
   height?: number | string;
   width?: number | string;
+  title?: string;
+  titleId?: string;
 }
 
 const SvgWechat = memo(
   forwardRef((props: SvgWechatProps, ref: Ref<SVGSVGElement>) => {
-    const { height, width } = props;
-    const title = 'SvgWechat';
-    const titleId = kebabCase(title);
+    const { height, width, title: propsTitle, titleId: propsTitleId } = props;
+    const title = propsTitle || 'SvgWechat';
+    const titleId = propsTitleId || kebabCase(title);
 
     return (
       <svg

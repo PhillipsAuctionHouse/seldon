@@ -5,13 +5,15 @@ interface SvgChevronNextProps {
   color?: string;
   height?: number | string;
   width?: number | string;
+  title?: string;
+  titleId?: string;
 }
 
 const SvgChevronNext = memo(
   forwardRef((props: SvgChevronNextProps, ref: Ref<SVGSVGElement>) => {
-    const { color, height, width } = props;
-    const title = 'SvgChevronNext';
-    const titleId = kebabCase(title);
+    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
+    const title = propsTitle || 'SvgChevronNext';
+    const titleId = propsTitleId || kebabCase(title);
 
     return (
       <svg

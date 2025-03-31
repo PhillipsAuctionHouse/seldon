@@ -5,13 +5,15 @@ interface SvgYoutubeProps {
   color?: string;
   height?: number | string;
   width?: number | string;
+  title?: string;
+  titleId?: string;
 }
 
 const SvgYoutube = memo(
   forwardRef((props: SvgYoutubeProps, ref: Ref<SVGSVGElement>) => {
-    const { height, width } = props;
-    const title = 'SvgYoutube';
-    const titleId = kebabCase(title);
+    const { height, width, title: propsTitle, titleId: propsTitleId } = props;
+    const title = propsTitle || 'SvgYoutube';
+    const titleId = propsTitleId || kebabCase(title);
 
     return (
       <svg

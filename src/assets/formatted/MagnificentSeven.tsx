@@ -5,13 +5,15 @@ interface SvgMagnificentSevenProps {
   color?: string;
   height?: number | string;
   width?: number | string;
+  title?: string;
+  titleId?: string;
 }
 
 const SvgMagnificentSeven = memo(
   forwardRef((props: SvgMagnificentSevenProps, ref: Ref<SVGSVGElement>) => {
-    const { height, width } = props;
-    const title = 'SvgMagnificentSeven';
-    const titleId = kebabCase(title);
+    const { height, width, title: propsTitle, titleId: propsTitleId } = props;
+    const title = propsTitle || 'SvgMagnificentSeven';
+    const titleId = propsTitleId || kebabCase(title);
 
     return (
       <svg

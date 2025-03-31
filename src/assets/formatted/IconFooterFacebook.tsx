@@ -5,13 +5,15 @@ interface SvgIconFooterFacebookProps {
   color?: string;
   height?: number | string;
   width?: number | string;
+  title?: string;
+  titleId?: string;
 }
 
 const SvgIconFooterFacebook = memo(
   forwardRef((props: SvgIconFooterFacebookProps, ref: Ref<SVGSVGElement>) => {
-    const { color, height, width } = props;
-    const title = 'SvgIconFooterFacebook';
-    const titleId = kebabCase(title);
+    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
+    const title = propsTitle || 'SvgIconFooterFacebook';
+    const titleId = propsTitleId || kebabCase(title);
 
     return (
       <svg

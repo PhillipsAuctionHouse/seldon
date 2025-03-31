@@ -5,13 +5,15 @@ interface SvgReactProps {
   color?: string;
   height?: number | string;
   width?: number | string;
+  title?: string;
+  titleId?: string;
 }
 
 const SvgReact = memo(
   forwardRef((props: SvgReactProps, ref: Ref<SVGSVGElement>) => {
-    const { height, width } = props;
-    const title = 'SvgReact';
-    const titleId = kebabCase(title);
+    const { height, width, title: propsTitle, titleId: propsTitleId } = props;
+    const title = propsTitle || 'SvgReact';
+    const titleId = propsTitleId || kebabCase(title);
 
     return (
       <svg

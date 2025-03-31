@@ -5,13 +5,15 @@ interface SvgCloseProps {
   color?: string;
   height?: number | string;
   width?: number | string;
+  title?: string;
+  titleId?: string;
 }
 
 const SvgClose = memo(
   forwardRef((props: SvgCloseProps, ref: Ref<SVGSVGElement>) => {
-    const { color, height, width } = props;
-    const title = 'SvgClose';
-    const titleId = kebabCase(title);
+    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
+    const title = propsTitle || 'SvgClose';
+    const titleId = propsTitleId || kebabCase(title);
 
     return (
       <svg

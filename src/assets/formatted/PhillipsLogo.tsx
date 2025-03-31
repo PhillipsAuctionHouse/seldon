@@ -5,13 +5,15 @@ interface SvgPhillipsLogoProps {
   color?: string;
   height?: number | string;
   width?: number | string;
+  title?: string;
+  titleId?: string;
 }
 
 const SvgPhillipsLogo = memo(
   forwardRef((props: SvgPhillipsLogoProps, ref: Ref<SVGSVGElement>) => {
-    const { height, width } = props;
-    const title = 'SvgPhillipsLogo';
-    const titleId = kebabCase(title);
+    const { height, width, title: propsTitle, titleId: propsTitleId } = props;
+    const title = propsTitle || 'SvgPhillipsLogo';
+    const titleId = propsTitleId || kebabCase(title);
 
     return (
       <svg

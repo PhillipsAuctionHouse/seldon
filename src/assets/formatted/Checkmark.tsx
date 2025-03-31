@@ -5,13 +5,15 @@ interface SvgCheckmarkProps {
   color?: string;
   height?: number | string;
   width?: number | string;
+  title?: string;
+  titleId?: string;
 }
 
 const SvgCheckmark = memo(
   forwardRef((props: SvgCheckmarkProps, ref: Ref<SVGSVGElement>) => {
-    const { color, height, width } = props;
-    const title = 'SvgCheckmark';
-    const titleId = kebabCase(title);
+    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
+    const title = propsTitle || 'SvgCheckmark';
+    const titleId = propsTitleId || kebabCase(title);
 
     return (
       <svg

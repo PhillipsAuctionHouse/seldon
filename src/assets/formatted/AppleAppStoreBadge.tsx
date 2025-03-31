@@ -5,13 +5,15 @@ interface SvgAppleAppStoreBadgeProps {
   color?: string;
   height?: number | string;
   width?: number | string;
+  title?: string;
+  titleId?: string;
 }
 
 const SvgAppleAppStoreBadge = memo(
   forwardRef((props: SvgAppleAppStoreBadgeProps, ref: Ref<SVGSVGElement>) => {
-    const { color, height, width } = props;
-    const title = 'SvgAppleAppStoreBadge';
-    const titleId = kebabCase(title);
+    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
+    const title = propsTitle || 'SvgAppleAppStoreBadge';
+    const titleId = propsTitleId || kebabCase(title);
 
     return (
       <svg

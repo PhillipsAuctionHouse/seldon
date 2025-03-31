@@ -5,13 +5,15 @@ interface SvgAccountCircleProps {
   color?: string;
   height?: number | string;
   width?: number | string;
+  title?: string;
+  titleId?: string;
 }
 
 const SvgAccountCircle = memo(
   forwardRef((props: SvgAccountCircleProps, ref: Ref<SVGSVGElement>) => {
-    const { color, height, width } = props;
-    const title = 'SvgAccountCircle';
-    const titleId = kebabCase(title);
+    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
+    const title = propsTitle || 'SvgAccountCircle';
+    const titleId = propsTitleId || kebabCase(title);
 
     return (
       <svg
@@ -26,7 +28,7 @@ const SvgAccountCircle = memo(
         {...props}
       >
         {title ? <title id={titleId}>{title}</title> : null}
-        <g clipPath="url(#account_circle_svg__a)">
+        <g fill={color} clipPath="url(#account_circle_svg__a)">
           <path
             fillRule="evenodd"
             d="M10.5 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0m-1 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"

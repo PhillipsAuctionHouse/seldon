@@ -5,13 +5,15 @@ interface SvgArrowPrevProps {
   color?: string;
   height?: number | string;
   width?: number | string;
+  title?: string;
+  titleId?: string;
 }
 
 const SvgArrowPrev = memo(
   forwardRef((props: SvgArrowPrevProps, ref: Ref<SVGSVGElement>) => {
-    const { color, height, width } = props;
-    const title = 'SvgArrowPrev';
-    const titleId = kebabCase(title);
+    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
+    const title = propsTitle || 'SvgArrowPrev';
+    const titleId = propsTitleId || kebabCase(title);
 
     return (
       <svg

@@ -5,13 +5,15 @@ interface SvgMenuProps {
   color?: string;
   height?: number | string;
   width?: number | string;
+  title?: string;
+  titleId?: string;
 }
 
 const SvgMenu = memo(
   forwardRef((props: SvgMenuProps, ref: Ref<SVGSVGElement>) => {
-    const { color, height, width } = props;
-    const title = 'SvgMenu';
-    const titleId = kebabCase(title);
+    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
+    const title = propsTitle || 'SvgMenu';
+    const titleId = propsTitleId || kebabCase(title);
 
     return (
       <svg
