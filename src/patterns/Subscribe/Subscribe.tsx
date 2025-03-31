@@ -94,7 +94,6 @@ const Subscribe = ({
   ...props
 }: SubscribeProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Subscribe');
-  const { id } = props;
   const isInvalid = subscriptionState === SubscriptionState.Invalid;
   const isLoading = subscriptionState === SubscriptionState.Loading;
   const isSuccess = subscriptionState === SubscriptionState.Success;
@@ -128,7 +127,7 @@ const Subscribe = ({
         warn={warn}
         warnText={text}
         required
-        id={`${id}-input`}
+        id={`${props?.id}-input`}
       />
       <Button
         className={`${baseClassName}__button ${className}`}

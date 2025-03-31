@@ -28,7 +28,7 @@ export interface InputProps extends Omit<React.ComponentProps<'input'>, 'size'> 
   /**
    * A custom `id` for the `<input>`
    */
-  id: string;
+  id?: string;
 
   /**
    * Boolean to dictate whether input is inline with the label or not. `true` to use the inline version.
@@ -122,7 +122,7 @@ const Input = React.forwardRef(
       defaultValue,
       disabled,
       hideLabel,
-      id,
+      id = '',
       inline,
       invalid,
       invalidText,
