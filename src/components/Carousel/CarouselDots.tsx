@@ -38,8 +38,8 @@ const dotGap = 12;
 const centerDotContainer = (dotWidth + dotGap) / 2;
 
 const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
-  ({ className, maxDots = 9, position = 'inline', numberOfSlides = 0, ...props }, ref) => {
-    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'CarouselDots');
+  ({ className, maxDots = 9, position = 'inline', numberOfSlides = 0, id, ...props }, ref) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'CarouselDots');
     const { api, onSlideChange } = useCarousel();
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [scrollSnaps, setScrollSnaps] = useState<number[]>(
@@ -138,7 +138,7 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
 
               return (
                 <CarouselDot
-                  key={`${props?.id}-dot-${index}`}
+                  key={`${id}-dot-${index}`}
                   onClick={() => onDotButtonClick(index)}
                   isSelected={isSelected}
                   scrollableContainerRef={scrollableContainerRef}
