@@ -1,3 +1,15 @@
+# [1.133.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.132.1...v1.133.0) (2025-04-01)
+
+
+### Bug Fixes
+
+* **IconGrid:** L3-3417 fix build issue ([#573](https://github.com/PhillipsAuctionHouse/seldon/issues/573)) ([8869d4c](https://github.com/PhillipsAuctionHouse/seldon/commit/8869d4c1af6363ddda46fe4b2fd2108bd4f61264))
+
+
+### Features
+
+* **Sale and Lot Icons:** L3-3417 icon updates ([#566](https://github.com/PhillipsAuctionHouse/seldon/issues/566)) ([4c88d48](https://github.com/PhillipsAuctionHouse/seldon/commit/4c88d48f24cc0865ee60385593d8257d84c2f621))
+
 ## [1.132.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.132.0...v1.132.1) (2025-04-01)
 
 
