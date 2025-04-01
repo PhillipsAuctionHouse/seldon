@@ -4,7 +4,7 @@ import { px, useNormalizedInputProps } from '../../utils';
 import { InputProps } from '../Input/Input';
 import { Merge } from 'type-fest';
 import { SelectVariants } from './types';
-import ChevronDownIcon from '../../assets/chevronDown.svg?react';
+import { Icon } from '../Icon';
 
 export interface SelectProps extends Merge<InputProps, React.ComponentProps<'select'>> {
   /**
@@ -112,7 +112,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           >
             {children}
           </select>
-          {showIcon ? <ChevronDownIcon /> : null}
+          {showIcon ? <Icon icon="ChevronDown" /> : null}
         </div>
         {inputProps.validation}
       </div>

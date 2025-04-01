@@ -4,12 +4,12 @@ import { getCommonProps } from '../../utils';
 import { px } from '../../utils';
 
 import Select from '../Select/Select';
-import ChevronRight from '../../assets/chevronRight.svg?react';
 import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 import { determineOptionValue, findOptionFromSelectString } from './utils';
 import { usePendingState } from '../../utils/hooks';
 import { ButtonProps } from '../Button/Button';
+import { Icon } from '../Icon';
 
 export type PaginationOptionValue = string | number;
 
@@ -146,7 +146,7 @@ const Pagination = ({
         href={typeof prevOption === 'object' && prevOption.href ? prevOption.href : undefined}
         prefetch={typeof prevOption === 'object' && prevOption.prefetch ? prevOption.prefetch : undefined}
       >
-        <ChevronRight />
+        <Icon icon="ChevronRight" />
       </IconButton>
 
       <Select
@@ -193,7 +193,7 @@ const Pagination = ({
         href={typeof nextOption === 'object' && nextOption.href ? nextOption.href : undefined}
         prefetch={typeof nextOption === 'object' && nextOption.prefetch ? nextOption.prefetch : undefined}
       >
-        <ChevronRight />
+        <Icon icon="ChevronRight" />
       </IconButton>
     </div>
   );
