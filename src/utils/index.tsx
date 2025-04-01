@@ -51,7 +51,7 @@ export interface InputProps {
    */
   disabled?: boolean;
   /**
-   * Specify a custom `id` for the `<input>`
+   * Specify a unique `id` for the `<input>`
    */
   id: string;
   /**

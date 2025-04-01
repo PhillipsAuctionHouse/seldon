@@ -15,7 +15,7 @@ describe('Carousel', () => {
           <CarouselItem>Slide 2</CarouselItem>
           <CarouselItem>Slide 3</CarouselItem>
         </CarouselContent>
-        <CarouselDots />
+        <CarouselDots id="test-carousel-dots" />
       </Carousel>,
     );
     expect(screen.getByText('Slide 1')).toBeInTheDocument();
