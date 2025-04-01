@@ -1,3 +1,38 @@
+## [1.132.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.132.0...v1.132.1) (2025-04-01)
+
+
+### Bug Fixes
+
+* **upgrade:** L3-6222 allow seldon to be used with phillips-public older React 18 version ([#567](https://github.com/PhillipsAuctionHouse/seldon/issues/567)) ([312d0b5](https://github.com/PhillipsAuctionHouse/seldon/commit/312d0b5dd2de424dfbe93fff98677ece64f088c0))
+
+# [1.132.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.131.0...v1.132.0) (2025-03-28)
+
+
+### Features
+
+* **textarea:** L3-5975 Add textarea component ([#551](https://github.com/PhillipsAuctionHouse/seldon/issues/551)) ([da4847d](https://github.com/PhillipsAuctionHouse/seldon/commit/da4847de26f3a9007b045d3388b057677f65117c))
+
+# [1.131.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.130.1...v1.131.0) (2025-03-26)
+
+
+### Features
+
+* **Grid:** L3-6072 Add support for xl breakpoints and colStart props ([#564](https://github.com/PhillipsAuctionHouse/seldon/issues/564)) ([a447d79](https://github.com/PhillipsAuctionHouse/seldon/commit/a447d79f47303770ca21ffc10a56fca88a946e8a))
+
+## [1.130.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.130.0...v1.130.1) (2025-03-26)
+
+
+### Bug Fixes
+
+* **Search:** L3-5572 Search Bar Removing Typed Search ([#563](https://github.com/PhillipsAuctionHouse/seldon/issues/563)) ([9d96b40](https://github.com/PhillipsAuctionHouse/seldon/commit/9d96b4053138727dad46f74fc5423f3bf8cd27d1))
+
+# [1.130.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.129.2...v1.130.0) (2025-03-21)
+
+
+### Features
+
+* **_button:** L3-6070 fixed height of button ([#562](https://github.com/PhillipsAuctionHouse/seldon/issues/562)) ([ede0cdf](https://github.com/PhillipsAuctionHouse/seldon/commit/ede0cdff814123458e2598c545b86a3834196275))
+
 ## [1.129.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.129.1...v1.129.2) (2025-03-18)
 
 

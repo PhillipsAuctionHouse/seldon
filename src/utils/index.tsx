@@ -34,6 +34,14 @@ export enum SpacingTokens {
   xxl = 'xxl',
 }
 
+export enum BreakpointTokens {
+  xs = 'xs',
+  sm = 'sm',
+  md = 'md',
+  lg = 'lg',
+  xl = 'xl',
+}
+
 /* eslint-disable @typescript-eslint/no-empty-function */
 export const noOp = () => {};
 
@@ -43,7 +51,7 @@ export interface InputProps {
    */
   disabled?: boolean;
   /**
-   * Specify a custom `id` for the `<input>`
+   * Specify a unique `id` for the `<input>`
    */
   id: string;
   /**

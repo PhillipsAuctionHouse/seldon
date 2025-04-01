@@ -1,0 +1,32 @@
+@import '#scss/allPartials';
+
+.story-icon-flex-wrapper {
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 20%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 24px;
+  padding: 24px;
+  width: fit-content;
+
+  .icon-set {
+    display: flex;
+    flex-direction: column;
+    margin: 24px 12px;
+  }
+
+  .icon-name {
+    padding: 8px;
+    text-align: center;
+
+    @include text($string2);
+  }
+
+  .icon-wrapper {
+    &.show-border {
+      border: 1px solid black;
+    }
+
+    margin: 0 auto;
+  }
+}
