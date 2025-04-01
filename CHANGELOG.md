@@ -1,3 +1,10 @@
+## [1.133.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.0...v1.133.1) (2025-04-01)
+
+
+### Bug Fixes
+
+* **Grid:** L3-6072  Revert Add support for xl breakpoints and colStart props ([#564](https://github.com/PhillipsAuctionHouse/seldon/issues/564))" ([#574](https://github.com/PhillipsAuctionHouse/seldon/issues/574)) ([e52b0a5](https://github.com/PhillipsAuctionHouse/seldon/commit/e52b0a5c0b069878cf477f85c39287dddb5e4f06))
+
 # [1.133.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.132.1...v1.133.0) (2025-04-01)
 
 
