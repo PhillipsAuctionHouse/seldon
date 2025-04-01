@@ -33,7 +33,7 @@ export interface DatePickerProps extends Omit<InputProps, 'defaultValue' | 'onCh
   hideLabel?: boolean;
 
   /**
-   * A custom `id` for the `<input>`
+   * A unique `id` for the `<input>`
    */
   id: string;
 

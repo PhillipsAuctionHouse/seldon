@@ -1,11 +1,15 @@
 import classNames from 'classnames';
 import { EmblaCarouselType } from 'embla-carousel';
-import { ComponentProps, forwardRef, useCallback, useEffect, useState, useId, useRef, useMemo } from 'react';
+import { ComponentProps, forwardRef, useCallback, useEffect, useState, useRef, useMemo } from 'react';
 import { useCarousel } from './utils';
 import { getCommonProps } from '../../utils';
 import { CarouselDot } from './CarouselDot';
 
 export interface CarouselDotsProps extends ComponentProps<'div'> {
+  /**
+   * A unique `id` for the `<CarouselDots>`
+   */
+  id: string;
   /**
    * The maximum number of dots to display.
    */
@@ -34,9 +38,8 @@ const dotGap = 12;
 const centerDotContainer = (dotWidth + dotGap) / 2;
 
 const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
-  ({ className, maxDots = 9, position = 'inline', numberOfSlides = 0, ...props }, ref) => {
-    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'CarouselDots');
-    const componentId = useId();
+  ({ className, maxDots = 9, position = 'inline', numberOfSlides = 0, id, ...props }, ref) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'CarouselDots');
     const { api, onSlideChange } = useCarousel();
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [scrollSnaps, setScrollSnaps] = useState<number[]>(
@@ -135,7 +138,7 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
 
               return (
                 <CarouselDot
-                  key={`${componentId}-dot-${index}`}
+                  key={`${id}-dot-${index}`}
                   onClick={() => onDotButtonClick(index)}
                   isSelected={isSelected}
                   scrollableContainerRef={scrollableContainerRef}

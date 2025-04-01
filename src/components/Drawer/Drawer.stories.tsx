@@ -35,7 +35,11 @@ export const Playground = (props: DrawerProps) => {
 
       <PlaygroundSplitPanel />
       <Drawer isOpen={props.isOpen} onClose={onClose}>
-        <Subscribe autoFocus blurb="Receive exclusive content about our auctions, exhibitions, and special events." />
+        <Subscribe
+          id="subscribe-drawer"
+          autoFocus
+          blurb="Receive exclusive content about our auctions, exhibitions, and special events."
+        />
       </Drawer>
     </>
   );

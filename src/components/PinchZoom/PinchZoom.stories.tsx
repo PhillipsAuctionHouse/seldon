@@ -127,7 +127,7 @@ export const ZoomCarousel = () => {
           </PinchZoom>
         </CarouselItem>
       </CarouselContent>
-      <CarouselDots numberOfSlides={3} />
+      <CarouselDots id="zoom-carousel-dots" numberOfSlides={3} />
     </Carousel>
   );
 };
@@ -217,7 +217,7 @@ export const CarouselWithZoomModal = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselDots numberOfSlides={images.length} position="on-content" />
+            <CarouselDots id="carousel-dots-on-content" numberOfSlides={images.length} position="on-content" />
           </Carousel>
         </Modal>
       )}
@@ -242,7 +242,7 @@ export const CarouselWithZoomModal = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselDots numberOfSlides={images.length} />
+        <CarouselDots id="carousel-dots" numberOfSlides={images.length} />
       </Carousel>
     </div>
   );

@@ -27,6 +27,11 @@
     visibility: visible;
   }
 
+  .seldon-icon-button--primary:hover svg,
+  .seldon-icon-button--primary:hover svg path {
+    fill: $pure-black;
+  }
+
   .atcb-list {
     background: #fff;
     border: 1px solid#ECEAE7;

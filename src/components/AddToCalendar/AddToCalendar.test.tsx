@@ -1,6 +1,7 @@
 import { render, waitFor } from '@testing-library/react';
 import { getTimeZone } from './utils';
 import AddToCalendar from './AddToCalendar';
+import { runCommonTests } from '../../utils/testUtils';
 
 const props = {
   startDateTimeOffset: '2025-01-27T15:13:02.59+00:00',
@@ -38,6 +39,7 @@ describe('getTimeZone', () => {
 });
 
 describe('AddToCalendar component', () => {
+  runCommonTests(AddToCalendar, 'AddToCalendar');
   it('renders correctly', () => {
     const { container } = render(<AddToCalendar {...props} />);
     expect(container).toMatchSnapshot();
@@ -49,7 +51,7 @@ describe('AddToCalendar component', () => {
     expect(svg).toBeInTheDocument();
     if (svg) {
       const paths = svg.querySelectorAll('path');
-      expect(paths).toHaveLength(6);
+      expect(paths).toHaveLength(2);
     }
   });
 

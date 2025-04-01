@@ -1,6 +1,6 @@
 {
   "name": "@phillips/seldon",
-  "version": "1.132.0",
+  "version": "1.132.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/PhillipsAuctionHouse/seldon"
@@ -37,7 +37,8 @@
     "lint": "tsc --noEmit && eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 && npm run lint:styles && npm run lint:md",
     "lint:styles": "stylelint \"src/**/*.scss\" --fix",
     "lint:md": "markdownlint \"src/**/*.{md,mdx}\" --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "icons:format": "npx @svgr/cli --config-file svgr.config.cjs --out-dir src/assets/formatted --ignore-existing -- src/assets"
   },
   "dependencies": {
     "@artsy/fresnel": "^7.1.4",
@@ -83,6 +84,10 @@
     "@storybook/react": "^8.5.0",
     "@storybook/react-vite": "^8.5.0",
     "@storybook/theming": "^8.5.0",
+    "@svgr/cli": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0",
+    "@svgr/plugin-prettier": "^8.1.0",
+    "@svgr/plugin-svgo": "^8.1.0",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.5.2",

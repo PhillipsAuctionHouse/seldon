@@ -1,9 +1,6 @@
 // Utils
 export * from './utils';
 
-// Icons
-export * from './assets/icons';
-
 // 📑 Pages
 export { default as Page } from './pages/Page';
 
@@ -98,4 +95,5 @@ export * from './patterns/ObjectTile';
 export * from './patterns/BidSnapshot';
 export * from './components/Article';
 export * from './components/AddToCalendar';
+export * from './components/Icon';
 export * from './components/TextArea';

@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { getCommonProps, noOp } from '../../utils';
-import CloseIcon from '../../assets/close.svg?react';
+import { Icon } from '../Icon';
 import ReactModal from 'react-modal';
 import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
@@ -82,7 +82,7 @@ const Modal = ({
         className={classnames(`${baseClassName}__close`)}
         variant={ButtonVariants.tertiary}
       >
-        <CloseIcon />
+        <Icon icon="Close" height={32} width={32} />
       </IconButton>
       {children}
     </ReactModal>

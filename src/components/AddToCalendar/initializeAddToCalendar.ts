@@ -25,7 +25,7 @@ export default function initializeAddToCalendar(): Promise<string> {
       }
     } else {
       let intervalCount = 0;
-      if (window.ifaddtocalendar === undefined) {
+      if (typeof window !== 'undefined' && window.ifaddtocalendar === undefined) {
         window.ifaddtocalendar = 1;
         const d = document;
         const s = d.createElement('script');
@@ -44,7 +44,7 @@ export default function initializeAddToCalendar(): Promise<string> {
       } else {
         const checkInterval = setInterval(() => {
           intervalCount++;
-          if (window.addtocalendar) {
+          if (typeof window !== 'undefined' && window.addtocalendar) {
             clearInterval(checkInterval);
             resolve('true');
           } else if (intervalCount >= 10) {

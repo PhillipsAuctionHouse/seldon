@@ -3,15 +3,18 @@ import classnames from 'classnames';
 import { px, useNormalizedInputProps } from '../../utils';
 import { InputProps } from '../Input/Input';
 import { Merge } from 'type-fest';
-
 import { SelectVariants } from './types';
-import ChevronDownIcon from '../../assets/chevronDown.svg?react';
+import { Icon } from '../Icon';
 
 export interface SelectProps extends Merge<InputProps, React.ComponentProps<'select'>> {
   /**
    * Option elements that are selectable
    */
   children: React.ReactNode;
+  /**
+   * A unique `id` for the `<Select>`
+   */
+  id: string;
   /**
    * Determines if you want to show the icon
    */
@@ -59,10 +62,9 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     ref,
   ) => {
     const type = 'select';
-    const generatedId = React.useId();
     const inputProps = useNormalizedInputProps({
       disabled,
-      id: id ?? generatedId,
+      id,
       invalid,
       invalidText,
       readOnly,
@@ -110,7 +112,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           >
             {children}
           </select>
-          {showIcon ? <ChevronDownIcon /> : null}
+          {showIcon ? <Icon icon="ChevronDown" /> : null}
         </div>
         {inputProps.validation}
       </div>

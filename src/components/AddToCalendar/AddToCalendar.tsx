@@ -1,13 +1,14 @@
 import { ComponentProps, forwardRef, useState, useEffect } from 'react';
-import { getCommonProps } from '../../utils';
+import { getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
 import { format } from 'date-fns/format';
 import initializeAddToCalendar from './initializeAddToCalendar';
-import { CalendarAlt } from '../../assets/icons';
+import { Icon } from '../Icon';
 import { getTimeZone } from './utils';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface AddToCalendarProps extends ComponentProps<'button'> {
+  id?: string;
   startDateTimeOffset?: string;
   endDateTimeOffset?: string;
   timeZone?: string;
@@ -43,6 +44,7 @@ const AddToCalendar = forwardRef<HTMLButtonElement, AddToCalendarProps>(
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'AddToCalendar');
+    const { id } = props;
     const [status, setStatus] = useState('mounting');
 
     useEffect(() => {
@@ -58,7 +60,6 @@ const AddToCalendar = forwardRef<HTMLButtonElement, AddToCalendarProps>(
 
     const statusClassName = classnames({
       hidden: status === 'mounting' || status === 'error',
-      baseClassName,
     });
 
     if (!startDateTimeOffset) {
@@ -89,8 +90,11 @@ const AddToCalendar = forwardRef<HTMLButtonElement, AddToCalendarProps>(
       >
         <div id="add-to-calendar" className={statusClassName}>
           <span className="addtocalendar atc-style-icon atc-style-menu-wb">
-            <a className="atcb-link">
-              <CalendarAlt />
+            <a
+              data-testid={`${id}-calendar-button`}
+              className={`${px}-icon-button ${px}-icon-button--primary ${baseClassName}__back-button atcb-link`}
+            >
+              <Icon icon="CalendarAlt" />
             </a>
             <var className="atc_event">
               <var className="atc_date_start">{format(startDateTime, 'yyyy-MM-dd HH:mm:ss')}</var>
