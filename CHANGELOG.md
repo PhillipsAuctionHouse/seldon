@@ -1,3 +1,10 @@
+## [1.132.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.132.0...v1.132.1) (2025-04-01)
+
+
+### Bug Fixes
+
+* **upgrade:** L3-6222 allow seldon to be used with phillips-public older React 18 version ([#567](https://github.com/PhillipsAuctionHouse/seldon/issues/567)) ([312d0b5](https://github.com/PhillipsAuctionHouse/seldon/commit/312d0b5dd2de424dfbe93fff98677ece64f088c0))
+
 # [1.132.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.131.0...v1.132.0) (2025-03-28)
 
 
