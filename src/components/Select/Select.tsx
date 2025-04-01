@@ -12,7 +12,7 @@ export interface SelectProps extends Merge<InputProps, React.ComponentProps<'sel
    */
   children: React.ReactNode;
   /**
-   * A custom `id` for the `<Select>`
+   * A unique `id` for the `<Select>`
    */
   id: string;
   /**

@@ -24,7 +24,7 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
    */
   element?: React.ElementType<SubscribeProps>;
   /**
-   * A custom `id` for the `<Subscribe>`
+   * A unique `id` for the `<Subscribe>`
    */
   id: string;
   /**
