@@ -30,9 +30,21 @@ export const IconGrid = (props: IconProps) => {
 
   return (
     <>
-      <Input type="number" labelText="Height" value={height} onChange={(e) => handleHeightChange(e.target.value)} />
-      <Input type="number" labelText="Width" value={width} onChange={(e) => handleWidthChange(e.target.value)} />
-      <Select labelText="Color" onChange={(e) => handleColorChange(e.target.value)}>
+      <Input
+        id="height"
+        type="number"
+        labelText="Height"
+        value={height}
+        onChange={(e) => handleHeightChange(e.target.value)}
+      />
+      <Input
+        id="width"
+        type="number"
+        labelText="Width"
+        value={width}
+        onChange={(e) => handleWidthChange(e.target.value)}
+      />
+      <Select id="color" labelText="Color" onChange={(e) => handleColorChange(e.target.value)}>
         {getScssColors().map((color) => (
           <option key={color} value={color}>
             {formatColorName(color)}
