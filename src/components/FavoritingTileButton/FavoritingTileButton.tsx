@@ -3,7 +3,6 @@ import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { Text, TextVariants } from '../Text';
 
-// You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface FavoritingTileButtonProps extends ComponentProps<'button'> {
   /**
    * Text for when the object is not in the list and the user wants to add it
@@ -20,7 +19,7 @@ export interface FavoritingTileButtonProps extends ComponentProps<'button'> {
   /**
    *  List title shown on tile
    */
-  listTitle: string;
+  listTitle: React.ReactNode;
   /**
    *  Number of objects in list to display on tile
    */
