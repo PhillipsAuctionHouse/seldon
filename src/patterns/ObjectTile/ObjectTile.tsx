@@ -79,7 +79,7 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
    * Object title.
    */
-  titleText?: string;
+  titleText?: string | React.ReactNode;
   /**
    * Withdrawn Text
    */
