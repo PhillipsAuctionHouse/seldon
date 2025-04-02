@@ -11,7 +11,7 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
    * Optional Object badge.
    */
-  badgeText?: string;
+  badgeText?: string | React.ReactNode;
   /**
    * Optional Element to render at the top level.
    */
@@ -67,11 +67,11 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
    * Object Maker name.
    */
-  makerText?: string;
+  makerText?: string | React.ReactNode;
   /**
    * Object Model text.
    */
-  modelText?: string;
+  modelText?: string | React.ReactNode;
   /**
    * Object reference number.
    */
@@ -79,7 +79,7 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
    * Object title.
    */
-  titleText?: string;
+  titleText?: string | React.ReactNode;
   /**
    * Withdrawn Text
    */
