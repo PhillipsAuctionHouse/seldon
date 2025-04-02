@@ -2,7 +2,7 @@
 @use '#scss/allPartials' as *;
 
 @mixin gridItemColumnSpan($span: 1, $total-cols: 12) {
-  grid-column: auto / span $span;
+  grid-column: span $span;
 
   &-align-right {
     grid-column-end: $total-cols + 1;
@@ -24,22 +24,10 @@
     }
   }
 
-  @for $i from 1 through 6 {
-    &--start-xs-#{$i} {
-      grid-column-start: #{$i};
-    }
-  }
-
   @include media($size-sm) {
     @for $i from 1 through 2 {
       &--span-sm-#{$i} {
         @include gridItemColumnSpan($i, 2);
-      }
-    }
-
-    @for $i from 1 through 6 {
-      &--start-sm-#{$i} {
-        grid-column-start: #{$i};
       }
     }
   }
@@ -50,38 +38,12 @@
         @include gridItemColumnSpan($i, 6);
       }
     }
-
-    @for $i from 1 through 6 {
-      &--start-md-#{$i} {
-        grid-column-start: #{$i};
-      }
-    }
   }
 
   @include media($size-lg) {
     @for $i from 1 through 12 {
       &--span-lg-#{$i} {
         @include gridItemColumnSpan($i, 12);
-      }
-    }
-
-    @for $i from 1 through 12 {
-      &--start-lg-#{$i} {
-        grid-column-start: #{$i};
-      }
-    }
-  }
-
-  @include media($size-xl) {
-    @for $i from 1 through 12 {
-      &--span-xl-#{$i} {
-        @include gridItemColumnSpan($i, 12);
-      }
-    }
-
-    @for $i from 1 through 12 {
-      &--start-xl-#{$i} {
-        grid-column-start: #{$i};
       }
     }
   }
