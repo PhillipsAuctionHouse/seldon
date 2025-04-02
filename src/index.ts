@@ -96,4 +96,4 @@ export * from './patterns/BidSnapshot';
 export * from './components/Article';
 export * from './components/Icon';
 export * from './components/TextArea';
-export * from './components/ListPreview';
+export * from './patterns/ListPreview';

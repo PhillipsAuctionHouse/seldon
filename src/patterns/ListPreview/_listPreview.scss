@@ -1,0 +1,8 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-list-preview {
+  display: flex;
+  flex-direction: column;
+  max-width: 24.5rem;
+  text-align: left;
+}
