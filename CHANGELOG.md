@@ -1,3 +1,10 @@
+## [1.133.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.1...v1.133.2) (2025-04-02)
+
+
+### Bug Fixes
+
+* **lot-description:** L3-6287 Fix for Object Tile Title Text ([#576](https://github.com/PhillipsAuctionHouse/seldon/issues/576)) ([0bc8145](https://github.com/PhillipsAuctionHouse/seldon/commit/0bc814534dc5e6be27fcb37304b556f6d368738c))
+
 ## [1.133.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.0...v1.133.1) (2025-04-01)
 
 
