@@ -16,38 +16,47 @@ exports[`AddToCalendar component > renders correctly 1`] = `
         class="addtocalendar atc-style-icon atc-style-menu-wb"
       >
         <a
-          class="seldon-icon-button seldon-icon-button--primary seldon-add-to-calendar__back-button atcb-link"
-          data-testid="undefined-calendar-button"
+          class="seldon-link seldon-link--link {px}-icon-button seldon-icon-button--primary seldon-add-to-calendar__back-button atcb-link"
+          data-testid="link"
         >
-          <div
-            class="seldon-icon seldon-icon-calendar-alt"
+          <span
+            class="seldon-text seldon-text--link"
+            data-testid="text"
           >
-            <svg
-              aria-labelledby="svg-calendar-alt"
-              color="$pure-black"
-              data-testid="icon-calendar-alt"
-              fill="none"
-              role="img"
-              viewBox="0 0 28 28"
-              xmlns="http://www.w3.org/2000/svg"
+            <span
+              class=""
             >
-              <title
-                id="svg-calendar-alt"
+              <div
+                class="seldon-icon seldon-icon-calendar-alt"
               >
-                SvgCalendarAlt
-              </title>
-              <path
-                d="M7 12.25A.875.875 0 1 0 7 14h1.75a.875.875 0 0 0 0-1.75zM13.125 12.25a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75zM19.25 12.25a.875.875 0 1 0 0 1.75H21a.875.875 0 0 0 0-1.75zM7 17.5a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75zM13.125 17.5a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75z"
-                fill="$pure-black"
-              />
-              <path
-                clip-rule="evenodd"
-                d="M1.75 7a3.5 3.5 0 0 1 3.5-3.5h17.5a3.5 3.5 0 0 1 3.5 3.5v14a3.5 3.5 0 0 1-3.5 3.5H5.25a3.5 3.5 0 0 1-3.5-3.5zM24.5 9.625V21a1.75 1.75 0 0 1-1.75 1.75H5.25A1.75 1.75 0 0 1 3.5 21V9.625zm0-1.75V7a1.75 1.75 0 0 0-1.75-1.75H5.25A1.75 1.75 0 0 0 3.5 7v.875z"
-                fill="$pure-black"
-                fill-rule="evenodd"
-              />
-            </svg>
-          </div>
+                <svg
+                  aria-labelledby="svg-calendar-alt"
+                  color="$pure-black"
+                  data-testid="icon-calendar-alt"
+                  fill="none"
+                  role="img"
+                  viewBox="0 0 28 28"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title
+                    id="svg-calendar-alt"
+                  >
+                    SvgCalendarAlt
+                  </title>
+                  <path
+                    d="M7 12.25A.875.875 0 1 0 7 14h1.75a.875.875 0 0 0 0-1.75zM13.125 12.25a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75zM19.25 12.25a.875.875 0 1 0 0 1.75H21a.875.875 0 0 0 0-1.75zM7 17.5a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75zM13.125 17.5a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75z"
+                    fill="$pure-black"
+                  />
+                  <path
+                    clip-rule="evenodd"
+                    d="M1.75 7a3.5 3.5 0 0 1 3.5-3.5h17.5a3.5 3.5 0 0 1 3.5 3.5v14a3.5 3.5 0 0 1-3.5 3.5H5.25a3.5 3.5 0 0 1-3.5-3.5zM24.5 9.625V21a1.75 1.75 0 0 1-1.75 1.75H5.25A1.75 1.75 0 0 1 3.5 21V9.625zm0-1.75V7a1.75 1.75 0 0 0-1.75-1.75H5.25A1.75 1.75 0 0 0 3.5 7v.875z"
+                    fill="$pure-black"
+                    fill-rule="evenodd"
+                  />
+                </svg>
+              </div>
+            </span>
+          </span>
         </a>
         <var
           class="atc_event"
@@ -115,38 +124,47 @@ exports[`AddToCalendar component > renders correctly with startDateTimeOffset 1`
         class="addtocalendar atc-style-icon atc-style-menu-wb"
       >
         <a
-          class="seldon-icon-button seldon-icon-button--primary seldon-add-to-calendar__back-button atcb-link"
-          data-testid="undefined-calendar-button"
+          class="seldon-link seldon-link--link {px}-icon-button seldon-icon-button--primary seldon-add-to-calendar__back-button atcb-link"
+          data-testid="link"
         >
-          <div
-            class="seldon-icon seldon-icon-calendar-alt"
+          <span
+            class="seldon-text seldon-text--link"
+            data-testid="text"
           >
-            <svg
-              aria-labelledby="svg-calendar-alt"
-              color="$pure-black"
-              data-testid="icon-calendar-alt"
-              fill="none"
-              role="img"
-              viewBox="0 0 28 28"
-              xmlns="http://www.w3.org/2000/svg"
+            <span
+              class=""
             >
-              <title
-                id="svg-calendar-alt"
+              <div
+                class="seldon-icon seldon-icon-calendar-alt"
               >
-                SvgCalendarAlt
-              </title>
-              <path
-                d="M7 12.25A.875.875 0 1 0 7 14h1.75a.875.875 0 0 0 0-1.75zM13.125 12.25a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75zM19.25 12.25a.875.875 0 1 0 0 1.75H21a.875.875 0 0 0 0-1.75zM7 17.5a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75zM13.125 17.5a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75z"
-                fill="$pure-black"
-              />
-              <path
-                clip-rule="evenodd"
-                d="M1.75 7a3.5 3.5 0 0 1 3.5-3.5h17.5a3.5 3.5 0 0 1 3.5 3.5v14a3.5 3.5 0 0 1-3.5 3.5H5.25a3.5 3.5 0 0 1-3.5-3.5zM24.5 9.625V21a1.75 1.75 0 0 1-1.75 1.75H5.25A1.75 1.75 0 0 1 3.5 21V9.625zm0-1.75V7a1.75 1.75 0 0 0-1.75-1.75H5.25A1.75 1.75 0 0 0 3.5 7v.875z"
-                fill="$pure-black"
-                fill-rule="evenodd"
-              />
-            </svg>
-          </div>
+                <svg
+                  aria-labelledby="svg-calendar-alt"
+                  color="$pure-black"
+                  data-testid="icon-calendar-alt"
+                  fill="none"
+                  role="img"
+                  viewBox="0 0 28 28"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title
+                    id="svg-calendar-alt"
+                  >
+                    SvgCalendarAlt
+                  </title>
+                  <path
+                    d="M7 12.25A.875.875 0 1 0 7 14h1.75a.875.875 0 0 0 0-1.75zM13.125 12.25a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75zM19.25 12.25a.875.875 0 1 0 0 1.75H21a.875.875 0 0 0 0-1.75zM7 17.5a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75zM13.125 17.5a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75z"
+                    fill="$pure-black"
+                  />
+                  <path
+                    clip-rule="evenodd"
+                    d="M1.75 7a3.5 3.5 0 0 1 3.5-3.5h17.5a3.5 3.5 0 0 1 3.5 3.5v14a3.5 3.5 0 0 1-3.5 3.5H5.25a3.5 3.5 0 0 1-3.5-3.5zM24.5 9.625V21a1.75 1.75 0 0 1-1.75 1.75H5.25A1.75 1.75 0 0 1 3.5 21V9.625zm0-1.75V7a1.75 1.75 0 0 0-1.75-1.75H5.25A1.75 1.75 0 0 0 3.5 7v.875z"
+                    fill="$pure-black"
+                    fill-rule="evenodd"
+                  />
+                </svg>
+              </div>
+            </span>
+          </span>
         </a>
         <var
           class="atc_event"

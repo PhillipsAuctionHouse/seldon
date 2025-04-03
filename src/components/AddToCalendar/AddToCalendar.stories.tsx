@@ -12,7 +12,7 @@ export const Playground = (props: AddToCalendarProps) => <AddToCalendar {...prop
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
-  id: 'calendarAlt',
+  id: 'AddToCalendar',
   startDateTimeOffset: '2025-01-27T15:13:02.59+00:00',
   endDateTimeOffset: '2025-06-27T15:13:02.59+00:00',
   timeZone: 'America/New_York',

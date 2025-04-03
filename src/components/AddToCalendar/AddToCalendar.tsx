@@ -1,14 +1,14 @@
-import { ComponentProps, forwardRef, useState, useEffect } from 'react';
+import { ComponentProps, forwardRef, useState, useEffect, ElementType } from 'react';
 import { getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
 import { format } from 'date-fns/format';
 import initializeAddToCalendar from './initializeAddToCalendar';
 import { Icon } from '../Icon';
 import { getTimeZone } from './utils';
+import { Link, LinkProps } from '../Link';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface AddToCalendarProps extends ComponentProps<'button'> {
-  id?: string;
   startDateTimeOffset?: string;
   endDateTimeOffset?: string;
   timeZone?: string;
@@ -17,6 +17,7 @@ export interface AddToCalendarProps extends ComponentProps<'button'> {
   location?: string;
   organizer?: string;
   organizerEmail?: string;
+  linkElement?: ElementType<LinkProps>;
 }
 /**
  * ## Overview
@@ -39,12 +40,12 @@ const AddToCalendar = forwardRef<HTMLButtonElement, AddToCalendarProps>(
       location = 'New York',
       organizer,
       organizerEmail,
+      linkElement: Component = Link,
       ...props
     },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'AddToCalendar');
-    const { id } = props;
     const [status, setStatus] = useState('mounting');
 
     useEffect(() => {
@@ -90,12 +91,12 @@ const AddToCalendar = forwardRef<HTMLButtonElement, AddToCalendarProps>(
       >
         <div id="add-to-calendar" className={statusClassName}>
           <span className="addtocalendar atc-style-icon atc-style-menu-wb">
-            <a
-              data-testid={`${id}-calendar-button`}
-              className={`${px}-icon-button ${px}-icon-button--primary ${baseClassName}__back-button atcb-link`}
+            <Component
+              className={`{px}-icon-button ${px}-icon-button--primary ${baseClassName}__back-button atcb-link`}
             >
               <Icon icon="CalendarAlt" />
-            </a>
+            </Component>
+
             <var className="atc_event">
               <var className="atc_date_start">{format(startDateTime, 'yyyy-MM-dd HH:mm:ss')}</var>
               {endDateTime && <var className="atc_date_end">{format(endDateTime, 'yyyy-MM-dd HH:mm:ss')}</var>}
