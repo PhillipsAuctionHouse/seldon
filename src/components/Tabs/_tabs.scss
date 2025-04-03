@@ -32,6 +32,7 @@
       color: $button-hover;
       cursor: pointer;
       font-size: $body-size2;
+      font-variation-settings: 'wght' 600;
       line-height: $body-line-height-size2;
 
       &:hover {
@@ -50,7 +51,6 @@
     }
     .#{$px}-text {
       color: $pure-black;
-      font-variation-settings: 'wght' 600;
 
       &:hover {
         color: $button-hover;
