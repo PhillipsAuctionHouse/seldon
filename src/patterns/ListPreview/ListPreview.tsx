@@ -1,5 +1,8 @@
-import { ComponentProps, forwardRef, ElementType } from 'react';
+import { ComponentProps, forwardRef, ElementType, memo } from 'react';
 import { getCommonProps } from '../../utils';
+
+import { Text, TextVariants } from '../../components/Text';
+// import { DropDown } from '../../components/DropDown';
 import classnames from 'classnames';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
@@ -37,6 +40,10 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
    */
   descriptionText?: string;
   /**
+   * List lot count.
+   */
+  lotCount?: number;
+  /**
    * List title.
    */
   titleText?: string;
@@ -46,15 +53,63 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
  *
  * Overview of this widget
  *
- * [Figma Link](Add Figma URL here)
+ * [Figma Link](https://www.figma.com/design/rIefa3bRPyZbZmtyV9PSQv/My-Account?node-id=61-14355&m=dev)
  *
  * [Storybook Link](Point back to yourself here)
  */
-const ListPreview = forwardRef<HTMLDivElement, ListPreviewProps>(({ className, ...props }, ref) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ListPreview');
-
-  return <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}></div>;
-});
+const ListPreview = memo(
+  forwardRef<HTMLAnchorElement | HTMLElement, ListPreviewProps>(
+    (
+      { 
+        children,
+        className,
+        descriptionText,
+        element: Element,
+        imageAlt = 'Brought to you by Phillips',
+        imageFetchPriority,
+        imageLoading,
+        imageSizes,
+        imageSrcSet,
+        imageUrl = '',
+        lotCount = 0,
+        titleText,
+        ...props 
+      }
+    ) => {
+      const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ListPreview');
+      const Component = Element ?? 'a';
+      
+      return (
+        <Component
+          {...commonProps}
+          {...props}
+          data-testid="seldon-list-preview"
+          className={classnames('seldon-list-preview', baseClassName, className)}
+        >
+          <Text variant={TextVariants.title3} className="seldon-list-preview__lot-count">{lotCount}</Text>
+          <Text variant={TextVariants.heading3} className="seldon-list-preview__lot-title">{titleText}</Text>
+          <Text variant={TextVariants.body1} className="seldon-list-preview__lot-description">{descriptionText}</Text>
+          <div className="seldon-list-preview__image">
+            <img
+              alt={imageAlt}
+              className="seldon-list-preview__image__img"
+              fetchPriority={imageFetchPriority}
+              loading={imageLoading}
+              sizes={imageSizes}
+              srcSet={imageSrcSet}
+              src={imageUrl}
+            />
+          </div>
+          <div className="seldon-list-preview__content">
+            <h3 className="seldon-list-preview__content__title">{titleText}</h3>
+            <p className="seldon-list-preview__content__description">{descriptionText}</p>
+            {children}
+          </div>
+        </Component>
+      );
+    }
+  )
+);
 
 ListPreview.displayName = 'ListPreview';
 

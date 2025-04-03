@@ -58,10 +58,10 @@
 @use 'patterns/BidSnapshot/bidSnapshot';
 @use 'patterns/FilterMenu/filterMenu';
 @use 'patterns/DetailList/detailList';
+@use 'patterns/ListPreview/listPreview';
 
 // Site Furniture
 @use 'site-furniture/Header/header';
 @use 'site-furniture/Footer/footer';
 @use 'components/Article/article';
 @use 'components/TextArea/textArea';
-@use 'patterns/ListPreview/listPreview';

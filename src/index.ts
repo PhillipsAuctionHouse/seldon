@@ -84,6 +84,7 @@ export * from './components/PinchZoom';
 export * from './components/Tabs';
 export * from './components/SeldonImage';
 export * from './patterns/SaleHeaderBanner';
+export * from './patterns/ListPreview';
 
 // utils
 export * from './utils/hooks';
@@ -96,4 +97,3 @@ export * from './patterns/BidSnapshot';
 export * from './components/Article';
 export * from './components/Icon';
 export * from './components/TextArea';
-export * from './patterns/ListPreview';
