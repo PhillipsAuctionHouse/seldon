@@ -1,0 +1,39 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-favoriting-tile-button {
+  align-items: center;
+  background-color: $white;
+  border: 1px solid $light-gray;
+  display: flex;
+  flex-shrink: 0;
+  gap: $spacing-md;
+  justify-content: space-between;
+  padding: $padding-md $padding-sm;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+
+  &--lot-in-list {
+    border: 1px solid $pure-black;
+  }
+
+  &__text {
+    display: flex;
+    gap: $spacing-xsm;
+    overflow: hidden;
+
+    span {
+      color: inherit;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &:hover {
+    align-items: center;
+    background: $button-hover;
+    border: 1px solid $button-hover;
+    color: $white;
+    cursor: pointer;
+  }
+}
