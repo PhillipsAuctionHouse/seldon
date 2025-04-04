@@ -1,3 +1,10 @@
+## [1.133.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.2...v1.133.3) (2025-04-04)
+
+
+### Bug Fixes
+
+* **Icons:** L3-6336 fix fallback value for Icon color ([#579](https://github.com/PhillipsAuctionHouse/seldon/issues/579)) ([16dc0bc](https://github.com/PhillipsAuctionHouse/seldon/commit/16dc0bc2728d581c903c49919c1aa1e4a108b7e2))
+
 ## [1.133.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.1...v1.133.2) (2025-04-02)
 
 
