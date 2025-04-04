@@ -3,8 +3,9 @@
 .#{$px}-pinch-zoom {
   cursor: pointer;
   display: flex;
-  flex: 1;
+  margin: 0 auto !important;
   max-height: 100%;
+  overflow: unset !important;
 
   &.#{$px}-pinch-zoom {
     height: unset;
