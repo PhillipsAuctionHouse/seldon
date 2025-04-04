@@ -1,19 +1,25 @@
 import vars from '#scss/_vars.scss?raw';
 
-// This function parses the _vars.scss file into individual lines and returns the value of the variable passed in
-// If the variable is not found, it returns the default value passed in
-export const getScssVar = (scssVar: string, defaultValue: string): string => {
+export const getScssVarsMap = () => {
   const parsedVars = vars.split('\n').map((_var) => {
     const [name, value] = _var.split(': ');
     return { name, value: value?.replace(';', '') };
   });
-  const colorIndex = parsedVars.findIndex(({ name }) => name === scssVar);
+  const scssVarsMap: Record<string, string> = {};
 
-  if (scssVar && colorIndex > -1) {
-    return parsedVars[colorIndex].value;
-  }
+  parsedVars.forEach(({ name, value }) => {
+    if (name && value) {
+      scssVarsMap[name] = value;
+    }
+  });
+  return scssVarsMap;
+};
 
-  return defaultValue;
+// This function parses the _vars.scss file into individual lines and returns the value of the variable passed in
+// If the variable is not found, it returns the default value passed in
+export const getScssVar = (scssVar: string, defaultValue: string): string => {
+  const varsMap = getScssVarsMap();
+  return varsMap[scssVar] ?? varsMap[defaultValue] ?? defaultValue;
 };
 
 // Finds all color variables set in _vars.scss and returns the name of each
