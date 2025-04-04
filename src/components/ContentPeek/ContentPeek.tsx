@@ -4,9 +4,9 @@ import { getCommonProps } from '../../utils';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../Collapsible';
-import PlusIcon from '../../assets/plus.svg?react';
-import MinusIcon from '../../assets/minus.svg?react';
 import { HeightUnits } from './utils';
+import { DEFAULT_REM_SIZE } from '../../utils/constants';
+import { Icon } from '../Icon';
 
 export interface ContentPeekProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -68,12 +68,22 @@ const ContentPeek = forwardRef<HTMLDivElement, ContentPeekProps>(
     const [hasOverflow, setHasOverflow] = useState(false);
     const contentRef = useRef<HTMLDivElement>(null);
 
+    const maxHeightInPx = heightUnits === HeightUnits.rem ? maxHeight * DEFAULT_REM_SIZE : maxHeight;
+    const minHeightThresholdToRem = minHeightThreshold ? minHeightThreshold * DEFAULT_REM_SIZE : null;
+    const minHeightThresholdInPx = heightUnits === HeightUnits.rem ? minHeightThresholdToRem : minHeightThreshold;
+
     useEffect(() => {
       if (contentRef.current) {
-        const threshold = minHeightThreshold ?? maxHeight;
+        const threshold = minHeightThresholdInPx ?? maxHeightInPx;
         setHasOverflow(contentRef.current.scrollHeight > threshold);
       }
-    }, [children, maxHeight, minHeightThreshold]);
+    }, [maxHeightInPx, minHeightThresholdInPx]);
+
+    useEffect(() => {
+      const threshold =
+        minHeightThresholdInPx && minHeightThresholdInPx >= maxHeightInPx ? minHeightThresholdInPx : maxHeightInPx;
+      contentRef.current?.style.setProperty('--content-peek-max-height', `${threshold}${HeightUnits.px}`);
+    }, [maxHeightInPx, minHeightThresholdInPx]);
 
     const toggleExpand = useCallback(() => {
       setIsExpanded((expanded) => !expanded);
@@ -85,11 +95,6 @@ const ContentPeek = forwardRef<HTMLDivElement, ContentPeekProps>(
         open={isExpanded}
         onOpenChange={toggleExpand}
         className={classnames(baseClassName, className)}
-        style={
-          {
-            '--content-peek-max-height': `${maxHeight}${heightUnits}`,
-          } as React.CSSProperties
-        }
         ref={ref}
         {...commonProps}
         {...props}
@@ -107,7 +112,7 @@ const ContentPeek = forwardRef<HTMLDivElement, ContentPeekProps>(
             <div className={`${baseClassName}-overlay-trigger-wrapper`}>
               <CollapsibleTrigger asChild className={`${baseClassName}-overlay-trigger`}>
                 <Button variant={ButtonVariants.secondary}>
-                  {isExpanded ? <MinusIcon /> : <PlusIcon />}
+                  {isExpanded ? <Icon icon="Minus" /> : <Icon icon="Plus" />}
                   {isExpanded ? contentCollapseText : contentExpandText}
                 </Button>
               </CollapsibleTrigger>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
-import ChevronNextIcon from '../../assets/chevronNext.svg?react';
+import { Icon } from '../Icon';
 
 export interface BreadcrumbItemProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -61,7 +61,7 @@ const BreadcrumbItem = ({
         </CustomElement>
       )}
 
-      {!isCurrent ? <ChevronNextIcon className={`${baseClassName}__chevron`} /> : null}
+      {!isCurrent ? <Icon icon="ChevronNext" className={`${baseClassName}__chevron`} /> : null}
     </li>
   );
 };

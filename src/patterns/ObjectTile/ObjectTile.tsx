@@ -11,7 +11,7 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
    * Optional Object badge.
    */
-  badgeText?: string;
+  badgeText?: string | React.ReactNode;
   /**
    * Optional Element to render at the top level.
    */
@@ -67,11 +67,11 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
    * Object Maker name.
    */
-  makerText?: string;
+  makerText?: string | React.ReactNode;
   /**
    * Object Model text.
    */
-  modelText?: string;
+  modelText?: string | React.ReactNode;
   /**
    * Object reference number.
    */
@@ -79,7 +79,7 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
    * Object title.
    */
-  titleText?: string;
+  titleText?: string | React.ReactNode;
   /**
    * Withdrawn Text
    */
@@ -145,7 +145,7 @@ const ObjectTile = memo(
             </Text>
           ) : null}
           <div className={`${baseClassName}__lot-number-like`}>
-            <Text className={`${baseClassName}__lot-number`} variant={TextVariants.heading3} element="p">
+            <Text className={`${baseClassName}__lot-number`} variant={TextVariants.heading4} element="p">
               {lotNumber}
             </Text>
             {BadgeElement && (
@@ -163,7 +163,7 @@ const ObjectTile = memo(
             <>
               <div className={`${baseClassName}__meta`}>
                 {makerText ? (
-                  <Text className={`${baseClassName}__maker`} variant={TextVariants.heading3}>
+                  <Text className={`${baseClassName}__maker`} variant={TextVariants.heading4}>
                     {makerText}
                   </Text>
                 ) : null}

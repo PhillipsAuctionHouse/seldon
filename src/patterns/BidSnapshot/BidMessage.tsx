@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { Text, TextVariants } from '../../components/Text';
 import { BidMessageVariants } from './types';
-import { GreenCircle, RedCircle } from '../../assets/icons';
+import { Icon } from '../../components/Icon';
 
 export interface BidMessageProps extends ComponentProps<'p'> {
   /**
@@ -37,12 +37,19 @@ const BidMessage = ({
   ...props
 }: BidMessageProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'BidMessage');
-  const icon = variant === BidMessageVariants.positive ? <GreenCircle /> : <RedCircle />;
+  const icon =
+    variant === BidMessageVariants.positive ? (
+      <Icon icon="IconGreenCircle" height={8} width={8} />
+    ) : (
+      <Icon icon="IconRedCircle" height={8} width={8} />
+    );
   return (
-    <Text {...commonProps} className={classnames(baseClassName, className)} {...props} variant={TextVariants.string2}>
+    <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
       {hasIcon ? icon : null}
-      {message}
-    </Text>
+      <Text variant={TextVariants.string2} className={`${baseClassName}-text`}>
+        {message}
+      </Text>
+    </div>
   );
 };
 

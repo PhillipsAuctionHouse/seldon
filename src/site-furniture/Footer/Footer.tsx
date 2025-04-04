@@ -1,8 +1,8 @@
 import classnames from 'classnames';
 
 import { defaultYear, px } from '../../utils';
-import Logo from '../../assets/PhillipsLogo.svg?react';
 import { Text, TextVariants } from '../../components/Text';
+import { Icon } from '../../components/Icon';
 
 export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -34,7 +34,7 @@ const Footer = ({
       <div className={`${px}-footer__copyright`}>
         <h3 data-testid="footer-logo" className={`${px}-footer__logo`}>
           <a href="/" aria-label="logo">
-            <Logo />
+            <Icon icon="PhillipsLogo" />
           </a>
         </h3>
         <Text variant={TextVariants.body3}>{copyright}</Text>

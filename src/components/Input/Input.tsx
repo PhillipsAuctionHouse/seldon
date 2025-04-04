@@ -1,6 +1,5 @@
 import * as React from 'react';
 import classnames from 'classnames';
-
 import { px, useNormalizedInputProps } from '../../utils';
 
 export interface InputProps extends Omit<React.ComponentProps<'input'>, 'size'> {
@@ -27,9 +26,9 @@ export interface InputProps extends Omit<React.ComponentProps<'input'>, 'size'> 
   hideLabel?: boolean;
 
   /**
-   * A custom `id` for the `<input>`
+   * A unique `id` for the `<input>`
    */
-  id?: string;
+  id: string;
 
   /**
    * Boolean to dictate whether input is inline with the label or not. `true` to use the inline version.
@@ -142,10 +141,9 @@ const Input = React.forwardRef(
     }: InputProps,
     ref: React.ForwardedRef<HTMLInputElement>,
   ) => {
-    const generatedId = React.useId();
     const inputProps = useNormalizedInputProps({
       disabled,
-      id: id || generatedId,
+      id,
       invalid,
       invalidText,
       readOnly,
@@ -166,8 +164,8 @@ const Input = React.forwardRef(
     return (
       <div className={wrapperClassnames}>
         <label
-          data-testid={`label-${id || generatedId}`}
-          htmlFor={id || generatedId}
+          data-testid={`label-${id}`}
+          htmlFor={id}
           className={classnames(`${px}-input__label`, {
             [`${px}-input__label--hidden`]: hideLabel,
             [`${px}-skeleton`]: isSkeletonLoading,
@@ -181,7 +179,7 @@ const Input = React.forwardRef(
           })}
           data-testid={id}
           disabled={inputProps.disabled}
-          id={id || generatedId}
+          id={id}
           onChange={onChange}
           onClick={onClick}
           placeholder={isSkeletonLoading ? '' : placeholder}

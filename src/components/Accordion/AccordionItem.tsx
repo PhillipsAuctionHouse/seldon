@@ -1,9 +1,7 @@
 import * as Accordion from '@radix-ui/react-accordion';
 import classnames from 'classnames';
 import React, { forwardRef, useCallback, useRef } from 'react';
-import LockIcon from '../../assets/lock.svg?react';
-import MinusIcon from '../../assets/minus.svg?react';
-import PlusIcon from '../../assets/plus.svg?react';
+import { Icon } from '../Icon';
 import { getCommonProps } from '../../utils';
 import { AccordionContentType, AccordionHeaderType, AccordionItemVariant } from './types';
 import { getIconClasses } from './utils';
@@ -72,7 +70,10 @@ const AccordionHeader = ({
   // Render all icons and use css to conditionally show/hide the correct one
   const lockIconComponent = (
     <div>
-      <LockIcon
+      <Icon
+        icon="Lock"
+        height={24}
+        width={24}
         className={getIconClasses(baseClassName, isLargeVariation, 'lock')}
         data-testid={`${id}-lockedIcon`}
         aria-hidden
@@ -82,7 +83,10 @@ const AccordionHeader = ({
 
   const plusIconComponent = (
     <div>
-      <PlusIcon
+      <Icon
+        icon="Plus"
+        height={24}
+        width={24}
         className={getIconClasses(baseClassName, isLargeVariation, 'plus')}
         data-testid={`${id}-plusIcon`}
         aria-hidden
@@ -92,7 +96,10 @@ const AccordionHeader = ({
 
   const minusIconComponent = (
     <div>
-      <MinusIcon
+      <Icon
+        icon="Minus"
+        height={24}
+        width={24}
         className={getIconClasses(baseClassName, isLargeVariation, 'minus')}
         data-testid={`${id}-minusIcon`}
         aria-hidden
