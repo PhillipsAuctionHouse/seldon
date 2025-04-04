@@ -1,4 +1,17 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-divider {
+  margin: $spacing-sm 0 $spacing-xsm 0;
+
+  &-line {
+    background-color: $keyline-gray;
+    border: none;
+    border-top: 1px solid $keyline-gray;
+    color: $keyline-gray;
+    display: block;
+    height: 1px;
+    margin: 1em 0;
+    padding: 0;
+    width: 100%;
+  }
 }

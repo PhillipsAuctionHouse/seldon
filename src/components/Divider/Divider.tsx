@@ -1,9 +1,14 @@
 import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
-import classnames from 'classnames';
+import classNames from 'classnames';
+import './_divider.scss';
 
-// You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
-export interface DividerProps extends ComponentProps<'div'> {}
+export interface DividerProps extends ComponentProps<'div'> {
+  /**
+   * Optional element to render as the top-level component e.g. 'div', 'span', CustomComponent, etc.  Defaults to the appropriate HTML based on the variant.
+   */
+  element?: React.ElementType;
+}
 /**
  * ## Overview
  *
@@ -13,10 +18,15 @@ export interface DividerProps extends ComponentProps<'div'> {}
  *
  * [Storybook Link](Point back to yourself here)
  */
-const Divider = forwardRef<HTMLDivElement, DividerProps>(({ className, ...props }, ref) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Divider');
+const Divider = forwardRef<HTMLDivElement, DividerProps>(({ className, element: CustomElement, ...props }) => {
+  const Component = CustomElement || 'div';
+  const { className: baseClassName } = getCommonProps(props, 'Divider');
 
-  return <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}></div>;
+  return (
+    <Component className={classNames(baseClassName, className)} {...props} data-testid={`divider-${props.id}`}>
+      <hr className={`${baseClassName}-line`} />
+    </Component>
+  );
 });
 
 Divider.displayName = 'Divider';
