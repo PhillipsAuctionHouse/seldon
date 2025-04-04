@@ -1,3 +1,10 @@
+## [1.133.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.3...v1.133.4) (2025-04-04)
+
+
+### Bug Fixes
+
+* **icon:** L3-6336 handle icons that are not of 1x1 aspect ratio ([#580](https://github.com/PhillipsAuctionHouse/seldon/issues/580)) ([3085546](https://github.com/PhillipsAuctionHouse/seldon/commit/3085546665d011272af6928578c180911ebe96ca))
+
 ## [1.133.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.2...v1.133.3) (2025-04-04)
 
 
