@@ -17,42 +17,51 @@ declare global {
   }
 }
 
-export default function initializeAddToCalendar(): Promise<string> {
+export function isAddToCalendarLoaded(window: Window): boolean {
+  return typeof window.addtocalendar !== 'undefined' && typeof window.addtocalendar.load === 'function';
+}
+
+export function loadAddToCalendarScript(document: Document, window: Window): Promise<string> {
   return new Promise((resolve, reject) => {
-    if (typeof window !== 'undefined' && window.addtocalendar) {
-      if (typeof window.addtocalendar.load === 'function') {
-        resolve('true');
-      }
-    } else {
-      let intervalCount = 0;
-      if (typeof window !== 'undefined' && window.ifaddtocalendar === undefined) {
-        window.ifaddtocalendar = 1;
-        const d = document;
-        const s = d.createElement('script');
-        const g = 'getElementsByTagName';
-        s.type = 'text/javascript';
-        s.charset = 'UTF-8';
-        s.async = true;
-        s.src = `${window.location.protocol === 'https:' ? 'https' : 'http'}://addtocalendar.com/atc/1.5/atc.min.js`;
-        s.onload = () => {
-          resolve('true');
-        };
-        s.onerror = () => {
-          reject('Failed to load AddToCalendar script');
-        };
-        d[g]('head')[0].appendChild(s);
-      } else {
-        const checkInterval = setInterval(() => {
-          intervalCount++;
-          if (typeof window !== 'undefined' && window.addtocalendar) {
-            clearInterval(checkInterval);
-            resolve('true');
-          } else if (intervalCount >= 10) {
-            clearInterval(checkInterval);
-            reject('AddToCalendar script failed to load');
-          }
-        }, 1000);
-      }
-    }
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.charset = 'UTF-8';
+    script.async = true;
+    script.src = `${window.location.protocol === 'https:' ? 'https' : 'http'}://addtocalendar.com/atc/1.5/atc.min.js`;
+    script.onload = () => {
+      resolve('true');
+    };
+    script.onerror = () => {
+      reject('Failed to load AddToCalendar script');
+    };
+    document.getElementsByTagName('head')[0].appendChild(script);
   });
+}
+
+export function checkAddToCalendarInterval(window: Window): Promise<string> {
+  return new Promise((resolve, reject) => {
+    let intervalCount = 0;
+    const intervalId = setInterval(() => {
+      // Store the interval ID
+      intervalCount++;
+      if (typeof window !== 'undefined' && window.addtocalendar) {
+        clearInterval(intervalId); // Use intervalId to clear the interval
+        resolve('true');
+      } else if (intervalCount >= 10) {
+        clearInterval(intervalId); // Use intervalId to clear the interval
+        reject('AddToCalendar script failed to load');
+      }
+    }, 1000);
+  });
+}
+
+export default function initializeAddToCalendar(): Promise<string> {
+  if (isAddToCalendarLoaded(window)) {
+    return Promise.resolve('true');
+  } else if (typeof window !== 'undefined' && window.ifaddtocalendar === undefined) {
+    window.ifaddtocalendar = 1;
+    return loadAddToCalendarScript(document, window);
+  } else {
+    return checkAddToCalendarInterval(window);
+  }
 }
