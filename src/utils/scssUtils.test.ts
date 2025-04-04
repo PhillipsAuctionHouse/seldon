@@ -13,12 +13,20 @@ describe('scssUtils', () => {
       expect(result).toBe('#000000');
     });
 
-    it('should return the default value if the scss variable does not exist', () => {
+    it('should return the color of the default value if the scss variable does not exist', () => {
       const scssVar = '$non-existent-var';
       const defaultValue = '$error-red';
 
       const result = getScssVar(scssVar, defaultValue);
-      expect(result).toBe('$error-red');
+      expect(result).toBe('#FF0000');
+    });
+
+    it('should return the default value if the scss variable does not exist AND the color of the default value is not found', () => {
+      const scssVar = '$non-existent-var';
+      const defaultValue = '$non-existent-default';
+
+      const result = getScssVar(scssVar, defaultValue);
+      expect(result).toBe('$non-existent-default');
     });
   });
 
