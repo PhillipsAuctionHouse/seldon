@@ -1,0 +1,11 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-icon {
+  align-items: center; /* for alignment of svg */
+  display: flex; /* for alignment of svg */
+  justify-content: center; /* for alignment of svg */
+  svg {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
