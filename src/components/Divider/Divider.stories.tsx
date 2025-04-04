@@ -11,8 +11,6 @@ export default meta;
 export const Playground = (props: DividerProps) => <Divider {...props} />;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-Playground.args = {
-  children: 'Hi There',
-};
+Playground.args = {};
 
 Playground.argTypes = {};
