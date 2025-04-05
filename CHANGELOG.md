@@ -1,3 +1,10 @@
+## [1.133.5](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.4...v1.133.5) (2025-04-05)
+
+
+### Bug Fixes
+
+* **lotobjecttile:** L3-6251 incorrect HTML nesting causing HTML validation errors and hydration errors ([#582](https://github.com/PhillipsAuctionHouse/seldon/issues/582)) ([edb5156](https://github.com/PhillipsAuctionHouse/seldon/commit/edb51560b5c96b6825a46f51adfaa7cb88d06826))
+
 ## [1.133.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.3...v1.133.4) (2025-04-04)
 
 
