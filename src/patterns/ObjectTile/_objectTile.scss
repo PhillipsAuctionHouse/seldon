@@ -13,6 +13,7 @@
 
   &__badge {
     color: $widget-red;
+    display: block; // Ensures the badge can be sized correctly
   }
 
   &__badge:empty {
@@ -47,7 +48,7 @@
     }
 
     .#{$px}-object-tile__lot-badge {
-      display: inline-block;
+      display: block;
       padding-left: $spacing-xsm;
       position: relative;
 
@@ -63,7 +64,7 @@
   }
 
   & .#{$px}-object-tile__lot-number {
-    display: inline-block;
+    display: block;
     margin-bottom: 0;
     padding-top: 2px;
   }
@@ -71,6 +72,7 @@
   & .#{$px}-object-tile__maker,
   & .#{$px}-object-tile__model,
   & .#{$px}-object-tile__reference-number {
+    display: block;
     margin-bottom: 0;
   }
 
@@ -80,6 +82,7 @@
   }
 
   &__meta {
+    display: block;
     margin-bottom: $spacing-sm;
   }
 
