@@ -3,6 +3,47 @@
 .#{$px}-list-preview {
   display: flex;
   flex-direction: column;
-  max-width: 24.5rem;
-  text-align: left;
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-medium);
+  box-shadow: var(--shadow-small);
+  overflow: hidden;
+
+  &__header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-gap: var(--spacing-xs);
+    padding: var(--spacing-m) var(--spacing-m) var(--spacing-s);
+    align-items: flex-end;
+  }
+
+  &__info {
+    overflow: hidden;
+  }
+
+  &__count {
+    display: block;
+    margin-bottom: var(--spacing-xxs);
+  }
+
+  &__title {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+  }
+
+  &__media-container {
+    width: 100%;
+    position: relative;
+  }
+
+  &__media {
+    width: 100%;
+    background-position: center;
+  }
 }

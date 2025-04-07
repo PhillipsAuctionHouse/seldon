@@ -1,53 +1,47 @@
-import { ComponentProps, forwardRef, ElementType, memo } from 'react';
-import { getCommonProps } from '../../utils';
-
-import { Text, TextVariants } from '../../components/Text';
-// import { DropDown } from '../../components/DropDown';
+import { ComponentProps, forwardRef, ElementType, memo, useRef } from 'react';
 import classnames from 'classnames';
 
-// You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
+import { getCommonProps } from '../../utils';
+import { Text, TextVariants } from '../../components/Text';
+import { SeldonImage } from '../../components/SeldonImage';
+
 export interface ListPreviewProps extends ComponentProps<'div'> {
   /**
-   * Optional Element to render at the top level.
+   * List data containing count and name
    */
-  element?: ElementType<ComponentProps<'a'>>;
+  list: {
+    count: number;
+    name: string;
+  };
   /**
-   * Image alt text for the object.
+   * Image URL for the list
    */
-  imageAlt?: string;
+  transformedImageUrl: string;
   /**
-   * Image URL for the object.
+   * Whether this card is in favorites view
    */
-  imageUrl?: string;
+  isFavorites?: boolean;
   /**
-   * Image srcset for the object. [https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset]
+   * Analytics wrapper for click events
    */
-  imageSrcSet?: string;
+  onClickAnalyticsWrapper: <T>(
+    callback: () => void,
+    eventName: string
+  ) => (event: T) => void;
   /**
-   * Image sizes for the object. [https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/sizes]
+   * Function to navigate to list details
    */
-  imageSizes?: string;
+  navigateToList: () => void;
   /**
-   * Image loading attribute. [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-loading]
+   * Optional Element to render at the top level
    */
-  imageLoading?: ComponentProps<'img'>['loading'];
+  element?: ElementType<ComponentProps<'div'>>;
   /**
-   * Image fetch priority. [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-fetchpriority]
+   * Element used for editing list
    */
-  imageFetchPriority?: ComponentProps<'img'>['fetchPriority'];
-  /**
-   * List description.
-   */
-  descriptionText?: string;
-  /**
-   * List lot count.
-   */
-  lotCount?: number;
-  /**
-   * List title.
-   */
-  titleText?: string;
+  EditListMenu?: React.ComponentType<{ list: any }>;
 }
+
 /**
  * ## Overview
  *
@@ -55,60 +49,79 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
  *
  * [Figma Link](https://www.figma.com/design/rIefa3bRPyZbZmtyV9PSQv/My-Account?node-id=61-14355&m=dev)
  *
- * [Storybook Link](Point back to yourself here)
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-listpreview--overview)
  */
 const ListPreview = memo(
-  forwardRef<HTMLAnchorElement | HTMLElement, ListPreviewProps>(
+  forwardRef<HTMLDivElement, ListPreviewProps>(
     (
-      { 
-        children,
+      {
         className,
-        descriptionText,
+        list,
+        transformedImageUrl,
+        isFavorites = false,
+        onClickAnalyticsWrapper,
+        navigateToList,
         element: Element,
-        imageAlt = 'Brought to you by Phillips',
-        imageFetchPriority,
-        imageLoading,
-        imageSizes,
-        imageSrcSet,
-        imageUrl = '',
-        lotCount = 0,
-        titleText,
-        ...props 
-      }
+        EditListMenu,
+        ...props
+      },
+      ref,
     ) => {
       const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ListPreview');
-      const Component = Element ?? 'a';
-      
+      const Component = Element ?? 'div';
+      const imageRef = useRef<HTMLDivElement>(null);
+
       return (
         <Component
-          {...commonProps}
-          {...props}
-          data-testid="seldon-list-preview"
-          className={classnames('seldon-list-preview', baseClassName, className)}
+          {...commonProps} 
+          className={classnames(baseClassName, className)} 
+          {...props} 
+          ref={ref}
         >
-          <Text variant={TextVariants.title3} className="seldon-list-preview__lot-count">{lotCount}</Text>
-          <Text variant={TextVariants.heading3} className="seldon-list-preview__lot-title">{titleText}</Text>
-          <Text variant={TextVariants.body1} className="seldon-list-preview__lot-description">{descriptionText}</Text>
-          <div className="seldon-list-preview__image">
-            <img
-              alt={imageAlt}
-              className="seldon-list-preview__image__img"
-              fetchPriority={imageFetchPriority}
-              loading={imageLoading}
-              sizes={imageSizes}
-              srcSet={imageSrcSet}
-              src={imageUrl}
-            />
+          <div className={`${baseClassName}__header`}>
+            <div className={`${baseClassName}__info`}>
+              <Text 
+                element="span" 
+                className={`${baseClassName}__count`} 
+                variant={TextVariants.body3}
+              >
+                {list.count} {list.count === 1 ? 'LOT' : 'LOTS'}
+              </Text>
+              <Text 
+                element="h3" 
+                className={`${baseClassName}__title`} 
+                variant={TextVariants.heading5}
+              >
+                {list.name}
+              </Text>
+            </div>
+            <div className={`${baseClassName}__actions`}>
+              {!isFavorites && EditListMenu && <EditListMenu list={list} />}
+            </div>
           </div>
-          <div className="seldon-list-preview__content">
-            <h3 className="seldon-list-preview__content__title">{titleText}</h3>
-            <p className="seldon-list-preview__content__description">{descriptionText}</p>
-            {children}
+          <div 
+            className={`${baseClassName}__media-container`} 
+            ref={imageRef}
+          >
+            <SeldonImage
+              alt={list.name}
+              aspectRatio="1/1"
+              className={`${baseClassName}__media`}
+              objectFit="cover"
+              src={transformedImageUrl}
+              onClick={onClickAnalyticsWrapper<React.MouseEvent>(
+                navigateToList,
+                isFavorites ? 'navigateToFavoritesList' : 'navigateToList'
+              )}
+              style={{
+                cursor: 'pointer',
+              }}
+            />
           </div>
         </Component>
       );
-    }
-  )
+    },
+  ),
 );
 
 ListPreview.displayName = 'ListPreview';
