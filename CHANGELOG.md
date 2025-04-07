@@ -1,3 +1,31 @@
+## [1.133.5](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.4...v1.133.5) (2025-04-05)
+
+
+### Bug Fixes
+
+* **lotobjecttile:** L3-6251 incorrect HTML nesting causing HTML validation errors and hydration errors ([#582](https://github.com/PhillipsAuctionHouse/seldon/issues/582)) ([edb5156](https://github.com/PhillipsAuctionHouse/seldon/commit/edb51560b5c96b6825a46f51adfaa7cb88d06826))
+
+## [1.133.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.3...v1.133.4) (2025-04-04)
+
+
+### Bug Fixes
+
+* **icon:** L3-6336 handle icons that are not of 1x1 aspect ratio ([#580](https://github.com/PhillipsAuctionHouse/seldon/issues/580)) ([3085546](https://github.com/PhillipsAuctionHouse/seldon/commit/3085546665d011272af6928578c180911ebe96ca))
+
+## [1.133.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.2...v1.133.3) (2025-04-04)
+
+
+### Bug Fixes
+
+* **Icons:** L3-6336 fix fallback value for Icon color ([#579](https://github.com/PhillipsAuctionHouse/seldon/issues/579)) ([16dc0bc](https://github.com/PhillipsAuctionHouse/seldon/commit/16dc0bc2728d581c903c49919c1aa1e4a108b7e2))
+
+## [1.133.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.1...v1.133.2) (2025-04-02)
+
+
+### Bug Fixes
+
+* **lot-description:** L3-6287 Fix for Object Tile Title Text ([#576](https://github.com/PhillipsAuctionHouse/seldon/issues/576)) ([0bc8145](https://github.com/PhillipsAuctionHouse/seldon/commit/0bc814534dc5e6be27fcb37304b556f6d368738c))
+
 ## [1.133.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.0...v1.133.1) (2025-04-01)
 
 
