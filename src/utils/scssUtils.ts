@@ -19,7 +19,7 @@ export const getScssVarsMap = () => {
 // If the variable is not found, it returns the default value passed in
 export const getScssVar = (scssVar: string, defaultValue: string): string => {
   const varsMap = getScssVarsMap();
-  return varsMap[scssVar] || varsMap[defaultValue] || defaultValue;
+  return varsMap[scssVar] ?? varsMap[defaultValue] ?? defaultValue;
 };
 
 // Finds all color variables set in _vars.scss and returns the name of each
