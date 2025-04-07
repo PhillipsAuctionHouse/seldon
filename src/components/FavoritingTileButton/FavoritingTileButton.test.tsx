@@ -1,6 +1,7 @@
 import FavoritingTileButton from './FavoritingTileButton';
 import { runCommonTests } from '../../utils/testUtils';
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 describe('FavoritingTileButton', () => {
   runCommonTests(FavoritingTileButton, 'FavoritingTileButton');
@@ -32,12 +33,12 @@ describe('FavoritingTileButton', () => {
     expect(getByText('Custom Add')).toBeInTheDocument();
   });
 
-  it('calls onClick handler', () => {
+  it('calls onClick handler', async () => {
     const handleClick = vi.fn();
     const { getByRole } = render(
       <FavoritingTileButton isLotInList={false} listTitle="My List" numberOfObjects="5" onClick={handleClick} />,
     );
-    fireEvent.click(getByRole('switch'));
+    await userEvent.click(getByRole('switch'));
     expect(handleClick).toHaveBeenCalled();
   });
 
