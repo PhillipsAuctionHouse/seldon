@@ -24,10 +24,7 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
   /**
    * Analytics wrapper for click events
    */
-  onClickAnalyticsWrapper: <T>(
-    callback: () => void,
-    eventName: string
-  ) => (event: T) => void;
+  onClickAnalyticsWrapper: <T>(callback: () => void, eventName: string) => (event: T) => void;
   /**
    * Function to navigate to list details
    */
@@ -39,7 +36,7 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
   /**
    * Element used for editing list
    */
-  EditListMenu?: React.ComponentType<{ list: any }>;
+  EditListMenu?: React.ElementType;
 }
 
 /**
@@ -72,51 +69,37 @@ const ListPreview = memo(
       const imageRef = useRef<HTMLDivElement>(null);
 
       return (
-        <Component
-          {...commonProps} 
-          className={classnames(baseClassName, className)} 
-          {...props} 
-          ref={ref}
-        >
-          <div className={`${baseClassName}__header`}>
-            <div className={`${baseClassName}__info`}>
-              <Text 
-                element="span" 
-                className={`${baseClassName}__count`} 
-                variant={TextVariants.body3}
-              >
-                {list.count} {list.count === 1 ? 'LOT' : 'LOTS'}
-              </Text>
-              <Text 
-                element="h3" 
-                className={`${baseClassName}__title`} 
-                variant={TextVariants.heading5}
-              >
-                {list.name}
-              </Text>
+        <Component {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
+          <div className={`${baseClassName}__content`}>
+            <div className={`${baseClassName}__header`}>
+              <div className={`${baseClassName}__info`}>
+                <Text element="span" className={`${baseClassName}__count`} variant={TextVariants.body3}>
+                  {list.count} {list.count === 1 ? 'LOT' : 'LOTS'}
+                </Text>
+                <Text element="h3" className={`${baseClassName}__title`} variant={TextVariants.heading5}>
+                  {list.name}
+                </Text>
+              </div>
+              <div className={`${baseClassName}__actions`}>
+                {!isFavorites && EditListMenu && <EditListMenu list={list} />}
+              </div>
             </div>
-            <div className={`${baseClassName}__actions`}>
-              {!isFavorites && EditListMenu && <EditListMenu list={list} />}
+            <div className={`${baseClassName}__media-container`} ref={imageRef}>
+              <SeldonImage
+                alt={list.name}
+                aspectRatio="1/1"
+                className={`${baseClassName}__media`}
+                objectFit="cover"
+                src={transformedImageUrl}
+                onClick={onClickAnalyticsWrapper<React.MouseEvent>(
+                  navigateToList,
+                  isFavorites ? 'navigateToFavoritesList' : 'navigateToList',
+                )}
+                style={{
+                  cursor: 'pointer',
+                }}
+              />
             </div>
-          </div>
-          <div 
-            className={`${baseClassName}__media-container`} 
-            ref={imageRef}
-          >
-            <SeldonImage
-              alt={list.name}
-              aspectRatio="1/1"
-              className={`${baseClassName}__media`}
-              objectFit="cover"
-              src={transformedImageUrl}
-              onClick={onClickAnalyticsWrapper<React.MouseEvent>(
-                navigateToList,
-                isFavorites ? 'navigateToFavoritesList' : 'navigateToList'
-              )}
-              style={{
-                cursor: 'pointer',
-              }}
-            />
           </div>
         </Component>
       );
