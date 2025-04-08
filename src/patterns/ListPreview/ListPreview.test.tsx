@@ -64,9 +64,8 @@ describe('ListPreview', () => {
   it('calls navigation function with analytics wrapper when image is clicked', () => {
     render(<ListPreview {...defaultProps} />);
 
-    // Find the SeldonImage - we would need to adjust this selector based on how SeldonImage renders
-    const image = screen.getByRole('img');
-    fireEvent.click(image);
+    const images = screen.getAllByRole('img');
+    fireEvent.click(images[0]);
 
     expect(mockNavigateToList).toHaveBeenCalledTimes(1);
     expect(mockOnClickAnalyticsWrapper).toHaveBeenCalledWith(mockNavigateToList, 'navigateToList');
@@ -75,8 +74,8 @@ describe('ListPreview', () => {
   it('uses navigateToFavoritesList event name when in favorites view', () => {
     render(<ListPreview {...defaultProps} isFavorites={true} />);
 
-    const image = screen.getByRole('img');
-    fireEvent.click(image);
+    const images = screen.getAllByRole('img');
+    fireEvent.click(images[0]);
 
     expect(mockOnClickAnalyticsWrapper).toHaveBeenCalledWith(mockNavigateToList, 'navigateToFavoritesList');
   });
