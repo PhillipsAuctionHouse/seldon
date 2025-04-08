@@ -66,7 +66,7 @@ export const Tag = ({ id, className, onRemove, label, removeText = 'Remove' }: T
     >
       <div className={`${px}-tag__label`}>{label}</div>
       <div className={`${px}-tag__button`} data-testid={`${id}-item-close-button`}>
-        <Icon icon="Close" height={24} width={24} />
+        <Icon icon="CloseX" height={24} width={24} color="currentColor" className={`${px}-tag__icon`} />
       </div>
     </Button>
   );
@@ -107,7 +107,7 @@ const TagsList = forwardRef<HTMLUListElement, TagsListProps>(
               aria-label={clearAllLabel}
               variant={ButtonVariants.tertiary}
             >
-              <Icon icon="ArrowPrev" height={24} width={24} />
+              <Icon icon="ArrowLeft" color="currentColor" height={24} width={24} />
               <div className={`${px}-label`}>{clearAllLabel}</div>
             </Button>
           </li>

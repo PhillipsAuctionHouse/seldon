@@ -46,7 +46,7 @@ const FilterHeader = forwardRef<HTMLDivElement, FilterHeaderProps>(
         />
         {isViewingAll ? (
           <Button variant={ButtonVariants.tertiary} onClick={handleClose} className={`${baseClassName}__back`}>
-            <Icon icon="ChevronNext" className={`${baseClassName}__chevron`} />
+            <Icon icon="ChevronLeft" className={`${baseClassName}__chevron`} />
             Back to all
           </Button>
         ) : null}
