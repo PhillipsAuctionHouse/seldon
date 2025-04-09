@@ -14,9 +14,9 @@ export interface DividerProps extends ComponentProps<'div'> {
  *
  * Overview of this widget
  *
- * [Figma Link](Add Figma URL here)
+ * [Figma Link](https://www.figma.com/design/rIefa3bRPyZbZmtyV9PSQv/My-Account?node-id=61-13461&m=dev)
  *
- * [Storybook Link](Point back to yourself here)
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-divider--overview)
  */
 const Divider = forwardRef<HTMLDivElement, DividerProps>(({ className, element: CustomElement, ...props }) => {
   const Component = CustomElement || 'div';
