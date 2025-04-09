@@ -1,3 +1,10 @@
+# [1.134.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.5...v1.134.0) (2025-04-09)
+
+
+### Features
+
+* **favoritetile:** L3-5962 add favoriting tile ([#560](https://github.com/PhillipsAuctionHouse/seldon/issues/560)) ([24b0e4c](https://github.com/PhillipsAuctionHouse/seldon/commit/24b0e4cccc9f08d3dcb96e4524e3c1db16887cb5))
+
 ## [1.133.5](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.4...v1.133.5) (2025-04-05)
 
 
