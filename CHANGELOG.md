@@ -1,3 +1,24 @@
+# [1.135.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.134.1...v1.135.0) (2025-04-10)
+
+
+### Features
+
+* **Divider:** L3-5954 horizontal divider ([#581](https://github.com/PhillipsAuctionHouse/seldon/issues/581)) ([fdf9cde](https://github.com/PhillipsAuctionHouse/seldon/commit/fdf9cdea923016b45cfd32f92bf27f58a4320327))
+
+## [1.134.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.134.0...v1.134.1) (2025-04-09)
+
+
+### Bug Fixes
+
+* **tab-triggers:** L3-5252 Tab Inactive Label Weight Fix ([#575](https://github.com/PhillipsAuctionHouse/seldon/issues/575)) ([381897d](https://github.com/PhillipsAuctionHouse/seldon/commit/381897dea0dac469f6f4008f7198f8716d291afe))
+
+# [1.134.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.5...v1.134.0) (2025-04-09)
+
+
+### Features
+
+* **favoritetile:** L3-5962 add favoriting tile ([#560](https://github.com/PhillipsAuctionHouse/seldon/issues/560)) ([24b0e4c](https://github.com/PhillipsAuctionHouse/seldon/commit/24b0e4cccc9f08d3dcb96e4524e3c1db16887cb5))
+
 ## [1.133.5](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.4...v1.133.5) (2025-04-05)
 
 
