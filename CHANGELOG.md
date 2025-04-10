@@ -1,3 +1,10 @@
+# [1.135.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.134.1...v1.135.0) (2025-04-10)
+
+
+### Features
+
+* **Divider:** L3-5954 horizontal divider ([#581](https://github.com/PhillipsAuctionHouse/seldon/issues/581)) ([fdf9cde](https://github.com/PhillipsAuctionHouse/seldon/commit/fdf9cdea923016b45cfd32f92bf27f58a4320327))
+
 ## [1.134.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.134.0...v1.134.1) (2025-04-09)
 
 
