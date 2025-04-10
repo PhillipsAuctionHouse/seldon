@@ -1,7 +1,7 @@
-import { Ref, forwardRef, memo } from 'react';
+import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgMagnificentSevenProps {
+interface SvgMagnificentSevenProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -10,7 +10,7 @@ interface SvgMagnificentSevenProps {
 }
 
 const SvgMagnificentSeven = memo(
-  forwardRef((props: SvgMagnificentSevenProps, ref: Ref<SVGSVGElement>) => {
+  forwardRef<SVGSVGElement, SvgMagnificentSevenProps>((props, ref) => {
     const { height, width, title: propsTitle, titleId: propsTitleId } = props;
     const title = propsTitle || 'SvgMagnificentSeven';
     const titleId = propsTitleId || kebabCase(title);

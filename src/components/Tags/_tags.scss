@@ -18,6 +18,12 @@
     gap: $spacing-micro;
     padding: $spacing-micro $spacing-xsm $spacing-micro $spacing-sm;
 
+    &__icon {
+      svg {
+        color: $button-hover;
+      }
+    }
+
     &__label {
       color: $button-hover;
       font-size: $body-size3;
@@ -29,23 +35,11 @@
       }
     }
 
-    svg {
-      fill: $button-hover;
-
-      path {
-        fill: $button-hover;
-      }
-    }
-
     &:hover {
       color: $pure-black;
 
       svg {
-        fill: $pure-black;
-
-        path {
-          fill: $pure-black;
-        }
+        color: $pure-black;
       }
     }
   }

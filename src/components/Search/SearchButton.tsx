@@ -49,7 +49,7 @@ export const SearchButton = ({
           event.stopPropagation();
         }}
       >
-        <Icon icon="Close" data-testid={`${testId}-form-icon`} className={`${className}__button__icon`} />
+        <Icon icon="CloseX" data-testid={`${testId}-form-icon`} className={`${className}__button__icon`} />
       </button>
     );
   }

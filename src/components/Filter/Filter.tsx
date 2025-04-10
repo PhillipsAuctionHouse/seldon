@@ -102,7 +102,7 @@ const Filter = forwardRef<HTMLDivElement, FilterProps>(
             }}
           >
             {viewAllLabel}
-            <Icon icon="ChevronNext" className={`${baseClassName}__chevron`} />
+            <Icon icon="ChevronRight" className={`${baseClassName}__chevron`} />
           </Button>
         ) : null}
       </div>

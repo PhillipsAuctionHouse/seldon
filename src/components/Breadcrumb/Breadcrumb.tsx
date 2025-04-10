@@ -52,7 +52,7 @@ const Breadcrumb = ({
           className={`${px}-icon-button ${px}-icon-button--primary ${baseClassName}__back-button`} // apply button styles though it's a link
           data-testid={`${id}-back-button`}
         >
-          <Icon icon="ArrowPrev" />
+          <Icon icon="ArrowLeft" />
         </CustomElement>
       </SSRMediaQuery.Media>
       {/* This is not visible when in mobile breakpoint */}
