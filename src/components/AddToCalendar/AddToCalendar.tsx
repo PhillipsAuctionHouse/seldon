@@ -87,7 +87,10 @@ const AddToCalendar = forwardRef<HTMLButtonElement, AddToCalendarProps>(
         {...props}
         ref={ref}
         aria-label={buttonAriaLabel}
+        aria-disabled={status !== 'connected'}
         disabled={status !== 'connected'}
+        role="button"
+        tabIndex={0}
       >
         <div id="add-to-calendar" className={statusClassName}>
           <span className="addtocalendar atc-style-icon atc-style-menu-wb">

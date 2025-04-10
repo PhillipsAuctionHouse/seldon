@@ -3,10 +3,13 @@
 exports[`AddToCalendar component > renders correctly 1`] = `
 <div>
   <button
+    aria-disabled="true"
     aria-label="Add Jewels & More: Online Auction to calendar"
     class="seldon-add-to-calendar"
     data-testid="add-to-calendar"
     disabled=""
+    role="button"
+    tabindex="0"
   >
     <div
       class="hidden"
@@ -111,10 +114,13 @@ exports[`AddToCalendar component > renders correctly 1`] = `
 exports[`AddToCalendar component > renders correctly with startDateTimeOffset 1`] = `
 <div>
   <button
+    aria-disabled="true"
     aria-label="Add Test Event to calendar"
     class="seldon-add-to-calendar"
     data-testid="add-to-calendar"
     disabled=""
+    role="button"
+    tabindex="0"
   >
     <div
       class="hidden"
