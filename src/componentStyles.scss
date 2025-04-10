@@ -8,6 +8,7 @@
 // ⚛️ Components
 @use 'components/Button/button';
 @use 'components/IconButton/iconButton';
+@use 'components/Icon/icon';
 @use 'components/Grid/grid';
 @use 'components/Navigation/navigation';
 @use 'components/Navigation/NavigationItem/navigationItem';
@@ -45,6 +46,7 @@
 @use 'components/Tabs/tabs';
 @use 'components/SeldonImage/seldonImage';
 @use 'components/Filter/filter';
+@use 'components/FavoritingTileButton/favoritingTileButton';
 
 // Patterns
 @use 'patterns/HeroBanner/heroBanner';
@@ -64,4 +66,5 @@
 @use 'site-furniture/Footer/footer';
 @use 'components/Article/article';
 @use 'components/AddToCalendar/addToCalendar';
+@use 'components/Divider/divider';
 @use 'components/TextArea/textArea';

@@ -1,7 +1,7 @@
 import Icon from './Icon';
 import { render } from '@testing-library/react';
 
-const vars = vi.hoisted(() => '$pure-black: COLOR_DEFAULT;\n$test-color: COLOR_RED;\n');
+const vars = vi.hoisted(() => '$pure-black: #000000;\n$test-color: #FF0000;\n');
 vi.mock('#scss/_vars.scss?raw', () => ({ default: vars }));
 
 describe('Icon', () => {
@@ -25,13 +25,13 @@ describe('Icon', () => {
   it('should apply correct color style based on prop', () => {
     const { getByTestId } = render(<Icon icon="AccountCircle" height={32} width={32} color="$test-color" />);
     const icon = getByTestId('icon-account-circle');
-    expect(icon).toHaveAttribute('fill', 'COLOR_RED');
+    expect(icon).toHaveAttribute('fill', '#FF0000');
   });
 
   it('should apply default color if color prop is not found in vars', () => {
     const { getByTestId } = render(<Icon icon="AccountCircle" height={32} width={32} color="$fake-color" />);
     const icon = getByTestId('icon-account-circle');
-    expect(icon).toHaveAttribute('fill', '$pure-black');
+    expect(icon).toHaveAttribute('fill', '#000000');
   });
 
   it('should return null if icon does not exist', () => {
