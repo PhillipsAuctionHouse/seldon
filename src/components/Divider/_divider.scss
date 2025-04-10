@@ -1,7 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-divider {
-  margin: $spacing-sm 0 $spacing-xsm 0;
+  margin: $spacing-sm 0;
 
   &-line {
     background-color: $keyline-gray;
