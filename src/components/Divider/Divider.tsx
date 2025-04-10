@@ -1,7 +1,6 @@
 import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classNames from 'classnames';
-// import './_divider.scss';
 
 export interface DividerProps extends ComponentProps<'div'> {
   /**
