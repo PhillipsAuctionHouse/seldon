@@ -22,14 +22,6 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
    */
   isFavorites?: boolean;
   /**
-   * Analytics wrapper for click events
-   */
-  onClickAnalyticsWrapper: <T>(callback: () => void, eventName: string) => (event: T) => void;
-  /**
-   * Function to navigate to list details
-   */
-  navigateToList: () => void;
-  /**
    * Optional Element to render at the top level
    */
   element?: ElementType<ComponentProps<'div'>>;
@@ -50,20 +42,7 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
  */
 const ListPreview = memo(
   forwardRef<HTMLDivElement, ListPreviewProps>(
-    (
-      {
-        className,
-        list,
-        transformedImageUrl,
-        isFavorites = false,
-        onClickAnalyticsWrapper,
-        navigateToList,
-        element: Element,
-        EditListMenu,
-        ...props
-      },
-      ref,
-    ) => {
+    ({ className, list, transformedImageUrl, isFavorites = false, element: Element, EditListMenu, ...props }, ref) => {
       const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ListPreview');
       const Component = Element ?? 'div';
       const imageRef = useRef<HTMLDivElement>(null);
@@ -91,10 +70,6 @@ const ListPreview = memo(
                 className={`${baseClassName}__media`}
                 objectFit="cover"
                 src={transformedImageUrl}
-                onClick={onClickAnalyticsWrapper<React.MouseEvent>(
-                  navigateToList,
-                  isFavorites ? 'navigateToFavoritesList' : 'navigateToList',
-                )}
                 style={{
                   cursor: 'pointer',
                 }}

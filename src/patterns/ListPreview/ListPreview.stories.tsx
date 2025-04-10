@@ -72,14 +72,6 @@ Playground.argTypes = {
     description: 'Whether this card is in favorites view',
     control: 'boolean',
   },
-  navigateToList: {
-    description: 'Function to navigate to list details',
-    control: { type: null },
-  },
-  onClickAnalyticsWrapper: {
-    description: 'Analytics wrapper for click events',
-    control: { type: null },
-  },
   EditListMenu: {
     description: 'Component for editing the list',
     control: { type: null },
