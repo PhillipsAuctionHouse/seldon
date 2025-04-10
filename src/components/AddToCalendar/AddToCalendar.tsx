@@ -6,9 +6,11 @@ import initializeAddToCalendar from './initializeAddToCalendar';
 import { Icon } from '../Icon';
 import { getTimeZone } from './utils';
 import { Link, LinkProps } from '../Link';
+import * as Menubar from '@radix-ui/react-menubar';
 
-// You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
-export interface AddToCalendarProps extends ComponentProps<'button'> {
+export interface AddToCalendarProps
+  extends Omit<Menubar.MenubarProps, 'defaultValue' | 'dir' | 'value'>,
+    ComponentProps<'div'> {
   startDateTimeOffset?: string;
   endDateTimeOffset?: string;
   timeZone?: string;
@@ -28,7 +30,7 @@ export interface AddToCalendarProps extends ComponentProps<'button'> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-addtocalendar--overview)
  */
-const AddToCalendar = forwardRef<HTMLButtonElement, AddToCalendarProps>(
+const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
   (
     {
       className,
@@ -79,37 +81,40 @@ const AddToCalendar = forwardRef<HTMLButtonElement, AddToCalendarProps>(
     const timeZoneToUse = timeZone || getTimeZone(location) || 'UTC';
     const startDateTime = parseDate(startDateTimeOffset);
     const endDateTime = endDateTimeOffset ? parseDate(endDateTimeOffset) : null;
+    const { defaultValue, dir, ...rest } = props;
 
     return (
-      <button
+      <Menubar.Root
         className={classnames(baseClassName, className)}
+        {...rest}
         {...commonProps}
-        {...props}
         ref={ref}
         aria-label={buttonAriaLabel}
-        disabled={status !== 'connected'}
       >
-        <div id="add-to-calendar" className={statusClassName}>
-          <span className="addtocalendar atc-style-icon atc-style-menu-wb">
-            <Component
-              className={`{px}-icon-button ${px}-icon-button--primary ${baseClassName}__back-button atcb-link`}
-            >
-              <Icon icon="CalendarAlt" />
-            </Component>
-
-            <var className="atc_event">
-              <var className="atc_date_start">{format(startDateTime, 'yyyy-MM-dd HH:mm:ss')}</var>
-              {endDateTime && <var className="atc_date_end">{format(endDateTime, 'yyyy-MM-dd HH:mm:ss')}</var>}
-              <var className="atc_timezone">{timeZoneToUse}</var>
-              <var className="atc_title">{title}</var>
-              <var className="atc_description">{description}</var>
-              <var className="atc_location">{location}</var>
-              <var className="atc_organizer">{organizer}</var>
-              <var className="atc_organizer_email">{organizerEmail}</var>
-            </var>
-          </span>
-        </div>
-      </button>
+        <Menubar.Menu>
+          <div id="add-to-calendar" className={statusClassName}>
+            <span className="addtocalendar atc-style-icon atc-style-menu-wb">
+              <Menubar.Trigger asChild>
+                <Component className={`{px}-icon-button ${px}-icon-button--primary atcb-link`}>
+                  <Icon icon="CalendarAlt" />
+                </Component>
+              </Menubar.Trigger>
+              <Menubar.Content>
+                <var className="atc_event">
+                  <var className="atc_date_start">{format(startDateTime, 'yyyy-MM-dd HH:mm:ss')}</var>
+                  {endDateTime && <var className="atc_date_end">{format(endDateTime, 'yyyy-MM-dd HH:mm:ss')}</var>}
+                  <var className="atc_timezone">{timeZoneToUse}</var>
+                  <var className="atc_title">{title}</var>
+                  <var className="atc_description">{description}</var>
+                  <var className="atc_location">{location}</var>
+                  <var className="atc_organizer">{organizer}</var>
+                  <var className="atc_organizer_email">{organizerEmail}</var>
+                </var>
+              </Menubar.Content>
+            </span>
+          </div>
+        </Menubar.Menu>
+      </Menubar.Root>
     );
   },
 );

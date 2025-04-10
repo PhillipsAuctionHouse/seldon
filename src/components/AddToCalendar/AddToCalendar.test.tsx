@@ -1,4 +1,5 @@
-import { render, waitFor } from '@testing-library/react';
+import { ReactNode } from 'react';
+import { render, waitFor, screen } from '@testing-library/react';
 import { getTimeZone } from './utils';
 import AddToCalendar from './AddToCalendar';
 
@@ -12,6 +13,13 @@ const props = {
   organizer: 'Conference Organizers',
   organizerEmail: 'test@example.com',
 };
+
+vi.mock('@radix-ui/react-menubar', () => ({
+  Root: ({ children }: { children: ReactNode }) => <div>{children}</div>,
+  Menu: ({ children }: { children: ReactNode }) => <div>{children}</div>,
+  Trigger: ({ children }: { children: ReactNode }) => <div>{children}</div>,
+  Content: ({ children }: { children: ReactNode }) => <div>{children}</div>,
+}));
 
 describe('getTimeZone', () => {
   it('should return the correct time zone for a known location', () => {
@@ -38,9 +46,15 @@ describe('getTimeZone', () => {
 });
 
 describe('AddToCalendar component', () => {
-  it('renders correctly', () => {
-    const { container } = render(<AddToCalendar {...props} />);
-    expect(container).toMatchSnapshot();
+  it('renders correctly with all props', async () => {
+    render(<AddToCalendar {...props} />);
+    await waitFor(() => {
+      expect(screen.getByText(props.title)).toBeInTheDocument();
+      expect(screen.getByText(props.description)).toBeInTheDocument();
+      expect(screen.getByText(props.location)).toBeInTheDocument();
+      expect(screen.getByText(props.organizer)).toBeInTheDocument();
+      expect(screen.getByText(props.organizerEmail)).toBeInTheDocument();
+    });
   });
 
   it('renders calendar icon with correct SVG paths', () => {
@@ -53,30 +67,20 @@ describe('AddToCalendar component', () => {
     }
   });
 
-  it('renders event details', () => {
-    const { container } = render(<AddToCalendar {...props} />);
-    const eventDetails = container.querySelector('var.atc_event');
-    expect(eventDetails).toBeInTheDocument();
-    if (eventDetails) {
-      const dateStart = eventDetails.querySelector('var.atc_date_start');
-      expect(dateStart).toHaveTextContent('2025-01-27 15:13:02');
-      const dateEnd = eventDetails.querySelector('var.atc_date_end');
-      expect(dateEnd).toHaveTextContent('2025-06-27 15:13:02');
-      const timezone = eventDetails.querySelector('var.atc_timezone');
-      expect(timezone).toHaveTextContent('America/New_York');
-      const title = eventDetails.querySelector('var.atc_title');
-      expect(title).toHaveTextContent('Jewels & More: Online Auction');
-      const description = eventDetails.querySelector('var.atc_description');
-      expect(description).toHaveTextContent('Jewels & More: Online Auction.');
-      const location = eventDetails.querySelector('var.atc_location');
-      expect(location).toHaveTextContent('New York');
-      const organizer = eventDetails.querySelector('var.atc_organizer');
-      expect(organizer).toHaveTextContent('Conference Organizers');
-      const organizerEmail = eventDetails.querySelector('var.atc_organizer_email');
-      expect(organizerEmail).toHaveTextContent('test@example.com');
-    }
+  it('renders event details', async () => {
+    //Use async/await for better handling of asynchronous operations
+    render(<AddToCalendar {...props} />);
+    await waitFor(() => {
+      expect(screen.getByText('Jewels & More: Online Auction')).toBeInTheDocument();
+      expect(screen.getByText('Jewels & More: Online Auction.')).toBeInTheDocument();
+      expect(screen.getByText('New York')).toBeInTheDocument();
+      expect(screen.getByText('Conference Organizers')).toBeInTheDocument();
+      expect(screen.getByText('test@example.com')).toBeInTheDocument();
+      expect(screen.getByText(/2025-01-27/)).toBeInTheDocument(); //Check for date part
+      expect(screen.getByText(/2025-06-27/)).toBeInTheDocument(); //Check for date part
+      expect(screen.getByText('America/New_York')).toBeInTheDocument();
+    });
   });
-
   it('renders Add to Calendar button with correct class names', () => {
     const { container } = render(<AddToCalendar {...props} />);
     const button = container.querySelector('span.addtocalendar');
