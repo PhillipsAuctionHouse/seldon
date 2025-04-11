@@ -1,11 +1,28 @@
 import { ComponentProps, forwardRef, ElementType, memo, useRef } from 'react';
 import classnames from 'classnames';
-
 import { getCommonProps } from '../../utils';
+import Link, { LinkProps } from '../../components/Link/Link';
 import { Text, TextVariants } from '../../components/Text';
 import { SeldonImage } from '../../components/SeldonImage';
-
+import { Icon } from '../../components/Icon';
+import { Popover } from 'radix-ui';
 export interface ListPreviewProps extends ComponentProps<'div'> {
+  /**
+   * Lots display text en/zh
+   */
+  lotText?: string;
+  /**
+   * Lots display text en/zh
+   */
+  lotsText?: string;
+  /**
+   * Lot favoritesText text en/zh
+   */
+  favoritesText?: string;
+  /**
+   * Lot List text en/zh
+   */
+  listText?: string;
   /**
    * List data containing count and name
    */
@@ -16,19 +33,19 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
   /**
    * Image URL for the list
    */
-  transformedImageUrl: string;
+  listImageUrl: string;
   /**
    * Whether this card is in favorites view
    */
   isFavorites?: boolean;
   /**
-   * Optional Element to render at the top level
+   * Element to render within the navigation item, renders <Link> by default
    */
-  element?: ElementType<ComponentProps<'div'>>;
+  element?: ElementType<LinkProps>;
   /**
-   * Element used for editing list
+   * imageLink
    */
-  EditListMenu?: React.ElementType;
+  imageLink?: string;
 }
 
 /**
@@ -42,41 +59,126 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
  */
 const ListPreview = memo(
   forwardRef<HTMLDivElement, ListPreviewProps>(
-    ({ className, list, transformedImageUrl, isFavorites = false, element: Element, EditListMenu, ...props }, ref) => {
+    (
+      {
+        className,
+        list,
+        listImageUrl,
+        isFavorites = false,
+        element: Component = Link,
+        imageLink,
+        lotText = 'LOT',
+        lotsText = 'LOTS',
+        favoritesText = 'You have not added any objects to your Favorites yet.',
+        listText = 'Create your first List.',
+        ...props
+      },
+      ref,
+    ) => {
       const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ListPreview');
-      const Component = Element ?? 'div';
       const imageRef = useRef<HTMLDivElement>(null);
+      const isCountEmpty = list.count === 0;
 
       return (
-        <Component {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
+        <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
           <div className={`${baseClassName}__content`}>
             <div className={`${baseClassName}__header`}>
               <div className={`${baseClassName}__info`}>
-                <Text element="span" className={`${baseClassName}__count`} variant={TextVariants.body3}>
-                  {list.count} {list.count === 1 ? 'LOT' : 'LOTS'}
-                </Text>
-                <Text element="h3" className={`${baseClassName}__title`} variant={TextVariants.heading5}>
-                  {list.name}
-                </Text>
+                {(isFavorites || !isCountEmpty) && (
+                  <Text element="span" className={`${baseClassName}__count`} variant={TextVariants.body3}>
+                    {list.count} {list.count === 1 ? lotText : lotsText}
+                  </Text>
+                )}
+                {
+                  <Text element="h3" className={`${baseClassName}__title`} variant={TextVariants.heading5}>
+                    {list.name}
+                  </Text>
+                }
               </div>
-              <div className={`${baseClassName}__actions`}>
-                {!isFavorites && EditListMenu && <EditListMenu list={list} />}
-              </div>
+              {!isCountEmpty && (
+                <div className={`${baseClassName}__actions`}>
+                  {!isFavorites && (
+                    <Popover.Root>
+                      <Popover.Trigger asChild>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"
+                            fill="currentColor"
+                          />
+                          <path
+                            d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z"
+                            fill="currentColor"
+                          />
+                          <path
+                            d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </Popover.Trigger>
+                      <Popover.Portal>
+                        <Popover.Content sideOffset={5}>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                            <div>One</div>
+                            <div>Two</div>
+                          </div>
+                        </Popover.Content>
+                      </Popover.Portal>
+                    </Popover.Root>
+                  )}
+                </div>
+              )}
             </div>
-            <div className={`${baseClassName}__media-container`} ref={imageRef}>
-              <SeldonImage
-                alt={list.name}
-                aspectRatio="1/1"
-                className={`${baseClassName}__media`}
-                objectFit="cover"
-                src={transformedImageUrl}
-                style={{
-                  cursor: 'pointer',
-                }}
-              />
-            </div>
+
+            <Component href={imageLink} className={`${baseClassName}__media-link`}>
+              {isCountEmpty ? (
+                isFavorites ? (
+                  <div className={`${baseClassName}__media-container`}>
+                    <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--favorites`)}>
+                      <div className={`${baseClassName}__empty__content`}>
+                        <Icon
+                          icon="FavoriteOutline"
+                          width={24}
+                          height={24}
+                          color="$dark-gray"
+                          className={`${baseClassName}__icon`}
+                        />
+                        <div className={`${baseClassName}__text`}>{favoritesText}</div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className={`${baseClassName}__media-container`}>
+                    <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--list`)}>
+                      <div className={`${baseClassName}__empty__content`}>
+                        <Icon
+                          icon="Plus"
+                          width={24}
+                          height={24}
+                          color="$dark-gray"
+                          className={`${baseClassName}__icon`}
+                        />
+                        <div className={`${baseClassName}__text`}>{listText}</div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              ) : (
+                <div className={`${baseClassName}__media-container`} ref={imageRef}>
+                  <SeldonImage
+                    alt={list.name}
+                    aspectRatio="1/1"
+                    className={`${baseClassName}__media`}
+                    objectFit="cover"
+                    src={listImageUrl}
+                    style={{
+                      cursor: 'pointer',
+                    }}
+                  />
+                </div>
+              )}
+            </Component>
           </div>
-        </Component>
+        </div>
       );
     },
   ),
