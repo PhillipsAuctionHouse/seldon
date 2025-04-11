@@ -142,35 +142,10 @@ export const CarouselWithZoomModal = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
-  const [isAtLeftEdge, setIsAtLeftEdge] = useState(false);
-  const [isAtRightEdge, setIsAtRightEdge] = useState(false);
 
-  const handleZoomChange = useCallback(
-    (zoom: boolean, index: number) => {
-      if (index === currentSlide) {
-        setIsZoomed(zoom);
-      }
-    },
-    [currentSlide],
-  );
-
-  const handleAtLeftEdge = useCallback(
-    (atLeftEdge: boolean, index: number) => {
-      if (index === currentSlide) {
-        setIsAtLeftEdge(atLeftEdge);
-      }
-    },
-    [currentSlide],
-  );
-
-  const handleAtRightEdge = useCallback(
-    (atRightEdge: boolean, index: number) => {
-      if (index === currentSlide) {
-        setIsAtRightEdge(atRightEdge);
-      }
-    },
-    [currentSlide],
-  );
+  const handleZoomChange = (zoom: boolean) => {
+    setIsZoomed(zoom);
+  };
 
   return (
     <div style={{ width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -197,17 +172,12 @@ export const CarouselWithZoomModal = () => {
               display: 'flex',
               flexDirection: 'column',
             }}
-            disableDrag={isZoomed && !isAtLeftEdge && !isAtRightEdge}
+            disableDrag={isZoomed}
           >
             <CarouselContent containerStyles={{ display: 'flex', flex: 1 }} style={{ display: 'flex', flex: 1 }}>
               {images.map((image, index) => (
                 <CarouselItem key={index} style={{ display: 'flex', height: '100%' }}>
-                  <PinchZoom
-                    isZoomReset={currentSlide !== index}
-                    onZoomChange={(zoom) => handleZoomChange(zoom, index)}
-                    onAtLeftEdge={(atLeftEdge) => handleAtLeftEdge(atLeftEdge, index)}
-                    onAtRightEdge={(atRightEdge) => handleAtRightEdge(atRightEdge, index)}
-                  >
+                  <PinchZoom onZoomChange={handleZoomChange}>
                     <SeldonImage
                       style={{ height: '100%', objectFit: 'contain', padding: '2rem 0' }}
                       src={image}
