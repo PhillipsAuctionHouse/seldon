@@ -2,14 +2,9 @@
 
 exports[`AddToCalendar component > renders correctly 1`] = `
 <div>
-  <button
-    aria-disabled="true"
-    aria-label="Add Jewels & More: Online Auction to calendar"
+  <div
     class="seldon-add-to-calendar"
     data-testid="add-to-calendar"
-    disabled=""
-    role="button"
-    tabindex="0"
   >
     <div
       class="hidden"
@@ -19,8 +14,11 @@ exports[`AddToCalendar component > renders correctly 1`] = `
         class="addtocalendar atc-style-icon atc-style-menu-wb"
       >
         <a
-          class="seldon-link seldon-link--link {px}-icon-button seldon-icon-button--primary seldon-add-to-calendar__back-button atcb-link"
+          aria-disabled="true"
+          aria-label="Add Jewels & More: Online Auction to calendar"
+          class="seldon-link seldon-link--link {px}-icon-button seldon-icon-button--primary atcb-link"
           data-testid="link"
+          tabindex="0"
         >
           <span
             class="seldon-text seldon-text--link"
@@ -107,20 +105,15 @@ exports[`AddToCalendar component > renders correctly 1`] = `
         </var>
       </span>
     </div>
-  </button>
+  </div>
 </div>
 `;
 
 exports[`AddToCalendar component > renders correctly with startDateTimeOffset 1`] = `
 <div>
-  <button
-    aria-disabled="true"
-    aria-label="Add Test Event to calendar"
+  <div
     class="seldon-add-to-calendar"
     data-testid="add-to-calendar"
-    disabled=""
-    role="button"
-    tabindex="0"
   >
     <div
       class="hidden"
@@ -130,8 +123,11 @@ exports[`AddToCalendar component > renders correctly with startDateTimeOffset 1`
         class="addtocalendar atc-style-icon atc-style-menu-wb"
       >
         <a
-          class="seldon-link seldon-link--link {px}-icon-button seldon-icon-button--primary seldon-add-to-calendar__back-button atcb-link"
+          aria-disabled="true"
+          aria-label="Add Test Event to calendar"
+          class="seldon-link seldon-link--link {px}-icon-button seldon-icon-button--primary atcb-link"
           data-testid="link"
+          tabindex="0"
         >
           <span
             class="seldon-text seldon-text--link"
@@ -218,6 +214,6 @@ exports[`AddToCalendar component > renders correctly with startDateTimeOffset 1`
         </var>
       </span>
     </div>
-  </button>
+  </div>
 </div>
 `;

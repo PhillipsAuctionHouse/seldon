@@ -8,7 +8,7 @@ import { getTimeZone } from './utils';
 import { Link, LinkProps } from '../Link';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
-export interface AddToCalendarProps extends ComponentProps<'button'> {
+export interface AddToCalendarProps extends ComponentProps<'div'> {
   startDateTimeOffset?: string;
   endDateTimeOffset?: string;
   timeZone?: string;
@@ -28,7 +28,7 @@ export interface AddToCalendarProps extends ComponentProps<'button'> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-addtocalendar--overview)
  */
-const AddToCalendar = forwardRef<HTMLButtonElement, AddToCalendarProps>(
+const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
   (
     {
       className,
@@ -81,21 +81,14 @@ const AddToCalendar = forwardRef<HTMLButtonElement, AddToCalendarProps>(
     const endDateTime = endDateTimeOffset ? parseDate(endDateTimeOffset) : null;
 
     return (
-      <button
-        className={classnames(baseClassName, className)}
-        {...commonProps}
-        {...props}
-        ref={ref}
-        aria-label={buttonAriaLabel}
-        aria-disabled={status !== 'connected'}
-        disabled={status !== 'connected'}
-        role="button"
-        tabIndex={0}
-      >
+      <div className={classnames(baseClassName, className)} {...commonProps} {...props} ref={ref}>
         <div id="add-to-calendar" className={statusClassName}>
           <span className="addtocalendar atc-style-icon atc-style-menu-wb">
             <Component
-              className={`{px}-icon-button ${px}-icon-button--primary ${baseClassName}__back-button atcb-link`}
+              className={`{px}-icon-button ${px}-icon-button--primary atcb-link`}
+              aria-label={buttonAriaLabel}
+              aria-disabled={status !== 'connected'}
+              tabIndex={0}
             >
               <Icon icon="CalendarAlt" />
             </Component>
@@ -112,7 +105,7 @@ const AddToCalendar = forwardRef<HTMLButtonElement, AddToCalendarProps>(
             </var>
           </span>
         </div>
-      </button>
+      </div>
     );
   },
 );
