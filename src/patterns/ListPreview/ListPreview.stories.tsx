@@ -33,10 +33,6 @@ Playground.argTypes = {
     description: 'List data containing count and name',
     control: 'object',
   },
-  transformedImageUrl: {
-    description: 'Image URL for the list',
-    control: 'text',
-  },
   isFavorites: {
     description: 'Whether this card is in favorites view',
     control: 'boolean',
