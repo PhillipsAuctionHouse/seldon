@@ -20,9 +20,17 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
    */
   favoritesText?: string;
   /**
-   * Lot List text en/zh
+   * Lot list text en/zh
    */
   listText?: string;
+  /**
+   * Lot edit list text en/zh
+   */
+  editListText?: string;
+  /**
+   * Lot delete list text en/zh
+   */
+  deleteListText?: string;
   /**
    * List data containing count and name
    */
@@ -46,6 +54,14 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
    * imageLink
    */
   imageLink?: string;
+  /**
+   * Callback function for editList menu item click
+   */
+  onEditListClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  /**
+   * Callback function for deleteList menu item click
+   */
+  onDeleteListClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 /**
@@ -71,6 +87,10 @@ const ListPreview = memo(
         lotsText = 'LOTS',
         favoritesText = 'You have not added any objects to your Favorites yet.',
         listText = 'Create your first List.',
+        editListText = 'Edit List',
+        deleteListText = 'Delete List',
+        onEditListClick,
+        onDeleteListClick,
         ...props
       },
       ref,
@@ -116,10 +136,14 @@ const ListPreview = memo(
                         </svg>
                       </Popover.Trigger>
                       <Popover.Portal>
-                        <Popover.Content sideOffset={5}>
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                            <div>One</div>
-                            <div>Two</div>
+                        <Popover.Content sideOffset={5} className={`${baseClassName}__popover-content`}>
+                          <div className={`${baseClassName}__dropdown`}>
+                            <div className={`${baseClassName}__dropdown--item`} onClick={onEditListClick}>
+                              {editListText}
+                            </div>
+                            <div className={`${baseClassName}__dropdown--item`} onClick={onDeleteListClick}>
+                              {deleteListText}
+                            </div>
                           </div>
                         </Popover.Content>
                       </Popover.Portal>

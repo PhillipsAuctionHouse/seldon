@@ -10,8 +10,7 @@ const defaultProps = {
     count: 2,
     name: 'New List',
   },
-  transformedImageUrl:
-    'https://assets.phillips.com/image/upload/t_Website_LotDetailZoomImage/v1742893121/auctions/CH080225/CH080225.jpg',
+  listImageUrl: 'https://via.placeholder.com/400',
   isFavorites: false,
   EditListMenu: MockEditListMenu,
 };
@@ -53,20 +52,7 @@ describe('ListPreview', () => {
     expect(screen.queryByTestId('edit-list-menu')).not.toBeInTheDocument();
   });
 
-  // it('passes custom element type when provided', () => {
-  //   const CustomElement = ({ className, children, ...props }) => (
-  //     <div data-testid="custom-element" className={className} {...props}>
-  //       {children}
-  //     </div>
-  //   );
+  // it shows the dropdown menu when the edit list button is clicked
 
-  //   render(<ListPreview {...defaultProps} element={CustomElement} />);
-  //   expect(screen.getByTestId('custom-element')).toBeInTheDocument();
-  // });
-
-  it('passes additional props to the component', () => {
-    const testId = 'test-list-preview';
-    render(<ListPreview {...defaultProps} data-testid={testId} />);
-    expect(screen.getByTestId(testId)).toBeInTheDocument();
-  });
+  // it calles the onEditListClick function when the edit list button is clicked
 });

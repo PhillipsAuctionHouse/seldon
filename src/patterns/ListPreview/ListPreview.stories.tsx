@@ -14,16 +14,6 @@ interface List {
   name: string;
 }
 
-// interface EditListMenuProps {
-//   // Props for the EditListMenu component
-//   props: EditListMenuProps
-// }
-
-type AnalyticsWrapperFunction = (
-  callback: () => void,
-  eventName: string,
-) => (event: React.MouseEvent<HTMLElement>) => void;
-
 export const Playground = (props: ComponentProps<typeof ListPreview>) => <ListPreview {...props} />;
 
 Playground.args = {
@@ -33,11 +23,9 @@ Playground.args = {
   } as List,
   listImageUrl: 'https://via.placeholder.com/400',
   isFavorites: false,
-  navigateToList: (): void => console.log('Navigate to list'),
-  onClickAnalyticsWrapper: ((callback: () => void, eventName: string) => (): void => {
-    console.log(`Analytics event: ${eventName}`);
-    callback();
-  }) as AnalyticsWrapperFunction,
+  onEditListClick: (): void => console.log('Edit list clicked'),
+  onDeleteListClick: (): void => console.log('Delete list clicked'),
+  element: 'a',
 };
 
 Playground.argTypes = {
@@ -54,7 +42,7 @@ Playground.argTypes = {
     control: 'boolean',
   },
   element: {
-    description: 'Optional element to render at the top level',
+    description: 'Wrapped element to pass in for the link',
     control: { type: null },
   },
 };
@@ -67,11 +55,7 @@ EmptyFavorites.args = {
     name: 'Favorites',
   } as List,
   isFavorites: true,
-  navigateToList: (): void => console.log('Navigate to list'),
-  onClickAnalyticsWrapper: ((callback: () => void, eventName: string) => (): void => {
-    console.log(`Analytics event: ${eventName}`);
-    callback();
-  }) as AnalyticsWrapperFunction,
+  element: 'a',
 };
 
 export const EmptyList = (props: ComponentProps<typeof ListPreview>) => <ListPreview {...props} />;
@@ -82,9 +66,6 @@ EmptyList.args = {
     name: '',
   } as List,
   isFavorites: false,
-  navigateToList: (): void => console.log('Navigate to list'),
-  onClickAnalyticsWrapper: ((callback: () => void, eventName: string) => (): void => {
-    console.log(`Analytics event: ${eventName}`);
-    callback();
-  }) as AnalyticsWrapperFunction,
+  element: 'a',
+  listText: '首先创建某人列表',
 };
