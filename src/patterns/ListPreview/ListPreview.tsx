@@ -100,7 +100,7 @@ const ListPreview = memo(
       const isCountEmpty = list.count === 0;
 
       return (
-        <div {...commonProps} className={classnames(baseClassName, className)} ref={ref}>
+        <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
           <div className={`${baseClassName}__content`}>
             <div className={`${baseClassName}__header`}>
               <div className={`${baseClassName}__info`}>
