@@ -115,11 +115,11 @@ const ListPreview = memo(
                   </Text>
                 }
               </div>
-              {!isCountEmpty && (
-                <div className={`${baseClassName}__actions`}>
-                  {!isFavorites && (
-                    <Popover.Root>
-                      <Popover.Trigger asChild>
+              <>
+                {!isCountEmpty && !isFavorites && (
+                  <Popover.Root>
+                    <Popover.Trigger asChild>
+                      <div className={`${baseClassName}__actions`} data-testid="menu-trigger">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"
@@ -134,29 +134,29 @@ const ListPreview = memo(
                             fill="currentColor"
                           />
                         </svg>
-                      </Popover.Trigger>
-                      <Popover.Portal>
-                        <Popover.Content sideOffset={5} className={`${baseClassName}__popover-content`}>
-                          <div className={`${baseClassName}__dropdown`}>
-                            <div className={`${baseClassName}__dropdown--item`} onClick={onEditListClick}>
-                              {editListText}
-                            </div>
-                            <div className={`${baseClassName}__dropdown--item`} onClick={onDeleteListClick}>
-                              {deleteListText}
-                            </div>
+                      </div>
+                    </Popover.Trigger>
+                    <Popover.Portal>
+                      <Popover.Content sideOffset={5} className={`${baseClassName}__popover-content`}>
+                        <div className={`${baseClassName}__dropdown`} data-testid="dropdown-menu">
+                          <div className={`${baseClassName}__dropdown--item`} onClick={onEditListClick}>
+                            {editListText}
                           </div>
-                        </Popover.Content>
-                      </Popover.Portal>
-                    </Popover.Root>
-                  )}
-                </div>
-              )}
+                          <div className={`${baseClassName}__dropdown--item`} onClick={onDeleteListClick}>
+                            {deleteListText}
+                          </div>
+                        </div>
+                      </Popover.Content>
+                    </Popover.Portal>
+                  </Popover.Root>
+                )}
+              </>
             </div>
 
             <Component href={imageLink} className={`${baseClassName}__media-link`}>
               {isCountEmpty ? (
                 isFavorites ? (
-                  <div className={`${baseClassName}__media-container`}>
+                  <div className={`${baseClassName}__media-container`} data-testid="favorites">
                     <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--favorites`)}>
                       <div className={`${baseClassName}__empty__content`}>
                         <Icon
@@ -171,7 +171,7 @@ const ListPreview = memo(
                     </div>
                   </div>
                 ) : (
-                  <div className={`${baseClassName}__media-container`}>
+                  <div className={`${baseClassName}__media-container`} data-testid="list">
                     <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--list`)}>
                       <div className={`${baseClassName}__empty__content`}>
                         <Icon

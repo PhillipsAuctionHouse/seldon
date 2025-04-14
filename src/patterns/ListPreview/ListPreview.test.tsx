@@ -1,9 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import ListPreview from './ListPreview';
 import { runCommonTests } from '../../utils/testUtils';
-
-const MockEditListMenu = () => <div data-testid="edit-list-menu">Edit Menu</div>;
 
 const defaultProps = {
   list: {
@@ -12,7 +10,6 @@ const defaultProps = {
   },
   listImageUrl: 'https://via.placeholder.com/400',
   isFavorites: false,
-  EditListMenu: MockEditListMenu,
 };
 
 describe('ListPreview', () => {
@@ -42,17 +39,53 @@ describe('ListPreview', () => {
     expect(screen.getByText('1 LOT')).toBeInTheDocument();
   });
 
-  it('shows EditListMenu when not in favorites view', () => {
+  it('shows dropdown menu when not in favorites view', () => {
     render(<ListPreview {...defaultProps} />);
-    expect(screen.getByTestId('edit-list-menu')).toBeInTheDocument();
+    expect(screen.getByTestId('menu-trigger')).toBeInTheDocument();
   });
 
-  it('hides EditListMenu when in favorites view', () => {
+  it('hides dropdown menu when in favorites view', () => {
     render(<ListPreview {...defaultProps} isFavorites={true} />);
-    expect(screen.queryByTestId('edit-list-menu')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('favorites')).not.toBeInTheDocument();
   });
 
-  // it shows the dropdown menu when the edit list button is clicked
+  it('hides dropdown menu when list is empty', () => {
+    render(
+      <ListPreview
+        {...defaultProps}
+        list={{
+          count: 0,
+          name: '',
+        }}
+      />,
+    );
+    expect(screen.queryByTestId('favorites')).not.toBeInTheDocument();
+  });
 
-  // it calles the onEditListClick function when the edit list button is clicked
+  it('it shows the dropdown menu when the edit list button is clicked', () => {
+    render(<ListPreview {...defaultProps} />);
+    const menuTrigger = screen.getByTestId('menu-trigger');
+
+    act(() => {
+      menuTrigger.click();
+    });
+
+    expect(screen.getByTestId('dropdown-menu')).toBeInTheDocument();
+  });
+
+  it('it calles the onDeleteListClick function when the edit list button is clicked', () => {
+    const mockOnDeleteListClick = vi.fn();
+    render(<ListPreview {...{ ...defaultProps, onDeleteListClick: mockOnDeleteListClick }} />);
+    const menuTrigger = screen.getByTestId('menu-trigger');
+
+    act(() => {
+      menuTrigger.click();
+    });
+    const deleteButton = screen.getByText('Delete List');
+    act(() => {
+      deleteButton.click();
+    });
+    expect(mockOnDeleteListClick).toHaveBeenCalled();
+    expect(mockOnDeleteListClick).toHaveBeenCalledTimes(1);
+  });
 });
