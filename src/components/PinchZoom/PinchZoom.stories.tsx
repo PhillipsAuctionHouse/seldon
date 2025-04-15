@@ -180,6 +180,7 @@ export const CarouselWithZoomModal = () => {
                   <PinchZoom onZoomChange={handleZoomChange}>
                     <SeldonImage
                       style={{ height: '100%', objectFit: 'contain', padding: '2rem 0' }}
+                      imageStyle={{ height: '100%' }}
                       src={image}
                       alt="placeholder"
                     />
