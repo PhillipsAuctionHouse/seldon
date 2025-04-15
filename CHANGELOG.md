@@ -1,3 +1,10 @@
+## [1.135.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.135.0...v1.135.1) (2025-04-15)
+
+
+### Bug Fixes
+
+* **Tabs:** L3-5827 Update active state of Tabs hover state ([#588](https://github.com/PhillipsAuctionHouse/seldon/issues/588)) ([6b941d0](https://github.com/PhillipsAuctionHouse/seldon/commit/6b941d00388a0b3cfd957bd471eeb0552fd3ceb0))
+
 # [1.135.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.134.1...v1.135.0) (2025-04-10)
 
 
