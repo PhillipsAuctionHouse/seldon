@@ -82,9 +82,12 @@
     padding: 0.5rem 0;
 
     &--item {
+      all: unset;
       background-color: $soft-gray;
       cursor: pointer;
+      display: block;
       padding: 0.25rem 1rem;
+      width: 90px;
 
       &:hover {
         background-color: $light-gray;

@@ -57,11 +57,11 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
   /**
    * Callback function for editList menu item click
    */
-  onEditListClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  onEditListClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   /**
    * Callback function for deleteList menu item click
    */
-  onDeleteListClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  onDeleteListClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 /**
@@ -139,12 +139,20 @@ const ListPreview = memo(
                     <Popover.Portal>
                       <Popover.Content sideOffset={5} className={`${baseClassName}__popover-content`}>
                         <div className={`${baseClassName}__dropdown`} data-testid="dropdown-menu">
-                          <div className={`${baseClassName}__dropdown--item`} onClick={onEditListClick}>
+                          <button
+                            className={`${baseClassName}__dropdown--item`}
+                            onClick={onEditListClick}
+                            type="button"
+                          >
                             {editListText}
-                          </div>
-                          <div className={`${baseClassName}__dropdown--item`} onClick={onDeleteListClick}>
+                          </button>
+                          <button
+                            className={`${baseClassName}__dropdown--item`}
+                            onClick={onDeleteListClick}
+                            type="button"
+                          >
                             {deleteListText}
-                          </div>
+                          </button>
                         </div>
                       </Popover.Content>
                     </Popover.Portal>
@@ -154,39 +162,41 @@ const ListPreview = memo(
             </div>
 
             <Component href={imageLink} className={`${baseClassName}__media-link`}>
-              {isCountEmpty ? (
-                isFavorites ? (
-                  <div className={`${baseClassName}__media-container`} data-testid="favorites">
-                    <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--favorites`)}>
-                      <div className={`${baseClassName}__empty__content`}>
-                        <Icon
-                          icon="FavoriteOutline"
-                          width={24}
-                          height={24}
-                          color="$dark-gray"
-                          className={`${baseClassName}__icon`}
-                        />
-                        <div className={`${baseClassName}__text`}>{favoritesText}</div>
-                      </div>
+              {isCountEmpty && isFavorites && (
+                <div className={`${baseClassName}__media-container`} data-testid="favorites">
+                  <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--favorites`)}>
+                    <div className={`${baseClassName}__empty__content`}>
+                      <Icon
+                        icon="FavoriteOutline"
+                        width={24}
+                        height={24}
+                        color="$dark-gray"
+                        className={`${baseClassName}__icon`}
+                      />
+                      <div className={`${baseClassName}__text`}>{favoritesText}</div>
                     </div>
                   </div>
-                ) : (
-                  <div className={`${baseClassName}__media-container`} data-testid="list">
-                    <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--list`)}>
-                      <div className={`${baseClassName}__empty__content`}>
-                        <Icon
-                          icon="Plus"
-                          width={24}
-                          height={24}
-                          color="$dark-gray"
-                          className={`${baseClassName}__icon`}
-                        />
-                        <div className={`${baseClassName}__text`}>{listText}</div>
-                      </div>
+                </div>
+              )}
+
+              {isCountEmpty && !isFavorites && (
+                <div className={`${baseClassName}__media-container`} data-testid="list">
+                  <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--list`)}>
+                    <div className={`${baseClassName}__empty__content`}>
+                      <Icon
+                        icon="Plus"
+                        width={24}
+                        height={24}
+                        color="$dark-gray"
+                        className={`${baseClassName}__icon`}
+                      />
+                      <div className={`${baseClassName}__text`}>{listText}</div>
                     </div>
                   </div>
-                )
-              ) : (
+                </div>
+              )}
+
+              {!isCountEmpty && (
                 <div className={`${baseClassName}__media-container`} ref={imageRef}>
                   <SeldonImage
                     alt={list.name}
