@@ -16,13 +16,17 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
    */
   lotsText?: string;
   /**
-   * Lot favoritesText text en/zh
+   * Lot empty Favorites text en/zh
    */
-  favoritesText?: string;
+  emptyFavoritesText?: string;
   /**
-   * Lot list text en/zh
+   * Lot blank list text en/zh
    */
-  listText?: string;
+  blankListText?: string;
+  /**
+   * Lot empty lists text en/zh
+   */
+  emptyListsText?: string;
   /**
    * Lot edit list text en/zh
    */
@@ -34,7 +38,7 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
   /**
    * List data containing count and name
    */
-  list: {
+  list?: {
     count: number;
     name: string;
   };
@@ -46,6 +50,10 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
    * Whether this card is in favorites view
    */
   isFavorites?: boolean;
+  /**
+   * Whether this card is in lists view
+   */
+  isLists?: boolean;
   /**
    * Element to render within the navigation item, renders <Link> by default
    */
@@ -62,6 +70,10 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
    * Callback function for deleteList menu item click
    */
   onDeleteListClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  /**
+   * Function to modify strings for lot string translation
+   */
+  formatlotStr?: (count: number) => string;
 }
 
 /**
@@ -80,43 +92,49 @@ const ListPreview = memo(
         className,
         list,
         listImageUrl,
+        isLists = false,
         isFavorites = false,
         element: Component = Link,
         imageLink,
         lotText = 'LOT',
         lotsText = 'LOTS',
-        favoritesText = 'You have not added any objects to your Favorites yet.',
-        listText = 'Create your first List.',
+        emptyFavoritesText = 'You have not added any objects to your Favorites yet.',
+        emptyListsText = 'You have not added any objects to your List yet.',
+        blankListText = 'Create your first List.',
         editListText = 'Edit List',
         deleteListText = 'Delete List',
         onEditListClick,
         onDeleteListClick,
+        formatlotStr,
         ...props
       },
       ref,
     ) => {
       const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ListPreview');
       const imageRef = useRef<HTMLDivElement>(null);
-      const isCountEmpty = list.count === 0;
+      const hasListData = !!list;
+      const isCountEmpty = hasListData && list?.count === 0;
 
       return (
         <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
           <div className={`${baseClassName}__content`}>
             <div className={`${baseClassName}__header`}>
               <div className={`${baseClassName}__info`}>
-                {(isFavorites || !isCountEmpty) && (
+                {hasListData && (
                   <Text element="span" className={`${baseClassName}__count`} variant={TextVariants.body3}>
-                    {list.count} {list.count === 1 ? lotText : lotsText}
+                    {formatlotStr && hasListData
+                      ? formatlotStr(list?.count)
+                      : `${list?.count} ${list?.count === 1 ? lotText : lotsText}`}
                   </Text>
                 )}
                 {
                   <Text element="h3" className={`${baseClassName}__title`} variant={TextVariants.heading5}>
-                    {list.name}
+                    {list?.name}
                   </Text>
                 }
               </div>
               <>
-                {!isCountEmpty && !isFavorites && (
+                {hasListData && (!isFavorites || (isFavorites && !isCountEmpty)) && (
                   <Popover.Root>
                     <Popover.Trigger asChild>
                       <div className={`${baseClassName}__actions`} data-testid="menu-trigger">
@@ -161,9 +179,9 @@ const ListPreview = memo(
               </>
             </div>
 
-            <Component href={imageLink} className={`${baseClassName}__media-link`}>
+            <Component href={imageLink} className={`${baseClassName}__media-link`} tabIndex={0}>
               {isCountEmpty && isFavorites && (
-                <div className={`${baseClassName}__media-container`} data-testid="favorites">
+                <div className={`${baseClassName}__media-container`} data-testid="favorites" aria-label="Favorites">
                   <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--favorites`)}>
                     <div className={`${baseClassName}__empty__content`}>
                       <Icon
@@ -173,33 +191,35 @@ const ListPreview = memo(
                         color="$dark-gray"
                         className={`${baseClassName}__icon`}
                       />
-                      <div className={`${baseClassName}__text`}>{favoritesText}</div>
+                      <div className={`${baseClassName}__text`}>{emptyFavoritesText}</div>
                     </div>
                   </div>
                 </div>
               )}
 
-              {isCountEmpty && !isFavorites && (
-                <div className={`${baseClassName}__media-container`} data-testid="list">
+              {(isCountEmpty || !hasListData) && isLists && (
+                <div className={`${baseClassName}__media-container`} data-testid="list" aria-label="Lists">
                   <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--list`)}>
                     <div className={`${baseClassName}__empty__content`}>
                       <Icon
-                        icon="Plus"
+                        icon={hasListData && isCountEmpty ? 'FavoriteOutline' : 'Plus'}
                         width={24}
                         height={24}
                         color="$dark-gray"
                         className={`${baseClassName}__icon`}
                       />
-                      <div className={`${baseClassName}__text`}>{listText}</div>
+                      <div className={`${baseClassName}__text`}>
+                        {hasListData && isCountEmpty ? emptyListsText : blankListText}
+                      </div>
                     </div>
                   </div>
                 </div>
               )}
 
-              {!isCountEmpty && (
+              {!isCountEmpty && hasListData && (
                 <div className={`${baseClassName}__media-container`} ref={imageRef}>
                   <SeldonImage
-                    alt={list.name}
+                    alt={list?.name}
                     aspectRatio="1/1"
                     className={`${baseClassName}__media`}
                     objectFit="cover"

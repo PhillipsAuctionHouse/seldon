@@ -11,7 +11,30 @@ const defaultProps = {
   listImageUrl: 'https://via.placeholder.com/400',
   isFavorites: false,
 };
-
+const blankListProps = {
+  listImageUrl: 'https://via.placeholder.com/400',
+  isLists: true,
+};
+const emptyListProps = {
+  listImageUrl: 'https://via.placeholder.com/400',
+  list: {
+    count: 0,
+    name: 'Test List',
+  },
+  isLists: true,
+};
+const translationedProps = {
+  listImageUrl: 'https://via.placeholder.com/400',
+  list: {
+    count: 0,
+    name: '某人列表',
+  },
+  isLists: true,
+  emptyListsText: '创建您的第一个列表',
+  formatlotStr: (count: number) => {
+    return `列表中有 ${count} 件拍品`;
+  },
+};
 describe('ListPreview', () => {
   runCommonTests(ListPreview, 'ListPreview', defaultProps);
 
@@ -87,5 +110,22 @@ describe('ListPreview', () => {
     });
     expect(mockOnDeleteListClick).toHaveBeenCalled();
     expect(mockOnDeleteListClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('it shows the blank list elements when the list is blank', () => {
+    render(<ListPreview {...blankListProps} />);
+    expect(screen.getByText('Create your first List.')).toBeInTheDocument();
+    expect(screen.queryByText('New List')).not.toBeInTheDocument();
+  });
+
+  it('it shows the correct empty list when data is provided', () => {
+    render(<ListPreview {...emptyListProps} />);
+    expect(screen.getByText('You have not added any objects to your List yet.')).toBeInTheDocument();
+  });
+
+  it('it shows the correct translation text when formatlotStr is provided', () => {
+    render(<ListPreview {...translationedProps} />);
+    expect(screen.getByText('列表中有 0 件拍品')).toBeInTheDocument();
+    expect(screen.getByText('创建您的第一个列表')).toBeInTheDocument();
   });
 });

@@ -54,14 +54,36 @@ EmptyFavorites.args = {
   element: 'a',
 };
 
+export const BlankList = (props: ComponentProps<typeof ListPreview>) => <ListPreview {...props} />;
+
+BlankList.args = {
+  list: null,
+  isLists: true,
+  element: 'a',
+};
+
 export const EmptyList = (props: ComponentProps<typeof ListPreview>) => <ListPreview {...props} />;
 
 EmptyList.args = {
   list: {
     count: 0,
-    name: '',
+    name: 'Test List',
   } as List,
-  isFavorites: false,
+  isLists: true,
   element: 'a',
-  listText: '首先创建某人列表',
+};
+
+export const TranslatedList = (props: ComponentProps<typeof ListPreview>) => <ListPreview {...props} />;
+
+TranslatedList.args = {
+  list: {
+    count: 0,
+    name: '某人列表',
+  } as List,
+  isLists: true,
+  element: 'a',
+  emptyListsText: '创建您的第一个列表',
+  formatlotStr: (count: number) => {
+    return `列表中有 ${count} 件拍品`;
+  },
 };
