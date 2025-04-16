@@ -1,0 +1,5 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-comboBox {
+  background-color: grey;
+}
