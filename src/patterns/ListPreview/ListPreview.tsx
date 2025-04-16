@@ -5,7 +5,7 @@ import Link, { LinkProps } from '../../components/Link/Link';
 import { Text, TextVariants } from '../../components/Text';
 import { SeldonImage } from '../../components/SeldonImage';
 import { Icon } from '../../components/Icon';
-import { Popover } from 'radix-ui';
+import * as Popover from '@radix-ui/react-popover';
 export interface ListPreviewProps extends ComponentProps<'div'> {
   /**
    * Lots display text en/zh
