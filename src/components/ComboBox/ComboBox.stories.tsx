@@ -12,7 +12,7 @@ const birthdays = Array.from({ length: 2025 - 1926 + 1 }, (_, i) => 1926 + i);
 export const Playground = (props: ComboBoxProps) => <ComboBox {...props} />;
 
 Playground.args = {
-  birthdays,
+  options: birthdays,
 };
 
 Playground.argTypes = {};

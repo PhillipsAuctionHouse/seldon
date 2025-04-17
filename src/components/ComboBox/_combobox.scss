@@ -1,5 +1,22 @@
 @use '#scss/allPartials' as *;
 
-.#{$px}-comboBox {
-  background-color: grey;
+.#{$px}-combo-box {
+  .command-input {
+    border: 1px solid transparent; /* Default border */
+    outline: none; /* Remove default focus outline */
+  }
+
+  .command-input:focus {
+    border: 1px solid blue; /* Add blue border on focus */
+  }
+
+  [cmdk-list] {
+    height: 200px;
+    max-height: 200px;
+    min-height: 300px;
+    overflow: hidden;
+    overflow-y: auto;
+    transition: height 100ms ease;
+    width: 210px;
+  }
 }
