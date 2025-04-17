@@ -1,14 +1,15 @@
-import { ComponentProps, forwardRef, useState, useEffect, ElementType } from 'react';
+import { ComponentProps, forwardRef, useState, useEffect } from 'react';
 import { getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
 import { format } from 'date-fns/format';
 import initializeAddToCalendar from './initializeAddToCalendar';
 import { Icon } from '../Icon';
 import { getTimeZone } from './utils';
-import { Link, LinkProps } from '../Link';
+import * as Menubar from '@radix-ui/react-menubar';
 
-// You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
-export interface AddToCalendarProps extends ComponentProps<'div'> {
+export interface AddToCalendarProps
+  extends Omit<Menubar.MenubarProps, 'defaultValue' | 'dir' | 'value'>,
+    ComponentProps<'div'> {
   startDateTimeOffset?: string;
   endDateTimeOffset?: string;
   timeZone?: string;
@@ -17,7 +18,6 @@ export interface AddToCalendarProps extends ComponentProps<'div'> {
   location?: string;
   organizer?: string;
   organizerEmail?: string;
-  linkElement?: ElementType<LinkProps>;
 }
 /**
  * ## Overview
@@ -40,7 +40,6 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
       location = 'New York',
       organizer,
       organizerEmail,
-      linkElement: Component = Link,
       ...props
     },
     ref,
@@ -79,20 +78,24 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
     const timeZoneToUse = timeZone || getTimeZone(location) || 'UTC';
     const startDateTime = parseDate(startDateTimeOffset);
     const endDateTime = endDateTimeOffset ? parseDate(endDateTimeOffset) : null;
+    const { defaultValue, dir, ...rest } = props;
 
     return (
-      <div className={classnames(baseClassName, className)} {...commonProps} {...props} ref={ref}>
-        <div id="add-to-calendar" className={statusClassName}>
-          <span className="addtocalendar atc-style-icon atc-style-menu-wb">
-            <Component
-              className={`{px}-icon-button ${px}-icon-button--primary atcb-link`}
-              aria-label={buttonAriaLabel}
-              aria-disabled={status !== 'connected'}
-              tabIndex={0}
-            >
+      <Menubar.Root
+        className={classnames(baseClassName, className)}
+        {...rest}
+        {...commonProps}
+        ref={ref}
+        aria-label={buttonAriaLabel}
+      >
+        <div
+          id="add-to-calendar"
+          className={classnames(statusClassName, 'addtocalendar atc-style-icon atc-style-menu-wb')}
+        >
+          <Menubar.Menu>
+            <Menubar.Trigger className={`{px}-icon-button ${px}-icon-button--primary atcb-link`}>
               <Icon icon="CalendarAlt" />
-            </Component>
-
+            </Menubar.Trigger>
             <var className="atc_event">
               <var className="atc_date_start">{format(startDateTime, 'yyyy-MM-dd HH:mm:ss')}</var>
               {endDateTime && <var className="atc_date_end">{format(endDateTime, 'yyyy-MM-dd HH:mm:ss')}</var>}
@@ -103,9 +106,9 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
               <var className="atc_organizer">{organizer}</var>
               <var className="atc_organizer_email">{organizerEmail}</var>
             </var>
-          </span>
+          </Menubar.Menu>
         </div>
-      </div>
+      </Menubar.Root>
     );
   },
 );

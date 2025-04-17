@@ -14,7 +14,7 @@ export const Playground = (props: AddToCalendarProps) => <AddToCalendar {...prop
 Playground.args = {
   id: 'AddToCalendar',
   startDateTimeOffset: '2025-01-27T15:13:02.59+00:00',
-  endDateTimeOffset: '2025-06-27T15:13:02.59+00:00',
+  endDateTimeOffset: '2025-06-18T15:13:02.59+00:00',
   timeZone: 'America/New_York',
   title: 'Jewels & More: Online Auction',
   description: 'Jewels & More: Online Auction.',

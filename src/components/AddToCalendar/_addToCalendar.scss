@@ -16,10 +16,12 @@
   }
 
   .atcb-link {
+    border: none;
     cursor: pointer;
     display: block;
     margin-bottom: 5px;
     outline: none;
+    padding: 0;
   }
 
   .atcb-link:focus ~ ul,

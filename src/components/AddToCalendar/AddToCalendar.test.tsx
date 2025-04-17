@@ -79,7 +79,7 @@ describe('AddToCalendar component', () => {
 
   it('renders Add to Calendar button with correct class names', () => {
     const { container } = render(<AddToCalendar {...props} />);
-    const button = container.querySelector('span.addtocalendar');
+    const button = container.querySelector('div.addtocalendar');
     expect(button).toBeInTheDocument();
     expect(button).toHaveClass('atc-style-icon');
     expect(button).toHaveClass('atc-style-menu-wb');

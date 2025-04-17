@@ -3,107 +3,104 @@
 exports[`AddToCalendar component > renders correctly 1`] = `
 <div>
   <div
+    aria-label="Add Jewels & More: Online Auction to calendar"
     class="seldon-add-to-calendar"
+    data-orientation="horizontal"
     data-testid="add-to-calendar"
+    role="menubar"
+    style="outline: none;"
+    tabindex="0"
   >
     <div
-      class="hidden"
+      class="hidden addtocalendar atc-style-icon atc-style-menu-wb"
       id="add-to-calendar"
     >
-      <span
-        class="addtocalendar atc-style-icon atc-style-menu-wb"
+      <button
+        aria-expanded="false"
+        aria-haspopup="menu"
+        class="{px}-icon-button seldon-icon-button--primary atcb-link"
+        data-orientation="horizontal"
+        data-radix-collection-item=""
+        data-state="closed"
+        id="radix-:r1:"
+        role="menuitem"
+        tabindex="-1"
+        type="button"
       >
-        <a
-          aria-disabled="true"
-          aria-label="Add Jewels & More: Online Auction to calendar"
-          class="seldon-link seldon-link--link {px}-icon-button seldon-icon-button--primary atcb-link"
-          data-testid="link"
-          tabindex="0"
+        <div
+          class="seldon-icon seldon-icon-calendar-alt"
         >
-          <span
-            class="seldon-text seldon-text--link"
-            data-testid="text"
+          <svg
+            aria-labelledby="svg-calendar-alt"
+            color="$pure-black"
+            data-testid="icon-calendar-alt"
+            fill="none"
+            role="img"
+            viewBox="0 0 28 28"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <span
-              class=""
+            <title
+              id="svg-calendar-alt"
             >
-              <div
-                class="seldon-icon seldon-icon-calendar-alt"
-              >
-                <svg
-                  aria-labelledby="svg-calendar-alt"
-                  color="$pure-black"
-                  data-testid="icon-calendar-alt"
-                  fill="none"
-                  role="img"
-                  viewBox="0 0 28 28"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title
-                    id="svg-calendar-alt"
-                  >
-                    SvgCalendarAlt
-                  </title>
-                  <path
-                    d="M7 12.25A.875.875 0 1 0 7 14h1.75a.875.875 0 0 0 0-1.75zM13.125 12.25a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75zM19.25 12.25a.875.875 0 1 0 0 1.75H21a.875.875 0 0 0 0-1.75zM7 17.5a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75zM13.125 17.5a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75z"
-                    fill="$pure-black"
-                  />
-                  <path
-                    clip-rule="evenodd"
-                    d="M1.75 7a3.5 3.5 0 0 1 3.5-3.5h17.5a3.5 3.5 0 0 1 3.5 3.5v14a3.5 3.5 0 0 1-3.5 3.5H5.25a3.5 3.5 0 0 1-3.5-3.5zM24.5 9.625V21a1.75 1.75 0 0 1-1.75 1.75H5.25A1.75 1.75 0 0 1 3.5 21V9.625zm0-1.75V7a1.75 1.75 0 0 0-1.75-1.75H5.25A1.75 1.75 0 0 0 3.5 7v.875z"
-                    fill="$pure-black"
-                    fill-rule="evenodd"
-                  />
-                </svg>
-              </div>
-            </span>
-          </span>
-        </a>
+              SvgCalendarAlt
+            </title>
+            <path
+              d="M7 12.25A.875.875 0 1 0 7 14h1.75a.875.875 0 0 0 0-1.75zM13.125 12.25a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75zM19.25 12.25a.875.875 0 1 0 0 1.75H21a.875.875 0 0 0 0-1.75zM7 17.5a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75zM13.125 17.5a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75z"
+              fill="$pure-black"
+            />
+            <path
+              clip-rule="evenodd"
+              d="M1.75 7a3.5 3.5 0 0 1 3.5-3.5h17.5a3.5 3.5 0 0 1 3.5 3.5v14a3.5 3.5 0 0 1-3.5 3.5H5.25a3.5 3.5 0 0 1-3.5-3.5zM24.5 9.625V21a1.75 1.75 0 0 1-1.75 1.75H5.25A1.75 1.75 0 0 1 3.5 21V9.625zm0-1.75V7a1.75 1.75 0 0 0-1.75-1.75H5.25A1.75 1.75 0 0 0 3.5 7v.875z"
+              fill="$pure-black"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </div>
+      </button>
+      <var
+        class="atc_event"
+      >
         <var
-          class="atc_event"
+          class="atc_date_start"
         >
-          <var
-            class="atc_date_start"
-          >
-            2025-01-27 15:13:02
-          </var>
-          <var
-            class="atc_date_end"
-          >
-            2025-06-27 15:13:02
-          </var>
-          <var
-            class="atc_timezone"
-          >
-            America/New_York
-          </var>
-          <var
-            class="atc_title"
-          >
-            Jewels & More: Online Auction
-          </var>
-          <var
-            class="atc_description"
-          >
-            Jewels & More: Online Auction.
-          </var>
-          <var
-            class="atc_location"
-          >
-            New York
-          </var>
-          <var
-            class="atc_organizer"
-          >
-            Conference Organizers
-          </var>
-          <var
-            class="atc_organizer_email"
-          >
-            test@example.com
-          </var>
+          2025-01-27 15:13:02
         </var>
-      </span>
+        <var
+          class="atc_date_end"
+        >
+          2025-06-27 15:13:02
+        </var>
+        <var
+          class="atc_timezone"
+        >
+          America/New_York
+        </var>
+        <var
+          class="atc_title"
+        >
+          Jewels & More: Online Auction
+        </var>
+        <var
+          class="atc_description"
+        >
+          Jewels & More: Online Auction.
+        </var>
+        <var
+          class="atc_location"
+        >
+          New York
+        </var>
+        <var
+          class="atc_organizer"
+        >
+          Conference Organizers
+        </var>
+        <var
+          class="atc_organizer_email"
+        >
+          test@example.com
+        </var>
+      </var>
     </div>
   </div>
 </div>
@@ -112,107 +109,104 @@ exports[`AddToCalendar component > renders correctly 1`] = `
 exports[`AddToCalendar component > renders correctly with startDateTimeOffset 1`] = `
 <div>
   <div
+    aria-label="Add Test Event to calendar"
     class="seldon-add-to-calendar"
+    data-orientation="horizontal"
     data-testid="add-to-calendar"
+    role="menubar"
+    style="outline: none;"
+    tabindex="0"
   >
     <div
-      class="hidden"
+      class="hidden addtocalendar atc-style-icon atc-style-menu-wb"
       id="add-to-calendar"
     >
-      <span
-        class="addtocalendar atc-style-icon atc-style-menu-wb"
+      <button
+        aria-expanded="false"
+        aria-haspopup="menu"
+        class="{px}-icon-button seldon-icon-button--primary atcb-link"
+        data-orientation="horizontal"
+        data-radix-collection-item=""
+        data-state="closed"
+        id="radix-:r19:"
+        role="menuitem"
+        tabindex="-1"
+        type="button"
       >
-        <a
-          aria-disabled="true"
-          aria-label="Add Test Event to calendar"
-          class="seldon-link seldon-link--link {px}-icon-button seldon-icon-button--primary atcb-link"
-          data-testid="link"
-          tabindex="0"
+        <div
+          class="seldon-icon seldon-icon-calendar-alt"
         >
-          <span
-            class="seldon-text seldon-text--link"
-            data-testid="text"
+          <svg
+            aria-labelledby="svg-calendar-alt"
+            color="$pure-black"
+            data-testid="icon-calendar-alt"
+            fill="none"
+            role="img"
+            viewBox="0 0 28 28"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <span
-              class=""
+            <title
+              id="svg-calendar-alt"
             >
-              <div
-                class="seldon-icon seldon-icon-calendar-alt"
-              >
-                <svg
-                  aria-labelledby="svg-calendar-alt"
-                  color="$pure-black"
-                  data-testid="icon-calendar-alt"
-                  fill="none"
-                  role="img"
-                  viewBox="0 0 28 28"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title
-                    id="svg-calendar-alt"
-                  >
-                    SvgCalendarAlt
-                  </title>
-                  <path
-                    d="M7 12.25A.875.875 0 1 0 7 14h1.75a.875.875 0 0 0 0-1.75zM13.125 12.25a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75zM19.25 12.25a.875.875 0 1 0 0 1.75H21a.875.875 0 0 0 0-1.75zM7 17.5a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75zM13.125 17.5a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75z"
-                    fill="$pure-black"
-                  />
-                  <path
-                    clip-rule="evenodd"
-                    d="M1.75 7a3.5 3.5 0 0 1 3.5-3.5h17.5a3.5 3.5 0 0 1 3.5 3.5v14a3.5 3.5 0 0 1-3.5 3.5H5.25a3.5 3.5 0 0 1-3.5-3.5zM24.5 9.625V21a1.75 1.75 0 0 1-1.75 1.75H5.25A1.75 1.75 0 0 1 3.5 21V9.625zm0-1.75V7a1.75 1.75 0 0 0-1.75-1.75H5.25A1.75 1.75 0 0 0 3.5 7v.875z"
-                    fill="$pure-black"
-                    fill-rule="evenodd"
-                  />
-                </svg>
-              </div>
-            </span>
-          </span>
-        </a>
+              SvgCalendarAlt
+            </title>
+            <path
+              d="M7 12.25A.875.875 0 1 0 7 14h1.75a.875.875 0 0 0 0-1.75zM13.125 12.25a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75zM19.25 12.25a.875.875 0 1 0 0 1.75H21a.875.875 0 0 0 0-1.75zM7 17.5a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75zM13.125 17.5a.875.875 0 1 0 0 1.75h1.75a.875.875 0 0 0 0-1.75z"
+              fill="$pure-black"
+            />
+            <path
+              clip-rule="evenodd"
+              d="M1.75 7a3.5 3.5 0 0 1 3.5-3.5h17.5a3.5 3.5 0 0 1 3.5 3.5v14a3.5 3.5 0 0 1-3.5 3.5H5.25a3.5 3.5 0 0 1-3.5-3.5zM24.5 9.625V21a1.75 1.75 0 0 1-1.75 1.75H5.25A1.75 1.75 0 0 1 3.5 21V9.625zm0-1.75V7a1.75 1.75 0 0 0-1.75-1.75H5.25A1.75 1.75 0 0 0 3.5 7v.875z"
+              fill="$pure-black"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </div>
+      </button>
+      <var
+        class="atc_event"
+      >
         <var
-          class="atc_event"
+          class="atc_date_start"
         >
-          <var
-            class="atc_date_start"
-          >
-            2022-01-01 12:00:00
-          </var>
-          <var
-            class="atc_date_end"
-          >
-            2022-01-01 13:00:00
-          </var>
-          <var
-            class="atc_timezone"
-          >
-            UTC
-          </var>
-          <var
-            class="atc_title"
-          >
-            Test Event
-          </var>
-          <var
-            class="atc_description"
-          >
-            This is a test event
-          </var>
-          <var
-            class="atc_location"
-          >
-            New York
-          </var>
-          <var
-            class="atc_organizer"
-          >
-            John Doe
-          </var>
-          <var
-            class="atc_organizer_email"
-          >
-            johndoe@example.com
-          </var>
+          2022-01-01 12:00:00
         </var>
-      </span>
+        <var
+          class="atc_date_end"
+        >
+          2022-01-01 13:00:00
+        </var>
+        <var
+          class="atc_timezone"
+        >
+          UTC
+        </var>
+        <var
+          class="atc_title"
+        >
+          Test Event
+        </var>
+        <var
+          class="atc_description"
+        >
+          This is a test event
+        </var>
+        <var
+          class="atc_location"
+        >
+          New York
+        </var>
+        <var
+          class="atc_organizer"
+        >
+          John Doe
+        </var>
+        <var
+          class="atc_organizer_email"
+        >
+          johndoe@example.com
+        </var>
+      </var>
     </div>
   </div>
 </div>
