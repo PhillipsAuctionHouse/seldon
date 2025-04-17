@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { Command, CommandInput, CommandList, CommandItem, CommandGroup } from 'cmdk';
