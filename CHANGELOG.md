@@ -1,3 +1,10 @@
+# [1.136.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.135.1...v1.136.0) (2025-04-18)
+
+
+### Features
+
+* **PinchZoom:** L3-4672 fixed unnecessary white space ([#596](https://github.com/PhillipsAuctionHouse/seldon/issues/596)) ([2151cee](https://github.com/PhillipsAuctionHouse/seldon/commit/2151cee66a0b76029e4154ba2e8bc7d3519a8919))
+
 ## [1.135.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.135.0...v1.135.1) (2025-04-15)
 
 
