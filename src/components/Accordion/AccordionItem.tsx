@@ -97,7 +97,7 @@ const AccordionHeader = ({
   const minusIconComponent = (
     <div>
       <Icon
-        icon="Minus"
+        icon="CloseDash"
         height={24}
         width={24}
         className={getIconClasses(baseClassName, isLargeVariation, 'minus')}

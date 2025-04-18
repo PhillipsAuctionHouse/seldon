@@ -34,7 +34,7 @@ const Footer = ({
       <div className={`${px}-footer__copyright`}>
         <h3 data-testid="footer-logo" className={`${px}-footer__logo`}>
           <a href="/" aria-label="logo">
-            <Icon icon="PhillipsLogo" />
+            <Icon icon="PhillipsLogo" width="94px" />
           </a>
         </h3>
         <Text variant={TextVariants.body3}>{copyright}</Text>

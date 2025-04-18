@@ -1,7 +1,7 @@
-import { Ref, forwardRef, memo } from 'react';
+import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgPhillipsAppIconProps {
+interface SvgPhillipsAppIconProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -10,7 +10,7 @@ interface SvgPhillipsAppIconProps {
 }
 
 const SvgPhillipsAppIcon = memo(
-  forwardRef((props: SvgPhillipsAppIconProps, ref: Ref<SVGSVGElement>) => {
+  forwardRef<SVGSVGElement, SvgPhillipsAppIconProps>((props, ref) => {
     const { height, width, title: propsTitle, titleId: propsTitleId } = props;
     const title = propsTitle || 'SvgPhillipsAppIcon';
     const titleId = propsTitleId || kebabCase(title);

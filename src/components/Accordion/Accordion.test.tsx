@@ -32,7 +32,7 @@ describe('Accordion', () => {
     );
     expect(screen.queryByTestId(/icon-plus/)).toBeInTheDocument();
     await userEvent.click(screen.getByTestId('accordion-item-0-trigger'));
-    await waitFor(() => expect(screen.queryByTestId(/icon-minus/)).toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByTestId(/icon-close-dash/)).toBeInTheDocument());
   });
 
   it('should contain the lock icon and lock icon content', async () => {
