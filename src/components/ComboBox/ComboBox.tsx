@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { Command, CommandInput, CommandList, CommandItem, CommandGroup } from 'cmdk';
-
+import { Icon } from '../Icon';
 export interface ComboBoxProps {
   options: string[];
   id: string; // Add the id property
@@ -90,6 +90,9 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
           }}
           className={`${baseClassName}__input`}
         />
+        <span className={`${baseClassName}__icon-wrapper`} onClick={() => setIsOpen((prev) => !prev)}>
+          <Icon color="$pure-black" height={18} icon="ChevronDown" width={18} className={`${baseClassName}__icon`} />
+        </span>
         <CommandList className={`${baseClassName}__list`} hidden={!isOpen}>
           {sanitizedOptions.some((option) => option.toLowerCase().includes(inputValue.toLowerCase())) ? (
             <CommandGroup>
