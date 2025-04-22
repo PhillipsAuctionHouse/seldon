@@ -90,9 +90,19 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
           }}
           className={`${baseClassName}__input`}
         />
-        <span className={`${baseClassName}__icon-wrapper`} onClick={() => setIsOpen((prev) => !prev)}>
+        {/* Make Elements accessible / tab-able */}
+        {inputValue.length > 0 && (
+          <div
+            className={`${baseClassName}__close-icon-wrapper`}
+            data-testid={`${id}-item-close-button`}
+            onClick={() => setInputValue('')}
+          >
+            <Icon color="$primary-black" icon="Close" height={18} width={18} className={`${baseClassName}__icon`} />
+          </div>
+        )}
+        <div className={`${baseClassName}__dropdown-icon-wrapper`} onClick={() => setIsOpen((prev) => !prev)}>
           <Icon color="$pure-black" height={18} icon="ChevronDown" width={18} className={`${baseClassName}__icon`} />
-        </span>
+        </div>
         <CommandList className={`${baseClassName}__list`} hidden={!isOpen}>
           {sanitizedOptions.some((option) => option.toLowerCase().includes(inputValue.toLowerCase())) ? (
             <CommandGroup>

@@ -19,7 +19,14 @@
     }
   }
 
-  &__icon-wrapper {
+  &__close-icon-wrapper {
+    color: $text-color;
+    position: absolute;
+    right: 36px;
+    top: 29px;
+  }
+
+  &__dropdown-icon-wrapper {
     color: $text-color;
     position: absolute;
     right: 3px;
