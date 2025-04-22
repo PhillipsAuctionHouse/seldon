@@ -2,7 +2,8 @@ import { ComponentProps, forwardRef, useRef, useState, useEffect, useCallback, m
 import classnames from 'classnames';
 
 import { getCommonProps } from '../../utils';
-import { PhillipsLogo } from '../../assets/icons';
+import { Icon } from '../Icon';
+import { isImageValid } from './utils';
 
 type AspectRatio = '16/9' | '1/1' | 'none';
 
@@ -55,39 +56,6 @@ export interface SeldonImageProps extends ComponentProps<'div'> {
    * The text to display when the image fails to load.
    */
   errorText?: string;
-}
-
-function isImageValid({
-  img,
-  src,
-  srcSet,
-  sizes,
-}: {
-  img: HTMLImageElement | null;
-  src: string;
-  srcSet?: string;
-  sizes?: string;
-}) {
-  const promise = new Promise((resolve) => {
-    let imgElement = img;
-    if (!imgElement) {
-      imgElement = document.createElement('img');
-    }
-    imgElement.onerror = () => resolve(false);
-    imgElement.onload = () => resolve(true);
-    if (srcSet) {
-      imgElement.srcset = srcSet;
-    }
-    if (sizes) {
-      imgElement.sizes = sizes;
-    }
-    imgElement.src = src;
-    if (imgElement.complete) {
-      resolve(true);
-    }
-  });
-
-  return promise;
 }
 
 const isServer = typeof window === 'undefined';
@@ -189,7 +157,7 @@ const SeldonImage = memo(
           )}
           {loadingState === 'error' ? (
             <div className={`${baseClassName}--error`}>
-              <PhillipsLogo aria-label={errorText} />
+              <Icon icon="PhillipsLogo" aria-label={errorText} role="img" />
             </div>
           ) : null}
           <img

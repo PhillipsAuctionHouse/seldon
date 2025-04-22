@@ -1,3 +1,113 @@
+# [1.136.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.135.1...v1.136.0) (2025-04-18)
+
+
+### Features
+
+* **PinchZoom:** L3-4672 fixed unnecessary white space ([#596](https://github.com/PhillipsAuctionHouse/seldon/issues/596)) ([2151cee](https://github.com/PhillipsAuctionHouse/seldon/commit/2151cee66a0b76029e4154ba2e8bc7d3519a8919))
+
+## [1.135.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.135.0...v1.135.1) (2025-04-15)
+
+
+### Bug Fixes
+
+* **Tabs:** L3-5827 Update active state of Tabs hover state ([#588](https://github.com/PhillipsAuctionHouse/seldon/issues/588)) ([6b941d0](https://github.com/PhillipsAuctionHouse/seldon/commit/6b941d00388a0b3cfd957bd471eeb0552fd3ceb0))
+
+# [1.135.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.134.1...v1.135.0) (2025-04-10)
+
+
+### Features
+
+* **Divider:** L3-5954 horizontal divider ([#581](https://github.com/PhillipsAuctionHouse/seldon/issues/581)) ([fdf9cde](https://github.com/PhillipsAuctionHouse/seldon/commit/fdf9cdea923016b45cfd32f92bf27f58a4320327))
+
+## [1.134.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.134.0...v1.134.1) (2025-04-09)
+
+
+### Bug Fixes
+
+* **tab-triggers:** L3-5252 Tab Inactive Label Weight Fix ([#575](https://github.com/PhillipsAuctionHouse/seldon/issues/575)) ([381897d](https://github.com/PhillipsAuctionHouse/seldon/commit/381897dea0dac469f6f4008f7198f8716d291afe))
+
+# [1.134.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.5...v1.134.0) (2025-04-09)
+
+
+### Features
+
+* **favoritetile:** L3-5962 add favoriting tile ([#560](https://github.com/PhillipsAuctionHouse/seldon/issues/560)) ([24b0e4c](https://github.com/PhillipsAuctionHouse/seldon/commit/24b0e4cccc9f08d3dcb96e4524e3c1db16887cb5))
+
+## [1.133.5](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.4...v1.133.5) (2025-04-05)
+
+
+### Bug Fixes
+
+* **lotobjecttile:** L3-6251 incorrect HTML nesting causing HTML validation errors and hydration errors ([#582](https://github.com/PhillipsAuctionHouse/seldon/issues/582)) ([edb5156](https://github.com/PhillipsAuctionHouse/seldon/commit/edb51560b5c96b6825a46f51adfaa7cb88d06826))
+
+## [1.133.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.3...v1.133.4) (2025-04-04)
+
+
+### Bug Fixes
+
+* **icon:** L3-6336 handle icons that are not of 1x1 aspect ratio ([#580](https://github.com/PhillipsAuctionHouse/seldon/issues/580)) ([3085546](https://github.com/PhillipsAuctionHouse/seldon/commit/3085546665d011272af6928578c180911ebe96ca))
+
+## [1.133.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.2...v1.133.3) (2025-04-04)
+
+
+### Bug Fixes
+
+* **Icons:** L3-6336 fix fallback value for Icon color ([#579](https://github.com/PhillipsAuctionHouse/seldon/issues/579)) ([16dc0bc](https://github.com/PhillipsAuctionHouse/seldon/commit/16dc0bc2728d581c903c49919c1aa1e4a108b7e2))
+
+## [1.133.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.1...v1.133.2) (2025-04-02)
+
+
+### Bug Fixes
+
+* **lot-description:** L3-6287 Fix for Object Tile Title Text ([#576](https://github.com/PhillipsAuctionHouse/seldon/issues/576)) ([0bc8145](https://github.com/PhillipsAuctionHouse/seldon/commit/0bc814534dc5e6be27fcb37304b556f6d368738c))
+
+## [1.133.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.133.0...v1.133.1) (2025-04-01)
+
+
+### Bug Fixes
+
+* **Grid:** L3-6072  Revert Add support for xl breakpoints and colStart props ([#564](https://github.com/PhillipsAuctionHouse/seldon/issues/564))" ([#574](https://github.com/PhillipsAuctionHouse/seldon/issues/574)) ([e52b0a5](https://github.com/PhillipsAuctionHouse/seldon/commit/e52b0a5c0b069878cf477f85c39287dddb5e4f06))
+
+# [1.133.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.132.1...v1.133.0) (2025-04-01)
+
+
+### Bug Fixes
+
+* **IconGrid:** L3-3417 fix build issue ([#573](https://github.com/PhillipsAuctionHouse/seldon/issues/573)) ([8869d4c](https://github.com/PhillipsAuctionHouse/seldon/commit/8869d4c1af6363ddda46fe4b2fd2108bd4f61264))
+
+
+### Features
+
+* **Sale and Lot Icons:** L3-3417 icon updates ([#566](https://github.com/PhillipsAuctionHouse/seldon/issues/566)) ([4c88d48](https://github.com/PhillipsAuctionHouse/seldon/commit/4c88d48f24cc0865ee60385593d8257d84c2f621))
+
+## [1.132.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.132.0...v1.132.1) (2025-04-01)
+
+
+### Bug Fixes
+
+* **upgrade:** L3-6222 allow seldon to be used with phillips-public older React 18 version ([#567](https://github.com/PhillipsAuctionHouse/seldon/issues/567)) ([312d0b5](https://github.com/PhillipsAuctionHouse/seldon/commit/312d0b5dd2de424dfbe93fff98677ece64f088c0))
+
+# [1.132.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.131.0...v1.132.0) (2025-03-28)
+
+
+### Features
+
+* **textarea:** L3-5975 Add textarea component ([#551](https://github.com/PhillipsAuctionHouse/seldon/issues/551)) ([da4847d](https://github.com/PhillipsAuctionHouse/seldon/commit/da4847de26f3a9007b045d3388b057677f65117c))
+
+# [1.131.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.130.1...v1.131.0) (2025-03-26)
+
+
+### Features
+
+* **Grid:** L3-6072 Add support for xl breakpoints and colStart props ([#564](https://github.com/PhillipsAuctionHouse/seldon/issues/564)) ([a447d79](https://github.com/PhillipsAuctionHouse/seldon/commit/a447d79f47303770ca21ffc10a56fca88a946e8a))
+
+## [1.130.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.130.0...v1.130.1) (2025-03-26)
+
+
+### Bug Fixes
+
+* **Search:** L3-5572 Search Bar Removing Typed Search ([#563](https://github.com/PhillipsAuctionHouse/seldon/issues/563)) ([9d96b40](https://github.com/PhillipsAuctionHouse/seldon/commit/9d96b4053138727dad46f74fc5423f3bf8cd27d1))
+
 # [1.130.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.129.2...v1.130.0) (2025-03-21)
 
 

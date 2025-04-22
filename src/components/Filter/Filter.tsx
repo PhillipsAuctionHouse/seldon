@@ -14,7 +14,7 @@ import FilterHeader from './FilterHeader';
 import { FilterInputProps } from './FilterInput';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
-import ChevronNextIcon from '../../assets/chevronNext.svg?react';
+import { Icon } from '../Icon';
 
 export interface FilterProps extends ComponentProps<'div'> {
   /** Logical name of this filter */
@@ -102,7 +102,7 @@ const Filter = forwardRef<HTMLDivElement, FilterProps>(
             }}
           >
             {viewAllLabel}
-            <ChevronNextIcon className={`${baseClassName}__chevron`} />
+            <Icon icon="ChevronNext" className={`${baseClassName}__chevron`} />
           </Button>
         ) : null}
       </div>

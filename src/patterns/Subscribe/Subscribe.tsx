@@ -24,6 +24,10 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
    */
   element?: React.ElementType<SubscribeProps>;
   /**
+   * A unique `id` for the `<Subscribe>`
+   */
+  id: string;
+  /**
    * Subscribe input label
    */
   inputLabelText?: string;
@@ -87,10 +91,10 @@ const Subscribe = ({
   successText,
   privacyText = 'By signing up, you agree to receive email communications from Phillips.',
   subscriptionState = SubscriptionState.Default,
+  id,
   ...props
 }: SubscribeProps) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Subscribe');
-
+  const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'Subscribe');
   const isInvalid = subscriptionState === SubscriptionState.Invalid;
   const isLoading = subscriptionState === SubscriptionState.Loading;
   const isSuccess = subscriptionState === SubscriptionState.Success;
@@ -108,7 +112,7 @@ const Subscribe = ({
   const invalid = isInvalid || isError;
 
   return (
-    <Element {...commonProps} className={classnames(baseClassName, className)} noValidate {...props}>
+    <Element id={id} {...commonProps} className={classnames(baseClassName, className)} noValidate {...props}>
       <h3 className={`${baseClassName}__title`}>{title}</h3>
       {blurb ? <p className={`${baseClassName}__blurb`}>{blurb}</p> : null}
 
@@ -124,6 +128,7 @@ const Subscribe = ({
         warn={warn}
         warnText={text}
         required
+        id={`${id}-input`}
       />
       <Button
         className={`${baseClassName}__button ${className}`}

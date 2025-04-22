@@ -11,7 +11,7 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
    * Optional Object badge.
    */
-  badgeText?: string;
+  badgeText?: string | React.ReactNode;
   /**
    * Optional Element to render at the top level.
    */
@@ -67,11 +67,11 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
    * Object Maker name.
    */
-  makerText?: string;
+  makerText?: string | React.ReactNode;
   /**
    * Object Model text.
    */
-  modelText?: string;
+  modelText?: string | React.ReactNode;
   /**
    * Object reference number.
    */
@@ -79,7 +79,7 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
    * Object title.
    */
-  titleText?: string;
+  titleText?: string | React.ReactNode;
   /**
    * Withdrawn Text
    */
@@ -140,12 +140,12 @@ const ObjectTile = memo(
             fetchPriority={imageFetchPriority}
           />
           {!withdrawnText ? (
-            <Text className={`${baseClassName}__badge`} variant={TextVariants.badge}>
+            <Text element="span" className={`${baseClassName}__badge`} variant={TextVariants.badge}>
               {badgeText}
             </Text>
           ) : null}
           <div className={`${baseClassName}__lot-number-like`}>
-            <Text className={`${baseClassName}__lot-number`} variant={TextVariants.heading4} element="p">
+            <Text element="span" className={`${baseClassName}__lot-number`} variant={TextVariants.heading4}>
               {lotNumber}
             </Text>
             {BadgeElement && (
@@ -156,14 +156,14 @@ const ObjectTile = memo(
             {FavoriteElement && <FavoriteElement />}
           </div>
           {withdrawnText ? (
-            <Text className={`${baseClassName}__withdrawn`} variant={TextVariants.heading4}>
+            <Text element="span" className={`${baseClassName}__withdrawn`} variant={TextVariants.heading4}>
               {withdrawnText}
             </Text> // TODO: Design calls for heading 4 but the values they have map to our current heading 5. This should be updated when we update those tokens.
           ) : (
             <>
               <div className={`${baseClassName}__meta`}>
                 {makerText ? (
-                  <Text className={`${baseClassName}__maker`} variant={TextVariants.heading4}>
+                  <Text element="span" className={`${baseClassName}__maker`} variant={TextVariants.heading4}>
                     {makerText}
                   </Text>
                 ) : null}
@@ -180,7 +180,7 @@ const ObjectTile = memo(
                   <Text
                     className={`${baseClassName}__reference-number ${baseClassName}__token-fix`}
                     variant={TextVariants.heading4}
-                    element="p"
+                    element="span"
                   >
                     {referenceNumber}
                   </Text>
@@ -189,7 +189,7 @@ const ObjectTile = memo(
                   <Text
                     className={`${baseClassName}__model ${baseClassName}__token-fix`}
                     variant={TextVariants.heading4}
-                    element="p"
+                    element="span"
                   >
                     {modelText}
                   </Text>
