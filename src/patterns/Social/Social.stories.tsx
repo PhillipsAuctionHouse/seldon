@@ -14,27 +14,27 @@ const socialIcons = (
   <ul>
     <li>
       <a>
-        <Icon icon="Instagram" height="4rem" />
+        <Icon icon="Instagram" height="1.75rem" width="1.75rem" color="$pure-black" />
       </a>
     </li>
     <li>
       <a>
-        <Icon icon="LinkedIn" height="4rem" />
+        <Icon icon="LinkedIn" height="1.75rem" width="1.75rem" color="$pure-black" />
       </a>
     </li>
     <li>
       <a>
-        <Icon icon="Wechat" height="4rem" />
+        <Icon icon="Wechat" height="1.75rem" width="1.75rem" color="$pure-black" />
       </a>
     </li>
     <li>
       <a>
-        <Icon icon="Red" height="4rem" />
+        <Icon icon="Red" height="1.75rem" width="1.75rem" color="$pure-black" />
       </a>
     </li>
     <li>
       <a>
-        <Icon icon="Facebook" height="4rem" />
+        <Icon icon="Facebook" height="1.75rem" width="1.75rem" color="$pure-black" />
       </a>
     </li>
   </ul>

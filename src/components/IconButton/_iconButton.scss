@@ -11,6 +11,10 @@
   & svg {
     height: $button-label-line-height;
     width: $button-label-line-height;
+
+    &:hover {
+      color: $white;
+    }
   }
 
   &:focus-visible {

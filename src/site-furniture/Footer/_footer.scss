@@ -16,6 +16,11 @@
     padding: $spacing-lg $spacing-md $spacing-md $spacing-md;
     width: 100%;
 
+    .#{$px}-icon {
+      height: 1rem;
+      width: 1rem;
+    }
+
     @include media($size-md) {
       flex-flow: row wrap;
       gap: $spacing-lg;

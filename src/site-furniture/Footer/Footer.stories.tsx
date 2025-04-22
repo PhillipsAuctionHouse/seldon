@@ -63,27 +63,27 @@ export const Playground = (props: FooterProps) => (
       <ul>
         <li>
           <a>
-            <Icon icon="Instagram" height="0.8rem" />
+            <Icon icon="Instagram" />
           </a>
         </li>
         <li>
           <a>
-            <Icon icon="LinkedIn" height="0.8rem" />
+            <Icon icon="LinkedIn" />
           </a>
         </li>
         <li>
           <a>
-            <Icon icon="Wechat" height="0.8rem" />
+            <Icon icon="Wechat" />
           </a>
         </li>
         <li>
           <a>
-            <Icon icon="Red" height="0.8rem" />
+            <Icon icon="Red" />
           </a>
         </li>
         <li>
           <a>
-            <Icon icon="Facebook" height="0.8rem" />
+            <Icon icon="Facebook" />
           </a>
         </li>
       </ul>

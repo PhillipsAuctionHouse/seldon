@@ -31,6 +31,6 @@ export default meta;
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Playground = {
   args: {
-    children: <Icon icon="CloseX" />,
+    children: <Icon icon="CloseX" color="currentColor" />,
   },
 };
