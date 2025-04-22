@@ -5,7 +5,7 @@
 
   &__input {
     border: 1px solid $keyline-gray;
-    border-radius: 0.1875rem;
+    border-radius: 5px;
     outline: none;
     padding: $padding-xsm;
     width: 100%;
@@ -19,18 +19,26 @@
     }
   }
 
-  &__close-icon-wrapper {
-    color: $text-color;
-    position: absolute;
-    right: 36px;
-    top: 29px;
+  &__label {
+    color: $soft-black-2;
+    font-size: $text-label-size;
+    font-variation-settings: 'wght' 600;
   }
 
-  &__dropdown-icon-wrapper {
+  &__close-button {
+    all: unset;
+    color: $text-color;
+    position: absolute;
+    right: 34px;
+    top: 28px;
+  }
+
+  &__dropdown-button {
+    all: unset;
     color: $text-color;
     position: absolute;
     right: 3px;
-    top: 29px;
+    top: 28px;
   }
 
   &__icon {
@@ -62,11 +70,15 @@
   }
 
   &__list {
-    height: 200px;
+    left: 0;
+    max-height: 200px;
     overflow: hidden;
     overflow-y: auto;
+    position: absolute;
+    top: 100%;
     transition: height 100ms ease;
     width: 100%;
+    z-index: 9999;
   }
 
   &__item {

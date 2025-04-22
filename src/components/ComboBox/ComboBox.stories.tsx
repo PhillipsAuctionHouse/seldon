@@ -10,7 +10,7 @@ export default meta;
 
 const birthdays = Array.from({ length: 2025 - 1926 + 1 }, (_, i) => 1926 + i);
 export const Playground = (props: ComboBoxProps) => (
-  <div style={{ height: '250px', width: '300px' }}>
+  <div style={{ height: '70px', width: '400px', zIndex: 1, position: 'relative' }}>
     <ComboBox {...props} />
   </div>
 );

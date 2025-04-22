@@ -8,6 +8,8 @@ export interface ComboBoxProps {
   id: string; // Add the id property
   className?: string; // Add the className property
   label: string; // Add the label property
+
+  placeholder?: string; // Add the placeholder property
 }
 
 /**
@@ -21,7 +23,7 @@ export interface ComboBoxProps {
  */
 
 const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboBox(
-  { options, className, id, label, ...props },
+  { options, className, id, label, placeholder, ...props },
   ref,
 ) {
   const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'ComboBox');
@@ -52,6 +54,9 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     const handleClickOutside = (event: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setIsOpen(false);
+        if (!sanitizedOptions.some((option) => option.toLowerCase() === inputValue.toLowerCase())) {
+          setInputValue('');
+        }
       }
     };
 
@@ -81,7 +86,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
       </label>
       <Command loop shouldFilter={false}>
         <CommandInput
-          placeholder="Type to search..."
+          placeholder={placeholder}
           value={inputValue}
           onValueChange={handleValueChange}
           onFocus={() => {
@@ -89,20 +94,27 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
             handleValueChange(inputValue);
           }}
           className={`${baseClassName}__input`}
+          tabIndex={0}
         />
-        {/* Make Elements accessible / tab-able */}
         {inputValue.length > 0 && (
-          <div
-            className={`${baseClassName}__close-icon-wrapper`}
+          <button
+            className={`${baseClassName}__close-button`}
             data-testid={`${id}-item-close-button`}
             onClick={() => setInputValue('')}
+            aria-label={`clear ${label}`}
+            tabIndex={0}
           >
             <Icon color="$primary-black" icon="Close" height={18} width={18} className={`${baseClassName}__icon`} />
-          </div>
+          </button>
         )}
-        <div className={`${baseClassName}__dropdown-icon-wrapper`} onClick={() => setIsOpen((prev) => !prev)}>
+        <button
+          aria-label={`dropdown ${label}`}
+          className={`${baseClassName}__dropdown-button`}
+          onClick={() => setIsOpen((prev) => !prev)}
+          tabIndex={0}
+        >
           <Icon color="$pure-black" height={18} icon="ChevronDown" width={18} className={`${baseClassName}__icon`} />
-        </div>
+        </button>
         <CommandList className={`${baseClassName}__list`} hidden={!isOpen}>
           {sanitizedOptions.some((option) => option.toLowerCase().includes(inputValue.toLowerCase())) ? (
             <CommandGroup>
