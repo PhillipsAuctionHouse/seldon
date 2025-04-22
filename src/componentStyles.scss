@@ -46,6 +46,7 @@
 @use 'components/Tabs/tabs';
 @use 'components/SeldonImage/seldonImage';
 @use 'components/Filter/filter';
+@use 'components/FavoritingTileButton/favoritingTileButton';
 
 // Patterns
 @use 'patterns/HeroBanner/heroBanner';
@@ -64,4 +65,5 @@
 @use 'site-furniture/Header/header';
 @use 'site-furniture/Footer/footer';
 @use 'components/Article/article';
+@use 'components/Divider/divider';
 @use 'components/TextArea/textArea';
