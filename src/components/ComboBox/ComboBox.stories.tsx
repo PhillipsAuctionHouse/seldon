@@ -9,7 +9,13 @@ const meta = {
 
 export default meta;
 
-const birthdays = Array.from({ length: 2025 - 1926 + 1 }, (_, i) => 1926 + i);
+const birthdays = Array.from({ length: 2025 - 1926 + 1 }, (_, i) => {
+  const year = 1926 + i;
+  return {
+    label: `${year}`,
+    value: `${year}`,
+  };
+});
 export const Playground = (props: ComboBoxProps) => {
   const [inputValue, setInputValue] = React.useState('');
   return (

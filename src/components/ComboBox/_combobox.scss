@@ -91,6 +91,10 @@
       background-color: $medium-gray;
       cursor: pointer;
     }
+
+    &[data-selected='true'] {
+      background-color: $medium-gray;
+    }
   }
 
   &__highlight {
