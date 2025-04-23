@@ -1,63 +1,117 @@
 import { useState } from 'react';
 import Select from '../../components/Select/Select';
-import Input from '../../components/Input/Input';
 import { Icon, IconProps } from '../../components/Icon';
-import * as iconComponents from '../../assets/formatted';
-import { getScssColors } from '../../utils/scssUtils';
+import cn from 'classnames';
 
-const formatColorName = (name: string): string =>
-  name
-    .replace('$', '')
-    .replace(/-/g, ' ')
-    .replace(/(?:^|\s)\S/g, (a) => a.toUpperCase());
-
+const designIcons = [
+  'ArrowLeft',
+  'ArrowRight',
+  'ArrowUp',
+  'ArrowDown',
+  'ChevronLeft',
+  'ChevronRight',
+  'ChevronUp',
+  'ChevronDown',
+  'ExternalLink',
+  'Share',
+  'UploadDoc',
+  'DownloadDoc',
+  'DownloadGeneric',
+  'Refresh',
+  'Add',
+  'Subtract',
+  'CloseX',
+  'Success',
+  'Home',
+  'HomeActive',
+  'Favorite',
+  'FavoriteActive',
+  'Account',
+  'AccountActive',
+  'Gavel',
+  'GavelActive',
+  'Sell',
+  'SellActive',
+  'Search',
+  'Email',
+  'Filters',
+  'Grid',
+  'List',
+  'Icon',
+  'Menu',
+  'Edit',
+  'Delete',
+  'Calendar',
+  'Bag',
+  'Tooltip',
+  'Error',
+  'Lock',
+  'ConditionReport',
+  'View',
+  'Hide',
+  'Play',
+  'Pause',
+  'VolumeMaximum',
+  'VolumeMid',
+  'VolumeMinimum',
+  'Mute',
+  'Fullscreen',
+  'FullscreenExit',
+  'Instagram',
+  'Facebook',
+  'TwitterX',
+  'LinkedIn',
+  'Red',
+  'WeChat',
+] as const;
 export const IconGrid = (props: IconProps) => {
   const [color, setColor] = useState<string>('$primary-black');
-  const [height, setHeight] = useState<number | string>(24);
-  const [width, setWidth] = useState<number | string>(24);
+  const [size, setSize] = useState<string>('16px');
+  const baseClassName = 'icon-grid-wrapper';
+  const isDarkMode = color === '$white';
+  const isSmallSize = size === '16px';
 
   const handleColorChange = (newColor: string) => {
     setColor(newColor);
   };
 
-  const handleHeightChange = (newHeight: number | string) => {
-    setHeight(newHeight);
+  const handleSizeChange = (newSize: string) => {
+    setSize(newSize);
   };
-
-  const handleWidthChange = (newWidth: number | string) => {
-    setWidth(newWidth);
-  };
-
   return (
     <>
-      <Input
-        id="height"
-        type="number"
-        labelText="Height"
-        value={height}
-        onChange={(e) => handleHeightChange(e.target.value)}
-      />
-      <Input
-        id="width"
-        type="number"
-        labelText="Width"
-        value={width}
-        onChange={(e) => handleWidthChange(e.target.value)}
-      />
-      <Select id="color" labelText="Color" onChange={(e) => handleColorChange(e.target.value)}>
-        {getScssColors().map((color) => (
-          <option key={color} value={color}>
-            {formatColorName(color)}
+      <div className={`${baseClassName}--controls`}>
+        <Select id="size" labelText="Icon Size" onChange={(e) => handleSizeChange(e.target.value)}>
+          <option key="16px" value="16px">
+            16px
           </option>
-        ))}
-      </Select>
-      <div className="story-icon-flex-wrapper">
-        {Object.keys(iconComponents).map((icon) => (
+          <option key="24px" value="24px">
+            24px
+          </option>
+        </Select>
+        <Select id="color" labelText="Icon Color" onChange={(e) => handleColorChange(e.target.value)}>
+          <option key="$pure-black" value="$pure-black">
+            Pure Black
+          </option>
+          <option key="$white" value="$white">
+            White
+          </option>
+        </Select>
+      </div>
+      <div className={cn(baseClassName, { [`${baseClassName}--dark`]: isDarkMode })}>
+        {designIcons.map((icon) => (
           <div className="icon-set" key={icon}>
             <div className="icon-wrapper">
-              <Icon {...props} color={color} height={height} width={width} icon={icon as IconProps['icon']} />
+              <Icon {...props} color={color} height={size} width={size} icon={icon as IconProps['icon']} />
             </div>
-            <div className="icon-name">{icon}</div>
+            <div
+              className={cn('icon-name', {
+                [`icon-name--dark`]: isDarkMode,
+                [`icon-name--small`]: isSmallSize,
+              })}
+            >
+              {icon}
+            </div>
           </div>
         ))}
       </div>
