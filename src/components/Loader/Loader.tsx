@@ -1,20 +1,23 @@
 import { forwardRef } from 'react';
 import { px } from '../../utils';
 import './loader.scss';
+import classnames from 'classnames';
 
 export interface LoaderProps {
-  /** Props for the Loader component */
+  /** Prop for centering Loader component */
   isCentered?: boolean;
   /** Accessible label for the loader */
   'aria-label'?: string;
+  /** Additional class names for the loader */
+  className?: string;
 }
 
 const Loader = forwardRef<HTMLSpanElement, LoaderProps>(
-  ({ 'aria-label': ariaLabel = 'Loading', isCentered = true, ...props }, ref) => (
+  ({ 'aria-label': ariaLabel = 'Loading', isCentered = true, className, ...props }, ref) => (
     <span
       ref={ref}
       {...props}
-      className={`${px}-loader${isCentered ? ` ${px}-loader--centered` : ''}`}
+      className={classnames(className, `${px}-loader${isCentered ? ` ${px}-loader--centered` : ''}`)}
       data-testid="loader"
       role="status"
       aria-live="polite"
