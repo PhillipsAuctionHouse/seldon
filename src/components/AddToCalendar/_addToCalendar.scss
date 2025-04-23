@@ -1,0 +1,55 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  &:focus-visible {
+    border-radius: 5px;
+    outline: 1px solid $medium-gray;
+  }
+}
+.#{$px}-link--link {
+  font-size: 16px;
+  font-variation-settings: 'wght' 400;
+  line-height: 24px;
+  text-decoration: none;
+}
+
+.atcb-list {
+  background: #fff;
+  border: 1px solid#ECEAE7;
+  padding: $spacing-sm;
+}
+
+.atcb-item {
+  margin-bottom: $spacing-xsm;
+}
+
+.atcb-item-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+
+  &:hover {
+    color: #000;
+    text-decoration: none;
+  }
+
+  span {
+    font-size: 16px;
+    font-variation-settings: 'wght' 400;
+    line-height: 24px;
+    text-decoration: none;
+  }
+}
+
+.#{$px}-add-to-calendar {
+  svg {
+    height: 30px;
+    width: 30px;
+  }
+}
