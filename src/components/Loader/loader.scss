@@ -1,17 +1,18 @@
 @use '#scss/allPartials' as *;
 
-// A simple loader animation (Seldon does not seem to have its own yet)
 .#{$px}-loader {
   animation: rotation 1s linear infinite;
-  border: 2px solid #eceae7;
+  border: 2px solid $primary-black;
   border-bottom-color: transparent;
   border-radius: 50%;
   box-sizing: border-box;
-  display: inline-block;
   display: flex;
   height: var(--button-label-line-height);
-  margin: auto;
   width: var(--button-label-line-height);
+
+  &--centered {
+    margin: auto;
+  }
 
   @keyframes rotation {
     0% {
