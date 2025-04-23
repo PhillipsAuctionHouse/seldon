@@ -81,7 +81,6 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
       const PreloadLinks = () => (
         <>
           <link data-testid="prefetch-link" rel="prefetch" href={href} />
-          <link data-testid="modulepreload-link" rel="modulepreload" href={href} />
         </>
       );
       return (
