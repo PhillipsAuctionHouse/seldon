@@ -65,20 +65,22 @@
     }
   }
 
+  &__content {
+    transform: translateY(1px);
+    width: var(--radix-popper-anchor-width);
+  }
+
   &__group {
     padding: $padding-xsm 0;
   }
 
   &__list {
-    left: 0;
     max-height: 200px;
     overflow: hidden;
     overflow-y: auto;
-    position: absolute;
-    top: 100%;
+    position: relative;
     transition: height 100ms ease;
     width: 100%;
-    z-index: 9999;
   }
 
   &__item {
@@ -86,12 +88,12 @@
     padding: $padding-micro $padding-xsm;
 
     &:hover {
-      background-color: $light-gray;
+      background-color: $medium-gray;
       cursor: pointer;
     }
   }
 
   &__highlight {
-    background-color: $light-gray;
+    background-color: $medium-gray;
   }
 }
