@@ -24,7 +24,6 @@ export interface ComboBoxProps {
    * Label for the ComboBox.
    */
   label: string; // Add the label property
-
   /**
    * Optional placeholder text for the input.
    */
@@ -50,7 +49,7 @@ export interface ComboBoxProps {
  */
 
 const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboBox(
-  { options, className, id, label, placeholder, inputValue, setInputValue, ...props },
+  { options = [], className, id, label, placeholder, inputValue = '', setInputValue, ...props },
   ref,
 ) {
   const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'ComboBox');
@@ -93,11 +92,8 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
       id={id}
       {...commonProps}
       {...props}
-      style={{
-        position: 'relative',
-      }}
     >
-      <label htmlFor={`${id}-input`} className={`${baseClassName}__label`}>
+      <label htmlFor={`${id}-input`} className={`${baseClassName}__label`} data-testid={`${id}-label`}>
         {label}
       </label>
       <Command
@@ -126,6 +122,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
               }}
               className={`${baseClassName}__input`}
               tabIndex={0}
+              aria-label={`${id}-input`}
             />
           </Popover.Trigger>
           {inputValue.length > 0 && (
@@ -133,20 +130,21 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
               className={`${baseClassName}__close-button`}
               data-testid={`${id}-item-close-button`}
               onClick={() => setInputValue('')}
-              aria-label={`clear ${label}`}
+              aria-label={`${id}-clear`}
             >
               <Icon color="$primary-black" icon="Close" height={18} width={18} className={`${baseClassName}__icon`} />
             </button>
           )}
           <button
-            aria-label={`dropdown ${label}`}
+            aria-label={`${id}-dropdown`}
             className={`${baseClassName}__dropdown-button`}
             onClick={() => setIsOpen((prev) => !prev)}
+            data-testid={`${id}-dropdown`}
           >
             <Icon color="$pure-black" height={18} icon="ChevronDown" width={18} className={`${baseClassName}__icon`} />
           </button>
           <Popover.Portal>
-            <Popover.Content className={`${baseClassName}__content`}>
+            <Popover.Content className={`${baseClassName}__content`} aria-label={`${id}-content`}>
               <CommandList className={`${baseClassName}__list`} hidden={!isOpen}>
                 {sanitizedOptions.some((option) => option.includes(inputValue)) ? (
                   <CommandGroup>

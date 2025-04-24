@@ -88,16 +88,12 @@
     padding: $padding-micro $padding-xsm;
 
     &:hover {
-      background-color: $medium-gray;
+      background-color: $light-gray;
       cursor: pointer;
     }
 
     &[data-selected='true'] {
-      background-color: $medium-gray;
+      background-color: $light-gray;
     }
-  }
-
-  &__highlight {
-    background-color: $medium-gray;
   }
 }
