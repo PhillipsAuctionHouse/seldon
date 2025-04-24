@@ -4,6 +4,11 @@ import Loader from './Loader';
 const meta = {
   title: 'Components/Loader',
   component: Loader,
+  argTypes: {
+    isCentered: {
+      control: 'boolean',
+    },
+  },
 } satisfies Meta<typeof Loader>;
 
 export default meta;
