@@ -17,7 +17,7 @@ const Loader = forwardRef<HTMLSpanElement, LoaderProps>(
     <span
       ref={ref}
       {...props}
-      className={classnames(className, `${px}-loader${isCentered ? ` ${px}-loader--centered` : ''}`)}
+      className={classnames(className, `${px}-loader`, { [`${px}-loader--centered`]: isCentered })}
       data-testid="loader"
       role="status"
       aria-live="polite"
