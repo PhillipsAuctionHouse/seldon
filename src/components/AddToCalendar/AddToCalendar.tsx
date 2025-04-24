@@ -17,6 +17,16 @@ export interface AddToCalendarProps extends ComponentProps<'div'> {
   linkElement?: ElementType<LinkProps>;
 }
 
+/**
+ * ## Overview
+ *
+ * Overview of AddToCalendar component
+ *
+ * [Figma Link](https://www.figma.com/design/OvBXAq48blO1r4qYbeBPjW/RW---Sale-Page-(PLP)?node-id=4791-30655)
+ *
+ * [Storybook Link](https://deploy-preview-600--phillips-seldon.netlify.app/?path=/docs/components-addtocalendar--overview)
+ */
+
 const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
   ({ className, event, linkElement: Component = Link, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'AddToCalendar');
