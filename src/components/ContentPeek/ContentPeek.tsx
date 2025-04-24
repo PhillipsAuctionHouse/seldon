@@ -112,7 +112,7 @@ const ContentPeek = forwardRef<HTMLDivElement, ContentPeekProps>(
             <div className={`${baseClassName}-overlay-trigger-wrapper`}>
               <CollapsibleTrigger asChild className={`${baseClassName}-overlay-trigger`}>
                 <Button variant={ButtonVariants.secondary}>
-                  {isExpanded ? <Icon icon="CloseDash" /> : <Icon icon="Plus" />}
+                  {isExpanded ? <Icon icon="Subtract" /> : <Icon icon="Add" />}
                   {isExpanded ? contentCollapseText : contentExpandText}
                 </Button>
               </CollapsibleTrigger>

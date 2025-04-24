@@ -30,7 +30,9 @@ const SvgVolumeMinimum = memo(
         {title ? <title id={titleId}>{title}</title> : null}
         <path
           fill={color}
-          d="M12 5h1V2.92l-1.625 1.3zM7 9v1a1 1 0 0 0 .625-.22zM3 9V8a1 1 0 0 0-1 1zm0 6H2a1 1 0 0 0 1 1zm4 0 .625-.78A1 1 0 0 0 7 14zm5 4-.625.78L13 21.08V19zm-.625-14.78-5 4 1.25 1.56 5-4zM7 8H3v2h4zM2 9v6h2V9zm1 7h4v-2H3zm3.375-.22 5 4 1.25-1.56-5-4zM13 19V5h-2v14z"
+          fillRule="evenodd"
+          d="m14.69 22-6.233-6.159H4.972a.966.966 0 0 1-.972-.96V9.119l.005-.098a.97.97 0 0 1 .967-.862h3.485L14.69 2zM9.546 9.798a.98.98 0 0 1-.687.281H5.944v3.842h2.915l.096.004a.98.98 0 0 1 .591.277l3.2 3.162V6.636z"
+          clipRule="evenodd"
         />
       </svg>
     );

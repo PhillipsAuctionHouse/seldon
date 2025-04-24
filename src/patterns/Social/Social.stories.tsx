@@ -24,7 +24,7 @@ const socialIcons = (
     </li>
     <li>
       <a>
-        <Icon icon="Wechat" height="1.75rem" width="1.75rem" color="$pure-black" />
+        <Icon icon="WeChat" height="1.75rem" width="1.75rem" color="$pure-black" />
       </a>
     </li>
     <li>

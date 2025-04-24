@@ -28,14 +28,7 @@ const SvgGrid = memo(
         {...props}
       >
         {title ? <title id={titleId}>{title}</title> : null}
-        <g clipPath="url(#Grid_svg__a)">
-          <path stroke={color} strokeWidth={2} d="M3 3h7v7H3zm0 11h7v7H3zM14 3h7v7h-7zm0 11h7v7h-7z" />
-        </g>
-        <defs>
-          <clipPath id="Grid_svg__a">
-            <path fill="#fff" d="M0 0h24v24H0z" />
-          </clipPath>
-        </defs>
+        <path stroke={color} strokeWidth={2} d="M21 14v7h-7v-7zm-11 0v7H3v-7zM21 3v7h-7V3zM10 3v7H3V3z" />
       </svg>
     );
   }),

@@ -29,9 +29,10 @@ const SvgConditionReport = memo(
       >
         {title ? <title id={titleId}>{title}</title> : null}
         <path
-          stroke={color}
-          strokeWidth={2}
-          d="M7 20h14V5a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1zm0 0H6a3 3 0 0 1-3-3v-5h4zm3-6h8m-8-5h6"
+          fill={color}
+          fillRule="evenodd"
+          d="M6 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16H6a4 4 0 0 1-4-4v-6h4zm2 14h12V5H8zm-2 0v-6H4v4a2 2 0 0 0 2 2m10-9h-6V8h6zm2 5h-8v-2h8z"
+          clipRule="evenodd"
         />
       </svg>
     );

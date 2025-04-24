@@ -73,7 +73,7 @@ export const Playground = (props: FooterProps) => (
         </li>
         <li>
           <a>
-            <Icon icon="Wechat" />
+            <Icon icon="WeChat" />
           </a>
         </li>
         <li>

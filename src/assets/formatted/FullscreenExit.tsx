@@ -28,7 +28,7 @@ const SvgFullscreenExit = memo(
         {...props}
       >
         {title ? <title id={titleId}>{title}</title> : null}
-        <path stroke={color} strokeWidth={2} d="M8 3v5H3m13-5v5h5m0 8h-5v5m-8 0v-5H3" />
+        <path fill={color} d="M8 16v6H6v-4H2v-2zM22 18h-4v4h-2v-6h6zM8 8H2V6h4V2h2zM18 6h4v2h-6V2h2z" />
       </svg>
     );
   }),

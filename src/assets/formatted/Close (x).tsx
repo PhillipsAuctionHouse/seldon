@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgCloseDashProps extends React.HTMLAttributes<SVGSVGElement> {
+interface SvgCloseXProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,10 +9,10 @@ interface SvgCloseDashProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgCloseDash = memo(
-  forwardRef<SVGSVGElement, SvgCloseDashProps>((props, ref) => {
+const SvgCloseX = memo(
+  forwardRef<SVGSVGElement, SvgCloseXProps>((props, ref) => {
     const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgCloseDash';
+    const title = propsTitle || 'SvgCloseX';
     const titleId = propsTitleId || kebabCase(title);
 
     return (
@@ -28,10 +28,10 @@ const SvgCloseDash = memo(
         {...props}
       >
         {title ? <title id={titleId}>{title}</title> : null}
-        <path fill={color} fillRule="evenodd" d="M4 11h16v2H4z" clipRule="evenodd" />
+        <path stroke={color} strokeLinecap="square" strokeLinejoin="round" strokeWidth={2} d="M18 6 6 18M6 6l12 12" />
       </svg>
     );
   }),
 );
 
-export default SvgCloseDash;
+export default SvgCloseX;

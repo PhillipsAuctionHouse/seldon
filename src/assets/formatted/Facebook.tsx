@@ -28,17 +28,10 @@ const SvgFacebook = memo(
         {...props}
       >
         {title ? <title id={titleId}>{title}</title> : null}
-        <g clipPath="url(#Facebook_svg__a)">
-          <path
-            fill={color}
-            d="M13.105 9.06V7.59c0-.735.102-1.155 1.225-1.155h1.428V3.6H13.41c-2.856 0-3.775 1.365-3.775 3.78v1.785H7.8V12h1.734v8.4h3.571V12h2.347l.306-2.94z"
-          />
-        </g>
-        <defs>
-          <clipPath id="Facebook_svg__a">
-            <path fill="#fff" d="M0 0h24v24H0z" />
-          </clipPath>
-        </defs>
+        <path
+          fill={color}
+          d="M14.079 8.5V6.75c0-.875.121-1.375 1.457-1.375h1.7V2h-2.793c-3.4 0-4.494 1.625-4.494 4.5v2.125H7.763V12h2.065v10h4.251V12h2.793l.365-3.5z"
+        />
       </svg>
     );
   }),

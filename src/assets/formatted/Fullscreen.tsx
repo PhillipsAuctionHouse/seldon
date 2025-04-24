@@ -28,7 +28,12 @@ const SvgFullscreen = memo(
         {...props}
       >
         {title ? <title id={titleId}>{title}</title> : null}
-        <path stroke={color} strokeWidth={2} d="M3 8V3h5m13 5V3h-5m0 18h5v-5M3 16v5h5" />
+        <path
+          fill={color}
+          fillRule="evenodd"
+          d="M2 2h6v2H4v4H2zm14 0h6v6h-2V4h-4zM2 16h2v4h4v2H2zm20 0v6h-6v-2h4v-4z"
+          clipRule="evenodd"
+        />
       </svg>
     );
   }),
