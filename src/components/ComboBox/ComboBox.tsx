@@ -123,6 +123,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
               className={`${baseClassName}__input`}
               tabIndex={0}
               aria-label={`${id}-input`}
+              data-testid={`${id}-input`}
             />
           </Popover.Trigger>
           {inputValue.length > 0 && (

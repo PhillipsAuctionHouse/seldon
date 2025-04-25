@@ -1,7 +1,8 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useState } from 'react';
 
-import ComboBox from './ComboBox';
+import ComboBox, { ComboBoxProps } from './ComboBox';
 import { runCommonTests } from '../../utils/testUtils';
 
 const options = [
@@ -15,7 +16,7 @@ describe('ComboBox', () => {
   runCommonTests(ComboBox, 'ComboBox');
   const reqProps = { label: 'My Test Label', id: 'test-id', options, setInputValue: () => vitest.fn(), inputValue: '' };
 
-  it('will render a default value if passed', () => {
+  it('will render a label value if passed', () => {
     render(<ComboBox {...reqProps} />);
     const label = screen.getAllByTestId('test-id-label');
     expect(label[0]).toBeInTheDocument();
@@ -35,19 +36,115 @@ describe('ComboBox', () => {
     expect(screen.queryByText('No Options')).not.toBeInTheDocument();
   });
 
-  // it should be able to select an option from the dropdown by clicking on it
+  it('should be able to select an option from the dropdown by clicking on it', async () => {
+    const mockSetInputValue = vi.fn();
+    render(<ComboBox {...{ ...reqProps, setInputValue: mockSetInputValue }} />);
+    const trigger = screen.getAllByTestId('test-id-dropdown')[0];
 
-  // it should be able to select an option from the dropdown by keyboard navigation
+    expect(trigger).toBeInTheDocument();
+    await userEvent.click(trigger);
 
-  // it should display No Options when input does not match any options
+    const option = screen.getByText('2000');
+    expect(option).toBeInTheDocument();
+    await userEvent.click(option);
 
-  // it should remove all input if the option is not found
+    expect(mockSetInputValue).toHaveBeenCalledWith('2000');
+    expect(mockSetInputValue).toHaveBeenCalledTimes(1);
+  });
 
-  // it should clear the input value when the close button is clicked
+  it('should be able to select an option from the dropdown by keyboard navigation', async () => {
+    const mockSetInputValue = vi.fn();
+    render(<ComboBox {...{ ...reqProps, setInputValue: mockSetInputValue }} />);
+    const trigger = screen.getAllByTestId('test-id-dropdown')[0];
 
-  // it should close the dropdown when an option is selected
+    await userEvent.click(trigger);
 
-  // it should close the dropdown when clicking outside of it
+    await userEvent.keyboard('{ArrowDown}');
+    await userEvent.keyboard('{ArrowDown}');
+    await userEvent.keyboard('{ArrowDown}');
+    await userEvent.keyboard('{Enter}');
 
-  // it should close the dropdown when the escape key is pressed while focused on the input
+    expect(mockSetInputValue).toHaveBeenCalledWith('2002');
+    expect(mockSetInputValue).toHaveBeenCalledTimes(1);
+  });
+
+  it('should display No Options when input does not match any options', async () => {
+    const mockSetInputValue = vi.fn();
+    render(<ComboBox {...{ ...reqProps, setInputValue: mockSetInputValue, inputValue: 'non-existent' }} />);
+    const trigger = screen.getAllByTestId('test-id-dropdown')[0];
+
+    await userEvent.click(trigger);
+    const input = screen.getAllByTestId('test-id-input')[0];
+
+    await userEvent.click(input);
+    await userEvent.type(input, 'HI');
+
+    expect(screen.queryByText('No Options.')).toBeInTheDocument();
+  });
+
+  it('should clear input value when the close button is clicked', async () => {
+    const mockSetInputValue = vi.fn();
+    render(
+      <>
+        <ComboBox {...{ ...reqProps, setInputValue: mockSetInputValue }} />
+        <div data-testid="outside-element">Outside Element</div>
+      </>,
+    );
+    const trigger = screen.getAllByTestId('test-id-dropdown')[0];
+
+    await userEvent.click(trigger);
+    const input = screen.getAllByTestId('test-id-input')[0];
+
+    await userEvent.click(input);
+    await userEvent.type(input, 'BYE');
+
+    const outsideElement = screen.getByTestId('outside-element');
+    await userEvent.click(outsideElement);
+
+    expect(input).toHaveValue('');
+  });
+
+  it('should clear the input value when the close button is clicked', async () => {
+    const ComboBoxWrapper = (props: ComboBoxProps) => {
+      const [inputValue, setInputValue] = useState('');
+      return <ComboBox {...props} inputValue={inputValue} setInputValue={setInputValue} />;
+    };
+
+    render(
+      <ComboBoxWrapper
+        label="Test Label"
+        id="test-id"
+        options={options}
+        inputValue=""
+        setInputValue={() => undefined}
+      />,
+    );
+
+    const trigger = screen.getByTestId('test-id-dropdown');
+    await userEvent.click(trigger);
+
+    const input = screen.getByTestId('test-id-input');
+    expect(input).toBeInTheDocument();
+
+    await userEvent.type(input, '2001');
+    expect(input).toHaveValue('2001');
+
+    const closeButton = screen.getByTestId('test-id-item-close-button');
+    await userEvent.click(closeButton);
+    expect(input).toHaveValue('');
+  });
+
+  it('should close the dropdown when an option is selected', async () => {
+    const mockSetInputValue = vi.fn();
+    render(<ComboBox {...{ ...reqProps, setInputValue: mockSetInputValue }} />);
+    const trigger = screen.getByTestId('test-id-dropdown');
+    await userEvent.click(trigger);
+
+    const commandList = screen.getByRole('listbox');
+    expect(commandList).toBeInTheDocument();
+
+    expect(commandList).not.toHaveAttribute('hidden');
+    await userEvent.click(trigger);
+    expect(commandList).toHaveAttribute('hidden');
+  });
 });
