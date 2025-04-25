@@ -93,18 +93,23 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
       return new Date(endDateTime).getTime() > new Date().getTime();
     }, [endDateTime]);
 
+    const isEqualToThreeMinuses =
+      timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 3 && timeLeft.seconds === 0;
+    const isLessThanThreeMinuses = timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes < 3;
+
     return showTimer ? (
       <div
         {...commonProps}
         className={classnames(baseClassName, className, {
           [`${baseClassName}--compact`]: variant === CountdownVariants.compact,
           [`${baseClassName}--show-bottom-border`]: showBottomBorder,
+          [`${baseClassName}--closing-lot`]: isEqualToThreeMinuses || isLessThanThreeMinuses,
         })}
         {...props}
         ref={ref}
       >
         <div className={`${baseClassName}__countdown-container`} role="timer" aria-label={label}>
-          <span>{label}</span>
+          <span className={`${baseClassName}__label`}>{label}</span>
           {timeLeft.days > 0 ? (
             <Duration duration={timeLeft} unit="days" locale={dateFnsLocale} formatDurationStr={formatDurationStr} />
           ) : null}

@@ -15,6 +15,7 @@ const daysDate = addDays(new Date(), 3);
 const hoursDate = addHours(new Date(), 5);
 const minutesDate = addMinutes(new Date(), 20);
 const secondsDate = addSeconds(new Date(), 10);
+const closingDate = addMinutes(addSeconds(new Date(), 10), 3);
 
 export const Playground = (props: CountdownProps) => <Countdown {...props} endDateTime={minutesDate} />;
 
@@ -36,3 +37,5 @@ export const Seconds = (props: CountdownProps) => <Countdown {...props} endDateT
 export const Compact = (props: CountdownProps) => (
   <Countdown {...props} endDateTime={minutesDate} variant={CountdownVariants.compact} />
 );
+
+export const ClosingCountdown = (props: CountdownProps) => <Countdown {...props} endDateTime={closingDate} />;

@@ -156,4 +156,25 @@ describe('Countdown', () => {
     expect(screen.getByText('00')).toBeInTheDocument();
     expect(screen.getByText('00')).toBeInTheDocument();
   });
+
+  it('should not have class countdown--closing-lot when the countdown is more than 3 minutes', () => {
+    const now = new Date();
+    render(<Countdown endDateTime={addMinutes(now, 4)} />);
+    const countdownContainer = screen.getByTestId('countdown');
+    expect(countdownContainer.className.includes('countdown--closing-lot')).toBeFalsy();
+  });
+
+  it('should have class countdown--closing-lot when the countdown is exactly 3 minutes', () => {
+    const now = new Date();
+    render(<Countdown endDateTime={addMinutes(now, 3)} />);
+    const countdownContainer = screen.getByTestId('countdown');
+    expect(countdownContainer.className.includes('countdown--closing-lot')).toBeTruthy();
+  });
+
+  it('should have class countdown--closing-lot when the countdown is less than 3 minutes', () => {
+    const now = new Date();
+    render(<Countdown endDateTime={addMinutes(now, 2)} />);
+    const countdownContainer = screen.getByTestId('countdown');
+    expect(countdownContainer.className.includes('countdown--closing-lot')).toBeTruthy();
+  });
 });
