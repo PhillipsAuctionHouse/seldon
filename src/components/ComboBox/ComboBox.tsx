@@ -15,7 +15,7 @@ export interface ComboBoxProps {
   /**
    * Unique id for the ComboBox.
    */
-  id: string; // Add the id property
+  id: string;
   /**
    * Optional className for custom styling.
    */
@@ -23,7 +23,7 @@ export interface ComboBoxProps {
   /**
    * Label for the ComboBox.
    */
-  label: string; // Add the label property
+  label: string;
   /**
    * Optional placeholder text for the input.
    */
