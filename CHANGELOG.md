@@ -1,3 +1,10 @@
+## [1.136.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.136.0...v1.136.1) (2025-04-23)
+
+
+### Bug Fixes
+
+* **prefetching:** L3-6129 remove module <link> ([#599](https://github.com/PhillipsAuctionHouse/seldon/issues/599)) ([77748bd](https://github.com/PhillipsAuctionHouse/seldon/commit/77748bd35e186a60a05ac81d804d2b8acd241369))
+
 # [1.136.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.135.1...v1.136.0) (2025-04-18)
 
 
