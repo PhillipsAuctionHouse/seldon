@@ -164,6 +164,13 @@ describe('Countdown', () => {
     expect(countdownContainer.className.includes('countdown--closing-lot')).toBeFalsy();
   });
 
+  it('should not have class countdown--closing-lot when the countdown is 3 minutes and 15 seconds', () => {
+    const now = new Date();
+    render(<Countdown endDateTime={addMinutes(addSeconds(now, 15), 3)} />);
+    const countdownContainer = screen.getByTestId('countdown');
+    expect(countdownContainer.className.includes('countdown--closing-lot')).toBeFalsy();
+  });
+
   it('should have class countdown--closing-lot when the countdown is exactly 3 minutes', () => {
     const now = new Date();
     render(<Countdown endDateTime={addMinutes(now, 3)} />);

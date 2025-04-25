@@ -93,9 +93,9 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
       return new Date(endDateTime).getTime() > new Date().getTime();
     }, [endDateTime]);
 
-    const isEqualToThreeMinuses =
-      timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 3 && timeLeft.seconds === 0;
-    const isLessThanThreeMinuses = timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes < 3;
+    const isDaysAndHoursZero = timeLeft.days === 0 && timeLeft.hours === 0;
+    const isExactlyThreeMinutes = isDaysAndHoursZero && timeLeft.minutes === 3 && timeLeft.seconds === 0;
+    const isLessThanThreeMinutes = isDaysAndHoursZero && timeLeft.minutes < 3;
 
     return showTimer ? (
       <div
@@ -103,7 +103,7 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
         className={classnames(baseClassName, className, {
           [`${baseClassName}--compact`]: variant === CountdownVariants.compact,
           [`${baseClassName}--show-bottom-border`]: showBottomBorder,
-          [`${baseClassName}--closing-lot`]: isEqualToThreeMinuses || isLessThanThreeMinuses,
+          [`${baseClassName}--closing-lot`]: isExactlyThreeMinutes || isLessThanThreeMinutes,
         })}
         {...props}
         ref={ref}
