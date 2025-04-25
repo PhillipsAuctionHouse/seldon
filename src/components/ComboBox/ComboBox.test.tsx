@@ -5,12 +5,7 @@ import { useState } from 'react';
 import ComboBox, { ComboBoxProps } from './ComboBox';
 import { runCommonTests } from '../../utils/testUtils';
 
-const options = [
-  { label: '1999', value: '1999' },
-  { label: '2000', value: '2000' },
-  { label: '2001', value: '2001' },
-  { label: '2002', value: '2002' },
-];
+const options = [{ value: '1999' }, { value: '2000' }, { value: '2001' }, { value: '2002' }];
 
 describe('ComboBox', () => {
   runCommonTests(ComboBox, 'ComboBox');
