@@ -12,14 +12,13 @@ export default meta;
 const birthdays = Array.from({ length: 2025 - 1926 + 1 }, (_, i) => {
   const year = 1926 + i;
   return {
-    label: `${year}`,
     value: `${year}`,
   };
 });
 export const Playground = (props: ComboBoxProps) => {
   const [inputValue, setInputValue] = React.useState('');
   return (
-    <div style={{ height: '70px', width: '400px', zIndex: 1, position: 'relative' }}>
+    <div style={{ height: '70px', width: '400px' }}>
       <ComboBox {...props} inputValue={inputValue} setInputValue={setInputValue} />
     </div>
   );

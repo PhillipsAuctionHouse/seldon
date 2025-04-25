@@ -1,11 +1,13 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-combo-box {
+  position: relative;
   width: 100%;
 
   &__input {
     border: 1px solid $keyline-gray;
     border-radius: 5px;
+    height: 40px;
     outline: none;
     padding: $padding-xsm;
     width: 100%;
@@ -21,7 +23,7 @@
 
   &__label {
     color: $soft-black-2;
-    font-size: $text-label-size;
+    font-size: $comboxbox-label-size;
     font-variation-settings: 'wght' 600;
   }
 

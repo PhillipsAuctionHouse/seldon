@@ -9,7 +9,7 @@ export interface ComboBoxProps {
    * List of options to be displayed in the ComboBox.
    */
   options: {
-    label: string;
+    label?: string;
     value: string;
   }[];
   /**
@@ -139,19 +139,19 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
               <CommandList className={`${baseClassName}__list`} hidden={!isOpen}>
                 {sanitizedOptions.some((option) => option.includes(inputValue)) ? (
                   <CommandGroup>
-                    {sanitizedOptions.map((option) =>
+                    {sanitizedOptions.map((option, ind) =>
                       option.includes(inputValue) ? (
                         <CommandItem
                           className={`${baseClassName}__item`}
-                          key={`${option}-key`}
-                          value={option}
+                          key={`${option}-${ind}-key`}
+                          value={options[ind]?.label ? `${options[ind]?.label} ${option}` : option}
                           ref={(el) => (itemRefs.current[option] = el)}
                           onSelect={(currentValue) => {
                             setInputValue(currentValue);
                             setIsOpen(false);
                           }}
                         >
-                          {option}
+                          {options[ind]?.label ? `${options[ind]?.label} ${option}` : option}
                         </CommandItem>
                       ) : null,
                     )}
