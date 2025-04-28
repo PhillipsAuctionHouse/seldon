@@ -29,8 +29,8 @@ const Footer = ({
 }: FooterProps) => {
   return (
     <footer data-testid={id ? id : `footer`} id={id} className={classnames(`${px}-footer`, { className })}>
+      version 1.0.0
       <div className={`${px}-footer__links`}>{children}</div>
-
       <div className={`${px}-footer__copyright`}>
         <h3 data-testid="footer-logo" className={`${px}-footer__logo`}>
           <a href="/" aria-label="logo">
