@@ -59,7 +59,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
         !popoverContent.contains(event.target as Node)
       ) {
         setIsOpen(false);
-        if (!sanitizedOptions.some((option) => option === inputValue)) {
+        if (!sanitizedOptions.some((option) => option === inputValue.toLowerCase())) {
           setInputValue('');
         }
       }
@@ -137,10 +137,10 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
           <Popover.Portal>
             <Popover.Content className={`${baseClassName}__content`} aria-label={`${id}-content`}>
               <CommandList className={`${baseClassName}__list`} hidden={!isOpen}>
-                {sanitizedOptions.some((option) => option.includes(inputValue)) ? (
+                {sanitizedOptions.some((option) => option.toLowerCase().includes(inputValue.toLowerCase())) ? (
                   <CommandGroup>
                     {sanitizedOptions.map((option, ind) =>
-                      option.includes(inputValue) ? (
+                      option.toLowerCase().includes(inputValue.toLowerCase()) ? (
                         <CommandItem
                           className={`${baseClassName}__item`}
                           key={`${option}-${ind}-key`}
