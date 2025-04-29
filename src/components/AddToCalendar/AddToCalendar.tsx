@@ -1,4 +1,4 @@
-import { ComponentProps, forwardRef, ElementType } from 'react';
+import { ComponentProps, forwardRef, ElementType, useState } from 'react';
 import { getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
 import * as Popover from '@radix-ui/react-popover';
@@ -31,13 +31,14 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
   ({ className, event, linkElement: Component = Link, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'AddToCalendar');
     const buttonAriaLabel = event.title ? `Add ${event.title} to calendar` : 'Add to calendar';
+    const [open, setOpen] = useState(false); // State to manage the open/close of the popover
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        <Popover.Root>
+        <Popover.Root open={open} onOpenChange={setOpen}>
           <Popover.Trigger asChild>
             <button aria-label={buttonAriaLabel} className={`${px}-icon-button ${px}-icon-button--small`} type="button">
-              <Icon icon="CalendarAlt" />
+              <Icon icon={open ? 'Close' : 'CalendarAlt'} />
             </button>
           </Popover.Trigger>
           <Popover.Portal>
@@ -65,7 +66,7 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
                 </li>
                 <li className="atcb-item">
                   <Component className="atcb-item-link" href={generateYahooCalendarLink(event)}>
-                    Yahoo! Calendar
+                    Yahoo Calendar
                   </Component>
                 </li>
               </ul>

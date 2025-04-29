@@ -1,7 +1,7 @@
 import type { CalendarEvent } from './types';
 import * as ics from 'ics';
 
-const generateGoogleCalendarLink = (event: CalendarEvent) => {
+const generateGoogleCalendarLink = (event: CalendarEvent): string => {
   const start = event.start;
   const end = event.end;
   const title = encodeURIComponent(event.title);
@@ -10,21 +10,21 @@ const generateGoogleCalendarLink = (event: CalendarEvent) => {
   return link;
 };
 
-const generateOutlookOnlineLink = (event: CalendarEvent) => {
+const generateOutlookOnlineLink = (event: CalendarEvent): string => {
   const start = event.start;
   const end = event.end;
   const link = `https://outlook.live.com/owa/?path=/calendar/action/compose&rru=addevent&subject=${event.title}&startdt=${formatDateForOutlook(start)}&enddt=${formatDateForOutlook(end)}&body=${event.description}&location=${event.location}`;
   return link;
 };
 
-const generateYahooCalendarLink = (event: CalendarEvent) => {
+const generateYahooCalendarLink = (event: CalendarEvent): string => {
   const start = event.start;
   const end = event.end;
   const link = `https://calendar.yahoo.com/?v=60&view=d&type=20&title=${event.title}&st=${formatDate(start)}&et=${formatDate(end)}&desc=${event.description}&in_loc=${event.location}`;
   return link;
 };
 
-const generateCalendarFile = (event: CalendarEvent) => {
+const generateCalendarFile = (event: CalendarEvent): void => {
   const { error, value } = ics.createEvent({
     title: event.title,
     description: event.description,
@@ -48,20 +48,22 @@ const generateCalendarFile = (event: CalendarEvent) => {
   });
 
   if (error) {
-    console.log(error);
+    console.error('Error creating iCalendar event:', error);
   } else {
     const link = document.createElement('a');
     link.href = `data:text/calendar;charset=utf8,${value}`;
     link.download = `${event.title}.ics`;
+    document.body.appendChild(link); // Append to the document to make click work in some browsers
     link.click();
+    document.body.removeChild(link); // Clean up after the click
   }
 };
 
-const formatDate = (date: Date) => {
+const formatDate = (date: Date): string => {
   return date.toISOString().replace(/[-:.]/g, '').replace('Z', '');
 };
 
-const formatDateForOutlook = (date: Date) => {
+const formatDateForOutlook = (date: Date): string => {
   return date.toISOString().replace('Z', '');
 };
 
