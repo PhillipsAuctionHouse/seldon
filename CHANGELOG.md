@@ -1,3 +1,10 @@
+# [1.137.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.136.1...v1.137.0) (2025-04-29)
+
+
+### Features
+
+* **Loader:** L3-5951 Loading Spinner Component ([#578](https://github.com/PhillipsAuctionHouse/seldon/issues/578)) ([bdf0ad8](https://github.com/PhillipsAuctionHouse/seldon/commit/bdf0ad81dcfa3a6244bc4088dd1b6a58513b364d))
+
 ## [1.136.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.136.0...v1.136.1) (2025-04-23)
 
 
