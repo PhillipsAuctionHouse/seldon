@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgDownloadGenericProps extends React.HTMLAttributes<SVGSVGElement> {
+interface SvgDownloadProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,10 +9,10 @@ interface SvgDownloadGenericProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgDownloadGeneric = memo(
-  forwardRef<SVGSVGElement, SvgDownloadGenericProps>((props, ref) => {
+const SvgDownload = memo(
+  forwardRef<SVGSVGElement, SvgDownloadProps>((props, ref) => {
     const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgDownloadGeneric';
+    const title = propsTitle || 'SvgDownload';
     const titleId = propsTitleId || kebabCase(title);
 
     return (
@@ -35,4 +35,4 @@ const SvgDownloadGeneric = memo(
   }),
 );
 
-export default SvgDownloadGeneric;
+export default SvgDownload;
