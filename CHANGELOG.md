@@ -1,3 +1,10 @@
+## [1.137.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.137.0...v1.137.1) (2025-04-29)
+
+
+### Bug Fixes
+
+* **ObjectTile:** L3-5631 reserve space for 'No Reserve' on ObjectTile ([#605](https://github.com/PhillipsAuctionHouse/seldon/issues/605)) ([321a1f9](https://github.com/PhillipsAuctionHouse/seldon/commit/321a1f900ffdcd1f46c2f5c5ad936ada92d34566))
+
 # [1.137.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.136.1...v1.137.0) (2025-04-29)
 
 
