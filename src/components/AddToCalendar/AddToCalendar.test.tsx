@@ -78,6 +78,16 @@ describe('AddToCalendar component', () => {
   });
 
   test('calls generateCalendarFile when button is clicked ', async () => {
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {}); // eslint-disable-line @typescript-eslint/no-empty-function
+    const originalCreateElement = document.createElement;
+    const link = originalCreateElement.call(document, 'a');
+    link.click = vi.fn(); // Mock the click function
+    const createElementSpy = vi.spyOn(document, 'createElement');
+    createElementSpy.mockImplementation((tagName) => {
+      if (tagName === 'a') return link;
+      return originalCreateElement.call(document, tagName);
+    });
+
     const generateCalendarFileSpy = vi.spyOn(CalendarLinks, 'generateCalendarFile');
     const { getByRole, findByRole } = render(<AddToCalendar event={event} />);
     const triggerButton = getByRole('button', { name: 'Add Jewels & More: Online Auction to calendar' });
@@ -98,11 +108,24 @@ describe('AddToCalendar component', () => {
     // Verify that generateCalendarFile is called with the event
     expect(generateCalendarFileSpy).toHaveBeenCalledTimes(1);
     expect(generateCalendarFileSpy).toHaveBeenCalledWith(event);
+
+    // Restore the spies
+    consoleErrorSpy.mockRestore();
+    createElementSpy.mockRestore();
   });
 
   test('clicking iCalendar button calls generateCalendarFile', async () => {
-    const generateCalendarFileSpy = vi.spyOn(CalendarLinks, 'generateCalendarFile');
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {}); // eslint-disable-line @typescript-eslint/no-empty-function
+    const originalCreateElement = document.createElement;
+    const link = originalCreateElement.call(document, 'a');
+    link.click = vi.fn(); // Mock the click function
+    const createElementSpy = vi.spyOn(document, 'createElement');
+    createElementSpy.mockImplementation((tagName) => {
+      if (tagName === 'a') return link;
+      return originalCreateElement.call(document, tagName);
+    });
 
+    const generateCalendarFileSpy = vi.spyOn(CalendarLinks, 'generateCalendarFile');
     const { getByRole } = render(<AddToCalendar event={event} />);
     const triggerButton = getByRole('button', { name: 'Add Jewels & More: Online Auction to calendar' });
 
@@ -118,5 +141,9 @@ describe('AddToCalendar component', () => {
 
     expect(generateCalendarFileSpy).toHaveBeenCalledTimes(1);
     expect(generateCalendarFileSpy).toHaveBeenCalledWith(event);
+
+    // Restore the spies
+    consoleErrorSpy.mockRestore();
+    createElementSpy.mockRestore();
   });
 });
