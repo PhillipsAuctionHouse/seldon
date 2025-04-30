@@ -1,5 +1,6 @@
 import { act, render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { runCommonTests } from '../../utils/testUtils';
 import FavoritesCollectionTile from './FavoritesCollectionTile';
 
 const defaultProps = {
@@ -35,6 +36,8 @@ const translationedProps = {
   },
 };
 describe('FavoritesCollectionTile', () => {
+  runCommonTests(FavoritesCollectionTile, 'FavoritesCollectionTile');
+
   beforeEach(() => {
     vi.clearAllMocks();
   });
