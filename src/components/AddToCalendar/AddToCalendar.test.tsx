@@ -26,8 +26,8 @@ describe('AddToCalendar component', () => {
   });
 
   test('renders correctly with CalendarAlt icon initially', () => {
-    const { getByRole } = render(<AddToCalendar event={event} />);
-    const button = getByRole('button', { name: 'Add Jewels & More: Online Auction to calendar' });
+    const { getByRole } = render(<AddToCalendar event={event} label="Add to calendar" />);
+    const button = getByRole('button', { name: 'Add to calendar' });
     expect(button).toBeInTheDocument();
     const icon = screen.getByTestId('icon-calendar-alt');
     expect(icon).toBeInTheDocument();
@@ -39,8 +39,8 @@ describe('AddToCalendar component', () => {
   });
 
   test('renders calendar links and changes icon to Cross on trigger click', () => {
-    const { getByRole, getByText } = render(<AddToCalendar event={event} />);
-    const button = getByRole('button', { name: 'Add Jewels & More: Online Auction to calendar' });
+    const { getByRole, getByText } = render(<AddToCalendar event={event} label="Add to calendar" />);
+    const button = getByRole('button', { name: 'Add to calendar' });
 
     // Click the button to open the Popover
     act(() => {
@@ -55,12 +55,6 @@ describe('AddToCalendar component', () => {
     // Check if the icon changes to Cross
     const crossIcon = screen.getByTestId('icon-close');
     expect(crossIcon).toBeInTheDocument();
-  });
-
-  test('renders button with correct aria-label when event title is present', () => {
-    const { getByRole } = render(<AddToCalendar event={event} />);
-    const button = getByRole('button', { name: `Add ${event.title} to calendar` });
-    expect(button).toBeInTheDocument();
   });
 
   test('renders button with default aria-label when event title is missing', () => {
@@ -89,8 +83,8 @@ describe('AddToCalendar component', () => {
     });
 
     const generateCalendarFileSpy = vi.spyOn(CalendarLinks, 'generateCalendarFile');
-    const { getByRole, findByRole } = render(<AddToCalendar event={event} />);
-    const triggerButton = getByRole('button', { name: 'Add Jewels & More: Online Auction to calendar' });
+    const { getByRole, findByRole } = render(<AddToCalendar event={event} label="Add to calendar" />);
+    const triggerButton = getByRole('button', { name: 'Add to calendar' });
 
     // Open the Popover
     act(() => {
@@ -126,7 +120,7 @@ describe('AddToCalendar component', () => {
     });
 
     const generateCalendarFileSpy = vi.spyOn(CalendarLinks, 'generateCalendarFile');
-    const { getByRole } = render(<AddToCalendar event={event} />);
+    const { getByRole } = render(<AddToCalendar event={event} label="Add Jewels & More: Online Auction to calendar" />);
     const triggerButton = getByRole('button', { name: 'Add Jewels & More: Online Auction to calendar' });
 
     // Open the Popover

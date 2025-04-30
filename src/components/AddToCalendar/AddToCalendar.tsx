@@ -15,6 +15,7 @@ import {
 export interface AddToCalendarProps extends ComponentProps<'div'> {
   event: CalendarEvent;
   linkElement?: ElementType<LinkProps>;
+  label?: string;
 }
 
 /**
@@ -28,16 +29,15 @@ export interface AddToCalendarProps extends ComponentProps<'div'> {
  */
 
 const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
-  ({ className, event, linkElement: Component = Link, ...props }, ref) => {
+  ({ className, event, label = 'Add to calendar', linkElement: Component = Link, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'AddToCalendar');
-    const buttonAriaLabel = event.title ? `Add ${event.title} to calendar` : 'Add to calendar';
     const [open, setOpen] = useState(false); // State to manage the open/close of the popover
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         <Popover.Root open={open} onOpenChange={setOpen}>
           <Popover.Trigger asChild>
-            <button aria-label={buttonAriaLabel} className={`${px}-icon-button ${px}-icon-button--small`} type="button">
+            <button aria-label={label} className={`${px}-icon-button ${px}-icon-button--small`} type="button">
               <Icon icon={open ? 'Close' : 'CalendarAlt'} />
             </button>
           </Popover.Trigger>
