@@ -57,27 +57,6 @@ describe('AddToCalendar component', () => {
     expect(crossIcon).toBeInTheDocument();
   });
 
-  test('calls generateCalendarFile when button is clicked ', async () => {
-    const { getByRole, findByRole } = render(<AddToCalendar event={event} />);
-    const triggerButton = getByRole('button', { name: 'Add Jewels & More: Online Auction to calendar' });
-
-    // Open the Popover
-    act(() => {
-      fireEvent.click(triggerButton);
-    });
-
-    // Find the Outlook button within the Popover
-    const outlookButton = await findByRole('button', { name: 'Outlook' });
-
-    // Click the Outlook button
-    act(() => {
-      fireEvent.click(outlookButton);
-    });
-
-    // Verify that generateCalendarFile is called with the event
-    expect(CalendarLinks.generateCalendarFile).toHaveBeenCalledTimes(1);
-    expect(CalendarLinks.generateCalendarFile).toHaveBeenCalledWith(event);
-  });
   test('renders button with correct aria-label when event title is present', () => {
     const { getByRole } = render(<AddToCalendar event={event} />);
     const button = getByRole('button', { name: `Add ${event.title} to calendar` });
@@ -98,7 +77,32 @@ describe('AddToCalendar component', () => {
     expect(button).toBeInTheDocument();
   });
 
+  test('calls generateCalendarFile when button is clicked ', async () => {
+    const generateCalendarFileSpy = vi.spyOn(CalendarLinks, 'generateCalendarFile');
+    const { getByRole, findByRole } = render(<AddToCalendar event={event} />);
+    const triggerButton = getByRole('button', { name: 'Add Jewels & More: Online Auction to calendar' });
+
+    // Open the Popover
+    act(() => {
+      fireEvent.click(triggerButton);
+    });
+
+    // Find the Outlook button within the Popover
+    const outlookButton = await findByRole('button', { name: 'Outlook' });
+
+    // Click the Outlook button
+    act(() => {
+      fireEvent.click(outlookButton);
+    });
+
+    // Verify that generateCalendarFile is called with the event
+    expect(generateCalendarFileSpy).toHaveBeenCalledTimes(1);
+    expect(generateCalendarFileSpy).toHaveBeenCalledWith(event);
+  });
+
   test('clicking iCalendar button calls generateCalendarFile', async () => {
+    const generateCalendarFileSpy = vi.spyOn(CalendarLinks, 'generateCalendarFile');
+
     const { getByRole } = render(<AddToCalendar event={event} />);
     const triggerButton = getByRole('button', { name: 'Add Jewels & More: Online Auction to calendar' });
 
@@ -108,11 +112,11 @@ describe('AddToCalendar component', () => {
     });
 
     const iCalendarButton = await screen.findByRole('button', { name: 'iCalendar' });
-
     act(() => {
       fireEvent.click(iCalendarButton);
     });
 
-    expect(CalendarLinks.generateCalendarFile).toHaveBeenCalledTimes(1); // check if generateCalendarFile is called
+    expect(generateCalendarFileSpy).toHaveBeenCalledTimes(1);
+    expect(generateCalendarFileSpy).toHaveBeenCalledWith(event);
   });
 });
