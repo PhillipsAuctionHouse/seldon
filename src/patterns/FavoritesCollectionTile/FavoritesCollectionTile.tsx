@@ -1,12 +1,17 @@
-import { ComponentProps, forwardRef, ElementType, memo, useRef } from 'react';
-import classnames from 'classnames';
-import { getCommonProps } from '../../utils';
-import Link, { LinkProps } from '../../components/Link/Link';
-import { Text, TextVariants } from '../../components/Text';
-import { SeldonImage } from '../../components/SeldonImage';
-import { Icon } from '../../components/Icon';
 import * as Popover from '@radix-ui/react-popover';
-export interface ListPreviewProps extends ComponentProps<'div'> {
+import classnames from 'classnames';
+import { ComponentProps, ElementType, forwardRef, memo, useRef } from 'react';
+import { Icon } from '../../components/Icon';
+import Link, { LinkProps } from '../../components/Link/Link';
+import { SeldonImage } from '../../components/SeldonImage';
+import { Text, TextVariants } from '../../components/Text';
+import { getCommonProps } from '../../utils';
+
+export interface FavoritesCollectionTileProps extends ComponentProps<'div'> {
+  /**
+   * Unique identifier for the list
+   */
+  id: string;
   /**
    * Lots display text en/zh
    */
@@ -36,12 +41,13 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
    */
   deleteListText?: string;
   /**
-   * List data containing count and name
+   * List data count
    */
-  list?: {
-    count: number;
-    name: string;
-  };
+  count: number;
+  /**
+   * List data name
+   */
+  name: string;
   /**
    * Image URL for the list
    */
@@ -65,11 +71,11 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
   /**
    * Callback function for editList menu item click
    */
-  onEditListClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onEdit?: (id: string, event: React.MouseEvent<HTMLButtonElement>) => void;
   /**
    * Callback function for deleteList menu item click
    */
-  onDeleteListClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onDelete?: (id: string, event: React.MouseEvent<HTMLButtonElement>) => void;
   /**
    * Function to modify strings for lot string translation
    */
@@ -83,14 +89,16 @@ export interface ListPreviewProps extends ComponentProps<'div'> {
  *
  * [Figma Link](https://www.figma.com/design/rIefa3bRPyZbZmtyV9PSQv/My-Account?node-id=61-14355&m=dev)
  *
- * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-listpreview--overview)
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-FavoritesCollectionTile--overview)
  */
-const ListPreview = memo(
-  forwardRef<HTMLDivElement, ListPreviewProps>(
+const FavoritesCollectionTile = memo(
+  forwardRef<HTMLDivElement, FavoritesCollectionTileProps>(
     (
       {
+        id,
         className,
-        list,
+        count,
+        name,
         listImageUrl,
         isLists = false,
         isFavorites = false,
@@ -103,33 +111,31 @@ const ListPreview = memo(
         blankListText = 'Create your first List.',
         editListText = 'Edit List',
         deleteListText = 'Delete List',
-        onEditListClick,
-        onDeleteListClick,
+        onEdit,
+        onDelete,
         formatlotStr,
         ...props
       },
       ref,
     ) => {
-      const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ListPreview');
+      const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'FavoritesCollectionTile');
       const imageRef = useRef<HTMLDivElement>(null);
-      const hasListData = !!list;
-      const isCountEmpty = hasListData && list?.count === 0;
+      const hasListData = name && count !== null && count !== undefined;
+      const isCountEmpty = count === 0;
 
       return (
-        <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
+        <div {...commonProps} className={classnames(baseClassName, className)} ref={ref} id={id}>
           <div className={`${baseClassName}__content`}>
             <div className={`${baseClassName}__header`}>
               <div className={`${baseClassName}__info`}>
                 {hasListData && (
                   <Text element="span" className={`${baseClassName}__count`} variant={TextVariants.body3}>
-                    {formatlotStr && hasListData
-                      ? formatlotStr(list?.count)
-                      : `${list?.count} ${list?.count === 1 ? lotText : lotsText}`}
+                    {formatlotStr && hasListData ? formatlotStr(count) : `${count} ${count === 1 ? lotText : lotsText}`}
                   </Text>
                 )}
                 {
                   <Text element="h3" className={`${baseClassName}__title`} variant={TextVariants.heading5}>
-                    {list?.name}
+                    {name}
                   </Text>
                 }
               </div>
@@ -156,17 +162,17 @@ const ListPreview = memo(
                     </Popover.Trigger>
                     <Popover.Portal>
                       <Popover.Content sideOffset={5} className={`${baseClassName}__popover-content`}>
-                        <div className={`${baseClassName}__dropdown`} data-testid="dropdown-menu">
+                        <div className={`${baseClassName}__dropdown`} data-testid={`dropdown-menu`}>
                           <button
                             className={`${baseClassName}__dropdown--item`}
-                            onClick={onEditListClick}
+                            onClick={(event) => onEdit?.(id, event)}
                             type="button"
                           >
                             {editListText}
                           </button>
                           <button
                             className={`${baseClassName}__dropdown--item`}
-                            onClick={onDeleteListClick}
+                            onClick={(event) => onDelete?.(id, event)}
                             type="button"
                           >
                             {deleteListText}
@@ -219,7 +225,7 @@ const ListPreview = memo(
               {!isCountEmpty && hasListData && (
                 <div className={`${baseClassName}__media-container`} ref={imageRef}>
                   <SeldonImage
-                    alt={list?.name}
+                    alt={name}
                     aspectRatio="1/1"
                     className={`${baseClassName}__media`}
                     objectFit="cover"
@@ -238,6 +244,6 @@ const ListPreview = memo(
   ),
 );
 
-ListPreview.displayName = 'ListPreview';
+FavoritesCollectionTile.displayName = 'FavoritesCollectionTile';
 
-export default ListPreview;
+export default FavoritesCollectionTile;
