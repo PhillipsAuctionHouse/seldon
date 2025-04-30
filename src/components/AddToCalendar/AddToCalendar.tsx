@@ -42,7 +42,7 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
             </button>
           </Popover.Trigger>
           <Popover.Portal>
-            <Popover.Content sideOffset={5} align="start">
+            <Popover.Content sideOffset={5} align="start" side="bottom">
               <ul className="atcb-list" role="dialog">
                 <li className="atcb-item">
                   <button className="atcb-item-link" onClick={() => generateCalendarFile(event)}>
