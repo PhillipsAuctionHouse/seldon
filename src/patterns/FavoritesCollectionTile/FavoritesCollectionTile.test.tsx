@@ -86,7 +86,7 @@ describe('FavoritesCollectionTile', () => {
     expect(screen.getByTestId('dropdown-menu')).toBeInTheDocument();
   });
 
-  it('calles the onDeleteListClick function when the edit list button is clicked', () => {
+  it('calles the onDeleteListClick function when the delete button is clicked', () => {
     const mockOnDeleteListClick = vi.fn();
     render(<FavoritesCollectionTile {...{ ...defaultProps, onDelete: mockOnDeleteListClick }} />);
     const menuTrigger = screen.getByTestId('menu-trigger');
