@@ -98,3 +98,4 @@ export * from './components/Divider';
 export * from './components/FavoritingTileButton';
 export * from './components/Icon';
 export * from './components/TextArea';
+export * from './patterns/AccountPageHeader';
