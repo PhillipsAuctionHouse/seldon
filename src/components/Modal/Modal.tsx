@@ -82,7 +82,7 @@ const Modal = ({
         className={classnames(`${baseClassName}__close`)}
         variant={ButtonVariants.tertiary}
       >
-        <Icon icon="CloseX" height={32} width={32} />
+        <Icon icon="CloseX" height={32} width={32} color="currentColor" />
       </IconButton>
       {children}
     </ReactModal>
