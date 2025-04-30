@@ -1,3 +1,24 @@
+## [1.137.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.137.0...v1.137.1) (2025-04-29)
+
+
+### Bug Fixes
+
+* **ObjectTile:** L3-5631 reserve space for 'No Reserve' on ObjectTile ([#605](https://github.com/PhillipsAuctionHouse/seldon/issues/605)) ([321a1f9](https://github.com/PhillipsAuctionHouse/seldon/commit/321a1f900ffdcd1f46c2f5c5ad936ada92d34566))
+
+# [1.137.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.136.1...v1.137.0) (2025-04-29)
+
+
+### Features
+
+* **Loader:** L3-5951 Loading Spinner Component ([#578](https://github.com/PhillipsAuctionHouse/seldon/issues/578)) ([bdf0ad8](https://github.com/PhillipsAuctionHouse/seldon/commit/bdf0ad81dcfa3a6244bc4088dd1b6a58513b364d))
+
+## [1.136.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.136.0...v1.136.1) (2025-04-23)
+
+
+### Bug Fixes
+
+* **prefetching:** L3-6129 remove module <link> ([#599](https://github.com/PhillipsAuctionHouse/seldon/issues/599)) ([77748bd](https://github.com/PhillipsAuctionHouse/seldon/commit/77748bd35e186a60a05ac81d804d2b8acd241369))
+
 # [1.136.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.135.1...v1.136.0) (2025-04-18)
 
 
