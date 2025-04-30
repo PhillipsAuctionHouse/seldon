@@ -2,7 +2,13 @@ import { ComponentProps, forwardRef, useEffect, useMemo, useState } from 'react'
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { SupportedLanguages } from '../../types/commonTypes';
-import { differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds } from 'date-fns';
+import {
+  differenceInDays,
+  differenceInHours,
+  differenceInMilliseconds,
+  differenceInMinutes,
+  differenceInSeconds,
+} from 'date-fns';
 import { zhCN, enUS } from 'date-fns/locale';
 import { CountdownVariants } from './types';
 import { Duration } from './Duration'; // Import the Duration component
@@ -93,9 +99,7 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
       return new Date(endDateTime).getTime() > new Date().getTime();
     }, [endDateTime]);
 
-    const isDaysAndHoursZero = timeLeft.days === 0 && timeLeft.hours === 0;
-    const isExactlyThreeMinutes = isDaysAndHoursZero && timeLeft.minutes === 3 && timeLeft.seconds === 0;
-    const isLessThanThreeMinutes = isDaysAndHoursZero && timeLeft.minutes < 3;
+    const isClosingTag = differenceInMilliseconds(endDateTime, currentDateTime) <= 3 * 60 * 1000;
 
     return showTimer ? (
       <div
@@ -103,7 +107,7 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
         className={classnames(baseClassName, className, {
           [`${baseClassName}--compact`]: variant === CountdownVariants.compact,
           [`${baseClassName}--show-bottom-border`]: showBottomBorder,
-          [`${baseClassName}--closing-lot`]: isExactlyThreeMinutes || isLessThanThreeMinutes,
+          [`${baseClassName}--closing-lot`]: isClosingTag,
         })}
         {...props}
         ref={ref}
