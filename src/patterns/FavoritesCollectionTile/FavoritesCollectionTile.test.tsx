@@ -75,7 +75,7 @@ describe('FavoritesCollectionTile', () => {
     expect(screen.queryByTestId('favorites')).not.toBeInTheDocument();
   });
 
-  it('it shows the dropdown menu when the edit list button is clicked', () => {
+  it('shows the dropdown menu when the edit list button is clicked', () => {
     render(<FavoritesCollectionTile {...defaultProps} />);
     const menuTrigger = screen.getByTestId('menu-trigger');
 
@@ -86,7 +86,7 @@ describe('FavoritesCollectionTile', () => {
     expect(screen.getByTestId('dropdown-menu')).toBeInTheDocument();
   });
 
-  it('it calles the onDeleteListClick function when the edit list button is clicked', () => {
+  it('calles the onDeleteListClick function when the edit list button is clicked', () => {
     const mockOnDeleteListClick = vi.fn();
     render(<FavoritesCollectionTile {...{ ...defaultProps, onDelete: mockOnDeleteListClick }} />);
     const menuTrigger = screen.getByTestId('menu-trigger');
@@ -102,20 +102,45 @@ describe('FavoritesCollectionTile', () => {
     expect(mockOnDeleteListClick).toHaveBeenCalledTimes(1);
   });
 
-  it('it shows the blank list elements when the list is blank', () => {
+  it('shows the blank list elements when the list is blank', () => {
     render(<FavoritesCollectionTile {...blankListProps} />);
     expect(screen.getByText('Create your first List.')).toBeInTheDocument();
     expect(screen.queryByText('New List')).not.toBeInTheDocument();
   });
 
-  it('it shows the correct empty list when data is provided', () => {
+  it('shows the correct empty list when data is provided', () => {
     render(<FavoritesCollectionTile {...emptyListProps} />);
     expect(screen.getByText('You have not added any objects to your List yet.')).toBeInTheDocument();
   });
 
-  it('it shows the correct translation text when formatlotStr is provided', () => {
+  it('shows the correct translation text when formatlotStr is provided', () => {
     render(<FavoritesCollectionTile {...translationedProps} />);
     expect(screen.getByText('列表中有 0 件拍品')).toBeInTheDocument();
     expect(screen.getByText('创建您的第一个列表')).toBeInTheDocument();
+  });
+
+  it('calls the onEdit function when the edit list button is clicked', () => {
+    const mockOnEdit = vi.fn();
+    render(<FavoritesCollectionTile {...{ ...defaultProps, onEdit: mockOnEdit }} />);
+    const menuTrigger = screen.getByTestId('menu-trigger');
+
+    act(() => {
+      menuTrigger.click();
+    });
+
+    const editButton = screen.getByText('Edit List');
+    act(() => {
+      editButton.click();
+    });
+
+    expect(mockOnEdit).toHaveBeenCalled();
+    expect(mockOnEdit).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls formatlotStr and displays its output correctly', () => {
+    const mockFormatlotStr = vi.fn((count) => `Formatted: ${count}`);
+    render(<FavoritesCollectionTile {...{ ...defaultProps, formatlotStr: mockFormatlotStr }} />);
+    expect(screen.getByText('Formatted: 2')).toBeInTheDocument();
+    expect(mockFormatlotStr).toHaveBeenCalledWith(2);
   });
 });
