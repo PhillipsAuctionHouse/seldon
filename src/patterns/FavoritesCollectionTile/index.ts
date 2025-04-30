@@ -1,1 +1,1 @@
-export { default as ListPreview, type ListPreviewProps } from './FavoritesCollectionTile';
+export { default as FavoritesCollectionTile, type FavoritesCollectionTileProps } from './FavoritesCollectionTile';
