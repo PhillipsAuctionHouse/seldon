@@ -66,7 +66,7 @@ export const Tag = ({ id, className, onRemove, label, removeText = 'Remove' }: T
     >
       <div className={`${px}-tag__label`}>{label}</div>
       <div className={`${px}-tag__button`} data-testid={`${id}-item-close-button`}>
-        <Icon icon="CloseX" height={24} width={24} color="currentColor" className={`${px}-tag__icon`} />
+        <Icon icon="CloseX" height={8} width={8} color="currentColor" className={`${px}-tag__icon`} />
       </div>
     </Button>
   );
