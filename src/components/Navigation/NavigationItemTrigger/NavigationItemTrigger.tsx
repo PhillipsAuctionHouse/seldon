@@ -1,14 +1,15 @@
-import { findChildrenOfType, getCommonProps, px } from '../../../utils';
 import classNames from 'classnames';
 import React, { ComponentProps, forwardRef, useState } from 'react';
-import { Text, TextVariants } from '../../Text';
-import NavigationList, { NavigationListProps } from '../NavigationList/NavigationList';
+import { RemoveScroll } from 'react-remove-scroll';
+import { SSRMediaQuery } from '../../../providers/SeldonProvider/utils';
+import { HeaderContext } from '../../../site-furniture/Header/Header';
+import { findChildrenOfType, getCommonProps, px } from '../../../utils';
+import { closeActiveElement } from '../../../utils/index';
+import { AccordionItemVariant } from '../../Accordion';
 import Accordion from '../../Accordion/Accordion';
 import AccordionItem from '../../Accordion/AccordionItem';
-import { SSRMediaQuery } from '../../../providers/SeldonProvider/utils';
-import { AccordionItemVariant } from '../../Accordion';
-import { HeaderContext } from '../../../site-furniture/Header/Header';
-import { RemoveScroll } from 'react-remove-scroll';
+import { Text, TextVariants } from '../../Text';
+import NavigationList, { NavigationListProps } from '../NavigationList/NavigationList';
 
 export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
   /**
@@ -78,9 +79,13 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
                 [`${baseClassName}--hovered`]: isSubmenuOpened,
               })}
               onClick={onClick}
-              onMouseOver={() => setIsSubmenuOpened(true)}
+              onMouseOver={() => {
+                setIsSubmenuOpened(true);
+                closeActiveElement('SELECT');
+              }}
               onMouseOut={() => setIsSubmenuOpened(false)}
               {...props}
+              tabIndex={-1}
             >
               <button className={`${px}-nav__item-trigger`} type="button">
                 <Text variant={TextVariants.snwHeaderLink}>{label}</Text>

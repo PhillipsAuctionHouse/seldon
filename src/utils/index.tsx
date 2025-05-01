@@ -202,3 +202,10 @@ export const encodeURLSearchParams = (url: string) => {
   const encodedLink = `${urlSections[0]}?${encodedQueryString}`;
   return encodedLink;
 };
+
+export const closeActiveElement = (elementType: string) => {
+  const activeElement = document.activeElement as HTMLElement;
+  if (activeElement?.tagName === elementType) {
+    activeElement.blur();
+  }
+};
