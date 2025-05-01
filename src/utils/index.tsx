@@ -205,7 +205,7 @@ export const encodeURLSearchParams = (url: string) => {
 
 export const closeActiveElement = (elementType: string) => {
   const activeElement = document.activeElement as HTMLElement;
-  if (activeElement?.tagName === elementType) {
+  if (activeElement?.tagName.toUpperCase() === elementType.toUpperCase()) {
     activeElement.blur();
   }
 };
