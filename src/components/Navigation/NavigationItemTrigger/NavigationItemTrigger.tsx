@@ -85,7 +85,6 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
               }}
               onMouseOut={() => setIsSubmenuOpened(false)}
               {...props}
-              tabIndex={-1}
             >
               <button className={`${px}-nav__item-trigger`} type="button">
                 <Text variant={TextVariants.snwHeaderLink}>{label}</Text>
