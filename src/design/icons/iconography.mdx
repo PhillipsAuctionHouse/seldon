@@ -1,0 +1,45 @@
+import { Meta, Source } from '@storybook/blocks';
+import { IconGrid } from './IconGrid';
+import { Icon } from '../../components/Icon';
+
+<Meta title="Design/Iconography" />
+
+<main className="sb-unstyled doc-wrapper">
+  <h1 className="h1">Iconography</h1>
+
+  <h2 className="h2">Icon Grid</h2>
+  <IconGrid />
+  <span className="p icon-usage">
+    <h2 className="h2">Usage</h2>
+      <span className="p">
+    The `Icon` component can be used to render any svg image and supports all of the icons shown in the Grid above.
+    Icons can be resized and recolored by passing the appropriate props
+  </span>
+    <div className="icon-example">
+      <div className="icons-container">
+        <Icon icon="FavoriteActive" height={16} width={16} color="$pure-black" />
+        <Icon icon="FavoriteActive" height={24} width={24} color="$pure-black" />
+      </div>
+      <Source
+        code={`
+<Icon icon="FavoriteActive" height={16} width={16} color="$pure-black" />
+<Icon icon="FavoriteActive" height={24} width={24} color="$pure-black" />
+`}
+        dark
+      />
+    </div>
+    <div className="icon-example">
+      <div className="icons-container--dark">
+        <Icon icon="Account" height={16} color="$white" />
+        <Icon icon="Account" height={24} color="$white" />
+      </div>
+      <Source
+        code={`
+<Icon icon="Account" height={16} width={16} color="$white" />
+<Icon icon="Account" height={24} width={24} color="$white" />
+`}
+        dark
+      />
+    </div>
+  </span>
+</main>

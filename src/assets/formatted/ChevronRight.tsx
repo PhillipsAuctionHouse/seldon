@@ -1,7 +1,7 @@
-import { Ref, forwardRef, memo } from 'react';
+import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgChevronRightProps {
+interface SvgChevronRightProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -10,7 +10,7 @@ interface SvgChevronRightProps {
 }
 
 const SvgChevronRight = memo(
-  forwardRef((props: SvgChevronRightProps, ref: Ref<SVGSVGElement>) => {
+  forwardRef<SVGSVGElement, SvgChevronRightProps>((props, ref) => {
     const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
     const title = propsTitle || 'SvgChevronRight';
     const titleId = propsTitleId || kebabCase(title);
@@ -19,7 +19,7 @@ const SvgChevronRight = memo(
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
-        viewBox="0 0 32 32"
+        viewBox="0 0 24 24"
         height={height}
         width={width}
         role="img"
@@ -31,7 +31,7 @@ const SvgChevronRight = memo(
         <path
           fill={color}
           fillRule="evenodd"
-          d="m20.252 16.131-8.288 8.288c-.293.293-.345 1.07.101 1.516.447.446 1.223.393 1.516.1l9.192-9.192c.149-.148.235-.42.226-.712.01-.29-.077-.563-.226-.712l-9.192-9.192c-.293-.293-1.07-.345-1.516.101s-.393 1.222-.1 1.515z"
+          d="M9.252 3.341 16.83 12l-7.577 8.659-1.505-1.317L14.171 12 7.747 4.659z"
           clipRule="evenodd"
         />
       </svg>

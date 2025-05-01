@@ -11,6 +11,10 @@
   & svg {
     height: $button-label-line-height;
     width: $button-label-line-height;
+
+    &:hover {
+      color: $white;
+    }
   }
 
   &:focus-visible {
@@ -30,7 +34,7 @@
     color: $pure-black;
 
     & svg {
-      fill: $pure-black;
+      color: $pure-black;
       height: calc($button-label-line-height * 1.5); // design-cheats-for-button-large
       margin-inline-end: unset;
       width: calc($button-label-line-height * 1.5); // design-cheats-for-button-large
@@ -42,10 +46,10 @@
 
     &:hover {
       svg {
-        fill: $pure-white;
+        color: $pure-white;
 
         path {
-          fill: $pure-white;
+          color: $pure-white;
         }
       }
     }
@@ -55,10 +59,10 @@
     border-color: transparent;
 
     svg {
-      fill: $keyline-gray;
+      color: $keyline-gray;
 
       path {
-        fill: $keyline-gray;
+        color: $keyline-gray;
       }
     }
   }

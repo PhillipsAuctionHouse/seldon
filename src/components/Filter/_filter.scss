@@ -41,10 +41,6 @@ $chevron-scale: 0.8;
 
       margin-top: $spacing-sm;
     }
-
-    &__chevron {
-      transform: rotateY(180deg) scale($chevron-scale);
-    }
   }
 
   &__chevron {
