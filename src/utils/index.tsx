@@ -203,6 +203,13 @@ export const encodeURLSearchParams = (url: string) => {
   return encodedLink;
 };
 
+/**
+ * Blurs the currently active element if its tag name matches the specified element type.
+ *
+ * @param elementType - The tag name of the element to blur (case-sensitive, e.g., "INPUT", "TEXTAREA").
+ *                      Ensure the value matches the `tagName` property of the active element.
+ *                      Typically, tag names are in uppercase.
+ */
 export const closeActiveElement = (elementType: string) => {
   const activeElement = document.activeElement as HTMLElement;
   if (activeElement?.tagName.toUpperCase() === elementType.toUpperCase()) {
