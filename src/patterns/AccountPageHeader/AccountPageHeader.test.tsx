@@ -1,6 +1,6 @@
-import AccountPageHeader from './AccountPageHeader';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import AccountPageHeader from './AccountPageHeader';
 
 describe('AccountPageHeader', () => {
   it('renders title correctly', () => {
@@ -20,39 +20,93 @@ describe('AccountPageHeader', () => {
     expect(getByText('User Profile')).toBeInTheDocument();
   });
 
-  it('renders primary action button when provided', async () => {
+  it('renders action buttons when provided', async () => {
     const handleClick = vi.fn();
-    const { getByText } = render(
+    render(
       <AccountPageHeader
         title="Account Settings"
-        primaryActionButton={{
-          onClick: handleClick,
-          label: 'Edit Profile',
-          icon: 'Favorite',
-        }}
+        actionButtons={[
+          {
+            onClick: handleClick,
+            label: 'Edit Profile',
+            icon: 'Favorite',
+            ariaLabel: 'Edit Profile',
+            isPrimary: true,
+          },
+        ]}
       />,
     );
 
-    expect(getByText('Edit Profile')).toBeInTheDocument();
-
-    const button = screen.getByRole('button', { name: 'SvgFavorite Edit Profile' });
+    const button = screen.getByRole('button', { name: 'Edit Profile' });
     await userEvent.click(button);
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  it('renders icon actions when provided', async () => {
-    const handleAction = vi.fn();
-    render(<AccountPageHeader title="Account Settings" iconActions={[{ icon: 'Favorite', action: handleAction }]} />);
+  it('renders multiple icon buttons when provided', async () => {
+    const handleShare = vi.fn();
+    const handleFavorite = vi.fn();
 
-    const iconButton = screen.getByTestId('icon-button');
-    expect(iconButton).toBeInTheDocument();
+    render(
+      <AccountPageHeader
+        title="Account Settings"
+        actionButtons={[
+          {
+            onClick: handleShare,
+            icon: 'Share',
+            ariaLabel: 'Share',
+            isPrimary: false,
+          },
+          {
+            onClick: handleFavorite,
+            icon: 'Favorite',
+            ariaLabel: 'Add to favorites',
+            isPrimary: false,
+          },
+        ]}
+      />,
+    );
 
-    await userEvent.click(iconButton);
-    expect(handleAction).toHaveBeenCalledTimes(1);
+    const shareButton = screen.getByRole('button', { name: 'Share' });
+    const favoriteButton = screen.getByRole('button', { name: 'Add to favorites' });
+
+    expect(shareButton).toBeInTheDocument();
+    expect(favoriteButton).toBeInTheDocument();
+
+    await userEvent.click(shareButton);
+    expect(handleShare).toHaveBeenCalledTimes(1);
+
+    await userEvent.click(favoriteButton);
+    expect(handleFavorite).toHaveBeenCalledTimes(1);
+  });
+
+  it('renders both primary and icon buttons when provided', () => {
+    render(
+      <AccountPageHeader
+        title="Account Settings"
+        actionButtons={[
+          {
+            onClick: () => vi.fn(),
+            label: 'Primary Action',
+            icon: 'Add',
+            ariaLabel: 'Add new item',
+            isPrimary: true,
+          },
+          {
+            onClick: () => vi.fn(),
+            icon: 'Share',
+            ariaLabel: 'Share',
+            isPrimary: false,
+          },
+        ]}
+      />,
+    );
+
+    expect(screen.getByRole('button', { name: 'Add new item' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Share' })).toBeInTheDocument();
   });
 
   it('does not render divider when showDivider is false', () => {
     const { container } = render(<AccountPageHeader title="Account Settings" showDivider={false} />);
-    expect(container.querySelector('.AccountPageHeader__divider')).not.toBeInTheDocument();
+    expect(container.querySelector('.px-account-page-header__divider')).not.toBeInTheDocument();
   });
 });

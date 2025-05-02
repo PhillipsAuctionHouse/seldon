@@ -20,33 +20,11 @@
     font-variation-settings: 'wght' 600;
   }
 
-  &__icon-buttons {
-    display: flex;
-    gap: $spacing-sm;
-    margin-left: auto;
-  }
-
-  &__primary-action {
+  &__button-wrapper {
     align-items: center;
     display: flex;
-
-    &-desktop {
-      display: none;
-
-      @media (min-width: $breakpoint-md) {
-        align-items: center;
-        display: flex;
-      }
-    }
-
-    &-mobile {
-      align-items: center;
-      display: flex;
-
-      @media (min-width: $breakpoint-md) {
-        display: none;
-      }
-    }
+    gap: $spacing-sm;
+    justify-content: center;
   }
 
   &__divider.seldon-divider {

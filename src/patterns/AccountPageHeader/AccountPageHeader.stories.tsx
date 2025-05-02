@@ -17,19 +17,23 @@ Playground.args = {
   title: 'Account Page Header',
   subheader: 'This is a subheader',
   overline: 'Overline',
-  primaryActionButton: {
-    onClick: () => alert('Primary action clicked'),
-    label: 'Create New',
-    icon: 'Plus',
-  },
-  iconActions: [
+  actionButtons: [
     {
-      action: () => alert('Icon action 1 clicked'),
-      icon: 'FavoriteOutline',
+      label: 'Create New',
+      ariaLabel: 'Create New',
+      icon: 'Add',
+      onClick: () => alert('Primary action clicked'),
+      isPrimary: true,
     },
     {
-      action: () => alert('Icon action 2 clicked'),
+      ariaLabel: 'Favorite',
       icon: 'Favorite',
+      onClick: () => alert('Icon action 1 clicked'),
+    },
+    {
+      ariaLabel: 'Share',
+      icon: 'Share',
+      onClick: () => alert('Icon action 2 clicked'),
     },
   ],
 };
@@ -42,11 +46,15 @@ export const FavoritesAndLists = () => (
   <AccountPageHeader
     title="Favorites & Lists"
     subheader="Save Favorite items and Create Lists to organize by themes or interests."
-    primaryActionButton={{
-      onClick: () => alert('Create list clicked'),
-      label: 'Create A List',
-      icon: 'Plus',
-    }}
+    actionButtons={[
+      {
+        label: 'Create A List',
+        ariaLabel: 'Create A List',
+        icon: 'Add',
+        onClick: () => alert('Create list clicked'),
+        isPrimary: true,
+      },
+    ]}
   />
 );
 
@@ -55,14 +63,16 @@ export const List = () => (
     title="Monaco apartment"
     subheader="Thoughts for the living room renovation"
     overline="List"
-    iconActions={[
+    actionButtons={[
       {
-        action: () => alert('Favorite clicked'),
-        icon: 'FavoriteOutline',
+        ariaLabel: 'Favorite',
+        icon: 'Favorite',
+        onClick: () => alert('Favorite clicked'),
       },
       {
-        action: () => alert('Share clicked'),
+        ariaLabel: 'Share',
         icon: 'Share',
+        onClick: () => alert('Share clicked'),
       },
     ]}
   />

@@ -8,33 +8,34 @@ import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';
 import { Icon, IconName } from '../../components/Icon';
 import IconButton from '../../components/IconButton/IconButton';
+import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 
 export interface AccountPageHeaderProps extends ComponentProps<'div'> {
   /** The main title displayed at the top of the account page */
   title: string;
+
   /** Optional subtitle text that appears below the main title */
   subheader?: string;
+
   /**
-   * Configuration for the primary action button
+   * Array of action buttons to display in the header
+   * @property {string} [label] - Optional text to display on the button
+   * @property {string} ariaLabel - Accessible label for the button
+   * @property {IconName} icon - Icon to display on the button
    * @property {() => void} onClick - Function to call when the button is clicked
-   * @property {string} label - Text to display on the button
-   * @property {IconName} [icon] - Optional icon to display alongside the text
+   * @property {boolean} [isPrimary] - When true, renders as a regular button; when false or undefined, renders as an icon button
    */
-  primaryActionButton?: {
+  actionButtons?: Array<{
+    label?: string;
+    ariaLabel: string;
+    icon: IconName;
     onClick: () => void;
-    label: string;
-    icon?: IconName;
-  };
+    isPrimary?: boolean;
+  }>;
+
   /** Optional text displayed above the title */
   overline?: string;
-  /**
-   * Array of icon actions to display
-   * Each object should have an icon name and an action function
-   */
-  iconActions?: Array<{
-    icon: IconName;
-    action: () => void;
-  }>;
+
   /**
    * Show or hide the bottom divider
    * @default true
@@ -51,35 +52,40 @@ export interface AccountPageHeaderProps extends ComponentProps<'div'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-accountpageheader--overview)
  */
 const AccountPageHeader = forwardRef<HTMLDivElement, AccountPageHeaderProps>(
-  ({ className, title, subheader, primaryActionButton, overline, iconActions, showDivider = true, ...props }, ref) => {
+  ({ className, title, subheader, actionButtons, overline, showDivider = true, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'AccountPageHeader');
 
-    const renderIconButtons = () => (
-      <div className={`${baseClassName}__icon-buttons`}>
-        {iconActions?.map((iconAction) => (
-          <IconButton key={`icon-action-${iconAction.icon}`} onClick={iconAction.action}>
-            <Icon icon={iconAction.icon} />
-          </IconButton>
-        ))}
+    const primaryButton = actionButtons?.find((button) => button.isPrimary);
+    const iconButtons = actionButtons?.filter((button) => !button.isPrimary);
+
+    const renderButtons = () => (
+      <div className={`${baseClassName}__button-wrapper`}>
+        {iconButtons && (
+          <>
+            {iconButtons.map((button) => (
+              <IconButton key={`icon-button-${button.icon}`} onClick={button.onClick} aria-label={button.ariaLabel}>
+                <Icon icon={button.icon} aria-label={button.ariaLabel} title={button.ariaLabel} />
+              </IconButton>
+            ))}
+          </>
+        )}
+
+        {primaryButton && (
+          <>
+            <SSRMediaQuery.Media greaterThanOrEqual="md">
+              <Button variant={ButtonVariants.secondary} onClick={primaryButton.onClick}>
+                <Icon icon={primaryButton.icon} /> {primaryButton.label}
+              </Button>
+            </SSRMediaQuery.Media>
+            <SSRMediaQuery.Media lessThan="md">
+              <IconButton onClick={primaryButton.onClick} aria-label={primaryButton.ariaLabel}>
+                <Icon icon={primaryButton.icon} title={primaryButton.ariaLabel} />
+              </IconButton>
+            </SSRMediaQuery.Media>
+          </>
+        )}
       </div>
     );
-
-    const renderPrimaryAction = () =>
-      primaryActionButton &&
-      primaryActionButton.icon && (
-        <div className={`${baseClassName}__primary-action`}>
-          <Button
-            variant={ButtonVariants.secondary}
-            onClick={primaryActionButton.onClick}
-            className={`${baseClassName}__primary-action-desktop`}
-          >
-            <Icon icon={primaryActionButton.icon} /> {primaryActionButton.label}
-          </Button>
-          <IconButton onClick={primaryActionButton.onClick} className={`${baseClassName}__primary-action-mobile`}>
-            <Icon icon={primaryActionButton.icon} />
-          </IconButton>
-        </div>
-      );
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} ref={ref}>
@@ -91,8 +97,7 @@ const AccountPageHeader = forwardRef<HTMLDivElement, AccountPageHeaderProps>(
           )}
           <div className={`${baseClassName}__header`}>
             <Text variant={TextVariants.title1}>{title}</Text>
-            {iconActions && renderIconButtons()}
-            {primaryActionButton && renderPrimaryAction()}
+            {actionButtons && actionButtons.length > 0 && renderButtons()}
           </div>
           {subheader && (
             <Text variant={TextVariants.string2} className={`${baseClassName}__subheader`}>
