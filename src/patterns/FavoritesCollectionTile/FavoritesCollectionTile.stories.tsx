@@ -18,22 +18,18 @@ Playground.args = {
   count: 2,
   name: 'New List',
   listImageUrl: 'https://via.placeholder.com/400',
-  isFavorites: false,
+  variant: 'favorites',
   onEdit: (): void => console.log('Edit list clicked'),
   onDelete: (): void => console.log('Delete list clicked'),
-  element: 'a',
+  href: 'a',
 };
 
 Playground.argTypes = {
-  list: {
-    description: 'List data containing count and name',
-    control: 'object',
+  variant: {
+    description: 'Determines if is in favorites view or lists view',
+    control: { type: 'favorites' || 'lists' },
   },
-  isFavorites: {
-    description: 'Whether this card is in favorites view',
-    control: 'boolean',
-  },
-  element: {
+  href: {
     description: 'Wrapped element to pass in for the link',
     control: { type: null },
   },
@@ -47,8 +43,11 @@ EmptyFavorites.args = {
   id: 'favorites-collection-tile-2',
   count: 0,
   name: 'Favorites',
-  isFavorites: true,
-  element: 'a',
+  variant: 'favorites',
+  href: 'a',
+  formatlotStr: (count: number, lotText = 'LOT') => {
+    return `${count} ${lotText}`;
+  },
 };
 
 export const BlankList = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
@@ -57,8 +56,10 @@ export const BlankList = (props: ComponentProps<typeof FavoritesCollectionTile>)
 
 BlankList.args = {
   id: 'favorites-collection-tile-3',
-  isLists: true,
-  element: 'a',
+  count: 0,
+  name: 'Blank List',
+  variant: 'lists',
+  href: 'a',
 };
 
 export const EmptyList = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
@@ -69,8 +70,8 @@ EmptyList.args = {
   id: 'favorites-collection-tile-4',
   count: 0,
   name: 'Test List',
-  isLists: true,
-  element: 'a',
+  variant: 'lists',
+  href: 'a',
 };
 
 export const TranslatedList = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
@@ -81,8 +82,8 @@ TranslatedList.args = {
   id: 'favorites-collection-tile-5',
   count: 0,
   name: '某人列表',
-  isLists: true,
-  element: 'a',
+  variant: 'lists',
+  href: 'a',
   emptyListsText: '创建您的第一个列表',
   formatlotStr: (count: number) => {
     return `列表中有 ${count} 件拍品`;

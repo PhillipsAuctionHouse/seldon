@@ -139,6 +139,10 @@
   &__icon {
     grid-column: 1;
     justify-self: start;
+
+    &-rotate {
+      transform: rotate(90deg);
+    }
   }
 
   &__text {

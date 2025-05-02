@@ -8,12 +8,10 @@ const defaultProps = {
   count: 2,
   name: 'New List',
   listImageUrl: 'https://via.placeholder.com/400',
-  isFavorites: false,
 };
 const blankListProps = {
   id: 'favorites-collection-tile-2',
   listImageUrl: 'https://via.placeholder.com/400',
-  isLists: true,
   count: 0,
   name: '',
 };
@@ -22,14 +20,12 @@ const emptyListProps = {
   listImageUrl: 'https://via.placeholder.com/400',
   count: 0,
   name: 'Test List',
-  isLists: true,
 };
 const translationedProps = {
   id: 'favorites-collection-tile-4',
   listImageUrl: 'https://via.placeholder.com/400',
   count: 0,
   name: '某人列表',
-  isLists: true,
   emptyListsText: '创建您的第一个列表',
   formatlotStr: (count: number) => {
     return `列表中有 ${count} 件拍品`;
@@ -43,7 +39,7 @@ describe('FavoritesCollectionTile', () => {
   });
 
   it('renders list count and name correctly', () => {
-    render(<FavoritesCollectionTile {...defaultProps} />);
+    render(<FavoritesCollectionTile {...{ ...defaultProps, variant: 'lists' }} />);
 
     expect(screen.getByText('2 LOTS')).toBeInTheDocument();
     expect(screen.getByText('New List')).toBeInTheDocument();
@@ -56,27 +52,27 @@ describe('FavoritesCollectionTile', () => {
       name: 'Single Item List',
     };
 
-    render(<FavoritesCollectionTile {...singularProps} />);
+    render(<FavoritesCollectionTile {...singularProps} variant="lists" />);
     expect(screen.getByText('1 LOT')).toBeInTheDocument();
   });
 
   it('shows dropdown menu when not in favorites view', () => {
-    render(<FavoritesCollectionTile {...defaultProps} />);
+    render(<FavoritesCollectionTile {...defaultProps} variant="favorites" />);
     expect(screen.getByTestId('menu-trigger')).toBeInTheDocument();
   });
 
   it('hides dropdown menu when in favorites view', () => {
-    render(<FavoritesCollectionTile {...defaultProps} isFavorites={true} />);
+    render(<FavoritesCollectionTile {...defaultProps} variant="favorites" />);
     expect(screen.queryByTestId('favorites')).not.toBeInTheDocument();
   });
 
   it('hides dropdown menu when list is empty', () => {
-    render(<FavoritesCollectionTile {...defaultProps} count={0} name="" />);
+    render(<FavoritesCollectionTile {...defaultProps} count={0} name="" variant="lists" />);
     expect(screen.queryByTestId('favorites')).not.toBeInTheDocument();
   });
 
   it('shows the dropdown menu when the edit list button is clicked', () => {
-    render(<FavoritesCollectionTile {...defaultProps} />);
+    render(<FavoritesCollectionTile {...defaultProps} variant="lists" />);
     const menuTrigger = screen.getByTestId('menu-trigger');
 
     act(() => {
@@ -88,7 +84,7 @@ describe('FavoritesCollectionTile', () => {
 
   it('calles the onDeleteListClick function when the delete button is clicked', () => {
     const mockOnDeleteListClick = vi.fn();
-    render(<FavoritesCollectionTile {...{ ...defaultProps, onDelete: mockOnDeleteListClick }} />);
+    render(<FavoritesCollectionTile {...{ ...defaultProps, onDelete: mockOnDeleteListClick, variant: 'lists' }} />);
     const menuTrigger = screen.getByTestId('menu-trigger');
 
     act(() => {
@@ -103,25 +99,25 @@ describe('FavoritesCollectionTile', () => {
   });
 
   it('shows the blank list elements when the list is blank', () => {
-    render(<FavoritesCollectionTile {...blankListProps} />);
+    render(<FavoritesCollectionTile {...blankListProps} variant="lists" />);
     expect(screen.getByText('Create your first List.')).toBeInTheDocument();
     expect(screen.queryByText('New List')).not.toBeInTheDocument();
   });
 
   it('shows the correct empty list when data is provided', () => {
-    render(<FavoritesCollectionTile {...emptyListProps} />);
+    render(<FavoritesCollectionTile {...emptyListProps} variant="lists" />);
     expect(screen.getByText('You have not added any objects to your List yet.')).toBeInTheDocument();
   });
 
   it('shows the correct translation text when formatlotStr is provided', () => {
-    render(<FavoritesCollectionTile {...translationedProps} />);
+    render(<FavoritesCollectionTile {...translationedProps} variant="lists" />);
     expect(screen.getByText('列表中有 0 件拍品')).toBeInTheDocument();
     expect(screen.getByText('创建您的第一个列表')).toBeInTheDocument();
   });
 
   it('calls the onEdit function when the edit list button is clicked', () => {
     const mockOnEdit = vi.fn();
-    render(<FavoritesCollectionTile {...{ ...defaultProps, onEdit: mockOnEdit }} />);
+    render(<FavoritesCollectionTile {...{ ...defaultProps, onEdit: mockOnEdit, variant: 'lists' }} />);
     const menuTrigger = screen.getByTestId('menu-trigger');
 
     act(() => {
@@ -139,7 +135,7 @@ describe('FavoritesCollectionTile', () => {
 
   it('calls formatlotStr and displays its output correctly', () => {
     const mockFormatlotStr = vi.fn((count) => `Formatted: ${count}`);
-    render(<FavoritesCollectionTile {...{ ...defaultProps, formatlotStr: mockFormatlotStr }} />);
+    render(<FavoritesCollectionTile {...{ ...defaultProps, formatlotStr: mockFormatlotStr, variant: 'lists' }} />);
     expect(screen.getByText('Formatted: 2')).toBeInTheDocument();
     expect(mockFormatlotStr).toHaveBeenCalledWith(2);
   });

@@ -13,14 +13,6 @@ export interface FavoritesCollectionTileProps extends ComponentProps<'div'> {
    */
   id: string;
   /**
-   * Lots display text en/zh
-   */
-  lotText?: string;
-  /**
-   * Lots display text en/zh
-   */
-  lotsText?: string;
-  /**
    * Lot empty Favorites text en/zh
    */
   emptyFavoritesText?: string;
@@ -53,17 +45,13 @@ export interface FavoritesCollectionTileProps extends ComponentProps<'div'> {
    */
   listImageUrl: string;
   /**
-   * Whether this card is in favorites view
+   * Whether this card is in favorites view or lists view
    */
-  isFavorites?: boolean;
+  variant: 'favorites' | 'lists';
   /**
-   * Whether this card is in lists view
+   * href to render within the navigation item, renders <Link> by default
    */
-  isLists?: boolean;
-  /**
-   * Element to render within the navigation item, renders <Link> by default
-   */
-  element?: ElementType<LinkProps>;
+  href?: ElementType<LinkProps>;
   /**
    * imageLink
    */
@@ -79,7 +67,7 @@ export interface FavoritesCollectionTileProps extends ComponentProps<'div'> {
   /**
    * Function to modify strings for lot string translation
    */
-  formatlotStr?: (count: number) => string;
+  formatlotStr?: (count: number, lotText?: string) => string;
 }
 
 /**
@@ -100,12 +88,9 @@ const FavoritesCollectionTile = memo(
         count,
         name,
         listImageUrl,
-        isLists = false,
-        isFavorites = false,
-        element: Component = Link,
+        variant,
+        href: Component = Link,
         imageLink,
-        lotText = 'LOT',
-        lotsText = 'LOTS',
         emptyFavoritesText = 'You have not added any objects to your Favorites yet.',
         emptyListsText = 'You have not added any objects to your List yet.',
         blankListText = 'Create your first List.',
@@ -113,7 +98,7 @@ const FavoritesCollectionTile = memo(
         deleteListText = 'Delete List',
         onEdit,
         onDelete,
-        formatlotStr,
+        formatlotStr = (count, lotText = count > 1 ? 'LOTS' : 'LOT') => `${count} ${lotText}`,
         ...props
       },
       ref,
@@ -130,7 +115,7 @@ const FavoritesCollectionTile = memo(
               <div className={`${baseClassName}__info`}>
                 {hasListData && (
                   <Text element="span" className={`${baseClassName}__count`} variant={TextVariants.body3}>
-                    {formatlotStr && hasListData ? formatlotStr(count) : `${count} ${count === 1 ? lotText : lotsText}`}
+                    {formatlotStr && hasListData && formatlotStr(count)}
                   </Text>
                 )}
                 {
@@ -140,24 +125,29 @@ const FavoritesCollectionTile = memo(
                 }
               </div>
               <>
-                {hasListData && (!isFavorites || (isFavorites && !isCountEmpty)) && (
+                {hasListData && (variant === 'lists' || (variant === 'favorites' && !isCountEmpty)) && (
                   <Popover.Root>
                     <Popover.Trigger asChild>
-                      <div className={`${baseClassName}__actions`} data-testid="menu-trigger">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"
-                            fill="currentColor"
-                          />
-                          <path
-                            d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z"
-                            fill="currentColor"
-                          />
-                          <path
-                            d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z"
-                            fill="currentColor"
-                          />
-                        </svg>
+                      <div
+                        className={`${baseClassName}__actions`}
+                        data-testid="menu-trigger"
+                        tabIndex={0}
+                        role="button"
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter') {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            (event.target as HTMLElement).click();
+                          }
+                        }}
+                      >
+                        <Icon
+                          icon="Icon"
+                          width={24}
+                          height={24}
+                          color="$dark-gray"
+                          className={`${baseClassName}__icon-rotate`}
+                        />
                       </div>
                     </Popover.Trigger>
                     <Popover.Portal>
@@ -186,12 +176,12 @@ const FavoritesCollectionTile = memo(
             </div>
 
             <Component href={imageLink} className={`${baseClassName}__media-link`} tabIndex={0}>
-              {isCountEmpty && isFavorites && (
+              {isCountEmpty && variant === 'favorites' && (
                 <div className={`${baseClassName}__media-container`} data-testid="favorites" aria-label="Favorites">
                   <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--favorites`)}>
                     <div className={`${baseClassName}__empty__content`}>
                       <Icon
-                        icon="FavoriteOutline"
+                        icon="Favorite"
                         width={24}
                         height={24}
                         color="$dark-gray"
@@ -203,12 +193,12 @@ const FavoritesCollectionTile = memo(
                 </div>
               )}
 
-              {(isCountEmpty || !hasListData) && isLists && (
+              {(isCountEmpty || !hasListData) && variant === 'lists' && (
                 <div className={`${baseClassName}__media-container`} data-testid="list" aria-label="Lists">
                   <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--list`)}>
                     <div className={`${baseClassName}__empty__content`}>
                       <Icon
-                        icon={hasListData && isCountEmpty ? 'FavoriteOutline' : 'Plus'}
+                        icon={hasListData && isCountEmpty ? 'Favorite' : 'Add'}
                         width={24}
                         height={24}
                         color="$dark-gray"
@@ -243,7 +233,5 @@ const FavoritesCollectionTile = memo(
     },
   ),
 );
-
-FavoritesCollectionTile.displayName = 'FavoritesCollectionTile';
 
 export default FavoritesCollectionTile;
