@@ -1,7 +1,7 @@
-import { Ref, forwardRef, memo } from 'react';
+import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgSearchProps {
+interface SvgSearchProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -10,7 +10,7 @@ interface SvgSearchProps {
 }
 
 const SvgSearch = memo(
-  forwardRef((props: SvgSearchProps, ref: Ref<SVGSVGElement>) => {
+  forwardRef<SVGSVGElement, SvgSearchProps>((props, ref) => {
     const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
     const title = propsTitle || 'SvgSearch';
     const titleId = propsTitleId || kebabCase(title);
@@ -19,7 +19,7 @@ const SvgSearch = memo(
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
-        viewBox="0 0 32 32"
+        viewBox="0 0 24 24"
         height={height}
         width={width}
         role="img"
@@ -31,7 +31,7 @@ const SvgSearch = memo(
         <path
           fill={color}
           fillRule="evenodd"
-          d="M19.76 17.618A9.001 9.001 0 0 0 6.364 5.636a9 9 0 0 0 11.982 13.396l1.453 1.453a1 1 0 0 0 0 1.415l3.535 3.535a2 2 0 1 0 2.829-2.828l-3.536-3.536a1 1 0 0 0-1.414 0zm-2.082-.668a7 7 0 1 0-9.9-9.9 7 7 0 0 0 9.9 9.9"
+          d="M14.906 16.32a8 8 0 1 1 1.414-1.414l4.155 4.155a.5.5 0 0 1 0 .707l-.707.707a.5.5 0 0 1-.707 0zM16 10a6 6 0 1 1-12 0 6 6 0 0 1 12 0"
           clipRule="evenodd"
         />
       </svg>

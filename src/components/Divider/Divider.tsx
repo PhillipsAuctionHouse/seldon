@@ -17,12 +17,17 @@ export interface DividerProps extends ComponentProps<'div'> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-divider--overview)
  */
-const Divider = forwardRef<HTMLDivElement, DividerProps>(({ className, element: CustomElement, ...props }) => {
+const Divider = forwardRef<HTMLDivElement, DividerProps>(({ className, element: CustomElement, ...props }, ref) => {
   const Component = CustomElement || 'div';
   const { className: baseClassName } = getCommonProps(props, 'Divider');
 
   return (
-    <Component className={classNames(baseClassName, className)} {...props} data-testid={`divider-${props.id}`}>
+    <Component
+      className={classNames(baseClassName, className)}
+      {...props}
+      data-testid={`divider-${props.id}`}
+      ref={ref}
+    >
       <hr className={`${baseClassName}-line`} />
     </Component>
   );

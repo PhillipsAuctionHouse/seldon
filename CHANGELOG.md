@@ -1,3 +1,17 @@
+# [1.138.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.137.1...v1.138.0) (2025-05-01)
+
+
+### Features
+
+* **Icons:** L3-3417 update icon set ([#586](https://github.com/PhillipsAuctionHouse/seldon/issues/586)) ([9ea7c63](https://github.com/PhillipsAuctionHouse/seldon/commit/9ea7c63e5539bfebaea3638df0c7ad63834138bb))
+
+## [1.137.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.137.0...v1.137.1) (2025-04-29)
+
+
+### Bug Fixes
+
+* **ObjectTile:** L3-5631 reserve space for 'No Reserve' on ObjectTile ([#605](https://github.com/PhillipsAuctionHouse/seldon/issues/605)) ([321a1f9](https://github.com/PhillipsAuctionHouse/seldon/commit/321a1f900ffdcd1f46c2f5c5ad936ada92d34566))
+
 # [1.137.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.136.1...v1.137.0) (2025-04-29)
 
 
