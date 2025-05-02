@@ -14,9 +14,6 @@
   &__badge {
     color: $widget-red;
     display: block; // Ensures the badge can be sized correctly
-  }
-
-  &__badge:empty {
     min-height: 1rem;
   }
 

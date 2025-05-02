@@ -18,6 +18,10 @@
     outline: none;
   }
 
+  .#{$px}-icon-close-x:hover {
+    color: $white;
+  }
+
   @media (max-width: $breakpoint-sm) {
     max-width: 100%;
   }

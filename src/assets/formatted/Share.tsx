@@ -1,7 +1,7 @@
-import { Ref, forwardRef, memo } from 'react';
+import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgShareProps {
+interface SvgShareProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -10,7 +10,7 @@ interface SvgShareProps {
 }
 
 const SvgShare = memo(
-  forwardRef((props: SvgShareProps, ref: Ref<SVGSVGElement>) => {
+  forwardRef<SVGSVGElement, SvgShareProps>((props, ref) => {
     const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
     const title = propsTitle || 'SvgShare';
     const titleId = propsTitleId || kebabCase(title);
@@ -19,7 +19,7 @@ const SvgShare = memo(
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
-        viewBox="0 0 12 12"
+        viewBox="0 0 24 24"
         height={height}
         width={width}
         role="img"
@@ -28,14 +28,8 @@ const SvgShare = memo(
         {...props}
       >
         {title ? <title id={titleId}>{title}</title> : null}
-        <path
-          fill={color}
-          d="M6 .595 8.515 3.11a.375.375 0 0 1-.53.53l-1.61-1.61v6.22a.375.375 0 0 1-.75 0V2.03l-1.61 1.61a.375.375 0 1 1-.53-.53z"
-        />
-        <path
-          fill={color}
-          d="M3 5.625a.75.75 0 0 0-.75.75V9.75c0 .414.336.75.75.75h6a.75.75 0 0 0 .75-.75V6.375a.75.75 0 0 0-.75-.75H7.875a.375.375 0 0 1 0-.75H9a1.5 1.5 0 0 1 1.5 1.5V9.75a1.5 1.5 0 0 1-1.5 1.5H3a1.5 1.5 0 0 1-1.5-1.5V6.375a1.5 1.5 0 0 1 1.5-1.5h1.125a.375.375 0 1 1 0 .75z"
-        />
+        <path fill={color} d="M18.133 6.726 12 1.708 5.867 6.726l1.266 1.548L11 5.11V16h2V5.11l3.867 3.164z" />
+        <path fill={color} d="M4 11v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9h-5v2h3v7H6v-7h3v-2z" />
       </svg>
     );
   }),
