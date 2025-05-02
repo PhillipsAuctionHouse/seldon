@@ -24,9 +24,9 @@ export default meta;
 
 export const ButtonWithIcon = (props: ButtonProps) => (
   <Button {...props}>
-    {!props.isIconLast ? <Icon icon="Plus" /> : null}
+    {!props.isIconLast ? <Icon icon="Add" /> : null}
     This is the title
-    {props.isIconLast ? <Icon icon="Plus" /> : null}
+    {props.isIconLast ? <Icon icon="Add" /> : null}
   </Button>
 );
 

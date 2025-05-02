@@ -56,7 +56,7 @@ const Drawer = ({ className, isOpen = false, onClose = noOp, children, ...props 
               data-testid="drawer-close"
               variant={ButtonVariants.tertiary}
             >
-              <Icon icon="Close" />
+              <Icon icon="CloseX" color="currentColor" />
             </IconButton>
           </Dialog.Close>
           {children}
