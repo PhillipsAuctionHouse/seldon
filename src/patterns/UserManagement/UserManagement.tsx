@@ -5,7 +5,6 @@ import classnames from 'classnames';
 import { AuthState } from './types';
 import { Text, TextVariants } from '../../components/Text';
 import { Icon } from '../../components/Icon';
-import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 
 export interface UserManagementProps extends ComponentProps<'div'> {
   /**
@@ -57,16 +56,6 @@ const UserManagement = forwardRef<HTMLDivElement, UserManagementProps>(
 
     const isLoggedIn = authState === AuthState.LoggedIn;
     const shouldShowAccountDetails = authState !== AuthState.Loading;
-    const ResponsiveAccountIcon = () => (
-      <>
-        <SSRMediaQuery.Media lessThan="md">
-          <Icon icon="Account" className={`${baseClassName}__account-icon`} height="1.5rem" width="1.5rem" />
-        </SSRMediaQuery.Media>
-        <SSRMediaQuery.Media greaterThanOrEqual="md">
-          <Icon icon="Account" className={`${baseClassName}__account-icon`} height="1rem" width="1rem" />
-        </SSRMediaQuery.Media>
-      </>
-    );
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
@@ -74,12 +63,12 @@ const UserManagement = forwardRef<HTMLDivElement, UserManagementProps>(
           <>
             {isLoggedIn ? (
               <AccountDetailsComponent className={`${baseClassName}__login`} href={href} disabled={disabled}>
-                <ResponsiveAccountIcon />
+                <Icon icon="Account" className={`${baseClassName}__account-icon`} height="100%" width="100%" />
                 <Text variant={TextVariants.body3}>{accountLabel}</Text>
               </AccountDetailsComponent>
             ) : (
               <button className={`${baseClassName}__login`} onClick={onLogin} disabled={disabled}>
-                <ResponsiveAccountIcon />
+                <Icon icon="Account" className={`${baseClassName}__account-icon`} height="100%" width="100%" />
                 <Text variant={TextVariants.body3}>{loginLabel}</Text>
               </button>
             )}
