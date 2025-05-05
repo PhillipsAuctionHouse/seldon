@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import type { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import { Icon } from '../../components/Icon';
@@ -14,6 +15,14 @@ import UserManagement from '../../patterns/UserManagement/UserManagement';
 import { SupportedLanguages } from '../../types/commonTypes';
 import { px } from '../../utils';
 import Header, { HeaderProps } from './Header';
+
+const generateLoremIpsum = (numOfParagraphs = 10) => {
+  let loremIpsum = '';
+  for (let i = 0; i < numOfParagraphs; i++) {
+    loremIpsum += faker.lorem.paragraph();
+  }
+  return loremIpsum;
+};
 
 const fetchData = async (searchQuery: string) => {
   console.log('searchQuery', searchQuery);
@@ -317,12 +326,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
         <LanguageSelector onLanguageChange={setCurrentLanguage} currentLanguage={currentLanguage} />
         <UserManagement authState={authState} onLogin={() => console.log('login')} href="/account" />
       </Header>
-      {/* {generateLoremIpsum(50)} */}
-      <select style={{ marginTop: '200px' }}>
-        <option value="en">English</option>
-        <option value="es">Spanish</option>
-        <option value="fr">French</option>
-      </select>
+      {generateLoremIpsum(50)}
     </div>
   );
 };
