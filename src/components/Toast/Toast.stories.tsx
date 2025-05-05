@@ -5,7 +5,6 @@ import Button from '../Button/Button';
 import { useToast } from './useToast';
 import { ButtonVariants } from '../Button/types';
 
-// More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
   title: 'Components/Toast',
   component: Toast,
@@ -13,20 +12,45 @@ const meta = {
 } satisfies Meta<typeof Toast>;
 
 export default meta;
+
 export const Playground = () => {
   return (
-    <div style={{ padding: '20px' }}>
-      <div style={{ display: 'flex', gap: '10px' }}></div>
+    <div
+      style={{
+        height: '20vh',
+      }}
+    >
+      <Toast title="Basic Toast" open={true} defaultOpen={true} onOpenChange={() => void 0} />
+
+      <Toast
+        title="Toast with Action"
+        open={true}
+        defaultOpen={true}
+        onOpenChange={() => void 0}
+        action={
+          <Button
+            onClick={() => {
+              alert('View Details clicked!');
+            }}
+            variant={ButtonVariants.link}
+          >
+            View Details
+          </Button>
+        }
+      />
     </div>
   );
 };
 
-// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-Playground.args = {
-  children: 'Hi There',
+Playground.parameters = {
+  docs: {
+    description: {
+      story:
+        'This is a static example of the Toast component. For a complete example, check the Interactive section.',
+    },
+  },
 };
 
-Playground.argTypes = {};
 const ToastDemo = () => {
   const toast = useToast();
 
@@ -47,7 +71,7 @@ const ToastDemo = () => {
           })
         }
       >
-        Click here for text only toast
+        Click for basic toast
       </Button>
       <Button
         onClick={() =>
@@ -62,7 +86,7 @@ const ToastDemo = () => {
           })
         }
       >
-        Click here for text toast with action
+        Click for toast with action
       </Button>
     </div>
   );

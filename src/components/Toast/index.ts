@@ -1,1 +1,3 @@
-export { default as Toast, type ToastProps } from './Toast';
+export { default as Toast } from './Toast';
+export { ToastProvider } from './ToastContextProvider';
+export { useToast } from './useToast';

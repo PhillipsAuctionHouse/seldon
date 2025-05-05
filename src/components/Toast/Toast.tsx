@@ -7,17 +7,25 @@ import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 
 export interface PrimitiveToastProps extends PrimitiveToast.ToastProps {
-  title?: string;
+  title: string;
   action?: ReactNode;
 }
 /**
  * ## Overview
  *
- * Overview of this widget
+ * Toast is a non-disruptive message component that appears temporarily to provide
+ * brief notifications to the user. It contains a title, a close button, and an optional action button or link.
+ *
+ * Use the `useToast` hook to trigger toast notifications programmatically from any component.
+ *
+ * This component requires a `ToastProvider` to be present in your application. Make sure to
+ * wrap your application or the relevant section with the `ToastProvider` component.
  *
  * [Figma Link](https://www.figma.com/design/f3vm6hItGjnsmkJxLLbe3P/MANAGE---MUI-v5.9.0--24?node-id=6586-47081&m=dev)
  *
- * [Storybook Link](Point back to yourself here)
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-toast--overview)
+ *
+ * [Radix UI Toast Documentation](https://www.radix-ui.com/docs/primitives/components/toast)
  */
 const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(({ className, title, action, ...props }, ref) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Toast');
@@ -25,8 +33,7 @@ const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(({ className, title
   return (
     <PrimitiveToast.Root {...commonProps} className={classnames(baseClassName, className)} ref={ref}>
       <div className={`${baseClassName}__content`}>
-        {title && <PrimitiveToast.Title>{title}</PrimitiveToast.Title>}
-
+        <PrimitiveToast.Title>{title}</PrimitiveToast.Title>
         {action && (
           <PrimitiveToast.Action asChild altText="Toast action" className={`${baseClassName}__action`}>
             {action}
@@ -34,8 +41,8 @@ const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(({ className, title
         )}
       </div>
       <PrimitiveToast.Close className={`${baseClassName}__close`} aria-label="Close" asChild>
-        <IconButton variant={ButtonVariants.tertiary}>
-          <Icon icon="Close"></Icon>
+        <IconButton variant={ButtonVariants.link}>
+          <Icon icon="CloseX" title="Close" color="$white" />
         </IconButton>
       </PrimitiveToast.Close>
     </PrimitiveToast.Root>

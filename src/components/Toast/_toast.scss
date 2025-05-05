@@ -2,9 +2,10 @@
 
 .#{$px}-toast {
   align-items: center;
-  background-color: $off-white;
+  background-color: $primary-black;
   border-radius: 4px;
   box-shadow: 0 6px 14px 0 #3232321f;
+  color: $white;
   column-gap: $spacing-sm;
   display: grid;
   grid-template-areas: 'title action' 'description action';
@@ -45,7 +46,6 @@
   }
 }
 
-// Animation keyframes
 @keyframes hide {
   from {
     opacity: 1;
@@ -92,7 +92,5 @@
   outline: none;
   padding: var(--viewport-padding);
   position: fixed;
-
-  // width: 390px;
   z-index: 1234567890;
 }
