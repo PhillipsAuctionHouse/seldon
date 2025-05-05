@@ -6,9 +6,3 @@
   display: flex;
   gap: $spacing-micro;
 }
-
-.#{$px}-countdown--compact .#{$px}-duration {
-  @include Montserrat;
-
-  color: $countdown-compact;
-}

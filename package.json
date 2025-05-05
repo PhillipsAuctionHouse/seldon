@@ -1,6 +1,6 @@
 {
   "name": "@phillips/seldon",
-  "version": "1.138.0",
+  "version": "1.140.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/PhillipsAuctionHouse/seldon"
@@ -45,6 +45,7 @@
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-collapsible": "^1.1.0",
     "@radix-ui/react-dialog": "^1.1.4",
+    "@radix-ui/react-popover": "^1.1.7",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-tabs": "^1.1.1",
     "@types/dompurify": "^3.0.5",
