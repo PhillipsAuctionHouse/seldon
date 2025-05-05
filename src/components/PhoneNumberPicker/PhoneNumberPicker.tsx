@@ -1,8 +1,8 @@
-import { getCountries, getCountryCallingCode, CountryCode } from 'libphonenumber-js';
-import React, { useMemo, useCallback } from 'react';
+import classnames from 'classnames';
+import { CountryCode, getCountries, getCountryCallingCode } from 'libphonenumber-js';
+import React, { useCallback, useMemo } from 'react';
 import { getCommonProps } from '../../utils';
 import { ComboBox } from '../ComboBox';
-import classnames from 'classnames';
 
 export interface PhoneNumberPickerProps {
   /**
@@ -16,7 +16,7 @@ export interface PhoneNumberPickerProps {
   /**
    * Label for the ComboBox.
    */
-  label: string;
+  labelText: string;
   /**
    * Optional placeholder text for the input.
    */
@@ -31,8 +31,15 @@ export interface PhoneNumberPickerProps {
   setInputValue: (value: string) => void;
 }
 
+/**
+ * ## Overview
+ *
+ * Overview of PhoneNumberPicker component
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-PhoneNumberPicker--overview)
+ */
 const PhoneNumberPicker = React.forwardRef<HTMLDivElement, PhoneNumberPickerProps>(
-  ({ inputValue, label, className, id, setInputValue, ...props }, ref) => {
+  ({ inputValue, labelText, className, id, setInputValue, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'PhoneNumberPicker');
     const countries = useMemo(() => getCountries(), []);
     const getCountryCode = useCallback((countryCode: CountryCode) => getCountryCallingCode(countryCode), []);
@@ -53,7 +60,7 @@ const PhoneNumberPicker = React.forwardRef<HTMLDivElement, PhoneNumberPickerProp
           setInputValue={(value) => {
             setInputValue(value.split(' ').pop() || '');
           }}
-          label={label}
+          labelText={labelText}
           placeholder={props.placeholder}
         />
       </div>

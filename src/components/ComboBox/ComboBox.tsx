@@ -1,9 +1,11 @@
-import React from 'react';
-import classnames from 'classnames';
-import { getCommonProps } from '../../utils';
-import { Command, CommandInput, CommandList, CommandItem, CommandGroup } from 'cmdk';
-import { Icon } from '../Icon';
+import { useClickOutside } from '@mantine/hooks';
 import * as Popover from '@radix-ui/react-popover';
+import classnames from 'classnames';
+import { Command, CommandGroup, CommandInput, CommandItem, CommandList } from 'cmdk';
+import React from 'react';
+import { getCommonProps } from '../../utils';
+import { Icon } from '../Icon';
+
 export interface ComboBoxProps {
   /**
    * List of options to be displayed in the ComboBox.
@@ -23,7 +25,7 @@ export interface ComboBoxProps {
   /**
    * Label for the ComboBox.
    */
-  label: string;
+  labelText: string;
   /**
    * Optional placeholder text for the input.
    */
@@ -39,52 +41,32 @@ export interface ComboBoxProps {
 }
 
 const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboBox(
-  { options = [], className, id, label, placeholder, inputValue = '', setInputValue, ...props },
+  { options = [], className, id, labelText, placeholder, inputValue = '', setInputValue, ...props },
   ref,
 ) {
   const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'ComboBox');
   const [isOpen, setIsOpen] = React.useState(false);
+  const [control, setControl] = React.useState<HTMLDivElement | null>(null);
+  const [dropdown, setDropdown] = React.useState<HTMLDivElement | null>(null);
 
-  const containerRef = React.useRef<HTMLDivElement | null>(null);
   const itemRefs = React.useRef<Record<string, HTMLDivElement | null>>({});
   const sanitizedOptions = options.map((option) => String(option.value).toLowerCase());
 
-  React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const popoverContent = document.querySelector(`.${baseClassName}__content`);
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node) &&
-        popoverContent &&
-        !popoverContent.contains(event.target as Node)
-      ) {
+  useClickOutside(
+    () => {
+      if (!sanitizedOptions.some((option) => option === inputValue.toLowerCase())) {
         setIsOpen(false);
-        if (!sanitizedOptions.some((option) => option === inputValue.toLowerCase())) {
-          setInputValue('');
-        }
+        setInputValue('');
       }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [inputValue, sanitizedOptions, baseClassName, setInputValue]);
+    },
+    null,
+    [control, dropdown],
+  );
 
   return (
-    <div
-      ref={(node) => {
-        containerRef.current = node;
-        if (typeof ref === 'function') ref(node);
-        else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
-      }}
-      className={classnames(baseClassName, className)}
-      id={id}
-      {...commonProps}
-      {...props}
-    >
+    <div ref={ref} className={classnames(baseClassName, className)} id={id} {...commonProps} {...props}>
       <label htmlFor={`${id}-input`} className={`${baseClassName}__label`} data-testid={`${id}-label`}>
-        {label}
+        {labelText}
       </label>
       <Command
         loop
@@ -96,6 +78,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
             }
           }, 0);
         }}
+        ref={setControl}
       >
         <Popover.Root open={true}>
           <Popover.Trigger asChild>
@@ -123,7 +106,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
               onClick={() => setInputValue('')}
               aria-label={`${id}-clear`}
             >
-              <Icon color="$primary-black" icon="Close" height={18} width={18} className={`${baseClassName}__icon`} />
+              <Icon color="$primary-black" icon="CloseX" height={18} width={18} className={`${baseClassName}__icon`} />
             </button>
           )}
           <button
@@ -136,30 +119,32 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
           </button>
           <Popover.Portal>
             <Popover.Content className={`${baseClassName}__content`} aria-label={`${id}-content`}>
-              <CommandList className={`${baseClassName}__list`} hidden={!isOpen}>
-                {sanitizedOptions.some((option) => option.toLowerCase().includes(inputValue.toLowerCase())) ? (
-                  <CommandGroup>
-                    {sanitizedOptions.map((option, ind) =>
-                      option.toLowerCase().includes(inputValue.toLowerCase()) ? (
-                        <CommandItem
-                          className={`${baseClassName}__item`}
-                          key={`${option}-${ind}-key`}
-                          value={options[ind]?.label ? `${options[ind]?.label} ${option}` : option}
-                          ref={(el) => (itemRefs.current[option] = el)}
-                          onSelect={(currentValue) => {
-                            setInputValue(currentValue);
-                            setIsOpen(false);
-                          }}
-                        >
-                          {options[ind]?.label ? `${options[ind]?.label} ${option}` : option}
-                        </CommandItem>
-                      ) : null,
-                    )}
-                  </CommandGroup>
-                ) : (
-                  <Command.Empty>No Options.</Command.Empty>
-                )}
-              </CommandList>
+              {isOpen && (
+                <CommandList className={`${baseClassName}__list`} ref={setDropdown}>
+                  {sanitizedOptions.some((option) => option.toLowerCase().includes(inputValue.toLowerCase())) ? (
+                    <CommandGroup>
+                      {sanitizedOptions.map((option, ind) =>
+                        option.toLowerCase().includes(inputValue.toLowerCase()) ? (
+                          <CommandItem
+                            className={`${baseClassName}__item`}
+                            key={`${option}-${ind}-key`}
+                            value={options[ind]?.label ? `${options[ind]?.label} ${option}` : option}
+                            ref={(el) => (itemRefs.current[option] = el)}
+                            onSelect={(currentValue) => {
+                              setInputValue(currentValue);
+                              setIsOpen(false);
+                            }}
+                          >
+                            {options[ind]?.label ? `${options[ind]?.label} ${option}` : option}
+                          </CommandItem>
+                        ) : null,
+                      )}
+                    </CommandGroup>
+                  ) : (
+                    <Command.Empty>No Options.</Command.Empty>
+                  )}
+                </CommandList>
+              )}
             </Popover.Content>
           </Popover.Portal>
         </Popover.Root>

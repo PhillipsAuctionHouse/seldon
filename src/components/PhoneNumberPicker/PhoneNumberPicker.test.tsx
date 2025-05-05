@@ -2,12 +2,12 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
 
-import PhoneNumberPicker, { PhoneNumberPickerProps } from './PhoneNumberPicker';
 import { runCommonTests } from '../../utils/testUtils';
+import PhoneNumberPicker, { PhoneNumberPickerProps } from './PhoneNumberPicker';
 
 describe('PhoneNumberPicker', () => {
   runCommonTests(PhoneNumberPicker, 'PhoneNumberPicker');
-  const reqProps = { label: 'Test Phone Number', id: 'test-id', setInputValue: () => vitest.fn(), inputValue: '' };
+  const reqProps = { labelText: 'Test Phone Number', id: 'test-id', setInputValue: () => vitest.fn(), inputValue: '' };
 
   it('should be able to select country with country code and only called with country code value', async () => {
     const mockSetInputValue = vi.fn();
@@ -46,7 +46,9 @@ describe('PhoneNumberPicker', () => {
       const [inputValue, setInputValue] = useState('');
       return <PhoneNumberPicker {...props} inputValue={inputValue} setInputValue={setInputValue} />;
     };
-    render(<PhoneNumberPickerWrapper label="Test Label" id="test-id" inputValue="" setInputValue={() => undefined} />);
+    render(
+      <PhoneNumberPickerWrapper labelText="Test Label" id="test-id" inputValue="" setInputValue={() => undefined} />,
+    );
 
     const input = screen.getByTestId('test-id-combobox-input');
     await userEvent.type(input, '+1');

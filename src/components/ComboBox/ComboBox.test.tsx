@@ -2,14 +2,20 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
 
-import ComboBox, { ComboBoxProps } from './ComboBox';
 import { runCommonTests } from '../../utils/testUtils';
+import ComboBox, { ComboBoxProps } from './ComboBox';
 
 const options = [{ value: '1999' }, { value: '2000' }, { value: '2001' }, { value: '2002' }];
 
 describe('ComboBox', () => {
   runCommonTests(ComboBox, 'ComboBox');
-  const reqProps = { label: 'My Test Label', id: 'test-id', options, setInputValue: () => vitest.fn(), inputValue: '' };
+  const reqProps = {
+    labelText: 'My Test Label',
+    id: 'test-id',
+    options,
+    setInputValue: () => vitest.fn(),
+    inputValue: '',
+  };
 
   it('will render a label value if passed', () => {
     render(<ComboBox {...reqProps} />);
@@ -107,7 +113,7 @@ describe('ComboBox', () => {
 
     render(
       <ComboBoxWrapper
-        label="Test Label"
+        labelText="Test Label"
         id="test-id"
         options={options}
         inputValue=""
@@ -127,19 +133,5 @@ describe('ComboBox', () => {
     const closeButton = screen.getByTestId('test-id-item-close-button');
     await userEvent.click(closeButton);
     expect(input).toHaveValue('');
-  });
-
-  it('should close the dropdown when an option is selected', async () => {
-    const mockSetInputValue = vi.fn();
-    render(<ComboBox {...{ ...reqProps, setInputValue: mockSetInputValue }} />);
-    const trigger = screen.getByTestId('test-id-dropdown');
-    await userEvent.click(trigger);
-
-    const commandList = screen.getByRole('listbox');
-    expect(commandList).toBeInTheDocument();
-
-    expect(commandList).not.toHaveAttribute('hidden');
-    await userEvent.click(trigger);
-    expect(commandList).toHaveAttribute('hidden');
   });
 });

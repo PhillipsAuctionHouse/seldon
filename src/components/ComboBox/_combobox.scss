@@ -7,7 +7,6 @@
   &__input {
     border: 1px solid $keyline-gray;
     border-radius: 5px;
-    height: 40px;
     outline: none;
     padding: $padding-xsm;
     width: 100%;
@@ -32,7 +31,7 @@
     color: $text-color;
     position: absolute;
     right: 34px;
-    top: 28px;
+    top: 32px;
   }
 
   &__dropdown-button {
@@ -40,7 +39,7 @@
     color: $text-color;
     position: absolute;
     right: 3px;
-    top: 28px;
+    top: 32px;
   }
 
   &__icon {
