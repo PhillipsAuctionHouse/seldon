@@ -27,7 +27,8 @@ Playground.args = {
 Playground.argTypes = {
   variant: {
     description: 'Determines if is in favorites view or lists view',
-    control: { type: 'select', options: ['favorites', 'lists'] },
+    control: { type: 'select' },
+    options: ['favorites', 'lists'],
   },
   element: {
     description: 'Wrapped element to pass in for the link',
