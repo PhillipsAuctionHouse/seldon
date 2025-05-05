@@ -41,21 +41,21 @@ export interface FavoritesCollectionTileProps extends ComponentProps<'div'> {
    */
   name: string;
   /**
-   * Image URL for the list
+   * Preview image for the list
    */
-  listImageUrl: string;
+  imageSrc: string;
   /**
    * Whether this card is in favorites view or lists view
    */
   variant: 'favorites' | 'lists';
   /**
-   * href to render within the navigation item, renders <Link> by default
+   * React component to render within the navigation item, renders <Link> by default
    */
-  href?: ElementType<LinkProps>;
+  element?: ElementType<LinkProps>;
   /**
-   * imageLink
+   * Link to navigate to when the tile is clicked
    */
-  imageLink?: string;
+  href?: string;
   /**
    * Callback function for editList menu item click
    */
@@ -87,10 +87,10 @@ const FavoritesCollectionTile = memo(
         className,
         count,
         name,
-        listImageUrl,
+        imageSrc,
         variant,
-        href: Component = Link,
-        imageLink,
+        element: Component = Link,
+        href,
         emptyFavoritesText = 'You have not added any objects to your Favorites yet.',
         emptyListsText = 'You have not added any objects to your List yet.',
         blankListText = 'Create your first List.',
@@ -175,7 +175,7 @@ const FavoritesCollectionTile = memo(
               </>
             </div>
 
-            <Component href={imageLink} className={`${baseClassName}__media-link`} tabIndex={0}>
+            <Component href={href} className={`${baseClassName}__media-link`} tabIndex={0}>
               {isCountEmpty && variant === 'favorites' && (
                 <div className={`${baseClassName}__media-container`} data-testid="favorites" aria-label="Favorites">
                   <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--favorites`)}>
@@ -219,7 +219,7 @@ const FavoritesCollectionTile = memo(
                     aspectRatio="1/1"
                     className={`${baseClassName}__media`}
                     objectFit="cover"
-                    src={listImageUrl}
+                    src={imageSrc}
                     style={{
                       cursor: 'pointer',
                     }}

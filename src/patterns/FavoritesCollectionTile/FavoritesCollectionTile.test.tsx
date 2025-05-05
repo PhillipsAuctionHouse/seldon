@@ -7,23 +7,23 @@ const defaultProps = {
   id: 'favorites-collection-tile-1',
   count: 2,
   name: 'New List',
-  listImageUrl: 'https://via.placeholder.com/400',
+  imageSrc: 'https://via.placeholder.com/400',
 };
 const blankListProps = {
   id: 'favorites-collection-tile-2',
-  listImageUrl: 'https://via.placeholder.com/400',
+  imageSrc: 'https://via.placeholder.com/400',
   count: 0,
   name: '',
 };
 const emptyListProps = {
   id: 'favorites-collection-tile-3',
-  listImageUrl: 'https://via.placeholder.com/400',
+  imageSrc: 'https://via.placeholder.com/400',
   count: 0,
   name: 'Test List',
 };
 const translationedProps = {
   id: 'favorites-collection-tile-4',
-  listImageUrl: 'https://via.placeholder.com/400',
+  imageSrc: 'https://via.placeholder.com/400',
   count: 0,
   name: '某人列表',
   emptyListsText: '创建您的第一个列表',
