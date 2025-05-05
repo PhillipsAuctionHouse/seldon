@@ -3,8 +3,7 @@ import React, { ComponentProps, forwardRef, useState } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import { SSRMediaQuery } from '../../../providers/SeldonProvider/utils';
 import { HeaderContext } from '../../../site-furniture/Header/Header';
-import { findChildrenOfType, getCommonProps, px } from '../../../utils';
-import { closeActiveElement } from '../../../utils/index';
+import { findChildrenOfType, focusElementById, getCommonProps, px } from '../../../utils';
 import { AccordionItemVariant } from '../../Accordion';
 import Accordion from '../../Accordion/Accordion';
 import AccordionItem from '../../Accordion/AccordionItem';
@@ -52,6 +51,14 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
     const navListElement = findChildrenOfType<NavigationListProps>(children, NavigationList);
     const { closeMenu } = React.useContext(HeaderContext);
 
+    React.useEffect(() => {
+      if (isSubmenuOpened && navListElement && navListElement[0]?.props?.id) {
+        focusElementById(navListElement[0].props.id, true);
+      } else if (!isSubmenuOpened && navListElement && navListElement[0]?.props?.id) {
+        focusElementById(navListElement[0].props.id, false);
+      }
+    }, [isSubmenuOpened, navListElement]);
+
     return (
       <>
         <RemoveScroll enabled={isSubmenuOpened} allowPinchZoom removeScrollBar={false}>
@@ -79,10 +86,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
                 [`${baseClassName}--hovered`]: isSubmenuOpened,
               })}
               onClick={onClick}
-              onMouseOver={() => {
-                setIsSubmenuOpened(true);
-                closeActiveElement('SELECT');
-              }}
+              onMouseOver={() => setIsSubmenuOpened(true)}
               onMouseOut={() => setIsSubmenuOpened(false)}
               {...props}
             >
