@@ -1,3 +1,10 @@
+# [1.140.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.139.0...v1.140.0) (2025-05-05)
+
+
+### Features
+
+* **countdown:** L3-6269 added closing state ([#604](https://github.com/PhillipsAuctionHouse/seldon/issues/604)) ([00ad305](https://github.com/PhillipsAuctionHouse/seldon/commit/00ad305824694cfd50a58f7436fa00e3553e3d37))
+
 # [1.139.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.138.0...v1.139.0) (2025-05-05)
 
 
