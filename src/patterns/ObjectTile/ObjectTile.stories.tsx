@@ -18,7 +18,7 @@ export default meta;
 const args = {
   badgeText: 'No Reserve',
   badgeElement: () => <Icon icon="MagnificentSeven" width={150} height={24} />,
-  favoriteElement: () => <Icon icon="Favorite" />,
+  favoriteElement: () => <Icon icon="FavoriteActive" />,
   estimate: '$1,500,000 - $3,000,000',
   element: 'span',
   children: (

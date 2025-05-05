@@ -1,6 +1,8 @@
 @use '#scss/allPartials' as *;
 
-$social_icon_height: 1.75rem;
+$icon_width: 1.75rem;
+$icon_gap: 2rem;
+$num_icons: 5;
 
 .#{$px}-social {
   align-items: center;
@@ -56,29 +58,16 @@ $social_icon_height: 1.75rem;
       align-items: center;
       border-top: 1px solid #eae8e4;
       display: flex;
-      gap: 0 1.75rem;
-      justify-content: center;
+      gap: 0 $icon_gap;
+      justify-content: flex-start;
       list-style: none;
       margin: $spacing-md 0 0;
+      max-width: calc($num_icons * $icon_width + ($num_icons - 1) * $icon_gap);
       padding: $spacing-sm 0 0;
       width: 100%;
 
-      @include media($size-md) {
-        gap: 0 2rem;
-        justify-content: flex-start;
-        margin: $spacing-md 0 $spacing-md;
-        padding: $spacing-sm 0 0;
-        width: 100%;
-      }
-
       li {
         cursor: pointer;
-        height: $social_icon_height;
-
-        svg {
-          height: $social_icon_height;
-          width: $social_icon_height;
-        }
       }
     }
 

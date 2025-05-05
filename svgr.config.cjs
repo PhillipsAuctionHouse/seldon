@@ -33,28 +33,28 @@ module.exports = {
     const propsName = `${componentName}Props`;
 
     return tpl`
-    import { Ref, forwardRef, memo } from 'react';
-    import { kebabCase } from 'change-case';
-    ${'\n'}
-    interface ${propsName} {
-      color?: string;
-      height?: number | string;
-      width?: number | string;
-      title?: string;
-      titleId?: string;
-    }
-    ${'\n'}
-    const ${componentName} = memo(forwardRef((props: ${propsName}, ref: Ref<SVGSVGElement>) => {
-      const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-      const title = propsTitle || '${componentName}';
-      const titleId = propsTitleId || kebabCase(title);
+      import { forwardRef, memo } from 'react';
+      import { kebabCase } from 'change-case';
       ${'\n'}
-      return (
-        ${jsx}
-      );
-    }));
-    ${'\n'}
-    export default ${componentName};
+      interface ${propsName} extends React.HTMLAttributes<SVGSVGElement>{
+        color?: string;
+        height?: number | string;
+        width?: number | string;
+        title?: string;
+        titleId?: string;
+      }
+      ${'\n'}
+      const ${componentName} = memo(forwardRef<SVGSVGElement, ${propsName}>((props, ref) => {
+        const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
+        const title = propsTitle || '${componentName}';
+        const titleId = propsTitleId || kebabCase(title);
+        ${'\n'}
+        return (
+          ${jsx}
+        );
+      }));
+      ${'\n'}
+      export default ${componentName};
     `;
   },
 };
