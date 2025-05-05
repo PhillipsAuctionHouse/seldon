@@ -52,12 +52,18 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
     const { closeMenu } = React.useContext(HeaderContext);
 
     React.useEffect(() => {
+      const triggerElement = ref && 'current' in ref ? ref.current : null;
+
       if (isSubmenuOpened && navListElement && navListElement[0]?.props?.id) {
         focusElementById(navListElement[0].props.id, true);
       } else if (!isSubmenuOpened && navListElement && navListElement[0]?.props?.id) {
         focusElementById(navListElement[0].props.id, false);
+
+        if (triggerElement) {
+          triggerElement.focus();
+        }
       }
-    }, [isSubmenuOpened, navListElement]);
+    }, [isSubmenuOpened, navListElement, ref]);
 
     return (
       <>
