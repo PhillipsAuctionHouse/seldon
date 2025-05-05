@@ -1,20 +1,21 @@
-import { faker } from '@faker-js/faker';
 import type { Meta } from '@storybook/react';
-import React, { useState } from 'react';
-import { Icon } from '../../components/Icon';
-import { LinkVariants } from '../../components/Link/types';
-import Navigation from '../../components/Navigation/Navigation';
-import NavigationItem from '../../components/Navigation/NavigationItem/NavigationItem';
-import NavigationItemTrigger from '../../components/Navigation/NavigationItemTrigger/NavigationItemTrigger';
-import NavigationList from '../../components/Navigation/NavigationList/NavigationList';
-import Search, { SearchProps } from '../../components/Search/Search';
-import { SearchResult } from '../../components/Search/SearchResults/SearchResults';
-import { LanguageSelector } from '../../patterns/LanguageSelector';
-import { AuthState } from '../../patterns/UserManagement/types';
-import UserManagement from '../../patterns/UserManagement/UserManagement';
-import { SupportedLanguages } from '../../types/commonTypes';
-import { px } from '../../utils';
 import Header, { HeaderProps } from './Header';
+import Navigation from '../../components/Navigation/Navigation';
+import NavigationList from '../../components/Navigation/NavigationList/NavigationList';
+import NavigationItemTrigger from '../../components/Navigation/NavigationItemTrigger/NavigationItemTrigger';
+import NavigationItem from '../../components/Navigation/NavigationItem/NavigationItem';
+import { LinkVariants } from '../../components/Link/types';
+import { px } from '../../utils';
+import UserManagement from '../../patterns/UserManagement/UserManagement';
+import Search, { SearchProps } from '../../components/Search/Search';
+import { AuthState } from '../../patterns/UserManagement/types';
+import { LanguageSelector } from '../../patterns/LanguageSelector';
+import { SupportedLanguages } from '../../types/commonTypes';
+import { useState } from 'react';
+import { faker } from '@faker-js/faker';
+import { SearchResult } from '../../components/Search/SearchResults/SearchResults';
+import React from 'react';
+import { Icon } from '../../components/Icon';
 
 const generateLoremIpsum = (numOfParagraphs = 10) => {
   let loremIpsum = '';
