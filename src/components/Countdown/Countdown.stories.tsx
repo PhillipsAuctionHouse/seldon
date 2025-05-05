@@ -24,6 +24,10 @@ Playground.argTypes = {
     type: 'select',
     options: ['en', 'zh'],
   },
+  variant: {
+    type: 'select',
+    options: Object.values(CountdownVariants),
+  },
 };
 
 export const Days = (props: CountdownProps) => <Countdown {...props} endDateTime={daysDate} />;
@@ -39,3 +43,10 @@ export const Compact = (props: CountdownProps) => (
 );
 
 export const ClosingCountdown = (props: CountdownProps) => <Countdown {...props} endDateTime={closingDate} />;
+
+ClosingCountdown.argTypes = {
+  variant: {
+    type: 'select',
+    options: Object.values(CountdownVariants),
+  },
+};

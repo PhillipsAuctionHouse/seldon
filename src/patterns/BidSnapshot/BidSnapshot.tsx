@@ -6,6 +6,7 @@ import { DetailList } from '../DetailList/index';
 import { Detail } from '../../components/Detail/index';
 import { LotStatus, SupportedLanguages } from '../../types/commonTypes';
 import { Countdown } from '../../components/Countdown/index';
+import { CountdownVariants } from '../../components/Countdown/types';
 import { BidStatusEnum } from './types';
 import BidMessage from './BidMessage';
 import { differenceInMinutes, isAfter } from 'date-fns';
@@ -169,6 +170,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
           <Countdown
             endDateTime={lotCloseDate}
             label={closingText}
+            variant={CountdownVariants.compact}
             locale={SupportedLanguages[lang]}
             formatDurationStr={formatDurationStr}
             showBottomBorder={false}
