@@ -1,38 +1,65 @@
 @import '#scss/allPartials';
 
+.icon-usage {
+  margin-top: 48px;
+}
+
 .icon-example {
   align-items: center;
+  border-bottom: 1px solid $pure-black;
   display: flex;
   flex-direction: column;
   flex-shrink: 1;
   gap: 24px;
+  margin-bottom: 2rem;
 
-  .blurb {
-    @include text($body2);
+  &:last-child {
+    border-bottom: none;
   }
 
   .#{$px}-icon {
-    // align-self: center;
-    border: 1px solid black;
-    border-radius: 1rem;
+    align-self: center;
     padding: 1rem;
   }
 
-  .icons-container {
+  .icons-container,
+  .icons-container--dark {
+    border-radius: 1rem;
     display: flex;
     gap: 1rem;
     justify-content: center;
   }
+
+  .icons-container--dark {
+    background-color: $pure-black;
+  }
 }
 
-.icon-flex-wrapper {
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 20%);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 24px;
+.icon-grid-wrapper {
+  border: 1px solid $pure-black;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 24px;
   padding: 24px;
   width: fit-content;
+
+  @include media($breakpoint-md) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @include media($breakpoint-lg) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  &--dark {
+    background-color: $pure-black;
+  }
+
+  &--controls {
+    display: flex;
+    gap: 1rem;
+  }
 
   .icon-set {
     display: flex;
@@ -45,6 +72,14 @@
     text-align: center;
 
     @include text($string2);
+
+    &--small {
+      @include text($string3);
+    }
+
+    &--dark {
+      color: $white;
+    }
   }
 
   .icon-wrapper {

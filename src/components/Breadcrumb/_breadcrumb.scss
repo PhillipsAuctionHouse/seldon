@@ -37,11 +37,6 @@
     }
   }
 
-  &__chevron {
-    height: 1rem;
-    width: 1rem;
-  }
-
   ol {
     display: flex;
     flex-direction: row;
@@ -56,6 +51,10 @@
       flex-shrink: 1;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    .#{$px}-icon-chevron-right {
+      flex-shrink: 0;
     }
   }
 

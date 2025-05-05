@@ -65,6 +65,8 @@ const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
                 <Icon
                   icon="ChevronDown"
                   className={classnames({ [`${baseClassName}__trigger-icon-expanded`]: isOpen })}
+                  height="1rem"
+                  width="1rem"
                 />
               }
             </DropdownSelect.Icon>

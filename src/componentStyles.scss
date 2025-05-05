@@ -24,6 +24,7 @@
 @use 'components/Toggle/toggle';
 @use 'components/Link/link';
 @use 'components/LinkBlock/linkBlock';
+@use 'components/Loader/loader';
 @use 'components/LinkList/linkList';
 @use 'components/Text/text';
 @use 'components/TextSymbol/textSymbol';
@@ -61,9 +62,11 @@
 @use 'patterns/BidSnapshot/bidSnapshot';
 @use 'patterns/FilterMenu/filterMenu';
 @use 'patterns/DetailList/detailList';
+@use 'patterns/FavoritesCollectionTile/favoritesCollectionTile';
 
 // Site Furniture
 @use 'site-furniture/Header/header';
 @use 'site-furniture/Footer/footer';
 @use 'components/Article/article';
+@use 'components/Divider/divider';
 @use 'components/TextArea/textArea';

@@ -1,3 +1,66 @@
+# [1.140.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.139.0...v1.140.0) (2025-05-05)
+
+
+### Features
+
+* **countdown:** L3-6269 added closing state ([#604](https://github.com/PhillipsAuctionHouse/seldon/issues/604)) ([00ad305](https://github.com/PhillipsAuctionHouse/seldon/commit/00ad305824694cfd50a58f7436fa00e3553e3d37))
+
+# [1.139.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.138.0...v1.139.0) (2025-05-05)
+
+
+### Features
+
+* **ListPreview:** L3-5956 List Preview Component ([#589](https://github.com/PhillipsAuctionHouse/seldon/issues/589)) ([ef45fea](https://github.com/PhillipsAuctionHouse/seldon/commit/ef45feab3a09f28f9d6d67bcbb4964e9c8b31572))
+
+# [1.138.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.137.1...v1.138.0) (2025-05-01)
+
+
+### Features
+
+* **Icons:** L3-3417 update icon set ([#586](https://github.com/PhillipsAuctionHouse/seldon/issues/586)) ([9ea7c63](https://github.com/PhillipsAuctionHouse/seldon/commit/9ea7c63e5539bfebaea3638df0c7ad63834138bb))
+
+## [1.137.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.137.0...v1.137.1) (2025-04-29)
+
+
+### Bug Fixes
+
+* **ObjectTile:** L3-5631 reserve space for 'No Reserve' on ObjectTile ([#605](https://github.com/PhillipsAuctionHouse/seldon/issues/605)) ([321a1f9](https://github.com/PhillipsAuctionHouse/seldon/commit/321a1f900ffdcd1f46c2f5c5ad936ada92d34566))
+
+# [1.137.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.136.1...v1.137.0) (2025-04-29)
+
+
+### Features
+
+* **Loader:** L3-5951 Loading Spinner Component ([#578](https://github.com/PhillipsAuctionHouse/seldon/issues/578)) ([bdf0ad8](https://github.com/PhillipsAuctionHouse/seldon/commit/bdf0ad81dcfa3a6244bc4088dd1b6a58513b364d))
+
+## [1.136.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.136.0...v1.136.1) (2025-04-23)
+
+
+### Bug Fixes
+
+* **prefetching:** L3-6129 remove module <link> ([#599](https://github.com/PhillipsAuctionHouse/seldon/issues/599)) ([77748bd](https://github.com/PhillipsAuctionHouse/seldon/commit/77748bd35e186a60a05ac81d804d2b8acd241369))
+
+# [1.136.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.135.1...v1.136.0) (2025-04-18)
+
+
+### Features
+
+* **PinchZoom:** L3-4672 fixed unnecessary white space ([#596](https://github.com/PhillipsAuctionHouse/seldon/issues/596)) ([2151cee](https://github.com/PhillipsAuctionHouse/seldon/commit/2151cee66a0b76029e4154ba2e8bc7d3519a8919))
+
+## [1.135.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.135.0...v1.135.1) (2025-04-15)
+
+
+### Bug Fixes
+
+* **Tabs:** L3-5827 Update active state of Tabs hover state ([#588](https://github.com/PhillipsAuctionHouse/seldon/issues/588)) ([6b941d0](https://github.com/PhillipsAuctionHouse/seldon/commit/6b941d00388a0b3cfd957bd471eeb0552fd3ceb0))
+
+# [1.135.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.134.1...v1.135.0) (2025-04-10)
+
+
+### Features
+
+* **Divider:** L3-5954 horizontal divider ([#581](https://github.com/PhillipsAuctionHouse/seldon/issues/581)) ([fdf9cde](https://github.com/PhillipsAuctionHouse/seldon/commit/fdf9cdea923016b45cfd32f92bf27f58a4320327))
+
 ## [1.134.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.134.0...v1.134.1) (2025-04-09)
 
 

@@ -1,7 +1,7 @@
-import { Ref, forwardRef, memo } from 'react';
+import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgAppleAppStoreBadgeProps {
+interface SvgAppleAppStoreBadgeProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -10,8 +10,8 @@ interface SvgAppleAppStoreBadgeProps {
 }
 
 const SvgAppleAppStoreBadge = memo(
-  forwardRef((props: SvgAppleAppStoreBadgeProps, ref: Ref<SVGSVGElement>) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
+  forwardRef<SVGSVGElement, SvgAppleAppStoreBadgeProps>((props, ref) => {
+    const { height, width, title: propsTitle, titleId: propsTitleId } = props;
     const title = propsTitle || 'SvgAppleAppStoreBadge';
     const titleId = propsTitleId || kebabCase(title);
 
@@ -34,7 +34,7 @@ const SvgAppleAppStoreBadge = memo(
             d="M120.662 0H10.446c-.402 0-.799 0-1.2.002-.335.003-.667.009-1.006.014Q7.135.03 6.044.21a7.3 7.3 0 0 0-2.082.685 7.05 7.05 0 0 0-3.064 3.06 7.2 7.2 0 0 0-.685 2.078A14 14 0 0 0 .017 8.22c-.01.335-.012.67-.017 1.006v25.252c.005.34.006.668.017 1.008q.012 1.101.196 2.187c.12.724.351 1.426.685 2.08a6.8 6.8 0 0 0 1.29 1.764 6.9 6.9 0 0 0 1.774 1.288 7.4 7.4 0 0 0 2.082.689q1.09.178 2.196.193c.339.008.671.012 1.007.012.4.002.797.002 1.2.002h110.215c.394 0 .794 0 1.188-.002.334 0 .676-.005 1.01-.012.734-.01 1.467-.074 2.191-.193a7.5 7.5 0 0 0 2.091-.69 6.9 6.9 0 0 0 1.771-1.287 7 7 0 0 0 1.295-1.764 7.2 7.2 0 0 0 .678-2.08q.183-1.086.204-2.187c.004-.34.004-.668.004-1.008.008-.396.008-.791.008-1.195V10.42q.002-.6-.008-1.193.001-.503-.004-1.006a15 15 0 0 0-.204-2.188 7.2 7.2 0 0 0-.678-2.079 7.08 7.08 0 0 0-3.066-3.059 7.4 7.4 0 0 0-2.091-.685 14 14 0 0 0-2.191-.193c-.334-.005-.676-.012-1.01-.014C121.456 0 121.056 0 120.662 0"
           />
           <path
-            fill={color}
+            fill="#000"
             d="M9.252 42.745c-.334 0-.66-.005-.99-.012a14 14 0 0 1-2.048-.178 6.5 6.5 0 0 1-1.816-.599 5.9 5.9 0 0 1-1.53-1.11A5.8 5.8 0 0 1 1.75 39.32c-.29-.57-.49-1.18-.595-1.81a13.5 13.5 0 0 1-.182-2.05 99 99 0 0 1-.017-.997V9.226s.01-.756.017-.978q.013-1.03.18-2.045a6.3 6.3 0 0 1 .596-1.816 6.1 6.1 0 0 1 2.649-2.644 6.4 6.4 0 0 1 1.811-.595Q7.23.983 8.264.969l.989-.013h112.591l1.001.014q1.025.012 2.036.177a6.5 6.5 0 0 1 1.83.599 6.1 6.1 0 0 1 2.646 2.644 6.3 6.3 0 0 1 .587 1.801q.17 1.024.19 2.062c.003.31.003.642.003.973.009.41.009.8.009 1.192v22.865c0 .397 0 .785-.009 1.175 0 .355 0 .68-.004 1.016a14 14 0 0 1-.187 2.025 6.3 6.3 0 0 1-.592 1.824 6 6 0 0 1-1.113 1.514 5.9 5.9 0 0 1-1.533 1.117 6.4 6.4 0 0 1-1.827.6q-1.017.166-2.048.18c-.321.006-.657.01-.983.01l-1.188.003z"
           />
           <path

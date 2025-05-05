@@ -117,12 +117,10 @@ details {
     width: 1.5rem;
   }
 
-  path {
+  path.favorite-active__inner {
     fill: transparent;
-  }
 
-  &:hover {
-    path {
+    &:hover {
       fill: $pure-black;
     }
   }
