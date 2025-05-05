@@ -1,3 +1,10 @@
+# [1.139.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.138.0...v1.139.0) (2025-05-05)
+
+
+### Features
+
+* **ListPreview:** L3-5956 List Preview Component ([#589](https://github.com/PhillipsAuctionHouse/seldon/issues/589)) ([ef45fea](https://github.com/PhillipsAuctionHouse/seldon/commit/ef45feab3a09f28f9d6d67bcbb4964e9c8b31572))
+
 # [1.138.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.137.1...v1.138.0) (2025-05-01)
 
 
