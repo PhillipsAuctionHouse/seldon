@@ -31,7 +31,24 @@
     color: $text-color;
     position: absolute;
     right: 34px;
-    top: 32px;
+    top: 18%;
+    transition:
+      visibility 0.2s ease,
+      opacity 0.2s ease;
+    visibility: hidden;
+
+    &:hover {
+      visibility: visible;
+    }
+
+    &:focus {
+      visibility: visible;
+    }
+
+    .#{$px}-combo-box__input:hover + &,
+    .#{$px}-combo-box__input:focus + & {
+      visibility: visible;
+    }
   }
 
   &__dropdown-button {
@@ -39,7 +56,7 @@
     color: $text-color;
     position: absolute;
     right: 3px;
-    top: 32px;
+    top: 18%;
   }
 
   &__icon {

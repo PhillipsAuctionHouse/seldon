@@ -38,10 +38,45 @@ export interface ComboBoxProps {
    * Passed in function to handle input value changes.
    */
   setInputValue: (value: string) => void;
+  /**
+   * aria-label optional input label
+   */
+  ariaLabelInput?: string;
+  /**
+   * aria-label for the clear button
+   */
+  ariaLabelClear?: string;
+  /**
+   * aria-label for the dropdown button
+   */
+  ariaLabelDropdown?: string;
+  /**
+   * aria-label for content
+   */
+  ariaLabelContent?: string;
 }
-
+/**
+ * ## Overview
+ *
+ * This is a ComboBox component that allows users to select from a list of options or enter a custom value.
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-comboBox--overview)
+ */
 const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboBox(
-  { options = [], className, id, labelText, placeholder, inputValue = '', setInputValue, ...props },
+  {
+    options = [],
+    className,
+    id,
+    labelText,
+    placeholder,
+    inputValue = '',
+    setInputValue,
+    ariaLabelDropdown,
+    ariaLabelInput,
+    ariaLabelClear,
+    ariaLabelContent,
+    ...props
+  },
   ref,
 ) {
   const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'ComboBox');
@@ -100,7 +135,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
               }}
               className={`${baseClassName}__input`}
               tabIndex={0}
-              aria-label={`${id}-input`}
+              aria-label={ariaLabelInput ? ariaLabelInput : `${id}-input`}
               data-testid={`${id}-input`}
             />
           </Popover.Trigger>
@@ -109,14 +144,14 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
               className={`${baseClassName}__close-button`}
               data-testid={`${id}-item-close-button`}
               onClick={() => setInputValue('')}
-              aria-label={`${id}-clear`}
+              aria-label={ariaLabelClear ? ariaLabelClear : `${id}-clear`}
               tabIndex={-1}
             >
               <Icon color="$primary-black" icon="CloseX" height={18} width={18} className={`${baseClassName}__icon`} />
             </button>
           )}
           <button
-            aria-label={`${id}-dropdown`}
+            aria-label={ariaLabelDropdown ? ariaLabelDropdown : `${id}-dropdown`}
             className={`${baseClassName}__dropdown-button`}
             onClick={() => setIsOpen((prev) => !prev)}
             data-testid={`${id}-dropdown`}
@@ -125,7 +160,10 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
             <Icon color="$pure-black" height={18} icon="ChevronDown" width={18} className={`${baseClassName}__icon`} />
           </button>
           <Popover.Portal>
-            <Popover.Content className={`${baseClassName}__content`} aria-label={`${id}-content`}>
+            <Popover.Content
+              className={`${baseClassName}__content`}
+              aria-label={ariaLabelContent ? ariaLabelContent : `${id}-content`}
+            >
               {isOpen && (
                 <CommandList className={`${baseClassName}__list`} ref={setDropdown}>
                   {sanitizedOptions.some((option) => option.toLowerCase().includes(inputValue.toLowerCase())) ? (
