@@ -89,6 +89,11 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                 setInputValue(value);
                 setIsOpen(true);
               }}
+              onKeyDown={(e) => {
+                if (e.key === 'Tab') {
+                  setIsOpen(false);
+                }
+              }}
               onFocus={() => {
                 setIsOpen(true);
                 setInputValue(inputValue);
@@ -105,6 +110,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
               data-testid={`${id}-item-close-button`}
               onClick={() => setInputValue('')}
               aria-label={`${id}-clear`}
+              tabIndex={-1}
             >
               <Icon color="$primary-black" icon="CloseX" height={18} width={18} className={`${baseClassName}__icon`} />
             </button>
@@ -114,6 +120,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
             className={`${baseClassName}__dropdown-button`}
             onClick={() => setIsOpen((prev) => !prev)}
             data-testid={`${id}-dropdown`}
+            tabIndex={-1}
           >
             <Icon color="$pure-black" height={18} icon="ChevronDown" width={18} className={`${baseClassName}__icon`} />
           </button>
