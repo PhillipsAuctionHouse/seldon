@@ -2,8 +2,7 @@ import { describe, expect, test, vi } from 'vitest';
 import { render, fireEvent, act, screen } from '@testing-library/react';
 import AddToCalendar from './AddToCalendar';
 import { CalendarEvent } from './types';
-import * as CalendarLinks from './CalendarLinks';
-
+import * as calendarLinks from './calendarLinks';
 vi.mock('./calendarLinks', () => ({
   generateGoogleCalendarLink: vi.fn(),
   generateOutlookOnlineLink: vi.fn(),
@@ -29,7 +28,7 @@ describe('AddToCalendar component', () => {
     const { getByRole } = render(<AddToCalendar event={event} label="Add to calendar" />);
     const button = getByRole('button', { name: 'Add to calendar' });
     expect(button).toBeInTheDocument();
-    const icon = screen.getByTestId('icon-calendar-alt');
+    const icon = screen.getByTestId('icon-calendar');
     expect(icon).toBeInTheDocument();
   });
 
@@ -53,7 +52,7 @@ describe('AddToCalendar component', () => {
     expect(getByText('Yahoo Calendar')).toBeInTheDocument();
 
     // Check if the icon changes to Cross
-    const crossIcon = screen.getByTestId('icon-close');
+    const crossIcon = screen.getByTestId('icon-close-x');
     expect(crossIcon).toBeInTheDocument();
   });
 
@@ -82,7 +81,7 @@ describe('AddToCalendar component', () => {
       return originalCreateElement.call(document, tagName);
     });
 
-    const generateCalendarFileSpy = vi.spyOn(CalendarLinks, 'generateCalendarFile');
+    const generateCalendarFileSpy = vi.spyOn(calendarLinks, 'generateCalendarFile');
     const { getByRole, findByRole } = render(<AddToCalendar event={event} label="Add to calendar" />);
     const triggerButton = getByRole('button', { name: 'Add to calendar' });
 
@@ -119,7 +118,7 @@ describe('AddToCalendar component', () => {
       return originalCreateElement.call(document, tagName);
     });
 
-    const generateCalendarFileSpy = vi.spyOn(CalendarLinks, 'generateCalendarFile');
+    const generateCalendarFileSpy = vi.spyOn(calendarLinks, 'generateCalendarFile');
     const { getByRole } = render(<AddToCalendar event={event} label="Add Jewels & More: Online Auction to calendar" />);
     const triggerButton = getByRole('button', { name: 'Add Jewels & More: Online Auction to calendar' });
 
@@ -139,5 +138,26 @@ describe('AddToCalendar component', () => {
     // Restore the spies
     consoleErrorSpy.mockRestore();
     createElementSpy.mockRestore();
+  });
+
+  test('pressing Enter key on button toggles open state', () => {
+    const { getByRole } = render(<AddToCalendar event={event} />);
+    const button = getByRole('button', { name: 'Add to calendar' });
+
+    // Simulate Enter key press
+    act(() => {
+      fireEvent.keyDown(button, { key: 'Enter', code: 'Enter' });
+    });
+
+    // Verify the Popover is open
+    expect(getByRole('menu')).toBeInTheDocument();
+
+    // Simulate Enter key press again
+    act(() => {
+      fireEvent.keyDown(button, { key: 'Enter', code: 'Enter' });
+    });
+
+    // Verify the Popover is closed
+    expect(screen.queryByRole('menu')).not.toBeInTheDocument();
   });
 });

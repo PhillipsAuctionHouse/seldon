@@ -1,70 +1,128 @@
 import type { CalendarEvent } from './types';
 import * as ics from 'ics';
+import { format, addHours, isValid } from 'date-fns';
+import { toZonedTime } from 'date-fns-tz';
 
-const generateGoogleCalendarLink = (event: CalendarEvent): string => {
-  const start = event.start;
-  const end = event.end;
-  const title = encodeURIComponent(event.title);
-  const description = encodeURIComponent(event.description);
-  const link = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${formatDate(start)}/${formatDate(end)}&details=${description}&location=${event.location}&ctz=${event.timezone}`;
-  return link;
+const CALENDAR_BASE_URL = {
+  google: 'https://calendar.google.com/calendar/u/0/r/eventedit',
+  outlook: 'https://outlook.office.com/calendar/0/deeplink/compose',
+  yahoo: 'https://calendar.yahoo.com/',
 };
 
-const generateOutlookOnlineLink = (event: CalendarEvent): string => {
-  const start = event.start;
-  const end = event.end;
-  const link = `https://outlook.live.com/owa/?path=/calendar/action/compose&rru=addevent&subject=${event.title}&startdt=${formatDateForOutlook(start)}&enddt=${formatDateForOutlook(end)}&body=${event.description}&location=${event.location}`;
-  return link;
-};
-
-const generateYahooCalendarLink = (event: CalendarEvent): string => {
-  const start = event.start;
-  const end = event.end;
-  const link = `https://calendar.yahoo.com/?v=60&view=d&type=20&title=${event.title}&st=${formatDate(start)}&et=${formatDate(end)}&desc=${event.description}&in_loc=${event.location}`;
-  return link;
-};
-
-const generateCalendarFile = (event: CalendarEvent): void => {
-  const { error, value } = ics.createEvent({
-    title: event.title,
-    description: event.description,
-    start: [
-      event.start.getFullYear(),
-      event.start.getMonth() + 1,
-      event.start.getDate(),
-      event.start.getHours(),
-      event.start.getMinutes(),
-    ],
-    end: [
-      event.end.getFullYear(),
-      event.end.getMonth() + 1,
-      event.end.getDate(),
-      event.end.getHours(),
-      event.end.getMinutes(),
-    ],
-    location: event.location,
-    startOutputType: 'local',
-    startInputType: 'local',
-  });
-
-  if (error) {
-    console.error('Error creating iCalendar event:', error);
-  } else {
-    const link = document.createElement('a');
-    link.href = `data:text/calendar;charset=utf8,${value}`;
-    link.download = `${event.title}.ics`;
-    document.body.appendChild(link); // Append to the document to make click work in some browsers
-    link.click();
-    document.body.removeChild(link); // Clean up after the click
+const getUserTimezone = () => {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone;
+  } catch {
+    console.warn("Unable to determine user's timezone. Using UTC as a fallback.");
+    return 'UTC';
   }
 };
 
-const formatDate = (date: Date): string => {
-  return date.toISOString().replace(/[-:.]/g, '').replace('Z', '');
+const createSearchParams = (params: Record<string, string>) => new URLSearchParams(params);
+
+const generateCalendarLink = (calendarType: 'google' | 'outlook' | 'yahoo', event: CalendarEvent) => {
+  if (!event.start || !isValid(event.start)) {
+    console.error('Invalid event start date:', event);
+    return '#';
+  }
+
+  const userTimezone = getUserTimezone();
+  const start = toZonedTime(event.start, calendarType === 'google' ? event.timezone : userTimezone);
+  const end = event.end
+    ? toZonedTime(event.end, calendarType === 'google' ? event.timezone : userTimezone)
+    : addHours(start, 1);
+
+  switch (calendarType) {
+    case 'google':
+      return generateGoogleLink(start, end, event);
+    case 'outlook':
+      return generateOutlookLink(start, end, event);
+    case 'yahoo':
+      return generateYahooLink(start, end, event);
+    default:
+      console.error('Invalid calendar type:', calendarType);
+      return '#';
+  }
 };
 
-const formatDateForOutlook = (date: Date): string => {
-  return date.toISOString().replace('Z', '');
+const generateGoogleLink = (start: Date, end: Date, event: CalendarEvent) => {
+  const params = createSearchParams({
+    text: event.title,
+    dates: `${format(start, "yyyyMMdd'T'HHmmss")}/${format(end, "yyyyMMdd'T'HHmmss")}`,
+    ctz: event.timezone,
+    details: event.description,
+    location: event.location,
+  });
+  const url = new URL(CALENDAR_BASE_URL.google);
+  url.search = params.toString();
+  return url.toString();
+};
+
+const generateOutlookLink = (start: Date, end: Date, event: CalendarEvent) => {
+  const params = createSearchParams({
+    path: '/calendar/action/compose',
+    rru: 'addevent',
+    subject: event.title,
+    startdt: format(start, "yyyy-MM-dd'T'HH:mm:ssXXX"),
+    enddt: format(end, "yyyy-MM-dd'T'HH:mm:ssXXX"),
+    body: event.description,
+    location: event.location,
+    allday: 'false',
+  });
+  const url = new URL(CALENDAR_BASE_URL.outlook);
+  url.search = params.toString();
+  return url.toString();
+};
+
+const generateYahooLink = (start: Date, end: Date, event: CalendarEvent) => {
+  const title = encodeURIComponent(event.title);
+  const desc = encodeURIComponent(event.description);
+  const location = encodeURIComponent(event.location);
+  const st = format(start, "yyyyMMdd'T'HHmmss");
+  const et = format(end, "yyyyMMdd'T'HHmmss");
+  return `${CALENDAR_BASE_URL.yahoo}?v=60&view=d&type=20&title=${title}&st=${st}&et=${et}&desc=${desc}&in_loc=${location}`;
+};
+
+const generateGoogleCalendarLink = (event: CalendarEvent) => generateCalendarLink('google', event);
+const generateOutlookOnlineLink = (event: CalendarEvent) => generateCalendarLink('outlook', event);
+const generateYahooCalendarLink = (event: CalendarEvent) => generateCalendarLink('yahoo', event);
+
+const generateCalendarFile = (event: CalendarEvent) => {
+  if (!event.start) {
+    console.error('Invalid event start date:', event);
+    return;
+  }
+  const end = event.end ? event.end : addHours(event.start, 1);
+  ics.createEvent(
+    {
+      title: event.title,
+      description: event.description,
+      start: [
+        event.start.getFullYear(),
+        event.start.getMonth() + 1,
+        event.start.getDate(),
+        event.start.getHours(),
+        event.start.getMinutes(),
+      ],
+      end: [end.getFullYear(), end.getMonth() + 1, end.getDate(), end.getHours(), end.getMinutes()],
+      location: event.location,
+    },
+    (error, value) => {
+      if (error) {
+        console.error('Error creating iCalendar event:', error);
+      } else {
+        const file = new File([value], `${event.title}.ics`, { type: 'text/calendar' });
+        const url = URL.createObjectURL(file);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = file.name;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }
+    },
+  );
 };
 
 export { generateGoogleCalendarLink, generateOutlookOnlineLink, generateYahooCalendarLink, generateCalendarFile };
