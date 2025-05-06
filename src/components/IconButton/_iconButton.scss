@@ -20,7 +20,7 @@
   &:focus-visible {
     &:focus-visible {
       outline: 0.5px solid $soft-black;
-      outline-offset: -4.5px;
+      outline-offset: 0;
 
       svg {
         fill: $pure-white;
