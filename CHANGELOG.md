@@ -1,3 +1,10 @@
+# [1.141.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.140.0...v1.141.0) (2025-05-07)
+
+
+### Features
+
+* **accountPageHeaderComponent:** L3-6606 add account page header component ([#606](https://github.com/PhillipsAuctionHouse/seldon/issues/606)) ([c1a99f6](https://github.com/PhillipsAuctionHouse/seldon/commit/c1a99f6e1a3cce7a881c469a82746838051153b3))
+
 # [1.140.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.139.0...v1.140.0) (2025-05-05)
 
 
