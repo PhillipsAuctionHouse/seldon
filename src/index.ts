@@ -95,6 +95,7 @@ export * from './components/FavoritingTileButton';
 export * from './components/Filter';
 export * from './components/Icon';
 export * from './components/TextArea';
+export * from './patterns/AccountPageHeader';
 export * from './patterns/BidSnapshot';
 export * from './patterns/FilterMenu';
 export * from './patterns/ObjectTile';
