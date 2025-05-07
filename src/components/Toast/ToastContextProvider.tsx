@@ -56,8 +56,8 @@ export const ToastProvider = ({ children }: PropsWithChildren) => {
           <Toast
             key={toast.id}
             {...toast}
-            title={toast.title ?? ''}
             onOpenChange={(open) => !open && removeToast(toast.id)}
+            title={toast.title ?? ''}
           />
         ))}
       </ToastPrimitive.Provider>

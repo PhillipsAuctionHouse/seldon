@@ -136,4 +136,36 @@ describe('ToastContextProvider', () => {
 
     expect(screen.getByTestId('toast-count')).toHaveTextContent('2');
   });
+
+  it('handles undefined toast title', () => {
+    const TestUndefinedTitle = () => {
+      const { toasts, addToast } = useToastContext();
+      return (
+        <>
+          <button data-testid="add-undefined-title" onClick={() => addToast({ description: 'Test description' })}>
+            Add Toast Without Title
+          </button>
+          {toasts.map((toast) => (
+            <div key={toast.id} data-testid={`toast-${toast.id}`}>
+              <span data-testid="toast-title">{toast.title}</span>
+            </div>
+          ))}
+        </>
+      );
+    };
+
+    render(
+      <ToastProvider>
+        <TestUndefinedTitle />
+      </ToastProvider>,
+    );
+
+    // Add toast without title
+    act(() => {
+      screen.getByTestId('add-undefined-title').click();
+    });
+
+    // Verify empty string fallback is used
+    expect(screen.getByTestId('toast-title')).toHaveTextContent('');
+  });
 });

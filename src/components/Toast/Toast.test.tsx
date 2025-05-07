@@ -64,8 +64,9 @@ describe('Toast', () => {
   });
 
   it('renders with action', () => {
-    render(<ToastWrapper title="Test Toast" action={<button>Action</button>} />);
+    render(<ToastWrapper title="Test Toast" action={<button data-testid="custom-action">Action</button>} />);
     expect(screen.getByTestId('toast-action')).toBeInTheDocument();
+    expect(screen.getByTestId('custom-action')).toBeInTheDocument();
     expect(screen.getByText('Action')).toBeInTheDocument();
   });
 
