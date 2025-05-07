@@ -9,7 +9,7 @@ interface ToastOptions {
 export const useToast = () => {
   const { addToast } = useToastContext();
   const toast = (options: ToastOptions | string) => {
-    const config = typeof options === 'string' ? { description: options } : options;
+    const config = typeof options === 'string' ? { title: options } : options;
     addToast({ ...config });
   };
 

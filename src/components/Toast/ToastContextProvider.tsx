@@ -53,7 +53,12 @@ export const ToastProvider = ({ children }: PropsWithChildren) => {
         {children}
         <ToastPrimitive.Viewport className={`${px}-toast-viewport`} />
         {toasts.map((toast) => (
-          <Toast key={toast.id} {...toast} title={toast.title || ''} onOpenChange={(open) => !open && removeToast(toast.id)} />
+          <Toast
+            key={toast.id}
+            {...toast}
+            title={toast.title || ''}
+            onOpenChange={(open) => !open && removeToast(toast.id)}
+          />
         ))}
       </ToastPrimitive.Provider>
     </ToastContext.Provider>

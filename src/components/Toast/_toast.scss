@@ -4,26 +4,29 @@
   align-items: center;
   background-color: $primary-black;
   border-radius: 4px;
-  box-shadow: 0 6px 14px 0 #3232321f;
+  box-shadow: 0 6px 14px 0 $primary-black;
   color: $white;
   column-gap: $spacing-sm;
   display: grid;
   grid-template-areas: 'title action' 'description action';
   grid-template-columns: auto max-content;
+
+  // There are no spacing tokens for the padding used in figma
   padding: 6px 16px;
 
   &__content {
     display: flex;
-
-    // flex-direction: column;
     gap: $spacing-sm;
   }
 
   &__action {
     color: $cta-blue;
+
+    &:hover {
+      color: $white;
+    }
   }
 
-  // State variations
   &[data-state='open'] {
     animation: slide-in 150ms cubic-bezier(0.16, 1, 0.3, 1);
   }
@@ -92,5 +95,5 @@
   outline: none;
   padding: var(--viewport-padding);
   position: fixed;
-  z-index: 1234567890;
+  z-index: 99999;
 }

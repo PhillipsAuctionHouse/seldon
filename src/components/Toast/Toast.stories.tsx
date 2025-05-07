@@ -45,8 +45,7 @@ export const Playground = () => {
 Playground.parameters = {
   docs: {
     description: {
-      story:
-        'This is a static example of the Toast component. For a complete example, check the Interactive section.',
+      story: 'This is a static example of the Toast component. For a complete example, check the Interactive section.',
     },
   },
 };
@@ -64,20 +63,11 @@ const ToastDemo = () => {
         gap: '10px',
       }}
     >
-      <Button
-        onClick={() =>
-          toast({
-            title: 'Oops! Something went wrong',
-          })
-        }
-      >
-        Click for basic toast
-      </Button>
+      <Button onClick={() => toast('Oops! Something went wrong')}>Click for basic toast</Button>
       <Button
         onClick={() =>
           toast({
             title: 'Yay! Your action was successful',
-
             action: (
               <Button variant={ButtonVariants.link} onClick={() => alert('Action clicked!')}>
                 Click for more
