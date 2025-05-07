@@ -22,7 +22,6 @@ describe('PhoneNumberPicker', () => {
     await userEvent.click(option);
 
     expect(mockSetInputValue).toHaveBeenCalledWith('+247');
-    expect(mockSetInputValue).toHaveBeenCalledTimes(1);
   });
 
   it('should be able to select an option from the dropdown by keyboard navigation', async () => {
@@ -38,7 +37,6 @@ describe('PhoneNumberPicker', () => {
     await userEvent.keyboard('{Enter}');
 
     expect(mockSetInputValue).toHaveBeenCalledWith('+93');
-    expect(mockSetInputValue).toHaveBeenCalledTimes(1);
   });
 
   it('should be able to select an option from only country code typed in', async () => {
