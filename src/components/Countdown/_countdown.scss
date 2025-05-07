@@ -31,8 +31,18 @@
   &--compact {
     .#{$px}-countdown__countdown-container {
       @include Montserrat;
+      .#{$px}-duration {
+        @include Montserrat;
+      }
 
       gap: $spacing-xsm;
+    }
+  }
+
+  &--closing-lot {
+    .#{$px}-duration,
+    .#{$px}-countdown__label {
+      color: $countdown-compact;
     }
   }
 }
