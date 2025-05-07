@@ -87,6 +87,10 @@
       background-size: 100%;
       transition: background 0s;
     }
+
+    &--flipped {
+      transform: rotate(180deg);
+    }
   }
 
   &__content {

@@ -173,7 +173,11 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
             data-testid={`${id}-dropdown`}
             tabIndex={-1}
           >
-            <div className={`${baseClassName}__icon`}>
+            <div
+              className={classnames(`${baseClassName}__icon`, {
+                [`${baseClassName}__icon--flipped`]: isOpen,
+              })}
+            >
               <DropdownIcon
                 color={getScssVar('', '$pure-black')}
                 height={18}
