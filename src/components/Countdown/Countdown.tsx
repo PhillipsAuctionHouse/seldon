@@ -100,6 +100,7 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
     }, [endDateTime, currentDateTimeProp]);
 
     const showTimer = useMemo(() => {
+      // we use the prop instead of the state variable to avoid hiding the timer when it hits 0
       return new Date(endDateTime).getTime() > currentDateTimeProp.getTime();
     }, [endDateTime, currentDateTimeProp]);
 
@@ -108,7 +109,7 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
     return showTimer ? (
       <div
         {...commonProps}
-        className={classnames('some-stupid-classname', baseClassName, className, {
+        className={classnames(baseClassName, className, {
           [`${baseClassName}--compact`]: variant === CountdownVariants.compact,
           [`${baseClassName}--show-bottom-border`]: showBottomBorder,
           [`${baseClassName}--closing-lot`]: isClosingTag,
