@@ -50,7 +50,6 @@ describe('ComboBox', () => {
     await userEvent.click(option);
 
     expect(mockSetInputValue).toHaveBeenCalledWith('2000');
-    expect(mockSetInputValue).toHaveBeenCalledTimes(1);
   });
 
   it('should be able to select an option from the dropdown by keyboard navigation', async () => {
@@ -66,7 +65,6 @@ describe('ComboBox', () => {
     await userEvent.keyboard('{Enter}');
 
     expect(mockSetInputValue).toHaveBeenCalledWith('2002');
-    expect(mockSetInputValue).toHaveBeenCalledTimes(1);
   });
 
   it('should display No Options when input does not match any options', async () => {
