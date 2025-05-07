@@ -20,22 +20,39 @@ describe('ToastContextProvider', () => {
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
-  it('returns fallback context and warns when used outside provider', () => {
-    const TestComponentWithoutProvider = () => {
-      const context = useToastContext();
-      return <div data-testid="toast-count">{context.toasts.length}</div>;
+  it('uses fallback context methods when outside provider', () => {
+    const TestFallbackMethods = () => {
+      const { toasts, addToast, removeToast } = useToastContext();
+
+      return (
+        <div>
+          <button onClick={() => addToast({ title: 'Test' })}>Add Toast</button>
+          <button onClick={() => removeToast('123')}>Remove Toast</button>
+          <div data-testid="toast-count">{toasts.length}</div>
+        </div>
+      );
     };
 
+    // Spy on console.warn
     const consoleSpy = vi.spyOn(console, 'warn');
-    consoleSpy.mockImplementation(() => {
-      /* intentionally empty */
+    consoleSpy.mockImplementation(() => undefined);
+
+    render(<TestFallbackMethods />);
+
+    // Test addToast from fallback
+    act(() => {
+      screen.getByText('Add Toast').click();
     });
-
-    render(<TestComponentWithoutProvider />);
-
-    expect(consoleSpy).toHaveBeenCalledWith('useToastContext must be used within a ToastProvider');
-
     expect(screen.getByTestId('toast-count')).toHaveTextContent('0');
+
+    // Test removeToast from fallback
+    act(() => {
+      screen.getByText('Remove Toast').click();
+    });
+    expect(screen.getByTestId('toast-count')).toHaveTextContent('0');
+
+    // Verify warning was shown
+    expect(consoleSpy).toHaveBeenCalledWith('useToastContext must be used within a ToastProvider');
 
     consoleSpy.mockRestore();
   });
@@ -90,5 +107,33 @@ describe('ToastContextProvider', () => {
       screen.getByText('Remove Toast').click();
     });
     expect(screen.getByTestId('toast-count')).toHaveTextContent('0');
+  });
+
+  it('handles multiple toasts being added', () => {
+    const TestMultipleToasts = () => {
+      const { toasts, addToast } = useToastContext();
+      return (
+        <>
+          <button onClick={() => addToast({ title: 'Toast 1' })}>Add Toast 1</button>
+          <button onClick={() => addToast({ title: 'Toast 2' })}>Add Toast 2</button>
+          <div data-testid="toast-count">{toasts.length}</div>
+        </>
+      );
+    };
+
+    render(
+      <ToastProvider>
+        <TestMultipleToasts />
+      </ToastProvider>,
+    );
+
+    expect(screen.getByTestId('toast-count')).toHaveTextContent('0');
+
+    act(() => {
+      screen.getByText('Add Toast 1').click();
+      screen.getByText('Add Toast 2').click();
+    });
+
+    expect(screen.getByTestId('toast-count')).toHaveTextContent('2');
   });
 });
