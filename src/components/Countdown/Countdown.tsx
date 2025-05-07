@@ -2,7 +2,13 @@ import { ComponentProps, forwardRef, useEffect, useMemo, useState } from 'react'
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { SupportedLanguages } from '../../types/commonTypes';
-import { differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds } from 'date-fns';
+import {
+  differenceInDays,
+  differenceInHours,
+  differenceInMilliseconds,
+  differenceInMinutes,
+  differenceInSeconds,
+} from 'date-fns';
 import { zhCN, enUS } from 'date-fns/locale';
 import { CountdownVariants } from './types';
 import { Duration } from './Duration'; // Import the Duration component
@@ -93,18 +99,21 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
       return new Date(endDateTime).getTime() > new Date().getTime();
     }, [endDateTime]);
 
+    const isClosingTag = differenceInMilliseconds(endDateTime, currentDateTime) <= 3 * 60 * 1000;
+
     return showTimer ? (
       <div
         {...commonProps}
         className={classnames(baseClassName, className, {
           [`${baseClassName}--compact`]: variant === CountdownVariants.compact,
           [`${baseClassName}--show-bottom-border`]: showBottomBorder,
+          [`${baseClassName}--closing-lot`]: isClosingTag,
         })}
         {...props}
         ref={ref}
       >
         <div className={`${baseClassName}__countdown-container`} role="timer" aria-label={label}>
-          <span>{label}</span>
+          <span className={`${baseClassName}__label`}>{label}</span>
           {timeLeft.days > 0 ? (
             <Duration duration={timeLeft} unit="days" locale={dateFnsLocale} formatDurationStr={formatDurationStr} />
           ) : null}
