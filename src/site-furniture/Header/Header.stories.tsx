@@ -110,7 +110,7 @@ export default meta;
 export const Playground = ({ authState, ...props }: HeaderProps & { authState?: AuthState }) => {
   const [currentLanguage, setCurrentLanguage] = useState(SupportedLanguages.en);
   return (
-    <div style={{ minHeight: '400px' }}>
+    <div style={{ minHeight: '400px', display: 'flex', flexDirection: 'column', paddingTop: '200px' }}>
       <Header {...props} logo={<Icon icon="PhillipsLogo" />}>
         <Navigation id={`${px}-main-nav`}>
           <NavigationList id={`${px}-main-nav-list`}>
@@ -326,8 +326,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
         <LanguageSelector onLanguageChange={setCurrentLanguage} currentLanguage={currentLanguage} />
         <UserManagement authState={authState} onLogin={() => console.log('login')} href="/account" />
       </Header>
-      {generateLoremIpsum(1)}
-      <select style={{ margin: '200px' }}>
+      <select>
         <option value="en">English</option>
         <option value="de">German</option>
         <option value="fr">French</option>
@@ -339,6 +338,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
         <option value="pt">Portuguese</option>
         <option value="ru">Russian</option>
       </select>
+      {generateLoremIpsum(100)}
     </div>
   );
 };
