@@ -1,3 +1,10 @@
+# [1.142.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.141.0...v1.142.0) (2025-05-07)
+
+
+### Features
+
+* **utils:** L3-4155 Header z index issues on sale and lot pages and references to an old class ([#607](https://github.com/PhillipsAuctionHouse/seldon/issues/607)) ([5b6bc2a](https://github.com/PhillipsAuctionHouse/seldon/commit/5b6bc2a36a28d13b619eca06080281ca927ee558))
+
 # [1.141.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.140.0...v1.141.0) (2025-05-07)
 
 
