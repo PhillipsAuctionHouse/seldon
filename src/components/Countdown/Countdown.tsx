@@ -43,6 +43,7 @@ export interface CountdownProps extends ComponentProps<'div'> {
    * Variant of the countdown
    */
   variant?: CountdownVariants;
+  currentDateTime?: Date;
 }
 /**
  * ## Overview
@@ -64,12 +65,13 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
       locale = 'en',
       showBottomBorder = true,
       variant = CountdownVariants.default,
+      currentDateTime: currentDateTimeProp = new Date(),
       ...props
     },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Countdown');
-    const [currentDateTime, setCurrentDateTime] = useState(new Date());
+    const [currentDateTime, setCurrentDateTime] = useState(currentDateTimeProp);
 
     const dateFnsLocale = locale === SupportedLanguages.zh ? zhCN : enUS;
 
@@ -89,22 +91,24 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
 
     useEffect(() => {
       const timer = setInterval(() => {
-        setCurrentDateTime(new Date());
+        setCurrentDateTime((currentTime) => {
+          return new Date(currentTime.getTime() + 1000);
+        });
       }, 1000);
 
       return () => clearInterval(timer);
-    }, [endDateTime]);
+    }, [endDateTime, currentDateTimeProp]);
 
     const showTimer = useMemo(() => {
-      return new Date(endDateTime).getTime() > new Date().getTime();
-    }, [endDateTime]);
+      return new Date(endDateTime).getTime() > currentDateTimeProp.getTime();
+    }, [endDateTime, currentDateTimeProp]);
 
     const isClosingTag = differenceInMilliseconds(endDateTime, currentDateTime) <= 3 * 60 * 1000;
 
     return showTimer ? (
       <div
         {...commonProps}
-        className={classnames(baseClassName, className, {
+        className={classnames('some-stupid-classname', baseClassName, className, {
           [`${baseClassName}--compact`]: variant === CountdownVariants.compact,
           [`${baseClassName}--show-bottom-border`]: showBottomBorder,
           [`${baseClassName}--closing-lot`]: isClosingTag,
