@@ -51,17 +51,17 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
     const navListElement = findChildrenOfType<NavigationListProps>(children, NavigationList);
     const { closeMenu } = React.useContext(HeaderContext);
 
-    React.useEffect(() => {
-      if (isSubmenuOpened) {
-        if (navListElement && navListElement[0]?.props?.id) {
-          focusElementById(navListElement[0].props.id, true);
-          const triggerElement = ref && 'current' in ref ? ref.current : null;
-          if (triggerElement) {
-            triggerElement.focus();
-          }
-        }
+    const handleSubmenuOpen = React.useCallback(() => {
+      setIsSubmenuOpened(true);
+
+      if (navListElement && navListElement[0]?.props?.id) {
+        focusElementById(navListElement[0].props.id, true);
       }
-    }, [isSubmenuOpened, navListElement, ref]);
+      const triggerElement = ref && 'current' in ref ? ref.current : null;
+      if (triggerElement) {
+        triggerElement.focus();
+      }
+    }, [navListElement, ref]);
 
     return (
       <>
@@ -90,7 +90,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
                 [`${baseClassName}--hovered`]: isSubmenuOpened,
               })}
               onClick={onClick}
-              onMouseOver={() => setIsSubmenuOpened(true)}
+              onMouseOver={handleSubmenuOpen}
               onMouseOut={() => setIsSubmenuOpened(false)}
               {...props}
             >
