@@ -7,6 +7,7 @@
   &__input {
     border: 1px solid $keyline-gray;
     border-radius: 5px;
+    min-height: 50px;
     outline: none;
     padding: $padding-xsm;
     width: 100%;
@@ -54,9 +55,14 @@
   &__dropdown-button {
     all: unset;
     color: $text-color;
+    cursor: pointer;
     position: absolute;
     right: 3px;
     top: 18%;
+  }
+
+  &__icon-button {
+    pointer-events: none;
   }
 
   &__icon {

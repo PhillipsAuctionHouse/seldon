@@ -3,8 +3,9 @@ import * as Popover from '@radix-ui/react-popover';
 import classnames from 'classnames';
 import { Command, CommandGroup, CommandInput, CommandItem, CommandList } from 'cmdk';
 import React from 'react';
+import * as iconComponents from '../../assets/formatted';
 import { getCommonProps } from '../../utils';
-import { Icon } from '../Icon';
+import { getScssVar } from '../../utils/scssUtils';
 
 export interface ComboBoxProps {
   /**
@@ -83,13 +84,20 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
   const [isOpen, setIsOpen] = React.useState(false);
   const [control, setControl] = React.useState<HTMLDivElement | null>(null);
   const [dropdown, setDropdown] = React.useState<HTMLDivElement | null>(null);
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
+  const DropdownIcon = iconComponents['ChevronDown'];
+  const CloseIcon = iconComponents['CloseX'];
 
   const itemRefs = React.useRef<Record<string, HTMLDivElement | null>>({});
-  const sanitizedOptions = options.map((option) => String(option.value).toLowerCase());
+  const filteredOptions = options.filter(
+    (option) =>
+      option.value.toLowerCase().includes(inputValue.toLowerCase()) ||
+      (option.label && option.label.toLowerCase().includes(inputValue.toLowerCase())),
+  );
 
   useClickOutside(
     () => {
-      if (!sanitizedOptions.some((option) => option === inputValue.toLowerCase())) {
+      if (!filteredOptions.some((option) => option.value.toLowerCase() === inputValue.toLowerCase())) {
         setIsOpen(false);
         setInputValue('');
       }
@@ -118,6 +126,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
         <Popover.Root open={true}>
           <Popover.Trigger asChild>
             <CommandInput
+              ref={inputRef}
               placeholder={placeholder}
               value={inputValue}
               onValueChange={(value) => {
@@ -130,7 +139,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                 }
               }}
               onFocus={() => {
-                setIsOpen(true);
+                setIsOpen((prev) => !prev);
                 setInputValue(inputValue);
               }}
               className={`${baseClassName}__input`}
@@ -147,17 +156,31 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
               aria-label={ariaLabelClear ? ariaLabelClear : `${id}-clear`}
               tabIndex={-1}
             >
-              <Icon color="$primary-black" icon="CloseX" height={18} width={18} className={`${baseClassName}__icon`} />
+              <div className={`${baseClassName}__icon`}>
+                <CloseIcon
+                  color={getScssVar('', '$primary-black')}
+                  height={18}
+                  width={18}
+                  className={`${baseClassName}__icon-button`}
+                />
+              </div>
             </button>
           )}
           <button
             aria-label={ariaLabelDropdown ? ariaLabelDropdown : `${id}-dropdown`}
             className={`${baseClassName}__dropdown-button`}
-            onClick={() => setIsOpen((prev) => !prev)}
+            onClick={() => inputRef.current?.focus()}
             data-testid={`${id}-dropdown`}
             tabIndex={-1}
           >
-            <Icon color="$pure-black" height={18} icon="ChevronDown" width={18} className={`${baseClassName}__icon`} />
+            <div className={`${baseClassName}__icon`}>
+              <DropdownIcon
+                color={getScssVar('', '$pure-black')}
+                height={18}
+                width={18}
+                className={`${baseClassName}__icon-button`}
+              />
+            </div>
           </button>
           <Popover.Portal>
             <Popover.Content
@@ -166,23 +189,29 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
             >
               {isOpen && (
                 <CommandList className={`${baseClassName}__list`} ref={setDropdown}>
-                  {sanitizedOptions.some((option) => option.toLowerCase().includes(inputValue.toLowerCase())) ? (
+                  {filteredOptions.some(
+                    (option) =>
+                      option.value.toLowerCase().includes(inputValue.toLowerCase()) ||
+                      (option.label && option.label.toLowerCase().includes(inputValue.toLowerCase())),
+                  ) ? (
                     <CommandGroup>
-                      {sanitizedOptions.map((option, ind) =>
-                        option.toLowerCase().includes(inputValue.toLowerCase()) ? (
-                          <CommandItem
-                            className={`${baseClassName}__item`}
-                            key={`${option}-${ind}-key`}
-                            value={options[ind]?.label ? `${options[ind]?.label} ${option}` : option}
-                            ref={(el) => (itemRefs.current[option] = el)}
-                            onSelect={(currentValue) => {
-                              setInputValue(currentValue);
-                              setIsOpen(false);
-                            }}
-                          >
-                            {options[ind]?.label ? `${options[ind]?.label} ${option}` : option}
-                          </CommandItem>
-                        ) : null,
+                      {filteredOptions.map(
+                        (option, ind) =>
+                          (option.value.toLowerCase().includes(inputValue.toLowerCase()) ||
+                            (option.label && option.label.toLowerCase().includes(inputValue.toLowerCase()))) && (
+                            <CommandItem
+                              className={`${baseClassName}__item`}
+                              key={`${option.value}-${ind}`}
+                              value={option.label ? `${option.label} ${option.value}` : option.value}
+                              ref={(el) => (itemRefs.current[option.value] = el)}
+                              onSelect={(currentValue) => {
+                                setInputValue(currentValue);
+                                setIsOpen(false);
+                              }}
+                            >
+                              {option.label ? `${option.label} ${option.value}` : option.value}
+                            </CommandItem>
+                          ),
                       )}
                     </CommandGroup>
                   ) : (

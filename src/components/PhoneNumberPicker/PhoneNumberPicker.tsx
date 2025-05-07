@@ -43,18 +43,21 @@ const PhoneNumberPicker = React.forwardRef<HTMLDivElement, PhoneNumberPickerProp
     const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'PhoneNumberPicker');
     const countries = useMemo(() => getCountries(), []);
     const getCountryCode = useCallback((countryCode: CountryCode) => getCountryCallingCode(countryCode), []);
+    const countriesWithCode = useMemo(() => {
+      return countries.map((country) => {
+        return {
+          label: country,
+          value: `+${getCountryCode(country)}`,
+        };
+      });
+    }, [countries, getCountryCode]);
 
     return (
       <div ref={ref} className={classnames(baseClassName, className)} id={id} {...commonProps}>
         <ComboBox
           className={classnames(baseClassName, className)}
           id={`${id}-combobox`}
-          options={countries.map((country) => {
-            return {
-              label: country,
-              value: `+${getCountryCode(country)}`,
-            };
-          })}
+          options={countriesWithCode}
           {...props}
           inputValue={inputValue}
           setInputValue={(value) => {
