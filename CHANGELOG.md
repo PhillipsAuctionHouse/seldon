@@ -1,3 +1,17 @@
+# [1.142.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.141.0...v1.142.0) (2025-05-07)
+
+
+### Features
+
+* **utils:** L3-4155 Header z index issues on sale and lot pages and references to an old class ([#607](https://github.com/PhillipsAuctionHouse/seldon/issues/607)) ([5b6bc2a](https://github.com/PhillipsAuctionHouse/seldon/commit/5b6bc2a36a28d13b619eca06080281ca927ee558))
+
+# [1.141.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.140.0...v1.141.0) (2025-05-07)
+
+
+### Features
+
+* **accountPageHeaderComponent:** L3-6606 add account page header component ([#606](https://github.com/PhillipsAuctionHouse/seldon/issues/606)) ([c1a99f6](https://github.com/PhillipsAuctionHouse/seldon/commit/c1a99f6e1a3cce7a881c469a82746838051153b3))
+
 # [1.140.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.139.0...v1.140.0) (2025-05-05)
 
 
