@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
-import PhoneNumberPicker, { PhoneNumberPickerProps } from './PhoneNumberPicker';
 import React from 'react';
+import PhoneNumberPicker, { PhoneNumberPickerProps } from './PhoneNumberPicker';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -20,6 +20,6 @@ export const Playground = ({ ...props }: PhoneNumberPickerProps) => {
 };
 
 Playground.args = {
-  label: 'Phone',
+  labelText: 'Phone',
   id: 'phone-num-picker-test',
 };

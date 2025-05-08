@@ -1,5 +1,5 @@
-import React from 'react';
 import { Meta } from '@storybook/react';
+import React from 'react';
 import ComboBox, { ComboBoxProps } from './ComboBox';
 
 const meta = {
@@ -27,7 +27,7 @@ export const Playground = (props: ComboBoxProps) => {
 Playground.args = {
   options: birthdays,
   id: 'birthdays-combo-box',
-  label: 'Birth Year',
+  labelText: 'Birth Year',
 };
 
 Playground.argTypes = {};
