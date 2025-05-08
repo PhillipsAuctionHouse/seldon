@@ -1,3 +1,10 @@
+## [1.142.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.142.0...v1.142.1) (2025-05-08)
+
+
+### Bug Fixes
+
+* **UserManagement:** L3-4229 make account icon responsive ([#609](https://github.com/PhillipsAuctionHouse/seldon/issues/609)) ([42d5243](https://github.com/PhillipsAuctionHouse/seldon/commit/42d5243e78aefcf63cefddff9b904809012abb89))
+
 # [1.142.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.141.0...v1.142.0) (2025-05-07)
 
 
