@@ -1,7 +1,8 @@
-import { render, screen, act } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { describe, it } from 'vitest';
 import { useToast } from './useToast';
 import { ToastProvider } from './ToastContextProvider';
+import userEvent from '@testing-library/user-event';
 
 const TestComponent = () => {
   const toast = useToast();
@@ -24,36 +25,30 @@ const TestComponent = () => {
 };
 
 describe('useToast', () => {
-  it('shows toast with basic config', () => {
+  it('shows toast with basic config', async () => {
     render(
       <ToastProvider>
         <TestComponent />
       </ToastProvider>,
     );
 
-    act(() => {
-      screen.getByText('Show Basic Toast').click();
-    });
-
-    expect(screen.getByText('Basic Toast')).toBeInTheDocument();
+    await userEvent.click(await screen.findByText('Show Basic Toast'));
+    await screen.findByText('Basic Toast');
   });
 
-  it('shows toast with action', () => {
+  it('shows toast with action', async () => {
     render(
       <ToastProvider>
         <TestComponent />
       </ToastProvider>,
     );
 
-    act(() => {
-      screen.getByText('Show Action Toast').click();
-    });
-
-    expect(screen.getByText('Action Toast')).toBeInTheDocument();
-    expect(screen.getByText('Action')).toBeInTheDocument();
+    await userEvent.click(await screen.findByText('Show Action Toast'));
+    await screen.findByText('Action Toast');
+    await screen.findByText('Action');
   });
 
-  it('accepts string shorthand', () => {
+  it('accepts string shorthand', async () => {
     const TestStringToast = () => {
       const toast = useToast();
       return <button onClick={() => toast('Quick message')}>Show Toast</button>;
@@ -65,10 +60,7 @@ describe('useToast', () => {
       </ToastProvider>,
     );
 
-    act(() => {
-      screen.getByText('Show Toast').click();
-    });
-
-    expect(screen.getByText('Quick message')).toBeInTheDocument();
+    await userEvent.click(await screen.findByText('Show Toast'));
+    await screen.findByText('Quick message');
   });
 });

@@ -1,12 +1,10 @@
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import { type PropsWithChildren, createContext, useCallback, useState } from 'react';
-import Toast from './Toast';
+import Toast, { PrimitiveToastProps } from './Toast';
 import { px } from '../../utils';
 
-interface Toast extends ToastPrimitive.ToastProps {
+interface Toast extends PrimitiveToastProps {
   id: string;
-  title?: string;
-  description?: string;
 }
 
 export interface ToastContextType {
