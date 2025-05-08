@@ -65,6 +65,10 @@
     @media (max-width: $breakpoint-lg) {
       transform: translate(-65px, 1px);
     }
+
+    @media (max-width: $breakpoint-xl) {
+      transform: translate(-65px, 2px);
+    }
   }
 
   &__dropdown-button {
@@ -76,6 +80,10 @@
 
     @media (max-width: $breakpoint-lg) {
       transform: translate(-35px, 1px);
+    }
+
+    @media (max-width: $breakpoint-xl) {
+      transform: translate(-35px, 2px);
     }
   }
 

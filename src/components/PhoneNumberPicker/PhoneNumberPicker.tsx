@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { CountryCode, getCountries, getCountryCallingCode } from 'libphonenumber-js';
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { getCommonProps } from '../../utils';
 import { ComboBox } from '../ComboBox';
 
@@ -43,16 +43,16 @@ export interface PhoneNumberPickerProps {
 const PhoneNumberPicker = React.forwardRef<HTMLDivElement, PhoneNumberPickerProps>(
   ({ inputValue, labelText, className, id, setInputValue, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'PhoneNumberPicker');
-    const countries = useMemo(() => getCountries(), []);
-    const getCountryCode = useCallback((countryCode: CountryCode) => getCountryCallingCode(countryCode), []);
     const countriesWithCode = useMemo(() => {
+      const countries = getCountries();
+      const getCountryCode = (countryCode: CountryCode) => getCountryCallingCode(countryCode);
       return countries.map((country) => {
         return {
           label: country,
           value: `+${getCountryCode(country)}`,
         };
       });
-    }, [countries, getCountryCode]);
+    }, []);
 
     return (
       <div ref={ref} className={classnames(baseClassName, className)} id={id} {...commonProps}>
