@@ -55,17 +55,12 @@
   }
 
   &__account-icon {
-    a {
-      align-items: center;
-      display: flex;
-      height: $mobile-minimum-clickable-area;
-      justify-content: center;
-      width: $mobile-minimum-clickable-area;
-    }
+    height: 1.5rem;
+    width: 1.5rem;
 
     @include isHeaderDesktop {
-      height: 1.5rem;
-      width: 1.5rem;
+      height: 1rem;
+      width: 1rem;
     }
   }
 }
