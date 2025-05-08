@@ -1,3 +1,10 @@
+# [1.143.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.142.1...v1.143.0) (2025-05-08)
+
+
+### Features
+
+* **countdown:** L3-6379 allow custom currentDate prop ([#613](https://github.com/PhillipsAuctionHouse/seldon/issues/613)) ([f325a0e](https://github.com/PhillipsAuctionHouse/seldon/commit/f325a0ebdf1bd093ab6664956cab9acbbee48841))
+
 ## [1.142.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.142.0...v1.142.1) (2025-05-08)
 
 
