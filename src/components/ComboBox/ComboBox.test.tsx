@@ -81,7 +81,7 @@ describe('ComboBox', () => {
     expect(screen.queryByText('No Options.')).toBeInTheDocument();
   });
 
-  it('should clear input value when the close button is clicked', async () => {
+  it('should clear input value when user clicks outside of input', async () => {
     const mockSetInputValue = vi.fn();
     render(
       <>

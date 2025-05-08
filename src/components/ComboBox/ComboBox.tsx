@@ -9,6 +9,10 @@ import { getScssVar } from '../../utils/scssUtils';
 
 export interface ComboBoxProps {
   /**
+   * Boolean to specify whether you want the underlying label to be visually hidden
+   */
+  hideLabel?: boolean;
+  /**
    * List of options to be displayed in the ComboBox.
    */
   options: {
@@ -61,6 +65,8 @@ export interface ComboBoxProps {
  *
  * This is a ComboBox component that allows users to select from a list of options or enter a custom value.
  *
+ * [Figma Link] https://www.figma.com/design/rIefa3bRPyZbZmtyV9PSQv/My-Account?node-id=1-3&p=f&m=dev
+ *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-comboBox--overview)
  */
 const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboBox(
@@ -76,6 +82,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     ariaLabelInput,
     ariaLabelClear,
     ariaLabelContent,
+    hideLabel = false,
     ...props
   },
   ref,
@@ -108,12 +115,17 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
 
   return (
     <div ref={ref} className={classnames(baseClassName, className)} id={id} {...commonProps} {...props}>
-      <label htmlFor={`${id}-input`} className={`${baseClassName}__label`} data-testid={`${id}-label`}>
+      <label
+        htmlFor={`${id}-input`}
+        className={classnames(`${baseClassName}__label`, {
+          [`${baseClassName}__label--hidden`]: hideLabel,
+        })}
+        data-testid={`${id}-label`}
+      >
         {labelText}
       </label>
       <Command
         loop
-        shouldFilter={false}
         onKeyDown={(e) => {
           setTimeout(() => {
             if (e.key === 'Escape') {
@@ -124,68 +136,70 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
         ref={setControl}
       >
         <Popover.Root open={true}>
-          <Popover.Trigger asChild>
-            <CommandInput
-              ref={inputRef}
-              placeholder={placeholder}
-              value={inputValue}
-              onValueChange={(value) => {
-                setInputValue(value);
-                setIsOpen(true);
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Tab') {
-                  setIsOpen(false);
-                }
-              }}
-              onFocus={() => {
-                setIsOpen((prev) => !prev);
-                setInputValue(inputValue);
-              }}
-              className={`${baseClassName}__input`}
-              tabIndex={0}
-              aria-label={ariaLabelInput ? ariaLabelInput : `${id}-input`}
-              data-testid={`${id}-input`}
-            />
-          </Popover.Trigger>
-          {inputValue.length > 0 && (
+          <div>
+            <Popover.Trigger asChild>
+              <CommandInput
+                ref={inputRef}
+                placeholder={placeholder}
+                value={inputValue}
+                onValueChange={(value) => {
+                  setInputValue(value);
+                  setIsOpen(true);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Tab') {
+                    setIsOpen(false);
+                  }
+                }}
+                onFocus={() => {
+                  setIsOpen((prev) => !prev);
+                  setInputValue(inputValue);
+                }}
+                className={`${baseClassName}__input`}
+                tabIndex={0}
+                aria-label={ariaLabelInput ? ariaLabelInput : `${id}-input`}
+                data-testid={`${id}-input`}
+              />
+            </Popover.Trigger>
+            {inputValue.length > 0 && (
+              <button
+                className={`${baseClassName}__close-button`}
+                data-testid={`${id}-item-close-button`}
+                onClick={() => setInputValue('')}
+                aria-label={ariaLabelClear ? ariaLabelClear : `${id}-clear`}
+                tabIndex={-1}
+              >
+                <div className={`${baseClassName}__icon`}>
+                  <CloseIcon
+                    color={getScssVar('', '$primary-black')}
+                    height={18}
+                    width={18}
+                    className={`${baseClassName}__icon-button`}
+                  />
+                </div>
+              </button>
+            )}
             <button
-              className={`${baseClassName}__close-button`}
-              data-testid={`${id}-item-close-button`}
-              onClick={() => setInputValue('')}
-              aria-label={ariaLabelClear ? ariaLabelClear : `${id}-clear`}
+              aria-label={ariaLabelDropdown ? ariaLabelDropdown : `${id}-dropdown`}
+              className={`${baseClassName}__dropdown-button`}
+              onClick={() => inputRef.current?.focus()}
+              data-testid={`${id}-dropdown`}
               tabIndex={-1}
             >
-              <div className={`${baseClassName}__icon`}>
-                <CloseIcon
-                  color={getScssVar('', '$primary-black')}
+              <div
+                className={classnames(`${baseClassName}__icon`, {
+                  [`${baseClassName}__icon--flipped`]: isOpen,
+                })}
+              >
+                <DropdownIcon
+                  color={getScssVar('', '$pure-black')}
                   height={18}
                   width={18}
                   className={`${baseClassName}__icon-button`}
                 />
               </div>
             </button>
-          )}
-          <button
-            aria-label={ariaLabelDropdown ? ariaLabelDropdown : `${id}-dropdown`}
-            className={`${baseClassName}__dropdown-button`}
-            onClick={() => inputRef.current?.focus()}
-            data-testid={`${id}-dropdown`}
-            tabIndex={-1}
-          >
-            <div
-              className={classnames(`${baseClassName}__icon`, {
-                [`${baseClassName}__icon--flipped`]: isOpen,
-              })}
-            >
-              <DropdownIcon
-                color={getScssVar('', '$pure-black')}
-                height={18}
-                width={18}
-                className={`${baseClassName}__icon-button`}
-              />
-            </div>
-          </button>
+          </div>
           <Popover.Portal>
             <Popover.Content
               className={`${baseClassName}__content`}

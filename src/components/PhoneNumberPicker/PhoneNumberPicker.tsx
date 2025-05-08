@@ -36,6 +36,8 @@ export interface PhoneNumberPickerProps {
  *
  * Overview of PhoneNumberPicker component
  *
+ * [Figma Link] https://www.figma.com/design/rIefa3bRPyZbZmtyV9PSQv/My-Account?node-id=1-3&p=f&m=dev
+ *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-PhoneNumberPicker--overview)
  */
 const PhoneNumberPicker = React.forwardRef<HTMLDivElement, PhoneNumberPickerProps>(
