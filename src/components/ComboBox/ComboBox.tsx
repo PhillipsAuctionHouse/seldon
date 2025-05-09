@@ -119,10 +119,10 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     );
 
     if (!isInputValueInOptions && autoClearInput) {
-      setIsOpen(false);
       setInputValue('');
     }
 
+    setIsOpen(false);
     event.stopPropagation();
   });
 
