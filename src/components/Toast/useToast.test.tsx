@@ -14,7 +14,8 @@ const TestComponent = () => {
         onClick={() =>
           toast({
             title: 'Action Toast',
-            action: <button>Action</button>,
+            actionElement: <button>Action</button>,
+            actionAltText: 'Action',
           })
         }
       >

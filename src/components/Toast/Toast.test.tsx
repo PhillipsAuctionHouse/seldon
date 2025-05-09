@@ -1,6 +1,7 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import { ToastProvider } from '@radix-ui/react-toast';
+import { ToastProvider } from './ToastContextProvider';
 import Toast, { PrimitiveToastProps } from './Toast';
 import { ReactNode } from 'react';
 
@@ -21,17 +22,43 @@ vi.mock('@radix-ui/react-toast', async () => {
   const actual = await vi.importActual('@radix-ui/react-toast');
   return {
     ...actual,
+    // eslint-disable-next-line react/prop-types
     Root: ({ children, className, ...props }: React.ComponentPropsWithoutRef<'div'>) => (
       <div className={className} data-testid="toast" {...props}>
         {children}
       </div>
     ),
     Title: ({ children }: ToastMockProps) => <div data-testid="toast-title">{children}</div>,
-    Action: ({ children, className }: ToastMockProps) => (
-      <div data-testid="toast-action" className={className}>
-        {children}
-      </div>
-    ),
+    Action: ({
+      children,
+      className,
+      'announce-alt': announceAlt,
+      asChild,
+      altText,
+      ...props
+      // eslint-disable-next-line react/boolean-prop-naming
+    }: ToastMockProps & { 'announce-alt'?: string; asChild?: boolean; altText?: string }) => {
+      if (asChild && React.isValidElement(children)) {
+        return React.cloneElement(children, {
+          className: `${className || ''} ${children.props.className || ''}`.trim(),
+          'data-radix-toast-announce-exclude': '',
+          'data-radix-toast-announce-alt': altText,
+          ...props,
+        } as React.HTMLAttributes<HTMLElement>);
+      }
+
+      return (
+        <div
+          data-testid="toast-action"
+          className={className}
+          data-radix-toast-announce-exclude=""
+          data-radix-toast-announce-alt={altText}
+          {...props}
+        >
+          {children}
+        </div>
+      );
+    },
     Close: ({ children, className, asChild, ...props }: ToastCloseProps) => {
       if (asChild) {
         return children;
@@ -43,31 +70,52 @@ vi.mock('@radix-ui/react-toast', async () => {
       );
     },
     Provider: ({ children }: { children: ReactNode }) => <div data-testid="toast-provider">{children}</div>,
+    Viewport: (props: React.ComponentPropsWithoutRef<'div'>) => <div data-testid="toast-viewport" {...props} />,
   };
 });
 
+// Update ToastWrapper to include Viewport
 const ToastWrapper = (props: Partial<PrimitiveToastProps>) => (
   <ToastProvider>
     <Toast title="Default Title" {...props} />
+    <div data-testid="toast-viewport" />
   </ToastProvider>
 );
 
 describe('Toast', () => {
-  it('renders with title', () => {
+  it('renders with title', async () => {
     render(<ToastWrapper title="Test Toast" />);
-    expect(screen.getByTestId('toast-title')).toHaveTextContent('Test Toast');
+    expect(await screen.findByTestId('toast-title')).toHaveTextContent('Test Toast');
   });
 
-  it('renders with custom className', () => {
+  it('renders with custom className', async () => {
     render(<ToastWrapper title="Test Toast" className="custom-class" />);
-    expect(screen.getByTestId('toast')).toHaveClass('custom-class');
+    expect(await screen.findByTestId('toast')).toHaveClass('custom-class');
   });
 
-  it('renders with action', () => {
-    render(<ToastWrapper title="Test Toast" action={<button data-testid="custom-action">Action</button>} />);
-    expect(screen.getByTestId('toast-action')).toBeInTheDocument();
-    expect(screen.getByTestId('custom-action')).toBeInTheDocument();
-    expect(screen.getByText('Action')).toBeInTheDocument();
+  it('renders with action', async () => {
+    render(
+      <ToastWrapper
+        title="Test Toast"
+        actionElement={
+          <button
+            data-testid="custom-action"
+            className="seldon-button seldon-button--link seldon-toast__action"
+            type="button"
+          >
+            Action
+          </button>
+        }
+        actionAltText="Click for more"
+      />,
+    );
+
+    const actionButton = await screen.findByTestId('custom-action');
+    expect(actionButton).toBeInTheDocument();
+    expect(actionButton).toHaveAttribute('data-radix-toast-announce-alt', 'Click for more');
+    expect(actionButton).toHaveAttribute('data-radix-toast-announce-exclude', '');
+    expect(actionButton).toHaveClass('seldon-button', 'seldon-button--link', 'seldon-toast__action');
+    expect(actionButton).toHaveAttribute('type', 'button');
   });
 
   it('does not render action when not provided', () => {
@@ -75,13 +123,13 @@ describe('Toast', () => {
     expect(screen.queryByTestId('toast-action')).not.toBeInTheDocument();
   });
 
-  it('renders close button', () => {
+  it('renders close button', async () => {
     render(<ToastWrapper title="Test Toast" />);
-    expect(screen.getByLabelText('Close')).toBeInTheDocument();
+    expect(await screen.findByLabelText('Close')).toBeInTheDocument();
   });
 
-  it('passes additional props to the root component', () => {
+  it('passes additional props to the root component', async () => {
     render(<ToastWrapper title="Test Toast" data-custom="value" />);
-    expect(screen.getByTestId('toast')).toHaveAttribute('data-custom', 'value');
+    expect(await screen.findByTestId('toast')).toHaveAttribute('data-custom', 'value');
   });
 });

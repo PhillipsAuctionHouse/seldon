@@ -27,7 +27,8 @@ export const Playground = () => {
         open={true}
         defaultOpen={true}
         onOpenChange={() => void 0}
-        action={
+        actionAltText="Click for more"
+        actionElement={
           <Button
             onClick={() => {
               alert('View Details clicked!');
@@ -68,11 +69,12 @@ const ToastDemo = () => {
         onClick={() =>
           toast({
             title: 'Yay! Your action was successful',
-            action: (
+            actionElement: (
               <Button variant={ButtonVariants.link} onClick={() => alert('Action clicked!')}>
                 Click for more
               </Button>
             ),
+            actionAltText: 'Click for more',
           })
         }
       >

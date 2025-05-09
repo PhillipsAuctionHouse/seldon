@@ -8,7 +8,8 @@ import { ButtonVariants } from '../Button/types';
 
 export interface PrimitiveToastProps extends PrimitiveToast.ToastProps {
   title: string;
-  action?: ReactNode;
+  actionElement?: ReactNode;
+  actionAltText?: string;
 }
 /**
  * ## Overview
@@ -27,27 +28,29 @@ export interface PrimitiveToastProps extends PrimitiveToast.ToastProps {
  *
  * [Radix UI Toast Documentation](https://www.radix-ui.com/docs/primitives/components/toast)
  */
-const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(({ className, title, action, ...props }, ref) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Toast');
+const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(
+  ({ className, title, actionElement, actionAltText, ...props }, ref) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Toast');
 
-  return (
-    <PrimitiveToast.Root {...commonProps} className={classnames(baseClassName, className)} ref={ref}>
-      <div className={`${baseClassName}__content`}>
-        <PrimitiveToast.Title>{title}</PrimitiveToast.Title>
-        {action && (
-          <PrimitiveToast.Action asChild altText="Toast action" className={`${baseClassName}__action`}>
-            {action}
-          </PrimitiveToast.Action>
-        )}
-      </div>
-      <PrimitiveToast.Close className={`${baseClassName}__close`} aria-label="Close" asChild>
-        <IconButton variant={ButtonVariants.link}>
-          <Icon icon="CloseX" title="Close" color="$white" />
-        </IconButton>
-      </PrimitiveToast.Close>
-    </PrimitiveToast.Root>
-  );
-});
+    return (
+      <PrimitiveToast.Root {...commonProps} className={classnames(baseClassName, className)} ref={ref}>
+        <div className={`${baseClassName}__content`}>
+          <PrimitiveToast.Title>{title}</PrimitiveToast.Title>
+          {actionElement && actionAltText && (
+            <PrimitiveToast.Action asChild altText={actionAltText} className={`${baseClassName}__action`}>
+              {actionElement}
+            </PrimitiveToast.Action>
+          )}
+        </div>
+        <PrimitiveToast.Close className={`${baseClassName}__close`} aria-label="Close" asChild>
+          <IconButton variant={ButtonVariants.link}>
+            <Icon icon="CloseX" title="Close" color="$white" />
+          </IconButton>
+        </PrimitiveToast.Close>
+      </PrimitiveToast.Root>
+    );
+  },
+);
 
 Toast.displayName = 'Toast';
 

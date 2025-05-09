@@ -1,14 +1,9 @@
-import { ReactNode } from 'react';
 import { useToastContext } from './useToastContext';
-
-interface ToastOptions {
-  title: string;
-  action?: ReactNode;
-}
+import { PrimitiveToastProps as ToastProps } from './Toast';
 
 export const useToast = () => {
   const { addToast } = useToastContext();
-  const toast = (options: ToastOptions | string) => {
+  const toast = (options: ToastProps | string) => {
     const config = typeof options === 'string' ? { title: options } : options;
     addToast({ ...config });
   };

@@ -8,7 +8,7 @@
   color: $white;
   column-gap: $spacing-sm;
   display: grid;
-  grid-template-areas: 'title action' 'description action';
+  grid-template-areas: 'title action';
   grid-template-columns: auto max-content;
 
   // There are no spacing tokens for the padding used in figma
@@ -82,8 +82,6 @@
 }
 
 .#{$px}-toast-viewport {
-  --viewport-padding: #{$spacing-lg};
-
   bottom: 0;
   display: flex;
   flex-direction: column;
@@ -93,7 +91,7 @@
   margin: 0;
   max-width: 100vw;
   outline: none;
-  padding: var(--viewport-padding);
+  padding: $spacing-lg;
   position: fixed;
   z-index: 99999;
 }
