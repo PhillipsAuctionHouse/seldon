@@ -64,7 +64,8 @@
     "react-remove-scroll": "^2.6.3",
     "react-transition-group": "^4.4.5",
     "react-zoom-pan-pinch": "^3.6.1",
-    "usehooks-ts": "^3.1.0"
+    "usehooks-ts": "^3.1.0",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.3",
@@ -99,6 +100,7 @@
     "@types/react-dom": "^18.0.11",
     "@types/react-modal": "^3.16.3",
     "@types/react-transition-group": "^4.4.11",
+    "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "@vitejs/plugin-react": "^4.3.1",

@@ -1,6 +1,7 @@
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import { type PropsWithChildren, createContext, useCallback, useState } from 'react';
 import Toast, { PrimitiveToastProps } from './Toast';
+import { v4 as uuidv4 } from 'uuid';
 import { px } from '../../utils';
 
 interface Toast extends PrimitiveToastProps {
@@ -28,7 +29,7 @@ export const ToastProvider = ({ children }: PropsWithChildren) => {
    * Adds a new toast notification
    */
   const addToast = useCallback((toast: Omit<Toast, 'id'>) => {
-    const id = Math.random().toString();
+    const id = uuidv4();
     setToasts((prev) => [...prev, { ...toast, id }]);
   }, []);
 
