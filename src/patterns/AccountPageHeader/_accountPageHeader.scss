@@ -10,9 +10,20 @@
 
   &__header {
     align-items: center;
+    border: 1px solid orange;
     display: flex;
     gap: $spacing-md;
     justify-content: space-between;
+
+    > span {
+      border: 1px solid green;
+    }
+  }
+
+  &__title-wrapper {
+    align-items: center;
+    border: 1px solid green;
+    display: flex;
   }
 
   &__overline {
@@ -22,6 +33,7 @@
 
   &__button-wrapper {
     align-items: center;
+    border: 1px solid blue;
     display: flex;
     gap: $spacing-sm;
     justify-content: center;
