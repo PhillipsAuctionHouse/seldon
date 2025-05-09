@@ -202,3 +202,12 @@ export const encodeURLSearchParams = (url: string) => {
   const encodedLink = `${urlSections[0]}?${encodedQueryString}`;
   return encodedLink;
 };
+
+export const focusElementById = (elementId: string, focus: boolean) => {
+  const element = document.getElementById(elementId);
+  if (element && focus) {
+    element.focus();
+  } else if (element) {
+    element.blur();
+  }
+};
