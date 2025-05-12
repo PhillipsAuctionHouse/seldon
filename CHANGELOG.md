@@ -1,3 +1,10 @@
+## [1.143.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.143.0...v1.143.1) (2025-05-12)
+
+
+### Bug Fixes
+
+* **countdown:** L3-6379 pass currentDateTime props through countdown … ([#615](https://github.com/PhillipsAuctionHouse/seldon/issues/615)) ([4fe31db](https://github.com/PhillipsAuctionHouse/seldon/commit/4fe31dbb484e11d429be3fb6b5e2d7f808324c3b))
+
 # [1.143.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.142.1...v1.143.0) (2025-05-08)
 
 
