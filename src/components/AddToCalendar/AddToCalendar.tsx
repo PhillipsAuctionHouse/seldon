@@ -19,6 +19,15 @@ export interface AddToCalendarProps extends ComponentProps<'div'> {
   label?: string;
 }
 
+/**
+ *
+ * Allows users to add an event to their calendar using various calendar services.
+ *
+ * [Figma Link](https://www.figma.com/design/OvBXAq48blO1r4qYbeBPjW/RW---Sale-Page--PLP-?node-id=4791-42453&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-addtocalendar--overview)
+ */
+
 const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
   ({ className, event, label = 'Add to calendar', linkElement: Component = Link, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'AddToCalendar');
