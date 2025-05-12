@@ -43,6 +43,9 @@ export interface CountdownProps extends ComponentProps<'div'> {
    * Variant of the countdown
    */
   variant?: CountdownVariants;
+  /**
+   * The current date time (defaults to new Date())
+   */
   currentDateTime?: Date;
 }
 /**

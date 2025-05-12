@@ -179,6 +179,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
             locale={SupportedLanguages[lang]}
             formatDurationStr={formatDurationStr}
             showBottomBorder={false}
+            currentDateTime={now}
           />
         ) : null}
       </div>

@@ -30,12 +30,12 @@
 
   &--compact {
     .#{$px}-countdown__countdown-container {
+      gap: $spacing-xsm;
+
       @include Montserrat;
       .#{$px}-duration {
         @include Montserrat;
       }
-
-      gap: $spacing-xsm;
     }
   }
 
