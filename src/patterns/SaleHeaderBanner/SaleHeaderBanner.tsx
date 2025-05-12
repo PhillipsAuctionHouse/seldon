@@ -130,7 +130,7 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
       label: countdownTimerLabel,
       formatDurationStr: countdownFormatDuration,
       currentDateTime,
-    };
+    } satisfies CountdownProps;
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
