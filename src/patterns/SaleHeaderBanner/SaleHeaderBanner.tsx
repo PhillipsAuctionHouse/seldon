@@ -118,7 +118,7 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
       footerElement,
       headerLabel,
       showTimer,
-      currentDateTime = new Date(),
+      currentDateTime,
       ...props
     },
     ref,
