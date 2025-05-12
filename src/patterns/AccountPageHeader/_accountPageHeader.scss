@@ -8,22 +8,16 @@
     width: 100%;
   }
 
-  &__header {
-    align-items: center;
-    border: 1px solid orange;
-    display: flex;
-    gap: $spacing-md;
-    justify-content: space-between;
-
-    > span {
-      border: 1px solid green;
-    }
+  &__title {
+    // To help center the title, accounts for the extra space inside the span below the text
+    margin-top: 4px;
   }
 
   &__title-wrapper {
     align-items: center;
-    border: 1px solid green;
     display: flex;
+    gap: $spacing-md;
+    justify-content: space-between;
   }
 
   &__overline {
@@ -33,7 +27,6 @@
 
   &__button-wrapper {
     align-items: center;
-    border: 1px solid blue;
     display: flex;
     gap: $spacing-sm;
     justify-content: center;

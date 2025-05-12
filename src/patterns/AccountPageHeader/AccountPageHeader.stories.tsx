@@ -65,14 +65,14 @@ export const List = () => (
     overline="List"
     actionButtons={[
       {
-        ariaLabel: 'Favorite',
-        icon: 'Favorite',
-        onClick: () => alert('Favorite clicked'),
+        ariaLabel: 'Edit',
+        icon: 'Edit',
+        onClick: () => alert('Edit clicked'),
       },
       {
-        ariaLabel: 'Share',
-        icon: 'Share',
-        onClick: () => alert('Share clicked'),
+        ariaLabel: 'Delete',
+        icon: 'Delete',
+        onClick: () => alert('Delete clicked'),
       },
     ]}
   />

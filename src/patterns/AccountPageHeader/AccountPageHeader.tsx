@@ -95,8 +95,10 @@ const AccountPageHeader = forwardRef<HTMLDivElement, AccountPageHeaderProps>(
               {overline}
             </Text>
           )}
-          <div className={`${baseClassName}__header`}>
-            <Text variant={TextVariants.title1}>{title}</Text>
+          <div className={`${baseClassName}__title-wrapper`}>
+            <Text variant={TextVariants.title1} className={`${baseClassName}__title`}>
+              {title}
+            </Text>
             {actionButtons && actionButtons.length > 0 && renderButtons()}
           </div>
           {subtitle && (
