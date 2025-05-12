@@ -1,5 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 import { render, fireEvent, act, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import AddToCalendar from './AddToCalendar';
 import { CalendarEvent } from './types';
 import * as calendarLinks from './calendarLinks';
@@ -37,23 +38,22 @@ describe('AddToCalendar component', () => {
     expect(getByRole('button')).toBeInTheDocument();
   });
 
-  test('renders calendar links and changes icon to Cross on trigger click', () => {
-    const { getByRole, getByText } = render(<AddToCalendar event={event} label="Add to calendar" />);
+  test('renders calendar links and changes icon to CloseX on trigger click', async () => {
+    const user = userEvent.setup();
+    const { getByRole } = render(<AddToCalendar event={event} label="Add to calendar" />);
     const button = getByRole('button', { name: 'Add to calendar' });
 
-    // Click the button to open the Popover
-    act(() => {
-      fireEvent.click(button);
-    });
+    // Click the button to open the dropdown
+    await user.click(button);
 
     // Check if the calendar links are rendered
-    expect(getByText('Google Calendar')).toBeInTheDocument();
-    expect(getByText('Outlook Online')).toBeInTheDocument();
-    expect(getByText('Yahoo Calendar')).toBeInTheDocument();
+    expect(await screen.findByText('Google Calendar')).toBeInTheDocument();
+    expect(await screen.findByText('Outlook Online')).toBeInTheDocument();
+    expect(await screen.findByText('Yahoo Calendar')).toBeInTheDocument();
 
-    // Check if the icon changes to Cross
-    const crossIcon = screen.getByTestId('icon-close-x');
-    expect(crossIcon).toBeInTheDocument();
+    // Check if the icon changes to CloseX
+    const closeIcon = screen.getByTestId('icon-close-x');
+    expect(closeIcon).toBeInTheDocument();
   });
 
   test('renders button with default aria-label when event title is missing', () => {
@@ -82,21 +82,19 @@ describe('AddToCalendar component', () => {
     });
 
     const generateCalendarFileSpy = vi.spyOn(calendarLinks, 'generateCalendarFile');
+    const user = userEvent.setup();
+
     const { getByRole, findByRole } = render(<AddToCalendar event={event} label="Add to calendar" />);
     const triggerButton = getByRole('button', { name: 'Add to calendar' });
 
     // Open the Popover
-    act(() => {
-      fireEvent.click(triggerButton);
-    });
+    await user.click(triggerButton);
 
     // Find the Outlook button within the Popover
     const outlookButton = await findByRole('button', { name: 'Outlook' });
 
     // Click the Outlook button
-    act(() => {
-      fireEvent.click(outlookButton);
-    });
+    await user.click(outlookButton);
 
     // Verify that generateCalendarFile is called with the event
     expect(generateCalendarFileSpy).toHaveBeenCalledTimes(1);
@@ -119,18 +117,16 @@ describe('AddToCalendar component', () => {
     });
 
     const generateCalendarFileSpy = vi.spyOn(calendarLinks, 'generateCalendarFile');
+    const user = userEvent.setup();
+
     const { getByRole } = render(<AddToCalendar event={event} label="Add Jewels & More: Online Auction to calendar" />);
     const triggerButton = getByRole('button', { name: 'Add Jewels & More: Online Auction to calendar' });
 
     // Open the Popover
-    act(() => {
-      fireEvent.click(triggerButton);
-    });
+    await user.click(triggerButton);
 
     const iCalendarButton = await screen.findByRole('button', { name: 'iCalendar' });
-    act(() => {
-      fireEvent.click(iCalendarButton);
-    });
+    await user.click(iCalendarButton);
 
     expect(generateCalendarFileSpy).toHaveBeenCalledTimes(1);
     expect(generateCalendarFileSpy).toHaveBeenCalledWith(event);
