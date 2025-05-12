@@ -19,19 +19,19 @@ export interface AddToCalendarProps extends ComponentProps<'div'> {
   label?: string;
 }
 
-/**
- *
- * Allows users to add an event to their calendar using various calendar services.
- *
- * [Figma Link](https://www.figma.com/design/OvBXAq48blO1r4qYbeBPjW/RW---Sale-Page--PLP-?node-id=4791-42453&m=dev)
- *
- * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-addtocalendar--overview)
- */
-
 const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
   ({ className, event, label = 'Add to calendar', linkElement: Component = Link, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'AddToCalendar');
     const [open, setOpen] = useState(false);
+
+    const handleSelect = (e: Event, link?: string, isFile?: boolean) => {
+      e.preventDefault();
+      if (isFile) {
+        generateCalendarFile(event);
+      } else if (link) {
+        window.open(link, '_blank');
+      }
+    };
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
@@ -54,27 +54,42 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
               avoidCollisions={false}
               className={`${baseClassName}-atcb-list`}
             >
-              <DropdownMenu.Item className={`${baseClassName}-atcb-item`}>
-                <button className={`${baseClassName}-atcb-item-link`} onClick={() => generateCalendarFile(event)}>
+              <DropdownMenu.Item
+                className={`${baseClassName}-atcb-item`}
+                onSelect={(e) => handleSelect(e, undefined, true)}
+              >
+                <button className={`${baseClassName}-atcb-item-link`}>
                   <Text variant={TextVariants.body2}>iCalendar</Text>
                 </button>
               </DropdownMenu.Item>
-              <DropdownMenu.Item className={`${baseClassName}-atcb-item`}>
+              <DropdownMenu.Item
+                className={`${baseClassName}-atcb-item`}
+                onSelect={(e) => handleSelect(e, generateGoogleCalendarLink(event))}
+              >
                 <Component className={`${baseClassName}-atcb-item-link`} href={generateGoogleCalendarLink(event)}>
                   Google Calendar
                 </Component>
               </DropdownMenu.Item>
-              <DropdownMenu.Item className={`${baseClassName}-atcb-item`}>
-                <button className={`${baseClassName}-atcb-item-link`} onClick={() => generateCalendarFile(event)}>
+              <DropdownMenu.Item
+                className={`${baseClassName}-atcb-item`}
+                onSelect={(e) => handleSelect(e, undefined, true)}
+              >
+                <button className={`${baseClassName}-atcb-item-link`}>
                   <Text variant={TextVariants.body2}>Outlook</Text>
                 </button>
               </DropdownMenu.Item>
-              <DropdownMenu.Item className={`${baseClassName}-atcb-item`}>
+              <DropdownMenu.Item
+                className={`${baseClassName}-atcb-item`}
+                onSelect={(e) => handleSelect(e, generateOutlookOnlineLink(event))}
+              >
                 <Component className={`${baseClassName}-atcb-item-link`} href={generateOutlookOnlineLink(event)}>
                   Outlook Online
                 </Component>
               </DropdownMenu.Item>
-              <DropdownMenu.Item className={`${baseClassName}-atcb-item`}>
+              <DropdownMenu.Item
+                className={`${baseClassName}-atcb-item`}
+                onSelect={(e) => handleSelect(e, generateYahooCalendarLink(event))}
+              >
                 <Component className={`${baseClassName}-atcb-item-link`} href={generateYahooCalendarLink(event)}>
                   Yahoo Calendar
                 </Component>
