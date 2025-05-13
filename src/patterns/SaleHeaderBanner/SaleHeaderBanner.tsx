@@ -82,6 +82,10 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
    * What action does the CTA take?
    */
   onClick?: () => void;
+  /**
+   * Current date time (defaults to new Date())
+   */
+  currentDateTime?: Date;
 }
 /**
  * ## Overview
@@ -114,6 +118,7 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
       footerElement,
       headerLabel,
       showTimer,
+      currentDateTime,
       ...props
     },
     ref,
@@ -124,7 +129,8 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
       endDateTime: auctionEndTime as Date,
       label: countdownTimerLabel,
       formatDurationStr: countdownFormatDuration,
-    };
+      currentDateTime,
+    } satisfies CountdownProps;
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>

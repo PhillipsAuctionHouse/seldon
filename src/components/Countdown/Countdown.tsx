@@ -43,6 +43,10 @@ export interface CountdownProps extends ComponentProps<'div'> {
    * Variant of the countdown
    */
   variant?: CountdownVariants;
+  /**
+   * The current date time (defaults to new Date())
+   */
+  currentDateTime?: Date;
 }
 /**
  * ## Overview
@@ -64,12 +68,13 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
       locale = 'en',
       showBottomBorder = true,
       variant = CountdownVariants.default,
+      currentDateTime: currentDateTimeProp = new Date(),
       ...props
     },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Countdown');
-    const [currentDateTime, setCurrentDateTime] = useState(new Date());
+    const [currentDateTime, setCurrentDateTime] = useState(currentDateTimeProp);
 
     const dateFnsLocale = locale === SupportedLanguages.zh ? zhCN : enUS;
 
@@ -89,15 +94,18 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
 
     useEffect(() => {
       const timer = setInterval(() => {
-        setCurrentDateTime(new Date());
+        setCurrentDateTime((currentTime) => {
+          return new Date(currentTime.getTime() + 1000);
+        });
       }, 1000);
 
       return () => clearInterval(timer);
-    }, [endDateTime]);
+    }, [endDateTime, currentDateTimeProp]);
 
     const showTimer = useMemo(() => {
-      return new Date(endDateTime).getTime() > new Date().getTime();
-    }, [endDateTime]);
+      // we use the prop instead of the state variable to avoid hiding the timer when it hits 0
+      return new Date(endDateTime).getTime() > currentDateTimeProp.getTime();
+    }, [endDateTime, currentDateTimeProp]);
 
     const isClosingTag = differenceInMilliseconds(endDateTime, currentDateTime) <= 3 * 60 * 1000;
 

@@ -63,12 +63,12 @@ const UserManagement = forwardRef<HTMLDivElement, UserManagementProps>(
           <>
             {isLoggedIn ? (
               <AccountDetailsComponent className={`${baseClassName}__login`} href={href} disabled={disabled}>
-                <Icon icon="Account" className={`${baseClassName}__account-icon`} height="1rem" width="1rem" />
+                <Icon icon="Account" className={`${baseClassName}__account-icon`} height="100%" width="100%" />
                 <Text variant={TextVariants.body3}>{accountLabel}</Text>
               </AccountDetailsComponent>
             ) : (
               <button className={`${baseClassName}__login`} onClick={onLogin} disabled={disabled}>
-                <Icon icon="Account" className={`${baseClassName}__account-icon`} height="1rem" width="1rem" />
+                <Icon icon="Account" className={`${baseClassName}__account-icon`} height="100%" width="100%" />
                 <Text variant={TextVariants.body3}>{loginLabel}</Text>
               </button>
             )}
