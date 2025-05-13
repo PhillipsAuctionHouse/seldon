@@ -27,6 +27,11 @@
     gap: $spacing-micro;
   }
 
+  &__date_info {
+    display: flex;
+    flex-direction: row;
+  }
+
   &__separator {
     margin: 0 8px;
   }

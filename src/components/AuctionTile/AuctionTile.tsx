@@ -22,16 +22,17 @@ export type AuctionTileProps = ComponentProps<'div'> & {
 const AuctionTile = forwardRef<HTMLDivElement, AuctionTileProps>(
   ({ className, auctionImageHref, auctionType, auctionTitle, auctionDate, auctionLocation, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'AuctionTile');
+    const componentProps = { ...commonProps, ...props };
 
     return (
-      <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
+      <div {...componentProps} className={classnames(baseClassName, className)} ref={ref}>
         <div className={`${baseClassName}__image`}>
           <img src={auctionImageHref} alt="Auction Image" />
         </div>
         <div className={`${baseClassName}__details`}>
           <Text variant={TextVariants.badge}>{auctionType}</Text>
           <Text variant={TextVariants.title4}>{auctionTitle}</Text>
-          <div>
+          <div className={`${baseClassName}__date_location`}>
             <Text variant={TextVariants.string2}>{auctionDate}</Text>
             <span className={`${baseClassName}__separator`}>•</span>
             <Text variant={TextVariants.string2}>{auctionLocation}</Text>
