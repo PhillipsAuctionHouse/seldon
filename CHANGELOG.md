@@ -1,3 +1,10 @@
+## [1.143.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.143.1...v1.143.2) (2025-05-13)
+
+
+### Bug Fixes
+
+* **Header:** L3-6500 Fix hover state ([#614](https://github.com/PhillipsAuctionHouse/seldon/issues/614)) ([c7a8246](https://github.com/PhillipsAuctionHouse/seldon/commit/c7a82460277461055a99e18fdeaa82a5d88cdacc))
+
 ## [1.143.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.143.0...v1.143.1) (2025-05-12)
 
 
