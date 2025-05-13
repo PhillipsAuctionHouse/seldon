@@ -149,7 +149,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
           }}
         >
           <Popover.Root open={true}>
-            <div>
+            <div className={`${baseClassName}__input-wrapper`}>
               <Popover.Trigger asChild>
                 <CommandInput
                   ref={inputRef}
