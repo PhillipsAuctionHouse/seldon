@@ -5,6 +5,7 @@ import { Text, TextVariants } from '../Text';
 
 export type AuctionTileProps = ComponentProps<'div'> & {
   auctionImageHref: string;
+  auctionImageAlt?: string;
   auctionType: string;
   auctionTitle: string;
   auctionDate: string;
@@ -20,14 +21,26 @@ export type AuctionTileProps = ComponentProps<'div'> & {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-auctiontile--overview)
  */
 const AuctionTile = forwardRef<HTMLDivElement, AuctionTileProps>(
-  ({ className, auctionImageHref, auctionType, auctionTitle, auctionDate, auctionLocation, ...props }, ref) => {
+  (
+    {
+      className,
+      auctionImageHref,
+      auctionImageAlt = 'Auction Image',
+      auctionType,
+      auctionTitle,
+      auctionDate,
+      auctionLocation,
+      ...props
+    },
+    ref,
+  ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'AuctionTile');
     const componentProps = { ...commonProps, ...props };
 
     return (
       <div {...componentProps} className={classnames(baseClassName, className)} ref={ref}>
         <div className={`${baseClassName}__image`}>
-          <img src={auctionImageHref} alt="Auction Image" />
+          <img src={auctionImageHref} alt={auctionImageAlt} />
         </div>
         <div className={`${baseClassName}__details`}>
           <Text variant={TextVariants.badge}>{auctionType}</Text>
