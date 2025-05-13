@@ -58,7 +58,7 @@
     "dompurify": "^3.2.4",
     "embla-carousel-class-names": "^8.5.1",
     "embla-carousel-react": "^8.5.1",
-    "embla-carousel-wheel-gestures": "^8.0.1",
+    "embla-carousel-wheel-gestures": "^8.0.2",
     "flatpickr": "^4.6.13",
     "html-react-parser": "^5.2.2",
     "ics": "^3.8.1",
