@@ -54,6 +54,7 @@
     }
 
     &--hovered &__submenu {
+      cursor: default;
       left: 0;
       max-height: calc(90vh - #{$header-height});
       opacity: 1;
