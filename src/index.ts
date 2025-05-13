@@ -47,7 +47,7 @@ export {
   default as NavigationList,
   type NavigationListProps,
 } from './components/Navigation/NavigationList/NavigationList';
-export { default as PageContentWrapper } from './components/PageContentWrapper/PageContentWrapper';
+
 export {
   default as Pagination,
   type PaginationOption,
@@ -82,6 +82,17 @@ export {
 } from './patterns/ViewingsList/StatefulViewingsList';
 export { default as ViewingsList, type ViewingsListProps } from './patterns/ViewingsList/ViewingsList';
 export * from './providers/SeldonProvider/SeldonProvider';
+
+export * from './components/Carousel';
+export * from './components/ComboBox';
+export * from './components/Detail';
+export { default as PageContentWrapper } from './components/PageContentWrapper/PageContentWrapper';
+export * from './components/PinchZoom';
+export * from './components/SeldonImage';
+export * from './components/Tabs';
+export * from './patterns/DetailList';
+export * from './patterns/SaleHeaderBanner';
+
 export { default as Footer, type FooterProps } from './site-furniture/Footer/Footer';
 export { default as Header, type HeaderProps } from './site-furniture/Header/Header';
 export * from './types/commonTypes';
