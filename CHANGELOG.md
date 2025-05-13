@@ -1,3 +1,10 @@
+# [1.145.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.144.0...v1.145.0) (2025-05-13)
+
+
+### Features
+
+* **AddToCalendar:** L3-5753 Add to calendar component revised ([#600](https://github.com/PhillipsAuctionHouse/seldon/issues/600)) ([a3827d7](https://github.com/PhillipsAuctionHouse/seldon/commit/a3827d7ea893ebb0d70909ce57a65b9db2ce0087))
+
 # [1.144.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.143.2...v1.144.0) (2025-05-13)
 
 
