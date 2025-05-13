@@ -24,14 +24,22 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'AddToCalendar');
     const [open, setOpen] = useState(false);
 
-    const handleSelect = (e: Event, link?: string, isFile?: boolean) => {
+    const handleSelect = (e: Event, action: 'file' | 'link', link?: string) => {
       e.preventDefault();
-      if (isFile) {
+      if (action === 'file') {
         generateCalendarFile(event);
-      } else if (link) {
+      } else if (action === 'link' && link) {
         window.open(link, '_blank');
       }
     };
+
+    const menuItems: { label: string; action: 'link' | 'file'; link?: string }[] = [
+      { label: 'iCalendar', action: 'file' },
+      { label: 'Google Calendar', action: 'link', link: generateGoogleCalendarLink(event) },
+      { label: 'Outlook', action: 'file' },
+      { label: 'Outlook Online', action: 'link', link: generateOutlookOnlineLink(event) },
+      { label: 'Yahoo Calendar', action: 'link', link: generateYahooCalendarLink(event) },
+    ];
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
@@ -54,46 +62,23 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
               avoidCollisions={false}
               className={`${baseClassName}-atcb-list`}
             >
-              <DropdownMenu.Item
-                className={`${baseClassName}-atcb-item`}
-                onSelect={(e) => handleSelect(e, undefined, true)}
-              >
-                <button className={`${baseClassName}-atcb-item-link`}>
-                  <Text variant={TextVariants.body2}>iCalendar</Text>
-                </button>
-              </DropdownMenu.Item>
-              <DropdownMenu.Item
-                className={`${baseClassName}-atcb-item`}
-                onSelect={(e) => handleSelect(e, generateGoogleCalendarLink(event))}
-              >
-                <Component className={`${baseClassName}-atcb-item-link`} href={generateGoogleCalendarLink(event)}>
-                  Google Calendar
-                </Component>
-              </DropdownMenu.Item>
-              <DropdownMenu.Item
-                className={`${baseClassName}-atcb-item`}
-                onSelect={(e) => handleSelect(e, undefined, true)}
-              >
-                <button className={`${baseClassName}-atcb-item-link`}>
-                  <Text variant={TextVariants.body2}>Outlook</Text>
-                </button>
-              </DropdownMenu.Item>
-              <DropdownMenu.Item
-                className={`${baseClassName}-atcb-item`}
-                onSelect={(e) => handleSelect(e, generateOutlookOnlineLink(event))}
-              >
-                <Component className={`${baseClassName}-atcb-item-link`} href={generateOutlookOnlineLink(event)}>
-                  Outlook Online
-                </Component>
-              </DropdownMenu.Item>
-              <DropdownMenu.Item
-                className={`${baseClassName}-atcb-item`}
-                onSelect={(e) => handleSelect(e, generateYahooCalendarLink(event))}
-              >
-                <Component className={`${baseClassName}-atcb-item-link`} href={generateYahooCalendarLink(event)}>
-                  Yahoo Calendar
-                </Component>
-              </DropdownMenu.Item>
+              {menuItems.map((item) => (
+                <DropdownMenu.Item
+                  key={item.label}
+                  className={`${baseClassName}-atcb-item`}
+                  onSelect={(e) => handleSelect(e, item.action, item.link)}
+                >
+                  {item.action === 'link' ? (
+                    <Component className={`${baseClassName}-atcb-item-link`} href={item.link}>
+                      {item.label}
+                    </Component>
+                  ) : (
+                    <button className={`${baseClassName}-atcb-item-link`}>
+                      <Text variant={TextVariants.body2}>{item.label}</Text>
+                    </button>
+                  )}
+                </DropdownMenu.Item>
+              ))}
             </DropdownMenu.Content>
           </DropdownMenu.Portal>
         </DropdownMenu.Root>
