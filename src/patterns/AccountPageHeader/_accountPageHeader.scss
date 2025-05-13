@@ -10,7 +10,7 @@
 
   &__title {
     // To help center the title, accounts for the extra space inside the span below the text
-    margin-top: 4px;
+    margin-top: $spacing-micro;
   }
 
   &__title-wrapper {
