@@ -24,8 +24,7 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'AddToCalendar');
     const [open, setOpen] = useState(false);
 
-    const handleSelect = (e: Event, action: 'file' | 'link', link?: string) => {
-      e.preventDefault();
+    const handleSelect = (action: 'file' | 'link', link?: string) => {
       if (action === 'file') {
         generateCalendarFile(event);
       } else if (action === 'link' && link) {
@@ -66,7 +65,7 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
                 <DropdownMenu.Item
                   key={item.label}
                   className={`${baseClassName}-atcb-item`}
-                  onSelect={(e) => handleSelect(e, item.action, item.link)}
+                  onSelect={() => handleSelect(item.action, item.link)}
                 >
                   {item.action === 'link' ? (
                     <Component className={`${baseClassName}-atcb-item-link`} href={item.link}>
