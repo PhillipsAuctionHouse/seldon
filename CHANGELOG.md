@@ -1,3 +1,10 @@
+# [1.144.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.143.2...v1.144.0) (2025-05-13)
+
+
+### Features
+
+* **ComboBox:** L3-6409 Combo box Component ([#602](https://github.com/PhillipsAuctionHouse/seldon/issues/602)) ([838b30d](https://github.com/PhillipsAuctionHouse/seldon/commit/838b30d07a545b372e61140124330f8a7a227c88))
+
 ## [1.143.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.143.1...v1.143.2) (2025-05-13)
 
 
