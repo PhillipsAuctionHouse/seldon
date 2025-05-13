@@ -60,6 +60,11 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
               data-side="bottom"
               avoidCollisions={false}
               className={`${baseClassName}-atcb-list`}
+              onKeyDown={(e) => {
+                if (e.key === 'Tab') {
+                  setOpen(false);
+                }
+              }}
             >
               {menuItems.map((item) => (
                 <DropdownMenu.Item
