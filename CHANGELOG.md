@@ -1,3 +1,10 @@
+# [1.146.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.145.1...v1.146.0) (2025-05-14)
+
+
+### Features
+
+* **toast:** L3-6424 Add Toast Component ([#612](https://github.com/PhillipsAuctionHouse/seldon/issues/612)) ([c7920f5](https://github.com/PhillipsAuctionHouse/seldon/commit/c7920f5a1169f10477959237ad2ca9b3e12d68e6))
+
 ## [1.145.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.145.0...v1.145.1) (2025-05-14)
 
 
