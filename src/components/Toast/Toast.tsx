@@ -22,7 +22,7 @@ export interface PrimitiveToastProps extends Omit<PrimitiveToast.ToastProps, 'ti
   /**
    * Title for the close button for accessibility.
    */
-  closeButtonTitle?: string;
+  closeButtonLabel?: string;
 }
 /**
  * ## Overview
@@ -42,7 +42,7 @@ export interface PrimitiveToastProps extends Omit<PrimitiveToast.ToastProps, 'ti
  * [Radix UI Toast Documentation](https://www.radix-ui.com/docs/primitives/components/toast)
  */
 const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(
-  ({ className, title, actionElement, actionAltText, closeButtonTitle, ...props }, ref) => {
+  ({ className, title, actionElement, actionAltText, closeButtonLabel, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Toast');
 
     return (
@@ -55,9 +55,9 @@ const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(
             </PrimitiveToast.Action>
           )}
         </div>
-        <PrimitiveToast.Close className={`${baseClassName}__close`} aria-label="Close" asChild>
+        <PrimitiveToast.Close className={`${baseClassName}__close`} aria-label={closeButtonLabel} asChild>
           <IconButton variant={ButtonVariants.link}>
-            <Icon icon="CloseX" title={closeButtonTitle} color="$white" aria-hidden />
+            <Icon icon="CloseX" title={closeButtonLabel} color="$white" aria-hidden />
           </IconButton>
         </PrimitiveToast.Close>
       </PrimitiveToast.Root>

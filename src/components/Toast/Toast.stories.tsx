@@ -18,7 +18,7 @@ export const Playground = () => {
         height: '20vh',
       }}
     >
-      <Toast title="Basic Toast" open={true} defaultOpen={true} onOpenChange={() => void 0} closeButtonTitle="Close" />
+      <Toast title="Basic Toast" open={true} defaultOpen={true} onOpenChange={() => void 0} closeButtonLabel="Close" />
 
       <Toast
         title="Toast with Action"
@@ -36,7 +36,7 @@ export const Playground = () => {
             View Details
           </Button>
         }
-        closeButtonTitle="Close"
+        closeButtonLabel="Close"
       />
     </div>
   );

@@ -59,12 +59,15 @@ vi.mock('@radix-ui/react-toast', async () => {
         </div>
       );
     },
-    Close: ({ children, className, asChild, ...props }: ToastCloseProps) => {
+    Close: ({ children, className, asChild, 'aria-label': ariaLabel, ...props }: ToastCloseProps) => {
       if (asChild) {
-        return children;
+        return React.cloneElement(children as React.ReactElement, {
+          'aria-label': ariaLabel,
+          ...props,
+        });
       }
       return (
-        <div data-testid="toast-close" className={className} {...props}>
+        <div data-testid="toast-close" className={className} aria-label={ariaLabel} {...props}>
           {children}
         </div>
       );
@@ -124,8 +127,13 @@ describe('Toast', () => {
   });
 
   it('renders close button', async () => {
-    render(<ToastWrapper title="Test Toast" />);
-    expect(await screen.findByLabelText('Close')).toBeInTheDocument();
+    render(<ToastWrapper title="Test Toast" closeButtonLabel="Close" />);
+    expect(await screen.findByRole('button', { name: 'Close' })).toBeInTheDocument();
+  });
+
+  it('renders with custom close button title', async () => {
+    render(<ToastWrapper title="Test Toast" closeButtonLabel="Custom Close Label" />);
+    expect(await screen.findByRole('button', { name: 'Custom Close Label' })).toBeInTheDocument();
   });
 
   it('passes additional props to the root component', async () => {
