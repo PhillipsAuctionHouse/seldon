@@ -15,7 +15,7 @@ export interface AccountPageHeaderProps extends ComponentProps<'div'> {
   title: string;
 
   /** Optional subtitle text that appears below the main title */
-  subheader?: string;
+  subtitle?: string;
 
   /**
    * Array of action buttons to display in the header
@@ -29,7 +29,7 @@ export interface AccountPageHeaderProps extends ComponentProps<'div'> {
     label?: string;
     ariaLabel: string;
     icon: IconName;
-    onClick: () => void;
+    onClick: (e?: React.SyntheticEvent) => void;
     isPrimary?: boolean;
   }>;
 
@@ -52,7 +52,7 @@ export interface AccountPageHeaderProps extends ComponentProps<'div'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-accountpageheader--overview)
  */
 const AccountPageHeader = forwardRef<HTMLDivElement, AccountPageHeaderProps>(
-  ({ className, title, subheader, actionButtons, overline, showDivider = true, ...props }, ref) => {
+  ({ className, title, subtitle, actionButtons, overline, showDivider = true, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'AccountPageHeader');
 
     const primaryButton = actionButtons?.find((button) => button.isPrimary);
@@ -95,13 +95,15 @@ const AccountPageHeader = forwardRef<HTMLDivElement, AccountPageHeaderProps>(
               {overline}
             </Text>
           )}
-          <div className={`${baseClassName}__header`}>
-            <Text variant={TextVariants.title1}>{title}</Text>
+          <div className={`${baseClassName}__title-wrapper`}>
+            <Text variant={TextVariants.title1} className={`${baseClassName}__title`}>
+              {title}
+            </Text>
             {actionButtons && actionButtons.length > 0 && renderButtons()}
           </div>
-          {subheader && (
-            <Text variant={TextVariants.string2} className={`${baseClassName}__subheader`}>
-              {subheader}
+          {subtitle && (
+            <Text variant={TextVariants.string2} className={`${baseClassName}__subtitle`}>
+              {subtitle}
             </Text>
           )}
         </div>

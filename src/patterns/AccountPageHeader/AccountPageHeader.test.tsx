@@ -8,9 +8,9 @@ describe('AccountPageHeader', () => {
     expect(getByText('Account Settings')).toBeInTheDocument();
   });
 
-  it('renders subheader when provided', () => {
+  it('renders subtitle when provided', () => {
     const { getByText } = render(
-      <AccountPageHeader title="Account Settings" subheader="Manage your account preferences" />,
+      <AccountPageHeader title="Account Settings" subtitle="Manage your account preferences" />,
     );
     expect(getByText('Manage your account preferences')).toBeInTheDocument();
   });

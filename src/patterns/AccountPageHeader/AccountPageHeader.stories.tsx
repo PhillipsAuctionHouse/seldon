@@ -15,7 +15,7 @@ export const Playground = (props: AccountPageHeaderProps) => <AccountPageHeader 
 
 Playground.args = {
   title: 'Account Page Header',
-  subheader: 'This is a subheader',
+  subtitle: 'This is a subtitle',
   overline: 'Overline',
   actionButtons: [
     {
@@ -45,7 +45,7 @@ export const Bids = () => <AccountPageHeader title="Bids" showDivider={false} />
 export const FavoritesAndLists = () => (
   <AccountPageHeader
     title="Favorites & Lists"
-    subheader="Save Favorite items and Create Lists to organize by themes or interests."
+    subtitle="Save Favorite items and Create Lists to organize by themes or interests."
     actionButtons={[
       {
         label: 'Create A List',
@@ -61,18 +61,18 @@ export const FavoritesAndLists = () => (
 export const List = () => (
   <AccountPageHeader
     title="Monaco apartment"
-    subheader="Thoughts for the living room renovation"
+    subtitle="Thoughts for the living room renovation"
     overline="List"
     actionButtons={[
       {
-        ariaLabel: 'Favorite',
-        icon: 'Favorite',
-        onClick: () => alert('Favorite clicked'),
+        ariaLabel: 'Edit',
+        icon: 'Edit',
+        onClick: () => alert('Edit clicked'),
       },
       {
-        ariaLabel: 'Share',
-        icon: 'Share',
-        onClick: () => alert('Share clicked'),
+        ariaLabel: 'Delete',
+        icon: 'Delete',
+        onClick: () => alert('Delete clicked'),
       },
     ]}
   />
