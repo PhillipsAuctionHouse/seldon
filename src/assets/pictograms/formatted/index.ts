@@ -1,0 +1,14 @@
+export { default as Chat } from './Chat';
+export { default as CreditCard } from './CreditCard';
+export { default as Form } from './Form';
+export { default as Live } from './Live';
+export { default as MobilePhone } from './MobilePhone';
+export { default as Notification } from './Notification';
+export { default as Phone } from './Phone';
+export { default as Photos } from './Photos';
+export { default as Search } from './Search';
+export { default as Shipping } from './Shipping';
+export { default as Sign } from './Sign';
+export { default as Submit } from './Submit';
+export { default as Timer } from './Timer';
+export { default as Verification } from './Verification';
