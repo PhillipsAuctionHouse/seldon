@@ -1,3 +1,31 @@
+# [1.145.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.144.0...v1.145.0) (2025-05-13)
+
+
+### Features
+
+* **AddToCalendar:** L3-5753 Add to calendar component revised ([#600](https://github.com/PhillipsAuctionHouse/seldon/issues/600)) ([a3827d7](https://github.com/PhillipsAuctionHouse/seldon/commit/a3827d7ea893ebb0d70909ce57a65b9db2ce0087))
+
+# [1.144.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.143.2...v1.144.0) (2025-05-13)
+
+
+### Features
+
+* **ComboBox:** L3-6409 Combo box Component ([#602](https://github.com/PhillipsAuctionHouse/seldon/issues/602)) ([838b30d](https://github.com/PhillipsAuctionHouse/seldon/commit/838b30d07a545b372e61140124330f8a7a227c88))
+
+## [1.143.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.143.1...v1.143.2) (2025-05-13)
+
+
+### Bug Fixes
+
+* **Header:** L3-6500 Fix hover state ([#614](https://github.com/PhillipsAuctionHouse/seldon/issues/614)) ([c7a8246](https://github.com/PhillipsAuctionHouse/seldon/commit/c7a82460277461055a99e18fdeaa82a5d88cdacc))
+
+## [1.143.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.143.0...v1.143.1) (2025-05-12)
+
+
+### Bug Fixes
+
+* **countdown:** L3-6379 pass currentDateTime props through countdown … ([#615](https://github.com/PhillipsAuctionHouse/seldon/issues/615)) ([4fe31db](https://github.com/PhillipsAuctionHouse/seldon/commit/4fe31dbb484e11d429be3fb6b5e2d7f808324c3b))
+
 # [1.143.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.142.1...v1.143.0) (2025-05-08)
 
 

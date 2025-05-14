@@ -1,0 +1,149 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-combo-box {
+  position: relative;
+  width: 100%;
+
+  &__input {
+    accent-color: $soft-black;
+    border: 1px solid $keyline-gray;
+    border-radius: 0.1875rem;
+    margin-bottom: 0.25rem;
+    outline: none;
+    padding: $padding-xsm;
+    width: 100%;
+
+    @include text($string2);
+
+    &:hover {
+      border: 1px solid $primary-black;
+    }
+
+    &:focus {
+      outline: 1px solid $primary-black;
+    }
+  }
+
+  &__label {
+    @include text($string2);
+
+    color: $pure-black;
+    display: inline-block;
+    font-variation-settings: 'wght' 600;
+    margin-bottom: 0.5rem;
+    width: fit-content;
+    word-break: break-word;
+
+    &--hidden {
+      @include hidden;
+    }
+  }
+
+  &__input-wrapper {
+    position: relative;
+  }
+
+  &__close-button {
+    all: unset;
+    color: $text-color;
+    padding-bottom: 0.25rem;
+    position: absolute;
+    right: 2.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    transition:
+      visibility 0.2s ease,
+      opacity 0.2s ease;
+    visibility: hidden;
+
+    &:hover {
+      visibility: visible;
+    }
+
+    &:focus {
+      visibility: visible;
+    }
+
+    .#{$px}-combo-box__input:hover + &,
+    .#{$px}-combo-box__input:focus + & {
+      visibility: visible;
+    }
+  }
+
+  &__dropdown-button {
+    all: unset;
+    color: $text-color;
+    cursor: pointer;
+    padding-bottom: 0.25rem;
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__icon-button {
+    pointer-events: none;
+  }
+
+  &__icon {
+    align-items: center;
+    align-self: normal;
+    background-position: center;
+    border-radius: 50%;
+    display: flex;
+    height: 2rem;
+    justify-content: center;
+    transition: background 0.8s;
+    width: 2rem;
+
+    &:hover {
+      background: $light-gray radial-gradient(circle, transparent 1%, $light-gray 1%) center/15000%;
+      background-color: $light-gray;
+      cursor: pointer;
+    }
+
+    &:active {
+      background-color: $medium-gray;
+      background-size: 100%;
+      transition: background 0s;
+    }
+
+    &--flipped {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__content {
+    transform: translateY(1px);
+    width: var(--radix-popper-anchor-width);
+  }
+
+  &__group {
+    padding: $padding-xsm 0;
+  }
+
+  &__list {
+    max-height: 200px;
+    overflow: hidden;
+    overflow-y: auto;
+    position: relative;
+    transition: height 100ms ease;
+    width: 100%;
+  }
+
+  &__item {
+    background-color: $pale-gray;
+    padding: $padding-micro $padding-xsm;
+
+    @include text($string2);
+
+    &:hover {
+      background-color: $light-gray;
+      cursor: pointer;
+    }
+
+    &[data-selected='true'] {
+      background-color: $light-gray;
+    }
+  }
+}
