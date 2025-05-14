@@ -1,6 +1,5 @@
 import { Meta } from '@storybook/react';
 import Toast from './Toast';
-import { ToastProvider } from './ToastContextProvider';
 import Button from '../Button/Button';
 import { useToast } from './useToast';
 import { ButtonVariants } from '../Button/types';
@@ -8,7 +7,6 @@ import { ButtonVariants } from '../Button/types';
 const meta = {
   title: 'Components/Toast',
   component: Toast,
-  decorators: [(Story) => <ToastProvider>{Story()}</ToastProvider>],
 } satisfies Meta<typeof Toast>;
 
 export default meta;
@@ -20,7 +18,7 @@ export const Playground = () => {
         height: '20vh',
       }}
     >
-      <Toast title="Basic Toast" open={true} defaultOpen={true} onOpenChange={() => void 0} />
+      <Toast title="Basic Toast" open={true} defaultOpen={true} onOpenChange={() => void 0} closeButtonTitle="Close" />
 
       <Toast
         title="Toast with Action"
@@ -38,6 +36,7 @@ export const Playground = () => {
             View Details
           </Button>
         }
+        closeButtonTitle="Close"
       />
     </div>
   );
@@ -69,6 +68,7 @@ const ToastDemo = () => {
         onClick={() =>
           toast({
             title: 'Yay! Your action was successful',
+            duration: Infinity,
             actionElement: (
               <Button variant={ButtonVariants.link} onClick={() => alert('Action clicked!')}>
                 Click for more

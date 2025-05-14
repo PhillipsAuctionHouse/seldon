@@ -10,9 +10,7 @@
   display: grid;
   grid-template-areas: 'title action';
   grid-template-columns: auto max-content;
-
-  // There are no spacing tokens for the padding used in figma
-  padding: 6px 16px;
+  padding: $spacing-xsm $spacing-sm;
 
   &__content {
     display: flex;

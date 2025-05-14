@@ -6,10 +6,23 @@ import { Icon } from '../Icon';
 import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 
-export interface PrimitiveToastProps extends PrimitiveToast.ToastProps {
-  title: string;
+export interface PrimitiveToastProps extends Omit<PrimitiveToast.ToastProps, 'title'> {
+  /**
+   * The content to display as the toast's title.
+   */
+  title: ReactNode;
+  /**
+   * Optional element to serve as an action within the toast.
+   */
   actionElement?: ReactNode;
+  /**
+   * Alternative text for the action element for accessibility.
+   */
   actionAltText?: string;
+  /**
+   * Title for the close button for accessibility.
+   */
+  closeButtonTitle?: string;
 }
 /**
  * ## Overview
@@ -29,7 +42,7 @@ export interface PrimitiveToastProps extends PrimitiveToast.ToastProps {
  * [Radix UI Toast Documentation](https://www.radix-ui.com/docs/primitives/components/toast)
  */
 const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(
-  ({ className, title, actionElement, actionAltText, ...props }, ref) => {
+  ({ className, title, actionElement, actionAltText, closeButtonTitle, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Toast');
 
     return (
@@ -44,7 +57,7 @@ const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(
         </div>
         <PrimitiveToast.Close className={`${baseClassName}__close`} aria-label="Close" asChild>
           <IconButton variant={ButtonVariants.link}>
-            <Icon icon="CloseX" title="Close" color="$white" />
+            <Icon icon="CloseX" title={closeButtonTitle} color="$white" aria-hidden />
           </IconButton>
         </PrimitiveToast.Close>
       </PrimitiveToast.Root>
