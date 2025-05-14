@@ -1,3 +1,10 @@
+## [1.145.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.145.0...v1.145.1) (2025-05-14)
+
+
+### Bug Fixes
+
+* **pageHeaderComponent:** L3-6694 small misalignment in account page header component ([#616](https://github.com/PhillipsAuctionHouse/seldon/issues/616)) ([d350ed2](https://github.com/PhillipsAuctionHouse/seldon/commit/d350ed2591473084a9b416e922eb9791558c2719))
+
 # [1.145.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.144.0...v1.145.0) (2025-05-13)
 
 
