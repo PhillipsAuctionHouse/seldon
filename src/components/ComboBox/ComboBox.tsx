@@ -223,7 +223,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                 </div>
               </button>
             </div>
-            <Popover.Portal container={popoverContainerRef ? popoverContainerRef.current : null}>
+            <Popover.Portal container={popoverContainerRef?.current}>
               <Popover.Content
                 className={`${baseClassName}__content`}
                 aria-label={ariaLabelContent ? ariaLabelContent : `${id}-content`}
