@@ -1,10 +1,17 @@
 @import '#scss/allPartials';
 
-.icon-usage {
+.story-wrapper {
+  display: flex;
+  gap: 1rem;
+}
+
+.icon-usage,
+.picto-usage {
   margin-top: 48px;
 }
 
-.icon-example {
+.icon-example,
+.picto-example {
   align-items: center;
   border-bottom: 1px solid $pure-black;
   display: flex;
@@ -23,19 +30,23 @@
   }
 
   .icons-container,
-  .icons-container--dark {
+  .icons-container--dark,
+  .picto-container,
+  .picto-container--dark {
     border-radius: 1rem;
     display: flex;
     gap: 1rem;
     justify-content: center;
   }
 
-  .icons-container--dark {
+  .icons-container--dark,
+  .picto-container--dark {
     background-color: $pure-black;
   }
 }
 
-.icon-grid-wrapper {
+.icon-grid-wrapper,
+.picto-grid-wrapper {
   border: 1px solid $pure-black;
   border-radius: 5px;
   display: grid;
@@ -45,11 +56,11 @@
   width: fit-content;
 
   @include media($breakpoint-md) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   @include media($breakpoint-lg) {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   &--dark {
@@ -61,13 +72,15 @@
     gap: 1rem;
   }
 
-  .icon-set {
+  .icon-set,
+  .picto-set {
     display: flex;
     flex-direction: column;
     margin: 24px 12px;
   }
 
-  .icon-name {
+  .icon-name,
+  .picto-name {
     padding: 8px;
     text-align: center;
 
@@ -82,7 +95,8 @@
     }
   }
 
-  .icon-wrapper {
+  .icon-wrapper,
+  .picto-wrapper {
     &.show-border {
       border: 1px solid black;
     }
