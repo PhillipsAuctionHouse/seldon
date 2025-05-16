@@ -1,20 +1,22 @@
 import { Meta, Source } from '@storybook/blocks';
 import { IconGrid } from './IconGrid';
+import { PictogramGrid } from './PictogramGrid';
 import { Icon } from '../../components/Icon';
 
 <Meta title="Design/Iconography" />
 
 <main className="sb-unstyled doc-wrapper">
   <h1 className="h1">Iconography</h1>
-
-  <h2 className="h2">Icon Grid</h2>
-  <IconGrid />
+  <div className="story-wrapper">
+    <IconGrid />
+    <PictogramGrid />
+  </div>
   <span className="p icon-usage">
     <h2 className="h2">Usage</h2>
-      <span className="p">
-    The `Icon` component can be used to render any svg image and supports all of the icons shown in the Grid above.
-    Icons can be resized and recolored by passing the appropriate props
-  </span>
+    <span className="p">
+      The `Icon` component can be used to render any svg image and supports all of the icons shown in the Grid above.
+      Icons can be resized and recolored by passing the appropriate props
+    </span>
     <div className="icon-example">
       <div className="icons-container">
         <Icon icon="FavoriteActive" height={16} width={16} color="$pure-black" />

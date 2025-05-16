@@ -3,8 +3,10 @@ import classnames from 'classnames';
 import { getCommonProps, px } from '../../utils';
 import { getScssVar } from '../../utils/scssUtils';
 import * as iconComponents from '../../assets/formatted';
+import * as pictogramComponents from '../../assets/pictograms/formatted';
 
 export type IconName = keyof typeof iconComponents;
+export type PictogramName = keyof typeof pictogramComponents;
 
 export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -22,7 +24,7 @@ export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Name of Icon to render
    */
-  icon: IconName;
+  icon: IconName | PictogramName;
 }
 
 /**
@@ -36,7 +38,7 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
   ({ className, height, width, color, icon, ...props }: IconProps, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, `Icon-${icon}`);
 
-    const Component = iconComponents[icon];
+    const Component = iconComponents[icon as IconName] || pictogramComponents[icon as PictogramName];
     const componentProps = {
       color: color === 'currentColor' ? color : getScssVar(color ?? '', '$pure-black'),
       ...(height ? { height } : {}),

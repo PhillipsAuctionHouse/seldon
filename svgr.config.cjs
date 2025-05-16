@@ -29,7 +29,8 @@ module.exports = {
     role: 'img',
   },
   template: (variables, { tpl }) => {
-    const { componentName, jsx } = variables;
+    const { jsx } = variables;
+    const componentName = variables.componentName.replace(/^Svg/, '');
     const propsName = `${componentName}Props`;
 
     return tpl`
@@ -45,9 +46,8 @@ module.exports = {
       }
       ${'\n'}
       const ${componentName} = memo(forwardRef<SVGSVGElement, ${propsName}>((props, ref) => {
-        const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-        const title = propsTitle || '${componentName}';
-        const titleId = propsTitleId || kebabCase(title);
+        const { color, height, width, title, titleId: propsTitleId } = props;
+        const titleId = propsTitleId || kebabCase(title || '');
         ${'\n'}
         return (
           ${jsx}

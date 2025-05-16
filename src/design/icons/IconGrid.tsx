@@ -78,7 +78,8 @@ export const IconGrid = (props: IconProps) => {
     setSize(newSize);
   };
   return (
-    <>
+    <div>
+      <h2 className="h2">Icons</h2>
       <div className={`${baseClassName}--controls`}>
         <Select id="size" labelText="Icon Size" onChange={(e) => handleSizeChange(e.target.value)}>
           <option key="16px" value="16px">
@@ -114,6 +115,6 @@ export const IconGrid = (props: IconProps) => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
