@@ -1,3 +1,10 @@
+## [1.146.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.146.0...v1.146.1) (2025-05-16)
+
+
+### Bug Fixes
+
+* **ComboBox:** L3-6753 add new props ([#619](https://github.com/PhillipsAuctionHouse/seldon/issues/619)) ([aa0bf01](https://github.com/PhillipsAuctionHouse/seldon/commit/aa0bf01d0c8326767339dbfa5e3557666d02a226))
+
 # [1.146.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.145.1...v1.146.0) (2025-05-14)
 
 
