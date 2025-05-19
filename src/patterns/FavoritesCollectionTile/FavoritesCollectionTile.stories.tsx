@@ -18,7 +18,7 @@ Playground.args = {
   count: 2,
   name: 'New List',
   imageSrc: 'https://via.placeholder.com/400',
-  variant: 'favorites',
+  variant: 'lists',
   onEdit: (): void => console.log('Edit list clicked'),
   onDelete: (): void => console.log('Delete list clicked'),
   element: 'a',
@@ -60,7 +60,7 @@ export const BlankList = (props: ComponentProps<typeof FavoritesCollectionTile>)
 BlankList.args = {
   id: 'favorites-collection-tile-3',
   count: 0,
-  name: 'Blank List',
+  name: '',
   variant: 'lists',
   element: 'a',
   linkClassName: 'seldon-link seldon-link--link',
@@ -76,6 +76,7 @@ EmptyList.args = {
   name: 'Test List',
   variant: 'lists',
   element: 'a',
+  linkClassName: 'seldon-link seldon-link--link',
 };
 
 export const TranslatedList = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
@@ -92,4 +93,5 @@ TranslatedList.args = {
   formatlotStr: (count: number) => {
     return `列表中有 ${count} 件拍品`;
   },
+  linkClassName: 'seldon-link seldon-link--link',
 };

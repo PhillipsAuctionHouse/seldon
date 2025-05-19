@@ -102,7 +102,7 @@ const FavoritesCollectionTile = memo(
         deleteListText = 'Delete List',
         onEdit,
         onDelete,
-        formatlotStr = (count, lotText = count > 1 ? 'LOTS' : 'LOT') => `${count} ${lotText}`,
+        formatlotStr = (count, lotText = count > 1 || count === 0 ? 'LOTS' : 'LOT') => `${count} ${lotText}`,
         linkClassName,
         ...props
       },
@@ -130,7 +130,7 @@ const FavoritesCollectionTile = memo(
                 }
               </div>
               <>
-                {hasListData && (variant === 'lists' || (variant === 'favorites' && !isCountEmpty)) && (
+                {hasListData && variant === 'lists' && name && (
                   <Popover.Root>
                     <Popover.Trigger asChild>
                       <div
@@ -146,13 +146,15 @@ const FavoritesCollectionTile = memo(
                           }
                         }}
                       >
-                        <Icon
-                          icon="Icon"
-                          width={24}
-                          height={24}
-                          color="$dark-gray"
-                          className={`${baseClassName}__icon-rotate`}
-                        />
+                        <div className={`${baseClassName}__icon-rotate`}>
+                          <Icon
+                            icon="Icon"
+                            width={24}
+                            height={24}
+                            color="$dark-gray"
+                            className={`${baseClassName}__icon-button`}
+                          />
+                        </div>
                       </div>
                     </Popover.Trigger>
                     <Popover.Portal>
@@ -189,7 +191,7 @@ const FavoritesCollectionTile = memo(
             <Component href={href} className={classnames(`${baseClassName}__media-link`, linkClassName)} tabIndex={0}>
               {isCountEmpty && variant === 'favorites' && (
                 <div className={`${baseClassName}__media-container`} data-testid="favorites" aria-label="Favorites">
-                  <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--favorites`)}>
+                  <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--bg`)}>
                     <div className={`${baseClassName}__empty__content`}>
                       <Icon
                         icon="Favorite"
@@ -206,14 +208,21 @@ const FavoritesCollectionTile = memo(
 
               {(isCountEmpty || !hasListData) && variant === 'lists' && (
                 <div className={`${baseClassName}__media-container`} data-testid="list" aria-label="Lists">
-                  <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--list`)}>
+                  <div
+                    className={classnames(`${baseClassName}__empty`, {
+                      [`${baseClassName}__empty--blank-list`]: !hasListData && variant === 'lists',
+                      [`${baseClassName}__empty--bg`]: isCountEmpty && name,
+                    })}
+                  >
                     <div className={`${baseClassName}__empty__content`}>
                       <Icon
                         icon={hasListData && isCountEmpty ? 'Favorite' : 'Add'}
                         width={24}
                         height={24}
                         color="$dark-gray"
-                        className={`${baseClassName}__icon`}
+                        className={classnames(`${baseClassName}__icon`, {
+                          [`${baseClassName}__icon-circle`]: !hasListData && variant === 'lists',
+                        })}
                       />
                       <div className={`${baseClassName}__text`}>
                         {hasListData && isCountEmpty ? emptyListsText : blankListText}
