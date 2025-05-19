@@ -68,6 +68,10 @@ export interface FavoritesCollectionTileProps extends ComponentProps<'div'> {
    * Function to modify strings for lot string translation
    */
   formatlotStr?: (count: number, lotText?: string) => string;
+  /**
+   * Custom class name for the Link component
+   */
+  linkClassName?: string;
 }
 
 /**
@@ -99,6 +103,7 @@ const FavoritesCollectionTile = memo(
         onEdit,
         onDelete,
         formatlotStr = (count, lotText = count > 1 ? 'LOTS' : 'LOT') => `${count} ${lotText}`,
+        linkClassName,
         ...props
       },
       ref,
@@ -151,7 +156,14 @@ const FavoritesCollectionTile = memo(
                       </div>
                     </Popover.Trigger>
                     <Popover.Portal>
-                      <Popover.Content sideOffset={5} className={`${baseClassName}__popover-content`}>
+                      <Popover.Content
+                        avoidCollisions={true}
+                        collisionPadding={10}
+                        sideOffset={5}
+                        align="start"
+                        alignOffset={5}
+                        className={`${baseClassName}__popover-content`}
+                      >
                         <div className={`${baseClassName}__dropdown`} data-testid={`dropdown-menu`}>
                           <button
                             className={`${baseClassName}__dropdown--item`}
@@ -174,8 +186,7 @@ const FavoritesCollectionTile = memo(
                 )}
               </>
             </div>
-
-            <Component href={href} className={`${baseClassName}__media-link`} tabIndex={0}>
+            <Component href={href} className={classnames(`${baseClassName}__media-link`, linkClassName)} tabIndex={0}>
               {isCountEmpty && variant === 'favorites' && (
                 <div className={`${baseClassName}__media-container`} data-testid="favorites" aria-label="Favorites">
                   <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--favorites`)}>

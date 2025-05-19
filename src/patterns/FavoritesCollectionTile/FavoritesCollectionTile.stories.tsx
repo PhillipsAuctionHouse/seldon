@@ -22,6 +22,7 @@ Playground.args = {
   onEdit: (): void => console.log('Edit list clicked'),
   onDelete: (): void => console.log('Delete list clicked'),
   element: 'a',
+  linkClassName: 'seldon-link seldon-link--link',
 };
 
 Playground.argTypes = {
@@ -49,6 +50,7 @@ EmptyFavorites.args = {
   formatlotStr: (count: number, lotText = 'LOT') => {
     return `${count} ${lotText}`;
   },
+  linkClassName: 'seldon-link seldon-link--link',
 };
 
 export const BlankList = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
@@ -61,6 +63,7 @@ BlankList.args = {
   name: 'Blank List',
   variant: 'lists',
   element: 'a',
+  linkClassName: 'seldon-link seldon-link--link',
 };
 
 export const EmptyList = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
