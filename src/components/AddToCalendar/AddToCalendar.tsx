@@ -49,7 +49,7 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
               className={`${px}-icon-button ${px}-icon-button--small ${baseClassName}-icon-button`}
               type="button"
             >
-              <Icon icon={open ? 'CloseX' : 'Calendar'} />
+              <Icon icon={open ? 'CloseX' : 'Calendar'} title={label} />
             </button>
           </DropdownMenu.Trigger>
           <DropdownMenu.Portal>

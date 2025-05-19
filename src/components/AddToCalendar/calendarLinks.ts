@@ -25,13 +25,9 @@ const generateCalendarLink = (calendarType: 'google' | 'outlook' | 'yahoo', even
     console.error('Invalid event start date:', event);
     return '#';
   }
-
   const userTimezone = getUserTimezone();
   const start = toZonedTime(event.start, calendarType === 'google' ? event.timezone : userTimezone);
-  const end = event.end
-    ? toZonedTime(event.end, calendarType === 'google' ? event.timezone : userTimezone)
-    : addHours(start, 1);
-
+  const end = event.end ? toZonedTime(event.end, calendarType === 'google' ? event.timezone : userTimezone) : null;
   switch (calendarType) {
     case 'google':
       return generateGoogleLink(start, end, event);
@@ -45,10 +41,12 @@ const generateCalendarLink = (calendarType: 'google' | 'outlook' | 'yahoo', even
   }
 };
 
-const generateGoogleLink = (start: Date, end: Date, event: CalendarEvent) => {
+const generateGoogleLink = (start: Date, end: Date | null, event: CalendarEvent) => {
   const params = createSearchParams({
     text: event.title,
-    dates: `${format(start, "yyyyMMdd'T'HHmmss")}/${format(end, "yyyyMMdd'T'HHmmss")}`,
+    dates: end
+      ? `${format(start, "yyyyMMdd'T'HHmmss")}/${format(end, "yyyyMMdd'T'HHmmss")}`
+      : `${format(start, "yyyyMMdd'T'HHmmss")}/${format(addHours(start, 1), "yyyyMMdd'T'HHmmss")}`,
     ctz: event.timezone,
     details: event.description,
     location: event.location,
@@ -58,13 +56,13 @@ const generateGoogleLink = (start: Date, end: Date, event: CalendarEvent) => {
   return url.toString();
 };
 
-const generateOutlookLink = (start: Date, end: Date, event: CalendarEvent) => {
+const generateOutlookLink = (start: Date, end: Date | null, event: CalendarEvent) => {
   const params = createSearchParams({
     path: '/calendar/action/compose',
     rru: 'addevent',
     subject: event.title,
     startdt: format(start, "yyyy-MM-dd'T'HH:mm:ssXXX"),
-    enddt: format(end, "yyyy-MM-dd'T'HH:mm:ssXXX"),
+    enddt: end ? format(end, "yyyy-MM-dd'T'HH:mm:ssXXX") : format(addHours(start, 1), "yyyy-MM-dd'T'HH:mm:ssXXX"),
     body: event.description,
     location: event.location,
     allday: 'false',
@@ -74,12 +72,12 @@ const generateOutlookLink = (start: Date, end: Date, event: CalendarEvent) => {
   return url.toString();
 };
 
-const generateYahooLink = (start: Date, end: Date, event: CalendarEvent) => {
+const generateYahooLink = (start: Date, end: Date | null, event: CalendarEvent) => {
   const title = encodeURIComponent(event.title);
   const desc = encodeURIComponent(event.description);
   const location = encodeURIComponent(event.location);
   const st = format(start, "yyyyMMdd'T'HHmmss");
-  const et = format(end, "yyyyMMdd'T'HHmmss");
+  const et = end ? format(end, "yyyyMMdd'T'HHmmss") : format(addHours(start, 1), "yyyyMMdd'T'HHmmss");
   return `${CALENDAR_BASE_URL.yahoo}?v=60&view=d&type=20&title=${title}&st=${st}&et=${et}&desc=${desc}&in_loc=${location}`;
 };
 

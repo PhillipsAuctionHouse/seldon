@@ -20,11 +20,18 @@
   &-atcb-list {
     background: #fff;
     border: 1px solid#ECEAE7;
-    padding: $spacing-sm;
   }
 
   &-atcb-item {
-    margin-bottom: $spacing-xsm;
+    margin: $spacing-sm 0;
+    padding: 0 $spacing-sm;
+
+    &:hover,
+    &:focus-visible {
+      background-color: $light-gray;
+      cursor: pointer;
+      outline: none;
+    }
   }
 
   &-atcb-item-link {
@@ -43,15 +50,9 @@
     }
 
     &:hover {
-      color: #000;
+      border: none;
+      outline: none;
       text-decoration: none;
-    }
-
-    &:focus-visible {
-      color: #000;
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: $spacing-micro;
     }
 
     span {
@@ -59,6 +60,13 @@
 
       font-variation-settings: 'wght' 400;
       text-decoration: none;
+
+      &:hover,
+      &:focus-visible {
+        color: #000;
+        outline: none;
+        text-decoration: none;
+      }
     }
   }
 }
