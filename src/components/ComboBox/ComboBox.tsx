@@ -63,6 +63,14 @@ export interface ComboBoxProps {
    * If true, the input will be cleared when the user clicks away when the input value is not in the options list.
    */
   autoClearInput?: boolean;
+  /**
+   * popoverContainer ref for the ComboBox
+   */
+  popoverContainerRef?: React.RefObject<HTMLElement>;
+  /**
+   * No options message translation
+   */
+  noOptionsMessage?: string;
 }
 /**
  * ## Overview
@@ -88,6 +96,8 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     ariaLabelContent,
     hideLabel = false,
     autoClearInput = true,
+    popoverContainerRef,
+    noOptionsMessage = 'No Options.',
     ...props
   },
   ref,
@@ -213,7 +223,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                 </div>
               </button>
             </div>
-            <Popover.Portal>
+            <Popover.Portal container={popoverContainerRef?.current}>
               <Popover.Content
                 className={`${baseClassName}__content`}
                 aria-label={ariaLabelContent ? ariaLabelContent : `${id}-content`}
@@ -246,7 +256,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                         )}
                       </CommandGroup>
                     ) : (
-                      <Command.Empty>No Options.</Command.Empty>
+                      <Command.Empty>{noOptionsMessage}</Command.Empty>
                     )}
                   </CommandList>
                 )}
