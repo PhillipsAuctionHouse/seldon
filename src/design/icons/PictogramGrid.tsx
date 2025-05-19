@@ -21,6 +21,8 @@ const pictograms = [
 ] as const;
 export const PictogramGrid = (props: PictogramProps) => {
   const [color, setColor] = useState<string>('$primary-black');
+  const [size, setSize] = useState<string>('64px');
+
   const baseClassName = 'picto-grid-wrapper';
   const isDarkMode = color === '$white';
 
@@ -28,10 +30,22 @@ export const PictogramGrid = (props: PictogramProps) => {
     setColor(newColor);
   };
 
+  const handleSizeChange = (newSize: string) => {
+    setSize(newSize);
+  };
+
   return (
     <div>
       <h2 className="h2">Pictograms</h2>
       <div className={`${baseClassName}--controls`}>
+        <Select id="size" labelText="Icon Size" value={size} onChange={(e) => handleSizeChange(e.target.value)}>
+          <option key="32px" value="32px">
+            32px
+          </option>
+          <option key="64px" value="64px">
+            64px
+          </option>
+        </Select>
         <Select id="color" labelText="Pictogram Color" onChange={(e) => handleColorChange(e.target.value)}>
           <option key="$pure-black" value="$pure-black">
             Pure Black
@@ -45,7 +59,7 @@ export const PictogramGrid = (props: PictogramProps) => {
         {pictograms.map((picto) => (
           <div className="picto-set" key={picto}>
             <div className="picto-wrapper">
-              <Pictogram {...props} color={color} size="64" pictogram={picto as PictogramProps['pictogram']} />
+              <Pictogram {...props} color={color} size={size} pictogram={picto as PictogramProps['pictogram']} />
             </div>
             <div
               className={cn('picto-name', {
