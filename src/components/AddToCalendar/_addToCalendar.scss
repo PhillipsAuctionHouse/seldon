@@ -6,7 +6,7 @@
     width: 30px;
   }
 
-  &-icon-button {
+  .seldon-icon-button {
     background: none;
     border: none;
     cursor: pointer;
@@ -23,7 +23,7 @@
   }
 
   &-atcb-item {
-    margin: $spacing-sm 0;
+    margin: $spacing-xsm 0;
     padding: 0 $spacing-sm;
 
     &:hover,
