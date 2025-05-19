@@ -50,6 +50,10 @@
 @use 'components/Filter/filter';
 @use 'components/FavoritingTileButton/favoritingTileButton';
 @use 'components/Toast/toast';
+@use 'components/Article/article';
+@use 'components/Divider/divider';
+@use 'components/TextArea/textArea';
+@use 'components/AddToCalendar/addToCalendar';
 
 // Patterns
 @use 'patterns/HeroBanner/heroBanner';
@@ -69,8 +73,3 @@
 // Site Furniture
 @use 'site-furniture/Header/header';
 @use 'site-furniture/Footer/footer';
-@use 'components/Article/article';
-@use 'components/Divider/divider';
-@use 'components/TextArea/textArea';
-@use 'components/AddToCalendar/addToCalendar';
-@use 'components/Pictogram/pictogram';
