@@ -163,7 +163,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
               hasWrap={false}
             />
           ) : null}
-          {isReady || (isLive && !hasBids) ? (
+          {isReady || (isLive && !hasBids && !!startingBid) ? (
             <Detail label={startingBidText} value={`${currency}${startingBid?.toLocaleString()}`} hasWrap={false} />
           ) : null}
         </DetailList>
