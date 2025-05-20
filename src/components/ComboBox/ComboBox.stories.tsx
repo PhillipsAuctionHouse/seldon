@@ -25,10 +25,6 @@ export const Playground = (props: ComboBoxProps) => {
   return (
     <div style={{ height: '300px', width: '400px' }}>
       <ComboBox {...props} value={value} onChange={setValue} inputValue={inputValue} setInputValue={setInputValue} />
-      <div style={{ marginTop: '20px' }}>
-        <p>Selected value: {value || 'none'}</p>
-        <p>Input value: {inputValue}</p>
-      </div>
     </div>
   );
 };
@@ -37,7 +33,7 @@ Playground.args = {
   options: birthdays,
   id: 'birthdays-combo-box',
   labelText: 'Birth Year',
-  freeSolo: false,
+  lockValueToOptions: true,
 };
 
 Playground.argTypes = {
@@ -244,7 +240,7 @@ export const FilterTermsExample = () => {
   );
 };
 
-export const FreeSoloMode = () => {
+export const DontLockValueToOptionsMode = () => {
   const [value, setValue] = React.useState<string>('');
   const [inputValue, setInputValue] = React.useState('');
 
@@ -252,13 +248,13 @@ export const FreeSoloMode = () => {
     <div style={{ width: '400px' }}>
       <ComboBox
         options={countries}
-        id="free-solo-combo"
+        id="dont-lock-value-to-options-combo"
         labelText="Country"
         value={value}
         onChange={(newValue) => setValue(newValue)}
         inputValue={inputValue}
         setInputValue={setInputValue}
-        freeSolo={true}
+        lockValueToOptions={false}
         placeholder="Type anything or select from list"
       />
       <div style={{ marginTop: '20px' }}>

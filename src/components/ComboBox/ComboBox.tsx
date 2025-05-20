@@ -94,7 +94,7 @@ export interface ComboBoxProps {
    * Allow free text input that doesn't match any option
    * Similar to MUI's freeSolo
    */
-  freeSolo?: boolean;
+  lockValueToOptions?: boolean;
 
   /**
    * Sets the invalid state of the input
@@ -165,7 +165,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     setInputValue,
     getOptionLabel = (option) => option.label || option.value,
     renderOption,
-    freeSolo = false,
+    lockValueToOptions = true,
     ariaLabelDropdown,
     ariaLabelInput,
     ariaLabelClear,
@@ -195,13 +195,13 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
       const option = options.find((opt) => opt.value === value);
       if (option) {
         setSelectedOption(option);
-      } else if (freeSolo) {
+      } else if (lockValueToOptions) {
         setSelectedOption(null);
       }
     } else {
       setSelectedOption(null);
     }
-  }, [value, options, freeSolo]);
+  }, [value, options, lockValueToOptions]);
 
   // Filtering with support for filterTerms and getOptionLabel
   const filteredOptions = React.useMemo(() => {
@@ -278,12 +278,12 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
       if (displayText !== value) {
         setSelectedOption(null);
 
-        // In freeSolo mode, update value as user types
-        if (freeSolo && onChange) {
+        // In lockValueToOptions mode, update value as user types
+        if (lockValueToOptions && onChange) {
           onChange(value, null);
         }
       }
-    } else if (freeSolo && onChange) {
+    } else if (lockValueToOptions && onChange) {
       onChange(value, null);
     }
   };
@@ -313,16 +313,16 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     if (matchedOption) {
       // If match found, select it
       handleOptionSelect(matchedOption);
-    } else if (!freeSolo) {
-      // In non-freeSolo mode, restore previous selection
+    } else if (!lockValueToOptions) {
+      // In non-lockValueToOptions mode, restore previous selection
       if (selectedOption) {
         const displayText = selectedOption.displayValue || getOptionLabel(selectedOption);
         setInputValue(displayText);
       } else if (autoClearInput) {
         setInputValue('');
       }
-    } else if (freeSolo && onChange) {
-      // In freeSolo mode, keep current input
+    } else if (lockValueToOptions && onChange) {
+      // In lockValueToOptions mode, keep current input
       onChange(inputValue, null);
     }
 
@@ -384,7 +384,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                       setIsOpen(false);
                     } else if (e.key === 'Enter' && !isOpen) {
                       // Only handle Enter when dropdown is closed
-                      if (freeSolo) {
+                      if (lockValueToOptions) {
                         if (onChange) {
                           onChange(inputValue, null);
                         }
