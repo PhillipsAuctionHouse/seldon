@@ -1,3 +1,10 @@
+# [1.147.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.146.2...v1.147.0) (2025-05-20)
+
+
+### Features
+
+* **BidSnapshot:** L3-6782 added condition ([#624](https://github.com/PhillipsAuctionHouse/seldon/issues/624)) ([2cf432f](https://github.com/PhillipsAuctionHouse/seldon/commit/2cf432f032076b721fbdfd5b7fdd16d8b94f23e0))
+
 ## [1.146.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.146.1...v1.146.2) (2025-05-20)
 
 
