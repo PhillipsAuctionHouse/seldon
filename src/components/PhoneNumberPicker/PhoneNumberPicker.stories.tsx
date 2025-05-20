@@ -11,10 +11,17 @@ const meta = {
 export default meta;
 
 export const Playground = ({ ...props }: PhoneNumberPickerProps) => {
+  const [value, setValue] = React.useState<string>('');
   const [inputValue, setInputValue] = React.useState('');
   return (
     <div style={{ height: '70px', width: '135px' }}>
-      <PhoneNumberPicker {...props} inputValue={inputValue} setInputValue={setInputValue} />
+      <PhoneNumberPicker
+        {...props}
+        value={value}
+        onChange={(newValue) => setValue(newValue)}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+      />
     </div>
   );
 };
