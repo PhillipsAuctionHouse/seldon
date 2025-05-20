@@ -18,6 +18,10 @@
       @include media($size-md) {
         height: 60%;
       }
+
+      @include media($size-xl) {
+        height: 80%;
+      }
     }
   }
 
