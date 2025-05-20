@@ -1,7 +1,7 @@
 import { ComponentProps, forwardRef, useId } from 'react';
 import classnames from 'classnames';
 
-import { px } from '../../utils';
+import { px, useNormalizedInputProps } from '../../utils';
 import { Icon } from '../Icon';
 
 export interface TextAreaProps extends ComponentProps<'textarea'> {
@@ -17,6 +17,35 @@ export interface TextAreaProps extends ComponentProps<'textarea'> {
    * Text that will be read by a screen reader when visiting this control
    */
   labelText: React.ReactNode;
+
+  /**
+   * Boolean to specify whether the control is disabled
+   */
+  disabled?: boolean;
+  /**
+   * Boolean to specify whether the control is currently in an invalid state
+   */
+  invalid?: boolean;
+  /**
+   * Text that is displayed when the control is in an invalid state
+   */
+  invalidText?: React.ReactNode;
+  /**
+   * Boolean to specify whether the control is readonly
+   */
+  readOnly?: boolean;
+  /**
+   * Boolean to specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+  /**
+   * Text that is displayed when the control is in warning state
+   */
+  warnText?: React.ReactNode;
+  /**
+   * The type of the input
+   */
+  type?: string;
 }
 
 /**
@@ -29,9 +58,37 @@ export interface TextAreaProps extends ComponentProps<'textarea'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-textarea--overview)
  */
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  ({ className, id, isSkeletonLoading, labelText, maxLength = 3000, name, rows = 2, ...props }, ref) => {
+  (
+    {
+      className,
+      id,
+      isSkeletonLoading,
+      labelText,
+      maxLength = 3000,
+      name,
+      rows = 2,
+      disabled,
+      warn,
+      warnText,
+      invalid,
+      invalidText,
+      ...props
+    },
+    ref,
+  ) => {
     const baseClassName = `${px}-text-area`;
     const generatedId = useId();
+
+    const textAreaProps = useNormalizedInputProps({
+      disabled,
+      id: id ?? generatedId,
+      invalid,
+      invalidText,
+      type: 'text',
+      warn,
+      warnText,
+    });
+
     return (
       <div className={classnames(`${baseClassName}__wrapper`)}>
         <label
@@ -45,7 +102,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         </label>
         <textarea
           {...props}
-          className={classnames(baseClassName, className, {
+          className={classnames(baseClassName, className, `${px}-text-area__input`, {
             [`${px}-skeleton`]: isSkeletonLoading,
           })}
           id={id ?? generatedId}
@@ -58,6 +115,11 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         <div className={`${baseClassName}-resizer__icon`}>
           <Icon icon="Menu" />
         </div>
+        {textAreaProps.validation ? (
+          textAreaProps.validation
+        ) : (
+          <p className={classnames(`${px}-text-area__validation`)}>&nbsp;</p>
+        )}
       </div>
     );
   },
