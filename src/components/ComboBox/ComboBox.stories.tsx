@@ -33,7 +33,7 @@ Playground.args = {
   options: birthdays,
   id: 'birthdays-combo-box',
   labelText: 'Birth Year',
-  lockValueToOptions: true,
+  allowCustomValue: true,
 };
 
 Playground.argTypes = {
@@ -240,7 +240,7 @@ export const FilterTermsExample = () => {
   );
 };
 
-export const DontLockValueToOptionsMode = () => {
+export const DontallowCustomValueMode = () => {
   const [value, setValue] = React.useState<string>('');
   const [inputValue, setInputValue] = React.useState('');
 
@@ -254,7 +254,7 @@ export const DontLockValueToOptionsMode = () => {
         onChange={(newValue) => setValue(newValue)}
         inputValue={inputValue}
         setInputValue={setInputValue}
-        lockValueToOptions={false}
+        allowCustomValue={true}
         placeholder="Type anything or select from list"
       />
       <div style={{ marginTop: '20px' }}>
