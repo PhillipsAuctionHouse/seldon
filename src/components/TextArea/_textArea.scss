@@ -70,20 +70,6 @@
     }
   }
 
-  // Read only
-  &--readonly {
-    pointer-events: none;
-
-    .#{$px}-text-area__label,
-    .#{$px}-text-area__input {
-      cursor: default;
-    }
-
-    .#{$px}-text-area__input {
-      background-color: rgba(239, 239, 239, 30%);
-    }
-  }
-
   &--invalid {
     color: $error-red;
 

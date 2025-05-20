@@ -85,7 +85,6 @@ describe('TextArea', () => {
       <TextArea labelText="Test Label" warn={false} warnText="Almost at character limit" />,
     );
 
-    // Check that the warning message is not displayed
     expect(queryByText('Almost at character limit')).not.toBeInTheDocument();
   });
 

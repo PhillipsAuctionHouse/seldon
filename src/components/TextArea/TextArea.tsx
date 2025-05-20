@@ -30,10 +30,7 @@ export interface TextAreaProps extends ComponentProps<'textarea'> {
    * Text that is displayed when the control is in an invalid state
    */
   invalidText?: React.ReactNode;
-  /**
-   * Boolean to specify whether the control is readonly
-   */
-  readOnly?: boolean;
+
   /**
    * Boolean to specify whether the control is currently in warning state
    */
