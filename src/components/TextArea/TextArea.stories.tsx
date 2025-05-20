@@ -46,4 +46,29 @@ Playground.argTypes = {
       type: 'string',
     },
   },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  invalid: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  invalidText: {
+    control: {
+      type: 'text',
+    },
+  },
+  warn: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  warnText: {
+    control: {
+      type: 'text',
+    },
+  },
 };

@@ -46,4 +46,58 @@ describe('TextArea', () => {
     expect(textarea).toHaveAttribute('id', 'test-id');
     expect(label).toHaveAttribute('for', 'test-id');
   });
+
+  it('applies invalid state and displays error message', () => {
+    const { getByText, container } = render(
+      <TextArea labelText="Test Label" invalid invalidText="This field is required" />,
+    );
+
+    // Check that the wrapper has the invalid class
+    const wrapper = container.querySelector('.seldon-text-area__wrapper');
+    expect(wrapper).toHaveClass('seldon-text-area--invalid');
+
+    // Check that the error message is displayed
+    expect(getByText('This field is required')).toBeInTheDocument();
+  });
+
+  it('does not show error message when invalid is false', () => {
+    const { queryByText } = render(
+      <TextArea labelText="Test Label" invalid={false} invalidText="This field is required" />,
+    );
+
+    // Check that the error message is not displayed
+    expect(queryByText('This field is required')).not.toBeInTheDocument();
+  });
+
+  it('applies warn state and displays warning message', () => {
+    const { getByText, container } = render(
+      <TextArea labelText="Test Label" warn warnText="Almost at character limit" />,
+    );
+
+    const wrapper = container.querySelector('.seldon-text-area__wrapper');
+    expect(wrapper).toHaveClass('seldon-text-area--warn');
+
+    expect(getByText('Almost at character limit')).toBeInTheDocument();
+  });
+
+  it('does not show warning message when warn is false', () => {
+    const { queryByText } = render(
+      <TextArea labelText="Test Label" warn={false} warnText="Almost at character limit" />,
+    );
+
+    // Check that the warning message is not displayed
+    expect(queryByText('Almost at character limit')).not.toBeInTheDocument();
+  });
+
+  it('applies disabled state correctly', () => {
+    const { getByRole, container } = render(<TextArea labelText="Test Label" disabled />);
+
+    // Check that the textarea has disabled attribute
+    const textarea = getByRole('textbox');
+    expect(textarea).toBeDisabled();
+
+    // Check that the wrapper has the disabled class
+    const wrapper = container.querySelector('.seldon-text-area__wrapper');
+    expect(wrapper).toHaveClass('seldon-text-area--disabled');
+  });
 });

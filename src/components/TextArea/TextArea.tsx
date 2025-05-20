@@ -42,10 +42,6 @@ export interface TextAreaProps extends ComponentProps<'textarea'> {
    * Text that is displayed when the control is in warning state
    */
   warnText?: React.ReactNode;
-  /**
-   * The type of the input
-   */
-  type?: string;
 }
 
 /**
@@ -84,17 +80,23 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       id: id ?? generatedId,
       invalid,
       invalidText,
-      type: 'text',
+      type: 'text-area',
       warn,
       warnText,
     });
 
+    const wrapperClassNames = classnames(`${baseClassName}__wrapper`, {
+      [`${px}-text-area--disabled`]: textAreaProps.disabled,
+      [`${px}-text-area--invalid`]: textAreaProps.invalid,
+      [`${px}-text-area--warn`]: textAreaProps.warn,
+    });
+
     return (
-      <div className={classnames(`${baseClassName}__wrapper`)}>
+      <div className={wrapperClassNames}>
         <label
           data-testid={`text-area-${id ?? generatedId}-label`}
           htmlFor={id ?? generatedId}
-          className={classnames(`${px}-input__label`, {
+          className={classnames(`${px}-text-area__label`, {
             [`${px}-skeleton`]: isSkeletonLoading,
           })}
         >
@@ -111,6 +113,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           name={name}
           ref={ref}
           data-testid={`text-area-${id ?? generatedId}-input`}
+          disabled={textAreaProps.disabled}
         />
         <div className={`${baseClassName}-resizer__icon`}>
           <Icon icon="Menu" />
