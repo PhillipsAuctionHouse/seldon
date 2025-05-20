@@ -1,3 +1,10 @@
+## [1.146.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.146.1...v1.146.2) (2025-05-20)
+
+
+### Bug Fixes
+
+* **Header:** L3-6783 Hover state on header link cursor pointer  ([#622](https://github.com/PhillipsAuctionHouse/seldon/issues/622)) ([7fad459](https://github.com/PhillipsAuctionHouse/seldon/commit/7fad4599007d3ad87ba1ac9a7c50cf6ffc4b09fa))
+
 ## [1.146.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.146.0...v1.146.1) (2025-05-16)
 
 
