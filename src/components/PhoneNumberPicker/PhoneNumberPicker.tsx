@@ -1,55 +1,38 @@
 import classnames from 'classnames';
 import { CountryCode, getCountries, getCountryCallingCode } from 'libphonenumber-js';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { getCommonProps } from '../../utils';
-import { ComboBox } from '../ComboBox';
+import ComboBox, { ComboBoxOption, ComboBoxProps } from '../ComboBox/ComboBox';
 
-export interface PhoneNumberPickerProps {
-  /**
-   * Unique id for the ComboBox.
-   */
-  id: string;
-  /**
-   * Optional className for custom styling.
-   */
-  className?: string;
-  /**
-   * Label for the ComboBox.
-   */
-  labelText: string;
-  /**
-   * Optional placeholder text for the input.
-   */
-  placeholder?: string;
-  /**
-   * Input value for the ComboBox.
-   */
-  inputValue: string;
-  /**
-   * Passed in function to handle input value changes.
-   */
-  setInputValue: (value: string) => void;
-}
+/**
+ * PhoneNumberPickerProps extends ComboBoxProps, allowing for all ComboBox options
+ * while adding any phone-specific props
+ */
+export type PhoneNumberPickerProps = Omit<ComboBoxProps, 'options'>;
 
 /**
  * ## Overview
  *
- * Overview of PhoneNumberPicker component
+ * A component for entering and selecting phone number country codes
  *
- * [Figma Link] https://www.figma.com/design/rIefa3bRPyZbZmtyV9PSQv/My-Account?node-id=1-3&p=f&m=dev
+ * [Figma Link](https://www.figma.com/design/rIefa3bRPyZbZmtyV9PSQv/My-Account?node-id=1-3&p=f&m=dev)
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-PhoneNumberPicker--overview)
  */
 const PhoneNumberPicker = React.forwardRef<HTMLDivElement, PhoneNumberPickerProps>(
-  ({ inputValue, labelText, className, id, setInputValue, ...props }, ref) => {
+  ({ className, id, inputValue, setInputValue, onChange, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'PhoneNumberPicker');
-    const countriesWithCode = useMemo(() => {
+
+    const [selectedCode, setSelectedCode] = useState('');
+
+    const countryOptions: ComboBoxOption[] = useMemo(() => {
       const countries = getCountries();
       const getCountryCode = (countryCode: CountryCode) => getCountryCallingCode(countryCode);
       return countries.map((country) => {
         return {
-          label: country,
-          value: `+${getCountryCode(country)}`,
+          label: `(${country}) +${getCountryCode(country)}`,
+          value: country,
+          displayValue: `+${getCountryCode(country)}`,
         };
       });
     }, []);
@@ -57,16 +40,14 @@ const PhoneNumberPicker = React.forwardRef<HTMLDivElement, PhoneNumberPickerProp
     return (
       <div ref={ref} className={classnames(baseClassName, className)} id={id} {...commonProps}>
         <ComboBox
-          className={classnames(baseClassName, className)}
+          className={`${baseClassName}__combobox`}
           id={`${id}-combobox`}
-          options={countriesWithCode}
-          {...props}
+          options={countryOptions}
+          value={selectedCode}
+          onChange={(newValue) => setSelectedCode(newValue)}
           inputValue={inputValue}
-          setInputValue={(value) => {
-            setInputValue(value.split(' ').pop() || '');
-          }}
-          labelText={labelText}
-          placeholder={props.placeholder}
+          setInputValue={setInputValue}
+          {...props}
         />
       </div>
     );
