@@ -21,6 +21,7 @@ const defaultProps = {
   title: 'Modern & Contemporary Art Day Sale, Morning Session',
   date: '18 Aug',
   location: 'New York',
+  href: 'https://www.phillips.com/auction/HK080225',
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args

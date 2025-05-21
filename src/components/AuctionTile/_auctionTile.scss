@@ -1,9 +1,20 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-auction-tile {
-  display: flex;
-  flex-direction: row;
-  gap: $spacing-sm;
+  text-decoration: none;
+
+  &:hover {
+    color: #000;
+    text-decoration: none;
+  }
+
+  .seldon-text--link {
+    span {
+      display: flex;
+      flex-direction: row;
+      gap: $spacing-sm;
+    }
+  }
 
   &__image {
     aspect-ratio: 16/9;
@@ -34,5 +45,12 @@
 
   &__separator {
     margin: 0 8px;
+  }
+
+  &__date_location {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    font-variation-settings: 'wght' 400;
   }
 }
