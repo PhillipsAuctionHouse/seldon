@@ -119,7 +119,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         </div>
         <div>
           {textAreaProps.validation ?? (
-            <div className={`${px}-text-area__validation`} id={textAreaProps.invalidId} style={{ height: '2em' }}></div>
+            <div className={`${px}-text-area__validation`} id={textAreaProps.invalidId}></div>
           )}
         </div>
       </>

@@ -53,6 +53,7 @@
     -webkit-line-clamp: 2;
     line-clamp: 2;
     line-height: $spacing-md;
+    min-height: 2em;
     overflow: hidden;
   }
 
