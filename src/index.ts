@@ -114,3 +114,4 @@ export * from './patterns/FilterMenu';
 export * from './patterns/ObjectTile';
 export * from './utils/hooks';
 export * from './components/Pictogram';
+export * from './components/AuctionTile';
