@@ -51,11 +51,11 @@
     -webkit-box-orient: vertical;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     line-height: $spacing-md;
     overflow: hidden;
   }
 
-  // Disabled
   &--disabled {
     color: $keyline-gray;
     cursor: default;

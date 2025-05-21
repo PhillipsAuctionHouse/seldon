@@ -89,42 +89,43 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     });
 
     return (
-      <div className={wrapperClassNames}>
-        <label
-          data-testid={`text-area-${id ?? generatedId}-label`}
-          htmlFor={id ?? generatedId}
-          className={classnames(`${px}-text-area__label`, {
-            [`${px}-skeleton`]: isSkeletonLoading,
-          })}
-        >
-          {labelText}
-        </label>
-        <textarea
-          {...props}
-          className={classnames(baseClassName, className, `${px}-text-area__input`, {
-            [`${px}-skeleton`]: isSkeletonLoading,
-          })}
-          id={id ?? generatedId}
-          rows={rows}
-          maxLength={maxLength}
-          name={name}
-          ref={ref}
-          data-testid={`text-area-${id ?? generatedId}-input`}
-          disabled={textAreaProps.disabled}
-        />
-        <div className={`${baseClassName}-resizer__icon`}>
-          <Icon icon="Menu" />
+      <>
+        <div className={wrapperClassNames}>
+          <label
+            data-testid={`text-area-${id ?? generatedId}-label`}
+            htmlFor={id ?? generatedId}
+            className={classnames(`${px}-text-area__label`, {
+              [`${px}-skeleton`]: isSkeletonLoading,
+            })}
+          >
+            {labelText}
+          </label>
+
+          <textarea
+            {...props}
+            className={classnames(baseClassName, className, `${px}-text-area__input`, {
+              [`${px}-skeleton`]: isSkeletonLoading,
+            })}
+            id={id ?? generatedId}
+            rows={rows}
+            maxLength={maxLength}
+            name={name}
+            ref={ref}
+            data-testid={`text-area-${id ?? generatedId}-input`}
+            disabled={textAreaProps.disabled}
+          />
+
+          <Icon icon="Menu" className={`${baseClassName}-resizer__icon`} />
         </div>
-        {textAreaProps.validation ? (
-          textAreaProps.validation
-        ) : (
-          <p className={classnames(`${px}-text-area__validation`)}>&nbsp;</p>
-        )}
-      </div>
+        <div>
+          {textAreaProps.validation ?? (
+            <div className={`${px}-text-area__validation`} id={textAreaProps.invalidId} style={{ height: '2em' }}></div>
+          )}
+        </div>
+      </>
     );
   },
 );
 
 TextArea.displayName = 'TextArea';
-
 export default TextArea;

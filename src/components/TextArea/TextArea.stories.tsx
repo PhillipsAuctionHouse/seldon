@@ -12,7 +12,7 @@ export const Playground = (props: TextAreaProps) => <TextArea {...props} />;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
-  children: 'Hi There',
+  defaultValue: 'Hi There',
   labelText: 'Description (Optional)',
   rows: 4,
   isSkeletonLoading: false,
