@@ -10,17 +10,17 @@ const meta = {
 
 export default meta;
 export const Playground = (props: AuctionTileProps) => (
-  <div style={{ width: '500px' }}>
+  <div>
     <AuctionTile {...props} />
   </div>
 );
 
 const defaultProps = {
-  auctionImageHref: 'https://picsum.photos/160/160',
-  auctionType: 'Live Auction',
-  auctionTitle: 'Modern & Contemporary Art Day Sale, Morning Session',
-  auctionDate: '18 Aug',
-  auctionLocation: 'New York',
+  imageSrc: 'https://picsum.photos/160/90',
+  type: 'Live Auction',
+  title: 'Modern & Contemporary Art Day Sale, Morning Session',
+  date: '18 Aug',
+  location: 'New York',
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
@@ -39,19 +39,11 @@ const divider = (
 );
 
 export const MultipleAuctions = () => (
-  <div style={{ display: 'flex', gap: 'var(--spacing-sm)', flexDirection: 'column', width: '400px' }}>
+  <div style={{ display: 'flex', gap: 'var(--spacing-sm)', flexDirection: 'column' }}>
     <AuctionTile {...defaultProps} />
     {divider}
-    <AuctionTile
-      {...defaultProps}
-      auctionTitle="Modern & Contemporary Art Day Sale, Afternoon Session"
-      auctionLocation="Hong Kong"
-    />
+    <AuctionTile {...defaultProps} title="Modern & Contemporary Art Day Sale, Afternoon Session" location="Hong Kong" />
     {divider}
-    <AuctionTile
-      {...defaultProps}
-      auctionTitle="Modern & Contemporary: Online Auction, New York"
-      auctionDate="27 Aug - 05 Sep"
-    />
+    <AuctionTile {...defaultProps} title="Modern & Contemporary: Online Auction, New York" date="27 Aug - 05 Sep" />
   </div>
 );

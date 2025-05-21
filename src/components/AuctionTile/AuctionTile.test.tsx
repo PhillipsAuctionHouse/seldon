@@ -6,11 +6,11 @@ describe('AuctionTile', () => {
   runCommonTests(AuctionTile, 'AuctionTile');
 
   const props = {
-    auctionImageHref: 'https://example.com/image.jpg',
-    auctionType: 'Live Auction',
-    auctionTitle: 'Modern & Contemporary Art Day Sale, Morning Session',
-    auctionDate: '18 Aug',
-    auctionLocation: 'New York',
+    imageSrc: 'https://example.com/image.jpg',
+    type: 'Live Auction',
+    title: 'Modern & Contemporary Art Day Sale, Morning Session',
+    date: '18 Aug',
+    location: 'New York',
   };
 
   it('should render the AuctionTile component', () => {
@@ -22,7 +22,7 @@ describe('AuctionTile', () => {
   });
 
   it('should allow custom image alt text', () => {
-    const { getByAltText } = render(<AuctionTile {...props} auctionImageAlt="Custom Alt Text" />);
+    const { getByAltText } = render(<AuctionTile {...props} imageAlt="Custom Alt Text" />);
 
     expect(getByAltText('Custom Alt Text')).toBeInTheDocument();
   });

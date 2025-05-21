@@ -4,12 +4,12 @@ import classnames from 'classnames';
 import { Text, TextVariants } from '../Text';
 
 export type AuctionTileProps = ComponentProps<'div'> & {
-  auctionImageHref: string;
-  auctionImageAlt?: string;
-  auctionType: string;
-  auctionTitle: string;
-  auctionDate: string;
-  auctionLocation: string;
+  imageSrc: string;
+  imageAlt?: string;
+  type: string;
+  title: string;
+  date: string;
+  location: string;
 };
 /**
  * ## Overview
@@ -21,34 +21,22 @@ export type AuctionTileProps = ComponentProps<'div'> & {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-auctiontile--overview)
  */
 const AuctionTile = forwardRef<HTMLDivElement, AuctionTileProps>(
-  (
-    {
-      className,
-      auctionImageHref,
-      auctionImageAlt = 'Auction Image',
-      auctionType,
-      auctionTitle,
-      auctionDate,
-      auctionLocation,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ className, imageSrc, imageAlt = 'Auction Image', type, title, date, location, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'AuctionTile');
     const componentProps = { ...commonProps, ...props };
 
     return (
       <div {...componentProps} className={classnames(baseClassName, className)} ref={ref}>
         <div className={`${baseClassName}__image`}>
-          <img src={auctionImageHref} alt={auctionImageAlt} />
+          <img src={imageSrc} alt={imageAlt} />
         </div>
         <div className={`${baseClassName}__details`}>
-          <Text variant={TextVariants.badge}>{auctionType}</Text>
-          <Text variant={TextVariants.title4}>{auctionTitle}</Text>
+          <Text variant={TextVariants.badge}>{type}</Text>
+          <Text variant={TextVariants.title4}>{title}</Text>
           <div className={`${baseClassName}__date_location`}>
-            <Text variant={TextVariants.string2}>{auctionDate}</Text>
+            <Text variant={TextVariants.string2}>{date}</Text>
             <span className={`${baseClassName}__separator`}>•</span>
-            <Text variant={TextVariants.string2}>{auctionLocation}</Text>
+            <Text variant={TextVariants.string2}>{location}</Text>
           </div>
         </div>
       </div>

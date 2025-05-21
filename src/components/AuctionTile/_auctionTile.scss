@@ -6,22 +6,16 @@
   gap: $spacing-sm;
 
   &__image {
-    align-self: stretch;
-    display: flex;
-    flex-direction: column;
+    aspect-ratio: 16/9;
+    max-width: $spacing-xxxl;
+    min-width: 90px;
+
+    @include media($size-xl) {
+      max-width: calc($spacing-xxxl * 1.25);
+    }
 
     img {
-      height: 40%;
       object-fit: cover;
-      width: 100%;
-
-      @include media($size-md) {
-        height: 60%;
-      }
-
-      @include media($size-xl) {
-        height: 80%;
-      }
     }
   }
 
