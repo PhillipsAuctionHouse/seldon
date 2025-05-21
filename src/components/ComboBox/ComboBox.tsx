@@ -32,113 +32,95 @@ export interface ComboBoxProps {
    * Boolean to specify whether you want the underlying label to be visually hidden
    */
   hideLabel?: boolean;
-
   /**
    * List of options to be displayed in the ComboBox.
    */
   options: ComboBoxOption[];
-
   /**
    * Unique id for the ComboBox.
    */
   id: string;
-
   /**
    * Optional className for custom styling.
    */
   className?: string;
-
   /**
    * Label for the ComboBox.
    */
   labelText: string;
-
   /**
    * Optional placeholder text for the input.
    */
   placeholder?: string;
-
   /**
    * Current selected value (e.g., 'US')
    */
   value?: string;
-
   /**
    * Function called when selected value changes
    */
   onChange?: (value: string, option: ComboBoxOption | null) => void;
-
   /**
    * Current input value shown in the input field
    */
   inputValue: string;
-
   /**
    * Function to update the input value
    */
   setInputValue: (value: string) => void;
-
   /**
    * Function to get display text for an option
    * Similar to MUI's getOptionLabel
    */
   getOptionLabel?: (option: ComboBoxOption) => string;
-
   /**
    * Function to render custom option content
    * Similar to MUI's renderOption
    */
   renderOption?: (option: ComboBoxOption) => React.ReactNode;
-
   /**
    * Allow free text input that doesn't match any option
    * Similar to MUI's allowCustomValue
+   * @default false
    */
   allowCustomValue?: boolean;
-
   /**
    * Sets the invalid state of the input
    * @default false
    */
   invalid?: boolean;
-
   /**
    * Text to display when input is invalid
    */
   invalidText?: string;
-
   /**
    * aria-label optional input label
    */
   ariaLabelInput?: string;
-
   /**
    * aria-label for the clear button
    */
   ariaLabelClear?: string;
-
   /**
    * aria-label for the dropdown button
    */
   ariaLabelDropdown?: string;
-
   /**
    * aria-label for content
    */
   ariaLabelContent?: string;
-
   /**
    * If true, the input will be cleared when the user clicks away when the input value is not in the options list.
+   * @default true
    */
   autoClearInput?: boolean;
-
   /**
    * popoverContainer ref for the ComboBox
    */
   popoverContainerRef?: React.RefObject<HTMLElement>;
-
   /**
    * No options message translation
+   * @default "No Options."
    */
   noOptionsMessage?: string;
 }
@@ -165,7 +147,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     setInputValue,
     getOptionLabel = (option) => option.label || option.value,
     renderOption,
-    allowCustomValue = true,
+    allowCustomValue = false,
     ariaLabelDropdown,
     ariaLabelInput,
     ariaLabelClear,

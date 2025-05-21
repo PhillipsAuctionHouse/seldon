@@ -67,6 +67,7 @@
     &--invalid {
       .#{$px}-combo-box__input {
         border-color: $error-red;
+        box-shadow: inset 0 0 3px 3px $error-pink;
 
         &:hover {
           border-color: $error-red;
@@ -181,7 +182,6 @@
     @include text($string2);
 
     align-items: center;
-    color: $error-red;
     display: flex;
     margin-top: $spacing-xsm;
   }

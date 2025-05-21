@@ -11,8 +11,8 @@ const meta = {
 
 export default meta;
 
-const birthdays: ComboBoxOption[] = Array.from({ length: 2025 - 1926 + 1 }, (_, i) => {
-  const year = 1926 + i;
+const birthdays: ComboBoxOption[] = Array.from({ length: 2025 - 1990 + 1 }, (_, i) => {
+  const year = 1990 + i;
   return {
     value: `${year}`,
     label: `${year}`,
@@ -28,7 +28,6 @@ export const Playground = (props: ComboBoxProps) => {
     </div>
   );
 };
-
 Playground.args = {
   options: birthdays,
   id: 'birthdays-combo-box',
@@ -37,10 +36,23 @@ Playground.args = {
 };
 
 Playground.argTypes = {
+  options: { control: 'object' },
+  id: { control: 'text' },
+  labelText: { control: 'text' },
+  allowCustomValue: { control: 'boolean' },
+  invalid: { control: 'boolean' },
+  invalidText: { control: 'text' },
+  placeholder: { control: 'text' },
+  ariaLabelInput: { control: 'text' },
+  disabled: { control: 'boolean' },
+  readOnly: { control: 'boolean' },
+  popoverContainerRef: { control: false },
   getOptionLabel: { control: false },
   renderOption: { control: false },
   onChange: { control: false },
   setInputValue: { control: false },
+  value: { control: false },
+  inputValue: { control: false },
 };
 
 export const ComboBoxInDrawer = () => {
@@ -240,7 +252,7 @@ export const FilterTermsExample = () => {
   );
 };
 
-export const DontallowCustomValueMode = () => {
+export const AllowCustomValue = () => {
   const [value, setValue] = React.useState<string>('');
   const [inputValue, setInputValue] = React.useState('');
 
@@ -248,7 +260,7 @@ export const DontallowCustomValueMode = () => {
     <div style={{ width: '400px' }}>
       <ComboBox
         options={countries}
-        id="dont-lock-value-to-options-combo"
+        id="allow-custom-value-combo"
         labelText="Country"
         value={value}
         onChange={(newValue) => setValue(newValue)}
@@ -298,33 +310,4 @@ export const Phone = () => {
       </div>
     </div>
   );
-};
-
-export const Invalid = () => {
-  const [value, setValue] = React.useState<string>('');
-  const [inputValue, setInputValue] = React.useState('');
-
-  return (
-    <div style={{ width: '300px' }}>
-      <ComboBox
-        options={countries}
-        id="invalid-combo"
-        labelText="Country"
-        value={value}
-        onChange={(newValue) => setValue(newValue)}
-        inputValue={inputValue}
-        setInputValue={setInputValue}
-        invalid={true}
-        invalidText="Please select a valid country"
-      />
-    </div>
-  );
-};
-
-Invalid.parameters = {
-  docs: {
-    description: {
-      story: 'Shows the ComboBox in an invalid state with error message.',
-    },
-  },
 };
