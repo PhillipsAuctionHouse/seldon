@@ -78,11 +78,10 @@
       color: $error-red;
     }
 
-    .#{$px}-input__input,
-    .#{$px}-input__input::placeholder,
+    .#{$px}-text-area__input,
+    .#{$px}-text-area__input::placeholder,
     .#{$px}-input__validation {
       color: $pure-black;
-      font-variation-settings: normal;
     }
 
     .#{$px}-text-area__input {
