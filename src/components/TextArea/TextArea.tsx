@@ -118,9 +118,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           <Icon icon="Menu" className={`${baseClassName}-resizer__icon`} />
         </div>
         <div>
-          {textAreaProps.validation ?? (
-            <div className={`${px}-text-area__validation`} id={textAreaProps.invalidId}></div>
-          )}
+          {textAreaProps.validation ?? <div className={`${px}-text-area__validation`} id={textAreaProps.invalidId} />}
         </div>
       </>
     );
