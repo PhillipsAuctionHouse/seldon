@@ -1,3 +1,10 @@
+## [1.149.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.149.0...v1.149.1) (2025-05-22)
+
+
+### Bug Fixes
+
+* **countdown:** L3-6795 fix glitchy countdown logic ([#628](https://github.com/PhillipsAuctionHouse/seldon/issues/628)) ([4ac439a](https://github.com/PhillipsAuctionHouse/seldon/commit/4ac439a9360c189787d08efe6289e67a5ebbad52))
+
 # [1.149.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.148.0...v1.149.0) (2025-05-22)
 
 
