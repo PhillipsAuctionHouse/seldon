@@ -6,14 +6,9 @@
     width: 30px;
   }
 
-  .seldon-icon-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-
+  .#{$px}-icon-button {
     &:focus-visible {
       border-radius: 5px;
-      outline: 1px solid $medium-gray;
     }
   }
 
@@ -23,8 +18,7 @@
   }
 
   &-atcb-item {
-    margin: $spacing-xsm 0;
-    padding: 0 $spacing-sm;
+    padding: $spacing-xsm $spacing-sm;
 
     &:hover,
     &:focus-visible {

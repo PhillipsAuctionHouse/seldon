@@ -1,5 +1,5 @@
 import { ComponentProps, forwardRef, ElementType, useState } from 'react';
-import { getCommonProps, px } from '../../utils';
+import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { Text, TextVariants } from '../Text';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
@@ -12,6 +12,7 @@ import {
   generateYahooCalendarLink,
   generateCalendarFile,
 } from './calendarLinks';
+import IconButton from '../IconButton/IconButton';
 
 export interface AddToCalendarProps extends ComponentProps<'div'> {
   event: CalendarEvent;
@@ -44,13 +45,9 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         <DropdownMenu.Root open={open} onOpenChange={setOpen}>
           <DropdownMenu.Trigger asChild>
-            <button
-              aria-label={label}
-              className={`${px}-icon-button ${px}-icon-button--small ${baseClassName}-icon-button`}
-              type="button"
-            >
+            <IconButton>
               <Icon icon={open ? 'CloseX' : 'Calendar'} title={label} />
-            </button>
+            </IconButton>
           </DropdownMenu.Trigger>
           <DropdownMenu.Portal>
             <DropdownMenu.Content
@@ -60,11 +57,6 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
               data-side="bottom"
               avoidCollisions={false}
               className={`${baseClassName}-atcb-list`}
-              onKeyDown={(e) => {
-                if (e.key === 'Tab') {
-                  setOpen(false);
-                }
-              }}
             >
               {menuItems.map((item) => (
                 <DropdownMenu.Item

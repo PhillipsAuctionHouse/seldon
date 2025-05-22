@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import Button, { ButtonProps } from '../Button/Button';
 import { getCommonProps } from '../../utils';
 import { ButtonVariants } from '../Button/types';
+import { forwardRef } from 'react';
 
 export interface IconButtonProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'children'> {
   /**
@@ -30,25 +31,24 @@ export interface IconButtonProps extends Omit<React.HTMLAttributes<HTMLButtonEle
   prefetch?: ButtonProps['prefetch'];
 }
 
-const IconButton = ({
-  children,
-  variant = ButtonVariants.primary,
-  isDisabled = false,
-  className,
-  ...props
-}: IconButtonProps) => {
-  const { className: baseClass, ...commonProps } = getCommonProps(props, 'IconButton');
-  return (
-    <Button
-      {...commonProps}
-      variant={variant}
-      className={classnames(baseClass, `${baseClass}--${variant}`, className)}
-      isDisabled={isDisabled}
-      {...props}
-    >
-      {children}
-    </Button>
-  );
-};
+const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
+  ({ children, variant = ButtonVariants.primary, isDisabled = false, className, ...props }, ref) => {
+    const { className: baseClass, ...commonProps } = getCommonProps(props, 'IconButton');
+    return (
+      <Button
+        {...commonProps}
+        variant={variant}
+        className={classnames(baseClass, `${baseClass}--${variant}`, className)}
+        isDisabled={isDisabled}
+        ref={ref}
+        {...props}
+      >
+        {children}
+      </Button>
+    );
+  },
+);
+
+IconButton.displayName = 'IconButton';
 
 export default IconButton;
