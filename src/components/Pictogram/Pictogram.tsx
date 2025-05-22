@@ -40,6 +40,7 @@ const Pictogram = forwardRef<HTMLDivElement, PictogramProps>(({ className, picto
       height={size}
       width={size}
       color={color}
+      isPictogram
       ref={ref}
     ></Icon>
   );
