@@ -2,6 +2,7 @@ import { Meta } from '@storybook/react';
 import Countdown, { CountdownProps } from './Countdown';
 import { addDays, addHours, addMinutes, addSeconds } from 'date-fns';
 import { CountdownVariants } from './types';
+import { useState } from 'react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -13,11 +14,24 @@ export default meta;
 
 const daysDate = addDays(new Date(), 3);
 const hoursDate = addHours(new Date(), 5);
-const minutesDate = addMinutes(new Date(), 20);
+const minutesDate = addMinutes(new Date(), 3);
 const secondsDate = addSeconds(new Date(), 10);
 const closingDate = addMinutes(addSeconds(new Date(), 10), 3);
 
-export const Playground = (props: CountdownProps) => <Countdown {...props} endDateTime={minutesDate} />;
+export const Playground = (props: CountdownProps) => {
+  const [endDateTime, setEndDateTime] = useState(props.endDateTime ?? minutesDate);
+
+  const resetToThreeMinutesFromNow = () => {
+    setEndDateTime(addMinutes(new Date(), 3));
+  };
+
+  return (
+    <div>
+      <Countdown {...props} endDateTime={endDateTime} />
+      <button onClick={resetToThreeMinutesFromNow}>Reset to 3 minutes from now</button>
+    </div>
+  );
+};
 
 Playground.argTypes = {
   locale: {
@@ -27,6 +41,12 @@ Playground.argTypes = {
   variant: {
     type: 'select',
     options: Object.values(CountdownVariants),
+  },
+  endDateTime: {
+    control: 'date',
+  },
+  currentDateTime: {
+    control: 'date',
   },
 };
 
