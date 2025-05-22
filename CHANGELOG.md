@@ -1,3 +1,10 @@
+# [1.149.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.148.0...v1.149.0) (2025-05-22)
+
+
+### Features
+
+* **Pictograms:** L3-6641 add pictograms ([#620](https://github.com/PhillipsAuctionHouse/seldon/issues/620)) ([63a96ee](https://github.com/PhillipsAuctionHouse/seldon/commit/63a96ee72ec612ffdb898a64ab7a4b850657a805))
+
 # [1.148.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.147.0...v1.148.0) (2025-05-21)
 
 
