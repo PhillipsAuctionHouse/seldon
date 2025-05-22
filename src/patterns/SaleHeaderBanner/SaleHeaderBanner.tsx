@@ -85,7 +85,7 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
   /**
    * Function to get the current date time (defaults to new Date())
    */
-  getCurrentDateTime?: () => Date;
+  getCurrentDateTime?: () => Date | null;
 }
 /**
  * ## Overview
