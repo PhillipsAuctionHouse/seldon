@@ -16,7 +16,7 @@
     align-items: flex-end;
     display: flex;
     justify-content: space-between;
-    margin-bottom: $spacing-sm;
+    padding-bottom: $spacing-sm;
   }
 
   &__info {
@@ -56,7 +56,7 @@
     height: 2.5rem;
     justify-content: center;
     position: relative;
-    top: 28px;
+    top: 10px;
     transition: background 0.8s;
     width: 2.5rem;
 
@@ -70,6 +70,14 @@
       background-color: $medium-gray;
       background-size: 100%;
       transition: background 0s;
+    }
+
+    @media (min-width: $breakpoint-md) {
+      top: 18px;
+    }
+
+    @media (min-width: $breakpoint-xl) {
+      top: 28px;
     }
   }
 
