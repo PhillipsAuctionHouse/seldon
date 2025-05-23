@@ -20,7 +20,7 @@ Playground.args = {
   event: {
     title: 'Modern & Contemporary Art Evening Sale',
     description: 'Modern & Contemporary Art Evening Sale',
-    start: new Date('2025-05-13T17:00:00-04:00'),
+    start: new Date('2025-08-13T17:00:00-04:00'),
     end: null,
     location: 'New York',
     timezone: 'America/New_York',

@@ -1,4 +1,5 @@
 import { describe, expect, test, vi } from 'vitest';
+import { addHours } from 'date-fns';
 import {
   generateGoogleCalendarLink,
   generateOutlookOnlineLink,
@@ -24,13 +25,11 @@ describe('calendar link generation', () => {
     const url = new URL(link);
     expect(url.origin + url.pathname).toBe('https://calendar.google.com/calendar/u/0/r/eventedit');
     expect(url.searchParams.get('text')).toBe(event.title);
-
     const start = toZonedTime(event.start, event.timezone);
-    const end = toZonedTime(event.end, event.timezone);
+    const end = event.end ? toZonedTime(event.end, event.timezone) : addHours(start, 1);
     expect(url.searchParams.get('dates')).toBe(
       `${format(start, "yyyyMMdd'T'HHmmss")}/${format(end, "yyyyMMdd'T'HHmmss")}`,
     );
-
     expect(url.searchParams.get('details')).toBe(event.description);
     expect(url.searchParams.get('location')).toBe(event.location);
     expect(url.searchParams.get('ctz')).toBe(event.timezone);
@@ -44,7 +43,8 @@ describe('calendar link generation', () => {
 
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const startInUserTimezone = toZonedTime(event.start, userTimezone);
-    const endInUserTimezone = toZonedTime(event.end, userTimezone);
+    const endInUserTimezone = event.end ? toZonedTime(event.end, userTimezone) : addHours(startInUserTimezone, 1); // Use userTimezone here
+
     expect(url.searchParams.get('startdt')).toBe(format(startInUserTimezone, "yyyy-MM-dd'T'HH:mm:ssXXX")); // Expect timezone
     expect(url.searchParams.get('enddt')).toBe(format(endInUserTimezone, "yyyy-MM-dd'T'HH:mm:ssXXX"));
 
@@ -60,7 +60,9 @@ describe('calendar link generation', () => {
 
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const startInUserTimezone = toZonedTime(event.start, userTimezone);
-    const endInUserTimezone = toZonedTime(event.end, userTimezone);
+
+    const endInUserTimezone = event.end ? toZonedTime(event.end, userTimezone) : addHours(startInUserTimezone, 1);
+
     expect(url.searchParams.get('st')).toBe(format(startInUserTimezone, "yyyyMMdd'T'HHmmss"));
     expect(url.searchParams.get('et')).toBe(format(endInUserTimezone, "yyyyMMdd'T'HHmmss"));
 
