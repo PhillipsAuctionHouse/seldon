@@ -1,11 +1,14 @@
 import { Meta } from '@storybook/react';
 import { ComponentProps } from 'react';
+import { px } from '../../utils';
 import FavoritesCollectionTile from './FavoritesCollectionTile';
 
 const meta = {
   title: 'Patterns/FavoritesCollectionTile',
   component: FavoritesCollectionTile,
 } satisfies Meta<typeof FavoritesCollectionTile>;
+
+const linkClassName = `.${px}-link .${px}-link--link`;
 
 export default meta;
 
@@ -18,10 +21,11 @@ Playground.args = {
   count: 2,
   name: 'New List',
   imageSrc: 'https://via.placeholder.com/400',
-  variant: 'favorites',
+  variant: 'lists',
   onEdit: (): void => console.log('Edit list clicked'),
   onDelete: (): void => console.log('Delete list clicked'),
   element: 'a',
+  linkClassName: linkClassName,
 };
 
 Playground.argTypes = {
@@ -49,6 +53,7 @@ EmptyFavorites.args = {
   formatlotStr: (count: number, lotText = 'LOT') => {
     return `${count} ${lotText}`;
   },
+  linkClassName: linkClassName,
 };
 
 export const BlankList = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
@@ -58,9 +63,10 @@ export const BlankList = (props: ComponentProps<typeof FavoritesCollectionTile>)
 BlankList.args = {
   id: 'favorites-collection-tile-3',
   count: 0,
-  name: 'Blank List',
-  variant: 'lists',
+  name: null,
+  variant: 'create',
   element: 'a',
+  linkClassName: linkClassName,
 };
 
 export const EmptyList = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
@@ -73,6 +79,7 @@ EmptyList.args = {
   name: 'Test List',
   variant: 'lists',
   element: 'a',
+  linkClassName: linkClassName,
 };
 
 export const TranslatedList = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
@@ -89,4 +96,5 @@ TranslatedList.args = {
   formatlotStr: (count: number) => {
     return `列表中有 ${count} 件拍品`;
   },
+  linkClassName: linkClassName,
 };
