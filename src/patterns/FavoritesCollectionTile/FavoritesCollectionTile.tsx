@@ -17,9 +17,9 @@ export interface FavoritesCollectionTileProps extends ComponentProps<'div'> {
    */
   emptyFavoritesText?: string;
   /**
-   * Lot blank list text en/zh
+   * Lot create first list text en/zh
    */
-  blankListText?: string;
+  createFirstListText?: string;
   /**
    * Lot empty lists text en/zh
    */
@@ -47,7 +47,7 @@ export interface FavoritesCollectionTileProps extends ComponentProps<'div'> {
   /**
    * Whether this card is in favorites view or lists view
    */
-  variant: 'favorites' | 'lists';
+  variant: 'favorites' | 'lists' | 'create';
   /**
    * React component to render within the navigation item, renders <Link> by default
    */
@@ -97,12 +97,12 @@ const FavoritesCollectionTile = memo(
         href,
         emptyFavoritesText = 'You have not added any objects to your Favorites yet.',
         emptyListsText = 'You have not added any objects to your List yet.',
-        blankListText = 'Create your first List.',
+        createFirstListText = 'Create your first List.',
         editListText = 'Edit List',
         deleteListText = 'Delete List',
         onEdit,
         onDelete,
-        formatlotStr = (count, lotText = count > 1 || count === 0 ? 'LOTS' : 'LOT') => `${count} ${lotText}`,
+        formatlotStr = (count, lotText = count === 1 ? 'LOT' : 'LOTS') => `${count} ${lotText}`,
         linkClassName,
         ...props
       },
@@ -112,6 +112,8 @@ const FavoritesCollectionTile = memo(
       const imageRef = useRef<HTMLDivElement>(null);
       const hasListData = name && count !== null && count !== undefined;
       const isCountEmpty = count === 0;
+      const isListVariant = variant === 'lists';
+      const isCreateVariant = variant === 'create';
 
       return (
         <div {...commonProps} className={classnames(baseClassName, className)} ref={ref} id={id}>
@@ -130,7 +132,7 @@ const FavoritesCollectionTile = memo(
                 }
               </div>
               <>
-                {hasListData && variant === 'lists' && name && (
+                {hasListData && isListVariant && (
                   <Popover.Root>
                     <Popover.Trigger asChild>
                       <div
@@ -206,12 +208,12 @@ const FavoritesCollectionTile = memo(
                 </div>
               )}
 
-              {(isCountEmpty || !hasListData) && variant === 'lists' && (
+              {(isCountEmpty || !hasListData) && (isListVariant || isCreateVariant) && (
                 <div className={`${baseClassName}__media-container`} data-testid="list" aria-label="Lists">
                   <div
                     className={classnames(`${baseClassName}__empty`, {
-                      [`${baseClassName}__empty--blank-list`]: !hasListData && variant === 'lists',
-                      [`${baseClassName}__empty--bg`]: isCountEmpty && name,
+                      [`${baseClassName}__empty--blank-list`]: !hasListData && (isListVariant || isCreateVariant),
+                      [`${baseClassName}__empty--bg`]: isCountEmpty && !isCreateVariant,
                     })}
                   >
                     <div className={`${baseClassName}__empty__content`}>
@@ -221,11 +223,11 @@ const FavoritesCollectionTile = memo(
                         height={24}
                         color="$dark-gray"
                         className={classnames(`${baseClassName}__icon`, {
-                          [`${baseClassName}__icon-circle`]: !hasListData && variant === 'lists',
+                          [`${baseClassName}__icon-circle`]: !hasListData && (isListVariant || isCreateVariant),
                         })}
                       />
                       <div className={`${baseClassName}__text`}>
-                        {hasListData && isCountEmpty ? emptyListsText : blankListText}
+                        {hasListData && isCountEmpty ? emptyListsText : createFirstListText}
                       </div>
                     </div>
                   </div>

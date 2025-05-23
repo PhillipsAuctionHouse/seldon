@@ -63,8 +63,8 @@ export const BlankList = (props: ComponentProps<typeof FavoritesCollectionTile>)
 BlankList.args = {
   id: 'favorites-collection-tile-3',
   count: 0,
-  name: '',
-  variant: 'lists',
+  name: null,
+  variant: 'create',
   element: 'a',
   linkClassName: linkClassName,
 };
