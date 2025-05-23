@@ -1,3 +1,10 @@
+## [1.149.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.149.1...v1.149.2) (2025-05-23)
+
+
+### Bug Fixes
+
+* **Loader:** L3-6809 missing component export ([#629](https://github.com/PhillipsAuctionHouse/seldon/issues/629)) ([963ce0f](https://github.com/PhillipsAuctionHouse/seldon/commit/963ce0faa02217b6f869958c20944bd857a724e4))
+
 ## [1.149.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.149.0...v1.149.1) (2025-05-22)
 
 
