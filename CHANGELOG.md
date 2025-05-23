@@ -1,3 +1,10 @@
+# [1.150.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.149.2...v1.150.0) (2025-05-23)
+
+
+### Features
+
+* **AddToCalendar:** L3-5753 Update code to accept end date as null value and match styles with dropdown ([#621](https://github.com/PhillipsAuctionHouse/seldon/issues/621)) ([7ccedb9](https://github.com/PhillipsAuctionHouse/seldon/commit/7ccedb9569596da82082ba0a42a0d7942697f977))
+
 ## [1.149.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.149.1...v1.149.2) (2025-05-23)
 
 
