@@ -47,6 +47,63 @@
     word-break: break-word;
   }
 
+  &__validation {
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    line-height: $spacing-md;
+    min-height: 2em;
+    overflow: hidden;
+  }
+
+  &--disabled {
+    color: $keyline-gray;
+    cursor: default;
+
+    .#{$px}-text-area__label,
+    .#{$px}-text-area__input {
+      color: inherit;
+    }
+    .#{$px}-text-area__label:hover,
+    .#{$px}-text-area__input:hover {
+      cursor: default;
+    }
+  }
+
+  &--invalid {
+    color: $error-red;
+
+    label {
+      color: $error-red;
+    }
+
+    .#{$px}-text-area__input,
+    .#{$px}-text-area__input::placeholder,
+    .#{$px}-input__validation {
+      color: $pure-black;
+    }
+
+    .#{$px}-text-area__input {
+      border: 1px solid $error-red;
+      box-shadow: inset 0 0 3px 3px $error-pink;
+
+      &:focus-within {
+        outline: 1px solid $error-red;
+      }
+    }
+  }
+
+  &--warn {
+    .#{$px}-text-area__label {
+      position: relative;
+    }
+  }
+
+  .#{$px}-input__validation {
+    animation: reveal 0.45s linear forwards;
+  }
+
   &::-webkit-resizer {
     bottom: 0;
     height: 28px;
