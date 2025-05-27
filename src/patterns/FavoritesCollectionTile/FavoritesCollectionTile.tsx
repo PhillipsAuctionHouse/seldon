@@ -209,29 +209,32 @@ const FavoritesCollectionTile = memo(
               )}
 
               {(isCountEmpty || !hasListData) && (isListVariant || isCreateVariant) && (
-                <div className={`${baseClassName}__media-container`} data-testid="list" aria-label="Lists">
-                  <div
-                    className={classnames(`${baseClassName}__empty`, {
-                      [`${baseClassName}__empty--blank-list`]: !hasListData && (isListVariant || isCreateVariant),
-                      [`${baseClassName}__empty--bg`]: isCountEmpty && !isCreateVariant,
-                    })}
-                  >
-                    <div className={`${baseClassName}__empty__content`}>
-                      <Icon
-                        icon={hasListData && isCountEmpty ? 'Favorite' : 'Add'}
-                        width={24}
-                        height={24}
-                        color="$dark-gray"
-                        className={classnames(`${baseClassName}__icon`, {
-                          [`${baseClassName}__icon-circle`]: !hasListData && (isListVariant || isCreateVariant),
-                        })}
-                      />
-                      <div className={`${baseClassName}__text`}>
-                        {hasListData && isCountEmpty ? emptyListsText : createFirstListText}
+                <>
+                  {isCreateVariant && <div className={`${baseClassName}__create-spacing`}></div>}
+                  <div className={`${baseClassName}__media-container`} data-testid="list" aria-label="Lists">
+                    <div
+                      className={classnames(`${baseClassName}__empty`, {
+                        [`${baseClassName}__empty--blank-list`]: !hasListData && (isListVariant || isCreateVariant),
+                        [`${baseClassName}__empty--bg`]: isCountEmpty && !isCreateVariant,
+                      })}
+                    >
+                      <div className={`${baseClassName}__empty__content`}>
+                        <Icon
+                          icon={hasListData && isCountEmpty ? 'Favorite' : 'Add'}
+                          width={24}
+                          height={24}
+                          color="$dark-gray"
+                          className={classnames(`${baseClassName}__icon`, {
+                            [`${baseClassName}__icon-circle`]: !hasListData && (isListVariant || isCreateVariant),
+                          })}
+                        />
+                        <div className={`${baseClassName}__text`}>
+                          {hasListData && isCountEmpty ? emptyListsText : createFirstListText}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </>
               )}
 
               {!isCountEmpty && hasListData && (

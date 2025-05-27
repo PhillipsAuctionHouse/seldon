@@ -72,10 +72,6 @@
       transition: background 0s;
     }
 
-    @media (min-width: $breakpoint-md) {
-      top: $spacing-sm;
-    }
-
     @media (min-width: $breakpoint-xl) {
       top: calc($spacing-sm + 0.45rem);
     }
@@ -173,6 +169,10 @@
     font-size: $body-size3;
     font-variation-settings: 'wght' 400;
     padding-top: 5px;
+  }
+
+  &__create-spacing {
+    height: calc($spacing-sm + 3rem);
   }
 
   [data-radix-popper-content-wrapper] > * {
