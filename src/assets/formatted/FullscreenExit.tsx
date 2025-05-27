@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgFullscreenExitProps extends React.HTMLAttributes<SVGSVGElement> {
+interface FullscreenExitProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgFullscreenExitProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgFullscreenExit = memo(
-  forwardRef<SVGSVGElement, SvgFullscreenExitProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgFullscreenExit';
-    const titleId = propsTitleId || kebabCase(title);
+const FullscreenExit = memo(
+  forwardRef<SVGSVGElement, FullscreenExitProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -34,4 +33,4 @@ const SvgFullscreenExit = memo(
   }),
 );
 
-export default SvgFullscreenExit;
+export default FullscreenExit;

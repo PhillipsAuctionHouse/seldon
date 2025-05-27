@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgViewProps extends React.HTMLAttributes<SVGSVGElement> {
+interface ViewProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgViewProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgView = memo(
-  forwardRef<SVGSVGElement, SvgViewProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgView';
-    const titleId = propsTitleId || kebabCase(title);
+const View = memo(
+  forwardRef<SVGSVGElement, ViewProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -39,4 +38,4 @@ const SvgView = memo(
   }),
 );
 
-export default SvgView;
+export default View;

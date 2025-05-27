@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgConditionReportProps extends React.HTMLAttributes<SVGSVGElement> {
+interface ConditionReportProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgConditionReportProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgConditionReport = memo(
-  forwardRef<SVGSVGElement, SvgConditionReportProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgConditionReport';
-    const titleId = propsTitleId || kebabCase(title);
+const ConditionReport = memo(
+  forwardRef<SVGSVGElement, ConditionReportProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -39,4 +38,4 @@ const SvgConditionReport = memo(
   }),
 );
 
-export default SvgConditionReport;
+export default ConditionReport;

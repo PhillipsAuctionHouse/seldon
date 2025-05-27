@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgBagProps extends React.HTMLAttributes<SVGSVGElement> {
+interface BagProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgBagProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgBag = memo(
-  forwardRef<SVGSVGElement, SvgBagProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgBag';
-    const titleId = propsTitleId || kebabCase(title);
+const Bag = memo(
+  forwardRef<SVGSVGElement, BagProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -39,4 +38,4 @@ const SvgBag = memo(
   }),
 );
 
-export default SvgBag;
+export default Bag;

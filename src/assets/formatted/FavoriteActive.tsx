@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgFavoriteActiveProps extends React.HTMLAttributes<SVGSVGElement> {
+interface FavoriteActiveProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgFavoriteActiveProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgFavoriteActive = memo(
-  forwardRef<SVGSVGElement, SvgFavoriteActiveProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgFavoriteActive';
-    const titleId = propsTitleId || kebabCase(title);
+const FavoriteActive = memo(
+  forwardRef<SVGSVGElement, FavoriteActiveProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -43,4 +42,4 @@ const SvgFavoriteActive = memo(
   }),
 );
 
-export default SvgFavoriteActive;
+export default FavoriteActive;

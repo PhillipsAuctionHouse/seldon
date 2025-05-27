@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgGridProps extends React.HTMLAttributes<SVGSVGElement> {
+interface GridProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgGridProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgGrid = memo(
-  forwardRef<SVGSVGElement, SvgGridProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgGrid';
-    const titleId = propsTitleId || kebabCase(title);
+const Grid = memo(
+  forwardRef<SVGSVGElement, GridProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -34,4 +33,4 @@ const SvgGrid = memo(
   }),
 );
 
-export default SvgGrid;
+export default Grid;
