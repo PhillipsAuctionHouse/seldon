@@ -18,6 +18,8 @@ $soft-black-2: #535050;
 // Utilititarian color palette
 $keyline-gray: #949494;
 $medium-gray: #c3bebb;
+$soft-gray: #fafafa;
+$pale-gray: #f4f4f4;
 $light-gray: #eceae7;
 $off-white: #f4f2f1;
 
@@ -149,6 +151,7 @@ $breakpoint-xl: 1801px;
   --label-size1: 1rem;
   --label-size2: 0.75rem;
   --label-size3: 0.56rem;
+  --label-size4: 0.56rem;
   --link-label-size: 0.75rem;
   --link-label-line-height: 0.75rem;
   --button-label-size: 0.75rem;
@@ -193,6 +196,7 @@ $breakpoint-xl: 1801px;
     --label-size1: 1.25rem;
     --label-size2: 1rem;
     --label-size3: 0.75rem;
+    --label-size4: 0.75rem;
     --link-label-size: 1rem;
     --link-label-line-height: 1rem;
     --button-label-size: 1rem;

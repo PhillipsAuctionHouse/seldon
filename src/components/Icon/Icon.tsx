@@ -3,8 +3,10 @@ import classnames from 'classnames';
 import { getCommonProps, px } from '../../utils';
 import { getScssVar } from '../../utils/scssUtils';
 import * as iconComponents from '../../assets/formatted';
+import * as pictogramComponents from '../../assets/pictograms/formatted';
 
 export type IconName = keyof typeof iconComponents;
+export type PictogramName = keyof typeof pictogramComponents;
 
 export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -22,7 +24,11 @@ export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Name of Icon to render
    */
-  icon: IconName;
+  icon: IconName | PictogramName;
+  /**
+   * Tells the Icon component that the icon prop refers to the name of a pictogram. This is only needed when rendering a pictogram that has the same name of an existing icon.
+   */
+  isPictogram?: boolean;
 }
 
 /**
@@ -33,10 +39,12 @@ export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-icon--overview)
  */
 const Icon = forwardRef<HTMLDivElement, IconProps>(
-  ({ className, height, width, color, icon, ...props }: IconProps, ref) => {
+  ({ className, height, width, color, icon, isPictogram, ...props }: IconProps, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, `Icon-${icon}`);
 
-    const Component = iconComponents[icon];
+    const Component = isPictogram
+      ? pictogramComponents[icon as PictogramName]
+      : iconComponents[icon as IconName] || pictogramComponents[icon as PictogramName];
     const componentProps = {
       color: color === 'currentColor' ? color : getScssVar(color ?? '', '$pure-black'),
       ...(height ? { height } : {}),

@@ -1,8 +1,6 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-nav__item {
-  cursor: pointer;
-
   @include isHeaderMobile {
     a {
       white-space: normal;
@@ -35,6 +33,7 @@
   & > button {
     background-color: transparent;
     border: 0;
+    cursor: pointer;
     display: flex;
     padding: 0.5rem 0.625rem calc(0.5rem + 2px); // 1 px so that the bottom border of the nav counts as part of the button
   }

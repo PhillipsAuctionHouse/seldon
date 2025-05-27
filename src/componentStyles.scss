@@ -39,6 +39,7 @@
 @use 'components/ContentPeek/contentPeek';
 @use 'components/PageContentWrapper/pageContentWrapper';
 @use 'components/Carousel/carousel';
+@use 'components/ComboBox/combobox';
 @use 'components/Tags/tags';
 @use 'components/Countdown/countdown';
 @use 'components/Countdown/duration';
@@ -48,6 +49,7 @@
 @use 'components/SeldonImage/seldonImage';
 @use 'components/Filter/filter';
 @use 'components/FavoritingTileButton/favoritingTileButton';
+@use 'components/Toast/toast';
 
 // Patterns
 @use 'patterns/HeroBanner/heroBanner';
@@ -61,6 +63,8 @@
 @use 'patterns/BidSnapshot/bidSnapshot';
 @use 'patterns/FilterMenu/filterMenu';
 @use 'patterns/DetailList/detailList';
+@use 'patterns/AccountPageHeader/accountPageHeader';
+@use 'patterns/FavoritesCollectionTile/favoritesCollectionTile';
 
 // Site Furniture
 @use 'site-furniture/Header/header';
@@ -68,3 +72,5 @@
 @use 'components/Article/article';
 @use 'components/Divider/divider';
 @use 'components/TextArea/textArea';
+@use 'components/AddToCalendar/addToCalendar';
+@use 'components/AuctionTile/auctionTile';

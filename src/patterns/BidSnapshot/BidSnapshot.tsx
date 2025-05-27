@@ -80,6 +80,10 @@ export interface BidSnapshotProps extends ComponentProps<'div'> {
    * Won for label text, a string for label of won for detail
    */
   wonForText?: string;
+  /**
+   * Function to get the current date time
+   */
+  getCurrentDateTime?: () => Date | null;
 }
 
 const bidsTranslation = (numberOfBids: number) => (numberOfBids === 1 ? `${numberOfBids} bid` : `${numberOfBids} bids`);
@@ -114,6 +118,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
       soldPrice,
       soldForText = 'Sold for',
       wonForText = 'Won for',
+      getCurrentDateTime = () => new Date(),
       ...props
     },
     ref,
@@ -124,7 +129,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
     const isReady = lotStatus === LotStatus.ready;
     const isLive = lotStatus === LotStatus.live;
     const isPast = lotStatus === LotStatus.past;
-    const now = new Date();
+    const now = getCurrentDateTime() || new Date();
     const hasCountdownTimer =
       isLive &&
       lotCloseDate &&
@@ -158,7 +163,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
               hasWrap={false}
             />
           ) : null}
-          {isReady || (isLive && !hasBids) ? (
+          {!!startingBid && (isReady || (isLive && !hasBids)) ? (
             <Detail label={startingBidText} value={`${currency}${startingBid?.toLocaleString()}`} hasWrap={false} />
           ) : null}
         </DetailList>
@@ -174,6 +179,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
             locale={SupportedLanguages[lang]}
             formatDurationStr={formatDurationStr}
             showBottomBorder={false}
+            getCurrentDateTime={getCurrentDateTime}
           />
         ) : null}
       </div>

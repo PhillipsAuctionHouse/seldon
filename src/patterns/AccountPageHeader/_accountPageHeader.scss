@@ -1,0 +1,38 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-account-page-header {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xsm;
+    width: 100%;
+  }
+
+  &__title {
+    // To help center the title, accounts for the extra space inside the span below the text
+    margin-top: $spacing-micro;
+  }
+
+  &__title-wrapper {
+    align-items: center;
+    display: flex;
+    gap: $spacing-md;
+    justify-content: space-between;
+  }
+
+  &__overline {
+    color: $button-hover;
+    font-variation-settings: 'wght' 600;
+  }
+
+  &__button-wrapper {
+    align-items: center;
+    display: flex;
+    gap: $spacing-sm;
+    justify-content: center;
+  }
+
+  &__divider.seldon-divider {
+    margin: $spacing-md 0;
+  }
+}

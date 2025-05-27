@@ -29,7 +29,7 @@ export const getScssColors = (): string[] => {
   const colors: string[] = parsedVars
     .map((_var) => {
       const [name, value] = _var.split(': ');
-      if (!!name && !!value && value.startsWith('#') && value.length === 8) {
+      if (!!name && !!value && value.startsWith('#') && (value.length === 5 || value.length === 8)) {
         return name; // returning only the name of each color variable
       }
       return null;

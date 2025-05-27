@@ -1,14 +1,14 @@
-import { findChildrenOfType, getCommonProps, px } from '../../../utils';
 import classNames from 'classnames';
 import React, { ComponentProps, forwardRef, useState } from 'react';
-import { Text, TextVariants } from '../../Text';
-import NavigationList, { NavigationListProps } from '../NavigationList/NavigationList';
+import { RemoveScroll } from 'react-remove-scroll';
+import { SSRMediaQuery } from '../../../providers/SeldonProvider/utils';
+import { HeaderContext } from '../../../site-furniture/Header/Header';
+import { findChildrenOfType, focusElementById, getCommonProps, px } from '../../../utils';
+import { AccordionItemVariant } from '../../Accordion';
 import Accordion from '../../Accordion/Accordion';
 import AccordionItem from '../../Accordion/AccordionItem';
-import { SSRMediaQuery } from '../../../providers/SeldonProvider/utils';
-import { AccordionItemVariant } from '../../Accordion';
-import { HeaderContext } from '../../../site-furniture/Header/Header';
-import { RemoveScroll } from 'react-remove-scroll';
+import { Text, TextVariants } from '../../Text';
+import NavigationList, { NavigationListProps } from '../NavigationList/NavigationList';
 
 export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
   /**
@@ -51,6 +51,18 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
     const navListElement = findChildrenOfType<NavigationListProps>(children, NavigationList);
     const { closeMenu } = React.useContext(HeaderContext);
 
+    const handleSubmenuOpen = React.useCallback(() => {
+      setIsSubmenuOpened(true);
+
+      if (navListElement && navListElement[0]?.props?.id) {
+        focusElementById(navListElement[0].props.id, true);
+      }
+      const triggerElement = ref && 'current' in ref ? ref.current : null;
+      if (triggerElement) {
+        triggerElement.focus();
+      }
+    }, [navListElement, ref]);
+
     return (
       <>
         <RemoveScroll enabled={isSubmenuOpened} allowPinchZoom removeScrollBar={false}>
@@ -78,7 +90,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
                 [`${baseClassName}--hovered`]: isSubmenuOpened,
               })}
               onClick={onClick}
-              onMouseOver={() => setIsSubmenuOpened(true)}
+              onMouseOver={handleSubmenuOpen}
               onMouseOut={() => setIsSubmenuOpened(false)}
               {...props}
             >
