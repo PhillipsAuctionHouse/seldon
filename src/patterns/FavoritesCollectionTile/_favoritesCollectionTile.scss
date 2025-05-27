@@ -173,7 +173,7 @@
   }
 
   &__create-spacing {
-    height: calc($spacing-xsm + var(--body-line-height-size3) + $spacing-sm + var(--heading-line-height-size5));
+    height: calc($spacing-xsm + var(--body-line-height-size3) + var(--heading-line-height-size5));
   }
 
   [data-radix-popper-content-wrapper] > * {
