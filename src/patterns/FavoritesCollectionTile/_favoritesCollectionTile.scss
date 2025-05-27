@@ -169,10 +169,11 @@
     font-size: $body-size3;
     font-variation-settings: 'wght' 400;
     padding-top: 5px;
+    text-transform: none;
   }
 
   &__create-spacing {
-    height: calc($spacing-sm + 3rem);
+    height: calc($spacing-xsm + var(--body-line-height-size3) + $spacing-sm + var(--heading-line-height-size5));
   }
 
   [data-radix-popper-content-wrapper] > * {
