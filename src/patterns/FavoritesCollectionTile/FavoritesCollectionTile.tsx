@@ -72,6 +72,10 @@ export interface FavoritesCollectionTileProps extends ComponentProps<'div'> {
    * Custom class name for the Link component
    */
   linkClassName?: string;
+  /**
+   * Custom icon size for the icon in the tile
+   */
+  iconSize?: number;
 }
 
 /**
@@ -104,6 +108,7 @@ const FavoritesCollectionTile = memo(
         onDelete,
         formatlotStr = (count, lotText = count === 1 ? 'LOT' : 'LOTS') => `${count} ${lotText}`,
         linkClassName,
+        iconSize = 22,
         ...props
       },
       ref,
@@ -114,6 +119,7 @@ const FavoritesCollectionTile = memo(
       const isCountEmpty = count === 0;
       const isListVariant = variant === 'lists';
       const isCreateVariant = variant === 'create';
+      const isHasListAndCountEmpty = hasListData && isCountEmpty;
 
       return (
         <div {...commonProps} className={classnames(baseClassName, className)} ref={ref} id={id}>
@@ -151,8 +157,8 @@ const FavoritesCollectionTile = memo(
                         <div className={`${baseClassName}__icon-rotate`}>
                           <Icon
                             icon="Icon"
-                            width={24}
-                            height={24}
+                            width={iconSize}
+                            height={iconSize}
                             color="$dark-gray"
                             className={`${baseClassName}__icon-button`}
                           />
@@ -197,8 +203,8 @@ const FavoritesCollectionTile = memo(
                     <div className={`${baseClassName}__empty__content`}>
                       <Icon
                         icon="Favorite"
-                        width={24}
-                        height={24}
+                        width={iconSize}
+                        height={iconSize}
                         color="$dark-gray"
                         className={`${baseClassName}__icon`}
                       />
@@ -220,16 +226,16 @@ const FavoritesCollectionTile = memo(
                     >
                       <div className={`${baseClassName}__empty__content`}>
                         <Icon
-                          icon={hasListData && isCountEmpty ? 'Favorite' : 'Add'}
-                          width={24}
-                          height={24}
+                          icon={isHasListAndCountEmpty ? 'Favorite' : 'Add'}
+                          width={isHasListAndCountEmpty ? iconSize : iconSize - 4}
+                          height={isHasListAndCountEmpty ? iconSize : iconSize - 4}
                           color="$dark-gray"
                           className={classnames(`${baseClassName}__icon`, {
                             [`${baseClassName}__icon-circle`]: !hasListData && (isListVariant || isCreateVariant),
                           })}
                         />
                         <div className={`${baseClassName}__text`}>
-                          {hasListData && isCountEmpty ? emptyListsText : createFirstListText}
+                          {isHasListAndCountEmpty ? emptyListsText : createFirstListText}
                         </div>
                       </div>
                     </div>

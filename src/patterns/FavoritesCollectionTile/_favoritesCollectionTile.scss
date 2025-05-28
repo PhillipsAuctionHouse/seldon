@@ -172,6 +172,11 @@
     text-transform: none;
   }
 
+  &__text,
+  &__text * {
+    font-size: $body-size3;
+  }
+
   &__create-spacing {
     height: calc($spacing-xsm + var(--body-line-height-size3) + var(--heading-line-height-size5));
   }
