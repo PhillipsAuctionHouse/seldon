@@ -164,17 +164,13 @@
     pointer-events: none;
   }
 
+  // will update font size with variable rem sizing after design takes a pass at it some point in the future
   &__text {
     color: $dark-gray;
-    font-size: $body-size3;
+    font-size: 0.75rem;
     font-variation-settings: 'wght' 400;
     padding-top: 5px;
     text-transform: none;
-  }
-
-  &__text,
-  &__text * {
-    font-size: $body-size3;
   }
 
   &__create-spacing {
