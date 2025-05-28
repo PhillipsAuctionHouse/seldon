@@ -13,7 +13,9 @@ const linkClassName = `.${px}-link .${px}-link--link`;
 export default meta;
 
 export const Playground = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
-  <FavoritesCollectionTile {...props} />
+  <div style={{ width: '32rem' }}>
+    <FavoritesCollectionTile {...props} />
+  </div>
 );
 
 Playground.args = {
@@ -41,7 +43,9 @@ Playground.argTypes = {
 };
 
 export const EmptyFavorites = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
-  <FavoritesCollectionTile {...props} />
+  <div style={{ width: '32rem' }}>
+    <FavoritesCollectionTile {...props} />
+  </div>
 );
 
 EmptyFavorites.args = {
@@ -57,7 +61,9 @@ EmptyFavorites.args = {
 };
 
 export const BlankList = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
-  <FavoritesCollectionTile {...props} />
+  <div style={{ width: '32rem' }}>
+    <FavoritesCollectionTile {...props} />
+  </div>
 );
 
 BlankList.args = {
@@ -70,7 +76,9 @@ BlankList.args = {
 };
 
 export const EmptyList = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
-  <FavoritesCollectionTile {...props} />
+  <div style={{ width: '32rem' }}>
+    <FavoritesCollectionTile {...props} />
+  </div>
 );
 
 EmptyList.args = {
@@ -83,7 +91,9 @@ EmptyList.args = {
 };
 
 export const TranslatedList = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
-  <FavoritesCollectionTile {...props} />
+  <div style={{ width: '32rem' }}>
+    <FavoritesCollectionTile {...props} />
+  </div>
 );
 
 TranslatedList.args = {
