@@ -1,3 +1,10 @@
+## [1.150.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.150.0...v1.150.1) (2025-05-28)
+
+
+### Bug Fixes
+
+* **Account:** L3-4229 fix account size icon ([#631](https://github.com/PhillipsAuctionHouse/seldon/issues/631)) ([d0254f7](https://github.com/PhillipsAuctionHouse/seldon/commit/d0254f73b1fd2012323ccff89d68f8d6cf0bd056))
+
 # [1.150.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.149.2...v1.150.0) (2025-05-23)
 
 
