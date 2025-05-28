@@ -1,3 +1,10 @@
+# [1.151.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.150.1...v1.151.0) (2025-05-28)
+
+
+### Features
+
+* **textbox:** L3-6790 Implement invalid/warn/disabled states and messaging in TextArea component ([#625](https://github.com/PhillipsAuctionHouse/seldon/issues/625)) ([817f1ca](https://github.com/PhillipsAuctionHouse/seldon/commit/817f1ca1cde7b66f1c46d4420000180cec36551f))
+
 ## [1.150.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.150.0...v1.150.1) (2025-05-28)
 
 
