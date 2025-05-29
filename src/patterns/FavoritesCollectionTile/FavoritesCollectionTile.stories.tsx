@@ -60,13 +60,13 @@ EmptyFavorites.args = {
   linkClassName: linkClassName,
 };
 
-export const BlankList = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
+export const CreateList = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
   <div style={{ width: '32rem' }}>
     <FavoritesCollectionTile {...props} />
   </div>
 );
 
-BlankList.args = {
+CreateList.args = {
   id: 'favorites-collection-tile-3',
   count: 0,
   name: null,

@@ -220,15 +220,15 @@ const FavoritesCollectionTile = memo(
                   <div className={`${baseClassName}__media-container`} data-testid="list" aria-label="Lists">
                     <div
                       className={classnames(`${baseClassName}__empty`, {
-                        [`${baseClassName}__empty--blank-list`]: !hasListData && (isListVariant || isCreateVariant),
+                        [`${baseClassName}__empty--create-list`]: !hasListData && (isListVariant || isCreateVariant),
                         [`${baseClassName}__empty--bg`]: isCountEmpty && !isCreateVariant,
                       })}
                     >
                       <div className={`${baseClassName}__empty__content`}>
                         <Icon
                           icon={isHasListAndCountEmpty ? 'Favorite' : 'Add'}
-                          width={isHasListAndCountEmpty ? iconSize : iconSize - 4}
-                          height={isHasListAndCountEmpty ? iconSize : iconSize - 4}
+                          width={iconSize}
+                          height={iconSize}
                           color="$dark-gray"
                           className={classnames(`${baseClassName}__icon`, {
                             [`${baseClassName}__icon-circle`]: !hasListData && (isListVariant || isCreateVariant),

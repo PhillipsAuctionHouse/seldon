@@ -131,7 +131,7 @@
       background-color: $soft-gray;
     }
 
-    &--blank-list {
+    &--create-list {
       border: 1px solid #0000001f;
       border-radius: 0;
     }
@@ -156,6 +156,7 @@
     &-circle {
       border: 2px solid $dark-gray;
       border-radius: 50%;
+      transform: scale(0.846);
     }
   }
 
