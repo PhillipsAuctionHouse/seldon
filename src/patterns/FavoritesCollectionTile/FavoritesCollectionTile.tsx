@@ -17,9 +17,9 @@ export interface FavoritesCollectionTileProps extends ComponentProps<'div'> {
    */
   emptyFavoritesText?: string;
   /**
-   * Lot blank list text en/zh
+   * Lot create first list text en/zh
    */
-  blankListText?: string;
+  createFirstListText?: string;
   /**
    * Lot empty lists text en/zh
    */
@@ -47,7 +47,7 @@ export interface FavoritesCollectionTileProps extends ComponentProps<'div'> {
   /**
    * Whether this card is in favorites view or lists view
    */
-  variant: 'favorites' | 'lists';
+  variant: 'favorites' | 'lists' | 'create';
   /**
    * React component to render within the navigation item, renders <Link> by default
    */
@@ -68,6 +68,14 @@ export interface FavoritesCollectionTileProps extends ComponentProps<'div'> {
    * Function to modify strings for lot string translation
    */
   formatlotStr?: (count: number, lotText?: string) => string;
+  /**
+   * Custom class name for the Link component
+   */
+  linkClassName?: string;
+  /**
+   * Custom icon size for the icon in the tile
+   */
+  iconSize?: number;
 }
 
 /**
@@ -93,12 +101,14 @@ const FavoritesCollectionTile = memo(
         href,
         emptyFavoritesText = 'You have not added any objects to your Favorites yet.',
         emptyListsText = 'You have not added any objects to your List yet.',
-        blankListText = 'Create your first List.',
+        createFirstListText = 'Create your first List.',
         editListText = 'Edit List',
         deleteListText = 'Delete List',
         onEdit,
         onDelete,
-        formatlotStr = (count, lotText = count > 1 ? 'LOTS' : 'LOT') => `${count} ${lotText}`,
+        formatlotStr = (count, lotText = count === 1 ? 'LOT' : 'LOTS') => `${count} ${lotText}`,
+        linkClassName,
+        iconSize = 22,
         ...props
       },
       ref,
@@ -107,6 +117,9 @@ const FavoritesCollectionTile = memo(
       const imageRef = useRef<HTMLDivElement>(null);
       const hasListData = name && count !== null && count !== undefined;
       const isCountEmpty = count === 0;
+      const isListVariant = variant === 'lists';
+      const isCreateVariant = variant === 'create';
+      const isHasListAndCountEmpty = hasListData && isCountEmpty;
 
       return (
         <div {...commonProps} className={classnames(baseClassName, className)} ref={ref} id={id}>
@@ -125,7 +138,7 @@ const FavoritesCollectionTile = memo(
                 }
               </div>
               <>
-                {hasListData && (variant === 'lists' || (variant === 'favorites' && !isCountEmpty)) && (
+                {hasListData && isListVariant && (
                   <Popover.Root>
                     <Popover.Trigger asChild>
                       <div
@@ -141,17 +154,26 @@ const FavoritesCollectionTile = memo(
                           }
                         }}
                       >
-                        <Icon
-                          icon="Icon"
-                          width={24}
-                          height={24}
-                          color="$dark-gray"
-                          className={`${baseClassName}__icon-rotate`}
-                        />
+                        <div className={`${baseClassName}__icon-rotate`}>
+                          <Icon
+                            icon="Icon"
+                            width={iconSize}
+                            height={iconSize}
+                            color="$dark-gray"
+                            className={`${baseClassName}__icon-button`}
+                          />
+                        </div>
                       </div>
                     </Popover.Trigger>
                     <Popover.Portal>
-                      <Popover.Content sideOffset={5} className={`${baseClassName}__popover-content`}>
+                      <Popover.Content
+                        avoidCollisions={true}
+                        collisionPadding={10}
+                        sideOffset={5}
+                        align="start"
+                        alignOffset={5}
+                        className={`${baseClassName}__popover-content`}
+                      >
                         <div className={`${baseClassName}__dropdown`} data-testid={`dropdown-menu`}>
                           <button
                             className={`${baseClassName}__dropdown--item`}
@@ -174,16 +196,15 @@ const FavoritesCollectionTile = memo(
                 )}
               </>
             </div>
-
-            <Component href={href} className={`${baseClassName}__media-link`} tabIndex={0}>
+            <Component href={href} className={classnames(`${baseClassName}__media-link`, linkClassName)} tabIndex={0}>
               {isCountEmpty && variant === 'favorites' && (
                 <div className={`${baseClassName}__media-container`} data-testid="favorites" aria-label="Favorites">
-                  <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--favorites`)}>
+                  <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--bg`)}>
                     <div className={`${baseClassName}__empty__content`}>
                       <Icon
                         icon="Favorite"
-                        width={24}
-                        height={24}
+                        width={iconSize}
+                        height={iconSize}
                         color="$dark-gray"
                         className={`${baseClassName}__icon`}
                       />
@@ -193,23 +214,33 @@ const FavoritesCollectionTile = memo(
                 </div>
               )}
 
-              {(isCountEmpty || !hasListData) && variant === 'lists' && (
-                <div className={`${baseClassName}__media-container`} data-testid="list" aria-label="Lists">
-                  <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--list`)}>
-                    <div className={`${baseClassName}__empty__content`}>
-                      <Icon
-                        icon={hasListData && isCountEmpty ? 'Favorite' : 'Add'}
-                        width={24}
-                        height={24}
-                        color="$dark-gray"
-                        className={`${baseClassName}__icon`}
-                      />
-                      <div className={`${baseClassName}__text`}>
-                        {hasListData && isCountEmpty ? emptyListsText : blankListText}
+              {(isCountEmpty || !hasListData) && (isListVariant || isCreateVariant) && (
+                <>
+                  {isCreateVariant && <div className={`${baseClassName}__create-spacing`}></div>}
+                  <div className={`${baseClassName}__media-container`} data-testid="list" aria-label="Lists">
+                    <div
+                      className={classnames(`${baseClassName}__empty`, {
+                        [`${baseClassName}__empty--create-list`]: !hasListData && (isListVariant || isCreateVariant),
+                        [`${baseClassName}__empty--bg`]: isCountEmpty && !isCreateVariant,
+                      })}
+                    >
+                      <div className={`${baseClassName}__empty__content`}>
+                        <Icon
+                          icon={isHasListAndCountEmpty ? 'Favorite' : 'Add'}
+                          width={iconSize}
+                          height={iconSize}
+                          color="$dark-gray"
+                          className={classnames(`${baseClassName}__icon`, {
+                            [`${baseClassName}__icon-circle`]: !hasListData && (isListVariant || isCreateVariant),
+                          })}
+                        />
+                        <div className={`${baseClassName}__text`}>
+                          {isHasListAndCountEmpty ? emptyListsText : createFirstListText}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </>
               )}
 
               {!isCountEmpty && hasListData && (
