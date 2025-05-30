@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgShareProps extends React.HTMLAttributes<SVGSVGElement> {
+interface ShareProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgShareProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgShare = memo(
-  forwardRef<SVGSVGElement, SvgShareProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgShare';
-    const titleId = propsTitleId || kebabCase(title);
+const Share = memo(
+  forwardRef<SVGSVGElement, ShareProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -35,4 +34,4 @@ const SvgShare = memo(
   }),
 );
 
-export default SvgShare;
+export default Share;

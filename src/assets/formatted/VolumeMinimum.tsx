@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgVolumeMinimumProps extends React.HTMLAttributes<SVGSVGElement> {
+interface VolumeMinimumProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgVolumeMinimumProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgVolumeMinimum = memo(
-  forwardRef<SVGSVGElement, SvgVolumeMinimumProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgVolumeMinimum';
-    const titleId = propsTitleId || kebabCase(title);
+const VolumeMinimum = memo(
+  forwardRef<SVGSVGElement, VolumeMinimumProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -39,4 +38,4 @@ const SvgVolumeMinimum = memo(
   }),
 );
 
-export default SvgVolumeMinimum;
+export default VolumeMinimum;

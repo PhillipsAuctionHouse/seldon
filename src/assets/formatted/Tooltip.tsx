@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgTooltipProps extends React.HTMLAttributes<SVGSVGElement> {
+interface TooltipProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgTooltipProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgTooltip = memo(
-  forwardRef<SVGSVGElement, SvgTooltipProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgTooltip';
-    const titleId = propsTitleId || kebabCase(title);
+const Tooltip = memo(
+  forwardRef<SVGSVGElement, TooltipProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -40,4 +39,4 @@ const SvgTooltip = memo(
   }),
 );
 
-export default SvgTooltip;
+export default Tooltip;

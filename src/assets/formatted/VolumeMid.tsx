@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgVolumeMidProps extends React.HTMLAttributes<SVGSVGElement> {
+interface VolumeMidProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgVolumeMidProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgVolumeMid = memo(
-  forwardRef<SVGSVGElement, SvgVolumeMidProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgVolumeMid';
-    const titleId = propsTitleId || kebabCase(title);
+const VolumeMid = memo(
+  forwardRef<SVGSVGElement, VolumeMidProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -43,4 +42,4 @@ const SvgVolumeMid = memo(
   }),
 );
 
-export default SvgVolumeMid;
+export default VolumeMid;

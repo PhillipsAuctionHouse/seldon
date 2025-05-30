@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgErrorProps extends React.HTMLAttributes<SVGSVGElement> {
+interface ErrorProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgErrorProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgError = memo(
-  forwardRef<SVGSVGElement, SvgErrorProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgError';
-    const titleId = propsTitleId || kebabCase(title);
+const Error = memo(
+  forwardRef<SVGSVGElement, ErrorProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -40,4 +39,4 @@ const SvgError = memo(
   }),
 );
 
-export default SvgError;
+export default Error;

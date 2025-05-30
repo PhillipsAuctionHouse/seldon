@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgGavelProps extends React.HTMLAttributes<SVGSVGElement> {
+interface GavelProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgGavelProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgGavel = memo(
-  forwardRef<SVGSVGElement, SvgGavelProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgGavel';
-    const titleId = propsTitleId || kebabCase(title);
+const Gavel = memo(
+  forwardRef<SVGSVGElement, GavelProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -39,4 +38,4 @@ const SvgGavel = memo(
   }),
 );
 
-export default SvgGavel;
+export default Gavel;

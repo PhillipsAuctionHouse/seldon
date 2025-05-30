@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgInstagramProps extends React.HTMLAttributes<SVGSVGElement> {
+interface InstagramProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgInstagramProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgInstagram = memo(
-  forwardRef<SVGSVGElement, SvgInstagramProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgInstagram';
-    const titleId = propsTitleId || kebabCase(title);
+const Instagram = memo(
+  forwardRef<SVGSVGElement, InstagramProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -46,4 +45,4 @@ const SvgInstagram = memo(
   }),
 );
 
-export default SvgInstagram;
+export default Instagram;

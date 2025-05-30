@@ -37,7 +37,7 @@ describe('AccountPageHeader', () => {
       />,
     );
 
-    const button = screen.getByRole('button', { name: 'Edit Profile' });
+    const button = screen.getAllByRole('button', { name: 'Edit Profile' })[0];
     await userEvent.click(button);
     expect(handleClick).toHaveBeenCalledTimes(1);
   });

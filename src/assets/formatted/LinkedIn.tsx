@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgLinkedInProps extends React.HTMLAttributes<SVGSVGElement> {
+interface LinkedInProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgLinkedInProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgLinkedIn = memo(
-  forwardRef<SVGSVGElement, SvgLinkedInProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgLinkedIn';
-    const titleId = propsTitleId || kebabCase(title);
+const LinkedIn = memo(
+  forwardRef<SVGSVGElement, LinkedInProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -37,4 +36,4 @@ const SvgLinkedIn = memo(
   }),
 );
 
-export default SvgLinkedIn;
+export default LinkedIn;

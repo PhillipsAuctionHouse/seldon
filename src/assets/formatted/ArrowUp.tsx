@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgArrowUpProps extends React.HTMLAttributes<SVGSVGElement> {
+interface ArrowUpProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgArrowUpProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgArrowUp = memo(
-  forwardRef<SVGSVGElement, SvgArrowUpProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgArrowUp';
-    const titleId = propsTitleId || kebabCase(title);
+const ArrowUp = memo(
+  forwardRef<SVGSVGElement, ArrowUpProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -34,4 +33,4 @@ const SvgArrowUp = memo(
   }),
 );
 
-export default SvgArrowUp;
+export default ArrowUp;

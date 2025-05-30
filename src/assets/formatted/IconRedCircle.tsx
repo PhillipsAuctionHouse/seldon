@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgIconRedCircleProps extends React.HTMLAttributes<SVGSVGElement> {
+interface IconRedCircleProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgIconRedCircleProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgIconRedCircle = memo(
-  forwardRef<SVGSVGElement, SvgIconRedCircleProps>((props, ref) => {
-    const { height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgIconRedCircle';
-    const titleId = propsTitleId || kebabCase(title);
+const IconRedCircle = memo(
+  forwardRef<SVGSVGElement, IconRedCircleProps>((props, ref) => {
+    const { height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -34,4 +33,4 @@ const SvgIconRedCircle = memo(
   }),
 );
 
-export default SvgIconRedCircle;
+export default IconRedCircle;

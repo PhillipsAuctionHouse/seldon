@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgFacebookProps extends React.HTMLAttributes<SVGSVGElement> {
+interface FacebookProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgFacebookProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgFacebook = memo(
-  forwardRef<SVGSVGElement, SvgFacebookProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgFacebook';
-    const titleId = propsTitleId || kebabCase(title);
+const Facebook = memo(
+  forwardRef<SVGSVGElement, FacebookProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -37,4 +36,4 @@ const SvgFacebook = memo(
   }),
 );
 
-export default SvgFacebook;
+export default Facebook;

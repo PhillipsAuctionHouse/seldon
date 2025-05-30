@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgChevronRightProps extends React.HTMLAttributes<SVGSVGElement> {
+interface ChevronRightProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgChevronRightProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgChevronRight = memo(
-  forwardRef<SVGSVGElement, SvgChevronRightProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgChevronRight';
-    const titleId = propsTitleId || kebabCase(title);
+const ChevronRight = memo(
+  forwardRef<SVGSVGElement, ChevronRightProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -39,4 +38,4 @@ const SvgChevronRight = memo(
   }),
 );
 
-export default SvgChevronRight;
+export default ChevronRight;

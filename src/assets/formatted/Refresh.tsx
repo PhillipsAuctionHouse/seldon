@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgRefreshProps extends React.HTMLAttributes<SVGSVGElement> {
+interface RefreshProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgRefreshProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgRefresh = memo(
-  forwardRef<SVGSVGElement, SvgRefreshProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgRefresh';
-    const titleId = propsTitleId || kebabCase(title);
+const Refresh = memo(
+  forwardRef<SVGSVGElement, RefreshProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -37,4 +36,4 @@ const SvgRefresh = memo(
   }),
 );
 
-export default SvgRefresh;
+export default Refresh;

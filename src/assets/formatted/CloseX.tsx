@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgCloseXProps extends React.HTMLAttributes<SVGSVGElement> {
+interface CloseXProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgCloseXProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgCloseX = memo(
-  forwardRef<SVGSVGElement, SvgCloseXProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgCloseX';
-    const titleId = propsTitleId || kebabCase(title);
+const CloseX = memo(
+  forwardRef<SVGSVGElement, CloseXProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -34,4 +33,4 @@ const SvgCloseX = memo(
   }),
 );
 
-export default SvgCloseX;
+export default CloseX;

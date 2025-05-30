@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgVolumeMaximumProps extends React.HTMLAttributes<SVGSVGElement> {
+interface VolumeMaximumProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgVolumeMaximumProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgVolumeMaximum = memo(
-  forwardRef<SVGSVGElement, SvgVolumeMaximumProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgVolumeMaximum';
-    const titleId = propsTitleId || kebabCase(title);
+const VolumeMaximum = memo(
+  forwardRef<SVGSVGElement, VolumeMaximumProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -39,4 +38,4 @@ const SvgVolumeMaximum = memo(
   }),
 );
 
-export default SvgVolumeMaximum;
+export default VolumeMaximum;
