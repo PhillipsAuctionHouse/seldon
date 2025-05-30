@@ -1,8 +1,9 @@
 import classnames from 'classnames';
 import { CountryCode, getCountries, getCountryCallingCode } from 'libphonenumber-js';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { getCommonProps } from '../../utils';
-import ComboBox, { ComboBoxOption, ComboBoxProps } from '../ComboBox/ComboBox';
+import ComboBox, { ComboBoxProps } from '../ComboBox/ComboBox';
+import { ComboBoxOption } from '../ComboBox/types';
 
 /**
  * PhoneNumberPickerProps extends ComboBoxProps, allowing for all ComboBox options
@@ -19,40 +20,83 @@ export type PhoneNumberPickerProps = Omit<ComboBoxProps, 'options'>;
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-PhoneNumberPicker--overview)
  */
-const PhoneNumberPicker = React.forwardRef<HTMLDivElement, PhoneNumberPickerProps>(
-  ({ className, id, inputValue, setInputValue, onChange, ...props }, ref) => {
-    const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'PhoneNumberPicker');
+const PhoneNumberPicker = React.forwardRef<HTMLDivElement, PhoneNumberPickerProps>((props, ref) => {
+  const { className, id, value, onChange, onBlur, ...restProps } = props;
+  const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'PhoneNumberPicker');
 
-    const [selectedCode, setSelectedCode] = useState('');
+  // Track the last explicitly selected country
+  const lastSelectedCountry = React.useRef(value);
 
-    const countryOptions: ComboBoxOption[] = useMemo(() => {
-      const countries = getCountries();
-      const getCountryCode = (countryCode: CountryCode) => getCountryCallingCode(countryCode);
-      return countries.map((country) => {
-        return {
-          label: `(${country}) +${getCountryCode(country)}`,
-          value: country,
-          displayValue: `+${getCountryCode(country)}`,
-        };
-      });
-    }, []);
+  // Update ref when value prop changes
+  React.useEffect(() => {
+    if (value) {
+      lastSelectedCountry.current = value;
+    }
+  }, [value]);
 
-    return (
-      <div ref={ref} className={classnames(baseClassName, className)} id={id} {...commonProps}>
-        <ComboBox
-          className={`${baseClassName}__combobox`}
-          id={`${id}-combobox`}
-          options={countryOptions}
-          value={selectedCode}
-          onChange={(newValue) => setSelectedCode(newValue)}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          {...props}
-        />
-      </div>
-    );
-  },
-);
+  const countryOptions: ComboBoxOption[] = useMemo(() => {
+    const countries = getCountries();
+    const getCountryCode = (countryCode: CountryCode) => getCountryCallingCode(countryCode);
+    return countries.map((country) => {
+      return {
+        label: `(${country}) +${getCountryCode(country)}`,
+        value: country,
+        displayValue: `+${getCountryCode(country)}`,
+      };
+    });
+  }, []);
+
+  // Update the handleChange function:
+  const handleChange = (newValue: string, option: ComboBoxOption | null) => {
+    // If the value is being cleared (empty string or null)
+    if (!newValue) {
+      // Clear the last selected country reference
+      lastSelectedCountry.current = '';
+    }
+    // Otherwise, store the explicitly selected country
+    else if (option) {
+      lastSelectedCountry.current = newValue;
+    }
+
+    if (onChange) {
+      onChange(newValue, option);
+    }
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    // If value has changed to another country with same display value,
+    // restore the last explicitly selected country
+    if (value !== lastSelectedCountry.current && lastSelectedCountry.current) {
+      // Call onChange with the stored country
+      if (onChange) {
+        onChange(
+          lastSelectedCountry.current,
+          countryOptions.find((opt) => opt.value === lastSelectedCountry.current) || null,
+        );
+      }
+    }
+
+    // Call the original onBlur handler
+    if (onBlur) {
+      onBlur(e);
+    }
+  };
+
+  return (
+    <div className={classnames(baseClassName, className)} id={id} {...commonProps}>
+      <ComboBox
+        ref={ref}
+        className={`${baseClassName}__combobox`}
+        id={`${id}-combobox`}
+        options={countryOptions}
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        {...restProps}
+      />
+    </div>
+  );
+});
 
 PhoneNumberPicker.displayName = 'PhoneNumberPicker';
 

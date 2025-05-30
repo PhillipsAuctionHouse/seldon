@@ -1,279 +1,189 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import ComboBox, { ComboBoxOption } from './ComboBox';
-
-const mockOptions = [
-  { value: 'apple', label: 'Apple' },
-  { value: 'banana', label: 'Banana' },
-  { value: 'cherry', label: 'Cherry', filterTerms: ['fruit', 'red'] },
-  { value: 'date', label: 'Date', displayValue: 'Date fruit' },
-];
+import ComboBox from './ComboBox';
+import { ComboBoxOption } from './types';
 
 describe('ComboBox', () => {
-  it('renders with required props', () => {
-    render(
-      <ComboBox
-        id="test-combo"
-        options={mockOptions}
-        labelText="Test Label"
-        inputValue=""
-        setInputValue={() => void 0}
-      />,
-    );
+  const mockOptions = [
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' },
+    { value: 'cherry', label: 'Cherry', filterTerms: ['fruit', 'red'] },
+    { value: 'date', label: 'Date' },
+    { value: 'elderberry', label: 'Elderberry', displayValue: 'Purple Elderberry' },
+  ];
 
-    expect(screen.getByTestId('test-combo-label')).toHaveTextContent('Test Label');
-    expect(screen.getByTestId('test-combo-input')).toBeInTheDocument();
+  const defaultProps = {
+    id: 'fruit-selector',
+    labelText: 'Select a fruit',
+    options: mockOptions,
+    placeholder: 'Choose a fruit',
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
   });
 
-  it('shows dropdown when clicking input', async () => {
-    render(
-      <ComboBox
-        id="test-combo"
-        options={mockOptions}
-        labelText="Test Label"
-        inputValue=""
-        setInputValue={() => void 0}
-      />,
-    );
+  it('renders with default props', () => {
+    render(<ComboBox {...defaultProps} />);
 
-    await userEvent.click(screen.getByTestId('test-combo-input'));
+    expect(screen.getByTestId('fruit-selector-label')).toHaveTextContent('Select a fruit');
+    expect(screen.getByTestId('fruit-selector-input')).toBeInTheDocument();
+    expect(screen.getByTestId('fruit-selector-dropdown')).toBeInTheDocument();
+  });
 
-    // Check that all options are displayed
+  it('opens dropdown when clicking the dropdown button', async () => {
+    render(<ComboBox {...defaultProps} />);
+
+    const dropdownButton = screen.getByTestId('fruit-selector-dropdown');
+    await userEvent.click(dropdownButton);
+
     await waitFor(() => {
       expect(screen.getByText('Apple')).toBeInTheDocument();
       expect(screen.getByText('Banana')).toBeInTheDocument();
-      expect(screen.getByText('Cherry')).toBeInTheDocument();
-      expect(screen.getByText('Date')).toBeInTheDocument();
     });
   });
 
   it('filters options based on input value', async () => {
-    const setInputValue = vi.fn();
+    render(<ComboBox {...defaultProps} />);
 
-    render(
-      <ComboBox
-        id="test-combo"
-        options={mockOptions}
-        labelText="Test Label"
-        inputValue="b"
-        setInputValue={setInputValue}
-      />,
-    );
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+    await userEvent.type(input, 'ber');
 
-    await userEvent.click(screen.getByTestId('test-combo-input'));
-
-    // Only Banana should be visible
     await waitFor(() => {
-      expect(screen.getByText('Banana')).toBeInTheDocument();
+      expect(screen.getByText('Elderberry')).toBeInTheDocument();
+      expect(screen.queryByText('Apple')).not.toBeInTheDocument();
+    });
+  });
+
+  it('filters options using filterTerms', async () => {
+    render(<ComboBox {...defaultProps} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+    await userEvent.type(input, 'red');
+
+    await waitFor(() => {
+      expect(screen.getByText('Cherry')).toBeInTheDocument();
       expect(screen.queryByText('Apple')).not.toBeInTheDocument();
     });
   });
 
   it('selects an option when clicked', async () => {
-    const setInputValue = vi.fn();
     const onChange = vi.fn();
+    render(<ComboBox {...defaultProps} onChange={onChange} />);
 
-    render(
-      <ComboBox
-        id="test-combo"
-        options={mockOptions}
-        labelText="Test Label"
-        inputValue=""
-        setInputValue={setInputValue}
-        onChange={onChange}
-      />,
-    );
-
-    await userEvent.click(screen.getByTestId('test-combo-input'));
-    await waitFor(() => expect(screen.getByText('Banana')).toBeInTheDocument());
-
-    await userEvent.click(screen.getByText('Banana'));
-
-    expect(setInputValue).toHaveBeenCalledWith('Banana');
-    expect(onChange).toHaveBeenCalledWith('banana', mockOptions[1]);
-  });
-
-  it('displays invalidText when invalid prop is true', () => {
-    render(
-      <ComboBox
-        id="test-combo"
-        options={mockOptions}
-        labelText="Test Label"
-        inputValue=""
-        setInputValue={() => void 0}
-        invalid={true}
-        invalidText="This field is required"
-      />,
-    );
-
-    expect(screen.getByTestId('test-combo-invalid-text')).toHaveTextContent('This field is required');
-  });
-
-  it('clears input when clear button is clicked', async () => {
-    const setInputValue = vi.fn();
-    const onChange = vi.fn();
-
-    render(
-      <ComboBox
-        id="test-combo"
-        options={mockOptions}
-        labelText="Test Label"
-        inputValue="Banana"
-        setInputValue={setInputValue}
-        onChange={onChange}
-      />,
-    );
-
-    await userEvent.click(screen.getByTestId('test-combo-clear-button'));
-
-    expect(setInputValue).toHaveBeenCalledWith('');
-    expect(onChange).toHaveBeenCalledWith('', null);
-  });
-
-  it('handles allowCustomValue mode false correctly', async () => {
-    const setInputValue = vi.fn();
-    const onChange = vi.fn();
-
-    render(
-      <ComboBox
-        id="test-combo"
-        options={mockOptions}
-        labelText="Test Label"
-        inputValue=""
-        setInputValue={setInputValue}
-        onChange={onChange}
-        allowCustomValue={true}
-      />,
-    );
-
-    const input = screen.getByTestId('test-combo-input');
+    const input = screen.getByTestId('fruit-selector-input');
     await userEvent.click(input);
-    await userEvent.type(input, 'Custom Value');
 
-    // Check that setInputValue was called multiple times - once per character
-    expect(setInputValue).toHaveBeenCalledTimes(12); // 'Custom Value' has 12 characters
-
-    // Check that the last call has the complete string
-    const lastCall = setInputValue.mock.calls[setInputValue.mock.calls.length - 1][0];
-    expect(lastCall).toBe('e'); // Last character typed
-
-    // Similarly check the final state with onChange
-    // expect(onChange).toHaveBeenCalled();
-
-    // Get the last onChange call
-    const lastOnChangeCall = onChange.mock.calls[onChange.mock.calls.length - 1];
-    expect(lastOnChangeCall[0]).toBe('e');
-    expect(lastOnChangeCall[1]).toBe(null);
-  });
-
-  it('uses displayValue when provided', async () => {
-    const setInputValue = vi.fn();
-    const onChange = vi.fn();
-
-    render(
-      <ComboBox
-        id="test-combo"
-        options={mockOptions}
-        labelText="Test Label"
-        inputValue=""
-        setInputValue={setInputValue}
-        onChange={onChange}
-      />,
-    );
-
-    await userEvent.click(screen.getByTestId('test-combo-input'));
-    await waitFor(() => expect(screen.getByText('Date')).toBeInTheDocument());
-
-    await userEvent.click(screen.getByText('Date'));
-
-    expect(setInputValue).toHaveBeenCalledWith('Date fruit');
-  });
-
-  it('filters by additional filter terms', async () => {
-    const setInputValue = vi.fn();
-
-    const { rerender } = render(
-      <ComboBox
-        id="test-combo"
-        options={mockOptions}
-        labelText="Test Label"
-        inputValue="red"
-        setInputValue={setInputValue}
-      />,
-    );
-
-    await userEvent.click(screen.getByTestId('test-combo-input'));
-
-    // Should find Cherry by its filter term "red"
-    await waitFor(() => {
-      expect(screen.getByText('Cherry')).toBeInTheDocument();
-    });
-
-    // Update with a different filter term
-    rerender(
-      <ComboBox
-        id="test-combo"
-        options={mockOptions}
-        labelText="Test Label"
-        inputValue="fruit"
-        setInputValue={setInputValue}
-      />,
-    );
-
-    // Should still find Cherry by its filter term "fruit"
-    await waitFor(() => {
-      expect(screen.getByText('Cherry')).toBeInTheDocument();
-    });
-  });
-
-  it('renders custom option content when renderOption is provided', async () => {
-    const renderOption = (option: ComboBoxOption) => (
-      <div data-testid={`custom-${option.value}`}>{option.label} - Custom</div>
-    );
-
-    render(
-      <ComboBox
-        id="test-combo"
-        options={mockOptions}
-        labelText="Test Label"
-        inputValue=""
-        setInputValue={() => void 0}
-        renderOption={renderOption}
-      />,
-    );
-
-    await userEvent.click(screen.getByTestId('test-combo-input'));
-
-    await waitFor(() => {
-      expect(screen.getByTestId('custom-apple')).toHaveTextContent('Apple - Custom');
-      expect(screen.getByTestId('custom-banana')).toHaveTextContent('Banana - Custom');
-    });
-  });
-
-  it('toggles dropdown when dropdown button is clicked', async () => {
-    render(
-      <ComboBox
-        id="test-combo"
-        options={mockOptions}
-        labelText="Test Label"
-        inputValue=""
-        setInputValue={() => void 0}
-      />,
-    );
-
-    await userEvent.click(screen.getByTestId('test-combo-dropdown'));
-
-    // Check that dropdown is opened
     await waitFor(() => {
       expect(screen.getByText('Apple')).toBeInTheDocument();
     });
 
-    // Click dropdown button again to close it
-    await userEvent.click(screen.getByTestId('test-combo-dropdown'));
+    await userEvent.click(screen.getByText('Apple'));
+
+    expect(onChange).toHaveBeenCalledWith('apple', expect.objectContaining({ value: 'apple', label: 'Apple' }));
+    expect(input).toHaveValue('Apple');
+  });
+
+  it('displays custom displayValue when option is selected', async () => {
+    render(<ComboBox {...defaultProps} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+
+    await waitFor(() => {
+      expect(screen.getByText('Elderberry')).toBeInTheDocument();
+    });
+
+    await userEvent.click(screen.getByText('Elderberry'));
+
+    expect(input).toHaveValue('Purple Elderberry');
+  });
+
+  it('clears the input when clear button is clicked', async () => {
+    const onChange = vi.fn();
+    render(<ComboBox {...defaultProps} onChange={onChange} value="apple" />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    expect(input).toHaveValue('Apple');
+
+    const clearButton = screen.getByTestId('fruit-selector-clear-button');
+    await userEvent.click(clearButton);
+
+    await waitFor(() => {
+      expect(input).toHaveValue('');
+      expect(onChange).toHaveBeenCalledWith('', null);
+    });
+  });
+
+  it('works in controlled mode', () => {
+    const onChange = vi.fn();
+    const { rerender } = render(<ComboBox {...defaultProps} value="apple" onChange={onChange} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    expect(input).toHaveValue('Apple');
+
+    // Simulate controlled update
+    rerender(<ComboBox {...defaultProps} value="banana" onChange={onChange} />);
+
+    expect(input).toHaveValue('Banana');
+  });
+
+  it('shows invalid state when specified', () => {
+    render(<ComboBox {...defaultProps} invalid={true} invalidText="Please select a valid fruit" />);
+
+    expect(screen.getByText('Please select a valid fruit')).toBeInTheDocument();
+    expect(screen.getByTestId('fruit-selector-label')).toHaveClass('seldon-combo-box__label--invalid');
+  });
+
+  it('handles keyboard navigation', async () => {
+    render(<ComboBox {...defaultProps} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+
+    // Press down arrow to open dropdown
+    await userEvent.type(input, '{arrowdown}');
+
+    await waitFor(() => {
+      expect(screen.getByText('Apple')).toBeInTheDocument();
+    });
+
+    // Press escape to close dropdown
+    await userEvent.type(input, '{escape}');
 
     await waitFor(() => {
       expect(screen.queryByText('Apple')).not.toBeInTheDocument();
+    });
+  });
+
+  it('allows custom option rendering', async () => {
+    const renderOption = (option: ComboBoxOption) => (
+      <div data-testid={`custom-option-${option.value}`}>Custom: {option.label}</div>
+    );
+
+    render(<ComboBox {...defaultProps} renderOption={renderOption} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+
+    await waitFor(() => {
+      expect(screen.getByTestId('custom-option-apple')).toBeInTheDocument();
+      expect(screen.getByText('Custom: Apple')).toBeInTheDocument();
+    });
+  });
+
+  it('shows no options message when no matches found', async () => {
+    render(<ComboBox {...defaultProps} noOptionsMessage="No fruits found" />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+    await userEvent.type(input, 'xyz');
+
+    await waitFor(() => {
+      expect(screen.getByText('No fruits found')).toBeInTheDocument();
     });
   });
 });

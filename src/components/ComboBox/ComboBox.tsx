@@ -1,31 +1,13 @@
 import * as Popover from '@radix-ui/react-popover';
 import classnames from 'classnames';
 import { Command, CommandGroup, CommandInput, CommandItem, CommandList } from 'cmdk';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
 import * as iconComponents from '../../assets/formatted';
-import { getCommonProps } from '../../utils';
+import { getCommonProps, useNormalizedInputProps } from '../../utils';
 import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
-
-export interface ComboBoxOption {
-  /**
-   * The label or display text
-   */
-  label?: string;
-  /**
-   * The option value (used for selection)
-   */
-  value: string;
-  /**
-   * Display value shown in input when selected (defaults to label)
-   */
-  displayValue?: string;
-  /**
-   * Additional terms for filtering
-   */
-  filterTerms?: string[];
-}
+import { ComboBoxOption } from './types';
 
 export interface ComboBoxProps {
   /**
@@ -53,21 +35,27 @@ export interface ComboBoxProps {
    */
   placeholder?: string;
   /**
-   * Current selected value (e.g., 'US')
+   * Name attribute for form submission
+   */
+  name?: string;
+  /**
+   * Value for the selected option
    */
   value?: string;
   /**
-   * Function called when selected value changes
+   * Handler for value changes
    */
   onChange?: (value: string, option: ComboBoxOption | null) => void;
   /**
-   * Current input value shown in the input field
+   * Input value (display text)
+   * Only needed for controlled usage, otherwise managed internally
    */
-  inputValue: string;
+  inputValue?: string;
   /**
-   * Function to update the input value
+   * Handler for input value changes
+   * Only needed for controlled usage, otherwise managed internally
    */
-  setInputValue: (value: string) => void;
+  setInputValue?: (value: string) => void;
   /**
    * Function to get display text for an option
    * Similar to MUI's getOptionLabel
@@ -78,12 +66,6 @@ export interface ComboBoxProps {
    * Similar to MUI's renderOption
    */
   renderOption?: (option: ComboBoxOption) => React.ReactNode;
-  /**
-   * Allow free text input that doesn't match any option
-   * Similar to MUI's allowCustomValue
-   * @default false
-   */
-  allowCustomValue?: boolean;
   /**
    * Sets the invalid state of the input
    * @default false
@@ -123,12 +105,23 @@ export interface ComboBoxProps {
    * @default "No Options."
    */
   noOptionsMessage?: string;
-}
 
+  /**
+   * Handler called when the combobox loses focus
+   */
+  onBlur?: React.FocusEventHandler<HTMLDivElement>;
+
+  /**
+   * When true, preserve the explicitly selected option value
+   * even when the display value matches multiple options
+   * @default false
+   */
+  preserveExplicitSelection?: boolean;
+}
 /**
  * ## Overview
  *
- * This is a ComboBox component that allows users to select from a list of options or enter a custom value.
+ * This is a ComboBox component that allows users to select from a list of options.
  *
  * [Figma Link](https://www.figma.com/design/rIefa3bRPyZbZmtyV9PSQv/My-Account?node-id=1-3&p=f&m=dev)
  *
@@ -141,13 +134,14 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     id,
     labelText,
     placeholder,
-    value,
+    name,
+    value: externalValue,
     onChange,
-    inputValue = '',
-    setInputValue,
+    onBlur,
+    inputValue: externalInputValue,
+    setInputValue: externalSetInputValue,
     getOptionLabel = (option) => option.label || option.value,
     renderOption,
-    allowCustomValue = false,
     ariaLabelDropdown,
     ariaLabelInput,
     ariaLabelClear,
@@ -158,52 +152,59 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     noOptionsMessage = 'No Options.',
     invalid = false,
     invalidText,
+    preserveExplicitSelection = true,
     ...props
   },
   ref,
 ) {
   const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'ComboBox');
-  const [isOpen, setIsOpen] = React.useState(false);
-  const [selectedOption, setSelectedOption] = React.useState<ComboBoxOption | null>(null);
-  const inputRef = React.useRef<HTMLInputElement | null>(null);
   const DropdownIcon = iconComponents['ChevronDown'];
   const CloseIcon = iconComponents['CloseX'];
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const justSelectedRef = React.useRef(false);
+  const inputProps = useNormalizedInputProps({
+    id,
+    invalid,
+    invalidText,
+    type: 'text',
+  });
 
-  // Initialize selected option from props
-  useEffect(() => {
-    if (value) {
-      const option = options.find((opt) => opt.value === value);
-      if (option) {
-        setSelectedOption(option);
-      } else if (allowCustomValue) {
-        setSelectedOption(null);
-      }
-    } else {
-      setSelectedOption(null);
-    }
-  }, [value, options, allowCustomValue]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [internalValue, setInternalValue] = useState('');
+  const [internalInputValue, setInternalInputValue] = useState('');
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const justSelectedRef = useRef(false);
+
+  const memoizedGetOptionLabel = useCallback((option: ComboBoxOption) => getOptionLabel(option), [getOptionLabel]);
+
+  // Determine if component is controlled
+  const isValueControlled = externalValue !== undefined;
+  const isInputControlled = externalInputValue !== undefined && externalSetInputValue !== undefined;
+
+  // Use either controlled or uncontrolled values
+  const value = isValueControlled ? externalValue : internalValue;
+  const inputValue = isInputControlled ? externalInputValue : internalInputValue;
+  const setInputValue = isInputControlled ? externalSetInputValue : setInternalInputValue;
+
+  // Find the selected option based on value
+  const selectedOption = useMemo(() => {
+    return options.find((option) => option.value === value) || null;
+  }, [options, value]);
 
   // Filtering with support for filterTerms and getOptionLabel
-  const filteredOptions = React.useMemo(() => {
-    if (!inputValue) {
+  const filteredOptions = useMemo(() => {
+    if (!internalInputValue) {
       return options;
     }
 
-    const searchTerm = inputValue.toLowerCase().trim();
+    const searchTerm = internalInputValue.toLowerCase().trim();
 
     return options.filter((option) => {
-      // Check label using getOptionLabel
-      const labelMatch = getOptionLabel(option).toLowerCase().includes(searchTerm);
+      const labelMatch = memoizedGetOptionLabel(option).toLowerCase().includes(searchTerm);
 
-      // Check value
       const valueMatch = option.value.toLowerCase().includes(searchTerm);
 
-      // Check displayValue if available
       const displayValueMatch = option.displayValue?.toLowerCase().includes(searchTerm) || false;
 
-      // Check filterTerms if available
       let filterTermsMatch = false;
       if (option.filterTerms && option.filterTerms.length > 0) {
         filterTermsMatch = option.filterTerms.some((term) => term.toLowerCase().includes(searchTerm));
@@ -211,64 +212,130 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
 
       return labelMatch || valueMatch || displayValueMatch || filterTermsMatch;
     });
-  }, [options, inputValue, getOptionLabel]);
+  }, [options, internalInputValue, memoizedGetOptionLabel]);
 
   // Handle option selection
   const handleOptionSelect = (option: ComboBoxOption) => {
-    // Move these updates before closing the dropdown
-    setSelectedOption(option);
+    // Update internal state if uncontrolled
+    if (!isValueControlled) {
+      setInternalValue(option.value);
+    }
 
-    const displayText = option.displayValue || getOptionLabel(option);
+    // Update input display value
+    const displayText = option.displayValue || memoizedGetOptionLabel(option);
     setInputValue(displayText);
 
+    // Call external onChange
     if (onChange) {
       onChange(option.value, option);
     }
 
-    // Close dropdown last
+    // Close dropdown
     setIsOpen(false);
 
     // Focus input after selection
-    inputRef.current?.focus();
+    justSelectedRef.current = true;
+    requestAnimationFrame(() => {
+      justSelectedRef.current = false;
+      containerRef.current?.focus();
+    });
   };
 
+  // Handle clearing the input
   const handleClear = () => {
-    setSelectedOption(null);
+    // Clear internal state if uncontrolled
+    if (!isValueControlled) {
+      setInternalValue('');
+    }
+
+    // Use the abstracted setInputValue function instead of directly accessing internal state
     setInputValue('');
+
+    // Call onChange with empty values
     if (onChange) {
       onChange('', null);
     }
-    inputRef.current?.focus();
+
+    // Focus the container
+    containerRef.current?.focus();
   };
 
+  // Handle toggling the dropdown
   const handleToggleDropdown = () => {
     setIsOpen(!isOpen);
-    inputRef.current?.focus();
+    containerRef.current?.focus();
   };
 
   const handleInputChange = (value: string) => {
+    // Always update display value
     setInputValue(value);
 
-    // Open dropdown if we have options
+    // Open dropdown when we have matching options
     if (filteredOptions.length > 0) {
       setIsOpen(true);
     }
 
-    // Handle selection clearing if input doesn't match selected option
-    if (selectedOption) {
-      const displayText = selectedOption.displayValue || getOptionLabel(selectedOption);
-      if (displayText !== value) {
-        setSelectedOption(null);
-
-        // In allowCustomValue mode, update value as user types
-        if (allowCustomValue && onChange) {
-          onChange(value, null);
-        }
-      }
-    } else if (allowCustomValue && onChange) {
+    // Only call onChange when there's no selection or we're explicitly allowing it
+    if (!selectedOption && onChange && !isInputControlled) {
       onChange(value, null);
     }
   };
+
+  // Handle blur event
+  const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
+    // If we're in the middle of a selection, don't trigger blur
+    if (justSelectedRef.current) {
+      return;
+    }
+
+    // Call the provided onBlur handler
+    if (onBlur) {
+      onBlur(event);
+    }
+  };
+
+  // Initialize selected option from props
+  useEffect(() => {
+    if (externalValue) {
+      const option = options.find((opt) => opt.value === externalValue);
+      if (option) {
+        setInternalValue(option.value);
+        setInternalInputValue(option.displayValue || memoizedGetOptionLabel(option));
+      } else {
+        setInternalValue('');
+        setInternalInputValue('');
+      }
+    } else {
+      setInternalValue('');
+      setInternalInputValue('');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [externalValue, options]);
+
+  // // Ensure the input value stays in sync when typing
+  useEffect(() => {
+    // If we're not in controlled mode and there's no selection,
+    // make sure input value matches what the user is typing
+    if (internalInputValue !== inputValue) {
+      setInternalInputValue(inputValue);
+    }
+  }, [inputValue, internalInputValue]);
+
+  // When dropdown opens, scroll to selected item when there are many options with same display value
+  useEffect(() => {
+    if (isOpen && selectedOption && filteredOptions.length > 5) {
+      requestAnimationFrame(() => {
+        const selectedElement = document.querySelector(`.${baseClassName}__item--selected`) as HTMLElement;
+
+        if (selectedElement) {
+          selectedElement.scrollIntoView({
+            block: 'nearest',
+            behavior: 'auto',
+          });
+        }
+      });
+    }
+  }, [isOpen, selectedOption, baseClassName, filteredOptions.length]);
 
   // Handle clicks outside the component
   useOnClickOutside(containerRef, (event) => {
@@ -276,36 +343,49 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     if (
       (event.target as HTMLElement).closest(`.${baseClassName}__item`) ||
       (event.target as HTMLElement).closest(`.${baseClassName}__content`) ||
-      inputRef.current?.contains(event.target as Node) ||
-      event.target === inputRef.current
+      containerRef.current?.contains(event.target as Node) ||
+      event.target === containerRef.current
     ) {
       return;
     }
 
     // Check if input value matches any option
     const matchedOption = options.find((option) => {
-      const optionLabel = getOptionLabel(option).toLowerCase();
+      const optionLabel = memoizedGetOptionLabel(option).toLowerCase();
       const optionValue = option.value.toLowerCase();
       const optionDisplay = option.displayValue?.toLowerCase();
-      const inputLower = inputValue.toLowerCase();
+      const inputLower = internalInputValue.toLowerCase();
 
       return optionLabel === inputLower || optionValue === inputLower || optionDisplay === inputLower;
     });
 
+    // If preserving explicit selections and we have a selected option
+    if (preserveExplicitSelection && selectedOption) {
+      const displayText = selectedOption.displayValue || memoizedGetOptionLabel(selectedOption);
+
+      // If the input value matches our selected option's display value,
+      // just restore the display value and don't change the selection
+      if (displayText.toLowerCase() === internalInputValue.toLowerCase()) {
+        setInputValue(displayText);
+        setIsOpen(false);
+        return;
+      }
+    }
+
     if (matchedOption) {
       // If match found, select it
       handleOptionSelect(matchedOption);
-    } else if (!allowCustomValue) {
-      // In non-allowCustomValue mode, restore previous selection
-      if (selectedOption) {
-        const displayText = selectedOption.displayValue || getOptionLabel(selectedOption);
+    } else {
+      // Always allow custom input values, regardless of selection state
+      if (selectedOption && autoClearInput) {
+        const displayText = selectedOption.displayValue || memoizedGetOptionLabel(selectedOption);
         setInputValue(displayText);
-      } else if (autoClearInput) {
+      } else if (autoClearInput && !internalInputValue.trim()) {
         setInputValue('');
+      } else if (onChange) {
+        // Always keep custom values
+        onChange(internalInputValue, null);
       }
-    } else if (allowCustomValue && onChange) {
-      // In allowCustomValue mode, keep current input
-      onChange(inputValue, null);
     }
 
     // Close dropdown
@@ -314,7 +394,22 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
 
   return (
     <div ref={ref} className={classnames(baseClassName, className)} id={id} {...commonProps} {...props}>
-      <div ref={containerRef}>
+      {/* Hidden input for form integration */}
+      {name && (
+        <input
+          type="hidden"
+          name={name}
+          id={name}
+          value={value || ''}
+          ref={(el) => {
+            // If ref is a callback ref, forward it to the hidden input
+            if (typeof ref === 'function' && el) {
+              ref(el);
+            }
+          }}
+        />
+      )}
+      <div ref={containerRef} onBlur={handleBlur} className={`${baseClassName}__wrapper`}>
         <label
           htmlFor={`${id}-input`}
           className={classnames(`${baseClassName}__label`, {
@@ -345,7 +440,6 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                 })}
               >
                 <CommandInput
-                  ref={inputRef}
                   id={`${id}-input`}
                   placeholder={placeholder}
                   value={inputValue}
@@ -356,21 +450,26 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                     }
                   }}
                   onClick={(e) => {
-                    e.stopPropagation();
+                    e.preventDefault();
+
                     if (filteredOptions.length > 0 && !justSelectedRef.current) {
                       setIsOpen(true);
                     }
+
+                    // Focus the input to allow typing
+                    e.currentTarget.focus();
                   }}
                   onKeyDown={(e) => {
                     if (e.key === 'Tab') {
                       setIsOpen(false);
                     } else if (e.key === 'Enter' && !isOpen) {
                       // Only handle Enter when dropdown is closed
-                      if (allowCustomValue) {
-                        if (onChange) {
-                          onChange(inputValue, null);
-                        }
-                      } else if (filteredOptions.length === 1) {
+                      // Always allow submitting the current input value
+                      if (onChange) {
+                        onChange(inputValue, null);
+                      }
+                      // If exactly one match, select it
+                      if (filteredOptions.length === 1) {
                         handleOptionSelect(filteredOptions[0]);
                       } else if (filteredOptions.length > 0) {
                         // Open dropdown if we have options
@@ -460,31 +559,9 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                             })}
                             key={option.value}
                             value={option.value}
-                            onSelect={() => {
-                              // Set the ref flag before doing anything else
-                              justSelectedRef.current = true;
-
-                              // Handle selection
-                              const selectedOpt = option;
-                              setSelectedOption(selectedOpt);
-                              setInputValue(selectedOpt.displayValue || getOptionLabel(selectedOpt));
-
-                              if (onChange) {
-                                onChange(selectedOpt.value, selectedOpt);
-                              }
-
-                              // Close dropdown
-                              setIsOpen(false);
-
-                              // Focus input but reset flag after DOM updates
-                              requestAnimationFrame(() => {
-                                inputRef.current?.focus();
-                                // Clear the flag after the current execution completes
-                                justSelectedRef.current = false;
-                              });
-                            }}
+                            onSelect={() => handleOptionSelect(option)}
                           >
-                            {renderOption ? renderOption(option) : getOptionLabel(option)}
+                            {renderOption ? renderOption(option) : memoizedGetOptionLabel(option)}
                           </CommandItem>
                         ))}
                       </CommandGroup>
@@ -499,10 +576,10 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
         </Command>
 
         {/* Invalid message */}
-        {invalid && invalidText && (
-          <div className={`${baseClassName}__invalid-text`} data-testid={`${id}-invalid-text`}>
-            {invalidText}
-          </div>
+        {inputProps.validation ? (
+          inputProps.validation
+        ) : (
+          <p className={classnames(`${baseClassName}__validation`)}>&nbsp;</p>
         )}
       </div>
     </div>

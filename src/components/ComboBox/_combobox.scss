@@ -4,6 +4,24 @@
   position: relative;
   width: 100%;
 
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &__input-wrapper {
+    margin-bottom: 0.25rem;
+    position: relative;
+
+    &:hover,
+    &:focus-within {
+      .#{$px}-combo-box__close-button {
+        opacity: 1;
+      }
+    }
+  }
+
   &__input {
     accent-color: $soft-black;
     border: 1px solid $keyline-gray;
@@ -14,16 +32,26 @@
 
     @include text($string2);
 
-    &:hover {
-      border: 1px solid $primary-black;
+    &::placeholder {
+      font-variation-settings: 'wght' 400;
     }
 
+    &:focus-visible,
     &:focus {
       outline: 1px solid $primary-black;
     }
 
+    &:hover {
+      border: 1px solid $primary-black;
+    }
+
     &--invalid {
       border-color: $error-red;
+      box-shadow: inset 0 0 3px 3px $error-pink;
+
+      &:focus {
+        outline-color: $error-red;
+      }
 
       &:hover {
         border-color: $error-red;
@@ -54,39 +82,8 @@
     }
   }
 
-  &__input-wrapper {
-    position: relative;
-
-    &:hover,
-    &:focus-within {
-      .#{$px}-combo-box__close-button {
-        opacity: 1;
-      }
-    }
-
-    &--invalid {
-      .#{$px}-combo-box__input {
-        border-color: $error-red;
-        box-shadow: inset 0 0 3px 3px $error-pink;
-
-        &:hover {
-          border-color: $error-red;
-        }
-
-        &:focus {
-          outline-color: $error-red;
-        }
-      }
-
-      .#{$px}-combo-box__dropdown-button,
-      .#{$px}-combo-box__close-button {
-        color: $error-red;
-      }
-    }
-  }
-
   &__close-button {
-    color: $text-color;
+    color: $pure-black;
     opacity: 0;
     position: absolute;
     right: 2.5rem;
@@ -96,21 +93,19 @@
       opacity 0.2s ease,
       background-color 0.2s ease;
 
-    // Override IconButton's default hover styles to ensure consistency
-    &:hover {
-      svg {
-        color: $white !important; // Force white icon on hover
-      }
-    }
-
-    // Fix the background transition
     &.#{$px}-icon-button {
       transition: background-color 0.2s ease;
+
+      &:hover {
+        svg {
+          color: $white;
+        }
+      }
     }
   }
 
   &__dropdown-button {
-    color: $text-color;
+    color: $pure-black;
     position: absolute;
     right: 0.5rem;
     top: 50%;
@@ -123,7 +118,7 @@
 
   &__content {
     animation: fade-in 150ms ease-out;
-    background-color: white;
+    background-color: $white;
     border: 1px solid #e0e0e0;
     border-radius: 4px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 10%);
@@ -132,21 +127,8 @@
     overflow-y: auto;
     position: absolute;
     transform: translateY(1px);
-    width: var(--radix-popper-anchor-width);
     width: 100%;
     z-index: 100;
-  }
-
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(-8px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   &__group {
@@ -165,6 +147,7 @@
   &__item {
     background-color: $pale-gray;
     padding: $padding-micro $padding-xsm;
+    transition: background-color 0.1s ease;
 
     @include text($string2);
 
@@ -173,16 +156,37 @@
       cursor: pointer;
     }
 
-    &[data-selected='true'] {
+    &[data-selected='true'],
+    &--selected {
       background-color: $light-gray;
     }
   }
 
-  &__invalid-text {
+  &__validation {
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-height: $spacing-md;
+    overflow: hidden;
+  }
+
+  &__item__invalid-text {
     @include text($string2);
 
     align-items: center;
     display: flex;
     margin-top: $spacing-xsm;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
