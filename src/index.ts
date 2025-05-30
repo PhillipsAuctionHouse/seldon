@@ -87,6 +87,7 @@ export * from './components/Carousel';
 export * from './components/ComboBox';
 export * from './components/PhoneNumberPicker';
 export * from './components/Detail';
+export * from './components/Loader';
 export { default as PageContentWrapper } from './components/PageContentWrapper/PageContentWrapper';
 export * from './components/PinchZoom';
 export * from './components/SeldonImage';
@@ -99,16 +100,18 @@ export { default as Header, type HeaderProps } from './site-furniture/Header/Hea
 export * from './types/commonTypes';
 
 // utils
+export * from './components/AddToCalendar';
 export * from './components/Article';
+export * from './components/AuctionTile';
 export * from './components/Countdown';
 export * from './components/Countdown/types';
 export * from './components/Divider';
 export * from './components/FavoritingTileButton';
 export * from './components/Filter';
 export * from './components/Icon';
+export * from './components/Pictogram';
 export * from './components/TextArea';
 export * from './components/Toast';
-export * from './components/AddToCalendar';
 export * from './patterns/AccountPageHeader';
 export * from './patterns/BidSnapshot';
 export * from './patterns/FilterMenu';

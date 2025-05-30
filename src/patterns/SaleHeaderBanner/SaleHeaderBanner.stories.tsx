@@ -30,6 +30,11 @@ Playground.argTypes = {
       type: 'select',
     },
   },
+  currentDateTime: {
+    control: {
+      type: 'date',
+    },
+  },
 };
 
 export const PreSale = (props: SaleHeaderBannerProps) => (
@@ -78,10 +83,10 @@ export const PreSaleThreeOccurrences = (props: SaleHeaderBannerProps) => (
   />
 );
 
-export const OpenForBidding = (props: SaleHeaderBannerProps) => (
+export const OpenForBidding = (props: SaleHeaderBannerProps & { currentDateTime?: Date }) => (
   <SaleHeaderBanner
     {...props}
-    auctionEndTime={addMinutes(new Date(), 20)}
+    auctionEndTime={props.auctionEndTime ? new Date(props.auctionEndTime) : addMinutes(new Date(), 10)}
     auctionTitle="Modern & Contemporary Art: Online Auction, New York"
     imageSrcUrl="https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg"
     occurrenceInformation={[{ date: '10:00am EDT, 4 Sep 2024', occurrenceLabel: 'Lots Begin to Close' }]}
@@ -91,8 +96,22 @@ export const OpenForBidding = (props: SaleHeaderBannerProps) => (
     countdownFormatDuration={(duration) => duration.replace('minutes', 'mins')}
     auctionState={AuctionStatus.live}
     showTimer
+    getCurrentDateTime={props.currentDateTime ? () => props.currentDateTime || new Date() : undefined}
   />
 );
+
+OpenForBidding.argTypes = {
+  currentDateTime: {
+    control: {
+      type: 'date',
+    },
+  },
+  auctionEndTime: {
+    control: {
+      type: 'date',
+    },
+  },
+};
 
 export const Closed = (props: SaleHeaderBannerProps) => (
   <SaleHeaderBanner
