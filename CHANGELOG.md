@@ -1,3 +1,10 @@
+## [1.151.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.151.0...v1.151.1) (2025-05-30)
+
+
+### Bug Fixes
+
+* **FavoritesCollectionTile:** L3-6739 Small issues ([#623](https://github.com/PhillipsAuctionHouse/seldon/issues/623)) ([faca1ed](https://github.com/PhillipsAuctionHouse/seldon/commit/faca1ed9bc886ce82e235fb96a537d27d487c367))
+
 # [1.151.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.150.1...v1.151.0) (2025-05-28)
 
 
