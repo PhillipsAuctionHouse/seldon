@@ -1,135 +1,314 @@
-import { render, screen } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { useState } from 'react';
-
-import { runCommonTests } from '../../utils/testUtils';
-import ComboBox, { ComboBoxProps } from './ComboBox';
-
-const options = [{ value: '1999' }, { value: '2000' }, { value: '2001' }, { value: '2002' }];
+import ComboBox from './ComboBox';
+import { ComboBoxOption } from './types';
 
 describe('ComboBox', () => {
-  runCommonTests(ComboBox, 'ComboBox');
-  const reqProps = {
-    labelText: 'My Test Label',
-    id: 'test-id',
-    options,
-    setInputValue: () => vitest.fn(),
-    inputValue: '',
+  const mockOptions = [
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' },
+    { value: 'cherry', label: 'Cherry', filterTerms: ['fruit', 'red'] },
+    { value: 'date', label: 'Date' },
+    { value: 'elderberry', label: 'Elderberry', displayValue: 'Purple Elderberry' },
+  ];
+
+  const defaultProps = {
+    id: 'fruit-selector',
+    labelText: 'Select a fruit',
+    options: mockOptions,
+    placeholder: 'Choose a fruit',
   };
 
-  it('will render a label value if passed', () => {
-    render(<ComboBox {...reqProps} />);
-    const label = screen.getAllByTestId('test-id-label');
-    expect(label[0]).toBeInTheDocument();
+  beforeEach(() => {
+    vi.clearAllMocks();
   });
 
-  it('should render the dropdown list after clicking the trigger', async () => {
-    render(<ComboBox {...reqProps} />);
-    const trigger = screen.getAllByTestId('test-id-dropdown')[0];
+  it('renders with default props', () => {
+    render(<ComboBox {...defaultProps} />);
 
-    expect(trigger).toBeInTheDocument();
-    await userEvent.click(trigger);
-
-    expect(screen.getByText('1999')).toBeInTheDocument();
-    expect(screen.getByText('2000')).toBeInTheDocument();
-    expect(screen.getByText('2001')).toBeInTheDocument();
-    expect(screen.getByText('2002')).toBeInTheDocument();
-    expect(screen.queryByText('No Options')).not.toBeInTheDocument();
+    expect(screen.getByTestId('fruit-selector-label')).toHaveTextContent('Select a fruit');
+    expect(screen.getByTestId('fruit-selector-input')).toBeInTheDocument();
+    expect(screen.getByTestId('fruit-selector-dropdown')).toBeInTheDocument();
   });
 
-  it('should be able to select an option from the dropdown by clicking on it', async () => {
-    const mockSetInputValue = vi.fn();
-    render(<ComboBox {...{ ...reqProps, setInputValue: mockSetInputValue }} />);
-    const trigger = screen.getAllByTestId('test-id-dropdown')[0];
+  it('opens dropdown when clicking the dropdown button', async () => {
+    render(<ComboBox {...defaultProps} />);
 
-    expect(trigger).toBeInTheDocument();
-    await userEvent.click(trigger);
+    const dropdownButton = screen.getByTestId('fruit-selector-dropdown');
+    await userEvent.click(dropdownButton);
 
-    const option = screen.getByText('2000');
-    expect(option).toBeInTheDocument();
-    await userEvent.click(option);
-
-    expect(mockSetInputValue).toHaveBeenCalledWith('2000');
+    await waitFor(() => {
+      expect(screen.getByText('Apple')).toBeInTheDocument();
+      expect(screen.getByText('Banana')).toBeInTheDocument();
+    });
   });
 
-  it('should be able to select an option from the dropdown by keyboard navigation', async () => {
-    const mockSetInputValue = vi.fn();
-    render(<ComboBox {...{ ...reqProps, setInputValue: mockSetInputValue }} />);
-    const trigger = screen.getAllByTestId('test-id-dropdown')[0];
+  it('filters options based on input value', async () => {
+    render(<ComboBox {...defaultProps} />);
 
-    await userEvent.click(trigger);
-
-    await userEvent.keyboard('{ArrowDown}');
-    await userEvent.keyboard('{ArrowDown}');
-    await userEvent.keyboard('{ArrowDown}');
-    await userEvent.keyboard('{Enter}');
-
-    expect(mockSetInputValue).toHaveBeenCalledWith('2002');
-  });
-
-  it('should display No Options when input does not match any options', async () => {
-    const mockSetInputValue = vi.fn();
-    render(<ComboBox {...{ ...reqProps, setInputValue: mockSetInputValue, inputValue: 'non-existent' }} />);
-    const trigger = screen.getAllByTestId('test-id-dropdown')[0];
-
-    await userEvent.click(trigger);
-    const input = screen.getAllByTestId('test-id-input')[0];
-
+    const input = screen.getByTestId('fruit-selector-input');
     await userEvent.click(input);
-    await userEvent.type(input, 'HI');
+    await userEvent.type(input, 'ber');
 
-    expect(screen.queryByText('No Options.')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Elderberry')).toBeInTheDocument();
+      expect(screen.queryByText('Apple')).not.toBeInTheDocument();
+    });
   });
 
-  it('should clear input value when user clicks outside of input', async () => {
-    const mockSetInputValue = vi.fn();
-    render(
-      <>
-        <ComboBox {...{ ...reqProps, setInputValue: mockSetInputValue }} />
-        <div data-testid="outside-element">Outside Element</div>
-      </>,
-    );
-    const trigger = screen.getAllByTestId('test-id-dropdown')[0];
+  it('filters options using filterTerms', async () => {
+    render(<ComboBox {...defaultProps} />);
 
-    await userEvent.click(trigger);
-    const input = screen.getAllByTestId('test-id-input')[0];
-
+    const input = screen.getByTestId('fruit-selector-input');
     await userEvent.click(input);
-    await userEvent.type(input, 'BYE');
+    await userEvent.type(input, 'red');
 
-    const outsideElement = screen.getByTestId('outside-element');
-    await userEvent.click(outsideElement);
-
-    expect(input).toHaveValue('');
+    await waitFor(() => {
+      expect(screen.getByText('Cherry')).toBeInTheDocument();
+      expect(screen.queryByText('Apple')).not.toBeInTheDocument();
+    });
   });
 
-  it('should clear the input value when the close button is clicked', async () => {
-    const ComboBoxWrapper = (props: ComboBoxProps) => {
-      const [inputValue, setInputValue] = useState('');
-      return <ComboBox {...props} inputValue={inputValue} setInputValue={setInputValue} />;
-    };
+  it('selects an option when clicked', async () => {
+    const onChange = vi.fn();
+    render(<ComboBox {...defaultProps} onChange={onChange} />);
 
-    render(
-      <ComboBoxWrapper
-        labelText="Test Label"
-        id="test-id"
-        options={options}
-        inputValue=""
-        setInputValue={() => undefined}
-      />,
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+
+    await waitFor(() => {
+      expect(screen.getByText('Apple')).toBeInTheDocument();
+    });
+
+    await userEvent.click(screen.getByText('Apple'));
+
+    expect(onChange).toHaveBeenCalledWith('apple', expect.objectContaining({ value: 'apple', label: 'Apple' }));
+    expect(input).toHaveValue('Apple');
+  });
+
+  it('displays custom displayValue when option is selected', async () => {
+    render(<ComboBox {...defaultProps} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+
+    await waitFor(() => {
+      expect(screen.getByText('Elderberry')).toBeInTheDocument();
+    });
+
+    await userEvent.click(screen.getByText('Elderberry'));
+
+    expect(input).toHaveValue('Purple Elderberry');
+  });
+
+  it('clears the input when clear button is clicked', async () => {
+    const onChange = vi.fn();
+    render(<ComboBox {...defaultProps} onChange={onChange} value="apple" />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    expect(input).toHaveValue('Apple');
+
+    const clearButton = screen.getByTestId('fruit-selector-clear-button');
+    await userEvent.click(clearButton);
+
+    await waitFor(() => {
+      expect(input).toHaveValue('');
+      expect(onChange).toHaveBeenCalledWith('', null);
+    });
+  });
+
+  it('works in controlled mode', () => {
+    const onChange = vi.fn();
+    const { rerender } = render(<ComboBox {...defaultProps} value="apple" onChange={onChange} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    expect(input).toHaveValue('Apple');
+
+    // Simulate controlled update
+    rerender(<ComboBox {...defaultProps} value="banana" onChange={onChange} />);
+
+    expect(input).toHaveValue('Banana');
+  });
+
+  it('shows invalid state when specified', () => {
+    render(<ComboBox {...defaultProps} invalid={true} invalidText="Please select a valid fruit" />);
+
+    expect(screen.getByText('Please select a valid fruit')).toBeInTheDocument();
+    expect(screen.getByTestId('fruit-selector-label')).toHaveClass('seldon-combo-box__label--invalid');
+  });
+
+  it('handles keyboard navigation', async () => {
+    render(<ComboBox {...defaultProps} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+
+    // Press down arrow to open dropdown
+    await userEvent.type(input, '{arrowdown}');
+
+    await waitFor(() => {
+      expect(screen.getByText('Apple')).toBeInTheDocument();
+    });
+
+    // Press escape to close dropdown
+    await userEvent.type(input, '{escape}');
+
+    await waitFor(() => {
+      expect(screen.queryByText('Apple')).not.toBeInTheDocument();
+    });
+  });
+
+  it('allows custom option rendering', async () => {
+    const renderOption = (option: ComboBoxOption) => (
+      <div data-testid={`custom-option-${option.value}`}>Custom: {option.label}</div>
     );
 
-    const trigger = screen.getByTestId('test-id-dropdown');
-    await userEvent.click(trigger);
+    render(<ComboBox {...defaultProps} renderOption={renderOption} />);
 
-    const input = screen.getByTestId('test-id-input');
-    expect(input).toBeInTheDocument();
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
 
-    await userEvent.type(input, '2001');
-    expect(input).toHaveValue('2001');
+    await waitFor(() => {
+      expect(screen.getByTestId('custom-option-apple')).toBeInTheDocument();
+      expect(screen.getByText('Custom: Apple')).toBeInTheDocument();
+    });
+  });
 
-    const closeButton = screen.getByTestId('test-id-item-close-button');
-    await userEvent.click(closeButton);
-    expect(input).toHaveValue('');
+  it('shows no options message when no matches found', async () => {
+    render(<ComboBox {...defaultProps} noOptionsMessage="No fruits found" />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+    await userEvent.type(input, 'xyz');
+
+    await waitFor(() => {
+      expect(screen.getByText('No fruits found')).toBeInTheDocument();
+    });
+  });
+
+  it('toggles dropdown when clicking the dropdown button multiple times', async () => {
+    render(<ComboBox {...defaultProps} />);
+
+    const dropdownButton = screen.getByTestId('fruit-selector-dropdown');
+
+    // First click - open
+    await userEvent.click(dropdownButton);
+    await waitFor(() => {
+      expect(screen.getByText('Apple')).toBeInTheDocument();
+    });
+
+    // Second click - close
+    await userEvent.click(dropdownButton);
+    await waitFor(() => {
+      expect(screen.queryByText('Apple')).not.toBeInTheDocument();
+    });
+
+    // Third click - open again
+    await userEvent.click(dropdownButton);
+    await waitFor(() => {
+      expect(screen.getByText('Apple')).toBeInTheDocument();
+    });
+  });
+  it('handles controlled inputValue prop correctly', async () => {
+    const setInputValue = vi.fn();
+    const { rerender } = render(<ComboBox {...defaultProps} inputValue="Custom Value" setInputValue={setInputValue} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    expect(input).toHaveValue('Custom Value');
+
+    // Type in the input
+    await userEvent.type(input, '!');
+
+    // setInputValue should be called with new value
+    expect(setInputValue).toHaveBeenCalledWith('Custom Value!');
+
+    // Update the controlled prop
+    rerender(<ComboBox {...defaultProps} inputValue="Updated Value" setInputValue={setInputValue} />);
+
+    // Input should reflect the new controlled value
+    expect(input).toHaveValue('Updated Value');
+  });
+  it('does not clear input when autoClearInput is false', async () => {
+    render(<ComboBox {...defaultProps} autoClearInput={false} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+    await userEvent.type(input, 'No match');
+
+    // Click outside
+    await userEvent.click(document.body);
+
+    // Input should still contain what was typed
+    expect(input).toHaveValue('No match');
+  });
+  it('selects exact match on outside click', async () => {
+    const onChange = vi.fn();
+    render(<ComboBox {...defaultProps} onChange={onChange} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+    await userEvent.type(input, 'Apple');
+
+    // Click outside (should select the exact match)
+    await userEvent.click(document.body);
+
+    expect(onChange).toHaveBeenCalledWith('apple', expect.objectContaining({ value: 'apple' }));
+  });
+  it('selects option on Enter key when there is exactly one match', async () => {
+    const onChange = vi.fn();
+    render(<ComboBox {...defaultProps} onChange={onChange} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+    await userEvent.type(input, 'ban');
+
+    // Press Enter (should select Banana as it's the only match)
+    await userEvent.type(input, '{enter}');
+
+    expect(onChange).toHaveBeenCalledWith('banana', expect.objectContaining({ value: 'banana' }));
+    expect(input).toHaveValue('Banana');
+  });
+  it('opens dropdown when clicking input with filtered options', async () => {
+    render(<ComboBox {...defaultProps} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+
+    // Type to filter options
+    await userEvent.type(input, 'a');
+
+    // Click outside to close dropdown
+    await userEvent.click(document.body);
+
+    // Wait for dropdown to close
+    await waitFor(() => {
+      expect(screen.queryByText('Apple')).not.toBeInTheDocument();
+    });
+
+    // Click input again
+    await userEvent.click(input);
+
+    // Verify dropdown opens with filtered options
+    await waitFor(() => {
+      expect(screen.getByText('Apple')).toBeInTheDocument();
+      expect(screen.queryByText('Cherry')).not.toBeInTheDocument();
+    });
+  });
+  it('does not open dropdown when no options match', async () => {
+    render(<ComboBox {...defaultProps} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+
+    // Type something that doesn't match any option
+    await userEvent.type(input, 'zzzzzz');
+
+    // Try to open dropdown by clicking input
+    await userEvent.click(input);
+
+    // Verify dropdown shows "no options" message instead of options
+    await waitFor(() => {
+      expect(screen.getByText('No Options.')).toBeInTheDocument();
+      expect(screen.queryByText('Apple')).not.toBeInTheDocument();
+    });
   });
 });

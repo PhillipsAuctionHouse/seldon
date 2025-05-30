@@ -1,11 +1,13 @@
 import * as Popover from '@radix-ui/react-popover';
 import classnames from 'classnames';
 import { Command, CommandGroup, CommandInput, CommandItem, CommandList } from 'cmdk';
-import React from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
 import * as iconComponents from '../../assets/formatted';
-import { getCommonProps } from '../../utils';
-import { getScssVar } from '../../utils/scssUtils';
+import { getCommonProps, useNormalizedInputProps } from '../../utils';
+import IconButton from '../IconButton/IconButton';
+import { ButtonVariants } from '../Button/types';
+import { ComboBoxOption } from './types';
 
 export interface ComboBoxProps {
   /**
@@ -15,10 +17,7 @@ export interface ComboBoxProps {
   /**
    * List of options to be displayed in the ComboBox.
    */
-  options: {
-    label?: string;
-    value: string;
-  }[];
+  options: ComboBoxOption[];
   /**
    * Unique id for the ComboBox.
    */
@@ -36,13 +35,46 @@ export interface ComboBoxProps {
    */
   placeholder?: string;
   /**
-   * Input value for the ComboBox.
+   * Name attribute for form submission
    */
-  inputValue: string;
+  name?: string;
   /**
-   * Passed in function to handle input value changes.
+   * Value for the selected option
    */
-  setInputValue: (value: string) => void;
+  value?: string;
+  /**
+   * Handler for value changes
+   */
+  onChange?: (value: string, option: ComboBoxOption | null) => void;
+  /**
+   * Input value (display text)
+   * Only needed for controlled usage, otherwise managed internally
+   */
+  inputValue?: string;
+  /**
+   * Handler for input value changes
+   * Only needed for controlled usage, otherwise managed internally
+   */
+  setInputValue?: (value: string) => void;
+  /**
+   * Function to get display text for an option
+   * Similar to MUI's getOptionLabel
+   */
+  getOptionLabel?: (option: ComboBoxOption) => string;
+  /**
+   * Function to render custom option content
+   * Similar to MUI's renderOption
+   */
+  renderOption?: (option: ComboBoxOption) => React.ReactNode;
+  /**
+   * Sets the invalid state of the input
+   * @default false
+   */
+  invalid?: boolean;
+  /**
+   * Text to display when input is invalid
+   */
+  invalidText?: string;
   /**
    * aria-label optional input label
    */
@@ -61,6 +93,7 @@ export interface ComboBoxProps {
   ariaLabelContent?: string;
   /**
    * If true, the input will be cleared when the user clicks away when the input value is not in the options list.
+   * @default true
    */
   autoClearInput?: boolean;
   /**
@@ -69,15 +102,28 @@ export interface ComboBoxProps {
   popoverContainerRef?: React.RefObject<HTMLElement>;
   /**
    * No options message translation
+   * @default "No Options."
    */
   noOptionsMessage?: string;
+
+  /**
+   * Handler called when the combobox loses focus
+   */
+  onBlur?: React.FocusEventHandler<HTMLDivElement>;
+
+  /**
+   * When true, preserve the explicitly selected option value
+   * even when the display value matches multiple options
+   * @default false
+   */
+  preserveExplicitSelection?: boolean;
 }
 /**
  * ## Overview
  *
- * This is a ComboBox component that allows users to select from a list of options or enter a custom value.
+ * This is a ComboBox component that allows users to select from a list of options.
  *
- * [Figma Link] https://www.figma.com/design/rIefa3bRPyZbZmtyV9PSQv/My-Account?node-id=1-3&p=f&m=dev
+ * [Figma Link](https://www.figma.com/design/rIefa3bRPyZbZmtyV9PSQv/My-Account?node-id=1-3&p=f&m=dev)
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-comboBox--overview)
  */
@@ -88,8 +134,14 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     id,
     labelText,
     placeholder,
-    inputValue = '',
-    setInputValue,
+    name,
+    value: externalValue,
+    onChange,
+    onBlur,
+    inputValue: externalInputValue,
+    setInputValue: externalSetInputValue,
+    getOptionLabel = (option) => option.label || option.value,
+    renderOption,
     ariaLabelDropdown,
     ariaLabelInput,
     ariaLabelClear,
@@ -98,172 +150,437 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     autoClearInput = true,
     popoverContainerRef,
     noOptionsMessage = 'No Options.',
+    invalid = false,
+    invalidText,
+    preserveExplicitSelection = true,
     ...props
   },
   ref,
 ) {
   const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'ComboBox');
-  const [isOpen, setIsOpen] = React.useState(false);
-  const inputRef = React.useRef<HTMLInputElement | null>(null);
   const DropdownIcon = iconComponents['ChevronDown'];
   const CloseIcon = iconComponents['CloseX'];
-  const containerRef = React.useRef<HTMLDivElement>(null);
+  const inputProps = useNormalizedInputProps({
+    id,
+    invalid,
+    invalidText,
+    type: 'text',
+  });
 
-  const itemRefs = React.useRef<Record<string, HTMLDivElement | null>>({});
-  const filteredOptions = options.filter(
-    (option) =>
-      option.value.toLowerCase().includes(inputValue.toLowerCase()) ||
-      (option.label && option.label.toLowerCase().includes(inputValue.toLowerCase())),
-  );
+  const [isOpen, setIsOpen] = useState(false);
+  const [internalValue, setInternalValue] = useState('');
+  const [internalInputValue, setInternalInputValue] = useState('');
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const justSelectedRef = useRef(false);
+
+  const memoizedGetOptionLabel = useCallback((option: ComboBoxOption) => getOptionLabel(option), [getOptionLabel]);
+
+  // Determine if component is controlled
+  const isValueControlled = externalValue !== undefined;
+  const isInputControlled = externalInputValue !== undefined && externalSetInputValue !== undefined;
+
+  // Use either controlled or uncontrolled values
+  const value = isValueControlled ? externalValue : internalValue;
+  const inputValue = isInputControlled ? externalInputValue : internalInputValue;
+  const setInputValue = isInputControlled ? externalSetInputValue : setInternalInputValue;
+
+  // Find the selected option based on value
+  const selectedOption = useMemo(() => {
+    return options.find((option) => option.value === value) || null;
+  }, [options, value]);
+
+  // Filtering with support for filterTerms and getOptionLabel
+  const filteredOptions = useMemo(() => {
+    if (!internalInputValue) {
+      return options;
+    }
+
+    const searchTerm = internalInputValue.toLowerCase().trim();
+
+    return options.filter((option) => {
+      const labelMatch = memoizedGetOptionLabel(option).toLowerCase().includes(searchTerm);
+
+      const valueMatch = option.value.toLowerCase().includes(searchTerm);
+
+      const displayValueMatch = option.displayValue?.toLowerCase().includes(searchTerm) || false;
+
+      let filterTermsMatch = false;
+      if (option.filterTerms && option.filterTerms.length > 0) {
+        filterTermsMatch = option.filterTerms.some((term) => term.toLowerCase().includes(searchTerm));
+      }
+
+      return labelMatch || valueMatch || displayValueMatch || filterTermsMatch;
+    });
+  }, [options, internalInputValue, memoizedGetOptionLabel]);
+
+  // Handle option selection
+  const handleOptionSelect = (option: ComboBoxOption) => {
+    // Update internal state if uncontrolled
+    if (!isValueControlled) {
+      setInternalValue(option.value);
+    }
+
+    // Update input display value
+    const displayText = option.displayValue || memoizedGetOptionLabel(option);
+    setInputValue(displayText);
+
+    // Call external onChange
+    if (onChange) {
+      onChange(option.value, option);
+    }
+
+    // Close dropdown
+    setIsOpen(false);
+
+    // Focus input after selection
+    justSelectedRef.current = true;
+    requestAnimationFrame(() => {
+      justSelectedRef.current = false;
+      containerRef.current?.focus();
+    });
+  };
+
+  // Handle clearing the input
+  const handleClear = () => {
+    // Clear internal state if uncontrolled
+    if (!isValueControlled) {
+      setInternalValue('');
+    }
+
+    // Use the abstracted setInputValue function instead of directly accessing internal state
+    setInputValue('');
+
+    // Call onChange with empty values
+    if (onChange) {
+      onChange('', null);
+    }
+
+    // Focus the container
+    containerRef.current?.focus();
+  };
+
+  // Handle toggling the dropdown
+  const handleToggleDropdown = () => {
+    setIsOpen(!isOpen);
+    containerRef.current?.focus();
+  };
+
+  const handleInputChange = (value: string) => {
+    // Always update display value
+    setInputValue(value);
+
+    // Open dropdown when we have matching options
+    if (filteredOptions.length > 0) {
+      setIsOpen(true);
+    }
+
+    // Only call onChange when there's no selection or we're explicitly allowing it
+    if (!selectedOption && onChange && !isInputControlled) {
+      onChange(value, null);
+    }
+  };
+
+  // Handle blur event
+  const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
+    // If we're in the middle of a selection, don't trigger blur
+    if (justSelectedRef.current) {
+      return;
+    }
+
+    // Call the provided onBlur handler
+    if (onBlur) {
+      onBlur(event);
+    }
+  };
+
+  // Initialize selected option from props
+  useEffect(() => {
+    if (externalValue) {
+      const option = options.find((opt) => opt.value === externalValue);
+      if (option) {
+        setInternalValue(option.value);
+        setInternalInputValue(option.displayValue || memoizedGetOptionLabel(option));
+      } else {
+        setInternalValue('');
+        setInternalInputValue('');
+      }
+    } else {
+      setInternalValue('');
+      setInternalInputValue('');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [externalValue, options]);
+
+  // // Ensure the input value stays in sync when typing
+  useEffect(() => {
+    // If we're not in controlled mode and there's no selection,
+    // make sure input value matches what the user is typing
+    if (internalInputValue !== inputValue) {
+      setInternalInputValue(inputValue);
+    }
+  }, [inputValue, internalInputValue]);
+
+  // When dropdown opens, scroll to selected item when there are many options with same display value
+  useEffect(() => {
+    if (isOpen && selectedOption && filteredOptions.length > 5) {
+      requestAnimationFrame(() => {
+        const selectedElement = document.querySelector(`.${baseClassName}__item--selected`) as HTMLElement;
+
+        if (selectedElement) {
+          selectedElement.scrollIntoView({
+            block: 'nearest',
+            behavior: 'auto',
+          });
+        }
+      });
+    }
+  }, [isOpen, selectedOption, baseClassName, filteredOptions.length]);
+
+  // Handle clicks outside the component
   useOnClickOutside(containerRef, (event) => {
+    // Don't handle clicks on dropdown items or the input itself
     if (
       (event.target as HTMLElement).closest(`.${baseClassName}__item`) ||
-      (event.target as HTMLElement).closest(`.${baseClassName}__content`)
+      (event.target as HTMLElement).closest(`.${baseClassName}__content`) ||
+      containerRef.current?.contains(event.target as Node) ||
+      event.target === containerRef.current
     ) {
       return;
     }
 
-    const isInputValueInOptions = filteredOptions.some(
-      (option) => option.value.toLowerCase() === inputValue.toLowerCase(),
-    );
+    // Check if input value matches any option
+    const matchedOption = options.find((option) => {
+      const optionLabel = memoizedGetOptionLabel(option).toLowerCase();
+      const optionValue = option.value.toLowerCase();
+      const optionDisplay = option.displayValue?.toLowerCase();
+      const inputLower = internalInputValue.toLowerCase();
 
-    if (!isInputValueInOptions && autoClearInput) {
-      setInputValue('');
+      return optionLabel === inputLower || optionValue === inputLower || optionDisplay === inputLower;
+    });
+
+    // If preserving explicit selections and we have a selected option
+    if (preserveExplicitSelection && selectedOption) {
+      const displayText = selectedOption.displayValue || memoizedGetOptionLabel(selectedOption);
+
+      // If the input value matches our selected option's display value,
+      // just restore the display value and don't change the selection
+      if (displayText.toLowerCase() === internalInputValue.toLowerCase()) {
+        setInputValue(displayText);
+        setIsOpen(false);
+        return;
+      }
     }
 
+    if (matchedOption) {
+      // If match found, select it
+      handleOptionSelect(matchedOption);
+    } else {
+      // Always allow custom input values, regardless of selection state
+      if (selectedOption && autoClearInput) {
+        const displayText = selectedOption.displayValue || memoizedGetOptionLabel(selectedOption);
+        setInputValue(displayText);
+      } else if (autoClearInput && !internalInputValue.trim()) {
+        setInputValue('');
+      } else if (onChange) {
+        // Always keep custom values
+        onChange(internalInputValue, null);
+      }
+    }
+
+    // Close dropdown
     setIsOpen(false);
-    event.stopPropagation();
   });
 
   return (
     <div ref={ref} className={classnames(baseClassName, className)} id={id} {...commonProps} {...props}>
-      <div ref={containerRef}>
+      {/* Hidden input for form integration */}
+      {name && (
+        <input
+          type="hidden"
+          name={name}
+          id={name}
+          value={value || ''}
+          ref={(el) => {
+            // If ref is a callback ref, forward it to the hidden input
+            if (typeof ref === 'function' && el) {
+              ref(el);
+            }
+          }}
+        />
+      )}
+      <div ref={containerRef} onBlur={handleBlur} className={`${baseClassName}__wrapper`}>
         <label
           htmlFor={`${id}-input`}
           className={classnames(`${baseClassName}__label`, {
             [`${baseClassName}__label--hidden`]: hideLabel,
+            [`${baseClassName}__label--invalid`]: invalid,
           })}
           data-testid={`${id}-label`}
         >
           {labelText}
         </label>
-        <Command
-          loop
-          onKeyDown={(e) => {
-            setTimeout(() => {
-              if (e.key === 'Escape') {
+
+        <Command shouldFilter={false} loop={true} className={`${baseClassName}__command-wrapper`}>
+          <Popover.Root
+            open={isOpen}
+            modal={false}
+            onOpenChange={(open) => {
+              if (!open) {
                 setIsOpen(false);
+              } else if (filteredOptions.length > 0) {
+                setIsOpen(true);
               }
-            }, 0);
-          }}
-        >
-          <Popover.Root open={true}>
-            <div className={`${baseClassName}__input-wrapper`}>
-              <Popover.Trigger asChild>
+            }}
+          >
+            <Popover.Trigger asChild>
+              <div
+                className={classnames(`${baseClassName}__input-wrapper`, {
+                  [`${baseClassName}__input-wrapper--invalid`]: invalid,
+                })}
+              >
                 <CommandInput
-                  ref={inputRef}
+                  id={`${id}-input`}
                   placeholder={placeholder}
                   value={inputValue}
-                  onValueChange={(value) => {
-                    setInputValue(value);
-                    setIsOpen(true);
+                  onValueChange={handleInputChange}
+                  onFocus={() => {
+                    if (filteredOptions.length > 0 && !justSelectedRef.current) {
+                      setIsOpen(true);
+                    }
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault();
+
+                    if (filteredOptions.length > 0 && !justSelectedRef.current) {
+                      setIsOpen(true);
+                    }
+
+                    // Focus the input to allow typing
+                    e.currentTarget.focus();
                   }}
                   onKeyDown={(e) => {
                     if (e.key === 'Tab') {
                       setIsOpen(false);
+                    } else if (e.key === 'Enter' && !isOpen) {
+                      // Only handle Enter when dropdown is closed
+                      // Always allow submitting the current input value
+                      if (onChange) {
+                        onChange(inputValue, null);
+                      }
+                      // If exactly one match, select it
+                      if (filteredOptions.length === 1) {
+                        handleOptionSelect(filteredOptions[0]);
+                      } else if (filteredOptions.length > 0) {
+                        // Open dropdown if we have options
+                        setIsOpen(true);
+                        e.preventDefault();
+                      }
+                    } else if (e.key === 'Escape') {
+                      setIsOpen(false);
+                      e.preventDefault();
+                    } else if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && !isOpen) {
+                      if (filteredOptions.length > 0) {
+                        setIsOpen(true);
+                        e.preventDefault();
+                      }
                     }
                   }}
-                  onFocus={() => {
-                    setIsOpen((prev) => !prev);
-                    setInputValue(inputValue);
-                  }}
-                  className={`${baseClassName}__input`}
-                  tabIndex={0}
+                  className={classnames(`${baseClassName}__input`, {
+                    [`${baseClassName}__input--invalid`]: invalid,
+                  })}
                   aria-label={ariaLabelInput ? ariaLabelInput : `${id}-input`}
                   data-testid={`${id}-input`}
                 />
-              </Popover.Trigger>
-              {inputValue.length > 0 && (
-                <button
-                  className={`${baseClassName}__close-button`}
-                  data-testid={`${id}-item-close-button`}
-                  onClick={() => setInputValue('')}
-                  aria-label={ariaLabelClear ? ariaLabelClear : `${id}-clear`}
-                  tabIndex={-1}
-                >
-                  <div className={`${baseClassName}__icon`}>
+
+                {/* Clear button */}
+                {inputValue && (
+                  <IconButton
+                    className={`${baseClassName}__close-button`}
+                    data-testid={`${id}-clear-button`}
+                    onClick={handleClear}
+                    aria-label={ariaLabelClear ? ariaLabelClear : `${id}-clear`}
+                    tabIndex={-1}
+                    variant={ButtonVariants.tertiary}
+                  >
                     <CloseIcon
-                      color={getScssVar('', '$primary-black')}
+                      color="currentColor"
                       height={18}
                       width={18}
                       className={`${baseClassName}__icon-button`}
+                      title={ariaLabelClear ? ariaLabelClear : `${id}-clear`}
                     />
-                  </div>
-                </button>
-              )}
-              <button
-                aria-label={ariaLabelDropdown ? ariaLabelDropdown : `${id}-dropdown`}
-                className={`${baseClassName}__dropdown-button`}
-                onClick={() => inputRef.current?.focus()}
-                data-testid={`${id}-dropdown`}
-                tabIndex={-1}
-              >
-                <div
-                  className={classnames(`${baseClassName}__icon`, {
-                    [`${baseClassName}__icon--flipped`]: isOpen,
+                  </IconButton>
+                )}
+
+                {/* Dropdown toggle button */}
+                <IconButton
+                  aria-label={ariaLabelDropdown ? ariaLabelDropdown : `${id}-dropdown`}
+                  className={classnames(`${baseClassName}__dropdown-button`, {
+                    [`${baseClassName}__dropdown-button--open`]: isOpen,
                   })}
+                  onClick={handleToggleDropdown}
+                  data-testid={`${id}-dropdown`}
+                  tabIndex={-1}
+                  variant={ButtonVariants.tertiary}
                 >
                   <DropdownIcon
-                    color={getScssVar('', '$pure-black')}
+                    color="currentColor"
                     height={18}
                     width={18}
                     className={`${baseClassName}__icon-button`}
+                    title={ariaLabelDropdown ? ariaLabelDropdown : `${id}-dropdown`}
                   />
-                </div>
-              </button>
-            </div>
-            <Popover.Portal container={popoverContainerRef?.current}>
-              <Popover.Content
-                className={`${baseClassName}__content`}
-                aria-label={ariaLabelContent ? ariaLabelContent : `${id}-content`}
-              >
-                {isOpen && (
+                </IconButton>
+              </div>
+            </Popover.Trigger>
+
+            {/* The dropdown content */}
+            {isOpen && (
+              <Popover.Portal container={popoverContainerRef?.current || document.body}>
+                <Popover.Content
+                  className={`${baseClassName}__content`}
+                  aria-label={ariaLabelContent ? ariaLabelContent : `${id}-content`}
+                  side="bottom"
+                  sideOffset={-5}
+                  align="start"
+                  alignOffset={0}
+                  style={{
+                    width: containerRef.current?.offsetWidth || '100%',
+                  }}
+                >
                   <CommandList className={`${baseClassName}__list`}>
-                    {filteredOptions.some(
-                      (option) =>
-                        option.value.toLowerCase().includes(inputValue.toLowerCase()) ||
-                        (option.label && option.label.toLowerCase().includes(inputValue.toLowerCase())),
-                    ) ? (
-                      <CommandGroup>
-                        {filteredOptions.map(
-                          (option, ind) =>
-                            (option.value.toLowerCase().includes(inputValue.toLowerCase()) ||
-                              (option.label && option.label.toLowerCase().includes(inputValue.toLowerCase()))) && (
-                              <CommandItem
-                                className={`${baseClassName}__item`}
-                                key={`${option.value}-${ind}`}
-                                value={option.label ? `${option.label} ${option.value}` : option.value}
-                                ref={(el) => (itemRefs.current[option.value] = el)}
-                                onSelect={(currentValue) => {
-                                  setInputValue(currentValue);
-                                  setIsOpen(false);
-                                }}
-                              >
-                                {option.label ? `${option.label} ${option.value}` : option.value}
-                              </CommandItem>
-                            ),
-                        )}
+                    {filteredOptions.length > 0 ? (
+                      <CommandGroup className={`${baseClassName}__group`}>
+                        {filteredOptions.map((option) => (
+                          <CommandItem
+                            className={classnames(`${baseClassName}__item`, {
+                              [`${baseClassName}__item--selected`]: selectedOption?.value === option.value,
+                            })}
+                            key={option.value}
+                            value={option.value}
+                            onSelect={() => handleOptionSelect(option)}
+                          >
+                            {renderOption ? renderOption(option) : memoizedGetOptionLabel(option)}
+                          </CommandItem>
+                        ))}
                       </CommandGroup>
                     ) : (
-                      <Command.Empty>{noOptionsMessage}</Command.Empty>
+                      <div className={`${baseClassName}__no-options`}>{noOptionsMessage}</div>
                     )}
                   </CommandList>
-                )}
-              </Popover.Content>
-            </Popover.Portal>
+                </Popover.Content>
+              </Popover.Portal>
+            )}
           </Popover.Root>
         </Command>
+
+        {/* Invalid message */}
+        {inputProps.validation ? (
+          inputProps.validation
+        ) : (
+          <p className={classnames(`${baseClassName}__validation`)}>&nbsp;</p>
+        )}
       </div>
     </div>
   );
