@@ -1,3 +1,10 @@
+# [1.152.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.151.1...v1.152.0) (2025-05-30)
+
+
+### Features
+
+* **calendarIcon:** L3-6826 Update calendar icon hover style ([#633](https://github.com/PhillipsAuctionHouse/seldon/issues/633)) ([27004ea](https://github.com/PhillipsAuctionHouse/seldon/commit/27004ea0a949063b5a706b9e871c2e97706e2ff9))
+
 ## [1.151.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.151.0...v1.151.1) (2025-05-30)
 
 
