@@ -31,14 +31,15 @@
       font-size: $body-size3;
       font-variation-settings: 'wght' 600;
       text-align: center;
-
-      &:hover {
-        color: $pure-black;
-      }
+      transition: color 0.25s;
     }
 
     &:hover {
       color: $pure-black;
+
+      .#{$px}-tag__label {
+        color: $pure-black;
+      }
 
       svg {
         color: $pure-black;
