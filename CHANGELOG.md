@@ -1,3 +1,10 @@
+## [1.152.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.152.0...v1.152.1) (2025-06-02)
+
+
+### Bug Fixes
+
+* **Icons:** L3-6793 L3-6740 fix svg titles ([#632](https://github.com/PhillipsAuctionHouse/seldon/issues/632)) ([6b4ee2a](https://github.com/PhillipsAuctionHouse/seldon/commit/6b4ee2acdcd61f382b2651e8b1d2122ef27fb352))
+
 # [1.152.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.151.1...v1.152.0) (2025-05-30)
 
 
