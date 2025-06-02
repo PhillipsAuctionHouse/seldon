@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgAppleAppStoreBadgeProps extends React.HTMLAttributes<SVGSVGElement> {
+interface AppleAppStoreBadgeProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgAppleAppStoreBadgeProps extends React.HTMLAttributes<SVGSVGElement>
   titleId?: string;
 }
 
-const SvgAppleAppStoreBadge = memo(
-  forwardRef<SVGSVGElement, SvgAppleAppStoreBadgeProps>((props, ref) => {
-    const { height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgAppleAppStoreBadge';
-    const titleId = propsTitleId || kebabCase(title);
+const AppleAppStoreBadge = memo(
+  forwardRef<SVGSVGElement, AppleAppStoreBadgeProps>((props, ref) => {
+    const { height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -52,4 +51,4 @@ const SvgAppleAppStoreBadge = memo(
   }),
 );
 
-export default SvgAppleAppStoreBadge;
+export default AppleAppStoreBadge;

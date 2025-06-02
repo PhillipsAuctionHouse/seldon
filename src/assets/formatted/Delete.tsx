@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgDeleteProps extends React.HTMLAttributes<SVGSVGElement> {
+interface DeleteProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgDeleteProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgDelete = memo(
-  forwardRef<SVGSVGElement, SvgDeleteProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgDelete';
-    const titleId = propsTitleId || kebabCase(title);
+const Delete = memo(
+  forwardRef<SVGSVGElement, DeleteProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -40,4 +39,4 @@ const SvgDelete = memo(
   }),
 );
 
-export default SvgDelete;
+export default Delete;

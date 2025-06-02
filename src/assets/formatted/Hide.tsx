@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgHideProps extends React.HTMLAttributes<SVGSVGElement> {
+interface HideProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgHideProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgHide = memo(
-  forwardRef<SVGSVGElement, SvgHideProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgHide';
-    const titleId = propsTitleId || kebabCase(title);
+const Hide = memo(
+  forwardRef<SVGSVGElement, HideProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -43,4 +42,4 @@ const SvgHide = memo(
   }),
 );
 
-export default SvgHide;
+export default Hide;

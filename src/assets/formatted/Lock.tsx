@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgLockProps extends React.HTMLAttributes<SVGSVGElement> {
+interface LockProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgLockProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgLock = memo(
-  forwardRef<SVGSVGElement, SvgLockProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgLock';
-    const titleId = propsTitleId || kebabCase(title);
+const Lock = memo(
+  forwardRef<SVGSVGElement, LockProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -40,4 +39,4 @@ const SvgLock = memo(
   }),
 );
 
-export default SvgLock;
+export default Lock;

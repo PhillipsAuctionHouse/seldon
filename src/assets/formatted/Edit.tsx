@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgEditProps extends React.HTMLAttributes<SVGSVGElement> {
+interface EditProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgEditProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgEdit = memo(
-  forwardRef<SVGSVGElement, SvgEditProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgEdit';
-    const titleId = propsTitleId || kebabCase(title);
+const Edit = memo(
+  forwardRef<SVGSVGElement, EditProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -40,4 +39,4 @@ const SvgEdit = memo(
   }),
 );
 
-export default SvgEdit;
+export default Edit;

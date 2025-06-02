@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgEmailProps extends React.HTMLAttributes<SVGSVGElement> {
+interface EmailProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgEmailProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgEmail = memo(
-  forwardRef<SVGSVGElement, SvgEmailProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgEmail';
-    const titleId = propsTitleId || kebabCase(title);
+const Email = memo(
+  forwardRef<SVGSVGElement, EmailProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -39,4 +38,4 @@ const SvgEmail = memo(
   }),
 );
 
-export default SvgEmail;
+export default Email;

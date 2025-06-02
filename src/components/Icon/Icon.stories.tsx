@@ -13,6 +13,7 @@ const meta = {
     height: { control: 'text' },
     width: { control: 'text' },
     color: { control: 'select', options: colorOptions },
+    title: { control: 'text' },
   },
   args: {
     height: 24,

@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgUploadProps extends React.HTMLAttributes<SVGSVGElement> {
+interface UploadProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgUploadProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgUpload = memo(
-  forwardRef<SVGSVGElement, SvgUploadProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgUpload';
-    const titleId = propsTitleId || kebabCase(title);
+const Upload = memo(
+  forwardRef<SVGSVGElement, UploadProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -35,4 +34,4 @@ const SvgUpload = memo(
   }),
 );
 
-export default SvgUpload;
+export default Upload;
