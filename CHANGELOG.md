@@ -1,3 +1,10 @@
+# [1.153.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.152.1...v1.153.0) (2025-06-02)
+
+
+### Features
+
+* **tags:** L3-6498 tags hover ([#635](https://github.com/PhillipsAuctionHouse/seldon/issues/635)) ([bd26828](https://github.com/PhillipsAuctionHouse/seldon/commit/bd268283374acbdb0d21ed6ff26638698022f5ab))
+
 ## [1.152.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.152.0...v1.152.1) (2025-06-02)
 
 
