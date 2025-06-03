@@ -101,4 +101,49 @@ describe('PhoneNumberPicker', () => {
     // Close dropdown
     await userEvent.keyboard('{Escape}');
   });
+
+  it('initializes with provided value', () => {
+    const onChange = vi.fn();
+    render(<PhoneNumberPicker id="phone-picker" labelText="Phone" value="US" onChange={onChange} />);
+
+    const input = screen.getByTestId('phone-picker-combobox-input');
+    expect(input).toHaveValue('+1'); // US code is +1
+  });
+
+  it('handles selecting a country option', async () => {
+    const onChange = vi.fn();
+    render(<PhoneNumberPicker id="phone-picker" labelText="Phone" onChange={onChange} />);
+
+    const input = screen.getByTestId('phone-picker-combobox-input');
+
+    // Open dropdown
+    await userEvent.click(input);
+
+    // Select an option (Germany - DE)
+    const option = await screen.findByText(/\(DE\)/);
+    await userEvent.click(option);
+
+    // Check if onChange was called with the right value and option
+    expect(onChange).toHaveBeenCalledWith(
+      'DE',
+      expect.objectContaining({
+        value: 'DE',
+        displayValue: '+49',
+      }),
+    );
+  });
+
+  it('calls the original onBlur handler', async () => {
+    const onBlur = vi.fn();
+    render(<PhoneNumberPicker id="phone-picker" labelText="Phone" onBlur={onBlur} />);
+
+    const input = screen.getByTestId('phone-picker-combobox-input');
+
+    // Focus and then blur the input
+    await userEvent.click(input);
+    await userEvent.tab();
+
+    // Check if original onBlur was called
+    expect(onBlur).toHaveBeenCalled();
+  });
 });
