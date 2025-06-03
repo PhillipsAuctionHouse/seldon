@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgPauseProps extends React.HTMLAttributes<SVGSVGElement> {
+interface PauseProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgPauseProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgPause = memo(
-  forwardRef<SVGSVGElement, SvgPauseProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgPause';
-    const titleId = propsTitleId || kebabCase(title);
+const Pause = memo(
+  forwardRef<SVGSVGElement, PauseProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -37,4 +36,4 @@ const SvgPause = memo(
   }),
 );
 
-export default SvgPause;
+export default Pause;

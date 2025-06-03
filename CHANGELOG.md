@@ -1,3 +1,31 @@
+# [1.153.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.152.1...v1.153.0) (2025-06-02)
+
+
+### Features
+
+* **tags:** L3-6498 tags hover ([#635](https://github.com/PhillipsAuctionHouse/seldon/issues/635)) ([bd26828](https://github.com/PhillipsAuctionHouse/seldon/commit/bd268283374acbdb0d21ed6ff26638698022f5ab))
+
+## [1.152.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.152.0...v1.152.1) (2025-06-02)
+
+
+### Bug Fixes
+
+* **Icons:** L3-6793 L3-6740 fix svg titles ([#632](https://github.com/PhillipsAuctionHouse/seldon/issues/632)) ([6b4ee2a](https://github.com/PhillipsAuctionHouse/seldon/commit/6b4ee2acdcd61f382b2651e8b1d2122ef27fb352))
+
+# [1.152.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.151.1...v1.152.0) (2025-05-30)
+
+
+### Features
+
+* **calendarIcon:** L3-6826 Update calendar icon hover style ([#633](https://github.com/PhillipsAuctionHouse/seldon/issues/633)) ([27004ea](https://github.com/PhillipsAuctionHouse/seldon/commit/27004ea0a949063b5a706b9e871c2e97706e2ff9))
+
+## [1.151.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.151.0...v1.151.1) (2025-05-30)
+
+
+### Bug Fixes
+
+* **FavoritesCollectionTile:** L3-6739 Small issues ([#623](https://github.com/PhillipsAuctionHouse/seldon/issues/623)) ([faca1ed](https://github.com/PhillipsAuctionHouse/seldon/commit/faca1ed9bc886ce82e235fb96a537d27d487c367))
+
 # [1.151.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.150.1...v1.151.0) (2025-05-28)
 
 

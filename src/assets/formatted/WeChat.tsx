@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgWeChatProps extends React.HTMLAttributes<SVGSVGElement> {
+interface WeChatProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgWeChatProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgWeChat = memo(
-  forwardRef<SVGSVGElement, SvgWeChatProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgWeChat';
-    const titleId = propsTitleId || kebabCase(title);
+const WeChat = memo(
+  forwardRef<SVGSVGElement, WeChatProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -37,4 +36,4 @@ const SvgWeChat = memo(
   }),
 );
 
-export default SvgWeChat;
+export default WeChat;

@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgFiltersProps extends React.HTMLAttributes<SVGSVGElement> {
+interface FiltersProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgFiltersProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgFilters = memo(
-  forwardRef<SVGSVGElement, SvgFiltersProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgFilters';
-    const titleId = propsTitleId || kebabCase(title);
+const Filters = memo(
+  forwardRef<SVGSVGElement, FiltersProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -39,4 +38,4 @@ const SvgFilters = memo(
   }),
 );
 
-export default SvgFilters;
+export default Filters;

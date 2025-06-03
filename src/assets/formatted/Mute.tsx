@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgMuteProps extends React.HTMLAttributes<SVGSVGElement> {
+interface MuteProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgMuteProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgMute = memo(
-  forwardRef<SVGSVGElement, SvgMuteProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgMute';
-    const titleId = propsTitleId || kebabCase(title);
+const Mute = memo(
+  forwardRef<SVGSVGElement, MuteProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -47,4 +46,4 @@ const SvgMute = memo(
   }),
 );
 
-export default SvgMute;
+export default Mute;

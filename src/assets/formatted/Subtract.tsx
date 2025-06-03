@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgSubtractProps extends React.HTMLAttributes<SVGSVGElement> {
+interface SubtractProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgSubtractProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgSubtract = memo(
-  forwardRef<SVGSVGElement, SvgSubtractProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgSubtract';
-    const titleId = propsTitleId || kebabCase(title);
+const Subtract = memo(
+  forwardRef<SVGSVGElement, SubtractProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -34,4 +33,4 @@ const SvgSubtract = memo(
   }),
 );
 
-export default SvgSubtract;
+export default Subtract;

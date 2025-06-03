@@ -5,10 +5,26 @@
     height: 30px;
     width: 30px;
   }
-
   .#{$px}-icon-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background: transparent;
+    }
+
+    svg path {
+      transition: fill 0.25s ease-in-out;
+    }
+
+    svg:hover path {
+      fill: $button-hover;
+    }
+
     &:focus-visible {
       border-radius: 5px;
+      outline: 1px solid $medium-gray;
     }
   }
 

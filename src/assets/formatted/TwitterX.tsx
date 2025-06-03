@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgXProps extends React.HTMLAttributes<SVGSVGElement> {
+interface TwitterXProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgXProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgX = memo(
-  forwardRef<SVGSVGElement, SvgXProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgX';
-    const titleId = propsTitleId || kebabCase(title);
+const TwitterX = memo(
+  forwardRef<SVGSVGElement, TwitterXProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -37,4 +36,4 @@ const SvgX = memo(
   }),
 );
 
-export default SvgX;
+export default TwitterX;

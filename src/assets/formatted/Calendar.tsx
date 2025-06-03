@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 import { kebabCase } from 'change-case';
 
-interface SvgCalendarProps extends React.HTMLAttributes<SVGSVGElement> {
+interface CalendarProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
   height?: number | string;
   width?: number | string;
@@ -9,11 +9,10 @@ interface SvgCalendarProps extends React.HTMLAttributes<SVGSVGElement> {
   titleId?: string;
 }
 
-const SvgCalendar = memo(
-  forwardRef<SVGSVGElement, SvgCalendarProps>((props, ref) => {
-    const { color, height, width, title: propsTitle, titleId: propsTitleId } = props;
-    const title = propsTitle || 'SvgCalendar';
-    const titleId = propsTitleId || kebabCase(title);
+const Calendar = memo(
+  forwardRef<SVGSVGElement, CalendarProps>((props, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = props;
+    const titleId = propsTitleId || kebabCase(title || '');
 
     return (
       <svg
@@ -39,4 +38,4 @@ const SvgCalendar = memo(
   }),
 );
 
-export default SvgCalendar;
+export default Calendar;

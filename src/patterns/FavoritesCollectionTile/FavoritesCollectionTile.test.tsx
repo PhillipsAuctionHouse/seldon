@@ -56,9 +56,9 @@ describe('FavoritesCollectionTile', () => {
     expect(screen.getByText('1 LOT')).toBeInTheDocument();
   });
 
-  it('shows dropdown menu when not in favorites view', () => {
+  it('does not show dropdown menu in favorites view', () => {
     render(<FavoritesCollectionTile {...defaultProps} variant="favorites" />);
-    expect(screen.getByTestId('menu-trigger')).toBeInTheDocument();
+    expect(screen.queryByTestId('menu-trigger')).not.toBeInTheDocument();
   });
 
   it('hides dropdown menu when in favorites view', () => {
