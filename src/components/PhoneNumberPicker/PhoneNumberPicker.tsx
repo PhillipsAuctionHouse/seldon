@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { CountryCode, getCountries, getCountryCallingCode } from 'libphonenumber-js';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { getCommonProps } from '../../utils';
 import ComboBox, { ComboBoxProps } from '../ComboBox/ComboBox';
 import { ComboBoxOption } from '../ComboBox/types';
@@ -25,10 +25,10 @@ const PhoneNumberPicker = React.forwardRef<HTMLDivElement, PhoneNumberPickerProp
   const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'PhoneNumberPicker');
 
   // Track the last explicitly selected country
-  const lastSelectedCountry = React.useRef(value);
+  // We need to do this because some countries have the same display value
+  const lastSelectedCountry = useRef(value);
 
-  // Update ref when value prop changes
-  React.useEffect(() => {
+  useEffect(() => {
     if (value) {
       lastSelectedCountry.current = value;
     }

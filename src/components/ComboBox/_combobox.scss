@@ -32,17 +32,13 @@
 
     @include text($string2);
 
-    &::placeholder {
-      font-variation-settings: 'wght' 400;
+    &:hover {
+      border: 1px solid $primary-black;
     }
 
     &:focus-visible,
     &:focus {
       outline: 1px solid $primary-black;
-    }
-
-    &:hover {
-      border: 1px solid $primary-black;
     }
 
     &--invalid {

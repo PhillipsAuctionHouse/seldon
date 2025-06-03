@@ -121,7 +121,7 @@ export interface ComboBoxProps {
 /**
  * ## Overview
  *
- * This is a ComboBox component that allows users to select from a list of options.
+ * This is a ComboBox component that allows users to select from a list of options or enter a custom value.
  *
  * [Figma Link](https://www.figma.com/design/rIefa3bRPyZbZmtyV9PSQv/My-Account?node-id=1-3&p=f&m=dev)
  *
@@ -421,7 +421,18 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
           {labelText}
         </label>
 
-        <Command shouldFilter={false} loop={true} className={`${baseClassName}__command-wrapper`}>
+        <Command
+          loop
+          onKeyDown={(e) => {
+            setTimeout(() => {
+              if (e.key === 'Escape') {
+                setIsOpen(false);
+              }
+            }, 0);
+          }}
+          shouldFilter={false}
+          className={`${baseClassName}__command-wrapper`}
+        >
           <Popover.Root
             open={isOpen}
             modal={false}
@@ -444,6 +455,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                   placeholder={placeholder}
                   value={inputValue}
                   onValueChange={handleInputChange}
+                  tabIndex={0}
                   onFocus={() => {
                     if (filteredOptions.length > 0 && !justSelectedRef.current) {
                       setIsOpen(true);
