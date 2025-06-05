@@ -137,20 +137,21 @@
   }
 
   &__item {
-    background-color: $pale-gray;
+    background-color: $white;
     padding: $padding-micro $padding-xsm;
     transition: background-color 0.1s ease;
 
     @include text($string2);
 
-    &:hover {
+    &:hover,
+    &[data-selected='true'] {
       background-color: $light-gray;
       cursor: pointer;
     }
 
-    &[data-selected='true'],
     &--selected {
       background-color: $light-gray;
+      font-variation-settings: 'wght' 600;
     }
   }
 

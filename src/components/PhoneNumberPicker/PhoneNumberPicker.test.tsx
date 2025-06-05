@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { useState } from 'react';
 import { vi } from 'vitest';
 
 import { runCommonTests } from '../../utils/testUtils';
@@ -11,8 +10,6 @@ describe('PhoneNumberPicker', () => {
   const reqProps = {
     labelText: 'Test Phone Number',
     id: 'test-id',
-    setInputValue: () => vi.fn(),
-    inputValue: '',
   };
 
   it('should be able to select country with country code and display the dialing code', async () => {
@@ -63,9 +60,8 @@ describe('PhoneNumberPicker', () => {
   it('should be able to input a country code directly', async () => {
     // Don't pass inputValue and setInputValue as props to override the state
     const PhoneNumberPickerWrapper = () => {
-      const [inputValue, setInputValue] = useState('');
       return (
-        <PhoneNumberPicker labelText="Test Label" id="test-id" inputValue={inputValue} setInputValue={setInputValue} />
+        <PhoneNumberPicker labelText="Test Label" id="test-id" />
       );
     };
 

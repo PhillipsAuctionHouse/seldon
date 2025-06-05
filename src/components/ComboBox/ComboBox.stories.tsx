@@ -22,10 +22,10 @@ const birthdays: ComboBoxOption[] = Array.from({ length: 2025 - 1990 + 1 }, (_, 
 
 export const Playground = (props: ComboBoxProps) => {
   const [value, setValue] = React.useState<string>('');
-  const [inputValue, setInputValue] = React.useState('');
+
   return (
     <div style={{ height: '300px', width: '400px' }}>
-      <ComboBox {...props} value={value} onChange={setValue} inputValue={inputValue} setInputValue={setInputValue} />
+      <ComboBox {...props} value={value} onChange={setValue} />
     </div>
   );
 };
@@ -49,17 +49,13 @@ Playground.argTypes = {
   getOptionLabel: { control: false },
   renderOption: { control: false },
   onChange: { control: false },
-  setInputValue: { control: false },
   value: { control: false },
-  inputValue: { control: false },
 };
 
 export const ComboBoxInDrawer = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [drawerValue, setDrawerValue] = React.useState('');
-  const [drawerInputValue, setDrawerInputValue] = React.useState('');
   const [outsideValue, setOutsideValue] = React.useState('');
-  const [outsideInputValue, setOutsideInputValue] = React.useState('');
   const drawerContentRef = React.useRef<HTMLDivElement>(null);
 
   return (
@@ -73,8 +69,6 @@ export const ComboBoxInDrawer = () => {
             labelText="Birth Year (Outside)"
             value={outsideValue}
             onChange={(newValue) => setOutsideValue(newValue)}
-            inputValue={outsideInputValue}
-            setInputValue={setOutsideInputValue}
           />
         </div>
       </div>
@@ -86,7 +80,6 @@ export const ComboBoxInDrawer = () => {
         isOpen={isOpen}
         onClose={() => {
           setIsOpen(false);
-          setDrawerInputValue('');
           setDrawerValue('');
         }}
       >
@@ -97,8 +90,6 @@ export const ComboBoxInDrawer = () => {
             labelText="Birth Year (In Drawer)"
             value={drawerValue}
             onChange={(newValue) => setDrawerValue(newValue)}
-            inputValue={drawerInputValue}
-            setInputValue={setDrawerInputValue}
             popoverContainerRef={drawerContentRef}
           />
         </div>
@@ -148,7 +139,6 @@ const countries: ComboBoxOption[] = [
 
 export const GetOptionLabelExample = () => {
   const [value, setValue] = React.useState<string>('');
-  const [inputValue, setInputValue] = React.useState('');
 
   const customGetOptionLabel = (option: ComboBoxOption) => {
     return `${option.label} - ${option.displayValue}`;
@@ -162,8 +152,6 @@ export const GetOptionLabelExample = () => {
         labelText="Country"
         value={value}
         onChange={(newValue) => setValue(newValue)}
-        inputValue={inputValue}
-        setInputValue={setInputValue}
         getOptionLabel={customGetOptionLabel}
         placeholder="Select or search a country"
       />
@@ -172,7 +160,6 @@ export const GetOptionLabelExample = () => {
           This example demonstrates a custom <code>getOptionLabel</code> function that combines label and displayValue.
         </p>
         <p>Selected value: {value || 'none'}</p>
-        <p>Input value: {inputValue}</p>
       </div>
     </div>
   );
@@ -180,7 +167,6 @@ export const GetOptionLabelExample = () => {
 
 export const CustomRendering = () => {
   const [value, setValue] = React.useState<string>('');
-  const [inputValue, setInputValue] = React.useState('');
 
   const renderOption = (option: ComboBoxOption) => (
     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -206,8 +192,6 @@ export const CustomRendering = () => {
         labelText="Country"
         value={value}
         onChange={(newValue) => setValue(newValue)}
-        inputValue={inputValue}
-        setInputValue={setInputValue}
         renderOption={renderOption}
         placeholder="Select or search a country"
       />
@@ -216,7 +200,6 @@ export const CustomRendering = () => {
           This example demonstrates a custom <code>renderOption</code> function to style dropdown items.
         </p>
         <p>Selected value: {value || 'none'}</p>
-        <p>Input value: {inputValue}</p>
       </div>
     </div>
   );
@@ -224,7 +207,6 @@ export const CustomRendering = () => {
 
 export const FilterTermsExample = () => {
   const [value, setValue] = React.useState<string>('');
-  const [inputValue, setInputValue] = React.useState('');
 
   return (
     <div style={{ width: '400px' }}>
@@ -234,8 +216,6 @@ export const FilterTermsExample = () => {
         labelText="Country"
         value={value}
         onChange={(newValue) => setValue(newValue)}
-        inputValue={inputValue}
-        setInputValue={setInputValue}
         placeholder="Try typing 'united', 'deutschland', etc."
       />
       <div style={{ marginTop: '20px' }}>
@@ -253,7 +233,6 @@ export const FilterTermsExample = () => {
 
 export const Phone = () => {
   const [value, setValue] = React.useState<string>('');
-  const [inputValue, setInputValue] = React.useState('');
   // Track the last explicitly selected country to preserve it
   const lastSelectedRef = React.useRef('');
 
@@ -301,14 +280,11 @@ export const Phone = () => {
         value={value}
         onChange={handleChange}
         onBlur={handleBlur}
-        inputValue={inputValue}
-        setInputValue={setInputValue}
         placeholder="Select country code"
       />
       <div style={{ marginTop: '20px' }}>
         <p>This example demonstrates selection of options with duplicate display values.</p>
         <p>Selected value: {value || 'none'}</p>
-        <p>Input value: {inputValue}</p>
         <p>Last explicitly selected: {lastSelectedRef.current || 'none'}</p>
         <p>Note: Both US and Canada have +1 as display value, but selection is preserved on blur.</p>
       </div>
