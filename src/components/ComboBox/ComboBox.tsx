@@ -78,11 +78,6 @@ export interface ComboBoxProps {
    */
   ariaLabelContent?: string;
   /**
-   * If true, the input will be cleared when the user clicks away when the input value is not in the options list.
-   * @default true
-   */
-  autoClearInput?: boolean;
-  /**
    * popoverContainer ref for the ComboBox
    */
   popoverContainerRef?: React.RefObject<HTMLElement>;
@@ -96,13 +91,6 @@ export interface ComboBoxProps {
    * Handler called when the combobox loses focus
    */
   onBlur?: React.FocusEventHandler<HTMLDivElement>;
-
-  /**
-   * When true, preserve the explicitly selected option value
-   * even when the display value matches multiple options
-   * @default false
-   */
-  preserveExplicitSelection?: boolean;
 }
 /**
  * ## Overview
@@ -131,12 +119,10 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     ariaLabelClear,
     ariaLabelContent,
     hideLabel = false,
-    autoClearInput = true,
     popoverContainerRef,
     noOptionsMessage = 'No Options.',
     invalid = false,
     invalidText,
-    preserveExplicitSelection = true,
     ...props
   },
   ref,
@@ -233,7 +219,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
   };
 
   // Handle clearing the input
-  const handleClear = (e) => {
+  const handleClear = (e: React.MouseEvent<HTMLButtonElement>) => {
     handleOpen(false);
     // don't reopen the dropdown when cleared
     justSelectedRef.current = true;
@@ -284,7 +270,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
 
   const inputDisplayValue = useMemo(() => {
     /** calculate initial input value if the externalValue or options wasn't set when the setState was called */
-    if (isValueControlled && !selectedOption) {
+    if (isValueControlled) {
       const option = options.find((opt) => opt.value === externalValue);
       if (!option) {
         return inputValue; // no match found, bogus external value
@@ -292,7 +278,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
       return option.displayValue ?? memoizedGetOptionLabel(option);
     }
     return inputValue;
-  }, [inputValue, isValueControlled, selectedOption, options, memoizedGetOptionLabel, externalValue]);
+  }, [inputValue, isValueControlled, options, memoizedGetOptionLabel, externalValue]);
 
   const handleOpen = (isOpen: boolean) => {
     setIsOpen(isOpen);
@@ -309,6 +295,18 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
           });
         }
       });
+    }
+  };
+
+  /**
+   * Triggered when changing inputText but leaving the field without selecting a new value should reset to the previous selected option
+   */
+  const resetInputDisplayValueIfNoMatch = (matchedOption?: ComboBoxOption | null) => {
+    if (selectedOption) {
+      const displayText = selectedOption.displayValue || memoizedGetOptionLabel(selectedOption);
+      if (displayText !== inputDisplayValue && !matchedOption) {
+        setInputValue(displayText);
+      }
     }
   };
 
@@ -334,32 +332,13 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
       return optionLabel === inputLower || optionValue === inputLower || optionDisplay === inputLower;
     });
 
-    // If preserving explicit selections and we have a selected option
-    if (preserveExplicitSelection && selectedOption) {
-      const displayText = selectedOption.displayValue || memoizedGetOptionLabel(selectedOption);
-
-      // If the input value matches our selected option's display value,
-      // just restore the display value and don't change the selection
-      if (displayText.toLowerCase() === inputValue.toLowerCase()) {
-        setInputValue(displayText);
-        handleOpen(false);
-        return;
-      }
-    }
-
     if (matchedOption) {
       // If match found, select it
       handleOptionSelect(matchedOption);
     } else {
       // Always allow custom input values, regardless of selection state
-      if (selectedOption && autoClearInput) {
-        const displayText = selectedOption.displayValue || memoizedGetOptionLabel(selectedOption);
-        setInputValue(displayText);
-      } else if (autoClearInput && !inputValue.trim()) {
-        setInputValue('');
-      } else if (onChange) {
-        // Always keep custom values
-        onChange(inputValue, null);
+      if (selectedOption) {
+        resetInputDisplayValueIfNoMatch();
       }
     }
 
@@ -429,13 +408,13 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                   }}
                   onClick={(e) => {
                     e.preventDefault();
-
-                    // Focus the input to allow typing
+                    // Focus the input to allow typing because when the Popover opens it steals focus
                     e.currentTarget.focus();
                   }}
                   onKeyDown={(e) => {
                     if (e.key === 'Tab') {
                       handleOpen(false);
+                      resetInputDisplayValueIfNoMatch();
                     } else if (e.key === 'Enter' && !isOpen) {
                       // Only handle Enter when dropdown is closed
                       // Always allow submitting the current input value
@@ -453,6 +432,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                     } else if (e.key === 'Escape') {
                       handleOpen(false);
                       e.preventDefault();
+                      resetInputDisplayValueIfNoMatch();
                     } else if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && !isOpen) {
                       if (filteredOptions.length > 0) {
                         handleOpen(true);

@@ -60,9 +60,7 @@ describe('PhoneNumberPicker', () => {
   it('should be able to input a country code directly', async () => {
     // Don't pass inputValue and setInputValue as props to override the state
     const PhoneNumberPickerWrapper = () => {
-      return (
-        <PhoneNumberPicker labelText="Test Label" id="test-id" />
-      );
+      return <PhoneNumberPicker labelText="Test Label" id="test-id" />;
     };
 
     render(<PhoneNumberPickerWrapper />);

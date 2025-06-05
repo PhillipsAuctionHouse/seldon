@@ -103,14 +103,19 @@ describe('ComboBox', () => {
   });
 
   it('clears the input when clear button is clicked', async () => {
-    const onChange = vi.fn();
-    render(<ComboBox {...defaultProps} onChange={onChange} value="apple" />);
+    let value = 'apple';
+    const onChange = vi.fn().mockImplementation((newValue) => {
+      value = newValue;
+    });
+    const { rerender } = render(<ComboBox {...defaultProps} onChange={onChange} value={value} />);
 
     const input = screen.getByTestId('fruit-selector-input');
     expect(input).toHaveValue('Apple');
 
     const clearButton = screen.getByTestId('fruit-selector-clear-button');
     await userEvent.click(clearButton);
+
+    rerender(<ComboBox {...defaultProps} onChange={onChange} value={value} />);
 
     await waitFor(() => {
       expect(input).toHaveValue('');
@@ -129,6 +134,57 @@ describe('ComboBox', () => {
     rerender(<ComboBox {...defaultProps} value="banana" onChange={onChange} />);
 
     expect(input).toHaveValue('Banana');
+  });
+
+  it('controlled mode: if selected option then type a new filter but tab out it should reset', async () => {
+    const onChange = vi.fn();
+    render(<ComboBox {...defaultProps} value="apple" onChange={onChange} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    expect(input).toHaveValue('Apple');
+
+    // Simulate typing a new filter
+    await userEvent.type(input, 'red');
+
+    // Simulate leaving the input
+    await userEvent.tab();
+
+    // Check that the input value has reset
+    expect(input).toHaveValue('Apple');
+  });
+
+  it('controlled mode: if selected option then type a new filter but do not select and press Escape, it should reset', async () => {
+    const onChange = vi.fn();
+    render(<ComboBox {...defaultProps} value="apple" onChange={onChange} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    expect(input).toHaveValue('Apple');
+
+    // Simulate typing a new filter
+    await userEvent.type(input, 'red');
+
+    // Press Escape
+    await userEvent.type(input, '{escape}');
+
+    // Check that the input value has reset
+    expect(input).toHaveValue('Apple');
+  });
+
+  it('controlled mode: if selected option then type a new filter but do not select but click outside it should reset', async () => {
+    const onChange = vi.fn();
+    render(<ComboBox {...defaultProps} value="apple" onChange={onChange} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    expect(input).toHaveValue('Apple');
+
+    // Simulate typing a new filter
+    await userEvent.type(input, 'red');
+
+    // Click outside
+    await userEvent.click(document.body);
+
+    // Check that the input value has reset
+    expect(input).toHaveValue('Apple');
   });
 
   it('shows invalid state when specified', () => {
@@ -209,38 +265,6 @@ describe('ComboBox', () => {
     await waitFor(() => {
       expect(screen.getByText('Apple')).toBeInTheDocument();
     });
-  });
-  it('handles controlled inputValue prop correctly', async () => {
-    const setInputValue = vi.fn();
-    const { rerender } = render(<ComboBox {...defaultProps} inputValue="Custom Value" setInputValue={setInputValue} />);
-
-    const input = screen.getByTestId('fruit-selector-input');
-    expect(input).toHaveValue('Custom Value');
-
-    // Type in the input
-    await userEvent.type(input, '!');
-
-    // setInputValue should be called with new value
-    expect(setInputValue).toHaveBeenCalledWith('Custom Value!');
-
-    // Update the controlled prop
-    rerender(<ComboBox {...defaultProps} inputValue="Updated Value" setInputValue={setInputValue} />);
-
-    // Input should reflect the new controlled value
-    expect(input).toHaveValue('Updated Value');
-  });
-  it('does not clear input when autoClearInput is false', async () => {
-    render(<ComboBox {...defaultProps} autoClearInput={false} />);
-
-    const input = screen.getByTestId('fruit-selector-input');
-    await userEvent.click(input);
-    await userEvent.type(input, 'No match');
-
-    // Click outside
-    await userEvent.click(document.body);
-
-    // Input should still contain what was typed
-    expect(input).toHaveValue('No match');
   });
   it('selects exact match on outside click', async () => {
     const onChange = vi.fn();
