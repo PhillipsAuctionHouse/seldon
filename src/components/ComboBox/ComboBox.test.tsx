@@ -57,6 +57,15 @@ describe('ComboBox', () => {
     });
   });
 
+  it('backspace should remove one character at a time', async () => {
+    render(<ComboBox {...defaultProps} value="apple" />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+    await userEvent.type(input, '{backspace}'); // Remove one char
+    expect(input).toHaveValue('Appl'); // Should still show partial input
+  });
+
   it('filters options using filterTerms', async () => {
     render(<ComboBox {...defaultProps} />);
 

@@ -8,6 +8,7 @@ import { getCommonProps, useNormalizedInputProps } from '../../utils';
 import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 import { ComboBoxOption } from './types';
+import { usePrevious } from '../../utils/usePrevious';
 
 export interface ComboBoxProps {
   /**
@@ -139,6 +140,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
 
   const [isOpen, setIsOpen] = useState(false);
   const [internalValue, setInternalValue] = useState('');
+  const previousExternalValue = usePrevious(externalValue);
   /**
    * to support setting an input display value that's different from the label from a selected option
    */
@@ -269,16 +271,37 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
   };
 
   const inputDisplayValue = useMemo(() => {
-    /** calculate initial input value if the externalValue or options wasn't set when the setState was called */
+    /**
+     * calculate initial input value if the externalValue or options wasn't set when the setState was called to support lazy loading
+     * Check selectedOption because if the inputText has been changed and it doesn't match this means we're in the process of editing
+     */
     if (isValueControlled) {
-      const option = options.find((opt) => opt.value === externalValue);
-      if (!option) {
-        return inputValue; // no match found, bogus external value
+      // Handle if the external value was changed OUTSIDE of the Combobox interaction
+      if (externalValue !== previousExternalValue) {
+        const updatedExternalValue = options.find((opt) => opt.value === externalValue);
+        if (!updatedExternalValue) {
+          return inputValue;
+        }
+        const displayText = updatedExternalValue?.displayValue || memoizedGetOptionLabel(updatedExternalValue);
+        return displayText;
+      } else if (selectedOption) {
+        const displayText = selectedOption.displayValue || memoizedGetOptionLabel(selectedOption);
+        // If displayText doesn't equal inputValue this means the user is in progress of typing in the input
+        return displayText !== inputValue ? inputValue : displayText;
+      } else {
+        return inputValue;
       }
-      return option.displayValue ?? memoizedGetOptionLabel(option);
     }
     return inputValue;
-  }, [inputValue, isValueControlled, options, memoizedGetOptionLabel, externalValue]);
+  }, [
+    isValueControlled,
+    inputValue,
+    externalValue,
+    previousExternalValue,
+    selectedOption,
+    options,
+    memoizedGetOptionLabel,
+  ]);
 
   const handleOpen = (isOpen: boolean) => {
     setIsOpen(isOpen);
