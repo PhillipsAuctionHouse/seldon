@@ -1,3 +1,10 @@
+# [1.154.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.153.0...v1.154.0) (2025-06-05)
+
+
+### Features
+
+* **_button:** L3-4546 button padding fix ([#636](https://github.com/PhillipsAuctionHouse/seldon/issues/636)) ([1bba66f](https://github.com/PhillipsAuctionHouse/seldon/commit/1bba66f4a522199306366d4e3124af9f5e13c29e))
+
 # [1.153.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.152.1...v1.153.0) (2025-06-02)
 
 
