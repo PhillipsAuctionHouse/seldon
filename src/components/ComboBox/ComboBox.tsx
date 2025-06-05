@@ -176,6 +176,13 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
       return options;
     }
 
+    if (
+      selectedOption &&
+      (inputValue === selectedOption?.displayValue || inputValue === memoizedGetOptionLabel(selectedOption))
+    ) {
+      return options; // return all options if input matches the selected option's display value
+    }
+
     const searchTerm = inputValue.toLowerCase().trim();
 
     return options.filter((option) => {
@@ -192,7 +199,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
 
       return labelMatch || valueMatch || displayValueMatch || filterTermsMatch;
     });
-  }, [options, inputValue, memoizedGetOptionLabel]);
+  }, [inputValue, selectedOption, memoizedGetOptionLabel, options]);
 
   // Handle option selection
   const handleOptionSelect = (option: ComboBoxOption) => {
@@ -278,11 +285,10 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     if (isValueControlled) {
       // Handle if the external value was changed OUTSIDE of the Combobox interaction
       if (externalValue !== previousExternalValue) {
-        const updatedExternalValue = options.find((opt) => opt.value === externalValue);
-        if (!updatedExternalValue) {
+        if (!selectedOption) {
           return inputValue;
         }
-        const displayText = updatedExternalValue?.displayValue || memoizedGetOptionLabel(updatedExternalValue);
+        const displayText = selectedOption?.displayValue || memoizedGetOptionLabel(selectedOption);
         return displayText;
       } else if (selectedOption) {
         const displayText = selectedOption.displayValue || memoizedGetOptionLabel(selectedOption);
@@ -293,15 +299,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
       }
     }
     return inputValue;
-  }, [
-    isValueControlled,
-    inputValue,
-    externalValue,
-    previousExternalValue,
-    selectedOption,
-    options,
-    memoizedGetOptionLabel,
-  ]);
+  }, [isValueControlled, inputValue, externalValue, previousExternalValue, selectedOption, memoizedGetOptionLabel]);
 
   const handleOpen = (isOpen: boolean) => {
     setIsOpen(isOpen);
@@ -330,6 +328,9 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
       if (displayText !== inputDisplayValue && !matchedOption) {
         setInputValue(displayText);
       }
+    } else {
+      // clear the input if no option was selected
+      setInputValue('');
     }
   };
 
@@ -430,6 +431,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                     }
                   }}
                   onClick={(e) => {
+                    handleOpen(true);
                     e.preventDefault();
                     // Focus the input to allow typing because when the Popover opens it steals focus
                     e.currentTarget.focus();

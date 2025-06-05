@@ -57,6 +57,43 @@ describe('ComboBox', () => {
     });
   });
 
+  it('if input value matches selected option display all', async () => {
+    render(<ComboBox {...defaultProps} value="apple" />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+
+    await waitFor(() => {
+      mockOptions.forEach((option) => {
+        expect(screen.getByText(option.label)).toBeInTheDocument();
+      });
+    });
+  });
+
+  it('clears input value if nothing was selected before leaving', async () => {
+    render(<ComboBox {...defaultProps} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+    await userEvent.type(input, 'ber');
+    await userEvent.tab(); // Leave input without selecting
+    await waitFor(() => {
+      expect(input).toHaveValue('');
+    });
+  });
+
+  it('controlled: clears input value if nothing was selected before leaving', async () => {
+    render(<ComboBox {...defaultProps} value="" />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+    await userEvent.type(input, 'ber');
+    await userEvent.tab(); // Leave input without selecting
+    await waitFor(() => {
+      expect(input).toHaveValue('');
+    });
+  });
+
   it('backspace should remove one character at a time', async () => {
     render(<ComboBox {...defaultProps} value="apple" />);
 
