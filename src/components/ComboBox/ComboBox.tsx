@@ -170,16 +170,17 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     return options.find((option) => option.value === value) || null;
   }, [options, value]);
 
+  const selectedOptionDisplayValue = useMemo(() => {
+    return selectedOption ? selectedOption.displayValue || memoizedGetOptionLabel(selectedOption) : '';
+  }, [selectedOption, memoizedGetOptionLabel]);
+
   // Filtering with support for filterTerms and getOptionLabel
   const filteredOptions = useMemo(() => {
     if (!inputValue) {
       return options;
     }
 
-    if (
-      selectedOption &&
-      (inputValue === selectedOption?.displayValue || inputValue === memoizedGetOptionLabel(selectedOption))
-    ) {
+    if (selectedOption && inputValue === selectedOptionDisplayValue) {
       return options; // return all options if input matches the selected option's display value
     }
 
@@ -199,33 +200,57 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
 
       return labelMatch || valueMatch || displayValueMatch || filterTermsMatch;
     });
-  }, [inputValue, selectedOption, memoizedGetOptionLabel, options]);
+  }, [inputValue, selectedOptionDisplayValue, selectedOption, memoizedGetOptionLabel, options]);
+
+  const handleOpen = useCallback(
+    (isOpen: boolean) => {
+      setIsOpen(isOpen);
+      if (isOpen && selectedOption && filteredOptions.length > 5) {
+        /**
+         * Wait for dropdown to render before scrolling
+         * to ensure the selected option is visible
+         */
+        requestAnimationFrame(() => {
+          if (selectedOptionRef.current) {
+            selectedOptionRef.current.scrollIntoView({
+              block: 'nearest',
+              behavior: 'auto',
+            });
+          }
+        });
+      }
+    },
+    [selectedOption, filteredOptions.length],
+  );
 
   // Handle option selection
-  const handleOptionSelect = (option: ComboBoxOption) => {
-    // Update internal state if uncontrolled
-    if (!isValueControlled) {
-      setInternalValue(option.value);
-    }
+  const handleOptionSelect = useCallback(
+    (option: ComboBoxOption) => {
+      // Update internal state if uncontrolled
+      if (!isValueControlled) {
+        setInternalValue(option.value);
+      }
 
-    // Update input display value
-    const displayText = option.displayValue || memoizedGetOptionLabel(option);
-    setInputValue(displayText);
+      // Update input display value
+      const displayText = option.displayValue || memoizedGetOptionLabel(option);
+      setInputValue(displayText);
 
-    // Call external onChange
-    if (onChange) {
-      onChange(option.value, option);
-    }
+      // Call external onChange
+      if (onChange) {
+        onChange(option.value, option);
+      }
 
-    // Close dropdown
-    handleOpen(false);
+      // Close dropdown
+      handleOpen(false);
 
-    // Focus input after selection
-    justSelectedRef.current = true;
-    requestAnimationFrame(() => {
-      justSelectedRef.current = false;
-    });
-  };
+      // Focus input after selection
+      justSelectedRef.current = true;
+      requestAnimationFrame(() => {
+        justSelectedRef.current = false;
+      });
+    },
+    [isValueControlled, onChange, handleOpen, memoizedGetOptionLabel],
+  );
 
   // Handle clearing the input
   const handleClear = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -264,19 +289,6 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     }
   };
 
-  // Handle blur event
-  const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
-    // If we're in the middle of a selection, don't trigger blur
-    if (justSelectedRef.current) {
-      return;
-    }
-
-    // Call the provided onBlur handler
-    if (onBlur) {
-      onBlur(event);
-    }
-  };
-
   const inputDisplayValue = useMemo(() => {
     /**
      * calculate initial input value if the externalValue or options wasn't set when the setState was called to support lazy loading
@@ -288,10 +300,10 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
         if (!selectedOption) {
           return inputValue;
         }
-        const displayText = selectedOption?.displayValue || memoizedGetOptionLabel(selectedOption);
+        const displayText = selectedOptionDisplayValue;
         return displayText;
       } else if (selectedOption) {
-        const displayText = selectedOption.displayValue || memoizedGetOptionLabel(selectedOption);
+        const displayText = selectedOptionDisplayValue;
         // If displayText doesn't equal inputValue this means the user is in progress of typing in the input
         return displayText !== inputValue ? inputValue : displayText;
       } else {
@@ -299,32 +311,14 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
       }
     }
     return inputValue;
-  }, [isValueControlled, inputValue, externalValue, previousExternalValue, selectedOption, memoizedGetOptionLabel]);
-
-  const handleOpen = (isOpen: boolean) => {
-    setIsOpen(isOpen);
-    if (isOpen && selectedOption && filteredOptions.length > 5) {
-      /**
-       * Wait for dropdown to render before scrolling
-       * to ensure the selected option is visible
-       */
-      requestAnimationFrame(() => {
-        if (selectedOptionRef.current) {
-          selectedOptionRef.current.scrollIntoView({
-            block: 'nearest',
-            behavior: 'auto',
-          });
-        }
-      });
-    }
-  };
+  }, [isValueControlled, inputValue, externalValue, previousExternalValue, selectedOption, selectedOptionDisplayValue]);
 
   /**
    * Triggered when changing inputText but leaving the field without selecting a new value should reset to the previous selected option
    */
   const resetInputDisplayValueIfNoMatch = (matchedOption?: ComboBoxOption | null) => {
     if (selectedOption) {
-      const displayText = selectedOption.displayValue || memoizedGetOptionLabel(selectedOption);
+      const displayText = selectedOptionDisplayValue;
       if (displayText !== inputDisplayValue && !matchedOption) {
         setInputValue(displayText);
       }
@@ -333,6 +327,23 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
       setInputValue('');
     }
   };
+
+  const selectOptionIfExactMatch = useCallback(() => {
+    // Check if input value matches any option
+    const matchedOption = options.filter((option) => {
+      const optionLabel = memoizedGetOptionLabel(option).toLowerCase();
+      const optionValue = option.value.toLowerCase();
+      const optionDisplay = option.displayValue?.toLowerCase();
+      const inputLower = inputValue.toLowerCase();
+
+      return optionLabel === inputLower || optionValue === inputLower || optionDisplay === inputLower;
+    });
+
+    if (matchedOption.length === 1) {
+      // If exact match found, select it
+      handleOptionSelect(matchedOption[0]);
+    }
+  }, [inputValue, options, handleOptionSelect, memoizedGetOptionLabel]);
 
   // Handle clicks outside the component
   useOnClickOutside(containerRef, (event) => {
@@ -344,30 +355,12 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
       event.target === containerRef.current
     ) {
       return;
-    }
-
-    // Check if input value matches any option
-    const matchedOption = options.find((option) => {
-      const optionLabel = memoizedGetOptionLabel(option).toLowerCase();
-      const optionValue = option.value.toLowerCase();
-      const optionDisplay = option.displayValue?.toLowerCase();
-      const inputLower = inputValue.toLowerCase();
-
-      return optionLabel === inputLower || optionValue === inputLower || optionDisplay === inputLower;
-    });
-
-    if (matchedOption) {
-      // If match found, select it
-      handleOptionSelect(matchedOption);
     } else {
-      // Always allow custom input values, regardless of selection state
-      if (selectedOption) {
-        resetInputDisplayValueIfNoMatch();
-      }
+      selectOptionIfExactMatch();
+      resetInputDisplayValueIfNoMatch();
+      // Close dropdown
+      handleOpen(false);
     }
-
-    // Close dropdown
-    handleOpen(false);
   });
 
   return (
@@ -387,7 +380,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
           }}
         />
       )}
-      <div ref={containerRef} onBlur={handleBlur} className={`${baseClassName}__wrapper`}>
+      <div ref={containerRef} className={`${baseClassName}__wrapper`}>
         <label
           htmlFor={`${id}-input`}
           className={classnames(`${baseClassName}__label`, {
@@ -439,6 +432,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                   onKeyDown={(e) => {
                     if (e.key === 'Tab') {
                       handleOpen(false);
+                      selectOptionIfExactMatch();
                       resetInputDisplayValueIfNoMatch();
                     } else if (e.key === 'Enter' && !isOpen) {
                       // Only handle Enter when dropdown is closed
@@ -449,14 +443,11 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                       // If exactly one match, select it
                       if (filteredOptions.length === 1) {
                         handleOptionSelect(filteredOptions[0]);
-                      } else if (filteredOptions.length > 0) {
-                        // Open dropdown if we have options
-                        handleOpen(true);
-                        e.preventDefault();
                       }
                     } else if (e.key === 'Escape') {
                       handleOpen(false);
                       e.preventDefault();
+                      selectOptionIfExactMatch();
                       resetInputDisplayValueIfNoMatch();
                     } else if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && !isOpen) {
                       if (filteredOptions.length > 0) {
@@ -465,6 +456,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                       }
                     }
                   }}
+                  onBlur={onBlur}
                   className={classnames(`${baseClassName}__input`, {
                     [`${baseClassName}__input--invalid`]: invalid,
                   })}

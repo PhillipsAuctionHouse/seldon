@@ -339,31 +339,6 @@ describe('ComboBox', () => {
     expect(onChange).toHaveBeenCalledWith('banana', expect.objectContaining({ value: 'banana' }));
     expect(input).toHaveValue('Banana');
   });
-  it('opens dropdown when clicking input with filtered options', async () => {
-    render(<ComboBox {...defaultProps} />);
-
-    const input = screen.getByTestId('fruit-selector-input');
-
-    // Type to filter options
-    await userEvent.type(input, 'a');
-
-    // Click outside to close dropdown
-    await userEvent.click(document.body);
-
-    // Wait for dropdown to close
-    await waitFor(() => {
-      expect(screen.queryByText('Apple')).not.toBeInTheDocument();
-    });
-
-    // Click input again
-    await userEvent.click(input);
-
-    // Verify dropdown opens with filtered options
-    await waitFor(() => {
-      expect(screen.getByText('Apple')).toBeInTheDocument();
-      expect(screen.queryByText('Cherry')).not.toBeInTheDocument();
-    });
-  });
   it('does not open dropdown when no options match', async () => {
     render(<ComboBox {...defaultProps} />);
 

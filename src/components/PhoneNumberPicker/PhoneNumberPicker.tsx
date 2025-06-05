@@ -21,11 +21,12 @@ export type PhoneNumberPickerProps = Omit<ComboBoxProps, 'options'>;
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-PhoneNumberPicker--overview)
  */
 const PhoneNumberPicker = React.forwardRef<HTMLDivElement, PhoneNumberPickerProps>((props, ref) => {
-  const { className, id, value, onChange, onBlur, ...restProps } = props;
+  const { className, id, value, onChange, ...restProps } = props;
   const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'PhoneNumberPicker');
 
   // Track the last explicitly selected country
   // We need to do this because some countries have the same display value
+  // TODO: can we replace this with usePrevious hook
   const lastSelectedCountry = useRef(value);
 
   useEffect(() => {
@@ -63,25 +64,6 @@ const PhoneNumberPicker = React.forwardRef<HTMLDivElement, PhoneNumberPickerProp
     }
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
-    // If value has changed to another country with same display value,
-    // restore the last explicitly selected country
-    if (value !== lastSelectedCountry.current && lastSelectedCountry.current) {
-      // Call onChange with the stored country
-      if (onChange) {
-        onChange(
-          lastSelectedCountry.current,
-          countryOptions.find((opt) => opt.value === lastSelectedCountry.current) || null,
-        );
-      }
-    }
-
-    // Call the original onBlur handler
-    if (onBlur) {
-      onBlur(e);
-    }
-  };
-
   return (
     <div className={classnames(baseClassName, className)} id={id} {...commonProps}>
       <ComboBox
@@ -91,7 +73,6 @@ const PhoneNumberPicker = React.forwardRef<HTMLDivElement, PhoneNumberPickerProp
         options={countryOptions}
         value={value}
         onChange={handleChange}
-        onBlur={handleBlur}
         {...restProps}
       />
     </div>
