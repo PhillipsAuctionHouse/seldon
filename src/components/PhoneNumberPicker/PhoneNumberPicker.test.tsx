@@ -13,8 +13,8 @@ describe('PhoneNumberPicker', () => {
   };
 
   it('should be able to select country with country code and display the dialing code', async () => {
-    const mockSetInputValue = vi.fn();
-    render(<PhoneNumberPicker {...{ ...reqProps, setInputValue: mockSetInputValue }} />);
+    const mockSetValue = vi.fn();
+    render(<PhoneNumberPicker {...{ ...reqProps, onChange: mockSetValue }} />);
 
     // Use the correct test ID for the dropdown trigger
     const trigger = screen.getByTestId('test-id-combobox-dropdown');
@@ -28,12 +28,12 @@ describe('PhoneNumberPicker', () => {
     await userEvent.click(option);
 
     // Check that input value is set to the dialing code with space
-    expect(mockSetInputValue).toHaveBeenCalledWith('+1');
+    expect(mockSetValue).toHaveBeenCalledWith('US', { displayValue: '+1', label: '(US) +1', value: 'US' });
   });
 
   it('should be able to select an option from the dropdown by keyboard navigation', async () => {
-    const mockSetInputValue = vi.fn();
-    render(<PhoneNumberPicker {...{ ...reqProps, setInputValue: mockSetInputValue }} />);
+    const mockSetValue = vi.fn();
+    render(<PhoneNumberPicker {...{ ...reqProps, onChange: mockSetValue }} />);
 
     // Need to click the input first to set focus for keyboard navigation
     const input = screen.getByTestId('test-id-combobox-input');
@@ -50,11 +50,11 @@ describe('PhoneNumberPicker', () => {
     await userEvent.keyboard('{Enter}');
 
     // Verify the input value is set with correct format
-    expect(mockSetInputValue).toHaveBeenCalled();
+    expect(mockSetValue).toHaveBeenCalled();
 
     // Update the pattern to match actual format (without requiring space)
-    const lastCall = mockSetInputValue.mock.calls[mockSetInputValue.mock.calls.length - 1][0];
-    expect(lastCall).toMatch(/^\+\d+$/); // Format is "+XX"
+    const lastCall = mockSetValue.mock.calls[mockSetValue.mock.calls.length - 1][0];
+    expect(lastCall).toMatch('AF');
   });
 
   it('should be able to input a country code directly', async () => {
