@@ -47,7 +47,6 @@ export interface ComboBoxProps {
    * Handler for value changes for controlled usage
    */
   onChange?: (value: string, option: ComboBoxOption | null) => void;
-  getOptionLabel?: (option: ComboBoxOption) => string;
   /**
    * Function to render custom option content
    * Similar to MUI's renderOption
@@ -113,7 +112,6 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     value: externalValue,
     onChange,
     onBlur,
-    getOptionLabel = (option) => option.label || option.value,
     renderOption,
     ariaLabelDropdown,
     ariaLabelInput,
@@ -141,6 +139,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
   const [isOpen, setIsOpen] = useState(false);
   const [internalValue, setInternalValue] = useState('');
   const previousExternalValue = usePrevious(externalValue);
+  const getOptionLabel = useCallback((option: ComboBoxOption) => option.label || option.value, []);
   /**
    * to support setting an input display value that's different from the label from a selected option
    */
