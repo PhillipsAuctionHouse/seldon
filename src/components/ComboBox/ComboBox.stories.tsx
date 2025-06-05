@@ -46,7 +46,6 @@ Playground.argTypes = {
   disabled: { control: 'boolean' },
   readOnly: { control: 'boolean' },
   popoverContainerRef: { control: false },
-  getOptionLabel: { control: false },
   renderOption: { control: false },
   onChange: { control: false },
   value: { control: false },
@@ -136,34 +135,6 @@ const countries: ComboBoxOption[] = [
     filterTerms: ['Commonwealth of Australia'],
   },
 ];
-
-export const GetOptionLabelExample = () => {
-  const [value, setValue] = React.useState<string>('');
-
-  const customGetOptionLabel = (option: ComboBoxOption) => {
-    return `${option.label} - ${option.displayValue}`;
-  };
-
-  return (
-    <div style={{ width: '400px' }}>
-      <ComboBox
-        options={countries}
-        id="get-option-label-combo"
-        labelText="Country"
-        value={value}
-        onChange={(newValue) => setValue(newValue)}
-        getOptionLabel={customGetOptionLabel}
-        placeholder="Select or search a country"
-      />
-      <div style={{ marginTop: '20px' }}>
-        <p>
-          This example demonstrates a custom <code>getOptionLabel</code> function that combines label and displayValue.
-        </p>
-        <p>Selected value: {value || 'none'}</p>
-      </div>
-    </div>
-  );
-};
 
 export const CustomRendering = () => {
   const [value, setValue] = React.useState<string>('');
