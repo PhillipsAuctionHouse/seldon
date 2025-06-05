@@ -233,7 +233,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
   };
 
   // Handle clearing the input
-  const handleClear = (e) => {
+  const handleClear = (e: React.MouseEvent<HTMLButtonElement>) => {
     handleOpen(false);
     // don't reopen the dropdown when cleared
     justSelectedRef.current = true;
