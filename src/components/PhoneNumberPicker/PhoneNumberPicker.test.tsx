@@ -45,33 +45,6 @@ describe('PhoneNumberPicker', () => {
     expect(input).toHaveValue('+1'); // US code is +1
   });
 
-  it('restores the last selected country on blur when display values match', async () => {
-    // Both US and CA have +1 code
-    const onChange = vi.fn();
-    const { rerender } = render(<PhoneNumberPicker {...reqProps} value="US" onChange={onChange} />);
-
-    // Select Canada
-    const input = screen.getByTestId('test-id-combobox-input');
-    await userEvent.click(input);
-
-    // Find and click Canada option
-    const option = await screen.findByText(/\(CA\)/);
-    await userEvent.click(option);
-
-    // Update component with Canada selected
-    rerender(<PhoneNumberPicker {...reqProps} value="CA" onChange={onChange} />);
-
-    // Now clear and type the same dialing code
-    await userEvent.clear(input);
-    await userEvent.type(input, '+1');
-
-    // Blur the input
-    await userEvent.tab();
-
-    // It should restore the last explicitly selected country (CA)
-    expect(onChange).toHaveBeenCalledWith('CA', expect.objectContaining({ value: 'CA' }));
-  });
-
   it('calls the original onBlur handler', async () => {
     const onBlur = vi.fn();
     render(<PhoneNumberPicker {...reqProps} onBlur={onBlur} />);

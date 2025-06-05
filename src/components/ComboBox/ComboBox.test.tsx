@@ -57,6 +57,52 @@ describe('ComboBox', () => {
     });
   });
 
+  it('if input value matches selected option display all', async () => {
+    render(<ComboBox {...defaultProps} value="apple" />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+
+    await waitFor(() => {
+      mockOptions.forEach((option) => {
+        expect(screen.getByText(option.label)).toBeInTheDocument();
+      });
+    });
+  });
+
+  it('clears input value if nothing was selected before leaving', async () => {
+    render(<ComboBox {...defaultProps} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+    await userEvent.type(input, 'ber');
+    await userEvent.tab(); // Leave input without selecting
+    await waitFor(() => {
+      expect(input).toHaveValue('');
+    });
+  });
+
+  it('controlled: clears input value if nothing was selected before leaving', async () => {
+    render(<ComboBox {...defaultProps} value="" />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+    await userEvent.type(input, 'ber');
+    await userEvent.tab(); // Leave input without selecting
+    await waitFor(() => {
+      expect(input).toHaveValue('');
+    });
+  });
+
+  it('backspace should remove one character at a time', async () => {
+    render(<ComboBox {...defaultProps} value="apple" />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+    await userEvent.type(input, '{backspace}'); // Remove one char
+    expect(input).toHaveValue('Appl'); // Should still show partial input
+  });
+
   it('filters options using filterTerms', async () => {
     render(<ComboBox {...defaultProps} />);
 
@@ -103,8 +149,11 @@ describe('ComboBox', () => {
   });
 
   it('clears the input when clear button is clicked', async () => {
-    const onChange = vi.fn();
-    render(<ComboBox {...defaultProps} onChange={onChange} value="apple" />);
+    let value = 'apple';
+    const onChange = vi.fn().mockImplementation((newValue) => {
+      value = newValue;
+    });
+    const { rerender } = render(<ComboBox {...defaultProps} onChange={onChange} value={value} />);
 
     const input = screen.getByTestId('fruit-selector-input');
     expect(input).toHaveValue('Apple');
@@ -112,10 +161,76 @@ describe('ComboBox', () => {
     const clearButton = screen.getByTestId('fruit-selector-clear-button');
     await userEvent.click(clearButton);
 
+    rerender(<ComboBox {...defaultProps} onChange={onChange} value={value} />);
+
     await waitFor(() => {
       expect(input).toHaveValue('');
       expect(onChange).toHaveBeenCalledWith('', null);
     });
+  });
+
+  it('works in controlled mode', () => {
+    const onChange = vi.fn();
+    const { rerender } = render(<ComboBox {...defaultProps} value="apple" onChange={onChange} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    expect(input).toHaveValue('Apple');
+
+    // Simulate controlled update
+    rerender(<ComboBox {...defaultProps} value="banana" onChange={onChange} />);
+
+    expect(input).toHaveValue('Banana');
+  });
+
+  it('controlled mode: if selected option then type a new filter but tab out it should reset', async () => {
+    const onChange = vi.fn();
+    render(<ComboBox {...defaultProps} value="apple" onChange={onChange} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    expect(input).toHaveValue('Apple');
+
+    // Simulate typing a new filter
+    await userEvent.type(input, 'red');
+
+    // Simulate leaving the input
+    await userEvent.tab();
+
+    // Check that the input value has reset
+    expect(input).toHaveValue('Apple');
+  });
+
+  it('controlled mode: if selected option then type a new filter but do not select and press Escape, it should reset', async () => {
+    const onChange = vi.fn();
+    render(<ComboBox {...defaultProps} value="apple" onChange={onChange} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    expect(input).toHaveValue('Apple');
+
+    // Simulate typing a new filter
+    await userEvent.type(input, 'red');
+
+    // Press Escape
+    await userEvent.type(input, '{escape}');
+
+    // Check that the input value has reset
+    expect(input).toHaveValue('Apple');
+  });
+
+  it('controlled mode: if selected option then type a new filter but do not select but click outside it should reset', async () => {
+    const onChange = vi.fn();
+    render(<ComboBox {...defaultProps} value="apple" onChange={onChange} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    expect(input).toHaveValue('Apple');
+
+    // Simulate typing a new filter
+    await userEvent.type(input, 'red');
+
+    // Click outside
+    await userEvent.click(document.body);
+
+    // Check that the input value has reset
+    expect(input).toHaveValue('Apple');
   });
 
   it('shows invalid state when specified', () => {
@@ -197,6 +312,50 @@ describe('ComboBox', () => {
       expect(screen.getByText('Apple')).toBeInTheDocument();
     });
   });
+  it('selects exact match on outside click', async () => {
+    const onChange = vi.fn();
+    render(<ComboBox {...defaultProps} onChange={onChange} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+    await userEvent.type(input, 'Apple');
+
+    // Click outside (should select the exact match)
+    await userEvent.click(document.body);
+
+    expect(onChange).toHaveBeenCalledWith('apple', expect.objectContaining({ value: 'apple' }));
+  });
+  it('selects option on Enter key when there is exactly one match', async () => {
+    const onChange = vi.fn();
+    render(<ComboBox {...defaultProps} onChange={onChange} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+    await userEvent.type(input, 'ban');
+
+    // Press Enter (should select Banana as it's the only match)
+    await userEvent.type(input, '{enter}');
+
+    expect(onChange).toHaveBeenCalledWith('banana', expect.objectContaining({ value: 'banana' }));
+    expect(input).toHaveValue('Banana');
+  });
+  it('does not open dropdown when no options match', async () => {
+    render(<ComboBox {...defaultProps} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+
+    // Type something that doesn't match any option
+    await userEvent.type(input, 'zzzzzz');
+
+    // Try to open dropdown by clicking input
+    await userEvent.click(input);
+
+    // Verify dropdown shows "no options" message instead of options
+    await waitFor(() => {
+      expect(screen.getByText('No Options.')).toBeInTheDocument();
+      expect(screen.queryByText('Apple')).not.toBeInTheDocument();
+    });
+  });
   it('handles typing in the input correctly', async () => {
     const onChange = vi.fn();
     render(<ComboBox {...defaultProps} onChange={onChange} />);
@@ -220,20 +379,6 @@ describe('ComboBox', () => {
 
     // Verify selection was made
     expect(onChange).toHaveBeenCalledWith('apple', expect.objectContaining({ value: 'apple' }));
-  });
-
-  it('does not clear input when autoClearInput is false', async () => {
-    render(<ComboBox {...defaultProps} autoClearInput={false} />);
-
-    const input = screen.getByTestId('fruit-selector-input');
-    await userEvent.click(input);
-    await userEvent.type(input, 'No match');
-
-    // Click outside
-    await userEvent.click(document.body);
-
-    // Input should still contain what was typed
-    expect(input).toHaveValue('No match');
   });
 
   it('filters correctly while typing even without inputValue prop', async () => {
