@@ -10,7 +10,7 @@
     overflow: hidden;
 
     &[data-state='closed'] {
-      max-height: var(--content-peek-max-height);
+      max-height: var(--content-peek-max-height, 100%);
     }
   }
 
