@@ -1,3 +1,10 @@
+# [1.155.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.154.0...v1.155.0) (2025-06-06)
+
+
+### Features
+
+* **ComboBox:** L3-6763 ComboBox updates for user details page integration ([#626](https://github.com/PhillipsAuctionHouse/seldon/issues/626)) ([1ab3ebb](https://github.com/PhillipsAuctionHouse/seldon/commit/1ab3ebbbef6960d08e074ec522fef94177032d82))
+
 # [1.154.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.153.0...v1.154.0) (2025-06-05)
 
 
