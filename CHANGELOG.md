@@ -1,3 +1,10 @@
+# [1.156.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.155.0...v1.156.0) (2025-06-10)
+
+
+### Features
+
+* **ContentPeek:** L3-6647 default ContentPeek to show 100% while loa… ([#638](https://github.com/PhillipsAuctionHouse/seldon/issues/638)) ([a7a9ab7](https://github.com/PhillipsAuctionHouse/seldon/commit/a7a9ab7968b04528c422f533208b582b13fd8127))
+
 # [1.155.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.154.0...v1.155.0) (2025-06-06)
 
 
