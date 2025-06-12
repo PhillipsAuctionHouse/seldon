@@ -22,3 +22,21 @@ Playground.args = {
 };
 
 Playground.argTypes = {};
+
+export const ExitGateCard = (props: ArticleProps) => (
+  <div style={{ maxWidth: '1392px' }}>
+    <Article {...props} />
+  </div>
+);
+
+ExitGateCard.args = {
+  imageSrc: 'https://picsum.photos/704/268',
+  label: 'CONSIGN TODAY',
+  header: 'Sell with us',
+  description: 'We are inviting consignments for our upcoming auctions.',
+  linkLabel: 'Enquire now',
+  linkHref: '/',
+  variant: 'exitGateCard',
+};
+
+ExitGateCard.argTypes = {};
