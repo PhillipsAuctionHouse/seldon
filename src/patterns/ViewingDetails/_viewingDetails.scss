@@ -1,0 +1,69 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-viewing-details {
+  border-radius: 1em;
+  max-width: 464px;
+
+  &__content {
+    padding: $spacing-md $spacing-md 0 $spacing-md;
+    position: relative;
+  }
+
+  &__label {
+    margin-bottom: 0;
+  }
+
+  &__close-icon {
+    cursor: pointer;
+    position: absolute;
+    right: $spacing-sm;
+    top: $spacing-sm;
+  }
+
+  &__text {
+    margin-bottom: $spacing-sm;
+  }
+
+  &__location {
+    margin-bottom: $spacing-xsm;
+    margin-top: $spacing-md;
+  }
+
+  &__map-link {
+    margin-bottom: $spacing-md;
+  }
+
+  &__divider {
+    margin: 0;
+  }
+
+  &__btns-group {
+    display: flex;
+    gap: 0.25rem;
+    justify-content: center;
+    padding: 0 $spacing-md $spacing-sm;
+  }
+
+  &__btns-group > * {
+    flex: 1 1 50%;
+    max-width: 50%;
+  }
+
+  &__btns {
+    padding: 0 $spacing-md $spacing-sm;
+  }
+}
+
+.#{$px}-viewing-details__content .#{$px}-viewing-details__label {
+  margin-bottom: 0;
+}
+.#{$px}-viewing-details__content .#{$px}-viewing-details__text {
+  margin-bottom: $spacing-sm;
+}
+.#{$px}-viewing-details__content .#{$px}-viewing-details__location {
+  margin-bottom: $spacing-xsm;
+  margin-top: $spacing-md;
+}
+.#{$px}-viewing-details .#{$px}-viewing-details__divider {
+  margin: 0;
+}
