@@ -1,12 +1,21 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-viewing-details {
-  border-radius: 1em;
-  max-width: 464px;
-
   &__content {
     padding: $spacing-md $spacing-md 0 $spacing-md;
     position: relative;
+  }
+
+  &__title {
+    margin-bottom: $spacing-md;
+  }
+
+  &__children {
+    margin-bottom: $spacing-md;
+  }
+
+  &__center-align {
+    text-align: center;
   }
 
   &__label {
@@ -39,7 +48,7 @@
 
   &__btns-group {
     display: flex;
-    gap: 0.25rem;
+    gap: $spacing-sm;
     justify-content: center;
     padding: 0 $spacing-md $spacing-sm;
   }

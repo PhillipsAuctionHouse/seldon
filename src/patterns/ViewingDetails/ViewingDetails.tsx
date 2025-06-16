@@ -4,14 +4,34 @@ import { ComponentProps, ElementType, forwardRef } from 'react';
 import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';
 import { Divider } from '../../components/Divider';
-import { Icon } from '../../components/Icon';
 import { Link, LinkProps } from '../../components/Link';
 import { Text, TextVariants } from '../../components/Text';
 import { getCommonProps } from '../../utils';
 
-export interface ViewingSession {
+export interface ViewingSessionProps {
+  /**
+   * Session label for viewing session text
+   */
   sessionLabel?: string;
+  /**
+   * Session time for viewing session text
+   */
   sessionTime?: string;
+}
+
+export interface ViewingDetailsButtonsProps {
+  /**
+   * Callback click function for button
+   */
+  onClick?: () => void | unknown;
+  /**
+   * Button label text
+   */
+  buttonLabel?: string;
+  /**
+   * Button variant
+   */
+  variant?: ButtonVariants.primary | ButtonVariants.secondary;
 }
 
 export interface ViewingDetailsProps extends ComponentProps<'div'> {
@@ -34,7 +54,7 @@ export interface ViewingDetailsProps extends ComponentProps<'div'> {
   /**
    * Session Times data array
    */
-  sessionTimes?: ViewingSession[];
+  sessionTimes?: ViewingSessionProps[];
   /**
    * Viewing Times string array
    */
@@ -56,18 +76,23 @@ export interface ViewingDetailsProps extends ComponentProps<'div'> {
    */
   onClose?: () => void | unknown;
   /**
-   * Callback for Browse button
+   * Left Button Props
    */
-  onBrowse?: () => void | unknown;
+  leftButton?: ViewingDetailsButtonsProps;
   /**
-   * Callback for Register to bid button
+   * Right Button Props
    */
-  onRegister?: () => void | unknown;
+  rightButton?: ViewingDetailsButtonsProps;
+  /**
+   * Optional proprerty center align all text in the component
+   */
+  centerAlignText?: boolean;
 }
 
 const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
   ({
     className,
+    children,
     title,
     label,
     sessionTimesLabel,
@@ -75,9 +100,10 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
     viewingTimes,
     location,
     mapLink,
+    centerAlignText = false,
     onClose,
-    onBrowse,
-    onRegister,
+    leftButton = { buttonLabel: 'Browse', variant: ButtonVariants.primary },
+    rightButton = { buttonLabel: 'Register to Bid', variant: ButtonVariants.secondary },
     linkElement: Component = Link,
     ...props
   }: ViewingDetailsProps) => {
@@ -86,52 +112,95 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
         <div className={`${baseClassName}__content`}>
-          <Icon icon="CloseX" height={24} width={24} className={`${baseClassName}__close-icon`} />
-          {title && <Text variant={TextVariants.heading3}>{title}</Text>}
-          {sessionTimesLabel && <Text variant={TextVariants.heading4}>{sessionTimesLabel}</Text>}
+          {title && (
+            <Text
+              variant={TextVariants.heading3}
+              className={classnames(`${baseClassName}__title`, { [`${baseClassName}__center-align`]: centerAlignText })}
+            >
+              {title}
+            </Text>
+          )}
+
+          {children && <div className={`${baseClassName}__children`}>{children}</div>}
+
+          {sessionTimesLabel && (
+            <Text variant={TextVariants.heading4} className={centerAlignText ? `${baseClassName}__center-align` : ''}>
+              {sessionTimesLabel}
+            </Text>
+          )}
           {sessionTimes &&
             sessionTimes.length > 0 &&
             sessionTimes.map((session, index) => (
               <div key={index}>
                 {session.sessionLabel && (
-                  <Text variant={TextVariants.heading5} className={`${baseClassName}__label`}>
+                  <Text
+                    variant={TextVariants.heading5}
+                    className={classnames(`${baseClassName}__label`, {
+                      [`${baseClassName}__center-align`]: centerAlignText,
+                    })}
+                  >
                     {session.sessionLabel}
                   </Text>
                 )}
                 {session.sessionTime && (
-                  <Text variant={TextVariants.body2} className={`${baseClassName}__text`}>
+                  <Text
+                    variant={TextVariants.body2}
+                    className={classnames(`${baseClassName}__text`, {
+                      [`${baseClassName}__center-align`]: centerAlignText,
+                    })}
+                  >
                     {session.sessionTime}
                   </Text>
                 )}
               </div>
             ))}
-          {label && <Text variant={TextVariants.heading4}>{label}</Text>}
+          {label && (
+            <Text variant={TextVariants.heading4} className={centerAlignText ? `${baseClassName}__center-align` : ''}>
+              {label}
+            </Text>
+          )}
           {viewingTimes &&
             viewingTimes.length > 0 &&
             viewingTimes.map((time, index) => (
-              <Text key={index} variant={TextVariants.body2} className={`${baseClassName}__label`}>
+              <Text
+                key={index}
+                variant={TextVariants.body2}
+                className={classnames(`${baseClassName}__label`, {
+                  [`${baseClassName}__center-align`]: centerAlignText,
+                })}
+              >
                 {time}
               </Text>
             ))}
 
           {location && (
-            <Text variant={TextVariants.body2} className={`${baseClassName}__location`}>
+            <Text
+              variant={TextVariants.body2}
+              className={classnames(`${baseClassName}__location`, {
+                [`${baseClassName}__center-align`]: centerAlignText,
+              })}
+            >
               {location}
             </Text>
           )}
           {mapLink && (
-            <Text variant={TextVariants.body2} className={`${baseClassName}__map-link`}>
+            <Text
+              variant={TextVariants.body2}
+              className={classnames(`${baseClassName}__map-link`, {
+                [`${baseClassName}__center-align`]: centerAlignText,
+              })}
+            >
               <Component href={mapLink}>(Map)</Component>
             </Text>
           )}
         </div>
         <Divider className={`${baseClassName}__divider`} id={baseClassName} />
         <div className={`${baseClassName}__btns-group`}>
-          <Button id={`viewings-list-browse-btn`} onClick={onBrowse}>
-            Browse
+          <Button id={`viewings-list-browse-btn`} variant={leftButton.variant} onClick={leftButton.onClick}>
+            {leftButton.buttonLabel}
           </Button>
-          <Button id={`viewings-list-register-btn`} variant={ButtonVariants.secondary} onClick={onRegister}>
-            Register to Bid
+          <Button id={`viewings-list-register-btn`} variant={rightButton.variant} onClick={rightButton.onClick}>
+            {rightButton.buttonLabel}
           </Button>
         </div>
       </div>
