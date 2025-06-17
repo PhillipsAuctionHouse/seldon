@@ -1,0 +1,12 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-composed-modal {
+  &__title {
+    margin-top: $spacing-md;
+    padding-left: $spacing-md;
+  }
+
+  &__center-align {
+    text-align: center;
+  }
+}

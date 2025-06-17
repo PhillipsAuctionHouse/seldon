@@ -39,10 +39,7 @@ export interface ViewingDetailsProps extends ComponentProps<'div'> {
    * Unique id for component
    */
   id?: string;
-  /**
-   * Title for Viewings Details
-   */
-  title?: string;
+
   /**
    * Label for Viewings Details
    */
@@ -60,9 +57,13 @@ export interface ViewingDetailsProps extends ComponentProps<'div'> {
    */
   viewingTimes?: string[];
   /**
-   * location of Viewings Details
+   * Location of Viewings Details
    */
   location?: string;
+  /**
+   * Disclaimer text for bottom of Viewings Details
+   */
+  disclaimer?: string;
   /**
    * Custom link element to use for the link. Defaults to the `Link` component.
    */
@@ -93,13 +94,13 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
   ({
     className,
     children,
-    title,
     label,
     sessionTimesLabel,
     sessionTimes,
     viewingTimes,
     location,
     mapLink,
+    disclaimer,
     centerAlignText = false,
     onClose,
     leftButton = { buttonLabel: 'Browse', variant: ButtonVariants.primary },
@@ -112,15 +113,6 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
         <div className={`${baseClassName}__content`}>
-          {title && (
-            <Text
-              variant={TextVariants.heading3}
-              className={classnames(`${baseClassName}__title`, { [`${baseClassName}__center-align`]: centerAlignText })}
-            >
-              {title}
-            </Text>
-          )}
-
           {children && <div className={`${baseClassName}__children`}>{children}</div>}
 
           {sessionTimesLabel && (
@@ -203,6 +195,17 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
             {rightButton.buttonLabel}
           </Button>
         </div>
+
+        {disclaimer && (
+          <Text
+            variant={TextVariants.heading5}
+            className={classnames(`${baseClassName}__disclaimer`, {
+              [`${baseClassName}__center-align`]: centerAlignText,
+            })}
+          >
+            {disclaimer}
+          </Text>
+        )}
       </div>
     );
   },

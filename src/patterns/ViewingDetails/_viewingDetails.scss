@@ -2,12 +2,8 @@
 
 .#{$px}-viewing-details {
   &__content {
-    padding: $spacing-md $spacing-md 0 $spacing-md;
+    padding: 0 $spacing-md;
     position: relative;
-  }
-
-  &__title {
-    margin-bottom: $spacing-md;
   }
 
   &__children {
@@ -60,6 +56,11 @@
 
   &__btns {
     padding: 0 $spacing-md $spacing-sm;
+  }
+
+  &__disclaimer {
+    margin: $spacing-xsm $spacing-md;
+    padding-bottom: $spacing-sm;
   }
 }
 
