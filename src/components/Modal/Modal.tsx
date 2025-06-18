@@ -4,6 +4,7 @@ import { Icon } from '../Icon';
 import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 import * as Dialog from '@radix-ui/react-dialog';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { forwardRef } from 'react';
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement>, Dialog.DialogProps {
@@ -68,7 +69,9 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
             {...commonProps}
             {...props}
           >
-            <Dialog.Title className="visually-hidden">{contentLabel ?? 'Modal'}</Dialog.Title>
+            <VisuallyHidden asChild>
+              <Dialog.Title>{contentLabel ?? 'Modal'}</Dialog.Title>
+            </VisuallyHidden>
             <Dialog.Description />
             <Dialog.Close asChild>
               <IconButton
