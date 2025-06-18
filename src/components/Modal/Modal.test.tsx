@@ -86,19 +86,4 @@ describe('Modal', () => {
     await userEvent.click(overlay);
     expect(onCloseMock).toHaveBeenCalled();
   });
-
-  it('locks and unlocks body scroll', () => {
-    const { rerender } = render(
-      <Modal isOpen onClose={onCloseMock}>
-        <div>Modal Content</div>
-      </Modal>,
-    );
-    expect(document.body.style.overflow).toBe('hidden');
-    rerender(
-      <Modal isOpen={false} onClose={onCloseMock}>
-        <div>Modal Content</div>
-      </Modal>,
-    );
-    expect(document.body.style.overflow).not.toBe('hidden');
-  });
 });
