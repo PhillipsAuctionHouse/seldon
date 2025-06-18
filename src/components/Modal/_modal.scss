@@ -1,24 +1,22 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-modal {
-  background-color: white;
+  background-color: $white;
   left: 50%;
   max-height: 100%;
   max-width: 100%;
   overflow: auto;
   padding: $padding-md;
-  position: absolute;
+  position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
+  z-index: 30;
 
   &__overlay {
-    background-color: rgba(0, 0, 0, 75%);
-    height: 100dvh;
-    left: 0;
+    background-color: $overlay-black;
+    inset: 0;
     position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: $modal-z-index;
+    z-index: 15;
   }
 
   &__close {
@@ -26,5 +24,17 @@
     right: 0.4rem;
     top: 0.4rem;
     z-index: 100;
+  }
+
+  .visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
   }
 }

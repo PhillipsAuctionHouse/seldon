@@ -1,11 +1,12 @@
 import classnames from 'classnames';
 import { getCommonProps, noOp } from '../../utils';
 import { Icon } from '../Icon';
-import ReactModal from 'react-modal';
 import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
+import * as Dialog from '@radix-ui/react-dialog';
+import { forwardRef } from 'react';
 
-export interface ModalProps extends ReactModal.Props {
+export interface ModalProps extends React.HTMLAttributes<HTMLDivElement>, Dialog.DialogProps {
   /**
    * Boolean to determine if the modal is open
    */
@@ -14,10 +15,6 @@ export interface ModalProps extends ReactModal.Props {
    * Function to close the modal
    */
   onClose?: () => void;
-  /**
-   * The selector for aria-hide
-   */
-  appElementSelector?: string;
   /**
    * The children of the modal
    */
@@ -33,7 +30,11 @@ export interface ModalProps extends ReactModal.Props {
   /**
    * style for the modal
    */
-  style?: ReactModal.Props['style'];
+  style?: React.CSSProperties;
+  /**
+   * Content label for accessibility
+   */
+  contentLabel?: string;
 }
 
 /**
@@ -42,51 +43,51 @@ export interface ModalProps extends ReactModal.Props {
  * A component for displaying a modal.
  *
  */
+const Modal = forwardRef<HTMLDivElement, ModalProps>(
+  ({ children, className, overlayClassName, isOpen = false, onClose = noOp, style, contentLabel, ...props }, ref) => {
+    const { className: baseClassName, 'data-testid': testId, ...commonProps } = getCommonProps(props, 'Modal');
 
-const Modal = ({
-  children,
-  className,
-  overlayClassName,
-  isOpen = false,
-  onClose = noOp,
-  appElementSelector = 'main',
-  style,
-  ...props
-}: ModalProps) => {
-  if (!isOpen) {
-    return null;
-  }
-
-  const { className: baseClassName, 'data-testid': testId, ...commonProps } = getCommonProps(props, 'Modal');
-
-  ReactModal.setAppElement(appElementSelector);
-
-  return (
-    <ReactModal
-      {...commonProps}
-      {...props}
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      className={classnames(baseClassName, className)}
-      overlayClassName={classnames(`${baseClassName}__overlay`, overlayClassName)}
-      ariaHideApp={isOpen}
-      testId={testId}
-      style={style}
-      onAfterOpen={() => (document.body.style.overflow = 'hidden')}
-      onAfterClose={() => (document.body.style.overflow = 'unset')}
-    >
-      <IconButton
-        id="modal-button"
-        onClick={onClose}
-        aria-label="Close Modal"
-        className={classnames(`${baseClassName}__close`)}
-        variant={ButtonVariants.tertiary}
+    return (
+      <Dialog.Root
+        open={isOpen}
+        onOpenChange={(open) => {
+          if (!open) onClose();
+        }}
       >
-        <Icon icon="CloseX" height={32} width={32} color="currentColor" />
-      </IconButton>
-      {children}
-    </ReactModal>
-  );
-};
+        <Dialog.Portal>
+          <Dialog.Overlay
+            className={classnames(`${baseClassName}__overlay`, overlayClassName)}
+            data-testid={`modal-overlay`}
+          />
+          <Dialog.Content
+            ref={ref}
+            className={classnames(baseClassName, className)}
+            data-testid={testId}
+            aria-modal="true"
+            style={style}
+            {...commonProps}
+            {...props}
+          >
+            <Dialog.Title className="visually-hidden">{contentLabel ?? 'Modal'}</Dialog.Title>
+            <Dialog.Description />
+            <Dialog.Close asChild>
+              <IconButton
+                id="modal-close-button"
+                aria-label="Close Modal"
+                className={classnames(`${baseClassName}__close`)}
+                variant={ButtonVariants.tertiary}
+              >
+                <Icon icon="CloseX" height={32} width={32} color="currentColor" />
+              </IconButton>
+            </Dialog.Close>
+            {children}
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
+    );
+  },
+);
+
+Modal.displayName = 'Modal';
 
 export default Modal;
