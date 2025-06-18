@@ -91,27 +91,30 @@ export interface ViewingDetailsProps extends ComponentProps<'div'> {
 }
 
 const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
-  ({
-    className,
-    children,
-    label,
-    sessionTimesLabel,
-    sessionTimes,
-    viewingTimes,
-    location,
-    mapLink,
-    disclaimer,
-    centerAlignText = false,
-    onClose,
-    leftButton = { buttonLabel: 'Browse', variant: ButtonVariants.primary },
-    rightButton = { buttonLabel: 'Register to Bid', variant: ButtonVariants.secondary },
-    linkElement: Component = Link,
-    ...props
-  }: ViewingDetailsProps) => {
+  (
+    {
+      className,
+      children,
+      label,
+      sessionTimesLabel,
+      sessionTimes,
+      viewingTimes,
+      location,
+      mapLink,
+      disclaimer,
+      centerAlignText = false,
+      onClose,
+      leftButton = { buttonLabel: 'Browse', variant: ButtonVariants.primary },
+      rightButton = { buttonLabel: 'Register to Bid', variant: ButtonVariants.secondary },
+      linkElement: Component = Link,
+      ...props
+    }: ViewingDetailsProps,
+    ref,
+  ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ViewingDetails');
 
     return (
-      <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
+      <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         <div className={`${baseClassName}__content`}>
           {children && <div className={`${baseClassName}__children`}>{children}</div>}
 

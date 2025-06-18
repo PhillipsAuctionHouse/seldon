@@ -28,6 +28,10 @@ export interface ComposedModalProps extends Omit<ModalProps, 'onClose' | 'role' 
    * Optional proprerty center align all text in the component
    */
   centerAlignText?: boolean;
+  /**
+   * Maximum height value for the modal body
+   */
+  maxHeightValue?: string;
 }
 
 /**
@@ -47,6 +51,7 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
     style,
     shouldFocusAfterRender,
     centerAlignText,
+    maxHeightValue = '60vh',
     title,
     ...props
   }: ComposedModalProps) => {
@@ -64,6 +69,7 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
         isOpen={isOpen}
         onClose={onClose}
         appElementSelector={appElementSelector}
+        {...props}
         {...commonProps}
         style={defaultModalStyle}
         className={className}
@@ -75,8 +81,9 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
         >
           {title}
         </Text>
-
-        {children}
+        <div className={`${baseClassName}__body`} style={{ maxHeight: maxHeightValue }}>
+          {children}
+        </div>
       </Modal>
     );
   },

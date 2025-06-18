@@ -3,10 +3,14 @@
 .#{$px}-composed-modal {
   &__title {
     margin-top: $spacing-md;
-    padding-left: $spacing-md;
+    padding: 0 $spacing-md;
   }
 
   &__center-align {
     text-align: center;
+  }
+
+  &__body {
+    overflow-y: auto;
   }
 }
