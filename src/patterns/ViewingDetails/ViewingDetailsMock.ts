@@ -2,7 +2,6 @@ import React from 'react';
 import { ButtonVariants } from '../../components/Button/types';
 
 export const viewingDetailsProps = {
-  variant: 'ViewingDetails',
   label: 'Viewings',
   sessionTimesLabel: 'Session Times',
   sessionTimes: [
