@@ -123,7 +123,7 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ViewingDetails');
 
     return (
-      <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
+      <div {...commonProps} {...props} className={classnames(baseClassName, className)} ref={ref}>
         <div className={`${baseClassName}__content`}>
           {children && <div className={`${baseClassName}__children`}>{children}</div>}
 
