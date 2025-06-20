@@ -46,7 +46,7 @@
     display: flex;
     gap: $spacing-sm;
     justify-content: center;
-    padding: 0 $spacing-md $spacing-sm;
+    padding: $spacing-sm $spacing-md;
   }
 
   &__btns-group > * {
@@ -59,8 +59,8 @@
   }
 
   &__disclaimer {
-    margin: $spacing-xsm $spacing-md;
-    padding-bottom: $spacing-sm;
+    margin-top: $spacing-sm;
+    padding: 0 $spacing-md;
   }
 }
 

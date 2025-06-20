@@ -37,7 +37,11 @@ export interface ComposedModalProps extends Omit<ModalProps, 'onClose' | 'role' 
 /**
  * ## Overview
  *
- * A component for ComposedModal.
+ * A component for ComposedModal that extends the base Modal component.
+ *
+ * [Figma Link](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/Design-System--Responsive-Web?node-id=25578-15048&p=f&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-composedmodal--overview)
  *
  */
 const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
@@ -47,7 +51,6 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
     overlayClassName,
     isOpen = false,
     onClose = noOp,
-    appElementSelector = 'main',
     style,
     shouldFocusAfterRender,
     centerAlignText,
@@ -55,25 +58,15 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
     title,
     ...props
   }: ComposedModalProps) => {
-    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ComposedModal');
-    const defaultModalStyle = {
-      content: {
-        padding: '0',
-        borderRadius: '1rem',
-        ...(style || {}),
-      },
-    };
+    const { className: baseClassName, 'data-testid': testId, ...commonProps } = getCommonProps(props, 'ComposedModal');
 
     return (
       <Modal
         isOpen={isOpen}
         onClose={onClose}
-        appElementSelector={appElementSelector}
         {...props}
         {...commonProps}
-        style={defaultModalStyle}
-        className={className}
-        shouldFocusAfterRender={shouldFocusAfterRender}
+        className={classnames(`${baseClassName}`, className)}
       >
         <Text
           variant={TextVariants.heading3}

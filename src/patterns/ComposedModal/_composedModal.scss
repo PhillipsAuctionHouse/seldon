@@ -1,6 +1,9 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-composed-modal {
+  border-radius: 1rem;
+  padding: $spacing-sm 0;
+
   &__title {
     margin-top: $spacing-md;
     padding: 0 $spacing-md;
@@ -12,5 +15,11 @@
 
   &__body {
     overflow-y: auto;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    max-width: 100vw;
+    min-width: 0;
+    width: 95vw;
   }
 }

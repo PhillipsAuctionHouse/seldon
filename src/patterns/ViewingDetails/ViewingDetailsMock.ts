@@ -21,7 +21,7 @@ export const viewingDetailsProps = {
     'Saturday, 09:00AM - 10:00PM',
     'Sunday, 09:00AM - 1:00PM',
   ],
-  disclaimer: 'Optional Disclaimer text',
+
   location: '30 Berkeley Square, London, United Kingdom, W1J 6EX',
   mapLink: 'https://www.google.com/maps/place/30+Berkeley+Square,+London,+United+Kingdom/@51.509865,-0.14189,17z',
 };
@@ -59,4 +59,5 @@ export const viewingDetailsWithChildrenProps = {
     variant: ButtonVariants.primary as ButtonVariants.primary,
     buttonLabel: 'Browse',
   },
+  disclaimer: 'Optional Disclaimer text',
 };

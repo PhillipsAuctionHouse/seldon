@@ -89,7 +89,16 @@ export interface ViewingDetailsProps extends ComponentProps<'div'> {
    */
   centerAlignText?: boolean;
 }
-
+/**
+ * ## Overview
+ *
+ * A simple component for displaying viewing details such as session times, viewing times, location, and a map link.
+ *
+ * [Figma Link](https://www.figma.com/design/H1kCh6MXU8jasYbQuCbyBt/Calendar?node-id=6-17&p=f&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-viewingdetails--overview)
+ *
+ */
 const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
   (
     {

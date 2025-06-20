@@ -33,14 +33,7 @@ export const Playground = (props: ComposedModalProps) => {
         Viewing Details
       </Link>
 
-      <ComposedModal
-        key={`${props.id}`}
-        {...props}
-        isOpen={isOpen}
-        onClose={onClose}
-        appElementSelector="body"
-        shouldFocusAfterRender={false}
-      >
+      <ComposedModal key={`${props.id}`} {...props} isOpen={isOpen} onClose={onClose} shouldFocusAfterRender={false}>
         <ViewingDetails {...viewingDetailsProps} />
       </ComposedModal>
     </>
@@ -73,7 +66,6 @@ export const ComposedModalScroll = (props: ComposedModalProps) => {
         {...props}
         isOpen={isOpen}
         onClose={onClose}
-        appElementSelector="body"
         maxHeightValue="40vh"
         shouldFocusAfterRender={false}
       >
