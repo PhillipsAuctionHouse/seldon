@@ -10,7 +10,7 @@ describe('Modal', () => {
   afterEach(() => {
     vi.clearAllMocks();
   });
-  runCommonTests((props) => <Modal {...props} isOpen></Modal>, 'Modal');
+  runCommonTests((props) => <Modal {...props} isOpen />, 'Modal');
 
   it('renders the modal when isOpen is true', () => {
     render(
