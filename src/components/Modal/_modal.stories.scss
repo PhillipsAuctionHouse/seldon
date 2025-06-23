@@ -2,4 +2,15 @@
   &__button {
     margin-bottom: 16px;
   }
+
+  &__drawer,
+  &__modal {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    &-heading.seldon-text {
+      margin-bottom: 0;
+    }
+  }
 }
