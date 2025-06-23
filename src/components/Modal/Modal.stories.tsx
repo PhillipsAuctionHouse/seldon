@@ -1,10 +1,12 @@
 import type { Meta } from '@storybook/react';
 import { Playground as PlaygroundSplitPanel } from '../SplitPanel/SplitPanel.stories';
 
-import Modal from './Modal';
 import { useState } from 'react';
 import Button from '../Button/Button';
 import Drawer from '../Drawer/Drawer';
+import { TextVariants } from '../Text';
+import Text from '../Text/Text';
+import Modal from './Modal';
 
 const meta = {
   title: 'Components/Modal',
@@ -54,17 +56,25 @@ export const ModalFromDrawer = () => {
 
   return (
     <>
-      <Button onClick={openDrawer}>Open Drawer</Button>
+      <Button onClick={openDrawer} className={`modal-story__button`}>
+        Open Drawer
+      </Button>
+      <PlaygroundSplitPanel />
       <Drawer isOpen={isDrawerOpen} onClose={closeDrawer}>
-        <div style={{ padding: '24px' }}>
-          <h2>Drawer Content</h2>
+        <div className={`modal-story__drawer`}>
+          <Text variant={TextVariants.heading2} className={`modal-story__drawer-heading`}>
+            Drawer Content
+          </Text>
+          <Text variant={TextVariants.string2}>Use the button below to launch a modal directly from the drawer.</Text>
           <Button onClick={openModal}>Open Modal</Button>
         </div>
       </Drawer>
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <div style={{ padding: '24px' }}>
-          <h2>Modal Content</h2>
-          <p>Test the focus trap by tabbing through the elements.</p>
+        <div className={`modal-story__modal`}>
+          <Text variant={TextVariants.heading2} className={`modal-story__modal-heading`}>
+            Modal Content
+          </Text>
+          <Text variant={TextVariants.string2}>Test the focus trap by tabbing through the elements.</Text>
           <input type="text" placeholder="Input field 1" />
           <input type="text" placeholder="Input field 2" />
           <Button onClick={closeModal}>Close Modal</Button>
