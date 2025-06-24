@@ -11,7 +11,6 @@
   }
 
   &__image {
-    aspect-ratio: 16/9;
     min-width: 100%;
 
     @include media($breakpoint-md) {
@@ -75,6 +74,13 @@
 
   &__modal-link {
     cursor: pointer;
+
+    @include underline;
+  }
+
+  &__modal-link-button {
+    font-variation-settings: 'wght' 400;
+    padding: 0;
 
     @include underline;
   }

@@ -5,8 +5,8 @@ import SaleCard from './SaleCard';
 describe('SaleCard', () => {
   const props = {
     imageSrc: 'https://example.com/image.jpg',
-    type: 'Live Auction',
-    title: 'Modern & Contemporary Art Day Sale, Morning Session',
+    auctionType: 'Live Auction',
+    titleText: 'Modern & Contemporary Art Day Sale, Morning Session',
     date: '18 Aug',
     location: 'New York',
   };
@@ -45,11 +45,24 @@ describe('SaleCard', () => {
     fireEvent.click(button);
     expect(secondaryButtonOnClick).toHaveBeenCalledTimes(1);
   });
-  it('should render PDF link', () => {
-    const pdfLink = { text: 'Download PDF', url: 'https://example.com/pdf' };
-    const { getByRole } = render(<SaleCard {...props} pdfLink={pdfLink} />);
-    const link = getByRole('link', { name: 'Download PDF' });
+
+  it('should render modal link', () => {
+    const modalLinkOnClick = vi.fn();
+    const { getByText } = render(
+      <SaleCard {...props} modalLinkText="View Details" modalLinkOnClick={modalLinkOnClick} />,
+    );
+    const link = getByText('View Details');
     expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute('href', 'https://example.com/pdf');
+    fireEvent.click(link);
+    expect(modalLinkOnClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render PDF link', () => {
+    const { getByText } = render(
+      <SaleCard {...props} pdfLinkText="Download PDF" pdfLinkUrl="https://example.com/pdf" />,
+    );
+    const link = getByText('Download PDF');
+    expect(link).toBeInTheDocument();
+    expect(link.closest('a')).toHaveAttribute('href', 'https://example.com/pdf');
   });
 });

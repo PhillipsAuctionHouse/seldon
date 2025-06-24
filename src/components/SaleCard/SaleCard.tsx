@@ -1,28 +1,90 @@
-import { ComponentProps, forwardRef, ElementType } from 'react';
+import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { Text, TextVariants } from '../Text';
-import { Link, LinkProps } from '../Link';
+import { SeldonImage } from '../SeldonImage';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 
-export type SaleCardProps = ComponentProps<'div'> & {
+/**
+ * Props for the SaleCard component.
+ */
+export interface SaleCardProps extends ComponentProps<'div'> {
+  /**
+   * The source URL of the image to be displayed.
+   */
   imageSrc: string;
+
+  /**
+   * The alt text for the image. Defaults to "Auction Image" if not provided.
+   */
   imageAlt?: string;
-  type: string;
-  title: string;
+
+  /**
+   * The auctionType of sale (e.g. "Live Auction", "Online Only", etc.).
+   */
+  auctionType: string;
+
+  /**
+   * The titleText of the sale.
+   */
+  titleText: string;
+
+  /**
+   * The date of the sale.
+   */
   date: string;
+
+  /**
+   * The location of the sale.
+   */
   location: string;
+
+  /**
+   * The text to be displayed on the primary button. If not provided, the button will not be rendered.
+   */
   primaryButtonText?: string;
+
+  /**
+   * The callback function to be executed when the primary button is clicked. Required if primaryButtonText is provided.
+   */
   primaryButtonOnClick?: () => void;
+
+  /**
+   * The text to be displayed on the secondary button. If not provided, the button will not be rendered.
+   */
   secondaryButtonText?: string;
+
+  /**
+   * The callback function to be executed when the secondary button is clicked. Required if secondaryButtonText is provided.
+   */
   secondaryButtonOnClick?: () => void;
+
+  /**
+   * The text to be displayed as a badge.
+   */
   badgeText?: string;
-  modalLink?: { text: string; onClick: () => void };
-  pdfLink?: { text: string; url: string };
-  linkElement?: ElementType<LinkProps>;
-};
+
+  /**
+   * The text to be displayed for the modal link.
+   */
+  modalLinkText?: string;
+
+  /**
+   * The callback function to be executed when the modal link is clicked.
+   */
+  modalLinkOnClick?: () => void;
+
+  /**
+   * The text to be displayed for the PDF link.
+   */
+  pdfLinkText?: string;
+  /**
+   * The URL of the PDF to be linked.
+   */
+  pdfLinkUrl?: string;
+}
 
 const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
   (
@@ -30,8 +92,8 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
       className,
       imageSrc,
       imageAlt = 'Auction Image',
-      type,
-      title,
+      auctionType,
+      titleText,
       date,
       location,
       primaryButtonText,
@@ -39,9 +101,10 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
       secondaryButtonText,
       secondaryButtonOnClick,
       badgeText,
-      modalLink,
-      pdfLink,
-      linkElement: Component = Link,
+      modalLinkText,
+      modalLinkOnClick,
+      pdfLinkText,
+      pdfLinkUrl,
       ...props
     },
     ref,
@@ -51,12 +114,12 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
 
     return (
       <div {...componentProps} className={classnames(baseClassName, className)} ref={ref}>
-        <div className={`${baseClassName}__image`}>
-          <img src={imageSrc} alt={imageAlt} />
-        </div>
+        {imageSrc ? (
+          <SeldonImage aspectRatio="16/9" src={imageSrc} alt={imageAlt} className={`${baseClassName}__image`} />
+        ) : null}
         <div className={`${baseClassName}__details`}>
-          <Text variant={TextVariants.badge}>{type}</Text>
-          <Text variant={TextVariants.title4}>{title}</Text>
+          <Text variant={TextVariants.badge}>{auctionType}</Text>
+          <Text variant={TextVariants.title4}>{titleText}</Text>
           {badgeText && (
             <Text variant={TextVariants.badge} className={`${baseClassName}__badge`}>
               {badgeText}
@@ -65,9 +128,15 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
           <div className={`${baseClassName}__info`}>
             <Text variant={TextVariants.string2}>{location}</Text>
             <Text variant={TextVariants.string2}>{date}</Text>
-            {modalLink && (
+            {modalLinkText && modalLinkOnClick && (
               <div className={`${baseClassName}__modal-link`}>
-                <a onClick={modalLink.onClick}>{modalLink.text}</a>
+                <Button
+                  onClick={modalLinkOnClick}
+                  variant={ButtonVariants.tertiary}
+                  className={`${baseClassName}__modal-link-button`}
+                >
+                  {modalLinkText}
+                </Button>
               </div>
             )}
           </div>
@@ -92,11 +161,11 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
                 {secondaryButtonText}
               </Button>
             )}
-            {pdfLink && (
+            {pdfLinkText && pdfLinkUrl && (
               <div className={`${baseClassName}__pdf-link`}>
-                <Component data-testid="pdf-link" href={pdfLink.url} target="_blank" rel="noopener noreferrer">
-                  {pdfLink.text}
-                </Component>
+                <Button href={pdfLinkUrl} target="_blank" variant={ButtonVariants.tertiary}>
+                  {pdfLinkText}
+                </Button>
               </div>
             )}
           </div>
