@@ -42,4 +42,28 @@ describe('ComposedModal', () => {
     expect(body).toHaveClass(`${px}-composed-modal__body`);
     expect(body).toHaveStyle({ maxHeight: '100px' });
   });
+
+  it('renders the modal buttons and disclaimers', () => {
+    render(
+      <ComposedModal
+        isOpen
+        onClose={onCloseMock}
+        title="Test Modal"
+        secondaryButton={{
+          buttonLabel: 'Register to Bid',
+        }}
+        primaryButton={{
+          buttonLabel: 'Browse',
+        }}
+        disclaimer="Optional Disclaimer text"
+      >
+        <div>Modal Content</div>
+      </ComposedModal>,
+    );
+
+    expect(screen.queryByText('Browse')).toBeInTheDocument();
+    expect(screen.queryByText('Register to Bid')).toBeInTheDocument();
+    expect(screen.getByText('Test Modal')).toBeInTheDocument();
+    expect(screen.getByText('Optional Disclaimer text')).toBeInTheDocument();
+  });
 });

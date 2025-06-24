@@ -26,8 +26,6 @@ describe('ViewingDetails', () => {
     expect(screen.queryByAltText('Viewings')).toBeNull();
     expect(screen.queryByText('Session Times')).toBeNull();
     expect(screen.queryByText('Session I, lots 1-103')).toBeNull();
-    expect(screen.queryByText('Browse')).toBeInTheDocument();
-    expect(screen.queryByText('Register to Bid')).toBeInTheDocument();
   });
 
   it('renders children correctly', () => {
