@@ -32,8 +32,6 @@ describe('ViewingDetails', () => {
 
   it('renders children correctly', () => {
     render(<ViewingDetails {...viewingDetailsWithChildrenProps} />);
-
-    expect(screen.getByText('Optional Disclaimer text')).toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'viewing-details-img' })).toHaveAttribute(
       'src',
       'https://picsum.photos/512/288',

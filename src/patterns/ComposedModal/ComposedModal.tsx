@@ -1,8 +1,23 @@
 import classnames from 'classnames';
 import { forwardRef } from 'react';
+import Button from '../../components/Button/Button';
+import { ButtonVariants } from '../../components/Button/types';
+import { Divider } from '../../components/Divider';
 import Modal, { ModalProps } from '../../components/Modal/Modal';
 import { Text, TextVariants } from '../../components/Text';
 import { getCommonProps, noOp } from '../../utils';
+
+export interface ViewingDetailsButtonsProps {
+  /**
+   * Callback click function for button
+   */
+  onClick?: () => void | unknown;
+  /**
+   * Button label text
+   */
+  buttonLabel?: string;
+}
+
 export interface ComposedModalProps extends Omit<ModalProps, 'onClose' | 'role' | 'style'> {
   /**
    * Title for Composed Modal
@@ -32,6 +47,18 @@ export interface ComposedModalProps extends Omit<ModalProps, 'onClose' | 'role' 
    * Maximum height value for the modal body
    */
   maxHeightValue?: string;
+  /**
+   * Left Button Props
+   */
+  secondaryButton?: ViewingDetailsButtonsProps;
+  /**
+   * Right Button Props
+   */
+  primaryButton?: ViewingDetailsButtonsProps;
+  /**
+   * Disclaimer text for bottom of Viewings Details
+   */
+  disclaimer?: string;
 }
 
 /**
@@ -56,6 +83,9 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
     centerAlignText,
     maxHeightValue = '60vh',
     title,
+    disclaimer,
+    secondaryButton,
+    primaryButton,
     ...props
   }: ComposedModalProps) => {
     const { className: baseClassName, 'data-testid': testId, ...commonProps } = getCommonProps(props, 'ComposedModal');
@@ -77,6 +107,41 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
         <div className={`${baseClassName}__body`} style={{ maxHeight: maxHeightValue }}>
           {children}
         </div>
+        {(secondaryButton || primaryButton || disclaimer) && (
+          <>
+            <Divider className={`${baseClassName}__divider`} id={baseClassName} />
+            <div className={`${baseClassName}__btns-group`}>
+              {secondaryButton && (
+                <Button
+                  id={`viewings-list-browse-btn`}
+                  variant={ButtonVariants.secondary}
+                  onClick={secondaryButton.onClick}
+                >
+                  {secondaryButton.buttonLabel}
+                </Button>
+              )}
+              {primaryButton && (
+                <Button
+                  id={`viewings-list-register-btn`}
+                  variant={ButtonVariants.primary}
+                  onClick={primaryButton.onClick}
+                >
+                  {primaryButton.buttonLabel}
+                </Button>
+              )}
+            </div>
+            {disclaimer && (
+              <Text
+                variant={TextVariants.heading5}
+                className={classnames(`${baseClassName}__disclaimer`, {
+                  [`${baseClassName}__center-align`]: centerAlignText,
+                })}
+              >
+                {disclaimer}
+              </Text>
+            )}
+          </>
+        )}
       </Modal>
     );
   },

@@ -1,5 +1,4 @@
 import React from 'react';
-import { ButtonVariants } from '../../components/Button/types';
 
 export const viewingDetailsProps = {
   label: 'Viewings',
@@ -50,13 +49,4 @@ export const viewingDetailsWithChildrenProps = {
   location: '30 Berkeley Square, London, United Kingdom, W1J 6EX',
   mapLink: 'https://www.google.com/maps/place/30+Berkeley+Square,+London,+United+Kingdom/@51.509865,-0.14189,17z',
   centerAlignText: true,
-  leftButton: {
-    variant: ButtonVariants.secondary as ButtonVariants.secondary,
-    buttonLabel: 'Register to Bid',
-  },
-  rightButton: {
-    variant: ButtonVariants.primary as ButtonVariants.primary,
-    buttonLabel: 'Browse',
-  },
-  disclaimer: 'Optional Disclaimer text',
 };

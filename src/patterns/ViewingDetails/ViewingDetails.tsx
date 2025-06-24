@@ -1,9 +1,6 @@
 import classnames from 'classnames';
 
 import { ComponentProps, ElementType, forwardRef } from 'react';
-import Button from '../../components/Button/Button';
-import { ButtonVariants } from '../../components/Button/types';
-import { Divider } from '../../components/Divider';
 import { Link, LinkProps } from '../../components/Link';
 import { Text, TextVariants } from '../../components/Text';
 import { getCommonProps } from '../../utils';
@@ -17,21 +14,6 @@ export interface ViewingSessionProps {
    * Session time for viewing session text
    */
   sessionTime?: string;
-}
-
-export interface ViewingDetailsButtonsProps {
-  /**
-   * Callback click function for button
-   */
-  onClick?: () => void | unknown;
-  /**
-   * Button label text
-   */
-  buttonLabel?: string;
-  /**
-   * Button variant
-   */
-  variant?: ButtonVariants.primary | ButtonVariants.secondary;
 }
 
 export interface ViewingDetailsProps extends ComponentProps<'div'> {
@@ -61,10 +43,6 @@ export interface ViewingDetailsProps extends ComponentProps<'div'> {
    */
   location?: string;
   /**
-   * Disclaimer text for bottom of Viewings Details
-   */
-  disclaimer?: string;
-  /**
    * Custom link element to use for the link. Defaults to the `Link` component.
    */
   linkElement?: ElementType<LinkProps>;
@@ -76,14 +54,6 @@ export interface ViewingDetailsProps extends ComponentProps<'div'> {
    * Callback for onClose function
    */
   onClose?: () => void | unknown;
-  /**
-   * Left Button Props
-   */
-  leftButton?: ViewingDetailsButtonsProps;
-  /**
-   * Right Button Props
-   */
-  rightButton?: ViewingDetailsButtonsProps;
   /**
    * Optional proprerty center align all text in the component
    */
@@ -110,11 +80,8 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
       viewingTimes,
       location,
       mapLink,
-      disclaimer,
       centerAlignText = false,
       onClose,
-      leftButton = { buttonLabel: 'Browse', variant: ButtonVariants.primary },
-      rightButton = { buttonLabel: 'Register to Bid', variant: ButtonVariants.secondary },
       linkElement: Component = Link,
       ...props
     }: ViewingDetailsProps,
@@ -198,26 +165,6 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
             </Text>
           )}
         </div>
-        <Divider className={`${baseClassName}__divider`} id={baseClassName} />
-        <div className={`${baseClassName}__btns-group`}>
-          <Button id={`viewings-list-browse-btn`} variant={leftButton.variant} onClick={leftButton.onClick}>
-            {leftButton.buttonLabel}
-          </Button>
-          <Button id={`viewings-list-register-btn`} variant={rightButton.variant} onClick={rightButton.onClick}>
-            {rightButton.buttonLabel}
-          </Button>
-        </div>
-
-        {disclaimer && (
-          <Text
-            variant={TextVariants.heading5}
-            className={classnames(`${baseClassName}__disclaimer`, {
-              [`${baseClassName}__center-align`]: centerAlignText,
-            })}
-          >
-            {disclaimer}
-          </Text>
-        )}
       </div>
     );
   },

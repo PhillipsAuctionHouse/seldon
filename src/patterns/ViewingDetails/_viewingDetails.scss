@@ -37,31 +37,6 @@
   &__map-link {
     margin-bottom: $spacing-md;
   }
-
-  &__divider {
-    margin: 0;
-  }
-
-  &__btns-group {
-    display: flex;
-    gap: $spacing-sm;
-    justify-content: center;
-    padding: $spacing-sm $spacing-md;
-  }
-
-  &__btns-group > * {
-    flex: 1 1 50%;
-    max-width: 50%;
-  }
-
-  &__btns {
-    padding: 0 $spacing-md $spacing-sm;
-  }
-
-  &__disclaimer {
-    margin-top: $spacing-sm;
-    padding: 0 $spacing-md;
-  }
 }
 
 .#{$px}-viewing-details__content .#{$px}-viewing-details__label {
@@ -73,7 +48,4 @@
 .#{$px}-viewing-details__content .#{$px}-viewing-details__location {
   margin-bottom: $spacing-xsm;
   margin-top: $spacing-md;
-}
-.#{$px}-viewing-details .#{$px}-viewing-details__divider {
-  margin: 0;
 }
