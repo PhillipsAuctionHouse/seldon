@@ -153,13 +153,10 @@ export const CarouselWithZoomModal = () => {
         <Modal
           isOpen={modalOpen}
           onClose={() => setModalOpen(false)}
-          appElementSelector="body"
           style={{
-            content: {
-              padding: 0,
-              height: '90%',
-              width: '90%',
-            },
+            padding: 0,
+            height: '90%',
+            width: '90%',
           }}
         >
           <Carousel
