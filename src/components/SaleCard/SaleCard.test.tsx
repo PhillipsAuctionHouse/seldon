@@ -59,7 +59,7 @@ describe('SaleCard', () => {
 
   it('should render PDF link', () => {
     const { getByText } = render(
-      <SaleCard {...props} pdfLinkText="Download PDF" pdfLinkUrl="https://example.com/pdf" />,
+      <SaleCard {...props} secondaryButtonText="Download PDF" secondaryButtonHref="https://example.com/pdf" />,
     );
     const link = getByText('Download PDF');
     expect(link).toBeInTheDocument();

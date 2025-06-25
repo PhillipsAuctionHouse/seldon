@@ -7,84 +7,51 @@ import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 
-/**
- * Props for the SaleCard component.
- */
+/** * Props for the SaleCard component. */
 export interface SaleCardProps extends ComponentProps<'div'> {
-  /**
-   * The source URL of the image to be displayed.
-   */
+  /** * The source URL of the image to be displayed. */
   imageSrc: string;
-
-  /**
-   * The alt text for the image. Defaults to "Auction Image" if not provided.
-   */
+  /** * The alt text for the image. Defaults to "Auction Image" if not provided. */
   imageAlt?: string;
-
-  /**
-   * The auctionType of sale (e.g. "Live Auction", "Online Only", etc.).
-   */
+  /** * The auctionType of sale (e.g. "Live Auction", "Online Only", etc.). */
   auctionType: string;
-
-  /**
-   * The titleText of the sale.
-   */
+  /** * The titleText of the sale. */
   titleText: string;
-
-  /**
-   * The date of the sale.
-   */
+  /** * The date of the sale. */
   date: string;
-
-  /**
-   * The location of the sale.
-   */
+  /** * The location of the sale. */
   location: string;
-
-  /**
-   * The text to be displayed on the primary button. If not provided, the button will not be rendered.
-   */
+  /** * The text to be displayed on the primary button. If not provided, the button will not be rendered. */
   primaryButtonText?: string;
-
-  /**
-   * The callback function to be executed when the primary button is clicked. Required if primaryButtonText is provided.
-   */
+  /** * The callback function to be executed when the primary button is clicked. Required if primaryButtonText is provided. */
   primaryButtonOnClick?: () => void;
-
-  /**
-   * The text to be displayed on the secondary button. If not provided, the button will not be rendered.
-   */
+  /** * The text to be displayed on the secondary button. If not provided, the button will not be rendered. */
   secondaryButtonText?: string;
-
-  /**
-   * The callback function to be executed when the secondary button is clicked. Required if secondaryButtonText is provided.
-   */
+  /** * The URL or callback function for the secondary button. Required if secondaryButtonText is provided. */
+  secondaryButtonHref?: string;
   secondaryButtonOnClick?: () => void;
-
-  /**
-   * The text to be displayed as a badge.
-   */
+  /** * The text to be displayed as a badge. */
   badgeText?: string;
-
-  /**
-   * The text to be displayed for the modal link.
-   */
+  /** * The text to be displayed for the modal link. */
   modalButtonText?: string;
-
-  /**
-   * The callback function to be executed when the modal link is clicked.
-   */
+  /** * The callback function to be executed when the modal link is clicked. */
   modalButtonOnClick?: () => void;
-
-  /**
-   * The text to be displayed for the PDF link.
+  /** * The variant of the SaleCard component.
+   * - 'default': The default style of the SaleCard component.
+   * - 'relatedSaleTile': A variant with a smaller image size and horizontal layout on mobile devices.
    */
-  pdfLinkText?: string;
-  /**
-   * The URL of the PDF to be linked.
-   */
-  pdfLinkUrl?: string;
+  variant?: 'default' | 'relatedSaleTile';
 }
+
+/**
+ * ## Overview
+ *
+ * Overview of this widget
+ *
+ * [Figma Link](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/Design-System--Responsive-Web?node-id=25028-2188&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-salecard--overview)
+ */
 
 const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
   (
@@ -99,27 +66,28 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
       primaryButtonText,
       primaryButtonOnClick,
       secondaryButtonText,
+      secondaryButtonHref,
       secondaryButtonOnClick,
       badgeText,
       modalButtonOnClick,
       modalButtonText,
-      pdfLinkText,
-      pdfLinkUrl,
+      variant = 'default',
       ...props
     },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SaleCard');
+    const classes = classnames(baseClassName, className, {
+      [`${baseClassName}--related-sale-tile`]: variant === 'relatedSaleTile',
+    });
     const componentProps = { ...commonProps, ...props };
 
     return (
-      <div {...componentProps} className={classnames(baseClassName, className)} ref={ref}>
-        {imageSrc ? (
-          <SeldonImage aspectRatio="16/9" src={imageSrc} alt={imageAlt} className={`${baseClassName}__image`} />
-        ) : null}
+      <div {...componentProps} className={classes} ref={ref}>
+        {imageSrc ? <SeldonImage src={imageSrc} alt={imageAlt} className={`${baseClassName}__image`} /> : null}
         <div className={`${baseClassName}__details`}>
           <Text variant={TextVariants.badge}>{auctionType}</Text>
-          <Text variant={TextVariants.title4}>{titleText}</Text>
+          <Text variant={TextVariants.title2}>{titleText}</Text>
           {badgeText && (
             <Text variant={TextVariants.badge} className={`${baseClassName}__badge`}>
               {badgeText}
@@ -152,21 +120,18 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
                 {primaryButtonText}
               </Button>
             )}
-            {secondaryButtonText && secondaryButtonOnClick && (
+            {secondaryButtonText && (
               <Button
-                variant={ButtonVariants.secondary}
+                variant={secondaryButtonHref ? ButtonVariants.tertiary : ButtonVariants.secondary}
+                href={secondaryButtonHref}
+                target={secondaryButtonHref ? '_blank' : undefined}
                 onClick={secondaryButtonOnClick}
-                className={`${baseClassName}__cta-button`}
+                className={classnames(`${baseClassName}__cta-button`, {
+                  [`${baseClassName}__pdf-link`]: secondaryButtonHref,
+                })}
               >
                 {secondaryButtonText}
               </Button>
-            )}
-            {pdfLinkText && pdfLinkUrl && (
-              <div className={`${baseClassName}__pdf-link`}>
-                <Button href={pdfLinkUrl} target="_blank" variant={ButtonVariants.tertiary}>
-                  {pdfLinkText}
-                </Button>
-              </div>
             )}
           </div>
         </SSRMediaQuery.Media>

@@ -37,23 +37,23 @@ const divider = (
   />
 );
 
-export const MultipleSales = () => (
-  <div
-    style={{
-      display: 'flex',
-      gap: 'var(--spacing-sm)',
-      flexDirection: 'column',
-    }}
-  >
-    <SaleCard {...defaultProps} />
+export const RelatedSaleTile = () => (
+  <div style={{ display: 'flex', gap: 'var(--spacing-sm)', flexDirection: 'column' }}>
+    <SaleCard {...defaultProps} variant="relatedSaleTile" />
     {divider}
     <SaleCard
       {...defaultProps}
       titleText="Modern & Contemporary Art Day Sale, Afternoon Session"
       location="Hong Kong"
+      variant="relatedSaleTile"
     />
     {divider}
-    <SaleCard {...defaultProps} titleText="Modern & Contemporary: Online Auction, New York" date="27 Aug - 05 Sep" />
+    <SaleCard
+      {...defaultProps}
+      titleText="Modern & Contemporary: Online Auction, New York"
+      date="27 Aug - 05 Sep"
+      variant="relatedSaleTile"
+    />
   </div>
 );
 
@@ -140,8 +140,8 @@ export const WithDownloadPdfLink = () => (
     badgeText="Happening Now"
     modalButtonText="Session & Viewing Details"
     modalButtonOnClick={() => console.log('Modal button clicked')}
-    pdfLinkText="Download PDF"
-    pdfLinkUrl="https://dist.phillips.com/content/web/docs/forms/NY_Conditions_of_Sale.pdf"
+    secondaryButtonText="Download PDF"
+    secondaryButtonHref="https://dist.phillips.com/content/web/docs/forms/NY_Conditions_of_Sale.pdf"
   />
 );
 

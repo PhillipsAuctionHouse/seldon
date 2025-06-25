@@ -4,17 +4,21 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: $spacing-md;
+  gap: $spacing-sm;
 
   @include media($breakpoint-md) {
     flex-direction: row;
+    gap: $spacing-md;
   }
 
   &__image {
+    aspect-ratio: 91/51;
+    border-radius: 4px;
     min-width: 100%;
 
     @include media($breakpoint-md) {
-      min-width: 360px;
+      aspect-ratio: 107/60;
+      min-width: 428px;
     }
 
     img {
@@ -79,7 +83,6 @@
   }
 
   &__modal-link-button {
-    font-variation-settings: 'wght' 400;
     padding: 0;
 
     @include underline;
@@ -94,6 +97,24 @@
 
     a {
       text-decoration: none;
+    }
+  }
+
+  &--related-sale-tile {
+    align-items: flex-start;
+    gap: $spacing-sm;
+
+    @include media($size-md, 'max') {
+      flex-direction: row;
+    }
+
+    .#{$px}-sale-card__image {
+      max-width: $spacing-xxxl;
+      min-width: 94px;
+
+      @include media($size-xl) {
+        max-width: calc($spacing-xxxl * 1.25);
+      }
     }
   }
 }
