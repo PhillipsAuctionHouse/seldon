@@ -47,14 +47,14 @@ describe('SaleCard', () => {
   });
 
   it('should render modal link', () => {
-    const modalLinkOnClick = vi.fn();
+    const modalButtonOnClick = vi.fn();
     const { getByText } = render(
-      <SaleCard {...props} modalLinkText="View Details" modalLinkOnClick={modalLinkOnClick} />,
+      <SaleCard {...props} modalButtonText="View Details" modalButtonOnClick={modalButtonOnClick} />,
     );
     const link = getByText('View Details');
     expect(link).toBeInTheDocument();
     fireEvent.click(link);
-    expect(modalLinkOnClick).toHaveBeenCalledTimes(1);
+    expect(modalButtonOnClick).toHaveBeenCalledTimes(1);
   });
 
   it('should render PDF link', () => {

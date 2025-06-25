@@ -69,12 +69,12 @@ export interface SaleCardProps extends ComponentProps<'div'> {
   /**
    * The text to be displayed for the modal link.
    */
-  modalLinkText?: string;
+  modalButtonText?: string;
 
   /**
    * The callback function to be executed when the modal link is clicked.
    */
-  modalLinkOnClick?: () => void;
+  modalButtonOnClick?: () => void;
 
   /**
    * The text to be displayed for the PDF link.
@@ -101,8 +101,8 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
       secondaryButtonText,
       secondaryButtonOnClick,
       badgeText,
-      modalLinkText,
-      modalLinkOnClick,
+      modalButtonOnClick,
+      modalButtonText,
       pdfLinkText,
       pdfLinkUrl,
       ...props
@@ -128,14 +128,14 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
           <div className={`${baseClassName}__info`}>
             <Text variant={TextVariants.string2}>{location}</Text>
             <Text variant={TextVariants.string2}>{date}</Text>
-            {modalLinkText && modalLinkOnClick && (
+            {modalButtonText && modalButtonOnClick && (
               <div className={`${baseClassName}__modal-link`}>
                 <Button
-                  onClick={modalLinkOnClick}
+                  onClick={modalButtonOnClick}
                   variant={ButtonVariants.tertiary}
                   className={`${baseClassName}__modal-link-button`}
                 >
-                  {modalLinkText}
+                  {modalButtonText}
                 </Button>
               </div>
             )}

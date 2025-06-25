@@ -72,8 +72,8 @@ export const WithBothCTAButtons = () => (
       secondaryButtonText="Register to Bid"
       secondaryButtonOnClick={() => console.log('Secondary button clicked')}
       badgeText="Happening Now"
-      modalLinkText="Session & Viewing Details"
-      modalLinkOnClick={() => console.log('Modal link clicked')}
+      modalButtonText="Session & Viewing Details"
+      modalButtonOnClick={() => console.log('Modal button clicked')}
     />
     {divider}
     <SaleCard
@@ -85,8 +85,8 @@ export const WithBothCTAButtons = () => (
       titleText="Modern & Contemporary Art Day Sale, Afternoon Session"
       location="Hong Kong"
       badgeText="Accepting Consignments"
-      modalLinkText="Session & Viewing Details"
-      modalLinkOnClick={() => console.log('Modal link clicked')}
+      modalButtonText="Session & Viewing Details"
+      modalButtonOnClick={() => console.log('Modal button clicked')}
     />
     {divider}
     <SaleCard
@@ -98,8 +98,8 @@ export const WithBothCTAButtons = () => (
       titleText="Modern & Contemporary: Online Auction, New York"
       date="27 Aug - 05 Sep"
       badgeText="Bidding Open"
-      modalLinkText="Session & Viewing Details"
-      modalLinkOnClick={() => console.log('Modal link clicked')}
+      modalButtonText="Session & Viewing Details"
+      modalButtonOnClick={() => console.log('Modal button clicked')}
     />
   </div>
 );
@@ -108,8 +108,8 @@ export const WithOnlyPrimaryCTAButton = () => (
   <SaleCard
     {...defaultProps}
     badgeText="Happening Now"
-    modalLinkText="Session & Viewing Details"
-    modalLinkOnClick={() => console.log('Modal link clicked')}
+    modalButtonText="Session & Viewing Details"
+    modalButtonOnClick={() => console.log('Modal button clicked')}
     primaryButtonText="Sell with us"
     primaryButtonOnClick={() => console.log('Primary button clicked')}
   />
@@ -127,8 +127,8 @@ export const WithOnlySecondaryCTAButton = () => (
     secondaryButtonText="Register to Bid"
     secondaryButtonOnClick={() => console.log('Secondary button clicked')}
     badgeText="Happening Now"
-    modalLinkText="Session & Viewing Details"
-    modalLinkOnClick={() => console.log('Modal link clicked')}
+    modalButtonText="Session & Viewing Details"
+    modalButtonOnClick={() => console.log('Modal button clicked')}
   />
 );
 
@@ -138,8 +138,8 @@ export const WithDownloadPdfLink = () => (
     primaryButtonText="View Results"
     primaryButtonOnClick={() => console.log('Primary button clicked')}
     badgeText="Happening Now"
-    modalLinkText="Session & Viewing Details"
-    modalLinkOnClick={() => console.log('Modal link clicked')}
+    modalButtonText="Session & Viewing Details"
+    modalButtonOnClick={() => console.log('Modal button clicked')}
     pdfLinkText="Download PDF"
     pdfLinkUrl="https://dist.phillips.com/content/web/docs/forms/NY_Conditions_of_Sale.pdf"
   />
@@ -153,7 +153,7 @@ export const WithoutCTAButtons = () => (
     date="2 PM EST, May 27, 2025"
     location="New York"
     badgeText="Happening Now"
-    modalLinkText="Session & Viewing Details"
-    modalLinkOnClick={() => console.log('Modal link clicked')}
+    modalButtonText="Session & Viewing Details"
+    modalButtonOnClick={() => console.log('Modal button clicked')}
   />
 );
