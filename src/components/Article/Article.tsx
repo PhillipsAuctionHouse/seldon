@@ -7,7 +7,6 @@ import { Link, LinkProps } from '../Link';
 import { SeldonImage } from '../SeldonImage';
 import { Text, TextVariants } from '../Text';
 
-// You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface ArticleProps extends ComponentProps<'div'> {
   /**
    * Image src to display at the right side of the article.
@@ -84,7 +83,7 @@ const Article = forwardRef<HTMLDivElement, ArticleProps>(
             aspectRatio="16/9"
             src={imageSrc}
             alt={altText}
-            className={isExitGateCardVariant ? `${articleBaseClassName}__desktop_image` : ''}
+            className={classnames({ [`${articleBaseClassName}__desktop_image`]: isExitGateCardVariant })}
           />
         ) : null}
 
@@ -105,13 +104,16 @@ const Article = forwardRef<HTMLDivElement, ArticleProps>(
           ) : null}
 
           {description ? (
-            <Text variant={TextVariants.body2} className={`${articleBaseClassName}__content-description`}>
+            <Text
+              variant={isExitGateCardVariant ? TextVariants.body3 : TextVariants.body2}
+              className={`${articleBaseClassName}__content-description`}
+            >
               {description}
             </Text>
           ) : null}
 
           {linkLabel ? (
-            <Component href={linkHref} className={isExitGateCardVariant ? '' : `${articleBaseClassName}__content-link`}>
+            <Component href={linkHref}>
               {isExitGateCardVariant ? (
                 <Button variant={ButtonVariants.secondary} className={`${articleBaseClassName}__content-link`}>
                   {linkLabel}
