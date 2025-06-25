@@ -101,8 +101,8 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
           )}
           {sessionTimes &&
             sessionTimes.length > 0 &&
-            sessionTimes.map((session, index) => (
-              <div key={index}>
+            sessionTimes.map((session) => (
+              <div key={`${session.sessionLabel ?? ''}-${session.sessionTime ?? ''}`}>
                 {session.sessionLabel && (
                   <Text
                     variant={TextVariants.heading5}
@@ -132,9 +132,9 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
           )}
           {viewingTimes &&
             viewingTimes.length > 0 &&
-            viewingTimes.map((time, index) => (
+            viewingTimes.map((time) => (
               <Text
-                key={index}
+                key={time}
                 variant={TextVariants.body2}
                 className={classnames(`${baseClassName}__label`, {
                   [`${baseClassName}__center-align`]: centerAlignText,

@@ -7,7 +7,7 @@ import Modal, { ModalProps } from '../../components/Modal/Modal';
 import { Text, TextVariants } from '../../components/Text';
 import { getCommonProps, noOp } from '../../utils';
 
-export interface ViewingDetailsButtonsProps {
+export interface ModalButtonProps {
   /**
    * Callback click function for button
    */
@@ -32,14 +32,6 @@ export interface ComposedModalProps extends Omit<ModalProps, 'onClose' | 'role' 
    */
   onClose?: () => void;
   /**
-   * Add any additional styles to the component
-   */
-  style?: React.CSSProperties;
-  /**
-   * Whether the modal should focus after render
-   */
-  shouldFocusAfterRender?: boolean;
-  /**
    * Optional proprerty center align all text in the component
    */
   centerAlignText?: boolean;
@@ -50,15 +42,15 @@ export interface ComposedModalProps extends Omit<ModalProps, 'onClose' | 'role' 
   /**
    * Left Button Props
    */
-  secondaryButton?: ViewingDetailsButtonsProps;
+  secondaryButton?: ModalButtonProps;
   /**
    * Right Button Props
    */
-  primaryButton?: ViewingDetailsButtonsProps;
+  primaryButton?: ModalButtonProps;
   /**
    * Disclaimer text for bottom of Viewings Details
    */
-  disclaimer?: string;
+  disclaimerText?: string;
 }
 
 /**
@@ -78,12 +70,10 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
     overlayClassName,
     isOpen = false,
     onClose = noOp,
-    style,
-    shouldFocusAfterRender,
     centerAlignText,
     maxHeightValue = '60vh',
     title,
-    disclaimer,
+    disclaimerText,
     secondaryButton,
     primaryButton,
     ...props
@@ -107,7 +97,7 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
         <div className={`${baseClassName}__body`} style={{ maxHeight: maxHeightValue }}>
           {children}
         </div>
-        {(secondaryButton || primaryButton || disclaimer) && (
+        {(secondaryButton || primaryButton || disclaimerText) && (
           <>
             <Divider className={`${baseClassName}__divider`} id={baseClassName} />
             <div className={`${baseClassName}__btns-group`}>
@@ -130,14 +120,14 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
                 </Button>
               )}
             </div>
-            {disclaimer && (
+            {disclaimerText && (
               <Text
                 variant={TextVariants.heading5}
                 className={classnames(`${baseClassName}__disclaimer`, {
                   [`${baseClassName}__center-align`]: centerAlignText,
                 })}
               >
-                {disclaimer}
+                {disclaimerText}
               </Text>
             )}
           </>

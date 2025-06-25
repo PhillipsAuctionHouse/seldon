@@ -38,7 +38,6 @@ export const Playground = (props: ComposedModalProps) => {
         {...props}
         isOpen={isOpen}
         onClose={onClose}
-        shouldFocusAfterRender={false}
         secondaryButton={{
           buttonLabel: 'Register to Bid',
         }}
@@ -73,14 +72,7 @@ export const ComposedModalScroll = (props: ComposedModalProps) => {
         Viewing Long Content
       </Link>
 
-      <ComposedModal
-        key={`${props.id}`}
-        {...props}
-        isOpen={isOpen}
-        onClose={onClose}
-        maxHeightValue="40vh"
-        shouldFocusAfterRender={false}
-      >
+      <ComposedModal key={`${props.id}`} {...props} isOpen={isOpen} onClose={onClose} maxHeightValue="40vh">
         <div style={{ maxWidth: '40rem', padding: '0 2rem' }}>{'Lorem ipsum '.repeat(150)}</div>
       </ComposedModal>
     </>
@@ -114,7 +106,6 @@ export const ComposedModalSingleButton = (props: ComposedModalProps) => {
         {...props}
         isOpen={isOpen}
         onClose={onClose}
-        shouldFocusAfterRender={false}
         primaryButton={{
           buttonLabel: 'Browse',
         }}

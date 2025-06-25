@@ -55,7 +55,7 @@ describe('ComposedModal', () => {
         primaryButton={{
           buttonLabel: 'Browse',
         }}
-        disclaimer="Optional Disclaimer text"
+        disclaimerText="Optional Disclaimer text"
       >
         <div>Modal Content</div>
       </ComposedModal>,
