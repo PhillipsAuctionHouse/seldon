@@ -75,6 +75,7 @@ export const WithBothCTAButtons = () => (
       badgeText="Happening Now"
       modalButtonText="Session & Viewing Details"
       modalButtonOnClick={() => console.log('Modal button clicked')}
+      imageSrc="https://via.placeholder.com/400"
     />
     {divider}
     <SaleCard
