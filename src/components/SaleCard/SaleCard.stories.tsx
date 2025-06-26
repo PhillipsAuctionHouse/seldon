@@ -1,9 +1,10 @@
 import { Meta } from '@storybook/react';
 import SaleCard, { SaleCardProps } from './SaleCard';
 import { getScssVar } from '../../utils/scssUtils';
+import { SaleCardVariants } from './types';
 
 const meta = {
-  title: 'Components/SaleCard',
+  title: 'Patterns/SaleCard',
   component: SaleCard,
 } satisfies Meta<typeof SaleCard>;
 
@@ -39,20 +40,20 @@ const divider = (
 
 export const RelatedSaleTile = () => (
   <div style={{ display: 'flex', gap: 'var(--spacing-sm)', flexDirection: 'column' }}>
-    <SaleCard {...defaultProps} variant="relatedSaleTile" />
+    <SaleCard {...defaultProps} variant={SaleCardVariants.RELATED_SALE_TILE} />
     {divider}
     <SaleCard
       {...defaultProps}
       titleText="Modern & Contemporary Art Day Sale, Afternoon Session"
       location="Hong Kong"
-      variant="relatedSaleTile"
+      variant={SaleCardVariants.RELATED_SALE_TILE}
     />
     {divider}
     <SaleCard
       {...defaultProps}
       titleText="Modern & Contemporary: Online Auction, New York"
       date="27 Aug - 05 Sep"
-      variant="relatedSaleTile"
+      variant={SaleCardVariants.RELATED_SALE_TILE}
     />
   </div>
 );

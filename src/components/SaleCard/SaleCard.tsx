@@ -6,6 +6,7 @@ import { SeldonImage } from '../SeldonImage';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
+import { SaleCardVariants } from './types';
 
 /** * Props for the SaleCard component. */
 export interface SaleCardProps extends ComponentProps<'div'> {
@@ -40,7 +41,7 @@ export interface SaleCardProps extends ComponentProps<'div'> {
    * - 'default': The default style of the SaleCard component.
    * - 'relatedSaleTile': A variant with a smaller image size and horizontal layout on mobile devices.
    */
-  variant?: 'default' | 'relatedSaleTile';
+  variant?: SaleCardVariants;
 }
 
 /**
@@ -71,14 +72,14 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
       badgeText,
       modalButtonOnClick,
       modalButtonText,
-      variant = 'default',
+      variant = SaleCardVariants.DEFAULT,
       ...props
     },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SaleCard');
     const classes = classnames(baseClassName, className, {
-      [`${baseClassName}--related-sale-tile`]: variant === 'relatedSaleTile',
+      [`${baseClassName}--${variant}`]: variant,
     });
     const componentProps = { ...commonProps, ...props };
 
