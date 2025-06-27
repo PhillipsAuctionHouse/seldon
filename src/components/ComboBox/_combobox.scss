@@ -23,14 +23,19 @@
   }
 
   &__input {
+    @include text($string2);
+
     accent-color: $soft-black;
     border: 1px solid $keyline-gray;
     border-radius: 0.1875rem;
+    font-variation-settings: 'wght' 600;
     outline: none;
     padding: $padding-xsm;
     width: 100%;
 
-    @include text($string2);
+    &::placeholder {
+      font-variation-settings: 'wght' 400;
+    }
 
     &:hover {
       border: 1px solid $primary-black;
