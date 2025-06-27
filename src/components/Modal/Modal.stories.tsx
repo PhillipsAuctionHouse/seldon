@@ -1,12 +1,12 @@
 import type { Meta } from '@storybook/react';
 import { Playground as PlaygroundSplitPanel } from '../SplitPanel/SplitPanel.stories';
 
-import Modal from './Modal';
 import { useState } from 'react';
 import Button from '../Button/Button';
 import Drawer from '../Drawer/Drawer';
-import Text from '../Text/Text';
 import { TextVariants } from '../Text';
+import Text from '../Text/Text';
+import Modal from './Modal';
 
 const meta = {
   title: 'Components/Modal',
