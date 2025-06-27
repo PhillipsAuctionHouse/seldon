@@ -1,3 +1,10 @@
+# [1.159.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.158.0...v1.159.0) (2025-06-27)
+
+
+### Features
+
+* **combobox:** L3-7091 match combobox input text to regular input text ([#646](https://github.com/PhillipsAuctionHouse/seldon/issues/646)) ([c2d9bf9](https://github.com/PhillipsAuctionHouse/seldon/commit/c2d9bf992e9e2528bc8c055ad86fc3823fbb9822))
+
 # [1.158.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.157.0...v1.158.0) (2025-06-26)
 
 
