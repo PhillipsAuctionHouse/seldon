@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import Article from './Article';
-import { Link } from '../Link';
 import { runCommonTests } from '../../utils/testUtils';
+import { Link } from '../Link';
+import Article from './Article';
 
 describe('Article', () => {
   runCommonTests(Article, 'Article');
@@ -16,6 +16,7 @@ describe('Article', () => {
         linkElement={Link}
         linkLabel="Test Link"
         linkHref="https://example.com"
+        altText="bull"
       />,
     );
 
