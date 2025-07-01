@@ -112,32 +112,34 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
             )}
           </div>
         </div>
-        <SSRMediaQuery.Media greaterThanOrEqual="md">
-          <div className={`${baseClassName}__cta`}>
-            {primaryButtonText && primaryButtonOnClick && (
-              <Button
-                variant={ButtonVariants.primary}
-                onClick={primaryButtonOnClick}
-                className={`${baseClassName}__cta-button`}
-              >
-                {primaryButtonText}
-              </Button>
-            )}
-            {secondaryButtonText && (
-              <Button
-                variant={secondaryButtonHref ? ButtonVariants.tertiary : ButtonVariants.secondary}
-                href={secondaryButtonHref}
-                target={secondaryButtonHref ? '_blank' : undefined}
-                onClick={secondaryButtonOnClick}
-                className={classnames(`${baseClassName}__cta-button`, {
-                  [`${baseClassName}__pdf-link`]: secondaryButtonHref,
-                })}
-              >
-                {secondaryButtonText}
-              </Button>
-            )}
-          </div>
-        </SSRMediaQuery.Media>
+        {variant !== SaleCardVariants.RELATED_SALE_TILE && (
+          <SSRMediaQuery.Media greaterThanOrEqual="md">
+            <div className={`${baseClassName}__cta`}>
+              {primaryButtonText && primaryButtonOnClick && (
+                <Button
+                  variant={ButtonVariants.primary}
+                  onClick={primaryButtonOnClick}
+                  className={`${baseClassName}__cta-button`}
+                >
+                  {primaryButtonText}
+                </Button>
+              )}
+              {secondaryButtonText && (
+                <Button
+                  variant={secondaryButtonHref ? ButtonVariants.tertiary : ButtonVariants.secondary}
+                  href={secondaryButtonHref}
+                  target={secondaryButtonHref ? '_blank' : undefined}
+                  onClick={secondaryButtonOnClick}
+                  className={classnames(`${baseClassName}__cta-button`, {
+                    [`${baseClassName}__pdf-link`]: secondaryButtonHref,
+                  })}
+                >
+                  {secondaryButtonText}
+                </Button>
+              )}
+            </div>
+          </SSRMediaQuery.Media>
+        )}
       </div>
     );
   },
