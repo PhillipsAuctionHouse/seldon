@@ -87,8 +87,10 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
       <div {...componentProps} className={classes} ref={ref}>
         {imageSrc ? <SeldonImage src={imageSrc} alt={imageAlt} className={`${baseClassName}__image`} /> : null}
         <div className={`${baseClassName}__details`}>
-          <Text variant={TextVariants.badge}>{auctionType}</Text>
-          <Text variant={TextVariants.title2}>{titleText}</Text>
+          <Text variant={TextVariants.badge} className={`${baseClassName}__auction-type`}>
+            {auctionType}
+          </Text>
+          <Text variant={TextVariants.title3}>{titleText}</Text>
           {badgeText && (
             <Text variant={TextVariants.badge} className={`${baseClassName}__badge`}>
               {badgeText}
