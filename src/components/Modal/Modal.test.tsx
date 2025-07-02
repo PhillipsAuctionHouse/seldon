@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import Modal from './Modal';
 import userEvent from '@testing-library/user-event';
 import { runCommonTests } from '../../utils/testUtils';
+import Modal from './Modal';
 import { ModalFromDrawer } from './Modal.stories';
 
 describe('Modal', () => {
@@ -10,6 +10,7 @@ describe('Modal', () => {
   afterEach(() => {
     vi.clearAllMocks();
   });
+
   runCommonTests((props) => <Modal {...props} isOpen />, 'Modal');
 
   it('renders the modal when isOpen is true', () => {

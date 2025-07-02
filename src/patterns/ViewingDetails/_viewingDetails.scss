@@ -1,0 +1,51 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-viewing-details {
+  &__content {
+    padding: 0 $spacing-md;
+    position: relative;
+  }
+
+  &__children {
+    margin-bottom: $spacing-md;
+  }
+
+  &__center-align {
+    text-align: center;
+  }
+
+  &__label {
+    margin-bottom: 0;
+  }
+
+  &__close-icon {
+    cursor: pointer;
+    position: absolute;
+    right: $spacing-sm;
+    top: $spacing-sm;
+  }
+
+  &__text {
+    margin-bottom: $spacing-sm;
+  }
+
+  &__location {
+    margin-bottom: $spacing-xsm;
+    margin-top: $spacing-md;
+  }
+
+  &__map-link {
+    margin-bottom: $spacing-md;
+  }
+}
+
+.#{$px}-viewing-details__content .#{$px}-viewing-details__label {
+  margin-bottom: 0;
+}
+.#{$px}-viewing-details__content .#{$px}-viewing-details__text {
+  margin-bottom: $spacing-sm;
+}
+.#{$px}-viewing-details__content .#{$px}-viewing-details__location {
+  margin-bottom: $spacing-xsm;
+  margin-top: $spacing-md;
+}
