@@ -1,49 +1,19 @@
-import classnames from 'classnames';
 import { ComponentProps, ElementType, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
-import Button from '../Button/Button';
-import { ButtonVariants } from '../Button/types';
-import { Link, LinkProps } from '../Link';
+import classnames from 'classnames';
 import { SeldonImage } from '../SeldonImage';
 import { Text, TextVariants } from '../Text';
+import { Link, LinkProps } from '../Link';
 
+// You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface ArticleProps extends ComponentProps<'div'> {
-  /**
-   * Image src to display at the right side of the article.
-   */
   imageSrc?: string;
-  /**
-   * Top label for the article.
-   */
   label?: string;
-  /**
-   * Header for the article.
-   */
   header?: string;
-  /**
-   * Description for the article.
-   */
   description?: string;
-  /**
-   * Custom link element to use for the link. Defaults to the `Link` component.
-   */
   linkElement?: ElementType<LinkProps>;
-  /**
-   * Label for the link.
-   */
   linkLabel?: string;
-  /**
-   * Href for the link.
-   */
   linkHref?: string;
-  /**
-   * Variant style for the article component.
-   */
-  variant?: 'default' | 'exitGateCard';
-  /**
-   * imageSrc alt text for accessibility.
-   */
-  altText?: string;
 }
 /**
  * ## Overview
@@ -56,71 +26,37 @@ export interface ArticleProps extends ComponentProps<'div'> {
  */
 const Article = forwardRef<HTMLDivElement, ArticleProps>(
   (
-    {
-      className,
-      imageSrc,
-      label,
-      header,
-      description,
-      linkElement: Component = Link,
-      linkLabel,
-      linkHref,
-      variant = 'default',
-      altText = 'Article Image',
-      ...props
-    },
+    { className, imageSrc, label, header, description, linkElement: Component = Link, linkLabel, linkHref, ...props },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Article');
-    const isExitGateCardVariant = variant === 'exitGateCard';
-    const articleBaseClassName = isExitGateCardVariant ? `${baseClassName}-${variant}` : baseClassName;
 
     return (
-      <article {...commonProps} className={classnames(articleBaseClassName, className)} {...props} ref={ref}>
-        {imageSrc ? (
-          <SeldonImage
-            objectFit={isExitGateCardVariant ? 'cover' : 'none'}
-            aspectRatio="16/9"
-            src={imageSrc}
-            alt={altText}
-            className={classnames({ [`${articleBaseClassName}__desktop_image`]: isExitGateCardVariant })}
-          />
-        ) : null}
+      <article {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
+        {imageSrc ? <SeldonImage aspectRatio="16/9" src={imageSrc} alt="bull" /> : null}
 
-        <div className={`${articleBaseClassName}__content`}>
+        <div className={`${baseClassName}__content`}>
           {label ? (
-            <Text variant={TextVariants.label} className={`${articleBaseClassName}__content-label`}>
+            <Text variant={TextVariants.label} className={`${baseClassName}__content-label`}>
               {label}
             </Text>
           ) : null}
 
           {header ? (
-            <Text
-              variant={isExitGateCardVariant ? TextVariants.heading2 : TextVariants.heading3}
-              className={`${articleBaseClassName}__content-title`}
-            >
+            <Text variant={TextVariants.heading3} className={`${baseClassName}__content-title`}>
               {header}
             </Text>
           ) : null}
 
           {description ? (
-            <Text
-              variant={isExitGateCardVariant ? TextVariants.body3 : TextVariants.body2}
-              className={`${articleBaseClassName}__content-description`}
-            >
+            <Text variant={TextVariants.body2} className={`${baseClassName}__content-description`}>
               {description}
             </Text>
           ) : null}
 
           {linkLabel ? (
-            <Component href={linkHref}>
-              {isExitGateCardVariant ? (
-                <Button variant={ButtonVariants.secondary} className={`${articleBaseClassName}__content-link`}>
-                  {linkLabel}
-                </Button>
-              ) : (
-                linkLabel
-              )}
+            <Component href={linkHref} className={`${baseClassName}__content-link`}>
+              {linkLabel}
             </Component>
           ) : null}
         </div>

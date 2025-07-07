@@ -1,21 +1,20 @@
 import { render, screen } from '@testing-library/react';
-import Article from './Article';
-import { Link } from '../Link';
 import { runCommonTests } from '../../utils/testUtils';
+import ExitGateCard from './ExitGateCard';
 
-describe('Article', () => {
-  runCommonTests(Article, 'Article');
+describe('ExitGateCard', () => {
+  runCommonTests(ExitGateCard, 'ExitGateCard');
 
   it('renders correctly with all props', () => {
     render(
-      <Article
+      <ExitGateCard
         imageSrc="test-image.jpg"
         label="Test Label"
         header="Test Header"
         description="Test Description"
-        linkElement={Link}
         linkLabel="Test Link"
         linkHref="https://example.com"
+        altText="bull"
       />,
     );
 
@@ -23,11 +22,11 @@ describe('Article', () => {
     expect(screen.getByText('Test Label')).toBeInTheDocument();
     expect(screen.getByText('Test Header')).toBeInTheDocument();
     expect(screen.getByText('Test Description')).toBeInTheDocument();
-    expect(screen.getByText('Test Link').parentElement?.parentElement).toHaveAttribute('href', 'https://example.com');
+    expect(screen.getByText('Test Link')).toHaveAttribute('href', 'https://example.com');
   });
 
   it('renders correctly without optional props', () => {
-    render(<Article header="Test Header" />);
+    render(<ExitGateCard header="Test Header" />);
 
     expect(screen.queryByAltText('bull')).toBeNull();
     expect(screen.queryByText('Test Label')).toBeNull();
