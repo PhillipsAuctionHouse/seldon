@@ -146,6 +146,8 @@ const FavoritesCollectionTile = memo(
                         data-testid="menu-trigger"
                         tabIndex={0}
                         role="button"
+                        aria-label="Manage List"
+                        aria-haspopup="menu"
                         onKeyDown={(event) => {
                           if (event.key === 'Enter') {
                             event.preventDefault();
@@ -161,6 +163,7 @@ const FavoritesCollectionTile = memo(
                             height={iconSize}
                             color="$dark-gray"
                             className={`${baseClassName}__icon-button`}
+                            title="Manage List"
                           />
                         </div>
                       </div>
@@ -196,68 +199,101 @@ const FavoritesCollectionTile = memo(
                 )}
               </>
             </div>
-            <Component href={href} className={classnames(`${baseClassName}__media-link`, linkClassName)} tabIndex={0}>
-              {isCountEmpty && variant === 'favorites' && (
-                <div className={`${baseClassName}__media-container`} data-testid="favorites" aria-label="Favorites">
-                  <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--bg`)}>
+            {isCreateVariant ? (
+              <>
+                <div className={`${baseClassName}__create-spacing`}></div>
+                <div
+                  className={`${baseClassName}__media-container`}
+                  data-testid="list"
+                  aria-label="Lists"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      props.onClick?.(e as unknown as React.MouseEvent<HTMLDivElement>);
+                    }
+                  }}
+                >
+                  <div
+                    className={classnames(`${baseClassName}__empty`, {
+                      [`${baseClassName}__empty--create-list`]: !hasListData,
+                    })}
+                  >
                     <div className={`${baseClassName}__empty__content`}>
                       <Icon
-                        icon="Favorite"
+                        icon="Add"
                         width={iconSize}
                         height={iconSize}
                         color="$dark-gray"
-                        className={`${baseClassName}__icon`}
+                        className={classnames(`${baseClassName}__icon`, {
+                          [`${baseClassName}__icon-circle`]: !hasListData,
+                        })}
                       />
-                      <div className={`${baseClassName}__text`}>{emptyFavoritesText}</div>
+                      <div className={`${baseClassName}__text`}>{createFirstListText}</div>
                     </div>
                   </div>
                 </div>
-              )}
+              </>
+            ) : (
+              <Component href={href} className={classnames(`${baseClassName}__media-link`, linkClassName)} tabIndex={0}>
+                {isCountEmpty && variant === 'favorites' && (
+                  <div className={`${baseClassName}__media-container`} data-testid="favorites" aria-label="Favorites">
+                    <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--bg`)}>
+                      <div className={`${baseClassName}__empty__content`}>
+                        <Icon
+                          icon="Favorite"
+                          width={iconSize}
+                          height={iconSize}
+                          color="$dark-gray"
+                          className={`${baseClassName}__icon`}
+                        />
+                        <div className={`${baseClassName}__text`}>{emptyFavoritesText}</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
-              {(isCountEmpty || !hasListData) && (isListVariant || isCreateVariant) && (
-                <>
-                  {isCreateVariant && <div className={`${baseClassName}__create-spacing`}></div>}
+                {isHasListAndCountEmpty && isListVariant && (
                   <div className={`${baseClassName}__media-container`} data-testid="list" aria-label="Lists">
                     <div
                       className={classnames(`${baseClassName}__empty`, {
-                        [`${baseClassName}__empty--create-list`]: !hasListData && (isListVariant || isCreateVariant),
-                        [`${baseClassName}__empty--bg`]: isCountEmpty && !isCreateVariant,
+                        [`${baseClassName}__empty--create-list`]: !hasListData,
+                        [`${baseClassName}__empty--bg`]: isCountEmpty,
                       })}
                     >
                       <div className={`${baseClassName}__empty__content`}>
                         <Icon
-                          icon={isHasListAndCountEmpty ? 'Favorite' : 'Add'}
+                          icon="Favorite"
                           width={iconSize}
                           height={iconSize}
                           color="$dark-gray"
                           className={classnames(`${baseClassName}__icon`, {
-                            [`${baseClassName}__icon-circle`]: !hasListData && (isListVariant || isCreateVariant),
+                            [`${baseClassName}__icon-circle`]: !hasListData,
                           })}
                         />
-                        <div className={`${baseClassName}__text`}>
-                          {isHasListAndCountEmpty ? emptyListsText : createFirstListText}
-                        </div>
+                        <div className={`${baseClassName}__text`}>{emptyListsText}</div>
                       </div>
                     </div>
                   </div>
-                </>
-              )}
+                )}
 
-              {!isCountEmpty && hasListData && (
-                <div className={`${baseClassName}__media-container`} ref={imageRef}>
-                  <SeldonImage
-                    alt={name}
-                    aspectRatio="1/1"
-                    className={`${baseClassName}__media`}
-                    objectFit="cover"
-                    src={imageSrc}
-                    style={{
-                      cursor: 'pointer',
-                    }}
-                  />
-                </div>
-              )}
-            </Component>
+                {!isCountEmpty && hasListData && (
+                  <div className={`${baseClassName}__media-container`} ref={imageRef}>
+                    <SeldonImage
+                      alt={name}
+                      aspectRatio="1/1"
+                      className={`${baseClassName}__media`}
+                      objectFit="contain"
+                      src={imageSrc}
+                      style={{
+                        cursor: 'pointer',
+                      }}
+                    />
+                  </div>
+                )}
+              </Component>
+            )}
           </div>
         </div>
       );
