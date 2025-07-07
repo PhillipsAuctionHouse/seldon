@@ -92,6 +92,7 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
         {...props}
         {...commonProps}
         className={classnames(`${baseClassName}`, className)}
+        id={id}
       >
         <Text
           variant={TextVariants.heading3}
