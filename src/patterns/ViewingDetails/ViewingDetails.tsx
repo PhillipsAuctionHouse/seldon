@@ -91,76 +91,44 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
 
     return (
       <div {...commonProps} {...props} className={classnames(baseClassName, className)} ref={ref}>
-        <div className={`${baseClassName}__content`}>
+        <div
+          className={classnames(`${baseClassName}__content`, { [`${baseClassName}__center-align`]: centerAlignText })}
+        >
           {children && <div className={`${baseClassName}__children`}>{children}</div>}
 
-          {sessionTimesLabel && (
-            <Text variant={TextVariants.heading4} className={centerAlignText ? `${baseClassName}__center-align` : ''}>
-              {sessionTimesLabel}
-            </Text>
-          )}
+          {sessionTimesLabel && <Text variant={TextVariants.heading4}>{sessionTimesLabel}</Text>}
           {sessionTimes &&
             sessionTimes.length > 0 &&
             sessionTimes.map((session) => (
               <div key={`${session.sessionLabel ?? ''}-${session.sessionTime ?? ''}`}>
                 {session.sessionLabel && (
-                  <Text
-                    variant={TextVariants.heading5}
-                    className={classnames(`${baseClassName}__label`, {
-                      [`${baseClassName}__center-align`]: centerAlignText,
-                    })}
-                  >
+                  <Text variant={TextVariants.heading5} className={`${baseClassName}__label`}>
                     {session.sessionLabel}
                   </Text>
                 )}
                 {session.sessionTime && (
-                  <Text
-                    variant={TextVariants.body2}
-                    className={classnames(`${baseClassName}__text`, {
-                      [`${baseClassName}__center-align`]: centerAlignText,
-                    })}
-                  >
+                  <Text variant={TextVariants.body2} className={`${baseClassName}__text`}>
                     {session.sessionTime}
                   </Text>
                 )}
               </div>
             ))}
-          {label && (
-            <Text variant={TextVariants.heading4} className={centerAlignText ? `${baseClassName}__center-align` : ''}>
-              {label}
-            </Text>
-          )}
+          {label && <Text variant={TextVariants.heading4}>{label}</Text>}
           {viewingTimes &&
             viewingTimes.length > 0 &&
             viewingTimes.map((time) => (
-              <Text
-                key={time}
-                variant={TextVariants.body2}
-                className={classnames(`${baseClassName}__label`, {
-                  [`${baseClassName}__center-align`]: centerAlignText,
-                })}
-              >
+              <Text key={time} variant={TextVariants.body2} className={`${baseClassName}__label`}>
                 {time}
               </Text>
             ))}
 
           {location && (
-            <Text
-              variant={TextVariants.body2}
-              className={classnames(`${baseClassName}__location`, {
-                [`${baseClassName}__center-align`]: centerAlignText,
-              })}
-            >
+            <Text variant={TextVariants.body2} className={`${baseClassName}__location`}>
               {location}
             </Text>
           )}
           {mapLink && (
-            <Text
-              variant={TextVariants.body2}
-              className={classnames(`${baseClassName}__map-link`, {
-                [`${baseClassName}__center-align`]: centerAlignText,
-              })}
-            >
+            <Text variant={TextVariants.body2} className={`${baseClassName}__map-link`}>
               <Component href={mapLink}>(Map)</Component>
             </Text>
           )}

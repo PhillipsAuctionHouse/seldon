@@ -1,11 +1,11 @@
 import classnames from 'classnames';
 import { forwardRef } from 'react';
-import Button from '../../components/Button/Button';
-import { ButtonVariants } from '../../components/Button/types';
-import { Divider } from '../../components/Divider';
-import Modal, { ModalProps } from '../../components/Modal/Modal';
-import { Text, TextVariants } from '../../components/Text';
 import { getCommonProps, noOp } from '../../utils';
+import Button from '../Button/Button';
+import { ButtonVariants } from '../Button/types';
+import { Divider } from '../Divider';
+import Modal, { ModalProps } from '../Modal/Modal';
+import { Text, TextVariants } from '../Text';
 
 export interface ModalButtonProps {
   /**
@@ -76,9 +76,14 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
     disclaimerText,
     secondaryButton,
     primaryButton,
+    id,
     ...props
-  }: ComposedModalProps) => {
-    const { className: baseClassName, 'data-testid': testId, ...commonProps } = getCommonProps(props, 'ComposedModal');
+  }: ComposedModalProps & { id?: string }) => {
+    const {
+      className: baseClassName,
+      'data-testid': testId,
+      ...commonProps
+    } = getCommonProps({ id, ...props }, 'ComposedModal');
 
     return (
       <Modal
@@ -99,23 +104,15 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
         </div>
         {(secondaryButton || primaryButton || disclaimerText) && (
           <>
-            <Divider className={`${baseClassName}__divider`} id={baseClassName} />
+            <Divider className={`${baseClassName}__divider`} id={`${id}-divider`} />
             <div className={`${baseClassName}__btns-group`}>
               {secondaryButton && (
-                <Button
-                  id={`viewings-list-browse-btn`}
-                  variant={ButtonVariants.secondary}
-                  onClick={secondaryButton.onClick}
-                >
+                <Button id={`${id}-secondary-btn`} variant={ButtonVariants.secondary} onClick={secondaryButton.onClick}>
                   {secondaryButton.buttonLabel}
                 </Button>
               )}
               {primaryButton && (
-                <Button
-                  id={`viewings-list-register-btn`}
-                  variant={ButtonVariants.primary}
-                  onClick={primaryButton.onClick}
-                >
+                <Button id={`${id}-primary-btn`} variant={ButtonVariants.primary} onClick={primaryButton.onClick}>
                   {primaryButton.buttonLabel}
                 </Button>
               )}

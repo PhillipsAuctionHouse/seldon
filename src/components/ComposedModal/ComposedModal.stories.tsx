@@ -1,12 +1,12 @@
 import { Meta } from '@storybook/react/*';
 import { useState } from 'react';
-import Link from '../../components/Link/Link';
-import ViewingDetails from '../ViewingDetails/ViewingDetails';
-import { viewingDetailsProps } from '../ViewingDetails/ViewingDetailsMock';
+import ViewingDetails from '../../patterns/ViewingDetails/ViewingDetails';
+import { viewingDetailsProps } from '../../patterns/ViewingDetails/ViewingDetailsMock';
+import Link from '../Link/Link';
 import ComposedModal, { ComposedModalProps } from './ComposedModal';
 
 export default {
-  title: 'Patterns/ComposedModal',
+  title: 'Components/ComposedModal',
   component: ComposedModal,
 } satisfies Meta<typeof ComposedModal>;
 

@@ -50,13 +50,13 @@
 @use 'components/Filter/filter';
 @use 'components/FavoritingTileButton/favoritingTileButton';
 @use 'components/Toast/toast';
+@use 'components/ComposedModal/composedModal';
 
 // Patterns
 @use 'patterns/HeroBanner/heroBanner';
 @use 'patterns/LanguageSelector/languageSelector';
 @use 'patterns/UserManagement/userManagement';
 @use 'patterns/ViewingsList/viewingsList';
-@use 'patterns/ComposedModal/composedModal';
 @use 'patterns/ViewingDetails/viewingDetails';
 @use 'patterns/Subscribe/subscribe';
 @use 'patterns/Social/social';
