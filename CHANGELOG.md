@@ -1,3 +1,17 @@
+# [1.161.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.160.0...v1.161.0) (2025-07-02)
+
+
+### Features
+
+* **favoritingTileButton:** L3-7125 FavoriteTileButton minor fix ([#648](https://github.com/PhillipsAuctionHouse/seldon/issues/648)) ([f8b35c1](https://github.com/PhillipsAuctionHouse/seldon/commit/f8b35c11265111ea1c818e790ec224013ebcbf97))
+
+# [1.160.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.159.0...v1.160.0) (2025-07-02)
+
+
+### Features
+
+* **Salecard:** L3-6924 Salecard review updates ([#647](https://github.com/PhillipsAuctionHouse/seldon/issues/647)) ([937686f](https://github.com/PhillipsAuctionHouse/seldon/commit/937686fd88016c756069511ccce406a7e585e0c9))
+
 # [1.159.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.158.0...v1.159.0) (2025-06-27)
 
 

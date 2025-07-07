@@ -67,7 +67,12 @@
   &__badge {
     border: 1px solid $badge-blue;
     color: $badge-blue;
+    font-size: 0.75rem;
     padding: $spacing-micro 8px;
+  }
+
+  &__auction-type {
+    font-size: 0.75rem;
   }
 
   &__cta-button {
@@ -84,6 +89,7 @@
 
   &__modal-link-button {
     padding: 0;
+    text-transform: none;
 
     @include underline;
   }
