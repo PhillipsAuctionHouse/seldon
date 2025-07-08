@@ -17,6 +17,7 @@
   }
 
   &__body {
+    max-height: var('--max-modal-body-height');
     overflow-y: auto;
   }
 
@@ -48,4 +49,9 @@
   @media (min-width: $breakpoint-md) {
     width: auto;
   }
+}
+
+.#{$px}-composed-modal__body {
+  max-height: var(--max-modal-body-height);
+  overflow-y: auto;
 }
