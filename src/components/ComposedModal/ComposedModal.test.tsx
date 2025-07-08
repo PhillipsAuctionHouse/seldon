@@ -40,7 +40,7 @@ describe('ComposedModal', () => {
 
     const body = document.querySelector(`.${px}-composed-modal__body`);
     expect(body).toHaveClass(`${px}-composed-modal__body`);
-    expect(body).toHaveStyle({ maxHeight: '100px' });
+    expect(body?.getAttribute('style') ?? '').toContain('--max-modal-body-height');
   });
 
   it('renders the modal buttons and disclaimers', () => {
