@@ -1,0 +1,15 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-in-place-filters {
+  display: flex;
+  gap: $spacing-sm;
+}
+
+.#{$px}-filter-button {
+  border: 1px solid $light-gray;
+  padding: $spacing-xsm $spacing-sm;
+
+  &--selected {
+    border: 1px solid $pure-black;
+  }
+}
