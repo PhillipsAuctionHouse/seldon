@@ -1,5 +1,6 @@
+import * as Popover from '@radix-ui/react-popover';
 import classnames from 'classnames';
-import { forwardRef } from 'react';
+import React from 'react';
 import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';
 import { Icon } from '../../components/Icon';
@@ -53,46 +54,49 @@ export interface FilterButtonProps {
    * Button selected state.
    */
   isButtonSelected?: boolean;
-  /**
-   * Button onClick handler.
-   */
-  handleClick?: () => void;
+
   /**
    * Button type.
    */
-  buttonType: 'fullMenu' | 'optionsMenu';
+  buttonType: 'Filter' | 'Sort' | 'Sale Type' | 'Departments' | 'Month' | 'Location';
 }
 
-export const FilterButton = ({
-  id,
-  className,
-  filterButtonLabel,
-  isButtonSelected = false,
-  buttonType,
-  handleClick,
-}: FilterButtonProps) => {
-  return (
-    <Button
-      className={classnames(`${px}-filter-button`, className, {
-        [`${px}-filter-button--selected`]: isButtonSelected,
-      })}
-      aria-label={filterButtonLabel}
-      variant={ButtonVariants.tertiary}
-      data-testid={`${id}-button`}
-      onClick={handleClick}
-    >
-      <div className={`${px}__label`}>{filterButtonLabel}</div>
-      <Icon
-        icon={buttonType === 'fullMenu' ? 'Filters' : isButtonSelected ? 'ChevronUp' : 'ChevronDown'}
-        height={8}
-        width={8}
-        className={`${px}__icon`}
-      />
-      {/* floating counter */}
-    </Button>
-  );
-};
-
+const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProps>(
+  ({ id, className, filterButtonLabel, isButtonSelected = false, buttonType }, ref) => {
+    return (
+      <>
+        <Popover.Root key={`${id}-${filterButtonLabel}-button`}>
+          <Popover.Trigger asChild>
+            <Button
+              ref={ref}
+              className={classnames(`${px}-filter-button`, className, {
+                [`${px}-filter-button--selected`]: isButtonSelected,
+              })}
+              aria-label={filterButtonLabel}
+              variant={ButtonVariants.tertiary}
+              data-testid={`${id}-button`}
+            >
+              {filterButtonLabel && <div className={`${px}__label`}>{filterButtonLabel}</div>}
+              <Icon
+                icon={buttonType === 'Filter' ? 'Filters' : isButtonSelected ? 'ChevronUp' : 'ChevronDown'}
+                height={8}
+                width={8}
+                className={`${px}__icon`}
+              />
+              {/* floating counter */}
+            </Button>
+          </Popover.Trigger>
+          <Popover.Portal>
+            <Popover.Content avoidCollisions={true} collisionPadding={10} sideOffset={5} align="start" alignOffset={5}>
+              TEST TEST
+            </Popover.Content>
+          </Popover.Portal>
+        </Popover.Root>
+      </>
+    );
+  },
+);
+FilterButton.displayName = 'FilterButton';
 /**
  * ## Overview
  *
@@ -102,7 +106,7 @@ export const FilterButton = ({
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-in-place-filters--overview)
  */
-const InPlaceFilters = forwardRef<HTMLDivElement, InPlaceFiltersProps>(
+const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
   (
     {
       id,
@@ -120,24 +124,16 @@ const InPlaceFilters = forwardRef<HTMLDivElement, InPlaceFiltersProps>(
 
     return (
       <div ref={ref} className={classnames(`${baseClassName}`, className)} {...commonProps}>
-        <FilterButton
-          id={`${id}-filter`}
-          filterButtonLabel={filterLabel}
-          handleClick={handleFilterClick}
-          buttonType="fullMenu"
-        />
-        {filtersLabelList.map((filterLabel, index) => (
-          <FilterButton
-            key={`${id}-${filterLabel}-button`}
-            id={`${id}-${filterLabel}-button`}
-            filterButtonLabel={filterLabel}
-            handleClick={() =>
-              setFiltersLabelListState?.(filtersListState.map((selected, i) => (i === index ? !selected : false)))
-            }
-            buttonType="optionsMenu"
-            isButtonSelected={filtersListState[index]}
-          />
-        ))}
+        <FilterButton id={`${id}-filter`} filterButtonLabel={filterLabel} buttonType="Filter" />
+        {filtersLabelList.length > 0 &&
+          filtersLabelList.map((filterLabel) => (
+            <FilterButton
+              key={`${id}-${filterLabel}-button`}
+              id={`${id}-${filterLabel}-button`}
+              filterButtonLabel={filterLabel}
+              buttonType={filterLabel as FilterButtonProps['buttonType']}
+            />
+          ))}
       </div>
     );
   },
