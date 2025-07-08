@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react/*';
+import './_viewingDetails.stories.scss';
 
 import ViewingDetails, { ViewingDetailsProps } from './ViewingDetails';
 import { viewingDetailsProps, viewingDetailsWithChildrenProps } from './ViewingDetailsMock';
@@ -16,10 +17,10 @@ Playground.args = {
   ...viewingDetailsProps,
 };
 
-export const WithChildren = (props: ViewingDetailsProps) => (
-  <ViewingDetails key={`${props.id}`} {...props} style={{ maxWidth: '480px' }} />
+export const CenterAlignText = (props: ViewingDetailsProps) => (
+  <ViewingDetails key={`${props.id}`} {...props} style={{ maxWidth: '480px' }} className="story-center-align" />
 );
 
-WithChildren.args = {
+CenterAlignText.args = {
   ...viewingDetailsWithChildrenProps,
 };

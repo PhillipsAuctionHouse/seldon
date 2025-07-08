@@ -48,5 +48,4 @@ export const viewingDetailsWithChildrenProps = {
   ],
   location: '30 Berkeley Square, London, United Kingdom, W1J 6EX',
   mapLink: 'https://www.google.com/maps/place/30+Berkeley+Square,+London,+United+Kingdom/@51.509865,-0.14189,17z',
-  centerAlignText: true,
 };

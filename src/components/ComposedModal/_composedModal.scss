@@ -12,10 +12,6 @@
     padding: 0 $spacing-md;
   }
 
-  &__center-align {
-    text-align: center;
-  }
-
   &__body {
     max-height: var('--max-modal-body-height');
     overflow-y: auto;

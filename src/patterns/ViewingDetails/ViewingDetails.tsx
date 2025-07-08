@@ -54,10 +54,6 @@ export interface ViewingDetailsProps extends ComponentProps<'div'> {
    * Callback for onClose function
    */
   onClose?: () => void | unknown;
-  /**
-   * Optional proprerty center align all text in the component
-   */
-  centerAlignText?: boolean;
 }
 /**
  * ## Overview
@@ -80,7 +76,6 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
       viewingTimes,
       location,
       mapLink,
-      centerAlignText = false,
       onClose,
       linkElement: Component = Link,
       ...props
@@ -91,9 +86,7 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
 
     return (
       <div {...commonProps} {...props} className={classnames(baseClassName, className)} ref={ref}>
-        <div
-          className={classnames(`${baseClassName}__content`, { [`${baseClassName}__center-align`]: centerAlignText })}
-        >
+        <div className={`${baseClassName}__content`}>
           {children && <div className={`${baseClassName}__children`}>{children}</div>}
 
           {sessionTimesLabel && <Text variant={TextVariants.heading4}>{sessionTimesLabel}</Text>}
