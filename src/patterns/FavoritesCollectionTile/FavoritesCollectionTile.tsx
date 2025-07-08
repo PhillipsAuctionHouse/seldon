@@ -131,11 +131,11 @@ const FavoritesCollectionTile = memo(
                     {formatlotStr && hasListData && formatlotStr(count)}
                   </Text>
                 )}
-                {
+                {name && (
                   <Text element="h3" className={`${baseClassName}__title`} variant={TextVariants.heading5}>
                     {name}
                   </Text>
-                }
+                )}
               </div>
               <>
                 {hasListData && isListVariant && (
@@ -229,6 +229,7 @@ const FavoritesCollectionTile = memo(
                         className={classnames(`${baseClassName}__icon`, {
                           [`${baseClassName}__icon-circle`]: !hasListData,
                         })}
+                        title="Create List"
                       />
                       <div className={`${baseClassName}__text`}>{createFirstListText}</div>
                     </div>
@@ -247,6 +248,7 @@ const FavoritesCollectionTile = memo(
                           height={iconSize}
                           color="$dark-gray"
                           className={`${baseClassName}__icon`}
+                          title="Favorites"
                         />
                         <div className={`${baseClassName}__text`}>{emptyFavoritesText}</div>
                       </div>
@@ -271,6 +273,7 @@ const FavoritesCollectionTile = memo(
                           className={classnames(`${baseClassName}__icon`, {
                             [`${baseClassName}__icon-circle`]: !hasListData,
                           })}
+                          title="Favorite"
                         />
                         <div className={`${baseClassName}__text`}>{emptyListsText}</div>
                       </div>
