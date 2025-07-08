@@ -3,9 +3,9 @@ import { ComponentProps, ElementType, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
+import { LinkProps } from '../Link';
 import { SeldonImage } from '../SeldonImage';
 import { Text, TextVariants } from '../Text';
-import { LinkProps } from '../Link';
 
 export interface ExitGateCardProps extends ComponentProps<'div'> {
   /**
@@ -48,7 +48,7 @@ export interface ExitGateCardProps extends ComponentProps<'div'> {
  *
  * [Figma Link](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/Design-System--Foundations--RW-to-be-depreciated-?node-id=24825-524&p=f&m=dev)
  *
- * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-article--overview)
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-ExitGateCard-overview)
  */
 const ExitGateCard = forwardRef<HTMLDivElement, ExitGateCardProps>(
   (
