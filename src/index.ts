@@ -102,7 +102,7 @@ export * from './types/commonTypes';
 // utils
 export * from './components/AddToCalendar';
 export * from './components/Article';
-export * from './components/AuctionTile';
+export * from './components/SaleCard';
 export * from './components/Countdown';
 export * from './components/Countdown/types';
 export * from './components/Divider';

@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
-  padding: 0 $spacing-md;
+  padding-left: $spacing-md;
 
   @media (max-width: $breakpoint-md) {
     flex-direction: column;
@@ -19,7 +19,7 @@
     padding-left: $spacing-lg;
 
     &__desktop_image {
-      display: block;
+      max-width: 405px;
     }
   }
 
@@ -28,16 +28,10 @@
     color: $pure-black;
     display: flex;
     flex-direction: column;
+    gap: $spacing-sm;
     margin: auto 0;
 
     &-label {
-      font-size: var(--label-size2);
-      font-variation-settings: 'wght' 400;
-      margin-bottom: $spacing-sm;
-      text-transform: uppercase;
-
-      @include Montserrat;
-
       @media (max-width: $breakpoint-md) {
         font-variation-settings: 'wght' 500;
       }
@@ -48,9 +42,6 @@
     }
 
     &-description {
-      line-height: var(--body-line-height-size1);
-      margin: $spacing-sm 0;
-
       @media (max-width: $breakpoint-md) {
         font-size: $body-size1;
         text-align: center;
@@ -76,21 +67,12 @@
     flex-direction: column;
     padding: 0;
   }
-}
-.#{$px}-exit-gate-card__content {
-  @media (max-width: $breakpoint-md) {
-    align-items: center;
-    margin: $spacing-md 0;
-    padding: 0 $spacing-xxl;
-  }
-}
 
-.#{$px}-exit-gate-card__content .#{$px}-exit-gate-card__content-label {
-  margin-bottom: $spacing-sm;
-}
-.#{$px}-exit-gate-card__content .#{$px}-exit-gate-card__content-title {
-  margin: 0;
-}
-.#{$px}-exit-gate-card__content .#{$px}-exit-gate-card__content-description {
-  margin: $spacing-sm 0;
+  &__content {
+    @media (max-width: $breakpoint-md) {
+      align-items: center;
+      margin-top: $spacing-md;
+      padding: 0 $spacing-md;
+    }
+  }
 }

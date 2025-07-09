@@ -1,9 +1,8 @@
 import classnames from 'classnames';
-import { ComponentProps, ElementType, forwardRef } from 'react';
+import { ComponentProps, ElementType, forwardRef, ReactNode } from 'react';
 import { getCommonProps } from '../../utils';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
-import { LinkProps } from '../Link';
 import { SeldonImage } from '../SeldonImage';
 import { Text, TextVariants } from '../Text';
 
@@ -15,23 +14,23 @@ export interface ExitGateCardProps extends ComponentProps<'div'> {
   /**
    * Top label for the article.
    */
-  label?: string;
+  label?: ReactNode;
   /**
    * Header for the article.
    */
-  header?: string;
+  header?: ReactNode;
   /**
    * Description for the article.
    */
-  description?: string;
+  description?: ReactNode;
   /**
    * Custom link element to use for the link. Defaults to the `Link` component.
    */
-  linkElement?: ElementType<LinkProps>;
+  linkElement?: ElementType<ComponentProps<'a'>>;
   /**
    * Label for the link.
    */
-  linkLabel?: string;
+  linkLabel?: ReactNode;
   /**
    * Href for the link.
    */
@@ -40,6 +39,10 @@ export interface ExitGateCardProps extends ComponentProps<'div'> {
    * imageSrc alt text for accessibility.
    */
   altText?: string;
+  /**
+   * LinkVariants for the ExitGateCard.
+   */
+  variant?: ButtonVariants;
 }
 /**
  * ## Overview
@@ -60,13 +63,14 @@ const ExitGateCard = forwardRef<HTMLDivElement, ExitGateCardProps>(
       description,
       linkLabel,
       linkHref,
+      linkElement: LinkElement = 'a',
+      variant = ButtonVariants.secondary,
       altText = 'Exit Gate Card Image',
       ...props
     },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ExitGateCard');
-
     return (
       <article {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         {imageSrc ? (
@@ -81,27 +85,29 @@ const ExitGateCard = forwardRef<HTMLDivElement, ExitGateCardProps>(
 
         <div className={`${baseClassName}__content`}>
           {label ? (
-            <Text variant={TextVariants.label} className={`${baseClassName}__content-label`}>
+            <Text variant={TextVariants.body2} element="span" className={`${baseClassName}__content-label`}>
               {label}
             </Text>
           ) : null}
 
           {header ? (
-            <Text variant={TextVariants.heading2} className={`${baseClassName}__content-title`}>
+            <Text variant={TextVariants.heading1} element="span" className={`${baseClassName}__content-title`}>
               {header}
             </Text>
           ) : null}
 
           {description ? (
-            <Text variant={TextVariants.body3} className={`${baseClassName}__content-description`}>
+            <Text variant={TextVariants.body2} element="span" className={`${baseClassName}__content-description`}>
               {description}
             </Text>
           ) : null}
 
           {linkLabel && linkHref ? (
-            <Button href={linkHref} variant={ButtonVariants.secondary} className={`${baseClassName}__content-link`}>
-              {linkLabel}
-            </Button>
+            <LinkElement href={linkHref}>
+              <Button variant={variant} className={`${baseClassName}__content-link`}>
+                {linkLabel}
+              </Button>
+            </LinkElement>
           ) : null}
         </div>
       </article>

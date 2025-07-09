@@ -1,0 +1,53 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-composed-modal {
+  border-radius: 1rem;
+  max-width: 95vw;
+  min-width: 0;
+  padding: $spacing-sm 0;
+  width: 95vw;
+
+  &__title {
+    margin-top: $spacing-md;
+    padding: 0 $spacing-md;
+  }
+
+  &__body {
+    max-height: var('--max-modal-body-height');
+    overflow-y: auto;
+  }
+
+  &__divider {
+    margin: 0;
+  }
+
+  &__btns-group {
+    display: flex;
+    gap: $spacing-sm;
+    justify-content: center;
+    padding: $spacing-sm $spacing-md;
+  }
+
+  &__btns-group > * {
+    flex: 1 1 50%;
+    max-width: 50%;
+  }
+
+  &__btns {
+    padding: 0 $spacing-md $spacing-sm;
+  }
+
+  &__disclaimer {
+    margin-top: $spacing-sm;
+    padding: 0 $spacing-md;
+  }
+
+  @media (min-width: $breakpoint-md) {
+    width: auto;
+  }
+}
+
+.#{$px}-composed-modal__body {
+  max-height: var(--max-modal-body-height);
+  overflow-y: auto;
+}

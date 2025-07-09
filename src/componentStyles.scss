@@ -51,12 +51,14 @@
 @use 'components/FavoritingTileButton/favoritingTileButton';
 @use 'components/Toast/toast';
 @use 'components/ExitGateCard/exitGateCard';
+@use 'components/ComposedModal/composedModal';
 
 // Patterns
 @use 'patterns/HeroBanner/heroBanner';
 @use 'patterns/LanguageSelector/languageSelector';
 @use 'patterns/UserManagement/userManagement';
 @use 'patterns/ViewingsList/viewingsList';
+@use 'patterns/ViewingDetails/viewingDetails';
 @use 'patterns/Subscribe/subscribe';
 @use 'patterns/Social/social';
 @use 'patterns/SaleHeaderBanner/saleHeaderBanner';
@@ -74,4 +76,4 @@
 @use 'components/Divider/divider';
 @use 'components/TextArea/textArea';
 @use 'components/AddToCalendar/addToCalendar';
-@use 'components/AuctionTile/auctionTile';
+@use 'components/SaleCard/saleCard';

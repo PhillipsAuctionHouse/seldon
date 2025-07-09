@@ -22,5 +22,5 @@ Playground.args = {
   description: 'We are inviting consignments for our upcoming auctions.',
   linkLabel: 'Enquire now',
   linkHref: '/',
-  variant: 'exitGateCard',
+  variant: 'secondary',
 };

@@ -1,3 +1,31 @@
+# [1.161.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.160.0...v1.161.0) (2025-07-02)
+
+
+### Features
+
+* **favoritingTileButton:** L3-7125 FavoriteTileButton minor fix ([#648](https://github.com/PhillipsAuctionHouse/seldon/issues/648)) ([f8b35c1](https://github.com/PhillipsAuctionHouse/seldon/commit/f8b35c11265111ea1c818e790ec224013ebcbf97))
+
+# [1.160.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.159.0...v1.160.0) (2025-07-02)
+
+
+### Features
+
+* **Salecard:** L3-6924 Salecard review updates ([#647](https://github.com/PhillipsAuctionHouse/seldon/issues/647)) ([937686f](https://github.com/PhillipsAuctionHouse/seldon/commit/937686fd88016c756069511ccce406a7e585e0c9))
+
+# [1.159.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.158.0...v1.159.0) (2025-06-27)
+
+
+### Features
+
+* **combobox:** L3-7091 match combobox input text to regular input text ([#646](https://github.com/PhillipsAuctionHouse/seldon/issues/646)) ([c2d9bf9](https://github.com/PhillipsAuctionHouse/seldon/commit/c2d9bf992e9e2528bc8c055ad86fc3823fbb9822))
+
+# [1.158.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.157.0...v1.158.0) (2025-06-26)
+
+
+### Features
+
+* **SaleCard:** L3-6924 Create Sale card component ([#645](https://github.com/PhillipsAuctionHouse/seldon/issues/645)) ([7c6174f](https://github.com/PhillipsAuctionHouse/seldon/commit/7c6174ffec3b8b018ac855ccc82a674f4401a5df))
+
 # [1.157.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.156.0...v1.157.0) (2025-06-23)
 
 
