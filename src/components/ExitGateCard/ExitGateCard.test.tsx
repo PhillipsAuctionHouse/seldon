@@ -22,7 +22,7 @@ describe('ExitGateCard', () => {
     expect(screen.getByText('Test Label')).toBeInTheDocument();
     expect(screen.getByText('Test Header')).toBeInTheDocument();
     expect(screen.getByText('Test Description')).toBeInTheDocument();
-    expect(screen.getByText('Test Link')).toHaveAttribute('href', 'https://example.com');
+    expect(screen.getByRole('link', { name: 'Test Link' })).toHaveAttribute('href', 'https://example.com');
   });
 
   it('renders correctly without optional props', () => {
