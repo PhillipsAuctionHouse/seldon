@@ -3,6 +3,7 @@ import { ComponentProps, ElementType, forwardRef, ReactNode } from 'react';
 import { getCommonProps } from '../../utils';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
+import { Link } from '../Link';
 import { SeldonImage } from '../SeldonImage';
 import { Text, TextVariants } from '../Text';
 
@@ -63,7 +64,7 @@ const ExitGateCard = forwardRef<HTMLDivElement, ExitGateCardProps>(
       description,
       linkLabel,
       linkHref,
-      linkElement: LinkElement = 'a',
+      linkElement: Component = Link,
       variant = ButtonVariants.secondary,
       altText = 'Exit Gate Card Image',
       ...props
@@ -102,12 +103,12 @@ const ExitGateCard = forwardRef<HTMLDivElement, ExitGateCardProps>(
             </Text>
           ) : null}
 
-          {linkLabel && linkHref ? (
-            <LinkElement href={linkHref}>
+          {(linkLabel || Component) && linkHref ? (
+            <Component href={linkHref}>
               <Button variant={variant} className={`${baseClassName}__content-link`}>
                 {linkLabel}
               </Button>
-            </LinkElement>
+            </Component>
           ) : null}
         </div>
       </article>
