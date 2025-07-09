@@ -18,6 +18,10 @@
   @media (min-width: $breakpoint-md) {
     flex-direction: row;
     padding-left: $spacing-lg;
+
+    &__desktop_image {
+      max-width: 405px;
+    }
   }
 
   &__content {
