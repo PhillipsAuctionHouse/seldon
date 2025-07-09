@@ -2,14 +2,73 @@
 
 .#{$px}-in-place-filters {
   display: flex;
+  flex-wrap: wrap;
   gap: $spacing-sm;
 }
 
 .#{$px}-filter-button {
   border: 1px solid $light-gray;
-  padding: $spacing-xsm $spacing-sm;
+  padding: 8px $spacing-xsm;
 
   &--selected {
     border: 1px solid $pure-black;
   }
+}
+
+.#{$px}-filter-dropdown {
+  border-radius: $spacing-xsm;
+  box-shadow: 0 4px 6px $medium-gray;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  width: 425px;
+
+  &__filters {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xsm);
+    padding-bottom: var(--spacing-sm);
+  }
+
+  &__header {
+    margin-bottom: $spacing-sm;
+    margin-top: 0;
+  }
+
+  &__button {
+    align-self: flex-end;
+  }
+
+  &__buttons {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__button-text {
+    color: $white;
+  }
+}
+
+.#{$px}-input {
+  &__wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__label {
+    align-self: center;
+    margin: 0;
+  }
+}
+.#{$px}-input__input[type='radio'] {
+  align-self: center;
+  margin-left: auto;
+}
+.#{$px}-input__input[type='checkbox'] {
+  align-self: center;
+  margin-left: auto;
 }
