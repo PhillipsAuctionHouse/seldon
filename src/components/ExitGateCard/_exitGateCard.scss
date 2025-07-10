@@ -10,7 +10,7 @@
     flex-direction: column;
 
     &__desktop_image {
-      max-width: 405px;
+      max-width: unset;
       overflow: visible;
     }
   }
