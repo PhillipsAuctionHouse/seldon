@@ -3,11 +3,13 @@ import classnames from 'classnames';
 import React from 'react';
 import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';
+import Drawer from '../../components/Drawer/Drawer';
 import { FilterInput } from '../../components/Filter';
 import FilterHeader from '../../components/Filter/FilterHeader';
 import { Icon } from '../../components/Icon';
 import { Text, TextVariants } from '../../components/Text';
 import { getCommonProps, px } from '../../utils';
+import { useIsMobile } from '../../utils/hooks';
 
 export type DropDownList = {
   id: string;
@@ -25,9 +27,9 @@ export interface FilterDropdownProps {
    */
   buttonType: 'Sort' | 'Sale' | 'Departments' | 'Month' | 'Location';
   /**
-   * Number of auctions to display in the Sale filter dropdown.
+   * Auction filter data for the filters.
    */
-  auctionCount?: number;
+  auctionFilterData?: AuctionFilterData;
 }
 
 const sortDropDownList = [
@@ -56,7 +58,7 @@ const saleDropDownList = [
 ];
 
 const FilterDropdown = React.forwardRef<HTMLDivElement, FilterDropdownProps>(
-  ({ className, buttonType, auctionCount }, ref) => {
+  ({ className, buttonType, auctionFilterData }, ref) => {
     switch (buttonType) {
       case 'Sort':
         return (
@@ -117,7 +119,47 @@ const FilterDropdown = React.forwardRef<HTMLDivElement, FilterDropdownProps>(
                 }}
               >
                 <Text variant={TextVariants.string2} className={`${px}-filter-dropdown__button-text`}>
-                  Show {auctionCount} Auctions
+                  Show {auctionFilterData?.[buttonType]?.auctionCount} Auctions
+                </Text>
+              </Button>
+            </div>
+          </div>
+        );
+      case 'Departments':
+      case 'Month':
+      case 'Location':
+        return (
+          <div className={classnames(`${px}-filter-dropdown`, className)} ref={ref}>
+            <FilterHeader heading={buttonType} className={`${px}-filter-dropdown__header`} />
+            <div className={`${px}-filter-dropdown__filters`}>
+              {auctionFilterData?.[buttonType]?.filterLabels &&
+                auctionFilterData?.[buttonType]?.filterLabels.map((value) => (
+                  <FilterInput
+                    id={value.label}
+                    key={value.label}
+                    labelText={value.label}
+                    name={value.label}
+                    type="checkbox"
+                  />
+                ))}
+            </div>
+            <div className={`${px}-filter-dropdown__buttons`}>
+              <Button
+                variant={ButtonVariants.secondary}
+                onClick={() => {
+                  // Handle sort btn click
+                }}
+              >
+                <Text variant={TextVariants.string2}>Clear all</Text>
+              </Button>
+              <Button
+                variant={ButtonVariants.primary}
+                onClick={() => {
+                  // Handle sort btn click
+                }}
+              >
+                <Text variant={TextVariants.string2} className={`${px}-filter-dropdown__button-text`}>
+                  Show {auctionFilterData?.[buttonType]?.auctionCount} Auctions
                 </Text>
               </Button>
             </div>
@@ -144,6 +186,10 @@ export interface FilterButtonProps {
    * Individual Filter button label.
    */
   filterButtonLabel: string;
+  /**
+   * isMobile determine if the component is rendered on mobile.
+   */
+  isMobile: boolean;
 
   /**
    * Button type.
@@ -162,45 +208,64 @@ export interface FilterButtonProps {
    */
   index?: number;
   /**
-   * Number of auctions to display in the Sale filter dropdown.
+   * Auction filter data for the filters.
    */
-  auctionCount?: number;
+  auctionFilterData?: AuctionFilterData;
 }
 
 const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProps>(
-  ({ id, className, filterButtonLabel, buttonType, handleClick, filtersListState, index, auctionCount }, ref) => {
+  (
+    { id, className, filterButtonLabel, buttonType, handleClick, filtersListState, index, auctionFilterData, isMobile },
+    ref,
+  ) => {
     const isButtonSelected = filtersListState && typeof index === 'number' ? filtersListState[index] : false;
+
+    const handleButtonClick: React.MouseEventHandler<HTMLButtonElement> = () => {
+      if (filtersListState && handleClick) {
+        handleClick(filtersListState.map((selected, i) => (i === index ? !selected : false)));
+      }
+    };
+
+    const filterButtonElement = (
+      <Button
+        ref={ref}
+        className={classnames(`${px}-filter-button`, className, {
+          [`${px}-filter-button--selected`]: isButtonSelected,
+        })}
+        aria-label={filterButtonLabel}
+        variant={ButtonVariants.secondary}
+        data-testid={`${id}-button`}
+        onClick={handleButtonClick}
+      >
+        <Text variant={TextVariants.string2}>{filterButtonLabel}</Text>
+        <Icon
+          icon={buttonType === 'Filter' ? 'Filters' : isButtonSelected ? 'ChevronUp' : 'ChevronDown'}
+          height={8}
+          width={8}
+          className={`${px}__icon`}
+        />
+        {/* Filter drawer floating counter icon */}
+      </Button>
+    );
+
+    if (isMobile) {
+      return (
+        <>
+          {filterButtonElement}
+          <Drawer isOpen={isButtonSelected} onClose={() => handleButtonClick()}>
+            Test Drawer Text
+          </Drawer>
+        </>
+      );
+    }
+
     return (
       <Popover.Root key={`${id}-${filterButtonLabel}-button`}>
-        <Popover.Trigger asChild>
-          <Button
-            ref={ref}
-            className={classnames(`${px}-filter-button`, className, {
-              [`${px}-filter-button--selected`]: isButtonSelected,
-            })}
-            aria-label={filterButtonLabel}
-            variant={ButtonVariants.secondary}
-            data-testid={`${id}-button`}
-            onClick={() => {
-              if (filtersListState && handleClick) {
-                handleClick(filtersListState.map((selected, i) => (i === index ? !selected : false)));
-              }
-            }}
-          >
-            <Text variant={TextVariants.string2}>{filterButtonLabel}</Text>
-            <Icon
-              icon={buttonType === 'Filter' ? 'Filters' : isButtonSelected ? 'ChevronUp' : 'ChevronDown'}
-              height={8}
-              width={8}
-              className={`${px}__icon`}
-            />
-            {/* Filter floating counter */}
-          </Button>
-        </Popover.Trigger>
+        <Popover.Trigger asChild>{filterButtonElement}</Popover.Trigger>
         <Popover.Portal>
           {buttonType !== 'Filter' && (
             <Popover.Content avoidCollisions={true} collisionPadding={10} sideOffset={5} align="start" alignOffset={5}>
-              <FilterDropdown buttonType={buttonType} auctionCount={auctionCount} />
+              <FilterDropdown buttonType={buttonType} auctionFilterData={auctionFilterData} />
             </Popover.Content>
           )}
         </Popover.Portal>
@@ -209,6 +274,7 @@ const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProps>(
   },
 );
 FilterButton.displayName = 'FilterButton';
+
 /**
  * ## Overview
  *
@@ -218,6 +284,22 @@ FilterButton.displayName = 'FilterButton';
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-in-place-filters--overview)
  */
+export type AuctionFilter = {
+  id: string;
+  label: string;
+  value: string;
+};
+export type AuctionFilterButton = {
+  auctionCount: number;
+  filterLabels?: AuctionFilter[];
+};
+export type AuctionFilterData = {
+  Filters: AuctionFilterButton;
+  Sale: AuctionFilterButton;
+  Departments: AuctionFilterButton;
+  Month: AuctionFilterButton;
+  Location: AuctionFilterButton;
+};
 
 export interface InPlaceFiltersProps {
   /**
@@ -231,7 +313,7 @@ export interface InPlaceFiltersProps {
   /**
    * Filter button label.
    */
-  filterLabel: string;
+  filterLabel?: string;
   /**
    * Filter Button onClick handler.
    */
@@ -239,7 +321,7 @@ export interface InPlaceFiltersProps {
   /**
    * List of labels for the filter buttons.
    */
-  filtersLabelList: string[];
+  filtersLabelList?: string[];
   /**
    * List of states for the filter buttons.
    */
@@ -249,9 +331,9 @@ export interface InPlaceFiltersProps {
    */
   setFiltersLabelListState?: (state: boolean[]) => void;
   /**
-   * Number of auctions to display in the Sale filter dropdown.
+   * Auction filter data for the filters.
    */
-  auctionCount?: number;
+  auctionFilterData?: AuctionFilterData;
 }
 
 const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
@@ -264,17 +346,24 @@ const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
       handleFilterClick,
       filtersListState,
       setFiltersLabelListState,
-      auctionCount,
+      auctionFilterData,
       ...props
     },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'InPlaceFilters');
-
+    const isMobile = useIsMobile();
     return (
       <div ref={ref} className={classnames(`${baseClassName}`, className)} {...commonProps}>
-        <FilterButton id={`${id}-filter`} filterButtonLabel={filterLabel} buttonType="Filter" />
-        {filtersLabelList.length > 0 &&
+        <FilterButton
+          id={`${id}-filter`}
+          filterButtonLabel={filterLabel ?? ''}
+          buttonType="Filter"
+          auctionFilterData={auctionFilterData}
+          isMobile={isMobile}
+        />
+        {filtersLabelList &&
+          filtersLabelList.length > 0 &&
           filtersLabelList.map((filterLabel, index) => (
             <FilterButton
               key={`${id}-${filterLabel}-button`}
@@ -284,7 +373,8 @@ const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
               handleClick={setFiltersLabelListState}
               filtersListState={filtersListState}
               index={index}
-              auctionCount={auctionCount}
+              auctionFilterData={auctionFilterData}
+              isMobile={isMobile}
             />
           ))}
       </div>

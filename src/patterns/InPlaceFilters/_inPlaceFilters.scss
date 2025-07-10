@@ -16,6 +16,7 @@
 }
 
 .#{$px}-filter-dropdown {
+  background: $white;
   border-radius: $spacing-xsm;
   box-shadow: 0 4px 6px $medium-gray;
   display: flex;
@@ -26,7 +27,7 @@
   &__filters {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xsm);
+    gap: $spacing-xsm;
     padding-bottom: var(--spacing-sm);
   }
 
