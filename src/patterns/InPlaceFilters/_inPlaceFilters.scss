@@ -29,15 +29,45 @@
     flex-direction: column;
     gap: $spacing-xsm;
     padding-bottom: var(--spacing-sm);
+
+    &--mobile {
+      padding: 0 $spacing-md $spacing-md;
+    }
+  }
+
+  &__button-wrap {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__buttons-wrap {
+    display: flex;
+    gap: $spacing-sm;
+    justify-content: space-between;
+  }
+
+  &__mobile-wrap {
+    box-shadow: 0 -4px 8px -4px $medium-gray;
   }
 
   &__header {
     margin-bottom: $spacing-sm;
     margin-top: 0;
+
+    &--mobile {
+      padding: $spacing-md $spacing-md 0 $spacing-md;
+    }
   }
 
   &__button {
     align-self: flex-end;
+    padding: $spacing-sm $spacing-md;
+
+    &--mobile {
+      display: block;
+      margin: $spacing-sm auto $spacing-md auto;
+      width: 80%;
+    }
   }
 
   &__buttons {
@@ -45,10 +75,34 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 14px $spacing-md;
+
+    &--mobile {
+      display: block;
+      margin-bottom: $spacing-md;
+      margin-top: $spacing-sm;
+      width: 45%;
+    }
+
+    &--left {
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    &--right {
+      margin-left: 0;
+      margin-right: auto;
+    }
   }
 
   &__button-text {
     color: $white;
+  }
+
+  &--mobile {
+    border-radius: $spacing-xsm $spacing-xsm 0 0;
+    padding: 0;
+    width: 100vw;
   }
 }
 

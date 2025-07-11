@@ -1,15 +1,15 @@
 import * as Popover from '@radix-ui/react-popover';
 import classnames from 'classnames';
 import React from 'react';
+import BottomSheet from '../../components/BottomSheet/BottomSheet';
 import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';
-import Drawer from '../../components/Drawer/Drawer';
 import { FilterInput } from '../../components/Filter';
 import FilterHeader from '../../components/Filter/FilterHeader';
 import { Icon } from '../../components/Icon';
 import { Text, TextVariants } from '../../components/Text';
+import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import { getCommonProps, px } from '../../utils';
-import { useIsMobile } from '../../utils/hooks';
 
 export type DropDownList = {
   id: string;
@@ -30,6 +30,10 @@ export interface FilterDropdownProps {
    * Auction filter data for the filters.
    */
   auctionFilterData?: AuctionFilterData;
+  /**
+   * isMobileDropdown style
+   */
+  isMobileDropdown?: boolean;
 }
 
 const sortDropDownList = [
@@ -58,82 +62,52 @@ const saleDropDownList = [
 ];
 
 const FilterDropdown = React.forwardRef<HTMLDivElement, FilterDropdownProps>(
-  ({ className, buttonType, auctionFilterData }, ref) => {
-    switch (buttonType) {
-      case 'Sort':
-        return (
-          <div className={classnames(`${px}-filter-dropdown`, className)} ref={ref}>
-            <FilterHeader heading="Sort By" className={`${px}-filter-dropdown__header`} />
-            <div className={`${px}-filter-dropdown__filters`}>
-              {sortDropDownList.map((value) => (
-                <FilterInput
-                  id={value.label}
-                  key={value.label}
-                  labelText={value.label}
-                  name={value.label}
-                  type="radio"
-                />
-              ))}
-            </div>
-            <Button
-              className={`${px}-filter-dropdown__button`}
-              variant={ButtonVariants.primary}
-              onClick={() => {
-                // Handle sort btn click
-              }}
-            >
-              <Text variant={TextVariants.string2} className={`${px}-filter-dropdown__button-text`}>
-                Confirm
-              </Text>
-            </Button>
-          </div>
-        );
-      case 'Sale':
-        return (
-          <div className={classnames(`${px}-filter-dropdown`, className)} ref={ref}>
-            <FilterHeader heading="Sale Type" className={`${px}-filter-dropdown__header`} />
-            <div className={`${px}-filter-dropdown__filters`}>
-              {saleDropDownList.map((value) => (
-                <FilterInput
-                  id={value.label}
-                  key={value.label}
-                  labelText={value.label}
-                  name={value.label}
-                  type="checkbox"
-                />
-              ))}
-            </div>
-            <div className={`${px}-filter-dropdown__buttons`}>
-              <Button
-                variant={ButtonVariants.secondary}
-                onClick={() => {
-                  // Handle sort btn click
-                }}
+  ({ className, buttonType, auctionFilterData, isMobileDropdown = false }, ref) => {
+    const dropdownContent = (() => {
+      const filterDropdownClass = classnames(`${px}-filter-dropdown__filters`, {
+        [`${px}-filter-dropdown__filters--mobile`]: isMobileDropdown,
+      });
+      switch (buttonType) {
+        case 'Sort':
+          return (
+            <>
+              <div className={filterDropdownClass}>
+                {sortDropDownList.map((value) => (
+                  <FilterInput
+                    id={value.label}
+                    key={value.label}
+                    labelText={value.label}
+                    name={value.label}
+                    type="radio"
+                  />
+                ))}
+              </div>
+              <div
+                className={classnames(`${px}-filter-dropdown__button-wrap`, {
+                  [`${px}-filter-dropdown__mobile-wrap`]: isMobileDropdown,
+                })}
               >
-                <Text variant={TextVariants.string2}>Clear all</Text>
-              </Button>
-              <Button
-                variant={ButtonVariants.primary}
-                onClick={() => {
-                  // Handle sort btn click
-                }}
-              >
-                <Text variant={TextVariants.string2} className={`${px}-filter-dropdown__button-text`}>
-                  Show {auctionFilterData?.[buttonType]?.auctionCount} Auctions
-                </Text>
-              </Button>
-            </div>
-          </div>
-        );
-      case 'Departments':
-      case 'Month':
-      case 'Location':
-        return (
-          <div className={classnames(`${px}-filter-dropdown`, className)} ref={ref}>
-            <FilterHeader heading={buttonType} className={`${px}-filter-dropdown__header`} />
-            <div className={`${px}-filter-dropdown__filters`}>
-              {auctionFilterData?.[buttonType]?.filterLabels &&
-                auctionFilterData?.[buttonType]?.filterLabels.map((value) => (
+                <Button
+                  className={classnames(`${px}-filter-dropdown__button`, {
+                    [`${px}-filter-dropdown__button--mobile`]: isMobileDropdown,
+                  })}
+                  variant={ButtonVariants.primary}
+                  onClick={() => {
+                    // Handle sort btn click
+                  }}
+                >
+                  <Text variant={TextVariants.string2} className={`${px}-filter-dropdown__button-text`}>
+                    Confirm
+                  </Text>
+                </Button>
+              </div>
+            </>
+          );
+        case 'Sale':
+          return (
+            <>
+              <div className={filterDropdownClass}>
+                {saleDropDownList.map((value) => (
                   <FilterInput
                     id={value.label}
                     key={value.label}
@@ -142,32 +116,133 @@ const FilterDropdown = React.forwardRef<HTMLDivElement, FilterDropdownProps>(
                     type="checkbox"
                   />
                 ))}
-            </div>
-            <div className={`${px}-filter-dropdown__buttons`}>
-              <Button
-                variant={ButtonVariants.secondary}
-                onClick={() => {
-                  // Handle sort btn click
-                }}
+              </div>
+              <div
+                className={classnames(`${px}-filter-dropdown__buttons-wrap`, {
+                  [`${px}-filter-dropdown__mobile-wrap`]: isMobileDropdown,
+                })}
               >
-                <Text variant={TextVariants.string2}>Clear all</Text>
-              </Button>
-              <Button
-                variant={ButtonVariants.primary}
-                onClick={() => {
-                  // Handle sort btn click
-                }}
+                <Button
+                  className={classnames(
+                    `${px}-filter-dropdown__buttons`,
+                    {
+                      [`${px}-filter-dropdown__buttons--mobile`]: isMobileDropdown,
+                    },
+                    {
+                      [`${px}-filter-dropdown__buttons--left`]: isMobileDropdown,
+                    },
+                  )}
+                  variant={ButtonVariants.secondary}
+                  onClick={() => {
+                    // Handle sort btn click
+                  }}
+                >
+                  <Text variant={TextVariants.string2}>Clear all</Text>
+                </Button>
+                <Button
+                  className={classnames(
+                    `${px}-filter-dropdown__buttons`,
+                    {
+                      [`${px}-filter-dropdown__buttons--mobile`]: isMobileDropdown,
+                    },
+                    {
+                      [`${px}-filter-dropdown__buttons--right`]: isMobileDropdown,
+                    },
+                  )}
+                  variant={ButtonVariants.primary}
+                  onClick={() => {
+                    // Handle sort btn click
+                  }}
+                >
+                  <Text variant={TextVariants.string2} className={`${px}-filter-dropdown__button-text`}>
+                    Show {auctionFilterData?.[buttonType]?.auctionCount} Auctions
+                  </Text>
+                </Button>
+              </div>
+            </>
+          );
+        case 'Departments':
+        case 'Month':
+        case 'Location':
+          return (
+            <>
+              <div className={filterDropdownClass}>
+                {auctionFilterData?.[buttonType]?.filterLabels &&
+                  auctionFilterData?.[buttonType]?.filterLabels.map((value) => (
+                    <FilterInput
+                      id={value.label}
+                      key={value.label}
+                      labelText={value.label}
+                      name={value.label}
+                      type="checkbox"
+                    />
+                  ))}
+              </div>
+              <div
+                className={classnames(`${px}-filter-dropdown__buttons-wrap`, {
+                  [`${px}-filter-dropdown__mobile-wrap`]: isMobileDropdown,
+                })}
               >
-                <Text variant={TextVariants.string2} className={`${px}-filter-dropdown__button-text`}>
-                  Show {auctionFilterData?.[buttonType]?.auctionCount} Auctions
-                </Text>
-              </Button>
-            </div>
-          </div>
-        );
-      default:
-        return <></>;
-    }
+                <Button
+                  className={classnames(
+                    `${px}-filter-dropdown__buttons`,
+                    {
+                      [`${px}-filter-dropdown__buttons--mobile`]: isMobileDropdown,
+                    },
+                    {
+                      [`${px}-filter-dropdown__buttons--left`]: isMobileDropdown,
+                    },
+                  )}
+                  variant={ButtonVariants.secondary}
+                  onClick={() => {
+                    // Handle sort btn click
+                  }}
+                >
+                  <Text variant={TextVariants.string2}>Clear all</Text>
+                </Button>
+                <Button
+                  className={classnames(
+                    `${px}-filter-dropdown__buttons`,
+                    {
+                      [`${px}-filter-dropdown__buttons--mobile`]: isMobileDropdown,
+                    },
+                    {
+                      [`${px}-filter-dropdown__buttons--right`]: isMobileDropdown,
+                    },
+                  )}
+                  variant={ButtonVariants.primary}
+                  onClick={() => {
+                    // Handle sort btn click
+                  }}
+                >
+                  <Text variant={TextVariants.string2} className={`${px}-filter-dropdown__button-text`}>
+                    Show {auctionFilterData?.[buttonType]?.auctionCount} Auctions
+                  </Text>
+                </Button>
+              </div>
+            </>
+          );
+        default:
+          return <></>;
+      }
+    })();
+
+    return (
+      <div
+        className={classnames(`${px}-filter-dropdown`, className, {
+          [`${px}-filter-dropdown--mobile`]: isMobileDropdown,
+        })}
+        ref={ref}
+      >
+        <FilterHeader
+          heading={buttonType}
+          className={classnames(`${px}-filter-dropdown__header`, {
+            [`${px}-filter-dropdown__header--mobile`]: isMobileDropdown,
+          })}
+        />
+        {dropdownContent}
+      </div>
+    );
   },
 );
 
@@ -186,10 +261,6 @@ export interface FilterButtonProps {
    * Individual Filter button label.
    */
   filterButtonLabel: string;
-  /**
-   * isMobile determine if the component is rendered on mobile.
-   */
-  isMobile: boolean;
 
   /**
    * Button type.
@@ -214,13 +285,10 @@ export interface FilterButtonProps {
 }
 
 const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProps>(
-  (
-    { id, className, filterButtonLabel, buttonType, handleClick, filtersListState, index, auctionFilterData, isMobile },
-    ref,
-  ) => {
+  ({ id, className, filterButtonLabel, buttonType, handleClick, filtersListState, index, auctionFilterData }, ref) => {
     const isButtonSelected = filtersListState && typeof index === 'number' ? filtersListState[index] : false;
 
-    const handleButtonClick: React.MouseEventHandler<HTMLButtonElement> = () => {
+    const handleButtonClick = () => {
       if (filtersListState && handleClick) {
         handleClick(filtersListState.map((selected, i) => (i === index ? !selected : false)));
       }
@@ -248,28 +316,37 @@ const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProps>(
       </Button>
     );
 
-    if (isMobile) {
-      return (
-        <>
-          {filterButtonElement}
-          <Drawer isOpen={isButtonSelected} onClose={() => handleButtonClick()}>
-            Test Drawer Text
-          </Drawer>
-        </>
-      );
-    }
-
     return (
-      <Popover.Root key={`${id}-${filterButtonLabel}-button`}>
-        <Popover.Trigger asChild>{filterButtonElement}</Popover.Trigger>
-        <Popover.Portal>
-          {buttonType !== 'Filter' && (
-            <Popover.Content avoidCollisions={true} collisionPadding={10} sideOffset={5} align="start" alignOffset={5}>
-              <FilterDropdown buttonType={buttonType} auctionFilterData={auctionFilterData} />
-            </Popover.Content>
-          )}
-        </Popover.Portal>
-      </Popover.Root>
+      <>
+        <SSRMediaQuery.Media greaterThanOrEqual="md">
+          <Popover.Root key={`${id}-${filterButtonLabel}-button`}>
+            <Popover.Trigger asChild>{filterButtonElement}</Popover.Trigger>
+            <Popover.Portal>
+              {buttonType !== 'Filter' && (
+                <Popover.Content
+                  avoidCollisions={true}
+                  collisionPadding={10}
+                  sideOffset={5}
+                  align="start"
+                  alignOffset={5}
+                >
+                  <FilterDropdown buttonType={buttonType} auctionFilterData={auctionFilterData} />
+                </Popover.Content>
+              )}
+            </Popover.Portal>
+          </Popover.Root>
+        </SSRMediaQuery.Media>
+        <SSRMediaQuery.Media lessThan="md">
+          <>
+            {filterButtonElement}
+            <BottomSheet isOpen={isButtonSelected} onClose={() => handleButtonClick()}>
+              {buttonType !== 'Filter' && (
+                <FilterDropdown buttonType={buttonType} auctionFilterData={auctionFilterData} isMobileDropdown />
+              )}
+            </BottomSheet>
+          </>
+        </SSRMediaQuery.Media>
+      </>
     );
   },
 );
@@ -352,7 +429,6 @@ const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'InPlaceFilters');
-    const isMobile = useIsMobile();
     return (
       <div ref={ref} className={classnames(`${baseClassName}`, className)} {...commonProps}>
         <FilterButton
@@ -360,7 +436,6 @@ const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
           filterButtonLabel={filterLabel ?? ''}
           buttonType="Filter"
           auctionFilterData={auctionFilterData}
-          isMobile={isMobile}
         />
         {filtersLabelList &&
           filtersLabelList.length > 0 &&
@@ -374,7 +449,6 @@ const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
               filtersListState={filtersListState}
               index={index}
               auctionFilterData={auctionFilterData}
-              isMobile={isMobile}
             />
           ))}
       </div>

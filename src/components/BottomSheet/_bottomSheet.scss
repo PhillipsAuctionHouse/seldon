@@ -1,0 +1,92 @@
+@import '#scss/_vars';
+
+.#{$px}-bottom-sheet {
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  right: 0;
+  width: 100%;
+  z-index: 10;
+
+  &:focus {
+    outline: none;
+  }
+
+  .#{$px}-icon-close-x:hover {
+    color: $white;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    max-width: 100%;
+  }
+
+  &__overlay {
+    background-color: $overlay-black;
+    inset: 0;
+    opacity: 0.35;
+    position: fixed;
+    z-index: 10;
+  }
+}
+
+.#{$px}-bottom-sheet[data-state='open'] {
+  animation: content-show $drawer-content-transition;
+}
+
+.#{$px}-bottom-sheet[data-state='closed'] {
+  animation: content-close $drawer-content-transition;
+}
+
+.#{$px}__overlay[data-state='open'] {
+  animation: overlay-show $default-overlay-transition;
+}
+
+.#{$px}__overlay[data-state='closed'] {
+  animation: overlay-close $default-overlay-transition;
+}
+
+@keyframes content-show {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes content-close {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+@keyframes overlay-show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes overlay-close {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
