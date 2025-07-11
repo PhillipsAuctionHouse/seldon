@@ -2,6 +2,7 @@ import { act, render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { runCommonTests } from '../../utils/testUtils';
 import FavoritesCollectionTile from './FavoritesCollectionTile';
+import userEvent from '@testing-library/user-event';
 
 const defaultProps = {
   id: 'favorites-collection-tile-1',
@@ -99,7 +100,7 @@ describe('FavoritesCollectionTile', () => {
   });
 
   it('shows the blank list elements when the list is blank', () => {
-    render(<FavoritesCollectionTile {...blankListProps} variant="lists" />);
+    render(<FavoritesCollectionTile {...blankListProps} variant="create" />);
     expect(screen.getByText('Create your first List.')).toBeInTheDocument();
     expect(screen.queryByText('New List')).not.toBeInTheDocument();
   });
@@ -138,5 +139,50 @@ describe('FavoritesCollectionTile', () => {
     render(<FavoritesCollectionTile {...{ ...defaultProps, formatlotStr: mockFormatlotStr, variant: 'lists' }} />);
     expect(screen.getByText('Formatted: 2')).toBeInTheDocument();
     expect(mockFormatlotStr).toHaveBeenCalledWith(2);
+  });
+  it('renders a button for the create variant with correct aria-label and calls onClick', () => {
+    const onClick = vi.fn();
+    render(<FavoritesCollectionTile {...blankListProps} variant="create" onClick={onClick} />);
+    const button = screen.getByRole('button', { name: /lists/i });
+    expect(button).toBeInTheDocument();
+
+    expect(button).toHaveAttribute('aria-label', 'Lists');
+    button.focus();
+    button.click();
+    expect(onClick).toHaveBeenCalled();
+  });
+  it('renders the image with correct alt and src when not empty and not create variant', () => {
+    render(<FavoritesCollectionTile {...defaultProps} variant="lists" />);
+    const img = screen.getByAltText(defaultProps.name);
+    expect(img).toBeInTheDocument();
+    expect(img).toHaveAttribute('src', defaultProps.imageSrc);
+  });
+  it('renders the empty state for favorites variant when count is 0', () => {
+    render(<FavoritesCollectionTile {...{ ...defaultProps, count: 0 }} variant="favorites" />);
+    const container = screen.getByTestId('favorites');
+    expect(container).toBeInTheDocument();
+    expect(container).toHaveAttribute('aria-label', 'Favorites');
+    expect(screen.getByText('You have not added any objects to your Favorites yet.')).toBeInTheDocument();
+  });
+
+  it('opens the popover menu when pressing Enter on the menu trigger', async () => {
+    render(<FavoritesCollectionTile {...defaultProps} variant="lists" />);
+    const menuTrigger = screen.getByTestId('menu-trigger');
+    menuTrigger.focus();
+    await userEvent.keyboard('{Enter}');
+    // The dropdown menu should now be visible
+    expect(screen.getByTestId('dropdown-menu')).toBeInTheDocument();
+  });
+  it('calls onClick when pressing Enter or Space on the create variant', async () => {
+    const onClick = vi.fn();
+    render(<FavoritesCollectionTile {...blankListProps} variant="create" onClick={onClick} />);
+    const tile = screen.getByTestId('list');
+    tile.focus();
+
+    await userEvent.keyboard('{Enter}');
+    expect(onClick).toHaveBeenCalledTimes(1);
+
+    await userEvent.keyboard(' ');
+    expect(onClick).toHaveBeenCalledTimes(2);
   });
 });
