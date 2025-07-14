@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 import { useState } from 'react';
 import InPlaceFilters from './InPlaceFilters';
-import { FilterDropdownProps } from './types';
+import { FilterDropdownProps, FilterType } from './types';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -10,8 +10,41 @@ const meta = {
 } satisfies Meta<typeof InPlaceFilters>;
 
 export default meta;
+
+const FILTER_KEYS = {
+  sortBy: 'sortBy',
+  makers: 'makers',
+  collections: 'collections',
+};
+
+const filters: FilterType[] = [
+  {
+    label: 'Sort By',
+    id: FILTER_KEYS.sortBy,
+    type: 'radio',
+    filterDimensions: new Set([
+      { label: 'Lot Number', active: true },
+      { label: 'A-Z Artist Maker', active: false },
+      { label: 'Price Low-High', active: false },
+      { label: 'Price High - Low', active: false },
+    ]),
+  },
+  {
+    label: 'Artists & Makers',
+    id: FILTER_KEYS.makers,
+    type: 'checkbox',
+    filterDimensions: new Set(),
+  },
+  {
+    label: 'Collections',
+    id: FILTER_KEYS.collections,
+    type: 'checkbox',
+    filterDimensions: new Set(),
+  },
+];
+
 export const Playground = (props: FilterDropdownProps) => {
-  const [filtersLabelListState, setFiltersLabelListState] = useState([false, false, false, false, false]);
+  const [filtersLabelListState, setFiltersLabelListState] = useState([false, false, false, false, false, false]);
 
   return (
     <>
@@ -29,7 +62,7 @@ export const Playground = (props: FilterDropdownProps) => {
 Playground.args = {
   id: 'in-place-filters-story',
   filterLabel: 'Filters',
-  filtersLabelList: ['Sort', 'Sale', 'Departments', 'Month', 'Location'],
+  filtersLabelList: ['Filter', 'Sort', 'Sale', 'Departments', 'Month', 'Location'],
   auctionFilterData: {
     Filters: {
       auctionCount: 5,
@@ -68,6 +101,7 @@ Playground.args = {
       ],
     },
   },
+  filters: filters,
 };
 
 Playground.argTypes = {};

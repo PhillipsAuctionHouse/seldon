@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 import { getCommonProps } from '../../utils';
 import { FilterButton, FilterButtonProps } from './FilterButton';
-import { AuctionFilterData } from './types';
+import { AuctionFilterData, FilterType } from './types';
 
 /**
  * ## Overview
@@ -13,15 +13,6 @@ import { AuctionFilterData } from './types';
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-in-place-filters--overview)
  */
-export type AuctionFilter = {
-  id: string;
-  label: string;
-  value: string;
-};
-export type AuctionFilterButton = {
-  auctionCount: number;
-  filterLabels?: AuctionFilter[];
-};
 
 export interface InPlaceFiltersProps {
   /**
@@ -56,6 +47,10 @@ export interface InPlaceFiltersProps {
    * Auction filter data for the filters.
    */
   auctionFilterData?: AuctionFilterData;
+  /**
+   * filters data
+   */
+  filters?: FilterType[];
 }
 
 const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
@@ -69,6 +64,7 @@ const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
       filtersListState,
       setFiltersLabelListState,
       auctionFilterData,
+      filters,
       ...props
     },
     ref,
@@ -76,12 +72,6 @@ const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'InPlaceFilters');
     return (
       <div ref={ref} className={classnames(`${baseClassName}`, className)} {...commonProps}>
-        <FilterButton
-          id={`${id}-filter`}
-          filterButtonLabel={filterLabel ?? ''}
-          buttonType="Filter"
-          auctionFilterData={auctionFilterData}
-        />
         {filtersLabelList &&
           filtersLabelList.length > 0 &&
           filtersLabelList.map((filterLabel, index) => (
@@ -94,6 +84,7 @@ const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
               filtersListState={filtersListState}
               index={index}
               auctionFilterData={auctionFilterData}
+              filters={filters}
             />
           ))}
       </div>

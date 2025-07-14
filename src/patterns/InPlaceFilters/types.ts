@@ -1,4 +1,24 @@
-import { AuctionFilterButton } from './InPlaceFilters';
+export type AuctionFilter = {
+  id: string;
+  label: string;
+  value: string;
+};
+
+export type AuctionFilterButton = {
+  auctionCount: number;
+  filterLabels?: AuctionFilter[];
+};
+export type FilterDimension = {
+  label: string;
+  disabled?: boolean;
+  active?: boolean;
+};
+export type FilterType = {
+  label: string;
+  id: string;
+  type: string;
+  filterDimensions: Set<FilterDimension>;
+};
 
 export type AuctionFilterData = {
   Filters: AuctionFilterButton;
@@ -16,7 +36,7 @@ export interface FilterDropdownProps {
   /**
    * Button type.
    */
-  buttonType: 'Sort' | 'Sale' | 'Departments' | 'Month' | 'Location';
+  buttonType: 'Filter' | 'Sort' | 'Sale' | 'Departments' | 'Month' | 'Location';
   /**
    * Auction filter data for the filters.
    */

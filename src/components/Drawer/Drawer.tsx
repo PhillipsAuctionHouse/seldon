@@ -24,6 +24,10 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    * Drawer optional variant
    */
   variant?: 'bottomSheet' | 'default';
+  /**
+   * Option drawer open side
+   */
+  drawerOpenSide?: 'left' | 'right';
 }
 /**
  * ## Overview
@@ -37,6 +41,7 @@ const Drawer = ({
   onClose = noOp,
   children,
   variant = 'default',
+  drawerOpenSide = 'right',
   ...props
 }: DrawerProps) => {
   const isBottomSheet = variant === 'bottomSheet';
@@ -56,7 +61,12 @@ const Drawer = ({
           className={classnames(`${baseClassName}__overlay`)}
           data-testid="drawer-overlay"
         />
-        <Dialog.Content className={classnames(baseClassName, className)} id={props.id} {...commonProps}>
+        <Dialog.Content
+          className={classnames(baseClassName, className)}
+          data-side={drawerOpenSide}
+          id={props.id}
+          {...commonProps}
+        >
           <Dialog.Title />
           <Dialog.Description />
           <Dialog.Close asChild>
