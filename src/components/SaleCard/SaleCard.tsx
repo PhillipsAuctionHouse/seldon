@@ -84,7 +84,7 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
     const componentProps = { ...commonProps, ...props };
 
     return (
-      <div {...componentProps} className={classes} ref={ref}>
+      <article {...componentProps} className={classes} ref={ref}>
         {imageSrc ? <SeldonImage src={imageSrc} alt={imageAlt} className={`${baseClassName}__image`} /> : null}
         <div className={`${baseClassName}__details`}>
           <Text variant={TextVariants.badge} className={`${baseClassName}__auction-type`}>
@@ -140,7 +140,7 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
             </div>
           </SSRMediaQuery.Media>
         )}
-      </div>
+      </article>
     );
   },
 );
