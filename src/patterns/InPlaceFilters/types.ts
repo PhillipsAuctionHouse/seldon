@@ -4,6 +4,14 @@ export type AuctionFilter = {
   value: string;
 };
 
+export type AuctionFilterButtonTypes = 'Filter' | 'Sort' | 'Sale' | 'Departments' | 'Month' | 'Location';
+
+export type DropDownList = {
+  id: string;
+  label: string;
+  value: string;
+};
+
 export type AuctionFilterButton = {
   auctionCount: number;
   filterLabels?: AuctionFilter[];
@@ -20,14 +28,6 @@ export type FilterType = {
   filterDimensions: Set<FilterDimension>;
 };
 
-export type AuctionFilterData = {
-  Filters: AuctionFilterButton;
-  Sale: AuctionFilterButton;
-  Departments: AuctionFilterButton;
-  Month: AuctionFilterButton;
-  Location: AuctionFilterButton;
-};
-
 export interface FilterDropdownProps {
   /**
    * Base class for Filter Dropdown button component.
@@ -36,13 +36,25 @@ export interface FilterDropdownProps {
   /**
    * Button type.
    */
-  buttonType: 'Filter' | 'Sort' | 'Sale' | 'Departments' | 'Month' | 'Location';
-  /**
-   * Auction filter data for the filters.
-   */
-  auctionFilterData?: AuctionFilterData;
+  buttonType: AuctionFilterButtonTypes;
   /**
    * isMobileDropdown style
    */
   isMobileDropdown?: boolean;
+  /**
+   * filters data
+   */
+  filters?: FilterType[];
+  /**
+   * Index of the filter in the filters list.
+   */
+  filterIndex?: number;
+  /**
+   * Handle filter changes.
+   */
+  handleFilterSelection?: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, filterId: string) => void;
+  /**
+   * Handle filter update.
+   */
+  handleFilterUpdate?: (filterId: string) => void;
 }

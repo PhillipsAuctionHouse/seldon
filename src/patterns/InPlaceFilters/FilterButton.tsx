@@ -13,13 +13,7 @@ import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import { px } from '../../utils';
 import FilterMenu from '../FilterMenu/FilterMenu';
 import { FilterDropdown } from './FilterDropdown';
-import { AuctionFilterData, FilterDimension, FilterType } from './types';
-
-export type DropDownList = {
-  id: string;
-  label: string;
-  value: string;
-};
+import { AuctionFilterButtonTypes, FilterDimension, FilterType } from './types';
 
 export interface FilterButtonProps {
   /**
@@ -38,7 +32,7 @@ export interface FilterButtonProps {
   /**
    * Filter Button type.
    */
-  buttonType: 'Filter' | 'Sort' | 'Sale' | 'Departments' | 'Month' | 'Location';
+  buttonType: AuctionFilterButtonTypes;
   /**
    * Filter button onClick handler.
    */
@@ -52,18 +46,33 @@ export interface FilterButtonProps {
    */
   index?: number;
   /**
-   * Auction filter data for the filters.
-   */
-  auctionFilterData?: AuctionFilterData;
-  /**
    * filters data
    */
   filters?: FilterType[];
+  /**
+   * Handle filter changes.
+   */
+  handleFilterSelection?: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, filterId: string) => void;
+  /**
+   * Handle filter update.
+   */
+  handleFilterUpdate?: (filterId: string) => void;
 }
 
 export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProps>(
   (
-    { id, className, filterButtonLabel, buttonType, handleClick, filtersListState, index, auctionFilterData, filters },
+    {
+      id,
+      className,
+      filterButtonLabel,
+      buttonType,
+      handleClick,
+      filtersListState,
+      index,
+      filters,
+      handleFilterSelection,
+      handleFilterUpdate,
+    },
     ref,
   ) => {
     const isButtonSelected = filtersListState && typeof index === 'number' ? filtersListState[index] : false;
@@ -123,11 +132,21 @@ export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProp
             ))}
           </FilterMenu>
 
-          <Button
-            onClick={() => {
-              // Handle filter button click
-            }}
-          >{`Show ${0} lots`}</Button>
+          <div className={`${px}-filter-dropdown__buttons-wrap`}>
+            <Button
+              className={`${px}-filter-dropdown__button`}
+              variant={ButtonVariants.secondary}
+              onClick={() => {
+                // Handle clear all button click
+              }}
+            >{`Clear All`}</Button>
+            <Button
+              className={`${px}-filter-dropdown__button`}
+              onClick={() => {
+                // Handle filter button click
+              }}
+            >{`Show ${0} lots`}</Button>
+          </div>
         </Drawer>
       </>
     ) : (
@@ -143,7 +162,13 @@ export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProp
                 align="start"
                 alignOffset={5}
               >
-                <FilterDropdown buttonType={buttonType} auctionFilterData={auctionFilterData} />
+                <FilterDropdown
+                  buttonType={buttonType}
+                  filters={filters}
+                  filterIndex={index}
+                  handleFilterSelection={handleFilterSelection}
+                  handleFilterUpdate={handleFilterUpdate}
+                />
               </Popover.Content>
             </Popover.Portal>
           </Popover.Root>
@@ -152,7 +177,14 @@ export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProp
           <>
             {filterButtonElement}
             <Drawer variant="bottomSheet" isOpen={isButtonSelected} onClose={() => handleButtonClick()}>
-              <FilterDropdown buttonType={buttonType} auctionFilterData={auctionFilterData} isMobileDropdown />
+              <FilterDropdown
+                buttonType={buttonType}
+                isMobileDropdown
+                filters={filters}
+                filterIndex={index}
+                handleFilterSelection={handleFilterSelection}
+                handleFilterUpdate={handleFilterUpdate}
+              />
             </Drawer>
           </>
         </SSRMediaQuery.Media>

@@ -1,0 +1,85 @@
+export const InPlaceFiltersFilters = {
+  Sort: [
+    {
+      id: 'sort-by-date-ascending',
+      label: 'End Date: Ascending',
+      active: true,
+    },
+    {
+      id: 'sort-by-date-descending',
+      label: 'End Date: Descending',
+      active: false,
+    },
+  ],
+  Sale: [
+    {
+      id: 'sale-type-online',
+      label: 'Online Auction',
+      active: false,
+    },
+    {
+      id: 'sale-type-live',
+      label: 'Live Auction',
+      active: false,
+    },
+  ],
+  Departments: [
+    { id: 'contemporary-art', label: 'Contemporary Art', value: 'Contemporary Art', active: false },
+    { id: 'design', label: 'Design', value: 'Design', active: false },
+    { id: 'jewellery', label: 'Jewellery', value: 'Jewellery', active: false },
+    { id: 'watches', label: 'Watches', value: 'Watches', active: false },
+    { id: 'photographs', label: 'Photographs', value: 'Photographs', active: false },
+  ],
+  Month: [
+    { id: 'january', label: 'January', value: 'January', active: false },
+    { id: 'february', label: 'February', value: 'February', active: false },
+    { id: 'march', label: 'March', value: 'March', active: false },
+    { id: 'april', label: 'April', value: 'April', active: false },
+    { id: 'may', label: 'May', value: 'May', active: false },
+    { id: 'june', label: 'June', value: 'June', active: false, disabled: true },
+  ],
+  Location: [
+    { id: 'geneva', label: 'Geneva', value: 'Geneva', active: false },
+    { id: 'hong-kong', label: 'Hong Kong', value: 'Hong Kong', active: false },
+    { id: 'london', label: 'London', value: 'London', active: false },
+    { id: 'new-york', label: 'New York', value: 'New York', active: false },
+  ],
+};
+
+export const SalesMockData = [
+  {
+    auctionType: 'Live Auction',
+    titleText: 'New York Art Sale',
+    date: '1 PM EST, January 1, 2025',
+    location: 'New York',
+    department: 'Contemporary Art',
+  },
+  {
+    auctionType: 'Live Auction',
+    titleText: 'London Art Sale',
+    date: '2 PM EST, February 2, 2025',
+    location: 'London',
+    department: 'Design',
+  },
+  {
+    auctionType: 'Online Auction',
+    titleText: 'Hong Kong Jewellery Sale',
+    date: '3 PM EST, March 3, 2025',
+    location: 'Hong Kong',
+    department: 'Jewellery',
+  },
+  {
+    auctionType: 'Online Auction',
+    titleText: 'Geneva Watch Sale',
+    date: '4 PM EST, April 4, 2025',
+    location: 'Geneva',
+    department: 'Watches',
+  },
+  {
+    auctionType: 'Live Auction',
+    titleText: 'New York Photographs Sale',
+    date: '5 PM EST, May 5, 2025',
+    location: 'New York',
+    department: 'Photographs',
+  },
+];

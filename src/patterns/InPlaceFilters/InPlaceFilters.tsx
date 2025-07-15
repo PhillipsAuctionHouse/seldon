@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React from 'react';
 import { getCommonProps } from '../../utils';
 import { FilterButton, FilterButtonProps } from './FilterButton';
-import { AuctionFilterData, FilterType } from './types';
+import { AuctionFilterButtonTypes, FilterType } from './types';
 
 /**
  * ## Overview
@@ -24,17 +24,9 @@ export interface InPlaceFiltersProps {
    */
   className?: string;
   /**
-   * Filter button label.
-   */
-  filterLabel?: string;
-  /**
    * Filter Button onClick handler.
    */
   handleFilterClick?: () => void;
-  /**
-   * List of labels for the filter buttons.
-   */
-  filtersLabelList?: string[];
   /**
    * List of states for the filter buttons.
    */
@@ -44,27 +36,32 @@ export interface InPlaceFiltersProps {
    */
   setFiltersLabelListState?: (state: boolean[]) => void;
   /**
-   * Auction filter data for the filters.
-   */
-  auctionFilterData?: AuctionFilterData;
-  /**
    * filters data
    */
   filters?: FilterType[];
+  /**
+   * Handle filter changes.
+   */
+  handleFilterSelection?: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, filterId: string) => void;
+  /**
+   * Handle filter update.
+   */
+  handleFilterUpdate?: (filterId: string) => void;
 }
+
+const filtersButtonsList: AuctionFilterButtonTypes[] = ['Filter', 'Sort', 'Sale', 'Departments', 'Month', 'Location'];
 
 const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
   (
     {
       id,
       className,
-      filterLabel,
-      filtersLabelList,
       handleFilterClick,
       filtersListState,
       setFiltersLabelListState,
-      auctionFilterData,
       filters,
+      handleFilterSelection,
+      handleFilterUpdate,
       ...props
     },
     ref,
@@ -72,21 +69,20 @@ const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'InPlaceFilters');
     return (
       <div ref={ref} className={classnames(`${baseClassName}`, className)} {...commonProps}>
-        {filtersLabelList &&
-          filtersLabelList.length > 0 &&
-          filtersLabelList.map((filterLabel, index) => (
-            <FilterButton
-              key={`${id}-${filterLabel}-button`}
-              id={`${id}-${filterLabel}-button`}
-              filterButtonLabel={filterLabel}
-              buttonType={filterLabel as FilterButtonProps['buttonType']}
-              handleClick={setFiltersLabelListState}
-              filtersListState={filtersListState}
-              index={index}
-              auctionFilterData={auctionFilterData}
-              filters={filters}
-            />
-          ))}
+        {filtersButtonsList.map((filterLabel, index) => (
+          <FilterButton
+            key={`${id}-${filterLabel}-button`}
+            id={`${id}-${filterLabel}-button`}
+            filterButtonLabel={filterLabel}
+            buttonType={filterLabel as FilterButtonProps['buttonType']}
+            handleClick={setFiltersLabelListState}
+            filtersListState={filtersListState}
+            index={index}
+            filters={filters}
+            handleFilterSelection={handleFilterSelection}
+            handleFilterUpdate={handleFilterUpdate}
+          />
+        ))}
       </div>
     );
   },
