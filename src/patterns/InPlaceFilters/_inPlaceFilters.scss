@@ -21,8 +21,8 @@
   box-shadow: 0 4px 6px $medium-gray;
   display: flex;
   flex-direction: column;
+  min-width: 430px;
   padding: 2rem;
-  width: 425px;
 
   &__filters {
     display: flex;

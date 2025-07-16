@@ -56,7 +56,15 @@ export interface FilterButtonProps {
   /**
    * Handle filter update.
    */
-  handleFilterUpdate?: (filterId: string) => void;
+  handleFilterUpdate?: (returnCountOnly: boolean) => void;
+  /**
+   * Clear all filter update by filter type
+   */
+  clearFilterUpdate?: (filterId: string) => void;
+  /**
+   * Results count to display
+   */
+  resultsCount: number;
 }
 
 export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProps>(
@@ -72,6 +80,8 @@ export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProp
       filters,
       handleFilterSelection,
       handleFilterUpdate,
+      clearFilterUpdate,
+      resultsCount,
     },
     ref,
   ) => {
@@ -145,14 +155,16 @@ export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProp
               onClick={() => {
                 // Handle filter button click
               }}
-            >{`Show ${0} lots`}</Button>
+            >
+              Show {resultsCount} lots
+            </Button>
           </div>
         </Drawer>
       </>
     ) : (
       <>
         <SSRMediaQuery.Media greaterThanOrEqual="md">
-          <Popover.Root key={`${id}-${filterButtonLabel}-button`}>
+          <Popover.Root key={`${id}-${filterButtonLabel}-button`} open={isButtonSelected}>
             <Popover.Trigger asChild>{filterButtonElement}</Popover.Trigger>
             <Popover.Portal>
               <Popover.Content
@@ -168,6 +180,8 @@ export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProp
                   filterIndex={index}
                   handleFilterSelection={handleFilterSelection}
                   handleFilterUpdate={handleFilterUpdate}
+                  clearFilterUpdate={clearFilterUpdate}
+                  resultsCount={resultsCount}
                 />
               </Popover.Content>
             </Popover.Portal>
@@ -184,6 +198,8 @@ export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProp
                 filterIndex={index}
                 handleFilterSelection={handleFilterSelection}
                 handleFilterUpdate={handleFilterUpdate}
+                clearFilterUpdate={clearFilterUpdate}
+                resultsCount={resultsCount}
               />
             </Drawer>
           </>

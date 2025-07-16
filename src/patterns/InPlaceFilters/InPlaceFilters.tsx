@@ -40,13 +40,21 @@ export interface InPlaceFiltersProps {
    */
   filters?: FilterType[];
   /**
-   * Handle filter changes.
+   * Handle filter changes
    */
   handleFilterSelection?: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, filterId: string) => void;
   /**
-   * Handle filter update.
+   * Handle filter update
    */
-  handleFilterUpdate?: (filterId: string) => void;
+  handleFilterUpdate?: (returnCountOnly: boolean) => void;
+  /**
+   * Clear all filter update by filter type
+   */
+  clearFilterUpdate?: (filterId: string) => void;
+  /**
+   * Results count to display
+   */
+  resultsCount: number;
 }
 
 const filtersButtonsList: AuctionFilterButtonTypes[] = ['Filter', 'Sort', 'Sale', 'Departments', 'Month', 'Location'];
@@ -62,6 +70,8 @@ const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
       filters,
       handleFilterSelection,
       handleFilterUpdate,
+      clearFilterUpdate,
+      resultsCount,
       ...props
     },
     ref,
@@ -81,6 +91,8 @@ const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
             filters={filters}
             handleFilterSelection={handleFilterSelection}
             handleFilterUpdate={handleFilterUpdate}
+            clearFilterUpdate={clearFilterUpdate}
+            resultsCount={resultsCount}
           />
         ))}
       </div>

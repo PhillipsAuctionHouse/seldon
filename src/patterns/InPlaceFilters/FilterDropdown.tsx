@@ -19,6 +19,8 @@ export const FilterDropdown = React.forwardRef<HTMLDivElement, FilterDropdownPro
       filterIndex,
       handleFilterSelection,
       handleFilterUpdate,
+      clearFilterUpdate,
+      resultsCount,
     },
     ref,
   ) => {
@@ -77,9 +79,9 @@ export const FilterDropdown = React.forwardRef<HTMLDivElement, FilterDropdownPro
                     [`${px}-filter-dropdown__button--mobile`]: isMobileDropdown,
                   })}
                   variant={ButtonVariants.primary}
-                  onClick={() => handleFilterUpdate && handleFilterUpdate(buttonType)}
+                  onClick={() => handleFilterUpdate && handleFilterUpdate(false)}
                 >
-                  <Text variant={TextVariants.string2} className={`${px}-filter-dropdown__button-text`}>
+                  <Text variant={TextVariants.string3} className={`${px}-filter-dropdown__button-text`}>
                     Confirm
                   </Text>
                 </Button>
@@ -98,10 +100,10 @@ export const FilterDropdown = React.forwardRef<HTMLDivElement, FilterDropdownPro
                   )}
                   variant={ButtonVariants.secondary}
                   onClick={() => {
-                    // Handle sort btn click
+                    clearFilterUpdate && clearFilterUpdate(buttonType);
                   }}
                 >
-                  <Text variant={TextVariants.string2}>Clear all</Text>
+                  <Text variant={TextVariants.string3}>Clear all</Text>
                 </Button>
                 <Button
                   className={classnames(
@@ -114,10 +116,10 @@ export const FilterDropdown = React.forwardRef<HTMLDivElement, FilterDropdownPro
                     },
                   )}
                   variant={ButtonVariants.primary}
-                  onClick={() => handleFilterUpdate && handleFilterUpdate(buttonType)}
+                  onClick={() => handleFilterUpdate && handleFilterUpdate(false)}
                 >
-                  <Text variant={TextVariants.string2} className={`${px}-filter-dropdown__button-text`}>
-                    Show 0 Auctions
+                  <Text variant={TextVariants.string3} className={`${px}-filter-dropdown__button-text`}>
+                    Show {resultsCount} Auctions
                   </Text>
                 </Button>
               </>

@@ -56,5 +56,13 @@ export interface FilterDropdownProps {
   /**
    * Handle filter update.
    */
-  handleFilterUpdate?: (filterId: string) => void;
+  handleFilterUpdate?: (returnCountOnly: boolean) => void;
+  /**
+   * Clear all filter update by filter type
+   */
+  clearFilterUpdate?: (filterId: string) => void;
+  /**
+   * Results count to display
+   */
+  resultsCount: number;
 }

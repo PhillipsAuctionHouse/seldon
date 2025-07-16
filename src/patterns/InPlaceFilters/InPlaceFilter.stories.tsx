@@ -60,32 +60,30 @@ const buildFilters = () => {
 };
 
 export const Playground = (props: FilterDropdownProps) => {
-  const [filtersLabelListState, setFiltersLabelListState] = useState([false, false, false, false, false, false]);
+  const [filtersLabelListState, setFiltersLabelListState] = useState(Array(6).fill(false));
   const initialFilters = buildFilters();
   const [results, setResults] = useState(SalesMockData);
   const [filters, setFilters] = useState(initialFilters);
   const [filterRules, setFilterRules] = useState<Map<string, Set<string>>>(new Map());
-
-  useEffect(() => {}, [filters]);
+  const [resultsCount, setResultsCount] = useState(SalesMockData.length);
 
   const updateFilters = (filterId: string, checked: boolean, name: string) => {
-    console.log('updateFilters called', { filterId, checked, name });
     const updatedFilters = filters.map((filter) => {
       if (filter.id === filterId) {
         const updatedFilterDimensions = new Set(
           Array.from(filter.filterDimensions).map((dimension) => {
-            console.log('dimension', dimension);
             if (dimension.label === name) {
               return {
                 ...dimension,
                 active: checked,
               };
-            } else {
+            } else if (filterId === FILTER_KEYS.sort) {
               return {
                 ...dimension,
                 active: false,
               };
             }
+            return dimension;
           }),
         );
 
@@ -102,10 +100,16 @@ export const Playground = (props: FilterDropdownProps) => {
 
   const updateFilterRules = (filterId: string, checked: boolean, name: string) => {
     const newFilterRules = new Map(filterRules);
-    // const rule = newFilterRules.get(filterId) ?? new Set<string>();
-    // remove rule if it's binary so only one can be selected at a time
+    let rule: Set<string> | undefined;
 
-    const rule: Set<string> = new Set<string>();
+    if (filterId === FILTER_KEYS.sort) {
+      rule = new Set<string>();
+    } else {
+      rule = newFilterRules.get(filterId);
+      if (!rule) {
+        rule = new Set<string>();
+      }
+    }
 
     if (checked) {
       rule.add(name);
@@ -115,6 +119,7 @@ export const Playground = (props: FilterDropdownProps) => {
 
     newFilterRules.set(filterId, rule);
     setFilterRules(newFilterRules);
+
     return newFilterRules;
   };
 
@@ -126,32 +131,97 @@ export const Playground = (props: FilterDropdownProps) => {
     console.log('filterRules after update', newFilterRules);
 
     updateFilters(filterId, checked, name);
+
+    const count = handleFilterUpdate(true, newFilterRules) ?? 0;
+    console.log('handleFilterSelection count', count);
+    setResultsCount(count);
   };
 
-  const handleFilterUpdate = (filterId: string) => {
-    console.log('handleFilterUpdate called', filterId);
-    let filterResults = results;
+  const handleFilterUpdate = (returnCountOnly?: boolean, rules = filterRules) => {
+    let filterResults = SalesMockData;
 
-    if (filterId === FILTER_KEYS.sort) {
-      const sortRule = filterRules.get('Sort');
-      const value = sortRule ? Array.from(sortRule)[0] : undefined;
-      console.log('sortRule', sortRule, 'value', value);
+    // sort filters
+    const sortRule = rules.get('Sort');
+    const sortValue = sortRule ? Array.from(sortRule)[0] : undefined;
+    filterResults = [...SalesMockData].sort((a, b) => {
+      const dateA = new Date(a.date.split(', ').slice(1).join(', '));
+      const dateB = new Date(b.date.split(', ').slice(1).join(', '));
+      if (sortValue === 'End Date: Descending') {
+        return dateB.getTime() - dateA.getTime();
+      } else {
+        return dateA.getTime() - dateB.getTime();
+      }
+    });
 
-      filterResults = [...results].sort((a, b) => {
-        const dateA = new Date(a.date.split(', ').slice(1).join(', '));
-        const dateB = new Date(b.date.split(', ').slice(1).join(', '));
+    // sale filters
+    const saleRule = rules.get(FILTER_KEYS.sale);
+    const saleValue = saleRule ? Array.from(saleRule) : [];
+    if (saleValue.length > 0) {
+      filterResults = [...filterResults].filter((sale) => saleValue.includes(sale.auctionType));
+    }
 
-        if (value === 'End Date: Descending') {
-          return dateB.getTime() - dateA.getTime(); // Descending: most recent first
-        } else {
-          return dateA.getTime() - dateB.getTime(); // Ascending: oldest first
-        }
+    // departments filters
+    const departmentsRule = rules.get(FILTER_KEYS.departments);
+    const departmentsValue = departmentsRule ? Array.from(departmentsRule) : [];
+    if (departmentsValue.length > 0) {
+      filterResults = [...filterResults].filter((sale) => departmentsValue.includes(sale.department));
+    }
+
+    // month filters
+    const monthRule = rules.get(FILTER_KEYS.month);
+    const monthValue = monthRule ? Array.from(monthRule) : [];
+    if (monthValue.length > 0) {
+      filterResults = [...filterResults].filter((sale) => {
+        const saleMonth = new Date(sale.date.split(', ').slice(1).join(', ')).toLocaleString('default', {
+          month: 'long',
+        });
+        return monthValue.includes(saleMonth);
       });
     }
 
-    console.log('setResults called with', filterResults);
-    setResults(filterResults);
+    // location filters
+    const locationRule = rules.get(FILTER_KEYS.location);
+    const locationValue = locationRule ? Array.from(locationRule) : [];
+    if (locationValue.length > 0) {
+      filterResults = [...filterResults].filter((sale) => locationValue.includes(sale.location));
+    }
+
+    if (returnCountOnly) {
+      return filterResults.length;
+    } else {
+      setResults(filterResults);
+      setFiltersLabelListState(Array(6).fill(false));
+    }
   };
+
+  const clearFilterUpdate = (filterId: string) => {
+    console.log('clearAllFilterUpdate called', filterId);
+
+    const newFilterRules = new Map(filterRules);
+    newFilterRules.delete(filterId);
+    setFilterRules(newFilterRules);
+    setFilters((prevFilters) =>
+      prevFilters.map((filter) =>
+        filter.id === filterId
+          ? {
+              ...filter,
+              filterDimensions: new Set(
+                Array.from(filter.filterDimensions).map((dimension) => ({
+                  ...dimension,
+                  active: false,
+                })),
+              ),
+            }
+          : filter,
+      ),
+    );
+
+    setResultsCount(handleFilterUpdate(true) ?? 0);
+  };
+
+  useEffect(() => {
+    console.log('resultsCount', resultsCount);
+  }, [resultsCount]);
 
   return (
     <>
@@ -163,6 +233,8 @@ export const Playground = (props: FilterDropdownProps) => {
         handleFilterSelection={handleFilterSelection}
         filters={filters}
         handleFilterUpdate={handleFilterUpdate}
+        clearFilterUpdate={clearFilterUpdate}
+        resultsCount={resultsCount}
       />
       <div
         style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-sm)', marginTop: 'var(--spacing-md)' }}
