@@ -228,7 +228,7 @@ const FavoritesCollectionTile = memo(
                 <div className={`${baseClassName}__create-spacing`}></div>
                 <div
                   className={`${baseClassName}__media-container`}
-                  data-testid="list"
+                  data-testid="create-list"
                   aria-label={createAriaLabel}
                   role="button"
                   tabIndex={0}
@@ -287,7 +287,7 @@ const FavoritesCollectionTile = memo(
                 {isHasListAndCountEmpty && isListVariant && (
                   <div
                     className={`${baseClassName}__media-container`}
-                    data-testid="list"
+                    data-testid="empty-list"
                     aria-label={emptyListAriaLabel}
                   >
                     <div
@@ -314,7 +314,12 @@ const FavoritesCollectionTile = memo(
                 )}
 
                 {!isCountEmpty && hasListData && (
-                  <div className={`${baseClassName}__media-container`} ref={imageRef} aria-label={listAriaLabel}>
+                  <div
+                    className={`${baseClassName}__media-container`}
+                    ref={imageRef}
+                    aria-label={listAriaLabel}
+                    data-testid="list"
+                  >
                     <SeldonImage
                       alt={name}
                       aspectRatio="1/1"

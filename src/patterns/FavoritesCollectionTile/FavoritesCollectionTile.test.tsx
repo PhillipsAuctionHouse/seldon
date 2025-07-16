@@ -143,10 +143,10 @@ describe('FavoritesCollectionTile', () => {
   it('renders a button for the create variant with correct aria-label and calls onClick', () => {
     const onClick = vi.fn();
     render(<FavoritesCollectionTile {...blankListProps} variant="create" onClick={onClick} />);
-    const button = screen.getByRole('button', { name: /lists/i });
+    const button = screen.getByRole('button', { name: /Create List/i });
     expect(button).toBeInTheDocument();
 
-    expect(button).toHaveAttribute('aria-label', 'Lists');
+    expect(button).toHaveAttribute('aria-label', 'Create List');
     button.focus();
     button.click();
     expect(onClick).toHaveBeenCalled();
@@ -176,7 +176,7 @@ describe('FavoritesCollectionTile', () => {
   it('calls onClick when pressing Enter or Space on the create variant', async () => {
     const onClick = vi.fn();
     render(<FavoritesCollectionTile {...blankListProps} variant="create" onClick={onClick} />);
-    const tile = screen.getByTestId('list');
+    const tile = screen.getByTestId('create-list');
     tile.focus();
 
     await userEvent.keyboard('{Enter}');
@@ -184,5 +184,38 @@ describe('FavoritesCollectionTile', () => {
 
     await userEvent.keyboard(' ');
     expect(onClick).toHaveBeenCalledTimes(2);
+  });
+  it('renders the correct aria-label for the create variant', () => {
+    render(<FavoritesCollectionTile {...blankListProps} variant="create" createAriaLabel="Create List" />);
+    const container = screen.getByTestId('create-list');
+    expect(container).toBeInTheDocument();
+    expect(container).toHaveAttribute('aria-label', 'Create List');
+  });
+
+  it('renders the correct aria-label for the favorites empty state', () => {
+    render(
+      <FavoritesCollectionTile
+        {...{ ...defaultProps, count: 0 }}
+        variant="favorites"
+        favoritesAriaLabel="Favorites Empty State"
+      />,
+    );
+    const container = screen.getByTestId('favorites');
+    expect(container).toBeInTheDocument();
+    expect(container).toHaveAttribute('aria-label', 'Favorites Empty State');
+  });
+
+  it('renders the correct aria-label for the lists empty state', () => {
+    render(<FavoritesCollectionTile {...emptyListProps} variant="lists" emptyListAriaLabel="Empty Lists State" />);
+    const container = screen.getByTestId('empty-list');
+    expect(container).toBeInTheDocument();
+    expect(container).toHaveAttribute('aria-label', 'Empty Lists State');
+  });
+
+  it('renders the correct aria-label for a list with data', () => {
+    render(<FavoritesCollectionTile {...defaultProps} variant="lists" listAriaLabel="List with Data" />);
+    const container = screen.getByTestId('list');
+    expect(container).toBeInTheDocument();
+    expect(container).toHaveAttribute('aria-label', 'List with Data');
   });
 });
