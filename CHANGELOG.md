@@ -1,3 +1,10 @@
+# [1.163.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.162.0...v1.163.0) (2025-07-16)
+
+
+### Features
+
+* **ExitgateCard:** L3-6952 Add missing import to index ([#657](https://github.com/PhillipsAuctionHouse/seldon/issues/657)) ([9df0abf](https://github.com/PhillipsAuctionHouse/seldon/commit/9df0abf46550399510c6f449042f55fdd0d0ca38))
+
 # [1.162.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.161.0...v1.162.0) (2025-07-16)
 
 
