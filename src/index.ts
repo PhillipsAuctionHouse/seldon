@@ -87,6 +87,7 @@ export * from './components/Carousel';
 export * from './components/ComboBox';
 export * from './components/PhoneNumberPicker';
 export * from './components/Detail';
+export * from './components/ExitGateCard';
 export * from './components/Loader';
 export { default as PageContentWrapper } from './components/PageContentWrapper/PageContentWrapper';
 export * from './components/PinchZoom';
