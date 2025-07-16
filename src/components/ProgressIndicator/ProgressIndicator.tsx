@@ -4,6 +4,7 @@ import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { Icon } from '../Icon';
 import { Text, TextVariants } from '../Text';
+import './_progressIndicator.scss';
 
 export interface ProgressIndicatorProps extends Progress.ProgressProps, ComponentProps<'div'> {
   /**
@@ -21,10 +22,10 @@ export interface ProgressIndicatorProps extends Progress.ProgressProps, Componen
  *
  * Overview of this widget
  *
- * 
+ *
  * [Figma Link](https://www.figma.com/design/kSxOhnqIhilZ9hIJd3bPgP/RW-Registration?node-id=2996-46615&m=dev)
  * TODO: Update Figma link when the component is moved into its own component.
- * 
+ *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-progressindicator--overview)
  */
 const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(

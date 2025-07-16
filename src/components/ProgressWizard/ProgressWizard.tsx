@@ -5,20 +5,39 @@ import ProgressIndicator from '../ProgressIndicator/ProgressIndicator';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
 import { Icon } from '../Icon';
+import './_progressWizard.scss';
 
 export interface ProgressWizardProps extends ComponentProps<'div'> {
   steps: number;
   initialStep?: number;
   children: ReactNode[];
+  current?: number; // controlled
+  onStepChange?: (step: number) => void; // controlled
+
+  
 }
 
 const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
-  ({ className, steps, initialStep = 1, children, ...props }, ref) => {
+  ({ className, steps, initialStep = 1, children, current: controlledCurrent, onStepChange, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ProgressWizard');
-    const [current, setCurrent] = useState(initialStep);
 
-    const goNext = () => setCurrent((c) => Math.min(c + 1, steps));
-    const goBack = () => setCurrent((c) => Math.max(c - 1, 1));
+    // Uncontrolled state fallback
+    const [uncontrolledCurrent, setUncontrolledCurrent] = useState(initialStep);
+
+    // Use controlled if provided, else internal state
+    const current = typeof controlledCurrent === 'number' ? controlledCurrent : uncontrolledCurrent;
+
+    // Step navigation handlers
+    const setStep = (step: number) => {
+      if (onStepChange) {
+        onStepChange(step);
+      } else {
+        setUncontrolledCurrent(step);
+      }
+    };
+
+    const goNext = () => setStep(Math.min(current + 1, steps));
+    const goBack = () => setStep(Math.max(current - 1, 1));
 
     const isFirst = current === 1;
     const isLast = current === steps;
