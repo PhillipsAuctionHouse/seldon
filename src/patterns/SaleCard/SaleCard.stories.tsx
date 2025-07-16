@@ -2,6 +2,11 @@ import { Meta } from '@storybook/react';
 import SaleCard, { SaleCardProps } from './SaleCard';
 import { getScssVar } from '../../utils/scssUtils';
 import { SaleCardVariants } from './types';
+import { SaleCardActions } from './SaleCardActions';
+import Button from '../../components/Button/Button';
+import { ButtonVariants } from '../../components/Button/types';
+import { px } from '../../utils';
+import './_saleCard.scss';
 
 const meta = {
   title: 'Patterns/SaleCard',
@@ -70,41 +75,82 @@ export const SaleCardWithPrimaryAndSecondaryCTA = () => (
   >
     <SaleCard
       {...defaultProps}
-      primaryButtonText="Join Sale room"
-      primaryButtonOnClick={() => console.log('Primary button clicked')}
-      secondaryButtonText="Register to bid"
-      secondaryButtonOnClick={() => console.log('Secondary button clicked')}
       badgeText="Happening Now"
       modalButtonText="Session and viewing details"
       modalButtonOnClick={() => console.log('Modal button clicked')}
       imageSrc="https://via.placeholder.com/400"
-    />
+    >
+      <SaleCardActions>
+        <Button
+          className={`${px}-sale-card__cta_button`}
+          onClick={() => console.log('Primary button clicked')}
+          variant={ButtonVariants.primary}
+          style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
+        >
+          Join Sale room
+        </Button>
+        <Button
+          className={`${px}-sale-card__cta_button`}
+          onClick={() => console.log('Secondary button clicked')}
+          variant={ButtonVariants.secondary}
+          style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
+        >
+          Register to bid
+        </Button>
+      </SaleCardActions>
+    </SaleCard>
     {divider}
     <SaleCard
       {...defaultProps}
-      primaryButtonText="Join Sale room"
-      primaryButtonOnClick={() => console.log('Primary button clicked')}
-      secondaryButtonText="Register to bid"
-      secondaryButtonOnClick={() => console.log('Secondary button clicked')}
       titleText="Modern & Contemporary Art Day Sale, Afternoon Session"
       location="Hong Kong"
       badgeText="Accepting Consignments"
       modalButtonText="Session and viewing details"
       modalButtonOnClick={() => console.log('Modal button clicked')}
-    />
+    >
+      <SaleCardActions>
+        <Button
+          onClick={() => console.log('Primary button clicked')}
+          variant={ButtonVariants.primary}
+          style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
+        >
+          Join Sale room
+        </Button>
+        <Button
+          onClick={() => console.log('Secondary button clicked')}
+          variant={ButtonVariants.secondary}
+          style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
+        >
+          Register to bid
+        </Button>
+      </SaleCardActions>
+    </SaleCard>
     {divider}
     <SaleCard
       {...defaultProps}
-      primaryButtonText="Browse"
-      primaryButtonOnClick={() => console.log('Primary button clicked')}
-      secondaryButtonText="Register to bid"
-      secondaryButtonOnClick={() => console.log('Secondary button clicked')}
       titleText="Modern & Contemporary: Online Auction, New York"
       date="27 Aug - 05 Sep"
       badgeText="Bidding Open"
       modalButtonText="Session and viewing details"
       modalButtonOnClick={() => console.log('Modal button clicked')}
-    />
+    >
+      <SaleCardActions>
+        <Button
+          onClick={() => console.log('Primary button clicked')}
+          variant={ButtonVariants.primary}
+          style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
+        >
+          Browse
+        </Button>
+        <Button
+          onClick={() => console.log('Secondary button clicked')}
+          variant={ButtonVariants.secondary}
+          style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
+        >
+          Register to bid
+        </Button>
+      </SaleCardActions>
+    </SaleCard>
   </div>
 );
 
@@ -114,9 +160,17 @@ export const SaleCardWithPrimaryCTA = () => (
     badgeText="Happening Now"
     modalButtonText="Session and viewing details"
     modalButtonOnClick={() => console.log('Modal button clicked')}
-    primaryButtonText="Sell with us"
-    primaryButtonOnClick={() => console.log('Primary button clicked')}
-  />
+  >
+    <SaleCardActions>
+      <Button
+        onClick={() => console.log('Primary button clicked')}
+        variant={ButtonVariants.primary}
+        style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
+      >
+        Sell with us
+      </Button>
+    </SaleCardActions>
+  </SaleCard>
 );
 
 export const SaleCardWithSecondaryCTA = () => (
@@ -126,25 +180,48 @@ export const SaleCardWithSecondaryCTA = () => (
     titleText="Modern & Contemporary Art Day Sale, Morning Session"
     date="2 PM EST, May 27, 2025"
     location="New York"
-    secondaryButtonText="Register to bid"
-    secondaryButtonOnClick={() => console.log('Secondary button clicked')}
     badgeText="Happening Now"
     modalButtonText="Session and viewing details"
     modalButtonOnClick={() => console.log('Modal button clicked')}
-  />
+  >
+    <SaleCardActions>
+      <Button
+        onClick={() => console.log('Secondary button clicked')}
+        variant={ButtonVariants.secondary}
+        style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
+      >
+        Register to bid
+      </Button>
+    </SaleCardActions>
+  </SaleCard>
 );
 
 export const SaleCardWithDownloadLink = () => (
   <SaleCard
     {...defaultProps}
-    primaryButtonText="View Results"
-    primaryButtonOnClick={() => console.log('Primary button clicked')}
     badgeText="Happening Now"
     modalButtonText="Session and viewing details"
     modalButtonOnClick={() => console.log('Modal button clicked')}
-    secondaryButtonText="Download PDF"
-    secondaryButtonHref="https://dist.phillips.com/content/web/docs/forms/NY_Conditions_of_Sale.pdf"
-  />
+  >
+    <SaleCardActions>
+      <Button
+        onClick={() => console.log('Primary button clicked')}
+        variant={ButtonVariants.primary}
+        style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
+      >
+        View Results
+      </Button>
+      <Button
+        href="https://dist.phillips.com/content/web/docs/forms/NY_Conditions_of_Sale.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        variant={ButtonVariants.tertiary}
+        style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
+      >
+        Download PDF
+      </Button>
+    </SaleCardActions>
+  </SaleCard>
 );
 
 export const SaleCardNoCTA = () => (
