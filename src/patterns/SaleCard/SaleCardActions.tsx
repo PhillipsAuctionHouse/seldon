@@ -1,7 +1,7 @@
 import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 
-interface SaleCardActionsProps extends ComponentProps<'div'> {
+export interface SaleCardActionsProps extends ComponentProps<'div'> {
   /**
    * The ctas to be rendered by <SaleCard />.
    */
