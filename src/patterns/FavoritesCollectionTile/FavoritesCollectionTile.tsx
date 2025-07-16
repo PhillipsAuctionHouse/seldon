@@ -76,6 +76,26 @@ export interface FavoritesCollectionTileProps extends ComponentProps<'div'> {
    * Custom icon size for the icon in the tile
    */
   iconSize?: number;
+  /**
+   * ARIA label for the popover menu trigger
+   */
+  menuAriaLabel?: string;
+  /**
+   * ARIA label for the create variant container
+   */
+  createAriaLabel?: string;
+  /**
+   * ARIA label for the favorites empty state
+   */
+  favoritesAriaLabel?: string;
+  /**
+   * ARIA label for the lists empty state
+   */
+  emptyListAriaLabel?: string;
+  /**
+   * ARIA label for list
+   */
+  listAriaLabel?: string;
 }
 
 /**
@@ -109,6 +129,11 @@ const FavoritesCollectionTile = memo(
         formatlotStr = (count, lotText = count === 1 ? 'LOT' : 'LOTS') => `${count} ${lotText}`,
         linkClassName,
         iconSize = 22,
+        menuAriaLabel = 'Manage List',
+        createAriaLabel = 'Create List',
+        favoritesAriaLabel = 'Favorites',
+        emptyListAriaLabel = 'Empty List',
+        listAriaLabel = 'List',
         ...props
       },
       ref,
@@ -146,7 +171,7 @@ const FavoritesCollectionTile = memo(
                         data-testid="menu-trigger"
                         tabIndex={0}
                         role="button"
-                        aria-label="Manage List"
+                        aria-label={menuAriaLabel}
                         aria-haspopup="menu"
                         onKeyDown={(event) => {
                           if (event.key === 'Enter') {
@@ -163,7 +188,6 @@ const FavoritesCollectionTile = memo(
                             height={iconSize}
                             color="$dark-gray"
                             className={`${baseClassName}__icon-button`}
-                            title="Manage List"
                           />
                         </div>
                       </div>
@@ -205,7 +229,7 @@ const FavoritesCollectionTile = memo(
                 <div
                   className={`${baseClassName}__media-container`}
                   data-testid="list"
-                  aria-label="Lists"
+                  aria-label={createAriaLabel}
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => {
@@ -239,7 +263,11 @@ const FavoritesCollectionTile = memo(
             ) : (
               <Component href={href} className={classnames(`${baseClassName}__media-link`, linkClassName)} tabIndex={0}>
                 {isCountEmpty && variant === 'favorites' && (
-                  <div className={`${baseClassName}__media-container`} data-testid="favorites" aria-label="Favorites">
+                  <div
+                    className={`${baseClassName}__media-container`}
+                    data-testid="favorites"
+                    aria-label={favoritesAriaLabel}
+                  >
                     <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--bg`)}>
                       <div className={`${baseClassName}__empty__content`}>
                         <Icon
@@ -257,7 +285,11 @@ const FavoritesCollectionTile = memo(
                 )}
 
                 {isHasListAndCountEmpty && isListVariant && (
-                  <div className={`${baseClassName}__media-container`} data-testid="list" aria-label="Lists">
+                  <div
+                    className={`${baseClassName}__media-container`}
+                    data-testid="list"
+                    aria-label={emptyListAriaLabel}
+                  >
                     <div
                       className={classnames(`${baseClassName}__empty`, {
                         [`${baseClassName}__empty--create-list`]: !hasListData,
@@ -282,7 +314,7 @@ const FavoritesCollectionTile = memo(
                 )}
 
                 {!isCountEmpty && hasListData && (
-                  <div className={`${baseClassName}__media-container`} ref={imageRef}>
+                  <div className={`${baseClassName}__media-container`} ref={imageRef} aria-label={listAriaLabel}>
                     <SeldonImage
                       alt={name}
                       aspectRatio="1/1"
