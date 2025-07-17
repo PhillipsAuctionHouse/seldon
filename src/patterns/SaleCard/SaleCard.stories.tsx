@@ -6,7 +6,6 @@ import { SaleCardActions } from './SaleCardActions';
 import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';
 import { px } from '../../utils';
-import './_saleCard.scss';
 
 const meta = {
   title: 'Patterns/SaleCard',
