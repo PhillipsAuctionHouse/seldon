@@ -66,7 +66,7 @@ export const Playground = (props: FilterDropdownProps) => {
   const [filterRules, setFilterRules] = useState<Map<string, Set<string>>>(new Map());
   const [resultsCount, setResultsCount] = useState(SalesMockData.length);
 
-  // Update filter dimensions' active state
+  // Update filter dimensions' state
   const updateFilters = (filterId: string, checked: boolean, name: string) => {
     setFilters((filters) =>
       filters.map((filter) => {
@@ -88,7 +88,7 @@ export const Playground = (props: FilterDropdownProps) => {
     );
   };
 
-  // Update filter rules map
+  // Update filter rules
   const updateFilterRules = (filterId: string, checked: boolean, name: string) => {
     const newFilterRules = new Map(filterRules);
     let rule: Set<string> | undefined;
@@ -113,7 +113,7 @@ export const Playground = (props: FilterDropdownProps) => {
     setResultsCount(handleFilterUpdate(true, newFilterRules) ?? 0);
   };
 
-  // Apply filters and sorting, return count if needed
+  // Apply filters and sorting or return count
   const handleFilterUpdate = (returnCountOnly?: boolean, rules = filterRules) => {
     let filterResults = SalesMockData;
 
@@ -166,11 +166,11 @@ export const Playground = (props: FilterDropdownProps) => {
     }
   };
 
-  // Clear filters or a specific filter
+  // Clear all filters or a specific filter
   const clearFilterUpdate = (filterId: string) => {
     if (filterId === 'all') {
       const newFilterRules = new Map();
-      newFilterRules.set(FILTER_KEYS.sort, new Set(['End Date: Ascending']));
+      newFilterRules.set(FILTER_KEYS.sort, new Set([InPlaceFiltersFilters.Sort[0].label]));
       setFilterRules(newFilterRules);
       setFilters(initialFilters);
       setResultsCount(handleFilterUpdate(true, newFilterRules) ?? 0);

@@ -68,7 +68,7 @@ export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProp
       </Button>
     );
 
-    // Drawer for mobile and for Filter button
+    // Drawer Filter button for mobile and desktop
     if (buttonType === 'Filter' && filters) {
       return (
         <>
@@ -120,7 +120,7 @@ export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProp
       );
     }
 
-    // Popover for desktop, Drawer for mobile for other buttons
+    // Popover Filter buttons for desktop, Drawer for mobile
     return (
       <>
         <SSRMediaQuery.Media greaterThanOrEqual="md">
