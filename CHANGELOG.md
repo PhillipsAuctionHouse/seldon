@@ -1,3 +1,10 @@
+# [1.164.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.163.0...v1.164.0) (2025-07-17)
+
+
+### Features
+
+* **SaleCard:** L3-7305 update SaleCard to use SaleCardActions for CTAs ([#658](https://github.com/PhillipsAuctionHouse/seldon/issues/658)) ([2027efa](https://github.com/PhillipsAuctionHouse/seldon/commit/2027efa648fe1f94a62b870839aadfbadbb3ff34))
+
 # [1.163.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.162.0...v1.163.0) (2025-07-16)
 
 
