@@ -1,11 +1,13 @@
 import { Meta } from '@storybook/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { SaleCard } from '../../components/SaleCard';
 import InPlaceFilters from './InPlaceFilters';
 import { FilterDropdownProps, FilterType } from './types';
-import { InPlaceFiltersFilters, SalesMockData } from './utils';
+import { FilterButtons, InPlaceFiltersFilters, SalesMockData } from './utils';
 
-// More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
+/**
+ * Storybook: https://storybook.js.org/docs/react/writing-stories/introduction
+ */
 const meta = {
   title: 'Patterns/InPlaceFilters',
   component: InPlaceFilters,
@@ -54,10 +56,7 @@ const filters: FilterType[] = [
   },
 ];
 
-const buildFilters = () => {
-  const builtFilters = filters;
-  return builtFilters;
-};
+const buildFilters = () => filters;
 
 export const Playground = (props: FilterDropdownProps) => {
   const [filtersLabelListState, setFiltersLabelListState] = useState(Array(6).fill(false));
@@ -67,37 +66,29 @@ export const Playground = (props: FilterDropdownProps) => {
   const [filterRules, setFilterRules] = useState<Map<string, Set<string>>>(new Map());
   const [resultsCount, setResultsCount] = useState(SalesMockData.length);
 
+  // Update filter dimensions' active state
   const updateFilters = (filterId: string, checked: boolean, name: string) => {
-    const updatedFilters = filters.map((filter) => {
-      if (filter.id === filterId) {
-        const updatedFilterDimensions = new Set(
-          Array.from(filter.filterDimensions).map((dimension) => {
-            if (dimension.label === name) {
-              return {
-                ...dimension,
-                active: checked,
-              };
-            } else if (filterId === FILTER_KEYS.sort) {
-              return {
-                ...dimension,
-                active: false,
-              };
-            }
-            return dimension;
-          }),
-        );
-
-        return {
-          ...filter,
-          filterDimensions: updatedFilterDimensions,
-        };
-      }
-      return filter;
-    });
-    console.log('updatedFilters', updatedFilters);
-    setFilters(updatedFilters);
+    setFilters((filters) =>
+      filters.map((filter) => {
+        if (filter.id === filterId) {
+          const updatedFilterDimensions = new Set(
+            Array.from(filter.filterDimensions).map((dimension) => {
+              if (dimension.label === name) {
+                return { ...dimension, active: checked };
+              } else if (filterId === FILTER_KEYS.sort) {
+                return { ...dimension, active: false };
+              }
+              return dimension;
+            }),
+          );
+          return { ...filter, filterDimensions: updatedFilterDimensions };
+        }
+        return filter;
+      }),
+    );
   };
 
+  // Update filter rules map
   const updateFilterRules = (filterId: string, checked: boolean, name: string) => {
     const newFilterRules = new Map(filterRules);
     let rule: Set<string> | undefined;
@@ -105,73 +96,55 @@ export const Playground = (props: FilterDropdownProps) => {
     if (filterId === FILTER_KEYS.sort) {
       rule = new Set<string>();
     } else {
-      rule = newFilterRules.get(filterId);
-      if (!rule) {
-        rule = new Set<string>();
-      }
+      rule = newFilterRules.get(filterId) || new Set<string>();
     }
 
-    if (checked) {
-      rule.add(name);
-    } else {
-      rule.delete(name);
-    }
-
+    checked ? rule.add(name) : rule.delete(name);
     newFilterRules.set(filterId, rule);
     setFilterRules(newFilterRules);
-
     return newFilterRules;
   };
 
+  // Handle filter selection (checkbox/radio)
   const handleFilterSelection = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, filterId: string) => {
     const { name, checked } = e.target as HTMLInputElement;
-    console.log('handleFilter called', { filterId, name, checked });
-
     const newFilterRules = updateFilterRules(filterId, checked, name);
-    console.log('filterRules after update', newFilterRules);
-
     updateFilters(filterId, checked, name);
-
-    const count = handleFilterUpdate(true, newFilterRules) ?? 0;
-    console.log('handleFilterSelection count', count);
-    setResultsCount(count);
+    setResultsCount(handleFilterUpdate(true, newFilterRules) ?? 0);
   };
 
+  // Apply filters and sorting, return count if needed
   const handleFilterUpdate = (returnCountOnly?: boolean, rules = filterRules) => {
     let filterResults = SalesMockData;
 
-    // sort filters
-    const sortRule = rules.get('Sort');
+    // Sort
+    const sortRule = rules.get(FILTER_KEYS.sort);
     const sortValue = sortRule ? Array.from(sortRule)[0] : undefined;
     filterResults = [...SalesMockData].sort((a, b) => {
       const dateA = new Date(a.date.split(', ').slice(1).join(', '));
       const dateB = new Date(b.date.split(', ').slice(1).join(', '));
       if (sortValue === 'End Date: Descending') {
         return dateB.getTime() - dateA.getTime();
-      } else {
-        return dateA.getTime() - dateB.getTime();
       }
+      return dateA.getTime() - dateB.getTime();
     });
 
-    // sale filters
-    const saleRule = rules.get(FILTER_KEYS.sale);
-    const saleValue = saleRule ? Array.from(saleRule) : [];
+    // Sale filter
+    const saleValue = Array.from(rules.get(FILTER_KEYS.sale) ?? []);
     if (saleValue.length > 0) {
-      filterResults = [...filterResults].filter((sale) => saleValue.includes(sale.auctionType));
+      filterResults = filterResults.filter((sale) => saleValue.includes(sale.auctionType));
     }
 
-    // departments filters
-    const departmentsRule = rules.get(FILTER_KEYS.departments);
-    const departmentsValue = departmentsRule ? Array.from(departmentsRule) : [];
+    // Departments filter
+    const departmentsValue = Array.from(rules.get(FILTER_KEYS.departments) ?? []);
     if (departmentsValue.length > 0) {
-      filterResults = [...filterResults].filter((sale) => departmentsValue.includes(sale.department));
+      filterResults = filterResults.filter((sale) => departmentsValue.includes(sale.department));
     }
 
-    // month filters
-    const monthRule = rules.get(FILTER_KEYS.month);
-    const monthValue = monthRule ? Array.from(monthRule) : [];
+    // Month filter
+    const monthValue = Array.from(rules.get(FILTER_KEYS.month) ?? []);
     if (monthValue.length > 0) {
-      filterResults = [...filterResults].filter((sale) => {
+      filterResults = filterResults.filter((sale) => {
         const saleMonth = new Date(sale.date.split(', ').slice(1).join(', ')).toLocaleString('default', {
           month: 'long',
         });
@@ -179,11 +152,10 @@ export const Playground = (props: FilterDropdownProps) => {
       });
     }
 
-    // location filters
-    const locationRule = rules.get(FILTER_KEYS.location);
-    const locationValue = locationRule ? Array.from(locationRule) : [];
+    // Location filter
+    const locationValue = Array.from(rules.get(FILTER_KEYS.location) ?? []);
     if (locationValue.length > 0) {
-      filterResults = [...filterResults].filter((sale) => locationValue.includes(sale.location));
+      filterResults = filterResults.filter((sale) => locationValue.includes(sale.location));
     }
 
     if (returnCountOnly) {
@@ -194,34 +166,36 @@ export const Playground = (props: FilterDropdownProps) => {
     }
   };
 
+  // Clear filters or a specific filter
   const clearFilterUpdate = (filterId: string) => {
-    console.log('clearAllFilterUpdate called', filterId);
-
-    const newFilterRules = new Map(filterRules);
-    newFilterRules.delete(filterId);
-    setFilterRules(newFilterRules);
-    setFilters((prevFilters) =>
-      prevFilters.map((filter) =>
-        filter.id === filterId
-          ? {
-              ...filter,
-              filterDimensions: new Set(
-                Array.from(filter.filterDimensions).map((dimension) => ({
-                  ...dimension,
-                  active: false,
-                })),
-              ),
-            }
-          : filter,
-      ),
-    );
-
-    setResultsCount(handleFilterUpdate(true) ?? 0);
+    if (filterId === 'all') {
+      const newFilterRules = new Map();
+      newFilterRules.set(FILTER_KEYS.sort, new Set(['End Date: Ascending']));
+      setFilterRules(newFilterRules);
+      setFilters(initialFilters);
+      setResultsCount(handleFilterUpdate(true, newFilterRules) ?? 0);
+    } else {
+      const newFilterRules = new Map(filterRules);
+      newFilterRules.delete(filterId);
+      setFilterRules(newFilterRules);
+      setFilters((prevFilters) =>
+        prevFilters.map((filter) =>
+          filter.id === filterId
+            ? {
+                ...filter,
+                filterDimensions: new Set(
+                  Array.from(filter.filterDimensions).map((dimension) => ({
+                    ...dimension,
+                    active: false,
+                  })),
+                ),
+              }
+            : filter,
+        ),
+      );
+      setResultsCount(handleFilterUpdate(true, newFilterRules) ?? 0);
+    }
   };
-
-  useEffect(() => {
-    console.log('resultsCount', resultsCount);
-  }, [resultsCount]);
 
   return (
     <>
@@ -235,15 +209,21 @@ export const Playground = (props: FilterDropdownProps) => {
         handleFilterUpdate={handleFilterUpdate}
         clearFilterUpdate={clearFilterUpdate}
         resultsCount={resultsCount}
+        filtersLabels={FilterButtons}
       />
       <div
-        style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-sm)', marginTop: 'var(--spacing-md)' }}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--spacing-sm)',
+          marginTop: 'var(--spacing-md)',
+        }}
       >
         {results.map((sale, index: number) => (
           <div key={`sale-card-container-${index}`} style={{ background: '#fafafa' }}>
             <SaleCard
               id={`sale-card-${index}`}
-              imageSrc="https://picsum.photos/160/90"
+              imageSrc="https://via.placeholder.com/400"
               auctionType={sale.auctionType}
               titleText={sale.titleText}
               date={sale.date}
@@ -256,7 +236,7 @@ export const Playground = (props: FilterDropdownProps) => {
   );
 };
 
-// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
+// See: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
   id: 'in-place-filters-story',
   filters: filters,

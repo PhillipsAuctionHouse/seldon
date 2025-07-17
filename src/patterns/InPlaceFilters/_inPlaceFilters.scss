@@ -8,10 +8,26 @@
 
 .#{$px}-filter-button {
   border: 1px solid $light-gray;
-  padding: 8px $spacing-xsm;
+  gap: 4px;
+  padding: $spacing-xsm $spacing-sm;
 
   &--selected {
     border: 1px solid $pure-black;
+  }
+
+  &--count {
+    background: $pure-black;
+    border: 2px solid $white;
+    border-radius: 50%;
+    color: $white;
+    display: inline-block;
+    font-size: var(--label-size3);
+    height: 1.5rem;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: -15px;
+    width: 1.5rem;
   }
 }
 
@@ -44,6 +60,13 @@
     display: flex;
     gap: $spacing-sm;
     justify-content: space-between;
+
+    &--drawer {
+      box-shadow: 0 -4px 8px -4px $medium-gray;
+      gap: $spacing-xl;
+      padding: $spacing-md;
+      width: 100%;
+    }
   }
 
   &__mobile-wrap {
@@ -77,13 +100,6 @@
     justify-content: space-between;
     padding: 14px $spacing-md;
 
-    &--mobile {
-      display: block;
-      margin-bottom: $spacing-md;
-      margin-top: $spacing-sm;
-      width: 45%;
-    }
-
     &--left {
       margin-left: auto;
       margin-right: 0;
@@ -92,6 +108,13 @@
     &--right {
       margin-left: 0;
       margin-right: auto;
+    }
+
+    &--mobile {
+      display: block;
+      margin-bottom: $spacing-md;
+      margin-top: $spacing-sm;
+      width: 45%;
     }
   }
 
@@ -126,4 +149,12 @@
 .#{$px}-input__input[type='checkbox'] {
   align-self: center;
   margin-left: auto;
+}
+
+.#{$px}-filter-drawer {
+  padding: 0;
+}
+
+.#{$px}-filter-drawer-menu {
+  padding: $spacing-md;
 }

@@ -1,1 +1,1 @@
-export { default as InPlaceFilters, type InPlaceFiltersProps } from './InPlaceFilters';
+export { default as InPlaceFilters } from './InPlaceFilters';

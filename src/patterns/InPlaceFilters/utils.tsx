@@ -1,3 +1,7 @@
+import { AuctionFilterButtonTypes, FilterType } from './types';
+
+export const FilterButtons: AuctionFilterButtonTypes[] = ['Filter', 'Sort', 'Sale', 'Departments', 'Month', 'Location'];
+
 export const InPlaceFiltersFilters = {
   Sort: [
     {
@@ -49,14 +53,14 @@ export const InPlaceFiltersFilters = {
 export const SalesMockData = [
   {
     auctionType: 'Live Auction',
-    titleText: 'New York Art Sale',
+    titleText: 'New York Contemporary Art Sale',
     date: '1 PM EST, January 1, 2025',
     location: 'New York',
     department: 'Contemporary Art',
   },
   {
     auctionType: 'Live Auction',
-    titleText: 'London Art Sale',
+    titleText: 'London Design Sale',
     date: '2 PM EST, February 2, 2025',
     location: 'London',
     department: 'Design',
@@ -70,7 +74,7 @@ export const SalesMockData = [
   },
   {
     auctionType: 'Online Auction',
-    titleText: 'Geneva Watch Sale',
+    titleText: 'Geneva Watches Sale',
     date: '4 PM EST, April 4, 2025',
     location: 'Geneva',
     department: 'Watches',
@@ -83,3 +87,27 @@ export const SalesMockData = [
     department: 'Photographs',
   },
 ];
+
+export const countActiveFilters = (
+  filters?: FilterType[],
+  buttonType?: string,
+): { totalCount: number; filterCount: number } => {
+  if (!filters) return { totalCount: 0, filterCount: 0 };
+
+  const totalCount = filters
+    .filter((filter) => filter.id !== 'Sort')
+    .reduce(
+      (total, filter) => total + Array.from(filter.filterDimensions).filter((dimension) => dimension.active).length,
+      0,
+    );
+
+  const filterCount =
+    buttonType === 'Sort'
+      ? 0
+      : (() => {
+          const filterDimensions = filters.find((filter) => filter.id === buttonType)?.filterDimensions;
+          return filterDimensions ? Array.from(filterDimensions).filter((dimension) => dimension.active).length : 0;
+        })();
+
+  return { totalCount, filterCount };
+};

@@ -1,68 +1,188 @@
-export type AuctionFilter = {
-  id: string;
-  label: string;
-  value: string;
-};
-
 export type AuctionFilterButtonTypes = 'Filter' | 'Sort' | 'Sale' | 'Departments' | 'Month' | 'Location';
 
-export type DropDownList = {
+/**
+ * Represents a single filter option (e.g., for a dropdown or button group)
+ */
+export type AuctionFilter = {
+  /**
+   * Unique identifier for the filter option
+   */
   id: string;
+  /**
+   * Display label for the filter option
+   */
   label: string;
-  value: string;
 };
 
+/**
+ * Represents a filter button with a count and optional labels
+ */
 export type AuctionFilterButton = {
+  /**
+   * Number of items matching this filter
+   */
   auctionCount: number;
+  /**
+   * Optional list of filter labels for this button
+   */
   filterLabels?: AuctionFilter[];
 };
+
+/**
+ * Represents a single dimension/option within a filter (e.g., a checkbox or radio option)
+ */
 export type FilterDimension = {
+  /**
+   * Display label for the filter dimension
+   */
   label: string;
+  /**
+   * Whether this dimension is disabled
+   */
   disabled?: boolean;
+  /**
+   * Whether this dimension is currently active/selected
+   */
   active?: boolean;
 };
+
+/**
+ * Represents a filter group (e.g., "Sale", "Department") with its options
+ */
 export type FilterType = {
+  /**
+   * Display label for the filter group
+   */
   label: string;
+  /**
+   * Unique identifier for the filter group
+   */
   id: string;
+  /**
+   * Type of filter (e.g., 'checkbox', 'radio')
+   */
   type: string;
+  /**
+   * Set of filter dimensions/options for this filter group
+   */
   filterDimensions: Set<FilterDimension>;
 };
 
-export interface FilterDropdownProps {
+/**
+ * Handler for when a filter input changes (checkbox, radio, or select)
+ */
+type FilterChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, filterId: string) => void;
+
+/**
+ * Handler for when filters are updated (e.g., after selection)
+ */
+type FilterUpdateHandler = (returnCountOnly?: boolean) => void;
+
+/**
+ * Handler for clearing a filter group by its id
+ */
+type ClearFilterHandler = (filterId: string) => void;
+
+/**
+ * Common props shared by all filter-related components
+ */
+interface BaseFilterProps {
   /**
-   * Base class for Filter Dropdown button component.
+   * Optional CSS class for the component
    */
   className?: string;
   /**
-   * Button type.
-   */
-  buttonType: AuctionFilterButtonTypes;
-  /**
-   * isMobileDropdown style
-   */
-  isMobileDropdown?: boolean;
-  /**
-   * filters data
+   * Array of filter groups to display
    */
   filters?: FilterType[];
   /**
-   * Index of the filter in the filters list.
+   * Handler for filter selection changes
    */
-  filterIndex?: number;
+  handleFilterSelection?: FilterChangeHandler;
   /**
-   * Handle filter changes.
+   * Handler for updating filters/results
    */
-  handleFilterSelection?: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, filterId: string) => void;
+  handleFilterUpdate?: FilterUpdateHandler;
   /**
-   * Handle filter update.
+   * Handler for clearing a filter group
    */
-  handleFilterUpdate?: (returnCountOnly: boolean) => void;
+  clearFilterUpdate?: ClearFilterHandler;
   /**
-   * Clear all filter update by filter type
-   */
-  clearFilterUpdate?: (filterId: string) => void;
-  /**
-   * Results count to display
+   * Number of results to display
    */
   resultsCount: number;
+}
+
+/**
+ * Props for the FilterDropdown component
+ */
+export interface FilterDropdownProps extends BaseFilterProps {
+  /**
+   * Type of filter button (e.g., 'Filter', 'Sort')
+   */
+  buttonType: AuctionFilterButtonTypes;
+  /**
+   * Whether the dropdown is styled for mobile
+   */
+  isMobileDropdown?: boolean;
+  /**
+   * Index of the filter in the filters list
+   */
+  filterIndex?: number;
+}
+
+/**
+ * Props for the InPlaceFilters component (main component)
+ */
+export interface InPlaceFiltersProps extends BaseFilterProps {
+  /**
+   * Unique id for component testing
+   */
+  id: string;
+  /**
+   * Handler for filter button click
+   */
+  handleFilterClick?: () => void;
+  /**
+   * List of states for the filter buttons
+   */
+  filtersListState: boolean[];
+  /**
+   * Setter for the filter button states
+   */
+  setFiltersLabelListState?: (state: boolean[]) => void;
+  /**
+   * List of filter labels to display as buttons
+   */
+  filtersLabels: AuctionFilterButtonTypes[];
+}
+
+/**
+ * Props for an individual filter button
+ */
+export interface FilterButtonProps extends BaseFilterProps {
+  /**
+   * Unique id for component testing
+   */
+  id: string;
+  /**
+   * Label for the filter button
+   */
+  filterButtonLabel: string;
+  /**
+   * Type of filter button (e.g., 'Filter', 'Sort')
+   */
+  buttonType: AuctionFilterButtonTypes;
+  /**
+   * Handler for filter button click
+   */
+  handleClick?: (state: boolean[]) => void;
+  /**
+   * List of states for the filter buttons
+   */
+  filtersListState?: boolean[];
+  /**
+   * Index of the filter button in the filtersListState
+   */
+  index?: number;
 }
