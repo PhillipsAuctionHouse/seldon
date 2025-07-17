@@ -76,6 +76,26 @@ export interface FavoritesCollectionTileProps extends ComponentProps<'div'> {
    * Custom icon size for the icon in the tile
    */
   iconSize?: number;
+  /**
+   * ARIA label for the popover menu trigger
+   */
+  menuAriaLabel?: string;
+  /**
+   * ARIA label for the create variant container
+   */
+  createAriaLabel?: string;
+  /**
+   * ARIA label for the favorites empty state
+   */
+  favoritesAriaLabel?: string;
+  /**
+   * ARIA label for the lists empty state
+   */
+  emptyListAriaLabel?: string;
+  /**
+   * ARIA label for list
+   */
+  listAriaLabel?: string;
 }
 
 /**
@@ -109,6 +129,11 @@ const FavoritesCollectionTile = memo(
         formatlotStr = (count, lotText = count === 1 ? 'LOT' : 'LOTS') => `${count} ${lotText}`,
         linkClassName,
         iconSize = 22,
+        menuAriaLabel = 'Manage List',
+        createAriaLabel = 'Create List',
+        favoritesAriaLabel = 'Favorites',
+        emptyListAriaLabel = 'Empty List',
+        listAriaLabel = 'List',
         ...props
       },
       ref,
@@ -131,11 +156,11 @@ const FavoritesCollectionTile = memo(
                     {formatlotStr && hasListData && formatlotStr(count)}
                   </Text>
                 )}
-                {
+                {name && (
                   <Text element="h3" className={`${baseClassName}__title`} variant={TextVariants.heading5}>
                     {name}
                   </Text>
-                }
+                )}
               </div>
               <>
                 {hasListData && isListVariant && (
@@ -146,6 +171,8 @@ const FavoritesCollectionTile = memo(
                         data-testid="menu-trigger"
                         tabIndex={0}
                         role="button"
+                        aria-label={menuAriaLabel}
+                        aria-haspopup="menu"
                         onKeyDown={(event) => {
                           if (event.key === 'Enter') {
                             event.preventDefault();
@@ -196,68 +223,117 @@ const FavoritesCollectionTile = memo(
                 )}
               </>
             </div>
-            <Component href={href} className={classnames(`${baseClassName}__media-link`, linkClassName)} tabIndex={0}>
-              {isCountEmpty && variant === 'favorites' && (
-                <div className={`${baseClassName}__media-container`} data-testid="favorites" aria-label="Favorites">
-                  <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--bg`)}>
+            {isCreateVariant ? (
+              <>
+                <div className={`${baseClassName}__create-spacing`}></div>
+                <div
+                  className={`${baseClassName}__media-container`}
+                  data-testid="create-list"
+                  aria-label={createAriaLabel}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      props.onClick?.(e as unknown as React.MouseEvent<HTMLDivElement>);
+                    }
+                  }}
+                >
+                  <div
+                    className={classnames(`${baseClassName}__empty`, {
+                      [`${baseClassName}__empty--create-list`]: !hasListData,
+                    })}
+                  >
                     <div className={`${baseClassName}__empty__content`}>
                       <Icon
-                        icon="Favorite"
+                        icon="Add"
                         width={iconSize}
                         height={iconSize}
                         color="$dark-gray"
-                        className={`${baseClassName}__icon`}
+                        className={classnames(`${baseClassName}__icon`, {
+                          [`${baseClassName}__icon-circle`]: !hasListData,
+                        })}
+                        title="Create List"
                       />
-                      <div className={`${baseClassName}__text`}>{emptyFavoritesText}</div>
+                      <div className={`${baseClassName}__text`}>{createFirstListText}</div>
                     </div>
                   </div>
                 </div>
-              )}
+              </>
+            ) : (
+              <Component href={href} className={classnames(`${baseClassName}__media-link`, linkClassName)} tabIndex={0}>
+                {isCountEmpty && variant === 'favorites' && (
+                  <div
+                    className={`${baseClassName}__media-container`}
+                    data-testid="favorites"
+                    aria-label={favoritesAriaLabel}
+                  >
+                    <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--bg`)}>
+                      <div className={`${baseClassName}__empty__content`}>
+                        <Icon
+                          icon="Favorite"
+                          width={iconSize}
+                          height={iconSize}
+                          color="$dark-gray"
+                          className={`${baseClassName}__icon`}
+                          title="Favorites"
+                        />
+                        <div className={`${baseClassName}__text`}>{emptyFavoritesText}</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
-              {(isCountEmpty || !hasListData) && (isListVariant || isCreateVariant) && (
-                <>
-                  {isCreateVariant && <div className={`${baseClassName}__create-spacing`}></div>}
-                  <div className={`${baseClassName}__media-container`} data-testid="list" aria-label="Lists">
+                {isHasListAndCountEmpty && isListVariant && (
+                  <div
+                    className={`${baseClassName}__media-container`}
+                    data-testid="empty-list"
+                    aria-label={emptyListAriaLabel}
+                  >
                     <div
                       className={classnames(`${baseClassName}__empty`, {
-                        [`${baseClassName}__empty--create-list`]: !hasListData && (isListVariant || isCreateVariant),
-                        [`${baseClassName}__empty--bg`]: isCountEmpty && !isCreateVariant,
+                        [`${baseClassName}__empty--create-list`]: !hasListData,
+                        [`${baseClassName}__empty--bg`]: isCountEmpty,
                       })}
                     >
                       <div className={`${baseClassName}__empty__content`}>
                         <Icon
-                          icon={isHasListAndCountEmpty ? 'Favorite' : 'Add'}
+                          icon="Favorite"
                           width={iconSize}
                           height={iconSize}
                           color="$dark-gray"
                           className={classnames(`${baseClassName}__icon`, {
-                            [`${baseClassName}__icon-circle`]: !hasListData && (isListVariant || isCreateVariant),
+                            [`${baseClassName}__icon-circle`]: !hasListData,
                           })}
+                          title="Favorite"
                         />
-                        <div className={`${baseClassName}__text`}>
-                          {isHasListAndCountEmpty ? emptyListsText : createFirstListText}
-                        </div>
+                        <div className={`${baseClassName}__text`}>{emptyListsText}</div>
                       </div>
                     </div>
                   </div>
-                </>
-              )}
+                )}
 
-              {!isCountEmpty && hasListData && (
-                <div className={`${baseClassName}__media-container`} ref={imageRef}>
-                  <SeldonImage
-                    alt={name}
-                    aspectRatio="1/1"
-                    className={`${baseClassName}__media`}
-                    objectFit="cover"
-                    src={imageSrc}
-                    style={{
-                      cursor: 'pointer',
-                    }}
-                  />
-                </div>
-              )}
-            </Component>
+                {!isCountEmpty && hasListData && (
+                  <div
+                    className={`${baseClassName}__media-container`}
+                    ref={imageRef}
+                    aria-label={listAriaLabel}
+                    data-testid="list"
+                  >
+                    <SeldonImage
+                      alt={name}
+                      aspectRatio="1/1"
+                      className={`${baseClassName}__media`}
+                      objectFit="contain"
+                      src={imageSrc}
+                      style={{
+                        cursor: 'pointer',
+                      }}
+                    />
+                  </div>
+                )}
+              </Component>
+            )}
           </div>
         </div>
       );
