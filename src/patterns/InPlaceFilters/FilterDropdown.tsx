@@ -27,9 +27,7 @@ export const FilterDropdown = React.forwardRef<HTMLDivElement, FilterDropdownPro
   ) => {
     const isSortButton = buttonType === 'Sort';
     const filterDimensions =
-      filterIndex !== undefined && filterIndex >= 0 && filterIndex < filters?.length
-        ? Array.from(filters?.[filterIndex]?.filterDimensions ?? [])
-        : [];
+      filterIndex !== undefined ? Array.from(filters?.[filterIndex - 1]?.filterDimensions ?? []) : [];
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       handleFilterSelection?.(e, buttonType);
