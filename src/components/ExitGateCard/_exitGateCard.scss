@@ -1,0 +1,79 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-exit-gate-card {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  padding-left: $spacing-md;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+
+    &__desktop_image {
+      max-width: unset;
+      overflow: visible;
+    }
+  }
+
+  @media (min-width: $breakpoint-md) {
+    flex-direction: row;
+    padding-left: $spacing-lg;
+
+    &__desktop_image {
+      max-width: 405px;
+    }
+  }
+
+  &__content {
+    align-items: flex-start;
+    color: $pure-black;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    margin: auto 0;
+
+    &-label {
+      @media (max-width: $breakpoint-md) {
+        font-variation-settings: 'wght' 500;
+      }
+    }
+
+    &-title {
+      margin: 0;
+    }
+
+    &-description {
+      @media (max-width: $breakpoint-md) {
+        font-size: $body-size1;
+        text-align: center;
+      }
+    }
+
+    &-link {
+      font-size: $body-size3;
+      padding: $padding-xsm $padding-xxl;
+
+      @media (max-width: $breakpoint-md) {
+        font-size: $body-size2;
+      }
+    }
+  }
+}
+
+.#{$px}-exit-gate-card {
+  display: flex;
+  flex-direction: row-reverse;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  &__content {
+    @media (max-width: $breakpoint-md) {
+      align-items: center;
+      margin-top: $spacing-md;
+      padding: 0 $spacing-md;
+    }
+  }
+}
