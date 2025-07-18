@@ -1,10 +1,10 @@
+import * as Dialog from '@radix-ui/react-dialog';
+import classnames from 'classnames';
 import React from 'react';
 import { getCommonProps, noOp } from '../../utils';
-import classnames from 'classnames';
-import * as Dialog from '@radix-ui/react-dialog';
-import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 import { Icon } from '../Icon';
+import IconButton from '../IconButton/IconButton';
 
 // You'll need to change the HTMLDivElement to match the top-level element of your component
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -20,6 +20,14 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    * The content of the drawer
    */
   children?: React.ReactNode;
+  /**
+   * Drawer optional variant
+   */
+  variant?: 'bottomSheet' | 'default';
+  /**
+   * Option drawer open side
+   */
+  drawerOpenSide?: 'left' | 'right';
 }
 /**
  * ## Overview
@@ -27,9 +35,17 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
  * A component for displaying a drawer.
  *
  */
-const Drawer = ({ className, isOpen = false, onClose = noOp, children, ...props }: DrawerProps) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Drawer');
-
+const Drawer = ({
+  className,
+  isOpen = false,
+  onClose = noOp,
+  children,
+  variant = 'default',
+  drawerOpenSide = 'right',
+  ...props
+}: DrawerProps) => {
+  const isBottomSheet = variant === 'bottomSheet';
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, isBottomSheet ? 'BottomSheet' : 'Drawer');
   return (
     <Dialog.Root
       open={isOpen}
@@ -45,19 +61,26 @@ const Drawer = ({ className, isOpen = false, onClose = noOp, children, ...props 
           className={classnames(`${baseClassName}__overlay`)}
           data-testid="drawer-overlay"
         />
-        <Dialog.Content className={classnames(baseClassName, className)} id={props.id} {...commonProps}>
+        <Dialog.Content
+          className={classnames(baseClassName, className)}
+          data-side={drawerOpenSide}
+          id={props.id}
+          {...commonProps}
+        >
           <Dialog.Title />
           <Dialog.Description />
           <Dialog.Close asChild>
-            <IconButton
-              onClick={onClose}
-              className={classnames(`${baseClassName}__close`)}
-              aria-label="Close"
-              data-testid="drawer-close"
-              variant={ButtonVariants.tertiary}
-            >
-              <Icon icon="CloseX" color="currentColor" />
-            </IconButton>
+            {!isBottomSheet && (
+              <IconButton
+                onClick={onClose}
+                className={classnames(`${baseClassName}__close`)}
+                aria-label="Close"
+                data-testid="drawer-close"
+                variant={ButtonVariants.tertiary}
+              >
+                <Icon icon="CloseX" color="currentColor" />
+              </IconButton>
+            )}
           </Dialog.Close>
           {children}
         </Dialog.Content>
