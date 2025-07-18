@@ -8,6 +8,7 @@ import Text from '../../components/Text/Text';
 import { TextVariants } from '../../components/Text/types';
 import { px } from '../../utils';
 import { FilterDimension, FilterDropdownProps } from './types';
+import { getFilterDimensions } from './utils';
 
 export const FilterDropdown = React.forwardRef<HTMLDivElement, FilterDropdownProps>(
   (
@@ -26,8 +27,6 @@ export const FilterDropdown = React.forwardRef<HTMLDivElement, FilterDropdownPro
     ref,
   ) => {
     const isSortButton = buttonType === 'Sort';
-    const filterDimensions =
-      filterIndex !== undefined ? Array.from(filters?.[filterIndex - 1]?.filterDimensions ?? []) : [];
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       handleFilterSelection?.(e, buttonType);
@@ -58,7 +57,7 @@ export const FilterDropdown = React.forwardRef<HTMLDivElement, FilterDropdownPro
             [`${px}-filter-dropdown__filters--mobile`]: isMobileDropdown,
           })}
         >
-          {filterDimensions.map((value: FilterDimension) => (
+          {getFilterDimensions(filters, filterIndex).map((value: FilterDimension) => (
             <FilterInput
               id={value.label}
               key={value.label}

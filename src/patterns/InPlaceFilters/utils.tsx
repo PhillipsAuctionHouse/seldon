@@ -1,4 +1,4 @@
-import { AuctionFilterButtonTypes, FilterType } from './types';
+import { AuctionFilterButtonTypes, FilterDimension, FilterType } from './types';
 
 export const FilterButtons: AuctionFilterButtonTypes[] = ['Filter', 'Sort', 'Sale', 'Departments', 'Month', 'Location'];
 
@@ -110,4 +110,20 @@ export const countActiveFilters = (
         })();
 
   return { totalCount, filterCount };
+};
+
+// Helper function to get filter dimensions safely
+export const getFilterDimensions = (
+  filters: { filterDimensions: Set<FilterDimension> }[] | undefined,
+  filterIndex: number | undefined,
+): FilterDimension[] => {
+  if (
+    filters &&
+    typeof filterIndex === 'number' &&
+    filters[filterIndex - 1] &&
+    filters[filterIndex - 1].filterDimensions
+  ) {
+    return Array.from(filters[filterIndex - 1].filterDimensions);
+  }
+  return [];
 };
