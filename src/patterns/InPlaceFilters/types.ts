@@ -42,8 +42,8 @@ export type FilterType = {
   id: string;
   /** Type of filter (e.g., 'checkbox', 'radio') */
   type: string;
-  /** Array of filter dimensions/options for this filter group */
-  filterDimensions: FilterDimension[];
+  /** Set of filter dimensions/options for this filter group */
+  filterDimensions: Set<FilterDimension>;
 };
 
 /** Handler for when a filter input changes (checkbox, radio, or select) */
