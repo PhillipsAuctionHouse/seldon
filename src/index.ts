@@ -96,6 +96,7 @@ export * from './components/Tabs';
 export * from './patterns/DetailList';
 export * from './patterns/InPlaceFilters';
 export * from './patterns/SaleCard';
+export * from './patterns/SaleHeaderBanner';
 
 export { default as Footer, type FooterProps } from './site-furniture/Footer/Footer';
 export { default as Header, type HeaderProps } from './site-furniture/Header/Header';
