@@ -20,15 +20,6 @@
 
       @include isHeaderDesktop {
         border-top: unset;
-
-        @include media($size-lg) {
-          div:first-child {
-            .#{$px}-nav__item:first-child[aria-expanded='true'] {
-              margin-left: -100px;
-              padding-left: 100px;
-            }
-          }
-        }
       }
 
       .#{$px}-nav__item + .#{$px}-accordion {

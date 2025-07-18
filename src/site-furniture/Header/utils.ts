@@ -6,4 +6,7 @@ export const defaultHeaderContext: HeaderContextType = {
   isSearchExpanded: false,
   setIsSearchExpanded: noOp,
   closeMenu: noOp,
+  activeSubmenuId: null,
+  setActiveSubmenuId: noOp,
+  closeTimeoutRef: { current: null },
 };
