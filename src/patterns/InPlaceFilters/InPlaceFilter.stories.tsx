@@ -130,19 +130,19 @@ export const Playground = (props: FilterDropdownProps) => {
     });
 
     // Sale filter
-    const saleValue = preprocessedRules[FILTER_KEYS.sale] ?? [];
+    const saleValue = Array.from(rules.get(FILTER_KEYS.sale) ?? []);
     if (saleValue.length > 0) {
       filterResults = filterResults.filter((sale) => saleValue.includes(sale.auctionType));
     }
 
     // Departments filter
-    const departmentsValue = preprocessedRules[FILTER_KEYS.departments] ?? [];
+    const departmentsValue = Array.from(rules.get(FILTER_KEYS.departments) ?? []);
     if (departmentsValue.length > 0) {
       filterResults = filterResults.filter((sale) => departmentsValue.includes(sale.department));
     }
 
     // Month filter
-    const monthValue = preprocessedRules[FILTER_KEYS.month] ?? [];
+    const monthValue = Array.from(rules.get(FILTER_KEYS.month) ?? []);
     if (monthValue.length > 0) {
       filterResults = filterResults.filter((sale) => {
         const saleMonth = new Date(sale.date.split(', ').slice(1).join(', ')).toLocaleString('default', {
