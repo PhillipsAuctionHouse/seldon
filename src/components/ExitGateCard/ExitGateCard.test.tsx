@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { runCommonTests } from '../../utils/testUtils';
-import { ExitGateCard } from './index';
+import ExitGateCard from './ExitGateCard';
 
 describe('ExitGateCard', () => {
   runCommonTests(ExitGateCard, 'ExitGateCard');
