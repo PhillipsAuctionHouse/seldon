@@ -68,6 +68,8 @@
 @use 'patterns/AccountPageHeader/accountPageHeader';
 @use 'patterns/FavoritesCollectionTile/favoritesCollectionTile';
 @use 'patterns/InPlaceFilters/inPlaceFilters';
+@use 'patterns/SaleCard/saleCard';
+@use 'patterns/SaleCard/saleCardActions';
 
 // Site Furniture
 @use 'site-furniture/Header/header';
@@ -76,4 +78,3 @@
 @use 'components/Divider/divider';
 @use 'components/TextArea/textArea';
 @use 'components/AddToCalendar/addToCalendar';
-@use 'components/SaleCard/saleCard';

@@ -1,3 +1,27 @@
+# [1.164.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.163.0...v1.164.0) (2025-07-17)
+
+
+### Features
+
+* **SaleCard:** L3-7305 update SaleCard to use SaleCardActions for CTAs ([#658](https://github.com/PhillipsAuctionHouse/seldon/issues/658)) ([2027efa](https://github.com/PhillipsAuctionHouse/seldon/commit/2027efa648fe1f94a62b870839aadfbadbb3ff34))
+
+# [1.163.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.162.0...v1.163.0) (2025-07-16)
+
+
+### Features
+
+* **ExitgateCard:** L3-6952 Add missing import to index ([#657](https://github.com/PhillipsAuctionHouse/seldon/issues/657)) ([9df0abf](https://github.com/PhillipsAuctionHouse/seldon/commit/9df0abf46550399510c6f449042f55fdd0d0ca38))
+
+# [1.162.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.161.0...v1.162.0) (2025-07-16)
+
+
+### Features
+
+* **Article:** L3-6952 Create exit gate card ([#639](https://github.com/PhillipsAuctionHouse/seldon/issues/639)) ([0d6eee0](https://github.com/PhillipsAuctionHouse/seldon/commit/0d6eee0d3e1585dcd27d3e1f099ff45305122573))
+* **ComposeModal:** L3-6977 Seldon: ViewingDetails Card + ComposedModal update ([#642](https://github.com/PhillipsAuctionHouse/seldon/issues/642)) ([56f8b28](https://github.com/PhillipsAuctionHouse/seldon/commit/56f8b287bbc45e7cda2309cdcee1b8f594366a02))
+* **iconButton:** L3-7252 fix tertiary hover ([#654](https://github.com/PhillipsAuctionHouse/seldon/issues/654)) ([2dd708c](https://github.com/PhillipsAuctionHouse/seldon/commit/2dd708c353a0cd89b78e3a861bc51a6b8a2a5ffc))
+* **RelatedSale:** L3-7218 Update auctio type font size ([#655](https://github.com/PhillipsAuctionHouse/seldon/issues/655)) ([fc968c5](https://github.com/PhillipsAuctionHouse/seldon/commit/fc968c5c8ada8f2874ae9d0f371305c99678d84f))
+
 # [1.161.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.160.0...v1.161.0) (2025-07-02)
 
 

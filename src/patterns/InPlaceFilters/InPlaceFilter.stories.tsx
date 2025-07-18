@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 import { useState } from 'react';
-import { SaleCard } from '../../components/SaleCard';
+import { SaleCard } from '../../patterns/SaleCard';
 import InPlaceFilters from './InPlaceFilters';
 import { FilterDropdownProps, FilterType } from './types';
 import { FilterButtons, InPlaceFiltersFilters, SalesMockData } from './utils';

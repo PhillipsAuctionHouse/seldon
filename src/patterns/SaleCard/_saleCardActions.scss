@@ -1,0 +1,12 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-sale-card-actions {
+  &__ctas {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    justify-content: center;
+    min-width: 200px;
+  }
+}
