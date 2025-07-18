@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { ComponentProps, forwardRef, useState } from 'react';
+import React, { ComponentProps, forwardRef, useEffect } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import { SSRMediaQuery } from '../../../providers/SeldonProvider/utils';
 import { HeaderContext } from '../../../site-furniture/Header/Header';
@@ -15,6 +15,10 @@ export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
    * Label for the navigation item
    */
   label: string;
+  /**
+   * ID for the trigger - required for context-based submenu management
+   */
+  id?: string;
 }
 
 const MobileNavigationItemTrigger = ({ id, label, children }: NavigationItemTriggerProps) => {
@@ -47,12 +51,26 @@ const MobileNavigationItemTrigger = ({ id, label, children }: NavigationItemTrig
 const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerProps>(
   ({ id, label, children, className, onClick, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'NavigationItemTrigger');
-    const [isSubmenuOpened, setIsSubmenuOpened] = useState(false);
     const navListElement = findChildrenOfType<NavigationListProps>(children, NavigationList);
-    const { closeMenu } = React.useContext(HeaderContext);
+    const {
+      closeMenu,
+      activeSubmenuId,
+      setActiveSubmenuId,
+      closeTimeoutRef: contextCloseTimeoutRef,
+    } = React.useContext(HeaderContext);
+
+    const localCloseTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+    const closeTimeoutRef = contextCloseTimeoutRef || localCloseTimeoutRef;
+
+    const isSubmenuOpened = activeSubmenuId === id;
 
     const handleSubmenuOpen = React.useCallback(() => {
-      setIsSubmenuOpened(true);
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+        closeTimeoutRef.current = null;
+      }
+
+      setActiveSubmenuId?.(id || null);
 
       if (navListElement && navListElement[0]?.props?.id) {
         focusElementById(navListElement[0].props.id, true);
@@ -61,7 +79,22 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
       if (triggerElement) {
         triggerElement.focus();
       }
-    }, [navListElement, ref]);
+    }, [navListElement, ref, id, setActiveSubmenuId, closeTimeoutRef]);
+
+    const handleSubmenuClose = React.useCallback(() => {
+      closeTimeoutRef.current = setTimeout(() => {
+        setActiveSubmenuId?.(null);
+        closeTimeoutRef.current = null;
+      }, 200);
+    }, [setActiveSubmenuId, closeTimeoutRef]);
+
+    useEffect(() => {
+      return () => {
+        if (!contextCloseTimeoutRef && closeTimeoutRef.current) {
+          clearTimeout(closeTimeoutRef.current);
+        }
+      };
+    }, [contextCloseTimeoutRef, closeTimeoutRef]);
 
     return (
       <>
@@ -73,7 +106,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
                     className: `${baseClassName}__submenu--mobile`,
                     onClick: (e: React.MouseEvent<HTMLElement>) => {
                       navListElement[0].props?.onClick?.(e);
-                      setIsSubmenuOpened?.(false);
+                      setActiveSubmenuId?.(null);
                       closeMenu?.();
                     },
                   })
@@ -91,7 +124,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
               })}
               onClick={onClick}
               onMouseOver={handleSubmenuOpen}
-              onMouseOut={() => setIsSubmenuOpened(false)}
+              onMouseOut={handleSubmenuClose}
               {...props}
             >
               <button className={`${px}-nav__item-trigger`} type="button">
@@ -102,7 +135,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
                     className: `${baseClassName}__submenu`,
                     onClick: (e: React.MouseEvent<HTMLElement>) => {
                       navListElement[0].props?.onClick?.(e);
-                      setIsSubmenuOpened?.(false);
+                      setActiveSubmenuId?.(null);
                       closeMenu?.();
                     },
                   })
