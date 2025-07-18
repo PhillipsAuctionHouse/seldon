@@ -12,7 +12,6 @@ import { FilterButtonProps, InPlaceFiltersProps } from './types';
  * [Figma Link](https://www.figma.com/design/H1kCh6MXU8jasYbQuCbyBt/Calendar?node-id=55-487568&p=f&m=dev)
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-in-place-filters--overview)
  */
-
 const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
   (
     {
@@ -26,14 +25,16 @@ const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
       clearFilterUpdate,
       resultsCount,
       filtersLabels,
+      ariaLabels,
       ...props
     },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'InPlaceFilters');
+
     return (
-      <div ref={ref} className={classnames(baseClassName, className)} {...commonProps}>
-        {filtersLabels.map((label, index) => (
+      <div ref={ref} className={classnames(baseClassName, className)} {...commonProps} id={id}>
+        {filtersLabels?.map((label, index) => (
           <FilterButton
             key={`${id}-${label}-button`}
             id={`${id}-${label}-button`}
@@ -47,6 +48,7 @@ const InPlaceFilters = React.forwardRef<HTMLDivElement, InPlaceFiltersProps>(
             handleFilterUpdate={handleFilterUpdate}
             clearFilterUpdate={clearFilterUpdate}
             resultsCount={resultsCount}
+            ariaLabels={ariaLabels}
           />
         ))}
       </div>

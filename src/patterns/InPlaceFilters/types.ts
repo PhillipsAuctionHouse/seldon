@@ -4,13 +4,9 @@ export type AuctionFilterButtonTypes = 'Filter' | 'Sort' | 'Sale' | 'Departments
  * Represents a single filter option (e.g., for a dropdown or button group)
  */
 export type AuctionFilter = {
-  /**
-   * Unique identifier for the filter option
-   */
+  /** Unique identifier for the filter option */
   id: string;
-  /**
-   * Display label for the filter option
-   */
+  /** Display label for the filter option */
   label: string;
 };
 
@@ -18,13 +14,9 @@ export type AuctionFilter = {
  * Represents a filter button with a count and optional labels
  */
 export type AuctionFilterButton = {
-  /**
-   * Number of items matching this filter
-   */
+  /** Number of items matching this filter */
   auctionCount: number;
-  /**
-   * Optional list of filter labels for this button
-   */
+  /** Optional list of filter labels for this button */
   filterLabels?: AuctionFilter[];
 };
 
@@ -32,17 +24,11 @@ export type AuctionFilterButton = {
  * Represents a single dimension/option within a filter (e.g., a checkbox or radio option)
  */
 export type FilterDimension = {
-  /**
-   * Display label for the filter dimension
-   */
+  /** Display label for the filter dimension */
   label: string;
-  /**
-   * Whether this dimension is disabled
-   */
+  /** Whether this dimension is disabled */
   disabled?: boolean;
-  /**
-   * Whether this dimension is currently active/selected
-   */
+  /** Whether this dimension is currently active/selected */
   active?: boolean;
 };
 
@@ -50,139 +36,107 @@ export type FilterDimension = {
  * Represents a filter group (e.g., "Sale", "Department") with its options
  */
 export type FilterType = {
-  /**
-   * Display label for the filter group
-   */
+  /** Display label for the filter group */
   label: string;
-  /**
-   * Unique identifier for the filter group
-   */
+  /** Unique identifier for the filter group */
   id: string;
-  /**
-   * Type of filter (e.g., 'checkbox', 'radio')
-   */
+  /** Type of filter (e.g., 'checkbox', 'radio') */
   type: string;
-  /**
-   * Set of filter dimensions/options for this filter group
-   */
+  /** Set of filter dimensions/options for this filter group */
   filterDimensions: Set<FilterDimension>;
 };
 
-/**
- * Handler for when a filter input changes (checkbox, radio, or select)
- */
+/** Handler for when a filter input changes (checkbox, radio, or select) */
 type FilterChangeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, filterId: string) => void;
 
-/**
- * Handler for when filters are updated (e.g., after selection)
- */
+/** Handler for when filters are updated (e.g., after selection) */
 type FilterUpdateHandler = (returnCountOnly?: boolean) => void;
 
-/**
- * Handler for clearing a filter group by its id
- */
+/** Handler for clearing a filter group by its id */
 type ClearFilterHandler = (filterId: string) => void;
 
 /**
  * Common props shared by all filter-related components
  */
 interface BaseFilterProps {
-  /**
-   * Optional CSS class for the component
-   */
+  /** Optional CSS class for the component */
   className?: string;
-  /**
-   * Array of filter groups to display
-   */
+  /** Array of filter groups to display */
   filters?: FilterType[];
-  /**
-   * Handler for filter selection changes
-   */
+  /** Handler for filter selection changes */
   handleFilterSelection?: FilterChangeHandler;
-  /**
-   * Handler for updating filters/results
-   */
+  /** Handler for updating filters/results */
   handleFilterUpdate?: FilterUpdateHandler;
-  /**
-   * Handler for clearing a filter group
-   */
+  /** Handler for clearing a filter group */
   clearFilterUpdate?: ClearFilterHandler;
-  /**
-   * Number of results to display
-   */
-  resultsCount: number;
+  /** Number of results to display */
+  resultsCount?: number;
+}
+
+/**
+ * Optional aria-labels for accessibility on various filter button elements.
+ */
+export interface FilterButtonAriaLabels {
+  /** Aria-label for the filter button itself */
+  button?: string;
+  /** Aria-label for the drawer (mobile or filter drawer) */
+  drawer?: string;
+  /** Aria-label for the popover (desktop dropdown) */
+  popover?: string;
+  /** Aria-label for the dropdown mobile container */
+  dropdownMobile?: string;
+  /** Aria-label for the dropdown desktop container */
+  dropdownDesktop?: string;
 }
 
 /**
  * Props for the FilterDropdown component
  */
 export interface FilterDropdownProps extends BaseFilterProps {
-  /**
-   * Type of filter button (e.g., 'Filter', 'Sort')
-   */
+  /** Type of filter button (e.g., 'Filter', 'Sort') */
   buttonType: AuctionFilterButtonTypes;
-  /**
-   * Whether the dropdown is styled for mobile
-   */
+  /** Whether the dropdown is styled for mobile */
   isMobileDropdown?: boolean;
-  /**
-   * Index of the filter in the filters list
-   */
+  /** Index of the filter in the filters list */
   filterIndex?: number;
+  /** Optional aria-labels for accessibility on various filter button elements. */
+  ariaLabels?: FilterButtonAriaLabels;
 }
 
 /**
  * Props for the InPlaceFilters component (main component)
  */
 export interface InPlaceFiltersProps extends BaseFilterProps {
-  /**
-   * Unique id for component testing
-   */
+  /** Unique id for component testing */
   id: string;
-  /**
-   * Handler for filter button click
-   */
+  /** Handler for filter button click */
   handleFilterClick?: () => void;
-  /**
-   * List of states for the filter buttons
-   */
-  filtersListState: boolean[];
-  /**
-   * Setter for the filter button states
-   */
+  /** List of states for the filter buttons */
+  filtersListState?: boolean[];
+  /** Setter for the filter button states */
   setFiltersLabelListState?: (state: boolean[]) => void;
-  /**
-   * List of filter labels to display as buttons
-   */
-  filtersLabels: AuctionFilterButtonTypes[];
+  /** List of filter labels to display as buttons */
+  filtersLabels?: AuctionFilterButtonTypes[];
+  /** Optional aria-labels for accessibility on various filter button elements. */
+  ariaLabels?: FilterButtonAriaLabels;
 }
 
 /**
  * Props for an individual filter button
  */
 export interface FilterButtonProps extends BaseFilterProps {
-  /**
-   * Unique id for component testing
-   */
+  /** Unique id for component testing */
   id: string;
-  /**
-   * Label for the filter button
-   */
+  /** Label for the filter button */
   filterButtonLabel: string;
-  /**
-   * Type of filter button (e.g., 'Filter', 'Sort')
-   */
+  /** Type of filter button (e.g., 'Filter', 'Sort') */
   buttonType: AuctionFilterButtonTypes;
-  /**
-   * Handler for filter button click
-   */
+  /** Handler for filter button click */
   handleClick?: (state: boolean[]) => void;
-  /**
-   * List of states for the filter buttons
-   */
+  /** List of states for the filter buttons */
   filtersListState?: boolean[];
-  /**
-   * Index of the filter button in the filtersListState
-   */
+  /** Index of the filter button in the filtersListState */
   index?: number;
+  /** Optional aria-labels for accessibility on various filter button elements. */
+  ariaLabels?: FilterButtonAriaLabels;
 }

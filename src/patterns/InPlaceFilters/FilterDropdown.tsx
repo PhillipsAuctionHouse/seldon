@@ -21,6 +21,7 @@ export const FilterDropdown = React.forwardRef<HTMLDivElement, FilterDropdownPro
       handleFilterUpdate,
       clearFilterUpdate,
       resultsCount,
+      ariaLabels,
     },
     ref,
   ) => {
@@ -38,6 +39,12 @@ export const FilterDropdown = React.forwardRef<HTMLDivElement, FilterDropdownPro
           [`${px}-filter-dropdown--mobile`]: isMobileDropdown,
         })}
         ref={ref}
+        data-testid={`filter-dropdown${isMobileDropdown ? '-mobile' : '-desktop'}`}
+        aria-label={
+          isMobileDropdown
+            ? ariaLabels?.dropdownMobile || `${buttonType} dropdown mobile`
+            : ariaLabels?.dropdownDesktop || `${buttonType} dropdown desktop`
+        }
       >
         <FilterHeader
           heading={isSortButton ? 'Sort By' : buttonType}
