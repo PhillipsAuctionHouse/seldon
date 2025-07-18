@@ -71,42 +71,49 @@ export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProp
             className={`${px}-filter-drawer`}
             aria-label={ariaLabels.drawer || 'Filter drawer'}
           >
-            <FilterMenu className={`${px}-filter-drawer-menu`}>
-              {filters.map((filter: FilterType) => (
-                <Filter key={filter.label} name={filter.label}>
-                  <FilterHeader heading={filter.label} />
-                  {Array.from(filter.filterDimensions).map((value: FilterDimension) => (
-                    <FilterInput
-                      id={value.label}
-                      key={value.label}
-                      labelText={value.label}
-                      onChange={(e) => handleFilterSelection?.(e, filter.label)}
-                      type={filter.type as 'checkbox' | 'radio'}
-                      disabled={value?.disabled}
-                      name={value.label}
-                      checked={value.active}
-                    />
-                  ))}
-                </Filter>
-              ))}
-            </FilterMenu>
-            <div
-              className={classnames(
-                `${px}-filter-dropdown__buttons-wrap`,
-                `${px}-filter-dropdown__buttons-wrap--drawer`,
-              )}
+            <Drawer
+              isOpen={isButtonSelected}
+              drawerOpenSide="left"
+              onClose={handleFilterButtonClick}
+              className={`${px}-filter-drawer`}
             >
-              <Button
-                className={`${px}-filter-dropdown__button`}
-                variant={ButtonVariants.secondary}
-                onClick={() => clearFilterUpdate?.('all')}
+              <FilterMenu className={`${px}-filter-drawer-menu`}>
+                {filters.map((filter: FilterType) => (
+                  <Filter key={filter.label} name={filter.label}>
+                    <FilterHeader heading={filter.label} />
+                    {Array.from(filter.filterDimensions).map((value: FilterDimension) => (
+                      <FilterInput
+                        id={value.label}
+                        key={value.label}
+                        labelText={value.label}
+                        onChange={(e) => handleFilterSelection?.(e, filter.label)}
+                        type={filter.type as 'checkbox' | 'radio'}
+                        disabled={value?.disabled}
+                        name={value.label}
+                        checked={value.active}
+                      />
+                    ))}
+                  </Filter>
+                ))}
+              </FilterMenu>
+              <div
+                className={classnames(
+                  `${px}-filter-dropdown__buttons-wrap`,
+                  `${px}-filter-dropdown__buttons-wrap--drawer`,
+                )}
               >
-                Clear All
-              </Button>
-              <Button className={`${px}-filter-dropdown__button`} onClick={() => handleFilterUpdate?.(false)}>
-                Show {resultsCount} lots
-              </Button>
-            </div>
+                <Button
+                  className={`${px}-filter-dropdown__button`}
+                  variant={ButtonVariants.secondary}
+                  onClick={() => clearFilterUpdate?.('all')}
+                >
+                  Clear All
+                </Button>
+                <Button className={`${px}-filter-dropdown__button`} onClick={() => handleFilterUpdate?.(false)}>
+                  Show {resultsCount} lots
+                </Button>
+              </div>
+            </Drawer>
           </Drawer>
         </>
       );
