@@ -16,7 +16,7 @@ export const Playground = (props: ExitGateCardProps) => (
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
-  imageSrc: 'https://picsum.photos/704/268',
+  imageSrc: 'https://www.dist.phillips.com/static-assets/Sell_With_Us_Exit_Gate_Image.png',
   label: 'CONSIGN TODAY',
   header: 'Sell with us',
   description: 'We are inviting consignments for our upcoming auctions.',
