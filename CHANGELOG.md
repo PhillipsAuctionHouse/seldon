@@ -1,3 +1,36 @@
+# [1.166.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.165.0...v1.166.0) (2025-07-21)
+
+
+### Features
+
+* **Viewing Details:** L3-6707 Add missing import to index ([#664](https://github.com/PhillipsAuctionHouse/seldon/issues/664)) ([0c343f6](https://github.com/PhillipsAuctionHouse/seldon/commit/0c343f6c0492c313b88d773424d1f650b1438b29))
+
+# [1.165.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.164.2...v1.165.0) (2025-07-21)
+
+
+### Bug Fixes
+
+* **ExitGateCard:** L3-6952 Remove text-transform capitalize for title ([#662](https://github.com/PhillipsAuctionHouse/seldon/issues/662)) ([312e853](https://github.com/PhillipsAuctionHouse/seldon/commit/312e8536a0cf20f710291ce7821ae32f1aa101fc))
+
+
+### Features
+
+* **_navigation:** L3-6501 header hover delay ([#640](https://github.com/PhillipsAuctionHouse/seldon/issues/640)) ([2952d75](https://github.com/PhillipsAuctionHouse/seldon/commit/2952d7543ca9ce1c7465a0bdf2e04fc85ec5f8ef))
+
+## [1.164.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.164.1...v1.164.2) (2025-07-21)
+
+
+### Bug Fixes
+
+* **icon:** L3-7333 Revert set width correctly for safari ([#661](https://github.com/PhillipsAuctionHouse/seldon/issues/661)) ([#663](https://github.com/PhillipsAuctionHouse/seldon/issues/663)) ([8e52f0c](https://github.com/PhillipsAuctionHouse/seldon/commit/8e52f0c59825b755840b80e7689b6853b52eb0fa))
+
+## [1.164.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.164.0...v1.164.1) (2025-07-21)
+
+
+### Bug Fixes
+
+* **icon:** L3-7333 set width correctly for safari ([#661](https://github.com/PhillipsAuctionHouse/seldon/issues/661)) ([1f54c0e](https://github.com/PhillipsAuctionHouse/seldon/commit/1f54c0ea8f139748f23ef8102ec0c3e326fdb15e))
+
 # [1.164.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.163.0...v1.164.0) (2025-07-17)
 
 

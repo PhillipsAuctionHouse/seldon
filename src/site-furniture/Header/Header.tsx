@@ -53,6 +53,18 @@ export type HeaderContextType = {
    * Close the mobile menu
    * */
   closeMenu?: () => void;
+  /**
+   * Active submenu ID for navigation
+   */
+  activeSubmenuId: string | null;
+  /**
+   * Set the active submenu ID
+   */
+  setActiveSubmenuId: (id: string | null) => void;
+  /**
+   * Reference to timeout for submenu closing
+   */
+  closeTimeoutRef: React.MutableRefObject<NodeJS.Timeout | null>;
 };
 
 export const HeaderContext = createContext<HeaderContextType>(defaultHeaderContext);
@@ -96,6 +108,9 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     const otherChildren = findChildrenExcludingTypes(children, [Navigation, UserManagement, LanguageSelector]);
     const { closeMenu, handleMenuToggle, isMenuOpen, toggleText } = useMobileMenu({ toggleOpenText, toggleCloseText });
 
+    const [activeSubmenuId, setActiveSubmenuId] = useState<string | null>(null);
+    const closeTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
     return (
       <header {...props} className={classnames(`${px}-header`, className)} ref={ref}>
         <div className={`${px}-header__top-row`}>
@@ -127,6 +142,9 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
           <HeaderContext.Provider
             value={
               {
+                activeSubmenuId,
+                setActiveSubmenuId,
+                closeTimeoutRef,
                 isMenuOpen,
                 isSearchExpanded,
                 setIsSearchExpanded,
