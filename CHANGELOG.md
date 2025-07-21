@@ -1,3 +1,10 @@
+## [1.164.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.164.0...v1.164.1) (2025-07-21)
+
+
+### Bug Fixes
+
+* **icon:** L3-7333 set width correctly for safari ([#661](https://github.com/PhillipsAuctionHouse/seldon/issues/661)) ([1f54c0e](https://github.com/PhillipsAuctionHouse/seldon/commit/1f54c0ea8f139748f23ef8102ec0c3e326fdb15e))
+
 # [1.164.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.163.0...v1.164.0) (2025-07-17)
 
 
