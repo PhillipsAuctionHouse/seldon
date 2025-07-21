@@ -1,3 +1,10 @@
+## [1.164.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.164.1...v1.164.2) (2025-07-21)
+
+
+### Bug Fixes
+
+* **icon:** L3-7333 Revert set width correctly for safari ([#661](https://github.com/PhillipsAuctionHouse/seldon/issues/661)) ([#663](https://github.com/PhillipsAuctionHouse/seldon/issues/663)) ([8e52f0c](https://github.com/PhillipsAuctionHouse/seldon/commit/8e52f0c59825b755840b80e7689b6853b52eb0fa))
+
 ## [1.164.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.164.0...v1.164.1) (2025-07-21)
 
 
