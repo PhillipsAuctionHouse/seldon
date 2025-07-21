@@ -1,3 +1,15 @@
+# [1.165.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.164.2...v1.165.0) (2025-07-21)
+
+
+### Bug Fixes
+
+* **ExitGateCard:** L3-6952 Remove text-transform capitalize for title ([#662](https://github.com/PhillipsAuctionHouse/seldon/issues/662)) ([312e853](https://github.com/PhillipsAuctionHouse/seldon/commit/312e8536a0cf20f710291ce7821ae32f1aa101fc))
+
+
+### Features
+
+* **_navigation:** L3-6501 header hover delay ([#640](https://github.com/PhillipsAuctionHouse/seldon/issues/640)) ([2952d75](https://github.com/PhillipsAuctionHouse/seldon/commit/2952d7543ca9ce1c7465a0bdf2e04fc85ec5f8ef))
+
 ## [1.164.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.164.1...v1.164.2) (2025-07-21)
 
 
