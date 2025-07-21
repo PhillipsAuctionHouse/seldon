@@ -1,3 +1,10 @@
+# [1.166.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.165.0...v1.166.0) (2025-07-21)
+
+
+### Features
+
+* **Viewing Details:** L3-6707 Add missing import to index ([#664](https://github.com/PhillipsAuctionHouse/seldon/issues/664)) ([0c343f6](https://github.com/PhillipsAuctionHouse/seldon/commit/0c343f6c0492c313b88d773424d1f650b1438b29))
+
 # [1.165.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.164.2...v1.165.0) (2025-07-21)
 
 
