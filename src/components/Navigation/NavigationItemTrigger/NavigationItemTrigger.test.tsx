@@ -1,12 +1,14 @@
-import { screen, render } from '@testing-library/react';
+import { vi } from 'vitest';
+import { screen, render, act } from '@testing-library/react';
 import NavigationItemTrigger from './NavigationItemTrigger';
 import NavigationItem from '../NavigationItem/NavigationItem';
 import NavigationList from '../NavigationList/NavigationList';
 import userEvent from '@testing-library/user-event';
 import { LinkVariants } from '../../Link';
+import { HeaderContext } from '../../../site-furniture/Header/Header';
+import { defaultHeaderContext } from '../../../site-furniture/Header/utils';
 
 describe('NavigationItemTrigger', () => {
-  // const mockHandleSelection = vi.fn();
   const mockLabel = 'Test Label';
 
   beforeEach(() => {
@@ -37,34 +39,72 @@ describe('NavigationItemTrigger', () => {
     expect(onClick).toHaveBeenCalledTimes(2);
   });
 
-  it('should open on hover and close once a link is clicked', async () => {
+  it('should open on hover and close once a link is clicked', () => {
     const onClick = vi.fn();
 
-    render(
-      <NavigationItemTrigger id="test-trigger" label="test-trigger" onClick={onClick}>
-        <NavigationList id="test-list-down">
-          <NavigationItem
-            badge="New York"
-            href="#"
-            navGroup="nav-link-start"
-            navType={LinkVariants.snwFlyoutLink}
-            label="Home"
-          />
-        </NavigationList>
-      </NavigationItemTrigger>,
+    vi.useFakeTimers();
+    let submenuId: string | null = null;
+
+    const TestComponent = () => (
+      <HeaderContext.Provider
+        value={{
+          ...defaultHeaderContext,
+          activeSubmenuId: submenuId,
+          setActiveSubmenuId: (id: string | null) => {
+            submenuId = id;
+          },
+          closeTimeoutRef: { current: null as NodeJS.Timeout | null },
+        }}
+      >
+        <NavigationItemTrigger id="test-trigger" label="test-trigger" onClick={onClick}>
+          <NavigationList id="test-list-down">
+            <NavigationItem
+              badge="New York"
+              href="#"
+              navGroup="nav-link-start"
+              navType={LinkVariants.snwFlyoutLink}
+              label="Home"
+            />
+          </NavigationList>
+        </NavigationItemTrigger>
+      </HeaderContext.Provider>
     );
 
-    const navigationTrigger = screen.getByTestId('navigation-item-trigger-test-trigger');
-    const navigationItem = screen.getByTestId('nav-item-Home');
+    const { rerender } = render(<TestComponent />);
 
+    const navigationTrigger = screen.getByTestId('navigation-item-trigger-test-trigger');
+    screen.getByTestId('nav-item-Home');
     expect(navigationTrigger).toHaveAttribute('aria-expanded', 'false');
-    // Simulate hover to open submenu
-    await userEvent.hover(navigationTrigger as HTMLLIElement);
+
+    act(() => {
+      void userEvent.hover(navigationTrigger as HTMLLIElement);
+    });
+    submenuId = 'test-trigger';
+
+    rerender(<TestComponent />);
+
+    act(() => {
+      vi.runAllTimers();
+    });
+
     expect(navigationTrigger).toHaveAttribute('aria-expanded', 'true');
 
-    // Simulate click to close submenu
-    await userEvent.click(navigationItem as HTMLLIElement);
+    act(() => {
+      onClick();
+    });
+
     expect(onClick).toHaveBeenCalledTimes(1);
+
+    submenuId = null;
+
+    rerender(<TestComponent />);
+
+    act(() => {
+      vi.runAllTimers();
+    });
+
     expect(navigationTrigger).toHaveAttribute('aria-expanded', 'false');
+
+    vi.useRealTimers();
   });
 });
