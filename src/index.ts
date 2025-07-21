@@ -85,6 +85,7 @@ export * from './providers/SeldonProvider/SeldonProvider';
 
 export * from './components/Carousel';
 export * from './components/ComboBox';
+export * from './components/ComposedModal';
 export * from './components/Detail';
 export * from './components/ExitGateCard';
 export * from './components/Loader';
@@ -97,6 +98,7 @@ export * from './patterns/DetailList';
 export * from './patterns/InPlaceFilters';
 export * from './patterns/SaleCard';
 export * from './patterns/SaleHeaderBanner';
+export * from './patterns/ViewingDetails';
 
 export { default as Footer, type FooterProps } from './site-furniture/Footer/Footer';
 export { default as Header, type HeaderProps } from './site-furniture/Header/Header';
