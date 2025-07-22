@@ -103,6 +103,118 @@ export interface FavoritesCollectionTileProps extends ComponentProps<'div'> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-FavoritesCollectionTile--overview)
  */
+
+// --- Variant Components ---
+
+const CreateVariant = ({
+  baseClassName,
+  iconSize,
+  createFirstListText,
+  onClick,
+}: {
+  baseClassName: string;
+  iconSize: number;
+  createFirstListText: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}) => {
+  return (
+    <button
+      type="button"
+      className={`${baseClassName}__create-variant`}
+      data-testid="create-list"
+      aria-label={createFirstListText}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick?.(e);
+      }}
+    >
+      <span className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--create-list`)}>
+        <span className={`${baseClassName}__empty__content`}>
+          <Icon
+            icon="Add"
+            width={iconSize}
+            height={iconSize}
+            color="$dark-gray"
+            className={classnames(`${baseClassName}__icon`, `${baseClassName}__icon-circle`)}
+            aria-hidden="true"
+          />
+          <span className={`${baseClassName}__text`}>{createFirstListText}</span>
+        </span>
+      </span>
+    </button>
+  );
+};
+
+const EmptyVariant = ({
+  baseClassName,
+  iconSize,
+  text,
+  ariaLabel,
+  dataTestId,
+}: {
+  baseClassName: string;
+  iconSize: number;
+  text: string;
+  ariaLabel: string;
+  dataTestId: string;
+}) => {
+  return (
+    <div className={`${baseClassName}__media-container`} data-testid={dataTestId} aria-label={ariaLabel} role="region">
+      <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--bg`)}>
+        <div className={`${baseClassName}__empty__content`}>
+          <Icon
+            icon="Favorite"
+            width={iconSize}
+            height={iconSize}
+            color="$dark-gray"
+            className={classnames(`${baseClassName}__icon`)}
+            aria-hidden="true"
+          />
+          <div className={`${baseClassName}__text`}>{text}</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ListImageVariant = ({
+  baseClassName,
+  imageRef,
+  listAriaLabel,
+  name,
+  imageSrc,
+}: {
+  baseClassName: string;
+  imageRef: React.RefObject<HTMLDivElement>;
+  listAriaLabel: string;
+  name: string;
+  imageSrc: string;
+  iconSize: number;
+}) => {
+  return (
+    <div
+      className={`${baseClassName}__media-container`}
+      ref={imageRef}
+      aria-label={listAriaLabel}
+      data-testid="list"
+      role="region"
+    >
+      <SeldonImage
+        alt={name}
+        aspectRatio="1/1"
+        className={`${baseClassName}__media`}
+        objectFit="contain"
+        src={imageSrc}
+        style={{
+          cursor: 'pointer',
+        }}
+      />
+    </div>
+  );
+};
+
+// --- Main Component ---
+
 const FavoritesCollectionTile = memo(
   forwardRef<HTMLDivElement, FavoritesCollectionTileProps>(
     (
@@ -135,20 +247,70 @@ const FavoritesCollectionTile = memo(
     ) => {
       const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'FavoritesCollectionTile');
       const imageRef = useRef<HTMLDivElement>(null);
-      const hasListData = name && count !== null && count !== undefined;
-      const isCountEmpty = count === 0;
-      const isListVariant = variant === 'lists';
-      const isCreateVariant = variant === 'create';
-      const isHasListAndCountEmpty = hasListData && isCountEmpty;
+      const hasListNameAndCount = name && count !== null && count !== undefined;
+      const isEmpty = count === 0;
+      const isListsView = variant === 'lists';
+      const isCreateView = variant === 'create';
+      const isFavoritesEmpty = variant === 'favorites' && isEmpty;
+      const isListEmpty = hasListNameAndCount && isEmpty && isListsView;
+
+      const renderMediaSection = () => {
+        if (isCreateView) {
+          return (
+            <CreateVariant
+              baseClassName={baseClassName}
+              iconSize={iconSize}
+              createFirstListText={createFirstListText}
+              onClick={props.onClick as unknown as React.MouseEventHandler<HTMLButtonElement>}
+            />
+          );
+        }
+
+        // For all other variants, wrap in <Component>
+        return (
+          <Component href={href} className={classnames(`${baseClassName}__media-link`, linkClassName)} tabIndex={0}>
+            {isFavoritesEmpty && (
+              <EmptyVariant
+                baseClassName={baseClassName}
+                iconSize={iconSize}
+                text={emptyFavoritesText}
+                ariaLabel={favoritesAriaLabel}
+                dataTestId="favorites"
+              />
+            )}
+
+            {isListEmpty && (
+              <EmptyVariant
+                baseClassName={baseClassName}
+                iconSize={iconSize}
+                text={emptyListsText}
+                ariaLabel={emptyListAriaLabel}
+                dataTestId="empty-list"
+              />
+            )}
+
+            {!isEmpty && hasListNameAndCount && (
+              <ListImageVariant
+                baseClassName={baseClassName}
+                imageRef={imageRef}
+                listAriaLabel={listAriaLabel}
+                name={name}
+                imageSrc={imageSrc}
+                iconSize={iconSize}
+              />
+            )}
+          </Component>
+        );
+      };
 
       return (
         <div {...commonProps} className={classnames(baseClassName, className)} ref={ref} id={id}>
           <div className={`${baseClassName}__content`}>
             <div className={`${baseClassName}__header`}>
               <div className={`${baseClassName}__info`}>
-                {hasListData && (
+                {hasListNameAndCount && (
                   <Text element="span" className={`${baseClassName}__count`} variant={TextVariants.body3}>
-                    {formatlotStr && hasListData && formatlotStr(count)}
+                    {formatlotStr && hasListNameAndCount && formatlotStr(count)}
                   </Text>
                 )}
                 {name && (
@@ -157,167 +319,67 @@ const FavoritesCollectionTile = memo(
                   </Text>
                 )}
               </div>
-              <>
-                {hasListData && isListVariant && (
-                  <Popover.Root>
-                    <Popover.Trigger asChild>
-                      <div
-                        className={`${baseClassName}__actions`}
-                        data-testid="menu-trigger"
-                        tabIndex={0}
-                        role="button"
-                        aria-label={menuAriaLabel}
-                        aria-haspopup="menu"
-                        onKeyDown={(event) => {
-                          if (event.key === 'Enter') {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            (event.target as HTMLElement).click();
-                          }
-                        }}
-                      >
-                        <div className={`${baseClassName}__icon-rotate`}>
-                          <Icon
-                            icon="Icon"
-                            width={iconSize}
-                            height={iconSize}
-                            color="$dark-gray"
-                            className={`${baseClassName}__icon-button`}
-                            aria-hidden="true"
-                          />
-                        </div>
-                      </div>
-                    </Popover.Trigger>
-                    <Popover.Portal>
-                      <Popover.Content
-                        avoidCollisions={true}
-                        collisionPadding={10}
-                        sideOffset={5}
-                        align="start"
-                        alignOffset={5}
-                        className={`${baseClassName}__popover-content`}
-                      >
-                        <div className={`${baseClassName}__dropdown`} data-testid={`dropdown-menu`}>
-                          <button
-                            className={`${baseClassName}__dropdown--item`}
-                            onClick={(event) => onEdit?.(id, event)}
-                            type="button"
-                          >
-                            {editListText}
-                          </button>
-                          <button
-                            className={`${baseClassName}__dropdown--item`}
-                            onClick={(event) => onDelete?.(id, event)}
-                            type="button"
-                          >
-                            {deleteListText}
-                          </button>
-                        </div>
-                      </Popover.Content>
-                    </Popover.Portal>
-                  </Popover.Root>
-                )}
-              </>
-            </div>
-            {isCreateVariant ? (
-              <button
-                type="button"
-                className={`${baseClassName}__create-variant`}
-                data-testid="create-list"
-                aria-label={createFirstListText}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  props.onClick?.(e as unknown as React.MouseEvent<HTMLDivElement>);
-                }}
-              >
-                <span className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--create-list`)}>
-                  <span className={`${baseClassName}__empty__content`}>
-                    <Icon
-                      icon="Add"
-                      width={iconSize}
-                      height={iconSize}
-                      color="$dark-gray"
-                      className={classnames(`${baseClassName}__icon`, `${baseClassName}__icon-circle`)}
-                      aria-hidden="true"
-                    />
-                    <span className={`${baseClassName}__text`}>{createFirstListText}</span>
-                  </span>
-                </span>
-              </button>
-            ) : (
-              <Component href={href} className={classnames(`${baseClassName}__media-link`, linkClassName)} tabIndex={0}>
-                {isCountEmpty && variant === 'favorites' && (
-                  <div
-                    className={`${baseClassName}__media-container`}
-                    data-testid="favorites"
-                    aria-label={favoritesAriaLabel}
-                  >
-                    <div className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--bg`)}>
-                      <div className={`${baseClassName}__empty__content`}>
-                        <Icon
-                          icon="Favorite"
-                          width={iconSize}
-                          height={iconSize}
-                          color="$dark-gray"
-                          className={`${baseClassName}__icon`}
-                          aria-hidden="true"
-                        />
-                        <div className={`${baseClassName}__text`}>{emptyFavoritesText}</div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {isHasListAndCountEmpty && isListVariant && (
-                  <div
-                    className={`${baseClassName}__media-container`}
-                    data-testid="empty-list"
-                    aria-label={emptyListAriaLabel}
-                  >
+              {hasListNameAndCount && isListsView && (
+                <Popover.Root>
+                  <Popover.Trigger asChild>
                     <div
-                      className={classnames(`${baseClassName}__empty`, {
-                        [`${baseClassName}__empty--create-list`]: !hasListData,
-                        [`${baseClassName}__empty--bg`]: isCountEmpty,
-                      })}
+                      className={`${baseClassName}__actions`}
+                      data-testid="menu-trigger"
+                      tabIndex={0}
+                      role="button"
+                      aria-label={menuAriaLabel}
+                      aria-haspopup="menu"
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter') {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          (event.target as HTMLElement).click();
+                        }
+                      }}
                     >
-                      <div className={`${baseClassName}__empty__content`}>
+                      <div className={`${baseClassName}__icon-rotate`}>
                         <Icon
-                          icon="Favorite"
+                          icon="Icon"
                           width={iconSize}
                           height={iconSize}
                           color="$dark-gray"
-                          className={classnames(`${baseClassName}__icon`, {
-                            [`${baseClassName}__icon-circle`]: !hasListData,
-                          })}
+                          className={`${baseClassName}__icon-button`}
                           aria-hidden="true"
                         />
-                        <div className={`${baseClassName}__text`}>{emptyListsText}</div>
                       </div>
                     </div>
-                  </div>
-                )}
-
-                {!isCountEmpty && hasListData && (
-                  <div
-                    className={`${baseClassName}__media-container`}
-                    ref={imageRef}
-                    aria-label={listAriaLabel}
-                    data-testid="list"
-                  >
-                    <SeldonImage
-                      alt={name}
-                      aspectRatio="1/1"
-                      className={`${baseClassName}__media`}
-                      objectFit="contain"
-                      src={imageSrc}
-                      style={{
-                        cursor: 'pointer',
-                      }}
-                    />
-                  </div>
-                )}
-              </Component>
-            )}
+                  </Popover.Trigger>
+                  <Popover.Portal>
+                    <Popover.Content
+                      avoidCollisions={true}
+                      collisionPadding={10}
+                      sideOffset={5}
+                      align="start"
+                      alignOffset={5}
+                      className={`${baseClassName}__popover-content`}
+                    >
+                      <div className={`${baseClassName}__dropdown`} data-testid={`dropdown-menu`}>
+                        <button
+                          className={`${baseClassName}__dropdown--item`}
+                          onClick={(event) => onEdit?.(id, event)}
+                          type="button"
+                        >
+                          {editListText}
+                        </button>
+                        <button
+                          className={`${baseClassName}__dropdown--item`}
+                          onClick={(event) => onDelete?.(id, event)}
+                          type="button"
+                        >
+                          {deleteListText}
+                        </button>
+                      </div>
+                    </Popover.Content>
+                  </Popover.Portal>
+                </Popover.Root>
+              )}
+            </div>
+            {renderMediaSection()}
           </div>
         </div>
       );
