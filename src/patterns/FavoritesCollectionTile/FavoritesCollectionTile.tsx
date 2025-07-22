@@ -83,10 +83,6 @@ export interface FavoritesCollectionTileProps extends ComponentProps<'div'> {
   /**
    * ARIA label for the create variant container
    */
-  createAriaLabel?: string;
-  /**
-   * ARIA label for the favorites empty state
-   */
   favoritesAriaLabel?: string;
   /**
    * ARIA label for the lists empty state
@@ -130,7 +126,6 @@ const FavoritesCollectionTile = memo(
         linkClassName,
         iconSize = 22,
         menuAriaLabel = 'Manage List',
-        createAriaLabel = 'Create List',
         favoritesAriaLabel = 'Favorites',
         emptyListAriaLabel = 'Empty List',
         listAriaLabel = 'List',
@@ -188,6 +183,7 @@ const FavoritesCollectionTile = memo(
                             height={iconSize}
                             color="$dark-gray"
                             className={`${baseClassName}__icon-button`}
+                            aria-hidden="true"
                           />
                         </div>
                       </div>
@@ -224,42 +220,30 @@ const FavoritesCollectionTile = memo(
               </>
             </div>
             {isCreateVariant ? (
-              <>
-                <div className={`${baseClassName}__create-spacing`}></div>
-                <div
-                  className={`${baseClassName}__media-container`}
-                  data-testid="create-list"
-                  aria-label={createAriaLabel}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      props.onClick?.(e as unknown as React.MouseEvent<HTMLDivElement>);
-                    }
-                  }}
-                >
-                  <div
-                    className={classnames(`${baseClassName}__empty`, {
-                      [`${baseClassName}__empty--create-list`]: !hasListData,
-                    })}
-                  >
-                    <div className={`${baseClassName}__empty__content`}>
-                      <Icon
-                        icon="Add"
-                        width={iconSize}
-                        height={iconSize}
-                        color="$dark-gray"
-                        className={classnames(`${baseClassName}__icon`, {
-                          [`${baseClassName}__icon-circle`]: !hasListData,
-                        })}
-                        title="Create List"
-                      />
-                      <div className={`${baseClassName}__text`}>{createFirstListText}</div>
-                    </div>
-                  </div>
-                </div>
-              </>
+              <button
+                type="button"
+                className={`${baseClassName}__create-variant`}
+                data-testid="create-list"
+                aria-label={createFirstListText}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  props.onClick?.(e as unknown as React.MouseEvent<HTMLDivElement>);
+                }}
+              >
+                <span className={classnames(`${baseClassName}__empty`, `${baseClassName}__empty--create-list`)}>
+                  <span className={`${baseClassName}__empty__content`}>
+                    <Icon
+                      icon="Add"
+                      width={iconSize}
+                      height={iconSize}
+                      color="$dark-gray"
+                      className={classnames(`${baseClassName}__icon`, `${baseClassName}__icon-circle`)}
+                      aria-hidden="true"
+                    />
+                    <span className={`${baseClassName}__text`}>{createFirstListText}</span>
+                  </span>
+                </span>
+              </button>
             ) : (
               <Component href={href} className={classnames(`${baseClassName}__media-link`, linkClassName)} tabIndex={0}>
                 {isCountEmpty && variant === 'favorites' && (
@@ -276,7 +260,7 @@ const FavoritesCollectionTile = memo(
                           height={iconSize}
                           color="$dark-gray"
                           className={`${baseClassName}__icon`}
-                          title="Favorites"
+                          aria-hidden="true"
                         />
                         <div className={`${baseClassName}__text`}>{emptyFavoritesText}</div>
                       </div>
@@ -305,7 +289,7 @@ const FavoritesCollectionTile = memo(
                           className={classnames(`${baseClassName}__icon`, {
                             [`${baseClassName}__icon-circle`]: !hasListData,
                           })}
-                          title="Favorite"
+                          aria-hidden="true"
                         />
                         <div className={`${baseClassName}__text`}>{emptyListsText}</div>
                       </div>

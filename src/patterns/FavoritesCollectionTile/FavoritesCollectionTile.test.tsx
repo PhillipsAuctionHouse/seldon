@@ -143,10 +143,10 @@ describe('FavoritesCollectionTile', () => {
   it('renders a button for the create variant with correct aria-label and calls onClick', () => {
     const onClick = vi.fn();
     render(<FavoritesCollectionTile {...blankListProps} variant="create" onClick={onClick} />);
-    const button = screen.getByRole('button', { name: /Create List/i });
+    const button = screen.getByRole('button', { name: 'Create your first List.' });
     expect(button).toBeInTheDocument();
 
-    expect(button).toHaveAttribute('aria-label', 'Create List');
+    expect(button).toHaveAttribute('aria-label', 'Create your first List.');
     button.focus();
     button.click();
     expect(onClick).toHaveBeenCalled();
@@ -186,12 +186,11 @@ describe('FavoritesCollectionTile', () => {
     expect(onClick).toHaveBeenCalledTimes(2);
   });
   it('renders the correct aria-label for the create variant', () => {
-    render(<FavoritesCollectionTile {...blankListProps} variant="create" createAriaLabel="Create List" />);
-    const container = screen.getByTestId('create-list');
-    expect(container).toBeInTheDocument();
-    expect(container).toHaveAttribute('aria-label', 'Create List');
+    render(<FavoritesCollectionTile {...blankListProps} variant="create" createFirstListText="Create List" />);
+    const button = screen.getByTestId('create-list');
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveAttribute('aria-label', 'Create List');
   });
-
   it('renders the correct aria-label for the favorites empty state', () => {
     render(
       <FavoritesCollectionTile
