@@ -1,3 +1,10 @@
+# [1.167.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.166.0...v1.167.0) (2025-07-22)
+
+
+### Features
+
+* **ExitgateCalendar:** L3-6952 Update image to match figma ([#665](https://github.com/PhillipsAuctionHouse/seldon/issues/665)) ([538f8d8](https://github.com/PhillipsAuctionHouse/seldon/commit/538f8d8c5974b05630b2e7463775cb9472c748eb))
+
 # [1.166.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.165.0...v1.166.0) (2025-07-21)
 
 
