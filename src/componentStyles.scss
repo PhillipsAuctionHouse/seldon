@@ -50,6 +50,7 @@
 @use 'components/Filter/filter';
 @use 'components/FavoritingTileButton/favoritingTileButton';
 @use 'components/Toast/toast';
+@use 'components/ExitGateCard/exitGateCard';
 @use 'components/ComposedModal/composedModal';
 
 // Patterns
@@ -67,6 +68,8 @@
 @use 'patterns/DetailList/detailList';
 @use 'patterns/AccountPageHeader/accountPageHeader';
 @use 'patterns/FavoritesCollectionTile/favoritesCollectionTile';
+@use 'patterns/SaleCard/saleCard';
+@use 'patterns/SaleCard/saleCardActions';
 
 // Site Furniture
 @use 'site-furniture/Header/header';
@@ -75,4 +78,3 @@
 @use 'components/Divider/divider';
 @use 'components/TextArea/textArea';
 @use 'components/AddToCalendar/addToCalendar';
-@use 'components/SaleCard/saleCard';

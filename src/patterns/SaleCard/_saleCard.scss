@@ -4,11 +4,10 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: $spacing-sm;
+  gap: $spacing-md;
 
   @include media($breakpoint-md) {
     flex-direction: row;
-    gap: $spacing-md;
   }
 
   &__image {
@@ -47,15 +46,6 @@
 
   &__separator {
     margin: 0 8px;
-  }
-
-  &__cta {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-sm;
-    justify-content: center;
-    min-width: 200px;
   }
 
   &__info {
@@ -121,6 +111,9 @@
       @include media($size-xl) {
         max-width: calc($spacing-xxxl * 1.25);
       }
+    }
+    .#{$px}-sale-card__auction-type {
+      font-size: 0.5rem;
     }
   }
 }

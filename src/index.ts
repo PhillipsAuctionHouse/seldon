@@ -85,15 +85,19 @@ export * from './providers/SeldonProvider/SeldonProvider';
 
 export * from './components/Carousel';
 export * from './components/ComboBox';
-export * from './components/PhoneNumberPicker';
+export * from './components/ComposedModal';
 export * from './components/Detail';
+export * from './components/ExitGateCard';
 export * from './components/Loader';
 export { default as PageContentWrapper } from './components/PageContentWrapper/PageContentWrapper';
+export * from './components/PhoneNumberPicker';
 export * from './components/PinchZoom';
 export * from './components/SeldonImage';
 export * from './components/Tabs';
 export * from './patterns/DetailList';
+export * from './patterns/SaleCard';
 export * from './patterns/SaleHeaderBanner';
+export * from './patterns/ViewingDetails';
 
 export { default as Footer, type FooterProps } from './site-furniture/Footer/Footer';
 export { default as Header, type HeaderProps } from './site-furniture/Header/Header';
@@ -102,7 +106,6 @@ export * from './types/commonTypes';
 // utils
 export * from './components/AddToCalendar';
 export * from './components/Article';
-export * from './components/SaleCard';
 export * from './components/Countdown';
 export * from './components/Countdown/types';
 export * from './components/Divider';

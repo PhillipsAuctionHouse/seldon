@@ -1,6 +1,9 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, fireEvent } from '@testing-library/react';
 import SaleCard from './SaleCard';
+import SaleCardActions from './SaleCardActions';
+import Button from '../../components/Button/Button';
+import { Link } from '../../components/Link';
 
 describe('SaleCard', () => {
   const props = {
@@ -27,7 +30,11 @@ describe('SaleCard', () => {
   it('should render primary button', () => {
     const primaryButtonOnClick = vi.fn();
     const { getByText } = render(
-      <SaleCard {...props} primaryButtonText="Bid Now" primaryButtonOnClick={primaryButtonOnClick} />,
+      <SaleCard {...props}>
+        <SaleCardActions>
+          <Button onClick={primaryButtonOnClick}>Bid Now</Button>
+        </SaleCardActions>
+      </SaleCard>,
     );
     const button = getByText('Bid Now');
     expect(button).toBeInTheDocument();
@@ -38,7 +45,11 @@ describe('SaleCard', () => {
   it('should render secondary button', () => {
     const secondaryButtonOnClick = vi.fn();
     const { getByText } = render(
-      <SaleCard {...props} secondaryButtonText="Register to Bid" secondaryButtonOnClick={secondaryButtonOnClick} />,
+      <SaleCard {...props}>
+        <SaleCardActions>
+          <Button onClick={secondaryButtonOnClick}>Register to Bid</Button>
+        </SaleCardActions>
+      </SaleCard>,
     );
     const button = getByText('Register to Bid');
     expect(button).toBeInTheDocument();
@@ -59,7 +70,13 @@ describe('SaleCard', () => {
 
   it('should render PDF link', () => {
     const { getByText } = render(
-      <SaleCard {...props} secondaryButtonText="Download PDF" secondaryButtonHref="https://example.com/pdf" />,
+      <SaleCard {...props}>
+        <SaleCardActions>
+          <Link href="https://example.com/pdf" target="_blank" rel="noopener noreferrer">
+            Download PDF
+          </Link>
+        </SaleCardActions>
+      </SaleCard>,
     );
     const link = getByText('Download PDF');
     expect(link).toBeInTheDocument();
