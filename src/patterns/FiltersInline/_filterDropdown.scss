@@ -1,36 +1,5 @@
 @use '#scss/allPartials' as *;
 
-.#{$px}-in-place-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $spacing-sm;
-}
-
-.#{$px}-filter-button {
-  border: 1px solid $light-gray;
-  gap: 4px;
-  padding: $spacing-xsm $spacing-sm;
-
-  &--selected {
-    border: 1px solid $pure-black;
-  }
-
-  &--count {
-    background: $pure-black;
-    border: 2px solid $white;
-    border-radius: 50%;
-    color: $white;
-    display: inline-block;
-    font-size: var(--label-size3);
-    height: 1.5rem;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    top: -15px;
-    width: 1.5rem;
-  }
-}
-
 .#{$px}-filter-dropdown {
   background: $white;
   border-radius: $spacing-xsm;
@@ -38,7 +7,7 @@
   display: flex;
   flex-direction: column;
   min-width: 430px;
-  padding: 2rem;
+  padding: $spacing-md;
 
   &__filters {
     display: flex;
@@ -127,34 +96,32 @@
     padding: 0;
     width: 100vw;
   }
-}
 
-.#{$px}-input {
-  &__wrapper {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  .#{$px}-input {
+    &__wrapper {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    &__label {
+      align-self: center;
+      margin: 0;
+    }
   }
-
-  &__label {
+  .#{$px}-input__input[type='radio'] {
     align-self: center;
-    margin: 0;
+    margin-left: auto;
   }
-}
-.#{$px}-input__input[type='radio'] {
-  align-self: center;
-  margin-left: auto;
-}
-.#{$px}-input__input[type='checkbox'] {
-  align-self: center;
-  margin-left: auto;
-}
+  .#{$px}-input__input[type='checkbox'] {
+    align-self: center;
+    margin-left: auto;
+  }
 
-.#{$px}-filter-drawer {
-  padding: 0;
-}
-
-.#{$px}-filter-drawer-menu {
-  padding: $spacing-md;
+  input[type='checkbox']:focus,
+  input[type='radio']:focus {
+    outline: 2px solid $focus-blue;
+    outline-offset: 2px;
+  }
 }

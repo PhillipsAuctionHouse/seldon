@@ -1,4 +1,18 @@
-export type AuctionFilterButtonTypes = 'Filter' | 'Sort' | 'Sale' | 'Departments' | 'Month' | 'Location';
+export enum FilterButtonType {
+  Filter = 'Filter',
+  Sort = 'Sort',
+  Sale = 'Sale',
+  Departments = 'Departments',
+  Month = 'Month',
+  Location = 'Location',
+}
+
+export enum FilterButtonIconType {
+  Filter = 'Filter',
+  Sort = 'Sort',
+  ChevronUp = 'ChevronUp',
+  ChevronDown = 'ChevronDown',
+}
 
 /**
  * Represents a single filter option (e.g., for a dropdown or button group)
@@ -90,23 +104,9 @@ export interface FilterButtonAriaLabels {
 }
 
 /**
- * Props for the FilterDropdown component
+ * Props for the FiltersInline component (main component)
  */
-export interface FilterDropdownProps extends BaseFilterProps {
-  /** Type of filter button (e.g., 'Filter', 'Sort') */
-  buttonType: AuctionFilterButtonTypes;
-  /** Whether the dropdown is styled for mobile */
-  isMobileDropdown?: boolean;
-  /** Index of the filter in the filters list */
-  filterIndex?: number;
-  /** Optional aria-labels for accessibility on various filter button elements. */
-  ariaLabels?: FilterButtonAriaLabels;
-}
-
-/**
- * Props for the InPlaceFilters component (main component)
- */
-export interface InPlaceFiltersProps extends BaseFilterProps {
+export interface FiltersInlineProps extends BaseFilterProps {
   /** Unique id for component testing */
   id: string;
   /** Handler for filter button click */
@@ -116,7 +116,7 @@ export interface InPlaceFiltersProps extends BaseFilterProps {
   /** Setter for the filter button states */
   setFiltersLabelListState?: (state: boolean[]) => void;
   /** List of filter labels to display as buttons */
-  filtersLabels?: AuctionFilterButtonTypes[];
+  filtersLabels?: FilterButtonType[];
   /** Optional aria-labels for accessibility on various filter button elements. */
   ariaLabels?: FilterButtonAriaLabels;
 }
@@ -124,13 +124,15 @@ export interface InPlaceFiltersProps extends BaseFilterProps {
 /**
  * Props for an individual filter button
  */
-export interface FilterButtonProps extends BaseFilterProps {
+export interface FilterDropdownProps extends BaseFilterProps {
   /** Unique id for component testing */
   id: string;
+  /** Unique id for this filter, used instead of index */
+  filterId?: number;
   /** Label for the filter button */
   filterButtonLabel: string;
   /** Type of filter button (e.g., 'Filter', 'Sort') */
-  buttonType: AuctionFilterButtonTypes;
+  buttonType: FilterButtonType;
   /** Handler for filter button click */
   handleClick?: (state: boolean[]) => void;
   /** List of states for the filter buttons */

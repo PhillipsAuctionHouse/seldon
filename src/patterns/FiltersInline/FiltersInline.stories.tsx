@@ -1,17 +1,18 @@
 import { Meta } from '@storybook/react';
 import { useState } from 'react';
-import { SaleCard } from '../../patterns/SaleCard';
-import InPlaceFilters from './InPlaceFilters';
-import { FilterDropdownProps, FilterType } from './types';
-import { FilterButtons, InPlaceFiltersFilters, SalesMockData } from './utils';
+import { SaleCard } from '../SaleCard';
+import type { FilterDropdownMenuProps } from './FilterDropdownMenu';
+import FiltersInline from './FiltersInline';
+import { FilterType } from './types';
+import { FilterButtons, FiltersInlineFilters, SalesMockData } from './utils';
 
 /**
  * Storybook: https://storybook.js.org/docs/react/writing-stories/introduction
  */
 const meta = {
-  title: 'Patterns/InPlaceFilters',
-  component: InPlaceFilters,
-} satisfies Meta<typeof InPlaceFilters>;
+  title: 'Patterns/FiltersInline',
+  component: FiltersInline,
+} satisfies Meta<typeof FiltersInline>;
 
 export default meta;
 
@@ -28,37 +29,37 @@ const filters: FilterType[] = [
     label: 'Sort',
     id: FILTER_KEYS.sort,
     type: 'radio',
-    filterDimensions: new Set(InPlaceFiltersFilters.Sort),
+    filterDimensions: new Set(FiltersInlineFilters.Sort),
   },
   {
     label: 'Sale',
     id: FILTER_KEYS.sale,
     type: 'checkbox',
-    filterDimensions: new Set(InPlaceFiltersFilters.Sale),
+    filterDimensions: new Set(FiltersInlineFilters.Sale),
   },
   {
     label: 'Departments',
     id: FILTER_KEYS.departments,
     type: 'checkbox',
-    filterDimensions: new Set(InPlaceFiltersFilters.Departments),
+    filterDimensions: new Set(FiltersInlineFilters.Departments),
   },
   {
     label: 'Month',
     id: FILTER_KEYS.month,
     type: 'checkbox',
-    filterDimensions: new Set(InPlaceFiltersFilters.Month),
+    filterDimensions: new Set(FiltersInlineFilters.Month),
   },
   {
     label: 'Location',
     id: FILTER_KEYS.location,
     type: 'checkbox',
-    filterDimensions: new Set(InPlaceFiltersFilters.Location),
+    filterDimensions: new Set(FiltersInlineFilters.Location),
   },
 ];
 
 const buildFilters = () => filters;
 
-export const Playground = (props: FilterDropdownProps) => {
+export const Playground = (props: FilterDropdownMenuProps) => {
   const [filtersLabelListState, setFiltersLabelListState] = useState(Array(6).fill(false));
   const initialFilters = buildFilters();
   const [results, setResults] = useState(SalesMockData);
@@ -170,7 +171,7 @@ export const Playground = (props: FilterDropdownProps) => {
   const clearFilterUpdate = (filterId: string) => {
     if (filterId === 'all') {
       const newFilterRules = new Map();
-      newFilterRules.set(FILTER_KEYS.sort, new Set([InPlaceFiltersFilters.Sort[0].label]));
+      newFilterRules.set(FILTER_KEYS.sort, new Set([FiltersInlineFilters.Sort[0].label]));
       setFilterRules(newFilterRules);
       setFilters(initialFilters);
       setResultsCount(handleFilterUpdate(true, newFilterRules) ?? 0);
@@ -199,9 +200,9 @@ export const Playground = (props: FilterDropdownProps) => {
 
   return (
     <>
-      <InPlaceFilters
+      <FiltersInline
         {...props}
-        id="in-place-filters-story"
+        id="filters-inline-story"
         filtersListState={filtersLabelListState}
         setFiltersLabelListState={setFiltersLabelListState}
         handleFilterSelection={handleFilterSelection}

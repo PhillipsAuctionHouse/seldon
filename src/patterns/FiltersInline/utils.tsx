@@ -1,8 +1,15 @@
-import { AuctionFilterButtonTypes, FilterDimension, FilterType } from './types';
+import { FilterButtonIconType, FilterButtonType, FilterDimension, FilterType } from './types';
 
-export const FilterButtons: AuctionFilterButtonTypes[] = ['Filter', 'Sort', 'Sale', 'Departments', 'Month', 'Location'];
+export const FilterButtons: FilterButtonType[] = [
+  FilterButtonType.Filter,
+  FilterButtonType.Sort,
+  FilterButtonType.Sale,
+  FilterButtonType.Departments,
+  FilterButtonType.Month,
+  FilterButtonType.Location,
+];
 
-export const InPlaceFiltersFilters = {
+export const FiltersInlineFilters = {
   Sort: [
     {
       id: 'sort-by-date-ascending',
@@ -126,4 +133,22 @@ export const getFilterDimensions = (
     return Array.from(filters[filterIndex - 1].filterDimensions);
   }
   return [];
+};
+
+export const getIcon = (type: FilterButtonIconType, isSelected: boolean) => {
+  if (type === 'Filter') return 'Filters';
+  if (isSelected) return 'ChevronUp';
+  return 'ChevronDown';
+};
+
+export const getFilterButtonClickHandler = (
+  filtersListState: boolean[] | undefined,
+  handleClick: ((state: boolean[]) => void) | undefined,
+  filterId: number,
+) => {
+  return () => {
+    if (filtersListState && handleClick) {
+      handleClick(filtersListState.map((selected, idx) => (idx === filterId ? !selected : false)));
+    }
+  };
 };

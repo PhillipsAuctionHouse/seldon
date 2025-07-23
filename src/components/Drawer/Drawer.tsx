@@ -6,7 +6,6 @@ import { ButtonVariants } from '../Button/types';
 import { Icon } from '../Icon';
 import IconButton from '../IconButton/IconButton';
 
-// You'll need to change the HTMLDivElement to match the top-level element of your component
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Whether the drawer is open or not
@@ -21,14 +20,11 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   children?: React.ReactNode;
   /**
-   * Drawer optional variant
+   * Which side the drawer opens from: left, right, or bottom
    */
-  variant?: 'bottomSheet' | 'default';
-  /**
-   * Option drawer open side
-   */
-  drawerOpenSide?: 'left' | 'right';
+  drawerOpenSide?: 'left' | 'right' | 'bottom';
 }
+
 /**
  * ## Overview
  *
@@ -40,12 +36,12 @@ const Drawer = ({
   isOpen = false,
   onClose = noOp,
   children,
-  variant = 'default',
   drawerOpenSide = 'right',
   ...props
 }: DrawerProps) => {
-  const isBottomSheet = variant === 'bottomSheet';
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, isBottomSheet ? 'BottomSheet' : 'Drawer');
+  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Drawer');
+  const isBottomSheet = drawerOpenSide === 'bottom';
+
   return (
     <Dialog.Root
       open={isOpen}
@@ -62,15 +58,15 @@ const Drawer = ({
           data-testid="drawer-overlay"
         />
         <Dialog.Content
-          className={classnames(baseClassName, className)}
+          className={classnames(baseClassName, className, { [`${baseClassName}--bottom`]: isBottomSheet })}
           data-side={drawerOpenSide}
           id={props.id}
           {...commonProps}
         >
           <Dialog.Title />
           <Dialog.Description />
-          <Dialog.Close asChild>
-            {!isBottomSheet && (
+          {!isBottomSheet ? (
+            <Dialog.Close asChild>
               <IconButton
                 onClick={onClose}
                 className={classnames(`${baseClassName}__close`)}
@@ -80,8 +76,8 @@ const Drawer = ({
               >
                 <Icon icon="CloseX" color="currentColor" />
               </IconButton>
-            )}
-          </Dialog.Close>
+            </Dialog.Close>
+          ) : null}
           {children}
         </Dialog.Content>
       </Dialog.Portal>

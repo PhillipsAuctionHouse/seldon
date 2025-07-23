@@ -1,13 +1,13 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { runCommonTests } from '../../utils/testUtils';
 import { FilterButtonDisplay } from './FilterButtonDisplay';
-import { FilterDropdown } from './FilterDropdown';
-import InPlaceFilters from './InPlaceFilters';
-import { AuctionFilterButtonTypes } from './types';
+import { FilterDropdownMenu } from './FilterDropdownMenu';
+import FiltersInline from './FiltersInline';
+import { FilterButtonIconType, FilterButtonType } from './types';
 import { FilterButtons } from './utils';
 
-describe('InPlaceFilters', () => {
-  runCommonTests(InPlaceFilters, 'InPlaceFilters');
+describe('FiltersInline', () => {
+  runCommonTests(FiltersInline, 'FiltersInline');
 
   const mockFilters = [
     {
@@ -31,7 +31,7 @@ describe('InPlaceFilters', () => {
   ];
 
   it('should render all the buttons correctly', () => {
-    render(<InPlaceFilters id="in-place-filters" filters={mockFilters} filtersLabels={FilterButtons} />);
+    render(<FiltersInline id="in-place-filters" filters={mockFilters} filtersLabels={FilterButtons} />);
 
     expect(screen.getByTestId('in-place-filters-Filter-button-Filter-label-desktop')).toBeInTheDocument();
     expect(screen.getByTestId('in-place-filters-Sort-button-Sort-label-desktop')).toBeInTheDocument();
@@ -49,7 +49,7 @@ describe('InPlaceFilters', () => {
       },
       mockFilters[1],
     ];
-    render(<InPlaceFilters id="in-place-filters" filters={filtersWithActive} filtersLabels={FilterButtons} />);
+    render(<FiltersInline id="in-place-filters" filters={filtersWithActive} filtersLabels={FilterButtons} />);
     expect(screen.getByText('1')).toBeInTheDocument();
   });
 });
@@ -60,15 +60,15 @@ describe('FilterButtonDisplay', () => {
   function getProps(overrides = {}) {
     return {
       className: 'custom-class',
-      isButtonSelected: false,
-      filterCount: 0,
+      label: 'Sort By',
+      onClick: handleChange,
+      isSelected: false,
+      type: 'Sort' as FilterButtonIconType,
+      count: 0,
       totalCount: 0,
-      buttonType: 'Sort',
-      filterButtonLabel: 'Sort',
-      buttonLabel: 'Sort By',
       id: 'test-id',
-      handleFilterButtonClick: handleChange,
-      isMobileDropdown: false,
+      ariaLabel: undefined,
+      isMobile: false,
       ...overrides,
     };
   }
@@ -78,29 +78,27 @@ describe('FilterButtonDisplay', () => {
   });
 
   it('renders the button with correct label and test ids', () => {
-    render(<FilterButtonDisplay {...getProps()} />);
-    expect(screen.getByTestId('test-id-Sort')).toBeInTheDocument();
-    expect(screen.getByTestId('test-id-Sort-label-desktop')).toHaveTextContent('Sort By');
+    render(<FilterButtonDisplay {...getProps({ type: 'Sort' as FilterButtonIconType })} />);
+    expect(screen.getByTestId('test-id-filter-button')).toBeInTheDocument();
+    expect(screen.getByTestId('test-id-filter-label-desktop')).toHaveTextContent('Sort By');
   });
 
-  it('calls handleFilterButtonClick when clicked', () => {
+  it('calls onClick when clicked', () => {
     render(<FilterButtonDisplay {...getProps()} />);
-    fireEvent.click(screen.getByTestId('test-id-Sort'));
+    fireEvent.click(screen.getByTestId('test-id-filter-button'));
     expect(handleChange).toHaveBeenCalled();
   });
 
-  it('shows the filter count when buttonType is Filter and totalCount > 0', () => {
+  it('shows the filter count when type is Filter and count > 0', () => {
     render(
-      <FilterButtonDisplay
-        {...getProps({ buttonType: 'Filter', totalCount: 3, filterCount: 2, buttonLabel: 'Filter' })}
-      />,
+      <FilterButtonDisplay {...getProps({ type: 'Filter' as FilterButtonIconType, count: 3, label: 'Filter' })} />,
     );
     expect(screen.getByText('3')).toBeInTheDocument();
   });
 
-  it('renders mobile label when isMobileDropdown is true', () => {
-    render(<FilterButtonDisplay {...getProps({ isMobileDropdown: true })} />);
-    expect(screen.getByTestId('test-id-Sort-label-mobile')).toBeInTheDocument();
+  it('renders mobile label when isMobile is true', () => {
+    render(<FilterButtonDisplay {...getProps({ isMobile: true, type: 'Sort' })} />);
+    expect(screen.getByTestId('test-id-filter-label-mobile')).toBeInTheDocument();
   });
 });
 
@@ -112,7 +110,7 @@ describe('FilterDropdown', () => {
   function getProps(overrides = {}) {
     return {
       className: 'custom-class',
-      buttonType: 'Sort' as AuctionFilterButtonTypes,
+      buttonType: FilterButtonType.Sort,
       isMobileDropdown: false,
       filters: [
         {
@@ -141,26 +139,26 @@ describe('FilterDropdown', () => {
   });
 
   it('renders the header and filter inputs', () => {
-    render(<FilterDropdown {...getProps()} />);
+    render(<FilterDropdownMenu {...getProps()} />);
     expect(screen.getByText('Sort By')).toBeInTheDocument();
     expect(screen.getByLabelText('Ascending')).toBeInTheDocument();
     expect(screen.getByLabelText('Descending')).toBeInTheDocument();
   });
 
   it('calls handleFilterSelection when an input is changed', () => {
-    render(<FilterDropdown {...getProps()} />);
+    render(<FilterDropdownMenu {...getProps()} />);
     fireEvent.click(screen.getByLabelText('Ascending'));
     expect(handleFilterSelection).toHaveBeenCalled();
   });
 
   it('calls handleFilterUpdate when Confirm button is clicked', () => {
-    render(<FilterDropdown {...getProps()} />);
+    render(<FilterDropdownMenu {...getProps()} />);
     fireEvent.click(screen.getByText('Confirm'));
     expect(handleFilterUpdate).toHaveBeenCalled();
     render(
-      <FilterDropdown
+      <FilterDropdownMenu
         {...getProps({
-          buttonType: 'Departments' as AuctionFilterButtonTypes,
+          buttonType: FilterButtonType.Departments,
           filters: [
             {
               label: 'Departments',
@@ -182,7 +180,7 @@ describe('FilterDropdown', () => {
   });
 
   it('renders mobile variant', () => {
-    render(<FilterDropdown {...getProps({ isMobileDropdown: true })} />);
+    render(<FilterDropdownMenu {...getProps({ isMobileDropdown: true })} />);
     expect(screen.getByTestId('filter-dropdown-mobile')).toBeInTheDocument();
     expect(screen.getByText('Sort By')).toBeInTheDocument();
     expect(screen.getByText('Confirm')).toBeInTheDocument();
@@ -190,7 +188,7 @@ describe('FilterDropdown', () => {
 
   it('applies custom aria-labels to FilterDropdown', () => {
     render(
-      <FilterDropdown
+      <FilterDropdownMenu
         {...getProps({
           ariaLabels: { dropdownMobile: 'Custom Mobile', dropdownDesktop: 'Custom Desktop' },
           isMobileDropdown: false,

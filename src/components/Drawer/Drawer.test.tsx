@@ -44,7 +44,7 @@ describe('Drawer', () => {
 
   it('does not render close button for bottomSheet variant', () => {
     render(
-      <Drawer isOpen variant="bottomSheet">
+      <Drawer isOpen drawerOpenSide="bottom">
         <div>Drawer Content</div>
       </Drawer>,
     );
