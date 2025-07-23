@@ -36,7 +36,7 @@ export interface FilterDropdownMenuProps extends React.HTMLAttributes<HTMLDivEle
 }
 
 // Desktop version
-const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, FilterDropdownMenuProps>(
+export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, FilterDropdownMenuProps>(
   (
     {
       className,
@@ -125,7 +125,7 @@ const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, FilterDropdow
 FilterDropdownMenuDesktop.displayName = 'FilterDropdownMenuDesktop';
 
 // Mobile version
-const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterDropdownMenuProps>(
+export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterDropdownMenuProps>(
   (
     {
       className,
@@ -222,7 +222,7 @@ const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterDropdown
 
 FilterDropdownMenuMobile.displayName = 'FilterDropdownMenuMobile';
 
-const FilterDropdownMenuContent = React.forwardRef<HTMLDivElement, FilterDropdownMenuProps>(
+export const FilterDropdownMenuContent = React.forwardRef<HTMLDivElement, FilterDropdownMenuProps>(
   (
     {
       className,
