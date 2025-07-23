@@ -31,6 +31,7 @@ export interface ProgressIndicatorProps extends Progress.ProgressProps, Componen
  *
  *
  * [Figma Link](https://www.figma.com/design/kSxOhnqIhilZ9hIJd3bPgP/RW-Registration?node-id=2529-23889&m=dev)
+ * [Figma Link 2](https://www.figma.com/design/kSxOhnqIhilZ9hIJd3bPgP/RW-Registration?node-id=2996-50543&m=dev)
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-progressindicator--overview)
  */
