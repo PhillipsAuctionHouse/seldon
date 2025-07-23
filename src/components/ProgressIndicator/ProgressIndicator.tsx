@@ -19,6 +19,9 @@ export interface ProgressIndicatorProps extends Progress.ProgressProps, Componen
    * Optional labels for each step in the progress indicator.
    */
   labels?: string[];
+  /**
+   * Optional class name for additional styling.
+   */
   className?: string;
 }
 /**
