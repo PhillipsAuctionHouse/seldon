@@ -13,26 +13,26 @@ export const Playground = (_props: ProgressWizardProps) => (
   <ProgressWizard steps={4}>
     <form>
       <label>
-      Step 1:
-      <input type="text" placeholder="Enter Step 1 data" />
+        Step 1:
+        <input type="text" placeholder="Enter Step 1 data" />
       </label>
     </form>
     <form>
       <label>
-      Step 2:
-      <input type="text" placeholder="Enter Step 2 data" />
+        Step 2:
+        <input type="text" placeholder="Enter Step 2 data" />
       </label>
     </form>
     <form>
       <label>
-      Step 3:
-      <input type="text" placeholder="Enter Step 3 data" />
+        Step 3:
+        <input type="text" placeholder="Enter Step 3 data" />
       </label>
     </form>
     <form>
       <label>
-      Step 4:
-      <input type="text" placeholder="Enter Step 4 data" />
+        Step 4:
+        <input type="text" placeholder="Enter Step 4 data" />
       </label>
     </form>
   </ProgressWizard>
@@ -48,11 +48,7 @@ export const Controlled = () => {
   const [currentStep, setCurrentStep] = useState(1);
 
   return (
-    <ProgressWizard
-      steps={4}
-      current={currentStep}
-      onStepChange={(step) => setCurrentStep(step)}
-    >
+    <ProgressWizard steps={4} current={currentStep} onStepChange={(step) => setCurrentStep(step)}>
       <form>
         <label>
           Step 1:

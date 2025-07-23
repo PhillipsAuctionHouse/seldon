@@ -20,3 +20,17 @@ Playground.argTypes = {
   steps: { control: { type: 'number', min: 1, max: 10 } },
   current: { control: { type: 'number', min: 1, max: 10 } },
 };
+
+export const WithLabels = (props: ProgressIndicatorProps) => (
+  <ProgressIndicator {...props} labels={['Register to bid', 'Your details', 'Primary address', 'Review and submit']} />
+);
+
+WithLabels.args = {
+  steps: 4,
+  current: 3,
+};
+
+WithLabels.argTypes = {
+  steps: { control: { type: 'number', min: 1, max: 10 } },
+  current: { control: { type: 'number', min: 1, max: 10 } },
+};

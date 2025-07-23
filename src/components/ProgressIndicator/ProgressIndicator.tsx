@@ -15,16 +15,19 @@ export interface ProgressIndicatorProps extends Progress.ProgressProps, Componen
    * Current step in the progress indicator.
    */
   current: number;
+  /**
+   * Optional labels for each step in the progress indicator.
+   */
+  labels?: string[];
   className?: string;
 }
 /**
  * ## Overview
  *
- * Overview of this widget
+ * This component provides a visual representation of a multi-step process.
  *
  *
- * [Figma Link](https://www.figma.com/design/kSxOhnqIhilZ9hIJd3bPgP/RW-Registration?node-id=2996-46615&m=dev)
- * TODO: Update Figma link when the component is moved into its own component.
+ * [Figma Link](https://www.figma.com/design/kSxOhnqIhilZ9hIJd3bPgP/RW-Registration?node-id=2529-23889&m=dev)
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-progressindicator--overview)
  */
@@ -51,33 +54,40 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
               const isComplete = current > index + 1;
               const isCurrent = current === index + 1;
               return (
-                <li
-                  key={`step-${index}`}
-                  className={`${baseClassName}__item`}
-                  role="listitem"
-                  aria-label={
-                    isComplete
-                      ? `Step ${index + 1} completed`
-                      : isCurrent
-                        ? `Step ${index + 1} current`
-                        : `Step ${index + 1} not started`
-                  }
-                  aria-current={isCurrent ? 'step' : undefined}
-                >
-                  <span
-                    className={classnames(`${baseClassName}__circle`, {
-                      [`${baseClassName}__circle--active`]: isComplete,
-                      [`${baseClassName}__circle--current`]: isCurrent,
-                    })}
+                <>
+                  <li
+                    key={`step-${index}`}
+                    className={`${baseClassName}__item`}
+                    role="listitem"
+                    aria-label={
+                      isComplete
+                        ? `Step ${index + 1} completed`
+                        : isCurrent
+                          ? `Step ${index + 1} current`
+                          : `Step ${index + 1} not started`
+                    }
+                    aria-current={isCurrent ? 'step' : undefined}
                   >
-                    {isComplete ? (
-                      <Icon icon="Success" aria-label="Completed Icon" color="currentColor" width={20} height={20} />
-                    ) : (
-                      <Text variant={TextVariants.badge}>{index + 1}</Text>
+                    <span
+                      className={classnames(`${baseClassName}__circle`, {
+                        [`${baseClassName}__circle--active`]: isComplete,
+                        [`${baseClassName}__circle--current`]: isCurrent,
+                      })}
+                    >
+                      {isComplete ? (
+                        <Icon icon="Success" aria-label="Completed Icon" color="currentColor" width={20} height={20} />
+                      ) : (
+                        <Text variant={TextVariants.badge}>{index + 1}</Text>
+                      )}
+                    </span>
+                    {props.labels && props.labels[index] && (
+                      <span className={`${baseClassName}__label`}>
+                        <Text variant={TextVariants.string1}>{props.labels[index]}</Text>
+                      </span>
                     )}
-                  </span>
-                  {index < steps - 1 && <div className={`${baseClassName}__connector`} aria-hidden="true" />}
-                </li>
+                  </li>
+                  {index < steps - 1 && <span className={`${baseClassName}__connector`} aria-hidden="true" />}
+                </>
               );
             })}
           </ul>

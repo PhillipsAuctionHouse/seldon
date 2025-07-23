@@ -13,8 +13,6 @@ export interface ProgressWizardProps extends ComponentProps<'div'> {
   children: ReactNode[];
   current?: number; // controlled
   onStepChange?: (step: number) => void; // controlled
-
-  
 }
 
 const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
