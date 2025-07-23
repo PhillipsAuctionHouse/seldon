@@ -36,6 +36,14 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement>, Dialog
    * Content label for accessibility
    */
   contentLabel?: string;
+  /**
+   * Custom close icon
+   */
+  closeIcon?: React.ReactElement;
+  /**
+   * Position of the close icon
+   */
+  closeIconPosition?: 'left' | 'right';
 }
 
 /**
@@ -45,7 +53,21 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement>, Dialog
  *
  */
 const Modal = forwardRef<HTMLDivElement, ModalProps>(
-  ({ children, className, overlayClassName, isOpen = false, onClose = noOp, style, contentLabel, ...props }, ref) => {
+  (
+    {
+      children,
+      className,
+      overlayClassName,
+      isOpen = false,
+      onClose = noOp,
+      style,
+      contentLabel,
+      closeIcon = <Icon icon="CloseX" height={32} width={32} color="currentColor" />,
+      closeIconPosition = 'right',
+      ...props
+    },
+    ref,
+  ) => {
     const { className: baseClassName, 'data-testid': testId, ...commonProps } = getCommonProps(props, 'Modal');
 
     return (
@@ -77,10 +99,12 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
               <IconButton
                 id="modal-close-button"
                 aria-label="Close Modal"
-                className={classnames(`${baseClassName}__close`)}
+                className={classnames(`${baseClassName}__close`, {
+                  [`${baseClassName}__close--left`]: closeIconPosition === 'left',
+                })}
                 variant={ButtonVariants.tertiary}
               >
-                <Icon icon="CloseX" height={32} width={32} color="currentColor" />
+                {closeIcon}
               </IconButton>
             </Dialog.Close>
             {children}
