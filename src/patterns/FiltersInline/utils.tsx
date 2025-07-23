@@ -152,3 +152,13 @@ export const getFilterButtonClickHandler = (
     }
   };
 };
+
+export function handleInputChange(
+  e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  buttonType: string,
+  handleFilterSelection?: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, filterType: string) => void,
+) {
+  if (handleFilterSelection) {
+    handleFilterSelection(e, buttonType);
+  }
+}

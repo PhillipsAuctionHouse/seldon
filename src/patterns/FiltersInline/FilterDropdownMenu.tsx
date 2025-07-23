@@ -9,7 +9,7 @@ import { TextVariants } from '../../components/Text/types';
 import { px } from '../../utils';
 import './_filterDropdown.scss';
 import { FilterDimension } from './types';
-import { getFilterDimensions } from './utils';
+import { getFilterDimensions, handleInputChange as handleInputChangeUtil } from './utils';
 
 export interface FilterDropdownMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Optional custom class name for the dropdown container */
@@ -43,18 +43,15 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
       buttonType,
       filters,
       filterIndex,
-      handleFilterSelection,
       handleFilterUpdate,
       clearFilterUpdate,
+      handleFilterSelection,
       resultsCount,
       ariaLabels,
     },
     ref,
   ) => {
     const isSortButton = buttonType === 'Sort';
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-      handleFilterSelection?.(e, buttonType);
-    };
 
     return (
       <div
@@ -77,7 +74,7 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
               type={isSortButton ? 'radio' : 'checkbox'}
               checked={value.active}
               disabled={value?.disabled}
-              onChange={handleInputChange}
+              onChange={(e) => handleInputChangeUtil(e, buttonType, handleFilterSelection)}
             />
           ))}
         </div>
@@ -132,18 +129,15 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
       buttonType,
       filters,
       filterIndex,
-      handleFilterSelection,
       handleFilterUpdate,
       clearFilterUpdate,
+      handleFilterSelection,
       resultsCount,
       ariaLabels,
     },
     ref,
   ) => {
     const isSortButton = buttonType === 'Sort';
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-      handleFilterSelection?.(e, buttonType);
-    };
 
     return (
       <div
@@ -166,7 +160,7 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
               type={isSortButton ? 'radio' : 'checkbox'}
               checked={value.active}
               disabled={value?.disabled}
-              onChange={handleInputChange}
+              onChange={(e) => handleInputChangeUtil(e, buttonType, handleFilterSelection)}
             />
           ))}
         </div>
@@ -229,17 +223,14 @@ export const FilterDropdownMenuContent = React.forwardRef<HTMLDivElement, Filter
       buttonType,
       filters,
       filterIndex,
-      handleFilterSelection,
       handleFilterUpdate,
       clearFilterUpdate,
+      handleFilterSelection,
       resultsCount,
     },
     ref,
   ) => {
     const isSortButton = buttonType === 'Sort';
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-      handleFilterSelection?.(e, buttonType);
-    };
 
     return (
       <div className={classnames(`${px}-filter-dropdown`, className)} ref={ref}>
@@ -257,7 +248,7 @@ export const FilterDropdownMenuContent = React.forwardRef<HTMLDivElement, Filter
               type={isSortButton ? 'radio' : 'checkbox'}
               checked={value.active}
               disabled={value?.disabled}
-              onChange={handleInputChange}
+              onChange={(e) => handleInputChangeUtil(e, buttonType, handleFilterSelection)}
             />
           ))}
         </div>
