@@ -1,3 +1,10 @@
+# [1.168.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.167.0...v1.168.0) (2025-07-24)
+
+
+### Features
+
+* **Modal:** PHOENIX-2058 adding custom icon to modal ([#667](https://github.com/PhillipsAuctionHouse/seldon/issues/667)) ([aba9aa6](https://github.com/PhillipsAuctionHouse/seldon/commit/aba9aa63f67a8ea063f593720b9a542c65d8e40e))
+
 # [1.167.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.166.0...v1.167.0) (2025-07-22)
 
 
