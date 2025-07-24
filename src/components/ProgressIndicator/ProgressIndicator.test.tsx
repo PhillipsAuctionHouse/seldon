@@ -7,7 +7,6 @@ describe('ProgressIndicator', () => {
 
   it('renders the correct number of steps', () => {
     render(<ProgressIndicator steps={5} current={1} />);
-    screen.debug();
     const steps = screen.getAllByTestId('progress-step');
     expect(steps).toHaveLength(5);
   });
