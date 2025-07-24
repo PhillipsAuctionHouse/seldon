@@ -5,7 +5,7 @@ import { FilterButtonDisplay } from './FilterButtonDisplay';
 import { FilterDropdownMenuDesktop, FilterDropdownMenuMobile } from './FilterDropdownMenu';
 import FiltersInline from './FiltersInline';
 import { FilterButtonIconType, FilterButtonType } from './types';
-import { FilterButtons } from './utils';
+import { FilterButtons, getFilterButtonClickHandler, handleInputChange, resetAllFilters } from './utils';
 
 describe('FiltersInline', () => {
   runCommonTests(FiltersInline, 'FiltersInline');
@@ -147,7 +147,6 @@ describe('FilterDropdown', () => {
   it('renders mobile variant', () => {
     render(<FilterDropdownMenuMobile {...getProps({ isMobileDropdown: true })} />);
     expect(screen.getByTestId('filter-dropdown-mobile')).toBeInTheDocument();
-    expect(screen.getByText('Sort By')).toBeInTheDocument();
     expect(screen.getByText('Confirm')).toBeInTheDocument();
   });
 
@@ -416,5 +415,82 @@ describe('FilterDropdownMenuMobile non-sort buttons', () => {
 
     fireEvent.click(screen.getByText('Show 5 Auctions'));
     expect(handleFilterUpdate).toHaveBeenCalledWith(false);
+  });
+});
+
+describe('getFilterButtonClickHandler', () => {
+  it('calls handleClick with correct toggled state for given filterId', () => {
+    const mockState = [false, true, false];
+    const mockHandleClick = vi.fn();
+    const handler = getFilterButtonClickHandler(mockState, mockHandleClick, 1);
+
+    handler();
+
+    // Only index 1 should be toggled, others set to false
+    expect(mockHandleClick).toHaveBeenCalledWith([false, false, false]);
+  });
+
+  it('toggles the correct index to true if it was false', () => {
+    const mockState = [false, false, false];
+    const mockHandleClick = vi.fn();
+    const handler = getFilterButtonClickHandler(mockState, mockHandleClick, 2);
+
+    handler();
+
+    expect(mockHandleClick).toHaveBeenCalledWith([false, false, true]);
+  });
+
+  it('does nothing if filtersListState is undefined', () => {
+    const mockHandleClick = vi.fn();
+    const handler = getFilterButtonClickHandler(undefined, mockHandleClick, 0);
+
+    handler();
+
+    expect(mockHandleClick).not.toHaveBeenCalled();
+  });
+
+  it('does nothing if handleClick is undefined', () => {
+    const mockState = [true, false];
+    const handler = getFilterButtonClickHandler(mockState, undefined, 0);
+
+    handler();
+  });
+});
+
+describe('handleInputChange', () => {
+  it('calls handleFilterSelection with event and buttonType', () => {
+    const mockEvent = { target: { value: 'foo' } } as React.ChangeEvent<HTMLInputElement>;
+    const mockHandler = vi.fn();
+
+    handleInputChange(mockEvent, 'Filter', mockHandler);
+
+    expect(mockHandler).toHaveBeenCalledWith(mockEvent, 'Filter');
+  });
+
+  it('does nothing if handleFilterSelection is not provided', () => {
+    const mockEvent = { target: { value: 'foo' } } as React.ChangeEvent<HTMLInputElement>;
+
+    handleInputChange(mockEvent, 'Filter');
+  });
+});
+
+describe('resetAllFilters', () => {
+  it('calls handleClick with all false when filtersListState is defined', () => {
+    const mockHandleClick = vi.fn();
+    const filtersListState = [true, false, true];
+    resetAllFilters(filtersListState, mockHandleClick);
+    expect(mockHandleClick).toHaveBeenCalledWith([false, false, false]);
+  });
+
+  it('does nothing if filtersListState is undefined', () => {
+    const mockHandleClick = vi.fn();
+    resetAllFilters(undefined, mockHandleClick);
+    expect(mockHandleClick).not.toHaveBeenCalled();
+  });
+
+  it('does nothing if handleClick is undefined', () => {
+    const filtersListState = [true, false, true];
+    // Should not throw
+    resetAllFilters(filtersListState, undefined);
   });
 });

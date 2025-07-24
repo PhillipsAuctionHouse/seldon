@@ -162,3 +162,15 @@ export function handleInputChange(
     handleFilterSelection(e, buttonType);
   }
 }
+
+/**
+ * Utility to reset all filter states to false and call the handler.
+ */
+export function resetAllFilters(
+  filtersListState: boolean[] | undefined,
+  handleClick: ((state: boolean[]) => void) | undefined,
+) {
+  if (filtersListState && handleClick) {
+    handleClick(filtersListState.map(() => false));
+  }
+}

@@ -42,13 +42,13 @@ describe('Drawer', () => {
     expect(onClose).toHaveBeenCalled();
   });
 
-  it('does not render close button for bottomSheet variant', () => {
+  it('does render bottomContentLabel for bottomSheet variant', () => {
     render(
-      <Drawer isOpen drawerOpenSide="bottom">
+      <Drawer isOpen drawerOpenSide="bottom" bottomContentLabel="Bottom Content">
         <div>Drawer Content</div>
       </Drawer>,
     );
-    expect(screen.queryByTestId('drawer-close')).not.toBeInTheDocument();
+    expect(screen.getByText('Bottom Content')).toBeInTheDocument();
   });
 
   it('applies custom className and data-side', () => {

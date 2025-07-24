@@ -13,7 +13,7 @@ import FilterMenu from '../FilterMenu/FilterMenu';
 import { FilterButtonDisplay } from './FilterButtonDisplay';
 import { FilterDropdownMenuDesktop, FilterDropdownMenuMobile } from './FilterDropdownMenu';
 import type { FilterButtonIconType, FilterDimension, FilterDropdownProps, FilterType } from './types';
-import { countActiveFilters, getFilterButtonClickHandler } from './utils';
+import { countActiveFilters, getFilterButtonClickHandler, resetAllFilters } from './utils';
 
 export const MainFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropdownProps>(
   (
@@ -58,11 +58,7 @@ export const MainFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDrop
         <Drawer
           isOpen={isButtonSelected}
           drawerOpenSide="left"
-          onClose={() => {
-            if (filtersListState && handleClick) {
-              handleClick(filtersListState.map(() => false));
-            }
-          }}
+          onClose={() => resetAllFilters(filtersListState, handleClick)}
           className={`${px}-filter-drawer`}
           aria-label={ariaLabels.drawer || 'Filter drawer'}
         >
