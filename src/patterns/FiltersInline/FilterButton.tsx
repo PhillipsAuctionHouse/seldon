@@ -11,7 +11,7 @@ import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import { px } from '../../utils';
 import FilterMenu from '../FilterMenu/FilterMenu';
 import { FilterButtonDisplay } from './FilterButtonDisplay';
-import { FilterDropdownMenu } from './FilterDropdownMenu';
+import { FilterDropdownMenuDesktop, FilterDropdownMenuMobile } from './FilterDropdownMenu';
 import type { FilterButtonIconType, FilterDimension, FilterDropdownProps, FilterType } from './types';
 import { countActiveFilters, getFilterButtonClickHandler } from './utils';
 
@@ -153,8 +153,9 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
             onClose={getFilterButtonClickHandler(filtersListState, handleClick, filterId)}
             aria-label={ariaLabels.drawer || `${filterButtonLabel} drawer`}
             className={`${px}-filter-drawer-mobile`}
+            bottomContentLabel={`${buttonLabel} Filter`}
           >
-            <FilterDropdownMenu
+            <FilterDropdownMenuMobile
               buttonType={buttonType}
               filters={filters}
               filterIndex={filterId}
@@ -196,7 +197,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
                 alignOffset={5}
                 aria-label={ariaLabels.popover || `${filterButtonLabel} dropdown`}
               >
-                <FilterDropdownMenu
+                <FilterDropdownMenuDesktop
                   buttonType={buttonType}
                   filters={filters}
                   filterIndex={filterId}

@@ -145,10 +145,6 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
         data-testid="filter-dropdown-mobile"
         aria-label={ariaLabels?.dropdownMobile || `${buttonType} dropdown mobile`}
       >
-        <FilterHeader
-          heading={isSortButton ? 'Sort By' : buttonType}
-          className={classnames(`${px}-filter-dropdown__header`, `${px}-filter-dropdown__header--mobile`)}
-        />
         <div className={classnames(`${px}-filter-dropdown__filters`, `${px}-filter-dropdown__filters--mobile`)}>
           {getFilterDimensions(filters, filterIndex).map((value: FilterDimension) => (
             <FilterInput
@@ -214,89 +210,3 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
 );
 
 FilterDropdownMenuMobile.displayName = 'FilterDropdownMenuMobile';
-
-export const FilterDropdownMenuContent = React.forwardRef<HTMLDivElement, FilterDropdownMenuProps>(
-  (
-    {
-      className,
-      buttonType,
-      filters,
-      filterIndex,
-      handleFilterUpdate,
-      clearFilterUpdate,
-      handleFilterSelection,
-      resultsCount,
-    },
-    ref,
-  ) => {
-    const isSortButton = buttonType === 'Sort';
-
-    return (
-      <div className={classnames(`${px}-filter-dropdown`, className)} ref={ref}>
-        <FilterHeader
-          heading={isSortButton ? 'Sort By' : buttonType}
-          className={classnames(`${px}-filter-dropdown__header`)}
-        />
-        <div className={classnames(`${px}-filter-dropdown__filters`)}>
-          {getFilterDimensions(filters, filterIndex).map((value: FilterDimension) => (
-            <FilterInput
-              id={value.label}
-              key={value.label}
-              labelText={value.label}
-              name={value.label}
-              type={isSortButton ? 'radio' : 'checkbox'}
-              checked={value.active}
-              disabled={value?.disabled}
-              onChange={(e) => handleInputChangeUtil(e, buttonType, handleFilterSelection)}
-            />
-          ))}
-        </div>
-        <div
-          className={classnames(
-            isSortButton ? `${px}-filter-dropdown__button-wrap` : `${px}-filter-dropdown__buttons-wrap`,
-          )}
-        >
-          {isSortButton ? (
-            <Button
-              className={classnames(`${px}-filter-dropdown__button`)}
-              variant={ButtonVariants.primary}
-              onClick={() => handleFilterUpdate?.(false)}
-            >
-              <Text variant={TextVariants.string3} className={`${px}-filter-dropdown__button-text`}>
-                Confirm
-              </Text>
-            </Button>
-          ) : (
-            <>
-              <Button
-                className={classnames(`${px}-filter-dropdown__buttons`)}
-                variant={ButtonVariants.secondary}
-                onClick={() => clearFilterUpdate?.(buttonType)}
-              >
-                <Text variant={TextVariants.string3}>Clear all</Text>
-              </Button>
-              <Button
-                className={classnames(`${px}-filter-dropdown__buttons`)}
-                variant={ButtonVariants.primary}
-                onClick={() => handleFilterUpdate?.(false)}
-              >
-                <Text variant={TextVariants.string3} className={`${px}-filter-dropdown__button-text`}>
-                  Show {resultsCount} Auctions
-                </Text>
-              </Button>
-            </>
-          )}
-        </div>
-      </div>
-    );
-  },
-);
-
-FilterDropdownMenuContent.displayName = 'FilterDropdownMenuContent';
-
-// Main export: automatically chooses desktop or mobile version, but uses the same markup/styles
-export const FilterDropdownMenu = React.forwardRef<HTMLDivElement, FilterDropdownMenuProps>((props, ref) => (
-  <FilterDropdownMenuContent {...props} ref={ref} />
-));
-
-FilterDropdownMenu.displayName = 'FilterDropdownMenu';

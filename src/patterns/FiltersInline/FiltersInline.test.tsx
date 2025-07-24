@@ -2,12 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { runCommonTests } from '../../utils/testUtils';
 import { MainFilterDropdown, SubFilterDropdown } from './FilterButton';
 import { FilterButtonDisplay } from './FilterButtonDisplay';
-import {
-  FilterDropdownMenu,
-  FilterDropdownMenuContent,
-  FilterDropdownMenuDesktop,
-  FilterDropdownMenuMobile,
-} from './FilterDropdownMenu';
+import { FilterDropdownMenuDesktop, FilterDropdownMenuMobile } from './FilterDropdownMenu';
 import FiltersInline from './FiltersInline';
 import { FilterButtonIconType, FilterButtonType } from './types';
 import { FilterButtons } from './utils';
@@ -149,47 +144,6 @@ describe('FilterDropdown', () => {
     clearFilterUpdate.mockClear();
   });
 
-  it('renders the header and filter inputs', () => {
-    render(<FilterDropdownMenu {...getProps()} />);
-    expect(screen.getByText('Sort By')).toBeInTheDocument();
-    expect(screen.getByLabelText('Ascending')).toBeInTheDocument();
-    expect(screen.getByLabelText('Descending')).toBeInTheDocument();
-  });
-
-  it('calls handleFilterSelection when an input is changed', () => {
-    render(<FilterDropdownMenu {...getProps()} />);
-    fireEvent.click(screen.getByLabelText('Ascending'));
-    expect(handleFilterSelection).toHaveBeenCalled();
-  });
-
-  it('calls handleFilterUpdate when Confirm button is clicked', () => {
-    render(<FilterDropdownMenu {...getProps()} />);
-    fireEvent.click(screen.getByText('Confirm'));
-    expect(handleFilterUpdate).toHaveBeenCalled();
-    render(
-      <FilterDropdownMenu
-        {...getProps({
-          buttonType: FilterButtonType.Departments,
-          filters: [
-            {
-              label: 'Departments',
-              id: 'Departments',
-              type: 'checkbox',
-              filterDimensions: new Set([
-                { label: 'Foo', active: false, disabled: false },
-                { label: 'Bar', active: false, disabled: false },
-              ]),
-            },
-          ],
-        })}
-      />,
-    );
-    expect(screen.getByText('Clear all')).toBeInTheDocument();
-    expect(screen.getByText('Show 5 Auctions')).toBeInTheDocument();
-    fireEvent.click(screen.getByText('Clear all'));
-    expect(clearFilterUpdate).toHaveBeenCalled();
-  });
-
   it('renders mobile variant', () => {
     render(<FilterDropdownMenuMobile {...getProps({ isMobileDropdown: true })} />);
     expect(screen.getByTestId('filter-dropdown-mobile')).toBeInTheDocument();
@@ -209,28 +163,6 @@ describe('FilterDropdown', () => {
     expect(screen.getByTestId('filter-dropdown-desktop')).toHaveAttribute('aria-label', 'Custom Desktop');
   });
 
-  it('renders disabled filter input', () => {
-    render(
-      <FilterDropdownMenu
-        {...getProps({
-          filters: [
-            {
-              label: 'Sort',
-              id: 'Sort',
-              type: 'radio',
-              filterDimensions: new Set([
-                { label: 'Ascending', active: false, disabled: true },
-                { label: 'Descending', active: false, disabled: false },
-              ]),
-            },
-          ],
-        })}
-      />,
-    );
-    expect(screen.getByLabelText('Ascending')).toBeDisabled();
-    expect(screen.getByLabelText('Descending')).not.toBeDisabled();
-  });
-
   it('renders mobile variant with correct aria-label', () => {
     render(
       <FilterDropdownMenuMobile
@@ -238,36 +170,6 @@ describe('FilterDropdown', () => {
       />,
     );
     expect(screen.getByTestId('filter-dropdown-mobile')).toHaveAttribute('aria-label', 'Mobile Dropdown');
-  });
-
-  it('renders no filters gracefully', () => {
-    render(<FilterDropdownMenu {...getProps({ filters: [] })} />);
-    expect(screen.queryByLabelText('Ascending')).not.toBeInTheDocument();
-    expect(screen.queryByLabelText('Descending')).not.toBeInTheDocument();
-  });
-
-  it('renders all filter options', () => {
-    render(
-      <FilterDropdownMenu
-        {...getProps({
-          filters: [
-            {
-              label: 'Sort',
-              id: 'Sort',
-              type: 'radio',
-              filterDimensions: new Set([
-                { label: 'Ascending', active: false, disabled: false },
-                { label: 'Descending', active: false, disabled: false },
-                { label: 'Random', active: false, disabled: false },
-              ]),
-            },
-          ],
-        })}
-      />,
-    );
-    expect(screen.getByLabelText('Ascending')).toBeInTheDocument();
-    expect(screen.getByLabelText('Descending')).toBeInTheDocument();
-    expect(screen.getByLabelText('Random')).toBeInTheDocument();
   });
 });
 
@@ -439,128 +341,6 @@ describe('SubFilterDropdown', () => {
   });
 });
 
-describe('FilterDropdownMenuContent', () => {
-  const handleFilterSelection = vi.fn();
-  const handleFilterUpdate = vi.fn();
-  const clearFilterUpdate = vi.fn();
-
-  const filters = [
-    {
-      label: 'Sort',
-      id: 'Sort',
-      type: 'radio',
-      filterDimensions: new Set([
-        { label: 'Ascending', active: false, disabled: false },
-        { label: 'Descending', active: false, disabled: false },
-      ]),
-    },
-  ];
-
-  it('renders filter inputs and header', () => {
-    render(
-      <FilterDropdownMenuContent
-        buttonType="Sort"
-        filters={filters}
-        filterIndex={0}
-        handleFilterSelection={handleFilterSelection}
-        handleFilterUpdate={handleFilterUpdate}
-        clearFilterUpdate={clearFilterUpdate}
-        resultsCount={10}
-      />,
-    );
-    expect(screen.getByText('Sort By')).toBeInTheDocument();
-    expect(screen.getByText('Confirm')).toBeInTheDocument();
-  });
-
-  it('calls handleFilterUpdate when Confirm button is clicked', () => {
-    render(
-      <FilterDropdownMenuContent
-        buttonType="Sort"
-        filters={filters}
-        filterIndex={0}
-        handleFilterSelection={handleFilterSelection}
-        handleFilterUpdate={handleFilterUpdate}
-        clearFilterUpdate={clearFilterUpdate}
-        resultsCount={10}
-      />,
-    );
-    fireEvent.click(screen.getByText('Confirm'));
-    expect(handleFilterUpdate).toHaveBeenCalled();
-  });
-
-  it('renders correct results count', () => {
-    render(
-      <FilterDropdownMenuContent
-        buttonType="Sale"
-        filters={filters}
-        filterIndex={0}
-        handleFilterSelection={handleFilterSelection}
-        handleFilterUpdate={handleFilterUpdate}
-        clearFilterUpdate={clearFilterUpdate}
-        resultsCount={42}
-      />,
-    );
-    expect(screen.getByText((content) => content.includes('Show 42 Auctions'))).toBeInTheDocument();
-  });
-
-  it('renders no filters gracefully', () => {
-    render(
-      <FilterDropdownMenuContent
-        buttonType="Sort"
-        filters={[]}
-        filterIndex={0}
-        handleFilterSelection={handleFilterSelection}
-        handleFilterUpdate={handleFilterUpdate}
-        clearFilterUpdate={clearFilterUpdate}
-        resultsCount={0}
-      />,
-    );
-    expect(screen.queryByLabelText('Ascending')).not.toBeInTheDocument();
-    expect(screen.queryByLabelText('Descending')).not.toBeInTheDocument();
-  });
-});
-
-describe('FilterDropdownMenuContent non-sort buttons', () => {
-  it('renders and handles Clear all and Show Auctions buttons', () => {
-    const clearFilterUpdate = vi.fn();
-    const handleFilterUpdate = vi.fn();
-    const filters = [
-      {
-        label: 'Departments',
-        id: 'Departments',
-        type: 'checkbox',
-        filterDimensions: new Set([
-          { label: 'Foo', active: false, disabled: false },
-          { label: 'Bar', active: false, disabled: false },
-        ]),
-      },
-    ];
-
-    render(
-      <FilterDropdownMenuContent
-        buttonType="Departments"
-        filters={filters}
-        filterIndex={0}
-        handleFilterSelection={vi.fn()}
-        handleFilterUpdate={handleFilterUpdate}
-        clearFilterUpdate={clearFilterUpdate}
-        resultsCount={7}
-      />,
-    );
-
-    // Assert buttons are present
-    expect(screen.getByText('Clear all')).toBeInTheDocument();
-    expect(screen.getByText('Show 7 Auctions')).toBeInTheDocument();
-
-    // Simulate clicks
-    fireEvent.click(screen.getByText('Clear all'));
-    expect(clearFilterUpdate).toHaveBeenCalledWith('Departments');
-
-    fireEvent.click(screen.getByText('Show 7 Auctions'));
-    expect(handleFilterUpdate).toHaveBeenCalledWith(false);
-  });
-});
-
 describe('FilterDropdownMenuDesktop non-sort buttons', () => {
   it('renders and handles Clear all and Show Auctions buttons', () => {
     const clearFilterUpdate = vi.fn();
@@ -635,45 +415,6 @@ describe('FilterDropdownMenuMobile non-sort buttons', () => {
     expect(clearFilterUpdate).toHaveBeenCalledWith('Departments');
 
     fireEvent.click(screen.getByText('Show 5 Auctions'));
-    expect(handleFilterUpdate).toHaveBeenCalledWith(false);
-  });
-});
-
-describe('FilterDropdownMenuContent non-sort buttons', () => {
-  it('renders and handles Clear all and Show Auctions buttons', () => {
-    const clearFilterUpdate = vi.fn();
-    const handleFilterUpdate = vi.fn();
-    const filters = [
-      {
-        label: 'Departments',
-        id: 'Departments',
-        type: 'checkbox',
-        filterDimensions: new Set([
-          { label: 'Foo', active: false, disabled: false },
-          { label: 'Bar', active: false, disabled: false },
-        ]),
-      },
-    ];
-
-    render(
-      <FilterDropdownMenuContent
-        buttonType="Departments"
-        filters={filters}
-        filterIndex={0}
-        handleFilterSelection={vi.fn()}
-        handleFilterUpdate={handleFilterUpdate}
-        clearFilterUpdate={clearFilterUpdate}
-        resultsCount={3}
-      />,
-    );
-
-    expect(screen.getByText('Clear all')).toBeInTheDocument();
-    expect(screen.getByText('Show 3 Auctions')).toBeInTheDocument();
-
-    fireEvent.click(screen.getByText('Clear all'));
-    expect(clearFilterUpdate).toHaveBeenCalledWith('Departments');
-
-    fireEvent.click(screen.getByText('Show 3 Auctions'));
     expect(handleFilterUpdate).toHaveBeenCalledWith(false);
   });
 });

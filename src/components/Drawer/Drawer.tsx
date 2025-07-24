@@ -5,6 +5,8 @@ import { getCommonProps, noOp } from '../../utils';
 import { ButtonVariants } from '../Button/types';
 import { Icon } from '../Icon';
 import IconButton from '../IconButton/IconButton';
+import Text from '../Text/Text';
+import { TextVariants } from '../Text/types';
 
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -23,6 +25,10 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    * Which side the drawer opens from: left, right, or bottom
    */
   drawerOpenSide?: 'left' | 'right' | 'bottom';
+  /**
+   * Optional label for the bottom content area
+   */
+  bottomContentLabel?: string;
 }
 
 /**
@@ -37,6 +43,7 @@ const Drawer = ({
   onClose = noOp,
   children,
   drawerOpenSide = 'right',
+  bottomContentLabel,
   ...props
 }: DrawerProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Drawer');
@@ -77,7 +84,24 @@ const Drawer = ({
                 <Icon icon="CloseX" color="currentColor" />
               </IconButton>
             </Dialog.Close>
-          ) : null}
+          ) : (
+            <div className={`${baseClassName}__bottom-content`}>
+              <Dialog.Close asChild>
+                <IconButton
+                  onClick={onClose}
+                  className={classnames(`${baseClassName}__close--bottom`)}
+                  aria-label="Close"
+                  data-testid="drawer-close"
+                  variant={ButtonVariants.tertiary}
+                >
+                  <Icon icon="CloseX" color="currentColor" />
+                </IconButton>
+              </Dialog.Close>
+              <Text variant={TextVariants.string1} className={`${baseClassName}__bottom-content--label`}>
+                {bottomContentLabel}
+              </Text>
+            </div>
+          )}
           {children}
         </Dialog.Content>
       </Dialog.Portal>

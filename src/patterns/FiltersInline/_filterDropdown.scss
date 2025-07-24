@@ -93,6 +93,7 @@
 
   &--mobile {
     border-radius: $spacing-xsm $spacing-xsm 0 0;
+    box-shadow: none;
     padding: 0;
     width: 100vw;
   }
