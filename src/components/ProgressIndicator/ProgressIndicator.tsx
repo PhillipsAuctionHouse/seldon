@@ -4,7 +4,7 @@ import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { Icon } from '../Icon';
 import { Text, TextVariants } from '../Text';
-import './_progressIndicator.scss';
+// import './_progressIndicator.scss';
 
 export interface ProgressIndicatorProps extends Progress.ProgressProps, ComponentProps<'div'> {
   /**
