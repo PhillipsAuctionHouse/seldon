@@ -10,7 +10,6 @@ import FilterInput from '../../components/Filter/FilterInput';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import { px } from '../../utils';
 import FilterMenu from '../FilterMenu/FilterMenu';
-import './_filterButton.scss';
 import { FilterButtonDisplay } from './FilterButtonDisplay';
 import { FilterDropdownMenu } from './FilterDropdownMenu';
 import type { FilterButtonIconType, FilterDimension, FilterDropdownProps, FilterType } from './types';

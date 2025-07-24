@@ -1,3 +1,5 @@
+@use '#scss/allPartials' as *;
+
 .#{$px}-filter-dropdown {
   background: $white;
   border-radius: $spacing-xsm;

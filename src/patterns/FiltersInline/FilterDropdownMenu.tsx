@@ -7,7 +7,6 @@ import FilterInput from '../../components/Filter/FilterInput';
 import Text from '../../components/Text/Text';
 import { TextVariants } from '../../components/Text/types';
 import { px } from '../../utils';
-import './_filterDropdown.scss';
 import { FilterDimension } from './types';
 import { getFilterDimensions, handleInputChange as handleInputChangeUtil } from './utils';
 
