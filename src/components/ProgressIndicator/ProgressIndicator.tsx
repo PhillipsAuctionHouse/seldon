@@ -1,5 +1,5 @@
 import * as Progress from '@radix-ui/react-progress';
-import { ComponentProps, forwardRef } from 'react';
+import { ComponentProps, forwardRef, Fragment } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { Icon } from '../Icon';
@@ -30,8 +30,8 @@ export interface ProgressIndicatorProps extends Progress.ProgressProps, Componen
  * This component provides a visual representation of a multi-step process.
  *
  *
- * [Figma Link](https://www.figma.com/design/kSxOhnqIhilZ9hIJd3bPgP/RW-Registration?node-id=2529-23889&m=dev)
- * [Figma Link 2](https://www.figma.com/design/kSxOhnqIhilZ9hIJd3bPgP/RW-Registration?node-id=2996-50543&m=dev)
+ * [Figma Link](https://www.figma.com/design/kSxOhnqIhilZ9hIJd3bPgP/RW-Registration?node-id=2996-50543&m=dev)
+ * [Figma Link 2](https://www.figma.com/design/kSxOhnqIhilZ9hIJd3bPgP/RW-Registration?node-id=2529-23889&m=dev)
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-progressindicator--overview)
  */
@@ -53,16 +53,15 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         <Progress.Root value={getValue(current)} max={steps} aria-label="Progress">
-          <ul role="list" className={`${baseClassName}__list`}>
+          <div className={`${baseClassName}__steps`} aria-label="Progress steps">
             {Array.from({ length: steps }).map((_, index) => {
               const isComplete = current > index + 1;
               const isCurrent = current === index + 1;
               return (
-                <>
-                  <li
-                    key={`step-${index}`}
+                <Fragment key={`Step ${index + 1}`}>
+                  <div
                     className={`${baseClassName}__item`}
-                    role="listitem"
+                    aria-current={isCurrent ? 'step' : undefined}
                     aria-label={
                       isComplete
                         ? `Step ${index + 1} completed`
@@ -70,7 +69,7 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
                           ? `Step ${index + 1} current`
                           : `Step ${index + 1} not started`
                     }
-                    aria-current={isCurrent ? 'step' : undefined}
+                    data-testid="progress-step"
                   >
                     <span
                       className={classnames(`${baseClassName}__circle`, {
@@ -86,15 +85,15 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
                     </span>
                     {props.labels && props.labels[index] && (
                       <span className={`${baseClassName}__label`}>
-                        <Text variant={TextVariants.string1}>{props.labels[index]}</Text>
+                        <Text variant={TextVariants.string2}>{props.labels[index]}</Text>
                       </span>
                     )}
-                  </li>
-                  {index < steps - 1 && <span className={`${baseClassName}__connector`} aria-hidden="true" />}
-                </>
+                  </div>
+                  {index < steps - 1 && <div className={`${baseClassName}__connector`} aria-hidden="true" />}
+                </Fragment>
               );
             })}
-          </ul>
+          </div>
         </Progress.Root>
       </div>
     );

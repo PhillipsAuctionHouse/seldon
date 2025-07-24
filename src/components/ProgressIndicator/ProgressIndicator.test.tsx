@@ -7,7 +7,8 @@ describe('ProgressIndicator', () => {
 
   it('renders the correct number of steps', () => {
     render(<ProgressIndicator steps={5} current={1} />);
-    const steps = screen.getAllByRole('listitem');
+    screen.debug();
+    const steps = screen.getAllByTestId('progress-step');
     expect(steps).toHaveLength(5);
   });
 
@@ -49,13 +50,13 @@ describe('ProgressIndicator', () => {
 
   it('handles zero steps gracefully', () => {
     render(<ProgressIndicator steps={0} current={0} />);
-    const steps = screen.queryAllByRole('listitem');
+    const steps = screen.queryAllByTestId('progress-step');
     expect(steps).toHaveLength(0);
   });
 
   it('handles current step greater than steps gracefully', () => {
     render(<ProgressIndicator steps={3} current={5} />);
-    const steps = screen.getAllByRole('listitem');
+    const steps = screen.getAllByTestId('progress-step');
     expect(steps).toHaveLength(3);
     const lastStep = screen.getByLabelText('Step 3 completed');
     expect(lastStep).toBeInTheDocument();
@@ -63,7 +64,7 @@ describe('ProgressIndicator', () => {
 
   it('handles negative current step gracefully', () => {
     render(<ProgressIndicator steps={3} current={-1} />);
-    const steps = screen.getAllByRole('listitem');
+    const steps = screen.getAllByTestId('progress-step');
     expect(steps).toHaveLength(3);
     const firstStep = screen.getByLabelText('Step 1 not started');
     expect(firstStep).toBeInTheDocument();

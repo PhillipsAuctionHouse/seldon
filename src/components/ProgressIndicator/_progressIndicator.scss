@@ -1,12 +1,11 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-progress-indicator {
-  &__list {
+  &__steps {
     align-items: flex-start;
     display: flex;
     gap: 0;
-    justify-content: center;
-    list-style: none;
+    justify-content: space-between;
     margin: 0;
     padding: 0;
   }
