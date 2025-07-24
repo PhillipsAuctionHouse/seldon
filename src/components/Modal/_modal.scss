@@ -12,6 +12,11 @@
   transform: translate(-50%, -50%);
   z-index: 30;
 
+  &__close--left {
+    left: 0.4rem;
+    right: auto;
+  }
+
   &__overlay {
     background-color: $overlay-black;
     inset: 0;
