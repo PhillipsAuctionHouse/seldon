@@ -1,7 +1,6 @@
 import { Meta } from '@storybook/react';
 import ProgressIndicator, { ProgressIndicatorProps } from './ProgressIndicator';
 
-// More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
   title: 'Components/ProgressIndicator',
   component: ProgressIndicator,
@@ -10,7 +9,6 @@ const meta = {
 export default meta;
 export const Playground = (props: ProgressIndicatorProps) => <ProgressIndicator {...props} />;
 
-// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
   steps: 5,
   current: 3,
