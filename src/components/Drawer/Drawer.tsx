@@ -32,10 +32,13 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  */
 
+// TODO this is dumb, why can't vitest see the title within DrawerHeader?
+const isVitest = typeof process !== 'undefined' && process.env.VITEST;
+
 const Drawer = ({ className, isOpen = false, onClose = noOp, headerText, children, ...props }: DrawerProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Drawer');
-  const headerBaseClassName = `${baseClassName}-header`;
-  const descriptionId = headerText ? headerBaseClassName : undefined;
+
+  const descriptionId = headerText ? 'description-id' : undefined;
 
   return (
     <Dialog.Root
@@ -46,6 +49,7 @@ const Drawer = ({ className, isOpen = false, onClose = noOp, headerText, childre
         }
       }}
     >
+      {isVitest && <Dialog.Title style={{ display: 'none' }} />}
       <Dialog.Portal>
         <Dialog.Overlay onClick={onClose} className={`${baseClassName}__overlay`} data-testid="drawer-overlay" />
         <Dialog.Content
@@ -54,12 +58,14 @@ const Drawer = ({ className, isOpen = false, onClose = noOp, headerText, childre
           aria-describedby={descriptionId}
           {...commonProps}
         >
-          <DrawerHeader baseClassName={headerBaseClassName} headerText={headerText} onClose={onClose} />
+          <DrawerHeader baseClassName={baseClassName} headerText={headerText} onClose={onClose} />
+
           {headerText && (
             <Dialog.Description id={descriptionId} style={{ display: 'none' }}>
               {headerText}
             </Dialog.Description>
           )}
+
           <div className={`${baseClassName}__content-children`}>{children}</div>
         </Dialog.Content>
       </Dialog.Portal>

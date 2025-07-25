@@ -4,13 +4,12 @@ import userEvent from '@testing-library/user-event';
 import { DrawerHeader } from './DrawerHeader';
 import * as Dialog from '@radix-ui/react-dialog';
 
-function renderWithDialog(children: React.ReactNode) {
-  return render(
+const renderWithDialog = (children: React.ReactNode) =>
+  render(
     <Dialog.Root open>
       <Dialog.Portal>{children}</Dialog.Portal>
     </Dialog.Root>,
   );
-}
 
 describe('DrawerHeader', () => {
   it('renders header text', () => {
