@@ -36,34 +36,6 @@
     z-index: 10;
   }
 
-  &-header {
-    align-items: center;
-    display: flex;
-    padding: $margin-sm $margin-xsm;
-    width: 100%;
-
-    &__bookend {
-      display: flex;
-      flex: 1 1 0;
-      justify-content: flex-end;
-    }
-
-    &__hr {
-      border-bottom: 2px solid $light-gray;
-      margin-bottom: $padding-lg;
-      width: 100%;
-    }
-
-    &__title {
-      font-size: 1.25rem;
-      font-variation-settings: 'wght' 600;
-      margin-bottom: 2px; // this just looks better, more of an optical center than a mathematical center
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-  }
-
   &__content-children {
     padding: $padding-sm $padding-md $padding-md $padding-md;
   }

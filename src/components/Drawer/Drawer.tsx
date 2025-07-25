@@ -1,29 +1,9 @@
-import React, { ComponentProps } from 'react';
+import React from 'react';
 import { getCommonProps, noOp } from '../../utils';
 import classnames from 'classnames';
 import * as Dialog from '@radix-ui/react-dialog';
-import IconButton from '../IconButton/IconButton';
-import { ButtonVariants } from '../Button/types';
-import { Icon } from '../Icon';
 
-/* Drawer header helpers */
-
-let headerBaseClassName = '';
-
-// Header container component
-const DrawerHeaderContainer = ({ children, ...props }: ComponentProps<'div'>) => (
-  <div className={headerBaseClassName} {...props}>
-    {children}
-  </div>
-);
-
-// Helps divide space in the header
-const DrawerHeaderBookend = ({ children }: ComponentProps<'div'>) => (
-  <div className={`${headerBaseClassName}__bookend`}>{children}</div>
-);
-
-// Horizontal rule for the drawer header, a drawer horizontal rule if you will
-const DrawerHorizontalRule = () => <div className={`${headerBaseClassName}__hr`} />;
+import { DrawerHeader } from './DrawerHeader';
 
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -39,7 +19,7 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   children?: React.ReactNode;
   /**
-   * A string to be displayed center on top of the drawer, up with the close button.
+   * A string to be displayed center at the top of the drawer, up with the close button.
    * Its presence also triggers the horizontal rule below the header to be rendered.
    */
   headerText?: string;
@@ -54,7 +34,9 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Drawer = ({ className, isOpen = false, onClose = noOp, headerText, children, ...props }: DrawerProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Drawer');
-  headerBaseClassName = `${baseClassName}-header`;
+  const headerBaseClassName = `${baseClassName}-header`;
+  const descriptionId = headerText ? headerBaseClassName : undefined;
+
   return (
     <Dialog.Root
       open={isOpen}
@@ -66,25 +48,18 @@ const Drawer = ({ className, isOpen = false, onClose = noOp, headerText, childre
     >
       <Dialog.Portal>
         <Dialog.Overlay onClick={onClose} className={`${baseClassName}__overlay`} data-testid="drawer-overlay" />
-        <Dialog.Content className={classnames(baseClassName, className)} id={props.id} {...commonProps}>
-          <DrawerHeaderContainer>
-            <DrawerHeaderBookend />
-            <Dialog.Title className={`${baseClassName}-header__title`}>{headerText}</Dialog.Title>
-            <DrawerHeaderBookend>
-              <Dialog.Close asChild>
-                <IconButton
-                  onClick={onClose}
-                  aria-label="Close"
-                  data-testid="drawer-close"
-                  variant={ButtonVariants.tertiary}
-                >
-                  <Icon icon="CloseX" color="currentColor" />
-                </IconButton>
-              </Dialog.Close>
-            </DrawerHeaderBookend>
-          </DrawerHeaderContainer>
-          {headerText && <DrawerHorizontalRule />}
-          <Dialog.Description />
+        <Dialog.Content
+          className={classnames(baseClassName, className)}
+          id={props.id}
+          aria-describedby={descriptionId}
+          {...commonProps}
+        >
+          <DrawerHeader baseClassName={headerBaseClassName} headerText={headerText} onClose={onClose} />
+          {headerText && (
+            <Dialog.Description id={descriptionId} style={{ display: 'none' }}>
+              {headerText}
+            </Dialog.Description>
+          )}
           <div className={`${baseClassName}__content-children`}>{children}</div>
         </Dialog.Content>
       </Dialog.Portal>
