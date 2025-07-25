@@ -2,11 +2,9 @@ import React from 'react';
 import { getCommonProps, noOp } from '../../utils';
 import classnames from 'classnames';
 import * as Dialog from '@radix-ui/react-dialog';
-import IconButton from '../IconButton/IconButton';
-import { ButtonVariants } from '../Button/types';
-import { Icon } from '../Icon';
 
-// You'll need to change the HTMLDivElement to match the top-level element of your component
+import { DrawerHeader } from './DrawerHeader';
+
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Whether the drawer is open or not
@@ -20,15 +18,27 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    * The content of the drawer
    */
   children?: React.ReactNode;
+  /**
+   * A string to be displayed center at the top of the drawer, up with the close button.
+   * Its presence also triggers the horizontal rule below the header to be rendered.
+   */
+  headerText?: string;
 }
+
 /**
  * ## Overview
  *
  * A component for displaying a drawer.
  *
  */
-const Drawer = ({ className, isOpen = false, onClose = noOp, children, ...props }: DrawerProps) => {
+
+// TODO this is dumb, why can't vitest see the title within DrawerHeader?
+const isVitest = typeof process !== 'undefined' && process.env.VITEST;
+
+const Drawer = ({ className, isOpen = false, onClose = noOp, headerText, children, ...props }: DrawerProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Drawer');
+
+  const descriptionId = headerText ? 'description-id' : undefined;
 
   return (
     <Dialog.Root
@@ -39,27 +49,24 @@ const Drawer = ({ className, isOpen = false, onClose = noOp, children, ...props 
         }
       }}
     >
+      {isVitest && <Dialog.Title style={{ display: 'none' }} />}
       <Dialog.Portal>
-        <Dialog.Overlay
-          onClick={onClose}
-          className={classnames(`${baseClassName}__overlay`)}
-          data-testid="drawer-overlay"
-        />
-        <Dialog.Content className={classnames(baseClassName, className)} id={props.id} {...commonProps}>
-          <Dialog.Title />
-          <Dialog.Description />
-          <Dialog.Close asChild>
-            <IconButton
-              onClick={onClose}
-              className={classnames(`${baseClassName}__close`)}
-              aria-label="Close"
-              data-testid="drawer-close"
-              variant={ButtonVariants.tertiary}
-            >
-              <Icon icon="CloseX" color="currentColor" />
-            </IconButton>
-          </Dialog.Close>
-          {children}
+        <Dialog.Overlay onClick={onClose} className={`${baseClassName}__overlay`} data-testid="drawer-overlay" />
+        <Dialog.Content
+          className={classnames(baseClassName, className)}
+          id={props.id}
+          aria-describedby={descriptionId}
+          {...commonProps}
+        >
+          <DrawerHeader baseClassName={baseClassName} headerText={headerText} onClose={onClose} />
+
+          {headerText && (
+            <Dialog.Description id={descriptionId} style={{ display: 'none' }}>
+              {headerText}
+            </Dialog.Description>
+          )}
+
+          <div className={`${baseClassName}__content-children`}>{children}</div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

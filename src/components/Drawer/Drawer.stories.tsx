@@ -34,7 +34,7 @@ export const Playground = (props: DrawerProps) => {
       </Button>
 
       <PlaygroundSplitPanel />
-      <Drawer isOpen={props.isOpen} onClose={onClose}>
+      <Drawer isOpen={props.isOpen} onClose={onClose} headerText={props.headerText}>
         <Subscribe
           id="subscribe-drawer"
           autoFocus
@@ -49,6 +49,7 @@ export const Playground = (props: DrawerProps) => {
 Playground.args = {
   children: 'Hi There',
   isOpen: false,
+  headerText: 'Drawer title',
 };
 
 Playground.argTypes = {};

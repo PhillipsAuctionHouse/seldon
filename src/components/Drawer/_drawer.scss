@@ -7,7 +7,6 @@
   flex-direction: column;
   height: 100dvh;
   max-width: 480px;
-  padding: $padding-xl $padding-md $padding-md;
   position: fixed;
   right: 0;
   top: 0;
@@ -37,15 +36,8 @@
     z-index: 10;
   }
 
-  &__close {
-    align-items: center;
-    border-radius: 100%;
-    color: $pure-black;
-    display: inline-flex;
-    justify-content: center;
-    position: absolute;
-    right: 10px;
-    top: 10px;
+  &__content-children {
+    padding: $padding-sm $padding-md $padding-md $padding-md;
   }
 }
 

@@ -67,4 +67,16 @@ describe('Drawer', () => {
 
     expect(onClose).toHaveBeenCalled();
   });
+
+  test('renders header and hr when headerText is supplied', () => {
+    render(
+      <Drawer isOpen={true} onClose={() => void 0} headerText="My Drawer Header">
+        <div>Test Content</div>
+      </Drawer>,
+    );
+    // Header text should be in the document
+    expect(screen.getByText('My Drawer Header', { selector: 'h2' })).toBeInTheDocument();
+    // The hr should be present (by class)
+    expect(document.querySelector('.seldon-drawer-header__hr')).toBeInTheDocument();
+  });
 });
