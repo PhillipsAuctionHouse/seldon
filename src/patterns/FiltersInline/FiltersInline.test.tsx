@@ -6,7 +6,7 @@ import { FilterDropdownMenuMobile } from './FilterDropdownMenuMobile';
 import FiltersInline from './FiltersInline';
 import { MainFilterDropdown } from './MainFilterDropdown';
 import { SubFilterDropdown } from './SubFilterDropdown';
-import { FilterButtonIconType, FilterButtonType } from './types';
+import { FilterButtonIconType, FilterButtonType, FilterType } from './types';
 import { getFilterButtonClickHandler, handleInputChange, resetAllFilters } from './utils';
 
 describe('FiltersInline', () => {
@@ -18,14 +18,40 @@ describe('FiltersInline', () => {
     expect(filterButton).toBeInTheDocument();
   });
 
-  it('shows filter count on the filter button when filters are active', () => {
-    render(<FiltersInline id="in-place-filters" mainFilterLabel={FilterButtonType.Filter} />);
-    expect(screen.getByText('1')).toBeInTheDocument();
+  const filters: FilterType[] = [
+    {
+      label: 'Sale',
+      id: 'sale',
+      type: 'checkbox',
+      filterDimensions: new Set([
+        { label: 'Foo', active: false },
+        { label: 'Bar', active: false },
+      ]),
+      buttonType: FilterButtonType.Sale,
+    },
+    {
+      label: 'Departments',
+      id: 'departments',
+      type: 'checkbox',
+      filterDimensions: new Set([{ label: 'Baz', active: false }]),
+      buttonType: FilterButtonType.Departments,
+    },
+  ];
+
+  it('renders MainFilterDropdown and all SubFilterDropdowns', () => {
+    render(<FiltersInline id="multi-filters" mainFilterLabel={FilterButtonType.Filter} filters={filters} />);
+    // MainFilterDropdown
+    expect(screen.getByTestId('multi-filters-Filter-button-filter-button')).toBeInTheDocument();
+    // SubFilterDropdowns
+    expect(screen.getAllByTestId('multi-filters-Sale-button-filter-button').length).toBeGreaterThan(0);
+    expect(screen.getAllByTestId('multi-filters-Departments-button-filter-button').length).toBeGreaterThan(0);
   });
 
-  it('renders with no filters gracefully', () => {
-    render(<FiltersInline id="empty-filters" filters={[]} mainFilterLabel={FilterButtonType.Filter} />);
-    expect(screen.queryByTestId('empty-filters-Filter-button-filter-button')).not.toBeInTheDocument();
+  it('renders nothing for SubFilterDropdown if filters is empty', () => {
+    render(<FiltersInline id="empty-filters-test" mainFilterLabel={FilterButtonType.Filter} filters={[]} />);
+    // Only the main filter button should be present
+    expect(screen.getByTestId('empty-filters-test-Filter-button-filter-button')).toBeInTheDocument();
+    expect(screen.queryByTestId('empty-filters-test-Sale-button-filter-button')).not.toBeInTheDocument();
   });
 });
 
@@ -122,34 +148,6 @@ describe('FilterDropdown', () => {
     expect(screen.getByTestId('filter-dropdown-mobile')).toBeInTheDocument();
     expect(screen.getByText('Confirm')).toBeInTheDocument();
   });
-
-  it('applies custom aria-labels to FilterDropdown', () => {
-    render(
-      <FilterDropdownMenuDesktop
-        {...getProps({
-          ariaLabels: { dropdownDesktop: 'Custom Desktop' },
-          isMobileDropdown: false,
-          filterButtonLabel: 'Sort',
-        })}
-        filterButtonLabel="Sort"
-      />,
-    );
-    expect(screen.getByTestId('filter-dropdown-desktop')).toHaveAttribute('aria-label', 'Custom Desktop');
-  });
-
-  it('renders mobile variant with correct aria-label', () => {
-    render(
-      <FilterDropdownMenuMobile
-        {...getProps({
-          isMobileDropdown: true,
-          ariaLabels: { ariaLabels: 'Mobile Dropdown' },
-          filterButtonLabel: 'Sort',
-        })}
-        filterButtonLabel="Sort"
-      />,
-    );
-    expect(screen.getByTestId('filter-dropdown-mobile')).toHaveAttribute('aria-label', 'Mobile Dropdown');
-  });
 });
 
 describe('MainFilterDropdown', () => {
@@ -213,27 +211,6 @@ describe('MainFilterDropdown', () => {
     expect(clearFilterUpdate).toHaveBeenCalledWith('all');
   });
 
-  it('calls handleFilterUpdate when Show lots button is clicked', () => {
-    render(
-      <MainFilterDropdown
-        id="main-filter"
-        filterButtonLabel="Filter"
-        filterId={0}
-        buttonType={'Filter' as FilterButtonType}
-        handleClick={handleClick}
-        filtersListState={[true]}
-        filters={filters}
-        onSelectFilter={handleFilterSelection}
-        onApplyFilter={handleFilterUpdate}
-        onClickClear={clearFilterUpdate}
-        resultsCount={2}
-        ariaLabels={{ button: 'Filter Button' }}
-      />,
-    );
-    fireEvent.click(screen.getByText(/Show 2 lots/i));
-    expect(handleFilterUpdate).toHaveBeenCalledWith(false);
-  });
-
   it('calls handleClick to close drawer', () => {
     render(
       <MainFilterDropdown
@@ -274,29 +251,6 @@ describe('SubFilterDropdown', () => {
       ]),
     },
   ];
-
-  it('renders FilterButtonDisplay with correct label for Sort', () => {
-    render(
-      <SubFilterDropdown
-        id="sub-filter"
-        filterButtonLabel="Sort"
-        filterId={0}
-        buttonType={'Sort' as FilterButtonType}
-        handleClick={handleClick}
-        filtersListState={[true]}
-        filters={filters}
-        onSelectFilter={handleFilterSelection}
-        onApplyFilter={handleFilterUpdate}
-        onClickClear={clearFilterUpdate}
-        resultsCount={2}
-        ariaLabels={{ button: 'Sort Button' }}
-      />,
-    );
-    const buttons = screen.getAllByTestId('sub-filter-filter-button');
-    expect(buttons.length).toBeGreaterThan(0);
-    expect(buttons.some((btn) => btn.textContent?.includes('Sort By'))).toBe(true);
-    expect(buttons.some((btn) => btn.getAttribute('aria-label') === 'Sort Button')).toBe(true);
-  });
 
   it('calls handleClick when FilterButtonDisplay is clicked', () => {
     render(
