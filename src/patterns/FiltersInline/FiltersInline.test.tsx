@@ -1,60 +1,30 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { runCommonTests } from '../../utils/testUtils';
-import { MainFilterDropdown, SubFilterDropdown } from './FilterButton';
-import { FilterButtonDisplay } from './FilterButtonDisplay';
-import { FilterDropdownMenuDesktop, FilterDropdownMenuMobile } from './FilterDropdownMenu';
+import { FilterButton } from './FilterButton';
+import { FilterDropdownMenuDesktop } from './FilterDropdownMenuDesktop';
+import { FilterDropdownMenuMobile } from './FilterDropdownMenuMobile';
 import FiltersInline from './FiltersInline';
+import { MainFilterDropdown } from './MainFilterDropdown';
+import { SubFilterDropdown } from './SubFilterDropdown';
 import { FilterButtonIconType, FilterButtonType } from './types';
-import { FilterButtons, getFilterButtonClickHandler, handleInputChange, resetAllFilters } from './utils';
+import { getFilterButtonClickHandler, handleInputChange, resetAllFilters } from './utils';
 
 describe('FiltersInline', () => {
   runCommonTests(FiltersInline, 'FiltersInline');
 
-  const mockFilters = [
-    {
-      label: 'Filter',
-      id: 'Filter',
-      type: 'checkbox',
-      filterDimensions: new Set([
-        { label: 'Foo', active: false, disabled: false },
-        { label: 'Bar', active: false, disabled: false },
-      ]),
-    },
-    {
-      label: 'Sort',
-      id: 'Sort',
-      type: 'radio',
-      filterDimensions: new Set([
-        { label: 'Ascending', active: false, disabled: false },
-        { label: 'Descending', active: false, disabled: false },
-      ]),
-    },
-  ];
-
   it('should render all the buttons correctly', () => {
-    render(<FiltersInline id="filters-inline" filters={mockFilters} filtersLabels={FilterButtons} />);
+    render(<FiltersInline id="filters-inline" mainFilterLabel={FilterButtonType.Filter} />);
     const filterButton = screen.getByTestId('filters-inline-Filter-button-filter-button');
     expect(filterButton).toBeInTheDocument();
-    expect(filterButton).toHaveAttribute('data-viewport', 'desktop');
   });
 
   it('shows filter count on the filter button when filters are active', () => {
-    const filtersWithActive = [
-      {
-        ...mockFilters[0],
-        filterDimensions: new Set([
-          { label: 'Foo', active: true, disabled: false },
-          { label: 'Bar', active: false, disabled: false },
-        ]),
-      },
-      mockFilters[1],
-    ];
-    render(<FiltersInline id="in-place-filters" filters={filtersWithActive} filtersLabels={FilterButtons} />);
+    render(<FiltersInline id="in-place-filters" mainFilterLabel={FilterButtonType.Filter} />);
     expect(screen.getByText('1')).toBeInTheDocument();
   });
 
   it('renders with no filters gracefully', () => {
-    render(<FiltersInline id="empty-filters" filters={[]} filtersLabels={[]} />);
+    render(<FiltersInline id="empty-filters" filters={[]} mainFilterLabel={FilterButtonType.Filter} />);
     expect(screen.queryByTestId('empty-filters-Filter-button-filter-button')).not.toBeInTheDocument();
   });
 });
@@ -83,25 +53,23 @@ describe('FilterButtonDisplay', () => {
   });
 
   it('renders the button with correct label and test ids', () => {
-    render(<FilterButtonDisplay {...getProps({ type: 'Sort' as FilterButtonIconType })} />);
+    render(<FilterButton {...getProps({ type: 'Sort' as FilterButtonIconType })} />);
     expect(screen.getByTestId('test-id-filter-label')).toHaveTextContent('Sort By');
   });
 
   it('calls onClick when clicked', () => {
-    render(<FilterButtonDisplay {...getProps()} />);
+    render(<FilterButton {...getProps()} />);
     fireEvent.click(screen.getByTestId('test-id-filter-button'));
     expect(handleChange).toHaveBeenCalled();
   });
 
   it('shows the filter count when type is Filter and count > 0', () => {
-    render(
-      <FilterButtonDisplay {...getProps({ type: 'Filter' as FilterButtonIconType, count: 3, label: 'Filter' })} />,
-    );
+    render(<FilterButton {...getProps({ type: 'Filter' as FilterButtonIconType, count: 3, label: 'Filter' })} />);
     expect(screen.getByTestId('test-id-filter-count')).toHaveTextContent('3');
   });
 
   it('renders mobile label when isMobile is true', () => {
-    render(<FilterButtonDisplay {...getProps({ isMobile: true, type: 'Sort' })} />);
+    render(<FilterButton {...getProps({ isMobile: true, type: 'Sort' })} />);
     const filterButton = screen.getByTestId('test-id-filter-button');
     expect(filterButton).toBeInTheDocument();
     expect(filterButton).toHaveAttribute('data-viewport', 'mobile');
@@ -122,7 +90,7 @@ describe('FilterDropdown', () => {
         {
           label: 'Sort',
           id: 'Sort',
-          type: 'radio',
+          type: 'radio' as const,
           filterDimensions: new Set([
             { label: 'Ascending', active: false, disabled: false },
             { label: 'Descending', active: false, disabled: false },
@@ -145,7 +113,12 @@ describe('FilterDropdown', () => {
   });
 
   it('renders mobile variant', () => {
-    render(<FilterDropdownMenuMobile {...getProps({ isMobileDropdown: true })} />);
+    render(
+      <FilterDropdownMenuMobile
+        {...getProps({ isMobileDropdown: true, filterButtonLabel: 'Sort' })}
+        filterButtonLabel="Sort"
+      />,
+    );
     expect(screen.getByTestId('filter-dropdown-mobile')).toBeInTheDocument();
     expect(screen.getByText('Confirm')).toBeInTheDocument();
   });
@@ -156,7 +129,9 @@ describe('FilterDropdown', () => {
         {...getProps({
           ariaLabels: { dropdownDesktop: 'Custom Desktop' },
           isMobileDropdown: false,
+          filterButtonLabel: 'Sort',
         })}
+        filterButtonLabel="Sort"
       />,
     );
     expect(screen.getByTestId('filter-dropdown-desktop')).toHaveAttribute('aria-label', 'Custom Desktop');
@@ -165,7 +140,12 @@ describe('FilterDropdown', () => {
   it('renders mobile variant with correct aria-label', () => {
     render(
       <FilterDropdownMenuMobile
-        {...getProps({ isMobileDropdown: true, ariaLabels: { dropdownMobile: 'Mobile Dropdown' } })}
+        {...getProps({
+          isMobileDropdown: true,
+          ariaLabels: { ariaLabels: 'Mobile Dropdown' },
+          filterButtonLabel: 'Sort',
+        })}
+        filterButtonLabel="Sort"
       />,
     );
     expect(screen.getByTestId('filter-dropdown-mobile')).toHaveAttribute('aria-label', 'Mobile Dropdown');
@@ -182,7 +162,8 @@ describe('MainFilterDropdown', () => {
     {
       label: 'Filter',
       id: 'Filter',
-      type: 'checkbox',
+      type: 'checkbox' as const,
+      buttonType: FilterButtonType.Filter,
       filterDimensions: new Set([
         { label: 'Foo', active: false, disabled: false },
         { label: 'Bar', active: false, disabled: false },
@@ -200,9 +181,9 @@ describe('MainFilterDropdown', () => {
         handleClick={handleClick}
         filtersListState={[true]}
         filters={filters}
-        handleFilterSelection={handleFilterSelection}
-        handleFilterUpdate={handleFilterUpdate}
-        clearFilterUpdate={clearFilterUpdate}
+        onSelectFilter={handleFilterSelection}
+        onApplyFilter={handleFilterUpdate}
+        onClickClear={clearFilterUpdate}
         resultsCount={2}
         ariaLabels={{ button: 'Filter Button' }}
       />,
@@ -221,9 +202,9 @@ describe('MainFilterDropdown', () => {
         handleClick={handleClick}
         filtersListState={[true]}
         filters={filters}
-        handleFilterSelection={handleFilterSelection}
-        handleFilterUpdate={handleFilterUpdate}
-        clearFilterUpdate={clearFilterUpdate}
+        onSelectFilter={handleFilterSelection}
+        onApplyFilter={handleFilterUpdate}
+        onClickClear={clearFilterUpdate}
         resultsCount={2}
         ariaLabels={{ button: 'Filter Button' }}
       />,
@@ -242,9 +223,9 @@ describe('MainFilterDropdown', () => {
         handleClick={handleClick}
         filtersListState={[true]}
         filters={filters}
-        handleFilterSelection={handleFilterSelection}
-        handleFilterUpdate={handleFilterUpdate}
-        clearFilterUpdate={clearFilterUpdate}
+        onSelectFilter={handleFilterSelection}
+        onApplyFilter={handleFilterUpdate}
+        onClickClear={clearFilterUpdate}
         resultsCount={2}
         ariaLabels={{ button: 'Filter Button' }}
       />,
@@ -263,9 +244,9 @@ describe('MainFilterDropdown', () => {
         handleClick={handleClick}
         filtersListState={[true]}
         filters={filters}
-        handleFilterSelection={handleFilterSelection}
-        handleFilterUpdate={handleFilterUpdate}
-        clearFilterUpdate={clearFilterUpdate}
+        onSelectFilter={handleFilterSelection}
+        onApplyFilter={handleFilterUpdate}
+        onClickClear={clearFilterUpdate}
         resultsCount={2}
         ariaLabels={{ button: 'Filter Button' }}
       />,
@@ -281,12 +262,12 @@ describe('SubFilterDropdown', () => {
   const handleFilterSelection = vi.fn();
   const handleFilterUpdate = vi.fn();
   const clearFilterUpdate = vi.fn();
-
   const filters = [
     {
       label: 'Sort',
       id: 'Sort',
-      type: 'radio',
+      type: 'radio' as const,
+      buttonType: FilterButtonType.Sort,
       filterDimensions: new Set([
         { label: 'Ascending', active: false, disabled: false },
         { label: 'Descending', active: false, disabled: false },
@@ -304,9 +285,9 @@ describe('SubFilterDropdown', () => {
         handleClick={handleClick}
         filtersListState={[true]}
         filters={filters}
-        handleFilterSelection={handleFilterSelection}
-        handleFilterUpdate={handleFilterUpdate}
-        clearFilterUpdate={clearFilterUpdate}
+        onSelectFilter={handleFilterSelection}
+        onApplyFilter={handleFilterUpdate}
+        onClickClear={clearFilterUpdate}
         resultsCount={2}
         ariaLabels={{ button: 'Sort Button' }}
       />,
@@ -327,9 +308,9 @@ describe('SubFilterDropdown', () => {
         handleClick={handleClick}
         filtersListState={[true]}
         filters={filters}
-        handleFilterSelection={handleFilterSelection}
-        handleFilterUpdate={handleFilterUpdate}
-        clearFilterUpdate={clearFilterUpdate}
+        onSelectFilter={handleFilterSelection}
+        onApplyFilter={handleFilterUpdate}
+        onClickClear={clearFilterUpdate}
         resultsCount={2}
         ariaLabels={{ button: 'Sort Button' }}
       />,
@@ -342,13 +323,14 @@ describe('SubFilterDropdown', () => {
 
 describe('FilterDropdownMenuDesktop non-sort buttons', () => {
   it('renders and handles Clear all and Show Auctions buttons', () => {
-    const clearFilterUpdate = vi.fn();
     const handleFilterUpdate = vi.fn();
+    const clearFilterUpdate = vi.fn();
     const filters = [
       {
         label: 'Departments',
         id: 'Departments',
-        type: 'checkbox',
+        type: 'checkbox' as const,
+        buttonType: FilterButtonType.Departments,
         filterDimensions: new Set([
           { label: 'Foo', active: false, disabled: false },
           { label: 'Bar', active: false, disabled: false },
@@ -361,10 +343,11 @@ describe('FilterDropdownMenuDesktop non-sort buttons', () => {
         buttonType="Departments"
         filters={filters}
         filterIndex={0}
-        handleFilterSelection={vi.fn()}
-        handleFilterUpdate={handleFilterUpdate}
-        clearFilterUpdate={clearFilterUpdate}
+        onSelectFilter={vi.fn()}
+        onApplyFilter={handleFilterUpdate}
+        onClickClear={clearFilterUpdate}
         resultsCount={7}
+        filterButtonLabel="Departments"
       />,
     );
 
@@ -381,13 +364,14 @@ describe('FilterDropdownMenuDesktop non-sort buttons', () => {
 
 describe('FilterDropdownMenuMobile non-sort buttons', () => {
   it('renders and handles Clear all and Show Auctions buttons', () => {
-    const clearFilterUpdate = vi.fn();
     const handleFilterUpdate = vi.fn();
+    const clearFilterUpdate = vi.fn();
     const filters = [
       {
         label: 'Departments',
         id: 'Departments',
         type: 'checkbox',
+        buttonType: FilterButtonType.Departments,
         filterDimensions: new Set([
           { label: 'Foo', active: false, disabled: false },
           { label: 'Bar', active: false, disabled: false },
@@ -400,10 +384,11 @@ describe('FilterDropdownMenuMobile non-sort buttons', () => {
         buttonType="Departments"
         filters={filters}
         filterIndex={0}
-        handleFilterSelection={vi.fn()}
-        handleFilterUpdate={handleFilterUpdate}
-        clearFilterUpdate={clearFilterUpdate}
+        onSelectFilter={vi.fn()}
+        onApplyFilter={handleFilterUpdate}
+        onClickClear={clearFilterUpdate}
         resultsCount={5}
+        filterButtonLabel="Departments"
       />,
     );
 

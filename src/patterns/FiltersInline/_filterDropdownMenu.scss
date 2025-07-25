@@ -1,6 +1,6 @@
 @use '#scss/allPartials' as *;
 
-.#{$px}-filter-dropdown {
+.#{$px}-filter-dropdown-menu {
   background: $white;
   border-radius: $spacing-xsm;
   box-shadow: 0 4px 6px $medium-gray;
@@ -119,10 +119,8 @@
     align-self: center;
     margin-left: auto;
   }
+}
 
-  input[type='checkbox']:focus,
-  input[type='radio']:focus {
-    outline: 2px solid $focus-blue;
-    outline-offset: 2px;
-  }
+.#{$px}-filter-drawer-mobile {
+  padding: 0;
 }

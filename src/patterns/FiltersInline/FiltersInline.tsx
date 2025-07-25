@@ -1,7 +1,8 @@
 import classnames from 'classnames';
 import React from 'react';
 import { getCommonProps } from '../../utils';
-import { MainFilterDropdown, SubFilterDropdown } from './FilterButton';
+import { MainFilterDropdown } from './MainFilterDropdown';
+import { SubFilterDropdown } from './SubFilterDropdown';
 import { FilterButtonType, FiltersInlineProps } from './types';
 
 /**
@@ -20,12 +21,12 @@ const FiltersInline = React.forwardRef<HTMLDivElement, FiltersInlineProps>(
       filtersListState,
       setFiltersLabelListState,
       filters,
-      handleFilterSelection,
-      handleFilterUpdate,
-      clearFilterUpdate,
+      onSelectFilter,
+      onApplyFilter,
+      onClickClear,
       resultsCount,
-      filtersLabels,
-      ariaLabels,
+      mainFilterLabel,
+      dropdownMenuTranslation,
       ...props
     },
     ref,
@@ -34,41 +35,37 @@ const FiltersInline = React.forwardRef<HTMLDivElement, FiltersInlineProps>(
 
     return (
       <div ref={ref} className={classnames(baseClassName, className)} {...commonProps} id={id}>
-        {filtersLabels?.map((label, index) =>
-          index === 0 ? (
-            <MainFilterDropdown
-              key={`${id}-${label}-button`}
-              id={`${id}-${label}-button`}
-              filterButtonLabel={label}
-              filterId={index}
-              buttonType={label as FilterButtonType}
-              handleClick={setFiltersLabelListState}
-              filtersListState={filtersListState}
-              filters={filters}
-              handleFilterSelection={handleFilterSelection}
-              handleFilterUpdate={handleFilterUpdate}
-              clearFilterUpdate={clearFilterUpdate}
-              resultsCount={resultsCount}
-              ariaLabels={ariaLabels}
-            />
-          ) : (
-            <SubFilterDropdown
-              key={`${id}-${label}-button`}
-              id={`${id}-${label}-button`}
-              filterButtonLabel={label}
-              buttonType={label as FilterButtonType}
-              handleClick={setFiltersLabelListState}
-              filtersListState={filtersListState}
-              filterId={index}
-              filters={filters}
-              handleFilterSelection={handleFilterSelection}
-              handleFilterUpdate={handleFilterUpdate}
-              clearFilterUpdate={clearFilterUpdate}
-              resultsCount={resultsCount}
-              ariaLabels={ariaLabels}
-            />
-          ),
-        )}
+        <MainFilterDropdown
+          key={`${id}-${mainFilterLabel}-button`}
+          id={`${id}-${mainFilterLabel}-button`}
+          filterButtonLabel={mainFilterLabel}
+          handleClick={setFiltersLabelListState}
+          filtersListState={filtersListState}
+          filters={filters}
+          onSelectFilter={onSelectFilter}
+          onApplyFilter={onApplyFilter}
+          onClickClear={onClickClear}
+          resultsCount={resultsCount}
+          dropdownMenuTranslation={dropdownMenuTranslation}
+        />
+        {filters?.map((filter, index) => (
+          <SubFilterDropdown
+            key={`${id}-${filter.label}-button`}
+            id={`${id}-${filter.label}-button`}
+            filterButtonLabel={filter.label}
+            buttonType={filter.buttonType as unknown as FilterButtonType}
+            handleClick={setFiltersLabelListState}
+            filtersListState={filtersListState}
+            filterId={index + 1}
+            filters={filters}
+            onSelectFilter={onSelectFilter}
+            onApplyFilter={onApplyFilter}
+            onClickClear={onClickClear}
+            resultsCount={resultsCount}
+            filterButtonLabelTranslated={filter.filterButtonLabelTranslated}
+            dropdownMenuTranslation={dropdownMenuTranslation}
+          />
+        ))}
       </div>
     );
   },

@@ -174,3 +174,13 @@ export function resetAllFilters(
     handleClick(filtersListState.map(() => false));
   }
 }
+
+export function getFilterButtonLabel(
+  filterButtonLabel: string,
+  filterCount: number | null,
+  filterButtonLabelTranslated: string | null,
+): string {
+  return filterButtonLabelTranslated
+    ? filterButtonLabelTranslated
+    : `${filterButtonLabel}` + (filterCount && filterCount > 0 ? ` (${filterCount})` : '');
+}

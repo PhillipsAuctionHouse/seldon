@@ -1,10 +1,9 @@
 import { Meta } from '@storybook/react';
 import { useState } from 'react';
 import { SaleCard } from '../SaleCard';
-import type { FilterDropdownMenuProps } from './FilterDropdownMenu';
 import FiltersInline from './FiltersInline';
-import { FilterType } from './types';
-import { FilterButtons, FiltersInlineFilters, SalesMockData } from './utils';
+import { FilterButtonType, FilterDropdownMenuProps, FilterType } from './types';
+import { FiltersInlineFilters, SalesMockData } from './utils';
 
 /**
  * Storybook: https://storybook.js.org/docs/react/writing-stories/introduction
@@ -26,34 +25,39 @@ const FILTER_KEYS = {
 
 const filters: FilterType[] = [
   {
-    label: 'Sort',
+    label: 'Sort By',
     id: FILTER_KEYS.sort,
     type: 'radio',
     filterDimensions: new Set(FiltersInlineFilters.Sort),
+    buttonType: FilterButtonType.Sort,
   },
   {
     label: 'Sale',
     id: FILTER_KEYS.sale,
     type: 'checkbox',
     filterDimensions: new Set(FiltersInlineFilters.Sale),
+    buttonType: FilterButtonType.Sale,
   },
   {
     label: 'Departments',
     id: FILTER_KEYS.departments,
     type: 'checkbox',
     filterDimensions: new Set(FiltersInlineFilters.Departments),
+    buttonType: FilterButtonType.Departments,
   },
   {
     label: 'Month',
     id: FILTER_KEYS.month,
     type: 'checkbox',
     filterDimensions: new Set(FiltersInlineFilters.Month),
+    buttonType: FilterButtonType.Month,
   },
   {
     label: 'Location',
     id: FILTER_KEYS.location,
     type: 'checkbox',
     filterDimensions: new Set(FiltersInlineFilters.Location),
+    buttonType: FilterButtonType.Location,
   },
 ];
 
@@ -205,12 +209,12 @@ export const Playground = (props: FilterDropdownMenuProps) => {
         id="filters-inline-story"
         filtersListState={filtersLabelListState}
         setFiltersLabelListState={setFiltersLabelListState}
-        handleFilterSelection={handleFilterSelection}
+        onSelectFilter={handleFilterSelection}
         filters={filters}
-        handleFilterUpdate={handleFilterUpdate}
-        clearFilterUpdate={clearFilterUpdate}
+        onApplyFilter={handleFilterUpdate}
+        onClickClear={clearFilterUpdate}
         resultsCount={resultsCount}
-        filtersLabels={FilterButtons}
+        mainFilterLabel={FilterButtonType.Filter}
       />
       <div
         style={{
