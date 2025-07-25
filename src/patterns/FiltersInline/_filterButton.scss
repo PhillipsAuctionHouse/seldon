@@ -1,0 +1,26 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-filter-button {
+  border: 1px solid $light-gray;
+  gap: 4px;
+  padding: $spacing-xsm $spacing-sm;
+
+  &--selected {
+    border: 1px solid $pure-black;
+  }
+
+  &--count {
+    background: $pure-black;
+    border: 2px solid $white;
+    border-radius: 50%;
+    color: $white;
+    display: inline-block;
+    font-size: var(--label-size3);
+    height: 1.5rem;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: -15px;
+    width: 1.5rem;
+  }
+}

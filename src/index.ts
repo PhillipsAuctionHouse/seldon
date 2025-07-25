@@ -95,6 +95,7 @@ export * from './components/PinchZoom';
 export * from './components/SeldonImage';
 export * from './components/Tabs';
 export * from './patterns/DetailList';
+export * from './patterns/FiltersInline';
 export * from './patterns/SaleCard';
 export * from './patterns/SaleHeaderBanner';
 export * from './patterns/ViewingDetails';

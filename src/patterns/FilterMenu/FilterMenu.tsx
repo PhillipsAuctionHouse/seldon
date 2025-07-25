@@ -21,7 +21,7 @@ export interface FilterMenuProps<ElementType = HTMLFormElement> extends React.HT
  *
  * [Figma Link](https://www.figma.com/design/OvBXAq48blO1r4qYbeBPjW/RW---Sale-Page-(PLP)?node-id=892-71019&node-type=frame&t=AsBDn4UgUEjNUnf7-0)
  *
- * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-filtercontrol--overview)
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-filtermenu--overview)
  */
 const FilterMenu = forwardRef<HTMLFormElement, FilterMenuProps>(
   ({ className, children, element: Element = 'form', ...props }, ref) => {
@@ -50,6 +50,6 @@ const FilterMenu = forwardRef<HTMLFormElement, FilterMenuProps>(
   },
 );
 
-FilterMenu.displayName = 'FilterControl';
+FilterMenu.displayName = 'FilterMenu';
 
 export default FilterMenu;
