@@ -52,6 +52,7 @@
 @use 'components/Toast/toast';
 @use 'components/ExitGateCard/exitGateCard';
 @use 'components/ComposedModal/composedModal';
+@use 'components/DescriptiveRadioButton/descriptiveRadioButton';
 
 // Patterns
 @use 'patterns/HeroBanner/heroBanner';
@@ -78,3 +79,4 @@
 @use 'components/Divider/divider';
 @use 'components/TextArea/textArea';
 @use 'components/AddToCalendar/addToCalendar';
+@use 'components/DescriptiveRadioButtonGroup/descriptiveRadioButtonGroup';

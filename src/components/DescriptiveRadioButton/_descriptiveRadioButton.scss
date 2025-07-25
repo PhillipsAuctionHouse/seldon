@@ -1,0 +1,59 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-descriptive-radio-button {
+  &__container {
+    align-items: flex-start;
+    background: $white;
+    border: 1px solid $light-gray;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    padding: $spacing-sm;
+
+    &--selected {
+      border: 1.5px solid $pure-black;
+    }
+  }
+
+  &__input {
+    accent-color: $light-gray;
+    cursor: pointer;
+    height: 16px;
+    margin-right: $spacing-sm;
+    margin-top: 2px;
+    width: 16px;
+
+    @media (min-width: $breakpoint-md) {
+      margin-top: $spacing-micro;
+    }
+  }
+
+  &__input:checked {
+    accent-color: $pure-black;
+  }
+
+  &__label-content {
+    align-items: flex-start;
+    cursor: pointer;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  &__label-text {
+    font-variation-settings: 'wght' 600;
+
+    // margin-bottom: 12px;
+  }
+
+  &__description {
+    // color: #666;
+    display: block;
+
+    // font-size: 0.95rem;
+
+    // line-height: 1.4;
+    // margin-top: 0.25rem;
+  }
+}

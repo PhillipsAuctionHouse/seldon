@@ -1,0 +1,42 @@
+import { Meta } from '@storybook/react';
+import DescriptiveRadioButtonGroup, { DescriptiveRadioButtonGroupProps } from './DescriptiveRadioButtonGroup';
+import { useState } from 'react';
+
+const meta = {
+  title: 'Components/DescriptiveRadioButtonGroup',
+  component: DescriptiveRadioButtonGroup,
+} satisfies Meta<typeof DescriptiveRadioButtonGroup>;
+
+export default meta;
+
+export const Playground = (props: DescriptiveRadioButtonGroupProps) => {
+  const [selected, setSelected] = useState(props.value ?? '');
+  return (
+    <DescriptiveRadioButtonGroup
+      {...props}
+      value={selected}
+      onChange={(event) => setSelected((event.target as HTMLInputElement).value)}
+    />
+  );
+};
+
+Playground.args = {
+  legend: 'Choose an option',
+  name: 'choices',
+  value: '', // No default selected
+  options: [
+    {
+      value: 'a',
+      label: 'Bidding for yourself',
+      description:
+        'This option should be selected by individuals who are bidding on works for their personal collection.',
+    },
+    {
+      value: 'b',
+      label: 'Bidding on behalf of a company',
+      description: 'This option if bidding for a company, institution, or legal entity for business or investment.',
+    },
+  ],
+};
+
+Playground.argTypes = {};
