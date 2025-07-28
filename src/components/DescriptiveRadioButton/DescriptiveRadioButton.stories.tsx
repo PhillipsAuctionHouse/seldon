@@ -24,8 +24,6 @@ export const Playground = () => {
   );
 };
 
-Playground.args = {
-  children: 'Hi There',
-};
+Playground.args = {};
 
 Playground.argTypes = {};
