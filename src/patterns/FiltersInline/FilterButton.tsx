@@ -22,7 +22,7 @@ export type FilterButton = {
   isSelected: boolean;
   /** Icon type to display (defaults to ChevronDown) */
   type: FilterButtonIconType;
-  /** Optional count badge to show next to the button */
+  /** Count badge to show next to the button */
   count: number;
   /** Optional unique identifier for the button (used for test IDs) */
   id?: string;
