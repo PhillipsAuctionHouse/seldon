@@ -65,4 +65,4 @@ const DrawerHeaderBase = ({ baseClassName, headerText, onClose, ...props }: Draw
   );
 };
 
-export const DrawerHeader = withDisplayName<never, DrawerHeaderProps>('DrawerHeader', DrawerHeaderBase);
+export const DrawerHeader = withDisplayName<React.ReactNode, DrawerHeaderProps>('DrawerHeader', DrawerHeaderBase);
