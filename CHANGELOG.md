@@ -1,3 +1,10 @@
+# [1.169.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.168.0...v1.169.0) (2025-07-28)
+
+
+### Features
+
+* **InPlaceFilters:** L3-7078 Calendar + Drawer(BottomSheet) ([#660](https://github.com/PhillipsAuctionHouse/seldon/issues/660)) ([09c736b](https://github.com/PhillipsAuctionHouse/seldon/commit/09c736b9d96ba4f0fa2dcd7a02e6c8b5b9edc73d))
+
 # [1.168.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.167.0...v1.168.0) (2025-07-24)
 
 
