@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
-import { DrawerHeader } from './DrawerHeader';
+import DrawerHeader from './DrawerHeader';
 import * as Dialog from '@radix-ui/react-dialog';
 
 const renderWithDialog = (children: React.ReactNode) =>

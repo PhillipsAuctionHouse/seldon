@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import * as Dialog from '@radix-ui/react-dialog';
 
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import { DrawerHeader } from './DrawerHeader';
+import DrawerHeader from './DrawerHeader';
 
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

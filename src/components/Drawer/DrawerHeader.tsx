@@ -1,4 +1,4 @@
-import { ComponentProps } from 'react';
+import { ComponentProps, forwardRef } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
@@ -28,34 +28,36 @@ const DrawerHeaderHorizontalRule = ({ baseClassName, children, ...rest }: Drawer
   <div className={`${baseClassName}__hr`} {...rest} />
 );
 
-const DrawerHeaderBase = ({ baseClassName, headerText, onClose, ...props }: DrawerHeaderProps) => {
-  const { className, ...commonProps } = getCommonProps(props, `${baseClassName.replace(px, '')}-header`);
-  return (
-    <>
-      <DrawerHeaderContainer baseClassName={className} {...commonProps}>
-        <DrawerHeaderBookend baseClassName={className} />
-        <p className={`${className}__title`}>{headerText}</p>
-        <DrawerHeaderBookend baseClassName={className}>
-          <Dialog.Close asChild>
-            <IconButton
-              onClick={onClose}
-              aria-label="Close"
-              data-testid="drawer-close"
-              variant={ButtonVariants.tertiary}
-            >
-              <Icon icon="CloseX" color="currentColor" />
-            </IconButton>
-          </Dialog.Close>
-        </DrawerHeaderBookend>
-      </DrawerHeaderContainer>
-      {headerText && <DrawerHeaderHorizontalRule baseClassName={className} />}
-    </>
-  );
-};
+const DrawerHeader = forwardRef<HTMLDivElement, DrawerHeaderProps>(
+  ({ baseClassName, headerText, onClose, ...props }: DrawerHeaderProps, _ref?: React.ForwardedRef<HTMLDivElement>) => {
+    const { className, ...commonProps } = getCommonProps(props, `${baseClassName.replace(px, '')}-header`);
+    return (
+      <>
+        <DrawerHeaderContainer baseClassName={className} {...commonProps}>
+          <DrawerHeaderBookend baseClassName={className} />
+          <p className={`${className}__title`}>{headerText}</p>
+          <DrawerHeaderBookend baseClassName={className}>
+            <Dialog.Close asChild>
+              <IconButton
+                onClick={onClose}
+                aria-label="Close"
+                data-testid="drawer-close"
+                variant={ButtonVariants.tertiary}
+              >
+                <Icon icon="CloseX" color="currentColor" />
+              </IconButton>
+            </Dialog.Close>
+          </DrawerHeaderBookend>
+        </DrawerHeaderContainer>
+        {headerText && <DrawerHeaderHorizontalRule baseClassName={className} />}
+      </>
+    );
+  },
+);
 
 DrawerHeaderContainer.displayName = 'DrawerHeaderContainer';
 DrawerHeaderBookend.displayName = 'DrawerHeaderBookend';
 DrawerHeaderHorizontalRule.displayName = 'DrawerHeaderHorizontalRule';
-DrawerHeaderBase.displayName = 'DrawerHeader';
+DrawerHeader.displayName = 'DrawerHeader';
 
-export const DrawerHeader = DrawerHeaderBase;
+export default DrawerHeader;
