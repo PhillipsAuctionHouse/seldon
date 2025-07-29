@@ -28,7 +28,7 @@ export interface SaleCardProps extends ComponentProps<'div'> {
   /** * The text to be displayed for the modal link. */
   modalButtonText?: string;
   /** * The callback function to be executed when the modal link is clicked. */
-  modalButtonOnClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  modalButtonOnClick?: (event: React.MouseEvent<HTMLElement>) => void;
   /** * The variant of the SaleCard component.
    * - 'default': The default style of the SaleCard component.
    * - 'relatedSaleTile': A variant with a smaller image size and horizontal layout on mobile devices.
