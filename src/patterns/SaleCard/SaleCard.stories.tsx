@@ -1,11 +1,12 @@
 import { Meta } from '@storybook/react';
-import SaleCard, { SaleCardProps } from './SaleCard';
-import { getScssVar } from '../../utils/scssUtils';
-import { SaleCardVariants } from './types';
-import { SaleCardActions } from './SaleCardActions';
 import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';
+import { Link } from '../../components/Link';
 import { px } from '../../utils';
+import { getScssVar } from '../../utils/scssUtils';
+import SaleCard, { SaleCardProps } from './SaleCard';
+import { SaleCardActions } from './SaleCardActions';
+import { SaleCardVariants } from './types';
 
 const meta = {
   title: 'Patterns/SaleCard',
@@ -234,4 +235,29 @@ export const SaleCardNoCTA = () => (
     modalButtonText="Session and viewing details"
     modalButtonOnClick={() => console.log('Modal button clicked')}
   />
+);
+
+export const SaleCardWithLink = () => (
+  <Link href="/?path=/docs/">
+    <SaleCard
+      {...defaultProps}
+      badgeText="Happening Now"
+      modalButtonText="Session and viewing details"
+      modalButtonOnClick={(event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        console.log('Modal button clicked');
+      }}
+    >
+      <SaleCardActions>
+        <Button
+          onClick={() => console.log('Primary button clicked')}
+          variant={ButtonVariants.primary}
+          style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
+        >
+          Home
+        </Button>
+      </SaleCardActions>
+    </SaleCard>
+  </Link>
 );
