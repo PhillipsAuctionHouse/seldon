@@ -1,7 +1,6 @@
 import { Meta } from '@storybook/react';
 import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';
-import { Link } from '../../components/Link';
 import { px } from '../../utils';
 import { getScssVar } from '../../utils/scssUtils';
 import SaleCard, { SaleCardProps } from './SaleCard';
@@ -238,7 +237,7 @@ export const SaleCardNoCTA = () => (
 );
 
 export const SaleCardWithLink = () => (
-  <Link href="/?path=/docs/">
+  <a href="/?path=/docs/">
     <SaleCard
       {...defaultProps}
       badgeText="Happening Now"
@@ -259,5 +258,5 @@ export const SaleCardWithLink = () => (
         </Button>
       </SaleCardActions>
     </SaleCard>
-  </Link>
+  </a>
 );
