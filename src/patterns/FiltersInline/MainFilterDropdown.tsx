@@ -63,7 +63,7 @@ export const MainFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDrop
                     id={value.label}
                     key={value.label}
                     labelText={value.label}
-                    onChange={(e) => onSelectFilter?.(e, filter.buttonType)}
+                    onChange={(e) => onSelectFilter?.(e, filter.label)}
                     type={filter.type as 'checkbox' | 'radio'}
                     disabled={value?.disabled}
                     name={value.label}
