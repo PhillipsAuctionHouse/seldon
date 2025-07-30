@@ -72,7 +72,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
             <VisuallyHidden asChild>
               <Dialog.Description>{ariaTitle}</Dialog.Description>
             </VisuallyHidden>
-            <DrawerHeader baseClassName={baseClassName} headerText={ariaTitle} onClose={onClose} />
+            <DrawerHeader baseClassName={baseClassName} headerText={headerText} onClose={onClose} />
             <div className={`${baseClassName}__content-children`}>{children}</div>
           </Dialog.Content>
         </Dialog.Portal>

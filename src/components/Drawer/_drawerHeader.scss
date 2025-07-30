@@ -1,4 +1,4 @@
-@import '#scss/_vars';
+@use '#scss/allPartials' as *;
 
 .#{$px}-drawer-header {
   align-items: center;
@@ -19,10 +19,15 @@
   }
 
   &__title {
-    font-size: 1.25rem;
+    @include DistinctDisplay;
+
+    color: $primary-black;
+    font-size: $heading-size4;
     font-variation-settings: 'wght' 600;
-    margin-bottom: 2px; // this just looks better, more of an optical center than a mathematical center
+    line-height: $body-line-height-size1;
+    margin-bottom: 2px;
     overflow: hidden;
+    text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
   }

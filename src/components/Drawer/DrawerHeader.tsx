@@ -35,7 +35,7 @@ const DrawerHeader = forwardRef<HTMLDivElement, DrawerHeaderProps>(
       <>
         <DrawerHeaderContainer baseClassName={className} {...commonProps}>
           <DrawerHeaderBookend baseClassName={className} />
-          <p className={`${className}__title`}>{headerText}</p>
+          <h3 className={`${className}__title`}>{headerText}</h3>
           <DrawerHeaderBookend baseClassName={className}>
             <Dialog.Close asChild>
               <IconButton

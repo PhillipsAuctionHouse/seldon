@@ -37,8 +37,8 @@
   }
 
   &__content-children {
-    padding: $padding-sm $padding-md $padding-md $padding-md;
-    width: 100%;
+    padding: 1rem; // no token for what design wants
+    padding-top: $snowflake-menu-padding;
   }
 }
 
