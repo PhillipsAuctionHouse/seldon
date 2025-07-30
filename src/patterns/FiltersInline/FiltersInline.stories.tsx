@@ -19,20 +19,20 @@ const FILTER_KEYS = {
   sort: 'Sort',
   sale: 'Sale',
   departments: 'Departments',
-  month: 'Month',
   location: 'Location',
+  month: 'Month',
 };
 
 const filters: FilterType[] = [
   {
-    label: 'Sort By',
+    label: 'Sort By Date',
     id: FILTER_KEYS.sort,
     type: 'radio',
     filterDimensions: new Set(FiltersInlineFilters.Sort),
     buttonType: FilterButtonType.Sort,
   },
   {
-    label: 'Sale',
+    label: 'Auction type',
     id: FILTER_KEYS.sale,
     type: 'checkbox',
     filterDimensions: new Set(FiltersInlineFilters.Sale),
@@ -46,18 +46,18 @@ const filters: FilterType[] = [
     buttonType: FilterButtonType.Departments,
   },
   {
-    label: 'Month',
-    id: FILTER_KEYS.month,
-    type: 'checkbox',
-    filterDimensions: new Set(FiltersInlineFilters.Month),
-    buttonType: FilterButtonType.Month,
-  },
-  {
     label: 'Location',
     id: FILTER_KEYS.location,
     type: 'checkbox',
     filterDimensions: new Set(FiltersInlineFilters.Location),
     buttonType: FilterButtonType.Location,
+  },
+  {
+    label: 'Month',
+    id: FILTER_KEYS.month,
+    type: 'checkbox',
+    filterDimensions: new Set(FiltersInlineFilters.Month),
+    buttonType: FilterButtonType.Month,
   },
 ];
 
@@ -214,7 +214,7 @@ export const Playground = (props: FilterDropdownMenuProps) => {
         onApplyFilter={handleFilterUpdate}
         onClickClear={clearFilterUpdate}
         resultsCount={resultsCount}
-        mainFilterLabel={FilterButtonType.Filter}
+        mainFilterLabel={FilterButtonType.Empty}
       />
       <div
         style={{

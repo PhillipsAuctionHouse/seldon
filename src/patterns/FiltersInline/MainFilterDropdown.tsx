@@ -45,7 +45,7 @@ export const MainFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDrop
           ariaLabel={ariaLabels.button || `${filterButtonLabel} button`}
           onClick={getFilterButtonClickHandler(filtersListState, handleClick, 0)}
           isMobile={false}
-          type={filterButtonLabel as unknown as FilterButtonIconType}
+          type={'Filter' as FilterButtonIconType}
         />
         <Drawer
           isOpen={isButtonSelected}
@@ -63,7 +63,7 @@ export const MainFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDrop
                     id={value.label}
                     key={value.label}
                     labelText={value.label}
-                    onChange={(e) => onSelectFilter?.(e, filter.label)}
+                    onChange={(e) => onSelectFilter?.(e, filter.buttonType)}
                     type={filter.type as 'checkbox' | 'radio'}
                     disabled={value?.disabled}
                     name={value.label}

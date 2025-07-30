@@ -7,8 +7,9 @@ export enum FilterButtonType {
   Sort = 'Sort', // Sort filter
   Sale = 'Sale', // Sale filter
   Departments = 'Departments', // Departments filter
-  Month = 'Month', // Month filter
   Location = 'Location', // Location filter
+  Month = 'Month', // Month filter
+  Empty = '', // Empty state for no filter label
 }
 
 /**
@@ -120,24 +121,6 @@ export interface FilterButtonAriaLabels {
 }
 
 /**
- * Props for the FiltersInline component (main component).
- */
-export interface FiltersInlineProps extends BaseFilterProps {
-  /** Unique id for component testing */
-  id: string;
-  /** Handler for filter button click */
-  handleFilterClick?: () => void;
-  /** List of states for the filter buttons */
-  filtersListState?: boolean[];
-  /** Setter for the filter button states */
-  setFiltersLabelListState?: (state: boolean[]) => void;
-  /** Main filter button type (e.g., 'Filter', 'Sort') */
-  mainFilterLabel: FilterButtonType;
-  /** Object containing translated strings for dropdown menu actions.*/
-  dropdownMenuTranslation?: DropdownMenuTranslation;
-}
-
-/**
  * Props for an individual filter button.
  */
 export interface FilterDropdownProps extends BaseFilterProps {
@@ -161,6 +144,8 @@ export interface FilterDropdownProps extends BaseFilterProps {
   filterButtonLabelTranslated?: string;
   /** Object containing translated strings for dropdown menu actions.*/
   dropdownMenuTranslation?: DropdownMenuTranslation;
+  /** Whether to hide the desktop sort button */
+  hideDesktopSortButton?: boolean;
 }
 
 /**

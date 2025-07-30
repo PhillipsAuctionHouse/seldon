@@ -5,8 +5,8 @@ export const FilterButtons: FilterButtonType[] = [
   FilterButtonType.Sort,
   FilterButtonType.Sale,
   FilterButtonType.Departments,
-  FilterButtonType.Month,
   FilterButtonType.Location,
+  FilterButtonType.Month,
 ];
 
 export const FiltersInlineFilters = {
@@ -41,6 +41,12 @@ export const FiltersInlineFilters = {
     { id: 'watches', label: 'Watches', value: 'Watches', active: false },
     { id: 'photographs', label: 'Photographs', value: 'Photographs', active: false },
   ],
+  Location: [
+    { id: 'geneva', label: 'Geneva', value: 'Geneva', active: false },
+    { id: 'hong-kong', label: 'Hong Kong', value: 'Hong Kong', active: false },
+    { id: 'london', label: 'London', value: 'London', active: false },
+    { id: 'new-york', label: 'New York', value: 'New York', active: false },
+  ],
   Month: [
     { id: 'january', label: 'January', value: 'January', active: false },
     { id: 'february', label: 'February', value: 'February', active: false },
@@ -48,12 +54,6 @@ export const FiltersInlineFilters = {
     { id: 'april', label: 'April', value: 'April', active: false },
     { id: 'may', label: 'May', value: 'May', active: false },
     { id: 'june', label: 'June', value: 'June', active: false, disabled: true },
-  ],
-  Location: [
-    { id: 'geneva', label: 'Geneva', value: 'Geneva', active: false },
-    { id: 'hong-kong', label: 'Hong Kong', value: 'Hong Kong', active: false },
-    { id: 'london', label: 'London', value: 'London', active: false },
-    { id: 'new-york', label: 'New York', value: 'New York', active: false },
   ],
 };
 
