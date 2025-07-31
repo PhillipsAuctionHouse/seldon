@@ -1,3 +1,10 @@
+## [1.169.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.169.1...v1.169.2) (2025-07-31)
+
+
+### Bug Fixes
+
+* **SaleCard:** L3-7396 Event type update ([#672](https://github.com/PhillipsAuctionHouse/seldon/issues/672)) ([a894f9d](https://github.com/PhillipsAuctionHouse/seldon/commit/a894f9db9ff54584381b9ab6973cceb0dc33381a))
+
 ## [1.169.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.169.0...v1.169.1) (2025-07-31)
 
 
