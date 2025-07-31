@@ -27,6 +27,9 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Accessibility label for the drawer, used for screen readers.
    * Defaults to the headerText if provided, otherwise an empty string.
+   * 
+   * Supplying this prop also reduces the content padding from 32px to 16px, 
+   * which aligns with the design.
    */
   ariaTitle?: string;
 }
@@ -53,7 +56,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Drawer');
-    const needsExtraPadding = !!headerText; // older designs that don't use this header text use 32px instead of 16px
+    const needsExtraPadding = !headerText; // older designs that don't use this header text use 32px instead of 16px
     return (
       <Dialog.Root
         open={isOpen}
@@ -73,7 +76,9 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
               <Dialog.Description>{ariaTitle}</Dialog.Description>
             </VisuallyHidden>
             <DrawerHeader baseClassName={baseClassName} headerText={headerText} onClose={onClose} />
-            <div className={`${baseClassName}__content-children${needsExtraPadding ? '--extra-padding' : ''}`}>
+            <div
+              className={`${baseClassName}__content-children${needsExtraPadding ? ` ${baseClassName}__content-children--extra-padding` : ''}`}
+            >
               {children}
             </div>
           </Dialog.Content>

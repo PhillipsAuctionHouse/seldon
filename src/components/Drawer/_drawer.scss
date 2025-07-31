@@ -17,10 +17,6 @@
     outline: none;
   }
 
-  .#{$px}-icon-close-x:hover {
-    color: $white;
-  }
-
   @media (max-width: $breakpoint-sm) {
     max-width: 100%;
   }
@@ -46,6 +42,7 @@
     &--extra-padding {
       // previous Drawer designs wanted 32px padding, new one wants 16px, not sure which if any will win
       padding: 2rem;
+      padding-top: 0;
     }
 
     > * {
