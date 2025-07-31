@@ -3,7 +3,27 @@ import React from 'react';
 import { getCommonProps } from '../../utils';
 import { MainFilterDropdown } from './MainFilterDropdown';
 import { SubFilterDropdown } from './SubFilterDropdown';
-import { FilterButtonType, FiltersInlineProps } from './types';
+import { BaseFilterProps, DropdownMenuTranslation, FilterButtonType } from './types';
+
+/**
+ * Props for the FiltersInline component (main component).
+ */
+export interface FiltersInlineProps extends BaseFilterProps {
+  /** Unique id for component testing */
+  id: string;
+  /** Handler for filter button click */
+  handleFilterClick?: () => void;
+  /** List of states for the filter buttons */
+  filtersListState?: boolean[];
+  /** Setter for the filter button states */
+  setFiltersLabelListState?: (state: boolean[]) => void;
+  /** Main filter button type (e.g., 'Filter', 'Sort') */
+  mainFilterLabel: FilterButtonType;
+  /** Object containing translated strings for dropdown menu actions.*/
+  dropdownMenuTranslation?: DropdownMenuTranslation;
+  /** Whether to hide the desktop sort button */
+  hideDesktopSortButton?: boolean;
+}
 
 /**
  * ## Overview
@@ -27,6 +47,7 @@ const FiltersInline = React.forwardRef<HTMLDivElement, FiltersInlineProps>(
       resultsCount,
       mainFilterLabel,
       dropdownMenuTranslation,
+      hideDesktopSortButton = true,
       ...props
     },
     ref,
@@ -64,6 +85,7 @@ const FiltersInline = React.forwardRef<HTMLDivElement, FiltersInlineProps>(
             resultsCount={resultsCount}
             filterButtonLabelTranslated={filter.filterButtonLabelTranslated}
             dropdownMenuTranslation={dropdownMenuTranslation}
+            hideDesktopSortButton={hideDesktopSortButton}
           />
         ))}
       </div>

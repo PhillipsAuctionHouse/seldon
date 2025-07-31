@@ -9,7 +9,7 @@ import FilterInput from '../../components/Filter/FilterInput';
 import { px } from '../../utils';
 import FilterMenu from '../FilterMenu/FilterMenu';
 import { FilterButton } from './FilterButton';
-import type { FilterButtonIconType, FilterDimension, FilterDropdownProps, FilterType } from './types';
+import { FilterButtonIconType, type FilterDimension, type FilterDropdownProps, type FilterType } from './types';
 import { countActiveFilters, getFilterButtonClickHandler, resetAllFilters } from './utils';
 export const MainFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropdownProps>(
   (
@@ -45,7 +45,7 @@ export const MainFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDrop
           ariaLabel={ariaLabels.button || `${filterButtonLabel} button`}
           onClick={getFilterButtonClickHandler(filtersListState, handleClick, 0)}
           isMobile={false}
-          type={filterButtonLabel as unknown as FilterButtonIconType}
+          type={FilterButtonIconType.Filter}
         />
         <Drawer
           isOpen={isButtonSelected}
@@ -63,7 +63,7 @@ export const MainFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDrop
                     id={value.label}
                     key={value.label}
                     labelText={value.label}
-                    onChange={(e) => onSelectFilter?.(e, filter.label)}
+                    onChange={(e) => onSelectFilter?.(e, filter.buttonType)}
                     type={filter.type as 'checkbox' | 'radio'}
                     disabled={value?.disabled}
                     name={value.label}

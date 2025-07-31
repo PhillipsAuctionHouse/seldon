@@ -35,6 +35,10 @@
       gap: $spacing-xl;
       padding: $spacing-md;
       width: 100%;
+
+      @media (min-width: $breakpoint-xl) {
+        gap: 0;
+      }
     }
   }
 
