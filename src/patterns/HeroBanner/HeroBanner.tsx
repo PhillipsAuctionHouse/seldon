@@ -2,6 +2,7 @@ import { HTMLAttributes } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { Text, TextVariants } from '../../components/Text';
+import { HeroBannerVariants } from './types';
 
 export interface HeroBannerProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -29,9 +30,17 @@ export interface HeroBannerProps extends HTMLAttributes<HTMLDivElement> {
    */
   background?: string;
   /**
+   * A description to be used with the TEXT variant of HeroBanner
+   */
+  description?: string;
+  /**
    * Unique id for component testing
    */
   id?: string;
+  /**
+   * The type of HeroBanner to render
+   */
+  variant?: HeroBannerVariants;
 }
 
 /**
@@ -41,7 +50,7 @@ export interface HeroBannerProps extends HTMLAttributes<HTMLDivElement> {
  *
  * [Figma Link](https://www.figma.com/design/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=6532-691&m=dev)
  *
- * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-herobanner--overview)
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-herobanner--overview)
  */
 
 const HeroBanner = ({
@@ -52,27 +61,39 @@ const HeroBanner = ({
   association,
   background,
   className,
+  description,
+  variant = HeroBannerVariants.DEFAULT,
   ...props
 }: HeroBannerProps) => {
   const { className: baseClass, ...commonProps } = getCommonProps(props, 'HeroBanner');
+  const isDefaultVariant = variant === HeroBannerVariants.DEFAULT;
+  const isTextVariant = variant === HeroBannerVariants.TEXT;
 
   return (
     <header
       {...commonProps}
-      className={classnames(baseClass, className)}
+      className={classnames(baseClass, className, {
+        [`${baseClass}--default-variant`]: isDefaultVariant,
+        [`${baseClass}--text-variant`]: isTextVariant,
+      })}
       style={{ '--background': background } as React.CSSProperties}
       {...props}
     >
-      <span className={`${baseClass}__content-wrapper`}>
-        {prehead || date ? (
+      <span
+        className={classnames(`${baseClass}__content-wrapper`, {
+          [`${baseClass}__content-wrapper--text-variant`]: isTextVariant,
+        })}
+      >
+        {!isTextVariant && (prehead || date) ? (
           <p className={`${baseClass}__pre-head`}>
             {prehead ? <span>{prehead}</span> : null}
             {date ? <span>{date}</span> : null}
           </p>
         ) : null}
         <Text variant={TextVariants.snwHeadingHero1}>{headerText}</Text>
-        {subHeadText ? <Text variant={TextVariants.snwHeadingHero2}>{subHeadText}</Text> : null}
-        {association ? <p className={`${baseClass}__after-head`}>{association}</p> : null}
+        {!isTextVariant && subHeadText ? <Text variant={TextVariants.snwHeadingHero2}>{subHeadText}</Text> : null}
+        {!isTextVariant && association ? <p className={`${baseClass}__after-head`}>{association}</p> : null}
+        {isTextVariant && description ? <p className={`${baseClass}__text-description`}>{description}</p> : null}
       </span>
     </header>
   );
