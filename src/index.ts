@@ -68,7 +68,7 @@ export * from './components/TextSymbol';
 export { default as Video, type VideoProps } from './components/Video/Video';
 export * from './patterns/DetailList';
 export * from './patterns/FavoritesCollectionTile';
-export { default as HeroBanner, type HeroBannerProps } from './patterns/HeroBanner/HeroBanner';
+export { default as HeroBanner, type HeroBannerProps, HeroBannerVariants } from './patterns/HeroBanner/HeroBanner';
 export * from './patterns/LanguageSelector';
 export * from './patterns/SaleHeaderBanner';
 export { default as Social, type SocialProps } from './patterns/Social/Social';
