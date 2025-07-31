@@ -109,7 +109,6 @@
     "typescript.preferences.organizeImports": {
       "accentCollation": true
     },
-    "github.copilot.chat.editor.temporalContext.enabled": true,
-    "workbench.colorTheme": "Catppuccin Frappé"
+    "github.copilot.chat.editor.temporalContext.enabled": true
 }
   
