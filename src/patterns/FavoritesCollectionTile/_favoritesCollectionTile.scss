@@ -109,6 +109,7 @@
   }
 
   &__media-container {
+    background-color: $soft-gray;
     position: relative;
     width: 100%;
   }
@@ -132,6 +133,7 @@
     }
 
     &--create-list {
+      background-color: $white;
       border: 1px solid #0000001f;
       border-radius: 0;
     }
@@ -145,8 +147,7 @@
   }
 
   &__icon {
-    grid-column: 1;
-    justify-self: start;
+    justify-content: flex-start;
     pointer-events: none;
 
     &-rotate {
@@ -156,7 +157,9 @@
     &-circle {
       border: 2px solid $dark-gray;
       border-radius: 50%;
-      transform: scale(0.846);
+      height: 1.5rem;
+      justify-content: flex-start;
+      width: 1.5rem;
     }
   }
 
@@ -173,11 +176,19 @@
     text-transform: none;
   }
 
-  &__create-spacing {
-    height: calc($spacing-xsm + var(--body-line-height-size3) + var(--heading-line-height-size5));
-  }
-
   [data-radix-popper-content-wrapper] > * {
     all: unset;
+  }
+
+  &__create-variant {
+    all: unset;
+    background: none;
+    height: 100%;
+    margin-top: calc($spacing-xsm + var(--body-line-height-size3) + var(--heading-line-height-size5));
+    width: 100%;
+
+    &:focus-visible {
+      outline: 1px solid $pure-black;
+    }
   }
 }
