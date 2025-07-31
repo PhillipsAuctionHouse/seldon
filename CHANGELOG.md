@@ -1,3 +1,10 @@
+## [1.169.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.169.0...v1.169.1) (2025-07-31)
+
+
+### Bug Fixes
+
+* **InlineFilters:** L3-7392 Label name fix ([#673](https://github.com/PhillipsAuctionHouse/seldon/issues/673)) ([05aa3b9](https://github.com/PhillipsAuctionHouse/seldon/commit/05aa3b9432cf2683236aeae19312d1c2a377b957))
+
 # [1.169.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.168.0...v1.169.0) (2025-07-28)
 
 
