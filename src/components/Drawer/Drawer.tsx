@@ -53,7 +53,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Drawer');
-
+    const needsExtraPadding = !!headerText; // older designs that don't use this header text use 32px instead of 16px
     return (
       <Dialog.Root
         open={isOpen}
@@ -73,7 +73,9 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
               <Dialog.Description>{ariaTitle}</Dialog.Description>
             </VisuallyHidden>
             <DrawerHeader baseClassName={baseClassName} headerText={headerText} onClose={onClose} />
-            <div className={`${baseClassName}__content-children`}>{children}</div>
+            <div className={`${baseClassName}__content-children${needsExtraPadding ? '--extra-padding' : ''}`}>
+              {children}
+            </div>
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>
