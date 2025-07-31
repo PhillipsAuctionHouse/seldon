@@ -27,8 +27,8 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Accessibility label for the drawer, used for screen readers.
    * Defaults to the headerText if provided, otherwise an empty string.
-   * 
-   * Supplying this prop also reduces the content padding from 32px to 16px, 
+   *
+   * Supplying this prop also reduces the content padding from 32px to 16px,
    * which aligns with the design.
    */
   ariaTitle?: string;

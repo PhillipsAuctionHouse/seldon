@@ -29,8 +29,11 @@ const DrawerHeaderHorizontalRule = ({ baseClassName, children, ...rest }: Drawer
 );
 
 const DrawerHeader = forwardRef<HTMLDivElement, DrawerHeaderProps>(
-  ({ baseClassName, headerText, onClose, ...props }: DrawerHeaderProps, _ref?: React.ForwardedRef<HTMLDivElement>) => {
-    const { className, ...commonProps } = getCommonProps(props, `${baseClassName.replace(px, '')}-header`);
+  (
+    { baseClassName: parentbaseClassName, headerText, onClose, ...props }: DrawerHeaderProps,
+    _ref?: React.ForwardedRef<HTMLDivElement>,
+  ) => {
+    const { className, ...commonProps } = getCommonProps(props, `${parentbaseClassName.replace(px, '')}-header`);
     return (
       <>
         <DrawerHeaderContainer baseClassName={className} {...commonProps}>
