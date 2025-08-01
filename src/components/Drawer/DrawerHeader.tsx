@@ -3,7 +3,6 @@ import * as Dialog from '@radix-ui/react-dialog';
 import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 import { Icon } from '../Icon';
-import { getCommonProps, px } from '../../utils';
 
 type BaseClassName = { baseClassName: string };
 type DrawerHeaderHelperProps = ComponentProps<'div'> & BaseClassName;
@@ -30,16 +29,16 @@ const DrawerHeaderHorizontalRule = ({ baseClassName, children, ...rest }: Drawer
 
 const DrawerHeader = forwardRef<HTMLDivElement, DrawerHeaderProps>(
   (
-    { baseClassName: parentbaseClassName, headerText, onClose, ...props }: DrawerHeaderProps,
+    { baseClassName: parentBaseClassName, headerText, onClose }: DrawerHeaderProps,
     _ref?: React.ForwardedRef<HTMLDivElement>,
   ) => {
-    const { className, ...commonProps } = getCommonProps(props, `${parentbaseClassName.replace(px, '')}-header`);
+    const baseClassName = `${parentBaseClassName}-header`;
     return (
       <>
-        <DrawerHeaderContainer baseClassName={className} {...commonProps}>
-          <DrawerHeaderBookend baseClassName={className} />
-          <h3 className={`${className}__title`}>{headerText}</h3>
-          <DrawerHeaderBookend baseClassName={className}>
+        <DrawerHeaderContainer baseClassName={baseClassName}>
+          <DrawerHeaderBookend baseClassName={baseClassName} />
+          <h3 className={`${baseClassName}__title`}>{headerText}</h3>
+          <DrawerHeaderBookend baseClassName={baseClassName}>
             <Dialog.Close asChild>
               <IconButton
                 onClick={onClose}
@@ -52,7 +51,7 @@ const DrawerHeader = forwardRef<HTMLDivElement, DrawerHeaderProps>(
             </Dialog.Close>
           </DrawerHeaderBookend>
         </DrawerHeaderContainer>
-        {headerText && <DrawerHeaderHorizontalRule baseClassName={className} />}
+        {headerText && <DrawerHeaderHorizontalRule baseClassName={baseClassName} />}
       </>
     );
   },

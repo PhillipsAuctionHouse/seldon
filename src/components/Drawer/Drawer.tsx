@@ -25,13 +25,13 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   headerText?: string;
   /**
-   * Accessibility label for the drawer, used for screen readers.
+   * Used as the accessibility label for the drawer, used for screen readers.
    * Defaults to the headerText if provided, otherwise an empty string.
    *
    * Supplying this prop also reduces the content padding from 32px to 16px,
    * which aligns with the design.
    */
-  ariaTitle?: string;
+  title?: string;
 }
 
 /**
@@ -42,19 +42,7 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 
 const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
-  (
-    {
-      className,
-      isOpen = false,
-      onClose = noOp,
-      headerText,
-      title,
-      ariaTitle = headerText ?? title ?? '',
-      children,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ className, isOpen = false, onClose = noOp, headerText, title, children, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Drawer');
     const needsExtraPadding = !headerText; // older designs that don't use this header text use 32px instead of 16px
     return (
@@ -70,10 +58,10 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
           <Dialog.Overlay onClick={onClose} className={`${baseClassName}__overlay`} data-testid="drawer-overlay" />
           <Dialog.Content className={classnames(baseClassName, className)} id={props.id} {...commonProps} ref={ref}>
             <VisuallyHidden asChild>
-              <Dialog.Title>{ariaTitle}</Dialog.Title>
+              <Dialog.Title>{title}</Dialog.Title>
             </VisuallyHidden>
             <VisuallyHidden asChild>
-              <Dialog.Description>{ariaTitle}</Dialog.Description>
+              <Dialog.Description>{title}</Dialog.Description>
             </VisuallyHidden>
             <DrawerHeader baseClassName={baseClassName} headerText={headerText} onClose={onClose} />
             <div
