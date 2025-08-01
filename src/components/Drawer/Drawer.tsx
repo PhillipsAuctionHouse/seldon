@@ -42,8 +42,11 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 
 const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
-  ({ className, isOpen = false, onClose = noOp, headerText, title, children, ...props }, ref) => {
-    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Drawer');
+  (
+    { isOpen = false, onClose = noOp, headerText = '', title = '', className: classNameFromParent, children, ...props },
+    ref,
+  ) => {
+    const { className: localClassName, ...commonProps } = getCommonProps(props, 'Drawer');
     const needsExtraPadding = !headerText; // older designs that don't use this header text use 32px instead of 16px
     return (
       <Dialog.Root
@@ -55,17 +58,25 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
         }}
       >
         <Dialog.Portal>
-          <Dialog.Overlay onClick={onClose} className={`${baseClassName}__overlay`} data-testid="drawer-overlay" />
-          <Dialog.Content className={classnames(baseClassName, className)} id={props.id} {...commonProps} ref={ref}>
+          <Dialog.Overlay onClick={onClose} className={`${localClassName}__overlay`} data-testid="drawer-overlay" />
+          <Dialog.Content
+            {...commonProps}
+            className={classnames(localClassName, classNameFromParent)}
+            id={props.id}
+            ref={ref}
+          >
             <VisuallyHidden asChild>
               <Dialog.Title>{title}</Dialog.Title>
             </VisuallyHidden>
             <VisuallyHidden asChild>
               <Dialog.Description>{title}</Dialog.Description>
             </VisuallyHidden>
-            <DrawerHeader baseClassName={baseClassName} headerText={headerText} onClose={onClose} />
+            <DrawerHeader baseClassName={localClassName} headerText={headerText} onClose={onClose} />
             <div
-              className={`${baseClassName}__content-children${needsExtraPadding ? ` ${baseClassName}__content-children--extra-padding` : ''}`}
+              className={classnames(
+                `${localClassName}__content-children`,
+                needsExtraPadding && `${localClassName}__content-children--extra-padding`,
+              )}
             >
               {children}
             </div>
