@@ -75,7 +75,7 @@ describe('Drawer', () => {
       </Drawer>,
     );
     // Header text should be in the document
-    expect(screen.getByText('My Drawer Header', { selector: 'h2' })).toBeInTheDocument();
+    expect(screen.getByText('My Drawer Header', { selector: 'h3' })).toBeInTheDocument();
     // The hr should be present (by class)
     expect(document.querySelector('.seldon-drawer-header__hr')).toBeInTheDocument();
   });
