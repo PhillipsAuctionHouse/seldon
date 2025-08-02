@@ -6,6 +6,7 @@ export { default as Page } from './pages/Page';
 
 // utils
 export * from './providers/SeldonProvider/utils';
+export { SSRMediaQuery, ssrMediaQueryStyle } from './providers/SeldonProvider/utils'; // TS wasn't catching these
 export * from './utils/hooks';
 
 // Types, Enums
