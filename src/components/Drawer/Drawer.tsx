@@ -2,7 +2,6 @@ import React, { forwardRef } from 'react';
 import { getCommonProps, noOp } from '../../utils';
 import classnames from 'classnames';
 import * as Dialog from '@radix-ui/react-dialog';
-
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import DrawerHeader from './DrawerHeader';
 
@@ -32,6 +31,14 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    * which aligns with the design.
    */
   title?: string;
+  /**
+   * Which side the drawer opens from: left, right, or bottom
+   */
+  drawerOpenSide?: 'left' | 'right' | 'bottom';
+  /**
+   * Optional label for the bottom content area
+   */
+  bottomContentLabel?: string;
 }
 
 /**
@@ -43,11 +50,23 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
   (
-    { isOpen = false, onClose = noOp, headerText = '', title = '', className: classNameFromParent, children, ...props },
+    {
+      isOpen = false,
+      onClose = noOp,
+      headerText = '',
+      title = '',
+      className: classNameFromParent,
+      children,
+      drawerOpenSide = 'right',
+      bottomContentLabel,
+      ...props
+    },
     ref,
   ) => {
     const { className: localClassName, ...commonProps } = getCommonProps(props, 'Drawer');
+    const isBottomSheet = drawerOpenSide === 'bottom';
     const needsExtraPadding = !headerText; // older designs that don't use this header text use 32px instead of 16px
+
     return (
       <Dialog.Root
         open={isOpen}
@@ -60,10 +79,12 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
         <Dialog.Portal>
           <Dialog.Overlay onClick={onClose} className={`${localClassName}__overlay`} data-testid="drawer-overlay" />
           <Dialog.Content
-            {...commonProps}
-            className={classnames(localClassName, classNameFromParent)}
+            className={classnames(localClassName, classNameFromParent, {
+              [`${localClassName}--bottom`]: isBottomSheet,
+            })}
             id={props.id}
             ref={ref}
+            {...commonProps}
           >
             <VisuallyHidden asChild>
               <Dialog.Title>{title}</Dialog.Title>
@@ -71,7 +92,13 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
             <VisuallyHidden asChild>
               <Dialog.Description>{title}</Dialog.Description>
             </VisuallyHidden>
-            <DrawerHeader baseClassName={localClassName} headerText={headerText} onClose={onClose} />
+            <DrawerHeader
+              baseClassName={localClassName}
+              headerText={headerText}
+              onClose={onClose}
+              isBottomSheet={isBottomSheet}
+              bottomContentLabel={bottomContentLabel}
+            />
             <div
               className={classnames(
                 `${localClassName}__content-children`,
