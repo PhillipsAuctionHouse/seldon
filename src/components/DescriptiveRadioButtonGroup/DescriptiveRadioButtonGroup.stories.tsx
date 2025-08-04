@@ -15,7 +15,7 @@ export const Playground = (props: DescriptiveRadioButtonGroupProps) => {
     <DescriptiveRadioButtonGroup
       {...props}
       value={selected}
-      onChange={(event) => setSelected((event.target as HTMLInputElement).value)}
+      onValueChange={(value) => setSelected(value)}
     />
   );
 };
