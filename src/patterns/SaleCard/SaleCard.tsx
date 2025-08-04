@@ -1,13 +1,13 @@
-import { ComponentProps, forwardRef } from 'react';
-import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
-import { Text, TextVariants } from '../../components/Text';
-import { SeldonImage } from '../../components/SeldonImage';
+import { ComponentProps, forwardRef } from 'react';
 import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';
+import { SeldonImage } from '../../components/SeldonImage';
+import { Text, TextVariants } from '../../components/Text';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
-import { SaleCardVariants } from './types';
+import { getCommonProps } from '../../utils';
 import { SaleCardActions } from './SaleCardActions';
+import { SaleCardVariants } from './types';
 
 /** * Props for the SaleCard component. */
 export interface SaleCardProps extends ComponentProps<'div'> {
@@ -28,7 +28,7 @@ export interface SaleCardProps extends ComponentProps<'div'> {
   /** * The text to be displayed for the modal link. */
   modalButtonText?: string;
   /** * The callback function to be executed when the modal link is clicked. */
-  modalButtonOnClick?: () => void;
+  modalButtonOnClick?: (event: React.MouseEvent<HTMLElement>) => void;
   /** * The variant of the SaleCard component.
    * - 'default': The default style of the SaleCard component.
    * - 'relatedSaleTile': A variant with a smaller image size and horizontal layout on mobile devices.

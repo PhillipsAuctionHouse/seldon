@@ -1,0 +1,15 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-filters-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.#{$px}-filter-drawer {
+  padding: 0;
+}
+
+.#{$px}-filter-drawer-menu {
+  padding: $spacing-md;
+}
