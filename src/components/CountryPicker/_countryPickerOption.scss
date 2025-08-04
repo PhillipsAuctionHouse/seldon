@@ -1,0 +1,61 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-country-picker {
+  &__option {
+    align-items: center;
+    background: $white;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row-reverse;
+    font-variation-settings: 'wght' 600;
+    justify-content: space-between;
+    margin-bottom: $spacing-micro;
+    margin-right: 1px; // account for scroll bar
+    outline: none;
+    padding: 12px $spacing-sm;
+    transition:
+      border-color 0.2s,
+      background 0.2s;
+
+    &--selected {
+      border: 1px solid $pure-black;
+
+      .#{$px}-country-picker__radio {
+        accent-color: $pure-black;
+      }
+    }
+
+    &--is-phone:focus-within {
+      outline: 1px solid $soft-black;
+      outline-offset: 1px;
+    }
+
+    &-content {
+      display: flex;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    &-flag {
+      height: 16px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+  }
+  .#{$px}-country-picker__radio {
+    height: 20px;
+    width: 20px;
+  }
+
+  &__radio--hidden {
+    border: 0;
+    height: 1px;
+    margin: -1px;
+    opacity: 0;
+    padding: 0;
+    white-space: nowrap;
+    width: 1px;
+  }
+}

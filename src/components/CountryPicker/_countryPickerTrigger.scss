@@ -1,0 +1,74 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-country-picker {
+  &__trigger {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &-label {
+      color: $soft-black;
+      font-variation-settings: 'wght' 600;
+      margin-bottom: 4px;
+
+      &--error {
+        color: $error-red;
+      }
+    }
+
+    &-btn {
+      align-items: center;
+      appearance: none;
+      background: $white;
+      border: 1px solid $light-gray;
+      border-radius: 6px;
+      box-sizing: border-box;
+      cursor: pointer;
+      display: flex;
+      flex-direction: row;
+      font-variation-settings: 'wght' 600;
+      justify-content: space-between;
+      padding: $spacing-xsm;
+      transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+      width: 100%;
+
+      &:hover,
+      &:focus-visible {
+        border-color: $pure-black;
+        box-shadow: 0 0 0 2px rgba($pure-black, 0.08);
+        outline: none;
+      }
+
+      &--error {
+        border-color: $error-red;
+      }
+    }
+
+    &-text {
+      color: $soft-black;
+      flex: 1;
+      overflow: hidden;
+      text-align: left;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &-icon {
+      align-items: center;
+      display: flex;
+      margin-left: 8px;
+    }
+
+    &-error-msg {
+      color: $error-red;
+      margin-top: 4px;
+    }
+
+    &-flag {
+      height: 16px;
+      margin-right: $spacing-sm;
+    }
+  }
+}

@@ -52,6 +52,10 @@
 @use 'components/Toast/toast';
 @use 'components/ExitGateCard/exitGateCard';
 @use 'components/ComposedModal/composedModal';
+@use 'components/CountryPicker/countryPicker';
+@use 'components/CountryPicker/countryPickerOption';
+@use 'components/CountryPicker/countryPickerModal';
+@use 'components/CountryPicker/countryPickerTrigger';
 
 // Patterns
 @use 'patterns/HeroBanner/heroBanner';
