@@ -8,7 +8,7 @@ export interface DescriptiveRadioButtonProps extends Omit<ComponentProps<'input'
   /**
    * Label for the radio button
    */
-  label: string;
+  labelText: string;
   /**
    * Optional description text for the radio button
    */
@@ -21,6 +21,10 @@ export interface DescriptiveRadioButtonProps extends Omit<ComponentProps<'input'
    * Custom class name for the container element
    */
   containerClassName?: string;
+  /**
+   * Unique identifier for the radio button
+   */
+  id: string;
 }
 
 /**
@@ -34,7 +38,7 @@ export interface DescriptiveRadioButtonProps extends Omit<ComponentProps<'input'
  */
 
 const DescriptiveRadioButton = forwardRef<HTMLInputElement, DescriptiveRadioButtonProps>(
-  ({ label, description, className, containerClassName, id, ...props }, ref) => {
+  ({ labelText, description, className, containerClassName, id, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(
       props as ComponentProps<'input'>,
       'descriptive-radio-button',
@@ -60,7 +64,7 @@ const DescriptiveRadioButton = forwardRef<HTMLInputElement, DescriptiveRadioButt
         />
         <span className={`${baseClassName}__label-content`}>
           <Text variant={TextVariants.string1} className={`${baseClassName}__label-text`}>
-            {label}
+            {labelText}
           </Text>
           {description && (
             <Text variant={TextVariants.string2} id={descId} className={`${baseClassName}__description`}>

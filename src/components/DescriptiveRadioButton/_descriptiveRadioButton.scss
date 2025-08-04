@@ -18,10 +18,10 @@
   &__input {
     accent-color: $light-gray;
     cursor: pointer;
-    height: 16px;
+    height: 1rem;
     margin-right: $spacing-sm;
     margin-top: 2px;
-    width: 16px;
+    width: 1rem;
 
     @media (min-width: $breakpoint-md) {
       margin-top: $spacing-micro;

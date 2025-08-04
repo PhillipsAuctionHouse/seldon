@@ -7,7 +7,11 @@ export interface DescriptiveRadioButtonGroupProps extends ComponentProps<'fields
   /**
    * Optional legend for the fieldset
    */
-  legend?: ReactNode;
+  legendText?: ReactNode;
+  /**
+   * Hide the legend visually
+   */
+  hideLegend?: boolean;
   /**
    * Array of options to render as DescriptiveRadioButton components
    * Each option should include label, value, and optionally description and id
@@ -39,7 +43,7 @@ export interface DescriptiveRadioButtonGroupProps extends ComponentProps<'fields
  * Renders a group of DescriptiveRadioButton components wrapped in a semantic fieldset.
  */
 const DescriptiveRadioButtonGroup = forwardRef<HTMLFieldSetElement, DescriptiveRadioButtonGroupProps>(
-  ({ legend, options, name, value, onValueChange, className, ...props }, ref) => {
+  ({ legendText, hideLegend = true, options, name, value, onValueChange, className, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'descriptive-radio-button-group');
 
     if (!options || options.length === 0) {
@@ -48,14 +52,15 @@ const DescriptiveRadioButtonGroup = forwardRef<HTMLFieldSetElement, DescriptiveR
 
     return (
       <fieldset {...commonProps} className={classnames(baseClassName, className)} ref={ref} name={name}>
-        {legend && <legend className={`${baseClassName}__sr-only`}>{legend}</legend>}
+        {legendText && <legend className={hideLegend ? `${baseClassName}__sr-only` : undefined}>{legendText}</legend>}
         {options.map((option) => (
           <DescriptiveRadioButton
-            key={String(option.id || option.value)}
+            key={option.id}
             {...option}
             name={name}
             checked={value === option.value}
             onChange={() => onValueChange(String(option.value ?? ''))}
+            id={option.id}
           />
         ))}
       </fieldset>

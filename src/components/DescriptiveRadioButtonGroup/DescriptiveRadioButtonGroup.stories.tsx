@@ -30,11 +30,13 @@ Playground.args = {
       label: 'Bidding for yourself',
       description:
         'This option should be selected by individuals who are bidding on works for their personal collection.',
+      id: 'option-a',
     },
     {
       value: 'b',
       label: 'Bidding on behalf of a company',
       description: 'This option if bidding for a company, institution, or legal entity for business or investment.',
+      id: 'option-b',
     },
   ],
 };

@@ -16,10 +16,11 @@ export const Playground = () => {
     <DescriptiveRadioButton
       name="choice"
       value="option1"
-      label="Option 1"
+      labelText="Option 1"
       description="This is a description for option 1."
       checked={selected}
       onChange={() => setSelected(true)}
+      id="option1"
     />
   );
 };

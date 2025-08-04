@@ -4,10 +4,10 @@ import DescriptiveRadioButtonGroup, { DescriptiveRadioButtonGroupProps } from '.
 
 describe('DescriptiveRadioButtonGroup', () => {
   const defaultProps: DescriptiveRadioButtonGroupProps = {
-    legend: 'Select an option',
+    legendText: 'Select an option',
     options: [
-      { id: '1', value: 'option1', label: 'Option 1' },
-      { id: '2', value: 'option2', label: 'Option 2' },
+      { id: '1', value: 'option1', labelText: 'Option 1' },
+      { id: '2', value: 'option2', labelText: 'Option 2' },
     ],
     name: 'test-group',
     value: 'option1',
@@ -20,7 +20,7 @@ describe('DescriptiveRadioButtonGroup', () => {
   });
 
   it('does not render the legend when not provided', () => {
-    const { queryByText } = render(<DescriptiveRadioButtonGroup {...defaultProps} legend={undefined} />);
+    const { queryByText } = render(<DescriptiveRadioButtonGroup {...defaultProps} legendText={undefined} />);
     expect(queryByText('Select an option')).not.toBeInTheDocument();
   });
 
