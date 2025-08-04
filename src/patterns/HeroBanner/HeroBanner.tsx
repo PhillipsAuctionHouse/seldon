@@ -75,7 +75,6 @@ const HeroBanner = ({
       {...commonProps}
       className={classnames(baseClass, className, {
         [`${baseClass}--default-variant`]: isDefaultVariant,
-        [`${baseClass}--text-variant`]: isTextVariant,
       })}
       style={{ '--background': background } as React.CSSProperties}
       {...props}
