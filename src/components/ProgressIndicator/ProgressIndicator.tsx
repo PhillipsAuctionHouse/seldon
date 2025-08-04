@@ -22,6 +22,23 @@ export interface ProgressIndicatorProps extends Progress.ProgressProps, Componen
    * Optional class name for additional styling.
    */
   className?: string;
+  /**
+   * Aria label for the progress indicator.
+   */ ariaLabelProgress?: string;
+  /**
+   * Aria label for the progress steps.
+   */
+  ariaLabelSteps?: string;
+  /**
+   * Aria labels for each step in different states.
+   */
+  ariaLabelStepCompleted?: (step: number) => string;
+  ariaLabelStepCurrent?: (step: number) => string;
+  ariaLabelStepNotStarted?: (step: number) => string;
+  /**
+   * Aria label for the completed icon.
+   */
+  ariaLabelCompletedIcon?: string;
 }
 /**
  * ## Overview
@@ -35,39 +52,49 @@ export interface ProgressIndicatorProps extends Progress.ProgressProps, Componen
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-progressindicator--overview)
  */
 const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
-  ({ steps, current, className, ...props }, ref) => {
+  (
+    {
+      steps,
+      current,
+      className,
+      ariaLabelProgress = 'Progress',
+      ariaLabelSteps = 'Progress steps',
+      ariaLabelStepCompleted = (step) => `Step ${step} completed`,
+      ariaLabelStepCurrent = (step) => `Step ${step} current`,
+      ariaLabelStepNotStarted = (step) => `Step ${step} not started`,
+      ariaLabelCompletedIcon = 'Completed Icon',
+      ...props
+    },
+    ref,
+  ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ProgressIndicator');
     if (steps < 1) return null;
 
     const getValue = (value: number) => {
-      if (value <= 0) {
-        return 0;
-      }
-      if (value >= steps) {
-        return steps;
-      }
+      if (value <= 0) return 0;
+      if (value >= steps) return steps;
       return value;
     };
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        <Progress.Root value={getValue(current)} max={steps} aria-label="Progress">
-          <div className={`${baseClassName}__steps`} aria-label="Progress steps">
+        <Progress.Root value={getValue(current)} max={steps} aria-label={ariaLabelProgress}>
+          <div className={`${baseClassName}__steps`} aria-label={ariaLabelSteps}>
             {Array.from({ length: steps }).map((_, index) => {
               const isComplete = current > index + 1;
               const isCurrent = current === index + 1;
+              const stepAriaLabel = isComplete
+                ? ariaLabelStepCompleted(index + 1)
+                : isCurrent
+                  ? ariaLabelStepCurrent(index + 1)
+                  : ariaLabelStepNotStarted(index + 1);
+
               return (
-                <Fragment key={`Step ${index + 1}`}>
+                <Fragment key={props.labels ? props.labels[index] : index}>
                   <div
                     className={`${baseClassName}__item`}
                     aria-current={isCurrent ? 'step' : undefined}
-                    aria-label={
-                      isComplete
-                        ? `Step ${index + 1} completed`
-                        : isCurrent
-                          ? `Step ${index + 1} current`
-                          : `Step ${index + 1} not started`
-                    }
+                    aria-label={stepAriaLabel}
                     data-testid="progress-step"
                   >
                     <span
@@ -77,7 +104,13 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
                       })}
                     >
                       {isComplete ? (
-                        <Icon icon="Success" aria-label="Completed Icon" color="currentColor" width={20} height={20} />
+                        <Icon
+                          icon="Success"
+                          aria-label={ariaLabelCompletedIcon}
+                          color="currentColor"
+                          width={20}
+                          height={20}
+                        />
                       ) : (
                         <Text variant={TextVariants.badge}>{index + 1}</Text>
                       )}
