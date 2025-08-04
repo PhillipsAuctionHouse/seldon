@@ -1,13 +1,38 @@
-import FilterMenu from './FilterMenu';
-import { runCommonTests } from '../../utils/testUtils';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { Filter } from '../../components/Filter';
 import FilterHeader from '../../components/Filter/FilterHeader';
 import FilterInput from '../../components/Filter/FilterInput';
-import { Filter } from '../../components/Filter';
+import { runCommonTests } from '../../utils/testUtils';
+import FilterMenu from './FilterMenu';
+import { exampleAuctionLots } from './utils';
 
 const BACK_BUTTON_TEXT = 'Back to all';
 const VIEW_ALL_BUTTON_TEXT = 'View All';
 
+describe('exampleAuctionLots', () => {
+  it('should be an array with at least 1 lot', () => {
+    expect(Array.isArray(exampleAuctionLots)).toBe(true);
+    expect(exampleAuctionLots.length).toBeGreaterThan(0);
+  });
+
+  it('should have the correct structure for each lot', () => {
+    exampleAuctionLots.forEach((lot) => {
+      expect(lot).toHaveProperty('id');
+      expect(lot).toHaveProperty('lotNumber');
+      expect(lot).toHaveProperty('title');
+      expect(lot).toHaveProperty('imageSrc');
+      expect(lot).toHaveProperty('maker');
+      expect(lot).toHaveProperty('price');
+      expect(lot).toHaveProperty('collection');
+    });
+  });
+
+  it('should contain a known lot', () => {
+    expect(exampleAuctionLots).toEqual(
+      expect.arrayContaining([expect.objectContaining({ title: 'Sunset Over the Hills', maker: 'John Doe' })]),
+    );
+  });
+});
 describe('FilterMenu', () => {
   runCommonTests(FilterMenu, 'FilterMenu');
   const handleChange = vi.fn();

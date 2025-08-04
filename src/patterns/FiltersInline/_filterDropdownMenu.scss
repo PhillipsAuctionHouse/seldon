@@ -1,0 +1,130 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-filter-dropdown-menu {
+  background: $white;
+  border-radius: $spacing-xsm;
+  box-shadow: 0 4px 6px $medium-gray;
+  display: flex;
+  flex-direction: column;
+  min-width: 430px;
+  padding: $spacing-md;
+
+  &__filters {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xsm;
+    padding-bottom: var(--spacing-sm);
+
+    &--mobile {
+      padding: 0 $spacing-md $spacing-md;
+    }
+  }
+
+  &__button-wrap {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__buttons-wrap {
+    display: flex;
+    gap: $spacing-sm;
+    justify-content: space-between;
+
+    &--drawer {
+      box-shadow: 0 -4px 8px -4px $medium-gray;
+      gap: $spacing-xl;
+      padding: $spacing-md;
+      width: 100%;
+
+      @media (min-width: $breakpoint-xl) {
+        gap: 0;
+      }
+    }
+  }
+
+  &__mobile-wrap {
+    box-shadow: 0 -4px 8px -4px $medium-gray;
+  }
+
+  &__header {
+    margin-bottom: $spacing-sm;
+    margin-top: 0;
+
+    &--mobile {
+      padding: $spacing-md $spacing-md 0 $spacing-md;
+    }
+  }
+
+  &__button {
+    align-self: flex-end;
+    padding: $spacing-sm $spacing-md;
+
+    &--mobile {
+      display: block;
+      margin: $spacing-sm auto $spacing-md auto;
+      width: 80%;
+    }
+  }
+
+  &__buttons {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 14px $spacing-md;
+
+    &--left {
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    &--right {
+      margin-left: 0;
+      margin-right: auto;
+    }
+
+    &--mobile {
+      display: block;
+      margin-bottom: $spacing-md;
+      margin-top: $spacing-sm;
+      width: 45%;
+    }
+  }
+
+  &__button-text {
+    color: $white;
+  }
+
+  &--mobile {
+    border-radius: $spacing-xsm $spacing-xsm 0 0;
+    box-shadow: none;
+    padding: 0;
+    width: 100vw;
+  }
+
+  .#{$px}-input {
+    &__wrapper {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    &__label {
+      align-self: center;
+      margin: 0;
+    }
+  }
+  .#{$px}-input__input[type='radio'] {
+    align-self: center;
+    margin-left: auto;
+  }
+  .#{$px}-input__input[type='checkbox'] {
+    align-self: center;
+    margin-left: auto;
+  }
+}
+
+.#{$px}-filter-drawer-mobile {
+  padding: 0;
+}

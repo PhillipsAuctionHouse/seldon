@@ -1,3 +1,38 @@
+## [1.169.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.169.2...v1.169.3) (2025-08-04)
+
+
+### Bug Fixes
+
+* **FiltersInline:** L3-7422 Add FiltersInline types to export ([#676](https://github.com/PhillipsAuctionHouse/seldon/issues/676)) ([42321a7](https://github.com/PhillipsAuctionHouse/seldon/commit/42321a71e18433cf2ec78671538f86223b05dc31))
+
+## [1.169.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.169.1...v1.169.2) (2025-07-31)
+
+
+### Bug Fixes
+
+* **SaleCard:** L3-7396 Event type update ([#672](https://github.com/PhillipsAuctionHouse/seldon/issues/672)) ([a894f9d](https://github.com/PhillipsAuctionHouse/seldon/commit/a894f9db9ff54584381b9ab6973cceb0dc33381a))
+
+## [1.169.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.169.0...v1.169.1) (2025-07-31)
+
+
+### Bug Fixes
+
+* **InlineFilters:** L3-7392 Label name fix ([#673](https://github.com/PhillipsAuctionHouse/seldon/issues/673)) ([05aa3b9](https://github.com/PhillipsAuctionHouse/seldon/commit/05aa3b9432cf2683236aeae19312d1c2a377b957))
+
+# [1.169.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.168.0...v1.169.0) (2025-07-28)
+
+
+### Features
+
+* **InPlaceFilters:** L3-7078 Calendar + Drawer(BottomSheet) ([#660](https://github.com/PhillipsAuctionHouse/seldon/issues/660)) ([09c736b](https://github.com/PhillipsAuctionHouse/seldon/commit/09c736b9d96ba4f0fa2dcd7a02e6c8b5b9edc73d))
+
+# [1.168.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.167.0...v1.168.0) (2025-07-24)
+
+
+### Features
+
+* **Modal:** PHOENIX-2058 adding custom icon to modal ([#667](https://github.com/PhillipsAuctionHouse/seldon/issues/667)) ([aba9aa6](https://github.com/PhillipsAuctionHouse/seldon/commit/aba9aa63f67a8ea063f593720b9a542c65d8e40e))
+
 # [1.167.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.166.0...v1.167.0) (2025-07-22)
 
 

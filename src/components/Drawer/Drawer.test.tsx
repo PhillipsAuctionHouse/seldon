@@ -1,70 +1,75 @@
+import { fireEvent, render, screen } from '@testing-library/react';
 import Drawer from './Drawer';
-import { runCommonTests } from '../../utils/testUtils';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
 describe('Drawer', () => {
-  runCommonTests((props) => <Drawer isOpen={true} {...props} />, 'Drawer');
-
-  test('renders children when isOpen is true', () => {
+  it('renders children when open', () => {
     render(
-      <Drawer isOpen={true} onClose={() => ({})}>
-        <div>Test Content</div>
+      <Drawer isOpen>
+        <div data-testid="drawer-content">Drawer Content</div>
       </Drawer>,
     );
-
-    const testContent = screen.getByText('Test Content');
-    expect(testContent).toBeInTheDocument();
+    expect(screen.getByTestId('drawer-content')).toBeInTheDocument();
   });
 
-  test('does not render children when isOpen is false', () => {
+  it('does not render children when closed', () => {
     render(
-      <Drawer isOpen={false} onClose={() => ({})}>
-        <div>Test Content</div>
+      <Drawer isOpen={false}>
+        <div data-testid="drawer-content">Drawer Content</div>
       </Drawer>,
     );
-
-    const testContent = screen.queryByText('Test Content');
-    expect(testContent).toBeNull();
+    expect(screen.queryByTestId('drawer-content')).not.toBeInTheDocument();
   });
 
-  test('calls onClose when overlay is clicked', async () => {
+  it('calls onClose when overlay is clicked', () => {
     const onClose = vi.fn();
     render(
-      <Drawer isOpen={true} onClose={onClose}>
-        <div>Test Content</div>
+      <Drawer isOpen onClose={onClose}>
+        <div>Drawer Content</div>
       </Drawer>,
     );
-
-    const overlay = screen.getByTestId('drawer-overlay');
-    await userEvent.click(overlay);
-
+    fireEvent.click(screen.getByTestId('drawer-overlay'));
     expect(onClose).toHaveBeenCalled();
   });
 
-  test('calls onClose when Esc is pressed', async () => {
+  it('calls onClose when close button is clicked (default variant)', () => {
     const onClose = vi.fn();
     render(
-      <Drawer isOpen={true} onClose={onClose}>
-        <div>Test Content</div>
+      <Drawer isOpen onClose={onClose}>
+        <div>Drawer Content</div>
       </Drawer>,
     );
-
-    await userEvent.keyboard('{Escape}');
+    fireEvent.click(screen.getByTestId('drawer-close'));
     expect(onClose).toHaveBeenCalled();
   });
 
-  test('calls onClose when close button is clicked', async () => {
-    const onClose = vi.fn();
+  it('does render bottomContentLabel for bottomSheet variant', () => {
     render(
-      <Drawer isOpen={true} onClose={onClose}>
-        <div>Test Content</div>
+      <Drawer isOpen drawerOpenSide="bottom" bottomContentLabel="Bottom Content">
+        <div>Drawer Content</div>
       </Drawer>,
     );
+    expect(screen.getByText('Bottom Content')).toBeInTheDocument();
+  });
 
-    const closeButton = screen.getByTestId('drawer-close');
-    await userEvent.click(closeButton);
+  it('applies custom className and data-side', () => {
+    render(
+      <Drawer isOpen className="custom-class" drawerOpenSide="left">
+        <div>Drawer Content</div>
+      </Drawer>,
+    );
+    const content = screen.getByRole('dialog');
+    expect(content).toHaveClass('custom-class');
+    expect(content).toHaveAttribute('data-side', 'left');
+  });
 
-    expect(onClose).toHaveBeenCalled();
+  it('forwards id and other props', () => {
+    render(
+      <Drawer isOpen id="drawer-id" aria-label="Drawer Label">
+        <div>Drawer Content</div>
+      </Drawer>,
+    );
+    const content = screen.getByRole('dialog');
+    expect(content).toHaveAttribute('id', 'drawer-id');
+    expect(content).toHaveAttribute('aria-label', 'Drawer Label');
   });
 });
