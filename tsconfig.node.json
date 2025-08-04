@@ -9,5 +9,5 @@
     "resolveJsonModule": true,
     "skipLibCheck": true
   },
-  "include": ["vite.config.ts", "package.json", "./src/build/buildUtils.ts"]
+  "include": ["vite.config.ts", "package.json"]
 }
