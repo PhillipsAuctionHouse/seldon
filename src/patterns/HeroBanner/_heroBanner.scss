@@ -76,7 +76,7 @@ body:has(.seldon-header__toggle-btn--open) {
       padding: 40px 48px;
 
       h1 {
-        text-wrap: nowrap;
+        white-space: nowrap;
       }
 
       h1,
