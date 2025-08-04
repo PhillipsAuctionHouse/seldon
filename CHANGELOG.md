@@ -1,3 +1,10 @@
+## [1.169.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.169.2...v1.169.3) (2025-08-04)
+
+
+### Bug Fixes
+
+* **FiltersInline:** L3-7422 Add FiltersInline types to export ([#676](https://github.com/PhillipsAuctionHouse/seldon/issues/676)) ([42321a7](https://github.com/PhillipsAuctionHouse/seldon/commit/42321a71e18433cf2ec78671538f86223b05dc31))
+
 ## [1.169.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.169.1...v1.169.2) (2025-07-31)
 
 
