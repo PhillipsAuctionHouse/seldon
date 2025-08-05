@@ -20,7 +20,7 @@ const CountryPicker = ({
   triggerValue,
   triggerCountryCode,
   isPhone,
-  countryValue, // <-- add this line
+  countryValue,
   ...modalProps
 }: CountryPickerProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,7 +35,7 @@ const CountryPicker = ({
         errorMsg={triggerErrorMsg}
         isPhone={isPhone}
         countryCode={triggerCountryCode}
-        countryValue={countryValue} // <-- pass countryValue to trigger
+        countryValue={countryValue}
         baseClassName={baseClassName}
       />
       <CountryPickerModal

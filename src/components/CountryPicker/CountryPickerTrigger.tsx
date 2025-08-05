@@ -56,7 +56,7 @@ export type CountryPickerTriggerProps = {
   /**
    * Used to determine the country value for the flag.
    */
-  countryValue: string;
+  countryValue?: string;
 };
 
 const CountryPickerTrigger = ({
