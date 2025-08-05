@@ -90,7 +90,7 @@ export const Playground = (props: DrawerProps) => {
       <PlaygroundSplitPanel />
       <Drawer
         isOpen={props.isOpen}
-        onClose={props.onClose ?? onClose}
+        onClose={onClose}
         headerText={props.headerText}
         title={props.title}
         className={props.className}
