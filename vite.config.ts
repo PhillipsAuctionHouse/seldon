@@ -98,6 +98,7 @@ export default defineConfig({
         '**/index.ts',
         '**/types.ts',
         '**/assets/**',
+        '**/testUtils.tsx',
       ], // ignore barrel files
       reporter: ['text', 'json', 'html'],
       provider: 'v8',

@@ -25,3 +25,32 @@ export const runCommonTests = (Component: ElementType, componentName: string, pr
     expect(ref.current).toBeInTheDocument();
   });
 };
+
+export const mockMatchMedia = (queries: Record<string, boolean>) => {
+  window.matchMedia = (query) => ({
+    matches: !!queries[query],
+    media: query,
+    onchange: null,
+    addListener: () => {
+      return;
+    },
+    removeListener: () => {
+      return;
+    },
+    addEventListener: () => {
+      return;
+    },
+    removeEventListener: () => {
+      return;
+    },
+    dispatchEvent: () => false,
+  });
+};
+
+export const mockDesktopBreakpoint = () => {
+  mockMatchMedia({ '(min-width: 961px)': true, '(max-width: 960px)': false });
+};
+
+export const mockMobileBreakpoint = () => {
+  mockMatchMedia({ '(min-width: 961px)': false, '(max-width: 960px)': true });
+};
