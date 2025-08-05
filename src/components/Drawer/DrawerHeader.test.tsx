@@ -25,28 +25,28 @@ describe('DrawerHeader', () => {
     expect(screen.getByText('Header!')).toBeInTheDocument();
   });
 
-  it('renders close button on the left for left side drawer', () => {
+  it('renders close button on the right for right side drawer', () => {
+    renderWithDialog(<DrawerHeader {...baseProps} drawerOpenSide="right" />);
+    const leftBookend = document.querySelector('.drawer-header__bookend-left');
+    const rightBookend = document.querySelector('.drawer-header__bookend-right');
+    expect(leftBookend?.querySelector('[data-testid="drawer-close"]')).not.toBeInTheDocument();
+    expect(rightBookend?.querySelector('[data-testid="drawer-close"]')).toBeInTheDocument();
+  });
+
+  it('renders close button on the right for left side drawer', () => {
     renderWithDialog(<DrawerHeader {...baseProps} drawerOpenSide="left" />);
     const leftBookend = document.querySelector('.drawer-header__bookend-left');
     const rightBookend = document.querySelector('.drawer-header__bookend-right');
-    expect(leftBookend?.querySelector('[data-testid="drawer-close"]')).toBeInTheDocument();
-    expect(rightBookend?.querySelector('[data-testid="drawer-close"]')).not.toBeInTheDocument();
-  });
-
-  it('renders close button on the right for right side drawer', () => {
-    renderWithDialog(<DrawerHeader {...baseProps} drawerOpenSide="right" />);
-    const leftBookend2 = document.querySelector('.drawer-header__bookend-left');
-    const rightBookend2 = document.querySelector('.drawer-header__bookend-right');
-    expect(leftBookend2?.querySelector('[data-testid="drawer-close"]')).not.toBeInTheDocument();
-    expect(rightBookend2?.querySelector('[data-testid="drawer-close"]')).toBeInTheDocument();
+    expect(leftBookend?.querySelector('[data-testid="drawer-close"]')).not.toBeInTheDocument();
+    expect(rightBookend?.querySelector('[data-testid="drawer-close"]')).toBeInTheDocument();
   });
 
   it('renders close button on the left for bottom drawer', () => {
     renderWithDialog(<DrawerHeader {...baseProps} drawerOpenSide="bottom" />);
-    const leftBookend3 = document.querySelector('.drawer-header__bookend-left');
-    const rightBookend3 = document.querySelector('.drawer-header__bookend-right');
-    expect(leftBookend3?.querySelector('[data-testid="drawer-close"]')).toBeInTheDocument();
-    expect(rightBookend3?.querySelector('[data-testid="drawer-close"]')).not.toBeInTheDocument();
+    const leftBookend = document.querySelector('.drawer-header__bookend-left');
+    const rightBookend = document.querySelector('.drawer-header__bookend-right');
+    expect(leftBookend?.querySelector('[data-testid="drawer-close"]')).toBeInTheDocument();
+    expect(rightBookend?.querySelector('[data-testid="drawer-close"]')).not.toBeInTheDocument();
   });
 
   it('calls onClose when close button is clicked in either position', async () => {

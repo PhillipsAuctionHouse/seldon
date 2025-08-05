@@ -4,6 +4,9 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { getCommonProps, noOp } from '../../utils';
 import DrawerHeader from './DrawerHeader';
+import IconButton from '../IconButton/IconButton';
+import { ButtonVariants } from '../Button/types';
+import { Icon } from '../Icon';
 
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -25,20 +28,26 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   headerText?: string;
   /**
    * Used as the accessibility label for the drawer, used for screen readers.
-   * Defaults to the headerText if provided, otherwise an empty string.
-   *
-   * Supplying this prop also reduces the content padding from 32px to 16px,
-   * which aligns with the design.
+   * Defaults to the headerText if that's provided, otherwise an empty string.
    */
   title?: string;
+  /**
+   * Used as the accessibility description for the drawer, used for screen readers.
+   * Defaults to the title if that's provided, otherwise an empty string.
+   */
+  description?: string;
   /**
    * Which side the drawer opens from: left, right, or bottom
    */
   drawerOpenSide?: 'left' | 'right' | 'bottom';
   /**
-   * Older designs for left/right drawers had more padding around the content, this adds the extra 16px
+   * Older designs for left/right drawers have more padding around the content.
+   * This value is in rem, and must be an integer under 3.
+   *
+   * Default is 2 if null or undefined, or 1 if headingText is supplied. This is silly
+   * but aligns with design and allows this prop to be left out most of the time.
    */
-  extraPaddingAmount?: 0 | 1 | 2;
+  extraPaddingLevel?: 0 | 1 | 2;
 }
 
 /**
@@ -55,10 +64,11 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       onClose = noOp,
       headerText = '',
       title = '',
+      description = title,
       drawerOpenSide = 'right',
       className: classNameFromParent,
       children,
-      extraPaddingAmount = 2, // legacy value for extra padding, modern designs set this to 0 or 1. should be removed in the future
+      extraPaddingLevel,
       ...props
     },
     ref,
@@ -66,6 +76,8 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     const { className: localClassName, ...commonProps } = getCommonProps(props, 'Drawer');
     const isBottomSheet = drawerOpenSide === 'bottom';
 
+    // legacy value for extra padding is 2, it isn't specified in those usages. newer drawers use 0 or 1.
+    extraPaddingLevel ??= headerText ? 1 : 2;
     return (
       <Dialog.Root
         open={isOpen}
@@ -90,20 +102,33 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
               <Dialog.Title>{title}</Dialog.Title>
             </VisuallyHidden>
             <VisuallyHidden asChild>
-              <Dialog.Description>{title}</Dialog.Description>
+              <Dialog.Description>{description}</Dialog.Description>
             </VisuallyHidden>
-
-            <DrawerHeader
-              baseClassName={localClassName}
-              headerText={headerText}
-              onClose={onClose}
-              drawerOpenSide={drawerOpenSide}
-            />
+            {headerText ? (
+              <DrawerHeader
+                baseClassName={localClassName}
+                headerText={headerText}
+                onClose={onClose}
+                drawerOpenSide={drawerOpenSide}
+              />
+            ) : (
+              <Dialog.Close asChild>
+                <IconButton
+                  onClick={onClose}
+                  className={classnames(`${localClassName}__close`)}
+                  aria-label="Close"
+                  data-testid="drawer-close"
+                  variant={ButtonVariants.tertiary}
+                >
+                  <Icon icon="CloseX" color="currentColor" />
+                </IconButton>
+              </Dialog.Close>
+            )}
 
             <div
               className={classnames(
                 `${localClassName}__content-children`,
-                extraPaddingAmount && `${localClassName}__content-children--ep${extraPaddingAmount}`,
+                extraPaddingLevel < 3 && `${localClassName}__content-children--ep${extraPaddingLevel}`,
               )}
             >
               {children}

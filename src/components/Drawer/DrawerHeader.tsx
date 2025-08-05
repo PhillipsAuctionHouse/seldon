@@ -20,17 +20,23 @@ export type DrawerHeaderProps = CommonProps & {
 
 // There is a Bookend component on either side of the header, the close button renders in whichever
 // one matches the side the drawer opened on (or on the left, if the drawer opens from the bottom)
-const Bookend = ({ baseClassName, drawerOpenSide, onClose, bookendSide: thisBookendSide, ...rest }: BookendProps) => (
-  <div className={`${baseClassName}__bookend ${baseClassName}__bookend-${thisBookendSide}`} {...rest}>
-    {(drawerOpenSide === thisBookendSide || (drawerOpenSide === 'bottom' && thisBookendSide === 'left')) && (
-      <Dialog.Close asChild>
-        <IconButton onClick={onClose} aria-label="Close" data-testid="drawer-close" variant={ButtonVariants.tertiary}>
-          <Icon icon="CloseX" color="currentColor" />
-        </IconButton>
-      </Dialog.Close>
-    )}
-  </div>
-);
+// The close button should always be on the right, unless the drawerOpenSide is 'bottom', in which case it should be on the left.
+const Bookend = ({ baseClassName, drawerOpenSide, onClose, bookendSide: thisBookendSide, ...rest }: BookendProps) => {
+  const shouldShowClose =
+    (drawerOpenSide === 'bottom' && thisBookendSide === 'left') ||
+    (drawerOpenSide !== 'bottom' && thisBookendSide === 'right');
+  return (
+    <div className={`${baseClassName}__bookend ${baseClassName}__bookend-${thisBookendSide}`} {...rest}>
+      {shouldShowClose && (
+        <Dialog.Close asChild>
+          <IconButton onClick={onClose} aria-label="Close" data-testid="drawer-close" variant={ButtonVariants.tertiary}>
+            <Icon icon="CloseX" color="currentColor" />
+          </IconButton>
+        </Dialog.Close>
+      )}
+    </div>
+  );
+};
 
 const DrawerHeader = forwardRef<HTMLDivElement, DrawerHeaderProps>(
   ({ baseClassName: parentBaseClassName, headerText, drawerOpenSide, onClose }, _ref) => {

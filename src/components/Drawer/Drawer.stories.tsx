@@ -48,6 +48,23 @@ const argTypes = {
     defaultValue: 'right',
     table: { type: { summary: `'left' | 'right' | 'bottom'` } },
   },
+  extraPaddingLevel: {
+    control: { type: 'select' },
+    options: [undefined, 0, 1, 2],
+    description: 'Extra padding around the content. 0, 1, 2, or undefined (defaults to 2).',
+    defaultValue: undefined,
+    table: { type: { summary: '0 | 1 | 2 | undefined' } },
+  },
+  className: {
+    control: 'text',
+    description: 'Custom class name for the Drawer',
+    table: { type: { summary: 'string' } },
+  },
+  id: {
+    control: 'text',
+    description: 'ID for the Drawer root element',
+    table: { type: { summary: 'string' } },
+  },
 };
 
 export default meta;
@@ -56,7 +73,6 @@ export const Playground = (props: DrawerProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const onClose = () => {
-    // Refocus on button after close for keyboard navigation
     buttonRef.current?.focus();
     updateArgs({ ...props, isOpen: false });
   };
@@ -67,18 +83,19 @@ export const Playground = (props: DrawerProps) => {
 
   return (
     <>
-      <Button className={`modal-story__button`} onClick={onOpen} ref={buttonRef}>
+      <Button className="modal-story__button" onClick={onOpen} ref={buttonRef}>
         Open Modal
       </Button>
 
       <PlaygroundSplitPanel />
       <Drawer
         isOpen={props.isOpen}
-        onClose={onClose}
+        onClose={props.onClose ?? onClose}
         headerText={props.headerText}
         title={props.title}
         className={props.className}
         drawerOpenSide={props.drawerOpenSide}
+        extraPaddingLevel={props.extraPaddingLevel}
       >
         <Subscribe
           id="subscribe-drawer"
@@ -97,6 +114,7 @@ Playground.args = {
   headerText: 'Drawer title',
   title: undefined,
   drawerOpenSide: 'right',
+  extraPaddingLevel: 2,
 };
 
 Playground.argTypes = argTypes;

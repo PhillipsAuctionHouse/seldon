@@ -75,12 +75,13 @@ export const ComboBoxInDrawer = () => {
       <Button onClick={() => setIsOpen(true)}>Open Drawer with ComboBox</Button>
 
       <Drawer
-        title="Select Birth Year"
+        headerText="Select Birth Year"
         isOpen={isOpen}
         onClose={() => {
           setIsOpen(false);
           setDrawerValue('');
         }}
+        extraPaddingLevel={2}
       >
         <div style={{ padding: '20px', width: '300px' }} ref={drawerContentRef}>
           <ComboBox

@@ -25,6 +25,17 @@
     padding-bottom: $padding-sm;
   }
 
+  &__close {
+    align-items: center;
+    border-radius: 100%;
+    color: $pure-black;
+    display: inline-flex;
+    justify-content: center;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
   &__overlay {
     background-color: $overlay-black;
     inset: 0;
@@ -65,31 +76,41 @@
   }
 
   &__content-children {
+    align-items: center;
     display: flex;
     flex-direction: column;
     height: 100%;
     overflow: hidden;
     overflow-y: auto;
-
-    // padding: 1rem; // no token for what design wants
     padding-top: $snowflake-menu-padding;
     width: 100%;
 
+    // different designs require different padding (ep = extra padding).
+
+    // this could be handled in individual implementations instead,
+    // I'm not sure if these are Distinct Drawer Styles or design oversights
+    // or a variety of old and new designs that will eventually be all new designs.
+
+    &--ep0 {
+      padding-top: 0;
+    }
+
     &--ep1 {
       padding: 1rem;
-      padding-top: 0;
+      padding-top: $snowflake-menu-padding;
     }
 
     &--ep2 {
       padding: 2rem;
-      padding-top: 0;
+      padding-top: $spacing-xl;
     }
 
     &--ep3 {
       padding: 3rem;
-      padding-top: 0;
+      padding-top: $snowflake-menu-padding;
     }
 
+    // make the children scroll in their little children box
     > * {
       overflow-y: auto;
     }
