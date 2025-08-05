@@ -2,7 +2,7 @@ import Icon from '../Icon/Icon';
 import { TextVariants } from '../Text';
 import Text from '../Text/Text';
 import classNames from 'classnames';
-import { countries } from './types'; // Make sure this import is correct for your project
+import { countries } from './types';
 
 export type CountryPickerTriggerProps = {
   /**

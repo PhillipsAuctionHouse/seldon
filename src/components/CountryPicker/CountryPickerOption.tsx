@@ -4,9 +4,6 @@ import classnames from 'classnames';
 import { getSafeCountryCallingCode } from './utils';
 import { CountryCode } from 'libphonenumber-js';
 
-/**
- * Props for the CountryPickerOption component.
- */
 interface CountryPickerOptionProps {
   /**
    * The country code associated with the option.

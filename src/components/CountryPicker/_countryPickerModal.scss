@@ -71,11 +71,11 @@
     width: 100%;
 
     .seldon-input__validation {
-      display: none !important;
+      display: none;
     }
 
     input {
-      padding-left: 36px !important;
+      padding-left: $spacing-md;
 
       &::placeholder {
         font-variation-settings: 'wght' 700;
@@ -87,7 +87,7 @@
     align-items: center;
     color: $dark-gray;
     display: flex;
-    left: 0.75rem;
+    left: $spacing-xsm;
     pointer-events: none;
     position: absolute;
     top: 50%;
