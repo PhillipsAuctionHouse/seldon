@@ -60,7 +60,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
             onClose={getFilterButtonClickHandler(filtersListState, handleClick, filterId)}
             aria-label={ariaLabels.drawer || `${filterButtonLabel} drawer`}
             className={`${px}-filter-drawer-mobile`}
-            bottomContentLabel={`${buttonLabel} Filter`}
+            headerText={`${buttonLabel} Filter`}
           >
             <FilterDropdownMenuMobile
               buttonType={buttonType}

@@ -13,13 +13,13 @@ const renderWithDialog = (children: React.ReactNode) =>
 
 describe('DrawerHeader', () => {
   it('renders header text', () => {
-    renderWithDialog(<DrawerHeader baseClassName="drawer-header" headerText="Header!" onClose={() => void 0} />);
+    renderWithDialog(<DrawerHeader baseClassName="drawer" headerText="Header!" onClose={() => void 0} />);
     expect(screen.getByText('Header!')).toBeInTheDocument();
   });
 
   it('calls onClose when close button is clicked', async () => {
     const onClose = vi.fn();
-    renderWithDialog(<DrawerHeader baseClassName="drawer-header" headerText="Header" onClose={onClose} />);
+    renderWithDialog(<DrawerHeader baseClassName="drawer" headerText="Header" onClose={onClose} />);
     await userEvent.click(screen.getByTestId('drawer-close'));
     expect(onClose).toHaveBeenCalled();
   });

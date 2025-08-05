@@ -9,7 +9,14 @@
   &__bookend {
     display: flex;
     flex: 1 1 0;
-    justify-content: flex-end;
+
+    &-right {
+      justify-content: flex-end;
+    }
+
+    &-left {
+      justify-content: flex-start;
+    }
   }
 
   &__hr {
@@ -34,21 +41,5 @@
 
   .#{$px}-icon-close-x:hover {
     color: $white;
-  }
-
-  &__close {
-    align-items: center;
-    border-radius: 100%;
-    color: $pure-black;
-    display: inline-flex;
-    justify-content: center;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-
-    &--bottom {
-      align-self: flex-start;
-      margin: $spacing-md;
-    }
   }
 }

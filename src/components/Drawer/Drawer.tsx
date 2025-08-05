@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
-import { getCommonProps, noOp } from '../../utils';
 import classnames from 'classnames';
 import * as Dialog from '@radix-ui/react-dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
+import { getCommonProps, noOp } from '../../utils';
 import DrawerHeader from './DrawerHeader';
 
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -36,9 +36,9 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   drawerOpenSide?: 'left' | 'right' | 'bottom';
   /**
-   * Optional label for the bottom content area
+   * Older designs for left/right drawers had more padding around the content, this adds the extra 16px
    */
-  bottomContentLabel?: string;
+  extraPaddingAmount?: 0 | 1 | 2;
 }
 
 /**
@@ -55,17 +55,16 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       onClose = noOp,
       headerText = '',
       title = '',
+      drawerOpenSide = 'right',
       className: classNameFromParent,
       children,
-      drawerOpenSide = 'right',
-      bottomContentLabel,
+      extraPaddingAmount = 2, // legacy value for extra padding, modern designs set this to 0 or 1. should be removed in the future
       ...props
     },
     ref,
   ) => {
     const { className: localClassName, ...commonProps } = getCommonProps(props, 'Drawer');
     const isBottomSheet = drawerOpenSide === 'bottom';
-    const needsExtraPadding = !headerText; // older designs that don't use this header text use 32px instead of 16px
 
     return (
       <Dialog.Root
@@ -82,6 +81,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
             className={classnames(localClassName, classNameFromParent, {
               [`${localClassName}--bottom`]: isBottomSheet,
             })}
+            data-side={drawerOpenSide}
             id={props.id}
             ref={ref}
             {...commonProps}
@@ -92,17 +92,18 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
             <VisuallyHidden asChild>
               <Dialog.Description>{title}</Dialog.Description>
             </VisuallyHidden>
+
             <DrawerHeader
               baseClassName={localClassName}
               headerText={headerText}
               onClose={onClose}
-              isBottomSheet={isBottomSheet}
-              bottomContentLabel={bottomContentLabel}
+              drawerOpenSide={drawerOpenSide}
             />
+
             <div
               className={classnames(
                 `${localClassName}__content-children`,
-                needsExtraPadding && `${localClassName}__content-children--extra-padding`,
+                extraPaddingAmount && `${localClassName}__content-children--ep${extraPaddingAmount}`,
               )}
             >
               {children}

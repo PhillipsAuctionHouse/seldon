@@ -42,9 +42,9 @@ describe('Drawer', () => {
     expect(onClose).toHaveBeenCalled();
   });
 
-  it('does render bottomContentLabel for bottomSheet variant', () => {
+  it('does render headerText for bottomSheet variant', () => {
     render(
-      <Drawer isOpen drawerOpenSide="bottom" bottomContentLabel="Bottom Content">
+      <Drawer isOpen drawerOpenSide="bottom" headerText="Bottom Content">
         <div>Drawer Content</div>
       </Drawer>,
     );

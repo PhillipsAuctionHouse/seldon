@@ -12,6 +12,44 @@ const meta = {
   component: Drawer,
 } satisfies Meta<typeof Drawer>;
 
+const argTypes = {
+  isOpen: {
+    control: 'boolean',
+    description: 'Whether the drawer is open or not',
+    defaultValue: false,
+    table: { type: { summary: 'boolean' } },
+  },
+  onClose: {
+    action: 'onClose',
+    description: 'Callback when the drawer is closed',
+    table: { type: { summary: '() => void' } },
+  },
+  children: {
+    control: 'text',
+    description: 'The content of the drawer',
+    table: { type: { summary: 'React.ReactNode' } },
+  },
+  headerText: {
+    control: 'text',
+    description:
+      'A string to be displayed center at the top of the drawer, up with the close button. Its presence also triggers the horizontal rule below the header to be rendered.',
+    table: { type: { summary: 'string' } },
+  },
+  title: {
+    control: 'text',
+    description:
+      'Used as the accessibility label for the drawer, used for screen readers. Defaults to the headerText if provided, otherwise an empty string. Supplying this prop also reduces the content padding from 32px to 16px, which aligns with the design.',
+    table: { type: { summary: 'string' } },
+  },
+  drawerOpenSide: {
+    control: { type: 'select' },
+    options: ['left', 'right', 'bottom'],
+    description: 'Which side the drawer opens from: left, right, or bottom',
+    defaultValue: 'right',
+    table: { type: { summary: `'left' | 'right' | 'bottom'` } },
+  },
+};
+
 export default meta;
 export const Playground = (props: DrawerProps) => {
   const [, updateArgs] = useArgs();
@@ -34,7 +72,14 @@ export const Playground = (props: DrawerProps) => {
       </Button>
 
       <PlaygroundSplitPanel />
-      <Drawer isOpen={props.isOpen} onClose={onClose} headerText={props.headerText}>
+      <Drawer
+        isOpen={props.isOpen}
+        onClose={onClose}
+        headerText={props.headerText}
+        title={props.title}
+        className={props.className}
+        drawerOpenSide={props.drawerOpenSide}
+      >
         <Subscribe
           id="subscribe-drawer"
           autoFocus
@@ -50,6 +95,8 @@ Playground.args = {
   children: 'Hi There',
   isOpen: false,
   headerText: 'Drawer title',
+  title: undefined,
+  drawerOpenSide: 'right',
 };
 
-Playground.argTypes = {};
+Playground.argTypes = argTypes;
