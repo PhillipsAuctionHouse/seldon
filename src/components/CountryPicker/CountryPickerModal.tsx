@@ -70,6 +70,24 @@ export interface CountryPickerModalProps {
 
 const PRIORITIZED_CODES = ['US', 'GB', 'HK', 'CH'];
 
+// Filtering helper
+const filterCountries = (list: typeof countries, filter: string) => {
+  if (!filter) return list;
+  // Escape regex special characters
+  const sanitizedFilter = filter.replace(/[.*?^${}()|[\]\\]/g, '\\$&');
+  // Remove + for matching (but keep original for display)
+  const pattern = sanitizedFilter.replace(/\+/g, '');
+  if (!pattern) return list;
+  const f = new RegExp(pattern, 'gi');
+  return list.filter((country) => {
+    const name = country.name;
+    const code = country.code;
+    const callingCode = getSafeCountryCallingCode(code);
+    const callingCodeNoPlus = callingCode.replace(/\+/g, '');
+    return f.test(name) || f.test(code) || f.test(callingCodeNoPlus) || f.test('+' + callingCodeNoPlus);
+  });
+};
+
 const CountryPickerModal = forwardRef<HTMLDivElement, CountryPickerModalProps>(
   ({
     isOpen,
@@ -101,23 +119,9 @@ const CountryPickerModal = forwardRef<HTMLDivElement, CountryPickerModalProps>(
     }, []);
 
     // Filtering
-    const filteredPrioritized = useMemo(() => {
-      if (!filter) return prioritized;
-      const sanitizedFilter = filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const f = new RegExp(sanitizedFilter, 'gi');
-      return prioritized.filter(
-        (country) => f.test(country.name) || f.test(country.code) || f.test(getSafeCountryCallingCode(country.code)),
-      );
-    }, [prioritized, filter]);
+    const filteredPrioritized = useMemo(() => filterCountries(prioritized, filter), [prioritized, filter]);
 
-    const filteredRest = useMemo(() => {
-      if (!filter) return rest;
-      const sanitizedFilter = filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const f = new RegExp(sanitizedFilter, 'gi');
-      return rest.filter(
-        (country) => f.test(country.name) || f.test(country.code) || f.test(getSafeCountryCallingCode(country.code)),
-      );
-    }, [rest, filter]);
+    const filteredRest = useMemo(() => filterCountries(rest, filter), [rest, filter]);
 
     // Group rest by first letter
     const groupedCountries = useMemo(() => {
