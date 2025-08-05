@@ -62,6 +62,13 @@ const designIcons = [
   'LinkedIn',
   'Red',
   'WeChat',
+  'AdminGavel',
+  'AdminLiveOnline',
+  'AdminPerson',
+  'AdminTelephone',
+  'AdminPlay',
+  'AdminFullscreen',
+  'AdminFullscreenExit',
 ] as const;
 export const IconGrid = (props: IconProps) => {
   const [color, setColor] = useState<string>('$primary-black');

@@ -1,6 +1,13 @@
 export { default as AccountActive } from './AccountActive';
 export { default as Account } from './Account';
 export { default as Add } from './Add';
+export { default as AdminGavel } from './AdminGavel';
+export { default as AdminLiveOnline } from './AdminLiveOnline';
+export { default as AdminPerson } from './AdminPerson';
+export { default as AdminTelephone } from './AdminTelephone';
+export { default as AdminPlay } from './AdminPlay';
+export { default as AdminFullscreen } from './AdminFullscreen';
+export { default as AdminFullscreenExit } from './AdminFullscreenExit';
 export { default as AppleAppStoreBadge } from './AppleAppStoreBadge';
 export { default as ArrowDown } from './ArrowDown';
 export { default as ArrowLeft } from './ArrowLeft';
