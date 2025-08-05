@@ -61,20 +61,23 @@ export interface ComposedModalProps extends Omit<ModalProps, 'onClose' | 'role' 
  *
  */
 const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
-  ({
-    children,
-    className,
-    overlayClassName,
-    isOpen = false,
-    onClose = noOp,
-    maxHeightValue = '60vh',
-    title,
-    footerContent,
-    secondaryButton,
-    primaryButton,
-    id,
-    ...props
-  }: ComposedModalProps & { id?: string }) => {
+  (
+    {
+      children,
+      className,
+      overlayClassName,
+      isOpen = false,
+      onClose = noOp,
+      maxHeightValue = '60vh',
+      title,
+      footerContent,
+      secondaryButton,
+      primaryButton,
+      id,
+      ...props
+    }: ComposedModalProps & { id?: string },
+    ref,
+  ) => {
     const {
       className: baseClassName,
       'data-testid': testId,
@@ -89,6 +92,7 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
         {...commonProps}
         className={classnames(`${baseClassName}`, className)}
         id={id}
+        ref={ref}
       >
         <Text variant={TextVariants.heading3} className={`${baseClassName}__title`}>
           {title}

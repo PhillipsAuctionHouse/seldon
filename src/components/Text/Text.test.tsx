@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { render, screen } from '@testing-library/react';
 import Text, { TextProps } from './Text';
 import { TextVariants } from './types';
@@ -7,7 +8,12 @@ import TextSymbol from '../TextSymbol/TextSymbol';
 import { TextSymbolVariants } from '../TextSymbol';
 
 describe('Text', () => {
-  runCommonTests(Text, 'Text');
+  // Use a forwardRef wrapper for runCommonTests to ensure ref is tested correctly
+  const RefText = forwardRef<HTMLElement, React.ComponentProps<typeof Text>>((props, ref) => (
+    <Text {...props} ref={ref} />
+  ));
+  RefText.displayName = 'RefText';
+  runCommonTests(RefText, 'Text');
   const renderText = (props: TextProps) => {
     render(<Text {...props} />);
   };

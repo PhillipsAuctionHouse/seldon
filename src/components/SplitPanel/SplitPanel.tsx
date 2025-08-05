@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-
+import { forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 
 export interface SplitPanelProps extends React.HTMLAttributes<HTMLElement> {
@@ -20,23 +20,22 @@ export interface SplitPanelProps extends React.HTMLAttributes<HTMLElement> {
  *
  * [Figma Link](https://www.figma.com/file/Hp2FyltbOmRxTuw9kSwBAd/EPIC-About-Us?type=design&node-id=635-34713&mode=design&t=wKZW1vKP8WePUjrH-0)
  */
-const SplitPanel = ({
-  children,
-  className,
-  element: Element = 'section',
-  hasBorder = true,
-  ...props
-}: SplitPanelProps) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SplitPanel');
-  return (
-    <Element
-      {...commonProps}
-      className={classnames(baseClassName, className, { [`${baseClassName}--borderless`]: !hasBorder })}
-      {...props}
-    >
-      {children}
-    </Element>
-  );
-};
+
+const SplitPanel = forwardRef<HTMLElement, SplitPanelProps>(
+  ({ children, className, element: Element = 'section', hasBorder = true, ...props }, ref) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SplitPanel');
+    return (
+      <Element
+        {...commonProps}
+        className={classnames(baseClassName, className, { [`${baseClassName}--borderless`]: !hasBorder })}
+        ref={ref}
+        {...props}
+      >
+        {children}
+      </Element>
+    );
+  },
+);
+SplitPanel.displayName = 'SplitPanel';
 
 export default SplitPanel;

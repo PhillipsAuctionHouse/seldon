@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef } from 'react';
 import { getCommonProps, px } from '../../utils';
 import { TextAlignments, TextVariants } from './types';
 import { determineDefaultTextElement, determineTextClassName } from './utils';
@@ -31,35 +31,35 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-text--overview)
  */
-const Text = ({
-  children,
-  className,
-  element: CustomElement,
-  variant = TextVariants.body2,
-  align,
-  isSkeletonLoading,
-  ...props
-}: TextProps) => {
-  const Component = CustomElement || determineDefaultTextElement(variant);
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Text');
 
-  return (
-    <Component
-      {...commonProps}
-      className={classNames(baseClassName, className, determineTextClassName(variant), {
-        [`${baseClassName}--${align}`]: !!align,
-      })}
-      {...props}
-    >
-      <span
-        className={classNames({
-          [`${px}-skeleton`]: isSkeletonLoading,
+const Text = forwardRef<HTMLElement, TextProps>(
+  (
+    { children, className, element: CustomElement, variant = TextVariants.body2, align, isSkeletonLoading, ...props },
+    ref,
+  ) => {
+    const Component = CustomElement || determineDefaultTextElement(variant);
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Text');
+
+    return (
+      <Component
+        {...commonProps}
+        className={classNames(baseClassName, className, determineTextClassName(variant), {
+          [`${baseClassName}--${align}`]: !!align,
         })}
+        ref={ref}
+        {...props}
       >
-        {children}
-      </span>
-    </Component>
-  );
-};
+        <span
+          className={classNames({
+            [`${px}-skeleton`]: isSkeletonLoading,
+          })}
+        >
+          {children}
+        </span>
+      </Component>
+    );
+  },
+);
+Text.displayName = 'Text';
 
 export default Text;
