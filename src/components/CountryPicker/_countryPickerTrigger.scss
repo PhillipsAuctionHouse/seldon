@@ -9,7 +9,7 @@
     &-label {
       color: $soft-black;
       font-variation-settings: 'wght' 600;
-      margin-bottom: 4px;
+      margin-bottom: $spacing-micro;
 
       &--error {
         color: $error-red;
@@ -34,7 +34,6 @@
         box-shadow 0.2s;
       width: 100%;
 
-      &:hover,
       &:focus-visible {
         border-color: $pure-black;
         box-shadow: 0 0 0 2px rgba($pure-black, 0.08);
@@ -58,16 +57,16 @@
     &-icon {
       align-items: center;
       display: flex;
-      margin-left: 8px;
+      margin-left: $spacing-sm;
     }
 
     &-error-msg {
       color: $error-red;
-      margin-top: 4px;
+      margin-top: $spacing-micro;
     }
 
     &-flag {
-      height: 16px;
+      height: 1rem;
       margin-right: $spacing-sm;
     }
   }

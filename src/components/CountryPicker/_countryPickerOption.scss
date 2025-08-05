@@ -39,14 +39,14 @@
     }
 
     &-flag {
-      height: 16px;
-      margin-right: 8px;
+      height: 1rem;
+      margin-right: $spacing-sm;
       vertical-align: middle;
     }
   }
   .#{$px}-country-picker__radio {
-    height: 20px;
-    width: 20px;
+    height: 1.25rem;
+    width: 1.25rem;
   }
 
   &__radio--hidden {

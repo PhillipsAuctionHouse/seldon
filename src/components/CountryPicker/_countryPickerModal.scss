@@ -87,7 +87,7 @@
     align-items: center;
     color: $dark-gray;
     display: flex;
-    left: 12px;
+    left: 0.75rem;
     pointer-events: none;
     position: absolute;
     top: 50%;
@@ -96,13 +96,13 @@
   }
 
   .#{$px}-country-picker__input-wrapper .seldon-input__label {
-    border: 0 !important;
-    height: 1px !important;
-    margin: -1px !important;
-    overflow: hidden !important;
-    padding: 0 !important;
-    position: absolute !important;
-    white-space: nowrap !important;
-    width: 1px !important;
+    border: 0;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
   }
 }
