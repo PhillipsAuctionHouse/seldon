@@ -1,3 +1,10 @@
+# [1.170.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.169.3...v1.170.0) (2025-08-05)
+
+
+### Features
+
+* **favoritesCollectionTile:** L3-7093 favorites collection tile fixes ([#651](https://github.com/PhillipsAuctionHouse/seldon/issues/651)) ([632e154](https://github.com/PhillipsAuctionHouse/seldon/commit/632e154bfcc99a3519f056b5d714bee87c4e2842))
+
 ## [1.169.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.169.2...v1.169.3) (2025-08-04)
 
 
