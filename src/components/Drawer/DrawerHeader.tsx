@@ -4,26 +4,23 @@ import * as Dialog from '@radix-ui/react-dialog';
 import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 import { Icon } from '../Icon';
+import { DrawerProps } from './Drawer';
 
-type Side = 'left' | 'right';
 type CommonProps = ComponentProps<'div'> & {
   baseClassName: string;
-  drawerOpenSide?: Side | 'bottom';
-  onClose?: () => void;
+  drawerOpenSide: DrawerProps['drawerOpenSide'];
+  onClose: () => void;
 };
-type DrawerHeaderProps = CommonProps & {
+type BookendProps = CommonProps & {
+  bookendSide: 'left' | 'right';
+};
+export type DrawerHeaderProps = CommonProps & {
   headerText?: string;
 };
 
-type BookendProps = CommonProps & { bookendSide: Side };
-
-const Bookend = ({
-  baseClassName,
-  drawerOpenSide = 'right',
-  onClose,
-  bookendSide: thisBookendSide,
-  ...rest
-}: BookendProps) => (
+// There is a Bookend component on either side of the header, the close button renders in whichever
+// one matches the side the drawer opened on (or on the left, if the drawer opens from the bottom)
+const Bookend = ({ baseClassName, drawerOpenSide, onClose, bookendSide: thisBookendSide, ...rest }: BookendProps) => (
   <div className={`${baseClassName}__bookend ${baseClassName}__bookend-${thisBookendSide}`} {...rest}>
     {(drawerOpenSide === thisBookendSide || (drawerOpenSide === 'bottom' && thisBookendSide === 'left')) && (
       <Dialog.Close asChild>
