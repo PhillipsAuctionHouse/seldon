@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { Icon } from '../Icon';
 import { Text, TextVariants } from '../Text';
 
+export type StepStatusEnum = 'completed' | 'current' | 'not started';
 export interface ProgressIndicatorProps extends Progress.ProgressProps, ComponentProps<'div'> {
   /**
    * Total number of steps in the progress indicator.
@@ -24,7 +25,8 @@ export interface ProgressIndicatorProps extends Progress.ProgressProps, Componen
   className?: string;
   /**
    * Aria label for the progress indicator.
-   */ ariaLabelProgress?: string;
+   */
+  ariaLabelProgress?: string;
   /**
    * Aria label for the progress steps.
    */
@@ -32,7 +34,7 @@ export interface ProgressIndicatorProps extends Progress.ProgressProps, Componen
   /**
    * Aria labels for each step in different states.
    */
-  ariaLabelStep?: (step: number, state: 'completed' | 'current' | 'not started') => string;
+  ariaLabelStep?: (step: number, state: StepStatusEnum) => string;
   /**
    * Aria label for the completed icon.
    */
