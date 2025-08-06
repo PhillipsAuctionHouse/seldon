@@ -60,24 +60,24 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
 const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
   (
     {
-      isOpen = false,
+      isOpen,
       onClose = noOp,
-      headerText = '',
-      title = '',
+      headerText,
+      title,
       description = title,
       drawerOpenSide = 'right',
+      paddingLevel,
       className: classNameFromParent,
       children,
-      paddingLevel,
       ...props
     },
     ref,
   ) => {
-    const { className: localClassName, ...commonProps } = getCommonProps(props, 'Drawer');
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Drawer');
     const isBottomSheet = drawerOpenSide === 'bottom';
 
     // the most common value for paddingLevel is 2. some newer designs with header text use 1. 0 is used by the filter drawer.
-    // this might be better served on a usage-by-usage basis, that'd just mean adding margins to a bunch of Seldon and Remix components.
+    // this might be better served on a usage-by-usage basis, but I hope drawer designs will be consistent enough that this is fine.
     paddingLevel ??= headerText ? 1 : 2;
     return (
       <Dialog.Root
@@ -89,10 +89,10 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
         }}
       >
         <Dialog.Portal>
-          <Dialog.Overlay onClick={onClose} className={`${localClassName}__overlay`} data-testid="drawer-overlay" />
+          <Dialog.Overlay onClick={onClose} className={`${baseClassName}__overlay`} data-testid="drawer-overlay" />
           <Dialog.Content
-            className={classnames(localClassName, classNameFromParent, {
-              [`${localClassName}--bottom`]: isBottomSheet,
+            className={classnames(baseClassName, classNameFromParent, {
+              [`${baseClassName}--bottom`]: isBottomSheet,
             })}
             data-side={drawerOpenSide}
             id={props.id}
@@ -107,7 +107,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
             </VisuallyHidden>
             {headerText ? (
               <DrawerHeader
-                baseClassName={localClassName}
+                baseClassName={baseClassName}
                 headerText={headerText}
                 onClose={onClose}
                 drawerOpenSide={drawerOpenSide}
@@ -116,7 +116,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
               <Dialog.Close asChild>
                 <IconButton
                   onClick={onClose}
-                  className={classnames(`${localClassName}__close`)}
+                  className={classnames(`${baseClassName}__close`)}
                   aria-label="Close"
                   data-testid="drawer-close"
                   variant={ButtonVariants.tertiary}
@@ -125,11 +125,10 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
                 </IconButton>
               </Dialog.Close>
             )}
-
             <div
               className={classnames(
-                `${localClassName}__content`,
-                paddingLevel < 3 && `${localClassName}__content--ep${paddingLevel}`,
+                `${baseClassName}__content`,
+                paddingLevel < 3 && `${baseClassName}__content--ep${paddingLevel}`,
               )}
             >
               {children}

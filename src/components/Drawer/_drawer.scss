@@ -85,11 +85,7 @@
     padding-top: $snowflake-menu-padding;
     width: 100%;
 
-    // different designs require different padding (ep = extra padding).
-
-    // this could be handled in individual implementations instead,
-    // I'm not sure if these are Distinct Drawer Styles or design oversights
-    // or a variety of old and new designs that will eventually be all new designs.
+    // different designs require different padding (ep = extra padding). more info in the component.
 
     &--ep0 {
       padding-top: 0;

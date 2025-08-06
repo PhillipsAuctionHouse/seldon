@@ -51,7 +51,8 @@ const argTypes = {
   paddingLevel: {
     control: { type: 'select' },
     options: [undefined, 0, 1, 2],
-    description: 'Extra padding around the content. 0, 1, 2, or undefined (defaults to 2).',
+    description:
+      'Extra padding around the content. 0, 1, 2, or undefined (defaults to 2, or 1 if headerText is supplied).',
     defaultValue: undefined,
     table: { type: { summary: '0 | 1 | 2 | undefined' } },
   },
@@ -73,6 +74,7 @@ export const Playground = (props: DrawerProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const onClose = () => {
+    // Refocus on button after close for keyboard navigation
     buttonRef.current?.focus();
     updateArgs({ ...props, isOpen: false });
   };
