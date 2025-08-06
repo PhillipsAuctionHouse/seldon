@@ -32,7 +32,7 @@ export interface ProgressIndicatorProps extends Progress.ProgressProps, Componen
   /**
    * Aria labels for each step in different states.
    */
-  ariaLabelStep?: (step: number, state: 'completed' | 'current' | 'notStarted') => string;
+  ariaLabelStep?: (step: number, state: 'completed' | 'current' | 'not started') => string;
   /**
    * Aria label for the completed icon.
    */
@@ -80,7 +80,7 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
               const stepNumber = index + 1;
               const isComplete = current > stepNumber;
               const isCurrent = current === stepNumber;
-              const stepState = isComplete ? 'completed' : isCurrent ? 'current' : 'notStarted';
+              const stepState = isComplete ? 'completed' : isCurrent ? 'current' : 'not started';
               const stepAriaLabel = ariaLabelStep(stepNumber, stepState);
 
               return (
