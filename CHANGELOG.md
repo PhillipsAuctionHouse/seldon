@@ -1,3 +1,10 @@
+## [1.171.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.171.0...v1.171.1) (2025-08-06)
+
+
+### Bug Fixes
+
+* **forwardRef:** L3-6777 add forwardRef tests to all components and fix any missing forwardRef ([#679](https://github.com/PhillipsAuctionHouse/seldon/issues/679)) ([7b3fd69](https://github.com/PhillipsAuctionHouse/seldon/commit/7b3fd69d279a69f6dbcde05afe825e7d816c0867))
+
 # [1.171.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.170.0...v1.171.0) (2025-08-06)
 
 
