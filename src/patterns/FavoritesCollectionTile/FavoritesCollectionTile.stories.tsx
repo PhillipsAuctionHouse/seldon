@@ -22,7 +22,7 @@ Playground.args = {
   id: 'favorites-collection-tile-1',
   count: 2,
   name: 'New List',
-  imageSrc: 'https://via.placeholder.com/400',
+  imageSrc: 'https://picsum.photos/160/90',
   variant: 'lists',
   onEdit: (): void => console.log('Edit list clicked'),
   onDelete: (): void => console.log('Delete list clicked'),
@@ -73,6 +73,7 @@ CreateList.args = {
   variant: 'create',
   element: 'a',
   linkClassName: linkClassName,
+  onClick: () => alert('Create new list clicked'),
 };
 
 export const EmptyList = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
