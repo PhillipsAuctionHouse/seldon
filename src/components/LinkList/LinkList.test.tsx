@@ -1,6 +1,7 @@
 import LinkBlock, { LinkBlockProps } from '../LinkBlock/LinkBlock';
 import { render, screen } from '@testing-library/react';
 import LinkList from './LinkList';
+import { forwardRef } from 'react';
 import { runCommonTests } from '../../utils/testUtils';
 
 const LinkBlocks: React.ReactElement<LinkBlockProps, typeof LinkBlock>[] = [
@@ -34,7 +35,13 @@ describe('LinkList component', () => {
   afterEach(() => {
     vi.clearAllMocks();
   });
-  runCommonTests((props) => <LinkList {...props}>{LinkBlocks}</LinkList>, 'LinkList');
+  const ComponentWithRef = forwardRef<HTMLUListElement, React.ComponentProps<typeof LinkList>>((props, ref) => (
+    <LinkList {...props} ref={ref}>
+      {LinkBlocks}
+    </LinkList>
+  ));
+  ComponentWithRef.displayName = 'ComponentWithRef';
+  runCommonTests(ComponentWithRef, 'LinkList');
 
   it('check testid', () => {
     render(<LinkList id="test">{LinkBlocks}</LinkList>);

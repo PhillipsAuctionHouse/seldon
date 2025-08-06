@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import GridItem from './GridItem';
 import { GridItemAlign } from './types';
@@ -5,7 +6,12 @@ import { runCommonTests } from '../../utils/testUtils';
 import { px } from '../../utils';
 
 describe('GridItem', () => {
-  runCommonTests(GridItem, 'GridItem');
+  // Use a forwardRef wrapper for runCommonTests to ensure ref is tested correctly
+  const RefGridItem = React.forwardRef<HTMLDivElement, React.ComponentProps<typeof GridItem>>((props, ref) => (
+    <GridItem {...props} ref={ref} />
+  ));
+  RefGridItem.displayName = 'RefGridItem';
+  runCommonTests(RefGridItem, 'GridItem');
 
   it('renders children correctly', () => {
     render(<GridItem>Child</GridItem>);

@@ -1,5 +1,5 @@
 import LinkBlock, { type LinkBlockProps } from '../LinkBlock/LinkBlock';
-import React from 'react';
+import { forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import Grid, { GridProps } from '../Grid/Grid';
@@ -18,20 +18,25 @@ export interface LinkListProps extends GridProps<HTMLUListElement> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-links-linklist--overview)
  */
 
-const LinkList = ({ children, className, ...props }: LinkListProps) => {
+const LinkList = forwardRef<HTMLUListElement, LinkListProps>(({ children, className, ...props }, ref) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'LinkList');
-
   return (
-    <Grid {...commonProps} className={classnames(baseClassName, className)} element="ul" role="list" {...props}>
-      {children.map((LinkBlockComponent) => {
-        return (
-          <li key={LinkBlockComponent?.props?.linkProps?.href} className={`${baseClassName}--item`}>
-            {LinkBlockComponent}
-          </li>
-        );
-      })}
+    <Grid
+      {...commonProps}
+      className={classnames(baseClassName, className)}
+      element="ul"
+      role="list"
+      {...props}
+      ref={ref}
+    >
+      {children.map((LinkBlockComponent) => (
+        <li key={LinkBlockComponent?.props?.linkProps?.href} className={`${baseClassName}--item`}>
+          {LinkBlockComponent}
+        </li>
+      ))}
     </Grid>
   );
-};
+});
+LinkList.displayName = 'LinkList';
 
 export default LinkList;

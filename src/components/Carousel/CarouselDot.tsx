@@ -3,7 +3,7 @@ import { useInView } from 'react-intersection-observer';
 import { getCommonProps } from '../../utils';
 import { ComponentProps } from 'react';
 
-interface Props extends ComponentProps<'button'> {
+export interface CarouselDotProps extends ComponentProps<'button'> {
   /** Whether the dot is selected */
   isSelected: boolean;
   /** Callback function when the dot is clicked */
@@ -23,7 +23,7 @@ export const CarouselDot = ({
   onInViewChange,
   variant = 'md',
   ...props
-}: Props) => {
+}: CarouselDotProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'CarouselDot');
   const { ref } = useInView({
     threshold: 0,
