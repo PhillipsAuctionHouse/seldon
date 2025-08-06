@@ -27,7 +27,7 @@ const AdminChevronLeft = memo(
         {...props}
       >
         {title ? <title id={titleId}>{title}</title> : null}
-        <path fill={color} d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+        <path fill={color || '#fff'} d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
       </svg>
     );
   }),

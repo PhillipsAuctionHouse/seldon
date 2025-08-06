@@ -41,7 +41,10 @@ const AdminFullscreen = memo(
           <path fill={color || '#D9D9D9'} d="M0 .625h24v24H0z" />
         </mask>
         <g mask="url(#AdminFullscreen_svg__a)">
-          <path fill={color} d="M3 21.625v-5h2v3h3v2zm13 0v-2h3v-3h2v5zm-13-13v-5h5v2H5v3zm16 0v-3h-3v-2h5v5z" />
+          <path
+            fill={color || '#fff'}
+            d="M3 21.625v-5h2v3h3v2zm13 0v-2h3v-3h2v5zm-13-13v-5h5v2H5v3zm16 0v-3h-3v-2h5v5z"
+          />
         </g>
       </svg>
     );

@@ -41,7 +41,7 @@ const AdminPlay = memo(
           <path fill={color || '#D9D9D9'} d="M0 .625h24v24H0z" />
         </mask>
         <g mask="url(#AdminPlay_svg__a)">
-          <path fill={color} d="M8 19.625v-14l11 7z" />
+          <path fill={color || '#fff'} d="M8 19.625v-14l11 7z" />
         </g>
       </svg>
     );
