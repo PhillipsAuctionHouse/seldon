@@ -32,9 +32,7 @@ export interface ProgressIndicatorProps extends Progress.ProgressProps, Componen
   /**
    * Aria labels for each step in different states.
    */
-  ariaLabelStepCompleted?: (step: number) => string;
-  ariaLabelStepCurrent?: (step: number) => string;
-  ariaLabelStepNotStarted?: (step: number) => string;
+  ariaLabelStep?: (step: number, state: 'completed' | 'current' | 'notStarted') => string;
   /**
    * Aria label for the completed icon.
    */
@@ -59,9 +57,7 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
       className,
       ariaLabelProgress = 'Progress',
       ariaLabelSteps = 'Progress steps',
-      ariaLabelStepCompleted = (step) => `Step ${step} completed`,
-      ariaLabelStepCurrent = (step) => `Step ${step} current`,
-      ariaLabelStepNotStarted = (step) => `Step ${step} not started`,
+      ariaLabelStep = (step, state) => `Step ${step} ${state}`,
       ariaLabelCompletedIcon = 'Completed Icon',
       ...props
     },
@@ -81,13 +77,11 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
         <Progress.Root value={getValue(current)} max={steps} aria-label={ariaLabelProgress}>
           <div className={`${baseClassName}__steps`} aria-label={ariaLabelSteps}>
             {Array.from({ length: steps }).map((_, index) => {
-              const isComplete = current > index + 1;
-              const isCurrent = current === index + 1;
-              const stepAriaLabel = isComplete
-                ? ariaLabelStepCompleted(index + 1)
-                : isCurrent
-                  ? ariaLabelStepCurrent(index + 1)
-                  : ariaLabelStepNotStarted(index + 1);
+              const stepNumber = index + 1;
+              const isComplete = current > stepNumber;
+              const isCurrent = current === stepNumber;
+              const stepState = isComplete ? 'completed' : isCurrent ? 'current' : 'notStarted';
+              const stepAriaLabel = ariaLabelStep(stepNumber, stepState);
 
               return (
                 <Fragment key={props.labels ? props.labels[index] : index}>
@@ -95,7 +89,7 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
                     className={`${baseClassName}__item`}
                     aria-current={isCurrent ? 'step' : undefined}
                     aria-label={stepAriaLabel}
-                    data-testid="progress-step"
+                    data-testid={`progress-step-${stepNumber}`}
                   >
                     <span
                       className={classnames(`${baseClassName}__circle`, {
@@ -112,7 +106,7 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
                           height={20}
                         />
                       ) : (
-                        <Text variant={TextVariants.badge}>{index + 1}</Text>
+                        <Text variant={TextVariants.badge}>{stepNumber}</Text>
                       )}
                     </span>
                     {props.labels && props.labels[index] && (
@@ -121,7 +115,7 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
                       </span>
                     )}
                   </div>
-                  {index < steps - 1 && <div className={`${baseClassName}__connector`} aria-hidden="true" />}
+                  {index < steps - 1 ? <div className={`${baseClassName}__connector`} aria-hidden="true" /> : null}
                 </Fragment>
               );
             })}
