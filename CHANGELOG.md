@@ -1,3 +1,10 @@
+# [1.171.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.170.0...v1.171.0) (2025-08-06)
+
+
+### Features
+
+* **icons:** PHOENIX-2024 admin icons and colors ([#678](https://github.com/PhillipsAuctionHouse/seldon/issues/678)) ([3dda2f3](https://github.com/PhillipsAuctionHouse/seldon/commit/3dda2f307850cfce9538e8318ef5082e3e6936e6))
+
 # [1.170.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.169.3...v1.170.0) (2025-08-05)
 
 
