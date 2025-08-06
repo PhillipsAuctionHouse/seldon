@@ -1,0 +1,38 @@
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
+import CountryPicker from './CountryPicker';
+
+describe('CountryPicker Component', () => {
+  const defaultProps = {
+    triggerLabel: 'Select Country',
+    triggerValue: 'US',
+    triggerCountryCode: 'US',
+    countryValue: 'US',
+    onCountryChange: vi.fn(),
+    modalTitle: 'Select a Country',
+    searchLabel: 'Search for a country',
+    searchPlaceholder: 'Type to search...',
+    selectButtonLabel: 'Select',
+    onChange: vi.fn(),
+    id: 'country-picker',
+    baseClassName: 'country-picker',
+  };
+
+  it('renders the trigger button with the correct label', () => {
+    render(<CountryPicker {...defaultProps} />);
+    expect(screen.getByText('Select Country')).toBeInTheDocument();
+  });
+
+  it('opens the modal when the trigger button is clicked', async () => {
+    render(<CountryPicker {...defaultProps} />);
+    const triggerButton = screen.getByRole('button', { name: 'Select Country' });
+    await userEvent.click(triggerButton);
+    expect(await screen.findByRole('dialog')).toBeInTheDocument();
+  });
+
+  it('displays an error message if hasTriggerError is true', () => {
+    render(<CountryPicker {...defaultProps} hasTriggerError={true} triggerErrorMsg="Error occurred" />);
+    expect(screen.getByText('Error occurred')).toBeInTheDocument();
+  });
+});
