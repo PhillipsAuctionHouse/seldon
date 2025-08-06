@@ -61,7 +61,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
             aria-label={ariaLabels.drawer || `${filterButtonLabel} drawer`}
             className={`${px}-filter-drawer-mobile`}
             headerText={`${buttonLabel} Filter`}
-            extraPaddingLevel={0}
+            paddingLevel={0}
           >
             <FilterDropdownMenuMobile
               buttonType={buttonType}
