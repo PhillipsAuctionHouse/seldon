@@ -47,7 +47,7 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
    * Default is 2 if null or undefined, or 1 if headingText is supplied. This is silly
    * but aligns with design and allows this prop to be left out most of the time.
    */
-  extraPaddingLevel?: 0 | 1 | 2;
+  paddingLevel?: 0 | 1 | 2;
 }
 
 /**
@@ -68,7 +68,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       drawerOpenSide = 'right',
       className: classNameFromParent,
       children,
-      extraPaddingLevel,
+      paddingLevel,
       ...props
     },
     ref,
@@ -76,8 +76,9 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     const { className: localClassName, ...commonProps } = getCommonProps(props, 'Drawer');
     const isBottomSheet = drawerOpenSide === 'bottom';
 
-    // legacy value for extra padding is 2, it isn't specified in those usages. newer drawers use 0 or 1.
-    extraPaddingLevel ??= headerText ? 1 : 2;
+    // the most common value for paddingLevel is 2. some newer designs with header text use 1. 0 is used by the filter drawer.
+    // this might be better served on a usage-by-usage basis, that'd just mean adding margins to a bunch of Seldon and Remix components.
+    paddingLevel ??= headerText ? 1 : 2;
     return (
       <Dialog.Root
         open={isOpen}
@@ -127,8 +128,8 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
 
             <div
               className={classnames(
-                `${localClassName}__content-children`,
-                extraPaddingLevel < 3 && `${localClassName}__content-children--ep${extraPaddingLevel}`,
+                `${localClassName}__content`,
+                paddingLevel < 3 && `${localClassName}__content--ep${paddingLevel}`,
               )}
             >
               {children}

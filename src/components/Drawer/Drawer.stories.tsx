@@ -48,7 +48,7 @@ const argTypes = {
     defaultValue: 'right',
     table: { type: { summary: `'left' | 'right' | 'bottom'` } },
   },
-  extraPaddingLevel: {
+  paddingLevel: {
     control: { type: 'select' },
     options: [undefined, 0, 1, 2],
     description: 'Extra padding around the content. 0, 1, 2, or undefined (defaults to 2).',
@@ -95,7 +95,7 @@ export const Playground = (props: DrawerProps) => {
         title={props.title}
         className={props.className}
         drawerOpenSide={props.drawerOpenSide}
-        extraPaddingLevel={props.extraPaddingLevel}
+        paddingLevel={props.paddingLevel}
       >
         <Subscribe
           id="subscribe-drawer"
@@ -114,7 +114,7 @@ Playground.args = {
   headerText: 'Drawer title',
   title: undefined,
   drawerOpenSide: 'right',
-  extraPaddingLevel: 2,
+  paddingLevel: 2,
 };
 
 Playground.argTypes = argTypes;

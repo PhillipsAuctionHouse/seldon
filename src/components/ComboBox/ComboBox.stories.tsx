@@ -81,7 +81,7 @@ export const ComboBoxInDrawer = () => {
           setIsOpen(false);
           setDrawerValue('');
         }}
-        extraPaddingLevel={2}
+        paddingLevel={2}
       >
         <div style={{ padding: '20px', width: '300px' }} ref={drawerContentRef}>
           <ComboBox
