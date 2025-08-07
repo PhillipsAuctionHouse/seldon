@@ -198,7 +198,7 @@ const Input = React.forwardRef(
           {labelText}
         </label>
         {inputAdornment ? (
-          <div className={`${px}-input__wrapper`}>
+          <div className={`${px}-input__wrapper`} data-testid={`wrapper-${id}`}>
             <span className={`${px}-input__wrapper__adornment`} id="adornmnent" data-testid={`adornment-${id}`}>
               {inputAdornment}
             </span>

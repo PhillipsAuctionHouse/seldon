@@ -41,6 +41,11 @@ const argTypes = {
       type: 'text',
     },
   },
+  inputAdornment: {
+    control: {
+      type: 'text',
+    },
+  },
   labelText: {
     control: {
       type: 'text',
