@@ -27,6 +27,49 @@ $lg: #{$px}-input--lg;
     }
   }
 
+  &__wrapper {
+    @include text($string2);
+
+    accent-color: $soft-black;
+    align-items: center;
+    border: 1px solid $keyline-gray;
+    border-radius: 0.1875rem;
+    display: inline-flex;
+    font-variation-settings: 'wght' 600;
+    margin-bottom: 0.25rem;
+    padding: $padding-xsm;
+    position: relative;
+
+    &::placeholder {
+      font-variation-settings: 'wght' 400;
+    }
+
+    &:focus-visible,
+    &:focus-within {
+      outline: 1px solid $pure-black;
+    }
+
+    &__adornment {
+      align-items: center;
+      display: flex;
+      font-size: var(--string-size2);
+      font-variation-settings: 'wght' 600;
+      line-height: calc(var(--string-line-height-size2) + 0.15rem);
+      margin-right: 0.25rem;
+      white-space: nowrap;
+
+      & + .#{$px}-input__wrapper__input {
+        border: none;
+        padding: 0;
+        width: 100%;
+
+        &:focus-visible {
+          outline: none;
+        }
+      }
+    }
+  }
+
   &__input {
     @include text($string2);
 

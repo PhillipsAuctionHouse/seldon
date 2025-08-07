@@ -9,6 +9,11 @@ export interface InputProps extends Omit<React.ComponentProps<'input'>, 'size'> 
   className?: string;
 
   /**
+   * Optional adornment to be displayed before the input value
+   */
+  inputAdornment?: string | React.ReactNode;
+
+  /**
    * Optionally provide the default value of the `<input>`. Should not be passed into controlled input!
    */
   defaultValue?: string | number | readonly string[];
@@ -119,6 +124,7 @@ const Input = React.forwardRef(
   (
     {
       className,
+      inputAdornment,
       defaultValue,
       disabled,
       hideLabel,
@@ -161,6 +167,24 @@ const Input = React.forwardRef(
       [`${className}__wrapper`]: className,
       [`${px}-input--hidden`]: rest.hidden,
     });
+
+    const inputClassNames = inputAdornment
+      ? classnames(`${px}-input__wrapper__input`, className, { [`${px}-skeleton`]: isSkeletonLoading })
+      : classnames(`${px}-input__input`, className, { [`${px}-skeleton`]: isSkeletonLoading });
+    const inputPropsToPass = {
+      className: inputClassNames,
+      'data-testid': id,
+      disabled: inputProps.disabled,
+      id,
+      onChange,
+      onClick,
+      placeholder: isSkeletonLoading ? '' : placeholder,
+      readOnly,
+      ref,
+      type: inputProps.type,
+      ...(inputProps.type !== 'checkbox' && inputProps.type !== 'radio' ? { value, defaultValue } : {}),
+      ...rest,
+    };
     return (
       <div className={wrapperClassnames}>
         <label
@@ -173,23 +197,16 @@ const Input = React.forwardRef(
         >
           {labelText}
         </label>
-        <input
-          className={classnames(`${px}-input__input`, className, {
-            [`${px}-skeleton`]: isSkeletonLoading,
-          })}
-          data-testid={id}
-          disabled={inputProps.disabled}
-          id={id}
-          onChange={onChange}
-          onClick={onClick}
-          placeholder={isSkeletonLoading ? '' : placeholder}
-          readOnly={readOnly}
-          ref={ref}
-          type={inputProps.type}
-          // can't set values on a checkbox or it breaks
-          {...(inputProps.type !== 'checkbox' && inputProps.type !== 'radio' ? { value, defaultValue } : {})}
-          {...rest}
-        />
+        {inputAdornment ? (
+          <div className={`${px}-input__wrapper`}>
+            <span className={`${px}-input__wrapper__adornment`} id="adornmnent" data-testid={`adornment-${id}`}>
+              {inputAdornment}
+            </span>
+            <input {...inputPropsToPass} />
+          </div>
+        ) : (
+          <input {...inputPropsToPass} />
+        )}
         {inputProps.validation ? (
           inputProps.validation
         ) : (
