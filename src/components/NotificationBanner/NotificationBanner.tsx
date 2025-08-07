@@ -20,10 +20,10 @@ export type NotificationBannerProps = ComponentProps<'div'> & {
  */
 const NotificationBanner = forwardRef<HTMLDivElement, NotificationBannerProps>(({ className, ...props }, ref) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'NotificationBanner');
-  const { children } = props;
+  const { children, id } = props;
 
   return (
-    <div {...commonProps} className={classnames(baseClassName, className)} ref={ref}>
+    <div {...commonProps} className={classnames(baseClassName, className)} ref={ref} id={id}>
       {children}
     </div>
   );
