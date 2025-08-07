@@ -8,10 +8,6 @@ export type NotificationBannerProps = ComponentProps<'div'> & {
    * The content to display inside the notification banner.
    */
   children: React.ReactNode;
-  /**
-   * A unique `id` for the `<NotificationBanner>`
-   */
-  id: string;
 };
 /**
  * ## Overview
