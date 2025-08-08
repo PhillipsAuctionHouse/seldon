@@ -74,7 +74,7 @@
   .flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n + 1)),
   .flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n + 1)),
   .flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n + 1)) {
-    box-shadow: -10px 0 0 #e6e6e6;
+    box-shadow: -10px 0 0 $grey-light;
   }
 
   &.arrowTop::before,

@@ -1,7 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .split-panel-story {
-  background-color: #f4f2f1;
+  background-color: $grey-lightest;
 
   &__text {
     font-family: Montserrat, serif;
