@@ -1,10 +1,13 @@
-import { type CountryCallingCode, type CountryCode, getCountryCallingCode } from 'libphonenumber-js';
+import { type CountryCode, getCountryCallingCode } from 'libphonenumber-js';
 
-// makes the value pass as a libphonenumber CountryCallingCode
-const numberIntoCallingCode = (number: string | number): CountryCallingCode =>
-  Object.assign(String(number), { __tag: 'CountryCallingCode' } as const);
+const SPECIAL_CALLING_CODES: Record<string, string> = {
+  GS: '500', // South Georgia and the South Sandwich Islands
+  // Add more special cases here as needed
+};
 
-export const getSafeCountryCallingCode = (countryCode: CountryCode | 'GS'): CountryCallingCode =>
-  countryCode === 'GS' // GS is South Georgia and the South Sandwich Islands, which we currently support but libphonenumber-js does not
-    ? numberIntoCallingCode(500)
-    : getCountryCallingCode(countryCode);
+export const getSafeCountryCallingCode = (countryCode: CountryCode | string): string => {
+  if (SPECIAL_CALLING_CODES[countryCode]) {
+    return SPECIAL_CALLING_CODES[countryCode];
+  }
+  return String(getCountryCallingCode(countryCode as CountryCode));
+};
