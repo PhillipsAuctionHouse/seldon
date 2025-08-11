@@ -8,8 +8,8 @@ const baseProps: React.ComponentProps<typeof CountryPickerModal> = {
   variantConfig: getConfigVariant(false),
   onClose: vi.fn(),
   modalTitle: 'Select a Country',
-  searchLabel: 'Search for a country',
-  searchPlaceholder: 'Type to search...',
+  searchInputLabel: 'Search for a country',
+  searchInputPlaceholder: 'Type to search...',
   selectButtonLabel: 'Select',
   baseClassName: 'country-picker-modal',
 };

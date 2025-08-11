@@ -8,8 +8,8 @@ describe('CountryPicker Component', () => {
     triggerDisplayValue: 'US',
     triggerCountryCallingCode: '+1',
     modalTitle: 'Select a Country',
-    searchLabel: 'Search for a country',
-    searchPlaceholder: 'Type to search...',
+    searchInputLabel: 'Search for a country',
+    searchInputPlaceholder: 'Type to search...',
     selectButtonLabel: 'Select',
     variantConfig: {
       onChange: vi.fn(),

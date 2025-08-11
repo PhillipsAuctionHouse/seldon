@@ -15,8 +15,8 @@ const CountryPicker = ({
   triggerDisplayValue,
   triggerCountryCallingCode,
   modalTitle,
-  searchLabel,
-  searchPlaceholder,
+  searchInputLabel,
+  searchInputPlaceholder,
   selectButtonLabel,
   inputName,
   variantConfig,
@@ -28,8 +28,8 @@ const CountryPicker = ({
 
   const modalProps = {
     modalTitle,
-    searchLabel,
-    searchPlaceholder,
+    searchInputLabel,
+    searchInputPlaceholder,
     selectButtonLabel,
     inputName,
     ...props,

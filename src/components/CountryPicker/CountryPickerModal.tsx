@@ -20,12 +20,12 @@ export type CountryPickerModalProps = {
   /**
    * The label for the search input field.
    */
-  searchLabel: string;
+  searchInputLabel: string;
 
   /**
    * Placeholder text for the search input field.
    */
-  searchPlaceholder: string;
+  searchInputPlaceholder: string;
 
   /**
    * Label for the button used to confirm the selection.
@@ -63,8 +63,8 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps<CountryPick
     isOpen = false,
     onClose,
     modalTitle,
-    searchLabel,
-    searchPlaceholder,
+    searchInputLabel,
+    searchInputPlaceholder,
     selectButtonLabel,
     inputName = 'countryValue',
     baseClassName,
@@ -151,8 +151,8 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps<CountryPick
               <Input
                 id="countrySearch"
                 type="search"
-                labelText={searchLabel}
-                placeholder={searchPlaceholder}
+                labelText={searchInputLabel}
+                placeholder={searchInputPlaceholder}
                 value={filter}
                 onChange={(e) => {
                   setFilter(e.target.value);

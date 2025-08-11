@@ -66,8 +66,8 @@ export const CountryPhoneCodePicker = (props: CountryPickerProps & { variantConf
       triggerErrorMsg=""
       triggerCountryCallingCode={selectedCountry ? `+${+getSafeCountryCallingCode(selectedCountry.code)}` : undefined}
       modalTitle="Country code"
-      searchLabel=""
-      searchPlaceholder="Search country"
+      searchInputLabel=""
+      searchInputPlaceholder="Search country"
       selectButtonLabel="Select"
       variantConfig={{
         isPhone: props.variantConfig.isPhone,
