@@ -168,9 +168,10 @@ const Input = React.forwardRef(
       [`${px}-input--hidden`]: rest.hidden,
     });
 
-    const inputClassNames = inputAdornment
-      ? classnames(`${px}-input__wrapper__input`, className, { [`${px}-skeleton`]: isSkeletonLoading })
-      : classnames(`${px}-input__input`, className, { [`${px}-skeleton`]: isSkeletonLoading });
+    const inputClassNames =
+      inputAdornment && inputProps.type === 'text'
+        ? classnames(`${px}-input__wrapper__input`, className, { [`${px}-skeleton`]: isSkeletonLoading })
+        : classnames(`${px}-input__input`, className, { [`${px}-skeleton`]: isSkeletonLoading });
     const inputPropsToPass = {
       className: inputClassNames,
       'data-testid': id,
@@ -197,7 +198,7 @@ const Input = React.forwardRef(
         >
           {labelText}
         </label>
-        {inputAdornment ? (
+        {inputAdornment && inputProps.type === 'text' ? (
           <div className={`${px}-input__wrapper`} data-testid={`wrapper-${id}`}>
             <span className={`${px}-input__wrapper__adornment`} id="adornment" data-testid={`adornment-${id}`}>
               {inputAdornment}
