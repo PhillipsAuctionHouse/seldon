@@ -1,50 +1,57 @@
 import { useState } from 'react';
-import CountryPickerTrigger from './CountryPickerTrigger';
+import CountryPickerTrigger, { CountryPickerTriggerProps } from './CountryPickerTrigger';
 import CountryPickerModal, { CountryPickerModalProps } from './CountryPickerModal';
 import { getCommonProps } from '../../utils';
+import { CommonProps, PrependTrigger } from './types';
 
-export type CountryPickerProps = Omit<CountryPickerModalProps, 'isOpen' | 'onClose'> & {
-  triggerLabel: string;
-  hasTriggerError?: boolean;
-  triggerErrorMsg?: string;
-  triggerValue: string;
-  triggerCountryCode?: string;
-  isPhone?: boolean;
-  id?: string;
-};
+export type CountryPickerProps = CommonProps &
+  CountryPickerModalProps &
+  PrependTrigger<Omit<CountryPickerTriggerProps, 'baseClassName' | 'variantConfig'>>;
 
 const CountryPicker = ({
-  triggerLabel,
+  triggerLabelText,
   hasTriggerError,
   triggerErrorMsg,
-  triggerValue,
-  triggerCountryCode,
-  isPhone,
-  countryValue,
-  ...modalProps
+  triggerDisplayValue,
+  triggerCountryCallingCode,
+  modalTitle,
+  searchLabel,
+  searchPlaceholder,
+  selectButtonLabel,
+  inputName,
+  variantConfig,
+  baseClassName: componentBaseClassName = 'CountryPicker',
+  ...props
 }: CountryPickerProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { className: baseClassName } = getCommonProps(modalProps, 'CountryPicker');
+  const { className: baseClassName } = getCommonProps(props, componentBaseClassName);
+
+  const modalProps = {
+    modalTitle,
+    searchLabel,
+    searchPlaceholder,
+    selectButtonLabel,
+    inputName,
+    ...props,
+  };
+
   return (
     <>
       <CountryPickerTrigger
-        labelText={triggerLabel}
-        value={triggerValue}
+        labelText={triggerLabelText}
+        displayValue={triggerDisplayValue}
         onClick={() => setIsOpen(true)}
         hasError={hasTriggerError}
         errorMsg={triggerErrorMsg}
-        isPhone={isPhone}
-        countryCode={triggerCountryCode}
-        countryValue={countryValue}
+        variantConfig={variantConfig}
         baseClassName={baseClassName}
       />
       <CountryPickerModal
         {...modalProps}
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        isPhone={isPhone}
+        variantConfig={variantConfig}
         baseClassName={baseClassName}
-        countryValue={countryValue}
       />
     </>
   );

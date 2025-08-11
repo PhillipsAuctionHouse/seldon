@@ -2,7 +2,9 @@ import Icon from '../Icon/Icon';
 import { TextVariants } from '../Text';
 import Text from '../Text/Text';
 import classNames from 'classnames';
-import { countries } from './types';
+import { countries } from './constants';
+import { assignType, ModalBaseProps, CountryCallingCode } from './types';
+import React from 'react';
 
 export type CountryPickerTriggerProps = {
   /**
@@ -11,14 +13,9 @@ export type CountryPickerTriggerProps = {
   labelText: string;
 
   /**
-   * The value displayed inside the button (e.g., selected country or phone code).
+   * The value displayed inside the button (e.g., selected country name or phone code).
    */
-  value: string;
-
-  /**
-   * Callback function triggered when the button is clicked.
-   */
-  onClick: () => void;
+  displayValue: string;
 
   /**
    * Optional flag to indicate if there is an error.
@@ -31,56 +28,39 @@ export type CountryPickerTriggerProps = {
   errorMsg?: string;
 
   /**
-   * Optional flag to indicate if the component is used for phone input.
-   */
-  isPhone?: boolean;
-
-  /**
    * Optional country code to display when `isPhone` is true. eg +1
    */
-  countryCode?: string;
-
-  /**
-   * Optional ID for the button and associated elements.
-   */
-  id?: string;
-
-  /**
-   * Optional additional class names for styling.
-   */
-  className?: string;
-  /**
-   * The base class name for styling the component.
-   */
-  baseClassName: string;
-  /**
-   * Used to determine the country value for the flag.
-   */
-  countryValue?: string;
+  countryCallingCode?: CountryCallingCode;
 };
+
+type InternalTriggerProps = CountryPickerTriggerProps &
+  Pick<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'id' | 'className'>;
 
 const CountryPickerTrigger = ({
   labelText,
-  value,
+  displayValue,
   onClick,
   hasError = false,
   errorMsg,
-  isPhone = false,
-  countryCode,
+  countryCallingCode,
   id,
   className,
   baseClassName,
-  countryValue,
-}: CountryPickerTriggerProps) => {
+  variantConfig,
+}: ModalBaseProps<InternalTriggerProps>) => {
+  const { isPhone, countryValue } = assignType(variantConfig);
+
   const errorId = errorMsg ? `${baseClassName}__trigger-error-msg` : undefined;
 
   // Determine the ISO country code for the flag
-  let flagCode: string | undefined;
-  if (isPhone && countryValue) {
-    flagCode = countryValue.toLowerCase();
-  } else if (!isPhone && countryValue) {
-    const found = countries.find((country) => country.name === countryValue);
-    flagCode = found ? found.code.toLowerCase() : undefined;
+  let flagCode;
+  if (countryValue) {
+    if (isPhone) {
+      flagCode = countryValue.toLowerCase();
+    } else if (!isPhone) {
+      const found = countries.find((country) => country.name === countryValue);
+      flagCode = found ? found.code.toLowerCase() : undefined;
+    }
   }
 
   return (
@@ -114,7 +94,9 @@ const CountryPickerTrigger = ({
             className={`${baseClassName}__trigger-flag`}
           />
         )}
-        <span className={classNames(`${baseClassName}__trigger-text`)}>{isPhone ? countryCode : value}</span>
+        <span className={classNames(`${baseClassName}__trigger-text`)}>
+          {isPhone ? countryCallingCode : displayValue}
+        </span>
         <span className={classNames(`${baseClassName}__trigger-icon`)}>
           <Icon icon="ChevronDown" color="$pure-black" width={16} height={16} />
         </span>

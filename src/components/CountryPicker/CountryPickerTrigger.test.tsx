@@ -1,45 +1,46 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import CountryPickerTrigger from './CountryPickerTrigger';
 import { vi } from 'vitest';
+import { getConfigVariant } from './testUtils';
 
 describe('CountryPickerTrigger', () => {
-  const defaultProps = {
+  const baseProps: React.ComponentProps<typeof CountryPickerTrigger> = {
     labelText: 'Country',
-    value: 'United States',
     onClick: vi.fn(),
     id: 'country-picker-trigger',
     baseClassName: 'country-picker-trigger',
-    countryValue: 'US',
-  };
+    displayValue: 'United States',
+    variantConfig: getConfigVariant(false),
+  } as const;
 
   it('renders the component with default props', () => {
-    render(<CountryPickerTrigger {...defaultProps} />);
+    render(<CountryPickerTrigger {...baseProps} />);
     expect(screen.getByText('Country')).toBeInTheDocument();
     expect(screen.getByText('United States')).toBeInTheDocument();
     expect(screen.getByTestId('country-picker-trigger')).toBeInTheDocument();
   });
 
   it('calls onClick when the button is clicked', () => {
-    render(<CountryPickerTrigger {...defaultProps} />);
+    render(<CountryPickerTrigger {...baseProps} />);
     const button = screen.getByTestId('country-picker-trigger');
     fireEvent.click(button);
-    expect(defaultProps.onClick).toHaveBeenCalled();
+    expect(baseProps.onClick).toHaveBeenCalled();
   });
 
   it('renders with error state', () => {
-    render(<CountryPickerTrigger {...defaultProps} hasError={true} errorMsg="This field is required" />);
+    render(<CountryPickerTrigger {...baseProps} hasError={true} errorMsg="This field is required" />);
     expect(screen.getByText('This field is required')).toBeInTheDocument();
     expect(screen.getByTestId('country-picker-trigger')).toHaveClass('country-picker-trigger__trigger-btn--error');
   });
 
   it('renders with phone mode', () => {
-    render(<CountryPickerTrigger {...defaultProps} isPhone={true} countryCode="+1" />);
+    render(<CountryPickerTrigger {...baseProps} variantConfig={getConfigVariant(true)} countryCallingCode="+1" />);
     expect(screen.getByText('+1')).toBeInTheDocument();
     expect(screen.getByTestId('country-picker-trigger')).toHaveClass('country-picker-trigger__trigger-btn--is-phone');
   });
 
   it('renders without error message when hasError is false', () => {
-    render(<CountryPickerTrigger {...defaultProps} hasError={false} />);
+    render(<CountryPickerTrigger {...baseProps} hasError={false} />);
     expect(screen.queryByText('This field is required')).not.toBeInTheDocument();
   });
 });

@@ -2,56 +2,30 @@ import Text from '../Text/Text';
 import { TextVariants } from '../Text';
 import classnames from 'classnames';
 import { getSafeCountryCallingCode } from './utils';
-import { CountryCode } from 'libphonenumber-js';
+import { assignType, Country, ModalBaseProps } from './types';
 
-interface CountryPickerOptionProps {
-  /**
-   * The country code associated with the option.
-   */
-  code: CountryCode;
-
-  /**
-   * The display name of the country.
-   */
-  name: string;
-
+export type CountryPickerOptionProps = Country & {
   /**
    * Indicates whether the option is currently selected.
    */
   isChecked: boolean;
 
   /**
-   * Indicates whether the option is related to a phone number.
-   */
-  isPhone: boolean;
-
-  /**
    * The name attribute for the input element.
    */
   inputName: string;
-
-  /**
-   * Callback function triggered when the option's value changes.
-   * @param value - The new value of the option.
-   */
-  onChange: (value: string) => void;
-
-  /**
-   * The base class name for styling the component.
-   */
-  baseClassName: string;
-}
+};
 
 export const CountryPickerOption = ({
   code,
   name,
   isChecked,
-  isPhone,
   inputName,
-  onChange,
   baseClassName,
-}: CountryPickerOptionProps) => {
+  variantConfig,
+}: ModalBaseProps<CountryPickerOptionProps>) => {
   const countryId = `${baseClassName}__radio-${code}`;
+  const { isPhone, onChange } = assignType(variantConfig);
   return (
     <label
       htmlFor={countryId}
@@ -71,7 +45,7 @@ export const CountryPickerOption = ({
           [`${baseClassName}__radio--hidden`]: isPhone,
         })}
         onChange={() => {
-          onChange(isPhone ? code : name);
+          isPhone ? onChange(code) : onChange(name);
         }}
         tabIndex={isChecked ? 0 : -1}
       />

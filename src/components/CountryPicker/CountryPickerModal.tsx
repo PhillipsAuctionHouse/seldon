@@ -1,43 +1,17 @@
-import { useState, useMemo, useRef, FormEvent, forwardRef } from 'react';
+import { useState, useMemo, useRef, forwardRef } from 'react';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 import Modal from '../Modal/Modal';
 import Text from '../Text/Text';
 import { TextVariants } from '../Text';
-import { countries } from './types';
+import { assignType, Country, ModalBaseProps } from './types';
+import { countries } from './constants';
 import { getSafeCountryCallingCode } from './utils';
 import { CountryPickerOption } from './CountryPickerOption';
 import { ButtonVariants } from '../Button/types';
 import Icon from '../Icon/Icon';
-import { Loader } from '../Loader';
 
-export interface CountryPickerModalProps {
-  /**
-   * Determines whether the modal is open.
-   */
-  isOpen: boolean;
-
-  /**
-   * Callback function triggered when the modal is closed.
-   */
-  onClose: () => void;
-
-  /**
-   * Indicates if the modal is being used for phone-related selection.
-   */
-  isPhone?: boolean;
-
-  /**
-   * The currently selected country value.
-   */
-  countryValue?: string;
-
-  /**
-   * Callback function triggered when the country value changes.
-   * @param value - The new country value.
-   */
-  onChange: (value: string) => void;
-
+export type CountryPickerModalProps = {
   /**
    * The title displayed at the top of the modal.
    */
@@ -62,16 +36,12 @@ export interface CountryPickerModalProps {
    * The name attribute for a hidden input field, if applicable.
    */
   inputName?: string;
-  /**
-   * The base class name for styling the component.
-   */
-  baseClassName: string;
-}
+};
 
-const PRIORITIZED_CODES = ['US', 'GB', 'HK', 'CH'];
+const PRIORITIZED_CODES: readonly Country['code'][] = ['US', 'GB', 'HK', 'CH'];
 
 // Filtering helper
-const filterCountries = (list: typeof countries, filter: string) => {
+const filterCountries = (list: Country[], filter: string) => {
   if (!filter) return list;
   // Escape regex special characters
   const sanitizedFilter = filter.replace(/[.*?^${}()|[\]\\]/g, '\\$&');
@@ -88,29 +58,28 @@ const filterCountries = (list: typeof countries, filter: string) => {
   });
 };
 
-const CountryPickerModal = forwardRef<HTMLDivElement, CountryPickerModalProps>(
+const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps<CountryPickerModalProps>>(
   ({
-    isOpen,
+    isOpen = false,
     onClose,
-    isPhone = false,
-    onChange,
-    countryValue,
     modalTitle,
     searchLabel,
     searchPlaceholder,
     selectButtonLabel,
     inputName = 'countryValue',
     baseClassName,
+    variantConfig,
   }) => {
+    const config = assignType(variantConfig);
+    const { isPhone, countryValue } = config;
+
     const [filter, setFilter] = useState('');
     const selectButtonRef = useRef<HTMLButtonElement>(null);
     const listRef = useRef<HTMLDivElement>(null);
 
     // Split out prioritized countries and the rest
     const [prioritized, rest] = useMemo(() => {
-      const prioritized = PRIORITIZED_CODES.map((code) => countries.find((country) => country.code === code)).filter(
-        (country): country is (typeof countries)[number] => country !== undefined,
-      );
+      const prioritized = PRIORITIZED_CODES.map((code) => countries.filter((country) => country.code === code)).flat();
       const rest = countries.filter((country) => !PRIORITIZED_CODES.includes(country.code));
       return [
         prioritized, // keep original order for prioritized
@@ -125,7 +94,7 @@ const CountryPickerModal = forwardRef<HTMLDivElement, CountryPickerModalProps>(
 
     // Group rest by first letter
     const groupedCountries = useMemo(() => {
-      const groups: Record<string, typeof countries> = {};
+      const groups: Record<string, Country[]> = {};
       filteredRest.forEach((country) => {
         const letter = country.name[0].toUpperCase();
         if (!groups[letter]) groups[letter] = [];
@@ -135,7 +104,7 @@ const CountryPickerModal = forwardRef<HTMLDivElement, CountryPickerModalProps>(
     }, [filteredRest]);
 
     // Keyboard navigation: focus moves with arrow keys
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const handleKeyDown = (e: React.KeyboardEvent) => {
       if (!listRef.current) return;
       const radios = Array.from(listRef.current.querySelectorAll('input[type="radio"]')) as HTMLInputElement[];
       const current = radios.findIndex((r) => r === document.activeElement);
@@ -151,31 +120,18 @@ const CountryPickerModal = forwardRef<HTMLDivElement, CountryPickerModalProps>(
     };
 
     // Render country options
-    const renderCountryOptions = (list: typeof countries) =>
+    const renderCountryOptions = (list: Country[]) =>
       list.map(({ name, code }) => (
         <CountryPickerOption
           key={code}
           code={code}
           name={name}
           isChecked={countryValue === (isPhone ? code : name)}
-          isPhone={isPhone}
           inputName={inputName}
-          onChange={onChange}
           baseClassName={baseClassName}
+          variantConfig={config}
         />
       ));
-
-    // Fallback UI if no countries
-    if (!countries || countries.length === 0) {
-      return (
-        <Modal isOpen={isOpen} onClose={onClose} className={`${baseClassName}__modal`} role="dialog" aria-modal="true">
-          <Text variant={TextVariants.heading3} className={`${baseClassName}__header-text`}>
-            {modalTitle}
-          </Text>
-          <Loader />
-        </Modal>
-      );
-    }
 
     return (
       <Modal isOpen={isOpen} onClose={onClose} data-testid="country-picker-modal" className={`${baseClassName}__modal`}>
@@ -198,8 +154,8 @@ const CountryPickerModal = forwardRef<HTMLDivElement, CountryPickerModalProps>(
                 labelText={searchLabel}
                 placeholder={searchPlaceholder}
                 value={filter}
-                onChange={(e: FormEvent) => {
-                  setFilter((e.target as HTMLInputElement).value);
+                onChange={(e) => {
+                  setFilter(e.target.value);
                 }}
                 autoFocus
                 className={`${baseClassName}__input`}

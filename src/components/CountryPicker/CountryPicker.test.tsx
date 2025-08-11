@@ -1,22 +1,20 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { vi } from 'vitest';
 import CountryPicker from './CountryPicker';
 
 describe('CountryPicker Component', () => {
-  const defaultProps = {
-    triggerLabel: 'Select Country',
-    triggerValue: 'US',
-    triggerCountryCode: 'US',
-    countryValue: 'US',
-    onCountryChange: vi.fn(),
+  const defaultProps: React.ComponentProps<typeof CountryPicker> = {
+    triggerLabelText: 'Select Country',
+    triggerDisplayValue: 'US',
+    triggerCountryCallingCode: '+1',
     modalTitle: 'Select a Country',
     searchLabel: 'Search for a country',
     searchPlaceholder: 'Type to search...',
     selectButtonLabel: 'Select',
-    onChange: vi.fn(),
-    id: 'country-picker',
-    baseClassName: 'country-picker',
+    variantConfig: {
+      onChange: vi.fn(),
+      isPhone: false,
+    },
   };
 
   it('renders the trigger button with the correct label', () => {
