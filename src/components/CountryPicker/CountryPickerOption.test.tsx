@@ -44,7 +44,7 @@ describe('CountryPickerOption', () => {
 
   it('applies the selected class when isChecked is true', () => {
     render(<CountryPickerOption {...baseProps} isChecked={true} variantConfig={getConfigVariant(false)} />);
-    const label = screen.getByLabelText('United States');
+    const label = screen.getByRole('radio', { name: 'United States' });
     expect(label).toHaveClass('country-picker__radio country-picker__radio--selected');
   });
 
@@ -58,6 +58,6 @@ describe('CountryPickerOption', () => {
   it('hides the radio input when isPhone is true', () => {
     render(<CountryPickerOption {...baseProps} />);
     const input = screen.getByRole('radio');
-    expect(input).toHaveClass('country-picker__radio--hidden');
+    expect(input).toHaveClass('country-picker__radio--visually-hidden');
   });
 });

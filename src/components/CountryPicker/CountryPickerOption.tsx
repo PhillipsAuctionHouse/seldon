@@ -33,7 +33,6 @@ export const CountryPickerOption = ({
         [`${baseClassName}__option--selected`]: isChecked,
         [`${baseClassName}__option--is-phone`]: isPhone,
       })}
-      tabIndex={-1}
       aria-label={isPhone ? `${name} +${getSafeCountryCallingCode(code)}` : name}
     >
       <input
@@ -43,12 +42,11 @@ export const CountryPickerOption = ({
         checked={isChecked}
         className={classnames(`${baseClassName}__radio`, {
           [`${baseClassName}__radio--selected`]: isChecked,
-          [`${baseClassName}__radio--hidden`]: isPhone,
+          [`${baseClassName}__radio--visually-hidden`]: isPhone,
         })}
         onChange={() => {
           isPhone ? onChange(code) : onChange(name);
         }}
-        tabIndex={isChecked ? 0 : -1}
       />
       <span className={`${baseClassName}__option-content`}>
         <Text variant={TextVariants.string2} className={`${baseClassName}__option-name`}>
