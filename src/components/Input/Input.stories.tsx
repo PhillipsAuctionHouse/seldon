@@ -46,6 +46,12 @@ const argTypes = {
       type: 'text',
     },
   },
+  adornmentPosition: {
+    options: ['start', 'end'],
+    control: {
+      type: 'select',
+    },
+  },
   labelText: {
     control: {
       type: 'text',
@@ -254,7 +260,8 @@ InputWithAdornment.args = {
   labelText: 'Input with Adornment',
   playgroundWidth: 300,
   size: 'md',
-  inputAdornment: '$',
+  inputAdornment: <Text variant={TextVariants.string2}>$</Text>,
+  adornmentPosition: 'start',
 };
 
 InputWithAdornment.argTypes = argTypes;

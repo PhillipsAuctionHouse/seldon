@@ -14,6 +14,11 @@ export interface InputProps extends Omit<React.ComponentProps<'input'>, 'size'> 
   inputAdornment?: string | React.ReactNode;
 
   /**
+   * Optional position to place the adornment. Defaults to 'start'
+   */
+  adornmentPosition?: 'start' | 'end';
+
+  /**
    * Optionally provide the default value of the `<input>`. Should not be passed into controlled input!
    */
   defaultValue?: string | number | readonly string[];
@@ -125,6 +130,7 @@ const Input = React.forwardRef(
     {
       className,
       inputAdornment,
+      adornmentPosition = 'start',
       defaultValue,
       disabled,
       hideLabel,
@@ -168,8 +174,24 @@ const Input = React.forwardRef(
       [`${px}-input--hidden`]: rest.hidden,
     });
 
+    const adornmentInputTypes = [
+      'text',
+      'number',
+      'password',
+      'email',
+      'tel',
+      'url',
+      'search',
+      'date',
+      'datetime-local',
+      'month',
+      'time',
+      'week',
+    ];
+    const isAdornmentInputType = adornmentInputTypes.includes(inputProps.type ?? '');
+
     const inputClassNames =
-      inputAdornment && inputProps.type === 'text'
+      inputAdornment && isAdornmentInputType
         ? classnames(`${px}-input__wrapper__input`, className, { [`${px}-skeleton`]: isSkeletonLoading })
         : classnames(`${px}-input__input`, className, { [`${px}-skeleton`]: isSkeletonLoading });
     const inputPropsToPass = {
@@ -198,12 +220,19 @@ const Input = React.forwardRef(
         >
           {labelText}
         </label>
-        {inputAdornment && inputProps.type === 'text' ? (
+        {inputAdornment && isAdornmentInputType ? (
           <div className={`${px}-input__wrapper`} data-testid={`wrapper-${id}`}>
-            <span className={`${px}-input__wrapper__adornment`} id="adornment" data-testid={`adornment-${id}`}>
-              {inputAdornment}
-            </span>
+            {adornmentPosition === 'start' && (
+              <span className={`${px}-input__wrapper__adornment`} id="adornment" data-testid={`adornment-${id}`}>
+                {inputAdornment}
+              </span>
+            )}
             <input {...inputPropsToPass} />
+            {adornmentPosition === 'end' && (
+              <span className={`${px}-input__wrapper__adornment`} id="adornment" data-testid={`adornment-${id}`}>
+                {inputAdornment}
+              </span>
+            )}
           </div>
         ) : (
           <input {...inputPropsToPass} />
