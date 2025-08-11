@@ -63,7 +63,7 @@ describe('CountryPickerModal - Country variant', () => {
     expect(letterHeader).toBeInTheDocument();
   });
 
-  it('calls onChange when a country is selected', async () => {
+  it('calls onChange only when submit button is clicked (country)', async () => {
     const onChangeSpy = vi.fn();
     render(
       <CountryPickerModal
@@ -71,8 +71,11 @@ describe('CountryPickerModal - Country variant', () => {
         variantConfig={{ ...getConfigVariant(false), onChange: onChangeSpy, countryValue: undefined }}
       />,
     );
-    const countryOptions = screen.getAllByLabelText('United States');
-    await userEvent.click(countryOptions[0]);
+    const countryOption = screen.getByRole('radio', { name: 'United States' });
+    await userEvent.click(countryOption);
+    expect(onChangeSpy).not.toHaveBeenCalled();
+    const selectButton = screen.getByTestId('country-picker-modal-select-button');
+    await userEvent.click(selectButton);
     expect(onChangeSpy).toHaveBeenCalledWith('United States');
   });
 
@@ -125,7 +128,7 @@ describe('CountryPickerModal - Phone variant', () => {
     expect(letterHeader).toBeInTheDocument();
   });
 
-  it('calls onChange when a country code is selected', async () => {
+  it('calls onChange only when submit button is clicked (phone)', async () => {
     const onChangeSpy = vi.fn();
     render(
       <CountryPickerModal
@@ -133,11 +136,12 @@ describe('CountryPickerModal - Phone variant', () => {
         variantConfig={{ ...getConfigVariant(true), onChange: onChangeSpy, countryValue: undefined }}
       />,
     );
-    screen.debug();
     const countryOption = screen.getByLabelText('United States +1');
     await userEvent.click(countryOption);
-    // For phone, you may want to check for code instead of name, depending on implementation
-    expect(onChangeSpy).toHaveBeenCalled();
+    expect(onChangeSpy).not.toHaveBeenCalled();
+    const selectButton = screen.getByTestId('country-picker-modal-select-button');
+    await userEvent.click(selectButton);
+    expect(onChangeSpy).toHaveBeenCalledWith('US');
   });
 
   it('disables the select button when no country code is selected', () => {
