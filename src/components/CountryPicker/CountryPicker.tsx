@@ -40,6 +40,7 @@ const CountryPicker = ({
       <CountryPickerTrigger
         labelText={triggerLabelText}
         displayValue={triggerDisplayValue}
+        countryCallingCode={triggerCountryCallingCode}
         onClick={() => setIsOpen(true)}
         hasError={hasTriggerError}
         errorMsg={triggerErrorMsg}
