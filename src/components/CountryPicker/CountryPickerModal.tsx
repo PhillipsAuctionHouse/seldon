@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef, forwardRef } from 'react';
+import { useState, useMemo, useRef, useEffect, forwardRef } from 'react';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 import Modal from '../Modal/Modal';
@@ -71,7 +71,15 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps<CountryPick
     variantConfig,
   }) => {
     const config = assignType(variantConfig);
-    const { countryValue } = config;
+    const { countryValue: committedValue, onChange, isPhone } = config;
+
+    // Draft value for modal selection
+    const [draftValue, setDraftValue] = useState(committedValue);
+
+    // Reset draft when modal opens/closes or committed value changes
+    useEffect(() => {
+      setDraftValue(committedValue);
+    }, [isOpen, committedValue]);
 
     const [filter, setFilter] = useState('');
     const selectButtonRef = useRef<HTMLButtonElement>(null);
@@ -105,10 +113,7 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps<CountryPick
 
     return (
       <Modal isOpen={isOpen} onClose={onClose} data-testid="country-picker-modal" className={`${baseClassName}__modal`}>
-        <form className={`${baseClassName}__form`}>
-          {/* Hidden input for form submission */}
-          <input type="hidden" name={inputName} value={countryValue ?? ''} data-testid="country-picker-hidden-input" />
-
+        <div className={`${baseClassName}__wrapper`}>
           {/* Modal header and search */}
           <div className={`${baseClassName}__header`}>
             <Text variant={TextVariants.heading3} className={`${baseClassName}__header-text`}>
@@ -140,25 +145,44 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps<CountryPick
             baseClassName={baseClassName}
             modalTitle={modalTitle}
             listRef={listRef}
-            variantConfig={config}
+            variantConfig={
+              isPhone
+                ? {
+                    isPhone: true,
+                    countryValue: draftValue as Country['code'],
+                    onChange: (value) => setDraftValue(value),
+                  }
+                : {
+                    isPhone: false,
+                    countryValue: draftValue as Country['name'],
+                    onChange: (value) => setDraftValue(value),
+                  }
+            }
             inputName={inputName}
           />
 
           {/* Select button pinned at bottom */}
           <div className={`${baseClassName}__button-container`}>
             <Button
-              onClick={onClose}
+              onClick={() => {
+                if (isPhone) {
+                  onChange?.(draftValue as Country['code']);
+                } else {
+                  onChange?.(draftValue as Country['name']);
+                }
+                onClose?.();
+              }}
               className={`${baseClassName}__button`}
               data-testid="country-picker-modal-select-button"
               ref={selectButtonRef}
               type="button"
               variant={ButtonVariants.secondary}
-              isDisabled={!countryValue}
+              isDisabled={!draftValue}
             >
               {selectButtonLabel}
             </Button>
           </div>
-        </form>
+        </div>
       </Modal>
     );
   },

@@ -52,6 +52,12 @@ const CountryPicker = ({
         variantConfig={variantConfig}
         baseClassName={baseClassName}
       />
+      <input
+        type="hidden"
+        name={inputName || 'countryValue'}
+        value={variantConfig.countryValue ?? ''}
+        data-testid="country-picker-hidden-input"
+      />
     </>
   );
 };
