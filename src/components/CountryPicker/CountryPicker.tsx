@@ -13,7 +13,6 @@ const CountryPicker = ({
   hasTriggerError,
   triggerErrorMsg,
   triggerDisplayValue,
-  triggerCountryCallingCode,
   modalTitle,
   searchInputLabel,
   searchInputPlaceholder,
@@ -40,7 +39,6 @@ const CountryPicker = ({
       <CountryPickerTrigger
         labelText={triggerLabelText}
         displayValue={triggerDisplayValue}
-        countryCallingCode={triggerCountryCallingCode}
         onClick={() => setIsOpen(true)}
         hasError={hasTriggerError}
         errorMsg={triggerErrorMsg}

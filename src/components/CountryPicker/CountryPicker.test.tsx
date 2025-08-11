@@ -6,7 +6,6 @@ describe('CountryPicker Component', () => {
   const defaultProps: React.ComponentProps<typeof CountryPicker> = {
     triggerLabelText: 'Select Country',
     triggerDisplayValue: 'US',
-    triggerCountryCallingCode: '+1',
     modalTitle: 'Select a Country',
     searchInputLabel: 'Search for a country',
     searchInputPlaceholder: 'Type to search...',

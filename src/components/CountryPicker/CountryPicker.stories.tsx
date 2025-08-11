@@ -112,7 +112,6 @@ export const CountryPhoneCodePicker = (props: CountryPickerProps & { variantConf
       triggerDisplayValue={selectedCountry ? `+${getSafeCountryCallingCode(selectedCountry.code)}` : 'Select code'}
       hasTriggerError={false}
       triggerErrorMsg=""
-      triggerCountryCallingCode={selectedCountry ? `+${+getSafeCountryCallingCode(selectedCountry.code)}` : undefined}
       modalTitle="Country code"
       searchInputLabel=""
       searchInputPlaceholder="Search country"

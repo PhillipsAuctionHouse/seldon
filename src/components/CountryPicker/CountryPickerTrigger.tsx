@@ -3,7 +3,7 @@ import { TextVariants } from '../Text';
 import Text from '../Text/Text';
 import classNames from 'classnames';
 import { countries } from './constants';
-import { assignType, ModalBaseProps, CountryCallingCode } from './types';
+import { assignType, ModalBaseProps } from './types';
 import React from 'react';
 
 export type CountryPickerTriggerProps = {
@@ -26,11 +26,6 @@ export type CountryPickerTriggerProps = {
    * Optional error message to display when there is an error.
    */
   errorMsg?: string;
-
-  /**
-   * Optional country code to display when `isPhone` is true. eg +1
-   */
-  countryCallingCode?: CountryCallingCode;
 };
 
 type InternalTriggerProps = CountryPickerTriggerProps &
@@ -42,7 +37,6 @@ const CountryPickerTrigger = ({
   onClick,
   hasError = false,
   errorMsg,
-  countryCallingCode,
   id,
   className,
   baseClassName,
@@ -94,9 +88,7 @@ const CountryPickerTrigger = ({
             className={`${baseClassName}__trigger-flag`}
           />
         )}
-        <span className={classNames(`${baseClassName}__trigger-text`)}>
-          {isPhone ? countryCallingCode : displayValue}
-        </span>
+        <span className={classNames(`${baseClassName}__trigger-text`)}>{displayValue}</span>
         <span className={classNames(`${baseClassName}__trigger-icon`)}>
           <Icon icon="ChevronDown" color="$pure-black" width={16} height={16} />
         </span>

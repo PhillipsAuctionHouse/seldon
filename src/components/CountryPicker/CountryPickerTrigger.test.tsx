@@ -18,8 +18,7 @@ describe('CountryPickerTrigger', () => {
     onClick: vi.fn(),
     id: 'country-picker-trigger',
     baseClassName: 'country-picker-trigger',
-    countryCallingCode: '+1',
-    displayValue: 'United States',
+    displayValue: '+1',
     variantConfig: getConfigVariant(true),
   } as const;
 
