@@ -246,7 +246,7 @@ CustomLabel.argTypes = {};
 
 export const InputWithAdornment = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <Input key={args.defaultValue as string} {...args} id="Input-1" inputAdornment="$" />
+    <Input key={args.defaultValue as string} {...args} id="Input-1" />
   </div>
 );
 
@@ -254,6 +254,7 @@ InputWithAdornment.args = {
   labelText: 'Input with Adornment',
   playgroundWidth: 300,
   size: 'md',
+  inputAdornment: '$',
 };
 
 InputWithAdornment.argTypes = argTypes;
