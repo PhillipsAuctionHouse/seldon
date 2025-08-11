@@ -8,13 +8,59 @@ import { assignType, Country, PhoneConfig } from './types';
 const meta: Meta<typeof CountryPicker> = {
   title: 'Components/CountryPicker',
   component: CountryPicker,
+  argTypes: {
+    modalTitle: {
+      control: 'text',
+      description: 'The title displayed at the top of the modal.',
+      defaultValue: 'Select a Country',
+    },
+    searchInputLabel: {
+      control: 'text',
+      description: 'Label for the search input field.',
+      defaultValue: 'Search for a country',
+    },
+    searchInputPlaceholder: {
+      control: 'text',
+      description: 'Placeholder text for the search input field.',
+      defaultValue: 'Type to search...',
+    },
+    selectButtonLabel: {
+      control: 'text',
+      description: 'Label for the select button.',
+      defaultValue: 'Select',
+    },
+    inputName: {
+      control: 'text',
+      description: 'Name attribute for the input field.',
+      defaultValue: 'country',
+    },
+    variantConfig: {
+      control: 'object',
+      description: 'Configuration for phone/country variant.',
+      table: {
+        type: { summary: 'PhoneConfig | CountryConfig' },
+      },
+      defaultValue: { isPhone: false },
+      options: [{ isPhone: false }, { isPhone: true }],
+      mapping: {
+        country: { isPhone: false },
+        phone: { isPhone: true },
+      },
+    },
+    baseClassName: {
+      control: 'text',
+      description: 'Base class name for styling.',
+      defaultValue: 'country-picker-modal',
+    },
+  },
 };
 
 export default meta;
 
 export const Playground = (props: CountryPickerProps) => {
-  // Assign the correct types per variant
-  const config = assignType(props.variantConfig);
+  // Always provide a safe default for variantConfig
+  const safeVariantConfig = props.variantConfig ?? { isPhone: false };
+  const config = assignType(safeVariantConfig);
   const { isPhone, countryValue } = config;
   // Store country name for non-phone
   const [selected, setSelected] = useState<typeof countryValue>(undefined);
@@ -34,7 +80,7 @@ export const Playground = (props: CountryPickerProps) => {
           isPhone,
           countryValue: selected,
           onChange: setSelected,
-        } as typeof config // somebody help with the onChange and/or isPhone typing, I am tired and lost and so far from home
+        } as typeof config
       }
     />
   );
@@ -51,6 +97,8 @@ Playground.args = {
 };
 
 export const CountryPhoneCodePicker = (props: CountryPickerProps & { variantConfig: PhoneConfig }) => {
+  // Always provide a safe default for variantConfig
+  const safeVariantConfig = props.variantConfig ?? { isPhone: true };
   // Store country code for phone
   const [selected, setSelected] = useState<Country['code'] | undefined>(undefined);
 
@@ -70,7 +118,7 @@ export const CountryPhoneCodePicker = (props: CountryPickerProps & { variantConf
       searchInputPlaceholder="Search country"
       selectButtonLabel="Select"
       variantConfig={{
-        isPhone: props.variantConfig.isPhone,
+        isPhone: safeVariantConfig.isPhone,
         countryValue: selected,
         onChange: setSelected,
       }}

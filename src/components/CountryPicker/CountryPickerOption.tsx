@@ -34,6 +34,7 @@ export const CountryPickerOption = ({
         [`${baseClassName}__option--is-phone`]: isPhone,
       })}
       tabIndex={-1}
+      aria-label={isPhone ? `${name} +${getSafeCountryCallingCode(code)}` : name}
     >
       <input
         type="radio"

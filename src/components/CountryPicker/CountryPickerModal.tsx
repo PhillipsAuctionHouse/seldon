@@ -7,9 +7,9 @@ import { TextVariants } from '../Text';
 import { assignType, Country, ModalBaseProps } from './types';
 import { countries } from './constants';
 import { getSafeCountryCallingCode } from './utils';
-import { CountryPickerOption } from './CountryPickerOption';
 import { ButtonVariants } from '../Button/types';
 import Icon from '../Icon/Icon';
+import { CountryPickerCountryList } from './CountryPickerCountryList';
 
 export type CountryPickerModalProps = {
   /**
@@ -71,7 +71,7 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps<CountryPick
     variantConfig,
   }) => {
     const config = assignType(variantConfig);
-    const { isPhone, countryValue } = config;
+    const { countryValue } = config;
 
     const [filter, setFilter] = useState('');
     const selectButtonRef = useRef<HTMLButtonElement>(null);
@@ -102,36 +102,6 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps<CountryPick
       });
       return groups;
     }, [filteredRest]);
-
-    // Keyboard navigation: focus moves with arrow keys
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-      if (!listRef.current) return;
-      const radios = Array.from(listRef.current.querySelectorAll('input[type="radio"]')) as HTMLInputElement[];
-      const current = radios.findIndex((r) => r === document.activeElement);
-      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-        e.preventDefault();
-        const next = (current + 1) % radios.length;
-        radios[next]?.focus();
-      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-        e.preventDefault();
-        const prev = (current - 1 + radios.length) % radios.length;
-        radios[prev]?.focus();
-      }
-    };
-
-    // Render country options
-    const renderCountryOptions = (list: Country[]) =>
-      list.map(({ name, code }) => (
-        <CountryPickerOption
-          key={code}
-          code={code}
-          name={name}
-          isChecked={countryValue === (isPhone ? code : name)}
-          inputName={inputName}
-          baseClassName={baseClassName}
-          variantConfig={config}
-        />
-      ));
 
     return (
       <Modal isOpen={isOpen} onClose={onClose} data-testid="country-picker-modal" className={`${baseClassName}__modal`}>
@@ -164,30 +134,15 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps<CountryPick
           </div>
 
           {/* Scrollable country list */}
-          <div
-            className={`${baseClassName}__list`}
-            ref={listRef}
-            tabIndex={-1}
-            onKeyDown={handleKeyDown}
-            role="radiogroup"
-            aria-label={modalTitle}
-          >
-            {/* Render prioritized countries first, no header */}
-            {renderCountryOptions(filteredPrioritized)}
-
-            {/* Then render grouped countries with letter headers */}
-            {Object.entries(groupedCountries).map(([letter, group]) => (
-              <div key={letter} className={`${baseClassName}__group`}>
-                <div className={`${baseClassName}__letter-header`}>
-                  <Text variant={TextVariants.heading2} className={`${baseClassName}__letter-text`}>
-                    {letter}
-                  </Text>
-                  <div className={`${baseClassName}__letter-line`} />
-                </div>
-                {renderCountryOptions(group)}
-              </div>
-            ))}
-          </div>
+          <CountryPickerCountryList
+            filteredPrioritized={filteredPrioritized}
+            groupedCountries={groupedCountries}
+            baseClassName={baseClassName}
+            modalTitle={modalTitle}
+            listRef={listRef}
+            variantConfig={config}
+            inputName={inputName}
+          />
 
           {/* Select button pinned at bottom */}
           <div className={`${baseClassName}__button-container`}>

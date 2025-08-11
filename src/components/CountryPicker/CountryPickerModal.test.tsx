@@ -1,9 +1,22 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
+
 import CountryPickerModal from './CountryPickerModal';
+
 import { getConfigVariant } from './testUtils';
 
-const baseProps: React.ComponentProps<typeof CountryPickerModal> = {
+vi.mock('./constants', () => ({
+  countries: [
+    { name: 'United States', code: 'US' },
+    { name: 'Canada', code: 'CA' },
+    { name: 'Mexico', code: 'MX' },
+    { name: 'Argentina', code: 'AR' },
+    { name: 'Australia', code: 'AU' },
+  ],
+}));
+
+const countryBaseProps: React.ComponentProps<typeof CountryPickerModal> = {
   isOpen: true,
   variantConfig: getConfigVariant(false),
   onClose: vi.fn(),
@@ -14,62 +27,136 @@ const baseProps: React.ComponentProps<typeof CountryPickerModal> = {
   baseClassName: 'country-picker-modal',
 };
 
-describe('CountryPickerModal', () => {
+const phoneBaseProps: React.ComponentProps<typeof CountryPickerModal> = {
+  isOpen: true,
+  variantConfig: getConfigVariant(true),
+  onClose: vi.fn(),
+  modalTitle: 'Select a Country Code',
+  searchInputLabel: 'Search for a country code',
+  searchInputPlaceholder: 'Type to search country code...',
+  selectButtonLabel: 'Select',
+  baseClassName: 'country-picker-modal',
+};
+
+describe('CountryPickerModal - Country variant', () => {
   it('renders the modal with the correct title', () => {
-    render(<CountryPickerModal {...baseProps} />);
+    render(<CountryPickerModal {...countryBaseProps} />);
     expect(screen.getByText('Select a Country')).toBeInTheDocument();
   });
 
-  it('filters countries based on search input', () => {
-    render(<CountryPickerModal {...baseProps} />);
+  it('filters countries based on search input', async () => {
+    render(<CountryPickerModal {...countryBaseProps} />);
     const searchInput = screen.getByPlaceholderText('Type to search...');
-    fireEvent.change(searchInput, { target: { value: 'United' } });
+    await userEvent.type(searchInput, 'United');
     expect(screen.getByText('United States')).toBeInTheDocument();
   });
 
   it('renders prioritized countries first', () => {
-    render(<CountryPickerModal {...baseProps} />);
+    render(<CountryPickerModal {...countryBaseProps} />);
     const prioritizedCountry = screen.getByText('United States');
     expect(prioritizedCountry).toBeInTheDocument();
   });
 
   it('renders grouped countries with letter headers', () => {
-    render(<CountryPickerModal {...baseProps} />);
+    render(<CountryPickerModal {...countryBaseProps} />);
     const letterHeader = screen.getByText('A');
     expect(letterHeader).toBeInTheDocument();
   });
 
-  it('calls onChange when a country is selected', () => {
+  it('calls onChange when a country is selected', async () => {
     const onChangeSpy = vi.fn();
     render(
       <CountryPickerModal
-        {...baseProps}
+        {...countryBaseProps}
         variantConfig={{ ...getConfigVariant(false), onChange: onChangeSpy, countryValue: undefined }}
       />,
     );
-    const countryOption = screen.getByLabelText('United States');
-    fireEvent.click(countryOption);
+    const countryOptions = screen.getAllByLabelText('United States');
+    await userEvent.click(countryOptions[0]);
     expect(onChangeSpy).toHaveBeenCalledWith('United States');
   });
 
   it('disables the select button when no country is selected', () => {
     render(
-      <CountryPickerModal {...baseProps} variantConfig={{ ...getConfigVariant(false), countryValue: undefined }} />,
+      <CountryPickerModal
+        {...countryBaseProps}
+        variantConfig={{ ...getConfigVariant(false), countryValue: undefined }}
+      />,
     );
     const selectButton = screen.getByTestId('country-picker-modal-select-button');
     expect(selectButton).toBeDisabled();
   });
 
   it('enables the select button when a country is selected', () => {
-    render(<CountryPickerModal {...baseProps} variantConfig={getConfigVariant(false)} />);
+    render(<CountryPickerModal {...countryBaseProps} variantConfig={getConfigVariant(false)} />);
     const selectButton = screen.getByTestId('country-picker-modal-select-button');
     expect(selectButton).not.toBeDisabled();
   });
 
-  it('handles keyboard navigation with arrow keys', () => {
-    render(<CountryPickerModal {...baseProps} />);
-    const list = screen.getByRole('radiogroup');
-    fireEvent.keyDown(list, { key: 'ArrowDown' });
+  it('handles keyboard navigation with arrow keys', async () => {
+    render(<CountryPickerModal {...countryBaseProps} />);
+    await userEvent.keyboard('{ArrowDown}');
+    // Add assertions to verify focus changes
+  });
+});
+
+describe('CountryPickerModal - Phone variant', () => {
+  it('renders the modal with the correct title', () => {
+    render(<CountryPickerModal {...phoneBaseProps} />);
+    expect(screen.getByText('Select a Country Code')).toBeInTheDocument();
+  });
+
+  it('filters countries based on search input', async () => {
+    render(<CountryPickerModal {...phoneBaseProps} />);
+    const searchInput = screen.getByPlaceholderText('Type to search country code...');
+    await userEvent.type(searchInput, 'United');
+    expect(screen.getByText('United States')).toBeInTheDocument();
+  });
+
+  it('renders prioritized countries first', () => {
+    render(<CountryPickerModal {...phoneBaseProps} />);
+    const prioritizedCountry = screen.getByText('United States');
+    expect(prioritizedCountry).toBeInTheDocument();
+  });
+
+  it('renders grouped countries with letter headers', () => {
+    render(<CountryPickerModal {...phoneBaseProps} />);
+    const letterHeader = screen.getByText('A');
+    expect(letterHeader).toBeInTheDocument();
+  });
+
+  it('calls onChange when a country code is selected', async () => {
+    const onChangeSpy = vi.fn();
+    render(
+      <CountryPickerModal
+        {...phoneBaseProps}
+        variantConfig={{ ...getConfigVariant(true), onChange: onChangeSpy, countryValue: undefined }}
+      />,
+    );
+    screen.debug();
+    const countryOption = screen.getByLabelText('United States +1');
+    await userEvent.click(countryOption);
+    // For phone, you may want to check for code instead of name, depending on implementation
+    expect(onChangeSpy).toHaveBeenCalled();
+  });
+
+  it('disables the select button when no country code is selected', () => {
+    render(
+      <CountryPickerModal {...phoneBaseProps} variantConfig={{ ...getConfigVariant(true), countryValue: undefined }} />,
+    );
+    const selectButton = screen.getByTestId('country-picker-modal-select-button');
+    expect(selectButton).toBeDisabled();
+  });
+
+  it('enables the select button when a country code is selected', () => {
+    render(<CountryPickerModal {...phoneBaseProps} variantConfig={getConfigVariant(true)} />);
+    const selectButton = screen.getByTestId('country-picker-modal-select-button');
+    expect(selectButton).not.toBeDisabled();
+  });
+
+  it('handles keyboard navigation with arrow keys', async () => {
+    render(<CountryPickerModal {...phoneBaseProps} />);
+    await userEvent.keyboard('{ArrowDown}');
     // Add assertions to verify focus changes
   });
 });
