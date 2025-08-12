@@ -6,19 +6,22 @@ import { Icon } from '../Icon';
 import { Text, TextVariants } from '../Text';
 
 export type StepStatusEnum = 'completed' | 'current' | 'not started';
+
+type StepLabelByStatus = { [K in StepStatusEnum]: string };
+type Step = {
+  statusLabels?: StepLabelByStatus;
+  statusAriaLabels?: StepLabelByStatus;
+};
+
 export interface ProgressIndicatorProps extends Progress.ProgressProps, ComponentProps<'div'> {
   /**
-   * Total number of steps in the progress indicator.
+   * Data for each step
    */
-  steps: number;
+  steps: Step[];
   /**
-   * Current step in the progress indicator.
+   * Current step number in the progress indicator.
    */
   current: number;
-  /**
-   * Optional labels for each step in the progress indicator.
-   */
-  labels?: string[];
   /**
    * Optional class name for additional styling.
    */
@@ -31,10 +34,6 @@ export interface ProgressIndicatorProps extends Progress.ProgressProps, Componen
    * Aria label for the progress steps.
    */
   ariaLabelSteps?: string;
-  /**
-   * Aria labels for each step in different states.
-   */
-  ariaLabelStep?: (step: number, state: StepStatusEnum) => string;
   /**
    * Aria label for the completed icon.
    */
@@ -59,34 +58,34 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
       className,
       ariaLabelProgress = 'Progress',
       ariaLabelSteps = 'Progress steps',
-      ariaLabelStep = (step, state) => `Step ${step} ${state}`,
       ariaLabelCompletedIcon = 'Completed Icon',
       ...props
     },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ProgressIndicator');
-    if (steps < 1) return null;
+    const stepCount = steps.length;
+    if (stepCount < 1) return null;
 
     const getValue = (value: number) => {
       if (value <= 0) return 0;
-      if (value >= steps) return steps;
+      if (value >= stepCount) return stepCount;
       return value;
     };
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        <Progress.Root value={getValue(current)} max={steps} aria-label={ariaLabelProgress}>
+        <Progress.Root value={getValue(current)} max={stepCount} aria-label={ariaLabelProgress}>
           <div className={`${baseClassName}__steps`} aria-label={ariaLabelSteps}>
-            {Array.from({ length: steps }).map((_, index) => {
+            {steps.map(({ statusLabels, statusAriaLabels = statusLabels }, index) => {
               const stepNumber = index + 1;
               const isComplete = current > stepNumber;
               const isCurrent = current === stepNumber;
               const stepState = isComplete ? 'completed' : isCurrent ? 'current' : 'not started';
-              const stepAriaLabel = ariaLabelStep(stepNumber, stepState);
+              const stepAriaLabel = statusAriaLabels?.[stepState];
 
               return (
-                <Fragment key={props.labels ? props.labels[index] : index}>
+                <Fragment key={statusLabels?.[stepState] ?? index}>
                   <div
                     className={`${baseClassName}__item`}
                     aria-current={isCurrent ? 'step' : undefined}
@@ -111,13 +110,13 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
                         <Text variant={TextVariants.badge}>{stepNumber}</Text>
                       )}
                     </span>
-                    {props.labels && props.labels[index] && (
+                    {statusLabels?.[stepState] && (
                       <span className={`${baseClassName}__label`}>
-                        <Text variant={TextVariants.string2}>{props.labels[index]}</Text>
+                        <Text variant={TextVariants.string2}>{statusLabels[stepState]}</Text>
                       </span>
                     )}
                   </div>
-                  {index < steps - 1 ? <div className={`${baseClassName}__connector`} aria-hidden="true" /> : null}
+                  {index < stepCount - 1 ? <div className={`${baseClassName}__connector`} aria-hidden="true" /> : null}
                 </Fragment>
               );
             })}
