@@ -27,6 +27,53 @@ $lg: #{$px}-input--lg;
     }
   }
 
+  &__wrapper {
+    @include text($string2);
+
+    accent-color: $soft-black;
+    align-items: center;
+    border: 1px solid $keyline-gray;
+    border-radius: 0.1875rem;
+    display: inline-flex;
+    font-variation-settings: 'wght' 600;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+    padding: $padding-xsm;
+    position: relative;
+
+    &::placeholder {
+      font-variation-settings: 'wght' 400;
+    }
+
+    &:focus-visible,
+    &:focus-within {
+      outline: 1px solid $pure-black;
+    }
+
+    .#{$px}-input__wrapper__input,
+    .#{$px}-input__input {
+      border: none;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+
+    &__adornment {
+      align-items: center;
+      display: flex;
+      margin-right: 0.25rem;
+      user-select: none;
+      user-select: none;
+      user-select: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+  }
+
   &__input {
     @include text($string2);
 
@@ -60,7 +107,8 @@ $lg: #{$px}-input--lg;
     flex-flow: row wrap;
     gap: 1rem;
 
-    .#{$px}-input__input {
+    .#{$px}-input__input,
+    .#{$px}-input__wrapper {
       align-self: center;
       width: unset;
     }
@@ -72,7 +120,8 @@ $lg: #{$px}-input--lg;
     cursor: default;
 
     .#{$px}-input__label,
-    .#{$px}-input__input {
+    .#{$px}-input__input,
+    .#{$px}-input__wrapper {
       color: inherit;
     }
     .#{$px}-input__label:hover,
@@ -86,7 +135,8 @@ $lg: #{$px}-input--lg;
     pointer-events: none;
 
     .#{$px}-input__label,
-    .#{$px}-input__input {
+    .#{$px}-input__input,
+    .#{$px}-input__wrapper {
       cursor: default;
     }
 
@@ -109,13 +159,20 @@ $lg: #{$px}-input--lg;
       color: $pure-black;
     }
 
-    .#{$px}-input__input {
+    .#{$px}-input__input,
+    .#{$px}-input__wrapper {
       border: 1px solid $error-red;
       box-shadow: inset 0 0 3px 3px $error-pink;
 
       &:focus-within {
         outline: 1px solid $error-red;
       }
+    }
+
+    .#{$px}-input__wrapper .#{$px}-input__input {
+      border: none;
+      box-shadow: none;
+      outline: none;
     }
   }
 
