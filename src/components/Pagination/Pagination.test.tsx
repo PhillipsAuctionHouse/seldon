@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 import { render, screen, waitFor, renderHook } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { runCommonTests } from '../../utils/testUtils';
@@ -13,7 +13,12 @@ const useMockState = (value: PaginationOptionValue) => {
 };
 
 describe('A Pagination', () => {
-  runCommonTests(Pagination, 'Pagination');
+  // Use a forwardRef wrapper for runCommonTests to ensure ref is tested correctly
+  const RefPagination = forwardRef<HTMLDivElement, React.ComponentProps<typeof Pagination>>((props, ref) => (
+    <Pagination {...props} ref={ref} />
+  ));
+  RefPagination.displayName = 'RefPagination';
+  runCommonTests(RefPagination, 'Pagination');
 
   const reqProps = { id: 'test-id' };
   const lotOptions = ['Lot 1', 'Lot 2', 'Lot 3', 'Lot 4', 'Lot 5'];

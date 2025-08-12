@@ -70,3 +70,23 @@ test('getLanguageLabel', () => {
   const currentLanguage = SupportedLanguages.zh;
   expect(getLanguageLabel({ languageOptions, currentLanguage })).toBe('中文');
 });
+
+describe('MobileLanguageSelector (responsive)', () => {
+  test('renders language options correctly', async () => {
+    const currentLanguage = SupportedLanguages.en;
+    const onLanguageChange = vitest.fn();
+
+    render(
+      <LanguageSelector
+        languageOptions={languageOptions}
+        currentLanguage={currentLanguage}
+        onLanguageChange={onLanguageChange}
+      />,
+    );
+    const mobileAccordion = screen.getByTestId('language-selector-accordion-trigger');
+    await userEvent.click(mobileAccordion);
+    const languageOptionZh = screen.getByText('中文');
+    await userEvent.click(languageOptionZh);
+    expect(onLanguageChange).toHaveBeenCalledWith('zh');
+  });
+});

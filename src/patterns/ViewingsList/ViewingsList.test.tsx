@@ -1,7 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 
-import StatefulViewingsList from './StatefulViewingsList';
+import { forwardRef } from 'react';
+import StatefulViewingsList, { StatefulViewingsListProps } from './StatefulViewingsList';
 import { defaultViewing, i18n, validate, handleOnSave } from './utils';
 import { ViewingsListCardProps } from './ViewingsListCard';
 import { runCommonTests } from '../../utils/testUtils';
@@ -11,7 +12,12 @@ import { px } from '../../utils';
 describe('ViewingsList', () => {
   const reqProps = { title: 'Tour Viewing(s) on Overview Tab', id: 'test-id', validate, onSave: handleOnSave };
 
-  runCommonTests((props) => <StatefulViewingsList {...props} />, 'ViewingsList');
+  const ForwardedViewingsList = forwardRef<HTMLDivElement, StatefulViewingsListProps>((props, ref) => (
+    <StatefulViewingsList {...props} ref={ref} />
+  ));
+  ForwardedViewingsList.displayName = 'ForwardedViewingsList';
+
+  runCommonTests(ForwardedViewingsList, 'ViewingsList');
 
   it('renders a list of ViewingsList cards when passed an array of viewing list objects', async () => {
     render(<StatefulViewingsList {...reqProps} defaultViewing={defaultViewing} />);

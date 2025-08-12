@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
-import { ComponentProps, ElementType } from 'react';
+import { ComponentProps, ElementType, forwardRef } from 'react';
 import { getLinkVariantClassName, isLinkExternal } from './utils';
 import { LinkVariants } from './types';
 import { Text, TextVariants } from '../Text';
@@ -30,30 +30,26 @@ export interface LinkProps extends ComponentProps<'a'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-links-link--overview)
  */
 
-const Link = ({
-  children,
-  className,
-  element: Element = 'a',
-  variant = LinkVariants.link,
-  href,
-  ...props
-}: LinkProps) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Link');
-  const classNames = classnames(baseClassName, getLinkVariantClassName(variant), className);
+const Link = forwardRef<HTMLAnchorElement, LinkProps>(
+  ({ children, className, element: Element = 'a', variant = LinkVariants.link, href, ...props }, ref) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Link');
+    const classNames = classnames(baseClassName, getLinkVariantClassName(variant), className);
 
-  const isExternal = isLinkExternal(href);
+    const isExternal = isLinkExternal(href);
 
-  return (
-    <Element
-      {...commonProps}
-      href={href}
-      className={classNames}
-      {...(isExternal && Element === 'a' ? { rel: 'noopener noreferrer', target: '_blank' } : {})}
-      {...props}
-    >
-      <Text variant={variant as unknown as TextVariants}>{children}</Text>
-    </Element>
-  );
-};
-
+    return (
+      <Element
+        ref={ref}
+        {...commonProps}
+        href={href}
+        className={classNames}
+        {...(isExternal && Element === 'a' ? { rel: 'noopener noreferrer', target: '_blank' } : {})}
+        {...props}
+      >
+        <Text variant={variant as unknown as TextVariants}>{children}</Text>
+      </Element>
+    );
+  },
+);
+Link.displayName = 'Link';
 export default Link;

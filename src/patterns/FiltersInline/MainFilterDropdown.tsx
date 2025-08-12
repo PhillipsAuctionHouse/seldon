@@ -53,6 +53,7 @@ export const MainFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDrop
           onClose={() => resetAllFilters(filtersListState, handleClick)}
           className={`${px}-filter-drawer`}
           aria-label={ariaLabels.drawer || 'Filter drawer'}
+          paddingLevel={0}
         >
           <FilterMenu className={`${px}-filter-drawer-menu`}>
             {filters?.map((filter: FilterType) => (

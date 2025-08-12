@@ -1,4 +1,4 @@
-import { FC, cloneElement, isValidElement, useCallback, useState, useRef, useEffect } from 'react';
+import { cloneElement, isValidElement, useCallback, useState, useRef, useEffect, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import { TransformWrapper, TransformComponent, ReactZoomPanPinchRef } from 'react-zoom-pan-pinch';
 
@@ -43,83 +43,82 @@ export interface PinchZoomProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-pinchzoom--overview)
  */
-const PinchZoom: FC<PinchZoomProps> = ({
-  onZoomChange,
-  onAtLeftEdge,
-  onAtRightEdge,
-  children,
-  maxZoom = 10,
-  className,
-  isZoomReset = false,
-  ...props
-}) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'PinchZoom');
+const PinchZoom = forwardRef<HTMLElement, PinchZoomProps>(
+  (
+    { onZoomChange, onAtLeftEdge, onAtRightEdge, children, maxZoom = 10, className, isZoomReset = false, ...props },
+    ref,
+  ) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'PinchZoom');
 
-  const [isZoomed, setIsZoomed] = useState(false);
+    const [isZoomed, setIsZoomed] = useState(false);
 
-  const zoomRef = useRef<ReactZoomPanPinchRef>(null);
+    const zoomRef = useRef<ReactZoomPanPinchRef>(null);
 
-  useEffect(() => {
-    if (isZoomReset) {
-      zoomRef.current?.resetTransform();
-      setIsZoomed(false);
-      onZoomChange?.(false);
-    }
-  }, [isZoomReset, onZoomChange]);
-
-  const onTransformed = useCallback(
-    (zoomRef: ReactZoomPanPinchRef) => {
-      const { state, instance } = zoomRef;
-      if (state.scale > 0.99 && state.scale < 1.01) {
+    useEffect(() => {
+      if (isZoomReset) {
+        zoomRef.current?.resetTransform();
         setIsZoomed(false);
         onZoomChange?.(false);
-      } else {
-        setIsZoomed(true);
-        onZoomChange?.(true);
       }
+    }, [isZoomReset, onZoomChange]);
 
-      const isAtLeftEdge = Math.abs(state.positionX - (instance.bounds?.maxPositionX ?? 0)) < 0.01;
-      const isAtRightEdge = Math.abs(state.positionX - (instance.bounds?.minPositionX ?? 0)) < 0.01;
+    const onTransformed = useCallback(
+      (zoomRef: ReactZoomPanPinchRef) => {
+        const { state, instance } = zoomRef;
+        if (state.scale > 0.99 && state.scale < 1.01) {
+          setIsZoomed(false);
+          onZoomChange?.(false);
+        } else {
+          setIsZoomed(true);
+          onZoomChange?.(true);
+        }
 
-      onAtLeftEdge?.(isAtLeftEdge);
-      onAtRightEdge?.(isAtRightEdge);
-    },
-    [onZoomChange, onAtLeftEdge, onAtRightEdge],
-  );
+        const isAtLeftEdge = Math.abs(state.positionX - (instance.bounds?.maxPositionX ?? 0)) < 0.01;
+        const isAtRightEdge = Math.abs(state.positionX - (instance.bounds?.minPositionX ?? 0)) < 0.01;
 
-  return (
-    <TransformWrapper
-      maxScale={maxZoom}
-      onTransformed={onTransformed}
-      minScale={1}
-      disablePadding
-      doubleClick={{
-        mode: isZoomed ? 'reset' : 'toggle',
-      }}
-      wheel={{
-        smoothStep: 0.01,
-      }}
-      panning={{
-        disabled: !isZoomed,
-      }}
-      ref={zoomRef}
-    >
-      <TransformComponent
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        wrapperProps={{ ...commonProps, ...props }}
-        wrapperClass={classNames(baseClassName, className, {
-          [`${baseClassName}-zoomed`]: isZoomed,
-        })}
-        contentClass={`${baseClassName}-content`}
+        onAtLeftEdge?.(isAtLeftEdge);
+        onAtRightEdge?.(isAtRightEdge);
+      },
+      [onZoomChange, onAtLeftEdge, onAtRightEdge],
+    );
+
+    return (
+      <TransformWrapper
+        maxScale={maxZoom}
+        onTransformed={onTransformed}
+        minScale={1}
+        disablePadding
+        doubleClick={{
+          mode: isZoomed ? 'reset' : 'toggle',
+        }}
+        wheel={{
+          smoothStep: 0.01,
+        }}
+        panning={{
+          disabled: !isZoomed,
+        }}
+        ref={zoomRef}
       >
-        {isValidElement<{ className: string }>(children)
-          ? cloneElement(children, { className: classNames(`${baseClassName}-child`, children?.props?.className) })
-          : children}
-      </TransformComponent>
-    </TransformWrapper>
-  );
-};
+        <TransformComponent
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          wrapperProps={{ ...commonProps, ...props }}
+          wrapperClass={classNames(baseClassName, className, {
+            [`${baseClassName}-zoomed`]: isZoomed,
+          })}
+          contentClass={`${baseClassName}-content`}
+        >
+          {isValidElement<{ className: string; ref: React.Ref<HTMLElement> }>(children)
+            ? cloneElement(children, {
+                className: classNames(`${baseClassName}-child`, children?.props?.className),
+                ref,
+              })
+            : children}
+        </TransformComponent>
+      </TransformWrapper>
+    );
+  },
+);
 
 PinchZoom.displayName = 'PinchZoom';
 

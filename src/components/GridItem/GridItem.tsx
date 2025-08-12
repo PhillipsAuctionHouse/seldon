@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { determineColumnSpanClassName, validateColumnSpans } from './gridItemUtils';
@@ -31,39 +31,45 @@ export interface GridItemProps extends React.HTMLAttributes<HTMLDivElement> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-layouts-griditem--overview)
  */
-const GridItem = ({
-  children,
-  xs = 2,
-  sm = 2,
-  md = 6,
-  lg = 12,
-  align = GridItemAlign.center,
-  element: Element = 'div',
-  className,
-  ...props
-}: GridItemProps) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'GridItem');
 
-  const columnSpansPerBreakpoint = useMemo(() => ({ xs, sm, md, lg }) as const, [xs, sm, md, lg]);
-  const gridItemClasses = useMemo(() => {
-    return [
-      baseClassName, // figure out the class names for each breakpoint
-      Object.entries(columnSpansPerBreakpoint).map(([key, value]) =>
-        determineColumnSpanClassName(key as GridItemAlign, value, align),
-      ),
+const GridItem = forwardRef<HTMLDivElement, GridItemProps>(
+  (
+    {
+      children,
+      xs = 2,
+      sm = 2,
+      md = 6,
+      lg = 12,
+      align = GridItemAlign.center,
+      element: Element = 'div',
       className,
-    ];
-  }, [align, columnSpansPerBreakpoint, baseClassName, className]);
+      ...props
+    },
+    ref,
+  ) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'GridItem');
 
-  if (!validateColumnSpans(Object.values(columnSpansPerBreakpoint))) {
-    return null;
-  }
+    const columnSpansPerBreakpoint = useMemo(() => ({ xs, sm, md, lg }) as const, [xs, sm, md, lg]);
+    const gridItemClasses = useMemo(() => {
+      return [
+        baseClassName, // figure out the class names for each breakpoint
+        Object.entries(columnSpansPerBreakpoint).map(([key, value]) =>
+          determineColumnSpanClassName(key as GridItemAlign, value, align),
+        ),
+        className,
+      ];
+    }, [align, columnSpansPerBreakpoint, baseClassName, className]);
 
-  return (
-    <Element {...commonProps} className={classnames(gridItemClasses)} {...props}>
-      {children}
-    </Element>
-  );
-};
+    if (!validateColumnSpans(Object.values(columnSpansPerBreakpoint))) {
+      return null;
+    }
 
+    return (
+      <Element ref={ref} {...commonProps} className={classnames(gridItemClasses)} {...props}>
+        {children}
+      </Element>
+    );
+  },
+);
+GridItem.displayName = 'GridItem';
 export default GridItem;
