@@ -131,16 +131,6 @@ $breakpoint-xl: 1801px;
   --desktop-max-width: 120rem;
   --quote-size: 1.5rem;
   --quote-line-height: 2rem;
-  --heading-size1: 1.5rem;
-  --heading-line-height-size1: 1.75rem;
-  --heading-size2: 1.5rem;
-  --heading-line-height-size2: 1.75rem;
-  --heading-size3: 1.25rem;
-  --heading-line-height-size3: 1.5rem;
-  --heading-size4: 1rem;
-  --heading-line-height-size4: 1.25rem;
-  --heading-size5: 0.75rem;
-  --heading-line-height-size5: 1rem;
   --string-size1: 1rem;
   --string-line-height-size1: 1.25rem;
   --string-size2: 0.75rem;
@@ -173,19 +163,19 @@ $breakpoint-xl: 1801px;
   --snw-heading-hero-size2: 1.625rem;
   --snw-heading-hero-line-height-size2: 1.9375rem;
 
+  // SIZES
+  --size-micro: 0.25rem;
+  --size-xsm: 0.5rem;
+  --size-sm: 0.75rem;
+  --size-md: 1rem;
+  --size-lg: 1.25rem;
+  --size-xl: 1.5rem;
+  --size-xxl: 1.75rem;
+  --size-xxxl: 2rem;
+
   @media (min-width: $breakpoint-md) {
     --quote-size: 1.75rem;
     --quote-line-height: 2.25rem;
-    --heading-size1: 1.75rem;
-    --heading-line-height-size1: 2rem;
-    --heading-size2: 1.75rem;
-    --heading-line-height-size2: 2rem;
-    --heading-size3: 1.5rem;
-    --heading-line-height-size3: 1.75rem;
-    --heading-size4: 1.25rem;
-    --heading-line-height-size4: 1.5rem;
-    --heading-size5: 1rem;
-    --heading-line-height-size5: 1.25rem;
     --string-size1: 1.25rem;
     --string-line-height-size1: 1.5rem;
     --string-size2: 1rem;
@@ -224,16 +214,6 @@ $breakpoint-xl: 1801px;
   @media (min-width: $breakpoint-xl) {
     --quote-size: 2rem;
     --quote-line-height: 2.5rem;
-    --heading-size1: 2rem;
-    --heading-line-height-size1: 2.25rem;
-    --heading-size2: 2rem;
-    --heading-line-height-size2: 2.25rem;
-    --heading-size3: 1.75rem;
-    --heading-line-height-size3: 2rem;
-    --heading-size4: 1.5rem;
-    --heading-line-height-size4: 1.75rem;
-    --heading-size5: 1.25rem;
-    --heading-line-height-size5: 1.5rem;
     --string-size1: 1.5rem;
     --string-line-height-size1: 1.75rem;
     --string-size2: 1.25rem;
@@ -259,6 +239,16 @@ $breakpoint-xl: 1801px;
     --snw-header-link-line-height: 1.75rem;
     --snw-flyout-link-size: 1.125rem;
     --snw-flyout-link-line-height: 2.125rem;
+
+    // SIZES
+    --size-micro: 0.5rem;
+    --size-xsm: 0.75rem;
+    --size-sm: 1rem;
+    --size-md: 1.25rem;
+    --size-lg: 1.5rem;
+    --size-xl: 1.75rem;
+    --size-xxl: 2rem;
+    --size-xxxl: 2.25rem;
   }
 }
 
@@ -267,18 +257,6 @@ $title-size1: var(--heading-size1);
 $title-size2: var(--heading-size2);
 $title-size3: var(--heading-size3);
 $title-size4: var(--heading-size4);
-
-// HEADING
-$heading-size1: var(--heading-size1);
-$heading-line-height-size1: var(--heading-line-height-size1);
-$heading-size2: var(--heading-size2);
-$heading-line-height-size2: var(--heading-line-height-size2);
-$heading-size3: var(--heading-size3);
-$heading-line-height-size3: var(--heading-line-height-size3);
-$heading-size4: var(--heading-size4);
-$heading-line-height-size4: var(--heading-line-height-size4);
-$heading-size5: var(--heading-size5);
-$heading-line-height-size5: var(--heading-line-height-size5);
 
 // BODY
 $body-size1: var(--body-size1);

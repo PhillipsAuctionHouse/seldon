@@ -43,12 +43,7 @@
   text-underline-offset: $offset;
 }
 
-@mixin hText(
-  $size: $heading-size1,
-  $color: $pure-black,
-  $transform-style: capitalize,
-  $line-height: $heading-line-height-size1
-) {
+@mixin hText($size: var(--size-xl), $color: $pure-black, $transform-style: capitalize, $line-height: var(--size-lg)) {
   @include DistinctDisplay;
 
   color: $color;
@@ -133,49 +128,44 @@
 
   // Headings
   @if $token == 'blockquote' {
-    @include hText(
-      $heading-size1,
-      $color: $primary-black,
-      $transform-style: initial,
-      $line-height: $heading-line-height-size1
-    );
+    @include hText(var(--size-xl), $color: $primary-black, $transform-style: initial, $line-height: var(--size-xxl));
   }
 
   @if $token == 'heading1' {
-    @include hText($heading-size1, $line-height: $heading-line-height-size1, $transform-style: capitalize);
+    @include hText(var(--size-xl), $line-height: var(--size-xxl), $transform-style: capitalize);
   }
 
   @if $token == 'heading2' {
-    @include hText($heading-size2, $line-height: $heading-line-height-size2, $transform-style: capitalize);
+    @include hText(var(--size-lg), $line-height: var(--size-xl), $transform-style: capitalize);
   }
 
   @if $token == 'heading3' {
-    @include hText($heading-size3, $line-height: $heading-line-height-size3, $transform-style: capitalize);
+    @include hText(var(--size-md), $line-height: var(--size-lg), $transform-style: capitalize);
   }
 
   @if $token == 'heading4' {
-    @include hText($heading-size4, $line-height: $heading-line-height-size4, $transform-style: capitalize);
+    @include hText(var(--size-sm), $line-height: var(--size-md), $transform-style: capitalize);
   }
 
   @if $token == 'heading5' {
-    @include hText($heading-size5, $line-height: $heading-line-height-size5, $transform-style: capitalize);
+    @include hText(var(--size-xs), $line-height: var(--size-sm), $transform-style: capitalize);
   }
 
   @if $token == 'title1' {
-    @include hText($heading-size1, $line-height: $heading-line-height-size1, $transform-style: uppercase);
+    @include hText(var(--size-xl), $line-height: var(--size-xxl), $transform-style: uppercase);
   }
 
   // the title2 token skips heading 2 because it's the same size currently as heading1
   @if $token == 'title2' {
-    @include hText($heading-size3, $line-height: $heading-line-height-size3, $transform-style: uppercase);
+    @include hText(var(--size-lg), $line-height: var(--size-xl), $transform-style: uppercase);
   }
 
   @if $token == 'title3' {
-    @include hText($heading-size4, $line-height: $heading-line-height-size4, $transform-style: uppercase);
+    @include hText(var(--size-md), $line-height: var(--size-lg), $transform-style: uppercase);
   }
 
   @if $token == 'title4' {
-    @include hText($heading-size5, $line-height: $heading-line-height-size5, $transform-style: uppercase);
+    @include hText(var(--size-sm), $line-height: var(--size-md), $transform-style: uppercase);
   }
 
   // Body
