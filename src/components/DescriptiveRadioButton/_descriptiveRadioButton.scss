@@ -10,7 +10,8 @@
     display: flex;
     padding: $spacing-sm;
 
-    &--selected {
+    &--selected,
+    &:has(input:focus-visible) {
       border: 1.5px solid $pure-black;
     }
   }

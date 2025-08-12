@@ -19,9 +19,9 @@ describe('DescriptiveRadioButtonGroup', () => {
     expect(screen.getByText('Select an option')).toBeInTheDocument();
   });
 
-  it('does not render the legend when not provided', () => {
-    const { queryByText } = render(<DescriptiveRadioButtonGroup {...defaultProps} legendText={undefined} />);
-    expect(queryByText('Select an option')).not.toBeInTheDocument();
+  it('renders the legend when hideLegend is false', () => {
+    const { getByText } = render(<DescriptiveRadioButtonGroup {...defaultProps} hideLegend={false} />);
+    expect(getByText('Select an option')).toBeVisible();
   });
 
   it('renders all options', () => {
@@ -51,6 +51,6 @@ describe('DescriptiveRadioButtonGroup', () => {
 
   it('applies custom className to the fieldset', () => {
     render(<DescriptiveRadioButtonGroup {...defaultProps} className="custom-class" />);
-    expect(screen.getByRole('group')).toHaveClass('custom-class');
+    expect(screen.getByRole('radiogroup')).toHaveClass('custom-class');
   });
 });

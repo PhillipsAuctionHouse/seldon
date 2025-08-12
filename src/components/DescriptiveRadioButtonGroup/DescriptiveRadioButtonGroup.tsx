@@ -1,13 +1,13 @@
-import { ComponentProps, forwardRef, ReactNode } from 'react';
+import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import DescriptiveRadioButton, { DescriptiveRadioButtonProps } from '../DescriptiveRadioButton/DescriptiveRadioButton';
 
 export interface DescriptiveRadioButtonGroupProps extends ComponentProps<'fieldset'> {
   /**
-   * Optional legend for the fieldset
+   * Legend for the fieldset
    */
-  legendText?: ReactNode;
+  legendText: string;
   /**
    * Hide the legend visually
    */
@@ -50,9 +50,20 @@ const DescriptiveRadioButtonGroup = forwardRef<HTMLFieldSetElement, DescriptiveR
       return null;
     }
 
+    // Use a unique id for the legend for aria-labelledby
+    const legendId = `${name}_radio-button-group`;
     return (
-      <fieldset {...commonProps} className={classnames(baseClassName, className)} ref={ref} name={name}>
-        {legendText && <legend className={hideLegend ? `${baseClassName}__sr-only` : undefined}>{legendText}</legend>}
+      <fieldset
+        {...commonProps}
+        className={classnames(baseClassName, className)}
+        ref={ref}
+        name={name}
+        role="radiogroup"
+        aria-labelledby={legendId}
+      >
+        <legend id={legendId} className={hideLegend ? `${baseClassName}__sr-only` : undefined}>
+          {legendText}
+        </legend>
         {options.map((option) => (
           <DescriptiveRadioButton
             key={option.id}

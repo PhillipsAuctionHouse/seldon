@@ -15,8 +15,8 @@ export const Playground = (props: DescriptiveRadioButtonGroupProps) => {
 };
 
 Playground.args = {
-  legend: 'Choose an option',
-  name: 'choices',
+  legendText: 'Choose an option',
+  name: 'bidder-type',
   value: '', // No default selected
   options: [
     {
