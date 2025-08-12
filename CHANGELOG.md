@@ -1,3 +1,10 @@
+# [1.173.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.172.0...v1.173.0) (2025-08-12)
+
+
+### Features
+
+* **input:** L3-6361 Input Adornment ([#680](https://github.com/PhillipsAuctionHouse/seldon/issues/680)) ([cfe3f2a](https://github.com/PhillipsAuctionHouse/seldon/commit/cfe3f2aa6bc3f81c77227ab51f8b0e0f5a197726))
+
 # [1.172.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.171.1...v1.172.0) (2025-08-11)
 
 
