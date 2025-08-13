@@ -79,7 +79,7 @@ const designIcons = [
   'AdminSearch',
 ] as const;
 export const IconGrid = (props: IconProps) => {
-  const [color, setColor] = useState<string>('$primary-black');
+  const [color, setColor] = useState<string>('$black');
   const [size, setSize] = useState<string>('16px');
   const baseClassName = 'icon-grid-wrapper';
   const isDarkMode = color === '$white';

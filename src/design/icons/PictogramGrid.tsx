@@ -20,7 +20,7 @@ const pictograms = [
   'CreditCard',
 ] as const;
 export const PictogramGrid = (props: PictogramProps) => {
-  const [color, setColor] = useState<string>('$primary-black');
+  const [color, setColor] = useState<string>('$black');
   const [size, setSize] = useState<string>('64px');
 
   const baseClassName = 'picto-grid-wrapper';
