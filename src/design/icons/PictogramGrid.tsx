@@ -47,8 +47,8 @@ export const PictogramGrid = (props: PictogramProps) => {
           </option>
         </Select>
         <Select id="color" labelText="Pictogram Color" onChange={(e) => handleColorChange(e.target.value)}>
-          <option key="$pure-black" value="$pure-black">
-            Pure Black
+          <option key="$black" value="$black">
+            Black
           </option>
           <option key="$white" value="$white">
             White
