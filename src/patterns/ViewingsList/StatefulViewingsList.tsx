@@ -31,40 +31,38 @@ export interface StatefulViewingsListProps extends Record<string, unknown> {
   ) => boolean;
 }
 
-const StatefulViewingsList = ({
-  defaultViewing,
-  i18n,
-  validate = () => undefined,
-  onDelete = () => undefined,
-  onSave,
-  ...props
-}: StatefulViewingsListProps) => {
-  const [viewings, setViewings] = React.useState<ViewingsListCardProps[]>(defaultViewing as ViewingsListCardProps[]);
-  const handleOnDelete = (id: string) => {
-    setViewings((prevViewings) => prevViewings?.filter((el) => el.id !== id));
-    // persist to database
-    onDelete(id);
-  };
+const StatefulViewingsList = React.forwardRef<HTMLDivElement, StatefulViewingsListProps>(
+  ({ defaultViewing, i18n, validate = () => undefined, onDelete = () => undefined, onSave, ...props }, ref) => {
+    const [viewings, setViewings] = React.useState<ViewingsListCardProps[]>(defaultViewing as ViewingsListCardProps[]);
+    const handleOnDelete = (id: string) => {
+      setViewings((prevViewings) => prevViewings?.filter((el) => el.id !== id));
+      // persist to database
+      onDelete(id);
+    };
 
-  const handleOnAdd = (id: string) => {
-    setViewings((prevViewings) => {
-      if (prevViewings) {
-        return [...prevViewings, { id }];
-      }
-      return [{ id }];
-    });
-  };
+    const handleOnAdd = (id: string) => {
+      setViewings((prevViewings) => {
+        if (prevViewings) {
+          return [...prevViewings, { id }];
+        }
+        return [{ id }];
+      });
+    };
 
-  return (
-    <ViewingsList
-      {...props}
-      i18n={i18n}
-      viewings={viewings}
-      onDelete={handleOnDelete}
-      onAdd={handleOnAdd}
-      onSave={(e) => onSave(e, setViewings, validate)}
-    />
-  );
-};
+    return (
+      <ViewingsList
+        ref={ref}
+        {...props}
+        i18n={i18n}
+        viewings={viewings}
+        onDelete={handleOnDelete}
+        onAdd={handleOnAdd}
+        onSave={(e) => onSave(e, setViewings, validate)}
+      />
+    );
+  },
+);
+
+StatefulViewingsList.displayName = 'StatefulViewingsList';
 
 export default StatefulViewingsList;

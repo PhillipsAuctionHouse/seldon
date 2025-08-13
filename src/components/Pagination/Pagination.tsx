@@ -1,4 +1,4 @@
-import React, { ComponentProps, useMemo } from 'react';
+import { ComponentProps, useMemo, forwardRef } from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { px } from '../../utils';
@@ -85,118 +85,124 @@ export interface PaginationProps extends Omit<ComponentProps<'div'>, 'onChange'>
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-pagination--overview)
  */
 
-const Pagination = ({
-  className,
-  onChange,
-  variant = 'inline',
-  options = [],
-  value,
-  isDisabled,
-  previousLabel = 'Previous',
-  nextLabel = 'Next',
-  selectLabel = 'Select',
-  ...props
-}: PaginationProps) => {
-  const type = 'pagination';
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Pagination');
-  const { id } = props;
-  // Necessary unfortunately to have the Select value update in realtime, this is needed for slow page transitions since the lot wouldn't update until the page transition is finished
-  const { pendingState, setPendingState } = usePendingState(determineOptionValue(value));
-
-  const valueWithPendingState = pendingState || value;
-
-  const handlePageChange = (
-    option: PaginationOption | PaginationOptionValue,
-    event?: React.ChangeEvent<HTMLSelectElement>,
+const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
+  (
+    {
+      className,
+      onChange,
+      variant = 'inline',
+      options = [],
+      value,
+      isDisabled,
+      previousLabel = 'Previous',
+      nextLabel = 'Next',
+      selectLabel = 'Select',
+      ...props
+    },
+    ref,
   ) => {
-    const newPage = determineOptionValue(option);
-    setPendingState(newPage);
-    onChange(newPage, event);
-  };
+    const type = 'pagination';
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Pagination');
+    const { id } = props;
+    // Necessary unfortunately to have the Select value update in realtime, this is needed for slow page transitions since the lot wouldn't update until the page transition is finished
+    const { pendingState, setPendingState } = usePendingState(determineOptionValue(value));
 
-  const [prevOption, nextOption] = useMemo(() => {
-    const prevIndex = options.findIndex((option) => determineOptionValue(option) === valueWithPendingState) - 1;
-    const prevOption = options.at(prevIndex) || '';
-    const nextIndex =
-      (options.findIndex((option) => determineOptionValue(option) === valueWithPendingState) + 1) % options.length;
-    const nextOption = options[nextIndex];
-    return [prevOption, nextOption];
-  }, [options, valueWithPendingState]);
+    const valueWithPendingState = pendingState || value;
 
-  return (
-    <div
-      className={classnames(`${px}-${type}`, { [`${baseClassName}__wrapper`]: baseClassName }, className)}
-      {...commonProps}
-      {...props}
-    >
-      <IconButton
-        className={classnames(`${baseClassName}__button`, `${px}-left-arrow`, {
-          [`${baseClassName}__button--is-disabled`]: isDisabled,
-        })}
-        onClick={(e) => {
-          if (typeof prevOption === 'object' && prevOption.href) {
-            e.preventDefault();
-          }
-          handlePageChange(prevOption);
-        }}
-        data-testid={`${id}-previous-button`}
-        isDisabled={isDisabled}
-        aria-label={previousLabel}
-        variant={ButtonVariants.primary}
-        href={typeof prevOption === 'object' && prevOption.href ? prevOption.href : undefined}
-        prefetch={typeof prevOption === 'object' && prevOption.prefetch ? prevOption.prefetch : undefined}
+    const handlePageChange = (
+      option: PaginationOption | PaginationOptionValue,
+      event?: React.ChangeEvent<HTMLSelectElement>,
+    ) => {
+      const newPage = determineOptionValue(option);
+      setPendingState(newPage);
+      onChange(newPage, event);
+    };
+
+    const [prevOption, nextOption] = useMemo(() => {
+      const prevIndex = options.findIndex((option) => determineOptionValue(option) === valueWithPendingState) - 1;
+      const prevOption = options.at(prevIndex) || '';
+      const nextIndex =
+        (options.findIndex((option) => determineOptionValue(option) === valueWithPendingState) + 1) % options.length;
+      const nextOption = options[nextIndex];
+      return [prevOption, nextOption];
+    }, [options, valueWithPendingState]);
+
+    return (
+      <div
+        ref={ref}
+        className={classnames(`${px}-${type}`, { [`${baseClassName}__wrapper`]: baseClassName }, className)}
+        {...commonProps}
+        {...props}
       >
-        <Icon icon="ChevronRight" />
-      </IconButton>
+        <IconButton
+          className={classnames(`${baseClassName}__button`, `${px}-left-arrow`, {
+            [`${baseClassName}__button--is-disabled`]: isDisabled,
+          })}
+          onClick={(e) => {
+            if (typeof prevOption === 'object' && prevOption.href) {
+              e.preventDefault();
+            }
+            handlePageChange(prevOption);
+          }}
+          data-testid={`${id}-previous-button`}
+          isDisabled={isDisabled}
+          aria-label={previousLabel}
+          variant={ButtonVariants.primary}
+          href={typeof prevOption === 'object' && prevOption.href ? prevOption.href : undefined}
+          prefetch={typeof prevOption === 'object' && prevOption.prefetch ? prevOption.prefetch : undefined}
+        >
+          <Icon icon="ChevronRight" />
+        </IconButton>
 
-      <Select
-        className={variant === 'inline' ? `${px}--inline-pagination` : undefined}
-        aria-label={selectLabel}
-        value={valueWithPendingState}
-        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-          const selectedOption = findOptionFromSelectString(options, event?.currentTarget.value);
-          if (selectedOption) {
-            handlePageChange(selectedOption, event);
-          }
-        }}
-        data-testid={`${id}-select-button`}
-        hideLabel
-        labelText={selectLabel}
-        disabled={isDisabled}
-        showIcon={false}
-        id={`${id}-select-button`}
-      >
-        {options.map((option) => {
-          const optionValue = determineOptionValue(option);
-          return (
-            <option key={optionValue} value={optionValue}>
-              {typeof option === 'string' || typeof option === 'number' ? option : option.label}
-            </option>
-          );
-        })}
-      </Select>
+        <Select
+          className={variant === 'inline' ? `${px}--inline-pagination` : undefined}
+          aria-label={selectLabel}
+          value={valueWithPendingState}
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+            const selectedOption = findOptionFromSelectString(options, event?.currentTarget.value);
+            if (selectedOption) {
+              handlePageChange(selectedOption, event);
+            }
+          }}
+          data-testid={`${id}-select-button`}
+          hideLabel
+          labelText={selectLabel}
+          disabled={isDisabled}
+          showIcon={false}
+          id={`${id}-select-button`}
+        >
+          {options.map((option) => {
+            const optionValue = determineOptionValue(option);
+            return (
+              <option key={optionValue} value={optionValue}>
+                {typeof option === 'string' || typeof option === 'number' ? option : option.label}
+              </option>
+            );
+          })}
+        </Select>
 
-      <IconButton
-        className={classnames(`${baseClassName}__button`, {
-          [`${baseClassName}__button--is-disabled`]: isDisabled,
-        })}
-        onClick={(e) => {
-          if (typeof nextOption === 'object' && nextOption.href) {
-            e.preventDefault();
-          }
-          handlePageChange(nextOption);
-        }}
-        data-testid={`${id}-next-button`}
-        isDisabled={isDisabled}
-        aria-label={nextLabel}
-        variant={ButtonVariants.primary}
-        href={typeof nextOption === 'object' && nextOption.href ? nextOption.href : undefined}
-        prefetch={typeof nextOption === 'object' && nextOption.prefetch ? nextOption.prefetch : undefined}
-      >
-        <Icon icon="ChevronRight" />
-      </IconButton>
-    </div>
-  );
-};
-
+        <IconButton
+          className={classnames(`${baseClassName}__button`, {
+            [`${baseClassName}__button--is-disabled`]: isDisabled,
+          })}
+          onClick={(e) => {
+            if (typeof nextOption === 'object' && nextOption.href) {
+              e.preventDefault();
+            }
+            handlePageChange(nextOption);
+          }}
+          data-testid={`${id}-next-button`}
+          isDisabled={isDisabled}
+          aria-label={nextLabel}
+          variant={ButtonVariants.primary}
+          href={typeof nextOption === 'object' && nextOption.href ? nextOption.href : undefined}
+          prefetch={typeof nextOption === 'object' && nextOption.prefetch ? nextOption.prefetch : undefined}
+        >
+          <Icon icon="ChevronRight" />
+        </IconButton>
+      </div>
+    );
+  },
+);
+Pagination.displayName = 'Pagination';
 export default Pagination;

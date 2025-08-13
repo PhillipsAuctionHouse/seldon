@@ -43,6 +43,7 @@ export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButton>(
       ref={ref}
       className={classnames(`${px}-filter-button`, className, {
         [`${px}-filter-button--selected`]: isSelected || count > 0 || (type === 'Filter' && totalCount > 0),
+        [`${px}-filter-button--filter`]: type === 'Filter',
       })}
       aria-label={ariaLabel}
       variant={ButtonVariants.secondary}

@@ -3,10 +3,14 @@
 .#{$px}-filter-button {
   border: 1px solid $light-gray;
   gap: 4px;
-  padding: $spacing-xsm $spacing-sm;
+  padding: $spacing-xsm $spacing-xsm;
 
   &--selected {
     border: 1px solid $pure-black;
+  }
+
+  &--filter {
+    border-radius: 8px;
   }
 
   &--count {

@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { runCommonTests } from '../../utils/testUtils';
 import Modal from './Modal';
+import { forwardRef } from 'react';
 import { ModalFromDrawer } from './Modal.stories';
 import { px } from '../../utils';
 
@@ -12,7 +13,11 @@ describe('Modal', () => {
     vi.clearAllMocks();
   });
 
-  runCommonTests((props) => <Modal {...props} isOpen />, 'Modal');
+  const ComponentWithRef = forwardRef<HTMLDivElement, React.ComponentProps<typeof Modal>>((props, ref) => (
+    <Modal {...props} isOpen ref={ref} />
+  ));
+  ComponentWithRef.displayName = 'ComponentWithRef';
+  runCommonTests(ComponentWithRef, 'Modal');
 
   it('renders the modal when isOpen is true', () => {
     render(

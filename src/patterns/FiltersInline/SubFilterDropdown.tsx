@@ -6,7 +6,7 @@ import { px } from '../../utils';
 import { FilterButton } from './FilterButton';
 import { FilterDropdownMenuDesktop } from './FilterDropdownMenuDesktop';
 import { FilterDropdownMenuMobile } from './FilterDropdownMenuMobile';
-import type { FilterButtonIconType, FilterDropdownProps } from './types';
+import { FilterButtonType, type FilterButtonIconType, type FilterDropdownProps } from './types';
 import { countActiveFilters, getFilterButtonClickHandler, getFilterButtonLabel } from './utils';
 export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropdownProps>(
   (
@@ -25,6 +25,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
       filterButtonLabelTranslated,
       dropdownMenuTranslation,
       ariaLabels = {},
+      hideDesktopSortButton,
       id,
     },
     ref,
@@ -32,6 +33,10 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
     const isButtonSelected = filtersListState?.[filterId] ?? false;
     const { totalCount, filterCount } = countActiveFilters(filters, buttonType);
     const buttonLabel = getFilterButtonLabel(filterButtonLabel, filterCount, filterButtonLabelTranslated || null);
+
+    if (hideDesktopSortButton && buttonType === FilterButtonType.Sort) {
+      return null;
+    }
 
     return (
       <>
@@ -55,7 +60,8 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
             onClose={getFilterButtonClickHandler(filtersListState, handleClick, filterId)}
             aria-label={ariaLabels.drawer || `${filterButtonLabel} drawer`}
             className={`${px}-filter-drawer-mobile`}
-            bottomContentLabel={`${buttonLabel} Filter`}
+            headerText={`${buttonLabel} Filter`}
+            paddingLevel={0}
           >
             <FilterDropdownMenuMobile
               buttonType={buttonType}

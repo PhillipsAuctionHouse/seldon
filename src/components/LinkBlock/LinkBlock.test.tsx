@@ -4,6 +4,7 @@ import Link, { LinkProps } from '../Link/Link';
 import { LinkVariants } from '../Link/types';
 import { getLinkVariantClassName } from '../Link/utils';
 import { runCommonTests } from '../../utils/testUtils';
+import { forwardRef } from 'react';
 
 const linkProps = {
   href: 'https://example.com',
@@ -13,7 +14,11 @@ const linkProps = {
 };
 
 describe('LinkBlock', () => {
-  runCommonTests((props) => <LinkBlock linkProps={linkProps} {...props} />, 'LinkBlock');
+  const ComponentWithRef = forwardRef<HTMLDivElement, React.ComponentProps<typeof LinkBlock>>((props, ref) => (
+    <LinkBlock {...props} linkProps={linkProps} ref={ref} />
+  ));
+  ComponentWithRef.displayName = 'ComponentWithRef';
+  runCommonTests(ComponentWithRef, 'LinkBlock');
 
   it('renders with data-testid when id prop is passed', () => {
     const id = 'test-id';
