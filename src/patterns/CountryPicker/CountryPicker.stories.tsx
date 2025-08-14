@@ -5,7 +5,7 @@ import { getSafeCountryCallingCode } from './utils';
 import { countries } from './constants';
 
 const meta: Meta<typeof CountryPicker> = {
-  title: 'Components/CountryPicker',
+  title: 'Patterns/CountryPicker',
   component: CountryPicker,
   argTypes: {
     modalTitle: {

@@ -1,5 +1,5 @@
-import Text from '../Text/Text';
-import { TextVariants } from '../Text';
+import Text from '../../components/Text/Text';
+import { TextVariants } from '../../components/Text';
 import classnames from 'classnames';
 import { getSafeCountryCallingCode } from './utils';
 import { Country, ModalBaseProps } from './types';

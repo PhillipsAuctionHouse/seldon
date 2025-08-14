@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
-import Text from '../Text/Text';
-import { TextVariants } from '../Text';
+import Text from '../../components/Text/Text';
+import { TextVariants } from '../../components/Text';
 import { CountryPickerOption } from './CountryPickerOption';
 import { Country, VariantConfig } from './types';
 
