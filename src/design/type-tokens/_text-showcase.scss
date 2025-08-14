@@ -26,15 +26,25 @@
 .type-block {
   margin-bottom: 48px;
 
+  &__item {
+    border-bottom: 1px solid #eae9e6;
+    display: flex;
+    flex-direction: column;
+    height: 6.5rem;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
   &__title {
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 24px;
+    margin-top: 5rem;
   }
 
   &__grid {
     display: grid;
-    gap: 32px;
     grid-template-columns: repeat(3, 1fr);
   }
 
@@ -45,6 +55,7 @@
   }
 
   &__header {
+    border-bottom: 1px solid #eae9e6;
     color: #545454;
     font-family: Montserrat, sans-serif;
     font-size: 0.75rem;
@@ -52,6 +63,7 @@
     font-weight: 400;
     letter-spacing: 0;
     line-height: 1rem; /* 133.333% */
+    padding-bottom: 1rem;
   }
 
   &__specs {
@@ -101,6 +113,10 @@
     @include text($heading4);
   }
 
+  &__heading-4--italic {
+    @include text($heading4Italic);
+  }
+
   // Labels
   &__label-large {
     @include text($labelLg);
@@ -139,6 +155,31 @@
     @include text($link);
 
     font-weight: 600;
+  }
+
+  // Body
+  &__body-large {
+    @include text($bodyLg);
+  }
+
+  &__body-medium {
+    @include text($bodyMd);
+  }
+
+  &__body-small {
+    @include text($bodySm);
+  }
+
+  &__body-large-bold {
+    @include text($bodyLgBold);
+  }
+
+  &__body-medium-bold {
+    @include text($bodyMdBold);
+  }
+
+  &__body-small-bold {
+    @include text($bodySmBold);
   }
 
   // Eyebrow

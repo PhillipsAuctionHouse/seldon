@@ -64,11 +64,17 @@
   text-transform: $transform-style;
 }
 
-@mixin pText($size: $body-size1, $color: $pure-black, $line-height: 1.5) {
+@mixin pText(
+  $size: $body-size1,
+  $color: $pure-black,
+  $line-height: calc($size + var(--font-size-step)),
+  $font-weight: 400
+) {
   @include Montserrat;
 
   color: $color;
   font-size: $size;
+  font-variation-settings: 'wght' $font-weight;
   line-height: $line-height;
 }
 
@@ -172,6 +178,30 @@
 
   @if $token == 'badge' {
     @include labelText($badge);
+  }
+
+  @if $token == 'bodyLg' {
+    @include pText(var(--font-size-md));
+  }
+
+  @if $token == 'bodyMd' {
+    @include pText(var(--font-size-sm));
+  }
+
+  @if $token == 'bodySm' {
+    @include pText(var(--font-size-xsm));
+  }
+
+  @if $token == 'bodyLgBold' {
+    @include pText(var(--font-size-md), $font-weight: 600);
+  }
+
+  @if $token == 'bodyMdBold' {
+    @include pText(var(--font-size-sm), $font-weight: 600);
+  }
+
+  @if $token == 'bodySmBold' {
+    @include pText(var(--font-size-xsm), $font-weight: 600);
   }
 
   // Headings

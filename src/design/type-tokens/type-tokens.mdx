@@ -167,7 +167,7 @@ import { Meta, Source } from '@storybook/blocks';
       </div>
         </div>
           <div className="type-block__item">
-        <h3 className="type-block__heading-3 type-block__heading-italic">Heading 3 Italic</h3>
+        <h3 className="type-block__heading-3--italic">Heading 3 Italic</h3>
         <div className="type-block__specs">
           Size: 16px / 1.00rem | Line height: 20px / 1.25rem | Tracking: 0% | Style: Italic
         </div>
@@ -179,7 +179,7 @@ import { Meta, Source } from '@storybook/blocks';
       </div>
         </div>
           <div className="type-block__item">
-        <h4 className="type-block__heading-4 type-block__heading-italic">Heading 4 Italic</h4>
+        <h4 className="type-block__heading-4--italic">Heading 4 Italic</h4>
         <div className="type-block__specs">
           Size: 12px / 0.75rem | Line height: 16px / 1.00rem | Tracking: 0% | Style: Italic
         </div>
@@ -208,7 +208,7 @@ import { Meta, Source } from '@storybook/blocks';
       </div>
         </div>
           <div className="type-block__item">
-        <h3 className="type-block__heading-3 type-block__heading-italic">Heading 3 Italic</h3>
+        <h3 className="type-block__heading-3--italic">Heading 3 Italic</h3>
         <div className="type-block__specs">
           Size: 20px / 1.25rem | Line height: 24px / 1.50rem | Tracking: 0% | Style: Italic
         </div>
@@ -220,7 +220,7 @@ import { Meta, Source } from '@storybook/blocks';
       </div>
         </div>
           <div className="type-block__item">
-        <h4 className="type-block__heading-4 type-block__heading-italic">Heading 4 Italic</h4>
+        <h4 className="type-block__heading-4--italic">Heading 4 Italic</h4>
         <div className="type-block__specs">
           Size: 16px / 1.00rem | Line height: 20px / 1.25rem | Tracking: 0% | Style: Italic
         </div>
@@ -359,6 +359,135 @@ import { Meta, Source } from '@storybook/blocks';
   </div>
 
   <div className="type-block">
+    <h2 className="type-block__title">Body</h2>
+    <div className="type-block__grid">
+      <div className="type-block__column type-block__column--small">
+        <div className="type-block__header">
+          <div>Small 320 → 1440px</div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-large">Body Large</div>
+          <div className="type-block__specs">
+            Size: 16px / 1.00rem | Line height: 20px / 1.25rem | Weight: 400 | Tracking: 0%
+          </div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-medium">Body Medium</div>
+          <div className="type-block__specs">
+            Size: 12px / 0.75rem | Line height: 16px / 1.00rem | Weight: 400 | Tracking: 0%
+          </div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-small">Body Small</div>
+          <div className="type-block__specs">
+            Size: 8px / 0.50rem | Line height: 12px / 0.75rem | Weight: 400 | Tracking: 0%
+          </div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-large-bold">Body Large Bold</div>
+          <div className="type-block__specs">
+            Size: 16px / 1.00rem | Line height: 20px / 1.25rem | Weight: 600 | Tracking: 0%
+          </div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-medium-bold">Body Medium Bold</div>
+          <div className="type-block__specs">
+            Size: 12px / 0.75rem | Line height: 16px / 1.00rem | Weight: 600 | Tracking: 0%
+          </div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-small-bold">Body Small Bold</div>
+          <div className="type-block__specs">
+            Size: 8px / 0.50rem | Line height: 12px / 0.75rem | Weight: 600 | Tracking: 0%
+          </div>
+        </div>
+      </div>
+      <div className="type-block__column type-block__column--medium">
+        <div className="type-block__header">
+          <div>Medium N / A</div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-large">Body Large</div>
+          <div className="type-block__specs">
+            Size: 16px / 1.00rem | Line height: 20px / 1.25rem | Weight: 400 | Tracking: 0%
+          </div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-medium">Body Medium</div>
+          <div className="type-block__specs">
+            Size: 12px / 0.75rem | Line height: 16px / 1.00rem | Weight: 400 | Tracking: 0%
+          </div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-small">Body Small</div>
+          <div className="type-block__specs">
+            Size: 8px / 0.50rem | Line height: 12px / 0.75rem | Weight: 400 | Tracking: 0%
+          </div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-large-bold">Body Large Bold</div>
+          <div className="type-block__specs">
+            Size: 16px / 1.00rem | Line height: 20px / 1.25rem | Weight: 600 | Tracking: 0%
+          </div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-medium-bold">Body Medium Bold</div>
+          <div className="type-block__specs">
+            Size: 12px / 0.75rem | Line height: 16px / 1.00rem | Weight: 600 | Tracking: 0%
+          </div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-small-bold">Body Small Bold</div>
+          <div className="type-block__specs">
+            Size: 8px / 0.50rem | Line height: 12px / 0.75rem | Weight: 600 | Tracking: 0%
+          </div>
+        </div>
+      </div>
+      <div className="type-block__column type-block__column--large">
+        <div className="type-block__header">
+          <div>Large 1441px → 2400px</div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-large">Body Large</div>
+          <div className="type-block__specs">
+            Size: 20px / 1.25rem | Line height: 24px / 1.50rem | Weight: 400 | Tracking: 0%
+          </div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-medium">Body Medium</div>
+          <div className="type-block__specs">
+            Size: 16px / 1.00rem | Line height: 20px / 1.25rem | Weight: 400 | Tracking: 0%
+          </div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-small">Body Small</div>
+          <div className="type-block__specs">
+            Size: 12px / 0.75rem | Line height: 16px / 1.00rem | Weight: 400 | Tracking: 0%
+          </div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-large-bold">Body Large Bold</div>
+          <div className="type-block__specs">
+            Size: 20px / 1.25rem | Line height: 24px / 1.50rem | Weight: 600 | Tracking: 0%
+          </div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-medium-bold">Body Medium Bold</div>
+          <div className="type-block__specs">
+            Size: 16px / 1.00rem | Line height: 20px / 1.25rem | Weight: 600 | Tracking: 0%
+          </div>
+        </div>
+        <div className="type-block__item">
+          <div className="type-block__body-small-bold">Body Small Bold</div>
+          <div className="type-block__specs">
+            Size: 12px / 0.75rem | Line height: 16px / 1.00rem | Weight: 600 | Tracking: 0%
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div className="type-block">
     <h2 className="type-block__title">Buttons & Links</h2>
     <div className="type-block__grid">
       <div className="type-block__column type-block__column--small">
@@ -414,19 +543,19 @@ import { Meta, Source } from '@storybook/blocks';
         <div className="type-block__item">
           <div className="type-block__button">Button</div>
           <div className="type-block__specs">
-            Size: 12px / 0.75rem | Line height: 16px / 1.00rem | Weight: 600 | Tracking: 0%
+            Size: 16px / 1.00rem | Line height: 20px / 1.25rem | Weight: 600 | Tracking: 0%
           </div>
         </div>
         <div className="type-block__item">
           <div className="type-block__link">Link</div>
           <div className="type-block__specs">
-            Size: 12px / 0.75rem | Line height: 16px / 1.00rem | Weight: 400 | Tracking: 0%
+            Size: 16px / 1.00rem | Line height: 20px / 1.25rem | Weight: 400 | Tracking: 0%
           </div>
         </div>
         <div className="type-block__item">
           <div className="type-block__link-bold">Link Bold</div>
           <div className="type-block__specs">
-            Size: 12px / 0.75rem | Line height: 16px / 1.00rem | Weight: 600 | Tracking: 0%
+            Size: 16px / 1.00rem | Line height: 20px / 1.25rem | Weight: 600 | Tracking: 0%
           </div>
         </div>
       </div>
