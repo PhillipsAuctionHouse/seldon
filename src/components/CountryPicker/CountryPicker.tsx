@@ -2,18 +2,20 @@ import { useState } from 'react';
 import CountryPickerTrigger, { CountryPickerTriggerProps } from './CountryPickerTrigger';
 import CountryPickerModal, { CountryPickerModalProps } from './CountryPickerModal';
 import { getCommonProps } from '../../utils';
-import { CommonProps, getConfig, PrependTrigger, VariantConfig } from './types';
+import { CommonProps, toConfig, PrependTrigger, PhoneConfig, CountryConfig } from './types';
 
-export type CountryPickerProps = Omit<
-  CommonProps &
-    CountryPickerModalProps &
-    PrependTrigger<Omit<CountryPickerTriggerProps, 'baseClassName'>> & {
-      value: VariantConfig['countryValue'];
-      isPhone: boolean;
-      onChange: (v?: VariantConfig['countryValue']) => void;
-    },
-  'variantConfig'
->;
+/**
+ * Props for the CountryPicker component.
+ * Combines:
+ * - CommonProps (excluding variantConfig, which is provided by PhoneConfig or CountryConfig)
+ * - Discriminated union for picker mode (PhoneConfig | CountryConfig)
+ * - Modal props
+ * - PrependTrigger utility for trigger props
+ */
+export type CountryPickerProps = Omit<CommonProps, 'variantConfig'> &
+  (PhoneConfig | CountryConfig) &
+  CountryPickerModalProps &
+  PrependTrigger<Omit<CountryPickerTriggerProps, 'baseClassName'>>;
 
 const CountryPicker = ({
   triggerLabelText,
@@ -43,7 +45,13 @@ const CountryPicker = ({
     ...props,
   };
 
-  const variantConfig = getConfig(isPhone, value, onChange);
+  /**
+   * Create the discriminated union config for picker mode.
+   * - If isPhone, config expects country code and phone-specific onChange.
+   * - Otherwise, config expects country name and country-specific onChange.
+   * This ensures type safety for all operations.
+   */
+  const variantConfig = isPhone ? toConfig(true, value, onChange) : toConfig(false, value, onChange);
 
   return (
     <>
@@ -65,8 +73,8 @@ const CountryPicker = ({
       />
       <input
         type="hidden"
-        name={inputName || 'countryValue'}
-        value={variantConfig.countryValue ?? ''}
+        name={inputName || 'value'}
+        value={variantConfig.value ?? ''}
         data-testid="country-picker-hidden-input"
       />
     </>

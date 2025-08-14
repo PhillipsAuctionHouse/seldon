@@ -1,75 +1,59 @@
-import { countries, states } from './constants';
+import { countries } from './constants';
 
-// Types
-
+// Helper to convert indeterminate config to a discriminated union Config
+export function toConfig(
+  isPhone: true,
+  value: Country['code'] | undefined,
+  onChange: (v: Country['code']) => void,
+): PhoneConfig;
+export function toConfig(
+  isPhone: false,
+  value: Country['name'] | undefined,
+  onChange: (v: Country['name']) => void,
+): CountryConfig;
+export function toConfig(
+  isPhone: boolean,
+  value: Country['code'] | Country['name'] | undefined,
+  onChange: ((v: Country['code']) => void) | ((v: Country['name']) => void),
+): Config {
+  return isPhone
+    ? { isPhone: true, value: value as Country['code'], onChange: onChange as (v: Country['code']) => void }
+    : { isPhone: false, value: value as Country['name'], onChange: onChange as (v: Country['name']) => void };
+}
+// Utility type to prepend 'trigger' to keys, and rename 'hasError' to 'hasTriggerError'
 export type PrependTrigger<T> = {
   [K in keyof T as K extends 'hasError' ? 'hasTriggerError' : `trigger${Capitalize<string & K>}`]: T[K];
 };
 
-export type ModalStateProps = {
-  /**
-   * Determines whether the modal is open.
-   */
-  isOpen?: boolean;
-
-  /**
-   * Callback function triggered when the modal is closed.
-   */
-  onClose?: () => void;
-};
-
-export type CommonProps = {
-  /**
-   * The base class name for styling the component.
-   */
-  baseClassName?: string;
-
-  /**
-   * Configuration for phone/country variant.
-   */
-  variantConfig: VariantConfig;
-};
-
-export type ModalBaseProps<T> = T & CommonProps & ModalStateProps;
-
 export type Country = {
-  name: (typeof countries)[number]['name'];
   code: (typeof countries)[number]['code'];
+  name: (typeof countries)[number]['name'];
 };
-
-export type State = {
-  name: (typeof states)[number]['name'];
-  code: (typeof states)[number]['code'];
-};
-
-export type CountryCallingCode = `+${number}`;
 
 export type PhoneConfig = {
   isPhone: true;
-  countryValue?: Country['code'];
-  onChange: (value: Country['code']) => void;
+  value: Country['code'] | undefined;
+  onChange: (v: Country['code']) => void;
 };
 
 export type CountryConfig = {
   isPhone: false;
-  countryValue?: Country['name'];
-  onChange: (value: Country['name']) => void;
+  value: Country['name'] | undefined;
+  onChange: (v: Country['name']) => void;
 };
 
-export type VariantConfig = PhoneConfig | CountryConfig;
-type VariantValue = PhoneConfig['countryValue'] | CountryConfig['countryValue'];
-export const getConfig = (
-  isPhone: boolean,
-  countryValue?: VariantValue,
-  func?: (v?: VariantValue) => void,
-): PhoneConfig | CountryConfig => {
-  const config = isPhone ? ({} as PhoneConfig) : ({} as CountryConfig);
-  Object.assign(config, {
-    isPhone,
-    countryValue,
-    onChange: (v?: VariantValue) => {
-      func?.(v);
-    },
-  });
-  return config;
+export type Config = PhoneConfig | CountryConfig;
+
+export type CommonProps = {
+  baseClassName?: string;
+  variantConfig: Config;
 };
+
+export type ModalStateProps = {
+  isOpen?: boolean;
+  onClose?: () => void;
+};
+
+export type ModalBaseProps = CommonProps & ModalStateProps;
+
+export const getConfig = (config: Config): Config => config;

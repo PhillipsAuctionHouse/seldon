@@ -3,6 +3,7 @@ import { useState } from 'react';
 import CountryPicker, { CountryPickerProps } from './CountryPicker';
 import { getSafeCountryCallingCode } from './utils';
 import { countries } from './constants';
+import { Country, toConfig } from './types';
 
 const meta: Meta<typeof CountryPicker> = {
   title: 'Components/CountryPicker',
@@ -58,10 +59,11 @@ const meta: Meta<typeof CountryPicker> = {
 export default meta;
 
 export const Playground = (props: CountryPickerProps) => {
-  // Store country name for non-phone
-  const [selected, setSelected] = useState<typeof props.value>(undefined);
+  // Store country name for non-phone picker
+  const [selected, setSelected] = useState<Country['name'] | undefined>(undefined);
 
-  // Find the country object by name
+  const config = toConfig(false, selected, setSelected);
+  // Find the country object by name for display
   const selectedCountry = countries.find((c) => c.name === selected);
 
   return (
@@ -71,9 +73,7 @@ export const Playground = (props: CountryPickerProps) => {
       triggerDisplayValue={selectedCountry ? selectedCountry.name : 'Select a country'}
       hasTriggerError={false}
       triggerErrorMsg=""
-      isPhone={false}
-      value={selected}
-      onChange={setSelected}
+      {...config}
     />
   );
 };
@@ -83,13 +83,12 @@ Playground.args = {
   searchLabel: '',
   searchPlaceholder: 'Search for a country',
   selectButtonLabel: 'Select',
-  isPhone: false,
 };
 export const CountryPhoneCodePicker = (props: CountryPickerProps) => {
-  // Store country code for phone
-  const [selected, setSelected] = useState<typeof props.value>(undefined);
+  // Store country code for phone picker
+  const [selected, setSelected] = useState<Country['code'] | undefined>(undefined);
 
-  // Find the country object by code
+  // Find the country object by code for display
   const selectedCountry = countries.find((c) => c.code === selected);
 
   return (
@@ -105,7 +104,7 @@ export const CountryPhoneCodePicker = (props: CountryPickerProps) => {
       selectButtonLabel="Select"
       isPhone={true}
       value={selected}
-      onChange={(v) => setSelected(v)}
+      onChange={setSelected}
     />
   );
 };

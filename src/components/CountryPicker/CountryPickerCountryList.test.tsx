@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { CountryPickerCountryList } from './CountryPickerCountryList';
-import { Country } from './types';
+import { Country, toConfig } from './types';
 import { createRef } from 'react';
 
 describe('CountryPickerCountryList - Country variant', () => {
@@ -20,7 +20,7 @@ describe('CountryPickerCountryList - Country variant', () => {
     baseClassName: 'country-picker',
     modalTitle: 'Select a country',
     listRef: createRef<HTMLDivElement>(),
-    variantConfig: { isPhone: false, countryValue: 'Canada', onChange: vi.fn() } as import('./types').CountryConfig,
+    variantConfig: { isPhone: false, value: 'Canada', onChange: vi.fn() } as import('./types').CountryConfig,
     inputName: 'country',
   };
 
@@ -77,7 +77,7 @@ describe('CountryPickerCountryList - Phone variant', () => {
     baseClassName: 'country-picker',
     modalTitle: 'Select a country',
     listRef: createRef<HTMLDivElement>(),
-    variantConfig: { isPhone: true, countryValue: 'CA', onChange: vi.fn() } as import('./types').PhoneConfig,
+    variantConfig: toConfig(true, 'CA', () => void 0),
     inputName: 'country',
   };
 

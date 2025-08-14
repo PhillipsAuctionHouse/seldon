@@ -4,6 +4,10 @@ import classnames from 'classnames';
 import { getSafeCountryCallingCode } from './utils';
 import { Country, ModalBaseProps } from './types';
 
+/**
+ * Props for a single country option in the picker.
+ * Extends Country and adds selection state and input name.
+ */
 export type CountryPickerOptionProps = Country & {
   /**
    * Indicates whether the option is currently selected.
@@ -16,6 +20,10 @@ export type CountryPickerOptionProps = Country & {
   inputName: string;
 };
 
+/**
+ * Renders a single country option for selection.
+ * Handles both country and phone picker modes via discriminated union.
+ */
 export const CountryPickerOption = ({
   code,
   name,
@@ -23,9 +31,10 @@ export const CountryPickerOption = ({
   inputName,
   baseClassName,
   variantConfig,
-}: ModalBaseProps<CountryPickerOptionProps>) => {
+}: ModalBaseProps & CountryPickerOptionProps) => {
   const countryId = `${baseClassName}__radio-${code}`;
-  const { isPhone, onChange } = variantConfig;
+  // Destructure discriminated union for type-safe access
+  const { isPhone, onChange, value } = variantConfig;
   return (
     <label
       htmlFor={countryId}
@@ -45,7 +54,10 @@ export const CountryPickerOption = ({
           [`${baseClassName}__radio--visually-hidden`]: isPhone,
         })}
         onChange={() => {
-          isPhone ? onChange(code) : onChange(name);
+          if (!value) return;
+          if (isPhone)
+            onChange(value); // these are two different typings of both onChange and value
+          else onChange(value); // totally different branches to TypeScript, silly as it may look
         }}
       />
       <span className={`${baseClassName}__option-content`}>

@@ -6,6 +6,7 @@ import { countries } from './constants';
 import { Country, ModalBaseProps } from './types';
 import React from 'react';
 
+// Props specific to the trigger, also used by the parent modal
 export type CountryPickerTriggerProps = {
   /**
    * The label text displayed above the button.
@@ -28,6 +29,7 @@ export type CountryPickerTriggerProps = {
   errorMsg?: string;
 };
 
+// Add in button props
 type InternalTriggerProps = CountryPickerTriggerProps &
   Pick<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'id' | 'className'>;
 
@@ -41,15 +43,17 @@ const CountryPickerTrigger = ({
   className,
   baseClassName,
   variantConfig,
-}: ModalBaseProps<InternalTriggerProps>) => {
-  const { isPhone, countryValue } = variantConfig;
-  console.log('variant config', variantConfig);
+}: ModalBaseProps & InternalTriggerProps) => {
+  // Destructure discriminated union for type-safe access
+  const { isPhone, value } = variantConfig;
+
   const errorId = errorMsg ? `${baseClassName}__trigger-error-msg` : undefined;
 
   // Determine the ISO country code for the flag
+  // If isPhone, value is a country code; otherwise, look up code by name
   const flagCode: Country['code'] | undefined = isPhone
-    ? countryValue
-    : countries.filter((country) => country.name === countryValue)?.[0]?.code;
+    ? value
+    : countries.filter((country) => country.name === value)?.[0]?.code;
 
   return (
     <div className={classNames(`${baseClassName}__trigger`, className)}>
@@ -78,7 +82,7 @@ const CountryPickerTrigger = ({
         {flagCode && (
           <img
             src={`https://flagcdn.com/24x18/${flagCode.toLowerCase()}.png`}
-            alt={`${countryValue} flag`}
+            alt={`${value} flag`}
             className={`${baseClassName}__trigger-flag`}
           />
         )}

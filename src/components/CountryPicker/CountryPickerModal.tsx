@@ -4,7 +4,7 @@ import Input from '../Input/Input';
 import Modal from '../Modal/Modal';
 import Text from '../Text/Text';
 import { TextVariants } from '../Text';
-import { Country, CountryConfig, ModalBaseProps, PhoneConfig } from './types';
+import { Country, ModalBaseProps } from './types';
 import { countries } from './constants';
 import { getSafeCountryCallingCode } from './utils';
 import { ButtonVariants } from '../Button/types';
@@ -58,22 +58,29 @@ const filterCountries = (list: Country[], filter: string) => {
   });
 };
 
-const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps<CountryPickerModalProps>>(
-  ({
-    isOpen = false,
-    onClose,
-    modalTitle,
-    searchInputLabel,
-    searchInputPlaceholder,
-    selectButtonLabel,
-    inputName = 'countryValue',
-    baseClassName,
-    variantConfig,
-  }) => {
-    const { countryValue: committedValue, onChange, isPhone } = variantConfig;
+const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps & CountryPickerModalProps>(
+  (
+    {
+      isOpen = false,
+      onClose,
+      modalTitle,
+      searchInputLabel,
+      searchInputPlaceholder,
+      selectButtonLabel,
+      inputName = 'value',
+      baseClassName,
+      variantConfig,
+    },
+    ref,
+  ) => {
+    const { value: committedValue, onChange, isPhone } = variantConfig;
 
-    // Draft value for modal selecion
-    const [draftValue, setDraftValue] = useState<typeof committedValue>(committedValue);
+    // Draft value for modal selection
+    const [draftValue, setDraftValue] = useState(committedValue);
+    const isPhoneValue = (v?: string): v is Country['code'] => countries.some((country) => country.code === v);
+
+    if (isPhoneValue(draftValue)) console.log(draftValue);
+    else console.log(draftValue);
 
     // Reset draft when modal opens/closes or committed value changes
     useEffect(() => {
@@ -111,7 +118,13 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps<CountryPick
     }, [filteredRest]);
 
     return (
-      <Modal isOpen={isOpen} onClose={onClose} data-testid="country-picker-modal" className={`${baseClassName}__modal`}>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        data-testid="country-picker-modal"
+        className={`${baseClassName}__modal`}
+        ref={ref}
+      >
         <div className={`${baseClassName}__wrapper`}>
           {/* Modal header and search */}
           <div className={`${baseClassName}__header`}>
@@ -144,19 +157,7 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps<CountryPick
             baseClassName={baseClassName}
             modalTitle={modalTitle}
             listRef={listRef}
-            variantConfig={
-              isPhone
-                ? {
-                    isPhone: true,
-                    countryValue: draftValue as Country['code'],
-                    onChange: (value) => setDraftValue(value),
-                  }
-                : {
-                    isPhone: false,
-                    countryValue: draftValue as Country['name'],
-                    onChange: (value) => setDraftValue(value),
-                  }
-            }
+            variantConfig={variantConfig}
             inputName={inputName}
           />
 
@@ -164,11 +165,11 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps<CountryPick
           <div className={`${baseClassName}__button-container`}>
             <Button
               onClick={() => {
+                if (!draftValue) return;
                 if (isPhone) {
-                  onChange(draftValue as NonNullable<PhoneConfig['countryValue']>);
-                } else {
-                  onChange(draftValue as NonNullable<CountryConfig['countryValue']>);
-                }
+                  if (isPhoneValue(draftValue)) onChange(draftValue);
+                } else if (!isPhoneValue(draftValue)) onChange(draftValue);
+
                 onClose?.();
               }}
               className={`${baseClassName}__button`}

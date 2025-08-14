@@ -4,7 +4,7 @@ import { vi } from 'vitest';
 
 import CountryPickerModal from './CountryPickerModal';
 
-import { getTestConfig } from './testUtils';
+import { toConfig } from './types';
 
 vi.mock('./constants', () => ({
   countries: [
@@ -18,7 +18,7 @@ vi.mock('./constants', () => ({
 
 const countryBaseProps: React.ComponentProps<typeof CountryPickerModal> = {
   isOpen: true,
-  variantConfig: getTestConfig(false),
+  variantConfig: toConfig(false, 'United States', vi.fn()),
   onClose: vi.fn(),
   modalTitle: 'Select a Country',
   searchInputLabel: 'Search for a country',
@@ -29,7 +29,7 @@ const countryBaseProps: React.ComponentProps<typeof CountryPickerModal> = {
 
 const phoneBaseProps: React.ComponentProps<typeof CountryPickerModal> = {
   isOpen: true,
-  variantConfig: getTestConfig(true),
+  variantConfig: toConfig(true, 'US', vi.fn()),
   onClose: vi.fn(),
   modalTitle: 'Select a Country Code',
   searchInputLabel: 'Search for a country code',
@@ -68,7 +68,7 @@ describe('CountryPickerModal - Country variant', () => {
     render(
       <CountryPickerModal
         {...countryBaseProps}
-        variantConfig={{ ...getTestConfig(false), onChange: onChangeSpy, countryValue: undefined }}
+        variantConfig={{ ...countryBaseProps.variantConfig, onChange: onChangeSpy }}
       />,
     );
     const countryOption = screen.getByRole('radio', { name: 'United States' });
@@ -81,14 +81,17 @@ describe('CountryPickerModal - Country variant', () => {
 
   it('disables the select button when no country is selected', () => {
     render(
-      <CountryPickerModal {...countryBaseProps} variantConfig={{ ...getTestConfig(false), countryValue: undefined }} />,
+      <CountryPickerModal
+        {...countryBaseProps}
+        variantConfig={{ ...countryBaseProps.variantConfig, value: undefined }}
+      />,
     );
     const selectButton = screen.getByTestId('country-picker-modal-select-button');
     expect(selectButton).toBeDisabled();
   });
 
   it('enables the select button when a country is selected', () => {
-    render(<CountryPickerModal {...countryBaseProps} variantConfig={getTestConfig(false)} />);
+    render(<CountryPickerModal {...countryBaseProps} />);
     const selectButton = screen.getByTestId('country-picker-modal-select-button');
     expect(selectButton).not.toBeDisabled();
   });
@@ -130,7 +133,7 @@ describe('CountryPickerModal - Phone variant', () => {
     render(
       <CountryPickerModal
         {...phoneBaseProps}
-        variantConfig={{ ...getTestConfig(true), onChange: onChangeSpy, countryValue: undefined }}
+        variantConfig={{ ...phoneBaseProps.variantConfig, onChange: onChangeSpy }}
       />,
     );
     const countryOption = screen.getByLabelText('United States +1');
@@ -143,14 +146,14 @@ describe('CountryPickerModal - Phone variant', () => {
 
   it('disables the select button when no country code is selected', () => {
     render(
-      <CountryPickerModal {...phoneBaseProps} variantConfig={{ ...getTestConfig(true), countryValue: undefined }} />,
+      <CountryPickerModal {...phoneBaseProps} variantConfig={{ ...phoneBaseProps.variantConfig, value: undefined }} />,
     );
     const selectButton = screen.getByTestId('country-picker-modal-select-button');
     expect(selectButton).toBeDisabled();
   });
 
   it('enables the select button when a country code is selected', () => {
-    render(<CountryPickerModal {...phoneBaseProps} variantConfig={getTestConfig(true)} />);
+    render(<CountryPickerModal {...phoneBaseProps} />);
     const selectButton = screen.getByTestId('country-picker-modal-select-button');
     expect(selectButton).not.toBeDisabled();
   });

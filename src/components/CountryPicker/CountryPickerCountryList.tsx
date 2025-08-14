@@ -2,15 +2,36 @@ import React, { useCallback } from 'react';
 import Text from '../Text/Text';
 import { TextVariants } from '../Text';
 import { CountryPickerOption } from './CountryPickerOption';
-import { Country, VariantConfig } from './types';
+import { CommonProps, Country } from './types';
 
-type CountryPickerCountryListProps = {
+/**
+ * Props for the country list in the picker modal.
+ * Includes prioritized and grouped countries, styling, and refs for keyboard navigation.
+ */
+type CountryPickerCountryListProps = CommonProps & {
+  /**
+   * List of prioritized countries to display first (e.g., US, GB).
+   */
   filteredPrioritized: Country[];
+  /**
+   * Grouped countries by first letter for display with headers.
+   */
   groupedCountries: Record<string, Country[]>;
+  /**
+   * Base class name for styling.
+   */
   baseClassName?: string;
+  /**
+   * Title for the modal, used for aria-label.
+   */
   modalTitle: string;
+  /**
+   * Ref to the list container for keyboard navigation.
+   */
   listRef: React.RefObject<HTMLDivElement>;
-  variantConfig: VariantConfig;
+  /**
+   * Name attribute for radio inputs.
+   */
   inputName: string;
 };
 
@@ -23,7 +44,8 @@ export const CountryPickerCountryList = ({
   variantConfig,
   inputName,
 }: CountryPickerCountryListProps) => {
-  const { isPhone, countryValue } = variantConfig;
+  // Destructure discriminated union for type-safe access
+  const { isPhone, value } = variantConfig;
 
   const renderCountryOptions = useCallback(
     (list: Country[]) =>
@@ -32,13 +54,13 @@ export const CountryPickerCountryList = ({
           key={code}
           code={code}
           name={name}
-          isChecked={countryValue === (isPhone ? code : name)}
+          isChecked={value === (isPhone ? code : name)}
           inputName={inputName}
           baseClassName={baseClassName}
           variantConfig={variantConfig}
         />
       )),
-    [countryValue, isPhone, inputName, baseClassName, variantConfig],
+    [value, isPhone, inputName, baseClassName, variantConfig],
   );
 
   // Keyboard navigation: focus moves with arrow keys

@@ -10,7 +10,7 @@ describe('CountryPicker Component', () => {
     searchInputLabel: 'Search for a country',
     searchInputPlaceholder: 'Type to search...',
     selectButtonLabel: 'Select',
-    onChange: vi.fn(),
+    onChange: () => void 0,
     isPhone: false,
     value: undefined,
   };
