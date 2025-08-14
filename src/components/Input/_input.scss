@@ -30,9 +30,9 @@ $lg: #{$px}-input--lg;
   &__wrapper {
     @include text($string2);
 
-    accent-color: pink;
+    accent-color: $black;
     align-items: center;
-    border: 1px solid pink;
+    border: 1px solid $black;
     border-radius: 0.1875rem;
     display: inline-flex;
     font-variation-settings: 'wght' 600;
@@ -69,10 +69,6 @@ $lg: #{$px}-input--lg;
       user-select: none;
       white-space: nowrap;
     }
-  }
-
-  input[type='checkbox'] {
-    border-color: red !important; /* Use !important cautiously */
   }
 
   &__input {
