@@ -6,7 +6,7 @@ import { countries } from './constants';
 import { Country, toConfig } from './types';
 
 const meta: Meta<typeof CountryPicker> = {
-  title: 'Components/CountryPicker',
+  title: 'Patterns/CountryPicker',
   component: CountryPicker,
   argTypes: {
     modalTitle: {

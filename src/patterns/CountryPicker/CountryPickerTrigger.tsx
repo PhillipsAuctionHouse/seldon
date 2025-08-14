@@ -1,6 +1,6 @@
-import Icon from '../Icon/Icon';
-import { TextVariants } from '../Text';
-import Text from '../Text/Text';
+import Icon from '../../components/Icon/Icon';
+import { TextVariants } from '../../components/Text';
+import Text from '../../components/Text/Text';
 import classNames from 'classnames';
 import { countries } from './constants';
 import { Country, ModalBaseProps } from './types';

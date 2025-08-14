@@ -1,14 +1,15 @@
 import { useState, useMemo, useRef, useEffect, forwardRef } from 'react';
-import Button from '../Button/Button';
-import Input from '../Input/Input';
-import Modal from '../Modal/Modal';
-import Text from '../Text/Text';
-import { TextVariants } from '../Text';
+
+import Button from '../../components/Button/Button';
+import Input from '../../components/Input/Input';
+import Modal from '../../components/Modal/Modal';
+import Text from '../../components/Text/Text';
+import { TextVariants } from '../../components/Text';
 import { Country, ModalBaseProps } from './types';
 import { countries } from './constants';
 import { getSafeCountryCallingCode } from './utils';
-import { ButtonVariants } from '../Button/types';
-import Icon from '../Icon/Icon';
+import { ButtonVariants } from '../../components/Button/types';
+import Icon from '../../components/Icon/Icon';
 import { CountryPickerCountryList } from './CountryPickerCountryList';
 
 export type CountryPickerModalProps = {
