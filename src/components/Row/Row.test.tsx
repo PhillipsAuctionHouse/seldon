@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { render, screen } from '@testing-library/react';
 import Row from './Row';
 import GridItem from '../GridItem/GridItem';
@@ -8,7 +9,12 @@ describe('Row', () => {
   afterEach(() => {
     vi.restoreAllMocks();
   });
-  runCommonTests(Row, 'Row');
+  // Use a forwardRef wrapper for runCommonTests to ensure ref is tested correctly
+  const RefRow = forwardRef<HTMLElement, React.ComponentProps<typeof Row>>((props, ref) => (
+    <Row {...props} ref={ref} />
+  ));
+  RefRow.displayName = 'RefRow';
+  runCommonTests(RefRow, 'Row');
   it('renders children correctly', () => {
     render(
       <Row>

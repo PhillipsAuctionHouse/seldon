@@ -122,3 +122,5 @@ export * from './patterns/BidSnapshot';
 export * from './patterns/FilterMenu';
 export * from './patterns/ObjectTile';
 export * from './utils/hooks';
+export * from './components/DescriptiveRadioButton';
+export * from './components/DescriptiveRadioButtonGroup';

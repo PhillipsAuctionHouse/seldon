@@ -2,8 +2,9 @@ import classnames from 'classnames';
 
 import { getCommonProps, SpacingTokens } from '../../utils';
 import { determineGridClassName } from './utils';
+import { forwardRef } from 'react';
 
-export interface GridProps<ElementType = HTMLElement> extends React.HTMLAttributes<ElementType> {
+export interface GridProps<GridElementType = HTMLElement> extends React.HTMLAttributes<GridElementType> {
   /**
    * A Grid must have children
    */
@@ -11,7 +12,7 @@ export interface GridProps<ElementType = HTMLElement> extends React.HTMLAttribut
   /**
    * Optional element to render as the top-level component e.g. 'div', 'span', CustomComponent, etc.  Defaults to 'section'.
    */
-  element?: React.ElementType<GridProps<ElementType>>;
+  element?: React.ElementType;
   /**
    * The gap between the rows in the grid.  Defaults to 'md'.
    */
@@ -32,24 +33,36 @@ export interface GridProps<ElementType = HTMLElement> extends React.HTMLAttribut
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-layouts-grid--overview)
  */
 
-export function Grid({
-  children,
-  className,
-  element: Element = 'section',
-  columnGap = SpacingTokens.md,
-  rowGap = SpacingTokens.lg,
-  ...props
-}: GridProps) {
+type GridComponent = <T extends HTMLElement = HTMLElement>(
+  props: GridProps<T> & { ref?: React.Ref<T> },
+) => React.ReactElement | null;
+
+const GridInner = <T extends HTMLElement = HTMLElement>(
+  {
+    children,
+    className,
+    element = 'section',
+    columnGap = SpacingTokens.md,
+    rowGap = SpacingTokens.lg,
+    ...props
+  }: GridProps<T>,
+  ref: React.Ref<T>,
+) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Grid');
+  const ElementType = element;
   return (
-    <Element
+    <ElementType
       {...commonProps}
       className={classnames(determineGridClassName(baseClassName, columnGap, rowGap), className)}
       {...props}
+      ref={ref}
     >
       {children}
-    </Element>
+    </ElementType>
   );
-}
+};
 
+const Grid = forwardRef(GridInner) as GridComponent;
+// @ts-expect-error: displayName is safe to assign
+Grid.displayName = 'Grid';
 export default Grid;

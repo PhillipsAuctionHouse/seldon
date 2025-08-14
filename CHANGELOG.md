@@ -1,3 +1,38 @@
+# [1.174.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.173.0...v1.174.0) (2025-08-14)
+
+
+### Features
+
+* **detailedRadio:** L3-7240 Make Radio input selector match figma for primary details (Bidder type select) ([#671](https://github.com/PhillipsAuctionHouse/seldon/issues/671)) ([ed88be9](https://github.com/PhillipsAuctionHouse/seldon/commit/ed88be98a08aafce98b43ae41f4386449e72c651))
+
+# [1.173.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.172.0...v1.173.0) (2025-08-12)
+
+
+### Features
+
+* **input:** L3-6361 Input Adornment ([#680](https://github.com/PhillipsAuctionHouse/seldon/issues/680)) ([cfe3f2a](https://github.com/PhillipsAuctionHouse/seldon/commit/cfe3f2aa6bc3f81c77227ab51f8b0e0f5a197726))
+
+# [1.172.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.171.1...v1.172.0) (2025-08-11)
+
+
+### Features
+
+* **Drawer:** L3-7239 give the Drawer component header text support to align … ([#670](https://github.com/PhillipsAuctionHouse/seldon/issues/670)) ([338cca0](https://github.com/PhillipsAuctionHouse/seldon/commit/338cca01d66aa0d8ffdb1c0fcc165ee0a0467136))
+
+## [1.171.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.171.0...v1.171.1) (2025-08-06)
+
+
+### Bug Fixes
+
+* **forwardRef:** L3-6777 add forwardRef tests to all components and fix any missing forwardRef ([#679](https://github.com/PhillipsAuctionHouse/seldon/issues/679)) ([7b3fd69](https://github.com/PhillipsAuctionHouse/seldon/commit/7b3fd69d279a69f6dbcde05afe825e7d816c0867))
+
+# [1.171.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.170.0...v1.171.0) (2025-08-06)
+
+
+### Features
+
+* **icons:** PHOENIX-2024 admin icons and colors ([#678](https://github.com/PhillipsAuctionHouse/seldon/issues/678)) ([3dda2f3](https://github.com/PhillipsAuctionHouse/seldon/commit/3dda2f307850cfce9538e8318ef5082e3e6936e6))
+
 # [1.170.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.169.3...v1.170.0) (2025-08-05)
 
 
