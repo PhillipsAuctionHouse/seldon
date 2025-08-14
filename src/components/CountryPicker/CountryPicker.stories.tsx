@@ -3,7 +3,6 @@ import { useState } from 'react';
 import CountryPicker, { CountryPickerProps } from './CountryPicker';
 import { getSafeCountryCallingCode } from './utils';
 import { countries } from './constants';
-import { assignType, Country, PhoneConfig } from './types';
 
 const meta: Meta<typeof CountryPicker> = {
   title: 'Components/CountryPicker',
@@ -34,18 +33,19 @@ const meta: Meta<typeof CountryPicker> = {
       description: 'Name attribute for the input field.',
       defaultValue: 'country',
     },
-    variantConfig: {
-      control: 'object',
-      description: 'Configuration for phone/country variant.',
-      table: {
-        type: { summary: 'PhoneConfig | CountryConfig' },
-      },
-      defaultValue: { isPhone: false },
-      options: [{ isPhone: false }, { isPhone: true }],
-      mapping: {
-        country: { isPhone: false },
-        phone: { isPhone: true },
-      },
+    isPhone: {
+      control: 'boolean',
+      description: 'Determines if the picker is for phone codes.',
+      defaultValue: false,
+    },
+    onChange: {
+      action: 'changed',
+      description: 'Callback function triggered when the value changes.',
+    },
+    value: {
+      control: 'text',
+      description: 'The currently selected value.',
+      defaultValue: '',
     },
     baseClassName: {
       control: 'text',
@@ -58,12 +58,8 @@ const meta: Meta<typeof CountryPicker> = {
 export default meta;
 
 export const Playground = (props: CountryPickerProps) => {
-  // Always provide a safe default for variantConfig
-  const safeVariantConfig = props.variantConfig ?? { isPhone: false };
-  const config = assignType(safeVariantConfig);
-  const { isPhone, countryValue } = config;
   // Store country name for non-phone
-  const [selected, setSelected] = useState<typeof countryValue>(undefined);
+  const [selected, setSelected] = useState<typeof props.value>(undefined);
 
   // Find the country object by name
   const selectedCountry = countries.find((c) => c.name === selected);
@@ -75,13 +71,9 @@ export const Playground = (props: CountryPickerProps) => {
       triggerDisplayValue={selectedCountry ? selectedCountry.name : 'Select a country'}
       hasTriggerError={false}
       triggerErrorMsg=""
-      variantConfig={
-        {
-          isPhone,
-          countryValue: selected,
-          onChange: setSelected,
-        } as typeof config
-      }
+      isPhone={false}
+      value={selected}
+      onChange={setSelected}
     />
   );
 };
@@ -91,16 +83,11 @@ Playground.args = {
   searchLabel: '',
   searchPlaceholder: 'Search for a country',
   selectButtonLabel: 'Select',
-  variantConfig: {
-    isPhone: false,
-  },
+  isPhone: false,
 };
-
-export const CountryPhoneCodePicker = (props: CountryPickerProps & { variantConfig: PhoneConfig }) => {
-  // Always provide a safe default for variantConfig
-  const safeVariantConfig = props.variantConfig ?? { isPhone: true };
+export const CountryPhoneCodePicker = (props: CountryPickerProps) => {
   // Store country code for phone
-  const [selected, setSelected] = useState<Country['code'] | undefined>(undefined);
+  const [selected, setSelected] = useState<typeof props.value>(undefined);
 
   // Find the country object by code
   const selectedCountry = countries.find((c) => c.code === selected);
@@ -116,11 +103,9 @@ export const CountryPhoneCodePicker = (props: CountryPickerProps & { variantConf
       searchInputLabel=""
       searchInputPlaceholder="Search country"
       selectButtonLabel="Select"
-      variantConfig={{
-        isPhone: safeVariantConfig.isPhone,
-        countryValue: selected,
-        onChange: setSelected,
-      }}
+      isPhone={true}
+      value={selected}
+      onChange={(v) => setSelected(v)}
     />
   );
 };

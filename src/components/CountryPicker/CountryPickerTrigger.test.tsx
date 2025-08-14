@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import CountryPickerTrigger from './CountryPickerTrigger';
 import { vi } from 'vitest';
-import { getConfigVariant } from './testUtils';
+import { getTestConfig } from './testUtils';
 
 describe('CountryPickerTrigger', () => {
   const baseProps: React.ComponentProps<typeof CountryPickerTrigger> = {
@@ -10,7 +10,7 @@ describe('CountryPickerTrigger', () => {
     id: 'country-picker-trigger',
     baseClassName: 'country-picker-trigger',
     displayValue: 'United States',
-    variantConfig: getConfigVariant(false),
+    variantConfig: getTestConfig(false),
   } as const;
 
   const basePhoneProps: React.ComponentProps<typeof CountryPickerTrigger> = {
@@ -19,7 +19,7 @@ describe('CountryPickerTrigger', () => {
     id: 'country-picker-trigger',
     baseClassName: 'country-picker-trigger',
     displayValue: '+1',
-    variantConfig: getConfigVariant(true),
+    variantConfig: getTestConfig(true),
   } as const;
 
   it('renders the component with default props', () => {

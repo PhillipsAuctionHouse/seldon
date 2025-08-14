@@ -10,10 +10,9 @@ describe('CountryPicker Component', () => {
     searchInputLabel: 'Search for a country',
     searchInputPlaceholder: 'Type to search...',
     selectButtonLabel: 'Select',
-    variantConfig: {
-      onChange: vi.fn(),
-      isPhone: false,
-    },
+    onChange: vi.fn(),
+    isPhone: false,
+    value: undefined,
   };
 
   it('renders the trigger button with the correct label', () => {

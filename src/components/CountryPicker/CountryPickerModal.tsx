@@ -4,7 +4,7 @@ import Input from '../Input/Input';
 import Modal from '../Modal/Modal';
 import Text from '../Text/Text';
 import { TextVariants } from '../Text';
-import { assignType, Country, ModalBaseProps } from './types';
+import { Country, CountryConfig, ModalBaseProps, PhoneConfig } from './types';
 import { countries } from './constants';
 import { getSafeCountryCallingCode } from './utils';
 import { ButtonVariants } from '../Button/types';
@@ -70,11 +70,10 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps<CountryPick
     baseClassName,
     variantConfig,
   }) => {
-    const config = assignType(variantConfig);
-    const { countryValue: committedValue, onChange, isPhone } = config;
+    const { countryValue: committedValue, onChange, isPhone } = variantConfig;
 
-    // Draft value for modal selection
-    const [draftValue, setDraftValue] = useState(committedValue);
+    // Draft value for modal selecion
+    const [draftValue, setDraftValue] = useState<typeof committedValue>(committedValue);
 
     // Reset draft when modal opens/closes or committed value changes
     useEffect(() => {
@@ -166,9 +165,9 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps<CountryPick
             <Button
               onClick={() => {
                 if (isPhone) {
-                  onChange?.(draftValue as Country['code']);
+                  onChange(draftValue as NonNullable<PhoneConfig['countryValue']>);
                 } else {
-                  onChange?.(draftValue as Country['name']);
+                  onChange(draftValue as NonNullable<CountryConfig['countryValue']>);
                 }
                 onClose?.();
               }}

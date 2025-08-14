@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import Text from '../Text/Text';
 import { TextVariants } from '../Text';
 import { CountryPickerOption } from './CountryPickerOption';
-import { assignType, Country, VariantConfig } from './types';
+import { Country, VariantConfig } from './types';
 
 type CountryPickerCountryListProps = {
   filteredPrioritized: Country[];
@@ -23,8 +23,7 @@ export const CountryPickerCountryList = ({
   variantConfig,
   inputName,
 }: CountryPickerCountryListProps) => {
-  const config = assignType(variantConfig);
-  const { isPhone, countryValue } = config;
+  const { isPhone, countryValue } = variantConfig;
 
   const renderCountryOptions = useCallback(
     (list: Country[]) =>
@@ -36,10 +35,10 @@ export const CountryPickerCountryList = ({
           isChecked={countryValue === (isPhone ? code : name)}
           inputName={inputName}
           baseClassName={baseClassName}
-          variantConfig={config}
+          variantConfig={variantConfig}
         />
       )),
-    [countryValue, isPhone, inputName, baseClassName, config],
+    [countryValue, isPhone, inputName, baseClassName, variantConfig],
   );
 
   // Keyboard navigation: focus moves with arrow keys

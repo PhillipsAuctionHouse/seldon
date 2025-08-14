@@ -24,10 +24,6 @@ export const countries = [
   { name: 'Benin', code: 'BJ' },
   { name: 'Bermuda', code: 'BM' },
   { name: 'Bhutan', code: 'BT' },
-  {
-    name: 'Venezuela',
-    code: 'VE',
-  },
   { name: 'Bolivia', code: 'BO' },
   {
     name: 'Caribbean Netherlands',
@@ -266,6 +262,10 @@ export const countries = [
   { name: 'Uzbekistan', code: 'UZ' },
   { name: 'Vanuatu', code: 'VU' },
   { name: 'Vatican City', code: 'VA' },
+  {
+    name: 'Venezuela',
+    code: 'VE',
+  },
   { name: 'Vietnam', code: 'VN' },
   { name: 'U.S. Virgin Islands', code: 'VI' },
   { name: 'British Virgin Islands', code: 'VG' },

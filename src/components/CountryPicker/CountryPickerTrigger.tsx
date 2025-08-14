@@ -3,7 +3,7 @@ import { TextVariants } from '../Text';
 import Text from '../Text/Text';
 import classNames from 'classnames';
 import { countries } from './constants';
-import { assignType, ModalBaseProps } from './types';
+import { Country, ModalBaseProps } from './types';
 import React from 'react';
 
 export type CountryPickerTriggerProps = {
@@ -42,20 +42,14 @@ const CountryPickerTrigger = ({
   baseClassName,
   variantConfig,
 }: ModalBaseProps<InternalTriggerProps>) => {
-  const { isPhone, countryValue } = assignType(variantConfig);
-
+  const { isPhone, countryValue } = variantConfig;
+  console.log('variant config', variantConfig);
   const errorId = errorMsg ? `${baseClassName}__trigger-error-msg` : undefined;
 
   // Determine the ISO country code for the flag
-  let flagCode;
-  if (countryValue) {
-    if (isPhone) {
-      flagCode = countryValue.toLowerCase();
-    } else if (!isPhone) {
-      const found = countries.find((country) => country.name === countryValue);
-      flagCode = found ? found.code.toLowerCase() : undefined;
-    }
-  }
+  const flagCode: Country['code'] | undefined = isPhone
+    ? countryValue
+    : countries.filter((country) => country.name === countryValue)?.[0]?.code;
 
   return (
     <div className={classNames(`${baseClassName}__trigger`, className)}>
@@ -83,7 +77,7 @@ const CountryPickerTrigger = ({
       >
         {flagCode && (
           <img
-            src={`https://flagcdn.com/24x18/${flagCode}.png`}
+            src={`https://flagcdn.com/24x18/${flagCode.toLowerCase()}.png`}
             alt={`${countryValue} flag`}
             className={`${baseClassName}__trigger-flag`}
           />

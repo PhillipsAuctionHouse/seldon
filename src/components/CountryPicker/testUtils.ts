@@ -1,4 +1,4 @@
-import { VariantConfig, PhoneConfig, CountryConfig } from './types';
+import { VariantConfig, getConfig } from './types';
 
 /**
  * Returns a configuration object based on the `isPhone` flag.
@@ -16,15 +16,5 @@ import { VariantConfig, PhoneConfig, CountryConfig } from './types';
  * @param isPhone - Determines whether to return a phone or country config.
  * @returns A mock configuration object for either phone or country selection.
  */
-export const getConfigVariant = (isPhone: VariantConfig['isPhone']) =>
-  (isPhone
-    ? ({
-        isPhone,
-        countryValue: 'US',
-        onChange: vi.fn() as PhoneConfig['onChange'],
-      } as PhoneConfig)
-    : {
-        isPhone,
-        countryValue: 'United States',
-        onChange: vi.fn() as CountryConfig['onChange'],
-      }) as CountryConfig;
+export const getTestConfig = (isPhone: VariantConfig['isPhone']) =>
+  getConfig(isPhone, isPhone ? 'US' : 'United States', vi.fn());

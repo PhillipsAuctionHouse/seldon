@@ -2,7 +2,7 @@ import Text from '../Text/Text';
 import { TextVariants } from '../Text';
 import classnames from 'classnames';
 import { getSafeCountryCallingCode } from './utils';
-import { assignType, Country, ModalBaseProps } from './types';
+import { Country, ModalBaseProps } from './types';
 
 export type CountryPickerOptionProps = Country & {
   /**
@@ -25,7 +25,7 @@ export const CountryPickerOption = ({
   variantConfig,
 }: ModalBaseProps<CountryPickerOptionProps>) => {
   const countryId = `${baseClassName}__radio-${code}`;
-  const { isPhone, onChange } = assignType(variantConfig);
+  const { isPhone, onChange } = variantConfig;
   return (
     <label
       htmlFor={countryId}

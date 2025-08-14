@@ -2,11 +2,18 @@ import { useState } from 'react';
 import CountryPickerTrigger, { CountryPickerTriggerProps } from './CountryPickerTrigger';
 import CountryPickerModal, { CountryPickerModalProps } from './CountryPickerModal';
 import { getCommonProps } from '../../utils';
-import { CommonProps, PrependTrigger } from './types';
+import { CommonProps, getConfig, PrependTrigger, VariantConfig } from './types';
 
-export type CountryPickerProps = CommonProps &
-  CountryPickerModalProps &
-  PrependTrigger<Omit<CountryPickerTriggerProps, 'baseClassName' | 'variantConfig'>>;
+export type CountryPickerProps = Omit<
+  CommonProps &
+    CountryPickerModalProps &
+    PrependTrigger<Omit<CountryPickerTriggerProps, 'baseClassName'>> & {
+      value: VariantConfig['countryValue'];
+      isPhone: boolean;
+      onChange: (v?: VariantConfig['countryValue']) => void;
+    },
+  'variantConfig'
+>;
 
 const CountryPicker = ({
   triggerLabelText,
@@ -18,8 +25,10 @@ const CountryPicker = ({
   searchInputPlaceholder,
   selectButtonLabel,
   inputName,
-  variantConfig,
   baseClassName: componentBaseClassName = 'CountryPicker',
+  value,
+  onChange,
+  isPhone,
   ...props
 }: CountryPickerProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +42,8 @@ const CountryPicker = ({
     inputName,
     ...props,
   };
+
+  const variantConfig = getConfig(isPhone, value, onChange);
 
   return (
     <>

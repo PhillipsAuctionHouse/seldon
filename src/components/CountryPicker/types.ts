@@ -57,11 +57,19 @@ export type CountryConfig = {
 };
 
 export type VariantConfig = PhoneConfig | CountryConfig;
-
-/**
- * Type guard to assign the correct config type based on isPhone.
- * @param variantConfig - The configuration object to assign.
- * @returns The config as PhoneConfig or CountryConfig.
- */
-export const assignType = (variantConfig: VariantConfig) =>
-  variantConfig.isPhone ? (variantConfig as PhoneConfig) : (variantConfig as CountryConfig);
+type VariantValue = PhoneConfig['countryValue'] | CountryConfig['countryValue'];
+export const getConfig = (
+  isPhone: boolean,
+  countryValue?: VariantValue,
+  func?: (v?: VariantValue) => void,
+): PhoneConfig | CountryConfig => {
+  const config = isPhone ? ({} as PhoneConfig) : ({} as CountryConfig);
+  Object.assign(config, {
+    isPhone,
+    countryValue,
+    onChange: (v?: VariantValue) => {
+      func?.(v);
+    },
+  });
+  return config;
+};
