@@ -1,5 +1,3 @@
-// src/design/colors-tokens/ColorTokensPage.tsx
-import Colors from '../assets/colors.svg';
 import ColorCard from './ColorCard';
 
 const colorSections = [
@@ -113,8 +111,8 @@ const colorSections = [
       </>
     ),
     colors: [
-      { label: '$text-default', hex: '#000' },
-      { label: '$text-inverted', hex: '#fff' },
+      { label: '$text-default', hex: '#000000' },
+      { label: '$text-inverted', hex: '#ffffff' },
       { label: '$text-supporting', hex: '#545454' },
     ],
   },
@@ -175,13 +173,13 @@ const colorSections = [
 export default function ColorTokensPage() {
   return (
     <main className="sb-unstyled doc-wrapper">
-      <h1 className="h1">
-        Colors and Gradients <img src={Colors} alt="colors" />
-      </h1>
+      <h1 className="h1">Colors</h1>
       {colorSections.map(({ section, description, colors }) => (
         <section key={section}>
           <h2>
-            <span className="h2">{section}</span>
+            <span className="h2" style={{ color: 'black' }}>
+              {section}
+            </span>
           </h2>
           {description}
           <div className="color__list">

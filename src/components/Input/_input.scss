@@ -30,9 +30,9 @@ $lg: #{$px}-input--lg;
   &__wrapper {
     @include text($string2);
 
-    accent-color: $soft-black;
+    accent-color: pink;
     align-items: center;
-    border: 1px solid $keyline-gray;
+    border: 1px solid pink;
     border-radius: 0.1875rem;
     display: inline-flex;
     font-variation-settings: 'wght' 600;
@@ -71,11 +71,15 @@ $lg: #{$px}-input--lg;
     }
   }
 
+  input[type='checkbox'] {
+    border-color: red !important; /* Use !important cautiously */
+  }
+
   &__input {
     @include text($string2);
 
-    accent-color: $soft-black;
-    border: 1px solid $keyline-gray;
+    accent-color: $black;
+    border: 1px solid $black;
     border-radius: 0.1875rem;
     font-variation-settings: 'wght' 600;
     margin-bottom: 0.25rem;
@@ -87,6 +91,11 @@ $lg: #{$px}-input--lg;
 
     &:focus-visible {
       outline: 1px solid $pure-black;
+    }
+
+    &:hover {
+      accent-color: $CTA-hover;
+      border-color: $CTA-hover;
     }
   }
 
