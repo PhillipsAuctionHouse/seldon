@@ -43,14 +43,24 @@
   text-underline-offset: $offset;
 }
 
-@mixin hText($size: var(--size-xl), $color: $pure-black, $transform-style: capitalize, $line-height: var(--size-lg)) {
+@mixin hText(
+  $size: var(--font-size-xl),
+  $color: $pure-black,
+  $transform-style: capitalize,
+  $text-decoration: unset,
+  $font-style: unset,
+  $line-height: calc($size + var(--font-size-step))
+) {
   @include DistinctDisplay;
+
+  // UI-QUESTION: should font be DistinctText? cause names are different but DistinctDisplay looks correct
 
   color: $color;
   font-size: $size;
+  font-style: $font-style;
   font-variation-settings: 'wght' 400;
   line-height: $line-height;
-  text-decoration: none;
+  text-decoration: $text-decoration;
   text-transform: $transform-style;
 }
 
@@ -59,6 +69,20 @@
 
   color: $color;
   font-size: $size;
+  line-height: $line-height;
+}
+
+@mixin label(
+  $size: var(--font-size-md),
+  $color: $pure-black,
+  $line-height: calc(var(--font-size-md) + var(--font-size-step)),
+  $font-weight: 400
+) {
+  @include Montserrat;
+
+  color: $color;
+  font-size: $size;
+  font-variation-settings: 'wght' $font-weight;
   line-height: $line-height;
 }
 
@@ -106,8 +130,32 @@
 
 @mixin text($token) {
   // Labels
+  @if $token == 'labelLg' {
+    @include label($size: var(--font-size-md));
+  }
+
+  @if $token == 'labelLgBold' {
+    @include label($size: var(--font-size-md), $font-weight: 600);
+  }
+
+  @if $token == 'labelMd' {
+    @include label($size: var(--font-size-sm), $font-weight: 400);
+  }
+
+  @if $token == 'labelMdBold' {
+    @include label($size: var(--font-size-sm), $font-weight: 600);
+  }
+
+  @if $token == 'labelSm' {
+    @include label($size: var(--font-size-xsm), $font-weight: 400);
+  }
+
+  @if $token == 'labelSmBold' {
+    @include label($size: var(--font-size-xsm), $font-weight: 600);
+  }
+
   @if $token == 'button' {
-    @include labelText($button);
+    @include label($size: var(--font-size-sm), $font-weight: 600);
   }
 
   @if $token == 'link' {
@@ -128,44 +176,57 @@
 
   // Headings
   @if $token == 'blockquote' {
-    @include hText(var(--size-xl), $color: $primary-black, $transform-style: initial, $line-height: var(--size-xxl));
+    @include hText(
+      var(--font-size-xl),
+      $color: $primary-black,
+      $transform-style: initial,
+      $line-height: var(--font-size-xxl)
+    );
   }
 
   @if $token == 'heading1' {
-    @include hText(var(--size-xl), $line-height: var(--size-xxl), $transform-style: capitalize);
+    @include hText(var(--font-size-xl));
   }
 
   @if $token == 'heading2' {
-    @include hText(var(--size-lg), $line-height: var(--size-xl), $transform-style: capitalize);
+    @include hText(var(--font-size-lg));
   }
 
   @if $token == 'heading3' {
-    @include hText(var(--size-md), $line-height: var(--size-lg), $transform-style: capitalize);
+    @include hText(var(--font-size-md));
+  }
+
+  @if $token == 'heading3Italic' {
+    @include hText(var(--font-size-md), $font-style: italic);
   }
 
   @if $token == 'heading4' {
-    @include hText(var(--size-sm), $line-height: var(--size-md), $transform-style: capitalize);
+    @include hText(var(--font-size-sm));
+  }
+
+  @if $token == 'heading4Italic' {
+    @include hText(var(--font-size-sm), $font-style: italic);
   }
 
   @if $token == 'heading5' {
-    @include hText(var(--size-xs), $line-height: var(--size-sm), $transform-style: capitalize);
+    @include hText(var(--font-size-xs));
   }
 
   @if $token == 'title1' {
-    @include hText(var(--size-xl), $line-height: var(--size-xxl), $transform-style: uppercase);
+    @include hText(var(--font-size-xl), $transform-style: uppercase);
   }
 
   // the title2 token skips heading 2 because it's the same size currently as heading1
   @if $token == 'title2' {
-    @include hText(var(--size-lg), $line-height: var(--size-xl), $transform-style: uppercase);
+    @include hText(var(--font-size-lg), $transform-style: uppercase);
   }
 
   @if $token == 'title3' {
-    @include hText(var(--size-md), $line-height: var(--size-lg), $transform-style: uppercase);
+    @include hText(var(--font-size-md), $transform-style: uppercase);
   }
 
   @if $token == 'title4' {
-    @include hText(var(--size-sm), $line-height: var(--size-md), $transform-style: uppercase);
+    @include hText(var(--font-size-sm), $transform-style: uppercase);
   }
 
   // Body

@@ -1,147 +1,154 @@
+/* stylelint-disable declaration-property-value-disallowed-list */
 @use '#scss/vars' as *;
 @use '#scss/type' as *;
 
-.type-tokens,
-.doc-wrapper {
-  .exp {
-    @include pText($body-size1);
+:root {
+  .type-block__column--small {
+    text-align: left;
 
-    color: $keyline-gray;
+    @include font-size-vars--sm;
   }
 
-  .property {
-    // @include pText($body-size2);
-    // font-variation-settings: 'wght' 400;
-    color: $post-sale-magenta;
-  }
-
-  li:not(li strong) {
-    color: $clock-widget-green;
-    font-family: monospace;
-    font-variation-settings: 'wght' 600;
-  }
-
-  li strong {
-    color: $clock-widget-blue;
-  }
-
-  .example {
-    background: #efefef;
-    display: block;
-    margin-top: 1rem;
-    padding: 1.5rem;
+  .type-block__column--medium {
     text-align: center;
 
-    .property {
-      // @include pText($body-size2);
-      // font-variation-settings: 'wght' 400;
-      color: $post-sale-magenta;
-    }
+    @include font-size-vars--md;
+  }
 
-    .h4 + ul li:not(li strong) {
-      color: $clock-widget-green;
-      font-family: monospace;
-      font-variation-settings: 'wght' 600;
-    }
+  .type-block__column--large {
+    text-align: right;
 
-    .h4 + ul li strong {
-      color: $clock-widget-blue;
-    }
+    @include font-size-vars--lg;
+  }
+}
 
-    &--h1 {
-      @include text($heading1);
-    }
+// Flat BEM structure for type-tokens demo
+.type-block {
+  margin-bottom: 48px;
 
-    &--h2 {
-      @include text($heading2);
-    }
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
 
-    &--h3 {
-      @include text($heading3);
-    }
+  &__grid {
+    display: grid;
+    gap: 32px;
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-    &--h4 {
-      @include text($heading4);
-    }
+  &__column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 
-    &-title {
-      &--h1 {
-        @include text($title1);
-      }
+  &__header {
+    color: #545454;
+    font-family: Montserrat, sans-serif;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1rem; /* 133.333% */
+  }
 
-      &--h2 {
-        @include text($title2);
-      }
+  &__specs {
+    color: #545454;
+    font-family: Montserrat, sans-serif;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1rem; /* 133.333% */
+  }
 
-      &--h3 {
-        @include text($title3);
-      }
+  // Titles
+  &__title-1 {
+    @include text($title1);
+  }
 
-      &--h4 {
-        @include text($title4);
-      }
-    }
+  &__title-2 {
+    @include text($title2);
+  }
 
-    &--p1 {
-      @include text($body1);
-    }
+  &__title-3 {
+    @include text($title3);
+  }
 
-    &--p2 {
-      @include text($body2);
-    }
+  &__title-4 {
+    @include text($title4);
+  }
 
-    &--p3 {
-      @include text($body3);
-    }
+  &__heading-1 {
+    @include text($heading1);
+  }
 
-    &-string {
-      &--p1 {
-        @include text($body1);
-      }
+  &__heading-2 {
+    @include text($heading2);
+  }
 
-      &--p2 {
-        @include text($body2);
-      }
+  &__heading-3 {
+    @include text($heading3);
+  }
 
-      &--p3 {
-        @include text($body3);
-      }
-    }
+  &__heading-3--italic {
+    @include text($heading3Italic);
+  }
 
-    &--button {
-      @include text($button);
-    }
+  &__heading-4 {
+    @include text($heading4);
+  }
 
-    &--link {
-      @include text($link);
-    }
+  // Labels
+  &__label-large {
+    @include text($labelLg);
+  }
 
-    &--email {
-      @include text($email);
-    }
+  &__label-medium {
+    @include text($labelMd);
+  }
 
-    &--label {
-      @include text($label);
-    }
+  &__label-small {
+    @include text($labelSm);
+  }
 
-    &--badge {
-      @include text($badge);
-    }
+  &__label-large-bold {
+    @include text($labelLgBold);
+  }
 
-    &-snw-header-link {
-      @include text($snwHeaderLink);
-    }
+  &__label-medium-bold {
+    @include text($labelMdBold);
+  }
 
-    &-snw-flyout-link {
-      @include text($snwFlyoutLink);
-    }
+  &__label-small-bold {
+    @include text($labelSmBold);
+  }
 
-    &-snw-heading-hero1 {
-      @include text($snwHeadingHero1);
-    }
+  // Buttons & Links
+  &__button {
+    @include text($button);
+  }
 
-    &-snw-heading-hero2 {
-      @include text($snwHeadingHero2);
-    }
+  &__link {
+    @include text($link);
+  }
+
+  &__link-bold {
+    @include text($link);
+
+    font-weight: 600;
+  }
+
+  // Eyebrow
+  &__eyebrow-large {
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  &__eyebrow-small {
+    font-size: 0.5rem;
+    font-weight: 500;
   }
 }

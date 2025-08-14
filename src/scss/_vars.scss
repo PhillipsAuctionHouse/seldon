@@ -1,6 +1,32 @@
 // prefix
 $px: seldon;
 
+@mixin font-size-vars--sm {
+  --font-size-micro: 0.25rem;
+  --font-size-xsm: 0.5rem;
+  --font-size-sm: 0.75rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-xxl: 1.75rem;
+  --font-size-xxxl: 2rem;
+}
+
+@mixin font-size-vars--md {
+  @include font-size-vars--sm;
+}
+
+@mixin font-size-vars--lg {
+  --font-size-micro: 0.5rem;
+  --font-size-xsm: 0.75rem;
+  --font-size-sm: 1rem;
+  --font-size-md: 1.25rem;
+  --font-size-lg: 1.5rem;
+  --font-size-xl: 1.75rem;
+  --font-size-xxl: 2rem;
+  --font-size-xxxl: 2.25rem;
+}
+
 ////////////////////////
 /// COlORS:
 ///////////////////////
@@ -83,6 +109,12 @@ $text-family: $DistinctText;
 
 // Used with the labelText mixin
 // @include labelText($label)
+$labelLg: 'labelLg';
+$labelLgBold: 'labelLgBold';
+$labelMd: 'labelMd';
+$labelMdBold: 'labelMdBold';
+$labelSm: 'labelSm';
+$labelSmBold: 'labelSmBold';
 $button: 'button';
 $link: 'link';
 $email: 'email';
@@ -94,7 +126,9 @@ $blockquote: 'blockquote';
 $heading1: 'heading1';
 $heading2: 'heading2';
 $heading3: 'heading3';
+$heading3Italic: 'heading3Italic';
 $heading4: 'heading4';
+$heading4Italic: 'heading4Italic';
 $heading5: 'heading5';
 $title1: 'title1';
 $title2: 'title2';
@@ -110,9 +144,10 @@ $snwHeaderLink: 'snwHeaderLink';
 $snwFlyoutLink: 'snwFlyoutLink';
 $snwHeadingHero1: 'snwHeadingHero1';
 $snwHeadingHero2: 'snwHeadingHero2';
-$text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $heading2, $heading3, $heading4, $heading5,
-  $title1, $title2, $title3, $title4, $body1, $body2, $body3, $string1, $string2, $string3, $snwFlyoutLink,
-  $snwHeaderLink, $snwHeadingHero1, $snwHeadingHero2;
+$text-tokens: $labelLg, $labelLgBold, $labelMd, $labelMdBold, $labelSm, $labelSmBold, $button, $link, $email, $label,
+  $badge, $blockquote, $heading1, $heading2, $heading3, $heading3Italic, $heading4, $heading4Italic, $heading5, $title1,
+  $title2, $title3, $title4, $body1, $body2, $body3, $string1, $string2, $string3, $snwFlyoutLink, $snwHeaderLink,
+  $snwHeadingHero1, $snwHeadingHero2;
 
 ////////////////////////
 /// Breakpoint TOKENS to be used for min-width comparisons, make sure they match BREAKPOINTS in constants.ts
@@ -163,15 +198,10 @@ $breakpoint-xl: 1801px;
   --snw-heading-hero-size2: 1.625rem;
   --snw-heading-hero-line-height-size2: 1.9375rem;
 
-  // SIZES
-  --size-micro: 0.25rem;
-  --size-xsm: 0.5rem;
-  --size-sm: 0.75rem;
-  --size-md: 1rem;
-  --size-lg: 1.25rem;
-  --size-xl: 1.5rem;
-  --size-xxl: 1.75rem;
-  --size-xxxl: 2rem;
+  // FONT SIZES
+  --font-size-step: 0.25rem;
+
+  @include font-size-vars--sm;
 
   @media (min-width: $breakpoint-md) {
     --quote-size: 1.75rem;
@@ -240,15 +270,8 @@ $breakpoint-xl: 1801px;
     --snw-flyout-link-size: 1.125rem;
     --snw-flyout-link-line-height: 2.125rem;
 
-    // SIZES
-    --size-micro: 0.5rem;
-    --size-xsm: 0.75rem;
-    --size-sm: 1rem;
-    --size-md: 1.25rem;
-    --size-lg: 1.5rem;
-    --size-xl: 1.75rem;
-    --size-xxl: 2rem;
-    --size-xxxl: 2.25rem;
+    // FONT SIZES
+    @include font-size-vars--lg;
   }
 }
 
