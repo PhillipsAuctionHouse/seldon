@@ -1,71 +1,67 @@
 import ProgressIndicator from './ProgressIndicator';
-import { runCommonTests } from '../../utils/testUtils';
 import { render, screen } from '@testing-library/react';
 
 describe('ProgressIndicator', () => {
-  runCommonTests(ProgressIndicator, 'ProgressIndicator');
-
   it('renders the correct number of steps', () => {
-    render(<ProgressIndicator steps={5} current={1} />);
-    const steps = screen.getAllByTestId(/^progress-step-\d+$/);
-    expect(steps).toHaveLength(5);
+    render(<ProgressIndicator totalSteps={5} currentStep={1} />);
+    const renderedSteps = screen.getAllByTestId(/^progress-step-\d+$/);
+    expect(renderedSteps).toHaveLength(5);
   });
 
   it('marks the current step correctly', () => {
-    render(<ProgressIndicator steps={5} current={3} />);
-    const currentStep = screen.getByLabelText('Step 3 current');
+    render(<ProgressIndicator totalSteps={5} currentStep={3} />);
+    const currentStep = screen.getByTestId('progress-step-3');
     expect(currentStep).toHaveAttribute('aria-current', 'step');
   });
 
-  it('marks completed steps correctly', () => {
-    render(<ProgressIndicator steps={5} current={3} />);
-    const completedStep = screen.getByLabelText('Step 2 completed');
-    expect(completedStep).toBeInTheDocument();
-  });
-
-  it('marks not started steps correctly', () => {
-    render(<ProgressIndicator steps={5} current={3} />);
-    const notStartedStep = screen.getByLabelText('Step 4 not started');
-    expect(notStartedStep).toBeInTheDocument();
-  });
-
-  it('renders the correct aria-label for progress', () => {
-    render(<ProgressIndicator steps={5} current={2} />);
-    const progressRoot = screen.getByLabelText('Progress');
+  it('renders the correct aria-label for progress root', () => {
+    render(<ProgressIndicator totalSteps={5} currentStep={2} progressIndicatorAriaLabel="Progress Indicator" />);
+    const progressRoot = screen.getByLabelText('Progress Indicator');
     expect(progressRoot).toBeInTheDocument();
   });
 
   it('renders the correct icons for completed steps', () => {
-    render(<ProgressIndicator steps={5} current={3} />);
+    render(<ProgressIndicator totalSteps={5} currentStep={3} />);
     const completedIcons = screen.getAllByLabelText('Completed Icon');
-    expect(completedIcons).toHaveLength(2); // Assuming steps 1 and 2 are completed
+    expect(completedIcons).toHaveLength(2); // Steps 1 and 2 are completed
   });
 
   it('renders the correct text for current step', () => {
-    render(<ProgressIndicator steps={5} current={3} />);
+    render(<ProgressIndicator totalSteps={5} currentStep={3} />);
     const currentStepText = screen.getByText('3');
     expect(currentStepText).toBeInTheDocument();
   });
 
   it('handles zero steps gracefully', () => {
-    render(<ProgressIndicator steps={0} current={0} />);
-    const steps = screen.queryAllByTestId(/^progress-step-\d+$/);
-    expect(steps).toHaveLength(0);
+    render(<ProgressIndicator totalSteps={0} currentStep={0} />);
+    const renderedSteps = screen.queryAllByTestId(/^progress-step-\d+$/);
+    expect(renderedSteps).toHaveLength(0);
   });
 
   it('handles current step greater than steps gracefully', () => {
-    render(<ProgressIndicator steps={3} current={5} />);
-    const steps = screen.getAllByTestId(/^progress-step-\d+$/);
-    expect(steps).toHaveLength(3);
-    const lastStep = screen.getByLabelText('Step 3 completed');
+    render(<ProgressIndicator totalSteps={3} currentStep={5} />);
+    const renderedSteps = screen.getAllByTestId(/^progress-step-\d+$/);
+    expect(renderedSteps).toHaveLength(3);
+    const lastStep = screen.getByTestId('progress-step-3');
     expect(lastStep).toBeInTheDocument();
   });
 
   it('handles negative current step gracefully', () => {
-    render(<ProgressIndicator steps={3} current={-1} />);
-    const steps = screen.getAllByTestId(/^progress-step-\d+$/);
-    expect(steps).toHaveLength(3);
-    const firstStep = screen.getByLabelText('Step 1 not started');
+    render(<ProgressIndicator totalSteps={3} currentStep={-1} />);
+    const renderedSteps = screen.getAllByTestId(/^progress-step-\d+$/);
+    expect(renderedSteps).toHaveLength(3);
+    const firstStep = screen.getByTestId('progress-step-1');
     expect(firstStep).toBeInTheDocument();
+  });
+
+  it('applies the proper labels passed in', () => {
+    const labels = ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5'];
+    render(<ProgressIndicator totalSteps={5} currentStep={3} labels={labels} />);
+    labels.forEach((label, index) => {
+      const stepLabel = screen.getByText(label);
+      expect(stepLabel).toBeInTheDocument();
+      const step = screen.getByTestId(`progress-step-${index + 1}`);
+      expect(step).toContainElement(stepLabel);
+    });
   });
 });

@@ -10,13 +10,13 @@ export default meta;
 export const Playground = (props: ProgressIndicatorProps) => <ProgressIndicator {...props} />;
 
 Playground.args = {
-  steps: 5,
-  current: 3,
+  totalSteps: 5,
+  currentStep: 3,
 };
 
 Playground.argTypes = {
-  steps: { control: { type: 'number', min: 1, max: 10 } },
-  current: { control: { type: 'number', min: 1, max: 10 } },
+  totalSteps: { control: { type: 'number', min: 1, max: 10 } },
+  currentStep: { control: { type: 'number', min: 1, max: 10 } },
 };
 
 export const WithLabels = (props: ProgressIndicatorProps) => (
@@ -24,11 +24,11 @@ export const WithLabels = (props: ProgressIndicatorProps) => (
 );
 
 WithLabels.args = {
-  steps: 4,
-  current: 3,
+  totalSteps: 4,
+  currentStep: 3,
 };
 
 WithLabels.argTypes = {
-  steps: { control: { type: 'number', min: 1, max: 10 } },
-  current: { control: { type: 'number', min: 1, max: 10 } },
+  totalSteps: { control: { type: 'number', min: 1, max: 10 } },
+  currentStep: { control: { type: 'number', min: 1, max: 10 } },
 };
