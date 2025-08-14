@@ -117,6 +117,7 @@ $labelSm: 'labelSm';
 $labelSmBold: 'labelSmBold';
 $button: 'button';
 $link: 'link';
+$linkBold: 'linkBold';
 $email: 'email';
 $label: 'label';
 $badge: 'badge';
@@ -138,6 +139,10 @@ $heading3Italic: 'heading3Italic';
 $heading4: 'heading4';
 $heading4Italic: 'heading4Italic';
 $heading5: 'heading5';
+
+// Eyebrow tokens
+$eyebrowLg: 'eyebrowLg';
+$eyebrowSm: 'eyebrowSm';
 $title1: 'title1';
 $title2: 'title2';
 $title3: 'title3';
@@ -152,10 +157,11 @@ $snwHeaderLink: 'snwHeaderLink';
 $snwFlyoutLink: 'snwFlyoutLink';
 $snwHeadingHero1: 'snwHeadingHero1';
 $snwHeadingHero2: 'snwHeadingHero2';
-$text-tokens: $labelLg, $labelLgBold, $labelMd, $labelMdBold, $labelSm, $labelSmBold, $button, $link, $email, $label,
-  $badge, $bodyLg, $bodyMd, $bodySm, $bodyLgBold, $bodyMdBold, $bodySmBold, $blockquote, $heading1, $heading2, $heading3,
-  $heading3Italic, $heading4, $heading4Italic, $heading5, $title1, $title2, $title3, $title4, $body1, $body2, $body3,
-  $string1, $string2, $string3, $snwFlyoutLink, $snwHeaderLink, $snwHeadingHero1, $snwHeadingHero2;
+$text-tokens: $labelLg, $labelLgBold, $labelMd, $labelMdBold, $labelSm, $labelSmBold, $button, $link, $linkBold, $email,
+  $label, $badge, $bodyLg, $bodyMd, $bodySm, $bodyLgBold, $bodyMdBold, $bodySmBold, $blockquote, $heading1, $heading2,
+  $heading3, $heading3Italic, $heading4, $heading4Italic, $heading5, $eyebrowLg, $eyebrowSm, $title1, $title2, $title3,
+  $title4, $body1, $body2, $body3, $string1, $string2, $string3, $snwFlyoutLink, $snwHeaderLink, $snwHeadingHero1,
+  $snwHeadingHero2;
 
 ////////////////////////
 /// Breakpoint TOKENS to be used for min-width comparisons, make sure they match BREAKPOINTS in constants.ts

@@ -152,9 +152,7 @@
   }
 
   &__link-bold {
-    @include text($link);
-
-    font-weight: 600;
+    @include text($linkBold);
   }
 
   // Body
@@ -184,12 +182,10 @@
 
   // Eyebrow
   &__eyebrow-large {
-    font-size: 0.75rem;
-    font-weight: 500;
+    @include text($eyebrowLg);
   }
 
   &__eyebrow-small {
-    font-size: 0.5rem;
-    font-weight: 500;
+    @include text($eyebrowSm);
   }
 }

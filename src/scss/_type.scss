@@ -82,7 +82,8 @@
   $size: var(--font-size-md),
   $color: $pure-black,
   $line-height: calc(var(--font-size-md) + var(--font-size-step)),
-  $font-weight: 400
+  $font-weight: 400,
+  $text-decoration: unset
 ) {
   @include Montserrat;
 
@@ -90,6 +91,7 @@
   font-size: $size;
   font-variation-settings: 'wght' $font-weight;
   line-height: $line-height;
+  text-decoration: $text-decoration;
 }
 
 @mixin labelText($label) {
@@ -134,6 +136,22 @@
   }
 }
 
+@mixin eyebrow(
+  $size: var(--font-size-xsm),
+  $color: $pure-black,
+  $line-height: calc($size + var(--font-size-step)),
+  $letter-spacing: 0
+) {
+  @include Montserrat;
+
+  color: $color;
+  font-size: $size;
+  font-variation-settings: 'wght' 500;
+  letter-spacing: $letter-spacing;
+  line-height: $line-height;
+  text-transform: uppercase;
+}
+
 @mixin text($token) {
   // Labels
   @if $token == 'labelLg' {
@@ -165,7 +183,11 @@
   }
 
   @if $token == 'link' {
-    @include labelText($link);
+    @include label($size: var(--font-size-sm), $font-weight: 400, $text-decoration: underline);
+  }
+
+  @if $token == 'linkBold' {
+    @include label($size: var(--font-size-sm), $font-weight: 600, $text-decoration: underline);
   }
 
   @if $token == 'email' {
@@ -316,5 +338,14 @@
     @include hText($snw-heading-hero-size2, $line-height: $snw-heading-hero-line-height2, $transform-style: uppercase);
 
     text-align: center;
+  }
+
+  // Eyebrows
+  @if $token == 'eyebrowLg' {
+    @include eyebrow($size: var(--font-size-sm));
+  }
+
+  @if $token == 'eyebrowSm' {
+    @include eyebrow($size: var(--font-size-xsm));
   }
 }

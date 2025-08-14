@@ -14,6 +14,7 @@ export const determineDefaultTextElement = (variant: TextVariants = TextVariants
   if (variant.includes('body')) return 'p';
   if (variant.includes('string')) return 'span';
   if (variant.includes('title')) return 'span';
+  if (variant.includes('eyebrow')) return 'span';
   if (variant === TextVariants.label) return 'label';
   if (loweredVariant.includes('heading')) {
     const headingNumber = !isNaN(parseInt(variant.slice(-1))) ? parseInt(variant.slice(-1)) : 3;

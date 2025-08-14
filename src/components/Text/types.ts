@@ -7,6 +7,11 @@ export enum TextVariants {
   heading4 = 'heading4',
   heading4Italic = 'heading4Italic',
   heading5 = 'heading5',
+
+  // Eyebrow variants
+  eyebrowLg = 'eyebrowLg',
+  eyebrowSm = 'eyebrowSm',
+
   title1 = 'title1',
   title2 = 'title2',
   title3 = 'title3',
@@ -28,6 +33,7 @@ export enum TextVariants {
   email = 'email',
   label = 'label',
   link = 'link',
+  linkBold = 'linkBold',
   badge = 'badge',
   snwFlyoutLink = 'snwFlyoutLink',
   snwHeaderLink = 'snwHeaderLink',
