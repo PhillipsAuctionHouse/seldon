@@ -1,8 +1,8 @@
+import classNames from 'classnames';
 import * as React from 'react';
 import { px } from '../../../utils';
-import classNames from 'classnames';
-import { NavigationItemProps } from '../NavigationItem/NavigationItem';
 import { Text, TextVariants } from '../../Text';
+import { NavigationItemProps } from '../NavigationItem/NavigationItem';
 
 export interface NavigationListProps extends React.ComponentProps<'ul'> {
   /**
@@ -25,10 +25,17 @@ export interface NavigationListProps extends React.ComponentProps<'ul'> {
    * Rewrite the onClick event
    * */
   onClick?: React.MouseEventHandler<HTMLElement>;
+  /**
+   * Height of the notification banner
+   */
+  bannerHeadingHeight?: number;
 }
 
 const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
-  ({ id, children, className, isOffScreen, leftSectionHeading, rightSectionHeading, onClick }, ref) => {
+  (
+    { id, children, className, isOffScreen, leftSectionHeading, rightSectionHeading, onClick, bannerHeadingHeight },
+    ref,
+  ) => {
     const leftSectionItems = React.Children.toArray(children)
       .map((child) => {
         if (
@@ -69,6 +76,7 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
         role="list"
         className={classNames(className, `${px}-nav__list`, { [`${px}-nav__list--offscreen`]: isOffScreen })}
         ref={ref}
+        style={bannerHeadingHeight != null ? { top: `${bannerHeadingHeight}px` } : undefined}
       >
         {leftSectionItems.length > 0 ? (
           <div className={classNames(`${px}-nav__list__section`, `${px}-nav__list__section--start`)}>
