@@ -1,3 +1,24 @@
+# [1.174.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.173.0...v1.174.0) (2025-08-14)
+
+
+### Features
+
+* **detailedRadio:** L3-7240 Make Radio input selector match figma for primary details (Bidder type select) ([#671](https://github.com/PhillipsAuctionHouse/seldon/issues/671)) ([ed88be9](https://github.com/PhillipsAuctionHouse/seldon/commit/ed88be98a08aafce98b43ae41f4386449e72c651))
+
+# [1.173.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.172.0...v1.173.0) (2025-08-12)
+
+
+### Features
+
+* **input:** L3-6361 Input Adornment ([#680](https://github.com/PhillipsAuctionHouse/seldon/issues/680)) ([cfe3f2a](https://github.com/PhillipsAuctionHouse/seldon/commit/cfe3f2aa6bc3f81c77227ab51f8b0e0f5a197726))
+
+# [1.172.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.171.1...v1.172.0) (2025-08-11)
+
+
+### Features
+
+* **Drawer:** L3-7239 give the Drawer component header text support to align … ([#670](https://github.com/PhillipsAuctionHouse/seldon/issues/670)) ([338cca0](https://github.com/PhillipsAuctionHouse/seldon/commit/338cca01d66aa0d8ffdb1c0fcc165ee0a0467136))
+
 ## [1.171.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.171.0...v1.171.1) (2025-08-06)
 
 

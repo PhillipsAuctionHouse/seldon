@@ -7,7 +7,6 @@
   flex-direction: column;
   height: 100dvh;
   max-width: 480px;
-  padding: $padding-xl $padding-md $padding-md;
   position: fixed;
   right: 0;
   top: 0;
@@ -18,23 +17,12 @@
     outline: none;
   }
 
-  .#{$px}-icon-close-x:hover {
-    color: $white;
-  }
-
   @media (max-width: $breakpoint-sm) {
     max-width: 100%;
   }
 
   @media (max-width: $breakpoint-md) {
     padding-bottom: $padding-sm;
-  }
-
-  &__overlay {
-    background-color: $overlay-black;
-    inset: 0;
-    position: fixed;
-    z-index: 10;
   }
 
   &__close {
@@ -46,11 +34,13 @@
     position: absolute;
     right: 10px;
     top: 10px;
+  }
 
-    &--bottom {
-      align-self: flex-start;
-      margin: $spacing-md;
-    }
+  &__overlay {
+    background-color: $overlay-black;
+    inset: 0;
+    position: fixed;
+    z-index: 10;
   }
 
   // Bottom sheet modifier
@@ -82,6 +72,43 @@
       padding-right: $spacing-xxxl;
       text-align: center;
       width: fit-content;
+    }
+  }
+
+  &__content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+    padding-top: $snowflake-menu-padding;
+    width: 100%;
+
+    // different designs require different padding (ep = extra padding). more info in the component.
+
+    &--ep0 {
+      padding-top: 0;
+    }
+
+    &--ep1 {
+      padding: 1rem;
+      padding-top: $snowflake-menu-padding;
+    }
+
+    &--ep2 {
+      padding: 2rem;
+      padding-top: $spacing-xl;
+    }
+
+    &--ep3 {
+      padding: 3rem;
+      padding-top: $snowflake-menu-padding;
+    }
+
+    // make the children scroll in their little children box
+    > * {
+      overflow-y: auto;
     }
   }
 }

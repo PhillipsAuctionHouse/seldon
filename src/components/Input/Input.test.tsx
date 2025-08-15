@@ -167,4 +167,16 @@ describe('An Input', () => {
     const inputElement = screen.getByRole('textbox');
     expect(inputElement).not.toHaveClass(`${px}-skeleton`);
   });
+
+  it('renders inputAdornment when provided', () => {
+    render(
+      <Input
+        id="adorned-input"
+        labelText="Adorned Input"
+        inputAdornment={<span data-testid="custom-adornment">Adornment</span>}
+      />,
+    );
+    expect(screen.getByTestId('adornment-adorned-input')).toBeInTheDocument();
+    expect(screen.getByTestId('custom-adornment')).toBeInTheDocument();
+  });
 });

@@ -32,6 +32,7 @@
 @use 'components/Accordion/accordion';
 @use 'components/Breadcrumb/breadcrumb';
 @use 'components/Drawer/drawer';
+@use 'components/Drawer/drawerHeader';
 @use 'components/Dropdown/dropdown';
 @use 'components/Video/video';
 @use 'components/Select/select';
@@ -52,6 +53,8 @@
 @use 'components/Toast/toast';
 @use 'components/ExitGateCard/exitGateCard';
 @use 'components/ComposedModal/composedModal';
+@use 'components/DescriptiveRadioButton/descriptiveRadioButton';
+@use 'components/DescriptiveRadioButtonGroup/descriptiveRadioButtonGroup';
 
 // Patterns
 @use 'patterns/HeroBanner/heroBanner';
