@@ -176,6 +176,10 @@
     margin-top: $spacing-xsm;
   }
 
+  &__no-options {
+    padding-left: $padding-xsm;
+  }
+
   @keyframes fade-in {
     from {
       opacity: 0;

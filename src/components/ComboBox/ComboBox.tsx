@@ -91,6 +91,12 @@ export interface ComboBoxProps {
    * Handler called when the combobox loses focus
    */
   onBlur?: React.FocusEventHandler<HTMLDivElement>;
+
+  /**
+   * Number of characters required in the input before the dropdown options are shown.
+   * @default 0
+   */
+  countOfCharsBeforeDropdown?: number;
 }
 /**
  * ## Overview
@@ -122,6 +128,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     noOptionsMessage = 'No Options.',
     invalid = false,
     invalidText,
+    countOfCharsBeforeDropdown = 0,
     ...props
   },
   ref,
@@ -202,8 +209,15 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
   }, [inputValue, selectedOptionDisplayValue, selectedOption, memoizedGetOptionLabel, options]);
 
   const handleOpen = useCallback(
-    (isOpen: boolean) => {
-      setIsOpen(isOpen);
+    (isOpen: boolean, newValue?: string) => {
+      const hasMetMinimumCharacterCount =
+        (newValue?.length && newValue.length >= countOfCharsBeforeDropdown) ||
+        inputValue.length >=
+          (countOfCharsBeforeDropdown === 1 ? countOfCharsBeforeDropdown : countOfCharsBeforeDropdown - 1);
+
+      if (!isOpen || (isOpen && hasMetMinimumCharacterCount)) {
+        setIsOpen(isOpen);
+      }
       if (isOpen && selectedOption && filteredOptions.length > 5) {
         /**
          * Wait for dropdown to render before scrolling
@@ -219,7 +233,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
         });
       }
     },
-    [selectedOption, filteredOptions.length],
+    [selectedOption, filteredOptions.length, inputValue, countOfCharsBeforeDropdown],
   );
 
   // Handle option selection
@@ -284,7 +298,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
 
     // Open dropdown when we have matching options
     if (newValue !== '' && filteredOptions.length > 0) {
-      handleOpen(true);
+      handleOpen(true, newValue);
     }
   };
 
