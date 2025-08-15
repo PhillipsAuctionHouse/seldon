@@ -2,7 +2,7 @@
 
 .#{$px}-button {
   @include bodyText;
-  @include labelText($button);
+  @include text($button);
 
   align-items: center;
   background-color: $pure-black;

@@ -67,7 +67,7 @@
 @mixin pText(
   $size: $body-size1,
   $color: $pure-black,
-  $line-height: calc($size + var(--font-size-step)),
+  $line-height: calc($size + var(--body-size-step)),
   $font-weight: 400
 ) {
   @include Montserrat;
