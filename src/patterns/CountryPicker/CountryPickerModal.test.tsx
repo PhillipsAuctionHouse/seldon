@@ -96,10 +96,15 @@ describe('CountryPickerModal - Country variant', () => {
     expect(selectButton).not.toBeDisabled();
   });
 
-  it('handles keyboard navigation with arrow keys', async () => {
+  it('moves focus from search input to the radio list when pressing Tab', async () => {
     render(<CountryPickerModal {...countryBaseProps} />);
-    await userEvent.keyboard('{ArrowDown}');
-    // Add assertions to verify focus changes
+    const searchInput = screen.getByPlaceholderText('Type to search...');
+    searchInput.focus();
+    expect(searchInput).toHaveFocus();
+
+    await userEvent.tab();
+    const firstRadioOption = screen.getByRole('radio', { name: 'United States' });
+    expect(firstRadioOption).toHaveFocus();
   });
 });
 
@@ -158,9 +163,14 @@ describe('CountryPickerModal - Phone variant', () => {
     expect(selectButton).not.toBeDisabled();
   });
 
-  it('handles keyboard navigation with arrow keys', async () => {
-    render(<CountryPickerModal {...phoneBaseProps} />);
-    await userEvent.keyboard('{ArrowDown}');
-    // Add assertions to verify focus changes
+  it('moves focus from search input to the radio list when pressing Tab', async () => {
+    render(<CountryPickerModal {...countryBaseProps} />);
+    const searchInput = screen.getByPlaceholderText('Type to search...');
+    searchInput.focus();
+    expect(searchInput).toHaveFocus();
+
+    await userEvent.tab();
+    const firstRadioOption = screen.getByRole('radio', { name: 'United States' });
+    expect(firstRadioOption).toHaveFocus();
   });
 });
