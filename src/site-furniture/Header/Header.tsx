@@ -1,14 +1,21 @@
-import React, { PropsWithChildren } from 'react';
 import classnames from 'classnames';
-import { findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
-import UserManagement, { UserManagementProps } from '../../patterns/UserManagement/UserManagement';
-import { LanguageSelector, LanguageSelectorProps } from '../../patterns/LanguageSelector';
-import Navigation from '../../components/Navigation/Navigation';
-import { Component, ComponentProps, forwardRef, ReactElement, useState, createContext } from 'react';
-import { defaultHeaderContext } from './utils';
-import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
-import { useMobileMenu } from './hooks';
+import React, {
+  Component,
+  ComponentProps,
+  createContext,
+  forwardRef,
+  PropsWithChildren,
+  ReactElement,
+  useState,
+} from 'react';
 import { Icon } from '../../components/Icon';
+import Navigation from '../../components/Navigation/Navigation';
+import { LanguageSelector, LanguageSelectorProps } from '../../patterns/LanguageSelector';
+import UserManagement, { UserManagementProps } from '../../patterns/UserManagement/UserManagement';
+import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
+import { findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
+import { useMobileMenu } from './hooks';
+import { defaultHeaderContext } from './utils';
 
 export interface HeaderProps extends ComponentProps<'header'> {
   /**
@@ -35,6 +42,10 @@ export interface HeaderProps extends ComponentProps<'header'> {
    * Is the header disabled
    */
   disabled?: boolean;
+  /**
+   * Height of the notification banner
+   */
+  bannerHeight?: number;
 }
 export type HeaderContextType = {
   /**
@@ -91,6 +102,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
       toggleCloseText = 'Close Menu',
       logoText = 'Home Page',
       disabled,
+      bannerHeight = 0,
       ...props
     },
     ref,
@@ -112,7 +124,12 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     const closeTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
     return (
-      <header {...props} className={classnames(`${px}-header`, className)} ref={ref}>
+      <header
+        {...props}
+        className={classnames(`${px}-header`, className)}
+        ref={ref}
+        style={{ ['top']: `${bannerHeight}px` } as React.CSSProperties}
+      >
         <div className={`${px}-header__top-row`}>
           <SSRMediaQuery.Media greaterThanOrEqual="md">{languageSelectorElement}</SSRMediaQuery.Media>
           {/** only render language selector in this location on desktop */}

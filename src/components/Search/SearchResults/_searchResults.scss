@@ -12,7 +12,7 @@
   padding: $spacing-sm;
   position: absolute;
   scrollbar-width: none; /* Firefox */
-  top: $search-size;
+  top: $search-size; // will be dynamically set again when notification banner is shown
   width: 100%;
 
   &::-webkit-scrollbar {
