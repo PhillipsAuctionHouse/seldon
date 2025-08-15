@@ -33,6 +33,7 @@ Playground.args = {
   options: birthdays,
   id: 'birthdays-combo-box',
   labelText: 'Birth Year',
+  noOptionsMessage: 'No available years to select',
 };
 
 Playground.argTypes = {
@@ -49,6 +50,8 @@ Playground.argTypes = {
   renderOption: { control: false },
   onChange: { control: false },
   value: { control: false },
+  countOfCharsBeforeDropdown: { control: 'number' },
+  noOptionsMessage: { control: 'text' },
 };
 
 export const ComboBoxInDrawer = () => {
