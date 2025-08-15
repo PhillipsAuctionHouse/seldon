@@ -92,6 +92,10 @@ export interface ComboBoxProps {
    */
   onBlur?: React.FocusEventHandler<HTMLDivElement>;
 
+  /**
+   * Number of characters required in the input before the dropdown options are shown.
+   * @default 0
+   */
   countOfCharsBeforeDropdown?: number;
 }
 /**
