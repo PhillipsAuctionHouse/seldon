@@ -124,15 +124,15 @@
   }
 
   &__text {
+    @include text($string2);
+
     flex: auto;
     font-variation-settings: 'wght' 600;
     text-align: left;
-
-    @include text($string2);
   }
 
   &__text--lg {
-    @include text($body1);
+    @include text($bodyLgBold);
   }
 
   &__icon {

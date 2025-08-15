@@ -109,6 +109,9 @@
     "typescript.preferences.organizeImports": {
       "accentCollation": true
     },
-    "github.copilot.chat.editor.temporalContext.enabled": true
+    "github.copilot.chat.editor.temporalContext.enabled": true,
+    "[markdown]": {
+      "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+    }
 }
   

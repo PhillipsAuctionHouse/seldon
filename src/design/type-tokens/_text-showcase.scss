@@ -1,147 +1,191 @@
+/* stylelint-disable declaration-property-value-disallowed-list */
 @use '#scss/vars' as *;
 @use '#scss/type' as *;
 
-.type-tokens,
-.doc-wrapper {
-  .exp {
-    @include pText($body-size1);
+:root {
+  .type-block__column--small {
+    text-align: left;
 
-    color: $keyline-gray;
+    @include font-size-vars--sm;
   }
 
-  .property {
-    // @include pText($body-size2);
-    // font-variation-settings: 'wght' 400;
-    color: $post-sale-magenta;
-  }
-
-  li:not(li strong) {
-    color: $clock-widget-green;
-    font-family: monospace;
-    font-variation-settings: 'wght' 600;
-  }
-
-  li strong {
-    color: $clock-widget-blue;
-  }
-
-  .example {
-    background: #efefef;
-    display: block;
-    margin-top: 1rem;
-    padding: 1.5rem;
+  .type-block__column--medium {
     text-align: center;
 
-    .property {
-      // @include pText($body-size2);
-      // font-variation-settings: 'wght' 400;
-      color: $post-sale-magenta;
-    }
+    @include font-size-vars--md;
+  }
 
-    .h4 + ul li:not(li strong) {
-      color: $clock-widget-green;
-      font-family: monospace;
-      font-variation-settings: 'wght' 600;
-    }
+  .type-block__column--large {
+    text-align: right;
 
-    .h4 + ul li strong {
-      color: $clock-widget-blue;
-    }
+    @include font-size-vars--lg;
+  }
+}
 
-    &--h1 {
-      @include text($heading1);
-    }
+// Flat BEM structure for type-tokens demo
+.type-block {
+  margin-bottom: 48px;
 
-    &--h2 {
-      @include text($heading2);
-    }
+  &__item {
+    border-bottom: 1px solid #eae9e6;
+    display: flex;
+    flex-direction: column;
+    height: 6.5rem;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+  }
 
-    &--h3 {
-      @include text($heading3);
-    }
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    margin-top: 5rem;
+  }
 
-    &--h4 {
-      @include text($heading4);
-    }
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-    &-title {
-      &--h1 {
-        @include text($title1);
-      }
+  &__column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 
-      &--h2 {
-        @include text($title2);
-      }
+  &__header {
+    border-bottom: 1px solid #eae9e6;
+    color: #545454;
+    font-family: Montserrat, sans-serif;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1rem; /* 133.333% */
+    padding-bottom: 1rem;
+  }
 
-      &--h3 {
-        @include text($title3);
-      }
+  &__specs {
+    color: #545454;
+    font-family: Montserrat, sans-serif;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1rem; /* 133.333% */
+  }
 
-      &--h4 {
-        @include text($title4);
-      }
-    }
+  // Titles
+  &__title-1 {
+    @include text($title1);
+  }
 
-    &--p1 {
-      @include text($body1);
-    }
+  &__title-2 {
+    @include text($title2);
+  }
 
-    &--p2 {
-      @include text($body2);
-    }
+  &__title-3 {
+    @include text($title3);
+  }
 
-    &--p3 {
-      @include text($body3);
-    }
+  &__title-4 {
+    @include text($title4);
+  }
 
-    &-string {
-      &--p1 {
-        @include text($body1);
-      }
+  &__heading-1 {
+    @include text($heading1);
+  }
 
-      &--p2 {
-        @include text($body2);
-      }
+  &__heading-2 {
+    @include text($heading2);
+  }
 
-      &--p3 {
-        @include text($body3);
-      }
-    }
+  &__heading-3 {
+    @include text($heading3);
+  }
 
-    &--button {
-      @include text($button);
-    }
+  &__heading-3--italic {
+    @include text($heading3Italic);
+  }
 
-    &--link {
-      @include text($link);
-    }
+  &__heading-4 {
+    @include text($heading4);
+  }
 
-    &--email {
-      @include text($email);
-    }
+  &__heading-4--italic {
+    @include text($heading4Italic);
+  }
 
-    &--label {
-      @include text($label);
-    }
+  // Labels
+  &__label-large {
+    @include text($labelLg);
+  }
 
-    &--badge {
-      @include text($badge);
-    }
+  &__label-medium {
+    @include text($labelMd);
+  }
 
-    &-snw-header-link {
-      @include text($snwHeaderLink);
-    }
+  &__label-small {
+    @include text($labelSm);
+  }
 
-    &-snw-flyout-link {
-      @include text($snwFlyoutLink);
-    }
+  &__label-large-bold {
+    @include text($labelLgBold);
+  }
 
-    &-snw-heading-hero1 {
-      @include text($snwHeadingHero1);
-    }
+  &__label-medium-bold {
+    @include text($labelMdBold);
+  }
 
-    &-snw-heading-hero2 {
-      @include text($snwHeadingHero2);
-    }
+  &__label-small-bold {
+    @include text($labelSmBold);
+  }
+
+  // Buttons & Links
+  &__button {
+    @include text($button);
+  }
+
+  &__link {
+    @include text($link);
+  }
+
+  &__link-bold {
+    @include text($linkBold);
+  }
+
+  // Body
+  &__body-large {
+    @include text($bodyLg);
+  }
+
+  &__body-medium {
+    @include text($bodyMd);
+  }
+
+  &__body-small {
+    @include text($bodySm);
+  }
+
+  &__body-large-bold {
+    @include text($bodyLgBold);
+  }
+
+  &__body-medium-bold {
+    @include text($bodyMdBold);
+  }
+
+  &__body-small-bold {
+    @include text($bodySmBold);
+  }
+
+  // Eyebrow
+  &__eyebrow-large {
+    @include text($eyebrowLg);
+  }
+
+  &__eyebrow-small {
+    @include text($eyebrowSm);
   }
 }

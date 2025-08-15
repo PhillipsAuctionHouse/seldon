@@ -14,7 +14,7 @@ $lg: #{$px}-input--lg;
   }
 
   &__label {
-    @include text($string2);
+    @include text($labelMd);
 
     color: $pure-black;
     font-variation-settings: 'wght' 600;

@@ -64,7 +64,7 @@ $chevron-scale: 0.8;
       height: unset;
 
       &__label {
-        @include text($body2);
+        @include text($labelMdBold);
 
         color: inherit;
         margin-bottom: 0;
