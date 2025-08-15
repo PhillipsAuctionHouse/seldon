@@ -93,7 +93,11 @@ const meta = {
 } satisfies Meta<typeof NotificationBanner>;
 
 export default meta;
-export const Playground = (props: NotificationBannerProps) => <NotificationBanner {...props} />;
+export const Playground = (props: NotificationBannerProps) => (
+  <div style={{ height: '100px' }}>
+    <NotificationBanner {...props} />
+  </div>
+);
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
@@ -113,27 +117,26 @@ Playground.argTypes = {};
 export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: AuthState }) => {
   const [currentLanguage, setCurrentLanguage] = useState(SupportedLanguages.en);
   const bannerRef = useRef<HTMLDivElement>(null);
-  const [bannerHeight, setBannerHeight] = useState(0);
   const headerRef = useRef<HTMLDivElement>(null);
+  const [bannerHeight, setBannerHeight] = useState(0);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [notificationData, setNotificationData] = useState<React.ReactNode>(<></>);
+
   const updateHeights = () => {
-    if (bannerRef.current) setBannerHeight(bannerRef.current.clientHeight);
-    if (headerRef.current) setHeaderHeight(headerRef.current.clientHeight);
+    setBannerHeight(bannerRef.current?.clientHeight ?? 0);
+    setHeaderHeight(headerRef.current?.clientHeight ?? 0);
   };
 
   useEffect(() => {
     updateHeights();
-
     window.addEventListener('resize', updateHeights);
     return () => window.removeEventListener('resize', updateHeights);
   }, [notificationData]);
 
   useEffect(() => {
-    // Simulate fetching notification data
     const timeout = setTimeout(() => {
       setNotificationData(
-        <div style={{ fontWeight: '600', color: 'black', fontSize: '16px' }}>
+        <div style={{ fontWeight: 600, color: 'black', fontSize: 16 }}>
           <a href="#" style={{ textDecoration: 'underline', cursor: 'pointer' }}>
             Our Moved by Beauty: Works by Lucie Rie from an Important Asian Collection Sale
           </a>{' '}
@@ -142,9 +145,7 @@ export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: 
         </div>,
       );
     }, 10);
-    return () => {
-      clearTimeout(timeout);
-    };
+    return () => clearTimeout(timeout);
   }, []);
 
   return (
@@ -304,7 +305,11 @@ export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: 
             </NavigationItemTrigger>
             <NavigationItem href="#" label="Calendar" />
             <NavigationItemTrigger id="departments" label="Departments">
-              <NavigationList id={`${px}-departments-nav-list`} leftSectionHeading="Our Specialist Departments">
+              <NavigationList
+                id={`${px}-departments-nav-list`}
+                leftSectionHeading="Our Specialist Departments"
+                bannerHeadingHeight={(bannerHeight + headerHeight) as number}
+              >
                 <NavigationItem
                   href="#"
                   navGroup="nav-link-start"
