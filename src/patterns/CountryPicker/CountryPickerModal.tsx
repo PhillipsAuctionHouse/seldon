@@ -80,9 +80,6 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps & CountryPi
     const [draftValue, setDraftValue] = useState(committedValue);
     const isPhoneValue = (v?: string): v is Country['code'] => countries.some((country) => country.code === v);
 
-    if (isPhoneValue(draftValue)) console.log(draftValue);
-    else console.log(draftValue);
-
     // Reset draft when modal opens/closes or committed value changes
     useEffect(() => {
       setDraftValue(committedValue);

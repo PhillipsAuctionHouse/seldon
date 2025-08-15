@@ -63,6 +63,7 @@ export const Playground = (props: CountryPickerProps) => {
   const [selected, setSelected] = useState<Country['name'] | undefined>(undefined);
 
   const config = toConfig(false, selected, setSelected);
+
   // Find the country object by name for display
   const selectedCountry = countries.find((c) => c.name === selected);
 
@@ -88,6 +89,8 @@ export const CountryPhoneCodePicker = (props: CountryPickerProps) => {
   // Store country code for phone picker
   const [selected, setSelected] = useState<Country['code'] | undefined>(undefined);
 
+  const config = toConfig(true, selected, setSelected);
+
   // Find the country object by code for display
   const selectedCountry = countries.find((c) => c.code === selected);
 
@@ -102,9 +105,7 @@ export const CountryPhoneCodePicker = (props: CountryPickerProps) => {
       searchInputLabel=""
       searchInputPlaceholder="Search country"
       selectButtonLabel="Select"
-      isPhone={true}
-      value={selected}
-      onChange={setSelected}
+      {...config}
     />
   );
 };

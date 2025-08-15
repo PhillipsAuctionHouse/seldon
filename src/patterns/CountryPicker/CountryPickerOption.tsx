@@ -34,7 +34,7 @@ export const CountryPickerOption = ({
 }: ModalBaseProps & CountryPickerOptionProps) => {
   const countryId = `${baseClassName}__radio-${code}`;
   // Destructure discriminated union for type-safe access
-  const { isPhone, onChange, value } = variantConfig;
+  const { isPhone, onChange } = variantConfig;
   return (
     <label
       htmlFor={countryId}
@@ -54,10 +54,8 @@ export const CountryPickerOption = ({
           [`${baseClassName}__radio--visually-hidden`]: isPhone,
         })}
         onChange={() => {
-          if (!value) return;
-          if (isPhone)
-            onChange(value); // these are two different typings of both onChange and value
-          else onChange(value); // totally different branches to TypeScript, silly as it may look
+          if (isPhone) onChange(code);
+          else onChange(name);
         }}
       />
       <span className={`${baseClassName}__option-content`}>
