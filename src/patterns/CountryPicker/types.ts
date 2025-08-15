@@ -1,6 +1,6 @@
 import { countries } from './constants';
 
-// Helper to convert indeterminate config to a discriminated union Config
+// Helper to convert indeterminate config to a discriminated union config
 export function toConfig(
   isPhone: true,
   value: Country['code'] | undefined,
@@ -20,7 +20,9 @@ export function toConfig(
     ? { isPhone: true, value: value as Country['code'], onChange: onChange as (v: Country['code']) => void }
     : { isPhone: false, value: value as Country['name'], onChange: onChange as (v: Country['name']) => void };
 }
-// Utility type to prepend 'trigger' to keys, and rename 'hasError' to 'hasTriggerError'
+
+// Utility type to prepend 'trigger' to keys, and rename 'hasError' to 'hasTriggerError'. Used by the outer
+// CountryPicker component to delineate trigger props from other props
 export type PrependTrigger<T> = {
   [K in keyof T as K extends 'hasError' ? 'hasTriggerError' : `trigger${Capitalize<string & K>}`]: T[K];
 };
@@ -55,5 +57,3 @@ export type ModalStateProps = {
 };
 
 export type ModalBaseProps = CommonProps & ModalStateProps;
-
-export const getConfig = (config: Config): Config => config;

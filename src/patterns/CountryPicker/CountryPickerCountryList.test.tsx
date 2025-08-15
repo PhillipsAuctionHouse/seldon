@@ -20,7 +20,7 @@ describe('CountryPickerCountryList - Country variant', () => {
     baseClassName: 'country-picker',
     modalTitle: 'Select a country',
     listRef: createRef<HTMLDivElement>(),
-    variantConfig: { isPhone: false, value: 'Canada', onChange: vi.fn() } as import('./types').CountryConfig,
+    variantConfig: toConfig(false, 'Canada', vi.fn()),
     inputName: 'country',
   };
 
@@ -77,7 +77,7 @@ describe('CountryPickerCountryList - Phone variant', () => {
     baseClassName: 'country-picker',
     modalTitle: 'Select a country',
     listRef: createRef<HTMLDivElement>(),
-    variantConfig: toConfig(true, 'CA', () => void 0),
+    variantConfig: toConfig(true, 'CA', vi.fn()),
     inputName: 'country',
   };
 
