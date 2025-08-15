@@ -17,7 +17,7 @@ const meta = {
 export default meta;
 
 const sampleContent = (
-  <div style={{ padding: '10px', backgroundColor: '#f0f0f0', marginTop: '10px' }}>
+  <div style={{ padding: '10px', backgroundColor: 'white', marginTop: '10px' }}>
     This is the collapsible content. It can be expanded or collapsed.
   </div>
 );

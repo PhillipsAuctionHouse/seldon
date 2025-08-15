@@ -12,7 +12,7 @@
   transition: left 0.25s ease-in;
 
   &::after {
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid $black;
     bottom: 0;
     content: '';
     display: flex;

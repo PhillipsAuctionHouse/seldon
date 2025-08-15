@@ -17,7 +17,7 @@ const meta = {
 export default meta;
 
 const Wrapper = ({ title, children }: WrapperProps) => (
-  <div style={{ backgroundColor: '#ccc', width: '100%', padding: '24px' }}>
+  <div style={{ backgroundColor: 'white', width: '100%', padding: '24px' }}>
     <div style={{ backgroundColor: 'white', padding: '12px', width: '400px', margin: '0 auto' }}>
       <div
         style={{

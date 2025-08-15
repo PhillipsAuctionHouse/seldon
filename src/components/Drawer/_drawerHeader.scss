@@ -28,7 +28,7 @@
   &__title {
     @include DistinctDisplay;
 
-    color: $primary-black;
+    color: $text-default;
     font-size: $heading-size4;
     font-variation-settings: 'wght' 600;
     line-height: $body-line-height-size1;
