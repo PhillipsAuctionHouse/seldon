@@ -1,3 +1,10 @@
+# [1.175.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.174.0...v1.175.0) (2025-08-15)
+
+
+### Features
+
+* **stepper:** L3-7123 Create progress component (Part 1) ([#668](https://github.com/PhillipsAuctionHouse/seldon/issues/668)) ([ecce47a](https://github.com/PhillipsAuctionHouse/seldon/commit/ecce47a63fbe139969adeba8aa17dd0a5623984b))
+
 # [1.174.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.173.0...v1.174.0) (2025-08-14)
 
 

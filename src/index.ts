@@ -99,6 +99,7 @@ export * from './patterns/FiltersInline';
 export * from './patterns/SaleCard';
 export * from './patterns/SaleHeaderBanner';
 export * from './patterns/ViewingDetails';
+export * from './components/ProgressIndicator';
 
 export { default as Footer, type FooterProps } from './site-furniture/Footer/Footer';
 export { default as Header, type HeaderProps } from './site-furniture/Header/Header';
