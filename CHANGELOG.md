@@ -1,3 +1,10 @@
+# [1.176.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.175.0...v1.176.0) (2025-08-18)
+
+
+### Features
+
+* **countryPicker:** L3-7243 Build country and country code picker variants ([#677](https://github.com/PhillipsAuctionHouse/seldon/issues/677)) ([19e540e](https://github.com/PhillipsAuctionHouse/seldon/commit/19e540edbf0037b00094de00231a4e2d7ec1c66e))
+
 # [1.175.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.174.0...v1.175.0) (2025-08-15)
 
 
