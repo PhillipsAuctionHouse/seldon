@@ -53,6 +53,10 @@
 @use 'components/Toast/toast';
 @use 'components/ExitGateCard/exitGateCard';
 @use 'components/ComposedModal/composedModal';
+@use 'patterns/CountryPicker/countryPickerOption';
+@use 'patterns/CountryPicker/countryPickerModal';
+@use 'patterns/CountryPicker/countryPickerTrigger';
+@use 'components/ProgressIndicator/progressIndicator';
 @use 'components/DescriptiveRadioButton/descriptiveRadioButton';
 @use 'components/DescriptiveRadioButtonGroup/descriptiveRadioButtonGroup';
 
