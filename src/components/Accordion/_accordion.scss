@@ -34,7 +34,7 @@
   }
 
   &__content--lg {
-    @include text($body2);
+    @include text($bodyMd);
   }
 
   &--transition[data-state='open'] {
@@ -124,7 +124,7 @@
   }
 
   &__text {
-    @include text($string2);
+    @include text($labelMd);
 
     flex: auto;
     font-variation-settings: 'wght' 600;

@@ -44,13 +44,13 @@ describe('Text', () => {
   it('applies the default variant correctly', () => {
     renderText({ children: 'Default Variant' });
 
-    expect(screen.getByText('Default Variant').parentElement).toHaveClass(`${px}-text--body2`);
+    expect(screen.getByText('Default Variant').parentElement).toHaveClass(`${px}-text--bodyMd`);
   });
 
   it('applies the custom variant correctly', () => {
-    renderText({ children: 'Custom Variant', variant: TextVariants.body1 });
+    renderText({ children: 'Custom Variant', variant: TextVariants.bodyLg });
 
-    expect(screen.getByText('Custom Variant').parentElement).toHaveClass(`${px}-text--body1`);
+    expect(screen.getByText('Custom Variant').parentElement).toHaveClass(`${px}-text--bodyLg`);
   });
 
   it('applies additional className correctly', () => {

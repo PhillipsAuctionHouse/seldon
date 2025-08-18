@@ -48,7 +48,7 @@
       ul {
         li {
           a {
-            @include text('snwFlyoutLink');
+            @include text($labelLg);
 
             &:hover {
               text-decoration: underline;
@@ -94,7 +94,7 @@
         }
 
         &__text {
-          @include text('snwHeaderLink');
+          @include text($title3);
         }
       }
 

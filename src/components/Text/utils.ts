@@ -1,13 +1,13 @@
 import { px } from '../../utils';
 import { TextVariants } from './types';
 
-export const determineTextClassName = (variant: TextVariants = TextVariants.body1): string => {
+export const determineTextClassName = (variant: TextVariants = TextVariants.bodyLg): string => {
   // our javascript const doesn't exactly match the tokens
 
   return `${px}-text--${variant.charAt(0).toLowerCase() + variant.slice(1)}`;
 };
 
-export const determineDefaultTextElement = (variant: TextVariants = TextVariants.body1): string => {
+export const determineDefaultTextElement = (variant: TextVariants = TextVariants.bodyLg): string => {
   const loweredVariant = variant.toLowerCase();
 
   if (variant === TextVariants.blockquote) return 'blockquote';

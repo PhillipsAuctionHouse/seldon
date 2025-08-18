@@ -144,7 +144,7 @@
 
   // Buttons & Links
   &__button {
-    @include text($button);
+    @include text($labelMdBold);
   }
 
   &__link {
