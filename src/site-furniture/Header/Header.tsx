@@ -136,14 +136,18 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
       });
 
       resizeObserver.observe(bannerElement);
-      document.documentElement.style.setProperty('--notification-height', `${bannerHeight}px`);
       return () => {
         resizeObserver.disconnect();
       };
     }, [bannerRef, bannerHeight]);
 
     return (
-      <header {...props} className={classnames(`${px}-header`, className)} ref={ref}>
+      <header
+        {...props}
+        className={classnames(`${px}-header`, className)}
+        ref={ref}
+        style={{ '--notification-height': `${bannerHeight}px` } as React.CSSProperties}
+      >
         <div className={`${px}-header__top-row`}>
           <SSRMediaQuery.Media greaterThanOrEqual="md">{languageSelectorElement}</SSRMediaQuery.Media>
           {/** only render language selector in this location on desktop */}
