@@ -6,6 +6,7 @@ import React, {
   forwardRef,
   PropsWithChildren,
   ReactElement,
+  useEffect,
   useState,
 } from 'react';
 import { Icon } from '../../components/Icon';
@@ -43,9 +44,9 @@ export interface HeaderProps extends ComponentProps<'header'> {
    */
   disabled?: boolean;
   /**
-   * Height of the notification banner
+   * Reference to the notification banner
    */
-  bannerHeight?: number;
+  bannerRef?: React.MutableRefObject<HTMLDivElement | null>;
 }
 export type HeaderContextType = {
   /**
@@ -102,7 +103,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
       toggleCloseText = 'Close Menu',
       logoText = 'Home Page',
       disabled,
-      bannerHeight = 0,
+      bannerRef,
       ...props
     },
     ref,
@@ -123,13 +124,26 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     const [activeSubmenuId, setActiveSubmenuId] = useState<string | null>(null);
     const closeTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
+    const [bannerHeight, setBannerHeight] = useState(bannerRef?.current ? bannerRef.current.clientHeight : 0);
+
+    useEffect(() => {
+      const bannerElement = bannerRef?.current;
+      if (!bannerElement) return;
+
+      setBannerHeight(bannerElement.clientHeight);
+      const resizeObserver = new window.ResizeObserver(() => {
+        setBannerHeight(bannerElement.clientHeight);
+      });
+
+      resizeObserver.observe(bannerElement);
+      document.documentElement.style.setProperty('--notification-height', `${bannerHeight}px`);
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }, [bannerRef, bannerHeight]);
+
     return (
-      <header
-        {...props}
-        className={classnames(`${px}-header`, className)}
-        ref={ref}
-        style={{ ['top']: `${bannerHeight}px` } as React.CSSProperties}
-      >
+      <header {...props} className={classnames(`${px}-header`, className)} ref={ref}>
         <div className={`${px}-header__top-row`}>
           <SSRMediaQuery.Media greaterThanOrEqual="md">{languageSelectorElement}</SSRMediaQuery.Media>
           {/** only render language selector in this location on desktop */}

@@ -25,17 +25,10 @@ export interface NavigationListProps extends React.ComponentProps<'ul'> {
    * Rewrite the onClick event
    * */
   onClick?: React.MouseEventHandler<HTMLElement>;
-  /**
-   * Height of the notification banner
-   */
-  bannerHeadingHeight?: number;
 }
 
 const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
-  (
-    { id, children, className, isOffScreen, leftSectionHeading, rightSectionHeading, onClick, bannerHeadingHeight },
-    ref,
-  ) => {
+  ({ id, children, className, isOffScreen, leftSectionHeading, rightSectionHeading, onClick }, ref) => {
     const leftSectionItems = React.Children.toArray(children)
       .map((child) => {
         if (
@@ -76,7 +69,6 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
         role="list"
         className={classNames(className, `${px}-nav__list`, { [`${px}-nav__list--offscreen`]: isOffScreen })}
         ref={ref}
-        style={bannerHeadingHeight != null ? { top: `${bannerHeadingHeight}px` } : undefined}
       >
         {leftSectionItems.length > 0 ? (
           <div className={classNames(`${px}-nav__list__section`, `${px}-nav__list__section--start`)}>

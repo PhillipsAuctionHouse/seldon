@@ -116,22 +116,8 @@ Playground.argTypes = {};
 
 export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: AuthState }) => {
   const [currentLanguage, setCurrentLanguage] = useState(SupportedLanguages.en);
-  const bannerRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const [bannerHeight, setBannerHeight] = useState(0);
-  const [headerHeight, setHeaderHeight] = useState(0);
   const [notificationData, setNotificationData] = useState<React.ReactNode>(<></>);
-
-  const updateHeights = () => {
-    setBannerHeight(bannerRef.current?.clientHeight ?? 0);
-    setHeaderHeight(headerRef.current?.clientHeight ?? 0);
-  };
-
-  useEffect(() => {
-    updateHeights();
-    window.addEventListener('resize', updateHeights);
-    return () => window.removeEventListener('resize', updateHeights);
-  }, [notificationData]);
+  const bannerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -151,7 +137,7 @@ export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: 
   return (
     <div style={{ minHeight: '400px', display: 'flex', flexDirection: 'column' }}>
       <NotificationBanner ref={bannerRef}>{notificationData}</NotificationBanner>
-      <Header {...props} logo={<Icon icon="PhillipsLogo" />} bannerHeight={bannerHeight as number} ref={headerRef}>
+      <Header {...props} logo={<Icon icon="PhillipsLogo" />} bannerRef={bannerRef}>
         <Navigation id={`${px}-main-nav`}>
           <NavigationList id={`${px}-main-nav-list`}>
             <NavigationItemTrigger id="auctions" label="Auctions">
@@ -159,7 +145,6 @@ export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: 
                 id={`${px}-auctions-nav-list`}
                 leftSectionHeading="Upcoming"
                 rightSectionHeading="Auction Information & Services"
-                bannerHeadingHeight={(bannerHeight + headerHeight) as number}
               >
                 <NavigationItem
                   badge="New York"
@@ -305,11 +290,7 @@ export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: 
             </NavigationItemTrigger>
             <NavigationItem href="#" label="Calendar" />
             <NavigationItemTrigger id="departments" label="Departments">
-              <NavigationList
-                id={`${px}-departments-nav-list`}
-                leftSectionHeading="Our Specialist Departments"
-                bannerHeadingHeight={(bannerHeight + headerHeight) as number}
-              >
+              <NavigationList id={`${px}-departments-nav-list`} leftSectionHeading="Our Specialist Departments">
                 <NavigationItem
                   href="#"
                   navGroup="nav-link-start"
@@ -371,7 +352,7 @@ export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: 
         <LanguageSelector onLanguageChange={setCurrentLanguage} currentLanguage={currentLanguage} />
         <UserManagement authState={authState} onLogin={() => console.log('login')} href="/account" />
       </Header>
-      <div style={{ ['paddingTop']: `${bannerHeight + headerHeight}px` } as React.CSSProperties}>
+      <div style={{ paddingTop: `${180 + (bannerRef.current?.offsetHeight || 0)}px` } as React.CSSProperties}>
         {generateLoremIpsum(100)}
       </div>
     </div>
