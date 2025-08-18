@@ -53,8 +53,6 @@
 ) {
   @include DistinctDisplay;
 
-  // UI-QUESTION: should font be DistinctText? cause names are different but DistinctDisplay looks correct
-
   color: $color;
   font-size: $size;
   font-style: $font-style;
