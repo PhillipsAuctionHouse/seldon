@@ -4,20 +4,14 @@
 
 :root {
   .type-block__column--small {
-    text-align: left;
-
     @include font-size-vars--sm;
   }
 
   .type-block__column--medium {
-    text-align: center;
-
     @include font-size-vars--md;
   }
 
   .type-block__column--large {
-    text-align: right;
-
     @include font-size-vars--lg;
   }
 }
