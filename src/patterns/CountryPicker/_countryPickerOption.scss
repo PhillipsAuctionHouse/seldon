@@ -59,3 +59,13 @@
     width: 1px;
   }
 }
+
+// Override focus within styles when phone option is clicked
+// TODO: align with design on focus states since the radio input is hidden
+.#{$px}-country-picker__option--is-phone.#{$px}-country-picker__option--selected {
+  border: 1px solid $pure-black;
+
+  &:focus-within {
+    outline: none;
+  }
+}
