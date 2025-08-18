@@ -1,0 +1,27 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-progress-wizard {
+  border: 5px solid pink;
+
+  &__content {
+    border: 5px solid yellow;
+  }
+
+  &__footer {
+    align-items: stretch;
+    border-top: 1px solid $keyline-gray;
+    display: flex;
+    gap: $spacing-sm;
+    justify-content: stretch;
+    padding: $spacing-sm 0;
+    width: 100%;
+
+    @media (min-width: $breakpoint-md) {
+      border-top: none;
+    }
+  }
+
+  &__btn {
+    flex: 1 1 0;
+  }
+}

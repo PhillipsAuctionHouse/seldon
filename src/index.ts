@@ -124,3 +124,4 @@ export * from './patterns/ObjectTile';
 export * from './utils/hooks';
 export * from './components/DescriptiveRadioButton';
 export * from './components/DescriptiveRadioButtonGroup';
+export * from './patterns/ProgressWizard';
