@@ -29,7 +29,7 @@
     @include DistinctDisplay;
 
     color: $primary-black;
-    font-size: var(--font-size-sm);
+    font-size: $font-size-sm;
     font-variation-settings: 'wght' 600;
     line-height: $line-height-default;
     margin-top: 4px; // better visual align with the close icon
