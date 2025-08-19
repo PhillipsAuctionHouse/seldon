@@ -459,7 +459,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                   className={classnames(`${baseClassName}__input`, {
                     [`${baseClassName}__input--invalid`]: invalid,
                   })}
-                  aria-label={ariaLabelInput ? ariaLabelInput : `${id}-input`}
+                  aria-label={ariaLabelInput}
                   data-testid={`${id}-input`}
                   ref={inputRef}
                 />
@@ -470,7 +470,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                     className={`${baseClassName}__close-button`}
                     data-testid={`${id}-clear-button`}
                     onClick={handleClear}
-                    aria-label={ariaLabelClear ? ariaLabelClear : `${id}-clear`}
+                    aria-label={ariaLabelClear}
                     tabIndex={-1}
                     variant={ButtonVariants.tertiary}
                   >
@@ -479,14 +479,13 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                       height={18}
                       width={18}
                       className={`${baseClassName}__icon-button`}
-                      title={ariaLabelClear ? ariaLabelClear : `${id}-clear`}
                     />
                   </IconButton>
                 )}
 
                 {/* Dropdown toggle button */}
                 <IconButton
-                  aria-label={ariaLabelDropdown ? ariaLabelDropdown : `${id}-dropdown`}
+                  aria-label={ariaLabelDropdown}
                   className={classnames(`${baseClassName}__dropdown-button`, {
                     [`${baseClassName}__dropdown-button--open`]: isOpen,
                   })}
@@ -511,7 +510,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
               <Popover.Portal container={popoverContainerRef?.current || document.body}>
                 <Popover.Content
                   className={`${baseClassName}__content`}
-                  aria-label={ariaLabelContent ? ariaLabelContent : `${id}-content`}
+                  aria-label={ariaLabelContent}
                   side="bottom"
                   sideOffset={-5}
                   align="start"
