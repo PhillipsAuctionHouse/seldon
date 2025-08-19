@@ -106,7 +106,6 @@
     background-color: $pure-white;
     height: calc(100dvh - $header-height);
     overflow-y: auto;
-    position: relative;
     z-index: 10;
 
     &--closed {
@@ -134,8 +133,7 @@
 
     @include isHeaderMobile {
       left: 0;
-      position: absolute;
-      top: var(--header-height);
+      position: relative;
       transition: left 0.25s ease-in-out;
 
       &--closed {

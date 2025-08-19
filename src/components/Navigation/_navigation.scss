@@ -12,9 +12,12 @@
     flex-direction: column;
     justify-content: center;
     padding: 0 $spacing-sm;
-
-    // position: relative;
     width: 100%;
+
+    @include isHeaderMobile {
+      max-height: 600px;
+      overflow-y: auto;
+    }
 
     > .#{$px}-nav__list {
       padding-top: 0;
