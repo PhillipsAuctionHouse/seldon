@@ -1,3 +1,10 @@
+# [1.178.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.177.0...v1.178.0) (2025-08-19)
+
+
+### Features
+
+* **AnnouncementBanner:** L3-7452 Create Announcement Bar ([#681](https://github.com/PhillipsAuctionHouse/seldon/issues/681)) ([f5dccb5](https://github.com/PhillipsAuctionHouse/seldon/commit/f5dccb59d44c6515f63c8640c14ebe559696d4f9))
+
 # [1.177.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.176.1...v1.177.0) (2025-08-19)
 
 
