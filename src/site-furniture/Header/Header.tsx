@@ -146,7 +146,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
         {...props}
         className={classnames(`${px}-header`, className)}
         ref={ref}
-        style={{ '--notification-height': `${bannerHeight}px` } as React.CSSProperties}
+        style={{ '--banner-height': `${bannerHeight}px` } as React.CSSProperties}
       >
         <div className={`${px}-header__top-row`}>
           <SSRMediaQuery.Media greaterThanOrEqual="md">{languageSelectorElement}</SSRMediaQuery.Media>

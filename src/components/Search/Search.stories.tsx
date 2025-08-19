@@ -1,14 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import Search, { type SearchProps } from './Search';
-import { SearchResult } from './SearchResults/SearchResults';
 import { HeaderContext } from '../../site-furniture/Header/Header';
 import { defaultHeaderContext } from '../../site-furniture/Header/utils';
+import Search, { type SearchProps } from './Search';
+import { SearchResult } from './SearchResults/SearchResults';
 
-const fetchData = async (searchQuery: string) => {
-  console.log('searchQuery', searchQuery);
+const fetchData = async () => {
   let searchResults: { makers: Array<SearchResult> } = { makers: [] };
-  // Call to get search results
   searchResults = await new Promise((resolve) => {
     setTimeout(
       () =>
@@ -38,7 +36,7 @@ const StatefulSearch = (props: SearchProps) => {
     // Call to get auto complete results
     if (searchQuery.length > 2) {
       setState('loading');
-      fetchData(searchQuery)
+      fetchData()
         .then((data) => {
           setAutoCompleteResults(data.makers);
           setState('idle');

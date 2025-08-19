@@ -2,7 +2,6 @@ import classnames from 'classnames';
 import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 
-// You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export type NotificationBannerProps = ComponentProps<'div'> & {
   /**
    * The content to display inside the notification banner.
