@@ -206,10 +206,8 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
 
   const handleOpen = useCallback(
     (isOpen: boolean, newValue?: string) => {
-      const hasMetMinimumCharacterCount =
-        (newValue?.length && newValue.length >= countOfCharsBeforeDropdown) ||
-        inputValue.length >=
-          (countOfCharsBeforeDropdown === 1 ? countOfCharsBeforeDropdown : countOfCharsBeforeDropdown - 1);
+      // we only have newValue if the value is being actively typed, otherwise use the inputValue to determine
+      const hasMetMinimumCharacterCount = (newValue?.length || inputValue.length) >= countOfCharsBeforeDropdown;
 
       if (!isOpen || (isOpen && hasMetMinimumCharacterCount)) {
         setIsOpen(isOpen);
@@ -229,7 +227,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
         });
       }
     },
-    [selectedOption, filteredOptions.length, inputValue, countOfCharsBeforeDropdown],
+    [countOfCharsBeforeDropdown, inputValue.length, selectedOption, filteredOptions.length],
   );
 
   // Handle option selection

@@ -4,6 +4,7 @@ import Button from '../Button/Button';
 import { Drawer } from '../Drawer';
 import ComboBox, { ComboBoxProps } from './ComboBox';
 import { ComboBoxOption } from './types';
+import { getYear } from 'date-fns';
 
 const meta = {
   title: 'Components/ComboBox',
@@ -13,7 +14,7 @@ const meta = {
 export default meta;
 
 const birthdays: ComboBoxOption[] = Array.from({ length: 2025 - 1990 + 1 }, (_, i) => {
-  const year = 1990 + i;
+  const year = getYear(new Date()) - i;
   return {
     value: `${year}`,
     label: `${year}`,
