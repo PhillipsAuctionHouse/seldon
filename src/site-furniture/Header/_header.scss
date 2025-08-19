@@ -117,8 +117,8 @@
 
       @include isHeaderMobile {
         flex-direction: column;
-        height: calc(100dvh - var(--header-height) - 1px);
         justify-content: flex-start;
+        min-height: calc(100dvh + var(--header-height));
         padding: 0 $spacing-md;
       }
 

@@ -7,6 +7,10 @@
   justify-content: center;
   width: 100vw;
 
+  @include isHeaderMobile {
+    height: 100vh;
+  }
+
   &__list-container {
     display: flex;
     flex-direction: column;
@@ -15,7 +19,7 @@
     width: 100%;
 
     @include isHeaderMobile {
-      max-height: 600px;
+      min-height: 100vh;
       overflow-y: auto;
     }
 
