@@ -1,3 +1,10 @@
+# [1.177.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.176.1...v1.177.0) (2025-08-19)
+
+
+### Features
+
+* **combobox:** L3-6813 allow specification of minimum chars before opening ([#690](https://github.com/PhillipsAuctionHouse/seldon/issues/690)) ([184c3ae](https://github.com/PhillipsAuctionHouse/seldon/commit/184c3aef7dfc9aacc128469016ab78de2b3d7e3a))
+
 ## [1.176.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.176.0...v1.176.1) (2025-08-19)
 
 
