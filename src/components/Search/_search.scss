@@ -112,7 +112,7 @@
 
         @include isHeaderMobile {
           height: calc(var(--spacing-md) + var(--search-size));
-          line-height: calc(var(--spacing-md) + var(--search-size));
+          line-height: $line-height-default;
           padding: $spacing-md 0;
           position: relative;
           top: calc($spacing-md * -1);

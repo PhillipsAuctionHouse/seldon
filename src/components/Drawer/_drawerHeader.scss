@@ -31,7 +31,7 @@
     color: $primary-black;
     font-size: var(--font-size-sm);
     font-variation-settings: 'wght' 600;
-    line-height: calc(var(--font-size-sm) + var(--font-size-step));
+    line-height: $line-height-default;
     margin-top: 4px; // better visual align with the close icon
     overflow: hidden;
     text-align: center;
