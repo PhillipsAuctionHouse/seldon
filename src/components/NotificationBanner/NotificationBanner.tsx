@@ -23,7 +23,7 @@ const NotificationBanner = forwardRef<HTMLDivElement, NotificationBannerProps>((
   const { children, id } = props;
 
   return (
-    <div {...commonProps} className={classnames(baseClassName, className)} ref={ref} id={id}>
+    <div {...commonProps} {...props} className={classnames(baseClassName, className)} ref={ref} id={id}>
       {children}
     </div>
   );
