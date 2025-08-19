@@ -150,7 +150,7 @@ describe('Header bannerHeight and ResizeObserver', () => {
     render(<TestHeaderWithBanner bannerContentHeight={100} />);
     const header = screen.getByRole('banner');
     await waitFor(() => {
-      const style = header.style.getPropertyValue('--notification-height');
+      const style = header.style.getPropertyValue('--banner-height');
       expect(style).toBe('100px');
     });
   });
