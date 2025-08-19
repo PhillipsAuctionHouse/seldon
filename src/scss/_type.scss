@@ -56,7 +56,8 @@
   color: $color;
   font-size: $size;
   font-style: $font-style;
-  font-variation-settings: 'wght' 400;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+  font-weight: 400;
   line-height: $line-height;
   text-decoration: $text-decoration;
   text-transform: $transform-style;
