@@ -1,3 +1,10 @@
+## [1.176.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.176.0...v1.176.1) (2025-08-19)
+
+
+### Bug Fixes
+
+* **drawer:** L3-7407 explicitly unset pointer-events ([#691](https://github.com/PhillipsAuctionHouse/seldon/issues/691)) ([233d8e6](https://github.com/PhillipsAuctionHouse/seldon/commit/233d8e6c6c0cbe9268a99cbe5d6791ae3bd0b375))
+
 # [1.176.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.175.0...v1.176.0) (2025-08-18)
 
 
