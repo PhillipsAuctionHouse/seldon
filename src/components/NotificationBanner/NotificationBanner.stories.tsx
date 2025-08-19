@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { Meta } from '@storybook/react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LanguageSelector } from '../../patterns/LanguageSelector';
 import { AuthState } from '../../patterns/UserManagement/types';
 import UserManagement from '../../patterns/UserManagement/UserManagement';
@@ -26,32 +26,33 @@ const generateLoremIpsum = (numOfParagraphs = 10) => {
 };
 
 const fetchData = async (searchQuery: string) => {
-  console.log('searchQuery', searchQuery);
-  let searchResults: { makers: Array<SearchResult> } = { makers: [] };
-  // Call to get search results
-  searchResults = await new Promise((resolve) => {
-    setTimeout(
-      () =>
-        resolve({
-          makers: [
-            { id: 'result1', label: 'Name', url: 'http://www.example.com' },
-            { id: 'result2', label: 'Another Name', url: 'http://www.example.com' },
-            { id: 'result3', label: 'Yet Another Name', url: 'http://www.example.com' },
-            { id: 'result4', label: 'Name', url: 'http://www.example.com' },
-            { id: 'result5', label: 'Another Name', url: 'http://www.example.com' },
-            { id: 'result6', label: 'Yet Another Name Yet Again', url: 'http://www.example.com' },
-            { id: 'result7', label: 'Name', url: 'http://www.example.com' },
-            { id: 'result8', label: 'Another Name', url: 'http://www.example.com' },
-            { id: 'result9', label: 'Yet Another Name Yet Again', url: 'http://www.example.com' },
-            { id: 'result10', label: 'Name', url: 'http://www.example.com' },
-            { id: 'result11', label: 'Another Name', url: 'http://www.example.com' },
-            { id: 'result12', label: 'Yet Another Name Yet Again', url: 'http://www.example.com' },
-          ],
-        }),
-      2000,
-    );
-  });
-  return searchResults;
+  if (searchQuery) {
+    let searchResults: { makers: Array<SearchResult> } = { makers: [] };
+    // Call to get search results
+    searchResults = await new Promise((resolve) => {
+      setTimeout(
+        () =>
+          resolve({
+            makers: [
+              { id: 'result1', label: 'Name', url: 'http://www.example.com' },
+              { id: 'result2', label: 'Another Name', url: 'http://www.example.com' },
+              { id: 'result3', label: 'Yet Another Name', url: 'http://www.example.com' },
+              { id: 'result4', label: 'Name', url: 'http://www.example.com' },
+              { id: 'result5', label: 'Another Name', url: 'http://www.example.com' },
+              { id: 'result6', label: 'Yet Another Name Yet Again', url: 'http://www.example.com' },
+              { id: 'result7', label: 'Name', url: 'http://www.example.com' },
+              { id: 'result8', label: 'Another Name', url: 'http://www.example.com' },
+              { id: 'result9', label: 'Yet Another Name Yet Again', url: 'http://www.example.com' },
+              { id: 'result10', label: 'Name', url: 'http://www.example.com' },
+              { id: 'result11', label: 'Another Name', url: 'http://www.example.com' },
+              { id: 'result12', label: 'Yet Another Name Yet Again', url: 'http://www.example.com' },
+            ],
+          }),
+        2000,
+      );
+    });
+    return searchResults;
+  }
 };
 
 const StatefulSearch = (props: SearchProps) => {
@@ -68,7 +69,7 @@ const StatefulSearch = (props: SearchProps) => {
       setState('loading');
       fetchData(searchQuery)
         .then((data) => {
-          setAutoCompleteResults(data.makers);
+          setAutoCompleteResults(data?.makers || []);
           setState('idle');
         })
         .catch((error) => console.error(error));
@@ -117,7 +118,6 @@ Playground.argTypes = {};
 export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: AuthState }) => {
   const [currentLanguage, setCurrentLanguage] = useState(SupportedLanguages.en);
   const [notificationData, setNotificationData] = useState<React.ReactNode>(<></>);
-  const bannerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -136,225 +136,225 @@ export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: 
 
   return (
     <div style={{ minHeight: '400px', display: 'flex', flexDirection: 'column' }}>
-      <NotificationBanner ref={bannerRef}>{notificationData}</NotificationBanner>
-      <Header {...props} logo={<Icon icon="PhillipsLogo" />} bannerRef={bannerRef}>
-        <Navigation id={`${px}-main-nav`}>
-          <NavigationList id={`${px}-main-nav-list`}>
-            <NavigationItemTrigger id="auctions" label="Auctions">
-              <NavigationList
-                id={`${px}-auctions-nav-list`}
-                leftSectionHeading="Upcoming"
-                rightSectionHeading="Auction Information & Services"
-              >
-                <NavigationItem
-                  badge="New York"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Editions & Works on Paper"
-                />
-                <NavigationItem
-                  badge="New York"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Design"
-                />
-                <NavigationItem
-                  badge="Geneva"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Reloaded: The Rebirth of Mechanical Watchmaking, 1980-1999"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Phillips Watches Online: The Geneva Sessions, Fall 2024"
-                />
-                <NavigationItem
-                  badge="Hong Kong"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Modern & Contemporary Art Evening Sale"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Damien Hirst: Online Auction"
-                />
-                <NavigationItem
-                  badge="Hong Kong"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="New Now: Modern & Contemporary Art"
-                />
-                <NavigationItem
-                  badge="London"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Casa Fornaroli"
-                />
-                <NavigationItem
-                  badge="Geneva"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="The Geneva Watch Auction: XVII"
-                />
-                <NavigationItem
-                  badge="New York"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Modern & Contemporary Art Day Sale—Morning Session"
-                />
-                <NavigationItem
-                  badge="New York"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Modern & Contemporary Art Day Sale—Afternoon Session"
-                />
-                <NavigationItem
-                  badge="New York"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Modern & Contemporary Art Evening Sale"
-                />
-                <NavigationItem
-                  badge="London"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Wired: Online Auction"
-                />
-                <NavigationItem
-                  badge="Hong Kong "
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="The Imperial Patek Philippe Sale"
-                />
-                <NavigationItem
-                  badge="Hong Kong"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Disruptors: Evening Sale of Modern & Contemporary Art, Design and Watches"
-                />
-                <NavigationItem
-                  href="#"
-                  isViewAllLink
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.link}
-                  label="View All"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-end"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Auction Calendar"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-end"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Auction Results"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-end"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Artists & Makers"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-end"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="How To Buy"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-end"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Remote Bidding"
-                />
-              </NavigationList>
-            </NavigationItemTrigger>
-            <NavigationItem href="#" label="Calendar" />
-            <NavigationItemTrigger id="departments" label="Departments">
-              <NavigationList id={`${px}-departments-nav-list`} leftSectionHeading="Our Specialist Departments">
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Modern & Contemporary Art"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Design"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Editions"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Jewels"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Photographs"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Watches"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Private Sales"
-                />
-                <NavigationItem
-                  href="#"
-                  isViewAllLink
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.link}
-                  label="View All"
-                />
-              </NavigationList>
-            </NavigationItemTrigger>
-            <NavigationItem href="#" id="exhibitions" label="Exhibitions" />
-            <NavigationItem href="#" label="Perpetual" />
-            <NavigationItem href="#" label="Dropshop" />
-            <NavigationItem href="#" label="Editorial" />
-          </NavigationList>
-          <StatefulSearch placeholder="Search for makers" />
-        </Navigation>
-        <LanguageSelector onLanguageChange={setCurrentLanguage} currentLanguage={currentLanguage} />
-        <UserManagement authState={authState} onLogin={() => console.log('login')} href="/account" />
-      </Header>
-      <div style={{ paddingTop: `${180 + (bannerRef.current?.offsetHeight || 0)}px` } as React.CSSProperties}>
-        {generateLoremIpsum(100)}
+      <div style={{ position: 'sticky', top: 0, zIndex: 500 }}>
+        <NotificationBanner>{notificationData}</NotificationBanner>
+        <Header {...props} logo={<Icon icon="PhillipsLogo" />}>
+          <Navigation id={`${px}-main-nav`}>
+            <NavigationList id={`${px}-main-nav-list`}>
+              <NavigationItemTrigger id="auctions" label="Auctions">
+                <NavigationList
+                  id={`${px}-auctions-nav-list`}
+                  leftSectionHeading="Upcoming"
+                  rightSectionHeading="Auction Information & Services"
+                >
+                  <NavigationItem
+                    badge="New York"
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Editions & Works on Paper"
+                  />
+                  <NavigationItem
+                    badge="New York"
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Design"
+                  />
+                  <NavigationItem
+                    badge="Geneva"
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Reloaded: The Rebirth of Mechanical Watchmaking, 1980-1999"
+                  />
+                  <NavigationItem
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Phillips Watches Online: The Geneva Sessions, Fall 2024"
+                  />
+                  <NavigationItem
+                    badge="Hong Kong"
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Modern & Contemporary Art Evening Sale"
+                  />
+                  <NavigationItem
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Damien Hirst: Online Auction"
+                  />
+                  <NavigationItem
+                    badge="Hong Kong"
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="New Now: Modern & Contemporary Art"
+                  />
+                  <NavigationItem
+                    badge="London"
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Casa Fornaroli"
+                  />
+                  <NavigationItem
+                    badge="Geneva"
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="The Geneva Watch Auction: XVII"
+                  />
+                  <NavigationItem
+                    badge="New York"
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Modern & Contemporary Art Day Sale—Morning Session"
+                  />
+                  <NavigationItem
+                    badge="New York"
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Modern & Contemporary Art Day Sale—Afternoon Session"
+                  />
+                  <NavigationItem
+                    badge="New York"
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Modern & Contemporary Art Evening Sale"
+                  />
+                  <NavigationItem
+                    badge="London"
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Wired: Online Auction"
+                  />
+                  <NavigationItem
+                    badge="Hong Kong "
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="The Imperial Patek Philippe Sale"
+                  />
+                  <NavigationItem
+                    badge="Hong Kong"
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Disruptors: Evening Sale of Modern & Contemporary Art, Design and Watches"
+                  />
+                  <NavigationItem
+                    href="#"
+                    isViewAllLink
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.link}
+                    label="View All"
+                  />
+                  <NavigationItem
+                    href="#"
+                    navGroup="nav-link-end"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Auction Calendar"
+                  />
+                  <NavigationItem
+                    href="#"
+                    navGroup="nav-link-end"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Auction Results"
+                  />
+                  <NavigationItem
+                    href="#"
+                    navGroup="nav-link-end"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Artists & Makers"
+                  />
+                  <NavigationItem
+                    href="#"
+                    navGroup="nav-link-end"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="How To Buy"
+                  />
+                  <NavigationItem
+                    href="#"
+                    navGroup="nav-link-end"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Remote Bidding"
+                  />
+                </NavigationList>
+              </NavigationItemTrigger>
+              <NavigationItem href="#" label="Calendar" />
+              <NavigationItemTrigger id="departments" label="Departments">
+                <NavigationList id={`${px}-departments-nav-list`} leftSectionHeading="Our Specialist Departments">
+                  <NavigationItem
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Modern & Contemporary Art"
+                  />
+                  <NavigationItem
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Design"
+                  />
+                  <NavigationItem
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Editions"
+                  />
+                  <NavigationItem
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Jewels"
+                  />
+                  <NavigationItem
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Photographs"
+                  />
+                  <NavigationItem
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Watches"
+                  />
+                  <NavigationItem
+                    href="#"
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.snwFlyoutLink}
+                    label="Private Sales"
+                  />
+                  <NavigationItem
+                    href="#"
+                    isViewAllLink
+                    navGroup="nav-link-start"
+                    navType={LinkVariants.link}
+                    label="View All"
+                  />
+                </NavigationList>
+              </NavigationItemTrigger>
+              <NavigationItem href="#" id="exhibitions" label="Exhibitions" />
+              <NavigationItem href="#" label="Perpetual" />
+              <NavigationItem href="#" label="Dropshop" />
+              <NavigationItem href="#" label="Editorial" />
+            </NavigationList>
+            <StatefulSearch placeholder="Search for makers" />
+          </Navigation>
+          <LanguageSelector onLanguageChange={setCurrentLanguage} currentLanguage={currentLanguage} />
+          <UserManagement authState={authState} onLogin={() => console.log('login')} href="/account" />
+        </Header>
       </div>
+      <div>{generateLoremIpsum(100)}</div>
     </div>
   );
 };

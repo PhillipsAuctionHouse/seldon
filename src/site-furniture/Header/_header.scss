@@ -6,8 +6,7 @@
   border-bottom: 1px solid $light-gray;
   display: flex;
   flex-direction: column;
-  position: fixed;
-  top: var(--notification-height);
+  position: static;
   width: 100%;
   z-index: 10;
 
@@ -140,7 +139,6 @@
       transition: left 0.25s ease-in-out;
 
       &--closed {
-        display: unset;
         left: -100%;
       }
     }

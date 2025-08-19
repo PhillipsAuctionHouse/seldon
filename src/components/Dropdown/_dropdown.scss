@@ -49,7 +49,7 @@
     max-height: var(--radix-select-content-available-height);
     overflow: hidden;
     position: relative;
-    z-index: 10;
+    z-index: $z-index-notification-banner;
   }
 
   &__scroll-button,
