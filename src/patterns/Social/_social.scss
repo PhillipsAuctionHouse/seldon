@@ -56,7 +56,7 @@ $num_icons: 5;
   &.#{$px}-social {
     ul {
       align-items: center;
-      border-top: 1px solid $grey-light;
+      border-top: 1px solid $grey-50;
       display: flex;
       gap: 0 $icon_gap;
       justify-content: flex-start;

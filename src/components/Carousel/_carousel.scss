@@ -145,21 +145,21 @@
 
     &:focus-visible {
       border-radius: 50%;
-      outline: 0.5px solid $black;
+      outline: 0.5px solid $black-100;
 
       &-dot {
         &:hover {
           background-color: transparent;
-          outline: 1px solid $black;
+          outline: 1px solid $black-100;
         }
       }
     }
   }
 
   &-dot {
-    background-color: $grey-light;
+    background-color: $grey-50;
     border-radius: 50%;
-    outline-color: $grey-light;
+    outline-color: $grey-50;
 
     &--md {
       height: 100%;
@@ -173,15 +173,15 @@
 
     &:hover {
       background-color: transparent;
-      outline: 1px solid $black;
+      outline: 1px solid $black-100;
     }
 
     &--selected {
-      background-color: $black;
-      outline-color: $black;
+      background-color: $black-100;
+      outline-color: $black-100;
 
       &:hover {
-        background-color: $black;
+        background-color: $black-100;
         outline: none;
       }
     }

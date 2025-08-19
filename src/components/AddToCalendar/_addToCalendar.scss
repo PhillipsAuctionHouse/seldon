@@ -29,8 +29,8 @@
   }
 
   &-atcb-list {
-    background: $white;
-    border: 1px solid$grey-light;
+    background: $white-100;
+    border: 1px solid $grey-50;
   }
 
   &-atcb-item {
@@ -73,7 +73,7 @@
 
       &:hover,
       &:focus-visible {
-        color: $black;
+        color: $black-100;
         outline: none;
         text-decoration: none;
       }

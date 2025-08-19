@@ -79,7 +79,7 @@ const designIcons = [
   'AdminSearch',
 ] as const;
 export const IconGrid = (props: IconProps) => {
-  const [color, setColor] = useState<string>('$black');
+  const [color, setColor] = useState<string>('$black-100');
   const [size, setSize] = useState<string>('16px');
   const baseClassName = 'icon-grid-wrapper';
   const isDarkMode = color === '$white';
@@ -105,7 +105,7 @@ export const IconGrid = (props: IconProps) => {
           </option>
         </Select>
         <Select id="color" labelText="Icon Color" onChange={(e) => handleColorChange(e.target.value)}>
-          <option key="$black" value="$black">
+          <option key="$black-100" value="$black-100">
             Black
           </option>
           <option key="$white" value="$white">

@@ -1,7 +1,7 @@
 import Icon from './Icon';
 import { render } from '@testing-library/react';
 
-const vars = vi.hoisted(() => '$black: #000000;\n$test-color: #FF0000;\n');
+const vars = vi.hoisted(() => '$black-100: #000000;\n$test-color: #FF0000;\n');
 vi.mock('#scss/_vars.scss?raw', () => ({ default: vars }));
 
 describe('Icon', () => {
@@ -16,7 +16,7 @@ describe('Icon', () => {
   });
 
   it('should apply correct height and width styles based on props', () => {
-    const { getByTestId } = render(<Icon icon="Account" height={32} width={32} color="$black" />);
+    const { getByTestId } = render(<Icon icon="Account" height={32} width={32} color="$black-100" />);
     const icon = getByTestId('icon-account');
     expect(icon).toHaveAttribute('height', '32');
     expect(icon).toHaveAttribute('width', '32');

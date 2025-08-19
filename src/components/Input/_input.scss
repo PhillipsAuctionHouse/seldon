@@ -30,9 +30,9 @@ $lg: #{$px}-input--lg;
   &__wrapper {
     @include text($string2);
 
-    accent-color: $black;
+    accent-color: $black-100;
     align-items: center;
-    border: 1px solid $black;
+    border: 1px solid $black-100;
     border-radius: 0.1875rem;
     display: inline-flex;
     font-variation-settings: 'wght' 600;
@@ -74,8 +74,8 @@ $lg: #{$px}-input--lg;
   &__input {
     @include text($string2);
 
-    accent-color: $black;
-    border: 1px solid $black;
+    accent-color: $black-100;
+    border: 1px solid $black-100;
     border-radius: 0.1875rem;
     font-variation-settings: 'wght' 600;
     margin-bottom: 0.25rem;
@@ -90,8 +90,8 @@ $lg: #{$px}-input--lg;
     }
 
     &:hover {
-      accent-color: $CTA-hover;
-      border-color: $CTA-hover;
+      accent-color: $cta-hover;
+      border-color: $cta-hover;
     }
   }
 

@@ -40,7 +40,7 @@ Playground.args = {
   icon: Object.keys(iconComponents)[0] as IconName,
   height: 24,
   width: 24,
-  color: '$black',
+  color: '$black-100',
 };
 
 Playground.argTypes = {

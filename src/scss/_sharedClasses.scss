@@ -62,10 +62,10 @@ button.#{$px}-skeleton {
 
 @keyframes skeleton-pulse {
   0% {
-    background-color: $grey-light;
+    background-color: $grey-50;
   }
 
   100% {
-    background-color: $black25;
+    background-color: $black-25;
   }
 }

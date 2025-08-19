@@ -2,9 +2,9 @@
 
 .#{$px}-toast {
   align-items: center;
-  background-color: $black;
+  background-color: $black-100;
   border-radius: 4px;
-  color: $white;
+  color: $white-100;
   column-gap: $spacing-sm;
   display: grid;
   grid-template-areas: 'title action';

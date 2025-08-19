@@ -11,22 +11,49 @@ const colorSections = [
     ),
     colorBlocks: [
       {
-        blockTitle: 'Primary Palette',
+        blockTitle: 'White',
         blockDescription: (
           <span className="p">
-            White is used widely for clarity and simplicity. Black is used sparingly to emphasise key actions or
-            content. The proportion lets us be more precise with how we use black to accent actions and text.
+            White is used widely to create clarity and simplicity. It provides space for content to stand out and
+            supports a clean, minimal experience.
           </span>
         ),
         colors: [
-          { label: '$black', hex: '#000000' },
-          { label: '$black75', hex: 'rgba(0, 0, 0, 0.75)' },
-          { label: '$black50', hex: 'rgba(0, 0, 0, 0.50)' },
-          { label: '$black25', hex: 'rgba(0, 0, 0, 0.25)' },
-          { label: '$white', hex: '#ffffff' },
-          { label: '$white75', hex: 'rgba(255, 255, 255, 0.75)' },
-          { label: '$white50', hex: 'rgba(255, 255, 255, 0.50)' },
-          { label: '$white25', hex: 'rgba(255, 255, 255, 0.25)' },
+          { label: '$white-100', hex: '#ffffff' },
+          { label: '$white-75', hex: 'rgba(255, 255, 255, 0.75)' },
+          { label: '$white-50', hex: 'rgba(255, 255, 255, 0.50)' },
+          { label: '$white-25', hex: 'rgba(255, 255, 255, 0.25)' },
+        ],
+      },
+      {
+        blockTitle: 'Black',
+        blockDescription: (
+          <span className="p">
+            Black is used sparingly to emphasise key actions and important content. Its limited use ensures precision
+            and impact when used for text or interactions.
+          </span>
+        ),
+        colors: [
+          { label: '$black-100', hex: '#000000' },
+          { label: '$black-75', hex: 'rgba(0, 0, 0, 0.75)' },
+          { label: '$black-50', hex: 'rgba(0, 0, 0, 0.50)' },
+          { label: '$black-25', hex: 'rgba(0, 0, 0, 0.25)' },
+        ],
+      },
+      {
+        blockTitle: 'Neutrals - WIP',
+        blockDescription: (
+          <span className="p">
+            Our neutral palette supports the primary colours by offering softer alternatives for UI elements like
+            backgrounds, outlines, dividers, and key-lines - especially in cases where pure black may feel too harsh or
+            dominant.
+          </span>
+        ),
+        colors: [
+          { label: 'placeholder', hex: '#000000' },
+          { label: 'placeholder', hex: 'rgba(0, 0, 0, 0.75)' },
+          { label: 'placeholder', hex: 'rgba(0, 0, 0, 0.50)' },
+          { label: 'placeholder', hex: 'rgba(0, 0, 0, 0.25)' },
         ],
       },
     ],
@@ -42,46 +69,19 @@ const colorSections = [
     ),
     colorBlocks: [
       {
-        blockTitle: 'Secondary Highlight',
+        blockTitle: 'Highlight',
         blockDescription: (
           <span className="p">
             The secondary highlight palette adds expression. We use these colours sparingly for wayfinding or special
-            brand moments
+            brand moments.
           </span>
         ),
         colors: [
-          { label: '$secondary-yellow', hex: '#fff90a' },
-          { label: '$secondary-green', hex: '#46ea77' },
-          { label: '$secondary-blue', hex: '#0065fc' },
-          { label: '$secondary-red', hex: '#ff3d0a' },
-          { label: '$secondary-purple', hex: '#802dfa' },
-        ],
-      },
-    ],
-  },
-  {
-    sectionTitle: 'Greys',
-    sectionDescription: (
-      <span className="p">
-        Our neutral palette supports the primary colours by offering softer alternatives for UI elements like
-        backgrounds, outlines, dividers, and key-lines - especially in cases where pure black may feel too harsh or
-        dominant.
-      </span>
-    ),
-    colorBlocks: [
-      {
-        blockTitle: 'Neutral Palette (Greys)',
-        blockDescription: (
-          <span className="p">
-            Grey is a neutral colour and is the foundation of the colour system. Many elements in UI design use
-            different shades of grey - text, form fields, backgrounds, dividers - are usually grey.
-          </span>
-        ),
-        colors: [
-          { label: '$grey-darkest', hex: '#545454' },
-          { label: '$grey-dark', hex: '#75716f' },
-          { label: '$grey-light', hex: '#eae9e6' },
-          { label: '$grey-lightest', hex: '#f9f8f7' },
+          { label: '$highlight-yellow', hex: '#fff90a' },
+          { label: '$highlight-green', hex: '#46ea77' },
+          { label: '$highlight-blue', hex: '#0065fc' },
+          { label: '$highlight-red', hex: '#ff3d0a' },
+          { label: '$highlight-purple', hex: '#802dfa' },
         ],
       },
     ],
@@ -96,16 +96,33 @@ const colorSections = [
     ),
     colorBlocks: [
       {
-        blockTitle: 'Success & Warning',
+        blockTitle: 'Greys',
         blockDescription: (
           <span className="p">
-            Success and warning colours are used consistently across UI elements to indicate positive actions, status
-            updates, or critical errors.
+            Greys form the functional foundation of our colour system. They provide the base for text, form fields,
+            backgrounds, and dividers, ensuring consistency and balance across the UI
           </span>
         ),
         colors: [
-          { label: '$positive-green', hex: '#00cc39' },
-          { label: '$negative-red', hex: '#ea0404' },
+          { label: '$grey-100', hex: '#545454' },
+          { label: '$grey-75', hex: '#75716f' },
+          { label: '$grey-50', hex: '#eae9e6' },
+          { label: '$grey-25', hex: '#f9f8f7' },
+        ],
+      },
+      {
+        blockTitle: 'Success, warning and focus',
+        blockDescription: (
+          <span className="p">
+            Success and warning colours are used consistently across UI elements to indicate positive actions, status
+            updates, or critical errors. <br /> Focus Blue is reserved for keyboard navigation, appearing as the focus
+            state when users move through the site with the Tab key.
+          </span>
+        ),
+        colors: [
+          { label: '$success-default', hex: '#00cc39' },
+          { label: '$warning-default', hex: '#ea0404' },
+          { label: '$focus-default', hex: '#0077CC' },
         ],
       },
     ],
@@ -129,8 +146,8 @@ const colorSections = [
         ),
         colors: [
           { label: '$text-default', hex: '#000000' },
-          { label: '$text-inverted', hex: '#ffffff' },
           { label: '$text-supporting', hex: '#545454' },
+          { label: '$text-inverted', hex: '#ffffff' },
         ],
       },
       {
@@ -142,10 +159,11 @@ const colorSections = [
           </span>
         ),
         colors: [
-          { label: '$CTA-default', hex: '#000000' },
-          { label: '$CTA-disabled', hex: '#eae9e6' },
-          { label: '$CTA-hover', hex: '#75716f' },
-          { label: '$CTA-focus', hex: '#75716f' },
+          { label: '$cta-default', hex: '#000000' },
+          { label: '$cta-focus', hex: '#545454' },
+          { label: '$cta-inactive', hex: '#75716f' },
+          { label: '$cta-hover', hex: '#75716f' },
+          { label: '$cta-disabled', hex: '#eae9e6' },
         ],
       },
       {
@@ -157,11 +175,11 @@ const colorSections = [
           </span>
         ),
         colors: [
-          { label: '$BG-default', hex: '#ffffff' },
-          { label: '$BG-soft', hex: '#f9f8f7' },
-          { label: '$keylines', hex: '#eae9e6' },
-          { label: '$BG-inverted', hex: '#000000' },
-          { label: '$BG-overlay', hex: 'rgba(0, 0, 0, 50%)' },
+          { label: '$bg-inverted', hex: '#000000' },
+          { label: '$bg-overlay', hex: 'rgba(0, 0, 0, 50%)' },
+          { label: '$bg-border', hex: '#eae9e6' },
+          { label: '$bg-soft', hex: '#f9f8f7' },
+          { label: '$bg-default', hex: '#ffffff' },
         ],
       },
       {
@@ -174,9 +192,9 @@ const colorSections = [
           </span>
         ),
         colors: [
-          { label: '$win-notification', hex: '#00cc39' },
-          { label: '$outbid-notification', hex: '#ea0404' },
-          { label: '$event-status', hex: '#0065fc' },
+          { label: '$success-notification', hex: '#00cc39' },
+          { label: '$warning-notification', hex: '#ea0404' },
+          { label: '$status-info', hex: '#0065fc' },
         ],
       },
     ],

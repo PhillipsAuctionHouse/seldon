@@ -6,31 +6,32 @@ $px: seldon;
 ///////////////////////
 
 // Primary color palette
-$black: #000;
-$black75: rgba(0, 0, 0, 75%);
-$black50: rgba(0, 0, 0, 50%);
-$black25: rgba(0, 0, 0, 25%);
-$white: #fff;
-$white75: rgba(255, 255, 255, 75%);
-$white50: rgba(255, 255, 255, 50%);
-$white25: rgba(255, 255, 255, 25%);
+$black-100: #000;
+$black-75: rgba(0, 0, 0, 75%);
+$black-50: rgba(0, 0, 0, 50%);
+$black-25: rgba(0, 0, 0, 25%);
+$white-100: #fff;
+$white-75: rgba(255, 255, 255, 75%);
+$white-50: rgba(255, 255, 255, 50%);
+$white-25: rgba(255, 255, 255, 25%);
 
 // Secondary color palette
-$secondary-yellow: #fff90a;
-$secondary-green: #46ea77;
-$secondary-blue: #0065fc;
-$secondary-red: #ff3d0a;
-$secondary-purple: #802dfa;
+$highlight-yellow: #fff90a;
+$highlight-green: #46ea77;
+$highlight-blue: #0065fc;
+$highlight-red: #ff3d0a;
+$highlight-purple: #802dfa;
 
 // Neutral color palette
-$grey-darkest: #545454;
-$grey-dark: #75716f;
-$grey-light: #eae9e6;
-$grey-lightest: #f9f8f7;
+$grey-100: #545454;
+$grey-75: #75716f;
+$grey-50: #eae9e6;
+$grey-25: #f9f8f7;
 
 // Functional color palette
-$positive-green: #00cc39;
-$negative-red: #ea0404;
+$success-default: #00cc39;
+$warning-default: #ea0404;
+$focus-default: #07c;
 
 // Semantic: Text
 $text-default: #000;
@@ -38,80 +39,82 @@ $text-inverted: #fff;
 $text-supporting: #545454;
 
 // Semantic: CTAs
-$CTA-default: #000;
-$CTA-disabled: #eae9e6;
-$CTA-hover: #75716f;
-$CTA-focus: #75716f;
+$cta-default: #000;
+$cta-disabled: #eae9e6;
+$cta-hover: #75716f;
+$cta-inactive: #75716f;
+$cta-focus: #545454;
 
 // Semantic: Background
-$BG-default: #fff;
-$BG-soft: #f9f8f7;
-$keylines: #eae9e6;
-$BG-inverted: #000;
-$BG-overlay: rgba(0, 0, 0, 50%);
+$bg-default: #fff;
+$bg-soft: #f9f8f7;
+$bg-border: #eae9e6;
+$bg-inverted: #000;
+$bg-overlay: rgba(0, 0, 0, 50%);
 
 // Semantic: Success, warning & status
-$win-notification: #00cc39;
-$outbid-notification: #ea0404;
-$event-status: #0065fc;
+$success-notification: #00cc39;
+$warning-notification: #ea0404;
+$status-info: #0065fc;
 
 // admin colors
 $admin-alert: #f24a4a;
 $admin-success: #10bc94;
 
-// LEGACY MAPPING:
-// --- Primary color palette ---
-$pure-black: $black;
-$primary-black: $black75;
+// LEGACY MAPPING (updated to new tokens):
+// --- Legacy Primary color palette ---
+$pure-black: $black-100;
+$primary-black: $black-75;
+$white: $white-100;
 
-// --- Utilitarian color palette ---
-$soft-black: $grey-darkest;
-$dark-gray: $grey-dark;
-$soft-black-2: $grey-darkest;
-$keyline-gray: $grey-dark;
-$medium-gray: $grey-light;
-$soft-gray: $grey-lightest;
-$pale-gray: $grey-lightest;
-$light-gray: $grey-light;
-$off-white: $grey-lightest;
+// --- Legacy Utilitarian color palette ---
+$soft-black: $grey-100;
+$dark-gray: $grey-75;
+$soft-black-2: $grey-100;
+$keyline-gray: $grey-75;
+$medium-gray: $grey-50;
+$soft-gray: $grey-25;
+$pale-gray: $grey-25;
+$light-gray: $grey-50;
+$off-white: $grey-25;
 
-// --- Notification color palette ---
-$error-red: $negative-red;
-$error-pink: $secondary-red;
-$warn-yellow: $secondary-yellow;
-$post-sale-pink: $secondary-red;
-$cta-blue: $secondary-blue;
-$badge-blue: $secondary-blue;
+// --- Legacy Notification color palette ---
+$error-red: $highlight-red;
+$error-pink: $highlight-purple;
+$warn-yellow: $highlight-yellow;
+$post-sale-pink: $highlight-purple;
+$cta-blue: $highlight-blue;
+$badge-blue: $highlight-blue;
 
-// --- AM color palette ---
-$widget-blue: $secondary-blue;
-$widget-green: $secondary-green;
-$widget-maroon: $secondary-red;
-$widget-red: $secondary-red;
-$clock-widget-blue: $widget-blue;
-$clock-widget-green: $widget-green;
-$clock-widget-maroon: $widget-maroon;
-$clock-widget-red: $widget-red;
+// --- Legacy AM color palette ---
+$widget-blue: $highlight-blue;
+$widget-green: $highlight-green;
+$widget-maroon: $highlight-red;
+$widget-red: $highlight-red;
+$clock-widget-blue: $highlight-blue;
+$clock-widget-green: $highlight-green;
+$clock-widget-maroon: $highlight-red;
+$clock-widget-red: $highlight-red;
 
-// --- Articker color palette ---
-$articker-red: $secondary-red;
-$articker-orange: $secondary-yellow;
-$articker-red-orange-gradient: linear-gradient(90deg, $secondary-red, $secondary-yellow);
-$overlay-black: $black75;
+// --- Legacy Articker color palette ---
+$articker-red: $highlight-red;
+$articker-orange: $highlight-yellow;
+$articker-red-orange-gradient: linear-gradient(90deg, $highlight-red, $highlight-yellow);
+$overlay-black: $black-75;
 
 // --- Legacy legacy mapping ---
-$pure-white: $white;
-$post-sale-magenta: $post-sale-pink;
+$pure-white: $white-100;
+$post-sale-magenta: $highlight-purple;
 
-// --- Text variables ---
-$header-color: $black;
-$text-color: $grey-darkest;
+// --- Legacy Text variables ---
+$header-color: $black-100;
+$text-color: $grey-100;
 
-// --- Interactive Colors ---
-$button-hover: $grey-dark;
+// --- Legacy Interactive Colors ---
+$button-hover: $grey-75;
 
-// --- Misc. Colors ---
-$countdown-compact: $secondary-red;
+// --- Legacy Misc. Colors ---
+$countdown-compact: $highlight-red;
 
 ////////////////////////
 /// FONTS:
