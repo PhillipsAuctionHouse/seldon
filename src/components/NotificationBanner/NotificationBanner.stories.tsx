@@ -25,8 +25,7 @@ const generateLoremIpsum = (numOfParagraphs = 10) => {
   return loremIpsum;
 };
 
-const fetchData = async (searchQuery: string) => {
-  console.log('searchQuery', searchQuery);
+const fetchData = async () => {
   let searchResults: { makers: Array<SearchResult> } = { makers: [] };
   // Call to get search results
   searchResults = await new Promise((resolve) => {
@@ -66,7 +65,7 @@ const StatefulSearch = (props: SearchProps) => {
     // Call to get auto complete results
     if (searchQuery.length > 2) {
       setState('loading');
-      fetchData(searchQuery)
+      fetchData()
         .then((data) => {
           setAutoCompleteResults(data.makers);
           setState('idle');
