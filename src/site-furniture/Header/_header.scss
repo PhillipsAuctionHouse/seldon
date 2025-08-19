@@ -163,13 +163,15 @@
     display: none;
 
     &--active {
-      background: rgba(0, 0, 0, 60%);
-      display: block;
-      height: 100vh;
-      left: 0;
-      position: absolute;
-      top: calc($header-height + 1px);
-      width: 100%;
+      @include isHeaderDesktop {
+        background: rgba(0, 0, 0, 60%);
+        display: block;
+        height: 100vh;
+        left: 0;
+        position: absolute;
+        top: calc($header-height + 1px + var(--header-navigation-height));
+        width: 100%;
+      }
     }
   }
 
