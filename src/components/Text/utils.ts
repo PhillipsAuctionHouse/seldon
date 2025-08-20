@@ -11,7 +11,7 @@ export const determineDefaultTextElement = (variant: TextVariants = TextVariants
   const loweredVariant = variant.toLowerCase();
 
   if (variant === TextVariants.blockquote) return 'blockquote';
-  if (variant.includes('body')) return 'p';
+  if (variant.includes('body')) return 'span';
   if (variant.includes('string')) return 'span';
   if (variant.includes('title')) return 'span';
   if (variant === TextVariants.label) return 'label';

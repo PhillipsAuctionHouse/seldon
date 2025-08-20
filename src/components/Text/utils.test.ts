@@ -30,9 +30,9 @@ describe('determineTextClassName', () => {
 });
 
 describe('determineDefaultTextElement', () => {
-  it('should return "p" for body variant', () => {
+  it('should return "span" for body variant', () => {
     const element = determineDefaultTextElement(TextVariants.body1);
-    expect(element).toBe('p');
+    expect(element).toBe('span');
   });
 
   it('should return "label" for label variant', () => {
