@@ -29,10 +29,6 @@ export interface HeroBannerProps extends HTMLAttributes<HTMLDivElement> {
    */
   background?: string;
   /**
-   * A description to be used with the TEXT variant of HeroBanner
-   */
-  description?: string;
-  /**
    * Unique id for component testing
    */
   id?: string;
