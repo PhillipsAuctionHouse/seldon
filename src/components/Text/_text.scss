@@ -33,11 +33,13 @@
   margin-bottom: $spacing-lg;
 }
 
-.#{$px}-text--heading3 {
+.#{$px}-text--heading3,
+.#{$px}-text--heading3Italic {
   margin-bottom: $spacing-md;
 }
 
 .#{$px}-text--heading4,
+.#{$px}-text--heading4Italic,
 .#{$px}-text--heading5,
 .#{$px}-text--heading6 {
   margin-bottom: $spacing-sm;

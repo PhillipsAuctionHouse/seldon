@@ -8,7 +8,7 @@ export const determineTextClassName = (variant: TextVariants = TextVariants.body
 };
 
 export const determineDefaultTextElement = (variant: TextVariants = TextVariants.bodyLg): string => {
-  const loweredVariant = variant.toLowerCase();
+  let loweredVariant = variant.toLowerCase();
 
   if (variant === TextVariants.blockquote) return 'blockquote';
   if (variant.includes('body')) return 'span';
@@ -17,7 +17,8 @@ export const determineDefaultTextElement = (variant: TextVariants = TextVariants
   if (variant.includes('eyebrow')) return 'span';
   if (variant === TextVariants.label) return 'label';
   if (loweredVariant.includes('heading')) {
-    const headingNumber = !isNaN(parseInt(variant.slice(-1))) ? parseInt(variant.slice(-1)) : 3;
+    loweredVariant = loweredVariant.replace('italic', '');
+    const headingNumber = !isNaN(parseInt(loweredVariant.slice(-1))) ? parseInt(loweredVariant.slice(-1)) : 3;
     return `h${headingNumber}`;
   }
 

@@ -63,10 +63,21 @@ describe('determineDefaultTextElement', () => {
     expect(element).toBe('h3');
   });
 
+  it('should return "h3" for heading3 variant', () => {
+    const element = determineDefaultTextElement(TextVariants.heading3Italic);
+    expect(element).toBe('h3');
+  });
+
   it('should return "h4" for heading4 variant', () => {
     const element = determineDefaultTextElement(TextVariants.heading4);
     expect(element).toBe('h4');
   });
+
+  it('should return "h4" for heading4Italic variant', () => {
+    const element = determineDefaultTextElement(TextVariants.heading4Italic);
+    expect(element).toBe('h4');
+  });
+
   it('should return "h4" for heading4 variant', () => {
     const element = determineDefaultTextElement(TextVariants.heading5);
     expect(element).toBe('h5');
