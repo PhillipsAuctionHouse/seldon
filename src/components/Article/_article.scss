@@ -17,6 +17,11 @@
     flex-direction: column;
     justify-content: center;
 
+    &-title,
+    .#{$px}-article__content-title {
+      margin-bottom: $spacing-md;
+    }
+
     &-label,
     &-description {
       color: $soft-black;

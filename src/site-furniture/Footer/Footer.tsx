@@ -36,7 +36,7 @@ const Footer = ({
             <Icon icon="PhillipsLogo" width="94px" />
           </a>
         </h3>
-        <Text variant={TextVariants.body3}>{copyright}</Text>
+        <Text variant={TextVariants.bodySm}>{copyright}</Text>
       </div>
     </footer>
   );

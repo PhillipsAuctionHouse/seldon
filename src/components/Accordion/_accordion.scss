@@ -34,7 +34,7 @@
   }
 
   &__content--lg {
-    @include text($body2);
+    @include text($bodyMd);
   }
 
   &--transition[data-state='open'] {
@@ -124,15 +124,15 @@
   }
 
   &__text {
+    @include text($labelMd);
+
     flex: auto;
     font-variation-settings: 'wght' 600;
     text-align: left;
-
-    @include text($string2);
   }
 
   &__text--lg {
-    @include text($body1);
+    @include text($bodyLgBold);
   }
 
   &__icon {

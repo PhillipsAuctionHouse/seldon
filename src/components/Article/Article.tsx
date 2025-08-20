@@ -43,13 +43,13 @@ const Article = forwardRef<HTMLDivElement, ArticleProps>(
           ) : null}
 
           {header ? (
-            <Text variant={TextVariants.heading3} className={`${baseClassName}__content-title`}>
+            <Text variant={TextVariants.heading2} className={`${baseClassName}__content-title`}>
               {header}
             </Text>
           ) : null}
 
           {description ? (
-            <Text variant={TextVariants.body2} className={`${baseClassName}__content-description`} element="p">
+            <Text variant={TextVariants.bodyMd} className={`${baseClassName}__content-description`} element="p">
               {description}
             </Text>
           ) : null}
