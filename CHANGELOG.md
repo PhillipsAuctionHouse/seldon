@@ -1,3 +1,10 @@
+# [1.180.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.179.0...v1.180.0) (2025-08-20)
+
+
+### Features
+
+* **_type:** L3-7279 typography tokens ([#687](https://github.com/PhillipsAuctionHouse/seldon/issues/687)) ([020e114](https://github.com/PhillipsAuctionHouse/seldon/commit/020e11461a6c9704c566839df78bee4caa132406))
+
 # [1.179.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.178.0...v1.179.0) (2025-08-20)
 
 
