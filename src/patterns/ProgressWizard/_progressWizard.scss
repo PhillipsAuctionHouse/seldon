@@ -1,27 +1,80 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-progress-wizard {
-  border: 5px solid pink;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  z-index: 100;
+
+  &__logo {
+    align-items: center;
+    border-bottom: 1px solid $light-gray;
+    display: flex;
+    justify-content: center;
+    margin-bottom: $spacing-md;
+    padding: $spacing-sm;
+  }
 
   &__content {
-    border: 5px solid yellow;
+    margin-top: $spacing-md;
+    overflow-y: auto;
   }
 
   &__footer {
     align-items: stretch;
-    border-top: 1px solid $keyline-gray;
+    border-top: 1px solid $light-gray;
     display: flex;
+    flex-shrink: 0;
     gap: $spacing-sm;
     justify-content: stretch;
     padding: $spacing-sm 0;
     width: 100%;
-
-    @media (min-width: $breakpoint-md) {
-      border-top: none;
-    }
   }
 
   &__btn {
     flex: 1 1 0;
+  }
+
+  // Mobile: sticky footer, only content scrolls
+  @media (max-width: $breakpoint-md) {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-height: 0;
+    overflow: visible;
+
+    &__content {
+      flex: 1 1 auto;
+      height: auto;
+      min-height: 0;
+      overflow-y: auto;
+    }
+
+    &__footer {
+      bottom: 0;
+      left: 0;
+      position: sticky;
+      right: 0;
+      z-index: 10;
+    }
+  }
+
+  // Desktop: footer at bottom if content is short, scrolls if content is long
+  @media (min-width: $breakpoint-md) {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    &__content {
+      flex: 1 1 auto;
+      overflow-y: auto;
+    }
+
+    &__footer {
+      border-top: none;
+      box-shadow: none;
+      margin-top: auto;
+      position: static;
+    }
   }
 }

@@ -4,6 +4,7 @@ import { ButtonVariants } from '../../components/Button/types';
 import ProgressIndicator from '../../components/ProgressIndicator/ProgressIndicator';
 import { getCommonProps } from '../../utils';
 import classNames from 'classnames';
+import Icon from '../../components/Icon/Icon';
 
 export interface ProgressWizardProps extends ComponentProps<'div'> {
   /**
@@ -54,6 +55,10 @@ export interface ProgressWizardProps extends ComponentProps<'div'> {
    * Callback function to be called when the wizard is canceled.
    */
   onCancel?: () => void;
+  /**
+   * Callback to determine if the current step is valid. Used to enable/disable navigation buttons.
+   */
+  isStepValid?: (step: number) => boolean;
 }
 
 const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
@@ -70,6 +75,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
       submitLabel = 'Submit',
       onSubmit,
       onCancel,
+      isStepValid,
       ...props
     },
     ref,
@@ -82,9 +88,11 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
     const goToStep = (next: number) => {
       setStep(next);
     };
+
     const handleBack = () => {
       if (!isFirst) goToStep(step - 1);
     };
+
     const handleNext = () => {
       if (!isLast) goToStep(step + 1);
     };
@@ -101,6 +109,9 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
         role="region"
         aria-label="Form Wizard"
       >
+        <div className={`${baseClassName}__logo`}>
+          <Icon icon="PhillipsLogo" height={20} width={180} />
+        </div>
         {renderHeader}
         <nav aria-label="Progress">
           <ProgressIndicator
@@ -131,6 +142,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
                 onClick={handleNext}
                 className={`${baseClassName}__btn`}
                 aria-label="Start Wizard"
+                isDisabled={isStepValid ? !isStepValid(step) : false}
               >
                 {startLabel}
               </Button>
@@ -152,6 +164,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
                 onClick={handleSubmit}
                 className={`${baseClassName}__btn`}
                 aria-label="Submit Wizard"
+                isDisabled={isStepValid ? !isStepValid(step) : false}
               >
                 {submitLabel}
               </Button>
@@ -173,6 +186,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
                 onClick={handleNext}
                 className={`${baseClassName}__btn`}
                 aria-label="Continue Wizard"
+                isDisabled={isStepValid ? !isStepValid(step) : false}
               >
                 {continueLabel}
               </Button>
