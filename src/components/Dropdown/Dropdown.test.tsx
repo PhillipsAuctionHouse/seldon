@@ -3,6 +3,7 @@ import { runCommonTests } from '../../utils/testUtils';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { SupportedLanguages } from '../../types/commonTypes';
+import { forwardRef } from 'react';
 
 const languages = [
   { label: 'English', value: SupportedLanguages.en },
@@ -10,7 +11,11 @@ const languages = [
 ];
 
 describe('Dropdown', () => {
-  runCommonTests((props) => <Dropdown {...props} options={languages} value={SupportedLanguages.en} />, 'Dropdown');
+  const RefDropdown = forwardRef<HTMLButtonElement, React.ComponentProps<typeof Dropdown>>((props, ref) => (
+    <Dropdown {...props} ref={ref} options={languages} value={SupportedLanguages.en} />
+  ));
+  RefDropdown.displayName = 'RefDropdown';
+  runCommonTests(RefDropdown, 'Dropdown');
 
   it('should render the default value label in the trigger', () => {
     render(

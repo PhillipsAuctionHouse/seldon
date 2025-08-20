@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { render, screen } from '@testing-library/react';
 
 import SplitPanel from './SplitPanel';
@@ -5,7 +6,12 @@ import { runCommonTests } from '../../utils/testUtils';
 import { px } from '../../utils';
 
 describe('SplitPanel', () => {
-  runCommonTests(SplitPanel, 'SplitPanel');
+  // Use a forwardRef wrapper for runCommonTests to ensure ref is tested correctly
+  const RefSplitPanel = forwardRef<HTMLElement, React.ComponentProps<typeof SplitPanel>>((props, ref) => (
+    <SplitPanel {...props} ref={ref} />
+  ));
+  RefSplitPanel.displayName = 'RefSplitPanel';
+  runCommonTests(RefSplitPanel, 'SplitPanel');
 
   it('is selectable by the test id', () => {
     render(<SplitPanel id="SplitPanel-test" />);

@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { px } from '../../utils';
 import { runCommonTests } from '../../utils/testUtils';
-import ComposedModal from './ComposedModal';
+import ComposedModal, { ComposedModalProps } from './ComposedModal';
+import { forwardRef } from 'react';
 
 describe('ComposedModal', () => {
   const onCloseMock = vi.fn();
@@ -9,7 +10,11 @@ describe('ComposedModal', () => {
   afterEach(() => {
     vi.clearAllMocks();
   });
-  runCommonTests((props) => <ComposedModal {...props} isOpen />, 'Modal');
+  const ComponentWithRef = forwardRef<HTMLDivElement, ComposedModalProps>((props, ref) => (
+    <ComposedModal {...props} isOpen ref={ref} />
+  ));
+  ComponentWithRef.displayName = 'ComponentWithRef';
+  runCommonTests(ComponentWithRef, 'Modal');
 
   it('renders the modal title when isOpen is true', () => {
     render(

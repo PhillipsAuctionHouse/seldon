@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { Text, TextVariants } from '../../components/Text';
@@ -54,49 +54,33 @@ export interface HeroBannerProps extends HTMLAttributes<HTMLDivElement> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-herobanner--overview)
  */
 
-const HeroBanner = ({
-  prehead,
-  date,
-  headerText,
-  subHeadText,
-  association,
-  background,
-  className,
-  description,
-  variant = HeroBannerVariants.DEFAULT,
-  ...props
-}: HeroBannerProps) => {
-  const { className: baseClass, ...commonProps } = getCommonProps(props, 'HeroBanner');
-  const isDefaultVariant = variant === HeroBannerVariants.DEFAULT;
-  const isTextVariant = variant === HeroBannerVariants.TEXT;
-
-  return (
-    <header
-      {...commonProps}
-      className={classnames(baseClass, className, {
-        [`${baseClass}--default-variant`]: isDefaultVariant,
-      })}
-      style={{ '--background': background } as React.CSSProperties}
-      {...props}
-    >
-      <span
-        className={classnames(`${baseClass}__content-wrapper`, {
-          [`${baseClass}__content-wrapper--text-variant`]: isTextVariant,
-        })}
+const HeroBanner = forwardRef<HTMLElement, HeroBannerProps>(
+  ({ prehead, date, headerText, subHeadText, association, background, className, ...props }, ref) => {
+    const { className: baseClass, ...commonProps } = getCommonProps(props, 'HeroBanner');
+    return (
+      <header
+        {...commonProps}
+        className={classnames(baseClass, className)}
+        style={{ '--background': background } as React.CSSProperties}
+        ref={ref}
+        {...props}
       >
-        {!isTextVariant && (prehead || date) ? (
-          <p className={`${baseClass}__pre-head`}>
-            {prehead ? <span>{prehead}</span> : null}
-            {date ? <span>{date}</span> : null}
-          </p>
-        ) : null}
-        <Text variant={TextVariants.snwHeadingHero1}>{headerText}</Text>
-        {!isTextVariant && subHeadText ? <Text variant={TextVariants.snwHeadingHero2}>{subHeadText}</Text> : null}
-        {!isTextVariant && association ? <p className={`${baseClass}__after-head`}>{association}</p> : null}
-        {isTextVariant && description ? <p className={`${baseClass}__text-description`}>{description}</p> : null}
-      </span>
-    </header>
-  );
-};
+        <span className={`${baseClass}__content-wrapper`}>
+          {prehead || date ? (
+            <p className={`${baseClass}__pre-head`}>
+              {prehead ? <span>{prehead}</span> : null}
+              {date ? <span>{date}</span> : null}
+            </p>
+          ) : null}
+          <Text variant={TextVariants.snwHeadingHero1}>{headerText}</Text>
+          {subHeadText ? <Text variant={TextVariants.snwHeadingHero2}>{subHeadText}</Text> : null}
+          {association ? <p className={`${baseClass}__after-head`}>{association}</p> : null}
+        </span>
+      </header>
+    );
+  },
+);
+
+HeroBanner.displayName = 'HeroBanner';
 
 export default HeroBanner;

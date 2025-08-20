@@ -2,11 +2,17 @@ import { render, screen } from '@testing-library/react';
 import Link from './Link';
 import { runCommonTests } from '../../utils/testUtils';
 import userEvent from '@testing-library/user-event';
+import { forwardRef } from 'react';
 
 const getLinkElement = (text: string) => screen.getByRole('link', { name: text });
 
 describe('Link', () => {
-  runCommonTests((props) => <Link {...props} href="test" />, 'Link');
+  // Use a forwardRef wrapper for runCommonTests to ensure ref is tested correctly
+  const RefLink = forwardRef<HTMLAnchorElement, React.ComponentProps<typeof Link>>((props, ref) => (
+    <Link {...props} ref={ref} href="test" />
+  ));
+  RefLink.displayName = 'RefLink';
+  runCommonTests(RefLink, 'Link');
 
   it('renders a link with the provided href', () => {
     render(<Link href="https://example.com">Example Link</Link>);

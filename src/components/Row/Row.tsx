@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef } from 'react';
 import { PaddingTokens, generatePaddingClassName, getCommonProps } from '../../utils';
 import classnames from 'classnames';
 
@@ -23,32 +23,35 @@ export interface RowProps extends React.HTMLAttributes<HTMLElement> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-layouts-row--overview)
  */
 
-const Row = ({
-  children,
-
-  element: CustomElement,
-  padding = { top: PaddingTokens.lg, bottom: PaddingTokens.lg },
-  className,
-  ...props
-}: RowProps) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Row');
-
-  const Component = CustomElement || 'section';
-
-  return (
-    <Component
-      {...commonProps}
-      className={classnames(
-        baseClassName,
-        padding.top && generatePaddingClassName(padding.top, 'start'),
-        padding.bottom && generatePaddingClassName(padding.bottom, 'end'),
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </Component>
-  );
-};
-
+const Row = forwardRef<HTMLElement, RowProps>(
+  (
+    {
+      children,
+      element: CustomElement,
+      padding = { top: PaddingTokens.lg, bottom: PaddingTokens.lg },
+      className,
+      ...props
+    },
+    ref,
+  ) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Row');
+    const Component = CustomElement || 'section';
+    return (
+      <Component
+        ref={ref}
+        {...commonProps}
+        className={classnames(
+          baseClassName,
+          padding.top && generatePaddingClassName(padding.top, 'start'),
+          padding.bottom && generatePaddingClassName(padding.bottom, 'end'),
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </Component>
+    );
+  },
+);
+Row.displayName = 'Row';
 export default Row;

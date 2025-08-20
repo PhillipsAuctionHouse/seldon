@@ -1,8 +1,7 @@
 import classnames from 'classnames';
-
 import { getCommonProps } from '../../utils';
 import Button from '../../components/Button/Button';
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, forwardRef } from 'react';
 import { ButtonVariants } from '../../components/Button/types';
 import { Text, TextVariants } from '../../components/Text';
 
@@ -31,26 +30,33 @@ export interface SocialProps extends React.HTMLAttributes<HTMLDivElement> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-social--overview)
  */
 
-const Social = ({
-  className,
-  children,
-  titleText = 'Never Miss A Moment',
-  buttonText = 'Subscribe To Our Newsletter',
-  onSubscribeClick,
-  ...props
-}: SocialProps) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Social');
-  return (
-    <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
-      <Text variant={TextVariants.heading4} className={`${baseClassName}__header`}>
-        {titleText}
-      </Text>
-      <Button onClick={onSubscribeClick} variant={ButtonVariants.tertiary} className={`${baseClassName}__button`}>
-        {buttonText}
-      </Button>
-      {children}
-    </div>
-  );
-};
+const Social = forwardRef<HTMLDivElement, SocialProps>(
+  (
+    {
+      className,
+      children,
+      titleText = 'Never Miss A Moment',
+      buttonText = 'Subscribe To Our Newsletter',
+      onSubscribeClick,
+      ...props
+    },
+    ref,
+  ) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Social');
+    return (
+      <div ref={ref} {...commonProps} className={classnames(baseClassName, className)} {...props}>
+        <Text variant={TextVariants.heading4} className={`${baseClassName}__header`}>
+          {titleText}
+        </Text>
+        <Button onClick={onSubscribeClick} variant={ButtonVariants.tertiary} className={`${baseClassName}__button`}>
+          {buttonText}
+        </Button>
+        {children}
+      </div>
+    );
+  },
+);
+
+Social.displayName = 'Social';
 
 export default Social;

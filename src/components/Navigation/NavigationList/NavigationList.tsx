@@ -1,8 +1,8 @@
+import classNames from 'classnames';
 import * as React from 'react';
 import { px } from '../../../utils';
-import classNames from 'classnames';
-import { NavigationItemProps } from '../NavigationItem/NavigationItem';
 import { Text, TextVariants } from '../../Text';
+import { NavigationItemProps } from '../NavigationItem/NavigationItem';
 
 export interface NavigationListProps extends React.ComponentProps<'ul'> {
   /**

@@ -77,7 +77,8 @@ $lg: #{$px}-input--lg;
   }
 
   // Hide actual checkbox input
-  .#{$px}-input__input {
+  .#{$px}-input__input,
+  .#{$px}-input__wrapper {
     @include hidden;
 
     margin-bottom: 0;

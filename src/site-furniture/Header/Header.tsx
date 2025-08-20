@@ -1,14 +1,22 @@
-import React, { PropsWithChildren } from 'react';
 import classnames from 'classnames';
-import { findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
-import UserManagement, { UserManagementProps } from '../../patterns/UserManagement/UserManagement';
-import { LanguageSelector, LanguageSelectorProps } from '../../patterns/LanguageSelector';
-import Navigation from '../../components/Navigation/Navigation';
-import { Component, ComponentProps, forwardRef, ReactElement, useState, createContext } from 'react';
-import { defaultHeaderContext } from './utils';
-import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
-import { useMobileMenu } from './hooks';
+import React, {
+  Component,
+  ComponentProps,
+  createContext,
+  forwardRef,
+  PropsWithChildren,
+  ReactElement,
+  useEffect,
+  useState,
+} from 'react';
 import { Icon } from '../../components/Icon';
+import Navigation from '../../components/Navigation/Navigation';
+import { LanguageSelector, LanguageSelectorProps } from '../../patterns/LanguageSelector';
+import UserManagement, { UserManagementProps } from '../../patterns/UserManagement/UserManagement';
+import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
+import { findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
+import { useMobileMenu } from './hooks';
+import { defaultHeaderContext } from './utils';
 
 export interface HeaderProps extends ComponentProps<'header'> {
   /**
@@ -35,6 +43,10 @@ export interface HeaderProps extends ComponentProps<'header'> {
    * Is the header disabled
    */
   disabled?: boolean;
+  /**
+   * Reference to the notification banner
+   */
+  bannerRef?: React.MutableRefObject<HTMLDivElement | null>;
 }
 export type HeaderContextType = {
   /**
@@ -91,6 +103,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
       toggleCloseText = 'Close Menu',
       logoText = 'Home Page',
       disabled,
+      bannerRef,
       ...props
     },
     ref,
@@ -111,8 +124,30 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     const [activeSubmenuId, setActiveSubmenuId] = useState<string | null>(null);
     const closeTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
+    const [bannerHeight, setBannerHeight] = useState(bannerRef?.current ? bannerRef.current.clientHeight : 0);
+
+    useEffect(() => {
+      const bannerElement = bannerRef?.current;
+      if (!bannerElement) return;
+
+      setBannerHeight(bannerElement.clientHeight);
+      const resizeObserver = new window.ResizeObserver(() => {
+        setBannerHeight(bannerElement.clientHeight);
+      });
+
+      resizeObserver.observe(bannerElement);
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }, [bannerRef, bannerHeight]);
+
     return (
-      <header {...props} className={classnames(`${px}-header`, className)} ref={ref}>
+      <header
+        {...props}
+        className={classnames(`${px}-header`, className)}
+        ref={ref}
+        style={{ '--banner-height': `${bannerHeight}px` } as React.CSSProperties}
+      >
         <div className={`${px}-header__top-row`}>
           <SSRMediaQuery.Media greaterThanOrEqual="md">{languageSelectorElement}</SSRMediaQuery.Media>
           {/** only render language selector in this location on desktop */}

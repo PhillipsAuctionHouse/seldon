@@ -47,6 +47,10 @@ $articker-orange: #ff8201;
 $articker-red-orange-gradient: linear-gradient(90deg, #fc1e2b, #ff8201);
 $overlay-black: rgba(0, 0, 0, 80%);
 
+// admin colors
+$admin-alert: #f24a4a;
+$admin-success: #10bc94;
+
 // Legacy mapping
 $pure-white: $white;
 $post-sale-magenta: $post-sale-pink;
@@ -393,6 +397,7 @@ $margin-xxl: var(--spacing-xxl);
 :root {
   --header-height: 56px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
   --search-size: 2.625rem; // This should be calculated from the scaling text and scaling spacing tokens instead of hardcoding in case they change
+  --banner-height: 0px;
 
   @media (min-width: $breakpoint-md) {
     --header-height: 123px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
@@ -414,6 +419,7 @@ $desktop-max-width: var(--desktop-max-width);
 /// z-index TOKENS:
 ///////////////////////
 $modal-z-index: 30;
+$z-index-notification-banner: 1000;
 
 ////////////////////////
 /// Our tokens usually support at least 4 sizes.
