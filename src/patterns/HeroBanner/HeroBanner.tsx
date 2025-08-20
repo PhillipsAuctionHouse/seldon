@@ -2,9 +2,7 @@ import { HTMLAttributes, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { Text, TextVariants } from '../../components/Text';
-import { HeroBannerVariants } from './types';
 
-export { HeroBannerVariants };
 export interface HeroBannerProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * informational text above the header (e.g. region label or "buy now")
@@ -38,10 +36,6 @@ export interface HeroBannerProps extends HTMLAttributes<HTMLDivElement> {
    * Unique id for component testing
    */
   id?: string;
-  /**
-   * The type of HeroBanner to render
-   */
-  variant?: HeroBannerVariants;
 }
 
 /**

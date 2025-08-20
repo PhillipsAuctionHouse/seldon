@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import HeroBanner, { HeroBannerProps } from './HeroBanner';
-import { HeroBannerVariants } from './types';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -30,14 +29,5 @@ export const SimpleHeroBanner = (props: HeroBannerProps) => (
     {...props}
     background="url(https://phillips.vo.llnwd.net/v1/web_prod/images/banners/about-us.jpg)"
     headerText="About Us"
-  />
-);
-
-export const TextHeroBanner = (props: HeroBannerProps) => (
-  <HeroBanner
-    {...props}
-    headerText="Text Banner"
-    description="This is the description to be used with the Text variant of the Hero Banner. This is not used in the default variant of the Hero Banner."
-    variant={HeroBannerVariants.TEXT}
   />
 );
