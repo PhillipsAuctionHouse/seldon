@@ -30,6 +30,11 @@ Playground.argTypes = {
       type: 'select',
     },
   },
+  badgeText: {
+    control: {
+      type: 'text',
+    },
+  },
   currentDateTime: {
     control: {
       type: 'date',
@@ -80,6 +85,19 @@ export const PreSaleThreeOccurrences = (props: SaleHeaderBannerProps) => (
     location="New York"
     auctionState={AuctionStatus.ready}
     showTimer
+  />
+);
+
+export const Consignment = (props: SaleHeaderBannerProps) => (
+  <SaleHeaderBanner
+    {...props}
+    auctionTitle="Consignment Auction"
+    imageSrcUrl="https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg"
+    occurrenceInformation={[{ date: '10:00am EDT, 4 Sep 2024', occurrenceLabel: 'Begins' }]}
+    badgeText="Accepting consignments"
+    location="New York"
+    headerLabel="Online Auction"
+    auctionState={AuctionStatus.ready}
   />
 );
 
