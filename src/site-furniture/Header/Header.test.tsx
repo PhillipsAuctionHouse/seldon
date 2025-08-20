@@ -1,15 +1,17 @@
-import { act, render, renderHook, screen } from '@testing-library/react';
+import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Header from './Header';
-import { px } from '../../utils';
+import { useRef } from 'react';
+import { Icon } from '../../components/Icon';
+import { LinkVariants } from '../../components/Link/types';
 import Navigation from '../../components/Navigation/Navigation';
 import NavigationItem from '../../components/Navigation/NavigationItem/NavigationItem';
 import NavigationItemTrigger from '../../components/Navigation/NavigationItemTrigger/NavigationItemTrigger';
 import NavigationList from '../../components/Navigation/NavigationList/NavigationList';
-import { LinkVariants } from '../../components/Link/types';
+import NotificationBanner from '../../components/NotificationBanner/NotificationBanner';
 import Search from '../../components/Search/Search';
+import { px } from '../../utils';
+import { default as Header } from './Header';
 import { useMobileMenu } from './hooks';
-import { Icon } from '../../components/Icon';
 
 describe('Header', () => {
   const headerComponent = () => (
@@ -113,5 +115,43 @@ describe('useMobileMenu', () => {
     });
     expect(result.current.isMenuOpen).toBe(false);
     expect(result.current.toggleText).toBe(toggleOpenText);
+  });
+});
+
+describe('Header bannerHeight and ResizeObserver', () => {
+  interface TestHeaderWithBannerProps {
+    bannerContentHeight?: number;
+  }
+
+  function TestHeaderWithBanner({ bannerContentHeight = 0 }: TestHeaderWithBannerProps) {
+    const bannerRef = useRef<HTMLDivElement>(null);
+
+    // Callback ref to mock clientHeight before effect runs
+    const setBannerRef = (el: HTMLDivElement | null) => {
+      if (el) {
+        Object.defineProperty(el, 'clientHeight', {
+          value: bannerContentHeight,
+          configurable: true,
+        });
+        (bannerRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+      }
+    };
+
+    return (
+      <div>
+        <NotificationBanner ref={setBannerRef} style={{ height: `${bannerContentHeight}px` }}>
+          <div>Banner Content</div>
+        </NotificationBanner>
+        <Header logo={<Icon icon="PhillipsLogo" />} bannerRef={bannerRef} />
+      </div>
+    );
+  }
+  it('should set bannerHeight from NotificationBanner height', async () => {
+    render(<TestHeaderWithBanner bannerContentHeight={100} />);
+    const header = screen.getByRole('banner');
+    await waitFor(() => {
+      const style = header.style.getPropertyValue('--banner-height');
+      expect(style).toBe('100px');
+    });
   });
 });

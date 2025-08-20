@@ -289,6 +289,18 @@ describe('ComboBox', () => {
     });
   });
 
+  it('uses default no options message when prop not provided', async () => {
+    render(<ComboBox {...defaultProps} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+    await userEvent.click(input);
+    await userEvent.type(input, 'xyz');
+
+    await waitFor(() => {
+      expect(screen.getByText('No Options.')).toBeInTheDocument();
+    });
+  });
+
   it('toggles dropdown when clicking the dropdown button multiple times', async () => {
     render(<ComboBox {...defaultProps} />);
 
@@ -578,5 +590,44 @@ describe('ComboBox', () => {
 
     // Verify option selected
     expect(input).toHaveValue('Banana');
+  });
+
+  it('does not open until the required number of characters are typed (countOfCharsBeforeDropdown)', async () => {
+    render(<ComboBox {...defaultProps} countOfCharsBeforeDropdown={3} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+
+    // Clicking input should not open when threshold > 0 and no characters yet
+    await userEvent.click(input);
+    await waitFor(() => {
+      expect(screen.queryByText('Banana')).not.toBeInTheDocument();
+    });
+
+    // Type first character - still should not open
+    await userEvent.type(input, 'b');
+    expect(screen.queryByText('Banana')).not.toBeInTheDocument();
+
+    // Type second character - still should not open (threshold is 3)
+    await userEvent.type(input, 'an');
+    expect(input).toHaveValue('ban');
+    await waitFor(() => expect(screen.getByText('Banana')).toBeInTheDocument());
+  });
+
+  it('opens after first character when countOfCharsBeforeDropdown is 1', async () => {
+    render(<ComboBox {...defaultProps} countOfCharsBeforeDropdown={1} />);
+
+    const input = screen.getByTestId('fruit-selector-input');
+
+    // Initially closed on click
+    await userEvent.click(input);
+    await waitFor(() => {
+      expect(screen.queryByText('Apple')).not.toBeInTheDocument();
+    });
+
+    // After one character typed, dropdown should open
+    await userEvent.type(input, 'a');
+    await waitFor(() => {
+      expect(screen.getByText('Apple')).toBeInTheDocument();
+    });
   });
 });
