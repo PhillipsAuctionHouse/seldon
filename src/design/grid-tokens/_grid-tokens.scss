@@ -70,7 +70,7 @@
     }
 
     p {
-      @include text($body1);
+      @include text($bodyLg);
     }
 
     div,
@@ -78,7 +78,7 @@
     .grid-example__section,
     .grid-example__aside,
     .grid-example__footer {
-      @include text($body-size2);
+      @include text($bodyLg);
 
       background: $light-gray;
       border-radius: 0.5rem;

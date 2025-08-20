@@ -14,7 +14,7 @@ $lg: #{$px}-input--lg;
   }
 
   &__label {
-    @include text($string2);
+    @include text($labelMd);
 
     color: $pure-black;
     font-variation-settings: 'wght' 600;
@@ -28,7 +28,7 @@ $lg: #{$px}-input--lg;
   }
 
   &__wrapper {
-    @include text($string2);
+    @include text($labelMd);
 
     accent-color: $soft-black;
     align-items: center;
@@ -72,7 +72,7 @@ $lg: #{$px}-input--lg;
   }
 
   &__input {
-    @include text($string2);
+    @include text($labelMd);
 
     accent-color: $soft-black;
     border: 1px solid $keyline-gray;

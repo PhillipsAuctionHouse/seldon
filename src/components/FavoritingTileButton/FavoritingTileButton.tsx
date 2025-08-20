@@ -65,7 +65,7 @@ const FavoritingTileButton = forwardRef<HTMLButtonElement, FavoritingTileButtonP
       >
         <div className={`${baseClassName}__text`}>
           <Text variant={TextVariants.button}>{isLotInList ? actionRemoveText : actionAddText}</Text>
-          <Text variant={TextVariants.string2}>{listTitle}</Text>
+          <Text variant={TextVariants.labelMd}>{listTitle}</Text>
         </div>
         <Text variant={TextVariants.button}>{numberOfObjects}</Text>
       </button>
