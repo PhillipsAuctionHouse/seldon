@@ -74,7 +74,11 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       <Dialog.Root
         open={isOpen}
         onOpenChange={(open) => {
-          if (!open) onClose();
+          if (!open) {
+            // this is a workaround because Dialogs interacting with other dialogs can get confused and not clear pointer-events correctly. https://my.onetrust.com/s/case/500RO00000XuZl3/pointerevents-none-being-applied-incorrectly-by-manage-cookies-dialog
+            document.body.style.removeProperty('pointer-events');
+            onClose();
+          }
         }}
       >
         <Dialog.Portal>

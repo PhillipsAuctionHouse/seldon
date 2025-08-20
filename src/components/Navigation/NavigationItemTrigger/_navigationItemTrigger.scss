@@ -41,7 +41,10 @@
       pointer-events: none;
       position: fixed; // has to bust out of the box containing it on desktop
       right: 0;
-      top: calc($header-height + 1px);
+      top: calc(
+        var(--banner-height) + #{$header-height} + 1px
+      ); // will be dynamically set again when notification banner is shown
+
       transition:
         max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
         opacity 0.2s cubic-bezier(0.65, 0, 0.35, 1);
@@ -56,7 +59,7 @@
     &--hovered &__submenu {
       cursor: default;
       left: 0;
-      max-height: calc(90vh - #{$header-height});
+      max-height: calc(90vh - #{$header-height} + var(--banner-height));
       opacity: 1;
       -ms-overflow-style: none; /* Internet Explorer 10+ */
       overflow-y: scroll;

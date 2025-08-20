@@ -18,6 +18,8 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
    * What is the title of the auction?
    */
   auctionTitle: React.ReactNode;
+  /** Text to be displayed as a badge. */
+  badgeText?: string;
   /**
    * The URL of the banner image
    */
@@ -102,6 +104,7 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
     {
       auctionEndTime,
       auctionTitle,
+      badgeText,
       imageSrcUrl,
       imageSrcSet,
       imageSizes,
@@ -159,8 +162,13 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
                 <div className={`${baseClassName}__stack__countdown`}>{<Countdown {...countdownProps} />}</div>
               </SSRMediaQuery.Media>
             ) : null}
-            <Text variant={TextVariants.badge}>{headerLabel}</Text>
+            <Text variant={TextVariants.eyebrowSm}>{headerLabel}</Text>
             <Text variant={TextVariants.title1}>{auctionTitle}</Text>
+            {badgeText && (
+              <Text variant={TextVariants.eyebrowSm} className={`${baseClassName}__badge`}>
+                {badgeText}
+              </Text>
+            )}
             <Text variant={TextVariants.labelMd} className={`${baseClassName}__location`}>
               {location}
             </Text>

@@ -1,3 +1,52 @@
+# [1.179.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.178.0...v1.179.0) (2025-08-20)
+
+
+### Features
+
+* **SaleHeaderBanner:** L3-7403 add badgeText prop to SaleHeaderBanner ([#693](https://github.com/PhillipsAuctionHouse/seldon/issues/693)) ([140881c](https://github.com/PhillipsAuctionHouse/seldon/commit/140881c11c151956ae7e7cdf709362aa37aa780f))
+
+# [1.178.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.177.0...v1.178.0) (2025-08-19)
+
+
+### Features
+
+* **AnnouncementBanner:** L3-7452 Create Announcement Bar ([#681](https://github.com/PhillipsAuctionHouse/seldon/issues/681)) ([f5dccb5](https://github.com/PhillipsAuctionHouse/seldon/commit/f5dccb59d44c6515f63c8640c14ebe559696d4f9))
+
+# [1.177.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.176.1...v1.177.0) (2025-08-19)
+
+
+### Features
+
+* **combobox:** L3-6813 allow specification of minimum chars before opening ([#690](https://github.com/PhillipsAuctionHouse/seldon/issues/690)) ([184c3ae](https://github.com/PhillipsAuctionHouse/seldon/commit/184c3aef7dfc9aacc128469016ab78de2b3d7e3a))
+
+## [1.176.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.176.0...v1.176.1) (2025-08-19)
+
+
+### Bug Fixes
+
+* **drawer:** L3-7407 explicitly unset pointer-events ([#691](https://github.com/PhillipsAuctionHouse/seldon/issues/691)) ([233d8e6](https://github.com/PhillipsAuctionHouse/seldon/commit/233d8e6c6c0cbe9268a99cbe5d6791ae3bd0b375))
+
+# [1.176.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.175.0...v1.176.0) (2025-08-18)
+
+
+### Features
+
+* **countryPicker:** L3-7243 Build country and country code picker variants ([#677](https://github.com/PhillipsAuctionHouse/seldon/issues/677)) ([19e540e](https://github.com/PhillipsAuctionHouse/seldon/commit/19e540edbf0037b00094de00231a4e2d7ec1c66e))
+
+# [1.175.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.174.0...v1.175.0) (2025-08-15)
+
+
+### Features
+
+* **stepper:** L3-7123 Create progress component (Part 1) ([#668](https://github.com/PhillipsAuctionHouse/seldon/issues/668)) ([ecce47a](https://github.com/PhillipsAuctionHouse/seldon/commit/ecce47a63fbe139969adeba8aa17dd0a5623984b))
+
+# [1.174.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.173.0...v1.174.0) (2025-08-14)
+
+
+### Features
+
+* **detailedRadio:** L3-7240 Make Radio input selector match figma for primary details (Bidder type select) ([#671](https://github.com/PhillipsAuctionHouse/seldon/issues/671)) ([ed88be9](https://github.com/PhillipsAuctionHouse/seldon/commit/ed88be98a08aafce98b43ae41f4386449e72c651))
+
 # [1.173.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.172.0...v1.173.0) (2025-08-12)
 
 
