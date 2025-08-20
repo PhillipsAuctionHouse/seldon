@@ -1,3 +1,10 @@
+# [1.179.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.178.0...v1.179.0) (2025-08-20)
+
+
+### Features
+
+* **SaleHeaderBanner:** L3-7403 add badgeText prop to SaleHeaderBanner ([#693](https://github.com/PhillipsAuctionHouse/seldon/issues/693)) ([140881c](https://github.com/PhillipsAuctionHouse/seldon/commit/140881c11c151956ae7e7cdf709362aa37aa780f))
+
 # [1.178.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.177.0...v1.178.0) (2025-08-19)
 
 
