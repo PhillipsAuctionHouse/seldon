@@ -51,7 +51,7 @@
     color: $badge-blue;
     font-size: 0.75rem;
     margin: $spacing-xsm 0;
-    padding: $spacing-micro 8px;
+    padding: $spacing-micro $spacing-xsm;
   }
 
   &__occurrence-details {
