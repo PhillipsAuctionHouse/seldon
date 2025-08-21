@@ -19,8 +19,9 @@
     font-variation-settings: 'wght' 600;
     line-height: $snw-flyout-link-size;
     text-align: center;
+  }
 
-  > .notification-banner-content {
+  > .#{$px}-notification-banner-content {
     color: $pure-black;
     font-size: $snowflake-note-size;
     font-variation-settings: 'wght' 600;
@@ -30,9 +31,10 @@
     a {
       cursor: pointer;
       text-decoration: underline;
+    }
   }
 
-  .notification-banner-link {
+  .#{$px}-notification-banner-link {
     cursor: pointer;
     text-decoration: underline;
   }
