@@ -4,8 +4,8 @@ import { px } from '../../utils';
 
 describe('determineTextClassName', () => {
   it('should return the correct class name for body variant', () => {
-    const className = determineTextClassName(TextVariants.bodyLg);
-    expect(className).toBe(`${px}-text--bodyLg`);
+    const className = determineTextClassName(TextVariants.body1);
+    expect(className).toBe(`${px}-text--body1`);
   });
 
   it('should return the correct class name for label variant', () => {
@@ -31,7 +31,7 @@ describe('determineTextClassName', () => {
 
 describe('determineDefaultTextElement', () => {
   it('should return "p" for body variant', () => {
-    const element = determineDefaultTextElement(TextVariants.bodyLg);
+    const element = determineDefaultTextElement(TextVariants.body1);
     expect(element).toBe('p');
   });
 

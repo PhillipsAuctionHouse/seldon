@@ -260,7 +260,7 @@ InputWithAdornment.args = {
   labelText: 'Input with Adornment',
   playgroundWidth: 300,
   size: 'md',
-  inputAdornment: <Text variant={TextVariants.labelMd}>$</Text>,
+  inputAdornment: <Text variant={TextVariants.string2}>$</Text>,
   adornmentPosition: 'start',
 };
 
@@ -309,7 +309,7 @@ export const Playground = ({ playgroundWidth, ...args }: StoryProps) => {
           name="toggleInput"
           isSkeletonLoading={loading}
         />
-        <Text variant={TextVariants.bodyLg} isSkeletonLoading={loading}>
+        <Text variant={TextVariants.body1} isSkeletonLoading={loading}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget nibh ac turpis molestie ultricies. Morbi
           placerat rhoncus elit, sed malesuada ante rutrum et.
         </Text>

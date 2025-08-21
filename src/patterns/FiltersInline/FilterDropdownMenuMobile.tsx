@@ -61,7 +61,7 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
               variant={ButtonVariants.primary}
               onClick={() => onApplyFilter?.(false)}
             >
-              <Text variant={TextVariants.labelLg} className={`${baseClassName}__button-text`}>
+              <Text variant={TextVariants.string1} className={`${baseClassName}__button-text`}>
                 {dropdownMenuTranslation?.confirm || 'Confirm'}
               </Text>
             </Button>
@@ -76,7 +76,7 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
                 variant={ButtonVariants.secondary}
                 onClick={() => onClickClear?.(buttonType ?? '')}
               >
-                <Text variant={TextVariants.labelMd}>{dropdownMenuTranslation?.clearAll || 'Clear all'}</Text>
+                <Text variant={TextVariants.string2}>{dropdownMenuTranslation?.clearAll || 'Clear all'}</Text>
               </Button>
               <Button
                 className={classnames(
@@ -87,7 +87,7 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
                 variant={ButtonVariants.primary}
                 onClick={() => onApplyFilter?.(false)}
               >
-                <Text variant={TextVariants.labelMd} className={`${baseClassName}__button-text`}>
+                <Text variant={TextVariants.string2} className={`${baseClassName}__button-text`}>
                   {dropdownMenuTranslation?.showAuctions || `Show ${resultsCount} Auctions`}
                 </Text>
               </Button>

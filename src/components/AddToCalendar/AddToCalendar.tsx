@@ -70,7 +70,7 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
                     </Component>
                   ) : (
                     <button className={`${baseClassName}-atcb-item-link`}>
-                      <Text variant={TextVariants.bodyMd}>{item.label}</Text>
+                      <Text variant={TextVariants.body2}>{item.label}</Text>
                     </button>
                   )}
                 </DropdownMenu.Item>

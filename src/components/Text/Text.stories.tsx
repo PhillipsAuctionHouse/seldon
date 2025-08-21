@@ -36,7 +36,7 @@ export const TextWithSkeleton = (props: TextProps) => <Text {...props} style={{ 
 TextWithSkeleton.args = {
   children:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget nibh ac turpis molestie ultricies. Morbi placerat rhoncus elit, sed malesuada ante rutrum et.',
-  variant: TextVariants.bodyMd,
+  variant: TextVariants.body2,
   isSkeletonLoading: true,
 };
 
