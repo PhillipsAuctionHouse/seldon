@@ -1,7 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-text-area {
-  @include text($string2);
+  @include text($labelMd);
 
   accent-color: $soft-black;
   border: 1px solid $keyline-gray;
@@ -38,7 +38,7 @@
   }
 
   &__label {
-    @include text($string2);
+    @include text($labelMd);
 
     color: $pure-black;
     font-variation-settings: 'wght' 600;

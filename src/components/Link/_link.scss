@@ -20,15 +20,15 @@
   }
 
   &--email {
-    @include text($email);
+    @include text($labelMdBold);
   }
 
   &--link {
-    @include text($link);
+    @include text($labelMdBold);
   }
 
   &--snwHeaderLink {
-    @include text($snwHeaderLink);
+    @include text($title2);
 
     padding: 0.5rem 0.625rem calc(0.5rem + 2px); // 1 px so that the bottom border of the nav counts as part of the button
     position: relative;
@@ -51,7 +51,7 @@
   &--snwFlyoutLink {
     border-bottom: 1px solid transparent;
 
-    @include text($snwFlyoutLink);
+    @include text($labelLg);
 
     &:hover,
     &:focus-visible {

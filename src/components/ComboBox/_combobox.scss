@@ -23,7 +23,7 @@
   }
 
   &__input {
-    @include text($string2);
+    @include text($labelMd);
 
     accent-color: $soft-black;
     border: 1px solid $keyline-gray;
@@ -61,7 +61,7 @@
   }
 
   &__label {
-    @include text($string2);
+    @include text($labelMd);
 
     color: $pure-black;
     display: inline-block;
@@ -146,7 +146,7 @@
     padding: $padding-micro $padding-xsm;
     transition: background-color 0.1s ease;
 
-    @include text($string2);
+    @include text($labelMd);
 
     &:hover,
     &[data-selected='true'] {
@@ -169,7 +169,7 @@
   }
 
   &__item__invalid-text {
-    @include text($string2);
+    @include text($labelMd);
 
     align-items: center;
     display: flex;

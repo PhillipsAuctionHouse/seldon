@@ -66,7 +66,7 @@ export const ModalFromDrawer = () => {
           <Text variant={TextVariants.heading2} className={`modal-story__drawer-heading`}>
             Drawer Content
           </Text>
-          <Text variant={TextVariants.string2}>Use the button below to launch a modal directly from the drawer.</Text>
+          <Text variant={TextVariants.labelMd}>Use the button below to launch a modal directly from the drawer.</Text>
           <Button onClick={openModal}>Open Modal</Button>
         </div>
       </Drawer>
@@ -75,7 +75,7 @@ export const ModalFromDrawer = () => {
           <Text variant={TextVariants.heading2} className={`modal-story__modal-heading`}>
             Modal Content
           </Text>
-          <Text variant={TextVariants.string2}>Test the focus trap by tabbing through the elements.</Text>
+          <Text variant={TextVariants.labelMd}>Test the focus trap by tabbing through the elements.</Text>
           <input type="text" placeholder="Input field 1" />
           <input type="text" placeholder="Input field 2" />
           <Button onClick={closeModal}>Close Modal</Button>

@@ -29,9 +29,9 @@
     @include DistinctDisplay;
 
     color: $primary-black;
-    font-size: $heading-size4;
+    font-size: $font-size-sm;
     font-variation-settings: 'wght' 600;
-    line-height: $body-line-height-size1;
+    line-height: $line-height-default;
     margin-top: 4px; // better visual align with the close icon
     overflow: hidden;
     text-align: center;

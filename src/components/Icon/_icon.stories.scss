@@ -19,7 +19,7 @@
     padding: 8px;
     text-align: center;
 
-    @include text($string2);
+    @include text($labelMd);
   }
 
   .icon-wrapper {

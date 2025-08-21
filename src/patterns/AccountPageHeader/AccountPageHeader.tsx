@@ -91,7 +91,7 @@ const AccountPageHeader = forwardRef<HTMLDivElement, AccountPageHeaderProps>(
       <div {...commonProps} className={classnames(baseClassName, className)} ref={ref}>
         <div className={`${baseClassName}__container`}>
           {overline && (
-            <Text variant={TextVariants.string2} className={`${baseClassName}__overline`}>
+            <Text variant={TextVariants.labelMd} className={`${baseClassName}__overline`}>
               {overline}
             </Text>
           )}
@@ -102,7 +102,7 @@ const AccountPageHeader = forwardRef<HTMLDivElement, AccountPageHeaderProps>(
             {actionButtons && actionButtons.length > 0 && renderButtons()}
           </div>
           {subtitle && (
-            <Text variant={TextVariants.string2} className={`${baseClassName}__subtitle`}>
+            <Text variant={TextVariants.labelMd} className={`${baseClassName}__subtitle`}>
               {subtitle}
             </Text>
           )}

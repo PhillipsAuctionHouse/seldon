@@ -1,7 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-dropdown {
-  @include text($body3);
+  @include text($bodyMd);
 
   &__trigger {
     align-items: center;
@@ -77,7 +77,7 @@
   }
 
   &__item {
-    @include text($body3);
+    @include text($bodySm);
 
     align-items: center;
     display: flex;

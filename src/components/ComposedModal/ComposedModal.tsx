@@ -94,7 +94,7 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
         id={id}
         ref={ref}
       >
-        <Text variant={TextVariants.heading3} className={`${baseClassName}__title`}>
+        <Text variant={TextVariants.heading2} className={`${baseClassName}__title`}>
           {title}
         </Text>
         <div
@@ -119,7 +119,7 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
               )}
             </div>
             {footerContent && (
-              <Text variant={TextVariants.heading5} className={`${baseClassName}__disclaimer`}>
+              <Text variant={TextVariants.heading3} className={`${baseClassName}__disclaimer`}>
                 {footerContent}
               </Text>
             )}

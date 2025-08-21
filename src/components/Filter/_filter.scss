@@ -37,7 +37,7 @@ $chevron-scale: 0.8;
     }
 
     &__back {
-      @include text($body2); // workaround where the tertiary button text is not scaling at different breakpoints
+      @include text($bodyMd); // workaround where the tertiary button text is not scaling at different breakpoints
 
       margin-top: $spacing-sm;
     }
@@ -64,7 +64,7 @@ $chevron-scale: 0.8;
       height: unset;
 
       &__label {
-        @include text($body2);
+        @include text($labelMdBold);
 
         color: inherit;
         margin-bottom: 0;
@@ -84,7 +84,7 @@ $chevron-scale: 0.8;
   }
 
   &__view-all {
-    @include text($body2); // workaround where the tertiary button text is not scaling at different breakpoints
+    @include text($bodyMd); // workaround where the tertiary button text is not scaling at different breakpoints
   }
 
   &.is-opening {
