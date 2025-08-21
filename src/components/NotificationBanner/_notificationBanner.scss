@@ -2,9 +2,14 @@
 
 .#{$px}-notification-banner {
   background: $light-gray;
+  color: $pure-black;
+  font-size: $snowflake-note-size;
+  font-variation-settings: 'wght' 600;
   left: 0;
+  line-height: $snw-flyout-link-size;
   padding: $spacing-sm $spacing-md;
   position: fixed;
+  text-align: center;
   top: 0;
   width: 100%;
   z-index: $z-index-notification-banner;
