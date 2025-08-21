@@ -172,6 +172,8 @@ $breakpoint-xl: 1801px;
   --snw-heading-hero-line-height-size1: 2.375rem;
   --snw-heading-hero-size2: 1.625rem;
   --snw-heading-hero-line-height-size2: 1.9375rem;
+  --snw-note-size: 0.75rem;
+  --snw-note-line-height: 1rem;
 
   @media (min-width: $breakpoint-md) {
     --quote-size: 1.75rem;
@@ -322,6 +324,8 @@ $snw-heading-hero-line-height2: var(--snw-heading-hero-line-height-size2);
 
 // SNOWFLAKES
 $snowflake-menu-padding: 1.25rem;
+$snowflake-note-size: var(--snw-note-size);
+$snowflake-note-line-height: var(--snw-note-line-height);
 
 /* stylelint-disable-next-line no-duplicate-selectors */
 :root {
