@@ -59,6 +59,25 @@ export interface ProgressWizardProps extends ComponentProps<'div'> {
    * Callback to determine if the current step is valid. Used to enable/disable navigation buttons.
    */
   isStepValid?: (step: number) => boolean;
+
+  /**
+   * The index of the current step (0-based). If provided, wizard is controlled.
+   */
+  currentStep?: number;
+  /**
+   * Callback when step changes (for controlled mode).
+   */
+  onStepChange?: (step: number) => void;
+  /**
+   * Callback to be called when the Back button is pressed.
+   * Receives the current step index.
+   */
+  onStepBack?: (step: number) => void;
+  /**
+   * Callback to be called when a step is submitted (before advancing).
+   * Receives the current step index. Return false to block navigation.
+   */
+  onStepSubmit?: (step: number) => boolean | void;
 }
 
 const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
@@ -76,29 +95,37 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
       onSubmit,
       onCancel,
       isStepValid,
+      currentStep,
+      onStepChange,
+      onStepSubmit,
+      onStepBack,
       ...props
     },
     ref,
   ) => {
-    const [step, setStep] = useState(0);
+    const [internalStep, setInternalStep] = useState(0);
+    const step = typeof currentStep === 'number' ? currentStep : internalStep;
     const isFirst = step === 0;
     const isLast = step === steps.length - 1;
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ProgressWizard');
 
     const goToStep = (next: number) => {
-      setStep(next);
+      if (typeof currentStep === 'number' && onStepChange) {
+        onStepChange(next);
+      } else {
+        setInternalStep(next);
+      }
     };
-
     const handleBack = () => {
+      if (onStepBack) onStepBack(step);
       if (!isFirst) goToStep(step - 1);
     };
-
-    const handleNext = () => {
-      if (!isLast) goToStep(step + 1);
-    };
-
-    const handleSubmit = () => {
+    const handlePrimary = (action: 'next' | 'submit') => {
+      // Always treat as submit: call onStepSubmit and onSubmit
+      if (onStepSubmit && onStepSubmit(step) === false) return;
       onSubmit?.();
+      if (action === 'next' && !isLast) goToStep(step + 1);
+      // For 'submit', goToStep is not called, just onSubmit
     };
 
     return (
@@ -110,7 +137,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
         aria-label="Form Wizard"
       >
         <div className={`${baseClassName}__logo`}>
-          <Icon icon="PhillipsLogo" height={20} width={180} />
+          <Icon icon="PhillipsLogo" height={32} width={120} />
         </div>
         {renderHeader}
         <nav aria-label="Progress">
@@ -138,8 +165,8 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
               </Button>
               <Button
                 variant={ButtonVariants.primary}
-                type="button"
-                onClick={handleNext}
+                type="submit"
+                onClick={() => handlePrimary('next')}
                 className={`${baseClassName}__btn`}
                 aria-label="Start Wizard"
                 isDisabled={isStepValid ? !isStepValid(step) : false}
@@ -151,7 +178,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
             <>
               <Button
                 variant={ButtonVariants.secondary}
-                type="button"
+                type="submit"
                 onClick={handleBack}
                 className={`${baseClassName}__btn`}
                 aria-label="Back"
@@ -160,8 +187,8 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
               </Button>
               <Button
                 variant={ButtonVariants.primary}
-                type="button"
-                onClick={handleSubmit}
+                type="submit"
+                onClick={() => handlePrimary('submit')}
                 className={`${baseClassName}__btn`}
                 aria-label="Submit Wizard"
                 isDisabled={isStepValid ? !isStepValid(step) : false}
@@ -173,7 +200,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
             <>
               <Button
                 variant={ButtonVariants.secondary}
-                type="button"
+                type="submit"
                 onClick={handleBack}
                 className={`${baseClassName}__btn`}
                 aria-label="Back"
@@ -182,8 +209,8 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
               </Button>
               <Button
                 variant={ButtonVariants.primary}
-                type="button"
-                onClick={handleNext}
+                type="submit"
+                onClick={() => handlePrimary('next')}
                 className={`${baseClassName}__btn`}
                 aria-label="Continue Wizard"
                 isDisabled={isStepValid ? !isStepValid(step) : false}

@@ -2,6 +2,7 @@ import { Meta } from '@storybook/react';
 import ProgressWizard, { ProgressWizardProps } from './ProgressWizard';
 import { useState } from 'react';
 import Input from '../../components/Input/Input';
+import { useForm, FormProvider } from 'react-hook-form';
 
 const meta = {
   title: 'Patterns/ProgressWizard',
@@ -116,6 +117,86 @@ export const WithValidation = () => {
 
   return (
     <ProgressWizard steps={exampleSteps} isStepValid={(step) => valid[step]}>
+      {children}
+    </ProgressWizard>
+  );
+};
+
+// New story using react-hook-form
+export const WithReactHookForm = () => {
+  const steps = [{ label: 'Name' }, { label: 'Email' }, { label: 'Password' }];
+
+  // Each step has its own form context
+  const forms = [useForm({ mode: 'onChange' }), useForm({ mode: 'onChange' }), useForm({ mode: 'onChange' })];
+
+  // Validation: require each field to be filled
+  const isStepValid = (step: number) => {
+    switch (step) {
+      case 0:
+        return !!forms[0].watch('name');
+      case 1:
+        return !!forms[1].watch('email');
+      case 2:
+        return !!forms[2].watch('password');
+      default:
+        return false;
+    }
+  };
+
+  const children = [
+    <FormProvider {...forms[0]} key="step1">
+      <form>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+          Name:
+          <input {...forms[0].register('name', { required: true })} />
+        </label>
+      </form>
+    </FormProvider>,
+    <FormProvider {...forms[1]} key="step2">
+      <form>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+          Email:
+          <input type="email" {...forms[1].register('email', { required: true })} />
+        </label>
+      </form>
+    </FormProvider>,
+    <FormProvider {...forms[2]} key="step3">
+      <form>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+          Password:
+          <input type="password" {...forms[2].register('password', { required: true })} />
+        </label>
+      </form>
+    </FormProvider>,
+  ];
+
+  return (
+    <ProgressWizard steps={steps} isStepValid={isStepValid}>
+      {children}
+    </ProgressWizard>
+  );
+};
+
+// Controlled story example
+export const Controlled = () => {
+  const [step, setStep] = useState(0);
+  const steps = [{ label: 'Personal Info' }, { label: 'Contact Details' }, { label: 'Confirmation' }];
+  const children = [
+    <div key="step1" style={{ padding: '2rem' }}>
+      <h3>Step 1: Personal Info</h3>
+      <p>Enter your name and age.</p>
+    </div>,
+    <div key="step2" style={{ padding: '2rem' }}>
+      <h3>Step 2: Contact Details</h3>
+      <p>Enter your email and phone number.</p>
+    </div>,
+    <div key="step3" style={{ padding: '2rem' }}>
+      <h3>Step 3: Confirmation</h3>
+      <p>Review and confirm your details.</p>
+    </div>,
+  ];
+  return (
+    <ProgressWizard steps={steps} currentStep={step} onStepChange={setStep}>
       {children}
     </ProgressWizard>
   );
