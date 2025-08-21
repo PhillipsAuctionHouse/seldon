@@ -1,3 +1,10 @@
+## [1.182.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.182.0...v1.182.1) (2025-08-21)
+
+
+### Bug Fixes
+
+* **NotificationBanner:** L3-7547 Add Notification Banner child style ([#700](https://github.com/PhillipsAuctionHouse/seldon/issues/700)) ([1680bd6](https://github.com/PhillipsAuctionHouse/seldon/commit/1680bd6b03016c4a394c5bf9d4fc06ebb6e5a6eb))
+
 # [1.182.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.181.0...v1.182.0) (2025-08-21)
 
 
