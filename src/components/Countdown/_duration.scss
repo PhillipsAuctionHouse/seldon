@@ -1,7 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-duration {
-  @include text($heading4);
+  @include text($heading5);
 
   display: flex;
   gap: $spacing-micro;

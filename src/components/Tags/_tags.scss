@@ -48,7 +48,7 @@
   }
 
   &--clear {
-    @include text($bodySm);
+    @include text($body3);
 
     align-items: center;
     border-color: $pure-white;

@@ -1,7 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-breadcrumb {
-  @include text($bodyLg);
+  @include text($body2);
 
   color: $pure-black;
 

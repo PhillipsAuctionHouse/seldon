@@ -8,6 +8,4 @@ export enum LinkVariants {
   snwFlyoutLink = TextVariants.snwFlyoutLink,
   /** standard link */
   link = TextVariants.link,
-
-  labelLg = TextVariants.labelLg,
 }

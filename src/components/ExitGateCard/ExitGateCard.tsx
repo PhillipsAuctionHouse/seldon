@@ -86,7 +86,7 @@ const ExitGateCard = forwardRef<HTMLDivElement, ExitGateCardProps>(
 
         <div className={`${baseClassName}__content`}>
           {label ? (
-            <Text variant={TextVariants.bodyMd} element="span" className={`${baseClassName}__content-label`}>
+            <Text variant={TextVariants.body2} element="span" className={`${baseClassName}__content-label`}>
               {label}
             </Text>
           ) : null}
@@ -98,7 +98,7 @@ const ExitGateCard = forwardRef<HTMLDivElement, ExitGateCardProps>(
           ) : null}
 
           {description ? (
-            <Text variant={TextVariants.bodyMd} element="span" className={`${baseClassName}__content-description`}>
+            <Text variant={TextVariants.body2} element="span" className={`${baseClassName}__content-description`}>
               {description}
             </Text>
           ) : null}

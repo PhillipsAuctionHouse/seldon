@@ -1,7 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-tabs-container {
-  @include text($bodyMd);
+  @include text($body2);
 
   width: 100%;
 

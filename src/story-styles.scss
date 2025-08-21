@@ -28,7 +28,7 @@ h6 {
 
 // Design markdown styles
 .h1 {
-  @include hText(var(--size-xl), null, uppercase, $line-height: var(--size-lg));
+  @include hText($heading-size1, null, uppercase);
 
   display: flex;
   margin-bottom: 1.5rem;
@@ -40,7 +40,7 @@ h6 {
 }
 
 .h2 {
-  @include hText(var(--size-xl), null, uppercase, $line-height: var(--size-lg));
+  @include hText($heading-size2);
 
   color: $clock-widget-blue;
   display: block;
@@ -48,7 +48,7 @@ h6 {
 }
 
 .h3 {
-  @include hText(var(--size-md), null, uppercase, $line-height: var(--size-lg));
+  @include hText($heading-size3);
 
   display: block;
   margin-bottom: 1rem;

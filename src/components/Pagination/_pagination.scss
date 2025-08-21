@@ -32,7 +32,7 @@
 
 .#{$px}--inline-pagination__wrapper {
   select {
-    @include text($bodyMd);
+    @include pText($body-size2);
 
     appearance: none;
     border: none;

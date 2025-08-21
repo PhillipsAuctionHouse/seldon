@@ -89,39 +89,39 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
         <div className={`${baseClassName}__content`}>
           {children && <div className={`${baseClassName}__children`}>{children}</div>}
 
-          {sessionTimesLabel && <Text variant={TextVariants.heading3}>{sessionTimesLabel}</Text>}
+          {sessionTimesLabel && <Text variant={TextVariants.heading4}>{sessionTimesLabel}</Text>}
           {sessionTimes &&
             sessionTimes.length > 0 &&
             sessionTimes.map((session) => (
               <div key={`${session.sessionLabel ?? ''}-${session.sessionTime ?? ''}`}>
                 {session.sessionLabel && (
-                  <Text variant={TextVariants.heading4} className={`${baseClassName}__label`}>
+                  <Text variant={TextVariants.heading5} className={`${baseClassName}__label`}>
                     {session.sessionLabel}
                   </Text>
                 )}
                 {session.sessionTime && (
-                  <Text variant={TextVariants.bodyMd} className={`${baseClassName}__text`}>
+                  <Text variant={TextVariants.body2} className={`${baseClassName}__text`}>
                     {session.sessionTime}
                   </Text>
                 )}
               </div>
             ))}
-          {label && <Text variant={TextVariants.heading3}>{label}</Text>}
+          {label && <Text variant={TextVariants.heading4}>{label}</Text>}
           {viewingTimes &&
             viewingTimes.length > 0 &&
             viewingTimes.map((time) => (
-              <Text key={time} variant={TextVariants.bodyMd} className={`${baseClassName}__label`}>
+              <Text key={time} variant={TextVariants.body2} className={`${baseClassName}__label`}>
                 {time}
               </Text>
             ))}
 
           {location && (
-            <Text variant={TextVariants.bodyMd} className={`${baseClassName}__location`}>
+            <Text variant={TextVariants.body2} className={`${baseClassName}__location`}>
               {location}
             </Text>
           )}
           {mapLink && (
-            <Text variant={TextVariants.bodyMd} className={`${baseClassName}__map-link`}>
+            <Text variant={TextVariants.body2} className={`${baseClassName}__map-link`}>
               <Component href={mapLink}>(Map)</Component>
             </Text>
           )}
