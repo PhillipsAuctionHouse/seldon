@@ -21,7 +21,14 @@
     line-height: $snw-flyout-link-size;
     text-align: center;
 
-    > a {
+  > .notification-banner-content {
+    color: $pure-black;
+    font-size: $snowflake-note-size;
+    font-variation-settings: 'wght' 600;
+    line-height: $snw-flyout-link-size;
+    text-align: center;
+
+    a {
       cursor: pointer;
       text-decoration: underline;
   }
