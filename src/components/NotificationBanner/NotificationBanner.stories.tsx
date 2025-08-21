@@ -363,3 +363,26 @@ export const StringMessage = (props: NotificationBannerProps) => (
 StringMessage.args = {
   children: 'You can bid, but there may be a delay with confirmations.',
 };
+
+export const NestedMessage = (props: NotificationBannerProps) => (
+  <div style={{ height: '100px' }}>
+    <NotificationBanner {...props} />
+  </div>
+);
+
+NestedMessage.args = {
+  children: (
+    <>
+      <div>
+        Test Message:
+        <br />
+        <div>
+          Click here to:
+          <a href="#" className={`${px}-notification-banner-link`}>
+            Learn more
+          </a>
+        </div>
+      </div>
+    </>
+  ),
+};
