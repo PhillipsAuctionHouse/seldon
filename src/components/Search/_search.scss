@@ -41,10 +41,6 @@
       transition: width 0.25s ease-in 0.2s;
       width: 100%;
     }
-
-    @include isHeaderMobile {
-      left: $spacing-md;
-    }
   }
 
   &__input-status-icon {
@@ -137,22 +133,21 @@
 .#{$px}-search__container {
   @include isHeaderMobile {
     border-bottom: 1px solid $light-gray;
-    left: 50%;
-    margin-left: -50vw;
+    margin-right: $spacing-md;
+    padding-left: $spacing-md;
     position: relative;
-    width: 100vw;
+    width: 100%;
   }
 
   &__inner {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
-    padding: 0 $padding-md;
+    padding: 0;
     pointer-events: all;
 
     @include isHeaderDesktop {
       cursor: default;
-      padding: 0;
     }
 
     @include isHeaderMobile {

@@ -5,7 +5,6 @@
   display: flex;
   height: fit-content;
   justify-content: center;
-  width: 100vw;
 
   &__list-container {
     display: flex;
@@ -20,6 +19,10 @@
 
       @include isHeaderDesktop {
         border-top: unset;
+      }
+
+      @include isHeaderMobile {
+        padding: 0 $spacing-md;
       }
 
       .#{$px}-nav__item + .#{$px}-accordion {
