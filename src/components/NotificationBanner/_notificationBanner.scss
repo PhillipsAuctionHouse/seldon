@@ -1,0 +1,46 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-notification-banner {
+  background: $light-gray;
+  color: $pure-black;
+  font-size: $snowflake-note-size;
+  font-variation-settings: 'wght' 600;
+  left: 0;
+  line-height: $snowflake-note-line-height;
+  padding: $spacing-sm $spacing-md;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  z-index: $z-index-notification-banner;
+
+  > * {
+    font-size: $snowflake-note-size;
+    font-variation-settings: 'wght' 600;
+    line-height: $snowflake-note-line-height;
+    text-align: center;
+
+    a {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+
+  > .#{$px}-notification-banner-content {
+    color: $pure-black;
+    font-size: $snowflake-note-size;
+    font-variation-settings: 'wght' 600;
+    line-height: $snowflake-note-line-height;
+    text-align: center;
+
+    a {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+
+  .#{$px}-notification-banner-link {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}

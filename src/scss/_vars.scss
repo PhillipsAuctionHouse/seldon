@@ -223,6 +223,8 @@ $breakpoint-xl: 1801px;
   --snw-heading-hero-line-height-size1: 2.375rem;
   --snw-heading-hero-size2: 1.625rem;
   --snw-heading-hero-line-height-size2: 1.9375rem;
+  --snw-note-size: 0.75rem;
+  --snw-note-line-height: 1rem;
 
   @media (min-width: $breakpoint-md) {
     --quote-size: 1.75rem;
@@ -373,6 +375,8 @@ $snw-heading-hero-line-height2: var(--snw-heading-hero-line-height-size2);
 
 // SNOWFLAKES
 $snowflake-menu-padding: 1.25rem;
+$snowflake-note-size: var(--snw-note-size);
+$snowflake-note-line-height: var(--snw-note-line-height);
 
 /* stylelint-disable-next-line no-duplicate-selectors */
 :root {
@@ -448,6 +452,7 @@ $margin-xxl: var(--spacing-xxl);
 :root {
   --header-height: 56px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
   --search-size: 2.625rem; // This should be calculated from the scaling text and scaling spacing tokens instead of hardcoding in case they change
+  --banner-height: 0px;
 
   @media (min-width: $breakpoint-md) {
     --header-height: 123px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
@@ -469,6 +474,7 @@ $desktop-max-width: var(--desktop-max-width);
 /// z-index TOKENS:
 ///////////////////////
 $modal-z-index: 30;
+$z-index-notification-banner: 1000;
 
 ////////////////////////
 /// Our tokens usually support at least 4 sizes.
