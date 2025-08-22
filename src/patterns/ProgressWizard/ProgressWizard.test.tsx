@@ -3,12 +3,17 @@ import userEvent from '@testing-library/user-event';
 import ProgressWizard, { ProgressWizardProps } from './ProgressWizard';
 import { describe, it, expect, vi } from 'vitest';
 
-const steps = [{ label: 'Step 1' }, { label: 'Step 2' }, { label: 'Step 3' }];
+const steps = [
+  { id: '0', label: 'Step 1' },
+  { id: '1', label: 'Step 2' },
+  { id: '2', label: 'Step 3' },
+];
 
 const renderProgressWizard = (props: Partial<ProgressWizardProps> = {}) => {
   const defaultProps: ProgressWizardProps = {
     steps,
     children: steps.map((step, index) => <div key={index}>Content for {step.label}</div>),
+    reportStepValidity: vi.fn(),
     onSubmit: vi.fn(),
     onCancel: vi.fn(),
     ...props,
