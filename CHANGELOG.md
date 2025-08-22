@@ -1,3 +1,10 @@
+# [1.183.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.182.1...v1.183.0) (2025-08-22)
+
+
+### Features
+
+* **icons:** PHOENIX-2071 adding icon ([#701](https://github.com/PhillipsAuctionHouse/seldon/issues/701)) ([10d0000](https://github.com/PhillipsAuctionHouse/seldon/commit/10d0000341b9ca3a91e573fed7aef7afdd66fad9))
+
 ## [1.182.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.182.0...v1.182.1) (2025-08-21)
 
 
