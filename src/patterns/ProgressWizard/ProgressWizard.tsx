@@ -1,27 +1,34 @@
-import { ComponentProps, forwardRef, useState } from 'react';
+import { cloneElement, ComponentProps, forwardRef, useState } from 'react';
 import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';
 import ProgressIndicator from '../../components/ProgressIndicator/ProgressIndicator';
 import { getCommonProps } from '../../utils';
 import classNames from 'classnames';
 import Icon from '../../components/Icon/Icon';
+import { v4 as uuidv4 } from 'uuid';
+
+export type ProgressWizardStepProps = {
+  formId: string;
+  goToStep: (step: number) => void;
+  reportStepValidity: ProgressWizardProps['reportStepValidity'];
+};
 
 export interface ProgressWizardProps extends ComponentProps<'div'> {
   /**
    * An array of step objects, each containing a `label` and an optional `id`.
    * Represents the steps in the wizard.
    */
-  steps: Array<{ label: string; id?: string }>;
+  steps: Array<{ label: string; id: string }>;
 
   /**
    * The content to be rendered inside the wizard. Typically includes the step-specific content.
    */
-  children: React.ReactNode;
+  children: React.ReactElement<ProgressWizardStepProps> | React.ReactElement<ProgressWizardStepProps>[];
 
   /**
    * Optional custom header to render above the wizard steps.
    */
-  renderHeader?: React.ReactNode;
+  customHeader?: React.ReactNode;
 
   /**
    * Label for the "Start" button. Defaults to a standard label if not provided.
@@ -48,18 +55,21 @@ export interface ProgressWizardProps extends ComponentProps<'div'> {
    */
   submitLabel?: string;
   /**
-   * Callback function to be called when the wizard is submitted.
+   * Optional callback function to be called when the wizard is submitted, if not supplied the wizard will use the default form submit
    */
   onSubmit?: () => void;
   /**
-   * Callback function to be called when the wizard is canceled.
+   * Optional callback function to be called when the wizard is canceled.
    */
   onCancel?: () => void;
   /**
-   * Callback to determine if the current step is valid. Used to enable/disable navigation buttons.
+   * Optional function to determine if the current step is valid. Used to enable/disable navigation buttons. If not supplied, continuing is always available.
    */
-  isStepValid?: (step: number) => boolean;
-
+  isStepValid?: (step?: number) => boolean;
+  /**
+   * Function to pass to the step components to send up their own validity state
+   */
+  reportStepValidity: (isValid: boolean) => void;
   /**
    * The index of the current step (0-based). If provided, wizard is controlled.
    */
@@ -75,9 +85,9 @@ export interface ProgressWizardProps extends ComponentProps<'div'> {
   onStepBack?: (step: number) => void;
   /**
    * Callback to be called when a step is submitted (before advancing).
-   * Receives the current step index. Return false to block navigation.
+   * Optionally receives the current step index. Can return false to prevent advancing.
    */
-  onStepSubmit?: (step: number) => boolean | void;
+  onStepSubmit?: (step?: number) => boolean | void;
 }
 
 const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
@@ -86,7 +96,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
       className,
       steps,
       children,
-      renderHeader,
+      customHeader: renderHeader,
       startLabel = 'Start',
       cancelLabel = 'Cancel',
       backLabel = 'Back',
@@ -94,39 +104,61 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
       submitLabel = 'Submit',
       onSubmit,
       onCancel,
-      isStepValid,
-      currentStep,
+      isStepValid = () => true,
+      reportStepValidity,
+      currentStep: externalStep,
       onStepChange,
-      onStepSubmit,
+      onStepSubmit: preSubmitStepAction,
       onStepBack,
       ...props
     },
     ref,
   ) => {
     const [internalStep, setInternalStep] = useState(0);
-    const step = typeof currentStep === 'number' ? currentStep : internalStep;
+    const step = externalStep ?? internalStep;
     const isFirst = step === 0;
     const isLast = step === steps.length - 1;
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ProgressWizard');
+    const uniqueFormId = uuidv4();
 
-    const goToStep = (next: number) => {
-      if (typeof currentStep === 'number' && onStepChange) {
-        onStepChange(next);
+    const goToStep = (targetStep: number) => {
+      if (!steps[targetStep]) return;
+      if (externalStep) {
+        onStepChange?.(targetStep);
       } else {
-        setInternalStep(next);
+        setInternalStep(targetStep);
       }
     };
     const handleBack = () => {
-      if (onStepBack) onStepBack(step);
-      if (!isFirst) goToStep(step - 1);
+      if (onStepBack) onStepBack(step); // 🎺 debatable if we want this function to be called for an invalid back action. I think yes for the case of little warnings or animations or whatever
+      if (steps[step - 1]) goToStep(step - 1);
     };
+
+    const submitForm = () => {
+      const form = document.getElementById(uniqueFormId);
+      if (form instanceof HTMLFormElement) {
+        form.requestSubmit();
+      } else {
+        console.error('Form element not found for submission');
+      }
+    };
+
     const handlePrimary = (action: 'next' | 'submit') => {
       // Always treat as submit: call onStepSubmit and onSubmit
-      if (onStepSubmit && onStepSubmit(step) === false) return;
-      onSubmit?.();
-      if (action === 'next' && !isLast) goToStep(step + 1);
-      // For 'submit', goToStep is not called, just onSubmit
+      const submitAction = onSubmit ? onSubmit : submitForm;
+      const preSubmitStepActionResult = preSubmitStepAction?.(step) ?? true;
+      // If pre-submit action returns false, we have failed external validation
+      if (!preSubmitStepActionResult) return;
+      submitAction();
+      if (action === 'next') goToStep(step + 1);
     };
+
+    // we only need one child at a time, and that child needs the unique form ID. and `goToStep` if that child needs to hop around
+    const stepContent = cloneElement(Array.isArray(children) ? children[step] : children, {
+      formId: uniqueFormId,
+      goToStep,
+      reportStepValidity,
+    });
 
     return (
       <div
@@ -149,7 +181,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
           />
         </nav>
         <div className={`${baseClassName}__content`} role="group" aria-labelledby={`wizard-step-label-${step}`}>
-          {Array.isArray(children) ? children[step] : children}
+          {stepContent}
         </div>
         <div className={`${baseClassName}__footer`}>
           {isFirst ? (
@@ -169,7 +201,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
                 onClick={() => handlePrimary('next')}
                 className={`${baseClassName}__btn`}
                 aria-label="Start Wizard"
-                isDisabled={isStepValid ? !isStepValid(step) : false}
+                isDisabled={!isStepValid(step)}
               >
                 {startLabel}
               </Button>
@@ -191,7 +223,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
                 onClick={() => handlePrimary('submit')}
                 className={`${baseClassName}__btn`}
                 aria-label="Submit Wizard"
-                isDisabled={isStepValid ? !isStepValid(step) : false}
+                isDisabled={!isStepValid(step)}
               >
                 {submitLabel}
               </Button>
@@ -213,7 +245,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
                 onClick={() => handlePrimary('next')}
                 className={`${baseClassName}__btn`}
                 aria-label="Continue Wizard"
-                isDisabled={isStepValid ? !isStepValid(step) : false}
+                isDisabled={!isStepValid(step)}
               >
                 {continueLabel}
               </Button>
