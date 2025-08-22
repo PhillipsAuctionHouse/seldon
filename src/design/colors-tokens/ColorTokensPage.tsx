@@ -40,22 +40,6 @@ const colorSections = [
           { label: '$black-25', hex: 'rgba(0, 0, 0, 0.25)' },
         ],
       },
-      {
-        blockTitle: 'Neutrals - WIP',
-        blockDescription: (
-          <span className="p">
-            Our neutral palette supports the primary colours by offering softer alternatives for UI elements like
-            backgrounds, outlines, dividers, and key-lines - especially in cases where pure black may feel too harsh or
-            dominant.
-          </span>
-        ),
-        colors: [
-          { label: 'placeholder', hex: '#000000' },
-          { label: 'placeholder', hex: 'rgba(0, 0, 0, 0.75)' },
-          { label: 'placeholder', hex: 'rgba(0, 0, 0, 0.50)' },
-          { label: 'placeholder', hex: 'rgba(0, 0, 0, 0.25)' },
-        ],
-      },
     ],
   },
   {
