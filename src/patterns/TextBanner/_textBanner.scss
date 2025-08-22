@@ -5,17 +5,20 @@
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 24px;
+    justify-content: center;
     max-width: none;
-    padding: 40px 48px;
+    padding: 32px 24px;
 
     h1 {
       white-space: nowrap;
     }
 
     h1,
-    p {
+    p,
+    span {
       color: $pure-black;
+      margin: 0;
       max-width: 100%;
       min-height: 48px;
       text-align: left;
@@ -28,7 +31,6 @@
       h1,
       p,
       span {
-        margin: 0;
         max-width: 50%;
         width: 50%;
       }
