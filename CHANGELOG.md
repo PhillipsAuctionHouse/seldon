@@ -1,3 +1,10 @@
+## [1.183.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.183.0...v1.183.1) (2025-08-24)
+
+
+### Bug Fixes
+
+* **text:** L3-7235 should render span not p by default ([#694](https://github.com/PhillipsAuctionHouse/seldon/issues/694)) ([bdefcf8](https://github.com/PhillipsAuctionHouse/seldon/commit/bdefcf8d2cf30a3aec71659c14bfa9777e4b7749))
+
 # [1.183.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.182.1...v1.183.0) (2025-08-22)
 
 
