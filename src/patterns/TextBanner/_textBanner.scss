@@ -1,0 +1,35 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-text-banner {
+  &__content-wrapper {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: none;
+    padding: 40px 48px;
+
+    h1 {
+      white-space: nowrap;
+    }
+
+    h1,
+    p {
+      color: $pure-black;
+      max-width: 100%;
+      min-height: 48px;
+      text-align: left;
+    }
+
+    @include media($breakpoint-md) {
+      align-items: center;
+      flex-direction: row;
+
+      h1,
+      p {
+        max-width: 50%;
+        width: 50%;
+      }
+    }
+  }
+}

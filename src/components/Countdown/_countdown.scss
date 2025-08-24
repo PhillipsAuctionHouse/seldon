@@ -1,7 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-countdown {
-  @include text($bodyMd);
+  @include text($body2);
 
   align-items: center;
   border-bottom: none;
@@ -18,7 +18,7 @@
   }
 
   &__countdown-container {
-    @include text($heading4);
+    @include text($heading5);
 
     align-items: center;
     display: flex;

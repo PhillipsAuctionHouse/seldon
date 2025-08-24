@@ -1,184 +1,147 @@
-/* stylelint-disable declaration-property-value-disallowed-list */
 @use '#scss/vars' as *;
 @use '#scss/type' as *;
 
-:root {
-  .type-block__column--small {
-    @include font-size-vars--sm;
+.type-tokens,
+.doc-wrapper {
+  .exp {
+    @include pText($body-size1);
+
+    color: $keyline-gray;
   }
 
-  .type-block__column--medium {
-    @include font-size-vars--md;
+  .property {
+    // @include pText($body-size2);
+    // font-variation-settings: 'wght' 400;
+    color: $post-sale-magenta;
   }
 
-  .type-block__column--large {
-    @include font-size-vars--lg;
-  }
-}
-
-.type-block {
-  margin-bottom: 48px;
-
-  &__item {
-    border-bottom: 1px solid #eae9e6;
-    display: flex;
-    flex-direction: column;
-    height: 6.5rem;
-    justify-content: space-between;
-    margin-top: 2rem;
-    padding-bottom: 2rem;
+  li:not(li strong) {
+    color: $clock-widget-green;
+    font-family: monospace;
+    font-variation-settings: 'wght' 600;
   }
 
-  &__title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 24px;
-    margin-top: 5rem;
+  li strong {
+    color: $clock-widget-blue;
   }
 
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-  }
+  .example {
+    background: #efefef;
+    display: block;
+    margin-top: 1rem;
+    padding: 1.5rem;
+    text-align: center;
 
-  &__column {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
+    .property {
+      // @include pText($body-size2);
+      // font-variation-settings: 'wght' 400;
+      color: $post-sale-magenta;
+    }
 
-  &__header {
-    border-bottom: 1px solid #eae9e6;
-    color: #545454;
-    font-family: Montserrat, sans-serif;
-    font-size: 0.75rem;
-    font-style: normal;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 1rem; /* 133.333% */
-    padding-bottom: 1rem;
-  }
+    .h4 + ul li:not(li strong) {
+      color: $clock-widget-green;
+      font-family: monospace;
+      font-variation-settings: 'wght' 600;
+    }
 
-  &__specs {
-    color: #545454;
-    font-family: Montserrat, sans-serif;
-    font-size: 0.75rem;
-    font-style: normal;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 1rem; /* 133.333% */
-  }
+    .h4 + ul li strong {
+      color: $clock-widget-blue;
+    }
 
-  // Titles
-  &__title-1 {
-    @include text($title1);
-  }
+    &--h1 {
+      @include text($heading1);
+    }
 
-  &__title-2 {
-    @include text($title2);
-  }
+    &--h2 {
+      @include text($heading2);
+    }
 
-  &__title-3 {
-    @include text($title3);
-  }
+    &--h3 {
+      @include text($heading3);
+    }
 
-  &__title-4 {
-    @include text($title4);
-  }
+    &--h4 {
+      @include text($heading4);
+    }
 
-  &__heading-1 {
-    @include text($heading1);
-  }
+    &-title {
+      &--h1 {
+        @include text($title1);
+      }
 
-  &__heading-2 {
-    @include text($heading2);
-  }
+      &--h2 {
+        @include text($title2);
+      }
 
-  &__heading-3 {
-    @include text($heading3);
-  }
+      &--h3 {
+        @include text($title3);
+      }
 
-  &__heading-3--italic {
-    @include text($heading3Italic);
-  }
+      &--h4 {
+        @include text($title4);
+      }
+    }
 
-  &__heading-4 {
-    @include text($heading4);
-  }
+    &--p1 {
+      @include text($body1);
+    }
 
-  &__heading-4--italic {
-    @include text($heading4Italic);
-  }
+    &--p2 {
+      @include text($body2);
+    }
 
-  // Labels
-  &__label-large {
-    @include text($labelLg);
-  }
+    &--p3 {
+      @include text($body3);
+    }
 
-  &__label-medium {
-    @include text($labelMd);
-  }
+    &-string {
+      &--p1 {
+        @include text($body1);
+      }
 
-  &__label-small {
-    @include text($labelSm);
-  }
+      &--p2 {
+        @include text($body2);
+      }
 
-  &__label-large-bold {
-    @include text($labelLgBold);
-  }
+      &--p3 {
+        @include text($body3);
+      }
+    }
 
-  &__label-medium-bold {
-    @include text($labelMdBold);
-  }
+    &--button {
+      @include text($button);
+    }
 
-  &__label-small-bold {
-    @include text($labelSmBold);
-  }
+    &--link {
+      @include text($link);
+    }
 
-  // Buttons & Links
-  &__button {
-    @include text($labelMdBold);
-  }
+    &--email {
+      @include text($email);
+    }
 
-  &__link {
-    @include text($link);
-  }
+    &--label {
+      @include text($label);
+    }
 
-  &__link-bold {
-    @include text($linkBold);
-  }
+    &--badge {
+      @include text($badge);
+    }
 
-  // Body
-  &__body-large {
-    @include text($bodyLg);
-  }
+    &-snw-header-link {
+      @include text($snwHeaderLink);
+    }
 
-  &__body-medium {
-    @include text($bodyMd);
-  }
+    &-snw-flyout-link {
+      @include text($snwFlyoutLink);
+    }
 
-  &__body-small {
-    @include text($bodySm);
-  }
+    &-snw-heading-hero1 {
+      @include text($snwHeadingHero1);
+    }
 
-  &__body-large-bold {
-    @include text($bodyLgBold);
-  }
-
-  &__body-medium-bold {
-    @include text($bodyMdBold);
-  }
-
-  &__body-small-bold {
-    @include text($bodySmBold);
-  }
-
-  // Eyebrow
-  &__eyebrow-large {
-    @include text($eyebrowLg);
-  }
-
-  &__eyebrow-small {
-    @include text($eyebrowSm);
+    &-snw-heading-hero2 {
+      @include text($snwHeadingHero2);
+    }
   }
 }

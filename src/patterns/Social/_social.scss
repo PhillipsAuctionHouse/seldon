@@ -29,7 +29,7 @@ $num_icons: 5;
   }
 
   &__button {
-    @include text($labelMdBold);
+    @include labelText('link');
 
     border-radius: 0;
     color: $pure-black;

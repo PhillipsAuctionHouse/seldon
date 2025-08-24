@@ -45,7 +45,7 @@
   }
 
   &-atcb-item-link {
-    @include text($bodyMd);
+    @include text($body-size2);
 
     background: none;
     border: none;
@@ -66,7 +66,7 @@
     }
 
     span {
-      @include text($bodyMd);
+      @include text($body-size2);
 
       font-variation-settings: 'wght' 400;
       text-decoration: none;

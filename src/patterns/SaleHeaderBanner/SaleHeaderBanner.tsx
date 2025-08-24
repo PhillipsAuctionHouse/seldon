@@ -162,21 +162,21 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
                 <div className={`${baseClassName}__stack__countdown`}>{<Countdown {...countdownProps} />}</div>
               </SSRMediaQuery.Media>
             ) : null}
-            <Text variant={TextVariants.eyebrowSm}>{headerLabel}</Text>
+            <Text variant={TextVariants.badge}>{headerLabel}</Text>
             <Text variant={TextVariants.title1}>{auctionTitle}</Text>
             {badgeText && (
-              <Text variant={TextVariants.eyebrowSm} className={`${baseClassName}__badge`}>
+              <Text variant={TextVariants.badge} className={`${baseClassName}__badge`}>
                 {badgeText}
               </Text>
             )}
-            <Text variant={TextVariants.labelMd} className={`${baseClassName}__location`}>
+            <Text variant={TextVariants.string2} className={`${baseClassName}__location`}>
               {location}
             </Text>
             <div className={`${baseClassName}__occurrence-details`}>
               {occurrenceInformation.map(({ date, occurrenceLabel }) => (
                 <div className={`${baseClassName}__occurrence-details-text`} key={String(date)}>
-                  <Text variant={TextVariants.labelMd}>{occurrenceLabel}</Text>
-                  <Text variant={TextVariants.labelMd} className={`${baseClassName}__date`}>
+                  <Text variant={TextVariants.string2}>{occurrenceLabel}</Text>
+                  <Text variant={TextVariants.string2} className={`${baseClassName}__date`}>
                     {date}
                   </Text>
                 </div>

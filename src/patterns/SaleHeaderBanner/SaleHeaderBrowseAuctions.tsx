@@ -14,7 +14,7 @@ const SaleHeaderBrowseAuctions = forwardRef<HTMLElement, SaleHeaderBrowseAuction
 
     return (
       <div className={`${baseClassName}__occurrence-details-text`}>
-        <Text variant={TextVariants.labelMd}>{ctaLabel}</Text>
+        <Text variant={TextVariants.string2}>{ctaLabel}</Text>
         <Link href="/calendar">{ctaText}</Link>
       </div>
     );

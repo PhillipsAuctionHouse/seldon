@@ -8,7 +8,7 @@
   display: flex;
   gap: $spacing-md;
 
-  @include text($labelMd);
+  @include text($string2);
 
   &__label {
     flex-shrink: 0;

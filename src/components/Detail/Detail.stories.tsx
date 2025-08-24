@@ -13,7 +13,7 @@ export const Playground = (props: DetailProps) => <Detail {...props} />;
 Playground.args = {
   label: 'Label',
   subLabel: '',
-  value: <Text variant={TextVariants.labelMd}>Value</Text>,
+  value: <Text variant={TextVariants.string2}>Value</Text>,
 };
 
 Playground.argTypes = {};

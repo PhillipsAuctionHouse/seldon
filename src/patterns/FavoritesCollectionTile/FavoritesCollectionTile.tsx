@@ -309,7 +309,7 @@ const FavoritesCollectionTile = memo(
             <div className={`${baseClassName}__header`}>
               <div className={`${baseClassName}__info`}>
                 {hasListNameAndCount && (
-                  <Text element="span" className={`${baseClassName}__count`} variant={TextVariants.bodySm}>
+                  <Text element="span" className={`${baseClassName}__count`} variant={TextVariants.body3}>
                     {formatlotStr && hasListNameAndCount && formatlotStr(count)}
                   </Text>
                 )}

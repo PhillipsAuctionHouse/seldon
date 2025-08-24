@@ -1,3 +1,22 @@
+# [1.182.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.181.0...v1.182.0) (2025-08-21)
+
+
+### Features
+
+* **header:** L3-5714 Small slice of a button on narrow windows ([#689](https://github.com/PhillipsAuctionHouse/seldon/issues/689)) ([3d66b67](https://github.com/PhillipsAuctionHouse/seldon/commit/3d66b6736dd038349a10f48bea41d6e214be2c45))
+
+
+### Reverts
+
+* **_type:** L3-7279 typography tokens ([#698](https://github.com/PhillipsAuctionHouse/seldon/issues/698)) ([9a942b1](https://github.com/PhillipsAuctionHouse/seldon/commit/9a942b1b99901b61b02425f2664f222c092248ba))
+
+# [1.181.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.180.0...v1.181.0) (2025-08-21)
+
+
+### Features
+
+* **HeroBanner:** L3-7300 add Text Banner ([#674](https://github.com/PhillipsAuctionHouse/seldon/issues/674)) ([066f8d5](https://github.com/PhillipsAuctionHouse/seldon/commit/066f8d5fd81a02a9417ed3b4f02dfdfea712c589))
+
 # [1.180.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.179.0...v1.180.0) (2025-08-20)
 
 

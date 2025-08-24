@@ -4,8 +4,8 @@ import { px } from '../../utils';
 
 describe('determineTextClassName', () => {
   it('should return the correct class name for body variant', () => {
-    const className = determineTextClassName(TextVariants.bodyLg);
-    expect(className).toBe(`${px}-text--bodyLg`);
+    const className = determineTextClassName(TextVariants.body1);
+    expect(className).toBe(`${px}-text--body1`);
   });
 
   it('should return the correct class name for label variant', () => {
@@ -31,7 +31,7 @@ describe('determineTextClassName', () => {
 
 describe('determineDefaultTextElement', () => {
   it('should return "span" for body variant', () => {
-    const element = determineDefaultTextElement(TextVariants.bodyLg);
+    const element = determineDefaultTextElement(TextVariants.body1);
     expect(element).toBe('span');
   });
 
@@ -63,20 +63,20 @@ describe('determineDefaultTextElement', () => {
     expect(element).toBe('h3');
   });
 
-  it('should return "h3" for heading3 variant', () => {
-    const element = determineDefaultTextElement(TextVariants.heading3Italic);
-    expect(element).toBe('h3');
-  });
+  // it('should return "h3" for heading3 variant', () => {
+  //   const element = determineDefaultTextElement(TextVariants.heading3Italic);
+  //   expect(element).toBe('h3');
+  // });
 
   it('should return "h4" for heading4 variant', () => {
     const element = determineDefaultTextElement(TextVariants.heading4);
     expect(element).toBe('h4');
   });
 
-  it('should return "h4" for heading4Italic variant', () => {
-    const element = determineDefaultTextElement(TextVariants.heading4Italic);
-    expect(element).toBe('h4');
-  });
+  // it('should return "h4" for heading4Italic variant', () => {
+  //   const element = determineDefaultTextElement(TextVariants.heading4Italic);
+  //   expect(element).toBe('h4');
+  // });
 
   it('should return "h4" for heading4 variant', () => {
     const element = determineDefaultTextElement(TextVariants.heading5);

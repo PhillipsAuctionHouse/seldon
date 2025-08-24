@@ -5,13 +5,13 @@
   width: 100%;
 
   &__title {
-    @include text($heading2);
+    @include text($heading3);
 
     margin-bottom: $spacing-xsm;
   }
 
   &__blurb {
-    @include text($bodyLg);
+    @include text($body1);
 
     color: $pure-black;
   }
@@ -27,6 +27,6 @@
   }
 
   &__privacy {
-    @include text($bodySm);
+    @include text($body3);
   }
 }

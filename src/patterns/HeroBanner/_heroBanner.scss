@@ -45,25 +45,31 @@ body:has(.seldon-header__toggle-btn--open) {
     margin: 0;
   }
 
-  h1,
-  h2,
-  p {
-    color: $pure-white;
-    text-align: center;
-  }
-
-  p {
-    font-size: 0.875rem;
-    letter-spacing: 0.125rem;
-    line-height: 1;
-    text-align: center;
-  }
-
   & .#{$px}-hero-banner__content-wrapper {
     align-items: center;
     display: flex;
     flex-direction: column;
     max-width: 1082px;
+
+    h1,
+    h2,
+    p {
+      color: $pure-white;
+      text-align: center;
+    }
+
+    p {
+      font-size: 0.875rem;
+      letter-spacing: 0.125rem;
+      line-height: 1;
+      text-align: center;
+    }
+
+    & .#{$px}-hero-banner__text-description {
+      text-transform: none;
+
+      @include text($body2);
+    }
   }
 
   & .#{$px}-hero-banner__pre-head {

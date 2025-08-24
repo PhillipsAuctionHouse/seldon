@@ -37,7 +37,7 @@ export const LotSymbol = () => (
 );
 
 export const EstimateSymbol = () => (
-  <Text variant={TextVariants.bodyMd}>
+  <Text variant={TextVariants.body2}>
     $1,000 - $2,000
     <TextSymbol symbols={allSymbols} variant={TextSymbolVariants.estimation} />
   </Text>
