@@ -22,22 +22,29 @@
   }
 }
 
-h1.#{$px}-text,
-blockquote.#{$px}-text {
+.#{$px}-text--blockquote,
+.#{$px}-text--heading1,
+.#{$px}-text--snwHeadingHero1,
+.#{$px}-text--snwHeadingHero2 {
   margin-bottom: $spacing-lg;
 }
 
-h2.#{$px}-text {
+.#{$px}-text--heading2 {
   margin-bottom: $spacing-lg;
 }
-h3.#{$px}-text {
+
+.#{$px}-text--heading3,
+.#{$px}-text--heading3Italic {
   margin-bottom: $spacing-md;
 }
-h4.#{$px}-text,
-h5.#{$px}-text,
-h6.#{$px}-text {
+
+.#{$px}-text--heading4,
+.#{$px}-text--heading4Italic,
+.#{$px}-text--heading5,
+.#{$px}-text--heading6 {
   margin-bottom: $spacing-sm;
 }
+
 p.#{$px}-text {
   margin-bottom: $spacing-md;
 }

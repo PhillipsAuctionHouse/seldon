@@ -68,7 +68,8 @@
 
   & .#{$px}-object-tile__maker,
   & .#{$px}-object-tile__model,
-  & .#{$px}-object-tile__reference-number {
+  & .#{$px}-object-tile__reference-number,
+  & .#{$px}-object-tile__title {
     display: block;
     margin-bottom: 0;
   }
