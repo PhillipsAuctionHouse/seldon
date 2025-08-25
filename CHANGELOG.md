@@ -1,3 +1,10 @@
+# [1.185.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.184.1...v1.185.0) (2025-08-25)
+
+
+### Features
+
+* **miniLotModal:** PHOENIX-2086 Mini Lot Modal Seldon Updates ([#704](https://github.com/PhillipsAuctionHouse/seldon/issues/704)) ([6a63af7](https://github.com/PhillipsAuctionHouse/seldon/commit/6a63af730eb1af8e0310ac49f285438c7922d04f))
+
 ## [1.184.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.184.0...v1.184.1) (2025-08-25)
 
 
