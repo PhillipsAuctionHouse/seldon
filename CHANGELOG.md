@@ -1,3 +1,10 @@
+## [1.184.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.184.0...v1.184.1) (2025-08-25)
+
+
+### Bug Fixes
+
+* **NotificationBanner:** L3-756 Notification banner is covering the bidding modal ([#703](https://github.com/PhillipsAuctionHouse/seldon/issues/703)) ([ee9db2d](https://github.com/PhillipsAuctionHouse/seldon/commit/ee9db2d3c9050290cc73d21bc0425342d4cc2242))
+
 # [1.184.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.183.1...v1.184.0) (2025-08-25)
 
 
