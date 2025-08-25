@@ -15,7 +15,7 @@
   }
 
   &__body {
-    margin: 0 $spacing-lg;
+    margin: 0 $spacing-lg $spacing-md;
     max-height: var('--max-modal-body-height');
     overflow-y: auto;
   }
