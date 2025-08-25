@@ -14,7 +14,7 @@ export const Playground = (props: TextBannerProps) => <TextBanner {...props} />;
 Playground.args = {
   headerText: 'Text Banner',
   description:
-    'This is the description to be used with the Text variant of the Hero Banner. This is not used in the default variant of the Hero Banner.',
+    'This is the description of the Text variant of the Hero Banner. This is a separate component from Hero Banner, which contains an image.',
 };
 
 Playground.argTypes = {
