@@ -73,7 +73,7 @@ export const ComposedModalScroll = (props: ComposedModalProps) => {
       </Link>
 
       <ComposedModal key={`${props.id}`} {...props} isOpen={isOpen} onClose={onClose} maxHeightValue="40vh">
-        <div style={{ maxWidth: '40rem', padding: '0 2rem' }}>{'Lorem ipsum '.repeat(150)}</div>
+        <div>{'Lorem ipsum '.repeat(150)}</div>
       </ComposedModal>
     </>
   );
