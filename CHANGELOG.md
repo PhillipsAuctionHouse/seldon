@@ -1,3 +1,10 @@
+# [1.184.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.183.1...v1.184.0) (2025-08-25)
+
+
+### Features
+
+* **TextBanner:** L3-7300 adjust styles to vertically align title ([#702](https://github.com/PhillipsAuctionHouse/seldon/issues/702)) ([04e76d5](https://github.com/PhillipsAuctionHouse/seldon/commit/04e76d57c979c3a73f678563dd519af66b241d82))
+
 ## [1.183.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.183.0...v1.183.1) (2025-08-24)
 
 
