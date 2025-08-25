@@ -1,7 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-modal {
-  background-color: $white;
+  background-color: $white-100;
   left: 50%;
   max-height: 100%;
   max-width: 100%;

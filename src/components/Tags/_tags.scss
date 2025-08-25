@@ -8,26 +8,27 @@
 
   &:focus-visible {
     border: unset;
-    outline: 1px solid $button-hover;
+    outline: 1px solid $black-100;
     outline-offset: 1px;
   }
 
   .#{$px}-tag {
-    border: 1px solid $button-hover;
+    border: 1px solid $black-100;
     border-radius: 6.25rem;
     gap: $spacing-micro;
     padding: $spacing-micro $spacing-xsm $spacing-micro $spacing-sm;
+    transition: border-color 0.25s;
 
     &__icon {
       svg {
-        color: $button-hover;
+        color: $black-100;
         height: 1rem;
         width: 1rem;
       }
     }
 
     &__label {
-      color: $button-hover;
+      color: $black-100;
       font-size: $body-size3;
       font-variation-settings: 'wght' 600;
       text-align: center;
@@ -35,14 +36,15 @@
     }
 
     &:hover {
-      color: $pure-black;
+      border-color: $cta-hover;
+      color: $cta-hover;
 
       .#{$px}-tag__label {
-        color: $pure-black;
+        color: $cta-hover;
       }
 
       svg {
-        color: $pure-black;
+        color: $cta-hover;
       }
     }
   }
@@ -54,7 +56,7 @@
     border-color: $pure-white;
     border-style: solid;
     border-width: 1px;
-    color: $button-hover;
+    color: $black-100;
     display: flex;
     gap: $spacing-micro;
     height: 2rem;
@@ -65,30 +67,30 @@
     }
 
     svg {
-      fill: $button-hover;
+      fill: $black-100;
       height: 1rem;
       width: 1rem;
 
       path {
-        fill: $button-hover;
+        fill: $black-100;
       }
     }
 
     &:hover {
-      color: $pure-black;
+      color: $cta-hover;
       cursor: pointer;
 
       svg {
-        fill: $pure-black;
+        fill: $cta-hover;
 
         path {
-          fill: $pure-black;
+          fill: $cta-hover;
         }
       }
     }
 
     &:focus-visible {
-      border-color: $button-hover;
+      border-color: $black-100;
       border-radius: 6.25rem;
       border-style: solid;
       border-width: 1px;

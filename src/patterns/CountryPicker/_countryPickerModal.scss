@@ -20,7 +20,7 @@
   }
 
   &__header {
-    background: $white;
+    background: $white-100;
     margin-bottom: 24px; // no token for this yet
     position: sticky;
     top: 0;
@@ -54,7 +54,7 @@
   }
 
   &__button-container {
-    background: $white;
+    background: $white-100;
     border-top: 1px solid $light-gray;
     margin-top: auto;
     padding-top: 1rem;

@@ -20,7 +20,7 @@ const pictograms = [
   'CreditCard',
 ] as const;
 export const PictogramGrid = (props: PictogramProps) => {
-  const [color, setColor] = useState<string>('$primary-black');
+  const [color, setColor] = useState<string>('$black-100');
   const [size, setSize] = useState<string>('64px');
 
   const baseClassName = 'picto-grid-wrapper';
@@ -47,8 +47,8 @@ export const PictogramGrid = (props: PictogramProps) => {
           </option>
         </Select>
         <Select id="color" labelText="Pictogram Color" onChange={(e) => handleColorChange(e.target.value)}>
-          <option key="$pure-black" value="$pure-black">
-            Pure Black
+          <option key="$black-100" value="$black-100">
+            Black
           </option>
           <option key="$white" value="$white">
             White

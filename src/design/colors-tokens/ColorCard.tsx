@@ -16,7 +16,7 @@ interface ColorCardProps {
   /**
    * Where is this token used?
    */
-  usage: string;
+  usage?: string;
   /**
    * class to add to color card container
    */
@@ -65,22 +65,24 @@ const ColorCard = ({ label, hex, usage, className }: ColorCardProps) => {
     <button
       type="button"
       className={`${className} ${baseClass}`}
-      onClick={() => handleOnClick(`$${label.replace(/\s+/g, '-').toLowerCase()}`)}
+      onClick={() => handleOnClick(`${label.replace(/\s+/g, '-').toLowerCase()}`)}
       style={{ ['--hex-value' as string]: hex }}
     >
       {copied ? (
         <span className={classnames(`${baseClass}__copied`, { [`${baseClass}__copied--light`]: isColorLight(hex) })}>
-          Copied &apos;{`$${label.replace(/\s+/g, '-').toLowerCase()}`}&apos;
+          Copied &apos;{`${label.replace(/\s+/g, '-').toLowerCase()}`}&apos;
         </span>
       ) : null}
       <span id={`token-${label}`} className={`${baseClass}__token`}>
         {label}
       </span>
       <span className={`${baseClass}__hex`}>{hex.replace(/linear-gradient/g, '')}</span>
-      <span className={`${baseClass}__usage`}>
-        <span>Usage:</span>
-        {usage}
-      </span>
+      {usage ? (
+        <span className={`${baseClass}__usage`}>
+          <span>Usage:</span>
+          {usage}
+        </span>
+      ) : null}
     </button>
   );
 };

@@ -1,7 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-filter-dropdown-menu {
-  background: $white;
+  background: $white-100;
   border-radius: $spacing-xsm;
   box-shadow: 0 4px 6px $medium-gray;
   display: flex;
@@ -92,7 +92,7 @@
   }
 
   &__button-text {
-    color: $white;
+    color: $white-100;
   }
 
   &--mobile {

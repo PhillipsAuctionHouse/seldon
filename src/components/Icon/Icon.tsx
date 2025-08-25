@@ -18,7 +18,7 @@ export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   width?: number | string | null;
   /**
-   * Color of the icon. Can be set to "currentColor" if you want to control the color through css. Otherwise, it only accepts valid seldon color tokens. Defaults to $pure-black
+   * Color of the icon. Can be set to "currentColor" if you want to control the color through css. Otherwise, it only accepts valid seldon color tokens. Defaults to $black-100
    */
   color?: string;
   /**
@@ -46,7 +46,7 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
       ? pictogramComponents[icon as PictogramName]
       : iconComponents[icon as IconName] || pictogramComponents[icon as PictogramName];
     const componentProps = {
-      color: color === 'currentColor' ? color : getScssVar(color ?? '', '$pure-black'),
+      color: color === 'currentColor' ? color : getScssVar(color ?? '', '$black-100'),
       ...(height ? { height } : {}),
       ...(width ? { width } : {}),
       ...commonProps,

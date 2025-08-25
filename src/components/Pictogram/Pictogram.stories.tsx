@@ -18,7 +18,7 @@ export const Playground = (props: PictogramProps) => <Pictogram {...props} />;
 Playground.args = {
   pictogram: 'Photos',
   size: '64',
-  color: '$pure-black',
+  color: '$black-100',
 };
 
 Playground.argTypes = {
