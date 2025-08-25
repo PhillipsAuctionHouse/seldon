@@ -1,3 +1,71 @@
+## [1.184.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.184.0...v1.184.1) (2025-08-25)
+
+
+### Bug Fixes
+
+* **NotificationBanner:** L3-756 Notification banner is covering the bidding modal ([#703](https://github.com/PhillipsAuctionHouse/seldon/issues/703)) ([ee9db2d](https://github.com/PhillipsAuctionHouse/seldon/commit/ee9db2d3c9050290cc73d21bc0425342d4cc2242))
+
+# [1.184.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.183.1...v1.184.0) (2025-08-25)
+
+
+### Features
+
+* **TextBanner:** L3-7300 adjust styles to vertically align title ([#702](https://github.com/PhillipsAuctionHouse/seldon/issues/702)) ([04e76d5](https://github.com/PhillipsAuctionHouse/seldon/commit/04e76d57c979c3a73f678563dd519af66b241d82))
+
+## [1.183.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.183.0...v1.183.1) (2025-08-24)
+
+
+### Bug Fixes
+
+* **text:** L3-7235 should render span not p by default ([#694](https://github.com/PhillipsAuctionHouse/seldon/issues/694)) ([bdefcf8](https://github.com/PhillipsAuctionHouse/seldon/commit/bdefcf8d2cf30a3aec71659c14bfa9777e4b7749))
+
+# [1.183.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.182.1...v1.183.0) (2025-08-22)
+
+
+### Features
+
+* **icons:** PHOENIX-2071 adding icon ([#701](https://github.com/PhillipsAuctionHouse/seldon/issues/701)) ([10d0000](https://github.com/PhillipsAuctionHouse/seldon/commit/10d0000341b9ca3a91e573fed7aef7afdd66fad9))
+
+## [1.182.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.182.0...v1.182.1) (2025-08-21)
+
+
+### Bug Fixes
+
+* **NotificationBanner:** L3-7547 Add Notification Banner child style ([#700](https://github.com/PhillipsAuctionHouse/seldon/issues/700)) ([1680bd6](https://github.com/PhillipsAuctionHouse/seldon/commit/1680bd6b03016c4a394c5bf9d4fc06ebb6e5a6eb))
+
+# [1.182.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.181.0...v1.182.0) (2025-08-21)
+
+
+### Features
+
+* **header:** L3-5714 Small slice of a button on narrow windows ([#689](https://github.com/PhillipsAuctionHouse/seldon/issues/689)) ([3d66b67](https://github.com/PhillipsAuctionHouse/seldon/commit/3d66b6736dd038349a10f48bea41d6e214be2c45))
+
+
+### Reverts
+
+* **_type:** L3-7279 typography tokens ([#698](https://github.com/PhillipsAuctionHouse/seldon/issues/698)) ([9a942b1](https://github.com/PhillipsAuctionHouse/seldon/commit/9a942b1b99901b61b02425f2664f222c092248ba))
+
+# [1.181.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.180.0...v1.181.0) (2025-08-21)
+
+
+### Features
+
+* **HeroBanner:** L3-7300 add Text Banner ([#674](https://github.com/PhillipsAuctionHouse/seldon/issues/674)) ([066f8d5](https://github.com/PhillipsAuctionHouse/seldon/commit/066f8d5fd81a02a9417ed3b4f02dfdfea712c589))
+
+# [1.180.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.179.0...v1.180.0) (2025-08-20)
+
+
+### Features
+
+* **_type:** L3-7279 typography tokens ([#687](https://github.com/PhillipsAuctionHouse/seldon/issues/687)) ([020e114](https://github.com/PhillipsAuctionHouse/seldon/commit/020e11461a6c9704c566839df78bee4caa132406))
+
+# [1.179.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.178.0...v1.179.0) (2025-08-20)
+
+
+### Features
+
+* **SaleHeaderBanner:** L3-7403 add badgeText prop to SaleHeaderBanner ([#693](https://github.com/PhillipsAuctionHouse/seldon/issues/693)) ([140881c](https://github.com/PhillipsAuctionHouse/seldon/commit/140881c11c151956ae7e7cdf709362aa37aa780f))
+
 # [1.178.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.177.0...v1.178.0) (2025-08-19)
 
 

@@ -108,6 +108,7 @@
     height: calc(100dvh - $header-height);
     overflow-y: auto;
     position: relative;
+    width: 100%;
     z-index: 10;
 
     &--closed {
@@ -121,7 +122,6 @@
         flex-direction: column;
         height: calc(100dvh - var(--header-height) - 1px);
         justify-content: flex-start;
-        padding: 0 $spacing-md;
       }
 
       @include isHeaderDesktop {
@@ -186,6 +186,10 @@
   @include isHeaderMobile {
     .#{$px}-nav__list .#{$px}-nav__item:last-child .#{$px}-link--snwHeaderLink {
       border-bottom: none;
+    }
+
+    .#{$px}-language-selector {
+      padding: 0 $spacing-md;
     }
   }
 }
