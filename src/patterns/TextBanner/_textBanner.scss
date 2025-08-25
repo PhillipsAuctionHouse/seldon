@@ -5,10 +5,10 @@
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: $spacing-md;
     justify-content: center;
     max-width: none;
-    padding: 32px 24px;
+    padding: $spacing-lg $spacing-md;
 
     h1 {
       white-space: nowrap;
