@@ -31,18 +31,19 @@
   &__input {
     flex: 1 1 75%;
     flex-grow: 1;
-    margin-top: calc(var(--string-line-height-size2) + 0.25rem);
+    margin-top: calc(var(--string-line-height-size2) + 0.5rem);
   }
 
-  // @media screen and (min-width: $breakpoint-xl) {
-  //   &__wrapper {
-  //     flex: 1 1 60%;
-  //     min-width: 0;
-  //   }
+  @media screen and (min-width: $breakpoint-xl) {
+    &__country-picker {
+      flex: 0 0 40%;
+      min-width: 0;
+      padding-bottom: 0.25rem;
+    }
 
-  //   &__input {
-  //     flex: 0 0 40%;
-  //     min-width: 0;
-  //   }
-  // }
+    &__input {
+      flex: 1 1 60%;
+      min-width: 0;
+    }
+  }
 }

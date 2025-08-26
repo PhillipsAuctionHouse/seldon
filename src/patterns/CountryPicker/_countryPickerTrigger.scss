@@ -7,9 +7,11 @@
     width: 100%;
 
     &-label {
+      @include text($string2);
+
       color: $pure-black;
       font-variation-settings: 'wght' 600;
-      margin-bottom: $spacing-micro;
+      margin-bottom: $spacing-xsm;
 
       &--error {
         color: $error-red;
@@ -84,7 +86,7 @@
     }
 
     &-flag {
-      height: 1.5rem;
+      height: 1rem;
       margin-right: $spacing-sm;
     }
   }
