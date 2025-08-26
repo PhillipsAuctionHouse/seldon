@@ -7,7 +7,7 @@
     width: 100%;
 
     &-label {
-      color: $soft-black;
+      color: $pure-black;
       font-variation-settings: 'wght' 600;
       margin-bottom: $spacing-micro;
 
@@ -17,11 +17,13 @@
     }
 
     &-btn {
+      @include text($string2);
+
       align-items: center;
       appearance: none;
       background: $white;
-      border: 1px solid $light-gray;
-      border-radius: 6px;
+      border: 1px solid $keyline-gray;
+      border-radius: 0.1875rem;
       box-sizing: border-box;
       cursor: pointer;
       display: flex;
@@ -42,11 +44,12 @@
 
       &--error {
         border-color: $error-red;
+        box-shadow: inset 0 0 3px 3px $error-pink;
       }
     }
 
     &-text {
-      color: $soft-black;
+      color: $pure-black;
       flex: 1;
       overflow: hidden;
       text-align: left;
@@ -60,9 +63,19 @@
       margin-left: $spacing-sm;
     }
 
-    &-error-msg {
-      color: $error-red;
+    &-error-msg,
+    &__trigger-error-msg,
+    .input__validation.input__validation--error {
+      animation: reveal 0.45s linear forwards;
       margin-top: $spacing-micro;
+
+      // Reveal animation (match Input)
+      max-height: 2em;
+      opacity: 1;
+      transition: opacity 0.2s;
+      visibility: visible;
+      white-space: nowrap;
+      will-change: opacity, max-height;
     }
 
     &-flag {
