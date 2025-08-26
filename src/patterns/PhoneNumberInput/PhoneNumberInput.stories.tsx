@@ -127,10 +127,9 @@ export const InDrawer = () => {
       phoneCountryCode: '+1',
     },
   });
-  const [open, setOpen] = React.useState(true);
 
   return (
-    <Drawer isOpen={open} onClose={() => setOpen(false)} title="Edit Phone Number">
+    <Drawer isOpen={true} onClose={() => void 0} title="Edit Phone Number">
       <form>
         <Controller
           name="phoneNumber"

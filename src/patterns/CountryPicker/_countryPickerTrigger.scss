@@ -61,6 +61,11 @@
       align-items: center;
       display: flex;
       margin-left: $spacing-sm;
+
+      @media (min-width: $breakpoint-md) {
+        height: 1.25rem;
+        width: 1.25rem;
+      }
     }
 
     &-error-msg,
@@ -79,7 +84,7 @@
     }
 
     &-flag {
-      height: 1rem;
+      height: 1.5rem;
       margin-right: $spacing-sm;
     }
   }
