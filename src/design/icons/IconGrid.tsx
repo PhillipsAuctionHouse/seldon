@@ -108,7 +108,7 @@ export const IconGrid = (props: IconProps) => {
           <option key="$black-100" value="$black-100">
             Black
           </option>
-          <option key="$white" value="$white">
+          <option key="$white-100" value="$white-100">
             White
           </option>
         </Select>
