@@ -5,57 +5,63 @@ $px: seldon;
 /// COlORS:
 ///////////////////////
 
-// Primary color palette
-$black-100: #000;
-$black-75: rgba(0, 0, 0, 75%);
-$black-50: rgba(0, 0, 0, 50%);
-$black-25: rgba(0, 0, 0, 25%);
+// Primary
+
+// White
 $white-100: #fff;
 $white-75: rgba(255, 255, 255, 75%);
 $white-50: rgba(255, 255, 255, 50%);
 $white-25: rgba(255, 255, 255, 25%);
 
-// Secondary color palette
+// Black
+$black-100: #000;
+$black-75: rgba(0, 0, 0, 75%);
+$black-50: rgba(0, 0, 0, 50%);
+$black-25: rgba(0, 0, 0, 25%);
+
+// Secondary
+
+// Highlight
 $highlight-yellow: #fff90a;
 $highlight-green: #46ea77;
 $highlight-blue: #0065fc;
 $highlight-red: #ff3d0a;
 $highlight-purple: #802dfa;
 
-// Neutral color palette
+// Functional
+
+// Greys
 $grey-100: #545454;
 $grey-75: #75716f;
 $grey-50: #eae9e6;
 $grey-25: #f9f8f7;
 
-// Functional color palette
-$success-default: #00cc39;
-$warning-default: #ea0404;
-$focus-default: #07c;
+// Semantic
 
-// Semantic: Text
+// Text
 $text-default: #000;
 $text-inverted: #fff;
 $text-supporting: #545454;
 
-// Semantic: CTAs
+// CTAs
 $cta-default: #000;
 $cta-disabled: #eae9e6;
 $cta-hover: #75716f;
 $cta-inactive: #75716f;
 $cta-focus: #545454;
 
-// Semantic: Background
+// Background
 $bg-default: #fff;
 $bg-soft: #f9f8f7;
 $bg-border: #eae9e6;
 $bg-inverted: #000;
 $bg-overlay: rgba(0, 0, 0, 50%);
 
-// Semantic: Success, warning & status
-$success-notification: #00cc39;
-$warning-notification: #ea0404;
+// Status
+$success-default: #00cc39;
+$warning-default: #ea0404;
 $status-info: #0065fc;
+$focus-default: #07c;
 
 // admin colors
 $admin-alert: #f24a4a;
