@@ -1,3 +1,38 @@
+# [1.185.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.184.1...v1.185.0) (2025-08-25)
+
+
+### Features
+
+* **miniLotModal:** PHOENIX-2086 Mini Lot Modal Seldon Updates ([#704](https://github.com/PhillipsAuctionHouse/seldon/issues/704)) ([6a63af7](https://github.com/PhillipsAuctionHouse/seldon/commit/6a63af730eb1af8e0310ac49f285438c7922d04f))
+
+## [1.184.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.184.0...v1.184.1) (2025-08-25)
+
+
+### Bug Fixes
+
+* **NotificationBanner:** L3-756 Notification banner is covering the bidding modal ([#703](https://github.com/PhillipsAuctionHouse/seldon/issues/703)) ([ee9db2d](https://github.com/PhillipsAuctionHouse/seldon/commit/ee9db2d3c9050290cc73d21bc0425342d4cc2242))
+
+# [1.184.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.183.1...v1.184.0) (2025-08-25)
+
+
+### Features
+
+* **TextBanner:** L3-7300 adjust styles to vertically align title ([#702](https://github.com/PhillipsAuctionHouse/seldon/issues/702)) ([04e76d5](https://github.com/PhillipsAuctionHouse/seldon/commit/04e76d57c979c3a73f678563dd519af66b241d82))
+
+## [1.183.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.183.0...v1.183.1) (2025-08-24)
+
+
+### Bug Fixes
+
+* **text:** L3-7235 should render span not p by default ([#694](https://github.com/PhillipsAuctionHouse/seldon/issues/694)) ([bdefcf8](https://github.com/PhillipsAuctionHouse/seldon/commit/bdefcf8d2cf30a3aec71659c14bfa9777e4b7749))
+
+# [1.183.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.182.1...v1.183.0) (2025-08-22)
+
+
+### Features
+
+* **icons:** PHOENIX-2071 adding icon ([#701](https://github.com/PhillipsAuctionHouse/seldon/issues/701)) ([10d0000](https://github.com/PhillipsAuctionHouse/seldon/commit/10d0000341b9ca3a91e573fed7aef7afdd66fad9))
+
 ## [1.182.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.182.0...v1.182.1) (2025-08-21)
 
 

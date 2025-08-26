@@ -48,6 +48,7 @@ export { default as Hide } from './Hide';
 export { default as HomeActive } from './HomeActive';
 export { default as Home } from './Home';
 export { default as IconGreenCircle } from './IconGreenCircle';
+export { default as IconBlueCircle } from './IconBlueCircle';
 export { default as IconRedCircle } from './IconRedCircle';
 export { default as Icon } from './Icon';
 export { default as Instagram } from './Instagram';

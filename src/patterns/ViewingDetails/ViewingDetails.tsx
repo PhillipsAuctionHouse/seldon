@@ -93,7 +93,10 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
           {sessionTimes &&
             sessionTimes.length > 0 &&
             sessionTimes.map((session) => (
-              <div key={`${session.sessionLabel ?? ''}-${session.sessionTime ?? ''}`}>
+              <div
+                key={`${session.sessionLabel ?? ''}-${session.sessionTime ?? ''}`}
+                className={`${baseClassName}__session`}
+              >
                 {session.sessionLabel && (
                   <Text variant={TextVariants.heading5} className={`${baseClassName}__label`}>
                     {session.sessionLabel}

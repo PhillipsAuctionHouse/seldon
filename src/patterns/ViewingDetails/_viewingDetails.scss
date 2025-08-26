@@ -2,7 +2,6 @@
 
 .#{$px}-viewing-details {
   &__content {
-    padding: 0 $spacing-md;
     position: relative;
   }
 
@@ -15,7 +14,12 @@
   }
 
   &__label {
+    display: block;
     margin-bottom: 0;
+  }
+
+  &__session {
+    margin-bottom: $spacing-sm;
   }
 
   &__close-icon {
@@ -30,6 +34,7 @@
   }
 
   &__location {
+    display: block;
     margin-bottom: $spacing-xsm;
     margin-top: $spacing-md;
   }
