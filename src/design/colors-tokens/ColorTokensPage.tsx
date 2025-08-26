@@ -1,6 +1,6 @@
 import ColorCard from './ColorCard';
 
-const colorSections = [
+const coreColorSections = [
   {
     sectionTitle: 'Primary',
     sectionDescription: (
@@ -74,8 +74,9 @@ const colorSections = [
     sectionTitle: 'Functional',
     sectionDescription: (
       <span className="p">
-        Our functional palette should be applied consistently across UI elements to convey important messages to our
-        clients. In this context, colour is used to emphasize urgency
+        Our functional palette combines greys with success and warning colours to support clarity and communication
+        across the UI. Greys provide the foundation for structure, while status colours highlight positive states,
+        alerts, and urgency.
       </span>
     ),
     colorBlocks: [
@@ -84,7 +85,7 @@ const colorSections = [
         blockDescription: (
           <span className="p">
             Greys form the functional foundation of our colour system. They provide the base for text, form fields,
-            backgrounds, and dividers, ensuring consistency and balance across the UI
+            backgrounds, and dividers, ensuring consistency and balance across the UI.
           </span>
         ),
         colors: [
@@ -95,12 +96,13 @@ const colorSections = [
         ],
       },
       {
-        blockTitle: 'Success, warning and focus',
+        blockTitle: 'Status',
         blockDescription: (
           <span className="p">
             Success and warning colours are used consistently across UI elements to indicate positive actions, status
-            updates, or critical errors. <br /> Focus Blue is reserved for keyboard navigation, appearing as the focus
-            state when users move through the site with the Tab key.
+            updates, or critical errors. <br /> <br />
+            Focus Blue is reserved for keyboard navigation, appearing as the focus state when users move through the
+            site with the Tab key.
           </span>
         ),
         colors: [
@@ -111,8 +113,11 @@ const colorSections = [
       },
     ],
   },
+];
+
+const semanticColorSections = [
   {
-    sectionTitle: 'Semantic',
+    sectionTitle: 'Semantics',
     sectionDescription: (
       <span className="p">
         Semantic colour tokens are labels used to apply color according to its intended function within the UI, guiding
@@ -167,7 +172,7 @@ const colorSections = [
         ],
       },
       {
-        blockTitle: 'Success, warning & status',
+        blockTitle: 'Status',
         blockDescription: (
           <span className="p">
             Our warning & positive colours are used at a system level to give feedback around bidding notifications and
@@ -176,8 +181,9 @@ const colorSections = [
           </span>
         ),
         colors: [
-          { label: '$success-notification', hex: '#00cc39' },
-          { label: '$warning-notification', hex: '#ea0404' },
+          { label: '$success-default', hex: '#00cc39' },
+          { label: '$warning-default', hex: '#ea0404' },
+          { label: '$focus-default', hex: '#0077CC' },
           { label: '$status-info', hex: '#0065fc' },
         ],
       },
@@ -185,31 +191,53 @@ const colorSections = [
   },
 ];
 
+function renderColorSections(sections: typeof coreColorSections | typeof semanticColorSections) {
+  return sections.map(({ sectionTitle, sectionDescription, colorBlocks }) => (
+    <section key={sectionTitle}>
+      <h2>
+        <span className="h2" style={{ color: 'black' }}>
+          {sectionTitle}
+        </span>
+      </h2>
+      {sectionDescription}
+      {colorBlocks.map(({ blockTitle, blockDescription, colors }) => (
+        <div key={blockTitle} className="color-block">
+          <h3 className="h3">{blockTitle}</h3>
+          {blockDescription}
+          <div className="color__list">
+            {colors.map(({ label, hex }) => (
+              <ColorCard key={label} label={label} hex={hex} className="" />
+            ))}
+          </div>
+        </div>
+      ))}
+    </section>
+  ));
+}
+
 export default function ColorTokensPage() {
   return (
     <main className="sb-unstyled doc-wrapper">
-      <h1 className="h1">Colors</h1>
-      {colorSections.map(({ sectionTitle, sectionDescription, colorBlocks }) => (
-        <section key={sectionTitle}>
-          <h2>
-            <span className="h2" style={{ color: 'black' }}>
-              {sectionTitle}
-            </span>
-          </h2>
-          {sectionDescription}
-          {colorBlocks.map(({ blockTitle, blockDescription, colors }) => (
-            <div key={blockTitle} className="color-block">
-              <h3 className="h3">{blockTitle}</h3>
-              {blockDescription}
-              <div className="color__list">
-                {colors.map(({ label, hex }) => (
-                  <ColorCard key={label} label={label} hex={hex} className="" />
-                ))}
-              </div>
-            </div>
-          ))}
-        </section>
-      ))}
+      <h1 className="h1">Colour Core</h1>
+      <span className="p">
+        Colour tokens create a consistent and flexible system. The core palette provides the foundation - reflecting our
+        brand identity and supporting hierarchy, states, and themes like dark mode. All usage should meet AA
+        accessibility standards and be tested across design and development. <br /> <br /> Our colour system is built
+        from <b>core tokens (the foundation)</b> and <b>semantic tokens (the application)</b>. Together they ensure
+        clarity, accessibility, and consistency across all experiences.
+      </span>
+      <br />
+      {renderColorSections(coreColorSections)}
+      <h1 className="h1">Colour Semantics</h1>
+      <span className="p">
+        Semantic tokens define how colours are used across our product. They translate the core palette into functional
+        roles - such as text, backgrounds, CTAs, or status states - ensuring clarity, accessibility, and consistency
+        across all components. <br /> <br />
+        Our colour system is built from <b>core tokens (the foundation)</b> and <b>semantic tokens (the application)</b>
+        . Together they ensure clarity, accessibility, and consistency across all experiences.
+      </span>
+      <br />
+      {renderColorSections(semanticColorSections)}
       <div className="tip-wrapper">
         <span className="tip">Tip</span>Click on the pallet tiles to copy the token
       </div>
