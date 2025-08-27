@@ -27,6 +27,11 @@ describe('SaleCard', () => {
     expect(getByAltText('Custom Alt Text')).toBeInTheDocument();
   });
 
+  it('should support not rendering image', () => {
+    const { queryByAltText } = render(<SaleCard {...props} imageSrc={undefined} imageAlt="Custom Alt Text" />);
+    expect(queryByAltText('Custom Alt Text')).not.toBeInTheDocument();
+  });
+
   it('should render primary button', () => {
     const primaryButtonOnClick = vi.fn();
     const { getByText } = render(
