@@ -1,3 +1,10 @@
+## [1.185.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.185.0...v1.185.1) (2025-08-27)
+
+
+### Bug Fixes
+
+* **Header:** L3-7580 Height fix for mobile with notification banner ([#708](https://github.com/PhillipsAuctionHouse/seldon/issues/708)) ([61d8e22](https://github.com/PhillipsAuctionHouse/seldon/commit/61d8e22773511ed0e91c0c6af33491272c439c83))
+
 # [1.185.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.184.1...v1.185.0) (2025-08-25)
 
 
