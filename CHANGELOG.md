@@ -1,3 +1,10 @@
+# [1.187.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.186.0...v1.187.0) (2025-08-27)
+
+
+### Features
+
+* **salecard:** PHOENIX-2233 allow imageSrc to be optional property ([#710](https://github.com/PhillipsAuctionHouse/seldon/issues/710)) ([8cd7536](https://github.com/PhillipsAuctionHouse/seldon/commit/8cd7536e8204ab4a6bce5ac401a0e37629a08014))
+
 # [1.186.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.185.1...v1.186.0) (2025-08-27)
 
 
