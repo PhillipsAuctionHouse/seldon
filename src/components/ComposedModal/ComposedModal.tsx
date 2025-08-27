@@ -22,7 +22,7 @@ export interface ComposedModalProps extends Omit<ModalProps, 'onClose' | 'role' 
   /**
    * Title for Composed Modal
    */
-  title: string;
+  title?: string;
   /**
    * The content of the modal.
    */
@@ -94,9 +94,11 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
         id={id}
         ref={ref}
       >
-        <Text variant={TextVariants.heading3} className={`${baseClassName}__title`}>
-          {title}
-        </Text>
+        {title ? (
+          <Text variant={TextVariants.heading3} className={`${baseClassName}__title`}>
+            {title}
+          </Text>
+        ) : null}
         <div
           className={`${baseClassName}__body`}
           style={{ ['--max-modal-body-height']: maxHeightValue } as React.CSSProperties}
