@@ -105,7 +105,7 @@
 
   &__nav {
     background-color: $pure-white;
-    height: calc(100dvh - $header-height);
+    height: calc(100dvh - $header-height - var(--banner-height));
     overflow-y: auto;
     position: relative;
     width: 100%;
@@ -120,7 +120,7 @@
 
       @include isHeaderMobile {
         flex-direction: column;
-        height: calc(100dvh - var(--header-height) - 1px);
+        height: calc(100dvh - var(--header-height) - var(--banner-height) - 1px);
         justify-content: flex-start;
       }
 
