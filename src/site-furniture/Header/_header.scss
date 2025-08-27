@@ -120,7 +120,7 @@
 
       @include isHeaderMobile {
         flex-direction: column;
-        height: calc(100dvh - var(--header-height) - var(--banner-height) - 1px);
+        height: calc(100dvh - var(--header-height) - var(--banner-height, 0px) - 1px);
         justify-content: flex-start;
       }
 
