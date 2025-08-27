@@ -262,3 +262,13 @@ export const SaleCardWithLink = () => (
     </SaleCard>
   </a>
 );
+
+export const SaleCardNoImage = () => (
+  <SaleCard
+    auctionType="Live Auction"
+    titleText="Modern & Contemporary Art Day Sale, Morning Session"
+    date="2 PM EST, May 27, 2025"
+    location="New York"
+    badgeText="Happening Now"
+  />
+);
