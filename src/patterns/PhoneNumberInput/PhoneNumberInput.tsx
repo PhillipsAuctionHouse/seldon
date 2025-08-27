@@ -20,11 +20,11 @@ export interface PhoneNumberInputProps extends Omit<ComponentProps<'div'>, 'onCh
 /**
  * ## Overview
  *
- * Overview of this widget
+ * A component for entering phone numbers with country code selection.
  *
- * [Figma Link](Add Figma URL here)
+ * [Figma Link](https://www.figma.com/design/kSxOhnqIhilZ9hIJd3bPgP/RW-Registration?node-id=6101-43645&m=dev)
  *
- * [Storybook Link](Point back to yourself here)
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-PhoneNumberInput--overview)
  */
 const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
   (
@@ -57,8 +57,13 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
       <div ref={ref} className={classnames(`${baseClassName}`, className)} {...commonProps}>
         <div className={`${baseClassName}__wrapper`}>
           <div className={`${baseClassName}__country-picker`}>
-            <input type="hidden" name="phoneNumber" value={value} />
-            <input type="hidden" name="phoneCountryCode" value={selected || ''} />
+            <input type="hidden" name="phoneNumber" value={value} data-testid="phone-number-hidden-input" />
+            <input
+              type="hidden"
+              name="phoneCountryCode"
+              value={selected || ''}
+              data-testid="phone-country-code-hidden-input"
+            />
             <CountryPicker
               triggerLabelText="Phone Number"
               triggerDisplayValue={selectedCountry ? `+${getSafeCountryCallingCode(selectedCountry.code)}` : ''}
