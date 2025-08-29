@@ -78,7 +78,7 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
               triggerErrorMsg={errorText}
             />
           </div>
-          <div className={`${baseClassName}__input`} style={{ flex: '1 1 75%' }}>
+          <div className={`${baseClassName}__input`}>
             <Input
               id="phone-input"
               type="tel"
@@ -89,6 +89,7 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
               required={required}
               invalid={!!error}
               disabled={disabled}
+              // We don't want to use the input default text, and the error text will be shown under the country picker
               invalidText=""
             />
           </div>
