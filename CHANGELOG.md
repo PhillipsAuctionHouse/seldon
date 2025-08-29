@@ -1,3 +1,10 @@
+# [1.188.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.187.0...v1.188.0) (2025-08-29)
+
+
+### Features
+
+* **colorTokens:** L3-7141 Design System: Align Colour Tokens Across Platforms ([#683](https://github.com/PhillipsAuctionHouse/seldon/issues/683)) ([6c829ce](https://github.com/PhillipsAuctionHouse/seldon/commit/6c829ce29940c0f5290a7505e2fec9099e73eabe))
+
 # [1.187.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.186.0...v1.187.0) (2025-08-27)
 
 
