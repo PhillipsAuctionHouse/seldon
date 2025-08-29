@@ -95,7 +95,7 @@
 
       &:hover {
         svg {
-          color: $white;
+          color: $white-100;
         }
       }
     }
@@ -115,10 +115,10 @@
 
   &__content {
     animation: fade-in 150ms ease-out;
-    background-color: $white;
-    border: 1px solid #e0e0e0;
+    background-color: $white-100;
+    border: 1px solid $grey-50;
     border-radius: 4px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 10%);
+    box-shadow: 0 5px 15px rgba($pure-black, 0.1);
     margin-top: 4px;
     max-height: 300px;
     overflow-y: auto;
@@ -142,7 +142,7 @@
   }
 
   &__item {
-    background-color: $white;
+    background-color: $white-100;
     padding: $padding-micro $padding-xsm;
     transition: background-color 0.1s ease;
 

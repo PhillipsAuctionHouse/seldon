@@ -1,7 +1,7 @@
 @import '#scss/allPartials';
 
 .story-icon-flex-wrapper {
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 20%);
+  box-shadow: 0 0 8px 0 rgba($pure-black, 0.2);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -24,7 +24,7 @@
 
   .icon-wrapper {
     &.show-border {
-      border: 1px solid black;
+      border: 1px solid $pure-black;
     }
 
     margin: 0 auto;

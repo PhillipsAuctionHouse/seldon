@@ -13,7 +13,7 @@
     width: $button-label-line-height;
 
     &:hover {
-      color: $white;
+      color: $white-100;
     }
   }
 
@@ -110,7 +110,7 @@
   }
 
   &:disabled {
-    background-color: $white;
+    background-color: $white-100;
     border: 1px solid $light-gray;
 
     svg {

@@ -24,7 +24,7 @@ const meta = {
 export default meta;
 
 const largeTextBlock = (
-  <div style={{ color: 'white', backgroundColor: '#d0d0d0', padding: 20 }}>{faker.lorem.paragraphs(20)}</div>
+  <div style={{ color: 'black', backgroundColor: 'white', padding: 20 }}>{faker.lorem.paragraphs(20)}</div>
 );
 const largeTextItems = [
   {

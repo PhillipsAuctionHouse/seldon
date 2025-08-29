@@ -2,7 +2,7 @@
 
 .#{$px}-header {
   align-items: center;
-  background-color: $white;
+  background-color: $white-100;
   border-bottom: 1px solid $light-gray;
   display: flex;
   flex-direction: column;
@@ -167,7 +167,7 @@
     display: none;
 
     &--active {
-      background: rgba(0, 0, 0, 60%);
+      background: $black-75;
       display: block;
       height: 100vh;
       left: 0;
