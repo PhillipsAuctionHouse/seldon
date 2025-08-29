@@ -12,7 +12,7 @@ import { SaleCardVariants } from './types';
 /** * Props for the SaleCard component. */
 export interface SaleCardProps extends ComponentProps<'div'> {
   /** * The source URL of the image to be displayed. */
-  imageSrc: string;
+  imageSrc?: string;
   /** * The alt text for the image. Defaults to "Auction Image" if not provided. */
   imageAlt?: string;
   /** * The auctionType of sale (e.g. "Live Auction", "Online Only", etc.). */

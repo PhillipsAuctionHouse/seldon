@@ -1,3 +1,25 @@
+# [1.187.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.186.0...v1.187.0) (2025-08-27)
+
+
+### Features
+
+* **salecard:** PHOENIX-2233 allow imageSrc to be optional property ([#710](https://github.com/PhillipsAuctionHouse/seldon/issues/710)) ([8cd7536](https://github.com/PhillipsAuctionHouse/seldon/commit/8cd7536e8204ab4a6bce5ac401a0e37629a08014))
+
+# [1.186.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.185.1...v1.186.0) (2025-08-27)
+
+
+### Features
+
+* **header:** L3-7579 Mobile Web | Account icon is not displaying correctly on Remix pages ([#709](https://github.com/PhillipsAuctionHouse/seldon/issues/709)) ([716445d](https://github.com/PhillipsAuctionHouse/seldon/commit/716445dcf5358638d9259738234ad257a87d1a7a))
+* **Salecard:** L3-7372 Center pin banner image ([#706](https://github.com/PhillipsAuctionHouse/seldon/issues/706)) ([fcf167a](https://github.com/PhillipsAuctionHouse/seldon/commit/fcf167ae4a26ebb35d2d2be72b706b285ee1268e))
+
+## [1.185.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.185.0...v1.185.1) (2025-08-27)
+
+
+### Bug Fixes
+
+* **Header:** L3-7580 Height fix for mobile with notification banner ([#708](https://github.com/PhillipsAuctionHouse/seldon/issues/708)) ([61d8e22](https://github.com/PhillipsAuctionHouse/seldon/commit/61d8e22773511ed0e91c0c6af33491272c439c83))
+
 # [1.185.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.184.1...v1.185.0) (2025-08-25)
 
 

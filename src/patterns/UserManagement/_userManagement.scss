@@ -44,7 +44,7 @@
       padding-right: 0;
     }
 
-    > p.#{$px}-text {
+    > .#{$px}-text {
       margin: 0;
 
       @include isHeaderMobile {
