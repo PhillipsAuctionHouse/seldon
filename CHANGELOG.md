@@ -1,3 +1,67 @@
+# [1.188.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.187.0...v1.188.0) (2025-08-29)
+
+
+### Features
+
+* **colorTokens:** L3-7141 Design System: Align Colour Tokens Across Platforms ([#683](https://github.com/PhillipsAuctionHouse/seldon/issues/683)) ([6c829ce](https://github.com/PhillipsAuctionHouse/seldon/commit/6c829ce29940c0f5290a7505e2fec9099e73eabe))
+
+# [1.187.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.186.0...v1.187.0) (2025-08-27)
+
+
+### Features
+
+* **salecard:** PHOENIX-2233 allow imageSrc to be optional property ([#710](https://github.com/PhillipsAuctionHouse/seldon/issues/710)) ([8cd7536](https://github.com/PhillipsAuctionHouse/seldon/commit/8cd7536e8204ab4a6bce5ac401a0e37629a08014))
+
+# [1.186.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.185.1...v1.186.0) (2025-08-27)
+
+
+### Features
+
+* **header:** L3-7579 Mobile Web | Account icon is not displaying correctly on Remix pages ([#709](https://github.com/PhillipsAuctionHouse/seldon/issues/709)) ([716445d](https://github.com/PhillipsAuctionHouse/seldon/commit/716445dcf5358638d9259738234ad257a87d1a7a))
+* **Salecard:** L3-7372 Center pin banner image ([#706](https://github.com/PhillipsAuctionHouse/seldon/issues/706)) ([fcf167a](https://github.com/PhillipsAuctionHouse/seldon/commit/fcf167ae4a26ebb35d2d2be72b706b285ee1268e))
+
+## [1.185.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.185.0...v1.185.1) (2025-08-27)
+
+
+### Bug Fixes
+
+* **Header:** L3-7580 Height fix for mobile with notification banner ([#708](https://github.com/PhillipsAuctionHouse/seldon/issues/708)) ([61d8e22](https://github.com/PhillipsAuctionHouse/seldon/commit/61d8e22773511ed0e91c0c6af33491272c439c83))
+
+# [1.185.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.184.1...v1.185.0) (2025-08-25)
+
+
+### Features
+
+* **miniLotModal:** PHOENIX-2086 Mini Lot Modal Seldon Updates ([#704](https://github.com/PhillipsAuctionHouse/seldon/issues/704)) ([6a63af7](https://github.com/PhillipsAuctionHouse/seldon/commit/6a63af730eb1af8e0310ac49f285438c7922d04f))
+
+## [1.184.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.184.0...v1.184.1) (2025-08-25)
+
+
+### Bug Fixes
+
+* **NotificationBanner:** L3-756 Notification banner is covering the bidding modal ([#703](https://github.com/PhillipsAuctionHouse/seldon/issues/703)) ([ee9db2d](https://github.com/PhillipsAuctionHouse/seldon/commit/ee9db2d3c9050290cc73d21bc0425342d4cc2242))
+
+# [1.184.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.183.1...v1.184.0) (2025-08-25)
+
+
+### Features
+
+* **TextBanner:** L3-7300 adjust styles to vertically align title ([#702](https://github.com/PhillipsAuctionHouse/seldon/issues/702)) ([04e76d5](https://github.com/PhillipsAuctionHouse/seldon/commit/04e76d57c979c3a73f678563dd519af66b241d82))
+
+## [1.183.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.183.0...v1.183.1) (2025-08-24)
+
+
+### Bug Fixes
+
+* **text:** L3-7235 should render span not p by default ([#694](https://github.com/PhillipsAuctionHouse/seldon/issues/694)) ([bdefcf8](https://github.com/PhillipsAuctionHouse/seldon/commit/bdefcf8d2cf30a3aec71659c14bfa9777e4b7749))
+
+# [1.183.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.182.1...v1.183.0) (2025-08-22)
+
+
+### Features
+
+* **icons:** PHOENIX-2071 adding icon ([#701](https://github.com/PhillipsAuctionHouse/seldon/issues/701)) ([10d0000](https://github.com/PhillipsAuctionHouse/seldon/commit/10d0000341b9ca3a91e573fed7aef7afdd66fad9))
+
 ## [1.182.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.182.0...v1.182.1) (2025-08-21)
 
 

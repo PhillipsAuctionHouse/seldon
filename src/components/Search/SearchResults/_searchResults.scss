@@ -2,7 +2,7 @@
 
 .#{$px}-search__results {
   align-items: flex-start;
-  background: $white;
+  background: $white-100;
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
@@ -24,7 +24,7 @@
   }
 
   &-container {
-    background: $white;
+    background: $white-100;
     display: flex;
     flex-direction: column;
     font-family: Montserrat, sans-serif;

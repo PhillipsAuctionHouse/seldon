@@ -11,13 +11,17 @@
   }
 
   &__image {
+    align-items: center;
     aspect-ratio: 91/51;
     border-radius: 4px;
+    display: flex;
+    flex: 0 0 30%;
+    justify-content: center;
     min-width: 100%;
 
     @include media($breakpoint-md) {
       aspect-ratio: 107/60;
-      min-width: 428px;
+      min-width: auto;
     }
 
     img {

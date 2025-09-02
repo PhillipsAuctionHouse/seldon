@@ -8,11 +8,11 @@ export interface SaleCardActionsProps extends ComponentProps<'div'> {
   children?: React.ReactNode;
 }
 
-export const SaleCardActions = forwardRef<HTMLDivElement, SaleCardActionsProps>(({ children, ...props }) => {
+export const SaleCardActions = forwardRef<HTMLDivElement, SaleCardActionsProps>(({ children, ...props }, ref) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SaleCardActions');
 
   return (
-    <div className={`${baseClassName}__ctas`} {...commonProps}>
+    <div className={`${baseClassName}__ctas`} {...commonProps} ref={ref}>
       {children}
     </div>
   );

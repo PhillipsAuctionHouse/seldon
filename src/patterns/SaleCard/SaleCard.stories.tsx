@@ -52,6 +52,7 @@ export const SaleCardRelated = () => (
       location="Hong Kong"
       badgeText="Happening Now"
       variant={SaleCardVariants.RELATED_SALE_TILE}
+      imageSrc="https://www.assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1/QA/auctions/NY041325/NY041325.jpg"
     />
     {divider}
     <SaleCard
@@ -77,7 +78,7 @@ export const SaleCardWithPrimaryAndSecondaryCTA = () => (
       badgeText="Happening Now"
       modalButtonText="Session and viewing details"
       modalButtonOnClick={() => console.log('Modal button clicked')}
-      imageSrc="https://via.placeholder.com/400"
+      imageSrc="https://www.assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1/QA/auctions/NY041325/NY041325.jpg"
     >
       <SaleCardActions>
         <Button
@@ -106,6 +107,7 @@ export const SaleCardWithPrimaryAndSecondaryCTA = () => (
       badgeText="Accepting Consignments"
       modalButtonText="Session and viewing details"
       modalButtonOnClick={() => console.log('Modal button clicked')}
+      imageSrc="https://www.assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1/QA/auctions/NY040725/NY040725.jpg"
     >
       <SaleCardActions>
         <Button
@@ -259,4 +261,14 @@ export const SaleCardWithLink = () => (
       </SaleCardActions>
     </SaleCard>
   </a>
+);
+
+export const SaleCardNoImage = () => (
+  <SaleCard
+    auctionType="Live Auction"
+    titleText="Modern & Contemporary Art Day Sale, Morning Session"
+    date="2 PM EST, May 27, 2025"
+    location="New York"
+    badgeText="Happening Now"
+  />
 );

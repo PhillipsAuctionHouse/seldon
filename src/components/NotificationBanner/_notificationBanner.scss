@@ -12,7 +12,7 @@
   text-align: center;
   top: 0;
   width: 100%;
-  z-index: $z-index-notification-banner;
+  z-index: $notification-banner-z-index;
 
   > * {
     font-size: $snowflake-note-size;

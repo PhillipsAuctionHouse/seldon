@@ -5,65 +5,122 @@ $px: seldon;
 /// COlORS:
 ///////////////////////
 
-// Primary color palette
-$pure-black: #000;
-$primary-black: #323232;
-$white: #fff;
+// Primary
 
-// Secondary color palette
-$soft-black: #545454;
-$dark-gray: #7b7474;
-$soft-black-2: #535050;
+// White
+$white-100: #fff;
+$white-75: rgba(255, 255, 255, 75%);
+$white-50: rgba(255, 255, 255, 50%);
+$white-25: rgba(255, 255, 255, 25%);
 
-// Utilititarian color palette
-$keyline-gray: #949494;
-$medium-gray: #c3bebb;
-$soft-gray: #fafafa;
-$pale-gray: #f4f4f4;
-$light-gray: #eceae7;
-$off-white: #f4f2f1;
+// Black
+$black-100: #000;
+$black-75: rgba(0, 0, 0, 75%);
+$black-50: rgba(0, 0, 0, 50%);
+$black-25: rgba(0, 0, 0, 25%);
 
-// Notification color palette
-$error-red: #f00;
-$error-pink: rgba(255, 229, 229, 90%);
-$warn-yellow: #d6d141;
-$post-sale-pink: #ff0086;
-$cta-blue: #4a90e2;
-$badge-blue: #0065fc;
+// Secondary
 
-// AM color palette
-$widget-blue: #4a90e2;
-$widget-green: #6a9c53;
-$widget-maroon: #6b0000;
-$widget-red: #b00000;
-$clock-widget-blue: $widget-blue;
-$clock-widget-green: $widget-green;
-$clock-widget-maroon: $widget-maroon;
-$clock-widget-red: $widget-red;
+// Highlight
+$highlight-yellow: #fff90a;
+$highlight-green: #46ea77;
+$highlight-blue: #0065fc;
+$highlight-red: #ff3d0a;
+$highlight-purple: #802dfa;
 
-// Articker color palette
-$articker-red: #fc1e2b;
-$articker-orange: #ff8201;
-$articker-red-orange-gradient: linear-gradient(90deg, #fc1e2b, #ff8201);
-$overlay-black: rgba(0, 0, 0, 80%);
+// Functional
+
+// Greys
+$grey-100: #545454;
+$grey-75: #75716f;
+$grey-50: #eae9e6;
+$grey-25: #f9f8f7;
+
+// Semantic
+
+// Text
+$text-default: #000;
+$text-inverted: #fff;
+$text-supporting: #545454;
+
+// CTAs
+$cta-default: #000;
+$cta-disabled: #eae9e6;
+$cta-hover: #75716f;
+$cta-inactive: #75716f;
+$cta-focus: #545454;
+
+// Background
+$bg-default: #fff;
+$bg-soft: #f9f8f7;
+$bg-border: #eae9e6;
+$bg-inverted: #000;
+$bg-overlay: rgba(0, 0, 0, 50%);
+
+// Status
+$success-default: #00cc39;
+$warning-default: #ea0404;
+$status-info: #0065fc;
+$focus-default: #07c;
 
 // admin colors
 $admin-alert: #f24a4a;
 $admin-success: #10bc94;
 
-// Legacy mapping
-$pure-white: $white;
-$post-sale-magenta: $post-sale-pink;
+// LEGACY MAPPING (updated to new tokens):
+// --- Legacy Primary color palette ---
+$pure-black: $black-100;
+$primary-black: $black-75;
+$white: $white-100;
 
-// Text variables
-$header-color: $pure-black;
-$text-color: $soft-black;
+// --- Legacy Utilitarian color palette ---
+$soft-black: $grey-100;
+$dark-gray: $grey-75;
+$soft-black-2: $grey-100;
+$keyline-gray: $grey-75;
+$medium-gray: $grey-50;
+$soft-gray: $grey-25;
+$pale-gray: $grey-25;
+$light-gray: $grey-50;
+$off-white: $grey-25;
 
-// Interactive Colors
-$button-hover: #75716f;
+// --- Legacy Notification color palette ---
+$error-red: $highlight-red;
+$error-pink: $highlight-purple;
+$warn-yellow: $highlight-yellow;
+$post-sale-pink: $highlight-purple;
+$cta-blue: $highlight-blue;
+$badge-blue: $highlight-blue;
 
-// Misc. Colors
-$countdown-compact: #b40919;
+// --- Legacy AM color palette ---
+$widget-blue: $highlight-blue;
+$widget-green: $highlight-green;
+$widget-maroon: $highlight-red;
+$widget-red: $highlight-red;
+$clock-widget-blue: $highlight-blue;
+$clock-widget-green: $highlight-green;
+$clock-widget-maroon: $highlight-red;
+$clock-widget-red: $highlight-red;
+
+// --- Legacy Articker color palette ---
+$articker-red: $highlight-red;
+$articker-orange: $highlight-yellow;
+$articker-red-orange-gradient: linear-gradient(90deg, $highlight-red, $highlight-yellow);
+$overlay-black: $black-75;
+
+// --- Legacy legacy mapping ---
+$pure-white: $white-100;
+$post-sale-magenta: $highlight-purple;
+
+// --- Legacy Text variables ---
+$header-color: $black-100;
+$text-color: $grey-100;
+
+// --- Legacy Interactive Colors ---
+$button-hover: $grey-75;
+
+// --- Legacy Misc. Colors ---
+$countdown-compact: $highlight-red;
 
 ////////////////////////
 /// FONTS:
@@ -423,7 +480,7 @@ $desktop-max-width: var(--desktop-max-width);
 /// z-index TOKENS:
 ///////////////////////
 $modal-z-index: 30;
-$z-index-notification-banner: 1000;
+$notification-banner-z-index: 10;
 
 ////////////////////////
 /// Our tokens usually support at least 4 sizes.

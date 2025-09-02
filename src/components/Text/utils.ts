@@ -8,15 +8,16 @@ export const determineTextClassName = (variant: TextVariants = TextVariants.body
 };
 
 export const determineDefaultTextElement = (variant: TextVariants = TextVariants.body1): string => {
-  const loweredVariant = variant.toLowerCase();
+  let loweredVariant = variant.toLowerCase();
 
   if (variant === TextVariants.blockquote) return 'blockquote';
-  if (variant.includes('body')) return 'p';
+  if (variant.includes('body')) return 'span';
   if (variant.includes('string')) return 'span';
   if (variant.includes('title')) return 'span';
   if (variant === TextVariants.label) return 'label';
   if (loweredVariant.includes('heading')) {
-    const headingNumber = !isNaN(parseInt(variant.slice(-1))) ? parseInt(variant.slice(-1)) : 3;
+    loweredVariant = loweredVariant.replace('italic', '');
+    const headingNumber = !isNaN(parseInt(loweredVariant.slice(-1))) ? parseInt(loweredVariant.slice(-1)) : 3;
     return `h${headingNumber}`;
   }
 

@@ -57,7 +57,7 @@ const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(
         </div>
         <PrimitiveToast.Close className={`${baseClassName}__close`} aria-label={closeButtonLabel} asChild>
           <IconButton variant={ButtonVariants.link}>
-            <Icon icon="CloseX" title={closeButtonLabel} color="$white" aria-hidden />
+            <Icon icon="CloseX" title={closeButtonLabel} color="$white-100" aria-hidden />
           </IconButton>
         </PrimitiveToast.Close>
       </PrimitiveToast.Root>

@@ -2,7 +2,7 @@
 
 .#{$px}-favoriting-tile-button {
   align-items: center;
-  background-color: $white;
+  background-color: $white-100;
   border: 1px solid $light-gray;
   display: flex;
   flex-shrink: 0;
@@ -33,7 +33,7 @@
     align-items: center;
     background: $button-hover;
     border: 1px solid $button-hover;
-    color: $white;
+    color: $white-100;
     cursor: pointer;
   }
 }
