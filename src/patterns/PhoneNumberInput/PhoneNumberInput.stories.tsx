@@ -99,18 +99,34 @@ export const InDrawerWithControllerAndValidation = () => {
     <>
       <Button onClick={() => setDrawerOpen(true)}>Open Drawer</Button>
       <Drawer isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)} title="Edit Phone Number">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} style={{ padding: '1rem' }}>
           <Controller
             name="firstName"
             control={control}
             defaultValue=""
-            render={({ field }) => <Input {...field} labelText="First Name" id="first-name" />}
+            render={({ field }) => (
+              <Input
+                {...field}
+                labelText="First Name"
+                id="first-name"
+                invalid={!!errors?.phoneNumber}
+                invalidText={errors?.phoneNumber?.message}
+              />
+            )}
           />
           <Controller
             name="lastName"
             control={control}
             defaultValue=""
-            render={({ field }) => <Input {...field} labelText="Last Name" id="last-name" />}
+            render={({ field }) => (
+              <Input
+                {...field}
+                labelText="Last Name"
+                id="last-name"
+                invalid={!!errors?.phoneNumber}
+                invalidText={errors?.phoneNumber?.message}
+              />
+            )}
           />
           <Controller
             name="phoneNumber"
@@ -134,7 +150,8 @@ export const InDrawerWithControllerAndValidation = () => {
             Submit form
           </Button>
           <p style={{ marginTop: '1rem' }}>
-            Note: will only validate if there is text in phone input, not if the number is valid
+            Notes: <br /> 1. Will only validate if there is text in phone input, not if the number is valid. <br /> 2.
+            Name inputs will error for style comparison.
           </p>
         </form>
       </Drawer>

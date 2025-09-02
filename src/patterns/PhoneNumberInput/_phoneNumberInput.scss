@@ -2,7 +2,7 @@
 
 .#{$px}-phone-number-input {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   position: relative;
   width: 100%;
 
@@ -14,14 +14,32 @@
   }
 
   &__error {
-    bottom: 0;
-    left: 0;
-    position: absolute;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-height: $spacing-md;
+
+    &-msg {
+      animation: reveal 0.45s linear forwards;
+
+      // Reveal animation (match Input)
+      max-height: 2em;
+      opacity: 1;
+      overflow: hidden;
+      transition: opacity 0.2s;
+      visibility: visible;
+      will-change: opacity, max-height;
+    }
+  }
+
+  // Hide the validation from the Input component
+  .seldon-input__validation {
+    display: none;
   }
 
   &__country-picker {
     flex: 0 0 25%;
-    margin-right: 0.5rem;
+    margin-right: $spacing-xsm;
     min-width: 150px; // just big enough for flag and 3 digit code
   }
 
@@ -32,14 +50,18 @@
   }
 
   @media screen and (min-width: $breakpoint-xl) {
+    &__wrapper {
+      align-items: center;
+    }
+
     &__country-picker {
       flex: 0 0 40%;
       min-width: 0;
-      padding-bottom: 0.25rem;
     }
 
     &__input {
       flex: 1 1 60%;
+      margin-top: calc(var(--string-line-height-size2) + 1rem);
       min-width: 0;
     }
   }

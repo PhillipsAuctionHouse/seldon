@@ -75,7 +75,6 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
               isPhone={true}
               value={selectedCountry?.code}
               onChange={setSelected}
-              triggerErrorMsg={errorText}
             />
           </div>
           <div className={`${baseClassName}__input`}>
@@ -94,6 +93,12 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
             />
           </div>
         </div>
+        {/** Mimics the Input component validation */}
+        {errorText ? (
+          <p className={classnames(`${baseClassName}__error`, `${baseClassName}__error-msg`)}>{errorText}</p>
+        ) : (
+          <p className={classnames(`${baseClassName}__error`)}>&nbsp;</p>
+        )}
       </div>
     );
   },
