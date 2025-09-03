@@ -1,521 +1,525 @@
-import { Meta, Source } from '@storybook/blocks';
-import Comments from '../assets/comments.svg';
+import { Meta } from '@storybook/blocks';
 
 <Meta title="Foundations in Seldon/Type" />
 
 <main className="sb-unstyled doc-wrapper type-tokens">
-<h1 className="h1">Typescale, Tokens, and Mixins<img src={Comments} alt="Text" /></h1>
-
-<span className="p">
-  The Easel design system's default type scale is based on the Major-Third approach, measured in `rem`. Each `rem` being
-  equal to `16px`. In typography, a major third refers to a difference in font size of `1.250rem`.
-</span>
-<span className="p">
-We have 3
-Classifications of Text Styling: Display, Heading and Body (Labels are a sub-set of Body). Each classification has a
-set of tokens that are used to style the text. These tokens are used in conjunction with our Mixins to create a
-consistent and scalable design system.
-
-</span>
-
-## <span className="h2">Font Tokens</span>
-
-## <span className="h3">Heading</span>
-
-<span className="p">
-  This styling utilizes Distinct Display in title case. Typically used within <strong>layouts</strong> for hierarchy
-  flow; There are four sizes in this scale:
-</span>
-
-<h4 className="h4">
-  Heading 1: <span className="token">`$heading1`</span>
-</h4>
-
-- **Default**:
-  <span className="property">font-size:</span> 1.75rem;
-  <span className="property">line-height: </span>2rem;
-  <span className="property">font-weight:</span>400;
-  <span className="property">text-transform:</span> capitalize;
-- **BP1**: <span className="property">font-size:</span> 1.5rem; <span className="property">line-height:</span> 1.75rem;
-- **BP4**: <span className="property">font-size:</span> 2rem; <span className="property">line-height:</span> 2.25rem;
-
-<details>
-```scss
-@include text($heading1);
-```
-
-  <summary>Example</summary>
-   <span className="example example--h1">example</span>
-
-</details>
-
-<h4 className="h4">
-  Heading 2: <span className="token">`$heading2`</span>
-  This is currently the same as the heading 1 token but might be different in the future.
-</h4>
-
-- **Default**:
-  <span className="property">font-size:</span> 1.75rem;
-  <span className="property">line-height: </span>2rem;
-  <span className="property">font-weight:</span>400;
-  <span className="property">text-transform:</span> capitalize;
-- **BP1**: <span className="property">font-size:</span> 1.5rem; <span className="property">line-height:</span> 1.75rem;
-- **BP4**: <span className="property">font-size:</span> 2rem; <span className="property">line-height:</span> 2.25rem;
-
-<details>
-  <summary>Example</summary>
-  
-```scss
-@include text($heading2);
-```
-
-  <span className="example example--h2">example</span>
-</details>
-
-<h4 className="h4">
-  Heading 3: <span className="token">`$heading3`</span>
-</h4>
-
-- **Default**:
-  <span className="property">font-size:</span> 1.5rem;
-  <span className="property">line-height: </span>1.75rem;
-  <span className="property">font-weight:</span> 400;
-  <span className="property">text-transform:</span> capitalize;
-- **BP1**: <span className="property">font-size:</span> 1.25rem; <span className="property">line-height:</span> 1.5rem;
-- **BP4**: <span className="property">font-size:</span> 1.75rem; <span className="property">line-height:</span> 2rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($heading3);
-```
-
-  <span className="example example--h3">example</span>
-</details>
-
-<h4 className="h4">
-  Heading 4: <span className="token">`$heading4`</span>
-</h4>
-
-- **Default**:
-  <span className="property">font-size:</span> 1.25rem;
-  <span className="property"> line-height:</span> 1.5rem;
-  <span className="property">font-weight:</span> 400;
-  <span className="property">text-transform:</span> capitalize;
-- **BP1**: <span className="property">font-size:</span> 1rem; <span className="property"> line-height:</span> 1.25rem;
-- **BP4**: <span className="property">font-size:</span> 1.5rem; <span className="property"> line-height:</span> 1.75rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($heading4);
-```
-
-  <span className="example example--h4">example</span>
-</details>
-
-<h4 id="header-size-4" className="h4">
-  Heading 5: <span className="token">`$heading5`</span>
-</h4>
-
-- **Default**:
-  <span className="property">font-size:</span> 1rem;
-  <span className="property"> line-height:</span> 1.25rem;
-  <span className="property">font-weight:</span> 400;
-  <span className="property">text-transform:</span> capitalize;
-- **BP1**: <span className="property">font-size:</span> 0.75rem; <span className="property"> line-height:</span> 1rem;
-- **BP4**: <span className="property">font-size:</span> 1.25rem; <span className="property"> line-height:</span> 1.5rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($heading5);
-```
-
-  <span className="example example--h5">example</span>
-</details>
-
-## <span className="h3">Title</span>
-
-<span className="p">
-  This styling utilizes Distinct Display in title case as well as uppercase text transform. There are four sizes in this scale:
-</span>
-
-<h4 className="h4">
-  Title 1: <span className="token">`title1`</span>
-</h4>
-
-- **Default**:
-  <span className="property">font-size:</span> 1.75rem;
-  <span className="property">line-height: </span>2rem;
-  <span className="property">font-weight:</span>400;
-  <span className="property">text-transform:</span> uppercase;
-- **BP1**: <span className="property">font-size:</span> 1.5rem; <span className="property">line-height:</span>1.75rem;
-- **BP4**: <span className="property">font-size:</span> 2rem; <span className="property">line-height: </span>2.25rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text(title1);
-```
-
-  <span className="example example-title--h1">example</span>
-</details>
-
-<h4 className="h4">
-  Title 2: <span className="token">`title2`</span>
-</h4>
-
-- **Default**:
-  <span className="property">font-size:</span> 1.5rem;
-  <span className="property">line-height:</span> 1.75rem;
-  <span className="property">font-weight:</span> 400;
-  <span className="property">text-transform:</span> uppercase;
-- **BP1**: <span className="property">font-size:</span> 1.25rem; <span className="property">line-height:</span> 1.5rem;
-- **BP4**: <span className="property">font-size:</span> 1.75rem; <span className="property">line-height:</span> 2rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text(title2);
-```
-
-  <span className="example example-title--h2">example</span>
-</details>
-
-<h4 className="h4">
-  Title 3: <span className="token">`title3`</span>
-</h4>
-
-- **Default**:
-  <span className="property">font-size:</span> 1.25rem;
-  <span className="property"> line-height:</span> 1.5rem;
-  <span className="property">font-weight:</span> 400;
-  <span className="property">text-transform:</span> uppercase;
-- **BP1**: <span className="property">font-size:</span> 1rem; <span className="property"> line-height:</span> 1.25rem;
-- **BP4**: <span className="property">font-size:</span> 1.5rem; <span className="property"> line-height:</span> 1.75rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text(title3);
-```
-
-  <span className="example example-title--h3">example</span>
-</details>
-
-<h4 id="header-size-4" className="h4">
-  title 4: <span className="token">`title4`</span>
-</h4>
-
-- **Default**:
-  <span className="property">font-size:</span> 1rem;
-  <span className="property"> line-height:</span> 1.25rem;
-  <span className="property">font-weight:</span> 400;
-  <span className="property">text-transform:</span> uppercase;
-- **BP1**: <span className="property">font-size:</span> 0.75rem; <span className="property"> line-height:</span> 1rem;
-- **BP4**: <span className="property">font-size:</span> 1.25rem; <span className="property"> line-height:</span> 1.5rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text(title4);
-```
-
-  <span className="example example-title--h4">example</span>
-</details>
-
-## <span className="h3">Body</span>
-
-<span className="p">
-  This styling utilizes Montserrat Reg & Semibold in Sentence Case. Typically used within <strong>layouts</strong> for
-  text-body blocks; also used for text strings in <strong>lists</strong> and <strong>tables</strong>. There are three
-  sizes in this scale:
-</span>
-
-<h4 className="h4">
-  Body 1: <span className="token">`$body1`</span>
-</h4>
-
-- **Default**: <span className="property">font-size:</span> 1.25rem; <span className="property">
-line-height:</span> 1.75rem; <span className="property">font-weight:</span> 400 or 600;
-- **BP1**: <span className="property">font-size:</span> 1rem; <span className="property"> line-height:</span> 1.5rem;
-- **BP4**: <span className="property">font-size:</span> 1.5rem; <span className="property"> line-height:</span> 2rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($body);
-```
-
-  <span className="example example--p1">example</span>
-</details>
-
-<h4 className="h4">
-  Body 2: <span className="token">`$body2`</span>
-</h4>
-
-- **Default**: <span className="property">font-size:</span> 1rem; <span className="property">
-  line-height:</span> 1.5; <span className="property">font-weight:</span> 400 or 600;
-- **BP1**: <span className="property">font-size:</span> 0.75rem; <span className="property"> line-height:</span> 1.25rem;
-- **BP4**: <span className="property">font-size:</span> 1.25rem; <span className="property"> line-height:</span> 1.75rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($body2);
-```
-
-  <span className="example example--p2">example</span>
-</details>
-
-<h4 className="h4">
-  Body 3: <span className="token">`$body3`</span>
-</h4>
-
-- **Default**: <span className="property">font-size:</span> 0.75rem; <span className="property">
-  line-height:</span> 1.25; <span className="property">font-weight:</span> 400 or 600;
-- **BP1**: <span className="property">font-size:</span> 0.5rem; <span className="property"> line-height:</span> 1rem;
-- **BP4**: <span className="property">font-size:</span> 1rem;  <span className="property"> line-height:</span> 1.5rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($body3);
-```
-
-  <span className="example example--p3">example</span>
-</details>
-
-## <span className="h3">String</span>
-
-<span className="p">
-  This styling utilizes utilizes Montserrat, in Regular (400) and SemiBold (600)
-</span>
-
-<h4 className="h4">
-  String 1: <span className="token">`$string1`</span>
-</h4>
-
-- **Default**: <span className="property">font-size:</span> 1.25rem; <span className="property">
-line-height:</span> 1.5rem; <span className="property">font-weight:</span> 400 or 600;
-- **BP1**: <span className="property">font-size:</span> 1rem; <span className="property"> line-height:</span> 1.25rem;
-- **BP4**: <span className="property">font-size:</span> 1.5rem; <span className="property"> line-height:</span> 1.75rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($string);
-```
-
-  <span className="example example-string--p1">example</span>
-</details>
-
-<h4 className="h4">
-  String 2: <span className="token">`$string2`</span>
-</h4>
-
-- **Default**: <span className="property">font-size:</span> 1rem; <span className="property">
-  line-height:</span> 1.25; <span className="property">font-weight:</span> 400 or 600;
-- **BP1**: <span className="property">font-size:</span> 0.75rem; <span className="property"> line-height:</span> 1.25rem;
-- **BP4**: <span className="property">font-size:</span> 1.25rem; <span className="property"> line-height:</span> 1.5rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($string2);
-```
-
-  <span className="example example-string--p2">example</span>
-</details>
-
-<h4 className="h4">
-  String 3: <span className="token">`$string3`</span>
-</h4>
-
-- **Default**: <span className="property">font-size:</span> 0.75rem; <span className="property">
-  line-height:</span> 1rem; <span className="property">font-weight:</span> 400 or 600;
-- **BP1**: <span className="property">font-size:</span> 0.5rem; <span className="property"> line-height:</span> 0.75rem;
-- **BP4**: <span className="property">font-size:</span> 1rem; <span className="property"> line-height:</span> 1.25rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($string3);
-```
-
-  <span className="example example-string--p3">example</span>
-</details>
-
-## <span className="h3">Labels</span>
-
-<span className="p">
-  This styling utilizes a subset of Montserrat, Medium, Semibold, Bold. Specifically used for purposeful labels across
-  UI and Content needs. There are six variations in this scale:
-</span>
-
-<h4 className="h4">
-  Button: <span className="token">`$button`</span>
-</h4>
-
-- **Default**: <span className="property">font-size:</span> 1rem; <span className="property">
-  line-height:</span> 1.25rem; <span className="property">letter-spacing:</span> 1px; <span className="property">font-weight:</span> 500; <span className="property">text-transform:</span> capitalize;
-- **BP1**: <span className="property">font-size:</span> 0.75rem; <span className="property"> line-height:</span> 1rem;
-- **BP4**: <span className="property">font-size:</span> 1.25rem; <span className="property"> line-height:</span> 1.25rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($button);
-```
-
-  <span className="example example--button">example</span>
-</details>
-
-<h4 className="h4">
-  Link: <span className="token">`$link`</span>
-</h4>
-
-- **Default**: <span className="property">font-size:</span> 1rem; <span className="property">
-  line-height:</span> 1rem; <span className="property">letter-spacing:</span> 1px; <span className="property">font-weight:</span> 500; <span className="property">text-transform:</span> capitalize;
-- **BP1**: <span className="property">font-size:</span> 0.75rem; <span className="property"> line-height:</span> 0.75rem;
-- **BP4**: <span className="property">font-size:</span> 1.25rem; <span className="property"> line-height:</span> 1.25rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($link);
-```
-
-  <span className="example example--link">example</span>
-</details>
-
-<h4 className="h4">
-  Badge: <span className="token">`$badge`</span>
-</h4>
-
-- **Default**: <span className="property">font-size:</span> 0.75rem; <span className="property">
-  line-height:</span> 1rem; <span className="property">letter-spacing:</span> 1px; <span className="property">font-weight:</span> 500; <span className="property">text-transform:</span> capitalize;
-- **BP1**: <span className="property">font-size:</span> 0.5rem; <span className="property"> line-height:</span> 0.67rem;
-- **BP4**: <span className="property">font-size:</span> 1rem; <span className="property"> line-height:</span> 1.5rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($badge);
-```
-
-  <span className="example example--badge">example</span>
-</details>
-
-- **Default**: <span className="property">font-size:</span> 1.25rem; <span className="property">
-  line-height:</span> 1.25; <span className="property">letter-spacing:</span> 2px; <span className="property">font-weight:</span> 700; <span className="property">text-transform:</span> uppercase;
-- **BP1**: <span className="property">font-size:</span> 1rem;
-- **BP4**: <span className="property">font-size:</span> 1.56rem;
-
-<h4 className="h4">
-  Email: <span className="token">`$email`</span>
-</h4>
-
-- **Default**: <span className="property">font-size:</span> 1rem; <span className="property">
-  line-height:</span> 1.25; <span className="property">letter-spacing:</span> 1px; <span className="property">font-weight:</span> 600; <span className="property">text-transform:</span> lowercase;
-- **BP1**: <span className="property">font-size:</span> 0.75rem;
-- **BP4**: <span className="property">font-size:</span> 1.25rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($email);
-```
-
-  <span className="example example--email">JDoe@Phillips.com</span>
-</details>
-
-<h4 className="h4">
-  Text: <span className="token">`$label`</span>
-</h4>
-
-- **Default**: <span className="property">font-size:</span> 0.75rem; <span className="property">
-  line-height:</span> 1.25; <span className="property">letter-spacing:</span> 1px; <span className="property">font-weight:</span> 700;
-- **BP1**: <span className="property">font-size:</span> 0.56rem;
-- **BP4**: <span className="property">font-size:</span> 1rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($label);
-```
-
-  <span className="example example--label">example</span>
-</details>
-
-## <span className="h3">Snowflake</span>
-
-<h4 className="h4">
-  snwHeaderLink: <span className="token">`$snwHeaderLink`</span>
-</h4>
-
-- **Default**: <span className="property">font-size:</span> 0.875rem; <span className="property">
-line-height:</span> 1.5rem; <span className="property">font-weight:</span> 400 or 600;
-- **BP1**: <span className="property">font-size:</span> 1rem; <span className="property"> line-height:</span> 1.5rem;
-- **BP4**: <span className="property">font-size:</span> 1.125rem; <span className="property"> line-height:</span> 1.75rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($snwHeaderLink);
-```
-
-  <span className="example example-snw-header-link">example</span>
-</details>
-
-<h4 className="h4">
-  snwFlyoutLink: <span className="token">`$snwFlyoutLink`</span>
-</h4>
-
-- **Default**: <span className="property">font-size:</span> 0.875rem; <span className="property">
-line-height:</span> 1.75rem; <span className="property">font-weight:</span> 400 or 600;
-- **BP1**: <span className="property">font-size:</span> 1rem; <span className="property"> line-height:</span> 1.5rem;
-- **BP4**: <span className="property">font-size:</span> 1.125rem; <span className="property"> line-height:</span> 2.125rem;
-
-<details>
-  <summary>Example</summary>
-
-```scss
-@include text($snwFlyoutLink);
-```
-
-  <span className="example example-snw-flyout-link">example</span>
-</details>
-
-### <span className="h2">Using the tokens</span>
-
-Use the above tokens along with the `text` mixin to apply the display text styling to an element. The text mixin is found in the `_type.scss` partial file.
-
-<Source code={`
-.pah-card__title {
-  @include text($title1);
-}
-
-`} dark language="scss" />
-
+  <h1>Typography</h1>
+  <p>We use two typefaces across our digital products - a bespoke display font for headings and standout elements, and a web-safe sans-serif for body text. This approach helps create clear hierarchy and improves readability across devices.</p>
+
+  <div className="typography">
+    <h2 className="typography-title">Display</h2>
+    <div className="typography-container">
+      <div className="typography-breakpoint-header">
+          <div>Small 320 → 1440px</div>
+      </div>
+      <div className="typography-breakpoint-header">
+          <div>Medium N / A</div>
+      </div>
+      <div className="typography-breakpoint-header">
+          <div>Small 320 → 1440px</div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <h1 className="typography-item__display-xl">Display XL</h1>
+          <div className="typography-item__specs">
+            Size: 40px / 2.50rem <br/>
+            Line height: 48px / 3.00rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <h1 className="typography-item__display-xl">Display XL</h1>
+          <div className="typography-item__specs">
+            Size: 40px / 2.50rem <br/>
+            Line height: 48px / 3.00rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--large">
+        <h1 className="typography-item__display-xl">Display XL</h1>
+          <div className="typography-item__specs">
+            Size: 48px / 3.00rem <br/>
+            Line height: 56px / 3.50rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <h2 className="typography-item__display-l">Display L</h2>
+          <div className="typography-item__specs">
+            Size: 32px / 2.00rem <br/>
+            Line height: 40px / 2.50rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <h2 className="typography-item__display-l">Display L</h2>
+          <div className="typography-item__specs">
+            Size: 32px / 2.00rem <br/>
+            Line height: 40px / 2.50rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--large">
+        <h2 className="typography-item__display-l">Display L</h2>
+          <div className="typography-item__specs">
+            Size: 40px / 2.50rem <br/>
+            Line height: 48px / 3.00rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+        <div className="typography-code-block">
+          ```scss
+          @include text($displayXL);
+          @include text($displayL);
+          ```
+        </div>
+    </div>
+  </div>
+
+  <div className="typography">
+    <h2 className="typography-title">Headings</h2>
+    <div className="typography-container">
+      <div className="typography-breakpoint-header">
+          <div>Small 320 → 1440px</div>
+      </div>
+      <div className="typography-breakpoint-header">
+          <div>Medium N / A</div>
+      </div>
+      <div className="typography-breakpoint-header">
+          <div>Large 1441px → 2400px</div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <h1 className="typography-item__heading-2xl">Heading 2XL</h1>
+          <div className="typography-item__specs">
+            Size: 24px / 1.50rem <br/>
+            Line height: 28px / 1.75rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display <br/>
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <h1 className="typography-item__heading-2xl">Heading 2XL</h1>
+          <div className="typography-item__specs">
+            Size: 24px / 1.50rem <br/>
+            Line height: 28px / 1.75rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--large">
+        <h1 className="typography-item__heading-2xl">Heading 2XL</h1>
+          <div className="typography-item__specs">
+            Size: 28px / 1.75rem <br/>
+            Line height: 32px / 2.00rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <h2 className="typography-item__heading-xl">Heading XL</h2>
+          <div className="typography-item__specs">
+            Size: 20px / 1.25rem <br/>
+            Line height: 24px / 1.50rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <h2 className="typography-item__heading-xl">Heading XL</h2>
+          <div className="typography-item__specs">
+            Size: 20px / 1.25rem <br/>
+            Line height: 24px / 1.50rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--large">
+        <h2 className="typography-item__heading-xl">Heading XL</h2>
+          <div className="typography-item__specs">
+            Size: 24px / 1.50rem <br/>
+            Line height: 28px / 1.75rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <h3 className="typography-item__heading-l">Heading L</h3>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 20px / 1.25rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <h3 className="typography-item__heading-l">Heading L</h3>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 20px / 1.25rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--large">
+        <h3 className="typography-item__heading-l">Heading L</h3>
+          <div className="typography-item__specs">
+            Size: 20px / 1.25rem <br/>
+            Line height: 24px / 1.50rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <h3 className="typography-item__heading-l--modified">Heading L modified</h3>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 20px / 1.25rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <h3 className="typography-item__heading-l--modified">Heading L modified</h3>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 20px / 1.25rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--large">
+        <h3 className="typography-item__heading-l--modified">Heading L modified</h3>
+          <div className="typography-item__specs">
+            Size: 20px / 1.25rem <br/>
+            Line height: 24px / 1.50rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <h4 className="typography-item__heading-m">Heading M</h4>
+          <div className="typography-item__specs">
+            Size: 12px / 0.75rem <br/>
+            Line height: 16px / 1.00rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <h4 className="typography-item__heading-m">Heading M</h4>
+          <div className="typography-item__specs">
+            Size: 12px / 0.75rem <br/>
+            Line height: 16px / 1.00rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--large">
+        <h4 className="typography-item__heading-m">Heading M</h4>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 20px / 1.25rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <h5 className="typography-item__heading-s">Heading S</h5>
+          <div className="typography-item__specs">
+            Size: 8px / 0.50rem <br/>
+            Line height: 12px / 0.75rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <h5 className="typography-item__heading-s">Heading S</h5>
+          <div className="typography-item__specs">
+            Size: 8px / 0.50rem <br/>
+            Line height: 12px / 0.75rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--large">
+        <h5 className="typography-item__heading-s">Heading S</h5>
+          <div className="typography-item__specs">
+            Size: 12px / 0.75rem <br/>
+            Line height: 16px / 1.00rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-code-block">
+        ```scss
+        @include text($heading2XL);
+        @include text($headingXL);
+        @include text($headingL);
+        @include text($headingL, 600, uppercase, italic);
+        @include text($headingM);
+        @include text($headingS);
+        ```
+      </div>
+    </div>
+  </div>
+
+  <div className="typography">
+    <h2 className="typography-title">Body</h2>
+    <div className="typography-container">
+      <div className="typography-breakpoint-header">
+          <div>Small 320 → 1440px</div>
+      </div>
+      <div className="typography-breakpoint-header">
+          <div>Medium N / A</div>
+      </div>
+      <div className="typography-breakpoint-header">
+          <div>Large 1441px → 2400px</div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <p className="typography-item__body-l">Body L</p>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 24px / 1.50rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <p className="typography-item__body-l">Body L</p>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 24px / 1.50rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat
+          </div>
+      </div>
+      <div className="typography-item typography-item--large">
+        <p className="typography-item__body-l">Body L</p>
+          <div className="typography-item__specs">
+            Size: 20px / 1.25rem <br/>
+            Line height: 28px / 1.75rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat
+          </div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <p className="typography-item__body-m">Body M</p>
+          <div className="typography-item__specs">
+            Size: 12px / 0.75rem <br/>
+            Line height: 20px / 1.25rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <p className="typography-item__body-m">Body M</p>
+          <div className="typography-item__specs">
+            Size: 12px / 0.75rem <br/>
+            Line height: 20px / 1.25rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat
+          </div>
+      </div>
+      <div className="typography-item typography-item--large">
+        <p className="typography-item__body-m">Body M</p>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 24px / 1.50rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat
+          </div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <p className="typography-item__body-s">Body S</p>
+          <div className="typography-item__specs">
+            Size: 8px / 0.50rem <br/>
+            Line height: 16px / 1.00rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <p className="typography-item__body-s">Body S</p>
+          <div className="typography-item__specs">
+            Size: 8px / 0.50rem <br/>
+            Line height: 16px / 1.00rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat
+          </div>
+      </div>
+      <div className="typography-item typography-item--large">
+        <p className="typography-item__body-s">Body S</p>
+          <div className="typography-item__specs">
+            Size: 12px / 0.75rem <br/>
+            Line height: 20px / 1.25rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat
+          </div>
+      </div>
+      <div className="typography-code-block">
+        ```scss
+        @include text($bodyL);
+        @include text($bodyM);
+        @include text($bodyS);
+        ```
+      </div>
+    </div>
+  </div>
+
+  <div className="typography">
+    <h2 className="typography-title">Links</h2>
+    <div className="typography-container">
+      <div className="typography-breakpoint-header">
+          <div>Small 320 → 1440px</div>
+      </div>
+      <div className="typography-breakpoint-header">
+          <div>Medium N / A</div>
+      </div>
+      <div className="typography-breakpoint-header">
+          <div>Large 1441px → 2400px</div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <p className="typography-item__link-stylised">LINK STYLISED</p>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 24px / 1.50rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display <br/>
+            Text transform: uppercase
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <p className="typography-item__link-stylised">LINK STYLISED</p>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 24px / 1.50rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display <br/>
+            Text transform: uppercase
+          </div>
+      </div>
+      <div className="typography-item typography-item--large">
+        <p className="typography-item__link-stylised">LINK STYLISED</p>
+          <div className="typography-item__specs">
+            Size: 20px / 1.25rem <br/>
+            Line height: 28px / 1.75rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display <br/>
+            Text transform: uppercase
+          </div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <a className="typography-item__link-l">Link L</a>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 24px / 1.50rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 600 <br/>
+            Text decoration: underline
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <a className="typography-item__link-l">Link L</a>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 24px / 1.50rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 600 <br/>
+            Text decoration: underline
+          </div>
+      </div>
+      <div className="typography-item typography-item--large">
+        <a className="typography-item__link-l">Link L</a>
+          <div className="typography-item__specs">
+            Size: 20px / 1.25rem <br/>
+            Line height: 28px / 1.75rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 600 <br/>
+            Text decoration: underline
+          </div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <a className="typography-item__link-m">Link M</a>
+          <div className="typography-item__specs">
+            Size: 12px / 0.75rem <br/>
+            Line height: 16px / 1.00rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 600 <br/>
+            Text decoration: underline
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <a className="typography-item__link-m">Link M</a>
+          <div className="typography-item__specs">
+            Size: 12px / 0.75rem <br/>
+            Line height: 16px / 1.00rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 600 <br/>
+            Text decoration: underline
+          </div>
+      </div>
+      <div className="typography-item typography-item--large">
+        <a className="typography-item__link-m">Link M</a>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 20px / 1.25rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 600 <br/>
+            Text decoration: underline
+          </div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <a className="typography-item__link-s">Link S</a>
+          <div className="typography-item__specs">
+            Size: 8px / 0.50rem <br/>
+            Line height: 12px / 0.75rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 600 <br/>
+            Text decoration: underline
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <a className="typography-item__link-s">Link S</a>
+          <div className="typography-item__specs">
+            Size: 8px / 0.50rem <br/>
+            Line height: 12px / 0.75rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 600 <br/>
+            Text decoration: underline
+          </div>
+      </div>
+      <div className="typography-item typography-item--large">
+        <a className="typography-item__link-s">Link S</a>
+          <div className="typography-item__specs">
+            Size: 12px / 0.75rem <br/>
+            Line height: 16px / 1.00rem <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 600 <br/>
+            Text decoration: underline
+          </div>
+      </div>
+      <div className="typography-code-block">
+        ```scss
+        @include text($linkStylised);
+        @include text($linkL);
+        @include text($linkM);
+        @include text($linkS);
+        ```
+      </div>
+    </div>
+  </div>
 </main>

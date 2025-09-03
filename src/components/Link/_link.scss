@@ -4,8 +4,8 @@
   color: $pure-black;
   text-decoration: none;
 
-  &--email,
-  &--link {
+  &--email.#{$px}-link--email,
+  &--link.#{$px}-link--link {
     @include underline;
   }
 
