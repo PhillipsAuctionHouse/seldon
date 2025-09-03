@@ -153,7 +153,7 @@
   @include modifying-styles($font-size, $font-weight, $text-transform, $font-style);
 }
 
-@mixin text($token, $font-weight: 400, $text-transform: unset, $font-style: revert, $text-decoration: unset) {
+@mixin text($token, $font-weight: 400, $text-transform: unset, $font-style: unset, $text-decoration: unset) {
   @if $token == 'blockquote' {
     @include heading-styles($font-size-2xl, $font-weight, initial, $font-style);
 
@@ -305,7 +305,7 @@
 
   @if $token == $linkStylised {
     @include DistinctDisplay;
-    @include link-styles($font-size-l, $text-transform: uppercase, $text-decoration: unset);
+    @include link-styles($font-size: $font-size-l, $text-transform: uppercase, $text-decoration: unset);
 
     line-height: calc($font-size-l + $line-height-l-units);
   }
