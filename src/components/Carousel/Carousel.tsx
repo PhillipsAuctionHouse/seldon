@@ -42,6 +42,7 @@ export interface CarouselProps extends ComponentProps<'div'> {
    *  The threshold for slides to be considered in view. A value of 0.1 means that 10% of the slide must be in view for it to be considered in view.
    */
   inViewThreshold?: number;
+  slidesToScroll?: number;
 }
 
 type CarouselContextProps = {
@@ -83,6 +84,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       disableDrag = false,
       disableNavigationDrag = null,
       inViewThreshold = 0.99,
+      slidesToScroll = 1,
       ...props
     },
     ref,
@@ -109,6 +111,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
         startIndex,
         inViewThreshold,
         ...disableNavigationDragBreakpoint,
+        slidesToScroll,
       },
       [
         ...(useWheelGestures
