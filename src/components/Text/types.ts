@@ -26,8 +26,8 @@ export enum TextVariants {
   snwHeadingHero2 = 'snwHeadingHero2',
 
   // New variants
-  displayXL = 'displayXL',
-  displayL = 'displayL',
+  display4XL = 'display4XL',
+  display3XL = 'display3XL',
   heading2XL = 'heading2XL',
   headingXL = 'headingXL',
   headingL = 'headingL',

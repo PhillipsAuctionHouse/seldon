@@ -263,14 +263,12 @@
     @include labelText($label);
   }
 
-  @if $token == $displayXL {
-    @include display-styles(calc($font-size-2xl + $font-size-l), $font-weight, $text-transform, $font-style);
-
-    // koss-temp: fix font size
+  @if $token == $display4XL {
+    @include display-styles($font-size-4xl, $font-weight, $text-transform, $font-style);
   }
 
-  @if $token == $displayL {
-    @include display-styles(calc($font-size-2xl + $font-size-s), $font-weight, $text-transform, $font-style);
+  @if $token == $display3XL {
+    @include display-styles($font-size-3xl, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == $heading2XL {
@@ -309,7 +307,7 @@
     @include DistinctDisplay;
     @include link-styles($font-size-l, $text-transform: uppercase, $text-decoration: unset);
 
-    line-height: calc($font-size-l + $line-height-l-units); // koss-temp
+    line-height: calc($font-size-l + $line-height-l-units);
   }
 
   @if $token == $linkL {

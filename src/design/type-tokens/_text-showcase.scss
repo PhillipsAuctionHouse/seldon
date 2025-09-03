@@ -69,12 +69,12 @@
       line-height: 1rem; /* 133.333% */
     }
 
-    &__display-xl {
-      @include text($displayXL);
+    &__display-4xl {
+      @include text($display4XL);
     }
 
-    &__display-l {
-      @include text($displayL);
+    &__display-3xl {
+      @include text($display3XL);
     }
 
     &__heading-2xl {
