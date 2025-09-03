@@ -42,6 +42,9 @@ export interface CarouselProps extends ComponentProps<'div'> {
    *  The threshold for slides to be considered in view. A value of 0.1 means that 10% of the slide must be in view for it to be considered in view.
    */
   inViewThreshold?: number;
+  /**
+   * The number of slides to scroll at once.
+   */
   slidesToScroll?: number;
 }
 
