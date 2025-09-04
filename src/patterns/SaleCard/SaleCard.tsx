@@ -102,8 +102,11 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
             )}
           </div>
         </div>
-        {variant !== SaleCardVariants.RELATED_SALE_TILE && (
-          <SSRMediaQuery.Media greaterThanOrEqual="md">{children}</SSRMediaQuery.Media>
+
+        {variant !== SaleCardVariants.RELATED_SALE_TILE && !!children && (
+          <div className={`${baseClassName}__ctas`}>
+            <SSRMediaQuery.Media greaterThanOrEqual="md">{children}</SSRMediaQuery.Media>
+          </div>
         )}
       </article>
     );
