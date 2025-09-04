@@ -8,6 +8,10 @@ import { useState } from 'react';
 const meta = {
   title: 'Components/Countdown',
   component: Countdown,
+  parameters: {
+    // have to disable snapshotting because of the countdown timer changing between snapshots
+    chromatic: { disableSnapshot: true },
+  },
 } satisfies Meta<typeof Countdown>;
 
 export default meta;
