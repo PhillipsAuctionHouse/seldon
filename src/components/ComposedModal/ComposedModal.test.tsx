@@ -73,7 +73,7 @@ describe('ComposedModal', () => {
             variant={ButtonVariants.secondary}
             style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
           >
-            Register to bid
+            Register to Bid
           </Button>
         }
         footerContent="Optional Disclaimer text"
