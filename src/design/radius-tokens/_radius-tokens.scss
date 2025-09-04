@@ -1,0 +1,52 @@
+@use '#scss/vars' as *;
+@use '#scss/type' as *;
+
+span.h2 {
+  color: $black-100;
+}
+
+span.h3 {
+  margin: 0;
+}
+
+.radius-token-demo {
+  align-items: flex-start;
+  display: flex;
+  gap: $spacing-sm;
+  justify-content: space-between;
+  margin-top: $spacing-xxl;
+}
+
+.radius-token-demo__item {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: $spacing-sm;
+  min-width: 100px;
+}
+
+.radius-token-demo__info {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xsm;
+}
+
+.radius-token-demo__box {
+  background: $white-100;
+  border: 2px solid $black-100;
+  height: 100px;
+  margin-bottom: 2rem;
+  width: 100px;
+}
+
+.radius-token-demo__box--sm {
+  border-radius: $radius-sm;
+}
+
+.radius-token-demo__box--md {
+  border-radius: $radius-md;
+}
+
+.radius-token-demo__box--lg {
+  border-radius: $radius-lg;
+}

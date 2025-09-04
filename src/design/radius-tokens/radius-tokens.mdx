@@ -1,0 +1,59 @@
+import { Meta } from '@storybook/blocks';
+import StackAlt from '../assets/stackalt.svg';
+
+<Meta title="Foundations in Seldon/Radius" />
+
+<main className="sb-unstyled doc-wrapper">
+<h1 className="h1">Radius</h1>
+
+<span className="p">
+  Radius is a <b>visual styling property used to round the corners of shapes.</b> We apply it to define the look and
+  feel of rectangular elements like cards, buttons, carousels, and dialogs. Our corner radius scale helps create visual
+  distinction and consistency across components.
+</span>
+
+<span className="h2">Overview</span>
+
+<span className="p">
+  We use 3 radius tokens to suit different UI needs, applying them carefully to align with Philips’ sharp, distinctive
+  brand. Rounded corners are used with restraint, and the tokens below include guidance on when and where to apply them.
+</span>
+
+<div class="radius-token-demo">
+
+{' '}
+
+<div class="radius-token-demo__item">
+  <div class="radius-token-demo__info">
+    <span className="h3">Small</span>
+    <b>$radius-sm</b>
+    <span>Radius: 4</span>
+  </div>
+  <div class="radius-token-demo__box radius-token-demo__box--sm"></div>
+  Used for Imagery &amp; App Cards
+</div>
+
+{' '}
+
+<div class="radius-token-demo__item">
+  <div class="radius-token-demo__info">
+    <span className="h3">Medium</span>
+    <b>$radius-md</b>
+    <span>Radius: 8</span>
+  </div>
+  <div class="radius-token-demo__box radius-token-demo__box--md"></div>
+  Use TBD
+</div>
+
+  <div class="radius-token-demo__item">
+    <div class="radius-token-demo__info">
+      <span className="h3">Large</span>
+      <b>$radius-lg</b>
+      <span>Radius: 16</span>
+    </div>
+    <div class="radius-token-demo__box radius-token-demo__box--lg"></div>
+    Used for Modals
+  </div>
+</div>
+
+</main>

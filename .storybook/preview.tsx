@@ -18,7 +18,7 @@ const preview: Preview = {
         order: [
           'Welcome',
           'Foundations in Seldon',
-          ['Colour', 'Type', 'Grid', 'Spacing', 'Icons & Pictograms'],
+          ['Colour', 'Type', 'Grid', 'Spacing', 'Radius', 'Icons & Pictograms'],
           'Components',
           'Pages',
         ],
