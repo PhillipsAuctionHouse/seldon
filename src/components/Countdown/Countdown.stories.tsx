@@ -8,10 +8,6 @@ import { useState } from 'react';
 const meta = {
   title: 'Components/Countdown',
   component: Countdown,
-  parameters: {
-    // have to disable snapshotting because of the countdown timer changing between snapshots
-    chromatic: { disableSnapshot: true },
-  },
 } satisfies Meta<typeof Countdown>;
 
 export default meta;
@@ -71,3 +67,7 @@ ClosingCountdown.argTypes = {
     options: Object.values(CountdownVariants),
   },
 };
+
+// Disable Chromatic snapshots only for the most timing-volatile stories
+Minutes.parameters = { chromatic: { disableSnapshot: true } };
+Seconds.parameters = { chromatic: { disableSnapshot: true } };
