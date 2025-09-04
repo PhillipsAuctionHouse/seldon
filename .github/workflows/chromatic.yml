@@ -34,6 +34,7 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          buildScriptName: 'build:storybook'
 
       - name: Find existing Storybook preview comment
         if: ${{ github.event_name == 'pull_request' }}
