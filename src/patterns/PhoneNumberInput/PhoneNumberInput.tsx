@@ -5,6 +5,7 @@ import CountryPicker from '../CountryPicker/CountryPicker';
 import Input from '../../components/Input/Input';
 import { getSafeCountryCallingCode } from '../CountryPicker/utils';
 import { countries } from '../CountryPicker/constants';
+import { Text } from '../../components/Text';
 
 export interface PhoneNumberInputProps extends Omit<ComponentProps<'div'>, 'onChange'> {
   value?: string;
@@ -53,6 +54,8 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
       onChange?.(e.target.value, selected || '');
     };
 
+    const errorId = errorText ? `${baseClassName}-error-text` : undefined;
+
     return (
       <div ref={ref} className={classnames(`${baseClassName}`, className)} {...commonProps}>
         <div className={`${baseClassName}__wrapper`}>
@@ -90,14 +93,17 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
               disabled={disabled}
               // We don't want to use the input default text, and the error text will be shown under the country picker
               invalidText=""
+              aria-describedby={errorId}
             />
           </div>
         </div>
         {/** Mimics the Input component validation */}
         {errorText ? (
-          <p className={classnames(`${baseClassName}__error`, `${baseClassName}__error-msg`)}>{errorText}</p>
+          <Text className={classnames(`${baseClassName}__error`, `${baseClassName}__error-msg`)} id={errorId}>
+            {errorText}
+          </Text>
         ) : (
-          <p className={classnames(`${baseClassName}__error`)}>&nbsp;</p>
+          <Text className={classnames(`${baseClassName}__error`)}>&nbsp;</Text>
         )}
       </div>
     );
