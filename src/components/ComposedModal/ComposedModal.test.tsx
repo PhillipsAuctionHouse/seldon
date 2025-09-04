@@ -63,7 +63,7 @@ describe('ComposedModal', () => {
             variant={ButtonVariants.primary}
             style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
           >
-            Join Sale room
+            Browse
           </Button>
         }
         primaryButton={
