@@ -22,7 +22,7 @@ Playground.args = {
   id: 'favorites-collection-tile-1',
   count: 2,
   name: 'New List',
-  imageSrc: 'https://picsum.photos/160/90',
+  imageSrc: '/static/test-image-160x90.jpg',
   variant: 'lists',
   onEdit: (): void => console.log('Edit list clicked'),
   onDelete: (): void => console.log('Delete list clicked'),
