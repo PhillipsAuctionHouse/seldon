@@ -8,13 +8,48 @@ import { countries } from '../CountryPicker/constants';
 import { Text } from '../../components/Text';
 
 export interface PhoneNumberInputProps extends Omit<ComponentProps<'div'>, 'onChange'> {
+  /**
+   * The current phone number value.
+   * This represents the phone number entered by the user without country code.
+   */
   value?: string;
+
+  /**
+   * The country code associated with the phone number.
+   */
   countryCode?: string;
+
+  /**
+   * Callback function triggered when the phone number or country code changes.
+   * @param value - The updated phone number value.
+   * @param countryCode - The updated country code.
+   */
   onChange?: (value: string, countryCode: string) => void;
+
+  /**
+   * The label for the combined fields.
+   */
   label?: string;
+
+  /**
+   * Indicates whether the input field is required.
+   * If true, the field will be marked as required.
+   */
   required?: boolean;
+
+  /**
+   * Indicates whether there is an error in the input field.
+   */
   error?: boolean;
+
+  /**
+   * The error message to display when there is an error.
+   */
   errorText?: string;
+
+  /**
+   * Indicates whether the input field is disabled.
+   */
   disabled?: boolean;
 }
 
@@ -99,11 +134,11 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
         </div>
         {/** Mimics the Input component validation */}
         {errorText ? (
-          <Text className={classnames(`${baseClassName}__error`, `${baseClassName}__error-msg`)} id={errorId}>
+          <Text className={`${baseClassName}__error ${baseClassName}__error-msg`} id={errorId}>
             {errorText}
           </Text>
         ) : (
-          <Text className={classnames(`${baseClassName}__error`)}>&nbsp;</Text>
+          <Text className={`${baseClassName}__error`}>&nbsp;</Text>
         )}
       </div>
     );

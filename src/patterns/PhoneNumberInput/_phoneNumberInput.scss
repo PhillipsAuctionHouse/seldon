@@ -33,7 +33,7 @@
   }
 
   // Hide the validation from the Input component
-  .seldon-input__validation {
+  .#{$px}-input__validation {
     display: none;
   }
 
