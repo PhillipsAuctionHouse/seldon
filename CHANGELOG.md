@@ -1,3 +1,10 @@
+## [1.188.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.188.0...v1.188.1) (2025-09-05)
+
+
+### Bug Fixes
+
+* **ComposedModal:** L3-7641 ComposedModal can accept a ReactNode ([#715](https://github.com/PhillipsAuctionHouse/seldon/issues/715)) ([4a8defb](https://github.com/PhillipsAuctionHouse/seldon/commit/4a8defba7bc4b4f16d0c02c461a90f121d4d0630))
+
 # [1.188.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.187.0...v1.188.0) (2025-08-29)
 
 
