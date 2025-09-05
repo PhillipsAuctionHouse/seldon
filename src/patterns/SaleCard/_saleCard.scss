@@ -43,7 +43,11 @@
   }
 
   &__ctas {
-    flex: 0 0 191px;
+    flex: 0 0 0%;
+
+    @include media($breakpoint-md) {
+      flex-basis: 191px;
+    }
 
     @include media($breakpoint-lg) {
       flex-basis: 280px;
