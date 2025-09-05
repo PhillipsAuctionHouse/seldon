@@ -87,11 +87,7 @@ const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & Inte
           </span>
         </button>
         {hasError && errorMsg && (
-          <Text
-            variant={TextVariants.string2}
-            className={classNames(`${baseClassName}__trigger-error-msg`)}
-            id={errorId}
-          >
+          <Text variant={TextVariants.string2} className={`${baseClassName}__trigger-error-msg`} id={errorId}>
             {errorMsg}
           </Text>
         )}

@@ -6,6 +6,7 @@ import Input from '../../components/Input/Input';
 import { getSafeCountryCallingCode } from '../CountryPicker/utils';
 import { countries } from '../CountryPicker/constants';
 import { Text } from '../../components/Text';
+import { CountryCode } from './types';
 
 export interface PhoneNumberInputProps extends Omit<ComponentProps<'div'>, 'onChange'> {
   /**
@@ -17,14 +18,14 @@ export interface PhoneNumberInputProps extends Omit<ComponentProps<'div'>, 'onCh
   /**
    * The country code associated with the phone number.
    */
-  countryCode?: string;
+  countryCode?: CountryCode;
 
   /**
    * Callback function triggered when the phone number or country code changes.
    * @param value - The updated phone number value.
    * @param countryCode - The updated country code.
    */
-  onChange?: (value: string, countryCode: string) => void;
+  handleValueChange?: (rawValue: string, countryCode: CountryCode) => void;
 
   /**
    * The label for the combined fields.
@@ -68,7 +69,7 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
       className,
       value = '',
       countryCode = '',
-      onChange,
+      handleValueChange,
       label = 'Phone',
       required = false,
       error,
@@ -86,7 +87,7 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
 
     // Handle phone number input change
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      onChange?.(e.target.value, selected || '');
+      handleValueChange?.(e.target.value, (selected as CountryCode) || '');
     };
 
     const errorId = errorText ? `${baseClassName}-error-text` : undefined;
@@ -107,7 +108,7 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
               triggerDisplayValue={selectedCountry ? `+${getSafeCountryCallingCode(selectedCountry.code)}` : ''}
               hasTriggerError={!!error}
               modalTitle="Country code"
-              searchInputLabel=""
+              searchInputLabel="Search country"
               searchInputPlaceholder="Search country"
               selectButtonLabel="Select"
               isPhone={true}

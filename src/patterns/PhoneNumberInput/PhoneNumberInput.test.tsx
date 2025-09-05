@@ -23,7 +23,7 @@ describe('PhoneNumberInput', () => {
         <PhoneNumberInput
           value={value}
           countryCode="US"
-          onChange={(val, code) => {
+          handleValueChange={(val, code) => {
             setValue(val);
             handleChange(val, code);
           }}

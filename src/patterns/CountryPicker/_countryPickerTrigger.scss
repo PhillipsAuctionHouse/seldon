@@ -72,9 +72,7 @@
       }
     }
 
-    &-error-msg,
-    &__trigger-error-msg,
-    .input__validation.input__validation--error {
+    &-error-msg {
       animation: reveal 0.45s linear forwards;
       margin-top: $spacing-micro;
 

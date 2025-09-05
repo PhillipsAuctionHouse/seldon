@@ -5,6 +5,7 @@ import Button from '../../components/Button/Button';
 import Drawer from '../../components/Drawer/Drawer';
 import { useState } from 'react';
 import Input from '../../components/Input/Input';
+import { CountryCode } from './types';
 
 const meta = {
   title: 'Patterns/PhoneNumberInput',
@@ -13,19 +14,26 @@ const meta = {
 
 export default meta;
 export const Playground = (props: Partial<PhoneNumberInputProps>) => {
-  const methods = useForm({ defaultValues: { phone: '', countryCode: '' } });
+  const methods = useForm<{ phone: string; countryCode: CountryCode }>({
+    defaultValues: { phone: '', countryCode: '' as CountryCode },
+  });
   const {
     setValue,
     watch,
     control,
+    handleSubmit,
     formState: { errors },
   } = methods;
 
   const countryCode = watch('countryCode');
+  const onSubmit = (data: { phone: string; countryCode: CountryCode }) => {
+    // Prevent crash, optionally log or show data
+    alert(JSON.stringify(data));
+  };
 
   return (
     <FormProvider {...methods}>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="phone"
           control={control}
@@ -34,7 +42,7 @@ export const Playground = (props: Partial<PhoneNumberInputProps>) => {
             <PhoneNumberInput
               {...field}
               countryCode={countryCode}
-              onChange={(val, code) => {
+              handleValueChange={(val, code) => {
                 field.onChange(val);
                 setValue('countryCode', code);
               }}
@@ -78,7 +86,12 @@ export const InDrawerWithControllerAndValidation = () => {
     watch,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<{
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    phoneCountryCode: CountryCode;
+  }>({
     defaultValues: {
       firstName: 'Phil',
       lastName: 'Lips',
@@ -90,7 +103,12 @@ export const InDrawerWithControllerAndValidation = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [_, setSubmittedData] = useState<Record<string, string> | null>(null);
 
-  const onSubmit = (data: { firstName: string; lastName: string; phoneNumber: string; phoneCountryCode: string }) => {
+  const onSubmit = (data: {
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    phoneCountryCode: CountryCode;
+  }) => {
     setSubmittedData(data);
     alert(JSON.stringify(data, null, 2));
   };
@@ -136,8 +154,8 @@ export const InDrawerWithControllerAndValidation = () => {
             render={({ field }) => (
               <PhoneNumberInput
                 value={field.value}
-                countryCode={watch('phoneCountryCode')}
-                onChange={(val, code) => {
+                countryCode={watch('phoneCountryCode') as CountryCode}
+                handleValueChange={(val, code) => {
                   field.onChange(val);
                   setValue('phoneCountryCode', code, { shouldValidate: true });
                 }}
