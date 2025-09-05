@@ -1,3 +1,10 @@
+# [1.190.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.189.0...v1.190.0) (2025-09-05)
+
+
+### Features
+
+* **phoneNumberInput:** L3-7310 Seldon Phone Input (Country code picker + Number input) ([#707](https://github.com/PhillipsAuctionHouse/seldon/issues/707)) ([0daaa38](https://github.com/PhillipsAuctionHouse/seldon/commit/0daaa381e481c329666affb56b9000848aaf1d4e))
+
 # [1.189.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.188.1...v1.189.0) (2025-09-05)
 
 
