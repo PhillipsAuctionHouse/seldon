@@ -1,3 +1,10 @@
+# [1.189.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.188.1...v1.189.0) (2025-09-05)
+
+
+### Features
+
+* **Carousel:** PHOENIX-2082 added multiple carousel example ([#714](https://github.com/PhillipsAuctionHouse/seldon/issues/714)) ([2be1384](https://github.com/PhillipsAuctionHouse/seldon/commit/2be138496ac6d8d30ae7453e923de04505b997eb))
+
 ## [1.188.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.188.0...v1.188.1) (2025-09-05)
 
 
