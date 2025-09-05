@@ -29,7 +29,7 @@ export const viewingDetailsWithChildrenProps = {
   title: 'Viewing Details with Children',
   label: 'Viewings',
   sessionTimesLabel: 'Session Times',
-  children: React.createElement('img', { src: 'https://picsum.photos/512/288', alt: 'viewing-details-img' }),
+  children: React.createElement('img', { src: '/static/test-image-512x288.jpg', alt: 'viewing-details-img' }),
   sessionTimes: [
     {
       sessionLabel: 'Session I, lots 1-103',

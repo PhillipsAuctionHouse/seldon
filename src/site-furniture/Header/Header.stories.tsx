@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 import type { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import { Icon } from '../../components/Icon';
@@ -15,14 +14,7 @@ import UserManagement from '../../patterns/UserManagement/UserManagement';
 import { SupportedLanguages } from '../../types/commonTypes';
 import { px } from '../../utils';
 import Header, { HeaderProps } from './Header';
-
-const generateLoremIpsum = (numOfParagraphs = 10) => {
-  let loremIpsum = '';
-  for (let i = 0; i < numOfParagraphs; i++) {
-    loremIpsum += faker.lorem.paragraph();
-  }
-  return loremIpsum;
-};
+import { LOREM_HUGE } from '../../utils/staticContent';
 
 const fetchData = async (searchQuery: string) => {
   console.log('searchQuery', searchQuery);
@@ -338,7 +330,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
         <option value="pt">Portuguese</option>
         <option value="ru">Russian</option>
       </select>
-      {generateLoremIpsum(100)}
+      <div style={{ whiteSpace: 'pre-wrap' }}>{LOREM_HUGE}</div>
     </div>
   );
 };

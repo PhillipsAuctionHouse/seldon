@@ -67,3 +67,7 @@ ClosingCountdown.argTypes = {
     options: Object.values(CountdownVariants),
   },
 };
+
+// Disable Chromatic snapshots only for the most timing-volatile stories
+Minutes.parameters = { chromatic: { disableSnapshot: true } };
+Seconds.parameters = { chromatic: { disableSnapshot: true } };
