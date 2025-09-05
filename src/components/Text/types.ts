@@ -39,7 +39,6 @@ export enum TextVariants {
   linkStylised = 'linkStylised',
   linkL = 'linkL',
   linkM = 'linkM',
-  linkS = 'linkS',
 }
 
 export enum TextAlignments {

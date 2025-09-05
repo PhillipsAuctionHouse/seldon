@@ -124,9 +124,5 @@
     &__link-m {
       @include text($linkM);
     }
-
-    &__link-s {
-      @include text($linkS);
-    }
   }
 }
