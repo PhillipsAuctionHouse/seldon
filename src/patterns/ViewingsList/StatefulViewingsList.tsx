@@ -4,7 +4,7 @@ import ViewingsList from './ViewingsList';
 import { ViewingsListCardProps } from './ViewingsListCard';
 import { I18nObject } from './ViewingsList';
 
-export interface StatefulViewingsListProps extends Record<string, unknown> {
+export interface StatefulViewingsListProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Existing viewings to populate the list
    */

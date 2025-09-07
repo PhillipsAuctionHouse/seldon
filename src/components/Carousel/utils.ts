@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { CarouselContext } from './Carousel';
+import { CarouselContext } from './CarouselContext';
 
 export function useCarousel() {
   const context = useContext(CarouselContext);

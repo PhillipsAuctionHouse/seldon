@@ -2,13 +2,13 @@ import classnames from 'classnames';
 import React, {
   Component,
   ComponentProps,
-  createContext,
   forwardRef,
   PropsWithChildren,
   ReactElement,
   useEffect,
   useState,
 } from 'react';
+import { HeaderContext } from './HeaderContext';
 import { Icon } from '../../components/Icon';
 import Navigation from '../../components/Navigation/Navigation';
 import { LanguageSelector, LanguageSelectorProps } from '../../patterns/LanguageSelector';
@@ -16,7 +16,6 @@ import UserManagement, { UserManagementProps } from '../../patterns/UserManageme
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import { findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
 import { useMobileMenu } from './hooks';
-import { defaultHeaderContext } from './utils';
 
 export interface HeaderProps extends ComponentProps<'header'> {
   /**
@@ -78,8 +77,6 @@ export type HeaderContextType = {
    */
   closeTimeoutRef: React.MutableRefObject<NodeJS.Timeout | null>;
 };
-
-export const HeaderContext = createContext<HeaderContextType>(defaultHeaderContext);
 
 /**
  * ## Overview

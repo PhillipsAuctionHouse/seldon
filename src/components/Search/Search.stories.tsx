@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import Search, { type SearchProps } from './Search';
 import { SearchResult } from './SearchResults/SearchResults';
-import { HeaderContext } from '../../site-furniture/Header/Header';
+import { HeaderContext } from '../../site-furniture/Header/HeaderContext';
 import { defaultHeaderContext } from '../../site-furniture/Header/utils';
 
 const fetchData = async (searchQuery: string) => {

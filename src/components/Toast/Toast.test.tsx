@@ -22,7 +22,6 @@ vi.mock('@radix-ui/react-toast', async () => {
   const actual = await vi.importActual('@radix-ui/react-toast');
   return {
     ...actual,
-    // eslint-disable-next-line react/prop-types
     Root: ({ children, className, ...props }: React.ComponentPropsWithoutRef<'div'>) => (
       <div className={className} data-testid="toast" {...props}>
         {children}

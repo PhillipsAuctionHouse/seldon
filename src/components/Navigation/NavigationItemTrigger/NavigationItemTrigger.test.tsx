@@ -5,7 +5,7 @@ import NavigationItem from '../NavigationItem/NavigationItem';
 import NavigationList from '../NavigationList/NavigationList';
 import userEvent from '@testing-library/user-event';
 import { LinkVariants } from '../../Link';
-import { HeaderContext } from '../../../site-furniture/Header/Header';
+import { HeaderContext } from '../../../site-furniture/Header/HeaderContext';
 import { defaultHeaderContext } from '../../../site-furniture/Header/utils';
 
 describe('NavigationItemTrigger', () => {
