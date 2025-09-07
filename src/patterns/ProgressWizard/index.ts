@@ -1,1 +1,2 @@
-export { default as ProgressWizard, type ProgressWizardProps } from './ProgressWizard';
+export { default as ProgressWizard } from './ProgressWizard';
+export * from './types';

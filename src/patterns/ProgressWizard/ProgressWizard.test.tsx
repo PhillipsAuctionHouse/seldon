@@ -1,19 +1,22 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import ProgressWizard, { ProgressWizardProps } from './ProgressWizard';
+import { ProgressWizard, type ProgressWizardProps } from './';
 import { describe, it, expect, vi } from 'vitest';
+import { z } from 'zod';
+import { useState } from 'react';
+
+// 🎺TODO this are all totally busted
 
 const steps = [
-  { id: '0', label: 'Step 1' },
-  { id: '1', label: 'Step 2' },
-  { id: '2', label: 'Step 3' },
+  { id: '0', label: 'Step 1', schema: z.object({}), component: undefined },
+  { id: '1', label: 'Step 2', schema: z.object({}), component: undefined },
+  { id: '2', label: 'Step 3', schema: z.object({}), component: undefined },
 ];
 
 const renderProgressWizard = (props: Partial<ProgressWizardProps> = {}) => {
   const defaultProps: ProgressWizardProps = {
-    steps,
-    children: steps.map((step, index) => <div key={index}>Content for {step.label}</div>),
-    reportStepValidity: vi.fn(),
+    steps: steps.map((s, i) => ({ ...s, component: <div key={i}>Content for {s.label}</div> })),
+    setCanContinue: vi.fn(),
     onSubmit: vi.fn(),
     onCancel: vi.fn(),
     ...props,
@@ -81,10 +84,12 @@ describe('ProgressWizard', () => {
     expect(onCancel).toHaveBeenCalled();
   });
 
-  it('disables navigation buttons when isStepValid returns false', async () => {
+  it('disables navigation buttons when canContinue is false', async () => {
+    const [canContinue, setCanContinue] = useState(false);
     const user = userEvent.setup();
     renderProgressWizard({
-      isStepValid: (step) => step !== 1,
+      canContinue,
+      setCanContinue,
     });
 
     const startButton = screen.getByRole('button', { name: /start/i });
