@@ -213,7 +213,7 @@ export const CarouselWithMultipleItems = (props: CarouselProps) => {
             <CarouselItem
               onClick={() => alert(el)}
               onKeyDown={(e) => {
-                if (e.keyCode == 13) {
+                if (e.key === 'Enter') {
                   alert(el);
                 }
               }}

@@ -21,7 +21,7 @@ const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(({ classN
       api.scrollPrev(true);
     } else {
       const slidesInView = api?.slidesInView();
-      api?.scrollTo(slidesInView[0] - (slidesInView.length ?? 1));
+      api?.scrollTo(Math.max(0, slidesInView[0] - (slidesInView.length ?? 1)));
     }
   }, [api]);
 

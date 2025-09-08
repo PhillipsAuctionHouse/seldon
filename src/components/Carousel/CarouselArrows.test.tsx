@@ -74,7 +74,7 @@ describe('CarouselArrows', () => {
     });
     render(<CarouselArrows />);
     fireEvent.click(screen.getByTestId('prev-arrow'));
-    expect(mockScrollTo).toHaveBeenCalledWith(-1);
+    expect(mockScrollTo).toHaveBeenCalledWith(0);
   });
 
   it('scrolls to next page when multiple slides are in view for next arrow', () => {
