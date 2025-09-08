@@ -13,6 +13,11 @@ const mockApi = vi.hoisted(() => ({
   off: vi.fn(() => ({ off: vi.fn(() => ({ off: vi.fn(() => ({ off: vi.fn() })) })) })),
   reInit: vi.fn(),
   slidesInView: () => [0],
+  slideNodes: () => [
+    <CarouselItem key="slide-1">Slide 1</CarouselItem>,
+    <CarouselItem key="slide-2">Slide 2</CarouselItem>,
+    <CarouselItem key="slide-3">Slide 3</CarouselItem>,
+  ],
   scrollSnapList: () => [0],
   selectedScrollSnap: () => true,
 }));

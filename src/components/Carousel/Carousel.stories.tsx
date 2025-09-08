@@ -207,12 +207,18 @@ export const CarouselWithMultipleItems = (props: CarouselProps) => {
 
   return (
     <div>
-      <Carousel {...{ ...props, slidesToScroll: props.slidesToScroll ?? 1 }}>
+      <Carousel {...{ ...props }}>
         <CarouselContent>
           {array.map((el) => (
             <CarouselItem
+              onClick={() => alert(el)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  alert(el);
+                }
+              }}
               style={{
-                maxWidth: `calc(${100 / (props.slidesToScroll ?? 1)}% - 2%)`,
+                maxWidth: `18%`,
                 minWidth: 0,
                 flex: '0 0 100%',
                 border: array[0] === el ? '1px solid blue' : '1px solid #eee',
@@ -222,6 +228,7 @@ export const CarouselWithMultipleItems = (props: CarouselProps) => {
                 marginRight: '16px',
               }}
               key={el}
+              tabIndex={0}
             >
               <img style={{ width: '60px', height: '60px' }} src={`https://picsum.photos/60/60?random=${el}`} alt="" />
               <div>
@@ -242,7 +249,7 @@ export const CarouselWithMultipleItems = (props: CarouselProps) => {
   );
 };
 
-CarouselWithMultipleItems.args = { disableNavigationDrag: 'desktop', slidesToScroll: 5 } satisfies CarouselProps;
+CarouselWithMultipleItems.args = { disableNavigationDrag: 'desktop' } satisfies CarouselProps;
 CarouselWithMultipleItems.argTypes = {
   slidesToScroll: {
     control: {
