@@ -33,7 +33,7 @@ export const Playground = (props: ProgressWizardProps) => (
     currentStepId={props.currentStepId}
     onStepBack={props.onStepBack}
     onStepChange={props.onStepChange}
-    onStepSubmit={props.onStepSubmit}
+    onContinue={props.onContinue}
     onSubmit={props.onSubmit}
     onCancel={props.onCancel}
   >
@@ -136,7 +136,7 @@ Playground.argTypes = {
   currentStepId: { control: 'text', description: 'The index of the current step (0-based).' },
   onStepBack: { control: 'object', description: 'Callback to be called when the Back button is pressed.' },
   onStepChange: { control: 'object', description: 'Callback when step changes (for controlled mode).' },
-  onStepSubmit: {
+  onContinue: {
     control: 'object',
     description: 'Callback to be called when a step is submitted (before advancing).',
   },

@@ -195,6 +195,8 @@ export interface ProgressWizardProps extends ComponentPropsWithRef<'div'> {
   // 🎺TODO comment
   setCanContinue?: SetCanContinue<'external'>;
 
+  hiddenFields?: string[];
+  
   /**
    * The index of the current step (0-based).
    */
@@ -215,7 +217,7 @@ export interface ProgressWizardProps extends ComponentPropsWithRef<'div'> {
    * Callback to be called when a step is submitted (before advancing).
    * Optionally receives the current step index. Can return false` to prevent advancing.
    */
-  onStepSubmit?: (stepId?: string) => boolean | void;
+  onContinue?: (stepId?: string) => boolean | void;
 
   /**
    * Optional callback function to be called when the wizard is submitted, if not supplied the wizard will use the default form submit

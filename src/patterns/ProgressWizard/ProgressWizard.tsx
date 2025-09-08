@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import Icon from '../../components/Icon/Icon';
 import { v4 as uuidv4 } from 'uuid';
 import { FormProvider, useForm, Form, type ChangeHandler } from 'react-hook-form';
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 import {
   type ProgressWizardStepComponentProps,
   type InputValue,
@@ -17,7 +17,6 @@ import {
   type RegisterProgressWizardInput,
   type RegisterProgressWizardInputReturn,
   type ProgressWizardStepComponent,
-  type SetCanContinue,
   type ProgressWizardStepFormProps,
 } from './types';
 
@@ -38,9 +37,10 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
       canContinue: externalCanContinue,
       setCanContinue: externalSetCanContinue,
       currentStepId: externalStepId,
+      hiddenFields: externalHiddenFields,
       onStepBack,
       onStepChange,
-      onStepSubmit: preSubmitStepAction,
+      onContinue,
       onSubmit,
       onCancel,
       onError,
@@ -49,61 +49,62 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
     },
     ref,
   ) => {
+    const navigate = useNavigate();
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ProgressWizard');
-    const { step: paramStep } = useParams(); // 🎺TODO can't use this hook, don't have the library. prop?
-    const [stepId, setStepId] = useState(externalStepId ?? paramStep ?? steps[0].id); // step is always kept as a string for future compatibility with non-numeric step IDs
-    const isControlled = externalStepId !== undefined; // a tad redundant, but it makes for a better brain model
+    const { step: paramStep } = useParams(); // 🤖 If you want to control step externally, pass currentStepId
 
-    const [internalCanContinue, internalSetCanContinue]: [boolean, SetCanContinue<'internal'>] = useState<boolean>(
-      externalCanContinue ?? true,
+    // Controlled mode: all state is managed externally
+    const isControlled = externalStepId !== undefined;
+
+    // Uncontrolled mode: state is managed internally
+    const [internalStepId, setInternalStepId] = useState(paramStep ?? steps[0].id);
+    const [internalCanContinue, setInternalCanContinue] = useState(true);
+    const [hiddenFields, setHiddenFields] = useState<string[]>([]);
+
+    // Step ID and canContinue logic
+    const stepId = isControlled ? externalStepId : internalStepId;
+    const canContinue = isControlled ? (externalCanContinue ?? true) : internalCanContinue;
+    const setCanContinue = useMemo(
+      () => (isControlled ? (externalSetCanContinue ?? (() => void 0)) : setInternalCanContinue),
+      [isControlled, externalSetCanContinue, setInternalCanContinue],
     );
 
-    if (isControlled && +!externalSetCanContinue ^ +(externalCanContinue === undefined)) {
-      console.error(
-        '<ProgressWizard /> is in a controlled state but is missing a `setCanContinue` prop or `canContinue` is undefined. It can be missing both to let the Wizard control it, or it can have both so you can externally control it.',
-      );
-    }
+    // Step navigation
+    const goToStep = useCallback(
+      (targetStepId: string) => {
+        if (!steps.find((s) => s.id === targetStepId)) return;
+        if (isControlled) {
+          onStepChange?.(targetStepId);
+        } else {
+          setInternalStepId(targetStepId);
+        }
+        void navigate(location.pathname.replace(/([\w\d]{6})(\/\d)?$/, `$1/${targetStepId}`), { state: { initiator: 'wizard' } });
+      },
+      [steps, isControlled, navigate, onStepChange],
+    );
 
-    const [canContinue, setCanContinue] = isControlled
-      ? [externalCanContinue ?? true, externalSetCanContinue ?? (() => void 0)]
-      : [internalCanContinue, internalSetCanContinue];
-
+    // Step info
     const isFirstStep = stepId === steps[0].id;
     const prevStep = steps[steps.findIndex((s) => s.id === stepId) - 1] ?? null;
     const currentStep = steps.find((s) => s.id === stepId) ?? null;
     const nextStep = steps[steps.findIndex((s) => s.id === stepId) + 1] ?? null;
     const isLastStep = stepId === steps[steps.length - 1].id;
 
-    const currentStepSchema = useMemo(() => {
-      if (!currentStep) return undefined;
-      if (currentStep.refineSchema) return currentStep.refineSchema(currentStep.schema, currentFormState);
-      else return currentStep.schema;
-    }, [currentStep, currentFormState]);
+    // Form state
     const uniqueFormId = uuidv4();
-
     const formMethods = useForm<Record<string, InputValue>>({
       defaultValues: currentFormState,
     });
 
-    useEffect(() => {
-      if (isControlled) setStepId(externalStepId);
-    }, [externalStepId, isControlled]);
 
-    const goToStep = useCallback(
-      (targetStepId: string) => {
-        if (!steps.find((s) => s.id === targetStepId)) return;
-        if (isControlled) {
-          onStepChange?.(targetStepId);
-        }
+    // Schema
+    const currentStepSchema = useMemo(() => {
+      if (!currentStep) return undefined;
+      if (currentStep.refineSchema) return currentStep.refineSchema(currentStep.schema, currentFormState);
+      return currentStep.schema;
+    }, [currentStep, currentFormState]);
 
-        // 🎺TODO i do not like this sam i am
-        window.history.pushState({}, '', location.pathname.replace(/([\w\d]{6})(\/\d)?$/, `$1/${targetStepId}`));
-
-        setStepId(targetStepId);
-      },
-      [steps, isControlled, onStepChange],
-    );
-
+    // Input commit
     const commitInputValue = useCallback(
       (fieldName: string) => {
         formMethods.clearErrors(fieldName);
@@ -115,6 +116,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
       [formMethods, setCurrentFormState],
     );
 
+    // Input trigger
     const onInputTrigger: ChangeHandler = useCallback(
       (e) => {
         commitInputValue(e.target.name);
@@ -123,6 +125,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
       [commitInputValue],
     );
 
+    // Register input
     const registerProgressWizardInput: RegisterProgressWizardInput = useCallback(
       <N extends string, T extends TriggerTypes = 'onBlur'>(
         fieldName: N,
@@ -150,16 +153,17 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
       [formMethods, onInputTrigger],
     );
 
+    // Navigation
     const handleBack = useCallback(() => {
-      if (onStepBack) onStepBack(stepId);
-      goToStep(prevStep?.id);
-    }, [onStepBack, stepId, goToStep, prevStep?.id]);
+      if (isControlled) onStepBack?.(stepId);
+      else goToStep(prevStep?.id);
+    }, [isControlled, onStepBack, stepId, goToStep, prevStep?.id]);
 
+    // Primary action
     const handlePrimary = useCallback(
       (action: 'next' | 'submit') => {
         formMethods.clearErrors();
         const values = formMethods.getValues();
-
         const result = currentStepSchema
           ? currentStepSchema.safeParse(values)
           : ({ success: true, data: values } as const);
@@ -170,11 +174,9 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
               message: issue.message,
             });
           });
-
           return;
         }
-
-        if (preSubmitStepAction?.(stepId) === false) {
+        if (onContinue?.(stepId) === false) {
           console.log('Pre-submit step action stopped us');
           return;
         }
@@ -182,19 +184,19 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
           console.error('Cannot continue to next step, button should not have been enabled');
           return;
         }
-
-        if (action === 'next' && nextStep) goToStep(nextStep.id);
+        if (action === 'next' && nextStep) onContinue ? onContinue() : goToStep(nextStep.id);
         if (action === 'submit') {
-          const form = document.getElementById(uniqueFormId);
-          if (form instanceof HTMLFormElement) form.requestSubmit();
+          if (onSubmit) onSubmit();
+          else {
+            const form = document.getElementById(uniqueFormId);
+            if (form instanceof HTMLFormElement) form.requestSubmit();
+          }
         }
       },
-      [preSubmitStepAction, stepId, uniqueFormId, goToStep, nextStep, canContinue, currentStepSchema, formMethods],
+      [onContinue, stepId, uniqueFormId, goToStep, nextStep, canContinue, currentStepSchema, formMethods, onSubmit],
     );
 
-    // we only need one child at a time, and that child needs the unique form ID. and `goToStep` if that child needs to hop around
-    const [hiddenFields, setHiddenFields] = useState<string[]>([]); // 🎺TODO i'd love to restrict to real form field names
-
+    // Step content
     const stepContent: ProgressWizardStepComponent = useMemo(() => {
       if (!currentStep) return <div />;
       const props: ProgressWizardStepComponentProps = {
@@ -202,35 +204,36 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
           const onChange = useCallback(() => {
             setCanContinue(!fetcher?.state || fetcher.state === 'submitting' || fetcher.state === 'loading');
           }, []);
-
           useEffect(() => {
             onChange();
           }, [onChange]);
-
           return {
             formMethods,
             currentFormState,
             commitInputValue,
             setCanContinue,
-            setHiddenFields,
+            setHiddenFields: !isControlled
+              ? setHiddenFields
+              : () => {
+                  console.error(
+                    'Attempted to set hidden fields in controlled mode, please modify `hiddenFields` prop directly',
+                  );
+                },
             registerProgressWizardInput,
             goToStep,
           };
         },
         usePendingValue: (fieldName) => {
           const [pendingValue, setPendingValue] = useState<InputValue>();
-
           const applyPendingValue = () => {
             formMethods.setValue(fieldName, pendingValue);
             if (fieldName === 'countryName' && pendingValue !== 'United States') formMethods.setValue('stateName', '');
             commitInputValue(fieldName);
             setPendingValue('');
           };
-
           return { setPendingValue, applyPendingValue, pendingValue };
         },
       };
-
       const StepFormProps = {
         formId: uniqueFormId,
         fetcher,
@@ -244,27 +247,13 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
               <h3>No step component found with step ID {currentStep.id} 😢</h3>
             </div>
           );
-
       const ProgressWizardForm: React.FC<ProgressWizardStepFormProps> = Form;
       return (
         <ProgressWizardForm {...StepFormProps} hiddenFields={hiddenFields}>
           <CurrentStepComponent {...props} />
         </ProgressWizardForm>
       );
-    }, [
-      currentStep,
-      uniqueFormId,
-      fetcher,
-      action,
-      currentStepSchema,
-      hiddenFields,
-      formMethods,
-      currentFormState,
-      commitInputValue,
-      setCanContinue,
-      registerProgressWizardInput,
-      goToStep,
-    ]);
+    }, [currentStep, uniqueFormId, fetcher, action, currentStepSchema, hiddenFields, formMethods, currentFormState, commitInputValue, setCanContinue, isControlled, registerProgressWizardInput, goToStep]);
 
     return (
       <FormProvider {...formMethods}>
