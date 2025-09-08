@@ -17,12 +17,24 @@ const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(({ classN
   const { api } = useCarousel();
   const onPrevArrowClick = useCallback(() => {
     if (!api) return;
-    api.scrollPrev(true);
+    if (api?.slidesInView().length <= 1) {
+      api.scrollPrev(true);
+    } else {
+      const slidesInView = api?.slidesInView();
+      api?.scrollTo(slidesInView[0] - (slidesInView.length ?? 1));
+    }
   }, [api]);
 
   const onNextArrowClick = useCallback(() => {
     if (!api) return;
-    api.scrollNext(true);
+
+    if (api?.slidesInView().length <= 1) {
+      api?.scrollNext(true);
+    } else {
+      const slidesInView = api?.slidesInView();
+      const lastSlideInView = slidesInView.slice(-1)[0] + 1;
+      api?.scrollTo(lastSlideInView);
+    }
   }, [api]);
 
   return (

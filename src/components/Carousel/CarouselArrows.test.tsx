@@ -10,6 +10,7 @@ vi.mock('./utils', () => ({
 describe('CarouselArrows', () => {
   const mockScrollPrev = vi.fn();
   const mockScrollNext = vi.fn();
+  const mockScrollTo = vi.fn();
 
   beforeEach(() => {
     (useCarousel as Mock).mockReturnValue({
@@ -31,12 +32,18 @@ describe('CarouselArrows', () => {
   });
 
   it('calls scrollPrev on prev arrow click', () => {
+    (useCarousel as Mock).mockReturnValue({
+      api: { slidesInView: () => [0], scrollPrev: mockScrollPrev, scrollNext: mockScrollNext },
+    });
     render(<CarouselArrows />);
     fireEvent.click(screen.getByTestId('prev-arrow'));
     expect(mockScrollPrev).toHaveBeenCalledWith(true);
   });
 
   it('calls scrollNext on next arrow click', () => {
+    (useCarousel as Mock).mockReturnValue({
+      api: { slidesInView: () => [0], scrollPrev: mockScrollPrev, scrollNext: mockScrollNext },
+    });
     render(<CarouselArrows />);
     fireEvent.click(screen.getByTestId('next-arrow'));
     expect(mockScrollNext).toHaveBeenCalledWith(true);
@@ -54,5 +61,33 @@ describe('CarouselArrows', () => {
     render(<CarouselArrows />);
     fireEvent.click(screen.getByTestId('next-arrow'));
     expect(mockScrollNext).not.toHaveBeenCalled();
+  });
+
+  it('scrolls to previous page when multiple slides are in view for prev arrow', () => {
+    (useCarousel as Mock).mockReturnValue({
+      api: {
+        slidesInView: () => [2, 3, 4],
+        scrollPrev: mockScrollPrev,
+        scrollNext: mockScrollNext,
+        scrollTo: mockScrollTo,
+      },
+    });
+    render(<CarouselArrows />);
+    fireEvent.click(screen.getByTestId('prev-arrow'));
+    expect(mockScrollTo).toHaveBeenCalledWith(-1);
+  });
+
+  it('scrolls to next page when multiple slides are in view for next arrow', () => {
+    (useCarousel as Mock).mockReturnValue({
+      api: {
+        slidesInView: () => [2, 3, 4],
+        scrollPrev: mockScrollPrev,
+        scrollNext: mockScrollNext,
+        scrollTo: mockScrollTo,
+      },
+    });
+    render(<CarouselArrows />);
+    fireEvent.click(screen.getByTestId('next-arrow'));
+    expect(mockScrollTo).toHaveBeenCalledWith(5);
   });
 });
