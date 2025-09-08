@@ -51,7 +51,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>(
   ) => {
     const navigate = useNavigate();
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ProgressWizard');
-    const { step: paramStep } = useParams(); // 🤖 If you want to control step externally, pass currentStepId
+    const { step: paramStep } = useParams();
 
     // Controlled mode: all state is managed externally
     const isControlled = externalStepId !== undefined;

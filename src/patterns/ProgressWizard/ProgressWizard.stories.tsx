@@ -11,7 +11,6 @@ const meta = {
 } satisfies Meta<typeof ProgressWizard>;
 
 export default meta;
-// 🤖 Playground story with all major props
 export const Playground = (props: ProgressWizardProps) => (
   <ProgressWizard
     {...props}
