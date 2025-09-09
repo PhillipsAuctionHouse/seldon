@@ -130,3 +130,4 @@ export * from './patterns/CountryPicker';
 export * from './components/DescriptiveRadioButton';
 export * from './components/DescriptiveRadioButtonGroup';
 export * from './patterns/TextBanner';
+export * from './patterns/PhoneNumberInput';

@@ -83,18 +83,6 @@
     }
   }
 
-  &__input-icon {
-    align-items: center;
-    color: $dark-gray;
-    display: flex;
-    left: $spacing-xsm;
-    pointer-events: none;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
-  }
-
   .#{$px}-country-picker__input-wrapper .seldon-input__label {
     border: 0;
     height: 1px;

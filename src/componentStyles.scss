@@ -91,6 +91,7 @@
 @use 'components/AddToCalendar/addToCalendar';
 @use 'components/NotificationBanner/notificationBanner';
 @use 'patterns/TextBanner/textBanner';
+@use 'patterns/PhoneNumberInput/phoneNumberInput';
 
 :root {
   --desktop-max-width: 120rem;
