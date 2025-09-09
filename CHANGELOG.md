@@ -1,3 +1,10 @@
+# [1.194.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.193.0...v1.194.0) (2025-09-09)
+
+
+### Features
+
+* **colorTokens:** L3-7655 add new token for no reserve red contrast violation ([#721](https://github.com/PhillipsAuctionHouse/seldon/issues/721)) ([205c4da](https://github.com/PhillipsAuctionHouse/seldon/commit/205c4daae5617eceacb7fc47d39bacbe60cecec8))
+
 # [1.193.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.192.0...v1.193.0) (2025-09-09)
 
 
