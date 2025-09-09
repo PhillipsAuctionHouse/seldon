@@ -32,7 +32,7 @@ describe('ViewingDetails', () => {
     render(<ViewingDetails {...viewingDetailsWithChildrenProps} />);
     expect(screen.getByRole('img', { name: 'viewing-details-img' })).toHaveAttribute(
       'src',
-      'https://picsum.photos/512/288',
+      '/static/test-image-512x288.jpg',
     );
   });
 });

@@ -1,3 +1,10 @@
+# [1.193.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.192.0...v1.193.0) (2025-09-09)
+
+
+### Features
+
+* **SaleCard:** L3-7429 make sale card more responsive ([#717](https://github.com/PhillipsAuctionHouse/seldon/issues/717)) ([4b907a7](https://github.com/PhillipsAuctionHouse/seldon/commit/4b907a7cbe250ef726e9970efc9f4461cd3cbed2))
+
 # [1.192.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.191.0...v1.192.0) (2025-09-09)
 
 

@@ -1,0 +1,60 @@
+name: Publish Storybook to Chromatic
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: ['**']
+  workflow_dispatch:
+
+jobs:
+  chromatic-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+          node-version-file: '.nvmrc'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Chromatic
+        id: chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          buildScriptName: 'build:storybook'
+
+      - name: Find existing Storybook preview comment
+        if: ${{ github.event_name == 'pull_request' }}
+        id: find-comment
+        uses: peter-evans/find-comment@v3
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: 'Storybook preview'
+
+      - name: Comment PR with Storybook preview link
+        if: ${{ github.event_name == 'pull_request' &&
+          steps.chromatic.outputs.storybookUrl != '' }}
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          edit-mode: replace
+          body: |
+            🚀 Storybook preview is ready.
+
+            • Preview: ${{ steps.chromatic.outputs.storybookUrl }}
+            • Chromatic build: ${{ steps.chromatic.outputs.buildUrl }}
