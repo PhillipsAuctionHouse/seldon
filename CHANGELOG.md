@@ -1,3 +1,10 @@
+# [1.192.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.191.0...v1.192.0) (2025-09-09)
+
+
+### Features
+
+* **colorTokens:** L3-7141 Token mapping fixes ([#718](https://github.com/PhillipsAuctionHouse/seldon/issues/718)) ([5ca3a4b](https://github.com/PhillipsAuctionHouse/seldon/commit/5ca3a4b7ab277c54981b059e318372dcc31ccefe))
+
 # [1.191.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.190.0...v1.191.0) (2025-09-08)
 
 
