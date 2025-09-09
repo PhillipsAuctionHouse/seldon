@@ -65,7 +65,7 @@ const coreColorSections = [
           { label: '$highlight-green', hex: '#46ea77' },
           { label: '$highlight-blue', hex: '#0065fc' },
           { label: '$highlight-red', hex: '#ff3d0a' },
-          { label: '$highlight-purple', hex: '#802dfa' },
+          { label: '$highlight-purple', hex: '#6F4EEA' },
         ],
       },
     ],
