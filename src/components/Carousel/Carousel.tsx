@@ -141,9 +141,22 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
         if (event.key === 'ArrowLeft') {
           event.preventDefault();
           api?.scrollPrev();
+
+          const prevNode = api?.slideNodes().filter((el) => el === document.activeElement)[0]
+            ?.previousElementSibling as HTMLElement;
+
+          if (prevNode) {
+            prevNode?.focus();
+          }
         } else if (event.key === 'ArrowRight') {
           event.preventDefault();
           api?.scrollNext();
+          const nextNode = api?.slideNodes().filter((el) => el === document.activeElement)[0]
+            ?.nextElementSibling as HTMLElement;
+
+          if (nextNode) {
+            nextNode?.focus();
+          }
         }
       },
       [api],

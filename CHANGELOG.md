@@ -1,3 +1,45 @@
+# [1.193.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.192.0...v1.193.0) (2025-09-09)
+
+
+### Features
+
+* **SaleCard:** L3-7429 make sale card more responsive ([#717](https://github.com/PhillipsAuctionHouse/seldon/issues/717)) ([4b907a7](https://github.com/PhillipsAuctionHouse/seldon/commit/4b907a7cbe250ef726e9970efc9f4461cd3cbed2))
+
+# [1.192.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.191.0...v1.192.0) (2025-09-09)
+
+
+### Features
+
+* **colorTokens:** L3-7141 Token mapping fixes ([#718](https://github.com/PhillipsAuctionHouse/seldon/issues/718)) ([5ca3a4b](https://github.com/PhillipsAuctionHouse/seldon/commit/5ca3a4b7ab277c54981b059e318372dcc31ccefe))
+
+# [1.191.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.190.0...v1.191.0) (2025-09-08)
+
+
+### Features
+
+* **Carousel:** PHOENIX-2082 added a11 fixes ([#719](https://github.com/PhillipsAuctionHouse/seldon/issues/719)) ([3112dd1](https://github.com/PhillipsAuctionHouse/seldon/commit/3112dd11537d0a2fa9d17b4c828e7031dcd95b07))
+
+# [1.190.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.189.0...v1.190.0) (2025-09-05)
+
+
+### Features
+
+* **phoneNumberInput:** L3-7310 Seldon Phone Input (Country code picker + Number input) ([#707](https://github.com/PhillipsAuctionHouse/seldon/issues/707)) ([0daaa38](https://github.com/PhillipsAuctionHouse/seldon/commit/0daaa381e481c329666affb56b9000848aaf1d4e))
+
+# [1.189.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.188.1...v1.189.0) (2025-09-05)
+
+
+### Features
+
+* **Carousel:** PHOENIX-2082 added multiple carousel example ([#714](https://github.com/PhillipsAuctionHouse/seldon/issues/714)) ([2be1384](https://github.com/PhillipsAuctionHouse/seldon/commit/2be138496ac6d8d30ae7453e923de04505b997eb))
+
+## [1.188.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.188.0...v1.188.1) (2025-09-05)
+
+
+### Bug Fixes
+
+* **ComposedModal:** L3-7641 ComposedModal can accept a ReactNode ([#715](https://github.com/PhillipsAuctionHouse/seldon/issues/715)) ([4a8defb](https://github.com/PhillipsAuctionHouse/seldon/commit/4a8defba7bc4b4f16d0c02c461a90f121d4d0630))
+
 # [1.188.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.187.0...v1.188.0) (2025-08-29)
 
 
