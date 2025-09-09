@@ -1,5 +1,5 @@
-// eslint-disable-next-line no-undef
 module.exports = {
+  ignorePatterns: ['.eslintrc.cjs', 'config/**'],
   env: {
     browser: true,
     es2020: true,
@@ -13,24 +13,27 @@ module.exports = {
     'plugin:storybook/recommended',
     'plugin:local-rules/all',
   ],
-  // ... other configurations
-  rules: {
-    'no-equals-word-string': 'error',
-    'no-template-curly-in-string': 'error',
-  },
-  settings: {},
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: ['./tsconfig.json', './tsconfig.node.json'],
+    project: [__dirname + '/tsconfig.json', __dirname + '/tsconfig.node.json'],
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
   plugins: ['react-refresh', 'local-rules'],
   rules: {
+    'react/prop-types': 'off', // we use TypeScript for type checking
     'react-refresh/only-export-components': 'warn',
     'react/boolean-prop-naming': ['warn', {}],
     'require-await': 'warn',
     '@typescript-eslint/no-floating-promises': ['error'],
+    '@typescript-eslint/consistent-type-imports': [
+      'warn',
+      {
+        prefer: 'type-imports',
+        disallowTypeAnnotations: true,
+        fixStyle: 'inline-type-imports',
+      },
+    ],
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': [
       'error',
@@ -44,6 +47,7 @@ module.exports = {
         ignoreRestSiblings: true,
       },
     ],
+    'no-template-curly-in-string': 'error',
   },
   settings: {
     react: {

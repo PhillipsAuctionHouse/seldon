@@ -39,7 +39,7 @@ export type ApproximatedFetcherType = {
   data?: any;
 };
 
-type FieldName = string;
+type FieldName = string; // NOSONAR
 type UsedForm = ReturnType<typeof useForm>;
 export type TriggerTypes = 'onChange' | 'onBlur'; // this is all `register` gives us
 
@@ -134,6 +134,8 @@ export type ProgressWizardStepFormProps =
   | ProgressWizardStepFormUniqueProps;
 
 export interface ProgressWizardProps extends ComponentPropsWithRef<'div'> {
+  // 🎺TODO
+  isControlled: boolean;
   /**
    * Optional custom header to render above the wizard steps.
    */
@@ -209,13 +211,13 @@ export interface ProgressWizardProps extends ComponentPropsWithRef<'div'> {
   onStepBack?: (stepId: string) => void;
 
   /**
-   * Callback when step changes (for controlled mode).
+   * Callback when step changes, whether or not from the continue button (for controlled mode).
    */
   onStepChange?: (stepId: string) => void;
 
   /**
    * Callback to be called when a step is submitted (before advancing).
-   * Optionally receives the current step index. Can return false` to prevent advancing.
+   * Optionally receives the current step index. Can return `false` to prevent advancing.
    */
   onContinue?: (stepId?: string) => boolean | void;
 
