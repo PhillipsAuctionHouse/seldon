@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 import { Meta } from '@storybook/react';
 import React, { useEffect, useRef, useState } from 'react';
 import { LanguageSelector } from '../../patterns/LanguageSelector';
@@ -16,14 +15,7 @@ import NavigationList from '../Navigation/NavigationList/NavigationList';
 import Search, { SearchProps } from '../Search/Search';
 import { SearchResult } from '../Search/SearchResults/SearchResults';
 import NotificationBanner, { NotificationBannerProps } from './NotificationBanner';
-
-const generateLoremIpsum = (numOfParagraphs = 10) => {
-  let loremIpsum = '';
-  for (let i = 0; i < numOfParagraphs; i++) {
-    loremIpsum += faker.lorem.paragraph();
-  }
-  return loremIpsum;
-};
+import { LOREM_HUGE } from '../../utils/staticContent';
 
 const fetchData = async () => {
   let searchResults: { makers: Array<SearchResult> } = { makers: [] };
@@ -348,7 +340,7 @@ export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: 
         <UserManagement authState={authState} onLogin={() => console.log('login')} href="/account" />
       </Header>
       <div style={{ paddingTop: `${180 + (bannerRef.current?.offsetHeight || 0)}px` } as React.CSSProperties}>
-        {generateLoremIpsum(100)}
+        <div>{LOREM_HUGE}</div>
       </div>
     </div>
   );

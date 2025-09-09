@@ -21,7 +21,7 @@ export const SaleCardPlayground = (props: SaleCardProps) => (
 );
 
 const defaultProps = {
-  imageSrc: 'https://picsum.photos/800/450',
+  imageSrc: '/static/test-image-160x90.jpg',
   auctionType: 'Live Auction',
   titleText: 'Modern & Contemporary Art Day Sale, Morning Session',
   date: '2 PM EST, May 27, 2025',
@@ -176,7 +176,7 @@ export const SaleCardWithPrimaryCTA = () => (
 
 export const SaleCardWithSecondaryCTA = () => (
   <SaleCard
-    imageSrc="https://picsum.photos/800/450"
+    imageSrc="/static/test-image-160x90.jpg"
     auctionType="Live Auction"
     titleText="Modern & Contemporary Art Day Sale, Morning Session"
     date="2 PM EST, May 27, 2025"
@@ -227,7 +227,7 @@ export const SaleCardWithDownloadLink = () => (
 
 export const SaleCardNoCTA = () => (
   <SaleCard
-    imageSrc="https://picsum.photos/800/450"
+    imageSrc="/static/test-image-160x90.jpg"
     auctionType="Live Auction"
     titleText="Modern & Contemporary Art Day Sale, Morning Session"
     date="2 PM EST, May 27, 2025"
