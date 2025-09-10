@@ -1,3 +1,10 @@
+# [1.195.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.194.0...v1.195.0) (2025-09-10)
+
+
+### Features
+
+* **colorTokens:** L3-7655 no reserve red contrast violation for ObjectTile ([#722](https://github.com/PhillipsAuctionHouse/seldon/issues/722)) ([45017a9](https://github.com/PhillipsAuctionHouse/seldon/commit/45017a96bd198fd1ecdb5dd749b4730c3a53b0c9))
+
 # [1.194.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.193.0...v1.194.0) (2025-09-09)
 
 
