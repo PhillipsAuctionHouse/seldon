@@ -112,17 +112,16 @@
 @mixin display-styles($font-size, $font-weight: 400, $text-transform: unset, $font-style: unset) {
   @include DistinctDisplay;
 
+  font-size: $font-size;
   font-style: $font-style;
   font-weight: $font-weight;
   letter-spacing: 0;
-  line-height: calc($font-size + $line-height-m-units);
+  line-height: 1.2;
   text-transform: $text-transform;
 }
 
 @mixin heading-styles($font-size, $font-weight: 400, $text-transform: unset, $font-style: unset) {
   @include display-styles($font-size, $font-weight, $text-transform, $font-style);
-
-  line-height: calc($font-size + $line-height-m-units);
 }
 
 @mixin body-styles($font-size, $font-weight: 400, $text-transform: unset, $font-style: unset) {
@@ -130,7 +129,7 @@
   font-style: $font-style;
   font-weight: $font-weight;
   letter-spacing: 0;
-  line-height: calc($font-size + $line-height-l-units);
+  line-height: 1.4;
   text-transform: $text-transform;
 
   @include Montserrat;
@@ -147,9 +146,9 @@
 
   font-size: $font-size;
   font-style: $font-style;
-  font-weight: $font-weight;
+  font-variation-settings: 'wght' $font-weight;
   letter-spacing: 0;
-  line-height: calc($font-size + $line-height-l-units);
+  line-height: 1.2;
   text-decoration: $text-decoration;
   text-transform: $text-transform;
 }
