@@ -16,7 +16,7 @@ const steps = [
 const renderProgressWizard = (props: Partial<ProgressWizardProps> = {}) => {
   const defaultProps: ProgressWizardProps = {
     steps: steps.map((s, i) => ({ ...s, component: <div key={i}>Content for {s.label}</div> })),
-    setCanContinue: vi.fn(),
+    setIsCanContinue: vi.fn(),
     onSubmit: vi.fn(),
     onCancel: vi.fn(),
     ...props,
@@ -84,12 +84,12 @@ describe('ProgressWizard', () => {
     expect(onCancel).toHaveBeenCalled();
   });
 
-  it('disables navigation buttons when canContinue is false', async () => {
-    const [canContinue, setCanContinue] = useState(false);
+  it('disables navigation buttons when isCanContinue is false', async () => {
+    const [isCanContinue, setIsCanContinue] = useState(false);
     const user = userEvent.setup();
     renderProgressWizard({
-      canContinue,
-      setCanContinue,
+      isCanContinue,
+      setIsCanContinue,
     });
 
     const startButton = screen.getByRole('button', { name: /start/i });

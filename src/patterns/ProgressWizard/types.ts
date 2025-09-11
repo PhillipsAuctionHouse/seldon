@@ -1,126 +1,187 @@
+// Core Data Types
 import {
   type ComponentPropsWithRef,
   type ComponentPropsWithoutRef,
   type Dispatch,
   type ForwardRefExoticComponent,
-  type ReactNode,
   type SetStateAction,
-  type FC,
-  type ReactElement,
+  type ChangeEventHandler,
+  type FocusEventHandler,
+  type ReactNode,
 } from 'react';
+``;
 import { type UnknownKeysParam, type z } from 'zod';
-import { type useForm, type Form, type ChangeHandler } from 'react-hook-form';
-
+import { type useForm, type Form } from 'react-hook-form';
 import { type InputProps } from '../../components/Input/Input';
 import { type SelectProps } from '../../components/Select/Select';
+import { type UUID } from 'crypto';
 
+// ==============================
+//  Core Data Types
+// ==============================
+export type FieldName = string;
+export type HTMLFormInputElement = HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
 export type InputValue = string | number | boolean | string[] | null | undefined;
-type HTMLFormControlElement = HTMLElement | HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+export type Primitive = string | number | boolean | symbol | bigint | null | void | undefined;
+export type GenericFormState = Record<string, InputValue>;
+export type StepId = FormStep['id'];
+export type ConsumerDefinedFunction = (..._args: unknown[]) => void;
 
-export type ProbablyFormFields = Record<string, InputValue>;
-
-export type ApproximatedFetcherType = {
-  state: 'idle' | 'submitting' | 'loading';
-
-  // it is a fake type, I am okay with anys
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Form?: ForwardRefExoticComponent<any>;
-  submit: (data: FormData) => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  load?: (href: string, opts?: any) => void;
-  formMethod?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
-  formAction?: string;
-  formEncType?: string;
-  text?: string;
-  formData?: FormData;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  json?: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data?: any;
+// ==============================
+//  Form Registration Types
+// ==============================
+type FormMethods = ReturnType<typeof useForm>;
+type RegisterProgressWizardInput = <FN extends FieldName, TT extends TriggerTypes>(
+  _fieldName: FN,
+  _options?: RegisterProgressWizardInputOptions<FN, TT>,
+) => RegisterProgressWizardInputReturn<FN>;
+type RegisterProgressWizardInputOptions<N extends FieldName = string, T extends TriggerTypes = TriggerTypes> = {
+  isRequired?: boolean;
+  overrides?: Overrides<N>;
+  translationFunction?: (_key: N | `${N}Required`) => string;
+  trigger?: T;
 };
-
-type FieldName = string; // NOSONAR
-type UsedForm = ReturnType<typeof useForm>;
-export type TriggerTypes = 'onChange' | 'onBlur'; // this is all `register` gives us
-
-type Overrides<N extends FieldName> = Omit<
+type RegisterProgressWizardInputReturn<N extends FieldName> = (Omit<
+  ReturnType<FormMethods['register']>,
+  'ref' | 'form' | 'onChange' | 'onBlur'
+> & { ref: React.Ref<HTMLFormInputElement> | string }) & {
+  onBlur?: OnInputTrigger<'onBlur'>;
+  onChange?: OnInputTrigger<'onChange'>;
+} & (Omit<Overrides<N>, 'id' | 'labelText'> & Required<Pick<Overrides<N>, 'id' | 'labelText'>>);
+export type TriggerTypes = 'onChange' | 'onBlur';
+export type Overrides<N extends FieldName> = Omit<
   Partial<ComponentPropsWithoutRef<'input' | 'select' | 'textarea'>> & (Partial<SelectProps> & Partial<InputProps>),
   TriggerTypes
 > & {
   id?: N;
-  labelText?: string;
   invalid?: boolean;
   invalidText?: string;
+  labelText?: string;
+};
+export type OnInputTrigger<T extends TriggerTypes> = T extends 'onBlur'
+  ? FocusEventHandler<HTMLInputElement>
+  : ChangeEventHandler<HTMLFormInputElement>;
+
+// ==============================
+//  Step Schema Types
+// ==============================
+export type StepSchema = z.ZodObject<Record<string, z.ZodTypeAny>, UnknownKeysParam, z.ZodTypeAny>;
+export type StepSchemaFunction = (schema: StepSchema, formState?: GenericFormState) => z.ZodEffects<StepSchema>;
+export type FormStep<T extends StepSchema = StepSchema> = {
+  component: React.FC<Record<string, unknown>>;
+  id: string;
+  label: string;
+  refineSchema?: StepSchemaFunction;
+  schema: T;
+  hiddenFields: string[];
 };
 
-export type RegisterProgressWizardInputOptions<N extends FieldName, T extends TriggerTypes> = {
-  isRequired?: boolean;
-  trigger?: T;
-  overrides?: Overrides<N>;
-  translationFunction?: (key: N | `${N}Required`) => string;
+// ==============================
+//  State Management Types
+// ==============================
+export type FormStateManagement =
+  | {
+      isControlled: true;
+      dataToSubmit: GenericFormState;
+      setDataToSubmit: SetDataToSubmit;
+      isCanContinue: boolean | undefined;
+      setIsCanContinue: undefined;
+      stepId: StepId;
+      setStepId: undefined;
+      isLoading: boolean | undefined;
+      setIsLoading: undefined;
+      stepForward: () => void;
+      stepBackward: () => void;
+      jumpToStep: (_stepId: StepId) => void;
+      handlers: ConfigureHandlersForVariantReturnValue;
+    }
+  | {
+      isControlled: false;
+      dataToSubmit: GenericFormState;
+      setDataToSubmit: SetDataToSubmit;
+      isCanContinue: boolean;
+      setIsCanContinue: Dispatch<SetStateAction<boolean>>;
+      stepId: StepId;
+      setStepId: Dispatch<SetStateAction<StepId>>;
+      isLoading: boolean;
+      setIsLoading: Dispatch<SetStateAction<boolean>>;
+      stepForward: () => void;
+      stepBackward: () => void;
+      jumpToStep: (_stepId: StepId) => void;
+      handlers: ConfigureHandlersForVariantReturnValue;
+    };
+export type updateDataToSubmit = (
+  _event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+) => void;
+
+type SetDataToSubmit = Dispatch<SetStateAction<GenericFormState>>;
+export type HandleContinue = () => void;
+export type HandleSubmit = (_formId: UUID) => void;
+export type UsePendingValue<FormState extends GenericFormState = GenericFormState> = (_fieldName: keyof FormState) => {
+  applyPendingValue: () => void;
+  pendingValue: InputValue;
+  setPendingValue: Dispatch<SetStateAction<InputValue>>;
 };
-
-export type RegisterProgressWizardInputReturn<N extends FieldName> = (Omit<
-  ReturnType<UsedForm['register']>,
-  'ref' | 'form'
-> & { ref: React.Ref<HTMLFormControlElement> | string }) & {
-  onBlur?: ChangeHandler;
-  onChange?: ChangeHandler;
-} & (Omit<Overrides<N>, 'id' | 'labelText'> & Required<Pick<Overrides<N>, 'id' | 'labelText'>>);
-
-export type RegisterProgressWizardInput = <N extends FieldName, T extends TriggerTypes>(
-  fieldName: N,
-  options?: RegisterProgressWizardInputOptions<N, T>,
-) => RegisterProgressWizardInputReturn<N>;
-
-export type SetCanContinue<T extends 'internal' | 'external' | undefined = undefined> = T extends 'internal'
-  ? Dispatch<SetStateAction<boolean>>
-  : T extends 'external'
-    ? (isValid: boolean) => void
-    : Dispatch<SetStateAction<boolean>> | ((isValid: boolean) => void);
-
-export type UseWizardFormStep<FS extends ProbablyFormFields = ProbablyFormFields> = () => {
-  formMethods: ReturnType<typeof useForm>;
-  goToStep: (step: string) => void;
-  commitInputValue: (fieldName: keyof FS) => void;
-  currentFormState: FS;
-  setCanContinue: SetCanContinue;
-  setHiddenFields: Dispatch<SetStateAction<(keyof FS)[]>>;
+export type UseWizardForm = () => {
   registerProgressWizardInput: RegisterProgressWizardInput;
 };
 
-type UsePendingValue<T extends ProbablyFormFields = ProbablyFormFields> = (fieldName: keyof T) => {
-  setPendingValue: Dispatch<SetStateAction<InputValue>>;
-  applyPendingValue: () => void;
-  pendingValue: InputValue;
+// ==============================
+//  Props Types
+// ==============================
+
+type FooterTextValues = {
+  start?: string;
+  cancel?: string;
+  back?: string;
+  continue?: string;
+  submit?: string;
 };
 
-export type ProgressWizardStepComponentProps<Schema extends ProbablyFormFields = ProbablyFormFields> = {
-  useWizardFormStep: UseWizardFormStep<Schema>;
-  usePendingValue: UsePendingValue<Schema>;
+type ExtKeysFooterTextValues = {
+  [k in keyof FooterTextValues as `${k}Label`]?: FooterTextValues[k];
 };
 
-export type ProgressWizardStepComponent = ReactElement<ProgressWizardStepComponentProps>;
+export type ProgressWizardBaseProps = {
+  activeStepId: StepId;
+  defaultValues?: GenericFormState;
+  steps: FormStep[];
+  customHeader?: ReactNode;
 
-type StepSchema = z.ZodObject<Record<string, z.ZodTypeAny>, UnknownKeysParam, z.ZodTypeAny>;
-
-type ca<T> = T extends z.ZodTypeAny ? T : z.ZodTypeAny;
-
-export type StepSchemaFunction = <T extends z.ZodTypeAny>(
-  schema: ca<T>,
-  formState?: ProbablyFormFields,
-) => z.ZodEffects<ca<T>>;
-
-export type FormStep<T extends StepSchema = StepSchema> = {
-  label: string;
-  id: string;
-  schema: T;
-  refineSchema?: StepSchemaFunction;
-  component: FC<ProgressWizardStepComponentProps>; // not ReactElement yet, just sitting there as a function
+  fetcher?: ApproximatedFetcherType;
+  action?: string;
 };
+export type ProgressWizardProps =
+  | (ProgressWizardBaseProps &
+      ComponentPropsWithRef<'div'> &
+      ExternalStates &
+      ExtKeysFooterTextValues &
+      OptionalTriggeredFunctions &
+      RequiredControlledVariantHandlers & {
+        isControlled: true;
+      })
+  | (ProgressWizardBaseProps &
+      ComponentPropsWithRef<'div'> &
+      ExternalStates &
+      ExtKeysFooterTextValues &
+      OptionalTriggeredFunctions & {
+        isControlled: false;
+        handleStepPrev?: undefined;
+        handleStepNext?: undefined;
+        handleSubmit?: undefined;
+      });
+export type InnerProgressWizardProps = ComponentPropsWithRef<'div'> &
+  ProgressWizardBaseProps &
+  ExtKeysFooterTextValues & { isControlled: boolean; formId: UUID };
 
-export type ProgressWizardStepForm = ReactElement<ProgressWizardStepFormProps>;
-
+export type FooterProps = ExternalStates & {
+  isFirstStep?: boolean;
+  isLastStep?: boolean;
+  baseClassName?: string;
+  formId: UUID;
+  fetcher: ApproximatedFetcherType | undefined;
+  labels: FooterTextValues;
+};
 type ProgressWizardStepFormUniqueProps = {
   formId: string;
   fetcher?: ApproximatedFetcherType;
@@ -128,109 +189,83 @@ type ProgressWizardStepFormUniqueProps = {
   schema?: StepSchema | z.ZodEffects<StepSchema>;
   hiddenFields?: string[];
 };
+export type ProgressWizardStepFormProps = Omit<
+  ComponentPropsWithRef<typeof Form>,
+  keyof ProgressWizardStepFormUniqueProps
+> &
+  ProgressWizardStepFormUniqueProps;
 
-export type ProgressWizardStepFormProps =
-  | Omit<ComponentPropsWithRef<typeof Form>, keyof ProgressWizardStepFormUniqueProps>
-  | ProgressWizardStepFormUniqueProps;
+// ==============================
+//  Handler Types
+// ==============================
 
-export interface ProgressWizardProps extends ComponentPropsWithRef<'div'> {
-  // 🎺TODO
+export type ConfigureHandlersForVariant = ({
+  incomingHandlers,
+  isControlled,
+  formMethods,
+  setDataToSubmit,
+  stepForward,
+  stepBackward,
+  steps,
+  stepId,
+}: ConfigureHandlersForVariantParams) => ConfigureHandlersForVariantReturnValue;
+
+export type ConfigureHandlersForVariantParams = {
+  incomingHandlers: IncomingHandlers;
   isControlled: boolean;
-  /**
-   * Optional custom header to render above the wizard steps.
-   */
-  customHeader?: ReactNode;
-
-  /**
-   * Label for the "Start" button. Defaults to a standard label if not provided.
-   */
-  startLabel?: string;
-
-  /**
-   * Label for the "Cancel" button. Defaults to a standard label if not provided.
-   */
-  cancelLabel?: string;
-
-  /**
-   * Label for the "Back" button. Defaults to a standard label if not provided.
-   */
-  backLabel?: string;
-
-  /**
-   * Label for the "Continue" button. Defaults to a standard label if not provided.
-   */
-  continueLabel?: string;
-
-  /**
-   * Label for the "Submit" button. Defaults to a standard label if not provided.
-   */
-  submitLabel?: string;
-
-  /**
-   * Optional fetcher function to handle form submission.
-   * If supplied, this function will be used to submit the wizard form data,
-   * overriding other submit handlers. 🎺TODO this might not be true when I fix the nav stuff
-   */
-  fetcher?: ApproximatedFetcherType;
-
-  /**
-   * Optional action string for the form submission endpoint.
-   */
-  action?: string;
-
-  /**
-   * An array of step objects. 🎺TODO update comments
-   * Represents the steps in the wizard. The order of the steps in the array is fixed. IDs can be whatever.
-   */
+  formMethods: FormMethods;
+  setDataToSubmit: SetDataToSubmit;
+  stepForward: () => void;
+  stepBackward: () => void;
   steps: FormStep[];
-  /**
-   * Optional default values for the form fields.
-   */
-  currentFormState?: ProbablyFormFields;
+  stepId: StepId;
+};
+type RequiredControlledVariantHandlers = {
+  handleStepPrev: ConsumerDefinedFunction;
+  handleStepNext: ConsumerDefinedFunction;
+  handleSubmit: ConsumerDefinedFunction;
+};
 
-  // 🎺TODO comment
-  setCurrentFormState?: Dispatch<SetStateAction<ProbablyFormFields>>;
-
-  // 🎺TODO comment
-  canContinue?: boolean;
-
-  // 🎺TODO comment
-  setCanContinue?: SetCanContinue<'external'>;
-
-  hiddenFields?: string[];
-  
-  /**
-   * The index of the current step (0-based).
-   */
-  currentStepId?: string;
-
-  /**
-   * Callback to be called when the Back button is pressed.
-   * Receives the current step index.
-   */
-  onStepBack?: (stepId: string) => void;
-
-  /**
-   * Callback when step changes, whether or not from the continue button (for controlled mode).
-   */
-  onStepChange?: (stepId: string) => void;
-
-  /**
-   * Callback to be called when a step is submitted (before advancing).
-   * Optionally receives the current step index. Can return `false` to prevent advancing.
-   */
-  onContinue?: (stepId?: string) => boolean | void;
-
-  /**
-   * Optional callback function to be called when the wizard is submitted, if not supplied the wizard will use the default form submit
-   */
+type OptionalTriggeredFunctions = {
+  onContinue?: () => boolean;
   onSubmit?: () => void;
-
-  // 🎺TODO
-  onError?: (error: unknown) => void;
-
-  /**
-   * Optional callback function to be called when the wizard is canceled.
-   */
   onCancel?: () => void;
-}
+  onError?: (error: unknown) => void;
+};
+
+type ExternalStates = {
+  isLoading?: boolean;
+  isCanContinue?: boolean;
+};
+export type IncomingHandlers = Partial<Handlers>;
+export type Handlers = RequiredControlledVariantHandlers & OptionalTriggeredFunctions;
+type ConfigureHandlersForVariantReturnValue = Partial<Omit<Handlers, 'handleSubmit'>> & {
+  updateDataToSubmit: updateDataToSubmit;
+  handleContinue: HandleContinue;
+  handleSubmit: HandleSubmit;
+  handleBack: () => void;
+  handleCancel: () => void;
+};
+
+// ==============================
+//  Utility Types
+// ==============================
+export type ApproximatedFetcherType = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Form?: ForwardRefExoticComponent<any>;
+  formAction?: string;
+  formData?: FormData;
+  formEncType?: string;
+  formMethod?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  json?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  load?: (_href: string, _opts?: any) => void;
+  state: 'idle' | 'submitting' | 'loading';
+  submit: (_data: FormData) => void;
+  text?: string;
+};
+
+export type HandleHiddenFields = (allFields: string[], hiddenFields: string[]) => void;
