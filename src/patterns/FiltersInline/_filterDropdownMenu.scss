@@ -33,9 +33,12 @@
     &--drawer {
       box-shadow: 0 -4px 8px -4px $medium-gray;
       gap: $spacing-xl;
-      min-height: $drawer-button-area-min-height;
       padding: $spacing-md;
       width: 100%;
+
+      @media (min-width: $breakpoint-md) {
+        min-height: $drawer-button-area-min-height;
+      }
 
       @media (min-width: $breakpoint-xl) {
         gap: 0;
