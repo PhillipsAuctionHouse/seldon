@@ -36,6 +36,10 @@
       padding: $spacing-md;
       width: 100%;
 
+      @media (min-width: $breakpoint-md) {
+        min-height: $drawer-button-area-min-height;
+      }
+
       @media (min-width: $breakpoint-xl) {
         gap: 0;
       }
