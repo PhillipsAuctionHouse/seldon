@@ -505,3 +505,8 @@ $mobile-minimum-clickable-area: 44px;
 ///
 $search-size: var(--search-size);
 $header-height: var(--header-height);
+
+/// Drawer min height Token
+/// Used to ensure the drawer button area is always at least the minimum clickable area on mobile devices
+/// This is calculated as the button label line height + (2 * Drawer panel padding) + (2 * Button's internal padding)
+$drawer-button-area-min-height: calc($button-label-line-height + $spacing-md * 2 + $spacing-sm * 2);

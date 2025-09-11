@@ -33,7 +33,7 @@
     &--drawer {
       box-shadow: 0 -4px 8px -4px $medium-gray;
       gap: $spacing-xl;
-      min-height: calc($button-label-line-height + $spacing-md * 2 + $spacing-sm * 2);
+      min-height: $drawer-button-area-min-height;
       padding: $spacing-md;
       width: 100%;
 
