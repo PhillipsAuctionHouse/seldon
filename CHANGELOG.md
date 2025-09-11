@@ -1,3 +1,10 @@
+## [1.195.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.195.0...v1.195.1) (2025-09-11)
+
+
+### Bug Fixes
+
+* **FiltersInline:** L3-7668 Update FiltersInline Drawer height ([#724](https://github.com/PhillipsAuctionHouse/seldon/issues/724)) ([439cc4a](https://github.com/PhillipsAuctionHouse/seldon/commit/439cc4a59a95eb516c4177f33d10db0dbf8b4418))
+
 # [1.195.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.194.0...v1.195.0) (2025-09-10)
 
 
