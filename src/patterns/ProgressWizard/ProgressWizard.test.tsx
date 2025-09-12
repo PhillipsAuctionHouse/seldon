@@ -1,17 +1,206 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { configure, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi, type Mock } from 'vitest';
 import ProgressWizard from './ProgressWizard';
 import { z } from 'zod';
 import Input from '../../components/Input/Input';
-import { type FormStep } from './types';
+import { type LoadingState, type FormStep } from './types';
 import userEvent from '@testing-library/user-event';
+import { useState } from 'react';
 
+beforeAll(() => {
+  configure({
+    getElementError: (message: string | null, _container: Element) => {
+      const error = new Error(message ?? '');
+      error.name = 'TestingLibraryElementError';
+      error.stack = undefined;
+      return error;
+    },
+  });
+});
 beforeEach(() => {
   if ((console.error as Mock)?.mockRestore) (console.error as Mock).mockRestore();
 });
 
 const getWizName = (label: string) => ({ name: `Wizard: ${label}` });
+
 describe('ProgressWizard', () => {
+  it('hides the ProgressIndicator when hideProgressIndicator is true', () => {
+    const steps: FormStep[] = [
+      {
+        id: 'step1',
+        label: 'Step 1',
+        componentFactory: ({ registerProgressWizardInput }) => (
+          <Input {...registerProgressWizardInput('name')} key="step1-input" />
+        ),
+      },
+    ];
+    render(
+      <ProgressWizard
+        steps={steps}
+        loadingState="idle"
+        hideProgressIndicator={true}
+        startLabel="Start"
+        cancelLabel="Cancel"
+        backLabel="Back"
+        continueLabel="Continue"
+        submitLabel="Submit"
+      />,
+    );
+    expect(screen.queryByLabelText('Wizard Progress')).toBeNull();
+  });
+
+  it('hides the navigation section when hideNavigation is true', () => {
+    const steps: FormStep[] = [
+      {
+        id: 'step1',
+        label: 'Step 1',
+        componentFactory: ({ registerProgressWizardInput }) => (
+          <Input {...registerProgressWizardInput('name')} key="step1-input" />
+        ),
+      },
+    ];
+    render(
+      <ProgressWizard
+        steps={steps}
+        loadingState="idle"
+        hideNavigation={true}
+        startLabel="Start"
+        cancelLabel="Cancel"
+        backLabel="Back"
+        continueLabel="Continue"
+        submitLabel="Submit"
+      />,
+    );
+    // Footer should not be rendered
+    expect(screen.queryByRole('button', { name: /Wizard:/ })).toBeNull();
+  });
+
+  it('merges formSchema with step schemas, with step schemas taking precedence', async () => {
+    const formSchema = z.object({
+      name: z.string().min(2, { message: 'formSchema: Name too short' }),
+      age: z.number().min(18, { message: 'formSchema: Age too low' }),
+    });
+    const steps: FormStep[] = [
+      {
+        id: 'step1',
+        label: 'Step 1',
+        schema: z.object({ name: z.string().min(4, { message: 'stepSchema: Name too short' }) }),
+        componentFactory: ({ registerProgressWizardInput }) => (
+          <Input {...registerProgressWizardInput('name')} key="step1-input" />
+        ),
+      },
+      {
+        id: 'step2',
+        label: 'Step 2',
+        schema: z.object({ age: z.number().min(21, { message: 'stepSchema: Age too low' }) }),
+        componentFactory: ({ registerProgressWizardInput }) => (
+          <Input
+            {...registerProgressWizardInput('age', {
+              overrides: { type: 'number' },
+              registerOptions: { valueAsNumber: true },
+            })}
+            key="step2-input"
+          />
+        ),
+      },
+    ];
+    render(
+      <ProgressWizard
+        steps={steps}
+        formSchema={formSchema}
+        loadingState="idle"
+        startLabel="Start"
+        cancelLabel="Cancel"
+        backLabel="Back"
+        continueLabel="Continue"
+        submitLabel="Submit"
+      />,
+    );
+
+    await userEvent.type(screen.getByLabelText('Name*'), '123');
+    await userEvent.click(screen.getByRole('button', getWizName('Start')));
+    await waitFor(() => expect(screen.getByText('stepSchema: Name too short')).toBeInTheDocument());
+    await userEvent.clear(screen.getByLabelText('Name*'));
+    await userEvent.type(screen.getByLabelText('Name*'), '1234');
+    await userEvent.click(screen.getByRole('button', getWizName('Start')));
+    // next step
+    await userEvent.type(screen.getByLabelText('Age*'), '20');
+    await userEvent.click(screen.getByRole('button', getWizName('Submit')));
+    await waitFor(() => expect(screen.getByText('stepSchema: Age too low')).toBeInTheDocument());
+  });
+
+  it('applies refinements from step schemas and validates them', async () => {
+    const steps: FormStep[] = [
+      {
+        id: 'step1',
+        label: 'Step 1',
+        schema: z.object({
+          name: z.string().refine((val) => val !== 'forbidden', { message: 'Name is forbidden' }),
+        }),
+        componentFactory: ({ registerProgressWizardInput }) => (
+          <Input {...registerProgressWizardInput('name')} key="step1-input" />
+        ),
+      },
+    ];
+    render(
+      <ProgressWizard
+        steps={steps}
+        loadingState="idle"
+        startLabel="Start"
+        cancelLabel="Cancel"
+        backLabel="Back"
+        continueLabel="Continue"
+        submitLabel="Submit"
+      />,
+    );
+    await userEvent.type(screen.getByLabelText('Name*'), 'forbidden');
+    await userEvent.click(screen.getByRole('button', { name: 'Wizard: Submit' }));
+    await waitFor(() => expect(screen.getByText('Name is forbidden')).toBeInTheDocument());
+  });
+
+  it('handles loading state with a simulated remix fetcher for form submission', async () => {
+    const steps: FormStep[] = [
+      {
+        id: 'step1',
+        label: 'Step 1',
+        schema: z.object({ name: z.string().min(1, { message: 'Name required' }) }),
+        componentFactory: ({ registerProgressWizardInput }) => (
+          <Input {...registerProgressWizardInput('name')} key="step1-input" />
+        ),
+      },
+    ];
+
+    const TestWrapper: React.FC = () => {
+      const [fetcherState, setFetcherState] = useState<LoadingState>('idle');
+      const onSubmit = vi.fn(async () => {
+        setFetcherState('loading');
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        setFetcherState('idle');
+      });
+      return (
+        <ProgressWizard
+          steps={steps}
+          loadingState={fetcherState}
+          onSubmit={onSubmit}
+          startLabel="Start"
+          cancelLabel="Cancel"
+          backLabel="Back"
+          continueLabel="Continue"
+          submitLabel="Submit"
+        />
+      );
+    };
+
+    render(<TestWrapper />);
+
+    await userEvent.type(screen.getByLabelText('Name*'), 'RemixUser');
+    await userEvent.click(screen.getByRole('button', getWizName('Submit')));
+
+    await waitFor(() => expect(screen.getByRole('button', getWizName('Submit'))).toBeDisabled());
+
+    await waitFor(() => expect(screen.getByRole('button', getWizName('Submit'))).not.toBeDisabled());
+  });
+
   it('renders steps and navigates between them', async () => {
     const steps: FormStep[] = [
       {
@@ -181,8 +370,7 @@ describe('ProgressWizard', () => {
     expect(screen.getByText('No fields')).toBeInTheDocument();
   });
 
-  // 🎺TODO This fails because it is simply not handled. But it should be. Should be easy too, just make the schema like "stepOne.name" or the like
-  it.skip('handles duplicate field names across steps', async () => {
+  it('handles duplicate field names across steps', async () => {
     const steps: FormStep[] = [
       {
         id: 'step1',
@@ -213,7 +401,7 @@ describe('ProgressWizard', () => {
       />,
     );
     await userEvent.type(screen.getByLabelText('Name*'), 'A');
-    await userEvent.click(screen.getByRole('button', getWizName('Continue')));
+    await userEvent.click(screen.getByRole('button', getWizName('Start')));
     await waitFor(() => expect(screen.getByLabelText('Name*')).toBeInTheDocument());
     await userEvent.type(screen.getByLabelText('Name*'), 'AB');
     await userEvent.click(screen.getByRole('button', getWizName('Submit')));
@@ -264,9 +452,7 @@ describe('ProgressWizard', () => {
   });
 
   it('calls onError for async validation errors', async () => {
-    vi.spyOn(console, 'error').mockImplementation((e) => {
-      console.log(e);
-    });
+    vi.spyOn(console, 'error').mockImplementation(() => void 0);
     const asyncSchema = z.string().refine(async () => {
       await new Promise((resolve) => setTimeout(resolve, 100));
       throw new Error('Async error');

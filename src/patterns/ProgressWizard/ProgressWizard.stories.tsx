@@ -4,6 +4,7 @@ import { z } from 'zod';
 import Input from '../../components/Input/Input';
 import { type Meta } from '@storybook/react';
 import { type FormStep } from './types';
+import { type FieldErrors } from 'react-hook-form';
 
 const meta = {
   title: 'Patterns/ProgressWizard',
@@ -19,6 +20,8 @@ const translations: Record<string, string> = {
   emailRequired: 'Email is required',
   age: 'Age',
   ageRequired: 'Age is required',
+  password: 'Password',
+  passwordRequired: 'Password is required',
 };
 
 const t = (key: string) => translations[key] || key;
@@ -46,6 +49,7 @@ export const BasicWizard = () => {
     },
   ];
   const alertedOnContinue = useRef(false);
+
   return (
     <ProgressWizard
       steps={steps}
@@ -60,7 +64,11 @@ export const BasicWizard = () => {
         return true;
       }}
       onCancel={() => alert('Called `onCancel`, without which cancelling does nothing')}
-      onSubmit={(data) => alert(`Called \`onSubmit\`. Form data: ${JSON.stringify(data)}`)}
+      onSubmit={(data) =>
+        alert(
+          `Called \`onSubmit\`, which replaces native form submission and validation. Both can still happen via function passed through the component factory.\n\nForm data: ${JSON.stringify(data)}`,
+        )
+      }
       startLabel="Start"
       cancelLabel="Cancel"
       backLabel="Back"
@@ -77,7 +85,7 @@ export const TranslationWizard = () => {
       id: 'step1',
       label: 'Step 1',
       schema: z.object({
-        email: z.string().email({ message: t('emailRequired') }),
+        email: z.string().min(1, { message: t('emailRequired') }).email({ message: t('emailInvalid') }),
       }),
       componentFactory: ({ registerProgressWizardInput }) => (
         <Input {...registerProgressWizardInput('email', { translationFunction: t })} />
@@ -88,8 +96,9 @@ export const TranslationWizard = () => {
     <ProgressWizard
       steps={steps}
       loadingState="idle"
-      onSubmit={(data) => alert('Submitted: ' + JSON.stringify(data))}
-      onError={(error) => alert('Error: ' + error.email?.message)}
+      onError={(error, errorType) =>
+        alert('Error: ' + (errorType === 'FieldErrors' ? (error as FieldErrors).email?.message : error))
+      }
       startLabel="Start"
       cancelLabel="Cancel"
       backLabel="Back"
@@ -188,7 +197,13 @@ export const MixedWizard = () => {
       id: 'step2',
       label: 'Step 2',
       schema: z.object({
-        password: z.string().min(6, { message: t('passwordRequired') }),
+        password: z
+          .string()
+          .min(1, { message: t('passwordRequired') })
+          .refine((data) => data.length < 6, {
+            message: 'Password must be longer than five characters',
+            path: ['password'],
+          }),
       }),
       componentFactory: ({ registerProgressWizardInput }) => (
         <Input
@@ -201,12 +216,15 @@ export const MixedWizard = () => {
     <ProgressWizard
       steps={steps}
       loadingState="idle"
-      onContinue={() => {
-        alert('Continue');
+      onContinue={(data) => {
+        if (data.username !== 'please') {
+          alert('onContinue called, disallowing continuing until `username` is "please"');
+          return false;
+        }
         return true;
       }}
       onCancel={() => alert('Cancel')}
-      onSubmit={(data) => alert('Submit: ' + JSON.stringify(data))}
+      action="/submit-here"
       onError={(error) => alert('Error: ' + JSON.stringify(error))}
       startLabel="Start"
       cancelLabel="Cancel"
