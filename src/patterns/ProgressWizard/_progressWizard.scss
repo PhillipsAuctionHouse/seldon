@@ -18,11 +18,9 @@
   &__content {
     margin-top: $spacing-md;
     overflow-y: auto;
-    max-height: min-content;  // 🎺TODO undo this
   }
 
   &__footer {
-    margin-top: 0 !important; // 🎺TODO undo this
     align-items: stretch;
     background-color: $white;
     border-top: 1px solid $light-gray;

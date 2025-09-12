@@ -1,96 +1,56 @@
 import { type FC } from 'react';
 import Button from '../../../components/Button/Button';
 import { ButtonVariants } from '../../../components/Button/types';
-import type { FooterProps } from '../types';
-import { useProgressWizardFormContext } from '../Hooks/useProgressWizardFormContext';
+import { type ButtonLabels, type Handlers } from '../types';
 
-export const Footer: FC<FooterProps> = ({
+export type ProgressWizardFooterProps = Handlers & {
+  isFirstStep: boolean;
+  isLastStep: boolean;
+  baseClassName?: string;
+  labels: ButtonLabels;
+  isCanContinue: boolean;
+  isLoading: boolean;
+};
+
+export const Footer: FC<ProgressWizardFooterProps> = ({
   isFirstStep,
   isLastStep,
   baseClassName,
   labels,
   isCanContinue,
-  formId,
-  fetcher,
   isLoading,
+  handleBack,
+  handleCancel,
 }) => {
-  const {
-    handlers: { handleContinue, handleSubmit, handleBack, handleCancel },
-  } = useProgressWizardFormContext();
+  const secondaryLabel = isFirstStep ? labels.cancelLabel : labels.backLabel;
+  const secondaryAria = secondaryLabel ?? 'Go Back';
+  const secondaryOnClick = isFirstStep ? handleCancel : handleBack;
 
-  const isSubmitting = fetcher?.state === 'submitting' || isLoading;
-  if (isFirstStep)
-    return (
-      <>
-        <Button
-          variant={ButtonVariants.secondary}
-          type="button"
-          className={`${baseClassName}__btn`}
-          aria-label="Cancel Wizard"
-          onClick={handleCancel}
-        >
-          {labels.cancel}
-        </Button>
-        <Button
-          variant={ButtonVariants.primary}
-          onClick={() => {
-            handleContinue();
-          }}
-          className={`${baseClassName}__btn`}
-          aria-label="Start Wizard"
-          isDisabled={!isCanContinue}
-        >
-          {labels.start}
-        </Button>
-      </>
-    );
-  else if (isLastStep)
-    return (
-      <>
-        <Button
-          variant={ButtonVariants.secondary}
-          onClick={handleBack}
-          className={`${baseClassName}__btn`}
-          aria-label="Back"
-        >
-          {labels.back}
-        </Button>
-        <Button
-          variant={ButtonVariants.primary}
-          type="submit"
-          onClick={() => handleSubmit(formId)}
-          className={`${baseClassName}__btn`}
-          aria-label="Submit Wizard"
-          isDisabled={!isCanContinue}
-        >
-          {labels.submit}
-        </Button>
-      </>
-    );
-  else
-    return (
-      <>
-        <Button
-          variant={ButtonVariants.secondary}
-          onClick={() => {
-            handleBack();
-          }}
-          className={`${baseClassName}__btn`}
-          aria-label="Back"
-        >
-          {labels.back}
-        </Button>
-        <Button
-          variant={ButtonVariants.primary}
-          onClick={() => handleContinue()}
-          className={`${baseClassName}__btn`}
-          aria-label="Continue Wizard"
-          isDisabled={!isCanContinue || isSubmitting}
-        >
-          {labels.continue}
-        </Button>
-      </>
-    );
+  const primaryLabel = isLastStep ? labels.submitLabel : !isFirstStep ? labels.continueLabel : labels.startLabel;
+  const primaryAria = primaryLabel ?? (isLastStep ? 'Submit' : !isFirstStep ? 'Continue' : 'Start');
+
+  return (
+    <>
+      <Button
+        variant={ButtonVariants.secondary}
+        type="button"
+        className={`${baseClassName}__btn`}
+        aria-label={`Wizard: ${secondaryAria}`}
+        onClick={secondaryOnClick}
+      >
+        {secondaryLabel}
+      </Button>
+      <Button
+        variant={ButtonVariants.primary}
+        type="submit"
+        className={`${baseClassName}__btn`}
+        aria-label={`Wizard: ${primaryAria}`}
+        isDisabled={!isCanContinue || isLoading}
+      >
+        {primaryLabel}
+      </Button>
+    </>
+  );
 };
 
 export default Footer;

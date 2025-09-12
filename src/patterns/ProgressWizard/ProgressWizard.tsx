@@ -1,20 +1,19 @@
-import { forwardRef, useEffect } from 'react';
-import { type ProgressWizardProps } from './types';
-import { type UUID } from 'crypto';
-import { v4 as uuidv4 } from 'uuid';
-import InnerProgressWizard from './Components/InnerProgressWizard';
-import { useFormContext } from 'react-hook-form';
-import { ProgressWizardContextProvider } from './Providers/ProgressWizardFormContext';
+import { forwardRef, useState, useEffect } from 'react';
+import { useForm, FormProvider, type FieldErrors } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { type LoadingState, type ButtonLabels, type CallbackProps, type ProgressWizardBaseProps } from './types';
+import InnerProgressWizard from './components/InnerProgressWizard';
+import { z } from 'zod';
+
+type ProgressWizardProps = ProgressWizardBaseProps & ButtonLabels & CallbackProps;
 
 const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, ref) => {
   const {
-    isControlled,
     defaultValues,
-    activeStepId,
-
-    // static data
-    steps,
+    steps: propSteps,
     customHeader,
+    loadingState: extLoadingState,
+    action,
 
     startLabel = 'Start',
     cancelLabel = 'Cancel',
@@ -22,87 +21,109 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, r
     continueLabel = 'Continue',
     submitLabel = 'Submit',
 
-    // network-related
-    fetcher,
-    action,
-
-    // functions that are called alongside normal behavior
     onContinue,
+    onBack,
     onCancel,
     onSubmit,
     onError,
-
-    // Handlers, controlled only:
-    handleStepPrev,
-    handleStepNext,
-    handleSubmit,
-
-    // Controlled mode:
-    isLoading: extIsLoading,
-    isCanContinue: extCanContinue,
   } = props;
 
-  const formId = uuidv4() as UUID;
-  const formMethods = useFormContext();
+  const steps = propSteps.map((step) => ({ ...step, schema: step.schema ?? z.object({}) }));
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const currentStep = steps[currentStepIndex];
+  const isFirstStep = currentStepIndex === 0;
+  const isLastStep = currentStepIndex === steps.length - 1;
 
-  
-  if (!formMethods || !formMethods.register) {
-    throw new Error('ProgressWizard must be used within a ProgressWizardFormProvider.');
-  }
+  const [loadingState, setLoadingState] = useState<LoadingState>(extLoadingState);
 
   useEffect(() => {
-    if (defaultValues)
-      Object.entries(defaultValues).forEach(([k, v]) => {
-        formMethods.setValue(k, v);
-      });
-  }, [defaultValues, formMethods]);
+    setLoadingState(extLoadingState);
+  }, [extLoadingState]);
 
-  const handlers = {
-    onContinue,
-    onCancel,
-    onSubmit,
-    onError,
+  const combinedSchema = steps.reduce((acc, step) => acc.merge(step.schema.strip()), z.object({}));
 
-    handleStepPrev,
-    handleStepNext,
-    handleSubmit,
+  const formMethods = useForm({
+    resolver: zodResolver(combinedSchema),
+    defaultValues,
+    mode: 'onSubmit',
+    shouldUnregister: false,
+  });
 
-    isLoading: extIsLoading,
-    isCanContinue: extCanContinue,
-  } as const;
+  const handleContinue = async () => {
+    formMethods.clearErrors();
+    setLoadingState('submitting');
+    const valid = await formMethods.trigger(Object.keys(currentStep.schema.shape));
+    if (onContinue && onContinue(formMethods.getValues()) === false) {
+      setLoadingState('idle');
+      return;
+    }
+    if (valid && !isLastStep) setCurrentStepIndex((idx) => idx + 1);
+    setLoadingState('idle');
+  };
 
-  const sharedProps = {
-    isControlled: false,
-    formId,
-    activeStepId,
-    steps,
-    customHeader,
-    startLabel,
-    cancelLabel,
-    backLabel,
-    continueLabel,
-    submitLabel,
-    fetcher,
-    action,
-  } as const;
+  const handleBack = () => {
+    if (onBack && onBack(formMethods.getValues()) === false) return;
+    if (!isFirstStep) setCurrentStepIndex((idx) => idx - 1);
+    else console.error('Cannot go back from first step');
+  };
 
-  const controlledProps = {
-    ...sharedProps,
-    isControlled: true,
-    isLoading: extIsLoading,
-    isCanContinue: extCanContinue,
-  } as const;
+  const handleCancel = () => {
+    if (onCancel) onCancel(formMethods.getValues());
+  };
+
+  const handleSubmit = onSubmit
+    ? formMethods.handleSubmit(
+        (data) => {
+          onSubmit(data);
+        },
+        (errors) => {
+          if (onError) onError(errors);
+        },
+      )
+    : async () => {
+        formMethods.clearErrors();
+        setLoadingState('submitting');
+        try {
+          const valid = await formMethods.trigger(Object.keys(currentStep.schema.shape));
+          if (valid) {
+            const form = document.querySelector('form[action]');
+            if (form && form instanceof HTMLFormElement) {
+              form.submit();
+            }
+          } else {
+            const errors = formMethods.formState.errors;
+            Object.entries(errors).forEach(([field, error]) => {
+              console.error(`Field "${field}" failed validation:`, error?.message);
+            });
+          }
+        } catch (error) {
+          if (onError) onError(error as FieldErrors);
+          console.error('Error submitting form:', error);
+        } finally {
+          setLoadingState('idle');
+        }
+      };
 
   return (
-    <ProgressWizardContextProvider
-      defaultState={defaultValues}
-      isControlled={isControlled}
-      steps={steps}
-      handlers={handlers}
-      extStepId={activeStepId}
-    >
-      <InnerProgressWizard {...(isControlled ? controlledProps : sharedProps)} ref={ref} />
-    </ProgressWizardContextProvider>
+    <FormProvider {...formMethods}>
+      <InnerProgressWizard
+        ref={ref}
+        steps={steps}
+        currentStepIndex={currentStepIndex}
+        setCurrentStepIndex={setCurrentStepIndex}
+        customHeader={customHeader}
+        buttonLabels={{ startLabel, cancelLabel, backLabel, continueLabel, submitLabel }}
+        loadingState={loadingState}
+        setLoadingState={setLoadingState}
+        action={action}
+        isFirstStep={isFirstStep}
+        isLastStep={isLastStep}
+        handleContinue={handleContinue}
+        handleBack={handleBack}
+        handleSubmit={handleSubmit}
+        handleCancel={handleCancel}
+      />
+    </FormProvider>
   );
 });
 

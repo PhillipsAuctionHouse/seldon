@@ -1,11 +1,9 @@
-import { useState } from 'react';
-import { useWizardForm } from './Hooks/useProgressWizardForm';
 import ProgressWizard from './ProgressWizard';
-import { ProgressWizardFormProvider } from './Providers/ProgressWizardFormProvider';
-import { type FormStep, type GenericFormState, type StepSchema } from './types';
+import { useRef } from 'react';
 import { z } from 'zod';
-import { type Meta } from '@storybook/react';
 import Input from '../../components/Input/Input';
+import { type Meta } from '@storybook/react';
+import { type FormStep } from './types';
 
 const meta = {
   title: 'Patterns/ProgressWizard',
@@ -14,204 +12,207 @@ const meta = {
 
 export default meta;
 
-// Example step schemas
-const nameStepSchema: StepSchema = z.object({
-  name: z.string().min(2, 'Name is required'),
-});
-const ageStepSchema: StepSchema = z.object({
-  age: z.preprocess(Number, z.number().min(18, 'Must be at least 18')),
-});
-const emailStepSchema: StepSchema = z.object({
-  email: z.string().email('Invalid email'),
-});
-
-// Example step components using useWizardForm
-const NameStep = () => {
-  const { registerProgressWizardInput } = useWizardForm();
-  return <Input {...registerProgressWizardInput('name', { isRequired: true })} placeholder="Name" />;
-};
-const AgeStep = () => {
-  const { registerProgressWizardInput } = useWizardForm();
-  return <Input {...registerProgressWizardInput('age', { isRequired: true })} type="number" placeholder="Age" />;
-};
-const EmailStep = () => {
-  const { registerProgressWizardInput } = useWizardForm();
-  return <Input {...registerProgressWizardInput('email', { isRequired: true })} type="email" placeholder="Email" />;
+const translations: Record<string, string> = {
+  name: 'Name',
+  nameRequired: 'Name is required',
+  email: 'Email',
+  emailRequired: 'Email is required',
+  age: 'Age',
+  ageRequired: 'Age is required',
 };
 
-const steps: FormStep[] = [
-  {
-    id: 'name',
-    label: 'Name',
-    component: NameStep,
-    schema: nameStepSchema,
-    hiddenFields: [],
-  },
-  {
-    id: 'age',
-    label: 'Age',
-    component: AgeStep,
-    schema: ageStepSchema,
-    hiddenFields: [],
-  },
-  {
-    id: 'email',
-    label: 'Email',
-    component: EmailStep,
-    schema: emailStepSchema,
-    hiddenFields: [],
-  },
-];
+const t = (key: string) => translations[key] || key;
 
-// Uncontrolled Example
-export const UncontrolledWizard = () => (
-  <ProgressWizard
-    isControlled={false}
-    steps={steps}
-    activeStepId={steps[0].id}
-    startLabel="Begin"
-    cancelLabel="Abort"
-    backLabel="Previous"
-    continueLabel="Next"
-    submitLabel="Finish"
-    customHeader={<h2>Uncontrolled Wizard Example</h2>}
-  />
-);
-
-// Controlled Example
-export const ControlledWizard = () => {
-  const [formState, _setFormState] = useState<GenericFormState>({});
-  const [activeStepId, setActiveStepId] = useState(steps[0].id);
-  const [canContinue, _setCanContinue] = useState(true);
-  const [isLoading, _setIsLoading] = useState(false);
-
-  const handleStepPrev = () => {
-    const idx = steps.findIndex((s) => s.id === activeStepId);
-    if (idx > 0) setActiveStepId(steps[idx - 1].id);
-  };
-  const handleStepNext = () => {
-    const idx = steps.findIndex((s) => s.id === activeStepId);
-    if (idx < steps.length - 1) setActiveStepId(steps[idx + 1].id);
-  };
-
-  const handleSubmit = () => {
-    alert('Submitted: ' + JSON.stringify(formState));
-  };
-
+// Story 1: Basic usage with custom error messages and onContinue/onCancel
+export const BasicWizard = () => {
+  const steps: FormStep[] = [
+    {
+      id: 'step1',
+      label: 'Step 1',
+      schema: z.object({
+        name: z.string().min(1, { message: 'Please enter your name' }),
+      }),
+      componentFactory: ({ registerProgressWizardInput }) => <Input {...registerProgressWizardInput('name')} />,
+    },
+    {
+      id: 'step2',
+      label: 'Step 2',
+      schema: z.object({
+        age: z.preprocess(Number, z.number().min(18, { message: 'You must be at least 18' })),
+      }),
+      componentFactory: ({ registerProgressWizardInput }) => (
+        <Input {...registerProgressWizardInput('age', { overrides: { type: 'number' } })} />
+      ),
+    },
+  ];
+  const alertedOnContinue = useRef(false);
   return (
-    <ProgressWizardFormProvider>
-      <ProgressWizard
-        isControlled={true}
-        steps={steps}
-        activeStepId={activeStepId}
-        startLabel="Start"
-        cancelLabel="Cancel"
-        backLabel="Back"
-        continueLabel="Continue"
-        submitLabel="Submit"
-        customHeader={<h2>Controlled Wizard Example</h2>}
-        isCanContinue={canContinue}
-        isLoading={isLoading}
-        handleStepPrev={handleStepPrev}
-        handleStepNext={handleStepNext}
-        handleSubmit={handleSubmit}
-        onCancel={() => setActiveStepId(steps[0].id)}
-        onError={(err) => alert('Error: ' + err)}
-        defaultValues={formState}
-      />
-    </ProgressWizardFormProvider>
+    <ProgressWizard
+      steps={steps}
+      loadingState="idle"
+      onContinue={() => {
+        if (!alertedOnContinue.current) {
+          alert(
+            'Called `onContinue`, which can prevent continuing if it returns `false`. Will hide this message until reload.',
+          );
+          alertedOnContinue.current = true;
+        }
+        return true;
+      }}
+      onCancel={() => alert('Called `onCancel`, without which cancelling does nothing')}
+      onSubmit={(data) => alert(`Called \`onSubmit\`. Form data: ${JSON.stringify(data)}`)}
+      startLabel="Start"
+      cancelLabel="Cancel"
+      backLabel="Back"
+      continueLabel="Continue"
+      submitLabel="Submit"
+    />
   );
 };
 
-// Example 3: Wizard with async validation
+// Story 2: Zod validation with translation function and onError
+export const TranslationWizard = () => {
+  const steps: FormStep[] = [
+    {
+      id: 'step1',
+      label: 'Step 1',
+      schema: z.object({
+        email: z.string().email({ message: t('emailRequired') }),
+      }),
+      componentFactory: ({ registerProgressWizardInput }) => (
+        <Input {...registerProgressWizardInput('email', { translationFunction: t })} />
+      ),
+    },
+  ];
+  return (
+    <ProgressWizard
+      steps={steps}
+      loadingState="idle"
+      onSubmit={(data) => alert('Submitted: ' + JSON.stringify(data))}
+      onError={(error) => alert('Error: ' + error.email?.message)}
+      startLabel="Start"
+      cancelLabel="Cancel"
+      backLabel="Back"
+      continueLabel="Continue"
+      submitLabel="Submit"
+    />
+  );
+};
+
+// Story 3: Async validation and all on* functions
+
+const asyncEmailSchema = z
+  .string()
+  .email({ message: 'Must be a valid email' })
+  .refine(
+    async (val) => {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      return val !== 'taken@example.com';
+    },
+    { message: 'Email is already taken' },
+  );
 export const AsyncValidationWizard = () => {
-  const [activeStepId, setActiveStepId] = useState(steps[0].id);
-  const [canContinue, _setCanContinue] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const steps: FormStep[] = [
+    {
+      id: 'step1',
+      label: 'Step 1',
+      schema: z.object({
+        email: asyncEmailSchema,
+      }),
+      componentFactory: ({ registerProgressWizardInput }) => (
+        <Input
+          {...registerProgressWizardInput('email', {
+            overrides: { labelText: "Type 'taken@example.com' for refinement error" },
+          })}
+        />
+      ),
+    },
+    {
+      id: 'step2',
+      label: 'Step 2',
+      schema: z.object({
+        confirm: z.string().min(1, { message: 'Please confirm.' }),
+      }),
+      componentFactory: ({ registerProgressWizardInput }) => <Input {...registerProgressWizardInput('confirm')} />,
+    },
+  ];
 
-  const handleStepNext = async () => {
-    setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setIsLoading(false);
-    const idx = steps.findIndex((s) => s.id === activeStepId);
-    if (idx < steps.length - 1) {
-      const schema = steps.find((s) => s.id === activeStepId)?.schema;
-      if (schema) {
-        const result = schema.safeParse(formMethods.getValues());
-        if (!result.success) {
-          result.error.issues.forEach((issue) => {
-            console.log(issue, issue.path);
-            formMethods.setError(String(issue.path[0]), {
-              type: 'manual',
-              message: issue.message,
-            });
-          });
-          return;
-        }
-      }
-      setActiveStepId(steps[idx + 1].id);
-    }
-  };
-
+  const alerts = useRef<string[]>([]);
   return (
-    <ProgressWizardFormProvider>
-      <ProgressWizard
-        isControlled={true}
-        steps={steps}
-        activeStepId={activeStepId}
-        startLabel="Start"
-        cancelLabel="Cancel"
-        backLabel="Back"
-        continueLabel="Continue"
-        submitLabel="Submit"
-        customHeader={<h2>Async Validation Wizard</h2>}
-        isCanContinue={canContinue}
-        isLoading={isLoading}
-        handleStepPrev={() => setActiveStepId(steps[0].id)}
-        handleStepNext={handleStepNext}
-        handleSubmit={() => alert('Async submit')}
-      />
-    </ProgressWizardFormProvider>
+    <ProgressWizard
+      steps={steps}
+      loadingState="idle"
+      onBack={() => {
+        if (!alerts.current.includes('Back')) {
+          alert('Back (will only alert once)');
+          alerts.current.push('Back');
+        }
+        return true;
+      }}
+      onContinue={() => {
+        if (!alerts.current.includes('Continue')) {
+          alert('Continue (will only alert once)');
+          alerts.current.push('Continue');
+        }
+        return true;
+      }}
+      onCancel={() => {
+        if (!alerts.current.includes('Cancel')) {
+          alert('Cancel (will only alert once)');
+          alerts.current.push('Cancel');
+        }
+      }}
+      onSubmit={(data) => alert('Submit: ' + JSON.stringify(data))}
+      onError={(error) => alert('Error: ' + JSON.stringify(error))}
+      startLabel="Start"
+      cancelLabel="Cancel"
+      backLabel="Back"
+      continueLabel="Continue"
+      submitLabel="Submit"
+    />
   );
 };
 
-// Example 4: Wizard with custom header and step skipping
-export const SkippingWizard = () => {
-  const [activeStepId, setActiveStepId] = useState(steps[0].id);
-  const [canContinue, _setCanContinue] = useState(true);
-
-  const handleStepNext = () => {
-    const idx = steps.findIndex((s) => s.id === activeStepId);
-    // Example: skip age step if name is 'Admin' (would need form state access 🎺TODO)
-    if (idx === 0 /* && formState.name === 'Admin' */) {
-      setActiveStepId(steps[2].id);
-    } else if (idx < steps.length - 1) {
-      setActiveStepId(steps[idx + 1].id);
-    }
-  };
-
+// Story 4: Mixed usage, translation, and custom error
+export const MixedWizard = () => {
+  const steps: FormStep[] = [
+    {
+      id: 'step1',
+      label: 'Step 1',
+      schema: z.object({
+        username: z.string().min(3, { message: 'Username must be at least 3 characters.' }),
+      }),
+      componentFactory: ({ registerProgressWizardInput }) => <Input {...registerProgressWizardInput('username')} />,
+    },
+    {
+      id: 'step2',
+      label: 'Step 2',
+      schema: z.object({
+        password: z.string().min(6, { message: t('passwordRequired') }),
+      }),
+      componentFactory: ({ registerProgressWizardInput }) => (
+        <Input
+          {...registerProgressWizardInput('password', { overrides: { type: 'password' }, translationFunction: t })}
+        />
+      ),
+    },
+  ];
   return (
-    <ProgressWizardFormProvider>
-      <ProgressWizard
-        isControlled={true}
-        steps={steps}
-        activeStepId={activeStepId}
-        startLabel="Start"
-        cancelLabel="Cancel"
-        backLabel="Back"
-        continueLabel="Continue"
-        submitLabel="Submit"
-        customHeader={
-          <div>
-            <h2>Skipping Wizard</h2>
-            <p>Custom header with instructions.</p>
-          </div>
-        }
-        isCanContinue={canContinue}
-        handleStepPrev={() => setActiveStepId(steps[0].id)}
-        handleStepNext={handleStepNext}
-        handleSubmit={() => alert('Skipped submit')}
-      />
-    </ProgressWizardFormProvider>
+    <ProgressWizard
+      steps={steps}
+      loadingState="idle"
+      onContinue={() => {
+        alert('Continue');
+        return true;
+      }}
+      onCancel={() => alert('Cancel')}
+      onSubmit={(data) => alert('Submit: ' + JSON.stringify(data))}
+      onError={(error) => alert('Error: ' + JSON.stringify(error))}
+      startLabel="Start"
+      cancelLabel="Cancel"
+      backLabel="Back"
+      continueLabel="Continue"
+      submitLabel="Submit"
+    />
   );
 };
