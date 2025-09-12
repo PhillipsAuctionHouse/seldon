@@ -1,3 +1,10 @@
+## [1.195.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.195.1...v1.195.2) (2025-09-12)
+
+
+### Bug Fixes
+
+* **favorites:** L3-6817 icons are an invalid color token ([#725](https://github.com/PhillipsAuctionHouse/seldon/issues/725)) ([272cf80](https://github.com/PhillipsAuctionHouse/seldon/commit/272cf809fae1b38dbb1de1c2ab8ea51f88a647d7))
+
 ## [1.195.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.195.0...v1.195.1) (2025-09-11)
 
 
