@@ -10,7 +10,7 @@ import {
 } from './types';
 import InnerProgressWizard from './components/InnerProgressWizard';
 import { z } from 'zod';
-import { mergeZodEffects, clog } from './utils';
+import { mergeZodEffects } from './utils';
 import { v4 as uuidv4 } from 'uuid'
 
 /**
