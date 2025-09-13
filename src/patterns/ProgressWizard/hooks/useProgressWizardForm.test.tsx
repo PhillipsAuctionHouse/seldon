@@ -2,7 +2,7 @@ import { type FC, type ReactNode } from 'react';
 import { describe, expect, it } from 'vitest';
 
 import { useForm, FormProvider, FieldError } from 'react-hook-form';
-import useProgressWizardForm from '../useProgressWizardForm';
+import useProgressWizardForm from './useProgressWizardForm';
 import { renderHook } from '@testing-library/react';
 
 const wrapper: FC<{ children: ReactNode }> = ({ children }) => {

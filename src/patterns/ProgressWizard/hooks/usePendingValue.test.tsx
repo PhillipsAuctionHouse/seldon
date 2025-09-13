@@ -1,7 +1,7 @@
 import React from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { useForm, FormProvider } from 'react-hook-form';
-import { usePendingValue } from '../usePendingValue';
+import { usePendingValue } from './usePendingValue';
 import { renderHook, waitFor, act } from '@testing-library/react';
 
 const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
