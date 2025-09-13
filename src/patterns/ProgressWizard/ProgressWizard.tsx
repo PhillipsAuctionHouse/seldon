@@ -11,7 +11,7 @@ import {
 import InnerProgressWizard from './components/InnerProgressWizard';
 import { z } from 'zod';
 import { mergeZodEffects } from './utils';
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid';
 
 /**
  * Props for the main ProgressWizard component. Accepts either 'action' or 'onSubmit', but not both.
