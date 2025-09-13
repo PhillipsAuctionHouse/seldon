@@ -1,22 +1,22 @@
-import React from 'react';
+import { type FC, type ReactNode } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { useForm, FormProvider } from 'react-hook-form';
 import { usePendingValue } from './usePendingValue';
 import { renderHook, waitFor, act } from '@testing-library/react';
 
-const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const useWrapper: FC<{ children: ReactNode }> = ({ children }) => {
   const methods = useForm();
   return <FormProvider {...methods}>{children}</FormProvider>;
 };
 
 describe('usePendingValue', () => {
   it('should initialize with undefined pendingValue', () => {
-    const { result } = renderHook(() => usePendingValue('field'), { wrapper });
+    const { result } = renderHook(() => usePendingValue('field'), { wrapper: useWrapper });
     expect(result.current.pendingValue).toBeUndefined();
   });
 
   it('should set pendingValue', async () => {
-    const { result, rerender } = renderHook(() => usePendingValue('field'), { wrapper });
+    const { result, rerender } = renderHook(() => usePendingValue('field'), { wrapper: useWrapper });
     act(() => {
       result.current.setPendingValue('SuperBass');
     });
@@ -27,7 +27,7 @@ describe('usePendingValue', () => {
   });
 
   it('should clear pendingValue after apply', async () => {
-    const { result, rerender } = renderHook(() => usePendingValue('field'), { wrapper });
+    const { result, rerender } = renderHook(() => usePendingValue('field'), { wrapper: useWrapper });
     act(() => {
       result.current.setPendingValue('Moment4Life');
     });
@@ -41,7 +41,7 @@ describe('usePendingValue', () => {
   });
 
   it('should not clear pendingValue if additionalAction returns false', async () => {
-    const { result, rerender } = renderHook(() => usePendingValue('field', () => false), { wrapper });
+    const { result, rerender } = renderHook(() => usePendingValue('field', () => false), { wrapper: useWrapper });
     act(() => {
       result.current.setPendingValue('Anaconda');
     });
@@ -56,7 +56,7 @@ describe('usePendingValue', () => {
 
   it('should call additionalAction after apply', async () => {
     const mockAction = vi.fn();
-    const { result, rerender } = renderHook(() => usePendingValue('field', mockAction), { wrapper });
+    const { result, rerender } = renderHook(() => usePendingValue('field', mockAction), { wrapper: useWrapper });
     act(() => {
       result.current.setPendingValue('ChunLi');
     });
@@ -71,7 +71,7 @@ describe('usePendingValue', () => {
 
   it('should log error if applyPendingValue called with no pendingValue', async () => {
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => void 0);
-    const { result } = renderHook(() => usePendingValue('field'), { wrapper });
+    const { result } = renderHook(() => usePendingValue('field'), { wrapper: useWrapper });
     result.current.applyPendingValue();
     await waitFor(() => {
       expect(errorSpy).toHaveBeenCalledWith(

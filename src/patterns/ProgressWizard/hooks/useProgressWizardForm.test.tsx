@@ -8,19 +8,19 @@ beforeEach(() => {
   vi.resetModules();
   vi.unmock('react-hook-form');
 });
-const wrapper: FC<{ children: ReactNode }> = ({ children }) => {
+const useWrapper: FC<{ children: ReactNode }> = ({ children }) => {
   const methods = useForm();
   return <FormProvider {...methods}>{children}</FormProvider>;
 };
 
 describe('useProgressWizardForm', () => {
   it('should return registerProgressWizardInput function', () => {
-    const { result } = renderHook(() => useProgressWizardForm(), { wrapper });
+    const { result } = renderHook(() => useProgressWizardForm(), { wrapper: useWrapper });
     expect(typeof result.current.registerProgressWizardInput).toBe('function');
   });
 
   it('should register field with default options', () => {
-    const { result } = renderHook(() => useProgressWizardForm(), { wrapper });
+    const { result } = renderHook(() => useProgressWizardForm(), { wrapper: useWrapper });
     const props = result.current.registerProgressWizardInput('language', {});
     expect(props.id).toBe('0.language');
     expect(props.labelText).toBe('Language*');
@@ -29,26 +29,26 @@ describe('useProgressWizardForm', () => {
   });
 
   it('should use displayName if provided', () => {
-    const { result } = renderHook(() => useProgressWizardForm(), { wrapper });
+    const { result } = renderHook(() => useProgressWizardForm(), { wrapper: useWrapper });
     const props = result.current.registerProgressWizardInput('Bees', { displayName: 'Bees!' });
     expect(props.labelText).toBe('Bees!*');
   });
 
   it('should use translationFunction if provided', () => {
     const translationFunction = (key: string) => (key === 'TruffleButter' ? 'Truffle Butter Label' : undefined);
-    const { result } = renderHook(() => useProgressWizardForm(), { wrapper });
+    const { result } = renderHook(() => useProgressWizardForm(), { wrapper: useWrapper });
     const props = result.current.registerProgressWizardInput('TruffleButter', { translationFunction });
     expect(props.labelText).toBe('Truffle Butter Label*');
   });
 
   it('should use stepId for namespacing', () => {
-    const { result } = renderHook(() => useProgressWizardForm(), { wrapper });
+    const { result } = renderHook(() => useProgressWizardForm(), { wrapper: useWrapper });
     const props = result.current.registerProgressWizardInput('FormFodder', {}, '2');
     expect(props.id).toBe('2.FormFodder');
   });
 
   it('should override props if overrides provided', () => {
-    const { result } = renderHook(() => useProgressWizardForm(), { wrapper });
+    const { result } = renderHook(() => useProgressWizardForm(), { wrapper: useWrapper });
     const props = result.current.registerProgressWizardInput('input!!', { overrides: { 'aria-label': 'test' } });
     expect(props['aria-label']).toBe('test');
   });
