@@ -1,23 +1,12 @@
-import { cleanup, configure } from '@testing-library/react';
+import { cleanup } from '@testing-library/react';
 import { afterEach, beforeEach, vi, type MockInstance } from 'vitest';
 import '@testing-library/jest-dom/vitest';
 
-const stopTheHtmlFlood = false;
-export let consoleError: MockInstance<(typeof console)['error']>;
+export let consoleError: MockInstance<Parameters<(typeof console)['error']>>;
 
 const originalWindow = window;
 
 beforeEach(() => {
-  if (stopTheHtmlFlood) {
-    configure({
-      getElementError: (message: string | null, _container: Element) => {
-        const error = new Error(message ?? '');
-        error.name = 'TestingLibraryElementError';
-        error.stack = undefined;
-        return error;
-      },
-    });
-  }
   const originalConsoleError = console.error;
   consoleError = vi.spyOn(console, 'error');
   consoleError.mockImplementation((...args: Parameters<typeof console.error>) => {

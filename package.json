@@ -67,7 +67,6 @@
     "html-react-parser": "^5.2.2",
     "ics": "^3.8.1",
     "libphonenumber-js": "^1.12.6",
-    "react-hook-form": "^7.62.0",
     "react-intersection-observer": "^9.13.1",
     "react-remove-scroll": "^2.6.3",
     "react-transition-group": "^4.4.5",
@@ -126,6 +125,7 @@
     "react": "^18.3.1",
     "react-docgen-typescript": "^2.2.2",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.62.0",
     "rimraf": "^6.0.1",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
@@ -144,11 +144,12 @@
     "vite-plugin-dts": "^4.2.4",
     "vite-plugin-svgr": "^4.2.0",
     "vite-tsconfig-paths": "^4.3.2",
-    "vitest": "^1.6.0",
-    "zod": "^3.23.8"
+    "vitest": "^3.2.4"
   },
   "peerDependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.62.0",
+    "zod": "^3.23.8"
   }
 }
