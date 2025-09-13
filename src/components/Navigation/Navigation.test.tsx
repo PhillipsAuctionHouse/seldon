@@ -4,8 +4,9 @@ import Search from '../Search/Search';
 import NavigationList from './NavigationList/NavigationList';
 import NavigationItem from './NavigationItem/NavigationItem';
 import { LanguageSelector } from '../../patterns/LanguageSelector';
-import { HeaderContext, HeaderContextType } from '../../site-furniture/Header/Header';
+import { HeaderContextType } from '../../site-furniture/Header/Header';
 import { defaultHeaderContext } from '../../site-furniture/Header/utils';
+import { HeaderContext } from '../../site-furniture/Header/HeaderContext';
 
 const defaultProps: NavigationProps = {
   id: 'phillips-nav',

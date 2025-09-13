@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { ComponentProps, forwardRef, useEffect } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import { SSRMediaQuery } from '../../../providers/SeldonProvider/utils';
-import { HeaderContext } from '../../../site-furniture/Header/Header';
+import { HeaderContext } from '../../../site-furniture/Header/HeaderContext';
 import { findChildrenOfType, focusElementById, getCommonProps, px } from '../../../utils';
 import { AccordionItemVariant } from '../../Accordion';
 import Accordion from '../../Accordion/Accordion';

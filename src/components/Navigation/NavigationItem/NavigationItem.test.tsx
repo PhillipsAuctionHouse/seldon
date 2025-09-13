@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import NavigationItem from './NavigationItem';
-import { HeaderContext } from '../../../site-furniture/Header/Header';
+import { HeaderContext } from '../../../site-furniture/Header/HeaderContext';
 import userEvent from '@testing-library/user-event';
 import { defaultHeaderContext } from '../../../site-furniture/Header/utils';
 
