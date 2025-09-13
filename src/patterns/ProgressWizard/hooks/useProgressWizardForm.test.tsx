@@ -1,10 +1,13 @@
-import { type FC, type ReactNode } from 'react';
+import { type FC, type ReactNode, useEffect } from 'react';
 import { describe, expect, it } from 'vitest';
-
-import { useForm, FormProvider, FieldError } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import useProgressWizardForm from './useProgressWizardForm';
 import { renderHook } from '@testing-library/react';
 
+beforeEach(() => {
+  vi.resetModules();
+  vi.unmock('react-hook-form');
+});
 const wrapper: FC<{ children: ReactNode }> = ({ children }) => {
   const methods = useForm();
   return <FormProvider {...methods}>{children}</FormProvider>;
@@ -51,12 +54,21 @@ describe('useProgressWizardForm', () => {
   });
 
   it('should set invalid and invalidText if error present', () => {
-    const wrapperWithError: FC<{ children: ReactNode }> = ({ children }) => {
-      const methods = useForm();
-      methods.formState.errors = { '0': { name: { message: 'name error' } as FieldError } }; // 🎺TODO why is this assertion necessary?
-      return <FormProvider {...methods}>{children}</FormProvider>;
-    };
-    const { result } = renderHook(() => useProgressWizardForm(), { wrapper: wrapperWithError });
+    vi.mock('react-hook-form', async () => ({
+      ...(await vi.importActual('react-hook-form')),
+      useFormContext: () => ({
+        register: () => ({}),
+        formState: {
+          errors: {
+            '0': {
+              name: { message: 'name error' },
+            },
+          },
+        },
+      }),
+    }));
+
+    const { result } = renderHook(() => useProgressWizardForm());
     const props = result.current.registerProgressWizardInput('name', {});
     expect(props.invalid).toBe(true);
     expect(props.invalidText).toBe('name error');
@@ -64,13 +76,15 @@ describe('useProgressWizardForm', () => {
 
   it('should use translationFunction for required error', () => {
     const translationFunction = (key: string) => (key === 'ageRequired' ? 'Age is required' : undefined);
-    const wrapperWithError: FC<{ children: ReactNode }> = ({ children }) => {
+    const useWrapperWithError: FC<{ children: ReactNode }> = ({ children }) => {
       const methods = useForm();
-      methods.formState.errors = { '0': { age: { message: undefined } } };
+      useEffect(() => {
+        methods.setError('0.age', { type: 'manual', message: undefined });
+      }, [methods]);
       return <FormProvider {...methods}>{children}</FormProvider>;
     };
-    const { result } = renderHook(() => useProgressWizardForm(), { wrapper: wrapperWithError });
+    const { result } = renderHook(() => useProgressWizardForm(), { wrapper: useWrapperWithError });
     const props = result.current.registerProgressWizardInput('age', { translationFunction });
-    expect(props.invalidText).toBe('age is required');
+    expect(props.invalidText).toBe('Age is required');
   });
 });

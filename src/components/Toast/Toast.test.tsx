@@ -5,6 +5,8 @@ import { ToastProvider } from './ToastContextProvider';
 import Toast, { PrimitiveToastProps } from './Toast';
 import { ReactNode } from 'react';
 
+/* eslint-disable react/prop-types */
+
 interface ToastMockProps {
   children?: ReactNode;
   className?: string;

@@ -70,7 +70,7 @@ describe('usePendingValue', () => {
   });
 
   it('should log error if applyPendingValue called with no pendingValue', async () => {
-    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => void 0);
     const { result } = renderHook(() => usePendingValue('field'), { wrapper });
     result.current.applyPendingValue();
     await waitFor(() => {
