@@ -77,11 +77,15 @@ const InnerProgressWizard = forwardRef<HTMLDivElement, InnerProgressWizardProps>
   } = props;
 
   const { className: baseClassName, ...commonProps } = getCommonProps(rest, 'ProgressWizard');
-  const currentStep = steps[currentStepIndex] ?? {
-    id: '0',
-    label: '',
-    componentFactory: () => <span>No step found at index {currentStepIndex}</span>,
-  };
+  const currentStep = useMemo(
+    () =>
+      steps[currentStepIndex] ?? {
+        id: '0',
+        label: '',
+        componentFactory: () => <span>No step found at index {currentStepIndex}</span>,
+      },
+    [steps, currentStepIndex],
+  );
   const formMethods = useFormContext();
 
   useEffect(() => {

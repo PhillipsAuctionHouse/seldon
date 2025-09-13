@@ -9,6 +9,10 @@ const useWrapper: FC<{ children: ReactNode }> = ({ children }) => {
   return <FormProvider {...methods}>{children}</FormProvider>;
 };
 
+beforeEach(() => {
+  vi.unmock('react-hook-form');
+});
+
 describe('useProgressWizardForm', () => {
   it('should return registerProgressWizardInput function', () => {
     const { result } = renderHook(() => useProgressWizardForm(), { wrapper: useWrapper });
@@ -68,7 +72,6 @@ describe('useProgressWizardForm', () => {
     const props = result.current.registerProgressWizardInput('name', {});
     expect(props.invalid).toBe(true);
     expect(props.invalidText).toBe('name error');
-    vi.unmock('react-hook-form');
   });
 
   it('should use translationFunction for required error', () => {
