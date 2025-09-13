@@ -125,7 +125,7 @@ export type Overrides = Partial<
 export type RegisterProgressWizardInputOptions<N extends FieldName<GenericFormState> = string> = {
   isRequired?: boolean;
   overrides?: Overrides;
-  translationFunction?: (key: N | `${N}Required`) => string;
+  translationFunction?: (key: N | `${N}Required`) => string | undefined;
   registerOptions?: RegisterOptions;
   displayName?: string;
 };
@@ -147,7 +147,7 @@ export type RegisterProgressWizardInputReturn = (Omit<ReturnType<FormMethods['re
 
 /**
  * Hook for ProgressWizard form logic. Provides input registration for wizard steps.
- * 
+ *
  * @returns Object with registerProgressWizardInput function
  * @function registerProgressWizardInput - Registers a field for use in the wizard, returns props and handlers for your input
  *

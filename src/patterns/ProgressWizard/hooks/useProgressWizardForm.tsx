@@ -55,9 +55,9 @@ export const useProgressWizardForm: UseProgressWizardForm = () => {
         stepErrors && fieldName in stepErrors ? stepErrors[fieldName as keyof typeof stepErrors] : undefined;
       const label = displayName ?? translationFunction?.(fieldName) ?? capitalize(fieldName);
       const invalidText =
-        (typeof error === 'string' ? error : ((error as FieldError)?.message ?? String(error))) ??
+        (typeof error === 'string' ? error : (error as FieldError)?.message) ??
         translationFunction?.(`${fieldName}Required`) ??
-        capitalize(fieldName).replace('Required', ' required');
+        `${capitalize(fieldName)} required`;
 
       return {
         ...formMethods.register(namespacedFieldName, registerOptions),

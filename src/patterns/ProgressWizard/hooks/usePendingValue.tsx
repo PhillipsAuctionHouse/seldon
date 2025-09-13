@@ -1,5 +1,4 @@
-
-import { useState } from 'react';
+import { useState, useRef, useEffect, type Dispatch, type SetStateAction } from 'react';
 import { type PathValue, useFormContext, type FieldValues, type Path } from 'react-hook-form';
 
 /**
@@ -38,15 +37,30 @@ export type UsePendingValueReturn<T extends FieldValues> = {
  */
 export const usePendingValue = <T extends FieldValues>(
   fieldName: Path<T>,
-  additionalAction?: () => void | false // e.g., resetting a state value when the user deselects US
+  additionalAction?: () => void | false, // e.g., resetting a state value when the user deselects US
 ): UsePendingValueReturn<T> => {
   const formMethods = useFormContext<T>();
-  const [pendingValue, setPendingValue] = useState<PathValue<T, Path<T>> | undefined>();
-  const applyPendingValue = () => {
-    if (pendingValue) formMethods.setValue(fieldName, pendingValue);
-    else console.error('usePendingValue', 'Cannot apply pending value when none has been set via `setPendingValue`');
-    if (additionalAction && additionalAction() === false) return;
-    setPendingValue(undefined);
+  const [pendingValue, setPendingValueState] = useState<PathValue<T, Path<T>> | undefined>();
+  const pendingValueRef = useRef<PathValue<T, Path<T>> | undefined>(pendingValue);
+
+  // Keep ref in sync with state, there seem to be stale closures to deal with
+  useEffect(() => {
+    pendingValueRef.current = pendingValue;
+  }, [pendingValue]);
+
+  const setPendingValue: Dispatch<SetStateAction<PathValue<T, Path<T>> | undefined>> = (value) => {
+    setPendingValueState(value);
+    // The effect will sync the ref
   };
+
+  const applyPendingValue = () => {
+    const value = pendingValueRef.current;
+    if (value !== undefined) formMethods.setValue(fieldName, value);
+    else console.error('usePendingValue', 'Cannot apply pending value when none has been set via `setPendingValue`');
+
+    if (additionalAction && additionalAction() === false) return;
+    setPendingValueState(undefined);
+  };
+
   return { setPendingValue, applyPendingValue, pendingValue };
 };
