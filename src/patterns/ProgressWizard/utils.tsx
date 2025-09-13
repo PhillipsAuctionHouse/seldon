@@ -27,8 +27,10 @@ export const handleHiddenFields: HandleHiddenFields = (allFields, hiddenFields) 
         } else {
           const [prevType, prevTabIndex] = (el.getAttribute('data-prev') ?? '').split('|');
           el.removeAttribute('aria-hidden');
-          if (prevType) el.setAttribute('type', prevType);
-          if (prevTabIndex) el.setAttribute('tabindex', prevTabIndex);
+          if (prevType && prevType !== 'null') el.setAttribute('type', prevType);
+          else if (el.tagName.toLowerCase() !== 'input') el.removeAttribute('type');
+          if (prevTabIndex && prevTabIndex !== 'null') el.setAttribute('tabindex', prevTabIndex);
+          else el.setAttribute('tabindex', '0');
           el.removeAttribute('data-prev');
         }
       });
