@@ -85,7 +85,10 @@ export const TranslationWizard = () => {
       id: 'step1',
       label: 'Step 1',
       schema: z.object({
-        email: z.string().min(1, { message: t('emailRequired') }).email({ message: t('emailInvalid') }),
+        email: z
+          .string()
+          .min(1, { message: t('emailRequired') })
+          .email({ message: t('emailInvalid') }),
       }),
       componentFactory: ({ registerProgressWizardInput }) => (
         <Input {...registerProgressWizardInput('email', { translationFunction: t })} />
@@ -109,7 +112,6 @@ export const TranslationWizard = () => {
 };
 
 // Story 3: Async validation and all on* functions
-
 const asyncEmailSchema = z
   .string()
   .email({ message: 'Must be a valid email' })

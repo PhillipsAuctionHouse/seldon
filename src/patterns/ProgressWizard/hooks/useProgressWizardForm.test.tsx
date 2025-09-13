@@ -4,10 +4,6 @@ import { useForm, FormProvider } from 'react-hook-form';
 import useProgressWizardForm from './useProgressWizardForm';
 import { renderHook } from '@testing-library/react';
 
-beforeEach(() => {
-  vi.resetModules();
-  vi.unmock('react-hook-form');
-});
 const useWrapper: FC<{ children: ReactNode }> = ({ children }) => {
   const methods = useForm();
   return <FormProvider {...methods}>{children}</FormProvider>;
@@ -72,6 +68,7 @@ describe('useProgressWizardForm', () => {
     const props = result.current.registerProgressWizardInput('name', {});
     expect(props.invalid).toBe(true);
     expect(props.invalidText).toBe('name error');
+    vi.unmock('react-hook-form');
   });
 
   it('should use translationFunction for required error', () => {

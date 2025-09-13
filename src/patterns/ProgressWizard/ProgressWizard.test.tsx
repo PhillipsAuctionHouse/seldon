@@ -5,7 +5,7 @@ import { z } from 'zod';
 import Input from '../../components/Input/Input';
 import { type LoadingState, type FormStep } from './types';
 import userEvent from '@testing-library/user-event';
-import { useState } from 'react';
+import { useState, type FC } from 'react';
 
 beforeAll(() => {
   configure({
@@ -170,7 +170,7 @@ describe('ProgressWizard', () => {
       },
     ];
 
-    const TestWrapper: React.FC = () => {
+    const TestWrapper: FC = () => {
       const [fetcherState, setFetcherState] = useState<LoadingState>('idle');
       const onSubmit = vi.fn(async () => {
         setFetcherState('loading');

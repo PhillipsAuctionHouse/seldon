@@ -1,4 +1,11 @@
-import { type ComponentProps, type ReactNode, type ReactElement, type Dispatch, type SetStateAction } from 'react';
+import {
+  type ComponentProps,
+  type ReactNode,
+  type ReactElement,
+  type Dispatch,
+  type SetStateAction,
+  type Ref,
+} from 'react';
 import { type UnknownKeysParam, type z } from 'zod';
 import {
   type useForm,
@@ -141,7 +148,7 @@ export type RegisterProgressWizardInputOptions<N extends FieldName<GenericFormSt
  * <Input {...registerProgressWizardInput('email')} />
  */
 export type RegisterProgressWizardInputReturn = (Omit<ReturnType<FormMethods['register']>, 'ref' | 'form'> & {
-  ref: React.Ref<HTMLFormInputElement> | string;
+  ref: Ref<HTMLFormInputElement> | string;
 }) &
   (Omit<Overrides, 'id' | 'labelText'> & Required<Pick<Overrides, 'id' | 'labelText'>>);
 
@@ -234,12 +241,10 @@ export type CallbackProps = {
  * @property handleBack - Returns to the previous step (calls onBack if provided)
  * @property handleSubmit - Submits the form (calls onSubmit instead of doing the native form submit if provided)
  * @property handleCancel - Cancels the wizard (calls onCancel if provided)
- * @property handleError - Handles validation errors (calls onError if provided)
  */
 export type Handlers = {
   handleContinue: () => void;
   handleBack: () => void;
   handleSubmit?: () => void;
   handleCancel?: () => void;
-  handleError?: (error: FieldErrors) => void;
 };

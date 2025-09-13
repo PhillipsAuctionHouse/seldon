@@ -10,6 +10,41 @@ const useWrapper: FC<{ children: ReactNode }> = ({ children }) => {
 };
 
 describe('usePendingValue', () => {
+  it('should handle setPendingValue(undefined)', async () => {
+    const { result, rerender } = renderHook(() => usePendingValue('field'), { wrapper: useWrapper });
+    act(() => {
+      result.current.setPendingValue(undefined);
+    });
+    rerender();
+    await waitFor(() => {
+      expect(result.current.pendingValue).toBeUndefined();
+    });
+  });
+
+  it('should not throw or change state when applyPendingValue is called multiple times in a row', async () => {
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => void 0);
+    const { result, rerender } = renderHook(() => usePendingValue('field'), { wrapper: useWrapper });
+    act(() => {
+      result.current.setPendingValue('Starships');
+    });
+    rerender();
+    act(() => {
+      result.current.applyPendingValue();
+    });
+    rerender();
+    act(() => {
+      result.current.applyPendingValue();
+    });
+    rerender();
+    await waitFor(() => {
+      expect(result.current.pendingValue).toBeUndefined();
+      expect(errorSpy).toHaveBeenCalledWith(
+        'usePendingValue',
+        'Cannot apply pending value when none has been set via `setPendingValue`',
+      );
+    });
+    errorSpy.mockRestore();
+  });
   it('should initialize with undefined pendingValue', () => {
     const { result } = renderHook(() => usePendingValue('field'), { wrapper: useWrapper });
     expect(result.current.pendingValue).toBeUndefined();

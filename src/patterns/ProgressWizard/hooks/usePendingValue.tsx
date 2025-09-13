@@ -12,7 +12,7 @@ import { type PathValue, useFormContext, type FieldValues, type Path } from 'rea
  * const { setPendingValue, applyPendingValue, pendingValue } = usePendingValue('country');
  */
 export type UsePendingValueReturn<T extends FieldValues> = {
-  setPendingValue: React.Dispatch<React.SetStateAction<PathValue<T, Path<T>> | undefined>>;
+  setPendingValue: Dispatch<SetStateAction<PathValue<T, Path<T>> | undefined>>;
   applyPendingValue: () => void;
   pendingValue: PathValue<T, Path<T>> | undefined;
 };
@@ -50,7 +50,6 @@ export const usePendingValue = <T extends FieldValues>(
 
   const setPendingValue: Dispatch<SetStateAction<PathValue<T, Path<T>> | undefined>> = (value) => {
     setPendingValueState(value);
-    // The effect will sync the ref
   };
 
   const applyPendingValue = () => {

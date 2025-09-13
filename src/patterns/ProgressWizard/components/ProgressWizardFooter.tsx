@@ -40,8 +40,12 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
   labels,
   isCanContinue,
   isLoading,
-  handleBack,
-  handleCancel,
+  handleBack = () => {
+    console.warn('No handleBack provided');
+  },
+  handleCancel = () => {
+    console.warn('No handleCancel provided');
+  },
 }) => {
   const secondaryLabel = isFirstStep ? labels.cancelLabel : labels.backLabel;
   const secondaryAria = secondaryLabel ?? 'Go Back';
