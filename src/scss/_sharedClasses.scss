@@ -19,12 +19,13 @@
   background-image: none !important;
   background-clip: initial !important;
   border-radius: 0.1875rem !important;
-
+  /* stylelint-disable-next-line declaration-property-value-allowed-list */
   border-color: #0000 !important;
   box-shadow: none !important;
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-box-decoration-break: clone !important;
   box-decoration-break: clone !important;
+  /* stylelint-disable-next-line declaration-property-value-allowed-list */
   color: #0000 !important;
   outline: none !important;
   pointer-events: none !important;
@@ -48,6 +49,10 @@ input[type='radio'].#{$px}-skeleton {
 
 button.#{$px}-skeleton {
   border-radius: 6.25rem !important;
+
+  svg path {
+    fill: transparent !important;
+  }
 }
 
 .#{$px}-toggle-input {
@@ -62,10 +67,10 @@ button.#{$px}-skeleton {
 
 @keyframes skeleton-pulse {
   0% {
-    background-color: #0000000f;
+    background-color: $grey-50;
   }
 
   100% {
-    background-color: #0000001f;
+    background-color: $black-25;
   }
 }

@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 import { Meta } from '@storybook/react';
 import React, { useEffect, useRef, useState } from 'react';
 import { LanguageSelector } from '../../patterns/LanguageSelector';
@@ -16,14 +15,7 @@ import NavigationList from '../Navigation/NavigationList/NavigationList';
 import Search, { SearchProps } from '../Search/Search';
 import { SearchResult } from '../Search/SearchResults/SearchResults';
 import NotificationBanner, { NotificationBannerProps } from './NotificationBanner';
-
-const generateLoremIpsum = (numOfParagraphs = 10) => {
-  let loremIpsum = '';
-  for (let i = 0; i < numOfParagraphs; i++) {
-    loremIpsum += faker.lorem.paragraph();
-  }
-  return loremIpsum;
-};
+import { LOREM_HUGE } from '../../utils/staticContent';
 
 const fetchData = async () => {
   let searchResults: { makers: Array<SearchResult> } = { makers: [] };
@@ -101,12 +93,10 @@ export const Playground = (props: NotificationBannerProps) => (
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
   children: (
-    <div style={{ fontWeight: '600', color: 'black', fontSize: '16px' }}>
-      <a href="#" style={{ textDecoration: 'underline', cursor: 'pointer' }}>
-        Our Moved by Beauty: Works by Lucie Rie from an Important Asian Collection Sale
-      </a>{' '}
-      is currently experiencing technical difficulties and there is a delay with livestream sale room bidding. You can
-      bid, but there may be a delay with confirmations.
+    <div>
+      <a href="#">Our Moved by Beauty: Works by Lucie Rie from an Important Asian Collection Sale</a> is currently
+      experiencing technical difficulties and there is a delay with livestream sale room bidding. You can bid, but there
+      may be a delay with confirmations.
     </div>
   ),
 };
@@ -121,12 +111,10 @@ export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setNotificationData(
-        <div style={{ fontWeight: 600, color: 'black', fontSize: 16 }}>
-          <a href="#" style={{ textDecoration: 'underline', cursor: 'pointer' }}>
-            Our Moved by Beauty: Works by Lucie Rie from an Important Asian Collection Sale
-          </a>{' '}
-          is currently experiencing technical difficulties and there is a delay with livestream sale room bidding. You
-          can bid, but there may be a delay with confirmations.
+        <div>
+          <a href="#">Our Moved by Beauty: Works by Lucie Rie from an Important Asian Collection Sale</a> is currently
+          experiencing technical difficulties and there is a delay with livestream sale room bidding. You can bid, but
+          there may be a delay with confirmations.
         </div>,
       );
     }, 10);
@@ -352,8 +340,41 @@ export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: 
         <UserManagement authState={authState} onLogin={() => console.log('login')} href="/account" />
       </Header>
       <div style={{ paddingTop: `${180 + (bannerRef.current?.offsetHeight || 0)}px` } as React.CSSProperties}>
-        {generateLoremIpsum(100)}
+        <div>{LOREM_HUGE}</div>
       </div>
     </div>
   );
+};
+
+export const StringMessage = (props: NotificationBannerProps) => (
+  <div style={{ height: '100px' }}>
+    <NotificationBanner {...props} />
+  </div>
+);
+
+StringMessage.args = {
+  children: 'You can bid, but there may be a delay with confirmations.',
+};
+
+export const NestedMessage = (props: NotificationBannerProps) => (
+  <div style={{ height: '100px' }}>
+    <NotificationBanner {...props} />
+  </div>
+);
+
+NestedMessage.args = {
+  children: (
+    <>
+      <div>
+        Test Message:
+        <br />
+        <div>
+          Click here to:
+          <a href="#" className={`${px}-notification-banner-link`}>
+            Learn more
+          </a>
+        </div>
+      </div>
+    </>
+  ),
 };

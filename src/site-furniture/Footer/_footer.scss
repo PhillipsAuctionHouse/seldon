@@ -74,7 +74,7 @@
   }
 
   .#{$px}-accordion {
-    border-bottom: 1px solid #eae8e4;
+    border-bottom: 1px solid $grey-50;
     border-top: unset;
     margin-bottom: $spacing-md;
     width: 100%;
@@ -99,14 +99,14 @@
       }
 
       &__border-bottom {
-        border-bottom: 1px solid #eae8e4;
+        border-bottom: 1px solid $grey-50;
       }
     }
   }
 
   &__copyright {
     align-items: center;
-    background-color: $white;
+    background-color: $white-100;
     display: flex;
     flex-direction: column;
     width: 100%;

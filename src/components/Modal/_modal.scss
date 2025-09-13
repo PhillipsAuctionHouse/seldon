@@ -1,7 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-modal {
-  background-color: $white;
+  background-color: $white-100;
   left: 50%;
   max-height: 100%;
   max-width: 100%;
@@ -18,7 +18,7 @@
   }
 
   &__overlay {
-    background-color: $overlay-black;
+    background-color: $black-75;
     inset: 0;
     position: fixed;
     z-index: 15;

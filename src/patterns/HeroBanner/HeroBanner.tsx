@@ -41,7 +41,7 @@ export interface HeroBannerProps extends HTMLAttributes<HTMLDivElement> {
  *
  * [Figma Link](https://www.figma.com/design/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=6532-691&m=dev)
  *
- * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-herobanner--overview)
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-herobanner--overview)
  */
 
 const HeroBanner = forwardRef<HTMLElement, HeroBannerProps>(

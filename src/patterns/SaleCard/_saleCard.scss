@@ -11,13 +11,16 @@
   }
 
   &__image {
+    align-items: center;
     aspect-ratio: 91/51;
     border-radius: 4px;
+    display: flex;
+    flex: 0 0 30%;
+    justify-content: center;
     min-width: 100%;
 
     @include media($breakpoint-md) {
-      aspect-ratio: 107/60;
-      min-width: 428px;
+      min-width: auto;
     }
 
     img {
@@ -36,6 +39,18 @@
 
     @include media($size-md, 'max') {
       align-self: flex-start;
+    }
+  }
+
+  &__ctas {
+    flex: 0 0 0%;
+
+    @include media($breakpoint-md) {
+      flex-basis: 191px;
+    }
+
+    @include media($breakpoint-lg) {
+      flex-basis: 280px;
     }
   }
 

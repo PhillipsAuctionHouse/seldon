@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 import { Meta } from '@storybook/react';
 import { useState } from 'react';
 import { LinkVariants } from '../Link';
@@ -7,6 +6,7 @@ import Accordion, { AccordionProps } from './Accordion';
 import AccordionItem, { AccordionItemProps } from './AccordionItem';
 import { AccordionItemVariant, AccordionVariants } from './types';
 import Button from '../Button/Button';
+import { LOREM_HUGE } from '../../utils/staticContent';
 
 const meta = {
   title: 'Components/Accordion',
@@ -24,7 +24,7 @@ const meta = {
 export default meta;
 
 const largeTextBlock = (
-  <div style={{ color: 'white', backgroundColor: '#d0d0d0', padding: 20 }}>{faker.lorem.paragraphs(20)}</div>
+  <div style={{ color: 'black', backgroundColor: 'white', padding: 20, whiteSpace: 'pre-wrap' }}>{LOREM_HUGE}</div>
 );
 const largeTextItems = [
   {

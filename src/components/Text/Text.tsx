@@ -49,13 +49,7 @@ const Text = forwardRef<HTMLElement, TextProps>(
         ref={ref}
         {...props}
       >
-        <span
-          className={classNames({
-            [`${px}-skeleton`]: isSkeletonLoading,
-          })}
-        >
-          {children}
-        </span>
+        {isSkeletonLoading ? <span className={`${px}-skeleton`}>{children}</span> : children}
       </Component>
     );
   },

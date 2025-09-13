@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { addMinutes } from 'date-fns';
+import { addHours } from 'date-fns';
 
 import ObjectTile from './ObjectTile';
 import { LotStatus } from '../../types/commonTypes';
@@ -28,8 +28,8 @@ const args = {
         bidStatus={BidStatusEnum.Winning}
         lotStatus={LotStatus.live}
         numberOfBids={2}
-        lotCloseDate={addMinutes(new Date(), 20)}
-        saleCloseDate={addMinutes(new Date(), 20)}
+        lotCloseDate={addHours(new Date(), 20)}
+        saleCloseDate={addHours(new Date(), 20)}
         currentBid={1000000}
       >
         <BidMessage message="With You" />
