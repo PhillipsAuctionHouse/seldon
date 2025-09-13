@@ -45,7 +45,7 @@ describe('Carousel', () => {
       expect(screen.getByText('Slide 3')).toBeVisible();
     });
 
-    it('handles keyboard navigation (arrow keys)', async () => {
+    it('handles keyboard navigation (arrow keys)', () => {
       render(
         <Carousel>
           <CarouselContent>
