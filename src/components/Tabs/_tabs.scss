@@ -9,7 +9,6 @@
     display: flex;
     gap: 1rem;
     overflow: hidden; /* Prevent overflow */
-    padding: 0 $padding-md;
     position: relative;
   }
 
@@ -17,7 +16,8 @@
     background: none;
     border: none;
     border-bottom: 2px solid transparent;
-    padding: $padding-xsm $padding-xsm $padding-sm;
+    padding-bottom: 20px;
+    padding-inline: 0;
     transition:
       background 0.2s ease,
       font-weight 0.2s ease-out,
@@ -33,6 +33,7 @@
       cursor: pointer;
       font-size: $body-size2;
       font-variation-settings: 'wght' 600;
+      letter-spacing: normal;
       line-height: $body-line-height-size2;
 
       &:hover {
