@@ -101,6 +101,20 @@
     }
   }
 
+  @if $breakpoint == $size-snw-mobile or $breakpoint == $breakpoint-snw-mobile {
+    @if $type == 'min' {
+      @media (min-width: $breakpoint-snw-mobile) {
+        @content;
+      }
+    }
+
+    @if $type == 'max' {
+      @media (max-width: calc($breakpoint-snw-mobile - 1px)) {
+        @content;
+      }
+    }
+  }
+
   @if $breakpoint == $size-md or $breakpoint == $breakpoint-md {
     // $breakpoint-md: 961px;
     @if $type == 'min' {

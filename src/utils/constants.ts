@@ -7,6 +7,9 @@ export const BREAKPOINTS = {
   md: 961,
   lg: 1401,
   xl: 1801,
+
+  // Temporary token for mobile breakpoint added to support [L4-7681](https://phillipsauctions.atlassian.net/browse/L3-7681)
+  ['snw-mobile']: 768,
 };
 
 export const DEFAULT_REM_SIZE = 16;
