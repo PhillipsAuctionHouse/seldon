@@ -1,3 +1,10 @@
+# [1.196.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.195.2...v1.196.0) (2025-09-16)
+
+
+### Features
+
+* **Calendar:** L3-7681 calendar page updates ([#726](https://github.com/PhillipsAuctionHouse/seldon/issues/726)) ([8359e3a](https://github.com/PhillipsAuctionHouse/seldon/commit/8359e3aead9260ea21cfb254980a66ce8b343bb8))
+
 ## [1.195.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.195.1...v1.195.2) (2025-09-12)
 
 
