@@ -8,7 +8,7 @@ export const BREAKPOINTS = {
   lg: 1401,
   xl: 1801,
 
-  // Temporary token for mobile breakpoint added to support [L4-7681](https://phillipsauctions.atlassian.net/browse/L3-7681)
+  // Temporary token for mobile breakpoint added to support [L3-7681](https://phillipsauctions.atlassian.net/browse/L3-7681)
   ['snw-mobile']: 768,
 };
 
