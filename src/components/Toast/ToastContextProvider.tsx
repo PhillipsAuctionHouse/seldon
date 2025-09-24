@@ -1,6 +1,5 @@
 import * as ToastPrimitive from '@radix-ui/react-toast';
-import { type PropsWithChildren, useCallback, useState } from 'react';
-import { ToastContext } from './ToastContext';
+import { type PropsWithChildren, createContext, useCallback, useState } from 'react';
 import Toast, { PrimitiveToastProps } from './Toast';
 import { v4 as uuidv4 } from 'uuid';
 import { px } from '../../utils';
@@ -14,6 +13,11 @@ export interface ToastContextType {
   addToast: (toast: Omit<Toast, 'id'>) => void;
   removeToast: (id: string) => void;
 }
+
+/**
+ * Context for managing toast notifications
+ */
+export const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
 /**
  * Provider component that manages toast notifications state and operations

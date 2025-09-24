@@ -5,8 +5,6 @@ import { ToastProvider } from './ToastContextProvider';
 import Toast, { PrimitiveToastProps } from './Toast';
 import { ReactNode } from 'react';
 
-/* eslint-disable react/prop-types */
-
 interface ToastMockProps {
   children?: ReactNode;
   className?: string;
@@ -24,6 +22,7 @@ vi.mock('@radix-ui/react-toast', async () => {
   const actual = await vi.importActual('@radix-ui/react-toast');
   return {
     ...actual,
+    // eslint-disable-next-line react/prop-types
     Root: ({ children, className, ...props }: React.ComponentPropsWithoutRef<'div'>) => (
       <div className={className} data-testid="toast" {...props}>
         {children}
