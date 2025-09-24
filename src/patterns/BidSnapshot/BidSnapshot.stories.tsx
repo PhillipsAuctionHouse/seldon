@@ -12,7 +12,21 @@ const meta = {
   title: 'Patterns/BidSnapshot',
   component: BidSnapshot,
   argTypes: {
-    lotStatus: { options: ['READY', 'LIVE', 'PAST'], control: { type: 'select' } },
+    bidStatus: { options: new Array(BidStatusEnum), control: { type: 'select' } },
+    lotStatus: { options: new Array(LotStatus), control: { type: 'select' } },
+    currency: { control: 'text' },
+    currentBidText: { control: 'text' },
+    closingText: { control: 'text' },
+    lang: { options: [enUS], control: { type: 'select' } },
+    saleCloseDate: { control: 'date' },
+    lotCloseDate: { control: 'date' },
+    numberOfBids: { control: 'number' },
+    startingBid: { control: 'number' },
+    startingBidText: { control: 'text' },
+    showSoldPrice: { control: 'boolean' },
+    soldPrice: { control: 'number' },
+    soldForText: { control: 'text' },
+    wonForText: { control: 'text' },
   },
 } satisfies Meta<typeof BidSnapshot>;
 
