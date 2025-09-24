@@ -1,3 +1,10 @@
+# [1.198.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.197.0...v1.198.0) (2025-09-24)
+
+
+### Features
+
+* **Calendar:** L3-7821 Update badge text to title case ([#730](https://github.com/PhillipsAuctionHouse/seldon/issues/730)) ([21491c8](https://github.com/PhillipsAuctionHouse/seldon/commit/21491c8335b94fee00f756e8513a7b3f6a0bc6f5))
+
 # [1.197.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.196.0...v1.197.0) (2025-09-19)
 
 
