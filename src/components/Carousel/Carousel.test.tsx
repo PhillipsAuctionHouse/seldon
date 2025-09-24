@@ -26,7 +26,7 @@ describe('Carousel', () => {
   });
 
   describe('functional behavior', () => {
-    it('navigates slides when dots are clicked', async () => {
+    it('navigates slides when dots are clicked', () => {
       render(
         <Carousel>
           <CarouselContent>
