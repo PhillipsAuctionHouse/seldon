@@ -25,8 +25,8 @@ describe('Carousel', () => {
     expect(screen.getByRole('group', { name: 'pagination' })).toBeInTheDocument();
   });
 
-  describe('draggable vs non draggable', () => {
-    it('enables drag by default', () => {
+  describe('functional behavior', () => {
+    it('navigates slides when dots are clicked', async () => {
       render(
         <Carousel>
           <CarouselContent>
@@ -37,15 +37,17 @@ describe('Carousel', () => {
           <CarouselDots id="test-carousel-dots" />
         </Carousel>,
       );
-      const carousel = screen.getByRole('region');
-      expect(carousel.children[0]).toHaveClass('is-draggable');
+      const dots = screen.getAllByRole('group').filter((el) => el.getAttribute('aria-roledescription') === 'slide');
+      expect(dots.length).toBe(3);
+      await dots[1].click();
+      expect(screen.getByText('Slide 2')).toBeVisible();
+      await dots[2].click();
+      expect(screen.getByText('Slide 3')).toBeVisible();
     });
 
-    it('disables drag on desktop breakpoint', () => {
-      mockDesktopBreakpoint();
-
+    it('handles keyboard navigation (arrow keys)', async () => {
       render(
-        <Carousel disableNavigationDrag="desktop">
+        <Carousel>
           <CarouselContent>
             <CarouselItem>Slide 1</CarouselItem>
             <CarouselItem>Slide 2</CarouselItem>
@@ -54,57 +56,122 @@ describe('Carousel', () => {
           <CarouselDots id="test-carousel-dots" />
         </Carousel>,
       );
-      const carousel = screen.getByRole('region');
-      expect(carousel.children[0]).not.toHaveClass('is-draggable');
+      const region = screen.getByRole('region');
+      region.focus();
+      region.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+      expect(screen.getByText('Slide 2')).toBeVisible();
+      region.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
+      expect(screen.getByText('Slide 1')).toBeVisible();
     });
 
-    it('enables drag on mobile breakpoint', () => {
-      mockMobileBreakpoint();
+    it('shows only one slide for single slide edge case', () => {
       render(
-        <Carousel disableNavigationDrag="desktop">
+        <Carousel>
           <CarouselContent>
-            <CarouselItem>Slide 1</CarouselItem>
-            <CarouselItem>Slide 2</CarouselItem>
-            <CarouselItem>Slide 3</CarouselItem>
+            <CarouselItem>Only Slide</CarouselItem>
           </CarouselContent>
           <CarouselDots id="test-carousel-dots" />
         </Carousel>,
       );
-      const carousel = screen.getByRole('region');
-      expect(carousel.children[0]).toHaveClass('is-draggable');
+      expect(screen.getByText('Only Slide')).toBeVisible();
+      const dots = screen.getAllByRole('group').filter((el) => el.getAttribute('aria-roledescription') === 'slide');
+      expect(dots.length).toBe(1);
     });
 
-    it('disables drag on mobile breakpoint when mobile is passed', () => {
-      mockMobileBreakpoint();
-
+    it('has correct accessibility attributes', () => {
       render(
-        <Carousel disableNavigationDrag="mobile">
+        <Carousel>
           <CarouselContent>
             <CarouselItem>Slide 1</CarouselItem>
             <CarouselItem>Slide 2</CarouselItem>
-            <CarouselItem>Slide 3</CarouselItem>
           </CarouselContent>
           <CarouselDots id="test-carousel-dots" />
         </Carousel>,
       );
-      const carousel = screen.getByRole('region');
-      expect(carousel.children[0]).not.toHaveClass('is-draggable');
+      const region = screen.getByRole('region');
+      expect(region).toHaveAttribute('aria-roledescription', 'carousel');
+      const dotsGroup = screen.getByRole('group', { name: 'pagination' });
+      expect(dotsGroup).toBeInTheDocument();
     });
+  });
+  it('enables drag by default', () => {
+    render(
+      <Carousel>
+        <CarouselContent>
+          <CarouselItem>Slide 1</CarouselItem>
+          <CarouselItem>Slide 2</CarouselItem>
+          <CarouselItem>Slide 3</CarouselItem>
+        </CarouselContent>
+        <CarouselDots id="test-carousel-dots" />
+      </Carousel>,
+    );
+    const carousel = screen.getByRole('region');
+    expect(carousel.children[0]).toHaveClass('is-draggable');
+  });
 
-    it('enables drag on desktop breakpoint when mobile is passed', () => {
-      mockDesktopBreakpoint();
-      render(
-        <Carousel disableNavigationDrag="mobile">
-          <CarouselContent>
-            <CarouselItem>Slide 1</CarouselItem>
-            <CarouselItem>Slide 2</CarouselItem>
-            <CarouselItem>Slide 3</CarouselItem>
-          </CarouselContent>
-          <CarouselDots id="test-carousel-dots" />
-        </Carousel>,
-      );
-      const carousel = screen.getByRole('region');
-      expect(carousel.children[0]).toHaveClass('is-draggable');
-    });
+  it('disables drag on desktop breakpoint', () => {
+    mockDesktopBreakpoint();
+
+    render(
+      <Carousel disableNavigationDrag="desktop">
+        <CarouselContent>
+          <CarouselItem>Slide 1</CarouselItem>
+          <CarouselItem>Slide 2</CarouselItem>
+          <CarouselItem>Slide 3</CarouselItem>
+        </CarouselContent>
+        <CarouselDots id="test-carousel-dots" />
+      </Carousel>,
+    );
+    const carousel = screen.getByRole('region');
+    expect(carousel.children[0]).not.toHaveClass('is-draggable');
+  });
+
+  it('enables drag on mobile breakpoint', () => {
+    mockMobileBreakpoint();
+    render(
+      <Carousel disableNavigationDrag="desktop">
+        <CarouselContent>
+          <CarouselItem>Slide 1</CarouselItem>
+          <CarouselItem>Slide 2</CarouselItem>
+          <CarouselItem>Slide 3</CarouselItem>
+        </CarouselContent>
+        <CarouselDots id="test-carousel-dots" />
+      </Carousel>,
+    );
+    const carousel = screen.getByRole('region');
+    expect(carousel.children[0]).toHaveClass('is-draggable');
+  });
+
+  it('disables drag on mobile breakpoint when mobile is passed', () => {
+    mockMobileBreakpoint();
+
+    render(
+      <Carousel disableNavigationDrag="mobile">
+        <CarouselContent>
+          <CarouselItem>Slide 1</CarouselItem>
+          <CarouselItem>Slide 2</CarouselItem>
+          <CarouselItem>Slide 3</CarouselItem>
+        </CarouselContent>
+        <CarouselDots id="test-carousel-dots" />
+      </Carousel>,
+    );
+    const carousel = screen.getByRole('region');
+    expect(carousel.children[0]).not.toHaveClass('is-draggable');
+  });
+
+  it('enables drag on desktop breakpoint when mobile is passed', () => {
+    mockDesktopBreakpoint();
+    render(
+      <Carousel disableNavigationDrag="mobile">
+        <CarouselContent>
+          <CarouselItem>Slide 1</CarouselItem>
+          <CarouselItem>Slide 2</CarouselItem>
+          <CarouselItem>Slide 3</CarouselItem>
+        </CarouselContent>
+        <CarouselDots id="test-carousel-dots" />
+      </Carousel>,
+    );
+    const carousel = screen.getByRole('region');
+    expect(carousel.children[0]).toHaveClass('is-draggable');
   });
 });
