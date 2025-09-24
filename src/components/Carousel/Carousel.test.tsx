@@ -39,13 +39,13 @@ describe('Carousel', () => {
       );
       const dots = screen.getAllByRole('group').filter((el) => el.getAttribute('aria-roledescription') === 'slide');
       expect(dots.length).toBe(3);
-      await dots[1].click();
+      dots[1].click();
       expect(screen.getByText('Slide 2')).toBeVisible();
-      await dots[2].click();
+      dots[2].click();
       expect(screen.getByText('Slide 3')).toBeVisible();
     });
 
-    it('handles keyboard navigation (arrow keys)', async () => {
+    it('handles keyboard navigation (arrow keys)', () => {
       render(
         <Carousel>
           <CarouselContent>
