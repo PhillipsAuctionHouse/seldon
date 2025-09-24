@@ -74,6 +74,7 @@
     color: $badge-blue;
     font-size: 0.75rem;
     padding: $spacing-micro 8px;
+    text-transform: unset;
   }
 
   &__auction-type {
