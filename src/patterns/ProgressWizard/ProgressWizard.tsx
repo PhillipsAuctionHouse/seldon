@@ -1,4 +1,4 @@
-import { forwardRef, useState, useEffect } from 'react';
+import { forwardRef, useState, useEffect, type SetStateAction } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -17,11 +17,12 @@ import { v4 as uuidv4 } from 'uuid';
  * Props for the main ProgressWizard component. Accepts either 'action' or 'onSubmit', but not both.
  *
  * @property steps - Array of FormStep objects (wizard steps, the primary configuration object).
- * @property loadingState - Current loading state (aligns with remix fetchers, see LoadingState)
+ * @property loadingState - Current loading state (aligns with remix fetchers, see type LoadingState)+
  * @property defaultValues - Optional initial form values
  * @property customHeader - Optional custom header ReactNode, displays above progress bar.
  *
- * @property hideNavigation - If true, hides the default footer navigation (so you can implement your own)
+ * @property hideNavigation - If true, hides the default footer navigation (so you can implement your own via the `setCurrentStepIndex`
+ *   function in the step component factory). Note that this removes the default triggers for `onContinue`, `onBack`, `onSubmit`, and `onCancel`. These are instead available to the step component factory under the `handlers` property.
  * @property hideProgressIndicator - If true, hides the progress indicator bar.
  *
  * @property formSchema - Optional Zod schema for form validation. Will be overridden by schemas provided to specific steps.
@@ -29,14 +30,16 @@ import { v4 as uuidv4 } from 'uuid';
  *
  * @property startLabel, cancelLabel, backLabel, continueLabel, submitLabel - Button labels for navigation
  *
- * @property onSubmit - Called on final submit (receives all form data). Not compatible with the `action` prop, because it overrides native submit.
- * @property onContinue - Called before advancing to next step (return false to block navigation)
- * @property onBack - Called before going back (return false to block navigation)
- * @property onCancel - Called when cancelling the wizard
- * @property onError - Called when validation errors occur
+ * @property onSubmit - Called if present on final submit (receives all form data). Not compatible with the `action` prop, because it overrides native submit.
+ * @property onContinue - Called if present before advancing to next step (return false to block navigation, useful for validation if not using step schemas)
+ * @property onBack - Called if present before going back (return false to block navigation)
+ * @property onCancel - Called if present when cancelling the wizard
+ * @property onError - Called if present when validation errors occur
  *
  * @remarks
  *   Only one of `action` or `onSubmit` should be provided. If both are present, Typescript will get mad and `action` will be ignored.
+ *
+ * @todo `onContinue` should provide a mechanism for setting per-field error messages
  */
 type ProgressWizardProps =
   | (Omit<ProgressWizardBaseProps, 'action'> &
@@ -111,6 +114,11 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, r
   // Loading state management, allow overriding of internal loading state when the external prop change
   const [loadingState, setLoadingState] = useState<LoadingState>(extLoadingState);
 
+  // Skip updating currentStepIndex if navigation is hidden, because that means the consumer is managing it themselves
+  const setCurrentStepIndexHandler: (arg: SetStateAction<number>) => void = (arg) => {
+    if (!hideNavigation) setCurrentStepIndex(arg);
+  };
+
   useEffect(() => {
     setLoadingState(extLoadingState);
   }, [extLoadingState]);
@@ -136,19 +144,21 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, r
   const handleContinue = async () => {
     formMethods.clearErrors();
     setLoadingState('submitting');
-    const valid = await getIsValid(currentStep);
 
     if (onContinue && onContinue(formMethods.getValues()) === false) {
       setLoadingState('idle');
       return;
     }
-    if (valid && !isLastStep) setCurrentStepIndex((idx) => idx + 1);
+
+    const valid = await getIsValid(currentStep);
+    if (valid && !isLastStep) setCurrentStepIndexHandler((idx) => idx + 1);
+
     setLoadingState('idle');
   };
 
   const handleBack = () => {
     if (onBack && onBack(formMethods.getValues()) === false) return;
-    if (!isFirstStep) setCurrentStepIndex((idx) => idx - 1);
+    if (!isFirstStep) setCurrentStepIndexHandler((idx) => idx - 1);
     else console.error('ProgressWizard', 'Cannot go back from first step');
   };
 
@@ -156,55 +166,56 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, r
     if (onCancel) onCancel(formMethods.getValues());
   };
 
-  const handleSubmit = onSubmit
-    ? () => {
+  const handleSubmit = async () => {
+    if (currentStep.schema) formMethods.clearErrors();
+    try {
+      setLoadingState('submitting');
+      if (onSubmit) {
         onSubmit(formMethods.getValues());
-      }
-    : async () => {
-        formMethods.clearErrors();
-        setLoadingState('submitting');
-        try {
-          const valid = await getIsValid(currentStep);
-          if (valid) {
-            const form = document.getElementById(formId);
-            if (form && form instanceof HTMLFormElement) {
-              form.submit();
-            }
+        return;
+      } else {
+        const valid = await getIsValid(currentStep);
+        if (valid) {
+          const form = document.getElementById(formId);
+          if (form && form instanceof HTMLFormElement) {
+            form.submit();
           }
-        } catch (error) {
-          if (onError) {
-            const errorType: Parameters<typeof onError>[1] =
-              typeof error === 'string'
-                ? 'string'
-                : error && typeof error === 'object' && 'message' in error
-                  ? 'FieldErrors'
-                  : `unknown: ${typeof error}`;
-
-            onError(error, errorType);
-            if (errorType.startsWith('unknown')) {
-              console.error('handleSubmit', 'An error of an unknown type occurred: ' + String(error));
-              if (error && typeof error === 'object') {
-                console.error('handleSubmit', 'Error object entries: ' + Object.entries(error));
-              }
-            }
-          }
-          // too much variation here
-          if (typeof error === 'string') {
-            console.error('handleSubmit', 'Error submitting form (string): ' + error);
-          } else if (error instanceof Error) {
-            console.error('handleSubmit', 'Error submitting form (Error object): ' + error.message + ' ' + error.stack);
-          } else if (error && typeof error === 'object') {
-            console.error('handleSubmit', 'Error submitting form (object): ' + Object.entries(error));
-            for (const [key, value] of Object.entries(error)) {
-              console.error('handleSubmit', `Error property [${key}]: ${String(value)}`);
-            }
-          } else {
-            console.error('handleSubmit', 'Error submitting form (unknown error type): ' + String(error));
-          }
-        } finally {
-          setLoadingState('idle');
         }
-      };
+      }
+    } catch (error) {
+      if (onError) {
+        const errorType: Parameters<typeof onError>[1] =
+          typeof error === 'string'
+            ? 'string'
+            : error && typeof error === 'object' && 'message' in error
+              ? 'FieldErrors'
+              : `unknown: ${typeof error}`;
+
+        onError(error, errorType);
+        if (errorType.startsWith('unknown')) {
+          console.error('handleSubmit', 'An error of an unknown type occurred: ' + String(error));
+          if (error && typeof error === 'object') {
+            console.error('handleSubmit', 'Error object entries: ' + Object.entries(error));
+          }
+        }
+      }
+      // too much variation here
+      if (typeof error === 'string') {
+        console.error('handleSubmit', 'Error submitting form (string): ' + error);
+      } else if (error instanceof Error) {
+        console.error('handleSubmit', 'Error submitting form (Error object): ' + error.message + ' ' + error.stack);
+      } else if (error && typeof error === 'object') {
+        console.error('handleSubmit', 'Error submitting form (object): ' + Object.entries(error));
+        for (const [key, value] of Object.entries(error)) {
+          console.error('handleSubmit', `Error property [${key}]: ${String(value)}`);
+        }
+      } else {
+        console.error('handleSubmit', 'Error submitting form (unknown error type): ' + String(error));
+      }
+    } finally {
+      setLoadingState('idle');
+    }
+  };
 
   return (
     <FormProvider {...formMethods}>

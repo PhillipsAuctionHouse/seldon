@@ -106,6 +106,12 @@ const InnerProgressWizard = forwardRef<HTMLDivElement, InnerProgressWizardProps>
           setCurrentStepIndex,
           loadingState,
           setLoadingState,
+          handlers: {
+            handleContinue,
+            handleBack,
+            handleSubmit,
+            handleCancel,
+          },
         }),
         {
           key: currentStep.id,

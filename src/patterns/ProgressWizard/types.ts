@@ -54,7 +54,7 @@ type StepSchema = z.ZodObject<Record<string, z.ZodTypeAny>, UnknownKeysParam, z.
 /**
  * Describes a single step in the ProgressWizard. Each step can have its own schema, label, and UI component.
  * @property componentFactory - Function that returns the ReactElement for the step, given the form context and helpers.
- *   See types `PublicState` and `UseProgressWizardForm` for available props.
+ *   See type `ComponentFactory` for available props.
  * @property id - Unique identifier for the step (used for navigation, not publicly visible and also not very important anymore)
  * @property label - Display label for the step (shown in progress indicator)
  * @property schema - Optional Zod schema for validation of this step's fields. No schema means everything is valid.
@@ -70,14 +70,33 @@ type StepSchema = z.ZodObject<Record<string, z.ZodTypeAny>, UnknownKeysParam, z.
  * };
  */
 export type FormStep = {
-  componentFactory: (
-    formContext: UseFormReturn<FieldValues> & ReturnType<UseProgressWizardForm> & PublicState,
-  ) => ReactElement;
+  componentFactory: ComponentFactory;
   id: string;
   label: string;
   schema?: StepSchema;
   hiddenFields?: string[];
 };
+
+/**
+ * Factory function type for rendering a ProgressWizard step component.
+ *
+ * @param formContext - The context object containing form state, wizard helpers, and navigation handlers.
+ *   - Includes all properties made available by react-hook-form's useForm hook
+ *   - Includes all properties made available by the useProgressWizardForm hook
+ *   - Includes public wizard state (i.e., state optionally controllable by consumers, see type PublicState)
+ *   - Includes navigation and action handlers (see type Handlers)
+ *
+ * @returns ReactElement - The rendered step component for the wizard.
+ *
+ * @example
+ * const factory: ComponentFactory = (formContext) => (
+ *   <Input {...formContext.registerProgressWizardInput('email')} />
+ * );
+ */
+
+type ComponentFactory = (
+  formContext: UseFormReturn<FieldValues> & ReturnType<UseProgressWizardForm> & PublicState & { handlers: Handlers },
+) => ReactElement;
 
 /**
  * State shared across ProgressWizard steps and form context.
