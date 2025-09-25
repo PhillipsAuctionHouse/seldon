@@ -125,6 +125,10 @@ const InnerProgressWizard = forwardRef<HTMLDivElement, InnerProgressWizardProps>
       registerProgressWizardInput,
       setCurrentStepIndex,
       setLoadingState,
+      handleContinue,
+      handleBack,
+      handleSubmit,
+      handleCancel,
     ],
   );
 
