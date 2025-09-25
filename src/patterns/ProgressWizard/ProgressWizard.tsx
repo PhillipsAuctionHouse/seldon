@@ -20,21 +20,21 @@ import { v4 as uuidv4 } from 'uuid';
  * @property loadingState - Current loading state (aligns with remix fetchers, see LoadingState)
  * @property defaultValues - Optional initial form values
  * @property customHeader - Optional custom header ReactNode, displays above progress bar.
- * 
+ *
  * @property hideNavigation - If true, hides the default footer navigation (so you can implement your own)
  * @property hideProgressIndicator - If true, hides the progress indicator bar.
- * 
+ *
  * @property formSchema - Optional Zod schema for form validation. Will be overridden by schemas provided to specific steps.
  * @property action - Optional form action URL, only if 'onSubmit' is not provided.
- * 
+ *
  * @property startLabel, cancelLabel, backLabel, continueLabel, submitLabel - Button labels for navigation
- * 
+ *
  * @property onSubmit - Called on final submit (receives all form data). Not compatible with the `action` prop, because it overrides native submit.
  * @property onContinue - Called before advancing to next step (return false to block navigation)
  * @property onBack - Called before going back (return false to block navigation)
  * @property onCancel - Called when cancelling the wizard
  * @property onError - Called when validation errors occur
- * 
+ *
  * @remarks
  *   Only one of `action` or `onSubmit` should be provided. If both are present, Typescript will get mad and `action` will be ignored.
  */

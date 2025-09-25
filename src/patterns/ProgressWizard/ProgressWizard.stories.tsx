@@ -219,7 +219,7 @@ export const MixedWizard = () => {
       steps={steps}
       loadingState="idle"
       onContinue={(data) => {
-        if (data.username !== 'please') {
+        if (data.step1.username !== 'please') {
           alert('onContinue called, disallowing continuing until `username` is "please"');
           return false;
         }
