@@ -276,7 +276,7 @@ export const Playground: {
     submitLabel = 'Submit',
 
     onContinue = () => true,
-    onCancel = () => {},
+    onCancel = () => void 0,
     onSubmit,
     onError = (error: unknown) => {
       console.error('Playground Error: ' + JSON.stringify(error, null, 2));

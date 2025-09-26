@@ -344,6 +344,7 @@ describe('ProgressWizard', () => {
         backLabel="Back"
         continueLabel="Continue"
         submitLabel="Submit"
+        action="#"
       />,
     );
     await userEvent.type(screen.getByLabelText('Name*'), 'A');
