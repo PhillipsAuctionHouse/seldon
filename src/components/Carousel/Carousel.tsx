@@ -11,6 +11,10 @@ export type CarouselApi = UseEmblaCarouselType[1];
 // see what is available in https://www.embla-carousel.com/api/options/
 export interface CarouselProps extends ComponentProps<'div'> {
   /**
+   * Optional element to render as the top-level component e.g. 'div', 'ul', CustomComponent, etc. Defaults to 'div'.
+   */
+  element?: React.ElementType;
+  /**
    * Whether the carousel should loop.
    */
   loop?: boolean;
@@ -73,6 +77,7 @@ export const CarouselContext = createContext<CarouselContextProps | null>(null);
 const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
   (
     {
+      element: CustomElement,
       loop = false,
       startIndex = 0,
       onSlideChange,
@@ -87,6 +92,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     },
     ref,
   ) => {
+    const Component = CustomElement || 'div';
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
     let disableNavigationDragBreakpoint = {};
     switch (disableNavigationDrag) {
@@ -198,7 +204,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
           onSlideChange,
         }}
       >
-        <div
+        <Component
           ref={ref}
           onKeyDownCapture={handleKeyDown}
           className={classnames(baseClassName, className)}
@@ -208,7 +214,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
           {...commonProps}
         >
           {children}
-        </div>
+        </Component>
       </CarouselContext.Provider>
     );
   },
