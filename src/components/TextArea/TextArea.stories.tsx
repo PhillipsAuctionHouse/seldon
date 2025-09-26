@@ -43,7 +43,7 @@ Playground.argTypes = {
   },
   name: {
     control: {
-      type: 'string',
+      type: 'text',
     },
   },
   disabled: {
