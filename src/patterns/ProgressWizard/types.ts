@@ -6,7 +6,7 @@ import {
   type SetStateAction,
   type Ref,
 } from 'react';
-import { type UnknownKeysParam, type z } from 'zod';
+import { ZodEffects, ZodObject, ZodTypeAny, type UnknownKeysParam } from 'zod';
 import {
   type useForm,
   type FieldValues,
@@ -46,10 +46,22 @@ export type LoadingState = 'idle' | 'loading' | 'submitting';
 \*                       */
 
 /**
+ * Zod base schema for a single step in the ProgressWizard. Like StepSchema but without effects.
+ * @see https://github.com/colinhacks/zod
+ */
+export type BaseStepSchema = ZodObject<Record<string, ZodTypeAny>, UnknownKeysParam, ZodTypeAny>;
+
+/**
  * Zod schema for a single step in the ProgressWizard. Used for validating the fields in a step.
  * @see https://github.com/colinhacks/zod
  */
-type StepSchema = z.ZodObject<Record<string, z.ZodTypeAny>, UnknownKeysParam, z.ZodTypeAny>;
+export type StepSchema = BaseStepSchema | ZodEffects<BaseStepSchema>;
+
+/**
+ * Represents a schema object where each key is the `id` of a `FormStep` and the value is the corresponding `StepSchema`.
+ * This allows for organizing step schemas by their unique identifiers within the progress wizard.
+ */
+export type NamespacedSchemas = Record<FormStep['id'], StepSchema>;
 
 /**
  * Describes a single step in the ProgressWizard. Each step can have its own schema, label, and UI component.
@@ -65,7 +77,7 @@ type StepSchema = z.ZodObject<Record<string, z.ZodTypeAny>, UnknownKeysParam, z.
  * const step: FormStep = {
  *   id: 'personal',
  *   label: 'Personal Info',
- *   schema: z.object({ name: z.string() }),
+ *   schema: object({ name: string() }),
  *   componentFactory: (ctx) => <Input {...ctx.registerProgressWizardInput('name')} />,
  * };
  */
@@ -201,11 +213,28 @@ export type UseProgressWizardForm = () => {
  * @property backLabel - Label for the back button (secondary, middle step)
  * @property submitLabel - Label for the submit button (primary, last step)
  */
+
+// duplicate documentation below for Storybook descriptions
 export type ButtonLabels = {
+  /**
+   * Label for the start button (primary, first step)
+   */
   startLabel?: string;
+  /**
+   * Label for the cancel button (secondary, first step)
+   */
   cancelLabel?: string;
+  /**
+   * Label for the continue button (primary, middle step)
+   */
   continueLabel?: string;
+  /**
+   * Label for the back button (secondary, middle step)
+   */
   backLabel?: string;
+  /**
+   * Label for the submit button (primary, last step)
+   */
   submitLabel?: string;
 };
 
@@ -217,21 +246,44 @@ export type ButtonLabels = {
  * @property loadingState - Current loading state (see LoadingState)
  * @property action - Optional form action URL (for native form submission, moot if `onSubmit` is provided)
  */
+
+// duplicate documentation below for Storybook descriptions
 export type ProgressWizardBaseProps = {
+  /**
+   * Initial values for the form (optional)
+   */
   defaultValues?: FieldValues;
+  /**
+   * Array of FormStep objects defining the wizard steps (see type FormStep, this is the _big_ part of the config)
+   */
   steps: FormStep[];
+  /**
+   * Optional custom header ReactNode (renders above progress indicator)
+   */
   customHeader?: ReactNode;
+  /**
+   * If true, hides the default footer navigation (so you can implement your own)
+   */
   hideNavigation?: boolean;
+  /**
+   * If true, hides the progress indicator bar.
+   */
   hideProgressIndicator?: boolean;
-  formSchema?: StepSchema;
-  loadingState: LoadingState;
+
+  /**
+   * Current loading state (see LoadingState)
+   */
+  loadingState?: LoadingState;
+  /**
+   * Optional form action URL (for native form submission, moot if `onSubmit` is provided)
+   */
   action?: string;
 };
 
 /**
- * Callback props for ProgressWizard actions. Used to handle navigation and submission events.
- * @property onContinue - Called when continuing to next step. Return false to block navigation.
- * @property onBack - Called when going back to a previous step. Return false to block navigation.
+ * Callback props for ProgressWizard actions. Used to handle navigation and submission events. Receives full form data.
+ * @property onContinue - Called when continuing to next step. Return false to block navigation. Receives full form data.
+ * @property onBack - Called when going back to a previous step. Return false to block navigation. Receives full form data.
  * @property onSubmit - Called on final submit (receives all form data, overrides native form submission [though you can still trigger that in a component factory!])
  * @property onCancel - Called when cancelling the wizard
  * @property onError - Called when validation errors occur
@@ -239,11 +291,28 @@ export type ProgressWizardBaseProps = {
  * @example
  * <ProgressWizard onContinue={(data) => { ... }} onSubmit={(data) => { ... }} />
  */
+
+// duplicate documentation below for Storybook descriptions
 export type CallbackProps = {
+  /**
+   * Called when continuing to next step. Return false to block navigation. Receives full form data.
+   */
   onContinue?: (formData: FieldValues) => boolean;
+  /**
+   * Called when going back to a previous step. Return false to block navigation.
+   */
   onBack?: (formData: FieldValues) => boolean;
-  onSubmit?: (data: FieldValues) => void;
+  /**
+   * Called on final submit (receives all form data, overrides native form submission [though you can still trigger that in a component factory!])
+   */
+  onSubmit?: (formData: FieldValues) => void;
+  /**
+   * Called when cancelling the wizard
+   */
   onCancel?: (formData: FieldValues) => void;
+  /**
+   * Called when validation errors occur
+   */
   onError?: (
     error: FieldErrors | string | object | unknown,
     type:

@@ -15,14 +15,15 @@ import { type ButtonLabels, type Handlers } from '../types';
  *
  * Inherits all navigation handler props from Handlers.
  */
-export type ProgressWizardFooterProps = Handlers & {
+
+export interface ProgressWizardFooterProps extends Handlers {
   isFirstStep: boolean;
   isLastStep: boolean;
   baseClassName?: string;
   labels: ButtonLabels;
   isCanContinue: boolean;
   isLoading: boolean;
-};
+}
 
 /**
  * Footer component for ProgressWizard. Renders navigation buttons (Back/Cancel, Continue/Submit) and handles their states.

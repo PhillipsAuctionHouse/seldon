@@ -2,8 +2,24 @@ import { useState, useRef, useEffect, type Dispatch, type SetStateAction } from 
 import { type PathValue, useFormContext, type FieldValues, type Path } from 'react-hook-form';
 
 /**
+ * Represents a staged (pending) value for a form field.
+ *
+ * @template FormShape - The shape of the form's values.
+ * @type PathValue<FormShape, Path<FormShape>> | undefined
+ *
+ * This type is used to temporarily hold a value before it is committed to the form.
+ * If no value is staged, it will be undefined.
+ *
+ * @remarks `PathValue` is remix-hook-form's utility type for getting
+ *   the value type at a given path in the form. The first param is the form
+ *   shape, the second is the string path to the field (e.g. 'step1.firstName').
+ */
+
+export type PendingValue<FormShape> = PathValue<FormShape, Path<FormShape>> | undefined;
+
+/**
  * Return type for the usePendingValue hook.
- * @template T - The form shape as key value pairs
+ * @template FormShape - The form shape as key value pairs
  * @property setPendingValue - Setter for the pending value (call this to stage a value)
  * @property applyPendingValue - Call this to commit the pending value to the form field
  * @property pendingValue - The currently staged value (or undefined if none)
@@ -11,10 +27,10 @@ import { type PathValue, useFormContext, type FieldValues, type Path } from 'rea
  * @example
  * const { setPendingValue, applyPendingValue, pendingValue } = usePendingValue('country');
  */
-export type UsePendingValueReturn<T extends FieldValues> = {
-  setPendingValue: Dispatch<SetStateAction<PathValue<T, Path<T>> | undefined>>;
+export type UsePendingValueReturn<FormShape extends FieldValues> = {
+  setPendingValue: Dispatch<SetStateAction<PendingValue<FormShape>>>;
   applyPendingValue: () => void;
-  pendingValue: PathValue<T, Path<T>> | undefined;
+  pendingValue: PendingValue<FormShape>;
 };
 
 /**
@@ -25,7 +41,7 @@ export type UsePendingValueReturn<T extends FieldValues> = {
  * @template T - The form shape as key value pairs
  * @param fieldName - The name of the field to manage
  * @param additionalAction - Optional callback to run after applying the value (return false to prevent clearing pending
- *   value so that applying can be re-attempted)
+ *   value so that applying can be re-attempted). Useful for things like resetting a state value when the user deselects US
  * @returns {UsePendingValueReturn<T>} - Object with setPendingValue, applyPendingValue, and pendingValue
  *
  * @example
@@ -37,18 +53,18 @@ export type UsePendingValueReturn<T extends FieldValues> = {
  */
 export const usePendingValue = <T extends FieldValues>(
   fieldName: Path<T>,
-  additionalAction?: () => void | false, // e.g., resetting a state value when the user deselects US
+  additionalAction?: () => void | false,
 ): UsePendingValueReturn<T> => {
   const formMethods = useFormContext<T>();
-  const [pendingValue, setPendingValueState] = useState<PathValue<T, Path<T>> | undefined>();
-  const pendingValueRef = useRef<PathValue<T, Path<T>> | undefined>(pendingValue);
+  const [pendingValue, setPendingValueState] = useState<PendingValue<T>>();
+  const pendingValueRef = useRef<PendingValue<T>>(pendingValue);
 
   // Keep ref in sync with state, there seem to be stale closures to deal with
   useEffect(() => {
     pendingValueRef.current = pendingValue;
   }, [pendingValue]);
 
-  const setPendingValue: Dispatch<SetStateAction<PathValue<T, Path<T>> | undefined>> = (value) => {
+  const setPendingValue: Dispatch<SetStateAction<PendingValue<T>>> = (value) => {
     setPendingValueState(value);
   };
 

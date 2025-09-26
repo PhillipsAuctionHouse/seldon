@@ -28,19 +28,19 @@ import { useProgressWizardForm } from '../hooks/useProgressWizardForm';
  *
  * Inherits handler props from Handlers.
  */
-type InnerProgressWizardProps = Required<Handlers> &
-  PublicState & {
-    steps: FormStep[];
-    customHeader?: ReactNode;
-    hideNavigation?: boolean;
-    hideProgressIndicator?: boolean;
-    buttonLabels: ButtonLabels;
-    action?: string;
-    isFirstStep: boolean;
-    isLastStep: boolean;
-    className?: string;
-    formId: string;
-  };
+
+export interface InnerProgressWizardProps extends Required<Handlers>, PublicState {
+  steps: FormStep[];
+  customHeader?: ReactNode;
+  hideNavigation?: boolean;
+  hideProgressIndicator?: boolean;
+  buttonLabels: ButtonLabels;
+  action?: string;
+  isFirstStep: boolean;
+  isLastStep: boolean;
+  className?: string;
+  formId: string;
+}
 
 /**
  * Internal layout component for ProgressWizard. Renders the wizard UI, progress indicator, step content, and footer.
@@ -90,7 +90,7 @@ const InnerProgressWizard = forwardRef<HTMLDivElement, InnerProgressWizardProps>
 
   useEffect(() => {
     if (currentStep && currentStep.hiddenFields) {
-      handleHiddenFields(Object.keys(formMethods.getValues()), currentStep.hiddenFields);
+      handleHiddenFields(currentStep);
     }
   }, [currentStep, formMethods]);
 

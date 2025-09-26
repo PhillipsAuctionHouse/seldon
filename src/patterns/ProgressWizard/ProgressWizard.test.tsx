@@ -75,60 +75,6 @@ describe('ProgressWizard', () => {
     expect(screen.queryByRole('button', { name: /Wizard:/ })).toBeNull();
   });
 
-  it('merges formSchema with step schemas, with step schemas taking precedence', async () => {
-    const formSchema = z.object({
-      name: z.string().min(2, { message: 'formSchema: Name too short' }),
-      age: z.number().min(18, { message: 'formSchema: Age too low' }),
-    });
-    const steps: FormStep[] = [
-      {
-        id: 'step1',
-        label: 'Step 1',
-        schema: z.object({ name: z.string().min(4, { message: 'stepSchema: Name too short' }) }),
-        componentFactory: ({ registerProgressWizardInput }) => (
-          <Input {...registerProgressWizardInput('name')} key="step1-input" />
-        ),
-      },
-      {
-        id: 'step2',
-        label: 'Step 2',
-        schema: z.object({ age: z.number().min(21, { message: 'stepSchema: Age too low' }) }),
-        componentFactory: ({ registerProgressWizardInput }) => (
-          <Input
-            {...registerProgressWizardInput('age', {
-              overrides: { type: 'number' },
-              registerOptions: { valueAsNumber: true },
-            })}
-            key="step2-input"
-          />
-        ),
-      },
-    ];
-    render(
-      <ProgressWizard
-        steps={steps}
-        formSchema={formSchema}
-        loadingState="idle"
-        startLabel="Start"
-        cancelLabel="Cancel"
-        backLabel="Back"
-        continueLabel="Continue"
-        submitLabel="Submit"
-      />,
-    );
-
-    await userEvent.type(screen.getByLabelText('Name*'), '123');
-    await userEvent.click(screen.getByRole('button', getWizName('Start')));
-    await waitFor(() => expect(screen.getByText('stepSchema: Name too short')).toBeInTheDocument());
-    await userEvent.clear(screen.getByLabelText('Name*'));
-    await userEvent.type(screen.getByLabelText('Name*'), '1234');
-    await userEvent.click(screen.getByRole('button', getWizName('Start')));
-    // next step
-    await userEvent.type(screen.getByLabelText('Age*'), '20');
-    await userEvent.click(screen.getByRole('button', getWizName('Submit')));
-    await waitFor(() => expect(screen.getByText('stepSchema: Age too low')).toBeInTheDocument());
-  });
-
   it('applies refinements from step schemas and validates them', async () => {
     const steps: FormStep[] = [
       {

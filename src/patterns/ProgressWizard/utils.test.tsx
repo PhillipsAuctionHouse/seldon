@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { handleHiddenFields, mergeZodEffects } from './utils';
+import { handleHiddenFields /* mergeZodEffects */ } from './utils';
 import { z } from 'zod';
+import { FormStep } from './types';
 
 describe('handleHiddenFields', () => {
   let inputEls: HTMLInputElement[];
@@ -39,8 +40,16 @@ describe('handleHiddenFields', () => {
     });
   });
 
+  const genStep = (hiddenFields?: string[]): FormStep => ({
+    id: 'step1',
+    label: 'Step 1',
+    schema: z.object({}),
+    componentFactory: () => <div />,
+    hiddenFields,
+  });
+
   it('hides specified fields and sets correct attributes', () => {
-    handleHiddenFields(['firstName', 'country'], ['firstName']);
+    handleHiddenFields(genStep(['firstName']));
     inputEls.forEach((el) => {
       if (el.getAttribute('name') === 'firstName') {
         expect(el.getAttribute('type')).toBe('hidden');
@@ -61,8 +70,8 @@ describe('handleHiddenFields', () => {
   });
 
   it('unhides fields and restores previous attributes', () => {
-    handleHiddenFields(['firstName', 'country'], ['firstName']);
-    handleHiddenFields(['firstName', 'country'], []);
+    handleHiddenFields(genStep(['firstName']));
+    handleHiddenFields(genStep([]));
     inputEls.forEach((el) => {
       expect(el.getAttribute('type')).toBe('text');
       expect(el.hasAttribute('aria-hidden')).toBe(false);
@@ -78,7 +87,9 @@ describe('handleHiddenFields', () => {
   });
 });
 
+/* 
 describe('mergeZodEffects', () => {
+  // this function is not used for the time being
   it('merges multiple Zod schemas and preserves refinements and transforms', () => {
     const personSchema = z
       .object({
@@ -96,12 +107,12 @@ describe('mergeZodEffects', () => {
       })
       .transform((obj) => ({ ...obj, age: obj.age + 1 }));
 
-    const merged = mergeZodEffects([personSchema, countrySchema]);
+    const merged = mergeZodEffects({ person: personSchema, country: countrySchema });
 
-    const result = merged.safeParse({ name: 'hello', age: 11 });
+    const result = merged.safeParse({ person: { name: 'hello' }, country: { age: 11 } });
     expect(result.success).toBe(true);
-    expect(result.data.name).toBe('HELLO');
-    expect(result.data.age).toBe(12);
+    expect(result.data?.person?.name).toBe('HELLO');
+    expect(result.data?.country?.age).toBe(12);
   });
 
   it('fails validation if refinements are not met', () => {
@@ -115,8 +126,8 @@ describe('mergeZodEffects', () => {
         message: 'Too small',
       }),
     });
-    const merged = mergeZodEffects([personSchema, countrySchema]);
-    const result = merged.safeParse({ name: 'hi', age: 5 });
+    const merged = mergeZodEffects({ person: personSchema, country: countrySchema });
+    const result = merged.safeParse({ person: { name: 'hi' }, country: { age: 5 } });
     expect(result.success).toBe(false);
     expect(result.error?.issues.length).toBeGreaterThan(0);
     expect(result.error?.issues.map((i) => i.message)).toEqual(expect.arrayContaining(['Too short', 'Too small']));
@@ -125,9 +136,10 @@ describe('mergeZodEffects', () => {
   it('merges schemas with no effects', () => {
     const personSchema = z.object({ name: z.string() });
     const countrySchema = z.object({ age: z.number() });
-    const merged = mergeZodEffects([personSchema, countrySchema]);
-    const result = merged.safeParse({ name: 'hello', age: 42 });
+    const merged = mergeZodEffects({ person: personSchema, country: countrySchema });
+    const result = merged.safeParse({ person: { name: 'hello' }, country: { age: 42 } });
     expect(result.success).toBe(true);
-    expect(result.data).toEqual({ name: 'hello', age: 42 });
+    expect(result.data).toEqual({ person: { name: 'hello' }, country: { age: 42 } });
   });
-});
+}); 
+*/

@@ -1,4 +1,4 @@
-import { forwardRef, useState, useEffect, type SetStateAction } from 'react';
+import { forwardRef, useState, useEffect, useRef, type SetStateAction } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -6,11 +6,10 @@ import {
   type ButtonLabels,
   type CallbackProps,
   type ProgressWizardBaseProps,
-  type FormStep,
+  type NamespacedSchemas,
 } from './types';
 import InnerProgressWizard from './components/InnerProgressWizard';
 import { z } from 'zod';
-import { mergeZodEffects } from './utils';
 import { v4 as uuidv4 } from 'uuid';
 
 /**
@@ -25,7 +24,6 @@ import { v4 as uuidv4 } from 'uuid';
  *   function in the step component factory). Note that this removes the default triggers for `onContinue`, `onBack`, `onSubmit`, and `onCancel`. These are instead available to the step component factory under the `handlers` property.
  * @property hideProgressIndicator - If true, hides the progress indicator bar.
  *
- * @property formSchema - Optional Zod schema for form validation. Will be overridden by schemas provided to specific steps.
  * @property action - Optional form action URL, only if 'onSubmit' is not provided.
  *
  * @property startLabel, cancelLabel, backLabel, continueLabel, submitLabel - Button labels for navigation
@@ -41,13 +39,7 @@ import { v4 as uuidv4 } from 'uuid';
  *
  * @todo `onContinue` should provide a mechanism for setting per-field error messages
  */
-type ProgressWizardProps =
-  | (Omit<ProgressWizardBaseProps, 'action'> &
-      ButtonLabels &
-      Omit<CallbackProps, 'onSubmit'> & { action: string; onSubmit?: undefined })
-  | (Omit<ProgressWizardBaseProps, 'action'> &
-      ButtonLabels &
-      CallbackProps & { action?: 'Action cannot be present when `onSubmit` is supplied' });
+export interface ProgressWizardProps extends ProgressWizardBaseProps, ButtonLabels, CallbackProps {}
 
 /**
  * Main ProgressWizard component. Renders a multi-step form with validation, navigation, and custom UI.
@@ -64,6 +56,7 @@ type ProgressWizardProps =
  *   onSubmit={(data) => alert(JSON.stringify(data))}
  * />
  */
+
 const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, ref) => {
   const {
     steps: propSteps,
@@ -73,7 +66,6 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, r
     hideNavigation,
     hideProgressIndicator,
 
-    formSchema = z.object({}), // Default to empty schema to allow merging
     action,
 
     startLabel = 'Start',
@@ -91,12 +83,11 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, r
 
   // Ensure every step has at least an empty ZodObject as its schema
   const steps = propSteps.map((step) => ({ ...step, schema: step.schema ?? z.object({}) }));
-
   // Nest each step's schema under its step id
-  const namespacedStepSchemas = steps.map((step) => z.object({ [step.id]: step.schema }));
-
-  // If formSchema is provided, nest it under 'formSchema'
-  const namespacedFormSchema = z.object({ formSchema });
+  const namespacedStepSchemas = steps.reduce(
+    (acc, { id, schema }) => ({ ...acc, [id]: schema }),
+    {} as NamespacedSchemas,
+  );
 
   if (steps.length > 10 && !hideProgressIndicator) {
     console.warn(
@@ -105,14 +96,20 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, r
     );
   }
 
-  const formId = `progress-wizard-form-${uuidv4()}`;
+  if (onSubmit && action) {
+    console.warn('ProgressWizard', 'Both `onSubmit` and `action` props were provided. `action` will be ignored.');
+  }
+
+  const formIdRef = useRef<string>(`progress-wizard-form-${uuidv4()}`);
+  const formId = formIdRef.current;
+
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const currentStep = steps[currentStepIndex];
   const isFirstStep = currentStepIndex === 0;
   const isLastStep = currentStepIndex === steps.length - 1;
 
   // Loading state management, allow overriding of internal loading state when the external prop change
-  const [loadingState, setLoadingState] = useState<LoadingState>(extLoadingState);
+  const [loadingState, setLoadingState] = useState<LoadingState>(extLoadingState ?? 'idle');
 
   // Skip updating currentStepIndex if navigation is hidden, because that means the consumer is managing it themselves
   const setCurrentStepIndexHandler: (arg: SetStateAction<number>) => void = (arg) => {
@@ -120,25 +117,20 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, r
   };
 
   useEffect(() => {
-    setLoadingState(extLoadingState);
+    setLoadingState(extLoadingState ?? 'idle');
   }, [extLoadingState]);
 
-  // Merge namespaced schemas
-  const combinedSchema = mergeZodEffects([namespacedFormSchema, ...namespacedStepSchemas]);
-
   const formMethods = useForm({
-    resolver: zodResolver(combinedSchema),
+    resolver: zodResolver(z.object({ ...namespacedStepSchemas })),
     defaultValues,
     mode: 'onSubmit',
     shouldUnregister: false,
   });
 
-  const getIsValid = async (formStep: Omit<FormStep, 'schema'> & { schema: NonNullable<FormStep['schema']> }) => {
-    // If step schema is provided, validate only those fields, otherwise validate all fields in formSchema
-    const [schema, prefix] =
-      Object.keys(formStep.schema.shape).length > 0 ? [formStep.schema, formStep.id] : [formSchema, 'formSchema'];
-    const stepFieldNames = Object.keys(schema.shape).map((field) => `${prefix}.${field}`);
-    return await formMethods.trigger(stepFieldNames);
+  const getIsValid = async () => {
+    const relevantSteps = steps.filter((_, i) => i <= currentStepIndex);
+    const result = await formMethods.trigger(relevantSteps.filter((_, i) => i <= currentStepIndex).map(({ id }) => id));
+    return result;
   };
 
   const handleContinue = async () => {
@@ -150,7 +142,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, r
       return;
     }
 
-    const valid = await getIsValid(currentStep);
+    const valid = await getIsValid();
     if (valid && !isLastStep) setCurrentStepIndexHandler((idx) => idx + 1);
 
     setLoadingState('idle');
@@ -174,7 +166,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, r
         onSubmit(formMethods.getValues());
         return;
       } else {
-        const valid = await getIsValid(currentStep);
+        const valid = await getIsValid();
         if (valid) {
           const form = document.getElementById(formId);
           if (form && form instanceof HTMLFormElement) {

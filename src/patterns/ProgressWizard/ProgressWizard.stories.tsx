@@ -1,15 +1,15 @@
-import ProgressWizard from './ProgressWizard';
+import ProgressWizard, { ProgressWizardProps } from './ProgressWizard';
 import { useRef } from 'react';
 import { z } from 'zod';
 import Input from '../../components/Input/Input';
-import { type Meta } from '@storybook/react';
+import { ArgTypes } from '@storybook/react';
 import { type FormStep } from './types';
 import { type FieldErrors } from 'react-hook-form';
 
 const meta = {
   title: 'Patterns/ProgressWizard',
   component: ProgressWizard,
-} satisfies Meta<typeof ProgressWizard>;
+};
 
 export default meta;
 
@@ -25,6 +25,25 @@ const translations: Record<string, string> = {
 };
 
 const t = (key: string) => translations[key] || key;
+
+const argTypes = {
+  startLabel: { control: { type: 'text' } },
+  cancelLabel: { control: { type: 'text' } },
+  backLabel: { control: { type: 'text' } },
+  continueLabel: { control: { type: 'text' } },
+  submitLabel: { control: { type: 'text' } },
+  loadingState: {
+    control: { type: 'select' },
+    options: ['idle', 'submitting', 'loading'],
+  },
+  action: { control: { type: 'text' } },
+  onContinue: { action: 'onContinue' },
+  onCancel: { action: 'onCancel' },
+  onSubmit: { action: 'onSubmit' },
+  onError: { action: 'onError' },
+  hideNavigation: { control: { type: 'boolean' } },
+  hideProgressIndicator: { control: { type: 'boolean' } },
+} as const;
 
 // Story 1: Basic usage with custom error messages and onContinue/onCancel
 export const BasicWizard = () => {
@@ -77,8 +96,10 @@ export const BasicWizard = () => {
     />
   );
 };
+BasicWizard.argTypes = argTypes;
 
 // Story 2: Zod validation with translation function and onError
+
 export const TranslationWizard = () => {
   const steps: FormStep[] = [
     {
@@ -110,6 +131,7 @@ export const TranslationWizard = () => {
     />
   );
 };
+TranslationWizard.argTypes = argTypes;
 
 // Story 3: Async validation and all on* functions
 const asyncEmailSchema = z
@@ -122,6 +144,7 @@ const asyncEmailSchema = z
     },
     { message: 'Email is already taken' },
   );
+
 export const AsyncValidationWizard = () => {
   const steps: FormStep[] = [
     {
@@ -183,6 +206,7 @@ export const AsyncValidationWizard = () => {
     />
   );
 };
+AsyncValidationWizard.argTypes = argTypes;
 
 // Story 4: Mixed usage, translation, and custom error
 export const MixedWizard = () => {
@@ -235,4 +259,120 @@ export const MixedWizard = () => {
       submitLabel="Submit"
     />
   );
+};
+MixedWizard.argTypes = argTypes;
+
+export const Playground: {
+  render: (props: ProgressWizardProps) => JSX.Element;
+  args: ProgressWizardProps;
+  argTypes: ArgTypes;
+} = {
+  render: ({
+    steps,
+    startLabel = 'Start',
+    cancelLabel = 'Cancel',
+    backLabel = 'Back',
+    continueLabel = 'Continue',
+    submitLabel = 'Submit',
+
+    onContinue = () => true,
+    onCancel = () => {},
+    onSubmit,
+    onError = (error: unknown) => {
+      console.error('Playground Error: ' + JSON.stringify(error, null, 2));
+    },
+    loadingState = 'idle',
+    action,
+
+    hideNavigation,
+    hideProgressIndicator,
+  }) => {
+    return (
+      <ProgressWizard
+        steps={steps}
+        customHeader={<h3 style={{ textAlign: 'center' }}>Playground Wizard</h3>}
+        loadingState={loadingState}
+        onContinue={onContinue}
+        onCancel={onCancel}
+        onError={onError}
+        startLabel={startLabel}
+        cancelLabel={cancelLabel}
+        backLabel={backLabel}
+        continueLabel={continueLabel}
+        submitLabel={submitLabel}
+        onSubmit={onSubmit}
+        action={action}
+        hideNavigation={hideNavigation}
+        hideProgressIndicator={hideProgressIndicator}
+      />
+    );
+  },
+  args: {
+    steps: [
+      {
+        id: 'step1',
+        label: 'Step 1',
+        schema: z.object({
+          favoriteSmokeyRobinsonSong: z.string().min(1, { message: 'Favorite Smokey Robinson song required' }),
+        }),
+        componentFactory: ({ registerProgressWizardInput }) => (
+          <Input
+            {...registerProgressWizardInput('favoriteSmokeyRobinsonSong', {
+              overrides: { labelText: 'Favorite song by Smokey Robinson:' },
+            })}
+          />
+        ),
+      },
+      {
+        id: 'step2',
+        label: 'Step 2',
+        hiddenFields: ['favoriteSmokeyRobinsonSong'],
+        schema: z
+          .object({
+            favoriteSmokeyRobinsonSong: z.string(),
+            didYouLie: z.boolean(),
+          })
+          .refine(
+            (data) => {
+              const songName = data.favoriteSmokeyRobinsonSong.trim().toLowerCase();
+              const lied = data.didYouLie;
+              return (songName === 'i second that emotion') === !lied;
+            },
+            {
+              message:
+                'If your favorite is "I Second That Emotion", you must not have lied. If you picked another song, you must admit you lied.',
+              path: ['didYouLie'],
+            },
+          ),
+        componentFactory: ({ registerProgressWizardInput, watch, setValue }) => {
+          if (watch('step2.favoriteSmokeyRobinsonSong') !== watch('step1.favoriteSmokeyRobinsonSong')) {
+            setValue('step2.favoriteSmokeyRobinsonSong', watch('step1.favoriteSmokeyRobinsonSong'));
+          }
+
+          return (
+            <>
+              <Input {...registerProgressWizardInput('favoriteSmokeyRobinsonSong')} />
+              <div style={{ marginTop: 24 }}>
+                <Input
+                  {...registerProgressWizardInput('didYouLie', {
+                    overrides: {
+                      type: 'checkbox',
+                      labelText: 'Did you lie? Check if yes.',
+                      style: {
+                        width: 20,
+                        height: 20,
+                        display: 'inline-block',
+                        verticalAlign: 'middle',
+                      },
+                    },
+                  })}
+                />
+              </div>
+            </>
+          );
+        },
+      },
+    ],
+  },
+  argTypes,
 };
