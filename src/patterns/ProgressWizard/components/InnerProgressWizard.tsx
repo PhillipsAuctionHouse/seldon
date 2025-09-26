@@ -138,16 +138,16 @@ const InnerProgressWizard = forwardRef<HTMLDivElement, InnerProgressWizardProps>
         <Icon icon="PhillipsLogo" height={32} width={120} />
       </div>
       {customHeader}
-      <nav aria-label="Progress">
-        {!hideProgressIndicator ? (
+      {!hideProgressIndicator ? (
+        <nav aria-label="Progress">
           <ProgressIndicator
             totalSteps={steps.length}
             currentStep={currentStepIndex + 1}
             labels={steps.map((s) => s.label)}
             progressIndicatorAriaLabel="Wizard Progress"
           />
-        ) : null}
-      </nav>
+        </nav>
+      ) : null}
       <form
         id={formId}
         action={action}
