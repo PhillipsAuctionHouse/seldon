@@ -8,6 +8,19 @@ import { mockDesktopBreakpoint, mockMobileBreakpoint, runCommonTests } from '../
 describe('Carousel', () => {
   runCommonTests(Carousel, 'Carousel');
 
+  it('renders with a custom element passed via the element prop', () => {
+    render(
+      <Carousel element="section">
+        <CarouselContent>
+          <CarouselItem>Custom Element Slide</CarouselItem>
+        </CarouselContent>
+      </Carousel>,
+    );
+    const customElement = screen.getByTestId('carousel');
+    expect(customElement.tagName.toLowerCase()).toBe('section');
+    expect(screen.getByText('Custom Element Slide')).toBeInTheDocument();
+  });
+
   it('renders carousel with content, items, and dots', () => {
     render(
       <Carousel>
