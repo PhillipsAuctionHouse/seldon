@@ -19,17 +19,24 @@ describe('GridItem', () => {
     const GridItemElement = screen.getByTestId('grid-item');
     expect(GridItemElement).toHaveClass(`${px}-grid-item`);
   });
+
   it('validates column span values', () => {
+    const originalError = console.error;
+    console.error = () => void 0;
+
     render(<GridItem xs={0} />);
     expect(screen.queryByTestId('grid-item')).not.toBeInTheDocument();
 
     render(<GridItem lg={13} />);
     expect(screen.queryByTestId('grid-item')).not.toBeInTheDocument();
+
+    console.error = originalError;
   });
 
   describe('breakpoint classes', () => {
     it('applies breakpoint column classes correctly', () => {
       render(<GridItem />);
+
       const GridItemElement = screen.getByTestId('grid-item');
       expect(GridItemElement).toHaveClass(`${px}-grid-item--span-xs-2`);
       expect(GridItemElement).toHaveClass(`${px}-grid-item--span-sm-2`);

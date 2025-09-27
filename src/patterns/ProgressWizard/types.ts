@@ -10,7 +10,6 @@ import { ZodEffects, ZodObject, ZodTypeAny, type UnknownKeysParam } from 'zod';
 import {
   type useForm,
   type FieldValues,
-  type FieldErrors,
   type UseFormReturn,
   type FieldName,
   type UseFormRegisterReturn,
@@ -93,21 +92,48 @@ export type FormStep = {
  * Factory function type for rendering a ProgressWizard step component.
  *
  * @param formContext - The context object containing form state, wizard helpers, and navigation handlers.
- *   - Includes all properties made available by react-hook-form's useForm hook
- *   - Includes all properties made available by the useProgressWizardForm hook
- *   - Includes public wizard state (i.e., state optionally controllable by consumers, see type PublicState)
- *   - Includes navigation and action handlers (see type Handlers)
+ *   Properties from react-hook-form's useForm hook, minus some that we have replaced
+ *     @property {any} control
+ *     @property {Function} watch
+ *     @property {Function} setValue
+ *     @property {Function} getValues
+ *     @property {Function} reset
+ *     @property {Function} trigger
+ *     @property {object} formState
+ *     @property {Function} unregister
+ *     @property {Function} setError
+ *     @property {Function} clearErrors
+ *     @see UseFormReturn<FieldValues>
+ *   Properties from useProgressWizardForm hook.
+ *     @property {Function} registerProgressWizardInput
+ *     @see ReturnType<UseProgressWizardForm>
+ *   Consumer-facing wizard state.
+ *     @property {number} currentStepIndex
+ *     @property {Dispatch<SetStateAction<number>>} setCurrentStepIndex
+ *     @property {LoadingState} loadingState
+ *     @property {Dispatch<SetStateAction<LoadingState>>} setLoadingState
+ *     @see PublicState
+ *   Navigation and action handlers.
+ *     @property {Function} handleContinue
+ *     @property {Function} handleBack
+ *     @property {Function} handleSubmit
+ *     @property {Function} handleCancel
+ *     @see Handlers
+ *   @property {string} formId - Unique form ID attribute.
  *
- * @returns ReactElement - The rendered step component for the wizard.
+ * @returns {ReactElement} The rendered step component for the wizard.
  *
  * @example
- * const factory: ComponentFactory = (formContext) => (
+ * const factory: ComponentFactory = ({registerProgressWizardInput, }) => (
  *   <Input {...formContext.registerProgressWizardInput('email')} />
  * );
  */
 
 type ComponentFactory = (
-  formContext: UseFormReturn<FieldValues> & ReturnType<UseProgressWizardForm> & PublicState & { handlers: Handlers },
+  formContext: Omit<UseFormReturn<FieldValues>, 'handleSubmit' | 'register'> &
+    ReturnType<UseProgressWizardForm> &
+    PublicState &
+    Handlers & { formId: string },
 ) => ReactElement;
 
 /**
@@ -244,7 +270,7 @@ export type ButtonLabels = {
  * @property steps - Array of FormStep objects defining the wizard steps (see type FormStep, this is the _big_ part of the config)
  * @property customHeader - Optional custom header ReactNode (renders above progress indicator)
  * @property loadingState - Current loading state (see LoadingState)
- * @property action - Optional form action URL (for native form submission, moot if `onSubmit` is provided)
+ * @property action - Optional form action URL (for native form submission, moot if `onFormSubmit` is provided)
  */
 
 // duplicate documentation below for Storybook descriptions
@@ -269,27 +295,31 @@ export type ProgressWizardBaseProps = {
    * If true, hides the progress indicator bar.
    */
   hideProgressIndicator?: boolean;
-
   /**
    * Current loading state (see LoadingState)
    */
   loadingState?: LoadingState;
   /**
-   * Optional form action URL (for native form submission, moot if `onSubmit` is provided)
+   * Optional form action URL (for native form submission, moot if `onFormSubmit` is provided)
    */
   action?: string;
+  /**
+   * If true, the wizard will push history states on step changes, allowing the browser back/forward buttons to navigate between steps. Default is true.
+   */
+  manageHistory?: boolean;
 };
 
 /**
  * Callback props for ProgressWizard actions. Used to handle navigation and submission events. Receives full form data.
  * @property onContinue - Called when continuing to next step. Return false to block navigation. Receives full form data.
  * @property onBack - Called when going back to a previous step. Return false to block navigation. Receives full form data.
- * @property onSubmit - Called on final submit (receives all form data, overrides native form submission [though you can still trigger that in a component factory!])
- * @property onCancel - Called when cancelling the wizard
+ * @property onFormSubmit - Called on final submit (receives all form data, overrides native form submission [though you can still trigger that in a component factory!]).
+ *   Also receives a function that returns a promise resolving to whether the current step is valid, so you can still use step schema validation without native submit.
+ * @property onCancel - Called when cancelling the wizard, return false to block cancellation. Receives full form data.
  * @property onError - Called when validation errors occur
  *
  * @example
- * <ProgressWizard onContinue={(data) => { ... }} onSubmit={(data) => { ... }} />
+ * <ProgressWizard onContinue={(data) => { ... }} onFormSubmit={(data) => { ... }} />
  */
 
 // duplicate documentation below for Storybook descriptions
@@ -303,32 +333,27 @@ export type CallbackProps = {
    */
   onBack?: (formData: FieldValues) => boolean;
   /**
-   * Called on final submit (receives all form data, overrides native form submission [though you can still trigger that in a component factory!])
+   * Called on final submit (receives all form data, overrides native form submission [though you can still trigger that in a component factory!]).
+   * Also receives a function that returns a promise resolving to whether the current step is valid, so you can still use step schema
+   * validation without native submit.
    */
-  onSubmit?: (formData: FieldValues) => void;
+  onFormSubmit?: (formData: FieldValues, getIsCurrentStepValid: () => Promise<boolean>) => void;
   /**
-   * Called when cancelling the wizard
+   * Called when cancelling the wizard. If not provided, cancelling navigates back in browser history if possible. Useful for unsaved changes warnings and similar,
    */
   onCancel?: (formData: FieldValues) => void;
   /**
    * Called when validation errors occur
    */
-  onError?: (
-    error: FieldErrors | string | object | unknown,
-    type:
-      | 'FieldErrors'
-      | 'network error'
-      | 'string'
-      | `unknown: ${'undefined' | 'object' | 'boolean' | 'number' | 'bigint' | 'string' | 'symbol' | 'function'}`,
-  ) => void;
+  onError?: (error: unknown, type: string, logMsg: string) => void;
 };
 
 /**
  * Internal handler functions for ProgressWizard navigation and actions. Not exposed to consumers.
  * @property handleContinue - Advances to the next step (calls onContinue if provided)
  * @property handleBack - Returns to the previous step (calls onBack if provided)
- * @property handleSubmit - Submits the form (calls onSubmit instead of doing the native form submit if provided)
- * @property handleCancel - Cancels the wizard (calls onCancel if provided)
+ * @property handleSubmit - Submits the form (calls onFormSubmit instead of doing the native form submit if provided)
+ * @property handleCancel - Cancels the wizard (calls onCancel if provided, otherwise navigates back in the browser history)
  */
 export type Handlers = {
   handleContinue: () => void;

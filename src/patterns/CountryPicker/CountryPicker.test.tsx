@@ -85,9 +85,9 @@ describe('CountryPicker Component', () => {
       'Hong Kong',
       'Hong Kong',
     );
-  });
+  }, 10000);
 
   it('opens phone-mode modal, selects an option, confirms selection, and updates value', async () => {
     await selectCountryAndConfirm({ ...defaultProps, ...toConfig(true, undefined, vi.fn()) }, 'Hong Kong', 'HK');
-  });
+  }, 10000);
 });

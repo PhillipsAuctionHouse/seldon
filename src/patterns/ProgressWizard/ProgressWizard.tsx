@@ -1,4 +1,4 @@
-import { forwardRef, useState, useEffect, useRef, type SetStateAction } from 'react';
+import { forwardRef, useState, useRef, useCallback, type SetStateAction, useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -9,11 +9,13 @@ import {
   type NamespacedSchemas,
 } from './types';
 import InnerProgressWizard from './components/InnerProgressWizard';
+import { useHandleActions } from './hooks/useHandleActions';
+import { useHistoryManagement } from './hooks/useHistoryManagement';
 import { z } from 'zod';
 import { v4 as uuidv4 } from 'uuid';
 
 /**
- * Props for the main ProgressWizard component. Accepts either 'action' or 'onSubmit', but not both.
+ * Props for the main ProgressWizard component.
  *
  * @property steps - Array of FormStep objects (wizard steps, the primary configuration object).
  * @property loadingState - Current loading state (aligns with remix fetchers, see type LoadingState)+
@@ -21,21 +23,23 @@ import { v4 as uuidv4 } from 'uuid';
  * @property customHeader - Optional custom header ReactNode, displays above progress bar.
  *
  * @property hideNavigation - If true, hides the default footer navigation (so you can implement your own via the `setCurrentStepIndex`
- *   function in the step component factory). Note that this removes the default triggers for `onContinue`, `onBack`, `onSubmit`, and `onCancel`. These are instead available to the step component factory under the `handlers` property.
+ *   function in the step component factory). Note that this removes the default triggers for `onContinue`, `onBack`, `onFormSubmit`, and `onCancel`. These are instead available to the step component factory under the `handlers` property.
  * @property hideProgressIndicator - If true, hides the progress indicator bar.
  *
- * @property action - Optional form action URL, only if 'onSubmit' is not provided.
+ * @property manageHistory - If true, the wizard will push history states on step changes, allowing the browser back/forward buttons to navigate between steps. Default is true.
+ *
+ * @property action - Optional form action URL, ignored if 'onFormSubmit' is provided.
  *
  * @property startLabel, cancelLabel, backLabel, continueLabel, submitLabel - Button labels for navigation
  *
- * @property onSubmit - Called if present on final submit (receives all form data). Not compatible with the `action` prop, because it overrides native submit.
+ * @property onFormSubmit - Called if present on final submit (receives all form data, and a function to check if the current step is valid). Not compatible with the `action` prop, because it overrides native form submit.
  * @property onContinue - Called if present before advancing to next step (return false to block navigation, useful for validation if not using step schemas)
  * @property onBack - Called if present before going back (return false to block navigation)
  * @property onCancel - Called if present when cancelling the wizard
  * @property onError - Called if present when validation errors occur
  *
  * @remarks
- *   Only one of `action` or `onSubmit` should be provided. If both are present, Typescript will get mad and `action` will be ignored.
+ *   Only one of `action` or `onFormSubmit` should be provided. If both are present, Typescript will get mad and `action` will be ignored.
  *
  * @todo `onContinue` should provide a mechanism for setting per-field error messages
  */
@@ -53,7 +57,7 @@ export interface ProgressWizardProps extends ProgressWizardBaseProps, ButtonLabe
  * <ProgressWizard
  *   steps={[{ id: 'step1', label: 'Step 1', schema: z.object({}), componentFactory: (formContextAndOtherGoodies) => <div>Step 1</div> }]}
  *   loadingState="idle"
- *   onSubmit={(data) => alert(JSON.stringify(data))}
+ *   onFormSubmit={(data) => alert(JSON.stringify(data))}
  * />
  */
 
@@ -66,7 +70,9 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, r
     hideNavigation,
     hideProgressIndicator,
 
-    action,
+    action: _action,
+
+    manageHistory = true,
 
     startLabel = 'Start',
     cancelLabel = 'Cancel',
@@ -77,9 +83,13 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, r
     onContinue,
     onBack,
     onCancel,
-    onSubmit,
+    onFormSubmit,
     onError,
   } = props;
+
+  /*                       *\
+        ✨ Prop prep ✨ 
+  \*                       */
 
   // Ensure every step has at least an empty ZodObject as its schema
   const steps = propSteps.map((step) => ({ ...step, schema: step.schema ?? z.object({}) }));
@@ -91,14 +101,20 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, r
 
   if (steps.length > 10 && !hideProgressIndicator) {
     console.warn(
-      'ProgressWizard',
+      '[ProgressWizard]',
       'You have more than 10 steps. Consider setting `hideProgressIndicator` because it is going to look weird.',
     );
   }
 
-  if (onSubmit && action) {
-    console.warn('ProgressWizard', 'Both `onSubmit` and `action` props were provided. `action` will be ignored.');
+  let action = _action;
+  if (onFormSubmit && action) {
+    console.warn('[ProgressWizard]', 'Both `onFormSubmit` and `action` props were provided. `action` will be ignored.');
+    action = undefined;
   }
+
+  /*                           *\
+     ✨ Form State Handling ✨
+  \*                           */
 
   const formIdRef = useRef<string>(`progress-wizard-form-${uuidv4()}`);
   const formId = formIdRef.current;
@@ -112,10 +128,14 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, r
   const [loadingState, setLoadingState] = useState<LoadingState>(extLoadingState ?? 'idle');
 
   // Skip updating currentStepIndex if navigation is hidden, because that means the consumer is managing it themselves
-  const setCurrentStepIndexHandler: (arg: SetStateAction<number>) => void = (arg) => {
-    if (!hideNavigation) setCurrentStepIndex(arg);
-  };
+  const setCurrentStepIndexHandler = useCallback(
+    (arg: SetStateAction<number>) => {
+      if (!hideNavigation) setCurrentStepIndex(arg);
+    },
+    [hideNavigation, setCurrentStepIndex],
+  );
 
+  // Sync loading state with external prop
   useEffect(() => {
     setLoadingState(extLoadingState ?? 'idle');
   }, [extLoadingState]);
@@ -124,90 +144,43 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, r
     resolver: zodResolver(z.object({ ...namespacedStepSchemas })),
     defaultValues,
     mode: 'onSubmit',
-    shouldUnregister: false,
+    shouldUnregister: false, // maintains state on inactive steps
   });
 
-  const getIsValid = async () => {
-    const relevantSteps = steps.filter((_, i) => i <= currentStepIndex);
-    const result = await formMethods.trigger(relevantSteps.filter((_, i) => i <= currentStepIndex).map(({ id }) => id));
-    return result;
-  };
+  // Check if all fields in current and previous steps are valid, or current only if specified
+  const getIsValid = useCallback(
+    async (currentOnly = false) => {
+      const relevantSteps = currentOnly ? [steps[currentStepIndex]] : steps.slice(0, currentStepIndex + 1);
+      const result = await formMethods.trigger(relevantSteps.map(({ id }) => id));
+      return result;
+    },
+    [steps, currentStepIndex, formMethods],
+  );
 
-  const handleContinue = async () => {
-    formMethods.clearErrors();
-    setLoadingState('submitting');
+  // Use custom hook for action handlers
+  const { handleContinue, handleBack, handleCancel, handleSubmit } = useHandleActions({
+    isFirstStep,
+    isLastStep,
+    formMethods,
+    setLoadingState,
+    onContinue,
+    onBack,
+    onCancel,
+    onFormSubmit,
+    onError,
+    getIsValid,
+    setCurrentStepIndexHandler,
+    currentStep,
+    formId,
+  });
 
-    if (onContinue && onContinue(formMethods.getValues()) === false) {
-      setLoadingState('idle');
-      return;
-    }
-
-    const valid = await getIsValid();
-    if (valid && !isLastStep) setCurrentStepIndexHandler((idx) => idx + 1);
-
-    setLoadingState('idle');
-  };
-
-  const handleBack = () => {
-    if (onBack && onBack(formMethods.getValues()) === false) return;
-    if (!isFirstStep) setCurrentStepIndexHandler((idx) => idx - 1);
-    else console.error('ProgressWizard', 'Cannot go back from first step');
-  };
-
-  const handleCancel = () => {
-    if (onCancel) onCancel(formMethods.getValues());
-  };
-
-  const handleSubmit = async () => {
-    if (currentStep.schema) formMethods.clearErrors();
-    try {
-      setLoadingState('submitting');
-      if (onSubmit) {
-        onSubmit(formMethods.getValues());
-        return;
-      } else {
-        const valid = await getIsValid();
-        if (valid) {
-          const form = document.getElementById(formId);
-          if (form && form instanceof HTMLFormElement) {
-            form.submit();
-          }
-        }
-      }
-    } catch (error) {
-      if (onError) {
-        const errorType: Parameters<typeof onError>[1] =
-          typeof error === 'string'
-            ? 'string'
-            : error && typeof error === 'object' && 'message' in error
-              ? 'FieldErrors'
-              : `unknown: ${typeof error}`;
-
-        onError(error, errorType);
-        if (errorType.startsWith('unknown')) {
-          console.error('handleSubmit', 'An error of an unknown type occurred: ' + String(error));
-          if (error && typeof error === 'object') {
-            console.error('handleSubmit', 'Error object entries: ' + Object.entries(error));
-          }
-        }
-      }
-      // too much variation here
-      if (typeof error === 'string') {
-        console.error('handleSubmit', 'Error submitting form (string): ' + error);
-      } else if (error instanceof Error) {
-        console.error('handleSubmit', 'Error submitting form (Error object): ' + error.message + ' ' + error.stack);
-      } else if (error && typeof error === 'object') {
-        console.error('handleSubmit', 'Error submitting form (object): ' + Object.entries(error));
-        for (const [key, value] of Object.entries(error)) {
-          console.error('handleSubmit', `Error property [${key}]: ${String(value)}`);
-        }
-      } else {
-        console.error('handleSubmit', 'Error submitting form (unknown error type): ' + String(error));
-      }
-    } finally {
-      setLoadingState('idle');
-    }
-  };
+  // Use custom hook for browser history management
+  useHistoryManagement({
+    manageHistory,
+    currentStepIndex,
+    stepsLength: steps.length,
+    setCurrentStepIndex,
+  });
 
   return (
     <FormProvider {...formMethods}>

@@ -71,7 +71,7 @@ export const usePendingValue = <T extends FieldValues>(
   const applyPendingValue = () => {
     const value = pendingValueRef.current;
     if (value !== undefined) formMethods.setValue(fieldName, value);
-    else console.error('usePendingValue', 'Cannot apply pending value when none has been set via `setPendingValue`');
+    else console.error('[usePendingValue]', 'Cannot apply pending value when none has been set via `setPendingValue`');
 
     if (additionalAction && additionalAction() === false) return;
     setPendingValueState(undefined);

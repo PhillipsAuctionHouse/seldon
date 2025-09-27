@@ -20,7 +20,7 @@ import { useProgressWizardForm } from '../hooks/useProgressWizardForm';
  * @property buttonLabels - Button labels for navigation (see type ButtonLabels)
  * @property loadingState - Current loading state (see type LoadingState, aligns with a remix fetcher)
  * @property setLoadingState - Setter for loading state
- * @property action - Optional form action URL, irrelevant if `onSubmit` is supplied to the parent component.
+ * @property action - Optional form action URL, irrelevant if `onFormSubmit` is supplied to the parent component.
  * @property isFirstStep - True if this is the first step
  * @property isLastStep - True if this is the last step
  * @property className - Optional class for styling
@@ -94,41 +94,45 @@ const InnerProgressWizard = forwardRef<HTMLDivElement, InnerProgressWizardProps>
     }
   }, [currentStep, formMethods]);
 
-  const { registerProgressWizardInput } = useProgressWizardForm();
+  const { registerProgressWizardInput: actualRegisterProgressWizardInput } = useProgressWizardForm();
+  const { handleSubmit: _handleSubmit, register: _register, ...maintainedFormMethods } = formMethods;
+
   const currentStepComponent = useMemo(
     () =>
       cloneElement(
         currentStep?.componentFactory({
-          ...formMethods,
+          ...maintainedFormMethods,
+          formId,
           registerProgressWizardInput: (fieldName, options) =>
-            registerProgressWizardInput(fieldName, options, currentStep.id),
+            actualRegisterProgressWizardInput(fieldName, options, currentStep.id),
           currentStepIndex,
           setCurrentStepIndex,
           loadingState,
           setLoadingState,
-          handlers: {
-            handleContinue,
-            handleBack,
-            handleSubmit,
-            handleCancel,
-          },
+
+          handleSubmit,
+          handleContinue,
+          handleBack,
+          handleCancel,
         }),
         {
           key: currentStep.id,
         },
       ),
     [
+      // hope everyone likes dependencies
       currentStep,
+      maintainedFormMethods,
+      formId,
       currentStepIndex,
-      formMethods,
-      loadingState,
-      registerProgressWizardInput,
       setCurrentStepIndex,
+      loadingState,
       setLoadingState,
+      handleSubmit,
       handleContinue,
       handleBack,
-      handleSubmit,
       handleCancel,
+      actualRegisterProgressWizardInput,
     ],
   );
 

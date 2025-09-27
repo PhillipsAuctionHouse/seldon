@@ -46,6 +46,26 @@ beforeEach(() => {
     writable: true,
     value: MockResizeObserver,
   });
+
+  Object.defineProperty(window, 'PointerEvent', {
+    writable: true,
+    value: class PointerEvent extends MouseEvent {
+      constructor(type: string, params: Record<string, unknown> = {}) {
+        super(type, params);
+      }
+    },
+  });
+
+  Object.defineProperty(window, 'WheelEvent', {
+    writable: true,
+    value: class WheelEvent extends MouseEvent {
+      deltaY: number;
+      constructor(type: string, params: Record<string, number> = {}) {
+        super(type, params);
+        this.deltaY = params.deltaY ?? 0;
+      }
+    },
+  });
 });
 
 afterEach(() => {

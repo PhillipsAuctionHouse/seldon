@@ -22,20 +22,13 @@ export const handleHiddenFields: HandleHiddenFields = ({ hiddenFields, id }) => 
     (el) => el.getAttribute('name')?.startsWith(id) || el.id?.startsWith(id),
   );
   hiddenFields = (hiddenFields ?? []).map(addStepId);
-  console.log('hidden', hiddenFields);
-
-  console.log(
-    'all',
-    allFields.map((f) => f.getAttribute('name')),
-  );
   allFields.forEach((el) => {
     const elName = el.getAttribute('name');
     if (!elName) {
-      console.warn('Skipping element with no name', el);
+      console.warn('[handleHiddenFields]', 'Skipping element with no name', el);
       return;
     }
     if ((hiddenFields ?? []).includes(elName)) {
-      console.log('hiding', el.id);
       const parentDiv = el.closest('div');
 
       el.setAttribute('data-prev', `${el.getAttribute('type')}|${el.getAttribute('tabindex')}`);

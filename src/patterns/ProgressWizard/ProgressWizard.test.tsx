@@ -1,4 +1,4 @@
-import { configure, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi, type Mock } from 'vitest';
 import ProgressWizard from './ProgressWizard';
 import { z } from 'zod';
@@ -7,16 +7,6 @@ import { type LoadingState, type FormStep } from './types';
 import userEvent from '@testing-library/user-event';
 import { useState, type FC } from 'react';
 
-beforeAll(() => {
-  configure({
-    getElementError: (message: string | null, _container: Element) => {
-      const error = new Error(message ?? '');
-      error.name = 'TestingLibraryElementError';
-      error.stack = undefined;
-      return error;
-    },
-  });
-});
 beforeEach(() => {
   if ((console.error as Mock)?.mockRestore) (console.error as Mock).mockRestore();
 });
@@ -24,6 +14,160 @@ beforeEach(() => {
 const getWizName = (label: string) => ({ name: `Wizard: ${label}` });
 
 describe('ProgressWizard', () => {
+  it('submits with Enter key and navigates steps with keyboard', async () => {
+    const steps: FormStep[] = [
+      {
+        id: 'step1',
+        label: 'Step 1',
+        componentFactory: ({ registerProgressWizardInput }) => (
+          <Input {...registerProgressWizardInput('name')} key="step1-input" />
+        ),
+      },
+      {
+        id: 'step2',
+        label: 'Step 2',
+        componentFactory: ({ registerProgressWizardInput }) => (
+          <Input {...registerProgressWizardInput('age', { overrides: { type: 'number' } })} key="step2-input" />
+        ),
+      },
+    ];
+    render(
+      <ProgressWizard
+        steps={steps}
+        loadingState="idle"
+        startLabel="Start"
+        cancelLabel="Cancel"
+        backLabel="Back"
+        continueLabel="Continue"
+        submitLabel="Submit"
+      />,
+    );
+    await userEvent.type(screen.getByLabelText('Name*'), 'KeyboardUser');
+    await userEvent.keyboard('{Enter}');
+    await waitFor(() => expect(screen.getByLabelText('Age*')).toBeInTheDocument());
+    await userEvent.type(screen.getByLabelText('Age*'), '42');
+    await userEvent.keyboard('{Enter}');
+    // Should be on submit step or show submit button
+    expect(screen.getByRole('button', getWizName('Submit'))).toBeInTheDocument();
+  });
+
+  it('persists field/form data when navigating back and forth through four steps', async () => {
+    const steps: FormStep[] = [
+      {
+        id: 'step1',
+        label: 'Step 1',
+        componentFactory: ({ registerProgressWizardInput }) => (
+          <Input {...registerProgressWizardInput('field1')} key="step1-input" />
+        ),
+      },
+      {
+        id: 'step2',
+        label: 'Step 2',
+        componentFactory: ({ registerProgressWizardInput }) => (
+          <Input {...registerProgressWizardInput('field2')} key="step2-input" />
+        ),
+      },
+      {
+        id: 'step3',
+        label: 'Step 3',
+        componentFactory: ({ registerProgressWizardInput }) => (
+          <Input {...registerProgressWizardInput('field3')} key="step3-input" />
+        ),
+      },
+      {
+        id: 'step4',
+        label: 'Step 4',
+        componentFactory: ({ registerProgressWizardInput }) => (
+          <Input {...registerProgressWizardInput('field4')} key="step4-input" />
+        ),
+      },
+      {
+        id: 'step5',
+        label: 'Step 5',
+        componentFactory: () => <div>just here to be the unused submit step</div>,
+      },
+    ];
+    render(
+      <ProgressWizard
+        steps={steps}
+        loadingState="idle"
+        startLabel="Start"
+        cancelLabel="Cancel"
+        backLabel="Back"
+        continueLabel="Continue"
+        submitLabel="Submit"
+      />,
+    );
+    // Fill all fields
+    await userEvent.type(screen.getByLabelText('Field1*'), 'A');
+    await userEvent.click(screen.getByRole('button', getWizName('Start')));
+    await userEvent.type(screen.getByLabelText('Field2*'), 'B');
+    await userEvent.click(screen.getByRole('button', getWizName('Continue')));
+    await userEvent.type(screen.getByLabelText('Field3*'), 'C');
+    await userEvent.click(screen.getByRole('button', getWizName('Continue')));
+    await userEvent.type(screen.getByLabelText('Field4*'), 'D');
+    // Go back to step 1
+    await userEvent.click(screen.getByRole('button', getWizName('Back')));
+    await userEvent.click(screen.getByRole('button', getWizName('Back')));
+    await userEvent.click(screen.getByRole('button', getWizName('Back')));
+    expect(screen.getByLabelText('Field1*')).toHaveValue('A');
+    await userEvent.click(screen.getByRole('button', getWizName('Continue')));
+    expect(screen.getByLabelText('Field2*')).toHaveValue('B');
+    await userEvent.click(screen.getByRole('button', getWizName('Continue')));
+    expect(screen.getByLabelText('Field3*')).toHaveValue('C');
+    await userEvent.click(screen.getByRole('button', getWizName('Continue')));
+    expect(screen.getByLabelText('Field4*')).toHaveValue('D');
+  });
+
+  it.only('handles browser navigation buttons (back/forward)', async () => {
+    const steps: FormStep[] = [
+      {
+        id: 'step1',
+        label: 'Step 1',
+        componentFactory: ({ registerProgressWizardInput }) => (
+          <Input {...registerProgressWizardInput('field1')} key="step1-input" />
+        ),
+      },
+      {
+        id: 'step2',
+        label: 'Step 2',
+        componentFactory: ({ registerProgressWizardInput }) => (
+          <Input {...registerProgressWizardInput('field2')} key="step2-input" />
+        ),
+      },
+      {
+        id: 'step3',
+        label: 'Step 3',
+        componentFactory: ({ registerProgressWizardInput }) => (
+          <Input {...registerProgressWizardInput('field3')} key="step3-input" />
+        ),
+      },
+    ];
+    render(
+      <ProgressWizard
+        steps={steps}
+        loadingState="idle"
+        startLabel="Start"
+        cancelLabel="Cancel"
+        backLabel="Back"
+        continueLabel="Continue"
+        submitLabel="Submit"
+      />,
+    );
+    await userEvent.type(screen.getByLabelText('Field1*'), 'A');
+    await userEvent.click(screen.getByRole('button', getWizName('Start')));
+    await userEvent.type(screen.getByLabelText('Field2*'), 'B');
+    await userEvent.click(screen.getByRole('button', getWizName('Continue')));
+    await userEvent.type(screen.getByLabelText('Field3*'), 'C');
+    window.history.back();
+    window.dispatchEvent(new PopStateEvent('popstate'));
+    await waitFor(() => expect(screen.getByLabelText('Field2*')).toBeInTheDocument());
+    expect(screen.getByLabelText('Field2*')).toHaveValue('B');
+    window.history.forward();
+    window.dispatchEvent(new PopStateEvent('popstate'));
+    await waitFor(() => expect(screen.getByLabelText('Field3*')).toBeInTheDocument());
+    expect(screen.getByLabelText('Field3*')).toHaveValue('C');
+  });
   it('hides the ProgressIndicator when hideProgressIndicator is true', () => {
     const steps: FormStep[] = [
       {
@@ -118,7 +262,7 @@ describe('ProgressWizard', () => {
 
     const TestWrapper: FC = () => {
       const [fetcherState, setFetcherState] = useState<LoadingState>('idle');
-      const onSubmit = vi.fn(async () => {
+      const onFormSubmit = vi.fn(async () => {
         setFetcherState('loading');
         await new Promise((resolve) => setTimeout(resolve, 500));
         setFetcherState('idle');
@@ -127,7 +271,7 @@ describe('ProgressWizard', () => {
         <ProgressWizard
           steps={steps}
           loadingState={fetcherState}
-          onSubmit={onSubmit}
+          onFormSubmit={onFormSubmit}
           startLabel="Start"
           cancelLabel="Cancel"
           backLabel="Back"
@@ -317,6 +461,10 @@ describe('ProgressWizard', () => {
   });
 
   it('handles duplicate field names across steps', async () => {
+    // Mock form.submit to avoid jsdom error
+    const originalSubmit = HTMLFormElement.prototype.submit;
+    HTMLFormElement.prototype.submit = vi.fn();
+
     const steps: FormStep[] = [
       {
         id: 'step1',
@@ -344,7 +492,6 @@ describe('ProgressWizard', () => {
         backLabel="Back"
         continueLabel="Continue"
         submitLabel="Submit"
-        action="#"
       />,
     );
     await userEvent.type(screen.getByLabelText('Name*'), 'A');
@@ -354,6 +501,9 @@ describe('ProgressWizard', () => {
     await userEvent.click(screen.getByRole('button', getWizName('Submit')));
     // Should not throw or lose value
     expect(screen.getByLabelText('Name*')).toHaveValue('AB');
+
+    // Clean up after test
+    HTMLFormElement.prototype.submit = originalSubmit;
   });
 
   it('calls onCancel and onBack and prevents navigation if they return false', async () => {

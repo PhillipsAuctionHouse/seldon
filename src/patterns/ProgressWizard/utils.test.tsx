@@ -1,5 +1,4 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { screen } from '@testing-library/react';
 import { handleHiddenFields } from './utils';
 import { z } from 'zod';
 import { FormStep } from './types';
@@ -50,7 +49,6 @@ describe('handleHiddenFields', () => {
 
   it('hides specified fields and sets correct attributes', () => {
     handleHiddenFields(genStep(['firstName']));
-    screen.logTestingPlaygroundURL();
     inputEls.forEach((el) => {
       if (el.getAttribute('name') === 'step1.firstName') {
         expect(el.getAttribute('type')).toBe('hidden');

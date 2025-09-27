@@ -39,7 +39,7 @@ describe('usePendingValue', () => {
     await waitFor(() => {
       expect(result.current.pendingValue).toBeUndefined();
       expect(errorSpy).toHaveBeenCalledWith(
-        'usePendingValue',
+        '[usePendingValue]',
         'Cannot apply pending value when none has been set via `setPendingValue`',
       );
     });
@@ -110,7 +110,7 @@ describe('usePendingValue', () => {
     result.current.applyPendingValue();
     await waitFor(() => {
       expect(errorSpy).toHaveBeenCalledWith(
-        'usePendingValue',
+        '[usePendingValue]',
         'Cannot apply pending value when none has been set via `setPendingValue`',
       );
     });

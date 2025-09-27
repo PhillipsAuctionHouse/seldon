@@ -1,5 +1,5 @@
 import ProgressWizard, { ProgressWizardProps } from './ProgressWizard';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { z } from 'zod';
 import Input from '../../components/Input/Input';
 import { ArgTypes } from '@storybook/react';
@@ -18,10 +18,13 @@ const translations: Record<string, string> = {
   nameRequired: 'Name is required',
   email: 'Email',
   emailRequired: 'Email is required',
+  emailInvalid: 'Email is invalid',
   age: 'Age',
   ageRequired: 'Age is required',
-  password: 'Password',
-  passwordRequired: 'Password is required',
+
+  password: 'Contraseña',
+  passwordRequired: 'Se requiere la contraseña',
+  passwordTooShort: 'La contraseña es demasiado corta',
 };
 
 const t = (key: string) => translations[key] || key;
@@ -39,7 +42,7 @@ const argTypes = {
   action: { control: { type: 'text' } },
   onContinue: { action: 'onContinue' },
   onCancel: { action: 'onCancel' },
-  onSubmit: { action: 'onSubmit' },
+  onFormSubmit: { action: 'onFormSubmit' },
   onError: { action: 'onError' },
   hideNavigation: { control: { type: 'boolean' } },
   hideProgressIndicator: { control: { type: 'boolean' } },
@@ -67,40 +70,28 @@ export const BasicWizard = () => {
       ),
     },
   ];
-  const alertedOnContinue = useRef(false);
 
   return (
     <ProgressWizard
       steps={steps}
       loadingState="idle"
-      onContinue={() => {
-        if (!alertedOnContinue.current) {
-          alert(
-            'Called `onContinue`, which can prevent continuing if it returns `false`. Will hide this message until reload.',
-          );
-          alertedOnContinue.current = true;
-        }
-        return true;
-      }}
       onCancel={() => alert('Called `onCancel`, without which cancelling does nothing')}
-      onSubmit={(data) =>
-        alert(
-          `Called \`onSubmit\`, which replaces native form submission and validation. Both can still happen via function passed through the component factory.\n\nForm data: ${JSON.stringify(data)}`,
-        )
-      }
       startLabel="Start"
       cancelLabel="Cancel"
       backLabel="Back"
       continueLabel="Continue"
       submitLabel="Submit"
+      action="javascript:alert('Native form submission via the `action` prop')"
     />
   );
 };
 BasicWizard.argTypes = argTypes;
 
 // Story 2: Zod validation with translation function and onError
-
 export const TranslationWizard = () => {
+  const [email, setEmail] = useState('');
+  const formRef = useRef<HTMLDivElement | null>(null);
+
   const steps: FormStep[] = [
     {
       id: 'step1',
@@ -111,11 +102,25 @@ export const TranslationWizard = () => {
           .min(1, { message: t('emailRequired') })
           .email({ message: t('emailInvalid') }),
       }),
-      componentFactory: ({ registerProgressWizardInput }) => (
-        <Input {...registerProgressWizardInput('email', { translationFunction: t })} />
-      ),
+      componentFactory: ({ registerProgressWizardInput, watch }) => {
+        const watchedEmail = watch('step1.email');
+        useEffect(() => {
+          setEmail(watchedEmail || '');
+        }, [watchedEmail, watch]);
+        return <Input {...registerProgressWizardInput('email', { translationFunction: t })} />;
+      },
     },
   ];
+
+  useEffect(() => {
+    if (formRef.current) {
+      formRef.current.setAttribute(
+        'action',
+        `javascript:alert('Native form submission via the action prop. Form values: { email: "${email}" }')`,
+      );
+    }
+  }, [email]);
+
   return (
     <ProgressWizard
       steps={steps}
@@ -123,11 +128,16 @@ export const TranslationWizard = () => {
       onError={(error, errorType) =>
         alert('Error: ' + (errorType === 'FieldErrors' ? (error as FieldErrors).email?.message : error))
       }
+      onCancel={() => {
+        alert('Cancelled');
+      }}
       startLabel="Start"
       cancelLabel="Cancel"
       backLabel="Back"
       continueLabel="Continue"
       submitLabel="Submit"
+      action={`javascript:alert('Native form submission via the action prop. Form values: { email: "${email}" }')`}
+      ref={formRef}
     />
   );
 };
@@ -145,7 +155,7 @@ const asyncEmailSchema = z
     { message: 'Email is already taken' },
   );
 
-export const AsyncValidationWizard = () => {
+export const AsyncValidationWizardWithCallbacks = () => {
   const steps: FormStep[] = [
     {
       id: 'step1',
@@ -172,68 +182,108 @@ export const AsyncValidationWizard = () => {
   ];
 
   const alerts = useRef<string[]>([]);
+  const [shouldErrorOnSubmit, setShouldErrorOnSubmit] = useState(false);
+
+  const triggerErrorOnSubmit = () => {
+    setShouldErrorOnSubmit(!shouldErrorOnSubmit);
+  };
+
   return (
-    <ProgressWizard
-      steps={steps}
-      loadingState="idle"
-      onBack={() => {
-        if (!alerts.current.includes('Back')) {
-          alert('Back (will only alert once)');
-          alerts.current.push('Back');
-        }
-        return true;
-      }}
-      onContinue={() => {
-        if (!alerts.current.includes('Continue')) {
-          alert('Continue (will only alert once)');
-          alerts.current.push('Continue');
-        }
-        return true;
-      }}
-      onCancel={() => {
-        if (!alerts.current.includes('Cancel')) {
-          alert('Cancel (will only alert once)');
-          alerts.current.push('Cancel');
-        }
-      }}
-      onSubmit={(data) => alert('Submit: ' + JSON.stringify(data))}
-      onError={(error) => alert('Error: ' + JSON.stringify(error))}
-      startLabel="Start"
-      cancelLabel="Cancel"
-      backLabel="Back"
-      continueLabel="Continue"
-      submitLabel="Submit"
-    />
+    <>
+      <button
+        type="button"
+        style={{
+          marginBottom: 16,
+          background: shouldErrorOnSubmit ? '#ffe4e1' : '#f0f0f0',
+          color: '#333',
+          border: shouldErrorOnSubmit ? '1px solid #ffb6c1' : '1px solid #ccc',
+          borderRadius: 4,
+          padding: '8px 16px',
+        }}
+        onClick={triggerErrorOnSubmit}
+      >
+        Enable Form Submission Error (will throw error on final submit if toggled on)
+      </button>
+      <ProgressWizard
+        steps={steps}
+        loadingState="idle"
+        onBack={() => {
+          if (!alerts.current.includes('Back')) {
+            alert('onBack callback (will only alert once here for minimal annoyance)');
+            alerts.current.push('Back');
+          }
+          return true;
+        }}
+        onContinue={() => {
+          if (!alerts.current.includes('Continue')) {
+            alert('onContinue callback (will only alert once here for minimal annoyance)');
+            alerts.current.push('Continue');
+          }
+          return true;
+        }}
+        onCancel={() => {
+          if (!alerts.current.includes('Cancel')) {
+            alert('onCancel callback (will only alert once here for minimal annoyance)');
+            alerts.current.push('Cancel');
+          }
+          return false;
+        }}
+        onFormSubmit={(data) => {
+          if (shouldErrorOnSubmit) {
+            setShouldErrorOnSubmit(false);
+            throw new Error('Simulated form submission error from handleSubmit!');
+          }
+          alert('onSubmit hook: ' + JSON.stringify(data));
+        }}
+        onError={(_err, _type, logMsg) => {
+          alert('onError hook: ' + logMsg);
+        }}
+        startLabel="Start"
+        cancelLabel="Cancel"
+        backLabel="Back"
+        continueLabel="Continue"
+        submitLabel="Submit"
+      />
+    </>
   );
 };
-AsyncValidationWizard.argTypes = argTypes;
+AsyncValidationWizardWithCallbacks.argTypes = argTypes;
 
 // Story 4: Mixed usage, translation, and custom error
-export const MixedWizard = () => {
+export const MixedValidationWizard = () => {
   const steps: FormStep[] = [
     {
-      id: 'step1',
-      label: 'Step 1',
+      id: `step1`,
+      label: `Step 1`,
       schema: z.object({
-        username: z.string().min(3, { message: 'Username must be at least 3 characters.' }),
+        username: z.string().min(3, { message: `Username must be at least 3 characters.` }),
       }),
-      componentFactory: ({ registerProgressWizardInput }) => <Input {...registerProgressWizardInput('username')} />,
+      componentFactory: ({ registerProgressWizardInput }) => (
+        <Input
+          {...registerProgressWizardInput(`username`, {
+            overrides: { labelText: `Username (validation by callback)` },
+          })}
+        />
+      ),
     },
     {
-      id: 'step2',
-      label: 'Step 2',
+      id: `step2`,
+      label: `Step 2`,
       schema: z.object({
         password: z
           .string()
-          .min(1, { message: t('passwordRequired') })
+          .min(1, { message: t(`passwordRequired`) })
           .refine((data) => data.length < 6, {
-            message: 'Password must be longer than five characters',
-            path: ['password'],
+            message: t('passwordTooShort'),
+            path: [`password`],
           }),
       }),
       componentFactory: ({ registerProgressWizardInput }) => (
         <Input
-          {...registerProgressWizardInput('password', { overrides: { type: 'password' }, translationFunction: t })}
+          {...registerProgressWizardInput(`password`, {
+            overrides: { type: `password`, labelText: `${t('password')} (native validation & translated label)` },
+            translationFunction: t,
+          })}
         />
       ),
     },
@@ -249,7 +299,7 @@ export const MixedWizard = () => {
         }
         return true;
       }}
-      onCancel={() => alert('Cancel')}
+      onCancel={() => alert('Cancelled')}
       action="/submit-here"
       onError={(error) => alert('Error: ' + JSON.stringify(error))}
       startLabel="Start"
@@ -260,7 +310,7 @@ export const MixedWizard = () => {
     />
   );
 };
-MixedWizard.argTypes = argTypes;
+MixedValidationWizard.argTypes = argTypes;
 
 export const Playground: {
   render: (props: ProgressWizardProps) => JSX.Element;
@@ -277,7 +327,7 @@ export const Playground: {
 
     onContinue = () => true,
     onCancel = () => void 0,
-    onSubmit,
+    onFormSubmit,
     onError = (error: unknown) => {
       console.error('Playground Error: ' + JSON.stringify(error, null, 2));
     },
@@ -300,7 +350,7 @@ export const Playground: {
         backLabel={backLabel}
         continueLabel={continueLabel}
         submitLabel={submitLabel}
-        onSubmit={onSubmit}
+        onFormSubmit={onFormSubmit}
         action={action}
         hideNavigation={hideNavigation}
         hideProgressIndicator={hideProgressIndicator}
