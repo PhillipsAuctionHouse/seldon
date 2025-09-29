@@ -15,8 +15,6 @@ export interface Tab {
    * Button value
    */
   value: string;
-
-  disabled?: boolean;
 }
 
 /**
@@ -79,7 +77,6 @@ const TabsContainer = forwardRef<HTMLDivElement, TabsContainerProps>(
             <TabTrigger
               key={tab.value}
               value={tab.value}
-              disabled={tab.disabled}
               className={`${baseClassName}__tabs-trigger`}
               onClick={onTabClick}
             >

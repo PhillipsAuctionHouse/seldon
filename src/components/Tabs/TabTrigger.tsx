@@ -8,10 +8,6 @@ export interface TabTriggerProps extends Omit<ComponentProps<'div'>, 'onClick'> 
    */
   value: string;
   /**
-   * Optional disabled state
-   */
-  disabled?: boolean;
-  /**
    * Optional onClick handler
    * @param value
    * @returns
@@ -29,22 +25,19 @@ export interface TabTriggerProps extends Omit<ComponentProps<'div'>, 'onClick'> 
  * @param {TabTriggerProps} props - The props for the TabTrigger component.
  * @returns {JSX.Element} The rendered TabTrigger component.
  */
-const TabTrigger = forwardRef<HTMLButtonElement, TabTriggerProps>(
-  ({ value, disabled, onClick, children, ...props }, ref) => {
-    const { className: baseClassName } = getCommonProps(props, 'TabsContainer');
-    return (
-      <TabsPrimitive.Trigger
-        value={value}
-        className={`${baseClassName}__tabs-trigger`}
-        onClick={() => onClick?.(value)}
-        ref={ref}
-        disabled={disabled}
-      >
-        {children}
-      </TabsPrimitive.Trigger>
-    );
-  },
-);
+const TabTrigger = forwardRef<HTMLButtonElement, TabTriggerProps>(({ value, onClick, children, ...props }, ref) => {
+  const { className: baseClassName } = getCommonProps(props, 'TabsContainer');
+  return (
+    <TabsPrimitive.Trigger
+      value={value}
+      className={`${baseClassName}__tabs-trigger`}
+      onClick={() => onClick?.(value)}
+      ref={ref}
+    >
+      {children}
+    </TabsPrimitive.Trigger>
+  );
+});
 TabTrigger.displayName = 'TabTrigger';
 
 export default TabTrigger;

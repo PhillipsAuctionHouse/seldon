@@ -52,10 +52,8 @@ describe('Tabs', () => {
       </TabsContainer>,
     );
     expect(screen.getByRole('tab', { name: /Overview/ })).toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: /Overview/ })).not.toBeDisabled();
     expect(screen.getByText(/\*/)).toBeInTheDocument();
     expect(screen.getByRole('tab', { name: /Submit/ })).toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: /Submit/ })).not.toBeDisabled();
     expect(screen.getByText(/\+/)).toBeInTheDocument();
   });
   test('displays correct content when a different tab is selected', async () => {
@@ -98,21 +96,5 @@ describe('Tabs', () => {
 
     await userEvent.click(screen.getByRole('tab', { name: /Overview/i }));
     expect(onTabClickMock).toBeCalledWith('overview'); // Validate that the clicked tab value is correct
-  });
-
-  it('renders as disabled when disabled prop is true', () => {
-    const { getByRole } = render(
-      <TabsContainer
-        tabs={[
-          {
-            value: 'tab1',
-            disabled: true,
-            label: undefined,
-          },
-        ]}
-      />,
-    );
-    const button = getByRole('tab');
-    expect(button).toBeDisabled();
   });
 });

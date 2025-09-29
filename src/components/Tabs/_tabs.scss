@@ -28,15 +28,6 @@
       outline: none;
     }
 
-    &[disabled] {
-      cursor: not-allowed;
-      pointer-events: none;
-
-      .#{$px}-text {
-        color: $grey-50;
-      }
-    }
-
     .#{$px}-text {
       color: $button-hover;
       cursor: pointer;

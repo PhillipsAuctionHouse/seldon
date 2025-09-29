@@ -16,7 +16,6 @@ export default meta;
 const tabs = [
   { label: 'Overview', value: 'overview' },
   { label: 'Browse lots', value: 'browse' },
-  { label: 'Disabled', value: 'disabled', disabled: true },
 ];
 
 // Default story for Tabs component
