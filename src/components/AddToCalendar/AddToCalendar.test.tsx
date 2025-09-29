@@ -1,9 +1,10 @@
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, vi } from 'vitest';
 import { render, fireEvent, act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import AddToCalendar from './AddToCalendar';
 import { CalendarEvent } from './types';
 import * as calendarLinks from './calendarLinks';
+
 vi.mock('./calendarLinks', () => ({
   generateGoogleCalendarLink: vi.fn(),
   generateOutlookOnlineLink: vi.fn(),
@@ -11,21 +12,65 @@ vi.mock('./calendarLinks', () => ({
   generateCalendarFile: vi.fn(),
 }));
 
-describe('AddToCalendar component', () => {
-  const event: CalendarEvent = {
-    title: 'Jewels & More: Online Auction',
-    description: 'Jewels & More: Online Auction.',
-    start: new Date('2025-01-27T15:13:02.59+00:00'),
-    end: new Date('2025-06-18T18:15:02.59+00:00'),
-    location: 'New York',
-    timezone: 'America/New_York',
-  };
+const event: CalendarEvent = {
+  title: 'Jewels & More: Online Auction',
+  description: 'Jewels & More: Online Auction.',
+  start: new Date('2025-01-27T15:13:02.59+00:00'),
+  end: new Date('2025-06-18T18:15:02.59+00:00'),
+  location: 'New York',
+  timezone: 'America/New_York',
+};
 
-  beforeEach(() => {
-    vi.clearAllMocks();
+beforeEach(() => {
+  vi.clearAllMocks();
+});
+
+describe('AddToCalendar component', () => {
+  it('iCalendar button triggers generateCalendarFile', async () => {
+    const user = userEvent.setup();
+    const generateCalendarFileSpy = vi.spyOn(calendarLinks, 'generateCalendarFile');
+    const { getByRole } = render(<AddToCalendar event={event} label="Add to calendar" />);
+    await user.click(getByRole('button', { name: 'Add to calendar' }));
+    const iCalBtn = await screen.findByRole('button', { name: 'iCalendar' });
+    await user.click(iCalBtn);
+    expect(generateCalendarFileSpy).toHaveBeenCalled();
   });
 
-  test('renders correctly with CalendarAlt icon initially', () => {
+  it('Outlook button triggers generateCalendarFile', async () => {
+    const user = userEvent.setup();
+    const generateCalendarFileSpy = vi.spyOn(calendarLinks, 'generateCalendarFile');
+    const { getByRole } = render(<AddToCalendar event={event} label="Add to calendar" />);
+    await user.click(getByRole('button', { name: 'Add to calendar' }));
+    const outlookBtn = await screen.findByRole('button', { name: 'Outlook' });
+    await user.click(outlookBtn);
+    expect(generateCalendarFileSpy).toHaveBeenCalled();
+  });
+
+  it('Google Calendar link is rendered', async () => {
+    const user = userEvent.setup();
+    render(<AddToCalendar event={event} label="Add to calendar" />);
+    await user.click(screen.getByRole('button', { name: 'Add to calendar' }));
+    const googleLink = await screen.findByText('Google Calendar');
+    expect(googleLink).toBeInTheDocument();
+  });
+
+  it('Outlook Online link is rendered', async () => {
+    const user = userEvent.setup();
+    render(<AddToCalendar event={event} label="Add to calendar" />);
+    await user.click(screen.getByRole('button', { name: 'Add to calendar' }));
+    const outlookOnlineLink = await screen.findByText('Outlook Online');
+    expect(outlookOnlineLink).toBeInTheDocument();
+  });
+
+  it('Yahoo Calendar link is rendered', async () => {
+    const user = userEvent.setup();
+    render(<AddToCalendar event={event} label="Add to calendar" />);
+    await user.click(screen.getByRole('button', { name: 'Add to calendar' }));
+    const yahooLink = await screen.findByText('Yahoo Calendar');
+    expect(yahooLink).toBeInTheDocument();
+  });
+
+  it('renders correctly with CalendarAlt icon initially', () => {
     const { getByRole } = render(<AddToCalendar event={event} label="Add to calendar" />);
     const button = getByRole('button', { name: 'Add to calendar' });
     expect(button).toBeInTheDocument();
@@ -33,12 +78,12 @@ describe('AddToCalendar component', () => {
     expect(icon).toBeInTheDocument();
   });
 
-  test('renders correctly', () => {
+  it('renders correctly', () => {
     const { getByRole } = render(<AddToCalendar event={event} />);
     expect(getByRole('button')).toBeInTheDocument();
   });
 
-  test('renders calendar links and changes icon to CloseX on trigger click', async () => {
+  it('renders calendar links and changes icon to CloseX on trigger click', async () => {
     const user = userEvent.setup();
     const { getByRole } = render(<AddToCalendar event={event} label="Add to calendar" />);
     const button = getByRole('button', { name: 'Add to calendar' });
@@ -56,7 +101,7 @@ describe('AddToCalendar component', () => {
     expect(closeIcon).toBeInTheDocument();
   });
 
-  test('renders button with default aria-label when event title is missing', () => {
+  it('renders button with default aria-label when event title is missing', () => {
     const eventWithoutTitle: CalendarEvent = {
       title: '', // or omit the title property
       description: 'Some description',
@@ -70,8 +115,8 @@ describe('AddToCalendar component', () => {
     expect(button).toBeInTheDocument();
   });
 
-  test('calls generateCalendarFile when button is clicked ', async () => {
-    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {}); // eslint-disable-line @typescript-eslint/no-empty-function
+  it('calls generateCalendarFile when button is clicked ', async () => {
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => void 0);
     const originalCreateElement = document.createElement;
     const link = originalCreateElement.call(document, 'a');
     link.click = vi.fn(); // Mock the click function
@@ -105,7 +150,7 @@ describe('AddToCalendar component', () => {
     createElementSpy.mockRestore();
   });
 
-  test('clicking iCalendar button calls generateCalendarFile', async () => {
+  it('clicking iCalendar button calls generateCalendarFile', async () => {
     const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {}); // eslint-disable-line @typescript-eslint/no-empty-function
     const originalCreateElement = document.createElement;
     const link = originalCreateElement.call(document, 'a');
@@ -136,7 +181,7 @@ describe('AddToCalendar component', () => {
     createElementSpy.mockRestore();
   });
 
-  test('pressing Enter key on button toggles open state', () => {
+  it('pressing Enter key on button toggles open state', () => {
     const { getByRole } = render(<AddToCalendar event={event} />);
     const button = getByRole('button', { name: 'Add to calendar' });
 

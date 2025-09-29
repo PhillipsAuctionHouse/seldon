@@ -18,8 +18,57 @@ const TestInput = React.forwardRef(
 
 TestInput.displayName = 'TestInput';
 
+const reqProps = { labelText: 'My Test Label', id: 'test-id' };
+
 describe('An Input', () => {
-  const reqProps = { labelText: 'My Test Label', id: 'test-id' };
+  it('renders checkbox input type', () => {
+    render(<Input {...reqProps} type="checkbox" />);
+    expect(screen.getByTestId('test-id')).toHaveAttribute('type', 'checkbox');
+  });
+
+  it('renders radio input type', () => {
+    render(<Input {...reqProps} type="radio" />);
+    expect(screen.getByTestId('test-id')).toHaveAttribute('type', 'radio');
+  });
+
+  it('renders inputAdornment for all supported input types', () => {
+    const types = [
+      'text',
+      'number',
+      'password',
+      'email',
+      'tel',
+      'url',
+      'search',
+      'date',
+      'datetime-local',
+      'month',
+      'time',
+      'week',
+    ];
+    types.forEach((type) => {
+      render(
+        <Input
+          id={`adorned-input-${type}`}
+          labelText="Adorned Input"
+          inputAdornment={<span data-testid={`custom-adornment-${type}`}>Adornment</span>}
+          type={type}
+        />,
+      );
+      expect(screen.getByTestId(`adornment-adorned-input-${type}`)).toBeInTheDocument();
+      expect(screen.getByTestId(`custom-adornment-${type}`)).toBeInTheDocument();
+    });
+  });
+
+  it('renders skeleton for checkboxes', () => {
+    render(<Input labelText="Text Input" id="Input-2" name="stringInput" isSkeletonLoading type="checkbox" />);
+    expect(screen.getByTestId('Input-2')).toHaveClass(`${px}-skeleton`);
+  });
+
+  it('renders skeleton for radio buttons', () => {
+    render(<Input labelText="Text Input" id="Input-3" name="stringInput" isSkeletonLoading type="radio" />);
+    expect(screen.getByTestId('Input-3')).toHaveClass(`${px}-skeleton`);
+  });
 
   it('will render a default value if passed', () => {
     const testRef = React.createRef<HTMLInputElement>();

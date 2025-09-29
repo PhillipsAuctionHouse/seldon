@@ -14,26 +14,26 @@ describe('DescriptiveRadioButtonGroup', () => {
     onValueChange: vi.fn(),
   };
 
-  it('renders the legend when provided', () => {
-    render(<DescriptiveRadioButtonGroup {...defaultProps} />);
-    expect(screen.getByText('Select an option')).toBeInTheDocument();
+  const legendVariants = [
+    { hideLegend: undefined, description: 'renders the legend when provided' },
+    { hideLegend: false, description: 'renders the legend when hideLegend is false' },
+  ];
+
+  it.each(legendVariants)('$description', ({ hideLegend }) => {
+    const props = hideLegend !== undefined ? { ...defaultProps, hideLegend } : defaultProps;
+    render(<DescriptiveRadioButtonGroup {...props} />);
+    expect(screen.getByText('Select an option')).toBeVisible();
   });
 
-  it('renders the legend when hideLegend is false', () => {
-    const { getByText } = render(<DescriptiveRadioButtonGroup {...defaultProps} hideLegend={false} />);
-    expect(getByText('Select an option')).toBeVisible();
-  });
+  const optionStates = [
+    { value: 'option1', checked: [true, false], description: 'marks the correct option as checked for option1' },
+    { value: 'option2', checked: [false, true], description: 'marks the correct option as checked for option2' },
+  ];
 
-  it('renders all options', () => {
-    render(<DescriptiveRadioButtonGroup {...defaultProps} />);
-    expect(screen.getByLabelText('Option 1')).toBeInTheDocument();
-    expect(screen.getByLabelText('Option 2')).toBeInTheDocument();
-  });
-
-  it('marks the correct option as checked', () => {
-    render(<DescriptiveRadioButtonGroup {...defaultProps} />);
-    expect(screen.getByLabelText('Option 1')).toBeChecked();
-    expect(screen.getByLabelText('Option 2')).not.toBeChecked();
+  it.each(optionStates)('$description', ({ value, checked }) => {
+    render(<DescriptiveRadioButtonGroup {...defaultProps} value={value} />);
+    expect((screen.getByLabelText('Option 1') as HTMLInputElement).checked).toBe(checked[0]);
+    expect((screen.getByLabelText('Option 2') as HTMLInputElement).checked).toBe(checked[1]);
   });
 
   it('calls onValueChange when an option is selected', () => {
@@ -42,6 +42,17 @@ describe('DescriptiveRadioButtonGroup', () => {
 
     fireEvent.click(screen.getByLabelText('Option 2'));
     expect(onValueChange).toHaveBeenCalledWith('option2');
+  });
+
+  it('calls onValueChange with an empty string when the option object has no value', () => {
+    const onValueChange = vi.fn();
+    const options = [
+      { id: '1', value: 'option1', labelText: 'Option 1' },
+      { id: '2', value: undefined, labelText: 'Option 2' },
+    ];
+    render(<DescriptiveRadioButtonGroup {...defaultProps} options={options} onValueChange={onValueChange} />);
+    fireEvent.click(screen.getByLabelText('Option 2'));
+    expect(onValueChange).toHaveBeenCalledWith('');
   });
 
   it('returns null when no options are provided', () => {

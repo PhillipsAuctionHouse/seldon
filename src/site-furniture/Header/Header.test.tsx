@@ -14,6 +14,11 @@ import { default as Header } from './Header';
 import { useMobileMenu } from './hooks';
 
 describe('Header', () => {
+  let toggleButton: HTMLElement;
+  let logo: HTMLElement;
+  let nav: HTMLElement;
+  let search: HTMLElement;
+
   const headerComponent = () => (
     <Header logo={<Icon icon="PhillipsLogo" />}>
       <Navigation id={`${px}-main-nav`}>
@@ -34,26 +39,30 @@ describe('Header', () => {
       <Search />
     </Header>
   );
-  it('should render the header component with default props', () => {
+
+  beforeEach(() => {
     render(headerComponent());
-    const toggleButton = screen.getByRole('button', { name: /Open Menu/i });
-    const logo = screen.getByTestId('header-logo');
-    const nav = screen.getByTestId(`${px}-main-nav`);
-    const search = screen.getByTestId(`search`);
+    toggleButton = screen.getByRole('button', { name: /Open Menu/i });
+    logo = screen.getByTestId('header-logo');
+    nav = screen.getByTestId(`${px}-main-nav`);
+    search = screen.getByTestId(`search`);
+  });
+
+  it('should render the header component with default props', () => {
     expect(toggleButton).toBeInTheDocument();
     expect(logo).toBeInTheDocument();
     expect(nav).toBeInTheDocument();
     expect(search).toBeInTheDocument();
   });
 
-  it('should toggle the menu when the toggle button is clicked', async () => {
-    render(headerComponent());
-    const nav = screen.getByTestId(`${px}-main-nav`);
-    const toggleButton = screen.getByRole('button', { name: /Open Menu/i });
-    expect(nav).toHaveClass(`${px}-nav`);
-    await userEvent.click(toggleButton);
-    expect(screen.getByRole('button', { name: /Close Menu/i })).toBeInTheDocument();
-  });
+  it.each([[/Open Menu/i, /Close Menu/i]])(
+    'should toggle the menu when the toggle button is clicked',
+    async (_openText, closeText) => {
+      expect(nav).toHaveClass(`${px}-nav`);
+      await userEvent.click(toggleButton);
+      expect(screen.getByRole('button', { name: closeText })).toBeInTheDocument();
+    },
+  );
 });
 
 describe('Header with logo', () => {
@@ -119,14 +128,36 @@ describe('useMobileMenu', () => {
 });
 
 describe('Header bannerHeight and ResizeObserver', () => {
+  it('should disconnect ResizeObserver on unmount', () => {
+    const disconnectSpy = vi.fn();
+    const originalResizeObserver = window.ResizeObserver;
+    window.ResizeObserver = class {
+      observe = () => void 0;
+      unobserve = () => void 0;
+      disconnect = disconnectSpy;
+    };
+    const { unmount } = render(
+      <Header logo={<Icon icon="PhillipsLogo" />} bannerRef={{ current: document.createElement('div') }} />,
+    );
+    unmount();
+    expect(disconnectSpy).toHaveBeenCalled();
+    window.ResizeObserver = originalResizeObserver;
+  });
+
+  it('provides all context values', () => {
+    render(<Header logo={<Icon icon="PhillipsLogo" />} />);
+    const toggleButton = screen.getByRole('button', { name: /Open Menu/i });
+    expect(toggleButton).toBeInTheDocument();
+    expect(screen.getByTestId('header-logo')).toBeInTheDocument();
+  });
+
   interface TestHeaderWithBannerProps {
     bannerContentHeight?: number;
   }
 
-  function TestHeaderWithBanner({ bannerContentHeight = 0 }: TestHeaderWithBannerProps) {
+  const TestHeaderWithBanner = ({ bannerContentHeight = 0 }: TestHeaderWithBannerProps) => {
     const bannerRef = useRef<HTMLDivElement>(null);
 
-    // Callback ref to mock clientHeight before effect runs
     const setBannerRef = (el: HTMLDivElement | null) => {
       if (el) {
         Object.defineProperty(el, 'clientHeight', {
@@ -145,7 +176,8 @@ describe('Header bannerHeight and ResizeObserver', () => {
         <Header logo={<Icon icon="PhillipsLogo" />} bannerRef={bannerRef} />
       </div>
     );
-  }
+  };
+
   it('should set bannerHeight from NotificationBanner height', async () => {
     render(<TestHeaderWithBanner bannerContentHeight={100} />);
     const header = screen.getByRole('banner');

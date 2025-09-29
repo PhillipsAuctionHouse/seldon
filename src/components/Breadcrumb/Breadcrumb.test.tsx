@@ -71,7 +71,7 @@ describe('Breadcrumb component', () => {
     expect(truncatedItem).not.toHaveClass('seldon-breadcrumb--truncate');
   });
 
-  test('renders breadcrumb items in desktop view', () => {
+  it('renders breadcrumb items in desktop view', () => {
     // Simulate desktop width
     setWindowWidth(1024);
     render(<Breadcrumb items={items} />);
@@ -80,7 +80,7 @@ describe('Breadcrumb component', () => {
     expect(screen.getByText('Lot 1')).toBeInTheDocument();
   });
 
-  test('renders back button in mobile view', () => {
+  it('renders back button in mobile view', () => {
     render(<Breadcrumb {...reqProps} items={items} />);
 
     // Check if back button is rendered
@@ -92,12 +92,38 @@ describe('Breadcrumb component', () => {
     expect(backButton.querySelector('svg')).toBeInTheDocument();
   });
 
-  test('last item is not a link', () => {
+  it('last item is not a link', () => {
     render(<Breadcrumb items={items} />);
 
     const lastItem = screen.getByText('Lot 1');
     expect(lastItem).toBeInTheDocument();
     // Ensure the last item is a <span>, not a link
     expect(lastItem.tagName).toBe('SPAN');
+  });
+
+  it('renders back button with correct href when items[1].href is present', () => {
+    render(
+      <Breadcrumb
+        id="test-breadcrumb"
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Section', href: '/section' },
+          { label: 'Current', href: '/current' },
+        ]}
+      />,
+    );
+    const backButton = screen.getByTestId('test-breadcrumb-back-button');
+    expect(backButton).toHaveAttribute('href', '/section');
+  });
+
+  it('renders back button with default href when items[1].href is missing', () => {
+    render(
+      <Breadcrumb
+        id="test-breadcrumb"
+        items={[{ label: 'Home', href: '/' }, { label: 'Section' }, { label: 'Current', href: '/current' }]}
+      />,
+    );
+    const backButton = screen.getByTestId('test-breadcrumb-back-button');
+    expect(backButton).toHaveAttribute('href', '/');
   });
 });

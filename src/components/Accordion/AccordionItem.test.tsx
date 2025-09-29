@@ -43,13 +43,31 @@ describe('AccordionItem', () => {
     expect(screen.getByTestId('accordion-item-1-trigger')).toHaveClass(`${px}-accordion-item-label--large`);
   });
 
-  it('renders the AccordionItem with locked state', () => {
+  it('renders the AccordionItem with locked state and correct icons', () => {
     render(
       <AccordionItemWithAccordion {...defaultProps} isLocked>
         Content
       </AccordionItemWithAccordion>,
     );
-    expect(screen.getByTestId(/icon-lock/)).toBeInTheDocument();
+    expect(screen.getByTestId('icon-lock')).toBeInTheDocument();
+    expect(screen.queryByTestId('icon-plus')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('icon-minus')).not.toBeInTheDocument();
+  });
+  it('toggles AccordionHeader and calls onOpen/onClose', async () => {
+    const onOpen = vi.fn();
+    const onClose = vi.fn();
+    render(
+      <AccordionItemWithAccordion {...defaultProps} onOpen={onOpen} onClose={onClose}>
+        Content
+      </AccordionItemWithAccordion>,
+    );
+    const trigger = screen.getByTestId('accordion-item-1-trigger');
+    // Simulate opening
+    await userEvent.click(trigger);
+    expect(onOpen).toHaveBeenCalled();
+    // Simulate closing
+    await userEvent.click(trigger);
+    expect(onClose).toHaveBeenCalled();
   });
 
   it('renders the AccordionItem without border bottom when isLastItem is true', () => {

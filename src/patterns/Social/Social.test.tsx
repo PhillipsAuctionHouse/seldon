@@ -32,11 +32,8 @@ describe('Social', () => {
     expect(screen.queryByText(/My Title/)).toBeInTheDocument();
   });
 
-  it('it will render any nested children', () => {
+  it.each([['Youtube'], ['Instagram'], ['Wechat'], ['Spotify']])('renders %s link', (platform) => {
     render(<Social>{children}</Social>);
-    expect(screen.queryByText(/Youtube/)).toBeInTheDocument();
-    expect(screen.queryByText(/Instagram/)).toBeInTheDocument();
-    expect(screen.queryByText(/Wechat/)).toBeInTheDocument();
-    expect(screen.queryByText(/Spotify/)).toBeInTheDocument();
+    expect(screen.getByText(platform)).toBeInTheDocument();
   });
 });

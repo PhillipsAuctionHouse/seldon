@@ -1,25 +1,48 @@
 import { render, screen } from '@testing-library/react';
-import * as React from 'react';
-
 import Input from '../Input/Input';
 import ErrorBoundary, { ErrorBoundaryProps } from './ErrorBoundary';
+import { useEffect } from 'react';
+import { Mock } from 'vitest';
+
+// 🎺TODO figure out how to shush these expected errors
 interface WrappedProps {
   throwError?: () => void;
 }
+
 const VolatileComponent = ({ throwError }: WrappedProps) => {
   const reqProps = { labelText: 'My Test Label', id: 'test-id' };
-  React.useEffect(() => {
-    if (throwError) {
-      throwError();
-    }
+  useEffect(() => {
+    if (throwError) throwError();
   }, [throwError]);
-  return <Input {...reqProps} defaultValue="2023-06-01T08:30" />;
+  return <Input {...reqProps} />;
 };
 
+const log = vi.spyOn(console, 'log').mockImplementation(() => void 0) as Mock;
+const error = vi.spyOn(console, 'error').mockImplementation(() => void 0) as Mock;
+
+beforeEach(() => {
+  vi.spyOn(console, 'error').mockImplementation(() => void 0);
+  vi.spyOn(console, 'log').mockImplementation(() => void 0);
+  vi.spyOn(console, 'warn').mockImplementation(() => void 0);
+});
+
 describe('An ErrorBoundary', () => {
+  it('uses default logger if none provided (error thrown during render)', () => {
+    // Component that throws during render
+    const RenderError = () => {
+      throw new Error('Default logger test');
+    };
+    render(
+      <ErrorBoundary logger={log}>
+        <RenderError />
+      </ErrorBoundary>,
+    );
+    expect(log).toHaveBeenCalledWith(expect.objectContaining({ message: 'Default logger test' }), expect.anything());
+  });
+
   it('will render its child component if no error is thrown', () => {
     render(
-      <ErrorBoundary>
+      <ErrorBoundary logger={log}>
         <VolatileComponent />
       </ErrorBoundary>,
     );
@@ -27,14 +50,8 @@ describe('An ErrorBoundary', () => {
   });
 
   it('will render a default fallback component if an error is thrown', () => {
-    const error = vi.spyOn(console, 'error').mockImplementation(() => {
-      return;
-    });
-    const log = vi.spyOn(console, 'log').mockImplementation(() => {
-      return;
-    });
     render(
-      <ErrorBoundary logger={log as unknown as ErrorBoundaryProps['logger']}>
+      <ErrorBoundary logger={log}>
         <VolatileComponent
           throwError={() => {
             throw new Error("I've been thrown!");
@@ -45,44 +62,25 @@ describe('An ErrorBoundary', () => {
     expect(screen.queryByTestId('test-id')).not.toBeInTheDocument();
     expect(screen.getByText('Sorry... An error occurred and we are looking into it')).toBeInTheDocument();
     expect(console.error).toHaveBeenCalled();
-    error.mockRestore();
-    log.mockRestore();
   });
 
   it('will render a provided fallback component if an error is thrown', () => {
-    const error = vi.spyOn(console, 'error').mockImplementation(() => {
-      return;
-    });
-    const log = vi.spyOn(console, 'log').mockImplementation(() => {
-      return;
-    });
     render(
-      <ErrorBoundary logger={log as unknown as ErrorBoundaryProps['logger']} fallback={<p>Something is not right!</p>}>
+      <ErrorBoundary logger={error} fallback={<p>Something is not right!</p>}>
         <VolatileComponent
           throwError={() => {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore-start
+            // @ts-expect-error the bad property access it a good bad property access
             log.unknownProperty();
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore-end
           }}
         />
       </ErrorBoundary>,
     );
     expect(screen.queryByTestId('test-id')).not.toBeInTheDocument();
     expect(screen.getByText('Something is not right!')).toBeInTheDocument();
-    expect(console.error).toHaveBeenCalled();
-    error.mockRestore();
-    log.mockRestore();
+    expect(error).toHaveBeenCalled();
   });
 
   it('will call the logger method that is passed in with the error details', () => {
-    const error = vi.spyOn(console, 'error').mockImplementation(() => {
-      return;
-    });
-    const log = vi.spyOn(console, 'log').mockImplementation(() => {
-      return 'logger mock';
-    });
     const mockedLogger = vi.fn().mockImplementation(() => {
       return 'logger mock';
     });
@@ -100,7 +98,5 @@ describe('An ErrorBoundary', () => {
     );
     expect(mockedLogger).toHaveBeenCalled();
     expect(mockedLogger.mock.calls[0][0].message).toBe("I've been thrown!");
-    error.mockRestore();
-    log.mockRestore();
   });
 });

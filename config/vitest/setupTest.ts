@@ -1,7 +1,36 @@
 import { cleanup } from '@testing-library/react';
 import { afterEach, beforeEach, vi, type MockInstance } from 'vitest';
 import '@testing-library/jest-dom/vitest';
+import { render as rtlRender } from '@testing-library/react';
 
+// this is temporary until we have a handle on the double prefix epidemic
+const reportedFiles = new Set<string>();
+export function render(ui: Parameters<typeof rtlRender>[0], actualRender: typeof rtlRender) {
+  const beNoisy = false;
+  const result = actualRender(ui);
+  const html = result.container.innerHTML;
+  if (html.includes('seldon-seldon')) {
+    const stack = new Error().stack;
+    const firstLineWithTestFile = stack?.split('\n').find((line) => line.includes('test.ts'));
+    const likelySource = firstLineWithTestFile?.slice(firstLineWithTestFile.indexOf('src')).trim();
+    if (likelySource && reportedFiles.has(likelySource)) return result;
+    else if (likelySource) reportedFiles.add(likelySource);
+    console.log(
+      '\x1b[38;5;183mFound double seldon prefixed class, probable source:\n',
+      `\x1b[38;5;151m${likelySource ?? 'Unknown'}\n\n`,
+      beNoisy ? `\x1b[38;5;117m${stack}\x1b[0m` : '',
+    );
+  }
+  return result;
+}
+
+vi.mock('@testing-library/react', async () => {
+  const actual = await vi.importActual<typeof import('@testing-library/react')>('@testing-library/react');
+  return {
+    ...actual,
+    render: (ui: Parameters<typeof actual.render>[0]) => render(ui, actual.render),
+  };
+});
 export let consoleError: MockInstance<Parameters<(typeof console)['error']>>;
 
 const originalWindow = window;

@@ -15,7 +15,7 @@ describe('Tabs', () => {
     const tabsList = getAllByRole('tablist');
     expect(tabsList.length).toBe(1);
   });
-  test('renders the tabs and displays default content', () => {
+  it('renders the tabs and displays default content', () => {
     render(
       <TabsContainer tabs={tabs} defaultValue="overview">
         <TabsContent value="overview">Overview content</TabsContent>
@@ -30,7 +30,7 @@ describe('Tabs', () => {
     expect(screen.getByRole('tabpanel', { name: 'Overview' })).toBeInTheDocument();
     expect(screen.queryByRole('tabpanel', { name: 'Browse lots' })).not.toBeInTheDocument();
   });
-  test('renders ReactNode in tab', () => {
+  it('renders ReactNode in tab', () => {
     const componentTabs = [
       {
         label: (
@@ -56,7 +56,7 @@ describe('Tabs', () => {
     expect(screen.getByRole('tab', { name: /Submit/ })).toBeInTheDocument();
     expect(screen.getByText(/\+/)).toBeInTheDocument();
   });
-  test('displays correct content when a different tab is selected', async () => {
+  it('displays correct content when a different tab is selected', async () => {
     render(
       <TabsContainer tabs={tabs} defaultValue="overview">
         <TabsContent value="overview">Overview content</TabsContent>
@@ -71,7 +71,7 @@ describe('Tabs', () => {
     expect(screen.getByRole('tabpanel', { name: 'Browse lots' })).toBeInTheDocument();
     expect(screen.queryByRole('tabpanel', { name: 'Overview' })).not.toBeInTheDocument();
   });
-  test('calls onTabClick when a tab is clicked', async () => {
+  it('calls onTabClick when a tab is clicked', async () => {
     const onTabClickMock = vitest.fn();
 
     render(
@@ -84,7 +84,7 @@ describe('Tabs', () => {
     await userEvent.click(screen.getByRole('tab', { name: /Overview/i }));
     expect(onTabClickMock).toBeCalledWith('overview'); // Validate that the clicked tab value is correct
   });
-  test('controlled state overrides defaultValue', async () => {
+  it('controlled state overrides defaultValue', async () => {
     const onTabClickMock = vitest.fn();
 
     render(

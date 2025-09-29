@@ -20,7 +20,7 @@ describe('calendar link generation', () => {
     timezone: 'America/New_York',
   };
 
-  test('generateGoogleCalendarLink', () => {
+  it('generateGoogleCalendarLink', () => {
     const link = generateGoogleCalendarLink(event);
     const url = new URL(link);
     expect(url.origin + url.pathname).toBe('https://calendar.google.com/calendar/u/0/r/eventedit');
@@ -35,7 +35,7 @@ describe('calendar link generation', () => {
     expect(url.searchParams.get('ctz')).toBe(event.timezone);
   });
 
-  test('generateOutlookOnlineLink', () => {
+  it('generateOutlookOnlineLink', () => {
     const link = generateOutlookOnlineLink(event);
     const url = new URL(link);
     expect(url.origin + url.pathname).toBe('https://outlook.office.com/calendar/0/deeplink/compose');
@@ -52,7 +52,7 @@ describe('calendar link generation', () => {
     expect(url.searchParams.get('location')).toBe(event.location);
   });
 
-  test('generateYahooCalendarLink', () => {
+  it('generateYahooCalendarLink', () => {
     const link = generateYahooCalendarLink(event);
     const url = new URL(link);
     expect(url.origin + url.pathname).toBe('https://calendar.yahoo.com/');
@@ -70,7 +70,7 @@ describe('calendar link generation', () => {
     expect(url.searchParams.get('in_loc')).toBe(event.location);
   });
 
-  test('generateCalendarFile', () => {
+  it('generateCalendarFile', () => {
     const createElementSpy = vi.spyOn(document, 'createElement');
     const appendChildSpy = vi.spyOn(document.body, 'appendChild');
     const removeChildSpy = vi.spyOn(document.body, 'removeChild');
@@ -113,7 +113,7 @@ describe('calendar link generation with invalid start date', () => {
     timezone: 'America/New_York',
   };
 
-  test('generateGoogleCalendarLink logs console error', () => {
+  it('generateGoogleCalendarLink logs console error', () => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const link = generateGoogleCalendarLink(event);
@@ -123,7 +123,7 @@ describe('calendar link generation with invalid start date', () => {
     consoleErrorSpy.mockRestore();
   });
 
-  test('generateOutlookOnlineLink logs console error', () => {
+  it('generateOutlookOnlineLink logs console error', () => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const link = generateOutlookOnlineLink(event);
@@ -133,7 +133,7 @@ describe('calendar link generation with invalid start date', () => {
     consoleErrorSpy.mockRestore();
   });
 
-  test('generateYahooCalendarLink logs console error', () => {
+  it('generateYahooCalendarLink logs console error', () => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const link = generateYahooCalendarLink(event);
@@ -143,7 +143,7 @@ describe('calendar link generation with invalid start date', () => {
     consoleErrorSpy.mockRestore();
   });
 
-  test('generateCalendarFile logs console error', () => {
+  it('generateCalendarFile logs console error', () => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     generateCalendarFile(event);

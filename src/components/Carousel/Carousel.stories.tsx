@@ -166,7 +166,6 @@ CarouselWithDotsOverflow.argTypes = {};
 
 export const ControlledCarousel = (props: CarouselProps & CarouselDotsProps) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  console.log(selectedIndex);
   return (
     <Carousel {...props} startIndex={selectedIndex} onSlideChange={setSelectedIndex}>
       <CarouselContent>

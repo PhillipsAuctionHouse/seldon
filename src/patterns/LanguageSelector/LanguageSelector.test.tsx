@@ -15,7 +15,7 @@ const languageOptions: LanguageOption[] = [
 ];
 
 describe('LanguageSelector', () => {
-  test('renders language options correctly', async () => {
+  it('renders language options correctly', async () => {
     const currentLanguage = SupportedLanguages.en;
     const onLanguageChange = vitest.fn();
 
@@ -35,7 +35,7 @@ describe('LanguageSelector', () => {
 
     expect(onLanguageChange).toHaveBeenCalledWith('zh');
   });
-  test('switch from Chinese to english', async () => {
+  it('switch from Chinese to english', async () => {
     const currentLanguage = SupportedLanguages.zh;
     const onLanguageChange = vitest.fn();
 
@@ -56,13 +56,13 @@ describe('LanguageSelector', () => {
     expect(onLanguageChange).toHaveBeenCalledWith('en');
   });
 
-  test('disabled Language Selector', () => {
+  it('disabled Language Selector', () => {
     render(<LanguageSelector languageOptions={languageOptions} disabled />);
     expect(screen.getByRole('combobox', { name: 'English' })).toBeDisabled();
   });
 });
 
-test('getLanguageLabel', () => {
+it('getLanguageLabel', () => {
   const languageOptions: LanguageOption[] = [
     { label: 'English', value: SupportedLanguages.en },
     { label: '中文', value: SupportedLanguages.zh },
@@ -72,7 +72,7 @@ test('getLanguageLabel', () => {
 });
 
 describe('MobileLanguageSelector (responsive)', () => {
-  test('renders language options correctly', async () => {
+  it('renders language options correctly', async () => {
     const currentLanguage = SupportedLanguages.en;
     const onLanguageChange = vitest.fn();
 

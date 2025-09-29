@@ -1,5 +1,5 @@
 import ComponentName from './ComponentName';
-import { runCommonTests } from '../../utils/testUtils';
+import { runCommonTests } from '../utils/testUtils';
 import { forwardRef } from 'react';
 
 describe('ComponentName', () => {

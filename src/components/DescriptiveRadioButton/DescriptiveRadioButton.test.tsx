@@ -17,6 +17,20 @@ describe('DescriptiveRadioButton', () => {
     expect(screen.getByText('Test Description')).toBeInTheDocument();
   });
 
+  it('sets description id when description is provided', () => {
+    render(
+      <DescriptiveRadioButton
+        labelText="Test Label"
+        description="Test Description"
+        name="test"
+        value="test"
+        id="test"
+      />,
+    );
+    const desc = screen.getByText('Test Description');
+    expect(desc).toHaveAttribute('id', 'test-desc');
+  });
+
   it('renders without description', () => {
     render(<DescriptiveRadioButton labelText="Test Label" name="test" value="test" id="test" />);
     expect(screen.getByText('Test Label')).toBeInTheDocument();

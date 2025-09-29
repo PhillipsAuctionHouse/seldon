@@ -24,6 +24,7 @@ export interface NavigationItemProps extends ComponentProps<'li'> {
   /**
    * Optional group for navigation items
    */
+  // 🎺TODO this isn't actually optional
   navGroup?: 'nav-link-start' | 'nav-link-end';
   /**
    * Optional type for navigation item

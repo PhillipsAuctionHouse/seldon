@@ -1,15 +1,5 @@
 import { transformScssAlias } from './buildUtils';
 
-function createMockGlob(fileName: string) {
-  return async (importOriginal: () => Promise<object>) => {
-    const glob = (await importOriginal()) as object;
-    return {
-      ...glob,
-      sync: vitest.fn(() => [fileName]),
-    };
-  };
-}
-
 const originalLog = console.log;
 beforeAll(() => {
   console.log = (...args: unknown[]) => {
@@ -24,42 +14,60 @@ afterAll(() => {
   console.log = originalLog;
 });
 
+const createMockGlob = (fileName: string) => async (importOriginal: () => Promise<Record<string, unknown>>) => {
+  const glob = await importOriginal();
+  return {
+    ...glob,
+    sync: vi.fn(() => [fileName]),
+  };
+};
+
 describe('transformScssAlias', () => {
-  it('should return the contents unchanged if the file name is not found', () => {
+  it('returns contents unchanged when file name is not found', () => {
     const contents = Buffer.from('Some contents');
     const transformedContents = transformScssAlias(contents, 'nonexistent.scss');
     expect(transformedContents).toBe(contents);
   });
 
-  it('should replace the #scss alias with the correct number of ".." based on the file path', () => {
-    vitest.mock('glob', createMockGlob('Text/_text.scss'));
-    const contents = Buffer.from('import "#scss/styles.scss";');
-    const transformedContents = transformScssAlias(contents, '_text.scss');
-    expect(transformedContents.toString()).toBe('import "../../styles.scss";');
-  });
-
-  it('should replace multiple occurrences of the #scss alias in the contents', () => {
-    vitest.mock('glob', createMockGlob('Text/_text.scss'));
-    const contents = Buffer.from(`
-      import "#scss/styles.scss";
-      import "#scss/variables.scss";
-    `);
-    const transformedContents = transformScssAlias(contents, '_text.scss');
-    expect(transformedContents.toString()).toBe(`
+  [
+    {
+      name: 'replaces #scss alias for shallow file',
+      fileName: 'Text/_text.scss',
+      filePath: '_text.scss',
+      expected: 'import "../../styles.scss";',
+      input: Buffer.from('import "#scss/styles.scss";'),
+    },
+    {
+      name: 'replaces multiple #scss aliases for shallow file',
+      fileName: 'Text/_text.scss',
+      filePath: '_text.scss',
+      expected: `
       import "../../styles.scss";
       import "../../variables.scss";
-    `);
-  });
-  it('should handle deeply nested links', () => {
-    vitest.mock('glob', createMockGlob('Navigation/NavigationItem/_navigationItem.scss'));
-    const contents = Buffer.from(`
+    `,
+      input: Buffer.from(`
       import "#scss/styles.scss";
       import "#scss/variables.scss";
-    `);
-    const transformedContents = transformScssAlias(contents, '_navigationItem.scss');
-    expect(transformedContents.toString()).toBe(`
+    `),
+    },
+    {
+      name: 'replaces #scss alias for deeply nested file',
+      fileName: 'Navigation/NavigationItem/_navigationItem.scss',
+      filePath: '_navigationItem.scss',
+      expected: `
       import "../../../styles.scss";
       import "../../../variables.scss";
-    `);
+    `,
+      input: Buffer.from(`
+      import "#scss/styles.scss";
+      import "#scss/variables.scss";
+    `),
+    },
+  ].forEach(({ name, fileName, filePath, expected, input }) => {
+    it(name, () => {
+      vi.mock('glob', createMockGlob(fileName));
+      const transformedContents = transformScssAlias(input, filePath);
+      expect(transformedContents.toString()).toBe(expected);
+    });
   });
 });

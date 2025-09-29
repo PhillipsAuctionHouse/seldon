@@ -21,8 +21,8 @@ describe('GridItem', () => {
   });
 
   it('validates column span values', () => {
-    const originalError = console.error;
-    console.error = () => void 0;
+    const originalWarn = console.warn;
+    console.warn = () => void 0;
 
     render(<GridItem xs={0} />);
     expect(screen.queryByTestId('grid-item')).not.toBeInTheDocument();
@@ -30,7 +30,7 @@ describe('GridItem', () => {
     render(<GridItem lg={13} />);
     expect(screen.queryByTestId('grid-item')).not.toBeInTheDocument();
 
-    console.error = originalError;
+    console.warn = originalWarn;
   });
 
   describe('breakpoint classes', () => {
