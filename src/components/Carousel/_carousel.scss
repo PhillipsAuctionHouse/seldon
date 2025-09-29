@@ -30,6 +30,10 @@
       }
     }
 
+    &--disabled {
+      display: none;
+    }
+
     &:hover {
       opacity: 1;
     }
