@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import { ComponentProps, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import React from 'react';
 import { getCommonProps } from '../../utils';
 import { useCarousel } from './utils';
 
-export interface CarouselItemProps extends ComponentProps<'div'> {
+export interface CarouselItemProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Optional element to render as the top-level component e.g. 'div', 'li', CustomComponent, etc. Defaults to 'div'.
    */

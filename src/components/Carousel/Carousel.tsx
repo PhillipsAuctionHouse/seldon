@@ -1,4 +1,4 @@
-import { ComponentProps, forwardRef, createContext, useCallback, useEffect, KeyboardEvent } from 'react';
+import { forwardRef, createContext, useCallback, useEffect, KeyboardEvent } from 'react';
 import { getCommonProps, SpacingTokens } from '../../utils';
 import classnames from 'classnames';
 import ClassNames from 'embla-carousel-class-names';
@@ -9,7 +9,7 @@ export type CarouselApi = UseEmblaCarouselType[1];
 
 // to expose more options from the embla carousel API
 // see what is available in https://www.embla-carousel.com/api/options/
-export interface CarouselProps extends ComponentProps<'div'> {
+export interface CarouselProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Optional element to render as the top-level component e.g. 'div', 'ul', CustomComponent, etc. Defaults to 'div'.
    */
