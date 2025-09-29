@@ -1,4 +1,9 @@
-/dist
-/storybook-static
-vite.config.ts
+dist/
+storybook-static/npm 
+node_modules/
+coverage/
 .template
+*.d.ts
+./*.ts
+./*.cjs
+.eslintrc.cjs
