@@ -18,7 +18,7 @@ const filters: FilterType[] = [
 ];
 
 describe('FilterDropdownMenuMobile', () => {
-  it('renders filter inputs and buttons', async () => {
+  it('renders filter inputs and buttons', () => {
     render(
       <FilterDropdownMenuMobile
         buttonType={FilterButtonType.Sort}

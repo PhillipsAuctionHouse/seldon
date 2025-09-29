@@ -2,22 +2,20 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import Drawer from './Drawer';
 
 describe('Drawer', () => {
-  it('renders children when open', () => {
+  it.each([
+    [true, 'renders children when open', true],
+    [false, 'does not render children when closed', false],
+  ])('%s', (isOpen, _desc, shouldRender) => {
     render(
-      <Drawer isOpen>
+      <Drawer isOpen={isOpen}>
         <div data-testid="drawer-content">Drawer Content</div>
       </Drawer>,
     );
-    expect(screen.getByTestId('drawer-content')).toBeInTheDocument();
-  });
-
-  it('does not render children when closed', () => {
-    render(
-      <Drawer isOpen={false}>
-        <div data-testid="drawer-content">Drawer Content</div>
-      </Drawer>,
-    );
-    expect(screen.queryByTestId('drawer-content')).not.toBeInTheDocument();
+    if (shouldRender) {
+      expect(screen.getByTestId('drawer-content')).toBeInTheDocument();
+    } else {
+      expect(screen.queryByTestId('drawer-content')).not.toBeInTheDocument();
+    }
   });
 
   it('calls onClose when overlay is clicked', () => {

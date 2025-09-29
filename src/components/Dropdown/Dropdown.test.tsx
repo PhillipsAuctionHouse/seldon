@@ -10,6 +10,13 @@ const languages = [
   { label: '中文', value: SupportedLanguages.zh },
 ];
 
+const sharedProps = {
+  options: languages,
+  label: 'Select a language',
+  id: 'test',
+  onValueChange: vitest.fn(),
+};
+
 describe('Dropdown', () => {
   const RefDropdown = forwardRef<HTMLButtonElement, React.ComponentProps<typeof Dropdown>>((props, ref) => (
     <Dropdown {...props} ref={ref} options={languages} value={SupportedLanguages.en} />
@@ -17,133 +24,62 @@ describe('Dropdown', () => {
   RefDropdown.displayName = 'RefDropdown';
   runCommonTests(RefDropdown, 'Dropdown');
 
-  it('should render the default value label in the trigger', () => {
-    render(
-      <Dropdown
-        options={languages}
-        value={SupportedLanguages.en}
-        label="Select a language"
-        id="test"
-        onValueChange={vitest.fn()}
-      />,
-    );
-
-    const trigger = screen.getByRole('combobox', {
-      name: 'Select a language',
+  describe('Trigger rendering', () => {
+    it.each([
+      { value: SupportedLanguages.en, expectedLabel: 'English' },
+      { value: SupportedLanguages.zh, expectedLabel: '中文' },
+    ])('should render the value label "$expectedLabel" in the trigger', ({ value, expectedLabel }) => {
+      render(<Dropdown {...sharedProps} value={value} />);
+      const trigger = screen.getByRole('combobox', { name: sharedProps.label });
+      expect(trigger).toBeInTheDocument();
+      expect(within(trigger).getByText(expectedLabel)).toBeInTheDocument();
     });
-
-    expect(trigger).toBeInTheDocument();
-    expect(within(trigger).getByText('English')).toBeInTheDocument();
   });
 
-  it('should render the initial value in the trigger', () => {
-    render(
-      <Dropdown
-        options={languages}
-        value={SupportedLanguages.zh}
-        label="Select a language"
-        id="test"
-        onValueChange={vitest.fn()}
-      />,
-    );
-
-    const trigger = screen.getByRole('combobox', {
-      name: 'Select a language',
+  describe('Dropdown list', () => {
+    it('should render the dropdown list after clicking the trigger', async () => {
+      render(<Dropdown {...sharedProps} value={SupportedLanguages.en} />);
+      const trigger = screen.getByRole('combobox', { name: sharedProps.label });
+      await userEvent.click(trigger);
+      expect(trigger).toHaveAttribute('aria-expanded', 'true');
+      languages.forEach(({ label }) => {
+        expect(screen.getByRole('option', { name: label })).toBeInTheDocument();
+      });
     });
 
-    expect(trigger).toBeInTheDocument();
-    expect(within(trigger).getByText('中文')).toBeInTheDocument();
+    it.each([
+      { value: SupportedLanguages.en, disabledLabel: 'English' },
+      { value: SupportedLanguages.zh, disabledLabel: '中文' },
+    ])(
+      'should render the default value option "$disabledLabel" in the list as disabled',
+      async ({ value, disabledLabel }) => {
+        render(<Dropdown {...sharedProps} value={value} />);
+        const trigger = screen.getByRole('combobox', { name: sharedProps.label });
+        await userEvent.click(trigger);
+        const option = screen.getByRole('option', { name: disabledLabel });
+        expect(option).toBeInTheDocument();
+        expect(option).toHaveAttribute('aria-disabled', 'true');
+      },
+    );
   });
 
-  it('should render the dropdown list after cliking the trigger', async () => {
-    render(
-      <Dropdown
-        options={languages}
-        value={SupportedLanguages.en}
-        label="Select a language"
-        id="test"
-        onValueChange={vitest.fn()}
-      />,
-    );
-
-    const trigger = screen.getByRole('combobox', {
-      name: 'Select a language',
-    });
-    expect(trigger).toBeInTheDocument();
-
-    await userEvent.click(trigger);
-
-    expect(trigger).toHaveAttribute('aria-expanded', 'true');
-    expect(screen.getByRole('option', { name: 'English' })).toBeInTheDocument();
-    expect(screen.getByRole('option', { name: '中文' })).toBeInTheDocument();
-  });
-
-  it('should render the default value option in the list as disabled', async () => {
-    render(
-      <Dropdown
-        options={languages}
-        value={SupportedLanguages.en}
-        label="Select a language"
-        id="test"
-        onValueChange={vitest.fn()}
-      />,
-    );
-
-    const trigger = screen.getByRole('combobox', {
-      name: 'Select a language',
-    });
-    expect(trigger).toBeInTheDocument();
-
-    await userEvent.click(trigger);
-
-    expect(screen.getByRole('option', { name: 'English' })).toBeInTheDocument();
-    expect(screen.getByRole('option', { name: 'English' })).toHaveAttribute('aria-disabled', 'true');
-  });
-
-  it('should trigger a callback on language change', async () => {
-    const onValueChangeMock = vitest.fn();
-    render(
-      <Dropdown
-        options={languages}
-        value={SupportedLanguages.en}
-        label="Select a language"
-        id="test"
-        onValueChange={onValueChangeMock}
-      />,
-    );
-
-    const trigger = screen.getByRole('combobox', {
-      name: 'Select a language',
-    });
-    expect(trigger).toBeInTheDocument();
-
-    await userEvent.click(trigger);
-
-    const option = screen.getByRole('option', { name: '中文' });
-
-    expect(option).toBeInTheDocument();
-
-    await userEvent.click(option);
-    expect(onValueChangeMock).toHaveBeenCalled();
-  });
-  it('disabled dropdown should not pop selection', async () => {
-    render(
-      <Dropdown
-        options={languages}
-        value={SupportedLanguages.zh}
-        label="Select a language"
-        disabled
-        id="test"
-        onValueChange={vitest.fn()}
-      />,
-    );
-
-    const trigger = screen.getByRole('combobox', {
-      name: 'Select a language',
+  describe('Interactions', () => {
+    it('should trigger a callback on language change', async () => {
+      const onValueChangeMock = vitest.fn();
+      render(<Dropdown {...sharedProps} value={SupportedLanguages.en} onValueChange={onValueChangeMock} />);
+      const trigger = screen.getByRole('combobox', { name: sharedProps.label });
+      await userEvent.click(trigger);
+      const option = screen.getByRole('option', { name: '中文' });
+      await userEvent.click(option);
+      expect(onValueChangeMock).toHaveBeenCalled();
     });
 
-    expect(trigger).toBeDisabled();
-    await userEvent.click(trigger);
-    expect(screen.queryByRole('option', { name: '中文' })).not.toBeInTheDocument();
+    it('disabled dropdown should not pop selection', async () => {
+      render(<Dropdown {...sharedProps} value={SupportedLanguages.zh} disabled />);
+      const trigger = screen.getByRole('combobox', { name: sharedProps.label });
+      expect(trigger).toBeDisabled();
+      await userEvent.click(trigger);
+      expect(screen.queryByRole('option', { name: '中文' })).not.toBeInTheDocument();
+    });
   });
 });

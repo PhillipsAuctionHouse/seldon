@@ -169,8 +169,8 @@ describe('SeldonImage', () => {
   });
 
   it('applies all objectFit values', () => {
-    ['contain', 'cover', 'fill', 'scale-down'].forEach((fit) => {
-      render(<SeldonImage src="test-image.jpg" alt="alt-text" objectFit={fit as any} />);
+    (['contain', 'cover', 'fill', 'scale-down'] as const).forEach((fit) => {
+      render(<SeldonImage src="test-image.jpg" alt="alt-text" objectFit={fit} />);
       const image = screen.getByTestId('seldon-image-img');
       expect(image).toHaveClass(`seldon-image-img--object-fit-${fit}`);
     });

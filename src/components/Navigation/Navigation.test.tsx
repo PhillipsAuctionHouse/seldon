@@ -11,10 +11,10 @@ const defaultProps: NavigationProps = {
   id: 'phillips-nav',
   visible: true,
 };
-const renderNavigation = (props: NavigationProps = defaultProps, context?: Partial<HeaderContextType>) =>
+const renderNavigation = (contextProps: Partial<HeaderContextType>) =>
   render(
-    <HeaderContext.Provider value={{ ...defaultHeaderContext, ...context }}>
-      <Navigation {...props}>
+    <HeaderContext.Provider value={{ ...defaultHeaderContext, ...contextProps }}>
+      <Navigation {...defaultProps}>
         <Search />
         <NavigationList id="test-nav">
           <NavigationItem label="Auctions" />
@@ -26,25 +26,46 @@ const renderNavigation = (props: NavigationProps = defaultProps, context?: Parti
   );
 
 describe('Navigation', () => {
-  it('renders without error', () => {
-    render(<Navigation {...defaultProps} />);
-    expect(screen.getByRole('navigation')).toBeInTheDocument();
-  });
-  it('renders nav list component if passed', () => {
-    renderNavigation();
-    expect(screen.getByRole('list')).toBeInTheDocument();
-    expect(screen.getByText('Auctions')).toBeInTheDocument();
-  });
-  it('renders search component if passed', () => {
-    renderNavigation();
-    expect(screen.getAllByLabelText('Search').length).toBeGreaterThanOrEqual(1);
-  });
-  it('renders language selector component if passed', () => {
-    renderNavigation();
-    expect(screen.getByText('English')).toBeInTheDocument();
-  });
-  it('hide nav list if search expanded', () => {
-    renderNavigation({}, { isSearchExpanded: true });
-    expect(screen.queryByRole('list')).not.toBeInTheDocument();
+  it.each([
+    [
+      'renders without error',
+      {},
+      () => {
+        expect(screen.getByRole('navigation')).toBeInTheDocument();
+      },
+    ],
+    [
+      'renders nav list component if passed',
+      {},
+      () => {
+        expect(screen.getByRole('list')).toBeInTheDocument();
+        expect(screen.getByText('Auctions')).toBeInTheDocument();
+      },
+    ],
+    [
+      'renders search component if passed',
+      {},
+      () => {
+        expect(screen.getAllByLabelText('Search').length).toBeGreaterThanOrEqual(1);
+      },
+    ],
+    [
+      'renders language selector component if passed',
+      {},
+      () => {
+        expect(screen.getByText('English')).toBeInTheDocument();
+      },
+    ],
+    [
+      'hide nav list if search expanded',
+
+      { isSearchExpanded: true },
+      () => {
+        expect(screen.queryByRole('list')).not.toBeInTheDocument();
+      },
+    ],
+  ])('%s', (_desc, contextProps, assertion) => {
+    renderNavigation(contextProps);
+    assertion();
   });
 });
