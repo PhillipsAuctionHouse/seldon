@@ -10,20 +10,6 @@ function createMockGlob(fileName: string) {
   };
 }
 
-const originalLog = console.log;
-beforeAll(() => {
-  console.log = (...args: unknown[]) => {
-    if (typeof args[0] === 'string' && args[0].startsWith('transforming scss alias')) {
-      return;
-    }
-    originalLog(...args);
-  };
-});
-
-afterAll(() => {
-  console.log = originalLog;
-});
-
 describe('transformScssAlias', () => {
   it('should return the contents unchanged if the file name is not found', () => {
     const contents = Buffer.from('Some contents');
