@@ -5,7 +5,7 @@ import { useCarousel } from './utils';
 import { Icon } from '../Icon';
 
 export interface CarouselArrowsProps extends ComponentProps<'div'> {
-  isArrowsAlwaysVisible?: boolean;
+  areArrowsAlwaysVisible?: boolean;
 }
 
 /**
@@ -15,7 +15,7 @@ export interface CarouselArrowsProps extends ComponentProps<'div'> {
  *
  */
 const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(
-  ({ className, isArrowsAlwaysVisible, ...props }, ref) => {
+  ({ className, areArrowsAlwaysVisible, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'CarouselArrows');
     const { api } = useCarousel();
     const onPrevArrowClick = useCallback(() => {
@@ -51,7 +51,7 @@ const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(
         <button
           data-testid="prev-arrow"
           className={classNames(`${baseClassName}-prev-btn`, {
-            [`${baseClassName}-prev-btn--always-visible`]: isArrowsAlwaysVisible,
+            [`${baseClassName}-prev-btn--always-visible`]: areArrowsAlwaysVisible,
           })}
           onClick={onPrevArrowClick}
         >
@@ -62,7 +62,7 @@ const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(
         <button
           data-testid="next-arrow"
           className={classNames(`${baseClassName}-next-btn`, {
-            [`${baseClassName}-next-btn--always-visible`]: isArrowsAlwaysVisible,
+            [`${baseClassName}-next-btn--always-visible`]: areArrowsAlwaysVisible,
           })}
           onClick={onNextArrowClick}
         >

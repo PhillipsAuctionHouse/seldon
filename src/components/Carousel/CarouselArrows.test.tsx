@@ -8,8 +8,8 @@ vi.mock('./utils', () => ({
 }));
 
 describe('CarouselArrows', () => {
-  it('adds always-visible class to prev and next arrows when isArrowsAlwaysVisible is true', () => {
-    render(<CarouselArrows isArrowsAlwaysVisible={true} />);
+  it('adds always-visible class to prev and next arrows when areArrowsAlwaysVisible is true', () => {
+    render(<CarouselArrows areArrowsAlwaysVisible={true} />);
     const prevArrow = screen.getByTestId('prev-arrow');
     const nextArrow = screen.getByTestId('next-arrow');
     expect(prevArrow.className).toMatch(/--always-visible/);

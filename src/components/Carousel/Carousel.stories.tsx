@@ -240,7 +240,7 @@ export const CarouselWithMultipleItems = (props: CarouselProps) => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselArrows isArrowsAlwaysVisible={true} />
+        <CarouselArrows areArrowsAlwaysVisible={true} />
       </Carousel>
 
       <div style={{ marginTop: '16px' }}>
