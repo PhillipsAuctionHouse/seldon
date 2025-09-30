@@ -65,125 +65,121 @@ describe('Header', () => {
   );
 });
 
-describe('Header with logo', () => {
-  it('should render the logo', () => {
-    render(<Header logo={<Icon icon="PhillipsLogo" />} />);
-    const logoElement = screen.getByTestId('icon-phillips-logo');
-    expect(logoElement).toBeInTheDocument();
-  });
-  it('logo should be clickable', () => {
-    render(<Header logo={<Icon icon="PhillipsLogo" />} />);
-    const logoElement = screen.getByRole('link', { name: 'Home Page' });
-    expect(logoElement).toBeInTheDocument();
-    expect(logoElement).toHaveAttribute('href', '/');
-  });
-  it('logo text should be used', () => {
-    render(<Header logo={<Icon icon="PhillipsLogo" />} logoText="Logo Text" />);
-    const logoElement = screen.getByRole('link', { name: 'Logo Text' });
-    expect(logoElement).toBeInTheDocument();
-    expect(logoElement).toHaveAttribute('href', '/');
-  });
+it('should render the logo', () => {
+  render(<Header logo={<Icon icon="PhillipsLogo" />} />);
+  const logoElement = screen.getByTestId('icon-phillips-logo');
+  expect(logoElement).toBeInTheDocument();
 });
 
-describe('useMobileMenu', () => {
-  const toggleCloseText = 'Close Menu';
-  const toggleOpenText = 'Open Menu';
-
-  it('should initialize with menu closed', () => {
-    const { result } = renderHook(() => useMobileMenu({ toggleCloseText, toggleOpenText }));
-    expect(result.current.isMenuOpen).toBe(false);
-    expect(result.current.toggleText).toBe(toggleOpenText);
-  });
-
-  it('should toggle menu open and close', () => {
-    const { result } = renderHook(() => useMobileMenu({ toggleCloseText, toggleOpenText }));
-
-    act(() => {
-      result.current.handleMenuToggle();
-    });
-    expect(result.current.isMenuOpen).toBe(true);
-    expect(result.current.toggleText).toBe(toggleCloseText);
-
-    act(() => {
-      result.current.handleMenuToggle();
-    });
-    expect(result.current.isMenuOpen).toBe(false);
-    expect(result.current.toggleText).toBe(toggleOpenText);
-  });
-
-  it('should close menu when closeMenu is called', () => {
-    const { result } = renderHook(() => useMobileMenu({ toggleCloseText, toggleOpenText }));
-
-    act(() => {
-      result.current.handleMenuToggle();
-    });
-    expect(result.current.isMenuOpen).toBe(true);
-
-    act(() => {
-      result.current.closeMenu();
-    });
-    expect(result.current.isMenuOpen).toBe(false);
-    expect(result.current.toggleText).toBe(toggleOpenText);
-  });
+it('logo should be clickable', () => {
+  render(<Header logo={<Icon icon="PhillipsLogo" />} />);
+  const logoElement = screen.getByRole('link', { name: 'Home Page' });
+  expect(logoElement).toBeInTheDocument();
+  expect(logoElement).toHaveAttribute('href', '/');
 });
 
-describe('Header bannerHeight and ResizeObserver', () => {
-  it('should disconnect ResizeObserver on unmount', () => {
-    const disconnectSpy = vi.fn();
-    const originalResizeObserver = window.ResizeObserver;
-    window.ResizeObserver = class {
-      observe = () => void 0;
-      unobserve = () => void 0;
-      disconnect = disconnectSpy;
-    };
-    const { unmount } = render(
-      <Header logo={<Icon icon="PhillipsLogo" />} bannerRef={{ current: document.createElement('div') }} />,
-    );
-    unmount();
-    expect(disconnectSpy).toHaveBeenCalled();
-    window.ResizeObserver = originalResizeObserver;
+it('logo text should be used', () => {
+  render(<Header logo={<Icon icon="PhillipsLogo" />} logoText="Logo Text" />);
+  const logoElement = screen.getByRole('link', { name: 'Logo Text' });
+  expect(logoElement).toBeInTheDocument();
+  expect(logoElement).toHaveAttribute('href', '/');
+});
+
+const toggleCloseText = 'Close Menu';
+const toggleOpenText = 'Open Menu';
+
+it('should initialize with menu closed', () => {
+  const { result } = renderHook(() => useMobileMenu({ toggleCloseText, toggleOpenText }));
+  expect(result.current.isMenuOpen).toBe(false);
+  expect(result.current.toggleText).toBe(toggleOpenText);
+});
+
+it('should toggle menu open and close', () => {
+  const { result } = renderHook(() => useMobileMenu({ toggleCloseText, toggleOpenText }));
+
+  act(() => {
+    result.current.handleMenuToggle();
   });
+  expect(result.current.isMenuOpen).toBe(true);
+  expect(result.current.toggleText).toBe(toggleCloseText);
 
-  it('provides all context values', () => {
-    render(<Header logo={<Icon icon="PhillipsLogo" />} />);
-    const toggleButton = screen.getByRole('button', { name: /Open Menu/i });
-    expect(toggleButton).toBeInTheDocument();
-    expect(screen.getByTestId('header-logo')).toBeInTheDocument();
+  act(() => {
+    result.current.handleMenuToggle();
   });
+  expect(result.current.isMenuOpen).toBe(false);
+  expect(result.current.toggleText).toBe(toggleOpenText);
+});
 
-  interface TestHeaderWithBannerProps {
-    bannerContentHeight?: number;
-  }
+it('should close menu when closeMenu is called', () => {
+  const { result } = renderHook(() => useMobileMenu({ toggleCloseText, toggleOpenText }));
 
-  const TestHeaderWithBanner = ({ bannerContentHeight = 0 }: TestHeaderWithBannerProps) => {
-    const bannerRef = useRef<HTMLDivElement>(null);
+  act(() => {
+    result.current.handleMenuToggle();
+  });
+  expect(result.current.isMenuOpen).toBe(true);
 
-    const setBannerRef = (el: HTMLDivElement | null) => {
-      if (el) {
-        Object.defineProperty(el, 'clientHeight', {
-          value: bannerContentHeight,
-          configurable: true,
-        });
-        (bannerRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
-      }
-    };
+  act(() => {
+    result.current.closeMenu();
+  });
+  expect(result.current.isMenuOpen).toBe(false);
+  expect(result.current.toggleText).toBe(toggleOpenText);
+});
 
-    return (
-      <div>
-        <NotificationBanner ref={setBannerRef} style={{ height: `${bannerContentHeight}px` }}>
-          <div>Banner Content</div>
-        </NotificationBanner>
-        <Header logo={<Icon icon="PhillipsLogo" />} bannerRef={bannerRef} />
-      </div>
-    );
+it('should disconnect ResizeObserver on unmount', () => {
+  const disconnectSpy = vi.fn();
+  const originalResizeObserver = window.ResizeObserver;
+  window.ResizeObserver = class {
+    observe = () => void 0;
+    unobserve = () => void 0;
+    disconnect = disconnectSpy;
+  };
+  const { unmount } = render(
+    <Header logo={<Icon icon="PhillipsLogo" />} bannerRef={{ current: document.createElement('div') }} />,
+  );
+  unmount();
+  expect(disconnectSpy).toHaveBeenCalled();
+  window.ResizeObserver = originalResizeObserver;
+});
+
+it('provides all context values', () => {
+  render(<Header logo={<Icon icon="PhillipsLogo" />} />);
+  const toggleButton = screen.getByRole('button', { name: /Open Menu/i });
+  expect(toggleButton).toBeInTheDocument();
+  expect(screen.getByTestId('header-logo')).toBeInTheDocument();
+});
+
+interface TestHeaderWithBannerProps {
+  bannerContentHeight?: number;
+}
+
+const TestHeaderWithBanner = ({ bannerContentHeight = 0 }: TestHeaderWithBannerProps) => {
+  const bannerRef = useRef<HTMLDivElement>(null);
+
+  const setBannerRef = (el: HTMLDivElement | null) => {
+    if (el) {
+      Object.defineProperty(el, 'clientHeight', {
+        value: bannerContentHeight,
+        configurable: true,
+      });
+      (bannerRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+    }
   };
 
-  it('should set bannerHeight from NotificationBanner height', async () => {
-    render(<TestHeaderWithBanner bannerContentHeight={100} />);
-    const header = screen.getByRole('banner');
-    await waitFor(() => {
-      const style = header.style.getPropertyValue('--banner-height');
-      expect(style).toBe('100px');
-    });
+  return (
+    <div>
+      <NotificationBanner ref={setBannerRef} style={{ height: `${bannerContentHeight}px` }}>
+        <div>Banner Content</div>
+      </NotificationBanner>
+      <Header logo={<Icon icon="PhillipsLogo" />} bannerRef={bannerRef} />
+    </div>
+  );
+};
+
+it('should set bannerHeight from NotificationBanner height', async () => {
+  render(<TestHeaderWithBanner bannerContentHeight={100} />);
+  const header = screen.getByRole('banner');
+  await waitFor(() => {
+    const style = header.style.getPropertyValue('--banner-height');
+    expect(style).toBe('100px');
   });
 });

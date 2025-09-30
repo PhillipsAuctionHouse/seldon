@@ -9,6 +9,26 @@ import { SubFilterDropdown } from './SubFilterDropdown';
 import { FilterButtonIconType, FilterButtonType, FilterType } from './types';
 import { getFilterButtonClickHandler, handleInputChange, resetAllFilters } from './utils';
 
+const filters: FilterType[] = [
+  {
+    label: 'Sale',
+    id: 'sale',
+    type: 'checkbox',
+    filterDimensions: new Set([
+      { label: 'Foo', active: false },
+      { label: 'Bar', active: false },
+    ]),
+    buttonType: FilterButtonType.Sale,
+  },
+  {
+    label: 'Departments',
+    id: 'departments',
+    type: 'checkbox',
+    filterDimensions: new Set([{ label: 'Baz', active: false }]),
+    buttonType: FilterButtonType.Departments,
+  },
+];
+
 describe('FiltersInline', () => {
   runCommonTests(FiltersInline, 'FiltersInline');
 
@@ -17,26 +37,6 @@ describe('FiltersInline', () => {
     const filterButton = screen.getByTestId('filters-inline-Filter-button-filter-button');
     expect(filterButton).toBeInTheDocument();
   });
-
-  const filters: FilterType[] = [
-    {
-      label: 'Sale',
-      id: 'sale',
-      type: 'checkbox',
-      filterDimensions: new Set([
-        { label: 'Foo', active: false },
-        { label: 'Bar', active: false },
-      ]),
-      buttonType: FilterButtonType.Sale,
-    },
-    {
-      label: 'Departments',
-      id: 'departments',
-      type: 'checkbox',
-      filterDimensions: new Set([{ label: 'Baz', active: false }]),
-      buttonType: FilterButtonType.Departments,
-    },
-  ];
 
   it('renders MainFilterDropdown and all SubFilterDropdowns', () => {
     render(<FiltersInline id="multi-filters" mainFilterLabel={FilterButtonType.Filter} filters={filters} />);

@@ -1,4 +1,4 @@
-import { describe, expect, vi } from 'vitest';
+import { describe, expect, Mock, vi } from 'vitest';
 import { render, fireEvent, act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import AddToCalendar from './AddToCalendar';
@@ -26,6 +26,11 @@ beforeEach(() => {
 });
 
 describe('AddToCalendar component', () => {
+  it('renders correctly', () => {
+    const { getByRole } = render(<AddToCalendar event={event} />);
+    expect(getByRole('button')).toBeInTheDocument();
+  });
+
   it('iCalendar button triggers generateCalendarFile', async () => {
     const user = userEvent.setup();
     const generateCalendarFileSpy = vi.spyOn(calendarLinks, 'generateCalendarFile');
@@ -76,11 +81,6 @@ describe('AddToCalendar component', () => {
     expect(button).toBeInTheDocument();
     const icon = screen.getByTestId('icon-calendar');
     expect(icon).toBeInTheDocument();
-  });
-
-  it('renders correctly', () => {
-    const { getByRole } = render(<AddToCalendar event={event} />);
-    expect(getByRole('button')).toBeInTheDocument();
   });
 
   it('renders calendar links and changes icon to CloseX on trigger click', async () => {
@@ -200,5 +200,23 @@ describe('AddToCalendar component', () => {
 
     // Verify the Popover is closed
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+  });
+
+  it('calls window.open with correct link when clicking a calendar link', async () => {
+    const user = userEvent.setup();
+    const googleLink = 'https://calendar.google.com/fake-link';
+    (calendarLinks.generateGoogleCalendarLink as Mock).mockReturnValue(googleLink);
+
+    const windowOpenSpy = vi.spyOn(window, 'open').mockImplementation(() => null);
+
+    render(<AddToCalendar event={event} label="Add to calendar" />);
+    await user.click(screen.getByRole('button', { name: 'Add to calendar' }));
+
+    const googleCalendarLink = await screen.findByText('Google Calendar');
+    await user.click(googleCalendarLink);
+
+    expect(windowOpenSpy).toHaveBeenCalledWith(googleLink, '_blank');
+
+    windowOpenSpy.mockRestore();
   });
 });

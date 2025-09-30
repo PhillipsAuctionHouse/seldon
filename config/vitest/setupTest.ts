@@ -16,8 +16,8 @@ export function render(ui: Parameters<typeof rtlRender>[0], actualRender: typeof
     if (likelySource && reportedFiles.includes(likelySource)) return result;
     else if (likelySource) reportedFiles.push(likelySource);
     console.log(
-      '\x1b[38;5;183mFound double seldon prefixed class, May cause test failure. Probable source:\n',
-      `\x1b[38;5;151m${likelySource ?? 'Unknown'}\n\n`,
+      '\x1b[38;5;183mFound double seldon prefixed class (.seldon-seldon-), may cause test failure. Probable source:\n',
+      `\x1b[38;5;151m${likelySource ?? 'Unknown'}\n\n\x1b[0m`,
       beNoisy ? `\x1b[38;5;117m${stack}\x1b[0m` : '',
     );
   }
@@ -46,16 +46,33 @@ beforeEach(() => {
   window.HTMLElement.prototype.releasePointerCapture = vi.fn();
   window.HTMLElement.prototype.hasPointerCapture = vi.fn().mockReturnValue(true);
 
-  class MockIntersectionObserver {
-    observe = vi.fn();
+  let intersectionCallback: ((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => void) | null =
+    null;
+  const observedElements: Element[] = [];
+  class MockIntersectionObserver implements IntersectionObserver {
+    readonly root: Element | null = null;
+    readonly rootMargin: string = '';
+    readonly thresholds: ReadonlyArray<number> = [];
+    constructor(cb: (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => void) {
+      intersectionCallback = cb;
+    }
+    observe = (el: Element) => {
+      observedElements.push(el);
+    };
     unobserve = vi.fn();
     disconnect = vi.fn();
+    takeRecords = vi.fn().mockReturnValue([]);
+    // Helper to simulate intersection
+    static triggerIntersect(entries: IntersectionObserverEntry[]) {
+      if (intersectionCallback) intersectionCallback(entries, new MockIntersectionObserver(intersectionCallback));
+    }
   }
-
   Object.defineProperty(window, 'IntersectionObserver', {
     writable: true,
     value: MockIntersectionObserver,
   });
+  // Expose helper globally for tests
+  (globalThis as Record<string, unknown>).triggerIntersection = MockIntersectionObserver.triggerIntersect;
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
     value: () => ({

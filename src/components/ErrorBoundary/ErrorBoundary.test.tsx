@@ -36,6 +36,15 @@ describe('ErrorBoundary', () => {
     expect(screen.getByTestId('test-id')).toBeInTheDocument();
   });
 
+  it('calls logger with info.componentStack when error is caught', () => {
+    const mockedLogger = vi.fn(() => void 0) as ErrorBoundaryProps['logger'] & Mock;
+    const errorBoundaryInstance = new ErrorBoundary({ logger: mockedLogger, children: undefined });
+    const error = new Error('Sudan Archives');
+    const info = { componentStack: '🐘Sudan Archives stack trace' };
+    errorBoundaryInstance.componentDidCatch(error, info);
+    expect(mockedLogger).toHaveBeenCalledWith(error, '🐘Sudan Archives stack trace');
+  });
+
   it.each([
     {
       name: 'default fallback',

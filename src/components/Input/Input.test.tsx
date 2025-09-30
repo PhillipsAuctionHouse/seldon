@@ -18,212 +18,227 @@ const TestInput = React.forwardRef(
 TestInput.displayName = 'TestInput';
 
 describe('Input', () => {
-  describe('input types', () => {
-    it.each([['checkbox'], ['radio']])('renders %s input type', (type) => {
-      render(<Input {...reqProps} type={type} />);
-      expect(screen.getByTestId('test-id')).toHaveAttribute('type', type);
-    });
-
-    it.each([['checkbox'], ['radio']])('renders skeleton for %s', (type) => {
-      render(<Input labelText="Text Input" id="Input-2" name="stringInput" isSkeletonLoading type={type} />);
-      expect(screen.getByTestId('Input-2')).toHaveClass(`${px}-skeleton`);
-    });
+  it.each([['checkbox'], ['radio']])('renders %s input type', (type) => {
+    render(<Input {...reqProps} type={type} />);
+    expect(screen.getByTestId('test-id')).toHaveAttribute('type', type);
   });
 
-  describe('inputAdornment', () => {
-    it.each([
-      'text',
-      'number',
-      'password',
-      'email',
-      'tel',
-      'url',
-      'search',
-      'date',
-      'datetime-local',
-      'month',
-      'time',
-      'week',
-    ])('renders inputAdornment for %s type', (type) => {
-      render(
-        <Input
-          id={`adorned-input-${type}`}
-          labelText="Adorned Input"
-          inputAdornment={<span data-testid={`custom-adornment-${type}`}>Adornment</span>}
-          type={type}
-        />,
-      );
-      expect(screen.getByTestId(`adornment-adorned-input-${type}`)).toBeInTheDocument();
-      expect(screen.getByTestId(`custom-adornment-${type}`)).toBeInTheDocument();
-    });
-
-    it('renders inputAdornment when provided', () => {
-      render(
-        <Input
-          id="adorned-input"
-          labelText="Adorned Input"
-          inputAdornment={<span data-testid="custom-adornment">Adornment</span>}
-        />,
-      );
-      expect(screen.getByTestId('adornment-adorned-input')).toBeInTheDocument();
-      expect(screen.getByTestId('custom-adornment')).toBeInTheDocument();
-    });
+  it.each([['checkbox'], ['radio']])('renders skeleton for %s', (type) => {
+    render(<Input labelText="Text Input" id="Input-2" name="stringInput" isSkeletonLoading type={type} />);
+    expect(screen.getByTestId('Input-2')).toHaveClass(`${px}-skeleton`);
   });
 
-  describe('controlled and uncontrolled', () => {
-    it('renders default value if passed', () => {
-      const testRef = React.createRef<HTMLInputElement>();
-      render(<Input ref={testRef} {...reqProps} defaultValue="Default Value" />);
-      expect(testRef?.current?.value).toEqual('Default Value');
-    });
-
-    it('remains uncontrolled input even with defaultValue', async () => {
-      const testRef = React.createRef<HTMLInputElement>();
-      render(<Input ref={testRef} {...reqProps} defaultValue="Default Value" />);
-      await userEvent.type(screen.getByTestId('test-id'), 's');
-      await waitFor(() => expect(testRef?.current?.value).toEqual('Default Values'));
-    });
-
-    it('updates value when used as controlled input', async () => {
-      const testRef = React.createRef<HTMLInputElement>();
-      render(<TestInput ref={testRef} {...reqProps} />);
-      await userEvent.type(screen.getByTestId('test-id'), 'Controlled Value');
-      await waitFor(() => expect(testRef?.current?.value).toEqual('Controlled Value'));
-    });
-
-    it('updates value when used as controlled input with defaultValue', async () => {
-      const testRef = React.createRef<HTMLInputElement>();
-      render(<TestInput ref={testRef} {...reqProps} defaultValue="Default Value" />);
-      await userEvent.type(screen.getByTestId('test-id'), 's');
-      await waitFor(() => expect(testRef?.current?.value).toEqual('Default Values'));
-    });
+  it.each([
+    'text',
+    'number',
+    'password',
+    'email',
+    'tel',
+    'url',
+    'search',
+    'date',
+    'datetime-local',
+    'month',
+    'time',
+    'week',
+  ])('renders inputAdornment for %s type', (type) => {
+    render(
+      <Input
+        id={`adorned-input-${type}`}
+        labelText="Adorned Input"
+        inputAdornment={<span data-testid={`custom-adornment-${type}`}>Adornment</span>}
+        type={type}
+      />,
+    );
+    expect(screen.getByTestId(`adornment-adorned-input-${type}`)).toBeInTheDocument();
+    expect(screen.getByTestId(`custom-adornment-${type}`)).toBeInTheDocument();
   });
 
-  describe('validation and warning', () => {
-    it('renders validation message when invalid', () => {
-      const { rerender } = render(<Input {...reqProps} invalidText="Your input is invalid" />);
-      expect(screen.queryByText(/Your input is invalid/)).not.toBeInTheDocument();
-      rerender(<Input {...reqProps} invalid invalidText="Your input is invalid" />);
-      expect(screen.queryByText(/Your input is invalid/)).toBeInTheDocument();
-    });
-
-    it('renders warning message when warn', () => {
-      const { rerender } = render(<Input {...reqProps} warnText="Your input is in warning state" />);
-      expect(screen.queryByText(/Your input is in warning state/)).not.toBeInTheDocument();
-      rerender(<Input {...reqProps} warn warnText="Your input is in warning state" />);
-      expect(screen.queryByText(/Your input is in warning state/)).toBeInTheDocument();
-    });
-
-    it('renders ReactNode as warnText or invalidText', () => {
-      const warnText = (
-        <div>
-          <h1 data-testid="span">The</h1>
-          <p>End Is Near!</p>
-        </div>
-      );
-      const invalidText = (
-        <div>
-          <h1 data-testid="span">This</h1>
-          <p>Is Not Valid!</p>
-        </div>
-      );
-      const { rerender } = render(<Input {...reqProps} warn warnText={warnText} />);
-      expect(screen.queryByText(/The/)).toBeInTheDocument();
-      rerender(<Input {...reqProps} invalid invalidText={invalidText} />);
-      expect(screen.queryByText(/This/)).toBeInTheDocument();
-    });
-
-    it('only renders warning when not invalid', () => {
-      const { rerender } = render(
-        <Input {...reqProps} invalidText="invalid" warn warnText="Your input is in warning state" />,
-      );
-      expect(screen.queryByText(/Your input is in warning state/)).toBeInTheDocument();
-      rerender(<Input {...reqProps} invalid invalidText="invalid" warn warnText="Your input is in warning state" />);
-      expect(screen.queryByText(/Your input is in warning state/)).not.toBeInTheDocument();
-      expect(screen.queryByText(/invalid/)).toBeInTheDocument();
-    });
-
-    it('does not render warning or invalid message when disabled or readonly', () => {
-      const { rerender } = render(
-        <Input {...reqProps} disabled invalid invalidText="invalid" warn warnText="Your input is in warning state" />,
-      );
-      expect(screen.queryByText(/Your input is in warning state/)).not.toBeInTheDocument();
-      expect(screen.queryByText(/invalid/)).not.toBeInTheDocument();
-      rerender(
-        <Input {...reqProps} readOnly invalid invalidText="invalid" warn warnText="Your input is in warning state" />,
-      );
-      expect(screen.queryByText(/Your input is in warning state/)).not.toBeInTheDocument();
-      expect(screen.queryByText(/invalid/)).not.toBeInTheDocument();
-    });
+  it('renders inputAdornment when provided', () => {
+    render(
+      <Input
+        id="adorned-input"
+        labelText="Adorned Input"
+        inputAdornment={<span data-testid="custom-adornment">Adornment</span>}
+      />,
+    );
+    expect(screen.getByTestId('adornment-adorned-input')).toBeInTheDocument();
+    expect(screen.getByTestId('custom-adornment')).toBeInTheDocument();
   });
 
-  describe('user interactions', () => {
-    it('fires onClick handler when clicked', async () => {
-      const mockedOnClick = vi.fn();
-      render(<Input {...reqProps} onClick={mockedOnClick} />);
-      await userEvent.click(screen.getByTestId('test-id'));
-      await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(1));
-    });
-
-    it('changes input value', async () => {
-      render(<Input {...reqProps} />);
-      await userEvent.click(screen.getByTestId('test-id'));
-      await userEvent.keyboard('s');
-      expect(screen.getByTestId('test-id')).toHaveValue('s');
-    });
-
-    it('does not fire onClick handler when disabled', async () => {
-      const mockedOnClick = vi.fn();
-      render(<Input {...reqProps} onClick={mockedOnClick} disabled />);
-      await userEvent.click(screen.getByTestId('test-id'));
-      expect(mockedOnClick).not.toHaveBeenCalled();
-    });
-
-    it('does not change input when readOnly', async () => {
-      render(<Input {...reqProps} readOnly />);
-      await userEvent.click(screen.getByTestId('test-id'));
-      await userEvent.keyboard('s');
-      expect(screen.getByTestId('test-id')).not.toHaveValue('s');
-    });
+  it('renders default value if passed', () => {
+    const testRef = React.createRef<HTMLInputElement>();
+    render(<Input ref={testRef} {...reqProps} defaultValue="Default Value" />);
+    expect(testRef?.current?.value).toEqual('Default Value');
   });
 
-  describe('labelText', () => {
-    it('renders labelText as ReactNode', () => {
-      render(
-        <Input
-          id="test-select-label"
-          labelText={
-            <div>
-              <p>
-                Test paragraph<span>Test Span</span>
-              </p>
-            </div>
-          }
-        />,
-      );
-
-      const labelElement = screen.getByTestId('label-test-select-label');
-      expect(labelElement).toBeInTheDocument();
-
-      const wrapperElement = screen.getByText('Test paragraph');
-      expect(wrapperElement).toBeInTheDocument();
-
-      const spanElement = screen.getByText('Test Span');
-      expect(spanElement).toBeInTheDocument();
-    });
+  it('renders inputAdornment at end when adornmentPosition is "end"', () => {
+    render(
+      <Input
+        id="adorned-input-end"
+        labelText="Adorned Input End"
+        inputAdornment={<span data-testid="custom-adornment-end">Adornment End</span>}
+        adornmentPosition="end"
+        type="text"
+      />,
+    );
+    const wrapper = screen.getByTestId('wrapper-adorned-input-end');
+    const input = screen.getByTestId('adorned-input-end');
+    const adornment = screen.getByTestId('adornment-adorned-input-end');
+    expect(wrapper).toBeInTheDocument();
+    expect(input).toBeInTheDocument();
+    expect(adornment).toBeInTheDocument();
+    expect(screen.getByTestId('custom-adornment-end')).toBeInTheDocument();
   });
 
-  describe('skeleton class name', () => {
-    it('renders with skeleton class name', () => {
-      render(<Input labelText="Text Input" id="Input-1" name="stringInput" isSkeletonLoading />);
-      const inputElement = screen.getByRole('textbox');
-      expect(inputElement).toHaveClass(`${px}-skeleton`);
-    });
+  it('remains uncontrolled input even with defaultValue', async () => {
+    const testRef = React.createRef<HTMLInputElement>();
+    render(<Input ref={testRef} {...reqProps} defaultValue="Default Value" />);
+    await userEvent.type(screen.getByTestId('test-id'), 's');
+    await waitFor(() => expect(testRef?.current?.value).toEqual('Default Values'));
+  });
 
-    it('does not render with skeleton class name', () => {
-      render(<Input labelText="Text Input" id="Input-1" name="stringInput" />);
-      const inputElement = screen.getByRole('textbox');
-      expect(inputElement).not.toHaveClass(`${px}-skeleton`);
-    });
+  it('updates value when used as controlled input', async () => {
+    const testRef = React.createRef<HTMLInputElement>();
+    render(<TestInput ref={testRef} {...reqProps} />);
+    await userEvent.type(screen.getByTestId('test-id'), 'Controlled Value');
+    await waitFor(() => expect(testRef?.current?.value).toEqual('Controlled Value'));
+  });
+
+  it('updates value when used as controlled input with defaultValue', async () => {
+    const testRef = React.createRef<HTMLInputElement>();
+    render(<TestInput ref={testRef} {...reqProps} defaultValue="Default Value" />);
+    await userEvent.type(screen.getByTestId('test-id'), 's');
+    await waitFor(() => expect(testRef?.current?.value).toEqual('Default Values'));
+  });
+
+  it('renders validation message when invalid', () => {
+    const { rerender } = render(<Input {...reqProps} invalidText="Your input is invalid" />);
+    expect(screen.queryByText(/Your input is invalid/)).not.toBeInTheDocument();
+    rerender(<Input {...reqProps} invalid invalidText="Your input is invalid" />);
+    expect(screen.queryByText(/Your input is invalid/)).toBeInTheDocument();
+  });
+
+  it('renders warning message when warn', () => {
+    const { rerender } = render(<Input {...reqProps} warnText="Your input is in warning state" />);
+    expect(screen.queryByText(/Your input is in warning state/)).not.toBeInTheDocument();
+    rerender(<Input {...reqProps} warn warnText="Your input is in warning state" />);
+    expect(screen.queryByText(/Your input is in warning state/)).toBeInTheDocument();
+  });
+
+  it('renders ReactNode as warnText or invalidText', () => {
+    const warnText = (
+      <div>
+        <h1 data-testid="span">The</h1>
+        <p>End Is Near!</p>
+      </div>
+    );
+    const invalidText = (
+      <div>
+        <h1 data-testid="span">This</h1>
+        <p>Is Not Valid!</p>
+      </div>
+    );
+    const { rerender } = render(<Input {...reqProps} warn warnText={warnText} />);
+    expect(screen.queryByText(/The/)).toBeInTheDocument();
+    rerender(<Input {...reqProps} invalid invalidText={invalidText} />);
+    expect(screen.queryByText(/This/)).toBeInTheDocument();
+  });
+
+  it('only renders warning when not invalid', () => {
+    const { rerender } = render(
+      <Input {...reqProps} invalidText="invalid" warn warnText="Your input is in warning state" />,
+    );
+    expect(screen.queryByText(/Your input is in warning state/)).toBeInTheDocument();
+    rerender(<Input {...reqProps} invalid invalidText="invalid" warn warnText="Your input is in warning state" />);
+    expect(screen.queryByText(/Your input is in warning state/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/invalid/)).toBeInTheDocument();
+  });
+
+  it('does not render warning or invalid message when disabled or readonly', () => {
+    const { rerender } = render(
+      <Input {...reqProps} disabled invalid invalidText="invalid" warn warnText="Your input is in warning state" />,
+    );
+    expect(screen.queryByText(/Your input is in warning state/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/invalid/)).not.toBeInTheDocument();
+    rerender(
+      <Input {...reqProps} readOnly invalid invalidText="invalid" warn warnText="Your input is in warning state" />,
+    );
+    expect(screen.queryByText(/Your input is in warning state/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/invalid/)).not.toBeInTheDocument();
+  });
+  it('fires onClick handler when clicked', async () => {
+    const mockedOnClick = vi.fn();
+    render(<Input {...reqProps} onClick={mockedOnClick} />);
+    await userEvent.click(screen.getByTestId('test-id'));
+    await waitFor(() => expect(mockedOnClick.mock.calls).toHaveLength(1));
+  });
+
+  it('changes input value', async () => {
+    render(<Input {...reqProps} />);
+    await userEvent.click(screen.getByTestId('test-id'));
+    await userEvent.keyboard('s');
+    expect(screen.getByTestId('test-id')).toHaveValue('s');
+  });
+
+  it('does not fire onClick handler when disabled', async () => {
+    const mockedOnClick = vi.fn();
+    render(<Input {...reqProps} onClick={mockedOnClick} disabled />);
+    await userEvent.click(screen.getByTestId('test-id'));
+    expect(mockedOnClick).not.toHaveBeenCalled();
+  });
+
+  it('does not change input when readOnly', async () => {
+    render(<Input {...reqProps} readOnly />);
+    await userEvent.click(screen.getByTestId('test-id'));
+    await userEvent.keyboard('s');
+    expect(screen.getByTestId('test-id')).not.toHaveValue('s');
+  });
+
+  it('renders labelText as ReactNode', () => {
+    render(
+      <Input
+        id="test-select-label"
+        labelText={
+          <div>
+            <p>
+              Test paragraph<span>Test Span</span>
+            </p>
+          </div>
+        }
+      />,
+    );
+
+    const labelElement = screen.getByTestId('label-test-select-label');
+    expect(labelElement).toBeInTheDocument();
+
+    const wrapperElement = screen.getByText('Test paragraph');
+    expect(wrapperElement).toBeInTheDocument();
+
+    const spanElement = screen.getByText('Test Span');
+    expect(spanElement).toBeInTheDocument();
+  });
+
+  it('renders with skeleton class name', () => {
+    render(<Input labelText="Text Input" id="Input-1" name="stringInput" isSkeletonLoading />);
+    const inputElement = screen.getByRole('textbox');
+    expect(inputElement).toHaveClass(`${px}-skeleton`);
+  });
+
+  it('does not render with skeleton class name', () => {
+    render(<Input labelText="Text Input" id="Input-1" name="stringInput" />);
+    const inputElement = screen.getByRole('textbox');
+    expect(inputElement).not.toHaveClass(`${px}-skeleton`);
+  });
+
+  it('falls back to "text" type when inputProps.type is undefined', () => {
+    // Simulate inputProps.type being undefined by omitting type prop
+    render(<Input {...reqProps} />);
+    expect(screen.getByTestId('test-id')).toHaveAttribute('type', 'text');
+  });
+
+  it('uses inputProps.type when provided', () => {
+    render(<Input {...reqProps} type="email" />);
+    expect(screen.getByTestId('test-id')).toHaveAttribute('type', 'email');
   });
 });

@@ -9,18 +9,20 @@ const CALENDAR_BASE_URL = {
   yahoo: 'https://calendar.yahoo.com/',
 };
 
+// unless it gets repurposed, this function should always return a timezone.
+// if the failure condition is true we would have thrown well before this is called
 const getUserTimezone = () => {
-  try {
-    return Intl.DateTimeFormat().resolvedOptions().timeZone;
-  } catch {
-    console.warn("Unable to determine user's timezone. Using UTC as a fallback.");
-    return 'UTC';
-  }
+  // try {
+  return Intl.DateTimeFormat().resolvedOptions().timeZone;
+  // } catch {
+  //   console.warn("Unable to determine user's timezone. Using UTC as a fallback.");
+  //   return 'UTC';
+  // }
 };
 
 const createSearchParams = (params: Record<string, string>) => new URLSearchParams(params);
 
-const generateCalendarLink = (calendarType: 'google' | 'outlook' | 'yahoo', event: CalendarEvent) => {
+export const generateCalendarLink = (calendarType: 'google' | 'outlook' | 'yahoo', event: CalendarEvent) => {
   if (!event.start || !isValid(event.start)) {
     console.error('Invalid event start date:', event);
     return '#';
@@ -86,7 +88,7 @@ const generateOutlookOnlineLink = (event: CalendarEvent) => generateCalendarLink
 const generateYahooCalendarLink = (event: CalendarEvent) => generateCalendarLink('yahoo', event);
 
 const generateCalendarFile = (event: CalendarEvent) => {
-  if (!event.start) {
+  if (!isValid(event.start)) {
     console.error('Invalid event start date:', event);
     return;
   }

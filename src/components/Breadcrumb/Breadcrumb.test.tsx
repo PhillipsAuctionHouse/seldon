@@ -28,67 +28,61 @@ describe('Breadcrumb component', () => {
     window.dispatchEvent(new Event('resize'));
   });
 
-  describe('Navigation', () => {
-    it('renders breadcrumb items in desktop view', () => {
-      render(<Breadcrumb items={items} />);
-      expect(screen.getByText('Art, Modern to Contemporary')).toBeInTheDocument();
-      expect(screen.getByText('Lot 1')).toBeInTheDocument();
-    });
+  it('renders breadcrumb items in desktop view', () => {
+    render(<Breadcrumb items={items} />);
+    expect(screen.getByText('Art, Modern to Contemporary')).toBeInTheDocument();
+    expect(screen.getByText('Lot 1')).toBeInTheDocument();
+  });
 
-    it('renders back button in mobile view', () => {
-      setWindowWidth(375);
-      render(<Breadcrumb {...reqProps} items={items} />);
-      const backButton = screen.getByTestId('test-id-back-button');
-      expect(backButton).toBeInTheDocument();
-      expect(backButton).toHaveAttribute('href', '/new');
-      expect(backButton.querySelector('svg')).toBeInTheDocument();
-    });
+  it('renders back button in mobile view', () => {
+    setWindowWidth(375);
+    render(<Breadcrumb {...reqProps} items={items} />);
+    const backButton = screen.getByTestId('test-id-back-button');
+    expect(backButton).toBeInTheDocument();
+    expect(backButton).toHaveAttribute('href', '/new');
+    expect(backButton.querySelector('svg')).toBeInTheDocument();
+  });
 
-    it.each([
+  it.each([
+    [
       [
-        [
-          { label: 'Home', href: '/' },
-          { label: 'Section', href: '/section' },
-          { label: 'Current', href: '/current' },
-        ],
-        '/section',
+        { label: 'Home', href: '/' },
+        { label: 'Section', href: '/section' },
+        { label: 'Current', href: '/current' },
       ],
-      [[{ label: 'Home', href: '/' }, { label: 'Section' }, { label: 'Current', href: '/current' }], '/'],
-    ])('renders back button with correct href', (breadcrumbItems, expectedHref) => {
-      render(<Breadcrumb id="test-breadcrumb" items={breadcrumbItems} />);
-      const backButton = screen.getByTestId('test-breadcrumb-back-button');
-      expect(backButton).toHaveAttribute('href', expectedHref);
-    });
+      '/section',
+    ],
+    [[{ label: 'Home', href: '/' }, { label: 'Section' }, { label: 'Current', href: '/current' }], '/'],
+  ])('renders back button with correct href', (breadcrumbItems, expectedHref) => {
+    render(<Breadcrumb id="test-breadcrumb" items={breadcrumbItems} />);
+    const backButton = screen.getByTestId('test-breadcrumb-back-button');
+    expect(backButton).toHaveAttribute('href', expectedHref);
   });
 
-  describe('Truncation', () => {
-    it.each([
-      [undefined, false],
-      [1, true],
-    ])('truncates item at index %s', (truncateIndex, shouldTruncate) => {
-      render(<Breadcrumb items={items} truncateIndex={truncateIndex} />);
-      const truncatedItem = screen.getByRole('listitem', { name: 'Modern & Contemporary Art Evening Sale - Test3' });
-      if (shouldTruncate) {
-        expect(truncatedItem).toHaveClass('seldon-breadcrumb--truncate');
-      } else {
-        expect(truncatedItem).not.toHaveClass('seldon-breadcrumb--truncate');
-      }
-    });
+  it.each([
+    [undefined, false],
+    [1, true],
+  ])('truncates item at index %s', (truncateIndex, shouldTruncate) => {
+    render(<Breadcrumb items={items} truncateIndex={truncateIndex} />);
+    const truncatedItem = screen.getByRole('listitem', { name: 'Modern & Contemporary Art Evening Sale - Test3' });
+    if (shouldTruncate) {
+      expect(truncatedItem).toHaveClass('seldon-breadcrumb--truncate');
+    } else {
+      expect(truncatedItem).not.toHaveClass('seldon-breadcrumb--truncate');
+    }
   });
 
-  describe('Accessibility', () => {
-    it('renders Breadcrumb with items', () => {
-      render(<Breadcrumb items={items} />);
-      const navElement = screen.getByRole('navigation', { name: 'Breadcrumb' });
-      expect(navElement).toBeInTheDocument();
-      const listItems = screen.getAllByRole('listitem');
-      expect(listItems).toHaveLength(items.length);
-    });
+  it('renders Breadcrumb with items', () => {
+    render(<Breadcrumb items={items} />);
+    const navElement = screen.getByRole('navigation', { name: 'Breadcrumb' });
+    expect(navElement).toBeInTheDocument();
+    const listItems = screen.getAllByRole('listitem');
+    expect(listItems).toHaveLength(items.length);
+  });
 
-    it('last item is not a link', () => {
-      render(<Breadcrumb items={items} />);
-      const lastItem = screen.getByText('Lot 1');
-      expect(lastItem.tagName).toBe('SPAN');
-    });
+  it('last item is not a link', () => {
+    render(<Breadcrumb items={items} />);
+    const lastItem = screen.getByText('Lot 1');
+    expect(lastItem.tagName).toBe('SPAN');
   });
 });

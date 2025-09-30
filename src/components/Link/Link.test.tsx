@@ -48,6 +48,7 @@ describe('Link', () => {
     expect(linkElement).toHaveAttribute('target', '_blank');
     expect(linkElement).toHaveAttribute('rel', 'noopener noreferrer');
   });
+
   it('calls on click', async () => {
     const onClick = vitest.fn();
     const { container } = render(<Link onClick={onClick}>Example Link</Link>);
@@ -59,15 +60,13 @@ describe('Link', () => {
     }
   });
 
-  describe('styling', () => {
-    it('applies the provided className to the link', () => {
-      render(
-        <Link href="https://example.com" className="custom-link">
-          Example Link
-        </Link>,
-      );
-      const linkElement = getLinkElement('Example Link');
-      expect(linkElement).toHaveClass('custom-link');
-    });
+  it('applies the provided className to the link', () => {
+    render(
+      <Link href="https://example.com" className="custom-link">
+        Example Link
+      </Link>,
+    );
+    const linkElement = getLinkElement('Example Link');
+    expect(linkElement).toHaveClass('custom-link');
   });
 });

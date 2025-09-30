@@ -1,3 +1,4 @@
+import { beforeAll, afterAll, vi, describe, it, expect } from 'vitest';
 import { transformScssAlias } from './buildUtils';
 
 const originalLog = console.log;
@@ -13,14 +14,6 @@ beforeAll(() => {
 afterAll(() => {
   console.log = originalLog;
 });
-
-const createMockGlob = (fileName: string) => async (importOriginal: () => Promise<Record<string, unknown>>) => {
-  const glob = await importOriginal();
-  return {
-    ...glob,
-    sync: vi.fn(() => [fileName]),
-  };
-};
 
 describe('transformScssAlias', () => {
   it('returns contents unchanged when file name is not found', () => {
@@ -65,7 +58,13 @@ describe('transformScssAlias', () => {
     },
   ].forEach(({ name, fileName, filePath, expected, input }) => {
     it(name, () => {
-      vi.mock('glob', createMockGlob(fileName));
+      vi.mock('glob', async (importOriginal: () => Promise<Record<string, unknown>>) => {
+        const glob = await importOriginal();
+        return {
+          ...glob,
+          sync: vi.fn(() => [fileName]),
+        };
+      });
       const transformedContents = transformScssAlias(input, filePath);
       expect(transformedContents.toString()).toBe(expected);
     });
