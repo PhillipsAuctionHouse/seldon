@@ -1,3 +1,10 @@
+# [1.200.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.199.0...v1.200.0) (2025-09-30)
+
+
+### Features
+
+* **BidSnapshot:** L3-7838 rename showSoldPrice prop -> showSoldLabel ([#732](https://github.com/PhillipsAuctionHouse/seldon/issues/732)) ([98002cc](https://github.com/PhillipsAuctionHouse/seldon/commit/98002cc71b021309e12371c3d97b86bc76cb09d7))
+
 # [1.199.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.198.0...v1.199.0) (2025-09-30)
 
 
