@@ -3,7 +3,7 @@
 .#{$px}-toast {
   align-items: center;
   background-color: $black-100;
-  border-radius: 4px;
+  border-radius: $radius-xs;
   color: $white-100;
   column-gap: $spacing-sm;
   display: grid;

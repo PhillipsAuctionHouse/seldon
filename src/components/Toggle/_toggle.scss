@@ -30,7 +30,7 @@ $lg: #{$px}-input--lg;
 
     &::before {
       background-color: rgba($pure-black, 0.4);
-      border-radius: 1rem;
+      border-radius: $radius-md;
       height: 1rem;
       left: 0;
       transition:
