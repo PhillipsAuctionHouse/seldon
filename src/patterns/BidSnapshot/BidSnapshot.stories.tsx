@@ -23,7 +23,7 @@ const meta = {
     numberOfBids: { control: 'number' },
     startingBid: { control: 'number' },
     startingBidText: { control: 'text' },
-    showSoldPrice: { control: 'boolean' },
+    showSoldLabel: { control: 'boolean' },
     soldPrice: { control: 'number' },
     soldForText: { control: 'text' },
     wonForText: { control: 'text' },
