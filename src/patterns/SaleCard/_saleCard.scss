@@ -6,7 +6,7 @@
   flex-direction: column;
   gap: $spacing-md;
 
-  @include media($breakpoint-md) {
+  @include media($breakpoint-snw-mobile) {
     flex-direction: row;
   }
 
@@ -19,8 +19,7 @@
     justify-content: center;
     min-width: 100%;
 
-    @include media($breakpoint-md) {
-      aspect-ratio: 107/60;
+    @include media($breakpoint-snw-mobile) {
       min-width: auto;
     }
 
@@ -38,8 +37,20 @@
     flex-grow: 1;
     gap: $spacing-micro;
 
-    @include media($size-md, 'max') {
+    @include media($size-snw-mobile, 'max') {
       align-self: flex-start;
+    }
+  }
+
+  &__ctas {
+    flex: 0 0 0%;
+
+    @include media($breakpoint-snw-mobile) {
+      flex-basis: 191px;
+    }
+
+    @include media($breakpoint-lg) {
+      flex-basis: 280px;
     }
   }
 
@@ -63,6 +74,7 @@
     color: $badge-blue;
     font-size: 0.75rem;
     padding: $spacing-micro 8px;
+    text-transform: unset;
   }
 
   &__auction-type {
@@ -105,7 +117,7 @@
     align-items: flex-start;
     gap: $spacing-sm;
 
-    @include media($size-md, 'max') {
+    @include media($size-snw-mobile, 'max') {
       flex-direction: row;
     }
 

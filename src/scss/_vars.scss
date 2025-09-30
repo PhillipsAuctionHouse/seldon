@@ -26,7 +26,7 @@ $highlight-yellow: #fff90a;
 $highlight-green: #46ea77;
 $highlight-blue: #0065fc;
 $highlight-red: #ff3d0a;
-$highlight-purple: #802dfa;
+$highlight-purple: #6f4eea;
 
 // Functional
 
@@ -60,6 +60,7 @@ $bg-overlay: rgba(0, 0, 0, 50%);
 // Status
 $success-default: #00cc39;
 $warning-default: #ea0404;
+$reserve-bid: #b00000;
 $status-info: #0065fc;
 $focus-default: #07c;
 
@@ -86,7 +87,7 @@ $off-white: $grey-25;
 
 // --- Legacy Notification color palette ---
 $error-red: $highlight-red;
-$error-pink: $highlight-purple;
+$error-pink: $highlight-red;
 $warn-yellow: $highlight-yellow;
 $post-sale-pink: $highlight-purple;
 $cta-blue: $highlight-blue;
@@ -96,7 +97,7 @@ $badge-blue: $highlight-blue;
 $widget-blue: $highlight-blue;
 $widget-green: $highlight-green;
 $widget-maroon: $highlight-red;
-$widget-red: $highlight-red;
+$widget-red: $reserve-bid;
 $clock-widget-blue: $highlight-blue;
 $clock-widget-green: $highlight-green;
 $clock-widget-maroon: $highlight-red;
@@ -178,6 +179,9 @@ $breakpoint-sm: 361px;
 $breakpoint-md: 961px;
 $breakpoint-lg: 1401px;
 $breakpoint-xl: 1801px;
+
+// Temporary token for mobile breakpoint added to support [L3-7681](https://phillipsauctions.atlassian.net/browse/L3-7681)
+$breakpoint-snw-mobile: 768px;
 
 ////////////////////////
 /// FONT SIZE TOKENS:
@@ -490,6 +494,7 @@ $size-md: 'md';
 $size-lg: 'lg';
 $size-xl: 'xl';
 $size-xxl: 'xxl';
+$size-snw-mobile: 'snw-mobile';
 $default-transition: 150ms cubic-bezier(0.16, 1, 0.3, 1);
 $drawer-content-transition: 350ms cubic-bezier(0, 0, 0.2, 1);
 $default-overlay-transition: 350ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -504,6 +509,11 @@ $mobile-minimum-clickable-area: 44px;
 ///
 $search-size: var(--search-size);
 $header-height: var(--header-height);
+
+/// Drawer min height Token
+/// Used to ensure the drawer button area is always at least the minimum height
+/// This is calculated as the (button label height) + (Drawer panel padding) + (Button's internal padding)
+$drawer-button-area-min-height: calc($button-label-line-height + $spacing-md * 2 + $spacing-sm * 2);
 
 ////////////////////////
 /// RADIUS:

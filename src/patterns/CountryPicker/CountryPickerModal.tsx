@@ -130,13 +130,11 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps & CountryPi
               {modalTitle}
             </Text>
             <div className={`${baseClassName}__input-wrapper`}>
-              <span className={`${baseClassName}__input-icon`} aria-hidden="true">
-                <Icon icon="Search" width={16} height={16} color="currentColor" />
-              </span>
               <Input
                 id="countrySearch"
                 type="search"
                 labelText={searchInputLabel}
+                hideLabel
                 placeholder={searchInputPlaceholder}
                 value={filter}
                 onChange={(e) => {
@@ -144,6 +142,11 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps & CountryPi
                 }}
                 autoFocus
                 className={`${baseClassName}__input`}
+                inputAdornment={
+                  <span aria-hidden="true">
+                    <Icon icon="Search" width={16} height={16} color="$cta-inactive" />
+                  </span>
+                }
               />
             </div>
           </div>

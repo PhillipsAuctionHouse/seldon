@@ -1,22 +1,9 @@
 import classnames from 'classnames';
 import { forwardRef, ReactNode } from 'react';
 import { getCommonProps, noOp } from '../../utils';
-import Button from '../Button/Button';
-import { ButtonVariants } from '../Button/types';
 import { Divider } from '../Divider';
 import Modal, { ModalProps } from '../Modal/Modal';
 import { Text, TextVariants } from '../Text';
-
-export interface ModalButtonProps {
-  /**
-   * Callback click function for button
-   */
-  onClick?: () => void | unknown;
-  /**
-   * Button label text
-   */
-  buttonLabel?: string;
-}
 
 export interface ComposedModalProps extends Omit<ModalProps, 'onClose' | 'role' | 'style'> {
   /**
@@ -39,11 +26,11 @@ export interface ComposedModalProps extends Omit<ModalProps, 'onClose' | 'role' 
   /**
    * Left Button Props
    */
-  secondaryButton?: ModalButtonProps;
+  secondaryButton?: React.ReactNode;
   /**
    * Right Button Props
    */
-  primaryButton?: ModalButtonProps;
+  primaryButton?: React.ReactNode;
   /**
    * Footer content for bottom of Viewings Details
    */
@@ -109,16 +96,8 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
           <>
             <Divider className={`${baseClassName}__divider`} id={`${id}-divider`} />
             <div className={`${baseClassName}__btns-group`}>
-              {secondaryButton && (
-                <Button id={`${id}-secondary-btn`} variant={ButtonVariants.secondary} onClick={secondaryButton.onClick}>
-                  {secondaryButton.buttonLabel}
-                </Button>
-              )}
-              {primaryButton && (
-                <Button id={`${id}-primary-btn`} variant={ButtonVariants.primary} onClick={primaryButton.onClick}>
-                  {primaryButton.buttonLabel}
-                </Button>
-              )}
+              {secondaryButton}
+              {primaryButton}
             </div>
             {footerContent && (
               <Text variant={TextVariants.heading5} className={`${baseClassName}__disclaimer`}>

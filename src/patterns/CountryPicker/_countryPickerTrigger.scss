@@ -7,9 +7,11 @@
     width: 100%;
 
     &-label {
-      color: $soft-black;
+      @include text($string2);
+
+      color: $pure-black;
       font-variation-settings: 'wght' 600;
-      margin-bottom: $spacing-micro;
+      margin-bottom: $spacing-xsm;
 
       &--error {
         color: $error-red;
@@ -17,11 +19,13 @@
     }
 
     &-btn {
+      @include text($string2);
+
       align-items: center;
       appearance: none;
-      background: $white-100;
-      border: 1px solid $light-gray;
-      border-radius: 6px;
+      background: $white;
+      border: 1px solid $black-100;
+      border-radius: 0.1875rem;
       box-sizing: border-box;
       cursor: pointer;
       display: flex;
@@ -29,9 +33,6 @@
       font-variation-settings: 'wght' 600;
       justify-content: space-between;
       padding: $spacing-xsm;
-      transition:
-        border-color 0.2s,
-        box-shadow 0.2s;
       width: 100%;
 
       &:focus-visible {
@@ -42,11 +43,12 @@
 
       &--error {
         border-color: $error-red;
+        box-shadow: inset 0 0 3px 3px $error-pink;
       }
     }
 
     &-text {
-      color: $soft-black;
+      color: $pure-black;
       flex: 1;
       overflow: hidden;
       text-align: left;
@@ -58,11 +60,29 @@
       align-items: center;
       display: flex;
       margin-left: $spacing-sm;
+
+      @media (min-width: $breakpoint-md) {
+        height: 1.25rem;
+        width: 1.25rem;
+      }
+
+      @media (min-width: $breakpoint-xl) {
+        height: 1.5rem;
+        width: 1.5rem;
+      }
     }
 
     &-error-msg {
-      color: $error-red;
+      animation: reveal 0.45s linear forwards;
       margin-top: $spacing-micro;
+
+      // Reveal animation (match Input)
+      max-height: 2em;
+      opacity: 1;
+      transition: opacity 0.2s;
+      visibility: visible;
+      white-space: nowrap;
+      will-change: opacity, max-height;
     }
 
     &-flag {
