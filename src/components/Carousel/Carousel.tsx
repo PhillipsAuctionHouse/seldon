@@ -1,4 +1,4 @@
-import { forwardRef, createContext, useCallback, useEffect, KeyboardEvent } from 'react';
+import { forwardRef, createContext, useCallback, useEffect, KeyboardEvent, useState } from 'react';
 import { getCommonProps, SpacingTokens } from '../../utils';
 import classnames from 'classnames';
 import ClassNames from 'embla-carousel-class-names';
@@ -109,6 +109,9 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
         disableNavigationDragBreakpoint = {};
     }
 
+    const [canScrollPrev, setCanScrollPrev] = useState(false);
+    const [canScrollNext, setCanScrollNext] = useState(false);
+
     const [carouselRef, api] = useEmblaCarousel(
       {
         loop,
@@ -170,9 +173,11 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
 
     const onSlidesInView = useCallback(
       (api: CarouselApi) => {
-        if (!api) {
-          return;
-        }
+        if (!api) return;
+
+        setCanScrollPrev(api?.canScrollPrev());
+        setCanScrollNext(api?.canScrollNext());
+
         const slideIndex = api.slidesInView()?.[0];
         if (slideIndex !== undefined) {
           onSlideChange?.(slideIndex);
@@ -198,8 +203,8 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
           api: api,
           scrollPrev: () => api?.scrollPrev(),
           scrollNext: () => api?.scrollNext(),
-          canScrollPrev: api?.canScrollPrev() ?? false,
-          canScrollNext: api?.canScrollNext() ?? false,
+          canScrollPrev,
+          canScrollNext,
           columnGap,
           onSlideChange,
         }}

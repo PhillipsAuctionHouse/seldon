@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { ComponentProps, forwardRef, useCallback, useEffect, useState } from 'react';
+import { ComponentProps, forwardRef, useCallback } from 'react';
 import { getCommonProps } from '../../utils';
 import { useCarousel } from './utils';
 import { Icon } from '../Icon';
@@ -41,20 +41,6 @@ const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(
       }
     }, [api]);
 
-    const [canScrollPrev, setCanScrollPrev] = useState(false);
-    const [canScrollNext, setCanScrollNext] = useState(false);
-
-    useEffect(() => {
-      if (!api) return;
-      setCanScrollPrev(api?.canScrollPrev());
-      setCanScrollNext(api?.canScrollNext());
-
-      api.on('scroll', () => {
-        setCanScrollPrev(api?.canScrollPrev());
-        setCanScrollNext(api?.canScrollNext());
-      });
-    }, [api]);
-
     return (
       <div
         ref={ref}
@@ -67,7 +53,7 @@ const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(
           data-testid="prev-arrow"
           className={classNames(`${baseClassName}-prev-btn`, {
             [`${baseClassName}-prev-btn--always-visible`]: areArrowsAlwaysVisible,
-            [`${baseClassName}-prev-btn--disabled`]: !canScrollPrev,
+            [`${baseClassName}-prev-btn--disabled`]: !api?.canScrollPrev(),
           })}
           onClick={onPrevArrowClick}
         >
@@ -79,7 +65,7 @@ const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(
           data-testid="next-arrow"
           className={classNames(`${baseClassName}-next-btn`, {
             [`${baseClassName}-next-btn--always-visible`]: areArrowsAlwaysVisible,
-            [`${baseClassName}-next-btn--disabled`]: !canScrollNext,
+            [`${baseClassName}-next-btn--disabled`]: !api?.canScrollNext(),
           })}
           onClick={onNextArrowClick}
         >
