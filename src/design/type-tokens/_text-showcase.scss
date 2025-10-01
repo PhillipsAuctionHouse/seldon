@@ -93,16 +93,16 @@
       @include text($headingSmall, 600, uppercase, italic);
     }
 
-    &__body-l {
-      @include text($bodyL);
+    &__body-large {
+      @include text($bodyLarge);
     }
 
-    &__body-m {
-      @include text($bodyM);
+    &__body-medium {
+      @include text($bodyMedium);
     }
 
-    &__body-s {
-      @include text($bodyS);
+    &__body-small {
+      @include text($bodySmall);
     }
 
     &__link-stylised {

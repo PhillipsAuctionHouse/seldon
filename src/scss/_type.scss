@@ -283,16 +283,16 @@
     @include heading-styles($font-size-heading-small, $font-weight, $text-transform, $font-style);
   }
 
-  @if $token == $bodyL {
-    @include body-styles($font-size-l, $font-weight, $text-transform, $font-style);
+  @if $token == $bodyLarge {
+    @include body-styles($font-size-body-large, $font-weight, $text-transform, $font-style);
   }
 
-  @if $token == $bodyM {
-    @include body-styles($font-size-m, $font-weight, $text-transform, $font-style);
+  @if $token == $bodyMedium {
+    @include body-styles($font-size-body-medium, $font-weight, $text-transform, $font-style);
   }
 
-  @if $token == $bodyS {
-    @include body-styles($font-size-s, $font-weight, $text-transform, $font-style);
+  @if $token == $bodySmall {
+    @include body-styles($font-size-body-small, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == $linkStylised {
