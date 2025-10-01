@@ -271,15 +271,15 @@
     @include display-styles($font-size-3xl, $font-weight, $text-transform: uppercase, $font-style: unset);
   }
 
-  @if $token == $heading2XL {
+  @if $token == $headingLarge {
     @include heading-styles($font-size-2xl, $font-weight, $text-transform, $font-style);
   }
 
-  @if $token == $headingXL {
+  @if $token == $headingMedium {
     @include heading-styles($font-size-xl, $font-weight, $text-transform, $font-style);
   }
 
-  @if $token == $headingL {
+  @if $token == $headingSmall {
     @include heading-styles($font-size-l, $font-weight, $text-transform, $font-style);
   }
 

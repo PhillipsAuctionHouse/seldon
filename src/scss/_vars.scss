@@ -207,9 +207,9 @@ $snwHeadingHero2: 'snwHeadingHero2';
 // New Typography Variables
 $displayMedium: 'displayMedium';
 $displaySmall: 'displaySmall';
-$heading2XL: 'heading2XL';
-$headingXL: 'headingXL';
-$headingL: 'headingL';
+$headingLarge: 'headingLarge';
+$headingMedium: 'headingMedium';
+$headingSmall: 'headingSmall';
 $headingM: 'headingM';
 $headingS: 'headingS';
 $bodyL: 'bodyL';
@@ -220,8 +220,8 @@ $linkL: 'linkL';
 $linkM: 'linkM';
 $text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $heading2, $heading3, $heading4, $heading5,
   $title1, $title2, $title3, $title4, $body1, $body2, $body3, $string1, $string2, $string3, $snwFlyoutLink,
-  $snwHeaderLink, $snwHeadingHero1, $snwHeadingHero2, $displayMedium, $displaySmall, $heading2XL, $headingXL, $headingL,
-  $headingM, $headingS, $bodyL, $bodyM, $bodyS, $linkStylised, $linkL, $linkM;
+  $snwHeaderLink, $snwHeadingHero1, $snwHeadingHero2, $displayMedium, $displaySmall, $headingLarge, $headingMedium,
+  $headingSmall, $headingM, $headingS, $bodyL, $bodyM, $bodyS, $linkStylised, $linkL, $linkM;
 
 ////////////////////////
 /// Breakpoint TOKENS to be used for min-width comparisons, make sure they match BREAKPOINTS in constants.ts

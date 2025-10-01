@@ -28,9 +28,9 @@ export enum TextVariants {
   // New variants
   displayMedium = 'displayMedium',
   displaySmall = 'displaySmall',
-  heading2XL = 'heading2XL',
-  headingXL = 'headingXL',
-  headingL = 'headingL',
+  headingLarge = 'headingLarge',
+  headingMedium = 'headingMedium',
+  headingSmall = 'headingSmall',
   headingM = 'headingM',
   headingS = 'headingS',
   bodyL = 'bodyL',

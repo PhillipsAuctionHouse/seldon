@@ -82,7 +82,7 @@ import { Meta } from '@storybook/blocks';
           <div>Large 1441px → 2400px</div>
       </div>
       <div className="typography-item typography-item--small">
-        <h1 className="typography-item__heading-2xl">Heading 2XL</h1>
+        <h1 className="typography-item__heading-large">Heading Large</h1>
           <div className="typography-item__specs">
             Size: 24px / 1.50rem <br/>
             Line height: 1.2 <br/>
@@ -91,10 +91,10 @@ import { Meta } from '@storybook/blocks';
           </div>
       </div>
       <div className="typography-item typography-item--medium">
-        <h1 className="typography-item__heading-2xl"></h1>
+        <h1 className="typography-item__heading-large"></h1>
       </div>
       <div className="typography-item typography-item--large">
-        <h1 className="typography-item__heading-2xl">Heading 2XL</h1>
+        <h1 className="typography-item__heading-large">Heading Large</h1>
           <div className="typography-item__specs">
             Size: 28px / 1.75rem <br/>
             Line height: 1.2 <br/>
@@ -103,7 +103,7 @@ import { Meta } from '@storybook/blocks';
           </div>
       </div>
       <div className="typography-item typography-item--small">
-        <h2 className="typography-item__heading-xl">Heading XL</h2>
+        <h2 className="typography-item__heading-medium">Heading Medium</h2>
           <div className="typography-item__specs">
             Size: 20px / 1.25rem <br/>
             Line height: 1.2 <br/>
@@ -112,10 +112,10 @@ import { Meta } from '@storybook/blocks';
           </div>
       </div>
       <div className="typography-item typography-item--medium">
-        <h2 className="typography-item__heading-xl"></h2>
+        <h2 className="typography-item__heading-medium"></h2>
       </div>
       <div className="typography-item typography-item--large">
-        <h2 className="typography-item__heading-xl">Heading XL</h2>
+        <h2 className="typography-item__heading-medium">Heading Medium</h2>
           <div className="typography-item__specs">
             Size: 24px / 1.50rem <br/>
             Line height: 1.2 <br/>
@@ -124,7 +124,7 @@ import { Meta } from '@storybook/blocks';
           </div>
       </div>
       <div className="typography-item typography-item--small">
-        <h3 className="typography-item__heading-l">Heading L</h3>
+        <h3 className="typography-item__heading-small">Heading Small</h3>
           <div className="typography-item__specs">
             Size: 16px / 1.00rem <br/>
             Line height: 1.2 <br/>
@@ -133,10 +133,10 @@ import { Meta } from '@storybook/blocks';
           </div>
       </div>
       <div className="typography-item typography-item--medium">
-        <h3 className="typography-item__heading-l"></h3>
+        <h3 className="typography-item__heading-small"></h3>
       </div>
       <div className="typography-item typography-item--large">
-        <h3 className="typography-item__heading-l">Heading L</h3>
+        <h3 className="typography-item__heading-small">Heading Small</h3>
           <div className="typography-item__specs">
             Size: 20px / 1.25rem <br/>
             Line height: 1.2 <br/>
@@ -145,7 +145,7 @@ import { Meta } from '@storybook/blocks';
           </div>
       </div>
       <div className="typography-item typography-item--small">
-        <h3 className="typography-item__heading-l--modified">Heading L modified</h3>
+        <h3 className="typography-item__heading-small--modified">Heading L modified</h3>
           <div className="typography-item__specs">
             Size: 16px / 1.00rem <br/>
             Line height: 1.2 <br/>
@@ -154,54 +154,12 @@ import { Meta } from '@storybook/blocks';
           </div>
       </div>
       <div className="typography-item typography-item--medium">
-        <h3 className="typography-item__heading-l--modified"></h3>
+        <h3 className="typography-item__heading-small--modified"></h3>
       </div>
       <div className="typography-item typography-item--large">
-        <h3 className="typography-item__heading-l--modified">Heading L modified</h3>
+        <h3 className="typography-item__heading-small--modified">Heading L modified</h3>
           <div className="typography-item__specs">
             Size: 20px / 1.25rem <br/>
-            Line height: 1.2 <br/>
-            Letter spacing: 0% <br/>
-            Font: Distinct Display
-          </div>
-      </div>
-      <div className="typography-item typography-item--small">
-        <h4 className="typography-item__heading-m">Heading M</h4>
-          <div className="typography-item__specs">
-            Size: 12px / 0.75rem <br/>
-            Line height: 1.2 <br/>
-            Letter spacing: 0% <br/>
-            Font: Distinct Display
-          </div>
-      </div>
-      <div className="typography-item typography-item--medium">
-        <h4 className="typography-item__heading-m"></h4>
-      </div>
-      <div className="typography-item typography-item--large">
-        <h4 className="typography-item__heading-m">Heading M</h4>
-          <div className="typography-item__specs">
-            Size: 16px / 1.00rem <br/>
-            Line height: 1.2 <br/>
-            Letter spacing: 0% <br/>
-            Font: Distinct Display
-          </div>
-      </div>
-      <div className="typography-item typography-item--small">
-        <h5 className="typography-item__heading-s">Heading S</h5>
-          <div className="typography-item__specs">
-            Size: 8px / 0.50rem <br/>
-            Line height: 1.2 <br/>
-            Letter spacing: 0% <br/>
-            Font: Distinct Display
-          </div>
-      </div>
-      <div className="typography-item typography-item--medium">
-        <h5 className="typography-item__heading-s"></h5>
-      </div>
-      <div className="typography-item typography-item--large">
-        <h5 className="typography-item__heading-s">Heading S</h5>
-          <div className="typography-item__specs">
-            Size: 12px / 0.75rem <br/>
             Line height: 1.2 <br/>
             Letter spacing: 0% <br/>
             Font: Distinct Display
@@ -209,12 +167,10 @@ import { Meta } from '@storybook/blocks';
       </div>
       <div className="typography-code-block">
         ```scss
-        @include text($heading2XL);
-        @include text($headingXL);
-        @include text($headingL);
-        @include text($headingL, 600, uppercase, italic);
-        @include text($headingM);
-        @include text($headingS);
+        @include text($headingLarge);
+        @include text($headingMedium);
+        @include text($headingSmall);
+        @include text($headingSmall, 600, uppercase, italic);
         ```
       </div>
     </div>

@@ -77,20 +77,20 @@
       @include text($displaySmall);
     }
 
-    &__heading-2xl {
-      @include text($heading2XL);
+    &__heading-large {
+      @include text($headingLarge);
     }
 
-    &__heading-xl {
-      @include text($headingXL);
+    &__heading-medium {
+      @include text($headingMedium);
     }
 
-    &__heading-l {
-      @include text($headingL);
+    &__heading-small {
+      @include text($headingSmall);
     }
 
-    &__heading-l--modified {
-      @include text($headingL, 600, uppercase, italic);
+    &__heading-small--modified {
+      @include text($headingSmall, 600, uppercase, italic);
     }
 
     &__heading-m {
