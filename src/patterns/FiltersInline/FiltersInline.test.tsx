@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { runCommonTests } from '../../utils/testUtils';
 import { FilterButton } from './FilterButton';
 import { FilterDropdownMenuDesktop } from './FilterDropdownMenuDesktop';
@@ -231,6 +232,36 @@ describe('MainFilterDropdown', () => {
     // Simulate closing the drawer
     fireEvent.click(screen.getByTestId('main-filter-filter-button'));
     expect(handleClick).toHaveBeenCalled();
+  });
+
+  it('calls onClickClear and onApplyFilter when drawer buttons are clicked', async () => {
+    const user = userEvent.setup();
+    const onClickClear = vi.fn();
+    const onApplyFilter = vi.fn();
+    render(
+      <MainFilterDropdown
+        id="main-filter-dropdown"
+        filterButtonLabel="Filter"
+        filtersListState={[true]}
+        filters={[
+          {
+            label: 'Sale',
+            id: 'sale',
+            type: 'checkbox',
+            filterDimensions: new Set([{ label: 'Foo', active: false }]),
+            buttonType: FilterButtonType.Sale as unknown as FilterButtonType,
+          },
+        ]}
+        onClickClear={onClickClear}
+        onApplyFilter={onApplyFilter}
+        resultsCount={5}
+        dropdownMenuTranslation={{}}
+      />,
+    );
+    await user.click(screen.getByText('Clear all'));
+    expect(onClickClear).toHaveBeenCalledWith('all');
+    await user.click(screen.getByText('Show 5 Auctions'));
+    expect(onApplyFilter).toHaveBeenCalledWith(false);
   });
 });
 
