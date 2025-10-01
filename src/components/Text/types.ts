@@ -24,6 +24,23 @@ export enum TextVariants {
   snwHeaderLink = 'snwHeaderLink',
   snwHeadingHero1 = 'snwHeadingHero1',
   snwHeadingHero2 = 'snwHeadingHero2',
+
+  // New variants
+  displayMedium = 'displayMedium',
+  displaySmall = 'displaySmall',
+  headingLarge = 'headingLarge',
+  headingMedium = 'headingMedium',
+  headingSmall = 'headingSmall',
+  bodyLarge = 'bodyLarge',
+  bodyMedium = 'bodyMedium',
+  bodySmall = 'bodySmall',
+  labelLarge = 'labelLarge',
+  labelMedium = 'labelMedium',
+  labelSmall = 'labelSmall',
+  linkStylised = 'linkStylised',
+  linkLarge = 'linkLarge',
+  linkMedium = 'linkMedium',
+  linkSmall = 'linkSmall',
 }
 
 export enum TextAlignments {
