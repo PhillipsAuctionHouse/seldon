@@ -31,14 +31,13 @@ export enum TextVariants {
   headingLarge = 'headingLarge',
   headingMedium = 'headingMedium',
   headingSmall = 'headingSmall',
-  headingM = 'headingM',
-  headingS = 'headingS',
   bodyL = 'bodyL',
   bodyM = 'bodyM',
   bodyS = 'bodyS',
   linkStylised = 'linkStylised',
   linkL = 'linkL',
   linkM = 'linkM',
+  linkSmall = 'linkSmall',
 }
 
 export enum TextAlignments {

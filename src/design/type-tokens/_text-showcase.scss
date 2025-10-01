@@ -93,14 +93,6 @@
       @include text($headingSmall, 600, uppercase, italic);
     }
 
-    &__heading-m {
-      @include text($headingM);
-    }
-
-    &__heading-s {
-      @include text($headingS);
-    }
-
     &__body-l {
       @include text($bodyL);
     }
@@ -123,6 +115,10 @@
 
     &__link-m {
       @include text($linkM);
+    }
+
+    &__link-small {
+      @include text($linkSmall);
     }
   }
 }

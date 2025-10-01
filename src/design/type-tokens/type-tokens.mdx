@@ -346,11 +346,37 @@ import { Meta } from '@storybook/blocks';
             Text decoration: underline
           </div>
       </div>
+      <div className="typography-item typography-item--small">
+        <a className="typography-item__link-small">Link Small</a>
+          <div className="typography-item__specs">
+            Size: 12px / 0.75rem <br/>
+            Line height: 1.2 <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 600 <br/>
+            Text decoration: underline
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <a className="typography-item__link-m"></a>
+      </div>
+      <div className="typography-item typography-item--large">
+        <a className="typography-item__link-small">Link Small</a>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 1.2 <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 600 <br/>
+            Text decoration: underline
+          </div>
+      </div>
       <div className="typography-code-block">
         ```scss
         @include text($linkStylised);
         @include text($linkL);
         @include text($linkM);
+        @include text($linkSmall);
         ```
       </div>
     </div>

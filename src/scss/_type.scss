@@ -264,31 +264,23 @@
   }
 
   @if $token == $displayMedium {
-    @include display-styles($font-size-4xl, $font-weight, $text-transform: uppercase, $font-style: unset);
+    @include display-styles($font-size-display-medium, $font-weight, $text-transform: uppercase, $font-style: unset);
   }
 
   @if $token == $displaySmall {
-    @include display-styles($font-size-3xl, $font-weight, $text-transform: uppercase, $font-style: unset);
+    @include display-styles($font-size-display-small, $font-weight, $text-transform: uppercase, $font-style: unset);
   }
 
   @if $token == $headingLarge {
-    @include heading-styles($font-size-2xl, $font-weight, $text-transform, $font-style);
+    @include heading-styles($font-size-heading-large, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == $headingMedium {
-    @include heading-styles($font-size-xl, $font-weight, $text-transform, $font-style);
+    @include heading-styles($font-size-heading-medium, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == $headingSmall {
-    @include heading-styles($font-size-l, $font-weight, $text-transform, $font-style);
-  }
-
-  @if $token == $headingM {
-    @include heading-styles($font-size-m, $font-weight, $text-transform, $font-style);
-  }
-
-  @if $token == $headingS {
-    @include heading-styles($font-size-s, $font-weight, $text-transform, $font-style);
+    @include heading-styles($font-size-heading-small, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == $bodyL {
@@ -317,5 +309,9 @@
 
   @if $token == $linkM {
     @include link-styles($font-size-m);
+  }
+
+  @if $token == $linkSmall {
+    @include link-styles($font-size-s);
   }
 }

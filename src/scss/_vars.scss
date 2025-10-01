@@ -1,15 +1,23 @@
 // prefix
 $px: seldon;
 
+// TODO: make design team to follow something like https://tailwindcss.com/docs/font-size
 @mixin font-size-vars--sm {
-  --font-size-xs: 0.25rem; // 4px
-  --font-size-s: 0.5rem; // 8px
-  --font-size-m: 0.75rem; // 12px
-  --font-size-l: 1rem; // 16px
-  --font-size-xl: 1.25rem; // 20px
-  --font-size-2xl: 1.5rem; // 24px
-  --font-size-3xl: 2rem; // 32px
-  --font-size-4xl: 2.5rem; // 40px
+  --font-size-display-medium: 2.5rem; // 40px
+  --font-size-display-small: 2rem; // 32px
+  --font-size-heading-large: 1.5rem; // 24px
+  --font-size-heading-medium: 1.25rem; // 20px
+  --font-size-heading-small: 1rem; // 16px
+  --font-size-body-large: 1rem; // 16px
+  --font-size-body-medium: 0.875rem; // 14px
+  --font-size-body-small: 0.75rem; // 12px
+  --font-size-label-large: 1rem; // 16px
+  --font-size-label-medium: 0.875rem; // 14px
+  --font-size-label-small: 0.75rem; // 12px
+  --font-size-link-stylised: 1rem; // 16px
+  --font-size-link-large: 1rem; // 16px
+  --font-size-link-medium: 0.875rem; // 14px
+  --font-size-link-small: 0.75rem; // 12px
 }
 
 @mixin font-size-vars--md {
@@ -17,14 +25,21 @@ $px: seldon;
 }
 
 @mixin font-size-vars--lg {
-  --font-size-xs: 0.5rem; // 8px
-  --font-size-s: 0.75rem; // 12px
-  --font-size-m: 1rem; // 16px
-  --font-size-l: 1.25rem; // 20px
-  --font-size-xl: 1.5rem; // 24px
-  --font-size-2xl: 1.75rem; // 28px
-  --font-size-3xl: 2.5rem; // 40px
-  --font-size-4xl: 3rem; // 48px
+  --font-size-display-medium: 3rem; // 48px
+  --font-size-display-small: 2.5rem; // 40px
+  --font-size-heading-large: 1.75rem; // 28px
+  --font-size-heading-medium: 1.5rem; // 24px
+  --font-size-heading-small: 1.25rem; // 20px
+  --font-size-body-large: 1.25rem; // 20px
+  --font-size-body-medium: 1.125; // 18px
+  --font-size-body-small: 1rem; // 16px
+  --font-size-label-large: 1.25rem; // 20px
+  --font-size-label-medium: 1.125rem; // 18px
+  --font-size-label-small: 1rem; // 16px
+  --font-size-link-stylised: 1.25rem; // 20px
+  --font-size-link-large: 1.25rem; // 20px
+  --font-size-link-medium: 1.125rem; // 18px
+  --font-size-link-small: 1rem; // 16px
 }
 
 $font-size-xs: var(--font-size-xs);
@@ -35,6 +50,23 @@ $font-size-xl: var(--font-size-xl);
 $font-size-2xl: var(--font-size-2xl);
 $font-size-3xl: var(--font-size-3xl);
 $font-size-4xl: var(--font-size-4xl);
+
+////////////////////////
+$font-size-display-medium: var(--font-size-display-medium);
+$font-size-display-small: var(--font-size-display-small);
+$font-size-heading-large: var(--font-size-heading-large);
+$font-size-heading-medium: var(--font-size-heading-medium);
+$font-size-heading-small: var(--font-size-heading-small);
+$font-size-body-large: var(--font-size-body-large);
+$font-size-body-medium: var(--font-size-body-medium);
+$font-size-body-small: var(--font-size-body-small);
+$font-size-label-large: var(--font-size-label-large);
+$font-size-label-medium: var(--font-size-label-medium);
+$font-size-label-small: var(--font-size-label-small);
+$font-size-link-stylised: var(--font-size-link-stylised);
+$font-size-link-large: var(--font-size-link-large);
+$font-size-link-medium: var(--font-size-link-medium);
+$font-size-link-small: var(--font-size-link-small);
 
 ////////////////////////
 /// COlORS:
@@ -210,18 +242,17 @@ $displaySmall: 'displaySmall';
 $headingLarge: 'headingLarge';
 $headingMedium: 'headingMedium';
 $headingSmall: 'headingSmall';
-$headingM: 'headingM';
-$headingS: 'headingS';
 $bodyL: 'bodyL';
 $bodyM: 'bodyM';
 $bodyS: 'bodyS';
 $linkStylised: 'linkStylised';
 $linkL: 'linkL';
 $linkM: 'linkM';
+$linkSmall: 'linkSmall';
 $text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $heading2, $heading3, $heading4, $heading5,
   $title1, $title2, $title3, $title4, $body1, $body2, $body3, $string1, $string2, $string3, $snwFlyoutLink,
   $snwHeaderLink, $snwHeadingHero1, $snwHeadingHero2, $displayMedium, $displaySmall, $headingLarge, $headingMedium,
-  $headingSmall, $headingM, $headingS, $bodyL, $bodyM, $bodyS, $linkStylised, $linkL, $linkM;
+  $headingSmall, $bodyL, $bodyM, $bodyS, $linkStylised, $linkL, $linkM, $linkSmall;
 
 ////////////////////////
 /// Breakpoint TOKENS to be used for min-width comparisons, make sure they match BREAKPOINTS in constants.ts
