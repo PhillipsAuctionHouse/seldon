@@ -121,12 +121,12 @@
       @include text($linkStylised);
     }
 
-    &__link-l {
-      @include text($linkL);
+    &__link-large {
+      @include text($linkLarge);
     }
 
-    &__link-m {
-      @include text($linkM);
+    &__link-medium {
+      @include text($linkMedium);
     }
 
     &__link-small {

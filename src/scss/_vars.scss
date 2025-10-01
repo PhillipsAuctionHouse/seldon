@@ -31,7 +31,7 @@ $px: seldon;
   --font-size-heading-medium: 1.5rem; // 24px
   --font-size-heading-small: 1.25rem; // 20px
   --font-size-body-large: 1.25rem; // 20px
-  --font-size-body-medium: 1.125; // 18px
+  --font-size-body-medium: 1.125rem; // 18px
   --font-size-body-small: 1rem; // 16px
   --font-size-label-large: 1.25rem; // 20px
   --font-size-label-medium: 1.125rem; // 18px
@@ -249,14 +249,14 @@ $labelLarge: 'labelLarge';
 $labelMedium: 'labelMedium';
 $labelSmall: 'labelSmall';
 $linkStylised: 'linkStylised';
-$linkL: 'linkL';
-$linkM: 'linkM';
+$linkLarge: 'linkLarge';
+$linkMedium: 'linkMedium';
 $linkSmall: 'linkSmall';
 $text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $heading2, $heading3, $heading4, $heading5,
   $title1, $title2, $title3, $title4, $body1, $body2, $body3, $string1, $string2, $string3, $snwFlyoutLink,
   $snwHeaderLink, $snwHeadingHero1, $snwHeadingHero2, $displayMedium, $displaySmall, $headingLarge, $headingMedium,
-  $headingSmall, $bodyLarge, $bodyMedium, $bodySmall, $labelLarge, $labelMedium, $labelSmall, $linkStylised, $linkL,
-  $linkM, $linkSmall;
+  $headingSmall, $bodyLarge, $bodyMedium, $bodySmall, $labelLarge, $labelMedium, $labelSmall, $linkStylised, $linkLarge,
+  $linkMedium, $linkSmall;
 
 ////////////////////////
 /// Breakpoint TOKENS to be used for min-width comparisons, make sure they match BREAKPOINTS in constants.ts

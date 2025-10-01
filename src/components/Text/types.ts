@@ -38,8 +38,8 @@ export enum TextVariants {
   labelMedium = 'labelMedium',
   labelSmall = 'labelSmall',
   linkStylised = 'linkStylised',
-  linkL = 'linkL',
-  linkM = 'linkM',
+  linkLarge = 'linkLarge',
+  linkMedium = 'linkMedium',
   linkSmall = 'linkSmall',
 }
 

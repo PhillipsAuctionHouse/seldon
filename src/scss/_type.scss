@@ -326,21 +326,21 @@
 
   @if $token == $linkStylised {
     @include DistinctDisplay;
-    @include link-styles($font-size: $font-size-l, $text-transform: uppercase, $text-decoration: unset);
+    @include link-styles($font-size: $font-size-link-stylised, $text-transform: uppercase, $text-decoration: unset);
 
     letter-spacing: 1px;
     line-height: calc($font-size-l + $line-height-l-units);
   }
 
-  @if $token == $linkL {
-    @include link-styles($font-size-l);
+  @if $token == $linkLarge {
+    @include link-styles($font-size-link-large);
   }
 
-  @if $token == $linkM {
-    @include link-styles($font-size-m);
+  @if $token == $linkMedium {
+    @include link-styles($font-size-link-medium);
   }
 
   @if $token == $linkSmall {
-    @include link-styles($font-size-s);
+    @include link-styles($font-size-link-small);
   }
 }
