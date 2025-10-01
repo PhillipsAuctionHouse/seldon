@@ -245,6 +245,9 @@ $headingSmall: 'headingSmall';
 $bodyLarge: 'bodyLarge';
 $bodyMedium: 'bodyMedium';
 $bodySmall: 'bodySmall';
+$labelLarge: 'labelLarge';
+$labelMedium: 'labelMedium';
+$labelSmall: 'labelSmall';
 $linkStylised: 'linkStylised';
 $linkL: 'linkL';
 $linkM: 'linkM';
@@ -252,7 +255,8 @@ $linkSmall: 'linkSmall';
 $text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $heading2, $heading3, $heading4, $heading5,
   $title1, $title2, $title3, $title4, $body1, $body2, $body3, $string1, $string2, $string3, $snwFlyoutLink,
   $snwHeaderLink, $snwHeadingHero1, $snwHeadingHero2, $displayMedium, $displaySmall, $headingLarge, $headingMedium,
-  $headingSmall, $bodyLarge, $bodyMedium, $bodySmall, $linkStylised, $linkL, $linkM, $linkSmall;
+  $headingSmall, $bodyLarge, $bodyMedium, $bodySmall, $labelLarge, $labelMedium, $labelSmall, $linkStylised, $linkL,
+  $linkM, $linkSmall;
 
 ////////////////////////
 /// Breakpoint TOKENS to be used for min-width comparisons, make sure they match BREAKPOINTS in constants.ts

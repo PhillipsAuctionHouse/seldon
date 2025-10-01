@@ -261,6 +261,103 @@ import { Meta } from '@storybook/blocks';
     </div>
   </div>
 
+   <div className="typography">
+    <h2 className="typography-title">Labels</h2>
+    <div className="typography-container">
+      <div className="typography-breakpoint-header">
+          <div>Small 320 → 1440px</div>
+      </div>
+      <div className="typography-breakpoint-header">
+          <div>Medium N / A</div>
+      </div>
+      <div className="typography-breakpoint-header">
+          <div>Large 1441px → 2400px</div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <a className="typography-item__label-large">Label Large</a>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 1.2 <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 600 <br/>
+            Text decoration: underline
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <a className="typography-item__label-large"></a>
+      </div>
+      <div className="typography-item typography-item--large">
+        <a className="typography-item__label-large">Label Large</a>
+          <div className="typography-item__specs">
+            Size: 20px / 1.25rem <br/>
+            Line height: 1.2 <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 600 <br/>
+            Text decoration: underline
+          </div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <a className="typography-item__label-medium">Label Medium</a>
+          <div className="typography-item__specs">
+            Size: 12px / 0.75rem <br/>
+            Line height: 1.2 <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 600 <br/>
+            Text decoration: underline
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <a className="typography-item__label-medium"></a>
+      </div>
+      <div className="typography-item typography-item--large">
+        <a className="typography-item__label-medium">Label Medium</a>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 1.2 <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 600 <br/>
+            Text decoration: underline
+          </div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <a className="typography-item__label-small">Label Small</a>
+          <div className="typography-item__specs">
+            Size: 12px / 0.75rem <br/>
+            Line height: 1.2 <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 600 <br/>
+            Text decoration: underline
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <a className="typography-item__link-m"></a>
+      </div>
+      <div className="typography-item typography-item--large">
+        <a className="typography-item__label-small">Label Small</a>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 1.2 <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 600 <br/>
+            Text decoration: underline
+          </div>
+      </div>
+      <div className="typography-code-block">
+        ```scss
+        @include text($labelLarge);
+        @include text($labelMedium);
+        @include text($labelSmall);
+        ```
+      </div>
+    </div>
+  </div>
+
   <div className="typography">
     <h2 className="typography-title">Links</h2>
     <div className="typography-container">

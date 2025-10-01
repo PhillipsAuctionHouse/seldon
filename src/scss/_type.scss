@@ -135,6 +135,17 @@
   @include Montserrat;
 }
 
+@mixin label-styles($font-size, $font-weight: 400, $text-transform: unset, $font-style: unset) {
+  @include Montserrat;
+
+  font-size: $font-size;
+  font-style: $font-style;
+  font-variation-settings: 'wght' $font-weight;
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-transform: $text-transform;
+}
+
 @mixin link-styles(
   $font-size,
   $font-weight: 600,
@@ -293,6 +304,24 @@
 
   @if $token == $bodySmall {
     @include body-styles($font-size-body-small, $font-weight, $text-transform, $font-style);
+  }
+
+  @if $token == $labelLarge {
+    @include label-styles($label);
+
+    font-size: $font-size-label-large;
+  }
+
+  @if $token == $labelMedium {
+    @include label-styles($label);
+
+    font-size: $font-size-label-medium;
+  }
+
+  @if $token == $labelSmall {
+    @include label-styles($label);
+
+    font-size: $font-size-label-small;
   }
 
   @if $token == $linkStylised {

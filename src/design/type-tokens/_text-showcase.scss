@@ -105,6 +105,18 @@
       @include text($bodySmall);
     }
 
+    &__label-large {
+      @include text($labelLarge);
+    }
+
+    &__label-medium {
+      @include text($labelMedium);
+    }
+
+    &__label-small {
+      @include text($labelSmall);
+    }
+
     &__link-stylised {
       @include text($linkStylised);
     }
