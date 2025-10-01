@@ -166,104 +166,106 @@
 
 @mixin text($token, $font-weight: 400, $text-transform: unset, $font-style: unset, $text-decoration: unset) {
   @if $token == 'blockquote' {
-    @include heading-styles($font-size-2xl, $font-weight, initial, $font-style);
-
-    color: $primary-black;
+    @include heading-styles($font-size-heading-large, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == 'heading1' {
-    @include heading-styles($font-size-2xl, $font-weight, capitalize, $font-style);
+    @include heading-styles($font-size-heading-large, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == 'heading2' {
-    @include heading-styles($font-size-2xl, $font-weight, capitalize, $font-style);
+    @include heading-styles($font-size-heading-large, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == 'heading3' {
-    @include heading-styles($font-size-xl, $font-weight, capitalize, $font-style);
+    @include heading-styles($font-size-heading-medium, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == 'heading4' {
-    @include heading-styles($font-size-l, $font-weight, capitalize, $font-style);
+    @include heading-styles($font-size-heading-small, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == 'heading5' {
-    @include heading-styles($font-size-m, $font-weight, capitalize, $font-style);
+    @include body-styles($font-size-body-small, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == 'string1' {
-    @include body-styles($font-size-l, $font-weight, $text-transform, $font-style);
+    @include heading-styles($font-size-heading-medium, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == 'string2' {
-    @include body-styles($font-size-m, $font-weight, $text-transform, $font-style);
+    @include body-styles($font-size-body-small, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == 'string3' {
-    @include body-styles($font-size-s, $font-weight, $text-transform, $font-style);
+    @include body-styles($font-size-body-small, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == 'body1' {
-    @include body-styles($font-size-l, $font-weight, $text-transform, $font-style);
+    @include body-styles($font-size-body-large, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == 'body2' {
-    @include body-styles($font-size-m, $font-weight, $text-transform, $font-style);
+    @include body-styles($font-size-body-medium, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == 'body3' {
-    @include body-styles($font-size-s, $font-weight, $text-transform, $font-style);
+    @include body-styles($font-size-body-small, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == 'link' {
-    @include link-styles($font-size-m, 600, $text-transform, $font-style, $text-decoration: unset);
+    @include label-styles($label);
+
+    font-size: $font-size-label-small;
   }
 
   @if $token == 'button' {
-    @include body-styles($font-size-m, 600, $text-transform, $font-style);
+    @include body-styles($font-size-body-small, $font-weight, $text-transform, $font-style);
   }
 
   @if $token == 'badge' {
-    @include heading-styles($font-size-s, 500, uppercase, $font-style);
+    @include label-styles($label, 400, uppercase);
+
+    font-size: $font-size-label-small;
   }
 
   @if $token == 'snwHeaderLink' {
-    @include link-styles($font-size-l, 400, uppercase, $font-style, unset);
     @include DistinctDisplay;
+    @include link-styles($font-size: $font-size-link-stylised, $text-transform: uppercase, $text-decoration: unset);
 
-    line-height: calc($font-size-l + $line-height-l-units);
+    letter-spacing: 1px;
   }
 
   @if $token == 'snwFlyoutLink' {
-    @include link-styles($font-size-l, 400, capitalize, $font-style, $text-decoration: unset);
+    @include link-styles($font-size-link-large, $font-weight: 400, $text-decoration: unset);
   }
 
   @if $token == 'snwHeadingHero1' {
-    @include display-styles(calc($font-size-2xl + $font-size-s), 400, uppercase, $font-style);
+    @include display-styles($font-size-display-small, $font-weight, $text-transform: uppercase, $font-style: unset);
 
     text-align: center;
   }
 
   @if $token == 'snwHeadingHero2' {
-    @include heading-styles($font-size-2xl, 400, uppercase, $font-style);
+    @include heading-styles($font-size-heading-large, $font-weight, uppercase, $font-style);
 
     text-align: center;
   }
 
   @if $token == 'title1' {
-    @include heading-styles($font-size-2xl, $font-weight, uppercase, $font-style);
+    @include heading-styles($font-size-heading-large, $font-weight, uppercase, $font-style);
   }
 
   @if $token == 'title2' {
-    @include heading-styles($font-size-xl, $font-weight, uppercase, $font-style);
+    @include heading-styles($font-size-heading-medium, $font-weight, uppercase, $font-style);
   }
 
   @if $token == 'title3' {
-    @include heading-styles($font-size-l, $font-weight, uppercase, $font-style);
+    @include heading-styles($font-size-heading-small, $font-weight, uppercase, $font-style);
   }
 
   @if $token == 'title4' {
-    @include heading-styles($font-size-m, $font-weight, uppercase, $font-style);
+    @include body-styles($font-size-body-small, $font-weight, uppercase, $font-style);
   }
 
   @if $token == 'email' {
@@ -329,7 +331,6 @@
     @include link-styles($font-size: $font-size-link-stylised, $text-transform: uppercase, $text-decoration: unset);
 
     letter-spacing: 1px;
-    line-height: calc($font-size-l + $line-height-l-units);
   }
 
   @if $token == $linkLarge {
