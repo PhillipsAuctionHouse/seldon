@@ -134,7 +134,7 @@ const CreateVariant = ({
             icon="Add"
             width={iconSize}
             height={iconSize}
-            color="$dark-gray"
+            color="$gray-75"
             className={classnames(`${baseClassName}__icon`, `${baseClassName}__icon-circle`)}
             aria-hidden="true"
           />
@@ -166,7 +166,7 @@ const EmptyVariant = ({
             icon="Favorite"
             width={iconSize}
             height={iconSize}
-            color="$dark-gray"
+            color="$gray-75"
             className={classnames(`${baseClassName}__icon`)}
             aria-hidden="true"
           />
@@ -342,7 +342,7 @@ const FavoritesCollectionTile = memo(
                           icon="Icon"
                           width={iconSize}
                           height={iconSize}
-                          color="$dark-gray"
+                          color="$gray-75"
                           className={`${baseClassName}__icon-button`}
                           aria-hidden="true"
                         />

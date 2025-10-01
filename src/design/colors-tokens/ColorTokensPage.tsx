@@ -108,7 +108,9 @@ const coreColorSections = [
         colors: [
           { label: '$success-default', hex: '#00cc39' },
           { label: '$warning-default', hex: '#ea0404' },
+          { label: '$reserve-bid', hex: '#B00000' },
           { label: '$focus-default', hex: '#0077CC' },
+          { label: '$status-info', hex: '#0065fc' },
         ],
       },
     ],
@@ -183,6 +185,7 @@ const semanticColorSections = [
         colors: [
           { label: '$success-default', hex: '#00cc39' },
           { label: '$warning-default', hex: '#ea0404' },
+          { label: '$reserve-bid', hex: '#B00000' },
           { label: '$focus-default', hex: '#0077CC' },
           { label: '$status-info', hex: '#0065fc' },
         ],

@@ -17,6 +17,23 @@
     top: 0;
     width: 33.3%;
 
+    &--always-visible {
+      height: unset;
+      opacity: 1;
+      top: 50%;
+      transform: translateY(-50%);
+      width: unset;
+
+      .#{$px}-carousel-arrows-next-btn__icon,
+      .#{$px}-carousel-arrows-prev-btn__icon {
+        box-shadow: 0 0 1px $grey-100;
+      }
+    }
+
+    &--disabled {
+      display: none;
+    }
+
     &:hover {
       opacity: 1;
     }
