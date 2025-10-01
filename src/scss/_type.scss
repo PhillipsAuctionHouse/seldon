@@ -263,12 +263,12 @@
     @include labelText($label);
   }
 
-  @if $token == $display4XL {
-    @include display-styles($font-size-4xl, $font-weight, $text-transform, $font-style);
+  @if $token == $displayMedium {
+    @include display-styles($font-size-4xl, $font-weight, $text-transform: uppercase, $font-style: unset);
   }
 
-  @if $token == $display3XL {
-    @include display-styles($font-size-3xl, $font-weight, $text-transform, $font-style);
+  @if $token == $displaySmall {
+    @include display-styles($font-size-3xl, $font-weight, $text-transform: uppercase, $font-style: unset);
   }
 
   @if $token == $heading2XL {

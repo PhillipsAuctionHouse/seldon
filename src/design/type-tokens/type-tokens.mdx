@@ -19,7 +19,7 @@ import { Meta } from '@storybook/blocks';
           <div>Large 1441px → 2400px</div>
       </div>
       <div className="typography-item typography-item--small">
-        <h1 className="typography-item__display-4xl">Display 4XL</h1>
+        <h1 className="typography-item__display-medium">Display Medium</h1>
           <div className="typography-item__specs">
             Size: 40px / 2.50rem <br/>
             Line height: 1.2 <br/>
@@ -28,10 +28,10 @@ import { Meta } from '@storybook/blocks';
           </div>
       </div>
       <div className="typography-item typography-item--medium">
-        <h1 className="typography-item__display-3xl"></h1>
+        <h1 className="typography-item__display-medium"></h1>
       </div>
       <div className="typography-item typography-item--large">
-        <h1 className="typography-item__display-4xl">Display 4XL</h1>
+        <h1 className="typography-item__display-medium">Display Medium</h1>
           <div className="typography-item__specs">
             Size: 48px / 3.00rem <br/>
             Line height: 1.2 <br/>
@@ -40,7 +40,7 @@ import { Meta } from '@storybook/blocks';
           </div>
       </div>
       <div className="typography-item typography-item--small">
-        <h2 className="typography-item__display-3xl">Display 3XL</h2>
+        <h2 className="typography-item__display-small">Display Small</h2>
           <div className="typography-item__specs">
             Size: 32px / 2.00rem <br/>
             Line height: 1.2 <br/>
@@ -49,12 +49,12 @@ import { Meta } from '@storybook/blocks';
           </div>
       </div>
       <div className="typography-item typography-item--medium">
-        <h2 className="typography-item__display-3xl"></h2>
+        <h2 className="typography-item__display-small"></h2>
       </div>
       <div className="typography-item typography-item--large">
-        <h2 className="typography-item__display-3xl">Display 3XL</h2>
+        <h2 className="typography-item__display-small">Display Small</h2>
           <div className="typography-item__specs">
-            Size: 36px / 2.25rem <br/>
+            Size: 40px / 2.50rem <br/>
             Line height: 1.2 <br/>
             Letter spacing: 0% <br/>
             Font: Distinct Display
@@ -62,8 +62,8 @@ import { Meta } from '@storybook/blocks';
       </div>
         <div className="typography-code-block">
           ```scss
-          @include text($display4XL);
-          @include text($display3XL);
+          @include text($displayMedium);
+          @include text($displaySmall);
           ```
         </div>
     </div>
