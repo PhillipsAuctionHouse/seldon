@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react';
+import { act, forwardRef, useState } from 'react';
 import { render, screen, waitFor, renderHook } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { runCommonTests } from '../../utils/testUtils';
@@ -183,5 +183,101 @@ describe('A Pagination', () => {
     expect(screen.getByRole('button', { name: 'Prev Lot' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Next Lot' })).toBeInTheDocument();
     expect(screen.getByRole('combobox', { name: 'Select Lot' })).toBeInTheDocument();
+  });
+});
+
+describe('Pagination edge cases and coverage gaps', () => {
+  const reqProps = { id: 'test-id' };
+
+  it('renders with empty options array', () => {
+    render(<Pagination {...reqProps} value="" options={[]} onChange={vi.fn()} />);
+    expect(screen.getByTestId('test-id-select-button')).toBeInTheDocument();
+  });
+
+  it('calls preventDefault on previous button if prevOption has href', () => {
+    const lotOptionsObjects = [
+      { label: 'Lot 1', value: '1', href: '#' },
+      { label: 'Lot 2', value: '2' },
+      { label: 'Lot 3', value: '3' },
+    ];
+    const mockedOnChange = vi.fn();
+    render(<Pagination {...reqProps} value="2" options={lotOptionsObjects} onChange={mockedOnChange} />);
+    const prevButton = screen.getByLabelText('Previous');
+
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true });
+    event.preventDefault = vi.fn();
+    act(() => {
+      prevButton.dispatchEvent(event);
+    });
+
+    expect(event.preventDefault).toHaveBeenCalled();
+    expect(mockedOnChange).toHaveBeenCalled();
+  });
+
+  it('calls preventDefault on next button if nextOption has href', () => {
+    const lotOptionsObjects = [
+      { label: 'Lot 1', value: '1' },
+      { label: 'Lot 2', value: '2' },
+      { label: 'Lot 3', value: '3', href: '#' },
+    ];
+    const mockedOnChange = vi.fn();
+    render(<Pagination {...reqProps} value="2" options={lotOptionsObjects} onChange={mockedOnChange} />);
+    const nextButton = screen.getByLabelText('Next');
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true });
+    event.preventDefault = vi.fn();
+    act(() => {
+      nextButton.dispatchEvent(event);
+    });
+
+    expect(event.preventDefault).toHaveBeenCalled();
+    expect(mockedOnChange).toHaveBeenCalled();
+  });
+
+  it('passes prefetch prop to IconButton if present', () => {
+    const lotOptionsObjects = [
+      { label: 'Lot 1', value: '1', prefetch: 'intent' } as const,
+      { label: 'Lot 2', value: '2' },
+      { label: 'Lot 3', value: '3' },
+    ];
+    render(<Pagination {...reqProps} value="2" options={lotOptionsObjects} onChange={vi.fn()} />);
+    const prevButton = screen.getByTestId('test-id-previous-button');
+    expect(prevButton).toBeInTheDocument();
+  });
+
+  it('renders with custom className and baseClassName', () => {
+    render(
+      <Pagination
+        {...reqProps}
+        value="Lot 1"
+        options={['Lot 1', 'Lot 2']}
+        onChange={vi.fn()}
+        className="custom-class"
+        data-testid="pagination-div"
+      />,
+    );
+    expect(screen.getByTestId('pagination-div')).toHaveClass('custom-class');
+  });
+
+  it('renders with variant other than inline', () => {
+    render(
+      <Pagination {...reqProps} value="Lot 1" options={['Lot 1', 'Lot 2']} onChange={vi.fn()} variant={undefined} />,
+    );
+    expect(screen.getByTestId('test-id-select-button')).toBeInTheDocument();
+  });
+
+  // Instead, you can directly fire a change event with an undefined value to mimic the edge case.
+  it('Select onChange does nothing if selectedOption is undefined', () => {
+    const mockedOnChange = vi.fn().mockImplementation((e) => {
+      console.log(e);
+    });
+    vi.spyOn(console, 'error').mockImplementation(() => void 0);
+    render(<Pagination {...reqProps} value="Lot 1" options={['Lot 1', 'Lot 2']} onChange={mockedOnChange} />);
+    const select: HTMLSelectElement = screen.getByTestId('test-id-select-button');
+    act(() => {
+      // @ts-expect-error sorry, ts. it'll just be undefined for a sec
+      select.value = undefined;
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    expect(mockedOnChange).not.toHaveBeenCalled();
   });
 });

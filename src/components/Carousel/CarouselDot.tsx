@@ -17,6 +17,7 @@ export interface CarouselDotProps extends ComponentProps<'button'> {
 }
 
 export const CarouselDot = ({
+  id,
   isSelected,
   onClick,
   scrollableContainerRef,
@@ -36,6 +37,7 @@ export const CarouselDot = ({
   return (
     <button
       ref={ref}
+      id={id}
       role="button"
       onClick={onClick}
       className={classNames(`${baseClassName}__container`)}

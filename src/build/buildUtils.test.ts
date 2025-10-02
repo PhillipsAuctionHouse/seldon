@@ -1,25 +1,19 @@
-import { beforeAll, afterAll, vi, describe, it, expect } from 'vitest';
+import { vi, describe, it, expect } from 'vitest';
 import { transformScssAlias } from './buildUtils';
 
-const originalLog = console.log;
-beforeAll(() => {
-  console.log = (...args: unknown[]) => {
-    if (typeof args[0] === 'string' && args[0].startsWith('transforming scss alias')) {
-      return;
-    }
-    originalLog(...args);
-  };
-});
-
-afterAll(() => {
-  console.log = originalLog;
-});
+const politeConsole = (...args) => {
+  if (!args[0]?.startsWith?.('transforming scss alias')) {
+    console.log(...args);
+  }
+};
 
 describe('transformScssAlias', () => {
   it('returns contents unchanged when file name is not found', () => {
+    const spy = vi.spyOn(console, 'log').mockImplementation(politeConsole);
     const contents = Buffer.from('Some contents');
     const transformedContents = transformScssAlias(contents, 'nonexistent.scss');
     expect(transformedContents).toBe(contents);
+    spy.mockRestore();
   });
 
   [
@@ -58,6 +52,7 @@ describe('transformScssAlias', () => {
     },
   ].forEach(({ name, fileName, filePath, expected, input }) => {
     it(name, () => {
+      const spy = vi.spyOn(console, 'log').mockImplementation(politeConsole);
       vi.mock('glob', async (importOriginal: () => Promise<Record<string, unknown>>) => {
         const glob = await importOriginal();
         return {
@@ -67,6 +62,7 @@ describe('transformScssAlias', () => {
       });
       const transformedContents = transformScssAlias(input, filePath);
       expect(transformedContents.toString()).toBe(expected);
+      spy.mockRestore();
     });
   });
 });

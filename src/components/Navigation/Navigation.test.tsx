@@ -69,7 +69,6 @@ describe('Navigation', () => {
       {},
       { visible: false },
       () => {
-        screen.debug();
         expect(screen.getByTestId('phillips-nav')).toHaveStyle({ '--visible': 'hidden' });
       },
     ],

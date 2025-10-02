@@ -190,8 +190,12 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
         value={{
           carouselRef,
           api: api,
-          scrollPrev: () => api?.scrollPrev(),
-          scrollNext: () => api?.scrollNext(),
+          scrollPrev: () => {
+            api?.scrollPrev();
+          },
+          scrollNext: () => {
+            api?.scrollNext();
+          },
           canScrollPrev: api?.canScrollPrev() ?? false,
           canScrollNext: api?.canScrollNext() ?? false,
           columnGap,

@@ -62,7 +62,10 @@ const TabsContainer = forwardRef<HTMLDivElement, TabsContainerProps>(
     { className, tabs = [], tabListLabel = 'Sale Page Tabs', children, defaultValue, value, onTabClick, ...props },
     ref,
   ) => {
-    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TabsContainer');
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TabsContainer', [
+      'defaultValue',
+      'dir',
+    ]);
     return (
       <TabsPrimitive.Root
         {...props}

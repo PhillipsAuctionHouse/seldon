@@ -1,15 +1,44 @@
 import { kebabCase } from 'change-case';
 import * as React from 'react';
+import { HTMLAttributes } from 'react';
 
 export const px = 'seldon';
+
+const isKeyOf = (k: string, obj: object): k is keyof typeof obj => k in obj; /// good contender for utils. should probably be existing ts functionality
 
 /**
  * Returns standard props values incorporating the component name into the class name and data-testid
  */
-export const getCommonProps = ({ id, ...props }: { id?: string }, componentName: string) => {
+type AddOnProps = { 'data-testid': string; className: string };
+type AllElementProperties = Omit<HTMLAttributes<Partial<HTMLDivElement>>, keyof AddOnProps> & {
+  'data-testid'?: string;
+  className?: string;
+};
+
+type PropsLessOmissions<OmittedKeys extends (keyof AllElementProperties)[] = []> = Omit<
+  AllElementProperties,
+  OmittedKeys[number]
+>;
+
+type GetCommonPropsReturn<OutProps> = AddOnProps & OutProps;
+
+export const getCommonProps = <OmittedKeys extends (keyof AllElementProperties)[] = []>(
+  { id, className, ...props }: { id?: string } & AllElementProperties,
+  componentName: string,
+  omitKeys?: OmittedKeys,
+): GetCommonPropsReturn<PropsLessOmissions<OmittedKeys>> => {
   const kebabCaseComponentName = kebabCase(componentName);
+
+  const outProps: AllElementProperties = {};
+
+  const allOmitKeys = [...(omitKeys || []), 'className', 'data-testid'];
+  Object.entries(props).forEach(([key, value]) => {
+    if (!isKeyOf(key, props)) return; // impossible to fail this check, but needed for TS
+    if (!allOmitKeys.includes(key as keyof AllElementProperties)) Object.assign(outProps, { [key]: value });
+  });
+
   return {
-    ...props,
+    ...outProps,
     'data-testid': id ? `${kebabCaseComponentName}-${id}` : `${kebabCaseComponentName}`,
     className: `${px}-${kebabCaseComponentName}`,
   };

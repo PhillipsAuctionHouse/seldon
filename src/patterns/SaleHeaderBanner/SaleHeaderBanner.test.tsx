@@ -39,7 +39,14 @@ describe('SaleHeaderBanner', () => {
     expect(img).toHaveAttribute('src', 'https://example.com/image.jpg');
   });
 
-  it('renders the countdown timer when auction is open for bidding and there is an auctionEndTime', () => {
+  it('renders only the mobile countdown when SSRMediaQuery is mocked for mobile', () => {
+    vi.mock('../../providers/SeldonProvider/utils', () => ({
+      SSRMediaQuery: {
+        Media: ({ lessThan, children }: { lessThan?: string; children: React.ReactNode }) =>
+          lessThan === 'md' ? <>{children}</> : null,
+      },
+    }));
+
     render(
       <SaleHeaderBanner
         {...defaultProps}
@@ -48,9 +55,28 @@ describe('SaleHeaderBanner', () => {
         showTimer
       />,
     );
-    // The countdown component is rendered twice, once for mobile and once for desktop
-    // Only one is shown at a time based on the screen size
-    expect(screen.getAllByText('Lots Close in').length).toBeGreaterThan(0);
+    const countdowns = screen.getAllByText('Lots Close in');
+    expect(countdowns.length).toBe(1);
+  });
+
+  it('renders only the desktop countdown when SSRMediaQuery is mocked for desktop', () => {
+    vi.mock('../../providers/SeldonProvider/utils', () => ({
+      SSRMediaQuery: {
+        Media: ({ greaterThanOrEqual, children }: { greaterThanOrEqual?: string; children: React.ReactNode }) =>
+          greaterThanOrEqual === 'md' ? <>{children}</> : null,
+      },
+    }));
+
+    render(
+      <SaleHeaderBanner
+        {...defaultProps}
+        auctionState={AuctionStatus.live}
+        auctionEndTime={addDays(new Date(), 2)}
+        showTimer
+      />,
+    );
+    const countdowns = screen.getAllByText('Lots Close in');
+    expect(countdowns.length).toBe(1);
   });
 
   it('does NOT render the countdown timer when showTimer is false', () => {
@@ -62,8 +88,7 @@ describe('SaleHeaderBanner', () => {
         showTimer={false}
       />,
     );
-    // The countdown component is rendered twice, once for mobile and once for desktop
-    // Only one is shown at a time based on the screen size
+
     expect(screen.queryByText('Lots Close in')).not.toBeInTheDocument();
   });
 

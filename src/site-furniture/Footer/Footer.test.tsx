@@ -1,6 +1,4 @@
 import { render, screen } from '@testing-library/react';
-// import { userEvent } from '@testing-library/user-event';
-
 import Footer from './Footer';
 import Social from '../../patterns/Social/Social';
 import Subscribe from '../../patterns/Subscribe/Subscribe';

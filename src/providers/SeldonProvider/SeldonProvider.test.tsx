@@ -49,12 +49,23 @@ describe('SeldonProvider', () => {
     expect(Array.from(styleTags).some((tag) => tag.textContent === ssrMediaQueryStyle)).toBe(true);
   });
 
-  const BrokenConsumer: FC = () => {
-    // @ts-expect-error it does not exist and we accept it
-    return <div>{doesNotExist()}</div>;
-  };
+  it('throws on a broken child', () => {
+    const BrokeKid: FC = () => {
+      // @ts-expect-error it does not exist and we accept it
+      return <div>{doesNotExist()}</div>;
+    };
+    const consoleError = console.error;
+    console.error = () => void 0;
 
-  expect(() => render(<BrokenConsumer />)).toThrow();
+    expect(() =>
+      render(
+        <SeldonProvider>
+          <BrokeKid />
+        </SeldonProvider>,
+      ),
+    ).toThrow();
+    console.error = consoleError;
+  });
 
   it('handles invalid breakpoint props gracefully', () => {
     render(

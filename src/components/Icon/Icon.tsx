@@ -45,7 +45,8 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
     const Component = isPictogram
       ? pictogramComponents[icon as PictogramName]
       : iconComponents[icon as IconName] || pictogramComponents[icon as PictogramName];
-    const componentProps = {
+
+    const svgProps: Omit<React.SVGProps<SVGSVGElement>, 'ref'> = {
       color: color === 'currentColor' ? color : getScssVar(color ?? '', '$black-100'),
       ...(height ? { height } : {}),
       ...(width ? { width } : {}),
@@ -54,7 +55,7 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
 
     return Component ? (
       <div className={classnames(`${px}-icon`, baseClassName, className)} ref={ref}>
-        <Component {...componentProps} />
+        <Component {...svgProps} />
       </div>
     ) : null;
   },

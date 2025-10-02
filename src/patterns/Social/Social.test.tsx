@@ -27,7 +27,7 @@ describe('Social', () => {
     expect(screen.queryByTestId(/test/)).toBeInTheDocument();
   });
 
-  it('it allows for all strings to be passed in', () => {
+  it('renders the title text when passed in', () => {
     render(<Social titleText="My Title">{children}</Social>);
     expect(screen.queryByText(/My Title/)).toBeInTheDocument();
   });

@@ -43,18 +43,24 @@ const renderCarousel = ({
   slides = ['Slide 1', 'Slide 2', 'Slide 3'],
   disableDrag = false,
   disableNavigationDrag = undefined,
+  useWheelGestures = false,
   customGuts = undefined,
 }: {
   slides?: string[];
   disableDrag?: boolean;
   disableNavigationDrag?: 'all' | 'desktop' | 'mobile';
+  useWheelGestures?: boolean;
   customGuts?: React.ReactNode;
 } = {}) => {
   const items = slides.map((text, i) => <CarouselItem key={i}>{text}</CarouselItem>);
   const dots = <CarouselDots id="test-carousel-dots" />;
 
   return render(
-    <Carousel disableDrag={disableDrag} disableNavigationDrag={disableNavigationDrag}>
+    <Carousel
+      disableDrag={disableDrag}
+      disableNavigationDrag={disableNavigationDrag}
+      useWheelGestures={useWheelGestures}
+    >
       {customGuts ?? (
         <>
           <CarouselContent>{items}</CarouselContent>
@@ -259,5 +265,21 @@ describe('Carousel', () => {
     renderCarousel({ disableNavigationDrag: 'mobile' });
     const carousel = screen.getByRole('region');
     expect(carousel.children[0]).toHaveClass('is-draggable');
+  });
+
+  it('enables wheel gestures to control X axis when useWheelGestures is true', async () => {
+    const wheelGesturesSpy = vi.spyOn(await import('embla-carousel-wheel-gestures'), 'WheelGesturesPlugin');
+    renderCarousel({ useWheelGestures: true });
+    expect(wheelGesturesSpy).toHaveBeenCalledWith(
+      expect.objectContaining({
+        forceWheelAxis: 'x',
+      }),
+    );
+    wheelGesturesSpy.mockRestore();
+  });
+
+  it.todo('triggers slide changes via mouse wheel events when useWheelGestures is true', async () => {
+    // I can see that the fireEvent wheel event is firing, but Embla isn't responding to it.\
+    // Works in the browser
   });
 });

@@ -2,6 +2,7 @@ import { cleanup } from '@testing-library/react';
 import { afterEach, beforeEach, vi, type MockInstance } from 'vitest';
 import '@testing-library/jest-dom/vitest';
 import { render as rtlRender } from '@testing-library/react';
+import { setupGlobalMocks as setUpIntersectionObserverMocks } from './mockIntersectionObserver';
 
 // this is temporary until we have a handle on the double prefix epidemic
 const reportedFiles: string[] = [];
@@ -46,33 +47,7 @@ beforeEach(() => {
   window.HTMLElement.prototype.releasePointerCapture = vi.fn();
   window.HTMLElement.prototype.hasPointerCapture = vi.fn().mockReturnValue(true);
 
-  let intersectionCallback: ((entries: IntersectionObserverEntry[], observer: IntersectionObserver) => void) | null =
-    null;
-  const observedElements: Element[] = [];
-  class MockIntersectionObserver implements IntersectionObserver {
-    readonly root: Element | null = null;
-    readonly rootMargin: string = '';
-    readonly thresholds: ReadonlyArray<number> = [];
-    constructor(cb: (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => void) {
-      intersectionCallback = cb;
-    }
-    observe = (el: Element) => {
-      observedElements.push(el);
-    };
-    unobserve = vi.fn();
-    disconnect = vi.fn();
-    takeRecords = vi.fn().mockReturnValue([]);
-    // Helper to simulate intersection
-    static triggerIntersect(entries: IntersectionObserverEntry[]) {
-      if (intersectionCallback) intersectionCallback(entries, new MockIntersectionObserver(intersectionCallback));
-    }
-  }
-  Object.defineProperty(window, 'IntersectionObserver', {
-    writable: true,
-    value: MockIntersectionObserver,
-  });
-  // Expose helper globally for tests
-  (globalThis as Record<string, unknown>).triggerIntersection = MockIntersectionObserver.triggerIntersect;
+  setUpIntersectionObserverMocks();
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
     value: () => ({
@@ -82,15 +57,6 @@ beforeEach(() => {
       addListener: vi.fn(),
       removeListener: vi.fn(),
     }),
-  });
-  class MockResizeObserver {
-    observe = vi.fn();
-    unobserve = vi.fn();
-    disconnect = vi.fn();
-  }
-  Object.defineProperty(window, 'ResizeObserver', {
-    writable: true,
-    value: MockResizeObserver,
   });
 
   Object.defineProperty(window, 'PointerEvent', {

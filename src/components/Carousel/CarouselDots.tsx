@@ -60,7 +60,9 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
 
     const onDotButtonClick = useCallback(
       (index: number) => {
-        if (!api) return;
+        if (!api) {
+          return;
+        }
         api.scrollTo(index, true);
         onSlideChange?.(index);
       },
@@ -99,7 +101,9 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
       };
     }, [api, onInit, onSelect, onSettle]);
 
-    const sortedInViewDots = useMemo(() => inViewDots.sort((a, b) => a - b), [inViewDots]);
+    const sortedInViewDots = useMemo(() => {
+      return inViewDots.sort((a, b) => a - b);
+    }, [inViewDots]);
 
     return (
       <div
@@ -116,6 +120,7 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
             // Calculate the max width of the container based on the number of dots and the width of each dot and container padding
             style={{ '--max-width': `${maxDots * dotWidth + (maxDots - 1) * dotGap + 2}px` } as React.CSSProperties}
             className={`${baseClassName}-container-inner`}
+            data-testid="carousel-dots-scrollable-container"
             ref={scrollableContainerRef}
           >
             {scrollSnaps.map((_, index) => {
@@ -139,7 +144,10 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
               return (
                 <CarouselDot
                   key={`${id}-dot-${index}`}
-                  onClick={() => onDotButtonClick(index)}
+                  id={`${id}-dot-${index}`}
+                  onClick={() => {
+                    onDotButtonClick(index);
+                  }}
                   isSelected={isSelected}
                   scrollableContainerRef={scrollableContainerRef}
                   onInViewChange={(inView) => {

@@ -43,7 +43,7 @@ export interface PrimitiveToastProps extends Omit<PrimitiveToast.ToastProps, 'ti
  */
 const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(
   ({ className, title, actionElement, actionAltText, closeButtonLabel, ...props }, ref) => {
-    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Toast');
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Toast', ['onPause']);
 
     return (
       <PrimitiveToast.Root {...commonProps} className={classnames(baseClassName, className)} ref={ref}>
