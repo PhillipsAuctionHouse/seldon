@@ -170,9 +170,9 @@
   }
 
   &:disabled {
-    background-color: $white-100;
-    border: 1px solid $light-gray;
-    color: $light-gray;
+    background-color: $grey-50;
+    border: 1px solid $grey-50;
+    color: $grey-75;
     cursor: default;
 
     &:hover {
@@ -182,10 +182,10 @@
     }
 
     svg {
-      fill: $light-gray;
+      fill: $grey-50;
 
       path {
-        fill: $light-gray;
+        fill: $grey-50;
       }
     }
   }
