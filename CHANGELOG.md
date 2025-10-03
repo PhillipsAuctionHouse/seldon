@@ -1,3 +1,17 @@
+# [1.200.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.199.0...v1.200.0) (2025-09-30)
+
+
+### Features
+
+* **BidSnapshot:** L3-7838 rename showSoldPrice prop -> showSoldLabel ([#732](https://github.com/PhillipsAuctionHouse/seldon/issues/732)) ([98002cc](https://github.com/PhillipsAuctionHouse/seldon/commit/98002cc71b021309e12371c3d97b86bc76cb09d7))
+
+# [1.199.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.198.0...v1.199.0) (2025-09-30)
+
+
+### Features
+
+* **Carousel:** L3-2323 Results and Rail improvements ([#731](https://github.com/PhillipsAuctionHouse/seldon/issues/731)) ([2dcd277](https://github.com/PhillipsAuctionHouse/seldon/commit/2dcd2772df53dc8d0f61f95301e6039eadefca75))
+
 # [1.198.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.197.0...v1.198.0) (2025-09-24)
 
 
