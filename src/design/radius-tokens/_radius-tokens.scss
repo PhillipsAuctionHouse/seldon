@@ -60,5 +60,9 @@ span.h3 {
     &--2xl {
       border-radius: $radius-2xl;
     }
+
+    &--3xl {
+      border-radius: $radius-3xl;
+    }
   }
 }

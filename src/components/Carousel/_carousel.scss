@@ -23,7 +23,7 @@
 
     &__icon {
       background-color: $pure-white;
-      border-radius: 50%;
+      border-radius: $radius-3xl;
       display: flex;
       flex-wrap: wrap;
       height: 3.25rem;
@@ -144,7 +144,7 @@
     width: 10px;
 
     &:focus-visible {
-      border-radius: 50%;
+      border-radius: $radius-3xl;
       outline: 0.5px solid $black-100;
 
       &-dot {
@@ -158,7 +158,7 @@
 
   &-dot {
     background-color: $grey-50;
-    border-radius: 50%;
+    border-radius: $radius-3xl;
     outline-color: $grey-50;
 
     &--md {

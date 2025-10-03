@@ -5,6 +5,15 @@
 .flatpickr-calendar {
   @include DistinctText;
 
+  .flatpickr-day,
+  .flatpickr-day.selected,
+  .flatpickr-day:hover,
+  .flatpickr-day:focus,
+  .flatpickr-day.startRange,
+  .flatpickr-day.endRange {
+    border-radius: $radius-xs;
+  }
+
   .flatpickr-day.selected,
   .flatpickr-day:hover,
   .flatpickr-day:focus,

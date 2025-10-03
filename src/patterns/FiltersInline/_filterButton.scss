@@ -16,7 +16,7 @@
   &--count {
     background: $pure-black;
     border: 2px solid $white-100;
-    border-radius: 50%;
+    border-radius: $radius-3xl;
     color: $white-100;
     display: inline-block;
     font-size: var(--label-size3);

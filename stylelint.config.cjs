@@ -107,14 +107,14 @@ module.exports = {
       // Enforce SCSS radius tokens for border-radius properties
       'border-radius': [
         // Allow a single token or 0
-        /^((\$radius-(xs|sm|md|lg|xl|2xl))|0|inherit|initial|unset)$/,
+        /^((\$radius-(xs|sm|md|lg|xl|2xl|3xl))|0|inherit|initial|unset)$/,
         // Allow up to 4 values (tokens or 0) separated by spaces
-        /^((\$radius-(xs|sm|md|lg|xl|2xl)|0)\s?){1,4}$/,
+        /^((\$radius-(xs|sm|md|lg|xl|2xl|3xl)|0)\s?){1,4}$/,
       ],
       // Also enforce for border-*-radius shorthands
       '/^border-(top|right|bottom|left)-radius$/': [
-        /^((\$radius-(xs|sm|md|lg|xl|2xl))|0|inherit|initial|unset)$/,
-        /^((\$radius-(xs|sm|md|lg|xl|2xl)|0)\s?){1,4}$/,
+        /^((\$radius-(xs|sm|md|lg|xl|2xl|3xl))|0|inherit|initial|unset)$/,
+        /^((\$radius-(xs|sm|md|lg|xl|2xl|3xl)|0)\s?){1,4}$/,
       ],
     },
 

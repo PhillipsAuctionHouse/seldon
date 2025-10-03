@@ -81,7 +81,7 @@
       @include text($body-size2);
 
       background: $light-gray;
-      border-radius: 0.5rem;
+      border-radius: $radius-sm;
       color: $post-sale-magenta;
       padding: 1rem;
       text-align: center;

@@ -42,7 +42,7 @@ $lg: #{$px}-input--lg;
     &::after {
       // background-color: transparent;
       background: $white linear-gradient(transparent, rgba($pure-black, 0.05));
-      border-radius: 50%;
+      border-radius: $radius-3xl;
       box-shadow:
         0 1px 2px 0 rgba($pure-black, 0.15),
         0 0 0 1px rgba($pure-black, 0.15) inset;
