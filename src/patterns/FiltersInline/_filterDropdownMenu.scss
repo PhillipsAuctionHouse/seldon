@@ -2,7 +2,7 @@
 
 .#{$px}-filter-dropdown-menu {
   background: $white-100;
-  border-radius: $spacing-xsm;
+  border-radius: $radius-sm;
   box-shadow: 0 4px 6px $medium-gray;
   display: flex;
   flex-direction: column;
@@ -100,7 +100,7 @@
   }
 
   &--mobile {
-    border-radius: $spacing-xsm $spacing-xsm 0 0;
+    border-radius: $radius-sm $radius-sm 0 0;
     box-shadow: none;
     padding: 0;
     width: 100vw;
