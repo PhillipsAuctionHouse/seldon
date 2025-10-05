@@ -1,65 +1,59 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Carousel from './Carousel';
+
+import Carousel, { CarouselProps } from './Carousel';
 import CarouselContent from './CarouselContent';
 import CarouselItem from './CarouselItem';
 import CarouselDots from './CarouselDots';
 import { mockDesktopBreakpoint, mockMobileBreakpoint, runCommonTests } from '../../utils/testUtils';
 import { useCarousel } from './utils';
+import { mutables, reInitMock, scrollNextMock, scrollPrevMock } from '../../../config/vitest/mockEmblaCarousel';
+import { updateInView, setupDomRectMocks, getSlides } from '../../../config/vitest/emblaTestUtils';
 
-//🎺TODO combine this with the similar mock in CarouselDots
-let mockScrollSnapList = () => [0, 1, 2, 3];
-const reInitMock = vi.fn();
-const scrollPrevMock = vi.fn();
-const scrollNextMock = vi.fn();
+// globalThis comes from the test environment
 
-beforeEach(() => {
-  vi.mock('embla-carousel-react', async () => {
-    const actual: typeof import('embla-carousel-react') = await vi.importActual('embla-carousel-react');
-    return {
-      ...actual,
-      default: (...args: Parameters<typeof actual.default>) => {
-        const [emblaRef, emblaApi] = actual.default(...args);
-        if (emblaApi) {
-          emblaApi.scrollSnapList = vi.fn().mockImplementation(() => mockScrollSnapList());
-          emblaApi.reInit = reInitMock;
-          emblaApi.scrollPrev = scrollPrevMock;
-          emblaApi.scrollNext = scrollNextMock;
-        }
+// shared helpers initialize DOMRect/BoundingClientRect mocks and provide intersection helpers
+setupDomRectMocks();
 
-        return [emblaRef, emblaApi];
-      },
-    };
-  });
-});
+export const beforeEach = () => {
+  mutables.scrollSnapList = undefined;
+  mutables.selectedScrollSnap = undefined;
+  mutables.slidesInView = undefined;
+};
+type CustomRenderResult = ReturnType<typeof render> & {
+  rerenderSame: () => void;
+};
 
-afterEach(() => {
-  // Reset mocks after each test
-  vi.resetAllMocks();
-  mockScrollSnapList = () => [0, 1, 2, 3];
-});
+const onSlideChangeMock = vi.fn();
+type TestCarouselProps = {
+  slides?: string[];
+  customGuts?: React.ReactNode;
+  onSlideChange?: (index: number) => void;
+  scrollSnapList?: () => number[];
+  slidesInView?: () => number[];
+  selectedScrollSnap?: () => number;
+} & CarouselProps;
 
-const renderCarousel = ({
+const TestCarousel = ({
   slides = ['Slide 1', 'Slide 2', 'Slide 3'],
   disableDrag = false,
-  disableNavigationDrag = undefined,
+  disableNavigationDrag = null,
   useWheelGestures = false,
   customGuts = undefined,
-}: {
-  slides?: string[];
-  disableDrag?: boolean;
-  disableNavigationDrag?: 'all' | 'desktop' | 'mobile';
-  useWheelGestures?: boolean;
-  customGuts?: React.ReactNode;
-} = {}) => {
+  onSlideChange = undefined,
+}: TestCarouselProps) => {
   const items = slides.map((text, i) => <CarouselItem key={i}>{text}</CarouselItem>);
-  const dots = <CarouselDots id="test-carousel-dots" />;
 
-  return render(
+  const dots = <CarouselDots id="test-carousel-dots" />;
+  return (
     <Carousel
       disableDrag={disableDrag}
       disableNavigationDrag={disableNavigationDrag}
       useWheelGestures={useWheelGestures}
+      onSlideChange={(args) => {
+        onSlideChangeMock(args);
+        onSlideChange?.(args);
+      }}
     >
       {customGuts ?? (
         <>
@@ -67,30 +61,33 @@ const renderCarousel = ({
           {dots}
         </>
       )}
-    </Carousel>,
+    </Carousel>
   );
 };
+
+const renderCarousel = (props: TestCarouselProps = {}): CustomRenderResult => {
+  const rendered = render(<TestCarousel {...props} />) as CustomRenderResult;
+  rendered.rerenderSame = () => rendered.rerender(<TestCarousel {...props} />);
+  return rendered;
+};
+
+// re-exported from emblaTestUtils
 
 describe('Carousel', () => {
   runCommonTests(Carousel, 'Carousel');
 
-  it('emblaApi.scrollSnapList returns correct values (default)', () => {
-    renderCarousel();
-    // Access emblaApi via CarouselDots or Carousel internals if exposed
-    // For demonstration, we'll just check the mock directly
-    expect(mockScrollSnapList()).toEqual([0, 1, 2, 3]);
+  it('emblaApi.scrollSnapList returns custom values', () => {
+    mutables.scrollSnapList = () => [10, 20, 30];
+    renderCarousel({
+      slides: ['Slide A', 'Slide B', 'Slide C'],
+    });
+    expect(getSlides()).toHaveLength(3);
   });
 
-  it('emblaApi.scrollSnapList returns custom values per test', () => {
-    mockScrollSnapList = () => [10, 20, 30];
-    renderCarousel({ slides: ['Slide A', 'Slide B', 'Slide C'] });
-    expect(mockScrollSnapList()).toEqual([10, 20, 30]);
-  });
-
-  it('emblaApi.scrollSnapList can be set to empty', () => {
-    mockScrollSnapList = () => [];
+  it('Carousel can be rendered without an empty scrollSnapList', () => {
+    mutables.scrollSnapList = () => [];
     renderCarousel({ slides: ['Slide X'] });
-    expect(mockScrollSnapList()).toEqual([]);
+    expect(screen.getAllByText('Slide X')).toHaveLength(1);
   });
 
   it('renders carousel with content, items, and dots', () => {
@@ -122,16 +119,7 @@ describe('Carousel', () => {
   });
 
   it('handles drag navigation (mouse/touch events)', async () => {
-    render(
-      <Carousel>
-        <CarouselContent>
-          <CarouselItem>Slide 1</CarouselItem>
-          <CarouselItem>Slide 2</CarouselItem>
-          <CarouselItem>Slide 3</CarouselItem>
-        </CarouselContent>
-        <CarouselDots id="test-carousel-dots" />
-      </Carousel>,
-    );
+    renderCarousel();
     const carousel = screen.getByRole('region').children[0];
     await userEvent.pointer({ target: carousel, keys: '[MouseLeft>]' });
     await userEvent.pointer({ target: carousel, keys: '[/MouseLeft]' });
@@ -217,8 +205,8 @@ describe('Carousel', () => {
   it('shows only one slide for single slide edge case', () => {
     renderCarousel({ slides: ['Only Slide'] });
     expect(screen.getByText('Only Slide')).toBeVisible();
-    const dots = screen.getAllByRole('group').filter((el) => el.getAttribute('aria-roledescription') === 'slide');
-    expect(dots.length).toBe(1);
+    const slides = getSlides();
+    expect(slides.length).toBe(1);
   });
 
   it('has correct accessibility attributes', () => {
@@ -276,6 +264,34 @@ describe('Carousel', () => {
       }),
     );
     wheelGesturesSpy.mockRestore();
+  });
+
+  it('calls onSlideChange with correct index when slidesInView fires', () => {
+    const r = renderCarousel();
+    updateInView(getSlides(), [2]);
+    r.rerenderSame();
+    expect(onSlideChangeMock).toHaveBeenCalledWith(2);
+  });
+
+  it('does not call onSlideChange if slidesInView returns undefined', () => {
+    const r = renderCarousel();
+    updateInView(getSlides(), [2]);
+
+    r.rerenderSame();
+    expect(onSlideChangeMock).toHaveBeenCalledTimes(1);
+    onSlideChangeMock.mockClear();
+    // @ts-expect-error what makes you think undefined is not an array of numbers? it has limitless potential
+    mutables.slidesInView = () => undefined;
+    r.rerenderSame();
+    expect(onSlideChangeMock).toHaveBeenCalledTimes(0);
+  });
+
+  it('does not throw if api is null', () => {
+    // @ts-expect-error this certainly would be an error, wouldn't it?
+    mutables.actualEmblaApi = null;
+    expect(() => {
+      renderCarousel({ onSlideChange: () => void 0 });
+    }).not.toThrow();
   });
 
   it.todo('triggers slide changes via mouse wheel events when useWheelGestures is true', async () => {

@@ -25,7 +25,7 @@
   ],
   "scripts": {
     "start": "storybook dev -p 6006",
-    "test": "vitest",
+    "test": "vitest --tsconfig=./tsconfig.test.json",
     "coverage": "vitest run --coverage",
     "build": "npm run clean && tsc && vite build",
     "chromatic": "STORYBOOK=1 chromatic --project-token=$CHROMATIC_PROJECT_TOKEN --build-script-name=build:storybook --exit-zero-on-changes",

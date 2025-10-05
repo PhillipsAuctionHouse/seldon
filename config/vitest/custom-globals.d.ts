@@ -6,4 +6,4 @@ declare global {
   }
 }
 
-export {};
+declare const globalThis: GlobalThis;

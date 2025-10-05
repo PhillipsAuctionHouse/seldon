@@ -3,6 +3,7 @@ import { afterEach, beforeEach, vi, type MockInstance } from 'vitest';
 import '@testing-library/jest-dom/vitest';
 import { render as rtlRender } from '@testing-library/react';
 import { setupGlobalMocks as setUpIntersectionObserverMocks } from './mockIntersectionObserver';
+import { setupGlobalMocks as setUpEmblaMocks } from './mockEmblaCarousel';
 
 // this is temporary until we have a handle on the double prefix epidemic
 const reportedFiles: string[] = [];
@@ -44,10 +45,13 @@ beforeEach(() => {
     throw new Error('Console error was called. Call consoleError.mockImplementation(() => {}) if this is expected.');
   });
   window.HTMLElement.prototype.scrollIntoView = vi.fn();
+  window.HTMLElement.prototype.scrollTo = vi.fn();
   window.HTMLElement.prototype.releasePointerCapture = vi.fn();
   window.HTMLElement.prototype.hasPointerCapture = vi.fn().mockReturnValue(true);
 
   setUpIntersectionObserverMocks();
+  setUpEmblaMocks();
+
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
     value: () => ({
@@ -68,16 +72,16 @@ beforeEach(() => {
     },
   });
 
-  Object.defineProperty(window, 'WheelEvent', {
-    writable: true,
-    value: class WheelEvent extends MouseEvent {
-      deltaY: number;
-      constructor(type: string, params: Record<string, number> = {}) {
-        super(type, params);
-        this.deltaY = params.deltaY ?? 0;
-      }
-    },
-  });
+  // Object.defineProperty(window, 'WheelEvent', {
+  //   writable: true,
+  //   value: class WheelEvent extends MouseEvent {
+  //     deltaY: number;
+  //     constructor(type: string, params: Record<string, number> = {}) {
+  //       super(type, params);
+  //       this.deltaY = params.deltaY ?? 0;
+  //     }
+  //   },
+  // });
 });
 
 afterEach(() => {

@@ -6,7 +6,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 
 const carouselPlaceholderContextValue = {
   carouselRef: vi.fn(),
-  api: {} as ReturnType<typeof useEmblaCarousel>[1],
+  api: undefined,
   scrollPrev: () => void 0,
   scrollNext: () => void 0,
   canScrollPrev: true,

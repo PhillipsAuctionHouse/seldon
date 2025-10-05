@@ -161,13 +161,13 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       },
       [api],
     );
-
     const onSlidesInView = useCallback(
       (api: CarouselApi) => {
         if (!api) {
           return;
         }
         const slideIndex = api.slidesInView()?.[0];
+
         if (slideIndex !== undefined) {
           onSlideChange?.(slideIndex);
         }
@@ -189,7 +189,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       <CarouselContext.Provider
         value={{
           carouselRef,
-          api: api,
+          api,
           scrollPrev: () => {
             api?.scrollPrev();
           },
