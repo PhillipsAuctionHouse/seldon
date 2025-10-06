@@ -23,8 +23,8 @@ export enum FilterButtonIconType {
 }
 
 export enum FilterInputType {
-  checkbox = 'checkbox',
-  radio = 'radio',
+  Checkbox = 'checkbox',
+  Radio = 'radio',
 }
 
 /**

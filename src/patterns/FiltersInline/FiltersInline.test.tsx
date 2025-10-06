@@ -23,7 +23,7 @@ describe('FiltersInline', () => {
     {
       label: 'Sale',
       id: 'sale',
-      type: FilterInputType.checkbox,
+      type: FilterInputType.Checkbox,
       filterDimensions: new Set([
         { label: 'Foo', active: false },
         { label: 'Bar', active: false },
@@ -33,7 +33,7 @@ describe('FiltersInline', () => {
     {
       label: 'Departments',
       id: 'departments',
-      type: FilterInputType.checkbox,
+      type: FilterInputType.Checkbox,
       filterDimensions: new Set([{ label: 'Baz', active: false }]),
       buttonType: FilterButtonType.Departments,
     },
@@ -117,7 +117,7 @@ describe('FilterDropdown', () => {
         {
           label: 'Sort',
           id: 'Sort',
-          type: 'radio',
+          type: FilterInputType.Radio,
           filterDimensions: new Set([
             { label: 'Ascending', active: false, disabled: false },
             { label: 'Descending', active: false, disabled: false },
@@ -161,7 +161,7 @@ describe('MainFilterDropdown', () => {
     {
       label: 'Filter',
       id: 'Filter',
-      type: FilterInputType.checkbox,
+      type: FilterInputType.Checkbox,
       buttonType: FilterButtonType.Filter,
       filterDimensions: new Set([
         { label: 'Foo', active: false, disabled: false },
@@ -247,7 +247,7 @@ describe('MainFilterDropdown', () => {
           {
             label: 'Sale',
             id: 'sale',
-            type: FilterInputType.checkbox,
+            type: FilterInputType.Checkbox,
             filterDimensions: new Set([{ label: 'Foo', active: false }]),
             buttonType: FilterButtonType.Sale,
           },
@@ -274,7 +274,7 @@ describe('SubFilterDropdown', () => {
     {
       label: 'Sort',
       id: 'Sort',
-      type: FilterInputType.radio,
+      type: FilterInputType.Radio,
       buttonType: FilterButtonType.Sort,
       filterDimensions: new Set([
         { label: 'Ascending', active: false, disabled: false },
@@ -314,7 +314,7 @@ describe('FilterDropdownMenuDesktop non-sort buttons', () => {
       {
         label: 'Departments',
         id: 'Departments',
-        type: FilterInputType.checkbox,
+        type: FilterInputType.Checkbox,
         buttonType: FilterButtonType.Departments,
         filterDimensions: new Set([
           { label: 'Foo', active: false, disabled: false },
@@ -355,7 +355,7 @@ describe('FilterDropdownMenuMobile non-sort buttons', () => {
       {
         label: 'Departments',
         id: 'Departments',
-        type: 'checkbox',
+        type: FilterInputType.Checkbox,
         buttonType: FilterButtonType.Departments,
         filterDimensions: new Set([
           { label: 'Foo', active: false, disabled: false },
