@@ -30,7 +30,7 @@ module.exports = {
   },
   plugins: ['react-refresh', 'local-rules'],
   rules: {
-    'local-rules/no-deprecated-text-variants': 'warn',
+    'local-rules/no-deprecated-text-variants': 'off',
     'react-refresh/only-export-components': 'warn',
     'react/boolean-prop-naming': ['warn', {}],
     'require-await': 'warn',

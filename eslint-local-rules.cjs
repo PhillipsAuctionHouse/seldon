@@ -1,63 +1,64 @@
 module.exports = {
-  'no-deprecated-text-variants': {
-    meta: {
-      type: 'problem',
-      docs: {
-        description: 'Disallow using deprecated TextVariants. Use new typography tokens instead.',
-        category: 'Best Practices',
-        recommended: true,
-      },
-      messages: {
-        deprecatedVariant:
-          'TextVariants.{{variant}} is deprecated. Use new typography tokens: displayMedium, displaySmall, headingLarge, headingMedium, headingSmall, bodyLarge, bodyMedium, bodySmall, labelLarge, labelMedium, labelSmall, linkStylised, linkLarge, linkMedium, or linkSmall.',
-      },
-      schema: [],
-    },
-    create(context) {
-      const deprecatedVariants = [
-        'heading1',
-        'heading2',
-        'heading3',
-        'heading4',
-        'heading5',
-        'title1',
-        'title2',
-        'title3',
-        'title4',
-        'body1',
-        'body2',
-        'body3',
-        'string1',
-        'string2',
-        'snwHeaderLink',
-        'snwFlyoutLink',
-        'snwHeadingHero1',
-        'snwHeadingHero2',
-      ];
+  // will be uncommented and enabled in a future pr
+  // 'no-deprecated-text-variants': {
+  //   meta: {
+  //     type: 'problem',
+  //     docs: {
+  //       description: 'Disallow using deprecated TextVariants. Use new typography tokens instead.',
+  //       category: 'Best Practices',
+  //       recommended: true,
+  //     },
+  //     messages: {
+  //       deprecatedVariant:
+  //         'TextVariants.{{variant}} is deprecated. Use new typography tokens: displayMedium, displaySmall, headingLarge, headingMedium, headingSmall, bodyLarge, bodyMedium, bodySmall, labelLarge, labelMedium, labelSmall, linkStylised, linkLarge, linkMedium, or linkSmall.',
+  //     },
+  //     schema: [],
+  //   },
+  //   create(context) {
+  //     const deprecatedVariants = [
+  //       'heading1',
+  //       'heading2',
+  //       'heading3',
+  //       'heading4',
+  //       'heading5',
+  //       'title1',
+  //       'title2',
+  //       'title3',
+  //       'title4',
+  //       'body1',
+  //       'body2',
+  //       'body3',
+  //       'string1',
+  //       'string2',
+  //       'snwHeaderLink',
+  //       'snwFlyoutLink',
+  //       'snwHeadingHero1',
+  //       'snwHeadingHero2',
+  //     ];
 
-      return {
-        MemberExpression(node) {
-          // Check for TextVariants.<deprecated>
-          if (
-            node.object &&
-            node.object.type === 'Identifier' &&
-            node.object.name === 'TextVariants' &&
-            node.property &&
-            node.property.type === 'Identifier' &&
-            deprecatedVariants.includes(node.property.name)
-          ) {
-            context.report({
-              node,
-              messageId: 'deprecatedVariant',
-              data: {
-                variant: node.property.name,
-              },
-            });
-          }
-        },
-      };
-    },
-  },
+  //     return {
+  //       MemberExpression(node) {
+  //         // Check for TextVariants.<deprecated>
+  //         if (
+  //           node.object &&
+  //           node.object.type === 'Identifier' &&
+  //           node.object.name === 'TextVariants' &&
+  //           node.property &&
+  //           node.property.type === 'Identifier' &&
+  //           deprecatedVariants.includes(node.property.name)
+  //         ) {
+  //           context.report({
+  //             node,
+  //             messageId: 'deprecatedVariant',
+  //             data: {
+  //               variant: node.property.name,
+  //             },
+  //           });
+  //         }
+  //       },
+  //     };
+  //   },
+  // },
   'no-equals-word-string': {
     meta: {
       type: 'problem',

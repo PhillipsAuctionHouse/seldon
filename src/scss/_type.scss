@@ -125,14 +125,14 @@
 }
 
 @mixin body-styles($font-size, $font-weight: 400, $text-transform: unset, $font-style: unset) {
+  @include Montserrat;
+
   font-size: $font-size;
   font-style: $font-style;
-  font-weight: $font-weight;
+  font-variation-settings: 'wght' $font-weight;
   letter-spacing: 0;
   line-height: 1.4;
   text-transform: $text-transform;
-
-  @include Montserrat;
 }
 
 @mixin label-styles($font-size, $font-weight: 400, $text-transform: unset, $font-style: unset) {
