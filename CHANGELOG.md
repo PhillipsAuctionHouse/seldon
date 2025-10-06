@@ -1,3 +1,10 @@
+# [1.201.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.200.0...v1.201.0) (2025-10-06)
+
+
+### Features
+
+* **editUserDetails:** L3-6773 The User Details page widgets should be consistent with Register to Bid  ([#734](https://github.com/PhillipsAuctionHouse/seldon/issues/734)) ([266ea4d](https://github.com/PhillipsAuctionHouse/seldon/commit/266ea4dd0ccb87098df249cde44cf13518416292))
+
 # [1.200.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.199.0...v1.200.0) (2025-09-30)
 
 
