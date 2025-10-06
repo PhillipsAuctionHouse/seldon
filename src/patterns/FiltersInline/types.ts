@@ -22,6 +22,11 @@ export enum FilterButtonIconType {
   ChevronDown = 'ChevronDown', // Chevron down icon
 }
 
+export enum FilterInputType {
+  checkbox = 'checkbox',
+  radio = 'radio',
+}
+
 /**
  * Represents a single filter option (e.g., for a dropdown or button group).
  */
@@ -63,7 +68,7 @@ export type FilterType = {
   /** Unique identifier for the filter group */
   id: string;
   /** Type of filter (e.g., 'checkbox', 'radio') */
-  type: 'checkbox' | 'radio';
+  type: FilterInputType;
   /** Set of filter dimensions/options for this filter group */
   filterDimensions: Set<FilterDimension>;
   /** FilterType for the filter */

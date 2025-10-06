@@ -11,7 +11,7 @@ import { getIcon } from './utils';
 /**
  * Props for the FilterButton component.
  */
-export type FilterButton = {
+export type FilterButtonProps = {
   /** Optional CSS class for the filter button */
   className?: string;
   /** The text label displayed on the button */
@@ -34,7 +34,7 @@ export type FilterButton = {
   totalCount: number;
 };
 
-export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButton>(
+export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButtonProps>(
   (
     { className, label, onClick, isSelected, type = 'ChevronDown', count, id, ariaLabel, isMobile, totalCount },
     ref,
