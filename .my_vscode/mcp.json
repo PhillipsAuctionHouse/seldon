@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "Figma MCP Server": {
+      "url": "http://127.0.0.1:3845/sse",
+      "type": "sse"
+    }
+  },
+  "inputs": []
+}

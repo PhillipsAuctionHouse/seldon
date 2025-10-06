@@ -2,7 +2,7 @@ import { Meta } from '@storybook/react';
 import { useState } from 'react';
 import { SaleCard } from '../SaleCard';
 import FiltersInline from './FiltersInline';
-import { FilterButtonType, FilterDropdownMenuProps, FilterType } from './types';
+import { FilterButtonType, FilterDropdownMenuProps, FilterInputType, FilterType } from './types';
 import { FiltersInlineFilters, SalesMockData } from './utils';
 
 /**
@@ -27,35 +27,35 @@ const filters: FilterType[] = [
   {
     label: 'Sort By Date',
     id: FILTER_KEYS.sort,
-    type: 'radio',
+    type: FilterInputType.radio,
     filterDimensions: new Set(FiltersInlineFilters.Sort),
     buttonType: FilterButtonType.Sort,
   },
   {
     label: 'Auction type',
     id: FILTER_KEYS.sale,
-    type: 'checkbox',
+    type: FilterInputType.checkbox,
     filterDimensions: new Set(FiltersInlineFilters.Sale),
     buttonType: FilterButtonType.Sale,
   },
   {
     label: 'Departments',
     id: FILTER_KEYS.departments,
-    type: 'checkbox',
+    type: FilterInputType.checkbox,
     filterDimensions: new Set(FiltersInlineFilters.Departments),
     buttonType: FilterButtonType.Departments,
   },
   {
     label: 'Location',
     id: FILTER_KEYS.location,
-    type: 'checkbox',
+    type: FilterInputType.checkbox,
     filterDimensions: new Set(FiltersInlineFilters.Location),
     buttonType: FilterButtonType.Location,
   },
   {
     label: 'Month',
     id: FILTER_KEYS.month,
-    type: 'checkbox',
+    type: FilterInputType.checkbox,
     filterDimensions: new Set(FiltersInlineFilters.Month),
     buttonType: FilterButtonType.Month,
   },
