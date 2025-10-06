@@ -13,6 +13,10 @@ $num_icons: 5;
   width: 100%;
 
   @include media($size-md) {
+    margin-top: $spacing-sm;
+  }
+
+  @include media($size-lg) {
     margin-top: 0;
   }
 

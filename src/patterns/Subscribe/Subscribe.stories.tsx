@@ -29,6 +29,5 @@ Playground.args = {
   blurb: 'Receive exclusive content about our auctions, exhibitions, and special events.',
   subscriptionState: SubscriptionState.Default,
   invalidText: 'Please enter a valid email address.',
-  warn: true,
   successText: 'Thank you for subscribing!',
 };

@@ -35,8 +35,8 @@ const Social = forwardRef<HTMLDivElement, SocialProps>(
     {
       className,
       children,
-      titleText = 'Never Miss A Moment',
-      buttonText = 'Subscribe To Our Newsletter',
+      titleText = 'Never miss a moment',
+      buttonText = 'Subscribe to our newsletter',
       onSubscribeClick,
       ...props
     },
@@ -45,11 +45,11 @@ const Social = forwardRef<HTMLDivElement, SocialProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Social');
     return (
       <div ref={ref} {...commonProps} className={classnames(baseClassName, className)} {...props}>
-        <Text variant={TextVariants.heading4} className={`${baseClassName}__header`}>
+        <Text variant={TextVariants.headingSmall} className={`${baseClassName}__header`}>
           {titleText}
         </Text>
         <Button onClick={onSubscribeClick} variant={ButtonVariants.tertiary} className={`${baseClassName}__button`}>
-          {buttonText}
+          <Text variant={TextVariants.labelSmall}>{buttonText}</Text>
         </Button>
         {children}
       </div>
