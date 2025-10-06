@@ -11,6 +11,7 @@ import FilterMenu from '../FilterMenu/FilterMenu';
 import { FilterButton } from './FilterButton';
 import { FilterButtonIconType, type FilterDimension, type FilterDropdownProps, type FilterType } from './types';
 import { countActiveFilters, getFilterButtonClickHandler, resetAllFilters } from './utils';
+
 export const MainFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropdownProps>(
   (
     {
