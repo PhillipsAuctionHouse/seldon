@@ -13,12 +13,15 @@ module.exports = {
     'plugin:storybook/recommended',
     'plugin:local-rules/all',
   ],
-  // ... other configurations
-  rules: {
-    'no-equals-word-string': 'error',
-    'no-template-curly-in-string': 'error',
-  },
-  settings: {},
+  overrides: [
+    {
+      // Don't warn about deprecated text variants in stories and test files
+      files: ['**/*.stories.tsx', '**/*.test.tsx', '**/*.test.ts'],
+      rules: {
+        'local-rules/no-deprecated-text-variants': 'off',
+      },
+    },
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: ['./tsconfig.json', './tsconfig.node.json'],
@@ -27,6 +30,7 @@ module.exports = {
   },
   plugins: ['react-refresh', 'local-rules'],
   rules: {
+    'local-rules/no-deprecated-text-variants': 'warn',
     'react-refresh/only-export-components': 'warn',
     'react/boolean-prop-naming': ['warn', {}],
     'require-await': 'warn',
