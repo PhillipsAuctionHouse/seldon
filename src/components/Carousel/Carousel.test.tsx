@@ -8,12 +8,11 @@ import CarouselDots from './CarouselDots';
 import { mockDesktopBreakpoint, mockMobileBreakpoint, runCommonTests } from '../../utils/testUtils';
 import { useCarousel } from './utils';
 import { mutables, reInitMock, scrollNextMock, scrollPrevMock } from '../../../config/vitest/mockEmblaCarousel';
-import { updateInView, setupDomRectMocks, getSlides } from '../../../config/vitest/emblaTestUtils';
+import { updateInView, getSlides } from './carouselTestUtils';
 
 // globalThis comes from the test environment
 
-// shared helpers initialize DOMRect/BoundingClientRect mocks and provide intersection helpers
-setupDomRectMocks();
+// shared helpers initialize DOM mocks and provide intersection helpers
 
 export const beforeEach = () => {
   mutables.scrollSnapList = undefined;

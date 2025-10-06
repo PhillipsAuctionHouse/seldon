@@ -1,10 +1,10 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import CarouselArrows from './CarouselArrows';
 import { mutables, scrollNextMock, scrollPrevMock, scrollToMock } from '../../../config/vitest/mockEmblaCarousel.ts';
+import { renderArrows } from './carouselTestUtils.tsx';
 import userEvent from '@testing-library/user-event';
 import Carousel from './Carousel.tsx';
-import CarouselContent from './CarouselContent.tsx';
-import CarouselItem from './CarouselItem.tsx';
+// CarouselContent/CarouselItem are used by renderArrows helper now
 
 beforeAll(() => {
   mutables.slidesInView = () => [0];
@@ -23,19 +23,7 @@ const restoreInitialMocks = () => {
   mutables.selectedScrollSnap = undefined;
 };
 
-const renderArrows = () =>
-  render(
-    <Carousel>
-      <CarouselContent>
-        <CarouselItem>Item 1</CarouselItem>
-        <CarouselItem>Item 2</CarouselItem>
-        <CarouselItem>Item 3</CarouselItem>
-        <CarouselItem>Item 4</CarouselItem>
-        <CarouselItem>Item 5</CarouselItem>
-      </CarouselContent>
-      <CarouselArrows />
-    </Carousel>,
-  );
+// rendering helpers are provided by config/vitest/carouselTestUtils
 
 describe('CarouselArrows', () => {
   it('renders correctly', () => {

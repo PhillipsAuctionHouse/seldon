@@ -4,7 +4,8 @@ import '@testing-library/jest-dom';
 import { Carousel, CarouselContent, CarouselDots, CarouselDotsProps, CarouselItem, CarouselProps } from '../..';
 import { MockIntersectionObserver } from '../../../config/vitest/mockIntersectionObserver';
 import { mutables } from '../../../config/vitest/mockEmblaCarousel.ts';
-import { createIntersectionEntry, updateInView, setupDomRectMocks } from '../../../config/vitest/emblaTestUtils';
+import { updateInView } from './carouselTestUtils.tsx';
+import { createIntersectionEntry } from '../../../config/vitest/emblaTestUtils';
 
 // unnecessary unless we can get the duplicate indicies test to work
 // const inViewCalls: Array<{ index: number; inView: boolean }> = [];
@@ -33,8 +34,7 @@ import { createIntersectionEntry, updateInView, setupDomRectMocks } from '../../
 //   },
 // }));
 
-// initialize shared DOM mocks used by embla tests
-setupDomRectMocks();
+// shared DOM mocks and helpers are initialized by the carousel test utils
 
 afterEach(() => {
   cleanup();

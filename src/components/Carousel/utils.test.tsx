@@ -2,7 +2,6 @@ import { renderHook } from '@testing-library/react';
 import { useCarousel } from './utils';
 import { type ReactNode } from 'react';
 import { CarouselContext } from './Carousel';
-import useEmblaCarousel from 'embla-carousel-react';
 
 const carouselPlaceholderContextValue = {
   carouselRef: vi.fn(),
@@ -24,6 +23,6 @@ describe('useCarousel', () => {
       <CarouselContext.Provider value={carouselPlaceholderContextValue}>{children}</CarouselContext.Provider>
     );
     const { result } = renderHook(() => useCarousel(), { wrapper });
-    expect(result.current).toBe(carouselPlaceholderContextValue);
+    expect(result.current).toStrictEqual(carouselPlaceholderContextValue);
   });
 });

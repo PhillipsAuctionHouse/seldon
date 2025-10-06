@@ -4,7 +4,36 @@ import { vi } from 'vitest';
 
 import { runCommonTests } from '../../utils/testUtils';
 import PhoneNumberPicker from './PhoneNumberPicker';
+import { CountryCode, getCountryCallingCode } from 'libphonenumber-js';
 
+let lastSelectedCountryRefValue: string | undefined;
+vi.mock('react', async () => {
+  const actual = (await vi.importActual('react')) as typeof import('react');
+  return {
+    ...actual,
+    useRef: (arg?: string) => {
+      // sort of silly way to check that this is the correct useRef call for us to mock
+      const getIsCountryCode = (arg: unknown) => {
+        try {
+          return !!getCountryCallingCode(arg as CountryCode);
+        } catch {
+          return false;
+        }
+      };
+      if (getIsCountryCode(arg)) lastSelectedCountryRefValue = arg;
+      let _current = actual.useRef(arg).current;
+      return {
+        get current() {
+          return _current;
+        },
+        set current(value) {
+          if (getIsCountryCode(value)) lastSelectedCountryRefValue = value;
+          _current = value;
+        },
+      };
+    },
+  };
+});
 describe('PhoneNumberPicker', () => {
   runCommonTests(PhoneNumberPicker, 'PhoneNumberPicker');
   const reqProps = {
@@ -79,5 +108,30 @@ describe('PhoneNumberPicker', () => {
 
     // Check onChange called with correct value
     expect(onChange).toHaveBeenCalledWith('DE', expect.objectContaining({ value: 'DE', displayValue: '+49' }));
+  });
+});
+
+it('should clear lastSelectedCountry reference when value is cleared', async () => {
+  const onChange = vi.fn();
+  render(<PhoneNumberPicker id="test-id" labelText="Phone" value="US" onChange={onChange} />);
+  await userEvent.click(screen.getByTestId('test-id-combobox-clear-button'));
+  // await userEvent.clear(screen.getByTestId('test-id-combobox-input'));
+  await userEvent.tab();
+
+  expect(lastSelectedCountryRefValue).toBe('');
+});
+
+it('should update lastSelectedCountry reference when a country is selected', async () => {
+  const onChange = vi.fn();
+  render(<PhoneNumberPicker id="test-id" labelText="Phone" onChange={onChange} />);
+
+  const trigger = screen.getByTestId('test-id-combobox-dropdown');
+  await userEvent.click(trigger);
+
+  const option = screen.getByText(/\(CA\)/i);
+  await userEvent.click(option);
+
+  await waitFor(() => {
+    expect(lastSelectedCountryRefValue).toBe('CA');
   });
 });

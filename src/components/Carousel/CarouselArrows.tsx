@@ -16,8 +16,6 @@ const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(({ classN
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'CarouselArrows');
   const { api } = useCarousel();
   const onPrevArrowClick = useCallback(() => {
-    console.log('has api?', !!api);
-    console.log('has slides?', api?.slidesInView());
     if (!api) return;
     if (api?.slidesInView().length <= 1) {
       api.scrollPrev(true);
