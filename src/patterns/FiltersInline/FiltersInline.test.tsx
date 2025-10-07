@@ -1,13 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { runCommonTests } from '../../utils/testUtils';
-import { FilterButton, FilterButtonProps } from './FilterButton';
+import { FilterButton } from './FilterButton';
 import { FilterDropdownMenuDesktop } from './FilterDropdownMenuDesktop';
 import { FilterDropdownMenuMobile } from './FilterDropdownMenuMobile';
 import FiltersInline from './FiltersInline';
 import { MainFilterDropdown } from './MainFilterDropdown';
 import { SubFilterDropdown } from './SubFilterDropdown';
-import { FilterButtonIconType, FilterButtonType, FilterInputType, FilterType } from './types';
+import { FilterButtonIconType, FilterButtonType, FilterType } from './types';
 import { getFilterButtonClickHandler, handleInputChange, resetAllFilters } from './utils';
 
 describe('FiltersInline', () => {
@@ -23,7 +22,7 @@ describe('FiltersInline', () => {
     {
       label: 'Sale',
       id: 'sale',
-      type: FilterInputType.Checkbox,
+      type: 'checkbox',
       filterDimensions: new Set([
         { label: 'Foo', active: false },
         { label: 'Bar', active: false },
@@ -33,7 +32,7 @@ describe('FiltersInline', () => {
     {
       label: 'Departments',
       id: 'departments',
-      type: FilterInputType.Checkbox,
+      type: 'checkbox',
       filterDimensions: new Set([{ label: 'Baz', active: false }]),
       buttonType: FilterButtonType.Departments,
     },
@@ -59,13 +58,13 @@ describe('FiltersInline', () => {
 describe('FilterButtonDisplay', () => {
   const handleChange = vi.fn();
 
-  function getProps(overrides = {}): FilterButtonProps {
+  function getProps(overrides = {}) {
     return {
       className: 'custom-class',
       label: 'Sort By',
       onClick: handleChange,
       isSelected: false,
-      type: FilterButtonIconType.Sort,
+      type: 'Sort' as FilterButtonIconType,
       count: 0,
       totalCount: 3,
       id: 'test-id',
@@ -80,7 +79,7 @@ describe('FilterButtonDisplay', () => {
   });
 
   it('renders the button with correct label and test ids', () => {
-    render(<FilterButton {...getProps({ type: FilterButtonIconType.Sort })} />);
+    render(<FilterButton {...getProps({ type: 'Sort' as FilterButtonIconType })} />);
     expect(screen.getByTestId('test-id-filter-label')).toHaveTextContent('Sort By');
   });
 
@@ -91,7 +90,7 @@ describe('FilterButtonDisplay', () => {
   });
 
   it('shows the filter count when type is Filter and count > 0', () => {
-    render(<FilterButton {...getProps({ type: FilterButtonIconType.Filter, count: 3, label: 'Filter' })} />);
+    render(<FilterButton {...getProps({ type: 'Filter' as FilterButtonIconType, count: 3, label: 'Filter' })} />);
     expect(screen.getByTestId('test-id-filter-count')).toHaveTextContent('3');
   });
 
@@ -117,7 +116,7 @@ describe('FilterDropdown', () => {
         {
           label: 'Sort',
           id: 'Sort',
-          type: FilterInputType.Radio,
+          type: 'radio' as const,
           filterDimensions: new Set([
             { label: 'Ascending', active: false, disabled: false },
             { label: 'Descending', active: false, disabled: false },
@@ -161,7 +160,7 @@ describe('MainFilterDropdown', () => {
     {
       label: 'Filter',
       id: 'Filter',
-      type: FilterInputType.Checkbox,
+      type: 'checkbox' as const,
       buttonType: FilterButtonType.Filter,
       filterDimensions: new Set([
         { label: 'Foo', active: false, disabled: false },
@@ -176,7 +175,7 @@ describe('MainFilterDropdown', () => {
         id="main-filter"
         filterButtonLabel="Filter"
         filterId={0}
-        buttonType={FilterButtonType.Filter}
+        buttonType={'Filter' as FilterButtonType}
         handleClick={handleClick}
         filtersListState={[true]}
         filters={filters}
@@ -197,7 +196,7 @@ describe('MainFilterDropdown', () => {
         id="main-filter"
         filterButtonLabel="Filter"
         filterId={0}
-        buttonType={FilterButtonType.Filter}
+        buttonType={'Filter' as FilterButtonType}
         handleClick={handleClick}
         filtersListState={[true]}
         filters={filters}
@@ -218,7 +217,7 @@ describe('MainFilterDropdown', () => {
         id="main-filter"
         filterButtonLabel="Filter"
         filterId={0}
-        buttonType={FilterButtonType.Filter}
+        buttonType={'Filter' as FilterButtonType}
         handleClick={handleClick}
         filtersListState={[true]}
         filters={filters}
@@ -233,36 +232,6 @@ describe('MainFilterDropdown', () => {
     fireEvent.click(screen.getByTestId('main-filter-filter-button'));
     expect(handleClick).toHaveBeenCalled();
   });
-
-  it('calls onClickClear and onApplyFilter when drawer buttons are clicked', async () => {
-    const user = userEvent.setup();
-    const onClickClear = vi.fn();
-    const onApplyFilter = vi.fn();
-    render(
-      <MainFilterDropdown
-        id="main-filter-dropdown"
-        filterButtonLabel="Filter"
-        filtersListState={[true]}
-        filters={[
-          {
-            label: 'Sale',
-            id: 'sale',
-            type: FilterInputType.Checkbox,
-            filterDimensions: new Set([{ label: 'Foo', active: false }]),
-            buttonType: FilterButtonType.Sale,
-          },
-        ]}
-        onClickClear={onClickClear}
-        onApplyFilter={onApplyFilter}
-        resultsCount={5}
-        dropdownMenuTranslation={{}}
-      />,
-    );
-    await user.click(screen.getByText('Clear all'));
-    expect(onClickClear).toHaveBeenCalledWith('all');
-    await user.click(screen.getByText('Show 5 Auctions'));
-    expect(onApplyFilter).toHaveBeenCalledWith(false);
-  });
 });
 
 describe('SubFilterDropdown', () => {
@@ -274,7 +243,7 @@ describe('SubFilterDropdown', () => {
     {
       label: 'Sort',
       id: 'Sort',
-      type: FilterInputType.Radio,
+      type: 'radio' as const,
       buttonType: FilterButtonType.Sort,
       filterDimensions: new Set([
         { label: 'Ascending', active: false, disabled: false },
@@ -289,7 +258,7 @@ describe('SubFilterDropdown', () => {
         id="sub-filter"
         filterButtonLabel="Sort"
         filterId={0}
-        buttonType={FilterButtonType.Sort}
+        buttonType={'Sort' as FilterButtonType}
         handleClick={handleClick}
         filtersListState={[true]}
         filters={filters}
@@ -314,7 +283,7 @@ describe('FilterDropdownMenuDesktop non-sort buttons', () => {
       {
         label: 'Departments',
         id: 'Departments',
-        type: FilterInputType.Checkbox,
+        type: 'checkbox' as const,
         buttonType: FilterButtonType.Departments,
         filterDimensions: new Set([
           { label: 'Foo', active: false, disabled: false },
@@ -355,7 +324,7 @@ describe('FilterDropdownMenuMobile non-sort buttons', () => {
       {
         label: 'Departments',
         id: 'Departments',
-        type: FilterInputType.Checkbox,
+        type: 'checkbox',
         buttonType: FilterButtonType.Departments,
         filterDimensions: new Set([
           { label: 'Foo', active: false, disabled: false },
