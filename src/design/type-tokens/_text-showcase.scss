@@ -133,4 +133,9 @@
       @include text($linkSmall);
     }
   }
+
+  &-migration-table {
+    text-align: left;
+    width: 100%;
+  }
 }

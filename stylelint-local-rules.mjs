@@ -1,4 +1,4 @@
-const stylelint = require('stylelint');
+import stylelint from 'stylelint';
 
 const ruleName = 'local-rules/no-deprecated-text-tokens';
 const messages = stylelint.utils.ruleMessages(ruleName, {
@@ -28,7 +28,7 @@ const deprecatedTokens = [
   '$snwHeadingHero2',
 ];
 
-module.exports = [
+export default [
   stylelint.createPlugin(ruleName, (primaryOption) => {
     return (root, result) => {
       const validOptions = stylelint.utils.validateOptions(result, ruleName, {

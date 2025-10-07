@@ -466,4 +466,182 @@ import { Meta } from '@storybook/blocks';
       </div>
     </div>
   </div>
+
+  <h2>Migration Guide</h2>
+  <br/>
+  <p>The following table shows how to migrate from old typography tokens/variants to the new system. Our linting rules will warn you when using deprecated tokens.</p>
+  <br/>
+  <table className="typography-migration-table">
+    <thead>
+      <tr>
+        <th>Old Token</th>
+        <th>New Token</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>$heading1</code></td>
+        <td><code>$headingLarge</code></td>
+        <td>Should always be H1 on page.</td>
+      </tr>
+      <tr>
+        <td><code>$heading2</code></td>
+        <td><code>$headingLarge</code></td>
+        <td>Removed as duplicate.</td>
+      </tr>
+      <tr>
+        <td><code>$heading3</code></td>
+        <td><code>$headingMedium</code></td>
+        <td>Updated to new heading token.</td>
+      </tr>
+      <tr>
+        <td><code>$heading4</code></td>
+        <td><code>$headingSmall</code></td>
+        <td>Updated to new heading token.</td>
+      </tr>
+      <tr>
+        <td><code>$heading5</code></td>
+        <td><code>$bodySmall</code></td>
+        <td>Updated to new heading token.</td>
+      </tr>
+        <tr>
+        <td><code>$blockquote</code></td>
+        <td><code>$headingLarge</code></td>
+        <td>Updated to new heading token.</td>
+      </tr>
+      <tr>
+        <td><code>$title1</code></td>
+        <td><code>$headingLarge</code></td>
+        <td>Use heading tokens instead.</td>
+      </tr>
+      <tr>
+        <td><code>$title2</code></td>
+        <td><code>$headingMedium</code></td>
+        <td>Use heading tokens instead.</td>
+      </tr>
+      <tr>
+        <td><code>$title3</code></td>
+        <td><code>$headingSmall</code></td>
+        <td>Use heading tokens instead.</td>
+      </tr>
+      <tr>
+        <td><code>$title4</code></td>
+        <td><code>$bodySmall</code></td>
+        <td>Use heading tokens instead.</td>
+      </tr>
+      <tr>
+        <td><code>$body1</code></td>
+        <td><code>$bodyLarge</code></td>
+        <td>Updated to new body token.</td>
+      </tr>
+      <tr>
+        <td><code>$body2</code></td>
+        <td><code>$bodyMedium</code></td>
+        <td>Updated to new body token. Will be slightly bigger.</td>
+      </tr>
+      <tr>
+        <td><code>$body3</code></td>
+        <td><code>$bodySmall</code></td>
+        <td>Updated to new body token. Will be slightly bigger.</td>
+      </tr>
+      <tr>
+        <td><code>$string1</code></td>
+        <td><code>$headingMedium</code></td>
+        <td>Removed and mapped to heading.</td>
+      </tr>
+      <tr>
+        <td><code>$string2</code></td>
+        <td><code>$bodySmall</code></td>
+        <td>Removed and mapped to body.</td>
+      </tr>
+      <tr>
+        <td><code>$string3</code></td>
+        <td><code>$bodySmall</code></td>
+        <td>Removed and mapped to body. Will be slightly bigger.</td>
+      </tr>
+      <tr>
+        <td><code>$label1</code></td>
+        <td><code>$labelLarge</code></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><code>$label2</code></td>
+        <td><code>$labelSmall</code></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><code>$label3</code></td>
+        <td><code>$labelSmall</code></td>
+        <td>Removed and mapped to small-label. Will be slightly bigger.</td>
+      </tr>
+      <tr>
+        <td><code>$label4</code></td>
+        <td><code>$labelSmall</code></td>
+        <td>Removed and mapped to small-label. Will be slightly bigger.</td>
+      </tr>
+      <tr>
+        <td><code>$link</code></td>
+        <td><code>$linkSmall</code></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><code>$button</code></td>
+        <td><code>$bodySmall</code></td>
+        <td>Removed and mapped to body.</td>
+      </tr>
+      <tr>
+        <td><code>$badge</code></td>
+        <td><code>$labelSmall</code></td>
+        <td>Removed and mapped to label</td>
+      </tr>
+      <tr>
+        <td><code>$snwHeadingHero1</code></td>
+        <td><code>$displaySmall</code></td>
+        <td>Shown in hero banner</td>
+      </tr>
+      <tr>
+        <td><code>$snwHeadingHero2</code></td>
+        <td><code>$headingLarge</code></td>
+        <td>Shown in hero banner</td>
+      </tr>
+      <tr>
+        <td><code>$snwHeaderLink</code></td>
+        <td><code>$linkStylised</code></td>
+        <td>Used in header component</td>
+      </tr>
+      <tr>
+        <td><code>$snwFlyoutLink</code></td>
+        <td><code>$linkLarge</code></td>
+        <td>Used in header component</td>
+      </tr>
+    </tbody>
+  </table>
+
+<br/>
+  <h3>Usage Examples</h3>
+  <br/>
+  <div className="code-examples">
+    <h4>TypeScript/TSX</h4>
+    <pre>
+      <code>{`// ❌ Old - will trigger linting warning
+<Text variant={TextVariants.heading1}>Title</Text>
+<Text variant={TextVariants.body2}>Content</Text>
+
+// ✅ New
+<Text variant={TextVariants.headingLarge}>Title</Text>
+<Text variant={TextVariants.bodyMedium}>Content</Text>`}</code>
+    </pre>
+<br/>
+    <h4>SCSS</h4>
+    <pre>
+      <code>{`// ❌ Old - will trigger linting warning
+@include text($heading1);
+@include text($body2);
+
+// ✅ New
+@include text($headingLarge);
+@include text($bodyMedium);`}</code>
+    </pre>
+  </div>
 </main>

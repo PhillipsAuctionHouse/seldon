@@ -1,6 +1,6 @@
 module.exports = {
   extends: ['stylelint-config-standard', 'stylelint-config-standard-scss'],
-  plugins: ['stylelint-scss', 'stylelint-order', './stylelint-local-rules.cjs'],
+  plugins: ['stylelint-scss', 'stylelint-order', './stylelint-local-rules.mjs'],
   overrides: [
     {
       // don't worry about enforcing tokens on storybook styles or vars file
