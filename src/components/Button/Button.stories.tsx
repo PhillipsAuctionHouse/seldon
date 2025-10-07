@@ -22,8 +22,22 @@ const meta = {
 
 export default meta;
 
+export const ButtonDisabled = (props: ButtonProps) => (
+  <Button {...props} isDisabled>
+    This is the title
+  </Button>
+);
+
 export const ButtonWithIcon = (props: ButtonProps) => (
   <Button {...props}>
+    {!props.isIconLast ? <Icon icon="Add" /> : null}
+    This is the title
+    {props.isIconLast ? <Icon icon="Add" /> : null}
+  </Button>
+);
+
+export const ButtonWithIconDisabled = (props: ButtonProps) => (
+  <Button {...props} isDisabled>
     {!props.isIconLast ? <Icon icon="Add" /> : null}
     This is the title
     {props.isIconLast ? <Icon icon="Add" /> : null}
