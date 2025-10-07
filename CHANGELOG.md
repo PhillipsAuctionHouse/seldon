@@ -1,3 +1,38 @@
+# [1.201.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.200.0...v1.201.0) (2025-10-06)
+
+
+### Features
+
+* **editUserDetails:** L3-6773 The User Details page widgets should be consistent with Register to Bid  ([#734](https://github.com/PhillipsAuctionHouse/seldon/issues/734)) ([266ea4d](https://github.com/PhillipsAuctionHouse/seldon/commit/266ea4dd0ccb87098df249cde44cf13518416292))
+
+# [1.200.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.199.0...v1.200.0) (2025-09-30)
+
+
+### Features
+
+* **BidSnapshot:** L3-7838 rename showSoldPrice prop -> showSoldLabel ([#732](https://github.com/PhillipsAuctionHouse/seldon/issues/732)) ([98002cc](https://github.com/PhillipsAuctionHouse/seldon/commit/98002cc71b021309e12371c3d97b86bc76cb09d7))
+
+# [1.199.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.198.0...v1.199.0) (2025-09-30)
+
+
+### Features
+
+* **Carousel:** L3-2323 Results and Rail improvements ([#731](https://github.com/PhillipsAuctionHouse/seldon/issues/731)) ([2dcd277](https://github.com/PhillipsAuctionHouse/seldon/commit/2dcd2772df53dc8d0f61f95301e6039eadefca75))
+
+# [1.198.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.197.0...v1.198.0) (2025-09-24)
+
+
+### Features
+
+* **Calendar:** L3-7821 Update badge text to title case ([#730](https://github.com/PhillipsAuctionHouse/seldon/issues/730)) ([21491c8](https://github.com/PhillipsAuctionHouse/seldon/commit/21491c8335b94fee00f756e8513a7b3f6a0bc6f5))
+
+# [1.197.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.196.0...v1.197.0) (2025-09-19)
+
+
+### Features
+
+* **BidSnapshot:** L3-7321 add showSoldPrice prop to BidSnapshot ([#727](https://github.com/PhillipsAuctionHouse/seldon/issues/727)) ([2c41e0b](https://github.com/PhillipsAuctionHouse/seldon/commit/2c41e0b49c1912725ba2eb2571bff0c73bd93b03))
+
 # [1.196.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.195.2...v1.196.0) (2025-09-16)
 
 

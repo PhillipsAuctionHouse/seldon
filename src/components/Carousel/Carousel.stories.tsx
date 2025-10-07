@@ -207,10 +207,11 @@ export const CarouselWithMultipleItems = (props: CarouselProps) => {
 
   return (
     <div>
-      <Carousel {...{ ...props }}>
+      <Carousel {...{ ...props, element: 'ul' }}>
         <CarouselContent>
           {array.map((el) => (
             <CarouselItem
+              element="li"
               onClick={() => alert(el)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
@@ -230,7 +231,7 @@ export const CarouselWithMultipleItems = (props: CarouselProps) => {
               key={el}
               tabIndex={0}
             >
-              <img style={{ width: '60px', height: '60px' }} src={`https://picsum.photos/60/60?random=${el}`} alt="" />
+              <img style={{ width: '60px', height: '60px' }} src={`https://picsum.photos/id/${el + 10}/60/60`} alt="" />
               <div>
                 <h2>Item {el + 1}</h2>
                 <p>lorem ipsum dolor sit amet</p>
@@ -239,7 +240,7 @@ export const CarouselWithMultipleItems = (props: CarouselProps) => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselArrows />
+        <CarouselArrows areArrowsAlwaysVisible={true} />
       </Carousel>
 
       <div style={{ marginTop: '16px' }}>
