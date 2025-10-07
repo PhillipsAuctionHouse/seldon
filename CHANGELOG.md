@@ -1,3 +1,10 @@
+# [1.202.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.201.0...v1.202.0) (2025-10-07)
+
+
+### Features
+
+* **button:** PHOENIX-2097 Dynamic CTA [Disabled Button Styles Updates] ([#737](https://github.com/PhillipsAuctionHouse/seldon/issues/737)) ([203893a](https://github.com/PhillipsAuctionHouse/seldon/commit/203893a667a7b627b5c2d614be5817db579731ff))
+
 # [1.201.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.200.0...v1.201.0) (2025-10-06)
 
 
