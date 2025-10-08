@@ -18,6 +18,10 @@
     margin-bottom: 0;
   }
 
+  &__heading {
+    padding-bottom: $spacing-sm;
+  }
+
   &__session {
     margin-bottom: $spacing-sm;
   }

@@ -51,7 +51,7 @@ export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButton>(
       data-viewport={isMobile ? 'mobile' : 'desktop'}
       onClick={onClick}
     >
-      <Text variant={TextVariants.string2} data-testid={`${id}-filter-label`}>
+      <Text variant={TextVariants.bodyLarge} data-testid={`${id}-filter-label`}>
         {label}
       </Text>
       <Icon icon={getIcon(type as FilterButtonIconType, isSelected)} height={8} width={8} className={`${px}__icon`} />

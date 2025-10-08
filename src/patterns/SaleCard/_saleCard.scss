@@ -10,6 +10,10 @@
     flex-direction: row;
   }
 
+  &__title {
+    @include text($headingMedium, $text-transform: uppercase);
+  }
+
   &__image {
     align-items: center;
     aspect-ratio: 91/51;

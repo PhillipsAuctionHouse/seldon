@@ -80,7 +80,9 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
           <Text variant={TextVariants.badge} className={`${baseClassName}__auction-type`}>
             {auctionType}
           </Text>
-          <Text variant={TextVariants.title3}>{titleText}</Text>
+          <Text variant={TextVariants.headingMedium} className={`${baseClassName}__title`}>
+            {titleText}
+          </Text>
           {badgeText && (
             <Text variant={TextVariants.badge} className={`${baseClassName}__badge`}>
               {badgeText}

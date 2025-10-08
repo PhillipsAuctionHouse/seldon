@@ -5,6 +5,14 @@
     max-width: 30rem;
   }
 
+  .#{$px}-link {
+    .seldon-text--link {
+      @include text($linkLarge);
+
+      text-decoration: none;
+    }
+  }
+
   &--item {
     // mobile first
     grid-column: span 2;
