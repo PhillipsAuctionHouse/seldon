@@ -20,7 +20,7 @@
   &__circle {
     align-items: center;
     border: 1px solid $pure-black;
-    border-radius: 50%;
+    border-radius: $radius-3xl;
     display: flex;
     height: 1.5rem;
     justify-content: center;
