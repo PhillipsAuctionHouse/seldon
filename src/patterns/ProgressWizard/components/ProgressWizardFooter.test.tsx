@@ -20,9 +20,9 @@ const baseProps: ProgressWizardFooterProps = {
   labels: defaultLabels,
   isCanContinue: true,
   isLoading: false,
-  handleBack: vi.fn(),
-  handleCancel: vi.fn(),
-  handleContinue: vi.fn(),
+  onBack: vi.fn(),
+  onCancel: vi.fn(),
+  onContinue: vi.fn(),
 };
 
 describe('ProgressWizardFooter', () => {
@@ -59,17 +59,17 @@ describe('ProgressWizardFooter', () => {
     expect(screen.getByRole('button', { name: 'Wizard: Continue' }).querySelector('.seldon-loader')).toBeTruthy();
   });
 
-  it('calls handleBack when Back is clicked', async () => {
+  it('calls onBack when Back is clicked', async () => {
     render(<Footer {...baseProps} />);
     await userEvent.click(getBtn('Back'));
-    expect(baseProps.handleBack).toHaveBeenCalled();
+    expect(baseProps.onBack).toHaveBeenCalled();
   });
 
-  it('calls handleCancel when Cancel is clicked on first step', async () => {
-    const handleCancel = vi.fn();
-    render(<Footer {...baseProps} isFirstStep={true} handleCancel={handleCancel} />);
+  it('calls onCancel when Cancel is clicked on first step', async () => {
+    const onCancel = vi.fn();
+    render(<Footer {...baseProps} isFirstStep={true} onCancel={onCancel} />);
     await userEvent.click(getBtn('Cancel'));
-    expect(handleCancel).toHaveBeenCalled();
+    expect(onCancel).toHaveBeenCalled();
   });
 
   it('applies custom baseClassName', () => {

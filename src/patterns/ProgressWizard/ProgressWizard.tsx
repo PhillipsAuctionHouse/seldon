@@ -75,8 +75,6 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
 
   const childOrChildren = Children.toArray(children);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const isFirstStep = currentStepIndex === 0;
-  const isLastStep = currentStepIndex === childOrChildren.length - 1;
 
   // Skip updating currentStepIndex if navigation is hidden or extCurrentStepIndex is provided, because that means the consumer is managing it themselves
   const setCurrentStepIndexHandler = useCallback(
@@ -114,8 +112,6 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
       continueLabel={continueLabel}
       submitLabel={submitLabel}
       loadingState={loadingState}
-      isFirstStep={isFirstStep}
-      isLastStep={isLastStep}
       onContinue={onContinue}
       onBack={onBack}
       onFormSubmit={onFormSubmit}
@@ -127,5 +123,3 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
 
 ProgressWizard.displayName = 'ProgressWizard';
 export default ProgressWizard;
-
-Object.is;

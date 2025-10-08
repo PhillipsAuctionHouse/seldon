@@ -1,11 +1,10 @@
-import { Children, forwardRef, type ReactNode } from 'react';
+import { Children, Dispatch, forwardRef, SetStateAction, type ReactNode } from 'react';
 import ProgressIndicator from '../../../components/ProgressIndicator/ProgressIndicator';
 import { getCommonProps } from '../../../utils';
-import classNames from 'classnames';
 import Icon from '../../../components/Icon/Icon';
 import { Footer } from './ProgressWizardFooter';
 
-import { type PublicState, type ButtonLabels, CallbackProps } from '../types';
+import { type ButtonLabels, CallbackProps, LoadingState } from '../types';
 
 /**
  * Props for the internal ProgressWizard layout component. Used to render the wizard UI and handle navigation.
@@ -26,13 +25,13 @@ import { type PublicState, type ButtonLabels, CallbackProps } from '../types';
  * Inherits handler props from Handlers.
  */
 
-export interface InnerProgressWizardProps extends CallbackProps, PublicState, ButtonLabels {
+export interface InnerProgressWizardProps extends CallbackProps, ButtonLabels {
+  currentStepIndex: number;
+  setCurrentStepIndex: Dispatch<SetStateAction<number>>;
+  loadingState?: LoadingState;
   customHeader?: ReactNode;
   hideNavigation?: boolean;
   hideProgressIndicator?: boolean;
-  isFirstStep: boolean;
-  isLastStep: boolean;
-  className?: string;
   childOrChildren: ReturnType<typeof Children.toArray>;
 }
 
@@ -57,23 +56,23 @@ const InnerProgressWizard = forwardRef<HTMLDivElement, InnerProgressWizardProps>
     continueLabel = 'Continue',
     submitLabel = 'Submit',
     loadingState,
-    isFirstStep,
-    isLastStep,
 
     onContinue,
     onBack,
     onFormSubmit,
     onCancel,
 
-    className,
     childOrChildren,
     ...rest
   } = props;
 
   const { className: baseClassName, ...commonProps } = getCommonProps(rest, 'ProgressWizard');
 
+  const isFirstStep = currentStepIndex === 0;
+  const isLastStep = currentStepIndex === childOrChildren.length - 1;
+
   return (
-    <section {...commonProps} className={classNames(baseClassName, className)} ref={ref} aria-label="Form Wizard">
+    <section {...commonProps} className={baseClassName} ref={ref} aria-label="Form Wizard">
       <div className={`${baseClassName}__logo`}>
         <Icon icon="PhillipsLogo" height={32} width={120} />
       </div>

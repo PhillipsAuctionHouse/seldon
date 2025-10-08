@@ -1,10 +1,7 @@
 import ProgressWizard, { ProgressWizardProps } from './ProgressWizard';
-import { useEffect, useRef, useState } from 'react';
-import { z } from 'zod';
 import Input from '../../components/Input/Input';
 import { ArgTypes } from '@storybook/react';
-import { type FormStep } from './types';
-import { type FieldErrors } from 'react-hook-form';
+import { useState } from 'react';
 
 const meta = {
   title: 'Patterns/ProgressWizard',
@@ -12,22 +9,6 @@ const meta = {
 };
 
 export default meta;
-
-const translations: Record<string, string> = {
-  name: 'Name',
-  nameRequired: 'Name is required',
-  email: 'Email',
-  emailRequired: 'Email is required',
-  emailInvalid: 'Email is invalid',
-  age: 'Age',
-  ageRequired: 'Age is required',
-
-  password: 'Contraseña',
-  passwordRequired: 'Se requiere la contraseña',
-  passwordTooShort: 'La contraseña es demasiado corta',
-};
-
-const t = (key: string) => translations[key] || key;
 
 const argTypes = {
   startLabel: { control: { type: 'text' } },
@@ -50,267 +31,153 @@ const argTypes = {
 
 // Story 1: Basic usage with custom error messages and onContinue/onCancel
 export const BasicWizard = () => {
-  const steps: FormStep[] = [
-    {
-      id: 'step1',
-      label: 'Step 1',
-      schema: z.object({
-        name: z.string().min(1, { message: 'Please enter your name' }),
-      }),
-      componentFactory: ({ registerProgressWizardInput }) => <Input {...registerProgressWizardInput('name')} />,
-    },
-    {
-      id: 'step2',
-      label: 'Step 2',
-      schema: z.object({
-        age: z.preprocess(Number, z.number().min(18, { message: 'You must be at least 18' })),
-      }),
-      componentFactory: ({ registerProgressWizardInput }) => (
-        <Input {...registerProgressWizardInput('age', { overrides: { type: 'number' } })} />
-      ),
-    },
-  ];
+  const [formData, setFormData] = useState({ name: '', age: '' });
+  const [errors, setErrors] = useState({ name: '', age: '' });
 
-  return (
-    <ProgressWizard
-      steps={steps}
-      loadingState="idle"
-      onCancel={() => alert('Called `onCancel`, without which cancelling does nothing')}
-      startLabel="Start"
-      cancelLabel="Cancel"
-      backLabel="Back"
-      continueLabel="Continue"
-      submitLabel="Submit"
-      action="javascript:alert('Native form submission via the `action` prop')"
-    />
-  );
-};
-BasicWizard.argTypes = argTypes;
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    const newErrors = {
+      name: formData.name ? '' : 'Name is required.',
+      age: formData.age && Number(formData.age) > 0 ? '' : 'Age must be a positive number.',
+    };
+    setErrors(newErrors);
 
-// Story 2: Zod validation with translation function and onError
-export const TranslationWizard = () => {
-  const [email, setEmail] = useState('');
-  const formRef = useRef<HTMLDivElement | null>(null);
-
-  const steps: FormStep[] = [
-    {
-      id: 'step1',
-      label: 'Step 1',
-      schema: z.object({
-        email: z
-          .string()
-          .min(1, { message: t('emailRequired') })
-          .email({ message: t('emailInvalid') }),
-      }),
-      componentFactory: ({ registerProgressWizardInput, watch }) => {
-        const watchedEmail = watch('step1.email');
-        useEffect(() => {
-          setEmail(watchedEmail || '');
-        }, [watchedEmail, watch]);
-        return <Input {...registerProgressWizardInput('email', { translationFunction: t })} />;
-      },
-    },
-  ];
-
-  useEffect(() => {
-    if (formRef.current) {
-      formRef.current.setAttribute(
-        'action',
-        `javascript:alert('Native form submission via the action prop. Form values: { email: "${email}" }')`,
-      );
+    if (!newErrors.name && !newErrors.age) {
+      alert(JSON.stringify(formData, null, 2));
     }
-  }, [email]);
-
-  return (
-    <ProgressWizard
-      steps={steps}
-      loadingState="idle"
-      onError={(error, errorType) =>
-        alert('Error: ' + (errorType === 'FieldErrors' ? (error as FieldErrors).email?.message : error))
-      }
-      onCancel={() => {
-        alert('Cancelled');
-      }}
-      startLabel="Start"
-      cancelLabel="Cancel"
-      backLabel="Back"
-      continueLabel="Continue"
-      submitLabel="Submit"
-      action={`javascript:alert('Native form submission via the action prop. Form values: { email: "${email}" }')`}
-      ref={formRef}
-    />
-  );
-};
-TranslationWizard.argTypes = argTypes;
-
-// Story 3: Async validation and all on* functions
-const asyncEmailSchema = z
-  .string()
-  .email({ message: 'Must be a valid email' })
-  .refine(
-    async (val) => {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      return val !== 'taken@example.com';
-    },
-    { message: 'Email is already taken' },
-  );
-
-export const AsyncValidationWizardWithCallbacks = () => {
-  const steps: FormStep[] = [
-    {
-      id: 'step1',
-      label: 'Step 1',
-      schema: z.object({
-        email: asyncEmailSchema,
-      }),
-      componentFactory: ({ registerProgressWizardInput }) => (
-        <Input
-          {...registerProgressWizardInput('email', {
-            overrides: { labelText: "Type 'taken@example.com' for refinement error" },
-          })}
-        />
-      ),
-    },
-    {
-      id: 'step2',
-      label: 'Step 2',
-      schema: z.object({
-        confirm: z.string().min(1, { message: 'Please confirm.' }),
-      }),
-      componentFactory: ({ registerProgressWizardInput }) => <Input {...registerProgressWizardInput('confirm')} />,
-    },
-  ];
-
-  const alerts = useRef<string[]>([]);
-  const [shouldErrorOnSubmit, setShouldErrorOnSubmit] = useState(false);
-
-  const triggerErrorOnSubmit = () => {
-    setShouldErrorOnSubmit(!shouldErrorOnSubmit);
   };
 
   return (
-    <>
-      <button
-        type="button"
-        style={{
-          marginBottom: 16,
-          background: shouldErrorOnSubmit ? '#ffe4e1' : '#f0f0f0',
-          color: '#333',
-          border: shouldErrorOnSubmit ? '1px solid #ffb6c1' : '1px solid #ccc',
-          borderRadius: 4,
-          padding: '8px 16px',
-        }}
-        onClick={triggerErrorOnSubmit}
-      >
-        Enable Form Submission Error (will throw error on final submit if toggled on)
-      </button>
+    <form onSubmit={handleSubmit}>
       <ProgressWizard
-        steps={steps}
         loadingState="idle"
-        onBack={() => {
-          if (!alerts.current.includes('Back')) {
-            alert('onBack callback (will only alert once here for minimal annoyance)');
-            alerts.current.push('Back');
-          }
-          return true;
-        }}
-        onContinue={() => {
-          if (!alerts.current.includes('Continue')) {
-            alert('onContinue callback (will only alert once here for minimal annoyance)');
-            alerts.current.push('Continue');
-          }
-          return true;
-        }}
-        onCancel={() => {
-          if (!alerts.current.includes('Cancel')) {
-            alert('onCancel callback (will only alert once here for minimal annoyance)');
-            alerts.current.push('Cancel');
-          }
-          return false;
-        }}
-        onFormSubmit={(data) => {
-          if (shouldErrorOnSubmit) {
-            setShouldErrorOnSubmit(false);
-            throw new Error('Simulated form submission error from handleSubmit!');
-          }
-          alert('onSubmit hook: ' + JSON.stringify(data));
-        }}
-        onError={(_err, _type, logMsg) => {
-          alert('onError hook: ' + logMsg);
-        }}
         startLabel="Start"
         cancelLabel="Cancel"
         backLabel="Back"
         continueLabel="Continue"
         submitLabel="Submit"
-      />
-    </>
+      >
+        <Input
+          name="name"
+          id="name"
+          labelText="Name*"
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          invalid={!!errors.name}
+          invalidText={errors.name}
+        />
+        <Input
+          name="age"
+          id="age"
+          labelText="Age*"
+          type="number"
+          value={formData.age}
+          onChange={(e) => setFormData({ ...formData, age: e.target.value })}
+          invalid={!!errors.age}
+          invalidText={errors.age}
+        />
+      </ProgressWizard>
+    </form>
+  );
+};
+BasicWizard.argTypes = argTypes;
+
+// Story 2: Zod validation
+export const ValidationWizard = () => {
+  const [formData, setFormData] = useState({ email: '' });
+  const [error, setError] = useState('');
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!formData.email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
+      setError('Please enter a valid email address.');
+    } else {
+      setError('');
+      alert(JSON.stringify(formData, null, 2));
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <ProgressWizard
+        loadingState="idle"
+        startLabel="Start"
+        cancelLabel="Cancel"
+        backLabel="Back"
+        continueLabel="Continue"
+        submitLabel="Submit"
+      >
+        <Input
+          name="email"
+          id="email"
+          labelText="E-mail Address"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          invalid={!!error}
+          invalidText={error}
+        />
+      </ProgressWizard>
+    </form>
+  );
+};
+ValidationWizard.argTypes = argTypes;
+
+// Story 3: Async validation and all on* functions
+export const AsyncValidationWizardWithCallbacks = () => {
+  const [formData, setFormData] = useState({ email: '', confirm: '' });
+  const [errors, setErrors] = useState({ email: '', confirm: '' });
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setLoading(true);
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    const newErrors = {
+      email: formData.email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/) ? '' : 'Please enter a valid email address.',
+      confirm: formData.email === formData.confirm ? '' : 'Emails must match.',
+    };
+    setErrors(newErrors);
+
+    if (!newErrors.email && !newErrors.confirm) {
+      alert(JSON.stringify(formData, null, 2));
+    }
+    setLoading(false);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <ProgressWizard
+        loadingState={loading ? 'loading' : 'idle'}
+        startLabel="Start"
+        cancelLabel="Cancel"
+        backLabel="Back"
+        continueLabel="Continue"
+        submitLabel="Submit"
+      >
+        <Input
+          name="email"
+          id="email"
+          labelText="Email*"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          invalid={!!errors.email}
+          invalidText={errors.email}
+        />
+        <Input
+          name="confirm"
+          id="confirm"
+          labelText="Confirm Email*"
+          value={formData.confirm}
+          onChange={(e) => setFormData({ ...formData, confirm: e.target.value })}
+          invalid={!!errors.confirm}
+          invalidText={errors.confirm}
+        />
+      </ProgressWizard>
+    </form>
   );
 };
 AsyncValidationWizardWithCallbacks.argTypes = argTypes;
-
-// Story 4: Mixed usage, translation, and custom error
-export const MixedValidationWizard = () => {
-  const steps: FormStep[] = [
-    {
-      id: `step1`,
-      label: `Step 1`,
-      schema: z.object({
-        username: z.string().min(3, { message: `Username must be at least 3 characters.` }),
-      }),
-      componentFactory: ({ registerProgressWizardInput }) => (
-        <Input
-          {...registerProgressWizardInput(`username`, {
-            overrides: { labelText: `Username (validation by callback)` },
-          })}
-        />
-      ),
-    },
-    {
-      id: `step2`,
-      label: `Step 2`,
-      schema: z.object({
-        password: z
-          .string()
-          .min(1, { message: t(`passwordRequired`) })
-          .refine((data) => data.length < 6, {
-            message: t('passwordTooShort'),
-            path: [`password`],
-          }),
-      }),
-      componentFactory: ({ registerProgressWizardInput }) => (
-        <Input
-          {...registerProgressWizardInput(`password`, {
-            overrides: { type: `password`, labelText: `${t('password')} (native validation & translated label)` },
-            translationFunction: t,
-          })}
-        />
-      ),
-    },
-  ];
-  return (
-    <ProgressWizard
-      steps={steps}
-      loadingState="idle"
-      onContinue={(data) => {
-        if (data.step1.username !== 'please') {
-          alert('onContinue called, disallowing continuing until `username` is "please"');
-          return false;
-        }
-        return true;
-      }}
-      onCancel={() => alert('Cancelled')}
-      action="/submit-here"
-      onError={(error) => alert('Error: ' + JSON.stringify(error))}
-      startLabel="Start"
-      cancelLabel="Cancel"
-      backLabel="Back"
-      continueLabel="Continue"
-      submitLabel="Submit"
-    />
-  );
-};
-MixedValidationWizard.argTypes = argTypes;
 
 export const Playground: {
   render: (props: ProgressWizardProps) => JSX.Element;
@@ -318,111 +185,33 @@ export const Playground: {
   argTypes: ArgTypes;
 } = {
   render: ({
-    steps,
     startLabel = 'Start',
     cancelLabel = 'Cancel',
     backLabel = 'Back',
     continueLabel = 'Continue',
     submitLabel = 'Submit',
-
-    onContinue = () => true,
-    onCancel = () => void 0,
-    onFormSubmit,
-    onError = (error: unknown) => {
-      console.error('Playground Error: ' + JSON.stringify(error, null, 2));
-    },
     loadingState = 'idle',
-    action,
-
     hideNavigation,
     hideProgressIndicator,
   }) => {
     return (
-      <ProgressWizard
-        steps={steps}
-        customHeader={<h3 style={{ textAlign: 'center' }}>Playground Wizard</h3>}
-        loadingState={loadingState}
-        onContinue={onContinue}
-        onCancel={onCancel}
-        onError={onError}
-        startLabel={startLabel}
-        cancelLabel={cancelLabel}
-        backLabel={backLabel}
-        continueLabel={continueLabel}
-        submitLabel={submitLabel}
-        onFormSubmit={onFormSubmit}
-        action={action}
-        hideNavigation={hideNavigation}
-        hideProgressIndicator={hideProgressIndicator}
-      />
+      <form onSubmit={(data) => alert(JSON.stringify(data, null, 2))}>
+        <ProgressWizard
+          loadingState={loadingState}
+          startLabel={startLabel}
+          cancelLabel={cancelLabel}
+          backLabel={backLabel}
+          continueLabel={continueLabel}
+          submitLabel={submitLabel}
+          hideNavigation={hideNavigation}
+          hideProgressIndicator={hideProgressIndicator}
+        >
+          <Input name="field1" id="field1" labelText="Field 1*" />
+          <Input name="field2" id="field2" labelText="Field 2*" />
+        </ProgressWizard>
+      </form>
     );
   },
-  args: {
-    steps: [
-      {
-        id: 'step1',
-        label: 'Step 1',
-        schema: z.object({
-          favoriteSmokeyRobinsonSong: z.string().min(1, { message: 'Favorite Smokey Robinson song required' }),
-        }),
-        componentFactory: ({ registerProgressWizardInput }) => (
-          <Input
-            {...registerProgressWizardInput('favoriteSmokeyRobinsonSong', {
-              overrides: { labelText: 'Favorite song by Smokey Robinson:' },
-            })}
-          />
-        ),
-      },
-      {
-        id: 'step2',
-        label: 'Step 2',
-        hiddenFields: ['favoriteSmokeyRobinsonSong'],
-        schema: z
-          .object({
-            favoriteSmokeyRobinsonSong: z.string(),
-            didYouLie: z.boolean(),
-          })
-          .refine(
-            (data) => {
-              const songName = data.favoriteSmokeyRobinsonSong.trim().toLowerCase();
-              const lied = data.didYouLie;
-              return (songName === 'i second that emotion') === !lied;
-            },
-            {
-              message:
-                'If your favorite is "I Second That Emotion", you must not have lied. If you picked another song, you must admit you lied.',
-              path: ['didYouLie'],
-            },
-          ),
-        componentFactory: ({ registerProgressWizardInput, watch, setValue }) => {
-          if (watch('step2.favoriteSmokeyRobinsonSong') !== watch('step1.favoriteSmokeyRobinsonSong')) {
-            setValue('step2.favoriteSmokeyRobinsonSong', watch('step1.favoriteSmokeyRobinsonSong'));
-          }
-
-          return (
-            <>
-              <Input {...registerProgressWizardInput('favoriteSmokeyRobinsonSong')} />
-              <div style={{ marginTop: 24 }}>
-                <Input
-                  {...registerProgressWizardInput('didYouLie', {
-                    overrides: {
-                      type: 'checkbox',
-                      labelText: 'Did you lie? Check if yes.',
-                      style: {
-                        width: 20,
-                        height: 20,
-                        display: 'inline-block',
-                        verticalAlign: 'middle',
-                      },
-                    },
-                  })}
-                />
-              </div>
-            </>
-          );
-        },
-      },
-    ],
-  },
+  args: {},
   argTypes,
 };
