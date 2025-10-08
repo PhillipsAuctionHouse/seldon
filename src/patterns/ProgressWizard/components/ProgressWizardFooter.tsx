@@ -2,7 +2,7 @@ import { type FC } from 'react';
 import Button from '../../../components/Button/Button';
 import { ButtonVariants } from '../../../components/Button/types';
 import Loader from '../../../components/Loader/Loader';
-import { type ButtonLabels, type Handlers } from '../types';
+import { CallbackProps, type ButtonLabels } from '../types';
 
 /**
  * Props for the ProgressWizard Footer component. Controls navigation and button states.
@@ -16,7 +16,7 @@ import { type ButtonLabels, type Handlers } from '../types';
  * Inherits all navigation handler props from Handlers.
  */
 
-export interface ProgressWizardFooterProps extends Handlers {
+export interface ProgressWizardFooterProps extends CallbackProps {
   isFirstStep: boolean;
   isLastStep: boolean;
   baseClassName?: string;
@@ -41,15 +41,18 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
   labels,
   isCanContinue,
   isLoading,
-  handleBack,
-  handleCancel,
+  onCancel,
+  onBack,
+  onContinue,
+  onFormSubmit,
 }) => {
   const secondaryLabel = isFirstStep ? labels.cancelLabel : labels.backLabel;
   const secondaryAria = secondaryLabel ?? 'Go Back';
-  const secondaryOnClick = isFirstStep ? handleCancel : handleBack;
+  const secondaryOnClick = isFirstStep ? onCancel : onBack;
 
   const primaryLabel = isLastStep ? labels.submitLabel : !isFirstStep ? labels.continueLabel : labels.startLabel;
   const primaryAria = primaryLabel ?? (isLastStep ? 'Submit' : !isFirstStep ? 'Continue' : 'Start');
+  const primaryOnClick = isLastStep ? onFormSubmit : onContinue;
 
   return (
     <>
@@ -67,6 +70,7 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
         type="submit"
         className={`${baseClassName}__btn`}
         aria-label={`Wizard: ${primaryAria}`}
+        onClick={primaryOnClick}
         isDisabled={!isCanContinue || isLoading}
       >
         {!isLoading ? primaryLabel : <Loader />}

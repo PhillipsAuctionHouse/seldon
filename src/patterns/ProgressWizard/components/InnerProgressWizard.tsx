@@ -1,14 +1,11 @@
-import { cloneElement, forwardRef, useEffect, useMemo, type ReactNode } from 'react';
+import { Children, forwardRef, type ReactNode } from 'react';
 import ProgressIndicator from '../../../components/ProgressIndicator/ProgressIndicator';
 import { getCommonProps } from '../../../utils';
 import classNames from 'classnames';
 import Icon from '../../../components/Icon/Icon';
-import { useFormContext } from 'react-hook-form';
 import { Footer } from './ProgressWizardFooter';
 
-import { type PublicState, type FormStep, type ButtonLabels, type Handlers } from '../types';
-import { handleHiddenFields } from '../utils';
-import { useProgressWizardForm } from '../hooks/useProgressWizardForm';
+import { type PublicState, type ButtonLabels, CallbackProps } from '../types';
 
 /**
  * Props for the internal ProgressWizard layout component. Used to render the wizard UI and handle navigation.
@@ -29,17 +26,14 @@ import { useProgressWizardForm } from '../hooks/useProgressWizardForm';
  * Inherits handler props from Handlers.
  */
 
-export interface InnerProgressWizardProps extends Required<Handlers>, PublicState {
-  steps: FormStep[];
+export interface InnerProgressWizardProps extends CallbackProps, PublicState, ButtonLabels {
   customHeader?: ReactNode;
   hideNavigation?: boolean;
   hideProgressIndicator?: boolean;
-  buttonLabels: ButtonLabels;
-  action?: string;
   isFirstStep: boolean;
   isLastStep: boolean;
   className?: string;
-  formId: string;
+  childOrChildren: ReturnType<typeof Children.toArray>;
 }
 
 /**
@@ -52,89 +46,31 @@ export interface InnerProgressWizardProps extends Required<Handlers>, PublicStat
  */
 const InnerProgressWizard = forwardRef<HTMLDivElement, InnerProgressWizardProps>((props, ref) => {
   const {
-    steps,
     currentStepIndex,
     setCurrentStepIndex,
     customHeader,
     hideNavigation,
     hideProgressIndicator,
-    buttonLabels,
+    startLabel = 'Start',
+    cancelLabel = 'Cancel',
+    backLabel = 'Back',
+    continueLabel = 'Continue',
+    submitLabel = 'Submit',
     loadingState,
-    setLoadingState,
-    action,
     isFirstStep,
     isLastStep,
 
-    handleContinue,
-    handleBack,
-    handleSubmit,
-    handleCancel,
+    onContinue,
+    onBack,
+    onFormSubmit,
+    onCancel,
 
     className,
-    formId,
-
+    childOrChildren,
     ...rest
   } = props;
 
   const { className: baseClassName, ...commonProps } = getCommonProps(rest, 'ProgressWizard');
-  const currentStep = useMemo(
-    () =>
-      steps[currentStepIndex] ?? {
-        id: '0',
-        label: '',
-        componentFactory: () => <span>No step found at index {currentStepIndex}</span>,
-      },
-    [steps, currentStepIndex],
-  );
-  const formMethods = useFormContext();
-
-  useEffect(() => {
-    if (currentStep && currentStep.hiddenFields) {
-      handleHiddenFields(currentStep);
-    }
-  }, [currentStep, formMethods]);
-
-  const { registerProgressWizardInput: actualRegisterProgressWizardInput } = useProgressWizardForm();
-  const { handleSubmit: _handleSubmit, register: _register, ...maintainedFormMethods } = formMethods;
-
-  const currentStepComponent = useMemo(
-    () =>
-      cloneElement(
-        currentStep?.componentFactory({
-          ...maintainedFormMethods,
-          formId,
-          registerProgressWizardInput: (fieldName, options) =>
-            actualRegisterProgressWizardInput(fieldName, options, currentStep.id),
-          currentStepIndex,
-          setCurrentStepIndex,
-          loadingState,
-          setLoadingState,
-
-          handleSubmit,
-          handleContinue,
-          handleBack,
-          handleCancel,
-        }),
-        {
-          key: currentStep.id,
-        },
-      ),
-    [
-      // hope everyone likes dependencies
-      currentStep,
-      maintainedFormMethods,
-      formId,
-      currentStepIndex,
-      setCurrentStepIndex,
-      loadingState,
-      setLoadingState,
-      handleSubmit,
-      handleContinue,
-      handleBack,
-      handleCancel,
-      actualRegisterProgressWizardInput,
-    ],
-  );
 
   return (
     <section {...commonProps} className={classNames(baseClassName, className)} ref={ref} aria-label="Form Wizard">
@@ -145,40 +81,42 @@ const InnerProgressWizard = forwardRef<HTMLDivElement, InnerProgressWizardProps>
       {!hideProgressIndicator ? (
         <nav aria-label="Progress">
           <ProgressIndicator
-            totalSteps={steps.length}
+            totalSteps={childOrChildren.length}
             currentStep={currentStepIndex + 1}
-            labels={steps.map((s) => s.label)}
+            labels={childOrChildren.map(
+              (child, i) =>
+                (typeof child === 'object' && 'props' in child && child.props['aria-label']) || `Step ${i + 1}`,
+            )}
             progressIndicatorAriaLabel="Wizard Progress"
           />
         </nav>
       ) : null}
-      <form
-        id={formId}
-        action={action}
-        onSubmit={(e) => {
-          e.preventDefault();
-          !isLastStep ? handleContinue() : handleSubmit();
-        }}
-      >
-        <div className={`${baseClassName}__content`} aria-labelledby={`wizard-step-label-${currentStep.id}`}>
-          {currentStepComponent}
+
+      <div className={`${baseClassName}__content`} aria-labelledby={`wizard-step-label-${currentStepIndex}`}>
+        {childOrChildren ?? <p>No content found for step {currentStepIndex + 1}</p>}
+      </div>
+      {!hideNavigation ? (
+        <div className={`${baseClassName}__footer`}>
+          <Footer
+            isFirstStep={isFirstStep}
+            isLastStep={isLastStep}
+            baseClassName={baseClassName}
+            isCanContinue={true}
+            isLoading={loadingState === 'submitting' || loadingState === 'loading'}
+            labels={{
+              startLabel,
+              cancelLabel,
+              backLabel,
+              continueLabel,
+              submitLabel,
+            }}
+            onContinue={onContinue}
+            onBack={onBack}
+            onCancel={onCancel}
+            onFormSubmit={onFormSubmit}
+          />
         </div>
-        {!hideNavigation ? (
-          <div className={`${baseClassName}__footer`}>
-            <Footer
-              isFirstStep={isFirstStep}
-              isLastStep={isLastStep}
-              baseClassName={baseClassName}
-              isCanContinue={true}
-              isLoading={loadingState === 'submitting' || loadingState === 'loading'}
-              labels={buttonLabels}
-              handleContinue={handleContinue}
-              handleBack={handleBack}
-              handleCancel={handleCancel}
-            />
-          </div>
-        ) : null}
-      </form>
+      ) : null}
     </section>
   );
 });

@@ -141,13 +141,11 @@ type ComponentFactory = (
  * @property currentStepIndex - The index of the current step (0-based)
  * @property setCurrentStepIndex - Setter for the current step index (use to navigate between steps)
  * @property loadingState - Current loading state (see type LoadingState)
- * @property setLoadingState - Setter for the loading state
  */
 export type PublicState = {
   currentStepIndex: number;
   setCurrentStepIndex: Dispatch<SetStateAction<number>>;
   loadingState?: LoadingState;
-  setLoadingState?: Dispatch<SetStateAction<LoadingState>>;
 };
 
 /*                             *\
@@ -322,42 +320,23 @@ export type ProgressWizardBaseProps = {
  * <ProgressWizard onContinue={(data) => { ... }} onFormSubmit={(data) => { ... }} />
  */
 
+type OnClick = (event: React.MouseEvent<HTMLButtonElement>) => void;
 // duplicate documentation below for Storybook descriptions
 export type CallbackProps = {
   /**
-   * Called when continuing to next step. Return false to block navigation. Receives full form data.
+   * Called when continuing to next step. Receives the click event.
    */
-  onContinue?: (formData: FieldValues) => boolean;
+  onContinue?: OnClick;
   /**
-   * Called when going back to a previous step. Return false to block navigation.
+   * Called when going back to a previous step. Receives the click event.
    */
-  onBack?: (formData: FieldValues) => boolean;
+  onBack?: OnClick;
   /**
-   * Called on final submit (receives all form data, overrides native form submission [though you can still trigger that in a component factory!]).
-   * Also receives a function that returns a promise resolving to whether the current step is valid, so you can still use step schema
-   * validation without native submit.
+   * Called on final submit (receives the click event and a function that returns a promise resolving to whether the current step is valid).
    */
-  onFormSubmit?: (formData: FieldValues, getIsCurrentStepValid: () => Promise<boolean>) => void;
+  onFormSubmit?: OnClick;
   /**
-   * Called when cancelling the wizard. If not provided, cancelling navigates back in browser history if possible. Useful for unsaved changes warnings and similar,
+   * Called when cancelling the wizard. Receives the click event.
    */
-  onCancel?: (formData: FieldValues) => void;
-  /**
-   * Called when validation errors occur
-   */
-  onError?: (error: unknown, type: string, logMsg: string) => void;
-};
-
-/**
- * Internal handler functions for ProgressWizard navigation and actions. Not exposed to consumers.
- * @property handleContinue - Advances to the next step (calls onContinue if provided)
- * @property handleBack - Returns to the previous step (calls onBack if provided)
- * @property handleSubmit - Submits the form (calls onFormSubmit instead of doing the native form submit if provided)
- * @property handleCancel - Cancels the wizard (calls onCancel if provided, otherwise navigates back in the browser history)
- */
-export type Handlers = {
-  handleContinue: () => void;
-  handleBack: () => void;
-  handleSubmit?: () => void;
-  handleCancel?: () => void;
+  onCancel?: OnClick;
 };

@@ -1,19 +1,7 @@
-import { forwardRef, useState, useRef, useCallback, type SetStateAction, useEffect } from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  type LoadingState,
-  type ButtonLabels,
-  type CallbackProps,
-  type ProgressWizardBaseProps,
-  type NamespacedSchemas,
-} from './types';
+import { forwardRef, useState, useCallback, type SetStateAction, PropsWithChildren, Children } from 'react';
+import { type ButtonLabels, type CallbackProps, type ProgressWizardBaseProps } from './types';
 import InnerProgressWizard from './components/InnerProgressWizard';
-import { useHandleActions } from './hooks/useHandleActions';
 import { useHistoryManagement } from './hooks/useHistoryManagement';
-import { z } from 'zod';
-import { v4 as uuidv4 } from 'uuid';
-
 /**
  * Props for the main ProgressWizard component.
  *
@@ -61,16 +49,12 @@ export interface ProgressWizardProps extends ProgressWizardBaseProps, ButtonLabe
  * />
  */
 
-const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, ref) => {
+const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWizardProps>>((props, ref) => {
   const {
-    steps: propSteps,
-    defaultValues,
-    loadingState: extLoadingState,
+    loadingState,
     customHeader,
     hideNavigation,
     hideProgressIndicator,
-
-    action: _action,
 
     manageHistory = true,
 
@@ -84,48 +68,13 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, r
     onBack,
     onCancel,
     onFormSubmit,
-    onError,
+    children,
   } = props;
 
-  /*                       *\
-        ✨ Prop prep ✨ 
-  \*                       */
-
-  // Ensure every step has at least an empty ZodObject as its schema
-  const steps = propSteps.map((step) => ({ ...step, schema: step.schema ?? z.object({}) }));
-  // Nest each step's schema under its step id
-  const namespacedStepSchemas = steps.reduce(
-    (acc, { id, schema }) => ({ ...acc, [id]: schema }),
-    {} as NamespacedSchemas,
-  );
-
-  if (steps.length > 10 && !hideProgressIndicator) {
-    console.warn(
-      '[ProgressWizard]',
-      'You have more than 10 steps. Consider setting `hideProgressIndicator` because it is going to look weird.',
-    );
-  }
-
-  let action = _action;
-  if (onFormSubmit && action) {
-    console.warn('[ProgressWizard]', 'Both `onFormSubmit` and `action` props were provided. `action` will be ignored.');
-    action = undefined;
-  }
-
-  /*                           *\
-     ✨ Form State Handling ✨
-  \*                           */
-
-  const formIdRef = useRef<string>(`progress-wizard-form-${uuidv4()}`);
-  const formId = formIdRef.current;
-
+  const childOrChildren = Children.toArray(children);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const currentStep = steps[currentStepIndex];
   const isFirstStep = currentStepIndex === 0;
-  const isLastStep = currentStepIndex === steps.length - 1;
-
-  // Loading state management, allow overriding of internal loading state when the external prop change
-  const [loadingState, setLoadingState] = useState<LoadingState>(extLoadingState ?? 'idle');
+  const isLastStep = currentStepIndex === childOrChildren.length - 1;
 
   // Skip updating currentStepIndex if navigation is hidden, because that means the consumer is managing it themselves
   const setCurrentStepIndexHandler = useCallback(
@@ -135,78 +84,40 @@ const ProgressWizard = forwardRef<HTMLDivElement, ProgressWizardProps>((props, r
     [hideNavigation, setCurrentStepIndex],
   );
 
-  // Sync loading state with external prop
-  useEffect(() => {
-    setLoadingState(extLoadingState ?? 'idle');
-  }, [extLoadingState]);
-
-  const formMethods = useForm({
-    resolver: zodResolver(z.object({ ...namespacedStepSchemas })),
-    defaultValues,
-    mode: 'onSubmit',
-    shouldUnregister: false, // maintains state on inactive steps
-  });
-
-  // Check if all fields in current and previous steps are valid, or current only if specified
-  const getIsValid = useCallback(
-    async (currentOnly = false) => {
-      const relevantSteps = currentOnly ? [steps[currentStepIndex]] : steps.slice(0, currentStepIndex + 1);
-      const result = await formMethods.trigger(relevantSteps.map(({ id }) => id));
-      return result;
-    },
-    [steps, currentStepIndex, formMethods],
-  );
-
-  // Use custom hook for action handlers
-  const { handleContinue, handleBack, handleCancel, handleSubmit } = useHandleActions({
-    isFirstStep,
-    isLastStep,
-    formMethods,
-    setLoadingState,
-    onContinue,
-    onBack,
-    onCancel,
-    onFormSubmit,
-    onError,
-    getIsValid,
-    setCurrentStepIndexHandler,
-    currentStep,
-    formId,
-  });
-
   // Use custom hook for browser history management
   useHistoryManagement({
     manageHistory,
     currentStepIndex,
-    stepsLength: steps.length,
+    stepsLength: childOrChildren.length,
     setCurrentStepIndex,
   });
 
   return (
-    <FormProvider {...formMethods}>
-      <InnerProgressWizard
-        ref={ref}
-        formId={formId}
-        steps={steps}
-        currentStepIndex={currentStepIndex}
-        setCurrentStepIndex={setCurrentStepIndex}
-        customHeader={customHeader}
-        hideNavigation={hideNavigation}
-        hideProgressIndicator={hideProgressIndicator}
-        buttonLabels={{ startLabel, cancelLabel, backLabel, continueLabel, submitLabel }}
-        loadingState={loadingState}
-        setLoadingState={setLoadingState}
-        action={action}
-        isFirstStep={isFirstStep}
-        isLastStep={isLastStep}
-        handleContinue={handleContinue}
-        handleBack={handleBack}
-        handleSubmit={handleSubmit}
-        handleCancel={handleCancel}
-      />
-    </FormProvider>
+    <InnerProgressWizard
+      ref={ref}
+      currentStepIndex={currentStepIndex}
+      setCurrentStepIndex={setCurrentStepIndexHandler}
+      customHeader={customHeader}
+      hideNavigation={hideNavigation}
+      hideProgressIndicator={hideProgressIndicator}
+      startLabel={startLabel}
+      cancelLabel={cancelLabel}
+      backLabel={backLabel}
+      continueLabel={continueLabel}
+      submitLabel={submitLabel}
+      loadingState={loadingState}
+      isFirstStep={isFirstStep}
+      isLastStep={isLastStep}
+      onContinue={onContinue}
+      onBack={onBack}
+      onFormSubmit={onFormSubmit}
+      onCancel={onCancel}
+      childOrChildren={childOrChildren}
+    />
   );
 });
 
 ProgressWizard.displayName = 'ProgressWizard';
 export default ProgressWizard;
+
+Object.is;
