@@ -1,7 +1,8 @@
-import { forwardRef, useState, useCallback, type SetStateAction, PropsWithChildren, Children } from 'react';
+import { forwardRef, useState, useCallback, useEffect, type SetStateAction, PropsWithChildren, Children } from 'react';
 import { type ButtonLabels, type CallbackProps, type ProgressWizardBaseProps } from './types';
 import InnerProgressWizard from './components/InnerProgressWizard';
 import { useHistoryManagement } from './hooks/useHistoryManagement';
+
 /**
  * Props for the main ProgressWizard component.
  *
@@ -52,6 +53,7 @@ export interface ProgressWizardProps extends ProgressWizardBaseProps, ButtonLabe
 const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWizardProps>>((props, ref) => {
   const {
     loadingState,
+    currentStepIndex: extCurrentStepIndex,
     customHeader,
     hideNavigation,
     hideProgressIndicator,
@@ -76,13 +78,19 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
   const isFirstStep = currentStepIndex === 0;
   const isLastStep = currentStepIndex === childOrChildren.length - 1;
 
-  // Skip updating currentStepIndex if navigation is hidden, because that means the consumer is managing it themselves
+  // Skip updating currentStepIndex if navigation is hidden or extCurrentStepIndex is provided, because that means the consumer is managing it themselves
   const setCurrentStepIndexHandler = useCallback(
     (arg: SetStateAction<number>) => {
-      if (!hideNavigation) setCurrentStepIndex(arg);
+      if (!hideNavigation && !extCurrentStepIndex && extCurrentStepIndex !== 0) setCurrentStepIndex(arg);
     },
-    [hideNavigation, setCurrentStepIndex],
+    [hideNavigation, extCurrentStepIndex, setCurrentStepIndex],
   );
+
+  useEffect(() => {
+    if (Number.isInteger(extCurrentStepIndex) && extCurrentStepIndex !== currentStepIndex) {
+      setCurrentStepIndex(extCurrentStepIndex ?? 0);
+    }
+  }, [extCurrentStepIndex, currentStepIndex]);
 
   // Use custom hook for browser history management
   useHistoryManagement({

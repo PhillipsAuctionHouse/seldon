@@ -132,8 +132,7 @@ export type FormStep = {
 type ComponentFactory = (
   formContext: Omit<UseFormReturn<FieldValues>, 'handleSubmit' | 'register'> &
     ReturnType<UseProgressWizardForm> &
-    PublicState &
-    Handlers & { formId: string },
+    PublicState & { formId: string },
 ) => ReactElement;
 
 /**
@@ -274,14 +273,6 @@ export type ButtonLabels = {
 // duplicate documentation below for Storybook descriptions
 export type ProgressWizardBaseProps = {
   /**
-   * Initial values for the form (optional)
-   */
-  defaultValues?: FieldValues;
-  /**
-   * Array of FormStep objects defining the wizard steps (see type FormStep, this is the _big_ part of the config)
-   */
-  steps: FormStep[];
-  /**
    * Optional custom header ReactNode (renders above progress indicator)
    */
   customHeader?: ReactNode;
@@ -298,13 +289,13 @@ export type ProgressWizardBaseProps = {
    */
   loadingState?: LoadingState;
   /**
-   * Optional form action URL (for native form submission, moot if `onFormSubmit` is provided)
-   */
-  action?: string;
-  /**
    * If true, the wizard will push history states on step changes, allowing the browser back/forward buttons to navigate between steps. Default is true.
    */
   manageHistory?: boolean;
+  /**
+   * Set the current step index manually. If provided, the footer buttons will not automatically switch steps.
+   */
+  currentStepIndex?: number;
 };
 
 /**
