@@ -1,13 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi } from 'vitest';
-import InnerProgressWizard, { InnerProgressWizardProps } from './InnerProgressWizard';
+import InnerProgressWizard, { type InnerProgressWizardProps } from './InnerProgressWizard';
+import { LoadingState } from '../types';
 
 const steps = [<input key="step1" aria-label="Step 1 Input" />, <input key="step2" aria-label="Step 2 Input" />];
 
 describe('InnerProgressWizard', () => {
   const defaultProps: InnerProgressWizardProps = {
     currentStepIndex: 0,
+    loadingState: LoadingState.Idle,
     setCurrentStepIndex: vi.fn(),
     customHeader: <div data-testid="custom-header">Header</div>,
     hideNavigation: false,
@@ -18,7 +20,6 @@ describe('InnerProgressWizard', () => {
     continueLabel: 'Continue',
     submitLabel: 'Submit',
     childOrChildren: steps,
-    loadingState: 'idle',
     onContinue: vi.fn(),
     onBack: vi.fn(),
     onFormSubmit: vi.fn(),
@@ -63,7 +64,7 @@ describe('InnerProgressWizard', () => {
 
   it('renders fallback if step index is out of bounds', () => {
     render(<InnerProgressWizard {...defaultProps} currentStepIndex={99} />);
-    expect(screen.getByText(/No step found at index/)).toBeInTheDocument();
+    expect(screen.getByText(/No content found for step 100/)).toBeInTheDocument();
   });
 
   it('renders footer with correct props', () => {
@@ -73,17 +74,17 @@ describe('InnerProgressWizard', () => {
   });
 
   it('footer disables Continue when loading', () => {
-    render(<InnerProgressWizard {...defaultProps} loadingState="loading" />);
+    render(<InnerProgressWizard {...defaultProps} loadingState={LoadingState.Loading} />);
     expect(screen.getByRole('button', { name: 'Wizard: Start' })).toBeDisabled();
   });
 
   it('footer disables Continue when submitting', () => {
-    render(<InnerProgressWizard {...defaultProps} loadingState="submitting" />);
+    render(<InnerProgressWizard {...defaultProps} loadingState={LoadingState.Submitting} />);
     expect(screen.getByRole('button', { name: 'Wizard: Start' })).toBeDisabled();
   });
 
   it('footer enables Continue when idle', () => {
-    render(<InnerProgressWizard {...defaultProps} loadingState="idle" />);
+    render(<InnerProgressWizard {...defaultProps} />);
     expect(screen.getByRole('button', { name: 'Wizard: Start' })).not.toBeDisabled();
   });
 

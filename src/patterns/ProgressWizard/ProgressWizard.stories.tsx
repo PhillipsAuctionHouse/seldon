@@ -1,7 +1,8 @@
-import ProgressWizard, { ProgressWizardProps } from './ProgressWizard';
+import ProgressWizard, { type ProgressWizardProps } from './ProgressWizard';
 import Input from '../../components/Input/Input';
-import { ArgTypes } from '@storybook/react';
+import { type ArgTypes } from '@storybook/react';
 import { useState } from 'react';
+import { LoadingState } from './types';
 
 const meta = {
   title: 'Patterns/ProgressWizard',
@@ -49,14 +50,7 @@ export const BasicWizard = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <ProgressWizard
-        loadingState="idle"
-        startLabel="Start"
-        cancelLabel="Cancel"
-        backLabel="Back"
-        continueLabel="Continue"
-        submitLabel="Submit"
-      >
+      <ProgressWizard>
         <Input
           name="name"
           id="name"
@@ -99,14 +93,7 @@ export const ValidationWizard = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <ProgressWizard
-        loadingState="idle"
-        startLabel="Start"
-        cancelLabel="Cancel"
-        backLabel="Back"
-        continueLabel="Continue"
-        submitLabel="Submit"
-      >
+      <ProgressWizard>
         <Input
           name="email"
           id="email"
@@ -147,14 +134,7 @@ export const AsyncValidationWizardWithCallbacks = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <ProgressWizard
-        loadingState={loading ? 'loading' : 'idle'}
-        startLabel="Start"
-        cancelLabel="Cancel"
-        backLabel="Back"
-        continueLabel="Continue"
-        submitLabel="Submit"
-      >
+      <ProgressWizard loadingState={loading ? LoadingState.Loading : LoadingState.Idle}>
         <Input
           name="email"
           id="email"
@@ -190,7 +170,7 @@ export const Playground: {
     backLabel = 'Back',
     continueLabel = 'Continue',
     submitLabel = 'Submit',
-    loadingState = 'idle',
+    loadingState = LoadingState.Idle,
     hideNavigation,
     hideProgressIndicator,
   }) => {

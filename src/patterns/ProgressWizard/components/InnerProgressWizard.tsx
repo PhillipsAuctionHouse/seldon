@@ -1,10 +1,10 @@
-import { Children, Dispatch, forwardRef, SetStateAction, type ReactNode } from 'react';
+import { type Children, type Dispatch, forwardRef, type SetStateAction, type ReactNode } from 'react';
 import ProgressIndicator from '../../../components/ProgressIndicator/ProgressIndicator';
 import { getCommonProps } from '../../../utils';
 import Icon from '../../../components/Icon/Icon';
 import { Footer } from './ProgressWizardFooter';
 
-import { type ButtonLabels, CallbackProps, LoadingState } from '../types';
+import { LoadingState, type ButtonLabels, type CallbackProps } from '../types';
 
 /**
  * Props for the internal ProgressWizard layout component. Used to render the wizard UI and handle navigation.
@@ -28,7 +28,7 @@ import { type ButtonLabels, CallbackProps, LoadingState } from '../types';
 export interface InnerProgressWizardProps extends CallbackProps, ButtonLabels {
   currentStepIndex: number;
   setCurrentStepIndex: Dispatch<SetStateAction<number>>;
-  loadingState?: LoadingState;
+  loadingState: LoadingState;
   customHeader?: ReactNode;
   hideNavigation?: boolean;
   hideProgressIndicator?: boolean;
@@ -69,7 +69,9 @@ const InnerProgressWizard = forwardRef<HTMLDivElement, InnerProgressWizardProps>
   const { className: baseClassName, ...commonProps } = getCommonProps(rest, 'ProgressWizard');
 
   const isFirstStep = currentStepIndex === 0;
+  const toFirstStep = () => setCurrentStepIndex(0);
   const isLastStep = currentStepIndex === childOrChildren.length - 1;
+  const toLastStep = () => setCurrentStepIndex(childOrChildren.length - 1);
 
   return (
     <section {...commonProps} className={baseClassName} ref={ref} aria-label="Form Wizard">
@@ -92,16 +94,19 @@ const InnerProgressWizard = forwardRef<HTMLDivElement, InnerProgressWizardProps>
       ) : null}
 
       <div className={`${baseClassName}__content`} aria-labelledby={`wizard-step-label-${currentStepIndex}`}>
-        {childOrChildren ?? <p>No content found for step {currentStepIndex + 1}</p>}
+        {childOrChildren[currentStepIndex] ?? <p>No content found for step {currentStepIndex + 1}</p>}
       </div>
       {!hideNavigation ? (
         <div className={`${baseClassName}__footer`}>
           <Footer
+            setCurrentStepIndex={setCurrentStepIndex}
             isFirstStep={isFirstStep}
+            toFirstStep={toFirstStep}
             isLastStep={isLastStep}
+            toLastStep={toLastStep}
             baseClassName={baseClassName}
             isCanContinue={true}
-            isLoading={loadingState === 'submitting' || loadingState === 'loading'}
+            isLoading={[LoadingState.Loading, LoadingState.Submitting].includes(loadingState)}
             labels={{
               startLabel,
               cancelLabel,

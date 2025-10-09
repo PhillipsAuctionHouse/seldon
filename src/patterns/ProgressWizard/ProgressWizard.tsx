@@ -1,5 +1,13 @@
-import { forwardRef, useState, useCallback, useEffect, type SetStateAction, PropsWithChildren, Children } from 'react';
-import { type ButtonLabels, type CallbackProps, type ProgressWizardBaseProps } from './types';
+import {
+  forwardRef,
+  useState,
+  useCallback,
+  useEffect,
+  Children,
+  type SetStateAction,
+  type PropsWithChildren,
+} from 'react';
+import { LoadingState, type ButtonLabels, type CallbackProps, type ProgressWizardBaseProps } from './types';
 import InnerProgressWizard from './components/InnerProgressWizard';
 import { useHistoryManagement } from './hooks/useHistoryManagement';
 
@@ -52,7 +60,7 @@ export interface ProgressWizardProps extends ProgressWizardBaseProps, ButtonLabe
 
 const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWizardProps>>((props, ref) => {
   const {
-    loadingState,
+    loadingState = LoadingState.Idle,
     currentStepIndex: extCurrentStepIndex,
     customHeader,
     hideNavigation,
@@ -78,8 +86,8 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
 
   // Skip updating currentStepIndex if navigation is hidden or extCurrentStepIndex is provided, because that means the consumer is managing it themselves
   const setCurrentStepIndexHandler = useCallback(
-    (arg: SetStateAction<number>) => {
-      if (!hideNavigation && !extCurrentStepIndex && extCurrentStepIndex !== 0) setCurrentStepIndex(arg);
+    (stepIndex: SetStateAction<number>) => {
+      if (!hideNavigation && !extCurrentStepIndex && extCurrentStepIndex !== 0) setCurrentStepIndex(stepIndex);
     },
     [hideNavigation, extCurrentStepIndex, setCurrentStepIndex],
   );

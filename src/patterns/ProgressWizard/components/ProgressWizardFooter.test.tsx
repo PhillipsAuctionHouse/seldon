@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
-import Footer, { ProgressWizardFooterProps } from './ProgressWizardFooter';
+import Footer, { type ProgressWizardFooterProps } from './ProgressWizardFooter';
 import userEvent from '@testing-library/user-event';
 
 const defaultLabels = {
@@ -14,8 +14,11 @@ const defaultLabels = {
 const getBtn = (label: string) => screen.getByRole('button', { name: `Wizard: ${label}` });
 
 const baseProps: ProgressWizardFooterProps = {
+  setCurrentStepIndex: vi.fn(),
   isFirstStep: false,
+  toFirstStep: vi.fn(),
   isLastStep: false,
+  toLastStep: vi.fn(),
   baseClassName: 'progress-wizard-footer',
   labels: defaultLabels,
   isCanContinue: true,

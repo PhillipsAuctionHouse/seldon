@@ -1,8 +1,8 @@
-import { type FC } from 'react';
+import { type Dispatch, type SetStateAction, type FC } from 'react';
 import Button from '../../../components/Button/Button';
 import { ButtonVariants } from '../../../components/Button/types';
 import Loader from '../../../components/Loader/Loader';
-import { CallbackProps, type ButtonLabels } from '../types';
+import { type CallbackProps, type OnClick, type ButtonLabels } from '../types';
 
 /**
  * Props for the ProgressWizard Footer component. Controls navigation and button states.
@@ -17,8 +17,11 @@ import { CallbackProps, type ButtonLabels } from '../types';
  */
 
 export interface ProgressWizardFooterProps extends CallbackProps {
+  setCurrentStepIndex: Dispatch<SetStateAction<number>>; // 🎺TODO make this a type
   isFirstStep: boolean;
+  toFirstStep: () => void;
   isLastStep: boolean;
+  toLastStep: () => void;
   baseClassName?: string;
   labels: ButtonLabels;
   isCanContinue: boolean;
@@ -36,8 +39,11 @@ export interface ProgressWizardFooterProps extends CallbackProps {
  */
 export const Footer: FC<ProgressWizardFooterProps> = ({
   isFirstStep,
+  toFirstStep,
   isLastStep,
+  toLastStep,
   baseClassName = 'progress-wizard-footer',
+  setCurrentStepIndex,
   labels,
   isCanContinue,
   isLoading,
@@ -46,13 +52,33 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
   onContinue,
   onFormSubmit,
 }) => {
+  const onClickStepNavigationAction =
+    ({ fn, distance = 0, skipTo }: { fn?: OnClick; distance?: number; skipTo?: 'first' | 'last' | number }): OnClick =>
+    async (e) => {
+      const res = await Promise.resolve(fn?.(e));
+      if (res !== false) {
+        if (typeof skipTo === 'number') {
+          setCurrentStepIndex(skipTo);
+        } else if (skipTo === 'first') {
+          toFirstStep();
+        } else if (skipTo === 'last') {
+          toLastStep();
+        } else {
+          setCurrentStepIndex((prev) => prev + distance);
+        }
+      }
+    };
   const secondaryLabel = isFirstStep ? labels.cancelLabel : labels.backLabel;
   const secondaryAria = secondaryLabel ?? 'Go Back';
-  const secondaryOnClick = isFirstStep ? onCancel : onBack;
+  const secondaryOnClick = isFirstStep
+    ? onClickStepNavigationAction({ fn: onCancel, distance: 0, skipTo: 'first' })
+    : onClickStepNavigationAction({ fn: onBack, distance: -1 });
 
   const primaryLabel = isLastStep ? labels.submitLabel : !isFirstStep ? labels.continueLabel : labels.startLabel;
   const primaryAria = primaryLabel ?? (isLastStep ? 'Submit' : !isFirstStep ? 'Continue' : 'Start');
-  const primaryOnClick = isLastStep ? onFormSubmit : onContinue;
+  const primaryOnClick = isLastStep
+    ? onClickStepNavigationAction({ fn: onFormSubmit })
+    : onClickStepNavigationAction({ fn: onContinue, distance: 1 });
 
   return (
     <>
@@ -61,7 +87,7 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
         type="button"
         className={`${baseClassName}__btn`}
         aria-label={`Wizard: ${secondaryAria}`}
-        onClick={secondaryOnClick}
+        onClick={async (e) => await secondaryOnClick(e)}
       >
         {secondaryLabel}
       </Button>
@@ -70,7 +96,7 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
         type="submit"
         className={`${baseClassName}__btn`}
         aria-label={`Wizard: ${primaryAria}`}
-        onClick={primaryOnClick}
+        onClick={async (e) => await primaryOnClick(e)}
         isDisabled={!isCanContinue || isLoading}
       >
         {!isLoading ? primaryLabel : <Loader />}

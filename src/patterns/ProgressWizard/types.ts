@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type MouseEvent, type ReactNode } from 'react';
 
 /*                         *\
     ✨ Core Data Types ✨ 
@@ -10,7 +10,11 @@ import { type ReactNode } from 'react';
  * - 'loading': Data is being loaded (e.g., async validation)
  * - 'submitting': Form is being submitted
  */
-export type LoadingState = 'idle' | 'loading' | 'submitting';
+export enum LoadingState {
+  Idle = 'idle',
+  Loading = 'loading',
+  Submitting = 'submitting',
+}
 
 /*                          *\
   ✨ ProgressWizard Props ✨ 
@@ -99,7 +103,9 @@ export type ProgressWizardBaseProps = {
  * <ProgressWizard onContinue={(data) => { ... }} onFormSubmit={(data) => { ... }} />
  */
 
-type OnClick = (event: React.MouseEvent<HTMLButtonElement>) => void;
+export type OnClick = (
+  event: MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
+) => void | false | Promise<void | false>;
 // duplicate documentation below for Storybook descriptions
 export type CallbackProps = {
   /**
