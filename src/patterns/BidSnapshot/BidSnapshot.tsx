@@ -69,9 +69,9 @@ export interface BidSnapshotProps extends ComponentProps<'div'> {
    */
   startingBidText?: string;
   /**
-   * Determines whether to show or hide sold price
+   * Determines whether to show or hide sold label and price
    */
-  showSoldPrice?: boolean;
+  showSoldLabel?: boolean;
   /**
    * Sold For amount
    * */
@@ -120,7 +120,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
       startingBid,
       startingBidText = 'Starting bid',
       soldPrice,
-      showSoldPrice = true,
+      showSoldLabel = true,
       soldForText = 'Sold for',
       wonForText = 'Won for',
       getCurrentDateTime = () => new Date(),
@@ -153,7 +153,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
     return (
       <div {...commonProps} {...props} ref={ref} className={classes}>
         <DetailList hasSeparators className={`${baseClassName}__text`}>
-          {showSoldPrice && isPast ? (
+          {showSoldLabel && isPast ? (
             <Detail
               label={bidStatus === BidStatusEnum.Won ? wonForText : soldForText} // if the user has won show wonForText else show soldForText
               value={soldPrice ? `${currency}${soldPrice?.toLocaleString()}` : ''}
