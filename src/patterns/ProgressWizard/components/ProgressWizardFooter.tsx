@@ -96,7 +96,7 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
       </Button>
       <Button
         variant={ButtonVariants.primary}
-        type="submit"
+        type={isLastStep ? 'submit' : 'button'}
         className={`${baseClassName}__btn`}
         aria-label={`Wizard: ${primaryAria}`}
         onClick={async (e) => await primaryOnClick(e)}

@@ -1,7 +1,7 @@
 import ProgressWizard, { type ProgressWizardProps } from './ProgressWizard';
 import Input from '../../components/Input/Input';
 import { type ArgTypes } from '@storybook/react';
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { LoadingState } from './types';
 
 const meta = {
@@ -28,35 +28,71 @@ const argTypes = {
   hideProgressIndicator: { control: { type: 'boolean' } },
 } as const;
 
-// Story 1: Basic usage with custom error messages and onContinue/onCancel
+const gentleMessageStyle = {
+  padding: '5px 8px',
+  borderRadius: '8px',
+  background: 'white',
+  position: 'fixed',
+  left: '50%',
+  top: '5%',
+  transform: 'translate(-50%, 0)',
+  opacity: '0',
+  transition: 'opacity 0.2s',
+};
+
+const gentleMessage = (text: string) => () => {
+  const p = document.createElement('p');
+  Object.assign(p.style, gentleMessageStyle);
+  p.textContent = text;
+  document.body.appendChild(p);
+  setTimeout(() => {
+    p.style.opacity = '1';
+    setTimeout(() => {
+      p.style.opacity = '0';
+      setTimeout(() => p.remove(), 500);
+    }, 2000);
+  }, 10);
+};
+
+const callbackNames = ['onContinue', 'onCancel', 'onFormSubmit', 'onBack'] as const;
+
+const callbackGenerators = Object.fromEntries(
+  callbackNames.map((name) => [
+    `genOn${name.slice(2)}`,
+    (shouldContinue: boolean) => (): false | void => {
+      gentleMessage(`${name} called`);
+      return shouldContinue !== false ? void 0 : false;
+    },
+  ]),
+);
+
+const callbacks = Object.fromEntries(callbackNames.map((name) => [name, gentleMessage(`${name} called`)]));
+
+const {
+  genOnContinue,
+  genOnCancel: _genOnCancel,
+  genOnFormSubmit: _genOnFormSubmit,
+  genOnBack: _genOnBack,
+} = callbackGenerators;
+const { onContinue, onCancel, onFormSubmit, onBack } = callbacks;
+
+// Story 1: Basic usage with all callbacks
 export const BasicWizard = () => {
   const [formData, setFormData] = useState({ name: '', age: '' });
-  const [errors, setErrors] = useState({ name: '', age: '' });
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    const newErrors = {
-      name: formData.name ? '' : 'Name is required.',
-      age: formData.age && Number(formData.age) > 0 ? '' : 'Age must be a positive number.',
-    };
-    setErrors(newErrors);
-
-    if (!newErrors.name && !newErrors.age) {
-      alert(JSON.stringify(formData, null, 2));
-    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <ProgressWizard>
+      <ProgressWizard onContinue={onContinue} onCancel={onCancel} onFormSubmit={onFormSubmit} onBack={onBack}>
         <Input
           name="name"
           id="name"
           labelText="Name*"
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          invalid={!!errors.name}
-          invalidText={errors.name}
         />
         <Input
           name="age"
@@ -65,8 +101,6 @@ export const BasicWizard = () => {
           type="number"
           value={formData.age}
           onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-          invalid={!!errors.age}
-          invalidText={errors.age}
         />
       </ProgressWizard>
     </form>
@@ -74,8 +108,8 @@ export const BasicWizard = () => {
 };
 BasicWizard.argTypes = argTypes;
 
-// Story 2: Zod validation
-export const ValidationWizard = () => {
+// Story 2: Consumer validation
+export const ValidationWizardWithOnBack = () => {
   const [formData, setFormData] = useState({ email: '' });
   const [error, setError] = useState('');
 
@@ -85,13 +119,13 @@ export const ValidationWizard = () => {
       setError('Please enter a valid email address.');
     } else {
       setError('');
-      alert(JSON.stringify(formData, null, 2));
+      alert(`Native form submit!\nValues:\n${JSON.stringify(formData, null, 2)}`);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <ProgressWizard>
+      <ProgressWizard onFormSubmit={onFormSubmit}>
         <Input
           name="email"
           id="email"
@@ -105,40 +139,59 @@ export const ValidationWizard = () => {
     </form>
   );
 };
-ValidationWizard.argTypes = argTypes;
+ValidationWizardWithOnBack.storyName = 'Validation Wizard With `onFormSubmit` hook';
+ValidationWizardWithOnBack.argTypes = argTypes;
 
 // Story 3: Async validation and all on* functions
-export const AsyncValidationWizardWithCallbacks = () => {
-  const [formData, setFormData] = useState({ email: '', confirm: '' });
-  const [errors, setErrors] = useState({ email: '', confirm: '' });
+export const AsyncValidationWizardWithAllCallbacks = () => {
+  const initialState = { email: '', confirm: '' };
+  const [formData, setFormData] = useState(initialState);
+  const [errors, setErrors] = useState(initialState);
   const [loading, setLoading] = useState(false);
+  const emailIsValid = useRef(false);
+
+  const validate = useCallback(async () => {
+    setLoading(true);
+
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    const newErrors = {
+      email: formData.email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/) ? '' : 'Please enter a valid email address.',
+      confirm: emailIsValid.current ? (formData.email === formData.confirm ? '' : 'Emails must match.') : '',
+    };
+    setLoading(false);
+    setErrors(newErrors);
+    emailIsValid.current = newErrors.email === '';
+    const result = !newErrors.email && !newErrors.confirm;
+    return result;
+  }, [formData]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
-    const newErrors = {
-      email: formData.email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/) ? '' : 'Please enter a valid email address.',
-      confirm: formData.email === formData.confirm ? '' : 'Emails must match.',
-    };
-    setErrors(newErrors);
-
-    if (!newErrors.email && !newErrors.confirm) {
-      alert(JSON.stringify(formData, null, 2));
-    }
-    setLoading(false);
+    if (await validate()) alert(`Submitted:\n${JSON.stringify(formData, null, 2)}`);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <ProgressWizard loadingState={loading ? LoadingState.Loading : LoadingState.Idle}>
+      <ProgressWizard
+        loadingState={loading ? LoadingState.Loading : LoadingState.Idle}
+        onBack={() => {
+          setErrors(initialState);
+          emailIsValid.current = false;
+          onBack();
+        }}
+        onCancel={onCancel}
+        onContinue={async () => genOnContinue(await validate())()}
+        onFormSubmit={onFormSubmit}
+      >
         <Input
           name="email"
           id="email"
           labelText="Email*"
           value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          onChange={(e) => {
+            setFormData({ ...formData, email: e.target.value });
+            setErrors({ ...errors, email: '' });
+          }}
           invalid={!!errors.email}
           invalidText={errors.email}
         />
@@ -147,7 +200,10 @@ export const AsyncValidationWizardWithCallbacks = () => {
           id="confirm"
           labelText="Confirm Email*"
           value={formData.confirm}
-          onChange={(e) => setFormData({ ...formData, confirm: e.target.value })}
+          onChange={(e) => {
+            setFormData({ ...formData, confirm: e.target.value });
+            setErrors({ ...errors, confirm: '' });
+          }}
           invalid={!!errors.confirm}
           invalidText={errors.confirm}
         />
@@ -155,7 +211,7 @@ export const AsyncValidationWizardWithCallbacks = () => {
     </form>
   );
 };
-AsyncValidationWizardWithCallbacks.argTypes = argTypes;
+AsyncValidationWizardWithAllCallbacks.argTypes = argTypes;
 
 // Story 4: External step control via currentStepIndex
 
@@ -167,6 +223,13 @@ export const ExternalStepControlWizard = () => {
     <Input key="step3" name="step3" id="step3" labelText="Step 3" />,
   ];
 
+  const vExtraButtonStyling = {
+    padding: '8px 20px',
+    borderRadius: 6,
+    fontWeight: 500,
+    transition: 'background 0.2s, color 0.2s',
+  };
+
   return (
     <div>
       <div style={{ marginBottom: 16 }}>
@@ -174,23 +237,38 @@ export const ExternalStepControlWizard = () => {
           type="button"
           onClick={() => setCurrentStepIndex((i) => Math.max(i - 1, 0))}
           disabled={currentStepIndex === 0}
+          style={{
+            ...vExtraButtonStyling,
+            background: currentStepIndex === 0 ? '#f3f6fa' : '#e3edfa',
+            color: currentStepIndex === 0 ? '#b0b0b0' : '#1a3a6b',
+          }}
         >
-          Previous Step
+          ◀ Previous
         </button>
         <button
           type="button"
           onClick={() => setCurrentStepIndex((i) => Math.min(i + 1, steps.length - 1))}
           disabled={currentStepIndex === steps.length - 1}
-          style={{ marginLeft: 8 }}
+          style={{
+            ...vExtraButtonStyling,
+            background: currentStepIndex === steps.length - 1 ? '#f3f6fa' : '#e3edfa',
+            color: currentStepIndex === steps.length - 1 ? '#b0b0b0' : '#1a3a6b',
+            cursor: currentStepIndex === steps.length - 1 ? 'not-allowed' : 'pointer',
+            marginLeft: 12,
+          }}
         >
-          Next Step
+          Next ▶
         </button>
         <span style={{ marginLeft: 16 }}>Current Step: {currentStepIndex + 1}</span>
       </div>
       <ProgressWizard
         currentStepIndex={currentStepIndex}
         hideNavigation
-        customHeader={<div style={{ padding: 8, background: '#f5f5f5' }}>External Step Control Demo</div>}
+        customHeader={
+          <div style={{ padding: 8, background: 'aliceblue', textAlign: 'center', borderRadius: 8, marginBottom: 16 }}>
+            External Step Control Demo
+          </div>
+        }
       >
         {steps}
       </ProgressWizard>
@@ -222,7 +300,7 @@ export const Playground: {
     onFormSubmit,
   }) => {
     return (
-      <form onSubmit={(data) => alert(JSON.stringify(data, null, 2))}>
+      <form onSubmit={(data) => alert(`Submitted:\n${JSON.stringify(data, null, 2)}`)}>
         <ProgressWizard
           customHeader={customHeader}
           hideNavigation={hideNavigation}

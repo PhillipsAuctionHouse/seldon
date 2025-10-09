@@ -16,7 +16,7 @@ export enum LoadingState {
   Submitting = 'submitting',
 }
 
-export type setCurrentStepIndex = Dispatch<SetStateAction<number>>;
+export type SetCurrentStepIndex = Dispatch<SetStateAction<number>>;
 
 /*                          *\
   ✨ ProgressWizard Props ✨ 
@@ -56,6 +56,13 @@ export type ButtonLabels = {
 };
 
 /**
+ * @internal __forceInternalStepNavigation - Forces internal step state management even when currentStepIndex is provided.
+ */
+type SecretProps = {
+  __forceInternalStepNavigation?: boolean;
+};
+
+/**
  * Base props for the ProgressWizard component.
  *
  * @property customHeader - Optional custom header ReactNode rendered above the progress indicator (e.g. logo or contextual banner)
@@ -63,6 +70,7 @@ export type ButtonLabels = {
  * @property hideProgressIndicator - If true, hides the progress indicator bar entirely
  * @property loadingState - Current loading state (see LoadingState) used to show loading UI / disable buttons
  * @property manageHistory - If true (default) advancing steps pushes a browser history state so back/forward navigates steps
+ * @property continueLabel - Label for the primary button on middle steps.
  * @property currentStepIndex - Controlled current step index (0‑based). When provided internal step state will not auto‑advance
  */
 
@@ -89,10 +97,14 @@ export type ProgressWizardBaseProps = {
    */
   currentStepIndex?: number;
   /**
+   *  Set false to disable continue/submit buttons
+   */
+  isCanContinue?: boolean;
+  /**
    * Current loading state (see LoadingState)
    */
   loadingState?: LoadingState;
-};
+} & SecretProps;
 
 /**
  * Callback props for ProgressWizard navigation lifecycle.
