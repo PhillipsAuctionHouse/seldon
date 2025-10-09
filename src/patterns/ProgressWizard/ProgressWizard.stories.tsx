@@ -21,11 +21,9 @@ const argTypes = {
     control: { type: 'select' },
     options: ['idle', 'submitting', 'loading'],
   },
-  action: { control: { type: 'text' } },
   onContinue: { action: 'onContinue' },
   onCancel: { action: 'onCancel' },
   onFormSubmit: { action: 'onFormSubmit' },
-  onError: { action: 'onError' },
   hideNavigation: { control: { type: 'boolean' } },
   hideProgressIndicator: { control: { type: 'boolean' } },
 } as const;
@@ -159,32 +157,88 @@ export const AsyncValidationWizardWithCallbacks = () => {
 };
 AsyncValidationWizardWithCallbacks.argTypes = argTypes;
 
+// Story 4: External step control via currentStepIndex
+
+export const ExternalStepControlWizard = () => {
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const steps = [
+    <Input key="step1" name="step1" id="step1" labelText="Step 1" />,
+    <Input key="step2" name="step2" id="step2" labelText="Step 2" />,
+    <Input key="step3" name="step3" id="step3" labelText="Step 3" />,
+  ];
+
+  return (
+    <div>
+      <div style={{ marginBottom: 16 }}>
+        <button
+          type="button"
+          onClick={() => setCurrentStepIndex((i) => Math.max(i - 1, 0))}
+          disabled={currentStepIndex === 0}
+        >
+          Previous Step
+        </button>
+        <button
+          type="button"
+          onClick={() => setCurrentStepIndex((i) => Math.min(i + 1, steps.length - 1))}
+          disabled={currentStepIndex === steps.length - 1}
+          style={{ marginLeft: 8 }}
+        >
+          Next Step
+        </button>
+        <span style={{ marginLeft: 16 }}>Current Step: {currentStepIndex + 1}</span>
+      </div>
+      <ProgressWizard
+        currentStepIndex={currentStepIndex}
+        hideNavigation
+        customHeader={<div style={{ padding: 8, background: '#f5f5f5' }}>External Step Control Demo</div>}
+      >
+        {steps}
+      </ProgressWizard>
+    </div>
+  );
+};
+ExternalStepControlWizard.argTypes = argTypes;
+
 export const Playground: {
   render: (props: ProgressWizardProps) => JSX.Element;
   args: ProgressWizardProps;
   argTypes: ArgTypes;
 } = {
   render: ({
+    customHeader,
+    hideNavigation,
+    hideProgressIndicator,
+    manageHistory,
+    currentStepIndex,
+    loadingState = LoadingState.Idle,
     startLabel = 'Start',
     cancelLabel = 'Cancel',
     backLabel = 'Back',
     continueLabel = 'Continue',
     submitLabel = 'Submit',
-    loadingState = LoadingState.Idle,
-    hideNavigation,
-    hideProgressIndicator,
+    onBack,
+    onCancel,
+    onContinue,
+    onFormSubmit,
   }) => {
     return (
       <form onSubmit={(data) => alert(JSON.stringify(data, null, 2))}>
         <ProgressWizard
+          customHeader={customHeader}
+          hideNavigation={hideNavigation}
+          hideProgressIndicator={hideProgressIndicator}
+          manageHistory={manageHistory}
+          currentStepIndex={currentStepIndex}
           loadingState={loadingState}
           startLabel={startLabel}
           cancelLabel={cancelLabel}
           backLabel={backLabel}
           continueLabel={continueLabel}
           submitLabel={submitLabel}
-          hideNavigation={hideNavigation}
-          hideProgressIndicator={hideProgressIndicator}
+          onBack={onBack}
+          onCancel={onCancel}
+          onContinue={onContinue}
+          onFormSubmit={onFormSubmit}
         >
           <Input name="field1" id="field1" labelText="Field 1*" />
           <Input name="field2" id="field2" labelText="Field 2*" />

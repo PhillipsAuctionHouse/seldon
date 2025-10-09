@@ -72,7 +72,7 @@ const ConsumerForm = ({
   ));
 
   return (
-    <ProgressWizard loadingState={LoadingState.Idle} {...buttonLabels}>
+    <ProgressWizard {...buttonLabels} loadingState={LoadingState.Idle}>
       {stepElements}
       {isAddExtraStep && <div key="unused-step">unused submit step</div>}
     </ProgressWizard>
@@ -161,8 +161,8 @@ describe('ProgressWizard', () => {
   it('hides the ProgressIndicator when hideProgressIndicator is true', () => {
     render(
       <ProgressWizard
-        loadingState={LoadingState.Idle}
         hideProgressIndicator={true}
+        loadingState={LoadingState.Idle}
         startLabel="Start"
         cancelLabel="Cancel"
         backLabel="Back"
@@ -178,8 +178,8 @@ describe('ProgressWizard', () => {
   it('hides the navigation section when hideNavigation is true', () => {
     render(
       <ProgressWizard
-        loadingState={LoadingState.Idle}
         hideNavigation={true}
+        loadingState={LoadingState.Idle}
         startLabel="Start"
         cancelLabel="Cancel"
         backLabel="Back"
@@ -203,12 +203,12 @@ describe('ProgressWizard', () => {
       return (
         <ProgressWizard
           loadingState={fetcherState}
-          onFormSubmit={onFormSubmit}
           startLabel="Start"
           cancelLabel="Cancel"
           backLabel="Back"
           continueLabel="Continue"
           submitLabel="Submit"
+          onFormSubmit={onFormSubmit}
         >
           <Input name="name" id="name" labelText="Name*" />
         </ProgressWizard>

@@ -1,23 +1,26 @@
-import { type Dispatch, type SetStateAction, type FC } from 'react';
+import { type FC } from 'react';
 import Button from '../../../components/Button/Button';
 import { ButtonVariants } from '../../../components/Button/types';
 import Loader from '../../../components/Loader/Loader';
+import type { SetCurrentStepIndex } from '../types';
 import { type CallbackProps, type OnClick, type ButtonLabels } from '../types';
 
 /**
  * Props for the ProgressWizard Footer component. Controls navigation and button states.
- * @property isFirstStep - True if this is the first step (shows Cancel instead of Back)
- * @property isLastStep - True if this is the last step (shows Submit instead of Continue)
- * @property className - Optional base class for styling
+ * @property setCurrentStepIndex - Setter used for relative step moves
+ * @property isFirstStep - True if this is the first step (renders Cancel instead of Back)
+ * @property toFirstStep - Jump helper to go directly to the first step
+ * @property isLastStep - True if this is the last step (renders Submit instead of Continue)
+ * @property toLastStep - Jump helper to go directly to the last step
+ * @property baseClassName - Base class for styling overrides
  * @property labels - Button labels for navigation (see ButtonLabels)
- * @property isCanContinue - Whether the primary button is enabled (e.g., validation passed)
- * @property isLoading - Whether the wizard is currently loading or submitting
- *
- * Inherits all navigation handler props from Handlers.
+ * @property isCanContinue - Whether the primary button should be enabled (e.g. validation passed)
+ * @property isLoading - Whether a loading/submitting state should be shown (disables buttons and shows loader on primary)
+ * Inherits navigation callbacks from CallbackProps (onCancel, onBack, onContinue, onFormSubmit)
  */
 
 export interface ProgressWizardFooterProps extends CallbackProps {
-  setCurrentStepIndex: Dispatch<SetStateAction<number>>; // 🎺TODO make this a type
+  setCurrentStepIndex: SetCurrentStepIndex;
   isFirstStep: boolean;
   toFirstStep: () => void;
   isLastStep: boolean;
@@ -38,17 +41,17 @@ export interface ProgressWizardFooterProps extends CallbackProps {
  * @returns ReactElement with navigation buttons
  */
 export const Footer: FC<ProgressWizardFooterProps> = ({
+  setCurrentStepIndex,
   isFirstStep,
   toFirstStep,
   isLastStep,
   toLastStep,
   baseClassName = 'progress-wizard-footer',
-  setCurrentStepIndex,
   labels,
   isCanContinue,
   isLoading,
-  onCancel,
   onBack,
+  onCancel,
   onContinue,
   onFormSubmit,
 }) => {

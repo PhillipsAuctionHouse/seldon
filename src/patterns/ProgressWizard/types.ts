@@ -1,4 +1,4 @@
-import { type MouseEvent, type ReactNode } from 'react';
+import { type MouseEvent, type ReactNode, type Dispatch, type SetStateAction } from 'react';
 
 /*                         *\
     ✨ Core Data Types ✨ 
@@ -15,6 +15,8 @@ export enum LoadingState {
   Loading = 'loading',
   Submitting = 'submitting',
 }
+
+export type setCurrentStepIndex = Dispatch<SetStateAction<number>>;
 
 /*                          *\
   ✨ ProgressWizard Props ✨ 
@@ -40,13 +42,13 @@ export type ButtonLabels = {
    */
   cancelLabel?: string;
   /**
-   * Label for the continue button (primary, middle step)
-   */
-  continueLabel?: string;
-  /**
    * Label for the back button (secondary, middle step)
    */
   backLabel?: string;
+  /**
+   * Label for the continue button (primary, middle step)
+   */
+  continueLabel?: string;
   /**
    * Label for the submit button (primary, last step)
    */
@@ -54,12 +56,14 @@ export type ButtonLabels = {
 };
 
 /**
- * Base props for the ProgressWizard component. These are important to render and control the wizard.
- * @property defaultValues - Initial values for the form (optional)
- * @property steps - Array of FormStep objects defining the wizard steps (see type FormStep, this is the _big_ part of the config)
- * @property customHeader - Optional custom header ReactNode (renders above progress indicator)
- * @property loadingState - Current loading state (see LoadingState)
- * @property action - Optional form action URL (for native form submission, moot if `onFormSubmit` is provided)
+ * Base props for the ProgressWizard component.
+ *
+ * @property customHeader - Optional custom header ReactNode rendered above the progress indicator (e.g. logo or contextual banner)
+ * @property hideNavigation - If true, hides the default footer navigation (consumer is responsible for changing steps)
+ * @property hideProgressIndicator - If true, hides the progress indicator bar entirely
+ * @property loadingState - Current loading state (see LoadingState) used to show loading UI / disable buttons
+ * @property manageHistory - If true (default) advancing steps pushes a browser history state so back/forward navigates steps
+ * @property currentStepIndex - Controlled current step index (0‑based). When provided internal step state will not auto‑advance
  */
 
 // duplicate documentation below for Storybook descriptions
@@ -77,10 +81,6 @@ export type ProgressWizardBaseProps = {
    */
   hideProgressIndicator?: boolean;
   /**
-   * Current loading state (see LoadingState)
-   */
-  loadingState?: LoadingState;
-  /**
    * If true, the wizard will push history states on step changes, allowing the browser back/forward buttons to navigate between steps. Default is true.
    */
   manageHistory?: boolean;
@@ -88,19 +88,18 @@ export type ProgressWizardBaseProps = {
    * Set the current step index manually. If provided, the footer buttons will not automatically switch steps.
    */
   currentStepIndex?: number;
+  /**
+   * Current loading state (see LoadingState)
+   */
+  loadingState?: LoadingState;
 };
 
 /**
- * Callback props for ProgressWizard actions. Used to handle navigation and submission events. Receives full form data.
- * @property onContinue - Called when continuing to next step. Return false to block navigation. Receives full form data.
- * @property onBack - Called when going back to a previous step. Return false to block navigation. Receives full form data.
- * @property onFormSubmit - Called on final submit (receives all form data, overrides native form submission [though you can still trigger that in a component factory!]).
- *   Also receives a function that returns a promise resolving to whether the current step is valid, so you can still use step schema validation without native submit.
- * @property onCancel - Called when cancelling the wizard, return false to block cancellation. Receives full form data.
- * @property onError - Called when validation errors occur
- *
- * @example
- * <ProgressWizard onContinue={(data) => { ... }} onFormSubmit={(data) => { ... }} />
+ * Callback props for ProgressWizard navigation lifecycle.
+ * @property onContinue - Called before advancing to the next step (async supported). Return false (or a Promise resolving to false) to block navigation.
+ * @property onBack - Called before going back a step. Return false to block navigation.
+ * @property onFormSubmit - Called when the last step primary button is clicked (async supported). Return false to block submission.
+ * @property onCancel - Called when cancelling from the first step.
  */
 
 export type OnClick = (
@@ -109,19 +108,19 @@ export type OnClick = (
 // duplicate documentation below for Storybook descriptions
 export type CallbackProps = {
   /**
-   * Called when continuing to next step. Receives the click event.
-   */
-  onContinue?: OnClick;
-  /**
    * Called when going back to a previous step. Receives the click event.
    */
   onBack?: OnClick;
   /**
-   * Called on final submit (receives the click event and a function that returns a promise resolving to whether the current step is valid).
-   */
-  onFormSubmit?: OnClick;
-  /**
    * Called when cancelling the wizard. Receives the click event.
    */
   onCancel?: OnClick;
+  /**
+   * Called when continuing to next step. Receives the click event.
+   */
+  onContinue?: OnClick;
+  /**
+   * Called on final submit (receives the click event and a function that returns a promise resolving to whether the current step is valid).
+   */
+  onFormSubmit?: OnClick;
 };

@@ -9,21 +9,21 @@ const steps = [<input key="step1" aria-label="Step 1 Input" />, <input key="step
 describe('InnerProgressWizard', () => {
   const defaultProps: InnerProgressWizardProps = {
     currentStepIndex: 0,
-    loadingState: LoadingState.Idle,
     setCurrentStepIndex: vi.fn(),
     customHeader: <div data-testid="custom-header">Header</div>,
     hideNavigation: false,
     hideProgressIndicator: false,
+    loadingState: LoadingState.Idle,
     startLabel: 'Start',
     cancelLabel: 'Cancel',
     backLabel: 'Back',
     continueLabel: 'Continue',
     submitLabel: 'Submit',
-    childOrChildren: steps,
-    onContinue: vi.fn(),
     onBack: vi.fn(),
-    onFormSubmit: vi.fn(),
     onCancel: vi.fn(),
+    onContinue: vi.fn(),
+    onFormSubmit: vi.fn(),
+    childOrChildren: steps,
   };
 
   it('renders logo, header, progress indicator, and step content', () => {

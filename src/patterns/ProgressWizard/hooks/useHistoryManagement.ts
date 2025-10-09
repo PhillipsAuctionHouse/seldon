@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { type SetCurrentStepIndex } from '../types';
 
 export const useHistoryManagement = ({
   manageHistory,
@@ -9,7 +10,7 @@ export const useHistoryManagement = ({
   manageHistory: boolean;
   currentStepIndex: number;
   stepsLength: number;
-  setCurrentStepIndex: (index: number) => void;
+  setCurrentStepIndex: SetCurrentStepIndex;
 }) => {
   const prevStepIndexRef = useRef<number>(0);
   useEffect(() => {

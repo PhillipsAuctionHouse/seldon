@@ -14,69 +14,41 @@ import { useHistoryManagement } from './hooks/useHistoryManagement';
 /**
  * Props for the main ProgressWizard component.
  *
- * @property steps - Array of FormStep objects (wizard steps, the primary configuration object).
- * @property loadingState - Current loading state (aligns with remix fetchers, see type LoadingState)+
- * @property defaultValues - Optional initial form values
- * @property customHeader - Optional custom header ReactNode, displays above progress bar.
- *
- * @property hideNavigation - If true, hides the default footer navigation (so you can implement your own via the `setCurrentStepIndex`
- *   function in the step component factory). Note that this removes the default triggers for `onContinue`, `onBack`, `onFormSubmit`, and `onCancel`. These are instead available to the step component factory under the `handlers` property.
+ * @property customHeader - Optional custom header ReactNode displayed above the progress indicator (e.g. brand logo or contextual banner).
+ * @property hideNavigation - If true, hides the default footer navigation. When hidden you must manage step index changes yourself (e.g. via currentStepIndex prop)
  * @property hideProgressIndicator - If true, hides the progress indicator bar.
- *
- * @property manageHistory - If true, the wizard will push history states on step changes, allowing the browser back/forward buttons to navigate between steps. Default is true.
- *
- * @property action - Optional form action URL, ignored if 'onFormSubmit' is provided.
- *
- * @property startLabel, cancelLabel, backLabel, continueLabel, submitLabel - Button labels for navigation
- *
- * @property onFormSubmit - Called if present on final submit (receives all form data, and a function to check if the current step is valid). Not compatible with the `action` prop, because it overrides native form submit.
- * @property onContinue - Called if present before advancing to next step (return false to block navigation, useful for validation if not using step schemas)
- * @property onBack - Called if present before going back (return false to block navigation)
- * @property onCancel - Called if present when cancelling the wizard
- * @property onError - Called if present when validation errors occur
- *
- * @remarks
- *   Only one of `action` or `onFormSubmit` should be provided. If both are present, Typescript will get mad and `action` will be ignored.
- *
- * @todo `onContinue` should provide a mechanism for setting per-field error messages
+ * @property manageHistory - If true (default), step advances push a history state so the browser back/forward buttons navigate between steps.
+ * @property currentStepIndex - Controlled current step index (0‑based). When provided the component becomes controlled and internal navigation state will not auto‑advance.
+ * @property loadingState - Current loading state (aligns with remix fetchers, see type LoadingState).
+ * @property startLabel - Label for the first step primary button.
+ * @property cancelLabel - Label for the first step secondary button.
+ * @property backLabel - Label for the secondary button on middle steps.
+ * @property continueLabel - Label for the primary button on middle steps.
+ * @property submitLabel - Label for the primary button on the last step.
+ * @property onBack - Called before navigating to the previous step. Return false to block navigation.
+ * @property onCancel - Called when the user cancels from the first step.
+ * @property onContinue - Called before advancing to next step (including first -> second). Return false to block navigation.
+ * @property onFormSubmit - Called on final submit click. Return false to block submission (async supported).
+ * @property children - The step content. Each direct child is treated as a step; its aria-label (if present) is used as the progress indicator label.
  */
 export interface ProgressWizardProps extends ProgressWizardBaseProps, ButtonLabels, CallbackProps {}
 
-/**
- * Main ProgressWizard component. Renders a multi-step form with validation, navigation, and custom UI.
- *
- * Use this component to build a step-by-step form experience. Each step is defined by a FormStep object.
- *
- * @param props - ProgressWizardProps
- * @returns ReactElement with wizard UI
- *
- * @example
- * <ProgressWizard
- *   steps={[{ id: 'step1', label: 'Step 1', schema: z.object({}), componentFactory: (formContextAndOtherGoodies) => <div>Step 1</div> }]}
- *   loadingState="idle"
- *   onFormSubmit={(data) => alert(JSON.stringify(data))}
- * />
- */
-
 const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWizardProps>>((props, ref) => {
   const {
-    loadingState = LoadingState.Idle,
-    currentStepIndex: extCurrentStepIndex,
     customHeader,
     hideNavigation,
     hideProgressIndicator,
-
     manageHistory = true,
-
+    currentStepIndex: extCurrentStepIndex,
+    loadingState = LoadingState.Idle,
     startLabel = 'Start',
     cancelLabel = 'Cancel',
     backLabel = 'Back',
     continueLabel = 'Continue',
     submitLabel = 'Submit',
-
-    onContinue,
     onBack,
     onCancel,
+    onContinue,
     onFormSubmit,
     children,
   } = props;
@@ -84,7 +56,6 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
   const childOrChildren = Children.toArray(children);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
-  // Skip updating currentStepIndex if navigation is hidden or extCurrentStepIndex is provided, because that means the consumer is managing it themselves
   const setCurrentStepIndexHandler = useCallback(
     (stepIndex: SetStateAction<number>) => {
       if (!hideNavigation && !extCurrentStepIndex && extCurrentStepIndex !== 0) setCurrentStepIndex(stepIndex);
@@ -98,7 +69,6 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
     }
   }, [extCurrentStepIndex, currentStepIndex]);
 
-  // Use custom hook for browser history management
   useHistoryManagement({
     manageHistory,
     currentStepIndex,
@@ -114,16 +84,16 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
       customHeader={customHeader}
       hideNavigation={hideNavigation}
       hideProgressIndicator={hideProgressIndicator}
+      loadingState={loadingState}
       startLabel={startLabel}
       cancelLabel={cancelLabel}
       backLabel={backLabel}
       continueLabel={continueLabel}
       submitLabel={submitLabel}
-      loadingState={loadingState}
-      onContinue={onContinue}
       onBack={onBack}
-      onFormSubmit={onFormSubmit}
       onCancel={onCancel}
+      onContinue={onContinue}
+      onFormSubmit={onFormSubmit}
       childOrChildren={childOrChildren}
     />
   );
