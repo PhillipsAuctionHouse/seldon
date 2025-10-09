@@ -1,3 +1,10 @@
+# [1.204.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.203.0...v1.204.0) (2025-10-09)
+
+
+### Features
+
+* **SaleCard:** L3-7848 Update CTA container width to accommodate lon… ([#739](https://github.com/PhillipsAuctionHouse/seldon/issues/739)) ([28535c9](https://github.com/PhillipsAuctionHouse/seldon/commit/28535c9ef911949e4c9922fe6f2bb280cf11ae70))
+
 # [1.203.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.202.0...v1.203.0) (2025-10-07)
 
 
