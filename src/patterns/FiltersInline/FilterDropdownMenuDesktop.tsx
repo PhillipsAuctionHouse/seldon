@@ -2,13 +2,12 @@ import classnames from 'classnames';
 import React from 'react';
 import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';
-import FilterHeader from '../../components/Filter/FilterHeader';
 import FilterInput from '../../components/Filter/FilterInput';
 import Text from '../../components/Text/Text';
 import { TextVariants } from '../../components/Text/types';
 import { px } from '../../utils';
 import { FilterDimension, FilterDropdownMenuProps } from './types';
-import { getFilterButtonLabel, getFilterDimensions, handleInputChange as handleInputChangeUtil } from './utils';
+import { getFilterDimensions, handleInputChange as handleInputChangeUtil } from './utils';
 
 export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, FilterDropdownMenuProps>(
   (
@@ -22,8 +21,6 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
       onApplyFilter,
       resultsCount,
       ariaLabels,
-      filterButtonLabel,
-      filterButtonLabelTranslated,
       dropdownMenuTranslation,
     },
     ref,
@@ -38,10 +35,6 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
         data-testid="filter-dropdown-desktop"
         aria-label={ariaLabels || `${buttonType} dropdown desktop`}
       >
-        <FilterHeader
-          heading={getFilterButtonLabel(filterButtonLabel, null, filterButtonLabelTranslated || null)}
-          className={classnames(`${baseClassName}__header`)}
-        />
         <div className={classnames(`${baseClassName}__filters`)}>
           {getFilterDimensions(filters, filterIndex).map((value: FilterDimension) => (
             <FilterInput
