@@ -3,7 +3,7 @@ import { describe, expect, it, vi, type Mock } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { useState, type FC } from 'react';
 import type { ButtonLabels } from './types';
-import { LoadingState } from './types';
+import { DefaultButtonLabels, LoadingState } from './types';
 import ProgressWizard from './ProgressWizard';
 import Input from '../../components/Input/Input';
 import type { StringSlice } from 'type-fest';
@@ -14,14 +14,6 @@ type v8StringMaximumLength = 1_073_741_824;
 type FieldNameAndLabel<fP extends string> = {
   name: `${fP}${number}`;
   label: `${Capitalize<fP>}${number}`;
-};
-
-const defaultButtonLabels: Required<ButtonLabels> = {
-  startLabel: 'Start',
-  cancelLabel: 'Cancel',
-  backLabel: 'Back',
-  continueLabel: 'Continue',
-  submitLabel: 'Submit',
 };
 
 const fieldPrefix = 'field';
@@ -46,7 +38,7 @@ let lastRenderedFieldNamesAndLabels: FieldNameAndLabel<'field'>[] = [];
 const ConsumerForm = ({
   stepCount = 4,
   isAddExtraStep = false,
-  buttonLabels = defaultButtonLabels,
+  buttonLabels,
 }: {
   stepCount?: number;
   isAddExtraStep?: boolean;
@@ -71,7 +63,7 @@ const ConsumerForm = ({
   ));
 
   return (
-    <ProgressWizard {...buttonLabels} loadingState={LoadingState.Idle}>
+    <ProgressWizard buttonLabels={buttonLabels}>
       {stepElements}
       {isAddExtraStep && <div key="unused-step">unused submit step</div>}
     </ProgressWizard>
@@ -96,12 +88,12 @@ describe('ProgressWizard', () => {
     await userEvent.type(screen.getByLabelText(firstLabel), 'yippee!');
     await userEvent.tab();
     await userEvent.tab();
-    expect(screen.getByRole('button', getWizName(defaultButtonLabels.startLabel))).toHaveFocus();
+    expect(screen.getByRole('button', getWizName(DefaultButtonLabels.Start))).toHaveFocus();
     await userEvent.keyboard('{Enter}');
     await waitFor(() => expect(screen.getByLabelText(secondLabel)).toBeInTheDocument());
     await userEvent.type(screen.getByLabelText(secondLabel), 'hurrayy!!');
     await userEvent.keyboard('{Enter}');
-    expect(screen.getByRole('button', getWizName(defaultButtonLabels.submitLabel))).toBeInTheDocument();
+    expect(screen.getByRole('button', getWizName(DefaultButtonLabels.Submit))).toBeInTheDocument();
   });
 
   it('persists field/form data when navigating back and forth through four steps', async () => {
@@ -111,21 +103,21 @@ describe('ProgressWizard', () => {
     );
 
     await userEvent.type(screen.getByLabelText(firstLabel), 'A');
-    await userEvent.click(screen.getByRole('button', getWizName(defaultButtonLabels.startLabel)));
+    await userEvent.click(screen.getByRole('button', getWizName(DefaultButtonLabels.Start)));
     await userEvent.type(screen.getByLabelText(secondLabel), 'B');
-    await userEvent.click(screen.getByRole('button', getWizName(defaultButtonLabels.continueLabel)));
+    await userEvent.click(screen.getByRole('button', getWizName(DefaultButtonLabels.Continue)));
     await userEvent.type(screen.getByLabelText(thirdLabel), 'C');
-    await userEvent.click(screen.getByRole('button', getWizName(defaultButtonLabels.continueLabel)));
+    await userEvent.click(screen.getByRole('button', getWizName(DefaultButtonLabels.Continue)));
     await userEvent.type(screen.getByLabelText(fourthLabel), 'D');
-    await userEvent.click(screen.getByRole('button', getWizName(defaultButtonLabels.backLabel)));
-    await userEvent.click(screen.getByRole('button', getWizName(defaultButtonLabels.backLabel)));
-    await userEvent.click(screen.getByRole('button', getWizName(defaultButtonLabels.backLabel)));
+    await userEvent.click(screen.getByRole('button', getWizName(DefaultButtonLabels.Back)));
+    await userEvent.click(screen.getByRole('button', getWizName(DefaultButtonLabels.Back)));
+    await userEvent.click(screen.getByRole('button', getWizName(DefaultButtonLabels.Back)));
     expect(screen.getByLabelText(firstLabel)).toHaveValue('A');
-    await userEvent.click(screen.getByRole('button', getWizName(defaultButtonLabels.startLabel)));
+    await userEvent.click(screen.getByRole('button', getWizName(DefaultButtonLabels.Start)));
     expect(screen.getByLabelText(secondLabel)).toHaveValue('B');
-    await userEvent.click(screen.getByRole('button', getWizName(defaultButtonLabels.continueLabel)));
+    await userEvent.click(screen.getByRole('button', getWizName(DefaultButtonLabels.Continue)));
     expect(screen.getByLabelText(thirdLabel)).toHaveValue('C');
-    await userEvent.click(screen.getByRole('button', getWizName(defaultButtonLabels.continueLabel)));
+    await userEvent.click(screen.getByRole('button', getWizName(DefaultButtonLabels.Continue)));
     expect(screen.getByLabelText(fourthLabel)).toHaveValue('D');
   });
 
@@ -134,9 +126,9 @@ describe('ProgressWizard', () => {
     const [firstLabel, secondLabel, thirdLabel] = lastRenderedFieldNamesAndLabels.map(({ label }) => label);
 
     await userEvent.type(screen.getByLabelText(firstLabel), 'A');
-    await userEvent.click(screen.getByRole('button', getWizName(defaultButtonLabels.startLabel)));
+    await userEvent.click(screen.getByRole('button', getWizName(DefaultButtonLabels.Start)));
     await userEvent.type(screen.getByLabelText(secondLabel), 'B');
-    await userEvent.click(screen.getByRole('button', getWizName(defaultButtonLabels.continueLabel)));
+    await userEvent.click(screen.getByRole('button', getWizName(DefaultButtonLabels.Continue)));
     await userEvent.type(screen.getByLabelText(thirdLabel), 'C');
 
     window.history.back();
@@ -152,15 +144,7 @@ describe('ProgressWizard', () => {
 
   it('hides the ProgressIndicator when hideProgressIndicator is true', () => {
     render(
-      <ProgressWizard
-        hideProgressIndicator={true}
-        loadingState={LoadingState.Idle}
-        startLabel="Start"
-        cancelLabel="Cancel"
-        backLabel="Back"
-        continueLabel="Continue"
-        submitLabel="Submit"
-      >
+      <ProgressWizard hideProgressIndicator={true}>
         <Input name="name" id="name" labelText="Name*" />
       </ProgressWizard>,
     );
@@ -169,15 +153,7 @@ describe('ProgressWizard', () => {
 
   it('hides the navigation section when hideNavigation is true', () => {
     render(
-      <ProgressWizard
-        hideNavigation={true}
-        loadingState={LoadingState.Idle}
-        startLabel="Start"
-        cancelLabel="Cancel"
-        backLabel="Back"
-        continueLabel="Continue"
-        submitLabel="Submit"
-      >
+      <ProgressWizard hideNavigation={true}>
         <Input name="name" id="name" labelText="Name*" />
       </ProgressWizard>,
     );
@@ -193,15 +169,7 @@ describe('ProgressWizard', () => {
         setFetcherState(LoadingState.Idle);
       });
       return (
-        <ProgressWizard
-          loadingState={fetcherState}
-          startLabel="Start"
-          cancelLabel="Cancel"
-          backLabel="Back"
-          continueLabel="Continue"
-          submitLabel="Submit"
-          onFormSubmit={onFormSubmit}
-        >
+        <ProgressWizard loadingState={fetcherState} onFormSubmit={onFormSubmit}>
           <Input name="name" id="name" labelText="Name*" />
         </ProgressWizard>
       );
@@ -216,29 +184,27 @@ describe('ProgressWizard', () => {
 
   it('renders steps and navigates between them', async () => {
     render(
-      <ProgressWizard loadingState={LoadingState.Idle}>
+      <ProgressWizard>
         <Input name="field1" id="field1" labelText="Field1*" />
         <Input name="field2" id="field2" labelText="Field2*" />
         <Input name="field3" id="field3" labelText="Field3*" />
       </ProgressWizard>,
     );
-    await userEvent.click(screen.getByRole('button', getWizName(defaultButtonLabels.startLabel)));
+    await userEvent.click(screen.getByRole('button', getWizName(DefaultButtonLabels.Start)));
     await waitFor(() =>
-      expect(screen.getByRole('button', getWizName(defaultButtonLabels.continueLabel))).toBeInTheDocument(),
+      expect(screen.getByRole('button', getWizName(DefaultButtonLabels.Continue))).toBeInTheDocument(),
     );
-    await userEvent.click(screen.getByRole('button', getWizName(defaultButtonLabels.continueLabel)));
-    await waitFor(() =>
-      expect(screen.getByRole('button', getWizName(defaultButtonLabels.submitLabel))).toBeInTheDocument(),
-    );
+    await userEvent.click(screen.getByRole('button', getWizName(DefaultButtonLabels.Continue)));
+    await waitFor(() => expect(screen.getByRole('button', getWizName(DefaultButtonLabels.Submit))).toBeInTheDocument());
   });
 
   it('handles browser navigation buttons (back/forward)', async () => {
     render(<ConsumerForm />);
     const [firstLabel, secondLabel, thirdLabel] = lastRenderedFieldNamesAndLabels.map(({ label }) => label);
     await userEvent.type(screen.getByLabelText(firstLabel), 'A');
-    await userEvent.click(screen.getByRole('button', getWizName(defaultButtonLabels.startLabel)));
+    await userEvent.click(screen.getByRole('button', getWizName(DefaultButtonLabels.Start)));
     await userEvent.type(screen.getByLabelText(secondLabel), 'B');
-    await userEvent.click(screen.getByRole('button', getWizName(defaultButtonLabels.continueLabel)));
+    await userEvent.click(screen.getByRole('button', getWizName(DefaultButtonLabels.Continue)));
     await userEvent.type(screen.getByLabelText(thirdLabel), 'C');
 
     window.history.back();
@@ -272,7 +238,7 @@ describe('ProgressWizard', () => {
 
   it('renders custom labels and translation', () => {
     render(
-      <ProgressWizard startLabel="Go!" cancelLabel="Stop">
+      <ProgressWizard buttonLabels={{ start: 'Go!', cancel: 'Stop' }}>
         <Input name="email" id="email" labelText="E-mail Address" />
         <Input name="thumb" id="thumb" labelText="Thumb Length" />
       </ProgressWizard>,
@@ -329,11 +295,10 @@ describe('ProgressWizard', () => {
 
       render(
         <ProgressWizard
-          currentStepIndex={startStep}
           onCancel={onCancelMock}
           onBack={onBackMock}
           onContinue={onContinueMock}
-          __forceInternalStepNavigation={true}
+          defaultStepIndex={startStep}
         >
           <Input name="name" id="name" labelText="Name*" />
           <Input name="age" id="age" labelText="Age*" />

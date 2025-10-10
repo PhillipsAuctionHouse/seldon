@@ -2,27 +2,27 @@ import { useEffect, useRef } from 'react';
 import { type SetCurrentStepIndex } from '../types';
 
 export const useHistoryManagement = ({
-  manageHistory,
+  enabled,
   currentStepIndex,
   stepsLength,
   setCurrentStepIndex,
 }: {
-  manageHistory: boolean;
+  enabled: boolean;
   currentStepIndex: number;
   stepsLength: number;
   setCurrentStepIndex: SetCurrentStepIndex;
 }) => {
   const prevStepIndexRef = useRef<number>(0);
   useEffect(() => {
-    if (!manageHistory) return;
+    if (!enabled) return;
     if (currentStepIndex > prevStepIndexRef.current) {
       window.history.pushState({ step: currentStepIndex }, '', window.location.pathname + window.location.search);
     }
     prevStepIndexRef.current = currentStepIndex;
-  }, [currentStepIndex, manageHistory]);
+  }, [currentStepIndex, enabled]);
 
   useEffect(() => {
-    if (!manageHistory) return;
+    if (!enabled) return;
     const handlePopState = (event: PopStateEvent) => {
       const state = event.state;
       if (state && typeof state.step === 'number' && state.step >= 0 && state.step < stepsLength) {
@@ -33,5 +33,5 @@ export const useHistoryManagement = ({
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };
-  }, [manageHistory, stepsLength, setCurrentStepIndex]);
+  }, [enabled, stepsLength, setCurrentStepIndex]);
 };

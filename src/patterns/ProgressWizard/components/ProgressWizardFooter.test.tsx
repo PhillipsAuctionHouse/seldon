@@ -3,14 +3,6 @@ import { describe, it, expect, vi } from 'vitest';
 import Footer, { type ProgressWizardFooterProps } from './ProgressWizardFooter';
 import userEvent from '@testing-library/user-event';
 
-const defaultLabels = {
-  startLabel: 'Start',
-  cancelLabel: 'Cancel',
-  backLabel: 'Back',
-  continueLabel: 'Continue',
-  submitLabel: 'Submit',
-};
-
 const getBtn = (label: string) => screen.getByRole('button', { name: `Wizard: ${label}` });
 
 const baseProps: ProgressWizardFooterProps = {
@@ -20,8 +12,7 @@ const baseProps: ProgressWizardFooterProps = {
   isLastStep: false,
   toLastStep: vi.fn(),
   baseClassName: 'progress-wizard-footer',
-  labels: defaultLabels,
-  isCanContinue: true,
+  shouldAllowContinue: true,
   isLoading: false,
   onBack: vi.fn(),
   onCancel: vi.fn(),
@@ -47,8 +38,8 @@ describe('ProgressWizardFooter', () => {
     expect(getBtn('Submit')).toBeInTheDocument();
   });
 
-  it('disables primary button when isCanContinue is false', () => {
-    render(<Footer {...baseProps} isCanContinue={false} />);
+  it('disables primary button when shouldAllowContinue is false', () => {
+    render(<Footer {...baseProps} shouldAllowContinue={false} />);
     expect(getBtn('Continue')).toBeDisabled();
   });
 
@@ -97,11 +88,11 @@ describe('ProgressWizardFooter', () => {
 
   it('renders custom labels', () => {
     const customLabels = {
-      startLabel: 'Begin',
-      cancelLabel: 'Abort',
-      backLabel: 'Previous',
-      continueLabel: 'Next',
-      submitLabel: 'Finish',
+      start: 'Begin',
+      cancel: 'Abort',
+      back: 'Previous',
+      continue: 'Next',
+      submit: 'Finish',
     };
     render(<Footer {...baseProps} labels={customLabels} />);
     expect(getBtn('Previous')).toBeInTheDocument();

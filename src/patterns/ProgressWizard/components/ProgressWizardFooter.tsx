@@ -3,7 +3,7 @@ import Button from '../../../components/Button/Button';
 import { ButtonVariants } from '../../../components/Button/types';
 import Loader from '../../../components/Loader/Loader';
 import type { SetCurrentStepIndex } from '../types';
-import { type CallbackProps, type OnClick, type ButtonLabels } from '../types';
+import { type CallbackProps, type OnClick, type ButtonLabels, DefaultButtonLabels } from '../types';
 
 /**
  * Props for the ProgressWizard Footer component. Controls navigation and button states.
@@ -14,7 +14,7 @@ import { type CallbackProps, type OnClick, type ButtonLabels } from '../types';
  * @property toLastStep - Jump helper to go directly to the last step
  * @property baseClassName - Base class for styling overrides
  * @property labels - Button labels for navigation (see ButtonLabels)
- * @property isCanContinue - Whether the primary button should be enabled (e.g. validation passed)
+ * @property shouldAllowContinue - Whether the primary button should be enabled (e.g. validation passed)
  * @property isLoading - Whether a loading/submitting state should be shown (disables buttons and shows loader on primary)
  * Inherits navigation callbacks from CallbackProps (onCancel, onBack, onContinue, onFormSubmit)
  */
@@ -26,8 +26,8 @@ export interface ProgressWizardFooterProps extends CallbackProps {
   isLastStep: boolean;
   toLastStep: () => void;
   baseClassName?: string;
-  labels: ButtonLabels;
-  isCanContinue: boolean;
+  labels?: ButtonLabels;
+  shouldAllowContinue: boolean;
   isLoading: boolean;
 }
 
@@ -47,8 +47,8 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
   isLastStep,
   toLastStep,
   baseClassName = 'progress-wizard-footer',
-  labels,
-  isCanContinue,
+  labels: customLabels,
+  shouldAllowContinue,
   isLoading,
   onBack,
   onCancel,
@@ -71,14 +71,17 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
         }
       }
     };
-  const secondaryLabel = isFirstStep ? labels.cancelLabel : labels.backLabel;
-  const secondaryAria = secondaryLabel ?? 'Go Back';
+
+  const labels: ButtonLabels = {
+    ...Object.fromEntries(Object.entries(DefaultButtonLabels).map(([k, v]) => [k.toLowerCase(), v])),
+    ...customLabels,
+  };
+  const secondaryLabel = isFirstStep ? labels.cancel : labels.back;
   const secondaryOnClick = isFirstStep
     ? onClickStepNavigationAction({ fn: onCancel, distance: 0, skipTo: 'first' })
     : onClickStepNavigationAction({ fn: onBack, distance: -1 });
 
-  const primaryLabel = isLastStep ? labels.submitLabel : !isFirstStep ? labels.continueLabel : labels.startLabel;
-  const primaryAria = primaryLabel ?? (isLastStep ? 'Submit' : !isFirstStep ? 'Continue' : 'Start');
+  const primaryLabel = isLastStep ? labels.submit : !isFirstStep ? labels.continue : labels.start;
   const primaryOnClick = isLastStep
     ? onClickStepNavigationAction({ fn: onFormSubmit })
     : onClickStepNavigationAction({ fn: onContinue, distance: 1 });
@@ -89,7 +92,7 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
         variant={ButtonVariants.secondary}
         type="button"
         className={`${baseClassName}__btn`}
-        aria-label={`Wizard: ${secondaryAria}`}
+        aria-label={`Wizard: ${secondaryLabel}`}
         onClick={async (e) => await secondaryOnClick(e)}
       >
         {secondaryLabel}
@@ -98,9 +101,9 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
         variant={ButtonVariants.primary}
         type={isLastStep ? 'submit' : 'button'}
         className={`${baseClassName}__btn`}
-        aria-label={`Wizard: ${primaryAria}`}
+        aria-label={`Wizard: ${primaryLabel}`}
         onClick={async (e) => await primaryOnClick(e)}
-        isDisabled={!isCanContinue || isLoading}
+        isDisabled={!shouldAllowContinue || isLoading}
       >
         {!isLoading ? primaryLabel : <Loader />}
       </Button>

@@ -27,7 +27,7 @@ describe('useHistoryManagement', () => {
     const { rerender } = renderHook(
       ({ idx }) =>
         useHistoryManagement({
-          manageHistory: true,
+          enabled: true,
           currentStepIndex: idx,
           stepsLength: 3,
           setCurrentStepIndex,
@@ -38,12 +38,12 @@ describe('useHistoryManagement', () => {
     expect(pushStateSpy).toHaveBeenCalledWith({ step: 1 }, '', getLocation());
   });
 
-  it('does not push state if manageHistory is false', () => {
+  it('does not push state if enabled is false', () => {
     const pushStateSpy = vi.spyOn(window.history, 'pushState');
     const setCurrentStepIndex = vi.fn();
     renderHook(() =>
       useHistoryManagement({
-        manageHistory: false,
+        enabled: false,
         currentStepIndex: 1,
         stepsLength: 3,
         setCurrentStepIndex,
@@ -61,7 +61,7 @@ describe('useHistoryManagement', () => {
     vi.spyOn(window, 'removeEventListener').mockImplementation(() => void 0);
     renderHook(() =>
       useHistoryManagement({
-        manageHistory: true,
+        enabled: true,
         currentStepIndex: 1,
         stepsLength: 3,
         setCurrentStepIndex,

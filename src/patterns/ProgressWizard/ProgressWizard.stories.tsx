@@ -1,8 +1,10 @@
 import ProgressWizard, { type ProgressWizardProps } from './ProgressWizard';
 import Input from '../../components/Input/Input';
 import { type ArgTypes } from '@storybook/react';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { LoadingState } from './types';
+import { Text, TextAlignments, TextVariants } from '../../components/Text';
+import { Icon } from '../../components/Icon';
 
 const meta = {
   title: 'Patterns/ProgressWizard',
@@ -11,21 +13,33 @@ const meta = {
 
 export default meta;
 
+const emailValidationRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const argTypes = {
-  startLabel: { control: { type: 'text' } },
-  cancelLabel: { control: { type: 'text' } },
-  backLabel: { control: { type: 'text' } },
-  continueLabel: { control: { type: 'text' } },
-  submitLabel: { control: { type: 'text' } },
+  customHeader: { control: { type: 'text' } },
+  hideNavigation: { control: { type: 'boolean' } },
+  hideProgressIndicator: { control: { type: 'boolean' } },
+  isEnableHistoryManagement: { control: { type: 'boolean' } },
+  currentStepIndex: { control: { type: 'number' } },
+  defaultStepIndex: { control: { type: 'number' } },
+  shouldAllowContinue: { control: { type: 'boolean' } },
   loadingState: {
     control: { type: 'select' },
     options: ['idle', 'submitting', 'loading'],
   },
+  buttonLabels: {
+    control: { type: 'object' },
+    description: 'Object of button labels for start/cancel/back/continue/submit',
+  },
+  'buttonLabels.start': { control: { type: 'text' }, name: 'buttonLabels.start' },
+  'buttonLabels.cancel': { control: { type: 'text' }, name: 'buttonLabels.cancel' },
+  'buttonLabels.back': { control: { type: 'text' }, name: 'buttonLabels.back' },
+  'buttonLabels.continue': { control: { type: 'text' }, name: 'buttonLabels.continue' },
+  'buttonLabels.submit': { control: { type: 'text' }, name: 'buttonLabels.submit' },
   onContinue: { action: 'onContinue' },
+  onBack: { action: 'onBack' },
   onCancel: { action: 'onCancel' },
   onFormSubmit: { action: 'onFormSubmit' },
-  hideNavigation: { control: { type: 'boolean' } },
-  hideProgressIndicator: { control: { type: 'boolean' } },
 } as const;
 
 const gentleMessageStyle = {
@@ -37,7 +51,7 @@ const gentleMessageStyle = {
   top: '5%',
   transform: 'translate(-50%, 0)',
   opacity: '0',
-  transition: 'opacity 0.2s',
+  transition: 'opacity 0.3s',
 };
 
 const gentleMessage = (text: string) => () => {
@@ -49,7 +63,7 @@ const gentleMessage = (text: string) => () => {
     p.style.opacity = '1';
     setTimeout(() => {
       p.style.opacity = '0';
-      setTimeout(() => p.remove(), 500);
+      setTimeout(() => p.remove(), 300);
     }, 2000);
   }, 10);
 };
@@ -76,7 +90,6 @@ const {
 } = callbackGenerators;
 const { onContinue, onCancel, onFormSubmit, onBack } = callbacks;
 
-// Story 1: Basic usage with all callbacks
 export const BasicWizard = () => {
   const [formData, setFormData] = useState({ name: '', age: '' });
 
@@ -86,7 +99,13 @@ export const BasicWizard = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <ProgressWizard onContinue={onContinue} onCancel={onCancel} onFormSubmit={onFormSubmit} onBack={onBack}>
+      <ProgressWizard
+        onContinue={onContinue}
+        onCancel={onCancel}
+        onFormSubmit={onFormSubmit}
+        onBack={onBack}
+        customHeader={<Icon icon="PhillipsLogo" height={32} width={120} aria-label="Phillips Logo" />}
+      >
         <Input
           name="name"
           id="name"
@@ -108,14 +127,13 @@ export const BasicWizard = () => {
 };
 BasicWizard.argTypes = argTypes;
 
-// Story 2: Consumer validation
 export const ValidationWizardWithOnBack = () => {
   const [formData, setFormData] = useState({ email: '' });
   const [error, setError] = useState('');
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    if (!formData.email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
+    if (!formData.email.match(emailValidationRegex)) {
       setError('Please enter a valid email address.');
     } else {
       setError('');
@@ -142,7 +160,6 @@ export const ValidationWizardWithOnBack = () => {
 ValidationWizardWithOnBack.storyName = 'Validation Wizard With `onFormSubmit` hook';
 ValidationWizardWithOnBack.argTypes = argTypes;
 
-// Story 3: Async validation and all on* functions
 export const AsyncValidationWizardWithAllCallbacks = () => {
   const initialState = { email: '', confirm: '' };
   const [formData, setFormData] = useState(initialState);
@@ -155,7 +172,7 @@ export const AsyncValidationWizardWithAllCallbacks = () => {
 
     await new Promise((resolve) => setTimeout(resolve, 500));
     const newErrors = {
-      email: formData.email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/) ? '' : 'Please enter a valid email address.',
+      email: formData.email.match(emailValidationRegex) ? '' : 'Please enter a valid email address.',
       confirm: emailIsValid.current ? (formData.email === formData.confirm ? '' : 'Emails must match.') : '',
     };
     setLoading(false);
@@ -213,7 +230,48 @@ export const AsyncValidationWizardWithAllCallbacks = () => {
 };
 AsyncValidationWizardWithAllCallbacks.argTypes = argTypes;
 
-// Story 4: External step control via currentStepIndex
+export const ShouldAllowContinue = () => {
+  const [formData, setFormData] = useState({ email: '' });
+  const [error, setError] = useState('');
+
+  const validateLocal = useCallback(() => {
+    const isValid = formData.email.match(emailValidationRegex);
+    if (formData.email) setError(isValid ? '' : "doesn't really look valid");
+    return !!isValid;
+  }, [formData.email]);
+
+  const shouldAllowContinue = useMemo(() => validateLocal(), [validateLocal]);
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onFormSubmit();
+      }}
+    >
+      <ProgressWizard
+        shouldAllowContinue={shouldAllowContinue}
+        onFormSubmit={onFormSubmit}
+        customHeader={
+          <Text align={TextAlignments.center} variant={TextVariants.body1}>
+            No validation on submit, controlled instead by `shouldAllowContinue` prop
+          </Text>
+        }
+      >
+        <Input
+          name="email"
+          id="email-should-continue"
+          labelText="E-mail Address"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          invalid={!!error}
+          invalidText={error}
+        />
+      </ProgressWizard>
+    </form>
+  );
+};
+ShouldAllowContinue.argTypes = argTypes;
 
 export const ExternalStepControlWizard = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
@@ -286,14 +344,11 @@ export const Playground: {
     customHeader,
     hideNavigation,
     hideProgressIndicator,
-    manageHistory,
+    isEnableHistoryManagement,
     currentStepIndex,
-    loadingState = LoadingState.Idle,
-    startLabel = 'Start',
-    cancelLabel = 'Cancel',
-    backLabel = 'Back',
-    continueLabel = 'Continue',
-    submitLabel = 'Submit',
+    loadingState,
+    shouldAllowContinue,
+    buttonLabels,
     onBack,
     onCancel,
     onContinue,
@@ -303,16 +358,13 @@ export const Playground: {
       <form onSubmit={(data) => alert(`Submitted:\n${JSON.stringify(data, null, 2)}`)}>
         <ProgressWizard
           customHeader={customHeader}
+          shouldAllowContinue={shouldAllowContinue}
           hideNavigation={hideNavigation}
           hideProgressIndicator={hideProgressIndicator}
-          manageHistory={manageHistory}
+          isEnableHistoryManagement={isEnableHistoryManagement}
           currentStepIndex={currentStepIndex}
           loadingState={loadingState}
-          startLabel={startLabel}
-          cancelLabel={cancelLabel}
-          backLabel={backLabel}
-          continueLabel={continueLabel}
-          submitLabel={submitLabel}
+          buttonLabels={buttonLabels}
           onBack={onBack}
           onCancel={onCancel}
           onContinue={onContinue}

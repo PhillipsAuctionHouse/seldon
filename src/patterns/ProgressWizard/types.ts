@@ -16,6 +16,25 @@ export enum LoadingState {
   Submitting = 'submitting',
 }
 
+type StrictLowercase<K> = K extends string ? Lowercase<K> : never;
+type CapitalizationInsensitiveObject<T> = T & { [K in keyof T as StrictLowercase<K>]: T[K] };
+
+const makeCapitalizationInsensitivePseudoEnum = <T extends object>(obj: T) =>
+  Object.fromEntries(
+    Object.keys(obj).flatMap((k) => [
+      [k, k],
+      [k.toLowerCase(), k],
+    ]),
+  ) as Readonly<CapitalizationInsensitiveObject<T>>;
+
+export const DefaultButtonLabels = makeCapitalizationInsensitivePseudoEnum({
+  Start: 'Start',
+  Cancel: 'Cancel',
+  Back: 'Back',
+  Continue: 'Continue',
+  Submit: 'Submit',
+} as const);
+
 export type SetCurrentStepIndex = Dispatch<SetStateAction<number>>;
 
 /*                          *\
@@ -36,30 +55,23 @@ export type ButtonLabels = {
   /**
    * Label for the start button (primary, first step)
    */
-  startLabel?: string;
+  start?: string;
   /**
    * Label for the cancel button (secondary, first step)
    */
-  cancelLabel?: string;
+  cancel?: string;
   /**
    * Label for the back button (secondary, middle step)
    */
-  backLabel?: string;
+  back?: string;
   /**
    * Label for the continue button (primary, middle step)
    */
-  continueLabel?: string;
+  continue?: string;
   /**
    * Label for the submit button (primary, last step)
    */
-  submitLabel?: string;
-};
-
-/**
- * @internal __forceInternalStepNavigation - Forces internal step state management even when currentStepIndex is provided.
- */
-type SecretProps = {
-  __forceInternalStepNavigation?: boolean;
+  submit?: string;
 };
 
 /**
@@ -68,10 +80,13 @@ type SecretProps = {
  * @property customHeader - Optional custom header ReactNode rendered above the progress indicator (e.g. logo or contextual banner)
  * @property hideNavigation - If true, hides the default footer navigation (consumer is responsible for changing steps)
  * @property hideProgressIndicator - If true, hides the progress indicator bar entirely
- * @property loadingState - Current loading state (see LoadingState) used to show loading UI / disable buttons
- * @property manageHistory - If true (default) advancing steps pushes a browser history state so back/forward navigates steps
+ * @property isEnableHistoryManagement - If true (default) advancing steps pushes a browser history state so back/forward navigates steps
  * @property continueLabel - Label for the primary button on middle steps.
  * @property currentStepIndex - Controlled current step index (0‑based). When provided internal step state will not auto‑advance
+ * @property defaultStepIndex - Default step index (0‑based). Used to initialize the internal step state.
+ * @property shouldAllowContinue - If true, allows advancing to the next step.
+ * @property loadingState - Current loading state (see LoadingState) used to show loading UI / disable buttons
+ * @property buttonLabels - Button labels for the footer navigation buttons (start/cancel/back/continue/submit)
  */
 
 // duplicate documentation below for Storybook descriptions
@@ -91,20 +106,28 @@ export type ProgressWizardBaseProps = {
   /**
    * If true, the wizard will push history states on step changes, allowing the browser back/forward buttons to navigate between steps. Default is true.
    */
-  manageHistory?: boolean;
+  isEnableHistoryManagement?: boolean;
   /**
    * Set the current step index manually. If provided, the footer buttons will not automatically switch steps.
    */
   currentStepIndex?: number;
   /**
+   * Default step index (0‑based). Used to initialize the internal step state.
+   */
+  defaultStepIndex?: number;
+  /**
    *  Set false to disable continue/submit buttons
    */
-  isCanContinue?: boolean;
+  shouldAllowContinue?: boolean;
   /**
    * Current loading state (see LoadingState)
    */
   loadingState?: LoadingState;
-} & SecretProps;
+  /**
+   * Button labels for the footer navigation buttons (start/cancel/back/continue/submit)
+   */
+  buttonLabels?: ButtonLabels;
+};
 
 /**
  * Callback props for ProgressWizard navigation lifecycle.
