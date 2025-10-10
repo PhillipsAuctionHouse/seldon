@@ -25,6 +25,15 @@ const config: StorybookConfig = {
         ...(process.env.NODE_ENV === 'production' ? { '../fonts': path.resolve(__dirname, '../public/fonts/') } : {}),
       };
     }
+    config.server = {
+      ...(config.server || {}),
+      watch: {
+        ...(config.server?.watch || {}),
+        ignored: [
+          '**/coverage/**', // otherwise, the end of the coverage process means a page reload per file in src/ if Storybook is running
+        ],
+      },
+    };
     return {
       ...config,
     };

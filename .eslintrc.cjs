@@ -28,7 +28,14 @@ module.exports = {
   plugins: ['react-refresh', 'local-rules'],
   rules: {
     'react-refresh/only-export-components': 'warn',
-    'react/boolean-prop-naming': ['warn', {}],
+    'react/boolean-prop-naming': [
+      'warn',
+      {
+        rule: '^(is|has|should)[A-Z]([A-Za-z0-9]?)+',
+        message: 'Boolean props should be named with is/has/should prefix',
+        validateNested: true,
+      },
+    ],
     'require-await': 'warn',
     '@typescript-eslint/no-floating-promises': ['error'],
     'no-unused-vars': 'off',
