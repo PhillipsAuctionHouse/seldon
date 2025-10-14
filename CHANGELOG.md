@@ -1,3 +1,10 @@
+## [1.204.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.204.0...v1.204.1) (2025-10-14)
+
+
+### Bug Fixes
+
+* **Filter:** L3-7927 Filter Fixes Dropdown update ([#740](https://github.com/PhillipsAuctionHouse/seldon/issues/740)) ([5cd16c3](https://github.com/PhillipsAuctionHouse/seldon/commit/5cd16c39a80edabb79dd7005b8931b19769850a2))
+
 # [1.204.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.203.0...v1.204.0) (2025-10-09)
 
 
