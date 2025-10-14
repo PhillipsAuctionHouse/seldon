@@ -1,6 +1,11 @@
 @use '#scss/vars' as *;
 @use '#scss/type' as *;
 
+span.h2.custom {
+  font-size: 5rem;
+  margin-bottom: $spacing-md;
+}
+
 span.h2 {
   color: $black-100;
 }
@@ -11,6 +16,11 @@ span.h3 {
 
 .hr {
   margin: $margin-lg 0;
+}
+
+.link {
+  font-weight: 600;
+  text-decoration: underline;
 }
 
 .radius-token-demo {
