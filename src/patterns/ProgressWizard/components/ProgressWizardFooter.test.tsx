@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest';
 import Footer, { type ProgressWizardFooterProps } from './ProgressWizardFooter';
 import userEvent from '@testing-library/user-event';
 
-const getBtn = (label: string) => screen.getByRole('button', { name: `Wizard: ${label}` });
+const getBtn = (label: string) => screen.getByRole('button', { name: `Progress Wizard: ${label}` });
 
 const baseProps: ProgressWizardFooterProps = {
   setCurrentStepIndex: vi.fn(),

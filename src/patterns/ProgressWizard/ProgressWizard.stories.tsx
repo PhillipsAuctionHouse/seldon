@@ -63,26 +63,18 @@ const gentleMessage = (text: string) => () => {
   }, 10);
 };
 
-const callbackNames = ['onContinue', 'onCancel', 'onFormSubmit', 'onBack'] as const;
+const callbacks = {
+  onContinue: gentleMessage('onContinue called'),
+  onCancel: gentleMessage('onCancel called'),
+  onFormSubmit: gentleMessage('onFormSubmit called'),
+  onBack: gentleMessage('onBack called'),
+};
 
-const callbackGenerators = Object.fromEntries(
-  callbackNames.map((name) => [
-    `genOn${name.slice(2)}`,
-    (shouldContinue: boolean) => (): false | void => {
-      gentleMessage(`${name} called`);
-      return shouldContinue !== false ? void 0 : false;
-    },
-  ]),
-);
+const genOnContinue = (shouldContinue: boolean) => () => {
+  gentleMessage('onContinue called')();
+  return shouldContinue !== false ? void 0 : false;
+};
 
-const callbacks = Object.fromEntries(callbackNames.map((name) => [name, gentleMessage(`${name} called`)]));
-
-const {
-  genOnContinue,
-  genOnCancel: _genOnCancel,
-  genOnFormSubmit: _genOnFormSubmit,
-  genOnBack: _genOnBack,
-} = callbackGenerators;
 const { onContinue, onCancel, onFormSubmit, onBack } = callbacks;
 
 export const BasicWizard = () => {
@@ -165,11 +157,13 @@ export const AsyncValidationWizardWithAllCallbacks = () => {
   const validate = useCallback(async () => {
     setLoading(true);
 
+
     await new Promise((resolve) => setTimeout(resolve, 500));
     const newErrors = {
       email: formData.email.match(emailValidationRegex) ? '' : 'Please enter a valid email address.',
       confirm: emailIsValid.current ? (formData.email === formData.confirm ? '' : 'Emails must match.') : '',
     };
+
     setLoading(false);
     setErrors(newErrors);
     emailIsValid.current = newErrors.email === '';

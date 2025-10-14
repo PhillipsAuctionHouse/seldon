@@ -92,7 +92,7 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
         variant={ButtonVariants.secondary}
         type="button"
         className={`${baseClassName}__btn`}
-        aria-label={`Wizard: ${secondaryLabel}`}
+        aria-label={`Progress Wizard: ${secondaryLabel}`}
         onClick={async (e) => await secondaryOnClick(e)}
       >
         {secondaryLabel}
@@ -101,7 +101,7 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
         variant={ButtonVariants.primary}
         type={isLastStep ? 'submit' : 'button'}
         className={`${baseClassName}__btn`}
-        aria-label={`Wizard: ${primaryLabel}`}
+        aria-label={`Progress Wizard: ${primaryLabel}`}
         onClick={async (e) => await primaryOnClick(e)}
         isDisabled={!shouldAllowContinue || isLoading}
       >

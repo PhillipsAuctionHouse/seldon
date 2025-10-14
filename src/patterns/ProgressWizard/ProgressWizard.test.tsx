@@ -70,7 +70,7 @@ const ConsumerForm = ({
   );
 };
 
-const getWizName = (label: string) => ({ name: `Wizard: ${label}` });
+const getWizName = (label: string) => ({ name: `Progress Wizard: ${label}` });
 
 describe('ProgressWizard', () => {
   beforeEach(() => {
@@ -157,7 +157,7 @@ describe('ProgressWizard', () => {
         <Input name="name" id="name" labelText="Name*" />
       </ProgressWizard>,
     );
-    expect(screen.queryByRole('button', { name: /Wizard:/ })).toBeNull();
+    expect(screen.queryByRole('button', { name: /Progress Wizard:/ })).toBeNull();
   });
 
   it('handles loading state during form submission', async () => {
@@ -233,7 +233,7 @@ describe('ProgressWizard', () => {
         <Input name="name" id="name" labelText="Name*" />
       </ProgressWizard>,
     );
-    expect(screen.queryByRole('button', { name: /Wizard:/ })).toBeNull();
+    expect(screen.queryByRole('button', { name: /Progress Wizard:/ })).toBeNull();
   });
 
   it('renders custom labels and translation', () => {
