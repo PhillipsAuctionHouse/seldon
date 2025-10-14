@@ -2,6 +2,7 @@ import { Meta } from '@storybook/react';
 import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';
 import { px } from '../../utils';
+import { Icon } from '../../components/Icon';
 import { getScssVar } from '../../utils/scssUtils';
 import SaleCard, { SaleCardProps } from './SaleCard';
 import { SaleCardActions } from './SaleCardActions';
@@ -117,13 +118,12 @@ export const SaleCardWithPrimaryAndSecondaryCTA = () => (
         >
           Join Sale room
         </Button>
-        <Button
-          onClick={() => console.log('Secondary button clicked')}
-          variant={ButtonVariants.secondary}
-          style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
-        >
-          Register to bid
-        </Button>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', width: '100%' }}>
+          <span>Registered as Paddle 7003</span>
+          <Button variant={ButtonVariants.tertiary}>
+            <Icon icon="Tooltip" height={16} width={16} aria-hidden />
+          </Button>
+        </div>
       </SaleCardActions>
     </SaleCard>
     {divider}
