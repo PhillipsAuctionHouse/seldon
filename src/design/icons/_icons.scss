@@ -33,7 +33,7 @@
   .icons-container--dark,
   .picto-container,
   .picto-container--dark {
-    border-radius: 1rem;
+    border-radius: $radius-md;
     display: flex;
     gap: 1rem;
     justify-content: center;
@@ -48,7 +48,7 @@
 .icon-grid-wrapper,
 .picto-grid-wrapper {
   border: 1px solid $pure-black;
-  border-radius: 5px;
+  border-radius: $radius-xs;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   margin-top: 24px;
