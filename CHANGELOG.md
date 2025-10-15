@@ -1,3 +1,10 @@
+## [1.204.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.204.1...v1.204.2) (2025-10-15)
+
+
+### Bug Fixes
+
+* **drawer:** L3-7876 - added z index to close button ([#743](https://github.com/PhillipsAuctionHouse/seldon/issues/743)) ([f860ff5](https://github.com/PhillipsAuctionHouse/seldon/commit/f860ff5230b31364265c80f853a2bfb3d9040c93))
+
 ## [1.204.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.204.0...v1.204.1) (2025-10-14)
 
 
