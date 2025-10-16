@@ -74,7 +74,8 @@
 
   @if $label == 'link' {
     font-size: $link-label-size;
-    letter-spacing: 1px;
+    font-variation-settings: 'wght' 400;
+    letter-spacing: 0;
     line-height: $link-label-line-height;
     text-transform: capitalize;
   }
