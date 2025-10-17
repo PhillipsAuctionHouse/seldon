@@ -44,7 +44,7 @@ describe('Text', () => {
   it('applies the default variant correctly', () => {
     renderText({ children: 'Default Variant' });
 
-    expect(screen.getByText('Default Variant')).toHaveClass(`${px}-text--body2`);
+    expect(screen.getByText('Default Variant')).toHaveClass(`${px}-text--bodyMedium`);
   });
 
   it('applies the custom variant correctly', () => {
