@@ -1,6 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-button {
+  // TODO: We really to remove this and instead use the Text component
   @include bodyText;
   @include labelText($button);
 

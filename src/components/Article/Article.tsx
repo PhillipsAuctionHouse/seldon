@@ -3,7 +3,7 @@ import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { SeldonImage } from '../SeldonImage';
 import { Text, TextVariants } from '../Text';
-import { Link, LinkProps } from '../Link';
+import { Link, LinkProps, LinkVariants } from '../Link';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface ArticleProps extends ComponentProps<'div'> {
@@ -55,7 +55,7 @@ const Article = forwardRef<HTMLDivElement, ArticleProps>(
           ) : null}
 
           {linkLabel ? (
-            <Component href={linkHref} className={`${baseClassName}__content-link`}>
+            <Component href={linkHref} variant={LinkVariants.linkSmall} className={`${baseClassName}__content-link`}>
               {linkLabel}
             </Component>
           ) : null}

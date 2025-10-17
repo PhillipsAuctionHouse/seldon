@@ -1,5 +1,4 @@
 import Text from '../../components/Text/Text';
-import { TextVariants } from '../../components/Text';
 import classnames from 'classnames';
 import { getSafeCountryCallingCode } from './utils';
 import { Country, ModalBaseProps } from './types';
@@ -59,14 +58,8 @@ export const CountryPickerOption = ({
         }}
       />
       <span className={`${baseClassName}__option-content`}>
-        <Text variant={TextVariants.string2} className={`${baseClassName}__option-name`}>
-          {name}
-        </Text>
-        {isPhone && (
-          <Text variant={TextVariants.string2} className={`${baseClassName}__option-code`}>
-            +{getSafeCountryCallingCode(code)}
-          </Text>
-        )}
+        <Text className={`${baseClassName}__option-name`}>{name}</Text>
+        {isPhone && <Text className={`${baseClassName}__option-code`}>+{getSafeCountryCallingCode(code)}</Text>}
       </span>
       <img
         src={`https://flagcdn.com/24x18/${code.toLowerCase()}.png`}

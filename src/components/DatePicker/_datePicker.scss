@@ -2,6 +2,10 @@
 @use '#scss/allPartials' as *;
 @import 'flatpickr/dist/flatpickr.css';
 
+.#{$px}-date-picker {
+  font-size: $font-size-body-medium;
+}
+
 .flatpickr-calendar {
   @include DistinctText;
 

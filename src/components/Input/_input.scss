@@ -9,22 +9,16 @@ $lg: #{$px}-input--lg;
   flex-direction: column;
   width: 100%;
 
-  &--hidden {
+  &--hidden,
+  &__label--hidden {
     @include hidden;
   }
 
-  &__label {
-    @include text($string2);
-
-    color: $pure-black;
+  &__label.#{$px}-text {
     font-variation-settings: 'wght' 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: $spacing-xsm;
     width: fit-content;
     word-break: break-word;
-
-    &--hidden {
-      @include hidden;
-    }
   }
 
   &__wrapper {
@@ -72,7 +66,7 @@ $lg: #{$px}-input--lg;
   }
 
   &__input {
-    @include text($string2);
+    @include text($bodyMedium);
 
     accent-color: $black-100;
     border: 1px solid $black-100;
@@ -197,6 +191,12 @@ $lg: #{$px}-input--lg;
 
 .#{$px}-radio-input,
 .#{$px}-checkbox-input {
+  .#{$px}-input__label {
+    @include text($bodyMedium);
+
+    font-variation-settings: 'wght' 600;
+  }
+
   .#{$px}-input__input {
     align-self: flex-start;
     cursor: pointer;

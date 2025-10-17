@@ -7,6 +7,10 @@
     flex-wrap: wrap;
     gap: 0 $spacing-sm;
     padding-bottom: $spacing-xsm;
+
+    .#{$px}-detail__value .#{$px}-text {
+      font-variation-settings: 'wght' 600;
+    }
   }
 
   .#{$px}-countdown {

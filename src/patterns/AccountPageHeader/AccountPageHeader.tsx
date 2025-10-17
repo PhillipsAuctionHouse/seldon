@@ -74,7 +74,10 @@ const AccountPageHeader = forwardRef<HTMLDivElement, AccountPageHeaderProps>(
           <>
             <SSRMediaQuery.Media greaterThanOrEqual="md">
               <Button variant={ButtonVariants.secondary} onClick={primaryButton.onClick}>
-                <Icon icon={primaryButton.icon} /> {primaryButton.label}
+                <Icon icon={primaryButton.icon} />{' '}
+                <Text className={`${baseClassName}__button-label`} variant={TextVariants.bodySmall}>
+                  {primaryButton.label}
+                </Text>
               </Button>
             </SSRMediaQuery.Media>
             <SSRMediaQuery.Media lessThan="md">
@@ -90,22 +93,14 @@ const AccountPageHeader = forwardRef<HTMLDivElement, AccountPageHeaderProps>(
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} ref={ref}>
         <div className={`${baseClassName}__container`}>
-          {overline && (
-            <Text variant={TextVariants.string2} className={`${baseClassName}__overline`}>
-              {overline}
-            </Text>
-          )}
+          {overline && <Text className={`${baseClassName}__overline`}>{overline}</Text>}
           <div className={`${baseClassName}__title-wrapper`}>
-            <Text variant={TextVariants.title1} className={`${baseClassName}__title`}>
+            <Text variant={TextVariants.headingLarge} className={`${baseClassName}__title`}>
               {title}
             </Text>
             {actionButtons && actionButtons.length > 0 && renderButtons()}
           </div>
-          {subtitle && (
-            <Text variant={TextVariants.string2} className={`${baseClassName}__subtitle`}>
-              {subtitle}
-            </Text>
-          )}
+          {subtitle && <Text className={`${baseClassName}__subtitle`}>{subtitle}</Text>}
         </div>
         {showDivider && <Divider className={`${baseClassName}__divider`} />}
       </div>

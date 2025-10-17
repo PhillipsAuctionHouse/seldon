@@ -5,6 +5,7 @@ import { InputProps } from '../Input/Input';
 import { Merge } from 'type-fest';
 import { SelectVariants } from './types';
 import { Icon } from '../Icon';
+import { Text, TextVariants } from '../Text';
 
 export interface SelectProps extends Merge<InputProps, React.ComponentProps<'select'>> {
   /**
@@ -91,13 +92,17 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     return (
       <div className={wrapperClassnames}>
-        <label
+        <Text
+          // TODO: This should be extracted to a shared InputLabel component
+          element="label"
+          variant={TextVariants.labelMedium}
           data-testid={`${id}-label`}
+          // @ts-expect-error this is actually a label element
           htmlFor={id}
           className={classnames(`${px}-input__label`, { [`${px}-input__label--hidden`]: hideLabel })}
         >
           {labelText}
-        </label>
+        </Text>
         <div className={selectContainerClassnames}>
           <select
             className={selectClassnames}

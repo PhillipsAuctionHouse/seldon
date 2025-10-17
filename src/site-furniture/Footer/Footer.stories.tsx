@@ -20,15 +20,15 @@ export const Playground = (props: FooterProps) => (
   <Footer {...props}>
     {/* desktop version of footer */}
     <div className={`${px}-footer-desktop`}>
-      <Text variant={TextVariants.heading4}>About Us</Text>
+      <Text variant={TextVariants.heading3}>About us</Text>
       {aboutUsLinks}
     </div>
     <div className={`${px}-footer-desktop`}>
-      <Text variant={TextVariants.heading4}>Our Services</Text>
+      <Text variant={TextVariants.heading3}>Our services</Text>
       {ourServicesLinks}
     </div>
     <div className={`${px}-footer-desktop`}>
-      <Text variant={TextVariants.heading4}>Policies</Text>
+      <Text variant={TextVariants.heading3}>Policies</Text>
       {policyLinks}
     </div>
 
@@ -94,10 +94,10 @@ export const Playground = (props: FooterProps) => (
 const aboutUsLinks = (
   <ul>
     <li>
-      <a href="/">Our History</a>
+      <a href="/">Our history</a>
     </li>
     <li>
-      <a href="/">Our Team</a>
+      <a href="/">Our team</a>
     </li>
     <li>
       <a href="/">Locations</a>
@@ -117,19 +117,19 @@ const aboutUsLinks = (
 const ourServicesLinks = (
   <ul>
     <li>
-      <a href="/">How to Buy</a>
+      <a href="/">How to buy</a>
     </li>
     <li>
-      <a href="/">How to Sell</a>
+      <a href="/">How to sell</a>
     </li>
     <li>
-      <a href="/">Private Services</a>
+      <a href="/">Private services</a>
     </li>
     <li>
-      <a href="/">Trusts, Estates & Valuations</a>
+      <a href="/">Trusts, estates & valuations</a>
     </li>
     <li>
-      <a href="/">Fiduciary Services</a>
+      <a href="/">Fiduciary services</a>
     </li>
   </ul>
 );
@@ -137,13 +137,13 @@ const ourServicesLinks = (
 const policyLinks = (
   <ul>
     <li>
-      <a href="/">Privacy Policy</a>
+      <a href="/">Privacy policy</a>
     </li>
     <li>
-      <a href="/">Cookie Policy</a>
+      <a href="/">Cookie policy</a>
     </li>
     <li>
-      <a href="/">Modern Day Slavery Policy</a>
+      <a href="/">Modern day slavery policy</a>
     </li>
   </ul>
 );

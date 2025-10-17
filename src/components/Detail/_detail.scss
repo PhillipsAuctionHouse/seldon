@@ -8,12 +8,13 @@
   display: flex;
   gap: $spacing-md;
 
-  @include text($string2);
-
-  &__label {
+  &__label-section {
     flex-shrink: 0;
-    font-variation-settings: 'wght' 600;
     width: 160px;
+
+    &--label.#{$px}-text {
+      font-variation-settings: 'wght' 600;
+    }
 
     @media (max-width: $breakpoint-lg) {
       width: 128px;
