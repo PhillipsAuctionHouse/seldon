@@ -9,6 +9,7 @@ import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 import { ComboBoxOption } from './types';
 import { usePrevious } from '../../utils/usePrevious';
+import { Text, TextVariants } from '../Text';
 
 export interface ComboBoxProps {
   /**
@@ -392,7 +393,10 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
         />
       )}
       <div ref={containerRef} className={`${baseClassName}__wrapper`}>
-        <label
+        <Text
+          element="label"
+          variant={TextVariants.labelMedium}
+          // @ts-expect-error this is actually a label element
           htmlFor={`${id}-input`}
           className={classnames(`${baseClassName}__label`, {
             [`${baseClassName}__label--hidden`]: hideLabel,
@@ -401,7 +405,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
           data-testid={`${id}-label`}
         >
           {labelText}
-        </label>
+        </Text>
 
         <Command
           loop

@@ -9,7 +9,8 @@ $lg: #{$px}-input--lg;
   flex-direction: column;
   width: 100%;
 
-  &--hidden {
+  &--hidden,
+  &__label--hidden {
     @include hidden;
   }
 

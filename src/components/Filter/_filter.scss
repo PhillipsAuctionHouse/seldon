@@ -30,7 +30,7 @@ $chevron-scale: 0.8;
 
 .#{$px}-filter {
   &-header {
-    margin-bottom: $spacing-md;
+    margin-bottom: $spacing-sm;
 
     legend {
       padding-inline: 0; // needed for default browser styles
@@ -101,8 +101,10 @@ $chevron-scale: 0.8;
     &__wrapper {
       display: flex;
       flex-direction: row;
-      height: 40px;
       justify-content: space-between;
+      .#{$px}-text {
+        font-variation-settings: 'wght' 600;
+      }
     }
   }
 }

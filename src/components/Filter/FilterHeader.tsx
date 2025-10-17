@@ -40,7 +40,7 @@ const FilterHeader = forwardRef<HTMLDivElement, FilterHeaderProps>(
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         <Text
-          variant={TextVariants.labelLarge}
+          variant={TextVariants.headingSmall}
           className={`${baseClassName}__heading`}
           element={(props) => <legend {...props}>{heading}</legend>}
         />

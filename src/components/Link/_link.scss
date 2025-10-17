@@ -9,6 +9,12 @@
     @include underline;
   }
 
+  &--linkSmall,
+  &--linkMedium,
+  &--linkLarge {
+    @include underline($offset: 1px);
+  }
+
   &--email,
   &--link {
     &:hover,

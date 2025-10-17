@@ -45,8 +45,8 @@
     }
 
     &-text {
-      color: $pure-black;
       flex: 1;
+      font-variation-settings: 'wght' 600;
       overflow: hidden;
       text-align: left;
       text-overflow: ellipsis;

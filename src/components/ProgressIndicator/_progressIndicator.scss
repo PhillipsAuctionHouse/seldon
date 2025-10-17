@@ -47,6 +47,10 @@
       text-align: center;
       white-space: nowrap;
     }
+
+    @include media($breakpoint-lg) {
+      margin-bottom: 0;
+    }
   }
 
   &__connector {

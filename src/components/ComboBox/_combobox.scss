@@ -23,8 +23,6 @@
   }
 
   &__input {
-    @include text($string2);
-
     accent-color: $soft-black;
     border: 1px solid $keyline-gray;
     border-radius: 0.1875rem;
@@ -61,8 +59,6 @@
   }
 
   &__label {
-    @include text($string2);
-
     color: $pure-black;
     display: inline-block;
     font-variation-settings: 'wght' 600;
