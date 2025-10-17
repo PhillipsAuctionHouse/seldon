@@ -14,7 +14,7 @@ $lg: #{$px}-input--lg;
   }
 
   &__label {
-    @include text($bodyLarge);
+    @include text($bodyMedium);
 
     color: $pure-black;
     font-variation-settings: 'wght' 600;
@@ -72,7 +72,7 @@ $lg: #{$px}-input--lg;
   }
 
   &__input {
-    @include text($string2);
+    @include text($bodyMedium);
 
     accent-color: $black-100;
     border: 1px solid $black-100;
@@ -197,6 +197,12 @@ $lg: #{$px}-input--lg;
 
 .#{$px}-radio-input,
 .#{$px}-checkbox-input {
+  .#{$px}-input__label {
+    @include text($bodyMedium);
+
+    font-variation-settings: 'wght' 600;
+  }
+
   .#{$px}-input__input {
     align-self: flex-start;
     cursor: pointer;
