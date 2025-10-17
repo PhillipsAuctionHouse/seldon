@@ -157,7 +157,6 @@ export const AsyncValidationWizardWithAllCallbacks = () => {
   const validate = useCallback(async () => {
     setLoading(true);
 
-
     await new Promise((resolve) => setTimeout(resolve, 500));
     const newErrors = {
       email: formData.email.match(emailValidationRegex) ? '' : 'Please enter a valid email address.',
