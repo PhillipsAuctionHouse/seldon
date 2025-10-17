@@ -11,7 +11,7 @@
   }
 
   &__title {
-    @include text($headingMedium, $text-transform: uppercase);
+    text-transform: uppercase;
   }
 
   &__image {
@@ -76,13 +76,8 @@
   &__badge {
     border: 1px solid $badge-blue;
     color: $badge-blue;
-    font-size: 0.75rem;
     padding: $spacing-micro 8px;
     text-transform: unset;
-  }
-
-  &__auction-type {
-    font-size: 0.75rem;
   }
 
   &__cta-button {
@@ -91,8 +86,9 @@
     width: 100%;
   }
 
-  &__modal-link {
+  &__modal-link-button {
     cursor: pointer;
+    font-variation-settings: 'wght' 400;
 
     @include underline;
   }
@@ -132,9 +128,6 @@
       @include media($size-xl) {
         max-width: calc($spacing-xxxl * 1.25);
       }
-    }
-    .#{$px}-sale-card__auction-type {
-      font-size: 0.5rem;
     }
   }
 }

@@ -6,6 +6,12 @@
   flex-direction: column;
   margin-bottom: $spacing-md;
 
+  &__header-label {
+    font-variation-settings: 'wght' 500;
+    margin-bottom: $spacing-xsm;
+    text-transform: uppercase;
+  }
+
   .fresnel-container {
     width: 100%;
   }
@@ -49,7 +55,6 @@
   &__badge {
     border: 1px solid $badge-blue;
     color: $badge-blue;
-    font-size: $string-size3;
     margin: $spacing-xsm 0;
     padding: $spacing-micro $spacing-xsm;
   }

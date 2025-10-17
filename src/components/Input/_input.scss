@@ -13,18 +13,11 @@ $lg: #{$px}-input--lg;
     @include hidden;
   }
 
-  &__label {
-    @include text($bodyMedium);
-
-    color: $pure-black;
+  &__label.#{$px}-text {
     font-variation-settings: 'wght' 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: $spacing-xsm;
     width: fit-content;
     word-break: break-word;
-
-    &--hidden {
-      @include hidden;
-    }
   }
 
   &__wrapper {

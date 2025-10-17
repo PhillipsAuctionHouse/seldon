@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 
 import { ComponentProps, ElementType, forwardRef } from 'react';
-import { Link, LinkProps } from '../../components/Link';
+import { Link, LinkProps, LinkVariants } from '../../components/Link';
 import { Text, TextVariants } from '../../components/Text';
 import { getCommonProps } from '../../utils';
 
@@ -106,11 +106,7 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
                     {session.sessionLabel}
                   </Text>
                 )}
-                {session.sessionTime && (
-                  <Text variant={TextVariants.body2} className={`${baseClassName}__text`}>
-                    {session.sessionTime}
-                  </Text>
-                )}
+                {session.sessionTime && <Text className={`${baseClassName}__text`}>{session.sessionTime}</Text>}
               </div>
             ))}
           {label && (
@@ -121,19 +117,17 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
           {viewingTimes &&
             viewingTimes.length > 0 &&
             viewingTimes.map((time) => (
-              <Text key={time} variant={TextVariants.body2} className={`${baseClassName}__label`}>
+              <Text key={time} className={`${baseClassName}__viewing-time`}>
                 {time}
               </Text>
             ))}
 
-          {location && (
-            <Text variant={TextVariants.body2} className={`${baseClassName}__location`}>
-              {location}
-            </Text>
-          )}
+          {location && <Text className={`${baseClassName}__location`}>{location}</Text>}
           {mapLink && (
-            <Text variant={TextVariants.body2} className={`${baseClassName}__map-link`}>
-              <Component href={mapLink}>(Map)</Component>
+            <Text className={`${baseClassName}__map-link`}>
+              <Component href={mapLink} variant={LinkVariants.linkSmall}>
+                (Map)
+              </Component>
             </Text>
           )}
         </div>

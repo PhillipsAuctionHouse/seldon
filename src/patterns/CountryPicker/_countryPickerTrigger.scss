@@ -7,9 +7,6 @@
     width: 100%;
 
     &-label {
-      @include text($string2);
-
-      color: $pure-black;
       font-variation-settings: 'wght' 600;
       margin-bottom: $spacing-xsm;
 

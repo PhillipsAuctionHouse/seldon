@@ -52,7 +52,8 @@ const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & Inte
     return (
       <div className={classNames(`${baseClassName}__trigger`, className)}>
         <Text
-          variant={TextVariants.string2}
+          element="label"
+          variant={TextVariants.labelMedium}
           className={classNames(`${baseClassName}__trigger-label`, {
             [`${baseClassName}__trigger-label--error`]: hasError,
           })}

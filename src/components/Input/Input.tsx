@@ -1,6 +1,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import { px, useNormalizedInputProps } from '../../utils';
+import { Text, TextVariants } from '../Text';
 
 export interface InputProps extends Omit<React.ComponentProps<'input'>, 'size'> {
   /**
@@ -210,16 +211,19 @@ const Input = React.forwardRef(
     };
     return (
       <div className={wrapperClassnames}>
-        <label
-          data-testid={`label-${id}`}
-          htmlFor={id}
+        <Text
+          element="label"
+          variant={TextVariants.labelMedium}
           className={classnames(`${px}-input__label`, {
             [`${px}-input__label--hidden`]: hideLabel,
             [`${px}-skeleton`]: isSkeletonLoading,
           })}
+          data-testid={`label-${id}`}
+          // @ts-expect-error this is actually a label element
+          htmlFor={id}
         >
           {labelText}
-        </label>
+        </Text>
         {inputAdornment && isAdornmentInputType ? (
           <div className={`${px}-input__wrapper`} data-testid={`wrapper-${id}`}>
             {adornmentPosition === 'start' && (

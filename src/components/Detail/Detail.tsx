@@ -1,6 +1,7 @@
 import React, { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
+import { Text, TextVariants } from '../Text';
 
 export interface DetailProps extends ComponentProps<'div'> {
   /*
@@ -36,10 +37,17 @@ const Detail = forwardRef<HTMLDivElement, DetailProps>(
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        <dt className={classnames(`${baseClassName}__label`, { [`${baseClassName}__label--no-wrap`]: !hasWrap })}>
-          {label} {subLabel ? <span>{subLabel}</span> : null}
+        <dt
+          className={classnames(`${baseClassName}__label-section`, { [`${baseClassName}__label--no-wrap`]: !hasWrap })}
+        >
+          <Text variant={TextVariants.bodySmall} className={classnames(`${baseClassName}__label-section--label`)}>
+            {label}
+          </Text>{' '}
+          {subLabel ? <Text variant={TextVariants.bodySmall}>{subLabel}</Text> : null}
         </dt>
-        <dd className={`${baseClassName}__value`}>{value}</dd>
+        <dd className={`${baseClassName}__value`}>
+          <Text variant={TextVariants.bodySmall}>{value}</Text>
+        </dd>
       </div>
     );
   },

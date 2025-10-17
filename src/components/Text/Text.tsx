@@ -34,7 +34,15 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
 
 const Text = forwardRef<HTMLElement, TextProps>(
   (
-    { children, className, element: CustomElement, variant = TextVariants.body2, align, isSkeletonLoading, ...props },
+    {
+      children,
+      className,
+      element: CustomElement,
+      variant = TextVariants.bodyMedium,
+      align,
+      isSkeletonLoading,
+      ...props
+    },
     ref,
   ) => {
     const Component = CustomElement || determineDefaultTextElement(variant);

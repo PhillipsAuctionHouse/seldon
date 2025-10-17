@@ -7,6 +7,10 @@
   gap: $spacing-xsm;
   text-align: center;
 
+  &__link .#{$px}-text {
+    font-variation-settings: 'wght' 400;
+  }
+
   &__description.#{$px}-text {
     margin-bottom: 0;
   }

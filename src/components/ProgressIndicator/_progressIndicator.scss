@@ -40,6 +40,7 @@
 
   &__label {
     display: none;
+    margin-bottom: $spacing-micro;
 
     @media (min-width: $breakpoint-md) {
       display: inline-block;

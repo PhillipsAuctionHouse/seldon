@@ -148,7 +148,7 @@
 
 @mixin link-styles(
   $font-size,
-  $font-weight: 600,
+  $font-weight: 400,
   $text-transform: unset,
   $font-style: unset,
   $text-decoration: underline
@@ -214,9 +214,7 @@
   }
 
   @if $token == 'link' {
-    @include label-styles($label);
-
-    font-size: $font-size-label-small;
+    @include link-styles($font-size: $font-size-link-medium);
   }
 
   @if $token == 'button' {
@@ -230,14 +228,19 @@
   }
 
   @if $token == 'snwHeaderLink' {
+    @include link-styles(
+      $font-size: $font-size-link-stylised,
+      $font-weight: 600,
+      $text-transform: uppercase,
+      $text-decoration: unset
+    );
     @include DistinctDisplay;
-    @include link-styles($font-size: $font-size-link-stylised, $text-transform: uppercase, $text-decoration: unset);
 
     letter-spacing: 1px;
   }
 
   @if $token == 'snwFlyoutLink' {
-    @include link-styles($font-size-link-large, $font-weight: 400, $text-decoration: unset);
+    @include link-styles($font-size: $font-size-link-large, $text-decoration: unset);
   }
 
   @if $token == 'snwHeadingHero1' {
@@ -327,8 +330,8 @@
   }
 
   @if $token == $linkStylised {
-    @include DistinctDisplay;
     @include link-styles($font-size: $font-size-link-stylised, $text-transform: uppercase, $text-decoration: unset);
+    @include DistinctDisplay;
 
     letter-spacing: 1px;
   }
