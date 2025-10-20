@@ -38,15 +38,22 @@ const Detail = forwardRef<HTMLDivElement, DetailProps>(
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         <dt
-          className={classnames(`${baseClassName}__label-section`, { [`${baseClassName}__label--no-wrap`]: !hasWrap })}
+          className={classnames(`${baseClassName}__label-section`, {
+            [`${baseClassName}__label--no-wrap`]: !hasWrap,
+            [`${baseClassName}__label-section--has-sub-label`]: subLabel,
+          })}
         >
-          <Text variant={TextVariants.bodySmall} className={classnames(`${baseClassName}__label-section--label`)}>
+          <Text variant={TextVariants.labelSmall} className={classnames(`${baseClassName}__label-section--label`)}>
             {label}
           </Text>{' '}
-          {subLabel ? <Text variant={TextVariants.bodySmall}>{subLabel}</Text> : null}
+          {subLabel ? (
+            <Text className={`${baseClassName}__sub-label`} variant={TextVariants.labelSmall}>
+              {subLabel}
+            </Text>
+          ) : null}
         </dt>
         <dd className={`${baseClassName}__value`}>
-          <Text variant={TextVariants.bodySmall}>{value}</Text>
+          <Text variant={TextVariants.labelSmall}>{value}</Text>
         </dd>
       </div>
     );

@@ -23,6 +23,8 @@
   }
 
   &__input {
+    @include text($bodyMedium);
+
     accent-color: $soft-black;
     border: 1px solid $keyline-gray;
     border-radius: 0.1875rem;
@@ -142,7 +144,7 @@
     padding: $padding-micro $padding-xsm;
     transition: background-color 0.1s ease;
 
-    @include text($string2);
+    @include text($bodyMedium);
 
     &:hover,
     &[data-selected='true'] {

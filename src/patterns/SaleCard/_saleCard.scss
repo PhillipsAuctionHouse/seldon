@@ -6,12 +6,23 @@
   flex-direction: column;
   gap: $spacing-md;
 
+  &__auction-type {
+    text-transform: uppercase;
+  }
+
   @include media($breakpoint-snw-mobile) {
     flex-direction: row;
   }
 
   &__title {
-    text-transform: uppercase;
+    &.#{$px}-text {
+      text-transform: uppercase;
+    }
+
+    @media (min-width: $breakpoint-md) and (max-width: $breakpoint-xl) {
+      // TODO: temporary override to keep SaleCard the same as before
+      @include text($headingMedium);
+    }
   }
 
   &__image {
@@ -71,6 +82,13 @@
     display: flex;
     flex-direction: column;
     gap: $spacing-micro;
+
+    .#{$px}-text {
+      @media (min-width: $breakpoint-md) and (max-width: $breakpoint-xl) {
+        // TODO: temporary override to keep SaleCard the same as before
+        @include text($labelMedium);
+      }
+    }
   }
 
   &__badge {

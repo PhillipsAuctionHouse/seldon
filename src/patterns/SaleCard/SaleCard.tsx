@@ -77,10 +77,10 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
       <article {...componentProps} className={classes} ref={ref}>
         {imageSrc ? <SeldonImage src={imageSrc} alt={imageAlt} className={`${baseClassName}__image`} /> : null}
         <div className={`${baseClassName}__details`}>
-          <Text variant={TextVariants.labelMedium} className={`${baseClassName}__auction-type`}>
+          <Text variant={TextVariants.labelSmall} className={`${baseClassName}__auction-type`}>
             {auctionType}
           </Text>
-          <Text variant={TextVariants.headingMedium} className={`${baseClassName}__title`}>
+          <Text variant={TextVariants.headingSmall} className={`${baseClassName}__title`}>
             {titleText}
           </Text>
           {badgeText && (
@@ -89,8 +89,8 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
             </Text>
           )}
           <div className={`${baseClassName}__info`}>
-            <Text variant={TextVariants.labelMedium}>{location}</Text>
-            <Text variant={TextVariants.labelMedium}>{date}</Text>
+            <Text variant={TextVariants.labelSmall}>{location}</Text>
+            <Text variant={TextVariants.labelSmall}>{date}</Text>
             {modalButtonText && modalButtonOnClick && (
               <div className={`${baseClassName}__modal-link`}>
                 <Button
@@ -98,7 +98,7 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
                   variant={ButtonVariants.tertiary}
                   className={`${baseClassName}__modal-link-button`}
                 >
-                  <Text variant={TextVariants.labelMedium}>{modalButtonText}</Text>
+                  <Text variant={TextVariants.labelSmall}>{modalButtonText}</Text>
                 </Button>
               </div>
             )}

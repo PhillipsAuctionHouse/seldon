@@ -12,6 +12,12 @@
     text-transform: uppercase;
   }
 
+  &__title {
+    &.#{$px}-text {
+      text-transform: uppercase;
+    }
+  }
+
   .fresnel-container {
     width: 100%;
   }

@@ -165,7 +165,9 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
             <Text variant={TextVariants.bodySmall} className={`${baseClassName}__header-label`}>
               {headerLabel}
             </Text>
-            <Text variant={TextVariants.headingLarge}>{auctionTitle}</Text>
+            <Text className={`${baseClassName}__title`} variant={TextVariants.headingLarge}>
+              {auctionTitle}
+            </Text>
             {badgeText && (
               <Text variant={TextVariants.badge} className={`${baseClassName}__badge`}>
                 {badgeText}

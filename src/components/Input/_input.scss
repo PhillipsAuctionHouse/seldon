@@ -22,8 +22,6 @@ $lg: #{$px}-input--lg;
   }
 
   &__wrapper {
-    @include text($string2);
-
     accent-color: $black-100;
     align-items: center;
     border: 1px solid $black-100;
@@ -195,6 +193,7 @@ $lg: #{$px}-input--lg;
     @include text($bodyMedium);
 
     font-variation-settings: 'wght' 600;
+    margin-bottom: 0;
   }
 
   .#{$px}-input__input {

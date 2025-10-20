@@ -7,8 +7,6 @@
 }
 
 .flatpickr-calendar {
-  @include DistinctText;
-
   .flatpickr-day,
   .flatpickr-day.selected,
   .flatpickr-day:hover,
@@ -32,8 +30,6 @@
     border-color: transparent;
     font-variation-settings: 'wght' 700;
     position: relative;
-
-    @include DistinctDisplay;
 
     &::after {
       background-color: $pure-black;
@@ -59,19 +55,20 @@
   .flatpickr-current-month,
   .flatpickr-monthDropdown-months,
   .flatpickr-current-month input.cur-year {
-    @include DistinctDisplay;
-
-    font-size: 1rem;
     text-transform: uppercase;
   }
 
   .flatpickr-weekday {
-    @include DistinctDisplay;
-
     font-variation-settings: 'wght' 700;
   }
 
-  .flatpickr-current-month {
+  .flatpickr-current-month.flatpickr-current-month {
+    @include text($labelLarge);
+
+    .cur-year {
+      @include text($labelLarge);
+    }
+
     padding: 0.65rem 0 0;
   }
 

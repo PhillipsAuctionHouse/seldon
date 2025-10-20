@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { addHours } from 'date-fns';
+import { addHours, addMinutes } from 'date-fns';
 
 import ObjectTile from './ObjectTile';
 import { LotStatus } from '../../types/commonTypes';
@@ -50,3 +50,23 @@ NoImage.args = args;
 export const Playground = (props: ComponentProps<typeof ObjectTile>) => <ObjectTile {...props} />;
 Playground.args = args;
 Playground.argTypes = {};
+
+export const WithCountdownTimer = (props: ComponentProps<typeof ObjectTile>) => <ObjectTile {...props} />;
+WithCountdownTimer.args = {
+  ...args,
+  children: (
+    <>
+      <BidSnapshot
+        startingBid={50000}
+        bidStatus={BidStatusEnum.Winning}
+        lotStatus={LotStatus.live}
+        numberOfBids={2}
+        lotCloseDate={addMinutes(new Date(), 3)} // Lot closes in 3 minutes
+        saleCloseDate={addMinutes(new Date(), 5)} // Sale closes in 5 minutes
+        currentBid={1000000}
+      >
+        <BidMessage message="With You" />
+      </BidSnapshot>
+    </>
+  ),
+};

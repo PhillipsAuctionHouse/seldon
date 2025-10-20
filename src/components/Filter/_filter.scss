@@ -57,14 +57,13 @@ $chevron-scale: 0.8;
     display: flex;
     flex-direction: column;
     gap: $spacing-sm;
-    padding-bottom: $spacing-sm;
 
     .#{$px}-input {
       align-items: center;
       height: unset;
 
       &__label {
-        @include text($bodyMedium);
+        @include text($labelMedium);
 
         color: inherit;
         margin-bottom: 0;

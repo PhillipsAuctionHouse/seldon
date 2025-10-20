@@ -14,10 +14,10 @@
 
     &--label.#{$px}-text {
       font-variation-settings: 'wght' 600;
-    }
 
-    @media (max-width: $breakpoint-lg) {
-      width: 128px;
+      @include media($breakpoint-md) {
+        font-size: 1rem; // 16px
+      }
     }
 
     @media (max-width: $breakpoint-md) {
@@ -26,6 +26,18 @@
 
     @media (max-width: $breakpoint-sm) {
       width: 96px;
+    }
+
+    &--has-sub-label {
+      width: 200px;
+
+      @include media($breakpoint-md) {
+        width: 160px;
+      }
+
+      @media (max-width: $breakpoint-sm) {
+        width: 120px;
+      }
     }
 
     &--no-wrap {
@@ -49,7 +61,23 @@
     }
   }
 
+  &__sub-label {
+    text-wrap: nowrap;
+
+    @include media($breakpoint-md) {
+      &.#{$px}-text {
+        font-size: 1rem; // 16px  TODO: temporary override to keep LotObjectTile the same as before
+      }
+    }
+  }
+
   &__value {
+    @include media($breakpoint-md) {
+      .#{$px}-text {
+        font-size: 1rem; // 16px  TODO: temporary override to keep LotObjectTile the same as before
+      }
+    }
+
     font-variation-settings: 'wght' 400;
   }
 }

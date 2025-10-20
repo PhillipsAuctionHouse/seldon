@@ -11,6 +11,7 @@
   &__title {
     // To help center the title, accounts for the extra space inside the span below the text
     margin-top: $spacing-micro;
+    text-transform: uppercase;
   }
 
   &__button-label {

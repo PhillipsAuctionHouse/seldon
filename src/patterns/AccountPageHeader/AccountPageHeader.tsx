@@ -75,9 +75,7 @@ const AccountPageHeader = forwardRef<HTMLDivElement, AccountPageHeaderProps>(
             <SSRMediaQuery.Media greaterThanOrEqual="md">
               <Button variant={ButtonVariants.secondary} onClick={primaryButton.onClick}>
                 <Icon icon={primaryButton.icon} />{' '}
-                <Text className={`${baseClassName}__button-label`} variant={TextVariants.bodySmall}>
-                  {primaryButton.label}
-                </Text>
+                <Text className={`${baseClassName}__button-label`}>{primaryButton.label}</Text>
               </Button>
             </SSRMediaQuery.Media>
             <SSRMediaQuery.Media lessThan="md">

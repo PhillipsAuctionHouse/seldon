@@ -2,8 +2,11 @@
 
 .#{$px}-button {
   // TODO: We really to remove this and instead use the Text component
-  @include bodyText;
-  @include labelText($button);
+  @include text($labelSmall);
+
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-xl) {
+    font-size: 1rem; // 16px  TODO: temporary override we need to revisit this with the button redesigns that are coming soon
+  }
 
   align-items: center;
   background-color: $pure-black;
@@ -23,8 +26,13 @@
 
   svg {
     fill: $pure-white;
-    height: $button-label-line-height;
-    width: $button-label-line-height;
+    height: calc($font-size-label-small * 1.3);
+    width: calc($font-size-label-small * 1.3);
+
+    @include media($breakpoint-md) {
+      height: calc($font-size-label-small * 1.4);
+      width: calc($font-size-label-small * 1.4);
+    }
 
     path {
       fill: $pure-white;

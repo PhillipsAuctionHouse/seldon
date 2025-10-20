@@ -140,7 +140,7 @@
   --snw-heading-hero-line-height-size2: 1.9375rem;
   --snw-note-size: 0.75rem;
   --snw-note-line-height: 1rem;
-  --snw-button-padding: 0.8125rem;
+  --snw-button-padding: 0.5rem;
   --spacing-micro: 0.25rem;
   --spacing-xsm: 0.5rem;
   --spacing-sm: 0.75rem;
@@ -158,6 +158,8 @@
   @include font-size-vars--sm;
 
   @media (min-width: $breakpoint-md) {
+    @include font-size-vars--md;
+
     --quote-size: 1.75rem;
     --quote-line-height: 2.25rem;
     --heading-size1: 1.75rem;
@@ -198,7 +200,7 @@
     --snw-flyout-link-line-height: 1.75rem;
     --snw-heading-hero-size1: 2.375rem;
     --snw-heading-hero-line-height-size1: 2.875rem;
-    --snw-button-padding: 0.8125rem;
+    --snw-button-padding: 0.5rem;
     --spacing-micro: 0.25rem;
     --spacing-xsm: 0.5rem;
     --spacing-sm: 1rem;
@@ -253,7 +255,7 @@
     --snw-header-link-line-height: 1.75rem;
     --snw-flyout-link-size: 1.125rem;
     --snw-flyout-link-line-height: 2.125rem;
-    --snw-button-padding: 0.813rem;
+    --snw-button-padding: 0.5rem;
     --spacing-micro: 0.5rem;
     --spacing-xsm: 0.75rem;
     --spacing-sm: 1.25rem;

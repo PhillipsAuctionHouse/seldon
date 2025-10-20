@@ -1,6 +1,5 @@
 import { Meta } from '@storybook/react';
 import Detail, { DetailProps } from './Detail';
-import { Text, TextVariants } from '../Text';
 
 const meta = {
   title: 'Components/Detail',
@@ -12,8 +11,13 @@ export const Playground = (props: DetailProps) => <Detail {...props} />;
 
 Playground.args = {
   label: 'Label',
-  subLabel: '',
-  value: <Text variant={TextVariants.string2}>Value</Text>,
+  value: 'Value',
 };
 
 Playground.argTypes = {};
+
+export const WithSubLabel = (props: DetailProps) => <Detail {...props} subLabel="Sub Label" />;
+WithSubLabel.args = {
+  ...Playground.args,
+  subLabel: 'Sub Label',
+};
