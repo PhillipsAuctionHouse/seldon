@@ -20,14 +20,14 @@
 
   &__info {
     flex: 1;
-    min-height: 2.5rem; // to match the height when the hamburger menu is shown
+    min-height: calc($spacing-sm + $spacing-xsm + $font-size-label-medium + $font-size-body-medium);
     overflow: hidden;
   }
 
   &__count {
     color: $dark-gray;
     display: block;
-    margin-bottom: $spacing-sm;
+    margin-bottom: $spacing-xsm;
   }
 
   h3.#{$px}-text {

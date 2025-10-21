@@ -313,12 +313,12 @@ const FavoritesCollectionTile = memo(
             <div className={`${baseClassName}__header`}>
               <div className={`${baseClassName}__info`}>
                 {hasListNameAndCount && (
-                  <Text element="span" className={`${baseClassName}__count`} variant={TextVariants.body3}>
+                  <Text element="span" className={`${baseClassName}__count`} variant={TextVariants.labelMedium}>
                     {formatlotStr && hasListNameAndCount && formatlotStr(count)}
                   </Text>
                 )}
                 {name && (
-                  <Text element="h3" className={`${baseClassName}__title`} variant={TextVariants.heading5}>
+                  <Text element="h3" className={`${baseClassName}__title`} variant={TextVariants.bodyMedium}>
                     {name}
                   </Text>
                 )}
