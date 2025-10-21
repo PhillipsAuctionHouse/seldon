@@ -188,34 +188,6 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
                   label="Modern & Contemporary Art Day Sale—Afternoon Session"
                 />
                 <NavigationItem
-                  badge="New York"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Modern & Contemporary Art Evening Sale"
-                />
-                <NavigationItem
-                  badge="London"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Wired: Online Auction"
-                />
-                <NavigationItem
-                  badge="Hong Kong "
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="The Imperial Patek Philippe Sale"
-                />
-                <NavigationItem
-                  badge="Hong Kong"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Disruptors: Evening Sale of Modern & Contemporary Art, Design and Watches"
-                />
-                <NavigationItem
                   href="#"
                   isViewAllLink
                   navGroup="nav-link-start"

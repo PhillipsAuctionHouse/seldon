@@ -4,6 +4,7 @@ import { TextVariants } from './types';
 export const determineTextClassName = (variant: TextVariants = TextVariants.body1): string => {
   // our javascript const doesn't exactly match the tokens
   switch (variant) {
+    // I'm doing this mapping because otherwise the Text actually does the underline work that the Link component is doing
     case TextVariants.email:
       return `${px}-text--bodyMedium`;
     case TextVariants.link:

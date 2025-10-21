@@ -13,6 +13,19 @@
     }
   }
 
+  &--view-all {
+    a {
+      border-bottom: 0;
+      padding: $spacing-sm 0;
+      text-decoration: underline;
+
+      span {
+        font-variation-settings: 'wght' 600;
+        text-transform: uppercase;
+      }
+    }
+  }
+
   @include isHeaderDesktop {
     align-items: center;
     display: flex;
@@ -86,18 +99,6 @@
       @include isHeaderMobile {
         border-bottom: 1px solid $light-gray;
         padding-bottom: $spacing-sm;
-      }
-    }
-
-    & .view-all {
-      a {
-        border-bottom: 0;
-        padding: $spacing-sm 0;
-        text-decoration: underline;
-
-        span {
-          text-transform: uppercase;
-        }
       }
     }
   }

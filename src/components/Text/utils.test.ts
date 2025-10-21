@@ -18,9 +18,29 @@ describe('determineTextClassName', () => {
     expect(className).toBe(`${px}-text--blockquote`);
   });
 
+  it('should return the correct class name for email variant', () => {
+    const className = determineTextClassName(TextVariants.email);
+    expect(className).toBe(`${px}-text--bodyMedium`);
+  });
+
   it('should return the correct class name for link variant', () => {
     const className = determineTextClassName(TextVariants.link);
-    expect(className).toBe(`${px}-text--link`);
+    expect(className).toBe(`${px}-text--bodyMedium`);
+  });
+
+  it('should return the correct class name for linkSmall variant', () => {
+    const className = determineTextClassName(TextVariants.linkSmall);
+    expect(className).toBe(`${px}-text--bodySmall`);
+  });
+
+  it('should return the correct class name for linkMedium variant', () => {
+    const className = determineTextClassName(TextVariants.linkMedium);
+    expect(className).toBe(`${px}-text--bodyMedium`);
+  });
+
+  it('should return the correct class name for linkLarge variant', () => {
+    const className = determineTextClassName(TextVariants.linkLarge);
+    expect(className).toBe(`${px}-text--bodyLarge`);
   });
 
   it('should return the correct class name for button variant', () => {
