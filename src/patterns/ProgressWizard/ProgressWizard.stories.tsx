@@ -49,6 +49,7 @@ const gentleMessageStyle = {
   transition: 'opacity 0.3s',
 };
 
+// can we use this instead of the alerts everywhere? or toasts?
 const gentleMessage = (text: string) => () => {
   const p = document.createElement('p');
   Object.assign(p.style, gentleMessageStyle);
@@ -82,6 +83,7 @@ export const BasicWizard = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    alert(`Submitted:\n${JSON.stringify(formData, null, 2)}`);
   };
 
   return (
@@ -96,14 +98,14 @@ export const BasicWizard = () => {
         <Input
           name="name"
           id="name"
-          labelText="Name*"
+          labelText="Name"
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         />
         <Input
           name="age"
           id="age"
-          labelText="Age*"
+          labelText="Age"
           type="number"
           value={formData.age}
           onChange={(e) => setFormData({ ...formData, age: e.target.value })}
@@ -323,6 +325,51 @@ export const ExternalStepControlWizard = () => {
 };
 ExternalStepControlWizard.argTypes = argTypes;
 
+export const TraditionalFormWizard = () => {
+  return (
+    <form
+      id="traditional-form"
+      onSubmit={(e) => {
+        e.preventDefault();
+        e.preventDefault();
+        try {
+          const formData = new FormData(e.currentTarget as HTMLFormElement);
+          const objectivelyFormData = Object.fromEntries(formData.entries());
+          console.log(`Submitted:\n${JSON.stringify(objectivelyFormData, null, 2)}`);
+        } catch (e) {
+          alert('Submitted (could not read form data)');
+          console.error(e);
+        }
+      }}
+    >
+      <ProgressWizard
+        customHeader={
+          <Text align={TextAlignments.center} variant={TextVariants.body1}>
+            {'plain old `<form>`  and `<input>` elements inside a ProgressWizard'}
+          </Text>
+        }
+      >
+        <span>
+          <label htmlFor="a">Input A</label>
+          <br />
+          <input name="a" id="a" />
+        </span>
+        <span>
+          <label htmlFor="b">Input B</label>
+          <br />
+          <input name="b" id="b" />
+        </span>
+        <span>
+          <label htmlFor="c">Input C</label>
+          <br />
+          <input name="c" id="c" />
+        </span>
+      </ProgressWizard>
+    </form>
+  );
+};
+TraditionalFormWizard.argTypes = argTypes;
+
 export const Playground: {
   render: (props: ProgressWizardProps) => JSX.Element;
   args: ProgressWizardProps;
@@ -334,6 +381,7 @@ export const Playground: {
     hideProgressIndicator,
     isEnableHistoryManagement,
     currentStepIndex,
+    defaultStepIndex,
     loadingState,
     shouldAllowContinue,
     buttonLabels,
@@ -343,7 +391,20 @@ export const Playground: {
     onFormSubmit,
   }) => {
     return (
-      <form onSubmit={(data) => alert(`Submitted:\n${JSON.stringify(data, null, 2)}`)}>
+      <form
+        id="progress-wizard-playground-form"
+        onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+          e.preventDefault();
+          try {
+            const formData = new FormData(e.currentTarget as HTMLFormElement);
+            const objectivelyFormData = Object.fromEntries(formData.entries());
+            console.log(`Submitted:\n${JSON.stringify(objectivelyFormData, null, 2)}`);
+          } catch (e) {
+            alert('Submitted (could not read form data)');
+            console.error(e);
+          }
+        }}
+      >
         <ProgressWizard
           customHeader={customHeader}
           shouldAllowContinue={shouldAllowContinue}
@@ -351,6 +412,7 @@ export const Playground: {
           hideProgressIndicator={hideProgressIndicator}
           isEnableHistoryManagement={isEnableHistoryManagement}
           currentStepIndex={currentStepIndex}
+          defaultStepIndex={defaultStepIndex}
           loadingState={loadingState}
           buttonLabels={buttonLabels}
           onBack={onBack}
@@ -358,8 +420,8 @@ export const Playground: {
           onContinue={onContinue}
           onFormSubmit={onFormSubmit}
         >
-          <Input name="field1" id="field1" labelText="Field 1*" />
-          <Input name="field2" id="field2" labelText="Field 2*" />
+          <Input name="field1" id="field1" labelText="Field 1" />
+          <Input name="field2" id="field2" labelText="Field 2" />
         </ProgressWizard>
       </form>
     );

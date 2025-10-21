@@ -29,7 +29,7 @@ describe('useHistoryManagement', () => {
         useHistoryManagement({
           enabled: true,
           currentStepIndex: idx,
-          stepsLength: 3,
+          stepCount: 3,
           setCurrentStepIndex,
         }),
       { initialProps: { idx: 0 } },
@@ -45,7 +45,7 @@ describe('useHistoryManagement', () => {
       useHistoryManagement({
         enabled: false,
         currentStepIndex: 1,
-        stepsLength: 3,
+        stepCount: 3,
         setCurrentStepIndex,
       }),
     );
@@ -63,7 +63,7 @@ describe('useHistoryManagement', () => {
       useHistoryManagement({
         enabled: true,
         currentStepIndex: 1,
-        stepsLength: 3,
+        stepCount: 3,
         setCurrentStepIndex,
       }),
     );

@@ -1,8 +1,8 @@
 import {
   forwardRef,
   useState,
+  useMemo,
   useCallback,
-  useEffect,
   Children,
   type SetStateAction,
   type PropsWithChildren,
@@ -12,6 +12,7 @@ import { useHistoryManagement } from './hooks/useHistoryManagement';
 import { getCommonProps } from '../../utils';
 import Footer from './components/ProgressWizardFooter';
 import { ProgressIndicator } from '../../components/ProgressIndicator';
+import { wrapChildren, getLabelsFromChildren, isControlled } from './utils';
 
 /**
  * Props for the main ProgressWizard component.
@@ -38,9 +39,9 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
     customHeader,
     hideNavigation,
     hideProgressIndicator,
-    isEnableHistoryManagement = true,
+    isEnableHistoryManagement = false,
     currentStepIndex: extCurrentStepIndex,
-    defaultStepIndex = 0,
+    defaultStepIndex: defaultStepIndex_,
 
     shouldAllowContinue = true,
     loadingState = LoadingState.Idle,
@@ -54,40 +55,83 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
     ...rest
   } = props;
 
-  if (defaultStepIndex && extCurrentStepIndex) {
-    console.warn(
-      'ProgressWizard: Both defaultStepIndex and currentStepIndex props are provided. defaultStepIndex will be ignored in controlled mode.',
-    );
-  }
-  const childOrChildren = Children.toArray(children);
-  const [currentStepIndex, setCurrentStepIndex] = useState(defaultStepIndex);
+  const { className: baseClassName, ...commonProps } = getCommonProps(rest, 'ProgressWizard');
 
-  const setCurrentStepIndexHandler = useCallback(
+  let defaultStepIndex = defaultStepIndex_;
+  if (defaultStepIndex !== undefined && extCurrentStepIndex !== undefined) {
+    console.warn(
+      'ProgressWizard: Both defaultStepIndex and currentStepIndex props are provided. defaultStepIndex will be ignored.',
+    );
+    defaultStepIndex = undefined;
+  }
+
+  const [internalCurrentStepIndex, setInternalCurrentStepIndex] = useState(defaultStepIndex ?? 0);
+
+  const setInternalCurrentStepIndexHandler = useCallback(
     (stepIndex: SetStateAction<number>) => {
-      if (!hideNavigation && !extCurrentStepIndex && extCurrentStepIndex !== 0) setCurrentStepIndex(stepIndex);
+      if (!hideNavigation && !isControlled(extCurrentStepIndex)) setInternalCurrentStepIndex(stepIndex);
     },
     [hideNavigation, extCurrentStepIndex],
   );
 
-  useEffect(() => {
-    if (Number.isInteger(extCurrentStepIndex) && extCurrentStepIndex !== currentStepIndex) {
-      setCurrentStepIndex(extCurrentStepIndex ?? 0);
-    }
-  }, [extCurrentStepIndex, currentStepIndex]);
+  const currentStepIndex = useMemo(
+    () => extCurrentStepIndex ?? internalCurrentStepIndex,
+    [extCurrentStepIndex, internalCurrentStepIndex],
+  );
+
+  if (isEnableHistoryManagement && isControlled(extCurrentStepIndex)) {
+    console.warn(
+      'ProgressWizard: History management is disabled in controlled mode (currentStepIndex prop). To enable history management, remove the currentStepIndex prop. You may also import and use the useHistoryManagement hook directly in your controlling component.',
+    );
+  }
+  // Children and derived values
+  const rawChildren = Children.toArray(children);
+  const labels = useMemo(() => getLabelsFromChildren(rawChildren), [rawChildren]);
+  const wrappedChildren = useMemo(
+    () => wrapChildren(rawChildren, currentStepIndex, baseClassName),
+    [rawChildren, currentStepIndex, baseClassName],
+  );
+  const stepCount = rawChildren.length;
+  if (!rawChildren || stepCount === 0) {
+    console.warn(
+      'ProgressWizard: No children provided. At least one child is required to render steps, two for normal behavior.',
+    );
+  }
+
+  if (!rawChildren[currentStepIndex]) {
+    console.warn(`ProgressWizard: currentStepIndex ${currentStepIndex} is out of bounds (0 to ${stepCount - 1})`);
+  }
 
   useHistoryManagement({
-    enabled: isEnableHistoryManagement,
+    enabled: !isControlled(extCurrentStepIndex) && isEnableHistoryManagement,
     currentStepIndex,
-    stepsLength: childOrChildren.length,
-    setCurrentStepIndex,
+    stepCount,
+    setCurrentStepIndex: setInternalCurrentStepIndexHandler,
   });
 
-  const { className: baseClassName, ...commonProps } = getCommonProps(rest, 'ProgressWizard');
-
+  // Navigation helpers
   const isFirstStep = currentStepIndex === 0;
-  const toFirstStep = () => setCurrentStepIndex(0);
-  const isLastStep = currentStepIndex === childOrChildren.length - 1;
-  const toLastStep = () => setCurrentStepIndex(childOrChildren.length - 1);
+  const toFirstStep = () => setInternalCurrentStepIndex(0);
+  const isLastStep = currentStepIndex === stepCount - 1;
+  const toLastStep = () => setInternalCurrentStepIndex(stepCount - 1);
+
+  const childContent = wrappedChildren;
+
+  const footerProps = {
+    setCurrentStepIndex: setInternalCurrentStepIndexHandler,
+    isFirstStep,
+    toFirstStep,
+    isLastStep,
+    toLastStep,
+    baseClassName,
+    shouldAllowContinue,
+    isLoading: [LoadingState.Loading, LoadingState.Submitting].includes(loadingState),
+    labels: buttonLabels,
+    onContinue,
+    onBack,
+    onCancel,
+    onFormSubmit,
+  } as const;
 
   return (
     <section {...commonProps} className={baseClassName} ref={ref} aria-label="Form Wizard">
@@ -95,37 +139,20 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
       {!hideProgressIndicator ? (
         <nav aria-label="Progress">
           <ProgressIndicator
-            totalSteps={childOrChildren.length}
+            totalSteps={stepCount}
             currentStep={currentStepIndex + 1}
-            labels={childOrChildren.map(
-              (child, i) =>
-                (typeof child === 'object' && 'props' in child && child.props['aria-label']) || `Step ${i + 1}`,
-            )}
+            labels={labels}
             progressIndicatorAriaLabel="Wizard Progress"
           />
         </nav>
       ) : null}
 
       <div className={`${baseClassName}__content`} aria-labelledby={`wizard-step-label-${currentStepIndex}`}>
-        {childOrChildren[currentStepIndex] ?? <p>No content found for step {currentStepIndex + 1}</p>}
+        {childContent}
       </div>
       {!hideNavigation ? (
         <div className={`${baseClassName}__footer`}>
-          <Footer
-            setCurrentStepIndex={setCurrentStepIndexHandler}
-            isFirstStep={isFirstStep}
-            toFirstStep={toFirstStep}
-            isLastStep={isLastStep}
-            toLastStep={toLastStep}
-            baseClassName={baseClassName}
-            shouldAllowContinue={shouldAllowContinue}
-            isLoading={[LoadingState.Loading, LoadingState.Submitting].includes(loadingState)}
-            labels={buttonLabels}
-            onContinue={onContinue}
-            onBack={onBack}
-            onCancel={onCancel}
-            onFormSubmit={onFormSubmit}
-          />
+          <Footer {...footerProps} />
         </div>
       ) : null}
     </section>

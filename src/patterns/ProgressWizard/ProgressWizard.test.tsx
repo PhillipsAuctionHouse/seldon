@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi, type Mock } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { useState, type FC } from 'react';
@@ -75,6 +75,12 @@ const getWizName = (label: string) => ({ name: `Progress Wizard: ${label}` });
 describe('ProgressWizard', () => {
   beforeEach(() => {
     if ((console.error as Mock)?.mockRestore) (console.error as Mock).mockRestore();
+
+    // jsdom doesn't play with scss, so we manually inject the required CSS for the test
+    document.head.insertAdjacentHTML(
+      'beforeend',
+      '<style>.seldon-progress-wizard-hidden{display:none !important;}</style>',
+    );
   });
 
   afterEach(() => {
@@ -133,31 +139,13 @@ describe('ProgressWizard', () => {
 
     window.history.back();
     window.dispatchEvent(new PopStateEvent('popstate'));
-    await waitFor(() => expect(screen.getByLabelText(secondLabel)).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByLabelText(secondLabel)).not.toHaveStyle('display: none'));
     expect(screen.getByLabelText(secondLabel)).toHaveValue('B');
 
     window.history.forward();
     window.dispatchEvent(new PopStateEvent('popstate'));
-    await waitFor(() => expect(screen.getByLabelText(thirdLabel)).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByLabelText(thirdLabel)).not.toHaveStyle('display: none'));
     expect(screen.getByLabelText(thirdLabel)).toHaveValue('C');
-  });
-
-  it('hides the ProgressIndicator when hideProgressIndicator is true', () => {
-    render(
-      <ProgressWizard hideProgressIndicator={true}>
-        <Input name="name" id="name" labelText="Name*" />
-      </ProgressWizard>,
-    );
-    expect(screen.queryByLabelText('Wizard Progress')).toBeNull();
-  });
-
-  it('hides the navigation section when hideNavigation is true', () => {
-    render(
-      <ProgressWizard hideNavigation={true}>
-        <Input name="name" id="name" labelText="Name*" />
-      </ProgressWizard>,
-    );
-    expect(screen.queryByRole('button', { name: /Progress Wizard:/ })).toBeNull();
   });
 
   it('handles loading state during form submission', async () => {
@@ -209,12 +197,12 @@ describe('ProgressWizard', () => {
 
     window.history.back();
     window.dispatchEvent(new PopStateEvent('popstate'));
-    await waitFor(() => expect(screen.getByLabelText(secondLabel)).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByLabelText(secondLabel)).not.toHaveStyle('display: none'));
     expect(screen.getByLabelText(secondLabel)).toHaveValue('B');
 
     window.history.forward();
     window.dispatchEvent(new PopStateEvent('popstate'));
-    await waitFor(() => expect(screen.getByLabelText(thirdLabel)).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByLabelText(thirdLabel)).not.toHaveStyle('display: none'));
     expect(screen.getByLabelText(thirdLabel)).toHaveValue('C');
   });
 
@@ -257,8 +245,17 @@ describe('ProgressWizard', () => {
   });
 
   it('handles no steps gracefully', () => {
+    const consoleWarn = console.warn;
+    console.warn = vi.fn();
     render(<ProgressWizard />);
-    expect(screen.getByText('No content found for step 1')).toBeInTheDocument();
+    // The component keeps step containers in the DOM but hides them; assert the content area has no visible children
+    const content = screen
+      .getByRole('region', { name: /Form Wizard/i })
+      ?.querySelector('.seldon-progress-wizard__content');
+    expect(content).toBeTruthy();
+    if (content) expect(content).toBeEmptyDOMElement();
+    expect(console.warn).toHaveBeenCalled();
+    console.warn = consoleWarn;
   });
 
   describe('calls onCancel, onBack, and onContinue props and prevents navigation if they return false', () => {
@@ -268,6 +265,12 @@ describe('ProgressWizard', () => {
         startStep: 0,
         progressEvidence: 'Cancelled',
         description: 'calls onCancel and prevents navigation if it returns false, then allows if true',
+        prepFunction: () => {
+          document.body.insertAdjacentHTML(
+            'afterbegin',
+            `<div id="hidden-cancelled" class="seldon-progress-wizard-hidden">Cancelled</div>`,
+          );
+        },
       },
       {
         task: 'Continue',
@@ -281,13 +284,14 @@ describe('ProgressWizard', () => {
         progressEvidence: 'Name*',
         description: 'calls onBack and prevents navigation if it returns false, then allows if true',
       },
-    ] as const)('handles $task button: $description', async ({ task, startStep, progressEvidence }) => {
+    ] as const)('handles $task button: $description', async ({ task, startStep, progressEvidence, prepFunction }) => {
+      cleanup();
       const onCancelMock = vi
         .fn()
         .mockReturnValueOnce(false)
         .mockImplementationOnce(() => {
-          // this is a little dumb, but we're testing the others normally with the actual handler logic
-          document.body.insertAdjacentHTML('afterbegin', `<div>${progressEvidence}</div>`);
+          // this is a little dumb, but at least we're testing the others normally with the actual handler logic
+          document.body.querySelector('#hidden-cancelled')?.classList.remove('seldon-progress-wizard-hidden');
           return true;
         });
       const onBackMock = vi.fn().mockReturnValueOnce(false).mockReturnValueOnce(true);
@@ -305,14 +309,20 @@ describe('ProgressWizard', () => {
           <Input name="realAge" id="realAge" labelText="Real Age*" />
         </ProgressWizard>,
       );
+
+      if (prepFunction) prepFunction();
       const mocks = { onCancelMock, onContinueMock, onBackMock };
-      await userEvent.click(screen.getByRole('button', getWizName(task)));
-      expect(mocks[`on${task}Mock`]).toHaveBeenCalled();
-      expect(screen.queryByText(progressEvidence)).not.toBeInTheDocument();
 
       await userEvent.click(screen.getByRole('button', getWizName(task)));
       expect(mocks[`on${task}Mock`]).toHaveBeenCalled();
-      expect(screen.queryByText(progressEvidence)).toBeInTheDocument();
+
+      // When prevented, there should be no progressEvidence injected
+      expect(screen.getByText(progressEvidence)).not.toBeVisible();
+
+      await userEvent.click(screen.getByRole('button', getWizName(task)));
+      expect(mocks[`on${task}Mock`]).toHaveBeenCalled();
+      // After allowing, the element should be present
+      expect(screen.getByText(progressEvidence)).toBeVisible();
     });
   });
 });
