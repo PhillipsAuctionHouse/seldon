@@ -14,7 +14,8 @@
   width: 100%;
   z-index: $notification-banner-z-index;
 
-  > * {
+  > *,
+  .#{$px}-text {
     font-size: $snowflake-note-size;
     font-variation-settings: 'wght' 400;
     line-height: $snowflake-note-line-height;

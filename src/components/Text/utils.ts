@@ -3,6 +3,20 @@ import { TextVariants } from './types';
 
 export const determineTextClassName = (variant: TextVariants = TextVariants.body1): string => {
   // our javascript const doesn't exactly match the tokens
+  switch (variant) {
+    case TextVariants.email:
+      return `${px}-text--bodyMedium`;
+    case TextVariants.link:
+      return `${px}-text--bodyMedium`;
+    case TextVariants.linkSmall:
+      return `${px}-text--bodySmall`;
+    case TextVariants.linkMedium:
+      return `${px}-text--bodyMedium`;
+    case TextVariants.linkLarge:
+      return `${px}-text--bodyLarge`;
+    default:
+      return `${px}-text--${variant.charAt(0).toLowerCase() + variant.slice(1)}`;
+  }
 
   return `${px}-text--${variant.charAt(0).toLowerCase() + variant.slice(1)}`;
 };

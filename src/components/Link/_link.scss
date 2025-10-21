@@ -5,10 +5,7 @@
   text-decoration: none;
 
   &--email.#{$px}-link--email,
-  &--link.#{$px}-link--link {
-    @include underline;
-  }
-
+  &--link.#{$px}-link--link,
   &--linkSmall,
   &--linkMedium,
   &--linkLarge {
@@ -19,14 +16,16 @@
   &--link {
     &:hover,
     &:focus-visible {
-      @include underline($color: $dark-gray);
-
       color: $dark-gray;
     }
   }
 
   &--email {
-    @include text($email);
+    @include text($linkMedium);
+
+    .#{$px}-text {
+      font-variation-settings: 'wght' 600;
+    }
   }
 
   &--link {

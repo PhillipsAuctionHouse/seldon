@@ -20,8 +20,10 @@
     color 0.25s,
     background-color 0.25s;
 
-  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-xl) {
-    font-size: 1rem; // 16px  TODO: temporary override we need to revisit this with the button redesigns that are coming soon
+  &:not(.#{$px}-button--link) {
+    @media (min-width: $breakpoint-md) and (max-width: $breakpoint-xl) {
+      font-size: 1rem; // 16px  TODO: temporary override we need to revisit this with the button redesigns that are coming soon
+    }
   }
 
   svg {

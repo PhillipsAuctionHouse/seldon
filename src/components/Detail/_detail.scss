@@ -72,12 +72,12 @@
   }
 
   &__value {
+    font-variation-settings: 'wght' 400;
+
     @include media($breakpoint-md) {
       .#{$px}-text {
         font-size: 1rem; // 16px  TODO: temporary override to keep LotObjectTile the same as before
       }
     }
-
-    font-variation-settings: 'wght' 400;
   }
 }

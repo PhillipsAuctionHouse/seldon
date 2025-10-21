@@ -7,7 +7,7 @@ import Header, { HeaderProps } from '../../site-furniture/Header/Header';
 import { SupportedLanguages } from '../../types/commonTypes';
 import { px } from '../../utils';
 import { Icon } from '../Icon';
-import { LinkVariants } from '../Link';
+import { Link, LinkVariants } from '../Link';
 import Navigation from '../Navigation/Navigation';
 import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
 import NavigationItemTrigger from '../Navigation/NavigationItemTrigger/NavigationItemTrigger';
@@ -97,7 +97,7 @@ Playground.args = {
       <span>
         Priority Bidding is here: Place a binding bid 48+ hours before the auction to secure a lower Buyer’s Premium.
         Available in live auctions starting Fall 2025 (excluding Watches).{' '}
-        <a href="https://www.phillips.com/article/160527128/priority-bidding-for-live-auctions">Learn More</a>
+        <Link href="https://www.phillips.com/article/160527128/priority-bidding-for-live-auctions">Learn More</Link>
       </span>
     </div>
   ),

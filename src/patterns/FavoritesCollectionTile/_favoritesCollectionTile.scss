@@ -20,13 +20,14 @@
 
   &__info {
     flex: 1;
+    min-height: 2.5rem; // to match the height when the hamburger menu is shown
     overflow: hidden;
   }
 
   &__count {
     color: $dark-gray;
     display: block;
-    margin-bottom: $spacing-xsm;
+    margin-bottom: $spacing-sm;
   }
 
   h3.#{$px}-text {
@@ -41,7 +42,8 @@
     line-clamp: 1;
     overflow: hidden;
 
-    h3.#{$px}-text {
+    &.#{$px}-text {
+      font-variation-settings: 'wght' 600;
       margin-bottom: 0;
     }
   }
@@ -55,7 +57,7 @@
     height: 2.5rem;
     justify-content: center;
     position: relative;
-    top: $spacing-sm;
+    top: $spacing-micro;
     transition: background 0.8s;
     width: 2.5rem;
 
@@ -85,7 +87,7 @@
 
     &--item {
       all: unset;
-      background-color: $soft-gray;
+      background-color: $white-100;
       cursor: pointer;
       display: block;
       padding: 0.75rem 1rem;
@@ -169,9 +171,7 @@
 
   // will update font size with variable rem sizing after design takes a pass at it some point in the future
   &__text {
-    color: $dark-gray;
-    font-size: 0.75rem;
-    font-variation-settings: 'wght' 400;
+    color: $cta-inactive;
     padding-top: 5px;
     text-transform: none;
   }
@@ -184,7 +184,6 @@
     all: unset;
     background: none;
     height: 100%;
-    margin-top: calc($spacing-xsm + var(--body-line-height-size3) + var(--heading-line-height-size5));
     width: 100%;
 
     &:focus-visible {
