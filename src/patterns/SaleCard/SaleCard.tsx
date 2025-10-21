@@ -77,9 +77,7 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
       <article {...componentProps} className={classes} ref={ref}>
         {imageSrc ? <SeldonImage src={imageSrc} alt={imageAlt} className={`${baseClassName}__image`} /> : null}
         <div className={`${baseClassName}__details`}>
-          <Text variant={TextVariants.labelSmall} className={`${baseClassName}__auction-type`}>
-            {auctionType}
-          </Text>
+          <Text variant={TextVariants.labelSmall}>{auctionType}</Text>
           <Text variant={TextVariants.headingSmall} className={`${baseClassName}__title`}>
             {titleText}
           </Text>

@@ -95,7 +95,7 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding: 3px $spacing-md;
+    padding: $spacing-micro $spacing-md;
     width: 100%;
 
     @include isHeaderDesktop {

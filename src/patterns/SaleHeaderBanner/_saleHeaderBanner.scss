@@ -7,9 +7,7 @@
   margin-bottom: $spacing-md;
 
   &__header-label {
-    font-variation-settings: 'wght' 500;
     margin-bottom: $spacing-xsm;
-    text-transform: uppercase;
   }
 
   &__title {
@@ -55,7 +53,7 @@
 
   &__location {
     font-variation-settings: 'wght' 600;
-    margin: $spacing-xsm 0;
+    margin: $spacing-xsm 0 $spacing-md 0;
   }
 
   &__badge {

@@ -162,7 +162,7 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
                 <div className={`${baseClassName}__stack__countdown`}>{<Countdown {...countdownProps} />}</div>
               </SSRMediaQuery.Media>
             ) : null}
-            <Text variant={TextVariants.bodySmall} className={`${baseClassName}__header-label`}>
+            <Text variant={TextVariants.labelMedium} className={`${baseClassName}__header-label`}>
               {headerLabel}
             </Text>
             <Text className={`${baseClassName}__title`} variant={TextVariants.headingLarge}>

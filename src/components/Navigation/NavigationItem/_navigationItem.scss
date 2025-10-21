@@ -5,6 +5,12 @@
     a {
       white-space: normal;
     }
+
+    &--nav-link-start {
+      padding-top: $spacing-micro;
+    }
+
+    padding-bottom: $spacing-xsm;
   }
 
   @include isHeaderDesktop {
@@ -79,7 +85,7 @@
     &__title {
       @include isHeaderMobile {
         border-bottom: 1px solid $light-gray;
-        padding-bottom: 0.625rem;
+        padding-bottom: $spacing-sm;
       }
     }
 

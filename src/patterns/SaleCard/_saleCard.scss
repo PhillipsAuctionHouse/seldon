@@ -6,10 +6,6 @@
   flex-direction: column;
   gap: $spacing-md;
 
-  &__auction-type {
-    text-transform: uppercase;
-  }
-
   @include media($breakpoint-snw-mobile) {
     flex-direction: row;
   }

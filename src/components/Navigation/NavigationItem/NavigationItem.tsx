@@ -65,7 +65,7 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
         {...props}
         onClick={onClick}
         data-testid={`nav-item-${label}`}
-        className={classNames(`${px}-nav__item`, navGroup, className, {
+        className={classNames(`${px}-nav__item`, `${px}-nav__item--${navGroup}`, className, {
           [`view-all`]: isViewAllLink,
         })}
         ref={ref}
