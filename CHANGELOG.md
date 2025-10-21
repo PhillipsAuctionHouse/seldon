@@ -1,3 +1,10 @@
+# [1.205.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.204.2...v1.205.0) (2025-10-21)
+
+
+### Features
+
+* **NotificationBanner:** L3-7834 Update link styles and notification… ([#745](https://github.com/PhillipsAuctionHouse/seldon/issues/745)) ([5761b21](https://github.com/PhillipsAuctionHouse/seldon/commit/5761b21d4be84ec48e65cc626110ec493da6e234))
+
 ## [1.204.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.204.1...v1.204.2) (2025-10-15)
 
 
