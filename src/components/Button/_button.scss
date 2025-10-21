@@ -4,10 +4,6 @@
   // TODO: We really to remove this and instead use the Text component
   @include text($labelSmall);
 
-  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-xl) {
-    font-size: 1rem; // 16px  TODO: temporary override we need to revisit this with the button redesigns that are coming soon
-  }
-
   align-items: center;
   background-color: $pure-black;
   border: 1px solid transparent;
@@ -23,6 +19,10 @@
   transition:
     color 0.25s,
     background-color 0.25s;
+
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-xl) {
+    font-size: 1rem; // 16px  TODO: temporary override we need to revisit this with the button redesigns that are coming soon
+  }
 
   svg {
     fill: $pure-white;
