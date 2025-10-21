@@ -4,7 +4,7 @@
   background: $light-gray;
   color: $pure-black;
   font-size: $snowflake-note-size;
-  font-variation-settings: 'wght' 600;
+  font-variation-settings: 'wght' 400;
   left: 0;
   line-height: $snowflake-note-line-height;
   padding: $spacing-sm $spacing-md;
@@ -16,20 +16,25 @@
 
   > * {
     font-size: $snowflake-note-size;
-    font-variation-settings: 'wght' 600;
+    font-variation-settings: 'wght' 400;
     line-height: $snowflake-note-line-height;
     text-align: center;
 
     a {
       cursor: pointer;
       text-decoration: underline;
+
+      &:hover,
+      &:focus-visible {
+        color: $dark-gray;
+      }
     }
   }
 
   > .#{$px}-notification-banner-content {
     color: $pure-black;
     font-size: $snowflake-note-size;
-    font-variation-settings: 'wght' 600;
+    font-variation-settings: 'wght' 400;
     line-height: $snowflake-note-line-height;
     text-align: center;
 

@@ -113,6 +113,10 @@
     &:hover {
       background-color: transparent;
       box-shadow: 0 0 0 1px rgba($pure-black, 1);
+
+      &:disabled {
+        box-shadow: none;
+      }
     }
   }
 
@@ -179,9 +183,9 @@
   }
 
   &:disabled {
-    background-color: $white-100;
-    border: 1px solid $light-gray;
-    color: $light-gray;
+    background-color: $grey-50;
+    border: 1px solid $grey-50;
+    color: $grey-75;
     cursor: default;
 
     &:hover {
@@ -191,10 +195,10 @@
     }
 
     svg {
-      fill: $light-gray;
+      fill: $grey-75;
 
       path {
-        fill: $light-gray;
+        fill: $grey-75;
       }
     }
   }

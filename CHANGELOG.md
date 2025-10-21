@@ -1,3 +1,52 @@
+# [1.205.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.204.2...v1.205.0) (2025-10-21)
+
+
+### Features
+
+* **NotificationBanner:** L3-7834 Update link styles and notification… ([#745](https://github.com/PhillipsAuctionHouse/seldon/issues/745)) ([5761b21](https://github.com/PhillipsAuctionHouse/seldon/commit/5761b21d4be84ec48e65cc626110ec493da6e234))
+
+## [1.204.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.204.1...v1.204.2) (2025-10-15)
+
+
+### Bug Fixes
+
+* **drawer:** L3-7876 - added z index to close button ([#743](https://github.com/PhillipsAuctionHouse/seldon/issues/743)) ([f860ff5](https://github.com/PhillipsAuctionHouse/seldon/commit/f860ff5230b31364265c80f853a2bfb3d9040c93))
+
+## [1.204.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.204.0...v1.204.1) (2025-10-14)
+
+
+### Bug Fixes
+
+* **Filter:** L3-7927 Filter Fixes Dropdown update ([#740](https://github.com/PhillipsAuctionHouse/seldon/issues/740)) ([5cd16c3](https://github.com/PhillipsAuctionHouse/seldon/commit/5cd16c39a80edabb79dd7005b8931b19769850a2))
+
+# [1.204.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.203.0...v1.204.0) (2025-10-09)
+
+
+### Features
+
+* **SaleCard:** L3-7848 Update CTA container width to accommodate lon… ([#739](https://github.com/PhillipsAuctionHouse/seldon/issues/739)) ([28535c9](https://github.com/PhillipsAuctionHouse/seldon/commit/28535c9ef911949e4c9922fe6f2bb280cf11ae70))
+
+# [1.203.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.202.0...v1.203.0) (2025-10-07)
+
+
+### Features
+
+* **editUserDetails:** L3-6773 Revert The User Details page widgets should be consistent with Register to Bid ([#738](https://github.com/PhillipsAuctionHouse/seldon/issues/738)) ([36170f4](https://github.com/PhillipsAuctionHouse/seldon/commit/36170f4771b1110e25bb640e533b5a2d8dd25b45))
+
+# [1.202.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.201.0...v1.202.0) (2025-10-07)
+
+
+### Features
+
+* **button:** PHOENIX-2097 Dynamic CTA [Disabled Button Styles Updates] ([#737](https://github.com/PhillipsAuctionHouse/seldon/issues/737)) ([203893a](https://github.com/PhillipsAuctionHouse/seldon/commit/203893a667a7b627b5c2d614be5817db579731ff))
+
+# [1.201.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.200.0...v1.201.0) (2025-10-06)
+
+
+### Features
+
+* **editUserDetails:** L3-6773 The User Details page widgets should be consistent with Register to Bid  ([#734](https://github.com/PhillipsAuctionHouse/seldon/issues/734)) ([266ea4d](https://github.com/PhillipsAuctionHouse/seldon/commit/266ea4dd0ccb87098df249cde44cf13518416292))
+
 # [1.200.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.199.0...v1.200.0) (2025-09-30)
 
 

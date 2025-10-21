@@ -56,12 +56,12 @@
   &__ctas {
     flex: 0 0 0%;
 
-    @include media($breakpoint-snw-mobile) {
-      flex-basis: 191px;
+    @media (min-width: $breakpoint-snw-mobile) {
+      flex-basis: 250px;
     }
 
-    @include media($breakpoint-lg) {
-      flex-basis: 280px;
+    @media (min-width: $breakpoint-lg) {
+      flex-basis: 400px;
     }
   }
 
