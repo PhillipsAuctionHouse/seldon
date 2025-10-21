@@ -58,7 +58,7 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
   const onClickStepNavigationAction =
     ({ fn, distance = 0, skipTo }: { fn?: OnClick; distance?: number; skipTo?: 'first' | 'last' | number }): OnClick =>
     async (e) => {
-      const res = await Promise.resolve(fn?.(e));
+      const res = fn ? await Promise.resolve(fn(e)) : undefined;
       if (res !== false) {
         if (typeof skipTo === 'number') {
           setCurrentStepIndex(skipTo);
@@ -67,7 +67,7 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
         } else if (skipTo === 'last') {
           toLastStep();
         } else {
-          setCurrentStepIndex((prev) => prev + distance);
+          if (distance) setCurrentStepIndex((prev) => prev + distance);
         }
       }
     };
@@ -78,7 +78,7 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
   };
   const secondaryLabel = isFirstStep ? labels.cancel : labels.back;
   const secondaryOnClick = isFirstStep
-    ? onClickStepNavigationAction({ fn: onCancel, distance: 0, skipTo: 'first' })
+    ? onClickStepNavigationAction({ fn: onCancel, distance: 0 })
     : onClickStepNavigationAction({ fn: onBack, distance: -1 });
 
   const primaryLabel = isLastStep ? labels.submit : !isFirstStep ? labels.continue : labels.start;
@@ -102,7 +102,13 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
         type={isLastStep ? 'submit' : 'button'}
         className={`${baseClassName}__btn`}
         aria-label={`Progress Wizard: ${primaryLabel}`}
-        onClick={async (e) => await primaryOnClick(e)}
+        onClick={async (e) => {
+          // If we're not on the final step, prevent the native form submit that can
+          // occur if a re-render replaces the button with a submit button before the
+          // browser processes the activation. Weird one to track down.
+          if (!isLastStep) e.preventDefault();
+          await primaryOnClick(e);
+        }}
         isDisabled={!shouldAllowContinue || isLoading}
       >
         {!isLoading ? primaryLabel : <Loader />}

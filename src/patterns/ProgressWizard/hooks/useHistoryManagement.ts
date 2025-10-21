@@ -17,7 +17,7 @@ import { type SetCurrentStepIndex } from '../types';
  * @param params.enabled - When false, the hook is inert (does not push or listen).
  * @param params.currentStepIndex - The current step index of the wizard. When this
  *   value increases the hook will push a new history state (if enabled).
- * @param params.stepsLength - Total number of steps in the wizard. Used to validate
+ * @param params.stepCount - Total number of steps in the wizard. Used to validate
  *   indices read from history state before applying them via `setCurrentStepIndex`.
  * @param params.setCurrentStepIndex - Setter callback used to update the current
  *   step index when a valid index is found in the popstate event state.
@@ -25,12 +25,12 @@ import { type SetCurrentStepIndex } from '../types';
 export const useHistoryManagement = ({
   enabled,
   currentStepIndex,
-  stepsLength,
+  stepCount,
   setCurrentStepIndex,
 }: {
   enabled: boolean;
   currentStepIndex: number;
-  stepsLength: number;
+  stepCount: number;
   setCurrentStepIndex: SetCurrentStepIndex;
 }) => {
   const prevStepIndexRef = useRef<number>(0);
@@ -46,7 +46,7 @@ export const useHistoryManagement = ({
     if (!enabled) return;
     const handlePopState = (event: PopStateEvent) => {
       const state = event.state;
-      if (state && typeof state.step === 'number' && state.step >= 0 && state.step < stepsLength) {
+      if (state && typeof state.step === 'number' && state.step >= 0 && state.step < stepCount) {
         setCurrentStepIndex(state.step);
       }
     };
@@ -54,5 +54,5 @@ export const useHistoryManagement = ({
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };
-  }, [enabled, stepsLength, setCurrentStepIndex]);
+  }, [enabled, stepCount, setCurrentStepIndex]);
 };

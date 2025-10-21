@@ -36,6 +36,10 @@
     flex: 1 1 0;
   }
 
+  &-hidden {
+    display: none;
+  }
+
   // Mobile: sticky footer, only content scrolls
   @media (max-width: $breakpoint-md) {
     display: flex;
