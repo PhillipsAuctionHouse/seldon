@@ -62,7 +62,7 @@ const HeroBanner = forwardRef<HTMLElement, HeroBannerProps>(
               {date ? <span>{date}</span> : null}
             </p>
           ) : null}
-          <Text variant={TextVariants.displaySmall}>{headerText}</Text>
+          <Text variant={TextVariants.headingLarge}>{headerText}</Text>
           {subHeadText ? <Text variant={TextVariants.headingLarge}>{subHeadText}</Text> : null}
           {association ? <p className={`${baseClass}__after-head`}>{association}</p> : null}
         </span>

@@ -34,8 +34,10 @@ export const determineDefaultTextElement = (variant: TextVariants = TextVariants
   if (variant.includes('heading')) {
     switch (variant) {
       case TextVariants.headingLarge:
+      case TextVariants.displayMedium:
         return 'h1';
       case TextVariants.headingMedium:
+      case TextVariants.displaySmall:
         return 'h2';
       case TextVariants.headingSmall:
         return 'h3';
