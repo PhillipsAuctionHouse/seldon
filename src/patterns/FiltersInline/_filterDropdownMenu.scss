@@ -6,7 +6,9 @@
   box-shadow: 0 4px 6px $medium-gray;
   display: flex;
   flex-direction: column;
-  min-width: stretch;
+  min-width: 100%;
+  min-width: -webkit-fill-available;
+  min-width: fill-available;
   padding: $spacing-md;
 
   &__filters {
