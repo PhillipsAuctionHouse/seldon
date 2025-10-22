@@ -4,7 +4,7 @@
   animation: rotation 1s linear infinite;
   border: 2px solid $black-100;
   border-bottom-color: transparent;
-  border-radius: 50%;
+  border-radius: $radius-3xl;
   box-sizing: border-box;
   display: flex;
   height: var(--button-label-line-height);
