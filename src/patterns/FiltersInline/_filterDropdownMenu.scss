@@ -6,7 +6,7 @@
   box-shadow: 0 4px 6px $medium-gray;
   display: flex;
   flex-direction: column;
-  min-width: 430px;
+  min-width: stretch;
   padding: $spacing-md;
 
   &__filters {
@@ -34,12 +34,15 @@
 
     &--drawer {
       box-shadow: 0 -4px 8px -4px $medium-gray;
-      gap: $spacing-xl;
+      display: flex;
+      flex-direction: row;
+      gap: $spacing-sm;
+      min-height: fit-content;
       padding: $spacing-md;
       width: 100%;
 
       @media (min-width: $breakpoint-md) {
-        min-height: $drawer-button-area-min-height;
+        gap: $spacing-xl;
       }
 
       @media (min-width: $breakpoint-xl) {
