@@ -7,7 +7,12 @@
 }
 
 .#{$px}-filter-drawer {
+  max-width: 380px;
   padding: 0;
+
+  @include media($breakpoint-xl) {
+    max-width: 420px;
+  }
 }
 
 .#{$px}-filter-drawer-menu {

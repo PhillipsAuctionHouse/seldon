@@ -6,7 +6,7 @@
   box-shadow: 0 4px 6px $medium-gray;
   display: flex;
   flex-direction: column;
-  min-width: 430px;
+  min-width: 280px;
   padding: $spacing-md;
 
   &__filters {
@@ -29,21 +29,17 @@
   &__buttons-wrap {
     display: flex;
     gap: $spacing-sm;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: $spacing-sm;
 
     &--drawer {
       box-shadow: 0 -4px 8px -4px $medium-gray;
-      gap: $spacing-xl;
-      padding: $spacing-md;
+      gap: $spacing-sm;
+      padding: $spacing-sm;
       width: 100%;
 
       @media (min-width: $breakpoint-md) {
         min-height: $drawer-button-area-min-height;
-      }
-
-      @media (min-width: $breakpoint-xl) {
-        gap: 0;
       }
     }
   }
