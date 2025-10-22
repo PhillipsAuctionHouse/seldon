@@ -3,6 +3,7 @@
 .#{$px}-filter-button {
   border: 1px solid $light-gray;
   gap: 4px;
+  max-height: 32px;
   padding: $spacing-xsm $spacing-xsm;
 
   &--selected {
@@ -13,17 +14,27 @@
     border-radius: 8px;
   }
 
+  &__label {
+    font-variation-settings: 'wght' 600;
+  }
+
   &--count {
     background: $pure-black;
     border: 2px solid $white-100;
     border-radius: 50%;
     color: $white-100;
     display: inline-block;
+    font-variation-settings: 'wght' 600;
     height: 1.5rem;
+    line-height: 1.2rem;
     position: absolute;
     right: 0;
     text-align: center;
     top: -15px;
     width: 1.5rem;
+
+    @include media($breakpoint-md) {
+      line-height: 1.3rem;
+    }
   }
 }

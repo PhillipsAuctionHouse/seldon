@@ -13,8 +13,9 @@
   display: inline-flex;
   font-variation-settings: 'wght' 600;
   gap: $margin-xsm;
+  height: 44px; // TODO: this is temporary as we will revisit the button in a new ticket
   justify-content: center;
-  padding: $padding-sm $padding-sm;
+  padding: 0 $padding-sm;
   position: relative;
   transition:
     color 0.25s,

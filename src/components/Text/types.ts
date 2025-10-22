@@ -7,15 +7,15 @@ export enum TextVariants {
   heading2 = 'heading2',
   /** @deprecated Use headingMedium instead */
   heading3 = 'heading3',
-  /** @deprecated Use headingSmall instead */
+  /** @deprecated Use headingMedium instead */
   heading4 = 'heading4',
   /** @deprecated Use bodySmall instead */
   heading5 = 'heading5',
-  /** @deprecated Use headingLarge instead */
+  /** @deprecated Use displayMedium instead */
   title1 = 'title1',
-  /** @deprecated Use headingMedium instead */
+  /** @deprecated Use displaySmall instead */
   title2 = 'title2',
-  /** @deprecated Use headingSmall instead */
+  /** @deprecated Use displaySmall instead */
   title3 = 'title3',
   /** @deprecated Use bodySmall instead */
   title4 = 'title4',
@@ -34,9 +34,9 @@ export enum TextVariants {
   /** @deprecated Use bodySmall instead */
   button = 'button',
   email = 'email',
-  /** @deprecated Use labelLarge instead */
+  /** @deprecated Use labelSmall instead */
   label = 'label',
-  /** @deprecated Use linkSmall instead */
+  /** @deprecated Use linkMedium instead */
   link = 'link',
   /** @deprecated Use labelSmall instead */
   badge = 'badge',

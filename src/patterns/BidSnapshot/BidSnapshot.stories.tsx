@@ -73,3 +73,111 @@ Playground.argTypes = {
   bidStatus: { options: BidStatusEnum, control: { type: 'select' } },
   lotStatus: { options: LotStatus, control: { type: 'select' } },
 };
+
+export const CurrentlyWinning = (props: BidSnapshotProps) => {
+  const { lotStatus, lotCloseDate, currentBid, soldPrice, ...rest } = props;
+
+  return (
+    <BidSnapshot
+      bidStatus={BidStatusEnum.Winning}
+      lotStatus={lotStatus}
+      currentBid={currentBid}
+      lotCloseDate={lotStatus === LotStatus.ready ? undefined : lotCloseDate}
+      soldPrice={soldPrice}
+      {...rest}
+    >
+      <BidMessage message="Currently Winning" />
+    </BidSnapshot>
+  );
+};
+
+CurrentlyWinning.args = {
+  currency: '$',
+  numberOfBids: 5,
+  lotStatus: LotStatus.live,
+  currentBid: 2500,
+  lotCloseDate: addMinutes(new Date(), 15),
+  saleCloseDate: addMinutes(new Date(), 30),
+  lang: enUS,
+  startingBid: 1000,
+};
+
+export const Outbid = (props: BidSnapshotProps) => {
+  const { lotStatus, lotCloseDate, currentBid, soldPrice, ...rest } = props;
+
+  return (
+    <BidSnapshot
+      bidStatus={BidStatusEnum.Losing}
+      lotStatus={lotStatus}
+      currentBid={currentBid}
+      lotCloseDate={lotStatus === LotStatus.ready ? undefined : lotCloseDate}
+      soldPrice={soldPrice}
+      {...rest}
+    >
+      <BidMessage variant={BidMessageVariants.negative} message="You've been outbid" />
+    </BidSnapshot>
+  );
+};
+
+Outbid.args = {
+  currency: '$',
+  numberOfBids: 8,
+  lotStatus: LotStatus.live,
+  currentBid: 3200,
+  lotCloseDate: addMinutes(new Date(), 8),
+  saleCloseDate: addMinutes(new Date(), 25),
+  lang: enUS,
+  startingBid: 1000,
+};
+
+export const WonBid = (props: BidSnapshotProps) => {
+  const { lotStatus, currentBid, soldPrice, ...rest } = props;
+
+  return (
+    <BidSnapshot
+      bidStatus={BidStatusEnum.Won}
+      lotStatus={lotStatus}
+      currentBid={currentBid}
+      soldPrice={soldPrice}
+      {...rest}
+    >
+      <BidMessage message="You won this lot!" />
+    </BidSnapshot>
+  );
+};
+
+WonBid.args = {
+  currency: '$',
+  numberOfBids: 12,
+  lotStatus: LotStatus.past,
+  currentBid: 4500,
+  soldPrice: 4500,
+  lang: enUS,
+  startingBid: 1000,
+};
+
+export const LostBid = (props: BidSnapshotProps) => {
+  const { lotStatus, currentBid, soldPrice, ...rest } = props;
+
+  return (
+    <BidSnapshot
+      bidStatus={BidStatusEnum.Lost}
+      lotStatus={lotStatus}
+      currentBid={currentBid}
+      soldPrice={soldPrice}
+      {...rest}
+    >
+      <BidMessage variant={BidMessageVariants.negative} message="Lot sold to another bidder" />
+    </BidSnapshot>
+  );
+};
+
+LostBid.args = {
+  currency: '$',
+  numberOfBids: 15,
+  lotStatus: LotStatus.past,
+  currentBid: 3800,
+  soldPrice: 4200,
+  lang: enUS,
+  startingBid: 1000,
+};

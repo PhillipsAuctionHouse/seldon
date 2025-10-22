@@ -136,7 +136,7 @@
   text-transform: $text-transform;
 }
 
-@mixin label-styles($font-size, $font-weight: 400, $text-transform: unset, $font-style: unset) {
+@mixin label-styles($font-size: $font-size-label-small, $font-weight: 400, $text-transform: unset, $font-style: unset) {
   @include Montserrat;
 
   font-size: $font-size;
@@ -223,9 +223,7 @@
   }
 
   @if $token == 'badge' {
-    @include label-styles($label, 400, uppercase);
-
-    font-size: $font-size-label-small;
+    @include label-styles($font-size: $font-size-label-small, $font-weight: 400, $text-transform: uppercase);
   }
 
   @if $token == 'snwHeaderLink' {
@@ -313,21 +311,15 @@
   }
 
   @if $token == $labelLarge {
-    @include label-styles($label);
-
-    font-size: $font-size-label-large;
+    @include label-styles($font-size: $font-size-label-large);
   }
 
   @if $token == $labelMedium {
-    @include label-styles($label);
-
-    font-size: $font-size-label-medium;
+    @include label-styles($font-size: $font-size-label-medium);
   }
 
   @if $token == $labelSmall {
-    @include label-styles($label);
-
-    font-size: $font-size-label-small;
+    @include label-styles($font-size: $font-size-label-small);
   }
 
   @if $token == $linkStylised {

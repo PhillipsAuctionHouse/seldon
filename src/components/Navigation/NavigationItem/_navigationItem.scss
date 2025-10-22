@@ -1,6 +1,10 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-nav__item {
+  .#{$px}-link:not(:hover):not(:focus-visible):not(.#{$px}-nav__item--view-all) {
+    text-decoration: none;
+  }
+
   @include isHeaderMobile {
     padding-bottom: $spacing-xsm;
 
@@ -10,19 +14,6 @@
 
     &--nav-link-start {
       padding-top: $spacing-micro;
-    }
-  }
-
-  &--view-all {
-    a {
-      border-bottom: 0;
-      padding: $spacing-sm 0;
-      text-decoration: underline;
-
-      span {
-        font-variation-settings: 'wght' 600;
-        text-transform: uppercase;
-      }
     }
   }
 
@@ -61,7 +52,6 @@
     & > a,
     & > button {
       display: flex;
-      padding: 0.5rem 0.625rem;
     }
   }
 

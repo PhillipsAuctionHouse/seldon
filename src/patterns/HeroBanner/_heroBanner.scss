@@ -47,6 +47,7 @@ body:has(.seldon-header__toggle-btn--open) {
 
   & .#{$px}-hero-banner__content-wrapper {
     align-items: center;
+    color: $pure-white;
     display: flex;
     flex-direction: column;
     max-width: 1082px;

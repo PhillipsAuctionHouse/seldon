@@ -47,6 +47,21 @@ describe('determineTextClassName', () => {
     const className = determineTextClassName(TextVariants.button);
     expect(className).toBe(`${px}-text--button`);
   });
+
+  it('should return the correct class name for headingLarge variant', () => {
+    const className = determineTextClassName(TextVariants.headingLarge);
+    expect(className).toBe(`${px}-text--headingLarge`);
+  });
+
+  it('should return the correct class name for headingMedium variant', () => {
+    const className = determineTextClassName(TextVariants.headingMedium);
+    expect(className).toBe(`${px}-text--headingMedium`);
+  });
+
+  it('should return the correct class name for headingSmall variant', () => {
+    const className = determineTextClassName(TextVariants.headingSmall);
+    expect(className).toBe(`${px}-text--headingSmall`);
+  });
 });
 
 describe('determineDefaultTextElement', () => {
@@ -101,5 +116,20 @@ describe('determineDefaultTextElement', () => {
   it('should return "h4" for heading4 variant', () => {
     const element = determineDefaultTextElement(TextVariants.heading5);
     expect(element).toBe('h5');
+  });
+
+  it('should return "h1" for headingLarge variant', () => {
+    const element = determineDefaultTextElement(TextVariants.headingLarge);
+    expect(element).toBe('h1');
+  });
+
+  it('should return "h2" for headingMedium variant', () => {
+    const element = determineDefaultTextElement(TextVariants.headingMedium);
+    expect(element).toBe('h2');
+  });
+
+  it('should return "h3" for headingSmall variant', () => {
+    const element = determineDefaultTextElement(TextVariants.headingSmall);
+    expect(element).toBe('h3');
   });
 });

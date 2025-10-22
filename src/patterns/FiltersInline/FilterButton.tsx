@@ -3,7 +3,7 @@ import React from 'react';
 import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';
 import { Icon } from '../../components/Icon';
-import { Text } from '../../components/Text';
+import { Text, TextVariants } from '../../components/Text';
 import { px } from '../../utils';
 import { FilterButtonIconType } from './types';
 import { getIcon } from './utils';
@@ -51,12 +51,22 @@ export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButton>(
       data-viewport={isMobile ? 'mobile' : 'desktop'}
       onClick={onClick}
     >
-      <Text data-testid={`${id}-filter-label`}>{label}</Text>
+      <Text
+        className={`${px}-filter-button__label`}
+        variant={TextVariants.labelSmall}
+        data-testid={`${id}-filter-label`}
+      >
+        {label}
+      </Text>
       <Icon icon={getIcon(type as FilterButtonIconType, isSelected)} height={8} width={8} className={`${px}__icon`} />
       {totalCount > 0 && type === 'Filter' && (
-        <div className={`${px}-filter-button--count`} data-testid={`${id}-filter-count`}>
+        <Text
+          variant={TextVariants.labelSmall}
+          className={`${px}-filter-button--count`}
+          data-testid={`${id}-filter-count`}
+        >
           {totalCount}
-        </div>
+        </Text>
       )}
     </Button>
   ),

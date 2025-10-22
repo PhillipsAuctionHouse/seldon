@@ -30,7 +30,7 @@ const MobileNavigationItemTrigger = ({ id, label, children }: NavigationItemTrig
         hasTransition
         key={`accordion-key-${label}`}
         id={`accordion-item-${id}`}
-        label={<Text variant={TextVariants.snwHeaderLink}>{label}</Text>}
+        label={<Text variant={TextVariants.linkStylised}>{label}</Text>}
         variant={AccordionItemVariant.lg}
       >
         {children}
@@ -128,7 +128,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
               {...props}
             >
               <button className={`${px}-nav__item-trigger`} type="button">
-                <Text variant={TextVariants.snwHeaderLink}>{label}</Text>
+                <Text variant={TextVariants.linkStylised}>{label}</Text>
               </button>
               {navListElement
                 ? React.cloneElement(navListElement[0], {

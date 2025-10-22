@@ -125,7 +125,7 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
           {location && <Text className={`${baseClassName}__location`}>{location}</Text>}
           {mapLink && (
             <Text className={`${baseClassName}__map-link`}>
-              <Component href={mapLink} variant={LinkVariants.linkSmall}>
+              <Component href={mapLink} variant={LinkVariants.linkMedium}>
                 (Map)
               </Component>
             </Text>

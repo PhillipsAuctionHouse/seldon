@@ -1,11 +1,16 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-text-banner {
+  &__header-text {
+    // To center the header on the description
+    align-items: center;
+    display: flex;
+  }
+
   &__content-wrapper {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    gap: $spacing-md;
     justify-content: center;
     max-width: none;
     padding: $spacing-lg 0;

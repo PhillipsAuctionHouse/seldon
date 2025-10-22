@@ -3,8 +3,6 @@ import React from 'react';
 import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';
 import FilterInput from '../../components/Filter/FilterInput';
-import Text from '../../components/Text/Text';
-import { TextVariants } from '../../components/Text/types';
 import { px } from '../../utils';
 import { FilterDimension, FilterDropdownMenuProps } from './types';
 import { getFilterDimensions, handleInputChange as handleInputChangeUtil } from './utils';
@@ -56,9 +54,7 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
               variant={ButtonVariants.primary}
               onClick={() => onApplyFilter?.(false)}
             >
-              <Text variant={TextVariants.string2} className={`${baseClassName}__button-text`}>
-                {dropdownMenuTranslation?.confirm || 'Confirm'}
-              </Text>
+              <span className={`${baseClassName}__button-text`}>{dropdownMenuTranslation?.confirm || 'Confirm'}</span>
             </Button>
           ) : (
             <>
@@ -67,16 +63,16 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
                 variant={ButtonVariants.secondary}
                 onClick={() => onClickClear?.(buttonType ?? '')}
               >
-                <Text variant={TextVariants.string2}>{dropdownMenuTranslation?.clearAll || 'Clear all'}</Text>
+                {dropdownMenuTranslation?.clearAll || 'Clear all'}
               </Button>
               <Button
                 className={classnames(`${baseClassName}__buttons`)}
                 variant={ButtonVariants.primary}
                 onClick={() => onApplyFilter?.(false)}
               >
-                <Text variant={TextVariants.string2} className={`${baseClassName}__button-text`}>
+                <span className={`${baseClassName}__button-text`}>
                   {dropdownMenuTranslation?.showAuctions || `Show ${resultsCount} Auctions`}
-                </Text>
+                </span>
               </Button>
             </>
           )}

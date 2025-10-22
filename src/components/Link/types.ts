@@ -1,3 +1,4 @@
+/* eslint-disable local-rules/no-deprecated-text-variants */
 import { TextVariants } from '../Text';
 
 export enum LinkVariants {
@@ -6,7 +7,6 @@ export enum LinkVariants {
   /** @deprecated Use linkStylised instead */
   snwHeaderLink = TextVariants.snwHeaderLink,
   /** @deprecated Use linkLarge instead */
-  /** link is being rendered in a footer|header */
   snwFlyoutLink = TextVariants.snwFlyoutLink,
   /** @deprecated Use linkSmall instead */
   /** standard link */
