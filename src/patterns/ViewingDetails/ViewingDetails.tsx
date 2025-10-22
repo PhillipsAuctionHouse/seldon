@@ -90,7 +90,7 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
           {children && <div className={`${baseClassName}__children`}>{children}</div>}
 
           {sessionTimesLabel && (
-            <Text variant={TextVariants.headingMedium} className={`${baseClassName}__heading`}>
+            <Text variant={TextVariants.headingSmall} className={`${baseClassName}__heading`}>
               {sessionTimesLabel}
             </Text>
           )}
@@ -102,7 +102,7 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
                 className={`${baseClassName}__session`}
               >
                 {session.sessionLabel && (
-                  <Text variant={TextVariants.headingSmall} className={`${baseClassName}__label`}>
+                  <Text variant={TextVariants.labelMedium} className={`${baseClassName}__label`}>
                     {session.sessionLabel}
                   </Text>
                 )}
@@ -110,7 +110,7 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
               </div>
             ))}
           {label && (
-            <Text variant={TextVariants.headingMedium} className={`${baseClassName}__heading`}>
+            <Text variant={TextVariants.headingSmall} className={`${baseClassName}__heading`}>
               {label}
             </Text>
           )}

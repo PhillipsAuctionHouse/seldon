@@ -95,15 +95,13 @@
     }
 
     &:hover {
-      background-color: $button-hover;
-
       & svg {
-        color: $pure-white;
-        fill: $pure-white;
+        color: $cta-hover;
+        fill: $cta-hover;
         margin-inline-end: unset;
 
         path {
-          fill: $pure-white;
+          fill: $cta-hover;
         }
       }
     }

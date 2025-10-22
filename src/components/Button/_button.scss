@@ -21,12 +21,6 @@
     color 0.25s,
     background-color 0.25s;
 
-  &:not(.#{$px}-button--link) {
-    @media (min-width: $breakpoint-md) and (max-width: $breakpoint-xl) {
-      font-size: 1rem; // 16px  TODO: temporary override we need to revisit this with the button redesigns that are coming soon
-    }
-  }
-
   svg {
     fill: $pure-white;
     height: calc($font-size-label-small * 1.3);

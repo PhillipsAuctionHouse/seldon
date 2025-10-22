@@ -2,6 +2,7 @@ import Text from '../../components/Text/Text';
 import classnames from 'classnames';
 import { getSafeCountryCallingCode } from './utils';
 import { Country, ModalBaseProps } from './types';
+import { TextVariants } from '../../components/Text';
 
 /**
  * Props for a single country option in the picker.
@@ -35,7 +36,10 @@ export const CountryPickerOption = ({
   // Destructure discriminated union for type-safe access
   const { isPhone, onChange } = variantConfig;
   return (
-    <label
+    <Text
+      element="label"
+      variant={TextVariants.labelMedium}
+      // @ts-expect-error this is actually a label element
       htmlFor={countryId}
       className={classnames(`${baseClassName}__option`, {
         [`${baseClassName}__option--selected`]: isChecked,
@@ -66,6 +70,6 @@ export const CountryPickerOption = ({
         alt={`${name} flag`}
         className={`${baseClassName}__option-flag`}
       />
-    </label>
+    </Text>
   );
 };

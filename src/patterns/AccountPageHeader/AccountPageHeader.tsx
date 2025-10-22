@@ -63,7 +63,12 @@ const AccountPageHeader = forwardRef<HTMLDivElement, AccountPageHeaderProps>(
         {iconButtons && (
           <>
             {iconButtons.map((button) => (
-              <IconButton key={`icon-button-${button.icon}`} onClick={button.onClick} aria-label={button.ariaLabel}>
+              <IconButton
+                variant={ButtonVariants.tertiary}
+                key={`icon-button-${button.icon}`}
+                onClick={button.onClick}
+                aria-label={button.ariaLabel}
+              >
                 <Icon icon={button.icon} aria-label={button.ariaLabel} title={button.ariaLabel} />
               </IconButton>
             ))}
@@ -75,11 +80,15 @@ const AccountPageHeader = forwardRef<HTMLDivElement, AccountPageHeaderProps>(
             <SSRMediaQuery.Media greaterThanOrEqual="md">
               <Button variant={ButtonVariants.secondary} onClick={primaryButton.onClick}>
                 <Icon icon={primaryButton.icon} />{' '}
-                <Text className={`${baseClassName}__button-label`}>{primaryButton.label}</Text>
+                <span className={`${baseClassName}__button-label`}>{primaryButton.label}</span>
               </Button>
             </SSRMediaQuery.Media>
             <SSRMediaQuery.Media lessThan="md">
-              <IconButton onClick={primaryButton.onClick} aria-label={primaryButton.ariaLabel}>
+              <IconButton
+                variant={ButtonVariants.tertiary}
+                onClick={primaryButton.onClick}
+                aria-label={primaryButton.ariaLabel}
+              >
                 <Icon icon={primaryButton.icon} title={primaryButton.ariaLabel} />
               </IconButton>
             </SSRMediaQuery.Media>
