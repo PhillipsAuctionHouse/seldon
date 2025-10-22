@@ -1,3 +1,10 @@
+## [1.205.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.205.0...v1.205.1) (2025-10-22)
+
+
+### Bug Fixes
+
+* **Filters:** L3-8017 Calendar filters - CTAs are being cut off and the filter drawer does not fill the screen on mobile browsers ([#748](https://github.com/PhillipsAuctionHouse/seldon/issues/748)) ([3d6af11](https://github.com/PhillipsAuctionHouse/seldon/commit/3d6af116eb9064d70a81c709973986e753ae426d))
+
 # [1.205.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.204.2...v1.205.0) (2025-10-21)
 
 
