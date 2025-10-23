@@ -1,12 +1,12 @@
 import React, { ComponentProps, forwardRef } from 'react';
-import { getCommonProps } from '../../utils';
+import { getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
 import CountryPicker from '../CountryPicker/CountryPicker';
 import Input from '../../components/Input/Input';
 import { getSafeCountryCallingCode } from '../CountryPicker/utils';
 import { countries } from '../CountryPicker/constants';
-import { Text } from '../../components/Text';
 import { CountryCode } from './types';
+import { useNormalizedInputProps } from '../../utils';
 
 export interface PhoneNumberInputProps extends Omit<ComponentProps<'div'>, 'onChange'> {
   /**
@@ -90,7 +90,12 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
       handleValueChange?.(e.target.value, (selected as CountryCode) || '');
     };
 
-    const errorId = errorText ? `${baseClassName}-error-text` : undefined;
+    const inputProps = useNormalizedInputProps({
+      id: 'phone-input',
+      invalid: error,
+      invalidText: errorText,
+      type: 'text',
+    });
 
     return (
       <div ref={ref} className={classnames(`${baseClassName}`, className)} {...commonProps}>
@@ -129,18 +134,12 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
               disabled={disabled}
               // We don't want to use the input default text, and the error text will be shown under the country picker
               invalidText=""
-              aria-describedby={errorId}
+              aria-describedby={inputProps.invalidId}
             />
           </div>
         </div>
-        {/** Mimics the Input component validation */}
-        {errorText ? (
-          <Text className={`${baseClassName}__error ${baseClassName}__error-msg`} id={errorId}>
-            {errorText}
-          </Text>
-        ) : (
-          <Text className={`${baseClassName}__error`}>&nbsp;</Text>
-        )}
+        {/* Invalid message */}
+        {inputProps.validation ? inputProps.validation : <p className={`${px}-input__validation`}>&nbsp;</p>}
       </div>
     );
   },

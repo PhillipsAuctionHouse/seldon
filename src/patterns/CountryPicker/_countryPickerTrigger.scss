@@ -32,6 +32,7 @@
       flex-direction: row;
       font-variation-settings: 'wght' 600;
       justify-content: space-between;
+      margin-bottom: $spacing-micro;
       padding: $spacing-xsm;
       width: 100%;
 
@@ -72,22 +73,22 @@
       }
     }
 
-    &-error-msg {
-      animation: reveal 0.45s linear forwards;
-      margin-top: $spacing-micro;
-
-      // Reveal animation (match Input)
-      max-height: 2em;
-      opacity: 1;
-      transition: opacity 0.2s;
-      visibility: visible;
-      white-space: nowrap;
-      will-change: opacity, max-height;
-    }
-
     &-flag {
       height: 1rem;
       margin-right: $spacing-sm;
     }
+  }
+}
+.#{$px}-input__validation {
+  animation: reveal 0.45s linear forwards;
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
