@@ -2,14 +2,13 @@
 import { TextVariants } from '../Text';
 
 export enum LinkVariants {
-  /** link rendering emailto: */
+  /** @deprecated Use the corresponding link size variant, linkSmall, linkMedium, or linkLarge instead */
   email = TextVariants.email,
   /** @deprecated Use linkStylised instead */
   snwHeaderLink = TextVariants.snwHeaderLink,
   /** @deprecated Use linkLarge instead */
   snwFlyoutLink = TextVariants.snwFlyoutLink,
   /** @deprecated Use linkSmall instead */
-  /** standard link */
   link = TextVariants.link,
   linkSmall = TextVariants.linkSmall,
   linkMedium = TextVariants.linkMedium,

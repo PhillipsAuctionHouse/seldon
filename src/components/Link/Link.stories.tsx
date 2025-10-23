@@ -34,7 +34,8 @@ Playground.argTypes = {
       (variant) =>
         variant !== LinkVariants.link &&
         variant !== LinkVariants.snwFlyoutLink &&
-        variant !== LinkVariants.snwHeaderLink,
+        variant !== LinkVariants.snwHeaderLink &&
+        variant !== LinkVariants.email,
     ),
     control: {
       type: 'select',
@@ -68,29 +69,27 @@ ExternalLink.args = {
 
 export const LegacyVariants = ({ playgroundWidth, children, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <div>
-        <h4>Deprecated Link Variants (for backward compatibility)</h4>
-        <p style={{ fontSize: '0.875rem', color: '#666', marginBottom: '1rem' }}>
-          These variants are deprecated but still supported for backward compatibility.
-        </p>
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-        <Link {...args} variant={LinkVariants.link}>
-          Deprecated: link (use linkSmall instead)
-        </Link>
-        <Link {...args} variant={LinkVariants.snwFlyoutLink}>
-          Deprecated: snwFlyoutLink (use linkLarge instead)
-        </Link>
-        <Link {...args} variant={LinkVariants.snwHeaderLink}>
-          Deprecated: snwHeaderLink (use linkStylised instead)
-        </Link>
-      </div>
-    </div>
+    <Link {...args}>{children}</Link>
   </div>
 );
 
 LegacyVariants.args = {
-  children: 'Legacy Link',
+  children: 'Legacy Link Variants',
   href: internalHref,
+  variant: LinkVariants.link,
+};
+
+LegacyVariants.argTypes = {
+  variant: {
+    options: Object.values(LinkVariants).filter(
+      (variant) =>
+        variant === LinkVariants.link ||
+        variant === LinkVariants.snwFlyoutLink ||
+        variant === LinkVariants.snwHeaderLink ||
+        variant === LinkVariants.email,
+    ),
+    control: {
+      type: 'select',
+    },
+  },
 };

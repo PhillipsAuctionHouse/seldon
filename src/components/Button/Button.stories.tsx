@@ -16,6 +16,12 @@ const meta = {
         type: 'select',
       },
     },
+    linkSize: {
+      options: ['sm', 'md', 'lg'],
+      control: {
+        type: 'select',
+      },
+    },
     isIconLast: { control: 'boolean' },
   },
 } satisfies Meta<typeof Button>;
@@ -52,7 +58,6 @@ export const ButtonAsLink = (props: ButtonProps) => (
 
 ButtonAsLink.args = {
   variant: ButtonVariants.tertiary,
-  size: 'md',
 };
 
 export const ButtonAsLinkWithPrefetch = (props: ButtonProps) => (

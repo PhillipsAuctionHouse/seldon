@@ -33,6 +33,7 @@ export enum TextVariants {
   string3 = 'string3',
   /** @deprecated Use bodySmall instead */
   button = 'button',
+  /** @deprecated Use the bodyMedium variant instead */
   email = 'email',
   /** @deprecated Use labelSmall instead */
   label = 'label',
