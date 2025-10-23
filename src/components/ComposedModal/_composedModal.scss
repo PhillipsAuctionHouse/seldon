@@ -34,11 +34,19 @@
     justify-content: center;
     margin: 0 $spacing-lg;
     padding: $spacing-sm 0 0;
+
+    @media (max-width: 450px) {
+      flex-direction: column;
+    }
   }
 
   &__btns-group > * {
     flex: 1 1 50%;
     margin: $spacing-xsm 0 0;
+
+    @media (max-width: 450px) {
+      flex: 1 1 auto;
+    }
   }
 
   &__btns {
