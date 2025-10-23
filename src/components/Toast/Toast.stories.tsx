@@ -70,7 +70,7 @@ const ToastDemo = () => {
             title: 'Yay! Your action was successful',
             duration: Infinity,
             actionElement: (
-              <Button variant={ButtonVariants.link} onClick={() => alert('Action clicked!')}>
+              <Button variant={ButtonVariants.tertiary} onClick={() => alert('Action clicked!')}>
                 Click for more
               </Button>
             ),
