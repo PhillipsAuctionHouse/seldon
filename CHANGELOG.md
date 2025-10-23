@@ -1,3 +1,10 @@
+# [1.206.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.205.2...v1.206.0) (2025-10-23)
+
+
+### Features
+
+* **wizard:** L3-7123 Create progress component (Part 2)  ([#697](https://github.com/PhillipsAuctionHouse/seldon/issues/697)) ([6cbc1a8](https://github.com/PhillipsAuctionHouse/seldon/commit/6cbc1a8c0ed9ec80a5af286c955bc41fcdd231d7))
+
 ## [1.205.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.205.1...v1.205.2) (2025-10-22)
 
 
