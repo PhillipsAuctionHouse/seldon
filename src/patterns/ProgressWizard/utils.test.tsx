@@ -1,14 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { generateStepKey, wrapChild, wrapChildren, getLabelsFromChildren, isControlled } from './utils';
+import { generateStepId, wrapChild, wrapChildren, getLabelsFromChildren, isControlled } from './utils';
 
 describe('Progress wizard utils', () => {
-  it('generateStepKey returns aria-based key when aria provided', () => {
-    expect(generateStepKey(2, 'MyLabel')).toBe('.2-MyLabel');
-  });
-
-  it('generateStepKey returns index-based key when no aria provided', () => {
-    expect(generateStepKey(1)).toBe('.wizard-step-1');
+  it('generateStepId returns index based id', () => {
+    expect(generateStepId(2)).toBe('wizard-step-2');
   });
 
   it('wrapChild returns original node for non-elements', () => {

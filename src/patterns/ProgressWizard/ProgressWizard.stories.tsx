@@ -1,5 +1,6 @@
 import ProgressWizard, { type ProgressWizardProps } from './ProgressWizard';
 import Input from '../../components/Input/Input';
+import Select from '../../components/Select/Select';
 import { type ArgTypes } from '@storybook/react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { LoadingState } from './types';
@@ -369,6 +370,197 @@ export const TraditionalFormWizard = () => {
   );
 };
 TraditionalFormWizard.argTypes = argTypes;
+
+export const MobileFormStory = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    country: '',
+    dateOfBirth: '',
+    gender: '',
+    occupation: '',
+    company: '',
+    emergencyContact: '',
+    emergencyPhone: '',
+    medicalConditions: '',
+    allergies: '',
+    medications: '',
+    insuranceProvider: '',
+    insuranceNumber: '',
+    comments: '',
+  });
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    alert(`Mobile Form Submitted:\n${JSON.stringify(formData, null, 2)}`);
+  };
+
+  const updateFormData = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  return (
+    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <form onSubmit={handleSubmit} style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <ProgressWizard
+          onContinue={onContinue}
+          onCancel={onCancel}
+          onFormSubmit={onFormSubmit}
+          onBack={onBack}
+          customHeader={
+            <Text align={TextAlignments.center} variant={TextVariants.heading3}>
+              Mobile Registration Form
+            </Text>
+          }
+        >
+          <div>
+            {/* Personal Information Section */}
+            <Text variant={TextVariants.heading4} style={{ marginBottom: '16px', marginTop: '8px' }}>
+              Personal Information
+            </Text>
+
+            <Input
+              name="firstName"
+              id="firstName"
+              labelText="First Name *"
+              value={formData.firstName}
+              onChange={(e) => updateFormData('firstName', e.target.value)}
+              required
+            />
+
+            <Input
+              name="lastName"
+              id="lastName"
+              labelText="Last Name *"
+              value={formData.lastName}
+              onChange={(e) => updateFormData('lastName', e.target.value)}
+              required
+            />
+
+            <Input
+              name="email"
+              id="email"
+              labelText="Email Address *"
+              type="email"
+              value={formData.email}
+              onChange={(e) => updateFormData('email', e.target.value)}
+              required
+            />
+
+            <Input
+              name="phone"
+              id="phone"
+              labelText="Phone Number *"
+              type="tel"
+              value={formData.phone}
+              onChange={(e) => updateFormData('phone', e.target.value)}
+              required
+            />
+
+            <Input
+              name="dateOfBirth"
+              id="dateOfBirth"
+              labelText="Date of Birth *"
+              type="date"
+              value={formData.dateOfBirth}
+              onChange={(e) => updateFormData('dateOfBirth', e.target.value)}
+              required
+            />
+
+            <Select
+              name="gender"
+              id="gender"
+              labelText="Gender"
+              value={formData.gender}
+              onChange={(e) => updateFormData('gender', e.target.value)}
+            >
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="non-binary">Non-binary</option>
+              <option value="prefer-not-to-say">Prefer not to say</option>
+            </Select>
+          </div>
+          {/* Address Information Section */}
+          <div>
+            <Text variant={TextVariants.heading4} style={{ marginBottom: '16px', marginTop: '24px' }}>
+              Address Information
+            </Text>
+
+            <Input
+              name="address"
+              id="address"
+              labelText="Street Address *"
+              value={formData.address}
+              onChange={(e) => updateFormData('address', e.target.value)}
+              required
+            />
+
+            <Input
+              name="city"
+              id="city"
+              labelText="City *"
+              value={formData.city}
+              onChange={(e) => updateFormData('city', e.target.value)}
+              required
+            />
+
+            <Input
+              name="state"
+              id="state"
+              labelText="State/Province *"
+              value={formData.state}
+              onChange={(e) => updateFormData('state', e.target.value)}
+              required
+            />
+
+            <Input
+              name="zipCode"
+              id="zipCode"
+              labelText="ZIP/Postal Code *"
+              value={formData.zipCode}
+              onChange={(e) => updateFormData('zipCode', e.target.value)}
+              required
+            />
+
+            <Select
+              name="country"
+              id="country"
+              labelText="Country *"
+              value={formData.country}
+              onChange={(e) => updateFormData('country', e.target.value)}
+              required
+            >
+              <option value="">Select Country</option>
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
+              <option value="UK">United Kingdom</option>
+              <option value="AU">Australia</option>
+              <option value="DE">Germany</option>
+              <option value="FR">France</option>
+              <option value="JP">Japan</option>
+              <option value="other">Other</option>
+            </Select>
+          </div>
+        </ProgressWizard>
+      </form>
+    </div>
+  );
+};
+
+MobileFormStory.storyName = 'Mobile Form - Long Content';
+MobileFormStory.parameters = {
+  viewport: {
+    defaultViewport: 'mobile1',
+  },
+};
+MobileFormStory.argTypes = argTypes;
 
 export const Playground: {
   render: (props: ProgressWizardProps) => JSX.Element;

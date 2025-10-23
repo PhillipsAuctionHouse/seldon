@@ -1,9 +1,8 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-progress-wizard {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   z-index: 100;
 
   &__logo {
@@ -16,6 +15,7 @@
   }
 
   &__content {
+    flex: 1 1 auto;
     margin-top: $spacing-md;
     overflow-y: auto;
   }
@@ -44,7 +44,6 @@
   @media (max-width: $breakpoint-md) {
     display: flex;
     flex-direction: column;
-    height: 100vh;
     min-height: 0;
     overflow: visible;
 
@@ -68,7 +67,6 @@
   @media (min-width: $breakpoint-md) {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
 
     &__content {
       flex: 1 1 auto;

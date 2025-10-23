@@ -250,7 +250,7 @@ describe('ProgressWizard', () => {
     render(<ProgressWizard />);
     // The component keeps step containers in the DOM but hides them; assert the content area has no visible children
     const content = screen
-      .getByRole('region', { name: /Form Wizard/i })
+      .getByRole('region', { name: /Progress Wizard/i })
       ?.querySelector('.seldon-progress-wizard__content');
     expect(content).toBeTruthy();
     if (content) expect(content).toBeEmptyDOMElement();

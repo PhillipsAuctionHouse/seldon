@@ -10,7 +10,7 @@ import {
 import { LoadingState, type CallbackProps, type ProgressWizardBaseProps } from './types';
 import { useHistoryManagement } from './hooks/useHistoryManagement';
 import { getCommonProps } from '../../utils';
-import Footer from './components/ProgressWizardFooter';
+import Footer, { ProgressWizardFooterProps } from './components/ProgressWizardFooter';
 import { ProgressIndicator } from '../../components/ProgressIndicator';
 import { wrapChildren, getLabelsFromChildren, isControlled } from './utils';
 
@@ -20,7 +20,7 @@ import { wrapChildren, getLabelsFromChildren, isControlled } from './utils';
  * @property customHeader - Optional custom header ReactNode displayed above the progress indicator. This can be used to add a logo or other branding element to the top of the wizard. If not provided, no header will be shown. For Phillips, it should probably be `          <Icon icon="PhillipsLogo" height={32} width={120} aria-label="Phillips Logo" />
  * @property hideNavigation - If true, hides the default footer navigation. When hidden you must manage step index changes yourself (e.g. via currentStepIndex prop)
  * @property hideProgressIndicator - If true, hides the progress indicator bar.
- * @property isEnableHistoryManagement - If true (default), step advances push a history state so the browser back/forward buttons navigate between steps.
+ * @property isEnableHistoryManagement - If true step advances push a history state so the browser back/forward buttons navigate between steps.  Default is false and if you want this behavior you should use the useHistoryManagement hook directly in your controlling component.
  * @property currentStepIndex - Controlled current step index (0‑based). When provided the component becomes controlled and internal navigation state will not respond to the built-in buttons.
  * @property defaultStepIndex - Default step index (0‑based). Used to initialize the internal step state.
  * @property shouldAllowContinue - set false to disable continue/submit buttons
@@ -42,7 +42,6 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
     isEnableHistoryManagement = false,
     currentStepIndex: extCurrentStepIndex,
     defaultStepIndex: defaultStepIndex_,
-
     shouldAllowContinue = true,
     loadingState = LoadingState.Idle,
     buttonLabels,
@@ -51,7 +50,6 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
     onContinue,
     onFormSubmit,
     children,
-
     ...rest
   } = props;
 
@@ -111,18 +109,13 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
 
   // Navigation helpers
   const isFirstStep = currentStepIndex === 0;
-  const toFirstStep = () => setInternalCurrentStepIndex(0);
   const isLastStep = currentStepIndex === stepCount - 1;
-  const toLastStep = () => setInternalCurrentStepIndex(stepCount - 1);
-
   const childContent = wrappedChildren;
 
-  const footerProps = {
+  const footerProps: ProgressWizardFooterProps = {
     setCurrentStepIndex: setInternalCurrentStepIndexHandler,
     isFirstStep,
-    toFirstStep,
     isLastStep,
-    toLastStep,
     baseClassName,
     shouldAllowContinue,
     isLoading: [LoadingState.Loading, LoadingState.Submitting].includes(loadingState),
@@ -131,25 +124,16 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
     onBack,
     onCancel,
     onFormSubmit,
-  } as const;
+  };
 
   return (
-    <section {...commonProps} className={baseClassName} ref={ref} aria-label="Form Wizard">
+    <section {...commonProps} className={baseClassName} ref={ref} aria-label="Progress Wizard">
       {customHeader}
       {!hideProgressIndicator ? (
-        <nav aria-label="Progress">
-          <ProgressIndicator
-            totalSteps={stepCount}
-            currentStep={currentStepIndex + 1}
-            labels={labels}
-            progressIndicatorAriaLabel="Wizard Progress"
-          />
-        </nav>
+        <ProgressIndicator totalSteps={stepCount} currentStep={currentStepIndex + 1} labels={labels} />
       ) : null}
 
-      <div className={`${baseClassName}__content`} aria-labelledby={`wizard-step-label-${currentStepIndex}`}>
-        {childContent}
-      </div>
+      <div className={`${baseClassName}__content`}>{childContent}</div>
       {!hideNavigation ? (
         <div className={`${baseClassName}__footer`}>
           <Footer {...footerProps} />

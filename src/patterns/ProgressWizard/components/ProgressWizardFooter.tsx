@@ -22,9 +22,7 @@ import { type CallbackProps, type OnClick, type ButtonLabels, DefaultButtonLabel
 export interface ProgressWizardFooterProps extends CallbackProps {
   setCurrentStepIndex: SetCurrentStepIndex;
   isFirstStep: boolean;
-  toFirstStep: () => void;
   isLastStep: boolean;
-  toLastStep: () => void;
   baseClassName?: string;
   labels?: ButtonLabels;
   shouldAllowContinue: boolean;
@@ -40,12 +38,10 @@ export interface ProgressWizardFooterProps extends CallbackProps {
  * @param props - ProgressWizardFooterProps
  * @returns ReactElement with navigation buttons
  */
-export const Footer: FC<ProgressWizardFooterProps> = ({
+export const ProgressWizardFooter: FC<ProgressWizardFooterProps> = ({
   setCurrentStepIndex,
   isFirstStep,
-  toFirstStep,
   isLastStep,
-  toLastStep,
   baseClassName = 'progress-wizard-footer',
   labels: customLabels,
   shouldAllowContinue,
@@ -56,19 +52,11 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
   onFormSubmit,
 }) => {
   const onClickStepNavigationAction =
-    ({ fn, distance = 0, skipTo }: { fn?: OnClick; distance?: number; skipTo?: 'first' | 'last' | number }): OnClick =>
+    ({ fn, distance = 0 }: { fn?: OnClick; distance?: number }): OnClick =>
     async (e) => {
       const res = fn ? await Promise.resolve(fn(e)) : undefined;
       if (res !== false) {
-        if (typeof skipTo === 'number') {
-          setCurrentStepIndex(skipTo);
-        } else if (skipTo === 'first') {
-          toFirstStep();
-        } else if (skipTo === 'last') {
-          toLastStep();
-        } else {
-          if (distance) setCurrentStepIndex((prev) => prev + distance);
-        }
+        if (distance) setCurrentStepIndex((prev) => prev + distance);
       }
     };
 
@@ -117,4 +105,4 @@ export const Footer: FC<ProgressWizardFooterProps> = ({
   );
 };
 
-export default Footer;
+export default ProgressWizardFooter;

@@ -1,15 +1,11 @@
 import React, { type ReactNode } from 'react';
 
-export const generateStepKey = (index: number, ariaLabel?: string) =>
-  ariaLabel ? `.${index}-${ariaLabel}` : `.wizard-step-${index}`;
+export const generateStepId = (index: number) => `wizard-step-${index}`;
 
 export const wrapChild = (child: ReactNode, childIndex: number, currentIndex: number, baseClassName: string) => {
   if (!React.isValidElement(child)) return child;
-  const props = (child.props ?? {}) as Record<string, unknown>;
-  const ariaLabel = typeof props['aria-label'] === 'string' ? (props['aria-label'] as string) : undefined;
-  const key = generateStepKey(childIndex, ariaLabel);
   return (
-    <div key={key} className={childIndex !== currentIndex ? `${baseClassName}-hidden` : ''}>
+    <div key={generateStepId(childIndex)} className={childIndex !== currentIndex ? `${baseClassName}-hidden` : ''}>
       {child}
     </div>
   );

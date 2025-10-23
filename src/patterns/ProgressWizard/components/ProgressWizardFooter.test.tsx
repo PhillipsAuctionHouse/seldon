@@ -8,9 +8,7 @@ const getProgressWizardButton = (label: string) => screen.getByRole('button', { 
 const baseProps: ProgressWizardFooterProps = {
   setCurrentStepIndex: vi.fn(),
   isFirstStep: false,
-  toFirstStep: vi.fn(),
   isLastStep: false,
-  toLastStep: vi.fn(),
   baseClassName: 'progress-wizard-footer',
   shouldAllowContinue: true,
   isLoading: false,
