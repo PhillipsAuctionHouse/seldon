@@ -1,5 +1,4 @@
 import { Meta } from '@storybook/react';
-import { useForm, FormProvider, Controller } from 'react-hook-form';
 import PhoneNumberInput, { PhoneNumberInputProps } from './PhoneNumberInput';
 import Button from '../../components/Button/Button';
 import Drawer from '../../components/Drawer/Drawer';
@@ -13,49 +12,39 @@ const meta = {
 } satisfies Meta<typeof PhoneNumberInput>;
 
 export default meta;
-export const Playground = (props: Partial<PhoneNumberInputProps>) => {
-  const methods = useForm<{ phone: string; countryCode: CountryCode }>({
-    defaultValues: { phone: '', countryCode: '' as CountryCode },
-  });
-  const {
-    setValue,
-    watch,
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = methods;
 
-  const countryCode = watch('countryCode');
-  const onSubmit = (data: { phone: string; countryCode: CountryCode }) => {
-    // Prevent crash, optionally log or show data
-    alert(JSON.stringify(data));
+export const Playground = (props: Partial<PhoneNumberInputProps>) => {
+  const [phone, setPhone] = useState('');
+  const [countryCode, setCountryCode] = useState<CountryCode>('' as CountryCode);
+  const [error, setError] = useState('');
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (props.required && !phone) {
+      setError('Phone number is required');
+    } else {
+      setError('');
+      alert(JSON.stringify({ phone, countryCode }, null, 2));
+    }
   };
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name="phone"
-          control={control}
-          rules={{ required: props.required ? 'Phone number is required' : false }}
-          render={({ field }) => (
-            <PhoneNumberInput
-              {...field}
-              countryCode={countryCode}
-              handleValueChange={(val, code) => {
-                field.onChange(val);
-                setValue('countryCode', code);
-              }}
-              label={props.label || 'Phone Number'}
-              required={props.required}
-              error={props.error || !!errors.phone}
-              errorText={props.errorText || errors.phone?.message}
-              disabled={props.disabled}
-            />
-          )}
-        />
-      </form>
-    </FormProvider>
+    <form onSubmit={handleSubmit}>
+      <PhoneNumberInput
+        value={phone}
+        countryCode={countryCode}
+        handleValueChange={(val, code) => {
+          setPhone(val);
+          setCountryCode(code);
+        }}
+        label={props.label || 'Phone Number'}
+        required={props.required}
+        error={!!error}
+        errorText={error}
+        disabled={props.disabled}
+      />
+      <Button type="submit">Submit</Button>
+    </form>
   );
 };
 
@@ -79,90 +68,58 @@ Playground.argTypes = {
   errorText: { control: 'text', description: 'Detailed error text for the input' },
 };
 
-export const InDrawerWithControllerAndValidation = () => {
-  const {
-    control,
-    setValue,
-    watch,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<{
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
-    phoneCountryCode: CountryCode;
-  }>({
-    defaultValues: {
-      firstName: 'Phil',
-      lastName: 'Lips',
-      phoneNumber: '', // Set to empty string for error testing
-      phoneCountryCode: 'US',
-    },
-  });
-
+export const InDrawerWithValidation = () => {
+  const [firstName, setFirstName] = useState('Phil');
+  const [lastName, setLastName] = useState('Lips');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneCountryCode, setPhoneCountryCode] = useState<CountryCode>('US');
+  const [errors, setErrors] = useState({ firstName: '', lastName: '', phoneNumber: '' });
   const [isDrawerOpen, setDrawerOpen] = useState(false);
-  const [_, setSubmittedData] = useState<Record<string, string> | null>(null);
 
-  const onSubmit = (data: {
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
-    phoneCountryCode: CountryCode;
-  }) => {
-    setSubmittedData(data);
-    alert(JSON.stringify(data, null, 2));
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    const newErrors = {
+      firstName: firstName ? '' : 'First name is required',
+      lastName: lastName ? '' : 'Last name is required',
+      phoneNumber: phoneNumber ? '' : 'Phone number is required',
+    };
+    setErrors(newErrors);
+
+    if (!newErrors.firstName && !newErrors.lastName && !newErrors.phoneNumber) {
+      alert(JSON.stringify({ firstName, lastName, phoneNumber, phoneCountryCode }, null, 2));
+    }
   };
 
   return (
     <>
       <Button onClick={() => setDrawerOpen(true)}>Open Drawer</Button>
       <Drawer isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)} title="Edit Phone Number">
-        <form onSubmit={handleSubmit(onSubmit)} style={{ padding: '1rem' }}>
-          <Controller
-            name="firstName"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <Input
-                {...field}
-                labelText="First Name"
-                id="first-name"
-                invalid={!!errors?.phoneNumber}
-                invalidText={errors?.phoneNumber?.message}
-              />
-            )}
+        <form onSubmit={handleSubmit} style={{ padding: '1rem' }}>
+          <Input
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            labelText="First Name"
+            id="first-name"
+            invalid={!!errors.firstName}
+            invalidText={errors.firstName}
           />
-          <Controller
-            name="lastName"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <Input
-                {...field}
-                labelText="Last Name"
-                id="last-name"
-                invalid={!!errors?.phoneNumber}
-                invalidText={errors?.phoneNumber?.message}
-              />
-            )}
+          <Input
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            labelText="Last Name"
+            id="last-name"
+            invalid={!!errors.lastName}
+            invalidText={errors.lastName}
           />
-          <Controller
-            name="phoneNumber"
-            control={control}
-            defaultValue=""
-            rules={{ required: 'Phone number is required' }}
-            render={({ field }) => (
-              <PhoneNumberInput
-                value={field.value}
-                countryCode={watch('phoneCountryCode') as CountryCode}
-                handleValueChange={(val, code) => {
-                  field.onChange(val);
-                  setValue('phoneCountryCode', code, { shouldValidate: true });
-                }}
-                error={!!errors?.phoneNumber}
-                errorText={errors?.phoneNumber?.message}
-              />
-            )}
+          <PhoneNumberInput
+            value={phoneNumber}
+            countryCode={phoneCountryCode}
+            handleValueChange={(val, code) => {
+              setPhoneNumber(val);
+              setPhoneCountryCode(code);
+            }}
+            error={!!errors.phoneNumber}
+            errorText={errors.phoneNumber}
           />
           <Button type="submit" style={{ marginTop: '1rem' }}>
             Submit form

@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { countries } from './constants';
 import { Country, ModalBaseProps } from './types';
 import React, { forwardRef } from 'react';
+import { px, useNormalizedInputProps } from '../../utils';
 
 // Props specific to the trigger, also used by the parent modal
 export type CountryPickerTriggerProps = {
@@ -41,13 +42,24 @@ const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & Inte
     // Destructure discriminated union for type-safe access
     const { isPhone, value } = variantConfig;
 
-    const errorId = errorMsg ? `${baseClassName}__trigger-error-msg` : undefined;
+    const inputProps = useNormalizedInputProps({
+      id: 'country-picker-trigger-input',
+      invalid: hasError,
+      invalidText: errorMsg,
+      type: 'text',
+    });
+
+    const errorId = inputProps.invalidId;
 
     // Determine the ISO country code for the flag
     // If isPhone, value is a country code; otherwise, look up code by name
     const flagCode: Country['code'] | undefined = isPhone
       ? value
       : countries.filter((country) => country.name === value)?.[0]?.code;
+
+    const handleValidation = () => {
+      return inputProps.validation ? inputProps.validation : <p className={`${px}-input__validation`}>&nbsp;</p>;
+    };
 
     return (
       <div className={classNames(`${baseClassName}__trigger`, className)}>
@@ -65,7 +77,7 @@ const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & Inte
           ref={ref}
           type="button"
           aria-label={labelText}
-          aria-invalid={hasError}
+          aria-invalid={inputProps.invalid}
           aria-describedby={errorId}
           className={classNames(`${baseClassName}__trigger-btn`, {
             [`${baseClassName}__trigger-btn--error`]: hasError,
@@ -87,11 +99,8 @@ const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & Inte
             <Icon icon="ChevronDown" color="black-100" width={16} height={16} />
           </span>
         </button>
-        {hasError && errorMsg && (
-          <Text className={`${baseClassName}__trigger-error-msg`} id={errorId}>
-            {errorMsg}
-          </Text>
-        )}
+
+        {!isPhone && handleValidation()}
       </div>
     );
   },

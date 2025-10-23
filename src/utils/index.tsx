@@ -26,7 +26,7 @@ export enum PaddingTokens {
 
 export enum SpacingTokens {
   micro = 'micro',
-  xs = 'xs',
+  xsm = 'xsm',
   sm = 'sm',
   md = 'md',
   lg = 'lg',

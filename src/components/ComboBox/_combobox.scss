@@ -25,8 +25,8 @@
   &__input {
     @include text($bodyMedium);
 
-    accent-color: $soft-black;
-    border: 1px solid $keyline-gray;
+    accent-color: $black-100;
+    border: 1px solid $black-100;
     border-radius: 0.1875rem;
     font-variation-settings: 'wght' 600;
     outline: none;
