@@ -1,3 +1,10 @@
+# [1.207.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.206.0...v1.207.0) (2025-10-24)
+
+
+### Features
+
+* **SessionCTA:** L3-8027 CTA Buttons Cut Off on Sessions & Viewings Modal for RM ([#750](https://github.com/PhillipsAuctionHouse/seldon/issues/750)) ([7448a01](https://github.com/PhillipsAuctionHouse/seldon/commit/7448a010bd9509e3930d4867ac7d6f67e4b923ad))
+
 # [1.206.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.205.2...v1.206.0) (2025-10-23)
 
 
