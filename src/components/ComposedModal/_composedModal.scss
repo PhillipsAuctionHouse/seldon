@@ -1,5 +1,7 @@
 @use '#scss/allPartials' as *;
 
+$breakpoint-mobile-small: 450px;
+
 .#{$px}-composed-modal {
   border-radius: 1rem;
   max-width: 95vw;
@@ -35,7 +37,7 @@
     margin: 0 $spacing-lg;
     padding: $spacing-sm 0 0;
 
-    @media (max-width: 450px) {
+    @media (max-width: $breakpoint-mobile-small) {
       flex-direction: column;
     }
   }
@@ -44,7 +46,7 @@
     flex: 1 1 50%;
     margin: $spacing-xsm 0 0;
 
-    @media (max-width: 450px) {
+    @media (max-width: $breakpoint-mobile-small) {
       flex: 1 1 auto;
     }
   }
