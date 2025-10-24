@@ -4,10 +4,10 @@
   margin: $spacing-sm 0;
 
   &-line {
-    background-color: $keyline-gray;
+    background-color: $bg-border;
     border: none;
-    border-top: 1px solid $keyline-gray;
-    color: $keyline-gray;
+    border-top: 1px solid $bg-border;
+    color: $bg-border;
     display: block;
     height: 1px;
     margin: 1em 0;

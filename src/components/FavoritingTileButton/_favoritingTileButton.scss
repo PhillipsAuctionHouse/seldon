@@ -21,6 +21,11 @@
     gap: $spacing-micro;
     overflow: hidden;
 
+    &--action,
+    &--number {
+      font-variation-settings: 'wght' 600;
+    }
+
     span {
       color: inherit;
       overflow: hidden;

@@ -39,16 +39,22 @@
     }
 
     h3.#{$px}-text {
+      @include text($headingSmall);
+
       @include media($size-sm) {
-        margin-bottom: $spacing-sm;
+        margin-bottom: $spacing-xsm;
       }
     }
 
     div:not(.#{$px}-social) {
       ul {
         li {
+          @include media($size-xl) {
+            padding-bottom: $spacing-micro;
+          }
+
           a {
-            @include text('snwFlyoutLink');
+            @include text($labelSmall);
 
             &:hover {
               text-decoration: underline;

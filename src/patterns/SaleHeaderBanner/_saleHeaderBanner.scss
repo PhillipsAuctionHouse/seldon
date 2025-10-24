@@ -6,6 +6,16 @@
   flex-direction: column;
   margin-bottom: $spacing-md;
 
+  &__header-label {
+    margin-bottom: $spacing-xsm;
+  }
+
+  &__title {
+    &.#{$px}-text {
+      text-transform: uppercase;
+    }
+  }
+
   .fresnel-container {
     width: 100%;
   }
@@ -43,13 +53,12 @@
 
   &__location {
     font-variation-settings: 'wght' 600;
-    margin: $spacing-xsm 0;
+    margin: $spacing-xsm 0 $spacing-md 0;
   }
 
   &__badge {
     border: 1px solid $badge-blue;
     color: $badge-blue;
-    font-size: $string-size3;
     margin: $spacing-xsm 0;
     padding: $spacing-micro $spacing-xsm;
   }
@@ -63,7 +72,7 @@
       align-items: flex-start;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: $spacing-micro;
 
       &::after {
         content: '';
@@ -79,6 +88,10 @@
         padding-left: $spacing-sm;
       }
     }
+  }
+
+  &__browse-auctions-text {
+    gap: 0;
   }
 
   &__date {

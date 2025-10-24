@@ -42,11 +42,11 @@ describe('FavoritesCollectionTile', () => {
   it('renders list count and name correctly', () => {
     render(<FavoritesCollectionTile {...{ ...defaultProps, variant: 'lists' }} />);
 
-    expect(screen.getByText('2 LOTS')).toBeInTheDocument();
+    expect(screen.getByText('2 Lots')).toBeInTheDocument();
     expect(screen.getByText('New List')).toBeInTheDocument();
   });
 
-  it('renders singular LOT text when count is 1', () => {
+  it('renders singular Lot text when count is 1', () => {
     const singularProps = {
       ...defaultProps,
       count: 1,
@@ -54,7 +54,7 @@ describe('FavoritesCollectionTile', () => {
     };
 
     render(<FavoritesCollectionTile {...singularProps} variant="lists" />);
-    expect(screen.getByText('1 LOT')).toBeInTheDocument();
+    expect(screen.getByText('1 Lot')).toBeInTheDocument();
   });
 
   it('does not show dropdown menu in favorites view', () => {

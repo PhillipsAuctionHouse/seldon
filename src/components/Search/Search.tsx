@@ -11,6 +11,7 @@ import { HeaderContext } from '../../site-furniture/Header/Header';
 import { SearchButton } from './SearchButton';
 import { CSSTransition } from 'react-transition-group';
 import { RemoveScroll } from 'react-remove-scroll';
+import { LinkVariants } from '../Link';
 
 export interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -144,7 +145,7 @@ const Search = forwardRef<HTMLDivElement, React.PropsWithChildren<SearchProps>>(
               }
             }}
           >
-            <Text variant={TextVariants.heading4} className={`${baseClassName}__container__inner__label`}>
+            <Text variant={TextVariants.headingSmall} className={`${baseClassName}__container__inner__label`}>
               {searchButtonText}
             </Text>
             <div
@@ -215,6 +216,7 @@ const Search = forwardRef<HTMLDivElement, React.PropsWithChildren<SearchProps>>(
                         href={((value: string) => {
                           return encodeURLSearchParams(getAllResultsLink(value));
                         })(value)}
+                        variant={LinkVariants.linkLarge}
                       >
                         <p>{getAllResultsText(value)}</p>
                       </Link>

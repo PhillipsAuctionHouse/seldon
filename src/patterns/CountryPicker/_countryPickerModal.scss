@@ -25,6 +25,10 @@
     position: sticky;
     top: 0;
     z-index: 2;
+
+    &-text {
+      margin-bottom: $spacing-md;
+    }
   }
 
   &__list {

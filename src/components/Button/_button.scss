@@ -1,8 +1,8 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-button {
-  @include bodyText;
-  @include labelText($button);
+  // TODO: We really to remove this and instead use the Text component
+  @include text($labelSmall);
 
   align-items: center;
   background-color: $pure-black;
@@ -13,8 +13,9 @@
   display: inline-flex;
   font-variation-settings: 'wght' 600;
   gap: $margin-xsm;
+  height: 44px; // TODO: this is temporary as we will revisit the button in a new ticket
   justify-content: center;
-  padding: $snw-button-padding $padding-sm;
+  padding: 0 $padding-sm;
   position: relative;
   transition:
     color 0.25s,
@@ -22,8 +23,13 @@
 
   svg {
     fill: $pure-white;
-    height: $button-label-line-height;
-    width: $button-label-line-height;
+    height: calc($font-size-label-small * 1.3);
+    width: calc($font-size-label-small * 1.3);
+
+    @include media($breakpoint-md) {
+      height: calc($font-size-label-small * 1.4);
+      width: calc($font-size-label-small * 1.4);
+    }
 
     path {
       fill: $pure-white;
@@ -55,6 +61,9 @@
     height: auto;
     padding: 0;
     text-decoration: underline;
+    .#{$px}-text {
+      font-variation-settings: 'wght' 400;
+    }
 
     &:hover {
       background-color: transparent;

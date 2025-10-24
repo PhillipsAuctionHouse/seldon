@@ -94,17 +94,12 @@
         background: transparent;
         border: 0;
         border-radius: unset;
-        color: $pure-black;
-        font-size: $string-size1;
-        font-style: normal;
         font-variation-settings: 'wght' 600;
         height: $search-size;
-        letter-spacing: 0;
-        line-height: $string-line-height-size1;
         margin: 0;
         padding: $spacing-xsm 0 $spacing-xsm $spacing-sm;
 
-        @include Montserrat;
+        @include text($headingMedium);
 
         @include isHeaderMobile {
           height: calc(var(--spacing-md) + var(--search-size));

@@ -1,8 +1,8 @@
 import Text from '../../components/Text/Text';
-import { TextVariants } from '../../components/Text';
 import classnames from 'classnames';
 import { getSafeCountryCallingCode } from './utils';
 import { Country, ModalBaseProps } from './types';
+import { TextVariants } from '../../components/Text';
 
 /**
  * Props for a single country option in the picker.
@@ -36,7 +36,10 @@ export const CountryPickerOption = ({
   // Destructure discriminated union for type-safe access
   const { isPhone, onChange } = variantConfig;
   return (
-    <label
+    <Text
+      element="label"
+      variant={TextVariants.labelMedium}
+      // @ts-expect-error this is actually a label element
       htmlFor={countryId}
       className={classnames(`${baseClassName}__option`, {
         [`${baseClassName}__option--selected`]: isChecked,
@@ -59,20 +62,14 @@ export const CountryPickerOption = ({
         }}
       />
       <span className={`${baseClassName}__option-content`}>
-        <Text variant={TextVariants.string2} className={`${baseClassName}__option-name`}>
-          {name}
-        </Text>
-        {isPhone && (
-          <Text variant={TextVariants.string2} className={`${baseClassName}__option-code`}>
-            +{getSafeCountryCallingCode(code)}
-          </Text>
-        )}
+        <Text className={`${baseClassName}__option-name`}>{name}</Text>
+        {isPhone && <Text className={`${baseClassName}__option-code`}>+{getSafeCountryCallingCode(code)}</Text>}
       </span>
       <img
         src={`https://flagcdn.com/24x18/${code.toLowerCase()}.png`}
         alt={`${name} flag`}
         className={`${baseClassName}__option-flag`}
       />
-    </label>
+    </Text>
   );
 };

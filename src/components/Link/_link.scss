@@ -4,23 +4,28 @@
   color: $pure-black;
   text-decoration: none;
 
-  &--email,
-  &--link {
-    @include underline;
+  &--email.#{$px}-link--email,
+  &--link.#{$px}-link--link,
+  &--linkSmall,
+  &--linkMedium,
+  &--linkLarge {
+    @include underline($offset: 1px);
   }
 
   &--email,
   &--link {
     &:hover,
     &:focus-visible {
-      @include underline($color: $dark-gray);
-
       color: $dark-gray;
     }
   }
 
   &--email {
-    @include text($email);
+    @include text($linkMedium);
+
+    .#{$px}-text {
+      font-variation-settings: 'wght' 600;
+    }
   }
 
   &--link {

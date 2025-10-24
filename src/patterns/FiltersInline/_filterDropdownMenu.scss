@@ -29,7 +29,7 @@
   &__buttons-wrap {
     display: flex;
     gap: $spacing-sm;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: $spacing-sm;
 
     &--drawer {
@@ -43,10 +43,6 @@
 
       @media (min-width: $breakpoint-md) {
         gap: $spacing-xl;
-      }
-
-      @media (min-width: $breakpoint-xl) {
-        gap: 0;
       }
     }
   }
