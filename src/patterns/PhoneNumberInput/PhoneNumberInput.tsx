@@ -121,22 +121,21 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
               onChange={setSelected}
             />
           </div>
-          <div className={`${baseClassName}__input`}>
+            <div className={`${baseClassName}__input`}>
             <Input
               id="phone-input"
               type="tel"
-              labelText={label}
+              labelText={`${label}-input`}
               hideLabel
               value={value}
               onChange={handleInputChange}
               required={required}
               invalid={!!error}
               disabled={disabled}
-              // We don't want to use the input default text, and the error text will be shown under the country picker
               invalidText=""
               aria-describedby={inputProps.invalidId}
             />
-          </div>
+            </div>
         </div>
         {/* Invalid message */}
         {inputProps.validation ? inputProps.validation : <p className={`${px}-input__validation`}>&nbsp;</p>}

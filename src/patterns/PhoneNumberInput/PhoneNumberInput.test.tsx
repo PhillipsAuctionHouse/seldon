@@ -31,7 +31,7 @@ describe('PhoneNumberInput', () => {
       );
     }
     render(<ControlledPhoneNumberInput />);
-    const input = screen.getByLabelText('Phone');
+    const input = screen.getByLabelText('Phone-input');
     await userEvent.type(input, '1234567890');
     expect(handleChange).toHaveBeenLastCalledWith('1234567890', 'US');
   });
@@ -43,7 +43,7 @@ describe('PhoneNumberInput', () => {
 
   it('disables the input when the disabled prop is true', () => {
     render(<PhoneNumberInput disabled />);
-    const input = screen.getByLabelText('Phone');
+    const input = screen.getByLabelText('Phone-input');
     expect(input).toBeDisabled();
   });
 
