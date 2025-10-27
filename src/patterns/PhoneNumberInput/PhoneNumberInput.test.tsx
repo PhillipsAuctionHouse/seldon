@@ -7,7 +7,7 @@ import { useState } from 'react';
 describe('PhoneNumberInput', () => {
   it('renders the component with default props', () => {
     render(<PhoneNumberInput />);
-    expect(screen.getByLabelText('Phone')).toBeInTheDocument();
+    expect(screen.getByLabelText('Phone country')).toBeInTheDocument();
   });
 
   it('displays the correct country code when a country is selected', () => {
@@ -31,7 +31,7 @@ describe('PhoneNumberInput', () => {
       );
     }
     render(<ControlledPhoneNumberInput />);
-    const input = screen.getByLabelText('Phone-input');
+    const input = screen.getByLabelText('Phone phone');
     await userEvent.type(input, '1234567890');
     expect(handleChange).toHaveBeenLastCalledWith('1234567890', 'US');
   });
@@ -43,7 +43,7 @@ describe('PhoneNumberInput', () => {
 
   it('disables the input when the disabled prop is true', () => {
     render(<PhoneNumberInput disabled />);
-    const input = screen.getByLabelText('Phone-input');
+    const input = screen.getByLabelText('Phone phone');
     expect(input).toBeDisabled();
   });
 

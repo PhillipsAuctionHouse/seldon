@@ -74,7 +74,7 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
               const isCurrent = clampedCurrentStep === stepNumber;
 
               return (
-                <Fragment key={stepLabels ? stepLabels[index] : index}>
+                <Fragment key={stepLabels?.[index] || index}>
                   <div
                     className={`${baseClassName}__item`}
                     aria-current={isCurrent ? 'step' : undefined}

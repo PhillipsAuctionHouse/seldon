@@ -110,6 +110,7 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
             />
             <CountryPicker
               triggerLabelText={label}
+              triggerAriaLabel={`${label.replace('*', '')} country`}
               triggerDisplayValue={selectedCountry ? `+${getSafeCountryCallingCode(selectedCountry.code)}` : ''}
               hasTriggerError={!!error}
               modalTitle="Country code"
@@ -125,7 +126,7 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
             <Input
               id="phone-input"
               type="tel"
-              labelText={`${label}-input`}
+              labelText={`${label.replace('*', '')} phone`}
               hideLabel
               value={value}
               onChange={handleInputChange}
