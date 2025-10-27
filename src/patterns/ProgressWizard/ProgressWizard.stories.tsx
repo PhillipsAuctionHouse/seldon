@@ -469,7 +469,6 @@ export const MobileFormStory = (props: ProgressWizardProps) => {
               <option value="non-binary">Non-binary</option>
               <option value="female">Female</option>
               <option value="male">Male</option>
-              <option value="prefer-not-to-say">Gender is a distant memory</option>
               <option value="prefer-not-to-say">Prefer not to say</option>
             </Select>
           </div>
