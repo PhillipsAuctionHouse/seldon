@@ -463,7 +463,7 @@ export const MobileFormStory = (props: ProgressWizardProps) => {
               value={formData.gender}
               onChange={(e) => updateFormData('gender', e.target.value)}
             >
-              <option value="" disabled>
+              <option value="placeholder" disabled>
                 Select Gender
               </option>
               <option value="non-binary">Non-binary</option>
