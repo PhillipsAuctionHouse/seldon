@@ -94,9 +94,11 @@ export const Playground = (props: NotificationBannerProps) => (
 Playground.args = {
   children: (
     <div>
-      <a href="#">Our Moved by Beauty: Works by Lucie Rie from an Important Asian Collection Sale</a> is currently
-      experiencing technical difficulties and there is a delay with livestream sale room bidding. You can bid, but there
-      may be a delay with confirmations.
+      <span>
+        Priority Bidding is here: Place a binding bid 48+ hours before the auction to secure a lower Buyer’s Premium.
+        Available in live auctions starting Fall 2025 (excluding Watches).{' '}
+        <a href="https://www.phillips.com/article/160527128/priority-bidding-for-live-auctions">Learn More</a>
+      </span>
     </div>
   ),
 };

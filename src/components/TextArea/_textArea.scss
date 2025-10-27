@@ -3,8 +3,8 @@
 .#{$px}-text-area {
   @include text($string2);
 
-  accent-color: $soft-black;
-  border: 1px solid $keyline-gray;
+  accent-color: $black-100;
+  border: 1px solid $black-100;
   border-radius: $radius-xs;
   min-height: 50px; // 50px is the height of 2 rows
   padding: $padding-xsm;

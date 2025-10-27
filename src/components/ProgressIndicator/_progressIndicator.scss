@@ -27,6 +27,10 @@
     padding: 0;
     width: 1.5rem;
 
+    .#{$px}-text {
+      font-variation-settings: 'wght' 600;
+    }
+
     &--active,
     &--current {
       background-color: $pure-black;
