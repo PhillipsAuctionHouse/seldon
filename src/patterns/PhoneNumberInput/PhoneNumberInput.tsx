@@ -109,7 +109,7 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
               data-testid="phone-country-code-hidden-input"
             />
             <CountryPicker
-              triggerLabelText="Phone Number"
+              triggerLabelText={label}
               triggerDisplayValue={selectedCountry ? `+${getSafeCountryCallingCode(selectedCountry.code)}` : ''}
               hasTriggerError={!!error}
               modalTitle="Country code"

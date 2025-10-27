@@ -5,11 +5,13 @@ import { type ArgTypes } from '@storybook/react';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { LoadingState } from './types';
 import { Text, TextAlignments, TextVariants } from '../../components/Text';
-import { Icon } from '../../components/Icon';
 
 const meta = {
   title: 'Patterns/ProgressWizard',
   component: ProgressWizard,
+  args: {
+    isFullHeight: true,
+  },
 };
 
 export default meta;
@@ -17,7 +19,7 @@ export default meta;
 const emailValidationRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const argTypes = {
-  customHeader: { control: { type: 'text' } },
+  isFullHeight: { control: { type: 'boolean' } },
   hideNavigation: { control: { type: 'boolean' } },
   hideProgressIndicator: { control: { type: 'boolean' } },
   isEnableHistoryManagement: { control: { type: 'boolean' } },
@@ -38,6 +40,13 @@ const argTypes = {
   onFormSubmit: { action: 'onFormSubmit' },
 } as const;
 
+const gentleTitleStyle = {
+  padding: 8,
+  background: 'aliceblue',
+  textAlign: TextAlignments.center,
+  borderRadius: 8,
+  marginBottom: 16,
+};
 const gentleMessageStyle = {
   padding: '5px 8px',
   borderRadius: '8px',
@@ -79,7 +88,7 @@ const genOnContinue = (shouldContinue: boolean) => () => {
 
 const { onContinue, onCancel, onFormSubmit, onBack } = callbacks;
 
-export const BasicWizard = () => {
+export const BasicWizard = ({ isFullHeight }: ProgressWizardProps) => {
   const [formData, setFormData] = useState({ name: '', age: '' });
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -90,11 +99,11 @@ export const BasicWizard = () => {
   return (
     <form onSubmit={handleSubmit}>
       <ProgressWizard
+        isFullHeight={isFullHeight}
         onContinue={onContinue}
         onCancel={onCancel}
         onFormSubmit={onFormSubmit}
         onBack={onBack}
-        customHeader={<Icon icon="PhillipsLogo" height={32} width={120} aria-label="Phillips Logo" />}
       >
         <Input
           name="name"
@@ -240,24 +249,19 @@ export const ShouldAllowContinue = () => {
         onFormSubmit();
       }}
     >
-      <ProgressWizard
-        shouldAllowContinue={shouldAllowContinue}
-        onFormSubmit={onFormSubmit}
-        customHeader={
-          <Text align={TextAlignments.center} variant={TextVariants.body1}>
-            No validation on submit, controlled instead by `shouldAllowContinue` prop
-          </Text>
-        }
-      >
-        <Input
-          name="email"
-          id="email-should-continue"
-          labelText="E-mail Address"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          invalid={!!error}
-          invalidText={error}
-        />
+      <div style={gentleTitleStyle}>No validation on submit, controlled instead by `shouldAllowContinue` prop</div>
+      <ProgressWizard shouldAllowContinue={shouldAllowContinue} onFormSubmit={onFormSubmit}>
+        <>
+          <Input
+            name="email"
+            id="email-should-continue"
+            labelText="E-mail Address"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            invalid={!!error}
+            invalidText={error}
+          />
+        </>
       </ProgressWizard>
     </form>
   );
@@ -310,15 +314,8 @@ export const ExternalStepControlWizard = () => {
         </button>
         <span style={{ marginLeft: 16 }}>Current Step: {currentStepIndex + 1}</span>
       </div>
-      <ProgressWizard
-        currentStepIndex={currentStepIndex}
-        hideNavigation
-        customHeader={
-          <div style={{ padding: 8, background: 'aliceblue', textAlign: 'center', borderRadius: 8, marginBottom: 16 }}>
-            External Step Control Demo
-          </div>
-        }
-      >
+      <div style={gentleTitleStyle}>External Step Control Demo</div>
+      <ProgressWizard currentStepIndex={currentStepIndex} hideNavigation>
         {steps}
       </ProgressWizard>
     </div>
@@ -332,7 +329,6 @@ export const TraditionalFormWizard = () => {
       id="traditional-form"
       onSubmit={(e) => {
         e.preventDefault();
-        e.preventDefault();
         try {
           const formData = new FormData(e.currentTarget as HTMLFormElement);
           const objectivelyFormData = Object.fromEntries(formData.entries());
@@ -343,13 +339,11 @@ export const TraditionalFormWizard = () => {
         }
       }}
     >
-      <ProgressWizard
-        customHeader={
-          <Text align={TextAlignments.center} variant={TextVariants.body1}>
-            {'plain old `<form>`  and `<input>` elements inside a ProgressWizard'}
-          </Text>
-        }
-      >
+      <div style={gentleTitleStyle}>
+        Plain old <code>&lt;form&gt;</code> and <code>&lt;input&gt;</code> elements with ProgressWizard
+      </div>
+
+      <ProgressWizard>
         <span>
           <label htmlFor="a">Input A</label>
           <br />
@@ -408,17 +402,8 @@ export const MobileFormStory = () => {
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
       <form onSubmit={handleSubmit} style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <ProgressWizard
-          onContinue={onContinue}
-          onCancel={onCancel}
-          onFormSubmit={onFormSubmit}
-          onBack={onBack}
-          customHeader={
-            <Text align={TextAlignments.center} variant={TextVariants.heading3}>
-              Mobile Registration Form
-            </Text>
-          }
-        >
+        <div style={gentleTitleStyle}>Mobile Registration Form </div>
+        <ProgressWizard onContinue={onContinue} onCancel={onCancel} onFormSubmit={onFormSubmit}>
           <div>
             {/* Personal Information Section */}
             <Text variant={TextVariants.heading4} style={{ marginBottom: '16px', marginTop: '8px' }}>
@@ -568,7 +553,6 @@ export const Playground: {
   argTypes: ArgTypes;
 } = {
   render: ({
-    customHeader,
     hideNavigation,
     hideProgressIndicator,
     isEnableHistoryManagement,
@@ -598,7 +582,6 @@ export const Playground: {
         }}
       >
         <ProgressWizard
-          customHeader={customHeader}
           shouldAllowContinue={shouldAllowContinue}
           hideNavigation={hideNavigation}
           hideProgressIndicator={hideProgressIndicator}

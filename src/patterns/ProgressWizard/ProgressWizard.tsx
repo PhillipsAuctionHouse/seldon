@@ -17,7 +17,7 @@ import { wrapChildren, getLabelsFromChildren, isControlled } from './utils';
 /**
  * Props for the main ProgressWizard component.
  *
- * @property customHeader - Optional custom header ReactNode displayed above the progress indicator. This can be used to add a logo or other branding element to the top of the wizard. If not provided, no header will be shown. For Phillips, it should probably be `          <Icon icon="PhillipsLogo" height={32} width={120} aria-label="Phillips Logo" />
+ * @property isFullHeight - Sets the wizard component to take up all available height of its container. Defaults true.
  * @property hideNavigation - If true, hides the default footer navigation. When hidden you must manage step index changes yourself (e.g. via currentStepIndex prop)
  * @property hideProgressIndicator - If true, hides the progress indicator bar.
  * @property isEnableHistoryManagement - If true step advances push a history state so the browser back/forward buttons navigate between steps.  Default is false and if you want this behavior you should use the useHistoryManagement hook directly in your controlling component.
@@ -36,7 +36,7 @@ export interface ProgressWizardProps extends ProgressWizardBaseProps, CallbackPr
 
 const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWizardProps>>((props, ref) => {
   const {
-    customHeader,
+    isFullHeight = true,
     hideNavigation,
     hideProgressIndicator,
     isEnableHistoryManagement = false,
@@ -128,12 +128,11 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
 
   return (
     <section {...commonProps} className={baseClassName} ref={ref} aria-label="Progress Wizard">
-      {customHeader}
       {!hideProgressIndicator ? (
         <ProgressIndicator totalSteps={stepCount} currentStep={currentStepIndex + 1} labels={labels} />
       ) : null}
 
-      <div className={`${baseClassName}__content`}>{childContent}</div>
+      <div className={`${baseClassName}__content${isFullHeight ? '--full-height' : ''}`}>{childContent}</div>
       {!hideNavigation ? (
         <div className={`${baseClassName}__footer`}>
           <Footer {...footerProps} />
