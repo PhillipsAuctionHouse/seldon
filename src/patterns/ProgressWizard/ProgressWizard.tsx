@@ -132,7 +132,9 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
         <ProgressIndicator totalSteps={stepCount} currentStep={currentStepIndex + 1} labels={labels} />
       ) : null}
 
-      <div className={`${baseClassName}__content${isFullHeight ? '--full-height' : ''}`}>{childContent}</div>
+      <div className={`${baseClassName}__content${isFullHeight ? ` ${baseClassName}__content--full-height` : ''}`}>
+        {childContent}
+      </div>
       {!hideNavigation ? (
         <div className={`${baseClassName}__footer`}>
           <Footer {...footerProps} />

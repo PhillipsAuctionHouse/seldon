@@ -1,4 +1,5 @@
 import ProgressWizard, { type ProgressWizardProps } from './ProgressWizard';
+import type { Meta } from '@storybook/react';
 import Input from '../../components/Input/Input';
 import Select from '../../components/Select/Select';
 import { type ArgTypes } from '@storybook/react';
@@ -6,20 +7,8 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 import { LoadingState } from './types';
 import { Text, TextAlignments, TextVariants } from '../../components/Text';
 
-const meta = {
-  title: 'Patterns/ProgressWizard',
-  component: ProgressWizard,
-  args: {
-    isFullHeight: true,
-  },
-};
-
-export default meta;
-
-const emailValidationRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-const argTypes = {
-  isFullHeight: { control: { type: 'boolean' } },
+const argTypes: ArgTypes = {
+  isFullHeight: { control: { type: 'boolean', defaultValue: true } },
   hideNavigation: { control: { type: 'boolean' } },
   hideProgressIndicator: { control: { type: 'boolean' } },
   isEnableHistoryManagement: { control: { type: 'boolean' } },
@@ -38,7 +27,15 @@ const argTypes = {
   onBack: { action: 'onBack' },
   onCancel: { action: 'onCancel' },
   onFormSubmit: { action: 'onFormSubmit' },
-} as const;
+};
+
+const meta: Meta<typeof ProgressWizard> = {
+  title: 'Patterns/ProgressWizard',
+  component: ProgressWizard,
+  argTypes,
+};
+
+const emailValidationRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const gentleTitleStyle = {
   padding: 8,
@@ -88,7 +85,7 @@ const genOnContinue = (shouldContinue: boolean) => () => {
 
 const { onContinue, onCancel, onFormSubmit, onBack } = callbacks;
 
-export const BasicWizard = ({ isFullHeight }: ProgressWizardProps) => {
+export const BasicWizard = (props: ProgressWizardProps) => {
   const [formData, setFormData] = useState({ name: '', age: '' });
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -99,11 +96,11 @@ export const BasicWizard = ({ isFullHeight }: ProgressWizardProps) => {
   return (
     <form onSubmit={handleSubmit}>
       <ProgressWizard
-        isFullHeight={isFullHeight}
         onContinue={onContinue}
         onCancel={onCancel}
         onFormSubmit={onFormSubmit}
         onBack={onBack}
+        {...props}
       >
         <Input
           name="name"
@@ -126,7 +123,7 @@ export const BasicWizard = ({ isFullHeight }: ProgressWizardProps) => {
 };
 BasicWizard.argTypes = argTypes;
 
-export const ValidationWizardWithOnBack = () => {
+export const ValidationWizardWithOnBack = (props: ProgressWizardProps) => {
   const [formData, setFormData] = useState({ email: '' });
   const [error, setError] = useState('');
 
@@ -142,7 +139,7 @@ export const ValidationWizardWithOnBack = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <ProgressWizard onFormSubmit={onFormSubmit}>
+      <ProgressWizard onFormSubmit={onFormSubmit} {...props}>
         <Input
           name="email"
           id="email"
@@ -159,7 +156,7 @@ export const ValidationWizardWithOnBack = () => {
 ValidationWizardWithOnBack.storyName = 'Validation Wizard With `onFormSubmit` hook';
 ValidationWizardWithOnBack.argTypes = argTypes;
 
-export const AsyncValidationWizardWithAllCallbacks = () => {
+export const AsyncValidationWizardWithAllCallbacks = (props: ProgressWizardProps) => {
   const initialState = { email: '', confirm: '' };
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState(initialState);
@@ -199,6 +196,7 @@ export const AsyncValidationWizardWithAllCallbacks = () => {
         onCancel={onCancel}
         onContinue={async () => genOnContinue(await validate())()}
         onFormSubmit={onFormSubmit}
+        {...props}
       >
         <Input
           name="email"
@@ -230,7 +228,7 @@ export const AsyncValidationWizardWithAllCallbacks = () => {
 };
 AsyncValidationWizardWithAllCallbacks.argTypes = argTypes;
 
-export const ShouldAllowContinue = () => {
+export const ShouldAllowContinue = (props: ProgressWizardProps) => {
   const [formData, setFormData] = useState({ email: '' });
   const [error, setError] = useState('');
 
@@ -250,7 +248,7 @@ export const ShouldAllowContinue = () => {
       }}
     >
       <div style={gentleTitleStyle}>No validation on submit, controlled instead by `shouldAllowContinue` prop</div>
-      <ProgressWizard shouldAllowContinue={shouldAllowContinue} onFormSubmit={onFormSubmit}>
+      <ProgressWizard shouldAllowContinue={shouldAllowContinue} onFormSubmit={onFormSubmit} {...props}>
         <>
           <Input
             name="email"
@@ -268,7 +266,7 @@ export const ShouldAllowContinue = () => {
 };
 ShouldAllowContinue.argTypes = argTypes;
 
-export const ExternalStepControlWizard = () => {
+export const ExternalStepControlWizard = (props: ProgressWizardProps) => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const steps = [
     <Input key="step1" name="step1" id="step1" labelText="Step 1" />,
@@ -315,7 +313,7 @@ export const ExternalStepControlWizard = () => {
         <span style={{ marginLeft: 16 }}>Current Step: {currentStepIndex + 1}</span>
       </div>
       <div style={gentleTitleStyle}>External Step Control Demo</div>
-      <ProgressWizard currentStepIndex={currentStepIndex} hideNavigation>
+      <ProgressWizard currentStepIndex={currentStepIndex} hideNavigation {...props}>
         {steps}
       </ProgressWizard>
     </div>
@@ -323,7 +321,7 @@ export const ExternalStepControlWizard = () => {
 };
 ExternalStepControlWizard.argTypes = argTypes;
 
-export const TraditionalFormWizard = () => {
+export const TraditionalFormWizard = (props: ProgressWizardProps) => {
   return (
     <form
       id="traditional-form"
@@ -343,7 +341,7 @@ export const TraditionalFormWizard = () => {
         Plain old <code>&lt;form&gt;</code> and <code>&lt;input&gt;</code> elements with ProgressWizard
       </div>
 
-      <ProgressWizard>
+      <ProgressWizard {...props}>
         <span>
           <label htmlFor="a">Input A</label>
           <br />
@@ -365,7 +363,7 @@ export const TraditionalFormWizard = () => {
 };
 TraditionalFormWizard.argTypes = argTypes;
 
-export const MobileFormStory = () => {
+export const MobileFormStory = (props: ProgressWizardProps) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -403,7 +401,7 @@ export const MobileFormStory = () => {
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
       <form onSubmit={handleSubmit} style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <div style={gentleTitleStyle}>Mobile Registration Form </div>
-        <ProgressWizard onContinue={onContinue} onCancel={onCancel} onFormSubmit={onFormSubmit}>
+        <ProgressWizard onContinue={onContinue} onCancel={onCancel} onFormSubmit={onFormSubmit} {...props}>
           <div>
             {/* Personal Information Section */}
             <Text variant={TextVariants.heading4} style={{ marginBottom: '16px', marginTop: '8px' }}>
@@ -465,10 +463,13 @@ export const MobileFormStory = () => {
               value={formData.gender}
               onChange={(e) => updateFormData('gender', e.target.value)}
             >
-              <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
+              <option value="" disabled>
+                Select Gender
+              </option>
               <option value="non-binary">Non-binary</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+              <option value="prefer-not-to-say">Gender is a distant memory</option>
               <option value="prefer-not-to-say">Prefer not to say</option>
             </Select>
           </div>
@@ -604,3 +605,5 @@ export const Playground: {
   args: {},
   argTypes,
 };
+
+export default meta;
