@@ -1,5 +1,5 @@
 import ProgressWizard, { type ProgressWizardProps } from './ProgressWizard';
-import type { Meta } from '@storybook/react';
+import { type Meta } from '@storybook/react';
 import Input from '../../components/Input/Input';
 import Select from '../../components/Select/Select';
 import { type ArgTypes } from '@storybook/react';
@@ -33,6 +33,9 @@ const meta: Meta<typeof ProgressWizard> = {
   title: 'Patterns/ProgressWizard',
   component: ProgressWizard,
   argTypes,
+  parameters: {
+    docs: { iframeHeight: 800 },
+  },
 };
 
 const emailValidationRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -94,7 +97,7 @@ export const BasicWizard = (props: ProgressWizardProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ height: '100vh' }}>
       <ProgressWizard
         onContinue={onContinue}
         onCancel={onCancel}
@@ -103,14 +106,12 @@ export const BasicWizard = (props: ProgressWizardProps) => {
         {...props}
       >
         <Input
-          name="name"
           id="name"
           labelText="Name"
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         />
         <Input
-          name="age"
           id="age"
           labelText="Age"
           type="number"

@@ -121,7 +121,7 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
               onChange={setSelected}
             />
           </div>
-            <div className={`${baseClassName}__input`}>
+          <div className={`${baseClassName}__input`}>
             <Input
               id="phone-input"
               type="tel"
@@ -135,7 +135,7 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
               invalidText=""
               aria-describedby={inputProps.invalidId}
             />
-            </div>
+          </div>
         </div>
         {/* Invalid message */}
         {inputProps.validation ? inputProps.validation : <p className={`${px}-input__validation`}>&nbsp;</p>}

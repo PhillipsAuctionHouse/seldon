@@ -84,7 +84,7 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
   }
   // Children and derived values
   const rawChildren = Children.toArray(children);
-  const labels = useMemo(() => getLabelsFromChildren(rawChildren), [rawChildren]);
+  const stepLabels = useMemo(() => getLabelsFromChildren(rawChildren), [rawChildren]);
   const wrappedChildren = useMemo(
     () => wrapChildren(rawChildren, currentStepIndex, baseClassName),
     [rawChildren, currentStepIndex, baseClassName],
@@ -127,14 +127,17 @@ const ProgressWizard = forwardRef<HTMLDivElement, PropsWithChildren<ProgressWiza
   };
 
   return (
-    <section {...commonProps} className={baseClassName} ref={ref} aria-label="Progress Wizard">
+    <section
+      {...commonProps}
+      className={`${baseClassName}${isFullHeight ? ` ${baseClassName}--full-height` : ''}`}
+      ref={ref}
+      aria-label="Progress Wizard"
+    >
       {!hideProgressIndicator ? (
-        <ProgressIndicator totalSteps={stepCount} currentStep={currentStepIndex + 1} labels={labels} />
+        <ProgressIndicator totalSteps={stepCount} currentStep={currentStepIndex + 1} stepLabels={stepLabels} />
       ) : null}
 
-      <div className={`${baseClassName}__content${isFullHeight ? ` ${baseClassName}__content--full-height` : ''}`}>
-        {childContent}
-      </div>
+      <div className={`${baseClassName}__content`}>{childContent}</div>
       {!hideNavigation ? (
         <div className={`${baseClassName}__footer`}>
           <Footer {...footerProps} />
