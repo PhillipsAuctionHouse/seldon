@@ -14,7 +14,7 @@ describe('FiltersInline', () => {
 
   it('should render all the buttons correctly', () => {
     render(<FiltersInline id="filters-inline" mainFilterLabel={FilterButtonType.Filter} />);
-    const filterButton = screen.getByTestId('filters-inline-Filter-button-filter-button');
+    const filterButton = screen.getByTestId('filters-inline-Filters-button-filter-button');
     expect(filterButton).toBeInTheDocument();
   });
 
@@ -40,17 +40,14 @@ describe('FiltersInline', () => {
 
   it('renders MainFilterDropdown and all SubFilterDropdowns', () => {
     render(<FiltersInline id="multi-filters" mainFilterLabel={FilterButtonType.Filter} filters={filters} />);
-    // MainFilterDropdown
-    expect(screen.getByTestId('multi-filters-Filter-button-filter-button')).toBeInTheDocument();
-    // SubFilterDropdowns
+    expect(screen.getByTestId('multi-filters-Filters-button-filter-button')).toBeInTheDocument();
     expect(screen.getAllByTestId('multi-filters-Sale-button-filter-button').length).toBeGreaterThan(0);
     expect(screen.getAllByTestId('multi-filters-Departments-button-filter-button').length).toBeGreaterThan(0);
   });
 
   it('renders nothing for SubFilterDropdown if filters is empty', () => {
     render(<FiltersInline id="empty-filters-test" mainFilterLabel={FilterButtonType.Filter} filters={[]} />);
-    // Only the main filter button should be present
-    expect(screen.getByTestId('empty-filters-test-Filter-button-filter-button')).toBeInTheDocument();
+    expect(screen.getByTestId('empty-filters-test-Filters-button-filter-button')).toBeInTheDocument();
     expect(screen.queryByTestId('empty-filters-test-Sale-button-filter-button')).not.toBeInTheDocument();
   });
 });
