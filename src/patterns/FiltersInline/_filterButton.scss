@@ -1,16 +1,16 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-filter-button {
-  border: 1px solid $light-gray;
+  border: 1.5px solid $light-gray;
   gap: 4px;
-  padding: $spacing-xsm $spacing-xsm;
+  padding: $spacing-xsm $spacing-sm;
 
   &--selected {
-    border: 1px solid $pure-black;
+    border: 1.5px solid $pure-black;
   }
 
   &--filter {
-    border-radius: 8px;
+    border-radius: 90px;
   }
 
   &--count {
