@@ -23,6 +23,10 @@ $dropdown-height: 224px;
     &--mobile {
       padding: 0 $spacing-md $spacing-md;
     }
+
+    @media (min-width: $breakpoint-xl) {
+      max-height: calc($dropdown-height + 32px);
+    }
   }
 
   &__divider {
