@@ -110,7 +110,8 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
             href={href}
             className={classnames(
               `${baseClassName}`,
-              `${baseClassName}--${variant}`,
+              { [`${baseClassName}--${variant}`]: variant !== ButtonVariants.link },
+              { [`${baseClassName}--link`]: variant === ButtonVariants.link },
               {
                 [`${baseClassName}--icon-last`]: iconLast,
               },

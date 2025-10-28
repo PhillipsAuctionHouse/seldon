@@ -199,6 +199,8 @@ $lg: #{$px}-input--lg;
   .#{$px}-input__input {
     align-self: flex-start;
     cursor: pointer;
+    height: 16px;
+    width: 16px;
   }
 
   &.#{$px}-input--inline {

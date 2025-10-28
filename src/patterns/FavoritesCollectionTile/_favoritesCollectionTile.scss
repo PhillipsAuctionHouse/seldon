@@ -150,6 +150,7 @@
 
   &__icon {
     justify-content: flex-start;
+    margin-bottom: $spacing-xsm;
     pointer-events: none;
 
     &-rotate {
@@ -171,8 +172,6 @@
 
   // will update font size with variable rem sizing after design takes a pass at it some point in the future
   &__text {
-    color: $cta-inactive;
-    padding-top: 5px;
     text-transform: none;
   }
 

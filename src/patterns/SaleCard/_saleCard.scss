@@ -14,11 +14,6 @@
     &.#{$px}-text {
       text-transform: uppercase;
     }
-
-    @media (min-width: $breakpoint-md) and (max-width: $breakpoint-xl) {
-      // TODO: temporary override to keep SaleCard the same as before
-      @include text($headingMedium);
-    }
   }
 
   &__image {

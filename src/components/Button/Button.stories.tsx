@@ -28,6 +28,8 @@ const meta = {
 
 export default meta;
 
+export const Default = (props: ButtonProps) => <Button {...props}>This is the title</Button>;
+
 export const ButtonDisabled = (props: ButtonProps) => (
   <Button {...props} isDisabled>
     This is the title
