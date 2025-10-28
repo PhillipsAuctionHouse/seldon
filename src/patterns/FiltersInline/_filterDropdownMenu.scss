@@ -25,7 +25,7 @@ $dropdown-height: 224px;
     }
 
     @media (min-width: $breakpoint-xl) {
-      max-height: calc($dropdown-height + 32px);
+      max-height: calc($dropdown-height + 36px);
     }
   }
 
