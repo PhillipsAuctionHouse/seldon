@@ -14,7 +14,7 @@ $dropdown-height: 224px;
   &__filters {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: $spacing-sm;
     max-height: $dropdown-height;
     overflow-y: auto;
     padding: 0 $spacing-sm;
