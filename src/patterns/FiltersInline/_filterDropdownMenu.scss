@@ -1,6 +1,6 @@
 @use '#scss/allPartials' as *;
 
-$dropdown-height: 224px;
+$dropdown-height: 240px;
 
 .#{$px}-filter-dropdown-menu {
   background: $white-100;
@@ -25,7 +25,7 @@ $dropdown-height: 224px;
     }
 
     @media (min-width: $breakpoint-xl) {
-      max-height: calc($dropdown-height + 36px);
+      max-height: calc($dropdown-height + $spacing-sm);
     }
   }
 
