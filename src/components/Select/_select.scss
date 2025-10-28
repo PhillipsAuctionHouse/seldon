@@ -9,14 +9,14 @@
     &--show__icon {
       select {
         appearance: none;
-        padding-right: 1.55rem;
+        padding-right: 3rem;
 
         @media (min-width: $breakpoint-md) {
-          padding-right: 1.95rem;
+          padding-right: 3.25rem;
         }
 
         @media (min-width: $breakpoint-xl) {
-          padding-right: 2.25rem;
+          padding-right: 4.25rem;
         }
       }
     }

@@ -44,11 +44,16 @@
 
   &__label {
     display: none;
+    margin-bottom: $spacing-micro;
 
     @media (min-width: $breakpoint-md) {
       display: inline-block;
       text-align: center;
       white-space: nowrap;
+    }
+
+    @include media($breakpoint-lg) {
+      margin-bottom: 0;
     }
   }
 

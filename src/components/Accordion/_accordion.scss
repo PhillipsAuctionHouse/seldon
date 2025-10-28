@@ -124,15 +124,17 @@
   }
 
   &__text {
+    @include text($labelMedium);
+
     flex: auto;
     font-variation-settings: 'wght' 600;
     text-align: left;
-
-    @include text($string2);
   }
 
   &__text--lg {
-    @include text($body1);
+    @include text($labelLarge);
+
+    font-variation-settings: 'wght' 600;
   }
 
   &__icon {

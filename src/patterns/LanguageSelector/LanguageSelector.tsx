@@ -36,7 +36,7 @@ const MobileLanguageSelector = forwardRef<HTMLDivElement, DropdownSelectorProps>
         <AccordionItem
           hasTransition
           id={id ?? 'language-selector-accordion'}
-          label={<Text variant={TextVariants.snwHeaderLink}>{label}</Text>}
+          label={<Text variant={TextVariants.linkStylised}>{label}</Text>}
           variant={AccordionItemVariant.lg}
         >
           <NavigationList id={`${id}-navlist`}>
@@ -45,7 +45,7 @@ const MobileLanguageSelector = forwardRef<HTMLDivElement, DropdownSelectorProps>
                 key={option.value}
                 label={option.label}
                 onClick={() => onValueChange(option.value)}
-                navType={LinkVariants.snwFlyoutLink}
+                navType={LinkVariants.linkLarge}
               ></NavigationItem>
             ))}
           </NavigationList>

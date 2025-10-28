@@ -46,7 +46,7 @@ const BidMessage = ({
   return (
     <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
       {hasIcon ? icon : null}
-      <Text variant={TextVariants.string2} className={`${baseClassName}-text`}>
+      <Text variant={TextVariants.bodySmall} className={`${baseClassName}-text`}>
         {message}
       </Text>
     </div>

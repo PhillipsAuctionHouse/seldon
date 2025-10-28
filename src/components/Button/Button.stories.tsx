@@ -16,11 +16,19 @@ const meta = {
         type: 'select',
       },
     },
+    linkSize: {
+      options: ['sm', 'md', 'lg'],
+      control: {
+        type: 'select',
+      },
+    },
     isIconLast: { control: 'boolean' },
   },
 } satisfies Meta<typeof Button>;
 
 export default meta;
+
+export const Default = (props: ButtonProps) => <Button {...props}>This is the title</Button>;
 
 export const ButtonDisabled = (props: ButtonProps) => (
   <Button {...props} isDisabled>
@@ -52,7 +60,6 @@ export const ButtonAsLink = (props: ButtonProps) => (
 
 ButtonAsLink.args = {
   variant: ButtonVariants.tertiary,
-  size: 'md',
 };
 
 export const ButtonAsLinkWithPrefetch = (props: ButtonProps) => (

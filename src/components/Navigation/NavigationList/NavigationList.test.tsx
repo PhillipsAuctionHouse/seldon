@@ -54,7 +54,7 @@ describe('NavigationList', () => {
     );
 
     expect(getByTestId('test-id')).toBeInTheDocument();
-    expect(getByTestId('test-id').querySelectorAll('.nav-link-start').length).toBe(2);
+    expect(getByTestId('test-id').querySelectorAll('.seldon-nav__item--nav-link-start').length).toBe(2);
   });
 
   it('renders right section items when present', () => {
@@ -70,7 +70,7 @@ describe('NavigationList', () => {
     );
 
     expect(getByTestId('test-id')).toBeInTheDocument();
-    expect(getByTestId('test-id').querySelectorAll('.nav-link-end').length).toBe(2);
+    expect(getByTestId('test-id').querySelectorAll('.seldon-nav__item--nav-link-end').length).toBe(2);
   });
 
   it('renders both left and right section items when present', () => {
@@ -86,8 +86,8 @@ describe('NavigationList', () => {
     );
 
     expect(getByTestId('test-id')).toBeInTheDocument();
-    expect(getByTestId('test-id').querySelectorAll('.nav-link-start').length).toBe(1);
-    expect(getByTestId('test-id').querySelectorAll('.nav-link-end').length).toBe(1);
+    expect(getByTestId('test-id').querySelectorAll('.seldon-nav__item--nav-link-start').length).toBe(1);
+    expect(getByTestId('test-id').querySelectorAll('.seldon-nav__item--nav-link-end').length).toBe(1);
   });
 
   it('calls onClick handler when left section item is clicked', async () => {

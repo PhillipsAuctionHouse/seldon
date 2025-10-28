@@ -63,7 +63,12 @@ const AccountPageHeader = forwardRef<HTMLDivElement, AccountPageHeaderProps>(
         {iconButtons && (
           <>
             {iconButtons.map((button) => (
-              <IconButton key={`icon-button-${button.icon}`} onClick={button.onClick} aria-label={button.ariaLabel}>
+              <IconButton
+                variant={ButtonVariants.tertiary}
+                key={`icon-button-${button.icon}`}
+                onClick={button.onClick}
+                aria-label={button.ariaLabel}
+              >
                 <Icon icon={button.icon} aria-label={button.ariaLabel} title={button.ariaLabel} />
               </IconButton>
             ))}
@@ -74,11 +79,16 @@ const AccountPageHeader = forwardRef<HTMLDivElement, AccountPageHeaderProps>(
           <>
             <SSRMediaQuery.Media greaterThanOrEqual="md">
               <Button variant={ButtonVariants.secondary} onClick={primaryButton.onClick}>
-                <Icon icon={primaryButton.icon} /> {primaryButton.label}
+                <Icon icon={primaryButton.icon} />{' '}
+                <span className={`${baseClassName}__button-label`}>{primaryButton.label}</span>
               </Button>
             </SSRMediaQuery.Media>
             <SSRMediaQuery.Media lessThan="md">
-              <IconButton onClick={primaryButton.onClick} aria-label={primaryButton.ariaLabel}>
+              <IconButton
+                variant={ButtonVariants.tertiary}
+                onClick={primaryButton.onClick}
+                aria-label={primaryButton.ariaLabel}
+              >
                 <Icon icon={primaryButton.icon} title={primaryButton.ariaLabel} />
               </IconButton>
             </SSRMediaQuery.Media>
@@ -90,22 +100,14 @@ const AccountPageHeader = forwardRef<HTMLDivElement, AccountPageHeaderProps>(
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} ref={ref}>
         <div className={`${baseClassName}__container`}>
-          {overline && (
-            <Text variant={TextVariants.string2} className={`${baseClassName}__overline`}>
-              {overline}
-            </Text>
-          )}
+          {overline && <Text className={`${baseClassName}__overline`}>{overline}</Text>}
           <div className={`${baseClassName}__title-wrapper`}>
-            <Text variant={TextVariants.title1} className={`${baseClassName}__title`}>
+            <Text variant={TextVariants.headingLarge} className={`${baseClassName}__title`}>
               {title}
             </Text>
             {actionButtons && actionButtons.length > 0 && renderButtons()}
           </div>
-          {subtitle && (
-            <Text variant={TextVariants.string2} className={`${baseClassName}__subtitle`}>
-              {subtitle}
-            </Text>
-          )}
+          {subtitle && <Text className={`${baseClassName}__subtitle`}>{subtitle}</Text>}
         </div>
         {showDivider && <Divider className={`${baseClassName}__divider`} />}
       </div>

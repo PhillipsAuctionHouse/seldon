@@ -7,6 +7,7 @@ import AccordionItem, { AccordionItemProps } from './AccordionItem';
 import { AccordionItemVariant, AccordionVariants } from './types';
 import Button from '../Button/Button';
 import { LOREM_HUGE } from '../../utils/staticContent';
+import { Text, TextVariants } from '../Text';
 
 const meta = {
   title: 'Components/Accordion',
@@ -23,9 +24,7 @@ const meta = {
 
 export default meta;
 
-const largeTextBlock = (
-  <div style={{ color: 'black', backgroundColor: 'white', padding: 20, whiteSpace: 'pre-wrap' }}>{LOREM_HUGE}</div>
-);
+const largeTextBlock = <Text variant={TextVariants.bodyLarge}>{LOREM_HUGE}</Text>;
 const largeTextItems = [
   {
     isLocked: false,
@@ -64,7 +63,7 @@ export const AccordionLarge = ({ transitionTimeInMs = 250, ...props }: Accordion
 );
 
 const smallTextBlock = (
-  <div style={{ color: 'white', backgroundColor: '#d0d0d0', padding: 20 }}>
+  <Text>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
     aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
@@ -77,15 +76,13 @@ const smallTextBlock = (
     veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
     reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </div>
+  </Text>
 );
 const smallTextItems = [
   {
     isLocked: true,
     label: 'Condition Report',
-    children: (
-      <div style={{ color: '#4A90E2', cursor: 'pointer', fontWeight: '500', fontSize: '20px' }}>LOGIN OR SIGNUP</div>
-    ),
+    children: <Text>LOGIN OR SIGNUP</Text>,
   },
   {
     isLocked: false,

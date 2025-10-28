@@ -1,7 +1,7 @@
 import { ComponentProps, forwardRef, ElementType, useState } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
-import { Text, TextVariants } from '../Text';
+import { Text } from '../Text';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { Icon } from '../Icon';
 import { CalendarEvent } from './types';
@@ -70,7 +70,7 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
                     </Component>
                   ) : (
                     <button className={`${baseClassName}-atcb-item-link`}>
-                      <Text variant={TextVariants.body2}>{item.label}</Text>
+                      <Text>{item.label}</Text>
                     </button>
                   )}
                 </DropdownMenu.Item>

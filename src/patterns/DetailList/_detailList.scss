@@ -27,10 +27,14 @@
       justify-content: space-between;
 
       &__label {
+        @include text($bodyLarge);
+
         text-align: left;
       }
 
       &__value {
+        @include text($bodyLarge);
+
         text-align: right;
       }
     }
