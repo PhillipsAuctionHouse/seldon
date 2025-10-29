@@ -48,7 +48,7 @@ input[type='radio'].#{$px}-skeleton {
 }
 
 button.#{$px}-skeleton {
-  border-radius: $radius-2xl !important;
+  border-radius: $radius-3xl !important;
 
   svg path {
     fill: transparent !important;
@@ -58,7 +58,7 @@ button.#{$px}-skeleton {
 .#{$px}-toggle-input {
   .#{$px}-skeleton::before,
   .#{$px}-skeleton::after {
-    border-radius: $radius-2xl !important;
+    border-radius: $radius-3xl !important;
   }
   .#{$px}-skeleton::after {
     display: none !important;
