@@ -13,30 +13,6 @@
     width: 100%;
   }
 
-  &__error {
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-height: $spacing-md;
-
-    &-msg {
-      animation: reveal 0.45s linear forwards;
-
-      // Reveal animation (match Input)
-      max-height: 2em;
-      opacity: 1;
-      overflow: hidden;
-      transition: opacity 0.2s;
-      visibility: visible;
-      will-change: opacity, max-height;
-    }
-  }
-
-  // Hide the validation from the Input component
-  .#{$px}-input__validation {
-    display: none;
-  }
-
   &__country-picker {
     flex: 0 0 25%;
     margin-right: $spacing-xsm;
@@ -47,6 +23,11 @@
     flex: 1 1 75%;
     flex-grow: 1;
     margin-top: calc(var(--string-line-height-size2) + 0.5rem);
+
+    // Hide input validation inside phone number input, we use a shared one
+    .#{$px}-input__validation {
+      display: none;
+    }
   }
 
   @media screen and (min-width: $breakpoint-xl) {
@@ -64,5 +45,19 @@
       margin-top: calc(var(--string-line-height-size2) + 1rem);
       min-width: 0;
     }
+  }
+}
+
+.#{$px}-input__validation {
+  animation: reveal 0.45s linear forwards;
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
