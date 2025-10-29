@@ -49,7 +49,6 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
             />
           ))}
         </div>
-        <div className={classnames(`${baseClassName}__divider`)} />
         <div className={classnames(isSortButton ? `${baseClassName}__button-wrap` : `${baseClassName}__buttons-wrap`)}>
           {isSortButton ? (
             <Button

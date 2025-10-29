@@ -29,21 +29,17 @@ $dropdown-height: 240px;
     }
   }
 
-  &__divider {
-    border-bottom: 1px solid $bg-border;
-  }
-
   &__button-wrap {
     display: flex;
     justify-content: flex-end;
   }
 
   &__buttons-wrap {
+    border-top: 1px solid $bg-border;
     display: flex;
     gap: $spacing-sm;
     justify-content: space-between;
-    margin-top: $spacing-sm;
-    padding: 0 $spacing-sm;
+    padding: $spacing-sm $spacing-sm 0 $spacing-sm;
 
     &--drawer {
       box-shadow: 0 -4px 8px -4px $medium-gray;
