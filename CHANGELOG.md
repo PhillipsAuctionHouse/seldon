@@ -1,3 +1,10 @@
+# [1.208.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.207.0...v1.208.0) (2025-10-29)
+
+
+### Features
+
+* **registration:** L3-8073 Small (mostly) ProgressWizard updates for registration ([#752](https://github.com/PhillipsAuctionHouse/seldon/issues/752)) ([258e838](https://github.com/PhillipsAuctionHouse/seldon/commit/258e838aabfecbec442ebaab7a02576b3118212f))
+
 # [1.207.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.206.0...v1.207.0) (2025-10-24)
 
 

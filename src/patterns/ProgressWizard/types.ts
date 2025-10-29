@@ -1,4 +1,4 @@
-import { type MouseEvent, type ReactNode, type Dispatch, type SetStateAction } from 'react';
+import { type MouseEvent, type Dispatch, type SetStateAction } from 'react';
 
 /*                         *\
     ✨ Core Data Types ✨ 
@@ -77,7 +77,7 @@ export type ButtonLabels = {
 /**
  * Base props for the ProgressWizard component.
  *
- * @property customHeader - Optional custom header ReactNode rendered above the progress indicator (e.g. logo or contextual banner)
+ * @property isFullHeight - Sets the wizard component to take up all available height of its container. Defaults true.
  * @property hideNavigation - If true, hides the default footer navigation (consumer is responsible for changing steps)
  * @property hideProgressIndicator - If true, hides the progress indicator bar entirely
  * @property isEnableHistoryManagement - If true (default) advancing steps pushes a browser history state so back/forward navigates steps
@@ -92,9 +92,9 @@ export type ButtonLabels = {
 // duplicate documentation below for Storybook descriptions
 export type ProgressWizardBaseProps = {
   /**
-   * Optional custom header ReactNode (renders above progress indicator)
+   * Sets the wizard component to take up all available height of its container. Defaults true.
    */
-  customHeader?: ReactNode;
+  isFullHeight?: boolean;
   /**
    * If true, hides the default footer navigation (so you can implement your own)
    */

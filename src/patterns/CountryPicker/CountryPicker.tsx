@@ -21,6 +21,7 @@ const CountryPicker = forwardRef<HTMLButtonElement, CountryPickerProps>(
   (
     {
       triggerLabelText,
+      triggerAriaLabel,
       hasTriggerError,
       triggerErrorMsg,
       triggerDisplayValue,
@@ -62,6 +63,7 @@ const CountryPicker = forwardRef<HTMLButtonElement, CountryPickerProps>(
         <CountryPickerTrigger
           ref={ref}
           labelText={triggerLabelText}
+          ariaLabel={triggerAriaLabel}
           displayValue={triggerDisplayValue}
           onClick={() => setIsOpen(true)}
           hasError={hasTriggerError}
