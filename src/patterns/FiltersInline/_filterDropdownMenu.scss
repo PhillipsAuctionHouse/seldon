@@ -125,7 +125,7 @@ $dropdown-height: 240px;
       align-items: center;
       display: flex;
       flex-direction: row;
-      height: 32px;
+      height: 2rem;
       justify-content: space-between;
     }
 
@@ -145,7 +145,7 @@ $dropdown-height: 240px;
 }
 
 .#{$px}-filter-dropdown-menu .#{$px}-filter-input__input__wrapper {
-  height: 32px;
+  height: 2rem;
 }
 
 .#{$px}-filter-drawer-mobile {
