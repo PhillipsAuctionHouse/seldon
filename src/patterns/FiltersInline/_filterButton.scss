@@ -6,7 +6,7 @@
   padding: $spacing-xsm $spacing-sm;
 
   &--selected {
-    border: 1.5px solid $pure-black;
+    border: 1.5px solid $black-100;
   }
 
   &--filter {
@@ -14,7 +14,7 @@
   }
 
   &--count {
-    background: $pure-black;
+    background: $black-100;
     border: 2px solid $white-100;
     border-radius: 50%;
     color: $white-100;
