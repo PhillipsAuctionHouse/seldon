@@ -34,11 +34,11 @@ describe('Progress wizard utils', () => {
     expect(screen.getByLabelText('B')).toBeInTheDocument();
   });
 
-  it('getLabelsFromChildren returns aria-labels or defaults', () => {
+  it('getLabelsFromChildren returns aria-labels else an empty string', () => {
     const children = [<div key="a" aria-label="A" />, <div key="b">NoLabel</div>];
     const labels = getLabelsFromChildren(children as React.ReactNode[]);
     expect(labels[0]).toBe('A');
-    expect(labels[1]).toBe('Step 2');
+    expect(labels[1]).toBe('');
   });
 
   it('isControlled returns true only when index is defined', () => {

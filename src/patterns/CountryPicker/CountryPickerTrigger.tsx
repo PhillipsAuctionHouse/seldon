@@ -15,6 +15,11 @@ export type CountryPickerTriggerProps = {
   labelText: string;
 
   /**
+   * The aria-label attribute for the button, defaults to labelText if not provided.
+   */
+  ariaLabel?: string;
+
+  /**
    * The value displayed inside the button (e.g., selected country name or phone code).
    */
   displayValue: string;
@@ -36,7 +41,18 @@ type InternalTriggerProps = CountryPickerTriggerProps &
 
 const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & InternalTriggerProps>(
   (
-    { labelText, displayValue, onClick, hasError = false, errorMsg, id, className, baseClassName, variantConfig },
+    {
+      labelText,
+      ariaLabel = labelText,
+      displayValue,
+      onClick,
+      hasError = false,
+      errorMsg,
+      id,
+      className,
+      baseClassName,
+      variantConfig,
+    },
     ref,
   ) => {
     // Destructure discriminated union for type-safe access
@@ -75,7 +91,7 @@ const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & Inte
         <button
           ref={ref}
           type="button"
-          aria-label={labelText}
+          aria-label={ariaLabel}
           aria-invalid={inputProps.invalid}
           aria-describedby={errorId}
           className={classNames(`${baseClassName}__trigger-btn`, {
