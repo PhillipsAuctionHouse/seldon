@@ -145,7 +145,7 @@ $dropdown-height: 240px;
 }
 
 .#{$px}-filter-dropdown-menu .#{$px}-filter-input__input__wrapper {
-  height: 2rem;
+  min-height: 2rem;
 }
 
 .#{$px}-filter-drawer-mobile {
