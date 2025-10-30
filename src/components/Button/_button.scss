@@ -7,7 +7,7 @@
   align-items: center;
   background-color: $pure-black;
   border: 1px solid transparent;
-  border-radius: 6.25rem;
+  border-radius: $radius-3xl;
   color: $pure-white;
   cursor: pointer;
   display: inline-flex;
@@ -71,7 +71,7 @@
     z-index: 0;
 
     &::before {
-      border-radius: 100px;
+      border-radius: $radius-3xl;
       box-sizing: border-box;
       content: '';
       display: inline-block;
@@ -166,7 +166,6 @@
 
     &:focus-visible {
       background-color: $pure-white;
-      border-radius: 0;
       outline-color: $soft-black;
       outline-offset: 4.5px;
       padding: 0 4px;

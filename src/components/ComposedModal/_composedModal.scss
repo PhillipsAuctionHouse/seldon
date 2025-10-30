@@ -3,7 +3,7 @@
 $breakpoint-mobile-small: 450px;
 
 .#{$px}-composed-modal {
-  border-radius: 1rem;
+  border-radius: $radius-md;
   max-width: 95vw;
   min-width: 0;
   padding: $spacing-lg 0 $spacing-sm 0;

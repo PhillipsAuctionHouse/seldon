@@ -27,7 +27,7 @@
 
     accent-color: $black-100;
     border: 1px solid $black-100;
-    border-radius: 0.1875rem;
+    border-radius: $radius-xs;
     font-variation-settings: 'wght' 600;
     outline: none;
     padding: $padding-xsm;
@@ -117,7 +117,7 @@
     animation: fade-in 150ms ease-out;
     background-color: $white-100;
     border: 1px solid $grey-50;
-    border-radius: 4px;
+    border-radius: $radius-xs;
     box-shadow: 0 5px 15px rgba($pure-black, 0.1);
     margin-top: 4px;
     max-height: 300px;

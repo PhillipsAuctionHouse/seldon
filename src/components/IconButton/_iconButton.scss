@@ -75,7 +75,7 @@
   &--secondary,
   &--tertiary.#{$px}-icon-button {
     &:focus-visible {
-      border-radius: 100px;
+      border-radius: $radius-3xl;
     }
 
     & > svg {
@@ -91,7 +91,7 @@
 
   &--tertiary {
     &:focus-visible {
-      border-radius: 100px;
+      border-radius: $radius-3xl;
     }
 
     &:hover {

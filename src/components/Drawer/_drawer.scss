@@ -27,7 +27,7 @@
 
   &__close {
     align-items: center;
-    border-radius: 100%;
+    border-radius: $radius-3xl;
     color: $pure-black;
     display: inline-flex;
     justify-content: center;
@@ -46,7 +46,7 @@
 
   // Bottom sheet modifier
   &--bottom {
-    border-radius: 16px 16px 0 0;
+    border-radius: $radius-md $radius-md 0 0;
     box-shadow: 0 -2px 16px rgba($pure-black, 0.08);
     height: auto;
     inset: auto 0 0;

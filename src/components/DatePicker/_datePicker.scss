@@ -11,7 +11,7 @@
   .flatpickr-day:focus,
   .flatpickr-day.startRange,
   .flatpickr-day.endRange {
-    border-radius: 0;
+    border-radius: $radius-xs;
   }
 
   .flatpickr-day.selected,
