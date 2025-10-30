@@ -52,7 +52,7 @@
     &__select {
       &--tertiary {
         border: 1.5px solid $black-100;
-        border-radius: 6.25rem;
+        border-radius: $radius-3xl;
         color: inherit;
         padding: $spacing-xsm $spacing-md $spacing-xsm $spacing-sm;
 
@@ -62,7 +62,7 @@
 
         &:focus-visible {
           background-color: $pure-white;
-          border-radius: 6.25rem;
+          border-radius: $radius-3xl;
           box-shadow: 0 0 0 0.5px $black-100;
           outline: none;
         }
