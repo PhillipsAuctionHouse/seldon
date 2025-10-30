@@ -74,7 +74,7 @@ export const CountryPickerOption = ({
           srcSet={`https://flagcdn.com/h40/${code.toLowerCase()}.png 2x`}
           alt={`${name} flag`}
           height="20"
-          className={`${baseClassName}__trigger-flag-img`}
+          className={`${baseClassName}__option-flag-img`}
         />
       </span>
     </label>
