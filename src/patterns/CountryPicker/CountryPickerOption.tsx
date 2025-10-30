@@ -68,11 +68,15 @@ export const CountryPickerOption = ({
           </Text>
         )}
       </span>
-      <img
-        src={`https://flagcdn.com/24x18/${code.toLowerCase()}.png`}
-        alt={`${name} flag`}
-        className={`${baseClassName}__option-flag`}
-      />
+      <span className={`${baseClassName}__option-flag`}>
+        <img
+          src={`https://flagcdn.com/h20/${code.toLowerCase()}.png`}
+          srcSet={`https://flagcdn.com/h40/${code.toLowerCase()}.png 2x`}
+          alt={`${name} flag`}
+          height="20"
+          className={`${baseClassName}__trigger-flag-img`}
+        />
+      </span>
     </label>
   );
 };
