@@ -214,7 +214,7 @@ export const Playground = (props: FilterDropdownMenuProps) => {
         onApplyFilter={handleFilterUpdate}
         onClickClear={clearFilterUpdate}
         resultsCount={resultsCount}
-        mainFilterLabel={FilterButtonType.Empty}
+        mainFilterLabel={FilterButtonType.Filter}
       />
       <div
         style={{

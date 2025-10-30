@@ -51,8 +51,10 @@
   select.#{$px}-input {
     &__select {
       &--tertiary {
-        border: 0;
+        border: 1.5px solid $black-100;
+        border-radius: $radius-3xl;
         color: inherit;
+        padding: $spacing-xsm $spacing-md $spacing-xsm $spacing-sm;
 
         &:hover {
           cursor: pointer;
@@ -60,8 +62,9 @@
 
         &:focus-visible {
           background-color: $pure-white;
-          outline-color: $soft-black;
-          outline-offset: 4.5px;
+          border-radius: $radius-3xl;
+          box-shadow: 0 0 0 0.5px $black-100;
+          outline: none;
         }
 
         svg {
