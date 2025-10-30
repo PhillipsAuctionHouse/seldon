@@ -1,3 +1,10 @@
+# [1.210.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.209.0...v1.210.0) (2025-10-30)
+
+
+### Features
+
+* **filterAndDropdownStyles:** L3-7878 update filter UX globally across all remix pages ([#754](https://github.com/PhillipsAuctionHouse/seldon/issues/754)) ([5edc246](https://github.com/PhillipsAuctionHouse/seldon/commit/5edc246721c1f984ed6bcc5aebe5ce21c94f439f))
+
 # [1.209.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.208.0...v1.209.0) (2025-10-30)
 
 
