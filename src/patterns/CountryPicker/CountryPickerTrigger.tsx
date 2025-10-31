@@ -103,11 +103,15 @@ const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & Inte
           id={id}
         >
           {flagCode && (
-            <img
-              src={`https://flagcdn.com/24x18/${flagCode.toLowerCase()}.png`}
-              alt={`${value} flag`}
-              className={`${baseClassName}__trigger-flag`}
-            />
+            <span className={`${baseClassName}__trigger-flag`}>
+              <img
+                src={`https://flagcdn.com/h20/${flagCode.toLowerCase()}.png`}
+                srcSet={`https://flagcdn.com/h40/${flagCode.toLowerCase()}.png 2x`}
+                alt={`${value} flag`}
+                height="20"
+                className={`${baseClassName}__trigger-flag-img`}
+              />
+            </span>
           )}
           <span className={classNames(`${baseClassName}__trigger-text`)}>{displayValue}</span>
           <span className={classNames(`${baseClassName}__trigger-icon`)}>
