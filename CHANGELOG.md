@@ -1,3 +1,10 @@
+## [1.210.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.210.0...v1.210.1) (2025-10-31)
+
+
+### Bug Fixes
+
+* **Filter:** L3-8050 Filter Option Cut Off Horizontally in Center of Word ([#753](https://github.com/PhillipsAuctionHouse/seldon/issues/753)) ([522e943](https://github.com/PhillipsAuctionHouse/seldon/commit/522e94344d7f09c2c5f7311c6a4cad5abb85d9ab))
+
 # [1.210.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.209.0...v1.210.0) (2025-10-30)
 
 
