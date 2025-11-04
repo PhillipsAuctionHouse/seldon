@@ -1,3 +1,10 @@
+## [1.210.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.210.1...v1.210.2) (2025-11-04)
+
+
+### Bug Fixes
+
+* **countryPicker:** L3-7249 fix flag icons ([#756](https://github.com/PhillipsAuctionHouse/seldon/issues/756)) ([938d178](https://github.com/PhillipsAuctionHouse/seldon/commit/938d17867a2ef23e1127a08d97f9fc00248f1bc7))
+
 ## [1.210.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.210.0...v1.210.1) (2025-10-31)
 
 
