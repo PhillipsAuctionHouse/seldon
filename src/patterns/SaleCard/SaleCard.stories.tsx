@@ -272,3 +272,26 @@ export const SaleCardNoImage = () => (
     badgeText="Happening Now"
   />
 );
+
+export const SaleCardImageRightVariants = () => (
+  <div style={{ display: 'flex', gap: 'var(--spacing-sm)', flexDirection: 'column' }}>
+    <SaleCard {...defaultProps} variant={SaleCardVariants.DEFAULT} imageDisplay="right" badgeText="Happening Now" />
+    {divider}
+    <SaleCard
+      {...defaultProps}
+      variant={SaleCardVariants.RELATED_SALE_TILE}
+      imageDisplay="right"
+      badgeText="Accepting Consignments"
+      imageSrc="https://www.assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1/QA/auctions/NY041325/NY041325.jpg"
+    />
+    {divider}
+    <SaleCard
+      {...defaultProps}
+      variant={SaleCardVariants.RELATED_SALE_TILE}
+      imageDisplay="right"
+      titleText="Modern & Contemporary: Online Auction, New York"
+      date="27 Aug - 05 Sep"
+      badgeText="Bidding Open"
+    />
+  </div>
+);

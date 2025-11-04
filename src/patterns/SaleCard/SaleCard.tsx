@@ -9,7 +9,9 @@ import { getCommonProps } from '../../utils';
 import { SaleCardActions } from './SaleCardActions';
 import { SaleCardVariants } from './types';
 
-/** * Props for the SaleCard component. */
+/**
+ * Props for the SaleCard component.
+ */
 export interface SaleCardProps extends ComponentProps<'div'> {
   /** * The source URL of the image to be displayed. */
   imageSrc?: string;
@@ -36,6 +38,10 @@ export interface SaleCardProps extends ComponentProps<'div'> {
   variant?: SaleCardVariants;
   /** * The <SaleCardActions /> component used to render the SaleCard CTAs. */
   children?: React.ReactElement<typeof SaleCardActions>;
+  /**
+   * Controls image position: 'left' or 'right'. Defaults to 'left'.
+   */
+  imageDisplay?: 'left' | 'right';
 }
 
 /**
@@ -63,6 +69,7 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
       modalButtonText,
       variant = SaleCardVariants.DEFAULT,
       children,
+      imageDisplay = 'left',
       ...props
     },
     ref,
@@ -70,6 +77,7 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SaleCard');
     const classes = classnames(baseClassName, className, {
       [`${baseClassName}--${variant}`]: variant,
+      [`${baseClassName}--image-${imageDisplay}`]: imageSrc,
     });
     const componentProps = { ...commonProps, ...props };
 
