@@ -77,7 +77,7 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SaleCard');
     const classes = classnames(baseClassName, className, {
       [`${baseClassName}--${variant}`]: variant,
-      [`${baseClassName}--image-${imageDisplay}`]: imageSrc,
+      [`${baseClassName}--image-${imageDisplay}`]: imageDisplay,
     });
     const componentProps = { ...commonProps, ...props };
 

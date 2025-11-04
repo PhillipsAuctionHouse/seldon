@@ -6,15 +6,15 @@
   flex-direction: column;
   gap: $spacing-md;
 
-  &--image-right {
-    @include media($breakpoint-snw-mobile) {
-      flex-direction: row-reverse;
-    }
-  }
-
   &--image-left {
     @include media($breakpoint-snw-mobile) {
       flex-direction: row;
+    }
+  }
+
+  &--image-right {
+    @include media($breakpoint-snw-mobile) {
+      flex-direction: row-reverse;
     }
   }
 
@@ -126,11 +126,11 @@
     gap: $spacing-sm;
 
     @include media($size-snw-mobile, 'max') {
-      &.#{$px}-sale-card--image-right {
-        flex-direction: row-reverse;
-      }
       &.#{$px}-sale-card--image-left {
         flex-direction: row;
+      }
+      &.#{$px}-sale-card--image-right {
+        flex-direction: row-reverse;
       }
     }
 
