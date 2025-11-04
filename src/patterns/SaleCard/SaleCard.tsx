@@ -38,9 +38,7 @@ export interface SaleCardProps extends ComponentProps<'div'> {
   variant?: SaleCardVariants;
   /** * The <SaleCardActions /> component used to render the SaleCard CTAs. */
   children?: React.ReactElement<typeof SaleCardActions>;
-  /**
-   * Controls image position: 'left' or 'right'. Defaults to 'left'.
-   */
+  /** * The position of the image relative to the content. Can be 'left' or 'right'. Defaults to 'left'. */
   imageDisplay?: 'left' | 'right';
 }
 
