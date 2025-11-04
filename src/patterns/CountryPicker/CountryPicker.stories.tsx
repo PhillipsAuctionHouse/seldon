@@ -109,3 +109,18 @@ export const CountryPhoneCodePicker = (props: CountryPickerProps) => {
     />
   );
 };
+
+export const PreSelectedCountry = () => (
+  <CountryPicker
+    value="US"
+    triggerLabelText="Country"
+    triggerDisplayValue="+1"
+    modalTitle="Select Country"
+    searchInputLabel="Search country"
+    searchInputPlaceholder="Search country"
+    selectButtonLabel="Select"
+    isPhone={true}
+    onChange={(code) => console.log('Selected country code:', code)}
+  />
+);
+PreSelectedCountry.storyName = 'Trigger with pre-selected country';
