@@ -33,10 +33,6 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement>, Dialog
    */
   style?: React.CSSProperties;
   /**
-   * Content label for accessibility
-   */
-  contentLabel?: string;
-  /**
    * Custom close icon
    */
   closeIcon?: React.ReactElement;
@@ -61,9 +57,9 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       isOpen = false,
       onClose = noOp,
       style,
-      contentLabel,
       closeIcon = <Icon icon="CloseX" height={32} width={32} color="currentColor" />,
       closeIconPosition = 'right',
+      title,
       ...props
     },
     ref,
@@ -96,7 +92,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
             {...props}
           >
             <VisuallyHidden asChild>
-              <Dialog.Title>{contentLabel ?? 'Modal'}</Dialog.Title>
+              <Dialog.Title>{title ?? 'Modal'}</Dialog.Title>
             </VisuallyHidden>
             <Dialog.Description />
             <Dialog.Close asChild>

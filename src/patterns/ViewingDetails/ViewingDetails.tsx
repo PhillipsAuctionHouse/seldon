@@ -35,6 +35,10 @@ export interface ViewingDetailsProps extends ComponentProps<'div'> {
    */
   sessionTimes?: ViewingSessionProps[];
   /**
+   * Viewing Times label text for Viewings Details
+   */
+  viewingTimesLabel?: string;
+  /**
    * Viewing Times string array
    */
   viewingTimes?: string[];
@@ -74,6 +78,7 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
       sessionTimesLabel,
       sessionTimes,
       viewingTimes,
+      viewingTimesLabel,
       location,
       mapLink,
       onClose,
@@ -112,9 +117,9 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
                 {session.sessionTime && <Text className={`${baseClassName}__text`}>{session.sessionTime}</Text>}
               </div>
             ))}
-          {label && (
+          {viewingTimesLabel && (
             <Text variant={TextVariants.headingSmall} className={`${baseClassName}__heading`}>
-              {label}
+              {viewingTimesLabel}
             </Text>
           )}
           {viewingTimes &&
