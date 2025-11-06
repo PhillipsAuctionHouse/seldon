@@ -70,7 +70,7 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
       modalButtonText,
       variant = SaleCardVariants.DEFAULT,
       children,
-      imageDisplay = 'left',
+      imageDisplay = SaleCardImageDisplay.LEFT,
       ...props
     },
     ref,
