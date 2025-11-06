@@ -7,13 +7,16 @@ import { Text, TextVariants } from '../../components/Text';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import { getCommonProps } from '../../utils';
 import { SaleCardActions } from './SaleCardActions';
-import { SaleCardVariants } from './types';
+import { SaleCardVariants, SaleCardImageDisplay } from './types';
 
 /**
  * Props for the SaleCard component.
  */
 export interface SaleCardProps extends ComponentProps<'div'> {
-  /** * The source URL of the image to be displayed. */
+  /**
+   * The source URL of the image to be displayed.
+   * Leaving this prop undefined or falsy is the intended way to hide the image.
+   */
   imageSrc?: string;
   /** * The alt text for the image. Defaults to "Auction Image" if not provided. */
   imageAlt?: string;
@@ -41,7 +44,7 @@ export interface SaleCardProps extends ComponentProps<'div'> {
   /**
    * Controls image position: 'left' or 'right'. Defaults to 'left'.
    */
-  imageDisplay?: 'left' | 'right';
+  imageDisplay?: SaleCardImageDisplay;
 }
 
 /**
