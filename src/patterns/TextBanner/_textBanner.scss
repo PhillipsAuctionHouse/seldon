@@ -30,7 +30,6 @@
     }
 
     @include media($breakpoint-md) {
-      align-items: center;
       flex-direction: row;
 
       h1,

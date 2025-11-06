@@ -5,6 +5,10 @@
     position: relative;
   }
 
+  &__title {
+    padding-bottom: $spacing-sm;
+  }
+
   &__children {
     margin-bottom: $spacing-md;
   }
@@ -20,7 +24,7 @@
   }
 
   &__heading {
-    padding-bottom: $spacing-sm;
+    padding-bottom: $spacing-xsm;
   }
 
   &__session {

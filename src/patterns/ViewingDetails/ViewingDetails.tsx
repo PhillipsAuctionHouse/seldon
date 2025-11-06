@@ -87,6 +87,9 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
     return (
       <div {...commonProps} {...props} className={classnames(baseClassName, className)} ref={ref}>
         <div className={`${baseClassName}__content`}>
+          <Text variant={TextVariants.headingMedium} className={`${baseClassName}__title`}>
+            {label}
+          </Text>
           {children && <div className={`${baseClassName}__children`}>{children}</div>}
 
           {sessionTimesLabel && (

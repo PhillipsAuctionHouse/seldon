@@ -80,12 +80,8 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
         className={classnames(`${baseClassName}`, className)}
         id={id}
         ref={ref}
+        title={title}
       >
-        {title ? (
-          <Text variant={TextVariants.headingMedium} className={`${baseClassName}__title`}>
-            {title}
-          </Text>
-        ) : null}
         <div
           className={`${baseClassName}__body`}
           style={{ ['--max-modal-body-height']: maxHeightValue } as React.CSSProperties}
