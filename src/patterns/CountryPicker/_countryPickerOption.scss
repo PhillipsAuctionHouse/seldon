@@ -5,7 +5,7 @@
     align-items: center;
     background: $white-100;
     border: 1px solid transparent;
-    border-radius: 6px;
+    border-radius: $radius-xs;
     cursor: pointer;
     display: flex;
     flex-direction: row-reverse;
@@ -42,9 +42,24 @@
     }
 
     &-flag {
+      align-items: center;
+      display: flex;
       height: 1rem;
+      justify-content: center;
       margin-right: $spacing-sm;
-      vertical-align: middle;
+      overflow: hidden;
+      width: 1.5rem;
+
+      @media (min-width: $breakpoint-md) {
+        height: 1.25rem;
+        width: 1.75rem;
+      }
+
+      &-img {
+        display: block;
+        height: 100%;
+        width: auto;
+      }
     }
   }
   .#{$px}-country-picker__radio {

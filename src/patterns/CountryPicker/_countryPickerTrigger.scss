@@ -22,7 +22,7 @@
       appearance: none;
       background: $white;
       border: 1px solid $black-100;
-      border-radius: 0.1875rem;
+      border-radius: $radius-xs;
       box-sizing: border-box;
       cursor: pointer;
       display: flex;
@@ -70,8 +70,24 @@
     }
 
     &-flag {
+      align-items: center;
+      display: flex;
       height: 1rem;
+      justify-content: center;
       margin-right: $spacing-sm;
+      overflow: hidden;
+      width: 1.5rem;
+
+      @media (min-width: $breakpoint-md) {
+        height: 1.25rem;
+        width: 1.75rem;
+      }
+
+      &-img {
+        display: block;
+        height: 100%;
+        width: auto;
+      }
     }
   }
 }

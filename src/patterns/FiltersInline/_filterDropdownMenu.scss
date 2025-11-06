@@ -1,23 +1,31 @@
 @use '#scss/allPartials' as *;
 
+$dropdown-height: 240px;
+
 .#{$px}-filter-dropdown-menu {
   background: $white-100;
-  border-radius: $spacing-xsm;
+  border-radius: $radius-sm;
   box-shadow: 0 4px 6px $medium-gray;
   display: flex;
   flex-direction: column;
   min-width: 100%;
-  padding: $spacing-md;
+  padding: $spacing-sm 0;
 
   &__filters {
     display: flex;
     flex-direction: column;
-    gap: $spacing-xsm;
-    max-height: 25vh;
+    gap: $spacing-sm;
+    max-height: $dropdown-height;
     overflow-y: auto;
+    padding: 0 $spacing-sm;
+    padding-bottom: $spacing-sm;
 
     &--mobile {
       padding: 0 $spacing-md $spacing-md;
+    }
+
+    @media (min-width: $breakpoint-xl) {
+      max-height: calc($dropdown-height + $spacing-sm);
     }
   }
 
@@ -27,10 +35,11 @@
   }
 
   &__buttons-wrap {
+    border-top: 1px solid $bg-border;
     display: flex;
     gap: $spacing-sm;
-    justify-content: center;
-    margin-top: $spacing-sm;
+    justify-content: space-between;
+    padding: $spacing-sm $spacing-sm 0 $spacing-sm;
 
     &--drawer {
       box-shadow: 0 -4px 8px -4px $medium-gray;
@@ -101,7 +110,7 @@
   }
 
   &--mobile {
-    border-radius: $spacing-xsm $spacing-xsm 0 0;
+    border-radius: $radius-sm $radius-sm 0 0;
     box-shadow: none;
     padding: 0;
     width: 100vw;
@@ -113,6 +122,7 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      max-height: 2rem;
     }
 
     &__label {
@@ -128,6 +138,10 @@
     align-self: center;
     margin-left: auto;
   }
+}
+
+.#{$px}-filter-dropdown-menu .#{$px}-filter-input__input__wrapper {
+  max-height: 2rem;
 }
 
 .#{$px}-filter-drawer-mobile {

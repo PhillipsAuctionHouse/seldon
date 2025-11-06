@@ -20,7 +20,10 @@ Playground.argTypes = {
 };
 
 export const WithLabels = (props: ProgressIndicatorProps) => (
-  <ProgressIndicator {...props} labels={['Register to bid', 'Your details', 'Primary address', 'Review and submit']} />
+  <ProgressIndicator
+    {...props}
+    stepLabels={['Register to bid', 'Your details', 'Primary address', 'Review and submit']}
+  />
 );
 
 WithLabels.args = {

@@ -52,7 +52,7 @@
     align-items: center;
     align-self: normal;
     background-position: center;
-    border-radius: 50%;
+    border-radius: $radius-3xl;
     display: flex;
     height: 2.5rem;
     justify-content: center;
@@ -159,7 +159,7 @@
 
     &-circle {
       border: 2px solid $dark-gray;
-      border-radius: 50%;
+      border-radius: $radius-3xl;
       height: 1.5rem;
       justify-content: flex-start;
       width: 1.5rem;

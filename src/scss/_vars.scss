@@ -407,3 +407,14 @@ $header-height: var(--header-height);
 /// Used to ensure the drawer button area is always at least the minimum height
 /// This is calculated as the (button label height) + (Drawer panel padding) + (Button's internal padding)
 $drawer-button-area-min-height: calc($button-label-line-height + $spacing-md * 2 + $spacing-sm * 2);
+
+////////////////////////
+/// RADIUS:
+///////////////////////
+$radius-xs: 4px;
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-xl: 20px;
+$radius-2xl: 24px;
+$radius-3xl: 40px;

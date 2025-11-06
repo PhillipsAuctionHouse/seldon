@@ -35,7 +35,6 @@ $num_icons: 5;
   &__button {
     @include labelText('link');
 
-    border-radius: 0;
     color: $pure-black;
     padding: 0;
     text-align: left;

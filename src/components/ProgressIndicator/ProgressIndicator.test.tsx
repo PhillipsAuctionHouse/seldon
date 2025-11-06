@@ -56,7 +56,7 @@ describe('ProgressIndicator', () => {
 
   it('applies the proper labels passed in', () => {
     const labels = ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5'];
-    render(<ProgressIndicator totalSteps={5} currentStep={3} labels={labels} />);
+    render(<ProgressIndicator totalSteps={5} currentStep={3} stepLabels={labels} />);
     labels.forEach((label, index) => {
       const stepLabel = screen.getByText(label);
       expect(stepLabel).toBeInTheDocument();

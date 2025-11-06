@@ -3,7 +3,7 @@
  * Used to distinguish between different filter categories.
  */
 export enum FilterButtonType {
-  Filter = 'Filter', // Drawer filter
+  Filter = 'Filters', // Drawer filter
   Sort = 'Sort', // Sort filter
   Sale = 'Sale', // Sale filter
   Departments = 'Departments', // Departments filter

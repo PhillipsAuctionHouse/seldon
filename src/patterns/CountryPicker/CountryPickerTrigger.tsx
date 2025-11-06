@@ -15,6 +15,11 @@ export type CountryPickerTriggerProps = {
   labelText: string;
 
   /**
+   * The aria-label attribute for the button, defaults to labelText if not provided.
+   */
+  ariaLabel?: string;
+
+  /**
    * The value displayed inside the button (e.g., selected country name or phone code).
    */
   displayValue: string;
@@ -36,7 +41,18 @@ type InternalTriggerProps = CountryPickerTriggerProps &
 
 const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & InternalTriggerProps>(
   (
-    { labelText, displayValue, onClick, hasError = false, errorMsg, id, className, baseClassName, variantConfig },
+    {
+      labelText,
+      ariaLabel = labelText,
+      displayValue,
+      onClick,
+      hasError = false,
+      errorMsg,
+      id,
+      className,
+      baseClassName,
+      variantConfig,
+    },
     ref,
   ) => {
     // Destructure discriminated union for type-safe access
@@ -76,7 +92,7 @@ const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & Inte
         <button
           ref={ref}
           type="button"
-          aria-label={labelText}
+          aria-label={ariaLabel}
           aria-invalid={inputProps.invalid}
           aria-describedby={errorId}
           className={classNames(`${baseClassName}__trigger-btn`, {
@@ -88,11 +104,14 @@ const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & Inte
           id={id}
         >
           {flagCode && (
-            <img
-              src={`https://flagcdn.com/24x18/${flagCode.toLowerCase()}.png`}
-              alt={`${value} flag`}
-              className={`${baseClassName}__trigger-flag`}
-            />
+            <span className={`${baseClassName}__trigger-flag`}>
+              <img
+                src={`https://flagcdn.com/h20/${flagCode.toLowerCase()}.png`}
+                srcSet={`https://flagcdn.com/h40/${flagCode.toLowerCase()}.png 2x`}
+                alt={`${value} flag`}
+                className={`${baseClassName}__trigger-flag-img`}
+              />
+            </span>
           )}
           <Text className={classNames(`${baseClassName}__trigger-text`)}>{displayValue}</Text>
           <span className={classNames(`${baseClassName}__trigger-icon`)}>

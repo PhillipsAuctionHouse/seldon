@@ -109,7 +109,8 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
               data-testid="phone-country-code-hidden-input"
             />
             <CountryPicker
-              triggerLabelText="Phone Number"
+              triggerLabelText={label}
+              triggerAriaLabel={`${label.replace('*', '')} country`}
               triggerDisplayValue={selectedCountry ? `+${getSafeCountryCallingCode(selectedCountry.code)}` : ''}
               hasTriggerError={!!error}
               modalTitle="Country code"
@@ -126,14 +127,13 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
               className={`${baseClassName}__input-phone`}
               id="phone-input"
               type="tel"
-              labelText={label}
+              labelText={`${label.replace('*', '')} phone`}
               hideLabel
               value={value}
               onChange={handleInputChange}
               required={required}
               invalid={!!error}
               disabled={disabled}
-              // We don't want to use the input default text, and the error text will be shown under the country picker
               invalidText=""
               aria-describedby={inputProps.invalidId}
             />

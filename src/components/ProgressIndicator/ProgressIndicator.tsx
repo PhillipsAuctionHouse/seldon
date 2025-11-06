@@ -19,7 +19,7 @@ export interface ProgressIndicatorProps extends Progress.ProgressProps, Componen
    * If supplied, only visible on desktop breakpoints.
    *
    */
-  labels?: string[];
+  stepLabels?: string[];
   /**
    * Optional class name for additional styling.
    */
@@ -51,6 +51,7 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
       totalSteps,
       currentStep,
       className,
+      stepLabels,
       progressIndicatorAriaLabel = 'Progress Indicator',
       completedIconAriaLabel = 'Completed Icon',
       ...props
@@ -73,7 +74,7 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
               const isCurrent = clampedCurrentStep === stepNumber;
 
               return (
-                <Fragment key={props.labels ? props.labels[index] : index}>
+                <Fragment key={stepLabels?.[index] || index}>
                   <div
                     className={`${baseClassName}__item`}
                     aria-current={isCurrent ? 'step' : undefined}
@@ -97,9 +98,9 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
                         <Text variant={TextVariants.labelSmall}>{stepNumber}</Text>
                       )}
                     </span>
-                    {props.labels && props.labels[index] && (
+                    {stepLabels && stepLabels[index] && (
                       <span className={`${baseClassName}__label`}>
-                        <Text variant={TextVariants.bodySmall}>{props.labels[index]}</Text>
+                        <Text variant={TextVariants.bodySmall}>{stepLabels[index]}</Text>
                       </span>
                     )}
                   </div>
