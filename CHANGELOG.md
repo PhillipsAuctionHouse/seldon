@@ -1,3 +1,10 @@
+# [1.212.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.211.0...v1.212.0) (2025-11-07)
+
+
+### Features
+
+* **saleCard:** L3-8099 Export New Sale Card Variant Type ([#758](https://github.com/PhillipsAuctionHouse/seldon/issues/758)) ([fffeea4](https://github.com/PhillipsAuctionHouse/seldon/commit/fffeea4594987409c201065cbe041922dde81d68))
+
 # [1.211.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.210.2...v1.211.0) (2025-11-07)
 
 
