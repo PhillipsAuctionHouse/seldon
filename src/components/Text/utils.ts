@@ -19,8 +19,6 @@ export const determineTextClassName = (variant: TextVariants = TextVariants.body
     default:
       return `${px}-text--${variant.charAt(0).toLowerCase() + variant.slice(1)}`;
   }
-
-  return `${px}-text--${variant.charAt(0).toLowerCase() + variant.slice(1)}`;
 };
 
 export const determineDefaultTextElement = (variant: TextVariants = TextVariants.body1): string => {
@@ -31,7 +29,7 @@ export const determineDefaultTextElement = (variant: TextVariants = TextVariants
   if (variant.includes('label')) {
     return 'label';
   }
-  if (variant.includes('heading')) {
+  if (variant.includes('heading') || variant.includes('display')) {
     switch (variant) {
       case TextVariants.headingLarge:
       case TextVariants.displayMedium:
