@@ -6,8 +6,16 @@
   flex-direction: column;
   gap: $spacing-md;
 
-  @include media($breakpoint-snw-mobile) {
-    flex-direction: row;
+  &--image-left {
+    @include media($breakpoint-snw-mobile) {
+      flex-direction: row;
+    }
+  }
+
+  &--image-right {
+    @include media($breakpoint-snw-mobile) {
+      flex-direction: row-reverse;
+    }
   }
 
   &__image {
@@ -118,7 +126,12 @@
     gap: $spacing-sm;
 
     @include media($size-snw-mobile, 'max') {
-      flex-direction: row;
+      &.#{$px}-sale-card--image-left {
+        flex-direction: row;
+      }
+      &.#{$px}-sale-card--image-right {
+        flex-direction: row-reverse;
+      }
     }
 
     .#{$px}-sale-card__image {
