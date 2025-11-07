@@ -66,11 +66,11 @@
     }
 
     h1 {
-      @include text($heading2);
+      @include text($headingMedium);
     }
 
     p {
-      @include text($body1);
+      @include text($bodyMedium);
     }
 
     div,
@@ -78,7 +78,7 @@
     .grid-example__section,
     .grid-example__aside,
     .grid-example__footer {
-      @include text($body-size2);
+      @include text($bodyMedium);
 
       background: $light-gray;
       border-radius: $radius-sm;

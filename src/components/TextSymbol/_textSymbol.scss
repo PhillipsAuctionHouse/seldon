@@ -1,13 +1,13 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-text-symbol {
-  @include text($heading4);
+  @include text($headingSmall);
 
   display: inline-flex;
   gap: $spacing-micro;
 
   &--estimation {
-    @include text($heading5);
+    @include text($bodySmall);
 
     margin-left: 0.25rem;
   }

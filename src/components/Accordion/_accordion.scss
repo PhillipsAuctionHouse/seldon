@@ -34,7 +34,7 @@
   }
 
   &__content--lg {
-    @include text($body2);
+    @include text($bodyMedium);
   }
 
   &--transition[data-state='open'] {

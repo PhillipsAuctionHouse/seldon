@@ -33,7 +33,7 @@
   }
 
   &--snwHeaderLink {
-    @include text($snwHeaderLink);
+    @include text($linkStylised);
 
     padding: 0.5rem 0.625rem calc(0.5rem + 2px); // 1 px so that the bottom border of the nav counts as part of the button
     position: relative;
@@ -56,7 +56,7 @@
   &--snwFlyoutLink {
     border-bottom: 1px solid transparent;
 
-    @include text($snwFlyoutLink);
+    @include text($linkLarge);
 
     &:hover,
     &:focus-visible {

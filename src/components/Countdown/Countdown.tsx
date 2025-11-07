@@ -12,6 +12,7 @@ import {
 import { zhCN, enUS } from 'date-fns/locale';
 import { CountdownVariants } from './types';
 import { Duration } from './Duration'; // Import the Duration component
+import { Text, TextVariants } from '../Text';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface CountdownProps extends ComponentProps<'div'> {
@@ -120,7 +121,7 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
         ref={ref}
       >
         <div className={`${baseClassName}__countdown-container`} role="timer" aria-label={label}>
-          <span className={`${baseClassName}__label`}>{label}</span>
+          <Text variant={TextVariants.labelSmall}>{label}</Text>
           {timeLeft.days > 0 ? (
             <Duration duration={timeLeft} unit="days" locale={dateFnsLocale} formatDurationStr={formatDurationStr} />
           ) : null}

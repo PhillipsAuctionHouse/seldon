@@ -33,7 +33,7 @@ const TextBanner = forwardRef<HTMLDivElement, TextBannerProps>(
     return (
       <header {...commonProps} className={classnames(baseClass, className)} ref={ref} {...props}>
         <span className={classnames(`${baseClass}__content-wrapper`)}>
-          <Text className={`${baseClass}__header-text`} variant={TextVariants.headingLarge}>
+          <Text className={`${baseClass}__header-text`} variant={TextVariants.displaySmall}>
             {headerText}
           </Text>
           {description ? <Text element="p">{description}</Text> : null}

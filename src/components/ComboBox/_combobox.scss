@@ -167,7 +167,7 @@
   }
 
   &__item__invalid-text {
-    @include text($string2);
+    @include text($bodySmall);
 
     align-items: center;
     display: flex;

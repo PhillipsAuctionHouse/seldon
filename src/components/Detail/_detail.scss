@@ -14,10 +14,6 @@
 
     &--label.#{$px}-text {
       font-variation-settings: 'wght' 600;
-
-      @include media($breakpoint-md) {
-        font-size: 1rem; // 16px
-      }
     }
 
     @media (max-width: $breakpoint-md) {
@@ -63,21 +59,9 @@
 
   &__sub-label {
     text-wrap: nowrap;
-
-    @include media($breakpoint-md) {
-      &.#{$px}-text {
-        font-size: 1rem; // 16px  TODO: temporary override to keep LotObjectTile the same as before
-      }
-    }
   }
 
   &__value {
     font-variation-settings: 'wght' 400;
-
-    @include media($breakpoint-md) {
-      .#{$px}-text {
-        font-size: 1rem; // 16px  TODO: temporary override to keep LotObjectTile the same as before
-      }
-    }
   }
 }

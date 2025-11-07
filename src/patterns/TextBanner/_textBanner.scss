@@ -27,6 +27,7 @@
       max-width: 100%;
       min-height: 48px;
       text-align: left;
+      text-transform: none;
     }
 
     @include media($breakpoint-md) {

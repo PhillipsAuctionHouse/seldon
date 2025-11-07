@@ -16,8 +16,6 @@
     }
 
     &-btn {
-      @include text($string2);
-
       align-items: center;
       appearance: none;
       background: $white;

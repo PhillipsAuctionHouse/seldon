@@ -23,14 +23,18 @@
     width: 0;
   }
 
-  @include isHeaderDesktop {
-    top: 0;
-  }
-
   @include isHeaderMobile {
     height: calc($search-size - 1px);
     left: calc(100% - $search-size - $spacing-md);
     right: $spacing-md;
+  }
+
+  @include media($breakpoint-md) {
+    top: 1;
+  }
+
+  @include media($breakpoint-xl) {
+    top: -4px;
   }
 
   &--active {

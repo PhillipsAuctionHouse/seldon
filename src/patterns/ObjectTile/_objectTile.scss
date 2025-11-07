@@ -85,11 +85,6 @@
     margin-bottom: $spacing-sm;
   }
 
-  & .#{$px}-object-tile__token-fix {
-    // @Todo: remove when tokens have been updated. heading 4 should have the font sizes of heading 5
-    @include text($heading5);
-  }
-
   &__withdrawn {
     font-family: $Distinct;
   }

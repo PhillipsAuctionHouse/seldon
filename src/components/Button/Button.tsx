@@ -144,6 +144,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
           {...commonProps}
           ref={ref as React.ForwardedRef<HTMLButtonElement>}
           type={type}
+          aria-busy={isSkeletonLoading}
           className={classnames(
             `${baseClassName}`,
             `${baseClassName}--${variant}`,
@@ -153,7 +154,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
             },
             className,
           )}
-          disabled={isDisabled}
+          disabled={isSkeletonLoading || isDisabled}
           {...props}
         >
           {children}

@@ -3,7 +3,7 @@
 .#{$px}-bid-snapshot {
   position: relative;
 
-  &__text .#{$px}-has-separators .#{$px}-detail {
+  &__text .#{$px}-has-separators .#{$px}-detail.#{$px}-detail {
     flex-wrap: wrap;
     gap: 0 $spacing-sm;
     padding-bottom: $spacing-xsm;
@@ -18,11 +18,6 @@
     padding: 0;
     position: absolute;
     top: calc(100% + $spacing-xsm);
-  }
-
-  .#{$px}-countdown__countdown-container,
-  .#{$px}-duration {
-    @include Montserrat;
   }
 
   &--live:has(.#{$px}-countdown) {
