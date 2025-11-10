@@ -12,9 +12,7 @@
   z-index: $notification-banner-z-index;
 
   & > *,
-  & .#{$px}-text,
-  & .pah-html-parser {
-    // this is a special workaround ideally this parser would be in seldon
+  & .#{$px}-text {
     text-align: center;
 
     @include text($bodySmall);
