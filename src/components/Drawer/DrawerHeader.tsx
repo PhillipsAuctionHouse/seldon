@@ -5,6 +5,7 @@ import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 import { Icon } from '../Icon';
 import { DrawerProps } from './Drawer';
+import { Text, TextVariants } from '../Text';
 
 type CommonProps = ComponentProps<'div'> & {
   baseClassName: string;
@@ -45,7 +46,9 @@ const DrawerHeader = forwardRef<HTMLDivElement, DrawerHeaderProps>(
       <>
         <div className={baseClassName}>
           <Bookend baseClassName={baseClassName} onClose={onClose} drawerOpenSide={drawerOpenSide} bookendSide="left" />
-          <h3 className={`${baseClassName}__title`}>{headerText}</h3>
+          <Text variant={TextVariants.headingSmall} className={`${baseClassName}__title`}>
+            {headerText}
+          </Text>
           <Bookend
             baseClassName={baseClassName}
             onClose={onClose}

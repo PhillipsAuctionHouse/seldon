@@ -3,10 +3,7 @@
 .#{$px}-notification-banner {
   background: $light-gray;
   color: $pure-black;
-  font-size: $snowflake-note-size;
-  font-variation-settings: 'wght' 400;
   left: 0;
-  line-height: $snowflake-note-line-height;
   padding: $spacing-sm $spacing-md;
   position: fixed;
   text-align: center;
@@ -14,11 +11,13 @@
   width: 100%;
   z-index: $notification-banner-z-index;
 
-  > *,
-  .#{$px}-text {
-    font-size: $snowflake-note-size;
-    line-height: $snowflake-note-line-height;
+  & > *,
+  & .#{$px}-text,
+  & .pah-html-parser {
+    // this is a special workaround ideally this parser would be in seldon
     text-align: center;
+
+    @include text($bodySmall);
 
     a {
       cursor: pointer;
@@ -33,9 +32,6 @@
 
   > .#{$px}-notification-banner-content {
     color: $pure-black;
-    font-size: $snowflake-note-size;
-    font-variation-settings: 'wght' 400;
-    line-height: $snowflake-note-line-height;
     text-align: center;
 
     a {
