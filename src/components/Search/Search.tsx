@@ -211,13 +211,11 @@ const Search = forwardRef<HTMLDivElement, React.PropsWithChildren<SearchProps>>(
                     userInputValue={value}
                     closeSearch={setShouldShowResults}
                   >
-                    <li key="viewAllSearchResults" className={`${baseClassName}__result`}>
-                      <Link
-                        href={((value: string) => {
-                          return encodeURLSearchParams(getAllResultsLink(value));
-                        })(value)}
-                        variant={LinkVariants.linkLarge}
-                      >
+                    <li
+                      key="viewAllSearchResults"
+                      className={classnames(`${baseClassName}__result`, `${baseClassName}__result--view-all`)}
+                    >
+                      <Link href={encodeURLSearchParams(getAllResultsLink(value))} variant={LinkVariants.linkLarge}>
                         <p>{getAllResultsText(value)}</p>
                       </Link>
                     </li>

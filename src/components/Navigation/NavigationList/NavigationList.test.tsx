@@ -16,7 +16,7 @@ describe('NavigationList', () => {
             badge="New York"
             href="#"
             navGroup="nav-link-start"
-            navType={LinkVariants.snwFlyoutLink}
+            navType={LinkVariants.linkLarge}
             label="Editions & Works on Paper"
           />
         </NavigationList>

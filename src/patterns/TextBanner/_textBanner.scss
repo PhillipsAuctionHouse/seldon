@@ -5,13 +5,14 @@
     // To center the header on the description
     align-items: center;
     display: flex;
+    text-transform: none;
   }
 
   &__content-wrapper {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     max-width: none;
     padding: $spacing-lg 0;
 

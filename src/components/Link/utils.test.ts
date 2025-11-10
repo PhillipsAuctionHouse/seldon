@@ -4,8 +4,8 @@ import { px } from '../../utils';
 
 describe('getLinkVariantClassName', () => {
   it('should return the correct variant class name', () => {
-    const className = getLinkVariantClassName(LinkVariants.email);
-    expect(className).toBe(`${px}-link--email`);
+    const className = getLinkVariantClassName(LinkVariants.linkLarge);
+    expect(className).toBe(`${px}-link--linkLarge`);
   });
 });
 

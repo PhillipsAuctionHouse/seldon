@@ -30,7 +30,7 @@
   }
 
   @include media($breakpoint-md) {
-    top: 1;
+    top: 2px;
   }
 
   @include media($breakpoint-xl) {
@@ -103,7 +103,7 @@
         margin: 0;
         padding: $spacing-xsm 0 $spacing-xsm $spacing-sm;
 
-        @include text($headingMedium);
+        @include text($bodyLarge);
 
         @include isHeaderMobile {
           height: calc(var(--spacing-md) + var(--search-size));

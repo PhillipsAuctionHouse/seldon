@@ -58,6 +58,51 @@ module.exports = {
       };
     },
   },
+  'no-deprecated-link-variants': {
+    meta: {
+      type: 'problem',
+      docs: {
+        description: 'Disallow using deprecated LinkVariants. Use new link variants instead.',
+        category: 'Best Practices',
+        recommended: true,
+      },
+      messages: {
+        deprecatedVariant: 'LinkVariants.{{variant}} is deprecated. {{migration}}',
+      },
+      schema: [],
+    },
+    create(context) {
+      const deprecatedVariants = {
+        email: 'Use linkSmall, linkMedium, or linkLarge instead',
+        snwHeaderLink: 'Use linkStylised instead',
+        snwFlyoutLink: 'Use linkLarge instead',
+        link: 'Use linkSmall instead',
+      };
+
+      return {
+        MemberExpression(node) {
+          // Check for LinkVariants.<deprecated>
+          if (
+            node.object &&
+            node.object.type === 'Identifier' &&
+            node.object.name === 'LinkVariants' &&
+            node.property &&
+            node.property.type === 'Identifier' &&
+            deprecatedVariants[node.property.name]
+          ) {
+            context.report({
+              node,
+              messageId: 'deprecatedVariant',
+              data: {
+                variant: node.property.name,
+                migration: deprecatedVariants[node.property.name],
+              },
+            });
+          }
+        },
+      };
+    },
+  },
   'no-equals-word-string': {
     meta: {
       type: 'problem',

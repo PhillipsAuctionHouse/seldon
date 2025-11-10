@@ -1,3 +1,4 @@
+/* eslint-disable local-rules/no-deprecated-link-variants */
 import type { Meta } from '@storybook/react';
 
 import Link, { LinkProps } from './Link';

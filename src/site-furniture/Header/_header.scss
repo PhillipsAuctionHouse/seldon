@@ -156,7 +156,7 @@
     }
 
     .#{$px}-nav__item {
-      .#{$px}-link--snwHeaderLink {
+      .#{$px}-link--linkStylised {
         align-content: center;
         height: 100%;
       }
@@ -172,7 +172,7 @@
       height: 100vh;
       left: 0;
       position: absolute;
-      top: calc($header-height);
+      top: calc($header-height - 4px);
       width: 100%;
     }
   }
@@ -184,7 +184,7 @@
   }
 
   @include isHeaderMobile {
-    .#{$px}-nav__list .#{$px}-nav__item:last-child .#{$px}-link--snwHeaderLink {
+    .#{$px}-nav__list .#{$px}-nav__item:last-child .#{$px}-link--linkStylised {
       border-bottom: none;
     }
 

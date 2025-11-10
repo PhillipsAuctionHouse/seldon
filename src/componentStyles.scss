@@ -150,7 +150,7 @@
   --spacing-xl: 3.75rem;
   --spacing-xxl: 4.75rem;
   --spacing-xxxl: 5.75rem;
-  --header-height: 52px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
+  --header-height: 56px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
   --search-size: 2.32rem; // This should be calculated from the scaling text and scaling spacing tokens instead of hardcoding in case they change
   --banner-height: 0px;
 
@@ -210,7 +210,7 @@
     --spacing-xl: 4rem;
     --spacing-xxl: 5rem;
     --spacing-xxxl: 6rem;
-    --header-height: 119px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
+    --header-height: 124px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
   }
 
   @media (min-width: $breakpoint-lg) {
@@ -265,7 +265,7 @@
     --spacing-xl: 4.25rem;
     --spacing-xxl: 5.25rem;
     --spacing-xxxl: 6.25rem;
-    --header-height: 131px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
+    --header-height: 133px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
     --search-size: 2.875rem; // This should be calculated from the scaling text and scaling spacing tokens instead of hardcoding in case they change
 
     // FONT SIZES

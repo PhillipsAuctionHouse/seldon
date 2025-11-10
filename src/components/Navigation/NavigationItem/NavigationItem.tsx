@@ -73,7 +73,7 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
             [`${px}-nav__item--view-all`]: isViewAllLink,
           })}
           href={href}
-          variant={navType ? navType : LinkVariants.snwHeaderLink}
+          variant={navType ? navType : LinkVariants.linkStylised}
         >
           <span className={`${px}-nav__item--label`}>{label}</span>
           {badge ? <span className={`${px}-nav__item--badge `}>{` • ${badge}`}</span> : null}

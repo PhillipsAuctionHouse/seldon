@@ -128,12 +128,12 @@ export const AccordionSubmenu = ({ transitionTimeInMs, ...props }: AccordionProp
           <NavigationItem
             label="English"
             onClick={() => setCurrentLanguage('English')}
-            navType={LinkVariants.snwFlyoutLink}
+            navType={LinkVariants.linkLarge}
           ></NavigationItem>
           <NavigationItem
             label="Chinese"
             onClick={() => setCurrentLanguage('Chinese')}
-            navType={LinkVariants.snwFlyoutLink}
+            navType={LinkVariants.linkLarge}
           ></NavigationItem>
         </div>
       </AccordionItem>
