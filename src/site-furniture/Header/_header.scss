@@ -172,8 +172,12 @@
       height: 100vh;
       left: 0;
       position: absolute;
-      top: calc($header-height - 4px);
+      top: calc($header-height - 3px);
       width: 100%;
+
+      @include media($breakpoint-xl) {
+        top: calc($header-height - 1px);
+      }
     }
   }
 
