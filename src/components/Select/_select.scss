@@ -1,7 +1,12 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-select-input {
+  margin-bottom: $spacing-sm;
   position: relative;
+
+  &__standalone {
+    margin-bottom: 0;
+  }
 
   .#{$px}-select-container {
     position: relative;

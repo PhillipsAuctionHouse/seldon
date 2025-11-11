@@ -166,6 +166,10 @@
     overflow: hidden;
   }
 
+  &__empty-validation {
+    line-height: $spacing-sm;
+  }
+
   &__item__invalid-text {
     @include text($bodySmall);
 

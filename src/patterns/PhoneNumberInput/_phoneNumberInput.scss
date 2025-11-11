@@ -32,6 +32,10 @@
     .#{$px}-input__validation {
       display: none;
     }
+
+    .#{$px}-input__empty-validation {
+      display: none;
+    }
   }
 
   @media screen and (min-width: $breakpoint-xl) {

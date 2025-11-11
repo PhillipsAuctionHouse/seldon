@@ -92,6 +92,9 @@
 .#{$px}-input__validation {
   animation: reveal 0.45s linear forwards;
 }
+.#{$px}-input__empty-validation {
+  line-height: $spacing-sm;
+}
 
 @keyframes reveal {
   0% {

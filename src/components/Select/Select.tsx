@@ -24,6 +24,11 @@ export interface SelectProps extends Merge<InputProps, React.ComponentProps<'sel
    * Determines the variant of the select
    */
   variant?: SelectVariants;
+
+  /**
+   * Determines if the select is not in a form
+   */
+  isStandalone?: boolean;
 }
 
 /**
@@ -58,6 +63,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       value,
       warn,
       warnText,
+      isStandalone = false,
       ...rest
     },
     ref,
@@ -81,6 +87,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       [`${px}-input--invalid`]: inputProps.invalid,
       [`${px}-input--warn`]: inputProps.warn,
       [`${className}__wrapper`]: className,
+      [`${px}-${type}-input__standalone`]: isStandalone,
     });
     const selectClassnames = classnames(className, `${px}-input__input`, {
       [`${px}-input__select--tertiary`]: variant === SelectVariants.tertiary,

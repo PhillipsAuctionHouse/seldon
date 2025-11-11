@@ -34,7 +34,8 @@ $lg: #{$px}-input--lg;
     position: relative;
 
     &::placeholder {
-      font-variation-settings: 'wght' 400;
+      color: $cta-inactive;
+      font-variation-settings: 'wght' 600;
     }
 
     &:focus-visible,
@@ -44,6 +45,8 @@ $lg: #{$px}-input--lg;
 
     .#{$px}-input__wrapper__input,
     .#{$px}-input__input {
+      @include text($bodyMedium);
+
       border: none;
       margin: 0;
       padding: 0;
@@ -93,6 +96,10 @@ $lg: #{$px}-input--lg;
     -webkit-line-clamp: 2;
     line-height: $spacing-md;
     overflow: hidden;
+  }
+
+  &__empty-validation {
+    line-height: $spacing-sm;
   }
 
   // Inline

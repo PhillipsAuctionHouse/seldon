@@ -1,5 +1,5 @@
 {
-  "branches": ["main"],
+  "branches": ["main", "L3-7279-typography-update-v2"],
   "plugins": [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",

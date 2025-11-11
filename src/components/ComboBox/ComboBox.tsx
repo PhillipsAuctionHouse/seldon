@@ -572,7 +572,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
         {inputProps.validation ? (
           inputProps.validation
         ) : (
-          <p className={classnames(`${baseClassName}__validation`)}>&nbsp;</p>
+          <p className={classnames(`${baseClassName}__empty-validation`)}>&nbsp;</p>
         )}
       </div>
     </div>

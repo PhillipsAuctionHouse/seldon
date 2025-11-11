@@ -144,7 +144,7 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps & CountryPi
                 className={`${baseClassName}__input`}
                 inputAdornment={
                   <span aria-hidden="true">
-                    <Icon icon="Search" width={16} height={16} color="$cta-inactive" />
+                    <Icon icon="Search" width={20} height={20} color="$cta-inactive" />
                   </span>
                 }
               />

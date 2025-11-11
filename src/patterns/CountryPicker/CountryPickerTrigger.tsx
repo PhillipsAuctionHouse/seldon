@@ -74,7 +74,7 @@ const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & Inte
       : countries.filter((country) => country.name === value)?.[0]?.code;
 
     const handleValidation = () => {
-      return inputProps.validation ? inputProps.validation : <p className={`${px}-input__validation`}>&nbsp;</p>;
+      return inputProps.validation ? inputProps.validation : <p className={`${px}-input__empty-validation`}>&nbsp;</p>;
     };
 
     return (
