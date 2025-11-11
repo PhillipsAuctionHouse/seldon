@@ -31,6 +31,7 @@ const args = {
         lotCloseDate={addHours(new Date(), 20)}
         saleCloseDate={addHours(new Date(), 20)}
         currentBid={1000000}
+        variant="sm"
       >
         <BidMessage message="With You" />
       </BidSnapshot>
@@ -64,8 +65,29 @@ WithCountdownTimer.args = {
         lotCloseDate={addMinutes(new Date(), 3)} // Lot closes in 3 minutes
         saleCloseDate={addMinutes(new Date(), 5)} // Sale closes in 5 minutes
         currentBid={1000000}
+        variant="sm"
       >
         <BidMessage message="With You" />
+      </BidSnapshot>
+    </>
+  ),
+};
+
+export const SoldState = (props: ComponentProps<typeof ObjectTile>) => <ObjectTile {...props} />;
+SoldState.args = {
+  ...args,
+  children: (
+    <>
+      <BidSnapshot
+        startingBid={50000}
+        bidStatus={BidStatusEnum.Won}
+        lotStatus={LotStatus.past}
+        numberOfBids={12}
+        currentBid={2500000}
+        soldPrice={2500000}
+        variant="sm"
+      >
+        <BidMessage message="You won this lot!" />
       </BidSnapshot>
     </>
   ),

@@ -20,6 +20,10 @@ export interface DetailProps extends ComponentProps<'div'> {
    * Value that appears on the right side of the Detail component
    */
   value: React.ReactNode;
+  /*
+   * Text variant to use for labels and values
+   */
+  textVariant?: TextVariants;
 }
 /**
  * ## Overview
@@ -32,7 +36,10 @@ export interface DetailProps extends ComponentProps<'div'> {
  *
  */
 const Detail = forwardRef<HTMLDivElement, DetailProps>(
-  ({ className = '', hasWrap = true, label, subLabel, value, ...props }, ref) => {
+  (
+    { className = '', hasWrap = true, label, subLabel, value, textVariant = TextVariants.labelMedium, ...props },
+    ref,
+  ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Detail');
 
     return (
@@ -43,17 +50,17 @@ const Detail = forwardRef<HTMLDivElement, DetailProps>(
             [`${baseClassName}__label-section--has-sub-label`]: subLabel,
           })}
         >
-          <Text variant={TextVariants.labelSmall} className={classnames(`${baseClassName}__label-section--label`)}>
+          <Text variant={textVariant} className={classnames(`${baseClassName}__label-section--label`)}>
             {label}
           </Text>{' '}
           {subLabel ? (
-            <Text className={`${baseClassName}__sub-label`} variant={TextVariants.labelSmall}>
+            <Text className={`${baseClassName}__sub-label`} variant={textVariant}>
               {subLabel}
             </Text>
           ) : null}
         </dt>
         <dd className={`${baseClassName}__value`}>
-          <Text variant={TextVariants.labelSmall}>{value}</Text>
+          <Text variant={textVariant}>{value}</Text>
         </dd>
       </div>
     );

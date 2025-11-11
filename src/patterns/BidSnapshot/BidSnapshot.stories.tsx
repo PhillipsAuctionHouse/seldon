@@ -6,6 +6,7 @@ import BidSnapshot, { BidSnapshotProps } from './BidSnapshot';
 import BidMessage from './BidMessage';
 import { LotStatus } from '../../types/commonTypes';
 import { BidMessageVariants, BidStatusEnum } from './types';
+import { TextVariants } from '../../components/Text';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -180,4 +181,115 @@ LostBid.args = {
   soldPrice: 4200,
   lang: enUS,
   startingBid: 1000,
+};
+
+export const StartingBid = (props: BidSnapshotProps) => {
+  const { lotStatus, lotCloseDate, ...rest } = props;
+
+  return (
+    <BidSnapshot
+      lotStatus={lotStatus}
+      lotCloseDate={lotStatus === LotStatus.ready ? undefined : lotCloseDate}
+      {...rest}
+    />
+  );
+};
+
+StartingBid.args = {
+  currency: '$',
+  lotStatus: LotStatus.ready,
+  startingBid: 500,
+  startingBidText: 'Starting bid',
+  lang: enUS,
+};
+
+export const NoSeparators = (props: BidSnapshotProps) => {
+  const { lotStatus, lotCloseDate, currentBid, soldPrice, ...rest } = props;
+
+  return (
+    <BidSnapshot
+      lotStatus={lotStatus}
+      currentBid={currentBid}
+      lotCloseDate={lotStatus === LotStatus.ready ? undefined : lotCloseDate}
+      soldPrice={soldPrice}
+      hasSeparators={false}
+      {...rest}
+    />
+  );
+};
+
+NoSeparators.args = {
+  currency: '$',
+  numberOfBids: 3,
+  lotStatus: LotStatus.live,
+  currentBid: 1500,
+  lotCloseDate: addMinutes(new Date(), 20),
+  saleCloseDate: addMinutes(new Date(), 40),
+  lang: enUS,
+  startingBid: 800,
+};
+
+export const SmallVariant = (props: BidSnapshotProps) => {
+  const { lotStatus, lotCloseDate, currentBid, soldPrice, ...rest } = props;
+
+  return (
+    <BidSnapshot
+      lotStatus={lotStatus}
+      currentBid={currentBid}
+      lotCloseDate={lotStatus === LotStatus.ready ? undefined : lotCloseDate}
+      soldPrice={soldPrice}
+      variant="sm"
+      {...rest}
+    />
+  );
+};
+
+SmallVariant.args = {
+  currency: '$',
+  numberOfBids: 4,
+  lotStatus: LotStatus.live,
+  currentBid: 1800,
+  lotCloseDate: addMinutes(new Date(), 15),
+  saleCloseDate: addMinutes(new Date(), 35),
+  lang: enUS,
+  startingBid: 900,
+};
+
+export const SmallVariantWithBidMessage = (props: BidSnapshotProps) => {
+  const { lotStatus, lotCloseDate, currentBid, soldPrice, bidStatus, ...rest } = props;
+
+  return (
+    <BidSnapshot
+      bidStatus={bidStatus}
+      lotStatus={lotStatus}
+      currentBid={currentBid}
+      lotCloseDate={lotStatus === LotStatus.ready ? undefined : lotCloseDate}
+      soldPrice={soldPrice}
+      variant="sm"
+      {...rest}
+    >
+      {bidStatus === BidStatusEnum.Winning ? (
+        <BidMessage message="Currently Winning" textVariant={TextVariants.labelSmall} />
+      ) : null}
+      {bidStatus === BidStatusEnum.Losing ? (
+        <BidMessage
+          variant={BidMessageVariants.negative}
+          message="You've been outbid"
+          textVariant={TextVariants.labelSmall}
+        />
+      ) : null}
+    </BidSnapshot>
+  );
+};
+
+SmallVariantWithBidMessage.args = {
+  currency: '$',
+  numberOfBids: 6,
+  lotStatus: LotStatus.live,
+  currentBid: 2200,
+  lotCloseDate: addMinutes(new Date(), 12),
+  saleCloseDate: addMinutes(new Date(), 30),
+  lang: enUS,
+  startingBid: 1000,
+  bidStatus: BidStatusEnum.Winning,
 };

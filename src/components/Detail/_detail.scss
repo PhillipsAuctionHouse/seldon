@@ -27,10 +27,6 @@
     &--has-sub-label {
       width: 200px;
 
-      @include media($breakpoint-md) {
-        width: 160px;
-      }
-
       @media (max-width: $breakpoint-sm) {
         width: 120px;
       }

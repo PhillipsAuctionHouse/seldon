@@ -7,15 +7,22 @@ export interface DurationProps {
   unit: DurationUnit;
   locale: Locale;
   formatDurationStr?: (duration: string) => string;
+  textVariant?: TextVariants;
 }
 
-export const Duration = ({ duration, unit, locale, formatDurationStr = (str) => str }: DurationProps) => {
+export const Duration = ({
+  duration,
+  unit,
+  locale,
+  formatDurationStr = (str) => str,
+  textVariant = TextVariants.labelMedium,
+}: DurationProps) => {
   const baseClassName = `${px}-duration`;
   const durationParts = formatDuration(duration, { format: [unit], zero: true, locale }).split(' ');
   return (
     <div className={baseClassName}>
-      <Text variant={TextVariants.labelSmall}>{durationParts[0].padStart(2, '0')}</Text>
-      <Text variant={TextVariants.labelSmall}>{formatDurationStr(durationParts[1])}</Text>
+      <Text variant={textVariant}>{durationParts[0].padStart(2, '0')}</Text>
+      <Text variant={textVariant}>{formatDurationStr(durationParts[1])}</Text>
     </div>
   );
 };

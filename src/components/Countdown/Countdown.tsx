@@ -109,11 +109,14 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
 
     const isClosingTag = differenceInMilliseconds(endDateTime, currentDateTime) <= 3 * 60 * 1000;
 
+    const textVariant = variant === CountdownVariants.sm ? TextVariants.labelSmall : TextVariants.labelMedium;
+
     return showTimer ? (
       <div
         {...commonProps}
         className={classnames(baseClassName, className, {
           [`${baseClassName}--compact`]: variant === CountdownVariants.compact,
+          [`${baseClassName}--sm`]: variant === CountdownVariants.sm,
           [`${baseClassName}--show-bottom-border`]: showBottomBorder,
           [`${baseClassName}--closing-lot`]: isClosingTag,
         })}
@@ -121,18 +124,42 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
         ref={ref}
       >
         <div className={`${baseClassName}__countdown-container`} role="timer" aria-label={label}>
-          <Text variant={TextVariants.labelSmall}>{label}</Text>
+          <Text variant={textVariant}>{label}</Text>
           {timeLeft.days > 0 ? (
-            <Duration duration={timeLeft} unit="days" locale={dateFnsLocale} formatDurationStr={formatDurationStr} />
+            <Duration
+              duration={timeLeft}
+              unit="days"
+              locale={dateFnsLocale}
+              formatDurationStr={formatDurationStr}
+              textVariant={textVariant}
+            />
           ) : null}
           {timeLeft.days > 0 || timeLeft.hours > 0 ? (
-            <Duration duration={timeLeft} unit="hours" locale={dateFnsLocale} formatDurationStr={formatDurationStr} />
+            <Duration
+              duration={timeLeft}
+              unit="hours"
+              locale={dateFnsLocale}
+              formatDurationStr={formatDurationStr}
+              textVariant={textVariant}
+            />
           ) : null}
           {timeLeft.days === 0 ? (
-            <Duration duration={timeLeft} unit="minutes" locale={dateFnsLocale} formatDurationStr={formatDurationStr} />
+            <Duration
+              duration={timeLeft}
+              unit="minutes"
+              locale={dateFnsLocale}
+              formatDurationStr={formatDurationStr}
+              textVariant={textVariant}
+            />
           ) : null}
           {timeLeft.days === 0 && timeLeft.hours === 0 ? (
-            <Duration duration={timeLeft} unit="seconds" locale={dateFnsLocale} formatDurationStr={formatDurationStr} />
+            <Duration
+              duration={timeLeft}
+              unit="seconds"
+              locale={dateFnsLocale}
+              formatDurationStr={formatDurationStr}
+              textVariant={textVariant}
+            />
           ) : null}
         </div>
         {variant === CountdownVariants.default ? <span>{intervalDescription}</span> : null}

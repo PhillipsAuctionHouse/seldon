@@ -140,12 +140,12 @@ const ObjectTile = memo(
             fetchPriority={imageFetchPriority}
           />
           {!withdrawnText ? (
-            <Text element="span" className={`${baseClassName}__badge`} variant={TextVariants.badge}>
+            <Text element="span" className={`${baseClassName}__badge`} variant={TextVariants.labelSmall}>
               {badgeText}
             </Text>
           ) : null}
           <div className={`${baseClassName}__lot-number-like`}>
-            <Text element="span" className={`${baseClassName}__lot-number`} variant={TextVariants.headingMedium}>
+            <Text element="span" className={`${baseClassName}__lot-number`} variant={TextVariants.headingSmall}>
               {lotNumber}
             </Text>
             {BadgeElement && (
@@ -156,33 +156,33 @@ const ObjectTile = memo(
             {FavoriteElement && <FavoriteElement />}
           </div>
           {withdrawnText ? (
-            <Text element="span" className={`${baseClassName}__withdrawn`} variant={TextVariants.headingMedium}>
+            <Text element="span" className={`${baseClassName}__withdrawn`} variant={TextVariants.headingSmall}>
               {withdrawnText}
-            </Text> // TODO: Design calls for heading 4 but the values they have map to our current heading 5. This should be updated when we update those tokens.
+            </Text>
           ) : (
             <>
               <div className={`${baseClassName}__meta`}>
                 {makerText ? (
-                  <Text element="span" className={`${baseClassName}__maker`} variant={TextVariants.headingMedium}>
+                  <Text element="span" className={`${baseClassName}__maker`} variant={TextVariants.headingSmall}>
                     {makerText}
                   </Text>
                 ) : null}
                 {titleText ? (
-                  <Text element="cite" className={`${baseClassName}__title`} variant={TextVariants.headingSmall}>
+                  <Text element="cite" className={`${baseClassName}__title`} variant={TextVariants.bodyMedium}>
                     {titleText}
                   </Text>
                 ) : null}
                 {referenceNumber ? (
                   <Text
                     className={`${baseClassName}__reference-number`}
-                    variant={TextVariants.headingSmall}
+                    variant={TextVariants.bodyMedium}
                     element="span"
                   >
                     {referenceNumber}
                   </Text>
                 ) : null}
                 {modelText ? (
-                  <Text className={`${baseClassName}__model`} variant={TextVariants.headingSmall} element="span">
+                  <Text className={`${baseClassName}__model`} variant={TextVariants.bodyMedium} element="span">
                     {modelText}
                   </Text>
                 ) : null}
@@ -194,6 +194,7 @@ const ObjectTile = memo(
                     label={estimateLabelText}
                     value={estimate ? estimate : estimateOnRequestText}
                     hasWrap={false}
+                    textVariant={TextVariants.labelSmall}
                   />
                 </DetailList>
               ) : null}
