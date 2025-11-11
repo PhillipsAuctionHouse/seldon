@@ -7,11 +7,16 @@ import { Text, TextVariants } from '../../components/Text';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import { getCommonProps } from '../../utils';
 import { SaleCardActions } from './SaleCardActions';
-import { SaleCardVariants } from './types';
+import { SaleCardVariants, SaleCardImageDisplay } from './types';
 
-/** * Props for the SaleCard component. */
+/**
+ * Props for the SaleCard component.
+ */
 export interface SaleCardProps extends ComponentProps<'div'> {
-  /** * The source URL of the image to be displayed. */
+  /**
+   * The source URL of the image to be displayed.
+   * Leaving this prop undefined or falsy is the intended way to hide the image.
+   */
   imageSrc?: string;
   /** * The alt text for the image. Defaults to "Auction Image" if not provided. */
   imageAlt?: string;
@@ -36,6 +41,8 @@ export interface SaleCardProps extends ComponentProps<'div'> {
   variant?: SaleCardVariants;
   /** * The <SaleCardActions /> component used to render the SaleCard CTAs. */
   children?: React.ReactElement<typeof SaleCardActions>;
+  /** * The position of the image relative to the content. Can be 'left' or 'right'. Defaults to 'left'. */
+  imageDisplay?: SaleCardImageDisplay;
 }
 
 /**
@@ -63,6 +70,7 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
       modalButtonText,
       variant = SaleCardVariants.DEFAULT,
       children,
+      imageDisplay = SaleCardImageDisplay.LEFT,
       ...props
     },
     ref,
@@ -70,6 +78,7 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SaleCard');
     const classes = classnames(baseClassName, className, {
       [`${baseClassName}--${variant}`]: variant,
+      [`${baseClassName}--image-${imageDisplay}`]: imageDisplay,
     });
     const componentProps = { ...commonProps, ...props };
 
