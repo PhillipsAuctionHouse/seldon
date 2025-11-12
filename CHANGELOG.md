@@ -1,3 +1,10 @@
+# [1.214.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.213.0...v1.214.0) (2025-11-12)
+
+
+### Features
+
+* **Clock:** L3-9595 added new icon ([#761](https://github.com/PhillipsAuctionHouse/seldon/issues/761)) ([5458eb6](https://github.com/PhillipsAuctionHouse/seldon/commit/5458eb6dd3a1fb096add9be42c0ad0f4c31f660f))
+
 # [1.213.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.212.0...v1.213.0) (2025-11-12)
 
 
