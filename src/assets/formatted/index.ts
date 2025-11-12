@@ -79,3 +79,4 @@ export { default as VolumeMid } from './VolumeMid';
 export { default as VolumeMinimum } from './VolumeMinimum';
 export { default as WeChat } from './WeChat';
 export { default as Clock } from './Clock';
+export { default as LiveNow } from './LiveNow';
