@@ -77,6 +77,7 @@ const designIcons = [
   'AdminHome',
   'AdminPencil',
   'AdminSearch',
+  'LiveNow',
 ] as const;
 export const IconGrid = (props: IconProps) => {
   const [color, setColor] = useState<string>('$black-100');
