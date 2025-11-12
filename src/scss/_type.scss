@@ -298,6 +298,10 @@
     @include heading-styles($font-size-heading-small, $font-weight, $text-transform, $font-style);
   }
 
+  @if $token == $headingExtraSmall {
+    @include heading-styles($font-size-heading-extra-small, $font-weight, $text-transform, $font-style);
+  }
+
   @if $token == $bodyLarge {
     @include body-styles($font-size-body-large, $font-weight, $text-transform, $font-style);
   }

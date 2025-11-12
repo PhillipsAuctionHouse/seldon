@@ -8,6 +8,7 @@ $px: seldon;
   --font-size-heading-large: 1.5rem; // 24px
   --font-size-heading-medium: 1.25rem; // 20px
   --font-size-heading-small: 1rem; // 16px
+  --font-size-heading-extra-small: 0.75rem; // 12px
   --font-size-body-large: 1rem; // 16px
   --font-size-body-medium: 0.875rem; // 14px
   --font-size-body-small: 0.75rem; // 12px
@@ -30,6 +31,7 @@ $px: seldon;
   --font-size-heading-large: 1.75rem; // 28px
   --font-size-heading-medium: 1.5rem; // 24px
   --font-size-heading-small: 1.25rem; // 20px
+  --font-size-heading-extra-small: 1rem; // 16px
   --font-size-body-large: 1.25rem; // 20px
   --font-size-body-medium: 1.125rem; // 18px
   --font-size-body-small: 1rem; // 16px
@@ -57,6 +59,7 @@ $font-size-display-small: var(--font-size-display-small);
 $font-size-heading-large: var(--font-size-heading-large);
 $font-size-heading-medium: var(--font-size-heading-medium);
 $font-size-heading-small: var(--font-size-heading-small);
+$font-size-heading-extra-small: var(--font-size-heading-extra-small);
 $font-size-body-large: var(--font-size-body-large);
 $font-size-body-medium: var(--font-size-body-medium);
 $font-size-body-small: var(--font-size-body-small);
@@ -242,6 +245,7 @@ $displaySmall: 'displaySmall';
 $headingLarge: 'headingLarge';
 $headingMedium: 'headingMedium';
 $headingSmall: 'headingSmall';
+$headingExtraSmall: 'headingExtraSmall';
 $bodyLarge: 'bodyLarge';
 $bodyMedium: 'bodyMedium';
 $bodySmall: 'bodySmall';
@@ -255,8 +259,8 @@ $linkSmall: 'linkSmall';
 $text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $heading2, $heading3, $heading4, $heading5,
   $title1, $title2, $title3, $title4, $body1, $body2, $body3, $string1, $string2, $string3, $snwFlyoutLink,
   $snwHeaderLink, $snwHeadingHero1, $snwHeadingHero2, $displayMedium, $displaySmall, $headingLarge, $headingMedium,
-  $headingSmall, $bodyLarge, $bodyMedium, $bodySmall, $labelLarge, $labelMedium, $labelSmall, $linkStylised, $linkLarge,
-  $linkMedium, $linkSmall;
+  $headingSmall, $headingExtraSmall, $bodyLarge, $bodyMedium, $bodySmall, $labelLarge, $labelMedium, $labelSmall,
+  $linkStylised, $linkLarge, $linkMedium, $linkSmall;
 
 ////////////////////////
 /// Breakpoint TOKENS to be used for min-width comparisons, make sure they match BREAKPOINTS in constants.ts

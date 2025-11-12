@@ -7,9 +7,9 @@ export enum TextVariants {
   heading2 = 'heading2',
   /** @deprecated Use headingMedium instead */
   heading3 = 'heading3',
-  /** @deprecated Use headingMedium instead */
+  /** @deprecated Use headingSmall instead */
   heading4 = 'heading4',
-  /** @deprecated Use bodySmall instead */
+  /** @deprecated Use headingExtraSmall instead */
   heading5 = 'heading5',
   /** @deprecated Use displayMedium instead */
   title1 = 'title1',
@@ -56,6 +56,7 @@ export enum TextVariants {
   headingLarge = 'headingLarge',
   headingMedium = 'headingMedium',
   headingSmall = 'headingSmall',
+  headingExtraSmall = 'headingExtraSmall',
   bodyLarge = 'bodyLarge',
   bodyMedium = 'bodyMedium',
   bodySmall = 'bodySmall',

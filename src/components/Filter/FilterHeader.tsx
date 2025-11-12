@@ -18,6 +18,10 @@ export interface FilterHeaderProps extends ComponentProps<'div'> {
 
   // Setter to apply closing transition to view all filter
   setIsClosing?: Dispatch<SetStateAction<boolean>>;
+  /**
+   *  translatable string for back to all button
+   */
+  backToAllLabel?: string;
 }
 /**
  * ## Overview
@@ -25,7 +29,18 @@ export interface FilterHeaderProps extends ComponentProps<'div'> {
  * The header of a filter
  */
 const FilterHeader = forwardRef<HTMLDivElement, FilterHeaderProps>(
-  ({ className, heading, isViewingAll = false, setViewAllFilter, setIsClosing, ...props }, ref) => {
+  (
+    {
+      className,
+      heading,
+      isViewingAll = false,
+      setViewAllFilter,
+      setIsClosing,
+      backToAllLabel = 'Back to all',
+      ...props
+    },
+    ref,
+  ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'FilterHeader');
 
     const handleClose = () => {
@@ -40,14 +55,14 @@ const FilterHeader = forwardRef<HTMLDivElement, FilterHeaderProps>(
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         <Text
-          variant={TextVariants.headingMedium}
+          variant={TextVariants.headingSmall}
           className={`${baseClassName}__heading`}
           element={(props) => <legend {...props}>{heading}</legend>}
         />
         {isViewingAll ? (
           <Button variant={ButtonVariants.tertiary} onClick={handleClose} className={`${baseClassName}__back`}>
             <Icon icon="ChevronLeft" />
-            Back to all
+            <Text variant={TextVariants.labelMedium}>{backToAllLabel}</Text>
           </Button>
         ) : null}
       </div>

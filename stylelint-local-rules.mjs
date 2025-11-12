@@ -3,7 +3,7 @@ import stylelint from 'stylelint';
 const ruleName = 'local-rules/no-deprecated-text-tokens';
 const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: (token) =>
-    `Text token "${token}" is deprecated. Use new typography tokens: $displayMedium, $displaySmall, $headingLarge, $headingMedium, $headingSmall, $bodyLarge, $bodyMedium, $bodySmall, $labelLarge, $labelMedium, $labelSmall, $linkStylised, $linkLarge, $linkMedium, or $linkSmall instead.`,
+    `Text token "${token}" is deprecated. Use new typography tokens: $displayMedium, $displaySmall, $headingLarge, $headingMedium, $headingSmall, $headingExtraSmall, $bodyLarge, $bodyMedium, $bodySmall, $labelLarge, $labelMedium, $labelSmall, $linkStylised, $linkLarge, $linkMedium, or $linkSmall instead.`,
 });
 
 const deprecatedTokens = [

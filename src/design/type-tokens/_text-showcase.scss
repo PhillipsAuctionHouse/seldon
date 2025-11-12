@@ -93,6 +93,10 @@
       @include text($headingSmall, 600, uppercase, italic);
     }
 
+    &__heading-extra-small {
+      @include text($headingExtraSmall);
+    }
+
     &__body-large {
       @include text($bodyLarge);
     }

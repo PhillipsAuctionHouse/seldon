@@ -39,6 +39,8 @@ export const determineDefaultTextElement = (variant: TextVariants = TextVariants
         return 'h2';
       case TextVariants.headingSmall:
         return 'h3';
+      case TextVariants.headingExtraSmall:
+        return 'h4';
       default: {
         const headingNumber = !isNaN(parseInt(variant.slice(-1))) ? parseInt(variant.slice(-1)) : 3;
         return `h${headingNumber}`;

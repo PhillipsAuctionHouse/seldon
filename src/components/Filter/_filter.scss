@@ -37,9 +37,11 @@ $chevron-scale: 0.8;
     }
 
     &__back {
-      @include text($bodyMedium); // workaround where the tertiary button text is not scaling at different breakpoints
+      @include text($labelMedium);
 
-      margin-top: $spacing-sm;
+      .#{$px}-text.#{$px}-text--labelMedium {
+        font-variation-settings: 'wght' 600;
+      }
     }
   }
 
@@ -76,14 +78,26 @@ $chevron-scale: 0.8;
         width: $body-line-height-size3;
       }
 
-      &__validation {
+      &__validation,
+      &__empty-validation {
         display: none;
       }
     }
   }
 
   &__view-all {
-    @include text($bodyMedium); // workaround where the tertiary button text is not scaling at different breakpoints
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    &__button {
+      @include text($labelMedium);
+
+      .#{$px}-text.#{$px}-text--labelMedium {
+        font-variation-settings: 'wght' 600;
+      }
+    }
   }
 
   &.is-opening {

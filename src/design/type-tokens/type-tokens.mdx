@@ -145,6 +145,27 @@ import { Meta } from '@storybook/blocks';
           </div>
       </div>
       <div className="typography-item typography-item--small">
+        <h3 className="typography-item__heading-extra-small">Heading Extra Small</h3>
+          <div className="typography-item__specs">
+            Size: 12px / 0.75rem <br/>
+            Line height: 1.2 <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <h3 className="typography-item__heading-extra-small"></h3>
+      </div>
+      <div className="typography-item typography-item--large">
+        <h3 className="typography-item__heading-extra-small">Heading Extra Small</h3>
+          <div className="typography-item__specs">
+            Size: 16px / 1.00rem <br/>
+            Line height: 1.2 <br/>
+            Letter spacing: 0% <br/>
+            Font: Distinct Display
+          </div>
+      </div>
+      <div className="typography-item typography-item--small">
         <h3 className="typography-item__heading-small--modified">Heading L modified</h3>
           <div className="typography-item__specs">
             Size: 16px / 1.00rem <br/>
@@ -171,6 +192,7 @@ import { Meta } from '@storybook/blocks';
         @include text($headingMedium);
         @include text($headingSmall);
         @include text($headingSmall, 600, uppercase, italic);
+        @include text($headingExtraSmall);
         ```
       </div>
     </div>
@@ -502,7 +524,7 @@ import { Meta } from '@storybook/blocks';
       </tr>
       <tr>
         <td><code>$heading5</code></td>
-        <td><code>$bodySmall</code></td>
+        <td><code>$headingExtraSmall</code></td>
         <td>Updated to new heading token.</td>
       </tr>
         <tr>
@@ -527,7 +549,7 @@ import { Meta } from '@storybook/blocks';
       </tr>
       <tr>
         <td><code>$title4</code></td>
-        <td><code>$bodySmall</code></td>
+        <td><code>$headingExtraSmall</code></td>
         <td>Use heading tokens instead.</td>
       </tr>
       <tr>
