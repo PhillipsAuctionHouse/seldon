@@ -151,7 +151,7 @@ const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
           href={typeof prevOption === 'object' && prevOption.href ? prevOption.href : undefined}
           prefetch={typeof prevOption === 'object' && prevOption.prefetch ? prevOption.prefetch : undefined}
         >
-          <Icon icon="ChevronRight" />
+          <Icon icon="ChevronRight" height="16" width="16" />
         </IconButton>
 
         <Select
@@ -170,6 +170,7 @@ const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
           disabled={isDisabled}
           showIcon={false}
           id={`${id}-select-button`}
+          isStandalone
         >
           {options.map((option) => {
             const optionValue = determineOptionValue(option);
@@ -198,7 +199,7 @@ const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
           href={typeof nextOption === 'object' && nextOption.href ? nextOption.href : undefined}
           prefetch={typeof nextOption === 'object' && nextOption.prefetch ? nextOption.prefetch : undefined}
         >
-          <Icon icon="ChevronRight" />
+          <Icon icon="ChevronRight" height="16" width="16" />
         </IconButton>
       </div>
     );

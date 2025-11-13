@@ -168,21 +168,21 @@ const ObjectTile = memo(
                   </Text>
                 ) : null}
                 {titleText ? (
-                  <Text element="cite" className={`${baseClassName}__title`} variant={TextVariants.bodyMedium}>
+                  <Text element="cite" className={`${baseClassName}__title`} variant={TextVariants.headingExtraSmall}>
                     {titleText}
                   </Text>
                 ) : null}
                 {referenceNumber ? (
                   <Text
                     className={`${baseClassName}__reference-number`}
-                    variant={TextVariants.bodyMedium}
+                    variant={TextVariants.headingExtraSmall}
                     element="span"
                   >
                     {referenceNumber}
                   </Text>
                 ) : null}
                 {modelText ? (
-                  <Text className={`${baseClassName}__model`} variant={TextVariants.bodyMedium} element="span">
+                  <Text className={`${baseClassName}__model`} variant={TextVariants.headingExtraSmall} element="span">
                     {modelText}
                   </Text>
                 ) : null}
