@@ -3,10 +3,20 @@
 .#{$px}-bid-snapshot {
   position: relative;
 
-  &__text .#{$px}-has-separators .#{$px}-detail {
+  &__text .#{$px}-has-separators .#{$px}-detail.#{$px}-detail {
     flex-wrap: wrap;
     gap: 0 $spacing-sm;
-    padding-bottom: $spacing-xsm;
+  }
+
+  &__current-bid,
+  &__sold {
+    .#{$px}-detail__value .#{$px}-text.#{$px}-text {
+      font-variation-settings: 'wght' 600;
+    }
+  }
+
+  &:has(.#{$px}-bid-message) &__text .#{$px}-detail {
+    padding-bottom: 0;
   }
 
   .#{$px}-countdown {
@@ -16,18 +26,9 @@
     top: calc(100% + $spacing-xsm);
   }
 
-  .#{$px}-countdown__countdown-container,
-  .#{$px}-duration {
-    @include Montserrat;
-  }
-
   &--live:has(.#{$px}-countdown) {
     border-bottom: 1px solid $light-gray;
     margin-bottom: $spacing-md;
-  }
-
-  &--has-bids .#{$px}-detail__value {
-    font-variation-settings: 'wght' 600;
   }
 
   // styles that will apply to bid message inside bid snapshot only

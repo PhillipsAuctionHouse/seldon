@@ -23,7 +23,7 @@
   }
 
   &__input {
-    @include text($string2);
+    @include text($bodyMedium);
 
     accent-color: $black-100;
     border: 1px solid $black-100;
@@ -61,8 +61,6 @@
   }
 
   &__label {
-    @include text($string2);
-
     color: $pure-black;
     display: inline-block;
     font-variation-settings: 'wght' 600;
@@ -146,7 +144,7 @@
     padding: $padding-micro $padding-xsm;
     transition: background-color 0.1s ease;
 
-    @include text($string2);
+    @include text($bodyMedium);
 
     &:hover,
     &[data-selected='true'] {
@@ -168,8 +166,12 @@
     overflow: hidden;
   }
 
+  &__empty-validation {
+    line-height: $spacing-sm;
+  }
+
   &__item__invalid-text {
-    @include text($string2);
+    @include text($bodySmall);
 
     align-items: center;
     display: flex;

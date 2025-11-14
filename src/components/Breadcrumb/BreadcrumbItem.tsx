@@ -61,7 +61,7 @@ const BreadcrumbItem = ({
         </CustomElement>
       )}
 
-      {!isCurrent ? <Icon icon="ChevronRight" height="1.5rem" width="1.5rem" /> : null}
+      {!isCurrent ? <Icon icon="ChevronRight" height="20px" width="20px" /> : null}
     </li>
   );
 };

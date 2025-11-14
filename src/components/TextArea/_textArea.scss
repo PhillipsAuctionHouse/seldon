@@ -1,8 +1,6 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-text-area {
-  @include text($string2);
-
   accent-color: $black-100;
   border: 1px solid $black-100;
   border-radius: $radius-xs;
@@ -10,6 +8,8 @@
   padding: $padding-xsm;
   resize: vertical;
   width: 100%;
+
+  @include text($bodyMedium);
 
   &__wrapper {
     display: flex;
@@ -38,8 +38,6 @@
   }
 
   &__label {
-    @include text($string2);
-
     color: $pure-black;
     font-variation-settings: 'wght' 600;
     margin-bottom: 0.5rem;

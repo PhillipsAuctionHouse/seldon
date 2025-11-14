@@ -95,7 +95,7 @@ export const CountryPickerCountryList = ({
       {Object.entries(groupedCountries).map(([letter, group]) => (
         <div key={letter} className={`${baseClassName}__group`}>
           <div className={`${baseClassName}__letter-header`}>
-            <Text variant={TextVariants.heading2} className={`${baseClassName}__letter-text`}>
+            <Text variant={TextVariants.headingLarge} className={`${baseClassName}__letter-text`}>
               {letter}
             </Text>
             <div className={`${baseClassName}__letter-line`} />

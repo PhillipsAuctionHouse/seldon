@@ -18,10 +18,6 @@ export interface AccordionHeaderType {
    * When true, prevents the user from interacting with the header.
    */
   disable: boolean;
-  /*
-   * When true, shows the large variation text style.
-   */
-  isLargeVariation: boolean;
   /**
    * Unique id for icon component testing
    */
@@ -34,6 +30,10 @@ export interface AccordionHeaderType {
    * Callback function that is called when the header is closed.
    */
   onClose?: () => void;
+  /**
+   * Determines whether the variant on text style is large or small.
+   */
+  variant?: AccordionItemVariant;
 }
 
 // AccordionContent Interface
@@ -58,10 +58,11 @@ export interface AccordionContentType {
    * When true applied the transition keyframe animation on item expand. Default as false.
    */
   hasTransition?: boolean;
-  /*
-   * When true, shows the large variation text style.
+
+  /**
+   * Determines whether the variant on text style is larger or smaller.
    */
-  isLargeVariation: boolean;
+  variant?: AccordionItemVariant;
 }
 
 export enum AccordionVariants {
@@ -93,6 +94,6 @@ export interface AccordionVariantProps {
 }
 
 export enum AccordionItemVariant {
-  lg = 'lg',
+  md = 'md',
   sm = 'sm',
 }

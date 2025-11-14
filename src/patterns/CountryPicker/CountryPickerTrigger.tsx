@@ -74,13 +74,14 @@ const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & Inte
       : countries.filter((country) => country.name === value)?.[0]?.code;
 
     const handleValidation = () => {
-      return inputProps.validation ? inputProps.validation : <p className={`${px}-input__validation`}>&nbsp;</p>;
+      return inputProps.validation ? inputProps.validation : <p className={`${px}-input__empty-validation`}>&nbsp;</p>;
     };
 
     return (
       <div className={classNames(`${baseClassName}__trigger`, className)}>
         <Text
-          variant={TextVariants.string2}
+          element="label"
+          variant={TextVariants.labelMedium}
           className={classNames(`${baseClassName}__trigger-label`, {
             [`${baseClassName}__trigger-label--error`]: hasError,
           })}
@@ -112,7 +113,7 @@ const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & Inte
               />
             </span>
           )}
-          <span className={classNames(`${baseClassName}__trigger-text`)}>{displayValue}</span>
+          <Text className={classNames(`${baseClassName}__trigger-text`)}>{displayValue}</Text>
           <span className={classNames(`${baseClassName}__trigger-icon`)}>
             <Icon icon="ChevronDown" color="black-100" width={16} height={16} />
           </span>

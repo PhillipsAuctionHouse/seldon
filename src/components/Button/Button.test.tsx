@@ -33,8 +33,7 @@ describe('Button', () => {
   });
   it('should render as an anchor tag if href is passed', () => {
     render(<Button href="https://example.com">Link</Button>);
-    const anchorElement = screen.getByText('Link');
-    expect(anchorElement.tagName).toBe('A');
+    const anchorElement = screen.getByRole('link', { name: 'Link' });
     expect(anchorElement).toHaveAttribute('href', 'https://example.com');
   });
   it('should render as a button if no href is passed', () => {

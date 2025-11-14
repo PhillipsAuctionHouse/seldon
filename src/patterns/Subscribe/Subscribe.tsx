@@ -5,6 +5,7 @@ import Input from '../../components/Input/Input';
 import Button, { ButtonProps } from '../../components/Button/Button';
 import { SubscriptionState } from './types';
 import { ButtonVariants } from '../../components/Button/types';
+import { Text, TextVariants } from '../../components/Text';
 
 export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
   /**
@@ -124,8 +125,10 @@ const Subscribe = React.forwardRef<HTMLFormElement, SubscribeProps>(
         ref={ref}
         {...props}
       >
-        <h3 className={`${baseClassName}__title`}>{title}</h3>
-        {blurb ? <p className={`${baseClassName}__blurb`}>{blurb}</p> : null}
+        <Text variant={TextVariants.headingSmall} className={`${baseClassName}__title`}>
+          {title}
+        </Text>
+        {blurb ? <Text variant={TextVariants.bodyMedium}>{blurb}</Text> : null}
 
         <Input
           autoFocus={autoFocus}
@@ -150,7 +153,7 @@ const Subscribe = React.forwardRef<HTMLFormElement, SubscribeProps>(
           {buttonText}
         </Button>
 
-        {privacyText ? <p className={`${baseClassName}__privacy`}>{privacyText}</p> : null}
+        {privacyText ? <Text element="p">{privacyText}</Text> : null}
       </Element>
     );
   },

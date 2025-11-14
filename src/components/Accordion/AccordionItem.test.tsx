@@ -1,15 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import AccordionItem, { AccordionItemProps } from './AccordionItem';
-import { AccordionItemVariant } from './types';
+import Accordion from './Accordion';
 
 const defaultProps = {
   id: 'accordion-item-1',
   label: 'Accordion Item 1',
 };
-
-import { px } from '../../utils';
-import Accordion from './Accordion';
 
 const AccordionItemWithAccordion = (props: AccordionItemProps) => {
   const combinedProps = { ...defaultProps, ...props };
@@ -33,14 +30,6 @@ describe('AccordionItem', () => {
       </AccordionItemWithAccordion>,
     );
     expect(screen.getByTestId('accordion').firstChild).toHaveClass('custom-class');
-  });
-  it('renders the AccordionItem with large variant', () => {
-    render(
-      <AccordionItemWithAccordion {...defaultProps} variant={AccordionItemVariant.lg}>
-        Content
-      </AccordionItemWithAccordion>,
-    );
-    expect(screen.getByTestId('accordion-item-1-trigger')).toHaveClass(`${px}-accordion-item-label--large`);
   });
 
   it('renders the AccordionItem with locked state', () => {

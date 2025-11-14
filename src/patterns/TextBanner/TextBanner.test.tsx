@@ -1,7 +1,7 @@
 import TextBanner from './TextBanner';
 import { runCommonTests } from '../../utils/testUtils';
 import { forwardRef } from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 describe('TextBanner', () => {
   const ComponentWithRef = forwardRef<HTMLDivElement, React.ComponentProps<typeof TextBanner>>((props, ref) => (
@@ -11,9 +11,8 @@ describe('TextBanner', () => {
   runCommonTests(ComponentWithRef, 'TextBanner');
 
   it('Renders the header when headerText is passed in', () => {
-    const { getByText } = render(<TextBanner headerText="This is my text" />);
-    expect(getByText(/This is my text/)?.nodeName).toEqual('H1');
-    expect(getByText(/This is my text/)).toBeInTheDocument();
+    render(<TextBanner headerText="This is my text" />);
+    expect(screen.getByRole('heading', { name: 'This is my text' })).toBeInTheDocument();
   });
 
   it('Renders the description when description is passed in', () => {

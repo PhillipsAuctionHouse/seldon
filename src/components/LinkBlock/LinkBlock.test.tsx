@@ -32,7 +32,7 @@ describe('LinkBlock', () => {
 
     const linkElement = screen.getByRole('link', { name: 'My Link' });
     expect(linkElement).toBeInTheDocument();
-    expect(linkElement).toHaveClass(getLinkVariantClassName(LinkVariants.link ?? 'link'));
+    expect(linkElement).toHaveClass(getLinkVariantClassName(LinkVariants.linkMedium));
     expect(linkElement).toHaveAttribute('href', 'https://example.com');
     expect(linkElement).toHaveAttribute('target', '_blank');
 

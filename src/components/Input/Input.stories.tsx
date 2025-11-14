@@ -99,6 +99,25 @@ const argTypes = {
   },
 };
 
+export const TextInput = ({ playgroundWidth, ...args }: StoryProps) => (
+  <div style={{ width: playgroundWidth, margin: '1rem' }}>
+    <Input key={args.defaultValue?.toString()} {...args} id="Input-1" />
+  </div>
+);
+
+TextInput.args = {
+  playgroundWidth: 300,
+  className: 'input-test-class',
+  defaultValue: 'Text input',
+  disabled: false,
+  invalid: false,
+  invalidText: 'Error message',
+  labelText: 'Label text',
+  warn: false,
+  warnText: 'Warning message that is really long can wrap to more lines.',
+  size: 'md',
+  type: 'text',
+};
 export const DateTimeInput = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
     <Input key={args.defaultValue?.toString()} {...args} id="Input-1" />

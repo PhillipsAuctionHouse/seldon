@@ -3,7 +3,7 @@ import { getCommonProps, noOp } from '../../utils';
 import classnames from 'classnames';
 import { SupportedLanguages } from '../../types/commonTypes';
 import { Dropdown } from '../../components/Dropdown';
-import { Accordion, AccordionItem, AccordionItemVariant } from '../../components/Accordion';
+import { Accordion, AccordionItem } from '../../components/Accordion';
 import NavigationItem from '../../components/Navigation/NavigationItem/NavigationItem';
 import { LinkVariants } from '../../components/Link';
 import { Text, TextVariants } from '../../components/Text';
@@ -36,8 +36,7 @@ const MobileLanguageSelector = forwardRef<HTMLDivElement, DropdownSelectorProps>
         <AccordionItem
           hasTransition
           id={id ?? 'language-selector-accordion'}
-          label={<Text variant={TextVariants.snwHeaderLink}>{label}</Text>}
-          variant={AccordionItemVariant.lg}
+          label={<Text variant={TextVariants.linkStylised}>{label}</Text>}
         >
           <NavigationList id={`${id}-navlist`}>
             {options.map((option) => (
@@ -45,7 +44,7 @@ const MobileLanguageSelector = forwardRef<HTMLDivElement, DropdownSelectorProps>
                 key={option.value}
                 label={option.label}
                 onClick={() => onValueChange(option.value)}
-                navType={LinkVariants.snwFlyoutLink}
+                navType={LinkVariants.linkLarge}
               ></NavigationItem>
             ))}
           </NavigationList>

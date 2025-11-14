@@ -9,27 +9,19 @@ $lg: #{$px}-input--lg;
   flex-direction: column;
   width: 100%;
 
-  &--hidden {
+  &--hidden,
+  &__label--hidden {
     @include hidden;
   }
 
-  &__label {
-    @include text($string2);
-
-    color: $pure-black;
+  &__label.#{$px}-text {
     font-variation-settings: 'wght' 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: $spacing-xsm;
     width: fit-content;
     word-break: break-word;
-
-    &--hidden {
-      @include hidden;
-    }
   }
 
   &__wrapper {
-    @include text($string2);
-
     accent-color: $black-100;
     align-items: center;
     border: 1px solid $black-100;
@@ -42,7 +34,8 @@ $lg: #{$px}-input--lg;
     position: relative;
 
     &::placeholder {
-      font-variation-settings: 'wght' 400;
+      color: $cta-inactive;
+      font-variation-settings: 'wght' 600;
     }
 
     &:focus-visible,
@@ -52,6 +45,8 @@ $lg: #{$px}-input--lg;
 
     .#{$px}-input__wrapper__input,
     .#{$px}-input__input {
+      @include text($bodyMedium);
+
       border: none;
       margin: 0;
       padding: 0;
@@ -72,7 +67,7 @@ $lg: #{$px}-input--lg;
   }
 
   &__input {
-    @include text($string2);
+    @include text($bodyMedium);
 
     accent-color: $black-100;
     border: 1px solid $black-100;
@@ -101,6 +96,10 @@ $lg: #{$px}-input--lg;
     -webkit-line-clamp: 2;
     line-height: $spacing-md;
     overflow: hidden;
+  }
+
+  &__empty-validation {
+    line-height: $spacing-sm;
   }
 
   // Inline
@@ -197,9 +196,18 @@ $lg: #{$px}-input--lg;
 
 .#{$px}-radio-input,
 .#{$px}-checkbox-input {
+  .#{$px}-input__label {
+    @include text($bodyMedium);
+
+    font-variation-settings: 'wght' 600;
+    margin-bottom: 0;
+  }
+
   .#{$px}-input__input {
     align-self: flex-start;
     cursor: pointer;
+    height: 16px;
+    width: 16px;
   }
 
   &.#{$px}-input--inline {

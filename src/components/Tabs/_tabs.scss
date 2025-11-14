@@ -1,8 +1,6 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-tabs-container {
-  @include text($body2);
-
   width: 100%;
 
   &__tabs-list {
@@ -16,7 +14,7 @@
     background: none;
     border: none;
     border-bottom: 2px solid transparent;
-    padding-bottom: $snowflake-menu-padding;
+    padding-bottom: $spacing-sm;
     padding-inline: 0;
     transition:
       background 0.2s ease,
@@ -31,10 +29,7 @@
     .#{$px}-text {
       color: $button-hover;
       cursor: pointer;
-      font-size: $body-size2;
       font-variation-settings: 'wght' 600;
-      letter-spacing: normal;
-      line-height: $body-line-height-size2;
 
       &:hover {
         color: $pure-black;

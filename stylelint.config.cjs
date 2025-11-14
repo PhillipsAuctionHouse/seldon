@@ -1,17 +1,19 @@
 module.exports = {
   extends: ['stylelint-config-standard', 'stylelint-config-standard-scss'],
-  plugins: ['stylelint-scss', 'stylelint-order'],
+  plugins: ['stylelint-scss', 'stylelint-order', './stylelint-local-rules.mjs'],
   overrides: [
     {
-      // don't worry about enforcing tokens on storybook styles
-      files: ['src/story-styles.scss', 'src/pages/**/*.scss'],
+      // don't worry about enforcing tokens on storybook styles or vars file
+      files: ['src/story-styles.scss', 'src/pages/**/*.scss', 'src/scss/_vars.scss'],
       rules: {
         'declaration-property-value-allowed-list': null,
         'declaration-property-value-disallowed-list': null,
+        'local-rules/no-deprecated-text-tokens': null,
       },
     },
   ],
   rules: {
+    'local-rules/no-deprecated-text-tokens': true,
     'at-rule-no-unknown': null,
     'scss/at-rule-no-unknown': true,
     'order/properties-alphabetical-order': true,

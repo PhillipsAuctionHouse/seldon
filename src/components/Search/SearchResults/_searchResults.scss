@@ -42,6 +42,11 @@
 .#{$px}-search {
   &__result {
     display: flex;
+    &:not(.#{$px}-search__result--view-all) {
+      .#{$px}-link:not(:hover):not(:focus-visible) {
+        text-decoration: none;
+      }
+    }
 
     &__label {
       text-transform: initial;

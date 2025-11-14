@@ -26,8 +26,8 @@
 
   &__close {
     position: absolute;
-    right: 0.4rem;
-    top: 0.4rem;
+    right: $spacing-sm;
+    top: $spacing-sm;
     z-index: 100;
   }
 }

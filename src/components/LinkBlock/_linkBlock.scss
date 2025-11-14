@@ -4,8 +4,12 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: $spacing-xsm;
+  gap: $spacing-micro;
   text-align: center;
+
+  &__link .#{$px}-text {
+    font-variation-settings: 'wght' 400;
+  }
 
   &__description.#{$px}-text {
     margin-bottom: 0;

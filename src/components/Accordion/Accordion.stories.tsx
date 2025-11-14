@@ -6,7 +6,7 @@ import Accordion, { AccordionProps } from './Accordion';
 import AccordionItem, { AccordionItemProps } from './AccordionItem';
 import { AccordionItemVariant, AccordionVariants } from './types';
 import Button from '../Button/Button';
-import { LOREM_HUGE } from '../../utils/staticContent';
+import { Text } from '../Text';
 
 const meta = {
   title: 'Components/Accordion',
@@ -23,48 +23,8 @@ const meta = {
 
 export default meta;
 
-const largeTextBlock = (
-  <div style={{ color: 'black', backgroundColor: 'white', padding: 20, whiteSpace: 'pre-wrap' }}>{LOREM_HUGE}</div>
-);
-const largeTextItems = [
-  {
-    isLocked: false,
-    variant: AccordionItemVariant.lg,
-    label: 'What information do I need to provide to submit a consignment?',
-    children: largeTextBlock,
-  },
-  {
-    isLocked: false,
-    variant: AccordionItemVariant.lg,
-    label: 'How long does it take to receive an estimate?',
-    children: largeTextBlock,
-  },
-  {
-    isLocked: true,
-    variant: AccordionItemVariant.lg,
-    label: 'Do you accept artist submissions?',
-  },
-];
-
-export const AccordionLarge = ({ transitionTimeInMs = 250, ...props }: AccordionProps & AccordionItemProps) => (
-  <Accordion {...props}>
-    {largeTextItems.map((item, index, arr) => (
-      <AccordionItem
-        {...item}
-        isLastItem={index === arr?.length - 1}
-        key={`accordion-key-${item?.label}`}
-        id={`accordion-item-${index}`}
-        hasTransition
-        transitionTimeInMs={transitionTimeInMs}
-      >
-        {item?.children}
-      </AccordionItem>
-    ))}
-  </Accordion>
-);
-
 const smallTextBlock = (
-  <div style={{ color: 'white', backgroundColor: '#d0d0d0', padding: 20 }}>
+  <div>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
     aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
@@ -83,9 +43,7 @@ const smallTextItems = [
   {
     isLocked: true,
     label: 'Condition Report',
-    children: (
-      <div style={{ color: '#4A90E2', cursor: 'pointer', fontWeight: '500', fontSize: '20px' }}>LOGIN OR SIGNUP</div>
-    ),
+    children: <Text>LOGIN OR SIGNUP</Text>,
   },
   {
     isLocked: false,
@@ -101,7 +59,7 @@ const smallTextItems = [
   },
 ];
 
-export const AccordionSmall = ({ transitionTimeInMs, ...props }: AccordionProps & AccordionItemProps) => (
+export const Default = ({ transitionTimeInMs, ...props }: AccordionProps & AccordionItemProps) => (
   <Accordion {...props}>
     {smallTextItems.map((item, index, arr) => (
       <AccordionItem
@@ -117,12 +75,28 @@ export const AccordionSmall = ({ transitionTimeInMs, ...props }: AccordionProps 
   </Accordion>
 );
 
+export const AccordionSmall = ({ transitionTimeInMs, ...props }: AccordionProps & AccordionItemProps) => (
+  <Accordion {...props}>
+    {smallTextItems.map((item, index, arr) => (
+      <AccordionItem
+        {...item}
+        isLastItem={index === arr?.length - 1}
+        key={`accordion-key-${item?.label}`}
+        id={`accordion-item-${index}`}
+        transitionTimeInMs={transitionTimeInMs}
+        variant={AccordionItemVariant.sm}
+      >
+        {item?.children}
+      </AccordionItem>
+    ))}
+  </Accordion>
+);
+
 export const AccordionSubmenu = ({ transitionTimeInMs, ...props }: AccordionProps & AccordionItemProps) => {
   const [currentLanguage, setCurrentLanguage] = useState('English');
   return (
     <Accordion {...props} id="accordion-item-submenu">
       <AccordionItem
-        variant={AccordionItemVariant.lg}
         id="languageselector"
         label={<NavigationItem label={currentLanguage}></NavigationItem>}
         transitionTimeInMs={transitionTimeInMs}
@@ -131,12 +105,12 @@ export const AccordionSubmenu = ({ transitionTimeInMs, ...props }: AccordionProp
           <NavigationItem
             label="English"
             onClick={() => setCurrentLanguage('English')}
-            navType={LinkVariants.snwFlyoutLink}
+            navType={LinkVariants.linkLarge}
           ></NavigationItem>
           <NavigationItem
             label="Chinese"
             onClick={() => setCurrentLanguage('Chinese')}
-            navType={LinkVariants.snwFlyoutLink}
+            navType={LinkVariants.linkLarge}
           ></NavigationItem>
         </div>
       </AccordionItem>

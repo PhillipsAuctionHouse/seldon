@@ -1,11 +1,12 @@
 import { Meta } from '@storybook/react';
-import { addHours } from 'date-fns';
+import { addHours, addMinutes } from 'date-fns';
 
 import ObjectTile from './ObjectTile';
 import { LotStatus } from '../../types/commonTypes';
 import { BidMessage, BidSnapshot, BidStatusEnum } from '../BidSnapshot';
 import { ComponentProps } from 'react';
 import { Icon } from '../../components/Icon';
+import { DetailVariants } from '../../components/Detail/types';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -31,6 +32,7 @@ const args = {
         lotCloseDate={addHours(new Date(), 20)}
         saleCloseDate={addHours(new Date(), 20)}
         currentBid={1000000}
+        variant={DetailVariants.sm}
       >
         <BidMessage message="With You" />
       </BidSnapshot>
@@ -50,3 +52,44 @@ NoImage.args = args;
 export const Playground = (props: ComponentProps<typeof ObjectTile>) => <ObjectTile {...props} />;
 Playground.args = args;
 Playground.argTypes = {};
+
+export const WithCountdownTimer = (props: ComponentProps<typeof ObjectTile>) => <ObjectTile {...props} />;
+WithCountdownTimer.args = {
+  ...args,
+  children: (
+    <>
+      <BidSnapshot
+        startingBid={50000}
+        bidStatus={BidStatusEnum.Winning}
+        lotStatus={LotStatus.live}
+        numberOfBids={2}
+        lotCloseDate={addMinutes(new Date(), 3)} // Lot closes in 3 minutes
+        saleCloseDate={addMinutes(new Date(), 5)} // Sale closes in 5 minutes
+        currentBid={1000000}
+        variant={DetailVariants.sm}
+      >
+        <BidMessage message="With You" />
+      </BidSnapshot>
+    </>
+  ),
+};
+
+export const SoldState = (props: ComponentProps<typeof ObjectTile>) => <ObjectTile {...props} />;
+SoldState.args = {
+  ...args,
+  children: (
+    <>
+      <BidSnapshot
+        startingBid={50000}
+        bidStatus={BidStatusEnum.Won}
+        lotStatus={LotStatus.past}
+        numberOfBids={12}
+        currentBid={2500000}
+        soldPrice={2500000}
+        variant={DetailVariants.sm}
+      >
+        <BidMessage message="You won this lot!" />
+      </BidSnapshot>
+    </>
+  ),
+};

@@ -125,6 +125,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     const closeTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
     const [bannerHeight, setBannerHeight] = useState(bannerRef?.current ? bannerRef.current.clientHeight : 0);
+    const headerRef = React.useRef<HTMLElement | null>(null);
 
     useEffect(() => {
       const bannerElement = bannerRef?.current;
@@ -141,11 +142,44 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
       };
     }, [bannerRef, bannerHeight]);
 
+    useEffect(() => {
+      const headerElement = headerRef.current;
+      if (!headerElement) return;
+
+      const updateHeaderHeight = () => {
+        const height = headerElement.offsetHeight;
+        document.documentElement.style.setProperty('--header-height', `${height}px`);
+      };
+
+      // Set initial height
+      updateHeaderHeight();
+
+      // Watch for changes
+      const resizeObserver = new window.ResizeObserver(updateHeaderHeight);
+      resizeObserver.observe(headerElement);
+
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }, []);
+
+    const combinedRef = React.useCallback(
+      (node: HTMLElement | null) => {
+        headerRef.current = node;
+        if (typeof ref === 'function') {
+          ref(node);
+        } else if (ref) {
+          ref.current = node;
+        }
+      },
+      [ref],
+    );
+
     return (
       <header
         {...props}
         className={classnames(`${px}-header`, className)}
-        ref={ref}
+        ref={combinedRef}
         style={{ '--banner-height': `${bannerHeight}px` } as React.CSSProperties}
       >
         <div className={`${px}-header__top-row`}>

@@ -15,6 +15,7 @@ import { FilterInputProps } from './FilterInput';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
 import { Icon } from '../Icon';
+import { Text, TextVariants } from '../Text';
 
 export interface FilterProps extends ComponentProps<'div'> {
   /** Logical name of this filter */
@@ -94,16 +95,18 @@ const Filter = forwardRef<HTMLDivElement, FilterProps>(
           <div className={`${baseClassName}__filters`}>{parsedFilterChildren}</div>
         </fieldset>
         {childrenArray.length > viewAllLimit && !isViewingAll ? (
-          <Button
-            className={`${baseClassName}__view-all`}
-            variant={ButtonVariants.tertiary}
-            onClick={() => {
-              setViewAllFilter?.(name);
-            }}
-          >
-            {viewAllLabel}
-            <Icon icon="ChevronRight" className={`${baseClassName}__chevron`} />
-          </Button>
+          <div className={`${baseClassName}__view-all`}>
+            <Button
+              className={`${baseClassName}__view-all__button`}
+              variant={ButtonVariants.tertiary}
+              onClick={() => {
+                setViewAllFilter?.(name);
+              }}
+            >
+              <Text variant={TextVariants.labelMedium}>{viewAllLabel}</Text>
+              <Icon icon="ChevronRight" className={`${baseClassName}__chevron`} />
+            </Button>
+          </div>
         ) : null}
       </div>
     );

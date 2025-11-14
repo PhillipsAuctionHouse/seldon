@@ -126,7 +126,7 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps & CountryPi
         <div className={`${baseClassName}__wrapper`}>
           {/* Modal header and search */}
           <div className={`${baseClassName}__header`}>
-            <Text variant={TextVariants.heading3} className={`${baseClassName}__header-text`}>
+            <Text variant={TextVariants.headingMedium} className={`${baseClassName}__header-text`}>
               {modalTitle}
             </Text>
             <div className={`${baseClassName}__input-wrapper`}>
@@ -144,7 +144,7 @@ const CountryPickerModal = forwardRef<HTMLDivElement, ModalBaseProps & CountryPi
                 className={`${baseClassName}__input`}
                 inputAdornment={
                   <span aria-hidden="true">
-                    <Icon icon="Search" width={16} height={16} color="$cta-inactive" />
+                    <Icon icon="Search" width={20} height={20} color="$cta-inactive" />
                   </span>
                 }
               />

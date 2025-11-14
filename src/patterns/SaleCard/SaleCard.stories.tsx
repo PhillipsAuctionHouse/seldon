@@ -6,6 +6,7 @@ import { Icon } from '../../components/Icon';
 import { getScssVar } from '../../utils/scssUtils';
 import SaleCard, { SaleCardProps } from './SaleCard';
 import { SaleCardActions } from './SaleCardActions';
+import { Text } from '../../components/Text';
 import { SaleCardImageDisplay, SaleCardVariants } from './types';
 
 const meta = {
@@ -174,7 +175,7 @@ export const SaleCardWithPrimaryCTA = () => (
   </SaleCard>
 );
 
-export const SaleCardWithSecondaryCTA = () => (
+export const SaleCardWithRegistrationStatus = () => (
   <SaleCard
     imageSrc="/static/test-image-160x90.jpg"
     auctionType="Live Auction"
@@ -186,13 +187,7 @@ export const SaleCardWithSecondaryCTA = () => (
     modalButtonOnClick={() => console.log('Modal button clicked')}
   >
     <SaleCardActions>
-      <Button
-        onClick={() => console.log('Secondary button clicked')}
-        variant={ButtonVariants.secondary}
-        style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
-      >
-        Register to bid
-      </Button>
+      <Text>Registered as Paddle 7003</Text>
     </SaleCardActions>
   </SaleCard>
 );

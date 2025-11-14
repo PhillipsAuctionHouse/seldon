@@ -84,10 +84,10 @@
     padding: 8px;
     text-align: center;
 
-    @include text($string2);
+    @include text($bodySmall);
 
     &--small {
-      @include text($string3);
+      @include text($bodySmall);
     }
 
     &--dark {

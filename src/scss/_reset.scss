@@ -58,3 +58,7 @@ li {
 #root {
   isolation: isolate;
 }
+
+label {
+  cursor: inherit;
+}

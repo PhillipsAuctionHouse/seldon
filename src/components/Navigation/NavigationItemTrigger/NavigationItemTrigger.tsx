@@ -4,7 +4,6 @@ import { RemoveScroll } from 'react-remove-scroll';
 import { SSRMediaQuery } from '../../../providers/SeldonProvider/utils';
 import { HeaderContext } from '../../../site-furniture/Header/Header';
 import { findChildrenOfType, focusElementById, getCommonProps, px } from '../../../utils';
-import { AccordionItemVariant } from '../../Accordion';
 import Accordion from '../../Accordion/Accordion';
 import AccordionItem from '../../Accordion/AccordionItem';
 import { Text, TextVariants } from '../../Text';
@@ -30,8 +29,7 @@ const MobileNavigationItemTrigger = ({ id, label, children }: NavigationItemTrig
         hasTransition
         key={`accordion-key-${label}`}
         id={`accordion-item-${id}`}
-        label={<Text variant={TextVariants.snwHeaderLink}>{label}</Text>}
-        variant={AccordionItemVariant.lg}
+        label={<Text variant={TextVariants.linkStylised}>{label}</Text>}
       >
         {children}
       </AccordionItem>
@@ -128,7 +126,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
               {...props}
             >
               <button className={`${px}-nav__item-trigger`} type="button">
-                <Text variant={TextVariants.snwHeaderLink}>{label}</Text>
+                <Text variant={TextVariants.linkStylised}>{label}</Text>
               </button>
               {navListElement
                 ? React.cloneElement(navListElement[0], {

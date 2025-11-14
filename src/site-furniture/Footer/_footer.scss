@@ -40,16 +40,18 @@
 
     h3.#{$px}-text {
       @include media($size-sm) {
-        margin-bottom: $spacing-sm;
+        margin-bottom: $spacing-xsm;
       }
     }
 
     div:not(.#{$px}-social) {
       ul {
         li {
-          a {
-            @include text('snwFlyoutLink');
+          @include media($size-xl) {
+            padding-bottom: $spacing-micro;
+          }
 
+          a {
             &:hover {
               text-decoration: underline;
             }
@@ -92,14 +94,20 @@
         @include media($size-md) {
           cursor: unset;
         }
-
-        &__text {
-          @include text('snwHeaderLink');
-        }
       }
 
       &__border-bottom {
         border-bottom: 1px solid $grey-50;
+      }
+    }
+  }
+
+  &-mobile {
+    .#{$px}-accordion-item {
+      &-label__text {
+        @include text($linkStylised);
+
+        text-transform: uppercase;
       }
     }
   }

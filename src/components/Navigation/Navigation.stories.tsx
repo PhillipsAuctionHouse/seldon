@@ -53,14 +53,14 @@ export const Playground = () => {
                 badge="New York"
                 href="#"
                 navGroup="nav-link-start"
-                navType={LinkVariants.snwFlyoutLink}
+                navType={LinkVariants.linkLarge}
                 label="Editions & Works on Paper"
               />
               <NavigationItem
                 badge="London"
                 href="#"
                 navGroup="nav-link-start"
-                navType={LinkVariants.snwFlyoutLink}
+                navType={LinkVariants.linkLarge}
                 label="Casa Fornaroli"
               />
             </NavigationList>

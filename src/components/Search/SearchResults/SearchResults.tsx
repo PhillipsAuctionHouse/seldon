@@ -49,7 +49,7 @@ const SearchResults = ({
                   href={result.url}
                   onKeyDown={onKeyDown}
                   onClick={() => closeSearch(false)}
-                  variant={LinkVariants.snwFlyoutLink}
+                  variant={LinkVariants.linkLarge}
                 >
                   <span data-testid={`search-result-${i}`} className="${px}-search__result__label">
                     {formatSearchLabel(result.label, userInputValue)}

@@ -19,7 +19,7 @@ $top-transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   @include isHeaderDesktop {
-    align-items: center;
+    align-items: flex-end;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -70,13 +70,14 @@ $top-transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
       }
     }
-    .#{$px}-link--snwHeaderLink {
+    .#{$px}-link--linkStylised {
       border-bottom: 1px solid $light-gray;
       flex-wrap: wrap;
       padding: $snowflake-menu-padding 0;
     }
-    .#{$px}-link--snwFlyoutLink {
-      padding: 0;
+
+    .#{$px}-accordion-item-label {
+      padding: $snowflake-menu-padding 0;
     }
   }
 }
