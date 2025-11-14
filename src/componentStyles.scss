@@ -148,7 +148,7 @@
   --spacing-xl: 3.75rem;
   --spacing-xxl: 4.75rem;
   --spacing-xxxl: 5.75rem;
-  --header-height: 56px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
+  --header-height: 56px; // Set dynamically by Header component on mount
   --search-size: 2.32rem; // This should be calculated from the scaling text and scaling spacing tokens instead of hardcoding in case they change
   --banner-height: 0px;
 
@@ -208,13 +208,15 @@
     --spacing-xl: 4rem;
     --spacing-xxl: 5rem;
     --spacing-xxxl: 6rem;
-    --header-height: 121px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
+
+    // --header-height is set dynamically by Header component
   }
 
   @media (min-width: $breakpoint-lg) {
     --snw-flyout-link-size: 0.875rem;
     --snw-flyout-link-line-height: 1.75rem;
-    --header-height: 124px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
+
+    // --header-height is set dynamically by Header component
 
     // FONT SIZES
     @include font-size-vars--lg;
@@ -268,6 +270,6 @@
     --spacing-xxl: 5.25rem;
     --spacing-xxxl: 6.25rem;
     --search-size: 2.875rem; // This should be calculated from the scaling text and scaling spacing tokens instead of hardcoding in case they change
-    --header-height: 132px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
+    // --header-height is set dynamically by Header component
   }
 }
