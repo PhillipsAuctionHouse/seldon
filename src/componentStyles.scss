@@ -214,6 +214,10 @@
   @media (min-width: $breakpoint-lg) {
     --snw-flyout-link-size: 0.875rem;
     --snw-flyout-link-line-height: 1.75rem;
+    --header-height: 124px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
+
+    // FONT SIZES
+    @include font-size-vars--lg;
   }
 
   @media (min-width: $breakpoint-xl) {
@@ -263,10 +267,7 @@
     --spacing-xl: 4.25rem;
     --spacing-xxl: 5.25rem;
     --spacing-xxxl: 6.25rem;
-    --header-height: 132px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
     --search-size: 2.875rem; // This should be calculated from the scaling text and scaling spacing tokens instead of hardcoding in case they change
-
-    // FONT SIZES
-    @include font-size-vars--lg;
+    --header-height: 132px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
   }
 }

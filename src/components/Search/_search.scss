@@ -33,8 +33,12 @@
     top: 2px;
   }
 
+  @include media($breakpoint-lg) {
+    top: 4px;
+  }
+
   @include media($breakpoint-xl) {
-    top: -5px;
+    top: -4px;
   }
 
   &--active {
