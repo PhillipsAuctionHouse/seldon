@@ -178,10 +178,6 @@
       @include isHeaderMobile {
         display: none;
       }
-
-      @include media($breakpoint-xl) {
-        top: calc($header-height - 1px);
-      }
     }
   }
 
