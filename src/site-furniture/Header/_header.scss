@@ -172,8 +172,12 @@
       height: 100vh;
       left: 0;
       position: absolute;
-      top: calc($header-height - 3px);
+      top: calc($header-height - 10px);
       width: 100%;
+
+      @media (min-width: $breakpoint-xl) {
+        top: calc($header-height - 3px);
+      }
 
       @include isHeaderMobile {
         display: none;

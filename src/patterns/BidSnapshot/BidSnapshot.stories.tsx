@@ -268,3 +268,68 @@ SmallVariantWithBidMessage.args = {
   startingBid: 1000,
   bidStatus: BidStatusEnum.Winning,
 };
+
+export const LargeVariant = (props: BidSnapshotProps) => {
+  const { lotStatus, lotCloseDate, currentBid, soldPrice, ...rest } = props;
+
+  return (
+    <BidSnapshot
+      lotStatus={lotStatus}
+      currentBid={currentBid}
+      lotCloseDate={lotStatus === LotStatus.ready ? undefined : lotCloseDate}
+      soldPrice={soldPrice}
+      variant={DetailVariants.lg}
+      {...rest}
+    />
+  );
+};
+
+LargeVariant.args = {
+  currency: '$',
+  numberOfBids: 4,
+  lotStatus: LotStatus.live,
+  currentBid: 1800,
+  lotCloseDate: addMinutes(new Date(), 15),
+  saleCloseDate: addMinutes(new Date(), 35),
+  lang: enUS,
+  startingBid: 900,
+};
+
+export const LargeVariantWithBidMessage = (props: BidSnapshotProps) => {
+  const { lotStatus, lotCloseDate, currentBid, soldPrice, bidStatus, ...rest } = props;
+
+  return (
+    <BidSnapshot
+      bidStatus={bidStatus}
+      lotStatus={lotStatus}
+      currentBid={currentBid}
+      lotCloseDate={lotStatus === LotStatus.ready ? undefined : lotCloseDate}
+      soldPrice={soldPrice}
+      variant={DetailVariants.lg}
+      {...rest}
+    >
+      {bidStatus === BidStatusEnum.Winning ? (
+        <BidMessage message="Currently Winning" textVariant={TextVariants.labelMedium} />
+      ) : null}
+      {bidStatus === BidStatusEnum.Losing ? (
+        <BidMessage
+          variant={BidMessageVariants.negative}
+          message="You've been outbid"
+          textVariant={TextVariants.labelMedium}
+        />
+      ) : null}
+    </BidSnapshot>
+  );
+};
+
+LargeVariantWithBidMessage.args = {
+  currency: '$',
+  numberOfBids: 6,
+  lotStatus: LotStatus.live,
+  currentBid: 2200,
+  lotCloseDate: addMinutes(new Date(), 12),
+  saleCloseDate: addMinutes(new Date(), 30),
+  lang: enUS,
+  startingBid: 1000,
+  bidStatus: BidStatusEnum.Winning,
+};

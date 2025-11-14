@@ -19,10 +19,11 @@
   &[data-state='open'] {
     display: block;
     height: auto;
+    padding-bottom: $spacing-sm;
   }
 
   &__content {
-    padding-bottom: $spacing-sm;
+    margin-bottom: $spacing-sm;
 
     &--locked {
       padding-bottom: $spacing-sm;

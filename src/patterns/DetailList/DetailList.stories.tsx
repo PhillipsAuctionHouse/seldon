@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react';
-import { Detail, DetailVariant } from '../../components/Detail';
+import { Detail, DetailVariants } from '../../components/Detail';
 import DetailList, { DetailListProps } from './DetailList';
 import { DetailListAlignment } from './types';
 
@@ -69,12 +69,15 @@ export const Playground = () => (
 );
 
 export const Variants = () => (
-  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
+  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
+    <Wrapper title="Large Variant (lg)">
+      <StoryList variant={DetailVariants.lg} hasSeparators alignment={DetailListAlignment.justified} />
+    </Wrapper>
     <Wrapper title="Medium Variant (md)">
-      <StoryList variant={DetailVariant.md} hasSeparators alignment={DetailListAlignment.justified} />
+      <StoryList variant={DetailVariants.md} hasSeparators alignment={DetailListAlignment.justified} />
     </Wrapper>
     <Wrapper title="Small Variant (sm)">
-      <StoryList variant={DetailVariant.sm} hasSeparators alignment={DetailListAlignment.justified} />
+      <StoryList variant={DetailVariants.sm} hasSeparators alignment={DetailListAlignment.justified} />
     </Wrapper>
   </div>
 );

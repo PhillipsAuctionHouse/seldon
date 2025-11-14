@@ -8,18 +8,15 @@
     gap: 0 $spacing-sm;
   }
 
-  &__current-bid {
-    .#{$px}-detail__value .#{$px}-text {
+  &__current-bid,
+  &__sold {
+    .#{$px}-detail__value .#{$px}-text.#{$px}-text {
       font-variation-settings: 'wght' 600;
     }
   }
 
-  &:has(.#{$px}-bid-message) &__text .#{$px}-has-separators .#{$px}-detail {
+  &:has(.#{$px}-bid-message) &__text .#{$px}-detail {
     padding-bottom: 0;
-  }
-
-  &__sold .#{$px}-detail__value .#{$px}-text {
-    font-variation-settings: 'wght' 600;
   }
 
   .#{$px}-countdown {

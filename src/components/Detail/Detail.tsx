@@ -42,8 +42,14 @@ const Detail = forwardRef<HTMLDivElement, DetailProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Detail');
 
     // Determine text variants based on variant prop
-    const labelTextVariant = variant === 'sm' ? TextVariants.labelSmall : TextVariants.labelMedium;
-    const valueTextVariant = variant === 'sm' ? TextVariants.bodySmall : labelTextVariant;
+    const labelTextVariant =
+      variant === 'sm'
+        ? TextVariants.labelSmall
+        : variant === 'lg'
+          ? TextVariants.labelLarge
+          : TextVariants.labelMedium;
+    const valueTextVariant =
+      variant === 'sm' ? TextVariants.bodySmall : variant === 'lg' ? TextVariants.bodyLarge : TextVariants.labelMedium;
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>

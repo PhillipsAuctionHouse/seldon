@@ -2,7 +2,7 @@ import { ComponentProps, cloneElement, forwardRef, isValidElement } from 'react'
 import classnames from 'classnames';
 import { findChildrenExcludingTypes, findChildrenOfType, getCommonProps } from '../../utils';
 import { DetailList, DetailListProps } from '../DetailList/index';
-import { Detail, DetailVariant } from '../../components/Detail/index';
+import { Detail, DetailVariants } from '../../components/Detail/index';
 import { LotStatus, SupportedLanguages } from '../../types/commonTypes';
 import { Countdown } from '../../components/Countdown/index';
 import { CountdownVariants } from '../../components/Countdown/types';
@@ -23,7 +23,7 @@ export interface BidSnapshotProps extends ComponentProps<'div'>, Pick<DetailList
   /**
    * Variant of the bid snapshot - 'sm' uses labelSmall for text
    */
-  variant?: DetailVariant;
+  variant?: DetailVariants;
   /**
    * Bids label text, a fucntion for label of bids amoutn (2 bids, 3 bids, etc) where the number is the length of the bids array.
    */
@@ -129,13 +129,18 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
       wonForText = 'Won for',
       getCurrentDateTime = () => new Date(),
       hasSeparators = true,
-      variant = DetailVariant.md,
+      variant = DetailVariants.md,
       ...props
     },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'BidSnapshot');
-    const textVariant = variant === 'sm' ? TextVariants.labelSmall : TextVariants.labelMedium;
+    const textVariant =
+      variant === 'sm'
+        ? TextVariants.labelSmall
+        : variant === 'lg'
+          ? TextVariants.labelLarge
+          : TextVariants.labelMedium;
     const countdownVariant = variant === 'sm' ? CountdownVariants.sm : CountdownVariants.compact;
 
     const hasBids = currentBid !== null && numberOfBids > 0;
@@ -155,7 +160,11 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
 
     const bidMessage = bidMessageChildren
       ? bidMessageChildren.map((child) =>
-          isValidElement(child) ? cloneElement(child, { textVariant } as { textVariant: TextVariants }) : child,
+          isValidElement(child)
+            ? cloneElement(child, {
+                textVariant: textVariant === TextVariants.labelLarge ? TextVariants.labelMedium : textVariant,
+              } as { textVariant: TextVariants })
+            : child,
         )
       : null;
 

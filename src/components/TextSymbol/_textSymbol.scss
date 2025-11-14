@@ -2,6 +2,7 @@
 
 .#{$px}-text-symbol {
   display: inline-flex;
+  font-variation-settings: 'wght' 600;
   gap: $spacing-micro;
 
   &--estimation {
