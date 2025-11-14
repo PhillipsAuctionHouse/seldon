@@ -7,7 +7,6 @@
 
   & .#{$px}-link--linkStylised {
     line-height: 1.25rem;
-    padding: 1.25rem 0;
 
     @include media($breakpoint-md) {
       padding: 0.5rem 0.625rem calc(0.5rem + 2px); // 1 px so that the bottom border of the nav counts as part of the button
@@ -28,8 +27,6 @@
   }
 
   @include isHeaderMobile {
-    padding-bottom: $spacing-xsm;
-
     a {
       white-space: normal;
     }

@@ -6,11 +6,16 @@
   &__text .#{$px}-has-separators .#{$px}-detail.#{$px}-detail {
     flex-wrap: wrap;
     gap: 0 $spacing-sm;
-    padding-bottom: $spacing-xsm;
   }
 
-  &__current-bid .#{$px}-detail__value .#{$px}-text {
-    font-variation-settings: 'wght' 600;
+  &__current-bid {
+    .#{$px}-detail__value .#{$px}-text {
+      font-variation-settings: 'wght' 600;
+    }
+  }
+
+  &:has(.#{$px}-bid-message) &__text .#{$px}-has-separators .#{$px}-detail {
+    padding-bottom: 0;
   }
 
   &__sold .#{$px}-detail__value .#{$px}-text {

@@ -80,7 +80,7 @@
   }
 
   &__submenu--mobile.#{$px}-nav__list {
-    padding: 0;
+    padding: 0 0 $snowflake-menu-padding;
   }
 
   @include isHeaderDesktop {

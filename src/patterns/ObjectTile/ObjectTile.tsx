@@ -1,11 +1,11 @@
 import { ComponentProps, forwardRef, ElementType, memo } from 'react';
 import classnames from 'classnames';
-
 import { getCommonProps } from '../../utils';
 import { Text, TextVariants } from '../../components/Text';
 import { DetailList } from '../DetailList/index';
 import { Detail } from '../../components/Detail/index';
 import { SeldonImage } from '../../components/SeldonImage';
+import { DetailVariants } from '../../components/Detail/types';
 
 export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
@@ -194,7 +194,7 @@ const ObjectTile = memo(
                     label={estimateLabelText}
                     value={estimate ? estimate : estimateOnRequestText}
                     hasWrap={false}
-                    textVariant={TextVariants.labelSmall}
+                    variant={DetailVariants.sm}
                   />
                 </DetailList>
               ) : null}

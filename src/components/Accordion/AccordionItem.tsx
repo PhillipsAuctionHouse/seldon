@@ -2,9 +2,10 @@ import * as Accordion from '@radix-ui/react-accordion';
 import classnames from 'classnames';
 import React, { forwardRef, useCallback, useRef } from 'react';
 import { Icon } from '../Icon';
-import { getCommonProps } from '../../utils';
+import { getCommonProps, px } from '../../utils';
 import { AccordionContentType, AccordionHeaderType, AccordionItemVariant } from './types';
 import { getIconClasses } from './utils';
+import { Text, TextVariants } from '../Text';
 
 export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -59,13 +60,15 @@ const AccordionHeader = ({
   className,
   baseClassName,
   disable,
-  isLargeVariation,
   id,
+  variant = AccordionItemVariant.md,
   onOpen,
   onClose,
 }: AccordionHeaderType) => {
   const itemRef = useRef<HTMLButtonElement>(null);
   const showLock = disable;
+
+  const labelVariant = variant === AccordionItemVariant.md ? TextVariants.labelMedium : TextVariants.labelSmall;
 
   // Render all icons and use css to conditionally show/hide the correct one
   const lockIconComponent = (
@@ -74,7 +77,7 @@ const AccordionHeader = ({
         icon="Lock"
         height={24}
         width={24}
-        className={getIconClasses(baseClassName, isLargeVariation, 'lock')}
+        className={getIconClasses(baseClassName, variant, 'lock')}
         data-testid={`${id}-lockedIcon`}
         aria-hidden
       />
@@ -87,7 +90,7 @@ const AccordionHeader = ({
         icon="Add"
         height={24}
         width={24}
-        className={getIconClasses(baseClassName, isLargeVariation, 'plus')}
+        className={getIconClasses(baseClassName, variant, 'plus')}
         data-testid={`${id}-plusIcon`}
         aria-hidden
       />
@@ -100,7 +103,7 @@ const AccordionHeader = ({
         icon="Subtract"
         height={24}
         width={24}
-        className={getIconClasses(baseClassName, isLargeVariation, 'minus')}
+        className={getIconClasses(baseClassName, variant, 'minus')}
         data-testid={`${id}-minusIcon`}
         aria-hidden
       />
@@ -120,19 +123,14 @@ const AccordionHeader = ({
     <Accordion.Trigger
       data-disabled={disable}
       asChild
-      className={classnames(
-        baseClassName,
-        { [`${baseClassName}--large`]: isLargeVariation },
-        { [`${baseClassName}--hoverable`]: !disable },
-        className,
-      )}
+      className={classnames(baseClassName, { [`${baseClassName}--hoverable`]: !disable }, className)}
       ref={itemRef}
       onClick={handleOnToggle}
     >
       <div data-testid={`${id}-trigger`}>
-        <div className={classnames(`${baseClassName}__text`, { [`${baseClassName}__text--lg`]: isLargeVariation })}>
+        <Text className={`${px}-accordion-item-label__text`} variant={labelVariant}>
           {children}
-        </div>
+        </Text>
         {showLock && lockIconComponent}
         {!showLock && plusIconComponent}
         {!showLock && minusIconComponent}
@@ -146,8 +144,8 @@ const AccordionContent = ({
   baseClassName,
   disable,
   hasTransition,
-  isLargeVariation,
   className,
+  variant = AccordionItemVariant.md,
 }: AccordionContentType) =>
   disable && children ? (
     <div className={`${baseClassName}__content--locked`}>{children}</div>
@@ -156,12 +154,13 @@ const AccordionContent = ({
       asChild
       className={classnames(
         `${baseClassName}__content`,
-        { [`${baseClassName}__content--lg`]: isLargeVariation },
         { [`${baseClassName}--transition`]: hasTransition },
         className,
       )}
     >
-      {children}
+      <Text variant={variant === AccordionItemVariant.md ? TextVariants.bodyMedium : TextVariants.bodySmall}>
+        {children}
+      </Text>
     </Accordion.Content>
   );
 
@@ -169,7 +168,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
   (
     {
       isLocked = false,
-      variant = AccordionItemVariant.sm,
+      variant = AccordionItemVariant.md,
       id,
       label,
       isLastItem,
@@ -184,7 +183,6 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
     ref,
   ) => {
     const { className: baseClassName } = getCommonProps({ id }, 'Accordion');
-    const isLargeVariation = variant === AccordionItemVariant.lg;
     const accordionItemClassName = `${baseClassName}-item`;
 
     return (
@@ -199,8 +197,8 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
         {...props}
       >
         <AccordionHeader
+          variant={variant}
           disable={isLocked}
-          isLargeVariation={isLargeVariation}
           id={id}
           baseClassName={`${accordionItemClassName}-label`}
           onOpen={onOpen}
@@ -212,7 +210,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
         <AccordionContent
           disable={isLocked}
           hasTransition={hasTransition}
-          isLargeVariation={isLargeVariation}
+          variant={variant}
           baseClassName={accordionItemClassName}
         >
           <div className="radix-accordion-content">{children}</div>

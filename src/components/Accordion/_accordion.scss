@@ -8,10 +8,6 @@
 .#{$px}-accordion-item {
   width: 100%;
 
-  &--large {
-    padding: $snowflake-menu-padding 0;
-  }
-
   svg {
     max-width: unset;
   }
@@ -26,15 +22,11 @@
   }
 
   &__content {
-    padding-bottom: $spacing-md;
+    padding-bottom: $spacing-sm;
 
     &--locked {
       padding-bottom: $spacing-sm;
     }
-  }
-
-  &__content--lg {
-    @include text($bodyMedium);
   }
 
   &--transition[data-state='open'] {
@@ -110,10 +102,6 @@
   justify-content: space-between;
   padding: $spacing-sm 0;
 
-  &--large {
-    padding: $snowflake-menu-padding 0;
-  }
-
   &--hoverable {
     cursor: pointer;
 
@@ -124,17 +112,9 @@
   }
 
   &__text {
-    @include text($labelMedium);
-
     flex: auto;
     font-variation-settings: 'wght' 600;
     text-align: left;
-  }
-
-  &__text--lg {
-    @include text($labelLarge);
-
-    font-variation-settings: 'wght' 600;
   }
 
   &__icon {
@@ -143,9 +123,10 @@
     width: 1.5rem;
   }
 
-  &__icon--lg {
-    height: 1.5rem;
-    width: 2rem;
+  &__icon--sm {
+    flex: initial;
+    height: 0.75rem;
+    width: 1.25rem;
   }
 
   @include media($breakpoint-md) {
@@ -155,9 +136,10 @@
       width: 1.5rem;
     }
 
-    &__icon--lg {
-      height: 1.5rem;
-      width: 2rem;
+    &__icon--sm {
+      flex: initial;
+      height: 0.875rem;
+      width: 1.5rem;
     }
   }
 
@@ -168,9 +150,10 @@
       width: 1.75rem;
     }
 
-    &__icon--lg {
-      height: 2rem;
-      width: 3rem;
+    &__icon--sm {
+      flex: initial;
+      height: 1rem;
+      width: 1.5rem;
     }
   }
 

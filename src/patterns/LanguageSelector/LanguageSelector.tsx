@@ -3,7 +3,7 @@ import { getCommonProps, noOp } from '../../utils';
 import classnames from 'classnames';
 import { SupportedLanguages } from '../../types/commonTypes';
 import { Dropdown } from '../../components/Dropdown';
-import { Accordion, AccordionItem, AccordionItemVariant } from '../../components/Accordion';
+import { Accordion, AccordionItem } from '../../components/Accordion';
 import NavigationItem from '../../components/Navigation/NavigationItem/NavigationItem';
 import { LinkVariants } from '../../components/Link';
 import { Text, TextVariants } from '../../components/Text';
@@ -37,7 +37,6 @@ const MobileLanguageSelector = forwardRef<HTMLDivElement, DropdownSelectorProps>
           hasTransition
           id={id ?? 'language-selector-accordion'}
           label={<Text variant={TextVariants.linkStylised}>{label}</Text>}
-          variant={AccordionItemVariant.lg}
         >
           <NavigationList id={`${id}-navlist`}>
             {options.map((option) => (

@@ -1,8 +1,6 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-tabs-container {
-  @include text($bodyMedium);
-
   width: 100%;
 
   &__tabs-list {
@@ -29,8 +27,6 @@
     }
 
     .#{$px}-text {
-      @include text($bodyMedium);
-
       color: $button-hover;
       cursor: pointer;
       font-variation-settings: 'wght' 600;

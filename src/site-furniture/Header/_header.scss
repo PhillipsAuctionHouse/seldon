@@ -175,6 +175,10 @@
       top: calc($header-height - 3px);
       width: 100%;
 
+      @include isHeaderMobile {
+        display: none;
+      }
+
       @include media($breakpoint-xl) {
         top: calc($header-height - 1px);
       }

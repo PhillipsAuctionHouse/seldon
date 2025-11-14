@@ -75,8 +75,9 @@ $top-transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       flex-wrap: wrap;
       padding: $snowflake-menu-padding 0;
     }
-    .#{$px}-link--snwFlyoutLink {
-      padding: 0;
+
+    .#{$px}-accordion-item-label {
+      padding: $snowflake-menu-padding 0;
     }
   }
 }

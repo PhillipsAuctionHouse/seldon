@@ -7,8 +7,6 @@
 
   .#{$px}-link {
     .seldon-text--link {
-      @include text($linkLarge);
-
       text-decoration: none;
     }
   }

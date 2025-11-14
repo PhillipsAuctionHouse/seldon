@@ -1,7 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-button {
-  // TODO: We really to remove this and instead use the Text component
+  // we need this because we can't be sure that the Text component is being used as a child of the Button component
   @include text($labelSmall);
 
   align-items: center;

@@ -6,6 +6,7 @@ import { LotStatus } from '../../types/commonTypes';
 import { BidMessage, BidSnapshot, BidStatusEnum } from '../BidSnapshot';
 import { ComponentProps } from 'react';
 import { Icon } from '../../components/Icon';
+import { DetailVariants } from '../../components/Detail/types';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -31,7 +32,7 @@ const args = {
         lotCloseDate={addHours(new Date(), 20)}
         saleCloseDate={addHours(new Date(), 20)}
         currentBid={1000000}
-        variant="sm"
+        variant={DetailVariants.sm}
       >
         <BidMessage message="With You" />
       </BidSnapshot>
@@ -65,7 +66,7 @@ WithCountdownTimer.args = {
         lotCloseDate={addMinutes(new Date(), 3)} // Lot closes in 3 minutes
         saleCloseDate={addMinutes(new Date(), 5)} // Sale closes in 5 minutes
         currentBid={1000000}
-        variant="sm"
+        variant={DetailVariants.sm}
       >
         <BidMessage message="With You" />
       </BidSnapshot>
@@ -85,7 +86,7 @@ SoldState.args = {
         numberOfBids={12}
         currentBid={2500000}
         soldPrice={2500000}
-        variant="sm"
+        variant={DetailVariants.sm}
       >
         <BidMessage message="You won this lot!" />
       </BidSnapshot>

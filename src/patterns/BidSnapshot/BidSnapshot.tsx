@@ -2,7 +2,7 @@ import { ComponentProps, cloneElement, forwardRef, isValidElement } from 'react'
 import classnames from 'classnames';
 import { findChildrenExcludingTypes, findChildrenOfType, getCommonProps } from '../../utils';
 import { DetailList, DetailListProps } from '../DetailList/index';
-import { Detail } from '../../components/Detail/index';
+import { Detail, DetailVariant } from '../../components/Detail/index';
 import { LotStatus, SupportedLanguages } from '../../types/commonTypes';
 import { Countdown } from '../../components/Countdown/index';
 import { CountdownVariants } from '../../components/Countdown/types';
@@ -10,8 +10,6 @@ import { BidStatusEnum } from './types';
 import BidMessage from './BidMessage';
 import { differenceInMinutes, isAfter } from 'date-fns';
 import { TextVariants } from '../../components/Text';
-
-export type BidSnapshotVariant = 'md' | 'sm';
 
 export interface BidSnapshotProps extends ComponentProps<'div'>, Pick<DetailListProps, 'hasSeparators'> {
   /**
@@ -25,7 +23,7 @@ export interface BidSnapshotProps extends ComponentProps<'div'>, Pick<DetailList
   /**
    * Variant of the bid snapshot - 'sm' uses labelSmall for text
    */
-  variant?: BidSnapshotVariant;
+  variant?: DetailVariant;
   /**
    * Bids label text, a fucntion for label of bids amoutn (2 bids, 3 bids, etc) where the number is the length of the bids array.
    */
@@ -131,7 +129,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
       wonForText = 'Won for',
       getCurrentDateTime = () => new Date(),
       hasSeparators = true,
-      variant = 'md',
+      variant = DetailVariant.md,
       ...props
     },
     ref,
@@ -168,14 +166,13 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
 
     return (
       <div {...commonProps} {...props} ref={ref} className={classes}>
-        <DetailList hasSeparators={hasSeparators} className={`${baseClassName}__text`}>
+        <DetailList hasSeparators={hasSeparators} variant={variant} className={`${baseClassName}__text`}>
           {showSoldLabel && isPast ? (
             <Detail
               label={bidStatus === BidStatusEnum.Won ? wonForText : soldForText} // if the user has won show wonForText else show soldForText
               value={soldPrice ? `${currency}${soldPrice?.toLocaleString()}` : ''}
               hasWrap={false}
               className={`${baseClassName}__sold`}
-              textVariant={textVariant}
             />
           ) : null}
           {isLive && hasBids ? (
@@ -185,16 +182,10 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
               value={`${currency}${currentBid?.toLocaleString()}`}
               hasWrap={false}
               className={`${baseClassName}__current-bid`}
-              textVariant={textVariant}
             />
           ) : null}
           {!!startingBid && (isReady || (isLive && !hasBids)) ? (
-            <Detail
-              label={startingBidText}
-              value={`${currency}${startingBid?.toLocaleString()}`}
-              hasWrap={false}
-              textVariant={textVariant}
-            />
+            <Detail label={startingBidText} value={`${currency}${startingBid?.toLocaleString()}`} hasWrap={false} />
           ) : null}
         </DetailList>
         {bidStatus && !isReady ? bidMessage : null}

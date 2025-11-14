@@ -33,14 +33,6 @@ body:has(.seldon-header__toggle-btn--open) {
     min-height: unset;
     padding: 1.875rem 0.9375rem;
 
-    &__header-text {
-      @include text($headingLarge);
-    }
-
-    &__sub-head-text {
-      @include text($headingMedium);
-    }
-
     &::before {
       background: var(--background);
       background-position: center center;

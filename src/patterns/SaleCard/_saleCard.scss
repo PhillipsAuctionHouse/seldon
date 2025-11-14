@@ -81,13 +81,6 @@
     display: flex;
     flex-direction: column;
     gap: $spacing-micro;
-
-    .#{$px}-text {
-      @media (min-width: $breakpoint-md) and (max-width: $breakpoint-xl) {
-        // TODO: temporary override to keep SaleCard the same as before
-        @include text($labelMedium);
-      }
-    }
   }
 
   &__badge {

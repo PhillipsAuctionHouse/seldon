@@ -7,6 +7,7 @@ import BidMessage from './BidMessage';
 import { LotStatus } from '../../types/commonTypes';
 import { BidMessageVariants, BidStatusEnum } from './types';
 import { TextVariants } from '../../components/Text';
+import { DetailVariants } from '../../components/Detail/types';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -203,32 +204,6 @@ StartingBid.args = {
   lang: enUS,
 };
 
-export const NoSeparators = (props: BidSnapshotProps) => {
-  const { lotStatus, lotCloseDate, currentBid, soldPrice, ...rest } = props;
-
-  return (
-    <BidSnapshot
-      lotStatus={lotStatus}
-      currentBid={currentBid}
-      lotCloseDate={lotStatus === LotStatus.ready ? undefined : lotCloseDate}
-      soldPrice={soldPrice}
-      hasSeparators={false}
-      {...rest}
-    />
-  );
-};
-
-NoSeparators.args = {
-  currency: '$',
-  numberOfBids: 3,
-  lotStatus: LotStatus.live,
-  currentBid: 1500,
-  lotCloseDate: addMinutes(new Date(), 20),
-  saleCloseDate: addMinutes(new Date(), 40),
-  lang: enUS,
-  startingBid: 800,
-};
-
 export const SmallVariant = (props: BidSnapshotProps) => {
   const { lotStatus, lotCloseDate, currentBid, soldPrice, ...rest } = props;
 
@@ -238,7 +213,7 @@ export const SmallVariant = (props: BidSnapshotProps) => {
       currentBid={currentBid}
       lotCloseDate={lotStatus === LotStatus.ready ? undefined : lotCloseDate}
       soldPrice={soldPrice}
-      variant="sm"
+      variant={DetailVariants.sm}
       {...rest}
     />
   );
@@ -265,7 +240,7 @@ export const SmallVariantWithBidMessage = (props: BidSnapshotProps) => {
       currentBid={currentBid}
       lotCloseDate={lotStatus === LotStatus.ready ? undefined : lotCloseDate}
       soldPrice={soldPrice}
-      variant="sm"
+      variant={DetailVariants.sm}
       {...rest}
     >
       {bidStatus === BidStatusEnum.Winning ? (
