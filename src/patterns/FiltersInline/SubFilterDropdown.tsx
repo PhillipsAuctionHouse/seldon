@@ -75,6 +75,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
               filterButtonLabel={filterButtonLabel}
               filterButtonLabelTranslated={filterButtonLabelTranslated}
               dropdownMenuTranslation={dropdownMenuTranslation}
+              inputType={filters?.[filterId - 1]?.type}
             />
           </Drawer>
         </SSRMediaQuery.Media>
@@ -120,6 +121,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
                   filterButtonLabel={filterButtonLabel}
                   filterButtonLabelTranslated={filterButtonLabelTranslated}
                   dropdownMenuTranslation={dropdownMenuTranslation}
+                  inputType={filters?.[filterId - 1]?.type}
                 />
               </Popover.Content>
             </Popover.Portal>

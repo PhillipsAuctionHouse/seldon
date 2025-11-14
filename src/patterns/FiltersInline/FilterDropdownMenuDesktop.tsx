@@ -22,6 +22,7 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
       resultsCount,
       ariaLabels,
       dropdownMenuTranslation,
+      inputType,
     },
     ref,
   ) => {
@@ -42,7 +43,7 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
               key={value.label}
               labelText={value.label}
               name={value.label}
-              type={isSortButton ? 'radio' : 'checkbox'}
+              type={inputType || (isSortButton ? 'radio' : 'checkbox')}
               checked={value.active}
               disabled={value?.disabled}
               onChange={(e) => handleInputChangeUtil(e, buttonType ?? '', onSelectFilter)}

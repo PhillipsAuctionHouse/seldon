@@ -188,4 +188,6 @@ export interface FilterDropdownMenuProps extends React.HTMLAttributes<HTMLDivEle
   filterButtonLabelTranslated?: string;
   /** Object containing translated strings for dropdown menu actions.*/
   dropdownMenuTranslation?: DropdownMenuTranslation;
+  /** Input type for filter inputs ('checkbox' or 'radio') */
+  inputType?: 'checkbox' | 'radio';
 }
