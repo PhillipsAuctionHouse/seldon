@@ -49,7 +49,7 @@ const Social = forwardRef<HTMLDivElement, SocialProps>(
           {titleText}
         </Text>
         <Button onClick={onSubscribeClick} variant={ButtonVariants.tertiary} className={`${baseClassName}__button`}>
-          <Text variant={TextVariants.labelSmall}>{buttonText}</Text>
+          <Text variant={TextVariants.linkMedium}>{buttonText}</Text>
         </Button>
         {children}
       </div>
