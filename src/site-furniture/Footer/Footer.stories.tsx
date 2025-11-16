@@ -93,7 +93,7 @@ export const Playground = (props: FooterProps) => (
 );
 
 const aboutUsLinks = (
-  <ul style={{ display: 'flex', gap: '.5rem', flexDirection: 'column' }}>
+  <ul>
     <li>
       <Link variant={LinkVariants.linkSmall} href="/">
         Our history
@@ -128,7 +128,7 @@ const aboutUsLinks = (
 );
 
 const ourServicesLinks = (
-  <ul style={{ display: 'flex', gap: '.5rem', flexDirection: 'column' }}>
+  <ul>
     <li>
       <Link variant={LinkVariants.linkSmall} href="/">
         How to buy
@@ -158,7 +158,7 @@ const ourServicesLinks = (
 );
 
 const policyLinks = (
-  <ul style={{ display: 'flex', gap: '.5rem', flexDirection: 'column' }}>
+  <ul>
     <li>
       <Link variant={LinkVariants.linkSmall} href="/">
         Privacy policy

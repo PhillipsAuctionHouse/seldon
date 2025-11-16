@@ -8,6 +8,12 @@
   margin: $spacing-lg 0 0;
   max-width: 100%;
 
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-micro;
+  }
+
   &__links {
     display: flex;
     flex-direction: column;
@@ -93,6 +99,12 @@
 
         @include media($size-md) {
           cursor: unset;
+        }
+
+        &__text {
+          @include text($linkStylised);
+
+          text-transform: uppercase;
         }
       }
 

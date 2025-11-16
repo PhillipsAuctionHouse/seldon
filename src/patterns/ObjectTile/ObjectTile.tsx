@@ -188,13 +188,16 @@ const ObjectTile = memo(
                 ) : null}
               </div>
               {shouldShowEstimate ? (
-                <DetailList hasSeparators className={`${baseClassName}__estimate ${baseClassName}__section`}>
+                <DetailList
+                  hasSeparators
+                  className={`${baseClassName}__estimate ${baseClassName}__section`}
+                  variant={DetailVariants.sm}
+                >
                   <Detail
                     className={`${baseClassName}__estimate__label`}
                     label={estimateLabelText}
                     value={estimate ? estimate : estimateOnRequestText}
                     hasWrap={false}
-                    variant={DetailVariants.sm}
                   />
                 </DetailList>
               ) : null}
