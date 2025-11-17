@@ -1,3 +1,10 @@
+# [1.215.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.214.0...v1.215.0) (2025-11-17)
+
+
+### Features
+
+* **SaleCard:** L3-10704 show sale card actions above snw-mobile brea… ([#764](https://github.com/PhillipsAuctionHouse/seldon/issues/764)) ([3de1738](https://github.com/PhillipsAuctionHouse/seldon/commit/3de1738d4ffd4d627e6afde754aa0aac2c4c29a6))
+
 # [1.214.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.213.0...v1.214.0) (2025-11-12)
 
 
