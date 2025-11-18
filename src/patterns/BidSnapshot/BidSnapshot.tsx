@@ -149,6 +149,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
     const isPast = lotStatus === LotStatus.past;
     const now = getCurrentDateTime() || new Date();
     const hasCountdownTimer =
+      variant === 'sm' &&
       isLive &&
       lotCloseDate &&
       isAfter(lotCloseDate, now) &&

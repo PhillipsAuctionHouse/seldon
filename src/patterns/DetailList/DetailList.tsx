@@ -65,7 +65,7 @@ const DetailList = forwardRef<HTMLDListElement, DetailListProps>(
               })}
               key={getDetailKey(child, index)}
             >
-              {cloneElement(child, { variant } as { variant: DetailVariants })}
+              {cloneElement(child, { variant: child.props.variant || variant } as { variant: DetailVariants })}
             </div>
           ) : undefined,
         )}
