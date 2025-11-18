@@ -92,6 +92,10 @@ export interface BidSnapshotProps extends ComponentProps<'div'>, Pick<DetailList
    * Function to get the current date time
    */
   getCurrentDateTime?: () => Date | null;
+  /**
+   * Hide the countdown timer, used in the Lot Details Page
+   */
+  shouldHideCountdownTimer?: boolean;
 }
 
 const bidsTranslation = (numberOfBids: number) => (numberOfBids === 1 ? `${numberOfBids} bid` : `${numberOfBids} bids`);
@@ -130,6 +134,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
       getCurrentDateTime = () => new Date(),
       hasSeparators = true,
       variant = DetailVariants.md,
+      shouldHideCountdownTimer = false,
       ...props
     },
     ref,
@@ -149,7 +154,7 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
     const isPast = lotStatus === LotStatus.past;
     const now = getCurrentDateTime() || new Date();
     const hasCountdownTimer =
-      variant === 'sm' &&
+      !shouldHideCountdownTimer &&
       isLive &&
       lotCloseDate &&
       isAfter(lotCloseDate, now) &&
