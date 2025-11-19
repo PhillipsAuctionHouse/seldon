@@ -12,6 +12,22 @@
     @include underline($offset: 1px);
   }
 
+  &--linkLarge {
+    @include text($linkLarge);
+  }
+
+  &--linkMedium {
+    @include text($linkMedium);
+  }
+
+  &--linkSmall {
+    @include text($linkSmall);
+  }
+
+  &--linkStylised {
+    @include text($linkStylised);
+  }
+
   &--email,
   &--link {
     &:hover,

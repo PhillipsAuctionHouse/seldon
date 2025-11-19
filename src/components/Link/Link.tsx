@@ -3,7 +3,6 @@ import { getCommonProps } from '../../utils';
 import { ComponentProps, ElementType, forwardRef } from 'react';
 import { getLinkVariantClassName, isLinkExternal } from './utils';
 import { LinkVariants } from './types';
-import { Text, TextVariants } from '../Text';
 
 export interface LinkProps extends ComponentProps<'a'> {
   /**
@@ -46,7 +45,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
         {...(isExternal && Element === 'a' ? { rel: 'noopener noreferrer', target: '_blank' } : {})}
         {...props}
       >
-        <Text variant={variant as unknown as TextVariants}>{children}</Text>
+        {children}
       </Element>
     );
   },
