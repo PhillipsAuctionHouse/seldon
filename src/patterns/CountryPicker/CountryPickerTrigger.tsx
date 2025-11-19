@@ -5,7 +5,8 @@ import classNames from 'classnames';
 import { countries } from './constants';
 import { Country, ModalBaseProps } from './types';
 import React, { forwardRef } from 'react';
-import { px, useNormalizedInputProps } from '../../utils';
+import { useNormalizedInputProps } from '../../utils';
+import { getInputClassNames } from '../../components/Input/utils';
 
 // Props specific to the trigger, also used by the parent modal
 export type CountryPickerTriggerProps = {
@@ -65,6 +66,8 @@ const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & Inte
       type: 'text',
     });
 
+    const inputClassNames = getInputClassNames();
+
     const errorId = inputProps.invalidId;
 
     // Determine the ISO country code for the flag
@@ -74,7 +77,7 @@ const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & Inte
       : countries.filter((country) => country.name === value)?.[0]?.code;
 
     const handleValidation = () => {
-      return inputProps.validation ? inputProps.validation : <p className={`${px}-input__empty-validation`}>&nbsp;</p>;
+      return inputProps.validation ? inputProps.validation : <p className={inputClassNames.emptyValidation}>&nbsp;</p>;
     };
 
     return (
@@ -82,7 +85,7 @@ const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & Inte
         <Text
           element="label"
           variant={TextVariants.labelMedium}
-          className={classNames(`${baseClassName}__trigger-label`, {
+          className={classNames(`${baseClassName}__trigger-label`, inputClassNames.label, {
             [`${baseClassName}__trigger-label--error`]: hasError,
           })}
           id={id ? `${id}-label` : undefined}
@@ -95,7 +98,7 @@ const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & Inte
           aria-label={ariaLabel}
           aria-invalid={inputProps.invalid}
           aria-describedby={errorId}
-          className={classNames(`${baseClassName}__trigger-btn`, {
+          className={classNames(`${baseClassName}__trigger-btn`, inputClassNames.input, {
             [`${baseClassName}__trigger-btn--error`]: hasError,
             [`${baseClassName}__trigger-btn--is-phone`]: isPhone,
           })}

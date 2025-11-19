@@ -24,10 +24,6 @@
     flex-grow: 1;
     min-width: 0; // ensures input shrinks properly in flex container, 0 prevents overflow and lets flex-basis do its thing
 
-    &-phone {
-      margin-bottom: 0;
-    }
-
     // Hide input validation inside phone number input, we use a shared one
     .#{$px}-input__validation {
       display: none;
@@ -39,10 +35,6 @@
   }
 
   @media screen and (min-width: $breakpoint-xl) {
-    &__wrapper {
-      align-items: center;
-    }
-
     &__country-picker {
       flex: 0 0 40%;
       min-width: 0;

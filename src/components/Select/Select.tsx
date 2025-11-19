@@ -6,6 +6,7 @@ import { Merge } from 'type-fest';
 import { SelectVariants } from './types';
 import { Icon } from '../Icon';
 import { Text, TextVariants } from '../Text';
+import { getInputClassNames } from '../Input/utils';
 
 export interface SelectProps extends Merge<InputProps, React.ComponentProps<'select'>> {
   /**
@@ -80,6 +81,8 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       warnText,
     });
 
+    const inputClassNames = getInputClassNames(className);
+
     const wrapperClassnames = classnames(`${px}-${type}-input`, `${px}-input`, `${px}-input--${size}`, {
       [`${px}-input--inline`]: inline,
       [`${px}-input--readonly`]: readOnly,
@@ -89,7 +92,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       [`${className}__wrapper`]: className,
       [`${px}-${type}-input__standalone`]: isStandalone,
     });
-    const selectClassnames = classnames(className, `${px}-input__input`, {
+    const selectClassnames = classnames(className, inputClassNames.input, {
       [`${px}-input__select--tertiary`]: variant === SelectVariants.tertiary,
     });
 
@@ -106,7 +109,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           data-testid={`${id}-label`}
           // @ts-expect-error this is actually a label element
           htmlFor={id}
-          className={classnames(`${px}-input__label`, { [`${px}-input__label--hidden`]: hideLabel })}
+          className={classnames(inputClassNames.label, { [inputClassNames.labelHidden]: hideLabel })}
         >
           {labelText}
         </Text>

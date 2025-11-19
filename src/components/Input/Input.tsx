@@ -2,6 +2,7 @@ import * as React from 'react';
 import classnames from 'classnames';
 import { px, useNormalizedInputProps } from '../../utils';
 import { Text, TextVariants } from '../Text';
+import { getInputClassNames } from './utils';
 
 export interface InputProps extends Omit<React.ComponentProps<'input'>, 'size'> {
   /**
@@ -175,6 +176,8 @@ const Input = React.forwardRef(
       [`${px}-input--hidden`]: rest.hidden,
     });
 
+    const inputClassNames = getInputClassNames(className);
+
     const adornmentInputTypes = [
       'text',
       'number',
@@ -191,12 +194,13 @@ const Input = React.forwardRef(
     ];
     const isAdornmentInputType = adornmentInputTypes.includes(inputProps.type ?? '');
 
-    const inputClassNames =
+    const inputElementClassNames =
       inputAdornment && isAdornmentInputType
-        ? classnames(`${px}-input__wrapper__input`, className, { [`${px}-skeleton`]: isSkeletonLoading })
-        : classnames(`${px}-input__input`, className, { [`${px}-skeleton`]: isSkeletonLoading });
+        ? classnames(inputClassNames.wrapper, className, { [`${px}-skeleton`]: isSkeletonLoading })
+        : classnames(inputClassNames.input, className, { [`${px}-skeleton`]: isSkeletonLoading });
+
     const inputPropsToPass = {
-      className: inputClassNames,
+      className: inputElementClassNames,
       'data-testid': id,
       disabled: inputProps.disabled,
       id,
@@ -214,9 +218,9 @@ const Input = React.forwardRef(
         <Text
           element="label"
           variant={TextVariants.labelMedium}
-          className={classnames(`${px}-input__label`, {
-            [`${px}-input__label--hidden`]: hideLabel,
-            [`${px}-skeleton`]: isSkeletonLoading,
+          className={classnames(inputClassNames.label, {
+            [inputClassNames.labelHidden]: hideLabel,
+            [inputClassNames.skeleton]: isSkeletonLoading,
           })}
           data-testid={`label-${id}`}
           // @ts-expect-error this is actually a label element
@@ -225,15 +229,15 @@ const Input = React.forwardRef(
           {labelText}
         </Text>
         {inputAdornment && isAdornmentInputType ? (
-          <div className={`${px}-input__wrapper`} data-testid={`wrapper-${id}`}>
+          <div className={inputClassNames.wrapper} data-testid={`wrapper-${id}`}>
             {adornmentPosition === 'start' && (
-              <span className={`${px}-input__wrapper__adornment`} id="adornment" data-testid={`adornment-${id}`}>
+              <span className={inputClassNames.adornment} id="adornment" data-testid={`adornment-${id}`}>
                 {inputAdornment}
               </span>
             )}
             <input {...inputPropsToPass} />
             {adornmentPosition === 'end' && (
-              <span className={`${px}-input__wrapper__adornment`} id="adornment" data-testid={`adornment-${id}`}>
+              <span className={inputClassNames.adornment} id="adornment" data-testid={`adornment-${id}`}>
                 {inputAdornment}
               </span>
             )}
@@ -241,7 +245,7 @@ const Input = React.forwardRef(
         ) : (
           <input {...inputPropsToPass} />
         )}
-        {inputProps.validation ? inputProps.validation : <p className={`${px}-input__empty-validation`}>&nbsp;</p>}
+        {inputProps.validation ? inputProps.validation : <p className={inputClassNames.emptyValidation}>&nbsp;</p>}
       </div>
     );
   },
