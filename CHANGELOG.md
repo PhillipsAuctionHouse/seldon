@@ -1,3 +1,10 @@
+# [1.217.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.216.0...v1.217.0) (2025-11-19)
+
+
+### Features
+
+* **type-tokens:** L3-7279 button size fix for tags and link variant of buttons ([#765](https://github.com/PhillipsAuctionHouse/seldon/issues/765)) ([7a27736](https://github.com/PhillipsAuctionHouse/seldon/commit/7a27736b8fc63ca490896e8f74c839f382f55f7e))
+
 # [1.216.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.215.0...v1.216.0) (2025-11-19)
 
 
