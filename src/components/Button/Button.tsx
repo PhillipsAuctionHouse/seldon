@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import { getCommonProps, px } from '../../utils';
 import { ButtonVariants } from './types';
 import { forwardRef, useState } from 'react';
+import { Link, LinkVariants } from '../Link';
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement> {
   /**
@@ -45,6 +46,10 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HT
    * Boolean to specify whether we need to display skeleton loader
    */
   isSkeletonLoading?: boolean;
+  /**
+   * This is only used when a button is rendered as a link. It controls the size of the link.
+   */
+  linkSize?: 'sm' | 'md' | 'lg';
 }
 
 /**
@@ -70,6 +75,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
       target,
       prefetch = 'none',
       isSkeletonLoading,
+      linkSize = 'md',
       ...props
     },
     ref,
@@ -77,21 +83,35 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Button');
     const [linkHovered, setLinkHovered] = useState(false);
 
-    if (href) {
+    if (href || variant === ButtonVariants.link) {
       const PreloadLinks = () => (
         <>
           <link data-testid="prefetch-link" rel="prefetch" href={href} />
         </>
       );
+      let linkVariant: LinkVariants = LinkVariants.linkMedium;
+      switch (linkSize) {
+        case 'lg':
+          linkVariant = LinkVariants.linkLarge;
+          break;
+        case 'md':
+          linkVariant = LinkVariants.linkMedium;
+          break;
+        case 'sm':
+          linkVariant = LinkVariants.linkSmall;
+          break;
+      }
       return (
         <>
-          <a
+          <Link
             {...commonProps}
+            variant={linkVariant}
             ref={ref as React.ForwardedRef<HTMLAnchorElement>}
             href={href}
             className={classnames(
               `${baseClassName}`,
-              `${baseClassName}--${variant}`,
+              { [`${baseClassName}--${variant}`]: variant !== ButtonVariants.link },
+              { [`${baseClassName}--link`]: variant === ButtonVariants.link },
               {
                 [`${baseClassName}--icon-last`]: iconLast,
               },
@@ -113,9 +133,9 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
             }}
           >
             {children}
-          </a>
-          {prefetch === 'intent' && linkHovered && <PreloadLinks />}
-          {prefetch === 'render' && <PreloadLinks />}
+          </Link>
+          {prefetch === 'intent' && href && linkHovered && <PreloadLinks />}
+          {prefetch === 'render' && href && <PreloadLinks />}
         </>
       );
     } else {
@@ -124,6 +144,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
           {...commonProps}
           ref={ref as React.ForwardedRef<HTMLButtonElement>}
           type={type}
+          aria-busy={isSkeletonLoading}
           className={classnames(
             `${baseClassName}`,
             `${baseClassName}--${variant}`,
@@ -133,7 +154,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
             },
             className,
           )}
-          disabled={isDisabled}
+          disabled={isSkeletonLoading || isDisabled}
           {...props}
         >
           {children}

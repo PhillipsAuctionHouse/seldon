@@ -12,28 +12,33 @@
   }
 
   &__badge {
-    color: $widget-red;
+    color: $warning-default;
     display: block; // Ensures the badge can be sized correctly
     min-height: 1rem;
+    text-transform: uppercase;
   }
 
-  &__title {
+  &__title,
+  &__maker,
+  &__model,
+  &__reference-number {
+    @include DistinctDisplay;
+
     -webkit-box-orient: vertical;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     line-clamp: 1;
     overflow: hidden;
-    text-transform: none;
-  }
 
-  // Temporary fix until __token-fix class can be removed
-  &__token-fix--no-transform {
-    text-transform: none !important;
+    &.#{$px}-text {
+      font-variation-settings: 'wght' 600;
+    }
   }
 
   &__lot-number-like {
     align-items: center;
     display: flex;
+    font-variation-settings: 'wght' 600;
     margin-bottom: $spacing-xsm;
     position: relative;
 
@@ -74,6 +79,7 @@
     margin-bottom: 0;
   }
 
+  &__title,
   &__reference-number,
   &__model {
     font-style: italic;
@@ -82,11 +88,6 @@
   &__meta {
     display: block;
     margin-bottom: $spacing-sm;
-  }
-
-  & .#{$px}-object-tile__token-fix {
-    // @Todo: remove when tokens have been updated. heading 4 should have the font sizes of heading 5
-    @include text($heading5);
   }
 
   &__withdrawn {

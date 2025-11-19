@@ -47,16 +47,8 @@ $dropdown-height: 240px;
       flex-direction: row;
       gap: $spacing-sm;
       min-height: fit-content;
-      padding: $spacing-md;
+      padding: $spacing-md $spacing-sm;
       width: 100%;
-
-      @media (min-width: $breakpoint-md) {
-        gap: $spacing-xl;
-      }
-
-      @media (min-width: $breakpoint-xl) {
-        gap: 0;
-      }
     }
   }
 

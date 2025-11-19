@@ -25,7 +25,7 @@ describe('ComposedModal', () => {
       </ComposedModal>,
     );
 
-    expect(screen.getByText('Test Modal')).toBeInTheDocument();
+    expect(screen.getByRole('dialog', { name: 'Test Modal' })).toBeInTheDocument();
   });
 
   it('renders the modal children when isOpen is true', () => {

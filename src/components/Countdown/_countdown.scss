@@ -1,8 +1,6 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-countdown {
-  @include text($body2);
-
   align-items: center;
   border-bottom: none;
   display: flex;
@@ -18,24 +16,25 @@
   }
 
   &__countdown-container {
-    @include text($heading5);
-
     align-items: center;
     display: flex;
     flex-shrink: 0;
     gap: $spacing-sm;
     justify-content: center;
     text-transform: inherit;
+
+    .#{$px}-text {
+      font-variation-settings: 'wght' 600;
+    }
+
+    .#{$px}-duration {
+      font-variation-settings: 'wght' 600;
+    }
   }
 
   &--compact {
     .#{$px}-countdown__countdown-container {
       gap: $spacing-xsm;
-
-      @include Montserrat;
-      .#{$px}-duration {
-        @include Montserrat;
-      }
     }
   }
 

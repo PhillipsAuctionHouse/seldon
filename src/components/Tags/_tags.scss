@@ -50,8 +50,6 @@
   }
 
   &--clear {
-    @include text($body3);
-
     align-items: center;
     border-color: $pure-white;
     border-style: solid;

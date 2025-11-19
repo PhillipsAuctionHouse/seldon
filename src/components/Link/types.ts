@@ -1,11 +1,17 @@
+/* eslint-disable local-rules/no-deprecated-text-variants */
 import { TextVariants } from '../Text';
 
 export enum LinkVariants {
-  /** link rendering emailto: */
+  /** @deprecated Use the corresponding link size variant, linkSmall, linkMedium, or linkLarge instead */
   email = TextVariants.email,
+  /** @deprecated Use linkStylised instead */
   snwHeaderLink = TextVariants.snwHeaderLink,
-  /** link is being rendered in a footer|header */
+  /** @deprecated Use linkLarge instead */
   snwFlyoutLink = TextVariants.snwFlyoutLink,
-  /** standard link */
+  /** @deprecated Use linkSmall instead */
   link = TextVariants.link,
+  linkSmall = TextVariants.linkSmall,
+  linkMedium = TextVariants.linkMedium,
+  linkLarge = TextVariants.linkLarge,
+  linkStylised = TextVariants.linkStylised,
 }

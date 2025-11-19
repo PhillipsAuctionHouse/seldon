@@ -1,3 +1,4 @@
+/* eslint-disable local-rules/no-deprecated-link-variants */
 import type { Meta } from '@storybook/react';
 
 import Link, { LinkProps } from './Link';
@@ -25,12 +26,18 @@ export const Playground = ({ playgroundWidth, children, ...args }: StoryProps) =
 Playground.args = {
   children: 'My Link',
   href: internalHref,
-  variant: LinkVariants.link,
+  variant: LinkVariants.linkSmall,
 };
 
 Playground.argTypes = {
   variant: {
-    options: LinkVariants,
+    options: Object.values(LinkVariants).filter(
+      (variant) =>
+        variant !== LinkVariants.link &&
+        variant !== LinkVariants.snwFlyoutLink &&
+        variant !== LinkVariants.snwHeaderLink &&
+        variant !== LinkVariants.email,
+    ),
     control: {
       type: 'select',
     },
@@ -59,4 +66,31 @@ export const ExternalLink = ({ playgroundWidth, children, ...args }: StoryProps)
 ExternalLink.args = {
   children: 'External Link',
   href: 'https://www.google.com',
+};
+
+export const LegacyVariants = ({ playgroundWidth, children, ...args }: StoryProps) => (
+  <div style={{ width: playgroundWidth, margin: '1rem' }}>
+    <Link {...args}>{children}</Link>
+  </div>
+);
+
+LegacyVariants.args = {
+  children: 'Legacy Link Variants',
+  href: internalHref,
+  variant: LinkVariants.link,
+};
+
+LegacyVariants.argTypes = {
+  variant: {
+    options: Object.values(LinkVariants).filter(
+      (variant) =>
+        variant === LinkVariants.link ||
+        variant === LinkVariants.snwFlyoutLink ||
+        variant === LinkVariants.snwHeaderLink ||
+        variant === LinkVariants.email,
+    ),
+    control: {
+      type: 'select',
+    },
+  },
 };

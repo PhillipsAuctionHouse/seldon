@@ -3,6 +3,7 @@
 .#{$px}-filter-button {
   border: 1.5px solid $light-gray;
   gap: 4px;
+  height: inherit;
   padding: $spacing-xsm $spacing-sm;
 
   &--selected {
@@ -13,18 +14,27 @@
     border-radius: $radius-3xl;
   }
 
-  &--count {
+  &__label {
+    font-variation-settings: 'wght' 600;
+  }
+
+  &--count.#{$px}-filter-button--count.#{$px}-text {
     background: $black-100;
     border: 2px solid $white-100;
     border-radius: $radius-3xl;
     color: $white-100;
     display: inline-block;
-    font-size: var(--label-size3);
+    font-variation-settings: 'wght' 600;
     height: 1.5rem;
+    line-height: 1.2rem;
     position: absolute;
     right: 0;
     text-align: center;
     top: -15px;
     width: 1.5rem;
+
+    @include media($breakpoint-md) {
+      line-height: 1.3rem;
+    }
   }
 }

@@ -95,12 +95,12 @@ const ProgressIndicator = forwardRef<HTMLDivElement, ProgressIndicatorProps>(
                           height={20}
                         />
                       ) : (
-                        <Text variant={TextVariants.badge}>{stepNumber}</Text>
+                        <Text variant={TextVariants.labelSmall}>{stepNumber}</Text>
                       )}
                     </span>
                     {stepLabels && stepLabels[index] && (
                       <span className={`${baseClassName}__label`}>
-                        <Text variant={TextVariants.string2}>{stepLabels[index]}</Text>
+                        <Text variant={TextVariants.bodySmall}>{stepLabels[index]}</Text>
                       </span>
                     )}
                   </div>

@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 
 import { ComponentProps, ElementType, forwardRef } from 'react';
-import { Link, LinkProps } from '../../components/Link';
+import { Link, LinkProps, LinkVariants } from '../../components/Link';
 import { Text, TextVariants } from '../../components/Text';
 import { getCommonProps } from '../../utils';
 
@@ -34,6 +34,10 @@ export interface ViewingDetailsProps extends ComponentProps<'div'> {
    * Session Times data array
    */
   sessionTimes?: ViewingSessionProps[];
+  /**
+   * Viewing Times label text for Viewings Details
+   */
+  viewingTimesLabel?: string;
   /**
    * Viewing Times string array
    */
@@ -74,6 +78,7 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
       sessionTimesLabel,
       sessionTimes,
       viewingTimes,
+      viewingTimesLabel,
       location,
       mapLink,
       onClose,
@@ -87,9 +92,16 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
     return (
       <div {...commonProps} {...props} className={classnames(baseClassName, className)} ref={ref}>
         <div className={`${baseClassName}__content`}>
+          <Text variant={TextVariants.headingMedium} className={`${baseClassName}__title`}>
+            {label}
+          </Text>
           {children && <div className={`${baseClassName}__children`}>{children}</div>}
 
-          {sessionTimesLabel && <Text variant={TextVariants.heading4}>{sessionTimesLabel}</Text>}
+          {sessionTimesLabel && (
+            <Text variant={TextVariants.headingSmall} className={`${baseClassName}__heading`}>
+              {sessionTimesLabel}
+            </Text>
+          )}
           {sessionTimes &&
             sessionTimes.length > 0 &&
             sessionTimes.map((session) => (
@@ -98,34 +110,32 @@ const ViewingDetails = forwardRef<HTMLDivElement, ViewingDetailsProps>(
                 className={`${baseClassName}__session`}
               >
                 {session.sessionLabel && (
-                  <Text variant={TextVariants.heading5} className={`${baseClassName}__label`}>
+                  <Text variant={TextVariants.labelMedium} className={`${baseClassName}__label`}>
                     {session.sessionLabel}
                   </Text>
                 )}
-                {session.sessionTime && (
-                  <Text variant={TextVariants.body2} className={`${baseClassName}__text`}>
-                    {session.sessionTime}
-                  </Text>
-                )}
+                {session.sessionTime && <Text className={`${baseClassName}__text`}>{session.sessionTime}</Text>}
               </div>
             ))}
-          {label && <Text variant={TextVariants.heading4}>{label}</Text>}
+          {viewingTimesLabel && (
+            <Text variant={TextVariants.headingSmall} className={`${baseClassName}__heading`}>
+              {viewingTimesLabel}
+            </Text>
+          )}
           {viewingTimes &&
             viewingTimes.length > 0 &&
             viewingTimes.map((time) => (
-              <Text key={time} variant={TextVariants.body2} className={`${baseClassName}__label`}>
+              <Text key={time} className={`${baseClassName}__viewing-time`}>
                 {time}
               </Text>
             ))}
 
-          {location && (
-            <Text variant={TextVariants.body2} className={`${baseClassName}__location`}>
-              {location}
-            </Text>
-          )}
+          {location && <Text className={`${baseClassName}__location`}>{location}</Text>}
           {mapLink && (
-            <Text variant={TextVariants.body2} className={`${baseClassName}__map-link`}>
-              <Component href={mapLink}>(Map)</Component>
+            <Text className={`${baseClassName}__map-link`}>
+              <Component href={mapLink} variant={LinkVariants.linkMedium}>
+                (Map)
+              </Component>
             </Text>
           )}
         </div>

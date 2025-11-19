@@ -72,6 +72,6 @@ describe('DescriptiveRadioButton', () => {
       />,
     );
     expect(screen.getByRole('radio')).toHaveClass('custom-input');
-    expect(screen.getByText('Test Label').closest('label,div')).toHaveClass('custom-container');
+    expect(screen.getByLabelText('Test Label').parentElement).toHaveClass('custom-container');
   });
 });

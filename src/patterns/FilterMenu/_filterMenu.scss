@@ -1,8 +1,9 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-filter-menu {
+  align-self: stretch;
   overflow-y: scroll;
-  width: 100%;
+  padding-bottom: $spacing-sm;
 
   &::-webkit-scrollbar {
     display: none;

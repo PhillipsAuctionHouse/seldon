@@ -124,6 +124,7 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
           </div>
           <div className={`${baseClassName}__input`}>
             <Input
+              className={`${baseClassName}__input-phone`}
               id="phone-input"
               type="tel"
               labelText={`${label.replace('*', '')} phone`}

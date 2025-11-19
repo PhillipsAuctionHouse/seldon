@@ -1,9 +1,10 @@
-import React, { ComponentProps, forwardRef } from 'react';
+import { ComponentProps, forwardRef, cloneElement, isValidElement } from 'react';
 import classnames from 'classnames';
 import { getCommonProps, px } from '../../utils';
 import { DetailListAlignment } from './types';
 import { DetailComponent } from '../../components/Detail';
 import { getDetailKey } from './utils';
+import { DetailVariants } from '../../components/Detail/types';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface DetailListProps extends ComponentProps<'dl'> {
@@ -19,6 +20,10 @@ export interface DetailListProps extends ComponentProps<'dl'> {
    * Whether to render separators between each Detail component
    */
   hasSeparators?: boolean;
+  /**
+   * Size variant to pass to child Detail components
+   */
+  variant?: DetailVariants;
 }
 /**
  * ## Overview
@@ -31,7 +36,10 @@ export interface DetailListProps extends ComponentProps<'dl'> {
  *
  */
 const DetailList = forwardRef<HTMLDListElement, DetailListProps>(
-  ({ alignment = DetailListAlignment.justified, className, children, hasSeparators = false, ...props }, ref) => {
+  (
+    { alignment = DetailListAlignment.justified, className, children, hasSeparators = false, variant = 'md', ...props },
+    ref,
+  ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'DetailList');
     const childrenArray = Array.isArray(children) ? children : [children];
 
@@ -42,12 +50,13 @@ const DetailList = forwardRef<HTMLDListElement, DetailListProps>(
           [`${px}-has-separators`]: hasSeparators,
           [`${px}-columns`]: alignment === DetailListAlignment.columns,
           [`${px}-justified`]: alignment === DetailListAlignment.justified,
+          [`${baseClassName}--${variant}`]: variant,
         })}
         {...props}
         ref={ref}
       >
         {childrenArray?.map((child, index) =>
-          React.isValidElement(child) ? (
+          isValidElement(child) ? (
             <div
               className={classnames(`${baseClassName}-wrapper`, {
                 [`${px}-has-separators`]: hasSeparators,
@@ -56,7 +65,7 @@ const DetailList = forwardRef<HTMLDListElement, DetailListProps>(
               })}
               key={getDetailKey(child, index)}
             >
-              {child}
+              {cloneElement(child, { variant: child.props.variant || variant } as { variant: DetailVariants })}
             </div>
           ) : undefined,
         )}

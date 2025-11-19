@@ -5,6 +5,7 @@ import { px } from '../../utils';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
 import { Icon } from '../Icon';
+import { Text, TextVariants } from '../Text';
 
 export interface I18nObject {
   clearAllLabel?: string;
@@ -64,7 +65,7 @@ export const Tag = ({ id, className, onRemove, label, removeText = 'Remove' }: T
       onClick={() => onRemove(label)}
       variant={ButtonVariants.tertiary}
     >
-      <div className={`${px}-tag__label`}>{label}</div>
+      <Text variant={TextVariants.labelSmall}>{label}</Text>
       <div className={`${px}-tag__button`} data-testid={`${id}-item-close-button`}>
         <Icon icon="CloseX" height={8} width={8} color="currentColor" className={`${px}-tag__icon`} />
       </div>
@@ -108,7 +109,7 @@ const TagsList = forwardRef<HTMLUListElement, TagsListProps>(
               variant={ButtonVariants.tertiary}
             >
               <Icon icon="ArrowLeft" color="currentColor" height={24} width={24} />
-              <div className={`${px}-label`}>{clearAllLabel}</div>
+              <Text variant={TextVariants.labelSmall}>{clearAllLabel}</Text>
             </Button>
           </li>
         )}

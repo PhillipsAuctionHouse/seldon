@@ -13,6 +13,10 @@
     margin-top: $spacing-micro;
   }
 
+  &__button-label {
+    font-variation-settings: 'wght' 600;
+  }
+
   &__title-wrapper {
     align-items: center;
     display: flex;

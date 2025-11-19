@@ -138,7 +138,9 @@ const CreateVariant = ({
             className={classnames(`${baseClassName}__icon`, `${baseClassName}__icon-circle`)}
             aria-hidden="true"
           />
-          <span className={`${baseClassName}__text`}>{createFirstListText}</span>
+          <Text className={`${baseClassName}__text`} variant={TextVariants.bodyMedium}>
+            {createFirstListText}
+          </Text>
         </span>
       </span>
     </button>
@@ -170,7 +172,9 @@ const EmptyVariant = ({
             className={classnames(`${baseClassName}__icon`)}
             aria-hidden="true"
           />
-          <div className={`${baseClassName}__text`}>{text}</div>
+          <Text className={`${baseClassName}__text`} variant={TextVariants.bodyMedium}>
+            {text}
+          </Text>
         </div>
       </div>
     </div>
@@ -234,7 +238,7 @@ const FavoritesCollectionTile = memo(
         deleteListText = 'Delete List',
         onEdit,
         onDelete,
-        formatlotStr = (count, lotText = count === 1 ? 'LOT' : 'LOTS') => `${count} ${lotText}`,
+        formatlotStr = (count, lotText = count === 1 ? 'Lot' : 'Lots') => `${count} ${lotText}`,
         linkClassName,
         iconSize = 22,
         menuAriaLabel = 'Manage List',
@@ -309,12 +313,12 @@ const FavoritesCollectionTile = memo(
             <div className={`${baseClassName}__header`}>
               <div className={`${baseClassName}__info`}>
                 {hasListNameAndCount && (
-                  <Text element="span" className={`${baseClassName}__count`} variant={TextVariants.body3}>
+                  <Text element="span" className={`${baseClassName}__count`} variant={TextVariants.labelMedium}>
                     {formatlotStr && hasListNameAndCount && formatlotStr(count)}
                   </Text>
                 )}
                 {name && (
-                  <Text element="h3" className={`${baseClassName}__title`} variant={TextVariants.heading5}>
+                  <Text element="h3" className={`${baseClassName}__title`} variant={TextVariants.bodyMedium}>
                     {name}
                   </Text>
                 )}
@@ -364,14 +368,14 @@ const FavoritesCollectionTile = memo(
                           onClick={(event) => onEdit?.(id, event)}
                           type="button"
                         >
-                          {editListText}
+                          <Text variant={TextVariants.bodyMedium}>{editListText}</Text>
                         </button>
                         <button
                           className={`${baseClassName}__dropdown--item`}
                           onClick={(event) => onDelete?.(id, event)}
                           type="button"
                         >
-                          {deleteListText}
+                          <Text variant={TextVariants.bodyMedium}>{deleteListText}</Text>
                         </button>
                       </div>
                     </Popover.Content>

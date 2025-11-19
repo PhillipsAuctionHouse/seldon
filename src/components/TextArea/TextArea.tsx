@@ -3,6 +3,8 @@ import classnames from 'classnames';
 
 import { px, useNormalizedInputProps } from '../../utils';
 import { Icon } from '../Icon';
+import Text from '../Text/Text';
+import { TextVariants } from '../Text/types';
 
 export interface TextAreaProps extends ComponentProps<'textarea'> {
   /**
@@ -91,15 +93,18 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     return (
       <>
         <div className={wrapperClassNames}>
-          <label
+          <Text
+            element="label"
+            variant={TextVariants.labelMedium}
             data-testid={`text-area-${id ?? generatedId}-label`}
+            // @ts-expect-error this is actually a label element
             htmlFor={id ?? generatedId}
             className={classnames(`${px}-text-area__label`, {
               [`${px}-skeleton`]: isSkeletonLoading,
             })}
           >
             {labelText}
-          </label>
+          </Text>
 
           <textarea
             {...props}

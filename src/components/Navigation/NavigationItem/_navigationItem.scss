@@ -1,9 +1,38 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-nav__item {
+  .#{$px}-link:not(:hover):not(:focus-visible):not(.#{$px}-nav__item--view-all) {
+    text-decoration: none;
+  }
+
+  & .#{$px}-link--linkStylised {
+    line-height: 1.25rem;
+
+    @include media($breakpoint-md) {
+      padding: 0.5rem 0.625rem calc(0.5rem + 2px); // 1 px so that the bottom border of the nav counts as part of the button
+      position: relative;
+      text-align: center;
+
+      &:hover::after,
+      &:focus-visible::after {
+        background: $pure-black;
+        bottom: -1px;
+        content: '';
+        height: 1px;
+        left: 0;
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+
   @include isHeaderMobile {
     a {
       white-space: normal;
+    }
+
+    &--nav-link-start {
+      padding-top: $spacing-micro;
     }
   }
 
@@ -42,7 +71,6 @@
     & > a,
     & > button {
       display: flex;
-      padding: 0.5rem 0.625rem;
     }
   }
 
@@ -79,19 +107,7 @@
     &__title {
       @include isHeaderMobile {
         border-bottom: 1px solid $light-gray;
-        padding-bottom: 0.625rem;
-      }
-    }
-
-    & .view-all {
-      a {
-        border-bottom: 0;
-        padding: $spacing-sm 0;
-        text-decoration: underline;
-
-        span {
-          text-transform: uppercase;
-        }
+        padding-bottom: $spacing-sm;
       }
     }
   }

@@ -1,20 +1,21 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-button {
-  @include bodyText;
-  @include labelText($button);
+  // we need this because we can't be sure that the Text component is being used as a child of the Button component
+  @include text($labelMedium);
 
   align-items: center;
   background-color: $pure-black;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   border-radius: $radius-3xl;
   color: $pure-white;
   cursor: pointer;
   display: inline-flex;
   font-variation-settings: 'wght' 600;
   gap: $margin-xsm;
+  height: 44px; // TODO: this is temporary as we will revisit the button in a new ticket
   justify-content: center;
-  padding: $snw-button-padding $padding-sm;
+  padding: 0 $padding-sm;
   position: relative;
   transition:
     color 0.25s,
@@ -22,12 +23,30 @@
 
   svg {
     fill: $pure-white;
-    height: $button-label-line-height;
-    width: $button-label-line-height;
+    height: calc($font-size-label-small * 1.3);
+    width: calc($font-size-label-small * 1.3);
+
+    @include media($breakpoint-md) {
+      height: calc($font-size-label-small * 1.4);
+      width: calc($font-size-label-small * 1.4);
+    }
 
     path {
       fill: $pure-white;
       transition: 0.25s;
+    }
+  }
+
+  &:not(.#{$px}-button--link) {
+    &.#{$px}-button--primary {
+      color: $white-100;
+    }
+    &.#{$px}-link.#{$px}-link {
+      text-decoration: none;
+    }
+    .#{$px}-text {
+      color: inherit;
+      font-variation-settings: inherit;
     }
   }
 
@@ -55,17 +74,24 @@
     height: auto;
     padding: 0;
     text-decoration: underline;
+    .#{$px}-text {
+      font-variation-settings: 'wght' 400;
+    }
 
     &:hover {
       background-color: transparent;
       color: $pure-black;
+
+      .#{$px}-text {
+        cursor: pointer;
+      }
     }
   }
 
   &--secondary,
   &--ghost {
     background-color: $pure-white;
-    border: 1px solid $pure-black;
+    border: 2px solid $pure-black;
     color: $pure-black;
     transition: border 0.3s ease-out;
     z-index: 0;

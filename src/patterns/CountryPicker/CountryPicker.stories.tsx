@@ -72,6 +72,7 @@ export const Playground = (props: CountryPickerProps) => {
       {...props}
       triggerLabelText="Country*"
       triggerDisplayValue={selectedCountry ? selectedCountry.name : 'Select a country'}
+      searchInputPlaceholder="Search country or code"
       hasTriggerError={false}
       triggerErrorMsg=""
       {...config}

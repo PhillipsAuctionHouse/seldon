@@ -6,7 +6,23 @@
   flex-direction: row;
   gap: $spacing-xsm;
 
-  .#{$px}-pagination__button {
+  &__button {
+    .#{$px}-icon-chevron-right {
+      color: $cta-blue;
+
+      svg {
+        height: 1rem;
+        width: 1rem;
+      }
+
+      @include media($breakpoint-md) {
+        svg {
+          height: 1.5rem;
+          width: 1.5rem;
+        }
+      }
+    }
+
     &:disabled {
       border: unset;
     }

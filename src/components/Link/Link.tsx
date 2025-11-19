@@ -31,7 +31,7 @@ export interface LinkProps extends ComponentProps<'a'> {
  */
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ children, className, element: Element = 'a', variant = LinkVariants.link, href, ...props }, ref) => {
+  ({ children, className, element: Element = 'a', variant = LinkVariants.linkMedium, href, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Link');
     const classNames = classnames(baseClassName, getLinkVariantClassName(variant), className);
 
