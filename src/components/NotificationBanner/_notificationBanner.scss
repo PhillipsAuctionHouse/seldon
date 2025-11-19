@@ -11,6 +11,8 @@
   width: 100%;
   z-index: $notification-banner-z-index;
 
+  @include text($bodySmall);
+
   & > *,
   & .#{$px}-text {
     text-align: center;
