@@ -7,8 +7,8 @@
     width: 100%;
 
     &-label {
-      font-variation-settings: 'wght' 600;
       margin-bottom: $spacing-xsm;
+      white-space: nowrap;
 
       &--error {
         color: $error-red;
@@ -27,6 +27,7 @@
       flex-direction: row;
       font-variation-settings: 'wght' 600;
       justify-content: space-between;
+      margin-bottom: 0;
       padding: $spacing-xsm;
       width: 100%;
 
