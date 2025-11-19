@@ -3,6 +3,7 @@
 .#{$px}-filter-button {
   border: 1.5px solid $light-gray;
   gap: 4px;
+  height: inherit;
   padding: $spacing-xsm $spacing-sm;
 
   &--selected {

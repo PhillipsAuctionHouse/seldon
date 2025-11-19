@@ -1,6 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-search {
+  bottom: 0;
   display: flex;
   gap: $spacing-md;
   height: $search-size;
@@ -8,7 +9,6 @@
   min-width: $search-size;
   position: absolute;
   right: 0;
-  top: $padding-md;
   transition: left 0.25s ease-in;
 
   &::after {
@@ -24,21 +24,10 @@
   }
 
   @include isHeaderMobile {
+    bottom: 1px;
     height: calc($search-size - 1px);
     left: calc(100% - $search-size - $spacing-md);
     right: $spacing-md;
-  }
-
-  @include media($breakpoint-md) {
-    top: 2px;
-  }
-
-  @include media($breakpoint-lg) {
-    top: 4px;
-  }
-
-  @include media($breakpoint-xl) {
-    top: -5px;
   }
 
   &--active {

@@ -217,12 +217,12 @@
     --snw-flyout-link-line-height: 1.75rem;
 
     // --header-height is set dynamically by Header component
-
-    // FONT SIZES
-    @include font-size-vars--lg;
   }
 
   @media (min-width: $breakpoint-xl) {
+    // FONT SIZES
+    @include font-size-vars--lg;
+
     --quote-size: 2rem;
     --quote-line-height: 2.5rem;
     --heading-size1: 2rem;

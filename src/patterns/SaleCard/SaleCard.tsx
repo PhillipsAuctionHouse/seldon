@@ -101,7 +101,7 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
             {modalButtonText && modalButtonOnClick && (
               <div className={`${baseClassName}__modal-link`}>
                 <Button onClick={modalButtonOnClick} variant={ButtonVariants.link}>
-                  <Text variant={TextVariants.labelSmall}>{modalButtonText}</Text>
+                  {modalButtonText}
                 </Button>
               </div>
             )}

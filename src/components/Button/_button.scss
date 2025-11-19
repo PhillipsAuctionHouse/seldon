@@ -2,7 +2,7 @@
 
 .#{$px}-button {
   // we need this because we can't be sure that the Text component is being used as a child of the Button component
-  @include text($labelSmall);
+  @include text($labelMedium);
 
   align-items: center;
   background-color: $pure-black;
