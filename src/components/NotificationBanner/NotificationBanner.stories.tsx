@@ -122,7 +122,6 @@ export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: 
     }, 1000);
     return () => clearTimeout(timeout);
   }, []);
-  console.log(notificationData);
   return (
     <div style={{ minHeight: '400px', display: 'flex', flexDirection: 'column' }}>
       <NotificationBanner ref={bannerRef}>{notificationData}</NotificationBanner>
