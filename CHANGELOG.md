@@ -1,3 +1,10 @@
+# [1.218.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.217.0...v1.218.0) (2025-11-19)
+
+
+### Features
+
+* **Filters:** L3-7878 Export it as FilterButton instead of exporting as type ([#766](https://github.com/PhillipsAuctionHouse/seldon/issues/766)) ([f4e3699](https://github.com/PhillipsAuctionHouse/seldon/commit/f4e36990161d663d2f7a5a295ce31ef55de2fece))
+
 # [1.217.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.216.0...v1.217.0) (2025-11-19)
 
 
