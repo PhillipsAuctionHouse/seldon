@@ -37,13 +37,20 @@
     }
   }
 
+  &--primary,
+  &--secondary,
+  &--ghost,
+  &--tertiary {
+    &.#{$px}-link {
+      text-decoration: none;
+    }
+  }
+
   &:not(.#{$px}-button--link) {
     &.#{$px}-button--primary {
       color: $white-100;
     }
-    &.#{$px}-link.#{$px}-link {
-      text-decoration: none;
-    }
+
     .#{$px}-text {
       color: inherit;
       font-variation-settings: inherit;

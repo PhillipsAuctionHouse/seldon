@@ -114,15 +114,14 @@ export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: 
     const timeout = setTimeout(() => {
       setNotificationData(
         <div>
-          <a href="#">Our Moved by Beauty: Works by Lucie Rie from an Important Asian Collection Sale</a> is currently
-          experiencing technical difficulties and there is a delay with livestream sale room bidding. You can bid, but
-          there may be a delay with confirmations.
+          <Link href="#">Our Moved by Beauty: Works by Lucie Rie from an Important Asian Collection Sale</Link> is
+          currently experiencing technical difficulties and there is a delay with livestream sale room bidding. You can
+          bid, but there may be a delay with confirmations.
         </div>,
       );
-    }, 10);
+    }, 1000);
     return () => clearTimeout(timeout);
   }, []);
-
   return (
     <div style={{ minHeight: '400px', display: 'flex', flexDirection: 'column' }}>
       <NotificationBanner ref={bannerRef}>{notificationData}</NotificationBanner>
@@ -347,9 +346,9 @@ NestedMessage.args = {
         <br />
         <div>
           Click here to:
-          <a href="#" className={`${px}-notification-banner-link`}>
+          <Link href="#" className={`${px}-notification-banner-link`}>
             Learn more
-          </a>
+          </Link>
         </div>
       </div>
     </>

@@ -11,30 +11,25 @@
   width: 100%;
   z-index: $notification-banner-z-index;
 
+  @include text($bodySmall);
+
   & > *,
   & .#{$px}-text {
     text-align: center;
 
     @include text($bodySmall);
+  }
 
-    a {
-      cursor: pointer;
-      text-decoration: underline;
-
-      &:hover,
-      &:focus-visible {
-        color: $dark-gray;
-      }
-    }
+  .#{$px}-link {
+    @include text($linkSmall);
   }
 
   > .#{$px}-notification-banner-content {
     color: $pure-black;
     text-align: center;
 
-    a {
-      cursor: pointer;
-      text-decoration: underline;
+    .#{$px}-link {
+      @include text($linkSmall);
     }
   }
 
