@@ -176,7 +176,7 @@ const Input = React.forwardRef(
       [`${px}-input--hidden`]: rest.hidden,
     });
 
-    const inputClassNames = getInputClassNames(className);
+    const inputClassNames = getInputClassNames();
 
     const adornmentInputTypes = [
       'text',

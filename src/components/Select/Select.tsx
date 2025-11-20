@@ -81,7 +81,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       warnText,
     });
 
-    const inputClassNames = getInputClassNames(className);
+    const inputClassNames = getInputClassNames();
 
     const wrapperClassnames = classnames(`${px}-${type}-input`, `${px}-input`, `${px}-input--${size}`, {
       [`${px}-input--inline`]: inline,
