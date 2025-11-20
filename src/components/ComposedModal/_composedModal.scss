@@ -4,18 +4,29 @@ $breakpoint-mobile-small: 450px;
 
 .#{$px}-composed-modal {
   border-radius: $radius-md;
-  max-width: 95vw;
+  display: flex;
+  flex-direction: column;
+  height: calc(fit-content - (2 * var(--modal-footer-height, 0px)));
+  max-height: 100svh;
   min-width: 0;
+  overflow: auto;
   padding: $spacing-lg 0 $spacing-sm 0;
-  width: 95vw;
   &:not(:has(.#{$px}-composed-modal__btns-group)) {
     padding-bottom: $spacing-lg;
   }
 
+  @include media($breakpoint-md, 'max') {
+    border-radius: 0;
+    height: 100svh;
+    width: 100svw;
+  }
+
   &__body {
-    margin: 0 $spacing-lg $spacing-md;
-    max-height: var('--max-modal-body-height');
+    max-height: calc(fit-content - var(--modal-footer-height, 0px));
     overflow-y: auto;
+    padding-bottom: var(--modal-footer-height);
+    padding-left: $spacing-md;
+    padding-right: $spacing-md;
   }
 
   .#{$px}-divider {
@@ -26,12 +37,20 @@ $breakpoint-mobile-small: 450px;
     }
   }
 
+  &__footer {
+    background-color: $white-100;
+    bottom: 0;
+    padding-bottom: $spacing-md;
+    position: absolute;
+    width: 100%;
+  }
+
   &__btns-group {
     display: flex;
     gap: $spacing-sm;
     justify-content: center;
     margin: 0 $spacing-lg;
-    padding: $spacing-sm 0 0;
+    padding: $spacing-md 0 0;
 
     @media (max-width: $breakpoint-mobile-small) {
       flex-direction: column;
@@ -40,7 +59,6 @@ $breakpoint-mobile-small: 450px;
 
   &__btns-group > * {
     flex: 1 1 50%;
-    margin: $spacing-xsm 0 0;
 
     @media (max-width: $breakpoint-mobile-small) {
       flex: 1 1 auto;
@@ -55,13 +73,8 @@ $breakpoint-mobile-small: 450px;
     margin-top: $spacing-sm;
     padding: 0 $spacing-md;
   }
-
-  @media (min-width: $breakpoint-md) {
-    width: auto;
-  }
 }
 
 .#{$px}-composed-modal__body {
-  max-height: var(--max-modal-body-height);
   overflow-y: auto;
 }
