@@ -63,7 +63,7 @@ const DescriptiveRadioButton = forwardRef<HTMLInputElement, DescriptiveRadioButt
           checked={props.checked}
         />
         <span className={`${baseClassName}__label-content`}>
-          <Text variant={TextVariants.labelLarge} className={`${baseClassName}__label-text`} element="label">
+          <Text variant={TextVariants.labelLarge} className={`${baseClassName}__label-text`}>
             {labelText}
           </Text>
           {description && (
