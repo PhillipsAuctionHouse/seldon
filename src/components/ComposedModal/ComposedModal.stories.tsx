@@ -11,6 +11,7 @@ import ComposedModal, { ComposedModalProps } from './ComposedModal';
 export default {
   title: 'Components/ComposedModal',
   component: ComposedModal,
+  tags: [],
 } satisfies Meta<typeof ComposedModal>;
 
 const args = {
@@ -20,7 +21,7 @@ const args = {
 };
 
 export const Playground = (props: ComposedModalProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const onClose = () => {
     setIsOpen(false);
@@ -73,7 +74,7 @@ Playground.args = {
 };
 
 export const ComposedModalScroll = (props: ComposedModalProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const onClose = () => {
     setIsOpen(false);
@@ -102,7 +103,7 @@ ComposedModalScroll.args = {
 };
 
 export const ComposedModalSingleButton = (props: ComposedModalProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const onClose = () => {
     setIsOpen(false);

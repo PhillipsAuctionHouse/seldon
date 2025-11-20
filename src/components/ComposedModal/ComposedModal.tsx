@@ -84,11 +84,6 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
         }
       };
 
-      if (!footerRef.current) {
-        setFooterHeight('0px');
-        return;
-      }
-
       // Initial measurement
       requestAnimationFrame(measureFooter);
 
@@ -97,12 +92,14 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
         measureFooter();
       });
 
-      resizeObserver.observe(footerRef.current);
+      if (footerRef.current) {
+        resizeObserver.observe(footerRef.current);
+      }
 
       return () => {
         resizeObserver.disconnect();
       };
-    }, [secondaryButton, primaryButton, footerContent]);
+    }, [secondaryButton, primaryButton, footerContent, footerHeight]);
 
     return (
       <Modal

@@ -24,9 +24,7 @@ const preview: Preview = {
       },
     },
     initialGlobals: {
-      viewport: {
-        viewport: { value: 'Desktop' },
-      },
+      viewport: 'desktop',
     },
     viewport: {
       viewports: {
@@ -54,10 +52,7 @@ const preview: Preview = {
       },
     },
     chromatic: {
-      modes: {
-        mobile: 'Mobile',
-        desktop: 'Desktop',
-      },
+      viewports: [400, 1200],
     },
   },
 
