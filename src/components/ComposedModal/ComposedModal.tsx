@@ -113,7 +113,7 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
         title={title}
         style={
           {
-            ['--modal-footer-height']: footerHeight,
+            '--modal-footer-height': footerHeight,
           } as React.CSSProperties
         }
       >
