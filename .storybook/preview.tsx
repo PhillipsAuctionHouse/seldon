@@ -52,7 +52,10 @@ const preview: Preview = {
       },
     },
     chromatic: {
-      viewports: [400, 1200],
+      viewports: [
+        { width: 400, height: 600 },
+        { width: 1200, height: 1080 },
+      ],
     },
   },
 
