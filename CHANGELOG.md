@@ -1,3 +1,10 @@
+# [1.219.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.218.0...v1.219.0) (2025-11-20)
+
+
+### Features
+
+* **header:** L3-7279 at large breakpoints headers were misaligned ([#768](https://github.com/PhillipsAuctionHouse/seldon/issues/768)) ([3c0282a](https://github.com/PhillipsAuctionHouse/seldon/commit/3c0282a067a59e1e88ab8136f0ee415f54d0bad6))
+
 # [1.218.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.217.0...v1.218.0) (2025-11-19)
 
 
