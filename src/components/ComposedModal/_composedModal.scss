@@ -6,7 +6,7 @@ $breakpoint-mobile-small: 450px;
   border-radius: $radius-md;
   display: flex;
   flex-direction: column;
-  height: calc(fit-content - (2 * var(--modal-footer-height, 0px)));
+  height: min(fit-content, calc(100svh - (2 * var(--modal-footer-height, 0px))));
   max-height: 100svh;
   min-width: 35rem;
   overflow: auto;
@@ -23,7 +23,7 @@ $breakpoint-mobile-small: 450px;
   }
 
   &__body {
-    max-height: calc(fit-content - var(--modal-footer-height, 0px));
+    max-height: min(fit-content, calc(100% - var(--modal-footer-height, 0px)));
     overflow-y: auto;
     padding-bottom: var(--modal-footer-height);
     padding-left: $spacing-md;
@@ -74,8 +74,4 @@ $breakpoint-mobile-small: 450px;
     margin-top: $spacing-sm;
     padding: 0 $spacing-md;
   }
-}
-
-.#{$px}-composed-modal__body {
-  overflow-y: auto;
 }
