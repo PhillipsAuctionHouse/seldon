@@ -1,4 +1,3 @@
-import React from 'react';
 import { Preview } from '@storybook/react';
 import '../src/componentStyles.scss';
 import '../src/story-styles.scss';
@@ -22,6 +21,44 @@ const preview: Preview = {
           'Components',
           'Pages',
         ],
+      },
+    },
+    initialGlobals: {
+      viewport: 'desktop',
+    },
+    viewport: {
+      viewports: {
+        mobile: {
+          name: 'Mobile',
+          styles: {
+            width: '400px',
+            height: '600px',
+          },
+        },
+        tablet: {
+          name: 'Tablet',
+          styles: {
+            width: '768px',
+            height: '1024px',
+          },
+        },
+        desktop: {
+          name: 'Desktop',
+          styles: {
+            width: '1200px',
+            height: '1080px',
+          },
+        },
+      },
+    },
+    chromatic: {
+      modes: {
+        mobile: {
+          viewport: 'mobile',
+        },
+        desktop: {
+          viewport: 'desktop',
+        },
       },
     },
   },
