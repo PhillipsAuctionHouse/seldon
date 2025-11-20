@@ -1,4 +1,22 @@
 export enum TextVariants {
+  // New variants
+  displayMedium = 'displayMedium',
+  displaySmall = 'displaySmall',
+  headingLarge = 'headingLarge',
+  headingMedium = 'headingMedium',
+  headingSmall = 'headingSmall',
+  headingExtraSmall = 'headingExtraSmall',
+  bodyLarge = 'bodyLarge',
+  bodyMedium = 'bodyMedium',
+  bodySmall = 'bodySmall',
+  labelLarge = 'labelLarge',
+  labelMedium = 'labelMedium',
+  labelSmall = 'labelSmall',
+  linkStylised = 'linkStylised',
+  linkLarge = 'linkLarge',
+  linkMedium = 'linkMedium',
+  linkSmall = 'linkSmall',
+
   /** @deprecated Use headingLarge instead */
   blockquote = 'blockquote',
   /** @deprecated Use headingLarge instead */
@@ -49,24 +67,6 @@ export enum TextVariants {
   snwHeadingHero1 = 'snwHeadingHero1',
   /** @deprecated Use headingLarge instead */
   snwHeadingHero2 = 'snwHeadingHero2',
-
-  // New variants
-  displayMedium = 'displayMedium',
-  displaySmall = 'displaySmall',
-  headingLarge = 'headingLarge',
-  headingMedium = 'headingMedium',
-  headingSmall = 'headingSmall',
-  headingExtraSmall = 'headingExtraSmall',
-  bodyLarge = 'bodyLarge',
-  bodyMedium = 'bodyMedium',
-  bodySmall = 'bodySmall',
-  labelLarge = 'labelLarge',
-  labelMedium = 'labelMedium',
-  labelSmall = 'labelSmall',
-  linkStylised = 'linkStylised',
-  linkLarge = 'linkLarge',
-  linkMedium = 'linkMedium',
-  linkSmall = 'linkSmall',
 }
 
 export enum TextAlignments {
