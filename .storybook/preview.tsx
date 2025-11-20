@@ -32,7 +32,7 @@ const preview: Preview = {
           name: 'Mobile',
           styles: {
             width: '400px',
-            height: '667px',
+            height: '600px',
           },
         },
         tablet: {
@@ -45,17 +45,21 @@ const preview: Preview = {
         desktop: {
           name: 'Desktop',
           styles: {
-            width: '100%',
-            height: '100%',
+            width: '1200px',
+            height: '1080px',
           },
         },
       },
     },
     chromatic: {
-      viewports: [
-        { width: 400, height: 600 },
-        { width: 1200, height: 1080 },
-      ],
+      modes: {
+        mobile: {
+          viewport: 'mobile',
+        },
+        desktop: {
+          viewport: 'desktop',
+        },
+      },
     },
   },
 
