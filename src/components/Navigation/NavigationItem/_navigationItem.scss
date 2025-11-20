@@ -6,8 +6,6 @@
   }
 
   & .#{$px}-link--linkStylised {
-    line-height: 1.25rem;
-
     @include media($breakpoint-md) {
       padding: 0.5rem 0.625rem calc(0.5rem + 2px); // 1 px so that the bottom border of the nav counts as part of the button
       position: relative;
