@@ -66,7 +66,6 @@ export { Tag, default as TagsList, type TagProps, type TagsListProps } from './c
 export * from './components/Text';
 export * from './components/TextSymbol';
 export { default as Video, type VideoProps } from './components/Video/Video';
-export * from './components/DetailList';
 export * from './patterns/FavoritesCollectionTile';
 export { default as HeroBanner, type HeroBannerProps } from './patterns/HeroBanner/HeroBanner';
 export { default as TextBanner, type TextBannerProps } from './patterns/TextBanner/TextBanner';
