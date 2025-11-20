@@ -80,12 +80,8 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
         className={classnames(`${baseClassName}`, className)}
         id={id}
         ref={ref}
+        title={title}
       >
-        {title ? (
-          <Text variant={TextVariants.heading3} className={`${baseClassName}__title`}>
-            {title}
-          </Text>
-        ) : null}
         <div
           className={`${baseClassName}__body`}
           style={{ ['--max-modal-body-height']: maxHeightValue } as React.CSSProperties}
@@ -100,7 +96,7 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
               {primaryButton}
             </div>
             {footerContent && (
-              <Text variant={TextVariants.heading5} className={`${baseClassName}__disclaimer`}>
+              <Text variant={TextVariants.bodySmall} className={`${baseClassName}__disclaimer`}>
                 {footerContent}
               </Text>
             )}

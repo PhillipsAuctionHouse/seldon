@@ -5,6 +5,10 @@
     position: relative;
   }
 
+  &__title {
+    padding-bottom: $spacing-sm;
+  }
+
   &__children {
     margin-bottom: $spacing-md;
   }
@@ -15,11 +19,20 @@
 
   &__label {
     display: block;
+    font-variation-settings: 'wght' 600;
     margin-bottom: 0;
+  }
+
+  &__heading {
+    padding-bottom: $spacing-xsm;
   }
 
   &__session {
     margin-bottom: $spacing-sm;
+  }
+
+  &__viewing-time {
+    display: block;
   }
 
   &__close-icon {
@@ -35,8 +48,7 @@
 
   &__location {
     display: block;
-    margin-bottom: $spacing-xsm;
-    margin-top: $spacing-md;
+    margin-top: $spacing-sm;
   }
 
   &__map-link {
@@ -50,7 +62,7 @@
 .#{$px}-viewing-details__content .#{$px}-viewing-details__text {
   margin-bottom: $spacing-sm;
 }
-.#{$px}-viewing-details__content .#{$px}-viewing-details__location {
+.#{$px}-viewing-details__content {
   margin-bottom: $spacing-xsm;
   margin-top: $spacing-md;
 }

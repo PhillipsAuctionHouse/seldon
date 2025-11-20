@@ -12,10 +12,6 @@ $breakpoint-mobile-small: 450px;
     padding-bottom: $spacing-lg;
   }
 
-  &__title {
-    margin: $spacing-md $spacing-lg $spacing-sm;
-  }
-
   &__body {
     margin: 0 $spacing-lg $spacing-md;
     max-height: var('--max-modal-body-height');

@@ -145,6 +145,23 @@ Tertiary.argTypes = {
   },
 };
 
+export const IsStandalone = ({ playgroundWidth, ...args }: StoryProps) => (
+  <div style={{ width: playgroundWidth, margin: '1rem' }}>
+    <Select
+      key={args.defaultValue?.toString()}
+      {...args}
+      id="Input-1"
+      value="show-lot"
+      hideLabel={true}
+      isStandalone={true}
+    >
+      <option key="0" value="show-lot" hidden>
+        Show Lot No.
+      </option>
+    </Select>
+  </div>
+);
+
 export const CustomLabel = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
     <Select

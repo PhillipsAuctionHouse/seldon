@@ -7,9 +7,6 @@
     width: 100%;
 
     &-label {
-      @include text($string2);
-
-      color: $pure-black;
       font-variation-settings: 'wght' 600;
       margin-bottom: $spacing-xsm;
 
@@ -19,8 +16,6 @@
     }
 
     &-btn {
-      @include text($string2);
-
       align-items: center;
       appearance: none;
       background: $white;
@@ -32,7 +27,6 @@
       flex-direction: row;
       font-variation-settings: 'wght' 600;
       justify-content: space-between;
-      margin-bottom: $spacing-micro;
       padding: $spacing-xsm;
       width: 100%;
 
@@ -49,8 +43,8 @@
     }
 
     &-text {
-      color: $pure-black;
       flex: 1;
+      font-variation-settings: 'wght' 600;
       overflow: hidden;
       text-align: left;
       text-overflow: ellipsis;
@@ -97,6 +91,9 @@
 }
 .#{$px}-input__validation {
   animation: reveal 0.45s linear forwards;
+}
+.#{$px}-input__empty-validation {
+  line-height: $spacing-sm;
 }
 
 @keyframes reveal {

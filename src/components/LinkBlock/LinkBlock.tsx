@@ -29,7 +29,12 @@ const LinkBlock = forwardRef<HTMLDivElement, LinkBlockProps>(
     const LinkComponent = linkProps.element ?? Link;
     return (
       <div {...commonProps} className={className} {...props} ref={ref}>
-        <LinkComponent {...linkProps} data-testid={`${commonProps['data-testid']}-link`} variant={LinkVariants.link} />
+        <LinkComponent
+          {...linkProps}
+          className={`${baseClassName}__link`}
+          data-testid={`${commonProps['data-testid']}-link`}
+          variant={LinkVariants.linkMedium}
+        />
         <Text className={`${baseClassName}__description`}>{description}</Text>
       </div>
     );

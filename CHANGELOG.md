@@ -1,3 +1,31 @@
+# [1.219.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.218.0...v1.219.0) (2025-11-20)
+
+
+### Features
+
+* **header:** L3-7279 at large breakpoints headers were misaligned ([#768](https://github.com/PhillipsAuctionHouse/seldon/issues/768)) ([3c0282a](https://github.com/PhillipsAuctionHouse/seldon/commit/3c0282a067a59e1e88ab8136f0ee415f54d0bad6))
+
+# [1.218.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.217.0...v1.218.0) (2025-11-19)
+
+
+### Features
+
+* **Filters:** L3-7878 Export it as FilterButton instead of exporting as type ([#766](https://github.com/PhillipsAuctionHouse/seldon/issues/766)) ([f4e3699](https://github.com/PhillipsAuctionHouse/seldon/commit/f4e36990161d663d2f7a5a295ce31ef55de2fece))
+
+# [1.217.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.216.0...v1.217.0) (2025-11-19)
+
+
+### Features
+
+* **type-tokens:** L3-7279 button size fix for tags and link variant of buttons ([#765](https://github.com/PhillipsAuctionHouse/seldon/issues/765)) ([7a27736](https://github.com/PhillipsAuctionHouse/seldon/commit/7a27736b8fc63ca490896e8f74c839f382f55f7e))
+
+# [1.216.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.215.0...v1.216.0) (2025-11-19)
+
+
+### Features
+
+* **_type:** L3-7279 typography tokens update ([#713](https://github.com/PhillipsAuctionHouse/seldon/issues/713)) ([3983fe1](https://github.com/PhillipsAuctionHouse/seldon/commit/3983fe18143c7039c6be12aabef01700aef38954))
+
 # [1.215.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.214.0...v1.215.0) (2025-11-17)
 
 

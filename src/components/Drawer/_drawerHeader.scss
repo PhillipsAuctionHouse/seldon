@@ -21,18 +21,11 @@
 
   &__hr {
     border-bottom: 2px solid $light-gray;
-    margin-bottom: $spacing-sm;
     width: 100%;
   }
 
   &__title {
-    @include DistinctDisplay;
-
-    color: $text-default;
-    font-size: $heading-size4;
     font-variation-settings: 'wght' 600;
-    line-height: $body-line-height-size1;
-    margin-top: 4px; // better visual align with the close icon
     overflow: hidden;
     text-align: center;
     text-overflow: ellipsis;

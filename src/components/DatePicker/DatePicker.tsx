@@ -3,7 +3,7 @@ import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
 import classnames from 'classnames';
 
-import { noOp, useNormalizedInputProps } from '../../utils';
+import { noOp, px, useNormalizedInputProps } from '../../utils';
 import Input, { InputProps } from '../Input/Input';
 
 export interface DatePickerProps extends Omit<InputProps, 'defaultValue' | 'onChange'>, Record<string, unknown> {
@@ -149,6 +149,7 @@ const DatePicker = React.forwardRef(
     }: DatePickerProps,
     ref: React.ForwardedRef<HTMLInputElement>,
   ) => {
+    const baseClassName = `${px}-date-picker`;
     const inputProps = useNormalizedInputProps({ disabled, id, invalid, invalidText, readOnly, type, warn, warnText });
     const fp = React.useRef() as React.MutableRefObject<flatpickr.Instance>;
     const inputRef = React.useRef() as React.Ref<HTMLInputElement> | undefined;
@@ -207,7 +208,7 @@ const DatePicker = React.forwardRef(
 
     return (
       <Input
-        className={classnames(`flatpickr`, { [`${className}`]: className })}
+        className={classnames(`flatpickr`, baseClassName, { [`${className}`]: className })}
         data-testid={id}
         disabled={inputProps.disabled}
         hideLabel={hideLabel}

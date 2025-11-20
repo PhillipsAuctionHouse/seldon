@@ -13,6 +13,10 @@ $num_icons: 5;
   width: 100%;
 
   @include media($size-md) {
+    margin-top: $spacing-sm;
+  }
+
+  @include media($size-lg) {
     margin-top: 0;
   }
 
@@ -37,7 +41,6 @@ $num_icons: 5;
     text-decoration: underline;
 
     &.#{$px}-social__button {
-      font-variation-settings: 'wght' 600;
       text-transform: none;
     }
 
@@ -57,6 +60,7 @@ $num_icons: 5;
       align-items: center;
       border-top: 1px solid $grey-50;
       display: flex;
+      flex-direction: row;
       gap: 0 $icon_gap;
       justify-content: flex-start;
       list-style: none;

@@ -38,9 +38,15 @@
 
   .#{$px}-has-separators {
     border-top: 1px solid $light-gray;
+  }
 
-    .#{$px}-detail {
-      padding: $spacing-sm 0;
+  .#{$px}-detail {
+    padding: $spacing-sm 0;
+  }
+
+  &--sm {
+    .#{$px}-detail.#{$px}-detail {
+      padding: $spacing-xsm 0;
     }
   }
 }

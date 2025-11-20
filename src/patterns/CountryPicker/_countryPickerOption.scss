@@ -36,6 +36,9 @@
       display: flex;
       flex: 1;
       justify-content: space-between;
+      .#{$px}-text {
+        font-variation-settings: 'wght' 600;
+      }
     }
 
     &-flag {

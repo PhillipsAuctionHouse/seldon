@@ -8,15 +8,12 @@
   display: flex;
   gap: $spacing-md;
 
-  @include text($string2);
-
-  &__label {
+  &__label-section {
     flex-shrink: 0;
-    font-variation-settings: 'wght' 600;
     width: 160px;
 
-    @media (max-width: $breakpoint-lg) {
-      width: 128px;
+    &--label.#{$px}-text {
+      font-variation-settings: 'wght' 600;
     }
 
     @media (max-width: $breakpoint-md) {
@@ -25,6 +22,14 @@
 
     @media (max-width: $breakpoint-sm) {
       width: 96px;
+    }
+
+    &--has-sub-label {
+      width: 240px;
+
+      @media (max-width: $breakpoint-sm) {
+        width: 120px;
+      }
     }
 
     &--no-wrap {
@@ -46,6 +51,10 @@
     span {
       font-variation-settings: 'wght' 400;
     }
+  }
+
+  &__sub-label {
+    text-wrap: nowrap;
   }
 
   &__value {

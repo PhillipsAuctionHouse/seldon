@@ -51,6 +51,7 @@ export const DefaultOpen = (props: ModalBaseProps & CountryPickerModalProps) => 
   return (
     <CountryPickerModal
       {...props}
+      searchInputPlaceholder="Search country or code"
       isOpen={true}
       onClose={() => console.log('Modal closed')}
       variantConfig={variantConfig}

@@ -1,11 +1,11 @@
 import { ComponentProps, forwardRef, ElementType, memo } from 'react';
 import classnames from 'classnames';
-
 import { getCommonProps } from '../../utils';
 import { Text, TextVariants } from '../../components/Text';
 import { DetailList } from '../DetailList/index';
 import { Detail } from '../../components/Detail/index';
 import { SeldonImage } from '../../components/SeldonImage';
+import { DetailVariants } from '../../components/Detail/types';
 
 export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
@@ -140,12 +140,12 @@ const ObjectTile = memo(
             fetchPriority={imageFetchPriority}
           />
           {!withdrawnText ? (
-            <Text element="span" className={`${baseClassName}__badge`} variant={TextVariants.badge}>
+            <Text element="span" className={`${baseClassName}__badge`} variant={TextVariants.labelSmall}>
               {badgeText}
             </Text>
           ) : null}
           <div className={`${baseClassName}__lot-number-like`}>
-            <Text element="span" className={`${baseClassName}__lot-number`} variant={TextVariants.heading4}>
+            <Text element="span" className={`${baseClassName}__lot-number`} variant={TextVariants.headingSmall}>
               {lotNumber}
             </Text>
             {BadgeElement && (
@@ -156,47 +156,43 @@ const ObjectTile = memo(
             {FavoriteElement && <FavoriteElement />}
           </div>
           {withdrawnText ? (
-            <Text element="span" className={`${baseClassName}__withdrawn`} variant={TextVariants.heading4}>
+            <Text element="span" className={`${baseClassName}__withdrawn`} variant={TextVariants.headingSmall}>
               {withdrawnText}
-            </Text> // TODO: Design calls for heading 4 but the values they have map to our current heading 5. This should be updated when we update those tokens.
+            </Text>
           ) : (
             <>
               <div className={`${baseClassName}__meta`}>
                 {makerText ? (
-                  <Text element="span" className={`${baseClassName}__maker`} variant={TextVariants.heading4}>
+                  <Text element="span" className={`${baseClassName}__maker`} variant={TextVariants.headingSmall}>
                     {makerText}
                   </Text>
                 ) : null}
                 {titleText ? (
-                  <Text
-                    className={`${baseClassName}__title ${baseClassName}__token-fix ${baseClassName}__token-fix--no-transform`}
-                    variant={TextVariants.heading4}
-                    element="cite"
-                  >
+                  <Text element="cite" className={`${baseClassName}__title`} variant={TextVariants.headingExtraSmall}>
                     {titleText}
                   </Text>
                 ) : null}
                 {referenceNumber ? (
                   <Text
-                    className={`${baseClassName}__reference-number ${baseClassName}__token-fix`}
-                    variant={TextVariants.heading4}
+                    className={`${baseClassName}__reference-number`}
+                    variant={TextVariants.headingExtraSmall}
                     element="span"
                   >
                     {referenceNumber}
                   </Text>
                 ) : null}
                 {modelText ? (
-                  <Text
-                    className={`${baseClassName}__model ${baseClassName}__token-fix`}
-                    variant={TextVariants.heading4}
-                    element="span"
-                  >
+                  <Text className={`${baseClassName}__model`} variant={TextVariants.headingExtraSmall} element="span">
                     {modelText}
                   </Text>
                 ) : null}
               </div>
               {shouldShowEstimate ? (
-                <DetailList hasSeparators className={`${baseClassName}__estimate ${baseClassName}__section`}>
+                <DetailList
+                  hasSeparators
+                  className={`${baseClassName}__estimate ${baseClassName}__section`}
+                  variant={DetailVariants.sm}
+                >
                   <Detail
                     className={`${baseClassName}__estimate__label`}
                     label={estimateLabelText}

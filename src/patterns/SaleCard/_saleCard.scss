@@ -18,6 +18,12 @@
     }
   }
 
+  &__title {
+    &.#{$px}-text {
+      text-transform: uppercase;
+    }
+  }
+
   &__image {
     align-items: center;
     aspect-ratio: 91/51;
@@ -57,7 +63,7 @@
       flex-basis: 250px;
     }
 
-    @media (min-width: $breakpoint-lg) {
+    @media (min-width: $breakpoint-xl) {
       flex-basis: 400px;
     }
   }
@@ -80,33 +86,14 @@
   &__badge {
     border: 1px solid $badge-blue;
     color: $badge-blue;
-    font-size: 0.75rem;
     padding: $spacing-micro 8px;
     text-transform: unset;
-  }
-
-  &__auction-type {
-    font-size: 0.75rem;
   }
 
   &__cta-button {
     padding: $spacing-sm $spacing-lg;
     white-space: nowrap;
     width: 100%;
-  }
-
-  &__modal-link {
-    cursor: pointer;
-
-    @include underline;
-  }
-
-  &__modal-link-button {
-    padding: 0;
-    text-align: left;
-    text-transform: none;
-
-    @include underline;
   }
 
   &__pdf-link {
@@ -141,9 +128,6 @@
       @include media($size-xl) {
         max-width: calc($spacing-xxxl * 1.25);
       }
-    }
-    .#{$px}-sale-card__auction-type {
-      font-size: 0.5rem;
     }
   }
 }

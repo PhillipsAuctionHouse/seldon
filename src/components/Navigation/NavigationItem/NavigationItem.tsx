@@ -65,12 +65,16 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
         {...props}
         onClick={onClick}
         data-testid={`nav-item-${label}`}
-        className={classNames(`${px}-nav__item`, navGroup, className, {
-          [`view-all`]: isViewAllLink,
-        })}
+        className={classNames(`${px}-nav__item`, `${px}-nav__item--${navGroup}`, className)}
         ref={ref}
       >
-        <Component href={href} variant={navType ? navType : LinkVariants.snwHeaderLink}>
+        <Component
+          className={classNames({
+            [`${px}-nav__item--view-all`]: isViewAllLink,
+          })}
+          href={href}
+          variant={navType ? navType : LinkVariants.linkStylised}
+        >
           <span className={`${px}-nav__item--label`}>{label}</span>
           {badge ? <span className={`${px}-nav__item--badge `}>{` • ${badge}`}</span> : null}
         </Component>

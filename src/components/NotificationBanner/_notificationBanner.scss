@@ -3,10 +3,7 @@
 .#{$px}-notification-banner {
   background: $light-gray;
   color: $pure-black;
-  font-size: $snowflake-note-size;
-  font-variation-settings: 'wght' 400;
   left: 0;
-  line-height: $snowflake-note-line-height;
   padding: $spacing-sm $spacing-md;
   position: fixed;
   text-align: center;
@@ -14,33 +11,25 @@
   width: 100%;
   z-index: $notification-banner-z-index;
 
-  > * {
-    font-size: $snowflake-note-size;
-    font-variation-settings: 'wght' 400;
-    line-height: $snowflake-note-line-height;
+  @include text($bodySmall);
+
+  & > *,
+  & .#{$px}-text {
     text-align: center;
 
-    a {
-      cursor: pointer;
-      text-decoration: underline;
+    @include text($bodySmall);
+  }
 
-      &:hover,
-      &:focus-visible {
-        color: $dark-gray;
-      }
-    }
+  .#{$px}-link {
+    @include text($linkSmall);
   }
 
   > .#{$px}-notification-banner-content {
     color: $pure-black;
-    font-size: $snowflake-note-size;
-    font-variation-settings: 'wght' 400;
-    line-height: $snowflake-note-line-height;
     text-align: center;
 
-    a {
-      cursor: pointer;
-      text-decoration: underline;
+    .#{$px}-link {
+      @include text($linkSmall);
     }
   }
 
