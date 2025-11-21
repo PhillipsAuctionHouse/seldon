@@ -196,7 +196,7 @@ const Input = React.forwardRef(
 
     const inputElementClassNames =
       inputAdornment && isAdornmentInputType
-        ? classnames(inputClassNames.wrapper, className, { [`${px}-skeleton`]: isSkeletonLoading })
+        ? classnames(inputClassNames.wrapperInput, className, { [`${px}-skeleton`]: isSkeletonLoading })
         : classnames(inputClassNames.input, className, { [`${px}-skeleton`]: isSkeletonLoading });
 
     const inputPropsToPass = {
