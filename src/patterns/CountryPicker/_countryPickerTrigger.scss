@@ -7,8 +7,8 @@
     width: 100%;
 
     &-label {
-      font-variation-settings: 'wght' 600;
       margin-bottom: $spacing-xsm;
+      white-space: nowrap;
 
       &--error {
         color: $error-red;
