@@ -48,13 +48,14 @@
       overflow: hidden;
       text-align: left;
       text-overflow: ellipsis;
+      margin-left: $spacing-xsm;
       white-space: nowrap;
+      margin-right: $spacing-xsm;
     }
 
     &-icon {
       align-items: center;
       display: flex;
-      margin-left: $spacing-sm;
 
       @media (min-width: $breakpoint-md) {
         height: 1.25rem;
@@ -72,7 +73,6 @@
       display: flex;
       height: 1rem;
       justify-content: center;
-      margin-right: $spacing-sm;
       overflow: hidden;
       width: 1.5rem;
 
