@@ -84,6 +84,13 @@
       &::placeholder {
         font-variation-settings: 'wght' 700;
       }
+
+      // Remove iOS gray background
+      @supports (-webkit-touch-callout: none) {
+        appearance: none;
+        appearance: none;
+        background-color: $white-100;
+      }
     }
   }
 
