@@ -12,7 +12,7 @@
     height: $button-label-line-height;
     width: $button-label-line-height;
 
-    &:hover {
+    @include hoverOrActive {
       color: $white-100;
     }
   }
