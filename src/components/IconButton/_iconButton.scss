@@ -44,7 +44,7 @@
       }
     }
 
-    &:hover {
+    @include hoverOrActive {
       svg {
         color: $pure-white;
 
@@ -94,7 +94,7 @@
       border-radius: $radius-3xl;
     }
 
-    &:hover {
+    @include hoverOrActive {
       & svg {
         color: $cta-hover;
         fill: $cta-hover;
