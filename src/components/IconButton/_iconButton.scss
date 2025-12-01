@@ -10,6 +10,7 @@
 
   & svg {
     height: $button-label-line-height;
+    pointer-events: none;
     width: $button-label-line-height;
 
     @include hoverOrActive {
@@ -49,6 +50,7 @@
         color: $pure-white;
 
         path {
+          color: $pure-white;
           fill: $pure-white;
         }
       }
@@ -56,6 +58,7 @@
   }
 
   &--ghost {
+    border: 1px solid transparent;
     border-color: transparent;
 
     svg {
