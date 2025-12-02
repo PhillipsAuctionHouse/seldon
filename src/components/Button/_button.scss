@@ -57,7 +57,7 @@
     }
   }
 
-  &:hover {
+  @include hoverOrActive {
     background-color: $button-hover;
 
     svg {
@@ -134,7 +134,7 @@
   &--secondary {
     transition: box-shadow 0.25s;
 
-    &:hover {
+    @include hoverOrActive {
       background-color: transparent;
       box-shadow: 0 0 0 1px rgba($pure-black, 1);
 
@@ -147,7 +147,7 @@
   &--ghost {
     border-color: transparent;
 
-    &:hover {
+    @include hoverOrActive {
       background-color: transparent;
       border: 1px solid transparent;
       color: $pure-white;
@@ -184,7 +184,7 @@
       }
     }
 
-    &:hover {
+    @include hoverOrActive {
       background-color: transparent;
       color: $button-hover;
 
