@@ -34,7 +34,7 @@
     }
   }
 
-  &:hover {
+  @include hoverOrActive {
     align-items: center;
     background: $button-hover;
     border: 1px solid $button-hover;

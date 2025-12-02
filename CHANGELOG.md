@@ -1,3 +1,10 @@
+# [1.220.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.219.0...v1.220.0) (2025-12-02)
+
+
+### Features
+
+* **Button:** L3-10766 fixed hover effect for mobile ([#774](https://github.com/PhillipsAuctionHouse/seldon/issues/774)) ([62862ac](https://github.com/PhillipsAuctionHouse/seldon/commit/62862ac041f9f327288385976b5ce15f512e9d2a))
+
 # [1.219.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.218.0...v1.219.0) (2025-11-20)
 
 
