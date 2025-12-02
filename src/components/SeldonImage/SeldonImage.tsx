@@ -2,7 +2,7 @@ import { ComponentProps, forwardRef, useRef, useState, useEffect, useCallback, m
 import classnames from 'classnames';
 
 import { getCommonProps } from '../../utils';
-import { Icon } from '../Icon';
+import { Text, TextVariants } from '../Text';
 import { isImageValid } from './utils';
 
 type AspectRatio = '16/9' | '1/1' | 'none';
@@ -85,7 +85,7 @@ const SeldonImage = memo(
         sizes,
         loading,
         fetchPriority,
-        errorText = 'Error loading image',
+        errorText = 'Image Unavailable',
         ...props
       },
       ref,
@@ -157,7 +157,9 @@ const SeldonImage = memo(
           )}
           {loadingState === 'error' ? (
             <div className={`${baseClassName}--error`}>
-              <Icon icon="PhillipsLogo" aria-label={errorText} role="img" />
+              <Text variant={TextVariants.headingMedium} className={`${baseClassName}--error-text`}>
+                {errorText}
+              </Text>
             </div>
           ) : null}
           <img

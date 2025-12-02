@@ -26,6 +26,17 @@
       top: 50%;
       transform: translate(-50%, -50%);
     }
+
+    h2 {
+      color: $black-50;
+      font-size: 3.5rem;
+      left: 50%;
+      position: absolute;
+      text-align: center;
+      text-transform: uppercase;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 
   &-img {
