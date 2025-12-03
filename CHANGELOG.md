@@ -1,3 +1,10 @@
+# [1.222.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.221.0...v1.222.0) (2025-12-03)
+
+
+### Features
+
+* **countryPicker:** L3-10755 country selection screen spacing and formatting issues on mobile web ([#773](https://github.com/PhillipsAuctionHouse/seldon/issues/773)) ([db1c027](https://github.com/PhillipsAuctionHouse/seldon/commit/db1c0276d694c24c0b625c5919dcc921e1790624))
+
 # [1.221.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.220.0...v1.221.0) (2025-12-03)
 
 
