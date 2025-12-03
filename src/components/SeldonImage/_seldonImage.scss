@@ -15,18 +15,6 @@
   &--error {
     width: 100%;
 
-    .phillips-logo {
-      fill: $medium-gray;
-    }
-
-    svg {
-      left: 50%;
-      max-width: 50%;
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-    }
-
     &-image {
       background-color: $soft-gray;
     }
