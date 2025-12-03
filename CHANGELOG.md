@@ -1,3 +1,10 @@
+# [1.221.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.220.0...v1.221.0) (2025-12-03)
+
+
+### Features
+
+* **phonePicker:** L3-10759 remove the "legacy" PhoneNumberPicker component ([#772](https://github.com/PhillipsAuctionHouse/seldon/issues/772)) ([25fd957](https://github.com/PhillipsAuctionHouse/seldon/commit/25fd9579fab168406469b31272327c03074f1187))
+
 # [1.220.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.219.0...v1.220.0) (2025-12-02)
 
 
