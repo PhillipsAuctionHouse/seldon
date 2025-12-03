@@ -141,6 +141,7 @@ const SeldonImage = memo(
           ref={ref}
           className={classnames(baseClassName, className, {
             [`${baseClassName}--aspect-ratio-${aspectRatio.replace('/', '-')}`]: aspectRatio !== 'none',
+            [`${baseClassName}--error-image`]: loadingState === 'error',
           })}
           role="img"
           aria-label={alt}

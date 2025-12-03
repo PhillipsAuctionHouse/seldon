@@ -27,6 +27,10 @@
       transform: translate(-50%, -50%);
     }
 
+    &-image {
+      background-color: $soft-gray;
+    }
+
     &-text {
       color: $black-50;
       left: 50%;
