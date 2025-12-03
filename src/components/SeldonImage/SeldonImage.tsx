@@ -157,7 +157,7 @@ const SeldonImage = memo(
           )}
           {loadingState === 'error' ? (
             <div className={`${baseClassName}--error`}>
-              <Text variant={TextVariants.headingMedium} className={`${baseClassName}--error-text`}>
+              <Text variant={TextVariants.displayMedium} className={`${baseClassName}--error-text`}>
                 {errorText}
               </Text>
             </div>

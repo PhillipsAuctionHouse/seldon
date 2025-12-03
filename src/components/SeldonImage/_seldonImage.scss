@@ -27,9 +27,8 @@
       transform: translate(-50%, -50%);
     }
 
-    h2 {
+    &-text {
       color: $black-50;
-      font-size: $font-size-display-medium;
       left: 50%;
       position: absolute;
       text-align: center;
