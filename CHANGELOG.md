@@ -1,3 +1,10 @@
+# [1.223.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.222.0...v1.223.0) (2025-12-04)
+
+
+### Features
+
+* **SeldonImage:** L3-6652 Replace Phillips logo with error text if image is unavailable ([#775](https://github.com/PhillipsAuctionHouse/seldon/issues/775)) ([77706e9](https://github.com/PhillipsAuctionHouse/seldon/commit/77706e976d1947b68b93afccb8792e225b6e937c))
+
 # [1.222.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.221.0...v1.222.0) (2025-12-03)
 
 
