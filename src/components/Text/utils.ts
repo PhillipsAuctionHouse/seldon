@@ -27,7 +27,7 @@ export const determineDefaultTextElement = (variant: TextVariants = TextVariants
   if (variant.includes('string')) return 'span';
   if (variant.includes('title')) return 'span';
   if (variant.includes('label')) {
-    return 'label';
+    return 'span';
   }
   if (variant.includes('heading') || variant.includes('display')) {
     switch (variant) {
