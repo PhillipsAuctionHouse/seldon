@@ -1,3 +1,10 @@
+# [1.224.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.223.0...v1.224.0) (2025-12-04)
+
+
+### Features
+
+* **colorTokens:** L3-10932 Add text-inactive colour to our semantic colour token library ([#776](https://github.com/PhillipsAuctionHouse/seldon/issues/776)) ([0136cf3](https://github.com/PhillipsAuctionHouse/seldon/commit/0136cf358102d1a37b43565c11f280c0c22e9290))
+
 # [1.223.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.222.0...v1.223.0) (2025-12-04)
 
 
