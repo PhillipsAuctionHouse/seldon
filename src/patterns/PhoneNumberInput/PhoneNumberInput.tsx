@@ -136,6 +136,7 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
               disabled={disabled}
               invalidText=""
               aria-describedby={inputProps.invalidId}
+              maxLength={25}
             />
           </div>
         </div>

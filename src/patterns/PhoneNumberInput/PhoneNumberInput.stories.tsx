@@ -94,7 +94,7 @@ export const InDrawerWithValidation = () => {
     <>
       <Button onClick={() => setDrawerOpen(true)}>Open Drawer</Button>
       <Drawer isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)} title="Edit Phone Number">
-        <form onSubmit={handleSubmit} style={{ padding: '1rem' }}>
+        <form onSubmit={handleSubmit} style={{ padding: '1rem', maxWidth: '100%' }}>
           <Input
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
