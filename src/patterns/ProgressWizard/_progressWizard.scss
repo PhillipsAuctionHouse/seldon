@@ -17,7 +17,7 @@
   &__content {
     flex: 1 1 auto;
     margin-top: $spacing-md;
-    overflow-y: auto;
+    overflow-y: visible;
   }
 
   &--full-height {
@@ -71,11 +71,6 @@
   @media (min-width: $breakpoint-md) {
     display: flex;
     flex-direction: column;
-
-    &__content {
-      flex: 1 1 auto;
-      overflow-y: visible;
-    }
 
     &__footer {
       border-top: none;
