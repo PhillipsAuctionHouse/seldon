@@ -1,13 +1,18 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-filter-button {
-  border: 1.5px solid $light-gray;
+  border: 1px solid $bg-border;
   gap: 4px;
   height: inherit;
   padding: $spacing-xsm $spacing-sm;
 
+  &:focus-visible {
+    box-shadow: 0 0 0 2px $white-100;
+    outline: none;
+  }
+
   &--selected {
-    border: 1.5px solid $black-100;
+    border: 1px solid $black-100;
   }
 
   &--filter {
