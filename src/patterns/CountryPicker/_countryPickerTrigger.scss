@@ -16,6 +16,8 @@
     }
 
     &-btn {
+      @include text($bodyMedium);
+
       align-items: center;
       appearance: none;
       background: $white;
@@ -45,27 +47,22 @@
     &-text {
       flex: 1;
       font-variation-settings: 'wght' 600;
+      margin-left: $spacing-xsm;
+      margin-right: $spacing-xsm;
       overflow: hidden;
       text-align: left;
       text-overflow: ellipsis;
-      margin-left: $spacing-xsm;
       white-space: nowrap;
-      margin-right: $spacing-xsm;
     }
 
     &-icon {
       align-items: center;
       display: flex;
 
-      @media (min-width: $breakpoint-md) {
-        height: 1.25rem;
-        width: 1.25rem;
-      }
-
-      @media (min-width: $breakpoint-xl) {
-        height: 1.5rem;
-        width: 1.5rem;
-      }
+      // 1.4em matches the line-height from body-styles mixin, ensuring icon scales with font-size at different breakpoints
+      // This keeps the trigger button height aligned with the Input component across all screen sizes
+      height: 1.4em;
+      width: 1.4em;
     }
 
     &-flag {
