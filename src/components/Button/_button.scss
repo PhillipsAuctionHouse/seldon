@@ -37,20 +37,27 @@
     }
   }
 
+  &--primary,
+  &--secondary,
+  &--ghost,
+  &--tertiary {
+    &.#{$px}-link {
+      text-decoration: none;
+    }
+  }
+
   &:not(.#{$px}-button--link) {
     &.#{$px}-button--primary {
       color: $white-100;
     }
-    &.#{$px}-link.#{$px}-link {
-      text-decoration: none;
-    }
+
     .#{$px}-text {
       color: inherit;
       font-variation-settings: inherit;
     }
   }
 
-  &:hover {
+  @include hoverOrActive {
     background-color: $button-hover;
 
     svg {
@@ -127,7 +134,7 @@
   &--secondary {
     transition: box-shadow 0.25s;
 
-    &:hover {
+    @include hoverOrActive {
       background-color: transparent;
       box-shadow: 0 0 0 1px rgba($pure-black, 1);
 
@@ -140,7 +147,7 @@
   &--ghost {
     border-color: transparent;
 
-    &:hover {
+    @include hoverOrActive {
       background-color: transparent;
       border: 1px solid transparent;
       color: $pure-white;
@@ -177,7 +184,7 @@
       }
     }
 
-    &:hover {
+    @include hoverOrActive {
       background-color: transparent;
       color: $button-hover;
 

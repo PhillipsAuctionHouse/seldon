@@ -19,7 +19,7 @@ describe('ViewingDetails', () => {
     expect(screen.getByText('Saturday, 09:00AM - 10:00PM')).toBeInTheDocument();
     expect(screen.getByText('Sunday, 09:00AM - 1:00PM')).toBeInTheDocument();
     expect(screen.getByText('30 Berkeley Square, London, United Kingdom, W1J 6EX')).toBeInTheDocument();
-    expect(screen.getByText('(Map)').parentElement).toHaveAttribute(
+    expect(screen.getByText('(Map)')).toHaveAttribute(
       'href',
       'https://www.google.com/maps/place/30+Berkeley+Square,+London,+United+Kingdom/@51.509865,-0.14189,17z',
     );

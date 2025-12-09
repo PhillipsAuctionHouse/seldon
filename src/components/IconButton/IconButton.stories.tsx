@@ -8,6 +8,10 @@ const meta = {
   title: 'Components/IconButton',
   component: IconButton,
 
+  args: {
+    onClick: () => console.log('clicked'),
+  },
+
   argTypes: {
     variant: {
       options: Object.values(ButtonVariants),
@@ -31,6 +35,6 @@ export default meta;
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 export const Playground = {
   args: {
-    children: <Icon icon="CloseX" color="currentColor" />,
+    children: <Icon icon="CloseX" color="currentColor" width={24} height={24} />,
   },
 };

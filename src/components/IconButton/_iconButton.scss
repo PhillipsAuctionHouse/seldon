@@ -10,9 +10,10 @@
 
   & svg {
     height: $button-label-line-height;
+    pointer-events: none;
     width: $button-label-line-height;
 
-    &:hover {
+    @include hoverOrActive {
       color: $white-100;
     }
   }
@@ -44,11 +45,12 @@
       }
     }
 
-    &:hover {
+    @include hoverOrActive {
       svg {
         color: $pure-white;
 
         path {
+          color: $pure-white;
           fill: $pure-white;
         }
       }
@@ -56,6 +58,7 @@
   }
 
   &--ghost {
+    border: 1px solid transparent;
     border-color: transparent;
 
     svg {
@@ -94,7 +97,7 @@
       border-radius: $radius-3xl;
     }
 
-    &:hover {
+    @include hoverOrActive {
       & svg {
         color: $cta-hover;
         fill: $cta-hover;
