@@ -1,3 +1,45 @@
+# [1.225.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.224.0...v1.225.0) (2025-12-10)
+
+
+### Features
+
+* **fancyRadioButton:** L3-10948 Fix radio button selection issue in Registration flow ([#778](https://github.com/PhillipsAuctionHouse/seldon/issues/778)) ([7a6b1c0](https://github.com/PhillipsAuctionHouse/seldon/commit/7a6b1c0a8d224e9d6453a333d6fbf5b2a088eec4))
+
+# [1.224.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.223.0...v1.224.0) (2025-12-04)
+
+
+### Features
+
+* **colorTokens:** L3-10932 Add text-inactive colour to our semantic colour token library ([#776](https://github.com/PhillipsAuctionHouse/seldon/issues/776)) ([0136cf3](https://github.com/PhillipsAuctionHouse/seldon/commit/0136cf358102d1a37b43565c11f280c0c22e9290))
+
+# [1.223.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.222.0...v1.223.0) (2025-12-04)
+
+
+### Features
+
+* **SeldonImage:** L3-6652 Replace Phillips logo with error text if image is unavailable ([#775](https://github.com/PhillipsAuctionHouse/seldon/issues/775)) ([77706e9](https://github.com/PhillipsAuctionHouse/seldon/commit/77706e976d1947b68b93afccb8792e225b6e937c))
+
+# [1.222.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.221.0...v1.222.0) (2025-12-03)
+
+
+### Features
+
+* **countryPicker:** L3-10755 country selection screen spacing and formatting issues on mobile web ([#773](https://github.com/PhillipsAuctionHouse/seldon/issues/773)) ([db1c027](https://github.com/PhillipsAuctionHouse/seldon/commit/db1c0276d694c24c0b625c5919dcc921e1790624))
+
+# [1.221.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.220.0...v1.221.0) (2025-12-03)
+
+
+### Features
+
+* **phonePicker:** L3-10759 remove the "legacy" PhoneNumberPicker component ([#772](https://github.com/PhillipsAuctionHouse/seldon/issues/772)) ([25fd957](https://github.com/PhillipsAuctionHouse/seldon/commit/25fd9579fab168406469b31272327c03074f1187))
+
+# [1.220.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.219.0...v1.220.0) (2025-12-02)
+
+
+### Features
+
+* **Button:** L3-10766 fixed hover effect for mobile ([#774](https://github.com/PhillipsAuctionHouse/seldon/issues/774)) ([62862ac](https://github.com/PhillipsAuctionHouse/seldon/commit/62862ac041f9f327288385976b5ce15f512e9d2a))
+
 # [1.219.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.218.0...v1.219.0) (2025-11-20)
 
 

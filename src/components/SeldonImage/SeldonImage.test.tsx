@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import SeldonImage from './SeldonImage';
 import { runCommonTests } from '../../utils/testUtils';
 import { px } from '../../utils';
@@ -40,14 +40,11 @@ describe('SeldonImage', () => {
   });
 
   it('sets loading state to error when image is invalid', async () => {
-    render(<SeldonImage src="broken" alt="" />);
-    const image = screen.getByTestId(`seldon-image-img`);
-    await waitFor(() => {
-      fireEvent.error(image);
-      const imgs = screen.getAllByRole('img');
-      const errorPlaceholder = imgs.find((img) => img.getAttribute('aria-label') === 'Error loading image');
-      expect(errorPlaceholder).toBeInTheDocument();
-    });
+    render(<SeldonImage src="broken" alt="Broken Image" errorText="Image Unavailable" />);
+    const image = screen.getByTestId('seldon-image-img');
+    fireEvent.error(image);
+    const errorMessage = await screen.findByText('Image Unavailable');
+    expect(errorMessage).toBeInTheDocument();
   });
 
   it('renders ImageUnavailable icon when imageBlocked is true', () => {
