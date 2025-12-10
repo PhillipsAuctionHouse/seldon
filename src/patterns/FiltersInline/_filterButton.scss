@@ -7,12 +7,17 @@
   padding: $spacing-xsm $spacing-sm;
 
   &:focus-visible {
-    box-shadow: 0 0 0 2px $white-100;
+    box-shadow: 0 0 0 0.5px $bg-border;
     outline: none;
   }
 
   &--selected {
     border: 1px solid $black-100;
+
+    &:focus-visible {
+      box-shadow: 0 0 0 0.5px $black-100;
+      outline: none;
+    }
   }
 
   &--filter {
