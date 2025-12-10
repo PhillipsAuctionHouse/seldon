@@ -6,6 +6,10 @@
   height: inherit;
   padding: $spacing-xsm $spacing-sm;
 
+  &:hover {
+    border-color: $black-100;
+  }
+
   &:focus-visible {
     box-shadow: 0 0 0 0.5px $bg-border;
     outline: none;
