@@ -1,3 +1,10 @@
+# [1.225.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.224.0...v1.225.0) (2025-12-10)
+
+
+### Features
+
+* **fancyRadioButton:** L3-10948 Fix radio button selection issue in Registration flow ([#778](https://github.com/PhillipsAuctionHouse/seldon/issues/778)) ([7a6b1c0](https://github.com/PhillipsAuctionHouse/seldon/commit/7a6b1c0a8d224e9d6453a333d6fbf5b2a088eec4))
+
 # [1.224.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.223.0...v1.224.0) (2025-12-04)
 
 
