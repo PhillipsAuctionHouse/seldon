@@ -89,7 +89,7 @@ const SeldonImage = memo(
         sizes,
         loading,
         fetchPriority,
-        errorText = 'Image Unavailable',
+        errorText = 'Error loading image',
         imageBlocked = false,
         ...props
       },
