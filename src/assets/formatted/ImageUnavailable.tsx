@@ -86,6 +86,12 @@ const ImageUnavailable = memo(
           fill="black"
           fillOpacity="0.25"
         />
+        <path
+          d="M44.5917 0.29625H48.1369L52.7783 11.4849L57.4295 0.29625H60.9549V14.1216H58.6836V2.92306L54.0225 14.1216H51.4056L46.7642 2.93293V14.1216H44.5917V0.29625Z"
+          fill="black"
+          fillOpacity="0.25"
+        />
+        <path d="M39.3667 14.1216V0.29625H41.638V14.1216H39.3667Z" fill="black" fillOpacity="0.25" />
       </svg>
     );
   }),

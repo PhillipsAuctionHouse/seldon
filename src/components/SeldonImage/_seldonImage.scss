@@ -19,12 +19,15 @@
       background-color: $bg-soft;
     }
 
-    &-text {
-      color: $black-50;
+    .phillips-logo {
+      fill: $medium-gray;
+    }
+
+    svg {
+      fill: $medium-gray;
       left: 50%;
+      max-width: 50%;
       position: absolute;
-      text-align: center;
-      text-transform: uppercase;
       top: 50%;
       transform: translate(-50%, -50%);
     }
