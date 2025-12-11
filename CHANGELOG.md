@@ -1,3 +1,10 @@
+# [1.227.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.226.0...v1.227.0) (2025-12-11)
+
+
+### Features
+
+* **SeldonImage:** L3-6652 Remove image after auction with image unavailable ([#780](https://github.com/PhillipsAuctionHouse/seldon/issues/780)) ([c25cf32](https://github.com/PhillipsAuctionHouse/seldon/commit/c25cf32130d10202a64c6632be5c96c9328acbec))
+
 # [1.226.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.225.0...v1.226.0) (2025-12-11)
 
 
