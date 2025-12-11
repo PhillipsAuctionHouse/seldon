@@ -7,6 +7,7 @@ export const FilterButtons: FilterButtonType[] = [
   FilterButtonType.Departments,
   FilterButtonType.Location,
   FilterButtonType.Month,
+  FilterButtonType.Year,
 ];
 
 export const FiltersInlineFilters = {
