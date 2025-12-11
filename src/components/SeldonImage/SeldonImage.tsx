@@ -2,7 +2,7 @@ import { ComponentProps, forwardRef, useRef, useState, useEffect, useCallback, m
 import classnames from 'classnames';
 
 import { getCommonProps } from '../../utils';
-import { Text, TextVariants } from '../Text';
+import { Icon } from '../Icon';
 import { isImageValid } from './utils';
 
 type AspectRatio = '16/9' | '1/1' | 'none';
@@ -56,6 +56,10 @@ export interface SeldonImageProps extends ComponentProps<'div'> {
    * The text to display when the image fails to load.
    */
   errorText?: string;
+  /**
+   * Whether the image is blocked and should display ImageUnavailable instead of PhillipsLogo.
+   */
+  imageBlocked?: boolean;
 }
 
 const isServer = typeof window === 'undefined';
@@ -85,7 +89,8 @@ const SeldonImage = memo(
         sizes,
         loading,
         fetchPriority,
-        errorText = 'Image Unavailable',
+        errorText = 'Error loading image',
+        imageBlocked = false,
         ...props
       },
       ref,
@@ -141,7 +146,7 @@ const SeldonImage = memo(
           ref={ref}
           className={classnames(baseClassName, className, {
             [`${baseClassName}--aspect-ratio-${aspectRatio.replace('/', '-')}`]: aspectRatio !== 'none',
-            [`${baseClassName}--error-image`]: loadingState === 'error',
+            [`${baseClassName}--error-image`]: loadingState === 'error' || imageBlocked,
           })}
           role="img"
           aria-label={alt}
@@ -151,21 +156,24 @@ const SeldonImage = memo(
           {hasBlurBackground && (
             <div
               className={classnames(`${baseClassName}-blur`, {
-                [`${baseClassName}-blur--hidden`]: loadingState === 'loading' || loadingState === 'error',
+                [`${baseClassName}-blur--hidden`]:
+                  loadingState === 'loading' || loadingState === 'error' || imageBlocked,
               })}
               style={{ backgroundImage: `url(${src})` }}
             />
           )}
-          {loadingState === 'error' ? (
+          {loadingState === 'error' || imageBlocked ? (
             <div className={`${baseClassName}--error`}>
-              <Text variant={TextVariants.displayMedium} className={`${baseClassName}--error-text`}>
-                {errorText}
-              </Text>
+              {imageBlocked ? (
+                <Icon icon="ImageUnavailable" aria-label="Image Unavailable" role="img" />
+              ) : (
+                <Icon icon="PhillipsLogo" aria-label={errorText} role="img" color="$black-25" />
+              )}
             </div>
           ) : null}
           <img
             className={classnames(`${baseClassName}-img`, imageClassName, {
-              [`${baseClassName}-img--hidden`]: loadingState === 'error',
+              [`${baseClassName}-img--hidden`]: loadingState === 'error' || imageBlocked,
               [`${baseClassName}-img--object-fit-${objectFit}`]: objectFit !== 'none',
             })}
             id={src}

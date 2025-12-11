@@ -57,9 +57,13 @@ export interface ObjectTileProps extends ComponentProps<'a'> {
    */
   imageLoading?: ComponentProps<'img'>['loading'];
   /**
-   * Image fetch priority. [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-fetchpriority]
+   * Image fetch priority. [https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/fetchPriority]
    */
   imageFetchPriority?: ComponentProps<'img'>['fetchPriority'];
+  /**
+   * Whether the image is blocked and should display ImageUnavailable instead of PhillipsLogo.
+   */
+  imageBlocked?: boolean;
   /**
    * Object Lot number.
    */
@@ -113,6 +117,7 @@ const ObjectTile = memo(
         imageSizes,
         imageLoading,
         imageFetchPriority,
+        imageBlocked,
         lotNumber,
         makerText,
         modelText,
@@ -138,6 +143,7 @@ const ObjectTile = memo(
             sizes={imageSizes}
             loading={imageLoading}
             fetchPriority={imageFetchPriority}
+            imageBlocked={imageBlocked}
           />
           {!withdrawnText ? (
             <Text element="span" className={`${baseClassName}__badge`} variant={TextVariants.labelSmall}>

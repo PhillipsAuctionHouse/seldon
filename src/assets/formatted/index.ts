@@ -51,6 +51,7 @@ export { default as IconGreenCircle } from './IconGreenCircle';
 export { default as IconBlueCircle } from './IconBlueCircle';
 export { default as IconRedCircle } from './IconRedCircle';
 export { default as Icon } from './Icon';
+export { default as ImageUnavailable } from './ImageUnavailable';
 export { default as Instagram } from './Instagram';
 export { default as LinkedIn } from './LinkedIn';
 export { default as List } from './List';
