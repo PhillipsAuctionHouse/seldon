@@ -1,3 +1,10 @@
+# [1.226.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.225.0...v1.226.0) (2025-12-11)
+
+
+### Features
+
+* **FilterType:** L3-11033 Add the Year filter to FiltersInline types file ([#781](https://github.com/PhillipsAuctionHouse/seldon/issues/781)) ([e2970e1](https://github.com/PhillipsAuctionHouse/seldon/commit/e2970e1fe359d0b8e976b584fe4818486d21fea4))
+
 # [1.225.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.224.0...v1.225.0) (2025-12-10)
 
 
