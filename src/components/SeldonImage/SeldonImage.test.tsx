@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import SeldonImage from './SeldonImage';
 import { runCommonTests } from '../../utils/testUtils';
 import { px } from '../../utils';
@@ -40,10 +40,40 @@ describe('SeldonImage', () => {
   });
 
   it('sets loading state to error when image is invalid', async () => {
-    render(<SeldonImage src="broken" alt="Broken Image" errorText="Image Unavailable" />);
+    render(<SeldonImage src="broken" alt="" />);
+    const image = screen.getByTestId(`seldon-image-img`);
+    await waitFor(() => {
+      fireEvent.error(image);
+      const imgs = screen.getAllByRole('img');
+      const errorPlaceholder = imgs.find((img) => img.getAttribute('aria-label') === 'Error loading image');
+      expect(errorPlaceholder).toBeInTheDocument();
+    });
+  });
+
+  it('renders ImageUnavailable icon when imageBlocked is true', () => {
+    const { container } = render(<SeldonImage src="test-image.jpg" alt="Blocked Image" imageBlocked />);
+    const errorDiv = container.querySelector(`.${px}-seldon-image--error`);
+    expect(errorDiv).toBeInTheDocument();
     const image = screen.getByTestId('seldon-image-img');
-    fireEvent.error(image);
-    const errorMessage = await screen.findByText('Image Unavailable');
-    expect(errorMessage).toBeInTheDocument();
+    expect(image).toHaveClass(`${px}-seldon-image-img--hidden`);
+  });
+
+  it('hides image when imageBlocked is true', () => {
+    render(<SeldonImage src="test-image.jpg" alt="Blocked Image" imageBlocked />);
+    const image = screen.getByTestId('seldon-image-img');
+    expect(image).toHaveClass(`${px}-seldon-image-img--hidden`);
+  });
+
+  it('applies error-image class when imageBlocked is true', () => {
+    const { container } = render(<SeldonImage src="test-image.jpg" alt="Blocked Image" imageBlocked />);
+    expect(container.firstChild).toHaveClass(`${px}-seldon-image--error-image`);
+  });
+
+  it('hides blur background when imageBlocked is true', () => {
+    const { container } = render(
+      <SeldonImage src="test-image.jpg" alt="Blocked Image" hasBlurBackground imageBlocked />,
+    );
+    const blur = container.querySelector(`.${px}-seldon-image-blur`);
+    expect(blur).toHaveClass(`${px}-seldon-image-blur--hidden`);
   });
 });
