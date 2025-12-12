@@ -113,6 +113,7 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
 
     return showTimer ? (
       <div
+        data-chromatic="ignore"
         {...commonProps}
         className={classnames(baseClassName, className, {
           [`${baseClassName}--compact`]: variant === CountdownVariants.compact,
