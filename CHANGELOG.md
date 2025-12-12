@@ -1,3 +1,10 @@
+# [1.230.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.229.0...v1.230.0) (2025-12-12)
+
+
+### Features
+
+* **phone-input:** L3-10742 L3-10756 Fix phone number picker display at tiny and huge widths ([#767](https://github.com/PhillipsAuctionHouse/seldon/issues/767)) ([768f251](https://github.com/PhillipsAuctionHouse/seldon/commit/768f251fd5a016f81d4fd9e4c0a11ac20f01fa53))
+
 # [1.229.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.228.0...v1.229.0) (2025-12-12)
 
 
