@@ -1,3 +1,10 @@
+# [1.228.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.227.0...v1.228.0) (2025-12-12)
+
+
+### Features
+
+* **wizard:** L3-10891 Client Portal | Primary address screen is displaying an extra scroll bar on desktop ([#777](https://github.com/PhillipsAuctionHouse/seldon/issues/777)) ([a34b3dd](https://github.com/PhillipsAuctionHouse/seldon/commit/a34b3dd80471b76aa1b1d14672e4d60429a36800))
+
 # [1.227.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.226.0...v1.227.0) (2025-12-11)
 
 
