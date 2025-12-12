@@ -1,3 +1,10 @@
+# [1.229.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.228.0...v1.229.0) (2025-12-12)
+
+
+### Features
+
+* **FilterButton:** L3-7878 Update Filter button stroke width ([#779](https://github.com/PhillipsAuctionHouse/seldon/issues/779)) ([8738478](https://github.com/PhillipsAuctionHouse/seldon/commit/87384782fcbb9ab534aad44564231cea3bc8dff0))
+
 # [1.228.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.227.0...v1.228.0) (2025-12-12)
 
 
