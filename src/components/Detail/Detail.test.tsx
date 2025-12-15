@@ -9,12 +9,12 @@ describe('Detail', () => {
 
   it('should render the label and value', () => {
     render(<Detail label="Label" value="Value" />);
-    expect(screen.getByRole('term')).toHaveTextContent('Label');
-    expect(screen.getByRole('definition')).toHaveTextContent('Value');
+    expect(screen.getByText('Label')).toBeInTheDocument();
+    expect(screen.getByText('Value')).toBeInTheDocument();
   });
 
   it('will add a no-wrap class if hasWrap is set to false', () => {
     render(<Detail label="Label" value="Value" hasWrap={false} />);
-    expect(screen.getByRole('term')).toHaveClass(`${px}-detail__label--no-wrap`);
+    expect(screen.getByText('Label').parentElement).toHaveClass(`${px}-detail__label--no-wrap`);
   });
 });

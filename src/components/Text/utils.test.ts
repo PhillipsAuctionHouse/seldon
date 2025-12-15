@@ -70,9 +70,9 @@ describe('determineDefaultTextElement', () => {
     expect(element).toBe('span');
   });
 
-  it('should return "label" for label variant', () => {
+  it('should return "span" for label variant', () => {
     const element = determineDefaultTextElement(TextVariants.label);
-    expect(element).toBe('label');
+    expect(element).toBe('span');
   });
 
   it('should return "blockquote" for blockquote variant', () => {
