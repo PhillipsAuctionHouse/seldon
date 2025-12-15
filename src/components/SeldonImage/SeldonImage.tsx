@@ -143,6 +143,7 @@ const SeldonImage = memo(
 
       return (
         <div
+          data-chromatic="ignore" // to handle the issue where the image is not rendered in the storybook
           ref={ref}
           className={classnames(baseClassName, className, {
             [`${baseClassName}--aspect-ratio-${aspectRatio.replace('/', '-')}`]: aspectRatio !== 'none',
