@@ -1,3 +1,10 @@
+## [1.230.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.230.0...v1.230.1) (2025-12-15)
+
+
+### Bug Fixes
+
+* **chromatic:** L3-0000 hide dynamic components from chromatic snapshots ([#782](https://github.com/PhillipsAuctionHouse/seldon/issues/782)) ([aaa6f79](https://github.com/PhillipsAuctionHouse/seldon/commit/aaa6f7995e39b6c9189819fd486a835672fd9fc6))
+
 # [1.230.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.229.0...v1.230.0) (2025-12-12)
 
 
