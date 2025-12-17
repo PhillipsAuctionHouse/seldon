@@ -371,6 +371,12 @@ $margin-xl: var(--spacing-xl);
 $margin-xxl: var(--spacing-xxl);
 
 ////////////////////////
+/// modal-min-width TOKEN:
+///////////////////////
+$mobile-modal-min-width: 22.5rem;
+$desktop-modal-min-width: 35rem;
+
+////////////////////////
 /// max-site-width TOKEN:
 ///////////////////////
 $max-site-width: 1560px;
