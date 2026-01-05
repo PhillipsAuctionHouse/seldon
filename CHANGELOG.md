@@ -1,3 +1,10 @@
+# [1.231.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.230.1...v1.231.0) (2026-01-05)
+
+
+### Features
+
+* **Icon:** L3-11171 Add IconOrangeCircle to Seldon ([#787](https://github.com/PhillipsAuctionHouse/seldon/issues/787)) ([54fba5b](https://github.com/PhillipsAuctionHouse/seldon/commit/54fba5b14e3d2dd61454bc857bd3c908fd1eeb48))
+
 ## [1.230.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.230.0...v1.230.1) (2025-12-15)
 
 
