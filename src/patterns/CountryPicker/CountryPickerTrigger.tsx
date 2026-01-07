@@ -118,7 +118,7 @@ const CountryPickerTrigger = forwardRef<HTMLButtonElement, ModalBaseProps & Inte
           )}
           <Text className={classNames(`${baseClassName}__trigger-text`)}>{displayValue}</Text>
           <span className={classNames(`${baseClassName}__trigger-icon`)}>
-            <Icon icon="ChevronDown" color="black-100" width={16} height={16} />
+            <Icon icon="ChevronDown" color="black-100" height="1.4rem" />
           </span>
         </button>
 
