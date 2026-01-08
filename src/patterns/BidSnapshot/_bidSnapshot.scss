@@ -26,9 +26,9 @@
     top: calc(100% + $spacing-xsm);
   }
 
-  &--live:has(.#{$px}-countdown) {
-    border-bottom: 1px solid $light-gray;
-    margin-bottom: $spacing-md;
+  &--live > .#{$px}-countdown {
+    border-top: 1px solid $light-gray;
+    padding-top: $spacing-xsm;
   }
 
   // styles that will apply to bid message inside bid snapshot only
