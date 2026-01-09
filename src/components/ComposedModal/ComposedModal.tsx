@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { forwardRef, ReactNode } from 'react';
+import { forwardRef, ReactNode, useEffect, useRef, useState } from 'react';
 import { getCommonProps, noOp } from '../../utils';
 import { Divider } from '../Divider';
 import Modal, { ModalProps } from '../Modal/Modal';
@@ -71,6 +71,36 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
       ...commonProps
     } = getCommonProps({ id, ...props }, 'ComposedModal');
 
+    const footerRef = useRef<HTMLDivElement>(null);
+    const [footerHeight, setFooterHeight] = useState<string>('0px');
+
+    useEffect(() => {
+      const measureFooter = () => {
+        if (footerRef.current) {
+          const height = footerRef.current.offsetHeight;
+          setFooterHeight(`${height}px`);
+        } else {
+          setFooterHeight('0px');
+        }
+      };
+
+      // Initial measurement
+      requestAnimationFrame(measureFooter);
+
+      // Set up ResizeObserver to watch for size changes
+      const resizeObserver = new ResizeObserver(() => {
+        measureFooter();
+      });
+
+      if (footerRef.current) {
+        resizeObserver.observe(footerRef.current);
+      }
+
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }, [secondaryButton, primaryButton, footerContent, footerHeight]);
+
     return (
       <Modal
         isOpen={isOpen}
@@ -81,6 +111,11 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
         id={id}
         ref={ref}
         title={title}
+        style={
+          {
+            '--modal-footer-height': footerHeight,
+          } as React.CSSProperties
+        }
       >
         <div
           className={`${baseClassName}__body`}
@@ -89,7 +124,7 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
           {children}
         </div>
         {(secondaryButton || primaryButton || footerContent) && (
-          <>
+          <div ref={footerRef} className={`${baseClassName}__footer`}>
             <Divider className={`${baseClassName}__divider`} id={`${id}-divider`} />
             <div className={`${baseClassName}__btns-group`}>
               {secondaryButton}
@@ -100,7 +135,7 @@ const ComposedModal = forwardRef<HTMLDivElement, ComposedModalProps>(
                 {footerContent}
               </Text>
             )}
-          </>
+          </div>
         )}
       </Modal>
     );

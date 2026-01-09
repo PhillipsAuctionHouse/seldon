@@ -541,10 +541,9 @@ export const MobileFormStory = (props: ProgressWizardProps) => {
 };
 
 MobileFormStory.storyName = 'Mobile Form - Long Content';
-MobileFormStory.parameters = {
-  viewport: {
-    defaultViewport: 'mobile1',
-  },
+
+MobileFormStory.globals = {
+  viewport: 'mobile',
 };
 MobileFormStory.argTypes = argTypes;
 
