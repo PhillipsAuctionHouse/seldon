@@ -1,3 +1,10 @@
+## [1.232.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.232.0...v1.232.1) (2026-01-12)
+
+
+### Bug Fixes
+
+* **Select:** L3-11351 select value should be black not blue on iOS ([#790](https://github.com/PhillipsAuctionHouse/seldon/issues/790)) ([c1c27aa](https://github.com/PhillipsAuctionHouse/seldon/commit/c1c27aa4aca429c40eedf26e5d05d2790c1cc1a8))
+
 # [1.232.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.231.0...v1.232.0) (2026-01-09)
 
 
