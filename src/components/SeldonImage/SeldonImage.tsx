@@ -56,6 +56,10 @@ export interface SeldonImageProps extends ComponentProps<'div'> {
    * The text to display when the image fails to load.
    */
   errorText?: string;
+  /**
+   * Whether the image is blocked and should display ImageUnavailable instead of PhillipsLogo.
+   */
+  imageBlocked?: boolean;
 }
 
 const isServer = typeof window === 'undefined';
@@ -86,6 +90,7 @@ const SeldonImage = memo(
         loading,
         fetchPriority,
         errorText = 'Error loading image',
+        imageBlocked = false,
         ...props
       },
       ref,
@@ -138,9 +143,11 @@ const SeldonImage = memo(
 
       return (
         <div
+          data-chromatic="ignore" // to handle the issue where the image is not rendered in the storybook
           ref={ref}
           className={classnames(baseClassName, className, {
             [`${baseClassName}--aspect-ratio-${aspectRatio.replace('/', '-')}`]: aspectRatio !== 'none',
+            [`${baseClassName}--error-image`]: loadingState === 'error' || imageBlocked,
           })}
           role="img"
           aria-label={alt}
@@ -150,19 +157,24 @@ const SeldonImage = memo(
           {hasBlurBackground && (
             <div
               className={classnames(`${baseClassName}-blur`, {
-                [`${baseClassName}-blur--hidden`]: loadingState === 'loading' || loadingState === 'error',
+                [`${baseClassName}-blur--hidden`]:
+                  loadingState === 'loading' || loadingState === 'error' || imageBlocked,
               })}
               style={{ backgroundImage: `url(${src})` }}
             />
           )}
-          {loadingState === 'error' ? (
+          {loadingState === 'error' || imageBlocked ? (
             <div className={`${baseClassName}--error`}>
-              <Icon icon="PhillipsLogo" aria-label={errorText} role="img" />
+              {imageBlocked ? (
+                <Icon icon="ImageUnavailable" aria-label="Image Unavailable" role="img" />
+              ) : (
+                <Icon icon="PhillipsLogo" aria-label={errorText} role="img" color="$black-25" />
+              )}
             </div>
           ) : null}
           <img
             className={classnames(`${baseClassName}-img`, imageClassName, {
-              [`${baseClassName}-img--hidden`]: loadingState === 'error',
+              [`${baseClassName}-img--hidden`]: loadingState === 'error' || imageBlocked,
               [`${baseClassName}-img--object-fit-${objectFit}`]: objectFit !== 'none',
             })}
             id={src}

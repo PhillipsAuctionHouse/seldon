@@ -54,3 +54,15 @@ BrokenImage.args = {
 };
 
 BrokenImage.argTypes = {};
+
+export const ImageBlocked = (props: React.ComponentProps<typeof SeldonImage>) => <SeldonImage {...props} />;
+
+// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
+ImageBlocked.args = {
+  src: 'https://whitneymedia.org/assets/artwork/5864/70_1672_cropped.jpeg',
+  aspectRatio: '1/1',
+  objectFit: 'contain',
+  imageBlocked: true,
+};
+
+ImageBlocked.argTypes = {};

@@ -15,11 +15,16 @@
   &--error {
     width: 100%;
 
+    &-image {
+      background-color: $bg-soft;
+    }
+
     .phillips-logo {
       fill: $medium-gray;
     }
 
     svg {
+      fill: $medium-gray;
       left: 50%;
       max-width: 50%;
       position: absolute;

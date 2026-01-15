@@ -93,3 +93,9 @@ SoldState.args = {
     </>
   ),
 };
+
+export const ImageBlocked = (props: ComponentProps<typeof ObjectTile>) => <ObjectTile {...props} />;
+ImageBlocked.args = {
+  ...args,
+  imageBlocked: true,
+};

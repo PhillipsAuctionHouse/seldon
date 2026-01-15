@@ -221,3 +221,21 @@
 @mixin cursorPointer() {
   cursor: pointer;
 }
+
+// Provides pointer-aware interaction states that adapt to the user's input device:
+// - Fine pointer devices (mouse/trackpad): shows styles on :hover
+// - Coarse pointer devices (touch screens): shows styles on :active
+// This prevents sticky hover states on touch devices and ensures proper feedback for all users.
+@mixin hoverOrActive() {
+  @media (pointer: fine) and (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+
+  @media (pointer: coarse) {
+    &:active {
+      @content;
+    }
+  }
+}
