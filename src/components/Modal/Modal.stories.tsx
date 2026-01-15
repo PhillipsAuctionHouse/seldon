@@ -12,12 +12,13 @@ import { Icon } from '../Icon';
 const meta = {
   title: 'Components/Modal',
   component: Modal,
+  tags: [],
 } satisfies Meta<typeof Modal>;
 
 export default meta;
 
 export const Playground = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const onClose = () => {
     setIsOpen(false);
@@ -86,7 +87,7 @@ export const ModalFromDrawer = () => {
 };
 
 export const CustomCloseIcon = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const onClose = () => {
     setIsOpen(false);
