@@ -138,6 +138,7 @@ const semanticColorSections = [
         colors: [
           { label: '$text-default', hex: '#000000' },
           { label: '$text-supporting', hex: '#545454' },
+          { label: '$text-inactive', hex: '#75716F' },
           { label: '$text-inverted', hex: '#ffffff' },
         ],
       },

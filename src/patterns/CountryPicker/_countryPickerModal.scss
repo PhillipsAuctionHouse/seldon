@@ -8,15 +8,16 @@
     width: 635px;
 
     @media (max-width: $breakpoint-md) {
-      height: 100vh;
+      height: 100dvh;
       width: 100%;
     }
   }
 
   &__wrapper {
     display: flex;
+    flex: 1;
     flex-direction: column;
-    height: 100%;
+    min-height: -webkit-fill-available;
   }
 
   &__header {
@@ -24,7 +25,6 @@
     margin-bottom: 24px; // no token for this yet
     position: sticky;
     top: 0;
-    z-index: 2;
 
     &-text {
       margin-bottom: $spacing-md;
@@ -83,6 +83,12 @@
 
       &::placeholder {
         font-variation-settings: 'wght' 700;
+      }
+
+      // Remove iOS gray background
+      @supports (-webkit-touch-callout: none) {
+        appearance: none;
+        background-color: $white-100;
       }
     }
   }

@@ -9,6 +9,7 @@ export enum FilterButtonType {
   Departments = 'Departments', // Departments filter
   Location = 'Location', // Location filter
   Month = 'Month', // Month filter
+  Year = 'Year', // Year filter
   Empty = '', // Empty state for no filter label
 }
 
