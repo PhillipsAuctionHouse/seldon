@@ -132,6 +132,7 @@
     "sass": "^1.83.4",
     "semantic-release": "^23.1.1",
     "storybook": "^8.5.0",
+    "storybook-addon-pseudo-states": "^4.0.3",
     "stylelint": "^16.8.1",
     "stylelint-config-standard": "^36.0.1",
     "stylelint-config-standard-scss": "^13.1.0",

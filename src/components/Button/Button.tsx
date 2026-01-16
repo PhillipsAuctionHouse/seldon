@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import { getCommonProps, px } from '../../utils';
-import { ButtonVariants } from './types';
+import { ButtonVariants, ButtonSizes } from './types';
 import { forwardRef, useState } from 'react';
 import { Link, LinkVariants } from '../Link';
 
@@ -21,6 +21,10 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HT
    * Is this the principal call to action on the page?
    */
   variant?: ButtonVariants;
+  /**
+   * The size of the button
+   */
+  size?: ButtonSizes;
   /**
    * The type of the button.
    */
@@ -66,6 +70,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
   (
     {
       variant = ButtonVariants.primary,
+      size = ButtonSizes.default,
       children,
       className,
       isIconLast: iconLast = false,
@@ -148,6 +153,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
           className={classnames(
             `${baseClassName}`,
             `${baseClassName}--${variant}`,
+            { [`${baseClassName}--${size}`]: size !== ButtonSizes.default },
             {
               [`${baseClassName}--icon-last`]: iconLast,
               [`${px}-skeleton`]: isSkeletonLoading,
