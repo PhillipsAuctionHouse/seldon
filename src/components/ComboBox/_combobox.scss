@@ -87,16 +87,6 @@
     transition:
       opacity 0.2s ease,
       background-color 0.2s ease;
-
-    &.#{$px}-icon-button {
-      transition: background-color 0.2s ease;
-
-      &:hover {
-        svg {
-          color: $white-100;
-        }
-      }
-    }
   }
 
   &__dropdown-button {
