@@ -89,12 +89,10 @@ export const ButtonWithSkeleton = (props: ButtonProps) => (
   </div>
 );
 
-export const SmallButtonVariants = () => (
-  <div style={{ display: 'flex', gap: '1rem' }}>
-    <Button size={ButtonSizes.small} variant={ButtonVariants.primary}>
-      Primary Small
-    </Button>
-  </div>
+export const SmallButtonVariant = (props: ButtonProps) => (
+  <Button {...props} size={ButtonSizes.small}>
+    Small Variant
+  </Button>
 );
 
 export const SmallButtonWithIcons = () => (
