@@ -131,7 +131,7 @@ export const AllVariantsGrid = () => {
         <div className="all-variants-grid__header-cell">Static</div>
         <div className="all-variants-grid__header-cell">Hover</div>
         <div className="all-variants-grid__header-cell">Focus</div>
-        <div className="all-variants-grid__header-cell">Loading</div>
+        <div className="all-variants-grid__header-cell">Loading (Disabled)</div>
         <div className="all-variants-grid__header-cell">Disabled</div>
       </div>
 
@@ -167,10 +167,35 @@ export const AllVariantsGrid = () => {
                 </Button>
               </div>
 
-              {/* Loading */}
+              {/* Loading (Disabled) */}
               <div className="all-variants-grid__button-cell">
-                <Button variant={variant} size={size} isDisabled>
-                  <Loader />
+                <Button
+                  variant={variant}
+                  size={size}
+                  isDisabled
+                  style={{
+                    position: 'relative',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {/* Mimic the same button width while showing loader */}
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      visibility: 'hidden',
+                      display: 'inline-block',
+                      height: 0,
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {buttonText}
+                  </span>
+                  <span style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}>
+                    <Loader />
+                  </span>
                 </Button>
               </div>
 

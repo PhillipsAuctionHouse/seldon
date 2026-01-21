@@ -9,7 +9,6 @@ const config: StorybookConfig = {
     '@storybook/addon-mdx-gfm',
     '@chromatic-com/storybook',
     '@storybook/addon-a11y',
-    '@storybook/addon-pseudo-states',
     'storybook-addon-pseudo-states'
   ],
   framework: {
