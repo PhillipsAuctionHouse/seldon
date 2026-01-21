@@ -1,3 +1,17 @@
+## [1.232.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.232.0...v1.232.1) (2026-01-12)
+
+
+### Bug Fixes
+
+* **Select:** L3-11351 select value should be black not blue on iOS ([#790](https://github.com/PhillipsAuctionHouse/seldon/issues/790)) ([c1c27aa](https://github.com/PhillipsAuctionHouse/seldon/commit/c1c27aa4aca429c40eedf26e5d05d2790c1cc1a8))
+
+# [1.232.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.231.0...v1.232.0) (2026-01-09)
+
+
+### Features
+
+* **countryPicker:** L3-11083 Client Portal | Mobile Web - Close button on Country Code input modal is not completely visible ([#783](https://github.com/PhillipsAuctionHouse/seldon/issues/783)) ([4f0072e](https://github.com/PhillipsAuctionHouse/seldon/commit/4f0072e20aff0707740a3dc4174ab9a96eb76a90))
+
 # [1.231.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.230.1...v1.231.0) (2026-01-05)
 
 
