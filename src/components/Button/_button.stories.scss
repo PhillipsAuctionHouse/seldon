@@ -55,6 +55,7 @@
   &__label-cell {
     @include cell-base;
     @include cell-border;
+
     background-color: $grey-25;
     font-weight: 600;
     justify-content: flex-start;
@@ -71,16 +72,5 @@
     &:last-child {
       border-right: none;
     }
-  }
-
-  &__ghost-overlay {
-    background: $grey-75;
-    border-radius: inherit;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: -1;
   }
 }

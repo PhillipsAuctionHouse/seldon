@@ -56,7 +56,6 @@
 
   &--primary,
   &--secondary,
-  &--ghost,
   &--tertiary {
     &.#{$px}-link {
       text-decoration: none;
@@ -112,8 +111,7 @@
     }
   }
 
-  &--secondary,
-  &--ghost {
+  &--secondary {
     background-color: $pure-white;
     border: 2px solid $pure-black;
     color: $pure-black;
@@ -157,32 +155,6 @@
 
       &:disabled {
         box-shadow: none;
-      }
-    }
-  }
-
-  &--ghost {
-    border-color: transparent;
-
-    @include hoverOrActive {
-      background-color: transparent;
-      border: 1px solid transparent;
-      color: $pure-white;
-
-      svg {
-        fill: $pure-white;
-
-        path {
-          fill: $pure-white;
-        }
-      }
-
-      &::before {
-        background: $button-hover;
-        height: 100%;
-        left: 0;
-        top: 0;
-        width: 100%;
       }
     }
   }
@@ -243,7 +215,6 @@
     }
   }
 
-  &--ghost:disabled,
   &--tertiary:disabled {
     border-color: transparent;
   }

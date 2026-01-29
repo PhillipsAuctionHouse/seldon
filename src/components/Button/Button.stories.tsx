@@ -112,7 +112,6 @@ export const AllVariantsGrid = () => {
   const variants = [
     { variant: ButtonVariants.primary, name: 'Primary' },
     { variant: ButtonVariants.secondary, name: 'Secondary' },
-    { variant: ButtonVariants.ghost, name: 'Ghost' },
     { variant: ButtonVariants.tertiary, name: 'Tertiary' },
   ];
 
