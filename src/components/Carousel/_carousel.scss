@@ -161,7 +161,7 @@
     width: 10px;
 
     &:focus-visible {
-      @include focus-ring(0, $focus-default, $radius-3xl, 0.5px);
+      @include focus-ring($border-radius: $radius-3xl, $outline-offset: 0, $outline-width: 0.5px);
 
       &-dot {
         &:hover {

@@ -9,7 +9,7 @@
   &:focus-visible {
     border: unset;
 
-    @include focus-ring(2px, $focus-default, $radius-xs);
+    @include focus-ring($border-radius: $radius-xs);
   }
 
   .#{$px}-tag {
@@ -89,7 +89,7 @@
     }
 
     &:focus-visible {
-      @include focus-ring(2px, $focus-default, $radius-3xl);
+      @include focus-ring($border-radius: $radius-3xl);
 
       padding: 0 $spacing-sm;
 

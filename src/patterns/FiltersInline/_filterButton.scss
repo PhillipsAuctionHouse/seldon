@@ -19,7 +19,7 @@
     border: 1px solid $black-100;
 
     &:focus-visible {
-      @include focus-ring(2px, $focus-default, $radius-3xl);
+      @include focus-ring($border-radius: $radius-3xl);
     }
   }
 

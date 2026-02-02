@@ -5,7 +5,7 @@
   text-decoration: none;
 
   &:focus-visible {
-    @include focus-ring(2px, $focus-default, $radius-xs);
+    @include focus-ring($border-radius: $radius-xs);
   }
 
   &--email.#{$px}-link--email,

@@ -66,7 +66,7 @@
   }
 
   &:focus-visible {
-    @include focus-ring(2px, $focus-default, $radius-3xl);
+    @include focus-ring($border-radius: $radius-3xl);
 
     svg {
       fill: $pure-white;
@@ -85,7 +85,7 @@
     }
 
     &:focus-visible {
-      @include focus-ring(2px, $focus-default, $radius-3xl);
+      @include focus-ring($border-radius: $radius-3xl);
     }
 
     &:hover {
@@ -121,7 +121,7 @@
     }
 
     &:focus-visible {
-      @include focus-ring(2px, $focus-default, $radius-3xl);
+      @include focus-ring($border-radius: $radius-3xl);
 
       background-color: $pure-white;
     }
@@ -202,7 +202,7 @@
     }
 
     &:focus-visible {
-      @include focus-ring(2px, $focus-default, $radius-3xl);
+      @include focus-ring($border-radius: $radius-3xl);
 
       background-color: $pure-white;
       padding: 0 4px;

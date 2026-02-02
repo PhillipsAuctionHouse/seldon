@@ -40,7 +40,7 @@ $lg: #{$px}-input--lg;
 
     &:focus-visible,
     &:focus-within {
-      @include focus-ring(2px, $focus-default, $radius-xs);
+      @include focus-ring($border-radius: $radius-xs);
     }
 
     .#{$px}-input__wrapper__input,
@@ -81,7 +81,7 @@ $lg: #{$px}-input--lg;
     }
 
     &:focus-visible {
-      @include focus-ring(2px, $focus-default, $radius-xs);
+      @include focus-ring($border-radius: $radius-xs);
     }
 
     &:hover {

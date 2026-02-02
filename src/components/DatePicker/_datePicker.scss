@@ -27,7 +27,7 @@
   }
 
   .flatpickr-day:focus {
-    @include focus-ring(2px, $focus-default, $radius-xs);
+    @include focus-ring($border-radius: $radius-xs);
   }
 
   .flatpickr-day.today {
