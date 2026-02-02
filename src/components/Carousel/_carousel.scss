@@ -161,9 +161,7 @@
     width: 10px;
 
     &:focus-visible {
-      @include focus-ring(0, $focus-default, $radius-3xl);
-
-      // TODO update util to accept outline px value
+      @include focus-ring(0, $focus-default, $radius-3xl, 0.5px);
 
       &-dot {
         &:hover {
