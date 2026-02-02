@@ -34,7 +34,7 @@
   }
 
   &:focus-visible {
-    outline: 1px solid $pure-black;
+    @include focus-ring;
   }
 
   &__label {
@@ -87,7 +87,8 @@
       box-shadow: inset 0 0 3px 3px $error-pink;
 
       &:focus-within {
-        outline: 1px solid $error-red;
+        outline: 2px solid $error-red;
+        outline-offset: 0;
       }
     }
   }

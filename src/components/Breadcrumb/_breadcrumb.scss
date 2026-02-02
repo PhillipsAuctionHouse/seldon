@@ -27,8 +27,7 @@
       }
 
       &:focus-visible {
-        border-radius: $radius-xs;
-        outline: 1px solid $medium-gray;
+        @include focus-ring(2px, $focus-default, $radius-xs);
       }
     }
 

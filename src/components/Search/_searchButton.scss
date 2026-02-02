@@ -30,6 +30,10 @@
     width: 1.5rem;
   }
 
+  &:focus-visible {
+    @include focus-ring(0, $focus-default, $radius-xs);
+  }
+
   &:hover,
   &:focus-visible,
   &:active {

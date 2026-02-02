@@ -4,6 +4,10 @@
   color: $pure-black;
   text-decoration: none;
 
+  &:focus-visible {
+    @include focus-ring(2px, $focus-default, $radius-xs);
+  }
+
   &--email.#{$px}-link--email,
   &--link.#{$px}-link--link,
   &--linkSmall,

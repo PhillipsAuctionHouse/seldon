@@ -239,3 +239,10 @@
     }
   }
 }
+
+@mixin focus-ring($outline-offset: 2px, $outline-color: $focus-default, $border-radius: 0) {
+  /* stylelint-disable-next-line */
+  border-radius: $border-radius;
+  outline: 2px solid $outline-color;
+  outline-offset: $outline-offset;
+}

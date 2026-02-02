@@ -12,16 +12,14 @@
   }
 
   &:focus-visible {
-    box-shadow: 0 0 0 0.5px $bg-border;
-    outline: none;
+    @include focus-ring;
   }
 
   &--selected {
     border: 1px solid $black-100;
 
     &:focus-visible {
-      box-shadow: 0 0 0 0.5px $black-100;
-      outline: none;
+      @include focus-ring;
     }
   }
 

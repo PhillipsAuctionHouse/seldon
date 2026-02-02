@@ -26,6 +26,10 @@
     color: $pure-white;
   }
 
+  .flatpickr-day:focus {
+    @include focus-ring;
+  }
+
   .flatpickr-day.today {
     border-color: transparent;
     font-variation-settings: 'wght' 700;

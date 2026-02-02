@@ -10,9 +10,12 @@
     display: flex;
     padding: $spacing-sm;
 
-    &--selected,
-    &:has(input:focus-visible) {
+    &--selected {
       border: 1.5px solid $pure-black;
+    }
+
+    &:has(input:focus-visible) {
+      @include focus-ring;
     }
   }
 

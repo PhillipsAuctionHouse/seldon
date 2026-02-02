@@ -34,9 +34,7 @@
       width: 100%;
 
       &:focus-visible {
-        border-color: $pure-black;
-        box-shadow: 0 0 0 2px rgba($pure-black, 0.08);
-        outline: none;
+        @include focus-ring;
       }
 
       &--error {

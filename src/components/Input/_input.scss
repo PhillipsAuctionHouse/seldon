@@ -40,7 +40,7 @@ $lg: #{$px}-input--lg;
 
     &:focus-visible,
     &:focus-within {
-      outline: 1px solid $pure-black;
+      @include focus-ring;
     }
 
     .#{$px}-input__wrapper__input,
@@ -81,7 +81,7 @@ $lg: #{$px}-input--lg;
     }
 
     &:focus-visible {
-      outline: 1px solid $pure-black;
+      @include focus-ring;
     }
 
     &:hover {
@@ -166,7 +166,7 @@ $lg: #{$px}-input--lg;
       box-shadow: inset 0 0 3px 3px $error-pink;
 
       &:focus-within {
-        outline: 1px solid $error-red;
+        outline: 2px solid $error-red;
       }
     }
 

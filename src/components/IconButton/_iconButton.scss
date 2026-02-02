@@ -19,13 +19,10 @@
   }
 
   &:focus-visible {
-    &:focus-visible {
-      outline: 0.5px solid $soft-black;
-      outline-offset: 0;
+    @include focus-ring;
 
-      svg {
-        fill: $pure-white;
-      }
+    svg {
+      fill: $pure-white;
     }
   }
 
@@ -78,6 +75,8 @@
   &--secondary,
   &--tertiary.#{$px}-icon-button {
     &:focus-visible {
+      @include focus-ring;
+
       border-radius: $radius-3xl;
     }
 
@@ -94,6 +93,8 @@
 
   &--tertiary {
     &:focus-visible {
+      @include focus-ring;
+
       border-radius: $radius-3xl;
     }
 
