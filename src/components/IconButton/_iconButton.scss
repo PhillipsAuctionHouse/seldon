@@ -19,7 +19,7 @@
   }
 
   &:focus-visible {
-    @include focus-ring;
+    @include focus-ring(2px, $focus-default, $radius-3xl);
 
     svg {
       fill: $pure-white;
@@ -75,7 +75,7 @@
   &--secondary,
   &--tertiary.#{$px}-icon-button {
     &:focus-visible {
-      @include focus-ring;
+      @include focus-ring(2px, $focus-default, $radius-3xl);
 
       border-radius: $radius-3xl;
     }
@@ -93,7 +93,7 @@
 
   &--tertiary {
     &:focus-visible {
-      @include focus-ring;
+      @include focus-ring(2px, $focus-default, $radius-3xl);
 
       border-radius: $radius-3xl;
     }

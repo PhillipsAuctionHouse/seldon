@@ -43,7 +43,7 @@
 
     &:focus-visible,
     &:focus {
-      @include focus-ring;
+      @include focus-ring(2px, $focus-default, $radius-xs);
     }
 
     &--invalid {
@@ -51,7 +51,7 @@
       box-shadow: inset 0 0 3px 3px $error-pink;
 
       &:focus {
-        @include focus-ring(2px, $error-red);
+        @include focus-ring(2px, $error-red, $radius-xs);
       }
 
       &:hover {

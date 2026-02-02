@@ -15,7 +15,7 @@
     }
 
     &:has(input:focus-visible) {
-      @include focus-ring;
+      @include focus-ring(2px, $focus-default, $radius-xs);
     }
   }
 

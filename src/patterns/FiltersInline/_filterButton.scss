@@ -12,14 +12,14 @@
   }
 
   &:focus-visible {
-    @include focus-ring;
+    @include focus-ring(2px, $focus-default, $radius-3xl);
   }
 
   &--selected {
     border: 1px solid $black-100;
 
     &:focus-visible {
-      @include focus-ring;
+      @include focus-ring(2px, $focus-default, $radius-3xl);
     }
   }
 
