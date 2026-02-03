@@ -9,42 +9,31 @@
   gap: $spacing-md;
 
   &__label-section {
-    flex: 0 1 160px;
+    flex: 1 0 160px;
+    max-width: 100%;
 
     &--label.#{$px}-text {
       font-variation-settings: 'wght' 600;
     }
 
     @media (max-width: $breakpoint-md) {
-      flex: 0 1 128px;
+      flex: 1 0 128px;
     }
 
     @media (max-width: $breakpoint-sm) {
-      flex: 0 1 96px;
+      flex: 1 0 96px;
     }
 
     &--has-sub-label {
-      flex: 0 1 240px;
+      flex: 1 0 240px;
 
       @media (max-width: $breakpoint-sm) {
-        flex: 0 1 120px;
+        flex: 1 0 120px;
       }
     }
 
     &--no-wrap {
-      width: unset;
-
-      @media (max-width: $breakpoint-lg) {
-        width: unset;
-      }
-
-      @media (max-width: $breakpoint-md) {
-        width: unset;
-      }
-
-      @media (max-width: $breakpoint-sm) {
-        width: unset;
-      }
+      flex: none;
     }
 
     span {
