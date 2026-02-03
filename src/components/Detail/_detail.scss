@@ -9,26 +9,25 @@
   gap: $spacing-md;
 
   &__label-section {
-    flex-shrink: 0;
-    width: 160px;
+    flex: 0 1 160px;
 
     &--label.#{$px}-text {
       font-variation-settings: 'wght' 600;
     }
 
     @media (max-width: $breakpoint-md) {
-      width: 128px;
+      flex: 0 1 128px;
     }
 
     @media (max-width: $breakpoint-sm) {
-      width: 96px;
+      flex: 0 1 96px;
     }
 
     &--has-sub-label {
-      width: 240px;
+      flex: 0 1 240px;
 
       @media (max-width: $breakpoint-sm) {
-        width: 120px;
+        flex: 0 1 120px;
       }
     }
 
@@ -58,6 +57,7 @@
   }
 
   &__value {
+    flex: 0 1 auto;
     font-variation-settings: 'wght' 400;
   }
 }
