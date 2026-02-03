@@ -77,7 +77,7 @@ export const ButtonAsLinkWithPrefetch = (props: ButtonProps) => (
 
 ButtonAsLinkWithPrefetch.args = {
   variant: ButtonVariants.tertiary,
-  size: 'md',
+  linkSize: 'md',
 };
 
 export const ButtonWithSkeleton = (props: ButtonProps) => (
@@ -216,11 +216,6 @@ AllVariantsGrid.parameters = {
     focus: ['.pseudo-focus'],
     focusVisible: ['.pseudo-focus'],
   },
-};
-
-ButtonAsLinkWithPrefetch.args = {
-  variant: ButtonVariants.tertiary,
-  size: 'md',
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
