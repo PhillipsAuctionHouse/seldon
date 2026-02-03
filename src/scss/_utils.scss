@@ -240,7 +240,7 @@
   }
 }
 
-@mixin focus-ring($border-radius: 0, $outline-offset: 2px, $outline-width: 2px, $outline-color: $focus-default) {
+@mixin focus-ring($border-radius: 0, $outline-offset: 4px, $outline-width: 2px, $outline-color: $focus-default) {
   @if $border-radius != 0 {
     /* stylelint-disable-next-line declaration-property-value-allowed-list */
     border-radius: $border-radius;

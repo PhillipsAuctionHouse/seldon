@@ -31,7 +31,7 @@
   }
 
   &:focus-visible {
-    @include focus-ring($border-radius: $radius-xs, $outline-offset: 0);
+    @include focus-ring($border-radius: $radius-xs);
   }
 
   &:hover,

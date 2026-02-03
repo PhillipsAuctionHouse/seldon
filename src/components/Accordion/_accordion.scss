@@ -119,7 +119,7 @@
   }
 
   &:focus-visible {
-    @include focus-ring($outline-offset: 0);
+    @include focus-ring;
   }
 
   &__text {
