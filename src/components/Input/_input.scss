@@ -166,7 +166,7 @@ $lg: #{$px}-input--lg;
       box-shadow: inset 0 0 3px 3px $error-pink;
 
       &:focus-within {
-        outline: 2px solid $error-red;
+        @include focus-ring($border-radius: $radius-xs, $outline-color: $error-red);
       }
     }
 
