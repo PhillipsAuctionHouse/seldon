@@ -146,7 +146,7 @@ const ObjectTile = memo(
             imageBlocked={imageBlocked}
           />
           {!withdrawnText ? (
-            <Text element="span" className={`${baseClassName}__badge`} variant={TextVariants.labelSmall}>
+            <Text element="span" className={`${baseClassName}__badge`} variant={TextVariants.badgeSmall}>
               {badgeText}
             </Text>
           ) : null}

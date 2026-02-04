@@ -19,6 +19,8 @@ $px: seldon;
   --font-size-link-large: 1rem; // 16px
   --font-size-link-medium: 0.875rem; // 14px
   --font-size-link-small: 0.75rem; // 12px
+  --font-size-badge-small: 0.75rem; // 12px
+  --font-size-badge-medium: 0.875rem; // 14px
 }
 
 @mixin font-size-vars--md {
@@ -42,6 +44,8 @@ $px: seldon;
   --font-size-link-large: 1.25rem; // 20px
   --font-size-link-medium: 1.125rem; // 18px
   --font-size-link-small: 1rem; // 16px
+  --font-size-badge-small: 1rem; // 16px
+  --font-size-badge-medium: 1.125rem; // 18px
 }
 
 $font-size-xs: var(--font-size-xs);
@@ -70,6 +74,8 @@ $font-size-link-stylised: var(--font-size-link-stylised);
 $font-size-link-large: var(--font-size-link-large);
 $font-size-link-medium: var(--font-size-link-medium);
 $font-size-link-small: var(--font-size-link-small);
+$font-size-badge-small: var(--font-size-badge-small);
+$font-size-badge-medium: var(--font-size-badge-medium);
 
 ////////////////////////
 /// COlORS:
@@ -257,11 +263,13 @@ $linkStylised: 'linkStylised';
 $linkLarge: 'linkLarge';
 $linkMedium: 'linkMedium';
 $linkSmall: 'linkSmall';
+$badgeSmall: 'badgeSmall';
+$badgeMedium: 'badgeMedium';
 $text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $heading2, $heading3, $heading4, $heading5,
   $title1, $title2, $title3, $title4, $body1, $body2, $body3, $string1, $string2, $string3, $snwFlyoutLink,
   $snwHeaderLink, $snwHeadingHero1, $snwHeadingHero2, $displayMedium, $displaySmall, $headingLarge, $headingMedium,
   $headingSmall, $headingExtraSmall, $bodyLarge, $bodyMedium, $bodySmall, $labelLarge, $labelMedium, $labelSmall,
-  $linkStylised, $linkLarge, $linkMedium, $linkSmall;
+  $linkStylised, $linkLarge, $linkMedium, $linkSmall, $badgeSmall, $badgeMedium;
 
 ////////////////////////
 /// Breakpoint TOKENS to be used for min-width comparisons, make sure they match BREAKPOINTS in constants.ts
