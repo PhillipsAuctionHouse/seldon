@@ -98,18 +98,28 @@
 
 .#{$px}-accordion-item-label {
   align-items: center;
+
+  // Reset button styles to match div appearance
+  background: none;
+  border: none;
   display: flex;
   flex-direction: row;
+  font: inherit;
   justify-content: space-between;
   padding: $spacing-sm 0;
+  text-align: inherit;
+  width: 100%;
 
   &--hoverable {
     cursor: pointer;
 
-    &:hover,
-    &:focus-visible {
+    &:hover {
       opacity: 0.75;
     }
+  }
+
+  &:focus-visible {
+    @include focus-ring;
   }
 
   &__text {

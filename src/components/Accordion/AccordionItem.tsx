@@ -127,14 +127,14 @@ const AccordionHeader = ({
       ref={itemRef}
       onClick={handleOnToggle}
     >
-      <div data-testid={`${id}-trigger`}>
+      <button type="button" data-testid={`${id}-trigger`}>
         <Text className={`${px}-accordion-item-label__text`} variant={labelVariant}>
           {children}
         </Text>
         {showLock && lockIconComponent}
         {!showLock && plusIconComponent}
         {!showLock && minusIconComponent}
-      </div>
+      </button>
     </Accordion.Trigger>
   );
 };
