@@ -1,3 +1,10 @@
+# [1.234.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.233.0...v1.234.0) (2026-02-09)
+
+
+### Features
+
+* **typeTokens:** L3-10719 Create a small and medium semantic text token for badges ([#795](https://github.com/PhillipsAuctionHouse/seldon/issues/795)) ([3df1cc4](https://github.com/PhillipsAuctionHouse/seldon/commit/3df1cc46c841e7df4422837bb7217dcdd4818842))
+
 # [1.233.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.232.1...v1.233.0) (2026-02-09)
 
 
