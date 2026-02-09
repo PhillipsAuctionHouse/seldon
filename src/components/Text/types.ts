@@ -67,6 +67,8 @@ export enum TextVariants {
   linkLarge = 'linkLarge',
   linkMedium = 'linkMedium',
   linkSmall = 'linkSmall',
+  badgeSmall = 'badgeSmall',
+  badgeMedium = 'badgeMedium',
 }
 
 export enum TextAlignments {
