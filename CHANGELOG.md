@@ -1,3 +1,11 @@
+## [1.234.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.234.0...v1.234.1) (2026-02-09)
+
+
+### Bug Fixes
+
+* **publish:** L3-0000 continuing setting up OIDC trusted publishing ([#801](https://github.com/PhillipsAuctionHouse/seldon/issues/801)) ([d82f9ad](https://github.com/PhillipsAuctionHouse/seldon/commit/d82f9ad0c37946577d4788ac6df47222be6fcfe1))
+* **release:** L3-0000 update trusted publishing ([#800](https://github.com/PhillipsAuctionHouse/seldon/issues/800)) ([fa7e092](https://github.com/PhillipsAuctionHouse/seldon/commit/fa7e092e62fb56f8c6937e1241f075a4ed95ff76))
+
 # [1.234.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.233.0...v1.234.0) (2026-02-09)
 
 
