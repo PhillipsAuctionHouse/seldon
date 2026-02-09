@@ -1,3 +1,10 @@
+# [1.233.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.232.1...v1.233.0) (2026-02-09)
+
+
+### Features
+
+* **_detail:** L3-11615 removed hardcoded values ([#797](https://github.com/PhillipsAuctionHouse/seldon/issues/797)) ([77467f0](https://github.com/PhillipsAuctionHouse/seldon/commit/77467f089880d49e9e643a8340ac02a307005d87))
+
 ## [1.232.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.232.0...v1.232.1) (2026-01-12)
 
 
