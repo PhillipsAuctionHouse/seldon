@@ -1,3 +1,10 @@
+# [1.235.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.234.1...v1.235.0) (2026-02-10)
+
+
+### Features
+
+* **comboBox:** L3-11215 RW |  Close button in birth year field disappears when hovering mouse pointer ([#791](https://github.com/PhillipsAuctionHouse/seldon/issues/791)) ([95fadb5](https://github.com/PhillipsAuctionHouse/seldon/commit/95fadb5d1476154c818be222ecedf32fa952fa5d))
+
 ## [1.234.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.234.0...v1.234.1) (2026-02-09)
 
 
