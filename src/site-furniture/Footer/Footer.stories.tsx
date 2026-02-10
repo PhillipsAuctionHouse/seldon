@@ -7,6 +7,7 @@ import Social from '../../patterns/Social/Social';
 import { Accordion, AccordionItem } from '../../components/Accordion';
 import { Text, TextVariants } from '../../components/Text';
 import { Icon } from '../../components/Icon';
+import { Link, LinkVariants } from '../../components/Link';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -20,15 +21,15 @@ export const Playground = (props: FooterProps) => (
   <Footer {...props}>
     {/* desktop version of footer */}
     <div className={`${px}-footer-desktop`}>
-      <Text variant={TextVariants.heading4}>About Us</Text>
+      <Text variant={TextVariants.headingSmall}>About us</Text>
       {aboutUsLinks}
     </div>
     <div className={`${px}-footer-desktop`}>
-      <Text variant={TextVariants.heading4}>Our Services</Text>
+      <Text variant={TextVariants.headingSmall}>Our services</Text>
       {ourServicesLinks}
     </div>
     <div className={`${px}-footer-desktop`}>
-      <Text variant={TextVariants.heading4}>Policies</Text>
+      <Text variant={TextVariants.headingSmall}>Policies</Text>
       {policyLinks}
     </div>
 
@@ -94,22 +95,34 @@ export const Playground = (props: FooterProps) => (
 const aboutUsLinks = (
   <ul>
     <li>
-      <a href="/">Our History</a>
+      <Link variant={LinkVariants.linkSmall} href="/">
+        Our history
+      </Link>
     </li>
     <li>
-      <a href="/">Our Team</a>
+      <Link variant={LinkVariants.linkSmall} href="/">
+        Our team
+      </Link>
     </li>
     <li>
-      <a href="/">Locations</a>
+      <Link variant={LinkVariants.linkSmall} href="/">
+        Locations
+      </Link>
     </li>
     <li>
-      <a href="/">Press</a>
+      <Link variant={LinkVariants.linkSmall} href="/">
+        Press
+      </Link>
     </li>
     <li>
-      <a href="/">Careers</a>
+      <Link variant={LinkVariants.linkSmall} href="/">
+        Careers
+      </Link>
     </li>
     <li>
-      <a href="/">Site map</a>
+      <Link variant={LinkVariants.linkSmall} href="/">
+        Site map
+      </Link>
     </li>
   </ul>
 );
@@ -117,19 +130,29 @@ const aboutUsLinks = (
 const ourServicesLinks = (
   <ul>
     <li>
-      <a href="/">How to Buy</a>
+      <Link variant={LinkVariants.linkSmall} href="/">
+        How to buy
+      </Link>
     </li>
     <li>
-      <a href="/">How to Sell</a>
+      <Link variant={LinkVariants.linkSmall} href="/">
+        How to sell
+      </Link>
     </li>
     <li>
-      <a href="/">Private Services</a>
+      <Link variant={LinkVariants.linkSmall} href="/">
+        Private services
+      </Link>
     </li>
     <li>
-      <a href="/">Trusts, Estates & Valuations</a>
+      <Link variant={LinkVariants.linkSmall} href="/">
+        Trusts, estates & valuations
+      </Link>
     </li>
     <li>
-      <a href="/">Fiduciary Services</a>
+      <Link variant={LinkVariants.linkSmall} href="/">
+        Fiduciary services
+      </Link>
     </li>
   </ul>
 );
@@ -137,13 +160,19 @@ const ourServicesLinks = (
 const policyLinks = (
   <ul>
     <li>
-      <a href="/">Privacy Policy</a>
+      <Link variant={LinkVariants.linkSmall} href="/">
+        Privacy policy
+      </Link>
     </li>
     <li>
-      <a href="/">Cookie Policy</a>
+      <Link variant={LinkVariants.linkSmall} href="/">
+        Cookie policy
+      </Link>
     </li>
     <li>
-      <a href="/">Modern Day Slavery Policy</a>
+      <Link variant={LinkVariants.linkSmall} href="/">
+        Modern day slavery policy
+      </Link>
     </li>
   </ul>
 );

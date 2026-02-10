@@ -1,36 +1,50 @@
 @use '#scss/allPartials' as *;
 
+$breakpoint-mobile-small: 450px;
+
 .#{$px}-composed-modal {
-  border-radius: 1rem;
+  border-radius: $radius-md;
   max-width: 95vw;
   min-width: 0;
-  padding: $spacing-sm 0;
+  padding: $spacing-lg 0 $spacing-sm 0;
   width: 95vw;
-
-  &__title {
-    margin-top: $spacing-md;
-    padding: 0 $spacing-md;
+  &:not(:has(.#{$px}-composed-modal__btns-group)) {
+    padding-bottom: $spacing-lg;
   }
 
   &__body {
+    margin: 0 $spacing-lg $spacing-md;
     max-height: var('--max-modal-body-height');
     overflow-y: auto;
   }
 
-  &__divider {
+  .#{$px}-divider {
     margin: 0;
+
+    hr {
+      margin: 0;
+    }
   }
 
   &__btns-group {
     display: flex;
     gap: $spacing-sm;
     justify-content: center;
-    padding: $spacing-sm $spacing-md;
+    margin: 0 $spacing-lg;
+    padding: $spacing-sm 0 0;
+
+    @media (max-width: $breakpoint-mobile-small) {
+      flex-direction: column;
+    }
   }
 
   &__btns-group > * {
     flex: 1 1 50%;
-    max-width: 50%;
+    margin: $spacing-xsm 0 0;
+
+    @media (max-width: $breakpoint-mobile-small) {
+      flex: 1 1 auto;
+    }
   }
 
   &__btns {

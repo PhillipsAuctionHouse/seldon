@@ -9,7 +9,6 @@
   display: flex;
   height: $search-size;
   justify-content: center;
-  margin: 0;
   padding: 0;
   position: absolute;
   right: 0;
@@ -35,7 +34,7 @@
   &:focus-visible,
   &:active {
     &::after {
-      border-bottom: 1px solid #000;
+      border-bottom: 1px solid $black-100;
       bottom: 0;
       content: '';
       display: flex;

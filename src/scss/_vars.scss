@@ -1,65 +1,204 @@
 // prefix
 $px: seldon;
 
+// TODO: make design team to follow something like https://tailwindcss.com/docs/font-size
+@mixin font-size-vars--sm {
+  --font-size-display-medium: 2.5rem; // 40px
+  --font-size-display-small: 2rem; // 32px
+  --font-size-heading-large: 1.5rem; // 24px
+  --font-size-heading-medium: 1.25rem; // 20px
+  --font-size-heading-small: 1rem; // 16px
+  --font-size-heading-extra-small: 0.75rem; // 12px
+  --font-size-body-large: 1rem; // 16px
+  --font-size-body-medium: 0.875rem; // 14px
+  --font-size-body-small: 0.75rem; // 12px
+  --font-size-label-large: 1rem; // 16px
+  --font-size-label-medium: 0.875rem; // 14px
+  --font-size-label-small: 0.75rem; // 12px
+  --font-size-link-stylised: 1rem; // 16px
+  --font-size-link-large: 1rem; // 16px
+  --font-size-link-medium: 0.875rem; // 14px
+  --font-size-link-small: 0.75rem; // 12px
+  --font-size-badge-small: 0.75rem; // 12px
+  --font-size-badge-medium: 0.875rem; // 14px
+}
+
+@mixin font-size-vars--md {
+  @include font-size-vars--sm;
+}
+
+@mixin font-size-vars--lg {
+  --font-size-display-medium: 3rem; // 48px
+  --font-size-display-small: 2.5rem; // 40px
+  --font-size-heading-large: 1.75rem; // 28px
+  --font-size-heading-medium: 1.5rem; // 24px
+  --font-size-heading-small: 1.25rem; // 20px
+  --font-size-heading-extra-small: 1rem; // 16px
+  --font-size-body-large: 1.25rem; // 20px
+  --font-size-body-medium: 1.125rem; // 18px
+  --font-size-body-small: 1rem; // 16px
+  --font-size-label-large: 1.25rem; // 20px
+  --font-size-label-medium: 1.125rem; // 18px
+  --font-size-label-small: 1rem; // 16px
+  --font-size-link-stylised: 1.25rem; // 20px
+  --font-size-link-large: 1.25rem; // 20px
+  --font-size-link-medium: 1.125rem; // 18px
+  --font-size-link-small: 1rem; // 16px
+  --font-size-badge-small: 1rem; // 16px
+  --font-size-badge-medium: 1.125rem; // 18px
+}
+
+$font-size-xs: var(--font-size-xs);
+$font-size-s: var(--font-size-s);
+$font-size-m: var(--font-size-m);
+$font-size-l: var(--font-size-l);
+$font-size-xl: var(--font-size-xl);
+$font-size-2xl: var(--font-size-2xl);
+$font-size-3xl: var(--font-size-3xl);
+$font-size-4xl: var(--font-size-4xl);
+
+////////////////////////
+$font-size-display-medium: var(--font-size-display-medium);
+$font-size-display-small: var(--font-size-display-small);
+$font-size-heading-large: var(--font-size-heading-large);
+$font-size-heading-medium: var(--font-size-heading-medium);
+$font-size-heading-small: var(--font-size-heading-small);
+$font-size-heading-extra-small: var(--font-size-heading-extra-small);
+$font-size-body-large: var(--font-size-body-large);
+$font-size-body-medium: var(--font-size-body-medium);
+$font-size-body-small: var(--font-size-body-small);
+$font-size-label-large: var(--font-size-label-large);
+$font-size-label-medium: var(--font-size-label-medium);
+$font-size-label-small: var(--font-size-label-small);
+$font-size-link-stylised: var(--font-size-link-stylised);
+$font-size-link-large: var(--font-size-link-large);
+$font-size-link-medium: var(--font-size-link-medium);
+$font-size-link-small: var(--font-size-link-small);
+$font-size-badge-small: var(--font-size-badge-small);
+$font-size-badge-medium: var(--font-size-badge-medium);
+
 ////////////////////////
 /// COlORS:
 ///////////////////////
 
-// Primary color palette
-$pure-black: #000;
-$primary-black: #323232;
-$white: #fff;
+// Primary
 
-// Secondary color palette
-$soft-black: #545454;
-$dark-gray: #7b7474;
-$soft-black-2: #535050;
+// White
+$white-100: #fff;
+$white-75: rgba(255, 255, 255, 75%);
+$white-50: rgba(255, 255, 255, 50%);
+$white-25: rgba(255, 255, 255, 25%);
 
-// Utilititarian color palette
-$keyline-gray: #949494;
-$medium-gray: #c3bebb;
-$soft-gray: #fafafa;
-$pale-gray: #f4f4f4;
-$light-gray: #eceae7;
-$off-white: #f4f2f1;
+// Black
+$black-100: #000;
+$black-75: rgba(0, 0, 0, 75%);
+$black-50: rgba(0, 0, 0, 50%);
+$black-25: rgba(0, 0, 0, 25%);
 
-// Notification color palette
-$error-red: #f00;
-$error-pink: rgba(255, 229, 229, 90%);
-$warn-yellow: #d6d141;
-$post-sale-pink: #ff0086;
-$cta-blue: #4a90e2;
-$badge-blue: #0065fc;
+// Secondary
 
-// AM color palette
-$widget-blue: #4a90e2;
-$widget-green: #6a9c53;
-$widget-maroon: #6b0000;
-$widget-red: #b00000;
-$clock-widget-blue: $widget-blue;
-$clock-widget-green: $widget-green;
-$clock-widget-maroon: $widget-maroon;
-$clock-widget-red: $widget-red;
+// Highlight
+$highlight-yellow: #fff90a;
+$highlight-green: #46ea77;
+$highlight-blue: #0065fc;
+$highlight-red: #ff3d0a;
+$highlight-purple: #6f4eea;
 
-// Articker color palette
-$articker-red: #fc1e2b;
-$articker-orange: #ff8201;
-$articker-red-orange-gradient: linear-gradient(90deg, #fc1e2b, #ff8201);
-$overlay-black: rgba(0, 0, 0, 80%);
+// Functional
 
-// Legacy mapping
-$pure-white: $white;
-$post-sale-magenta: $post-sale-pink;
+// Greys
+$grey-100: #545454;
+$grey-75: #75716f;
+$grey-50: #eae9e6;
+$grey-25: #f9f8f7;
 
-// Text variables
-$header-color: $pure-black;
-$text-color: $soft-black;
+// Semantic
 
-// Interactive Colors
-$button-hover: #75716f;
+// Text
+$text-default: #000;
+$text-inverted: #fff;
+$text-inactive: #75716f;
+$text-supporting: #545454;
 
-// Misc. Colors
-$countdown-compact: #b40919;
+// CTAs
+$cta-default: #000;
+$cta-disabled: #eae9e6;
+$cta-hover: #75716f;
+$cta-inactive: #75716f;
+$cta-focus: #545454;
+
+// Background
+$bg-default: #fff;
+$bg-soft: #f9f8f7;
+$bg-border: #eae9e6;
+$bg-inverted: #000;
+$bg-overlay: rgba(0, 0, 0, 50%);
+
+// Status
+$success-default: #00cc39;
+$warning-default: #ea0404;
+$reserve-bid: #b00000;
+$status-info: #0065fc;
+$focus-default: #07c;
+
+// admin colors
+$admin-alert: #f24a4a;
+$admin-success: #10bc94;
+
+// LEGACY MAPPING (updated to new tokens):
+// --- Legacy Primary color palette ---
+$pure-black: $black-100;
+$primary-black: $black-75;
+$white: $white-100;
+
+// --- Legacy Utilitarian color palette ---
+$soft-black: $grey-100;
+$dark-gray: $grey-75;
+$soft-black-2: $grey-100;
+$keyline-gray: $grey-75;
+$medium-gray: $grey-50;
+$soft-gray: $grey-25;
+$pale-gray: $grey-25;
+$light-gray: $grey-50;
+$off-white: $grey-25;
+
+// --- Legacy Notification color palette ---
+$error-red: $highlight-red;
+$error-pink: $highlight-red;
+$warn-yellow: $highlight-yellow;
+$post-sale-pink: $highlight-purple;
+$cta-blue: $highlight-blue;
+$badge-blue: $highlight-blue;
+
+// --- Legacy AM color palette ---
+$widget-blue: $highlight-blue;
+$widget-green: $highlight-green;
+$widget-maroon: $highlight-red;
+$widget-red: $reserve-bid;
+$clock-widget-blue: $highlight-blue;
+$clock-widget-green: $highlight-green;
+$clock-widget-maroon: $highlight-red;
+$clock-widget-red: $highlight-red;
+
+// --- Legacy Articker color palette ---
+$articker-red: $highlight-red;
+$articker-orange: $highlight-yellow;
+$articker-red-orange-gradient: linear-gradient(90deg, $highlight-red, $highlight-yellow);
+$overlay-black: $black-75;
+
+// --- Legacy legacy mapping ---
+$pure-white: $white-100;
+$post-sale-magenta: $highlight-purple;
+
+// --- Legacy Text variables ---
+$header-color: $black-100;
+$text-color: $grey-100;
+
+// --- Legacy Interactive Colors ---
+$button-hover: $grey-75;
+
+// --- Legacy Misc. Colors ---
+$countdown-compact: $highlight-red;
 
 ////////////////////////
 /// FONTS:
@@ -106,9 +245,31 @@ $snwHeaderLink: 'snwHeaderLink';
 $snwFlyoutLink: 'snwFlyoutLink';
 $snwHeadingHero1: 'snwHeadingHero1';
 $snwHeadingHero2: 'snwHeadingHero2';
+
+// New Typography Variables
+$displayMedium: 'displayMedium';
+$displaySmall: 'displaySmall';
+$headingLarge: 'headingLarge';
+$headingMedium: 'headingMedium';
+$headingSmall: 'headingSmall';
+$headingExtraSmall: 'headingExtraSmall';
+$bodyLarge: 'bodyLarge';
+$bodyMedium: 'bodyMedium';
+$bodySmall: 'bodySmall';
+$labelLarge: 'labelLarge';
+$labelMedium: 'labelMedium';
+$labelSmall: 'labelSmall';
+$linkStylised: 'linkStylised';
+$linkLarge: 'linkLarge';
+$linkMedium: 'linkMedium';
+$linkSmall: 'linkSmall';
+$badgeSmall: 'badgeSmall';
+$badgeMedium: 'badgeMedium';
 $text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $heading2, $heading3, $heading4, $heading5,
   $title1, $title2, $title3, $title4, $body1, $body2, $body3, $string1, $string2, $string3, $snwFlyoutLink,
-  $snwHeaderLink, $snwHeadingHero1, $snwHeadingHero2;
+  $snwHeaderLink, $snwHeadingHero1, $snwHeadingHero2, $displayMedium, $displaySmall, $headingLarge, $headingMedium,
+  $headingSmall, $headingExtraSmall, $bodyLarge, $bodyMedium, $bodySmall, $labelLarge, $labelMedium, $labelSmall,
+  $linkStylised, $linkLarge, $linkMedium, $linkSmall, $badgeSmall, $badgeMedium;
 
 ////////////////////////
 /// Breakpoint TOKENS to be used for min-width comparisons, make sure they match BREAKPOINTS in constants.ts
@@ -118,145 +279,14 @@ $breakpoint-md: 961px;
 $breakpoint-lg: 1401px;
 $breakpoint-xl: 1801px;
 
+// Temporary token for mobile breakpoint added to support [L3-7681](https://phillipsauctions.atlassian.net/browse/L3-7681)
+$breakpoint-snw-mobile: 768px;
+
 ////////////////////////
 /// FONT SIZE TOKENS:
 ///////////////////////
 // @TODO: These tokens need to be aligned with the new values from the design system https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/EASEL-Compendium%3A-Tokens%2C-Components-%26-Patterns?node-id=7263-1361&node-type=canvas&m=dev
 // Once we update ObjectTile and other components will need to be updated to match the new token.
-:root {
-  --desktop-max-width: 120rem;
-  --quote-size: 1.5rem;
-  --quote-line-height: 2rem;
-  --heading-size1: 1.5rem;
-  --heading-line-height-size1: 1.75rem;
-  --heading-size2: 1.5rem;
-  --heading-line-height-size2: 1.75rem;
-  --heading-size3: 1.25rem;
-  --heading-line-height-size3: 1.5rem;
-  --heading-size4: 1rem;
-  --heading-line-height-size4: 1.25rem;
-  --heading-size5: 0.75rem;
-  --heading-line-height-size5: 1rem;
-  --string-size1: 1rem;
-  --string-line-height-size1: 1.25rem;
-  --string-size2: 0.75rem;
-  --string-line-height-size2: 1rem;
-  --string-size3: 0.5rem;
-  --string-line-height-size3: 0.75rem;
-  --body-size1: 1rem;
-  --body-line-height-size1: 1.5rem;
-  --body-size2: 0.75rem;
-  --body-line-height-size2: 1.25rem;
-  --body-size3: 0.5rem;
-  --body-line-height-size3: 1rem;
-  --label-size1: 1rem;
-  --label-size2: 0.75rem;
-  --label-size3: 0.56rem;
-  --label-size4: 0.56rem;
-  --link-label-size: 0.75rem;
-  --link-label-line-height: 0.75rem;
-  --button-label-size: 0.75rem;
-  --button-label-line-height: 1rem;
-  --button-tertiary-height: 1.75rem;
-  --badge-label-size: 0.5rem;
-  --badge-label-line-height: 0.67rem;
-  --snw-header-link-size: 1rem;
-  --snw-header-link-line-height: 1.5rem;
-  --snw-flyout-link-size: 1rem;
-  --snw-flyout-link-line-height: 1.75rem;
-  --snw-heading-hero-size1: 2rem;
-  --snw-heading-hero-line-height-size1: 2.375rem;
-  --snw-heading-hero-size2: 1.625rem;
-  --snw-heading-hero-line-height-size2: 1.9375rem;
-
-  @media (min-width: $breakpoint-md) {
-    --quote-size: 1.75rem;
-    --quote-line-height: 2.25rem;
-    --heading-size1: 1.75rem;
-    --heading-line-height-size1: 2rem;
-    --heading-size2: 1.75rem;
-    --heading-line-height-size2: 2rem;
-    --heading-size3: 1.5rem;
-    --heading-line-height-size3: 1.75rem;
-    --heading-size4: 1.25rem;
-    --heading-line-height-size4: 1.5rem;
-    --heading-size5: 1rem;
-    --heading-line-height-size5: 1.25rem;
-    --string-size1: 1.25rem;
-    --string-line-height-size1: 1.5rem;
-    --string-size2: 1rem;
-    --string-line-height-size2: 1.25rem;
-    --string-size3: 0.75rem;
-    --string-line-height-size3: 1rem;
-    --body-size1: 1.25rem;
-    --body-line-height-size1: 1.75rem;
-    --body-size2: 1rem;
-    --body-line-height-size2: 1.5rem;
-    --body-size3: 0.75rem;
-    --body-line-height-size3: 1.25rem;
-    --label-size1: 1.25rem;
-    --label-size2: 1rem;
-    --label-size3: 0.75rem;
-    --label-size4: 0.75rem;
-    --link-label-size: 1rem;
-    --link-label-line-height: 1rem;
-    --button-label-size: 1rem;
-    --button-label-line-height: 1.25rem;
-    --badge-label-size: 0.75rem;
-    --badge-label-line-height: 1rem;
-    --snw-header-link-size: 1rem;
-    --snw-header-link-line-height: 1.5rem;
-    --snw-flyout-link-size: 0.875rem;
-    --snw-flyout-link-line-height: 1.75rem;
-    --snw-heading-hero-size1: 2.375rem;
-    --snw-heading-hero-line-height-size1: 2.875rem;
-  }
-
-  @media (min-width: $breakpoint-lg) {
-    --snw-flyout-link-size: 0.875rem;
-    --snw-flyout-link-line-height: 1.75rem;
-  }
-
-  @media (min-width: $breakpoint-xl) {
-    --quote-size: 2rem;
-    --quote-line-height: 2.5rem;
-    --heading-size1: 2rem;
-    --heading-line-height-size1: 2.25rem;
-    --heading-size2: 2rem;
-    --heading-line-height-size2: 2.25rem;
-    --heading-size3: 1.75rem;
-    --heading-line-height-size3: 2rem;
-    --heading-size4: 1.5rem;
-    --heading-line-height-size4: 1.75rem;
-    --heading-size5: 1.25rem;
-    --heading-line-height-size5: 1.5rem;
-    --string-size1: 1.5rem;
-    --string-line-height-size1: 1.75rem;
-    --string-size2: 1.25rem;
-    --string-line-height-size2: 1.5rem;
-    --string-size3: 1rem;
-    --string-line-height-size3: 1.25rem;
-    --body-size1: 1.5rem;
-    --body-line-height-size1: 2rem;
-    --body-size2: 1.25rem;
-    --body-line-height-size2: 1.75rem;
-    --body-size3: 1rem;
-    --body-line-height-size3: 1.5rem;
-    --label-size1: 1.56rem;
-    --label-size2: 1.25rem;
-    --label-size3: 1rem;
-    --link-label-size: 1.25rem;
-    --link-label-line-height: 1.25rem;
-    --button-label-size: 1.25rem;
-    --button-label-line-height: 1.5rem;
-    --badge-label-size: 1rem;
-    --badge-label-line-height: 1.5rem;
-    --snw-header-link-size: 1.125rem;
-    --snw-header-link-line-height: 1.75rem;
-    --snw-flyout-link-size: 1.125rem;
-    --snw-flyout-link-line-height: 2.125rem;
-  }
-}
 
 // TITLE
 $title-size1: var(--heading-size1);
@@ -293,7 +323,7 @@ $string-size3: var(--string-size3);
 $string-line-height-size3: var(--string-line-height-size3);
 
 // LABELS
-$email-label-size: var(--label-size2);
+$email-label-size: var(--font-size-link-medium);
 $text-label-size: var(--label-size3);
 $badge-label-size: var(--label-size3);
 $link-label-size: var(--link-label-size);
@@ -318,44 +348,6 @@ $snw-heading-hero-line-height2: var(--snw-heading-hero-line-height-size2);
 
 // SNOWFLAKES
 $snowflake-menu-padding: 1.25rem;
-
-/* stylelint-disable-next-line no-duplicate-selectors */
-:root {
-  --snw-button-padding: 0.8125rem;
-  --spacing-micro: 0.25rem;
-  --spacing-xsm: 0.5rem;
-  --spacing-sm: 0.75rem;
-  --spacing-md: 1.75rem;
-  --spacing-lg: 2.75rem;
-  --spacing-xl: 3.75rem;
-  --spacing-xxl: 4.75rem;
-  --spacing-xxxl: 5.75rem;
-
-  @media (min-width: $breakpoint-md) {
-    --snw-button-padding: 0.8125rem;
-    --spacing-micro: 0.25rem;
-    --spacing-xsm: 0.5rem;
-    --spacing-sm: 1rem;
-    --spacing-md: 2rem;
-    --spacing-lg: 3rem;
-    --spacing-xl: 4rem;
-    --spacing-xxl: 5rem;
-    --spacing-xxxl: 6rem;
-  }
-
-  @media (min-width: $breakpoint-xl) {
-    --snw-button-padding: 0.813rem;
-    --spacing-micro: 0.5rem;
-    --spacing-xsm: 0.75rem;
-    --spacing-sm: 1.25rem;
-    --spacing-md: 2.25rem;
-    --spacing-lg: 3.25rem;
-    --spacing-xl: 4.25rem;
-    --spacing-xxl: 5.25rem;
-    --spacing-xxxl: 6.25rem;
-  }
-}
-
 $spacing-micro: var(--spacing-micro);
 $spacing-xsm: var(--spacing-xsm);
 $spacing-sm: var(--spacing-sm);
@@ -387,24 +379,6 @@ $margin-xl: var(--spacing-xl);
 $margin-xxl: var(--spacing-xxl);
 
 ////////////////////////
-/// HEADER TOKENS:
-///////////////////////
-/* stylelint-disable-next-line no-duplicate-selectors */
-:root {
-  --header-height: 56px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
-  --search-size: 2.625rem; // This should be calculated from the scaling text and scaling spacing tokens instead of hardcoding in case they change
-
-  @media (min-width: $breakpoint-md) {
-    --header-height: 123px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
-  }
-
-  @media (min-width: $breakpoint-xl) {
-    --header-height: 135px; // ideally we would calculate the size from the current text size plus spacing components so that it scales with the text size and spacing
-    --search-size: 2.875rem; // This should be calculated from the scaling text and scaling spacing tokens instead of hardcoding in case they change
-  }
-}
-
-////////////////////////
 /// max-site-width TOKEN:
 ///////////////////////
 $max-site-width: 1560px;
@@ -414,6 +388,7 @@ $desktop-max-width: var(--desktop-max-width);
 /// z-index TOKENS:
 ///////////////////////
 $modal-z-index: 30;
+$notification-banner-z-index: 10;
 
 ////////////////////////
 /// Our tokens usually support at least 4 sizes.
@@ -423,6 +398,7 @@ $size-md: 'md';
 $size-lg: 'lg';
 $size-xl: 'xl';
 $size-xxl: 'xxl';
+$size-snw-mobile: 'snw-mobile';
 $default-transition: 150ms cubic-bezier(0.16, 1, 0.3, 1);
 $drawer-content-transition: 350ms cubic-bezier(0, 0, 0.2, 1);
 $default-overlay-transition: 350ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -437,3 +413,19 @@ $mobile-minimum-clickable-area: 44px;
 ///
 $search-size: var(--search-size);
 $header-height: var(--header-height);
+
+/// Drawer min height Token
+/// Used to ensure the drawer button area is always at least the minimum height
+/// This is calculated as the (button label height) + (Drawer panel padding) + (Button's internal padding)
+$drawer-button-area-min-height: calc($button-label-line-height + $spacing-md * 2 + $spacing-sm * 2);
+
+////////////////////////
+/// RADIUS:
+///////////////////////
+$radius-xs: 4px;
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-xl: 20px;
+$radius-2xl: 24px;
+$radius-3xl: 40px;

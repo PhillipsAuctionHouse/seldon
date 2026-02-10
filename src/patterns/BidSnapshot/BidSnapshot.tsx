@@ -1,17 +1,17 @@
-import { ComponentProps, forwardRef } from 'react';
+import { ComponentProps, cloneElement, forwardRef, isValidElement } from 'react';
 import classnames from 'classnames';
-
 import { findChildrenExcludingTypes, findChildrenOfType, getCommonProps } from '../../utils';
-import { DetailList } from '../DetailList/index';
-import { Detail } from '../../components/Detail/index';
+import { DetailList, DetailListProps } from '../DetailList/index';
+import { Detail, DetailVariants } from '../../components/Detail/index';
 import { LotStatus, SupportedLanguages } from '../../types/commonTypes';
 import { Countdown } from '../../components/Countdown/index';
 import { CountdownVariants } from '../../components/Countdown/types';
 import { BidStatusEnum } from './types';
 import BidMessage from './BidMessage';
 import { differenceInMinutes, isAfter } from 'date-fns';
+import { TextVariants } from '../../components/Text';
 
-export interface BidSnapshotProps extends ComponentProps<'div'> {
+export interface BidSnapshotProps extends ComponentProps<'div'>, Pick<DetailListProps, 'hasSeparators'> {
   /**
    * The user's current bid state, winning or losing, etc.
    */
@@ -20,6 +20,10 @@ export interface BidSnapshotProps extends ComponentProps<'div'> {
    * State of the object
    */
   lotStatus?: LotStatus;
+  /**
+   * Variant of the bid snapshot - 'sm' uses labelSmall for text
+   */
+  variant?: DetailVariants;
   /**
    * Bids label text, a fucntion for label of bids amoutn (2 bids, 3 bids, etc) where the number is the length of the bids array.
    */
@@ -69,6 +73,10 @@ export interface BidSnapshotProps extends ComponentProps<'div'> {
    */
   startingBidText?: string;
   /**
+   * Determines whether to show or hide sold label and price
+   */
+  showSoldLabel?: boolean;
+  /**
    * Sold For amount
    * */
   soldPrice?: number;
@@ -84,6 +92,10 @@ export interface BidSnapshotProps extends ComponentProps<'div'> {
    * Function to get the current date time
    */
   getCurrentDateTime?: () => Date | null;
+  /**
+   * Hide the countdown timer, used in the Lot Details Page
+   */
+  shouldHideCountdownTimer?: boolean;
 }
 
 const bidsTranslation = (numberOfBids: number) => (numberOfBids === 1 ? `${numberOfBids} bid` : `${numberOfBids} bids`);
@@ -116,14 +128,25 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
       startingBid,
       startingBidText = 'Starting bid',
       soldPrice,
+      showSoldLabel = true,
       soldForText = 'Sold for',
       wonForText = 'Won for',
       getCurrentDateTime = () => new Date(),
+      hasSeparators = true,
+      variant = DetailVariants.md,
+      shouldHideCountdownTimer = false,
       ...props
     },
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'BidSnapshot');
+    const textVariant =
+      variant === 'sm'
+        ? TextVariants.labelSmall
+        : variant === 'lg'
+          ? TextVariants.labelLarge
+          : TextVariants.labelMedium;
+    const countdownVariant = variant === 'sm' ? CountdownVariants.sm : CountdownVariants.compact;
 
     const hasBids = currentBid !== null && numberOfBids > 0;
     const isReady = lotStatus === LotStatus.ready;
@@ -131,14 +154,25 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
     const isPast = lotStatus === LotStatus.past;
     const now = getCurrentDateTime() || new Date();
     const hasCountdownTimer =
+      !shouldHideCountdownTimer &&
       isLive &&
       lotCloseDate &&
       isAfter(lotCloseDate, now) &&
       saleCloseDate &&
       (differenceInMinutes(saleCloseDate, now) < 60 || isAfter(now, saleCloseDate)); // only show within the 60 minutes of when the lots start closing or if we're past the close date
 
-    const bidMessage = findChildrenOfType(children, BidMessage);
+    const bidMessageChildren = findChildrenOfType(children, BidMessage);
     const otherChildren = findChildrenExcludingTypes(children, [BidMessage]);
+
+    const bidMessage = bidMessageChildren
+      ? bidMessageChildren.map((child) =>
+          isValidElement(child)
+            ? cloneElement(child, {
+                textVariant: textVariant === TextVariants.labelLarge ? TextVariants.labelMedium : textVariant,
+              } as { textVariant: TextVariants })
+            : child,
+        )
+      : null;
 
     const classes = classnames(baseClassName, className, {
       [`${baseClassName}--live`]: isLive,
@@ -147,12 +181,13 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
 
     return (
       <div {...commonProps} {...props} ref={ref} className={classes}>
-        <DetailList hasSeparators className={`${baseClassName}__text`}>
-          {isPast ? (
+        <DetailList hasSeparators={hasSeparators} variant={variant} className={`${baseClassName}__text`}>
+          {showSoldLabel && isPast ? (
             <Detail
               label={bidStatus === BidStatusEnum.Won ? wonForText : soldForText} // if the user has won show wonForText else show soldForText
               value={soldPrice ? `${currency}${soldPrice?.toLocaleString()}` : ''}
               hasWrap={false}
+              className={`${baseClassName}__sold`}
             />
           ) : null}
           {isLive && hasBids ? (
@@ -161,21 +196,20 @@ const BidSnapshot = forwardRef<HTMLDivElement, BidSnapshotProps>(
               subLabel={`(${bidsLabelText(numberOfBids)})`}
               value={`${currency}${currentBid?.toLocaleString()}`}
               hasWrap={false}
+              className={`${baseClassName}__current-bid`}
             />
           ) : null}
           {!!startingBid && (isReady || (isLive && !hasBids)) ? (
             <Detail label={startingBidText} value={`${currency}${startingBid?.toLocaleString()}`} hasWrap={false} />
           ) : null}
         </DetailList>
-        {
-          bidStatus && !isReady ? bidMessage : null // only show bidMessage if the user has bid
-        }
+        {bidStatus && !isReady ? bidMessage : null}
         {otherChildren}
         {hasCountdownTimer ? (
           <Countdown
             endDateTime={lotCloseDate}
             label={closingText}
-            variant={CountdownVariants.compact}
+            variant={countdownVariant}
             locale={SupportedLanguages[lang]}
             formatDurationStr={formatDurationStr}
             showBottomBorder={false}

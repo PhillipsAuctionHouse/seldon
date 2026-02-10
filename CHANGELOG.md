@@ -1,3 +1,633 @@
+## [1.234.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.234.0...v1.234.1) (2026-02-09)
+
+
+### Bug Fixes
+
+* **publish:** L3-0000 continuing setting up OIDC trusted publishing ([#801](https://github.com/PhillipsAuctionHouse/seldon/issues/801)) ([d82f9ad](https://github.com/PhillipsAuctionHouse/seldon/commit/d82f9ad0c37946577d4788ac6df47222be6fcfe1))
+* **release:** L3-0000 update trusted publishing ([#800](https://github.com/PhillipsAuctionHouse/seldon/issues/800)) ([fa7e092](https://github.com/PhillipsAuctionHouse/seldon/commit/fa7e092e62fb56f8c6937e1241f075a4ed95ff76))
+
+# [1.234.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.233.0...v1.234.0) (2026-02-09)
+
+
+### Features
+
+* **typeTokens:** L3-10719 Create a small and medium semantic text token for badges ([#795](https://github.com/PhillipsAuctionHouse/seldon/issues/795)) ([3df1cc4](https://github.com/PhillipsAuctionHouse/seldon/commit/3df1cc46c841e7df4422837bb7217dcdd4818842))
+
+# [1.233.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.232.1...v1.233.0) (2026-02-09)
+
+
+### Features
+
+* **_detail:** L3-11615 removed hardcoded values ([#797](https://github.com/PhillipsAuctionHouse/seldon/issues/797)) ([77467f0](https://github.com/PhillipsAuctionHouse/seldon/commit/77467f089880d49e9e643a8340ac02a307005d87))
+
+## [1.232.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.232.0...v1.232.1) (2026-01-12)
+
+
+### Bug Fixes
+
+* **Select:** L3-11351 select value should be black not blue on iOS ([#790](https://github.com/PhillipsAuctionHouse/seldon/issues/790)) ([c1c27aa](https://github.com/PhillipsAuctionHouse/seldon/commit/c1c27aa4aca429c40eedf26e5d05d2790c1cc1a8))
+
+# [1.232.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.231.0...v1.232.0) (2026-01-09)
+
+
+### Features
+
+* **countryPicker:** L3-11083 Client Portal | Mobile Web - Close button on Country Code input modal is not completely visible ([#783](https://github.com/PhillipsAuctionHouse/seldon/issues/783)) ([4f0072e](https://github.com/PhillipsAuctionHouse/seldon/commit/4f0072e20aff0707740a3dc4174ab9a96eb76a90))
+
+# [1.231.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.230.1...v1.231.0) (2026-01-05)
+
+
+### Features
+
+* **Icon:** L3-11171 Add IconOrangeCircle to Seldon ([#787](https://github.com/PhillipsAuctionHouse/seldon/issues/787)) ([54fba5b](https://github.com/PhillipsAuctionHouse/seldon/commit/54fba5b14e3d2dd61454bc857bd3c908fd1eeb48))
+
+## [1.230.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.230.0...v1.230.1) (2025-12-15)
+
+
+### Bug Fixes
+
+* **chromatic:** L3-0000 hide dynamic components from chromatic snapshots ([#782](https://github.com/PhillipsAuctionHouse/seldon/issues/782)) ([aaa6f79](https://github.com/PhillipsAuctionHouse/seldon/commit/aaa6f7995e39b6c9189819fd486a835672fd9fc6))
+
+# [1.230.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.229.0...v1.230.0) (2025-12-12)
+
+
+### Features
+
+* **phone-input:** L3-10742 L3-10756 Fix phone number picker display at tiny and huge widths ([#767](https://github.com/PhillipsAuctionHouse/seldon/issues/767)) ([768f251](https://github.com/PhillipsAuctionHouse/seldon/commit/768f251fd5a016f81d4fd9e4c0a11ac20f01fa53))
+
+# [1.229.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.228.0...v1.229.0) (2025-12-12)
+
+
+### Features
+
+* **FilterButton:** L3-7878 Update Filter button stroke width ([#779](https://github.com/PhillipsAuctionHouse/seldon/issues/779)) ([8738478](https://github.com/PhillipsAuctionHouse/seldon/commit/87384782fcbb9ab534aad44564231cea3bc8dff0))
+
+# [1.228.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.227.0...v1.228.0) (2025-12-12)
+
+
+### Features
+
+* **wizard:** L3-10891 Client Portal | Primary address screen is displaying an extra scroll bar on desktop ([#777](https://github.com/PhillipsAuctionHouse/seldon/issues/777)) ([a34b3dd](https://github.com/PhillipsAuctionHouse/seldon/commit/a34b3dd80471b76aa1b1d14672e4d60429a36800))
+
+# [1.227.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.226.0...v1.227.0) (2025-12-11)
+
+
+### Features
+
+* **SeldonImage:** L3-6652 Remove image after auction with image unavailable ([#780](https://github.com/PhillipsAuctionHouse/seldon/issues/780)) ([c25cf32](https://github.com/PhillipsAuctionHouse/seldon/commit/c25cf32130d10202a64c6632be5c96c9328acbec))
+
+# [1.226.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.225.0...v1.226.0) (2025-12-11)
+
+
+### Features
+
+* **FilterType:** L3-11033 Add the Year filter to FiltersInline types file ([#781](https://github.com/PhillipsAuctionHouse/seldon/issues/781)) ([e2970e1](https://github.com/PhillipsAuctionHouse/seldon/commit/e2970e1fe359d0b8e976b584fe4818486d21fea4))
+
+# [1.225.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.224.0...v1.225.0) (2025-12-10)
+
+
+### Features
+
+* **fancyRadioButton:** L3-10948 Fix radio button selection issue in Registration flow ([#778](https://github.com/PhillipsAuctionHouse/seldon/issues/778)) ([7a6b1c0](https://github.com/PhillipsAuctionHouse/seldon/commit/7a6b1c0a8d224e9d6453a333d6fbf5b2a088eec4))
+
+# [1.224.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.223.0...v1.224.0) (2025-12-04)
+
+
+### Features
+
+* **colorTokens:** L3-10932 Add text-inactive colour to our semantic colour token library ([#776](https://github.com/PhillipsAuctionHouse/seldon/issues/776)) ([0136cf3](https://github.com/PhillipsAuctionHouse/seldon/commit/0136cf358102d1a37b43565c11f280c0c22e9290))
+
+# [1.223.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.222.0...v1.223.0) (2025-12-04)
+
+
+### Features
+
+* **SeldonImage:** L3-6652 Replace Phillips logo with error text if image is unavailable ([#775](https://github.com/PhillipsAuctionHouse/seldon/issues/775)) ([77706e9](https://github.com/PhillipsAuctionHouse/seldon/commit/77706e976d1947b68b93afccb8792e225b6e937c))
+
+# [1.222.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.221.0...v1.222.0) (2025-12-03)
+
+
+### Features
+
+* **countryPicker:** L3-10755 country selection screen spacing and formatting issues on mobile web ([#773](https://github.com/PhillipsAuctionHouse/seldon/issues/773)) ([db1c027](https://github.com/PhillipsAuctionHouse/seldon/commit/db1c0276d694c24c0b625c5919dcc921e1790624))
+
+# [1.221.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.220.0...v1.221.0) (2025-12-03)
+
+
+### Features
+
+* **phonePicker:** L3-10759 remove the "legacy" PhoneNumberPicker component ([#772](https://github.com/PhillipsAuctionHouse/seldon/issues/772)) ([25fd957](https://github.com/PhillipsAuctionHouse/seldon/commit/25fd9579fab168406469b31272327c03074f1187))
+
+# [1.220.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.219.0...v1.220.0) (2025-12-02)
+
+
+### Features
+
+* **Button:** L3-10766 fixed hover effect for mobile ([#774](https://github.com/PhillipsAuctionHouse/seldon/issues/774)) ([62862ac](https://github.com/PhillipsAuctionHouse/seldon/commit/62862ac041f9f327288385976b5ce15f512e9d2a))
+
+# [1.219.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.218.0...v1.219.0) (2025-11-20)
+
+
+### Features
+
+* **header:** L3-7279 at large breakpoints headers were misaligned ([#768](https://github.com/PhillipsAuctionHouse/seldon/issues/768)) ([3c0282a](https://github.com/PhillipsAuctionHouse/seldon/commit/3c0282a067a59e1e88ab8136f0ee415f54d0bad6))
+
+# [1.218.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.217.0...v1.218.0) (2025-11-19)
+
+
+### Features
+
+* **Filters:** L3-7878 Export it as FilterButton instead of exporting as type ([#766](https://github.com/PhillipsAuctionHouse/seldon/issues/766)) ([f4e3699](https://github.com/PhillipsAuctionHouse/seldon/commit/f4e36990161d663d2f7a5a295ce31ef55de2fece))
+
+# [1.217.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.216.0...v1.217.0) (2025-11-19)
+
+
+### Features
+
+* **type-tokens:** L3-7279 button size fix for tags and link variant of buttons ([#765](https://github.com/PhillipsAuctionHouse/seldon/issues/765)) ([7a27736](https://github.com/PhillipsAuctionHouse/seldon/commit/7a27736b8fc63ca490896e8f74c839f382f55f7e))
+
+# [1.216.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.215.0...v1.216.0) (2025-11-19)
+
+
+### Features
+
+* **_type:** L3-7279 typography tokens update ([#713](https://github.com/PhillipsAuctionHouse/seldon/issues/713)) ([3983fe1](https://github.com/PhillipsAuctionHouse/seldon/commit/3983fe18143c7039c6be12aabef01700aef38954))
+
+# [1.215.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.214.0...v1.215.0) (2025-11-17)
+
+
+### Features
+
+* **SaleCard:** L3-10704 show sale card actions above snw-mobile brea… ([#764](https://github.com/PhillipsAuctionHouse/seldon/issues/764)) ([3de1738](https://github.com/PhillipsAuctionHouse/seldon/commit/3de1738d4ffd4d627e6afde754aa0aac2c4c29a6))
+
+# [1.214.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.213.0...v1.214.0) (2025-11-12)
+
+
+### Features
+
+* **Clock:** L3-9595 added new icon ([#761](https://github.com/PhillipsAuctionHouse/seldon/issues/761)) ([5458eb6](https://github.com/PhillipsAuctionHouse/seldon/commit/5458eb6dd3a1fb096add9be42c0ad0f4c31f660f))
+
+# [1.213.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.212.0...v1.213.0) (2025-11-12)
+
+
+### Features
+
+* **Icon:** L3-9531 Add new Live Now icon ([#760](https://github.com/PhillipsAuctionHouse/seldon/issues/760)) ([12c4518](https://github.com/PhillipsAuctionHouse/seldon/commit/12c451806b1be66dc5d9f774eda45ade4061c73c))
+
+# [1.212.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.211.0...v1.212.0) (2025-11-07)
+
+
+### Features
+
+* **saleCard:** L3-8099 Export New Sale Card Variant Type ([#758](https://github.com/PhillipsAuctionHouse/seldon/issues/758)) ([fffeea4](https://github.com/PhillipsAuctionHouse/seldon/commit/fffeea4594987409c201065cbe041922dde81d68))
+
+# [1.211.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.210.2...v1.211.0) (2025-11-07)
+
+
+### Features
+
+* **saleCard:** L3-8099 New Sale Card Variant ([#757](https://github.com/PhillipsAuctionHouse/seldon/issues/757)) ([7fdfae3](https://github.com/PhillipsAuctionHouse/seldon/commit/7fdfae3f27060f183efd0bde6a055e05e6f1ae84))
+
+## [1.210.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.210.1...v1.210.2) (2025-11-04)
+
+
+### Bug Fixes
+
+* **countryPicker:** L3-7249 fix flag icons ([#756](https://github.com/PhillipsAuctionHouse/seldon/issues/756)) ([938d178](https://github.com/PhillipsAuctionHouse/seldon/commit/938d17867a2ef23e1127a08d97f9fc00248f1bc7))
+
+## [1.210.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.210.0...v1.210.1) (2025-10-31)
+
+
+### Bug Fixes
+
+* **Filter:** L3-8050 Filter Option Cut Off Horizontally in Center of Word ([#753](https://github.com/PhillipsAuctionHouse/seldon/issues/753)) ([522e943](https://github.com/PhillipsAuctionHouse/seldon/commit/522e94344d7f09c2c5f7311c6a4cad5abb85d9ab))
+
+# [1.210.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.209.0...v1.210.0) (2025-10-30)
+
+
+### Features
+
+* **filterAndDropdownStyles:** L3-7878 update filter UX globally across all remix pages ([#754](https://github.com/PhillipsAuctionHouse/seldon/issues/754)) ([5edc246](https://github.com/PhillipsAuctionHouse/seldon/commit/5edc246721c1f984ed6bcc5aebe5ce21c94f439f))
+
+# [1.209.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.208.0...v1.209.0) (2025-10-30)
+
+
+### Features
+
+* **radiusTokens:** L3-7139 Design System: Add Radius Variables to Seldon ([#733](https://github.com/PhillipsAuctionHouse/seldon/issues/733)) ([41f470c](https://github.com/PhillipsAuctionHouse/seldon/commit/41f470c84eac82d400fdc21759b9bb55fd1b8a34))
+
+# [1.208.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.207.0...v1.208.0) (2025-10-29)
+
+
+### Features
+
+* **registration:** L3-8073 Small (mostly) ProgressWizard updates for registration ([#752](https://github.com/PhillipsAuctionHouse/seldon/issues/752)) ([258e838](https://github.com/PhillipsAuctionHouse/seldon/commit/258e838aabfecbec442ebaab7a02576b3118212f))
+
+# [1.207.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.206.0...v1.207.0) (2025-10-24)
+
+
+### Features
+
+* **SessionCTA:** L3-8027 CTA Buttons Cut Off on Sessions & Viewings Modal for RM ([#750](https://github.com/PhillipsAuctionHouse/seldon/issues/750)) ([7448a01](https://github.com/PhillipsAuctionHouse/seldon/commit/7448a010bd9509e3930d4867ac7d6f67e4b923ad))
+
+# [1.206.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.205.2...v1.206.0) (2025-10-23)
+
+
+### Features
+
+* **wizard:** L3-7123 Create progress component (Part 2)  ([#697](https://github.com/PhillipsAuctionHouse/seldon/issues/697)) ([6cbc1a8](https://github.com/PhillipsAuctionHouse/seldon/commit/6cbc1a8c0ed9ec80a5af286c955bc41fcdd231d7))
+
+## [1.205.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.205.1...v1.205.2) (2025-10-22)
+
+
+### Bug Fixes
+
+* **Filter:** L3-8017 Calendar filters - CTAs are being cut off and the filter drawer does not fill the screen on mobile browsers Fix ([#749](https://github.com/PhillipsAuctionHouse/seldon/issues/749)) ([db5a8db](https://github.com/PhillipsAuctionHouse/seldon/commit/db5a8dbc0b0be56a4a32da834cafaf6701196654))
+
+## [1.205.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.205.0...v1.205.1) (2025-10-22)
+
+
+### Bug Fixes
+
+* **Filters:** L3-8017 Calendar filters - CTAs are being cut off and the filter drawer does not fill the screen on mobile browsers ([#748](https://github.com/PhillipsAuctionHouse/seldon/issues/748)) ([3d6af11](https://github.com/PhillipsAuctionHouse/seldon/commit/3d6af116eb9064d70a81c709973986e753ae426d))
+
+# [1.205.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.204.2...v1.205.0) (2025-10-21)
+
+
+### Features
+
+* **NotificationBanner:** L3-7834 Update link styles and notification… ([#745](https://github.com/PhillipsAuctionHouse/seldon/issues/745)) ([5761b21](https://github.com/PhillipsAuctionHouse/seldon/commit/5761b21d4be84ec48e65cc626110ec493da6e234))
+
+## [1.204.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.204.1...v1.204.2) (2025-10-15)
+
+
+### Bug Fixes
+
+* **drawer:** L3-7876 - added z index to close button ([#743](https://github.com/PhillipsAuctionHouse/seldon/issues/743)) ([f860ff5](https://github.com/PhillipsAuctionHouse/seldon/commit/f860ff5230b31364265c80f853a2bfb3d9040c93))
+
+## [1.204.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.204.0...v1.204.1) (2025-10-14)
+
+
+### Bug Fixes
+
+* **Filter:** L3-7927 Filter Fixes Dropdown update ([#740](https://github.com/PhillipsAuctionHouse/seldon/issues/740)) ([5cd16c3](https://github.com/PhillipsAuctionHouse/seldon/commit/5cd16c39a80edabb79dd7005b8931b19769850a2))
+
+# [1.204.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.203.0...v1.204.0) (2025-10-09)
+
+
+### Features
+
+* **SaleCard:** L3-7848 Update CTA container width to accommodate lon… ([#739](https://github.com/PhillipsAuctionHouse/seldon/issues/739)) ([28535c9](https://github.com/PhillipsAuctionHouse/seldon/commit/28535c9ef911949e4c9922fe6f2bb280cf11ae70))
+
+# [1.203.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.202.0...v1.203.0) (2025-10-07)
+
+
+### Features
+
+* **editUserDetails:** L3-6773 Revert The User Details page widgets should be consistent with Register to Bid ([#738](https://github.com/PhillipsAuctionHouse/seldon/issues/738)) ([36170f4](https://github.com/PhillipsAuctionHouse/seldon/commit/36170f4771b1110e25bb640e533b5a2d8dd25b45))
+
+# [1.202.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.201.0...v1.202.0) (2025-10-07)
+
+
+### Features
+
+* **button:** PHOENIX-2097 Dynamic CTA [Disabled Button Styles Updates] ([#737](https://github.com/PhillipsAuctionHouse/seldon/issues/737)) ([203893a](https://github.com/PhillipsAuctionHouse/seldon/commit/203893a667a7b627b5c2d614be5817db579731ff))
+
+# [1.201.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.200.0...v1.201.0) (2025-10-06)
+
+
+### Features
+
+* **editUserDetails:** L3-6773 The User Details page widgets should be consistent with Register to Bid  ([#734](https://github.com/PhillipsAuctionHouse/seldon/issues/734)) ([266ea4d](https://github.com/PhillipsAuctionHouse/seldon/commit/266ea4dd0ccb87098df249cde44cf13518416292))
+
+# [1.200.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.199.0...v1.200.0) (2025-09-30)
+
+
+### Features
+
+* **BidSnapshot:** L3-7838 rename showSoldPrice prop -> showSoldLabel ([#732](https://github.com/PhillipsAuctionHouse/seldon/issues/732)) ([98002cc](https://github.com/PhillipsAuctionHouse/seldon/commit/98002cc71b021309e12371c3d97b86bc76cb09d7))
+
+# [1.199.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.198.0...v1.199.0) (2025-09-30)
+
+
+### Features
+
+* **Carousel:** L3-2323 Results and Rail improvements ([#731](https://github.com/PhillipsAuctionHouse/seldon/issues/731)) ([2dcd277](https://github.com/PhillipsAuctionHouse/seldon/commit/2dcd2772df53dc8d0f61f95301e6039eadefca75))
+
+# [1.198.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.197.0...v1.198.0) (2025-09-24)
+
+
+### Features
+
+* **Calendar:** L3-7821 Update badge text to title case ([#730](https://github.com/PhillipsAuctionHouse/seldon/issues/730)) ([21491c8](https://github.com/PhillipsAuctionHouse/seldon/commit/21491c8335b94fee00f756e8513a7b3f6a0bc6f5))
+
+# [1.197.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.196.0...v1.197.0) (2025-09-19)
+
+
+### Features
+
+* **BidSnapshot:** L3-7321 add showSoldPrice prop to BidSnapshot ([#727](https://github.com/PhillipsAuctionHouse/seldon/issues/727)) ([2c41e0b](https://github.com/PhillipsAuctionHouse/seldon/commit/2c41e0b49c1912725ba2eb2571bff0c73bd93b03))
+
+# [1.196.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.195.2...v1.196.0) (2025-09-16)
+
+
+### Features
+
+* **Calendar:** L3-7681 calendar page updates ([#726](https://github.com/PhillipsAuctionHouse/seldon/issues/726)) ([8359e3a](https://github.com/PhillipsAuctionHouse/seldon/commit/8359e3aead9260ea21cfb254980a66ce8b343bb8))
+
+## [1.195.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.195.1...v1.195.2) (2025-09-12)
+
+
+### Bug Fixes
+
+* **favorites:** L3-6817 icons are an invalid color token ([#725](https://github.com/PhillipsAuctionHouse/seldon/issues/725)) ([272cf80](https://github.com/PhillipsAuctionHouse/seldon/commit/272cf809fae1b38dbb1de1c2ab8ea51f88a647d7))
+
+## [1.195.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.195.0...v1.195.1) (2025-09-11)
+
+
+### Bug Fixes
+
+* **FiltersInline:** L3-7668 Update FiltersInline Drawer height ([#724](https://github.com/PhillipsAuctionHouse/seldon/issues/724)) ([439cc4a](https://github.com/PhillipsAuctionHouse/seldon/commit/439cc4a59a95eb516c4177f33d10db0dbf8b4418))
+
+# [1.195.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.194.0...v1.195.0) (2025-09-10)
+
+
+### Features
+
+* **colorTokens:** L3-7655 no reserve red contrast violation for ObjectTile ([#722](https://github.com/PhillipsAuctionHouse/seldon/issues/722)) ([45017a9](https://github.com/PhillipsAuctionHouse/seldon/commit/45017a96bd198fd1ecdb5dd749b4730c3a53b0c9))
+
+# [1.194.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.193.0...v1.194.0) (2025-09-09)
+
+
+### Features
+
+* **colorTokens:** L3-7655 add new token for no reserve red contrast violation ([#721](https://github.com/PhillipsAuctionHouse/seldon/issues/721)) ([205c4da](https://github.com/PhillipsAuctionHouse/seldon/commit/205c4daae5617eceacb7fc47d39bacbe60cecec8))
+
+# [1.193.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.192.0...v1.193.0) (2025-09-09)
+
+
+### Features
+
+* **SaleCard:** L3-7429 make sale card more responsive ([#717](https://github.com/PhillipsAuctionHouse/seldon/issues/717)) ([4b907a7](https://github.com/PhillipsAuctionHouse/seldon/commit/4b907a7cbe250ef726e9970efc9f4461cd3cbed2))
+
+# [1.192.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.191.0...v1.192.0) (2025-09-09)
+
+
+### Features
+
+* **colorTokens:** L3-7141 Token mapping fixes ([#718](https://github.com/PhillipsAuctionHouse/seldon/issues/718)) ([5ca3a4b](https://github.com/PhillipsAuctionHouse/seldon/commit/5ca3a4b7ab277c54981b059e318372dcc31ccefe))
+
+# [1.191.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.190.0...v1.191.0) (2025-09-08)
+
+
+### Features
+
+* **Carousel:** PHOENIX-2082 added a11 fixes ([#719](https://github.com/PhillipsAuctionHouse/seldon/issues/719)) ([3112dd1](https://github.com/PhillipsAuctionHouse/seldon/commit/3112dd11537d0a2fa9d17b4c828e7031dcd95b07))
+
+# [1.190.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.189.0...v1.190.0) (2025-09-05)
+
+
+### Features
+
+* **phoneNumberInput:** L3-7310 Seldon Phone Input (Country code picker + Number input) ([#707](https://github.com/PhillipsAuctionHouse/seldon/issues/707)) ([0daaa38](https://github.com/PhillipsAuctionHouse/seldon/commit/0daaa381e481c329666affb56b9000848aaf1d4e))
+
+# [1.189.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.188.1...v1.189.0) (2025-09-05)
+
+
+### Features
+
+* **Carousel:** PHOENIX-2082 added multiple carousel example ([#714](https://github.com/PhillipsAuctionHouse/seldon/issues/714)) ([2be1384](https://github.com/PhillipsAuctionHouse/seldon/commit/2be138496ac6d8d30ae7453e923de04505b997eb))
+
+## [1.188.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.188.0...v1.188.1) (2025-09-05)
+
+
+### Bug Fixes
+
+* **ComposedModal:** L3-7641 ComposedModal can accept a ReactNode ([#715](https://github.com/PhillipsAuctionHouse/seldon/issues/715)) ([4a8defb](https://github.com/PhillipsAuctionHouse/seldon/commit/4a8defba7bc4b4f16d0c02c461a90f121d4d0630))
+
+# [1.188.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.187.0...v1.188.0) (2025-08-29)
+
+
+### Features
+
+* **colorTokens:** L3-7141 Design System: Align Colour Tokens Across Platforms ([#683](https://github.com/PhillipsAuctionHouse/seldon/issues/683)) ([6c829ce](https://github.com/PhillipsAuctionHouse/seldon/commit/6c829ce29940c0f5290a7505e2fec9099e73eabe))
+
+# [1.187.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.186.0...v1.187.0) (2025-08-27)
+
+
+### Features
+
+* **salecard:** PHOENIX-2233 allow imageSrc to be optional property ([#710](https://github.com/PhillipsAuctionHouse/seldon/issues/710)) ([8cd7536](https://github.com/PhillipsAuctionHouse/seldon/commit/8cd7536e8204ab4a6bce5ac401a0e37629a08014))
+
+# [1.186.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.185.1...v1.186.0) (2025-08-27)
+
+
+### Features
+
+* **header:** L3-7579 Mobile Web | Account icon is not displaying correctly on Remix pages ([#709](https://github.com/PhillipsAuctionHouse/seldon/issues/709)) ([716445d](https://github.com/PhillipsAuctionHouse/seldon/commit/716445dcf5358638d9259738234ad257a87d1a7a))
+* **Salecard:** L3-7372 Center pin banner image ([#706](https://github.com/PhillipsAuctionHouse/seldon/issues/706)) ([fcf167a](https://github.com/PhillipsAuctionHouse/seldon/commit/fcf167ae4a26ebb35d2d2be72b706b285ee1268e))
+
+## [1.185.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.185.0...v1.185.1) (2025-08-27)
+
+
+### Bug Fixes
+
+* **Header:** L3-7580 Height fix for mobile with notification banner ([#708](https://github.com/PhillipsAuctionHouse/seldon/issues/708)) ([61d8e22](https://github.com/PhillipsAuctionHouse/seldon/commit/61d8e22773511ed0e91c0c6af33491272c439c83))
+
+# [1.185.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.184.1...v1.185.0) (2025-08-25)
+
+
+### Features
+
+* **miniLotModal:** PHOENIX-2086 Mini Lot Modal Seldon Updates ([#704](https://github.com/PhillipsAuctionHouse/seldon/issues/704)) ([6a63af7](https://github.com/PhillipsAuctionHouse/seldon/commit/6a63af730eb1af8e0310ac49f285438c7922d04f))
+
+## [1.184.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.184.0...v1.184.1) (2025-08-25)
+
+
+### Bug Fixes
+
+* **NotificationBanner:** L3-756 Notification banner is covering the bidding modal ([#703](https://github.com/PhillipsAuctionHouse/seldon/issues/703)) ([ee9db2d](https://github.com/PhillipsAuctionHouse/seldon/commit/ee9db2d3c9050290cc73d21bc0425342d4cc2242))
+
+# [1.184.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.183.1...v1.184.0) (2025-08-25)
+
+
+### Features
+
+* **TextBanner:** L3-7300 adjust styles to vertically align title ([#702](https://github.com/PhillipsAuctionHouse/seldon/issues/702)) ([04e76d5](https://github.com/PhillipsAuctionHouse/seldon/commit/04e76d57c979c3a73f678563dd519af66b241d82))
+
+## [1.183.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.183.0...v1.183.1) (2025-08-24)
+
+
+### Bug Fixes
+
+* **text:** L3-7235 should render span not p by default ([#694](https://github.com/PhillipsAuctionHouse/seldon/issues/694)) ([bdefcf8](https://github.com/PhillipsAuctionHouse/seldon/commit/bdefcf8d2cf30a3aec71659c14bfa9777e4b7749))
+
+# [1.183.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.182.1...v1.183.0) (2025-08-22)
+
+
+### Features
+
+* **icons:** PHOENIX-2071 adding icon ([#701](https://github.com/PhillipsAuctionHouse/seldon/issues/701)) ([10d0000](https://github.com/PhillipsAuctionHouse/seldon/commit/10d0000341b9ca3a91e573fed7aef7afdd66fad9))
+
+## [1.182.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.182.0...v1.182.1) (2025-08-21)
+
+
+### Bug Fixes
+
+* **NotificationBanner:** L3-7547 Add Notification Banner child style ([#700](https://github.com/PhillipsAuctionHouse/seldon/issues/700)) ([1680bd6](https://github.com/PhillipsAuctionHouse/seldon/commit/1680bd6b03016c4a394c5bf9d4fc06ebb6e5a6eb))
+
+# [1.182.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.181.0...v1.182.0) (2025-08-21)
+
+
+### Features
+
+* **header:** L3-5714 Small slice of a button on narrow windows ([#689](https://github.com/PhillipsAuctionHouse/seldon/issues/689)) ([3d66b67](https://github.com/PhillipsAuctionHouse/seldon/commit/3d66b6736dd038349a10f48bea41d6e214be2c45))
+
+
+### Reverts
+
+* **_type:** L3-7279 typography tokens ([#698](https://github.com/PhillipsAuctionHouse/seldon/issues/698)) ([9a942b1](https://github.com/PhillipsAuctionHouse/seldon/commit/9a942b1b99901b61b02425f2664f222c092248ba))
+
+# [1.181.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.180.0...v1.181.0) (2025-08-21)
+
+
+### Features
+
+* **HeroBanner:** L3-7300 add Text Banner ([#674](https://github.com/PhillipsAuctionHouse/seldon/issues/674)) ([066f8d5](https://github.com/PhillipsAuctionHouse/seldon/commit/066f8d5fd81a02a9417ed3b4f02dfdfea712c589))
+
+# [1.180.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.179.0...v1.180.0) (2025-08-20)
+
+
+### Features
+
+* **_type:** L3-7279 typography tokens ([#687](https://github.com/PhillipsAuctionHouse/seldon/issues/687)) ([020e114](https://github.com/PhillipsAuctionHouse/seldon/commit/020e11461a6c9704c566839df78bee4caa132406))
+
+# [1.179.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.178.0...v1.179.0) (2025-08-20)
+
+
+### Features
+
+* **SaleHeaderBanner:** L3-7403 add badgeText prop to SaleHeaderBanner ([#693](https://github.com/PhillipsAuctionHouse/seldon/issues/693)) ([140881c](https://github.com/PhillipsAuctionHouse/seldon/commit/140881c11c151956ae7e7cdf709362aa37aa780f))
+
+# [1.178.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.177.0...v1.178.0) (2025-08-19)
+
+
+### Features
+
+* **AnnouncementBanner:** L3-7452 Create Announcement Bar ([#681](https://github.com/PhillipsAuctionHouse/seldon/issues/681)) ([f5dccb5](https://github.com/PhillipsAuctionHouse/seldon/commit/f5dccb59d44c6515f63c8640c14ebe559696d4f9))
+
+# [1.177.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.176.1...v1.177.0) (2025-08-19)
+
+
+### Features
+
+* **combobox:** L3-6813 allow specification of minimum chars before opening ([#690](https://github.com/PhillipsAuctionHouse/seldon/issues/690)) ([184c3ae](https://github.com/PhillipsAuctionHouse/seldon/commit/184c3aef7dfc9aacc128469016ab78de2b3d7e3a))
+
+## [1.176.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.176.0...v1.176.1) (2025-08-19)
+
+
+### Bug Fixes
+
+* **drawer:** L3-7407 explicitly unset pointer-events ([#691](https://github.com/PhillipsAuctionHouse/seldon/issues/691)) ([233d8e6](https://github.com/PhillipsAuctionHouse/seldon/commit/233d8e6c6c0cbe9268a99cbe5d6791ae3bd0b375))
+
+# [1.176.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.175.0...v1.176.0) (2025-08-18)
+
+
+### Features
+
+* **countryPicker:** L3-7243 Build country and country code picker variants ([#677](https://github.com/PhillipsAuctionHouse/seldon/issues/677)) ([19e540e](https://github.com/PhillipsAuctionHouse/seldon/commit/19e540edbf0037b00094de00231a4e2d7ec1c66e))
+
+# [1.175.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.174.0...v1.175.0) (2025-08-15)
+
+
+### Features
+
+* **stepper:** L3-7123 Create progress component (Part 1) ([#668](https://github.com/PhillipsAuctionHouse/seldon/issues/668)) ([ecce47a](https://github.com/PhillipsAuctionHouse/seldon/commit/ecce47a63fbe139969adeba8aa17dd0a5623984b))
+
+# [1.174.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.173.0...v1.174.0) (2025-08-14)
+
+
+### Features
+
+* **detailedRadio:** L3-7240 Make Radio input selector match figma for primary details (Bidder type select) ([#671](https://github.com/PhillipsAuctionHouse/seldon/issues/671)) ([ed88be9](https://github.com/PhillipsAuctionHouse/seldon/commit/ed88be98a08aafce98b43ae41f4386449e72c651))
+
+# [1.173.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.172.0...v1.173.0) (2025-08-12)
+
+
+### Features
+
+* **input:** L3-6361 Input Adornment ([#680](https://github.com/PhillipsAuctionHouse/seldon/issues/680)) ([cfe3f2a](https://github.com/PhillipsAuctionHouse/seldon/commit/cfe3f2aa6bc3f81c77227ab51f8b0e0f5a197726))
+
+# [1.172.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.171.1...v1.172.0) (2025-08-11)
+
+
+### Features
+
+* **Drawer:** L3-7239 give the Drawer component header text support to align … ([#670](https://github.com/PhillipsAuctionHouse/seldon/issues/670)) ([338cca0](https://github.com/PhillipsAuctionHouse/seldon/commit/338cca01d66aa0d8ffdb1c0fcc165ee0a0467136))
+
+## [1.171.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.171.0...v1.171.1) (2025-08-06)
+
+
+### Bug Fixes
+
+* **forwardRef:** L3-6777 add forwardRef tests to all components and fix any missing forwardRef ([#679](https://github.com/PhillipsAuctionHouse/seldon/issues/679)) ([7b3fd69](https://github.com/PhillipsAuctionHouse/seldon/commit/7b3fd69d279a69f6dbcde05afe825e7d816c0867))
+
+# [1.171.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.170.0...v1.171.0) (2025-08-06)
+
+
+### Features
+
+* **icons:** PHOENIX-2024 admin icons and colors ([#678](https://github.com/PhillipsAuctionHouse/seldon/issues/678)) ([3dda2f3](https://github.com/PhillipsAuctionHouse/seldon/commit/3dda2f307850cfce9538e8318ef5082e3e6936e6))
+
+# [1.170.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.169.3...v1.170.0) (2025-08-05)
+
+
+### Features
+
+* **favoritesCollectionTile:** L3-7093 favorites collection tile fixes ([#651](https://github.com/PhillipsAuctionHouse/seldon/issues/651)) ([632e154](https://github.com/PhillipsAuctionHouse/seldon/commit/632e154bfcc99a3519f056b5d714bee87c4e2842))
+
+## [1.169.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.169.2...v1.169.3) (2025-08-04)
+
+
+### Bug Fixes
+
+* **FiltersInline:** L3-7422 Add FiltersInline types to export ([#676](https://github.com/PhillipsAuctionHouse/seldon/issues/676)) ([42321a7](https://github.com/PhillipsAuctionHouse/seldon/commit/42321a71e18433cf2ec78671538f86223b05dc31))
+
+## [1.169.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.169.1...v1.169.2) (2025-07-31)
+
+
+### Bug Fixes
+
+* **SaleCard:** L3-7396 Event type update ([#672](https://github.com/PhillipsAuctionHouse/seldon/issues/672)) ([a894f9d](https://github.com/PhillipsAuctionHouse/seldon/commit/a894f9db9ff54584381b9ab6973cceb0dc33381a))
+
+## [1.169.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.169.0...v1.169.1) (2025-07-31)
+
+
+### Bug Fixes
+
+* **InlineFilters:** L3-7392 Label name fix ([#673](https://github.com/PhillipsAuctionHouse/seldon/issues/673)) ([05aa3b9](https://github.com/PhillipsAuctionHouse/seldon/commit/05aa3b9432cf2683236aeae19312d1c2a377b957))
+
+# [1.169.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.168.0...v1.169.0) (2025-07-28)
+
+
+### Features
+
+* **InPlaceFilters:** L3-7078 Calendar + Drawer(BottomSheet) ([#660](https://github.com/PhillipsAuctionHouse/seldon/issues/660)) ([09c736b](https://github.com/PhillipsAuctionHouse/seldon/commit/09c736b9d96ba4f0fa2dcd7a02e6c8b5b9edc73d))
+
+# [1.168.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.167.0...v1.168.0) (2025-07-24)
+
+
+### Features
+
+* **Modal:** PHOENIX-2058 adding custom icon to modal ([#667](https://github.com/PhillipsAuctionHouse/seldon/issues/667)) ([aba9aa6](https://github.com/PhillipsAuctionHouse/seldon/commit/aba9aa63f67a8ea063f593720b9a542c65d8e40e))
+
+# [1.167.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.166.0...v1.167.0) (2025-07-22)
+
+
+### Features
+
+* **ExitgateCalendar:** L3-6952 Update image to match figma ([#665](https://github.com/PhillipsAuctionHouse/seldon/issues/665)) ([538f8d8](https://github.com/PhillipsAuctionHouse/seldon/commit/538f8d8c5974b05630b2e7463775cb9472c748eb))
+
 # [1.166.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.165.0...v1.166.0) (2025-07-21)
 
 

@@ -33,9 +33,13 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement>, Dialog
    */
   style?: React.CSSProperties;
   /**
-   * Content label for accessibility
+   * Custom close icon
    */
-  contentLabel?: string;
+  closeIcon?: React.ReactElement;
+  /**
+   * Position of the close icon
+   */
+  closeIconPosition?: 'left' | 'right';
 }
 
 /**
@@ -45,14 +49,32 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement>, Dialog
  *
  */
 const Modal = forwardRef<HTMLDivElement, ModalProps>(
-  ({ children, className, overlayClassName, isOpen = false, onClose = noOp, style, contentLabel, ...props }, ref) => {
+  (
+    {
+      children,
+      className,
+      overlayClassName,
+      isOpen = false,
+      onClose = noOp,
+      style,
+      closeIcon = <Icon icon="CloseX" height={32} width={32} color="currentColor" />,
+      closeIconPosition = 'right',
+      title,
+      ...props
+    },
+    ref,
+  ) => {
     const { className: baseClassName, 'data-testid': testId, ...commonProps } = getCommonProps(props, 'Modal');
 
     return (
       <Dialog.Root
         open={isOpen}
         onOpenChange={(open) => {
-          if (!open) onClose();
+          if (!open) {
+            // this is a workaround because Dialogs interacting with other dialogs can get confused and not clear pointer-events correctly. https://my.onetrust.com/s/case/500RO00000XuZl3/pointerevents-none-being-applied-incorrectly-by-manage-cookies-dialog
+            document.body.style.removeProperty('pointer-events');
+            onClose();
+          }
         }}
       >
         <Dialog.Portal>
@@ -70,17 +92,19 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
             {...props}
           >
             <VisuallyHidden asChild>
-              <Dialog.Title>{contentLabel ?? 'Modal'}</Dialog.Title>
+              <Dialog.Title>{title ?? 'Modal'}</Dialog.Title>
             </VisuallyHidden>
             <Dialog.Description />
             <Dialog.Close asChild>
               <IconButton
                 id="modal-close-button"
                 aria-label="Close Modal"
-                className={classnames(`${baseClassName}__close`)}
+                className={classnames(`${baseClassName}__close`, {
+                  [`${baseClassName}__close--left`]: closeIconPosition === 'left',
+                })}
                 variant={ButtonVariants.tertiary}
               >
-                <Icon icon="CloseX" height={32} width={32} color="currentColor" />
+                {closeIcon}
               </IconButton>
             </Dialog.Close>
             {children}

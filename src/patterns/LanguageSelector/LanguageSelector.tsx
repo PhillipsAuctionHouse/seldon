@@ -3,7 +3,7 @@ import { getCommonProps, noOp } from '../../utils';
 import classnames from 'classnames';
 import { SupportedLanguages } from '../../types/commonTypes';
 import { Dropdown } from '../../components/Dropdown';
-import { Accordion, AccordionItem, AccordionItemVariant } from '../../components/Accordion';
+import { Accordion, AccordionItem } from '../../components/Accordion';
 import NavigationItem from '../../components/Navigation/NavigationItem/NavigationItem';
 import { LinkVariants } from '../../components/Link';
 import { Text, TextVariants } from '../../components/Text';
@@ -16,40 +16,45 @@ interface DropdownSelectorProps extends ComponentProps<'div'> {
   onValueChange: (value: string) => void;
   label: string;
   options: { label: string; value: string }[];
-  // eslint-disable-next-line react/boolean-prop-naming
   disabled?: boolean;
 }
 
-const MobileLanguageSelector = ({
-  id,
-  value: _value, // can't be passed to the accordion
-  onValueChange,
-  label,
-  options,
-  ...props
-}: DropdownSelectorProps) => {
-  return (
-    <Accordion {...props}>
-      <AccordionItem
-        hasTransition
-        id={id ?? 'language-selector-accordion'}
-        label={<Text variant={TextVariants.snwHeaderLink}>{label}</Text>}
-        variant={AccordionItemVariant.lg}
-      >
-        <NavigationList id={`${id}-navlist`}>
-          {options.map((option) => (
-            <NavigationItem
-              key={option.value}
-              label={option.label}
-              onClick={() => onValueChange(option.value)}
-              navType={LinkVariants.snwFlyoutLink}
-            ></NavigationItem>
-          ))}
-        </NavigationList>
-      </AccordionItem>
-    </Accordion>
-  );
-};
+const MobileLanguageSelector = forwardRef<HTMLDivElement, DropdownSelectorProps>(
+  (
+    {
+      id,
+      value: _value, // can't be passed to the accordion
+      onValueChange,
+      label,
+      options,
+      ...props
+    }: DropdownSelectorProps,
+    ref,
+  ) => {
+    return (
+      <Accordion {...props} ref={ref}>
+        <AccordionItem
+          hasTransition
+          id={id ?? 'language-selector-accordion'}
+          label={<Text variant={TextVariants.linkStylised}>{label}</Text>}
+        >
+          <NavigationList id={`${id}-navlist`}>
+            {options.map((option) => (
+              <NavigationItem
+                key={option.value}
+                label={option.label}
+                onClick={() => onValueChange(option.value)}
+                navType={LinkVariants.linkLarge}
+              ></NavigationItem>
+            ))}
+          </NavigationList>
+        </AccordionItem>
+      </Accordion>
+    );
+  },
+);
+
+MobileLanguageSelector.displayName = 'MobileLanguageSelector';
 
 export type LanguageOption = { label: string; value: SupportedLanguages };
 

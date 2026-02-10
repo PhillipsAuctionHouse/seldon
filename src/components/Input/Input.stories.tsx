@@ -41,6 +41,17 @@ const argTypes = {
       type: 'text',
     },
   },
+  inputAdornment: {
+    control: {
+      type: 'text',
+    },
+  },
+  adornmentPosition: {
+    options: ['start', 'end'],
+    control: {
+      type: 'select',
+    },
+  },
   labelText: {
     control: {
       type: 'text',
@@ -88,6 +99,25 @@ const argTypes = {
   },
 };
 
+export const TextInput = ({ playgroundWidth, ...args }: StoryProps) => (
+  <div style={{ width: playgroundWidth, margin: '1rem' }}>
+    <Input key={args.defaultValue?.toString()} {...args} id="Input-1" />
+  </div>
+);
+
+TextInput.args = {
+  playgroundWidth: 300,
+  className: 'input-test-class',
+  defaultValue: 'Text input',
+  disabled: false,
+  invalid: false,
+  invalidText: 'Error message',
+  labelText: 'Label text',
+  warn: false,
+  warnText: 'Warning message that is really long can wrap to more lines.',
+  size: 'md',
+  type: 'text',
+};
 export const DateTimeInput = ({ playgroundWidth, ...args }: StoryProps) => (
   <div style={{ width: playgroundWidth, margin: '1rem' }}>
     <Input key={args.defaultValue?.toString()} {...args} id="Input-1" />
@@ -238,6 +268,22 @@ CustomLabel.args = {
 };
 
 CustomLabel.argTypes = {};
+
+export const InputWithAdornment = ({ playgroundWidth, ...args }: StoryProps) => (
+  <div style={{ width: playgroundWidth, margin: '1rem' }}>
+    <Input key={args.defaultValue as string} {...args} id="Input-1" />
+  </div>
+);
+
+InputWithAdornment.args = {
+  labelText: 'Input with Adornment',
+  playgroundWidth: 300,
+  size: 'md',
+  inputAdornment: <Text variant={TextVariants.string2}>$</Text>,
+  adornmentPosition: 'start',
+};
+
+InputWithAdornment.argTypes = argTypes;
 
 export const Playground = ({ playgroundWidth, ...args }: StoryProps) => {
   const [loading, setLoading] = useState(false);

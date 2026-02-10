@@ -2,12 +2,12 @@
 
 .#{$px}-header {
   align-items: center;
-  background-color: $white;
+  background-color: $white-100;
   border-bottom: 1px solid $light-gray;
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 0;
+  top: var(--banner-height);
   width: 100%;
   z-index: 10;
 
@@ -95,7 +95,7 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding: 3px $spacing-md;
+    padding: $spacing-micro $spacing-md;
     width: 100%;
 
     @include isHeaderDesktop {
@@ -105,9 +105,10 @@
 
   &__nav {
     background-color: $pure-white;
-    height: calc(100dvh - $header-height);
+    height: calc(100dvh - $header-height - var(--banner-height, 0px));
     overflow-y: auto;
     position: relative;
+    width: 100%;
     z-index: 10;
 
     &--closed {
@@ -119,9 +120,8 @@
 
       @include isHeaderMobile {
         flex-direction: column;
-        height: calc(100dvh - var(--header-height) - 1px);
+        height: calc(100dvh - var(--header-height) - var(--banner-height, 0px) - 1px);
         justify-content: flex-start;
-        padding: 0 $spacing-md;
       }
 
       @include isHeaderDesktop {
@@ -156,7 +156,7 @@
     }
 
     .#{$px}-nav__item {
-      .#{$px}-link--snwHeaderLink {
+      .#{$px}-link--linkStylised {
         align-content: center;
         height: 100%;
       }
@@ -167,13 +167,21 @@
     display: none;
 
     &--active {
-      background: rgba(0, 0, 0, 60%);
+      background: $black-75;
       display: block;
       height: 100vh;
       left: 0;
       position: absolute;
-      top: calc($header-height + 1px);
+      top: calc($header-height - 10px);
       width: 100%;
+
+      @media (min-width: $breakpoint-xl) {
+        top: calc($header-height - 3px);
+      }
+
+      @include isHeaderMobile {
+        display: none;
+      }
     }
   }
 
@@ -184,8 +192,12 @@
   }
 
   @include isHeaderMobile {
-    .#{$px}-nav__list .#{$px}-nav__item:last-child .#{$px}-link--snwHeaderLink {
+    .#{$px}-nav__list .#{$px}-nav__item:last-child .#{$px}-link--linkStylised {
       border-bottom: none;
+    }
+
+    .#{$px}-language-selector {
+      padding: 0 $spacing-md;
     }
   }
 }

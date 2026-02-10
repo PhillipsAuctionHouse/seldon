@@ -22,7 +22,7 @@ Playground.args = {
   id: 'favorites-collection-tile-1',
   count: 2,
   name: 'New List',
-  imageSrc: 'https://via.placeholder.com/400',
+  imageSrc: '/static/test-image-160x90.jpg',
   variant: 'lists',
   onEdit: (): void => console.log('Edit list clicked'),
   onDelete: (): void => console.log('Delete list clicked'),
@@ -73,6 +73,7 @@ CreateList.args = {
   variant: 'create',
   element: 'a',
   linkClassName: linkClassName,
+  onClick: () => alert('Create new list clicked'),
 };
 
 export const EmptyList = (props: ComponentProps<typeof FavoritesCollectionTile>) => (
@@ -108,3 +109,53 @@ TranslatedList.args = {
   },
   linkClassName: linkClassName,
 };
+
+export const CreateAndEmptyComparison = () => (
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: '1fr 1fr 1fr',
+      gap: '2rem',
+      width: '96rem',
+      padding: '2rem',
+    }}
+  >
+    <div>
+      <h3 style={{ marginBottom: '1rem', fontSize: '1.25rem', fontWeight: '600' }}>Create Variant</h3>
+      <FavoritesCollectionTile
+        id="favorites-collection-tile-create"
+        count={0}
+        name=""
+        imageSrc=""
+        variant="create"
+        element="a"
+        linkClassName={linkClassName}
+        onClick={() => alert('Create new list clicked')}
+      />
+    </div>
+    <div>
+      <h3 style={{ marginBottom: '1rem', fontSize: '1.25rem', fontWeight: '600' }}>Empty Lists Variant</h3>
+      <FavoritesCollectionTile
+        id="favorites-collection-tile-empty-lists"
+        count={0}
+        name="Test List"
+        imageSrc=""
+        variant="lists"
+        element="a"
+        linkClassName={linkClassName}
+      />
+    </div>
+    <div>
+      <h3 style={{ marginBottom: '1rem', fontSize: '1.25rem', fontWeight: '600' }}>Empty Favorites Variant</h3>
+      <FavoritesCollectionTile
+        id="favorites-collection-tile-empty-favorites"
+        count={0}
+        name="Favorites"
+        imageSrc=""
+        variant="favorites"
+        element="a"
+        linkClassName={linkClassName}
+      />
+    </div>
+  </div>
+);

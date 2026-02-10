@@ -4,23 +4,44 @@
   color: $pure-black;
   text-decoration: none;
 
-  &--email,
-  &--link {
-    @include underline;
+  &--email.#{$px}-link--email,
+  &--link.#{$px}-link--link,
+  &--linkSmall,
+  &--linkMedium,
+  &--linkLarge {
+    @include underline($offset: 1px);
+  }
+
+  &--linkLarge {
+    @include text($linkLarge);
+  }
+
+  &--linkMedium {
+    @include text($linkMedium);
+  }
+
+  &--linkSmall {
+    @include text($linkSmall);
+  }
+
+  &--linkStylised {
+    @include text($linkStylised);
   }
 
   &--email,
   &--link {
     &:hover,
     &:focus-visible {
-      @include underline($color: $dark-gray);
-
       color: $dark-gray;
     }
   }
 
   &--email {
-    @include text($email);
+    @include text($linkMedium);
+
+    .#{$px}-text {
+      font-variation-settings: 'wght' 600;
+    }
   }
 
   &--link {
@@ -28,7 +49,7 @@
   }
 
   &--snwHeaderLink {
-    @include text($snwHeaderLink);
+    @include text($linkStylised);
 
     padding: 0.5rem 0.625rem calc(0.5rem + 2px); // 1 px so that the bottom border of the nav counts as part of the button
     position: relative;
@@ -51,7 +72,7 @@
   &--snwFlyoutLink {
     border-bottom: 1px solid transparent;
 
-    @include text($snwFlyoutLink);
+    @include text($linkLarge);
 
     &:hover,
     &:focus-visible {

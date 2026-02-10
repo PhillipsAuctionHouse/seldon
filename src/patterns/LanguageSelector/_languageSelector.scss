@@ -26,11 +26,15 @@
     .#{$px}-accordion-item {
       border-top: 1px solid $light-gray;
       .#{$px}-nav__list {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-xsm;
         padding: 0;
       }
 
       &-label {
         opacity: 1;
+        padding: $snowflake-menu-padding 0;
       }
 
       &__border-bottom {

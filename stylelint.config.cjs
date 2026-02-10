@@ -1,7 +1,19 @@
 module.exports = {
   extends: ['stylelint-config-standard', 'stylelint-config-standard-scss'],
-  plugins: ['stylelint-scss', 'stylelint-order'],
+  plugins: ['stylelint-scss', 'stylelint-order', './stylelint-local-rules.mjs'],
+  overrides: [
+    {
+      // don't worry about enforcing tokens on storybook styles or vars file
+      files: ['src/story-styles.scss', 'src/pages/**/*.scss', 'src/scss/_vars.scss'],
+      rules: {
+        'declaration-property-value-allowed-list': null,
+        'declaration-property-value-disallowed-list': null,
+        'local-rules/no-deprecated-text-tokens': null,
+      },
+    },
+  ],
   rules: {
+    'local-rules/no-deprecated-text-tokens': true,
     'at-rule-no-unknown': null,
     'scss/at-rule-no-unknown': true,
     'order/properties-alphabetical-order': true,
@@ -32,5 +44,91 @@ module.exports = {
         },
       },
     ],
+
+    // Enforce SCSS color tokens for color-related properties. Disallow raw color literals.
+    // Allowed values:
+    // - $token-name (e.g., $white-100)
+    // - rgba($token-name, <alpha>) for transparency
+    // - common keywords needed for composition: transparent | currentColor | inherit | initial | unset
+    'declaration-property-value-allowed-list': {
+      color: [
+        /^\$[A-Za-z0-9_-]+$/,
+        /^rgba\(\$[A-Za-z0-9_-]+\s*,\s*(0|0?\.\d+|1(?:\.0+)?)\)$/i,
+        'transparent',
+        'currentColor',
+        'inherit',
+        'initial',
+        'unset',
+      ],
+      'background-color': [
+        /^\$[A-Za-z0-9_-]+$/,
+        /^rgba\(\$[A-Za-z0-9_-]+\s*,\s*(0|0?\.\d+|1(?:\.0+)?)\)$/i,
+        'transparent',
+        'currentColor',
+        'inherit',
+        'initial',
+        'unset',
+      ],
+      'outline-color': [
+        /^\$[A-Za-z0-9_-]+$/,
+        /^rgba\(\$[A-Za-z0-9_-]+\s*,\s*(0|0?\.\d+|1(?:\.0+)?)\)$/i,
+        'transparent',
+        'currentColor',
+        'inherit',
+        'initial',
+        'unset',
+      ],
+      fill: [
+        /^\$[A-Za-z0-9_-]+$/,
+        /^rgba\(\$[A-Za-z0-9_-]+\s*,\s*(0|0?\.\d+|1(?:\.0+)?)\)$/i,
+        'transparent',
+        'currentColor',
+        'inherit',
+        'initial',
+        'unset',
+      ],
+      stroke: [
+        /^\$[A-Za-z0-9_-]+$/,
+        /^rgba\(\$[A-Za-z0-9_-]+\s*,\s*(0|0?\.\d+|1(?:\.0+)?)\)$/i,
+        'transparent',
+        'currentColor',
+        'inherit',
+        'initial',
+        'unset',
+      ],
+      '/^border(-(?:(?:top|right|bottom|left))(?:-[a-z]+)?)?-color$/': [
+        /^\$[A-Za-z0-9_-]+$/,
+        /^rgba\(\$[A-Za-z0-9_-]+\s*,\s*(0|0?\.\d+|1(?:\.0+)?)\)$/i,
+        'transparent',
+        'currentColor',
+        'inherit',
+        'initial',
+        'unset',
+      ],
+
+      // Enforce SCSS radius tokens for border-radius properties
+      'border-radius': [
+        // Allow a single token or 0
+        /^((\$radius-(xs|sm|md|lg|xl|2xl|3xl))|0|inherit|initial|unset)$/,
+        // Allow up to 4 values (tokens or 0) separated by spaces
+        /^((\$radius-(xs|sm|md|lg|xl|2xl|3xl)|0)\s?){1,4}$/,
+      ],
+      // Also enforce for border-*-radius shorthands
+      '/^border-(top|right|bottom|left)-radius$/': [
+        /^((\$radius-(xs|sm|md|lg|xl|2xl|3xl))|0|inherit|initial|unset)$/,
+        /^((\$radius-(xs|sm|md|lg|xl|2xl|3xl)|0)\s?){1,4}$/,
+      ],
+    },
+
+    // Disallow raw color literals (hex, numeric rgb/hsl) in shorthands where colors can be embedded
+    'declaration-property-value-disallowed-list': {
+      '/^(background|border|border-(top|right|bottom|left)|outline|box-shadow)$/': [
+        /^(?!.*linear-gradient\().*#[0-9a-fA-F]{3,8}\b/i,
+        /^(?!.*linear-gradient\().*\brgb\(\s*\d/i,
+        /^(?!.*linear-gradient\().*\brgba\(\s*\d/i,
+        /^(?!.*linear-gradient\().*\bhsl\(\s*\d/i,
+        /^(?!.*linear-gradient\().*\bhsla\(\s*\d/i,
+      ],
+    },
   },
 };

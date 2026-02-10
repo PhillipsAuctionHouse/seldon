@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import classNames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { TextSymbolVariants } from './types';
@@ -13,16 +14,24 @@ export interface TextSymbolProps extends React.HTMLAttributes<HTMLElement> {
   variant?: TextSymbolVariants;
 }
 
-const TextSymbol = ({ symbols = [], variant = TextSymbolVariants.lotNumber, className, ...props }: TextSymbolProps) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TextSymbol');
+const TextSymbol = forwardRef<HTMLSpanElement, TextSymbolProps>(
+  ({ symbols = [], variant = TextSymbolVariants.lotNumber, className, ...props }, ref) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TextSymbol');
 
-  return (
-    <span {...commonProps} className={classNames(baseClassName, className, `${baseClassName}--${variant}`)} {...props}>
-      {symbols.map((symbol) => (
-        <span key={symbol}>{symbol}</span>
-      ))}
-    </span>
-  );
-};
+    return (
+      <span
+        {...commonProps}
+        className={classNames(baseClassName, className, `${baseClassName}--${variant}`)}
+        ref={ref}
+        {...props}
+      >
+        {symbols.map((symbol) => (
+          <span key={symbol}>{symbol}</span>
+        ))}
+      </span>
+    );
+  },
+);
+TextSymbol.displayName = 'TextSymbol';
 
 export default TextSymbol;

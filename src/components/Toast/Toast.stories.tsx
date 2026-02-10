@@ -3,6 +3,7 @@ import Toast from './Toast';
 import Button from '../Button/Button';
 import { useToast } from './useToast';
 import { ButtonVariants } from '../Button/types';
+import { Text } from '../Text';
 
 const meta = {
   title: 'Components/Toast',
@@ -18,10 +19,15 @@ export const Playground = () => {
         height: '20vh',
       }}
     >
-      <Toast title="Basic Toast" open={true} defaultOpen={true} onOpenChange={() => void 0} closeButtonLabel="Close" />
-
       <Toast
-        title="Toast with Action"
+        title={<Text>Basic Toast</Text>}
+        open={true}
+        defaultOpen={true}
+        onOpenChange={() => void 0}
+        closeButtonLabel="Close"
+      />
+      <Toast
+        title={<Text>Toast with Action</Text>}
         open={true}
         defaultOpen={true}
         onOpenChange={() => void 0}
@@ -70,7 +76,7 @@ const ToastDemo = () => {
             title: 'Yay! Your action was successful',
             duration: Infinity,
             actionElement: (
-              <Button variant={ButtonVariants.link} onClick={() => alert('Action clicked!')}>
+              <Button variant={ButtonVariants.tertiary} onClick={() => alert('Action clicked!')}>
                 Click for more
               </Button>
             ),

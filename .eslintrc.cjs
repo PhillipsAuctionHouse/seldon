@@ -13,12 +13,15 @@ module.exports = {
     'plugin:storybook/recommended',
     'plugin:local-rules/all',
   ],
-  // ... other configurations
-  rules: {
-    'no-equals-word-string': 'error',
-    'no-template-curly-in-string': 'error',
-  },
-  settings: {},
+  overrides: [
+    {
+      // Don't warn about deprecated text variants in stories and test files
+      files: ['**/*.stories.tsx', '**/*.test.tsx', '**/*.test.ts'],
+      rules: {
+        'local-rules/no-deprecated-text-variants': 'off',
+      },
+    },
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: ['./tsconfig.json', './tsconfig.node.json'],
@@ -27,8 +30,16 @@ module.exports = {
   },
   plugins: ['react-refresh', 'local-rules'],
   rules: {
+    'local-rules/no-deprecated-text-variants': 'error',
     'react-refresh/only-export-components': 'warn',
-    'react/boolean-prop-naming': ['warn', {}],
+    'react/boolean-prop-naming': [
+      'warn',
+      {
+        rule: '^(is|has|should)[A-Z]([A-Za-z0-9]?)+',
+        message: 'Boolean props should be named with is/has/should prefix',
+        validateNested: true,
+      },
+    ],
     'require-await': 'warn',
     '@typescript-eslint/no-floating-promises': ['error'],
     'no-unused-vars': 'off',

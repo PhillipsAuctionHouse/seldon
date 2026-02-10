@@ -1,7 +1,7 @@
 import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
-import { Text, TextVariants } from '../Text';
+import { Text } from '../Text';
 
 export interface FavoritingTileButtonProps extends ComponentProps<'button'> {
   /**
@@ -64,10 +64,10 @@ const FavoritingTileButton = forwardRef<HTMLButtonElement, FavoritingTileButtonP
         role="switch"
       >
         <div className={`${baseClassName}__text`}>
-          <Text variant={TextVariants.button}>{isLotInList ? actionRemoveText : actionAddText}</Text>
-          <Text variant={TextVariants.string2}>{listTitle}</Text>
+          <Text className={`${baseClassName}__text--action`}>{isLotInList ? actionRemoveText : actionAddText}</Text>
+          <Text>{listTitle}</Text>
         </div>
-        <Text variant={TextVariants.button}>{numberOfObjects}</Text>
+        <Text className={`${baseClassName}__text--number`}>{numberOfObjects}</Text>
       </button>
     );
   },

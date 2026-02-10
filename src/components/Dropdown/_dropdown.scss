@@ -1,12 +1,13 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-dropdown {
-  @include text($body3);
+  @include text($bodySmall);
 
   &__trigger {
     align-items: center;
-    background-color: $white;
+    background-color: $white-100;
     border: none;
+    color: $black-100;
     display: inline-flex;
     gap: 10px;
     justify-content: center;
@@ -42,7 +43,7 @@
   }
 
   &__content {
-    background-color: $white;
+    background-color: $white-100;
     border: 1px solid $light-gray;
 
     // following will add additional arrows if list is near edge of viewport
@@ -77,7 +78,7 @@
   }
 
   &__item {
-    @include text($body3);
+    @include text($bodySmall);
 
     align-items: center;
     display: flex;

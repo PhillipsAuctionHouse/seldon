@@ -80,7 +80,7 @@ const TabsContainer = forwardRef<HTMLDivElement, TabsContainerProps>(
               className={`${baseClassName}__tabs-trigger`}
               onClick={onTabClick}
             >
-              <Text variant={TextVariants.label}>{tab.label}</Text>
+              <Text variant={TextVariants.labelMedium}>{tab.label}</Text>
             </TabTrigger>
           ))}
           <div className={`${baseClassName}__full-bleed-underline`} />

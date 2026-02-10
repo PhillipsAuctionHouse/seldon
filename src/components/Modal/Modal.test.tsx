@@ -2,7 +2,9 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { runCommonTests } from '../../utils/testUtils';
 import Modal from './Modal';
+import { forwardRef } from 'react';
 import { ModalFromDrawer } from './Modal.stories';
+import { px } from '../../utils';
 
 describe('Modal', () => {
   const onCloseMock = vi.fn();
@@ -11,7 +13,11 @@ describe('Modal', () => {
     vi.clearAllMocks();
   });
 
-  runCommonTests((props) => <Modal {...props} isOpen />, 'Modal');
+  const ComponentWithRef = forwardRef<HTMLDivElement, React.ComponentProps<typeof Modal>>((props, ref) => (
+    <Modal {...props} isOpen ref={ref} />
+  ));
+  ComponentWithRef.displayName = 'ComponentWithRef';
+  runCommonTests(ComponentWithRef, 'Modal');
 
   it('renders the modal when isOpen is true', () => {
     render(
@@ -86,5 +92,43 @@ describe('Modal', () => {
     const overlay = screen.getByTestId(/overlay/);
     await userEvent.click(overlay);
     expect(onCloseMock).toHaveBeenCalled();
+  });
+
+  it('renders custom close icon', () => {
+    const customCloseIcon = <span>Custom Close</span>;
+    render(
+      <Modal isOpen onClose={onCloseMock} closeIcon={customCloseIcon} closeIconPosition="left">
+        <div>Modal Content</div>
+      </Modal>,
+    );
+
+    const closeButton = screen.getByText('Custom Close');
+    expect(closeButton).toBeInTheDocument();
+  });
+
+  it('renders class to align close icon to the left', () => {
+    const customCloseIcon = <span>Custom Close</span>;
+    render(
+      <Modal isOpen onClose={onCloseMock} closeIcon={customCloseIcon} closeIconPosition="left">
+        <div>Modal Content</div>
+      </Modal>,
+    );
+
+    const closeButton = screen.getByText('Custom Close');
+    expect(closeButton).toBeInTheDocument();
+    expect(closeButton.parentElement).toHaveClass(`${px}-modal__close--left`);
+  });
+
+  it('renders component without left class alignment', () => {
+    const customCloseIcon = <span>Custom Close</span>;
+    render(
+      <Modal isOpen onClose={onCloseMock} closeIcon={customCloseIcon}>
+        <div>Modal Content</div>
+      </Modal>,
+    );
+
+    const closeButton = screen.getByText('Custom Close');
+    expect(closeButton).toBeInTheDocument();
+    expect(closeButton.parentElement).not.toHaveClass(`${px}-modal__close--left`);
   });
 });

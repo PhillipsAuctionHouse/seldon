@@ -1,18 +1,23 @@
-import { ComponentProps, forwardRef } from 'react';
-import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
-import { Text, TextVariants } from '../../components/Text';
-import { SeldonImage } from '../../components/SeldonImage';
+import { ComponentProps, forwardRef } from 'react';
 import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';
+import { SeldonImage } from '../../components/SeldonImage';
+import { Text, TextVariants } from '../../components/Text';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
-import { SaleCardVariants } from './types';
+import { getCommonProps } from '../../utils';
 import { SaleCardActions } from './SaleCardActions';
+import { SaleCardVariants, SaleCardImageDisplay } from './types';
 
-/** * Props for the SaleCard component. */
+/**
+ * Props for the SaleCard component.
+ */
 export interface SaleCardProps extends ComponentProps<'div'> {
-  /** * The source URL of the image to be displayed. */
-  imageSrc: string;
+  /**
+   * The source URL of the image to be displayed.
+   * Leaving this prop undefined or falsy is the intended way to hide the image.
+   */
+  imageSrc?: string;
   /** * The alt text for the image. Defaults to "Auction Image" if not provided. */
   imageAlt?: string;
   /** * The auctionType of sale (e.g. "Live Auction", "Online Only", etc.). */
@@ -28,7 +33,7 @@ export interface SaleCardProps extends ComponentProps<'div'> {
   /** * The text to be displayed for the modal link. */
   modalButtonText?: string;
   /** * The callback function to be executed when the modal link is clicked. */
-  modalButtonOnClick?: () => void;
+  modalButtonOnClick?: (event: React.MouseEvent<HTMLElement>) => void;
   /** * The variant of the SaleCard component.
    * - 'default': The default style of the SaleCard component.
    * - 'relatedSaleTile': A variant with a smaller image size and horizontal layout on mobile devices.
@@ -36,6 +41,8 @@ export interface SaleCardProps extends ComponentProps<'div'> {
   variant?: SaleCardVariants;
   /** * The <SaleCardActions /> component used to render the SaleCard CTAs. */
   children?: React.ReactElement<typeof SaleCardActions>;
+  /** * The position of the image relative to the content. Can be 'left' or 'right'. Defaults to 'left'. */
+  imageDisplay?: SaleCardImageDisplay;
 }
 
 /**
@@ -63,6 +70,7 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
       modalButtonText,
       variant = SaleCardVariants.DEFAULT,
       children,
+      imageDisplay = SaleCardImageDisplay.LEFT,
       ...props
     },
     ref,
@@ -70,6 +78,7 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SaleCard');
     const classes = classnames(baseClassName, className, {
       [`${baseClassName}--${variant}`]: variant,
+      [`${baseClassName}--image-${imageDisplay}`]: imageDisplay,
     });
     const componentProps = { ...commonProps, ...props };
 
@@ -77,33 +86,32 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
       <article {...componentProps} className={classes} ref={ref}>
         {imageSrc ? <SeldonImage src={imageSrc} alt={imageAlt} className={`${baseClassName}__image`} /> : null}
         <div className={`${baseClassName}__details`}>
-          <Text variant={TextVariants.badge} className={`${baseClassName}__auction-type`}>
-            {auctionType}
+          <Text variant={TextVariants.labelSmall}>{auctionType}</Text>
+          <Text variant={TextVariants.headingSmall} className={`${baseClassName}__title`}>
+            {titleText}
           </Text>
-          <Text variant={TextVariants.title3}>{titleText}</Text>
           {badgeText && (
-            <Text variant={TextVariants.badge} className={`${baseClassName}__badge`}>
+            <Text variant={TextVariants.badgeMedium} className={`${baseClassName}__badge`}>
               {badgeText}
             </Text>
           )}
           <div className={`${baseClassName}__info`}>
-            <Text variant={TextVariants.string2}>{location}</Text>
-            <Text variant={TextVariants.string2}>{date}</Text>
+            <Text variant={TextVariants.labelMedium}>{location}</Text>
+            <Text variant={TextVariants.labelMedium}>{date}</Text>
             {modalButtonText && modalButtonOnClick && (
               <div className={`${baseClassName}__modal-link`}>
-                <Button
-                  onClick={modalButtonOnClick}
-                  variant={ButtonVariants.tertiary}
-                  className={`${baseClassName}__modal-link-button`}
-                >
+                <Button onClick={modalButtonOnClick} variant={ButtonVariants.link}>
                   {modalButtonText}
                 </Button>
               </div>
             )}
           </div>
         </div>
-        {variant !== SaleCardVariants.RELATED_SALE_TILE && (
-          <SSRMediaQuery.Media greaterThanOrEqual="md">{children}</SSRMediaQuery.Media>
+
+        {variant !== SaleCardVariants.RELATED_SALE_TILE && children && (
+          <div className={`${baseClassName}__ctas`}>
+            <SSRMediaQuery.Media greaterThanOrEqual="snw-mobile">{children}</SSRMediaQuery.Media>
+          </div>
         )}
       </article>
     );

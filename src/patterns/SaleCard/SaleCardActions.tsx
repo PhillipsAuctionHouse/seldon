@@ -1,5 +1,6 @@
 import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
+import { Text } from '../../components/Text';
 
 export interface SaleCardActionsProps extends ComponentProps<'div'> {
   /**
@@ -8,13 +9,13 @@ export interface SaleCardActionsProps extends ComponentProps<'div'> {
   children?: React.ReactNode;
 }
 
-export const SaleCardActions = forwardRef<HTMLDivElement, SaleCardActionsProps>(({ children, ...props }) => {
+export const SaleCardActions = forwardRef<HTMLDivElement, SaleCardActionsProps>(({ children, ...props }, ref) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SaleCardActions');
 
   return (
-    <div className={`${baseClassName}__ctas`} {...commonProps}>
+    <Text className={`${baseClassName}__ctas`} {...commonProps} ref={ref}>
       {children}
-    </div>
+    </Text>
   );
 });
 

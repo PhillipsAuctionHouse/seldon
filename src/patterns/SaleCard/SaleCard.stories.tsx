@@ -1,11 +1,13 @@
 import { Meta } from '@storybook/react';
-import SaleCard, { SaleCardProps } from './SaleCard';
-import { getScssVar } from '../../utils/scssUtils';
-import { SaleCardVariants } from './types';
-import { SaleCardActions } from './SaleCardActions';
 import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';
 import { px } from '../../utils';
+import { Icon } from '../../components/Icon';
+import { getScssVar } from '../../utils/scssUtils';
+import SaleCard, { SaleCardProps } from './SaleCard';
+import { SaleCardActions } from './SaleCardActions';
+import { Text } from '../../components/Text';
+import { SaleCardImageDisplay, SaleCardVariants } from './types';
 
 const meta = {
   title: 'Patterns/SaleCard',
@@ -21,7 +23,7 @@ export const SaleCardPlayground = (props: SaleCardProps) => (
 );
 
 const defaultProps = {
-  imageSrc: 'https://picsum.photos/160/90',
+  imageSrc: '/static/test-image-160x90.jpg',
   auctionType: 'Live Auction',
   titleText: 'Modern & Contemporary Art Day Sale, Morning Session',
   date: '2 PM EST, May 27, 2025',
@@ -52,6 +54,7 @@ export const SaleCardRelated = () => (
       location="Hong Kong"
       badgeText="Happening Now"
       variant={SaleCardVariants.RELATED_SALE_TILE}
+      imageSrc="https://www.assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1/QA/auctions/NY041325/NY041325.jpg"
     />
     {divider}
     <SaleCard
@@ -77,7 +80,7 @@ export const SaleCardWithPrimaryAndSecondaryCTA = () => (
       badgeText="Happening Now"
       modalButtonText="Session and viewing details"
       modalButtonOnClick={() => console.log('Modal button clicked')}
-      imageSrc="https://via.placeholder.com/400"
+      imageSrc="https://www.assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1/QA/auctions/NY041325/NY041325.jpg"
     >
       <SaleCardActions>
         <Button
@@ -106,6 +109,7 @@ export const SaleCardWithPrimaryAndSecondaryCTA = () => (
       badgeText="Accepting Consignments"
       modalButtonText="Session and viewing details"
       modalButtonOnClick={() => console.log('Modal button clicked')}
+      imageSrc="https://www.assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1/QA/auctions/NY040725/NY040725.jpg"
     >
       <SaleCardActions>
         <Button
@@ -115,13 +119,12 @@ export const SaleCardWithPrimaryAndSecondaryCTA = () => (
         >
           Join Sale room
         </Button>
-        <Button
-          onClick={() => console.log('Secondary button clicked')}
-          variant={ButtonVariants.secondary}
-          style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
-        >
-          Register to bid
-        </Button>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', width: '100%' }}>
+          <span>Registered as Paddle 7003</span>
+          <Button variant={ButtonVariants.tertiary}>
+            <Icon icon="Tooltip" height={16} width={16} aria-hidden />
+          </Button>
+        </div>
       </SaleCardActions>
     </SaleCard>
     {divider}
@@ -172,9 +175,9 @@ export const SaleCardWithPrimaryCTA = () => (
   </SaleCard>
 );
 
-export const SaleCardWithSecondaryCTA = () => (
+export const SaleCardWithRegistrationStatus = () => (
   <SaleCard
-    imageSrc="https://picsum.photos/160/90"
+    imageSrc="/static/test-image-160x90.jpg"
     auctionType="Live Auction"
     titleText="Modern & Contemporary Art Day Sale, Morning Session"
     date="2 PM EST, May 27, 2025"
@@ -184,13 +187,7 @@ export const SaleCardWithSecondaryCTA = () => (
     modalButtonOnClick={() => console.log('Modal button clicked')}
   >
     <SaleCardActions>
-      <Button
-        onClick={() => console.log('Secondary button clicked')}
-        variant={ButtonVariants.secondary}
-        style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
-      >
-        Register to bid
-      </Button>
+      <Text>Registered as Paddle 7003</Text>
     </SaleCardActions>
   </SaleCard>
 );
@@ -225,7 +222,7 @@ export const SaleCardWithDownloadLink = () => (
 
 export const SaleCardNoCTA = () => (
   <SaleCard
-    imageSrc="https://picsum.photos/160/90"
+    imageSrc="/static/test-image-160x90.jpg"
     auctionType="Live Auction"
     titleText="Modern & Contemporary Art Day Sale, Morning Session"
     date="2 PM EST, May 27, 2025"
@@ -234,4 +231,67 @@ export const SaleCardNoCTA = () => (
     modalButtonText="Session and viewing details"
     modalButtonOnClick={() => console.log('Modal button clicked')}
   />
+);
+
+export const SaleCardWithLink = () => (
+  <a href="/?path=/docs/">
+    <SaleCard
+      {...defaultProps}
+      badgeText="Happening Now"
+      modalButtonText="Session and viewing details"
+      modalButtonOnClick={(event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        console.log('Modal button clicked');
+      }}
+    >
+      <SaleCardActions>
+        <Button
+          onClick={() => console.log('Primary button clicked')}
+          variant={ButtonVariants.primary}
+          style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
+        >
+          Home
+        </Button>
+      </SaleCardActions>
+    </SaleCard>
+  </a>
+);
+
+export const SaleCardNoImage = () => (
+  <SaleCard
+    auctionType="Live Auction"
+    titleText="Modern & Contemporary Art Day Sale, Morning Session"
+    date="2 PM EST, May 27, 2025"
+    location="New York"
+    badgeText="Happening Now"
+  />
+);
+
+export const SaleCardImageRightVariants = () => (
+  <div style={{ display: 'flex', gap: 'var(--spacing-sm)', flexDirection: 'column' }}>
+    <SaleCard
+      {...defaultProps}
+      variant={SaleCardVariants.DEFAULT}
+      imageDisplay={SaleCardImageDisplay.RIGHT}
+      badgeText="Happening Now"
+    />
+    {divider}
+    <SaleCard
+      {...defaultProps}
+      variant={SaleCardVariants.RELATED_SALE_TILE}
+      imageDisplay={SaleCardImageDisplay.RIGHT}
+      badgeText="Accepting Consignments"
+      imageSrc="https://www.assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1/QA/auctions/NY041325/NY041325.jpg"
+    />
+    {divider}
+    <SaleCard
+      {...defaultProps}
+      variant={SaleCardVariants.RELATED_SALE_TILE}
+      imageDisplay={SaleCardImageDisplay.RIGHT}
+      titleText="Modern & Contemporary: Online Auction, New York"
+      date="27 Aug - 05 Sep"
+      badgeText="Bidding Open"
+    />
+  </div>
 );

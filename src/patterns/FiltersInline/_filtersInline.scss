@@ -1,0 +1,20 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-filters-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.#{$px}-filter-drawer {
+  max-width: 380px;
+  padding: 0;
+
+  @include media($breakpoint-xl) {
+    max-width: 420px;
+  }
+}
+
+.#{$px}-filter-drawer-menu {
+  padding: $spacing-md;
+}

@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { render, screen } from '@testing-library/react';
 import Text, { TextProps } from './Text';
 import { TextVariants } from './types';
@@ -7,7 +8,12 @@ import TextSymbol from '../TextSymbol/TextSymbol';
 import { TextSymbolVariants } from '../TextSymbol';
 
 describe('Text', () => {
-  runCommonTests(Text, 'Text');
+  // Use a forwardRef wrapper for runCommonTests to ensure ref is tested correctly
+  const RefText = forwardRef<HTMLElement, React.ComponentProps<typeof Text>>((props, ref) => (
+    <Text {...props} ref={ref} />
+  ));
+  RefText.displayName = 'RefText';
+  runCommonTests(RefText, 'Text');
   const renderText = (props: TextProps) => {
     render(<Text {...props} />);
   };
@@ -38,26 +44,32 @@ describe('Text', () => {
   it('applies the default variant correctly', () => {
     renderText({ children: 'Default Variant' });
 
-    expect(screen.getByText('Default Variant').parentElement).toHaveClass(`${px}-text--body2`);
+    expect(screen.getByText('Default Variant')).toHaveClass(`${px}-text--bodyMedium`);
   });
 
   it('applies the custom variant correctly', () => {
     renderText({ children: 'Custom Variant', variant: TextVariants.body1 });
 
-    expect(screen.getByText('Custom Variant').parentElement).toHaveClass(`${px}-text--body1`);
+    expect(screen.getByText('Custom Variant')).toHaveClass(`${px}-text--body1`);
   });
 
   it('applies additional className correctly', () => {
     renderText({ children: 'Additional Class', className: 'custom-class' });
 
-    expect(screen.getByText('Additional Class').parentElement).toHaveClass('custom-class');
+    expect(screen.getByText('Additional Class')).toHaveClass('custom-class');
   });
 
   it('renders with custom element correctly', () => {
-    renderText({ children: 'Custom Element', element: 'span' });
+    renderText({ children: 'Custom Element', element: 'p' });
 
     expect(screen.getByText('Custom Element')).toBeInTheDocument();
-    expect(screen.getByText('Custom Element').tagName).toBe('SPAN');
+    expect(screen.getByText('Custom Element').tagName).toBe('P');
+  });
+
+  it('renders with default span', () => {
+    renderText({ children: 'Default Span' });
+    expect(screen.getByText('Default Span')).toBeInTheDocument();
+    expect(screen.getByText('Default Span').tagName).toBe('SPAN');
   });
 
   it('should render with skeleton class name', () => {

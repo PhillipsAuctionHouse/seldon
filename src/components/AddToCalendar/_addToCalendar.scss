@@ -23,14 +23,14 @@
     }
 
     &:focus-visible {
-      border-radius: 5px;
+      border-radius: $radius-xs;
       outline: 1px solid $medium-gray;
     }
   }
 
   &-atcb-list {
-    background: #fff;
-    border: 1px solid#ECEAE7;
+    background: $white-100;
+    border: 1px solid $grey-50;
   }
 
   &-atcb-item {
@@ -45,8 +45,6 @@
   }
 
   &-atcb-item-link {
-    @include text($body-size2);
-
     background: none;
     border: none;
     cursor: pointer;
@@ -66,14 +64,12 @@
     }
 
     span {
-      @include text($body-size2);
-
       font-variation-settings: 'wght' 400;
       text-decoration: none;
 
       &:hover,
       &:focus-visible {
-        color: #000;
+        color: $black-100;
         outline: none;
         text-decoration: none;
       }

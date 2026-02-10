@@ -2,10 +2,9 @@
 
 .#{$px}-toast {
   align-items: center;
-  background-color: $primary-black;
-  border-radius: 4px;
-  box-shadow: 0 6px 14px 0 $primary-black;
-  color: $white;
+  background-color: $black-100;
+  border-radius: $radius-xs;
+  color: $white-100;
   column-gap: $spacing-sm;
   display: grid;
   grid-template-areas: 'title action';
@@ -18,10 +17,10 @@
   }
 
   &__action {
-    color: $cta-blue;
+    color: $text-inverted;
 
     &:hover {
-      color: $white;
+      color: $text-inverted;
     }
   }
 

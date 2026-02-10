@@ -1,7 +1,12 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-select-input {
+  margin-bottom: $spacing-sm;
   position: relative;
+
+  &__standalone {
+    margin-bottom: 0;
+  }
 
   .#{$px}-select-container {
     position: relative;
@@ -9,14 +14,15 @@
     &--show__icon {
       select {
         appearance: none;
-        padding-right: 1.55rem;
+        color: $black-100;
+        padding-right: 3rem;
 
         @media (min-width: $breakpoint-md) {
-          padding-right: 1.95rem;
+          padding-right: 3.25rem;
         }
 
         @media (min-width: $breakpoint-xl) {
-          padding-right: 2.25rem;
+          padding-right: 4.25rem;
         }
       }
     }
@@ -51,8 +57,10 @@
   select.#{$px}-input {
     &__select {
       &--tertiary {
-        border: 0;
+        border: 1.5px solid $black-100;
+        border-radius: $radius-3xl;
         color: inherit;
+        padding: $spacing-xsm $spacing-md $spacing-xsm $spacing-sm;
 
         &:hover {
           cursor: pointer;
@@ -60,9 +68,9 @@
 
         &:focus-visible {
           background-color: $pure-white;
-          border-radius: 0;
-          outline-color: $soft-black;
-          outline-offset: 4.5px;
+          border-radius: $radius-3xl;
+          box-shadow: 0 0 0 0.5px $black-100;
+          outline: none;
         }
 
         svg {

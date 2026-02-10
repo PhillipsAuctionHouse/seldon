@@ -197,3 +197,65 @@ export const ControlledCarousel = (props: CarouselProps & CarouselDotsProps) => 
 CarouselWithDots.args = { id: 'carousel-dots' } satisfies CarouselProps & CarouselDotsProps;
 
 CarouselWithDots.argTypes = {};
+
+export const CarouselWithMultipleItems = (props: CarouselProps) => {
+  const [array, setArray] = useState(
+    Array.from({ length: 12 })
+      .fill(0)
+      .map((_, i) => i),
+  );
+
+  return (
+    <div>
+      <Carousel {...{ ...props, element: 'ul' }}>
+        <CarouselContent>
+          {array.map((el) => (
+            <CarouselItem
+              element="li"
+              onClick={() => alert(el)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  alert(el);
+                }
+              }}
+              style={{
+                maxWidth: `18%`,
+                minWidth: 0,
+                flex: '0 0 100%',
+                border: array[0] === el ? '1px solid blue' : '1px solid #eee',
+                display: 'flex',
+                gap: '16px',
+                paddingRight: '8px',
+                marginRight: '16px',
+              }}
+              key={el}
+              tabIndex={0}
+            >
+              <img style={{ width: '60px', height: '60px' }} src={`https://picsum.photos/id/${el + 10}/60/60`} alt="" />
+              <div>
+                <h2>Item {el + 1}</h2>
+                <p>lorem ipsum dolor sit amet</p>
+                <em>Additional information about Item {el} and its features</em>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselArrows areArrowsAlwaysVisible={true} />
+      </Carousel>
+
+      <div style={{ marginTop: '16px' }}>
+        <button onClick={() => setArray((prev) => prev.slice(1))}>Remove first item</button>
+      </div>
+    </div>
+  );
+};
+
+CarouselWithMultipleItems.args = { disableNavigationDrag: 'desktop' } satisfies CarouselProps;
+CarouselWithMultipleItems.argTypes = {
+  slidesToScroll: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 4,
+  },
+};

@@ -1,6 +1,6 @@
 {
   "name": "@phillips/seldon",
-  "version": "1.166.0",
+  "version": "1.234.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/PhillipsAuctionHouse/seldon"
@@ -23,18 +23,23 @@
   "files": [
     "dist/**"
   ],
+  "overrides": {
+    "@semantic-release/npm": "^13.1.4"
+  },
   "scripts": {
     "start": "storybook dev -p 6006",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "build": "npm run clean && tsc && vite build",
+    "chromatic": "STORYBOOK=1 chromatic",
     "build:storybook": "storybook build",
     "preview": "npx http-server storybook-static",
     "clean": "rimraf './dist'",
     "clean:stories": "rimraf './storybook-static'",
     "create-component": "node --no-warnings --loader ts-node/esm .template/scripts/createComponent.ts",
     "format": "prettier . --write",
-    "lint": "tsc --noEmit && eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 && npm run lint:styles && npm run lint:md",
+    "lint": "tsc --noEmit && npm run lint:js && npm run lint:styles && npm run lint:md",
+    "lint:js": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:styles": "stylelint \"src/**/*.scss\" --fix",
     "lint:md": "markdownlint \"src/**/*.{md,mdx}\" --fix",
     "prepare": "husky install",
@@ -48,6 +53,7 @@
     "@radix-ui/react-dialog": "^1.1.4",
     "@radix-ui/react-dropdown-menu": "^2.1.14",
     "@radix-ui/react-popover": "^1.1.11",
+    "@radix-ui/react-progress": "^1.1.7",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-tabs": "^1.1.1",
     "@radix-ui/react-toast": "^1.2.11",
@@ -76,11 +82,11 @@
     "@chromatic-com/storybook": "^3.2.3",
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
-    "@faker-js/faker": "^9.0.0",
     "@figma/code-connect": "^0.2.1",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^10.1.0",
+    "@semantic-release/github": "^12.0.0",
+    "@semantic-release/npm": "^13.1.4",
     "@storybook/addon-a11y": "^8.5.8",
     "@storybook/addon-essentials": "^8.5.0",
     "@storybook/addon-interactions": "^8.5.0",
@@ -109,6 +115,7 @@
     "@typescript-eslint/parser": "^5.62.0",
     "@vitejs/plugin-react": "^4.3.1",
     "@vitest/coverage-v8": "^1.6.0",
+    "chromatic": "^13.1.4",
     "color": "^4.2.3",
     "eslint": "^8.57.0",
     "eslint-plugin-local-rules": "^3.0.2",
@@ -127,7 +134,7 @@
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "sass": "^1.83.4",
-    "semantic-release": "^23.1.1",
+    "semantic-release": "^25.0.0",
     "storybook": "^8.5.0",
     "stylelint": "^16.8.1",
     "stylelint-config-standard": "^36.0.1",

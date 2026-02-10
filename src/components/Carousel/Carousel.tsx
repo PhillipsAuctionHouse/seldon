@@ -1,4 +1,4 @@
-import { ComponentProps, forwardRef, createContext, useCallback, useEffect, KeyboardEvent } from 'react';
+import { forwardRef, createContext, useCallback, useEffect, KeyboardEvent, useState } from 'react';
 import { getCommonProps, SpacingTokens } from '../../utils';
 import classnames from 'classnames';
 import ClassNames from 'embla-carousel-class-names';
@@ -9,7 +9,11 @@ export type CarouselApi = UseEmblaCarouselType[1];
 
 // to expose more options from the embla carousel API
 // see what is available in https://www.embla-carousel.com/api/options/
-export interface CarouselProps extends ComponentProps<'div'> {
+export interface CarouselProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * Optional element to render as the top-level component e.g. 'div', 'ul', CustomComponent, etc. Defaults to 'div'.
+   */
+  element?: React.ElementType;
   /**
    * Whether the carousel should loop.
    */
@@ -73,6 +77,7 @@ export const CarouselContext = createContext<CarouselContextProps | null>(null);
 const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
   (
     {
+      element: CustomElement,
       loop = false,
       startIndex = 0,
       onSlideChange,
@@ -87,6 +92,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     },
     ref,
   ) => {
+    const Component = CustomElement || 'div';
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
     let disableNavigationDragBreakpoint = {};
     switch (disableNavigationDrag) {
@@ -102,6 +108,9 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       default:
         disableNavigationDragBreakpoint = {};
     }
+
+    const [canScrollPrev, setCanScrollPrev] = useState(false);
+    const [canScrollNext, setCanScrollNext] = useState(false);
 
     const [carouselRef, api] = useEmblaCarousel(
       {
@@ -141,9 +150,22 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
         if (event.key === 'ArrowLeft') {
           event.preventDefault();
           api?.scrollPrev();
+
+          const prevNode = api?.slideNodes().filter((el) => el === document.activeElement)[0]
+            ?.previousElementSibling as HTMLElement;
+
+          if (prevNode) {
+            prevNode?.focus();
+          }
         } else if (event.key === 'ArrowRight') {
           event.preventDefault();
           api?.scrollNext();
+          const nextNode = api?.slideNodes().filter((el) => el === document.activeElement)[0]
+            ?.nextElementSibling as HTMLElement;
+
+          if (nextNode) {
+            nextNode?.focus();
+          }
         }
       },
       [api],
@@ -151,9 +173,11 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
 
     const onSlidesInView = useCallback(
       (api: CarouselApi) => {
-        if (!api) {
-          return;
-        }
+        if (!api) return;
+
+        setCanScrollPrev(api?.canScrollPrev());
+        setCanScrollNext(api?.canScrollNext());
+
         const slideIndex = api.slidesInView()?.[0];
         if (slideIndex !== undefined) {
           onSlideChange?.(slideIndex);
@@ -179,13 +203,13 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
           api: api,
           scrollPrev: () => api?.scrollPrev(),
           scrollNext: () => api?.scrollNext(),
-          canScrollPrev: api?.canScrollPrev() ?? false,
-          canScrollNext: api?.canScrollNext() ?? false,
+          canScrollPrev,
+          canScrollNext,
           columnGap,
           onSlideChange,
         }}
       >
-        <div
+        <Component
           ref={ref}
           onKeyDownCapture={handleKeyDown}
           className={classnames(baseClassName, className)}
@@ -195,7 +219,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
           {...commonProps}
         >
           {children}
-        </div>
+        </Component>
       </CarouselContext.Provider>
     );
   },

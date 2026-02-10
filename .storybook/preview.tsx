@@ -15,7 +15,13 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ['Welcome', 'Design', 'Components', 'Pages'],
+        order: [
+          'Welcome',
+          'Foundations in Seldon',
+          ['Colour', 'Type', 'Grid', 'Spacing', 'Radius', 'Icons & Pictograms'],
+          'Components',
+          'Pages',
+        ],
       },
     },
   },

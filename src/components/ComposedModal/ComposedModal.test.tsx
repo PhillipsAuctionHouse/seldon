@@ -1,7 +1,10 @@
 import { render, screen } from '@testing-library/react';
+import { forwardRef } from 'react';
+import Button from '../../components/Button/Button';
+import { ButtonVariants } from '../../components/Button/types';
 import { px } from '../../utils';
 import { runCommonTests } from '../../utils/testUtils';
-import ComposedModal from './ComposedModal';
+import ComposedModal, { ComposedModalProps } from './ComposedModal';
 
 describe('ComposedModal', () => {
   const onCloseMock = vi.fn();
@@ -9,7 +12,11 @@ describe('ComposedModal', () => {
   afterEach(() => {
     vi.clearAllMocks();
   });
-  runCommonTests((props) => <ComposedModal {...props} isOpen />, 'Modal');
+  const ComponentWithRef = forwardRef<HTMLDivElement, ComposedModalProps>((props, ref) => (
+    <ComposedModal {...props} isOpen ref={ref} />
+  ));
+  ComponentWithRef.displayName = 'ComponentWithRef';
+  runCommonTests(ComponentWithRef, 'Modal');
 
   it('renders the modal title when isOpen is true', () => {
     render(
@@ -18,7 +25,7 @@ describe('ComposedModal', () => {
       </ComposedModal>,
     );
 
-    expect(screen.getByText('Test Modal')).toBeInTheDocument();
+    expect(screen.getByRole('dialog', { name: 'Test Modal' })).toBeInTheDocument();
   });
 
   it('renders the modal children when isOpen is true', () => {
@@ -49,12 +56,26 @@ describe('ComposedModal', () => {
         isOpen
         onClose={onCloseMock}
         title="Test Modal"
-        secondaryButton={{
-          buttonLabel: 'Register to Bid',
-        }}
-        primaryButton={{
-          buttonLabel: 'Browse',
-        }}
+        secondaryButton={
+          <Button
+            className={`${px}-sale-card__cta_button`}
+            onClick={() => console.log('Primary button clicked')}
+            variant={ButtonVariants.primary}
+            style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
+          >
+            Browse
+          </Button>
+        }
+        primaryButton={
+          <Button
+            className={`${px}-sale-card__cta_button`}
+            onClick={() => console.log('Secondary button clicked')}
+            variant={ButtonVariants.secondary}
+            style={{ padding: '16px 48px', width: '100%', whiteSpace: 'nowrap' }}
+          >
+            Register to Bid
+          </Button>
+        }
         footerContent="Optional Disclaimer text"
       >
         <div>Modal Content</div>

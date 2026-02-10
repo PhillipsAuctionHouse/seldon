@@ -9,6 +9,7 @@ import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 import { ComboBoxOption } from './types';
 import { usePrevious } from '../../utils/usePrevious';
+import { Text, TextVariants } from '../Text';
 
 export interface ComboBoxProps {
   /**
@@ -91,6 +92,12 @@ export interface ComboBoxProps {
    * Handler called when the combobox loses focus
    */
   onBlur?: React.FocusEventHandler<HTMLDivElement>;
+
+  /**
+   * Number of characters required in the input before the dropdown options are shown.
+   * @default 0
+   */
+  countOfCharsBeforeDropdown?: number;
 }
 /**
  * ## Overview
@@ -122,6 +129,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     noOptionsMessage = 'No Options.',
     invalid = false,
     invalidText,
+    countOfCharsBeforeDropdown = 0,
     ...props
   },
   ref,
@@ -202,8 +210,13 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
   }, [inputValue, selectedOptionDisplayValue, selectedOption, memoizedGetOptionLabel, options]);
 
   const handleOpen = useCallback(
-    (isOpen: boolean) => {
-      setIsOpen(isOpen);
+    (isOpen: boolean, newValue?: string) => {
+      // we only have newValue if the value is being actively typed, otherwise use the inputValue to determine
+      const hasMetMinimumCharacterCount = (newValue?.length || inputValue.length) >= countOfCharsBeforeDropdown;
+
+      if (!isOpen || (isOpen && hasMetMinimumCharacterCount)) {
+        setIsOpen(isOpen);
+      }
       if (isOpen && selectedOption && filteredOptions.length > 5) {
         /**
          * Wait for dropdown to render before scrolling
@@ -219,7 +232,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
         });
       }
     },
-    [selectedOption, filteredOptions.length],
+    [countOfCharsBeforeDropdown, inputValue.length, selectedOption, filteredOptions.length],
   );
 
   // Handle option selection
@@ -284,7 +297,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
 
     // Open dropdown when we have matching options
     if (newValue !== '' && filteredOptions.length > 0) {
-      handleOpen(true);
+      handleOpen(true, newValue);
     }
   };
 
@@ -380,7 +393,10 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
         />
       )}
       <div ref={containerRef} className={`${baseClassName}__wrapper`}>
-        <label
+        <Text
+          element="label"
+          variant={TextVariants.labelMedium}
+          // @ts-expect-error this is actually a label element
           htmlFor={`${id}-input`}
           className={classnames(`${baseClassName}__label`, {
             [`${baseClassName}__label--hidden`]: hideLabel,
@@ -389,7 +405,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
           data-testid={`${id}-label`}
         >
           {labelText}
-        </label>
+        </Text>
 
         <Command
           loop
@@ -459,7 +475,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                   className={classnames(`${baseClassName}__input`, {
                     [`${baseClassName}__input--invalid`]: invalid,
                   })}
-                  aria-label={ariaLabelInput ? ariaLabelInput : `${id}-input`}
+                  aria-label={ariaLabelInput}
                   data-testid={`${id}-input`}
                   ref={inputRef}
                 />
@@ -470,7 +486,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                     className={`${baseClassName}__close-button`}
                     data-testid={`${id}-clear-button`}
                     onClick={handleClear}
-                    aria-label={ariaLabelClear ? ariaLabelClear : `${id}-clear`}
+                    aria-label={ariaLabelClear}
                     tabIndex={-1}
                     variant={ButtonVariants.tertiary}
                   >
@@ -479,14 +495,13 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                       height={18}
                       width={18}
                       className={`${baseClassName}__icon-button`}
-                      title={ariaLabelClear ? ariaLabelClear : `${id}-clear`}
                     />
                   </IconButton>
                 )}
 
                 {/* Dropdown toggle button */}
                 <IconButton
-                  aria-label={ariaLabelDropdown ? ariaLabelDropdown : `${id}-dropdown`}
+                  aria-label={ariaLabelDropdown}
                   className={classnames(`${baseClassName}__dropdown-button`, {
                     [`${baseClassName}__dropdown-button--open`]: isOpen,
                   })}
@@ -511,7 +526,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
               <Popover.Portal container={popoverContainerRef?.current || document.body}>
                 <Popover.Content
                   className={`${baseClassName}__content`}
-                  aria-label={ariaLabelContent ? ariaLabelContent : `${id}-content`}
+                  aria-label={ariaLabelContent}
                   side="bottom"
                   sideOffset={-5}
                   align="start"
@@ -557,7 +572,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
         {inputProps.validation ? (
           inputProps.validation
         ) : (
-          <p className={classnames(`${baseClassName}__validation`)}>&nbsp;</p>
+          <p className={classnames(`${baseClassName}__empty-validation`)}>&nbsp;</p>
         )}
       </div>
     </div>

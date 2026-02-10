@@ -1,7 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-breadcrumb {
-  @include text($body2);
+  @include text($labelMedium);
 
   color: $pure-black;
 
@@ -27,8 +27,15 @@
       }
 
       &:focus-visible {
-        border-radius: 5px;
+        border-radius: $radius-xs;
         outline: 1px solid $medium-gray;
+      }
+    }
+
+    @include media($breakpoint-xl) {
+      svg {
+        height: 1.5rem;
+        width: 1.5rem;
       }
     }
 

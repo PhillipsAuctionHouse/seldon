@@ -1,0 +1,40 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-notification-banner {
+  background: $light-gray;
+  color: $pure-black;
+  left: 0;
+  padding: $spacing-sm $spacing-md;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  z-index: $notification-banner-z-index;
+
+  @include text($bodySmall);
+
+  & > *,
+  & .#{$px}-text {
+    text-align: center;
+
+    @include text($bodySmall);
+  }
+
+  .#{$px}-link {
+    @include text($linkSmall);
+  }
+
+  > .#{$px}-notification-banner-content {
+    color: $pure-black;
+    text-align: center;
+
+    .#{$px}-link {
+      @include text($linkSmall);
+    }
+  }
+
+  .#{$px}-notification-banner-link {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}

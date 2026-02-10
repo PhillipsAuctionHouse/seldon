@@ -165,6 +165,21 @@ describe('BidSnapshot', () => {
       expect(screen.queryByText('Closes in')).not.toBeInTheDocument();
     });
 
+    it('does not render Countdown timer if shouldHideCountdownTimer is true', () => {
+      const lotCloseDate = new Date(Date.now() + 10000); // 10 seconds from now
+      render(
+        <BidSnapshot
+          startingBid={100}
+          numberOfBids={1}
+          lotStatus={LotStatus.live}
+          lotCloseDate={lotCloseDate}
+          saleCloseDate={saleCloseDate}
+          shouldHideCountdownTimer={true}
+        />,
+      );
+      expect(screen.queryByText('Closes in')).not.toBeInTheDocument();
+    });
+
     it('does not render Countdown timer if lot closed', () => {
       const lotCloseDate = new Date(Date.now() + 10000); // 10 seconds from now
       render(

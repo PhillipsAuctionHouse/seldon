@@ -5,6 +5,8 @@ import { InputProps } from '../Input/Input';
 import { Merge } from 'type-fest';
 import { SelectVariants } from './types';
 import { Icon } from '../Icon';
+import { Text, TextVariants } from '../Text';
+import { getInputClassNames } from '../Input/utils';
 
 export interface SelectProps extends Merge<InputProps, React.ComponentProps<'select'>> {
   /**
@@ -23,6 +25,11 @@ export interface SelectProps extends Merge<InputProps, React.ComponentProps<'sel
    * Determines the variant of the select
    */
   variant?: SelectVariants;
+
+  /**
+   * Determines if the select is not in a form
+   */
+  isStandalone?: boolean;
 }
 
 /**
@@ -57,6 +64,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       value,
       warn,
       warnText,
+      isStandalone = false,
       ...rest
     },
     ref,
@@ -73,6 +81,8 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       warnText,
     });
 
+    const inputClassNames = getInputClassNames();
+
     const wrapperClassnames = classnames(`${px}-${type}-input`, `${px}-input`, `${px}-input--${size}`, {
       [`${px}-input--inline`]: inline,
       [`${px}-input--readonly`]: readOnly,
@@ -80,8 +90,9 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       [`${px}-input--invalid`]: inputProps.invalid,
       [`${px}-input--warn`]: inputProps.warn,
       [`${className}__wrapper`]: className,
+      [`${px}-${type}-input__standalone`]: isStandalone,
     });
-    const selectClassnames = classnames(className, `${px}-input__input`, {
+    const selectClassnames = classnames(className, inputClassNames.input, {
       [`${px}-input__select--tertiary`]: variant === SelectVariants.tertiary,
     });
 
@@ -91,13 +102,17 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     return (
       <div className={wrapperClassnames}>
-        <label
+        <Text
+          // TODO: This should be extracted to a shared InputLabel component
+          element="label"
+          variant={TextVariants.labelMedium}
           data-testid={`${id}-label`}
+          // @ts-expect-error this is actually a label element
           htmlFor={id}
-          className={classnames(`${px}-input__label`, { [`${px}-input__label--hidden`]: hideLabel })}
+          className={classnames(inputClassNames.label, { [inputClassNames.labelHidden]: hideLabel })}
         >
           {labelText}
-        </label>
+        </Text>
         <div className={selectContainerClassnames}>
           <select
             className={selectClassnames}

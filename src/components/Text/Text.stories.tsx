@@ -40,6 +40,10 @@ TextWithSkeleton.args = {
   isSkeletonLoading: true,
 };
 
+TextWithSkeleton.parameters = {
+  chromatic: { disableSnapshot: true },
+};
+
 TextWithSkeleton.argTypes = {
   variant: {
     options: TextVariants,

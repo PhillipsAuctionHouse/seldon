@@ -4,6 +4,7 @@ import Link, { LinkProps } from '../Link/Link';
 import { LinkVariants } from '../Link/types';
 import { getLinkVariantClassName } from '../Link/utils';
 import { runCommonTests } from '../../utils/testUtils';
+import { forwardRef } from 'react';
 
 const linkProps = {
   href: 'https://example.com',
@@ -13,7 +14,11 @@ const linkProps = {
 };
 
 describe('LinkBlock', () => {
-  runCommonTests((props) => <LinkBlock linkProps={linkProps} {...props} />, 'LinkBlock');
+  const ComponentWithRef = forwardRef<HTMLDivElement, React.ComponentProps<typeof LinkBlock>>((props, ref) => (
+    <LinkBlock {...props} linkProps={linkProps} ref={ref} />
+  ));
+  ComponentWithRef.displayName = 'ComponentWithRef';
+  runCommonTests(ComponentWithRef, 'LinkBlock');
 
   it('renders with data-testid when id prop is passed', () => {
     const id = 'test-id';
@@ -27,7 +32,7 @@ describe('LinkBlock', () => {
 
     const linkElement = screen.getByRole('link', { name: 'My Link' });
     expect(linkElement).toBeInTheDocument();
-    expect(linkElement).toHaveClass(getLinkVariantClassName(LinkVariants.link ?? 'link'));
+    expect(linkElement).toHaveClass(getLinkVariantClassName(LinkVariants.linkMedium));
     expect(linkElement).toHaveAttribute('href', 'https://example.com');
     expect(linkElement).toHaveAttribute('target', '_blank');
 

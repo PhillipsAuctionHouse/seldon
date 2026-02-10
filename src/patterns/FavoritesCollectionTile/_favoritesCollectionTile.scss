@@ -20,6 +20,7 @@
 
   &__info {
     flex: 1;
+    min-height: calc($spacing-sm + $spacing-xsm + $font-size-label-medium + $font-size-body-medium);
     overflow: hidden;
   }
 
@@ -41,7 +42,8 @@
     line-clamp: 1;
     overflow: hidden;
 
-    h3.#{$px}-text {
+    &.#{$px}-text {
+      font-variation-settings: 'wght' 600;
       margin-bottom: 0;
     }
   }
@@ -50,12 +52,12 @@
     align-items: center;
     align-self: normal;
     background-position: center;
-    border-radius: 50%;
+    border-radius: $radius-3xl;
     display: flex;
     height: 2.5rem;
     justify-content: center;
     position: relative;
-    top: $spacing-sm;
+    top: $spacing-micro;
     transition: background 0.8s;
     width: 2.5rem;
 
@@ -85,7 +87,7 @@
 
     &--item {
       all: unset;
-      background-color: $soft-gray;
+      background-color: $white-100;
       cursor: pointer;
       display: block;
       padding: 0.75rem 1rem;
@@ -109,6 +111,7 @@
   }
 
   &__media-container {
+    background-color: $soft-gray;
     position: relative;
     width: 100%;
   }
@@ -132,7 +135,8 @@
     }
 
     &--create-list {
-      border: 1px solid #0000001f;
+      background-color: $white-100;
+      border: 1px solid $black-25;
       border-radius: 0;
     }
 
@@ -145,8 +149,8 @@
   }
 
   &__icon {
-    grid-column: 1;
-    justify-self: start;
+    justify-content: flex-start;
+    margin-bottom: $spacing-xsm;
     pointer-events: none;
 
     &-rotate {
@@ -155,8 +159,10 @@
 
     &-circle {
       border: 2px solid $dark-gray;
-      border-radius: 50%;
-      transform: scale(0.846);
+      border-radius: $radius-3xl;
+      height: 1.5rem;
+      justify-content: flex-start;
+      width: 1.5rem;
     }
   }
 
@@ -166,18 +172,21 @@
 
   // will update font size with variable rem sizing after design takes a pass at it some point in the future
   &__text {
-    color: $dark-gray;
-    font-size: 0.75rem;
-    font-variation-settings: 'wght' 400;
-    padding-top: 5px;
     text-transform: none;
-  }
-
-  &__create-spacing {
-    height: calc($spacing-xsm + var(--body-line-height-size3) + var(--heading-line-height-size5));
   }
 
   [data-radix-popper-content-wrapper] > * {
     all: unset;
+  }
+
+  &__create-variant {
+    all: unset;
+    background: none;
+    height: 100%;
+    width: 100%;
+
+    &:focus-visible {
+      outline: 1px solid $pure-black;
+    }
   }
 }

@@ -3,6 +3,7 @@ import { getCommonProps } from '../../utils';
 import Link, { LinkProps } from '../Link/Link';
 import { LinkVariants } from '../Link/types';
 import { Text } from '../Text';
+import { forwardRef } from 'react';
 
 export interface LinkBlockProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Props for the Link component */
@@ -21,17 +22,24 @@ export interface LinkBlockProps extends React.HTMLAttributes<HTMLDivElement> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-links-linkblock--overview)
  *
  */
-const LinkBlock = ({ linkProps, description, className: classNameProp, ...props }: LinkBlockProps) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'LinkBlock');
-  const className = classnames(baseClassName, classNameProp);
-  const LinkComponent = linkProps.element ?? Link;
-
-  return (
-    <div {...commonProps} className={className} {...props}>
-      <LinkComponent {...linkProps} data-testid={`${commonProps['data-testid']}-link`} variant={LinkVariants.link} />
-      <Text className={`${baseClassName}__description`}>{description}</Text>
-    </div>
-  );
-};
+const LinkBlock = forwardRef<HTMLDivElement, LinkBlockProps>(
+  ({ linkProps, description, className: classNameProp, ...props }, ref) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps(props, 'LinkBlock');
+    const className = classnames(baseClassName, classNameProp);
+    const LinkComponent = linkProps.element ?? Link;
+    return (
+      <div {...commonProps} className={className} {...props} ref={ref}>
+        <LinkComponent
+          {...linkProps}
+          className={`${baseClassName}__link`}
+          data-testid={`${commonProps['data-testid']}-link`}
+          variant={LinkVariants.linkMedium}
+        />
+        <Text className={`${baseClassName}__description`}>{description}</Text>
+      </div>
+    );
+  },
+);
+LinkBlock.displayName = 'LinkBlock';
 
 export default LinkBlock;

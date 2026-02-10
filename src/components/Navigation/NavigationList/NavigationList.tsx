@@ -1,8 +1,8 @@
+import classNames from 'classnames';
 import * as React from 'react';
 import { px } from '../../../utils';
-import classNames from 'classnames';
-import { NavigationItemProps } from '../NavigationItem/NavigationItem';
 import { Text, TextVariants } from '../../Text';
+import { NavigationItemProps } from '../NavigationItem/NavigationItem';
 
 export interface NavigationListProps extends React.ComponentProps<'ul'> {
   /**
@@ -73,7 +73,7 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
         {leftSectionItems.length > 0 ? (
           <div className={classNames(`${px}-nav__list__section`, `${px}-nav__list__section--start`)}>
             {leftSectionHeading ? (
-              <Text variant={TextVariants.heading4} className={`${px}-nav__list__section--start__title`}>
+              <Text variant={TextVariants.headingMedium} className={`${px}-nav__list__section--start__title`}>
                 {leftSectionHeading}
               </Text>
             ) : null}
@@ -83,7 +83,7 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
         {rightSectionItems.length > 0 ? (
           <div className={classNames(`${px}-nav__list__section`, `${px}-nav__list__section--end`)}>
             {rightSectionHeading ? (
-              <Text variant={TextVariants.heading4} className={`${px}-nav__list__section--end__title`}>
+              <Text variant={TextVariants.headingMedium} className={`${px}-nav__list__section--end__title`}>
                 {rightSectionHeading}
               </Text>
             ) : null}

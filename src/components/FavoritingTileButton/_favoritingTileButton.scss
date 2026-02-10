@@ -2,7 +2,7 @@
 
 .#{$px}-favoriting-tile-button {
   align-items: center;
-  background-color: $white;
+  background-color: $white-100;
   border: 1px solid $light-gray;
   display: flex;
   flex-shrink: 0;
@@ -21,6 +21,11 @@
     gap: $spacing-micro;
     overflow: hidden;
 
+    &--action,
+    &--number {
+      font-variation-settings: 'wght' 600;
+    }
+
     span {
       color: inherit;
       overflow: hidden;
@@ -29,11 +34,11 @@
     }
   }
 
-  &:hover {
+  @include hoverOrActive {
     align-items: center;
     background: $button-hover;
     border: 1px solid $button-hover;
-    color: $white;
+    color: $white-100;
     cursor: pointer;
   }
 }

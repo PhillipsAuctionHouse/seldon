@@ -1,0 +1,55 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-filter-button {
+  border: 1px solid $bg-border;
+  gap: 4px;
+  height: inherit;
+  padding: $spacing-xsm $spacing-sm;
+
+  &:hover {
+    border: 1px solid $black-100;
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 0.5px $bg-border;
+    outline: none;
+  }
+
+  &--selected {
+    border: 1px solid $black-100;
+
+    &:focus-visible {
+      box-shadow: 0 0 0 0.5px $black-100;
+      outline: none;
+    }
+  }
+
+  &--filter {
+    border-radius: $radius-3xl;
+  }
+
+  &__label {
+    font-variation-settings: 'wght' 600;
+  }
+
+  &--count.#{$px}-filter-button--count.#{$px}-text {
+    background: $black-100;
+    border: 2px solid $white-100;
+    border-radius: $radius-3xl;
+    color: $white-100;
+    display: inline-block;
+    font-variation-settings: 'wght' 600;
+    height: 1.5rem;
+    line-height: 1.2rem;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: -15px;
+    width: 1.5rem;
+
+    @include media($breakpoint-md) {
+      line-height: 1.3rem;
+    }
+  }
+}

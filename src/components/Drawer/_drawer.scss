@@ -2,12 +2,11 @@
 
 .#{$px}-drawer {
   align-items: center;
-  background-color: $white;
+  background-color: $white-100;
   display: flex;
   flex-direction: column;
   height: 100dvh;
   max-width: 480px;
-  padding: $padding-xl $padding-md $padding-md;
   position: fixed;
   right: 0;
   top: 0;
@@ -18,10 +17,6 @@
     outline: none;
   }
 
-  .#{$px}-icon-close-x:hover {
-    color: $white;
-  }
-
   @media (max-width: $breakpoint-sm) {
     max-width: 100%;
   }
@@ -30,25 +25,95 @@
     padding-bottom: $padding-sm;
   }
 
-  &__overlay {
-    background-color: $overlay-black;
-    inset: 0;
-    position: fixed;
-    z-index: 10;
-  }
-
   &__close {
     align-items: center;
-    border-radius: 100%;
+    border-radius: $radius-3xl;
     color: $pure-black;
     display: inline-flex;
     justify-content: center;
     position: absolute;
     right: 10px;
     top: 10px;
+    z-index: 10;
+  }
+
+  &__overlay {
+    background-color: $black-75;
+    inset: 0;
+    position: fixed;
+    z-index: 10;
+  }
+
+  // Bottom sheet modifier
+  &--bottom {
+    border-radius: $radius-md $radius-md 0 0;
+    box-shadow: 0 -2px 16px rgba($pure-black, 0.08);
+    height: auto;
+    inset: auto 0 0;
+    max-width: 100%;
+    min-height: 30vh;
+    width: 100%;
+
+    @media (max-width: $breakpoint-sm) {
+      max-width: 100%;
+    }
+  }
+
+  &__bottom-content {
+    align-items: center;
+    border-bottom: 1px solid $medium-gray;
+    display: flex;
+    margin-bottom: $spacing-sm;
+    width: 100%;
+
+    &--label {
+      flex: 1;
+      font-variation-settings: 'wght' 600;
+      margin: $spacing-md;
+      padding-right: $spacing-xxxl;
+      text-align: center;
+      width: fit-content;
+    }
+  }
+
+  &__content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+    padding-top: $snowflake-menu-padding;
+    width: 100%;
+
+    // different designs require different padding (ep = extra padding). more info in the component.
+
+    &--ep0 {
+      padding-top: 0;
+    }
+
+    &--ep1 {
+      padding: 1rem;
+      padding-top: $snowflake-menu-padding;
+    }
+
+    &--ep2 {
+      padding: 2rem;
+    }
+
+    &--ep3 {
+      padding: 3rem;
+      padding-top: $snowflake-menu-padding;
+    }
+
+    // make the children scroll in their little children box
+    > * {
+      overflow-y: auto;
+    }
   }
 }
 
+// Drawer open/close animations
 .#{$px}-drawer[data-state='open'] {
   animation: content-show $drawer-content-transition;
 }
@@ -57,14 +122,39 @@
   animation: content-close $drawer-content-transition;
 }
 
-.#{$px}__overlay[data-state='open'] {
+// Overlay animations
+.#{$px}-drawer__overlay[data-state='open'] {
   animation: overlay-show $default-overlay-transition;
 }
 
-.#{$px}__overlay[data-state='closed'] {
+.#{$px}-drawer__overlay[data-state='closed'] {
   animation: overlay-close $default-overlay-transition;
 }
 
+// Drawer left side
+.#{$px}-drawer[data-side='left'][data-state='open'] {
+  animation: content-show-left $drawer-content-transition;
+}
+
+.#{$px}-drawer[data-side='left'][data-state='closed'] {
+  animation: content-close-left $drawer-content-transition;
+}
+
+.#{$px}-drawer[data-side='left'] {
+  left: 0;
+  right: auto;
+}
+
+// Drawer bottom sheet animations
+.#{$px}-drawer--bottom[data-state='open'] {
+  animation: bottom-sheet-content-show $drawer-content-transition;
+}
+
+.#{$px}-drawer--bottom[data-state='closed'] {
+  animation: bottom-sheet-content-close $drawer-content-transition;
+}
+
+// Keyframes
 @keyframes content-show {
   from {
     opacity: 0;
@@ -86,6 +176,54 @@
   to {
     opacity: 0;
     transform: translateX(100%);
+  }
+}
+
+@keyframes content-show-left {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes content-close-left {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes bottom-sheet-content-show {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bottom-sheet-content-close {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(100%);
   }
 }
 

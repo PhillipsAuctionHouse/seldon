@@ -1,0 +1,356 @@
+import { Meta } from '@storybook/react';
+import React, { useEffect, useRef, useState } from 'react';
+import { LanguageSelector } from '../../patterns/LanguageSelector';
+import { AuthState } from '../../patterns/UserManagement/types';
+import UserManagement from '../../patterns/UserManagement/UserManagement';
+import Header, { HeaderProps } from '../../site-furniture/Header/Header';
+import { SupportedLanguages } from '../../types/commonTypes';
+import { px } from '../../utils';
+import { Icon } from '../Icon';
+import { Link, LinkVariants } from '../Link';
+import Navigation from '../Navigation/Navigation';
+import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
+import NavigationItemTrigger from '../Navigation/NavigationItemTrigger/NavigationItemTrigger';
+import NavigationList from '../Navigation/NavigationList/NavigationList';
+import Search, { SearchProps } from '../Search/Search';
+import { SearchResult } from '../Search/SearchResults/SearchResults';
+import NotificationBanner, { NotificationBannerProps } from './NotificationBanner';
+import { LOREM_HUGE } from '../../utils/staticContent';
+
+const fetchData = async () => {
+  let searchResults: { makers: Array<SearchResult> } = { makers: [] };
+  // Call to get search results
+  searchResults = await new Promise((resolve) => {
+    setTimeout(
+      () =>
+        resolve({
+          makers: [
+            { id: 'result1', label: 'Name', url: 'http://www.example.com' },
+            { id: 'result2', label: 'Another Name', url: 'http://www.example.com' },
+            { id: 'result3', label: 'Yet Another Name', url: 'http://www.example.com' },
+            { id: 'result4', label: 'Name', url: 'http://www.example.com' },
+            { id: 'result5', label: 'Another Name', url: 'http://www.example.com' },
+            { id: 'result6', label: 'Yet Another Name Yet Again', url: 'http://www.example.com' },
+            { id: 'result7', label: 'Name', url: 'http://www.example.com' },
+            { id: 'result8', label: 'Another Name', url: 'http://www.example.com' },
+            { id: 'result9', label: 'Yet Another Name Yet Again', url: 'http://www.example.com' },
+            { id: 'result10', label: 'Name', url: 'http://www.example.com' },
+            { id: 'result11', label: 'Another Name', url: 'http://www.example.com' },
+            { id: 'result12', label: 'Yet Another Name Yet Again', url: 'http://www.example.com' },
+          ],
+        }),
+      2000,
+    );
+  });
+  return searchResults;
+};
+
+const StatefulSearch = (props: SearchProps) => {
+  const [autoCompleteResults, setAutoCompleteResults] = React.useState([] as Array<SearchResult>);
+  const [state, setState] = React.useState<SearchProps['state']>('idle');
+
+  const onSearch = (searchQuery: string) => {
+    if (searchQuery?.includes('?')) {
+      setState('invalid');
+      return;
+    }
+    // Call to get auto complete results
+    if (searchQuery.length > 2) {
+      setState('loading');
+      fetchData()
+        .then((data) => {
+          setAutoCompleteResults(data.makers);
+          setState('idle');
+        })
+        .catch((error) => console.error(error));
+    }
+  };
+  return (
+    <Search
+      {...props}
+      onSearch={(value) => {
+        onSearch(value);
+      }}
+      searchResults={autoCompleteResults}
+      state={state}
+    />
+  );
+};
+
+// More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
+const meta = {
+  title: 'Components/NotificationBanner',
+  component: NotificationBanner,
+} satisfies Meta<typeof NotificationBanner>;
+
+export default meta;
+export const Playground = (props: NotificationBannerProps) => (
+  <div style={{ height: '100px' }}>
+    <NotificationBanner {...props} />
+  </div>
+);
+
+// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
+Playground.args = {
+  children: (
+    <div>
+      <span>
+        Priority Bidding is here: Place a binding bid 48+ hours before the auction to secure a lower Buyer’s Premium.
+        Available in live auctions starting Fall 2025 (excluding Watches).{' '}
+        <Link href="https://www.phillips.com/article/160527128/priority-bidding-for-live-auctions">Learn More</Link>
+      </span>
+    </div>
+  ),
+};
+
+Playground.argTypes = {};
+
+export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: AuthState }) => {
+  const [currentLanguage, setCurrentLanguage] = useState(SupportedLanguages.en);
+  const [notificationData, setNotificationData] = useState<React.ReactNode>(<></>);
+  const bannerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setNotificationData(
+        <div>
+          <Link href="#">Our Moved by Beauty: Works by Lucie Rie from an Important Asian Collection Sale</Link> is
+          currently experiencing technical difficulties and there is a delay with livestream sale room bidding. You can
+          bid, but there may be a delay with confirmations.
+        </div>,
+      );
+    }, 1000);
+    return () => clearTimeout(timeout);
+  }, []);
+  return (
+    <div style={{ minHeight: '400px', display: 'flex', flexDirection: 'column' }}>
+      <NotificationBanner ref={bannerRef}>{notificationData}</NotificationBanner>
+      <Header {...props} logo={<Icon icon="PhillipsLogo" />} bannerRef={bannerRef}>
+        <Navigation id={`${px}-main-nav`}>
+          <NavigationList id={`${px}-main-nav-list`}>
+            <NavigationItemTrigger id="auctions" label="Auctions">
+              <NavigationList
+                id={`${px}-auctions-nav-list`}
+                leftSectionHeading="Upcoming"
+                rightSectionHeading="Auction Information & Services"
+              >
+                <NavigationItem
+                  badge="New York"
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="Editions & Works on Paper"
+                />
+                <NavigationItem
+                  badge="New York"
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="Design"
+                />
+                <NavigationItem
+                  badge="Geneva"
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="Reloaded: The Rebirth of Mechanical Watchmaking, 1980-1999"
+                />
+                <NavigationItem
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="Phillips Watches Online: The Geneva Sessions, Fall 2024"
+                />
+                <NavigationItem
+                  badge="Hong Kong"
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="Modern & Contemporary Art Evening Sale"
+                />
+                <NavigationItem
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="Damien Hirst: Online Auction"
+                />
+                <NavigationItem
+                  badge="Hong Kong"
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="New Now: Modern & Contemporary Art"
+                />
+                <NavigationItem
+                  badge="London"
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="Casa Fornaroli"
+                />
+                <NavigationItem
+                  badge="Geneva"
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="The Geneva Watch Auction: XVII"
+                />
+                <NavigationItem
+                  badge="New York"
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="Modern & Contemporary Art Day Sale—Morning Session"
+                />
+                <NavigationItem
+                  badge="New York"
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="Modern & Contemporary Art Day Sale—Afternoon Session"
+                />
+                <NavigationItem
+                  badge="New York"
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="Modern & Contemporary Art Evening Sale"
+                />
+                <NavigationItem
+                  badge="London"
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="Wired: Online Auction"
+                />
+                <NavigationItem
+                  badge="Hong Kong "
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="The Imperial Patek Philippe Sale"
+                />
+                <NavigationItem
+                  badge="Hong Kong"
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="Disruptors: Evening Sale of Modern & Contemporary Art, Design and Watches"
+                />
+                <NavigationItem
+                  href="#"
+                  isViewAllLink
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="View All"
+                />
+                <NavigationItem
+                  href="#"
+                  navGroup="nav-link-end"
+                  navType={LinkVariants.linkLarge}
+                  label="Auction Calendar"
+                />
+                <NavigationItem
+                  href="#"
+                  navGroup="nav-link-end"
+                  navType={LinkVariants.linkLarge}
+                  label="Auction Results"
+                />
+                <NavigationItem
+                  href="#"
+                  navGroup="nav-link-end"
+                  navType={LinkVariants.linkLarge}
+                  label="Artists & Makers"
+                />
+                <NavigationItem href="#" navGroup="nav-link-end" navType={LinkVariants.linkLarge} label="How To Buy" />
+                <NavigationItem
+                  href="#"
+                  navGroup="nav-link-end"
+                  navType={LinkVariants.linkLarge}
+                  label="Remote Bidding"
+                />
+              </NavigationList>
+            </NavigationItemTrigger>
+            <NavigationItem href="#" label="Calendar" />
+            <NavigationItemTrigger id="departments" label="Departments">
+              <NavigationList id={`${px}-departments-nav-list`} leftSectionHeading="Our Specialist Departments">
+                <NavigationItem
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="Modern & Contemporary Art"
+                />
+                <NavigationItem href="#" navGroup="nav-link-start" navType={LinkVariants.linkLarge} label="Design" />
+                <NavigationItem href="#" navGroup="nav-link-start" navType={LinkVariants.linkLarge} label="Editions" />
+                <NavigationItem href="#" navGroup="nav-link-start" navType={LinkVariants.linkLarge} label="Jewels" />
+                <NavigationItem
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="Photographs"
+                />
+                <NavigationItem href="#" navGroup="nav-link-start" navType={LinkVariants.linkLarge} label="Watches" />
+                <NavigationItem
+                  href="#"
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="Private Sales"
+                />
+                <NavigationItem
+                  href="#"
+                  isViewAllLink
+                  navGroup="nav-link-start"
+                  navType={LinkVariants.linkLarge}
+                  label="View All"
+                />
+              </NavigationList>
+            </NavigationItemTrigger>
+            <NavigationItem href="#" id="exhibitions" label="Exhibitions" />
+            <NavigationItem href="#" label="Perpetual" />
+            <NavigationItem href="#" label="Dropshop" />
+            <NavigationItem href="#" label="Editorial" />
+          </NavigationList>
+          <StatefulSearch placeholder="Search for makers" />
+        </Navigation>
+        <LanguageSelector onLanguageChange={setCurrentLanguage} currentLanguage={currentLanguage} />
+        <UserManagement authState={authState} onLogin={() => console.log('login')} href="/account" />
+      </Header>
+      <div style={{ paddingTop: `${180 + (bannerRef.current?.offsetHeight || 0)}px` } as React.CSSProperties}>
+        <div>{LOREM_HUGE}</div>
+      </div>
+    </div>
+  );
+};
+
+export const StringMessage = (props: NotificationBannerProps) => (
+  <div style={{ height: '100px' }}>
+    <NotificationBanner {...props} />
+  </div>
+);
+
+StringMessage.args = {
+  children: 'You can bid, but there may be a delay with confirmations.',
+};
+
+export const NestedMessage = (props: NotificationBannerProps) => (
+  <div style={{ height: '100px' }}>
+    <NotificationBanner {...props} />
+  </div>
+);
+
+NestedMessage.args = {
+  children: (
+    <>
+      <div>
+        Test Message:
+        <br />
+        <div>
+          Click here to:
+          <Link href="#" className={`${px}-notification-banner-link`}>
+            Learn more
+          </Link>
+        </div>
+      </div>
+    </>
+  ),
+};

@@ -9,30 +9,69 @@ $lg: #{$px}-input--lg;
   flex-direction: column;
   width: 100%;
 
-  &--hidden {
+  &--hidden,
+  &__label--hidden {
     @include hidden;
   }
 
-  &__label {
-    @include text($string2);
-
-    color: $pure-black;
+  &__label.#{$px}-text {
     font-variation-settings: 'wght' 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: $spacing-xsm;
     width: fit-content;
     word-break: break-word;
+  }
 
-    &--hidden {
-      @include hidden;
+  &__wrapper {
+    accent-color: $black-100;
+    align-items: center;
+    border: 1px solid $black-100;
+    border-radius: $radius-xs;
+    display: inline-flex;
+    font-variation-settings: 'wght' 600;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+    padding: $padding-xsm;
+    position: relative;
+
+    &::placeholder {
+      color: $cta-inactive;
+      font-variation-settings: 'wght' 600;
+    }
+
+    &:focus-visible,
+    &:focus-within {
+      outline: 1px solid $pure-black;
+    }
+
+    .#{$px}-input__wrapper__input,
+    .#{$px}-input__input {
+      @include text($bodyMedium);
+
+      border: none;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+
+    &__adornment {
+      align-items: center;
+      display: flex;
+      margin-right: 0.25rem;
+      user-select: none;
+      white-space: nowrap;
     }
   }
 
   &__input {
-    @include text($string2);
+    @include text($bodyMedium);
 
-    accent-color: $soft-black;
-    border: 1px solid $keyline-gray;
-    border-radius: 0.1875rem;
+    accent-color: $black-100;
+    border: 1px solid $black-100;
+    border-radius: $radius-xs;
     font-variation-settings: 'wght' 600;
     margin-bottom: 0.25rem;
     padding: $padding-xsm;
@@ -44,6 +83,11 @@ $lg: #{$px}-input--lg;
     &:focus-visible {
       outline: 1px solid $pure-black;
     }
+
+    &:hover {
+      accent-color: $cta-hover;
+      border-color: $cta-hover;
+    }
   }
 
   &__validation {
@@ -54,13 +98,18 @@ $lg: #{$px}-input--lg;
     overflow: hidden;
   }
 
+  &__empty-validation {
+    line-height: $spacing-sm;
+  }
+
   // Inline
   &--inline {
     align-items: center;
     flex-flow: row wrap;
     gap: 1rem;
 
-    .#{$px}-input__input {
+    .#{$px}-input__input,
+    .#{$px}-input__wrapper {
       align-self: center;
       width: unset;
     }
@@ -72,7 +121,8 @@ $lg: #{$px}-input--lg;
     cursor: default;
 
     .#{$px}-input__label,
-    .#{$px}-input__input {
+    .#{$px}-input__input,
+    .#{$px}-input__wrapper {
       color: inherit;
     }
     .#{$px}-input__label:hover,
@@ -86,12 +136,13 @@ $lg: #{$px}-input--lg;
     pointer-events: none;
 
     .#{$px}-input__label,
-    .#{$px}-input__input {
+    .#{$px}-input__input,
+    .#{$px}-input__wrapper {
       cursor: default;
     }
 
     .#{$px}-input__input {
-      background-color: rgba(239, 239, 239, 30%);
+      background-color: rgba($pure-black, 0.05);
     }
   }
 
@@ -109,13 +160,20 @@ $lg: #{$px}-input--lg;
       color: $pure-black;
     }
 
-    .#{$px}-input__input {
+    .#{$px}-input__input,
+    .#{$px}-input__wrapper {
       border: 1px solid $error-red;
       box-shadow: inset 0 0 3px 3px $error-pink;
 
       &:focus-within {
         outline: 1px solid $error-red;
       }
+    }
+
+    .#{$px}-input__wrapper .#{$px}-input__input {
+      border: none;
+      box-shadow: none;
+      outline: none;
     }
   }
 
@@ -138,9 +196,18 @@ $lg: #{$px}-input--lg;
 
 .#{$px}-radio-input,
 .#{$px}-checkbox-input {
+  .#{$px}-input__label {
+    @include text($bodyMedium);
+
+    font-variation-settings: 'wght' 600;
+    margin-bottom: 0;
+  }
+
   .#{$px}-input__input {
     align-self: flex-start;
     cursor: pointer;
+    height: 16px;
+    width: 16px;
   }
 
   &.#{$px}-input--inline {

@@ -19,6 +19,10 @@ export interface BidMessageProps extends ComponentProps<'p'> {
    * Variant type - positive | negative
    */
   variant?: BidMessageVariants;
+  /**
+   * Text variant to use for the message text
+   */
+  textVariant?: TextVariants;
 }
 /**
  * ## Overview
@@ -34,6 +38,7 @@ const BidMessage = ({
   hasIcon = true,
   message,
   variant = BidMessageVariants.positive,
+  textVariant = TextVariants.labelMedium,
   ...props
 }: BidMessageProps) => {
   const { className: baseClassName, ...commonProps } = getCommonProps(props, 'BidMessage');
@@ -46,7 +51,7 @@ const BidMessage = ({
   return (
     <div {...commonProps} className={classnames(baseClassName, className)} {...props}>
       {hasIcon ? icon : null}
-      <Text variant={TextVariants.string2} className={`${baseClassName}-text`}>
+      <Text variant={textVariant} className={`${baseClassName}-text`}>
         {message}
       </Text>
     </div>

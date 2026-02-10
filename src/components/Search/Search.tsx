@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, forwardRef, useContext, useRef, useState } from 'react';
 import { encodeURLSearchParams, getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
 import Input from '../Input/Input';
@@ -11,6 +11,7 @@ import { HeaderContext } from '../../site-furniture/Header/Header';
 import { SearchButton } from './SearchButton';
 import { CSSTransition } from 'react-transition-group';
 import { RemoveScroll } from 'react-remove-scroll';
+import { LinkVariants } from '../Link';
 
 export interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -57,171 +58,177 @@ export interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {
   invalidText?: string;
 }
 
-const Search = ({
-  onSearch,
-  onCancel,
-  searchResults = [],
-  state = 'idle',
-  defaultValue = '',
-  className,
-  placeholder = '',
-  searchButtonText = 'Search',
-  loadingText = 'Search In Progress...',
-  invalidText = 'Invalid search',
-  getAllResultsText = (searchValue) => `View all results for ${searchValue}`,
-  getAllResultsLink = (searchValue) => `/Search?Search=${searchValue}`,
-  ...props
-}: React.PropsWithChildren<SearchProps>) => {
-  const { className: baseClassName, 'data-testid': baseTestId, ...commonProps } = getCommonProps(props, 'Search');
-  const headerContext = React.useContext(HeaderContext);
-  const searchInputRef = React.useRef<HTMLInputElement>(null);
-  const searchFormRef = React.useRef<HTMLFormElement>(null);
-  const searchContainerRef = React.useRef<HTMLDivElement>(null);
-  const isSearchExpanded = headerContext.isSearchExpanded;
-  const value = searchInputRef.current?.value;
-  const [shouldShowResults, setShouldShowResults] = React.useState(true);
+const Search = forwardRef<HTMLDivElement, React.PropsWithChildren<SearchProps>>(
+  (
+    {
+      onSearch,
+      onCancel,
+      searchResults = [],
+      state = 'idle',
+      defaultValue = '',
+      className,
+      placeholder = '',
+      searchButtonText = 'Search',
+      loadingText = 'Search In Progress...',
+      invalidText = 'Invalid search',
+      getAllResultsText = (searchValue) => `View all results for ${searchValue}`,
+      getAllResultsLink = (searchValue) => `/Search?Search=${searchValue}`,
+      ...props
+    },
+    ref,
+  ) => {
+    const { className: baseClassName, 'data-testid': baseTestId, ...commonProps } = getCommonProps(props, 'Search');
+    const headerContext = useContext(HeaderContext);
+    const searchInputRef = useRef<HTMLInputElement>(null);
+    const searchFormRef = useRef<HTMLFormElement>(null);
+    const searchContainerRef = useRef<HTMLDivElement>(null);
+    const isSearchExpanded = headerContext.isSearchExpanded;
+    const value = searchInputRef.current?.value;
+    const [shouldShowResults, setShouldShowResults] = useState(true);
 
-  const onInputChange = onSearch
-    ? (e: { target: { value: string } }) => {
-        onSearch(e.target.value);
-      }
-    : undefined;
+    const onInputChange = onSearch
+      ? (e: { target: { value: string } }) => {
+          onSearch(e.target.value);
+        }
+      : undefined;
 
-  useOnClickOutside(searchContainerRef, (event) => {
-    onCancel?.();
-    showSearch(false);
-    event.stopPropagation();
-  });
+    useOnClickOutside(searchContainerRef, (event) => {
+      onCancel?.();
+      showSearch(false);
+      event.stopPropagation();
+    });
 
-  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLAnchorElement>) => {
-    e.stopPropagation();
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      if (value && value.length > 2) {
-        const allResultsLink = encodeURLSearchParams(getAllResultsLink(value));
-        setShouldShowResults(false);
-        window.location.href = allResultsLink;
+    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLAnchorElement>) => {
+      e.stopPropagation();
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (value && value.length > 2) {
+          const allResultsLink = encodeURLSearchParams(getAllResultsLink(value));
+          setShouldShowResults(false);
+          window.location.href = allResultsLink;
+        }
+        if (e.currentTarget instanceof HTMLAnchorElement) {
+          setShouldShowResults(false);
+          e.currentTarget.click();
+        }
       }
-      if (e.currentTarget instanceof HTMLAnchorElement) {
-        setShouldShowResults(false);
-        e.currentTarget.click();
+      if (e.key === 'Escape') {
+        searchFormRef.current?.reset();
+        headerContext.setIsSearchExpanded(false);
       }
-    }
-    if (e.key === 'Escape') {
+    };
+
+    useEffect(() => {
+      // means we're opening search
+      if (isSearchExpanded) {
+        searchInputRef.current?.focus();
+        return;
+      }
+    }, [isSearchExpanded]);
+
+    const showSearch: typeof headerContext.setIsSearchExpanded = (isSearchExpanded) => {
       searchFormRef.current?.reset();
-      headerContext.setIsSearchExpanded(false);
-    }
-  };
+      headerContext.setIsSearchExpanded(isSearchExpanded);
+    };
 
-  useEffect(() => {
-    // means we're opening search
-    if (isSearchExpanded) {
-      searchInputRef.current?.focus();
-      return;
-    }
-  }, [isSearchExpanded]);
-
-  const showSearch: typeof headerContext.setIsSearchExpanded = (isSearchExpanded) => {
-    searchFormRef.current?.reset();
-    headerContext.setIsSearchExpanded(isSearchExpanded);
-  };
-
-  return (
-    <RemoveScroll enabled={isSearchExpanded} allowPinchZoom removeScrollBar={false}>
-      <div className={`${baseClassName}__container`}>
-        <div
-          className={`${baseClassName}__container__inner`}
-          ref={searchContainerRef}
-          onClick={(event: React.MouseEvent<HTMLElement>) => {
-            if (!isSearchExpanded) {
-              showSearch(true);
-              event.stopPropagation();
-            }
-          }}
-        >
-          <Text variant={TextVariants.heading4} className={`${baseClassName}__container__inner__label`}>
-            {searchButtonText}
-          </Text>
+    // Forward the ref to the outermost container div
+    return (
+      <RemoveScroll enabled={isSearchExpanded} allowPinchZoom removeScrollBar={false}>
+        <div className={`${baseClassName}__container`} ref={ref}>
           <div
-            {...commonProps}
-            className={classnames(baseClassName, className, { [`${baseClassName}--active`]: isSearchExpanded })}
-            data-testid={baseTestId}
-            role="search"
-            {...props}
+            className={`${baseClassName}__container__inner`}
+            ref={searchContainerRef}
+            onClick={(event: React.MouseEvent<HTMLElement>) => {
+              if (!isSearchExpanded) {
+                showSearch(true);
+                event.stopPropagation();
+              }
+            }}
           >
-            <form
-              data-testid={`${baseTestId}-form`}
-              className={classnames(`${baseClassName}__form`, {
-                [`${baseClassName}__form--active`]: isSearchExpanded,
-              })}
-              ref={searchFormRef}
+            <Text variant={TextVariants.headingSmall} className={`${baseClassName}__container__inner__label`}>
+              {searchButtonText}
+            </Text>
+            <div
+              {...commonProps}
+              className={classnames(baseClassName, className, { [`${baseClassName}--active`]: isSearchExpanded })}
+              data-testid={baseTestId}
+              role="search"
+              {...props}
             >
-              <div
-                className={classnames(`${baseClassName}__content-wrapper`, {
-                  [`${baseClassName}__content-wrapper--active`]: isSearchExpanded,
+              <form
+                data-testid={`${baseTestId}-form`}
+                className={classnames(`${baseClassName}__form`, {
+                  [`${baseClassName}__form--active`]: isSearchExpanded,
                 })}
-                role="combobox"
-                aria-haspopup="listbox"
+                ref={searchFormRef}
               >
-                <CSSTransition
-                  in={isSearchExpanded}
-                  classNames={`${px}-input`}
-                  addEndListener={() => {
-                    return;
-                  }}
+                <div
+                  className={classnames(`${baseClassName}__content-wrapper`, {
+                    [`${baseClassName}__content-wrapper--active`]: isSearchExpanded,
+                  })}
+                  role="combobox"
+                  aria-haspopup="listbox"
                 >
-                  <Input
-                    aria-hidden={!isSearchExpanded}
-                    className={`${baseClassName}__input`}
-                    id="search-input"
-                    hideLabel
-                    labelText={searchButtonText}
-                    placeholder={isSearchExpanded ? placeholder : ''}
-                    type="text"
-                    defaultValue={defaultValue}
-                    invalid={state === 'invalid'}
-                    invalidText={invalidText}
-                    onKeyDown={onKeyDown}
-                    onChange={onInputChange}
-                    ref={searchInputRef}
+                  <CSSTransition
+                    in={isSearchExpanded}
+                    classNames={`${px}-input`}
+                    addEndListener={() => {
+                      return;
+                    }}
+                  >
+                    <Input
+                      aria-hidden={!isSearchExpanded}
+                      className={`${baseClassName}__input`}
+                      id="search-input"
+                      hideLabel
+                      labelText={searchButtonText}
+                      placeholder={isSearchExpanded ? placeholder : ''}
+                      type="text"
+                      defaultValue={defaultValue}
+                      invalid={state === 'invalid'}
+                      invalidText={invalidText}
+                      onKeyDown={onKeyDown}
+                      onChange={onInputChange}
+                      ref={searchInputRef}
+                    />
+                  </CSSTransition>
+                  <SearchButton
+                    className={baseClassName}
+                    searchButtonText={searchButtonText}
+                    state={state}
+                    testId={baseTestId}
+                    isSearchExpanded={isSearchExpanded}
+                    setIsSearchExpanded={showSearch}
+                    onCancel={onCancel}
                   />
-                </CSSTransition>
-                <SearchButton
-                  className={baseClassName}
-                  searchButtonText={searchButtonText}
-                  state={state}
-                  testId={baseTestId}
-                  isSearchExpanded={isSearchExpanded}
-                  setIsSearchExpanded={showSearch}
-                  onCancel={onCancel}
-                />
-              </div>
-              {isSearchExpanded && shouldShowResults && value && value.length > 2 ? (
-                <SearchResults
-                  autoCompleteResults={searchResults}
-                  isLoading={state === 'loading'}
-                  loadingText={loadingText}
-                  onKeyDown={onKeyDown}
-                  userInputValue={value}
-                  closeSearch={setShouldShowResults}
-                >
-                  <li key="viewAllSearchResults" className={`${baseClassName}__result`}>
-                    <Link
-                      href={((value: string) => {
-                        return encodeURLSearchParams(getAllResultsLink(value));
-                      })(value)}
+                </div>
+                {isSearchExpanded && shouldShowResults && value && value.length > 2 ? (
+                  <SearchResults
+                    autoCompleteResults={searchResults}
+                    isLoading={state === 'loading'}
+                    loadingText={loadingText}
+                    onKeyDown={onKeyDown}
+                    userInputValue={value}
+                    closeSearch={setShouldShowResults}
+                  >
+                    <li
+                      key="viewAllSearchResults"
+                      className={classnames(`${baseClassName}__result`, `${baseClassName}__result--view-all`)}
                     >
-                      <p>{getAllResultsText(value)}</p>
-                    </Link>
-                  </li>
-                </SearchResults>
-              ) : null}
-            </form>
+                      <Link href={encodeURLSearchParams(getAllResultsLink(value))} variant={LinkVariants.linkLarge}>
+                        <p>{getAllResultsText(value)}</p>
+                      </Link>
+                    </li>
+                  </SearchResults>
+                ) : null}
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    </RemoveScroll>
-  );
-};
+      </RemoveScroll>
+    );
+  },
+);
+Search.displayName = 'Search';
 
 export default Search;

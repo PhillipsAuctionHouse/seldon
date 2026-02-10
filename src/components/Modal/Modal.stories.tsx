@@ -7,6 +7,7 @@ import Drawer from '../Drawer/Drawer';
 import { TextVariants } from '../Text';
 import Text from '../Text/Text';
 import Modal from './Modal';
+import { Icon } from '../Icon';
 
 const meta = {
   title: 'Components/Modal',
@@ -79,6 +80,36 @@ export const ModalFromDrawer = () => {
           <input type="text" placeholder="Input field 2" />
           <Button onClick={closeModal}>Close Modal</Button>
         </div>
+      </Modal>
+    </>
+  );
+};
+
+export const CustomCloseIcon = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onClose = () => {
+    setIsOpen(false);
+  };
+
+  const onOpen = () => {
+    setIsOpen(true);
+  };
+
+  return (
+    <>
+      <Button className={`modal-story__button`} onClick={onOpen}>
+        Open Modal
+      </Button>
+
+      <PlaygroundSplitPanel />
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        closeIcon={<Icon icon="ChevronLeft" height={32} width={32} color="currentColor" />}
+        closeIconPosition="left"
+      >
+        <img src="https://www.dev.phillips.com/Content/homepage/wechat_qr_mobile.png" alt="placeholder" />
       </Modal>
     </>
   );

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { ReactNode } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import userEvent from '@testing-library/user-event';
 import Search from './Search';
 import { runCommonTests } from '../../utils/testUtils';
@@ -11,7 +11,12 @@ const renderWithContext = (component: ReactNode) => {
 };
 
 describe('Search component', () => {
-  runCommonTests((props) => <Search {...props} />, 'Search');
+  // Use a forwardRef wrapper for runCommonTests to ensure ref is tested correctly
+  const RefSearch = forwardRef<HTMLDivElement, React.ComponentProps<typeof Search>>((props, ref) => (
+    <Search {...props} ref={ref} />
+  ));
+  RefSearch.displayName = 'RefSearch';
+  runCommonTests(RefSearch, 'Search');
   it('check is loading state', async () => {
     renderWithContext(<Search state="loading" loadingText="Pending..." defaultValue="My Value" />);
     await userEvent.click(screen.getByTestId('search-button'));

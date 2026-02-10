@@ -1,20 +1,21 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-button {
-  @include bodyText;
-  @include labelText($button);
+  // we need this because we can't be sure that the Text component is being used as a child of the Button component
+  @include text($labelMedium);
 
   align-items: center;
   background-color: $pure-black;
-  border: 1px solid transparent;
-  border-radius: 6.25rem;
+  border: 2px solid transparent;
+  border-radius: $radius-3xl;
   color: $pure-white;
   cursor: pointer;
   display: inline-flex;
   font-variation-settings: 'wght' 600;
   gap: $margin-xsm;
+  height: 44px; // TODO: this is temporary as we will revisit the button in a new ticket
   justify-content: center;
-  padding: $snw-button-padding $padding-sm;
+  padding: 0 $padding-sm;
   position: relative;
   transition:
     color 0.25s,
@@ -22,8 +23,13 @@
 
   svg {
     fill: $pure-white;
-    height: $button-label-line-height;
-    width: $button-label-line-height;
+    height: calc($font-size-label-small * 1.3);
+    width: calc($font-size-label-small * 1.3);
+
+    @include media($breakpoint-md) {
+      height: calc($font-size-label-small * 1.4);
+      width: calc($font-size-label-small * 1.4);
+    }
 
     path {
       fill: $pure-white;
@@ -31,7 +37,27 @@
     }
   }
 
-  &:hover {
+  &--primary,
+  &--secondary,
+  &--ghost,
+  &--tertiary {
+    &.#{$px}-link {
+      text-decoration: none;
+    }
+  }
+
+  &:not(.#{$px}-button--link) {
+    &.#{$px}-button--primary {
+      color: $white-100;
+    }
+
+    .#{$px}-text {
+      color: inherit;
+      font-variation-settings: inherit;
+    }
+  }
+
+  @include hoverOrActive {
     background-color: $button-hover;
 
     svg {
@@ -55,23 +81,30 @@
     height: auto;
     padding: 0;
     text-decoration: underline;
+    .#{$px}-text {
+      font-variation-settings: 'wght' 400;
+    }
 
     &:hover {
       background-color: transparent;
       color: $pure-black;
+
+      .#{$px}-text {
+        cursor: pointer;
+      }
     }
   }
 
   &--secondary,
   &--ghost {
     background-color: $pure-white;
-    border: 1px solid $pure-black;
+    border: 2px solid $pure-black;
     color: $pure-black;
     transition: border 0.3s ease-out;
     z-index: 0;
 
     &::before {
-      border-radius: 100px;
+      border-radius: $radius-3xl;
       box-sizing: border-box;
       content: '';
       display: inline-block;
@@ -101,16 +134,20 @@
   &--secondary {
     transition: box-shadow 0.25s;
 
-    &:hover {
+    @include hoverOrActive {
       background-color: transparent;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 100%);
+      box-shadow: 0 0 0 1px rgba($pure-black, 1);
+
+      &:disabled {
+        box-shadow: none;
+      }
     }
   }
 
   &--ghost {
     border-color: transparent;
 
-    &:hover {
+    @include hoverOrActive {
       background-color: transparent;
       border: 1px solid transparent;
       color: $pure-white;
@@ -147,7 +184,7 @@
       }
     }
 
-    &:hover {
+    @include hoverOrActive {
       background-color: transparent;
       color: $button-hover;
 
@@ -162,7 +199,6 @@
 
     &:focus-visible {
       background-color: $pure-white;
-      border-radius: 0;
       outline-color: $soft-black;
       outline-offset: 4.5px;
       padding: 0 4px;
@@ -170,9 +206,9 @@
   }
 
   &:disabled {
-    background-color: $white;
-    border: 1px solid $light-gray;
-    color: $light-gray;
+    background-color: $grey-50;
+    border: 1px solid $grey-50;
+    color: $grey-75;
     cursor: default;
 
     &:hover {
@@ -182,10 +218,10 @@
     }
 
     svg {
-      fill: $light-gray;
+      fill: $grey-75;
 
       path {
-        fill: $light-gray;
+        fill: $grey-75;
       }
     }
   }

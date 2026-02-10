@@ -23,11 +23,11 @@
   }
 
   &__input {
-    @include text($string2);
+    @include text($bodyMedium);
 
-    accent-color: $soft-black;
-    border: 1px solid $keyline-gray;
-    border-radius: 0.1875rem;
+    accent-color: $black-100;
+    border: 1px solid $black-100;
+    border-radius: $radius-xs;
     font-variation-settings: 'wght' 600;
     outline: none;
     padding: $padding-xsm;
@@ -61,8 +61,6 @@
   }
 
   &__label {
-    @include text($string2);
-
     color: $pure-black;
     display: inline-block;
     font-variation-settings: 'wght' 600;
@@ -95,7 +93,7 @@
 
       &:hover {
         svg {
-          color: $white;
+          color: $white-100;
         }
       }
     }
@@ -115,10 +113,10 @@
 
   &__content {
     animation: fade-in 150ms ease-out;
-    background-color: $white;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 10%);
+    background-color: $white-100;
+    border: 1px solid $grey-50;
+    border-radius: $radius-xs;
+    box-shadow: 0 5px 15px rgba($pure-black, 0.1);
     margin-top: 4px;
     max-height: 300px;
     overflow-y: auto;
@@ -142,11 +140,11 @@
   }
 
   &__item {
-    background-color: $white;
+    background-color: $white-100;
     padding: $padding-micro $padding-xsm;
     transition: background-color 0.1s ease;
 
-    @include text($string2);
+    @include text($bodyMedium);
 
     &:hover,
     &[data-selected='true'] {
@@ -168,12 +166,20 @@
     overflow: hidden;
   }
 
+  &__empty-validation {
+    line-height: $spacing-sm;
+  }
+
   &__item__invalid-text {
-    @include text($string2);
+    @include text($bodySmall);
 
     align-items: center;
     display: flex;
     margin-top: $spacing-xsm;
+  }
+
+  &__no-options {
+    padding-left: $padding-xsm;
   }
 
   @keyframes fade-in {

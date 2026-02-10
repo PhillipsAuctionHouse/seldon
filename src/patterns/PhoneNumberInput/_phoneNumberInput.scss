@@ -1,0 +1,60 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-phone-number-input {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+
+  &__wrapper {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+    gap: $spacing-xsm;
+    width: 100%;
+  }
+
+  &__country-picker {
+    flex: 0 0 30%;
+  }
+
+  &__input {
+    flex: 1 1 70%;
+    min-width: 0; // ensures input shrinks properly in flex container, 0 prevents overflow and lets flex-basis do its thing
+
+    // Hide input validation inside phone number input, we use a shared one
+    .#{$px}-input__validation {
+      display: none;
+    }
+
+    .#{$px}-input__empty-validation {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: $breakpoint-xl) {
+    &__country-picker {
+      flex: 0 0 37.5%;
+      min-width: 0;
+    }
+
+    &__input {
+      flex: 1 1 62.5%;
+      min-width: 0;
+    }
+  }
+}
+
+.#{$px}-input__validation {
+  animation: reveal 0.45s linear forwards;
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

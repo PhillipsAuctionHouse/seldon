@@ -1,8 +1,8 @@
 @use 'scss/reset' as *;
 @use 'scss/allPartials' as *;
-@use 'componentStyles';
 @use 'design/colors-tokens/color-card';
 @use 'design/type-tokens/text-showcase';
+@use 'design/radius-tokens/radius-tokens';
 @use 'design/spacing-tokens/spacing-tokens';
 @use 'design/grid-tokens/grid-tokens';
 @use 'design/icons/icons';
@@ -84,7 +84,7 @@ details {
 
 .tip {
   background: #e7fdd8;
-  border-radius: 1em;
+  border-radius: $radius-lg;
   color: #66bf3c;
   display: inline-block;
   font-size: 11px;

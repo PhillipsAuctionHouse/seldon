@@ -1,4 +1,4 @@
-import React, { useState, ComponentPropsWithoutRef } from 'react';
+import { forwardRef, useState, ComponentPropsWithoutRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import * as DropdownSelect from '@radix-ui/react-select';
@@ -39,7 +39,8 @@ export interface DropdownProps
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-dropdown--overview)
  */
-const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
+
+const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
   ({ options, value, onValueChange, label, className, id, disabled, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'Dropdown');
     const [isOpen, setIsOpen] = useState(false);
@@ -101,7 +102,7 @@ const Dropdown = React.forwardRef<HTMLButtonElement, DropdownProps>(
 
 Dropdown.displayName = 'Dropdown';
 
-const DropdownSelectItem = React.forwardRef<HTMLDivElement, DropdownSelect.SelectItemProps>(
+const DropdownSelectItem = forwardRef<HTMLDivElement, DropdownSelect.SelectItemProps>(
   ({ children, className, ...props }, forwardedRef) => (
     <DropdownSelect.Item className={`${className}__item`} {...props} ref={forwardedRef}>
       <DropdownSelect.ItemText>{children}</DropdownSelect.ItemText>

@@ -1,0 +1,106 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-country-picker {
+  &__modal {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    width: 635px;
+
+    @media (max-width: $breakpoint-md) {
+      height: 100dvh;
+      width: 100%;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: -webkit-fill-available;
+  }
+
+  &__header {
+    background: $white-100;
+    margin-bottom: 24px; // no token for this yet
+    position: sticky;
+    top: 0;
+
+    &-text {
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  &__list {
+    flex: 1;
+    margin-bottom: $spacing-sm;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  &__letter-header {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin: $spacing-sm 0;
+  }
+
+  &__letter-text {
+    &.seldon-text {
+      margin-bottom: 0;
+    }
+  }
+
+  &__letter-line {
+    border-bottom: 1px solid $light-gray;
+    height: 0;
+    width: 100%;
+  }
+
+  &__button-container {
+    background: $white-100;
+    border-top: 1px solid $light-gray;
+    margin-top: auto;
+    padding-top: 1rem;
+    width: 100%;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  &__input-wrapper {
+    padding-bottom: 0.25rem;
+    position: relative;
+    width: 100%;
+
+    .seldon-input__validation {
+      display: none;
+    }
+
+    input {
+      padding-left: $spacing-md;
+
+      &::placeholder {
+        font-variation-settings: 'wght' 700;
+      }
+
+      // Remove iOS gray background
+      @supports (-webkit-touch-callout: none) {
+        appearance: none;
+        background-color: $white-100;
+      }
+    }
+  }
+
+  .#{$px}-country-picker__input-wrapper .seldon-input__label {
+    border: 0;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+}

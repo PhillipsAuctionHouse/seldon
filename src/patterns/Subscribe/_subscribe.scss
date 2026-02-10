@@ -5,15 +5,7 @@
   width: 100%;
 
   &__title {
-    @include text($heading3);
-
     margin-bottom: $spacing-xsm;
-  }
-
-  &__blurb {
-    @include text($body1);
-
-    color: $pure-black;
   }
 
   &__input__wrapper {
@@ -24,9 +16,5 @@
     margin: 0.25rem 0 $spacing-sm;
     max-width: 240px;
     width: 100%;
-  }
-
-  &__privacy {
-    @include text($body3);
   }
 }

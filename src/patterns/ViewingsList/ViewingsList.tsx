@@ -69,22 +69,25 @@ export interface ViewingsListProps extends React.HTMLAttributes<HTMLDivElement> 
 
 const getRandomNum = () => Math.floor(Math.random() * 100) + Date.now();
 
-const ViewingsList = ({
-  cardTitle = 'Viewing Details',
-  className,
-  i18n = {},
-  onAdd,
-  onDelete,
-  onSave,
-  title,
-  viewings,
-  ...props
-}: ViewingsListProps) => {
+import { forwardRef } from 'react';
+
+const ViewingsList = forwardRef<HTMLDivElement, ViewingsListProps>((props, ref) => {
+  const {
+    cardTitle = 'Viewing Details',
+    className,
+    i18n = {},
+    onAdd,
+    onDelete,
+    onSave,
+    title,
+    viewings,
+    ...rest
+  } = props;
   const [viewingList, setViewingsList] = React.useState(viewings);
   const [hasUnsavedData, setHasUnsavedData] = React.useState('');
   const [oldState, setOldState] = React.useState<ViewingsListCardProps | string>();
 
-  const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ViewingsList');
+  const { className: baseClassName, ...commonProps } = getCommonProps(rest, 'ViewingsList');
 
   React.useEffect(() => {
     setViewingsList(viewings);
@@ -123,7 +126,7 @@ const ViewingsList = ({
   };
 
   return (
-    <div {...commonProps} className={classnames(baseClassName, className)} key={hasUnsavedData} {...props}>
+    <div ref={ref} {...commonProps} className={classnames(baseClassName, className)} key={hasUnsavedData} {...rest}>
       <h2 className={classnames(`${baseClassName}__title`)}>{title}</h2>
       {viewingList?.map((item, index) => (
         <ViewingsListCard
@@ -143,6 +146,8 @@ const ViewingsList = ({
       </Button>
     </div>
   );
-};
+});
+
+ViewingsList.displayName = 'ViewingsList';
 
 export default ViewingsList;

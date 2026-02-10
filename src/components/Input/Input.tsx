@@ -1,12 +1,24 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import { px, useNormalizedInputProps } from '../../utils';
+import { Text, TextVariants } from '../Text';
+import { getInputClassNames } from './utils';
 
 export interface InputProps extends Omit<React.ComponentProps<'input'>, 'size'> {
   /**
    * Optional className to be applied to the `<input>` node
    */
   className?: string;
+
+  /**
+   * Optional adornment to be displayed before the input value
+   */
+  inputAdornment?: string | React.ReactNode;
+
+  /**
+   * Optional position to place the adornment. Defaults to 'start'
+   */
+  adornmentPosition?: 'start' | 'end';
 
   /**
    * Optionally provide the default value of the `<input>`. Should not be passed into controlled input!
@@ -119,6 +131,8 @@ const Input = React.forwardRef(
   (
     {
       className,
+      inputAdornment,
+      adornmentPosition = 'start',
       defaultValue,
       disabled,
       hideLabel,
@@ -161,40 +175,77 @@ const Input = React.forwardRef(
       [`${className}__wrapper`]: className,
       [`${px}-input--hidden`]: rest.hidden,
     });
+
+    const inputClassNames = getInputClassNames();
+
+    const adornmentInputTypes = [
+      'text',
+      'number',
+      'password',
+      'email',
+      'tel',
+      'url',
+      'search',
+      'date',
+      'datetime-local',
+      'month',
+      'time',
+      'week',
+    ];
+    const isAdornmentInputType = adornmentInputTypes.includes(inputProps.type ?? '');
+
+    const inputElementClassNames =
+      inputAdornment && isAdornmentInputType
+        ? classnames(inputClassNames.wrapperInput, className, { [`${px}-skeleton`]: isSkeletonLoading })
+        : classnames(inputClassNames.input, className, { [`${px}-skeleton`]: isSkeletonLoading });
+
+    const inputPropsToPass = {
+      className: inputElementClassNames,
+      'data-testid': id,
+      disabled: inputProps.disabled,
+      id,
+      onChange,
+      onClick,
+      placeholder: isSkeletonLoading ? '' : placeholder,
+      readOnly,
+      ref,
+      type: inputProps.type,
+      ...(inputProps.type !== 'checkbox' && inputProps.type !== 'radio' ? { value, defaultValue } : {}),
+      ...rest,
+    };
     return (
       <div className={wrapperClassnames}>
-        <label
-          data-testid={`label-${id}`}
-          htmlFor={id}
-          className={classnames(`${px}-input__label`, {
-            [`${px}-input__label--hidden`]: hideLabel,
-            [`${px}-skeleton`]: isSkeletonLoading,
+        <Text
+          element="label"
+          variant={TextVariants.labelMedium}
+          className={classnames(inputClassNames.label, {
+            [inputClassNames.labelHidden]: hideLabel,
+            [inputClassNames.skeleton]: isSkeletonLoading,
           })}
+          data-testid={`label-${id}`}
+          // @ts-expect-error this is actually a label element
+          htmlFor={id}
         >
           {labelText}
-        </label>
-        <input
-          className={classnames(`${px}-input__input`, className, {
-            [`${px}-skeleton`]: isSkeletonLoading,
-          })}
-          data-testid={id}
-          disabled={inputProps.disabled}
-          id={id}
-          onChange={onChange}
-          onClick={onClick}
-          placeholder={isSkeletonLoading ? '' : placeholder}
-          readOnly={readOnly}
-          ref={ref}
-          type={inputProps.type}
-          // can't set values on a checkbox or it breaks
-          {...(inputProps.type !== 'checkbox' && inputProps.type !== 'radio' ? { value, defaultValue } : {})}
-          {...rest}
-        />
-        {inputProps.validation ? (
-          inputProps.validation
+        </Text>
+        {inputAdornment && isAdornmentInputType ? (
+          <div className={inputClassNames.wrapper} data-testid={`wrapper-${id}`}>
+            {adornmentPosition === 'start' && (
+              <span className={inputClassNames.adornment} id="adornment" data-testid={`adornment-${id}`}>
+                {inputAdornment}
+              </span>
+            )}
+            <input {...inputPropsToPass} />
+            {adornmentPosition === 'end' && (
+              <span className={inputClassNames.adornment} id="adornment" data-testid={`adornment-${id}`}>
+                {inputAdornment}
+              </span>
+            )}
+          </div>
         ) : (
-          <p className={classnames(`${px}-input__validation`)}>&nbsp;</p>
+          <input {...inputPropsToPass} />
         )}
+        {inputProps.validation ? inputProps.validation : <p className={inputClassNames.emptyValidation}>&nbsp;</p>}
       </div>
     );
   },

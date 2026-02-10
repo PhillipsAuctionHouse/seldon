@@ -30,16 +30,16 @@ $chevron-scale: 0.8;
 
 .#{$px}-filter {
   &-header {
-    margin-bottom: $spacing-md;
+    margin-bottom: $spacing-sm;
 
     legend {
       padding-inline: 0; // needed for default browser styles
     }
 
     &__back {
-      @include text($body2); // workaround where the tertiary button text is not scaling at different breakpoints
-
-      margin-top: $spacing-sm;
+      .#{$px}-text.#{$px}-text--labelMedium {
+        font-variation-settings: 'wght' 600;
+      }
     }
   }
 
@@ -57,15 +57,12 @@ $chevron-scale: 0.8;
     display: flex;
     flex-direction: column;
     gap: $spacing-sm;
-    padding-bottom: $spacing-sm;
 
     .#{$px}-input {
       align-items: center;
       height: unset;
 
       &__label {
-        @include text($body2);
-
         color: inherit;
         margin-bottom: 0;
       }
@@ -77,14 +74,18 @@ $chevron-scale: 0.8;
         width: $body-line-height-size3;
       }
 
-      &__validation {
+      &__validation,
+      &__empty-validation {
         display: none;
       }
     }
   }
 
   &__view-all {
-    @include text($body2); // workaround where the tertiary button text is not scaling at different breakpoints
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
 
   &.is-opening {
@@ -101,8 +102,10 @@ $chevron-scale: 0.8;
     &__wrapper {
       display: flex;
       flex-direction: row;
-      height: 40px;
       justify-content: space-between;
+      .#{$px}-text {
+        font-variation-settings: 'wght' 600;
+      }
     }
   }
 }

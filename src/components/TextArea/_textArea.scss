@@ -1,15 +1,15 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-text-area {
-  @include text($string2);
-
-  accent-color: $soft-black;
-  border: 1px solid $keyline-gray;
-  border-radius: 0.1875rem;
+  accent-color: $black-100;
+  border: 1px solid $black-100;
+  border-radius: $radius-xs;
   min-height: 50px; // 50px is the height of 2 rows
   padding: $padding-xsm;
   resize: vertical;
   width: 100%;
+
+  @include text($bodyMedium);
 
   &__wrapper {
     display: flex;
@@ -38,8 +38,6 @@
   }
 
   &__label {
-    @include text($string2);
-
     color: $pure-black;
     font-variation-settings: 'wght' 600;
     margin-bottom: 0.5rem;

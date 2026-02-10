@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 import type { Meta } from '@storybook/react';
 import React, { useState } from 'react';
 import { Icon } from '../../components/Icon';
@@ -15,14 +14,7 @@ import UserManagement from '../../patterns/UserManagement/UserManagement';
 import { SupportedLanguages } from '../../types/commonTypes';
 import { px } from '../../utils';
 import Header, { HeaderProps } from './Header';
-
-const generateLoremIpsum = (numOfParagraphs = 10) => {
-  let loremIpsum = '';
-  for (let i = 0; i < numOfParagraphs; i++) {
-    loremIpsum += faker.lorem.paragraph();
-  }
-  return loremIpsum;
-};
+import { LOREM_HUGE } from '../../utils/staticContent';
 
 const fetchData = async (searchQuery: string) => {
   console.log('searchQuery', searchQuery);
@@ -110,7 +102,15 @@ export default meta;
 export const Playground = ({ authState, ...props }: HeaderProps & { authState?: AuthState }) => {
   const [currentLanguage, setCurrentLanguage] = useState(SupportedLanguages.en);
   return (
-    <div style={{ minHeight: '400px', display: 'flex', flexDirection: 'column', paddingTop: '200px' }}>
+    <div
+      style={{
+        minHeight: '400px',
+        display: 'flex',
+        flexDirection: 'column',
+        paddingTop: '200px',
+        backgroundColor: '#ff9',
+      }}
+    >
       <Header {...props} logo={<Icon icon="PhillipsLogo" />}>
         <Navigation id={`${px}-main-nav`}>
           <NavigationList id={`${px}-main-nav-list`}>
@@ -124,140 +124,107 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
                   badge="New York"
                   href="#"
                   navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="Editions & Works on Paper"
                 />
                 <NavigationItem
                   badge="New York"
                   href="#"
                   navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="Design"
                 />
                 <NavigationItem
                   badge="Geneva"
                   href="#"
                   navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="Reloaded: The Rebirth of Mechanical Watchmaking, 1980-1999"
                 />
                 <NavigationItem
                   href="#"
                   navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="Phillips Watches Online: The Geneva Sessions, Fall 2024"
                 />
                 <NavigationItem
                   badge="Hong Kong"
                   href="#"
                   navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="Modern & Contemporary Art Evening Sale"
                 />
                 <NavigationItem
                   href="#"
                   navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="Damien Hirst: Online Auction"
                 />
                 <NavigationItem
                   badge="Hong Kong"
                   href="#"
                   navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="New Now: Modern & Contemporary Art"
                 />
                 <NavigationItem
                   badge="London"
                   href="#"
                   navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="Casa Fornaroli"
                 />
                 <NavigationItem
                   badge="Geneva"
                   href="#"
                   navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="The Geneva Watch Auction: XVII"
                 />
                 <NavigationItem
                   badge="New York"
                   href="#"
                   navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="Modern & Contemporary Art Day Sale—Morning Session"
                 />
                 <NavigationItem
                   badge="New York"
                   href="#"
                   navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="Modern & Contemporary Art Day Sale—Afternoon Session"
-                />
-                <NavigationItem
-                  badge="New York"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Modern & Contemporary Art Evening Sale"
-                />
-                <NavigationItem
-                  badge="London"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Wired: Online Auction"
-                />
-                <NavigationItem
-                  badge="Hong Kong "
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="The Imperial Patek Philippe Sale"
-                />
-                <NavigationItem
-                  badge="Hong Kong"
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Disruptors: Evening Sale of Modern & Contemporary Art, Design and Watches"
                 />
                 <NavigationItem
                   href="#"
                   isViewAllLink
                   navGroup="nav-link-start"
-                  navType={LinkVariants.link}
-                  label="View All"
+                  navType={LinkVariants.linkLarge}
+                  label="View All Auctions"
                 />
                 <NavigationItem
                   href="#"
                   navGroup="nav-link-end"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="Auction Calendar"
                 />
                 <NavigationItem
                   href="#"
                   navGroup="nav-link-end"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="Auction Results"
                 />
                 <NavigationItem
                   href="#"
                   navGroup="nav-link-end"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="Artists & Makers"
                 />
+                <NavigationItem href="#" navGroup="nav-link-end" navType={LinkVariants.linkLarge} label="How To Buy" />
                 <NavigationItem
                   href="#"
                   navGroup="nav-link-end"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="How To Buy"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-end"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="Remote Bidding"
                 />
               </NavigationList>
@@ -268,50 +235,30 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
                 <NavigationItem
                   href="#"
                   navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="Modern & Contemporary Art"
                 />
+                <NavigationItem href="#" navGroup="nav-link-start" navType={LinkVariants.linkLarge} label="Design" />
+                <NavigationItem href="#" navGroup="nav-link-start" navType={LinkVariants.linkLarge} label="Editions" />
+                <NavigationItem href="#" navGroup="nav-link-start" navType={LinkVariants.linkLarge} label="Jewels" />
                 <NavigationItem
                   href="#"
                   navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Design"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Editions"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Jewels"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="Photographs"
                 />
+                <NavigationItem href="#" navGroup="nav-link-start" navType={LinkVariants.linkLarge} label="Watches" />
                 <NavigationItem
                   href="#"
                   navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
-                  label="Watches"
-                />
-                <NavigationItem
-                  href="#"
-                  navGroup="nav-link-start"
-                  navType={LinkVariants.snwFlyoutLink}
+                  navType={LinkVariants.linkLarge}
                   label="Private Sales"
                 />
                 <NavigationItem
                   href="#"
                   isViewAllLink
                   navGroup="nav-link-start"
-                  navType={LinkVariants.link}
+                  navType={LinkVariants.linkLarge}
                   label="View All"
                 />
               </NavigationList>
@@ -338,7 +285,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
         <option value="pt">Portuguese</option>
         <option value="ru">Russian</option>
       </select>
-      {generateLoremIpsum(100)}
+      <div style={{ whiteSpace: 'pre-wrap' }}>{LOREM_HUGE}</div>
     </div>
   );
 };

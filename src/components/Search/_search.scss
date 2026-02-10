@@ -1,6 +1,7 @@
 @use '#scss/allPartials' as *;
 
 .#{$px}-search {
+  bottom: 0;
   display: flex;
   gap: $spacing-md;
   height: $search-size;
@@ -8,11 +9,10 @@
   min-width: $search-size;
   position: absolute;
   right: 0;
-  top: $padding-md;
   transition: left 0.25s ease-in;
 
   &::after {
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid $black-100;
     bottom: 0;
     content: '';
     display: flex;
@@ -23,11 +23,8 @@
     width: 0;
   }
 
-  @include isHeaderDesktop {
-    top: 0;
-  }
-
   @include isHeaderMobile {
+    bottom: 1px;
     height: calc($search-size - 1px);
     left: calc(100% - $search-size - $spacing-md);
     right: $spacing-md;
@@ -40,10 +37,6 @@
     &::after {
       transition: width 0.25s ease-in 0.2s;
       width: 100%;
-    }
-
-    @include isHeaderMobile {
-      left: $spacing-md;
     }
   }
 
@@ -86,7 +79,7 @@
       }
 
       &-enter-active input {
-        background: $white;
+        background: $white-100;
 
         &::placeholder {
           opacity: 1;
@@ -98,17 +91,12 @@
         background: transparent;
         border: 0;
         border-radius: unset;
-        color: $pure-black;
-        font-size: $string-size1;
-        font-style: normal;
         font-variation-settings: 'wght' 600;
         height: $search-size;
-        letter-spacing: 0;
-        line-height: $string-line-height-size1;
         margin: 0;
         padding: $spacing-xsm 0 $spacing-xsm $spacing-sm;
 
-        @include Montserrat;
+        @include text($bodyLarge);
 
         @include isHeaderMobile {
           height: calc(var(--spacing-md) + var(--search-size));
@@ -137,22 +125,21 @@
 .#{$px}-search__container {
   @include isHeaderMobile {
     border-bottom: 1px solid $light-gray;
-    left: 50%;
-    margin-left: -50vw;
+    margin-right: $spacing-md;
+    padding-left: $spacing-md;
     position: relative;
-    width: 100vw;
+    width: 100%;
   }
 
   &__inner {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
-    padding: 0 $padding-md;
+    padding: 0;
     pointer-events: all;
 
     @include isHeaderDesktop {
       cursor: default;
-      padding: 0;
     }
 
     @include isHeaderMobile {

@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { Text, TextVariants } from '../../components/Text';
@@ -41,41 +41,42 @@ export interface HeroBannerProps extends HTMLAttributes<HTMLDivElement> {
  *
  * [Figma Link](https://www.figma.com/design/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0?node-id=6532-691&m=dev)
  *
- * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-herobanner--overview)
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-herobanner--overview)
  */
 
-const HeroBanner = ({
-  prehead,
-  date,
-  headerText,
-  subHeadText,
-  association,
-  background,
-  className,
-  ...props
-}: HeroBannerProps) => {
-  const { className: baseClass, ...commonProps } = getCommonProps(props, 'HeroBanner');
+const HeroBanner = forwardRef<HTMLElement, HeroBannerProps>(
+  ({ prehead, date, headerText, subHeadText, association, background, className, ...props }, ref) => {
+    const { className: baseClass, ...commonProps } = getCommonProps(props, 'HeroBanner');
+    return (
+      <header
+        {...commonProps}
+        className={classnames(baseClass, className)}
+        style={{ '--background': background } as React.CSSProperties}
+        ref={ref}
+        {...props}
+      >
+        <span className={`${baseClass}__content-wrapper`}>
+          {prehead || date ? (
+            <p className={`${baseClass}__pre-head`}>
+              {prehead ? <span>{prehead}</span> : null}
+              {date ? <span>{date}</span> : null}
+            </p>
+          ) : null}
+          <Text className={`${baseClass}__header-text`} variant={TextVariants.displayMedium}>
+            {headerText}
+          </Text>
+          {subHeadText ? (
+            <Text className={`${baseClass}__sub-head-text`} variant={TextVariants.headingMedium}>
+              {subHeadText}
+            </Text>
+          ) : null}
+          {association ? <p className={`${baseClass}__after-head`}>{association}</p> : null}
+        </span>
+      </header>
+    );
+  },
+);
 
-  return (
-    <header
-      {...commonProps}
-      className={classnames(baseClass, className)}
-      style={{ '--background': background } as React.CSSProperties}
-      {...props}
-    >
-      <span className={`${baseClass}__content-wrapper`}>
-        {prehead || date ? (
-          <p className={`${baseClass}__pre-head`}>
-            {prehead ? <span>{prehead}</span> : null}
-            {date ? <span>{date}</span> : null}
-          </p>
-        ) : null}
-        <Text variant={TextVariants.snwHeadingHero1}>{headerText}</Text>
-        {subHeadText ? <Text variant={TextVariants.snwHeadingHero2}>{subHeadText}</Text> : null}
-        {association ? <p className={`${baseClass}__after-head`}>{association}</p> : null}
-      </span>
-    </header>
-  );
-};
+HeroBanner.displayName = 'HeroBanner';
 
 export default HeroBanner;

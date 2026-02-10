@@ -1,147 +1,153 @@
+/* stylelint-disable declaration-property-value-allowed-list */
+/* stylelint-disable declaration-property-value-disallowed-list */
 @use '#scss/vars' as *;
 @use '#scss/type' as *;
 
-.type-tokens,
-.doc-wrapper {
-  .exp {
-    @include pText($body-size1);
-
-    color: $keyline-gray;
+:root {
+  .typography-item--small {
+    @include font-size-vars--sm;
   }
 
-  .property {
-    // @include pText($body-size2);
-    // font-variation-settings: 'wght' 400;
-    color: $post-sale-magenta;
+  .typography-item--medium {
+    @include font-size-vars--md;
   }
 
-  li:not(li strong) {
-    color: $clock-widget-green;
-    font-family: monospace;
-    font-variation-settings: 'wght' 600;
+  .typography-item--large {
+    @include font-size-vars--lg;
+  }
+}
+
+.typography {
+  &-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    margin-top: 3rem;
   }
 
-  li strong {
-    color: $clock-widget-blue;
+  &-container {
+    display: grid;
+    grid-gap: 0;
+    grid-template-columns: repeat(3, 1fr);
   }
 
-  .example {
-    background: #efefef;
-    display: block;
-    margin-top: 1rem;
-    padding: 1.5rem;
-    text-align: center;
+  &-breakpoint-header {
+    border-bottom: 1px solid #eae9e6;
+    color: #545454;
+    font-family: Montserrat, sans-serif;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1rem; /* 133.333% */
+    padding-bottom: 1rem;
+  }
 
-    .property {
-      // @include pText($body-size2);
-      // font-variation-settings: 'wght' 400;
-      color: $post-sale-magenta;
+  &-code-block {
+    grid-column: 1 / span 3;
+
+    & > pre > div {
+      margin-top: -0.25rem;
+    }
+  }
+
+  &-item {
+    border-bottom: 1px solid #eae9e6;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+
+    &__specs {
+      color: #545454;
+      font-family: Montserrat, sans-serif;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1rem; /* 133.333% */
     }
 
-    .h4 + ul li:not(li strong) {
-      color: $clock-widget-green;
-      font-family: monospace;
-      font-variation-settings: 'wght' 600;
+    &__display-medium {
+      @include text($displayMedium);
     }
 
-    .h4 + ul li strong {
-      color: $clock-widget-blue;
+    &__display-small {
+      @include text($displaySmall);
     }
 
-    &--h1 {
-      @include text($heading1);
+    &__heading-large {
+      @include text($headingLarge);
     }
 
-    &--h2 {
-      @include text($heading2);
+    &__heading-medium {
+      @include text($headingMedium);
     }
 
-    &--h3 {
-      @include text($heading3);
+    &__heading-small {
+      @include text($headingSmall);
     }
 
-    &--h4 {
-      @include text($heading4);
+    &__heading-small--modified {
+      @include text($headingSmall, 600, uppercase, italic);
     }
 
-    &-title {
-      &--h1 {
-        @include text($title1);
-      }
-
-      &--h2 {
-        @include text($title2);
-      }
-
-      &--h3 {
-        @include text($title3);
-      }
-
-      &--h4 {
-        @include text($title4);
-      }
+    &__heading-extra-small {
+      @include text($headingExtraSmall);
     }
 
-    &--p1 {
-      @include text($body1);
+    &__body-large {
+      @include text($bodyLarge);
     }
 
-    &--p2 {
-      @include text($body2);
+    &__body-medium {
+      @include text($bodyMedium);
     }
 
-    &--p3 {
-      @include text($body3);
+    &__body-small {
+      @include text($bodySmall);
     }
 
-    &-string {
-      &--p1 {
-        @include text($body1);
-      }
-
-      &--p2 {
-        @include text($body2);
-      }
-
-      &--p3 {
-        @include text($body3);
-      }
+    &__label-large {
+      @include text($labelLarge);
     }
 
-    &--button {
-      @include text($button);
+    &__label-medium {
+      @include text($labelMedium);
     }
 
-    &--link {
-      @include text($link);
+    &__label-small {
+      @include text($labelSmall);
     }
 
-    &--email {
-      @include text($email);
+    &__link-stylised {
+      @include text($linkStylised);
     }
 
-    &--label {
-      @include text($label);
+    &__link-large {
+      @include text($linkLarge);
     }
 
-    &--badge {
-      @include text($badge);
+    &__link-medium {
+      @include text($linkMedium);
     }
 
-    &-snw-header-link {
-      @include text($snwHeaderLink);
+    &__link-small {
+      @include text($linkSmall);
     }
 
-    &-snw-flyout-link {
-      @include text($snwFlyoutLink);
+    &__badge-small {
+      @include text($badgeSmall);
     }
 
-    &-snw-heading-hero1 {
-      @include text($snwHeadingHero1);
+    &__badge-medium {
+      @include text($badgeMedium);
     }
+  }
 
-    &-snw-heading-hero2 {
-      @include text($snwHeadingHero2);
-    }
+  &-migration-table {
+    text-align: left;
+    width: 100%;
   }
 }

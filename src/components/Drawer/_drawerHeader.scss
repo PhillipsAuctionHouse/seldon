@@ -1,0 +1,38 @@
+@use '#scss/allPartials' as *;
+
+.#{$px}-drawer-header {
+  align-items: center;
+  display: flex;
+  padding: $margin-sm $margin-xsm;
+  width: 100%;
+
+  &__bookend {
+    display: flex;
+    flex: 1 1 0;
+
+    &-right {
+      justify-content: flex-end;
+    }
+
+    &-left {
+      justify-content: flex-start;
+    }
+  }
+
+  &__hr {
+    border-bottom: 2px solid $light-gray;
+    width: 100%;
+  }
+
+  &__title {
+    font-variation-settings: 'wght' 600;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$px}-icon-close-x:hover {
+    color: $white-100;
+  }
+}
