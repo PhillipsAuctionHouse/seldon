@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import { useState } from 'react';
 import { SaleCard } from '../SaleCard';
 import FiltersInline from './FiltersInline';

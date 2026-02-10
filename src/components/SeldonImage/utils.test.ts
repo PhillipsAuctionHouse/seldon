@@ -1,73 +1,49 @@
+import { afterEach, describe, expect, it } from 'vitest';
+
 import { isImageValid } from './utils';
-import { vi } from 'vitest';
+
+const originalImage = typeof globalThis.Image !== 'undefined' ? globalThis.Image : undefined;
 
 describe('utils', () => {
   describe('isImageValid', () => {
-    beforeEach(() => {
-      global.Image = vi.fn().mockImplementation(() => {
-        return {
-          onload: null,
-          onerror: null,
-          src: null,
-        };
-      });
+    afterEach(() => {
+      if (originalImage !== undefined) {
+        (globalThis as typeof globalThis & { Image: typeof originalImage }).Image = originalImage;
+      }
     });
+
+    function createImageMock(onSrcSet: () => void): HTMLImageElement {
+      const image = {
+        onload: null as (() => void) | null,
+        onerror: null as (() => void) | null,
+        _src: null as string | null,
+      };
+      Object.defineProperty(image, 'src', {
+        set(value: string) {
+          image._src = value;
+          setTimeout(() => onSrcSet());
+        },
+        get() {
+          return image._src;
+        },
+        configurable: true,
+      });
+      return image as unknown as HTMLImageElement;
+    }
 
     it('should return a promise that resolves to true if the image is valid', async () => {
       const validImageUrl = 'https://example.com/valid-image.jpg';
+      const img = createImageMock(() => (img.onload as (() => void) | null)?.());
 
-      // Mock the Image instance to trigger onload when src is set
-      global.Image = vi.fn().mockImplementation(() => {
-        const image = {
-          onload: null,
-          onerror: null,
-          src: null,
-        };
-
-        // Use setTimeout to simulate async behavior
-        Object.defineProperty(image, 'src', {
-          set(value) {
-            this._src = value;
-            setTimeout(() => this.onload());
-          },
-          get() {
-            return this._src;
-          },
-        });
-
-        return image;
-      });
-
-      const isValid = await isImageValid({ img: new Image(), src: validImageUrl });
+      const isValid = await isImageValid({ img, src: validImageUrl });
       expect(isValid).toBe(true);
     });
 
     it('should return a promise that resolves to false if the image is invalid', async () => {
       const invalidImageUrl = 'https://example.com/invalid-image.jpg';
+      const img = createImageMock(() => (img.onerror as (() => void) | null)?.());
 
-      // Mock the Image instance to trigger onerror when src is set
-      global.Image = vi.fn().mockImplementation(() => {
-        const image = {
-          onload: null,
-          onerror: null,
-          src: null,
-        };
-
-        // Use setTimeout to simulate async behavior
-        Object.defineProperty(image, 'src', {
-          set(value) {
-            this._src = value;
-            setTimeout(() => this.onerror());
-          },
-          get() {
-            return this._src;
-          },
-        });
-
-        return image;
-      });
-
-      const isValid = await isImageValid({ img: new Image(), src: invalidImageUrl });
+      const isValid = await isImageValid({ img, src: invalidImageUrl });
       expect(isValid).toBe(false);
     });
   });

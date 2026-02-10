@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-undef
 module.exports = {
+  ignorePatterns: ['vitest.config.ts'],
   env: {
     browser: true,
     es2020: true,

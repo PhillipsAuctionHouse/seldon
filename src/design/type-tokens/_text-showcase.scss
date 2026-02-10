@@ -1,7 +1,7 @@
 /* stylelint-disable declaration-property-value-allowed-list */
 /* stylelint-disable declaration-property-value-disallowed-list */
-@use '#scss/vars' as *;
-@use '#scss/type' as *;
+@use '~scss/vars' as *;
+@use '~scss/type' as *;
 
 :root {
   .typography-item--small {

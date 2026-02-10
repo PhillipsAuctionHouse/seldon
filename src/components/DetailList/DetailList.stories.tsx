@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import { Detail, DetailVariants } from '../../components/Detail';
 import DetailList, { DetailListProps } from './DetailList';
 import { DetailListAlignment } from './types';

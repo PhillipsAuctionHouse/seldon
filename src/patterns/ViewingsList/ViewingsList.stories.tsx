@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 
 import StatefulViewingsList, { StatefulViewingsListProps } from './StatefulViewingsList';
 import { defaultViewing, i18n, handleOnSave, validate } from './utils';

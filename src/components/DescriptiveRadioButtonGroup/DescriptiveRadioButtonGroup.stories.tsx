@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import DescriptiveRadioButtonGroup, { DescriptiveRadioButtonGroupProps } from './DescriptiveRadioButtonGroup';
 import { useState } from 'react';
 

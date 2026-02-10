@@ -1,4 +1,4 @@
-@use '#scss/allPartials' as *;
+@use '~scss/allPartials' as *;
 
 // Mobile version of the language selector mirrors the navigation menu link styles
 .#{$px}-language-selector {

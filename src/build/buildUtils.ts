@@ -10,7 +10,7 @@ export const transformScssAlias = (contents: Buffer, name: string) => {
   const countOfSubDirectories = filePath.split('/').length - 1;
 
   return contents.toString().replace(
-    /#scss/g,
+    /~scss/g,
     Array(countOfSubDirectories)
       .fill(0)
       .map(() => '..')
