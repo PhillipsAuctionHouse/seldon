@@ -46,6 +46,7 @@
 @use 'components/Countdown/countdown';
 @use 'components/Countdown/duration';
 @use 'components/Detail/detail';
+@use 'components/DetailList/detailList';
 @use 'components/PinchZoom/pinchZoom';
 @use 'components/Tabs/tabs';
 @use 'components/SeldonImage/seldonImage';
@@ -73,7 +74,6 @@
 @use 'patterns/ObjectTile/objectTile';
 @use 'patterns/BidSnapshot/bidSnapshot';
 @use 'patterns/FilterMenu/filterMenu';
-@use 'patterns/DetailList/detailList';
 @use 'patterns/AccountPageHeader/accountPageHeader';
 @use 'patterns/FavoritesCollectionTile/favoritesCollectionTile';
 @use 'patterns/SaleCard/saleCard';
