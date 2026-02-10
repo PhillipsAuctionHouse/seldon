@@ -1,6 +1,6 @@
 {
   "name": "@phillips/seldon",
-  "version": "1.230.1",
+  "version": "1.235.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/PhillipsAuctionHouse/seldon"
@@ -23,6 +23,9 @@
   "files": [
     "dist/**"
   ],
+  "overrides": {
+    "@semantic-release/npm": "^13.1.4"
+  },
   "scripts": {
     "start": "storybook dev -p 6006",
     "test": "vitest",
@@ -82,7 +85,8 @@
     "@figma/code-connect": "^0.2.1",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^10.1.0",
+    "@semantic-release/github": "^12.0.0",
+    "@semantic-release/npm": "^13.1.4",
     "@storybook/addon-a11y": "^8.5.8",
     "@storybook/addon-essentials": "^8.5.0",
     "@storybook/addon-interactions": "^8.5.0",
@@ -130,7 +134,7 @@
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "sass": "^1.83.4",
-    "semantic-release": "^23.1.1",
+    "semantic-release": "^25.0.0",
     "storybook": "^8.6.15",
     "stylelint": "^16.8.1",
     "stylelint-config-standard": "^36.0.1",

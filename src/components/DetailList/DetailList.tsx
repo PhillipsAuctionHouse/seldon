@@ -7,7 +7,7 @@ import { getDetailKey } from './utils';
 import { DetailVariants } from '../../components/Detail/types';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
-export interface DetailListProps extends ComponentProps<'dl'> {
+export interface DetailListProps extends ComponentProps<'div'> {
   /**
    * Determines whether each Details' label and value are aligned in columns or justified
    */
@@ -35,7 +35,7 @@ export interface DetailListProps extends ComponentProps<'dl'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-detaillist--overview)
  *
  */
-const DetailList = forwardRef<HTMLDListElement, DetailListProps>(
+const DetailList = forwardRef<HTMLDivElement, DetailListProps>(
   (
     { alignment = DetailListAlignment.justified, className, children, hasSeparators = false, variant = 'md', ...props },
     ref,
@@ -44,7 +44,7 @@ const DetailList = forwardRef<HTMLDListElement, DetailListProps>(
     const childrenArray = Array.isArray(children) ? children : [children];
 
     return (
-      <dl
+      <div
         {...commonProps}
         className={classnames(baseClassName, className, {
           [`${px}-has-separators`]: hasSeparators,
@@ -69,7 +69,7 @@ const DetailList = forwardRef<HTMLDListElement, DetailListProps>(
             </div>
           ) : undefined,
         )}
-      </dl>
+      </div>
     );
   },
 );
