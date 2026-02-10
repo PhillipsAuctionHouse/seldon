@@ -16,6 +16,8 @@ export enum TextVariants {
   linkLarge = 'linkLarge',
   linkMedium = 'linkMedium',
   linkSmall = 'linkSmall',
+  badgeSmall = 'badgeSmall',
+  badgeMedium = 'badgeMedium',
 
   /** @deprecated Use headingLarge instead */
   blockquote = 'blockquote',
