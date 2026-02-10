@@ -9,43 +9,31 @@
   gap: $spacing-md;
 
   &__label-section {
-    flex-shrink: 0;
-    width: 160px;
+    flex: 1 0 160px;
+    max-width: 100%;
 
     &--label.#{$px}-text {
       font-variation-settings: 'wght' 600;
     }
 
     @media (max-width: $breakpoint-md) {
-      width: 128px;
+      flex: 1 0 128px;
     }
 
     @media (max-width: $breakpoint-sm) {
-      width: 96px;
+      flex: 1 0 96px;
     }
 
     &--has-sub-label {
-      width: 240px;
+      flex: 1 0 240px;
 
       @media (max-width: $breakpoint-sm) {
-        width: 120px;
+        flex: 1 0 120px;
       }
     }
 
     &--no-wrap {
-      width: unset;
-
-      @media (max-width: $breakpoint-lg) {
-        width: unset;
-      }
-
-      @media (max-width: $breakpoint-md) {
-        width: unset;
-      }
-
-      @media (max-width: $breakpoint-sm) {
-        width: unset;
-      }
+      flex: none;
     }
 
     span {
@@ -58,6 +46,7 @@
   }
 
   &__value {
+    flex: 0 1 auto;
     font-variation-settings: 'wght' 400;
   }
 }

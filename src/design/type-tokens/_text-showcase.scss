@@ -136,6 +136,14 @@
     &__link-small {
       @include text($linkSmall);
     }
+
+    &__badge-small {
+      @include text($badgeSmall);
+    }
+
+    &__badge-medium {
+      @include text($badgeMedium);
+    }
   }
 
   &-migration-table {
