@@ -170,6 +170,37 @@ describe('ProgressWizard', () => {
     await waitFor(() => expect(screen.getByRole('button', getWizName('Submit'))).not.toBeDisabled());
   });
 
+  it('warns when both defaultStepIndex and currentStepIndex are provided', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    render(
+      <ProgressWizard defaultStepIndex={1} currentStepIndex={0}>
+        <Input name="a" id="a" labelText="Step 1" />
+        <Input name="b" id="b" labelText="Step 2" />
+      </ProgressWizard>,
+    );
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Both defaultStepIndex and currentStepIndex'));
+    warnSpy.mockRestore();
+  });
+
+  it('warns when isEnableHistoryManagement is true in controlled mode', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    render(
+      <ProgressWizard isEnableHistoryManagement currentStepIndex={0}>
+        <Input name="a" id="a" labelText="Step 1" />
+        <Input name="b" id="b" labelText="Step 2" />
+      </ProgressWizard>,
+    );
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('History management is disabled in controlled mode'));
+    warnSpy.mockRestore();
+  });
+
+  it('warns when no children are provided', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    render(<ProgressWizard>{[]}</ProgressWizard>);
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('No children provided'));
+    warnSpy.mockRestore();
+  });
+
   it('renders steps and navigates between them', async () => {
     render(
       <ProgressWizard>

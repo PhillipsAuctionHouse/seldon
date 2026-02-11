@@ -22,19 +22,40 @@ describe('CarouselDots', () => {
   });
 
   it('calls onClick for a dot', () => {
-    // Patch CarouselDot to spy on onClick
-
     render(<CarouselDots {...baseProps} />, { wrapper: ({ children }) => <Carousel>{children}</Carousel> });
     const buttons = screen.getAllByRole('button');
     fireEvent.click(buttons[2]);
-    // We can't check the callback directly, but we can check the button exists and is clickable
     expect(buttons[2]).toBeInTheDocument();
   });
 
   it('renders a selected dot', () => {
     render(<CarouselDots {...baseProps} />, { wrapper: ({ children }) => <Carousel>{children}</Carousel> });
-    // By default, the first dot is selected
     const buttons = screen.getAllByRole('button');
     expect(buttons[0]).toBeInTheDocument();
+  });
+
+  it('applies position class for position="on-content"', () => {
+    render(<CarouselDots {...baseProps} position="on-content" />, {
+      wrapper: ({ children }) => <Carousel>{children}</Carousel>,
+    });
+    const dotsRoot = screen.getByRole('group', { name: 'pagination' });
+    expect(dotsRoot.className).toMatch(/-on-content$/);
+  });
+
+  it('applies position class for position="inline" (default)', () => {
+    render(<CarouselDots {...baseProps} />, {
+      wrapper: ({ children }) => <Carousel>{children}</Carousel>,
+    });
+    const dotsRoot = screen.getByRole('group', { name: 'pagination' });
+    expect(dotsRoot.className).toMatch(/-inline$/);
+  });
+
+  it('uses default maxDots (9) and position (inline) when omitted', () => {
+    render(<CarouselDots id="minimal-dots" numberOfSlides={1} />, {
+      wrapper: ({ children }) => <Carousel>{children}</Carousel>,
+    });
+    const dotsRoot = screen.getByRole('group', { name: 'pagination' });
+    expect(dotsRoot).toBeInTheDocument();
+    expect(dotsRoot.className).toMatch(/-inline$/);
   });
 });

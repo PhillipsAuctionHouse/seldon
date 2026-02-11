@@ -136,6 +136,5 @@ export const LOREM_HUGE = (() => {
   while (lines.length < 100) {
     lines.push(seed[lines.length % seed.length]);
   }
-  if (lines.length === 0) return '';
   return lines.join(' ');
 })();
