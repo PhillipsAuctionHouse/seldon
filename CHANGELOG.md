@@ -1,3 +1,10 @@
+## [1.235.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.235.1...v1.235.2) (2026-02-11)
+
+
+### Bug Fixes
+
+* **detaillist:** L3-11707 fix detail list item spacing ([#804](https://github.com/PhillipsAuctionHouse/seldon/issues/804)) ([0d2e606](https://github.com/PhillipsAuctionHouse/seldon/commit/0d2e606d592544b85b442f3a3b9833d0c46550f9))
+
 ## [1.235.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.235.0...v1.235.1) (2026-02-10)
 
 
