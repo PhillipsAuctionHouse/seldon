@@ -3,11 +3,12 @@ import { afterEach, beforeEach, vi } from 'vitest';
 import '@testing-library/jest-dom/vitest';
 
 const originalConsoleError = console.error;
-export const consoleError = vi.spyOn(console, 'error');
+export let consoleError: ReturnType<typeof vi.spyOn>;
 
 const originalWindow = window;
 
 beforeEach(() => {
+  consoleError = vi.spyOn(console, 'error');
   consoleError.mockImplementation((...args: Parameters<typeof console.error>) => {
     originalConsoleError(...args);
     throw new Error('Console error was called. Call consoleError.mockImplementation(() => {}) if this is expected.');
