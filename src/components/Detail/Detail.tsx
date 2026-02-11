@@ -49,7 +49,7 @@ const Detail = forwardRef<HTMLDivElement, DetailProps>(
           ? TextVariants.labelLarge
           : TextVariants.labelMedium;
     const valueTextVariant =
-      variant === 'sm' ? TextVariants.bodySmall : variant === 'lg' ? TextVariants.bodyLarge : TextVariants.labelMedium;
+      variant === 'sm' ? TextVariants.labelSmall : variant === 'lg' ? TextVariants.bodyLarge : TextVariants.labelMedium;
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
