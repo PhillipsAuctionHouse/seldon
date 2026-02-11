@@ -1,3 +1,10 @@
+## [1.235.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.235.0...v1.235.1) (2026-02-10)
+
+
+### Bug Fixes
+
+* **detaillist/text:** L3-10789 improve semantic HTML to remove accessibility violations with `<dl` and `<label` ([#771](https://github.com/PhillipsAuctionHouse/seldon/issues/771)) ([689e11b](https://github.com/PhillipsAuctionHouse/seldon/commit/689e11b3877f6ec20e6837ab14150bc183ae1443))
+
 # [1.235.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.234.1...v1.235.0) (2026-02-10)
 
 
