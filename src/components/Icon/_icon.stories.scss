@@ -1,7 +1,4 @@
-@use '~scss/sharedClasses' as *;
-@use '~scss/type' as *;
-@use '~scss/utils' as *;
-@use '~scss/vars' as *;
+@use '~scss/allPartials' as *;
 
 .story-icon-flex-wrapper {
   box-shadow: 0 0 8px 0 rgba($pure-black, 0.2);
