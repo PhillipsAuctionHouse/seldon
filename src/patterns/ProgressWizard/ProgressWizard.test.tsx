@@ -47,8 +47,8 @@ const ConsumerForm = ({
   const stepCountArray = Array.from({ length: stepCount });
   const stepCountNameAndLabels = stepCountArray.map(genFieldNameAndLabel);
   lastRenderedFieldNamesAndLabels = stepCountNameAndLabels;
-  const stepNames = stepCountNameAndLabels.map(({ name }) => name);
-  type FormData = Record<(typeof stepNames)[number], HTMLInputElement['value']>;
+  const _stepNames = stepCountNameAndLabels.map(({ name }) => name);
+  type FormData = Record<(typeof _stepNames)[number], HTMLInputElement['value']>;
   const [formData, setFormData] = useState<FormData>({});
 
   const stepElements = stepCountNameAndLabels.map(({ name, label }, i) => (

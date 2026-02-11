@@ -72,7 +72,7 @@ describe('AddToCalendar component', () => {
   });
 
   test('calls generateCalendarFile when button is clicked ', async () => {
-    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {}); // eslint-disable-line @typescript-eslint/no-empty-function
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const originalCreateElement = document.createElement;
     const link = originalCreateElement.call(document, 'a');
     link.click = vi.fn(); // Mock the click function
@@ -107,7 +107,7 @@ describe('AddToCalendar component', () => {
   });
 
   test('clicking iCalendar button calls generateCalendarFile', async () => {
-    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {}); // eslint-disable-line @typescript-eslint/no-empty-function
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const originalCreateElement = document.createElement;
     const link = originalCreateElement.call(document, 'a');
     link.click = vi.fn(); // Mock the click function

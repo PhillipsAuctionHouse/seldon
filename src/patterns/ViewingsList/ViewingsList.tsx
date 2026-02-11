@@ -102,7 +102,7 @@ const ViewingsList = forwardRef<HTMLDivElement, ViewingsListProps>((props, ref) 
 
   const handleOnDelete = (viewingId: string) => {
     setHasUnsavedData('');
-    typeof onDelete === 'function' && onDelete(viewingId);
+    if (typeof onDelete === 'function') onDelete(viewingId);
   };
 
   const handleOnEdit = (viewingId: string) => {
@@ -118,7 +118,7 @@ const ViewingsList = forwardRef<HTMLDivElement, ViewingsListProps>((props, ref) 
 
   const handleOnCancel = () => {
     if (typeof oldState === 'string') {
-      typeof onDelete === 'function' && onDelete(oldState);
+      if (typeof onDelete === 'function') onDelete(oldState);
     } else if (hasUnsavedData === oldState?.id) {
       setViewingsList((prevViewings) => prevViewings?.map((el) => (el.id === oldState.id ? oldState : el)));
     }
