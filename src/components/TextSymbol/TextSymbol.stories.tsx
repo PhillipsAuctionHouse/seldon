@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react/*';
+import type { Meta } from '@storybook/react-vite';
 import TextSymbol, { TextSymbolProps } from './TextSymbol';
 import { TextSymbolVariants } from './types';
 import Text from '../Text/Text';

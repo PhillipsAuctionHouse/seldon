@@ -51,6 +51,14 @@ describe('CountryPickerModal - Country variant', () => {
     expect(screen.getByText('United States')).toBeInTheDocument();
   });
 
+  it('returns full list when search filter yields empty pattern (e.g. only "+")', async () => {
+    render(<CountryPickerModal {...countryBaseProps} />);
+    const searchInput = screen.getByPlaceholderText('Type to search...');
+    await userEvent.type(searchInput, '+');
+    expect(screen.getByText('United States')).toBeInTheDocument();
+    expect(screen.getByText('Canada')).toBeInTheDocument();
+  });
+
   it('renders prioritized countries first', () => {
     render(<CountryPickerModal {...countryBaseProps} />);
     const prioritizedCountry = screen.getByText('United States');

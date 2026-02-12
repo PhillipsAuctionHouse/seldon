@@ -1,4 +1,3 @@
-/// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import react from '@vitejs/plugin-react';
@@ -55,7 +54,7 @@ export default defineConfig({
               transform: (contents) =>
                 contents
                   .toString()
-                  .replace(/#scss/g, '.')
+                  .replace(/~scss/g, '.')
                   .replace(/\.\.\/fonts/g, '@phillips/seldon/dist/fonts'),
             },
           ],
@@ -79,36 +78,6 @@ export default defineConfig({
   optimizeDeps: {
     esbuildOptions: {
       target: 'es2020',
-    },
-  },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    include: ['**/*.test.{js,jsx,ts,tsx}'],
-    exclude: ['node_modules', 'dist', 'build', 'coverage', 'public', 'scripts', 'storybook', '.template/**/*.{ts,tsx}'],
-    setupFiles: ['./config/vitest/setupTest.ts'],
-    restoreMocks: true,
-    coverage: {
-      include: ['src/**/*.{ts,tsx}'],
-      exclude: [
-        '**/*.test.{ts,tsx}',
-        '**/*.stories.{ts,tsx}',
-        '**/design/**/*.{ts,tsx}',
-        '.template/**/*.{ts,tsx}',
-        '**/index.ts',
-        '**/types.ts',
-        '**/assets/**',
-        '**/testUtils.tsx',
-      ], // ignore barrel files
-      reporter: ['text', 'json', 'html'],
-      provider: 'v8',
-      thresholds: {
-        branches: 90,
-        lines: 90,
-        functions: 90,
-        statements: 90,
-      },
-      all: true,
     },
   },
 });

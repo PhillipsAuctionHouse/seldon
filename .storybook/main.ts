@@ -1,15 +1,12 @@
+// This file has been automatically migrated to valid ESM format by Storybook.
+import { fileURLToPath } from 'node:url';
 import type { StorybookConfig } from '@storybook/react-vite';
-import path from 'path';
+import path, { dirname } from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-    '@storybook/addon-mdx-gfm',
-    '@chromatic-com/storybook',
-    '@storybook/addon-a11y',
-  ],
+  addons: ['@storybook/addon-links', '@chromatic-com/storybook', '@storybook/addon-a11y', '@storybook/addon-docs'],
   framework: {
     name: '@storybook/react-vite',
     options: {},
@@ -21,7 +18,7 @@ const config: StorybookConfig = {
     if (config && config.resolve) {
       config.resolve.alias = {
         ...config.resolve.alias,
-        '#scss': path.resolve(__dirname, '../src/scss/'),
+        '~scss': path.resolve(__dirname, '../src/scss/'),
         ...(process.env.NODE_ENV === 'production' ? { '../fonts': path.resolve(__dirname, '../public/fonts/') } : {}),
       };
     }

@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import Pictogram, { PictogramProps } from './Pictogram';
 import * as pictogramComponents from '../../assets/pictograms/formatted';
 import { getScssColors } from '../../utils/scssUtils';

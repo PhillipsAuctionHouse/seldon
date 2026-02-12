@@ -3,8 +3,8 @@
 // @TODO: reset styles when we can do a site wide regressions QA in phillips-public
 // @use 'reset';
 
-@use '#scss/typography' as *;
-@use '#scss/vars' as *;
+@use '~scss/typography' as *;
+@use '~scss/vars' as *;
 
 // ⚛️ Components
 @use 'components/Button/button';
@@ -40,6 +40,7 @@
 @use 'components/Pagination/pagination';
 @use 'components/ContentPeek/contentPeek';
 @use 'components/PageContentWrapper/pageContentWrapper';
+@use 'components/DatePicker/datePicker';
 @use 'components/Carousel/carousel';
 @use 'components/ComboBox/combobox';
 @use 'components/Tags/tags';

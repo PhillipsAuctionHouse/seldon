@@ -34,18 +34,17 @@ describe('CountryPicker Component', () => {
     expect(screen.getByText('Error occurred')).toBeInTheDocument();
   });
 
-  const StatefulCountryPicker = (
-    props: ComponentProps<typeof CountryPicker> & { onChange: ReturnType<typeof vi.fn> },
-  ) => {
-    const [testValue, setTestValue] = useState<ComponentProps<typeof CountryPicker>['value']>(props.value);
+  type Value = ComponentProps<typeof CountryPicker>['value'];
+  const StatefulCountryPicker = (props: ComponentProps<typeof CountryPicker>) => {
+    const [testValue, setTestValue] = useState<Value>(props.value);
 
-    const handleChange = (v: ComponentProps<typeof CountryPicker>['value']) => {
+    const handleChange = (v: Value) => {
       setTestValue(v);
-      props.onChange(v);
+      (props.onChange as (v: Value) => void)(v);
     };
     const typedConfig = props.isPhone
-      ? toConfig(true, testValue as Country['code'], handleChange)
-      : toConfig(false, testValue as Country['name'], handleChange);
+      ? toConfig(true, testValue as Country['code'], handleChange as (v: Country['code']) => void)
+      : toConfig(false, testValue as Country['name'], handleChange as (v: Country['name']) => void);
     return <CountryPicker {...props} {...typedConfig} triggerDisplayValue="" />;
   };
 
