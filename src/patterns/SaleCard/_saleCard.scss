@@ -81,6 +81,10 @@
     display: flex;
     flex-direction: column;
     gap: $spacing-micro;
+
+    .#{$px}-text {
+      color: $text-supporting;
+    }
   }
 
   &__badge {
