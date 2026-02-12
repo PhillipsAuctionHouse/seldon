@@ -14,6 +14,14 @@ export interface TextSymbolProps extends React.HTMLAttributes<HTMLElement> {
   variant?: TextSymbolVariants;
 }
 
+// Unicode Variation Selector-15 (U+FE0E) forces text presentation instead of emoji
+const TEXT_VARIATION_SELECTOR = '\uFE0E';
+
+const toTextSymbol = (symbol: string): string => {
+  if (!symbol) return '';
+  return `${symbol}${TEXT_VARIATION_SELECTOR}`;
+};
+
 const TextSymbol = forwardRef<HTMLSpanElement, TextSymbolProps>(
   ({ symbols = [], variant = TextSymbolVariants.lotNumber, className, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TextSymbol');
@@ -26,7 +34,7 @@ const TextSymbol = forwardRef<HTMLSpanElement, TextSymbolProps>(
         {...props}
       >
         {symbols.map((symbol) => (
-          <span key={symbol}>{symbol}</span>
+          <span key={symbol}>{toTextSymbol(symbol)}</span>
         ))}
       </span>
     );
