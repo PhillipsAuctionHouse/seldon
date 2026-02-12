@@ -1,8 +1,9 @@
 import type { Meta } from '@storybook/react-vite';
-
 import Button, { ButtonProps } from './Button';
-import { ButtonVariants } from './types';
+import { ButtonVariants, ButtonSizes } from './types';
 import { Icon } from '../Icon';
+import { Loader } from '../..';
+import './_button.stories.scss';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
@@ -12,6 +13,12 @@ const meta = {
   argTypes: {
     variant: {
       options: Object.values(ButtonVariants),
+      control: {
+        type: 'select',
+      },
+    },
+    size: {
+      options: Object.values(ButtonSizes),
       control: {
         type: 'select',
       },
@@ -70,7 +77,7 @@ export const ButtonAsLinkWithPrefetch = (props: ButtonProps) => (
 
 ButtonAsLinkWithPrefetch.args = {
   variant: ButtonVariants.tertiary,
-  size: 'md',
+  linkSize: 'md',
 };
 
 export const ButtonWithSkeleton = (props: ButtonProps) => (
@@ -82,9 +89,144 @@ export const ButtonWithSkeleton = (props: ButtonProps) => (
   </div>
 );
 
-ButtonAsLinkWithPrefetch.args = {
-  variant: ButtonVariants.tertiary,
-  size: 'md',
+export const SmallButtonVariant = (props: ButtonProps) => (
+  <Button {...props} size={ButtonSizes.small}>
+    Small Variant
+  </Button>
+);
+
+SmallButtonVariant.argTypes = {
+  size: {
+    control: false,
+  },
+};
+
+export const SmallButtonWithIcons = () => (
+  <div style={{ display: 'flex', gap: '1rem' }}>
+    <Button size={ButtonSizes.small} variant={ButtonVariants.primary}>
+      <Icon icon="Add" />
+      With Icon
+    </Button>
+    <Button size={ButtonSizes.small} variant={ButtonVariants.secondary} isIconLast>
+      Icon Last
+      <Icon icon="ArrowRight" />
+    </Button>
+  </div>
+);
+
+SmallButtonWithIcons.argTypes = {
+  size: {
+    control: false,
+  },
+};
+export const AllVariantsGrid = () => {
+  const variants = [
+    { variant: ButtonVariants.primary, name: 'Primary' },
+    { variant: ButtonVariants.secondary, name: 'Secondary' },
+    { variant: ButtonVariants.tertiary, name: 'Tertiary' },
+  ];
+
+  const sizes = [
+    { size: ButtonSizes.default, name: 'Default' },
+    { size: ButtonSizes.small, name: 'Small' },
+  ];
+
+  return (
+    <div className="all-variants-grid">
+      {/* Header row */}
+      <div className="all-variants-grid__header">
+        <div className="all-variants-grid__header-cell">Variant</div>
+        <div className="all-variants-grid__header-cell">Static</div>
+        <div className="all-variants-grid__header-cell">Hover</div>
+        <div className="all-variants-grid__header-cell">Focus</div>
+        <div className="all-variants-grid__header-cell">Loading (Disabled)</div>
+        <div className="all-variants-grid__header-cell">Disabled</div>
+      </div>
+
+      {/* Grid rows for each variant and size combination */}
+      {variants.map(({ variant, name: variantName }) =>
+        sizes.map(({ size, name: sizeName }) => {
+          const buttonText = size === ButtonSizes.small ? 'Clear' : 'Register To Bid';
+
+          return (
+            <div key={`${variant}-${size}`} className="all-variants-grid__row">
+              <div className="all-variants-grid__label-cell">
+                {variantName} {sizeName}
+              </div>
+
+              {/* Static */}
+              <div className="all-variants-grid__button-cell">
+                <Button variant={variant} size={size}>
+                  {buttonText}
+                </Button>
+              </div>
+
+              {/* Hover */}
+              <div className="all-variants-grid__button-cell">
+                <Button className="pseudo-hover" variant={variant} size={size}>
+                  {buttonText}
+                </Button>
+              </div>
+
+              {/* Focus */}
+              <div className="all-variants-grid__button-cell">
+                <Button className="pseudo-focus" variant={variant} size={size}>
+                  {buttonText}
+                </Button>
+              </div>
+
+              {/* Loading (Disabled) */}
+              <div className="all-variants-grid__button-cell">
+                <Button
+                  variant={variant}
+                  size={size}
+                  isDisabled
+                  style={{
+                    position: 'relative',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {/* Mimic the same button width while showing loader */}
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      visibility: 'hidden',
+                      display: 'inline-block',
+                      height: 0,
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {buttonText}
+                  </span>
+                  <span style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}>
+                    <Loader />
+                  </span>
+                </Button>
+              </div>
+
+              {/* Disabled */}
+              <div className="all-variants-grid__button-cell">
+                <Button variant={variant} size={size} isDisabled>
+                  {buttonText}
+                </Button>
+              </div>
+            </div>
+          );
+        }),
+      )}
+    </div>
+  );
+};
+
+AllVariantsGrid.parameters = {
+  pseudo: {
+    hover: ['.pseudo-hover'],
+    focus: ['.pseudo-focus'],
+    focusVisible: ['.pseudo-focus'],
+  },
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
