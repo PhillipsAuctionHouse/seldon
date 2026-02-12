@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import { ToastProvider } from './ToastContextProvider';
 import { useToastContext } from './useToastContext';
@@ -111,5 +111,34 @@ describe('ToastContextProvider', () => {
     await userEvent.click(screen.getByText('Add Toast 1'));
     await userEvent.click(screen.getByText('Add Toast 2'));
     expect(screen.getByTestId('toast-count')).toHaveTextContent('2');
+  });
+
+  it('removes toast when toast is closed via onOpenChange (e.g. close button)', async () => {
+    const closeLabel = 'Dismiss toast';
+    const TestToastWithClose = () => {
+      const { toasts, addToast } = useToastContext();
+      return (
+        <>
+          <button onClick={() => addToast({ title: 'To be closed', closeButtonLabel: closeLabel })}>Add Toast</button>
+          <div data-testid="toast-count">{toasts.length}</div>
+        </>
+      );
+    };
+
+    render(
+      <ToastProvider>
+        <TestToastWithClose />
+      </ToastProvider>,
+    );
+
+    await userEvent.click(screen.getByText('Add Toast'));
+    expect(screen.getByTestId('toast-count')).toHaveTextContent('1');
+
+    const closeButton = screen.getByRole('button', { name: closeLabel });
+    await userEvent.click(closeButton);
+
+    await waitFor(() => {
+      expect(screen.getByTestId('toast-count')).toHaveTextContent('0');
+    });
   });
 });

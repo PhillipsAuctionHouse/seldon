@@ -2,7 +2,7 @@ import Icon from './Icon';
 import { render } from '@testing-library/react';
 
 const vars = vi.hoisted(() => '$black-100: #000000;\n$test-color: #FF0000;\n');
-vi.mock('#scss/_vars.scss?raw', () => ({ default: vars }));
+vi.mock('~scss/_vars.scss?raw', () => ({ default: vars }));
 
 describe('Icon', () => {
   it('should render the icon', () => {
