@@ -1,3 +1,10 @@
+# [1.237.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.236.0...v1.237.0) (2026-02-12)
+
+
+### Features
+
+* **buttonLinks:** L3-11125 Design System [RW]: Seldon - Link Buttons of Primary/Secondary need to bold the text ([#802](https://github.com/PhillipsAuctionHouse/seldon/issues/802)) ([5ea5aa1](https://github.com/PhillipsAuctionHouse/seldon/commit/5ea5aa10d708dfabc370e71c4ca7e5051239aa8a))
+
 # [1.236.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.235.2...v1.236.0) (2026-02-12)
 
 
