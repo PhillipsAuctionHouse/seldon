@@ -95,6 +95,12 @@ export const SmallButtonVariant = (props: ButtonProps) => (
   </Button>
 );
 
+SmallButtonVariant.argTypes = {
+  size: {
+    control: false,
+  },
+};
+
 export const SmallButtonWithIcons = () => (
   <div style={{ display: 'flex', gap: '1rem' }}>
     <Button size={ButtonSizes.small} variant={ButtonVariants.primary}>
@@ -108,6 +114,11 @@ export const SmallButtonWithIcons = () => (
   </div>
 );
 
+SmallButtonWithIcons.argTypes = {
+  size: {
+    control: false,
+  },
+};
 export const AllVariantsGrid = () => {
   const variants = [
     { variant: ButtonVariants.primary, name: 'Primary' },
