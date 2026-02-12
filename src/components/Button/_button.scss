@@ -46,6 +46,16 @@
     }
   }
 
+  &--primary.#{$px}-link,
+  &--secondary.#{$px}-link,
+  &--ghost.#{$px}-link {
+    font-variation-settings: 'wght' 600;
+
+    .#{$px}-text {
+      font-variation-settings: 'wght' 600;
+    }
+  }
+
   &:not(.#{$px}-button--link) {
     &.#{$px}-button--primary {
       color: $white-100;
