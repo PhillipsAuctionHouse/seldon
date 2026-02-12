@@ -170,9 +170,7 @@
 
   &--tertiary {
     background-color: transparent;
-    border: 0;
     color: $pure-black;
-    padding: 0 $spacing-micro;
 
     svg {
       fill: $pure-black;
@@ -205,7 +203,7 @@
 
   &:disabled {
     background-color: $grey-50;
-    border: 1px solid $grey-50;
+    border: 2px solid $grey-50;
     color: $grey-75;
     cursor: default;
 
@@ -225,6 +223,7 @@
   }
 
   &--tertiary:disabled {
+    background-color: transparent;
     border-color: transparent;
   }
 
