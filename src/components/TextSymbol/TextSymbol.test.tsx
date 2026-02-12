@@ -6,6 +6,7 @@ import { TextSymbolVariants } from './types';
 import { forwardRef } from 'react';
 
 const symbols = 'Ο‡≠♠ΩΔ•†◆Σ܀∞✱▼Ж≌Ø'.split('');
+const TEXT_VARIATION_SELECTOR = '\uFE0E';
 
 describe('TextSymbol', () => {
   // Use a forwardRef wrapper for runCommonTests to ensure ref is tested correctly
@@ -18,9 +19,32 @@ describe('TextSymbol', () => {
     render(<TextSymbol {...props} />);
   };
 
-  it('renders children correctly', () => {
-    renderTextSymbol({ symbols });
-    symbols.forEach((symbol) => expect(screen.getByText(symbol)).toBeInTheDocument());
+  it('renders symbols with text variation selector', () => {
+    const { container } = render(<TextSymbol symbols={symbols} />);
+    const symbolSpans = container.querySelectorAll('span > span');
+
+    expect(symbolSpans).toHaveLength(symbols.length);
+    symbolSpans.forEach((span, index) => {
+      // Each symbol should have the variation selector appended
+      expect(span.textContent).toBe(`${symbols[index]}${TEXT_VARIATION_SELECTOR}`);
+    });
+  });
+
+  it('renders empty when symbols array is empty', () => {
+    const { container } = render(<TextSymbol symbols={[]} />);
+    const symbolSpans = container.querySelectorAll('span > span');
+    expect(symbolSpans).toHaveLength(0);
+  });
+
+  it('handles empty string symbols', () => {
+    const { container } = render(<TextSymbol symbols={['♠', '', '♣']} />);
+    const symbolSpans = container.querySelectorAll('span > span');
+
+    // Should render all 3 spans, but empty string returns empty (early return in toTextSymbol)
+    expect(symbolSpans).toHaveLength(3);
+    expect(symbolSpans[0].textContent).toBe(`♠${TEXT_VARIATION_SELECTOR}`);
+    expect(symbolSpans[1].textContent).toBe(''); // Empty string returns empty
+    expect(symbolSpans[2].textContent).toBe(`♣${TEXT_VARIATION_SELECTOR}`);
   });
 
   it('applies the default variant correctly', () => {
