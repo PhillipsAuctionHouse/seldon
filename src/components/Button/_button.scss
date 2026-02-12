@@ -63,8 +63,7 @@
   }
 
   &--primary.#{$px}-link,
-  &--secondary.#{$px}-link,
-  &--ghost.#{$px}-link {
+  &--secondary.#{$px}-link {
     font-variation-settings: 'wght' 600;
 
     .#{$px}-text {
