@@ -1,3 +1,10 @@
+# [1.236.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.235.2...v1.236.0) (2026-02-12)
+
+
+### Features
+
+* **saleCard:** L3-10829 Update label size across lot tiles and sale cards, fix sale card badge sizing ([#805](https://github.com/PhillipsAuctionHouse/seldon/issues/805)) ([fddf5d4](https://github.com/PhillipsAuctionHouse/seldon/commit/fddf5d49c755f7c431290762725235069d4e0920))
+
 ## [1.235.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.235.1...v1.235.2) (2026-02-11)
 
 
