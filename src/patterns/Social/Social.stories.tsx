@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 
 import Social, { SocialProps } from './Social';
 import { Icon } from '../../components/Icon';

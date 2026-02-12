@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { Playground as PlaygroundSplitPanel } from '../SplitPanel/SplitPanel.stories';
 
 import { useState } from 'react';

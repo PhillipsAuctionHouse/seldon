@@ -62,13 +62,32 @@ describe('LanguageSelector', () => {
   });
 });
 
-test('getLanguageLabel', () => {
-  const languageOptions: LanguageOption[] = [
-    { label: 'English', value: SupportedLanguages.en },
-    { label: '中文', value: SupportedLanguages.zh },
-  ];
-  const currentLanguage = SupportedLanguages.zh;
-  expect(getLanguageLabel({ languageOptions, currentLanguage })).toBe('中文');
+describe('getLanguageLabel', () => {
+  test('returns label when option matches currentLanguage', () => {
+    const languageOptions: LanguageOption[] = [
+      { label: 'English', value: SupportedLanguages.en },
+      { label: '中文', value: SupportedLanguages.zh },
+    ];
+    const currentLanguage = SupportedLanguages.zh;
+    expect(getLanguageLabel({ languageOptions, currentLanguage })).toBe('中文');
+  });
+
+  test('returns "English" when no option matches currentLanguage', () => {
+    const languageOptions: LanguageOption[] = [
+      { label: 'English', value: SupportedLanguages.en },
+      { label: '中文', value: SupportedLanguages.zh },
+    ];
+    expect(getLanguageLabel({ languageOptions, currentLanguage: 'fr' as SupportedLanguages })).toBe('English');
+  });
+
+  test('returns "English" when languageOptions is undefined', () => {
+    expect(
+      getLanguageLabel({
+        languageOptions: undefined,
+        currentLanguage: SupportedLanguages.en,
+      }),
+    ).toBe('English');
+  });
 });
 
 describe('MobileLanguageSelector (responsive)', () => {

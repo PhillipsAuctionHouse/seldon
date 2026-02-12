@@ -1,4 +1,4 @@
-@import '#scss/allPartials';
+@use '~scss/allPartials' as *;
 
 .story-wrapper {
   display: flex;

@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import React, { useEffect, useRef, useState } from 'react';
 import { LanguageSelector } from '../../patterns/LanguageSelector';
 import { AuthState } from '../../patterns/UserManagement/types';
