@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import ContentPeek, { ContentPeekProps } from './ContentPeek';
 import { HeightUnits } from './utils';
 

@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import PhoneNumberInput, { PhoneNumberInputProps } from './PhoneNumberInput';
 import Button from '../../components/Button/Button';
 import Drawer from '../../components/Drawer/Drawer';

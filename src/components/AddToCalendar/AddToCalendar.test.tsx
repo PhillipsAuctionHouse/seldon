@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { describe, expect, test, vi } from 'vitest';
 import { render, fireEvent, act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -71,7 +72,7 @@ describe('AddToCalendar component', () => {
   });
 
   test('calls generateCalendarFile when button is clicked ', async () => {
-    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {}); // eslint-disable-line @typescript-eslint/no-empty-function
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const originalCreateElement = document.createElement;
     const link = originalCreateElement.call(document, 'a');
     link.click = vi.fn(); // Mock the click function
@@ -106,7 +107,7 @@ describe('AddToCalendar component', () => {
   });
 
   test('clicking iCalendar button calls generateCalendarFile', async () => {
-    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {}); // eslint-disable-line @typescript-eslint/no-empty-function
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const originalCreateElement = document.createElement;
     const link = originalCreateElement.call(document, 'a');
     link.click = vi.fn(); // Mock the click function
@@ -155,5 +156,66 @@ describe('AddToCalendar component', () => {
 
     // Verify the Popover is closed
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+  });
+
+  test('clicking Google Calendar link opens URL in new tab', async () => {
+    const user = userEvent.setup();
+    const openSpy = vi.spyOn(window, 'open').mockImplementation(() => null);
+    vi.mocked(calendarLinks.generateGoogleCalendarLink).mockReturnValue('https://calendar.google.com/event?eid=test');
+
+    const { getByRole } = render(<AddToCalendar event={event} />);
+    await user.click(getByRole('button', { name: 'Add to calendar' }));
+
+    const googleLink = await screen.findByRole('link', { name: 'Google Calendar' });
+    await user.click(googleLink);
+
+    expect(openSpy).toHaveBeenCalledWith('https://calendar.google.com/event?eid=test', '_blank');
+    openSpy.mockRestore();
+  });
+
+  test('clicking Outlook Online link opens URL in new tab', async () => {
+    const user = userEvent.setup();
+    const openSpy = vi.spyOn(window, 'open').mockImplementation(() => null);
+    vi.mocked(calendarLinks.generateOutlookOnlineLink).mockReturnValue('https://outlook.live.com/owa?path=test');
+
+    const { getByRole } = render(<AddToCalendar event={event} />);
+    await user.click(getByRole('button', { name: 'Add to calendar' }));
+
+    const outlookLink = await screen.findByRole('link', { name: 'Outlook Online' });
+    await user.click(outlookLink);
+
+    expect(openSpy).toHaveBeenCalledWith('https://outlook.live.com/owa?path=test', '_blank');
+    openSpy.mockRestore();
+  });
+
+  test('clicking Yahoo Calendar link opens URL in new tab', async () => {
+    const user = userEvent.setup();
+    const openSpy = vi.spyOn(window, 'open').mockImplementation(() => null);
+    vi.mocked(calendarLinks.generateYahooCalendarLink).mockReturnValue('https://calendar.yahoo.com/?v=test');
+
+    const { getByRole } = render(<AddToCalendar event={event} />);
+    await user.click(getByRole('button', { name: 'Add to calendar' }));
+
+    const yahooLink = await screen.findByRole('link', { name: 'Yahoo Calendar' });
+    await user.click(yahooLink);
+
+    expect(openSpy).toHaveBeenCalledWith('https://calendar.yahoo.com/?v=test', '_blank');
+    openSpy.mockRestore();
+  });
+
+  test('renders with custom linkElement', async () => {
+    const user = userEvent.setup();
+    const CustomLink = ({ href, children, ...rest }: { href?: string; children?: ReactNode }) => (
+      <a data-testid="custom-link" href={href} {...rest}>
+        {children}
+      </a>
+    );
+
+    const { getByRole } = render(<AddToCalendar event={event} linkElement={CustomLink} label="Add to calendar" />);
+    await user.click(getByRole('button', { name: 'Add to calendar' }));
+
+    const customLinks = screen.getAllByTestId('custom-link');
+    expect(customLinks.length).toBe(3);
+    expect(customLinks[0]).toHaveTextContent('Google Calendar');
   });
 });

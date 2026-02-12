@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import React, { useState } from 'react';
 import { Icon } from '../../components/Icon';
 import { LinkVariants } from '../../components/Link/types';
@@ -90,11 +90,14 @@ const meta = {
     layout: 'fullscreen',
   },
   args: {
-    // @ts-expect-error passing UserManagement authState prop through in this story
+    // authState is passed through to UserManagement in this story
+    // @ts-expect-error - not in HeaderProps but used by Playground story
     authState: AuthState.LoggedOut,
   },
-  // @ts-expect-error passing UserManagement authState prop through in this story
-  argTypes: { authState: { control: { type: 'select' }, options: Object.values(AuthState) } },
+  argTypes: {
+    // @ts-expect-error - not in HeaderProps but used by Playground story
+    authState: { control: { type: 'select' }, options: Object.values(AuthState) },
+  },
 } satisfies Meta<typeof Header>;
 
 export default meta;

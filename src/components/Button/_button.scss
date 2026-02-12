@@ -1,4 +1,4 @@
-@use '#scss/allPartials' as *;
+@use '~scss/allPartials' as *;
 
 .#{$px}-button {
   // we need this because we can't be sure that the Text component is being used as a child of the Button component
@@ -59,6 +59,16 @@
   &--tertiary {
     &.#{$px}-link {
       text-decoration: none;
+    }
+  }
+
+  &--primary.#{$px}-link,
+  &--secondary.#{$px}-link,
+  &--ghost.#{$px}-link {
+    font-variation-settings: 'wght' 600;
+
+    .#{$px}-text {
+      font-variation-settings: 'wght' 600;
     }
   }
 

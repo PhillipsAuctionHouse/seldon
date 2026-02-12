@@ -188,15 +188,15 @@ const ViewingsListCard = ({
   }, [invalidFields]);
 
   const handleOnCancel = () => {
-    typeof onCancel === 'function' && onCancel();
+    if (typeof onCancel === 'function') onCancel();
   };
 
   const handleOnEdit = () => {
-    typeof onEdit === 'function' && onEdit();
+    if (typeof onEdit === 'function') onEdit();
   };
 
   const handleOnSave = (e: React.MouseEvent<HTMLElement>) => {
-    typeof onSave === 'function' && onSave(e);
+    if (typeof onSave === 'function') onSave(e);
   };
 
   return (

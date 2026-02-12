@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import Detail, { DetailProps } from './Detail';
 import { DetailVariants } from './types';
 

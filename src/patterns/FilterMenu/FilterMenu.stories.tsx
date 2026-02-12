@@ -1,6 +1,6 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import FilterMenu from './FilterMenu';
-import { useArgs } from '@storybook/preview-api';
+import { useArgs } from 'storybook/preview-api';
 import { useEffect, useRef, useState } from 'react';
 import Button from '../../components/Button/Button';
 import { Drawer } from '../../components/Drawer';
