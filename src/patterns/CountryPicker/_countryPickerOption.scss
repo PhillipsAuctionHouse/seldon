@@ -28,8 +28,8 @@
     }
 
     &--is-phone:focus-within {
-      outline: 1px solid $soft-black;
-      outline-offset: 1px;
+      box-shadow: inset 0 0 0 2px $focus-default;
+      outline: none;
     }
 
     &-content {
@@ -78,12 +78,10 @@
   }
 }
 
-// Override focus within styles when phone option is clicked
-// TODO: align with design on focus states since the radio input is hidden
+// When both selected and focused, show both the border and focus ring
 .#{$px}-country-picker__option--is-phone.#{$px}-country-picker__option--selected {
-  border: 1px solid $pure-black;
-
   &:focus-within {
+    box-shadow: inset 0 0 0 2px $focus-default;
     outline: none;
   }
 }

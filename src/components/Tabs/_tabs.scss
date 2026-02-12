@@ -22,7 +22,7 @@
       border-bottom 0.2s ease-out;
 
     &:focus-visible {
-      box-shadow: rgba($pure-black, 1) 0 0 0 1px inset;
+      box-shadow: rgba($focus-default, 1) 0 0 0 2px inset;
       outline: none;
     }
 
@@ -42,7 +42,7 @@
     color: $pure-black;
 
     &:focus-visible {
-      box-shadow: rgba($pure-black, 1) 0 0 0 1px inset;
+      box-shadow: rgba($focus-default, 1) 0 0 0 2px inset;
       outline: none;
     }
     .#{$px}-text {

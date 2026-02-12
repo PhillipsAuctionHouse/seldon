@@ -67,10 +67,9 @@
         }
 
         &:focus-visible {
+          @include focus-ring($border-radius: $radius-3xl);
+
           background-color: $pure-white;
-          border-radius: $radius-3xl;
-          box-shadow: 0 0 0 0.5px $black-100;
-          outline: none;
         }
 
         svg {
