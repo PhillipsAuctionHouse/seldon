@@ -20,31 +20,34 @@ describe('TextSymbol', () => {
   };
 
   it('renders symbols with text variation selector', () => {
-    const { container } = render(<TextSymbol symbols={symbols} />);
-    const symbolSpans = container.querySelectorAll('span > span');
+    render(<TextSymbol symbols={symbols} />);
+    const root = screen.getByTestId('text-symbol');
+    const symbolElements = root.querySelectorAll(':scope > *');
 
-    expect(symbolSpans).toHaveLength(symbols.length);
-    symbolSpans.forEach((span, index) => {
+    expect(symbolElements).toHaveLength(symbols.length);
+    symbolElements.forEach((element, index) => {
       // Each symbol should have the variation selector appended
-      expect(span.textContent).toBe(`${symbols[index]}${TEXT_VARIATION_SELECTOR}`);
+      expect(element.textContent).toBe(`${symbols[index]}${TEXT_VARIATION_SELECTOR}`);
     });
   });
 
   it('renders empty when symbols array is empty', () => {
-    const { container } = render(<TextSymbol symbols={[]} />);
-    const symbolSpans = container.querySelectorAll('span > span');
-    expect(symbolSpans).toHaveLength(0);
+    render(<TextSymbol symbols={[]} />);
+    const root = screen.getByTestId('text-symbol');
+    const symbolElements = root.querySelectorAll(':scope > *');
+    expect(symbolElements).toHaveLength(0);
   });
 
   it('handles empty string symbols', () => {
-    const { container } = render(<TextSymbol symbols={['♠', '', '♣']} />);
-    const symbolSpans = container.querySelectorAll('span > span');
+    render(<TextSymbol symbols={['♠', '', '♣']} />);
+    const root = screen.getByTestId('text-symbol');
+    const symbolElements = root.querySelectorAll(':scope > *');
 
-    // Should render all 3 spans, but empty string returns empty (early return in toTextSymbol)
-    expect(symbolSpans).toHaveLength(3);
-    expect(symbolSpans[0].textContent).toBe(`♠${TEXT_VARIATION_SELECTOR}`);
-    expect(symbolSpans[1].textContent).toBe(''); // Empty string returns empty
-    expect(symbolSpans[2].textContent).toBe(`♣${TEXT_VARIATION_SELECTOR}`);
+    // Should render all 3 children, but empty string returns empty (early return in toTextSymbol)
+    expect(symbolElements).toHaveLength(3);
+    expect(symbolElements[0].textContent).toBe(`♠${TEXT_VARIATION_SELECTOR}`);
+    expect(symbolElements[1].textContent).toBe(''); // Empty string returns empty
+    expect(symbolElements[2].textContent).toBe(`♣${TEXT_VARIATION_SELECTOR}`);
   });
 
   it('applies the default variant correctly', () => {
