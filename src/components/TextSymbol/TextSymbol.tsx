@@ -19,6 +19,13 @@ const TEXT_VARIATION_SELECTOR = '\uFE0E';
 
 const toTextSymbol = (symbol: string): string => {
   if (!symbol) return '';
+
+  // If the symbol already ends with a variation selector (text or emoji),
+  // return it unchanged so the transformation is idempotent and does not
+  // introduce duplicate selectors.
+  if (symbol.endsWith('\uFE0E') || symbol.endsWith('\uFE0F')) {
+    return symbol;
+  }
   return `${symbol}${TEXT_VARIATION_SELECTOR}`;
 };
 
