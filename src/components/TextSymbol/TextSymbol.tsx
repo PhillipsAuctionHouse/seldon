@@ -40,8 +40,8 @@ const TextSymbol = forwardRef<HTMLSpanElement, TextSymbolProps>(
         ref={ref}
         {...props}
       >
-        {symbols.map((symbol) => (
-          <span key={symbol}>{toTextSymbol(symbol)}</span>
+        {symbols.map((symbol, i) => (
+          <span key={`${symbol}-${i}`}>{toTextSymbol(symbol)}</span>
         ))}
       </span>
     );
