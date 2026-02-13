@@ -29,6 +29,7 @@ describe('Text', () => {
     expect(screen.getByText('Hello World')).toBeInTheDocument();
   });
   it('renders superscript correctly', () => {
+    const TEXT_VARIATION_SELECTOR = '\uFE0E';
     renderText({
       children: (
         <>
@@ -38,7 +39,8 @@ describe('Text', () => {
     });
 
     expect(screen.getByText('Hello World')).toBeInTheDocument();
-    expect(screen.getByText('sup')).toBeInTheDocument();
+    // TextSymbol appends variation selector to force text presentation
+    expect(screen.getByText(`sup${TEXT_VARIATION_SELECTOR}`)).toBeInTheDocument();
   });
 
   it('applies the default variant correctly', () => {
