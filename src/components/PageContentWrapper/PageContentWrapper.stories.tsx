@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import PageContentWrapper from './PageContentWrapper';
 import { Playground as PlaygroundSplitPanel } from '../SplitPanel/SplitPanel.stories';
 import { Text, TextVariants } from '../Text';

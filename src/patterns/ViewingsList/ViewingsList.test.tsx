@@ -184,3 +184,28 @@ describe('ViewingsList', () => {
     INCREASED_TEST_TIMEOUT,
   );
 });
+
+describe('ViewingsList utils', () => {
+  it('validate returns error when location is london', () => {
+    expect(validate({ location: 'london', address3: 'US', id: '1' } as ViewingsListCardProps)).toEqual({
+      location: "Can't be london!",
+    });
+  });
+
+  it('validate returns error when address3 is France', () => {
+    expect(validate({ location: 'Paris', address3: 'France', id: '1' } as ViewingsListCardProps)).toEqual({
+      address3: 'We do not sell in France',
+    });
+  });
+
+  it('validate returns both errors when location is london and address3 is France', () => {
+    expect(validate({ location: 'london', address3: 'France', id: '1' } as ViewingsListCardProps)).toEqual({
+      location: "Can't be london!",
+      address3: 'We do not sell in France',
+    });
+  });
+
+  it('validate returns undefined when values are valid', () => {
+    expect(validate({ location: 'NY', address3: 'US', id: '1' } as ViewingsListCardProps)).toBeUndefined();
+  });
+});

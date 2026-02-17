@@ -45,4 +45,11 @@ describe('ViewingDetails', () => {
       '/static/test-image-512x288.jpg',
     );
   });
+
+  it('renders session with undefined sessionLabel using empty string as key part', () => {
+    render(
+      <ViewingDetails sessionTimesLabel="Sessions" sessionTimes={[{ sessionLabel: undefined, sessionTime: '2pm' }]} />,
+    );
+    expect(screen.getByText('2pm')).toBeInTheDocument();
+  });
 });

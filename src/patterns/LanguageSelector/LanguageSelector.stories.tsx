@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import LanguageSelector, { LanguageSelectorProps } from './LanguageSelector';
 import { SupportedLanguages } from '../../types/commonTypes';
 

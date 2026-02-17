@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 
 import Footer, { FooterProps } from './Footer';
 import { px } from '../../utils';
