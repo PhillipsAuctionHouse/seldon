@@ -30,6 +30,11 @@
     @media (min-width: $breakpoint-md) {
       margin-top: $spacing-micro;
     }
+
+    &:focus,
+    &:focus-visible {
+      outline: none;
+    }
   }
 
   &__input:checked {

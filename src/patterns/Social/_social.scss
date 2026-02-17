@@ -33,12 +33,15 @@ $num_icons: 5;
   }
 
   &__button {
-    @include labelText('link');
+    @include text($linkMedium);
 
-    color: $pure-black;
+    border: 0;
+    height: auto;
     padding: 0;
     text-align: left;
     text-decoration: underline;
+    margin-top: $spacing-xsm;
+    margin-bottom: $spacing-sm;
 
     &.#{$px}-social__button {
       text-transform: none;
@@ -49,9 +52,9 @@ $num_icons: 5;
       color: unset;
     }
 
-    &:focus {
-      background-color: unset;
-      color: unset;
+    &:focus-visible {
+      border-radius: $radius-xs;
+      padding: 0;
     }
   }
 

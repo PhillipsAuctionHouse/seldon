@@ -37,7 +37,7 @@
     }
 
     &:focus-within:not(:disabled) {
-      @include focus-ring;
+      @include focus-ring($border-radius: $radius-xs);
     }
   }
 

@@ -35,7 +35,6 @@
   }
 
   &:hover,
-  &:focus-visible,
   &:active {
     &::after {
       border-bottom: 1px solid $black-100;

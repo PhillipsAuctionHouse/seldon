@@ -6,12 +6,6 @@
   flex-flow: row wrap;
   gap: $spacing-sm;
 
-  &:focus-visible {
-    border: unset;
-
-    @include focus-ring($border-radius: $radius-xs);
-  }
-
   .#{$px}-tag {
     border: 1px solid $black-100;
     border-radius: $radius-3xl;

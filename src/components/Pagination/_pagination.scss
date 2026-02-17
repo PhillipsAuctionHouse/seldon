@@ -52,7 +52,7 @@
 
     appearance: none;
     border: none;
-    border-bottom: 1px solid $pure-black;
+    border-bottom: 1px solid green;
     border-radius: 0;
     font-variation-settings: 'wght' 600;
     margin-bottom: 0;
@@ -73,7 +73,7 @@
     }
 
     &:focus-visible {
-      @include focus-ring;
+      border-radius: 0;
     }
   }
 
