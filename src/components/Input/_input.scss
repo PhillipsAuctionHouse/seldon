@@ -223,15 +223,12 @@ $lg: #{$px}-input--lg;
     position: relative;
 
     &::before {
-      content: '';
-      position: absolute;
-      top: -6px;
-      left: -6px;
-      right: -6px;
-      bottom: -6px;
       border: 2px solid $focus-default;
-      border-radius: 50%;
+      border-radius: $radius-3xl;
+      inset: -6px;
+      content: '';
       pointer-events: none;
+      position: absolute;
     }
   }
 }

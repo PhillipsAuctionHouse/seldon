@@ -37,11 +37,11 @@ $num_icons: 5;
 
     border: 0;
     height: auto;
+    margin-bottom: $spacing-sm;
+    margin-top: $spacing-xsm;
     padding: 0;
     text-align: left;
     text-decoration: underline;
-    margin-top: $spacing-xsm;
-    margin-bottom: $spacing-sm;
 
     &.#{$px}-social__button {
       text-transform: none;

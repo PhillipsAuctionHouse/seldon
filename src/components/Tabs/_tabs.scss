@@ -24,16 +24,14 @@
 
     &:focus-visible {
       outline: none;
+
       &::after {
         border: 2px solid $focus-default;
         border-radius: $radius-xs;
-        bottom: -6px;
+        inset: -4px -4px -6px;
         content: '';
-        left: -4px;
         pointer-events: none;
         position: absolute;
-        right: -4px;
-        top: -4px;
         z-index: 1;
       }
     }
@@ -59,13 +57,10 @@
       &::after {
         border: 2px solid $focus-default;
         border-radius: $radius-xs;
-        bottom: -8px;
+        inset: -6px -6px -8px;
         content: '';
-        left: -6px;
         pointer-events: none;
         position: absolute;
-        right: -6px;
-        top: -6px;
         z-index: 1;
       }
     }

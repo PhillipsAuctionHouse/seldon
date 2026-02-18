@@ -26,8 +26,8 @@
     display: flex;
     gap: 0 $spacing-xsm;
     justify-content: center;
-    padding: 0;
     margin-bottom: $padding-xsm;
+    padding: 0;
 
     &:disabled {
       cursor: default;
