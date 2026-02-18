@@ -217,6 +217,25 @@ $lg: #{$px}-input--lg;
   }
 }
 
+.#{$px}-radio-input .#{$px}-input__input {
+  &:focus-visible {
+    outline: none;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      right: -6px;
+      bottom: -6px;
+      border: 2px solid $focus-default;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+  }
+}
+
 .#{$px}-input--inline.#{$px}-radio-input,
 .#{$px}-input--inline.#{$px}-checkbox-input,
 .#{$px}-input--inline.#{$px}-toggle-input {
