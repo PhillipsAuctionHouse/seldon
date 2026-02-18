@@ -6,13 +6,13 @@
 @use 'design/spacing-tokens/spacing-tokens';
 @use 'design/grid-tokens/grid-tokens';
 @use 'design/icons/icons';
-@use 'components/DatePicker/datePicker';
 @use 'components/SplitPanel/splitPanel.stories';
 @use 'components/Modal/modal.stories';
 @use 'components/Icon/icon.stories';
+@use 'patterns/ViewingDetails/viewingDetails.stories';
 
 // 📑 Pages
-@import 'pages/page';
+@use 'pages/page';
 
 strong,
 h1,

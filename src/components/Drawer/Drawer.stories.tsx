@@ -1,9 +1,9 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import Drawer, { DrawerProps } from './Drawer';
 import Button from '../Button/Button';
 import { Playground as PlaygroundSplitPanel } from '../SplitPanel/SplitPanel.stories';
 import Subscribe from '../../patterns/Subscribe/Subscribe';
-import { useArgs } from '@storybook/preview-api';
+import { useArgs } from 'storybook/preview-api';
 import { useRef } from 'react';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction

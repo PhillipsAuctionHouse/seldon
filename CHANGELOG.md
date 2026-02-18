@@ -1,3 +1,60 @@
+# [1.237.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.236.0...v1.237.0) (2026-02-12)
+
+
+### Features
+
+* **buttonLinks:** L3-11125 Design System [RW]: Seldon - Link Buttons of Primary/Secondary need to bold the text ([#802](https://github.com/PhillipsAuctionHouse/seldon/issues/802)) ([5ea5aa1](https://github.com/PhillipsAuctionHouse/seldon/commit/5ea5aa10d708dfabc370e71c4ca7e5051239aa8a))
+
+# [1.236.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.235.2...v1.236.0) (2026-02-12)
+
+
+### Features
+
+* **saleCard:** L3-10829 Update label size across lot tiles and sale cards, fix sale card badge sizing ([#805](https://github.com/PhillipsAuctionHouse/seldon/issues/805)) ([fddf5d4](https://github.com/PhillipsAuctionHouse/seldon/commit/fddf5d49c755f7c431290762725235069d4e0920))
+
+## [1.235.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.235.1...v1.235.2) (2026-02-11)
+
+
+### Bug Fixes
+
+* **detaillist:** L3-11707 fix detail list item spacing ([#804](https://github.com/PhillipsAuctionHouse/seldon/issues/804)) ([0d2e606](https://github.com/PhillipsAuctionHouse/seldon/commit/0d2e606d592544b85b442f3a3b9833d0c46550f9))
+
+## [1.235.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.235.0...v1.235.1) (2026-02-10)
+
+
+### Bug Fixes
+
+* **detaillist/text:** L3-10789 improve semantic HTML to remove accessibility violations with `<dl` and `<label` ([#771](https://github.com/PhillipsAuctionHouse/seldon/issues/771)) ([689e11b](https://github.com/PhillipsAuctionHouse/seldon/commit/689e11b3877f6ec20e6837ab14150bc183ae1443))
+
+# [1.235.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.234.1...v1.235.0) (2026-02-10)
+
+
+### Features
+
+* **comboBox:** L3-11215 RW |  Close button in birth year field disappears when hovering mouse pointer ([#791](https://github.com/PhillipsAuctionHouse/seldon/issues/791)) ([95fadb5](https://github.com/PhillipsAuctionHouse/seldon/commit/95fadb5d1476154c818be222ecedf32fa952fa5d))
+
+## [1.234.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.234.0...v1.234.1) (2026-02-09)
+
+
+### Bug Fixes
+
+* **publish:** L3-0000 continuing setting up OIDC trusted publishing ([#801](https://github.com/PhillipsAuctionHouse/seldon/issues/801)) ([d82f9ad](https://github.com/PhillipsAuctionHouse/seldon/commit/d82f9ad0c37946577d4788ac6df47222be6fcfe1))
+* **release:** L3-0000 update trusted publishing ([#800](https://github.com/PhillipsAuctionHouse/seldon/issues/800)) ([fa7e092](https://github.com/PhillipsAuctionHouse/seldon/commit/fa7e092e62fb56f8c6937e1241f075a4ed95ff76))
+
+# [1.234.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.233.0...v1.234.0) (2026-02-09)
+
+
+### Features
+
+* **typeTokens:** L3-10719 Create a small and medium semantic text token for badges ([#795](https://github.com/PhillipsAuctionHouse/seldon/issues/795)) ([3df1cc4](https://github.com/PhillipsAuctionHouse/seldon/commit/3df1cc46c841e7df4422837bb7217dcdd4818842))
+
+# [1.233.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.232.1...v1.233.0) (2026-02-09)
+
+
+### Features
+
+* **_detail:** L3-11615 removed hardcoded values ([#797](https://github.com/PhillipsAuctionHouse/seldon/issues/797)) ([77467f0](https://github.com/PhillipsAuctionHouse/seldon/commit/77467f089880d49e9e643a8340ac02a307005d87))
+
 ## [1.232.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.232.0...v1.232.1) (2026-01-12)
 
 

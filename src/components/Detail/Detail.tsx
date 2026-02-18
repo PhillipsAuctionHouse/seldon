@@ -49,11 +49,11 @@ const Detail = forwardRef<HTMLDivElement, DetailProps>(
           ? TextVariants.labelLarge
           : TextVariants.labelMedium;
     const valueTextVariant =
-      variant === 'sm' ? TextVariants.bodySmall : variant === 'lg' ? TextVariants.bodyLarge : TextVariants.labelMedium;
+      variant === 'sm' ? TextVariants.labelSmall : variant === 'lg' ? TextVariants.bodyLarge : TextVariants.labelMedium;
 
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        <dt
+        <div
           className={classnames(`${baseClassName}__label-section`, {
             [`${baseClassName}__label--no-wrap`]: !hasWrap,
             [`${baseClassName}__label-section--has-sub-label`]: subLabel,
@@ -67,10 +67,10 @@ const Detail = forwardRef<HTMLDivElement, DetailProps>(
               {subLabel}
             </Text>
           ) : null}
-        </dt>
-        <dd className={`${baseClassName}__value`}>
+        </div>
+        <div className={`${baseClassName}__value`}>
           <Text variant={valueTextVariant}>{value}</Text>
-        </dd>
+        </div>
       </div>
     );
   },

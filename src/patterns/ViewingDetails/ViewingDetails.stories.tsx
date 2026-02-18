@@ -1,5 +1,4 @@
-import { Meta } from '@storybook/react/*';
-import './_viewingDetails.stories.scss';
+import type { Meta } from '@storybook/react-vite';
 
 import ViewingDetails, { ViewingDetailsProps } from './ViewingDetails';
 import { viewingDetailsProps, viewingDetailsWithChildrenProps } from './ViewingDetailsMock';

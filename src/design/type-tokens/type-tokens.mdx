@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="Foundations in Seldon/Type" />
 
@@ -367,7 +367,6 @@ import { Meta } from '@storybook/blocks';
       </div>
     </div>
   </div>
-
   <div className="typography">
     <h2 className="typography-title">Links</h2>
     <div className="typography-container">
@@ -488,7 +487,72 @@ import { Meta } from '@storybook/blocks';
       </div>
     </div>
   </div>
-
+  <div className="typography">
+    <h2 className="typography-title">Typography Semantic Tokens</h2>
+    <div className="typography-container">
+      <div className="typography-breakpoint-header">
+          <div>Small 320 → 1800px</div>
+      </div>
+      <div className="typography-breakpoint-header">
+          <div>Medium N / A</div>
+      </div>
+      <div className="typography-breakpoint-header">
+          <div>Large 1801px → 2400px</div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <span className="typography-item__badge-small">Badge Small</span>
+          <div className="typography-item__specs">
+            Size: 12px / 0.75rem <br/>
+            Line height: 1.2 <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 400 <br/>
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <span className="typography-item__badge-small"></span>
+      </div>
+      <div className="typography-item typography-item--large">
+        <span className="typography-item__badge-small">Badge Small</span>
+          <div className="typography-item__specs">
+            Size: 16px / 1rem <br/>
+            Line height: 1.2 <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 400 <br/>
+          </div>
+      </div>
+      <div className="typography-item typography-item--small">
+        <span className="typography-item__badge-medium">Badge Medium</span>
+          <div className="typography-item__specs">
+            Size: 14px / 0.875rem <br/>
+            Line height: 1.2 <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 400 <br/>
+          </div>
+      </div>
+      <div className="typography-item typography-item--medium">
+        <span className="typography-item__badge-medium"></span>
+      </div>
+      <div className="typography-item typography-item--large">
+        <span className="typography-item__badge-medium">Badge Medium</span>
+          <div className="typography-item__specs">
+            Size: 18px / 1.125rem <br/>
+            Line height: 1.2 <br/>
+            Letter spacing: 0% <br/>
+            Font: Montserrat <br/>
+            Font weight: 400 <br/>
+          </div>
+      </div>
+      <div className="typography-code-block">
+        ```scss
+        @include text($badgeSmall);
+        @include text($badgeMedium);
+        ```
+      </div>
+    </div>
+  </div>
   <h2>Migration Guide</h2>
   <br/>
   <p>The following table shows how to migrate from old typography tokens/variants to the new system. Our linting rules will warn you when using deprecated tokens.</p>

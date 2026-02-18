@@ -1,7 +1,7 @@
 /* stylelint-disable declaration-property-value-allowed-list */
 /* stylelint-disable declaration-property-value-disallowed-list */
-@use '#scss/vars' as *;
-@use '#scss/type' as *;
+@use '~scss/vars' as *;
+@use '~scss/type' as *;
 
 :root {
   .typography-item--small {
@@ -135,6 +135,14 @@
 
     &__link-small {
       @include text($linkSmall);
+    }
+
+    &__badge-small {
+      @include text($badgeSmall);
+    }
+
+    &__badge-medium {
+      @include text($badgeMedium);
     }
   }
 

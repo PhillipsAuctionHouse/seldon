@@ -1,4 +1,4 @@
-@use '#scss/allPartials' as *;
+@use '~scss/allPartials' as *;
 
 .#{$px}-navigation-item-trigger {
   flex-direction: column;

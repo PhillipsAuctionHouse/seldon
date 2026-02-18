@@ -2,7 +2,7 @@ import { ComponentProps, forwardRef, ElementType, memo } from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { Text, TextVariants } from '../../components/Text';
-import { DetailList } from '../DetailList/index';
+import { DetailList } from '../../components/DetailList/index';
 import { Detail } from '../../components/Detail/index';
 import { SeldonImage } from '../../components/SeldonImage';
 import { DetailVariants } from '../../components/Detail/types';
@@ -146,7 +146,7 @@ const ObjectTile = memo(
             imageBlocked={imageBlocked}
           />
           {!withdrawnText ? (
-            <Text element="span" className={`${baseClassName}__badge`} variant={TextVariants.labelSmall}>
+            <Text element="span" className={`${baseClassName}__badge`} variant={TextVariants.badgeSmall}>
               {badgeText}
             </Text>
           ) : null}
