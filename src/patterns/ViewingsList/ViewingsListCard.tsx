@@ -273,21 +273,26 @@ const ViewingsListCard = ({
       <div className={`${baseClass}__btn-group ${px}-button__group`}>
         {editState ? (
           <>
-            <Button id={`vlc-save-btn-${id}`} variant={ButtonVariants.ghost} type="submit" onClick={handleOnSave}>
+            <Button id={`vlc-save-btn-${id}`} variant={ButtonVariants.tertiary} type="submit" onClick={handleOnSave}>
               {saveBtnLabel}
             </Button>
-            <Button id={`vlc-cancel-btn-${id}`} variant={ButtonVariants.ghost} type="button" onClick={handleOnCancel}>
+            <Button
+              id={`vlc-cancel-btn-${id}`}
+              variant={ButtonVariants.tertiary}
+              type="button"
+              onClick={handleOnCancel}
+            >
               {cancelBtnLabel}
             </Button>
           </>
         ) : (
           <>
-            <Button id={`vlc-edit-btn-${id}`} variant={ButtonVariants.ghost} type="button" onClick={handleOnEdit}>
+            <Button id={`vlc-edit-btn-${id}`} variant={ButtonVariants.tertiary} type="button" onClick={handleOnEdit}>
               {editBtnLabel}
             </Button>
             <Button
               id={`vlc-delete-btn-${id}`}
-              variant={ButtonVariants.ghost}
+              variant={ButtonVariants.tertiary}
               type="button"
               onClick={() => typeof onDelete === 'function' && onDelete(id)}
             >
