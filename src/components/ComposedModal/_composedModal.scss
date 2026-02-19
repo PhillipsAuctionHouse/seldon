@@ -5,16 +5,19 @@ $breakpoint-mobile-small: 450px;
 .#{$px}-composed-modal {
   border-radius: $radius-md;
   max-width: 95vw;
-  min-width: $desktop-modal-min-width;
+  min-width: 100%;
   padding: $spacing-lg 0 $spacing-sm 0;
 
   &:not(:has(.#{$px}-composed-modal__btns-group)) {
     padding-bottom: $spacing-lg;
   }
 
-  @media (max-width: $breakpoint-md) {
+  @media (min-width: $breakpoint-sm) {
     min-width: $mobile-modal-min-width;
-    width: $mobile-modal-min-width;
+  }
+
+  @media (min-width: $breakpoint-md) {
+    min-width: $desktop-modal-min-width;
   }
 
   &__body {

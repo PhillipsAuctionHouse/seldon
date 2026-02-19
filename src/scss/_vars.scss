@@ -282,6 +282,9 @@ $breakpoint-xl: 1801px;
 // Temporary token for mobile breakpoint added to support [L3-7681](https://phillipsauctions.atlassian.net/browse/L3-7681)
 $breakpoint-snw-mobile: 768px;
 
+// Temporary token for mobile breakpoint added to support [L3-10837](https://phillipsauctions.atlassian.net/browse/L3-10837)
+$breakpoint-snw-sm-desktop: 561px;
+
 ////////////////////////
 /// FONT SIZE TOKENS:
 ///////////////////////
@@ -381,7 +384,7 @@ $margin-xxl: var(--spacing-xxl);
 ////////////////////////
 /// modal-min-width TOKEN:
 ///////////////////////
-$mobile-modal-min-width: 100%;
+$mobile-modal-min-width: 22.5rem;
 $desktop-modal-min-width: 35rem;
 
 ////////////////////////
