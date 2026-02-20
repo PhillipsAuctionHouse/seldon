@@ -17,12 +17,19 @@
 
     @include isHeaderDesktop {
       color: unset;
-      justify-content: center;
+      display: block;
+      text-align: center;
+      // Match .nav__item .nav__link--linkStylised typography so trigger label aligns with link labels
+      @include text($linkStylised);
     }
   }
 
   @include isHeaderDesktop {
-    &--hovered button::after {
+    // Underline on button (full-width like .nav__item .nav__link--linkStylised) when open, hover or focus
+    &[data-state='open'] > button::after,
+    &--hovered > button::after,
+    & > button:hover::after,
+    & > button:focus-visible::after {
       background-color: $pure-black;
       bottom: -1px;
       content: '';
@@ -32,45 +39,21 @@
       right: 0;
     }
 
-    & > &__submenu {
-      align-items: flex-start;
-      height: fit-content;
-      max-height: 0;
-      opacity: 0;
-      padding: $padding-md;
-      pointer-events: none;
-      position: fixed; // has to bust out of the box containing it on desktop
-      right: 0;
-      top: calc(
-        var(--banner-height) + #{$header-height}
-      ); // will be dynamically set again when notification banner is shown
-
-      transition:
-        max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-        opacity 0.2s cubic-bezier(0.65, 0, 0.35, 1);
-      width: 100%;
-
-      .#{$px}-nav__list__section {
-        opacity: 0;
-        transition: opacity 0.3s cubic-bezier(0.33, 1, 0.68, 1) 0.2s;
-      }
-    }
-
-    &--hovered &__submenu {
+    // Radix: submenu content is rendered in viewport (_navigation.scss); these styles apply when content is in viewport
+    &__submenu[data-state='open'] {
       cursor: default;
       left: 0;
       max-height: calc(90vh - #{$header-height} + var(--banner-height));
-      opacity: 1;
-      -ms-overflow-style: none; /* Internet Explorer 10+ */
-      overflow-y: scroll;
-      pointer-events: all;
-      scrollbar-width: none; /* Firefox */
-      transition:
-        max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-        opacity 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+      min-width: 100%;
+      -ms-overflow-style: none;
+      overflow-y: auto;
+      padding: 0;
+      scrollbar-width: none;
+      width: 100%;
+      box-sizing: border-box;
 
       &::-webkit-scrollbar {
-        display: none; /* Safari and Chrome */
+        display: none;
       }
 
       .#{$px}-nav__list__section {
@@ -82,26 +65,5 @@
   &__submenu--mobile.#{$px}-nav__list {
     padding: 0 0 $snowflake-menu-padding;
   }
-
-  @include isHeaderDesktop {
-    ul {
-      background-color: $pure-white;
-      height: auto;
-      left: 0;
-      overflow: hidden;
-      position: absolute;
-
-      li {
-        display: inline;
-
-        button,
-        a,
-        p {
-          @include isHeaderDesktop {
-            border: none;
-          }
-        }
-      }
-    }
-  }
 }
+

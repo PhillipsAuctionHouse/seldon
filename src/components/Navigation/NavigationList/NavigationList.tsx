@@ -2,7 +2,9 @@ import classNames from 'classnames';
 import * as React from 'react';
 import { px } from '../../../utils';
 import { Text, TextVariants } from '../../Text';
+import NavigationItem from '../NavigationItem/NavigationItem';
 import { NavigationItemProps } from '../NavigationItem/NavigationItem';
+import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 
 export interface NavigationListProps extends React.ComponentProps<'ul'> {
   /**
@@ -25,10 +27,17 @@ export interface NavigationListProps extends React.ComponentProps<'ul'> {
    * Rewrite the onClick event
    * */
   onClick?: React.MouseEventHandler<HTMLElement>;
+  /**
+   * When true (desktop only), wrap in Radix NavigationMenu.List for accessibility
+   */
+  asRadixList?: boolean;
 }
 
 const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
-  ({ id, children, className, isOffScreen, leftSectionHeading, rightSectionHeading, onClick }, ref) => {
+  (
+    { id, children, className, isOffScreen, leftSectionHeading, rightSectionHeading, onClick, asRadixList },
+    ref,
+  ) => {
     const leftSectionItems = React.Children.toArray(children)
       .map((child) => {
         if (
@@ -61,15 +70,21 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
       })
       .filter(Boolean);
 
-    return (
-      <ul
-        aria-hidden={isOffScreen}
-        id={id}
-        data-testid={id}
-        role="list"
-        className={classNames(className, `${px}-nav__list`, { [`${px}-nav__list--offscreen`]: isOffScreen })}
-        ref={ref}
-      >
+    // When asRadixList, wrap top-level NavigationItem in Radix Item+Link so arrow keys work between all items
+    const topLevelChildren =
+      asRadixList && !leftSectionItems.length && !rightSectionItems.length
+        ? React.Children.map(children, (child) => {
+            if (React.isValidElement(child) && child.type === NavigationItem) {
+              return React.cloneElement(child as React.ReactElement<NavigationItemProps>, {
+                asRadixLink: true,
+              });
+            }
+            return child;
+          })
+        : null;
+
+    const listContent = (
+      <>
         {leftSectionItems.length > 0 ? (
           <div className={classNames(`${px}-nav__list__section`, `${px}-nav__list__section--start`)}>
             {leftSectionHeading ? (
@@ -90,7 +105,41 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
             {rightSectionItems}
           </div>
         ) : null}
-        {!leftSectionItems.length && !rightSectionItems.length ? children : null}
+        {!leftSectionItems.length && !rightSectionItems.length ? (topLevelChildren ?? children) : null}
+      </>
+    );
+
+    const listClassName = classNames(className, `${px}-nav__list`, {
+      [`${px}-nav__list--offscreen`]: isOffScreen,
+    });
+
+    if (asRadixList) {
+      return (
+        <NavigationMenu.List asChild>
+          <ul
+            aria-hidden={isOffScreen}
+            id={id}
+            data-testid={id}
+            role="list"
+            className={listClassName}
+            ref={ref}
+          >
+            {listContent}
+          </ul>
+        </NavigationMenu.List>
+      );
+    }
+
+    return (
+      <ul
+        aria-hidden={isOffScreen}
+        id={id}
+        data-testid={id}
+        role="list"
+        className={listClassName}
+        ref={ref}
+      >
+        {listContent}
       </ul>
     );
   },

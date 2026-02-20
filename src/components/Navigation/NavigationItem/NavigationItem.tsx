@@ -2,7 +2,8 @@ import { px } from '../../../utils';
 import classNames from 'classnames';
 import Link, { LinkProps } from '../../Link/Link';
 import { LinkVariants } from '../../Link/types';
-import { ComponentProps, ElementType, forwardRef, ReactNode } from 'react';
+import { ComponentProps, ElementType, forwardRef, MouseEventHandler, ReactNode } from 'react';
+import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 
 export interface NavigationItemProps extends ComponentProps<'li'> {
   /**
@@ -33,6 +34,14 @@ export interface NavigationItemProps extends ComponentProps<'li'> {
    * Element to render within the navigation item, renders <Link> by default
    */
   element?: ElementType<LinkProps>;
+  /**
+   * When true (desktop Radix list), render as NavigationMenu.Item + Link for arrow-key navigation
+   */
+  asRadixLink?: boolean;
+  /**
+   * When true, sets aria-current="page" on the link for the current page (helps screen reader users).
+   */
+  isCurrentPage?: boolean;
 }
 
 /**
@@ -51,33 +60,58 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
       className = '',
       href,
       isViewAllLink = false,
+      isCurrentPage = false,
       label,
       navGroup,
       navType,
       onClick,
       element: Component = Link,
+      asRadixLink,
       ...props
     },
     ref,
   ) => {
+    const itemClassName = classNames(`${px}-nav__item`, `${px}-nav__item--${navGroup}`, className);
+    const linkContent = (
+      <Component
+        className={classNames({
+          [`${px}-nav__item--view-all`]: isViewAllLink,
+        })}
+        href={href}
+        variant={navType ? navType : LinkVariants.linkStylised}
+        onClick={onClick as MouseEventHandler<HTMLAnchorElement> | undefined}
+        {...(isCurrentPage ? { 'aria-current': 'page' as const } : {})}
+      >
+        <span className={`${px}-nav__item--label`}>{label}</span>
+        {badge ? <span className={`${px}-nav__item--badge `}>{` • ${badge}`}</span> : null}
+      </Component>
+    );
+
+    if (asRadixLink) {
+      const { value: _omitValue, ...restProps } = props as ComponentProps<'li'> & { value?: unknown };
+      return (
+        <NavigationMenu.Item
+          ref={ref}
+          data-testid={`nav-item-${label}`}
+          className={itemClassName}
+          {...restProps}
+        >
+          <NavigationMenu.Link asChild>
+            {linkContent}
+          </NavigationMenu.Link>
+        </NavigationMenu.Item>
+      );
+    }
+
     return (
       <li
         {...props}
         onClick={onClick}
         data-testid={`nav-item-${label}`}
-        className={classNames(`${px}-nav__item`, `${px}-nav__item--${navGroup}`, className)}
+        className={itemClassName}
         ref={ref}
       >
-        <Component
-          className={classNames({
-            [`${px}-nav__item--view-all`]: isViewAllLink,
-          })}
-          href={href}
-          variant={navType ? navType : LinkVariants.linkStylised}
-        >
-          <span className={`${px}-nav__item--label`}>{label}</span>
-          {badge ? <span className={`${px}-nav__item--badge `}>{` • ${badge}`}</span> : null}
-        </Component>
+        {linkContent}
       </li>
     );
   },

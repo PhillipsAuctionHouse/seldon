@@ -47,6 +47,14 @@ export interface HeaderProps extends ComponentProps<'header'> {
    * Reference to the notification banner
    */
   bannerRef?: React.MutableRefObject<HTMLDivElement | null>;
+  /**
+   * ID of the main content element for the skip link target (e.g. "main"). When set, a "Skip to main content" link is rendered for keyboard users.
+   */
+  skipToContentId?: string | null;
+  /**
+   * Accessible label for the skip link. Defaults to "Skip to main content".
+   */
+  skipLinkLabel?: string;
 }
 export type HeaderContextType = {
   /**
@@ -104,6 +112,8 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
       logoText = 'Home Page',
       disabled,
       bannerRef,
+      skipToContentId = 'main',
+      skipLinkLabel = 'Skip to main content',
       ...props
     },
     ref,
@@ -182,6 +192,15 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
         ref={combinedRef}
         style={{ '--banner-height': `${bannerHeight}px` } as React.CSSProperties}
       >
+        {skipToContentId && (
+          <a
+            href={`#${skipToContentId}`}
+            className={`${px}-header__skip-link`}
+            data-testid="skip-to-content"
+          >
+            {skipLinkLabel}
+          </a>
+        )}
         <div className={`${px}-header__top-row`}>
           <SSRMediaQuery.Media greaterThanOrEqual="md">{languageSelectorElement}</SSRMediaQuery.Media>
           {/** only render language selector in this location on desktop */}

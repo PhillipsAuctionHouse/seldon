@@ -11,6 +11,22 @@
   width: 100%;
   z-index: 10;
 
+  // Skip link: visually hidden until focused so keyboard users can skip to main content
+  &__skip-link {
+    position: absolute;
+    left: -9999px;
+    z-index: 100;
+
+    &:focus {
+      left: $spacing-md;
+      padding: $spacing-sm $spacing-md;
+      background-color: $pure-white;
+      border: 1px solid $pure-black;
+      outline: 2px solid $pure-black;
+      outline-offset: 2px;
+    }
+  }
+
   &__toggle-btn {
     align-items: center;
     background: none;
