@@ -73,9 +73,14 @@
       padding: 0 $spacing-md;
     }
 
-    &__list-container .#{$px}-nav__list .#{$px}-link--linkStylised,
-    &__list-container .#{$px}-nav__list .#{$px}-link--linkMedium {
+    &__list-container .#{$px}-nav__list .#{$px}-link--linkStylised {
       padding: $snowflake-menu-padding 0;
+    }
+
+    // linkMedium and linkLarge: same compact padding as linkLarge had (no snowflake padding)
+    &__list-container .#{$px}-nav__list .#{$px}-link--linkMedium,
+    &__list-container .#{$px}-nav__list .#{$px}-link--linkLarge {
+      padding: 0;
     }
 
     &__list-container .#{$px}-nav__list .#{$px}-accordion-item-label {
@@ -133,13 +138,18 @@
         .#{$px}-nav__list {
           align-items: flex-start;
           box-sizing: border-box;
-          padding: $snowflake-menu-padding $spacing-md;
+          padding: $spacing-md;
           width: 100%;
         }
 
-        .#{$px}-nav__list .#{$px}-link--linkStylised,
-        .#{$px}-nav__list .#{$px}-link--linkMedium {
+        .#{$px}-nav__list .#{$px}-link--linkStylised {
           padding: $snowflake-menu-padding 0;
+        }
+
+        // linkMedium and linkLarge: same compact padding as linkLarge had
+        .#{$px}-nav__list .#{$px}-link--linkMedium,
+        .#{$px}-nav__list .#{$px}-link--linkLarge {
+          padding: 0;
         }
       }
     }
