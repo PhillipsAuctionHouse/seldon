@@ -1,3 +1,10 @@
+# [1.239.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.238.0...v1.239.0) (2026-02-23)
+
+
+### Features
+
+* **filter:** L3-7878 Update border to 2px ([#813](https://github.com/PhillipsAuctionHouse/seldon/issues/813)) ([2ad6ec2](https://github.com/PhillipsAuctionHouse/seldon/commit/2ad6ec29426a3ee635deba0d86b70fe288c9d80e))
+
 # [1.238.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.237.0...v1.238.0) (2026-02-19)
 
 
