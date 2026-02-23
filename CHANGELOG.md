@@ -1,3 +1,18 @@
+# [1.239.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.238.0...v1.239.0) (2026-02-23)
+
+
+### Features
+
+* **filter:** L3-7878 Update border to 2px ([#813](https://github.com/PhillipsAuctionHouse/seldon/issues/813)) ([2ad6ec2](https://github.com/PhillipsAuctionHouse/seldon/commit/2ad6ec29426a3ee635deba0d86b70fe288c9d80e))
+
+# [1.238.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.237.0...v1.238.0) (2026-02-19)
+
+
+### Features
+
+* **buttons:** L3-11299 L3-11476 Design System [RW] - Introduce small button component to Seldon, Remove ghost button variant ([#792](https://github.com/PhillipsAuctionHouse/seldon/issues/792)) ([dda9c0d](https://github.com/PhillipsAuctionHouse/seldon/commit/dda9c0df2f8e442ec07bd271f2c58f120b5a4c87))
+* **text-symbol:** L3-11066 Text Symbol Emoji Fix ([#806](https://github.com/PhillipsAuctionHouse/seldon/issues/806)) ([4ed7d68](https://github.com/PhillipsAuctionHouse/seldon/commit/4ed7d68f2f5c68dfc6abfa850591b496169c91e2))
+
 # [1.237.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.236.0...v1.237.0) (2026-02-12)
 
 

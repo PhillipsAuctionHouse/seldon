@@ -1,13 +1,13 @@
 @use '~scss/allPartials' as *;
 
 .#{$px}-filter-button {
-  border: 1px solid $bg-border;
+  border: 2px solid $bg-border;
   gap: 4px;
   height: inherit;
   padding: $spacing-xsm $spacing-sm;
 
   &:hover {
-    border: 1px solid $black-100;
+    border: 2px solid $black-100;
     box-shadow: none;
   }
 
@@ -16,7 +16,7 @@
   }
 
   &--selected {
-    border: 1px solid $black-100;
+    border: 2px solid $black-100;
 
     &:focus-visible {
       @include focus-ring($border-radius: $radius-3xl);
