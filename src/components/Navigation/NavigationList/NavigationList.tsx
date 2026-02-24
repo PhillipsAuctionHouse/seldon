@@ -31,11 +31,25 @@ export interface NavigationListProps extends React.ComponentProps<'ul'> {
    * When true (desktop only), wrap in Radix NavigationMenu.List for accessibility
    */
   asRadixList?: boolean;
+  /**
+   * When true (desktop submenu content), wrap each section item in NavigationMenu.Link so submenu closes on link click
+   */
+  wrapLinksInRadixLink?: boolean;
 }
 
 const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
   (
-    { id, children, className, isOffScreen, leftSectionHeading, rightSectionHeading, onClick, asRadixList },
+    {
+      id,
+      children,
+      className,
+      isOffScreen,
+      leftSectionHeading,
+      rightSectionHeading,
+      onClick,
+      asRadixList,
+      wrapLinksInRadixLink,
+    },
     ref,
   ) => {
     const leftSectionItems = React.Children.toArray(children)
@@ -49,6 +63,7 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
               onClick?.(e);
               child.props?.onClick?.(e);
             },
+            ...(wrapLinksInRadixLink ? { asRadixSubmenuLink: true } : {}),
           });
         }
       })
@@ -65,6 +80,7 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
               onClick?.(e);
               child.props?.onClick?.(e);
             },
+            ...(wrapLinksInRadixLink ? { asRadixSubmenuLink: true } : {}),
           });
         }
       })

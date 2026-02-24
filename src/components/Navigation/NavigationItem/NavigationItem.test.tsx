@@ -29,7 +29,7 @@ describe('NavigationItem', () => {
     expect(navigationItem).toHaveClass('custom-class');
   });
 
-  it('calls closeMenu, closeSubmenu, and onClick when clicked', async () => {
+  it('calls onClick when clicked', async () => {
     const onClick = vi.fn();
 
     render(

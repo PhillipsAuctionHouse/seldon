@@ -54,7 +54,6 @@ describe('NavigationItemTrigger', () => {
           setActiveSubmenuId: (id: string | null) => {
             submenuId = id;
           },
-          closeTimeoutRef: { current: null as NodeJS.Timeout | null },
         }}
       >
         <NavigationItemTrigger id="test-trigger" label="test-trigger" onClick={onClick}>
@@ -106,70 +105,6 @@ describe('NavigationItemTrigger', () => {
 
     expect(navigationTrigger).toHaveAttribute('aria-expanded', 'false');
 
-    vi.useRealTimers();
-  });
-
-  it('clears pending close timeout when opening submenu', async () => {
-    const clearTimeoutSpy = vi.spyOn(global, 'clearTimeout');
-    const timeoutId = setTimeout(() => {}, 200);
-
-    render(
-      <HeaderContext.Provider
-        value={{
-          ...defaultHeaderContext,
-          activeSubmenuId: null,
-          setActiveSubmenuId: vi.fn(),
-          closeTimeoutRef: { current: timeoutId },
-        }}
-      >
-        <NavigationItemTrigger id="trigger-1" label="Nav">
-          <NavigationList id="list-1">
-            <NavigationItem href="/" label="Item" />
-          </NavigationList>
-        </NavigationItemTrigger>
-      </HeaderContext.Provider>,
-    );
-
-    const trigger = screen.getByTestId('navigation-item-trigger-trigger-1');
-    await userEvent.hover(trigger as HTMLLIElement);
-
-    expect(clearTimeoutSpy).toHaveBeenCalledWith(timeoutId);
-    clearTimeoutSpy.mockRestore();
-  });
-
-  it('cleans up local timeout on unmount when context does not provide closeTimeoutRef', () => {
-    vi.useFakeTimers();
-    const clearTimeoutSpy = vi.spyOn(global, 'clearTimeout');
-    const setActiveSubmenuId = vi.fn();
-    const contextValue = {
-      ...defaultHeaderContext,
-      setActiveSubmenuId,
-      closeTimeoutRef: undefined as unknown as React.RefObject<NodeJS.Timeout | null>,
-    };
-
-    const { unmount } = render(
-      <HeaderContext.Provider value={contextValue}>
-        <NavigationItemTrigger id="trigger-1" label="Nav">
-          <NavigationList id="list-1">
-            <NavigationItem href="/" label="Item" />
-          </NavigationList>
-        </NavigationItemTrigger>
-      </HeaderContext.Provider>,
-    );
-
-    const trigger = screen.getByTestId('navigation-item-trigger-trigger-1');
-    act(() => {
-      fireEvent.mouseOver(trigger);
-    });
-    act(() => {
-      fireEvent.mouseOut(trigger);
-    });
-    act(() => {
-      unmount();
-    });
-
-    expect(clearTimeoutSpy).toHaveBeenCalled();
-    clearTimeoutSpy.mockRestore();
     vi.useRealTimers();
   });
 

@@ -39,6 +39,10 @@ export interface NavigationItemProps extends ComponentProps<'li'> {
    */
   asRadixLink?: boolean;
   /**
+   * When true (desktop submenu), wrap link in NavigationMenu.Link so Radix closes the submenu on click
+   */
+  asRadixSubmenuLink?: boolean;
+  /**
    * When true, sets aria-current="page" on the link for the current page (helps screen reader users).
    */
   isCurrentPage?: boolean;
@@ -67,6 +71,7 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
       onClick,
       element: Component = Link,
       asRadixLink,
+      asRadixSubmenuLink,
       ...props
     },
     ref,
@@ -100,6 +105,19 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
             {linkContent}
           </NavigationMenu.Link>
         </NavigationMenu.Item>
+      );
+    }
+
+    if (asRadixSubmenuLink) {
+      return (
+        <li
+          {...props}
+          data-testid={`nav-item-${label}`}
+          className={itemClassName}
+          ref={ref}
+        >
+          <NavigationMenu.Link asChild>{linkContent}</NavigationMenu.Link>
+        </li>
       );
     }
 

@@ -1,4 +1,4 @@
-import React, { ComponentProps, CSSProperties, forwardRef, ReactElement, useState } from 'react';
+import React, { ComponentProps, CSSProperties, forwardRef, ReactElement } from 'react';
 import { findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
 import classnames from 'classnames';
 import { HeaderContext } from '../../site-furniture/Header/Header';
@@ -30,11 +30,11 @@ export interface NavigationProps extends ComponentProps<'nav'> {
  */
 const Navigation = forwardRef<HTMLElement, NavigationProps>(
   ({ 'aria-label': ariaLabelProp, ariaLabel, children, className, id, visible = true, ...props }, ref) => {
-    const { isSearchExpanded } = React.useContext(HeaderContext);
+    const { isSearchExpanded, activeSubmenuId, setActiveSubmenuId } = React.useContext(HeaderContext);
     const childNavList = findChildrenOfType<NavigationListProps>(children, NavigationList)?.[0];
     const otherChildren = findChildrenExcludingTypes(children, [NavigationList, LanguageSelector]); // Includes the Search component, needed to do exclusion rather than inclusion so we could support StatefulSearch in our stories
     const languageSelectorElement = findChildrenOfType<LanguageSelectorProps>(children, LanguageSelector)?.[0];
-    const [openSubmenuValue, setOpenSubmenuValue] = useState<string | undefined>(undefined);
+    const openSubmenuValue = activeSubmenuId ?? undefined;
 
     return (
       <nav
@@ -66,7 +66,7 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
                   delayDuration={0}
                   skipDelayDuration={300}
                   value={openSubmenuValue}
-                  onValueChange={setOpenSubmenuValue}
+                  onValueChange={(value) => setActiveSubmenuId(value ?? null)}
                 >
                   {React.cloneElement<NavigationListProps>(childNavList, {
                     isOffScreen: isSearchExpanded,

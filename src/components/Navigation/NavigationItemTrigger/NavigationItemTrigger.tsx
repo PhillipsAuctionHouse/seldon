@@ -51,7 +51,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
   ({ id, label, children, className, onClick, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'NavigationItemTrigger');
     const navListElement = findChildrenOfType<NavigationListProps>(children, NavigationList);
-    const { closeMenu } = React.useContext(HeaderContext);
+    const { closeMenu, setActiveSubmenuId } = React.useContext(HeaderContext);
     const itemValue = id ?? baseClassName ?? 'item';
 
     return (
@@ -91,12 +91,15 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
                   onSelect={(e) => {
                     navListElement[0].props?.onClick?.(e as unknown as React.MouseEvent<HTMLElement>);
                     closeMenu?.();
+                    setActiveSubmenuId?.(null);
                   }}
                 >
                   {React.cloneElement(navListElement[0], {
+                    wrapLinksInRadixLink: true,
                     onClick: (e: React.MouseEvent<HTMLElement>) => {
                       navListElement[0].props?.onClick?.(e);
                       closeMenu?.();
+                      setActiveSubmenuId?.(null);
                     },
                   })}
                 </NavigationMenu.Content>
