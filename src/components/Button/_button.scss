@@ -1,4 +1,7 @@
+@use 'sass:color';
 @use '~scss/allPartials' as *;
+
+$destructive-hover-disabled: color.adjust($warning-default, $alpha: -0.5);
 
 .#{$px}-button {
   // we need this because we can't be sure that the Text component is being used as a child of the Button component
@@ -18,8 +21,10 @@
   padding: 0 $padding-sm;
   position: relative;
   transition:
-    color 0.25s,
-    background-color 0.25s;
+    color 0.25s ease-out,
+    background-color 0.25s ease-out,
+    border-color 0.25s ease-out,
+    box-shadow 0.25s ease-out;
 
   &--small {
     height: 32px; // Explicitly defined by design
@@ -50,20 +55,22 @@
 
     path {
       fill: $pure-white;
-      transition: 0.25s;
+      transition: fill 0.25s ease-out;
     }
   }
 
   &--primary,
   &--secondary,
-  &--tertiary {
+  &--tertiary,
+  &--destructive {
     &.#{$px}-link {
       text-decoration: none;
     }
   }
 
   &--primary.#{$px}-link,
-  &--secondary.#{$px}-link {
+  &--secondary.#{$px}-link,
+  &--destructive.#{$px}-link {
     font-variation-settings: 'wght' 600;
 
     .#{$px}-text {
@@ -124,7 +131,7 @@
     background-color: $pure-white;
     border: 2px solid $pure-black;
     color: $pure-black;
-    transition: border 0.3s ease-out;
+    transition: box-shadow 0.25s;
     z-index: 0;
 
     &::before {
@@ -136,7 +143,7 @@
       left: 50%;
       position: absolute;
       top: 50%;
-      transition: all 0.25s ease;
+      transition: all 0.25s ease-out;
       width: 0;
       z-index: -2;
     }
@@ -156,11 +163,46 @@
   }
 
   &--secondary {
-    transition: box-shadow 0.25s;
-
     @include hoverOrActive {
       background-color: transparent;
       box-shadow: 0 0 0 1px rgba($pure-black, 1);
+
+      &:disabled {
+        box-shadow: none;
+      }
+    }
+  }
+
+  &--destructive {
+    background-color: $pure-white;
+    border: 2px solid $warning-default;
+    color: $warning-default;
+
+    &:focus-visible {
+      background-color: $pure-white;
+      outline-color: $warning-default;
+    }
+
+    svg {
+      fill: $warning-default;
+
+      path {
+        fill: $warning-default;
+      }
+    }
+
+    @include hoverOrActive {
+      background-color: $pure-white;
+      border-color: $destructive-hover-disabled;
+      color: $destructive-hover-disabled;
+
+      svg {
+        fill: $destructive-hover-disabled;
+
+        path {
+          fill: $destructive-hover-disabled;
+        }
+      }
 
       &:disabled {
         box-shadow: none;
@@ -225,6 +267,20 @@
   &--tertiary:disabled {
     background-color: transparent;
     border-color: transparent;
+  }
+
+  &--destructive:disabled {
+    background-color: $white-100;
+    border-color: $destructive-hover-disabled;
+    color: $destructive-hover-disabled;
+
+    svg {
+      fill: $destructive-hover-disabled;
+
+      path {
+        fill: $destructive-hover-disabled;
+      }
+    }
   }
 
   &--link:disabled {
