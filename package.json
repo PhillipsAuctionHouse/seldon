@@ -1,6 +1,6 @@
 {
   "name": "@phillips/seldon",
-  "version": "1.237.0",
+  "version": "1.240.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/PhillipsAuctionHouse/seldon"
@@ -132,6 +132,7 @@
     "sass": "^1.83.4",
     "semantic-release": "^25.0.0",
     "storybook": "^10.2.8",
+    "storybook-addon-pseudo-states": "^10.2.8",
     "stylelint": "^16.8.1",
     "stylelint-config-standard": "^36.0.1",
     "stylelint-config-standard-scss": "^13.1.0",

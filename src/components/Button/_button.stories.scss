@@ -1,0 +1,76 @@
+@use '~scss/allPartials' as *;
+
+@mixin grid-layout {
+  display: grid;
+  gap: 0;
+  grid-template-columns: 150px repeat(5, 1fr);
+}
+
+@mixin cell-base {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  padding: $spacing-sm;
+}
+
+@mixin cell-border {
+  border-right: 1px solid $bg-border;
+}
+
+.all-variants-grid {
+  background-color: $bg-default;
+  border: 1px solid $bg-border;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &__header {
+    @include grid-layout;
+
+    background-color: $grey-25;
+    border-bottom: 1px solid $bg-border;
+    font-weight: bold;
+
+    &-cell {
+      @include cell-base;
+      @include cell-border;
+
+      justify-content: center;
+      text-align: center;
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+
+  &__row {
+    @include grid-layout;
+
+    background-color: $pure-white;
+    border-bottom: 1px solid $bg-border;
+  }
+
+  &__label-cell {
+    @include cell-base;
+    @include cell-border;
+
+    background-color: $grey-25;
+    font-weight: 600;
+    justify-content: flex-start;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  &__button-cell {
+    @include cell-base;
+    @include cell-border;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
