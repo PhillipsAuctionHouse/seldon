@@ -81,6 +81,15 @@ const meta = {
   title: 'SiteFurniture/Header',
   component: Header,
   subcomponents: { Search: Search as React.ComponentType<unknown> },
+  decorators: [
+    (Story) => (
+      <>
+        {/* Reserve scrollbar space so RemoveScroll (submenu open) doesn't cause a flash/shift in the small preview */}
+        <style>{`html { scrollbar-gutter: stable; }`}</style>
+        <Story />
+      </>
+    ),
+  ],
   parameters: {
     docs: {
       story: {
