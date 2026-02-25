@@ -191,11 +191,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
         style={{ '--banner-height': `${bannerHeight}px` } as React.CSSProperties}
       >
         {skipToContentId && (
-          <a
-            href={`#${skipToContentId}`}
-            className={`${px}-header__skip-link`}
-            data-testid="skip-to-content"
-          >
+          <a href={`#${skipToContentId}`} className={`${px}-header__skip-link`} data-testid="skip-to-content">
             {skipLinkLabel}
           </a>
         )}

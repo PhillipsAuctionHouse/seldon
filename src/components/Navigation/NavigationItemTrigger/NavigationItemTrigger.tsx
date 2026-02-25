@@ -80,7 +80,13 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
               >
                 <NavigationMenu.Trigger
                   className={`${px}-nav__item-trigger-wrapper`}
-                  onClick={onClick ? (e: React.MouseEvent<HTMLButtonElement>) => onClick(e as unknown as React.MouseEvent<HTMLLIElement>) : undefined}
+                  data-testid={commonProps['data-testid']}
+                  onClick={
+                    onClick
+                      ? (e: React.MouseEvent<HTMLButtonElement>) =>
+                          onClick(e as unknown as React.MouseEvent<HTMLLIElement>)
+                      : undefined
+                  }
                 >
                   <span className={`${px}-nav__item-trigger`}>
                     <Text variant={TextVariants.linkStylised}>{label}</Text>

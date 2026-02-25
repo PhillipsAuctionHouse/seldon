@@ -13,17 +13,17 @@
 
   // Skip link: visually hidden until focused so keyboard users can skip to main content
   &__skip-link {
-    position: absolute;
     left: -9999px;
+    position: absolute;
     z-index: 100;
 
     &:focus {
-      left: $spacing-md;
-      padding: $spacing-sm $spacing-md;
       background-color: $pure-white;
       border: 1px solid $pure-black;
+      left: $spacing-md;
       outline: 2px solid $pure-black;
       outline-offset: 2px;
+      padding: $spacing-sm $spacing-md;
     }
   }
 

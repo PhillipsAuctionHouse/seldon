@@ -19,6 +19,7 @@
       color: unset;
       display: block;
       text-align: center;
+
       // Match .nav__item .nav__link--linkStylised typography so trigger label aligns with link labels
       @include text($linkStylised);
     }
@@ -41,6 +42,7 @@
 
     // Radix: submenu content is rendered in viewport (_navigation.scss); these styles apply when content is in viewport
     &__submenu[data-state='open'] {
+      box-sizing: border-box;
       cursor: default;
       left: 0;
       max-height: calc(90vh - #{$header-height} + var(--banner-height));
@@ -50,7 +52,6 @@
       padding: 0;
       scrollbar-width: none;
       width: 100%;
-      box-sizing: border-box;
 
       &::-webkit-scrollbar {
         display: none;
@@ -66,4 +67,3 @@
     padding: 0 0 $snowflake-menu-padding;
   }
 }
-

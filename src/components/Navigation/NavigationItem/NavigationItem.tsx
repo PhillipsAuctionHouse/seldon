@@ -95,40 +95,22 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
     if (asRadixLink) {
       const { value: _omitValue, ...restProps } = props as ComponentProps<'li'> & { value?: unknown };
       return (
-        <NavigationMenu.Item
-          ref={ref}
-          data-testid={`nav-item-${label}`}
-          className={itemClassName}
-          {...restProps}
-        >
-          <NavigationMenu.Link asChild>
-            {linkContent}
-          </NavigationMenu.Link>
+        <NavigationMenu.Item ref={ref} data-testid={`nav-item-${label}`} className={itemClassName} {...restProps}>
+          <NavigationMenu.Link asChild>{linkContent}</NavigationMenu.Link>
         </NavigationMenu.Item>
       );
     }
 
     if (asRadixSubmenuLink) {
       return (
-        <li
-          {...props}
-          data-testid={`nav-item-${label}`}
-          className={itemClassName}
-          ref={ref}
-        >
+        <li {...props} data-testid={`nav-item-${label}`} className={itemClassName} ref={ref}>
           <NavigationMenu.Link asChild>{linkContent}</NavigationMenu.Link>
         </li>
       );
     }
 
     return (
-      <li
-        {...props}
-        onClick={onClick}
-        data-testid={`nav-item-${label}`}
-        className={itemClassName}
-        ref={ref}
-      >
+      <li {...props} onClick={onClick} data-testid={`nav-item-${label}`} className={itemClassName} ref={ref}>
         {linkContent}
       </li>
     );

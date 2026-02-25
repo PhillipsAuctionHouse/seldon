@@ -132,14 +132,7 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
     if (asRadixList) {
       return (
         <NavigationMenu.List asChild>
-          <ul
-            aria-hidden={isOffScreen}
-            id={id}
-            data-testid={id}
-            role="list"
-            className={listClassName}
-            ref={ref}
-          >
+          <ul aria-hidden={isOffScreen} id={id} data-testid={id} role="list" className={listClassName} ref={ref}>
             {listContent}
           </ul>
         </NavigationMenu.List>
@@ -147,14 +140,7 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
     }
 
     return (
-      <ul
-        aria-hidden={isOffScreen}
-        id={id}
-        data-testid={id}
-        role="list"
-        className={listClassName}
-        ref={ref}
-      >
+      <ul aria-hidden={isOffScreen} id={id} data-testid={id} role="list" className={listClassName} ref={ref}>
         {listContent}
       </ul>
     );

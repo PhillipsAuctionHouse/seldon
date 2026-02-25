@@ -99,13 +99,13 @@
     }
 
     &__radix-viewport {
+      height: 0;
       left: 0;
+      overflow: hidden;
+      pointer-events: none; // allow clicks to reach search when viewport is closed or when search is open
       position: fixed;
       right: 0;
       top: calc(var(--banner-height, 0px) + var(--header-height));
-      height: 0;
-      overflow: hidden;
-      pointer-events: none; // allow clicks to reach search when viewport is closed or when search is open
       transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
       @media (prefers-reduced-motion: reduce) {
@@ -113,9 +113,9 @@
       }
 
       &[data-state='open'] {
-        pointer-events: auto; // submenu content must receive clicks when open
         animation: nav-viewport-enter 0.3s cubic-bezier(0.33, 1, 0.68, 1);
         height: var(--radix-navigation-menu-viewport-height, auto);
+        pointer-events: auto; // submenu content must receive clicks when open
 
         @media (prefers-reduced-motion: reduce) {
           animation: none;
@@ -162,6 +162,7 @@
       opacity: 0;
       transform: translateY(-16px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -173,6 +174,7 @@
       opacity: 1;
       transform: translateY(0);
     }
+
     to {
       opacity: 0;
       transform: translateY(-16px);

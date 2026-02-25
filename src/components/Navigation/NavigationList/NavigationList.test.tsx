@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import NavigationList from './NavigationList';
 import NavigationItem from '../NavigationItem/NavigationItem';
@@ -5,6 +6,18 @@ import { LinkVariants } from '../../Link/types';
 import NavigationItemTrigger from '../NavigationItemTrigger/NavigationItemTrigger';
 import { px } from '../../../utils';
 import userEvent from '@testing-library/user-event';
+import { HeaderContext } from '../../../site-furniture/Header/Header';
+import { defaultHeaderContext } from '../../../site-furniture/Header/utils';
+import * as NavigationMenu from '@radix-ui/react-navigation-menu';
+
+function withNavMenuRoot(children: React.ReactNode) {
+  return (
+    <NavigationMenu.Root>
+      {children}
+      <NavigationMenu.Viewport data-testid="nav-viewport" />
+    </NavigationMenu.Root>
+  );
+}
 
 describe('NavigationList', () => {
   const reqProps = { id: 'test-id' };
@@ -25,7 +38,9 @@ describe('NavigationList', () => {
     </NavigationList>
   );
   it('renders without error', () => {
-    render(renderNavList());
+    render(
+      withNavMenuRoot(<HeaderContext.Provider value={defaultHeaderContext}>{renderNavList()}</HeaderContext.Provider>),
+    );
   });
 
   it('renders children when no left or right section items are present', () => {
