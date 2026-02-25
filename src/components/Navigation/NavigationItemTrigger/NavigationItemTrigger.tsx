@@ -96,9 +96,10 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
                     <Text variant={TextVariants.linkStylised}>{label}</Text>
                   </span>
                 </NavigationMenu.Trigger>
-                {/* Content: submenu panel; close menu and clear active submenu when a link is selected */}
+                {/* Content: submenu panel */}
                 <NavigationMenu.Content
                   className={`${baseClassName}__submenu`}
+                  aria-label={`${label} submenu`}
                   onSelect={(e) => {
                     navListElement[0].props?.onClick?.(e as unknown as React.MouseEvent<HTMLElement>);
                     closeMenu?.();
