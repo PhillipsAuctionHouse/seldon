@@ -52,6 +52,7 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
     },
     ref,
   ) => {
+    // Submenu left section: items with navGroup='nav-link-start', optionally wrapped in Radix Link for close-on-click
     const leftSectionItems = React.Children.toArray(children)
       .map((child) => {
         if (
@@ -69,6 +70,7 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
       })
       .filter(Boolean);
 
+    // Submenu right section: items with navGroup='nav-link-end', optionally wrapped in Radix Link for close-on-click
     const rightSectionItems = React.Children.toArray(children)
       .map((child) => {
         if (
@@ -86,7 +88,7 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
       })
       .filter(Boolean);
 
-    // When asRadixList, wrap top-level NavigationItem in Radix Item+Link so arrow keys work between all items
+    // Desktop top-level only: wrap each direct NavigationItem in Radix Item+Link for arrow-key navigation
     const topLevelChildren =
       asRadixList && !leftSectionItems.length && !rightSectionItems.length
         ? React.Children.map(children, (child) => {
@@ -99,9 +101,11 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
           })
         : null;
 
+    // One of: left section + right section (submenu), or top-level items (no sections)
     const listContent = (
       <>
         {leftSectionItems.length > 0 ? (
+          /* Left section (submenu links) */
           <div className={classNames(`${px}-nav__list__section`, `${px}-nav__list__section--start`)}>
             {leftSectionHeading ? (
               <Text variant={TextVariants.headingMedium} className={`${px}-nav__list__section--start__title`}>
@@ -112,6 +116,7 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
           </div>
         ) : null}
         {rightSectionItems.length > 0 ? (
+          /* Right section (e.g. "View all" link) */
           <div className={classNames(`${px}-nav__list__section`, `${px}-nav__list__section--end`)}>
             {rightSectionHeading ? (
               <Text variant={TextVariants.headingMedium} className={`${px}-nav__list__section--end__title`}>
@@ -121,6 +126,7 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
             {rightSectionItems}
           </div>
         ) : null}
+        {/* No sections: top-level nav items only (desktop main list or mobile) */}
         {!leftSectionItems.length && !rightSectionItems.length ? (topLevelChildren ?? children) : null}
       </>
     );
@@ -129,6 +135,7 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
       [`${px}-nav__list--offscreen`]: isOffScreen,
     });
 
+    // Desktop Radix: wrap in NavigationMenu.List for role and keyboard nav
     if (asRadixList) {
       return (
         <NavigationMenu.List asChild>
@@ -139,6 +146,7 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
       );
     }
 
+    // Plain list (mobile or non-Radix)
     return (
       <ul aria-hidden={isOffScreen} id={id} data-testid={id} role="list" className={listClassName} ref={ref}>
         {listContent}

@@ -155,10 +155,10 @@ describe('NavigationItemTrigger', () => {
     expect(refCallback).toHaveBeenCalled();
   });
 
-  it('closes submenu after clicking a link in it', async () => {
+  it('opens submenu on hover and closes once a link is clicked', async () => {
     const setActiveSubmenuId = vi.fn();
     function TestWrapper() {
-      const [value, setValue] = useState<string>('test-trigger');
+      const [value, setValue] = useState<string>('');
       return (
         <NavigationMenu.Root value={value} onValueChange={(v) => setValue(v ?? '')}>
           <HeaderContext.Provider
@@ -166,7 +166,7 @@ describe('NavigationItemTrigger', () => {
               ...defaultHeaderContext,
               setActiveSubmenuId: (id: string | null) => {
                 setActiveSubmenuId(id);
-                setValue('');
+                setValue(id ?? '');
               },
             }}
           >
@@ -189,7 +189,12 @@ describe('NavigationItemTrigger', () => {
     render(<TestWrapper />);
 
     const trigger = screen.getByTestId('navigation-item-trigger-test-trigger');
-    expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    expect(trigger).toHaveAttribute('aria-expanded', 'false');
+
+    await userEvent.hover(trigger);
+    await waitFor(() => {
+      expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    });
 
     const link = screen.getByRole('link', { name: /view auctions/i });
     await userEvent.click(link);

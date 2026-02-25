@@ -21,6 +21,7 @@ export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
   id?: string;
 }
 
+/** Mobile-only: renders trigger and submenu as an accordion (click to expand). */
 const MobileNavigationItemTrigger = ({ id, label, children }: NavigationItemTriggerProps) => {
   const { isMenuOpen } = React.useContext(HeaderContext);
 
@@ -52,11 +53,12 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
     const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'NavigationItemTrigger');
     const navListElement = findChildrenOfType<NavigationListProps>(children, NavigationList);
     const { closeMenu, setActiveSubmenuId } = React.useContext(HeaderContext);
-    const itemValue = id ?? baseClassName ?? 'item';
+    const itemValue = id ?? baseClassName ?? 'item'; // Radix value for controlled submenu
 
     return (
       <>
         <RemoveScroll enabled={false} allowPinchZoom removeScrollBar={false}>
+          {/* Mobile (< md): accordion expand/collapse */}
           <SSRMediaQuery.Media lessThan="md">
             <MobileNavigationItemTrigger id={id} label={label} {...commonProps}>
               {navListElement
@@ -71,6 +73,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
             </MobileNavigationItemTrigger>
           </SSRMediaQuery.Media>
 
+          {/* Desktop (≥ md): Radix submenu (hover to open) or plain list item */}
           <SSRMediaQuery.Media greaterThanOrEqual="md">
             {navListElement ? (
               <NavigationMenu.Item
@@ -78,6 +81,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
                 ref={ref as React.Ref<HTMLLIElement>}
                 className={classNames(className, baseClassName, `${px}-nav__item`)}
               >
+                {/* Trigger: hover opens submenu; optional onClick forwarded */}
                 <NavigationMenu.Trigger
                   className={`${px}-nav__item-trigger-wrapper`}
                   data-testid={commonProps['data-testid']}
@@ -92,6 +96,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
                     <Text variant={TextVariants.linkStylised}>{label}</Text>
                   </span>
                 </NavigationMenu.Trigger>
+                {/* Content: submenu panel; close menu and clear active submenu when a link is selected */}
                 <NavigationMenu.Content
                   className={`${baseClassName}__submenu`}
                   onSelect={(e) => {
@@ -111,6 +116,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
                 </NavigationMenu.Content>
               </NavigationMenu.Item>
             ) : (
+              /* No submenu: render as plain list item (e.g. top-level link) */
               <li
                 {...commonProps}
                 ref={ref}

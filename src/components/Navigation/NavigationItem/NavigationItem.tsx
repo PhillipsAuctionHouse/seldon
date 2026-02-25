@@ -42,10 +42,6 @@ export interface NavigationItemProps extends ComponentProps<'li'> {
    * When true (desktop submenu), wrap link in NavigationMenu.Link so Radix closes the submenu on click
    */
   asRadixSubmenuLink?: boolean;
-  /**
-   * When true, sets aria-current="page" on the link for the current page (helps screen reader users).
-   */
-  isCurrentPage?: boolean;
 }
 
 /**
@@ -64,7 +60,6 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
       className = '',
       href,
       isViewAllLink = false,
-      isCurrentPage = false,
       label,
       navGroup,
       navType,
@@ -77,6 +72,8 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
     ref,
   ) => {
     const itemClassName = classNames(`${px}-nav__item`, `${px}-nav__item--${navGroup}`, className);
+
+    // Shared link content (label, badge, optional aria-current); wrapper varies by radix mode
     const linkContent = (
       <Component
         className={classNames({
@@ -85,13 +82,13 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
         href={href}
         variant={navType ? navType : LinkVariants.linkStylised}
         onClick={onClick as MouseEventHandler<HTMLAnchorElement> | undefined}
-        {...(isCurrentPage ? { 'aria-current': 'page' as const } : {})}
       >
         <span className={`${px}-nav__item--label`}>{label}</span>
         {badge ? <span className={`${px}-nav__item--badge `}>{` • ${badge}`}</span> : null}
       </Component>
     );
 
+    // Desktop top-level: Radix Item + Link (arrow-key navigation between items)
     if (asRadixLink) {
       const { value: _omitValue, ...restProps } = props as ComponentProps<'li'> & { value?: unknown };
       return (
@@ -101,6 +98,7 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
       );
     }
 
+    // Desktop submenu: plain li + Radix Link (closes submenu on click)
     if (asRadixSubmenuLink) {
       return (
         <li {...props} data-testid={`nav-item-${label}`} className={itemClassName} ref={ref}>
@@ -109,6 +107,7 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
       );
     }
 
+    // Default: plain list item with link (mobile or non-Radix)
     return (
       <li {...props} onClick={onClick} data-testid={`nav-item-${label}`} className={itemClassName} ref={ref}>
         {linkContent}

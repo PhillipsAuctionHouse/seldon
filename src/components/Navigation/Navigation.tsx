@@ -10,10 +10,6 @@ import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 
 export interface NavigationProps extends ComponentProps<'nav'> {
   /**
-   * Accessible label for the navigation landmark (e.g. "Main navigation"). Defaults to "Main navigation" when not provided via aria-label.
-   */
-  ariaLabel?: string;
-  /**
    * Optional visible state
    */
   visible?: boolean;
@@ -29,7 +25,7 @@ export interface NavigationProps extends ComponentProps<'nav'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-navigation--overview)
  */
 const Navigation = forwardRef<HTMLElement, NavigationProps>(
-  ({ 'aria-label': ariaLabelProp, ariaLabel, children, className, id, visible = true, ...props }, ref) => {
+  ({ 'aria-label': ariaLabel, children, className, id, visible = true, ...props }, ref) => {
     const { isSearchExpanded, activeSubmenuId, setActiveSubmenuId } = React.useContext(HeaderContext);
     const childNavList = findChildrenOfType<NavigationListProps>(children, NavigationList)?.[0];
     const otherChildren = findChildrenExcludingTypes(children, [NavigationList, LanguageSelector]); // Includes the Search component, needed to do exclusion rather than inclusion so we could support StatefulSearch in our stories
@@ -38,7 +34,7 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
 
     return (
       <nav
-        aria-label={ariaLabelProp ?? ariaLabel ?? 'Main navigation'}
+        aria-label={ariaLabel ?? 'Main navigation'}
         role="navigation"
         data-testid={id}
         id={id}
@@ -52,12 +48,17 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
             [`${px}-nav__list-container--search-expanded`]: isSearchExpanded,
           })}
         >
+          {/* Shared: Search and other non-list children */}
           {otherChildren}
+
+          {/* Mobile (< md): accordion-style nav list */}
           <SSRMediaQuery.Media lessThan="md">
             {React.isValidElement(childNavList)
               ? React.cloneElement<NavigationListProps>(childNavList, { isOffScreen: isSearchExpanded })
               : undefined}
           </SSRMediaQuery.Media>
+
+          {/* Desktop (≥ md): Radix navigation menu (hover submenus, controlled by activeSubmenuId) */}
           <SSRMediaQuery.Media greaterThanOrEqual="md">
             {React.isValidElement(childNavList) ? (
               <RemoveScroll enabled={!!openSubmenuValue} allowPinchZoom removeScrollBar={false}>
@@ -77,6 +78,8 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
               </RemoveScroll>
             ) : undefined}
           </SSRMediaQuery.Media>
+
+          {/* Mobile (< md): language selector (visually hidden when search expanded) */}
           <SSRMediaQuery.Media lessThan="md">
             {/* This is not visible through css when in desktop breakpoint */}
             {React.isValidElement(languageSelectorElement) && languageSelectorElement

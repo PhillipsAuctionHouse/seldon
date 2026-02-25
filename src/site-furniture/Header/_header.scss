@@ -18,10 +18,10 @@
     z-index: 100;
 
     &:focus {
-      background-color: $pure-white;
-      border: 1px solid $pure-black;
+      background-color: $white-100;
+      border: 1px solid $black-100;
       left: $spacing-md;
-      outline: 2px solid $pure-black;
+      outline: 2px solid $black-100;
       outline-offset: 2px;
       padding: $spacing-sm $spacing-md;
     }
