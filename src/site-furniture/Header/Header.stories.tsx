@@ -84,7 +84,6 @@ const meta = {
   decorators: [
     (Story) => (
       <>
-        {/* Reserve scrollbar space so RemoveScroll (submenu open) doesn't cause a flash/shift in the small preview */}
         <style>{`html { scrollbar-gutter: stable; }`}</style>
         <Story />
       </>
@@ -121,6 +120,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
         flexDirection: 'column',
         paddingTop: '200px',
         backgroundColor: '#ff9',
+        contain: 'layout',
       }}
     >
       <Header {...props} logo={<Icon icon="PhillipsLogo" />}>
