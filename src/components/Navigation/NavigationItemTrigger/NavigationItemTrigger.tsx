@@ -1,13 +1,14 @@
 import classNames from 'classnames';
-import React, { ComponentProps, forwardRef, useEffect } from 'react';
+import React, { ComponentProps, forwardRef } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import { SSRMediaQuery } from '../../../providers/SeldonProvider/utils';
 import { HeaderContext } from '../../../site-furniture/Header/Header';
-import { findChildrenOfType, focusElementById, getCommonProps, px } from '../../../utils';
+import { findChildrenOfType, getCommonProps, px } from '../../../utils';
 import Accordion from '../../Accordion/Accordion';
 import AccordionItem from '../../Accordion/AccordionItem';
 import { Text, TextVariants } from '../../Text';
 import NavigationList, { NavigationListProps } from '../NavigationList/NavigationList';
+import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 
 export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
   /**
@@ -20,6 +21,7 @@ export interface NavigationItemTriggerProps extends ComponentProps<'li'> {
   id?: string;
 }
 
+/** Mobile-only: renders trigger and submenu as an accordion (click to expand). */
 const MobileNavigationItemTrigger = ({ id, label, children }: NavigationItemTriggerProps) => {
   const { isMenuOpen } = React.useContext(HeaderContext);
 
@@ -50,53 +52,13 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
   ({ id, label, children, className, onClick, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id }, 'NavigationItemTrigger');
     const navListElement = findChildrenOfType<NavigationListProps>(children, NavigationList);
-    const {
-      closeMenu,
-      activeSubmenuId,
-      setActiveSubmenuId,
-      closeTimeoutRef: contextCloseTimeoutRef,
-    } = React.useContext(HeaderContext);
-
-    const localCloseTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
-    const closeTimeoutRef = contextCloseTimeoutRef || localCloseTimeoutRef;
-
-    const isSubmenuOpened = activeSubmenuId === id;
-
-    const handleSubmenuOpen = React.useCallback(() => {
-      if (closeTimeoutRef.current) {
-        clearTimeout(closeTimeoutRef.current);
-        closeTimeoutRef.current = null;
-      }
-
-      setActiveSubmenuId?.(id || null);
-
-      if (navListElement && navListElement[0]?.props?.id) {
-        focusElementById(navListElement[0].props.id, true);
-      }
-      const triggerElement = ref && 'current' in ref ? ref.current : null;
-      if (triggerElement) {
-        triggerElement.focus();
-      }
-    }, [navListElement, ref, id, setActiveSubmenuId, closeTimeoutRef]);
-
-    const handleSubmenuClose = React.useCallback(() => {
-      closeTimeoutRef.current = setTimeout(() => {
-        setActiveSubmenuId?.(null);
-        closeTimeoutRef.current = null;
-      }, 200);
-    }, [setActiveSubmenuId, closeTimeoutRef]);
-
-    useEffect(() => {
-      return () => {
-        if (!contextCloseTimeoutRef && closeTimeoutRef.current) {
-          clearTimeout(closeTimeoutRef.current);
-        }
-      };
-    }, [contextCloseTimeoutRef, closeTimeoutRef]);
+    const { closeMenu, setActiveSubmenuId } = React.useContext(HeaderContext);
+    const itemValue = id ?? baseClassName ?? 'item'; // Radix value for controlled submenu
 
     return (
       <>
-        <RemoveScroll enabled={isSubmenuOpened} allowPinchZoom removeScrollBar={false}>
+        <RemoveScroll enabled={false} allowPinchZoom removeScrollBar={false}>
+          {/* Mobile (< md): accordion expand/collapse */}
           <SSRMediaQuery.Media lessThan="md">
             <MobileNavigationItemTrigger id={id} label={label} {...commonProps}>
               {navListElement
@@ -104,7 +66,6 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
                     className: `${baseClassName}__submenu--mobile`,
                     onClick: (e: React.MouseEvent<HTMLElement>) => {
                       navListElement[0].props?.onClick?.(e);
-                      setActiveSubmenuId?.(null);
                       closeMenu?.();
                     },
                   })
@@ -112,33 +73,63 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
             </MobileNavigationItemTrigger>
           </SSRMediaQuery.Media>
 
+          {/* Desktop (≥ md): Radix submenu (hover to open) or plain list item */}
           <SSRMediaQuery.Media greaterThanOrEqual="md">
-            <li
-              {...commonProps}
-              ref={ref}
-              aria-expanded={isSubmenuOpened}
-              className={classNames(className, baseClassName, `${px}-nav__item`, {
-                [`${baseClassName}--hovered`]: isSubmenuOpened,
-              })}
-              onClick={onClick}
-              onMouseOver={handleSubmenuOpen}
-              onMouseOut={handleSubmenuClose}
-              {...props}
-            >
-              <button className={`${px}-nav__item-trigger`} type="button">
-                <Text variant={TextVariants.linkStylised}>{label}</Text>
-              </button>
-              {navListElement
-                ? React.cloneElement(navListElement[0], {
-                    className: `${baseClassName}__submenu`,
+            {navListElement ? (
+              <NavigationMenu.Item
+                value={itemValue}
+                ref={ref as React.Ref<HTMLLIElement>}
+                className={classNames(className, baseClassName, `${px}-nav__item`)}
+              >
+                {/* Trigger: hover opens submenu; optional onClick forwarded */}
+                <NavigationMenu.Trigger
+                  className={`${px}-nav__item-trigger-wrapper`}
+                  data-testid={commonProps['data-testid']}
+                  onClick={
+                    onClick
+                      ? (e: React.MouseEvent<HTMLButtonElement>) =>
+                          onClick(e as unknown as React.MouseEvent<HTMLLIElement>)
+                      : undefined
+                  }
+                >
+                  <span className={`${px}-nav__item-trigger`}>
+                    <Text variant={TextVariants.linkStylised}>{label}</Text>
+                  </span>
+                </NavigationMenu.Trigger>
+                {/* Content: submenu panel */}
+                <NavigationMenu.Content
+                  className={`${baseClassName}__submenu`}
+                  aria-label={`${label} submenu`}
+                  onSelect={(e) => {
+                    navListElement[0].props?.onClick?.(e as unknown as React.MouseEvent<HTMLElement>);
+                    closeMenu?.();
+                    setActiveSubmenuId?.(null);
+                  }}
+                >
+                  {React.cloneElement(navListElement[0], {
+                    wrapLinksInRadixLink: true,
                     onClick: (e: React.MouseEvent<HTMLElement>) => {
                       navListElement[0].props?.onClick?.(e);
-                      setActiveSubmenuId?.(null);
                       closeMenu?.();
+                      setActiveSubmenuId?.(null);
                     },
-                  })
-                : null}
-            </li>
+                  })}
+                </NavigationMenu.Content>
+              </NavigationMenu.Item>
+            ) : (
+              /* No submenu: render as plain list item (e.g. top-level link) */
+              <li
+                {...commonProps}
+                ref={ref}
+                className={classNames(className, baseClassName, `${px}-nav__item`)}
+                onClick={onClick}
+                {...props}
+              >
+                <span className={`${px}-nav__item-trigger`}>
+                  <Text variant={TextVariants.linkStylised}>{label}</Text>
+                </span>
+              </li>
+            )}
           </SSRMediaQuery.Media>
         </RemoveScroll>
       </>

@@ -33,6 +33,7 @@
   &--active {
     left: 0;
     transition: left 0.25s ease-in 0.2s;
+    z-index: 11; // above nav (Radix viewport) and overlay when open so input receives clicks
 
     &::after {
       transition: width 0.25s ease-in 0.2s;

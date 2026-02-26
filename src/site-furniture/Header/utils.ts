@@ -8,5 +8,4 @@ export const defaultHeaderContext: HeaderContextType = {
   closeMenu: noOp,
   activeSubmenuId: null,
   setActiveSubmenuId: noOp,
-  closeTimeoutRef: { current: null },
 };

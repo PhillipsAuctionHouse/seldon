@@ -8,7 +8,8 @@ $top-transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   justify-content: left;
   opacity: 1;
 
-  &:focus {
+  // Remove default outline only for mouse focus; keep it for keyboard (:focus-visible)
+  &:focus:not(:focus-visible) {
     outline: none;
   }
 
@@ -28,16 +29,27 @@ $top-transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 0;
     position: relative;
     top: 0;
+    transform: translateY(0);
     transition:
       $top-transition,
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
       opacity 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+    z-index: 5;
 
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
+    // Offscreen state (transform/opacity) driven by .nav__list-container--search-expanded in _navigation.scss
     &--offscreen {
-      top: -100%;
       transition:
         $top-transition,
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
         opacity 0.2s cubic-bezier(0.65, 0, 0.35, 1);
-      z-index: 5;
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
 
     &__section {

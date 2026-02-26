@@ -11,6 +11,22 @@
   width: 100%;
   z-index: 10;
 
+  // Skip link: visually hidden until focused so keyboard users can skip to main content
+  &__skip-link {
+    left: -9999px;
+    position: absolute;
+    z-index: 100;
+
+    &:focus {
+      background-color: $white-100;
+      border: 1px solid $black-100;
+      left: $spacing-md;
+      outline: 2px solid $black-100;
+      outline-offset: 2px;
+      padding: $spacing-sm $spacing-md;
+    }
+  }
+
   &__toggle-btn {
     align-items: center;
     background: none;
@@ -75,6 +91,14 @@
   &__logo {
     align-self: center;
     margin: 0;
+
+    a {
+      display: inline-block; // so focus ring has a clear box to wrap
+
+      &:focus-visible {
+        @include focus-ring($border-radius: $radius-xs);
+      }
+    }
 
     svg {
       height: 20.58px; // 20.58px is the height of the logo's container to make logo 16px

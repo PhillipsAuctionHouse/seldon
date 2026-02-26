@@ -2,7 +2,8 @@ import { px } from '../../../utils';
 import classNames from 'classnames';
 import Link, { LinkProps } from '../../Link/Link';
 import { LinkVariants } from '../../Link/types';
-import { ComponentProps, ElementType, forwardRef, ReactNode } from 'react';
+import { ComponentProps, ElementType, forwardRef, MouseEventHandler, ReactNode } from 'react';
+import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 
 export interface NavigationItemProps extends ComponentProps<'li'> {
   /**
@@ -33,6 +34,14 @@ export interface NavigationItemProps extends ComponentProps<'li'> {
    * Element to render within the navigation item, renders <Link> by default
    */
   element?: ElementType<LinkProps>;
+  /**
+   * When true (desktop Radix list), render as NavigationMenu.Item + Link for arrow-key navigation
+   */
+  asRadixLink?: boolean;
+  /**
+   * When true (desktop submenu), wrap link in NavigationMenu.Link so Radix closes the submenu on click
+   */
+  asRadixSubmenuLink?: boolean;
 }
 
 /**
@@ -56,28 +65,52 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
       navType,
       onClick,
       element: Component = Link,
+      asRadixLink,
+      asRadixSubmenuLink,
       ...props
     },
     ref,
   ) => {
-    return (
-      <li
-        {...props}
-        onClick={onClick}
-        data-testid={`nav-item-${label}`}
-        className={classNames(`${px}-nav__item`, `${px}-nav__item--${navGroup}`, className)}
-        ref={ref}
+    const itemClassName = classNames(`${px}-nav__item`, `${px}-nav__item--${navGroup}`, className);
+
+    // Shared link content (label, badge, optional aria-current); wrapper varies by radix mode
+    const linkContent = (
+      <Component
+        className={classNames({
+          [`${px}-nav__item--view-all`]: isViewAllLink,
+        })}
+        href={href}
+        variant={navType ? navType : LinkVariants.linkStylised}
+        onClick={onClick as MouseEventHandler<HTMLAnchorElement> | undefined}
       >
-        <Component
-          className={classNames({
-            [`${px}-nav__item--view-all`]: isViewAllLink,
-          })}
-          href={href}
-          variant={navType ? navType : LinkVariants.linkStylised}
-        >
-          <span className={`${px}-nav__item--label`}>{label}</span>
-          {badge ? <span className={`${px}-nav__item--badge `}>{` • ${badge}`}</span> : null}
-        </Component>
+        <span className={`${px}-nav__item--label`}>{label}</span>
+        {badge ? <span className={`${px}-nav__item--badge `}>{` • ${badge}`}</span> : null}
+      </Component>
+    );
+
+    // Desktop top-level: Radix Item + Link (arrow-key navigation between items)
+    if (asRadixLink) {
+      const { value: _omitValue, ...restProps } = props as ComponentProps<'li'> & { value?: unknown };
+      return (
+        <NavigationMenu.Item ref={ref} data-testid={`nav-item-${label}`} className={itemClassName} {...restProps}>
+          <NavigationMenu.Link asChild>{linkContent}</NavigationMenu.Link>
+        </NavigationMenu.Item>
+      );
+    }
+
+    // Desktop submenu: plain li + Radix Link (closes submenu on click)
+    if (asRadixSubmenuLink) {
+      return (
+        <li {...props} data-testid={`nav-item-${label}`} className={itemClassName} ref={ref}>
+          <NavigationMenu.Link asChild>{linkContent}</NavigationMenu.Link>
+        </li>
+      );
+    }
+
+    // Default: plain list item with link (mobile or non-Radix)
+    return (
+      <li {...props} onClick={onClick} data-testid={`nav-item-${label}`} className={itemClassName} ref={ref}>
+        {linkContent}
       </li>
     );
   },

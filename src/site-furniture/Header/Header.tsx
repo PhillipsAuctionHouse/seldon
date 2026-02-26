@@ -47,6 +47,14 @@ export interface HeaderProps extends ComponentProps<'header'> {
    * Reference to the notification banner
    */
   bannerRef?: React.MutableRefObject<HTMLDivElement | null>;
+  /**
+   * ID of the main content element for the skip link target (e.g. "main"). When set, a "Skip to main content" link is rendered for keyboard users.
+   */
+  skipToContentId?: string | null;
+  /**
+   * Accessible label for the skip link. Defaults to "Skip to main content".
+   */
+  skipLinkLabel?: string;
 }
 export type HeaderContextType = {
   /**
@@ -73,10 +81,6 @@ export type HeaderContextType = {
    * Set the active submenu ID
    */
   setActiveSubmenuId: (id: string | null) => void;
-  /**
-   * Reference to timeout for submenu closing
-   */
-  closeTimeoutRef: React.MutableRefObject<NodeJS.Timeout | null>;
 };
 
 export const HeaderContext = createContext<HeaderContextType>(defaultHeaderContext);
@@ -104,6 +108,8 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
       logoText = 'Home Page',
       disabled,
       bannerRef,
+      skipToContentId = 'main',
+      skipLinkLabel = 'Skip to main content',
       ...props
     },
     ref,
@@ -119,10 +125,12 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     const [isSearchExpanded, setIsSearchExpanded] = useState(false);
     const navigationElement = findChildrenOfType(children, Navigation);
     const otherChildren = findChildrenExcludingTypes(children, [Navigation, UserManagement, LanguageSelector]);
-    const { closeMenu, handleMenuToggle, isMenuOpen, toggleText } = useMobileMenu({ toggleOpenText, toggleCloseText });
+    const { closeMenu, handleMenuToggle, isMenuOpen, toggleText } = useMobileMenu({
+      toggleOpenText,
+      toggleCloseText,
+    });
 
     const [activeSubmenuId, setActiveSubmenuId] = useState<string | null>(null);
-    const closeTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
     const [bannerHeight, setBannerHeight] = useState(bannerRef?.current ? bannerRef.current.clientHeight : 0);
     const headerRef = React.useRef<HTMLElement | null>(null);
@@ -182,6 +190,11 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
         ref={combinedRef}
         style={{ '--banner-height': `${bannerHeight}px` } as React.CSSProperties}
       >
+        {skipToContentId && (
+          <a href={`#${skipToContentId}`} className={`${px}-header__skip-link`} data-testid="skip-to-content">
+            {skipLinkLabel}
+          </a>
+        )}
         <div className={`${px}-header__top-row`}>
           <SSRMediaQuery.Media greaterThanOrEqual="md">{languageSelectorElement}</SSRMediaQuery.Media>
           {/** only render language selector in this location on desktop */}
@@ -213,7 +226,6 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
               {
                 activeSubmenuId,
                 setActiveSubmenuId,
-                closeTimeoutRef,
                 isMenuOpen,
                 isSearchExpanded,
                 setIsSearchExpanded,

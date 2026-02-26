@@ -6,7 +6,7 @@ import NavigationList from './NavigationList/NavigationList';
 import NavigationItem from './NavigationItem/NavigationItem';
 import { LinkVariants } from '../Link';
 import Search from '../Search/Search';
-import React, { CSSProperties, useState } from 'react';
+import { CSSProperties, useState } from 'react';
 import { HeaderContext } from '../../site-furniture/Header/Header';
 import { defaultHeaderContext } from '../../site-furniture/Header/utils';
 
@@ -31,7 +31,6 @@ export default meta;
 export const Playground = () => {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [activeSubmenuId, setActiveSubmenuId] = useState<string | null>(null);
-  const closeTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
   return (
     <HeaderContext.Provider
@@ -41,7 +40,6 @@ export const Playground = () => {
         setIsSearchExpanded,
         activeSubmenuId,
         setActiveSubmenuId,
-        closeTimeoutRef,
       }}
     >
       <Navigation style={{ position: 'relative' } as CSSProperties}>

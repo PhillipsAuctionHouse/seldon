@@ -32,8 +32,8 @@ describe('Navigation', () => {
   });
   it('renders nav list component if passed', () => {
     renderNavigation();
-    expect(screen.getByRole('list')).toBeInTheDocument();
-    expect(screen.getByText('Auctions')).toBeInTheDocument();
+    expect(screen.getAllByRole('list').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText('Auctions').length).toBeGreaterThanOrEqual(1);
   });
   it('renders search component if passed', () => {
     renderNavigation();
@@ -45,6 +45,7 @@ describe('Navigation', () => {
   });
   it('hide nav list if search expanded', () => {
     renderNavigation({}, { isSearchExpanded: true });
+    // Lists are offscreen (aria-hidden) when search expanded, so no visible list
     expect(screen.queryByRole('list')).not.toBeInTheDocument();
   });
 });

@@ -81,6 +81,14 @@ const meta = {
   title: 'SiteFurniture/Header',
   component: Header,
   subcomponents: { Search: Search as React.ComponentType<unknown> },
+  decorators: [
+    (Story) => (
+      <>
+        <style>{`html { scrollbar-gutter: stable; }`}</style>
+        <Story />
+      </>
+    ),
+  ],
   parameters: {
     docs: {
       story: {
@@ -112,6 +120,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
         flexDirection: 'column',
         paddingTop: '200px',
         backgroundColor: '#ff9',
+        contain: 'layout',
       }}
     >
       <Header {...props} logo={<Icon icon="PhillipsLogo" />}>

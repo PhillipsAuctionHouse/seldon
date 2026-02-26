@@ -190,6 +190,7 @@ const Search = forwardRef<HTMLDivElement, React.PropsWithChildren<SearchProps>>(
                       onKeyDown={onKeyDown}
                       onChange={onInputChange}
                       ref={searchInputRef}
+                      tabIndex={isSearchExpanded ? 0 : -1}
                     />
                   </CSSTransition>
                   <SearchButton
