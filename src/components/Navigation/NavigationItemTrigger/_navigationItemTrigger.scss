@@ -22,6 +22,10 @@
 
       // Match .nav__item .nav__link--linkStylised typography so trigger label aligns with link labels
       @include text($linkStylised);
+
+      &:focus-visible {
+        @include focus-ring($border-radius: $radius-xs);
+      }
     }
   }
 

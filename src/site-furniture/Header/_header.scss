@@ -92,6 +92,14 @@
     align-self: center;
     margin: 0;
 
+    a {
+      display: inline-block; // so focus ring has a clear box to wrap
+
+      &:focus-visible {
+        @include focus-ring($border-radius: $radius-xs);
+      }
+    }
+
     svg {
       height: 20.58px; // 20.58px is the height of the logo's container to make logo 16px
       width: 100%;

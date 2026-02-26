@@ -144,10 +144,11 @@ describe('Accordion', () => {
     expect(container.querySelectorAll(`.${px}-accordion-item[data-state="open"]`)).toHaveLength(1);
     expect(container.querySelectorAll(`.${px}-accordion-item[data-state="closed"]`)).toHaveLength(1);
 
-    // After clicking second item, we should have both items open and none closed
+    // After clicking second item (which is locked), it should not change state
+    // Only the first item should still be open
     await userEvent.click(screen.getByTestId('accordion-item-1-trigger'));
-    expect(container.querySelectorAll(`.${px}-accordion-item[data-state="open"]`)).toHaveLength(2);
-    expect(container.querySelectorAll(`.${px}-accordion-item[data-state="closed"]`)).toHaveLength(0);
+    expect(container.querySelectorAll(`.${px}-accordion-item[data-state="open"]`)).toHaveLength(1);
+    expect(container.querySelectorAll(`.${px}-accordion-item[data-state="closed"]`)).toHaveLength(1);
   });
 
   it('should get the correct variant props for the "singleCollapsible" variant', () => {
