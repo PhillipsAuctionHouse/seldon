@@ -1,4 +1,7 @@
+@use 'sass:color';
 @use '~scss/allPartials' as *;
+
+$destructive-hover-disabled: color.adjust($warning-default, $alpha: -0.5);
 
 .#{$px}-button {
   // we need this because we can't be sure that the Text component is being used as a child of the Button component
@@ -18,8 +21,10 @@
   padding: 0 $padding-sm;
   position: relative;
   transition:
-    color 0.25s,
-    background-color 0.25s;
+    color 0.25s ease-out,
+    background-color 0.25s ease-out,
+    border-color 0.25s ease-out,
+    box-shadow 0.25s ease-out;
 
   &--small {
     height: 32px; // Explicitly defined by design
@@ -50,20 +55,22 @@
 
     path {
       fill: $pure-white;
-      transition: 0.25s;
+      transition: fill 0.25s ease-out;
     }
   }
 
   &--primary,
   &--secondary,
-  &--tertiary {
+  &--tertiary,
+  &--destructive {
     &.#{$px}-link {
       text-decoration: none;
     }
   }
 
   &--primary.#{$px}-link,
-  &--secondary.#{$px}-link {
+  &--secondary.#{$px}-link,
+  &--destructive.#{$px}-link {
     font-variation-settings: 'wght' 600;
 
     .#{$px}-text {
@@ -168,6 +175,51 @@
     }
   }
 
+  &--destructive {
+    background-color: $white-100;
+    border: 2px solid $warning-default;
+    color: $warning-default;
+
+    &:focus-visible {
+      background-color: $white-100;
+      outline: 2px solid $warning-default;
+      outline-offset: 4px;
+      border-radius: $radius-3xl;
+    }
+
+    // Spinner inside destructive button uses the same red
+    .#{$px}-loader {
+      border-color: $warning-default;
+      border-bottom-color: transparent;
+    }
+
+    svg {
+      fill: $warning-default;
+
+      path {
+        fill: $warning-default;
+      }
+    }
+
+    @include hoverOrActive {
+      background-color: $white-100;
+      border-color: $destructive-hover-disabled;
+      color: $destructive-hover-disabled;
+
+      svg {
+        fill: $destructive-hover-disabled;
+
+        path {
+          fill: $destructive-hover-disabled;
+        }
+      }
+
+      &:disabled {
+        box-shadow: none;
+      }
+    }
+  }
+
   &--tertiary {
     background-color: transparent;
     color: $pure-black;
@@ -225,6 +277,20 @@
   &--tertiary:disabled {
     background-color: transparent;
     border-color: transparent;
+  }
+
+  &--destructive:disabled {
+    background-color: $white-100;
+    border-color: $destructive-hover-disabled;
+    color: $destructive-hover-disabled;
+
+    svg {
+      fill: $destructive-hover-disabled;
+
+      path {
+        fill: $destructive-hover-disabled;
+      }
+    }
   }
 
   &--link:disabled {

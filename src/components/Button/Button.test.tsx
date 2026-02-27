@@ -32,6 +32,16 @@ describe('Button', () => {
     expect(buttonElement).toHaveClass(`${px}-button--icon-last`);
   });
 
+  it('renders with destructive variant', () => {
+    render(
+      <Button variant={ButtonVariants.destructive} isIconLast>
+        Delete
+      </Button>,
+    );
+    const buttonElement = screen.getByText('Delete');
+    expect(buttonElement).toHaveClass(`${px}-button--destructive`);
+  });
+
   it('renders with default default size (no size class)', () => {
     render(<Button>Default Size</Button>);
     const buttonElement = screen.getByText('Default Size');
