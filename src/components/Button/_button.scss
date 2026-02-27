@@ -131,7 +131,7 @@ $destructive-hover-disabled: color.adjust($warning-default, $alpha: -0.5);
     background-color: $pure-white;
     border: 2px solid $pure-black;
     color: $pure-black;
-    transition: box-shadow 0.25s;
+    transition: border 0.3s ease-out;
     z-index: 0;
 
     &::before {
@@ -143,7 +143,7 @@ $destructive-hover-disabled: color.adjust($warning-default, $alpha: -0.5);
       left: 50%;
       position: absolute;
       top: 50%;
-      transition: all 0.25s ease-out;
+      transition: all 0.25s ease;
       width: 0;
       z-index: -2;
     }
@@ -163,6 +163,8 @@ $destructive-hover-disabled: color.adjust($warning-default, $alpha: -0.5);
   }
 
   &--secondary {
+    transition: box-shadow 0.25s;
+
     @include hoverOrActive {
       background-color: transparent;
       box-shadow: 0 0 0 1px rgba($pure-black, 1);
@@ -174,12 +176,12 @@ $destructive-hover-disabled: color.adjust($warning-default, $alpha: -0.5);
   }
 
   &--destructive {
-    background-color: $pure-white;
+    background-color: $white-100;
     border: 2px solid $warning-default;
     color: $warning-default;
 
     &:focus-visible {
-      background-color: $pure-white;
+      background-color: $white-100;
       outline-color: $warning-default;
     }
 
@@ -192,7 +194,7 @@ $destructive-hover-disabled: color.adjust($warning-default, $alpha: -0.5);
     }
 
     @include hoverOrActive {
-      background-color: $pure-white;
+      background-color: $white-100;
       border-color: $destructive-hover-disabled;
       color: $destructive-hover-disabled;
 
