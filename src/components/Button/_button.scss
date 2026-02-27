@@ -91,8 +91,7 @@
   }
 
   &:focus-visible {
-    outline: 0.5px solid $pure-white;
-    outline-offset: -4.5px;
+    @include focus-ring($border-radius: $radius-3xl);
 
     svg {
       fill: $pure-white;
@@ -103,11 +102,17 @@
     background-color: transparent;
     border: 0;
     color: $pure-black;
+    font-variation-settings: 'wght' 400;
     height: auto;
     padding: 0;
     text-decoration: underline;
+
     .#{$px}-text {
       font-variation-settings: 'wght' 400;
+    }
+
+    &:focus-visible {
+      @include focus-ring($border-radius: $radius-xs);
     }
 
     &:hover {
@@ -142,8 +147,9 @@
     }
 
     &:focus-visible {
+      @include focus-ring($border-radius: $radius-3xl);
+
       background-color: $pure-white;
-      outline-color: $soft-black;
     }
 
     svg {
@@ -194,10 +200,9 @@
     }
 
     &:focus-visible {
+      @include focus-ring($border-radius: $radius-3xl);
+
       background-color: $pure-white;
-      outline-color: $soft-black;
-      outline-offset: 4.5px;
-      padding: 0 4px;
     }
   }
 

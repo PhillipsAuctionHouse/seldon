@@ -58,6 +58,11 @@
         font-size: $body-size2;
       }
     }
+
+    // Match button focus state when the link (wrapper) is focused
+    > a:focus-visible {
+      @include focus-ring($border-radius: $radius-3xl);
+    }
   }
 }
 

@@ -40,7 +40,7 @@ $lg: #{$px}-input--lg;
 
     &:focus-visible,
     &:focus-within {
-      outline: 1px solid $pure-black;
+      @include focus-ring($border-radius: $radius-xs);
     }
 
     .#{$px}-input__wrapper__input,
@@ -81,7 +81,7 @@ $lg: #{$px}-input--lg;
     }
 
     &:focus-visible {
-      outline: 1px solid $pure-black;
+      @include focus-ring($border-radius: $radius-xs);
     }
 
     &:hover {
@@ -166,7 +166,7 @@ $lg: #{$px}-input--lg;
       box-shadow: inset 0 0 3px 3px $error-pink;
 
       &:focus-within {
-        outline: 1px solid $error-red;
+        @include focus-ring($border-radius: $radius-xs, $outline-color: $error-red);
       }
     }
 
@@ -213,6 +213,22 @@ $lg: #{$px}-input--lg;
   &.#{$px}-input--inline {
     .#{$px}-input__input {
       align-self: center;
+    }
+  }
+}
+
+.#{$px}-radio-input .#{$px}-input__input {
+  &:focus-visible {
+    outline: none;
+    position: relative;
+
+    &::before {
+      border: 2px solid $focus-default;
+      border-radius: $radius-3xl;
+      content: '';
+      inset: -6px;
+      pointer-events: none;
+      position: absolute;
     }
   }
 }

@@ -105,7 +105,7 @@ const ExitGateCard = forwardRef<HTMLDivElement, ExitGateCardProps>(
 
           {(linkLabel || Component) && linkHref ? (
             <Component href={linkHref}>
-              <Button variant={variant} className={`${baseClassName}__content-link`}>
+              <Button variant={variant} tabIndex={-1} className={`${baseClassName}__content-link`}>
                 {linkLabel}
               </Button>
             </Component>

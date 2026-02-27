@@ -140,7 +140,7 @@ describe('Tags', () => {
       await userEvent.keyboard('{Enter}');
       expect(result.current.mockState).toEqual([]);
     });
-    it('removes a single tags with tab focus and enter key', async () => {
+    it('removes a single tag with tab focus and enter key', async () => {
       const { result } = renderHook(() => useMockState(tagsListExample));
       const { mockState, setMockState } = result.current;
       render(
@@ -157,8 +157,7 @@ describe('Tags', () => {
           ))}
         </TagsList>,
       );
-      await userEvent.tab(); // tab past the main ul
-      await userEvent.keyboard('{Tab}');
+      await userEvent.tab();
       await userEvent.keyboard('{Tab}');
       await userEvent.keyboard('{Tab}');
       await userEvent.keyboard('{Tab}');

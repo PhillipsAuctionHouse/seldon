@@ -1,5 +1,17 @@
 @use '~scss/allPartials' as *;
 
+// Focus ring when the entire card acts as a link (wrapped in <a>)
+a:focus-visible > .#{$px}-sale-card {
+  @include focus-ring($border-radius: $radius-xs);
+}
+
+// Remove default browser outline from the link so only the card focus ring shows
+a:has(> .#{$px}-sale-card) {
+  &:focus {
+    outline: none;
+  }
+}
+
 .#{$px}-sale-card {
   align-items: center;
   display: flex;
