@@ -34,8 +34,18 @@
       display: none;
     }
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       opacity: 1;
+    }
+
+    &:focus-visible {
+      outline: none;
+
+      .#{$px}-carousel-arrows-next-btn__icon,
+      .#{$px}-carousel-arrows-prev-btn__icon {
+        @include focus-ring($border-radius: $radius-3xl);
+      }
     }
 
     &__icon {

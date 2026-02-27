@@ -88,7 +88,8 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Button');
     const [linkHovered, setLinkHovered] = useState(false);
 
-    if (href || variant === ButtonVariants.link) {
+    // With href: render as <a> for navigation. Link variant without href: render as <button> (keeps --link styling, focusable).
+    if (href) {
       const PreloadLinks = () => (
         <>
           <link data-testid="prefetch-link" rel="prefetch" href={href} />

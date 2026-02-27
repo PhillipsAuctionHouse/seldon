@@ -225,8 +225,8 @@ $lg: #{$px}-input--lg;
     &::before {
       border: 2px solid $focus-default;
       border-radius: $radius-3xl;
-      inset: -6px;
       content: '';
+      inset: -6px;
       pointer-events: none;
       position: absolute;
     }

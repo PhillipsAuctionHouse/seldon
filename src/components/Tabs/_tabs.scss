@@ -28,8 +28,8 @@
       &::after {
         border: 2px solid $focus-default;
         border-radius: $radius-xs;
-        inset: -4px -4px -6px;
         content: '';
+        inset: -4px -4px -6px;
         pointer-events: none;
         position: absolute;
         z-index: 1;
@@ -57,8 +57,8 @@
       &::after {
         border: 2px solid $focus-default;
         border-radius: $radius-xs;
-        inset: -6px -6px -8px;
         content: '';
+        inset: -6px -6px -8px;
         pointer-events: none;
         position: absolute;
         z-index: 1;

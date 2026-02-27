@@ -102,15 +102,17 @@
     background-color: transparent;
     border: 0;
     color: $pure-black;
+    font-variation-settings: 'wght' 400;
     height: auto;
     padding: 0;
     text-decoration: underline;
+
     .#{$px}-text {
       font-variation-settings: 'wght' 400;
     }
 
     &:focus-visible {
-      @include focus-ring($border-radius: $radius-3xl);
+      @include focus-ring($border-radius: $radius-xs);
     }
 
     &:hover {
@@ -201,7 +203,6 @@
       @include focus-ring($border-radius: $radius-3xl);
 
       background-color: $pure-white;
-      padding: 0 4px;
     }
   }
 
