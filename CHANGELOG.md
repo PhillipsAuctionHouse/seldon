@@ -1,3 +1,17 @@
+# [1.240.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.239.0...v1.240.0) (2026-02-24)
+
+
+### Features
+
+* **Composed Modal:** L3-10837 add min-widths to ComposedModal ([#784](https://github.com/PhillipsAuctionHouse/seldon/issues/784)) ([e865527](https://github.com/PhillipsAuctionHouse/seldon/commit/e865527bc6eb071fe3838fb4d052a1866b8bf56e))
+
+# [1.239.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.238.0...v1.239.0) (2026-02-23)
+
+
+### Features
+
+* **filter:** L3-7878 Update border to 2px ([#813](https://github.com/PhillipsAuctionHouse/seldon/issues/813)) ([2ad6ec2](https://github.com/PhillipsAuctionHouse/seldon/commit/2ad6ec29426a3ee635deba0d86b70fe288c9d80e))
+
 # [1.238.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.237.0...v1.238.0) (2026-02-19)
 
 
