@@ -182,7 +182,9 @@ $destructive-hover-disabled: color.adjust($warning-default, $alpha: -0.5);
 
     &:focus-visible {
       background-color: $white-100;
-      outline-color: $warning-default;
+      outline: 2px solid $warning-default;
+      outline-offset: 4px;
+      border-radius: $radius-3xl;
     }
 
     svg {
