@@ -187,6 +187,12 @@ $destructive-hover-disabled: color.adjust($warning-default, $alpha: -0.5);
       border-radius: $radius-3xl;
     }
 
+    // Spinner inside destructive button uses the same red
+    .#{$px}-loader {
+      border-color: $warning-default;
+      border-bottom-color: transparent;
+    }
+
     svg {
       fill: $warning-default;
 
