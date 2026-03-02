@@ -1,3 +1,10 @@
+# [1.240.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.239.0...v1.240.0) (2026-02-24)
+
+
+### Features
+
+* **Composed Modal:** L3-10837 add min-widths to ComposedModal ([#784](https://github.com/PhillipsAuctionHouse/seldon/issues/784)) ([e865527](https://github.com/PhillipsAuctionHouse/seldon/commit/e865527bc6eb071fe3838fb4d052a1866b8bf56e))
+
 # [1.239.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.238.0...v1.239.0) (2026-02-23)
 
 
