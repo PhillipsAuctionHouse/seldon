@@ -99,6 +99,10 @@ a:has(> .#{$px}-sale-card) {
     }
   }
 
+  &__modal-link .#{$px}-button {
+    @include text($linkSmall);
+  }
+
   &__badge {
     border: 1px solid $badge-blue;
     color: $badge-blue;
