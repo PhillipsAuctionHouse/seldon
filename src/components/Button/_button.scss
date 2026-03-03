@@ -182,9 +182,9 @@ $destructive-hover-disabled: color.adjust($warning-default, $alpha: -0.5);
 
     &:focus-visible {
       background-color: $white-100;
+      border-radius: $radius-3xl;
       outline: 2px solid $warning-default;
       outline-offset: 4px;
-      border-radius: $radius-3xl;
     }
 
     // Spinner inside destructive button uses the same red
