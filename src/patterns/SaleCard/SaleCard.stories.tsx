@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';
 import { px } from '../../utils';

@@ -1,4 +1,4 @@
-@use '#scss/allPartials' as *;
+@use '~scss/allPartials' as *;
 
 .#{$px}-article {
   border-bottom: 1px solid $pure-black;

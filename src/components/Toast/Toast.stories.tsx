@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import Toast from './Toast';
 import Button from '../Button/Button';
 import { useToast } from './useToast';

@@ -118,6 +118,22 @@ describe('useMobileMenu', () => {
   });
 });
 
+describe('Header ref forwarding', () => {
+  it('calls callback ref with header element when ref is a function', () => {
+    const refCallback = vitest.fn();
+    render(<Header logo={<Icon icon="PhillipsLogo" />} ref={refCallback} />);
+    expect(refCallback).toHaveBeenCalledWith(expect.anything());
+    expect(refCallback.mock.calls[0][0]?.tagName).toBe('HEADER');
+  });
+
+  it('assigns header element to ref.current when ref is an object', () => {
+    const refObj = { current: null as HTMLElement | null };
+    render(<Header logo={<Icon icon="PhillipsLogo" />} ref={refObj} />);
+    expect(refObj.current).not.toBeNull();
+    expect(refObj.current?.tagName).toBe('HEADER');
+  });
+});
+
 describe('Header bannerHeight and ResizeObserver', () => {
   interface TestHeaderWithBannerProps {
     bannerContentHeight?: number;
@@ -153,5 +169,16 @@ describe('Header bannerHeight and ResizeObserver', () => {
       const style = header.style.getPropertyValue('--banner-height');
       expect(style).toBe('100px');
     });
+  });
+
+  it('uses bannerRef.current height for initial bannerHeight when ref is already set', () => {
+    const bannerRef = { current: null as HTMLDivElement | null };
+    const fakeBanner = document.createElement('div');
+    Object.defineProperty(fakeBanner, 'clientHeight', { value: 75, configurable: true });
+    (bannerRef as React.MutableRefObject<HTMLDivElement | null>).current = fakeBanner;
+
+    render(<Header logo={<Icon icon="PhillipsLogo" />} bannerRef={bannerRef} />);
+    const header = screen.getByRole('banner');
+    expect(header.style.getPropertyValue('--banner-height')).toBe('75px');
   });
 });

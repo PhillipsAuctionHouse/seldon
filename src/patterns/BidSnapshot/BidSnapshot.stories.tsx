@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import { addMinutes } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 

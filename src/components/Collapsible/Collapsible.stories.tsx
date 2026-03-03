@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from './';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';

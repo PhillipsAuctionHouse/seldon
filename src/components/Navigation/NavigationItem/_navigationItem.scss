@@ -1,4 +1,4 @@
-@use '#scss/allPartials' as *;
+@use '~scss/allPartials' as *;
 
 .#{$px}-nav__item {
   .#{$px}-link:not(:hover):not(:focus-visible):not(.#{$px}-nav__item--view-all) {

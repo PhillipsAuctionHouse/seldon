@@ -1,8 +1,8 @@
 import ProgressWizard, { type ProgressWizardProps } from './ProgressWizard';
-import { type Meta } from '@storybook/react';
+import { type Meta } from '@storybook/react-vite';
 import Input from '../../components/Input/Input';
 import Select from '../../components/Select/Select';
-import { type ArgTypes } from '@storybook/react';
+import { type ArgTypes } from '@storybook/react-vite';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { LoadingState } from './types';
 import { Text, TextAlignments, TextVariants } from '../../components/Text';

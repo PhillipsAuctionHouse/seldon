@@ -114,7 +114,6 @@ describe('calendar link generation with invalid start date', () => {
   };
 
   test('generateGoogleCalendarLink logs console error', () => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const link = generateGoogleCalendarLink(event);
     expect(link).toBe('#');
@@ -124,7 +123,6 @@ describe('calendar link generation with invalid start date', () => {
   });
 
   test('generateOutlookOnlineLink logs console error', () => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const link = generateOutlookOnlineLink(event);
     expect(link).toBe('#');
@@ -134,7 +132,6 @@ describe('calendar link generation with invalid start date', () => {
   });
 
   test('generateYahooCalendarLink logs console error', () => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     const link = generateYahooCalendarLink(event);
     expect(link).toBe('#');
@@ -144,7 +141,6 @@ describe('calendar link generation with invalid start date', () => {
   });
 
   test('generateCalendarFile logs console error', () => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
     generateCalendarFile(event);
     expect(consoleErrorSpy).toHaveBeenCalledTimes(1);

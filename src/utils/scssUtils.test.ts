@@ -1,7 +1,7 @@
 import { getScssColors, getScssVar } from './scssUtils';
 
 const vars = vi.hoisted(() => '$pure-black: #000000;\n$cta-blue: #0077FF;\n$error-red: #FF0000;\n');
-vi.mock('#scss/_vars.scss?raw', () => ({ default: vars }));
+vi.mock('~scss/_vars.scss?raw', () => ({ default: vars }));
 
 describe('scssUtils', () => {
   describe('getScssVar', () => {

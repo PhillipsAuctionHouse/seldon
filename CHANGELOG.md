@@ -1,3 +1,103 @@
+# [1.240.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.239.0...v1.240.0) (2026-02-24)
+
+
+### Features
+
+* **Composed Modal:** L3-10837 add min-widths to ComposedModal ([#784](https://github.com/PhillipsAuctionHouse/seldon/issues/784)) ([e865527](https://github.com/PhillipsAuctionHouse/seldon/commit/e865527bc6eb071fe3838fb4d052a1866b8bf56e))
+
+# [1.239.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.238.0...v1.239.0) (2026-02-23)
+
+
+### Features
+
+* **filter:** L3-7878 Update border to 2px ([#813](https://github.com/PhillipsAuctionHouse/seldon/issues/813)) ([2ad6ec2](https://github.com/PhillipsAuctionHouse/seldon/commit/2ad6ec29426a3ee635deba0d86b70fe288c9d80e))
+
+# [1.238.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.237.0...v1.238.0) (2026-02-19)
+
+
+### Features
+
+* **buttons:** L3-11299 L3-11476 Design System [RW] - Introduce small button component to Seldon, Remove ghost button variant ([#792](https://github.com/PhillipsAuctionHouse/seldon/issues/792)) ([dda9c0d](https://github.com/PhillipsAuctionHouse/seldon/commit/dda9c0df2f8e442ec07bd271f2c58f120b5a4c87))
+* **text-symbol:** L3-11066 Text Symbol Emoji Fix ([#806](https://github.com/PhillipsAuctionHouse/seldon/issues/806)) ([4ed7d68](https://github.com/PhillipsAuctionHouse/seldon/commit/4ed7d68f2f5c68dfc6abfa850591b496169c91e2))
+
+# [1.237.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.236.0...v1.237.0) (2026-02-12)
+
+
+### Features
+
+* **buttonLinks:** L3-11125 Design System [RW]: Seldon - Link Buttons of Primary/Secondary need to bold the text ([#802](https://github.com/PhillipsAuctionHouse/seldon/issues/802)) ([5ea5aa1](https://github.com/PhillipsAuctionHouse/seldon/commit/5ea5aa10d708dfabc370e71c4ca7e5051239aa8a))
+
+# [1.236.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.235.2...v1.236.0) (2026-02-12)
+
+
+### Features
+
+* **saleCard:** L3-10829 Update label size across lot tiles and sale cards, fix sale card badge sizing ([#805](https://github.com/PhillipsAuctionHouse/seldon/issues/805)) ([fddf5d4](https://github.com/PhillipsAuctionHouse/seldon/commit/fddf5d49c755f7c431290762725235069d4e0920))
+
+## [1.235.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.235.1...v1.235.2) (2026-02-11)
+
+
+### Bug Fixes
+
+* **detaillist:** L3-11707 fix detail list item spacing ([#804](https://github.com/PhillipsAuctionHouse/seldon/issues/804)) ([0d2e606](https://github.com/PhillipsAuctionHouse/seldon/commit/0d2e606d592544b85b442f3a3b9833d0c46550f9))
+
+## [1.235.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.235.0...v1.235.1) (2026-02-10)
+
+
+### Bug Fixes
+
+* **detaillist/text:** L3-10789 improve semantic HTML to remove accessibility violations with `<dl` and `<label` ([#771](https://github.com/PhillipsAuctionHouse/seldon/issues/771)) ([689e11b](https://github.com/PhillipsAuctionHouse/seldon/commit/689e11b3877f6ec20e6837ab14150bc183ae1443))
+
+# [1.235.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.234.1...v1.235.0) (2026-02-10)
+
+
+### Features
+
+* **comboBox:** L3-11215 RW |  Close button in birth year field disappears when hovering mouse pointer ([#791](https://github.com/PhillipsAuctionHouse/seldon/issues/791)) ([95fadb5](https://github.com/PhillipsAuctionHouse/seldon/commit/95fadb5d1476154c818be222ecedf32fa952fa5d))
+
+## [1.234.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.234.0...v1.234.1) (2026-02-09)
+
+
+### Bug Fixes
+
+* **publish:** L3-0000 continuing setting up OIDC trusted publishing ([#801](https://github.com/PhillipsAuctionHouse/seldon/issues/801)) ([d82f9ad](https://github.com/PhillipsAuctionHouse/seldon/commit/d82f9ad0c37946577d4788ac6df47222be6fcfe1))
+* **release:** L3-0000 update trusted publishing ([#800](https://github.com/PhillipsAuctionHouse/seldon/issues/800)) ([fa7e092](https://github.com/PhillipsAuctionHouse/seldon/commit/fa7e092e62fb56f8c6937e1241f075a4ed95ff76))
+
+# [1.234.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.233.0...v1.234.0) (2026-02-09)
+
+
+### Features
+
+* **typeTokens:** L3-10719 Create a small and medium semantic text token for badges ([#795](https://github.com/PhillipsAuctionHouse/seldon/issues/795)) ([3df1cc4](https://github.com/PhillipsAuctionHouse/seldon/commit/3df1cc46c841e7df4422837bb7217dcdd4818842))
+
+# [1.233.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.232.1...v1.233.0) (2026-02-09)
+
+
+### Features
+
+* **_detail:** L3-11615 removed hardcoded values ([#797](https://github.com/PhillipsAuctionHouse/seldon/issues/797)) ([77467f0](https://github.com/PhillipsAuctionHouse/seldon/commit/77467f089880d49e9e643a8340ac02a307005d87))
+
+## [1.232.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.232.0...v1.232.1) (2026-01-12)
+
+
+### Bug Fixes
+
+* **Select:** L3-11351 select value should be black not blue on iOS ([#790](https://github.com/PhillipsAuctionHouse/seldon/issues/790)) ([c1c27aa](https://github.com/PhillipsAuctionHouse/seldon/commit/c1c27aa4aca429c40eedf26e5d05d2790c1cc1a8))
+
+# [1.232.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.231.0...v1.232.0) (2026-01-09)
+
+
+### Features
+
+* **countryPicker:** L3-11083 Client Portal | Mobile Web - Close button on Country Code input modal is not completely visible ([#783](https://github.com/PhillipsAuctionHouse/seldon/issues/783)) ([4f0072e](https://github.com/PhillipsAuctionHouse/seldon/commit/4f0072e20aff0707740a3dc4174ab9a96eb76a90))
+
+# [1.231.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.230.1...v1.231.0) (2026-01-05)
+
+
+### Features
+
+* **Icon:** L3-11171 Add IconOrangeCircle to Seldon ([#787](https://github.com/PhillipsAuctionHouse/seldon/issues/787)) ([54fba5b](https://github.com/PhillipsAuctionHouse/seldon/commit/54fba5b14e3d2dd61454bc857bd3c908fd1eeb48))
+
 ## [1.230.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.230.0...v1.230.1) (2025-12-15)
 
 

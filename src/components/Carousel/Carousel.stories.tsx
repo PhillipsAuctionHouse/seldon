@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import Carousel, { CarouselProps } from './Carousel';
 import CarouselContent from './CarouselContent';
 import CarouselItem from './CarouselItem';

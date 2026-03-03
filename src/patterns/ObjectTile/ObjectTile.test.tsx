@@ -69,4 +69,20 @@ describe('ObjectTile', () => {
     );
     expect(screen.getByText('Estimate on request')).toBeInTheDocument();
   });
+
+  it('renders custom BadgeElement when provided', () => {
+    const BadgeEl = () => <span data-testid="custom-badge">Custom Badge</span>;
+    render(<ObjectTile imageUrl="https://via.placeholder.com/150" lotNumber="123" badgeElement={BadgeEl} />);
+    expect(screen.getByTestId('custom-badge')).toHaveTextContent('Custom Badge');
+  });
+
+  it('renders custom FavoriteElement when provided', () => {
+    const FavEl = () => (
+      <button data-testid="custom-favorite" type="button">
+        Favorite
+      </button>
+    );
+    render(<ObjectTile imageUrl="https://via.placeholder.com/150" lotNumber="123" favoriteElement={FavEl} />);
+    expect(screen.getByTestId('custom-favorite')).toBeInTheDocument();
+  });
 });

@@ -1,5 +1,5 @@
 /* stylelint-disable selector-class-pattern */
-@use '#scss/allPartials' as *;
+@use '~scss/allPartials' as *;
 @import 'flatpickr/dist/flatpickr.css';
 
 .#{$px}-date-picker {
@@ -65,11 +65,11 @@
   .flatpickr-current-month.flatpickr-current-month {
     @include text($labelLarge);
 
+    padding: 0.65rem 0 0;
+
     .cur-year {
       @include text($labelLarge);
     }
-
-    padding: 0.65rem 0 0;
   }
 
   .flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n + 1)),

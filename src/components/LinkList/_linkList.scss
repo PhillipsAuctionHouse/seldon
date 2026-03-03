@@ -1,4 +1,4 @@
-@use '#scss/allPartials' as *;
+@use '~scss/allPartials' as *;
 
 .#{$px}-link-list {
   @include media($size-sm, $type: max) {

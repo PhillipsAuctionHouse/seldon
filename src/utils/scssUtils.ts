@@ -1,4 +1,4 @@
-import vars from '#scss/_vars.scss?raw';
+import vars from '~scss/_vars.scss?raw';
 
 export const getScssVarsMap = () => {
   const parsedVars = vars.split('\n').map((_var) => {

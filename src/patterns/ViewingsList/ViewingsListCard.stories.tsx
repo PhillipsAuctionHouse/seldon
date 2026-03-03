@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import ViewingsListCard, { ViewingsListCardProps } from './ViewingsListCard';
 import { px } from '../../utils';
 

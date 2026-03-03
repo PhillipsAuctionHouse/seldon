@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 
 import Navigation from './Navigation';
 import NavigationItemTrigger from './NavigationItemTrigger/NavigationItemTrigger';

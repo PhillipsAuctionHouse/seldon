@@ -1,4 +1,4 @@
-@use '#scss/allPartials' as *;
+@use '~scss/allPartials' as *;
 
 .#{$px}-select-input {
   margin-bottom: $spacing-sm;
@@ -14,6 +14,7 @@
     &--show__icon {
       select {
         appearance: none;
+        color: $black-100;
         padding-right: 3rem;
 
         @media (min-width: $breakpoint-md) {

@@ -91,16 +91,16 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
             {titleText}
           </Text>
           {badgeText && (
-            <Text variant={TextVariants.labelSmall} className={`${baseClassName}__badge`}>
+            <Text variant={TextVariants.badgeSmall} className={`${baseClassName}__badge`}>
               {badgeText}
             </Text>
           )}
           <div className={`${baseClassName}__info`}>
-            <Text variant={TextVariants.labelMedium}>{location}</Text>
-            <Text variant={TextVariants.labelMedium}>{date}</Text>
+            <Text variant={TextVariants.labelSmall}>{location}</Text>
+            <Text variant={TextVariants.labelSmall}>{date}</Text>
             {modalButtonText && modalButtonOnClick && (
               <div className={`${baseClassName}__modal-link`}>
-                <Button onClick={modalButtonOnClick} variant={ButtonVariants.link}>
+                <Button onClick={modalButtonOnClick} variant={ButtonVariants.link} linkSize="sm">
                   {modalButtonText}
                 </Button>
               </div>

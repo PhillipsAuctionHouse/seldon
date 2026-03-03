@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import Dropdown, { DropdownProps } from './Dropdown';
 import { useMemo } from 'react';
 import { SupportedLanguages } from '../../types/commonTypes';

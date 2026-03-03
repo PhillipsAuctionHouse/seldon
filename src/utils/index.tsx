@@ -34,7 +34,6 @@ export enum SpacingTokens {
   xxl = 'xxl',
 }
 
-/* eslint-disable @typescript-eslint/no-empty-function */
 export const noOp = () => {};
 
 export interface InputProps {

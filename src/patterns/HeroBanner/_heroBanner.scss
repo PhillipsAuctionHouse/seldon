@@ -1,4 +1,4 @@
-@use '#scss/allPartials' as *;
+@use '~scss/allPartials' as *;
 
 body:has(.seldon-header__toggle-btn--open) {
   // targeting this button cause header itself has closed state only

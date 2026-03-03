@@ -22,6 +22,11 @@ describe('SaleHeaderBanner', () => {
     expect(screen.getByText('Sample Auction')).toBeInTheDocument();
   });
 
+  it('renders badgeText when provided', () => {
+    render(<SaleHeaderBanner {...defaultProps} badgeText="Live" />);
+    expect(screen.getByText('Live')).toBeInTheDocument();
+  });
+
   it('renders the location', () => {
     render(<SaleHeaderBanner {...defaultProps} />);
     expect(screen.getByText('New York')).toBeInTheDocument();

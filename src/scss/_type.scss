@@ -326,6 +326,14 @@
     @include label-styles($font-size: $font-size-label-small);
   }
 
+  @if $token == $badgeSmall {
+    @include label-styles($font-size: $font-size-badge-small);
+  }
+
+  @if $token == $badgeMedium {
+    @include label-styles($font-size: $font-size-badge-medium);
+  }
+
   @if $token == $linkStylised {
     @include link-styles($font-size: $font-size-link-stylised, $text-transform: uppercase, $text-decoration: unset);
     @include DistinctDisplay;

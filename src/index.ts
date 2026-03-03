@@ -13,7 +13,7 @@ export * from './types/commonTypes';
 
 // ⚛️ Components
 export { default as Button, type ButtonProps } from './components/Button/Button';
-export { ButtonVariants } from './components/Button/types';
+export { ButtonVariants, ButtonSizes } from './components/Button/types';
 export { default as IconButton } from './components/IconButton/IconButton';
 // export { default as DatePicker, type DatePickerProps } from './components/DatePicker/DatePicker';
 export * from './components/Accordion';
@@ -66,7 +66,6 @@ export { Tag, default as TagsList, type TagProps, type TagsListProps } from './c
 export * from './components/Text';
 export * from './components/TextSymbol';
 export { default as Video, type VideoProps } from './components/Video/Video';
-export * from './patterns/DetailList';
 export * from './patterns/FavoritesCollectionTile';
 export { default as HeroBanner, type HeroBannerProps } from './patterns/HeroBanner/HeroBanner';
 export { default as TextBanner, type TextBannerProps } from './patterns/TextBanner/TextBanner';
@@ -88,13 +87,13 @@ export * from './components/Carousel';
 export * from './components/ComboBox';
 export * from './components/ComposedModal';
 export * from './components/Detail';
+export * from './components/DetailList';
 export * from './components/ExitGateCard';
 export * from './components/Loader';
 export { default as PageContentWrapper } from './components/PageContentWrapper/PageContentWrapper';
 export * from './components/PinchZoom';
 export * from './components/SeldonImage';
 export * from './components/Tabs';
-export * from './patterns/DetailList';
 export * from './patterns/FiltersInline';
 export * from './patterns/SaleCard';
 export * from './patterns/SaleHeaderBanner';

@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import { ComponentProps } from 'react';
 import { px } from '../../utils';
 import FavoritesCollectionTile from './FavoritesCollectionTile';

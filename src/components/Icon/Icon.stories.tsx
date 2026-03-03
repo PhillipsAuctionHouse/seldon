@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import Icon, { IconName, IconProps } from './Icon';
 import * as iconComponents from '../../assets/formatted';
 import { getScssColors } from '../../utils/scssUtils';

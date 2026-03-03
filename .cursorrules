@@ -33,7 +33,7 @@ const ComponentName = ({
 
 CSS:
 - We use the BEM naming convention for CSS classes.  
-- In the SCSS files generated always import the partials from the @use '#scss/allPartials' as *;;
+- In the SCSS files generated always import the partials from the @use '~scss/allPartials' as *;
 - Make sure to prefix all the class names with
 the .#{$px} prefix like .#{$px}-lot-cataloging-section
 - In SCSS use the @use with a global scope rather than @import.  

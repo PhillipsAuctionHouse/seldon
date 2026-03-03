@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: read # for checkout
+  id-token: write # to enable use of OIDC for npm trusted publishing
 
 env:
   HUSKY: 0
@@ -32,6 +33,9 @@ jobs:
           cache: 'npm'
           node-version-file: '.nvmrc'
 
+      - name: Upgrade npm (for trusted publishing, requires 11.5.1+)
+        run: npm install -g npm@latest
+
       - name: Install dependencies
         run: npm ci
 
@@ -44,5 +48,4 @@ jobs:
       - name: publish
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release

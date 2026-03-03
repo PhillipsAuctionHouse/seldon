@@ -36,6 +36,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           buildScriptName: 'build:storybook'
           autoAcceptChanges: 'main'
+          onlyChanged: true
 
       - name: Find existing Storybook preview comment
         if: ${{ github.event_name == 'pull_request' }}

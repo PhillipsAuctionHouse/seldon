@@ -159,4 +159,17 @@ describe('FilterMenu', () => {
     const button = await screen.findByText(VIEW_ALL_BUTTON_TEXT);
     expect(button).toBeInTheDocument();
   });
+
+  it('renders non-Filter children without cloning', () => {
+    render(
+      <FilterMenu>
+        <div data-testid="sibling-element">Sibling content</div>
+        <Filter name="only">
+          <FilterHeader heading="Only Filter" />
+          <FilterInput type="checkbox" onChange={handleChange} id="x" labelText="X" name="x" checked={false} />
+        </Filter>
+      </FilterMenu>,
+    );
+    expect(screen.getByTestId('sibling-element')).toHaveTextContent('Sibling content');
+  });
 });

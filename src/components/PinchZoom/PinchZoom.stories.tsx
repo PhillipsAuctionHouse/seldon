@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import PinchZoom, { PinchZoomProps } from './PinchZoom';
 import { Carousel, CarouselContent, CarouselDots, CarouselItem } from '../Carousel';
 import { SpacingTokens } from '../../utils';

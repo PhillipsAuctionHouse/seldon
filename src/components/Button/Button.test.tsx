@@ -3,7 +3,7 @@ import { px } from '../../utils';
 
 import Button from './Button';
 import { runCommonTests } from '../../utils/testUtils';
-import { ButtonVariants } from './types';
+import { ButtonVariants, ButtonSizes } from './types';
 
 describe('Button', () => {
   runCommonTests(Button, 'Button');
@@ -30,6 +30,29 @@ describe('Button', () => {
     expect(buttonElement).toHaveClass(`${px}-button`);
     expect(buttonElement).toHaveClass(`${px}-button--secondary`);
     expect(buttonElement).toHaveClass(`${px}-button--icon-last`);
+  });
+
+  it('renders with default default size (no size class)', () => {
+    render(<Button>Default Size</Button>);
+    const buttonElement = screen.getByText('Default Size');
+    expect(buttonElement).toHaveClass(`${px}-button`);
+    expect(buttonElement).not.toHaveClass(`${px}-button--small`);
+    expect(buttonElement).not.toHaveClass(`${px}-button--medium`);
+  });
+
+  it('renders with small size class', () => {
+    render(<Button size={ButtonSizes.small}>Small Button</Button>);
+    const buttonElement = screen.getByText('Small Button');
+    expect(buttonElement).toHaveClass(`${px}-button`);
+    expect(buttonElement).toHaveClass(`${px}-button--small`);
+  });
+
+  it('renders with explicit default size (no size class)', () => {
+    render(<Button size={ButtonSizes.default}>Medium Button</Button>);
+    const buttonElement = screen.getByText('Medium Button');
+    expect(buttonElement).toHaveClass(`${px}-button`);
+    expect(buttonElement).not.toHaveClass(`${px}-button--small`);
+    expect(buttonElement).not.toHaveClass(`${px}-button--medium`);
   });
   it('should render as an anchor tag if href is passed', () => {
     render(<Button href="https://example.com">Link</Button>);

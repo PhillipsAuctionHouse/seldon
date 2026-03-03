@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react/*';
+import type { Meta } from '@storybook/react-vite';
 import { useState } from 'react';
 import Button from '../../components/Button/Button';
 import { ButtonVariants } from '../../components/Button/types';

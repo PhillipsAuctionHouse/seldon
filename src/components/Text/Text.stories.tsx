@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import Text, { TextProps } from './Text';
 import { TextAlignments, TextVariants } from './types';
 import { TextSymbolVariants } from '../TextSymbol/types';

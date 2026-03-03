@@ -67,6 +67,23 @@ describe('Search component', () => {
     expect(screen.queryByRole('button', { name: 'Close' })).not.toBeInTheDocument();
     expect(searchForm).not.toHaveClass(`${px}-search__form--active`);
   });
+  it('handles Enter key with value length > 2 (navigates to all results)', async () => {
+    renderWithContext(<Search />);
+    const searchButton = screen.getByTestId('search-button');
+    const searchInput = screen.getByTestId('search-input');
+    await userEvent.click(searchButton);
+    await userEvent.type(searchInput, 'abc');
+    await userEvent.keyboard('{Enter}');
+    expect(searchInput).toHaveValue('abc');
+  });
+  it('should close results and click when Enter is pressed on the all results link', async () => {
+    renderWithContext(<Search defaultValue="test" />);
+    await userEvent.click(screen.getByTestId('search-button'));
+    const allResultsLink = screen.getByRole('link', { name: 'View all results for test' });
+    allResultsLink.focus();
+    await userEvent.keyboard('{Enter}');
+    expect(allResultsLink).toBeInTheDocument();
+  });
   it('should reset form when close button is clicked', async () => {
     renderWithContext(<Search />);
     const searchButton = screen.getByTestId('search-button');

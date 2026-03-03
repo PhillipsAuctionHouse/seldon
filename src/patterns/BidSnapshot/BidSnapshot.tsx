@@ -1,7 +1,7 @@
 import { ComponentProps, cloneElement, forwardRef, isValidElement } from 'react';
 import classnames from 'classnames';
 import { findChildrenExcludingTypes, findChildrenOfType, getCommonProps } from '../../utils';
-import { DetailList, DetailListProps } from '../DetailList/index';
+import { DetailList, DetailListProps } from '../../components/DetailList/index';
 import { Detail, DetailVariants } from '../../components/Detail/index';
 import { LotStatus, SupportedLanguages } from '../../types/commonTypes';
 import { Countdown } from '../../components/Countdown/index';

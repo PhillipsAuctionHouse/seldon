@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import IconButton from './IconButton';
 import { ButtonVariants } from '../Button/types';
 import Icon from '../Icon/Icon';

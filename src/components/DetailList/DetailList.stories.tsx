@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import { Detail, DetailVariants } from '../../components/Detail';
 import DetailList, { DetailListProps } from './DetailList';
 import { DetailListAlignment } from './types';
@@ -10,7 +10,7 @@ interface WrapperProps {
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
-  title: 'Patterns/DetailList',
+  title: 'Components/DetailList',
   component: DetailList,
 } satisfies Meta<typeof DetailList>;
 

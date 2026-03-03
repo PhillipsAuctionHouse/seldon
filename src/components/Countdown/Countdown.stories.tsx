@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import Countdown, { CountdownProps } from './Countdown';
 import { addDays, addHours, addMinutes, addSeconds } from 'date-fns';
 import { CountdownVariants } from './types';

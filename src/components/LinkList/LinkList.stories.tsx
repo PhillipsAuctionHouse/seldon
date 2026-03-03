@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import LinkList, { LinkListProps } from './LinkList';
 import LinkBlock, { LinkBlockProps } from '../LinkBlock/LinkBlock';
 

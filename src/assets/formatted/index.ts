@@ -50,6 +50,7 @@ export { default as Home } from './Home';
 export { default as IconGreenCircle } from './IconGreenCircle';
 export { default as IconBlueCircle } from './IconBlueCircle';
 export { default as IconRedCircle } from './IconRedCircle';
+export { default as IconOrangeCircle } from './IconOrangeCircle';
 export { default as Icon } from './Icon';
 export { default as ImageUnavailable } from './ImageUnavailable';
 export { default as Instagram } from './Instagram';

@@ -1,5 +1,5 @@
 /* eslint-disable local-rules/no-deprecated-link-variants */
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 
 import Link, { LinkProps } from './Link';
 import { LinkVariants } from './types';

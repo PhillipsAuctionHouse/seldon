@@ -5,6 +5,7 @@ import { LotStatus } from '../../types/commonTypes';
 import { BidStatusEnum } from './types';
 import BidMessage from './BidMessage';
 import { addDays, addMinutes, subHours } from 'date-fns';
+import { DetailVariants } from '../../components/Detail';
 
 const saleCloseDate = addMinutes(new Date(), 50);
 
@@ -51,6 +52,21 @@ describe('BidSnapshot', () => {
     expect(screen.getByText('Won for')).toBeInTheDocument();
     expect(screen.getByText('$300')).toBeInTheDocument();
     expect(screen.getByText('You won')).toBeInTheDocument();
+  });
+
+  it('renders with variant lg and passes labelMedium to BidMessage', () => {
+    render(
+      <BidSnapshot
+        startingBid={100}
+        lotStatus={LotStatus.past}
+        bidStatus={BidStatusEnum.Won}
+        soldPrice={100}
+        variant={DetailVariants.lg}
+      >
+        <BidMessage message="Custom message" />
+      </BidSnapshot>,
+    );
+    expect(screen.getByText('Custom message')).toBeInTheDocument();
   });
 
   it('does not render bid message if user has not bid', () => {

@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import GridItem, { type GridItemProps } from './GridItem';
 import Grid from '../Grid/Grid';
 import { GridItemAlign } from './types';

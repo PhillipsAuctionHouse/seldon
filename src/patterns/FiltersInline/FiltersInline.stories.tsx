@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/react';
+import { Meta } from '@storybook/react-vite';
 import { useState } from 'react';
 import { SaleCard } from '../SaleCard';
 import FiltersInline from './FiltersInline';
@@ -104,7 +104,8 @@ export const Playground = (props: FilterDropdownMenuProps) => {
       rule = newFilterRules.get(filterId) || new Set<string>();
     }
 
-    checked ? rule.add(name) : rule.delete(name);
+    if (checked) rule.add(name);
+    else rule.delete(name);
     newFilterRules.set(filterId, rule);
     setFilterRules(newFilterRules);
     return newFilterRules;

@@ -1,4 +1,4 @@
-@import '#scss/allPartials';
+@use '~scss/allPartials' as *;
 
 .story-icon-flex-wrapper {
   box-shadow: 0 0 8px 0 rgba($pure-black, 0.2);
