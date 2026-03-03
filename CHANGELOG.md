@@ -1,3 +1,10 @@
+## [1.240.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.240.0...v1.240.1) (2026-03-03)
+
+
+### Bug Fixes
+
+* **ComposedModal:** L3-10837 fix button alignment in ComposedModal ([#817](https://github.com/PhillipsAuctionHouse/seldon/issues/817)) ([fd51f01](https://github.com/PhillipsAuctionHouse/seldon/commit/fd51f0135d00f7c27c93087a0d11a270b88f8298))
+
 # [1.240.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.239.0...v1.240.0) (2026-02-24)
 
 
