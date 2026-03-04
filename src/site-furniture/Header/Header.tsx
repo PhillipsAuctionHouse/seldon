@@ -196,15 +196,13 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
           >
             <span /> {/** this is here so we can do transitions with pseudo icons */}
           </button>
-          <h1 data-testid="header-logo" className={`${px}-header__logo`}>
-            <a href={logoHref} aria-label={logoText}>
-              {typeof logo === 'object' ? (
-                logo
-              ) : (
-                <img alt="Phillips" data-testid="header-logo-img" src={logo as string} />
-              )}
-            </a>
-          </h1>
+          <a href={logoHref} aria-label={logoText} data-testid="header-logo" className={`${px}-header__logo`}>
+            {typeof logo === 'object' ? (
+              logo
+            ) : (
+              <img alt="Phillips" data-testid="header-logo-img" src={logo as string} />
+            )}
+          </a>
           {userManagementElement}
         </div>
         <div className={classnames(`${px}-header__nav`, { [`${px}-header__nav--closed`]: !isMenuOpen })}>

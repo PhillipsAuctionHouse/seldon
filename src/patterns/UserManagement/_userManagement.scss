@@ -26,13 +26,17 @@
     display: flex;
     gap: 0 $spacing-xsm;
     justify-content: center;
+    margin-bottom: $padding-xsm;
     padding: 0;
-    padding-bottom: $padding-xsm;
 
     &:disabled {
       cursor: default;
       opacity: 0.5;
       pointer-events: none;
+    }
+
+    &:focus-visible {
+      @include focus-ring($border-radius: $radius-xs);
     }
 
     &:hover:not(:disabled) {

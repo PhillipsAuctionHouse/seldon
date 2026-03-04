@@ -108,6 +108,10 @@
     &.#{$px}-link {
       text-transform: none;
     }
+
+    &:focus-visible {
+      @include focus-ring;
+    }
   }
 
   &__media-container {
@@ -129,6 +133,10 @@
     cursor: pointer;
     display: block;
     position: relative;
+
+    &:focus-visible {
+      @include focus-ring;
+    }
 
     &--bg {
       background-color: $soft-gray;
@@ -186,7 +194,7 @@
     width: 100%;
 
     &:focus-visible {
-      outline: 1px solid $pure-black;
+      @include focus-ring;
     }
   }
 }
