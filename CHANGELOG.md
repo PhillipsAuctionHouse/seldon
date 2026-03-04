@@ -1,3 +1,10 @@
+# [1.242.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.241.0...v1.242.0) (2026-03-04)
+
+
+### Features
+
+* **focusStates:** L3-7525 Design System [RW]: Update keyboard focus state across all components ([#796](https://github.com/PhillipsAuctionHouse/seldon/issues/796)) ([388b56f](https://github.com/PhillipsAuctionHouse/seldon/commit/388b56f8e56742f9fc8e22988cef7541db974287))
+
 # [1.241.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.240.1...v1.241.0) (2026-03-04)
 
 
