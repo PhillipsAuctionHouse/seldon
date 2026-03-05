@@ -30,7 +30,7 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
     const childNavList = findChildrenOfType<NavigationListProps>(children, NavigationList)?.[0];
     const otherChildren = findChildrenExcludingTypes(children, [NavigationList, LanguageSelector]); // Includes the Search component, needed to do exclusion rather than inclusion so we could support StatefulSearch in our stories
     const languageSelectorElement = findChildrenOfType<LanguageSelectorProps>(children, LanguageSelector)?.[0];
-    const openSubmenuValue = activeSubmenuId ?? undefined;
+    const openSubmenuValue = activeSubmenuId ?? '';
 
     return (
       <nav
@@ -67,7 +67,7 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
                   delayDuration={0}
                   skipDelayDuration={300}
                   value={openSubmenuValue}
-                  onValueChange={(value) => setActiveSubmenuId(value ?? null)}
+                  onValueChange={(value) => setActiveSubmenuId(value === '' ? null : value)}
                 >
                   {React.cloneElement<NavigationListProps>(childNavList, {
                     isOffScreen: isSearchExpanded,

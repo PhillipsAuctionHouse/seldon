@@ -12,7 +12,7 @@ interface SearchProps extends React.HTMLAttributes<SVGSVGElement> {
 const Search = memo(
   forwardRef<SVGSVGElement, SearchProps>((props, ref) => {
     const { color, height, width, title, titleId: propsTitleId } = props;
-    const titleId = propsTitleId || kebabCase(title || '');
+    const titleId = title ? propsTitleId || kebabCase(title) : undefined;
 
     return (
       <svg
@@ -21,12 +21,13 @@ const Search = memo(
         viewBox="0 0 24 24"
         height={height}
         width={width}
-        role="img"
         ref={ref}
-        aria-labelledby={titleId}
+        {...(titleId
+          ? { role: 'img' as const, 'aria-labelledby': titleId }
+          : { 'aria-hidden': true })}
         {...props}
       >
-        {title ? <title id={titleId}>{title}</title> : null}
+        {title && titleId ? <title id={titleId}>{title}</title> : null}
         <path
           fill={color}
           fillRule="evenodd"

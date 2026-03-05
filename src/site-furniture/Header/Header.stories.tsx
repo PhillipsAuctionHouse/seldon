@@ -285,19 +285,24 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
         <LanguageSelector onLanguageChange={setCurrentLanguage} currentLanguage={currentLanguage} />
         <UserManagement authState={authState} onLogin={() => console.log('login')} href="/account" />
       </Header>
-      <select>
-        <option value="en">English</option>
-        <option value="de">German</option>
-        <option value="fr">French</option>
-        <option value="it">Italian</option>
-        <option value="es">Spanish</option>
-        <option value="zh">Chinese</option>
-        <option value="ja">Japanese</option>
-        <option value="ko">Korean</option>
-        <option value="pt">Portuguese</option>
-        <option value="ru">Russian</option>
-      </select>
-      <div style={{ whiteSpace: 'pre-wrap' }}>{LOREM_HUGE}</div>
+      <main
+        id="main"
+      >
+        <h2 style={{ marginTop: 0 }}>Main content</h2>
+        <select>
+          <option value="en">English</option>
+          <option value="de">German</option>
+          <option value="fr">French</option>
+          <option value="it">Italian</option>
+          <option value="es">Spanish</option>
+          <option value="zh">Chinese</option>
+          <option value="ja">Japanese</option>
+          <option value="ko">Korean</option>
+          <option value="pt">Portuguese</option>
+          <option value="ru">Russian</option>
+        </select>
+        <div style={{ whiteSpace: 'pre-wrap' }}>{LOREM_HUGE}</div>
+      </main>
     </div>
   );
 };
