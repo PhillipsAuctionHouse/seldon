@@ -1,3 +1,24 @@
+# [1.242.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.241.0...v1.242.0) (2026-03-04)
+
+
+### Features
+
+* **focusStates:** L3-7525 Design System [RW]: Update keyboard focus state across all components ([#796](https://github.com/PhillipsAuctionHouse/seldon/issues/796)) ([388b56f](https://github.com/PhillipsAuctionHouse/seldon/commit/388b56f8e56742f9fc8e22988cef7541db974287))
+
+# [1.241.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.240.1...v1.241.0) (2026-03-04)
+
+
+### Features
+
+* **button:** L3-11475 Introduce destructive button to Seldon ([#814](https://github.com/PhillipsAuctionHouse/seldon/issues/814)) ([f03f4a3](https://github.com/PhillipsAuctionHouse/seldon/commit/f03f4a36fe5ebce7c893ab86610a130c30ff4414))
+
+## [1.240.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.240.0...v1.240.1) (2026-03-03)
+
+
+### Bug Fixes
+
+* **ComposedModal:** L3-10837 fix button alignment in ComposedModal ([#817](https://github.com/PhillipsAuctionHouse/seldon/issues/817)) ([fd51f01](https://github.com/PhillipsAuctionHouse/seldon/commit/fd51f0135d00f7c27c93087a0d11a270b88f8298))
+
 # [1.240.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.239.0...v1.240.0) (2026-02-24)
 
 

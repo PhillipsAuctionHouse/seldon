@@ -42,6 +42,7 @@ $breakpoint-mobile-small: 450px;
     padding: $spacing-sm 0 0;
 
     @media (max-width: $breakpoint-mobile-small) {
+      align-items: center;
       flex-direction: column;
     }
   }

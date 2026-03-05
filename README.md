@@ -44,3 +44,33 @@ import { Button } from '@phillips/seldon';
 ### Contributing Guidelines
 
 Before you start contributing to this project please check out our guidelines found [here](/src/docs/CONTRIBUTING.md)
+
+### Git worktrees (`new-worktree.sh`)
+
+You can use Git [worktrees](https://git-scm.com/docs/git-worktree) to keep multiple branches checked out at once (for example when reviewing a PR or spiking a change) without re-running all setup steps every time.
+
+Use the `scripts/new-worktree.sh` helper to create a new worktree and copy ignored files (like `.env`) into the new directory:
+
+```bash
+# New worktree at ../my-feature using the current branch
+./scripts/new-worktree.sh ../my-feature
+
+# New worktree on an existing branch
+./scripts/new-worktree.sh ../my-feature feature-branch
+
+# New worktree with a new branch (e.g. from main)
+./scripts/new-worktree.sh ../my-feature -b new-branch main
+
+# Optionally copy node_modules instead of running npm install in the new worktree
+COPY_NODE_MODULES=1 ./scripts/new-worktree.sh ../my-feature
+```
+
+The script runs `git worktree add`, copies ignored config files into the new directory, runs `npm install`, and then opens the new worktree in Cursor or VS Code.
+
+To remove a worktree, you can run the following command:
+
+```bash
+git worktree remove ../my-feature
+```
+
+This will remove the worktree from the git repository.
