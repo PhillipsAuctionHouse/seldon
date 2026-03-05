@@ -25,71 +25,73 @@ export interface NavigationProps extends ComponentProps<'nav'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-navigation--overview)
  */
 const Navigation = forwardRef<HTMLElement, NavigationProps>(
-  ({ 'aria-label': ariaLabel, children, className, id, visible = true, ...props }, ref) => {
+  ({ 'aria-label': ariaLabel, children, className, id, visible = true, dir: _dir, ...props }, ref) => {
     const { isSearchExpanded, activeSubmenuId, setActiveSubmenuId } = React.useContext(HeaderContext);
     const childNavList = findChildrenOfType<NavigationListProps>(children, NavigationList)?.[0];
     const otherChildren = findChildrenExcludingTypes(children, [NavigationList, LanguageSelector]); // Includes the Search component, needed to do exclusion rather than inclusion so we could support StatefulSearch in our stories
     const languageSelectorElement = findChildrenOfType<LanguageSelectorProps>(children, LanguageSelector)?.[0];
     const openSubmenuValue = activeSubmenuId ?? '';
 
+    const listContainer = (
+      <div
+        className={classnames(`${px}-nav__list-container`, {
+          [`${px}-nav__list-container--search-expanded`]: isSearchExpanded,
+        })}
+      >
+        {/* Shared: Search and other non-list children */}
+        {otherChildren}
+
+        {/* Mobile (< md): accordion-style nav list */}
+        <SSRMediaQuery.Media lessThan="md">
+          {React.isValidElement(childNavList)
+            ? React.cloneElement<NavigationListProps>(childNavList, { isOffScreen: isSearchExpanded })
+            : undefined}
+        </SSRMediaQuery.Media>
+
+        {/* Desktop (≥ md): Radix list + viewport (hover submenus, controlled by activeSubmenuId) */}
+        <SSRMediaQuery.Media greaterThanOrEqual="md">
+          {React.isValidElement(childNavList) ? (
+            <RemoveScroll enabled={!!openSubmenuValue} allowPinchZoom removeScrollBar={false}>
+              {React.cloneElement<NavigationListProps>(childNavList, {
+                isOffScreen: isSearchExpanded,
+                asRadixList: true,
+              })}
+              <NavigationMenu.Viewport className={`${px}-nav__radix-viewport`} />
+            </RemoveScroll>
+          ) : undefined}
+        </SSRMediaQuery.Media>
+
+        {/* Mobile (< md): language selector (visually hidden when search expanded) */}
+        <SSRMediaQuery.Media lessThan="md">
+          {React.isValidElement(languageSelectorElement) && languageSelectorElement
+            ? React.cloneElement(languageSelectorElement as ReactElement<LanguageSelectorProps>, {
+                isHidden: isSearchExpanded,
+              })
+            : undefined}
+        </SSRMediaQuery.Media>
+      </div>
+    );
+
+    // Single <nav>: Radix Root renders the nav so we avoid duplicate nav elements in the DOM
     return (
-      <nav
+      <NavigationMenu.Root
         aria-label={ariaLabel ?? 'Main navigation'}
-        role="navigation"
         data-testid={id}
         id={id}
         style={{ '--visible': visible ? 'visible' : 'hidden' } as CSSProperties}
-        className={classnames(`${px}-nav`, className)}
-        {...props}
-        ref={ref}
+        className={classnames(`${px}-nav`, `${px}-nav__radix-root`, className)}
+        delayDuration={0}
+        skipDelayDuration={300}
+        value={openSubmenuValue}
+        onValueChange={(value) => setActiveSubmenuId(value === '' ? null : value)}
+        ref={ref as React.Ref<HTMLElement>}
+        {...(props as Omit<
+          NavigationProps,
+          'aria-label' | 'children' | 'className' | 'id' | 'visible' | 'dir' | 'defaultValue' | 'value' | 'onValueChange'
+        >)}
       >
-        <div
-          className={classnames(`${px}-nav__list-container`, {
-            [`${px}-nav__list-container--search-expanded`]: isSearchExpanded,
-          })}
-        >
-          {/* Shared: Search and other non-list children */}
-          {otherChildren}
-
-          {/* Mobile (< md): accordion-style nav list */}
-          <SSRMediaQuery.Media lessThan="md">
-            {React.isValidElement(childNavList)
-              ? React.cloneElement<NavigationListProps>(childNavList, { isOffScreen: isSearchExpanded })
-              : undefined}
-          </SSRMediaQuery.Media>
-
-          {/* Desktop (≥ md): Radix navigation menu (hover submenus, controlled by activeSubmenuId) */}
-          <SSRMediaQuery.Media greaterThanOrEqual="md">
-            {React.isValidElement(childNavList) ? (
-              <RemoveScroll enabled={!!openSubmenuValue} allowPinchZoom removeScrollBar={false}>
-                <NavigationMenu.Root
-                  className={`${px}-nav__radix-root`}
-                  delayDuration={0}
-                  skipDelayDuration={300}
-                  value={openSubmenuValue}
-                  onValueChange={(value) => setActiveSubmenuId(value === '' ? null : value)}
-                >
-                  {React.cloneElement<NavigationListProps>(childNavList, {
-                    isOffScreen: isSearchExpanded,
-                    asRadixList: true,
-                  })}
-                  <NavigationMenu.Viewport className={`${px}-nav__radix-viewport`} />
-                </NavigationMenu.Root>
-              </RemoveScroll>
-            ) : undefined}
-          </SSRMediaQuery.Media>
-
-          {/* Mobile (< md): language selector (visually hidden when search expanded) */}
-          <SSRMediaQuery.Media lessThan="md">
-            {/* This is not visible through css when in desktop breakpoint */}
-            {React.isValidElement(languageSelectorElement) && languageSelectorElement
-              ? React.cloneElement(languageSelectorElement as ReactElement<LanguageSelectorProps>, {
-                  isHidden: isSearchExpanded,
-                })
-              : undefined}
-          </SSRMediaQuery.Media>
-        </div>
-      </nav>
+        {listContainer}
+      </NavigationMenu.Root>
     );
   },
 );

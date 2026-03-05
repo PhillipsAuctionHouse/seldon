@@ -83,6 +83,7 @@ const NavigationItemTrigger = forwardRef<HTMLLIElement, NavigationItemTriggerPro
               >
                 {/* Trigger: hover opens submenu; optional onClick forwarded */}
                 <NavigationMenu.Trigger
+                  aria-label={label}
                   className={`${px}-nav__item-trigger-wrapper`}
                   data-testid={commonProps['data-testid']}
                   onClick={

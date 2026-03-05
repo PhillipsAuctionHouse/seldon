@@ -95,7 +95,8 @@
       flex-direction: column;
       overflow: visible; // allow nav list to slide up/down when search opens/closes
       position: relative;
-      width: 100%;
+      // Keep fit-content so search button stays next to nav list (position: absolute relative to list-container)
+      width: fit-content;
     }
 
     &__radix-viewport {
