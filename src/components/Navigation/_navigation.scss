@@ -147,6 +147,22 @@
           padding: $snowflake-menu-padding 0;
         }
 
+        // Restore hover/focus underline for submenu links (viewport context can lose .nav__item cascade)
+        .#{$px}-nav__item .#{$px}-link--linkStylised {
+          position: relative;
+
+          &:hover::after,
+          &:focus-visible::after {
+            background: $pure-black;
+            bottom: -1px;
+            content: '';
+            height: 1px;
+            left: 0;
+            position: absolute;
+            right: 0;
+          }
+        }
+
         // linkMedium and linkLarge: same compact padding as linkLarge had
         .#{$px}-nav__list .#{$px}-link--linkMedium,
         .#{$px}-nav__list .#{$px}-link--linkLarge {

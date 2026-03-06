@@ -35,6 +35,10 @@ export interface NavigationListProps extends React.ComponentProps<'ul'> {
    * When true (desktop submenu content), wrap each section item in NavigationMenu.Link so submenu closes on link click
    */
   wrapLinksInRadixLink?: boolean;
+  /**
+   * When set, list items render only this variant (no SSRMediaQuery at item level). Set by Navigation for valid ul > li DOM.
+   */
+  renderMode?: 'mobile' | 'desktop';
 }
 
 const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
@@ -49,6 +53,7 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
       onClick,
       asRadixList,
       wrapLinksInRadixLink,
+      renderMode,
     },
     ref,
   ) => {
@@ -88,7 +93,7 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
       })
       .filter(Boolean);
 
-    // Desktop top-level only: wrap each direct NavigationItem in Radix Item+Link for arrow-key navigation
+    // Desktop top-level only: wrap each direct NavigationItem in Radix Item+Link for arrow-key navigation; inject renderMode for triggers
     const topLevelChildren =
       asRadixList && !leftSectionItems.length && !rightSectionItems.length
         ? React.Children.map(children, (child) => {
@@ -97,8 +102,24 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
                 asRadixLink: true,
               });
             }
-            return child;
+            return React.isValidElement(child)
+              ? React.cloneElement(child as React.ReactElement<{ renderMode?: 'mobile' | 'desktop' }>, {
+                  ...(renderMode != null && { renderMode }),
+                })
+              : child;
           })
+        : null;
+
+    // When we have sections we don't use renderMode; when we have top-level items, clone children with renderMode for valid ul > li (only triggers use it; NavigationItem must not receive it to avoid forwarding to DOM)
+    const topLevelWithRenderMode =
+      !leftSectionItems.length && !rightSectionItems.length && renderMode != null
+        ? React.Children.map(children, (child) =>
+            React.isValidElement(child) && child.type !== NavigationItem
+              ? React.cloneElement(child as React.ReactElement<{ renderMode?: 'mobile' | 'desktop' }>, {
+                  renderMode,
+                })
+              : child,
+          )
         : null;
 
     // One of: left section + right section (submenu), or top-level items (no sections)
@@ -126,8 +147,10 @@ const NavigationList = React.forwardRef<HTMLUListElement, NavigationListProps>(
             {rightSectionItems}
           </div>
         ) : null}
-        {/* No sections: top-level nav items only (desktop main list or mobile) */}
-        {!leftSectionItems.length && !rightSectionItems.length ? (topLevelChildren ?? children) : null}
+        {/* No sections: top-level nav items only (desktop main list or mobile); use clones with renderMode when set */}
+        {!leftSectionItems.length && !rightSectionItems.length
+          ? (topLevelChildren ?? topLevelWithRenderMode ?? children)
+          : null}
       </>
     );
 

@@ -44,7 +44,10 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
         {/* Mobile (< md): accordion-style nav list */}
         <SSRMediaQuery.Media lessThan="md">
           {React.isValidElement(childNavList)
-            ? React.cloneElement<NavigationListProps>(childNavList, { isOffScreen: isSearchExpanded })
+            ? React.cloneElement<NavigationListProps>(childNavList, {
+                isOffScreen: isSearchExpanded,
+                renderMode: 'mobile',
+              })
             : undefined}
         </SSRMediaQuery.Media>
 
@@ -55,6 +58,7 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
               {React.cloneElement<NavigationListProps>(childNavList, {
                 isOffScreen: isSearchExpanded,
                 asRadixList: true,
+                renderMode: 'desktop',
               })}
               <NavigationMenu.Viewport className={`${px}-nav__radix-viewport`} />
             </RemoveScroll>
