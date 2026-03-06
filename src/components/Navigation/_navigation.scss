@@ -147,14 +147,14 @@
           padding: $snowflake-menu-padding 0;
         }
 
-        // Restore hover/focus underline for submenu links (viewport context can lose .nav__item cascade)
-        .#{$px}-nav__item .#{$px}-link--linkStylised {
+        // Restore hover/focus underline for submenu links (viewport overflow can clip bottom: -1px; use bottom: 0 so line stays visible)
+        .#{$px}-nav__list .#{$px}-nav__item .#{$px}-link--linkStylised {
           position: relative;
 
           &:hover::after,
           &:focus-visible::after {
             background: $pure-black;
-            bottom: -1px;
+            bottom: 0;
             content: '';
             height: 1px;
             left: 0;
