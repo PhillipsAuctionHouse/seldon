@@ -22,9 +22,7 @@ const Search = memo(
         height={height}
         width={width}
         ref={ref}
-        {...(titleId
-          ? { role: 'img' as const, 'aria-labelledby': titleId }
-          : { 'aria-hidden': true })}
+        {...(titleId ? { role: 'img' as const, 'aria-labelledby': titleId } : { 'aria-hidden': true })}
         {...props}
       >
         {title && titleId ? <title id={titleId}>{title}</title> : null}

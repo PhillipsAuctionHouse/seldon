@@ -35,9 +35,9 @@ export interface NavigationItemProps extends ComponentProps<'li'> {
    */
   element?: ElementType<LinkProps>;
   /**
-   * When true (desktop Radix list), render as NavigationMenu.Item + Link for arrow-key navigation
+   * When false (desktop), render as NavigationMenu.Item + Link for arrow-key navigation. Set by NavigationList.
    */
-  asRadixLink?: boolean;
+  isMobile?: boolean;
   /**
    * When true (desktop submenu), wrap link in NavigationMenu.Link so Radix closes the submenu on click
    */
@@ -65,7 +65,7 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
       navType,
       onClick,
       element: Component = Link,
-      asRadixLink,
+      isMobile,
       asRadixSubmenuLink,
       ...props
     },
@@ -89,7 +89,7 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
     );
 
     // Desktop top-level: Radix Item + Link (arrow-key navigation between items)
-    if (asRadixLink) {
+    if (isMobile === false) {
       const { value: _omitValue, ...restProps } = props as ComponentProps<'li'> & { value?: unknown };
       return (
         <NavigationMenu.Item ref={ref} data-testid={`nav-item-${label}`} className={itemClassName} {...restProps}>

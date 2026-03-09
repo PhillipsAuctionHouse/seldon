@@ -41,12 +41,7 @@ const SearchResults = ({
 
   return (
     <div className={`${px}-search__results`}>
-      <ul
-        id={id}
-        role="listbox"
-        data-testid="search-results"
-        className={`${px}-search__results-container`}
-      >
+      <ul id={id} role="listbox" data-testid="search-results" className={`${px}-search__results-container`}>
         {isLoading ? <li className={`${px}-search__result`}>{loadingText}</li> : null}
         {hasResults &&
           autoCompleteResults.map((result, i) => {

@@ -95,6 +95,7 @@
       flex-direction: column;
       overflow: visible; // allow nav list to slide up/down when search opens/closes
       position: relative;
+
       // Keep fit-content so search button stays next to nav list (position: absolute relative to list-container)
       width: fit-content;
     }
@@ -128,45 +129,6 @@
 
         @media (prefers-reduced-motion: reduce) {
           animation: none;
-        }
-      }
-
-      // Submenu content is rendered here by Radix; padding so link list is inset (desktop only)
-      .#{$px}-navigation-item-trigger__submenu {
-        background-color: $pure-white;
-        box-sizing: border-box;
-
-        .#{$px}-nav__list {
-          align-items: flex-start;
-          box-sizing: border-box;
-          padding: $spacing-md;
-          width: 100%;
-        }
-
-        .#{$px}-nav__list .#{$px}-link--linkStylised {
-          padding: $snowflake-menu-padding 0;
-        }
-
-        // Restore hover/focus underline for submenu links (viewport overflow can clip bottom: -1px; use bottom: 0 so line stays visible)
-        .#{$px}-nav__list .#{$px}-nav__item .#{$px}-link--linkStylised {
-          position: relative;
-
-          &:hover::after,
-          &:focus-visible::after {
-            background: $pure-black;
-            bottom: 0;
-            content: '';
-            height: 1px;
-            left: 0;
-            position: absolute;
-            right: 0;
-          }
-        }
-
-        // linkMedium and linkLarge: same compact padding as linkLarge had
-        .#{$px}-nav__list .#{$px}-link--linkMedium,
-        .#{$px}-nav__list .#{$px}-link--linkLarge {
-          padding: 0;
         }
       }
     }

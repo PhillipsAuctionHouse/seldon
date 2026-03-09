@@ -40,13 +40,17 @@ export {
   type NavigationItemProps,
 } from './components/Navigation/NavigationItem/NavigationItem';
 export {
-  default as NavigationItemTrigger,
-  type NavigationItemTriggerProps,
-} from './components/Navigation/NavigationItemTrigger/NavigationItemTrigger';
+  default as NavigationItemWithSubmenu,
+  type NavigationItemWithSubmenuProps,
+} from './components/Navigation/NavigationItemWithSubmenu/';
 export {
   default as NavigationList,
   type NavigationListProps,
 } from './components/Navigation/NavigationList/NavigationList';
+export {
+  default as NavigationSubmenu,
+  type NavigationSubmenuProps,
+} from './components/Navigation/NavigationSubmenu/NavigationSubmenu';
 
 export {
   default as Pagination,

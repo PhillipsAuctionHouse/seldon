@@ -5,7 +5,7 @@ import { Icon } from '../../components/Icon';
 import { LinkVariants } from '../../components/Link/types';
 import Navigation from '../../components/Navigation/Navigation';
 import NavigationItem from '../../components/Navigation/NavigationItem/NavigationItem';
-import NavigationItemTrigger from '../../components/Navigation/NavigationItemTrigger/NavigationItemTrigger';
+import NavigationItemWithSubmenu from '../../components/Navigation/NavigationItemWithSubmenu/';
 import NavigationList from '../../components/Navigation/NavigationList/NavigationList';
 import NotificationBanner from '../../components/NotificationBanner/NotificationBanner';
 import Search from '../../components/Search/Search';
@@ -18,7 +18,7 @@ describe('Header', () => {
     <Header logo={<Icon icon="PhillipsLogo" />}>
       <Navigation id={`${px}-main-nav`}>
         <NavigationList id={`${px}-main-nav-list`}>
-          <NavigationItemTrigger id="auctions" label={`Auctions`}>
+          <NavigationItemWithSubmenu id="auctions" label={`Auctions`}>
             <NavigationList id={`${px}-auction-nav-list`}>
               <NavigationItem
                 badge="New York"
@@ -28,7 +28,7 @@ describe('Header', () => {
                 label="Editions & Works on Paper"
               />
             </NavigationList>
-          </NavigationItemTrigger>
+          </NavigationItemWithSubmenu>
         </NavigationList>
       </Navigation>
       <Search />

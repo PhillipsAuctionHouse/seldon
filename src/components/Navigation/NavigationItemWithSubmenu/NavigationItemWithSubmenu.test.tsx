@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { vi } from 'vitest';
 import { screen, render, act, fireEvent, waitFor } from '@testing-library/react';
-import NavigationItemTrigger from './NavigationItemTrigger';
+import NavigationItemWithSubmenu from './NavigationItemWithSubmenu';
 import NavigationItem from '../NavigationItem/NavigationItem';
-import NavigationList from '../NavigationList/NavigationList';
+import NavigationSubmenu from '../NavigationSubmenu/NavigationSubmenu';
 import userEvent from '@testing-library/user-event';
 import { LinkVariants } from '../../Link';
 import { HeaderContext } from '../../../site-furniture/Header/Header';
@@ -21,7 +21,7 @@ function withNavMenuRoot(children: React.ReactNode) {
   );
 }
 
-describe('NavigationItemTrigger', () => {
+describe('NavigationItemWithSubmenu', () => {
   const mockLabel = 'Test Label';
 
   beforeEach(() => {
@@ -29,7 +29,7 @@ describe('NavigationItemTrigger', () => {
   });
 
   it('should render the label correctly', () => {
-    render(<NavigationItemTrigger data-testid={`nav-trigger`} label={mockLabel} />);
+    render(<NavigationItemWithSubmenu data-testid={`nav-trigger`} label={mockLabel} />);
 
     expect(screen.queryByTestId(/nav-trigger/)).toBeInTheDocument();
     expect(screen.queryByTestId(/nav-trigger/)?.textContent).toEqual(mockLabel);
@@ -41,11 +41,11 @@ describe('NavigationItemTrigger', () => {
     render(
       withNavMenuRoot(
         <HeaderContext.Provider value={defaultHeaderContext}>
-          <NavigationItemTrigger id="test-trigger" label="test" onClick={onClick}>
-            <NavigationList id="test-list-down">
-              <NavigationItem href="/" label="Home" onClick={onClick} />
-            </NavigationList>
-          </NavigationItemTrigger>
+          <NavigationItemWithSubmenu id="test-trigger" label="test" onClick={onClick}>
+            <NavigationSubmenu id="test-list-down">
+              <NavigationItem href="/" label="Home" navGroup="nav-link-start" onClick={onClick} />
+            </NavigationSubmenu>
+          </NavigationItemWithSubmenu>
         </HeaderContext.Provider>,
       ),
     );
@@ -69,8 +69,8 @@ describe('NavigationItemTrigger', () => {
             setActiveSubmenuId: vi.fn(),
           }}
         >
-          <NavigationItemTrigger id="test-trigger" label="test-trigger">
-            <NavigationList id="test-list-down">
+          <NavigationItemWithSubmenu id="test-trigger" label="test-trigger">
+            <NavigationSubmenu id="test-list-down">
               <NavigationItem
                 badge="New York"
                 href="#"
@@ -78,32 +78,32 @@ describe('NavigationItemTrigger', () => {
                 navType={LinkVariants.linkLarge}
                 label="Home"
               />
-            </NavigationList>
-          </NavigationItemTrigger>
+            </NavigationSubmenu>
+          </NavigationItemWithSubmenu>
         </HeaderContext.Provider>,
       ),
     );
 
-    const navigationTrigger = screen.getByTestId('navigation-item-trigger-test-trigger');
+    const navigationTrigger = screen.getByTestId('navigation-item-with-submenu-test-trigger');
     expect(navigationTrigger).toHaveAttribute('aria-expanded', 'false');
   });
 
-  it('does not call focusElementById when NavigationList has no id', () => {
+  it('does not call focusElementById when NavigationSubmenu has no id', () => {
     const focusSpy = vi.spyOn(utils, 'focusElementById').mockImplementation(() => {});
 
     render(
       withNavMenuRoot(
         <HeaderContext.Provider value={{ ...defaultHeaderContext, setActiveSubmenuId: vi.fn() }}>
-          <NavigationItemTrigger id="trigger-1" label="Nav">
-            <NavigationList id="">
-              <NavigationItem href="/" label="Item" />
-            </NavigationList>
-          </NavigationItemTrigger>
+          <NavigationItemWithSubmenu id="trigger-1" label="Nav">
+            <NavigationSubmenu id="">
+              <NavigationItem href="/" label="Item" navGroup="nav-link-start" />
+            </NavigationSubmenu>
+          </NavigationItemWithSubmenu>
         </HeaderContext.Provider>,
       ),
     );
 
-    const trigger = screen.getByTestId('navigation-item-trigger-trigger-1');
+    const trigger = screen.getByTestId('navigation-item-with-submenu-trigger-1');
     act(() => {
       fireEvent.mouseOver(trigger);
     });
@@ -116,16 +116,16 @@ describe('NavigationItemTrigger', () => {
     render(
       withNavMenuRoot(
         <HeaderContext.Provider value={{ ...defaultHeaderContext, setActiveSubmenuId: vi.fn() }}>
-          <NavigationItemTrigger label="Nav">
-            <NavigationList id="list-1">
-              <NavigationItem href="/" label="Item" />
-            </NavigationList>
-          </NavigationItemTrigger>
+          <NavigationItemWithSubmenu label="Nav">
+            <NavigationSubmenu id="list-1">
+              <NavigationItem href="/" label="Item" navGroup="nav-link-start" />
+            </NavigationSubmenu>
+          </NavigationItemWithSubmenu>
         </HeaderContext.Provider>,
       ),
     );
 
-    const trigger = screen.getByTestId('navigation-item-trigger');
+    const trigger = screen.getByTestId('navigation-item-with-submenu');
     expect(trigger).toBeInTheDocument();
     act(() => {
       fireEvent.mouseOver(trigger);
@@ -138,16 +138,16 @@ describe('NavigationItemTrigger', () => {
     render(
       withNavMenuRoot(
         <HeaderContext.Provider value={{ ...defaultHeaderContext, setActiveSubmenuId: vi.fn() }}>
-          <NavigationItemTrigger ref={refCallback} id="trigger-1" label="Nav">
-            <NavigationList id="list-1">
-              <NavigationItem href="/" label="Item" />
-            </NavigationList>
-          </NavigationItemTrigger>
+          <NavigationItemWithSubmenu ref={refCallback} id="trigger-1" label="Nav">
+            <NavigationSubmenu id="list-1">
+              <NavigationItem href="/" label="Item" navGroup="nav-link-start" />
+            </NavigationSubmenu>
+          </NavigationItemWithSubmenu>
         </HeaderContext.Provider>,
       ),
     );
 
-    const trigger = screen.getByTestId('navigation-item-trigger-trigger-1');
+    const trigger = screen.getByTestId('navigation-item-with-submenu-trigger-1');
     act(() => {
       fireEvent.mouseOver(trigger);
     });
@@ -170,16 +170,16 @@ describe('NavigationItemTrigger', () => {
               },
             }}
           >
-            <NavigationItemTrigger id="test-trigger" label="Auctions">
-              <NavigationList id="auctions-submenu">
+            <NavigationItemWithSubmenu id="test-trigger" label="Auctions">
+              <NavigationSubmenu id="auctions-submenu">
                 <NavigationItem
                   href="/auctions"
                   label="View Auctions"
                   navGroup="nav-link-start"
                   navType={LinkVariants.linkLarge}
                 />
-              </NavigationList>
-            </NavigationItemTrigger>
+              </NavigationSubmenu>
+            </NavigationItemWithSubmenu>
           </HeaderContext.Provider>
           <NavigationMenu.Viewport data-testid="nav-viewport" />
         </NavigationMenu.Root>
@@ -188,7 +188,7 @@ describe('NavigationItemTrigger', () => {
 
     render(<TestWrapper />);
 
-    const trigger = screen.getByTestId('navigation-item-trigger-test-trigger');
+    const trigger = screen.getByTestId('navigation-item-with-submenu-test-trigger');
     expect(trigger).toHaveAttribute('aria-expanded', 'false');
 
     await userEvent.hover(trigger);

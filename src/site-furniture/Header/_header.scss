@@ -19,11 +19,12 @@
 
     &:focus {
       @include focus-ring($border-radius: $radius-xs);
+
       background-color: $white-100;
       box-shadow: 0 0 0 4px $white-100; // fills outline-offset gap so content behind doesn’t show through
       left: $spacing-sm;
-      top: $spacing-sm;
       padding: $spacing-micro $spacing-sm;
+      top: $spacing-sm;
     }
   }
 

@@ -1,12 +1,8 @@
 @use '~scss/allPartials' as *;
 
-.#{$px}-navigation-item-trigger {
+.#{$px}-navigation-item-with-submenu {
   flex-direction: column;
   justify-content: center;
-
-  @include isHeaderMobile {
-    display: none;
-  }
 
   & > button {
     color: $pure-black;
@@ -44,7 +40,7 @@
       right: 0;
     }
 
-    // Radix: submenu content is rendered in viewport (_navigation.scss); these styles apply when content is in viewport
+    // Radix: submenu content is rendered in viewport; these styles apply when content is in viewport
     &__submenu[data-state='open'] {
       box-sizing: border-box;
       cursor: default;
@@ -63,6 +59,51 @@
 
       .#{$px}-nav__list__section {
         opacity: 1;
+      }
+    }
+
+    // When submenu is rendered inside nav viewport: panel and link styles (@at-root so selector is viewport → submenu)
+    @at-root .#{$px}-nav__radix-viewport .#{$px}-navigation-item-with-submenu__submenu {
+      background-color: $pure-white;
+      box-sizing: border-box;
+
+      .#{$px}-nav__list {
+        align-items: flex-start;
+        box-sizing: border-box;
+        padding: $spacing-md;
+        width: 100%;
+      }
+
+      .#{$px}-nav__list .#{$px}-link--linkStylised {
+        padding: $snowflake-menu-padding 0;
+      }
+
+      // Single underline on hover/focus for submenu links
+      .#{$px}-nav__list .#{$px}-nav__item {
+        .#{$px}-link--linkStylised,
+        .#{$px}-link--linkMedium,
+        .#{$px}-link--linkLarge {
+          text-decoration: none;
+
+          &:hover,
+          &:focus-visible {
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 1px;
+          }
+        }
+
+        // View all link: always underlined
+        .#{$px}-nav__item--view-all {
+          text-decoration: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 1px;
+        }
+      }
+
+      .#{$px}-nav__list .#{$px}-link--linkMedium,
+      .#{$px}-nav__list .#{$px}-link--linkLarge {
+        padding: 0;
       }
     }
   }

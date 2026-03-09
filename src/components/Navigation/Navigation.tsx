@@ -46,7 +46,7 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
           {React.isValidElement(childNavList)
             ? React.cloneElement<NavigationListProps>(childNavList, {
                 isOffScreen: isSearchExpanded,
-                renderMode: 'mobile',
+                isMobile: true,
               })
             : undefined}
         </SSRMediaQuery.Media>
@@ -57,8 +57,7 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
             <RemoveScroll enabled={!!openSubmenuValue} allowPinchZoom removeScrollBar={false}>
               {React.cloneElement<NavigationListProps>(childNavList, {
                 isOffScreen: isSearchExpanded,
-                asRadixList: true,
-                renderMode: 'desktop',
+                isMobile: false,
               })}
               <NavigationMenu.Viewport className={`${px}-nav__radix-viewport`} />
             </RemoveScroll>
@@ -91,7 +90,15 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
         ref={ref as React.Ref<HTMLElement>}
         {...(props as Omit<
           NavigationProps,
-          'aria-label' | 'children' | 'className' | 'id' | 'visible' | 'dir' | 'defaultValue' | 'value' | 'onValueChange'
+          | 'aria-label'
+          | 'children'
+          | 'className'
+          | 'id'
+          | 'visible'
+          | 'dir'
+          | 'defaultValue'
+          | 'value'
+          | 'onValueChange'
         >)}
       >
         {listContainer}
