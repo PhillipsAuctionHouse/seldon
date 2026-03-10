@@ -18,6 +18,10 @@
     @include isHeaderDesktop {
       color: unset;
       justify-content: center;
+
+      &:focus-visible {
+        @include focus-ring($border-radius: $radius-xs);
+      }
     }
   }
 

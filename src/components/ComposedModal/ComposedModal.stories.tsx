@@ -5,7 +5,6 @@ import { ButtonVariants } from '../../components/Button/types';
 import ViewingDetails from '../../patterns/ViewingDetails/ViewingDetails';
 import { viewingDetailsProps } from '../../patterns/ViewingDetails/ViewingDetailsMock';
 import { px } from '../../utils';
-import Link from '../Link/Link';
 import ComposedModal, { ComposedModalProps } from './ComposedModal';
 
 export default {
@@ -32,9 +31,9 @@ export const Playground = (props: ComposedModalProps) => {
 
   return (
     <>
-      <Link style={{ cursor: 'pointer' }} onClick={onOpen}>
+      <Button variant={ButtonVariants.link} onClick={onOpen}>
         Viewing Details
-      </Link>
+      </Button>
 
       <ComposedModal
         key={`${props.id}`}
@@ -85,9 +84,9 @@ export const ComposedModalScroll = (props: ComposedModalProps) => {
 
   return (
     <>
-      <Link style={{ cursor: 'pointer' }} onClick={onOpen}>
+      <Button variant={ButtonVariants.link} onClick={onOpen}>
         Viewing Long Content
-      </Link>
+      </Button>
 
       <ComposedModal key={`${props.id}`} {...props} isOpen={isOpen} onClose={onClose} maxHeightValue="40vh">
         <div>{'Lorem ipsum '.repeat(150)}</div>
@@ -114,9 +113,9 @@ export const ComposedModalSingleButton = (props: ComposedModalProps) => {
 
   return (
     <>
-      <Link style={{ cursor: 'pointer' }} onClick={onOpen}>
+      <Button variant={ButtonVariants.link} onClick={onOpen}>
         Single CTA
-      </Link>
+      </Button>
 
       <ComposedModal
         key={`${props.id}`}

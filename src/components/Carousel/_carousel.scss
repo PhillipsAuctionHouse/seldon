@@ -34,8 +34,18 @@
       display: none;
     }
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       opacity: 1;
+    }
+
+    &:focus-visible {
+      outline: none;
+
+      .#{$px}-carousel-arrows-next-btn__icon,
+      .#{$px}-carousel-arrows-prev-btn__icon {
+        @include focus-ring($border-radius: $radius-3xl);
+      }
     }
 
     &__icon {
@@ -161,8 +171,7 @@
     width: 10px;
 
     &:focus-visible {
-      border-radius: $radius-3xl;
-      outline: 0.5px solid $black-100;
+      @include focus-ring($border-radius: $radius-3xl, $outline-offset: 0, $outline-width: 0.5px);
 
       &-dot {
         &:hover {

@@ -124,6 +124,7 @@ export const AllVariantsGrid = () => {
     { variant: ButtonVariants.primary, name: 'Primary' },
     { variant: ButtonVariants.secondary, name: 'Secondary' },
     { variant: ButtonVariants.tertiary, name: 'Tertiary' },
+    { variant: ButtonVariants.destructive, name: 'Destructive' },
   ];
 
   const sizes = [

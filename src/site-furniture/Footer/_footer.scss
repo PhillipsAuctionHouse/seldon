@@ -124,6 +124,15 @@
     }
   }
 
+  &__logo {
+    margin-bottom: $spacing-sm;
+    margin-top: $spacing-md;
+
+    &:focus-visible {
+      @include focus-ring($border-radius: $radius-xs);
+    }
+  }
+
   &__copyright {
     align-items: center;
     background-color: $white-100;

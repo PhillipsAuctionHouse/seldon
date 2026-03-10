@@ -31,11 +31,9 @@ const Footer = ({
     <footer data-testid={id ? id : `footer`} id={id} className={classnames(`${px}-footer`, { className })}>
       <div className={`${px}-footer__links`}>{children}</div>
       <div className={`${px}-footer__copyright`}>
-        <h3 data-testid="footer-logo" className={`${px}-footer__logo`}>
-          <a href="/" aria-label="logo">
-            <Icon icon="PhillipsLogo" width="94px" />
-          </a>
-        </h3>
+        <a href="/" aria-label="logo" data-testid="footer-logo" className={`${px}-footer__logo`}>
+          <Icon icon="PhillipsLogo" width="94px" />
+        </a>
         <Text variant={TextVariants.bodySmall}>{copyright}</Text>
       </div>
     </footer>
