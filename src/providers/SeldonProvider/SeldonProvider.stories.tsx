@@ -13,7 +13,6 @@ export const Playground = () => (
   <SeldonProvider>
     <SSRMediaQuery.Media lessThan="md">Small Breakpoint</SSRMediaQuery.Media>
     <SSRMediaQuery.Media between={['md', 'lg']}>Medium Breakpoint</SSRMediaQuery.Media>
-    <SSRMediaQuery.Media between={['lg', 'xl']}>Large Breakpoint</SSRMediaQuery.Media>
-    <SSRMediaQuery.Media greaterThan="lg">Extra Large Breakpoint</SSRMediaQuery.Media>
+    <SSRMediaQuery.Media greaterThan="lg">Large Breakpoint</SSRMediaQuery.Media>
   </SeldonProvider>
 );
