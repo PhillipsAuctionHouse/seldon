@@ -51,6 +51,10 @@ export {
   default as NavigationSubmenu,
   type NavigationSubmenuProps,
 } from './components/Navigation/NavigationSubmenu/NavigationSubmenu';
+export {
+  NavigationDesktopSubmenu,
+  type NavigationDesktopSubmenuProps,
+} from './components/Navigation/NavigationItemWithSubmenu/';
 
 export {
   default as Pagination,
