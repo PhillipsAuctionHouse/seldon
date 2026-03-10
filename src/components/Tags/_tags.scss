@@ -61,10 +61,6 @@
     height: 2rem;
     padding: 0 $spacing-sm;
 
-    @include media($breakpoint-xl) {
-      padding: $spacing-sm;
-    }
-
     svg {
       fill: $black-100;
       height: 1rem;
@@ -96,10 +92,6 @@
       outline-color: transparent;
       outline-offset: unset;
       padding: 0 $spacing-sm;
-
-      @include media($breakpoint-xl) {
-        padding: $spacing-sm;
-      }
     }
   }
 }

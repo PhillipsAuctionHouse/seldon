@@ -62,10 +62,6 @@
     @media (min-width: $breakpoint-snw-mobile) {
       flex-basis: 250px;
     }
-
-    @media (min-width: $breakpoint-xl) {
-      flex-basis: 400px;
-    }
   }
 
   &__date_info {

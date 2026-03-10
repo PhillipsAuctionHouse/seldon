@@ -50,10 +50,6 @@
   @media (min-width: $breakpoint-lg) {
     margin: 0 $spacing-lg;
   }
-
-  @media (min-width: $breakpoint-xl) {
-    margin: 0 $spacing-xl;
-  }
 }
 
 @mixin grid($columns: 2, $margins-on: true) {
@@ -141,21 +137,6 @@
 
     @if $type == 'max' {
       @media (max-width: calc($breakpoint-lg - 1px)) {
-        @content;
-      }
-    }
-  }
-
-  @if $breakpoint == $size-xl or $breakpoint == $breakpoint-xl {
-    // $breakpoint-xl: 1801px;
-    @if $type == 'min' {
-      @media (min-width: $breakpoint-xl) {
-        @content;
-      }
-    }
-
-    @if $type == 'max' {
-      @media (max-width: calc($breakpoint-xl - 1px)) {
         @content;
       }
     }

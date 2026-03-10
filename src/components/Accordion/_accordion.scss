@@ -144,20 +144,6 @@
     }
   }
 
-  @include media($breakpoint-xl) {
-    &__icon {
-      flex: initial;
-      height: 1.25rem;
-      width: 1.75rem;
-    }
-
-    &__icon--sm {
-      flex: initial;
-      height: 1rem;
-      width: 1.5rem;
-    }
-  }
-
   &--blue-fill {
     filter: brightness(0) saturate(100%) invert(51%) sepia(72%) saturate(1698%) hue-rotate(191deg) brightness(95%)
       contrast(86%);
