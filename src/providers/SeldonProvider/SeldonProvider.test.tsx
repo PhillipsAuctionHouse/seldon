@@ -4,12 +4,12 @@ import { SSRMediaQuery } from './utils';
 
 describe('SeldonProvider', () => {
   describe('Media Queries', () => {
-    it('four children render with the fresnel classes', () => {
+    it('three children render with the fresnel classes', () => {
       render(
         <SeldonProvider>
           <SSRMediaQuery.Media lessThan="md">Small Breakpoint</SSRMediaQuery.Media>
           <SSRMediaQuery.Media between={['md', 'lg']}>Medium Breakpoint</SSRMediaQuery.Media>
-          <SSRMediaQuery.Media greaterThan="lg">Large Breakpoint</SSRMediaQuery.Media>
+          <SSRMediaQuery.Media greaterThanOrEqual="lg">Large Breakpoint</SSRMediaQuery.Media>
         </SeldonProvider>,
       );
 
