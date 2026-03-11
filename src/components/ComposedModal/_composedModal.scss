@@ -6,7 +6,7 @@ $breakpoint-mobile-small: 450px;
   border-radius: $radius-md;
   max-width: 95vw;
   min-width: 100%;
-  padding: $spacing-lg 0 $spacing-sm 0;
+  padding: $spacing-lg 0 0;
 
   &:not(:has(.#{$px}-composed-modal__btns-group)) {
     padding-bottom: $spacing-lg;
@@ -38,8 +38,7 @@ $breakpoint-mobile-small: 450px;
     display: flex;
     gap: $spacing-sm;
     justify-content: center;
-    margin: 0 $spacing-lg;
-    padding: $spacing-sm 0 0;
+    margin: $spacing-sm $spacing-lg;
 
     @media (max-width: $breakpoint-mobile-small) {
       align-items: center;
@@ -49,7 +48,6 @@ $breakpoint-mobile-small: 450px;
 
   &__btns-group > * {
     flex: 1 1 50%;
-    margin: $spacing-xsm 0 0;
 
     @media (max-width: $breakpoint-mobile-small) {
       flex: 1 1 auto;
