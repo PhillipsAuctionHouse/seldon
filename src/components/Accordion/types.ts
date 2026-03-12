@@ -30,10 +30,6 @@ export interface AccordionHeaderType {
    * Callback function that is called when the header is closed.
    */
   onClose?: () => void;
-  /**
-   * Determines whether the variant on text style is large or small.
-   */
-  variant?: AccordionItemVariant;
 }
 
 // AccordionContent Interface
@@ -58,11 +54,6 @@ export interface AccordionContentType {
    * When true applied the transition keyframe animation on item expand. Default as false.
    */
   hasTransition?: boolean;
-
-  /**
-   * Determines whether the variant on text style is larger or smaller.
-   */
-  variant?: AccordionItemVariant;
 }
 
 export enum AccordionVariants {
@@ -91,9 +82,4 @@ export interface AccordionVariantProps {
    * Only applicable to the `single` variants.
    */
   collapsible?: boolean;
-}
-
-export enum AccordionItemVariant {
-  md = 'md',
-  sm = 'sm',
 }

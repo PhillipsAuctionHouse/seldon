@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import React, { forwardRef, useCallback, useRef } from 'react';
 import { Icon } from '../Icon';
 import { getCommonProps, px } from '../../utils';
-import { AccordionContentType, AccordionHeaderType, AccordionItemVariant } from './types';
+import { AccordionContentType, AccordionHeaderType } from './types';
 import { getIconClasses } from './utils';
 import { Text, TextVariants } from '../Text';
 
@@ -16,10 +16,6 @@ export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement>
    * When true, prevents the user from interacting with the item.
    */
   isLocked?: boolean;
-  /**
-   * Determines whether the variant on text style is large or small.
-   */
-  variant?: AccordionItemVariant;
   /**
    * Uniqueid for the Accordion Item.
    */
@@ -55,20 +51,11 @@ export interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement>
  * A single Accordion Item from a list
  */
 
-const AccordionHeader = ({
-  children,
-  className,
-  baseClassName,
-  disable,
-  id,
-  variant = AccordionItemVariant.md,
-  onOpen,
-  onClose,
-}: AccordionHeaderType) => {
+const AccordionHeader = ({ children, className, baseClassName, disable, id, onOpen, onClose }: AccordionHeaderType) => {
   const itemRef = useRef<HTMLButtonElement>(null);
   const showLock = disable;
 
-  const labelVariant = variant === AccordionItemVariant.md ? TextVariants.labelMedium : TextVariants.labelSmall;
+  const labelVariant = TextVariants.labelMedium;
 
   // Render all icons and use css to conditionally show/hide the correct one
   const lockIconComponent = (
@@ -77,7 +64,7 @@ const AccordionHeader = ({
         icon="Lock"
         height={24}
         width={24}
-        className={getIconClasses(baseClassName, variant, 'lock')}
+        className={getIconClasses(baseClassName, 'lock')}
         data-testid={`${id}-lockedIcon`}
         aria-hidden
       />
@@ -90,7 +77,7 @@ const AccordionHeader = ({
         icon="Add"
         height={24}
         width={24}
-        className={getIconClasses(baseClassName, variant, 'plus')}
+        className={getIconClasses(baseClassName, 'plus')}
         data-testid={`${id}-plusIcon`}
         aria-hidden
       />
@@ -103,7 +90,7 @@ const AccordionHeader = ({
         icon="Subtract"
         height={24}
         width={24}
-        className={getIconClasses(baseClassName, variant, 'minus')}
+        className={getIconClasses(baseClassName, 'minus')}
         data-testid={`${id}-minusIcon`}
         aria-hidden
       />
@@ -139,14 +126,7 @@ const AccordionHeader = ({
   );
 };
 
-const AccordionContent = ({
-  children,
-  baseClassName,
-  disable,
-  hasTransition,
-  className,
-  variant = AccordionItemVariant.md,
-}: AccordionContentType) =>
+const AccordionContent = ({ children, baseClassName, disable, hasTransition, className }: AccordionContentType) =>
   disable && children ? (
     <div className={`${baseClassName}__content--locked`}>{children}</div>
   ) : (
@@ -158,9 +138,7 @@ const AccordionContent = ({
         className,
       )}
     >
-      <Text variant={variant === AccordionItemVariant.md ? TextVariants.bodyMedium : TextVariants.bodySmall}>
-        {children}
-      </Text>
+      <Text variant={TextVariants.bodyMedium}>{children}</Text>
     </Accordion.Content>
   );
 
@@ -168,7 +146,6 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
   (
     {
       isLocked = false,
-      variant = AccordionItemVariant.md,
       id,
       label,
       isLastItem,
@@ -197,7 +174,6 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
         {...props}
       >
         <AccordionHeader
-          variant={variant}
           disable={isLocked}
           id={id}
           baseClassName={`${accordionItemClassName}-label`}
@@ -207,12 +183,7 @@ const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
           {label}
         </AccordionHeader>
 
-        <AccordionContent
-          disable={isLocked}
-          hasTransition={hasTransition}
-          variant={variant}
-          baseClassName={accordionItemClassName}
-        >
+        <AccordionContent disable={isLocked} hasTransition={hasTransition} baseClassName={accordionItemClassName}>
           <div className="radix-accordion-content">{children}</div>
         </AccordionContent>
       </Accordion.Item>
