@@ -18,6 +18,7 @@ $breakpoint-mobile-small: 450px;
 
   @media (min-width: $breakpoint-md) {
     min-width: $desktop-modal-min-width;
+    width: $desktop-modal-min-width;
   }
 
   &__body {
