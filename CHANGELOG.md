@@ -1,3 +1,10 @@
+# [1.244.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.243.0...v1.244.0) (2026-03-13)
+
+
+### Features
+
+* **ComposedModal:** L3-10837 fix width of composed modal ([#826](https://github.com/PhillipsAuctionHouse/seldon/issues/826)) ([a550c09](https://github.com/PhillipsAuctionHouse/seldon/commit/a550c097dd63830500aabf3b8acb7d97ce9c8f01))
+
 # [1.243.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.242.0...v1.243.0) (2026-03-13)
 
 
