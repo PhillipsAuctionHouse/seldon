@@ -1,3 +1,10 @@
+# [1.243.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.242.0...v1.243.0) (2026-03-13)
+
+
+### Features
+
+* **modal:** L3-11756 ComposedModal has extra margin above buttons  ([#823](https://github.com/PhillipsAuctionHouse/seldon/issues/823)) ([2a36323](https://github.com/PhillipsAuctionHouse/seldon/commit/2a363231d2f9ea1267d69283fdf6168e6d63c534))
+
 # [1.242.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.241.0...v1.242.0) (2026-03-04)
 
 
