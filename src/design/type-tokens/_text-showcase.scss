@@ -4,17 +4,7 @@
 @use '~scss/type' as *;
 
 :root {
-  .typography-item--small {
-    @include font-size-vars--sm;
-  }
-
-  .typography-item--medium {
-    @include font-size-vars--md;
-  }
-
-  .typography-item--large {
-    @include font-size-vars--lg;
-  }
+  @include font-size-vars;
 }
 
 .typography {
@@ -26,9 +16,9 @@
   }
 
   &-container {
-    display: grid;
-    grid-gap: 0;
-    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    display: flex;
+    flex-direction: column;
   }
 
   &-breakpoint-header {
@@ -44,7 +34,7 @@
   }
 
   &-code-block {
-    grid-column: 1 / span 3;
+    width: 100%;
 
     & > pre > div {
       margin-top: -0.25rem;
@@ -58,6 +48,7 @@
     justify-content: space-between;
     margin-top: 2rem;
     padding-bottom: 2rem;
+    width: 100%;
 
     &__specs {
       color: #545454;

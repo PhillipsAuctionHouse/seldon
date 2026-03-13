@@ -32,7 +32,7 @@
     }
   }
 
-  @media screen and (min-width: $breakpoint-xl) {
+  @media screen {
     &__country-picker {
       flex: 0 0 37.5%;
       min-width: 0;

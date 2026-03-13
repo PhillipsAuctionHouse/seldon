@@ -23,10 +23,6 @@ $dropdown-height: 240px;
     &--mobile {
       padding: 0 $spacing-md $spacing-md;
     }
-
-    @media (min-width: $breakpoint-xl) {
-      max-height: calc($dropdown-height + $spacing-sm);
-    }
   }
 
   &__button-wrap {
