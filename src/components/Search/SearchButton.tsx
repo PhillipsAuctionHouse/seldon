@@ -23,7 +23,7 @@ export const SearchButton = ({
         {...props}
         type="button"
         data-testid={`${testId}-button`}
-        aria-label={searchButtonText}
+        aria-label={searchButtonText || 'Search'}
         className={`${className}__button ${className}__button--search`}
         onClick={(event) => {
           setIsSearchExpanded(true);

@@ -62,12 +62,22 @@ const UserManagement = forwardRef<HTMLDivElement, UserManagementProps>(
         {shouldShowAccountDetails && (
           <>
             {isLoggedIn ? (
-              <AccountDetailsComponent className={`${baseClassName}__login`} href={href} disabled={disabled}>
+              <AccountDetailsComponent
+                aria-label={typeof accountLabel === 'string' ? accountLabel : 'Account'}
+                className={`${baseClassName}__login`}
+                href={href}
+                disabled={disabled}
+              >
                 <Icon icon="Account" className={`${baseClassName}__account-icon`} height="100%" width="100%" />
                 <Text variant={TextVariants.bodySmall}>{accountLabel}</Text>
               </AccountDetailsComponent>
             ) : (
-              <button className={`${baseClassName}__login`} onClick={onLogin} disabled={disabled}>
+              <button
+                aria-label={typeof loginLabel === 'string' ? loginLabel : 'Login'}
+                className={`${baseClassName}__login`}
+                onClick={onLogin}
+                disabled={disabled}
+              >
                 <Icon icon="Account" className={`${baseClassName}__account-icon`} height="100%" width="100%" />
                 <Text variant={TextVariants.bodySmall}>{loginLabel}</Text>
               </button>

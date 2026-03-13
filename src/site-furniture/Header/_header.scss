@@ -11,6 +11,23 @@
   width: 100%;
   z-index: 10;
 
+  // Skip link: visually hidden until focused so keyboard users can skip to main content
+  &__skip-link {
+    left: -9999px;
+    position: absolute;
+    z-index: 100;
+
+    &:focus {
+      @include focus-ring($border-radius: $radius-xs);
+
+      background-color: $white-100;
+      box-shadow: 0 0 0 4px $white-100; // fills outline-offset gap so content behind doesn’t show through
+      left: $spacing-sm;
+      padding: $spacing-micro $spacing-sm;
+      top: $spacing-sm;
+    }
+  }
+
   &__toggle-btn {
     align-items: center;
     background: none;
@@ -74,13 +91,19 @@
 
   &__logo {
     align-self: center;
+    display: inline-block; // so focus ring has a clear box to wrap
     margin: 0;
+    outline: none;
+    vertical-align: middle; // keep aligned with top-row flex items
 
+    &:focus,
     &:focus-visible {
       @include focus-ring($border-radius: $radius-xs);
     }
 
+    img,
     svg {
+      display: block; // avoid baseline gap so logo doesn’t slide up
       height: 20.58px; // 20.58px is the height of the logo's container to make logo 16px
       width: 100%;
     }
@@ -88,6 +111,7 @@
     @include isHeaderDesktop {
       padding-top: 0;
 
+      img,
       svg {
         height: 25.73px; // 25.73px is the height of the logo's container to make logo 20px
         width: 100%;

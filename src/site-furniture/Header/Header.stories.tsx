@@ -4,8 +4,9 @@ import { Icon } from '../../components/Icon';
 import { LinkVariants } from '../../components/Link/types';
 import Navigation from '../../components/Navigation/Navigation';
 import NavigationItem from '../../components/Navigation/NavigationItem/NavigationItem';
-import NavigationItemTrigger from '../../components/Navigation/NavigationItemTrigger/NavigationItemTrigger';
+import NavigationItemWithSubmenu from '../../components/Navigation/NavigationItemWithSubmenu/';
 import NavigationList from '../../components/Navigation/NavigationList/NavigationList';
+import NavigationSubmenu from '../../components/Navigation/NavigationSubmenu/NavigationSubmenu';
 import Search, { SearchProps } from '../../components/Search/Search';
 import { SearchResult } from '../../components/Search/SearchResults/SearchResults';
 import { LanguageSelector } from '../../patterns/LanguageSelector';
@@ -81,6 +82,14 @@ const meta = {
   title: 'SiteFurniture/Header',
   component: Header,
   subcomponents: { Search: Search as React.ComponentType<unknown> },
+  decorators: [
+    (Story) => (
+      <>
+        <style>{`html { scrollbar-gutter: stable; }`}</style>
+        <Story />
+      </>
+    ),
+  ],
   parameters: {
     docs: {
       story: {
@@ -112,13 +121,14 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
         flexDirection: 'column',
         paddingTop: '200px',
         backgroundColor: '#ff9',
+        contain: 'layout',
       }}
     >
       <Header {...props} logo={<Icon icon="PhillipsLogo" />}>
         <Navigation id={`${px}-main-nav`}>
           <NavigationList id={`${px}-main-nav-list`}>
-            <NavigationItemTrigger id="auctions" label="Auctions">
-              <NavigationList
+            <NavigationItemWithSubmenu id="auctions" label="Auctions">
+              <NavigationSubmenu
                 id={`${px}-auctions-nav-list`}
                 leftSectionHeading="Upcoming"
                 rightSectionHeading="Auction Information & Services"
@@ -230,11 +240,11 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
                   navType={LinkVariants.linkLarge}
                   label="Remote Bidding"
                 />
-              </NavigationList>
-            </NavigationItemTrigger>
+              </NavigationSubmenu>
+            </NavigationItemWithSubmenu>
             <NavigationItem href="#" label="Calendar" />
-            <NavigationItemTrigger id="departments" label="Departments">
-              <NavigationList id={`${px}-departments-nav-list`} leftSectionHeading="Our Specialist Departments">
+            <NavigationItemWithSubmenu id="departments" label="Departments">
+              <NavigationSubmenu id={`${px}-departments-nav-list`} leftSectionHeading="Our Specialist Departments">
                 <NavigationItem
                   href="#"
                   navGroup="nav-link-start"
@@ -264,8 +274,8 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
                   navType={LinkVariants.linkLarge}
                   label="View All"
                 />
-              </NavigationList>
-            </NavigationItemTrigger>
+              </NavigationSubmenu>
+            </NavigationItemWithSubmenu>
             <NavigationItem href="#" id="exhibitions" label="Exhibitions" />
             <NavigationItem href="#" label="Perpetual" />
             <NavigationItem href="#" label="Dropshop" />
@@ -276,19 +286,22 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
         <LanguageSelector onLanguageChange={setCurrentLanguage} currentLanguage={currentLanguage} />
         <UserManagement authState={authState} onLogin={() => console.log('login')} href="/account" />
       </Header>
-      <select>
-        <option value="en">English</option>
-        <option value="de">German</option>
-        <option value="fr">French</option>
-        <option value="it">Italian</option>
-        <option value="es">Spanish</option>
-        <option value="zh">Chinese</option>
-        <option value="ja">Japanese</option>
-        <option value="ko">Korean</option>
-        <option value="pt">Portuguese</option>
-        <option value="ru">Russian</option>
-      </select>
-      <div style={{ whiteSpace: 'pre-wrap' }}>{LOREM_HUGE}</div>
+      <main id="main">
+        <h2 style={{ marginTop: 0 }}>Main content</h2>
+        <select>
+          <option value="en">English</option>
+          <option value="de">German</option>
+          <option value="fr">French</option>
+          <option value="it">Italian</option>
+          <option value="es">Spanish</option>
+          <option value="zh">Chinese</option>
+          <option value="ja">Japanese</option>
+          <option value="ko">Korean</option>
+          <option value="pt">Portuguese</option>
+          <option value="ru">Russian</option>
+        </select>
+        <div style={{ whiteSpace: 'pre-wrap' }}>{LOREM_HUGE}</div>
+      </main>
     </div>
   );
 };

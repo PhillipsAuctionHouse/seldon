@@ -1,12 +1,13 @@
 import type { Meta } from '@storybook/react-vite';
 
 import Navigation from './Navigation';
-import NavigationItemTrigger from './NavigationItemTrigger/NavigationItemTrigger';
+import NavigationItemWithSubmenu from './NavigationItemWithSubmenu/';
 import NavigationList from './NavigationList/NavigationList';
+import NavigationSubmenu from './NavigationSubmenu/NavigationSubmenu';
 import NavigationItem from './NavigationItem/NavigationItem';
 import { LinkVariants } from '../Link';
 import Search from '../Search/Search';
-import React, { CSSProperties, useState } from 'react';
+import { CSSProperties, useState } from 'react';
 import { HeaderContext } from '../../site-furniture/Header/Header';
 import { defaultHeaderContext } from '../../site-furniture/Header/utils';
 
@@ -31,7 +32,6 @@ export default meta;
 export const Playground = () => {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [activeSubmenuId, setActiveSubmenuId] = useState<string | null>(null);
-  const closeTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
   return (
     <HeaderContext.Provider
@@ -41,14 +41,13 @@ export const Playground = () => {
         setIsSearchExpanded,
         activeSubmenuId,
         setActiveSubmenuId,
-        closeTimeoutRef,
       }}
     >
       <Navigation style={{ position: 'relative' } as CSSProperties}>
         {/* emulates the header that does the absolute positioning for submenus*/}
         <NavigationList id="topmenu">
-          <NavigationItemTrigger id="auctions-menu" label="Auctions">
-            <NavigationList id="auctions-submenu">
+          <NavigationItemWithSubmenu id="auctions-menu" label="Auctions">
+            <NavigationSubmenu id="auctions-submenu" leftSectionHeading="Auctions">
               <NavigationItem
                 badge="New York"
                 href="#"
@@ -63,8 +62,9 @@ export const Playground = () => {
                 navType={LinkVariants.linkLarge}
                 label="Casa Fornaroli"
               />
-            </NavigationList>
-          </NavigationItemTrigger>
+              <NavigationItem href="#" navGroup="nav-link-end" label="View all Auctions" />
+            </NavigationSubmenu>
+          </NavigationItemWithSubmenu>
           <NavigationItem href="#" label="Calendar" />
         </NavigationList>
         <Search placeholder="Search" />
