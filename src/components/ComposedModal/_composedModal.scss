@@ -17,8 +17,8 @@ $breakpoint-mobile-small: 450px;
   }
 
   @media (min-width: $breakpoint-md) {
-    min-width: $desktop-modal-min-width;
-    width: $desktop-modal-min-width;
+    min-width: $desktop-modal-width;
+    width: $desktop-modal-width;
   }
 
   &__body {
