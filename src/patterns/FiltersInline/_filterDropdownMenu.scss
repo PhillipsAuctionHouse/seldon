@@ -21,7 +21,7 @@ $dropdown-height: 240px;
     padding-bottom: $spacing-sm;
 
     &--mobile {
-      padding: 0 $spacing-md $spacing-md;
+      padding: $spacing-md;
     }
 
     @media (min-width: $breakpoint-xl) {
