@@ -42,7 +42,7 @@ export interface ComposedModalProps extends Omit<ModalProps, 'onClose' | 'role' 
  *
  * A component for ComposedModal that extends the base Modal component.
  *
- * [Figma Link](https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/Design-System--Responsive-Web?node-id=25578-15048&p=f&m=dev)
+ * [Figma Link](https://www.figma.com/design/wRbSaO9MngnSedlDSQka3Y/Design-System--Responsive-Web?node-id=2292-1672&m=dev)
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-composedmodal--overview)
  *
