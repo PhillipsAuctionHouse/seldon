@@ -2,7 +2,7 @@
 $px: seldon;
 
 // TODO: make design team to follow something like https://tailwindcss.com/docs/font-size
-@mixin font-size-vars--sm {
+@mixin font-size-vars {
   --font-size-display-medium: 2.5rem; // 40px
   --font-size-display-small: 2rem; // 32px
   --font-size-heading-large: 1.5rem; // 24px
@@ -21,31 +21,6 @@ $px: seldon;
   --font-size-link-small: 0.75rem; // 12px
   --font-size-badge-small: 0.75rem; // 12px
   --font-size-badge-medium: 0.875rem; // 14px
-}
-
-@mixin font-size-vars--md {
-  @include font-size-vars--sm;
-}
-
-@mixin font-size-vars--lg {
-  --font-size-display-medium: 3rem; // 48px
-  --font-size-display-small: 2.5rem; // 40px
-  --font-size-heading-large: 1.75rem; // 28px
-  --font-size-heading-medium: 1.5rem; // 24px
-  --font-size-heading-small: 1.25rem; // 20px
-  --font-size-heading-extra-small: 1rem; // 16px
-  --font-size-body-large: 1.25rem; // 20px
-  --font-size-body-medium: 1.125rem; // 18px
-  --font-size-body-small: 1rem; // 16px
-  --font-size-label-large: 1.25rem; // 20px
-  --font-size-label-medium: 1.125rem; // 18px
-  --font-size-label-small: 1rem; // 16px
-  --font-size-link-stylised: 1.25rem; // 20px
-  --font-size-link-large: 1.25rem; // 20px
-  --font-size-link-medium: 1.125rem; // 18px
-  --font-size-link-small: 1rem; // 16px
-  --font-size-badge-small: 1rem; // 16px
-  --font-size-badge-medium: 1.125rem; // 18px
 }
 
 $font-size-xs: var(--font-size-xs);
@@ -277,7 +252,6 @@ $text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $h
 $breakpoint-sm: 361px;
 $breakpoint-md: 961px;
 $breakpoint-lg: 1401px;
-$breakpoint-xl: 1801px;
 
 // Temporary token for mobile breakpoint added to support [L3-7681](https://phillipsauctions.atlassian.net/browse/L3-7681)
 $breakpoint-snw-mobile: 768px;
