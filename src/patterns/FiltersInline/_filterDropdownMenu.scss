@@ -69,6 +69,10 @@ $dropdown-height: 240px;
     align-self: flex-end;
     padding: $spacing-sm $spacing-md;
 
+    &--text {
+      text-wrap: nowrap;
+    }
+
     &--mobile {
       display: block;
       margin: $spacing-sm auto $spacing-md auto;
