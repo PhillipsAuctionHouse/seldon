@@ -1,3 +1,10 @@
+# [1.245.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.244.0...v1.245.0) (2026-03-17)
+
+
+### Features
+
+* **styles:** L3-11583 standardize layout and remove xl bp ([#822](https://github.com/PhillipsAuctionHouse/seldon/issues/822)) ([93e0c58](https://github.com/PhillipsAuctionHouse/seldon/commit/93e0c587a29d7d8d4edbb3aa25dc596bde9b9486))
+
 # [1.244.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.243.0...v1.244.0) (2026-03-13)
 
 
