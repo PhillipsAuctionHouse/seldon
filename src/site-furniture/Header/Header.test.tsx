@@ -76,6 +76,22 @@ describe('Header with logo', () => {
   });
 });
 
+describe('Header skip link', () => {
+  it('renders skip link by default (skipToContentId="main")', () => {
+    render(<Header logo={<Icon icon="PhillipsLogo" />} />);
+
+    const skipLink = screen.getByRole('link', { name: /skip to main content/i });
+    expect(skipLink).toBeInTheDocument();
+    expect(skipLink).toHaveAttribute('href', '#main');
+  });
+
+  it('hides skip link when skipToContentId is null', () => {
+    render(<Header logo={<Icon icon="PhillipsLogo" />} skipToContentId={null} />);
+
+    expect(screen.queryByTestId('skip-to-content')).not.toBeInTheDocument();
+  });
+});
+
 describe('useMobileMenu', () => {
   const toggleCloseText = 'Close Menu';
   const toggleOpenText = 'Open Menu';
