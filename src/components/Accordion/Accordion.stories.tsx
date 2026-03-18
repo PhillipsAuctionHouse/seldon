@@ -4,7 +4,7 @@ import { LinkVariants } from '../Link';
 import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
 import Accordion, { AccordionProps } from './Accordion';
 import AccordionItem, { AccordionItemProps } from './AccordionItem';
-import { AccordionItemVariant, AccordionVariants } from './types';
+import { AccordionVariants } from './types';
 import Button from '../Button/Button';
 import { Text } from '../Text';
 
@@ -68,23 +68,6 @@ export const Default = ({ transitionTimeInMs, ...props }: AccordionProps & Accor
         key={`accordion-key-${item?.label}`}
         id={`accordion-item-${index}`}
         transitionTimeInMs={transitionTimeInMs}
-      >
-        {item?.children}
-      </AccordionItem>
-    ))}
-  </Accordion>
-);
-
-export const AccordionSmall = ({ transitionTimeInMs, ...props }: AccordionProps & AccordionItemProps) => (
-  <Accordion {...props}>
-    {smallTextItems.map((item, index, arr) => (
-      <AccordionItem
-        {...item}
-        isLastItem={index === arr?.length - 1}
-        key={`accordion-key-${item?.label}`}
-        id={`accordion-item-${index}`}
-        transitionTimeInMs={transitionTimeInMs}
-        variant={AccordionItemVariant.sm}
       >
         {item?.children}
       </AccordionItem>

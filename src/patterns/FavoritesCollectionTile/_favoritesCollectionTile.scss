@@ -72,10 +72,6 @@
       background-size: 100%;
       transition: background 0s;
     }
-
-    @media (min-width: $breakpoint-xl) {
-      top: calc($spacing-sm + 0.45rem);
-    }
   }
 
   &__popover-content {
