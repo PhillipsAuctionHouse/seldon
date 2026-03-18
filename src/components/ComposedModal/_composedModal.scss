@@ -17,7 +17,8 @@ $breakpoint-mobile-small: 450px;
   }
 
   @media (min-width: $breakpoint-md) {
-    min-width: $desktop-modal-min-width;
+    min-width: $desktop-modal-width;
+    width: $desktop-modal-width;
   }
 
   &__body {
@@ -49,7 +50,6 @@ $breakpoint-mobile-small: 450px;
 
   &__btns-group > * {
     flex: 1 1 50%;
-    margin: $spacing-xsm 0 0;
 
     @media (max-width: $breakpoint-mobile-small) {
       flex: 1 1 auto;
