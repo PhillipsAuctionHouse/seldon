@@ -1,3 +1,10 @@
+# [1.246.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.245.0...v1.246.0) (2026-03-18)
+
+
+### Features
+
+* **accordion:** L3-11478 Remove small accordion variant ([#825](https://github.com/PhillipsAuctionHouse/seldon/issues/825)) ([f7af87a](https://github.com/PhillipsAuctionHouse/seldon/commit/f7af87ae0acb8cc04385a574ee3cec6600a49159))
+
 # [1.245.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.244.0...v1.245.0) (2026-03-17)
 
 
