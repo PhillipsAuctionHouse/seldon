@@ -1,3 +1,10 @@
+# [1.248.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.247.0...v1.248.0) (2026-03-19)
+
+
+### Features
+
+* **styling:** L3-11486 Calendar Page Filter Buttons Fix ([#830](https://github.com/PhillipsAuctionHouse/seldon/issues/830)) ([6562852](https://github.com/PhillipsAuctionHouse/seldon/commit/6562852ea2bd706233079ee58bc5bdb830331747))
+
 # [1.247.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.246.0...v1.247.0) (2026-03-19)
 
 
