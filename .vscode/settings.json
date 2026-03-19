@@ -102,7 +102,7 @@
     "typescript.tsserver.log": "off",
     "typescript.updateImportsOnFileMove.enabled": "always",
     "typescript.validate.enable": true,
-    "workbench.iconTheme": "vs-seti",
+    "workbench.iconTheme": "vscode-icons",
     "github.copilot.chat.generateTests.codeLens": true,
     "githubPullRequests.experimental.chat": true,
     "githubPullRequests.experimental.notificationsView": true,
