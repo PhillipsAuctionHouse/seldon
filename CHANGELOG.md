@@ -1,3 +1,10 @@
+# [1.247.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.246.0...v1.247.0) (2026-03-19)
+
+
+### Features
+
+* **header:** L3-2561 Improve header accessibility ([#815](https://github.com/PhillipsAuctionHouse/seldon/issues/815)) ([ddf45e1](https://github.com/PhillipsAuctionHouse/seldon/commit/ddf45e1cb9a1cb9e2c5dc587de054f85402d86ca))
+
 # [1.246.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.245.0...v1.246.0) (2026-03-18)
 
 
