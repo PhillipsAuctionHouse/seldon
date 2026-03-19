@@ -168,6 +168,8 @@ const Search = forwardRef<HTMLDivElement, React.PropsWithChildren<SearchProps>>(
                   })}
                   role="combobox"
                   aria-haspopup="listbox"
+                  aria-expanded={isSearchExpanded}
+                  aria-controls={isSearchExpanded ? `${baseTestId}-listbox` : undefined}
                 >
                   <CSSTransition
                     in={isSearchExpanded}
@@ -190,6 +192,7 @@ const Search = forwardRef<HTMLDivElement, React.PropsWithChildren<SearchProps>>(
                       onKeyDown={onKeyDown}
                       onChange={onInputChange}
                       ref={searchInputRef}
+                      tabIndex={isSearchExpanded ? 0 : -1}
                     />
                   </CSSTransition>
                   <SearchButton
@@ -204,6 +207,7 @@ const Search = forwardRef<HTMLDivElement, React.PropsWithChildren<SearchProps>>(
                 </div>
                 {isSearchExpanded && shouldShowResults && value && value.length > 2 ? (
                   <SearchResults
+                    id={`${baseTestId}-listbox`}
                     autoCompleteResults={searchResults}
                     isLoading={state === 'loading'}
                     loadingText={loadingText}

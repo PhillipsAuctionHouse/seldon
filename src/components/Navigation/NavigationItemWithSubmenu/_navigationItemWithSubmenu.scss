@@ -1,0 +1,114 @@
+@use '~scss/allPartials' as *;
+
+.#{$px}-navigation-item-with-submenu {
+  flex-direction: column;
+  justify-content: center;
+
+  & > button {
+    color: $pure-black;
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    width: 100%;
+
+    @include isHeaderDesktop {
+      color: unset;
+      display: block;
+      text-align: center;
+
+      // Match .nav__item .nav__link--linkStylised typography so trigger label aligns with link labels
+      @include text($linkStylised);
+
+      &:focus-visible {
+        @include focus-ring($border-radius: $radius-xs);
+      }
+    }
+  }
+
+  @include isHeaderDesktop {
+    // Underline on button (full-width like .nav__item .nav__link--linkStylised) when open, hover or focus
+    &[data-state='open'] > button::after,
+    &--hovered > button::after,
+    & > button:hover::after,
+    & > button:focus-visible::after {
+      background-color: $pure-black;
+      bottom: -1px;
+      content: '';
+      height: 1px;
+      left: 0;
+      position: absolute;
+      right: 0;
+    }
+
+    // Radix: submenu content is rendered in viewport; these styles apply when content is in viewport
+    &__submenu[data-state='open'] {
+      box-sizing: border-box;
+      cursor: default;
+      left: 0;
+      max-height: calc(90vh - #{$header-height} + var(--banner-height));
+      min-width: 100%;
+      -ms-overflow-style: none;
+      overflow-y: auto;
+      padding: 0;
+      scrollbar-width: none;
+      width: 100%;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .#{$px}-nav__list__section {
+        opacity: 1;
+      }
+    }
+
+    // When submenu is rendered inside nav viewport: panel and link styles (@at-root so selector is viewport → submenu)
+    @at-root .#{$px}-nav__radix-viewport .#{$px}-navigation-item-with-submenu__submenu {
+      background-color: $pure-white;
+      box-sizing: border-box;
+
+      .#{$px}-nav__list {
+        align-items: flex-start;
+        box-sizing: border-box;
+        padding: $spacing-md;
+        width: 100%;
+      }
+
+      .#{$px}-nav__list .#{$px}-link--linkStylised {
+        padding: $snowflake-menu-padding 0;
+      }
+
+      // Single underline on hover/focus for submenu links
+      .#{$px}-nav__list .#{$px}-nav__item {
+        .#{$px}-link--linkStylised,
+        .#{$px}-link--linkMedium,
+        .#{$px}-link--linkLarge {
+          text-decoration: none;
+
+          &:hover,
+          &:focus-visible {
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 1px;
+          }
+        }
+
+        // View all link: always underlined
+        .#{$px}-nav__item--view-all {
+          text-decoration: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 1px;
+        }
+      }
+
+      .#{$px}-nav__list .#{$px}-link--linkMedium,
+      .#{$px}-nav__list .#{$px}-link--linkLarge {
+        padding: 0;
+      }
+    }
+  }
+
+  &__submenu--mobile.#{$px}-nav__list {
+    padding: 0 0 $snowflake-menu-padding;
+  }
+}

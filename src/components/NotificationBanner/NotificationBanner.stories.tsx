@@ -10,8 +10,9 @@ import { Icon } from '../Icon';
 import { Link, LinkVariants } from '../Link';
 import Navigation from '../Navigation/Navigation';
 import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
-import NavigationItemTrigger from '../Navigation/NavigationItemTrigger/NavigationItemTrigger';
+import NavigationItemWithSubmenu from '../Navigation/NavigationItemWithSubmenu/';
 import NavigationList from '../Navigation/NavigationList/NavigationList';
+import NavigationSubmenu from '../Navigation/NavigationSubmenu/NavigationSubmenu';
 import Search, { SearchProps } from '../Search/Search';
 import { SearchResult } from '../Search/SearchResults/SearchResults';
 import NotificationBanner, { NotificationBannerProps } from './NotificationBanner';
@@ -128,8 +129,8 @@ export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: 
       <Header {...props} logo={<Icon icon="PhillipsLogo" />} bannerRef={bannerRef}>
         <Navigation id={`${px}-main-nav`}>
           <NavigationList id={`${px}-main-nav-list`}>
-            <NavigationItemTrigger id="auctions" label="Auctions">
-              <NavigationList
+            <NavigationItemWithSubmenu id="auctions" label="Auctions">
+              <NavigationSubmenu
                 id={`${px}-auctions-nav-list`}
                 leftSectionHeading="Upcoming"
                 rightSectionHeading="Auction Information & Services"
@@ -269,11 +270,11 @@ export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: 
                   navType={LinkVariants.linkLarge}
                   label="Remote Bidding"
                 />
-              </NavigationList>
-            </NavigationItemTrigger>
+              </NavigationSubmenu>
+            </NavigationItemWithSubmenu>
             <NavigationItem href="#" label="Calendar" />
-            <NavigationItemTrigger id="departments" label="Departments">
-              <NavigationList id={`${px}-departments-nav-list`} leftSectionHeading="Our Specialist Departments">
+            <NavigationItemWithSubmenu id="departments" label="Departments">
+              <NavigationSubmenu id={`${px}-departments-nav-list`} leftSectionHeading="Our Specialist Departments">
                 <NavigationItem
                   href="#"
                   navGroup="nav-link-start"
@@ -303,8 +304,8 @@ export const WithHeader = ({ authState, ...props }: HeaderProps & { authState?: 
                   navType={LinkVariants.linkLarge}
                   label="View All"
                 />
-              </NavigationList>
-            </NavigationItemTrigger>
+              </NavigationSubmenu>
+            </NavigationItemWithSubmenu>
             <NavigationItem href="#" id="exhibitions" label="Exhibitions" />
             <NavigationItem href="#" label="Perpetual" />
             <NavigationItem href="#" label="Dropshop" />

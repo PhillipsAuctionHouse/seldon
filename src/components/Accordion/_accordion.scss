@@ -110,6 +110,12 @@
   text-align: inherit;
   width: 100%;
 
+  // Disabled state: keep normal appearance (no gray-out), only interaction is disabled
+  &[data-disabled] {
+    color: inherit;
+    opacity: 1;
+  }
+
   &--hoverable {
     cursor: pointer;
 

@@ -71,18 +71,6 @@
       display: flex;
     }
   }
-
-  @include isHeaderDesktop {
-    & > .#{$px}-nav__list-item-trigger::before {
-      background: $grey-50;
-      content: '';
-      height: 2px;
-      left: 0;
-      position: absolute;
-      top: 100%;
-      width: 100%;
-    }
-  }
 }
 
 .#{$px}-nav__list__section {
