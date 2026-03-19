@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { AccordionVariantKey, AccordionVariants, AccordionItemVariant } from './types';
+import { AccordionVariantKey, AccordionVariants } from './types';
 import { AccordionMultipleProps, AccordionSingleProps } from '@radix-ui/react-accordion';
 
 /**
@@ -33,15 +33,8 @@ export const getAccordionVariantProps = (
 /**
  * A helper for getting the classes of the Accordion icons
  * @param className - The className of the component
- * @param variant - The size variant of the accordion item
  * @param iconName - The name of the icon to be displayed
  * @returns the classes that should be applied for the icon
  */
-export const getIconClasses = (
-  className: string,
-  variant: AccordionItemVariant = AccordionItemVariant.md,
-  iconName: string,
-) =>
-  classnames(`${className}__icon`, `${className}-${iconName}__icon`, {
-    [`${className}__icon--sm`]: variant === AccordionItemVariant.sm,
-  });
+export const getIconClasses = (className: string, iconName: string) =>
+  classnames(`${className}__icon`, `${className}-${iconName}__icon`);

@@ -1,3 +1,31 @@
+# [1.246.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.245.0...v1.246.0) (2026-03-18)
+
+
+### Features
+
+* **accordion:** L3-11478 Remove small accordion variant ([#825](https://github.com/PhillipsAuctionHouse/seldon/issues/825)) ([f7af87a](https://github.com/PhillipsAuctionHouse/seldon/commit/f7af87ae0acb8cc04385a574ee3cec6600a49159))
+
+# [1.245.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.244.0...v1.245.0) (2026-03-17)
+
+
+### Features
+
+* **styles:** L3-11583 standardize layout and remove xl bp ([#822](https://github.com/PhillipsAuctionHouse/seldon/issues/822)) ([93e0c58](https://github.com/PhillipsAuctionHouse/seldon/commit/93e0c587a29d7d8d4edbb3aa25dc596bde9b9486))
+
+# [1.244.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.243.0...v1.244.0) (2026-03-13)
+
+
+### Features
+
+* **ComposedModal:** L3-10837 fix width of composed modal ([#826](https://github.com/PhillipsAuctionHouse/seldon/issues/826)) ([a550c09](https://github.com/PhillipsAuctionHouse/seldon/commit/a550c097dd63830500aabf3b8acb7d97ce9c8f01))
+
+# [1.243.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.242.0...v1.243.0) (2026-03-13)
+
+
+### Features
+
+* **modal:** L3-11756 ComposedModal has extra margin above buttons  ([#823](https://github.com/PhillipsAuctionHouse/seldon/issues/823)) ([2a36323](https://github.com/PhillipsAuctionHouse/seldon/commit/2a363231d2f9ea1267d69283fdf6168e6d63c534))
+
 # [1.242.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.241.0...v1.242.0) (2026-03-04)
 
 

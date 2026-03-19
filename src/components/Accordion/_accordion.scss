@@ -140,34 +140,8 @@
     width: 1.5rem;
   }
 
-  &__icon--sm {
-    flex: initial;
-    height: 0.75rem;
-    width: 1.25rem;
-  }
-
   @include media($breakpoint-md) {
     &__icon {
-      flex: initial;
-      height: 1rem;
-      width: 1.5rem;
-    }
-
-    &__icon--sm {
-      flex: initial;
-      height: 0.875rem;
-      width: 1.5rem;
-    }
-  }
-
-  @include media($breakpoint-xl) {
-    &__icon {
-      flex: initial;
-      height: 1.25rem;
-      width: 1.75rem;
-    }
-
-    &__icon--sm {
       flex: initial;
       height: 1rem;
       width: 1.5rem;
