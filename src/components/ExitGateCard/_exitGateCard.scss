@@ -51,12 +51,7 @@
     }
 
     &-link {
-      font-size: $body-size3;
       padding: $padding-xsm $padding-xxl;
-
-      @media (max-width: $breakpoint-md) {
-        font-size: $body-size2;
-      }
     }
 
     // Match button focus state when the link (wrapper) is focused
