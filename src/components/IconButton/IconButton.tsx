@@ -39,11 +39,11 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       <Button
         {...commonProps}
         variant={variant}
-        aria-label={ariaLabel}
         className={classnames(baseClass, `${baseClass}--${variant}`, className)}
         isDisabled={isDisabled}
         ref={ref}
         {...props}
+        aria-label={ariaLabel}
       >
         {children}
       </Button>
