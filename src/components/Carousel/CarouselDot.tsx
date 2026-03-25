@@ -36,7 +36,7 @@ export const CarouselDot = ({
   return (
     <button
       ref={ref}
-      role="button"
+      type="button"
       onClick={onClick}
       className={classNames(`${baseClassName}__container`)}
       {...commonProps}
