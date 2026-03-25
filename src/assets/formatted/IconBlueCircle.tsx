@@ -10,9 +10,17 @@ interface IconBlueCircleProps extends React.HTMLAttributes<SVGSVGElement> {
 }
 
 const IconBlueCircle = memo(
-  forwardRef<SVGSVGElement, IconBlueCircleProps>((props, ref) => {
-    const { height, width, title, titleId: propsTitleId } = props;
+  forwardRef<SVGSVGElement, IconBlueCircleProps>((inlineProps, ref) => {
+    const { height, width, title, titleId: propsTitleId } = inlineProps;
     const titleId = propsTitleId || kebabCase(title || '');
+    const hasAccessibleName = Boolean(title || inlineProps['aria-label']);
+    const props = hasAccessibleName
+      ? inlineProps
+      : {
+          ...inlineProps,
+          'aria-hidden': true,
+          role: 'presentation',
+        };
 
     return (
       <svg

@@ -10,9 +10,17 @@ interface AdminCloseProps extends React.HTMLAttributes<SVGSVGElement> {
 }
 
 const AdminClose = memo(
-  forwardRef<SVGSVGElement, AdminCloseProps>((props, ref) => {
-    const { color, height, width, title, titleId: propsTitleId } = props;
+  forwardRef<SVGSVGElement, AdminCloseProps>((inlineProps, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = inlineProps;
     const titleId = propsTitleId || kebabCase(title || '');
+    const hasAccessibleName = Boolean(title || inlineProps['aria-label']);
+    const props = hasAccessibleName
+      ? inlineProps
+      : {
+          ...inlineProps,
+          'aria-hidden': true,
+          role: 'presentation',
+        };
 
     return (
       <svg
@@ -23,7 +31,7 @@ const AdminClose = memo(
         width={width}
         role="img"
         ref={ref}
-        aria-labelledby={titleId}
+        aria-labelledby={hasAccessibleName ? titleId : undefined}
         {...props}
       >
         {title ? <title id={titleId}>{title}</title> : null}

@@ -10,9 +10,17 @@ interface AdminTelephoneProps extends React.HTMLAttributes<SVGSVGElement> {
 }
 
 const AdminTelephone = memo(
-  forwardRef<SVGSVGElement, AdminTelephoneProps>((props, ref) => {
-    const { color, height, width, title, titleId: propsTitleId } = props;
+  forwardRef<SVGSVGElement, AdminTelephoneProps>((inlineProps, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = inlineProps;
     const titleId = propsTitleId || kebabCase(title || '');
+    const hasAccessibleName = Boolean(title || inlineProps['aria-label']);
+    const props = hasAccessibleName
+      ? inlineProps
+      : {
+          ...inlineProps,
+          'aria-hidden': true,
+          role: 'presentation',
+        };
 
     return (
       <svg
@@ -23,7 +31,7 @@ const AdminTelephone = memo(
         width={width}
         role="img"
         ref={ref}
-        aria-labelledby={titleId}
+        aria-labelledby={hasAccessibleName ? titleId : undefined}
         {...props}
       >
         {title ? <title id={titleId}>{title}</title> : null}
@@ -38,7 +46,7 @@ const AdminTelephone = memo(
             maskType: 'alpha',
           }}
         >
-          <path fill={color || '#D9D9D9'} d="M0 .625h24v24H0z" />
+          <path fill="#D9D9D9" d="M0 .625h24v24H0z" />
         </mask>
         <g mask="url(#AdminTelephone_svg__a)">
           <path
