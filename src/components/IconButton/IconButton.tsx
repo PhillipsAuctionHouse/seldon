@@ -34,6 +34,7 @@ export interface IconButtonProps extends Omit<React.HTMLAttributes<HTMLButtonEle
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ children, variant = ButtonVariants.primary, isDisabled = false, className, ...props }, ref) => {
     const { className: baseClass, ...commonProps } = getCommonProps(props, 'IconButton');
+    const ariaLabel = props['aria-label'] ?? 'Icon button';
     return (
       <Button
         {...commonProps}
@@ -42,6 +43,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         isDisabled={isDisabled}
         ref={ref}
         {...props}
+        aria-label={ariaLabel}
       >
         {children}
       </Button>

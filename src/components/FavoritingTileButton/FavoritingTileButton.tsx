@@ -61,7 +61,6 @@ const FavoritingTileButton = forwardRef<HTMLButtonElement, FavoritingTileButtonP
         id={props?.id}
         aria-label={`${isLotInList ? actionRemoveText : actionAddText} ${listTitle}`}
         aria-pressed={isLotInList}
-        role="switch"
       >
         <div className={`${baseClassName}__text`}>
           <Text className={`${baseClassName}__text--action`}>{isLotInList ? actionRemoveText : actionAddText}</Text>
