@@ -10,9 +10,17 @@ interface HomeProps extends React.HTMLAttributes<SVGSVGElement> {
 }
 
 const Home = memo(
-  forwardRef<SVGSVGElement, HomeProps>((props, ref) => {
-    const { color, height, width, title, titleId: propsTitleId } = props;
+  forwardRef<SVGSVGElement, HomeProps>((inlineProps, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = inlineProps;
     const titleId = propsTitleId || kebabCase(title || '');
+    const hasAccessibleName = Boolean(title || inlineProps['aria-label']);
+    const props = hasAccessibleName
+      ? inlineProps
+      : {
+          ...inlineProps,
+          'aria-hidden': true,
+          role: 'presentation',
+        };
 
     return (
       <svg

@@ -10,9 +10,17 @@ interface AdminGavelProps extends React.HTMLAttributes<SVGSVGElement> {
 }
 
 const AdminGavel = memo(
-  forwardRef<SVGSVGElement, AdminGavelProps>((props, ref) => {
-    const { color, height, width, title, titleId: propsTitleId } = props;
+  forwardRef<SVGSVGElement, AdminGavelProps>((inlineProps, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = inlineProps;
     const titleId = propsTitleId || kebabCase(title || '');
+    const hasAccessibleName = Boolean(title || inlineProps['aria-label']);
+    const props = hasAccessibleName
+      ? inlineProps
+      : {
+          ...inlineProps,
+          'aria-hidden': true,
+          role: 'presentation',
+        };
 
     return (
       <svg
@@ -38,7 +46,7 @@ const AdminGavel = memo(
             maskType: 'alpha',
           }}
         >
-          <path fill={color || '#D9D9D9'} d="M0 .625h24v24H0z" />
+          <path fill="#D9D9D9" d="M0 .625h24v24H0z" />
         </mask>
         <g mask="url(#AdminGavel_svg__a)">
           <path
