@@ -1,1 +1,1 @@
-npm run coverage
+npm run coverage && npm run test-storybook

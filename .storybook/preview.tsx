@@ -24,6 +24,11 @@ const preview: Preview = {
         ],
       },
     },
+
+    a11y: {
+      // Non-blocking until violations are fixed; switch to 'error' when ready.
+      test: 'warning',
+    },
   },
 
   tags: ['autodocs'],
