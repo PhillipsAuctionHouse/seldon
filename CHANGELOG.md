@@ -1,3 +1,10 @@
+# [1.249.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.248.0...v1.249.0) (2026-03-27)
+
+
+### Features
+
+* **ExitGateCard:** L3-11583 fix issue with Enquire Now font size ([#833](https://github.com/PhillipsAuctionHouse/seldon/issues/833)) ([7d3e855](https://github.com/PhillipsAuctionHouse/seldon/commit/7d3e855fcb46c1b5e6d0dbfaf122b901d56d9fa1))
+
 # [1.248.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.247.0...v1.248.0) (2026-03-19)
 
 
