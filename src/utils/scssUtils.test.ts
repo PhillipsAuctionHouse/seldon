@@ -1,6 +1,9 @@
 import { getScssColors, getScssVar } from './scssUtils';
 
-const vars = vi.hoisted(() => '$pure-black: #000000;\n$cta-blue: #0077FF;\n$error-red: #FF0000;\n');
+const vars = vi.hoisted(
+  () =>
+    '$pure-black: #000000;\n$black-75: rgba(0, 0, 0, 75%);\n$primary-black: $black-75;\n$cta-blue: #0077FF;\n$error-red: #FF0000;\n',
+);
 vi.mock('~scss/_vars.scss?raw', () => ({ default: vars }));
 
 describe('scssUtils', () => {
@@ -11,6 +14,14 @@ describe('scssUtils', () => {
 
       const result = getScssVar(scssVar, defaultValue);
       expect(result).toBe('#000000');
+    });
+
+    it('should resolve aliased scss variables to their final value', () => {
+      const scssVar = '$primary-black';
+      const defaultValue = '$error-red';
+
+      const result = getScssVar(scssVar, defaultValue);
+      expect(result).toBe('rgba(0, 0, 0, 75%)');
     });
 
     it('should return the color of the default value if the scss variable does not exist', () => {

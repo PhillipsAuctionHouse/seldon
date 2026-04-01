@@ -15,11 +15,31 @@ export const getScssVarsMap = () => {
   return scssVarsMap;
 };
 
+const resolveScssVarValue = ({
+  fallbackValue,
+  scssVar,
+  varsMap,
+}: {
+  fallbackValue: string;
+  scssVar: string;
+  varsMap: Record<string, string>;
+}): string => {
+  const visitedVars = new Set<string>();
+  let resolvedValue = varsMap[scssVar] ?? varsMap[fallbackValue] ?? fallbackValue;
+
+  while (resolvedValue.startsWith('$') && !visitedVars.has(resolvedValue)) {
+    visitedVars.add(resolvedValue);
+    resolvedValue = varsMap[resolvedValue] ?? resolvedValue;
+  }
+
+  return resolvedValue;
+};
+
 // This function parses the _vars.scss file into individual lines and returns the value of the variable passed in
 // If the variable is not found, it returns the default value passed in
 export const getScssVar = (scssVar: string, defaultValue: string): string => {
   const varsMap = getScssVarsMap();
-  return varsMap[scssVar] ?? varsMap[defaultValue] ?? defaultValue;
+  return resolveScssVarValue({ scssVar, fallbackValue: defaultValue, varsMap });
 };
 
 // Finds all color variables set in _vars.scss and returns the name of each
