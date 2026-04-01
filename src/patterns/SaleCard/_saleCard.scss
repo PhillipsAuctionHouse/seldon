@@ -18,53 +18,20 @@ a:has(> .#{$px}-sale-card) {
   flex-direction: column;
   gap: $spacing-md;
 
-  &--image-left {
+  &__card {
+    flex-grow: 1;
+    width: 100%;
+  }
+
+  &--default {
     @include media($breakpoint-snw-mobile) {
       flex-direction: row;
     }
-  }
 
-  &--image-right {
-    @include media($breakpoint-snw-mobile) {
-      flex-direction: row-reverse;
-    }
-  }
-
-  &__title {
-    &.#{$px}-text {
-      text-transform: uppercase;
-    }
-  }
-
-  &__image {
-    align-items: center;
-    aspect-ratio: 91/51;
-    border-radius: $radius-xs;
-    display: flex;
-    flex: 0 0 30%;
-    justify-content: center;
-    min-width: 100%;
-
-    @include media($breakpoint-snw-mobile) {
-      min-width: auto;
-    }
-
-    img {
-      height: auto;
-      object-fit: cover;
-      width: 100%;
-    }
-  }
-
-  &__details {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    gap: $spacing-micro;
-
-    @include media($size-snw-mobile, 'max') {
-      align-self: flex-start;
+    .#{$px}-sale-card__card {
+      @include media($breakpoint-snw-mobile) {
+        width: calc(100% - 250px - #{$spacing-md});
+      }
     }
   }
 
@@ -76,34 +43,8 @@ a:has(> .#{$px}-sale-card) {
     }
   }
 
-  &__date_info {
-    display: flex;
-    flex-direction: row;
-  }
-
-  &__separator {
-    margin: 0 8px;
-  }
-
-  &__info {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-micro;
-
-    .#{$px}-text {
-      color: $text-supporting;
-    }
-  }
-
   &__modal-link .#{$px}-button {
     @include text($linkSmall);
-  }
-
-  &__badge {
-    border: 1px solid $badge-blue;
-    color: $badge-blue;
-    padding: $spacing-micro 8px;
-    text-transform: unset;
   }
 
   &__cta-button {
@@ -128,21 +69,26 @@ a:has(> .#{$px}-sale-card) {
     align-items: flex-start;
     gap: $spacing-sm;
 
-    @include media($size-snw-mobile, 'max') {
-      &.#{$px}-sale-card--image-left {
-        flex-direction: row;
-      }
-      &.#{$px}-sale-card--image-right {
-        flex-direction: row-reverse;
-      }
-    }
+    .#{$px}-sale-card__card {
+      .#{$px}-card {
+        @include media($size-snw-mobile, 'max') {
+          &.#{$px}-card--image-left {
+            flex-direction: row;
+          }
 
-    .#{$px}-sale-card__image {
-      max-width: $spacing-xxxl;
-      min-width: 94px;
+          &.#{$px}-card--image-right {
+            flex-direction: row-reverse;
+          }
+        }
+      }
 
-      @include media($size-xl) {
-        max-width: calc($spacing-xxxl * 1.25);
+      .#{$px}-card__image {
+        max-width: $spacing-xxxl;
+        min-width: 94px;
+
+        @include media($size-xl) {
+          max-width: calc($spacing-xxxl * 1.25);
+        }
       }
     }
   }

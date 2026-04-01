@@ -14,6 +14,7 @@ export * from './types/commonTypes';
 // ⚛️ Components
 export { default as Button, type ButtonProps } from './components/Button/Button';
 export { ButtonVariants, ButtonSizes } from './components/Button/types';
+export * from './components/Card';
 export { default as IconButton } from './components/IconButton/IconButton';
 // export { default as DatePicker, type DatePickerProps } from './components/DatePicker/DatePicker';
 export * from './components/Accordion';

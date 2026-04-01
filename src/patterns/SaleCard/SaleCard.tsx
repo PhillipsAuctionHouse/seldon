@@ -1,9 +1,8 @@
 import classnames from 'classnames';
 import { ComponentProps, forwardRef } from 'react';
 import Button from '../../components/Button/Button';
+import { Card, CardImageDisplay, CardVariants } from '../../components/Card';
 import { ButtonVariants } from '../../components/Button/types';
-import { SeldonImage } from '../../components/SeldonImage';
-import { Text, TextVariants } from '../../components/Text';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import { getCommonProps } from '../../utils';
 import { SaleCardActions } from './SaleCardActions';
@@ -78,35 +77,32 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SaleCard');
     const classes = classnames(baseClassName, className, {
       [`${baseClassName}--${variant}`]: variant,
-      [`${baseClassName}--image-${imageDisplay}`]: imageDisplay,
     });
     const componentProps = { ...commonProps, ...props };
+    const cardImageDisplay =
+      imageDisplay === SaleCardImageDisplay.RIGHT ? CardImageDisplay.right : CardImageDisplay.left;
 
     return (
       <article {...componentProps} className={classes} ref={ref}>
-        {imageSrc ? <SeldonImage src={imageSrc} alt={imageAlt} className={`${baseClassName}__image`} /> : null}
-        <div className={`${baseClassName}__details`}>
-          <Text variant={TextVariants.labelSmall}>{auctionType}</Text>
-          <Text variant={TextVariants.headingSmall} className={`${baseClassName}__title`}>
-            {titleText}
-          </Text>
-          {badgeText && (
-            <Text variant={TextVariants.badgeSmall} className={`${baseClassName}__badge`}>
-              {badgeText}
-            </Text>
-          )}
-          <div className={`${baseClassName}__info`}>
-            <Text variant={TextVariants.labelSmall}>{location}</Text>
-            <Text variant={TextVariants.labelSmall}>{date}</Text>
-            {modalButtonText && modalButtonOnClick && (
-              <div className={`${baseClassName}__modal-link`}>
-                <Button onClick={modalButtonOnClick} variant={ButtonVariants.link} linkSize="sm">
-                  {modalButtonText}
-                </Button>
-              </div>
-            )}
-          </div>
-        </div>
+        <Card.Root className={`${baseClassName}__card`} imageDisplay={cardImageDisplay} variant={CardVariants.default}>
+          {imageSrc ? <Card.Image alt={imageAlt} src={imageSrc} /> : null}
+          <Card.Content>
+            <Card.Eyebrow>{auctionType}</Card.Eyebrow>
+            <Card.Title>{titleText}</Card.Title>
+            {badgeText ? <Card.Badge>{badgeText}</Card.Badge> : null}
+            <Card.Meta className={`${baseClassName}__info`}>
+              <Card.MetaItem>{location}</Card.MetaItem>
+              <Card.MetaItem>{date}</Card.MetaItem>
+              {modalButtonText && modalButtonOnClick && (
+                <div className={`${baseClassName}__modal-link`}>
+                  <Button onClick={modalButtonOnClick} variant={ButtonVariants.link} linkSize="sm">
+                    {modalButtonText}
+                  </Button>
+                </div>
+              )}
+            </Card.Meta>
+          </Card.Content>
+        </Card.Root>
 
         {variant !== SaleCardVariants.RELATED_SALE_TILE && children && (
           <div className={`${baseClassName}__ctas`}>
