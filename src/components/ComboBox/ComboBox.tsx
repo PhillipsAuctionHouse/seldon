@@ -425,8 +425,6 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                 className={classnames(`${baseClassName}__input-wrapper`, {
                   [`${baseClassName}__input-wrapper--invalid`]: invalid,
                 })}
-                role="combobox"
-                aria-label={labelText}
               >
                 {/** this input doesn't get used by the form it's just for display **/}
                 <CommandInput
@@ -478,7 +476,6 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                     [`${baseClassName}__input--invalid`]: invalid,
                   })}
                   aria-label={ariaLabelInput}
-                  aria-controls={`${id}-content`}
                   data-testid={`${id}-input`}
                   ref={inputRef}
                 />
@@ -528,7 +525,6 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
             {isOpen && (
               <Popover.Portal container={popoverContainerRef?.current || document.body}>
                 <Popover.Content
-                  id={`${id}-content`}
                   className={`${baseClassName}__content`}
                   aria-label={ariaLabelContent}
                   side="bottom"

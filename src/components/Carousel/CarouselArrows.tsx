@@ -51,7 +51,6 @@ const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(
       >
         <button
           data-testid="prev-arrow"
-          aria-label="Previous slide"
           className={classNames(`${baseClassName}-prev-btn`, {
             [`${baseClassName}-prev-btn--always-visible`]: areArrowsAlwaysVisible,
             [`${baseClassName}-prev-btn--disabled`]: !api?.canScrollPrev(),
@@ -64,7 +63,6 @@ const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(
         </button>
         <button
           data-testid="next-arrow"
-          aria-label="Next slide"
           className={classNames(`${baseClassName}-next-btn`, {
             [`${baseClassName}-next-btn--always-visible`]: areArrowsAlwaysVisible,
             [`${baseClassName}-next-btn--disabled`]: !api?.canScrollNext(),

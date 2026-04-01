@@ -207,10 +207,11 @@ export const CarouselWithMultipleItems = (props: CarouselProps) => {
 
   return (
     <div>
-      <Carousel {...props}>
+      <Carousel {...{ ...props, element: 'ul' }}>
         <CarouselContent>
           {array.map((el) => (
             <CarouselItem
+              element="li"
               onClick={() => alert(el)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {

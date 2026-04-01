@@ -193,7 +193,7 @@ const LotsWithFilter = (props: PropTypes) => {
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {results.map((lot: lotType) => (
           <div key={lot.id} style={{ display: 'flex', flexDirection: 'column', justifyContent: '', margin: 15 }}>
-            <img src={lot.imageSrc} height={150} width={150} alt={`${lot.maker} ${lot.title}`} />
+            <img src={lot.imageSrc} height={150} width={150} />
             <div>
               <strong>{lot.lotNumber}</strong>
             </div>

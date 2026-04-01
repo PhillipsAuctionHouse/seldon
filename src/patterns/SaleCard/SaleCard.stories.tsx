@@ -121,7 +121,7 @@ export const SaleCardWithPrimaryAndSecondaryCTA = () => (
         </Button>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', width: '100%' }}>
           <span>Registered as Paddle 7003</span>
-          <Button variant={ButtonVariants.tertiary} aria-label="More registration information">
+          <Button variant={ButtonVariants.tertiary}>
             <Icon icon="Tooltip" height={16} width={16} aria-hidden />
           </Button>
         </div>

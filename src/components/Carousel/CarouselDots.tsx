@@ -141,8 +141,6 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
                   key={`${id}-dot-${index}`}
                   onClick={() => onDotButtonClick(index)}
                   isSelected={isSelected}
-                  aria-label={`Go to slide ${index + 1}`}
-                  aria-current={isSelected ? 'true' : undefined}
                   scrollableContainerRef={scrollableContainerRef}
                   onInViewChange={(inView) => {
                     if (inView) {

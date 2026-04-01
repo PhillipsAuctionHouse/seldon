@@ -9,18 +9,6 @@ import { getYear } from 'date-fns';
 const meta = {
   title: 'Components/ComboBox',
   component: ComboBox,
-  parameters: {
-    a11y: {
-      config: {
-        rules: [
-          {
-            id: 'aria-valid-attr-value',
-            enabled: false,
-          },
-        ],
-      },
-    },
-  },
 } satisfies Meta<typeof ComboBox>;
 
 export default meta;

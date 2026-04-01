@@ -56,7 +56,7 @@ const Dropdown = forwardRef<HTMLButtonElement, DropdownProps>(
         >
           <DropdownSelect.Trigger
             className={`${baseClassName}__trigger`}
-            aria-label={label ?? 'Select option'}
+            aria-label={label}
             ref={ref}
             disabled={disabled}
           >

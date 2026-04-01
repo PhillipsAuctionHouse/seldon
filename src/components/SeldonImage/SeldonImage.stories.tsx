@@ -13,7 +13,6 @@ export const Playground = (props: React.ComponentProps<typeof SeldonImage>) => <
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 Playground.args = {
   src: 'https://whitneymedia.org/assets/artwork/5864/70_1672_cropped.jpeg',
-  alt: 'Seldon image placeholder',
   aspectRatio: '1/1',
 };
 
@@ -24,7 +23,6 @@ export const CircleImage = (props: React.ComponentProps<typeof SeldonImage>) => 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 CircleImage.args = {
   src: 'https://whitneymedia.org/assets/artwork/21471/70_1558_85_cropped.jpeg',
-  alt: 'Circular Seldon image placeholder',
   aspectRatio: '1/1',
   objectFit: 'cover',
   imageStyle: {
@@ -39,7 +37,6 @@ export const BlurBackground = (props: React.ComponentProps<typeof SeldonImage>) 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 BlurBackground.args = {
   src: 'https://whitneymedia.org/assets/artwork/5892/70_1419_cropped.jpeg',
-  alt: 'Blur background Seldon image placeholder',
   aspectRatio: '1/1',
   objectFit: 'contain',
   hasBlurBackground: true,
@@ -52,7 +49,6 @@ export const BrokenImage = (props: React.ComponentProps<typeof SeldonImage>) => 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 BrokenImage.args = {
   src: 'broken',
-  alt: 'Broken image placeholder',
   aspectRatio: '1/1',
   objectFit: 'contain',
 };
@@ -64,7 +60,6 @@ export const ImageBlocked = (props: React.ComponentProps<typeof SeldonImage>) =>
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 ImageBlocked.args = {
   src: 'https://whitneymedia.org/assets/artwork/5864/70_1672_cropped.jpeg',
-  alt: 'Blocked image placeholder',
   aspectRatio: '1/1',
   objectFit: 'contain',
   imageBlocked: true,

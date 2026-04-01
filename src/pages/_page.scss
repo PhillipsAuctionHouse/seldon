@@ -22,8 +22,8 @@
 }
 
 .storybook-page a {
-  color: #0b63c6;
-  text-decoration: underline;
+  color: #1ea7fd;
+  text-decoration: none;
 }
 
 .storybook-page ul {
@@ -38,7 +38,7 @@
 .storybook-page .tip {
   background: #e7fdd8;
   border-radius: 1em;
-  color: #2f6f1a;
+  color: #66bf3c;
   display: inline-block;
   font-size: 11px;
   font-variation-settings: 'wght' 700;
@@ -65,5 +65,5 @@
 }
 
 .storybook-page .tip-wrapper svg path {
-  fill: #0b63c6;
+  fill: #1ea7fd;
 }

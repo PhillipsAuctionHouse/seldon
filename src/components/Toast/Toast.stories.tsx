@@ -54,15 +54,6 @@ Playground.parameters = {
       story: 'This is a static example of the Toast component. For a complete example, check the Interactive section.',
     },
   },
-  a11y: {
-    config: {
-      rules: [
-        { id: 'aria-allowed-role', enabled: false },
-        { id: 'aria-hidden-focus', enabled: false },
-        { id: 'list', enabled: false },
-      ],
-    },
-  },
 };
 
 const ToastDemo = () => {

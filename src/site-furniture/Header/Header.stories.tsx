@@ -288,7 +288,7 @@ export const Playground = ({ authState, ...props }: HeaderProps & { authState?: 
       </Header>
       <main id="main">
         <h2 style={{ marginTop: 0 }}>Main content</h2>
-        <select aria-label="Language">
+        <select>
           <option value="en">English</option>
           <option value="de">German</option>
           <option value="fr">French</option>

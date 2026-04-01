@@ -2,12 +2,11 @@ import { Meta } from '@storybook/react-vite';
 import { useState } from 'react';
 import { LinkVariants } from '../Link';
 import NavigationItem from '../Navigation/NavigationItem/NavigationItem';
-import NavigationList from '../Navigation/NavigationList/NavigationList';
 import Accordion, { AccordionProps } from './Accordion';
 import AccordionItem, { AccordionItemProps } from './AccordionItem';
 import { AccordionVariants } from './types';
 import Button from '../Button/Button';
-import { Text, TextVariants } from '../Text';
+import { Text } from '../Text';
 
 const meta = {
   title: 'Components/Accordion',
@@ -82,22 +81,20 @@ export const AccordionSubmenu = ({ transitionTimeInMs, ...props }: AccordionProp
     <Accordion {...props} id="accordion-item-submenu">
       <AccordionItem
         id="languageselector"
-        label={<Text variant={TextVariants.linkStylised}>{currentLanguage}</Text>}
+        label={<NavigationItem label={currentLanguage}></NavigationItem>}
         transitionTimeInMs={transitionTimeInMs}
       >
         <div style={{ paddingLeft: 'var(--spacing-sm)' }}>
-          <NavigationList id="language-selector-navlist">
-            <NavigationItem
-              label="English"
-              onClick={() => setCurrentLanguage('English')}
-              navType={LinkVariants.linkLarge}
-            ></NavigationItem>
-            <NavigationItem
-              label="Chinese"
-              onClick={() => setCurrentLanguage('Chinese')}
-              navType={LinkVariants.linkLarge}
-            ></NavigationItem>
-          </NavigationList>
+          <NavigationItem
+            label="English"
+            onClick={() => setCurrentLanguage('English')}
+            navType={LinkVariants.linkLarge}
+          ></NavigationItem>
+          <NavigationItem
+            label="Chinese"
+            onClick={() => setCurrentLanguage('Chinese')}
+            navType={LinkVariants.linkLarge}
+          ></NavigationItem>
         </div>
       </AccordionItem>
     </Accordion>

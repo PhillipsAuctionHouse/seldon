@@ -7,7 +7,7 @@ describe('FavoritingTileButton', () => {
   runCommonTests(FavoritingTileButton, 'FavoritingTileButton');
   it('renders with required props', () => {
     const { getByRole } = render(<FavoritingTileButton isLotInList={false} listTitle="My List" numberOfObjects="5" />);
-    expect(getByRole('button', { pressed: false })).toBeInTheDocument();
+    expect(getByRole('switch')).toBeInTheDocument();
   });
 
   it('displays add text when isLotInList is false', () => {
@@ -38,7 +38,7 @@ describe('FavoritingTileButton', () => {
     const { getByRole } = render(
       <FavoritingTileButton isLotInList={false} listTitle="My List" numberOfObjects="5" onClick={handleClick} />,
     );
-    await userEvent.click(getByRole('button', { pressed: false }));
+    await userEvent.click(getByRole('switch'));
     expect(handleClick).toHaveBeenCalled();
   });
 

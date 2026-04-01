@@ -28,7 +28,6 @@ export const Playground = ({ value, ...props }: DropdownProps) => {
       value={newValue}
       onValueChange={(value) => console.log('value changed', value)}
       id="test"
-      label="Select a language"
     />
   );
 };
