@@ -45,9 +45,13 @@ module.exports = {
         titleId?: string;
       }
       ${'\n'}
-      const ${componentName} = memo(forwardRef<SVGSVGElement, ${propsName}>((props, ref) => {
-        const { color, height, width, title, titleId: propsTitleId } = props;
+      const ${componentName} = memo(forwardRef<SVGSVGElement, ${propsName}>((inlineProps, ref) => {
+        const { color, height, width, title, titleId: propsTitleId } = inlineProps;
         const titleId = propsTitleId || kebabCase(title || '');
+        const hasAccessibleName = Boolean(title || inlineProps['aria-label']);
+        const props = hasAccessibleName
+          ? inlineProps
+          : { ...inlineProps, 'aria-hidden': true, role: 'presentation' };
         ${'\n'}
         return (
           ${jsx}

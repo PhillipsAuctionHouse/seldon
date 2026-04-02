@@ -10,9 +10,17 @@ interface AdminFullscreenExitProps extends React.HTMLAttributes<SVGSVGElement> {
 }
 
 const AdminFullscreenExit = memo(
-  forwardRef<SVGSVGElement, AdminFullscreenExitProps>((props, ref) => {
-    const { color, height, width, title, titleId: propsTitleId } = props;
+  forwardRef<SVGSVGElement, AdminFullscreenExitProps>((inlineProps, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = inlineProps;
     const titleId = propsTitleId || kebabCase(title || '');
+    const hasAccessibleName = Boolean(title || inlineProps['aria-label']);
+    const props = hasAccessibleName
+      ? inlineProps
+      : {
+          ...inlineProps,
+          'aria-hidden': true,
+          role: 'presentation',
+        };
 
     return (
       <svg
@@ -38,7 +46,7 @@ const AdminFullscreenExit = memo(
             maskType: 'alpha',
           }}
         >
-          <path fill={color || '#D9D9D9'} d="M0 .625h24v24H0z" />
+          <path fill="#D9D9D9" d="M0 .625h24v24H0z" />
         </mask>
         <g mask="url(#AdminFullscreenExit_svg__a)">
           <path

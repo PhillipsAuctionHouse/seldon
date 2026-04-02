@@ -28,7 +28,8 @@
   },
   "scripts": {
     "start": "storybook dev -p 6006",
-    "test": "vitest",
+    "test": "vitest --project=unit",
+    "test:all": "vitest",
     "coverage": "vitest run --project=unit --coverage",
     "test-storybook": "vitest run --project=storybook",
     "build": "npm run clean && tsc && vite build",
