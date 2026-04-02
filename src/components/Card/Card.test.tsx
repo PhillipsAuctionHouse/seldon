@@ -14,6 +14,7 @@ describe('Card', () => {
         <Card.Content>
           <Card.Eyebrow>Modern & Contemporary Art</Card.Eyebrow>
           <Card.Title>Gallery Tour: Modern & Contemporary Art London</Card.Title>
+          <Card.Cta href="https://example.com/article">Read more</Card.Cta>
           <Card.Badge>Happening Now</Card.Badge>
           <Card.Description>Additional editorial summary</Card.Description>
           <Card.Meta>
@@ -26,6 +27,7 @@ describe('Card', () => {
 
     expect(screen.getByText('Modern & Contemporary Art')).toBeInTheDocument();
     expect(screen.getByText('Gallery Tour: Modern & Contemporary Art London')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Read more' })).toHaveAttribute('href', 'https://example.com/article');
     expect(screen.getByText('Happening Now')).toBeInTheDocument();
     expect(screen.getByText('Additional editorial summary')).toBeInTheDocument();
     expect(screen.getByText('New York')).toBeInTheDocument();

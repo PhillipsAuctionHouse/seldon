@@ -71,6 +71,10 @@
     }
   }
 
+  &__cta {
+    align-self: flex-start;
+  }
+
   &__description {
     &.#{$px}-text {
       color: $text-default;

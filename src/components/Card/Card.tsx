@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import { type ComponentProps, forwardRef } from 'react';
 
 import { getCommonProps, px } from '../../utils';
+import { Link, LinkVariants } from '../Link';
 import { SeldonImage } from '../SeldonImage';
 import { Text, TextVariants } from '../Text';
 import { CardVariants } from './types';
@@ -23,6 +24,7 @@ export type CardDescriptionProps = Omit<ComponentProps<typeof Text>, 'variant'>;
 export type CardBadgeProps = Omit<ComponentProps<typeof Text>, 'variant'>;
 export type CardMetaProps = ComponentProps<'div'>;
 export type CardMetaItemProps = Omit<ComponentProps<typeof Text>, 'variant'>;
+export type CardCtaProps = ComponentProps<typeof Link>;
 
 /**
  * ## Overview
@@ -92,6 +94,12 @@ const CardMetaItem = forwardRef<HTMLElement, CardMetaItemProps>(({ className, ..
   />
 ));
 
+const CardCta = forwardRef<HTMLAnchorElement, CardCtaProps>(
+  ({ className, variant = LinkVariants.linkSmall, ...props }, ref) => (
+    <Link {...props} ref={ref} className={classnames(`${px}-card__cta`, className)} variant={variant} />
+  ),
+);
+
 CardRoot.displayName = 'Card.Root';
 CardImage.displayName = 'Card.Image';
 CardContent.displayName = 'Card.Content';
@@ -101,6 +109,7 @@ CardDescription.displayName = 'Card.Description';
 CardBadge.displayName = 'Card.Badge';
 CardMeta.displayName = 'Card.Meta';
 CardMetaItem.displayName = 'Card.MetaItem';
+CardCta.displayName = 'Card.Cta';
 
 const Card = Object.assign(CardRoot, {
   Root: CardRoot,
@@ -112,6 +121,7 @@ const Card = Object.assign(CardRoot, {
   Badge: CardBadge,
   Meta: CardMeta,
   MetaItem: CardMetaItem,
+  Cta: CardCta,
 });
 
 export default Card;

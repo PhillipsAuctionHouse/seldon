@@ -2,6 +2,7 @@ export {
   default as Card,
   type CardBadgeProps,
   type CardContentProps,
+  type CardCtaProps,
   type CardDescriptionProps,
   type CardEyebrowProps,
   type CardImageProps,
