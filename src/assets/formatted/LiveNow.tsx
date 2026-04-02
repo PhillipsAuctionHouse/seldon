@@ -13,6 +13,10 @@ const LiveNow = memo(
   forwardRef<SVGSVGElement, LiveNowProps>((props, ref) => {
     const { color, height, width, title, titleId: propsTitleId } = props;
     const titleId = propsTitleId || kebabCase(title || '');
+    const hasAccessibleName = Boolean(title || props['aria-label']);
+    const svgProps = hasAccessibleName
+      ? props
+      : { ...props, 'aria-hidden': true, role: 'presentation', 'aria-labelledby': undefined };
 
     return (
       <svg
@@ -23,8 +27,8 @@ const LiveNow = memo(
         width={width}
         role="img"
         ref={ref}
-        aria-labelledby={titleId}
-        {...props}
+        aria-labelledby={hasAccessibleName ? titleId : undefined}
+        {...svgProps}
       >
         {title ? <title id={titleId}>{title}</title> : null}
         <path
