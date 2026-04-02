@@ -3,6 +3,7 @@
 .#{$px}-card {
   align-items: center;
   display: flex;
+  flex-direction: column;
   gap: $spacing-md;
 
   @include media($breakpoint-snw-mobile) {
@@ -28,12 +29,15 @@
     align-items: center;
     border-radius: $radius-xs;
     display: flex;
-    flex: 0 0 30%;
+    flex: none;
     justify-content: center;
-    min-width: 100%;
+    min-width: 0;
+    width: 100%;
 
     @include media($breakpoint-snw-mobile) {
+      flex: 0 0 30%;
       min-width: auto;
+      width: auto;
     }
   }
 
@@ -60,7 +64,7 @@
     gap: $spacing-micro;
 
     @include media($size-snw-mobile, 'max') {
-      align-self: flex-start;
+      align-self: stretch;
     }
   }
 

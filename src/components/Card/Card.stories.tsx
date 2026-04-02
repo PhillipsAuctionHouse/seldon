@@ -47,37 +47,39 @@ Playground.argTypes = {
 };
 
 export const ArticleCard = (props: CardRootProps) => (
-  <div
-    style={{
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: 'var(--spacing-md)',
-      maxWidth: '720px',
-    }}
-  >
-    <Card.Root {...props} id="article-card-date">
-      <Card.Image alt="Article card image" src="/static/test-image-160x90.jpg" />
-      <Card.Content>
-        <Card.Eyebrow>Modern & Contemporary Art</Card.Eyebrow>
-        <Card.Title>Perpetual Picks: Two Sides of A. Lange & Söhne</Card.Title>
-        <Card.Meta>
-          <Card.MetaItem>May 27, 2025</Card.MetaItem>
-        </Card.Meta>
-      </Card.Content>
-    </Card.Root>
+  <Card.Root {...props} id="article-card-date">
+    <Card.Image alt="Article card image" src="/static/test-image-160x90.jpg" />
+    <Card.Content>
+      <Card.Eyebrow>Modern & Contemporary Art</Card.Eyebrow>
+      <Card.Title>Perpetual Picks: Two Sides of A. Lange & Söhne</Card.Title>
+      <Card.Meta>
+        <Card.MetaItem>May 27, 2025</Card.MetaItem>
+      </Card.Meta>
+    </Card.Content>
+  </Card.Root>
+);
+
+ArticleCard.args = {
+  id: 'article-card',
+};
+
+export const ArticleCardWithCta = (props: CardRootProps) => (
+  <div style={{ maxWidth: '720px' }}>
     <Card.Root {...props} id="article-card-cta">
       <Card.Image alt="Article card image with CTA" src="/static/test-image-160x90.jpg" />
       <Card.Content>
         <Card.Eyebrow>Modern & Contemporary Art</Card.Eyebrow>
         <Card.Title>Perpetual Picks: Two Sides of A. Lange & Söhne</Card.Title>
-        <Card.Cta href="/?path=/docs/components-card--article-card">Read more</Card.Cta>
+        <Card.Cta href="/?path=/docs/components-card--article-card-with-cta">Read more</Card.Cta>
       </Card.Content>
     </Card.Root>
   </div>
 );
 
-ArticleCard.args = {
-  id: 'article-card',
+ArticleCardWithCta.storyName = 'Article card with CTA';
+
+ArticleCardWithCta.args = {
+  id: 'article-card-cta',
 };
 
 export const MediaCard = (props: CardRootProps) => (
