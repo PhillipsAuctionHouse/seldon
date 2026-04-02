@@ -10,9 +10,17 @@ interface AdminCheckProps extends React.HTMLAttributes<SVGSVGElement> {
 }
 
 const AdminCheck = memo(
-  forwardRef<SVGSVGElement, AdminCheckProps>((props, ref) => {
-    const { color, height, width, title, titleId: propsTitleId } = props;
+  forwardRef<SVGSVGElement, AdminCheckProps>((inlineProps, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = inlineProps;
     const titleId = propsTitleId || kebabCase(title || '');
+    const hasAccessibleName = Boolean(title || inlineProps['aria-label']);
+    const props = hasAccessibleName
+      ? inlineProps
+      : {
+          ...inlineProps,
+          'aria-hidden': true,
+          role: 'presentation',
+        };
 
     return (
       <svg

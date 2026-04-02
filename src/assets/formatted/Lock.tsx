@@ -10,9 +10,17 @@ interface LockProps extends React.HTMLAttributes<SVGSVGElement> {
 }
 
 const Lock = memo(
-  forwardRef<SVGSVGElement, LockProps>((props, ref) => {
-    const { color, height, width, title, titleId: propsTitleId } = props;
+  forwardRef<SVGSVGElement, LockProps>((inlineProps, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = inlineProps;
     const titleId = propsTitleId || kebabCase(title || '');
+    const hasAccessibleName = Boolean(title || inlineProps['aria-label']);
+    const props = hasAccessibleName
+      ? inlineProps
+      : {
+          ...inlineProps,
+          'aria-hidden': true,
+          role: 'presentation',
+        };
 
     return (
       <svg

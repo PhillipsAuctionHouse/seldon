@@ -18,7 +18,7 @@ const meta = {
   args: {
     height: 24,
     width: 24,
-    color: '$primary-black',
+    color: '$black-100',
   },
 } satisfies Meta<typeof Icon>;
 

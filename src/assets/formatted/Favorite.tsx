@@ -10,9 +10,17 @@ interface FavoriteProps extends React.HTMLAttributes<SVGSVGElement> {
 }
 
 const Favorite = memo(
-  forwardRef<SVGSVGElement, FavoriteProps>((props, ref) => {
-    const { color, height, width, title, titleId: propsTitleId } = props;
+  forwardRef<SVGSVGElement, FavoriteProps>((inlineProps, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = inlineProps;
     const titleId = propsTitleId || kebabCase(title || '');
+    const hasAccessibleName = Boolean(title || inlineProps['aria-label']);
+    const props = hasAccessibleName
+      ? inlineProps
+      : {
+          ...inlineProps,
+          'aria-hidden': true,
+          role: 'presentation',
+        };
 
     return (
       <svg

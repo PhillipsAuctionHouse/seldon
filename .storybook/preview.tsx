@@ -24,6 +24,10 @@ const preview: Preview = {
         ],
       },
     },
+
+    a11y: {
+      test: 'error',
+    },
   },
 
   tags: ['autodocs'],

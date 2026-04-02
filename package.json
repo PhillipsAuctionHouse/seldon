@@ -1,6 +1,6 @@
 {
   "name": "@phillips/seldon",
-  "version": "1.249.0",
+  "version": "1.250.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/PhillipsAuctionHouse/seldon"
@@ -28,8 +28,10 @@
   },
   "scripts": {
     "start": "storybook dev -p 6006",
-    "test": "vitest",
-    "coverage": "vitest run --coverage",
+    "test": "vitest --project=unit",
+    "test:all": "vitest",
+    "coverage": "vitest run --project=unit --coverage",
+    "test-storybook": "vitest run --project=storybook",
     "build": "npm run clean && tsc && vite build",
     "chromatic": "STORYBOOK=1 chromatic",
     "build:storybook": "storybook build",
@@ -95,6 +97,7 @@
     "@storybook/addon-a11y": "^10.2.8",
     "@storybook/addon-docs": "^10.2.8",
     "@storybook/addon-links": "^10.2.8",
+    "@storybook/addon-vitest": "^10.2.8",
     "@storybook/react": "^10.2.8",
     "@storybook/react-vite": "^10.2.8",
     "@svgr/cli": "^8.1.0",
@@ -113,7 +116,8 @@
     "@typescript-eslint/eslint-plugin": "^8.18.0",
     "@typescript-eslint/parser": "^8.18.0",
     "@vitejs/plugin-react": "^5.1.4",
-    "@vitest/coverage-v8": "^4.0.18",
+    "@vitest/browser-playwright": "^4.1.0",
+    "@vitest/coverage-v8": "^4.1.0",
     "chromatic": "^13.1.4",
     "color": "^4.2.3",
     "eslint": "^9.15.0",
@@ -125,6 +129,7 @@
     "husky": "^9.1.6",
     "jsdom": "^26.1.0",
     "markdownlint-cli": "^0.41.0",
+    "playwright": "^1.58.2",
     "prettier": "3.3.3",
     "react": "^18.3.1",
     "react-docgen-typescript": "^2.2.2",
@@ -149,7 +154,7 @@
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-svgr": "^4.5.0",
     "vite-tsconfig-paths": "^6.1.0",
-    "vitest": "^4.0.18"
+    "vitest": "^4.1.0"
   },
   "peerDependencies": {
     "react": "^18.3.1",

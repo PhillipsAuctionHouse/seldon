@@ -1,5 +1,5 @@
-import { kebabCase } from 'change-case';
 import { forwardRef, memo } from 'react';
+import { kebabCase } from 'change-case';
 
 interface IconOrangeCircleProps extends React.HTMLAttributes<SVGSVGElement> {
   color?: string;
@@ -10,9 +10,17 @@ interface IconOrangeCircleProps extends React.HTMLAttributes<SVGSVGElement> {
 }
 
 const IconOrangeCircle = memo(
-  forwardRef<SVGSVGElement, IconOrangeCircleProps>((props, ref) => {
-    const { height, width, title, titleId: propsTitleId } = props;
+  forwardRef<SVGSVGElement, IconOrangeCircleProps>((inlineProps, ref) => {
+    const { height, width, title, titleId: propsTitleId } = inlineProps;
     const titleId = propsTitleId || kebabCase(title || '');
+    const hasAccessibleName = Boolean(title || inlineProps['aria-label']);
+    const props = hasAccessibleName
+      ? inlineProps
+      : {
+          ...inlineProps,
+          'aria-hidden': true,
+          role: 'presentation',
+        };
 
     return (
       <svg
