@@ -64,16 +64,14 @@ ArticleCard.args = {
 };
 
 export const ArticleCardWithCta = (props: CardRootProps) => (
-  <div style={{ maxWidth: '720px' }}>
-    <Card.Root {...props} id="article-card-cta">
-      <Card.Image alt="Article card image with CTA" src="/static/test-image-160x90.jpg" />
-      <Card.Content>
-        <Card.Eyebrow>Modern & Contemporary Art</Card.Eyebrow>
-        <Card.Title>Perpetual Picks: Two Sides of A. Lange & Söhne</Card.Title>
-        <Card.Cta href="/?path=/docs/components-card--article-card-with-cta">Read more</Card.Cta>
-      </Card.Content>
-    </Card.Root>
-  </div>
+  <Card.Root {...props} id="article-card-cta">
+    <Card.Image alt="Article card image with CTA" src="/static/test-image-160x90.jpg" />
+    <Card.Content>
+      <Card.Eyebrow>Modern & Contemporary Art</Card.Eyebrow>
+      <Card.Title>Perpetual Picks: Two Sides of A. Lange & Söhne</Card.Title>
+      <Card.Cta href="/?path=/docs/components-card--article-card-with-cta">Read more</Card.Cta>
+    </Card.Content>
+  </Card.Root>
 );
 
 ArticleCardWithCta.storyName = 'Article card with CTA';
