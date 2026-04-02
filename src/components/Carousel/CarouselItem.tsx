@@ -21,13 +21,14 @@ export interface CarouselItemProps extends React.HTMLAttributes<HTMLElement> {
 const CarouselItem = forwardRef<HTMLDivElement, CarouselItemProps>(
   ({ element: CustomElement, className, ...props }, ref) => {
     const Component = CustomElement || 'div';
+    const isListItemElement = Component === 'li';
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'CarouselItem');
     const { columnGap } = useCarousel();
 
     return (
       <Component
         ref={ref}
-        role={props.onClick ? 'button' : 'group'}
+        role={isListItemElement ? undefined : props.onClick ? 'button' : 'group'}
         aria-roledescription="slide"
         className={classNames(`${baseClassName}`, className, {
           [`${baseClassName}--gap-${columnGap}`]: !!columnGap,
