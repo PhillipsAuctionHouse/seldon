@@ -34,6 +34,16 @@ describe('Card', () => {
     expect(screen.getByText('18 Aug')).toBeInTheDocument();
   });
 
+  it('renders Card.Video with an embedded iframe', () => {
+    render(
+      <Card.Root>
+        <Card.Video iframeTitle="Card embed" videoSource="https://www.example.com/video" />
+      </Card.Root>,
+    );
+
+    expect(screen.getByTitle('Card embed')).toHaveAttribute('src', 'https://www.example.com/video');
+  });
+
   it('renders the image when imageSrc is provided', () => {
     render(
       <Card.Root>

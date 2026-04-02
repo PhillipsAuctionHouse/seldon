@@ -4,6 +4,7 @@ import { type ComponentProps, forwardRef } from 'react';
 import { getCommonProps, px } from '../../utils';
 import { Link, LinkVariants } from '../Link';
 import { SeldonImage } from '../SeldonImage';
+import { Video } from '../Video';
 import { Text, TextVariants } from '../Text';
 import { CardVariants } from './types';
 
@@ -17,6 +18,7 @@ export interface CardRootProps extends ComponentProps<'div'> {
 export type CardProps = CardRootProps;
 
 export type CardImageProps = Omit<ComponentProps<typeof SeldonImage>, 'className'>;
+export type CardVideoProps = ComponentProps<typeof Video>;
 export type CardContentProps = ComponentProps<'div'>;
 export type CardEyebrowProps = Omit<ComponentProps<typeof Text>, 'variant'>;
 export type CardTitleProps = Omit<ComponentProps<typeof Text>, 'variant'>;
@@ -45,6 +47,15 @@ const CardRoot = forwardRef<HTMLDivElement, CardRootProps>(
 const CardImage = forwardRef<HTMLDivElement, CardImageProps>(({ ...props }, ref) => (
   <SeldonImage {...props} className={`${px}-card__image`} ref={ref} />
 ));
+
+/** Same 91/51 aspect as {@link CardImage} unless overridden. */
+const CARD_MEDIA_ASPECT_RATIO = 91 / 51;
+
+const CardVideo = forwardRef<HTMLDivElement, CardVideoProps>(
+  ({ aspectRatio = CARD_MEDIA_ASPECT_RATIO, className, ...props }, ref) => (
+    <Video {...props} ref={ref} aspectRatio={aspectRatio} className={classnames(`${px}-card__video`, className)} />
+  ),
+);
 
 const CardContent = forwardRef<HTMLDivElement, CardContentProps>(({ className, ...props }, ref) => (
   <div {...props} className={classnames(`${px}-card__details`, className)} ref={ref} />
@@ -102,6 +113,7 @@ const CardCta = forwardRef<HTMLAnchorElement, CardCtaProps>(
 
 CardRoot.displayName = 'Card.Root';
 CardImage.displayName = 'Card.Image';
+CardVideo.displayName = 'Card.Video';
 CardContent.displayName = 'Card.Content';
 CardEyebrow.displayName = 'Card.Eyebrow';
 CardTitle.displayName = 'Card.Title';
@@ -114,6 +126,7 @@ CardCta.displayName = 'Card.Cta';
 const Card = Object.assign(CardRoot, {
   Root: CardRoot,
   Image: CardImage,
+  Video: CardVideo,
   Content: CardContent,
   Eyebrow: CardEyebrow,
   Title: CardTitle,

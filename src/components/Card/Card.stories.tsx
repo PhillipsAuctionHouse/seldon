@@ -1,8 +1,10 @@
 import type { Meta } from '@storybook/react-vite';
 
 import Card, { type CardRootProps } from './Card';
-import { Icon } from '../Icon';
 import { CardVariants } from './types';
+
+const sampleVideoSource =
+  'https://players.brightcove.net/6415663453001/default_default/index.html?videoId=6355671347112';
 
 const meta = {
   title: 'Components/Card',
@@ -80,43 +82,15 @@ ArticleCard.args = {
 
 export const MediaCard = (props: CardRootProps) => (
   <Card.Root {...props}>
-    <div style={{ position: 'relative', width: '100%' }}>
-      <Card.Image alt="Media card image" src="/static/test-image-160x90.jpg" />
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          pointerEvents: 'none',
-        }}
-      >
-        <div
-          style={{
-            alignItems: 'center',
-            background: 'rgba(0, 0, 0, 0.5)',
-            borderRadius: '999px',
-            color: 'white',
-            display: 'inline-flex',
-            height: '3rem',
-            justifyContent: 'center',
-            width: '3rem',
-          }}
-        >
-          <Icon icon="Play" color="currentColor" height={20} width={20} />
-        </div>
-      </div>
-    </div>
+    <Card.Video iframeTitle="Featured auction video" videoSource={sampleVideoSource} />
     <Card.Content>
       <Card.Eyebrow>Modern & Contemporary Art</Card.Eyebrow>
       <Card.Title>
         <a href="/?path=/docs/components-card--overview">Gallery Tour: Modern & Contemporary Art London</a>
       </Card.Title>
       <Card.Description>
-        From Scandinavian masterworks led by Vilhelm Hammershoi to signature works by Andy Warhol, Banksy, and El
-        Anatsui, this season&apos;s Modern & Contemporary Art auctions bring together celebrated voices of the 20th and
-        21st centuries.
+        Watch highlights from this season&apos;s auctions—led by signature works from Vilhelm Hammershoi, Andy Warhol,
+        Banksy, and El Anatsui—and explore voices of the 20th and 21st centuries.
       </Card.Description>
     </Card.Content>
   </Card.Root>
