@@ -113,11 +113,4 @@
       color: $text-supporting;
     }
   }
-
-  &__content {
-    align-self: stretch;
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-micro;
-  }
 }

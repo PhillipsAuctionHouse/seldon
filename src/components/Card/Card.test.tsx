@@ -59,4 +59,11 @@ describe('Card', () => {
 
     expect(screen.getByTestId('card')).toHaveClass('seldon-card--stacked');
   });
+
+  it('preserves an explicit data-testid over the default from getCommonProps', () => {
+    render(<Card.Root id="x" data-testid="wrapper-sale-card" />);
+
+    expect(screen.getByTestId('wrapper-sale-card')).toBeInTheDocument();
+    expect(screen.queryByTestId('card-x')).not.toBeInTheDocument();
+  });
 });

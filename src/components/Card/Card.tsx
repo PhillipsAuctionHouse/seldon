@@ -36,6 +36,10 @@ export type CardCtaProps = ComponentProps<typeof Link>;
  * ## Overview
  *
  * Shared compound card shell for editorial, sale, and media tiles.
+ *
+ * [Figma Link](https://www.figma.com/design/raduA60GRdDPmI7D4mWr6a/07_Editorial--NEW-?node-id=4204-8920&m=dev)
+ *
+ * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-card--overview)
  */
 const CardRoot = forwardRef<HTMLElement, CardRootProps>(
   ({ as: Root = 'div', className, id, variant = CardVariants.default, ...props }, ref) => {
@@ -44,7 +48,7 @@ const CardRoot = forwardRef<HTMLElement, CardRootProps>(
       [`${baseClassName}--${variant}`]: variant,
     });
 
-    return <Root className={classes} id={id} ref={ref} {...commonProps} />;
+    return <Root className={classes} id={id} ref={ref} {...commonProps} {...props} />;
   },
 );
 
