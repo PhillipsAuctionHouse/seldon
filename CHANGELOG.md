@@ -1,3 +1,10 @@
+# [1.250.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.249.0...v1.250.0) (2026-04-02)
+
+
+### Features
+
+* **accessibility:** L3-2530 Accessibility automation - infra setup ([#831](https://github.com/PhillipsAuctionHouse/seldon/issues/831)) ([8abacac](https://github.com/PhillipsAuctionHouse/seldon/commit/8abacac0a885f34542702a9c8decae3b4b19e51f))
+
 # [1.249.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.248.0...v1.249.0) (2026-03-27)
 
 
