@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { type ComponentProps, forwardRef } from 'react';
+import { type ComponentProps, type ElementType, forwardRef } from 'react';
 
 import { getCommonProps, px } from '../../utils';
 import { Link, LinkVariants } from '../Link';
@@ -9,6 +9,10 @@ import { Text, TextVariants } from '../Text';
 import { CardVariants } from './types';
 
 export interface CardRootProps extends ComponentProps<'div'> {
+  /**
+   * Root element for the card shell. Defaults to `div`.
+   */
+  as?: ElementType;
   /**
    * Layout variant for the card.
    */
@@ -33,14 +37,14 @@ export type CardCtaProps = ComponentProps<typeof Link>;
  *
  * Shared compound card shell for editorial, sale, and media tiles.
  */
-const CardRoot = forwardRef<HTMLDivElement, CardRootProps>(
-  ({ className, id, variant = CardVariants.default, ...props }, ref) => {
+const CardRoot = forwardRef<HTMLElement, CardRootProps>(
+  ({ as: Root = 'div', className, id, variant = CardVariants.default, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'Card');
     const classes = classnames(baseClassName, className, {
       [`${baseClassName}--${variant}`]: variant,
     });
 
-    return <div className={classes} id={id} ref={ref} {...commonProps} />;
+    return <Root className={classes} id={id} ref={ref} {...commonProps} />;
   },
 );
 

@@ -18,15 +18,14 @@ a:has(> .#{$px}-sale-card) {
   flex-direction: column;
   gap: $spacing-md;
 
-  &__card {
-    flex-grow: 1;
-    width: 100%;
-
-    &.#{$px}-sale-card--image-left {
+  &--image-left {
+    @include media($breakpoint-snw-mobile) {
       flex-direction: row;
     }
+  }
 
-    &.#{$px}-sale-card--image-right {
+  &--image-right {
+    @include media($breakpoint-snw-mobile) {
       flex-direction: row-reverse;
     }
   }
@@ -65,7 +64,17 @@ a:has(> .#{$px}-sale-card) {
     align-items: flex-start;
     gap: $spacing-sm;
 
-    .#{$px}-sale-card__card .#{$px}-card__image {
+    @include media($size-snw-mobile, 'max') {
+      &.#{$px}-sale-card--image-left {
+        flex-direction: row;
+      }
+
+      &.#{$px}-sale-card--image-right {
+        flex-direction: row-reverse;
+      }
+    }
+
+    > .#{$px}-card__image {
       max-width: $spacing-xxxl;
       min-width: 94px;
 

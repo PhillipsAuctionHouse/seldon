@@ -11,7 +11,7 @@ import { SaleCardImageDisplay, SaleCardVariants } from './types';
 /**
  * Props for the SaleCard component.
  */
-export interface SaleCardProps extends ComponentProps<'div'> {
+export interface SaleCardProps extends ComponentProps<'article'> {
   /**
    * The source URL of the image to be displayed.
    * Leaving this prop undefined or falsy is the intended way to hide the image.
@@ -54,7 +54,7 @@ export interface SaleCardProps extends ComponentProps<'div'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-salecard--overview)
  */
 
-const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
+const SaleCard = forwardRef<HTMLElement, SaleCardProps>(
   (
     {
       className,
@@ -77,42 +77,36 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'SaleCard');
     const classes = classnames(baseClassName, className, {
       [`${baseClassName}--${variant}`]: variant,
+      [`${baseClassName}--image-${imageDisplay}`]: imageDisplay,
     });
     const componentProps = { ...commonProps, ...props };
 
     return (
-      <article {...componentProps} className={classes} ref={ref}>
-        <Card.Root
-          className={classnames(`${baseClassName}__card`, {
-            [`${baseClassName}--image-${imageDisplay}`]: imageDisplay,
-          })}
-          variant={CardVariants.default}
-        >
-          {imageSrc ? <Card.Image alt={imageAlt} src={imageSrc} /> : null}
-          <Card.Content>
-            <Card.Eyebrow>{auctionType}</Card.Eyebrow>
-            <Card.Title>{titleText}</Card.Title>
-            {badgeText ? <Card.Badge>{badgeText}</Card.Badge> : null}
-            <Card.Meta className={`${baseClassName}__info`}>
-              <Card.MetaItem>{location}</Card.MetaItem>
-              <Card.MetaItem>{date}</Card.MetaItem>
-              {modalButtonText && modalButtonOnClick && (
-                <div className={`${baseClassName}__modal-link`}>
-                  <Button onClick={modalButtonOnClick} variant={ButtonVariants.link} linkSize="sm">
-                    {modalButtonText}
-                  </Button>
-                </div>
-              )}
-            </Card.Meta>
-          </Card.Content>
-        </Card.Root>
+      <Card.Root ref={ref} as="article" variant={CardVariants.default} className={classes} {...componentProps}>
+        {imageSrc ? <Card.Image alt={imageAlt} src={imageSrc} /> : null}
+        <Card.Content>
+          <Card.Eyebrow>{auctionType}</Card.Eyebrow>
+          <Card.Title>{titleText}</Card.Title>
+          {badgeText ? <Card.Badge>{badgeText}</Card.Badge> : null}
+          <Card.Meta className={`${baseClassName}__info`}>
+            <Card.MetaItem>{location}</Card.MetaItem>
+            <Card.MetaItem>{date}</Card.MetaItem>
+            {modalButtonText && modalButtonOnClick && (
+              <div className={`${baseClassName}__modal-link`}>
+                <Button onClick={modalButtonOnClick} variant={ButtonVariants.link} linkSize="sm">
+                  {modalButtonText}
+                </Button>
+              </div>
+            )}
+          </Card.Meta>
+        </Card.Content>
 
         {variant !== SaleCardVariants.RELATED_SALE_TILE && children && (
           <div className={`${baseClassName}__ctas`}>
             <SSRMediaQuery.Media greaterThanOrEqual="snw-mobile">{children}</SSRMediaQuery.Media>
           </div>
         )}
-      </article>
+      </Card.Root>
     );
   },
 );
