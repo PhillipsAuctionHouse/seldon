@@ -2,7 +2,7 @@ import type { Meta } from '@storybook/react-vite';
 
 import Card, { type CardRootProps } from './Card';
 import { Icon } from '../Icon';
-import { CardImageDisplay, CardVariants } from './types';
+import { CardVariants } from './types';
 
 const meta = {
   title: 'Components/Card',
@@ -36,12 +36,6 @@ Playground.args = {
 };
 
 Playground.argTypes = {
-  imageDisplay: {
-    options: Object.values(CardImageDisplay),
-    control: {
-      type: 'select',
-    },
-  },
   variant: {
     options: Object.values(CardVariants),
     control: {

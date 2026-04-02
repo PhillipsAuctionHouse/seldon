@@ -11,4 +11,4 @@ export {
   type CardRootProps,
   type CardTitleProps,
 } from './Card';
-export { CardImageDisplay, CardVariants } from './types';
+export { CardVariants } from './types';

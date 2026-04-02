@@ -1,20 +1,16 @@
 import classnames from 'classnames';
 import { type ComponentProps, forwardRef } from 'react';
 
-import { getCommonProps } from '../../utils';
+import { getCommonProps, px } from '../../utils';
 import { SeldonImage } from '../SeldonImage';
 import { Text, TextVariants } from '../Text';
-import { CardImageDisplay, CardVariants } from './types';
+import { CardVariants } from './types';
 
 export interface CardRootProps extends ComponentProps<'div'> {
   /**
    * Layout variant for the card.
    */
   variant?: CardVariants;
-  /**
-   * Position of the image relative to the content.
-   */
-  imageDisplay?: CardImageDisplay;
 }
 
 export type CardProps = CardRootProps;
@@ -34,11 +30,10 @@ export type CardMetaItemProps = Omit<ComponentProps<typeof Text>, 'variant'>;
  * Shared compound card shell for editorial, sale, and media tiles.
  */
 const CardRoot = forwardRef<HTMLDivElement, CardRootProps>(
-  ({ className, id, imageDisplay = CardImageDisplay.left, variant = CardVariants.default, ...props }, ref) => {
+  ({ className, id, variant = CardVariants.default, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'Card');
     const classes = classnames(baseClassName, className, {
       [`${baseClassName}--${variant}`]: variant,
-      [`${baseClassName}--image-${imageDisplay}`]: imageDisplay,
     });
 
     return <div className={classes} id={id} ref={ref} {...commonProps} />;
@@ -46,17 +41,17 @@ const CardRoot = forwardRef<HTMLDivElement, CardRootProps>(
 );
 
 const CardImage = forwardRef<HTMLDivElement, CardImageProps>(({ ...props }, ref) => (
-  <SeldonImage {...props} className="seldon-card__image" ref={ref} />
+  <SeldonImage {...props} className={`${px}-card__image`} ref={ref} />
 ));
 
 const CardContent = forwardRef<HTMLDivElement, CardContentProps>(({ className, ...props }, ref) => (
-  <div {...props} className={classnames('seldon-card__details', className)} ref={ref} />
+  <div {...props} className={classnames(`${px}-card__details`, className)} ref={ref} />
 ));
 
 const CardEyebrow = forwardRef<HTMLElement, CardEyebrowProps>(({ className, ...props }, ref) => (
   <Text
     {...props}
-    className={classnames('seldon-card__eyebrow', className)}
+    className={classnames(`${px}-card__eyebrow`, className)}
     ref={ref}
     variant={TextVariants.labelSmall}
   />
@@ -65,7 +60,7 @@ const CardEyebrow = forwardRef<HTMLElement, CardEyebrowProps>(({ className, ...p
 const CardTitle = forwardRef<HTMLElement, CardTitleProps>(({ className, ...props }, ref) => (
   <Text
     {...props}
-    className={classnames('seldon-card__title', className)}
+    className={classnames(`${px}-card__title`, className)}
     ref={ref}
     variant={TextVariants.headingSmall}
   />
@@ -74,29 +69,24 @@ const CardTitle = forwardRef<HTMLElement, CardTitleProps>(({ className, ...props
 const CardDescription = forwardRef<HTMLElement, CardDescriptionProps>(({ className, ...props }, ref) => (
   <Text
     {...props}
-    className={classnames('seldon-card__description', className)}
+    className={classnames(`${px}-card__description`, className)}
     ref={ref}
     variant={TextVariants.bodySmall}
   />
 ));
 
 const CardBadge = forwardRef<HTMLElement, CardBadgeProps>(({ className, ...props }, ref) => (
-  <Text
-    {...props}
-    className={classnames('seldon-card__badge', className)}
-    ref={ref}
-    variant={TextVariants.badgeSmall}
-  />
+  <Text {...props} className={classnames(`${px}-card__badge`, className)} ref={ref} variant={TextVariants.badgeSmall} />
 ));
 
 const CardMeta = forwardRef<HTMLDivElement, CardMetaProps>(({ className, ...props }, ref) => (
-  <div {...props} className={classnames('seldon-card__meta', className)} ref={ref} />
+  <div {...props} className={classnames(`${px}-card__meta`, className)} ref={ref} />
 ));
 
 const CardMetaItem = forwardRef<HTMLElement, CardMetaItemProps>(({ className, ...props }, ref) => (
   <Text
     {...props}
-    className={classnames('seldon-card__meta-item', className)}
+    className={classnames(`${px}-card__meta-item`, className)}
     ref={ref}
     variant={TextVariants.labelSmall}
   />

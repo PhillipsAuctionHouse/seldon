@@ -1,12 +1,12 @@
 import classnames from 'classnames';
 import { ComponentProps, forwardRef } from 'react';
 import Button from '../../components/Button/Button';
-import { Card, CardImageDisplay, CardVariants } from '../../components/Card';
+import { Card, CardVariants } from '../../components/Card';
 import { ButtonVariants } from '../../components/Button/types';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import { getCommonProps } from '../../utils';
 import { SaleCardActions } from './SaleCardActions';
-import { SaleCardVariants, SaleCardImageDisplay } from './types';
+import { SaleCardImageDisplay, SaleCardVariants } from './types';
 
 /**
  * Props for the SaleCard component.
@@ -79,12 +79,15 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
       [`${baseClassName}--${variant}`]: variant,
     });
     const componentProps = { ...commonProps, ...props };
-    const cardImageDisplay =
-      imageDisplay === SaleCardImageDisplay.RIGHT ? CardImageDisplay.right : CardImageDisplay.left;
 
     return (
       <article {...componentProps} className={classes} ref={ref}>
-        <Card.Root className={`${baseClassName}__card`} imageDisplay={cardImageDisplay} variant={CardVariants.default}>
+        <Card.Root
+          className={classnames(`${baseClassName}__card`, {
+            [`${baseClassName}--image-${imageDisplay}`]: imageDisplay,
+          })}
+          variant={CardVariants.default}
+        >
           {imageSrc ? <Card.Image alt={imageAlt} src={imageSrc} /> : null}
           <Card.Content>
             <Card.Eyebrow>{auctionType}</Card.Eyebrow>
