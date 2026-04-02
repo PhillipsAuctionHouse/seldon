@@ -26,8 +26,7 @@ const preview: Preview = {
     },
 
     a11y: {
-      // Non-blocking until violations are fixed; switch to 'error' when ready.
-      test: 'todo',
+      test: 'error',
     },
   },
 
