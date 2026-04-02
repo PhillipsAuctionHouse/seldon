@@ -93,6 +93,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
     ref,
   ) => {
     const Component = CustomElement || 'div';
+    const isListElement = Component === 'ul' || Component === 'ol';
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Carousel');
     let disableNavigationDragBreakpoint = {};
     switch (disableNavigationDrag) {
@@ -213,8 +214,8 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
           ref={ref}
           onKeyDownCapture={handleKeyDown}
           className={classnames(baseClassName, className)}
-          role="region"
-          aria-roledescription="carousel"
+          role={isListElement ? undefined : 'region'}
+          aria-roledescription={isListElement ? undefined : 'carousel'}
           {...props}
           {...commonProps}
         >

@@ -45,7 +45,7 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         <DropdownMenu.Root open={open} onOpenChange={setOpen}>
           <DropdownMenu.Trigger asChild>
-            <IconButton>
+            <IconButton aria-label={label}>
               <Icon icon={open ? 'CloseX' : 'Calendar'} title={label} />
             </IconButton>
           </DropdownMenu.Trigger>

@@ -19,6 +19,10 @@ export interface VideoProps extends ComponentProps<'div'> {
    * The class name for the iframe
    */
   iframeClassName?: string;
+  /**
+   * Accessible name for the iframe.
+   */
+  iframeTitle?: string;
 }
 /**
  * ## Overview
@@ -30,7 +34,10 @@ export interface VideoProps extends ComponentProps<'div'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-video--overview)
  */
 const Video = forwardRef<HTMLDivElement, VideoProps>(
-  ({ aspectRatio, className, videoSource, iframeRef, iframeClassName, ...props }, ref) => {
+  (
+    { aspectRatio, className, videoSource, iframeRef, iframeClassName, iframeTitle = 'Embedded video', ...props },
+    ref,
+  ) => {
     const { className: baseClassName, 'data-testid': dataTestId, ...commonProps } = getCommonProps(props, 'Video');
 
     const componentProps = {
@@ -48,6 +55,7 @@ const Video = forwardRef<HTMLDivElement, VideoProps>(
           data-testid={`${dataTestId}-iframe`}
           className={classnames(`${baseClassName}__iframe`, iframeClassName)}
           src={videoSource}
+          title={iframeTitle}
           allowFullScreen
           allow="encrypted-media"
           referrerPolicy="no-referrer"

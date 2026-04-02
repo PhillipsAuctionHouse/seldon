@@ -10,9 +10,17 @@ interface AdminPlayProps extends React.HTMLAttributes<SVGSVGElement> {
 }
 
 const AdminPlay = memo(
-  forwardRef<SVGSVGElement, AdminPlayProps>((props, ref) => {
-    const { color, height, width, title, titleId: propsTitleId } = props;
+  forwardRef<SVGSVGElement, AdminPlayProps>((inlineProps, ref) => {
+    const { color, height, width, title, titleId: propsTitleId } = inlineProps;
     const titleId = propsTitleId || kebabCase(title || '');
+    const hasAccessibleName = Boolean(title || inlineProps['aria-label']);
+    const props = hasAccessibleName
+      ? inlineProps
+      : {
+          ...inlineProps,
+          'aria-hidden': true,
+          role: 'presentation',
+        };
 
     return (
       <svg
@@ -23,7 +31,7 @@ const AdminPlay = memo(
         width={width}
         role="img"
         ref={ref}
-        aria-labelledby={titleId}
+        aria-labelledby={hasAccessibleName ? titleId : undefined}
         {...props}
       >
         {title ? <title id={titleId}>{title}</title> : null}
@@ -38,10 +46,10 @@ const AdminPlay = memo(
             maskType: 'alpha',
           }}
         >
-          <path fill={color || '#D9D9D9'} d="M0 .625h24v24H0z" />
+          <path fill="#D9D9D9" d="M0 .625h24v24H0z" />
         </mask>
         <g mask="url(#AdminPlay_svg__a)">
-          <path fill={color || '#fff'} d="M8 19.625v-14l11 7z" />
+          <path fill={color || '#000'} d="M8 19.625v-14l11 7z" />
         </g>
       </svg>
     );
