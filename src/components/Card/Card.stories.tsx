@@ -38,6 +38,9 @@ Playground.args = {
 };
 
 Playground.argTypes = {
+  element: {
+    control: false,
+  },
   variant: {
     options: Object.values(CardVariants),
     control: {

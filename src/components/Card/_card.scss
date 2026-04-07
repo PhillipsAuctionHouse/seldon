@@ -42,7 +42,7 @@
   }
 
   &__image {
-    aspect-ratio: 91/51;
+    // aspect-ratio: 91/51;
 
     img {
       height: auto;
@@ -52,7 +52,6 @@
   }
 
   &__video {
-    // Aspect ratio comes from `Video` via `--aspect-ratio` (defaults to 91/51 in `Card.Video`).
     width: 100%;
   }
 

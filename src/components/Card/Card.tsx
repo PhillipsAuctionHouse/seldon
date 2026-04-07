@@ -12,7 +12,7 @@ export interface CardRootProps extends ComponentProps<'div'> {
   /**
    * Root element for the card shell. Defaults to `div`.
    */
-  as?: ElementType;
+  element?: ElementType;
   /**
    * Layout variant for the card.
    */
@@ -42,28 +42,23 @@ export type CardCtaProps = ComponentProps<typeof Link>;
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-card--overview)
  */
 const CardRoot = forwardRef<HTMLElement, CardRootProps>(
-  ({ as: Root = 'div', className, id, variant = CardVariants.default, ...props }, ref) => {
+  ({ element: Element = 'div', className, id, variant = CardVariants.default, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'Card');
     const classes = classnames(baseClassName, className, {
       [`${baseClassName}--${variant}`]: variant,
     });
 
-    return <Root className={classes} id={id} ref={ref} {...commonProps} {...props} />;
+    return <Element className={classes} id={id} ref={ref} {...commonProps} {...props} />;
   },
 );
 
-const CardImage = forwardRef<HTMLDivElement, CardImageProps>(({ ...props }, ref) => (
-  <SeldonImage {...props} className={`${px}-card__image`} ref={ref} />
+const CardImage = forwardRef<HTMLDivElement, CardImageProps>(({ aspectRatio = '16/9', ...props }, ref) => (
+  <SeldonImage {...props} aspectRatio={aspectRatio} className={`${px}-card__image`} ref={ref} />
 ));
 
-/** Same 91/51 aspect as {@link CardImage} unless overridden. */
-const CARD_MEDIA_ASPECT_RATIO = 91 / 51;
-
-const CardVideo = forwardRef<HTMLDivElement, CardVideoProps>(
-  ({ aspectRatio = CARD_MEDIA_ASPECT_RATIO, className, ...props }, ref) => (
-    <Video {...props} ref={ref} aspectRatio={aspectRatio} className={classnames(`${px}-card__video`, className)} />
-  ),
-);
+const CardVideo = forwardRef<HTMLDivElement, CardVideoProps>(({ aspectRatio = 16 / 9, className, ...props }, ref) => (
+  <Video {...props} ref={ref} aspectRatio={aspectRatio} className={classnames(`${px}-card__video`, className)} />
+));
 
 const CardContent = forwardRef<HTMLDivElement, CardContentProps>(({ className, ...props }, ref) => (
   <div {...props} className={classnames(`${px}-card__details`, className)} ref={ref} />

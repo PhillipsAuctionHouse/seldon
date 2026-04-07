@@ -82,7 +82,7 @@ const SaleCard = forwardRef<HTMLElement, SaleCardProps>(
     const componentProps = { ...commonProps, ...props };
 
     return (
-      <Card.Root ref={ref} as="article" variant={CardVariants.default} className={classes} {...componentProps}>
+      <Card.Root ref={ref} element="article" variant={CardVariants.default} className={classes} {...componentProps}>
         {imageSrc ? <Card.Image alt={imageAlt} src={imageSrc} /> : null}
         <Card.Content>
           <Card.Eyebrow>{auctionType}</Card.Eyebrow>
