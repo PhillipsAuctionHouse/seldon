@@ -52,11 +52,11 @@ const CardRoot = forwardRef<HTMLElement, CardRootProps>(
   },
 );
 
-const CardImage = forwardRef<HTMLDivElement, CardImageProps>(({ aspectRatio, ...props }, ref) => (
+const CardImage = forwardRef<HTMLDivElement, CardImageProps>(({ aspectRatio = '16/9', ...props }, ref) => (
   <SeldonImage {...props} aspectRatio={aspectRatio} className={`${px}-card__image`} ref={ref} />
 ));
 
-const CardVideo = forwardRef<HTMLDivElement, CardVideoProps>(({ aspectRatio = 91 / 51, className, ...props }, ref) => (
+const CardVideo = forwardRef<HTMLDivElement, CardVideoProps>(({ aspectRatio = 16 / 9, className, ...props }, ref) => (
   <Video {...props} ref={ref} aspectRatio={aspectRatio} className={classnames(`${px}-card__video`, className)} />
 ));
 

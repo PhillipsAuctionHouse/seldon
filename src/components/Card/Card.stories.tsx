@@ -103,3 +103,22 @@ MediaCard.args = {
   id: 'media-card',
   variant: CardVariants.stacked,
 };
+
+export const CardWithImagePlaceholder = (props: CardRootProps) => (
+  <Card.Root {...props} id="card-image-placeholder">
+    <Card.Image alt="Card placeholder image" src="broken-image-src" aspectRatio="16/9" />
+    <Card.Content>
+      <Card.Eyebrow>Modern & Contemporary Art</Card.Eyebrow>
+      <Card.Title>Card image placeholder state</Card.Title>
+      <Card.Description>
+        This story intentionally uses a broken image source to demonstrate the default Phillips placeholder.
+      </Card.Description>
+    </Card.Content>
+  </Card.Root>
+);
+
+CardWithImagePlaceholder.storyName = 'Card with image placeholder';
+
+CardWithImagePlaceholder.args = {
+  id: 'card-image-placeholder',
+};

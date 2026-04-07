@@ -4,12 +4,24 @@
   overflow: hidden;
   position: relative;
 
-  &--aspect-ratio-16-9 img {
-    aspect-ratio: 16 / 9;
+  &--aspect-ratio-16-9 {
+    img {
+      aspect-ratio: 16 / 9;
+    }
+
+    &.#{$px}-seldon-image--error-image {
+      aspect-ratio: 16 / 9;
+    }
   }
 
-  &--aspect-ratio-1-1 img {
-    aspect-ratio: 1 / 1;
+  &--aspect-ratio-1-1 {
+    img {
+      aspect-ratio: 1 / 1;
+    }
+
+    &.#{$px}-seldon-image--error-image {
+      aspect-ratio: 1 / 1;
+    }
   }
 
   &--error {
