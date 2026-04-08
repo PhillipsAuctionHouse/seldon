@@ -1,3 +1,10 @@
+# [1.251.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.250.0...v1.251.0) (2026-04-08)
+
+
+### Features
+
+* **card:** PDD-146 Editorial v1.1: add composable card component, refactor salecard ([#838](https://github.com/PhillipsAuctionHouse/seldon/issues/838)) ([9f8d23b](https://github.com/PhillipsAuctionHouse/seldon/commit/9f8d23b18b5afbf311e07fb21a3822aad13bd325))
+
 # [1.250.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.249.0...v1.250.0) (2026-04-02)
 
 
