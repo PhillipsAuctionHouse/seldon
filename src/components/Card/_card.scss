@@ -1,0 +1,113 @@
+@use '~scss/allPartials' as *;
+
+.#{$px}-card {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+
+  @include media($breakpoint-snw-mobile) {
+    flex-direction: row;
+  }
+
+  &--stacked {
+    align-items: flex-start;
+    flex-direction: column;
+
+    .#{$px}-card__image,
+    .#{$px}-card__video {
+      min-width: 100%;
+    }
+
+    .#{$px}-card__details {
+      align-self: stretch;
+    }
+  }
+
+  &__image,
+  &__video {
+    align-items: center;
+    border-radius: $radius-xs;
+    display: flex;
+    flex: none;
+    justify-content: center;
+    min-width: 0;
+    width: 100%;
+
+    @include media($breakpoint-snw-mobile) {
+      flex: 0 0 30%;
+      min-width: auto;
+      width: auto;
+    }
+  }
+
+  &__image {
+    img {
+      height: auto;
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+
+  &__video {
+    width: 100%;
+  }
+
+  &__details {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: $spacing-micro;
+
+    @include media($size-snw-mobile, 'max') {
+      align-self: stretch;
+    }
+  }
+
+  &__title {
+    &.#{$px}-text {
+      text-transform: uppercase;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+
+      &:hover,
+      &:focus-visible {
+        color: inherit;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__cta {
+    align-self: flex-start;
+  }
+
+  &__description {
+    &.#{$px}-text {
+      color: $text-default;
+    }
+  }
+
+  &__badge {
+    border: 1px solid $badge-blue;
+    color: $badge-blue;
+    padding: $spacing-micro 8px;
+    text-transform: unset;
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-micro;
+  }
+
+  &__meta-item {
+    &.#{$px}-text {
+      color: $text-supporting;
+    }
+  }
+}

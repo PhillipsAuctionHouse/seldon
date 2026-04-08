@@ -1,18 +1,17 @@
 import classnames from 'classnames';
 import { ComponentProps, forwardRef } from 'react';
 import Button from '../../components/Button/Button';
+import { Card, CardVariants } from '../../components/Card';
 import { ButtonVariants } from '../../components/Button/types';
-import { SeldonImage } from '../../components/SeldonImage';
-import { Text, TextVariants } from '../../components/Text';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import { getCommonProps } from '../../utils';
 import { SaleCardActions } from './SaleCardActions';
-import { SaleCardVariants, SaleCardImageDisplay } from './types';
+import { SaleCardImageDisplay, SaleCardVariants } from './types';
 
 /**
  * Props for the SaleCard component.
  */
-export interface SaleCardProps extends ComponentProps<'div'> {
+export interface SaleCardProps extends ComponentProps<'article'> {
   /**
    * The source URL of the image to be displayed.
    * Leaving this prop undefined or falsy is the intended way to hide the image.
@@ -55,7 +54,7 @@ export interface SaleCardProps extends ComponentProps<'div'> {
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-salecard--overview)
  */
 
-const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
+const SaleCard = forwardRef<HTMLElement, SaleCardProps>(
   (
     {
       className,
@@ -83,21 +82,15 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
     const componentProps = { ...commonProps, ...props };
 
     return (
-      <article {...componentProps} className={classes} ref={ref}>
-        {imageSrc ? <SeldonImage src={imageSrc} alt={imageAlt} className={`${baseClassName}__image`} /> : null}
-        <div className={`${baseClassName}__details`}>
-          <Text variant={TextVariants.labelSmall}>{auctionType}</Text>
-          <Text variant={TextVariants.headingSmall} className={`${baseClassName}__title`}>
-            {titleText}
-          </Text>
-          {badgeText && (
-            <Text variant={TextVariants.badgeSmall} className={`${baseClassName}__badge`}>
-              {badgeText}
-            </Text>
-          )}
-          <div className={`${baseClassName}__info`}>
-            <Text variant={TextVariants.labelSmall}>{location}</Text>
-            <Text variant={TextVariants.labelSmall}>{date}</Text>
+      <Card.Root ref={ref} element="article" variant={CardVariants.default} className={classes} {...componentProps}>
+        {imageSrc ? <Card.Image alt={imageAlt} src={imageSrc} /> : null}
+        <Card.Content>
+          <Card.Eyebrow>{auctionType}</Card.Eyebrow>
+          <Card.Title>{titleText}</Card.Title>
+          {badgeText ? <Card.Badge>{badgeText}</Card.Badge> : null}
+          <Card.Meta className={`${baseClassName}__info`}>
+            <Card.MetaItem>{location}</Card.MetaItem>
+            <Card.MetaItem>{date}</Card.MetaItem>
             {modalButtonText && modalButtonOnClick && (
               <div className={`${baseClassName}__modal-link`}>
                 <Button onClick={modalButtonOnClick} variant={ButtonVariants.link} linkSize="sm">
@@ -105,15 +98,15 @@ const SaleCard = forwardRef<HTMLDivElement, SaleCardProps>(
                 </Button>
               </div>
             )}
-          </div>
-        </div>
+          </Card.Meta>
+        </Card.Content>
 
         {variant !== SaleCardVariants.RELATED_SALE_TILE && children && (
           <div className={`${baseClassName}__ctas`}>
             <SSRMediaQuery.Media greaterThanOrEqual="snw-mobile">{children}</SSRMediaQuery.Media>
           </div>
         )}
-      </article>
+      </Card.Root>
     );
   },
 );

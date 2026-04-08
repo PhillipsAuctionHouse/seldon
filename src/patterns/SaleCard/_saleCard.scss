@@ -30,80 +30,16 @@ a:has(> .#{$px}-sale-card) {
     }
   }
 
-  &__title {
-    &.#{$px}-text {
-      text-transform: uppercase;
-    }
-  }
-
-  &__image {
-    align-items: center;
-    aspect-ratio: 91/51;
-    border-radius: $radius-xs;
-    display: flex;
-    flex: 0 0 30%;
-    justify-content: center;
-    min-width: 100%;
-
-    @include media($breakpoint-snw-mobile) {
-      min-width: auto;
-    }
-
-    img {
-      height: auto;
-      object-fit: cover;
-      width: 100%;
-    }
-  }
-
-  &__details {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    gap: $spacing-micro;
-
-    @include media($size-snw-mobile, 'max') {
-      align-self: flex-start;
-    }
-  }
-
   &__ctas {
     flex: 0 0 0%;
 
-    @media (min-width: $breakpoint-snw-mobile) {
+    @include media($breakpoint-snw-mobile) {
       flex-basis: 250px;
-    }
-  }
-
-  &__date_info {
-    display: flex;
-    flex-direction: row;
-  }
-
-  &__separator {
-    margin: 0 8px;
-  }
-
-  &__info {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-micro;
-
-    .#{$px}-text {
-      color: $text-supporting;
     }
   }
 
   &__modal-link .#{$px}-button {
     @include text($linkSmall);
-  }
-
-  &__badge {
-    border: 1px solid $badge-blue;
-    color: $badge-blue;
-    padding: $spacing-micro 8px;
-    text-transform: unset;
   }
 
   &__cta-button {
@@ -132,12 +68,13 @@ a:has(> .#{$px}-sale-card) {
       &.#{$px}-sale-card--image-left {
         flex-direction: row;
       }
+
       &.#{$px}-sale-card--image-right {
         flex-direction: row-reverse;
       }
     }
 
-    .#{$px}-sale-card__image {
+    > .#{$px}-card__image {
       max-width: $spacing-xxxl;
       min-width: 94px;
 
