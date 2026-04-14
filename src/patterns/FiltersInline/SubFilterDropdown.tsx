@@ -32,7 +32,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
   ) => {
     const isButtonSelected = filtersListState?.[filterId] ?? false;
     const { totalCount, filterCount } = countActiveFilters(filters, buttonType);
-    const buttonLabel = getFilterButtonLabel(filterButtonLabel, filterCount, filterButtonLabelTranslated || null);
+    const buttonLabel = getFilterButtonLabel(filterButtonLabel, filterButtonLabelTranslated || null);
 
     if (hideDesktopSortButton && buttonType === FilterButtonType.Sort) {
       return null;
