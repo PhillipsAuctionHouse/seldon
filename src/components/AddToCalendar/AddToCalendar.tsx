@@ -13,6 +13,7 @@ import {
   generateCalendarFile,
 } from './calendarLinks';
 import IconButton from '../IconButton/IconButton';
+import { ButtonVariants } from '../Button/types';
 
 export interface AddToCalendarProps extends ComponentProps<'div'> {
   event: CalendarEvent;
@@ -45,7 +46,7 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         <DropdownMenu.Root open={open} onOpenChange={setOpen}>
           <DropdownMenu.Trigger asChild>
-            <IconButton aria-label={label}>
+            <IconButton aria-label={label} variant={ButtonVariants.tertiary}>
               <Icon icon={open ? 'CloseX' : 'Calendar'} title={label} />
             </IconButton>
           </DropdownMenu.Trigger>
