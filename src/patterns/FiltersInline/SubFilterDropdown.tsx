@@ -32,7 +32,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
   ) => {
     const isButtonSelected = filtersListState?.[filterId] ?? false;
     const { totalCount, filterCount } = countActiveFilters(filters, buttonType);
-    const buttonLabel = getFilterButtonLabel(filterButtonLabel, filterCount, filterButtonLabelTranslated || null);
+    const buttonLabel = getFilterButtonLabel(filterButtonLabel, filterButtonLabelTranslated || null);
 
     if (hideDesktopSortButton && buttonType === FilterButtonType.Sort) {
       return null;
@@ -60,7 +60,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
             onClose={getFilterButtonClickHandler(filtersListState, handleClick, filterId)}
             aria-label={ariaLabels.drawer || `${filterButtonLabel} drawer`}
             className={`${px}-filter-drawer-mobile`}
-            headerText={`${buttonLabel} Filter`}
+            headerText={buttonLabel}
             paddingLevel={0}
           >
             <FilterDropdownMenuMobile

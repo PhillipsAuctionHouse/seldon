@@ -176,12 +176,6 @@ export function resetAllFilters(
   }
 }
 
-export function getFilterButtonLabel(
-  filterButtonLabel: string,
-  filterCount: number | null,
-  filterButtonLabelTranslated: string | null,
-): string {
-  return filterButtonLabelTranslated
-    ? filterButtonLabelTranslated
-    : `${filterButtonLabel}` + (filterCount && filterCount > 0 ? ` (${filterCount})` : '');
+export function getFilterButtonLabel(filterButtonLabel: string, filterButtonLabelTranslated: string | null): string {
+  return filterButtonLabelTranslated ? filterButtonLabelTranslated : `${filterButtonLabel}`;
 }
