@@ -74,21 +74,4 @@
       }
     }
   }
-
-  &--is-hover-style-disabled {
-    .#{$px}-icon-button--primary {
-      @include hoverOrActive {
-        svg {
-          color: $pure-black;
-          path {
-            color: $pure-black;
-            fill: $pure-black;
-          }
-        }
-      }
-    }
-    .#{$px}-icon-button svg:hover path {
-      fill: $pure-black;
-    }
-  }
 }

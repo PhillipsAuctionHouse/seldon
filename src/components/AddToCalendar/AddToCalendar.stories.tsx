@@ -25,7 +25,6 @@ Playground.args = {
     location: 'New York',
     timezone: 'America/New_York',
   },
-  isHoverStyleDisabled: true,
 };
 
 Playground.argTypes = {};
