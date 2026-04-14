@@ -41,6 +41,7 @@ export default defineConfig({
         {
           dir: 'dist',
           format: 'cjs',
+          exports: 'named',
           preserveModules: true,
           preserveModulesRoot: 'src',
           chunkFileNames: '[name].cjs',
@@ -52,7 +53,7 @@ export default defineConfig({
       external: [...Object.keys(packageJson.peerDependencies)],
       plugins: [
         copy({
-          hook: 'writeBundle',
+          hook: 'closeBundle',
           flatten: true,
           targets: [
             // Sass entrypoint and utils
@@ -68,7 +69,7 @@ export default defineConfig({
           ],
         }),
         copy({
-          hook: 'writeBundle',
+          hook: 'closeBundle',
           flatten: false,
           targets: [
             // Sass components
