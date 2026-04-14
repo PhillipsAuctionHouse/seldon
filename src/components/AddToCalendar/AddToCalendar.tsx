@@ -18,10 +18,21 @@ export interface AddToCalendarProps extends ComponentProps<'div'> {
   event: CalendarEvent;
   linkElement?: ElementType<LinkProps>;
   label?: string;
+  isHoverStyleDisabled?: boolean;
 }
 
 const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
-  ({ className, event, label = 'Add to calendar', linkElement: Component = Link, ...props }, ref) => {
+  (
+    {
+      className,
+      event,
+      label = 'Add to calendar',
+      linkElement: Component = Link,
+      isHoverStyleDisabled = true,
+      ...props
+    },
+    ref,
+  ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'AddToCalendar');
     const [open, setOpen] = useState(false);
 
@@ -42,7 +53,14 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
     ];
 
     return (
-      <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
+      <div
+        {...commonProps}
+        className={classnames(baseClassName, className, {
+          [`${baseClassName}--is-hover-style-disabled`]: isHoverStyleDisabled,
+        })}
+        {...props}
+        ref={ref}
+      >
         <DropdownMenu.Root open={open} onOpenChange={setOpen}>
           <DropdownMenu.Trigger asChild>
             <IconButton aria-label={label}>
