@@ -1,3 +1,10 @@
+# [1.254.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.253.0...v1.254.0) (2026-04-14)
+
+
+### Features
+
+* **CalendarIcon:** L3-12355 Calendar icon disappears on hover on Auction overview page ([#847](https://github.com/PhillipsAuctionHouse/seldon/issues/847)) ([d4dc066](https://github.com/PhillipsAuctionHouse/seldon/commit/d4dc06641ec85fbebe1b493d6cbb53196c887fb2))
+
 # [1.253.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.252.0...v1.253.0) (2026-04-14)
 
 
