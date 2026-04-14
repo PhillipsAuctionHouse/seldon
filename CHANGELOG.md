@@ -1,3 +1,10 @@
+# [1.252.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.251.0...v1.252.0) (2026-04-14)
+
+
+### Features
+
+* **filters:** L3-7862 cosmetic calendar filter changes ([#845](https://github.com/PhillipsAuctionHouse/seldon/issues/845)) ([bdd8930](https://github.com/PhillipsAuctionHouse/seldon/commit/bdd89300f2d1fc4692a66d39b0d4aef0cfdfd9ae))
+
 # [1.251.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.250.0...v1.251.0) (2026-04-08)
 
 
