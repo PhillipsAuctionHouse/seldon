@@ -1,3 +1,10 @@
+## [1.254.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.254.0...v1.254.1) (2026-04-14)
+
+
+### Bug Fixes
+
+* **package:** PDD-44 need to support React 19 for cms ([#848](https://github.com/PhillipsAuctionHouse/seldon/issues/848)) ([571aa33](https://github.com/PhillipsAuctionHouse/seldon/commit/571aa33c2c7d66144b163b909c77b7a5482abb31))
+
 # [1.254.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.253.0...v1.254.0) (2026-04-14)
 
 
