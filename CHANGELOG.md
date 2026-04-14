@@ -1,3 +1,10 @@
+# [1.253.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.252.0...v1.253.0) (2026-04-14)
+
+
+### Features
+
+* **package:** PDD-44 support CJS bundlers of seldon ([#846](https://github.com/PhillipsAuctionHouse/seldon/issues/846)) ([30ac4ab](https://github.com/PhillipsAuctionHouse/seldon/commit/30ac4ab293ab0f3dc2773584c366c41dbb08a995))
+
 # [1.252.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.251.0...v1.252.0) (2026-04-14)
 
 
