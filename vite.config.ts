@@ -38,6 +38,14 @@ export default defineConfig({
           chunkFileNames: '[name].js',
           entryFileNames: '[name].js',
         },
+        {
+          dir: 'dist',
+          format: 'cjs',
+          preserveModules: true,
+          preserveModulesRoot: 'src',
+          chunkFileNames: '[name].cjs',
+          entryFileNames: '[name].cjs',
+        },
       ],
       // make sure to externalize deps that shouldn't be bundled
       // into your library
