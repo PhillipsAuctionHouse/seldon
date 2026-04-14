@@ -181,7 +181,5 @@ export function getFilterButtonLabel(
   filterCount: number | null,
   filterButtonLabelTranslated: string | null,
 ): string {
-  return filterButtonLabelTranslated
-    ? filterButtonLabelTranslated
-    : `${filterButtonLabel}` + (filterCount && filterCount > 0 ? ` (${filterCount})` : '');
+  return filterButtonLabelTranslated ? filterButtonLabelTranslated : `${filterButtonLabel}`;
 }
