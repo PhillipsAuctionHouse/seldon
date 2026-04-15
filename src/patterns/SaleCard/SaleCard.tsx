@@ -40,6 +40,8 @@ export interface SaleCardProps extends ComponentProps<'article'> {
   variant?: SaleCardVariants;
   /** * The <SaleCardActions /> component used to render the SaleCard CTAs. */
   children?: React.ReactElement<typeof SaleCardActions>;
+  /** * Optional additional content rendered after the info/meta section inside Card.Content. */
+  additionalContent?: React.ReactNode;
   /** * The position of the image relative to the content. Can be 'left' or 'right'. Defaults to 'left'. */
   imageDisplay?: SaleCardImageDisplay;
 }
@@ -69,6 +71,7 @@ const SaleCard = forwardRef<HTMLElement, SaleCardProps>(
       modalButtonText,
       variant = SaleCardVariants.DEFAULT,
       children,
+      additionalContent,
       imageDisplay = SaleCardImageDisplay.LEFT,
       ...props
     },
@@ -99,6 +102,7 @@ const SaleCard = forwardRef<HTMLElement, SaleCardProps>(
               </div>
             )}
           </Card.Meta>
+          {additionalContent ? additionalContent : null}
         </Card.Content>
 
         {variant !== SaleCardVariants.RELATED_SALE_TILE && children && (

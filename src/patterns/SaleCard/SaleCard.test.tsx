@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import SaleCard from './SaleCard';
 import SaleCardActions from './SaleCardActions';
 import Button from '../../components/Button/Button';
@@ -86,5 +86,10 @@ describe('SaleCard', () => {
     const link = getByText('Download PDF');
     expect(link).toBeInTheDocument();
     expect(link.closest('a')).toHaveAttribute('href', 'https://example.com/pdf');
+  });
+
+  it('should render additional content when provided', () => {
+    render(<SaleCard {...props} additionalContent={<span>Online bidding</span>} />);
+    expect(screen.getByText('Online bidding')).toBeInTheDocument();
   });
 });

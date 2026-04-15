@@ -7,6 +7,7 @@ import { getScssVar } from '../../utils/scssUtils';
 import SaleCard, { SaleCardProps } from './SaleCard';
 import { SaleCardActions } from './SaleCardActions';
 import { Text } from '../../components/Text';
+import { TextVariants } from '../../components/Text/types';
 import { SaleCardImageDisplay, SaleCardVariants } from './types';
 
 const meta = {
@@ -190,6 +191,39 @@ export const SaleCardWithRegistrationStatus = () => (
       <Text>Registered as Paddle 7003</Text>
     </SaleCardActions>
   </SaleCard>
+);
+
+export const AdditionalContent = () => (
+  <SaleCard
+    {...defaultProps}
+    badgeText="Happening Now"
+    additionalContent={
+      <div
+        style={{
+          alignItems: 'center',
+          borderTop: `1px solid #ECEAE7`,
+          display: 'flex',
+          gap: '1rem',
+          justifyContent: 'space-between',
+          marginTop: '0.75rem',
+          paddingTop: '0.75rem',
+          width: '100%',
+        }}
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+          <Text variant={TextVariants.headingSmall}>Online bidding</Text>
+          <Text variant={TextVariants.bodySmall}>Advance bids placed</Text>
+        </div>
+        <Button
+          onClick={() => console.log('Details button clicked')}
+          variant={ButtonVariants.secondary}
+          style={{ minWidth: '120px', whiteSpace: 'nowrap' }}
+        >
+          Details
+        </Button>
+      </div>
+    }
+  />
 );
 
 export const SaleCardWithDownloadLink = () => (
