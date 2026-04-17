@@ -1,7 +1,7 @@
 @use '~scss/allPartials' as *;
 
 .#{$px}-countdown {
-  align-items: center;
+  align-items: stretch;
   border-bottom: none;
   display: flex;
   flex-direction: column;
@@ -10,38 +10,62 @@
   padding-bottom: $spacing-sm;
   width: 100%;
 
+  &--closing-lot {
+    .#{$px}-duration,
+    .#{$px}-duration .#{$px}-text {
+      color: $warning-default;
+      font-variation-settings: 'wght' 600;
+    }
+  }
+
   &--show-bottom-border {
     border-bottom: 1px solid $light-gray;
     margin-bottom: 1.5rem;
   }
 
   &__countdown-container {
-    align-items: center;
+    align-items: flex-start;
+    column-gap: $spacing-sm;
     display: flex;
-    flex-shrink: 0;
-    gap: $spacing-sm;
-    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    row-gap: 0;
     text-transform: inherit;
+    width: 100%;
 
-    .#{$px}-text {
-      font-variation-settings: 'wght' 600;
+    > .#{$px}-text {
+      flex-shrink: 0;
     }
+  }
 
-    .#{$px}-duration {
-      font-variation-settings: 'wght' 600;
-    }
+  &__duration-group {
+    align-items: center;
+    column-gap: $spacing-sm;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    row-gap: 0;
   }
 
   &--compact {
     .#{$px}-countdown__countdown-container {
-      gap: $spacing-xsm;
+      column-gap: $spacing-xsm;
+      row-gap: 0;
     }
-  }
 
-  &--closing-lot {
-    .#{$px}-duration,
-    .#{$px}-countdown__label {
-      color: $warning-default;
+    .#{$px}-countdown__duration-group {
+      column-gap: $spacing-xsm;
+      row-gap: 0;
+    }
+
+    &--closing-lot {
+      .#{$px}-duration,
+      .#{$px}-duration .#{$px}-text {
+        color: $warning-default;
+        font-variation-settings: 'wght' 600;
+      }
     }
   }
 }
