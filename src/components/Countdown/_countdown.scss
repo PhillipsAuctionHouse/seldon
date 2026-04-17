@@ -30,7 +30,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-    row-gap: 0;
+    row-gap: $spacing-micro;
     text-transform: inherit;
     width: 100%;
 
@@ -52,12 +52,10 @@
   &--compact {
     .#{$px}-countdown__countdown-container {
       column-gap: $spacing-xsm;
-      row-gap: 0;
     }
 
     .#{$px}-countdown__duration-group {
       column-gap: $spacing-xsm;
-      row-gap: 0;
     }
 
     &--closing-lot {
