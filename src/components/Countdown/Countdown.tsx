@@ -1,4 +1,4 @@
-import { ComponentProps, forwardRef, useEffect, useMemo, useState } from 'react';
+import { ComponentProps, forwardRef, useEffect, useMemo, useState, type ReactElement } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { SupportedLanguages } from '../../types/commonTypes';
@@ -111,6 +111,49 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
 
     const textVariant = variant === CountdownVariants.sm ? TextVariants.labelSmall : TextVariants.labelMedium;
 
+    const durationGroupContent = [
+      timeLeft.days > 0 ? (
+        <Duration
+          key="days"
+          duration={timeLeft}
+          unit="days"
+          locale={dateFnsLocale}
+          formatDurationStr={formatDurationStr}
+          textVariant={textVariant}
+        />
+      ) : null,
+      timeLeft.days > 0 || timeLeft.hours > 0 ? (
+        <Duration
+          key="hours"
+          duration={timeLeft}
+          unit="hours"
+          locale={dateFnsLocale}
+          formatDurationStr={formatDurationStr}
+          textVariant={textVariant}
+        />
+      ) : null,
+      timeLeft.days === 0 ? (
+        <Duration
+          key="minutes"
+          duration={timeLeft}
+          unit="minutes"
+          locale={dateFnsLocale}
+          formatDurationStr={formatDurationStr}
+          textVariant={textVariant}
+        />
+      ) : null,
+      timeLeft.days === 0 && timeLeft.hours === 0 ? (
+        <Duration
+          key="seconds"
+          duration={timeLeft}
+          unit="seconds"
+          locale={dateFnsLocale}
+          formatDurationStr={formatDurationStr}
+          textVariant={textVariant}
+        />
+      ) : null,
+    ].filter((node): node is ReactElement => node != null);
+
     return showTimer ? (
       <div
         data-chromatic="ignore"
@@ -126,44 +169,9 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
       >
         <div className={`${baseClassName}__countdown-container`} role="timer" aria-label={label}>
           <Text variant={textVariant}>{label}</Text>
-          <div className={`${baseClassName}__duration-group`}>
-            {timeLeft.days > 0 ? (
-              <Duration
-                duration={timeLeft}
-                unit="days"
-                locale={dateFnsLocale}
-                formatDurationStr={formatDurationStr}
-                textVariant={textVariant}
-              />
-            ) : null}
-            {timeLeft.days > 0 || timeLeft.hours > 0 ? (
-              <Duration
-                duration={timeLeft}
-                unit="hours"
-                locale={dateFnsLocale}
-                formatDurationStr={formatDurationStr}
-                textVariant={textVariant}
-              />
-            ) : null}
-            {timeLeft.days === 0 ? (
-              <Duration
-                duration={timeLeft}
-                unit="minutes"
-                locale={dateFnsLocale}
-                formatDurationStr={formatDurationStr}
-                textVariant={textVariant}
-              />
-            ) : null}
-            {timeLeft.days === 0 && timeLeft.hours === 0 ? (
-              <Duration
-                duration={timeLeft}
-                unit="seconds"
-                locale={dateFnsLocale}
-                formatDurationStr={formatDurationStr}
-                textVariant={textVariant}
-              />
-            ) : null}
-          </div>
+          {durationGroupContent.length > 0 ? (
+            <div className={`${baseClassName}__duration-group`}>{durationGroupContent}</div>
+          ) : null}
         </div>
         {variant === CountdownVariants.default ? <span>{intervalDescription}</span> : null}
       </div>
