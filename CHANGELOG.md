@@ -1,3 +1,10 @@
+# [1.255.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.254.1...v1.255.0) (2026-04-22)
+
+
+### Features
+
+* **Countdown:** L3-12092 Sale PLP - Lot timers are misaligned ([#851](https://github.com/PhillipsAuctionHouse/seldon/issues/851)) ([6d04863](https://github.com/PhillipsAuctionHouse/seldon/commit/6d04863ef3a247175000849fa9f68d4d8d65744c))
+
 ## [1.254.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.254.0...v1.254.1) (2026-04-14)
 
 
