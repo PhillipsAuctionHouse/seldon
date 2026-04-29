@@ -1,11 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import { promisify } from 'util';
 import { fileURLToPath } from 'url';
 import { exec } from 'child_process';
+import { promisify } from 'util';
 
-const copyFile = promisify(fs.copyFile);
-const mkdir = promisify(fs.mkdir);
 const execAsync = promisify(exec);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,16 +12,29 @@ const __dirname = path.dirname(__filename);
 const ICON_TEMPLATE_DIR = path.join(__dirname, '..', 'Icon');
 const FORMATTED_ICONS_DIR = path.join(__dirname, '../../src/assets/formatted');
 const SVG_SOURCE_DIR = path.join(__dirname, '../../src/assets');
+const TEMPLATE_FILE = 'IconName.tsx';
+
+// Regex patterns
+const PASCAL_CASE_REGEX = /^[A-Z][a-zA-Z0-9]*$/;
+const KEBAB_CASE_REGEX = /\s([a-z]+)-([a-z]+)=/gi;
+const SVG_TAG_REGEX = /<svg[^>]*>([\s\S]*)<\/svg>/i;
+const VIEWBOX_REGEX = /<svg[^>]*viewBox=/i;
+const HARDCODED_COLOR_REGEX = /fill=["'](?!none)(?!currentColor)#[0-9a-fA-F]{3,6}["']/i;
+const FILL_ATTRIBUTE_REGEX = /fill\s*=/i;
+
+// SVG elements to process
+const SVG_ELEMENTS = ['path', 'circle', 'rect', 'polygon', 'ellipse', 'line', 'polyline'] as const;
 
 /**
- * Validates that the icon name is in PascalCase format
+ * Formats an error message consistently
  */
-function validateIconName(name: string): boolean {
-  return /^[A-Z][a-zA-Z0-9]*$/.test(name);
+function formatError(message: string, error?: unknown): string {
+  const errorMsg = error instanceof Error ? error.message : String(error);
+  return error ? `${message}: ${errorMsg}` : message;
 }
 
 /**
- * Checks if a file exists and is accessible
+ * Checks if a file exists
  */
 async function fileExists(filePath: string): Promise<boolean> {
   try {
@@ -35,156 +46,174 @@ async function fileExists(filePath: string): Promise<boolean> {
 }
 
 /**
- * Extracts SVG content after the opening <svg> tag
+ * Validates icon name and file paths
+ */
+async function validateInputs(
+  iconName: string,
+  svgFilePath: string,
+  targetFile: string,
+  force: boolean,
+): Promise<void> {
+  if (!PASCAL_CASE_REGEX.test(iconName)) {
+    throw new Error(`Icon name "${iconName}" must be in PascalCase format (e.g., ArrowLeft, CheckCircle)`);
+  }
+
+  if ((await fileExists(targetFile)) && !force) {
+    throw new Error(`Icon "${iconName}" already exists. Use --force to overwrite.`);
+  }
+
+  if (!(await fileExists(svgFilePath))) {
+    throw new Error(`SVG file not found: ${svgFilePath}`);
+  }
+}
+
+/**
+ * Extracts SVG content between tags
  */
 function extractSvgContent(svgFileContent: string): string {
-  const match = svgFileContent.match(/<svg[^>]*>([\s\S]*)<\/svg>/i);
-  if (!match || !match[1]) {
+  const match = svgFileContent.match(SVG_TAG_REGEX);
+  if (!match?.[1]) {
     throw new Error('Invalid SVG file: could not parse SVG content');
   }
   return match[1];
 }
 
 /**
- * Converts SVG content to React-compatible TSX format
- * - Adds fill={color} to SVG elements without fill attribute
- * - Converts kebab-case attributes to camelCase
+ * Validates SVG content and logs warnings
  */
-function tsxifySvgContent(svgContent: string): string {
-  const elementsToProcess = ['path', 'circle', 'rect', 'polygon', 'ellipse', 'line', 'polyline'];
-  let result = svgContent;
-
-  // Add fill={color} to elements that don't have a fill attribute
-  elementsToProcess.forEach((element) => {
-    result = result.replace(new RegExp(`<${element}\\s+([^>]*?)(\\/??)>`, 'gi'), (match, attributes, selfClosing) => {
-      if (/fill\\s*=/i.test(attributes)) {
-        return match;
-      }
-      return `<${element} ${attributes.trim()} fill={color}${selfClosing}>`;
-    });
-  });
-
-  // Convert kebab-case attributes to camelCase (only attribute names, not values)
-  return result.replace(
-    /\s([a-z]+)-([a-z]+)=/gi,
-    (match, p1, p2) => ` ${p1}${p2.charAt(0).toUpperCase()}${p2.slice(1)}=`,
-  );
-}
-
-/**
- * Updates the icon template file with the icon name and SVG content
- */
-async function updateFileContent(targetFile: string, iconName: string, svgRest: string): Promise<string> {
-  const fileContent = await fs.promises.readFile(targetFile, 'utf-8');
-  const updatedContent = fileContent.replace(/IconName/g, iconName).replace('SVGRest', svgRest);
-  return updatedContent;
-}
-
-/**
- * Main function to copy and process icon files
- */
-async function copyIconFiles(iconName: string, svgFilePath: string, force = false): Promise<void> {
-  // Validate icon name format
-  if (!validateIconName(iconName)) {
-    throw new Error(`Icon name "${iconName}" must be in PascalCase format (e.g., ArrowLeft, CheckCircle)`);
-  }
-
-  // Check for duplicate icon
-  const targetFile = path.join(FORMATTED_ICONS_DIR, `${iconName}.tsx`);
-  if ((await fileExists(targetFile)) && !force) {
-    throw new Error(`Icon "${iconName}" already exists. Use --force to overwrite.`);
-  }
-
-  // Validate SVG file exists
-  if (!(await fileExists(svgFilePath))) {
-    throw new Error(`SVG file not found: ${svgFilePath}`);
-  }
-
-  // Read and parse SVG file
-  let svgFileContent: string;
-  try {
-    svgFileContent = await fs.promises.readFile(svgFilePath, 'utf-8');
-  } catch (error) {
-    throw new Error(`Failed to read SVG file: ${error instanceof Error ? error.message : String(error)}`);
-  }
-
-  // Validate SVG content
-  if (!svgFileContent.includes('<svg')) {
+function validateAndWarnSvg(svgContent: string, svgInnerContent: string): void {
+  if (!svgContent.includes('<svg')) {
     throw new Error('Invalid SVG file: missing <svg> tag');
   }
 
-  // Warn about missing viewBox
-  if (!/<svg[^>]*viewBox=/i.test(svgFileContent)) {
+  if (!VIEWBOX_REGEX.test(svgContent)) {
     console.warn('⚠️  Warning: SVG missing viewBox attribute. This may cause scaling issues.');
   }
 
-  let svgRest: string;
+  if (HARDCODED_COLOR_REGEX.test(svgInnerContent)) {
+    console.warn('⚠️  Warning: SVG contains hardcoded fill colors. These may override the dynamic color prop.');
+  }
+}
+
+/**
+ * Adds fill={color} to SVG elements without a fill attribute
+ */
+function addFillToElements(svgContent: string): string {
+  let result = svgContent;
+  SVG_ELEMENTS.forEach((element) => {
+    result = result.replace(new RegExp(`<${element}\\s+([^>]*?)(\\/??)>`, 'gi'), (match, attributes, selfClosing) => {
+      if (FILL_ATTRIBUTE_REGEX.test(attributes)) return match;
+      return `<${element} ${attributes.trim()} fill={color}${selfClosing}>`;
+    });
+  });
+  return result;
+}
+
+/**
+ * Converts kebab-case attributes to camelCase
+ */
+function kebabToCamelCase(content: string): string {
+  return content.replace(KEBAB_CASE_REGEX, (_, p1, p2) => ` ${p1}${p2.charAt(0).toUpperCase()}${p2.slice(1)}=`);
+}
+
+/**
+ * Converts SVG content to React-compatible TSX format
+ */
+function convertToTsx(svgContent: string): string {
+  const withFill = addFillToElements(svgContent);
+  return kebabToCamelCase(withFill);
+}
+
+/**
+ * Reads and processes SVG file
+ */
+async function processSvgFile(svgFilePath: string): Promise<string> {
+  const svgContent = await fs.promises.readFile(svgFilePath, 'utf-8');
+  const svgInner = extractSvgContent(svgContent);
+  validateAndWarnSvg(svgContent, svgInner);
+  return convertToTsx(svgInner) + '</svg>';
+}
+
+/**
+ * Updates icon template with icon name and SVG content
+ */
+function updateTemplate(templateContent: string, iconName: string, svgContent: string): string {
+  return templateContent
+    .replace(/\/\/ /g, ' ')
+    .replace(/IconName/g, iconName)
+    .replace('SVGRest', svgContent);
+}
+
+/**
+ * Updates index file with new icon export
+ */
+function updateIndexContent(existingContent: string, iconName: string): string {
+  const exportStatement = `export { default as ${iconName} } from './${iconName}';`;
+  const lines = existingContent.split('\n').filter((line) => line.trim());
+  if (!lines.includes(exportStatement)) {
+    lines.push(exportStatement);
+  }
+  return lines.sort().join('\n') + '\n';
+}
+
+/**
+ * Formats files with Prettier
+ */
+async function formatFiles(targetFile: string, indexPath: string, svgTargetFile: string): Promise<void> {
   try {
-    svgRest = extractSvgContent(svgFileContent);
-
-    // Warn about hardcoded colors
-    if (/fill=["'](?!none)(?!currentColor)#[0-9a-fA-F]{3,6}["']/i.test(svgRest)) {
-      console.warn('⚠️  Warning: SVG contains hardcoded fill colors. These may override the dynamic color prop.');
-    }
-
-    svgRest = tsxifySvgContent(svgRest) + '</svg>';
+    await execAsync(`npx prettier --write "${targetFile}" "${indexPath}"`);
+    await execAsync(`npx prettier --write --parser html "${svgTargetFile}"`);
   } catch (error) {
-    throw new Error(`Failed to process SVG content: ${error instanceof Error ? error.message : String(error)}`);
+    console.warn('Warning: Prettier formatting failed:', error instanceof Error ? error.message : String(error));
+  }
+}
+
+/**
+ * Creates icon files from SVG
+ */
+async function copyIconFiles(iconName: string, svgFilePath: string, force = false): Promise<void> {
+  const targetFile = path.join(FORMATTED_ICONS_DIR, `${iconName}.tsx`);
+  const sourceFile = path.join(ICON_TEMPLATE_DIR, TEMPLATE_FILE);
+  const indexPath = path.join(FORMATTED_ICONS_DIR, 'index.ts');
+  const svgTargetFile = path.join(SVG_SOURCE_DIR, `${iconName}.svg`);
+
+  // Validate inputs
+  await validateInputs(iconName, svgFilePath, targetFile, force);
+
+  if (!(await fileExists(sourceFile))) {
+    throw new Error(`Icon template not found: ${sourceFile}`);
   }
 
-  try {
-    // Ensure target directory exists
-    await mkdir(FORMATTED_ICONS_DIR, { recursive: true });
+  // Process SVG file
+  const processedSvg = await processSvgFile(svgFilePath).catch((error) => {
+    throw new Error(formatError('Failed to process SVG file', error));
+  });
 
-    // Copy and update icon template
-    const sourceFile = path.join(ICON_TEMPLATE_DIR, 'IconName.tsx');
+  // Read template and existing index
+  const [templateContent, existingIndex] = await Promise.all([
+    fs.promises.readFile(sourceFile, 'utf-8'),
+    fileExists(indexPath).then((exists) => (exists ? fs.promises.readFile(indexPath, 'utf-8') : '')),
+  ]);
 
-    if (!(await fileExists(sourceFile))) {
-      throw new Error(`Icon template not found: ${sourceFile}`);
-    }
+  // Generate file contents
+  const updatedTemplate = updateTemplate(templateContent, iconName, processedSvg);
+  const updatedIndex = updateIndexContent(existingIndex, iconName);
 
-    await copyFile(sourceFile, targetFile);
-    const updatedContent = await updateFileContent(targetFile, iconName, svgRest);
+  // Ensure directory exists and write files
+  await fs.promises.mkdir(FORMATTED_ICONS_DIR, { recursive: true });
+  await Promise.all([
+    fs.promises.writeFile(targetFile, updatedTemplate),
+    fs.promises.writeFile(indexPath, updatedIndex),
+    fs.promises.copyFile(svgFilePath, svgTargetFile),
+  ]);
 
-    // Update index file with sorted exports
-    const indexPath = path.join(FORMATTED_ICONS_DIR, 'index.ts');
-    let indexContent = '';
-    if (await fileExists(indexPath)) {
-      indexContent = await fs.promises.readFile(indexPath, 'utf-8');
-    }
+  // Format with prettier
+  await formatFiles(targetFile, indexPath, svgTargetFile);
 
-    const importStatement = `export { default as ${iconName} } from './${iconName}';`;
-    const lines = indexContent.split('\n').filter((line) => line.trim());
-    if (!lines.includes(importStatement)) {
-      lines.push(importStatement);
-    }
-    const sortedContent = lines.sort().join('\n') + '\n';
-
-    // Copy original SVG file
-    const svgTargetFile = path.join(SVG_SOURCE_DIR, `${iconName}.svg`);
-
-    // Write all files in parallel
-    await Promise.all([
-      fs.promises.writeFile(targetFile, updatedContent),
-      fs.promises.writeFile(indexPath, sortedContent),
-      copyFile(svgFilePath, svgTargetFile),
-    ]);
-
-    // Format generated files with prettier
-    try {
-      await execAsync(`npx prettier --write "${targetFile}" "${indexPath}"`);
-      await execAsync(`npx prettier --write --parser html "${svgTargetFile}"`);
-    } catch (error) {
-      console.warn('Warning: Prettier formatting failed:', error instanceof Error ? error.message : String(error));
-    }
-
-    console.log(`✓ Icon files created successfully for ${iconName}`);
-    console.log(`  - ${targetFile}`);
-    console.log(`  - ${svgTargetFile}`);
-    console.log(`  - ${indexPath} (updated)`);
-  } catch (error) {
-    throw new Error(`Failed to create icon files: ${error instanceof Error ? error.message : String(error)}`);
-  }
+  console.log(`✓ Icon files created successfully for ${iconName}:`);
+  console.log(`  - ${targetFile}`);
+  console.log(`  - ${svgTargetFile}`);
+  console.log(`  - ${indexPath} (updated)`);
 }
 
 /**
@@ -217,4 +246,4 @@ async function main(): Promise<number> {
 
 main().then((exitCode) => process.exit(exitCode));
 
-export { copyIconFiles, updateFileContent };
+export { copyIconFiles };
