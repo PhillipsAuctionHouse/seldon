@@ -10,38 +10,43 @@ interface PaddleProps extends React.HTMLAttributes<SVGSVGElement> {
 }
 
 const Paddle = memo(
-  forwardRef<SVGSVGElement, PaddleProps>((props, ref) => {
-    const { color, height, width, title, titleId: propsTitleId } = props;
-    const titleId = propsTitleId || kebabCase(title || '');
+  forwardRef < SVGSVGElement,
+  PaddleProps >
+    ((inlineProps, ref) => {
+      const { color, height, width, title, titleId: propsTitleId } = inlineProps;
+      const titleId = propsTitleId || kebabCase(title || '');
+      const hasAccessibleName = Boolean(title || inlineProps['aria-label']);
+      const props = hasAccessibleName
+        ? inlineProps
+        : {
+            ...inlineProps,
+            'aria-hidden': true,
+            role: 'presentation',
+          };
 
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        height={height}
-        width={width}
-        role="img"
-        ref={ref}
-        aria-labelledby={titleId}
-        {...props}
-      >
-        {title ? <title id={titleId}>{title}</title> : null}
-
-        <rect width="24" height="24" fill="white" />
-        <path
-          d="M12 3C13.7 3 15.483 3.6376 16.8291 4.7041C18.1714 5.76774 19 7.18717 19 8.74023C18.9999 10.294 18.1704 11.7184 16.8271 12.7871C15.4805 13.8585 13.6982 14.5 12 14.5C10.3009 14.5 8.51822 13.8609 7.17188 12.792C5.82898 11.7258 5 10.3035 5 8.75C5 7.19649 5.82898 5.77422 7.17188 4.70801C8.51822 3.63908 10.3009 3 12 3Z"
-          stroke="black"
-          strokeWidth="2"
-          fill={color}
-        />
-        <path
-          d="M13 15C13 15 13 15 13 18C13 19.0746 13 20.5 13 20.5L14 22C14 22 13 22 12 22C11 22 10 22 10 22L11 20.5C11 20 11 19.4037 11 18C11 15 11 15 11 15H13Z"
-          fill="black"
-        />
-      </svg>
-    );
-  }),
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          height={height}
+          width={width}
+          role="img"
+          ref={ref}
+          aria-labelledby={titleId}
+          {...props}
+        >
+          {title ? <title id={titleId}>{title}</title> : null}
+          <path fill="#fff" d="M0 0h24v24H0z" />
+          <path
+            stroke={color}
+            strokeWidth={2}
+            d="M12 3c1.7 0 3.483.638 4.83 1.704C18.17 5.768 19 7.187 19 8.74c0 1.554-.83 2.978-2.173 4.047C15.48 13.858 13.698 14.5 12 14.5c-1.7 0-3.482-.64-4.828-1.708C5.829 11.726 5 10.304 5 8.75s.829-2.976 2.172-4.042C8.518 3.639 10.3 3 12 3Z"
+          />
+          <path fill={color} d="M13 15v5.5l1 1.5h-4l1-1.5V15z" />
+        </svg>
+      );
+    }),
 );
 
 export default Paddle;
