@@ -48,6 +48,10 @@ export interface CountdownProps extends ComponentProps<'div'> {
    * Function to get the current date time
    */
   getCurrentDateTime?: () => Date | null;
+  /**
+   * Centers label and durationwithin the countdown row
+   */
+  centerAlign?: boolean;
 }
 /**
  * ## Overview
@@ -70,6 +74,7 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
       showBottomBorder = true,
       variant = CountdownVariants.default,
       getCurrentDateTime = () => new Date(),
+      centerAlign = false,
       ...props
     },
     ref,
@@ -163,6 +168,7 @@ const Countdown = forwardRef<HTMLDivElement, CountdownProps>(
           [`${baseClassName}--sm`]: variant === CountdownVariants.sm,
           [`${baseClassName}--show-bottom-border`]: showBottomBorder,
           [`${baseClassName}--closing-lot`]: isClosingTag,
+          [`${baseClassName}--center-align`]: centerAlign,
         })}
         {...props}
         ref={ref}
