@@ -1,3 +1,10 @@
+# [1.256.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.255.0...v1.256.0) (2026-04-29)
+
+
+### Features
+
+* **Countdown:** L3-12092 Lot timers are misaligned regression bug fix ([#854](https://github.com/PhillipsAuctionHouse/seldon/issues/854)) ([5194260](https://github.com/PhillipsAuctionHouse/seldon/commit/5194260ca1c01e91f963bf61bdb07be0d8e8c601))
+
 # [1.255.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.254.1...v1.255.0) (2026-04-22)
 
 
