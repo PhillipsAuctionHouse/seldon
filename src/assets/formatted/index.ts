@@ -72,6 +72,7 @@ export { default as Refresh } from './Refresh';
 export { default as Search } from './Search';
 export { default as Sell } from './Sell';
 export { default as SellActive } from './SellActive';
+export { default as Settings } from './Settings';
 export { default as Share } from './Share';
 export { default as Subtract } from './Subtract';
 export { default as Success } from './Success';
