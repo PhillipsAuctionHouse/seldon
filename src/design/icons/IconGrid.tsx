@@ -4,7 +4,7 @@ import { Icon, IconProps } from '../../components/Icon';
 import cn from 'classnames';
 import * as Icons from '../../assets/formatted';
 
-const designIcons = Object.keys(Icons).map((key) => key.replace(/\.tsx$/, ''));
+const designIcons = Object.keys(Icons);
 export const IconGrid = (props: IconProps) => {
   const [color, setColor] = useState<string>('$black-100');
   const [size, setSize] = useState<string>('16px');
