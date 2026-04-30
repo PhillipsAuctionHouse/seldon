@@ -1,3 +1,10 @@
+# [1.258.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.257.0...v1.258.0) (2026-04-30)
+
+
+### Features
+
+* **Icons:** L3-12367 rebuild my account navigation tower ([#853](https://github.com/PhillipsAuctionHouse/seldon/issues/853)) ([3e2fa84](https://github.com/PhillipsAuctionHouse/seldon/commit/3e2fa8404ec7f15ad5aab22311454389cf4275e0))
+
 # [1.257.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.256.0...v1.257.0) (2026-04-30)
 
 
