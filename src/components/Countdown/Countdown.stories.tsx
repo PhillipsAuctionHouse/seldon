@@ -45,6 +45,9 @@ Playground.argTypes = {
   endDateTime: {
     control: 'date',
   },
+  centerAlign: {
+    control: 'boolean',
+  },
 };
 
 export const Days = (props: CountdownProps) => <Countdown {...props} endDateTime={daysDate} />;

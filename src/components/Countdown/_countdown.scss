@@ -25,24 +25,41 @@
 
   &__countdown-container {
     align-items: flex-start;
-    gap: $spacing-micro $spacing-sm;
     display: flex;
     flex-flow: row wrap;
+    gap: $spacing-micro $spacing-sm;
     justify-content: flex-start;
     text-transform: inherit;
     width: 100%;
 
     > .#{$px}-text {
       flex-shrink: 0;
+      font-variation-settings: 'wght' 600;
+    }
+  }
+
+  &--center-align {
+    .#{$px}-countdown__countdown-container {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .#{$px}-countdown__duration-group {
+      justify-content: center;
     }
   }
 
   &__duration-group {
     align-items: center;
-    gap: 0 $spacing-sm;
     display: flex;
     flex-flow: row wrap;
+    gap: 0 $spacing-sm;
     justify-content: flex-start;
+
+    .#{$px}-duration .#{$px}-text {
+      font-variation-settings: 'wght' 600;
+    }
   }
 
   &--compact {

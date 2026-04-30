@@ -1,3 +1,24 @@
+# [1.258.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.257.0...v1.258.0) (2026-04-30)
+
+
+### Features
+
+* **Icons:** L3-12367 rebuild my account navigation tower ([#853](https://github.com/PhillipsAuctionHouse/seldon/issues/853)) ([3e2fa84](https://github.com/PhillipsAuctionHouse/seldon/commit/3e2fa8404ec7f15ad5aab22311454389cf4275e0))
+
+# [1.257.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.256.0...v1.257.0) (2026-04-30)
+
+
+### Features
+
+* **SaleHeaderBanner:** L3-12092 Countdown timer inside of SaleHeaderBanner fix ([#857](https://github.com/PhillipsAuctionHouse/seldon/issues/857)) ([9fedd2e](https://github.com/PhillipsAuctionHouse/seldon/commit/9fedd2e8296c0c7f60553b22a903337e27285def))
+
+# [1.256.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.255.0...v1.256.0) (2026-04-29)
+
+
+### Features
+
+* **Countdown:** L3-12092 Lot timers are misaligned regression bug fix ([#854](https://github.com/PhillipsAuctionHouse/seldon/issues/854)) ([5194260](https://github.com/PhillipsAuctionHouse/seldon/commit/5194260ca1c01e91f963bf61bdb07be0d8e8c601))
+
 # [1.255.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.254.1...v1.255.0) (2026-04-22)
 
 
