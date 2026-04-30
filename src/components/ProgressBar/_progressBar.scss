@@ -15,9 +15,15 @@
   }
 
   &__fill {
+    align-items: center;
     background: $status-info;
     bottom: 0;
+    display: flex;
+    justify-content: flex-end;
     left: 0;
+    min-width: 0;
+    overflow: hidden;
+    padding-inline: $spacing-xsm;
     position: absolute;
     top: 0;
     transition: width 250ms ease;
@@ -27,16 +33,15 @@
   &__label {
     align-items: center;
     display: flex;
+    flex-shrink: 0;
     height: 100%;
-    padding-inline-start: $spacing-xsm;
-    position: relative;
-    z-index: 1;
   }
 
   &__label-text {
     color: $white;
     font-size: $string-size3;
     font-variation-settings: 'wght' 600;
+    white-space: nowrap;
   }
 
   &__live-region {
@@ -48,5 +53,17 @@
     position: absolute;
     white-space: nowrap;
     width: 1px;
+  }
+
+  @media (max-width: calc($breakpoint-md - 1px)) {
+    &__track {
+      background: $bg-progress-bar-mobile;
+      height: 4px;
+    }
+
+    &__label,
+    &__label-text {
+      display: none;
+    }
   }
 }

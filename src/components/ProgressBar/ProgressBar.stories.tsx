@@ -11,6 +11,6 @@ export default meta;
 export const Playground = (props: ProgressBarProps) => <ProgressBar {...props} />;
 
 Playground.args = {
-  currentLot: 8,
-  totalLots: 110,
+  currentLot: 1,
+  totalLots: 80,
 };
