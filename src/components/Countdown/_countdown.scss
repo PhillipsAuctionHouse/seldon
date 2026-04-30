@@ -25,9 +25,9 @@
 
   &__countdown-container {
     align-items: flex-start;
+    gap: $spacing-micro $spacing-sm;
     display: flex;
     flex-flow: row wrap;
-    gap: $spacing-micro $spacing-sm;
     justify-content: flex-start;
     text-transform: inherit;
     width: 100%;
@@ -39,9 +39,9 @@
 
   &__duration-group {
     align-items: center;
+    gap: 0 $spacing-sm;
     display: flex;
     flex-flow: row wrap;
-    gap: 0 $spacing-sm;
     justify-content: flex-start;
   }
 
