@@ -1,3 +1,4 @@
+@use 'sass:color';
 // prefix
 $px: seldon;
 
@@ -108,7 +109,7 @@ $bg-soft: #f9f8f7;
 $bg-border: #eae9e6;
 $bg-inverted: #000;
 $bg-overlay: rgba(0, 0, 0, 50%);
-$bg-progress-bar: rgba(0, 101, 252, 20%);
+$bg-progress-bar: color.adjust(#0065fc, $alpha: -0.8);
 $bg-progress-bar-mobile: #ebf3ff;
 
 // Status
