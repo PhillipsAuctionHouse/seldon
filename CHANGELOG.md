@@ -1,3 +1,10 @@
+# [1.257.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.256.0...v1.257.0) (2026-04-30)
+
+
+### Features
+
+* **SaleHeaderBanner:** L3-12092 Countdown timer inside of SaleHeaderBanner fix ([#857](https://github.com/PhillipsAuctionHouse/seldon/issues/857)) ([9fedd2e](https://github.com/PhillipsAuctionHouse/seldon/commit/9fedd2e8296c0c7f60553b22a903337e27285def))
+
 # [1.256.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.255.0...v1.256.0) (2026-04-29)
 
 
