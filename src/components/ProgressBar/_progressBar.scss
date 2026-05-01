@@ -9,9 +9,74 @@
     background: $bg-progress-bar;
     display: flex;
     height: 1rem;
-    overflow: hidden;
+    overflow: visible;
     position: relative;
     width: 100%;
+  }
+
+  &__markers {
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 3;
+  }
+
+  &__marker-trigger {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    display: inline-flex;
+    height: fit-content;
+    justify-content: center;
+    left: 0;
+    line-height: 0;
+    padding: $spacing-xsm;
+    pointer-events: auto;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
+  }
+
+  &__marker-shape {
+    background: $status-info;
+    border: 1px solid $pure-white;
+    box-sizing: border-box;
+    display: block;
+    flex-shrink: 0;
+    position: relative;
+    transition: background-color 150ms ease, border-color 150ms ease;
+  }
+
+  &__marker-trigger:hover &__marker-shape::after,
+  &__marker-trigger:focus-visible &__marker-shape::after {
+    border: 2px solid $status-info;
+    border-radius: inherit;
+    box-sizing: border-box;
+    content: '';
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  &__marker-shape--dot {
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+  }
+
+  &__marker-shape--diamond {
+    border-radius: 1px;
+    height: 8px;
+    transform: rotate(45deg);
+    width: 8px;
+  }
+
+  &__marker-trigger:hover &__marker-shape,
+  &__marker-trigger:focus-visible &__marker-shape {
+    background: $pure-white;
+    border-color: $pure-white;
   }
 
   &__fill {
@@ -28,6 +93,7 @@
     top: 0;
     transition: width 250ms ease;
     width: 0;
+    z-index: 1;
   }
 
   &__label {
@@ -65,5 +131,59 @@
     &__label-text {
       display: none;
     }
+  }
+}
+
+// Popover is portaled to document.body — cannot be nested under .#{$px}-progress-bar
+.#{$px}-progress-bar__marker-popover {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+  padding: 0;
+  z-index: 50;
+
+  &[data-state='open'] > .#{$px}-progress-bar__marker-popover-inner {
+    animation: #{$px}-progress-bar-popover-in 280ms cubic-bezier(0.33, 1, 0.68, 1) both;
+  }
+
+  &[data-state='closed'] > .#{$px}-progress-bar__marker-popover-inner {
+    animation: #{$px}-progress-bar-popover-out 220ms cubic-bezier(0.4, 0, 1, 1) both;
+  }
+}
+
+.#{$px}-progress-bar__marker-popover-inner {
+  background: $pure-white;
+  border-radius: $radius-sm;
+  box-shadow: 0 4px 16px rgba($pure-black, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xsm;
+  max-width: 280px;
+  padding: $spacing-sm;
+  transform-origin: center bottom;
+}
+
+@keyframes #{$px}-progress-bar-popover-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes #{$px}-progress-bar-popover-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(4px) scale(0.99);
   }
 }
