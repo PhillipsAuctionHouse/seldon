@@ -14,14 +14,14 @@
     width: 100%;
   }
 
-  &__markers {
+  &__lot-object {
     inset: 0;
     pointer-events: none;
     position: absolute;
     z-index: 3;
   }
 
-  &__marker-trigger {
+  &__lot-object-trigger {
     align-items: center;
     background: transparent;
     border: 0;
@@ -39,7 +39,7 @@
     width: fit-content;
   }
 
-  &__marker-shape {
+  &__lot-object-shape {
     background: $status-info;
     border: 1px solid $pure-white;
     box-sizing: border-box;
@@ -49,8 +49,22 @@
     transition: background-color 150ms ease, border-color 150ms ease;
   }
 
-  &__marker-trigger:hover &__marker-shape::after,
-  &__marker-trigger:focus-visible &__marker-shape::after {
+  &__lot-object-shape--dot {
+    border-radius: 50%;
+    height: 0.625rem;
+    width: 0.625rem;
+  }
+  &__lot-object-shape--diamond {
+    border-radius: 0.0625rem;
+    height: 0.5rem;
+    transform: rotate(45deg);
+    width: 0.5rem;
+  }
+
+  &__lot-object-trigger:hover &__lot-object-shape::after,
+  &__lot-object-trigger:focus-visible &__lot-object-shape::after,
+  &__lot-object-trigger[data-state='open'] &__lot-object-shape::after,
+  &__lot-object-trigger.#{$px}-progress-bar__lot-object-trigger--current &__lot-object-shape::after {
     border: 2px solid $status-info;
     border-radius: inherit;
     box-sizing: border-box;
@@ -60,23 +74,12 @@
     position: absolute;
   }
 
-  &__marker-shape--dot {
-    border-radius: 50%;
-    height: 10px;
-    width: 10px;
-  }
-
-  &__marker-shape--diamond {
-    border-radius: 1px;
-    height: 8px;
-    transform: rotate(45deg);
-    width: 8px;
-  }
-
-  &__marker-trigger:hover &__marker-shape,
-  &__marker-trigger:focus-visible &__marker-shape {
+  &__lot-object-trigger:hover &__lot-object-shape,
+  &__lot-object-trigger:focus-visible &__lot-object-shape,
+  &__lot-object-trigger[data-state='open'] &__lot-object-shape,
+  &__lot-object-trigger.#{$px}-progress-bar__lot-object-trigger--current &__lot-object-shape {
     background: $pure-white;
-    border-color: $pure-white;
+    border-color: $bg-progress-bar;
   }
 
   &__fill {
@@ -135,7 +138,7 @@
 }
 
 // Popover is portaled to document.body — cannot be nested under .#{$px}-progress-bar
-.#{$px}-progress-bar__marker-popover {
+.#{$px}-progress-bar__lot-object-popover {
   background: transparent;
   border-radius: 0;
   box-shadow: none;
@@ -143,23 +146,23 @@
   padding: 0;
   z-index: 50;
 
-  &[data-state='open'] > .#{$px}-progress-bar__marker-popover-inner {
+  &[data-state='open'] > .#{$px}-progress-bar__lot-object-popover-inner {
     animation: #{$px}-progress-bar-popover-in 280ms cubic-bezier(0.33, 1, 0.68, 1) both;
   }
 
-  &[data-state='closed'] > .#{$px}-progress-bar__marker-popover-inner {
+  &[data-state='closed'] > .#{$px}-progress-bar__lot-object-popover-inner {
     animation: #{$px}-progress-bar-popover-out 220ms cubic-bezier(0.4, 0, 1, 1) both;
   }
 }
 
-.#{$px}-progress-bar__marker-popover-inner {
+.#{$px}-progress-bar__lot-object-popover-inner {
   background: $pure-white;
   border-radius: $radius-sm;
   box-shadow: 0 4px 16px rgba($pure-black, 0.12);
   display: flex;
   flex-direction: column;
   gap: $spacing-xsm;
-  max-width: 280px;
+  max-width: 400px;  
   padding: $spacing-sm;
   transform-origin: center bottom;
 }
@@ -187,3 +190,4 @@
     transform: translateY(4px) scale(0.99);
   }
 }
+

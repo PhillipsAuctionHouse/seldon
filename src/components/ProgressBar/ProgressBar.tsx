@@ -3,19 +3,20 @@ import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { Text, TextVariants } from '../Text';
 import * as Popover from '@radix-ui/react-popover';
-import type { ProgressBarLotMarker } from './types';
-
+import type { ProgressBarLotObject } from './types';
+import ProgressBarCard from './ProgressBarCard';
 export interface ProgressBarProps extends ComponentProps<'div'> {
   currentLot: number;
   totalLots: number;
   ariaLive?: 'polite' | 'assertive' | 'off';
-  lotMarkers?: ProgressBarLotMarker[];
+  lotObjects?: ProgressBarLotObject[];
 }
+
 function getVisualWidthPercent(rawLot: number, rawTotal: number): number {
   const safeTotal = Math.max(Math.round(rawTotal), 1);
   const safeCurrent = Math.min(Math.max(Math.round(rawLot), 1), safeTotal);
 
-  const minVisiblePercent = safeTotal < 1000 ? 3 : 5;
+  const minVisiblePercent = safeTotal < 199 ? 3 : 5;
   const trueProgression = safeCurrent / safeTotal;
 
   if (safeCurrent <= 0) {
@@ -30,8 +31,19 @@ function getVisualWidthPercent(rawLot: number, rawTotal: number): number {
   );
 }
 
+function formatLotsAwayText(currentLot: number, markerLot: number): string {
+  const delta = Math.round(markerLot) - Math.round(currentLot);
+  if (delta <= 0) {
+    return 'In Progress';
+  }
+  if (delta === 1) {
+    return '1 lot away';
+  }
+  return `${delta} lots away`;
+}
+
 const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
-  ({ currentLot, totalLots, ariaLive = 'polite', lotMarkers = [], className, ...props }, ref) => {
+  ({ currentLot, totalLots, ariaLive = 'polite', lotObjects = [], className, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ProgressBar');
 
     const { safeTotal, safeCurrent, visualPercent } = useMemo(() => {
@@ -66,54 +78,61 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
             </div>
           </div>
 
-          <div className={`${baseClassName}__markers`}>
-            {lotMarkers.map((marker, index) => {
-
-              const clampedLot = Math.min(Math.max(Math.round(marker.lotNumber), 1), safeTotal);
+          <div className={`${baseClassName}__lot-object`}>
+            {lotObjects.map((lotObject, index) => {
+              const clampedLot = Math.min(Math.max(Math.round(lotObject.lotNumber), 1), safeTotal);
               if (safeCurrent > clampedLot) {
                 return null;
               }
               const leftPercent = getVisualWidthPercent(clampedLot, totalLots);
-              const isDiamond = Boolean(marker.advBid?.trim());
+              const isDiamond = Boolean(lotObject.advBid?.trim());
 
               return (
-                <Popover.Root key={`${marker.lotNumber}-${index}`}>
+                <Popover.Root key={`${lotObject.lotNumber}-${index}`}>
                   <Popover.Trigger asChild>
                     <button
                       type="button"
-                      className={classnames(`${baseClassName}__marker-trigger`, {
-                        [`${baseClassName}__marker-trigger--diamond`]: isDiamond,
+                      className={classnames(`${baseClassName}__lot-object-trigger`, {
+                        [`${baseClassName}__lot-object-trigger--diamond`]: isDiamond,
+                        [`${baseClassName}__lot-object-trigger--current`]: safeCurrent === clampedLot,
                       })}
                       style={{ left: `${leftPercent}%` }}
-                      aria-label={`Lot ${clampedLot}, ${marker.lotTitle}`}
+                      aria-label={`Lot ${clampedLot}, ${lotObject.lotTitle}`}
                     >
                       <span
-                        className={classnames(`${baseClassName}__marker-shape`, {
-                          [`${baseClassName}__marker-shape--diamond`]: isDiamond,
-                          [`${baseClassName}__marker-shape--dot`]: !isDiamond,
+                        className={classnames(`${baseClassName}__lot-object-shape`, {
+                          [`${baseClassName}__lot-object-shape--diamond`]: isDiamond,
+                          [`${baseClassName}__lot-object-shape--dot`]: !isDiamond,
                         })}
                         aria-hidden
                       />
                     </button>
                   </Popover.Trigger>
                   <Popover.Portal>
-                    <Popover.Content
-                      className={`${baseClassName}__marker-popover`}
+                  <Popover.Content
+                      className={`${baseClassName}__lot-object-popover`}
                       side="top"
                       sideOffset={8}
                       align="center"
                       collisionPadding={12}
                     >
-                      <div className={`${baseClassName}__marker-popover-inner`}>
-                        <Text variant={TextVariants.labelMedium}>{`Lot ${clampedLot}`}</Text>
-                        <Text variant={TextVariants.bodySmall}>{marker.lotArtist}</Text>
-                        <Text variant={TextVariants.bodySmall}>{marker.lotTitle}</Text>
-                        <Text variant={TextVariants.bodySmall}>{marker.estimate}</Text>
-                        {marker.advBid ? (
-                          <Text variant={TextVariants.bodySmall}>{`Advance bid ${marker.advBid}`}</Text>
-                        ) : (
-                          <Text variant={TextVariants.bodySmall}>Upcoming</Text>
-                        )}
+                      <div className={`${baseClassName}__lot-object-popover-inner`}>
+                        <ProgressBarCard
+                          imageSrc={lotObject.imageSrc}
+                          imageAlt={lotObject.imageAlt}
+                          lotNumber={clampedLot}
+                          artistName={lotObject.lotArtist}
+                          artworkTitle={lotObject.lotTitle}
+                          estimateRange={lotObject.estimate}
+                          advanceBidAmount={lotObject.advBid?.trim() || undefined}
+                          statusText={safeCurrent === clampedLot ? 'Current Lot' : 'Upcoming'}
+                          lotsAwayText={
+                            lotObject.advBid?.trim() && safeCurrent === clampedLot
+                              ? 'In progress'
+                              : formatLotsAwayText(safeCurrent, clampedLot)
+                          }
+                          isCurrentLot={safeCurrent === clampedLot}
+                        />
                       </div>
                     </Popover.Content>
                   </Popover.Portal>
