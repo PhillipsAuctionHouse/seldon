@@ -9,7 +9,7 @@ import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 import { Text, TextVariants } from '../Text';
 import Gavel from '../../assets/formatted/Gavel';
-
+import Icon from '../../assets/formatted/Icon';
 export interface ProgressBarCardProps extends Omit<ComponentProps<'article'>, 'children'> {
   imageSrc?: string;
   imageAlt?: string;
@@ -73,14 +73,17 @@ const ProgressBarCard = forwardRef<HTMLElement, ProgressBarCardProps>(
               {lotNumber}
             </Text>
             {onMenuClick ? (
-                <IconButton
+            <IconButton
                 aria-label={menuAriaLabel}
                 variant={ButtonVariants.tertiary}
                 className={`${baseClassName}__menu`}
                 onClick={onMenuClick}
-                >
-              </IconButton>
-            ) : null}
+            >
+                <Icon width={14} height={14} color="currentColor" title="" />
+            </IconButton>
+            ) : (
+            <Icon className={`${baseClassName}__menu-icon`} width={14} height={14} color="currentColor" title="" />
+            )}
           </div>
 
           <Text element="p" variant={TextVariants.headingExtraSmall} className={`${baseClassName}__artist`}>

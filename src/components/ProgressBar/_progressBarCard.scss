@@ -53,6 +53,17 @@
     flex-shrink: 0;
   }
 
+  &__menu-icon {
+    color: $text-default;
+    flex-shrink: 0;
+    transition: color 150ms ease;
+
+    &:hover {
+      cursor: pointer;
+      color: $highlight-blue;
+    }
+  }
+
   &__artist {
     font-weight: 600;
   }

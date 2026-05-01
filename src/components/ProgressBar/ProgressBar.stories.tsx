@@ -84,20 +84,20 @@ export default meta;
 export const Playground = (props: ProgressBarProps) => <ProgressBar {...props} />;
 
 Playground.args = {
-  currentLot: 35,
+  currentLot: 1,
   totalLots: 120,
 };
 
-/** Story id: `components-progressbar--with-markers` (stable URL for bookmarks). */
-export const WithLots = (props: ProgressBarProps) => <ProgressBar {...props} />;
+/** Story id: `components-progressbar--interactive-progress-bar` (stable URL for bookmarks). */
+export const InteractiveProgressBar = (props: ProgressBarProps) => <ProgressBar {...props} />;
 
-WithLots.args = {
+InteractiveProgressBar.args = {
   currentLot: 1,
   totalLots: 120,
   lotObjects: sampleLotObjects,
 };
 
-WithLots.parameters = {
+InteractiveProgressBar.parameters = {
   controls: {
     expanded: true,
     include: ['currentLot', 'totalLots', 'ariaLive', 'lotObjects', 'className'],
