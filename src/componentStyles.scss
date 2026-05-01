@@ -143,13 +143,17 @@
   --snw-heading-hero-line-height-size2: 1.9375rem;
   --snw-button-padding: 0.5rem;
   --spacing-micro: 0.25rem;
+
+  // https://www.figma.com/design/hMu9IWH5N3KamJy8tLFdyV/Design-System--Foundations?node-id=6591-3391&p=f&m=dev
   --spacing-xsm: 0.5rem;
   --spacing-sm: 0.75rem;
-  --spacing-md: 1.75rem;
-  --spacing-lg: 2.75rem;
-  --spacing-xl: 3.75rem;
-  --spacing-xxl: 4.75rem;
-  --spacing-xxxl: 5.75rem;
+  --spacing-smd: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-mlg: 2rem;
+  --spacing-lg: 2.5rem;
+  --spacing-xl: 3rem;
+  --spacing-xxl: 3.5rem;
+  --spacing-xxxl: 4rem;
   --header-height: 56px; // Set dynamically by Header component on mount
   --search-size: 2.32rem; // This should be calculated from the scaling text and scaling spacing tokens instead of hardcoding in case they change
   --banner-height: 0px;
