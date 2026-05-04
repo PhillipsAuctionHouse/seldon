@@ -20,7 +20,7 @@ const tabs = [
 
 // Default story for Tabs component
 export const Playground = (props: TabsContainerProps & TabContentProps) => (
-  <TabsContainer {...props} defaultValue="overview">
+  <TabsContainer {...props} defaultValue="overview" tabListLabel="Sale Page Tabs">
     <TabsContent value="overview">
       <p>This content is for the Overview tab.</p>
     </TabsContent>
@@ -38,7 +38,7 @@ Playground.argTypes = {};
 
 // Story with the Browse tab selected
 export const BrowseTabSelected = () => (
-  <TabsContainer tabs={tabs} defaultValue="browse">
+  <TabsContainer tabs={tabs} defaultValue="browse" tabListLabel="Sale Page Tabs">
     <TabsContent value="overview">
       <p>This content is for the Overview tab.</p>
     </TabsContent>
@@ -54,7 +54,7 @@ export const ControlledTabs = () => {
 
   return (
     <>
-      <TabsContainer tabs={tabs} value={value} onTabClick={setValue}>
+      <TabsContainer tabs={tabs} value={value} onTabClick={setValue} tabListLabel="Sale Page Tabs">
         <TabsContent value="overview">
           <p>This content is for the Overview tab.</p>
         </TabsContent>
@@ -76,13 +76,13 @@ const componentTabs = [
   },
   {
     label: <div style={{ display: 'flex' }}>Submit {<Text style={{ color: 'blue', marginBottom: '0' }}>+</Text>}</div>,
-    value: 'Browse',
+    value: 'browse',
   },
 ];
 
 // Story with the Browse tab selected
 export const ComponentLabels = () => (
-  <TabsContainer tabs={componentTabs}>
+  <TabsContainer tabs={componentTabs} tabListLabel="Sale Page Tabs">
     <TabsContent value="overview">
       <p>This content is for the Overview tab.</p>
     </TabsContent>
