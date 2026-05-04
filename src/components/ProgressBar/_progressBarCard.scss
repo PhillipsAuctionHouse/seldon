@@ -59,8 +59,8 @@
     transition: color 150ms ease;
 
     &:hover {
-      cursor: pointer;
       color: $highlight-blue;
+      cursor: pointer;
     }
   }
 
@@ -69,7 +69,7 @@
   }
 
   &__title {
-    font-size: 0.6875rem;
+    font-size: $font-size-body-small;
     font-style: italic;
     line-height: 1.35;
   }
@@ -79,7 +79,7 @@
   }
 
   &__estimate-label {
-    font-size: 0.6875rem;
+    font-size: $font-size-body-small;
     font-weight: 600;
     line-height: 1.35;
   }
@@ -97,13 +97,12 @@
     gap: $spacing-micro;
 
     .#{$px}-text {
-      font-size: 0.6875rem;
+      font-size: $font-size-body-small;
       line-height: 1.35;
     }
   }
 
   &__status-icon {
-    color: currentColor;
     flex-shrink: 0;
   }
 
@@ -118,7 +117,7 @@
     background: $bg-border;
     border: 0;
     height: 1px;
-    margin: calc(#{$spacing-xsm} / 2) 0;
+    margin: 0.25rem 0;
     width: 100%;
   }
 
@@ -138,29 +137,30 @@
 
   &__advance-bid-dot {
     background: $highlight-blue;
-    border-radius: 50%;
+    border-radius: $radius-md;
     display: inline-block;
     flex-shrink: 0;
     height: 0.375rem;
+    transform: rotate(45deg);
     width: 0.375rem;
   }
 
   &__advance-bid-copy {
     color: $highlight-blue;
-    font-size: 0.6875rem;
+    font-size: $font-size-body-small;
     line-height: 1.35;
   }
 
   &__advance-bid-label,
   &__advance-bid-amount {
-      color: $text-default;
+    color: $text-default;
     font-variation-settings: 'wght' 600;
     font-weight: 600;
   }
 
   &__footer--advance-bid {
-    margin-top: 0.125rem;
     justify-content: space-between;
+    margin-top: 0.125rem;
   }
 
   &__lots-away-compact {
@@ -170,11 +170,11 @@
     gap: $spacing-micro;
     padding-left: $spacing-sm;
   }
-  
+
   &__lots-away-count {
     color: $highlight-blue;
   }
-  
+
   &__lots-away-clock {
     color: $highlight-blue;
     flex-shrink: 0;

@@ -1,4 +1,5 @@
 @use '~scss/allPartials' as *;
+@use 'sass:color';
 
 .#{$px}-progress-bar {
   position: relative;
@@ -12,6 +13,10 @@
     overflow: visible;
     position: relative;
     width: 100%;
+
+    &--with-lot-objects {
+      height: 1.5rem;
+    }
   }
 
   &__lot-object {
@@ -46,32 +51,45 @@
     display: block;
     flex-shrink: 0;
     position: relative;
-    transition: background-color 150ms ease, border-color 150ms ease;
+    transition:
+      background-color 200ms ease,
+      border-color 200ms ease;
   }
 
   &__lot-object-shape--dot {
-    border-radius: 50%;
-    height: 0.625rem;
-    width: 0.625rem;
+    border-radius: $radius-md;
+    height: $font-size-body-small;
+    width: $font-size-body-small;
   }
+
   &__lot-object-shape--diamond {
-    border-radius: 0.0625rem;
-    height: 0.5rem;
+    border-radius: 0;
+    height: $font-size-body-small;
     transform: rotate(45deg);
-    width: 0.5rem;
+    width: $font-size-body-small;
+  }
+
+  &__lot-object-shape::after {
+    border: 2px solid $status-info;
+    border-radius: inherit;
+    box-sizing: border-box;
+    content: '';
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transform: scale(0.92);
+    transition:
+      opacity 200ms ease,
+      transform 200ms ease;
   }
 
   &__lot-object-trigger:hover &__lot-object-shape::after,
   &__lot-object-trigger:focus-visible &__lot-object-shape::after,
   &__lot-object-trigger[data-state='open'] &__lot-object-shape::after,
   &__lot-object-trigger.#{$px}-progress-bar__lot-object-trigger--current &__lot-object-shape::after {
-    border: 2px solid $status-info;
-    border-radius: inherit;
-    box-sizing: border-box;
-    content: '';
-    inset: 0;
-    pointer-events: none;
-    position: absolute;
+    opacity: 1;
+    transform: scale(1);
   }
 
   &__lot-object-trigger:hover &__lot-object-shape,
@@ -131,13 +149,13 @@
     }
 
     &__label,
-    &__label-text {
+    &__label-text,
+    &__lot-object {
       display: none;
     }
   }
 }
 
-// Popover is portaled to document.body — cannot be nested under .#{$px}-progress-bar
 .#{$px}-progress-bar__lot-object-popover {
   background: transparent;
   border-radius: 0;
@@ -158,11 +176,11 @@
 .#{$px}-progress-bar__lot-object-popover-inner {
   background: $pure-white;
   border-radius: $radius-sm;
-  box-shadow: 0 4px 16px rgba($pure-black, 0.22);
+  box-shadow: 0 0.25rem 1rem color.adjust($pure-black, $alpha: -0.78);
   display: flex;
   flex-direction: column;
   gap: $spacing-xsm;
-  max-width: 400px;  
+  max-width: 25rem;
   padding: $spacing-sm;
   transform-origin: center bottom;
 }
@@ -170,7 +188,7 @@
 @keyframes #{$px}-progress-bar-popover-in {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(0.98);
+    transform: translateY(0.5rem) scale(0.98);
   }
 
   to {
@@ -187,7 +205,6 @@
 
   to {
     opacity: 0;
-    transform: translateY(4px) scale(0.99);
+    transform: translateY(0.25rem) scale(0.99);
   }
 }
-

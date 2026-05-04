@@ -5,71 +5,109 @@ import { Text, TextVariants } from '../Text';
 import * as Popover from '@radix-ui/react-popover';
 import type { ProgressBarLotObject } from './types';
 import ProgressBarCard from './ProgressBarCard';
+import {
+  defaultProgressBarLabels,
+  formatLotsAwayText,
+  getClampedLotNumber,
+  getProgressBarMetrics,
+  getVisualWidthPercent,
+  type ProgressBarLabels,
+  type ProgressBarLotsAwayMessages,
+} from './utils';
+
+function defaultAriaValueText(safeCurrent: number, safeTotal: number): string {
+  return `Lot ${safeCurrent} of ${safeTotal}`;
+}
+
+function defaultLotMarkerAriaLabel(lotNumber: number, artworkTitle: string): string {
+  return `Lot ${lotNumber}, ${artworkTitle}`;
+}
+
 export interface ProgressBarProps extends ComponentProps<'div'> {
+  /** Which lot the sale is on (display + markers fill toward this value). */
   currentLot: number;
+  /** Total lots in the sale (denominator for display and clamping). */
   totalLots: number;
+  /** Politeness of the live region wrapping `safeCurrent/safeTotal` in the track label. */
   ariaLive?: 'polite' | 'assertive' | 'off';
+  /** Lots shown as markers/popovers; clamped to `[1, safeTotal]`. */
   lotObjects?: ProgressBarLotObject[];
-}
 
-function getVisualWidthPercent(rawLot: number, rawTotal: number): number {
-  const safeTotal = Math.max(Math.round(rawTotal), 1);
-  const safeCurrent = Math.min(Math.max(Math.round(rawLot), 1), safeTotal);
-
-  const minVisiblePercent = safeTotal < 199 ? 3 : 5;
-  const trueProgression = safeCurrent / safeTotal;
-
-  if (safeCurrent <= 0) {
-    return 0;
-  }
-  if (trueProgression >= 0.5) {
-    return 100 * trueProgression;
-  }
-  return (
-    (1 - 2 * trueProgression) ** 2 * (minVisiblePercent + (100 - minVisiblePercent) * trueProgression) +
-    (1 - (1 - 2 * trueProgression) ** 2) * (100 * trueProgression)
-  );
-}
-
-function formatLotsAwayText(currentLot: number, markerLot: number): string {
-  const delta = Math.round(markerLot) - Math.round(currentLot);
-  if (delta <= 0) {
-    return 'In Progress';
-  }
-  if (delta === 1) {
-    return '1 lot away';
-  }
-  return `${delta} lots away`;
+  /** Copy for “lots away” strings (`formatLotsAwayText`); */
+  lotsAwayMessages?: Partial<ProgressBarLotsAwayMessages>;
+  /** Popover status labels (`statusCurrentLot`, `statusUpcoming`, `lotsAwayAdvanceBidCurrent`). */
+  labels?: Partial<ProgressBarLabels>;
+  /** Accessible name for the track (`role="progressbar"`). */
+  progressAriaLabel?: string;
+  /** Screen reader summary of progress; receives clamped current/total (defaults to English “Lot X of Y”). */
+  getAriaValueText?: (safeCurrent: number, safeTotal: number) => string;
+  /** `aria-label` for each lot-marker trigger (lot number + artwork title by default). */
+  getLotMarkerAriaLabel?: (lotNumber: number, artworkTitle: string) => string;
+  /** Label before the advance-bid amount in the popover card (card falls back if omitted or blank). */
+  advanceBidLabel?: string;
+  /** Label before the estimate range in the popover card (defaults to `'Estimate'`). */
+  estimateLabel?: string;
+  /** Accessible name for the popover card menu icon (kebab), when present. */
+  menuAriaLabel?: string;
 }
 
 const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
-  ({ currentLot, totalLots, ariaLive = 'polite', lotObjects = [], className, ...props }, ref) => {
+  (
+    {
+      currentLot,
+      totalLots,
+      ariaLive = 'polite',
+      lotObjects = [],
+      className,
+      lotsAwayMessages,
+      labels,
+      progressAriaLabel = 'Sale progress',
+      getAriaValueText = defaultAriaValueText,
+      getLotMarkerAriaLabel = defaultLotMarkerAriaLabel,
+      advanceBidLabel,
+      estimateLabel,
+      menuAriaLabel,
+      ...props
+    },
+    ref,
+  ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ProgressBar');
+    const { safeTotal, safeCurrent, visualPercent } = useMemo(
+      () => getProgressBarMetrics(currentLot, totalLots),
+      [currentLot, totalLots],
+    );
 
-    const { safeTotal, safeCurrent, visualPercent } = useMemo(() => {
-      const safeTotal = Math.max(Math.round(totalLots), 1);
-      const safeCurrent = Math.min(Math.max(Math.round(currentLot), 1), safeTotal);
-      const visualPercent = getVisualWidthPercent(currentLot, totalLots);
+    const progressBarCardLabels: ProgressBarLabels = { ...defaultProgressBarLabels, ...labels };
 
-      return { safeTotal, safeCurrent, visualPercent };
-    }, [currentLot, totalLots]);
+    const visibleLotMarkerCount = useMemo(
+      () =>
+        lotObjects.reduce((count, lotObject) => {
+          const clampedLot = getClampedLotNumber(lotObject.lotNumber, safeTotal);
+          return safeCurrent > clampedLot ? count : count + 1;
+        }, 0),
+      [lotObjects, safeCurrent, safeTotal],
+    );
+
+    const ariaValueText = getAriaValueText(safeCurrent, safeTotal);
 
     return (
       <div {...commonProps} ref={ref} className={classnames(baseClassName, className)}>
         <div
-          className={`${baseClassName}__track`}
+          className={classnames(`${baseClassName}__track`, {
+            [`${baseClassName}__track--with-lot-objects`]: visibleLotMarkerCount > 0,
+          })}
           role="progressbar"
           aria-valuemin={1}
           aria-valuemax={safeTotal}
           aria-valuenow={safeCurrent}
-          aria-valuetext={`Lot ${safeCurrent} of ${safeTotal}`}
-          aria-label="Sale progress"
+          aria-valuetext={ariaValueText}
+          aria-label={progressAriaLabel}
         >
           <div className={`${baseClassName}__fill`} style={{ width: `${visualPercent}%` }}>
             <div className={`${baseClassName}__label`}>
               <Text
                 element="span"
-                variant={TextVariants.labelMedium}
+                variant={TextVariants.labelLarge}
                 className={`${baseClassName}__label-text`}
                 aria-live={ariaLive}
               >
@@ -80,7 +118,7 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
 
           <div className={`${baseClassName}__lot-object`}>
             {lotObjects.map((lotObject, index) => {
-              const clampedLot = Math.min(Math.max(Math.round(lotObject.lotNumber), 1), safeTotal);
+              const clampedLot = getClampedLotNumber(lotObject.lotNumber, safeTotal);
               if (safeCurrent > clampedLot) {
                 return null;
               }
@@ -97,7 +135,7 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
                         [`${baseClassName}__lot-object-trigger--current`]: safeCurrent === clampedLot,
                       })}
                       style={{ left: `${leftPercent}%` }}
-                      aria-label={`Lot ${clampedLot}, ${lotObject.lotTitle}`}
+                      aria-label={getLotMarkerAriaLabel(clampedLot, lotObject.lotTitle)}
                     >
                       <span
                         className={classnames(`${baseClassName}__lot-object-shape`, {
@@ -109,7 +147,7 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
                     </button>
                   </Popover.Trigger>
                   <Popover.Portal>
-                  <Popover.Content
+                    <Popover.Content
                       className={`${baseClassName}__lot-object-popover`}
                       side="top"
                       sideOffset={8}
@@ -125,13 +163,20 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
                           artworkTitle={lotObject.lotTitle}
                           estimateRange={lotObject.estimate}
                           advanceBidAmount={lotObject.advBid?.trim() || undefined}
-                          statusText={safeCurrent === clampedLot ? 'Current Lot' : 'Upcoming'}
+                          statusText={
+                            safeCurrent === clampedLot
+                              ? progressBarCardLabels.statusCurrentLot
+                              : progressBarCardLabels.statusUpcoming
+                          }
                           lotsAwayText={
                             lotObject.advBid?.trim() && safeCurrent === clampedLot
-                              ? 'In progress'
-                              : formatLotsAwayText(safeCurrent, clampedLot)
+                              ? progressBarCardLabels.lotsAwayAdvanceBidCurrent
+                              : formatLotsAwayText(safeCurrent, clampedLot, lotsAwayMessages)
                           }
                           isCurrentLot={safeCurrent === clampedLot}
+                          advanceBidLabel={advanceBidLabel}
+                          estimateLabel={estimateLabel}
+                          menuAriaLabel={menuAriaLabel}
                         />
                       </div>
                     </Popover.Content>

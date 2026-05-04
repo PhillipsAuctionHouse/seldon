@@ -64,6 +64,7 @@ export {
   type PaginationProps,
 } from './components/Pagination/Pagination';
 export * from './components/PinchZoom';
+export * from './components/ProgressBar';
 export { default as Row, type RowProps } from './components/Row/Row';
 export { default as Search, type SearchProps } from './components/Search/Search';
 export * from './components/SeldonImage';

@@ -76,6 +76,24 @@ const meta = {
     lotObjects: {
       control: 'object',
     },
+    lotsAwayMessages: {
+      control: 'object',
+    },
+    labels: {
+      control: 'object',
+    },
+    progressAriaLabel: {
+      control: 'text',
+    },
+    advanceBidLabel: {
+      control: 'text',
+    },
+    estimateLabel: {
+      control: 'text',
+    },
+    menuAriaLabel: {
+      control: 'text',
+    },
   },
 } satisfies Meta<typeof ProgressBar>;
 
@@ -100,6 +118,18 @@ InteractiveProgressBar.args = {
 InteractiveProgressBar.parameters = {
   controls: {
     expanded: true,
-    include: ['currentLot', 'totalLots', 'ariaLive', 'lotObjects', 'className'],
+    include: [
+      'currentLot',
+      'totalLots',
+      'ariaLive',
+      'lotObjects',
+      'lotsAwayMessages',
+      'labels',
+      'progressAriaLabel',
+      'advanceBidLabel',
+      'estimateLabel',
+      'menuAriaLabel',
+      'className',
+    ],
   },
 };
