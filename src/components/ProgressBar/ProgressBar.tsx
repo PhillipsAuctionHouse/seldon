@@ -92,16 +92,19 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
 
     return (
       <div {...commonProps} ref={ref} className={classnames(baseClassName, className)}>
-        <div
-          className={classnames(`${baseClassName}__track`, {
-            [`${baseClassName}__track--with-lot-objects`]: visibleLotMarkerCount > 0,
-          })}
+        <span
+          className={`${baseClassName}__live-region`}
           role="progressbar"
           aria-valuemin={1}
           aria-valuemax={safeTotal}
           aria-valuenow={safeCurrent}
           aria-valuetext={ariaValueText}
           aria-label={progressAriaLabel}
+        />
+        <div
+          className={classnames(`${baseClassName}__track`, {
+            [`${baseClassName}__track--with-lot-objects`]: visibleLotMarkerCount > 0,
+          })}
         >
           <div className={`${baseClassName}__fill`} style={{ width: `${visualPercent}%` }}>
             <div className={`${baseClassName}__label`}>
