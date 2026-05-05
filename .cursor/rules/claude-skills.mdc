@@ -1,0 +1,31 @@
+---
+description: >-
+  Points agents and Agent Review at optional Claude Code skills under
+  ~/.claude/skills (SKILL.md per folder). Use when the task matches Sanity, SEO,
+  content modeling, experimentation, or skill discovery.
+alwaysApply: true
+---
+
+# Claude skills (user-local)
+
+This repo’s **Seldon skill** (`.agents/skills/seldon/SKILL.md`) is
+canonical for **this codebase**. For **cross-cutting topics**, also load the
+matching skill from your **Claude skills** directory when relevant:
+
+| Topic                                            | Skill folder (each contains `SKILL.md`)                   |
+| ------------------------------------------------ | --------------------------------------------------------- |
+| Sanity schemas, GROQ, Portable Text, preview     | `~/.claude/skills/sanity-best-practices`                  |
+| SEO, metadata, structured data, hreflang         | `~/.claude/skills/seo-aeo-best-practices`                 |
+| CMS/content architecture, references vs embedded | `~/.claude/skills/content-modeling-best-practices`        |
+| Experiments, A/B tests, metrics                  | `~/.claude/skills/content-experimentation-best-practices` |
+| Discovering or installing skills                 | `~/.claude/skills/find-skills`                            |
+
+**Paths:** Skills live under **`~/.claude/skills/<name>/SKILL.md`**. Install or
+update with **`npx skills add`** / **`npx skills update`** (Skills CLI) — see
+**`docs/agents/SETUP.md`**. Project-bundled skills also live under
+**`.agents/skills/`** (committed or symlinked); user-local copies may live under
+`~/.claude/skills`.
+
+**When to use:** Prefer project docs (`AGENTS.md`, `docs/agents/*`, Seldon skill)
+first; pull in a Claude skill when you need deeper domain guidance that
+complements (not replaces) repo conventions.
