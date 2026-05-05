@@ -1,4 +1,4 @@
-import { ComponentProps, forwardRef, useMemo } from 'react';
+import { ComponentProps, forwardRef, useMemo, useState } from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { Text, TextVariants } from '../Text';
@@ -89,6 +89,37 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
     );
 
     const ariaValueText = getAriaValueText(safeCurrent, safeTotal);
+    const [hoverPreview, setHoverPreview] = useState<{ isVisible: boolean; x: number; lot: number }>({
+      isVisible: false,
+      x: 0,
+      lot: safeCurrent,
+    });
+    const [openLotPopoverKey, setOpenLotPopoverKey] = useState<string | null>(null);
+
+    const updateHoverPreview = (clientX: number, trackRect: DOMRect) => {
+      if (openLotPopoverKey) {
+        return;
+      }
+      const clampedX = Math.min(Math.max(clientX - trackRect.left, 0), trackRect.width);
+      setHoverPreview({
+        isVisible: true,
+        x: clampedX,
+        lot: safeCurrent,
+      });
+    };
+
+    const showHoverPreviewForDot = (trackRect: DOMRect, dotRect: DOMRect, dotLot: number) => {
+      if (openLotPopoverKey) {
+        return;
+      }
+      const dotCenterX = dotRect.left + dotRect.width / 2;
+      const clampedX = Math.min(Math.max(dotCenterX - trackRect.left, 0), trackRect.width);
+      setHoverPreview({
+        isVisible: true,
+        x: clampedX,
+        lot: dotLot,
+      });
+    };
 
     return (
       <div {...commonProps} ref={ref} className={classnames(baseClassName, className)}>
@@ -105,6 +136,29 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
           className={classnames(`${baseClassName}__track`, {
             [`${baseClassName}__track--with-lot-objects`]: visibleLotMarkerCount > 0,
           })}
+          onMouseEnter={(event) => {
+            if (openLotPopoverKey) {
+              return;
+            }
+            const target = event.target as HTMLElement;
+            if (target.closest(`.${baseClassName}__lot-object-trigger`)) {
+              return;
+            }
+            updateHoverPreview(event.clientX, event.currentTarget.getBoundingClientRect());
+          }}
+          onMouseMove={(event) => {
+            if (openLotPopoverKey) {
+              return;
+            }
+            const target = event.target as HTMLElement;
+            if (target.closest(`.${baseClassName}__lot-object-trigger`)) {
+              return;
+            }
+            updateHoverPreview(event.clientX, event.currentTarget.getBoundingClientRect());
+          }}
+          onMouseLeave={() => {
+            setHoverPreview((prev) => ({ ...prev, isVisible: false }));
+          }}
         >
           <div className={`${baseClassName}__fill`} style={{ width: `${visualPercent}%` }}>
             <div className={`${baseClassName}__label`}>
@@ -118,9 +172,20 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
               </Text>
             </div>
           </div>
+          {hoverPreview.isVisible && !openLotPopoverKey && (
+            <div className={`${baseClassName}__hover-tooltip`} style={{ left: `${hoverPreview.x}px` }} aria-hidden>
+              <Text element="span" variant={TextVariants.headingExtraSmall} className={`${baseClassName}__hover-copy`}>
+                {progressBarCardLabels.hoverLiveLot
+                  .replace(/\{current\}/g, String(hoverPreview.lot))
+                  .replace(/\{total\}/g, String(safeTotal))}
+              </Text>
+              <span className={`${baseClassName}__hover-tooltip-caret`} />
+            </div>
+          )}
 
           <div className={`${baseClassName}__lot-object`}>
             {lotObjects.map((lotObject, index) => {
+              const lotPopoverKey = `${lotObject.lotNumber}-${index}`;
               const clampedLot = getClampedLotNumber(lotObject.lotNumber, safeTotal);
               if (safeCurrent > clampedLot) {
                 return null;
@@ -129,7 +194,16 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
               const isDiamond = Boolean(lotObject.advBid?.trim());
 
               return (
-                <Popover.Root key={`${lotObject.lotNumber}-${index}`}>
+                <Popover.Root
+                  key={lotPopoverKey}
+                  open={openLotPopoverKey === lotPopoverKey}
+                  onOpenChange={(isOpen) => {
+                    if (isOpen) {
+                      setHoverPreview((prev) => ({ ...prev, isVisible: false }));
+                    }
+                    setOpenLotPopoverKey(isOpen ? lotPopoverKey : null);
+                  }}
+                >
                   <Popover.Trigger asChild>
                     <button
                       type="button"
@@ -139,6 +213,28 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
                       })}
                       style={{ left: `${leftPercent}%` }}
                       aria-label={getLotMarkerAriaLabel(clampedLot, lotObject.lotTitle)}
+                      onMouseEnter={(event) => {
+                        const track = event.currentTarget.closest(`.${baseClassName}__track`);
+                        if (!track) {
+                          return;
+                        }
+                        showHoverPreviewForDot(
+                          track.getBoundingClientRect(),
+                          event.currentTarget.getBoundingClientRect(),
+                          clampedLot,
+                        );
+                      }}
+                      onMouseMove={(event) => {
+                        const track = event.currentTarget.closest(`.${baseClassName}__track`);
+                        if (!track) {
+                          return;
+                        }
+                        showHoverPreviewForDot(
+                          track.getBoundingClientRect(),
+                          event.currentTarget.getBoundingClientRect(),
+                          clampedLot,
+                        );
+                      }}
                     >
                       <span
                         className={classnames(`${baseClassName}__lot-object-shape`, {

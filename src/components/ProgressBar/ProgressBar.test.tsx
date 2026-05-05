@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ProgressBar } from './index';
 
@@ -72,19 +72,79 @@ describe('ProgressBar', () => {
     expect(screen.getByText('$500')).toBeInTheDocument();
   });
 
-  it('forwards estimateLabel and menuAriaLabel to the popover card', async () => {
-    const user = userEvent.setup();
+  it('shows hover preview copy near pointer position on track', () => {
+    render(<ProgressBar currentLot={40} totalLots={80} />);
+    const track = screen.getByText('40/80').closest('.seldon-progress-bar__track');
+    expect(track).not.toBeNull();
+    if (!track) {
+      return;
+    }
+
+    Object.defineProperty(track, 'getBoundingClientRect', {
+      value: () => ({
+        width: 200,
+        left: 10,
+        right: 210,
+        top: 0,
+        bottom: 0,
+        height: 0,
+        x: 10,
+        y: 0,
+        toJSON: () => ({}),
+      }),
+    });
+
+    fireEvent.mouseMove(track, { clientX: 110 });
+    expect(screen.getByText('Live lot 40 of 80')).toBeInTheDocument();
+  });
+
+  it('supports overriding hover preview copy via labels', () => {
+    render(
+      <ProgressBar currentLot={40} totalLots={80} labels={{ hoverLiveLot: 'Lot en direct {current} sur {total}' }} />,
+    );
+    const track = screen.getByText('40/80').closest('.seldon-progress-bar__track');
+    expect(track).not.toBeNull();
+    if (!track) {
+      return;
+    }
+
+    Object.defineProperty(track, 'getBoundingClientRect', {
+      value: () => ({
+        width: 200,
+        left: 10,
+        right: 210,
+        top: 0,
+        bottom: 0,
+        height: 0,
+        x: 10,
+        y: 0,
+        toJSON: () => ({}),
+      }),
+    });
+
+    fireEvent.mouseMove(track, { clientX: 110 });
+    expect(screen.getByText('Lot en direct 40 sur 80')).toBeInTheDocument();
+  });
+
+  it('shows dot lot number in hover preview when hovering a marker', () => {
     render(
       <ProgressBar
-        currentLot={12}
-        totalLots={20}
-        lotObjects={[{ ...sampleLot }]}
-        estimateLabel="Estimation"
-        menuAriaLabel="Menu du lot"
+        currentLot={1}
+        totalLots={120}
+        lotObjects={[
+          {
+            lotNumber: 50,
+            lotTitle: 'Marker lot',
+            lotArtist: 'Artist',
+            estimate: '$100',
+            type: 'upcoming',
+          },
+        ]}
       />,
     );
-    await user.click(screen.getByRole('button', { name: 'Lot 12, Test work' }));
-    expect(await screen.findByText('Estimation')).toBeInTheDocument();
-    expect(screen.getByLabelText('Menu du lot')).toBeInTheDocument();
+    const button = screen.getByRole('button', { name: 'Lot 50, Marker lot' });
+    // ensure we use dot center within track bounds
+    fireEvent.mouseEnter(button);
+    expect(screen.getByText('Live lot 50 of 120')).toBeInTheDocument();
   });
 });

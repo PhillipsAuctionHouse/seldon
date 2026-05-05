@@ -64,12 +64,14 @@ export type ProgressBarLabels = {
   statusCurrentLot: string;
   statusUpcoming: string;
   lotsAwayAdvanceBidCurrent: string;
+  hoverLiveLot: string;
 };
 
 export const defaultProgressBarLabels: ProgressBarLabels = {
   statusCurrentLot: 'Current Lot',
   statusUpcoming: 'Upcoming',
   lotsAwayAdvanceBidCurrent: 'In progress',
+  hoverLiveLot: 'Live lot {current} of {total}',
 };
 
 export function formatLotsAwayText(
