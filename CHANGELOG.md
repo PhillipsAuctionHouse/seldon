@@ -1,3 +1,10 @@
+# [1.259.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.258.0...v1.259.0) (2026-04-30)
+
+
+### Features
+
+* **SaleHeaderBanner:** L3-12092 SaleHeaderBanner  fix ([#859](https://github.com/PhillipsAuctionHouse/seldon/issues/859)) ([ff920a0](https://github.com/PhillipsAuctionHouse/seldon/commit/ff920a0c1484e7a87d8190643cf294e59069101d))
+
 # [1.258.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.257.0...v1.258.0) (2026-04-30)
 
 
