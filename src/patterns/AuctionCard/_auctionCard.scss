@@ -1,0 +1,119 @@
+@use '~scss/allPartials' as *;
+
+$auction-card-mobile-max: $breakpoint-snw-mobile - 1px;
+
+.#{$px}-auction-card {
+  box-sizing: border-box;
+  color: $text-default;
+  display: block;
+  height: 220px;
+  padding: 24px;
+  position: relative;
+  width: 414px;
+
+  &--translucent {
+    background: $white-75;
+  }
+
+  &--opaque {
+    background: $bg-default;
+  }
+
+  @media (max-width: $auction-card-mobile-max) {
+    height: 184px;
+    padding: 16px;
+    width: 361px;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 366px;
+
+    @media (max-width: $auction-card-mobile-max) {
+      width: 329px;
+    }
+  }
+
+  &__label {
+    color: $text-default;
+    line-height: 16px;
+    margin: 0;
+
+    @include label-styles(14px, 400, unset);
+  }
+
+  &__title {
+    @include text($headingMedium, 400, uppercase);
+
+    color: $black-100;
+    font-size: 20px;
+    line-height: 24px;
+    margin: 0;
+    max-width: 331px;
+
+    @media (max-width: $auction-card-mobile-max) {
+      max-width: 100%;
+    }
+  }
+
+  &__line {
+    color: $text-default;
+    line-height: 16px;
+    margin: 0;
+
+    @include label-styles(14px, 400, unset);
+  }
+
+  &__buttons {
+    align-items: flex-end;
+    display: flex;
+    gap: 8px;
+    padding-top: 16px;
+  }
+
+  &__cta {
+    align-items: center;
+    border-radius: $radius-2xl;
+    box-sizing: border-box;
+    display: inline-flex;
+    flex-shrink: 0;
+    font-weight: 600;
+    height: 44px;
+    justify-content: center;
+    line-height: 16px;
+    min-width: 160px;
+    padding: 0 16px;
+    text-decoration: none;
+    white-space: nowrap;
+
+    @include label-styles(14px, 600, unset);
+
+    &--primary {
+      background: $black-100;
+      border: 2px solid $black-100;
+      color: $text-inverted;
+    }
+
+    &--secondary {
+      background: transparent;
+      border: 2px solid $black-100;
+      color: $text-default;
+    }
+
+    @media (max-width: $auction-card-mobile-max) {
+      height: 32px;
+      min-width: 0;
+      padding: 0 12px;
+
+      &--primary {
+        min-width: 86px;
+      }
+
+      &--secondary {
+        min-width: 160px;
+      }
+    }
+  }
+}

@@ -1,0 +1,213 @@
+@use '~scss/allPartials' as *;
+
+$hero-carousel-mobile-max: $breakpoint-snw-mobile - 1px;
+$hero-carousel-tablet-max: 1023px;
+$hero-fade-duration: 1200ms;
+$hero-fade-easing: cubic-bezier(0.4, 0, 0.2, 1);
+$hero-kenburns-duration: 8000ms;
+
+.#{$px}-hero-carousel {
+  background: $bg-default;
+  display: block;
+  isolation: isolate;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+
+  &__viewport {
+    height: 100dvh;
+    min-height: 600px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+
+    @media (max-width: $hero-carousel-tablet-max) and (min-width: $breakpoint-snw-mobile) {
+      height: 432px;
+      min-height: 432px;
+    }
+
+    @media (max-width: $hero-carousel-mobile-max) {
+      height: 600px;
+      min-height: 600px;
+    }
+  }
+
+  &__stage {
+    height: 100%;
+    inset: 0;
+    position: absolute;
+    width: 100%;
+  }
+
+  &__slide {
+    height: 100%;
+    inset: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    transition: opacity $hero-fade-duration $hero-fade-easing;
+    width: 100%;
+    z-index: 0;
+  }
+
+  &__slide--active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+  }
+
+  &__image {
+    height: 100%;
+    inset: 0;
+    object-fit: cover;
+    position: absolute;
+    transform: scale(1);
+    transform-origin: center;
+    transition: transform $hero-kenburns-duration linear;
+    width: 100%;
+  }
+
+  &__slide--active &__image {
+    transform: scale(1.04);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__slide {
+      transition: none;
+    }
+
+    &__slide--active &__image {
+      transform: none;
+      transition: none;
+    }
+  }
+
+  &__slide-link {
+    display: block;
+    height: 100%;
+    inset: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+  }
+
+  &__card-wrap {
+    bottom: 48px;
+    left: 48px;
+    position: absolute;
+    z-index: 3;
+
+    @media (max-width: $hero-carousel-tablet-max) and (min-width: $breakpoint-snw-mobile) {
+      bottom: 24px;
+      left: 24px;
+    }
+
+    @media (max-width: $hero-carousel-mobile-max) {
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+    }
+  }
+
+  &__arrows {
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 2;
+  }
+
+  &__arrow {
+    align-items: center;
+    background: $bg-default;
+    border: 0;
+    /* stylelint-disable-next-line declaration-property-value-allowed-list */
+    border-radius: 50%;
+    box-sizing: border-box;
+    color: $text-default;
+    cursor: pointer;
+    display: inline-flex;
+    height: 52px;
+    justify-content: center;
+    padding: 0;
+    pointer-events: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: opacity 200ms ease;
+    width: 52px;
+
+    &:hover {
+      background: $bg-default;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $black-100;
+      outline-offset: 2px;
+    }
+
+    svg {
+      display: block;
+      height: 24px;
+      width: 24px;
+    }
+  }
+
+  &__arrow--prev {
+    left: 12px;
+  }
+
+  &__arrow--next {
+    right: 12px;
+  }
+
+  @media (hover: hover) {
+    &__arrow {
+      opacity: 0;
+    }
+
+    &:hover &__arrow,
+    &:focus-within &__arrow {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: $hero-carousel-mobile-max) {
+    &__arrows {
+      display: none;
+    }
+  }
+
+  &__pagination {
+    align-items: center;
+    display: flex;
+    gap: 12px;
+    height: 52px;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  &__dot {
+    background: $grey-50;
+    border: 0;
+    /* stylelint-disable-next-line declaration-property-value-allowed-list */
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-block;
+    height: 8px;
+    padding: 0;
+    transition: background-color 200ms ease;
+    width: 8px;
+
+    &--active {
+      background: $black-100;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $black-100;
+      outline-offset: 4px;
+    }
+  }
+}

@@ -1,0 +1,94 @@
+@use '~scss/allPartials' as *;
+
+$image-banner-mobile-max: $breakpoint-snw-mobile - 1px;
+$image-banner-tablet-max: 1023px;
+
+.#{$px}-image-banner {
+  background: $bg-default;
+  position: relative;
+  width: 100%;
+
+  &__link,
+  &__inner {
+    align-items: center;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: $text-default;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1440px;
+    position: relative;
+    text-decoration: none;
+    width: 100%;
+  }
+
+  &--gradient-gray &__link,
+  &--gradient-gray &__inner {
+    background-color: $grey-50;
+    background-image: linear-gradient(180deg, #d8d6d2 0%, #b9b7b3 100%);
+  }
+
+  &__link {
+    aspect-ratio: 1344 / 255;
+
+    @media (max-width: $image-banner-tablet-max) and (min-width: $breakpoint-snw-mobile) {
+      aspect-ratio: 720 / 137;
+    }
+
+    @media (max-width: $image-banner-mobile-max) {
+      aspect-ratio: 345 / 314;
+    }
+  }
+
+  &__inner {
+    aspect-ratio: 1344 / 255;
+  }
+
+  &__content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  &__wordmark {
+    @include text($displayMedium, 400, uppercase);
+
+    color: $text-default;
+    font-size: 56px;
+    letter-spacing: 0.05em;
+    line-height: 1;
+
+    @media (max-width: $image-banner-mobile-max) {
+      font-size: 36px;
+    }
+  }
+
+  &__tagline {
+    @include body-styles(12px, 400, unset);
+
+    color: $text-default;
+    line-height: 16px;
+    margin: 0;
+    text-align: center;
+  }
+
+  &__button {
+    background: $black-100;
+    border-radius: $radius-2xl;
+    color: $text-inverted;
+    display: inline-block;
+    line-height: 16px;
+    margin-top: 4px;
+    padding: 12px 24px;
+    pointer-events: none;
+    text-align: center;
+    text-decoration: none;
+
+    @include label-styles(12px, 400, uppercase);
+  }
+}
