@@ -43,6 +43,7 @@ product API clients here.
   shared vars (`src/scss/_vars.scss` — currently `seldon`).
 - Prefer existing primitives (`Text`, `Button`, `Grid`, etc.) before adding
   parallel patterns.
+- Do not use the mixin for `@include text(variant)` in the SCSS files, instead use the <Text variant="..."> component.
 
 ## Testing
 
@@ -59,6 +60,15 @@ product API clients here.
 - **`.agents/skills/vercel-react-best-practices/SKILL.md`** — performance; see
   the “Scope in this repository” section there (skip server-only rules for
   typical library work).
+- **`.agents/skills/branch-coverage-hotspot-hunter/SKILL.md`** — flag branch coverage hotspots.
+- **`.agents/skills/storybook-coverage-checker/SKILL.md`** — flag storybook coverage gaps.
+- **`.agents/skills/accessibility-compliance-accessibility-audit/SKILL.md`** — flag accessibility compliance issues.
+- **`.agents/skills/security-compliance-security-audit/SKILL.md`** — flag security compliance issues.
+- **`.agents/skills/performance-compliance-performance-audit/SKILL.md`** — flag performance compliance issues.
+- **`.agents/skills/best-practices-best-practices-audit/SKILL.md`** — flag best practices issues.
+- **`.agents/skills/code-style-code-style-audit/SKILL.md`** — flag code style issues.
+- **`.agents/skills/documentation-documentation-audit/SKILL.md`** — flag documentation issues.
+- **`.agents/skills/testing-testing-audit/SKILL.md`** — flag testing issues.
 
 ## Repo docs (read in order)
 

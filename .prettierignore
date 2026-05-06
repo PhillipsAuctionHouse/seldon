@@ -35,3 +35,4 @@ coverage
 
 CHANGELOG.md
 src/design/type-tokens/type-tokens.mdx
+./agents/skills/*

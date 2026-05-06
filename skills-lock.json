@@ -1,6 +1,18 @@
 {
   "version": 1,
   "skills": {
+    "accessibility-compliance-accessibility-audit": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/accessibility-compliance-accessibility-audit/SKILL.md",
+      "computedHash": "653f1972133a68520cff37d8d52cd516d66a1cfcf48cc7b0bebbf3d83d9bb5bf"
+    },
+    "radix-ui-design-system": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/radix-ui-design-system/SKILL.md",
+      "computedHash": "e80a260a82334d85f4ca41d9417f44df759db55db88c881447c8d8d2eb434825"
+    },
     "shadcn": {
       "source": "shadcn/ui",
       "sourceType": "github",

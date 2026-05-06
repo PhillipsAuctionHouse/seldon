@@ -48,7 +48,7 @@ fi
 if [[ "${IS_BACKGROUND}" -ne 1 ]]; then
   if [[ "${LOOP_ZERO}" -eq 1 ]]; then
     cat <<'JSON'
-{"followup_message":"Run this as a background agent only: execute project quality checks from docs/agents/QUALITY.md (npm run format && npm run lint && npm run test). Report concise pass/fail and the first failing command output if anything fails. Do not make code edits in this pass."}
+{"followup_message":"Run this as a background agent only. For major implementation work, run the local skill pass before command checks, using docs/agents/CODE_REVIEW_AUDIT.md for audit framing and selecting applicable skills from this set: `.agents/skills/radix-ui-design-system`, `.agents/skills/accessibility-compliance-accessibility-audit`, `.agents/skills/component-size-splitter`, `.agents/skills/storybook-coverage-enforcer`, `.agents/skills/unit-test-coverage-enforcer`, `.agents/skills/testing-library-modernization`, `.agents/skills/conditional-rendering-conventions`, `.agents/skills/scss-specificity-remediation`, `.agents/skills/import-and-type-style-normalizer`, `.agents/skills/branch-coverage-hotspot-hunter`. Always include radix + accessibility for substantial UI work; add the others when the change set/audit signals match. Then execute project quality checks from docs/agents/QUALITY.md (npm run format && npm run lint && npm run test). Report concise pass/fail, include key audit findings, include which skills were applied and why, and include the first failing command output if anything fails. Do not make code edits in this pass."}
 JSON
     exit 0
   fi

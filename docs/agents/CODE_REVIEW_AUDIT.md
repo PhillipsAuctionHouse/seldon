@@ -150,3 +150,20 @@ Grep found **`!important`** usage in:
 - **Component detection** was heuristic-based (path under `src/components` / `src/patterns`, PascalCase `Foo.tsx`, export pattern suggesting a React component). It will **false-positive** or **false-negative** on edge cases (barrels, `forwardRef`-only exports, non-component TSX).
 - **E2E:** not re-audited in this pass; `e2e/header.spec.ts` exists and targets Storybook URLs — no gap analysis run.
 - Re-run this audit after large refactors: `npm run lint && npm run coverage`, then re-execute the Node inventory script used to produce §2–§3.
+
+---
+
+## Hook wiring for major changes
+
+To keep this audit actionable after plan execution or major agent changes:
+
+- Use local skills first as a review gate:
+  - `.agents/skills/radix-ui-design-system`
+  - `.agents/skills/accessibility-compliance-accessibility-audit`
+- Then run project checks from `docs/agents/QUALITY.md`:
+  - `npm run format`
+  - `npm run lint`
+  - `npm run test`
+- Enforcement path:
+  - `.cursor/hooks/post-agent-quality.sh` schedules a background follow-up agent on completion and now prompts that run to execute the two skills as an audit pass before command checks.
+- If the work is not major, the skill pass can be treated as lightweight (only report material risks).
