@@ -5,7 +5,7 @@ import { getCommonProps } from '../../utils';
 /**
  * Props for the AuctionCard component.
  */
-export interface AuctionCardProps extends ComponentProps<'aside'> {
+export interface AuctionCardProps extends ComponentProps<'div'> {
   /** Eyebrow shown above the title (e.g. "Live Auction"). */
   saleTypeLabel?: string;
   /** Main title (rendered uppercase, Distinct Display). */
@@ -35,7 +35,7 @@ export interface AuctionCardProps extends ComponentProps<'aside'> {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/patterns-auctioncard--overview)
  */
-const AuctionCard = forwardRef<HTMLElement, AuctionCardProps>(
+const AuctionCard = forwardRef<HTMLDivElement, AuctionCardProps>(
   (
     {
       className,
@@ -58,7 +58,7 @@ const AuctionCard = forwardRef<HTMLElement, AuctionCardProps>(
     const dateTime = [date, time].filter(Boolean).join(' ');
 
     return (
-      <aside ref={ref} className={classes} aria-label="Upcoming auction" {...commonProps}>
+      <div ref={ref} className={classes} aria-label="Upcoming auction" {...commonProps}>
         <div className={`${baseClassName}__inner`}>
           {saleTypeLabel ? <span className={`${baseClassName}__label`}>{saleTypeLabel}</span> : null}
           {title ? <h2 className={`${baseClassName}__title`}>{title}</h2> : null}
@@ -79,7 +79,7 @@ const AuctionCard = forwardRef<HTMLElement, AuctionCardProps>(
             </div>
           ) : null}
         </div>
-      </aside>
+      </div>
     );
   },
 );
