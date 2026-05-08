@@ -1,3 +1,10 @@
+# [1.260.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.259.0...v1.260.0) (2026-05-07)
+
+
+### Features
+
+* **a11y:** L3-12633 remove inaccurate default tab container label, require on… ([#861](https://github.com/PhillipsAuctionHouse/seldon/issues/861)) ([a9ce850](https://github.com/PhillipsAuctionHouse/seldon/commit/a9ce85013fab5924907d37733360bd63ae93a29b))
+
 # [1.259.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.258.0...v1.259.0) (2026-04-30)
 
 
