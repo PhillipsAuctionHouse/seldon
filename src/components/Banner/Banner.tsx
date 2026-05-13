@@ -17,7 +17,7 @@ export interface BannerRootProps extends ComponentProps<'article'> {
   /**
    * Visual variant for the banner root.
    * - `inline`: bordered row chrome (border-top / border-bottom).
-   * - `top`: Usually rendered at the top of a page,stacked layout (image above content) through 768px; side-by-side from 961px up.
+   * - `top`: Usually rendered at the top of a page, stacked layout (image above content) below 961px; side-by-side from 961px up.
    */
   variant?: BannerVariants;
 }
