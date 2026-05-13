@@ -1,5 +1,5 @@
 import { ComponentProps, forwardRef } from 'react';
-import { getCommonProps } from '../../utils';
+import { Breakpoints, getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { Countdown, CountdownProps } from '../../components/Countdown';
 import { SeldonImage } from '../../components/SeldonImage';
@@ -7,6 +7,7 @@ import { AuctionStatus } from '../../types/commonTypes';
 import { Text, TextVariants } from '../../components/Text';
 import { PageContentWrapper as PageMargin } from '../../components/PageContentWrapper';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
+import Banner, { BannerImageSize, BannerVariants } from '../../components/Banner/Banner';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
@@ -138,60 +139,65 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
     return (
       <div {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
         {isOpenForBidding && auctionEndTime && showTimer ? (
-          <SSRMediaQuery.Media lessThan="md">
+          <SSRMediaQuery.Media lessThan={Breakpoints.md}>
             <div className={`${baseClassName}__stack__countdown`}>
-              {<Countdown {...countdownProps} showBottomBorder={false} centerAlign={true} />}
+              <Countdown {...countdownProps} showBottomBorder={false} centerAlign={true} />
             </div>
           </SSRMediaQuery.Media>
         ) : null}
-        <SeldonImage
-          aspectRatio="16/9"
-          src={imageSrcUrl}
-          alt={String(auctionTitle)}
-          objectFit="cover"
-          className={`${baseClassName}__image`}
-          srcSet={imageSrcSet}
-          sizes={imageSizes}
-          loading={imageLoading}
-          fetchPriority={imageFetchPriority}
-        />
-        <PageMargin className={`${baseClassName}__stack-wrapper`} {...commonProps} {...props} ref={ref}>
-          <div className={`${baseClassName}__stack`}>
-            {isOpenForBidding && auctionEndTime && showTimer ? (
-              <SSRMediaQuery.Media greaterThanOrEqual="md">
-                <div className={`${baseClassName}__stack__countdown`}>
-                  {<Countdown {...countdownProps} centerAlign={true} />}
-                </div>
-              </SSRMediaQuery.Media>
-            ) : null}
-            <Text variant={TextVariants.labelMedium} className={`${baseClassName}__header-label`}>
-              {headerLabel}
-            </Text>
-            <Text className={`${baseClassName}__title`} variant={TextVariants.headingLarge}>
-              {auctionTitle}
-            </Text>
-            {badgeText && (
-              <Text variant={TextVariants.badge} className={`${baseClassName}__badge`}>
-                {badgeText}
-              </Text>
-            )}
-            <Text variant={TextVariants.labelMedium} className={`${baseClassName}__location`}>
-              {location}
-            </Text>
-            <div className={`${baseClassName}__occurrence-details`}>
-              {occurrenceInformation.map(({ date, occurrenceLabel }) => (
-                <div className={`${baseClassName}__occurrence-details-text`} key={String(date)}>
-                  <Text variant={TextVariants.labelMedium}>{occurrenceLabel}</Text>
-                  <Text variant={TextVariants.labelMedium} className={`${baseClassName}__date`}>
-                    {date}
+        <Banner variant={BannerVariants.top}>
+          <Banner.Content>
+            <PageMargin>
+              <div className={`${baseClassName}__stack`}>
+                {isOpenForBidding && auctionEndTime && showTimer ? (
+                  <SSRMediaQuery.Media greaterThanOrEqual={Breakpoints.snwMobile}>
+                    <div className={`${baseClassName}__stack__countdown`}>
+                      <Countdown {...countdownProps} centerAlign={true} />
+                    </div>
+                  </SSRMediaQuery.Media>
+                ) : null}
+                <Banner.Eyebrow variant={TextVariants.labelMedium} className={`${baseClassName}__header-label`}>
+                  {headerLabel}
+                </Banner.Eyebrow>
+                <Banner.Title variant={TextVariants.headingLarge} element="h1" className={`${baseClassName}__title`}>
+                  {auctionTitle}
+                </Banner.Title>
+                {badgeText && (
+                  <Text variant={TextVariants.badge} className={`${baseClassName}__badge`}>
+                    {badgeText}
                   </Text>
+                )}
+                <Text variant={TextVariants.labelMedium} className={`${baseClassName}__location`}>
+                  {location}
+                </Text>
+                <div className={`${baseClassName}__occurrence-details`}>
+                  {occurrenceInformation.map(({ date, occurrenceLabel }) => (
+                    <div className={`${baseClassName}__occurrence-details-text`} key={String(date)}>
+                      <Text variant={TextVariants.labelMedium}>{occurrenceLabel}</Text>
+                      <Text variant={TextVariants.labelMedium} className={`${baseClassName}__date`}>
+                        {date}
+                      </Text>
+                    </div>
+                  ))}
+                  {children}
                 </div>
-              ))}
-              {children}
-            </div>
-            {footerElement}
-          </div>
-        </PageMargin>
+                {footerElement}
+              </div>
+            </PageMargin>
+          </Banner.Content>
+          <Banner.Media imageSize={BannerImageSize.Half} className={`${baseClassName}__image`}>
+            <SeldonImage
+              aspectRatio="16/9"
+              src={imageSrcUrl}
+              alt={String(auctionTitle)}
+              objectFit="cover"
+              srcSet={imageSrcSet}
+              sizes={imageSizes}
+              loading={imageLoading}
+              fetchPriority={imageFetchPriority}
+            />
+          </Banner.Media>
+        </Banner>
       </div>
     );
   },

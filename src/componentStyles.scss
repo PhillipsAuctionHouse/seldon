@@ -7,6 +7,7 @@
 @use '~scss/vars' as *;
 
 // ⚛️ Components
+@use 'components/Banner/banner';
 @use 'components/Button/button';
 @use 'components/Card/card';
 @use 'components/IconButton/iconButton';

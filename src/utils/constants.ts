@@ -11,4 +11,12 @@ export const BREAKPOINTS = {
   ['snw-mobile']: 768,
 };
 
+export enum Breakpoints {
+  xsm = 'xsm',
+  sm = 'sm',
+  md = 'md',
+  lg = 'lg',
+  snwMobile = 'snw-mobile',
+}
+
 export const DEFAULT_REM_SIZE = 16;

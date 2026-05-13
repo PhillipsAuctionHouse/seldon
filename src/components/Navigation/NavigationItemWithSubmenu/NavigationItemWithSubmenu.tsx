@@ -3,7 +3,7 @@ import React, { ComponentProps, forwardRef } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import { SSRMediaQuery } from '../../../providers/SeldonProvider/utils';
 import { HeaderContext } from '../../../site-furniture/Header/Header';
-import { findChildrenOfType, getCommonProps, px } from '../../../utils';
+import { Breakpoints, findChildrenOfType, getCommonProps, px } from '../../../utils';
 import Accordion from '../../Accordion/Accordion';
 import AccordionItem from '../../Accordion/AccordionItem';
 import { Text, TextVariants } from '../../Text';
@@ -116,7 +116,7 @@ const NavigationItemWithSubmenu = forwardRef<HTMLLIElement, NavigationItemWithSu
     return (
       <>
         <RemoveScroll enabled={false} allowPinchZoom removeScrollBar={false}>
-          <SSRMediaQuery.Media lessThan="md">
+          <SSRMediaQuery.Media lessThan={Breakpoints.md}>
             <li className={classNames(baseClassName, `${px}-nav__item`)} {...commonPropsWithoutTestId}>
               <MobileNavigationItemWithSubmenu id={id} label={label} {...commonProps}>
                 {navSubmenuElement
@@ -131,7 +131,7 @@ const NavigationItemWithSubmenu = forwardRef<HTMLLIElement, NavigationItemWithSu
               </MobileNavigationItemWithSubmenu>
             </li>
           </SSRMediaQuery.Media>
-          <SSRMediaQuery.Media greaterThanOrEqual="md">{desktopContent}</SSRMediaQuery.Media>
+          <SSRMediaQuery.Media greaterThanOrEqual={Breakpoints.md}>{desktopContent}</SSRMediaQuery.Media>
         </RemoveScroll>
       </>
     );

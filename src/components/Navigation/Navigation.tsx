@@ -1,5 +1,5 @@
 import React, { ComponentProps, CSSProperties, forwardRef, ReactElement } from 'react';
-import { findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
+import { Breakpoints, findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
 import classnames from 'classnames';
 import { HeaderContext } from '../../site-furniture/Header/Header';
 import NavigationList, { NavigationListProps } from './NavigationList/NavigationList';
@@ -42,7 +42,7 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
         {otherChildren}
 
         {/* Mobile (< md): accordion-style nav list */}
-        <SSRMediaQuery.Media lessThan="md">
+        <SSRMediaQuery.Media lessThan={Breakpoints.md}>
           {React.isValidElement(childNavList)
             ? React.cloneElement<NavigationListProps>(childNavList, {
                 isOffScreen: isSearchExpanded,
@@ -52,7 +52,7 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
         </SSRMediaQuery.Media>
 
         {/* Desktop (≥ md): Radix list + viewport (hover submenus, controlled by activeSubmenuId) */}
-        <SSRMediaQuery.Media greaterThanOrEqual="md">
+        <SSRMediaQuery.Media greaterThanOrEqual={Breakpoints.md}>
           {React.isValidElement(childNavList) ? (
             <RemoveScroll enabled={!!openSubmenuValue} allowPinchZoom removeScrollBar={false}>
               {React.cloneElement<NavigationListProps>(childNavList, {
@@ -65,7 +65,7 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
         </SSRMediaQuery.Media>
 
         {/* Mobile (< md): language selector (visually hidden when search expanded) */}
-        <SSRMediaQuery.Media lessThan="md">
+        <SSRMediaQuery.Media lessThan={Breakpoints.md}>
           {React.isValidElement(languageSelectorElement) && languageSelectorElement
             ? React.cloneElement(languageSelectorElement as ReactElement<LanguageSelectorProps>, {
                 isHidden: isSearchExpanded,
