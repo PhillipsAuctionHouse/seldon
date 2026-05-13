@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "Figma Dev Mode MCP": {
+      "url": "http://127.0.0.1:3845/sse",
+      "disabled": false
+    },
+    "Jira MCP": {
+      "url": "https://mcp.atlassian.com/v1/sse",
+      "disabled": false
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["chrome-devtools-mcp@latest"],
+      "disabled": false
+    }
+  }
+}

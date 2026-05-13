@@ -32,6 +32,7 @@ export default tseslint.config(
       'svgr.config.cjs',
       'chromatic.config.cjs',
       'commitlint.config.js',
+      '.agents/skills/*',
     ],
   },
   js.configs.recommended,
