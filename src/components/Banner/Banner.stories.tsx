@@ -9,6 +9,12 @@ const sampleImage =
 const meta = {
   title: 'Components/Banner',
   component: Banner,
+  argTypes: {
+    variant: {
+      options: Object.values(BannerVariants),
+      control: { type: 'select' },
+    },
+  },
 } satisfies Meta<typeof Banner>;
 
 export default meta;
@@ -20,7 +26,6 @@ export const Playground = (props: BannerRootProps) => (
         <Banner.Image src={sampleImage} alt="Modern & Contemporary Art auction" />
       </Banner.MediaFrame>
     </Banner.Media>
-    <Banner.Separator />
     <Banner.Content>
       <Banner.Eyebrow>Modern & Contemporary Art</Banner.Eyebrow>
       <Banner.Title>Gallery Tour: Modern & Contemporary Art London</Banner.Title>
@@ -51,7 +56,6 @@ export const Inline = (props: BannerRootProps) => (
         <Banner.Image imageSize={BannerImageSize.Third} src={sampleImage} alt="Auction banner" />
       </Banner.MediaFrame>
     </Banner.Media>
-    <Banner.Separator />
     <Banner.Content>
       <Banner.Eyebrow>Department</Banner.Eyebrow>
       <Banner.Title>Banner with inline borders</Banner.Title>
@@ -73,7 +77,6 @@ export const ImageHalf = (props: BannerRootProps) => (
         <Banner.Image imageSize={BannerImageSize.Half} src={sampleImage} alt="Auction banner half width" />
       </Banner.MediaFrame>
     </Banner.Media>
-    <Banner.Separator />
     <Banner.Content>
       <Banner.Eyebrow>Label</Banner.Eyebrow>
       <Banner.Title>Half-width media column</Banner.Title>
@@ -86,13 +89,12 @@ ImageHalf.storyName = 'Image half width';
 ImageHalf.args = { id: 'image-half' };
 
 export const ImageOnRight = (props: BannerRootProps) => (
-  <Banner.Root {...props} variant={BannerVariants.inline}>
+  <Banner.Root {...props}>
     <Banner.Content>
       <Banner.Eyebrow>Label</Banner.Eyebrow>
       <Banner.Title>Image column on the right</Banner.Title>
       <Banner.Cta>Action</Banner.Cta>
     </Banner.Content>
-    <Banner.Separator />
     <Banner.Media>
       <Banner.MediaFrame>
         <Banner.Image imageSize={BannerImageSize.Half} src={sampleImage} alt="Auction banner image right" />

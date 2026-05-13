@@ -1,6 +1,4 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
-
 import { runCommonTests } from '../../utils/testUtils';
 import Banner from './Banner';
 import { BannerImageSize, BannerVariants } from './types';
@@ -14,7 +12,6 @@ describe('Banner', () => {
         <Banner.Media>
           <span>Media slot</span>
         </Banner.Media>
-        <Banner.Separator />
         <Banner.Content>
           <Banner.Eyebrow>Eyebrow</Banner.Eyebrow>
           <Banner.Title>Title</Banner.Title>

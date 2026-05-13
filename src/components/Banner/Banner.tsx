@@ -1,8 +1,7 @@
 import classnames from 'classnames';
 import { createContext, type ComponentProps, forwardRef, useCallback, useContext, useEffect, useState } from 'react';
 
-import { Breakpoints, getCommonProps, px } from '../../utils';
-import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
+import { getCommonProps, px } from '../../utils';
 import { Text, type TextProps, TextVariants } from '../Text';
 import { BannerImageSize, BannerVariants } from './types';
 
@@ -53,22 +52,24 @@ export type BannerImageProps = ComponentProps<'img'> & {
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-banner--overview)
  */
-const BannerRoot = forwardRef<HTMLElement, BannerRootProps>(({ children, className, variant, id, ...props }, ref) => {
-  const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'Banner');
-  return (
-    <article
-      {...commonProps}
-      {...props}
-      id={id}
-      ref={ref}
-      className={classnames(baseClassName, className, {
-        [`${baseClassName}--${variant}`]: variant,
-      })}
-    >
-      <div className={`${base}__inner`}>{children}</div>
-    </article>
-  );
-});
+const BannerRoot = forwardRef<HTMLElement, BannerRootProps>(
+  ({ children, className, variant = BannerVariants.top, id, ...props }, ref) => {
+    const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'Banner');
+    return (
+      <article
+        {...commonProps}
+        {...props}
+        id={id}
+        ref={ref}
+        className={classnames(baseClassName, className, {
+          [`${baseClassName}--${variant}`]: variant,
+        })}
+      >
+        <div className={`${base}__inner`}>{children}</div>
+      </article>
+    );
+  },
+);
 
 const BannerMedia = forwardRef<HTMLDivElement, BannerMediaProps>(
   ({ children, className, imageSize: imageSizeFromProp, ...props }, ref) => {
@@ -88,12 +89,6 @@ const BannerMedia = forwardRef<HTMLDivElement, BannerMediaProps>(
       </BannerMediaLayoutContext.Provider>
     );
   },
-);
-
-const BannerSeparator = () => (
-  <SSRMediaQuery.Media greaterThanOrEqual={Breakpoints.snwMobile}>
-    <div className={`${base}__column-gap`} aria-hidden />
-  </SSRMediaQuery.Media>
 );
 
 const BannerContent = forwardRef<HTMLDivElement, ComponentProps<'div'>>(({ children, className, ...props }, ref) => (
@@ -160,7 +155,6 @@ const BannerMediaImg = forwardRef<HTMLImageElement, ComponentProps<'img'>>(({ cl
 
 BannerRoot.displayName = 'Banner.Root';
 BannerMedia.displayName = 'Banner.Media';
-BannerSeparator.displayName = 'Banner.Separator';
 BannerContent.displayName = 'Banner.Content';
 BannerEyebrow.displayName = 'Banner.Eyebrow';
 BannerTitle.displayName = 'Banner.Title';
@@ -173,7 +167,6 @@ BannerMediaImg.displayName = 'Banner.MediaImg';
 const Banner = Object.assign(BannerRoot, {
   Root: BannerRoot,
   Media: BannerMedia,
-  Separator: BannerSeparator,
   Content: BannerContent,
   Eyebrow: BannerEyebrow,
   Title: BannerTitle,

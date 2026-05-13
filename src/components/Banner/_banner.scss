@@ -8,7 +8,7 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    gap: $spacing-sm;
+    gap: 16px;
 
     // Stacked: always show media above copy; at snw-mobile+ DOM order controls left/right in the row.
     > .#{$px}-banner__media {
@@ -106,17 +106,24 @@
   }
 
   &--top {
-    // Top-of-page banners: flush columns, full-height row alignment, and full-width
-    // Fresnel slices (e.g. countdown) — matches legacy sale-header style before Banner.
-    .fresnel-container {
+    // Top-of-page banners: uses default `&__inner` gap ($spacing-sm). Full-width Fresnel slices (e.g. countdown).
+    .#{$px}-banner__body .fresnel-container {
       width: 100%;
+    }
+    .#{$px}-banner__body {
+      padding-left: 0;
+
+      @include media($breakpoint-md) {
+        padding: $spacing-md 0;
+        padding-left: $spacing-lg;
+      }
     }
 
     .#{$px}-banner__inner {
       align-items: stretch;
-      gap: 0;
+      column-gap: 0;
 
-      @include media($breakpoint-snw-mobile) {
+      @include media($breakpoint-md) {
         flex-direction: column;
 
         > .#{$px}-banner__media {
@@ -163,6 +170,14 @@
         &--1-2 {
           flex-basis: 50%;
         }
+      }
+    }
+
+    // Row layout: page margins inset copy from the media seam; remove inline-start padding
+    // so the stack aligns with the image edge (SaleHeaderBanner and similar).
+    @include media($breakpoint-md) {
+      .#{$px}-banner__body > .#{$px}-page-content-wrapper {
+        padding-inline-start: 0;
       }
     }
   }
