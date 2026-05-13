@@ -102,7 +102,7 @@
   &--inline {
     border-bottom: 1px solid $grey-50;
     border-top: 1px solid $grey-50;
-    padding: $spacing-sm 0;
+    padding: 16px;
   }
 
   &--top {
@@ -123,7 +123,7 @@
       align-items: stretch;
       column-gap: 0;
 
-      @include media($breakpoint-md) {
+      @include media($breakpoint-snw-mobile) {
         flex-direction: column;
 
         > .#{$px}-banner__media {
