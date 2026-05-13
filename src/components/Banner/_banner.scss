@@ -111,6 +111,7 @@
       width: 100%;
     }
     .#{$px}-banner__body {
+      justify-content: center;
       padding-left: 0;
 
       @include media($breakpoint-md) {
