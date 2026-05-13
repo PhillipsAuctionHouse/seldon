@@ -1,0 +1,45 @@
+---
+description: >-
+  Seldon design system — src/components and src/patterns, co-located Storybook +
+  Vitest; after substantive edits run npm run format. Canonical skill at
+  .agents/skills/seldon/SKILL.md.
+alwaysApply: true
+---
+
+# Seldon (Agent Review + UI work)
+
+## Agent Review
+
+When running **Cursor Agent Review**, **PR review**, or any **automated code
+review** on this repository, you **must** treat the following as binding project
+standards (not suggestions):
+
+1. **Canonical skill:** Read and apply **`.agents/skills/seldon/SKILL.md`**
+   (Seldon skill): library scope, co-located stories and tests, SCSS + `px` / `$px`
+   conventions.
+2. **Repo rules:** **`AGENTS.md`**, **`docs/agents/CONVENTIONS.md`**,
+   **`docs/agents/QUALITY.md`**.
+3. **Checklist:** **`.cursor/commands/code-review-checklist.md`** — verify
+   Storybook/tests where applicable, accessibility, and BEM / prefix rules.
+
+Flag gaps explicitly (for example a new visual component without `.stories.tsx` /
+`.test.tsx` when the rest of the folder uses that pattern).
+
+## Everyday UI work
+
+For edits under **`src/components/`** or **`src/patterns/`**, follow the same
+**`.agents/skills/seldon/SKILL.md`** before merge. After substantive edits,
+run **`npm run format`**.
+
+## Cursor subagents (structured audits)
+
+For **gap analysis** (not a substitute for CI), invoke or @mention these
+**`.cursor/agents/`** definitions:
+
+| Subagent                        | File                                            | Purpose                                                                          |
+| ------------------------------- | ----------------------------------------------- | -------------------------------------------------------------------------------- |
+| **component-unit-test-checker** | `.cursor/agents/component-unit-test-checker.md` | Flag `src/components/**` folders missing co-located `*.test.tsx` where expected. |
+| **component-storybook-checker** | `.cursor/agents/component-storybook-checker.md` | Flag `src/components/**` missing co-located `*.stories.tsx` where expected.      |
+
+Agent Review may **delegate** to these when verifying Seldon skill test and story
+expectations.
