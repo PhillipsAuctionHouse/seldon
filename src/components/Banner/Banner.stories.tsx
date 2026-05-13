@@ -53,7 +53,7 @@ export const Inline = (props: BannerRootProps) => (
   <Banner.Root {...props} variant={BannerVariants.inline}>
     <Banner.Media>
       <Banner.MediaFrame>
-        <Banner.Image imageSize={BannerImageSize.Third} src={sampleImage} alt="Auction banner" />
+        <Banner.Image imageSize={BannerImageSize.third} src={sampleImage} alt="Auction banner" />
       </Banner.MediaFrame>
     </Banner.Media>
     <Banner.Content>
@@ -74,7 +74,7 @@ export const ImageHalf = (props: BannerRootProps) => (
   <Banner.Root {...props}>
     <Banner.Media>
       <Banner.MediaFrame>
-        <Banner.Image imageSize={BannerImageSize.Half} src={sampleImage} alt="Auction banner half width" />
+        <Banner.Image imageSize={BannerImageSize.half} src={sampleImage} alt="Auction banner half width" />
       </Banner.MediaFrame>
     </Banner.Media>
     <Banner.Content>
@@ -97,7 +97,7 @@ export const ImageOnRight = (props: BannerRootProps) => (
     </Banner.Content>
     <Banner.Media>
       <Banner.MediaFrame>
-        <Banner.Image imageSize={BannerImageSize.Half} src={sampleImage} alt="Auction banner image right" />
+        <Banner.Image imageSize={BannerImageSize.half} src={sampleImage} alt="Auction banner image right" />
       </Banner.MediaFrame>
     </Banner.Media>
   </Banner.Root>

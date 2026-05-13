@@ -43,7 +43,7 @@ export type BannerImageProps = ComponentProps<'img'> & {
 /**
  * ## Overview
  *
- * Compositional banner layout: `Banner.Root` wraps `Banner.Media`, optional `Banner.Separator`,
+ * Compositional banner layout: `Banner.Root` wraps `Banner.Media`
  * and `Banner.Content` with `Banner.Eyebrow` / `Banner.Title` / `Banner.Description` / `Banner.Cta`.
  * Pass `variant={BannerVariants.inline}` on `Banner.Root` for bordered row chrome.
  * Use `Banner.Image` (or `imageSize` on `Banner.Media`) for column width from `snw-mobile` up.
@@ -78,8 +78,8 @@ const BannerMedia = forwardRef<HTMLDivElement, BannerMediaProps>(
       setRegisteredSize(size);
     }, []);
 
-    const resolved: BannerImageSize = registeredSize ?? imageSizeFromProp ?? BannerImageSize.Third;
-    const basisMod = resolved === BannerImageSize.Half ? '1-2' : '1-3';
+    const resolved: BannerImageSize = registeredSize ?? imageSizeFromProp ?? BannerImageSize.third;
+    const basisMod = resolved === BannerImageSize.half ? '1-2' : '1-3';
 
     return (
       <BannerMediaLayoutContext.Provider value={registerImageSize}>
@@ -134,7 +134,7 @@ const BannerMediaFrame = forwardRef<HTMLDivElement, BannerMediaFrameProps>(({ ch
 ));
 
 const BannerImage = forwardRef<HTMLImageElement, BannerImageProps>(
-  ({ imageSize = BannerImageSize.Third, className, alt = '', ...props }, ref) => {
+  ({ imageSize = BannerImageSize.third, className, alt = '', ...props }, ref) => {
     const register = useContext(BannerMediaLayoutContext);
 
     useEffect(() => {

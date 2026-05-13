@@ -4,6 +4,6 @@ export enum BannerVariants {
 }
 
 export enum BannerImageSize {
-  Half = '1/2',
-  Third = '1/3',
+  half = '1/2',
+  third = '1/3',
 }

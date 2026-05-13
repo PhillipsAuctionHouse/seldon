@@ -56,7 +56,7 @@ describe('Banner', () => {
     render(
       <Banner.Root>
         <Banner.Media data-testid="banner-media">
-          <Banner.Image imageSize={BannerImageSize.Half} src="/x.jpg" alt="test" />
+          <Banner.Image imageSize={BannerImageSize.half} src="/x.jpg" alt="test" />
         </Banner.Media>
       </Banner.Root>,
     );

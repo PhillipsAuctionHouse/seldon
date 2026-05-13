@@ -185,7 +185,7 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
               </div>
             </PageMargin>
           </Banner.Content>
-          <Banner.Media imageSize={BannerImageSize.Half} className={`${baseClassName}__image`}>
+          <Banner.Media imageSize={BannerImageSize.half} className={`${baseClassName}__image`}>
             <SeldonImage
               aspectRatio="16/9"
               src={imageSrcUrl}
