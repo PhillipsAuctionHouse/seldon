@@ -106,7 +106,16 @@
   }
 
   &--top {
+    // Top-of-page banners: flush columns, full-height row alignment, and full-width
+    // Fresnel slices (e.g. countdown) — matches legacy sale-header style before Banner.
+    .fresnel-container {
+      width: 100%;
+    }
+
     .#{$px}-banner__inner {
+      align-items: stretch;
+      gap: 0;
+
       @include media($breakpoint-snw-mobile) {
         flex-direction: column;
 

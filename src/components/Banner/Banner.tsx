@@ -49,7 +49,7 @@ export type BannerImageProps = ComponentProps<'img'> & {
  * Pass `variant={BannerVariants.inline}` on `Banner.Root` for bordered row chrome.
  * Use `Banner.Image` (or `imageSize` on `Banner.Media`) for column width from `snw-mobile` up.
  *
- * [Figma Link](https://www.figma.com/design/xMuOXOAKVt5HC7hgYjF3ot/Components-v2.0)
+ * [Figma Link](https://www.figma.com/design/wRbSaO9MngnSedlDSQka3Y/Design-System--Responsive-Web?node-id=2134-5414)
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-banner--overview)
  */

@@ -150,7 +150,7 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
             <PageMargin>
               <div className={`${baseClassName}__stack`}>
                 {isOpenForBidding && auctionEndTime && showTimer ? (
-                  <SSRMediaQuery.Media greaterThanOrEqual={Breakpoints.snwMobile}>
+                  <SSRMediaQuery.Media greaterThanOrEqual={Breakpoints.md}>
                     <div className={`${baseClassName}__stack__countdown`}>
                       <Countdown {...countdownProps} centerAlign={true} />
                     </div>
