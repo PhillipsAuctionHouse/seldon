@@ -88,6 +88,24 @@ export const ImageHalf = (props: BannerRootProps) => (
 ImageHalf.storyName = 'Image half width';
 ImageHalf.args = { id: 'image-half' };
 
+export const ImageThird = (props: BannerRootProps) => (
+  <Banner.Root {...props}>
+    <Banner.Media>
+      <Banner.MediaFrame>
+        <Banner.Image imageSize={BannerImageSize.third} src={sampleImage} alt="Auction banner third width" />
+      </Banner.MediaFrame>
+    </Banner.Media>
+    <Banner.Content>
+      <Banner.Eyebrow>Label</Banner.Eyebrow>
+      <Banner.Title>Third-width media column</Banner.Title>
+      <Banner.Cta>Action</Banner.Cta>
+    </Banner.Content>
+  </Banner.Root>
+);
+
+ImageThird.storyName = 'Image third width';
+ImageThird.args = { id: 'image-third' };
+
 export const ImageOnRight = (props: BannerRootProps) => (
   <Banner.Root {...props}>
     <Banner.Content>
