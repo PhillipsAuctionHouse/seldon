@@ -20,6 +20,7 @@
     align-items: center;
     background: $status-info;
     bottom: 0;
+    color: $white;
     display: flex;
     justify-content: flex-end;
     left: 0;
@@ -38,12 +39,6 @@
     display: flex;
     flex-shrink: 0;
     height: 100%;
-  }
-
-  &__label-text {
-    color: $white;
-    font-size: $string-size3;
-    font-variation-settings: 'wght' 600;
     white-space: nowrap;
   }
 
@@ -59,11 +54,6 @@
     top: calc(100%);
     transform: translateX(-50%);
     z-index: 4;
-  }
-
-  &__hover-copy {
-    color: $text-default;
-    white-space: nowrap;
   }
 
   &__hover-tooltip-caret {
@@ -97,7 +87,6 @@
     }
 
     &__label,
-    &__label-text,
     &__hover-tooltip {
       display: none;
     }

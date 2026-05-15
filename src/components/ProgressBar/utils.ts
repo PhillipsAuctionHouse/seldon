@@ -15,26 +15,18 @@ function getVisualWidthPercentFromSafe(safeCurrent: number, safeTotal: number): 
 }
 
 export function getProgressBarMetrics(
-  currentLot: number,
-  totalLots: number,
+  current: number,
+  total: number,
 ): {
   safeTotal: number;
   safeCurrent: number;
   visualPercent: number;
 } {
-  const safeTotal = Math.max(Math.round(totalLots), 1);
-  const safeCurrent = Math.min(Math.max(Math.round(currentLot), 1), safeTotal);
+  const safeTotal = Math.max(Math.round(total), 1);
+  const safeCurrent = Math.min(Math.max(Math.round(current), 1), safeTotal);
   return {
     safeTotal,
     safeCurrent,
     visualPercent: getVisualWidthPercentFromSafe(safeCurrent, safeTotal),
   };
 }
-
-export type ProgressBarLabels = {
-  hoverLiveLot: string;
-};
-
-export const defaultProgressBarLabels: ProgressBarLabels = {
-  hoverLiveLot: 'Live lot {current} of {total}',
-};

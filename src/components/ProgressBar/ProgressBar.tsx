@@ -1,37 +1,37 @@
-import { ComponentProps, forwardRef, useMemo, useState } from 'react';
+import { ComponentProps, forwardRef, ReactNode, useMemo, useState } from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { Text, TextVariants } from '../Text';
-import { defaultProgressBarLabels, getProgressBarMetrics, type ProgressBarLabels } from './utils';
+import { getProgressBarMetrics } from './utils';
 
 function defaultAriaValueText(safeCurrent: number, safeTotal: number): string {
-  return `Lot ${safeCurrent} of ${safeTotal}`;
+  return `${safeCurrent} of ${safeTotal}`;
 }
 
 export interface ProgressBarProps extends ComponentProps<'div'> {
-  /** Which lot the sale is on (display + fill toward this value). */
-  currentLot: number;
-  /** Total lots in the sale (denominator for display and clamping). */
-  totalLots: number;
+  /** Current step (display + fill toward this value). */
+  current: number;
+  /** Total steps (denominator for display and clamping). */
+  total: number;
   /** Politeness of the live region wrapping `safeCurrent/safeTotal` in the track label. */
   ariaLive?: 'polite' | 'assertive' | 'off';
-  /** Track hover tooltip copy (`hoverLiveLot` uses `{current}` / `{total}` tokens). */
-  labels?: Partial<ProgressBarLabels>;
-  /** Accessible name for the track (`role="progressbar"`). */
+  /** Optional track hover tooltip content (app-specific copy, e.g. from Remix). */
+  tooltipContent?: ReactNode;
+  /** Accessible name for the progressbar live region. */
   progressAriaLabel?: string;
-  /** Screen reader summary of progress; receives clamped current/total (defaults to English “Lot X of Y”). */
+  /** Screen reader summary of progress; receives clamped current/total. */
   getAriaValueText?: (safeCurrent: number, safeTotal: number) => string;
 }
 
 const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
   (
     {
-      currentLot,
-      totalLots,
+      current,
+      total,
       ariaLive = 'polite',
       className,
-      labels,
-      progressAriaLabel = 'Sale progress',
+      tooltipContent,
+      progressAriaLabel = 'Progress',
       getAriaValueText = defaultAriaValueText,
       ...props
     },
@@ -39,16 +39,14 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'ProgressBar');
     const { safeTotal, safeCurrent, visualPercent } = useMemo(
-      () => getProgressBarMetrics(currentLot, totalLots),
-      [currentLot, totalLots],
+      () => getProgressBarMetrics(current, total),
+      [current, total],
     );
 
-    const progressBarLabels: ProgressBarLabels = { ...defaultProgressBarLabels, ...labels };
     const ariaValueText = getAriaValueText(safeCurrent, safeTotal);
-    const [hoverPreview, setHoverPreview] = useState<{ isVisible: boolean; x: number; lot: number }>({
+    const [hoverPreview, setHoverPreview] = useState<{ isVisible: boolean; x: number }>({
       isVisible: false,
       x: 0,
-      lot: safeCurrent,
     });
 
     const updateHoverPreview = (clientX: number, trackRect: DOMRect) => {
@@ -56,13 +54,8 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
       setHoverPreview({
         isVisible: true,
         x: clampedX,
-        lot: safeCurrent,
       });
     };
-
-    const hoverPreviewText = progressBarLabels.hoverLiveLot
-      .replace(/\{current\}/g, String(hoverPreview.lot))
-      .replace(/\{total\}/g, String(safeTotal));
 
     return (
       <div {...commonProps} ref={ref} className={classnames(baseClassName, className)}>
@@ -77,33 +70,28 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         />
         <div
           className={`${baseClassName}__track`}
-          onMouseEnter={(event) => {
-            updateHoverPreview(event.clientX, event.currentTarget.getBoundingClientRect());
-          }}
-          onMouseMove={(event) => {
-            updateHoverPreview(event.clientX, event.currentTarget.getBoundingClientRect());
-          }}
-          onMouseLeave={() => {
-            setHoverPreview((prev) => ({ ...prev, isVisible: false }));
-          }}
+          onMouseEnter={
+            tooltipContent
+              ? (event) => updateHoverPreview(event.clientX, event.currentTarget.getBoundingClientRect())
+              : undefined
+          }
+          onMouseMove={
+            tooltipContent
+              ? (event) => updateHoverPreview(event.clientX, event.currentTarget.getBoundingClientRect())
+              : undefined
+          }
+          onMouseLeave={tooltipContent ? () => setHoverPreview((prev) => ({ ...prev, isVisible: false })) : undefined}
         >
           <div className={`${baseClassName}__fill`} style={{ width: `${visualPercent}%` }}>
             <div className={`${baseClassName}__label`}>
-              <Text
-                element="span"
-                variant={TextVariants.labelLarge}
-                className={`${baseClassName}__label-text`}
-                aria-live={ariaLive}
-              >
+              <Text element="span" variant={TextVariants.stringSmall} aria-live={ariaLive}>
                 {`${safeCurrent}/${safeTotal}`}
               </Text>
             </div>
           </div>
-          {hoverPreview.isVisible && (
+          {tooltipContent && hoverPreview.isVisible && (
             <div className={`${baseClassName}__hover-tooltip`} style={{ left: `${hoverPreview.x}px` }} aria-hidden>
-              <Text element="span" variant={TextVariants.headingExtraSmall} className={`${baseClassName}__hover-copy`}>
-                {hoverPreviewText}
-              </Text>
+              {tooltipContent}
               <span className={`${baseClassName}__hover-tooltip-caret`} />
             </div>
           )}
