@@ -103,7 +103,11 @@ export { default as PageContentWrapper } from './components/PageContentWrapper/P
 export * from './components/PinchZoom';
 export * from './components/SeldonImage';
 export * from './components/Tabs';
+export * from './patterns/AuctionCard';
 export * from './patterns/FiltersInline';
+export * from './patterns/HeroCarousel';
+export * from './patterns/ImageBanner';
+export * from './patterns/MediaCard';
 export * from './patterns/SaleCard';
 export * from './patterns/SaleHeaderBanner';
 export * from './patterns/ViewingDetails';
