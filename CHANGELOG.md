@@ -1,3 +1,10 @@
+# [1.262.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.261.0...v1.262.0) (2026-05-19)
+
+
+### Features
+
+* **ProgressBar:** L3-12628 Build new Progress Bar component for V2 saleroom ([#869](https://github.com/PhillipsAuctionHouse/seldon/issues/869)) ([5bc3cbf](https://github.com/PhillipsAuctionHouse/seldon/commit/5bc3cbf3b057979607df7463d5feeef93eb621d0))
+
 # [1.261.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.260.0...v1.261.0) (2026-05-19)
 
 
