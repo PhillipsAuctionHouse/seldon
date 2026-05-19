@@ -4,6 +4,16 @@
   border-bottom: 1px solid $light-gray;
   margin-bottom: $spacing-md;
 
+  @include media($breakpoint-md, $type: 'max') {
+    .#{$px}-banner__inner {
+      gap: 0;
+    }
+
+    &__stack {
+      padding: $spacing-md 0;
+    }
+  }
+
   &__header-label {
     margin-bottom: $spacing-xsm;
   }
