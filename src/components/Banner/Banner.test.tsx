@@ -1,7 +1,7 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { runCommonTests } from '../../utils/testUtils';
 import Banner from './Banner';
-import { BannerImageSize, BannerVariants } from './types';
+import { BannerMediaSize, BannerVariants } from './types';
 
 describe('Banner', () => {
   runCommonTests(Banner.Root, 'Banner');
@@ -52,21 +52,19 @@ describe('Banner', () => {
     expect(screen.getByRole('article')).not.toHaveClass('seldon-banner--inline');
   });
 
-  it('applies 1-2 media basis when Banner.Image uses imageSize Half', async () => {
+  it('applies 1-2 media basis when Banner.Media uses size Half', () => {
     render(
       <Banner.Root>
-        <Banner.Media data-testid="banner-media">
-          <Banner.Image imageSize={BannerImageSize.half} src="/x.jpg" alt="test" />
+        <Banner.Media size={BannerMediaSize.half} data-testid="banner-media">
+          <Banner.Image src="/x.jpg" alt="test" />
         </Banner.Media>
       </Banner.Root>,
     );
 
-    await waitFor(() => {
-      expect(screen.getByTestId('banner-media')).toHaveClass('seldon-banner__media--1-2');
-    });
+    expect(screen.getByTestId('banner-media')).toHaveClass('seldon-banner__media--1-2');
   });
 
-  it('defaults to 1-3 media basis', async () => {
+  it('defaults to 1-3 media basis', () => {
     render(
       <Banner.Root>
         <Banner.Media data-testid="banner-media">
@@ -75,23 +73,6 @@ describe('Banner', () => {
       </Banner.Root>,
     );
 
-    await waitFor(() => {
-      expect(screen.getByTestId('banner-media')).toHaveClass('seldon-banner__media--1-3');
-    });
-  });
-
-  it('renders a 16/9 frame via Banner.MediaFrame', () => {
-    render(
-      <Banner.Root>
-        <Banner.Media>
-          <Banner.MediaFrame data-testid="frame">
-            <Banner.MediaImg src="/x.jpg" alt="test" />
-          </Banner.MediaFrame>
-        </Banner.Media>
-      </Banner.Root>,
-    );
-
-    expect(screen.getByTestId('frame')).toHaveClass('seldon-banner__media-frame');
-    expect(screen.getByAltText('test')).toHaveClass('seldon-banner__media-img');
+    expect(screen.getByTestId('banner-media')).toHaveClass('seldon-banner__media--1-3');
   });
 });

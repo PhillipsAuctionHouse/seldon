@@ -3,7 +3,7 @@ export enum BannerVariants {
   top = 'top',
 }
 
-export enum BannerImageSize {
+export enum BannerMediaSize {
   half = '1/2',
   third = '1/3',
 }

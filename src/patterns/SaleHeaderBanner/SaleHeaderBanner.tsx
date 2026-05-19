@@ -7,7 +7,7 @@ import { AuctionStatus } from '../../types/commonTypes';
 import { Text, TextVariants } from '../../components/Text';
 import { PageContentWrapper as PageMargin } from '../../components/PageContentWrapper';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
-import Banner, { BannerImageSize, BannerVariants } from '../../components/Banner/Banner';
+import Banner, { BannerMediaSize, BannerVariants } from '../../components/Banner/Banner';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
@@ -185,7 +185,7 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
               </div>
             </PageMargin>
           </Banner.Content>
-          <Banner.Media imageSize={BannerImageSize.half} className={`${baseClassName}__image`}>
+          <Banner.Media size={BannerMediaSize.half} className={`${baseClassName}__image`}>
             <SeldonImage
               aspectRatio="16/9"
               src={imageSrcUrl}

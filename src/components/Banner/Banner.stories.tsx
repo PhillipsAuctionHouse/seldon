@@ -1,7 +1,8 @@
 import type { Meta } from '@storybook/react-vite';
 
+import { SeldonImage } from '../SeldonImage';
 import Banner, { type BannerRootProps } from './Banner';
-import { BannerImageSize, BannerVariants } from './types';
+import { BannerMediaSize, BannerVariants } from './types';
 
 const sampleImage =
   'https://assets.phillips.com/image/upload/t_Website_AuctionPageHero/v1726172550/auctions/NY090324/NY090324.jpg';
@@ -22,9 +23,7 @@ export default meta;
 export const Playground = (props: BannerRootProps) => (
   <Banner.Root {...props}>
     <Banner.Media>
-      <Banner.MediaFrame>
-        <Banner.Image src={sampleImage} alt="Modern & Contemporary Art auction" />
-      </Banner.MediaFrame>
+      <SeldonImage aspectRatio="16/9" src={sampleImage} alt="Modern & Contemporary Art auction" objectFit="cover" />
     </Banner.Media>
     <Banner.Content>
       <Banner.Eyebrow>Modern & Contemporary Art</Banner.Eyebrow>
@@ -51,10 +50,8 @@ Playground.argTypes = {
 
 export const Inline = (props: BannerRootProps) => (
   <Banner.Root {...props} variant={BannerVariants.inline}>
-    <Banner.Media>
-      <Banner.MediaFrame>
-        <Banner.Image imageSize={BannerImageSize.third} src={sampleImage} alt="Auction banner" />
-      </Banner.MediaFrame>
+    <Banner.Media size={BannerMediaSize.third}>
+      <SeldonImage aspectRatio="16/9" src={sampleImage} alt="Auction banner" objectFit="cover" />
     </Banner.Media>
     <Banner.Content>
       <Banner.Eyebrow>Department</Banner.Eyebrow>
@@ -72,10 +69,8 @@ Inline.args = { id: 'inline' };
 
 export const ImageHalf = (props: BannerRootProps) => (
   <Banner.Root {...props}>
-    <Banner.Media>
-      <Banner.MediaFrame>
-        <Banner.Image imageSize={BannerImageSize.half} src={sampleImage} alt="Auction banner half width" />
-      </Banner.MediaFrame>
+    <Banner.Media size={BannerMediaSize.half}>
+      <SeldonImage aspectRatio="16/9" src={sampleImage} alt="Auction banner half width" objectFit="cover" />
     </Banner.Media>
     <Banner.Content>
       <Banner.Eyebrow>Label</Banner.Eyebrow>
@@ -90,10 +85,8 @@ ImageHalf.args = { id: 'image-half' };
 
 export const ImageThird = (props: BannerRootProps) => (
   <Banner.Root {...props}>
-    <Banner.Media>
-      <Banner.MediaFrame>
-        <Banner.Image imageSize={BannerImageSize.third} src={sampleImage} alt="Auction banner third width" />
-      </Banner.MediaFrame>
+    <Banner.Media size={BannerMediaSize.third}>
+      <SeldonImage aspectRatio="16/9" src={sampleImage} alt="Auction banner third width" objectFit="cover" />
     </Banner.Media>
     <Banner.Content>
       <Banner.Eyebrow>Label</Banner.Eyebrow>
@@ -113,10 +106,8 @@ export const ImageOnRight = (props: BannerRootProps) => (
       <Banner.Title>Image column on the right</Banner.Title>
       <Banner.Cta>Action</Banner.Cta>
     </Banner.Content>
-    <Banner.Media>
-      <Banner.MediaFrame>
-        <Banner.Image imageSize={BannerImageSize.half} src={sampleImage} alt="Auction banner image right" />
-      </Banner.MediaFrame>
+    <Banner.Media size={BannerMediaSize.half}>
+      <SeldonImage aspectRatio="16/9" src={sampleImage} alt="Auction banner image right" objectFit="cover" />
     </Banner.Media>
   </Banner.Root>
 );

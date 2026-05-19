@@ -1,15 +1,11 @@
 import classnames from 'classnames';
-import { createContext, type ComponentProps, forwardRef, useCallback, useContext, useEffect, useState } from 'react';
+import { type ComponentProps, forwardRef } from 'react';
 
 import { getCommonProps, px } from '../../utils';
 import { Text, type TextProps, TextVariants } from '../Text';
-import { BannerImageSize, BannerVariants } from './types';
+import { BannerMediaSize, BannerVariants } from './types';
 
-export { BannerImageSize, BannerVariants } from './types';
-
-type RegisterBannerImageSize = (size: BannerImageSize | null) => void;
-
-const BannerMediaLayoutContext = createContext<RegisterBannerImageSize | undefined>(undefined);
+export { BannerMediaSize, BannerVariants } from './types';
 
 const base = `${px}-banner`;
 
@@ -23,21 +19,8 @@ export interface BannerRootProps extends ComponentProps<'article'> {
 }
 
 export type BannerMediaProps = ComponentProps<'div'> & {
-  /**
-   * Flex-basis for the media column from `snw-mobile` up. When `Banner.Image` sets
-   * `imageSize` inside this `Media`, that wins after mount.
-   */
-  imageSize?: BannerImageSize;
-};
-
-export type BannerMediaFrameProps = ComponentProps<'div'>;
-
-export type BannerImageProps = ComponentProps<'img'> & {
-  /**
-   * Flex-basis for the parent `Banner.Media` column from `snw-mobile` up.
-   * Registers with the nearest `Banner.Media` after mount.
-   */
-  imageSize?: BannerImageSize;
+  /** Flex-basis for the media column from `snw-mobile` up. */
+  size?: BannerMediaSize;
 };
 
 /**
@@ -46,7 +29,7 @@ export type BannerImageProps = ComponentProps<'img'> & {
  * Compositional banner layout: `Banner.Root` wraps `Banner.Media`
  * and `Banner.Content` with `Banner.Eyebrow` / `Banner.Title` / `Banner.Description` / `Banner.Cta`.
  * Pass `variant={BannerVariants.inline}` on `Banner.Root` for bordered row chrome.
- * Use `Banner.Image` (or `imageSize` on `Banner.Media`) for column width from `snw-mobile` up.
+ * Use `size` on `Banner.Media` to control column width from `snw-mobile` up.
  *
  * [Figma Link](https://www.figma.com/design/wRbSaO9MngnSedlDSQka3Y/Design-System--Responsive-Web?node-id=2134-5414)
  *
@@ -72,21 +55,13 @@ const BannerRoot = forwardRef<HTMLElement, BannerRootProps>(
 );
 
 const BannerMedia = forwardRef<HTMLDivElement, BannerMediaProps>(
-  ({ children, className, imageSize: imageSizeFromProp, ...props }, ref) => {
-    const [registeredSize, setRegisteredSize] = useState<BannerImageSize | null>(null);
-    const registerImageSize = useCallback<RegisterBannerImageSize>((size) => {
-      setRegisteredSize(size);
-    }, []);
-
-    const resolved: BannerImageSize = registeredSize ?? imageSizeFromProp ?? BannerImageSize.third;
-    const basisMod = resolved === BannerImageSize.half ? '1-2' : '1-3';
+  ({ children, className, size = BannerMediaSize.third, ...props }, ref) => {
+    const basisMod = size === BannerMediaSize.half ? '1-2' : '1-3';
 
     return (
-      <BannerMediaLayoutContext.Provider value={registerImageSize}>
-        <div {...props} ref={ref} className={classnames(`${base}__media`, `${base}__media--${basisMod}`, className)}>
-          {children}
-        </div>
-      </BannerMediaLayoutContext.Provider>
+      <div {...props} ref={ref} className={classnames(`${base}__media`, `${base}__media--${basisMod}`, className)}>
+        {children}
+      </div>
     );
   },
 );
@@ -127,29 +102,7 @@ const BannerCta = forwardRef<HTMLElement, TextProps>(
   ),
 );
 
-const BannerMediaFrame = forwardRef<HTMLDivElement, BannerMediaFrameProps>(({ children, className, ...props }, ref) => (
-  <div {...props} ref={ref} className={classnames(`${base}__media-frame`, className)}>
-    {children}
-  </div>
-));
-
-const BannerImage = forwardRef<HTMLImageElement, BannerImageProps>(
-  ({ imageSize = BannerImageSize.third, className, alt = '', ...props }, ref) => {
-    const register = useContext(BannerMediaLayoutContext);
-
-    useEffect(() => {
-      if (!register) return;
-      register(imageSize);
-      return () => {
-        register(null);
-      };
-    }, [imageSize, register]);
-
-    return <img {...props} ref={ref} alt={alt} className={classnames(`${base}__media-img`, className)} />;
-  },
-);
-
-const BannerMediaImg = forwardRef<HTMLImageElement, ComponentProps<'img'>>(({ className, alt = '', ...props }, ref) => (
+const BannerImage = forwardRef<HTMLImageElement, ComponentProps<'img'>>(({ className, alt = '', ...props }, ref) => (
   <img {...props} ref={ref} alt={alt} className={classnames(`${base}__media-img`, className)} />
 ));
 
@@ -160,9 +113,7 @@ BannerEyebrow.displayName = 'Banner.Eyebrow';
 BannerTitle.displayName = 'Banner.Title';
 BannerDescription.displayName = 'Banner.Description';
 BannerCta.displayName = 'Banner.Cta';
-BannerMediaFrame.displayName = 'Banner.MediaFrame';
 BannerImage.displayName = 'Banner.Image';
-BannerMediaImg.displayName = 'Banner.MediaImg';
 
 const Banner = Object.assign(BannerRoot, {
   Root: BannerRoot,
@@ -172,9 +123,7 @@ const Banner = Object.assign(BannerRoot, {
   Title: BannerTitle,
   Description: BannerDescription,
   Cta: BannerCta,
-  MediaFrame: BannerMediaFrame,
   Image: BannerImage,
-  MediaImg: BannerMediaImg,
 });
 
 export default Banner;
