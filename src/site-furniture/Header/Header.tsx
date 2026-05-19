@@ -14,7 +14,7 @@ import Navigation from '../../components/Navigation/Navigation';
 import { LanguageSelector, LanguageSelectorProps } from '../../patterns/LanguageSelector';
 import UserManagement, { UserManagementProps } from '../../patterns/UserManagement/UserManagement';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
-import { findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
+import { Breakpoints, findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
 import { useMobileMenu } from './hooks';
 import { defaultHeaderContext } from './utils';
 
@@ -196,7 +196,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
           </a>
         )}
         <div className={`${px}-header__top-row`}>
-          <SSRMediaQuery.Media greaterThanOrEqual="md">{languageSelectorElement}</SSRMediaQuery.Media>
+          <SSRMediaQuery.Media greaterThanOrEqual={Breakpoints.md}>{languageSelectorElement}</SSRMediaQuery.Media>
           {/** only render language selector in this location on desktop */}
           <button
             aria-label={toggleText}

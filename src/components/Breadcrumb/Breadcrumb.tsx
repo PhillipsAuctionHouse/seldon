@@ -1,5 +1,5 @@
 import React from 'react';
-import { getCommonProps, px } from '../../utils';
+import { Breakpoints, getCommonProps, px } from '../../utils';
 import classnames from 'classnames';
 import BreadcrumbItem, { BreadcrumbItemProps } from './BreadcrumbItem';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
@@ -46,7 +46,7 @@ const Breadcrumb = ({
   return (
     <nav aria-label="Breadcrumb" className={classnames(baseClassName, className)} {...commonProps} {...props}>
       {/* This is not visible when in desktop breakpoint */}
-      <SSRMediaQuery.Media lessThan="md">
+      <SSRMediaQuery.Media lessThan={Breakpoints.md}>
         <CustomElement
           href={items[1].href ? items[1].href : '/'}
           className={`${px}-icon-button ${px}-icon-button--primary ${baseClassName}__back-button`} // apply button styles though it's a link
@@ -56,7 +56,7 @@ const Breadcrumb = ({
         </CustomElement>
       </SSRMediaQuery.Media>
       {/* This is not visible when in mobile breakpoint */}
-      <SSRMediaQuery.Media greaterThanOrEqual="md">
+      <SSRMediaQuery.Media greaterThanOrEqual={Breakpoints.md}>
         <ol>
           {items.map((item: BreadcrumbItemProps, index: number) => (
             <BreadcrumbItem
