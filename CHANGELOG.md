@@ -1,3 +1,10 @@
+# [1.263.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.262.0...v1.263.0) (2026-05-29)
+
+
+### Features
+
+* **ProgressBar:** L3-12628 Remove ProgressBar display for mobile ([#874](https://github.com/PhillipsAuctionHouse/seldon/issues/874)) ([a9a94ae](https://github.com/PhillipsAuctionHouse/seldon/commit/a9a94aecae59977a95b8e0be0d3bf53e8a65ed66))
+
 # [1.262.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.261.0...v1.262.0) (2026-05-19)
 
 
