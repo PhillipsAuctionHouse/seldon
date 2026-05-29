@@ -4,6 +4,11 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
+    cooldown:
+      default-days: 7
+      exclude:
+        - '@phillips/*'
+        - '@phillipsauctionhouse/*'
     commit-message:
       prefix: fix # https://dev.to/kengotoda/a-complete-guide-to-use-dependabot-with-semantic-release-and-vercel-ncc-for-github-actions-230p
       prefix-development: build
