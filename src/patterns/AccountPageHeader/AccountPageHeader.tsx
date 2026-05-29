@@ -1,5 +1,5 @@
 import { ComponentProps, forwardRef } from 'react';
-import { getCommonProps } from '../../utils';
+import { Breakpoints, getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import Text from '../../components/Text/Text';
 import { TextVariants } from '../../components/Text';
@@ -77,13 +77,13 @@ const AccountPageHeader = forwardRef<HTMLDivElement, AccountPageHeaderProps>(
 
         {primaryButton && (
           <>
-            <SSRMediaQuery.Media greaterThanOrEqual="md">
+            <SSRMediaQuery.Media greaterThanOrEqual={Breakpoints.md}>
               <Button variant={ButtonVariants.secondary} onClick={primaryButton.onClick}>
                 <Icon icon={primaryButton.icon} />{' '}
                 <span className={`${baseClassName}__button-label`}>{primaryButton.label}</span>
               </Button>
             </SSRMediaQuery.Media>
-            <SSRMediaQuery.Media lessThan="md">
+            <SSRMediaQuery.Media lessThan={Breakpoints.md}>
               <IconButton
                 variant={ButtonVariants.tertiary}
                 onClick={primaryButton.onClick}

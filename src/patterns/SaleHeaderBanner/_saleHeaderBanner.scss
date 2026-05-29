@@ -2,9 +2,17 @@
 
 .#{$px}-sale-header-banner {
   border-bottom: 1px solid $light-gray;
-  display: flex;
-  flex-direction: column;
   margin-bottom: $spacing-md;
+
+  @include media($breakpoint-md, $type: 'max') {
+    .#{$px}-banner__inner {
+      gap: 0;
+    }
+
+    &__stack {
+      padding: $spacing-md 0;
+    }
+  }
 
   &__header-label {
     margin-bottom: $spacing-xsm;
@@ -16,21 +24,8 @@
     }
   }
 
-  .fresnel-container {
-    width: 100%;
-  }
-
   .#{$px}-countdown {
     padding-top: var(--spacing-sm);
-  }
-
-  @include media($size-md, $type: 'min') {
-    flex-direction: row-reverse;
-
-    &__image,
-    &__stack-wrapper {
-      flex: 0 50%;
-    }
   }
 
   &__stack {
@@ -39,7 +34,6 @@
     flex-direction: column;
     height: 100%;
     justify-content: center;
-    padding: $spacing-md 0;
 
     &__countdown {
       display: flex;

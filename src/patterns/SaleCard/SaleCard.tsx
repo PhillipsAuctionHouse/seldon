@@ -4,7 +4,7 @@ import Button from '../../components/Button/Button';
 import { Card, CardVariants } from '../../components/Card';
 import { ButtonVariants } from '../../components/Button/types';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
-import { getCommonProps } from '../../utils';
+import { Breakpoints, getCommonProps } from '../../utils';
 import { SaleCardActions } from './SaleCardActions';
 import { SaleCardImageDisplay, SaleCardVariants } from './types';
 
@@ -103,7 +103,7 @@ const SaleCard = forwardRef<HTMLElement, SaleCardProps>(
 
         {variant !== SaleCardVariants.RELATED_SALE_TILE && children && (
           <div className={`${baseClassName}__ctas`}>
-            <SSRMediaQuery.Media greaterThanOrEqual="snw-mobile">{children}</SSRMediaQuery.Media>
+            <SSRMediaQuery.Media greaterThanOrEqual={Breakpoints.snwMobile}>{children}</SSRMediaQuery.Media>
           </div>
         )}
       </Card.Root>

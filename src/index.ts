@@ -14,6 +14,7 @@ export * from './types/commonTypes';
 // ⚛️ Components
 export { default as Button, type ButtonProps } from './components/Button/Button';
 export { ButtonVariants, ButtonSizes } from './components/Button/types';
+export * from './components/Banner';
 export * from './components/Card';
 export { default as IconButton } from './components/IconButton/IconButton';
 // export { default as DatePicker, type DatePickerProps } from './components/DatePicker/DatePicker';
@@ -64,6 +65,7 @@ export {
   type PaginationProps,
 } from './components/Pagination/Pagination';
 export * from './components/PinchZoom';
+export * from './components/ProgressBar';
 export { default as Row, type RowProps } from './components/Row/Row';
 export { default as Search, type SearchProps } from './components/Search/Search';
 export * from './components/SeldonImage';

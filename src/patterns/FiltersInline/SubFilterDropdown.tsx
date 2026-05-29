@@ -2,7 +2,7 @@ import * as Popover from '@radix-ui/react-popover';
 import React from 'react';
 import Drawer from '../../components/Drawer/Drawer';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
-import { px } from '../../utils';
+import { Breakpoints, px } from '../../utils';
 import { FilterButton } from './FilterButton';
 import { FilterDropdownMenuDesktop } from './FilterDropdownMenuDesktop';
 import { FilterDropdownMenuMobile } from './FilterDropdownMenuMobile';
@@ -40,7 +40,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
 
     return (
       <>
-        <SSRMediaQuery.Media lessThan="md">
+        <SSRMediaQuery.Media lessThan={Breakpoints.md}>
           <FilterButton
             ref={ref}
             className={className}
@@ -78,7 +78,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
             />
           </Drawer>
         </SSRMediaQuery.Media>
-        <SSRMediaQuery.Media greaterThanOrEqual="md">
+        <SSRMediaQuery.Media greaterThanOrEqual={Breakpoints.md}>
           <Popover.Root
             key={`${id}-${filterButtonLabel}-button`}
             open={isButtonSelected}

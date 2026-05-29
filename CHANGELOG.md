@@ -1,3 +1,17 @@
+# [1.262.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.261.0...v1.262.0) (2026-05-19)
+
+
+### Features
+
+* **ProgressBar:** L3-12628 Build new Progress Bar component for V2 saleroom ([#869](https://github.com/PhillipsAuctionHouse/seldon/issues/869)) ([5bc3cbf](https://github.com/PhillipsAuctionHouse/seldon/commit/5bc3cbf3b057979607df7463d5feeef93eb621d0))
+
+# [1.261.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.260.0...v1.261.0) (2026-05-19)
+
+
+### Features
+
+* **Banner:** PDD-30 add banner component and refactor SaleHeaderBanner ([#870](https://github.com/PhillipsAuctionHouse/seldon/issues/870)) ([9bd1604](https://github.com/PhillipsAuctionHouse/seldon/commit/9bd160418a6ed67631223dc98f674e5f8a7f6a75))
+
 # [1.260.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.259.0...v1.260.0) (2026-05-07)
 
 

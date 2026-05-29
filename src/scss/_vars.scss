@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 // prefix
 $px: seldon;
 
@@ -108,6 +110,8 @@ $bg-soft: #f9f8f7;
 $bg-border: #eae9e6;
 $bg-inverted: #000;
 $bg-overlay: rgba(0, 0, 0, 50%);
+$bg-progress-bar: color.adjust(#0065fc, $alpha: -0.8);
+$bg-progress-bar-mobile: #ebf3ff;
 
 // Status
 $success-default: #00cc39;
@@ -240,11 +244,12 @@ $linkMedium: 'linkMedium';
 $linkSmall: 'linkSmall';
 $badgeSmall: 'badgeSmall';
 $badgeMedium: 'badgeMedium';
+$stringSmall: 'stringSmall';
 $text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $heading2, $heading3, $heading4, $heading5,
   $title1, $title2, $title3, $title4, $body1, $body2, $body3, $string1, $string2, $string3, $snwFlyoutLink,
   $snwHeaderLink, $snwHeadingHero1, $snwHeadingHero2, $displayMedium, $displaySmall, $headingLarge, $headingMedium,
   $headingSmall, $headingExtraSmall, $bodyLarge, $bodyMedium, $bodySmall, $labelLarge, $labelMedium, $labelSmall,
-  $linkStylised, $linkLarge, $linkMedium, $linkSmall, $badgeSmall, $badgeMedium;
+  $linkStylised, $linkLarge, $linkMedium, $linkSmall, $badgeSmall, $badgeMedium, $stringSmall;
 
 ////////////////////////
 /// Breakpoint TOKENS to be used for min-width comparisons, make sure they match BREAKPOINTS in constants.ts

@@ -1,3 +1,4 @@
+export { Breakpoints } from './constants';
 import { kebabCase } from 'change-case';
 import * as React from 'react';
 
