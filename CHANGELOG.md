@@ -1,3 +1,10 @@
+# [1.264.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.263.0...v1.264.0) (2026-06-02)
+
+
+### Features
+
+* **Button:** L3-12729 Update Button style ([#872](https://github.com/PhillipsAuctionHouse/seldon/issues/872)) ([f9509f3](https://github.com/PhillipsAuctionHouse/seldon/commit/f9509f3f5bb547fb472847d7e04e99daacdca0c0))
+
 # [1.263.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.262.0...v1.263.0) (2026-05-29)
 
 
