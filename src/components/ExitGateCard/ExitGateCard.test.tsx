@@ -27,11 +27,13 @@ describe('ExitGateCard', () => {
 
   it('forwards responsive image props to SeldonImage', () => {
     render(
+    render(
       <ExitGateCard
         imageSrc="delivery.jpg"
         imageSrcSet="thumb.jpg 400w, delivery.jpg 1302w"
         imageSizes="(min-width: 768px) 50vw, 100vw"
         imageLoading="lazy"
+        imageFetchPriority="high"
         altText="Promo artwork"
       />,
     );
@@ -41,6 +43,7 @@ describe('ExitGateCard', () => {
     expect(image).toHaveAttribute('srcset', 'thumb.jpg 400w, delivery.jpg 1302w');
     expect(image).toHaveAttribute('sizes', '(min-width: 768px) 50vw, 100vw');
     expect(image).toHaveAttribute('loading', 'lazy');
+    expect(image).toHaveAttribute('fetchpriority', 'high');
   });
 
   it('renders correctly without optional props', () => {
