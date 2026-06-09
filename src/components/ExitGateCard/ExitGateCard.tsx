@@ -12,6 +12,10 @@ export interface ExitGateCardProps extends ComponentProps<'div'> {
    * Image src to display at the right side of the article.
    */
   imageSrc?: string;
+  imageSrcSet?: string;
+  imageSizes?: string;
+  imageLoading?: ComponentProps<'img'>['loading'];
+  imageFetchPriority?: ComponentProps<'img'>['fetchPriority'];
   /**
    * Top label for the article.
    */
@@ -67,6 +71,10 @@ const ExitGateCard = forwardRef<HTMLDivElement, ExitGateCardProps>(
       linkElement: Component = Link,
       variant = ButtonVariants.secondary,
       altText = 'Exit Gate Card Image',
+      imageSrcSet,
+      imageSizes,
+      imageLoading,
+      imageFetchPriority,
       ...props
     },
     ref,
@@ -80,6 +88,10 @@ const ExitGateCard = forwardRef<HTMLDivElement, ExitGateCardProps>(
             aspectRatio="16/9"
             src={imageSrc}
             alt={altText}
+            srcSet={imageSrcSet}
+            sizes={imageSizes}
+            loading={imageLoading}
+            fetchPriority={imageFetchPriority}
             className={`${baseClassName}__desktop_image`}
           />
         ) : null}
