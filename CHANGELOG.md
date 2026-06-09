@@ -1,3 +1,10 @@
+# [1.265.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.264.0...v1.265.0) (2026-06-09)
+
+
+### Features
+
+* **ExitGateCard:** PDD-477 forward responsive image props for CMS delivery ([#875](https://github.com/PhillipsAuctionHouse/seldon/issues/875)) ([dd263e5](https://github.com/PhillipsAuctionHouse/seldon/commit/dd263e5b889e4ed5819ef554d17c813f2bc8d51e))
+
 # [1.264.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.263.0...v1.264.0) (2026-06-02)
 
 
