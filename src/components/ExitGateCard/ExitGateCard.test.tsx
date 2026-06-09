@@ -27,7 +27,6 @@ describe('ExitGateCard', () => {
 
   it('forwards responsive image props to SeldonImage', () => {
     render(
-    render(
       <ExitGateCard
         imageSrc="delivery.jpg"
         imageSrcSet="thumb.jpg 400w, delivery.jpg 1302w"
