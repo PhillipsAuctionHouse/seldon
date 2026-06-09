@@ -12,6 +12,7 @@ export interface ExitGateCardProps extends ComponentProps<'div'> {
    * Image src to display at the right side of the article.
    */
   imageSrc?: string;
+  /** Responsive image attributes forwarded to `SeldonImage` (`srcSet`, `sizes`, `loading`, `fetchPriority`). */
   imageSrcSet?: string;
   imageSizes?: string;
   imageLoading?: ComponentProps<'img'>['loading'];
