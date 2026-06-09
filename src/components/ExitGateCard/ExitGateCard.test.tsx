@@ -25,6 +25,26 @@ describe('ExitGateCard', () => {
     expect(screen.getByRole('link', { name: 'Test Link' })).toHaveAttribute('href', 'https://example.com');
   });
 
+  it('forwards responsive image props to SeldonImage', () => {
+    render(
+      <ExitGateCard
+        imageSrc="delivery.jpg"
+        imageSrcSet="thumb.jpg 400w, delivery.jpg 1302w"
+        imageSizes="(min-width: 768px) 50vw, 100vw"
+        imageLoading="lazy"
+        imageFetchPriority="high"
+        altText="Promo artwork"
+      />,
+    );
+
+    const image = screen.getByAltText('Promo artwork');
+    expect(image).toHaveAttribute('src', 'delivery.jpg');
+    expect(image).toHaveAttribute('srcset', 'thumb.jpg 400w, delivery.jpg 1302w');
+    expect(image).toHaveAttribute('sizes', '(min-width: 768px) 50vw, 100vw');
+    expect(image).toHaveAttribute('loading', 'lazy');
+    expect(image).toHaveAttribute('fetchpriority', 'high');
+  });
+
   it('renders correctly without optional props', () => {
     render(<ExitGateCard header="Test Header" />);
 

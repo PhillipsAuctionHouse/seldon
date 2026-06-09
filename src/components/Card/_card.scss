@@ -16,6 +16,7 @@
 
     .#{$px}-card__image,
     .#{$px}-card__video {
+      flex: 1 1 100%;
       min-width: 100%;
     }
 

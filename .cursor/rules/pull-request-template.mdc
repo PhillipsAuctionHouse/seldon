@@ -1,0 +1,58 @@
+---
+description: Require PR bodies to follow .github/PULL_REQUEST_TEMPLATE.MD
+alwaysApply: true
+---
+
+# Pull request template
+
+When creating or updating a pull request (`gh pr create`, `gh pr edit`, or
+`/commit-push-pr`), **read `.github/PULL_REQUEST_TEMPLATE.MD` first** and
+populate **all applicable sections** in the PR body. Do not substitute a
+minimal custom summary.
+
+## Required PR body structure
+
+Use this structure (omit optional sections only when truly N/A; say so explicitly):
+
+```markdown
+**Jira ticket**
+
+[Jira Ticket ID](https://phillipsauctions.atlassian.net/browse/TICKET-ID)
+
+**Screenshots**
+| Before | After |
+| ------ | ----- |
+| Paste Before Image | Paste After Image |
+
+**Figma link**
+
+[Figma Link](https://www.figma.com/file/FIGMA-LINK)
+
+**Summary**
+
+High-level overview and WHY the changes were made.
+
+**Change List (describe the changes made to the files)**
+
+- Additions, changes, and removals per file or area
+
+**Acceptance Test (how to verify the PR)**
+
+- Step-by-step verification instructions
+
+**Regression Test**
+
+- Steps to confirm existing behavior still works (or "N/A — …")
+
+**Evidence of testing**
+
+- Logs, screenshots, test command output, etc.
+```
+
+## PR creation checklist
+
+- Branch name or commit context should supply the Jira ticket ID when available.
+- PR title follows conventional commits (`feat(scope): …`, `fix(scope): …`).
+- For UI changes, fill Screenshots and Figma link; use "N/A" with a short reason if none.
+- Include reviewer checklist items from the template footer only when editing on GitHub;
+  do not remove that block if the template is pasted into the PR description.
