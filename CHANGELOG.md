@@ -1,3 +1,10 @@
+## [1.265.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.265.0...v1.265.1) (2026-06-12)
+
+
+### Bug Fixes
+
+* **accordion:** L3-0000 align expand/collapse animation with Radix pattern ([#877](https://github.com/PhillipsAuctionHouse/seldon/issues/877)) ([84bad14](https://github.com/PhillipsAuctionHouse/seldon/commit/84bad14ae0280367bc57d82635e17ee40a04e391))
+
 # [1.265.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.264.0...v1.265.0) (2026-06-09)
 
 
