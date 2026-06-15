@@ -1,6 +1,7 @@
 import { forwardRef, createContext, useCallback, useEffect, KeyboardEvent, useState } from 'react';
-import { getCommonProps, SpacingTokens } from '../../utils';
+import { getCommonProps, SpacingTokens, userPrefersReducedMotion } from '../../utils';
 import classnames from 'classnames';
+import Autoplay from 'embla-carousel-autoplay';
 import ClassNames from 'embla-carousel-class-names';
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
@@ -46,6 +47,18 @@ export interface CarouselProps extends React.HTMLAttributes<HTMLElement> {
    *  The threshold for slides to be considered in view. A value of 0.1 means that 10% of the slide must be in view for it to be considered in view.
    */
   inViewThreshold?: number;
+  /**
+   * Delay in milliseconds between automatic slide advances. When set, the carousel auto-advances,
+   * pausing while hovered or while focus is inside it. Autoplay is disabled entirely when the user
+   * prefers reduced motion.
+   */
+  autoAdvanceDelay?: number;
+  /**
+   * Scroll transition duration used by programmatic navigation (arrows, dots, autoplay). Not in
+   * milliseconds — see https://www.embla-carousel.com/api/options/#duration. Values between
+   * 20 and 60 are recommended.
+   */
+  duration?: number;
 }
 
 type CarouselContextProps = {
@@ -88,6 +101,8 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       disableDrag = false,
       disableNavigationDrag = null,
       inViewThreshold = 0.99,
+      autoAdvanceDelay,
+      duration,
       ...props
     },
     ref,
@@ -118,9 +133,20 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
         loop,
         startIndex,
         inViewThreshold,
+        duration,
         ...disableNavigationDragBreakpoint,
       },
       [
+        ...(autoAdvanceDelay && !userPrefersReducedMotion()
+          ? [
+              Autoplay({
+                delay: autoAdvanceDelay,
+                stopOnInteraction: false,
+                stopOnMouseEnter: true,
+                stopOnFocusIn: true,
+              }),
+            ]
+          : []),
         ...(useWheelGestures
           ? [
               WheelGesturesPlugin({

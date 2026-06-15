@@ -61,7 +61,7 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
     const onDotButtonClick = useCallback(
       (index: number) => {
         if (!api) return;
-        api.scrollTo(index, true);
+        api.scrollTo(index);
         onSlideChange?.(index);
       },
       [api, onSlideChange],

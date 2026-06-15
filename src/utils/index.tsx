@@ -1,4 +1,5 @@
 export { Breakpoints } from './constants';
+export { userPrefersReducedMotion } from './motion';
 import { kebabCase } from 'change-case';
 import * as React from 'react';
 
