@@ -7,20 +7,11 @@ import CarouselDots from './CarouselDots';
 import { useCarousel } from './utils';
 import { mockDesktopBreakpoint, mockMatchMedia, mockMobileBreakpoint, runCommonTests } from '../../utils/testUtils';
 
-const CarouselApiProbe = ({
-  onApi,
-  onShouldAnimateNavigation,
-}: {
-  onApi: (api: CarouselApi) => void;
-  onShouldAnimateNavigation?: (shouldAnimateNavigation: boolean) => void;
-}) => {
-  const { api, shouldAnimateNavigation } = useCarousel();
+const CarouselApiProbe = ({ onApi }: { onApi: (api: CarouselApi) => void }) => {
+  const { api } = useCarousel();
   useEffect(() => {
-    if (api) {
-      onApi(api);
-    }
-    onShouldAnimateNavigation?.(shouldAnimateNavigation);
-  }, [api, onApi, onShouldAnimateNavigation, shouldAnimateNavigation]);
+    if (api) onApi(api);
+  }, [api, onApi]);
   return null;
 };
 
@@ -184,37 +175,18 @@ describe('Carousel', () => {
       expect(api?.plugins().autoplay).toBeUndefined();
     });
 
-    it('only opts into animated navigation when auto advance or duration is configured', async () => {
-      let shouldAnimateNavigation = true;
-      const { rerender } = render(
-        <Carousel>
-          <CarouselContent>
-            <CarouselItem>Slide 1</CarouselItem>
-            <CarouselItem>Slide 2</CarouselItem>
-          </CarouselContent>
-          <CarouselApiProbe
-            onApi={() => null}
-            onShouldAnimateNavigation={(value) => (shouldAnimateNavigation = value)}
-          />
-        </Carousel>,
-      );
+    it('resets the autoplay timer whenever the selected slide changes', async () => {
+      let api: CarouselApi;
+      renderWithProbe({ autoAdvanceDelay: 5000, loop: true }, (captured) => (api = captured));
 
-      await waitFor(() => expect(shouldAnimateNavigation).toBe(false));
+      await waitFor(() => expect(api).toBeDefined());
+      const autoplay = api!.plugins().autoplay;
+      expect(autoplay).toBeDefined();
 
-      rerender(
-        <Carousel autoAdvanceDelay={5000} duration={30}>
-          <CarouselContent>
-            <CarouselItem>Slide 1</CarouselItem>
-            <CarouselItem>Slide 2</CarouselItem>
-          </CarouselContent>
-          <CarouselApiProbe
-            onApi={() => null}
-            onShouldAnimateNavigation={(value) => (shouldAnimateNavigation = value)}
-          />
-        </Carousel>,
-      );
+      const resetSpy = vi.spyOn(autoplay!, 'reset');
+      api!.scrollTo(1);
 
-      await waitFor(() => expect(shouldAnimateNavigation).toBe(true));
+      await waitFor(() => expect(resetSpy).toHaveBeenCalled());
     });
   });
 });

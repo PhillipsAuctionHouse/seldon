@@ -1,5 +1,5 @@
-import { forwardRef, createContext, useCallback, useEffect, KeyboardEvent, useState } from 'react';
-import { getCommonProps, SpacingTokens, userPrefersReducedMotion } from '../../utils';
+import { forwardRef, createContext, useCallback, useEffect, KeyboardEvent, useMemo, useState } from 'react';
+import { getCommonProps, SpacingTokens, useReducedMotion } from '../../utils';
 import classnames from 'classnames';
 import Autoplay from 'embla-carousel-autoplay';
 import ClassNames from 'embla-carousel-class-names';
@@ -68,7 +68,6 @@ type CarouselContextProps = {
   scrollNext: () => void;
   canScrollPrev: boolean;
   canScrollNext: boolean;
-  shouldAnimateNavigation: boolean;
 } & CarouselProps;
 
 export const CarouselContext = createContext<CarouselContextProps | null>(null);
@@ -128,19 +127,11 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
 
     const [canScrollPrev, setCanScrollPrev] = useState(false);
     const [canScrollNext, setCanScrollNext] = useState(false);
-    const prefersReducedMotion = userPrefersReducedMotion();
+    const prefersReducedMotion = useReducedMotion();
     const shouldAutoAdvance = !!autoAdvanceDelay && !prefersReducedMotion;
-    const shouldAnimateNavigation = !prefersReducedMotion && (!!autoAdvanceDelay || duration !== undefined);
 
-    const [carouselRef, api] = useEmblaCarousel(
-      {
-        loop,
-        startIndex,
-        inViewThreshold,
-        duration,
-        ...disableNavigationDragBreakpoint,
-      },
-      [
+    const plugins = useMemo(
+      () => [
         ...(shouldAutoAdvance
           ? [
               Autoplay({
@@ -151,17 +142,21 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
               }),
             ]
           : []),
-        ...(useWheelGestures
-          ? [
-              WheelGesturesPlugin({
-                forceWheelAxis: 'x',
-              }),
-            ]
-          : []),
-        ClassNames({
-          snapped: 'carousel-item-in-view',
-        }),
+        ...(useWheelGestures ? [WheelGesturesPlugin({ forceWheelAxis: 'x' })] : []),
+        ClassNames({ snapped: 'carousel-item-in-view' }),
       ],
+      [shouldAutoAdvance, autoAdvanceDelay, useWheelGestures],
+    );
+
+    const [carouselRef, api] = useEmblaCarousel(
+      {
+        loop,
+        startIndex,
+        inViewThreshold,
+        duration,
+        ...disableNavigationDragBreakpoint,
+      },
+      plugins,
     );
 
     useEffect(() => {
@@ -227,6 +222,15 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       };
     }, [api, onSlidesInView]);
 
+    useEffect(() => {
+      if (!api || !shouldAutoAdvance) return;
+      const resetAutoplay = () => api.plugins().autoplay?.reset();
+      api.on('select', resetAutoplay);
+      return () => {
+        api.off('select', resetAutoplay);
+      };
+    }, [api, shouldAutoAdvance]);
+
     return (
       <CarouselContext.Provider
         value={{
@@ -236,7 +240,6 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
           scrollNext: () => api?.scrollNext(),
           canScrollPrev,
           canScrollNext,
-          shouldAnimateNavigation,
           columnGap,
           onSlideChange,
         }}
