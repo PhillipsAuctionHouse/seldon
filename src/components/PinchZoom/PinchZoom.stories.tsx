@@ -17,7 +17,7 @@ export const Playground = (props: PinchZoomProps) => {
     <div
       style={{
         width: '500px',
-        height: '500px',
+        maxHeight: '50vh',
         backgroundColor: '#ddd',
         display: 'flex',
         justifyContent: 'center',
@@ -30,7 +30,7 @@ export const Playground = (props: PinchZoomProps) => {
       <PinchZoom {...props}>
         <SeldonImage
           style={{ padding: '20px 0' }}
-          src="https://whitneymedia.org/assets/artwork/10980/96_175_cropped.jpeg"
+          src="https://dist.phillips.com/auction-assets/NY030626/228499_002.jpg?fit=cover&optimize=medium&width=1302"
           alt="placeholder"
         />
       </PinchZoom>
@@ -83,7 +83,7 @@ export const ZoomCarousel = () => {
       disableDrag={isZoomed && !isAtLeftEdge && !isAtRightEdge}
       onSlideChange={setCurrentSlide}
     >
-      <CarouselContent style={{ alignItems: 'center' }}>
+      <CarouselContent style={{ alignItems: 'center', maxHeight: '90vh' }}>
         <CarouselItem>
           <PinchZoom
             isZoomReset={currentSlide !== 0}
@@ -93,7 +93,7 @@ export const ZoomCarousel = () => {
           >
             <SeldonImage
               style={{ borderRadius: '10px' }}
-              src="https://whitneymedia.org/assets/artwork/6896/70_1164_cropped.jpeg"
+              src="https://dist.phillips.com/content/web/HomePage/slide-2550.jpg?crop=smart&fit=bounds&disable=upscale&width=2000&optimize=low"
               alt="placeholder"
             />
           </PinchZoom>
@@ -107,7 +107,7 @@ export const ZoomCarousel = () => {
           >
             <SeldonImage
               style={{ borderRadius: '10px' }}
-              src="https://whitneymedia.org/assets/artwork/732/50_8_cropped.jpeg"
+              src="https://dist.phillips.com/auction-assets/NY030626/228499_002.jpg?fit=cover&optimize=medium&width=1302"
               alt="placeholder"
             />
           </PinchZoom>
@@ -121,7 +121,7 @@ export const ZoomCarousel = () => {
           >
             <SeldonImage
               style={{ borderRadius: '10px' }}
-              src="https://whitneymedia.org/assets/image/828142/large_RS18772_MoMA_NY-Movie_ART162191_web.jpg"
+              src="https://dist.phillips.com/auction-assets/NY030626/228499_008.jpg?fit=cover&optimize=medium&width=1302"
               alt="placeholder"
             />
           </PinchZoom>

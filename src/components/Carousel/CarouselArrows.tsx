@@ -21,23 +21,23 @@ const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(
     const { api } = useCarousel();
     const onPrevArrowClick = useCallback(() => {
       if (!api) return;
-      if (api?.slidesInView().length <= 1) {
-        api.scrollPrev(true);
+      if (api.slidesInView().length <= 1) {
+        api.scrollPrev();
       } else {
-        const slidesInView = api?.slidesInView();
-        api?.scrollTo(Math.max(0, slidesInView[0] - (slidesInView.length ?? 1)));
+        const slidesInView = api.slidesInView();
+        api.scrollTo(Math.max(0, slidesInView[0] - slidesInView.length));
       }
     }, [api]);
 
     const onNextArrowClick = useCallback(() => {
       if (!api) return;
 
-      if (api?.slidesInView().length <= 1) {
-        api?.scrollNext(true);
+      if (api.slidesInView().length <= 1) {
+        api.scrollNext();
       } else {
-        const slidesInView = api?.slidesInView();
+        const slidesInView = api.slidesInView();
         const lastSlideInView = slidesInView.slice(-1)[0] + 1;
-        api?.scrollTo(lastSlideInView);
+        api.scrollTo(lastSlideInView);
       }
     }, [api]);
 
