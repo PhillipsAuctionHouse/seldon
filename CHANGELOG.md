@@ -1,3 +1,10 @@
+# [1.266.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.265.1...v1.266.0) (2026-06-15)
+
+
+### Features
+
+* **carousel:** PDD-484 add auto advance controls ([#878](https://github.com/PhillipsAuctionHouse/seldon/issues/878)) ([0c1722e](https://github.com/PhillipsAuctionHouse/seldon/commit/0c1722e03eb17272e31448560a0d70165532dfd9))
+
 ## [1.265.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.265.0...v1.265.1) (2026-06-12)
 
 
