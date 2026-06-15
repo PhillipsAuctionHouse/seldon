@@ -40,7 +40,7 @@ const centerDotContainer = (dotWidth + dotGap) / 2;
 const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
   ({ className, maxDots = 9, position = 'inline', numberOfSlides = 0, id, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'CarouselDots');
-    const { api, onSlideChange } = useCarousel();
+    const { api, onSlideChange, shouldAnimateNavigation } = useCarousel();
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [scrollSnaps, setScrollSnaps] = useState<number[]>(
       Array.from({ length: numberOfSlides }, (_, index) => index),
@@ -61,10 +61,10 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
     const onDotButtonClick = useCallback(
       (index: number) => {
         if (!api) return;
-        api.scrollTo(index);
+        api.scrollTo(index, !shouldAnimateNavigation);
         onSlideChange?.(index);
       },
-      [api, onSlideChange],
+      [api, onSlideChange, shouldAnimateNavigation],
     );
 
     const onInit = useCallback((emblaApi: EmblaCarouselType) => {

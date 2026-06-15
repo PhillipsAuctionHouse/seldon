@@ -7,13 +7,20 @@ import CarouselDots from './CarouselDots';
 import { useCarousel } from './utils';
 import { mockDesktopBreakpoint, mockMatchMedia, mockMobileBreakpoint, runCommonTests } from '../../utils/testUtils';
 
-const CarouselApiProbe = ({ onApi }: { onApi: (api: CarouselApi) => void }) => {
-  const { api } = useCarousel();
+const CarouselApiProbe = ({
+  onApi,
+  onShouldAnimateNavigation,
+}: {
+  onApi: (api: CarouselApi) => void;
+  onShouldAnimateNavigation?: (shouldAnimateNavigation: boolean) => void;
+}) => {
+  const { api, shouldAnimateNavigation } = useCarousel();
   useEffect(() => {
     if (api) {
       onApi(api);
     }
-  }, [api, onApi]);
+    onShouldAnimateNavigation?.(shouldAnimateNavigation);
+  }, [api, onApi, onShouldAnimateNavigation, shouldAnimateNavigation]);
   return null;
 };
 
@@ -175,6 +182,39 @@ describe('Carousel', () => {
 
       await waitFor(() => expect(api).toBeDefined());
       expect(api?.plugins().autoplay).toBeUndefined();
+    });
+
+    it('only opts into animated navigation when auto advance or duration is configured', async () => {
+      let shouldAnimateNavigation = true;
+      const { rerender } = render(
+        <Carousel>
+          <CarouselContent>
+            <CarouselItem>Slide 1</CarouselItem>
+            <CarouselItem>Slide 2</CarouselItem>
+          </CarouselContent>
+          <CarouselApiProbe
+            onApi={() => null}
+            onShouldAnimateNavigation={(value) => (shouldAnimateNavigation = value)}
+          />
+        </Carousel>,
+      );
+
+      await waitFor(() => expect(shouldAnimateNavigation).toBe(false));
+
+      rerender(
+        <Carousel autoAdvanceDelay={5000} duration={30}>
+          <CarouselContent>
+            <CarouselItem>Slide 1</CarouselItem>
+            <CarouselItem>Slide 2</CarouselItem>
+          </CarouselContent>
+          <CarouselApiProbe
+            onApi={() => null}
+            onShouldAnimateNavigation={(value) => (shouldAnimateNavigation = value)}
+          />
+        </Carousel>,
+      );
+
+      await waitFor(() => expect(shouldAnimateNavigation).toBe(true));
     });
   });
 });

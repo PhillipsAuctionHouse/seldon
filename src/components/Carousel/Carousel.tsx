@@ -68,6 +68,7 @@ type CarouselContextProps = {
   scrollNext: () => void;
   canScrollPrev: boolean;
   canScrollNext: boolean;
+  shouldAnimateNavigation: boolean;
 } & CarouselProps;
 
 export const CarouselContext = createContext<CarouselContextProps | null>(null);
@@ -127,6 +128,9 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
 
     const [canScrollPrev, setCanScrollPrev] = useState(false);
     const [canScrollNext, setCanScrollNext] = useState(false);
+    const prefersReducedMotion = userPrefersReducedMotion();
+    const shouldAutoAdvance = !!autoAdvanceDelay && !prefersReducedMotion;
+    const shouldAnimateNavigation = !prefersReducedMotion && (!!autoAdvanceDelay || duration !== undefined);
 
     const [carouselRef, api] = useEmblaCarousel(
       {
@@ -137,7 +141,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
         ...disableNavigationDragBreakpoint,
       },
       [
-        ...(autoAdvanceDelay && !userPrefersReducedMotion()
+        ...(shouldAutoAdvance
           ? [
               Autoplay({
                 delay: autoAdvanceDelay,
@@ -232,6 +236,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
           scrollNext: () => api?.scrollNext(),
           canScrollPrev,
           canScrollNext,
+          shouldAnimateNavigation,
           columnGap,
           onSlideChange,
         }}

@@ -57,7 +57,7 @@ describe('CarouselArrows', () => {
     });
     render(<CarouselArrows />);
     fireEvent.click(screen.getByTestId('prev-arrow'));
-    expect(mockScrollPrev).toHaveBeenCalledWith();
+    expect(mockScrollPrev).toHaveBeenCalledWith(true);
   });
 
   it('calls scrollNext on next arrow click', () => {
@@ -73,7 +73,28 @@ describe('CarouselArrows', () => {
     });
     render(<CarouselArrows />);
     fireEvent.click(screen.getByTestId('next-arrow'));
-    expect(mockScrollNext).toHaveBeenCalledWith();
+    expect(mockScrollNext).toHaveBeenCalledWith(true);
+  });
+
+  it('animates prev and next arrow clicks when carousel navigation animation is enabled', () => {
+    (useCarousel as Mock).mockReturnValue({
+      api: {
+        slidesInView: () => [0],
+        scrollPrev: mockScrollPrev,
+        scrollNext: mockScrollNext,
+        canScrollPrev: mockCanScrollPrev,
+        canScrollNext: mockCanScrollNext,
+        on: mockOn,
+      },
+      shouldAnimateNavigation: true,
+    });
+    render(<CarouselArrows />);
+
+    fireEvent.click(screen.getByTestId('prev-arrow'));
+    fireEvent.click(screen.getByTestId('next-arrow'));
+
+    expect(mockScrollPrev).toHaveBeenCalledWith(false);
+    expect(mockScrollNext).toHaveBeenCalledWith(false);
   });
 
   it('does not call scrollPrev if api is not available', () => {
@@ -104,7 +125,7 @@ describe('CarouselArrows', () => {
     });
     render(<CarouselArrows />);
     fireEvent.click(screen.getByTestId('prev-arrow'));
-    expect(mockScrollTo).toHaveBeenCalledWith(0);
+    expect(mockScrollTo).toHaveBeenCalledWith(0, true);
   });
 
   it('scrolls to next page when multiple slides are in view for next arrow', () => {
@@ -121,7 +142,29 @@ describe('CarouselArrows', () => {
     });
     render(<CarouselArrows />);
     fireEvent.click(screen.getByTestId('next-arrow'));
-    expect(mockScrollTo).toHaveBeenCalledWith(5);
+    expect(mockScrollTo).toHaveBeenCalledWith(5, true);
+  });
+
+  it('animates paged arrow clicks when carousel navigation animation is enabled', () => {
+    (useCarousel as Mock).mockReturnValue({
+      api: {
+        slidesInView: () => [2, 3, 4],
+        scrollPrev: mockScrollPrev,
+        scrollNext: mockScrollNext,
+        scrollTo: mockScrollTo,
+        canScrollPrev: mockCanScrollPrev,
+        canScrollNext: mockCanScrollNext,
+        on: mockOn,
+      },
+      shouldAnimateNavigation: true,
+    });
+    render(<CarouselArrows />);
+
+    fireEvent.click(screen.getByTestId('prev-arrow'));
+    fireEvent.click(screen.getByTestId('next-arrow'));
+
+    expect(mockScrollTo).toHaveBeenCalledWith(0, false);
+    expect(mockScrollTo).toHaveBeenCalledWith(5, false);
   });
 
   it('adds disabled class to prev button when canScrollPrev returns false', () => {

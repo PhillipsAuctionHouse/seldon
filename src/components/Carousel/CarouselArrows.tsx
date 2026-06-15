@@ -18,28 +18,29 @@ const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(
   ({ className, areArrowsAlwaysVisible, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'CarouselArrows');
 
-    const { api } = useCarousel();
+    const { api, shouldAnimateNavigation } = useCarousel();
+    const shouldJump = !shouldAnimateNavigation;
     const onPrevArrowClick = useCallback(() => {
       if (!api) return;
       if (api?.slidesInView().length <= 1) {
-        api.scrollPrev();
+        api.scrollPrev(shouldJump);
       } else {
         const slidesInView = api?.slidesInView();
-        api?.scrollTo(Math.max(0, slidesInView[0] - (slidesInView.length ?? 1)));
+        api?.scrollTo(Math.max(0, slidesInView[0] - (slidesInView.length ?? 1)), shouldJump);
       }
-    }, [api]);
+    }, [api, shouldJump]);
 
     const onNextArrowClick = useCallback(() => {
       if (!api) return;
 
       if (api?.slidesInView().length <= 1) {
-        api?.scrollNext();
+        api?.scrollNext(shouldJump);
       } else {
         const slidesInView = api?.slidesInView();
         const lastSlideInView = slidesInView.slice(-1)[0] + 1;
-        api?.scrollTo(lastSlideInView);
+        api?.scrollTo(lastSlideInView, shouldJump);
       }
-    }, [api]);
+    }, [api, shouldJump]);
 
     return (
       <div
