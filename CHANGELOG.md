@@ -1,3 +1,10 @@
+# [1.267.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.266.0...v1.267.0) (2026-06-17)
+
+
+### Features
+
+* **Button:** L3-13086 Fix calendar filter button ([#879](https://github.com/PhillipsAuctionHouse/seldon/issues/879)) ([33ee86a](https://github.com/PhillipsAuctionHouse/seldon/commit/33ee86a570f0715479fbb5ec59f2bcca883e8a4b))
+
 # [1.266.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.265.1...v1.266.0) (2026-06-15)
 
 
