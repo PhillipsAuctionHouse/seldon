@@ -1,5 +1,5 @@
 import { ComponentProps, ForwardedRef, forwardRef } from 'react';
-import { getCommonProps, noOp } from '../../utils';
+import { Breakpoints, getCommonProps, noOp } from '../../utils';
 import classnames from 'classnames';
 import { SupportedLanguages } from '../../types/commonTypes';
 import { Dropdown } from '../../components/Dropdown';
@@ -125,10 +125,10 @@ const LanguageSelector = forwardRef<HTMLElement, LanguageSelectorProps>(
 
     return (
       <>
-        <SSRMediaQuery.Media greaterThanOrEqual="md">
+        <SSRMediaQuery.Media greaterThanOrEqual={Breakpoints.md}>
           <Dropdown {...selectorProps} disabled={disabled} ref={ref as ForwardedRef<HTMLButtonElement>} />
         </SSRMediaQuery.Media>
-        <SSRMediaQuery.Media lessThan="md">
+        <SSRMediaQuery.Media lessThan={Breakpoints.md}>
           <MobileLanguageSelector {...selectorProps} ref={ref as ForwardedRef<HTMLDivElement>} />
         </SSRMediaQuery.Media>
       </>

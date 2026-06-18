@@ -258,3 +258,40 @@ CarouselWithMultipleItems.argTypes = {
     defaultValue: 4,
   },
 };
+
+export const AutoAdvancingCarousel = (props: CarouselProps & CarouselDotsProps) => (
+  <Carousel {...props}>
+    <CarouselContent>
+      {Array.from({ length: 4 }).map((_, index) => (
+        <CarouselItem key={index}>
+          <div
+            style={{
+              display: 'flex',
+              aspectRatio: '4 / 1',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '1.5rem',
+              backgroundColor: '#66BF3B',
+              borderRadius: '0.5rem',
+            }}
+          >
+            <span style={{ fontSize: '2.25rem', fontWeight: '600', color: 'white' }}>{index + 1}</span>
+          </div>
+        </CarouselItem>
+      ))}
+    </CarouselContent>
+    <CarouselDots maxDots={4} position={props.position} numberOfSlides={4} id={props.id} />
+    <CarouselArrows />
+  </Carousel>
+);
+
+// Auto-advances every 4s with a slower slide transition; pauses on hover/focus and
+// is disabled when the user prefers reduced motion.
+AutoAdvancingCarousel.args = {
+  autoAdvanceDelay: 4000,
+  duration: 30,
+  loop: true,
+  id: 'carousel-auto-advance',
+} satisfies CarouselProps & CarouselDotsProps;
+
+AutoAdvancingCarousel.argTypes = {};

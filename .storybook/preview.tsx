@@ -28,6 +28,10 @@ const preview: Preview = {
     a11y: {
       test: 'error',
     },
+
+    chromatic: {
+      viewports: [500, 1200],
+    },
   },
 
   tags: ['autodocs'],

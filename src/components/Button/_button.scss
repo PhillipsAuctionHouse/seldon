@@ -10,7 +10,7 @@ $destructive-hover-disabled: color.adjust($warning-default, $alpha: -0.5);
   align-items: center;
   background-color: $pure-black;
   border: 2px solid transparent;
-  border-radius: $radius-3xl;
+  border-radius: $radius-xs;
   color: $pure-white;
   cursor: pointer;
   display: inline-flex;
@@ -98,7 +98,7 @@ $destructive-hover-disabled: color.adjust($warning-default, $alpha: -0.5);
   }
 
   &:focus-visible {
-    @include focus-ring($border-radius: $radius-3xl);
+    @include focus-ring($border-radius: $radius-xs);
 
     svg {
       fill: $pure-white;
@@ -140,7 +140,7 @@ $destructive-hover-disabled: color.adjust($warning-default, $alpha: -0.5);
     z-index: 0;
 
     &::before {
-      border-radius: $radius-3xl;
+      border-radius: $radius-xs;
       box-sizing: border-box;
       content: '';
       display: inline-block;
@@ -154,7 +154,7 @@ $destructive-hover-disabled: color.adjust($warning-default, $alpha: -0.5);
     }
 
     &:focus-visible {
-      @include focus-ring($border-radius: $radius-3xl);
+      @include focus-ring($border-radius: $radius-xs);
 
       background-color: $pure-white;
     }
@@ -188,7 +188,7 @@ $destructive-hover-disabled: color.adjust($warning-default, $alpha: -0.5);
 
     &:focus-visible {
       background-color: $white-100;
-      border-radius: $radius-3xl;
+      border-radius: $radius-xs;
       outline: 2px solid $warning-default;
       outline-offset: 4px;
     }
@@ -252,7 +252,7 @@ $destructive-hover-disabled: color.adjust($warning-default, $alpha: -0.5);
     }
 
     &:focus-visible {
-      @include focus-ring($border-radius: $radius-3xl);
+      @include focus-ring($border-radius: $radius-xs);
 
       background-color: $pure-white;
     }

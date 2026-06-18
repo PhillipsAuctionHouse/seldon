@@ -1,9 +1,19 @@
-import { render, screen } from '@testing-library/react';
-import Carousel from './Carousel';
+import { render, screen, waitFor } from '@testing-library/react';
+import { useEffect } from 'react';
+import Carousel, { type CarouselApi } from './Carousel';
 import CarouselContent from './CarouselContent';
 import CarouselItem from './CarouselItem';
 import CarouselDots from './CarouselDots';
-import { mockDesktopBreakpoint, mockMobileBreakpoint, runCommonTests } from '../../utils/testUtils';
+import { useCarousel } from './utils';
+import { mockDesktopBreakpoint, mockMatchMedia, mockMobileBreakpoint, runCommonTests } from '../../utils/testUtils';
+
+const CarouselApiProbe = ({ onApi }: { onApi: (api: CarouselApi) => void }) => {
+  const { api } = useCarousel();
+  useEffect(() => {
+    if (api) onApi(api);
+  }, [api, onApi]);
+  return null;
+};
 
 describe('Carousel', () => {
   runCommonTests(Carousel, 'Carousel');
@@ -118,6 +128,65 @@ describe('Carousel', () => {
       );
       const carousel = screen.getByRole('region');
       expect(carousel.children[0]).toHaveClass('is-draggable');
+    });
+  });
+
+  describe('autoAdvanceDelay', () => {
+    // The global test setup mocks matchMedia with matches: true for every query,
+    // which trips the prefers-reduced-motion guard. Default to no matching queries.
+    beforeEach(() => {
+      mockMatchMedia({});
+    });
+
+    const renderWithProbe = (props: React.ComponentProps<typeof Carousel>, onApi: (api: CarouselApi) => void) =>
+      render(
+        <Carousel {...props}>
+          <CarouselContent>
+            <CarouselItem>Slide 1</CarouselItem>
+            <CarouselItem>Slide 2</CarouselItem>
+          </CarouselContent>
+          <CarouselApiProbe onApi={onApi} />
+        </Carousel>,
+      );
+
+    it('registers the autoplay plugin when autoAdvanceDelay is set', async () => {
+      let api: CarouselApi;
+      renderWithProbe({ autoAdvanceDelay: 5000, loop: true }, (captured) => (api = captured));
+
+      await waitFor(() => expect(api).toBeDefined());
+      expect(api?.plugins().autoplay).toBeDefined();
+    });
+
+    it('does not register the autoplay plugin without autoAdvanceDelay', async () => {
+      let api: CarouselApi;
+      renderWithProbe({ loop: true }, (captured) => (api = captured));
+
+      await waitFor(() => expect(api).toBeDefined());
+      expect(api?.plugins().autoplay).toBeUndefined();
+    });
+
+    it('does not register the autoplay plugin when the user prefers reduced motion', async () => {
+      mockMatchMedia({ '(prefers-reduced-motion: reduce)': true });
+
+      let api: CarouselApi;
+      renderWithProbe({ autoAdvanceDelay: 5000, loop: true }, (captured) => (api = captured));
+
+      await waitFor(() => expect(api).toBeDefined());
+      expect(api?.plugins().autoplay).toBeUndefined();
+    });
+
+    it('resets the autoplay timer whenever the selected slide changes', async () => {
+      let api: CarouselApi;
+      renderWithProbe({ autoAdvanceDelay: 5000, loop: true }, (captured) => (api = captured));
+
+      await waitFor(() => expect(api).toBeDefined());
+      const autoplay = api!.plugins().autoplay;
+      expect(autoplay).toBeDefined();
+
+      const resetSpy = vi.spyOn(autoplay!, 'reset');
+      api!.scrollTo(1);
+
+      await waitFor(() => expect(resetSpy).toHaveBeenCalled());
     });
   });
 });

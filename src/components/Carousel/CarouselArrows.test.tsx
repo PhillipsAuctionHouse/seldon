@@ -57,7 +57,7 @@ describe('CarouselArrows', () => {
     });
     render(<CarouselArrows />);
     fireEvent.click(screen.getByTestId('prev-arrow'));
-    expect(mockScrollPrev).toHaveBeenCalledWith(true);
+    expect(mockScrollPrev).toHaveBeenCalledWith();
   });
 
   it('calls scrollNext on next arrow click', () => {
@@ -73,7 +73,7 @@ describe('CarouselArrows', () => {
     });
     render(<CarouselArrows />);
     fireEvent.click(screen.getByTestId('next-arrow'));
-    expect(mockScrollNext).toHaveBeenCalledWith(true);
+    expect(mockScrollNext).toHaveBeenCalledWith();
   });
 
   it('does not call scrollPrev if api is not available', () => {

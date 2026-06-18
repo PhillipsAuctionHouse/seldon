@@ -1,3 +1,73 @@
+# [1.268.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.267.0...v1.268.0) (2026-06-18)
+
+
+### Features
+
+* **InlineFilters:** L3-13086 Update filter buttons from square to rounded ([#880](https://github.com/PhillipsAuctionHouse/seldon/issues/880)) ([fd022a2](https://github.com/PhillipsAuctionHouse/seldon/commit/fd022a20cf5594aed24774148c9c5fde2cd48da5))
+
+# [1.267.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.266.0...v1.267.0) (2026-06-17)
+
+
+### Features
+
+* **Button:** L3-13086 Fix calendar filter button ([#879](https://github.com/PhillipsAuctionHouse/seldon/issues/879)) ([33ee86a](https://github.com/PhillipsAuctionHouse/seldon/commit/33ee86a570f0715479fbb5ec59f2bcca883e8a4b))
+
+# [1.266.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.265.1...v1.266.0) (2026-06-15)
+
+
+### Features
+
+* **carousel:** PDD-484 add auto advance controls ([#878](https://github.com/PhillipsAuctionHouse/seldon/issues/878)) ([0c1722e](https://github.com/PhillipsAuctionHouse/seldon/commit/0c1722e03eb17272e31448560a0d70165532dfd9))
+
+## [1.265.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.265.0...v1.265.1) (2026-06-12)
+
+
+### Bug Fixes
+
+* **accordion:** L3-0000 align expand/collapse animation with Radix pattern ([#877](https://github.com/PhillipsAuctionHouse/seldon/issues/877)) ([84bad14](https://github.com/PhillipsAuctionHouse/seldon/commit/84bad14ae0280367bc57d82635e17ee40a04e391))
+
+# [1.265.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.264.0...v1.265.0) (2026-06-09)
+
+
+### Features
+
+* **ExitGateCard:** PDD-477 forward responsive image props for CMS delivery ([#875](https://github.com/PhillipsAuctionHouse/seldon/issues/875)) ([dd263e5](https://github.com/PhillipsAuctionHouse/seldon/commit/dd263e5b889e4ed5819ef554d17c813f2bc8d51e))
+
+# [1.264.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.263.0...v1.264.0) (2026-06-02)
+
+
+### Features
+
+* **Button:** L3-12729 Update Button style ([#872](https://github.com/PhillipsAuctionHouse/seldon/issues/872)) ([f9509f3](https://github.com/PhillipsAuctionHouse/seldon/commit/f9509f3f5bb547fb472847d7e04e99daacdca0c0))
+
+# [1.263.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.262.0...v1.263.0) (2026-05-29)
+
+
+### Features
+
+* **ProgressBar:** L3-12628 Remove ProgressBar display for mobile ([#874](https://github.com/PhillipsAuctionHouse/seldon/issues/874)) ([a9a94ae](https://github.com/PhillipsAuctionHouse/seldon/commit/a9a94aecae59977a95b8e0be0d3bf53e8a65ed66))
+
+# [1.262.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.261.0...v1.262.0) (2026-05-19)
+
+
+### Features
+
+* **ProgressBar:** L3-12628 Build new Progress Bar component for V2 saleroom ([#869](https://github.com/PhillipsAuctionHouse/seldon/issues/869)) ([5bc3cbf](https://github.com/PhillipsAuctionHouse/seldon/commit/5bc3cbf3b057979607df7463d5feeef93eb621d0))
+
+# [1.261.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.260.0...v1.261.0) (2026-05-19)
+
+
+### Features
+
+* **Banner:** PDD-30 add banner component and refactor SaleHeaderBanner ([#870](https://github.com/PhillipsAuctionHouse/seldon/issues/870)) ([9bd1604](https://github.com/PhillipsAuctionHouse/seldon/commit/9bd160418a6ed67631223dc98f674e5f8a7f6a75))
+
+# [1.260.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.259.0...v1.260.0) (2026-05-07)
+
+
+### Features
+
+* **a11y:** L3-12633 remove inaccurate default tab container label, require on… ([#861](https://github.com/PhillipsAuctionHouse/seldon/issues/861)) ([a9ce850](https://github.com/PhillipsAuctionHouse/seldon/commit/a9ce85013fab5924907d37733360bd63ae93a29b))
+
 # [1.259.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.258.0...v1.259.0) (2026-04-30)
 
 

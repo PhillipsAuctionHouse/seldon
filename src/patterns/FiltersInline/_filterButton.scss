@@ -2,6 +2,7 @@
 
 .#{$px}-filter-button {
   border: 2px solid $bg-border;
+  border-radius: $radius-3xl;
   gap: 4px;
   height: inherit;
   padding: $spacing-xsm $spacing-sm;
@@ -21,10 +22,6 @@
     &:focus-visible {
       @include focus-ring($border-radius: $radius-3xl);
     }
-  }
-
-  &--filter {
-    border-radius: $radius-3xl;
   }
 
   &__label {

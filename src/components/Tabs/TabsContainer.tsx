@@ -32,7 +32,7 @@ export interface TabsContainerProps extends TabsPrimitive.TabsProps, Omit<Compon
   /**
    * Aria-label for specific tab list view
    */
-  tabListLabel?: string;
+  tabListLabel: string;
   /**
    * Optional value for controlled tabs
    */
@@ -58,10 +58,7 @@ export interface TabsContainerProps extends TabsPrimitive.TabsProps, Omit<Compon
  */
 
 const TabsContainer = forwardRef<HTMLDivElement, TabsContainerProps>(
-  (
-    { className, tabs = [], tabListLabel = 'Sale Page Tabs', children, defaultValue, value, onTabClick, ...props },
-    ref,
-  ) => {
+  ({ className, tabs = [], tabListLabel, children, defaultValue, value, onTabClick, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'TabsContainer');
     return (
       <TabsPrimitive.Root

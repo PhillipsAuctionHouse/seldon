@@ -11,13 +11,13 @@ describe('Tabs', () => {
   ];
 
   it('renders tabs', () => {
-    const { getAllByRole } = render(<TabsContainer tabs={tabs} />);
+    const { getAllByRole } = render(<TabsContainer tabs={tabs} tabListLabel="" />);
     const tabsList = getAllByRole('tablist');
     expect(tabsList.length).toBe(1);
   });
   test('renders the tabs and displays default content', () => {
     render(
-      <TabsContainer tabs={tabs} defaultValue="overview">
+      <TabsContainer tabs={tabs} defaultValue="overview" tabListLabel="Sale Page Tabs">
         <TabsContent value="overview">Overview content</TabsContent>
         <TabsContent value="browse">Browse lots content</TabsContent>
       </TabsContainer>,
@@ -46,7 +46,7 @@ describe('Tabs', () => {
       },
     ];
     render(
-      <TabsContainer tabs={componentTabs}>
+      <TabsContainer tabs={componentTabs} tabListLabel="Sale Page Tabs">
         <TabsContent value="overview">Overview content</TabsContent>
         <TabsContent value="browse">Browse lots content</TabsContent>
       </TabsContainer>,
@@ -58,7 +58,7 @@ describe('Tabs', () => {
   });
   test('displays correct content when a different tab is selected', async () => {
     render(
-      <TabsContainer tabs={tabs} defaultValue="overview">
+      <TabsContainer tabs={tabs} defaultValue="overview" tabListLabel="Sale Page Tabs">
         <TabsContent value="overview">Overview content</TabsContent>
         <TabsContent value="browse">Browse lots content</TabsContent>
       </TabsContainer>,
@@ -75,7 +75,7 @@ describe('Tabs', () => {
     const onTabClickMock = vitest.fn();
 
     render(
-      <TabsContainer tabs={tabs} defaultValue="browse" onTabClick={onTabClickMock}>
+      <TabsContainer tabs={tabs} defaultValue="browse" onTabClick={onTabClickMock} tabListLabel="Sale Page Tabs">
         <TabsContent value="overview">Overview content</TabsContent>
         <TabsContent value="browse">Browse lots content</TabsContent>
       </TabsContainer>,
@@ -88,7 +88,13 @@ describe('Tabs', () => {
     const onTabClickMock = vitest.fn();
 
     render(
-      <TabsContainer tabs={tabs} defaultValue="browse" value="browse" onTabClick={onTabClickMock}>
+      <TabsContainer
+        tabs={tabs}
+        defaultValue="browse"
+        value="browse"
+        onTabClick={onTabClickMock}
+        tabListLabel="Sale Page Tabs"
+      >
         <TabsContent value="overview">Overview content</TabsContent>
         <TabsContent value="browse">Browse lots content</TabsContent>
       </TabsContainer>,
