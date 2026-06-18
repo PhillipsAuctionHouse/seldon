@@ -90,7 +90,7 @@
   outline: none;
   padding: $spacing-lg;
 
-  // radix UI DismissableLayer sets pointer-events:none on document.body when
+  // Radix UI DismissableLayer sets pointer-events: none on document.body when
   // any dialog is open, and only restores auto on its own layer elements. This
   // viewport is a portal into body (not a DismissableLayer), so it must opt
   // back in explicitly to remain interactive while a modal is open.
