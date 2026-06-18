@@ -1,3 +1,10 @@
+# [1.268.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.267.0...v1.268.0) (2026-06-18)
+
+
+### Features
+
+* **InlineFilters:** L3-13086 Update filter buttons from square to rounded ([#880](https://github.com/PhillipsAuctionHouse/seldon/issues/880)) ([fd022a2](https://github.com/PhillipsAuctionHouse/seldon/commit/fd022a20cf5594aed24774148c9c5fde2cd48da5))
+
 # [1.267.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.266.0...v1.267.0) (2026-06-17)
 
 
