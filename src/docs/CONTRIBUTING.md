@@ -190,14 +190,16 @@ the coverage/index.html file in a browser and investigate.
 
 ## Testing changes in downstream consumers
 
-Often times changes to the library are being made to add features to an application. To test these changes you can link the library to the consuming application. This is done by running the following commands to add the library to the global npm registry:
+Often times changes to the library are being made to add features to an application. The recommended way to test Seldon changes in **phillips-public-remix** is the [phillips-ui-dev](https://github.com/PhillipsAuctionHouse/phillips-ui-dev) workspace (git submodules + `npm run dev`). That runs Storybook, a Seldon `dist` watch build, and Remix with hot reload—no `npm link` or yalc.
+
+For other consumers, or if you are not using the workspace, you can link the library with npm:
 
 ```sh
 npm run build
 npm link
 ```
 
-Then you will point the application to the `seldon` published in the global npm registry not the one installed locally in `application/node_modules`. To link the application in to the global npm registry run the following command in the application directory:
+Then in the consuming application:
 
 ```sh
 npm link "@phillips/seldon"

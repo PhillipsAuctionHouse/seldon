@@ -33,9 +33,7 @@ const config: StorybookConfig = {
       ...(config.server || {}),
       watch: {
         ...(config.server?.watch || {}),
-        ignored: [
-          '**/coverage/**', // otherwise, the end of the coverage process means a page reload per file in src/ if Storybook is running
-        ],
+        ignored: ['**/coverage/**', '**/dist/**', '**/storybook-static/**'],
       },
     };
     return {

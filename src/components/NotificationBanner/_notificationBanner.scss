@@ -5,6 +5,9 @@
   color: $pure-black;
   left: 0;
   padding: $spacing-sm $spacing-md;
+
+  // see _toast.scss \/
+  pointer-events: auto;
   position: fixed;
   text-align: center;
   top: 0;
