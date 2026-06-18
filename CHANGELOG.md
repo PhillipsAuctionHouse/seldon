@@ -1,3 +1,10 @@
+# [1.269.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.268.0...v1.269.0) (2026-06-18)
+
+
+### Features
+
+* **Toast, etc:** L3-12787 toast viewport pointer events ([#881](https://github.com/PhillipsAuctionHouse/seldon/issues/881)) ([644cd2d](https://github.com/PhillipsAuctionHouse/seldon/commit/644cd2d0c9cd73c83d6de9daa389c285fbc7ee77))
+
 # [1.268.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.267.0...v1.268.0) (2026-06-18)
 
 
