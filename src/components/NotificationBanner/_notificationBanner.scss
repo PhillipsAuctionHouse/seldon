@@ -6,7 +6,8 @@
   left: 0;
   padding: $spacing-sm $spacing-md;
 
-  // see _toast.scss \/
+  // Radix UI DismissableLayer sets pointer-events: none on document.body while dialogs are open.
+  // This banner is rendered outside the layer, so opt back in to remain clickable.
   pointer-events: auto;
   position: fixed;
   text-align: center;
