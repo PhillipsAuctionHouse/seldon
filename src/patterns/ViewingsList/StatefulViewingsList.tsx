@@ -1,14 +1,18 @@
 import * as React from 'react';
 
-import ViewingsList, { type ViewingsListProps } from './ViewingsList';
+import ViewingsList from './ViewingsList';
 import { ViewingsListCardProps } from './ViewingsListCard';
+import { I18nObject } from './ViewingsList';
 
-export interface StatefulViewingsListProps
-  extends Omit<ViewingsListProps, 'viewings' | 'onAdd' | 'onDelete' | 'onSave'> {
+export interface StatefulViewingsListProps extends Record<string, unknown> {
   /**
    * Existing viewings to populate the list
    */
   defaultViewing?: ViewingsListCardProps[];
+  /**
+   * Optional strings to pass for the form and button labels
+   */
+  i18n?: I18nObject;
   /**
    * Optional validations script to be ran when Viewing list is updated and saved
    */

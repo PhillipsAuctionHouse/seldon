@@ -1,8 +1,8 @@
 import path from 'path';
-import { globSync } from 'glob';
+import glob from 'glob';
 
 export const transformScssAlias = (contents: Buffer, name: string) => {
-  const filePath = globSync(`**/${name}`, { cwd: path.resolve(__dirname, '../../src') })[0];
+  const filePath = glob.sync(`**/${name}`, { cwd: path.resolve(__dirname, '../../src') })[0];
   console.log('transforming scss alias for file:', filePath);
   if (!filePath) {
     return contents;
