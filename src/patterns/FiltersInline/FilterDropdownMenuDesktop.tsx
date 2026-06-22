@@ -25,7 +25,8 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
   ) => {
     const isSortButton = buttonType === 'Sort';
     const baseClassName = `${px}-filter-dropdown-menu`;
-    const hasActiveFilters = getFilterDimensions(filters, filterIndex).some((dimension) => dimension.active);
+    const filterDimensions = getFilterDimensions(filters, filterIndex);
+    const hasActiveFilters = filterDimensions.some((dimension) => dimension.active);
 
     return (
       <div
@@ -35,7 +36,7 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
         aria-label={ariaLabels || `${buttonType} dropdown desktop`}
       >
         <div className={classnames(`${baseClassName}__filters`)}>
-          {getFilterDimensions(filters, filterIndex).map((value: FilterDimension) => (
+          {filterDimensions.map((value: FilterDimension) => (
             <FilterInput
               id={value.label}
               key={value.label}
@@ -61,7 +62,6 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
           ) : (
             <>
               <Button
-                className={classnames(`${baseClassName}__buttons`)}
                 variant={ButtonVariants.secondary}
                 size={ButtonSizes.small}
                 isDisabled={!hasActiveFilters}
@@ -69,12 +69,7 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
               >
                 {dropdownMenuTranslation?.clearAll || 'Clear all'}
               </Button>
-              <Button
-                className={classnames(`${baseClassName}__buttons`)}
-                variant={ButtonVariants.primary}
-                size={ButtonSizes.small}
-                onClick={() => onApplyFilter?.(false)}
-              >
+              <Button variant={ButtonVariants.primary} size={ButtonSizes.small} onClick={() => onApplyFilter?.(false)}>
                 <span className={`${baseClassName}__button-text`}>
                   {dropdownMenuTranslation?.showAuctions || `Show ${resultsCount} Auctions`}
                 </span>

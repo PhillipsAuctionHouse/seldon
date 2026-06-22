@@ -81,7 +81,6 @@ export const MainFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDrop
             )}
           >
             <Button
-              className={`${px}-filter-dropdown-menu__button`}
               variant={ButtonVariants.secondary}
               size={ButtonSizes.small}
               isDisabled={totalCount === 0}
@@ -89,11 +88,7 @@ export const MainFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDrop
             >
               {dropdownMenuTranslation?.clearAll || 'Clear all'}
             </Button>
-            <Button
-              className={`${px}-filter-dropdown-menu__button`}
-              size={ButtonSizes.small}
-              onClick={() => onApplyFilter?.(false)}
-            >
+            <Button size={ButtonSizes.small} onClick={() => onApplyFilter?.(false)}>
               {dropdownMenuTranslation?.showAuctions || `Show ${resultsCount} Auctions`}
             </Button>
           </div>

@@ -27,7 +27,8 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
   ) => {
     const isSortButton = buttonType === 'Sort';
     const baseClassName = `${px}-filter-dropdown-menu`;
-    const hasActiveFilters = getFilterDimensions(filters, filterIndex).some((dimension) => dimension.active);
+    const filterDimensions = getFilterDimensions(filters, filterIndex);
+    const hasActiveFilters = filterDimensions.some((dimension) => dimension.active);
 
     return (
       <div
@@ -37,7 +38,7 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
         aria-label={ariaLabels || `${buttonType} dropdown mobile`}
       >
         <div className={classnames(`${baseClassName}__filters`, `${baseClassName}__filters--mobile`)}>
-          {getFilterDimensions(filters, filterIndex).map((value: FilterDimension) => (
+          {filterDimensions.map((value: FilterDimension) => (
             <FilterInput
               id={value.label}
               key={value.label}
@@ -70,11 +71,6 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
           ) : (
             <>
               <Button
-                className={classnames(
-                  `${baseClassName}__buttons`,
-                  `${baseClassName}__buttons--mobile`,
-                  `${baseClassName}__buttons--left`,
-                )}
                 variant={ButtonVariants.secondary}
                 size={ButtonSizes.small}
                 isDisabled={!hasActiveFilters}
@@ -82,16 +78,7 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
               >
                 <Text variant={TextVariants.bodySmall}>{dropdownMenuTranslation?.clearAll || 'Clear all'}</Text>
               </Button>
-              <Button
-                className={classnames(
-                  `${baseClassName}__buttons`,
-                  `${baseClassName}__buttons--mobile`,
-                  `${baseClassName}__buttons--right`,
-                )}
-                variant={ButtonVariants.primary}
-                size={ButtonSizes.small}
-                onClick={() => onApplyFilter?.(false)}
-              >
+              <Button variant={ButtonVariants.primary} size={ButtonSizes.small} onClick={() => onApplyFilter?.(false)}>
                 <Text variant={TextVariants.bodySmall} className={`${baseClassName}__button-text`}>
                   {dropdownMenuTranslation?.showAuctions || `Show ${resultsCount} Auctions`}
                 </Text>

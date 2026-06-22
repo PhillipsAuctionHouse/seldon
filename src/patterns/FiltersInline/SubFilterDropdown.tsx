@@ -34,7 +34,6 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
     const { totalCount, filterCount } = countActiveFilters(filters, buttonType);
     const buttonLabel = getFilterButtonLabel(filterButtonLabel, filterButtonLabelTranslated || null);
     const isSortFilter = buttonType === FilterButtonType.Sort;
-    // Flag the Sort filter's wrapper so FiltersInline can align it to the right of the filter row on desktop.
     const mediaClassName = isSortFilter ? `${px}-filters-inline__sort` : undefined;
 
     if (hideDesktopSortButton && buttonType === FilterButtonType.Sort) {

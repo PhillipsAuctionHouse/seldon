@@ -1,9 +1,6 @@
 @use '~scss/allPartials' as *;
 
 $dropdown-height: 240px;
-
-// Fixed width wide enough for the two footer CTAs (Clear all / Show N) to sit side-by-side on one
-// line, and for long option labels (e.g. "Modern & Contemporary Art") not to wrap.
 $dropdown-width: 320px;
 
 .#{$px}-filter-dropdown-menu {
@@ -13,8 +10,6 @@ $dropdown-width: 320px;
   display: flex;
   flex-direction: column;
   padding: $spacing-sm 0;
-
-  // Fixed dropdown width so the menu does not resize based on its content (matches the Sort By dropdown).
   width: $dropdown-width;
 
   &__filters {
@@ -43,10 +38,6 @@ $dropdown-width: 320px;
     justify-content: space-between;
     padding: $spacing-sm $spacing-sm 0 $spacing-sm;
 
-    // CTAs split the available width equally, stay on one line, and centre their label. This
-    // overrides the per-variant button classes (`__buttons`, `__buttons--mobile/--left/--right`),
-    // which otherwise left-pack the label (space-between), force display:block on mobile, or cap
-    // the width at the small-button max-width.
     > .#{$px}-button {
       display: inline-flex;
       flex: 1 1 0;
@@ -97,29 +88,6 @@ $dropdown-width: 320px;
     }
   }
 
-  &__buttons {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    &--left {
-      margin-left: auto;
-      margin-right: 0;
-    }
-
-    &--right {
-      margin-left: 0;
-      margin-right: auto;
-    }
-
-    &--mobile {
-      display: block;
-      margin: $spacing-sm 0 $spacing-md;
-      width: auto;
-    }
-  }
-
   &__button-text {
     color: $white-100;
   }
@@ -163,8 +131,6 @@ $dropdown-width: 320px;
   padding: 0;
 }
 
-// "Filter" drawer (MainFilterDropdown): keep the CTAs anchored to the bottom of the screen
-// while the filter list scrolls, mirroring the live Sale page filter drawer.
 .#{$px}-filter-drawer {
   .#{$px}-filter-drawer-menu {
     flex: 1 1 auto;
