@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import React from 'react';
 import Button from '../../components/Button/Button';
-import { ButtonVariants } from '../../components/Button/types';
+import { ButtonSizes, ButtonVariants } from '../../components/Button/types';
 import FilterInput from '../../components/Filter/FilterInput';
 import Text from '../../components/Text/Text';
 import { TextVariants } from '../../components/Text/types';
@@ -27,6 +27,7 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
   ) => {
     const isSortButton = buttonType === 'Sort';
     const baseClassName = `${px}-filter-dropdown-menu`;
+    const hasActiveFilters = getFilterDimensions(filters, filterIndex).some((dimension) => dimension.active);
 
     return (
       <div
@@ -59,6 +60,7 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
             <Button
               className={classnames(`${baseClassName}__button`, `${baseClassName}__button--mobile`)}
               variant={ButtonVariants.primary}
+              size={ButtonSizes.small}
               onClick={() => onApplyFilter?.(false)}
             >
               <Text variant={TextVariants.headingMedium} className={`${baseClassName}__button-text`}>
@@ -74,6 +76,8 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
                   `${baseClassName}__buttons--left`,
                 )}
                 variant={ButtonVariants.secondary}
+                size={ButtonSizes.small}
+                isDisabled={!hasActiveFilters}
                 onClick={() => onClickClear?.(buttonType ?? '')}
               >
                 <Text variant={TextVariants.bodySmall}>{dropdownMenuTranslation?.clearAll || 'Clear all'}</Text>
@@ -85,6 +89,7 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
                   `${baseClassName}__buttons--right`,
                 )}
                 variant={ButtonVariants.primary}
+                size={ButtonSizes.small}
                 onClick={() => onApplyFilter?.(false)}
               >
                 <Text variant={TextVariants.bodySmall} className={`${baseClassName}__button-text`}>

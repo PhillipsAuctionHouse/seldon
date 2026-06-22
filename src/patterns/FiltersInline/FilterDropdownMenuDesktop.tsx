@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import React from 'react';
 import Button from '../../components/Button/Button';
-import { ButtonVariants } from '../../components/Button/types';
+import { ButtonSizes, ButtonVariants } from '../../components/Button/types';
 import FilterInput from '../../components/Filter/FilterInput';
 import { px } from '../../utils';
 import { FilterDimension, FilterDropdownMenuProps } from './types';
@@ -25,6 +25,7 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
   ) => {
     const isSortButton = buttonType === 'Sort';
     const baseClassName = `${px}-filter-dropdown-menu`;
+    const hasActiveFilters = getFilterDimensions(filters, filterIndex).some((dimension) => dimension.active);
 
     return (
       <div
@@ -52,6 +53,7 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
             <Button
               className={classnames(`${baseClassName}__button`)}
               variant={ButtonVariants.primary}
+              size={ButtonSizes.small}
               onClick={() => onApplyFilter?.(false)}
             >
               <span className={`${baseClassName}__button-text`}>{dropdownMenuTranslation?.confirm || 'Confirm'}</span>
@@ -61,6 +63,8 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
               <Button
                 className={classnames(`${baseClassName}__buttons`)}
                 variant={ButtonVariants.secondary}
+                size={ButtonSizes.small}
+                isDisabled={!hasActiveFilters}
                 onClick={() => onClickClear?.(buttonType ?? '')}
               >
                 {dropdownMenuTranslation?.clearAll || 'Clear all'}
@@ -68,6 +72,7 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
               <Button
                 className={classnames(`${baseClassName}__buttons`)}
                 variant={ButtonVariants.primary}
+                size={ButtonSizes.small}
                 onClick={() => onApplyFilter?.(false)}
               >
                 <span className={`${baseClassName}__button-text`}>
