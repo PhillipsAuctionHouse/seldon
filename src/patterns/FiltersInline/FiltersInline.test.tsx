@@ -187,7 +187,7 @@ describe('MainFilterDropdown', () => {
     expect(screen.getByTestId('main-filter-filter-button')).toHaveAttribute('aria-label', 'Filter Button');
   });
 
-  it('calls clearFilterUpdate with "all" when Clear All button is clicked', () => {
+  it('disables Clear All when no filters are selected', () => {
     render(
       <MainFilterDropdown
         id="main-filter"
@@ -197,6 +197,37 @@ describe('MainFilterDropdown', () => {
         handleClick={handleClick}
         filtersListState={[true]}
         filters={filters}
+        onSelectFilter={handleFilterSelection}
+        onApplyFilter={handleFilterUpdate}
+        onClickClear={clearFilterUpdate}
+        resultsCount={2}
+        ariaLabels={{ button: 'Filter Button' }}
+      />,
+    );
+    expect(screen.getByText(/Clear All/i)).toBeDisabled();
+    fireEvent.click(screen.getByText(/Clear All/i));
+    expect(clearFilterUpdate).not.toHaveBeenCalled();
+  });
+
+  it('calls clearFilterUpdate with "all" when Clear All button is clicked', () => {
+    const activeFilters = [
+      {
+        ...filters[0],
+        filterDimensions: new Set([
+          { label: 'Foo', active: true, disabled: false },
+          { label: 'Bar', active: false, disabled: false },
+        ]),
+      },
+    ];
+    render(
+      <MainFilterDropdown
+        id="main-filter"
+        filterButtonLabel="Filter"
+        filterId={0}
+        buttonType={'Filter' as FilterButtonType}
+        handleClick={handleClick}
+        filtersListState={[true]}
+        filters={activeFilters}
         onSelectFilter={handleFilterSelection}
         onApplyFilter={handleFilterUpdate}
         onClickClear={clearFilterUpdate}
@@ -273,27 +304,28 @@ describe('SubFilterDropdown', () => {
 });
 
 describe('FilterDropdownMenuDesktop non-sort buttons', () => {
+  const makeFilters = (fooActive: boolean) => [
+    {
+      label: 'Departments',
+      id: 'Departments',
+      type: 'checkbox' as const,
+      buttonType: FilterButtonType.Departments,
+      filterDimensions: new Set([
+        { label: 'Foo', active: fooActive, disabled: false },
+        { label: 'Bar', active: false, disabled: false },
+      ]),
+    },
+  ];
+
   it('renders and handles Clear all and Show Auctions buttons', () => {
     const handleFilterUpdate = vi.fn();
     const clearFilterUpdate = vi.fn();
-    const filters = [
-      {
-        label: 'Departments',
-        id: 'Departments',
-        type: 'checkbox' as const,
-        buttonType: FilterButtonType.Departments,
-        filterDimensions: new Set([
-          { label: 'Foo', active: false, disabled: false },
-          { label: 'Bar', active: false, disabled: false },
-        ]),
-      },
-    ];
 
     render(
       <FilterDropdownMenuDesktop
         buttonType="Departments"
-        filters={filters}
-        filterIndex={0}
+        filters={makeFilters(true)}
+        filterIndex={1}
         onSelectFilter={vi.fn()}
         onApplyFilter={handleFilterUpdate}
         onClickClear={clearFilterUpdate}
@@ -311,30 +343,52 @@ describe('FilterDropdownMenuDesktop non-sort buttons', () => {
     fireEvent.click(screen.getByText('Show 7 Auctions'));
     expect(handleFilterUpdate).toHaveBeenCalledWith(false);
   });
+
+  it('disables Clear all when no filters in the group are selected', () => {
+    const clearFilterUpdate = vi.fn();
+
+    render(
+      <FilterDropdownMenuDesktop
+        buttonType="Departments"
+        filters={makeFilters(false)}
+        filterIndex={1}
+        onSelectFilter={vi.fn()}
+        onApplyFilter={vi.fn()}
+        onClickClear={clearFilterUpdate}
+        resultsCount={7}
+        filterButtonLabel="Departments"
+      />,
+    );
+
+    expect(screen.getByText('Clear all')).toBeDisabled();
+    fireEvent.click(screen.getByText('Clear all'));
+    expect(clearFilterUpdate).not.toHaveBeenCalled();
+  });
 });
 
 describe('FilterDropdownMenuMobile non-sort buttons', () => {
+  const makeFilters = (fooActive: boolean) => [
+    {
+      label: 'Departments',
+      id: 'Departments',
+      type: 'checkbox' as const,
+      buttonType: FilterButtonType.Departments,
+      filterDimensions: new Set([
+        { label: 'Foo', active: fooActive, disabled: false },
+        { label: 'Bar', active: false, disabled: false },
+      ]),
+    },
+  ];
+
   it('renders and handles Clear all and Show Auctions buttons', () => {
     const handleFilterUpdate = vi.fn();
     const clearFilterUpdate = vi.fn();
-    const filters = [
-      {
-        label: 'Departments',
-        id: 'Departments',
-        type: 'checkbox',
-        buttonType: FilterButtonType.Departments,
-        filterDimensions: new Set([
-          { label: 'Foo', active: false, disabled: false },
-          { label: 'Bar', active: false, disabled: false },
-        ]),
-      },
-    ];
 
     render(
       <FilterDropdownMenuMobile
         buttonType="Departments"
-        filters={filters}
-        filterIndex={0}
+        filters={makeFilters(true)}
+        filterIndex={1}
         onSelectFilter={vi.fn()}
         onApplyFilter={handleFilterUpdate}
         onClickClear={clearFilterUpdate}
@@ -351,6 +405,27 @@ describe('FilterDropdownMenuMobile non-sort buttons', () => {
 
     fireEvent.click(screen.getByText('Show 5 Auctions'));
     expect(handleFilterUpdate).toHaveBeenCalledWith(false);
+  });
+
+  it('disables Clear all when no filters in the group are selected', () => {
+    const clearFilterUpdate = vi.fn();
+
+    render(
+      <FilterDropdownMenuMobile
+        buttonType="Departments"
+        filters={makeFilters(false)}
+        filterIndex={1}
+        onSelectFilter={vi.fn()}
+        onApplyFilter={vi.fn()}
+        onClickClear={clearFilterUpdate}
+        resultsCount={5}
+        filterButtonLabel="Departments"
+      />,
+    );
+
+    expect(screen.getByText('Clear all').closest('button')).toBeDisabled();
+    fireEvent.click(screen.getByText('Clear all'));
+    expect(clearFilterUpdate).not.toHaveBeenCalled();
   });
 });
 

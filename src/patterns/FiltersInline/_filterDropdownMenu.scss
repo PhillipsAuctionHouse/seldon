@@ -2,14 +2,20 @@
 
 $dropdown-height: 240px;
 
+// Fixed width wide enough for the two footer CTAs (Clear all / Show N) to sit side-by-side on one
+// line, and for long option labels (e.g. "Modern & Contemporary Art") not to wrap.
+$dropdown-width: 320px;
+
 .#{$px}-filter-dropdown-menu {
   background: $white-100;
   border-radius: $radius-sm;
   box-shadow: 0 4px 6px $medium-gray;
   display: flex;
   flex-direction: column;
-  min-width: 100%;
   padding: $spacing-sm 0;
+
+  // Fixed dropdown width so the menu does not resize based on its content (matches the Sort By dropdown).
+  width: $dropdown-width;
 
   &__filters {
     display: flex;
@@ -36,6 +42,21 @@ $dropdown-height: 240px;
     gap: $spacing-sm;
     justify-content: space-between;
     padding: $spacing-sm $spacing-sm 0 $spacing-sm;
+
+    // CTAs split the available width equally, stay on one line, and centre their label. This
+    // overrides the per-variant button classes (`__buttons`, `__buttons--mobile/--left/--right`),
+    // which otherwise left-pack the label (space-between), force display:block on mobile, or cap
+    // the width at the small-button max-width.
+    > .#{$px}-button {
+      display: inline-flex;
+      flex: 1 1 0;
+      justify-content: center;
+      margin: 0;
+      max-width: none;
+      min-width: 0;
+      text-align: center;
+      white-space: nowrap;
+    }
 
     &--drawer {
       box-shadow: 0 -4px 8px -4px $medium-gray;
@@ -94,9 +115,8 @@ $dropdown-height: 240px;
 
     &--mobile {
       display: block;
-      margin-bottom: $spacing-md;
-      margin-top: $spacing-sm;
-      width: 45%;
+      margin: $spacing-sm 0 $spacing-md;
+      width: auto;
     }
   }
 
@@ -141,4 +161,20 @@ $dropdown-height: 240px;
 
 .#{$px}-filter-drawer-mobile {
   padding: 0;
+}
+
+// "Filter" drawer (MainFilterDropdown): keep the CTAs anchored to the bottom of the screen
+// while the filter list scrolls, mirroring the live Sale page filter drawer.
+.#{$px}-filter-drawer {
+  .#{$px}-filter-drawer-menu {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .#{$px}-filter-dropdown-menu__buttons-wrap--drawer {
+    flex: 0 0 auto;
+    margin-top: auto;
+    overflow: visible;
+  }
 }

@@ -33,6 +33,9 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
     const isButtonSelected = filtersListState?.[filterId] ?? false;
     const { totalCount, filterCount } = countActiveFilters(filters, buttonType);
     const buttonLabel = getFilterButtonLabel(filterButtonLabel, filterButtonLabelTranslated || null);
+    const isSortFilter = buttonType === FilterButtonType.Sort;
+    // Flag the Sort filter's wrapper so FiltersInline can align it to the right of the filter row on desktop.
+    const mediaClassName = isSortFilter ? `${px}-filters-inline__sort` : undefined;
 
     if (hideDesktopSortButton && buttonType === FilterButtonType.Sort) {
       return null;
@@ -40,7 +43,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
 
     return (
       <>
-        <SSRMediaQuery.Media lessThan={Breakpoints.md}>
+        <SSRMediaQuery.Media lessThan={Breakpoints.md} className={mediaClassName}>
           <FilterButton
             ref={ref}
             className={className}
@@ -78,7 +81,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
             />
           </Drawer>
         </SSRMediaQuery.Media>
-        <SSRMediaQuery.Media greaterThanOrEqual={Breakpoints.md}>
+        <SSRMediaQuery.Media greaterThanOrEqual={Breakpoints.md} className={mediaClassName}>
           <Popover.Root
             key={`${id}-${filterButtonLabel}-button`}
             open={isButtonSelected}
