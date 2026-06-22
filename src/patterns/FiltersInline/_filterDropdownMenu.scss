@@ -62,6 +62,7 @@ $dropdown-width: 320px;
 
   &__mobile-wrap {
     box-shadow: 0 -4px 8px -4px $medium-gray;
+    padding-bottom: calc(#{$spacing-sm} + env(safe-area-inset-bottom));
   }
 
   &__header {
@@ -95,6 +96,7 @@ $dropdown-width: 320px;
   &--mobile {
     border-radius: $radius-sm $radius-sm 0 0;
     box-shadow: none;
+    height: 100%;
     padding: 0;
     width: 100vw;
   }
@@ -128,7 +130,24 @@ $dropdown-width: 320px;
 }
 
 .#{$px}-filter-drawer-mobile {
+  height: min(70dvh, 640px);
   padding: 0;
+
+  .#{$px}-drawer__content {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0;
+  }
+
+  .#{$px}-filter-dropdown-menu__filters--mobile {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .#{$px}-filter-dropdown-menu__mobile-wrap {
+    flex: 0 0 auto;
+    margin-top: auto;
+  }
 }
 
 .#{$px}-filter-drawer {

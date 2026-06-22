@@ -7,7 +7,7 @@ import { FilterButton } from './FilterButton';
 import { FilterDropdownMenuDesktop } from './FilterDropdownMenuDesktop';
 import { FilterDropdownMenuMobile } from './FilterDropdownMenuMobile';
 import { FilterButtonType, type FilterButtonIconType, type FilterDropdownProps } from './types';
-import { countActiveFilters, getFilterButtonClickHandler, getFilterButtonLabel } from './utils';
+import { countActiveFilters, getFilterButtonClickHandler, getFilterButtonLabel, resetAllFilters } from './utils';
 export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropdownProps>(
   (
     {
@@ -59,7 +59,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
           <Drawer
             drawerOpenSide="bottom"
             isOpen={isButtonSelected}
-            onClose={getFilterButtonClickHandler(filtersListState, handleClick, filterId)}
+            onClose={() => resetAllFilters(filtersListState, handleClick)}
             aria-label={ariaLabels.drawer || `${filterButtonLabel} drawer`}
             className={`${px}-filter-drawer-mobile`}
             headerText={buttonLabel}

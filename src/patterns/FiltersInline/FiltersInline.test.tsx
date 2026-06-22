@@ -301,6 +301,29 @@ describe('SubFilterDropdown', () => {
     buttons.forEach((btn) => fireEvent.click(btn));
     expect(handleClick).toHaveBeenCalled();
   });
+
+  it('closes the mobile drawer when the overlay is clicked', () => {
+    render(
+      <SubFilterDropdown
+        id="sub-filter"
+        filterButtonLabel="Sort"
+        filterId={1}
+        buttonType={'Sort' as FilterButtonType}
+        handleClick={handleClick}
+        filtersListState={[false, true]}
+        filters={filters}
+        onSelectFilter={handleFilterSelection}
+        onApplyFilter={handleFilterUpdate}
+        onClickClear={clearFilterUpdate}
+        resultsCount={2}
+        ariaLabels={{ button: 'Sort Button' }}
+      />,
+    );
+
+    fireEvent.click(screen.getByTestId('drawer-overlay'));
+
+    expect(handleClick).toHaveBeenCalledWith([false, false]);
+  });
 });
 
 describe('FilterDropdownMenuDesktop non-sort buttons', () => {
