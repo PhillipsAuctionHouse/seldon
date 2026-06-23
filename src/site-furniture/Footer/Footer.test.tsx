@@ -104,7 +104,7 @@ describe('Footer with logoLinkComponent', () => {
     expect(logoLink).toBeInTheDocument();
     expect(logoLink).toHaveAttribute('data-custom-link');
     expect(logoLink).toHaveAttribute('href', '/');
-    expect(logoLink).toHaveAttribute('aria-label', 'logo');
+    expect(logoLink).toHaveAttribute('aria-label', 'logoLink');
   });
 
   it('passes logoHref to the custom link component', () => {
