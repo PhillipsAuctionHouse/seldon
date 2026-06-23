@@ -1,3 +1,10 @@
+# [1.270.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.269.0...v1.270.0) (2026-06-23)
+
+
+### Features
+
+* **footer,header:** add SPA support to header and footer ([17fbd92](https://github.com/PhillipsAuctionHouse/seldon/commit/17fbd92ae43b0f34ef01ba1e2398371506449c86))
+
 # [1.269.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.268.0...v1.269.0) (2026-06-18)
 
 
