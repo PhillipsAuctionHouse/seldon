@@ -150,15 +150,15 @@ describe('Header ref forwarding', () => {
   });
 });
 
-describe('Header with logoLinkElement', () => {
+describe('Header with logoLinkComponent', () => {
   const CustomLink = ({ children, ...props }: ComponentPropsWithoutRef<'a'>) => (
     <a data-custom-link {...props}>
       {children}
     </a>
   );
 
-  it('renders the custom link element when logoLinkElement is a React element', () => {
-    render(<Header logo={<Icon icon="PhillipsLogo" />} logoLinkElement={<CustomLink />} />);
+  it('renders the custom link component when logoLinkComponent is provided', () => {
+    render(<Header logo={<Icon icon="PhillipsLogo" />} logoLinkComponent={CustomLink} />);
 
     const logoElement = screen.getByTestId('header-logo');
     expect(logoElement).toBeInTheDocument();
@@ -167,11 +167,11 @@ describe('Header with logoLinkElement', () => {
     expect(logoElement).toHaveAttribute('aria-label', 'Home Page');
   });
 
-  it('passes logoHref and logoText to the custom link element', () => {
+  it('passes logoHref and logoText to the custom link component', () => {
     render(
       <Header
         logo={<Icon icon="PhillipsLogo" />}
-        logoLinkElement={<CustomLink />}
+        logoLinkComponent={CustomLink}
         logoHref="/custom-path"
         logoText="Custom Label"
       />,

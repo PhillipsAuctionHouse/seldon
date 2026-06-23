@@ -8,7 +8,6 @@ import React, {
   PropsWithChildren,
   ReactElement,
   useEffect,
-  useMemo,
   useState,
 } from 'react';
 import { Icon } from '../../components/Icon';
@@ -30,9 +29,9 @@ export interface HeaderProps extends ComponentProps<'header'> {
    */
   logoHref?: string;
   /**
-   * Logo link element to support SPA navigation links
+   * Logo link component to support SPA navigation (e.g. Remix <Link> or Next.js <Link>)
    */
-  logoLinkElement?: ReactElement<ComponentPropsWithoutRef<'a'> & { 'data-testid'?: string }>;
+  logoLinkComponent?: React.ComponentType<ComponentPropsWithoutRef<'a'>>;
   /**
    * Toggle open text
    */
@@ -107,7 +106,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     {
       logo = <Icon icon="PhillipsLogo" />,
       logoHref = '/',
-      logoLinkElement,
+      logoLinkComponent,
       className,
       children,
       toggleOpenText = 'Open Menu',
@@ -190,17 +189,9 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
       [ref],
     );
 
-    const logoElementProps = useMemo(
-      () => ({
-        href: logoHref,
-        'aria-label': logoText,
-        'data-testid': 'header-logo',
-        className: `${px}-header__logo`,
-        children:
-          typeof logo === 'object' ? logo : <img alt="Phillips" data-testid="header-logo-img" src={logo as string} />,
-      }),
-      [logoHref, logoText, logo],
-    );
+    const LogoLink = logoLinkComponent;
+    const logoContent =
+      typeof logo === 'object' ? logo : <img alt="Phillips" data-testid="header-logo-img" src={logo as string} />;
 
     return (
       <header
@@ -228,12 +219,14 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
           >
             <span /> {/** this is here so we can do transitions with pseudo icons */}
           </button>
-          {React.isValidElement(logoLinkElement) ? (
-            React.cloneElement(logoLinkElement, {
-              ...logoElementProps,
-            })
+          {LogoLink ? (
+            <LogoLink href={logoHref} aria-label={logoText} data-testid="header-logo" className={`${px}-header__logo`}>
+              {logoContent}
+            </LogoLink>
           ) : (
-            <a {...logoElementProps} />
+            <a href={logoHref} aria-label={logoText} data-testid="header-logo" className={`${px}-header__logo`}>
+              {logoContent}
+            </a>
           )}
           {userManagementElement}
         </div>

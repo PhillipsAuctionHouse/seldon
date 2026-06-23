@@ -18,16 +18,14 @@ const meta = {
 
 export default meta;
 
-export const WithCustomLinkElement = () => {
-  // Simulates a SPA router link (e.g. Remix <Link> or Next.js <Link>)
-  const RouterLink = ({ href, children, ...props }: React.ComponentPropsWithoutRef<'a'>) => (
-    <a href={href} data-router-link {...props}>
-      {children}
-    </a>
-  );
+// Simulates a SPA router link (e.g. Remix <Link> or Next.js <Link>)
+const RouterLink = ({ href, children, ...props }: React.ComponentPropsWithoutRef<'a'>) => (
+  <a href={href} data-router-link {...props}>
+    {children}
+  </a>
+);
 
-  return <Footer logoLinkElement={<RouterLink />} />;
-};
+export const WithCustomLinkElement = () => <Footer logoLinkComponent={RouterLink} />;
 
 export const Playground = (props: FooterProps) => (
   <Footer {...props}>

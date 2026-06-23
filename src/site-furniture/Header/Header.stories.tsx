@@ -111,23 +111,21 @@ const meta = {
 
 export default meta;
 
-export const WithCustomLinkElement = () => {
-  // Simulates a SPA router link (e.g. Remix <Link> or Next.js <Link>)
-  const RouterLink = ({ href, children, ...props }: React.ComponentPropsWithoutRef<'a'>) => (
-    <a href={href} data-router-link {...props}>
-      {children}
-    </a>
-  );
+// Simulates a SPA router link (e.g. Remix <Link> or Next.js <Link>)
+const RouterLink = ({ href, children, ...props }: React.ComponentPropsWithoutRef<'a'>) => (
+  <a href={href} data-router-link {...props}>
+    {children}
+  </a>
+);
 
-  return (
-    <div style={{ minHeight: '200px' }}>
-      <Header logo={<Icon icon="PhillipsLogo" />} logoLinkElement={<RouterLink />} />
-      <main id="main" style={{ padding: '1rem' }}>
-        <p>Logo link rendered via a custom link element (e.g. a SPA router&apos;s Link component).</p>
-      </main>
-    </div>
-  );
-};
+export const WithCustomLinkElement = () => (
+  <div style={{ minHeight: '200px' }}>
+    <Header logo={<Icon icon="PhillipsLogo" />} logoLinkComponent={RouterLink} />
+    <main id="main" style={{ padding: '1rem' }}>
+      <p>Logo link rendered via a custom link component (e.g. a SPA router&apos;s Link component).</p>
+    </main>
+  </div>
+);
 
 export const Playground = ({ authState, ...props }: HeaderProps & { authState?: AuthState }) => {
   const [currentLanguage, setCurrentLanguage] = useState(SupportedLanguages.en);

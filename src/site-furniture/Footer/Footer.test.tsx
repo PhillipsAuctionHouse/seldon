@@ -83,22 +83,22 @@ describe('Footer', () => {
   });
 });
 
-describe('Footer with logoLinkElement', () => {
+describe('Footer with logoLinkComponent', () => {
   const CustomLink = ({ children, ...props }: ComponentPropsWithoutRef<'a'>) => (
     <a data-custom-link {...props}>
       {children}
     </a>
   );
 
-  it('renders the default anchor logo link when no logoLinkElement is provided', () => {
+  it('renders the default anchor logo link when no logoLinkComponent is provided', () => {
     render(<Footer />);
     const logoLink = screen.getByTestId('footer-logo');
     expect(logoLink.tagName).toBe('A');
     expect(logoLink).toHaveAttribute('href', '/');
   });
 
-  it('renders a custom link element when logoLinkElement is a React element', () => {
-    render(<Footer logoLinkElement={<CustomLink />} />);
+  it('renders a custom link component when logoLinkComponent is provided', () => {
+    render(<Footer logoLinkComponent={CustomLink} />);
 
     const logoLink = screen.getByTestId('footer-logo');
     expect(logoLink).toBeInTheDocument();
@@ -107,8 +107,8 @@ describe('Footer with logoLinkElement', () => {
     expect(logoLink).toHaveAttribute('aria-label', 'logo');
   });
 
-  it('passes logoHref to the custom link element', () => {
-    render(<Footer logoLinkElement={<CustomLink />} logoHref="/custom-path" />);
+  it('passes logoHref to the custom link component', () => {
+    render(<Footer logoLinkComponent={CustomLink} logoHref="/custom-path" />);
 
     const logoLink = screen.getByTestId('footer-logo');
     expect(logoLink).toHaveAttribute('href', '/custom-path');

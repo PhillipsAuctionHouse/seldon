@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { cloneElement, ComponentPropsWithoutRef, isValidElement, ReactElement } from 'react';
+import { ComponentPropsWithoutRef, ComponentType } from 'react';
 
 import { defaultYear, px } from '../../utils';
 import { Text, TextVariants } from '../../components/Text';
@@ -15,9 +15,9 @@ export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
    */
   logoHref?: string;
   /**
-   * Logo link element to support SPA navigation links
+   * Logo link component to support SPA navigation (e.g. Remix <Link> or Next.js <Link>)
    */
-  logoLinkElement?: ReactElement<ComponentPropsWithoutRef<'a'> & { 'data-testid'?: string }>;
+  logoLinkComponent?: ComponentType<ComponentPropsWithoutRef<'a'>>;
 }
 
 /**
@@ -36,21 +36,23 @@ const Footer = ({
   copyright = `© ${defaultYear} Phillips Auctioneers, LLC`,
   id,
   logoHref = '/',
-  logoLinkElement,
+  logoLinkComponent,
 }: FooterProps) => {
-  const logoProps = {
-    href: logoHref,
-    'aria-label': 'logo',
-    'data-testid': 'footer-logo',
-    className: `${px}-footer__logo`,
-    children: <Icon icon="PhillipsLogo" width="94px" />,
-  };
+  const LogoLink = logoLinkComponent;
 
   return (
     <footer data-testid={id ? id : `footer`} id={id} className={classnames(`${px}-footer`, { className })}>
       <div className={`${px}-footer__links`}>{children}</div>
       <div className={`${px}-footer__copyright`}>
-        {isValidElement(logoLinkElement) ? cloneElement(logoLinkElement, { ...logoProps }) : <a {...logoProps} />}
+        {LogoLink ? (
+          <LogoLink href={logoHref} aria-label="logo" data-testid="footer-logo" className={`${px}-footer__logo`}>
+            <Icon icon="PhillipsLogo" width="94px" />
+          </LogoLink>
+        ) : (
+          <a href={logoHref} aria-label="logo" data-testid="footer-logo" className={`${px}-footer__logo`}>
+            <Icon icon="PhillipsLogo" width="94px" />
+          </a>
+        )}
         <Text variant={TextVariants.bodySmall}>{copyright}</Text>
       </div>
     </footer>
