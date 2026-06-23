@@ -1,4 +1,5 @@
 import type { Meta } from '@storybook/react-vite';
+import React from 'react';
 
 import Footer, { FooterProps } from './Footer';
 import { px } from '../../utils';
@@ -16,6 +17,17 @@ const meta = {
 } satisfies Meta<typeof Footer>;
 
 export default meta;
+
+export const WithCustomLinkElement = () => {
+  // Simulates a SPA router link (e.g. Remix <Link> or Next.js <Link>)
+  const RouterLink = ({ href, children, ...props }: React.ComponentPropsWithoutRef<'a'>) => (
+    <a href={href} data-router-link {...props}>
+      {children}
+    </a>
+  );
+
+  return <Footer logoLinkElement={<RouterLink />} />;
+};
 
 export const Playground = (props: FooterProps) => (
   <Footer {...props}>

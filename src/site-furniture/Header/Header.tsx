@@ -8,6 +8,7 @@ import React, {
   PropsWithChildren,
   ReactElement,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import { Icon } from '../../components/Icon';
@@ -189,6 +190,18 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
       [ref],
     );
 
+    const logoElementProps = useMemo(
+      () => ({
+        href: logoHref,
+        'aria-label': logoText,
+        'data-testid': 'header-logo',
+        className: `${px}-header__logo`,
+        children:
+          typeof logo === 'object' ? logo : <img alt="Phillips" data-testid="header-logo-img" src={logo as string} />,
+      }),
+      [logoHref, logoText, logo],
+    );
+
     return (
       <header
         {...props}
@@ -215,20 +228,13 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
           >
             <span /> {/** this is here so we can do transitions with pseudo icons */}
           </button>
-          {React.isValidElement(logoLinkElement)
-            ? React.cloneElement(logoLinkElement, {
-                href: logoHref,
-                'aria-label': logoText,
-                'data-testid': 'header-logo',
-                className: `${px}-header__logo`,
-                children:
-                  typeof logo === 'object' ? (
-                    logo
-                  ) : (
-                    <img alt="Phillips" data-testid="header-logo-img" src={logo as string} />
-                  ),
-              })
-            : null}
+          {React.isValidElement(logoLinkElement) ? (
+            React.cloneElement(logoLinkElement, {
+              ...logoElementProps,
+            })
+          ) : (
+            <a {...logoElementProps} />
+          )}
           {userManagementElement}
         </div>
         <div className={classnames(`${px}-header__nav`, { [`${px}-header__nav--closed`]: !isMenuOpen })}>
