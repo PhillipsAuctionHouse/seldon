@@ -111,6 +111,22 @@ const meta = {
 
 export default meta;
 
+// Simulates a SPA router link (e.g. Remix <Link> or Next.js <Link>)
+const RouterLink = ({ href, children, ...props }: React.ComponentPropsWithoutRef<'a'>) => (
+  <a href={href} data-router-link {...props}>
+    {children}
+  </a>
+);
+
+export const WithCustomLinkElement = () => (
+  <div style={{ minHeight: '200px' }}>
+    <Header logo={<Icon icon="PhillipsLogo" />} logoLinkComponent={RouterLink} />
+    <main id="main" style={{ padding: '1rem' }}>
+      <p>Logo link rendered via a custom link component (e.g. a SPA router&apos;s Link component).</p>
+    </main>
+  </div>
+);
+
 export const Playground = ({ authState, ...props }: HeaderProps & { authState?: AuthState }) => {
   const [currentLanguage, setCurrentLanguage] = useState(SupportedLanguages.en);
   return (

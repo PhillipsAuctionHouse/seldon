@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import { ComponentPropsWithoutRef, ComponentType } from 'react';
 
 import { defaultYear, px } from '../../utils';
 import { Text, TextVariants } from '../../components/Text';
@@ -9,6 +10,14 @@ export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
    * Copyright data added to bottom of site
    */
   copyright?: string;
+  /**
+   * Logo href
+   */
+  logoHref?: string;
+  /**
+   * Logo link component to support SPA navigation (e.g. Remix <Link> or Next.js <Link>)
+   */
+  logoLinkComponent?: ComponentType<ComponentPropsWithoutRef<'a'>>;
 }
 
 /**
@@ -26,14 +35,24 @@ const Footer = ({
   className,
   copyright = `© ${defaultYear} Phillips Auctioneers, LLC`,
   id,
+  logoHref = '/',
+  logoLinkComponent,
 }: FooterProps) => {
+  const LogoLink = logoLinkComponent;
+
   return (
     <footer data-testid={id ? id : `footer`} id={id} className={classnames(`${px}-footer`, { className })}>
       <div className={`${px}-footer__links`}>{children}</div>
       <div className={`${px}-footer__copyright`}>
-        <a href="/" aria-label="logo" data-testid="footer-logo" className={`${px}-footer__logo`}>
-          <Icon icon="PhillipsLogo" width="94px" />
-        </a>
+        {LogoLink ? (
+          <LogoLink href={logoHref} aria-label="logoLink" data-testid="footer-logo" className={`${px}-footer__logo`}>
+            <Icon icon="PhillipsLogo" width="94px" />
+          </LogoLink>
+        ) : (
+          <a href={logoHref} aria-label="logo" data-testid="footer-logo" className={`${px}-footer__logo`}>
+            <Icon icon="PhillipsLogo" width="94px" />
+          </a>
+        )}
         <Text variant={TextVariants.bodySmall}>{copyright}</Text>
       </div>
     </footer>
