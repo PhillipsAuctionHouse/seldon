@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import { ComponentPropsWithoutRef } from 'react';
-// import { userEvent } from '@testing-library/user-event';
 
 import Footer from './Footer';
 import Social from '../../patterns/Social/Social';
