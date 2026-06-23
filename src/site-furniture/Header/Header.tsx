@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import React, {
   Component,
   ComponentProps,
+  ComponentPropsWithoutRef,
   createContext,
   forwardRef,
   PropsWithChildren,
@@ -27,6 +28,10 @@ export interface HeaderProps extends ComponentProps<'header'> {
    * Logo href
    */
   logoHref?: string;
+  /**
+   * Logo link element to support SPA navigation links
+   */
+  logoLinkElement?: ReactElement<ComponentPropsWithoutRef<'a'> & { 'data-testid'?: string }>;
   /**
    * Toggle open text
    */
@@ -101,6 +106,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     {
       logo = <Icon icon="PhillipsLogo" />,
       logoHref = '/',
+      logoLinkElement = 'a',
       className,
       children,
       toggleOpenText = 'Open Menu',
@@ -209,13 +215,20 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
           >
             <span /> {/** this is here so we can do transitions with pseudo icons */}
           </button>
-          <a href={logoHref} aria-label={logoText} data-testid="header-logo" className={`${px}-header__logo`}>
-            {typeof logo === 'object' ? (
-              logo
-            ) : (
-              <img alt="Phillips" data-testid="header-logo-img" src={logo as string} />
-            )}
-          </a>
+          {React.isValidElement(logoLinkElement)
+            ? React.cloneElement(logoLinkElement, {
+                href: logoHref,
+                'aria-label': logoText,
+                'data-testid': 'header-logo',
+                className: `${px}-header__logo`,
+                children:
+                  typeof logo === 'object' ? (
+                    logo
+                  ) : (
+                    <img alt="Phillips" data-testid="header-logo-img" src={logo as string} />
+                  ),
+              })
+            : null}
           {userManagementElement}
         </div>
         <div className={classnames(`${px}-header__nav`, { [`${px}-header__nav--closed`]: !isMenuOpen })}>
