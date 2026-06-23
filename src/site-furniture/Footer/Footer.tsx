@@ -45,7 +45,7 @@ const Footer = ({
       <div className={`${px}-footer__links`}>{children}</div>
       <div className={`${px}-footer__copyright`}>
         {LogoLink ? (
-          <LogoLink href={logoHref} aria-label="logo" data-testid="footer-logo" className={`${px}-footer__logo`}>
+          <LogoLink href={logoHref} aria-label="logoLink" data-testid="footer-logo" className={`${px}-footer__logo`}>
             <Icon icon="PhillipsLogo" width="94px" />
           </LogoLink>
         ) : (
