@@ -107,7 +107,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     {
       logo = <Icon icon="PhillipsLogo" />,
       logoHref = '/',
-      logoLinkElement = 'a',
+      logoLinkElement,
       className,
       children,
       toggleOpenText = 'Open Menu',
