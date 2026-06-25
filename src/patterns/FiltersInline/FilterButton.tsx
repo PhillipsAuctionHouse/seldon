@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import React from 'react';
 import Button from '../../components/Button/Button';
-import { ButtonVariants } from '../../components/Button/types';
+import { ButtonSizes, ButtonVariants } from '../../components/Button/types';
 import { Icon } from '../../components/Icon';
 import { Text, TextVariants } from '../../components/Text';
 import { px } from '../../utils';
@@ -47,6 +47,7 @@ export const FilterButton = React.forwardRef<HTMLButtonElement, FilterButton>(
       })}
       aria-label={ariaLabel}
       variant={ButtonVariants.secondary}
+      size={ButtonSizes.small}
       data-testid={`${id}-filter-button`}
       data-viewport={isMobile ? 'mobile' : 'desktop'}
       onClick={onClick}
