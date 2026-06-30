@@ -23,6 +23,7 @@ export { default as ArrowRight } from './ArrowRight';
 export { default as ArrowUp } from './ArrowUp';
 export { default as Bag } from './Bag';
 export { default as Calendar } from './Calendar';
+export { default as Card } from './Card';
 export { default as ChevronDown } from './ChevronDown';
 export { default as ChevronLeft } from './ChevronLeft';
 export { default as ChevronRight } from './ChevronRight';
