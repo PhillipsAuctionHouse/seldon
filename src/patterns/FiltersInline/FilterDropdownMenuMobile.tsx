@@ -7,7 +7,7 @@ import Text from '../../components/Text/Text';
 import { TextVariants } from '../../components/Text/types';
 import { px } from '../../utils';
 import { FilterDimension, FilterDropdownMenuProps } from './types';
-import { getFilterDimensions, handleInputChange as handleInputChangeUtil } from './utils';
+import { getFilterDimensions, handleInputChange as handleInputChangeUtil, hasActiveDimensions } from './utils';
 
 export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterDropdownMenuProps>(
   (
@@ -28,7 +28,7 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
     const isSortButton = buttonType === 'Sort';
     const baseClassName = `${px}-filter-dropdown-menu`;
     const filterDimensions = getFilterDimensions(filters, filterIndex);
-    const hasActiveFilters = filterDimensions.some((dimension) => dimension.active);
+    const hasActiveFilters = hasActiveDimensions(filters, buttonType, filterIndex);
 
     return (
       <div

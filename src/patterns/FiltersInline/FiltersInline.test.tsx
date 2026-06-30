@@ -7,7 +7,7 @@ import FiltersInline from './FiltersInline';
 import { MainFilterDropdown } from './MainFilterDropdown';
 import { SubFilterDropdown } from './SubFilterDropdown';
 import { FilterButtonIconType, FilterButtonType, FilterType } from './types';
-import { getFilterButtonClickHandler, handleInputChange, resetAllFilters } from './utils';
+import { getFilterButtonClickHandler, handleInputChange, hasActiveDimensions, resetAllFilters } from './utils';
 
 describe('FiltersInline', () => {
   runCommonTests(FiltersInline, 'FiltersInline');
@@ -488,6 +488,31 @@ describe('getFilterButtonClickHandler', () => {
     const handler = getFilterButtonClickHandler(mockState, undefined, 0);
 
     handler();
+  });
+});
+
+describe('hasActiveDimensions', () => {
+  const filters: FilterType[] = [
+    {
+      label: 'Sale',
+      id: 'Sale',
+      type: 'checkbox' as const,
+      buttonType: FilterButtonType.Sale,
+      filterDimensions: new Set([{ label: 'Online Auction', active: false }]),
+    },
+    {
+      label: 'Departments',
+      id: 'Departments',
+      type: 'checkbox' as const,
+      buttonType: FilterButtonType.Departments,
+      filterDimensions: new Set([{ label: 'Design', active: true }]),
+    },
+  ];
+
+  it('checks active dimensions by filter id', () => {
+    expect(hasActiveDimensions(filters, 'Sale')).toBe(false);
+    expect(hasActiveDimensions(filters, 'Departments')).toBe(true);
+    expect(hasActiveDimensions(filters, 'Location')).toBe(false);
   });
 });
 

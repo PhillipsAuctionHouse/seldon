@@ -120,6 +120,20 @@ export const countActiveFilters = (
   return { totalCount, filterCount };
 };
 
+export const hasActiveDimensions = (
+  filters: { id?: string; filterDimensions: Set<FilterDimension> }[] | undefined,
+  buttonType?: string,
+  filterIndex?: number,
+): boolean => {
+  if (!filters) return false;
+
+  const filterDimensions =
+    filters.find((filter) => filter.id === buttonType)?.filterDimensions ??
+    (typeof filterIndex === 'number' ? filters[filterIndex - 1]?.filterDimensions : undefined);
+
+  return filterDimensions ? Array.from(filterDimensions).some((dimension) => dimension.active) : false;
+};
+
 // Helper function to get filter dimensions safely
 export const getFilterDimensions = (
   filters: { filterDimensions: Set<FilterDimension> }[] | undefined,
