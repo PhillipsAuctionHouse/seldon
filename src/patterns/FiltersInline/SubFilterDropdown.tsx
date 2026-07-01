@@ -7,7 +7,7 @@ import { FilterButton } from './FilterButton';
 import { FilterDropdownMenuDesktop } from './FilterDropdownMenuDesktop';
 import { FilterDropdownMenuMobile } from './FilterDropdownMenuMobile';
 import { FilterButtonType, type FilterButtonIconType, type FilterDropdownProps } from './types';
-import { countActiveFilters, getFilterButtonClickHandler, getFilterButtonLabel } from './utils';
+import { countActiveFilters, getFilterButtonClickHandler, getFilterButtonLabel, resetAllFilters } from './utils';
 export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropdownProps>(
   (
     {
@@ -33,6 +33,8 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
     const isButtonSelected = filtersListState?.[filterId] ?? false;
     const { totalCount, filterCount } = countActiveFilters(filters, buttonType);
     const buttonLabel = getFilterButtonLabel(filterButtonLabel, filterButtonLabelTranslated || null);
+    const isSortFilter = buttonType === FilterButtonType.Sort;
+    const mediaClassName = isSortFilter ? `${px}-filters-inline__sort` : undefined;
 
     if (hideDesktopSortButton && buttonType === FilterButtonType.Sort) {
       return null;
@@ -40,7 +42,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
 
     return (
       <>
-        <SSRMediaQuery.Media lessThan={Breakpoints.md}>
+        <SSRMediaQuery.Media lessThan={Breakpoints.md} className={mediaClassName}>
           <FilterButton
             ref={ref}
             className={className}
@@ -57,7 +59,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
           <Drawer
             drawerOpenSide="bottom"
             isOpen={isButtonSelected}
-            onClose={getFilterButtonClickHandler(filtersListState, handleClick, filterId)}
+            onClose={() => resetAllFilters(filtersListState, handleClick)}
             aria-label={ariaLabels.drawer || `${filterButtonLabel} drawer`}
             className={`${px}-filter-drawer-mobile`}
             headerText={buttonLabel}
@@ -78,7 +80,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
             />
           </Drawer>
         </SSRMediaQuery.Media>
-        <SSRMediaQuery.Media greaterThanOrEqual={Breakpoints.md}>
+        <SSRMediaQuery.Media greaterThanOrEqual={Breakpoints.md} className={mediaClassName}>
           <Popover.Root
             key={`${id}-${filterButtonLabel}-button`}
             open={isButtonSelected}

@@ -1,11 +1,11 @@
 import classnames from 'classnames';
 import React from 'react';
 import Button from '../../components/Button/Button';
-import { ButtonVariants } from '../../components/Button/types';
+import { ButtonSizes, ButtonVariants } from '../../components/Button/types';
 import FilterInput from '../../components/Filter/FilterInput';
 import { px } from '../../utils';
 import { FilterDimension, FilterDropdownMenuProps } from './types';
-import { getFilterDimensions, handleInputChange as handleInputChangeUtil } from './utils';
+import { getFilterDimensions, handleInputChange as handleInputChangeUtil, hasActiveDimensions } from './utils';
 
 export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, FilterDropdownMenuProps>(
   (
@@ -25,6 +25,8 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
   ) => {
     const isSortButton = buttonType === 'Sort';
     const baseClassName = `${px}-filter-dropdown-menu`;
+    const filterDimensions = getFilterDimensions(filters, filterIndex);
+    const hasActiveFilters = hasActiveDimensions(filters, buttonType, filterIndex);
 
     return (
       <div
@@ -34,7 +36,7 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
         aria-label={ariaLabels || `${buttonType} dropdown desktop`}
       >
         <div className={classnames(`${baseClassName}__filters`)}>
-          {getFilterDimensions(filters, filterIndex).map((value: FilterDimension) => (
+          {filterDimensions.map((value: FilterDimension) => (
             <FilterInput
               id={value.label}
               key={value.label}
@@ -52,6 +54,7 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
             <Button
               className={classnames(`${baseClassName}__button`)}
               variant={ButtonVariants.primary}
+              size={ButtonSizes.small}
               onClick={() => onApplyFilter?.(false)}
             >
               <span className={`${baseClassName}__button-text`}>{dropdownMenuTranslation?.confirm || 'Confirm'}</span>
@@ -59,17 +62,14 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
           ) : (
             <>
               <Button
-                className={classnames(`${baseClassName}__buttons`)}
                 variant={ButtonVariants.secondary}
+                size={ButtonSizes.small}
+                isDisabled={!hasActiveFilters}
                 onClick={() => onClickClear?.(buttonType ?? '')}
               >
                 {dropdownMenuTranslation?.clearAll || 'Clear all'}
               </Button>
-              <Button
-                className={classnames(`${baseClassName}__buttons`)}
-                variant={ButtonVariants.primary}
-                onClick={() => onApplyFilter?.(false)}
-              >
+              <Button variant={ButtonVariants.primary} size={ButtonSizes.small} onClick={() => onApplyFilter?.(false)}>
                 <span className={`${baseClassName}__button-text`}>
                   {dropdownMenuTranslation?.showAuctions || `Show ${resultsCount} Auctions`}
                 </span>

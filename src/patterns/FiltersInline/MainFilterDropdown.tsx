@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import React from 'react';
 import Button from '../../components/Button/Button';
-import { ButtonVariants } from '../../components/Button/types';
+import { ButtonSizes, ButtonVariants } from '../../components/Button/types';
 import Drawer from '../../components/Drawer/Drawer';
 import Filter from '../../components/Filter/Filter';
 import FilterHeader from '../../components/Filter/FilterHeader';
@@ -81,13 +81,14 @@ export const MainFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDrop
             )}
           >
             <Button
-              className={`${px}-filter-dropdown-menu__button`}
               variant={ButtonVariants.secondary}
+              size={ButtonSizes.small}
+              isDisabled={totalCount === 0}
               onClick={() => onClickClear?.('all')}
             >
               {dropdownMenuTranslation?.clearAll || 'Clear all'}
             </Button>
-            <Button className={`${px}-filter-dropdown-menu__button`} onClick={() => onApplyFilter?.(false)}>
+            <Button size={ButtonSizes.small} onClick={() => onApplyFilter?.(false)}>
               {dropdownMenuTranslation?.showAuctions || `Show ${resultsCount} Auctions`}
             </Button>
           </div>

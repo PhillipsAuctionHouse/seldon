@@ -4,6 +4,28 @@
   display: flex;
   flex-wrap: wrap;
   gap: $spacing-sm;
+
+  // Desktop: align the Sort filter (and anything following it) to the right of the filter row.
+  @include media($breakpoint-md) {
+    > .#{$px}-filters-inline__sort {
+      margin-left: auto;
+    }
+  }
+
+  // Mobile: filter buttons scroll horizontally and overflow off-screen instead of wrapping.
+  @include media($breakpoint-md, 'max') {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    > * {
+      flex: 0 0 auto;
+    }
+  }
 }
 
 .#{$px}-filter-drawer {
