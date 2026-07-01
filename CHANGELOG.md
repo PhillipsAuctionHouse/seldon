@@ -1,3 +1,18 @@
+# [1.271.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.270.0...v1.271.0) (2026-06-30)
+
+
+### Features
+
+* **Icon:** L3-13111 add Card icon ([#888](https://github.com/PhillipsAuctionHouse/seldon/issues/888)) ([49fa67e](https://github.com/PhillipsAuctionHouse/seldon/commit/49fa67e75b652c1d7431f7c431cebb53eacc1c51))
+* **Icon:** L3-13111 add Card icon ([#888](https://github.com/PhillipsAuctionHouse/seldon/issues/888)) ([254a528](https://github.com/PhillipsAuctionHouse/seldon/commit/254a5286dd6b0e54cd0fc705e32b0e4b7a304a82))
+
+# [1.270.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.269.0...v1.270.0) (2026-06-23)
+
+
+### Features
+
+* **footer,header:** add SPA support to header and footer ([17fbd92](https://github.com/PhillipsAuctionHouse/seldon/commit/17fbd92ae43b0f34ef01ba1e2398371506449c86))
+
 # [1.269.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.268.0...v1.269.0) (2026-06-18)
 
 

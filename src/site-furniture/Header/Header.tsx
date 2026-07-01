@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import React, {
   Component,
   ComponentProps,
+  ComponentPropsWithoutRef,
   createContext,
   forwardRef,
   PropsWithChildren,
@@ -27,6 +28,10 @@ export interface HeaderProps extends ComponentProps<'header'> {
    * Logo href
    */
   logoHref?: string;
+  /**
+   * Logo link component to support SPA navigation (e.g. Remix <Link> or Next.js <Link>)
+   */
+  logoLinkComponent?: React.ComponentType<ComponentPropsWithoutRef<'a'>>;
   /**
    * Toggle open text
    */
@@ -101,6 +106,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     {
       logo = <Icon icon="PhillipsLogo" />,
       logoHref = '/',
+      logoLinkComponent,
       className,
       children,
       toggleOpenText = 'Open Menu',
@@ -183,6 +189,10 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
       [ref],
     );
 
+    const LogoLink = logoLinkComponent;
+    const logoContent =
+      typeof logo === 'object' ? logo : <img alt="Phillips" data-testid="header-logo-img" src={logo as string} />;
+
     return (
       <header
         {...props}
@@ -209,13 +219,15 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
           >
             <span /> {/** this is here so we can do transitions with pseudo icons */}
           </button>
-          <a href={logoHref} aria-label={logoText} data-testid="header-logo" className={`${px}-header__logo`}>
-            {typeof logo === 'object' ? (
-              logo
-            ) : (
-              <img alt="Phillips" data-testid="header-logo-img" src={logo as string} />
-            )}
-          </a>
+          {LogoLink ? (
+            <LogoLink href={logoHref} aria-label={logoText} data-testid="header-logo" className={`${px}-header__logo`}>
+              {logoContent}
+            </LogoLink>
+          ) : (
+            <a href={logoHref} aria-label={logoText} data-testid="header-logo" className={`${px}-header__logo`}>
+              {logoContent}
+            </a>
+          )}
           {userManagementElement}
         </div>
         <div className={classnames(`${px}-header__nav`, { [`${px}-header__nav--closed`]: !isMenuOpen })}>

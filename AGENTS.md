@@ -19,6 +19,12 @@ Start here, then read only the focused docs you need:
 
 ---
 
+## Pull requests
+
+When creating a pull request, always populate the body using `.github/PULL_REQUEST_TEMPLATE.MD` as the structure. Fill in every section — do not leave placeholder text. For sections that genuinely do not apply (e.g. Figma link for a non-visual change), write "N/A" with a brief reason rather than omitting them.
+
+---
+
 ## Core rules
 
 - Keep `ts/tsx/js/jsx` files under 200 lines — split if a file grows past that

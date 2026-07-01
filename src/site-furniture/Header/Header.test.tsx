@@ -1,6 +1,6 @@
 import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { useRef } from 'react';
+import { ComponentPropsWithoutRef, useRef } from 'react';
 import { Icon } from '../../components/Icon';
 import { LinkVariants } from '../../components/Link/types';
 import Navigation from '../../components/Navigation/Navigation';
@@ -136,7 +136,7 @@ describe('useMobileMenu', () => {
 
 describe('Header ref forwarding', () => {
   it('calls callback ref with header element when ref is a function', () => {
-    const refCallback = vitest.fn();
+    const refCallback = vi.fn();
     render(<Header logo={<Icon icon="PhillipsLogo" />} ref={refCallback} />);
     expect(refCallback).toHaveBeenCalledWith(expect.anything());
     expect(refCallback.mock.calls[0][0]?.tagName).toBe('HEADER');
@@ -147,6 +147,39 @@ describe('Header ref forwarding', () => {
     render(<Header logo={<Icon icon="PhillipsLogo" />} ref={refObj} />);
     expect(refObj.current).not.toBeNull();
     expect(refObj.current?.tagName).toBe('HEADER');
+  });
+});
+
+describe('Header with logoLinkComponent', () => {
+  const CustomLink = ({ children, ...props }: ComponentPropsWithoutRef<'a'>) => (
+    <a data-custom-link {...props}>
+      {children}
+    </a>
+  );
+
+  it('renders the custom link component when logoLinkComponent is provided', () => {
+    render(<Header logo={<Icon icon="PhillipsLogo" />} logoLinkComponent={CustomLink} />);
+
+    const logoElement = screen.getByTestId('header-logo');
+    expect(logoElement).toBeInTheDocument();
+    expect(logoElement).toHaveAttribute('data-custom-link');
+    expect(logoElement).toHaveAttribute('href', '/');
+    expect(logoElement).toHaveAttribute('aria-label', 'Home Page');
+  });
+
+  it('passes logoHref and logoText to the custom link component', () => {
+    render(
+      <Header
+        logo={<Icon icon="PhillipsLogo" />}
+        logoLinkComponent={CustomLink}
+        logoHref="/custom-path"
+        logoText="Custom Label"
+      />,
+    );
+
+    const logoElement = screen.getByRole('link', { name: 'Custom Label' });
+    expect(logoElement).toHaveAttribute('href', '/custom-path');
+    expect(logoElement).toHaveAttribute('data-custom-link');
   });
 });
 
