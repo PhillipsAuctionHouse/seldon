@@ -1,3 +1,10 @@
+# [1.272.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.271.0...v1.272.0) (2026-07-01)
+
+
+### Features
+
+* **FiltersInline:** PDD-289 update editorial hub filters ([#883](https://github.com/PhillipsAuctionHouse/seldon/issues/883)) ([ac98c85](https://github.com/PhillipsAuctionHouse/seldon/commit/ac98c85ca033a45c222f8b85286197c40857ff9e))
+
 # [1.271.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.270.0...v1.271.0) (2026-06-30)
 
 
