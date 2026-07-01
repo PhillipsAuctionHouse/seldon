@@ -14,7 +14,8 @@
     flex-direction: column;
     justify-content: space-between;
     max-width: none;
-    padding: $spacing-lg 0;
+    // No legacy spacing token maps to the requested 24px vertical padding.
+    padding: 24px 0;
 
     h1 {
       white-space: nowrap;
@@ -33,7 +34,8 @@
 
     @include media($breakpoint-md) {
       flex-direction: row;
-      padding-block: $spacing-xl;
+      // No legacy spacing token maps to the requested 32px vertical padding.
+      padding-block: 32px;
 
       h1,
       p,
