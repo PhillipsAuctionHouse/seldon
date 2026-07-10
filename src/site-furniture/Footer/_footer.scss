@@ -104,22 +104,13 @@
         &__text {
           @include text($linkStylised);
 
-          text-transform: uppercase;
+          // Sentence case: cancel the uppercase baked into linkStylised
+          text-transform: none;
         }
       }
 
       &__border-bottom {
         border-bottom: 1px solid $grey-50;
-      }
-    }
-  }
-
-  &-mobile {
-    .#{$px}-accordion-item {
-      &-label__text {
-        @include text($linkStylised);
-
-        text-transform: uppercase;
       }
     }
   }

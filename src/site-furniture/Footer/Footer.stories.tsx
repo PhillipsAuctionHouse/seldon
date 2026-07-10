@@ -45,13 +45,13 @@ export const Playground = (props: FooterProps) => (
 
     {/* mobile version of footer */}
     <Accordion className={`${px}-footer-mobile`}>
-      <AccordionItem isLocked={false} label="About Us" key="accordion-key-about-us" id="accordion-item-about-us">
+      <AccordionItem isLocked={false} label="About us" key="accordion-key-about-us" id="accordion-item-about-us">
         {aboutUsLinks}
       </AccordionItem>
 
       <AccordionItem
         isLocked={false}
-        label="Our Services"
+        label="Our services"
         key="accordion-key-our-services"
         id="accordion-item-our-services"
       >
