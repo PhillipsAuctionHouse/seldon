@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import React from 'react';
 import Button from '../../components/Button/Button';
-import { ButtonSizes, ButtonVariants } from '../../components/Button/types';
+import { ButtonVariants } from '../../components/Button/types';
 import FilterInput from '../../components/Filter/FilterInput';
 import { px } from '../../utils';
 import { FilterDimension, FilterDropdownMenuProps } from './types';
@@ -45,38 +45,27 @@ export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, Filter
               type={isSortButton ? 'radio' : 'checkbox'}
               checked={value.active}
               disabled={value?.disabled}
-              onChange={(e) => handleInputChangeUtil(e, buttonType ?? '', onSelectFilter)}
+              onChange={(e) => handleInputChangeUtil(e, buttonType ?? '', onSelectFilter, 'dropdown')}
             />
           ))}
         </div>
-        <div className={classnames(isSortButton ? `${baseClassName}__button-wrap` : `${baseClassName}__buttons-wrap`)}>
-          {isSortButton ? (
+        {/* Sort applies on selection, so the sort dropdown renders no action buttons. */}
+        {!isSortButton && (
+          <div className={classnames(`${baseClassName}__buttons-wrap`)}>
             <Button
-              className={classnames(`${baseClassName}__button`)}
-              variant={ButtonVariants.primary}
-              size={ButtonSizes.small}
-              onClick={() => onApplyFilter?.(false)}
+              variant={ButtonVariants.secondary}
+              isDisabled={!hasActiveFilters}
+              onClick={() => onClickClear?.(buttonType ?? '')}
             >
-              <span className={`${baseClassName}__button-text`}>{dropdownMenuTranslation?.confirm || 'Confirm'}</span>
+              {dropdownMenuTranslation?.clearAll || 'Clear all'}
             </Button>
-          ) : (
-            <>
-              <Button
-                variant={ButtonVariants.secondary}
-                size={ButtonSizes.small}
-                isDisabled={!hasActiveFilters}
-                onClick={() => onClickClear?.(buttonType ?? '')}
-              >
-                {dropdownMenuTranslation?.clearAll || 'Clear all'}
-              </Button>
-              <Button variant={ButtonVariants.primary} size={ButtonSizes.small} onClick={() => onApplyFilter?.(false)}>
-                <span className={`${baseClassName}__button-text`}>
-                  {dropdownMenuTranslation?.showAuctions || `Show ${resultsCount} Auctions`}
-                </span>
-              </Button>
-            </>
-          )}
-        </div>
+            <Button variant={ButtonVariants.primary} onClick={() => onApplyFilter?.(false)}>
+              <span className={`${baseClassName}__button-text`}>
+                {dropdownMenuTranslation?.showAuctions || `Show ${resultsCount} Auctions`}
+              </span>
+            </Button>
+          </div>
+        )}
       </div>
     );
   },

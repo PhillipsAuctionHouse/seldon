@@ -26,11 +26,6 @@ $dropdown-width: 320px;
     }
   }
 
-  &__button-wrap {
-    display: flex;
-    justify-content: flex-end;
-  }
-
   &__buttons-wrap {
     border-top: 1px solid $bg-border;
     display: flex;
@@ -74,21 +69,6 @@ $dropdown-width: 320px;
     }
   }
 
-  &__button {
-    align-self: flex-end;
-    padding: $spacing-sm $spacing-md;
-
-    &--text {
-      text-wrap: nowrap;
-    }
-
-    &--mobile {
-      display: block;
-      margin: $spacing-sm auto $spacing-md auto;
-      width: 80%;
-    }
-  }
-
   &__button-text {
     color: $white-100;
   }
@@ -118,6 +98,9 @@ $dropdown-width: 320px;
   .#{$px}-input__input[type='radio'] {
     align-self: center;
     margin-left: auto;
+  }
+  .#{$px}-input__input[type='checkbox']:disabled {
+    border-color: $keyline-gray;
   }
   .#{$px}-input__input[type='checkbox'] {
     align-self: center;
@@ -157,6 +140,14 @@ $dropdown-width: 320px;
 
 .#{$px}-filter-dropdown-menu .#{$px}-filter-input__input__wrapper {
   max-height: 2rem;
+}
+
+// Filter option labels use the labels/label-small-bold type token.
+.#{$px}-filter-dropdown-menu,
+.#{$px}-filter-drawer-menu {
+  .#{$px}-input__label.#{$px}-text {
+    @include label-styles($font-size: $font-size-label-small, $font-weight: 600);
+  }
 }
 
 .#{$px}-filter-drawer-mobile {

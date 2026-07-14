@@ -135,7 +135,7 @@ describe('FilterDropdown', () => {
     clearFilterUpdate.mockClear();
   });
 
-  it('renders mobile variant', () => {
+  it('renders mobile variant without action buttons for sort', () => {
     render(
       <FilterDropdownMenuMobile
         {...getProps({ isMobileDropdown: true, filterButtonLabel: 'Sort' })}
@@ -143,7 +143,19 @@ describe('FilterDropdown', () => {
       />,
     );
     expect(screen.getByTestId('filter-dropdown-mobile')).toBeInTheDocument();
-    expect(screen.getByText('Confirm')).toBeInTheDocument();
+    expect(screen.getByLabelText('Ascending')).toBeInTheDocument();
+    expect(screen.queryByText('Confirm')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button')).not.toBeInTheDocument();
+  });
+
+  it('renders desktop sort variant without action buttons and applies selection via onSelectFilter', () => {
+    const onSelectFilter = vi.fn();
+    render(<FilterDropdownMenuDesktop {...getProps({ onSelectFilter })} filterButtonLabel="Sort" />);
+    expect(screen.queryByText('Confirm')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button')).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByLabelText('Ascending'));
+    expect(onSelectFilter).toHaveBeenCalledWith(expect.anything(), 'Sort', 'dropdown');
   });
 });
 
@@ -259,6 +271,27 @@ describe('MainFilterDropdown', () => {
     // Simulate closing the drawer
     fireEvent.click(screen.getByTestId('main-filter-filter-button'));
     expect(handleClick).toHaveBeenCalled();
+  });
+
+  it('marks drawer input changes with the drawer source', () => {
+    render(
+      <MainFilterDropdown
+        id="main-filter"
+        filterButtonLabel="Filter"
+        filterId={0}
+        buttonType={'Filter' as FilterButtonType}
+        handleClick={handleClick}
+        filtersListState={[true]}
+        filters={filters}
+        onSelectFilter={handleFilterSelection}
+        onApplyFilter={handleFilterUpdate}
+        onClickClear={clearFilterUpdate}
+        resultsCount={2}
+        ariaLabels={{ button: 'Filter Button' }}
+      />,
+    );
+    fireEvent.click(screen.getByLabelText('Foo'));
+    expect(handleFilterSelection).toHaveBeenCalledWith(expect.anything(), FilterButtonType.Filter, 'drawer');
   });
 });
 
@@ -523,7 +556,16 @@ describe('handleInputChange', () => {
 
     handleInputChange(mockEvent, 'Filter', mockHandler);
 
-    expect(mockHandler).toHaveBeenCalledWith(mockEvent, 'Filter');
+    expect(mockHandler).toHaveBeenCalledWith(mockEvent, 'Filter', undefined);
+  });
+
+  it('passes the change source through to handleFilterSelection', () => {
+    const mockEvent = { target: { value: 'foo' } } as React.ChangeEvent<HTMLInputElement>;
+    const mockHandler = vi.fn();
+
+    handleInputChange(mockEvent, 'Sort', mockHandler, 'dropdown');
+
+    expect(mockHandler).toHaveBeenCalledWith(mockEvent, 'Sort', 'dropdown');
   });
 
   it('does nothing if handleFilterSelection is not provided', () => {

@@ -1,4 +1,4 @@
-import { FilterButtonIconType, FilterButtonType, FilterDimension, FilterType } from './types';
+import { FilterButtonIconType, FilterButtonType, FilterChangeSource, FilterDimension, FilterType } from './types';
 
 export const FilterButtons: FilterButtonType[] = [
   FilterButtonType.Filter,
@@ -171,10 +171,15 @@ export const getFilterButtonClickHandler = (
 export function handleInputChange(
   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   buttonType: string,
-  handleFilterSelection?: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, filterType: string) => void,
+  handleFilterSelection?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    filterType: string,
+    source?: FilterChangeSource,
+  ) => void,
+  source?: FilterChangeSource,
 ) {
   if (handleFilterSelection) {
-    handleFilterSelection(e, buttonType);
+    handleFilterSelection(e, buttonType, source);
   }
 }
 

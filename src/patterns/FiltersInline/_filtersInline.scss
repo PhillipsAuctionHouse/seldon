@@ -5,7 +5,13 @@
   flex-wrap: wrap;
   gap: $spacing-sm;
 
-  // Desktop: align the Sort filter (and anything following it) to the right of the filter row.
+  // The Sort filter always renders last in the row regardless of its position
+  // in the filters array (the drawer lists Sort first, the row shows it last).
+  > .#{$px}-filters-inline__sort {
+    order: 1;
+  }
+
+  // Desktop: align the Sort filter to the right of the filter row.
   @include media($breakpoint-md) {
     > .#{$px}-filters-inline__sort {
       margin-left: auto;
