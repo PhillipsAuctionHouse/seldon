@@ -1,3 +1,11 @@
+# [1.273.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.272.0...v1.273.0) (2026-07-14)
+
+
+### Features
+
+* **chore:** L3-00000 update node version to v22.23.1 ([#893](https://github.com/PhillipsAuctionHouse/seldon/issues/893)) ([88a9ddf](https://github.com/PhillipsAuctionHouse/seldon/commit/88a9ddf0d0fb15513570dc0f4a89b65ea97342d2))
+* **config:** L3-13449 declare package side-effect-free to enable consumer tree shaking ([#891](https://github.com/PhillipsAuctionHouse/seldon/issues/891)) ([4016df6](https://github.com/PhillipsAuctionHouse/seldon/commit/4016df601c80889e18d42b36bdb50023cbafa45a))
+
 # [1.272.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.271.0...v1.272.0) (2026-07-01)
 
 
