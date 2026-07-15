@@ -60,6 +60,12 @@ $dropdown-width: 320px;
     padding-bottom: calc(#{$spacing-sm} + env(safe-area-inset-bottom));
   }
 
+  // Sort dropdown has no footer buttons; this spacer preserves the safe-area
+  // inset so the last option stays clear of the iOS home indicator.
+  &__mobile-safe-area {
+    padding-bottom: calc(#{$spacing-sm} + env(safe-area-inset-bottom));
+  }
+
   &__header {
     margin-bottom: $spacing-sm;
     margin-top: 0;
@@ -176,6 +182,10 @@ $dropdown-width: 320px;
   .#{$px}-filter-dropdown-menu__mobile-wrap {
     flex: 0 0 auto;
     margin-top: 0;
+  }
+
+  .#{$px}-filter-dropdown-menu__mobile-safe-area {
+    flex: 0 0 auto;
   }
 }
 

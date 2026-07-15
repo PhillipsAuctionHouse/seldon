@@ -49,8 +49,12 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
             />
           ))}
         </div>
-        {/* Sort applies on selection, so the sort dropdown renders no action buttons. */}
-        {!isSortButton && (
+        {/* Sort applies on selection, so the sort dropdown renders no action
+            buttons — just a spacer so the safe-area inset still keeps the last
+            option clear of the iOS home indicator. */}
+        {isSortButton ? (
+          <div className={`${baseClassName}__mobile-safe-area`} aria-hidden="true" />
+        ) : (
           <div className={classnames(`${baseClassName}__buttons-wrap`, `${baseClassName}__mobile-wrap`)}>
             <Button
               variant={ButtonVariants.secondary}

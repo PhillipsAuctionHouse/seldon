@@ -181,11 +181,7 @@ export interface FilterDropdownMenuProps extends React.HTMLAttributes<HTMLDivEle
   /** Index of the filter to display (typically corresponds to the selected filter) */
   filterIndex?: number;
   /** Handler for when a filter input is changed */
-  onSelectFilter?: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    filterType: string,
-    source?: FilterChangeSource,
-  ) => void;
+  onSelectFilter?: FilterChangeHandler;
   /** Handler for when the filter is confirmed or updated */
   onApplyFilter?: (returnCountOnly?: boolean) => void;
   /** Handler for clearing the filter (by type) */

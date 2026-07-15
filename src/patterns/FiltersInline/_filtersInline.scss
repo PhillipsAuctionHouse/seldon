@@ -5,13 +5,9 @@
   flex-wrap: wrap;
   gap: $spacing-sm;
 
-  // The Sort filter always renders last in the row regardless of its position
-  // in the filters array (the drawer lists Sort first, the row shows it last).
-  > .#{$px}-filters-inline__sort {
-    order: 1;
-  }
-
-  // Desktop: align the Sort filter to the right of the filter row.
+  // Desktop: align the Sort filter to the right of the filter row. The Sort
+  // pill is already rendered last in the DOM (see FiltersInline.tsx) so visual
+  // and tab order match; this just pushes it to the right edge.
   @include media($breakpoint-md) {
     > .#{$px}-filters-inline__sort {
       margin-left: auto;
