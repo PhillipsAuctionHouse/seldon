@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cat ../.agents/skills/seldon/SKILL.md ../.agents/skills/vercel-composition-patterns/SKILL.md"
+            "command": "cat \"$CLAUDE_PROJECT_DIR/.agents/skills/seldon/SKILL.md\" \"$CLAUDE_PROJECT_DIR/.agents/skills/vercel-composition-patterns/SKILL.md\""
           }
         ]
       }
