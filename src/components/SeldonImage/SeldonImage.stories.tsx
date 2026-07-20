@@ -8,6 +8,12 @@ const framedDecorator: Decorator = (Story) => (
   </div>
 );
 
+const heightLimitedDecorator: Decorator = (Story) => (
+  <div style={{ maxHeight: '40vh' }}>
+    <Story />
+  </div>
+);
+
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {
   title: 'Components/SeldonImage',
@@ -61,6 +67,32 @@ AspectRatioSquare.args = {
 };
 
 AspectRatioSquare.decorators = [framedDecorator];
+
+export const AspectRatioPortraitHeightConstrained = (props: React.ComponentProps<typeof SeldonImage>) => (
+  <SeldonImage {...props} />
+);
+
+AspectRatioPortraitHeightConstrained.args = {
+  src: '/static/test-image-1200x1600.jpg',
+  alt: 'Portrait 3/4 image inside a max-height: 40vh container',
+  aspectRatio: AspectRatio.Portrait,
+  objectFit: 'cover',
+};
+
+AspectRatioPortraitHeightConstrained.decorators = [heightLimitedDecorator];
+
+export const AspectRatioSquareHeightConstrained = (props: React.ComponentProps<typeof SeldonImage>) => (
+  <SeldonImage {...props} />
+);
+
+AspectRatioSquareHeightConstrained.args = {
+  src: '/static/test-image-1600x1600.jpg',
+  alt: 'Square 1/1 image inside a max-height: 40vh container',
+  aspectRatio: AspectRatio.Square,
+  objectFit: 'cover',
+};
+
+AspectRatioSquareHeightConstrained.decorators = [heightLimitedDecorator];
 
 export const AspectRatioNone = (props: React.ComponentProps<typeof SeldonImage>) => <SeldonImage {...props} />;
 

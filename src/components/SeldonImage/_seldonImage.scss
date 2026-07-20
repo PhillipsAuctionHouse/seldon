@@ -14,9 +14,14 @@
     }
   }
 
+  // Portrait/square can overflow vertically; auto dims + max caps let the img respect parent max-height, not just width.
   &--aspect-ratio-3-4 {
     img {
       aspect-ratio: 3 / 4;
+      height: auto;
+      max-height: 100%;
+      max-width: 100%;
+      width: auto;
     }
 
     &.#{$px}-seldon-image--error-image {
@@ -27,6 +32,10 @@
   &--aspect-ratio-1-1 {
     img {
       aspect-ratio: 1 / 1;
+      height: auto;
+      max-height: 100%;
+      max-width: 100%;
+      width: auto;
     }
 
     &.#{$px}-seldon-image--error-image {
