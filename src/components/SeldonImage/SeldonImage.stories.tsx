@@ -2,7 +2,11 @@ import { Meta, Decorator } from '@storybook/react-vite';
 import SeldonImage from './SeldonImage';
 import { AspectRatio } from './types';
 
-const framedDecorator: Decorator = (Story) => <div style={{ maxWidth: '320px' }}>{Story()}</div>;
+const framedDecorator: Decorator = (Story) => (
+  <div style={{ maxWidth: '320px' }}>
+    <Story />
+  </div>
+);
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta = {

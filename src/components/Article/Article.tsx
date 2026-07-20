@@ -33,7 +33,7 @@ const Article = forwardRef<HTMLDivElement, ArticleProps>(
 
     return (
       <article {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        {imageSrc ? <SeldonImage aspectRatio={AspectRatio.Landscape} src={imageSrc} alt="bull" /> : null}
+        {imageSrc ? <SeldonImage aspectRatio={AspectRatio.Landscape} src={imageSrc} alt={header ?? ''} /> : null}
 
         <div className={`${baseClassName}__content`}>
           {label ? (
