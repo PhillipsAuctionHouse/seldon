@@ -1,3 +1,10 @@
+# [1.274.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.273.0...v1.274.0) (2026-07-20)
+
+
+### Features
+
+* **Footer:** L3-6892 Change footer links and copy to sentence case ([#890](https://github.com/PhillipsAuctionHouse/seldon/issues/890)) ([02a266c](https://github.com/PhillipsAuctionHouse/seldon/commit/02a266c7e8892b9a44067e31642cd75311c36631))
+
 # [1.273.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.272.0...v1.273.0) (2026-07-14)
 
 
