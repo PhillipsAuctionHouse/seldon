@@ -4,7 +4,7 @@ import { getCommonProps } from '../../utils';
 import { Text, TextVariants } from '../../components/Text';
 import { DetailList } from '../../components/DetailList/index';
 import { Detail } from '../../components/Detail/index';
-import { SeldonImage } from '../../components/SeldonImage';
+import { SeldonImage, AspectRatio } from '../../components/SeldonImage';
 import { DetailVariants } from '../../components/Detail/types';
 
 export interface ObjectTileProps extends ComponentProps<'a'> {
@@ -135,7 +135,7 @@ const ObjectTile = memo(
         <Component {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
           <SeldonImage
             alt={imageAlt}
-            aspectRatio="1/1"
+            aspectRatio={AspectRatio.Square}
             className={`${baseClassName}__img`}
             objectFit="contain"
             src={imageUrl}

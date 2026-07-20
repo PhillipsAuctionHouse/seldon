@@ -14,6 +14,16 @@
     }
   }
 
+  &--aspect-ratio-3-4 {
+    img {
+      aspect-ratio: 3 / 4;
+    }
+
+    &.#{$px}-seldon-image--error-image {
+      aspect-ratio: 3 / 4;
+    }
+  }
+
   &--aspect-ratio-1-1 {
     img {
       aspect-ratio: 1 / 1;

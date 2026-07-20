@@ -1,7 +1,7 @@
 import { ComponentProps, ElementType, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
-import { SeldonImage } from '../SeldonImage';
+import { SeldonImage, AspectRatio } from '../SeldonImage';
 import { Text, TextVariants } from '../Text';
 import { Link, LinkProps, LinkVariants } from '../Link';
 
@@ -33,7 +33,7 @@ const Article = forwardRef<HTMLDivElement, ArticleProps>(
 
     return (
       <article {...commonProps} className={classnames(baseClassName, className)} {...props} ref={ref}>
-        {imageSrc ? <SeldonImage aspectRatio="16/9" src={imageSrc} alt="bull" /> : null}
+        {imageSrc ? <SeldonImage aspectRatio={AspectRatio.Landscape} src={imageSrc} alt="bull" /> : null}
 
         <div className={`${baseClassName}__content`}>
           {label ? (

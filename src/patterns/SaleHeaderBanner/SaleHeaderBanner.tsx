@@ -2,7 +2,7 @@ import { ComponentProps, forwardRef } from 'react';
 import { Breakpoints, getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { Countdown, CountdownProps } from '../../components/Countdown';
-import { SeldonImage } from '../../components/SeldonImage';
+import { SeldonImage, AspectRatio } from '../../components/SeldonImage';
 import { AuctionStatus } from '../../types/commonTypes';
 import { Text, TextVariants } from '../../components/Text';
 import { PageContentWrapper as PageMargin } from '../../components/PageContentWrapper';
@@ -187,7 +187,7 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
           </Banner.Content>
           <Banner.Media size={BannerMediaSize.half} className={`${baseClassName}__image`}>
             <SeldonImage
-              aspectRatio="16/9"
+              aspectRatio={AspectRatio.Landscape}
               src={imageSrcUrl}
               alt={String(auctionTitle)}
               objectFit="cover"
