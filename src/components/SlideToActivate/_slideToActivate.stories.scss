@@ -1,0 +1,192 @@
+@use 'sass:color';
+@use '~scss/allPartials' as *;
+
+$slide-story-max-width: 360px;
+$branded-blush: color.mix($pure-white, $highlight-purple, 88%);
+$branded-rose: color.mix($pure-white, $highlight-purple, 62%);
+$branded-lilac: color.mix($pure-white, $highlight-purple, 45%);
+$branded-petal: color.mix($pure-white, $highlight-red, 82%);
+
+.slide-to-activate-story {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  max-width: $slide-story-max-width;
+  touch-action: none;
+  width: 100%;
+
+  &__reset {
+    align-self: flex-start;
+  }
+
+  &__hint {
+    color: $soft-black;
+  }
+}
+
+.slide-to-activate-story-branded {
+  background: linear-gradient(165deg, $branded-blush 0%, $pure-white 55%, $branded-petal 100%);
+  border-radius: $radius-md;
+  box-sizing: border-box;
+  max-width: $slide-story-max-width;
+  padding: $padding-md;
+  width: 100%;
+
+  .slide-to-activate-story {
+    max-width: none;
+  }
+
+  .#{$px}-slide-to-activate__track {
+    background: linear-gradient(90deg, $branded-lilac 0%, $branded-rose 55%, $branded-petal 100%);
+    box-shadow: inset 0 1px 0 rgba($pure-white, 0.55);
+  }
+
+  .#{$px}-slide-to-activate__thumb-face {
+    background: linear-gradient(145deg, $pure-white 0%, $branded-blush 100%);
+    border-color: rgba($highlight-purple, 0.35);
+    box-shadow: 0 2px 8px rgba($highlight-purple, 0.18);
+    color: $highlight-purple;
+  }
+
+  .#{$px}-slide-to-activate__label {
+    color: $pure-white;
+    font-variation-settings: 'wght' 500;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 8px rgba($highlight-purple, 0.25);
+  }
+
+  .#{$px}-slide-to-activate--held .#{$px}-slide-to-activate__thumb-face,
+  .#{$px}-slide-to-activate__thumb--held .#{$px}-slide-to-activate__thumb-face {
+    border-color: $highlight-purple;
+    box-shadow:
+      0 0 0 2px rgba($pure-white, 0.85),
+      0 4px 14px rgba($highlight-purple, 0.28);
+  }
+
+  .#{$px}-slide-to-activate--disabled-complete {
+    .#{$px}-slide-to-activate__track {
+      background: linear-gradient(90deg, $branded-rose 0%, $highlight-purple 100%);
+    }
+  }
+
+  .#{$px}-slide-to-activate__pending-indicator .#{$px}-loader {
+    border-color: $pure-white;
+    border-bottom-color: transparent;
+  }
+}
+
+.slide-to-activate-story-custom-styling {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  width: 100%;
+}
+
+.slide-to-activate-story-compact {
+  .#{$px}-slide-to-activate__track {
+    background-color: $pure-white;
+    border: 2px solid $pure-black;
+  }
+
+  .#{$px}-slide-to-activate__label {
+    color: $pure-black;
+  }
+
+  .#{$px}-slide-to-activate__thumb-face {
+    background-color: $pure-black;
+    border-color: $pure-black;
+    color: $pure-white;
+  }
+
+  .#{$px}-slide-to-activate__pending-indicator .#{$px}-loader {
+    border-color: $pure-black;
+    border-bottom-color: transparent;
+  }
+}
+
+.slide-to-activate-story-disabled-states {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  max-width: $slide-story-max-width;
+  width: 100%;
+}
+
+.slide-to-activate-story-progress-meter {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xsm;
+  max-width: $slide-story-max-width;
+  width: 100%;
+
+  &__track {
+    background-color: $grey-50;
+    border-radius: $radius-xs;
+    height: $spacing-xsm;
+    overflow: hidden;
+    width: 100%;
+
+    &::after {
+      background-color: $highlight-blue;
+      content: '';
+      display: block;
+      height: 100%;
+      transition: width 80ms linear;
+      width: calc(var(--slide-demo-progress, 0) * 100%);
+    }
+  }
+}
+
+.slide-to-activate-story-widths {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  max-width: 100%;
+  overflow-x: hidden;
+  touch-action: none;
+  width: 100%;
+
+  &__item {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xsm;
+    max-width: 100%;
+
+    // Cap to the canvas so wide examples don't overflow and steal the drag as a scroll.
+    width: min(var(--slide-demo-width, #{$slide-story-max-width}), 100%);
+
+    .slide-to-activate-story {
+      max-width: none;
+    }
+
+    // Scale label from the 320px baseline (`--slide-demo-label-scale`).
+    .#{$px}-slide-to-activate__label {
+      font-size: calc(#{$font-size-label-medium} * var(--slide-demo-label-scale, 1));
+    }
+  }
+}
+
+.slide-to-activate-story-held-demo {
+  max-width: $slide-story-max-width;
+
+  .#{$px}-slide-to-activate__thumb-icon--held {
+    color: $highlight-blue;
+    filter: drop-shadow(0 0 4px rgba($highlight-blue, 0.55));
+    transform: scale(1.55) rotate(28deg);
+  }
+
+  .#{$px}-slide-to-activate__thumb--held .#{$px}-slide-to-activate__thumb-face {
+    background-color: $highlight-blue;
+    border-color: $highlight-blue;
+    box-shadow:
+      0 0 0 3px rgba($highlight-blue, 0.35),
+      0 0 0 6px rgba($highlight-blue, 0.15);
+    color: $pure-white;
+    transform: scale(1.08);
+  }
+
+  .slide-to-activate-story {
+    max-width: none;
+  }
+}

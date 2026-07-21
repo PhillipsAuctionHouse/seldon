@@ -1,0 +1,291 @@
+@use '~scss/allPartials' as *;
+
+.#{$px}-slide-to-activate {
+  --seldon-slide-thumb-size: 40px;
+  --seldon-slide-hit-tolerance: 8px;
+  --seldon-slide-track-height: 44px;
+  --seldon-slide-gutter-inset: #{$padding-micro};
+
+  display: block;
+  max-width: 100%;
+  touch-action: none;
+  width: 100%;
+
+  &--small {
+    --seldon-slide-thumb-size: 28px;
+    --seldon-slide-track-height: 32px;
+  }
+
+  &--radius-xs {
+    .#{$px}-slide-to-activate__track,
+    .#{$px}-slide-to-activate__thumb-face {
+      border-radius: $radius-xs;
+    }
+
+    .#{$px}-slide-to-activate__thumb:focus-visible {
+      @include focus-ring($border-radius: $radius-xs);
+    }
+  }
+
+  &--radius-sm {
+    .#{$px}-slide-to-activate__track,
+    .#{$px}-slide-to-activate__thumb-face {
+      border-radius: $radius-sm;
+    }
+
+    .#{$px}-slide-to-activate__thumb:focus-visible {
+      @include focus-ring($border-radius: $radius-sm);
+    }
+  }
+
+  &--radius-md {
+    .#{$px}-slide-to-activate__track,
+    .#{$px}-slide-to-activate__thumb-face {
+      border-radius: $radius-md;
+    }
+
+    .#{$px}-slide-to-activate__thumb:focus-visible {
+      @include focus-ring($border-radius: $radius-md);
+    }
+  }
+
+  &--radius-lg {
+    .#{$px}-slide-to-activate__track,
+    .#{$px}-slide-to-activate__thumb-face {
+      border-radius: $radius-lg;
+    }
+
+    .#{$px}-slide-to-activate__thumb:focus-visible {
+      @include focus-ring($border-radius: $radius-lg);
+    }
+  }
+
+  &--radius-xl {
+    .#{$px}-slide-to-activate__track,
+    .#{$px}-slide-to-activate__thumb-face {
+      border-radius: $radius-xl;
+    }
+
+    .#{$px}-slide-to-activate__thumb:focus-visible {
+      @include focus-ring($border-radius: $radius-xl);
+    }
+  }
+
+  &--radius-2xl {
+    .#{$px}-slide-to-activate__track,
+    .#{$px}-slide-to-activate__thumb-face {
+      border-radius: $radius-2xl;
+    }
+
+    .#{$px}-slide-to-activate__thumb:focus-visible {
+      @include focus-ring($border-radius: $radius-2xl);
+    }
+  }
+
+  &--radius-3xl {
+    .#{$px}-slide-to-activate__track,
+    .#{$px}-slide-to-activate__thumb-face {
+      border-radius: $radius-3xl;
+    }
+
+    .#{$px}-slide-to-activate__thumb:focus-visible {
+      @include focus-ring($border-radius: $radius-3xl);
+    }
+  }
+
+  &__track {
+    align-items: center;
+    background-color: $pure-black;
+    border-radius: $radius-xs;
+    box-sizing: border-box;
+    display: flex;
+    height: var(--seldon-slide-track-height);
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    touch-action: none;
+    transition:
+      background-color 0.32s ease-out,
+      border-color 0.32s ease-out;
+    user-select: none;
+    width: 100%;
+  }
+
+  &__label {
+    color: $pure-white;
+    font-variation-settings: 'wght' 600;
+    pointer-events: none;
+    position: relative;
+    transition:
+      color 0.32s ease-out,
+      opacity 0.28s ease-out;
+    z-index: 1;
+  }
+
+  &__pending-indicator {
+    align-items: center;
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    pointer-events: none;
+    position: absolute;
+    transition: opacity 0.28s ease-out;
+    z-index: 2;
+
+    .#{$px}-loader {
+      border-color: $pure-white;
+      border-bottom-color: transparent;
+    }
+  }
+
+  &__thumb {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    cursor: grab;
+    display: flex;
+    height: var(--seldon-slide-thumb-size);
+    justify-content: center;
+    left: var(--seldon-slide-gutter-inset);
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    touch-action: none;
+    transform: translateY(-50%);
+    width: var(--seldon-slide-thumb-size);
+    z-index: 3;
+
+    &::before {
+      content: '';
+      inset: calc(var(--seldon-slide-hit-tolerance) * -1);
+      position: absolute;
+    }
+
+    &:active,
+    &--held {
+      cursor: grabbing;
+    }
+
+    &:focus-visible {
+      @include focus-ring($border-radius: $radius-xs);
+    }
+
+    &--held .#{$px}-slide-to-activate__thumb-face {
+      box-shadow: 0 0 0 1px rgba($pure-black, 1);
+    }
+  }
+
+  &__thumb-face {
+    align-items: center;
+    background-color: $pure-white;
+    border: 2px solid $pure-black;
+    border-radius: $radius-xs;
+    box-sizing: border-box;
+    color: $pure-black;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    pointer-events: none;
+    transition:
+      box-shadow 0.28s ease-out,
+      background-color 0.32s ease-out,
+      border-color 0.32s ease-out,
+      color 0.32s ease-out;
+    width: 100%;
+  }
+
+  &__thumb-icon {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    transition: transform 0.15s ease-out;
+
+    svg {
+      height: calc($font-size-label-small * 1.3);
+      width: calc($font-size-label-small * 1.3);
+    }
+
+    &--held {
+      transform: scale(1.1);
+    }
+  }
+
+  &--rtl &__thumb {
+    left: auto;
+    right: var(--seldon-slide-gutter-inset);
+  }
+
+  &--rtl &__thumb-icon {
+    transform: scaleX(-1);
+
+    &--held {
+      transform: scaleX(-1) scale(1.1);
+    }
+  }
+
+  &--pending {
+    .#{$px}-slide-to-activate__label {
+      opacity: 0;
+    }
+
+    .#{$px}-slide-to-activate__thumb {
+      cursor: default;
+    }
+  }
+
+  &--disabled {
+    pointer-events: none;
+
+    .#{$px}-slide-to-activate__thumb {
+      cursor: not-allowed;
+    }
+  }
+
+  // Not allowed / unavailable
+  &--disabled-blocked {
+    .#{$px}-slide-to-activate__track {
+      background-color: $grey-50;
+    }
+
+    .#{$px}-slide-to-activate__label {
+      color: $grey-75;
+    }
+
+    .#{$px}-slide-to-activate__thumb-face {
+      background-color: $grey-50;
+      border-color: $grey-50;
+      color: $grey-75;
+    }
+  }
+
+  // Already completed — settled success look; thumb is always faded out
+  &--disabled-complete {
+    .#{$px}-slide-to-activate__track {
+      background-color: $pure-black;
+    }
+
+    .#{$px}-slide-to-activate__label {
+      color: $pure-white;
+    }
+  }
+
+  // Soft exit for activated / hide-thumb — keep gutter, ease the button away
+  &--disabled-hide-thumb {
+    .#{$px}-slide-to-activate__thumb,
+    .#{$px}-slide-to-activate__thumb--hidden {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 100ms ease-out;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__track,
+    &__label,
+    &__pending-indicator,
+    &__thumb,
+    &__thumb-face {
+      transition: none;
+    }
+  }
+}
