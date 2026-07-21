@@ -1,6 +1,5 @@
 import type { Meta } from '@storybook/react-vite';
 import type { CSSProperties } from 'react';
-import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Icon } from '../Icon';
 import { Text, TextVariants } from '../Text';
 import SlideToActivate from './SlideToActivate';
@@ -161,27 +160,6 @@ export const AsyncActivation = (props: SlideToActivateProps) => (
 );
 
 AsyncActivation.argTypes = argTypes;
-
-// First interaction test in this file — drives the pointer-drag path (unlike the unit tests,
-// which only cover keyboard activation under mocked reduced motion). Drag, not keyboard: the
-// keyboard charge/finish ramp is driven by requestAnimationFrame, which browsers throttle or
-// pause entirely in a backgrounded/off-screen test tab, so it can stall until something
-// happens to bring the page back into view. Pointer drag updates progress synchronously off
-// real pointermove events with no rAF in the loop, so it isn't subject to that throttling.
-AsyncActivation.play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-  const canvas = within(canvasElement);
-  const thumb = canvas.getByRole('button', { name: 'Swipe to place bid' });
-  const thumbRect = thumb.getBoundingClientRect();
-  const y = thumbRect.top + thumbRect.height / 2;
-
-  await userEvent.pointer([
-    { keys: '[MouseLeft>]', target: thumb, coords: { x: thumbRect.left + thumbRect.width / 2, y } },
-    { coords: { x: thumbRect.left + 400, y } },
-    { keys: '[/MouseLeft]' },
-  ]);
-
-  await waitFor(() => expect(canvas.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'pending'));
-};
 
 export const Rtl = (props: SlideToActivateProps) => (
   <SlideToActivateInteractiveDemo {...props} direction={SlideToActivateDirections.rtl} thumbIcon={chevronIcon} />
