@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef, type KeyboardEvent as ReactKeyboardEvent } from 'react';
+import { useCallback, useEffect, useRef, type MutableRefObject, type KeyboardEvent as ReactKeyboardEvent } from 'react';
+import type { SlideToActivateAction, SlideToActivateState } from '../slideToActivateReducer';
 import {
   clampProgress,
   easeOutCubic,
@@ -7,15 +8,13 @@ import {
   KEYBOARD_CHARGE_TARGET,
   KEYBOARD_FINISH_MS,
   linear,
-  type SlideToActivateStatus,
 } from '../slideToActivateUtils';
 
 interface UseSlideKeyboardChargeOptions {
   isDisabled: boolean;
   reduceMotion: boolean;
-  statusRef: React.MutableRefObject<SlideToActivateStatus>;
-  progressRef: React.MutableRefObject<number>;
-  updateStatus: (status: SlideToActivateStatus) => void;
+  stateRef: MutableRefObject<SlideToActivateState>;
+  dispatch: (action: SlideToActivateAction) => void;
   emitProgress: (progress: number) => void;
   runActivation: () => Promise<void>;
   snapToIdle: () => void;
@@ -24,9 +23,8 @@ interface UseSlideKeyboardChargeOptions {
 export const useSlideKeyboardCharge = ({
   isDisabled,
   reduceMotion,
-  statusRef,
-  progressRef,
-  updateStatus,
+  stateRef,
+  dispatch,
   emitProgress,
   runActivation,
   snapToIdle,
@@ -42,16 +40,16 @@ export const useSlideKeyboardCharge = ({
   }, []);
 
   const cancelKeyboardGesture = useCallback(() => {
-    if (!activeKeyRef.current && statusRef.current !== 'dragging') {
+    if (!activeKeyRef.current && stateRef.current.status !== 'dragging') {
       stopRaf();
       return;
     }
     activeKeyRef.current = null;
     stopRaf();
-    if (statusRef.current === 'dragging' || statusRef.current === 'snapping') {
+    if (stateRef.current.status === 'dragging' || stateRef.current.status === 'snapping') {
       snapToIdle();
     }
-  }, [snapToIdle, statusRef, stopRaf]);
+  }, [snapToIdle, stateRef, stopRaf]);
 
   useEffect(() => () => stopRaf(), [stopRaf]);
 
@@ -70,7 +68,7 @@ export const useSlideKeyboardCharge = ({
       ease: (t: number) => number,
       options?: { onDone?: () => void; shouldContinue?: () => boolean },
     ) => {
-      const startProgress = progressRef.current;
+      const startProgress = stateRef.current.progress;
       const startTime = performance.now();
       const tick = (now: number) => {
         if (options?.shouldContinue && !options.shouldContinue()) {
@@ -86,22 +84,22 @@ export const useSlideKeyboardCharge = ({
       };
       rafRef.current = requestAnimationFrame(tick);
     },
-    [emitProgress, progressRef],
+    [emitProgress, stateRef],
   );
 
   const finishAndActivate = useCallback(() => {
     stopRaf();
     // Only reachable with reduceMotion false — handleKeyUp already handles the reduceMotion case.
-    if (progressRef.current >= 1) {
+    if (stateRef.current.progress >= 1) {
       void runActivation();
       return;
     }
     animateProgressTo(1, KEYBOARD_FINISH_MS, linear, { onDone: () => void runActivation() });
-  }, [animateProgressTo, progressRef, runActivation, stopRaf]);
+  }, [animateProgressTo, runActivation, stateRef, stopRaf]);
 
   const handleKeyDown = useCallback(
     (event: ReactKeyboardEvent<HTMLButtonElement>) => {
-      if (isDisabled || isGestureBusy(statusRef.current)) {
+      if (isDisabled || isGestureBusy(stateRef.current.status)) {
         return;
       }
       if (event.key === 'Escape') {
@@ -123,12 +121,12 @@ export const useSlideKeyboardCharge = ({
         return;
       }
 
-      updateStatus('dragging');
+      dispatch({ type: 'dragStarted' });
       animateProgressTo(KEYBOARD_CHARGE_TARGET, KEYBOARD_CHARGE_MS, easeOutCubic, {
-        shouldContinue: () => activeKeyRef.current !== null && statusRef.current === 'dragging',
+        shouldContinue: () => activeKeyRef.current !== null && stateRef.current.status === 'dragging',
       });
     },
-    [animateProgressTo, cancelKeyboardGesture, isDisabled, reduceMotion, statusRef, updateStatus],
+    [animateProgressTo, cancelKeyboardGesture, dispatch, isDisabled, reduceMotion, stateRef],
   );
 
   const handleKeyUp = useCallback(
@@ -140,7 +138,7 @@ export const useSlideKeyboardCharge = ({
       activeKeyRef.current = null;
       stopRaf();
 
-      if (isDisabled || statusRef.current === 'pending') {
+      if (isDisabled || stateRef.current.status === 'pending') {
         return;
       }
 
@@ -149,12 +147,12 @@ export const useSlideKeyboardCharge = ({
         return;
       }
 
-      if (statusRef.current !== 'dragging') {
-        updateStatus('dragging');
+      if (stateRef.current.status !== 'dragging') {
+        dispatch({ type: 'dragStarted' });
       }
       finishAndActivate();
     },
-    [finishAndActivate, isDisabled, reduceMotion, runActivation, statusRef, stopRaf, updateStatus],
+    [dispatch, finishAndActivate, isDisabled, reduceMotion, runActivation, stateRef, stopRaf],
   );
 
   const handleBlur = useCallback(() => {

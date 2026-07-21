@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useRef, type PointerEvent as ReactPointerEvent } from 'react';
-import { clampProgress, isGestureBusy, type SlideToActivateStatus } from '../slideToActivateUtils';
+import { useCallback, useEffect, useRef, type MutableRefObject, type PointerEvent as ReactPointerEvent } from 'react';
+import type { SlideToActivateAction, SlideToActivateState } from '../slideToActivateReducer';
+import { clampProgress, isGestureBusy } from '../slideToActivateUtils';
 
 interface UseSlideDragHandlersOptions {
   requiredProgress: number;
@@ -7,11 +8,9 @@ interface UseSlideDragHandlersOptions {
   sensitivity: number;
   direction: 'ltr' | 'rtl';
   isDisabled: boolean;
-  statusRef: React.MutableRefObject<SlideToActivateStatus>;
-  progressRef: React.MutableRefObject<number>;
-  maxTravelRef: React.MutableRefObject<number>;
+  stateRef: MutableRefObject<SlideToActivateState>;
   measureTravel: () => void;
-  updateStatus: (status: SlideToActivateStatus) => void;
+  dispatch: (action: SlideToActivateAction) => void;
   emitProgress: (progress: number) => void;
   runActivation: () => Promise<void>;
   snapToIdle: () => void;
@@ -23,11 +22,9 @@ export const useSlideDragHandlers = ({
   sensitivity,
   direction,
   isDisabled,
-  statusRef,
-  progressRef,
-  maxTravelRef,
+  stateRef,
   measureTravel,
-  updateStatus,
+  dispatch,
   emitProgress,
   runActivation,
   snapToIdle,
@@ -61,19 +58,19 @@ export const useSlideDragHandlers = ({
     activePointerIdRef.current = null;
     thumbElementRef.current = null;
 
-    if (statusRef.current !== 'dragging') {
+    if (stateRef.current.status !== 'dragging') {
       return;
     }
-    if (progressRef.current >= requiredProgress || progressRef.current >= 1) {
+    if (stateRef.current.progress >= requiredProgress || stateRef.current.progress >= 1) {
       void runActivation();
       return;
     }
     snapToIdle();
-  }, [detachDocumentListeners, progressRef, requiredProgress, runActivation, snapToIdle, statusRef]);
+  }, [detachDocumentListeners, requiredProgress, runActivation, snapToIdle, stateRef]);
 
   const handlePointerDown = useCallback(
     (event: ReactPointerEvent<HTMLButtonElement>) => {
-      if (isDisabled || isGestureBusy(statusRef.current)) {
+      if (isDisabled || isGestureBusy(stateRef.current.status)) {
         return;
       }
       // Avoid text selection / scroll stealing the gesture (esp. Storybook iframe + touch).
@@ -90,24 +87,24 @@ export const useSlideDragHandlers = ({
         // Capture can fail in some embedded contexts; document listeners still drive the drag.
       }
       dragStartXRef.current = event.clientX;
-      dragOriginProgressRef.current = progressRef.current;
+      dragOriginProgressRef.current = stateRef.current.progress;
       hasClearedDeadZoneRef.current = false;
-      updateStatus('dragging');
+      dispatch({ type: 'dragStarted' });
 
       detachDocumentListeners();
 
       const onPointerMove = (moveEvent: PointerEvent) => {
-        if (moveEvent.pointerId !== activePointerIdRef.current || statusRef.current !== 'dragging') {
+        if (moveEvent.pointerId !== activePointerIdRef.current || stateRef.current.status !== 'dragging') {
           return;
         }
         // Keep the gesture from promoting to a scroll (wide tracks / overflow parents).
         if (moveEvent.cancelable) {
           moveEvent.preventDefault();
         }
-        let travel = maxTravelRef.current;
+        let travel = stateRef.current.maxTravel;
         if (travel <= 0) {
           measureTravel();
-          travel = maxTravelRef.current;
+          travel = stateRef.current.maxTravel;
           if (travel <= 0) {
             return;
           }
@@ -144,15 +141,13 @@ export const useSlideDragHandlers = ({
       deadZone,
       detachDocumentListeners,
       direction,
+      dispatch,
       emitProgress,
       finishDrag,
       isDisabled,
-      maxTravelRef,
       measureTravel,
-      progressRef,
       sensitivity,
-      statusRef,
-      updateStatus,
+      stateRef,
     ],
   );
 

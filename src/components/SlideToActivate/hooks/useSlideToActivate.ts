@@ -1,5 +1,10 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { measureMaxTravel, SNAP_MS, type SlideToActivateStatus } from '../slideToActivateUtils';
+import { useCallback, useEffect, useLayoutEffect, useReducer, useRef } from 'react';
+import {
+  initialSlideToActivateState,
+  slideToActivateReducer,
+  type SlideToActivateAction,
+} from '../slideToActivateReducer';
+import { measureMaxTravel, SNAP_MS } from '../slideToActivateUtils';
 import { useSlideDragHandlers } from './useSlideDragHandlers';
 import { useSlideKeyboardCharge } from './useSlideKeyboardCharge';
 
@@ -35,21 +40,19 @@ export const useSlideToActivate = ({
   onError,
   onProgress,
 }: UseSlideToActivateOptions) => {
-  const [progress, setProgress] = useState(0);
-  const [status, setStatus] = useState<SlideToActivateStatus>('idle');
-  const [announcement, setAnnouncement] = useState('');
-  const [maxTravel, setMaxTravel] = useState(0);
+  const [state, reactDispatch] = useReducer(slideToActivateReducer, initialSlideToActivateState);
+  const stateRef = useRef(state);
+  // Updated synchronously (not via a useEffect) so native document-level pointer listeners and
+  // requestAnimationFrame callbacks — which close over stale state otherwise — always see the
+  // value from the most recent dispatch rather than the last committed render.
+  const dispatch = useCallback((action: SlideToActivateAction) => {
+    stateRef.current = slideToActivateReducer(stateRef.current, action);
+    reactDispatch(action);
+  }, []);
+
   const trackRef = useRef<HTMLDivElement>(null);
   const thumbRef = useRef<HTMLButtonElement>(null);
-  const statusRef = useRef(status);
-  const progressRef = useRef(progress);
-  const maxTravelRef = useRef(0);
   const snapTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const updateStatus = useCallback((next: SlideToActivateStatus) => {
-    statusRef.current = next;
-    setStatus(next);
-  }, []);
 
   const measureTravel = useCallback(() => {
     const track = trackRef.current;
@@ -57,10 +60,8 @@ export const useSlideToActivate = ({
     if (!track || !thumb) {
       return;
     }
-    const nextTravel = measureMaxTravel({ track, thumb, direction });
-    maxTravelRef.current = nextTravel;
-    setMaxTravel(nextTravel);
-  }, [direction]);
+    dispatch({ type: 'measured', maxTravel: measureMaxTravel({ track, thumb, direction }) });
+  }, [direction, dispatch]);
 
   useLayoutEffect(() => {
     measureTravel();
@@ -78,11 +79,10 @@ export const useSlideToActivate = ({
 
   const emitProgress = useCallback(
     (nextProgress: number) => {
-      setProgress(nextProgress);
-      progressRef.current = nextProgress;
+      dispatch({ type: 'progressChanged', progress: nextProgress });
       onProgress?.(nextProgress);
     },
-    [onProgress],
+    [dispatch, onProgress],
   );
 
   const clearSnapTimeout = useCallback(() => {
@@ -94,73 +94,63 @@ export const useSlideToActivate = ({
 
   const snapToIdle = useCallback(() => {
     clearSnapTimeout();
+    emitProgress(0);
+    dispatch({ type: 'snapStarted', immediate: reduceMotion });
     if (reduceMotion) {
-      emitProgress(0);
-      updateStatus('idle');
       return;
     }
-    updateStatus('snapping');
-    emitProgress(0);
     snapTimeoutRef.current = setTimeout(() => {
-      updateStatus('idle');
+      dispatch({ type: 'snapCompleted' });
       snapTimeoutRef.current = null;
     }, SNAP_MS);
-  }, [clearSnapTimeout, emitProgress, reduceMotion, updateStatus]);
-
-  const settleAtEnd = useCallback(() => {
-    clearSnapTimeout();
-    emitProgress(1);
-    updateStatus('idle');
-  }, [clearSnapTimeout, emitProgress, updateStatus]);
+  }, [clearSnapTimeout, dispatch, emitProgress, reduceMotion]);
 
   const runActivation = useCallback(async () => {
-    if (statusRef.current === 'pending') {
+    if (stateRef.current.status === 'pending') {
       return;
     }
     emitProgress(1);
-    updateStatus('pending');
-    setAnnouncement(pendingAnnouncement);
+    dispatch({ type: 'activationStarted', announcement: pendingAnnouncement });
     try {
       await onActivation?.();
-      setAnnouncement(successAnnouncement);
-      settleAtEnd();
+      clearSnapTimeout();
+      dispatch({ type: 'activationSucceeded', announcement: successAnnouncement });
     } catch (error: unknown) {
       if (onError) {
         onError(error);
       } else {
         console.error(error);
       }
-      setAnnouncement(errorAnnouncement);
+      dispatch({ type: 'activationFailed', announcement: errorAnnouncement });
       snapToIdle();
     }
   }, [
+    clearSnapTimeout,
+    dispatch,
     emitProgress,
     errorAnnouncement,
     onActivation,
     onError,
     pendingAnnouncement,
-    settleAtEnd,
     snapToIdle,
     successAnnouncement,
-    updateStatus,
   ]);
 
   const wasDisabledRef = useRef(isDisabled);
   useEffect(() => {
     if (wasDisabledRef.current && !isDisabled) {
       clearSnapTimeout();
-      emitProgress(0);
-      updateStatus('idle');
+      dispatch({ type: 'reset' });
+      onProgress?.(0);
     }
     wasDisabledRef.current = isDisabled;
-  }, [clearSnapTimeout, emitProgress, isDisabled, updateStatus]);
+  }, [clearSnapTimeout, dispatch, isDisabled, onProgress]);
 
   const { handleKeyDown, handleKeyUp, handleBlur, cancelKeyboardGesture } = useSlideKeyboardCharge({
     isDisabled,
     reduceMotion,
-    statusRef,
-    progressRef,
-    updateStatus,
+    stateRef,
+    dispatch,
     emitProgress,
     runActivation,
     snapToIdle,
@@ -172,14 +162,12 @@ export const useSlideToActivate = ({
     sensitivity,
     direction,
     isDisabled,
-    statusRef,
-    progressRef,
-    maxTravelRef,
+    stateRef,
     measureTravel: () => {
       cancelKeyboardGesture();
       measureTravel();
     },
-    updateStatus,
+    dispatch,
     emitProgress,
     runActivation,
     snapToIdle,
@@ -193,12 +181,12 @@ export const useSlideToActivate = ({
   );
 
   return {
-    progress,
-    status,
-    announcement,
+    progress: state.progress,
+    status: state.status,
+    announcement: state.announcement,
     trackRef,
     thumbRef,
-    thumbTranslatePx: progress * maxTravel * (direction === 'rtl' ? -1 : 1),
+    thumbTranslatePx: state.progress * state.maxTravel * (direction === 'rtl' ? -1 : 1),
     handlePointerDown,
     handlePointerUp,
     handlePointerCancel,

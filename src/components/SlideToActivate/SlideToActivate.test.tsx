@@ -312,7 +312,7 @@ describe('SlideToActivate', () => {
 
     render(<SlideToActivate labelText="Confirm" />);
     expect(resizeCallback).toBeDefined();
-    expect(() => resizeCallback?.()).not.toThrow();
+    expect(() => act(() => resizeCallback?.())).not.toThrow();
 
     window.ResizeObserver = original;
   });
