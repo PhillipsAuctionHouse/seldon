@@ -112,31 +112,6 @@ $branded-petal: color.mix($pure-white, $highlight-red, 82%);
   width: 100%;
 }
 
-.slide-to-activate-story-progress-meter {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-xsm;
-  max-width: $slide-story-max-width;
-  width: 100%;
-
-  &__track {
-    background-color: $grey-50;
-    border-radius: $radius-xs;
-    height: $spacing-xsm;
-    overflow: hidden;
-    width: 100%;
-
-    &::after {
-      background-color: $highlight-blue;
-      content: '';
-      display: block;
-      height: 100%;
-      transition: width 80ms linear;
-      width: calc(var(--slide-demo-progress, 0) * 100%);
-    }
-  }
-}
-
 .slide-to-activate-story-widths {
   display: flex;
   flex-direction: column;

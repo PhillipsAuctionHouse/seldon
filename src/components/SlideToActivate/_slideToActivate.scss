@@ -248,13 +248,14 @@
     }
 
     .#{$px}-slide-to-activate__label {
-      color: $grey-75;
+      // $grey-75 fails 4.5:1 against this $grey-50 background (3.98:1) — $grey-100 passes at 6.24:1.
+      color: $grey-100;
     }
 
     .#{$px}-slide-to-activate__thumb-face {
       background-color: $grey-50;
       border-color: $grey-50;
-      color: $grey-75;
+      color: $grey-100;
     }
   }
 

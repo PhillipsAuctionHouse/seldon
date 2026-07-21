@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react-vite';
-import { useState, type CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Icon } from '../Icon';
 import { Text, TextVariants } from '../Text';
@@ -195,32 +195,21 @@ export const Small = (props: SlideToActivateProps) => (
 
 Small.argTypes = argTypes;
 
-export const CustomStyling = (props: SlideToActivateProps) => {
-  const [opacity, setOpacity] = useState(0.25);
-  return (
-    <div className="slide-to-activate-story-custom-styling">
-      <div className="slide-to-activate-story-branded">
-        <SlideToActivateInteractiveDemo
-          {...props}
-          labelText="Slide to unlock"
-          activatedLabel="Unlocked"
-          borderRadius={SlideToActivateBorderRadii.threeXl}
-          thumbIcon={chevronIcon}
-        />
-      </div>
-      <div className="slide-to-activate-story-compact">
-        <SlideToActivateInteractiveDemo
-          {...props}
-          labelText="Confirm"
-          thumbIcon={chevronIcon}
-          style={{ opacity }}
-          onProgress={(p) => {
-            setOpacity(0.5 + p * 0.75);
-          }}
-        />
-      </div>
+export const CustomStyling = (props: SlideToActivateProps) => (
+  <div className="slide-to-activate-story-custom-styling">
+    <div className="slide-to-activate-story-branded">
+      <SlideToActivateInteractiveDemo
+        {...props}
+        labelText="Slide to unlock"
+        activatedLabel="Unlocked"
+        borderRadius={SlideToActivateBorderRadii.threeXl}
+        thumbIcon={chevronIcon}
+      />
     </div>
-  );
-};
+    <div className="slide-to-activate-story-compact">
+      <SlideToActivateInteractiveDemo {...props} labelText="Confirm" thumbIcon={chevronIcon} />
+    </div>
+  </div>
+);
 
 CustomStyling.argTypes = argTypes;

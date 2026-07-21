@@ -51,8 +51,12 @@ export const useSlideDragHandlers = ({
     detachDocumentListeners();
     const thumb = thumbElementRef.current;
     const pointerId = activePointerIdRef.current;
-    if (thumb && pointerId !== null && thumb.hasPointerCapture(pointerId)) {
-      thumb.releasePointerCapture(pointerId);
+    try {
+      if (thumb && pointerId !== null && thumb.hasPointerCapture(pointerId)) {
+        thumb.releasePointerCapture(pointerId);
+      }
+    } catch {
+      // hasPointerCapture/releasePointerCapture unsupported in some environments (e.g. jsdom).
     }
     activePointerIdRef.current = null;
     thumbElementRef.current = null;
