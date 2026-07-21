@@ -32,7 +32,11 @@ fi
 
 # Extract every bold section header (**Section name**) — same regex as the
 # GitHub Actions workflow at .github/workflows/pr-template-and-prefix.yaml.
-mapfile -t required_sections < <(grep -E '^\*\*[^*]+\*\*[[:space:]]*$' "$template" | sed 's/[[:space:]]*$//')
+# Using a while-read loop instead of `mapfile` for macOS bash 3.2 compat.
+required_sections=()
+while IFS= read -r line; do
+  required_sections+=("$line")
+done < <(grep -E '^\*\*[^*]+\*\*[[:space:]]*$' "$template" | sed 's/[[:space:]]*$//')
 
 if [ "${#required_sections[@]}" -eq 0 ]; then
   exit 0

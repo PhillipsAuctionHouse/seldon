@@ -1,6 +1,8 @@
 @use '~scss/allPartials' as *;
 
 .#{$px}-seldon-image {
+  // Propagate an ancestor `max-height` down to the wrapper so the img can inherit it too (percentages resolve to `none` when parent height is auto; `inherit` doesn't).
+  max-height: inherit;
   overflow: hidden;
   position: relative;
 
@@ -19,7 +21,7 @@
     img {
       aspect-ratio: 3 / 4;
       height: auto;
-      max-height: 100%;
+      max-height: inherit;
       max-width: 100%;
       width: auto;
     }
@@ -33,7 +35,7 @@
     img {
       aspect-ratio: 1 / 1;
       height: auto;
-      max-height: 100%;
+      max-height: inherit;
       max-width: 100%;
       width: auto;
     }
