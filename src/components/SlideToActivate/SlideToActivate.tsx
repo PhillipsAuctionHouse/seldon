@@ -33,6 +33,9 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
       onActivation,
       onError,
       onProgress,
+      pendingAnnouncement = labelText,
+      successAnnouncement = 'Activated.',
+      errorAnnouncement = 'Action failed. Please try again.',
       requiredProgress = 0.95,
       deadZone = 8,
       sensitivity = 1,
@@ -58,6 +61,7 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
     const reduceMotion = useReducedMotion();
     const {
       status,
+      announcement,
       trackRef,
       thumbRef,
       thumbTranslatePx,
@@ -75,6 +79,9 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
       direction,
       isDisabled,
       reduceMotion,
+      pendingAnnouncement,
+      successAnnouncement,
+      errorAnnouncement,
       onActivation,
       onError,
       onProgress,
@@ -106,6 +113,7 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
         })}
         data-status={status}
         data-disabled-reason={isDisabled ? disabledReason : undefined}
+        aria-busy={isPending ? true : undefined}
       >
         <div
           ref={trackRef}
@@ -123,21 +131,23 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
             {labelText}
           </Text>
 
+          {/* Stays mounted across idle/pending/settled/error so assistive tech gets pending,
+              success, and error announcements alike — a region that unmounts on state change
+              only ever announces the first transition. */}
+          <VisuallyHidden asChild>
+            <span role="status" aria-live="polite" aria-atomic="true">
+              {announcement}
+            </span>
+          </VisuallyHidden>
+
           {isPending ? (
-            <>
-              <VisuallyHidden asChild>
-                <span role="status" aria-live="polite">
-                  {labelText}
-                </span>
-              </VisuallyHidden>
-              {pendingIndicator !== undefined ? (
-                pendingIndicator
-              ) : (
-                <span className={`${baseClassName}__pending-indicator`} aria-hidden>
-                  <Loader isCentered={false} aria-label="" />
-                </span>
-              )}
-            </>
+            pendingIndicator !== undefined ? (
+              pendingIndicator
+            ) : (
+              <span className={`${baseClassName}__pending-indicator`} aria-hidden>
+                <Loader isCentered={false} />
+              </span>
+            )
           ) : null}
 
           <SlideToActivateThumb

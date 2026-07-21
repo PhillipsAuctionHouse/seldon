@@ -13,6 +13,9 @@ export interface UseSlideToActivateOptions {
   direction: 'ltr' | 'rtl';
   isDisabled: boolean;
   reduceMotion: boolean;
+  pendingAnnouncement: string;
+  successAnnouncement: string;
+  errorAnnouncement: string;
   onActivation?: () => void | Promise<void>;
   onError?: (error: unknown) => void;
   onProgress?: (progress: number) => void;
@@ -25,12 +28,16 @@ export const useSlideToActivate = ({
   direction,
   isDisabled,
   reduceMotion,
+  pendingAnnouncement,
+  successAnnouncement,
+  errorAnnouncement,
   onActivation,
   onError,
   onProgress,
 }: UseSlideToActivateOptions) => {
   const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState<SlideToActivateStatus>('idle');
+  const [announcement, setAnnouncement] = useState('');
   const [maxTravel, setMaxTravel] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
   const thumbRef = useRef<HTMLButtonElement>(null);
@@ -112,8 +119,10 @@ export const useSlideToActivate = ({
     }
     emitProgress(1);
     updateStatus('pending');
+    setAnnouncement(pendingAnnouncement);
     try {
       await onActivation?.();
+      setAnnouncement(successAnnouncement);
       settleAtEnd();
     } catch (error: unknown) {
       if (onError) {
@@ -121,9 +130,20 @@ export const useSlideToActivate = ({
       } else {
         console.error(error);
       }
+      setAnnouncement(errorAnnouncement);
       snapToIdle();
     }
-  }, [emitProgress, onActivation, onError, settleAtEnd, snapToIdle, updateStatus]);
+  }, [
+    emitProgress,
+    errorAnnouncement,
+    onActivation,
+    onError,
+    pendingAnnouncement,
+    settleAtEnd,
+    snapToIdle,
+    successAnnouncement,
+    updateStatus,
+  ]);
 
   const wasDisabledRef = useRef(isDisabled);
   useEffect(() => {
@@ -175,6 +195,7 @@ export const useSlideToActivate = ({
   return {
     progress,
     status,
+    announcement,
     trackRef,
     thumbRef,
     thumbTranslatePx: progress * maxTravel * (direction === 'rtl' ? -1 : 1),

@@ -41,6 +41,18 @@ export interface SlideToActivateProps extends Omit<HTMLAttributes<HTMLDivElement
   onError?: (error: unknown) => void;
   /** Fired while dragging with progress in `[0, 1]`. */
   onProgress?: (progress: number) => void;
+  /**
+   * Screen-reader announcement while `onActivation` is pending, via a persistent `aria-live`
+   * region (separate from the visible label). Default: `labelText`.
+   */
+  pendingAnnouncement?: string;
+  /** Screen-reader announcement once `onActivation` resolves. Default `'Activated.'`. */
+  successAnnouncement?: string;
+  /**
+   * Screen-reader announcement when `onActivation` rejects. Default
+   * `'Action failed. Please try again.'`.
+   */
+  errorAnnouncement?: string;
   /** Progress at which activation fires on release (or track edge, whichever first). Default `0.95`. */
   requiredProgress?: number;
   /** Pointer movement (px) ignored before the thumb follows. Default `8`. */
