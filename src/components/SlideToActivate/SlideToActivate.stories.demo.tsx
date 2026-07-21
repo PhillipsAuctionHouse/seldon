@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import Button from '../Button/Button';
 import { ButtonSizes, ButtonVariants } from '../Button/types';
 import { Text, TextVariants } from '../Text';
@@ -21,6 +21,9 @@ export const SlideToActivateInteractiveDemo = ({
   const [isActivated, setIsActivated] = useState(false);
   const [progress, setProgress] = useState(0);
 
+  useEffect(() => {
+    setLabelText(props.labelText ?? initialLabel);
+  }, [props.labelText, initialLabel]);
   const reset = () => {
     setLabelText(initialLabel);
     setIsActivated(false);
