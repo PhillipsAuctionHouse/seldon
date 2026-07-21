@@ -4,7 +4,7 @@ import { forwardRef } from 'react';
 import { getCommonProps, useReducedMotion } from '../../utils';
 import { Loader } from '../Loader';
 import { Text, TextVariants } from '../Text';
-import { SlideToActivateThumb } from './components/SlideToActivateThumb';
+import { SlideToActivateThumb } from './SlideToActivateThumb';
 import { useSlideToActivate } from './hooks/useSlideToActivate';
 import { focusThumbFromTrack } from './slideToActivateUtils';
 import {

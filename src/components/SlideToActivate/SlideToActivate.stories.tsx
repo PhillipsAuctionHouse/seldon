@@ -4,7 +4,7 @@ import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Icon } from '../Icon';
 import { Text, TextVariants } from '../Text';
 import SlideToActivate from './SlideToActivate';
-import { SlideToActivateInteractiveDemo } from './SlideToActivateInteractiveDemo';
+import { SlideToActivateInteractiveDemo } from './SlideToActivate.stories.demo';
 import {
   SlideToActivateBorderRadii,
   SlideToActivateDisabledReasons,

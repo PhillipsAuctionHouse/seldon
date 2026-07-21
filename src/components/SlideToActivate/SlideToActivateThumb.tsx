@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import type { CSSProperties, KeyboardEvent, PointerEvent, ReactNode, Ref } from 'react';
-import type { SlideToActivateStatus } from '../slideToActivateUtils';
+import type { SlideToActivateStatus } from './slideToActivateUtils';
 
 interface SlideToActivateThumbProps {
   baseClassName: string;
