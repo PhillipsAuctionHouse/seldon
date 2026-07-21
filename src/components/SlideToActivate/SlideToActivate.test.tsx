@@ -210,7 +210,7 @@ describe('SlideToActivate', () => {
 
   it('applies a shared border radius modifier', () => {
     render(<SlideToActivate labelText="Confirm" borderRadius={SlideToActivateBorderRadii.pill} />);
-    expect(screen.getByTestId('slide-to-activate')).toHaveClass(`${px}-slide-to-activate--radius-3xl`);
+    expect(screen.getByTestId('slide-to-activate')).toHaveClass(`${px}-slide-to-activate--radius-pill`);
   });
 
   it('uses blocked disabled styles by default', () => {

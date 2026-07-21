@@ -16,7 +16,7 @@
     --seldon-slide-track-height: 32px;
   }
 
-  &--radius-xs {
+  &--radius-sharp {
     .#{$px}-slide-to-activate__track,
     .#{$px}-slide-to-activate__thumb-face {
       border-radius: $radius-xs;
@@ -27,7 +27,7 @@
     }
   }
 
-  &--radius-md {
+  &--radius-rounded {
     .#{$px}-slide-to-activate__track,
     .#{$px}-slide-to-activate__thumb-face {
       border-radius: $radius-md;
@@ -38,7 +38,7 @@
     }
   }
 
-  &--radius-3xl {
+  &--radius-pill {
     .#{$px}-slide-to-activate__track,
     .#{$px}-slide-to-activate__thumb-face {
       border-radius: $radius-3xl;

@@ -14,13 +14,12 @@ export type SlideToActivateSizes = ButtonSizes;
 /**
  * Shared corner radius for track, thumb face, and focus ring. Narrowed to three options —
  * every unused option is another class kept alive in Chromatic snapshots and jsdoc, for a
- * value that's never actually reached for. Values are the underlying `$radius-*` design
- * tokens (used verbatim in the generated `--radius-{value}` class), keys are the sensible names.
+ * value that's never actually reached for.
  */
 export enum SlideToActivateBorderRadii {
-  sharp = 'xs',
-  rounded = 'md',
-  pill = '3xl',
+  sharp = 'sharp',
+  rounded = 'rounded',
+  pill = 'pill',
 }
 
 /** Why the control is disabled — drives distinct visuals. */
