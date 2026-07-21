@@ -27,17 +27,6 @@
     }
   }
 
-  &--radius-sm {
-    .#{$px}-slide-to-activate__track,
-    .#{$px}-slide-to-activate__thumb-face {
-      border-radius: $radius-sm;
-    }
-
-    .#{$px}-slide-to-activate__thumb:focus-visible {
-      @include focus-ring($border-radius: $radius-sm);
-    }
-  }
-
   &--radius-md {
     .#{$px}-slide-to-activate__track,
     .#{$px}-slide-to-activate__thumb-face {
@@ -46,39 +35,6 @@
 
     .#{$px}-slide-to-activate__thumb:focus-visible {
       @include focus-ring($border-radius: $radius-md);
-    }
-  }
-
-  &--radius-lg {
-    .#{$px}-slide-to-activate__track,
-    .#{$px}-slide-to-activate__thumb-face {
-      border-radius: $radius-lg;
-    }
-
-    .#{$px}-slide-to-activate__thumb:focus-visible {
-      @include focus-ring($border-radius: $radius-lg);
-    }
-  }
-
-  &--radius-xl {
-    .#{$px}-slide-to-activate__track,
-    .#{$px}-slide-to-activate__thumb-face {
-      border-radius: $radius-xl;
-    }
-
-    .#{$px}-slide-to-activate__thumb:focus-visible {
-      @include focus-ring($border-radius: $radius-xl);
-    }
-  }
-
-  &--radius-2xl {
-    .#{$px}-slide-to-activate__track,
-    .#{$px}-slide-to-activate__thumb-face {
-      border-radius: $radius-2xl;
-    }
-
-    .#{$px}-slide-to-activate__thumb:focus-visible {
-      @include focus-ring($border-radius: $radius-2xl);
     }
   }
 

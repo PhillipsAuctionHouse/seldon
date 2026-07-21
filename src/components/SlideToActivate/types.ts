@@ -11,14 +11,14 @@ export enum SlideToActivateDirections {
 export const SlideToActivateSizes = ButtonSizes;
 export type SlideToActivateSizes = ButtonSizes;
 
-/** Shared corner radius for track, thumb face, and focus ring. */
+/**
+ * Shared corner radius for track, thumb face, and focus ring. Narrowed to three options
+ * (sharp / rounded / pill) — every unused option is another class kept alive in Chromatic
+ * snapshots and jsdoc, for a value that's never actually reached for.
+ */
 export enum SlideToActivateBorderRadii {
   xs = 'xs',
-  sm = 'sm',
   md = 'md',
-  lg = 'lg',
-  xl = 'xl',
-  twoXl = '2xl',
   threeXl = '3xl',
 }
 
