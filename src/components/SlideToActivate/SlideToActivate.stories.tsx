@@ -74,7 +74,7 @@ export const PillThumb = (props: SlideToActivateProps) => (
   <SlideToActivateInteractiveDemo
     {...props}
     thumbWidth={72}
-    borderRadius={SlideToActivateBorderRadii.threeXl}
+    borderRadius={SlideToActivateBorderRadii.pill}
     thumbIcon={chevronIcon}
   />
 );
@@ -202,7 +202,7 @@ export const CustomStyling = (props: SlideToActivateProps) => (
         {...props}
         labelText="Slide to unlock"
         activatedLabel="Unlocked"
-        borderRadius={SlideToActivateBorderRadii.threeXl}
+        borderRadius={SlideToActivateBorderRadii.pill}
         thumbIcon={chevronIcon}
       />
     </div>

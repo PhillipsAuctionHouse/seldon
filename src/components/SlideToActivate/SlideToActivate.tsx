@@ -41,7 +41,7 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
       sensitivity = 1,
       direction = SlideToActivateDirections.ltr,
       size = SlideToActivateSizes.default,
-      borderRadius = SlideToActivateBorderRadii.xs,
+      borderRadius = SlideToActivateBorderRadii.sharp,
       thumbHitTolerance = 8,
       thumbIcon,
       thumbWidth,
