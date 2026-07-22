@@ -70,7 +70,7 @@ export const useSlideDragHandlers = ({
 
   const handlePointerDown = useCallback(
     (event: ReactPointerEvent<HTMLButtonElement>) => {
-      if (isDisabled || isGestureBusy(stateRef.current.status)) {
+      if (isDisabled || isGestureBusy(stateRef.current.status) || stateRef.current.progress >= 1) {
         return;
       }
       // Avoid text selection / scroll stealing the gesture (esp. Storybook iframe + touch).
