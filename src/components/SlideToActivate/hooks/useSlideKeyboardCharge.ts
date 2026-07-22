@@ -99,7 +99,7 @@ export const useSlideKeyboardCharge = ({
 
   const handleKeyDown = useCallback(
     (event: ReactKeyboardEvent<HTMLButtonElement>) => {
-      if (isDisabled || isGestureBusy(stateRef.current.status)) {
+      if (isDisabled || isGestureBusy(stateRef.current.status) || stateRef.current.progress >= 1) {
         return;
       }
       if (event.key === 'Escape') {
