@@ -1,5 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import SeldonImage from './SeldonImage';
+import { AspectRatio } from './types';
 import { runCommonTests } from '../../utils/testUtils';
 import { px } from '../../utils';
 
@@ -15,8 +16,23 @@ describe('SeldonImage', () => {
   });
 
   it('applies aspect ratio class correctly', () => {
-    const { container } = render(<SeldonImage src="test-image.jpg" alt="" aspectRatio="16/9" />);
+    const { container } = render(<SeldonImage src="test-image.jpg" alt="" aspectRatio={AspectRatio.Landscape} />);
     expect(container.firstChild).toHaveClass(`${px}-seldon-image--aspect-ratio-16-9`);
+  });
+
+  it('applies 3/4 aspect ratio class correctly', () => {
+    const { container } = render(<SeldonImage src="test-image.jpg" alt="" aspectRatio={AspectRatio.Portrait} />);
+    expect(container.firstChild).toHaveClass(`${px}-seldon-image--aspect-ratio-3-4`);
+  });
+
+  it('applies 1/1 aspect ratio class correctly', () => {
+    const { container } = render(<SeldonImage src="test-image.jpg" alt="" aspectRatio={AspectRatio.Square} />);
+    expect(container.firstChild).toHaveClass(`${px}-seldon-image--aspect-ratio-1-1`);
+  });
+
+  it('does not apply an aspect ratio class when aspectRatio is None', () => {
+    const { container } = render(<SeldonImage src="test-image.jpg" alt="" aspectRatio={AspectRatio.None} />);
+    expect(container.firstChild).not.toHaveClass(`${px}-seldon-image--aspect-ratio-none`);
   });
 
   it('applies object fit class correctly', () => {

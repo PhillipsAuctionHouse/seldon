@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { ComponentProps, ElementType, forwardRef, memo, useRef } from 'react';
 import { Icon } from '../../components/Icon';
 import Link, { LinkProps } from '../../components/Link/Link';
-import { SeldonImage } from '../../components/SeldonImage';
+import { SeldonImage, AspectRatio } from '../../components/SeldonImage';
 import { Text, TextVariants } from '../../components/Text';
 import { getCommonProps } from '../../utils';
 
@@ -205,7 +205,7 @@ const ListImageVariant = ({
     >
       <SeldonImage
         alt={name}
-        aspectRatio="1/1"
+        aspectRatio={AspectRatio.Square}
         className={`${baseClassName}__media`}
         objectFit="contain"
         src={imageSrc}
