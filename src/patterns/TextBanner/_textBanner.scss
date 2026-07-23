@@ -14,7 +14,7 @@
     flex-direction: column;
     justify-content: space-between;
     max-width: none;
-    padding: $spacing-lg 0;
+    padding: 24px 0;
 
     h1 {
       white-space: nowrap;
@@ -33,6 +33,7 @@
 
     @include media($breakpoint-md) {
       flex-direction: row;
+      padding-block: 32px;
 
       h1,
       p,
