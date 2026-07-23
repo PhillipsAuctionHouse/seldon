@@ -26,11 +26,6 @@ $dropdown-width: 320px;
     }
   }
 
-  &__button-wrap {
-    display: flex;
-    justify-content: flex-end;
-  }
-
   &__buttons-wrap {
     border-top: 1px solid $bg-border;
     display: flex;
@@ -65,27 +60,18 @@ $dropdown-width: 320px;
     padding-bottom: calc(#{$spacing-sm} + env(safe-area-inset-bottom));
   }
 
+  // Sort dropdown has no footer buttons; this spacer preserves the safe-area
+  // inset so the last option stays clear of the iOS home indicator.
+  &__mobile-safe-area {
+    padding-bottom: calc(#{$spacing-sm} + env(safe-area-inset-bottom));
+  }
+
   &__header {
     margin-bottom: $spacing-sm;
     margin-top: 0;
 
     &--mobile {
       padding: $spacing-md $spacing-md 0 $spacing-md;
-    }
-  }
-
-  &__button {
-    align-self: flex-end;
-    padding: $spacing-sm $spacing-md;
-
-    &--text {
-      text-wrap: nowrap;
-    }
-
-    &--mobile {
-      display: block;
-      margin: $spacing-sm auto $spacing-md auto;
-      width: 80%;
     }
   }
 
@@ -118,6 +104,9 @@ $dropdown-width: 320px;
   .#{$px}-input__input[type='radio'] {
     align-self: center;
     margin-left: auto;
+  }
+  .#{$px}-input__input[type='checkbox']:disabled {
+    border-color: $keyline-gray;
   }
   .#{$px}-input__input[type='checkbox'] {
     align-self: center;
@@ -159,6 +148,14 @@ $dropdown-width: 320px;
   max-height: 2rem;
 }
 
+// Filter option labels use the labels/label-small-bold type token.
+.#{$px}-filter-dropdown-menu,
+.#{$px}-filter-drawer-menu {
+  .#{$px}-input__label.#{$px}-text {
+    @include label-styles($font-size: $font-size-label-small, $font-weight: 600);
+  }
+}
+
 .#{$px}-filter-drawer-mobile {
   height: min(70dvh, 640px);
   padding: 0;
@@ -185,6 +182,10 @@ $dropdown-width: 320px;
   .#{$px}-filter-dropdown-menu__mobile-wrap {
     flex: 0 0 auto;
     margin-top: 0;
+  }
+
+  .#{$px}-filter-dropdown-menu__mobile-safe-area {
+    flex: 0 0 auto;
   }
 }
 

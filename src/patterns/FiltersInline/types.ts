@@ -74,11 +74,18 @@ export type FilterType = {
 };
 
 /**
+ * Where a filter input change originated: the main filter drawer or an
+ * individual filter dropdown (desktop popover or mobile bottom sheet).
+ */
+export type FilterChangeSource = 'drawer' | 'dropdown';
+
+/**
  * Handler for when a filter input changes (checkbox, radio, or select).
  */
 export type FilterChangeHandler = (
   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   filterId: string,
+  source?: FilterChangeSource,
 ) => void;
 
 /**
@@ -151,11 +158,11 @@ export interface FilterDropdownProps extends BaseFilterProps {
 
 /**
  * Object containing translated strings for dropdown menu actions.
- * - confirm: Label for the confirm/apply button.
  * - clearAll: Label for the "Clear all" button.
  * - showAuctions: Label for the button showing the number of auctions/results.
  */
 export type DropdownMenuTranslation = {
+  /** @deprecated The sort dropdown no longer renders a confirm button; sort applies on selection. */
   confirm?: string | null;
   clearAll?: string | null;
   showAuctions?: string | null;
@@ -174,7 +181,7 @@ export interface FilterDropdownMenuProps extends React.HTMLAttributes<HTMLDivEle
   /** Index of the filter to display (typically corresponds to the selected filter) */
   filterIndex?: number;
   /** Handler for when a filter input is changed */
-  onSelectFilter?: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, filterType: string) => void;
+  onSelectFilter?: FilterChangeHandler;
   /** Handler for when the filter is confirmed or updated */
   onApplyFilter?: (returnCountOnly?: boolean) => void;
   /** Handler for clearing the filter (by type) */
