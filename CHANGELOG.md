@@ -1,3 +1,10 @@
+# [1.275.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.274.0...v1.275.0) (2026-07-23)
+
+
+### Features
+
+* **SeldonImage:** PDD-459 add 3/4 portrait aspect ratio ([#894](https://github.com/PhillipsAuctionHouse/seldon/issues/894)) ([9480ae9](https://github.com/PhillipsAuctionHouse/seldon/commit/9480ae911fc6bd772865d657df5d418c700e699c))
+
 # [1.274.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.273.0...v1.274.0) (2026-07-20)
 
 
