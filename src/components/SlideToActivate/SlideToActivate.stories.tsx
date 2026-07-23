@@ -2,6 +2,7 @@ import type { Meta } from '@storybook/react-vite';
 import type { CSSProperties } from 'react';
 import { Text, TextVariants } from '../Text';
 import SlideToActivate from './SlideToActivate';
+import { actionArgTypes, playgroundArgTypes } from './SlideToActivate.stories.argTypes';
 import { SlideToActivateInteractiveDemo } from './SlideToActivate.stories.demo';
 import {
   SlideToActivateBorderRadii,
@@ -21,18 +22,6 @@ export default meta;
 
 const WIDTH_EXAMPLES = [180, 240, 320, 480] as const;
 
-const argTypes = {
-  onActivation: {
-    action: 'onActivation',
-  },
-  onError: {
-    action: 'onError',
-  },
-  onProgress: {
-    action: 'onProgress',
-  },
-};
-
 export const Playground = (props: SlideToActivateProps) => (
   <SlideToActivateInteractiveDemo {...props}>
     <Text className="slide-to-activate-story__hint">
@@ -47,13 +36,26 @@ export const Playground = (props: SlideToActivateProps) => (
 
 Playground.args = {
   labelText: 'Slide to bid $10,000',
+  textVariant: TextVariants.labelMedium,
+  requiredProgress: 0.95,
+  deadZone: 8,
+  sensitivity: 1,
+  direction: SlideToActivateDirections.ltr,
+  size: SlideToActivateSizes.default,
+  borderRadius: SlideToActivateBorderRadii.sharp,
+  thumbHitTolerance: 8,
+  isDisabled: false,
+  disabledReason: SlideToActivateDisabledReasons.blocked,
+  showThumbWhenDisabled: true,
+  successAnnouncement: 'Activated.',
+  errorAnnouncement: 'Action failed. Please try again.',
 };
 
 Playground.parameters = {
   chromatic: { disableSnapshot: true },
 };
 
-Playground.argTypes = argTypes;
+Playground.argTypes = playgroundArgTypes;
 
 export const WithThumbIconHeldState = (props: SlideToActivateProps) => (
   <div className="slide-to-activate-story-held-demo">
@@ -64,13 +66,13 @@ export const WithThumbIconHeldState = (props: SlideToActivateProps) => (
   </div>
 );
 
-WithThumbIconHeldState.argTypes = argTypes;
+WithThumbIconHeldState.argTypes = actionArgTypes;
 
 export const PillThumb = (props: SlideToActivateProps) => (
   <SlideToActivateInteractiveDemo {...props} thumbWidth={72} borderRadius={SlideToActivateBorderRadii.pill} />
 );
 
-PillThumb.argTypes = argTypes;
+PillThumb.argTypes = actionArgTypes;
 
 export const Widths = (props: SlideToActivateProps) => (
   <div className="slide-to-activate-story-widths">
@@ -102,7 +104,7 @@ export const Widths = (props: SlideToActivateProps) => (
   </div>
 );
 
-Widths.argTypes = argTypes;
+Widths.argTypes = actionArgTypes;
 
 export const DisabledStates = (props: SlideToActivateProps) => (
   <div className="slide-to-activate-story-disabled-states">
@@ -149,19 +151,19 @@ export const AsyncActivation = (props: SlideToActivateProps) => (
   />
 );
 
-AsyncActivation.argTypes = argTypes;
+AsyncActivation.argTypes = actionArgTypes;
 
 export const Rtl = (props: SlideToActivateProps) => (
   <SlideToActivateInteractiveDemo {...props} direction={SlideToActivateDirections.rtl} />
 );
 
-Rtl.argTypes = argTypes;
+Rtl.argTypes = actionArgTypes;
 
 export const Small = (props: SlideToActivateProps) => (
   <SlideToActivateInteractiveDemo {...props} size={SlideToActivateSizes.small} />
 );
 
-Small.argTypes = argTypes;
+Small.argTypes = actionArgTypes;
 
 export const CustomStyling = (props: SlideToActivateProps) => (
   <div className="slide-to-activate-story-custom-styling">
@@ -179,4 +181,4 @@ export const CustomStyling = (props: SlideToActivateProps) => (
   </div>
 );
 
-CustomStyling.argTypes = argTypes;
+CustomStyling.argTypes = actionArgTypes;
