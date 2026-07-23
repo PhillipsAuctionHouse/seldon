@@ -238,6 +238,17 @@ describe('SlideToActivate', () => {
     expect(icon.closest(`.${px}-slide-to-activate__thumb-face`)).toHaveAttribute('aria-hidden', 'true');
   });
 
+  it('renders the default double-chevron thumb icon', () => {
+    render(<SlideToActivate labelText="Confirm" />);
+    expect(document.querySelector(`.${px}-slide-to-activate__thumb-chevrons`)).toBeInTheDocument();
+  });
+
+  it('hides the thumb icon when thumbIcon is null', () => {
+    render(<SlideToActivate labelText="Confirm" thumbIcon={null} />);
+    expect(document.querySelector(`.${px}-slide-to-activate__thumb-chevrons`)).not.toBeInTheDocument();
+    expect(document.querySelector(`.${px}-slide-to-activate__thumb-icon`)).not.toBeInTheDocument();
+  });
+
   it('ignores irrelevant keys', () => {
     const onProgress = vi.fn();
     render(<SlideToActivate labelText="Confirm" onProgress={onProgress} />);

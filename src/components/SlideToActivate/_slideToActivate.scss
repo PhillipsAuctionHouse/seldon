@@ -1,10 +1,11 @@
 @use '~scss/allPartials' as *;
 
 .#{$px}-slide-to-activate {
+  // Figma Saleroom Bid Status (8482:81744): 44 track / 40 thumb / 2px inset.
   --seldon-slide-thumb-size: 40px;
   --seldon-slide-hit-tolerance: 8px;
   --seldon-slide-track-height: 44px;
-  --seldon-slide-gutter-inset: #{$padding-micro};
+  --seldon-slide-gutter-inset: 2px;
 
   display: block;
   max-width: 100%;
@@ -19,11 +20,11 @@
   &--radius-sharp {
     .#{$px}-slide-to-activate__track,
     .#{$px}-slide-to-activate__thumb-face {
-      border-radius: $radius-xs;
+      border-radius: 0;
     }
 
     .#{$px}-slide-to-activate__thumb:focus-visible {
-      @include focus-ring($border-radius: $radius-xs);
+      @include focus-ring($border-radius: 0);
     }
   }
 
@@ -52,7 +53,7 @@
   &__track {
     align-items: center;
     background-color: $pure-black;
-    border-radius: $radius-xs;
+    border-radius: 0;
     box-sizing: border-box;
     display: flex;
     height: var(--seldon-slide-track-height);
@@ -123,7 +124,7 @@
     }
 
     &:focus-visible {
-      @include focus-ring($border-radius: $radius-xs);
+      @include focus-ring($border-radius: 0);
     }
 
     &--held .#{$px}-slide-to-activate__thumb-face {
@@ -134,8 +135,8 @@
   &__thumb-face {
     align-items: center;
     background-color: $pure-white;
-    border: 2px solid $pure-black;
-    border-radius: $radius-xs;
+    border: 0;
+    border-radius: 0;
     box-sizing: border-box;
     color: $pure-black;
     display: flex;
@@ -145,9 +146,26 @@
     transition:
       box-shadow 0.28s ease-out,
       background-color 0.32s ease-out,
-      border-color 0.32s ease-out,
       color 0.32s ease-out;
     width: 100%;
+  }
+
+  // Figma Chevron Group (8893:13050): two 22px ChevronRight icons, second at x=12.
+  &__thumb-chevrons {
+    align-items: center;
+    display: flex;
+    height: 22px;
+    width: 33px;
+
+    > *:last-child {
+      margin-left: -11px;
+    }
+
+    .#{$px}-icon {
+      flex-shrink: 0;
+      height: 22px;
+      width: 22px;
+    }
   }
 
   &__thumb-icon {
@@ -157,13 +175,32 @@
     transition: transform 0.15s ease-out;
 
     svg {
-      height: calc($font-size-label-small * 1.3);
-      width: calc($font-size-label-small * 1.3);
+      height: 22px;
+      width: 22px;
     }
 
     &--held {
       transform: scale(1.1);
     }
+  }
+
+  &--small &__thumb-chevrons {
+    height: 16px;
+    width: 24px;
+
+    > *:last-child {
+      margin-left: -8px;
+    }
+
+    .#{$px}-icon {
+      height: 16px;
+      width: 16px;
+    }
+  }
+
+  &--small &__thumb-icon svg {
+    height: 16px;
+    width: 16px;
   }
 
   &--rtl &__thumb {
@@ -210,7 +247,6 @@
 
     .#{$px}-slide-to-activate__thumb-face {
       background-color: $grey-50;
-      border-color: $grey-50;
       color: $grey-100;
     }
   }

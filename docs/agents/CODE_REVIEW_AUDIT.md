@@ -157,13 +157,17 @@ Grep found **`!important`** usage in:
 
 To keep this audit actionable after plan execution or major agent changes:
 
-- Use local skills first as a review gate:
+- Use local skills first as a review gate when doing substantial UI work:
   - `.agents/skills/radix-ui-design-system`
   - `.agents/skills/accessibility-compliance-accessibility-audit`
+  - Plus other skills from `.agents/skills/` when the change set matches (size, stories, tests, SCSS, imports, etc.)
 - Then run project checks from `docs/agents/QUALITY.md`:
   - `npm run format`
   - `npm run lint`
   - `npm run test`
 - Enforcement path:
-  - `.cursor/hooks/post-agent-quality.sh` schedules a background follow-up agent on completion and now prompts that run to execute the two skills as an audit pass before command checks.
-- If the work is not major, the skill pass can be treated as lightweight (only report material risks).
+  - `.cursor/hooks/post-agent-quality.sh` (Cursor `stop` hook) runs `format` → `lint` → `test` quietly after a successful foreground agent turn.
+  - On success it emits no chat follow-up.
+  - On failure it posts a short `followup_message` with the failing step and a truncated log.
+- Skill audits are **not** auto-scheduled by the hook; run them intentionally when the change warrants it.
+- If the work is not major, a skill pass can be treated as lightweight (only report material risks).

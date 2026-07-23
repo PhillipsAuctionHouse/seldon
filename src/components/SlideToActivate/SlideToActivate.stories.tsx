@@ -1,6 +1,5 @@
 import type { Meta } from '@storybook/react-vite';
 import type { CSSProperties } from 'react';
-import { Icon } from '../Icon';
 import { Text, TextVariants } from '../Text';
 import SlideToActivate from './SlideToActivate';
 import { SlideToActivateInteractiveDemo } from './SlideToActivate.stories.demo';
@@ -20,8 +19,6 @@ const meta = {
 
 export default meta;
 
-const chevronIcon = <Icon icon="ChevronRight" height={20} width={20} color="currentColor" />;
-
 const WIDTH_EXAMPLES = [180, 240, 320, 480] as const;
 
 const argTypes = {
@@ -37,7 +34,7 @@ const argTypes = {
 };
 
 export const Playground = (props: SlideToActivateProps) => (
-  <SlideToActivateInteractiveDemo {...props} thumbIcon={props.thumbIcon ?? chevronIcon}>
+  <SlideToActivateInteractiveDemo {...props}>
     <Text className="slide-to-activate-story__hint">
       Note: Inputs do not work in some stories unless there is content between the interactive elements and the iframe
       edge.
@@ -49,7 +46,7 @@ export const Playground = (props: SlideToActivateProps) => (
 );
 
 Playground.args = {
-  labelText: 'Swipe to confirm',
+  labelText: 'Slide to bid $10,000',
 };
 
 Playground.parameters = {
@@ -60,7 +57,7 @@ Playground.argTypes = argTypes;
 
 export const WithThumbIconHeldState = (props: SlideToActivateProps) => (
   <div className="slide-to-activate-story-held-demo">
-    <SlideToActivateInteractiveDemo {...props} thumbIcon={chevronIcon} />
+    <SlideToActivateInteractiveDemo {...props} />
     <Text className="slide-to-activate-story__hint" variant={TextVariants.bodySmall}>
       Press and hold the thumb — `__thumb-icon--held` / `__thumb--held` styles apply while dragging.
     </Text>
@@ -70,12 +67,7 @@ export const WithThumbIconHeldState = (props: SlideToActivateProps) => (
 WithThumbIconHeldState.argTypes = argTypes;
 
 export const PillThumb = (props: SlideToActivateProps) => (
-  <SlideToActivateInteractiveDemo
-    {...props}
-    thumbWidth={72}
-    borderRadius={SlideToActivateBorderRadii.pill}
-    thumbIcon={chevronIcon}
-  />
+  <SlideToActivateInteractiveDemo {...props} thumbWidth={72} borderRadius={SlideToActivateBorderRadii.pill} />
 );
 
 PillThumb.argTypes = argTypes;
@@ -97,7 +89,7 @@ export const Widths = (props: SlideToActivateProps) => (
         <Text className="slide-to-activate-story__hint" variant={TextVariants.bodySmall}>
           {width}px
         </Text>
-        <SlideToActivateInteractiveDemo {...props} labelText="Swipe to confirm" thumbIcon={chevronIcon} />
+        <SlideToActivateInteractiveDemo {...props} labelText="Swipe to confirm" />
       </div>
     ))}
     <Text className="slide-to-activate-story__hint">
@@ -120,7 +112,6 @@ export const DisabledStates = (props: SlideToActivateProps) => (
         labelText="Bidding closed"
         isDisabled
         disabledReason={SlideToActivateDisabledReasons.blocked}
-        thumbIcon={chevronIcon}
       />
     </div>
     <div className="slide-to-activate-story">
@@ -149,7 +140,6 @@ export const AsyncActivation = (props: SlideToActivateProps) => (
     initialLabel="Swipe to place bid"
     pendingLabel="Placing bid…"
     activatedLabel="Bid placed"
-    thumbIcon={chevronIcon}
     onActivation={async () => {
       await new Promise((resolve) => {
         setTimeout(resolve, 2800);
@@ -162,13 +152,13 @@ export const AsyncActivation = (props: SlideToActivateProps) => (
 AsyncActivation.argTypes = argTypes;
 
 export const Rtl = (props: SlideToActivateProps) => (
-  <SlideToActivateInteractiveDemo {...props} direction={SlideToActivateDirections.rtl} thumbIcon={chevronIcon} />
+  <SlideToActivateInteractiveDemo {...props} direction={SlideToActivateDirections.rtl} />
 );
 
 Rtl.argTypes = argTypes;
 
 export const Small = (props: SlideToActivateProps) => (
-  <SlideToActivateInteractiveDemo {...props} size={SlideToActivateSizes.small} thumbIcon={chevronIcon} />
+  <SlideToActivateInteractiveDemo {...props} size={SlideToActivateSizes.small} />
 );
 
 Small.argTypes = argTypes;
@@ -181,11 +171,10 @@ export const CustomStyling = (props: SlideToActivateProps) => (
         labelText="Slide to unlock"
         activatedLabel="Unlocked"
         borderRadius={SlideToActivateBorderRadii.pill}
-        thumbIcon={chevronIcon}
       />
     </div>
     <div className="slide-to-activate-story-compact">
-      <SlideToActivateInteractiveDemo {...props} labelText="Confirm" thumbIcon={chevronIcon} />
+      <SlideToActivateInteractiveDemo {...props} labelText="Confirm" />
     </div>
   </div>
 );

@@ -12,9 +12,8 @@ export const SlideToActivateSizes = ButtonSizes;
 export type SlideToActivateSizes = ButtonSizes;
 
 /**
- * Shared corner radius for track, thumb face, and focus ring. Narrowed to three options —
- * every unused option is another class kept alive in Chromatic snapshots and jsdoc, for a
- * value that's never actually reached for.
+ * Shared corner radius for track, thumb face, and focus ring.
+ * `sharp` is 0 to match Saleroom Bid Status; `rounded` / `pill` for branded variants.
  */
 export enum SlideToActivateBorderRadii {
   sharp = 'sharp',
@@ -63,11 +62,14 @@ export interface SlideToActivateProps extends Omit<HTMLAttributes<HTMLDivElement
   direction?: SlideToActivateDirections | `${SlideToActivateDirections}`;
   /** Control height; matches Button default (44) / small (32). */
   size?: SlideToActivateSizes | `${SlideToActivateSizes}`;
-  /** Corner radius shared by track, thumb face, and focus ring. Default `sharp`. */
+  /** Corner radius shared by track, thumb face, and focus ring. Default `sharp` (0 — Figma Bid Status). */
   borderRadius?: SlideToActivateBorderRadii | `${SlideToActivateBorderRadii}`;
   /** Extra press target around the thumb (px). Default `8`. */
   thumbHitTolerance?: number;
-  /** Optional icon rendered inside the thumb (decorative). */
+  /**
+   * Icon rendered inside the thumb (decorative). Defaults to a double ChevronRight
+   * matching the Saleroom Figma Bid Status control. Pass `null` to hide.
+   */
   thumbIcon?: ReactNode;
   /** When set, thumb becomes a pill of this width (px); otherwise square like Button. */
   thumbWidth?: number;

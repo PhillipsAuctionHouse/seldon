@@ -43,7 +43,7 @@ $branded-petal: color.mix($pure-white, $highlight-red, 82%);
 
   .#{$px}-slide-to-activate__thumb-face {
     background: linear-gradient(145deg, $pure-white 0%, $branded-blush 100%);
-    border-color: rgba($highlight-purple, 0.35);
+    border: 2px solid rgba($highlight-purple, 0.35);
     box-shadow: 0 2px 8px rgba($highlight-purple, 0.18);
     color: $highlight-purple;
   }
@@ -94,7 +94,7 @@ $branded-petal: color.mix($pure-white, $highlight-red, 82%);
 
   .#{$px}-slide-to-activate__thumb-face {
     background-color: $pure-black;
-    border-color: $pure-black;
+    border: 2px solid $pure-black;
     color: $pure-white;
   }
 
