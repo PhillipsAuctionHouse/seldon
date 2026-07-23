@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 # Cursor `stop` hook for post-agent quality checks.
+#
 # Behavior:
-# 1) Foreground agent completion -> schedule one background follow-up agent run.
-# 2) Background follow-up completion -> run quality checks (format, lint, test).
+# - On a successful foreground agent completion (loop_count 0), run
+#   format → lint → test quietly.
+# - On success: emit no chat follow-up (`{}`).
+# - On failure: emit a short `followup_message` with the failing step and
+#   a truncated log so the failure is visible in chat.
 #
 # Hook I/O:
 # - reads JSON input on stdin
@@ -38,51 +42,61 @@ if echo "${INPUT}" | rg -q '"loop_count"\s*:\s*0'; then
   LOOP_ZERO=1
 fi
 
-# Only react to successful completions.
-if [[ "${IS_COMPLETED}" -ne 1 ]]; then
+# Only foreground completions on the first stop loop — no chat noise from
+# background agents or follow-up turns.
+if [[ "${IS_COMPLETED}" -ne 1 || "${IS_BACKGROUND}" -eq 1 || "${LOOP_ZERO}" -ne 1 ]]; then
   echo '{}'
   exit 0
 fi
 
-# Foreground pass: request one background-only follow-up run.
-if [[ "${IS_BACKGROUND}" -ne 1 ]]; then
-  if [[ "${LOOP_ZERO}" -eq 1 ]]; then
-    cat <<'JSON'
-{"followup_message":"Run this as a background agent only. For major implementation work, run the local skill pass before command checks, using docs/agents/CODE_REVIEW_AUDIT.md for audit framing and selecting applicable skills from this set: `.agents/skills/radix-ui-design-system`, `.agents/skills/accessibility-compliance-accessibility-audit`, `.agents/skills/component-size-splitter`, `.agents/skills/storybook-coverage-enforcer`, `.agents/skills/unit-test-coverage-enforcer`, `.agents/skills/testing-library-modernization`, `.agents/skills/conditional-rendering-conventions`, `.agents/skills/scss-specificity-remediation`, `.agents/skills/import-and-type-style-normalizer`, `.agents/skills/branch-coverage-hotspot-hunter`. Always include radix + accessibility for substantial UI work; add the others when the change set/audit signals match. Then execute project quality checks from docs/agents/QUALITY.md (npm run format && npm run lint && npm run test). Report concise pass/fail, include key audit findings, include which skills were applied and why, and include the first failing command output if anything fails. Do not make code edits in this pass."}
-JSON
-    exit 0
+LOG="$(mktemp -t seldon-post-agent-quality.XXXXXX)"
+trap 'rm -f "${LOG}"' EXIT
+
+FAILED_STEP=""
+
+run_step() {
+  local name="$1"
+  shift
+  if [[ -n "${FAILED_STEP}" ]]; then
+    return 0
   fi
+  {
+    echo ""
+    echo "=== ${name} ==="
+  } >>"${LOG}"
+  if ! "$@" >>"${LOG}" 2>&1; then
+    FAILED_STEP="${name}"
+  fi
+}
 
+run_step "npm run format" npm run format
+run_step "npm run lint" npm run lint
+run_step "npm run test" npm run test
+
+if [[ -z "${FAILED_STEP}" ]]; then
   echo '{}'
   exit 0
 fi
 
-# Background pass: perform the checks.
-FAILED=0
+# Truncate log for chat; keep the tail where command failures usually land.
+LOG_TAIL="$(tail -n 40 "${LOG}" | sed 's/[[:space:]]*$//')"
 
-echo "" >&2
-echo "=== Seldon background quality hook (format -> lint -> test) ===" >&2
+FOLLOWUP="$(
+  cat <<EOF
+post-agent-quality failed on \`${FAILED_STEP}\`. Do not re-run the full skill audit. Briefly report this failure to the user (no code edits unless they ask).
 
-if ! npm run format >&2; then
-  FAILED=1
-  echo "post-agent-quality: npm run format failed" >&2
+\`\`\`
+${LOG_TAIL}
+\`\`\`
+EOF
+)"
+
+# Safe JSON for Cursor followup_message.
+if ! command -v python3 >/dev/null 2>&1; then
+  printf '{"followup_message":"post-agent-quality failed on %s (python3 unavailable to format log)."}\n' "${FAILED_STEP}"
+  exit 0
 fi
 
-if ! npm run lint >&2; then
-  FAILED=1
-  echo "post-agent-quality: npm run lint failed" >&2
-fi
+printf '%s' "${FOLLOWUP}" | python3 -c 'import json, sys; print(json.dumps({"followup_message": sys.stdin.read()}))'
 
-if ! npm run test >&2; then
-  FAILED=1
-  echo "post-agent-quality: npm run test failed" >&2
-fi
-
-if [[ "${FAILED}" -ne 0 ]]; then
-  echo "post-agent-quality: finished with failures (see logs)." >&2
-else
-  echo "post-agent-quality: format, lint, and test completed successfully." >&2
-fi
-
-echo '{}'
 exit 0

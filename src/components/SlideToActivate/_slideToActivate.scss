@@ -1,0 +1,284 @@
+@use '~scss/allPartials' as *;
+
+.#{$px}-slide-to-activate {
+  // Figma Saleroom Bid Status (8482:81744): 44 track / 40 thumb / 2px inset.
+  --seldon-slide-thumb-size: 40px;
+  --seldon-slide-hit-tolerance: 8px;
+  --seldon-slide-track-height: 44px;
+  --seldon-slide-gutter-inset: 2px;
+
+  display: block;
+  max-width: 100%;
+  touch-action: none;
+  width: 100%;
+
+  &--small {
+    --seldon-slide-thumb-size: 28px;
+    --seldon-slide-track-height: 32px;
+  }
+
+  &--radius-sharp {
+    .#{$px}-slide-to-activate__track,
+    .#{$px}-slide-to-activate__thumb-face {
+      border-radius: 0;
+    }
+
+    .#{$px}-slide-to-activate__thumb:focus-visible {
+      @include focus-ring($border-radius: 0);
+    }
+  }
+
+  &--radius-rounded {
+    .#{$px}-slide-to-activate__track,
+    .#{$px}-slide-to-activate__thumb-face {
+      border-radius: $radius-md;
+    }
+
+    .#{$px}-slide-to-activate__thumb:focus-visible {
+      @include focus-ring($border-radius: $radius-md);
+    }
+  }
+
+  &--radius-pill {
+    .#{$px}-slide-to-activate__track,
+    .#{$px}-slide-to-activate__thumb-face {
+      border-radius: $radius-3xl;
+    }
+
+    .#{$px}-slide-to-activate__thumb:focus-visible {
+      @include focus-ring($border-radius: $radius-3xl);
+    }
+  }
+
+  &__track {
+    align-items: center;
+    background-color: $pure-black;
+    border-radius: 0;
+    box-sizing: border-box;
+    display: flex;
+    height: var(--seldon-slide-track-height);
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    touch-action: none;
+    transition:
+      background-color 0.32s ease-out,
+      border-color 0.32s ease-out;
+    user-select: none;
+    width: 100%;
+  }
+
+  &__label {
+    color: $pure-white;
+    font-variation-settings: 'wght' 600;
+    pointer-events: none;
+    position: relative;
+    transition:
+      color 0.32s ease-out,
+      opacity 0.28s ease-out;
+    z-index: 1;
+  }
+
+  &__pending-indicator {
+    align-items: center;
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    pointer-events: none;
+    position: absolute;
+    transition: opacity 0.28s ease-out;
+    z-index: 2;
+
+    .#{$px}-loader {
+      border-color: $pure-white;
+      border-bottom-color: transparent;
+    }
+  }
+
+  &__thumb {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    cursor: grab;
+    display: flex;
+    height: var(--seldon-slide-thumb-size);
+    justify-content: center;
+    left: var(--seldon-slide-gutter-inset);
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    touch-action: none;
+    transform: translateY(-50%);
+    width: var(--seldon-slide-thumb-size);
+    z-index: 3;
+
+    &::before {
+      content: '';
+      inset: calc(var(--seldon-slide-hit-tolerance) * -1);
+      position: absolute;
+    }
+
+    &:active,
+    &--held {
+      cursor: grabbing;
+    }
+
+    &:focus-visible {
+      @include focus-ring($border-radius: 0);
+    }
+
+    &--held .#{$px}-slide-to-activate__thumb-face {
+      box-shadow: 0 0 0 1px rgba($pure-black, 1);
+    }
+  }
+
+  &__thumb-face {
+    align-items: center;
+    background-color: $pure-white;
+    border: 0;
+    border-radius: 0;
+    box-sizing: border-box;
+    color: $pure-black;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    pointer-events: none;
+    transition:
+      box-shadow 0.28s ease-out,
+      background-color 0.32s ease-out,
+      color 0.32s ease-out;
+    width: 100%;
+  }
+
+  // Figma Chevron Group (8893:13050): two 22px ChevronRight icons, second at x=12.
+  &__thumb-chevrons {
+    align-items: center;
+    display: flex;
+    height: 22px;
+    width: 33px;
+
+    > *:last-child {
+      margin-left: -11px;
+    }
+
+    .#{$px}-icon {
+      flex-shrink: 0;
+      height: 22px;
+      width: 22px;
+    }
+  }
+
+  &__thumb-icon {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    transition: transform 0.15s ease-out;
+
+    svg {
+      height: 22px;
+      width: 22px;
+    }
+
+    &--held {
+      transform: scale(1.1);
+    }
+  }
+
+  &--small &__thumb-chevrons {
+    height: 16px;
+    width: 24px;
+
+    > *:last-child {
+      margin-left: -8px;
+    }
+
+    .#{$px}-icon {
+      height: 16px;
+      width: 16px;
+    }
+  }
+
+  &--small &__thumb-icon svg {
+    height: 16px;
+    width: 16px;
+  }
+
+  &--rtl &__thumb {
+    left: auto;
+    right: var(--seldon-slide-gutter-inset);
+  }
+
+  &--rtl &__thumb-icon {
+    transform: scaleX(-1);
+
+    &--held {
+      transform: scaleX(-1) scale(1.1);
+    }
+  }
+
+  &--pending {
+    .#{$px}-slide-to-activate__label {
+      opacity: 0;
+    }
+
+    .#{$px}-slide-to-activate__thumb {
+      cursor: default;
+    }
+  }
+
+  &--disabled {
+    pointer-events: none;
+
+    .#{$px}-slide-to-activate__thumb {
+      cursor: not-allowed;
+    }
+  }
+
+  // Not allowed / unavailable
+  &--disabled-blocked {
+    .#{$px}-slide-to-activate__track {
+      background-color: $grey-50;
+    }
+
+    .#{$px}-slide-to-activate__label {
+      // $grey-75 fails 4.5:1 against this $grey-50 background (3.98:1) — $grey-100 passes at 6.24:1.
+      color: $grey-100;
+    }
+
+    .#{$px}-slide-to-activate__thumb-face {
+      background-color: $grey-50;
+      color: $grey-100;
+    }
+  }
+
+  // Already completed — settled success look; thumb is always faded out
+  &--disabled-complete {
+    .#{$px}-slide-to-activate__track {
+      background-color: $pure-black;
+    }
+
+    .#{$px}-slide-to-activate__label {
+      color: $pure-white;
+    }
+  }
+
+  // Soft exit for activated / hide-thumb — keep gutter, ease the button away
+  &--disabled-hide-thumb {
+    .#{$px}-slide-to-activate__thumb,
+    .#{$px}-slide-to-activate__thumb--hidden {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 100ms ease-out;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__track,
+    &__label,
+    &__pending-indicator,
+    &__thumb,
+    &__thumb-face {
+      transition: none;
+    }
+  }
+}
