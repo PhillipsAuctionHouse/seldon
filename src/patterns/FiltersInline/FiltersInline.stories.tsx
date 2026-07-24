@@ -246,6 +246,7 @@ export const Playground = (props: FilterDropdownMenuProps) => {
 Playground.args = {
   id: 'in-place-filters-story',
   filters: filters,
+  hideDesktopSortButton: false,
 };
 
 Playground.argTypes = {};
