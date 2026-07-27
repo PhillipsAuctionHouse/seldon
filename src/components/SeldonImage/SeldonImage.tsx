@@ -98,6 +98,12 @@ const SeldonImage = memo(
       const imgRef = useRef<HTMLImageElement>(null);
 
       const [loadingState, setLoadingState] = useState<'loading' | 'loaded' | 'error'>(() => {
+        // Empty src no longer renders `<img src="">` (React 19 warns on that),
+        // so the browser onError → 'error' path never fires — surface the
+        // error state up-front instead.
+        if (!src) {
+          return 'error';
+        }
         if (isServer) {
           return 'loading';
         }
@@ -123,6 +129,11 @@ const SeldonImage = memo(
       });
 
       const loadImage = useCallback(async () => {
+        // Nothing to validate when src is empty — the empty-src branch of
+        // useState above has already set the error state.
+        if (!src) {
+          return;
+        }
         const isValid = await isImageValid({
           img: imgRef.current,
           src,

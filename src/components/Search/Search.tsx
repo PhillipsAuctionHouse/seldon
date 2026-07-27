@@ -82,6 +82,10 @@ const Search = forwardRef<HTMLDivElement, React.PropsWithChildren<SearchProps>>(
     const searchInputRef = useRef<HTMLInputElement>(null);
     const searchFormRef = useRef<HTMLFormElement>(null);
     const searchContainerRef = useRef<HTMLDivElement>(null);
+    // Dedicated ref for react-transition-group so the CSSTransition classes
+    // land on the wrapper div (matching pre-React-19 findDOMNode behavior)
+    // rather than the inner <input>.
+    const searchInputWrapperRef = useRef<HTMLDivElement>(null);
     const isSearchExpanded = headerContext.isSearchExpanded;
     const value = searchInputRef.current?.value;
     const [shouldShowResults, setShouldShowResults] = useState(true);
@@ -174,27 +178,29 @@ const Search = forwardRef<HTMLDivElement, React.PropsWithChildren<SearchProps>>(
                   <CSSTransition
                     in={isSearchExpanded}
                     classNames={`${px}-input`}
-                    nodeRef={searchInputRef}
+                    nodeRef={searchInputWrapperRef}
                     addEndListener={() => {
                       return;
                     }}
                   >
-                    <Input
-                      aria-hidden={!isSearchExpanded}
-                      className={`${baseClassName}__input`}
-                      id="search-input"
-                      hideLabel
-                      labelText={searchButtonText}
-                      placeholder={isSearchExpanded ? placeholder : ''}
-                      type="text"
-                      defaultValue={defaultValue}
-                      invalid={state === 'invalid'}
-                      invalidText={invalidText}
-                      onKeyDown={onKeyDown}
-                      onChange={onInputChange}
-                      ref={searchInputRef}
-                      tabIndex={isSearchExpanded ? 0 : -1}
-                    />
+                    <div ref={searchInputWrapperRef}>
+                      <Input
+                        aria-hidden={!isSearchExpanded}
+                        className={`${baseClassName}__input`}
+                        id="search-input"
+                        hideLabel
+                        labelText={searchButtonText}
+                        placeholder={isSearchExpanded ? placeholder : ''}
+                        type="text"
+                        defaultValue={defaultValue}
+                        invalid={state === 'invalid'}
+                        invalidText={invalidText}
+                        onKeyDown={onKeyDown}
+                        onChange={onInputChange}
+                        ref={searchInputRef}
+                        tabIndex={isSearchExpanded ? 0 : -1}
+                      />
+                    </div>
                   </CSSTransition>
                   <SearchButton
                     className={baseClassName}
