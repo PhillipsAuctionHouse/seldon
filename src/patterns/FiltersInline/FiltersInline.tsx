@@ -69,25 +69,36 @@ const FiltersInline = React.forwardRef<HTMLDivElement, FiltersInlineProps>(
           resultsCount={resultsCount}
           dropdownMenuTranslation={dropdownMenuTranslation}
         />
-        {filters?.map((filter, index) => (
-          <SubFilterDropdown
-            key={`${id}-${filter.label}-button`}
-            id={`${id}-${filter.label}-button`}
-            filterButtonLabel={filter.label}
-            buttonType={filter.buttonType as unknown as FilterButtonType}
-            handleClick={setFiltersLabelListState}
-            filtersListState={filtersListState}
-            filterId={index + 1}
-            filters={filters}
-            onSelectFilter={onSelectFilter}
-            onApplyFilter={onApplyFilter}
-            onClickClear={onClickClear}
-            resultsCount={resultsCount}
-            filterButtonLabelTranslated={filter.filterButtonLabelTranslated}
-            dropdownMenuTranslation={dropdownMenuTranslation}
-            hideDesktopSortButton={hideDesktopSortButton}
-          />
-        ))}
+        {/* Render the Sort pill last in the DOM so keyboard/reading order
+            matches the visual order. Sort is kept first in the source array
+            for the drawer, but sits last (right-aligned) in the row.
+            filterId preserves the original index into filtersListState. */}
+        {(() => {
+          const indexed = filters?.map((filter, index) => ({ filter, filterId: index + 1 })) ?? [];
+          const sortItem = indexed.find(({ filter }) => filter.buttonType === FilterButtonType.Sort);
+          const rest = indexed.filter(({ filter }) => filter.buttonType !== FilterButtonType.Sort);
+          const orderedFilters = sortItem ? [...rest, sortItem] : rest;
+
+          return orderedFilters.map(({ filter, filterId }) => (
+            <SubFilterDropdown
+              key={`${id}-${filter.label}-button`}
+              id={`${id}-${filter.label}-button`}
+              filterButtonLabel={filter.label}
+              buttonType={filter.buttonType as unknown as FilterButtonType}
+              handleClick={setFiltersLabelListState}
+              filtersListState={filtersListState}
+              filterId={filterId}
+              filters={filters}
+              onSelectFilter={onSelectFilter}
+              onApplyFilter={onApplyFilter}
+              onClickClear={onClickClear}
+              resultsCount={resultsCount}
+              filterButtonLabelTranslated={filter.filterButtonLabelTranslated}
+              dropdownMenuTranslation={dropdownMenuTranslation}
+              hideDesktopSortButton={hideDesktopSortButton}
+            />
+          ));
+        })()}
       </div>
     );
   },

@@ -135,7 +135,7 @@ describe('FilterDropdown', () => {
     clearFilterUpdate.mockClear();
   });
 
-  it('renders mobile variant', () => {
+  it('renders mobile variant without confirm action buttons for sort', () => {
     render(
       <FilterDropdownMenuMobile
         {...getProps({ isMobileDropdown: true, filterButtonLabel: 'Sort' })}
@@ -143,7 +143,56 @@ describe('FilterDropdown', () => {
       />,
     );
     expect(screen.getByTestId('filter-dropdown-mobile')).toBeInTheDocument();
-    expect(screen.getByText('Confirm')).toBeInTheDocument();
+    expect(screen.getByLabelText('Ascending')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /confirm|clear all|show \d+/i })).not.toBeInTheDocument();
+  });
+
+  it('applies sort immediately from the desktop dropdown (library owns auto-apply)', () => {
+    const onSelectFilter = vi.fn();
+    const onApplyFilter = vi.fn();
+    render(<FilterDropdownMenuDesktop {...getProps({ onSelectFilter, onApplyFilter })} filterButtonLabel="Sort" />);
+    expect(screen.queryByRole('button', { name: /confirm|clear all|show \d+/i })).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByLabelText('Ascending'));
+    expect(onSelectFilter).toHaveBeenCalledWith(expect.anything(), 'Sort');
+    expect(onApplyFilter).toHaveBeenCalledWith(false);
+  });
+
+  it('applies sort immediately from the mobile dropdown (library owns auto-apply)', () => {
+    const onSelectFilter = vi.fn();
+    const onApplyFilter = vi.fn();
+    render(<FilterDropdownMenuMobile {...getProps({ onSelectFilter, onApplyFilter })} filterButtonLabel="Sort" />);
+
+    fireEvent.click(screen.getByLabelText('Ascending'));
+    expect(onSelectFilter).toHaveBeenCalledWith(expect.anything(), 'Sort');
+    expect(onApplyFilter).toHaveBeenCalledWith(false);
+  });
+
+  it('does not auto-apply for non-sort dropdowns (user still confirms via Show button)', () => {
+    const onSelectFilter = vi.fn();
+    const onApplyFilter = vi.fn();
+    render(
+      <FilterDropdownMenuDesktop
+        {...getProps({
+          buttonType: FilterButtonType.Departments,
+          onSelectFilter,
+          onApplyFilter,
+          filters: [
+            {
+              label: 'Departments',
+              id: 'Departments',
+              type: 'checkbox' as const,
+              filterDimensions: new Set([{ label: 'Foo', active: false, disabled: false }]),
+            },
+          ],
+        })}
+        filterButtonLabel="Departments"
+      />,
+    );
+
+    fireEvent.click(screen.getByLabelText('Foo'));
+    expect(onSelectFilter).toHaveBeenCalledWith(expect.anything(), FilterButtonType.Departments);
+    expect(onApplyFilter).not.toHaveBeenCalled();
   });
 });
 
@@ -259,6 +308,28 @@ describe('MainFilterDropdown', () => {
     // Simulate closing the drawer
     fireEvent.click(screen.getByTestId('main-filter-filter-button'));
     expect(handleClick).toHaveBeenCalled();
+  });
+
+  it('drawer input changes do not auto-apply (user confirms via Show button)', () => {
+    render(
+      <MainFilterDropdown
+        id="main-filter"
+        filterButtonLabel="Filter"
+        filterId={0}
+        buttonType={'Filter' as FilterButtonType}
+        handleClick={handleClick}
+        filtersListState={[true]}
+        filters={filters}
+        onSelectFilter={handleFilterSelection}
+        onApplyFilter={handleFilterUpdate}
+        onClickClear={clearFilterUpdate}
+        resultsCount={2}
+        ariaLabels={{ button: 'Filter Button' }}
+      />,
+    );
+    fireEvent.click(screen.getByLabelText('Foo'));
+    expect(handleFilterSelection).toHaveBeenCalledWith(expect.anything(), FilterButtonType.Filter);
+    expect(handleFilterUpdate).not.toHaveBeenCalled();
   });
 });
 
