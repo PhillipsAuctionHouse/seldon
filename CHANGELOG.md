@@ -1,3 +1,10 @@
+# [1.277.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.276.0...v1.277.0) (2026-07-27)
+
+
+### Features
+
+* **deps:** L3-0000 bundle remaining low-risk dependabot updates ([#909](https://github.com/PhillipsAuctionHouse/seldon/issues/909)) ([1551ea9](https://github.com/PhillipsAuctionHouse/seldon/commit/1551ea9d0fd1b005cf5fe9394364f418055cceb6))
+
 # [1.276.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.275.0...v1.276.0) (2026-07-27)
 
 
