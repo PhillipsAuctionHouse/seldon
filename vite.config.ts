@@ -4,19 +4,22 @@ import react from '@vitejs/plugin-react';
 import copy from 'rollup-plugin-copy';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import svgr from 'vite-plugin-svgr';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import { transformScssAlias } from './src/build/buildUtils';
 
 import * as packageJson from './package.json';
 // const isDev = process.env.NODE_ENV;
 
-const plugins = [svgr(), react(), tsconfigPaths(), dts({ entryRoot: 'src' })];
+const plugins = [svgr(), react(), dts({ entryRoot: 'src' })];
 
 const scssFilesToTransform = ['src/**/*.scss', '!src/scss/**/*.scss', '!src/design/**', '!src/*.scss'];
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: plugins,
+  resolve: {
+    // Replaces the vite-tsconfig-paths plugin, which Vite 8 supports natively.
+    tsconfigPaths: true,
+  },
   build: {
     target: ['es2020'],
     minify: true,
@@ -85,8 +88,11 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    esbuildOptions: {
-      target: 'es2020',
+    // Vite 8 pre-bundles deps with Rolldown; target lives under `transform`.
+    rolldownOptions: {
+      transform: {
+        target: 'es2020',
+      },
     },
   },
 });
