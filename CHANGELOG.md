@@ -1,3 +1,10 @@
+# [1.276.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.275.0...v1.276.0) (2026-07-27)
+
+
+### Features
+
+* **FiltersInline:** PDD-289 apply filter design feedback ([#892](https://github.com/PhillipsAuctionHouse/seldon/issues/892)) ([eb7e231](https://github.com/PhillipsAuctionHouse/seldon/commit/eb7e231c40a7943bbdce0644101cc195b8ae0e1f))
+
 # [1.275.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.274.0...v1.275.0) (2026-07-23)
 
 
