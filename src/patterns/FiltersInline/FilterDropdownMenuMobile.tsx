@@ -45,7 +45,10 @@ export const FilterDropdownMenuMobile = React.forwardRef<HTMLDivElement, FilterD
               type={isSortButton ? 'radio' : 'checkbox'}
               checked={value.active}
               disabled={value?.disabled}
-              onChange={(e) => handleInputChangeUtil(e, buttonType ?? '', onSelectFilter, 'dropdown')}
+              onChange={(e) => {
+                handleInputChangeUtil(e, buttonType ?? '', onSelectFilter);
+                if (isSortButton) onApplyFilter?.(false);
+              }}
             />
           ))}
         </div>

@@ -1,5 +1,5 @@
 import { Meta } from '@storybook/react-vite';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { SaleCard } from '../SaleCard';
 import FiltersInline from './FiltersInline';
 import { FilterButtonType, FilterDropdownMenuProps, FilterType } from './types';
@@ -69,6 +69,11 @@ export const Playground = (props: FilterDropdownMenuProps) => {
   const [results, setResults] = useState(SalesMockData);
   const [filters, setFilters] = useState(initialFilters);
   const [filterRules, setFilterRules] = useState<Map<string, Set<string>>>(new Map());
+  // Mirror `filterRules` in a ref so `handleFilterUpdate` sees the latest
+  // rules when the library synchronously fires `onSelectFilter` then
+  // `onApplyFilter` (sort dropdown auto-apply). React state closures would
+  // otherwise be one render behind.
+  const filterRulesRef = useRef<Map<string, Set<string>>>(filterRules);
   const [resultsCount, setResultsCount] = useState(SalesMockData.length);
 
   // Update filter dimensions' state
@@ -108,6 +113,7 @@ export const Playground = (props: FilterDropdownMenuProps) => {
     else rule.delete(name);
     newFilterRules.set(filterId, rule);
     setFilterRules(newFilterRules);
+    filterRulesRef.current = newFilterRules;
     return newFilterRules;
   };
 
@@ -120,7 +126,7 @@ export const Playground = (props: FilterDropdownMenuProps) => {
   };
 
   // Apply filters and sorting or return count
-  const handleFilterUpdate = (returnCountOnly?: boolean, rules = filterRules) => {
+  const handleFilterUpdate = (returnCountOnly?: boolean, rules = filterRulesRef.current) => {
     let filterResults = SalesMockData;
 
     // Sort
@@ -178,12 +184,14 @@ export const Playground = (props: FilterDropdownMenuProps) => {
       const newFilterRules = new Map();
       newFilterRules.set(FILTER_KEYS.sort, new Set([FiltersInlineFilters.Sort[0].label]));
       setFilterRules(newFilterRules);
+      filterRulesRef.current = newFilterRules;
       setFilters(initialFilters);
       setResultsCount(handleFilterUpdate(true, newFilterRules) ?? 0);
     } else {
       const newFilterRules = new Map(filterRules);
       newFilterRules.delete(filterId);
       setFilterRules(newFilterRules);
+      filterRulesRef.current = newFilterRules;
       setFilters((prevFilters) =>
         prevFilters.map((filter) =>
           filter.id === filterId

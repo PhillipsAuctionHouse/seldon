@@ -1,11 +1,4 @@
-import {
-  FilterButtonIconType,
-  FilterButtonType,
-  FilterChangeHandler,
-  FilterChangeSource,
-  FilterDimension,
-  FilterType,
-} from './types';
+import { FilterButtonIconType, FilterButtonType, FilterChangeHandler, FilterDimension, FilterType } from './types';
 
 export const FilterButtons: FilterButtonType[] = [
   FilterButtonType.Filter,
@@ -179,10 +172,9 @@ export function handleInputChange(
   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   buttonType: string,
   handleFilterSelection?: FilterChangeHandler,
-  source?: FilterChangeSource,
 ) {
   if (handleFilterSelection) {
-    handleFilterSelection(e, buttonType, source);
+    handleFilterSelection(e, buttonType);
   }
 }
 

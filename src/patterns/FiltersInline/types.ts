@@ -74,18 +74,11 @@ export type FilterType = {
 };
 
 /**
- * Where a filter input change originated: the main filter drawer or an
- * individual filter dropdown (desktop popover or mobile bottom sheet).
- */
-export type FilterChangeSource = 'drawer' | 'dropdown';
-
-/**
  * Handler for when a filter input changes (checkbox, radio, or select).
  */
 export type FilterChangeHandler = (
   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   filterId: string,
-  source?: FilterChangeSource,
 ) => void;
 
 /**

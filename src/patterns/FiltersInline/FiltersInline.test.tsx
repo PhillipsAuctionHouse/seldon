@@ -135,7 +135,7 @@ describe('FilterDropdown', () => {
     clearFilterUpdate.mockClear();
   });
 
-  it('renders mobile variant without action buttons for sort', () => {
+  it('renders mobile variant without confirm action buttons for sort', () => {
     render(
       <FilterDropdownMenuMobile
         {...getProps({ isMobileDropdown: true, filterButtonLabel: 'Sort' })}
@@ -144,18 +144,55 @@ describe('FilterDropdown', () => {
     );
     expect(screen.getByTestId('filter-dropdown-mobile')).toBeInTheDocument();
     expect(screen.getByLabelText('Ascending')).toBeInTheDocument();
-    expect(screen.queryByText('Confirm')).not.toBeInTheDocument();
-    expect(screen.queryByRole('button')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /confirm|clear all|show \d+/i })).not.toBeInTheDocument();
   });
 
-  it('renders desktop sort variant without action buttons and applies selection via onSelectFilter', () => {
+  it('applies sort immediately from the desktop dropdown (library owns auto-apply)', () => {
     const onSelectFilter = vi.fn();
-    render(<FilterDropdownMenuDesktop {...getProps({ onSelectFilter })} filterButtonLabel="Sort" />);
-    expect(screen.queryByText('Confirm')).not.toBeInTheDocument();
-    expect(screen.queryByRole('button')).not.toBeInTheDocument();
+    const onApplyFilter = vi.fn();
+    render(<FilterDropdownMenuDesktop {...getProps({ onSelectFilter, onApplyFilter })} filterButtonLabel="Sort" />);
+    expect(screen.queryByRole('button', { name: /confirm|clear all|show \d+/i })).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByLabelText('Ascending'));
-    expect(onSelectFilter).toHaveBeenCalledWith(expect.anything(), 'Sort', 'dropdown');
+    expect(onSelectFilter).toHaveBeenCalledWith(expect.anything(), 'Sort');
+    expect(onApplyFilter).toHaveBeenCalledWith(false);
+  });
+
+  it('applies sort immediately from the mobile dropdown (library owns auto-apply)', () => {
+    const onSelectFilter = vi.fn();
+    const onApplyFilter = vi.fn();
+    render(<FilterDropdownMenuMobile {...getProps({ onSelectFilter, onApplyFilter })} filterButtonLabel="Sort" />);
+
+    fireEvent.click(screen.getByLabelText('Ascending'));
+    expect(onSelectFilter).toHaveBeenCalledWith(expect.anything(), 'Sort');
+    expect(onApplyFilter).toHaveBeenCalledWith(false);
+  });
+
+  it('does not auto-apply for non-sort dropdowns (user still confirms via Show button)', () => {
+    const onSelectFilter = vi.fn();
+    const onApplyFilter = vi.fn();
+    render(
+      <FilterDropdownMenuDesktop
+        {...getProps({
+          buttonType: FilterButtonType.Departments,
+          onSelectFilter,
+          onApplyFilter,
+          filters: [
+            {
+              label: 'Departments',
+              id: 'Departments',
+              type: 'checkbox' as const,
+              filterDimensions: new Set([{ label: 'Foo', active: false, disabled: false }]),
+            },
+          ],
+        })}
+        filterButtonLabel="Departments"
+      />,
+    );
+
+    fireEvent.click(screen.getByLabelText('Foo'));
+    expect(onSelectFilter).toHaveBeenCalledWith(expect.anything(), FilterButtonType.Departments);
+    expect(onApplyFilter).not.toHaveBeenCalled();
   });
 });
 
@@ -273,7 +310,7 @@ describe('MainFilterDropdown', () => {
     expect(handleClick).toHaveBeenCalled();
   });
 
-  it('marks drawer input changes with the drawer source', () => {
+  it('drawer input changes do not auto-apply (user confirms via Show button)', () => {
     render(
       <MainFilterDropdown
         id="main-filter"
@@ -291,7 +328,8 @@ describe('MainFilterDropdown', () => {
       />,
     );
     fireEvent.click(screen.getByLabelText('Foo'));
-    expect(handleFilterSelection).toHaveBeenCalledWith(expect.anything(), FilterButtonType.Filter, 'drawer');
+    expect(handleFilterSelection).toHaveBeenCalledWith(expect.anything(), FilterButtonType.Filter);
+    expect(handleFilterUpdate).not.toHaveBeenCalled();
   });
 });
 
@@ -556,16 +594,7 @@ describe('handleInputChange', () => {
 
     handleInputChange(mockEvent, 'Filter', mockHandler);
 
-    expect(mockHandler).toHaveBeenCalledWith(mockEvent, 'Filter', undefined);
-  });
-
-  it('passes the change source through to handleFilterSelection', () => {
-    const mockEvent = { target: { value: 'foo' } } as React.ChangeEvent<HTMLInputElement>;
-    const mockHandler = vi.fn();
-
-    handleInputChange(mockEvent, 'Sort', mockHandler, 'dropdown');
-
-    expect(mockHandler).toHaveBeenCalledWith(mockEvent, 'Sort', 'dropdown');
+    expect(mockHandler).toHaveBeenCalledWith(mockEvent, 'Filter');
   });
 
   it('does nothing if handleFilterSelection is not provided', () => {

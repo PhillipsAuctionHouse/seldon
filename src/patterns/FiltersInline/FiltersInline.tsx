@@ -69,18 +69,17 @@ const FiltersInline = React.forwardRef<HTMLDivElement, FiltersInlineProps>(
           resultsCount={resultsCount}
           dropdownMenuTranslation={dropdownMenuTranslation}
         />
-        {filters
-          ?.map((filter, index) => ({ filter, filterId: index + 1 }))
-          // Render the Sort pill last in the DOM so keyboard/reading order
-          // matches the visual order. Sort is listed first for the drawer, but
-          // sits last (right-aligned) in the row; a stable sort keeps the other
-          // pills in their original order.
-          .sort(
-            (a, b) =>
-              (a.filter.buttonType === FilterButtonType.Sort ? 1 : 0) -
-              (b.filter.buttonType === FilterButtonType.Sort ? 1 : 0),
-          )
-          .map(({ filter, filterId }) => (
+        {/* Render the Sort pill last in the DOM so keyboard/reading order
+            matches the visual order. Sort is kept first in the source array
+            for the drawer, but sits last (right-aligned) in the row.
+            filterId preserves the original index into filtersListState. */}
+        {(() => {
+          const indexed = filters?.map((filter, index) => ({ filter, filterId: index + 1 })) ?? [];
+          const sortItem = indexed.find(({ filter }) => filter.buttonType === FilterButtonType.Sort);
+          const rest = indexed.filter(({ filter }) => filter.buttonType !== FilterButtonType.Sort);
+          const orderedFilters = sortItem ? [...rest, sortItem] : rest;
+
+          return orderedFilters.map(({ filter, filterId }) => (
             <SubFilterDropdown
               key={`${id}-${filter.label}-button`}
               id={`${id}-${filter.label}-button`}
@@ -98,7 +97,8 @@ const FiltersInline = React.forwardRef<HTMLDivElement, FiltersInlineProps>(
               dropdownMenuTranslation={dropdownMenuTranslation}
               hideDesktopSortButton={hideDesktopSortButton}
             />
-          ))}
+          ));
+        })()}
       </div>
     );
   },
