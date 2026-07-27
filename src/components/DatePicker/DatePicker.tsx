@@ -58,7 +58,7 @@ export interface DatePickerProps extends Omit<InputProps, 'defaultValue' | 'onCh
   labelText: string;
 
   /**
-   * Locatiion you want the calendar to render for
+   * Location you want the calendar to render for
    */
   locale?: string;
 
