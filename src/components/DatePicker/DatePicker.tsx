@@ -1,7 +1,11 @@
 import * as React from 'react';
 import flatpickr from 'flatpickr';
-import l10n from 'flatpickr/dist/l10n/index';
+import l10nImport from 'flatpickr/dist/l10n/index';
 import classnames from 'classnames';
+
+// vite@8 CJS interop can nest the flatpickr locales under `.default`
+const l10nModule = l10nImport as unknown as { en?: unknown; default?: typeof l10nImport };
+const l10n = l10nModule.en ? l10nImport : (l10nModule.default ?? l10nImport);
 
 import { noOp, px, useNormalizedInputProps } from '../../utils';
 import Input, { InputProps } from '../Input/Input';
