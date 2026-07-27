@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import ViewingsList from './ViewingsList';
+import ViewingsList, { ViewingsListProps } from './ViewingsList';
 import { ViewingsListCardProps } from './ViewingsListCard';
 import { I18nObject } from './ViewingsList';
 
-export interface StatefulViewingsListProps extends Record<string, unknown> {
+export interface StatefulViewingsListProps extends Omit<ViewingsListProps, 'onDelete' | 'onSave' | 'viewings'> {
   /**
    * Existing viewings to populate the list
    */
