@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # UserPromptSubmit hook: snapshot the tree so the paired Stop hook can diff
 # against it and see only what THIS response changed, not the branch delta.
 #

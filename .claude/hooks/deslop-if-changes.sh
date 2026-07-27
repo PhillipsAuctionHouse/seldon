@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Stop hook: nudge Claude to run the deslop skill before stopping, but only
 # when this response changed src/ code — diffed against the snapshot taken by
 # the paired UserPromptSubmit hook.
@@ -22,12 +22,20 @@ git rev-parse --git-dir >/dev/null 2>&1 || exit 0
 
 BASE=$(cat "$BASE_FILE")
 
+# ls-files is needed alongside diff: a brand-new component is untracked, and
+# neither `git stash create` nor `git diff` sees untracked files, so scaffolding
+# a component would otherwise never trigger the nudge.
+#
 # Extensions are filtered with grep, not a pathspec: git treats 'src/**/*.ts'
 # as needing an intermediate directory, so it misses top-level src/index.ts.
 # `|| true` is load-bearing — grep exits 1 on no match, which under pipefail
 # would abort with exit 1 (a hook error) on every response that skips src/.
-CHANGED=$(git diff --name-only "$BASE" -- src 2>/dev/null \
-  | grep -E '\.(ts|tsx|scss)$' | head -1 || true)
+CHANGED=$(
+  {
+    git diff --name-only "$BASE" -- src 2>/dev/null
+    git ls-files --others --exclude-standard -- src 2>/dev/null
+  } | grep -E '\.(ts|tsx|scss)$' | head -1 || true
+)
 
 [ -z "$CHANGED" ] && exit 0
 
