@@ -1,8 +1,7 @@
 import * as React from 'react';
 
-import ViewingsList, { ViewingsListProps } from './ViewingsList';
+import ViewingsList, { I18nObject, ViewingsListProps } from './ViewingsList';
 import { ViewingsListCardProps } from './ViewingsListCard';
-import { I18nObject } from './ViewingsList';
 
 export interface StatefulViewingsListProps extends Omit<ViewingsListProps, 'onDelete' | 'onSave' | 'viewings'> {
   /**
