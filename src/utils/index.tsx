@@ -80,7 +80,7 @@ interface NormalizedProps {
   type?: string;
   warn?: boolean;
   warnId?: string;
-  validation: JSX.Element | null;
+  validation: React.JSX.Element | null;
 }
 
 /**
