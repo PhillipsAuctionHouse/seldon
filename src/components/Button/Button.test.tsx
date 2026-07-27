@@ -5,9 +5,6 @@ import Button from './Button';
 import { runCommonTests } from '../../utils/testUtils';
 import { ButtonVariants, ButtonSizes } from './types';
 
-// React 19 hoists <link> elements to <head>, so prefetch link assertions
-// need to look there rather than in the render container. See:
-// https://react.dev/reference/react-dom/components/link#link
 const getPrefetchLink = () => document.head.querySelector<HTMLLinkElement>('[data-testid="prefetch-link"]');
 
 describe('Button', () => {

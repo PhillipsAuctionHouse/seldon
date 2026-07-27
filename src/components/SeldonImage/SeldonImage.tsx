@@ -98,6 +98,9 @@ const SeldonImage = memo(
       const imgRef = useRef<HTMLImageElement>(null);
 
       const [loadingState, setLoadingState] = useState<'loading' | 'loaded' | 'error'>(() => {
+        if (!src) {
+          return 'error';
+        }
         if (isServer) {
           return 'loading';
         }
@@ -123,6 +126,9 @@ const SeldonImage = memo(
       });
 
       const loadImage = useCallback(async () => {
+        if (!src) {
+          return;
+        }
         const isValid = await isImageValid({
           img: imgRef.current,
           src,

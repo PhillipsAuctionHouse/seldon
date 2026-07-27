@@ -30,6 +30,9 @@ coverage
 # Playwright files
 test-results/**
 
+# Local Claude Code worktrees
+.claude/worktrees/
+
 
 *.notes.md
 vite.config.ts.timestamp*
