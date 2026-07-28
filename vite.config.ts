@@ -53,7 +53,15 @@ export default defineConfig({
       ],
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: [...Object.keys(packageJson.peerDependencies)],
+      external: [
+        ...Object.keys(packageJson.peerDependencies),
+        // @artsy/fresnel is CJS and calls `require('react')` internally. Rolldown
+        // cannot hoist a require of an external module into a static ESM import, so
+        // bundling it emits a runtime `__require('react')` that throws in ESM
+        // consumers. Externalizing it lets the consumer's bundler do the interop.
+        // https://rolldown.rs/in-depth/bundling-cjs#require-external-modules
+        '@artsy/fresnel',
+      ],
       plugins: [
         copy({
           hook: 'closeBundle',

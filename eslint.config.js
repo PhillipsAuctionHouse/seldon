@@ -104,4 +104,11 @@ export default tseslint.config(
       'local-rules/no-deprecated-text-variants': 'off',
     },
   },
+  {
+    // Build scripts run in Node, not the browser.
+    files: ['scripts/**/*.mjs'],
+    languageOptions: {
+      globals: { ...globals.node },
+    },
+  },
 );

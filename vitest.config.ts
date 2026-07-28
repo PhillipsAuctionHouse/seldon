@@ -80,6 +80,10 @@ export default mergeConfig(viteConfig, {
               },
             ],
           },
+          // Storybook logs an Info saying this setProjectAnnotations setup file is
+          // redundant since 10.3, but it is load-bearing: without it addon-vitest
+          // provisions the annotations from its own setup file, which fails to import
+          // aria-query's named exports under Vite 8 and breaks every story test.
           setupFiles: ['.storybook/vitest.setup.ts'],
         },
       },

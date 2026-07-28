@@ -7,6 +7,18 @@ export let consoleError: ReturnType<typeof vi.spyOn>;
 
 const originalWindow = window;
 
+// jsdom does not implement navigation. A click on an <a href> that nothing
+// default-prevents schedules one on a timer that fires after the test has already
+// finished, so jsdom reports "Not implemented: navigation" with no test to attribute it
+// to. Cancelling the default stops the navigation being scheduled at all; this listens
+// on the bubble phase so React's own click handlers still run first, untouched.
+document.addEventListener('click', (event) => {
+  const href = (event.target as Element | null)?.closest?.('a')?.getAttribute('href');
+  if (href && !href.startsWith('#')) {
+    event.preventDefault();
+  }
+});
+
 beforeEach(() => {
   consoleError = vi.spyOn(console, 'error');
   consoleError.mockImplementation((...args: Parameters<typeof console.error>) => {

@@ -37,6 +37,7 @@
     "coverage": "vitest run --project=unit --coverage",
     "test-storybook": "vitest run --project=storybook",
     "build": "npm run clean && tsc && vite build",
+    "smoke": "node scripts/smokeTest.mjs",
     "chromatic": "STORYBOOK=1 chromatic",
     "build:storybook": "storybook build",
     "preview": "npx http-server storybook-static",
