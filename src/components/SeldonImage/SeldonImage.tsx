@@ -98,6 +98,9 @@ const SeldonImage = memo(
       const imgRef = useRef<HTMLImageElement>(null);
 
       const [loadingState, setLoadingState] = useState<'loading' | 'loaded' | 'error'>(() => {
+        if (!src) {
+          return 'error';
+        }
         if (isServer) {
           return 'loading';
         }
@@ -123,6 +126,9 @@ const SeldonImage = memo(
       });
 
       const loadImage = useCallback(async () => {
+        if (!src) {
+          return;
+        }
         const isValid = await isImageValid({
           img: imgRef.current,
           src,
@@ -178,16 +184,14 @@ const SeldonImage = memo(
             })}
             id={src}
             style={imageStyle}
-            src={src}
+            src={src || undefined}
             srcSet={srcSet}
             sizes={sizes}
             alt={alt}
             data-testid={`${commonProps['data-testid']}-img`}
             ref={imgRef}
             loading={loading}
-            // @ts-expect-error - React throws error when this is passed as fetchPriority, so we need to disable the rule
-            // let it be known that this is a valid attribute [https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/fetchPriority]
-            fetchpriority={fetchPriority} // eslint-disable-line react/no-unknown-property
+            fetchPriority={fetchPriority}
             onLoad={() => {
               setLoadingState('loaded');
             }}

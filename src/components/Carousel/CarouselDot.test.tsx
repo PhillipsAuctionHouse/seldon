@@ -12,7 +12,7 @@ describe('CarouselDot', () => {
   const baseProps = {
     isSelected: false,
     onClick: vi.fn(),
-    scrollableContainerRef: { current: null } as React.RefObject<HTMLDivElement>,
+    scrollableContainerRef: { current: null } as React.RefObject<HTMLDivElement | null>,
     onInViewChange: vi.fn(),
   };
 

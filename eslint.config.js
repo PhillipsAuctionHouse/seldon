@@ -24,6 +24,7 @@ export default tseslint.config(
       'vite.config.ts',
       '.template',
       '.storybook',
+      '.claude/worktrees/**',
       'coverage',
       'eslint-local-rules.cjs',
       'eslint.config.js',
@@ -101,6 +102,13 @@ export default tseslint.config(
     files: ['**/*.stories.tsx', '**/*.test.tsx', '**/*.test.ts'],
     rules: {
       'local-rules/no-deprecated-text-variants': 'off',
+    },
+  },
+  {
+    // Build scripts run in Node, not the browser.
+    files: ['scripts/**/*.mjs'],
+    languageOptions: {
+      globals: { ...globals.node },
     },
   },
 );

@@ -23,7 +23,7 @@ $breakpoint-mobile-small: 450px;
 
   &__body {
     margin: 0 $spacing-lg $spacing-md;
-    max-height: var('--max-modal-body-height');
+    max-height: var(--max-modal-body-height);
     overflow-y: auto;
   }
 

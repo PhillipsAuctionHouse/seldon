@@ -79,7 +79,7 @@
         display: none;
       }
 
-      &-enter-active input {
+      &__input.#{$px}-input-enter-active {
         background: $white-100;
 
         &::placeholder {

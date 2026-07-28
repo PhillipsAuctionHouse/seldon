@@ -29,6 +29,28 @@ const config: StorybookConfig = {
         ...(process.env.NODE_ENV === 'production' ? { '../fonts': path.resolve(__dirname, '../public/fonts/') } : {}),
       };
     }
+    // vite@8's rolldown-based CSS pipeline no longer applies resolve.alias to
+    // sass @use/@import, so give sass an explicit importer for the ~scss prefix.
+    const scssRoot = path.resolve(__dirname, '../src/scss/');
+    config.css = {
+      ...(config.css || {}),
+      preprocessorOptions: {
+        ...(config.css?.preprocessorOptions || {}),
+        scss: {
+          ...(config.css?.preprocessorOptions?.scss || {}),
+          importers: [
+            {
+              findFileUrl(url: string) {
+                if (url.startsWith('~scss/')) {
+                  return new URL(url.replace('~scss/', ''), `file://${scssRoot}/`);
+                }
+                return null;
+              },
+            },
+          ],
+        },
+      },
+    };
     config.server = {
       ...(config.server || {}),
       watch: {

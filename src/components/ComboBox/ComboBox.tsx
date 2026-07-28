@@ -81,7 +81,7 @@ export interface ComboBoxProps {
   /**
    * popoverContainer ref for the ComboBox
    */
-  popoverContainerRef?: React.RefObject<HTMLElement>;
+  popoverContainerRef?: React.RefObject<HTMLElement | null>;
   /**
    * No options message translation
    * @default "No Options."
@@ -358,7 +358,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
   }, [inputValue, options, handleOptionSelect, memoizedGetOptionLabel]);
 
   // Handle clicks outside the component
-  useOnClickOutside(containerRef, (event) => {
+  useOnClickOutside(containerRef as React.RefObject<HTMLDivElement>, (event) => {
     // Don't handle clicks on dropdown items or the input itself
     if (
       (event.target as HTMLElement).closest(`.${baseClassName}__item`) ||

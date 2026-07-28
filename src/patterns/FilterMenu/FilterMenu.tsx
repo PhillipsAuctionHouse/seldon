@@ -32,7 +32,7 @@ const FilterMenu = forwardRef<HTMLFormElement, FilterMenuProps>(
     const isViewAllSet = viewAllFilter?.length;
 
     const parsedChildren = Children.map(children, (childElement) =>
-      React.isValidElement(childElement) && childElement.type === Filter
+      React.isValidElement<FilterProps>(childElement) && childElement.type === Filter
         ? cloneElement(childElement, {
             setViewAllFilter,
             hidden: !isViewAllSet ? false : viewAllFilter !== childElement.props.name,

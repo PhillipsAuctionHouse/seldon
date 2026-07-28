@@ -92,7 +92,7 @@ const Search = forwardRef<HTMLDivElement, React.PropsWithChildren<SearchProps>>(
         }
       : undefined;
 
-    useOnClickOutside(searchContainerRef, (event) => {
+    useOnClickOutside(searchContainerRef as React.RefObject<HTMLDivElement>, (event) => {
       onCancel?.();
       showSearch(false);
       event.stopPropagation();
@@ -174,6 +174,7 @@ const Search = forwardRef<HTMLDivElement, React.PropsWithChildren<SearchProps>>(
                   <CSSTransition
                     in={isSearchExpanded}
                     classNames={`${px}-input`}
+                    nodeRef={searchInputRef}
                     addEndListener={() => {
                       return;
                     }}
