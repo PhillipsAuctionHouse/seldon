@@ -1,16 +1,10 @@
-import { clampProgress, easeOutCubic, measureMaxTravel } from './slideToActivateUtils';
+import { clampProgress, measureMaxTravel } from './slideToActivateUtils';
 
 describe('slideToActivateUtils', () => {
   it('clamps progress to the unit interval', () => {
     expect(clampProgress(-0.2)).toBe(0);
     expect(clampProgress(0.4)).toBe(0.4);
     expect(clampProgress(1.5)).toBe(1);
-  });
-
-  it('eases out cubically', () => {
-    expect(easeOutCubic(0)).toBe(0);
-    expect(easeOutCubic(1)).toBe(1);
-    expect(easeOutCubic(0.5)).toBeGreaterThan(0.5);
   });
 
   it('measures max travel accounting for inset', () => {

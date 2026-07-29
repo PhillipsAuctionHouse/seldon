@@ -149,7 +149,7 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
           </VisuallyHidden>
 
           <VisuallyHidden id={thumbDescriptionId}>
-            Press Space or Enter to activate. Hold to see progress before releasing. Press Escape to cancel.
+            Press Space or Enter to activate. Press Escape to cancel.
           </VisuallyHidden>
 
           {isPending ? (

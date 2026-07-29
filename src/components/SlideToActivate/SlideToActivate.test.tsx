@@ -4,7 +4,6 @@ import { px } from '../../utils';
 import { runCommonTests } from '../../utils/testUtils';
 import { TextVariants } from '../Text';
 import SlideToActivate from './SlideToActivate';
-import { KEYBOARD_CHARGE_MS, KEYBOARD_FINISH_MS, SNAP_MS } from './slideToActivateUtils';
 import {
   SlideToActivateBorderRadii,
   SlideToActivateDisabledReasons,
@@ -642,192 +641,17 @@ describe('SlideToActivate', () => {
     });
   });
 
-  describe('keyboard charge (reduced motion off)', () => {
-    // These exercise the real requestAnimationFrame-driven charge/finish ramps, which every
-    // other test in this file bypasses via the mocked useReducedMotion. Faking rAF (and
-    // setTimeout, for the snap-back delay) makes the animation timing deterministic; state
-    // updates driven by advancing fake timers need to be wrapped in act() so React flushes them.
-    beforeEach(() => {
-      useReducedMotion.mockReturnValue(false);
-      vi.useFakeTimers({ toFake: ['requestAnimationFrame', 'cancelAnimationFrame', 'performance', 'setTimeout'] });
-    });
+  it('cancels an in-progress key hold on Escape, preventing activation on keyup', () => {
+    const onActivation = vi.fn(() => Promise.resolve());
+    render(<SlideToActivate labelText="Confirm" onActivation={onActivation} />);
+    const thumb = screen.getByRole('button', { name: 'Confirm' });
+    thumb.focus();
 
-    afterEach(() => {
-      vi.useRealTimers();
-    });
+    fireEvent.keyDown(thumb, { key: 'Enter' });
+    fireEvent.keyDown(thumb, { key: 'Escape' });
+    fireEvent.keyUp(thumb, { key: 'Enter' }); // key no longer matches activeKeyRef — ignored
 
-    it('charges progress toward the target while held, then waits for keyup to activate', () => {
-      const onProgress = vi.fn();
-      const onActivation = vi.fn(() => Promise.resolve());
-      render(<SlideToActivate labelText="Confirm" onProgress={onProgress} onActivation={onActivation} />);
-      const thumb = screen.getByRole('button', { name: 'Confirm' });
-      thumb.focus();
-
-      fireEvent.keyDown(thumb, { key: 'Enter' });
-      expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'dragging');
-
-      act(() => {
-        vi.advanceTimersByTime(KEYBOARD_CHARGE_MS + 100);
-      });
-
-      expect(onProgress).toHaveBeenLastCalledWith(1);
-      expect(onActivation).not.toHaveBeenCalled(); // still waiting on keyup
-      expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'dragging');
-    });
-
-    it('activates immediately on keyup after a full charge (fast path)', async () => {
-      const onActivation = vi.fn(() => Promise.resolve());
-      render(<SlideToActivate labelText="Confirm" onActivation={onActivation} />);
-      const thumb = screen.getByRole('button', { name: 'Confirm' });
-      thumb.focus();
-
-      fireEvent.keyDown(thumb, { key: 'Enter' });
-      act(() => {
-        vi.advanceTimersByTime(KEYBOARD_CHARGE_MS + 100);
-      });
-      await act(async () => {
-        fireEvent.keyUp(thumb, { key: 'Enter' });
-        await Promise.resolve(); // let runActivation's `await onActivation()` continuation settle
-      });
-
-      expect(onActivation).toHaveBeenCalledTimes(1);
-    });
-
-    it('bursts to completion and activates on a quick tap', async () => {
-      const onActivation = vi.fn(() => Promise.resolve());
-      render(<SlideToActivate labelText="Confirm" onActivation={onActivation} />);
-      const thumb = screen.getByRole('button', { name: 'Confirm' });
-      thumb.focus();
-
-      fireEvent.keyDown(thumb, { key: 'Enter' });
-      fireEvent.keyUp(thumb, { key: 'Enter' }); // released almost immediately, progress still near 0
-
-      expect(onActivation).not.toHaveBeenCalled();
-      await act(async () => {
-        vi.advanceTimersByTime(KEYBOARD_FINISH_MS + 20);
-        await Promise.resolve(); // let runActivation's `await onActivation()` continuation settle
-      });
-
-      expect(onActivation).toHaveBeenCalledTimes(1);
-    });
-
-    it('cancels the charge on blur', () => {
-      const onProgress = vi.fn();
-      render(<SlideToActivate labelText="Confirm" onProgress={onProgress} />);
-      const thumb = screen.getByRole('button', { name: 'Confirm' });
-      thumb.focus();
-
-      fireEvent.keyDown(thumb, { key: 'Enter' });
-      expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'dragging');
-
-      fireEvent.blur(thumb);
-      expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'snapping');
-
-      act(() => {
-        vi.advanceTimersByTime(SNAP_MS);
-      });
-      expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'idle');
-    });
-
-    it('cancels an in-progress charge on Escape and snaps back after the delay', () => {
-      const onProgress = vi.fn();
-      render(<SlideToActivate labelText="Confirm" onProgress={onProgress} />);
-      const thumb = screen.getByRole('button', { name: 'Confirm' });
-      thumb.focus();
-
-      fireEvent.keyDown(thumb, { key: 'Enter' });
-      act(() => {
-        vi.advanceTimersByTime(300);
-      });
-
-      fireEvent.keyDown(thumb, { key: 'Escape' });
-      expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'snapping');
-      expect(onProgress).toHaveBeenLastCalledWith(0);
-
-      act(() => {
-        vi.advanceTimersByTime(SNAP_MS);
-      });
-      expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'idle');
-    });
-
-    it('ignores a new keydown while still snapping back from Escape', () => {
-      const onProgress = vi.fn();
-      render(<SlideToActivate labelText="Confirm" onProgress={onProgress} />);
-      const thumb = screen.getByRole('button', { name: 'Confirm' });
-      thumb.focus();
-
-      fireEvent.keyDown(thumb, { key: 'Enter' });
-      act(() => {
-        vi.advanceTimersByTime(300);
-      });
-      fireEvent.keyDown(thumb, { key: 'Escape' });
-      expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'snapping');
-
-      onProgress.mockClear();
-      fireEvent.keyDown(thumb, { key: 'Enter' }); // busy (snapping) — should be ignored
-      expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'snapping');
-      expect(onProgress).not.toHaveBeenCalled();
-    });
-
-    it('ignores a pointerdown while still snapping back from Escape', () => {
-      vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(function (this: Element) {
-        if (this.classList.contains(`${px}-slide-to-activate__track`)) {
-          return {
-            width: 200,
-            height: 44,
-            top: 0,
-            left: 0,
-            right: 200,
-            bottom: 44,
-            x: 0,
-            y: 0,
-            toJSON: () => undefined,
-          } as DOMRect;
-        }
-        if (this.classList.contains(`${px}-slide-to-activate__thumb`)) {
-          return {
-            width: 44,
-            height: 40,
-            top: 2,
-            left: 8,
-            right: 52,
-            bottom: 42,
-            x: 8,
-            y: 2,
-            toJSON: () => undefined,
-          } as DOMRect;
-        }
-        return {
-          width: 0,
-          height: 0,
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          x: 0,
-          y: 0,
-          toJSON: () => undefined,
-        } as DOMRect;
-      });
-
-      const onProgress = vi.fn();
-      render(<SlideToActivate labelText="Confirm" onProgress={onProgress} />);
-      const thumb = screen.getByRole('button', { name: 'Confirm' });
-      thumb.focus();
-
-      fireEvent.keyDown(thumb, { key: 'Enter' });
-      act(() => {
-        vi.advanceTimersByTime(300);
-      });
-      fireEvent.keyDown(thumb, { key: 'Escape' });
-      expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'snapping');
-
-      onProgress.mockClear();
-      fireEvent.pointerDown(thumb, { pointerId: 1, clientX: 20, button: 0 }); // busy (snapping) — ignored
-      fireEvent.pointerMove(document, { pointerId: 1, clientX: 90 });
-
-      expect(onProgress).not.toHaveBeenCalled();
-      expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'snapping');
-    });
+    expect(onActivation).not.toHaveBeenCalled();
+    expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'idle');
   });
 });

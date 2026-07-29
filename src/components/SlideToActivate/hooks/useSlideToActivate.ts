@@ -168,12 +168,8 @@ export const useSlideToActivate = ({
 
   const { handleKeyDown, handleKeyUp, handleBlur, cancelKeyboardGesture } = useSlideKeyboardCharge({
     isDisabled,
-    reduceMotion,
     stateRef,
-    dispatch,
-    emitProgress,
     runActivation,
-    snapToIdle,
   });
 
   const { handlePointerDown, handlePointerUp, handlePointerCancel } = useSlideDragHandlers({
