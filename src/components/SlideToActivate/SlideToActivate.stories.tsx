@@ -6,7 +6,6 @@ import { actionArgTypes, playgroundArgTypes } from './SlideToActivate.stories.ar
 import { SlideToActivateInteractiveDemo } from './SlideToActivate.stories.demo';
 import {
   SlideToActivateBorderRadii,
-  SlideToActivateDisabledReasons,
   SlideToActivateDirections,
   SlideToActivateSizes,
   type SlideToActivateConfig,
@@ -35,10 +34,6 @@ export const Playground = ({
   pendingIndicator,
   trackClassName,
   thumbClassName,
-  thumbHitTolerance,
-  deadZone,
-  sensitivity,
-  requiredProgress,
   ...rest
 }: PlaygroundArgs) => (
   <SlideToActivateInteractiveDemo
@@ -53,10 +48,6 @@ export const Playground = ({
       pendingIndicator,
       trackClassName,
       thumbClassName,
-      thumbHitTolerance,
-      deadZone,
-      sensitivity,
-      requiredProgress,
     }}
   >
     <Text className="slide-to-activate-story__hint">
@@ -72,15 +63,11 @@ export const Playground = ({
 Playground.args = {
   labelText: 'Slide to bid $10,000',
   textVariant: TextVariants.labelMedium,
-  requiredProgress: 0.95,
-  deadZone: 8,
-  sensitivity: 1,
   direction: SlideToActivateDirections.ltr,
   size: SlideToActivateSizes.default,
   borderRadius: SlideToActivateBorderRadii.sharp,
-  thumbHitTolerance: 8,
   isDisabled: false,
-  disabledReason: SlideToActivateDisabledReasons.blocked,
+  isComplete: false,
   showThumbWhenDisabled: true,
   successAnnouncement: 'Activated.',
   errorAnnouncement: 'Action failed. Please try again.',
@@ -147,29 +134,13 @@ Widths.argTypes = actionArgTypes;
 export const DisabledStates = (props: SlideToActivateProps) => (
   <div className="slide-to-activate-story-disabled-states">
     <div className="slide-to-activate-story">
-      <SlideToActivate
-        {...props}
-        labelText="Bidding closed"
-        isDisabled
-        disabledReason={SlideToActivateDisabledReasons.blocked}
-      />
+      <SlideToActivate {...props} labelText="Bidding closed" isDisabled />
     </div>
     <div className="slide-to-activate-story">
-      <SlideToActivate
-        {...props}
-        labelText="Unavailable"
-        isDisabled
-        disabledReason={SlideToActivateDisabledReasons.blocked}
-        showThumbWhenDisabled={false}
-      />
+      <SlideToActivate {...props} labelText="Unavailable" isDisabled showThumbWhenDisabled={false} />
     </div>
     <div className="slide-to-activate-story">
-      <SlideToActivate
-        {...props}
-        labelText="Bid placed"
-        isDisabled
-        disabledReason={SlideToActivateDisabledReasons.complete}
-      />
+      <SlideToActivate {...props} labelText="Bid placed" isDisabled isComplete />
     </div>
   </div>
 );

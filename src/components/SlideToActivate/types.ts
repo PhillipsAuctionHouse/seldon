@@ -22,14 +22,6 @@ export enum SlideToActivateBorderRadii {
   pill = 'pill',
 }
 
-/** Why the control is disabled — drives distinct visuals. */
-export enum SlideToActivateDisabledReasons {
-  /** Not allowed / unavailable (muted, blocked look). */
-  blocked = 'blocked',
-  /** Already completed successfully (settled / success look). */
-  complete = 'complete',
-}
-
 /** Visual and behavioural tuning props, grouped to reduce top-level prop count. */
 export interface SlideToActivateConfig {
   /** Text variant for the track label. Default `labelMedium`. */
@@ -51,14 +43,6 @@ export interface SlideToActivateConfig {
   pendingIndicator?: ReactNode;
   trackClassName?: string;
   thumbClassName?: string;
-  /** Extra press target around the thumb (px). Default `8`. */
-  thumbHitTolerance?: number;
-  /** Pointer movement (px) ignored before the thumb follows. Default `8`. */
-  deadZone?: number;
-  /** Multiplier applied to pointer travel vs thumb travel. Default `1`. */
-  sensitivity?: number;
-  /** Progress at which activation fires on release (or track edge, whichever first). Default `0.95`. */
-  requiredProgress?: number;
 }
 
 export interface SlideToActivateProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'onProgress'> {
@@ -68,8 +52,8 @@ export interface SlideToActivateProps extends Omit<HTMLAttributes<HTMLDivElement
    * Called when activation threshold/edge is reached on release (or via keyboard).
    *
    * After this resolves, the component enters `idle` with `progress=1` — the thumb stays
-   * latched at the end and re-activation is blocked by the `progress >= 1` guard. Set
-   * `isDisabled` with `disabledReason="complete"` to present the settled visual state.
+   * latched at the end and re-activation is blocked by the `progress >= 1` guard. Pass
+   * `isDisabled isComplete` to present the settled visual state.
    */
   onActivation?: () => void | Promise<void>;
   /** Called on `onActivation` rejection when provided; otherwise the error is `console.error`ed. */
@@ -96,19 +80,20 @@ export interface SlideToActivateProps extends Omit<HTMLAttributes<HTMLDivElement
   /**
    * When `false`, the component does not snap back to idle after `onActivation` rejects —
    * the thumb stays latched and status returns to `idle`. Consumer is responsible for the
-   * reset (typically `isDisabled` + `disabledReason`). Default `true`.
+   * reset (typically `isDisabled isComplete`). Default `true`.
    */
   resetOnError?: boolean;
   /** Blocks pointer and keyboard activation. */
   isDisabled?: boolean;
   /**
-   * Visual disabled variant when `isDisabled` is true.
-   * `blocked` = not allowed; `complete` = already done (thumb always hidden). Default `blocked`.
+   * Applies the "completed" disabled visual (dark track, white label, hidden thumb).
+   * Use after a successful activation to signal the settled state.
+   * Only meaningful when `isDisabled` is `true`.
    */
-  disabledReason?: SlideToActivateDisabledReasons | `${SlideToActivateDisabledReasons}`;
+  isComplete?: boolean;
   /**
-   * When `false` and disabled with reason `blocked`, the thumb is hidden.
-   * Ignored for `complete` (thumb is always hidden). Default `true`.
+   * When `false` and `isDisabled` is `true`, the thumb is hidden.
+   * Ignored when `isComplete` is `true` (thumb is always hidden then). Default `true`.
    */
   showThumbWhenDisabled?: boolean;
   /** Visual and behavioural tuning. All properties are optional with sensible defaults. */

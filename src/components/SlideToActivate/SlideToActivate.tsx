@@ -9,7 +9,6 @@ import { useSlideToActivate } from './hooks/useSlideToActivate';
 import { focusThumbFromTrack } from './slideToActivateUtils';
 import {
   SlideToActivateBorderRadii,
-  SlideToActivateDisabledReasons,
   SlideToActivateDirections,
   SlideToActivateSizes,
   type SlideToActivateProps,
@@ -38,7 +37,7 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
       errorAnnouncement = 'Action failed. Please try again.',
       resetOnError = true,
       isDisabled = false,
-      disabledReason = SlideToActivateDisabledReasons.blocked,
+      isComplete = false,
       showThumbWhenDisabled = true,
       config = {},
       className,
@@ -57,10 +56,6 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
       pendingIndicator,
       trackClassName,
       thumbClassName,
-      thumbHitTolerance = 8,
-      deadZone = 8,
-      sensitivity = 1,
-      requiredProgress = 0.95,
     } = config;
     const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'SlideToActivate');
     const reduceMotion = useReducedMotion();
@@ -79,9 +74,6 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
       handleBlur,
       snapDurationMs,
     } = useSlideToActivate({
-      requiredProgress,
-      deadZone,
-      sensitivity,
       direction,
       isDisabled,
       reduceMotion,
@@ -98,8 +90,8 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
     const isPending = status === 'pending';
     const isHeld = status === 'dragging';
     const isInteractive = !isDisabled && !isPending;
-    const isCompleteDisabled = isDisabled && disabledReason === SlideToActivateDisabledReasons.complete;
-    const isBlockedDisabled = isDisabled && disabledReason === SlideToActivateDisabledReasons.blocked;
+    const isCompleteDisabled = isDisabled && isComplete;
+    const isBlockedDisabled = isDisabled && !isComplete;
     const isRtl = direction === SlideToActivateDirections.rtl;
     const isThumbHidden = isCompleteDisabled || (isBlockedDisabled && !showThumbWhenDisabled);
 
@@ -120,7 +112,6 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
           [`${baseClassName}--held`]: isHeld,
         })}
         data-status={status}
-        data-disabled-reason={isDisabled ? disabledReason : undefined}
         aria-busy={isPending ? true : undefined}
       >
         <div
@@ -168,7 +159,6 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
             thumbClassName={thumbClassName}
             thumbWidth={thumbWidth}
             thumbIcon={thumbIcon}
-            thumbHitTolerance={thumbHitTolerance}
             thumbTranslatePx={thumbTranslatePx}
             labelText={labelText}
             descriptionId={thumbDescriptionId}

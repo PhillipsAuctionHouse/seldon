@@ -2,10 +2,11 @@ import { useCallback, useEffect, useRef, type MutableRefObject, type PointerEven
 import type { SlideToActivateAction, SlideToActivateState } from '../slideToActivateReducer';
 import { clampProgress, isGestureBusy } from '../slideToActivateUtils';
 
+const REQUIRED_PROGRESS = 0.95;
+const DEAD_ZONE = 8;
+const SENSITIVITY = 1;
+
 interface UseSlideDragHandlersOptions {
-  requiredProgress: number;
-  deadZone: number;
-  sensitivity: number;
   direction: 'ltr' | 'rtl';
   isDisabled: boolean;
   stateRef: MutableRefObject<SlideToActivateState>;
@@ -17,9 +18,6 @@ interface UseSlideDragHandlersOptions {
 }
 
 export const useSlideDragHandlers = ({
-  requiredProgress,
-  deadZone,
-  sensitivity,
   direction,
   isDisabled,
   stateRef,
@@ -61,12 +59,12 @@ export const useSlideDragHandlers = ({
     if (stateRef.current.status !== 'dragging') {
       return;
     }
-    if (stateRef.current.progress >= requiredProgress || stateRef.current.progress >= 1) {
+    if (stateRef.current.progress >= REQUIRED_PROGRESS || stateRef.current.progress >= 1) {
       void runActivation();
       return;
     }
     snapToIdle();
-  }, [detachDocumentListeners, requiredProgress, runActivation, snapToIdle, stateRef]);
+  }, [detachDocumentListeners, runActivation, snapToIdle, stateRef]);
 
   const handlePointerDown = useCallback(
     (event: ReactPointerEvent<HTMLButtonElement>) => {
@@ -112,12 +110,12 @@ export const useSlideDragHandlers = ({
         const rawDelta = moveEvent.clientX - dragStartXRef.current;
         const signedDelta = direction === 'rtl' ? -rawDelta : rawDelta;
         if (!hasClearedDeadZoneRef.current) {
-          if (Math.abs(signedDelta) < deadZone) {
+          if (Math.abs(signedDelta) < DEAD_ZONE) {
             return;
           }
           hasClearedDeadZoneRef.current = true;
         }
-        const nextProgress = clampProgress(dragOriginProgressRef.current + (signedDelta * sensitivity) / travel);
+        const nextProgress = clampProgress(dragOriginProgressRef.current + (signedDelta * SENSITIVITY) / travel);
         emitProgress(nextProgress);
       };
 
@@ -137,18 +135,7 @@ export const useSlideDragHandlers = ({
         document.removeEventListener('pointercancel', onPointerUp);
       };
     },
-    [
-      deadZone,
-      detachDocumentListeners,
-      direction,
-      dispatch,
-      emitProgress,
-      finishDrag,
-      isDisabled,
-      measureTravel,
-      sensitivity,
-      stateRef,
-    ],
+    [detachDocumentListeners, direction, dispatch, emitProgress, finishDrag, isDisabled, measureTravel, stateRef],
   );
 
   return {

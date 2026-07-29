@@ -4,12 +4,7 @@ import { px } from '../../utils';
 import { runCommonTests } from '../../utils/testUtils';
 import { TextVariants } from '../Text';
 import SlideToActivate from './SlideToActivate';
-import {
-  SlideToActivateBorderRadii,
-  SlideToActivateDisabledReasons,
-  SlideToActivateDirections,
-  SlideToActivateSizes,
-} from './types';
+import { SlideToActivateBorderRadii, SlideToActivateDirections, SlideToActivateSizes } from './types';
 
 const { useReducedMotion } = vi.hoisted(() => ({ useReducedMotion: vi.fn(() => true) }));
 vi.mock('../../utils/useReducedMotion', () => ({ useReducedMotion }));
@@ -220,17 +215,13 @@ describe('SlideToActivate', () => {
     render(<SlideToActivate labelText="Bidding closed" isDisabled />);
     const root = screen.getByTestId('slide-to-activate');
     expect(root).toHaveClass(`${px}-slide-to-activate--disabled-blocked`);
-    expect(root).toHaveAttribute('data-disabled-reason', SlideToActivateDisabledReasons.blocked);
   });
 
   it('uses complete disabled styles and always hides the thumb', () => {
-    render(
-      <SlideToActivate labelText="Bid placed" isDisabled disabledReason={SlideToActivateDisabledReasons.complete} />,
-    );
+    render(<SlideToActivate labelText="Bid placed" isDisabled isComplete />);
     const root = screen.getByTestId('slide-to-activate');
     expect(root).toHaveClass(`${px}-slide-to-activate--disabled-complete`);
     expect(root).toHaveClass(`${px}-slide-to-activate--disabled-hide-thumb`);
-    expect(root).toHaveAttribute('data-disabled-reason', SlideToActivateDisabledReasons.complete);
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 
@@ -487,19 +478,6 @@ describe('SlideToActivate', () => {
       const thumb = screen.getByRole('button', { name: 'Confirm' });
 
       drag(thumb, 20, 160); // full 140px travel
-      release();
-
-      await waitFor(() => {
-        expect(onActivation).toHaveBeenCalledTimes(1);
-      });
-    });
-
-    it('activates at the track edge even when requiredProgress is set above 1', async () => {
-      const onActivation = vi.fn(() => Promise.resolve());
-      render(<SlideToActivate labelText="Confirm" onActivation={onActivation} config={{ requiredProgress: 2 }} />);
-      const thumb = screen.getByRole('button', { name: 'Confirm' });
-
-      drag(thumb, 20, 400); // dragged well past full travel, progress clamps to 1
       release();
 
       await waitFor(() => {

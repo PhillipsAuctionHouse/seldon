@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 import { ButtonSizes, ButtonVariants } from '../Button/types';
 import { Text, TextVariants } from '../Text';
 import SlideToActivate from './SlideToActivate';
-import { SlideToActivateDisabledReasons, type SlideToActivateProps } from './types';
+import { type SlideToActivateProps } from './types';
 
 export const SlideToActivateInteractiveDemo = ({
   children,
@@ -36,7 +36,7 @@ export const SlideToActivateInteractiveDemo = ({
         {...props}
         labelText={labelText}
         isDisabled={isActivated}
-        disabledReason={SlideToActivateDisabledReasons.complete}
+        isComplete={isActivated}
         onProgress={(nextProgress) => {
           setProgress(nextProgress);
           props.onProgress?.(nextProgress);

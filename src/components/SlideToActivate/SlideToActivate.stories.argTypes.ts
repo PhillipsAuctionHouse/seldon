@@ -1,10 +1,5 @@
 import { TextVariants } from '../Text';
-import {
-  SlideToActivateBorderRadii,
-  SlideToActivateDisabledReasons,
-  SlideToActivateDirections,
-  SlideToActivateSizes,
-} from './types';
+import { SlideToActivateBorderRadii, SlideToActivateDirections, SlideToActivateSizes } from './types';
 
 export const actionArgTypes = {
   onActivation: {
@@ -20,7 +15,7 @@ export const actionArgTypes = {
   },
   onProgress: {
     action: 'onProgress',
-    description: 'Fired while dragging (and during keyboard charge) with progress in `[0, 1]`.',
+    description: 'Fired while dragging with progress in `[0, 1]`.',
     table: { type: { summary: '(progress: number) => void' } },
   },
 };
@@ -47,30 +42,6 @@ export const playgroundArgTypes = {
     table: {
       type: { summary: 'TextVariants' },
       defaultValue: { summary: 'labelMedium' },
-    },
-  },
-  requiredProgress: {
-    control: { type: 'range', min: 0.5, max: 1, step: 0.01 },
-    description: 'Travel fraction `[0.5–1]` needed on release to activate (edge also activates). Default `0.95`.',
-    table: {
-      type: { summary: 'number (0–1)' },
-      defaultValue: { summary: '0.95' },
-    },
-  },
-  deadZone: {
-    control: { type: 'range', min: 0, max: 32, step: 1 },
-    description: 'Pointer px ignored before the thumb follows. Higher = less twitchy. Default `8`.',
-    table: {
-      type: { summary: 'number (px)' },
-      defaultValue: { summary: '8' },
-    },
-  },
-  sensitivity: {
-    control: { type: 'range', min: 0.25, max: 3, step: 0.05 },
-    description: 'Pointer→thumb travel multiplier (`1` = 1:1; `>1` shorter swipe). Default `1`.',
-    table: {
-      type: { summary: 'number' },
-      defaultValue: { summary: '1' },
     },
   },
   direction: {
@@ -100,14 +71,6 @@ export const playgroundArgTypes = {
       defaultValue: { summary: 'sharp' },
     },
   },
-  thumbHitTolerance: {
-    control: { type: 'range', min: 0, max: 24, step: 1 },
-    description: 'Extra invisible hit padding (px) around the thumb for easier grab. Default `8`.',
-    table: {
-      type: { summary: 'number (px)' },
-      defaultValue: { summary: '8' },
-    },
-  },
   thumbWidth: {
     control: { type: 'number', min: 28, max: 120, step: 1 },
     description: 'Pill thumb width (px). Empty = default square thumb.',
@@ -118,24 +81,24 @@ export const playgroundArgTypes = {
   },
   isDisabled: {
     control: 'boolean',
-    description: 'Blocks pointer and keyboard activation. Pair with `disabledReason` for visuals.',
+    description: 'Blocks pointer and keyboard activation.',
     table: {
       type: { summary: 'boolean' },
       defaultValue: { summary: 'false' },
     },
   },
-  disabledReason: {
-    control: { type: 'select' },
-    options: Object.values(SlideToActivateDisabledReasons),
-    description: 'When disabled: `blocked` = muted; `complete` = success (thumb always hidden).',
+  isComplete: {
+    control: 'boolean',
+    description:
+      'Applies the "completed" visual (dark track, white label, hidden thumb). Use after a successful activation.',
     table: {
-      type: { summary: `'blocked' | 'complete'` },
-      defaultValue: { summary: 'blocked' },
+      type: { summary: 'boolean' },
+      defaultValue: { summary: 'false' },
     },
   },
   showThumbWhenDisabled: {
     control: 'boolean',
-    description: 'If `false` with `blocked`, hide thumb. Ignored for `complete`. Default `true`.',
+    description: 'If `false` and `isDisabled` is `true`, hide the thumb. Ignored when `isComplete`. Default `true`.',
     table: {
       type: { summary: 'boolean' },
       defaultValue: { summary: 'true' },

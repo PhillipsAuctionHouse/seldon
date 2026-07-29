@@ -9,7 +9,6 @@ interface SlideToActivateThumbProps {
   thumbClassName?: string;
   thumbWidth?: number;
   thumbIcon?: ReactNode;
-  thumbHitTolerance: number;
   thumbTranslatePx: number;
   labelText: string;
   descriptionId: string;
@@ -41,7 +40,6 @@ export const SlideToActivateThumb = ({
   thumbClassName,
   thumbWidth,
   thumbIcon,
-  thumbHitTolerance,
   thumbTranslatePx,
   labelText,
   descriptionId,
@@ -74,7 +72,7 @@ export const SlideToActivateThumb = ({
       })}
       style={
         {
-          '--seldon-slide-hit-tolerance': `${thumbHitTolerance}px`,
+          '--seldon-slide-hit-tolerance': '8px',
           width: thumbWidth !== undefined ? `${thumbWidth}px` : undefined,
           transform: `translateY(-50%) translateX(${thumbTranslatePx}px)`,
           transition:

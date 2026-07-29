@@ -13,9 +13,6 @@ export type { SlideToActivateStatus } from '../slideToActivateUtils';
 export { SNAP_MS } from '../slideToActivateUtils';
 
 export interface UseSlideToActivateOptions {
-  requiredProgress: number;
-  deadZone: number;
-  sensitivity: number;
   direction: 'ltr' | 'rtl';
   isDisabled: boolean;
   reduceMotion: boolean;
@@ -30,9 +27,6 @@ export interface UseSlideToActivateOptions {
 }
 
 export const useSlideToActivate = ({
-  requiredProgress,
-  deadZone,
-  sensitivity,
   direction,
   isDisabled,
   reduceMotion,
@@ -173,9 +167,6 @@ export const useSlideToActivate = ({
   });
 
   const { handlePointerDown, handlePointerUp, handlePointerCancel } = useSlideDragHandlers({
-    requiredProgress,
-    deadZone,
-    sensitivity,
     direction,
     isDisabled,
     stateRef,
