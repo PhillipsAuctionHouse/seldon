@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useReducer, useRef } from 'react';
+import type { SlideToActivateStatus } from '../slideToActivateUtils';
 import {
   initialSlideToActivateState,
   slideToActivateReducer,
@@ -21,9 +22,11 @@ export interface UseSlideToActivateOptions {
   pendingAnnouncement: string;
   successAnnouncement: string;
   errorAnnouncement: string;
+  resetOnError: boolean;
   onActivation?: () => void | Promise<void>;
   onError?: (error: unknown) => void;
   onProgress?: (progress: number) => void;
+  onStatusChange?: (status: SlideToActivateStatus) => void;
 }
 
 export const useSlideToActivate = ({
@@ -36,9 +39,11 @@ export const useSlideToActivate = ({
   pendingAnnouncement,
   successAnnouncement,
   errorAnnouncement,
+  resetOnError,
   onActivation,
   onError,
   onProgress,
+  onStatusChange,
 }: UseSlideToActivateOptions) => {
   const [state, reactDispatch] = useReducer(slideToActivateReducer, initialSlideToActivateState);
   const stateRef = useRef(state);
@@ -121,8 +126,13 @@ export const useSlideToActivate = ({
       } else {
         console.error(error);
       }
-      dispatch({ type: 'activationFailed', announcement: errorAnnouncement });
-      snapToIdle();
+      if (resetOnError) {
+        dispatch({ type: 'activationFailed', announcement: errorAnnouncement });
+        snapToIdle();
+      } else {
+        // Keep progress=1 (thumb latched); consumer owns the reset via isDisabled or remount.
+        dispatch({ type: 'activationFailedHeld', announcement: errorAnnouncement });
+      }
     }
   }, [
     clearSnapTimeout,
@@ -132,9 +142,19 @@ export const useSlideToActivate = ({
     onActivation,
     onError,
     pendingAnnouncement,
+    resetOnError,
     snapToIdle,
     successAnnouncement,
   ]);
+
+  const isMountedRef = useRef(false);
+  useEffect(() => {
+    if (!isMountedRef.current) {
+      isMountedRef.current = true;
+      return;
+    }
+    onStatusChange?.(state.status);
+  }, [state.status, onStatusChange]);
 
   const wasDisabledRef = useRef(isDisabled);
   useEffect(() => {

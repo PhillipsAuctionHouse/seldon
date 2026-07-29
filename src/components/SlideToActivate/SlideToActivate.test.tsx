@@ -264,6 +264,45 @@ describe('SlideToActivate', () => {
     expect(description).toHaveTextContent(/Escape/i);
   });
 
+  it('calls onStatusChange on each status transition, skipping the initial idle', async () => {
+    const user = userEvent.setup();
+    const onStatusChange = vi.fn();
+    const onActivation = vi.fn(() => Promise.resolve());
+
+    render(<SlideToActivate labelText="Confirm" onActivation={onActivation} onStatusChange={onStatusChange} />);
+
+    expect(onStatusChange).not.toHaveBeenCalled();
+
+    screen.getByRole('button', { name: 'Confirm' }).focus();
+    await user.keyboard('{Enter}');
+
+    await waitFor(() => {
+      expect(onActivation).toHaveBeenCalledTimes(1);
+    });
+
+    const calls = onStatusChange.mock.calls.map(([s]) => s);
+    expect(calls).toContain('pending');
+    expect(calls).toContain('idle');
+  });
+
+  it('does not snap back when resetOnError is false', async () => {
+    const user = userEvent.setup();
+    const onError = vi.fn();
+    const onActivation = vi.fn(() => Promise.reject(new Error('fail')));
+
+    render(<SlideToActivate labelText="Confirm" onActivation={onActivation} onError={onError} resetOnError={false} />);
+    screen.getByRole('button', { name: 'Confirm' }).focus();
+    await user.keyboard('{Enter}');
+
+    await waitFor(() => {
+      expect(onError).toHaveBeenCalled();
+    });
+    // Thumb stays latched — status is idle but re-activation is blocked by progress=1 guard.
+    expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'idle');
+    const thumb = screen.getByRole('button', { name: 'Confirm' });
+    expect(thumb).not.toHaveClass(/snap/);
+  });
+
   it('removes the description when disabled', () => {
     render(<SlideToActivate labelText="Confirm" isDisabled showThumbWhenDisabled />);
     const thumb = screen.getByRole('button', { name: 'Confirm' });

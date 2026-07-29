@@ -32,9 +32,11 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
       onActivation,
       onError,
       onProgress,
+      onStatusChange,
       pendingAnnouncement = labelText,
       successAnnouncement = 'Activated.',
       errorAnnouncement = 'Action failed. Please try again.',
+      resetOnError = true,
       isDisabled = false,
       disabledReason = SlideToActivateDisabledReasons.blocked,
       showThumbWhenDisabled = true,
@@ -86,9 +88,11 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
       pendingAnnouncement,
       successAnnouncement,
       errorAnnouncement,
+      resetOnError,
       onActivation,
       onError,
       onProgress,
+      onStatusChange,
     });
 
     const isPending = status === 'pending';

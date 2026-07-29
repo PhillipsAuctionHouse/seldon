@@ -22,6 +22,7 @@ export type SlideToActivateAction =
   | { type: 'activationStarted'; announcement: string }
   | { type: 'activationSucceeded'; announcement: string }
   | { type: 'activationFailed'; announcement: string }
+  | { type: 'activationFailedHeld'; announcement: string }
   | { type: 'snapStarted'; immediate: boolean }
   | { type: 'snapCompleted' }
   | { type: 'reset' };
@@ -48,6 +49,9 @@ export function slideToActivateReducer(
       return { ...state, status: 'idle', announcement: action.announcement };
     case 'activationFailed':
       return { ...state, announcement: action.announcement };
+    case 'activationFailedHeld':
+      // resetOnError=false: clear pending but keep progress=1 so the thumb stays latched.
+      return { ...state, status: 'idle', announcement: action.announcement };
     case 'snapStarted': {
       const nextStatus = action.immediate ? 'idle' : 'snapping';
       return nextStatus === state.status ? state : { ...state, status: nextStatus };

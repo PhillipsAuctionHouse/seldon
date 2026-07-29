@@ -1,6 +1,7 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { ButtonSizes } from '../Button/types';
 import { type TextVariants } from '../Text';
+import type { SlideToActivateStatus } from './slideToActivateUtils';
 
 export enum SlideToActivateDirections {
   ltr = 'ltr',
@@ -63,7 +64,13 @@ export interface SlideToActivateConfig {
 export interface SlideToActivateProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'onProgress'> {
   /** Visible label; also used as the accessible name. Consumer owns idle/pending copy. */
   labelText: string;
-  /** Called when activation threshold/edge is reached on release (or via keyboard). */
+  /**
+   * Called when activation threshold/edge is reached on release (or via keyboard).
+   *
+   * After this resolves, the component enters `idle` with `progress=1` — the thumb stays
+   * latched at the end and re-activation is blocked by the `progress >= 1` guard. Set
+   * `isDisabled` with `disabledReason="complete"` to present the settled visual state.
+   */
   onActivation?: () => void | Promise<void>;
   /** Called on `onActivation` rejection when provided; otherwise the error is `console.error`ed. */
   onError?: (error: unknown) => void;
@@ -81,6 +88,17 @@ export interface SlideToActivateProps extends Omit<HTMLAttributes<HTMLDivElement
    * `'Action failed. Please try again.'`.
    */
   errorAnnouncement?: string;
+  /**
+   * Called on every status transition after mount. Useful for syncing external state to
+   * the component's gesture lifecycle (e.g. dimming sibling elements while `dragging`).
+   */
+  onStatusChange?: (status: SlideToActivateStatus) => void;
+  /**
+   * When `false`, the component does not snap back to idle after `onActivation` rejects —
+   * the thumb stays latched and status returns to `idle`. Consumer is responsible for the
+   * reset (typically `isDisabled` + `disabledReason`). Default `true`.
+   */
+  resetOnError?: boolean;
   /** Blocks pointer and keyboard activation. */
   isDisabled?: boolean;
   /**
