@@ -50,7 +50,7 @@ export function slideToActivateReducer(
     case 'activationFailed':
       return { ...state, announcement: action.announcement };
     case 'activationFailedHeld':
-      // resetOnError=false: clear pending but keep progress=1 so the thumb stays latched.
+      // Clear pending without resetting progress — thumb stays latched at the end.
       return { ...state, status: 'idle', announcement: action.announcement };
     case 'snapStarted': {
       const nextStatus = action.immediate ? 'idle' : 'snapping';

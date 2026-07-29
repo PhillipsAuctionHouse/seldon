@@ -147,15 +147,6 @@ export const useSlideToActivate = ({
     successAnnouncement,
   ]);
 
-  const isMountedRef = useRef(false);
-  useEffect(() => {
-    if (!isMountedRef.current) {
-      isMountedRef.current = true;
-      return;
-    }
-    onStatusChange?.(state.status);
-  }, [state.status, onStatusChange]);
-
   const wasDisabledRef = useRef(isDisabled);
   useEffect(() => {
     if (wasDisabledRef.current && !isDisabled) {
@@ -165,6 +156,15 @@ export const useSlideToActivate = ({
     }
     wasDisabledRef.current = isDisabled;
   }, [clearSnapTimeout, dispatch, isDisabled, onProgress]);
+
+  const isMountedRef = useRef(false);
+  useEffect(() => {
+    if (!isMountedRef.current) {
+      isMountedRef.current = true;
+      return;
+    }
+    onStatusChange?.(state.status);
+  }, [state.status, onStatusChange]);
 
   const { handleKeyDown, handleKeyUp, handleBlur, cancelKeyboardGesture } = useSlideKeyboardCharge({
     isDisabled,

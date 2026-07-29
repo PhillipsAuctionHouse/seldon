@@ -23,8 +23,6 @@ export default meta;
 
 const WIDTH_EXAMPLES = [180, 240, 320, 480] as const;
 
-// Storybook controls work best on flat props, so the Playground accepts a flat shape and maps
-// the config-related args into the `config` object before passing them to the component.
 type PlaygroundArgs = Omit<SlideToActivateProps, 'config'> & SlideToActivateConfig;
 
 export const Playground = ({
