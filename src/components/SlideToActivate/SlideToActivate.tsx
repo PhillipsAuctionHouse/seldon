@@ -1,6 +1,6 @@
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import classnames from 'classnames';
-import { forwardRef } from 'react';
+import { forwardRef, useId } from 'react';
 import { getCommonProps, useReducedMotion } from '../../utils';
 import { Loader } from '../Loader';
 import { Text, TextVariants } from '../Text';
@@ -15,7 +15,7 @@ import {
   type SlideToActivateProps,
 } from './types';
 
-export type { SlideToActivateProps } from './types';
+export type { SlideToActivateConfig, SlideToActivateProps } from './types';
 
 /**
  * ## Overview
@@ -29,36 +29,40 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
   (
     {
       labelText,
-      textVariant = TextVariants.labelMedium,
       onActivation,
       onError,
       onProgress,
       pendingAnnouncement = labelText,
       successAnnouncement = 'Activated.',
       errorAnnouncement = 'Action failed. Please try again.',
-      requiredProgress = 0.95,
-      deadZone = 8,
-      sensitivity = 1,
-      direction = SlideToActivateDirections.ltr,
-      size = SlideToActivateSizes.default,
-      borderRadius = SlideToActivateBorderRadii.sharp,
-      thumbHitTolerance = 8,
-      thumbIcon,
-      thumbWidth,
-      pendingIndicator,
       isDisabled = false,
       disabledReason = SlideToActivateDisabledReasons.blocked,
       showThumbWhenDisabled = true,
+      config = {},
       className,
-      trackClassName,
-      thumbClassName,
       id,
       ...props
     },
     ref,
   ) => {
+    const {
+      textVariant = TextVariants.labelMedium,
+      size = SlideToActivateSizes.default,
+      borderRadius = SlideToActivateBorderRadii.sharp,
+      direction = SlideToActivateDirections.ltr,
+      thumbIcon,
+      thumbWidth,
+      pendingIndicator,
+      trackClassName,
+      thumbClassName,
+      thumbHitTolerance = 8,
+      deadZone = 8,
+      sensitivity = 1,
+      requiredProgress = 0.95,
+    } = config;
     const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'SlideToActivate');
     const reduceMotion = useReducedMotion();
+    const thumbDescriptionId = useId();
     const {
       status,
       announcement,
@@ -140,6 +144,10 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
             </span>
           </VisuallyHidden>
 
+          <VisuallyHidden id={thumbDescriptionId}>
+            Press Space or Enter to activate. Hold to see progress before releasing. Press Escape to cancel.
+          </VisuallyHidden>
+
           {isPending ? (
             pendingIndicator !== undefined ? (
               pendingIndicator
@@ -159,6 +167,7 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
             thumbHitTolerance={thumbHitTolerance}
             thumbTranslatePx={thumbTranslatePx}
             labelText={labelText}
+            descriptionId={thumbDescriptionId}
             isHeld={isHeld}
             isPending={isPending}
             isDisabled={isDisabled}

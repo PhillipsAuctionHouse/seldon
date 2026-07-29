@@ -1,5 +1,5 @@
 export { default as SlideToActivate } from './SlideToActivate';
-export type { SlideToActivateProps } from './types';
+export type { SlideToActivateConfig, SlideToActivateProps } from './types';
 export {
   SlideToActivateDirections,
   SlideToActivateSizes,

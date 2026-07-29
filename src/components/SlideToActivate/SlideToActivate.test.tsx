@@ -138,7 +138,7 @@ describe('SlideToActivate', () => {
   });
 
   it('renders a pill thumb when thumbWidth is set', () => {
-    render(<SlideToActivate labelText="Confirm" thumbWidth={72} />);
+    render(<SlideToActivate labelText="Confirm" config={{ thumbWidth: 72 }} />);
     expect(screen.getByRole('button', { name: 'Confirm' })).toHaveClass(`${px}-slide-to-activate__thumb--pill`);
   });
 
@@ -153,7 +153,11 @@ describe('SlideToActivate', () => {
     );
 
     render(
-      <SlideToActivate labelText="Confirm" onActivation={onActivation} pendingIndicator={<span>Working…</span>} />,
+      <SlideToActivate
+        labelText="Confirm"
+        onActivation={onActivation}
+        config={{ pendingIndicator: <span>Working…</span> }}
+      />,
     );
     screen.getByRole('button', { name: 'Confirm' }).focus();
     await user.keyboard('{Enter}');
@@ -173,17 +177,17 @@ describe('SlideToActivate', () => {
   });
 
   it('applies the small size modifier', () => {
-    render(<SlideToActivate labelText="Confirm" size={SlideToActivateSizes.small} />);
+    render(<SlideToActivate labelText="Confirm" config={{ size: SlideToActivateSizes.small }} />);
     expect(screen.getByTestId('slide-to-activate')).toHaveClass(`${px}-slide-to-activate--small`);
   });
 
   it('applies textVariant to the track label', () => {
-    render(<SlideToActivate labelText="Confirm" textVariant={TextVariants.labelLarge} />);
+    render(<SlideToActivate labelText="Confirm" config={{ textVariant: TextVariants.labelLarge }} />);
     expect(screen.getByText('Confirm')).toHaveClass(`${px}-text--labelLarge`);
   });
 
   it('applies the rtl modifier so the thumb icon can mirror', () => {
-    render(<SlideToActivate labelText="Confirm" direction={SlideToActivateDirections.rtl} />);
+    render(<SlideToActivate labelText="Confirm" config={{ direction: SlideToActivateDirections.rtl }} />);
     expect(screen.getByTestId('slide-to-activate')).toHaveClass(`${px}-slide-to-activate--rtl`);
   });
 
@@ -209,7 +213,7 @@ describe('SlideToActivate', () => {
   });
 
   it('applies a shared border radius modifier', () => {
-    render(<SlideToActivate labelText="Confirm" borderRadius={SlideToActivateBorderRadii.pill} />);
+    render(<SlideToActivate labelText="Confirm" config={{ borderRadius: SlideToActivateBorderRadii.pill }} />);
     expect(screen.getByTestId('slide-to-activate')).toHaveClass(`${px}-slide-to-activate--radius-pill`);
   });
 
@@ -232,7 +236,7 @@ describe('SlideToActivate', () => {
   });
 
   it('renders a thumb icon with aria-hidden', () => {
-    render(<SlideToActivate labelText="Confirm" thumbIcon={<svg data-testid="thumb-icon" />} />);
+    render(<SlideToActivate labelText="Confirm" config={{ thumbIcon: <svg data-testid="thumb-icon" /> }} />);
     const icon = screen.getByTestId('thumb-icon');
     expect(icon).toBeInTheDocument();
     expect(icon.closest(`.${px}-slide-to-activate__thumb-face`)).toHaveAttribute('aria-hidden', 'true');
@@ -244,9 +248,26 @@ describe('SlideToActivate', () => {
   });
 
   it('hides the thumb icon when thumbIcon is null', () => {
-    render(<SlideToActivate labelText="Confirm" thumbIcon={null} />);
+    render(<SlideToActivate labelText="Confirm" config={{ thumbIcon: null }} />);
     expect(document.querySelector(`.${px}-slide-to-activate__thumb-chevrons`)).not.toBeInTheDocument();
     expect(document.querySelector(`.${px}-slide-to-activate__thumb-icon`)).not.toBeInTheDocument();
+  });
+
+  it('describes keyboard interaction to assistive tech when interactive', () => {
+    render(<SlideToActivate labelText="Confirm" />);
+    const thumb = screen.getByRole('button', { name: 'Confirm' });
+    const descriptionId = thumb.getAttribute('aria-describedby');
+    expect(descriptionId).toBeTruthy();
+    const description = document.getElementById(descriptionId!);
+    expect(description).toBeInTheDocument();
+    expect(description).toHaveTextContent(/Space or Enter/i);
+    expect(description).toHaveTextContent(/Escape/i);
+  });
+
+  it('removes the description when disabled', () => {
+    render(<SlideToActivate labelText="Confirm" isDisabled showThumbWhenDisabled />);
+    const thumb = screen.getByRole('button', { name: 'Confirm' });
+    expect(thumb).not.toHaveAttribute('aria-describedby');
   });
 
   it('ignores irrelevant keys', () => {
@@ -437,7 +458,7 @@ describe('SlideToActivate', () => {
 
     it('activates at the track edge even when requiredProgress is set above 1', async () => {
       const onActivation = vi.fn(() => Promise.resolve());
-      render(<SlideToActivate labelText="Confirm" onActivation={onActivation} requiredProgress={2} />);
+      render(<SlideToActivate labelText="Confirm" onActivation={onActivation} config={{ requiredProgress: 2 }} />);
       const thumb = screen.getByRole('button', { name: 'Confirm' });
 
       drag(thumb, 20, 400); // dragged well past full travel, progress clamps to 1
@@ -482,7 +503,13 @@ describe('SlideToActivate', () => {
       });
 
       const onProgress = vi.fn();
-      render(<SlideToActivate labelText="Confirm" onProgress={onProgress} direction={SlideToActivateDirections.rtl} />);
+      render(
+        <SlideToActivate
+          labelText="Confirm"
+          onProgress={onProgress}
+          config={{ direction: SlideToActivateDirections.rtl }}
+        />,
+      );
       const thumb = screen.getByRole('button', { name: 'Confirm' });
 
       drag(thumb, 100, 30); // moving toward track-start increases progress under rtl

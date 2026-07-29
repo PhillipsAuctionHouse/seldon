@@ -12,6 +12,7 @@ interface SlideToActivateThumbProps {
   thumbHitTolerance: number;
   thumbTranslatePx: number;
   labelText: string;
+  descriptionId: string;
   isHeld: boolean;
   isPending: boolean;
   isDisabled: boolean;
@@ -43,6 +44,7 @@ export const SlideToActivateThumb = ({
   thumbHitTolerance,
   thumbTranslatePx,
   labelText,
+  descriptionId,
   isHeld,
   isPending,
   isDisabled,
@@ -82,6 +84,7 @@ export const SlideToActivateThumb = ({
         } as CSSProperties
       }
       aria-label={labelText}
+      aria-describedby={isInteractive ? descriptionId : undefined}
       aria-busy={isPending ? true : undefined}
       aria-disabled={isDisabled || isPending ? true : undefined}
       aria-hidden={isThumbHidden ? true : undefined}

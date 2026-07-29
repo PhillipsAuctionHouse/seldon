@@ -9,6 +9,7 @@ import {
   SlideToActivateDisabledReasons,
   SlideToActivateDirections,
   SlideToActivateSizes,
+  type SlideToActivateConfig,
   type SlideToActivateProps,
 } from './types';
 import './_slideToActivate.stories.scss';
@@ -22,8 +23,44 @@ export default meta;
 
 const WIDTH_EXAMPLES = [180, 240, 320, 480] as const;
 
-export const Playground = (props: SlideToActivateProps) => (
-  <SlideToActivateInteractiveDemo {...props}>
+// Storybook controls work best on flat props, so the Playground accepts a flat shape and maps
+// the config-related args into the `config` object before passing them to the component.
+type PlaygroundArgs = Omit<SlideToActivateProps, 'config'> & SlideToActivateConfig;
+
+export const Playground = ({
+  textVariant,
+  size,
+  borderRadius,
+  direction,
+  thumbIcon,
+  thumbWidth,
+  pendingIndicator,
+  trackClassName,
+  thumbClassName,
+  thumbHitTolerance,
+  deadZone,
+  sensitivity,
+  requiredProgress,
+  ...rest
+}: PlaygroundArgs) => (
+  <SlideToActivateInteractiveDemo
+    {...rest}
+    config={{
+      textVariant,
+      size,
+      borderRadius,
+      direction,
+      thumbIcon,
+      thumbWidth,
+      pendingIndicator,
+      trackClassName,
+      thumbClassName,
+      thumbHitTolerance,
+      deadZone,
+      sensitivity,
+      requiredProgress,
+    }}
+  >
     <Text className="slide-to-activate-story__hint">
       Note: Inputs do not work in some stories unless there is content between the interactive elements and the iframe
       edge.
@@ -69,7 +106,10 @@ export const WithThumbIconHeldState = (props: SlideToActivateProps) => (
 WithThumbIconHeldState.argTypes = actionArgTypes;
 
 export const PillThumb = (props: SlideToActivateProps) => (
-  <SlideToActivateInteractiveDemo {...props} thumbWidth={72} borderRadius={SlideToActivateBorderRadii.pill} />
+  <SlideToActivateInteractiveDemo
+    {...props}
+    config={{ thumbWidth: 72, borderRadius: SlideToActivateBorderRadii.pill }}
+  />
 );
 
 PillThumb.argTypes = actionArgTypes;
@@ -154,13 +194,13 @@ export const AsyncActivation = (props: SlideToActivateProps) => (
 AsyncActivation.argTypes = actionArgTypes;
 
 export const Rtl = (props: SlideToActivateProps) => (
-  <SlideToActivateInteractiveDemo {...props} direction={SlideToActivateDirections.rtl} />
+  <SlideToActivateInteractiveDemo {...props} config={{ direction: SlideToActivateDirections.rtl }} />
 );
 
 Rtl.argTypes = actionArgTypes;
 
 export const Small = (props: SlideToActivateProps) => (
-  <SlideToActivateInteractiveDemo {...props} size={SlideToActivateSizes.small} />
+  <SlideToActivateInteractiveDemo {...props} config={{ size: SlideToActivateSizes.small }} />
 );
 
 Small.argTypes = actionArgTypes;
@@ -172,7 +212,7 @@ export const CustomStyling = (props: SlideToActivateProps) => (
         {...props}
         labelText="Slide to unlock"
         activatedLabel="Unlocked"
-        borderRadius={SlideToActivateBorderRadii.pill}
+        config={{ borderRadius: SlideToActivateBorderRadii.pill }}
       />
     </div>
     <div className="slide-to-activate-story-compact">
