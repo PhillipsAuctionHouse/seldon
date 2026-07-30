@@ -42,12 +42,9 @@ const NavigationSubmenu = React.forwardRef<HTMLUListElement, NavigationSubmenuPr
   ) => {
     const leftSectionItems = React.Children.toArray(children)
       .map((child) => {
-        if (
-          React.isValidElement(child) &&
-          (child as React.ReactElement<NavigationItemProps>).props.navGroup === 'nav-link-start'
-        ) {
-          return React.cloneElement(child as React.ReactElement<NavigationItemProps>, {
-            onClick: (e: React.MouseEvent<HTMLElement>) => {
+        if (React.isValidElement<NavigationItemProps>(child) && child.props.navGroup === 'nav-link-start') {
+          return React.cloneElement(child, {
+            onClick: (e: React.MouseEvent<HTMLLIElement>) => {
               onClick?.(e);
               child.props?.onClick?.(e);
             },
@@ -59,12 +56,9 @@ const NavigationSubmenu = React.forwardRef<HTMLUListElement, NavigationSubmenuPr
 
     const rightSectionItems = React.Children.toArray(children)
       .map((child) => {
-        if (
-          React.isValidElement(child) &&
-          (child as React.ReactElement<NavigationItemProps>).props.navGroup === 'nav-link-end'
-        ) {
-          return React.cloneElement(child as React.ReactElement<NavigationItemProps>, {
-            onClick: (e: React.MouseEvent<HTMLElement>) => {
+        if (React.isValidElement<NavigationItemProps>(child) && child.props.navGroup === 'nav-link-end') {
+          return React.cloneElement(child, {
+            onClick: (e: React.MouseEvent<HTMLLIElement>) => {
               onClick?.(e);
               child.props?.onClick?.(e);
             },

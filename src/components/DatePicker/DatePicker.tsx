@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { noOp, px, useNormalizedInputProps } from '../../utils';
 import Input, { InputProps } from '../Input/Input';
 
-export interface DatePickerProps extends Omit<InputProps, 'defaultValue' | 'onChange'>, Record<string, unknown> {
+export interface DatePickerProps extends Omit<InputProps, 'defaultValue' | 'onChange'> {
   /**
    * Optionally allow manual entry to the date input
    */
@@ -58,9 +58,9 @@ export interface DatePickerProps extends Omit<InputProps, 'defaultValue' | 'onCh
   labelText: string;
 
   /**
-   * Locatiion you want the calendar to render for
+   * Location you want the calendar to render for
    */
-  locale: string;
+  locale?: string;
 
   /**
    * Optional `onChange` handler that is called whenever flatpickr is updated
@@ -121,7 +121,7 @@ l10n.en.weekdays.shorthand.forEach((_day, index) => {
   }
 });
 
-const DatePicker = React.forwardRef(
+const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
   (
     {
       allowInput = false,
@@ -151,9 +151,9 @@ const DatePicker = React.forwardRef(
   ) => {
     const baseClassName = `${px}-date-picker`;
     const inputProps = useNormalizedInputProps({ disabled, id, invalid, invalidText, readOnly, type, warn, warnText });
-    const fp = React.useRef() as React.MutableRefObject<flatpickr.Instance>;
-    const inputRef = React.useRef() as React.Ref<HTMLInputElement> | undefined;
-    const manualValue = React.useRef<Date[]>();
+    const fp = React.useRef<flatpickr.Instance>(null!);
+    const inputRef = React.useRef<HTMLInputElement | null>(null);
+    const manualValue = React.useRef<Date[] | undefined>(undefined);
     React.useEffect(() => {
       // Config for flatpickr
       const config: flatpickr.Options.Options = {

@@ -56,7 +56,7 @@ const DetailList = forwardRef<HTMLDivElement, DetailListProps>(
         ref={ref}
       >
         {childrenArray?.map((child, index) =>
-          isValidElement(child) ? (
+          isValidElement<{ variant?: DetailVariants }>(child) ? (
             <div
               className={classnames(`${baseClassName}-wrapper`, {
                 [`${px}-has-separators`]: hasSeparators,
