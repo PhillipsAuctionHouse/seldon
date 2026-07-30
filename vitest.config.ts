@@ -49,6 +49,7 @@ export default mergeConfig(viteConfig, {
             'scripts',
             'storybook',
             '.template/**/*.{ts,tsx}',
+            '.claude/worktrees/**',
           ],
           setupFiles: ['./config/vitest/setupTest.ts'],
           restoreMocks: true,
