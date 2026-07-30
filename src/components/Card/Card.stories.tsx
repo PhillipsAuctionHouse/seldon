@@ -2,6 +2,7 @@ import type { Meta } from '@storybook/react-vite';
 
 import Card, { type CardRootProps } from './Card';
 import { CardVariants } from './types';
+import { AspectRatio } from '../SeldonImage';
 
 const sampleVideoSource =
   'https://players.brightcove.net/6415663453001/default_default/index.html?videoId=6355671347112';
@@ -106,7 +107,7 @@ MediaCard.args = {
 
 export const CardWithImagePlaceholder = (props: CardRootProps) => (
   <Card.Root {...props} id="card-image-placeholder">
-    <Card.Image alt="Card placeholder image" src="broken-image-src" aspectRatio="16/9" />
+    <Card.Image alt="Card placeholder image" src="broken-image-src" aspectRatio={AspectRatio.Landscape} />
     <Card.Content>
       <Card.Eyebrow>Modern & Contemporary Art</Card.Eyebrow>
       <Card.Title>Card image placeholder state</Card.Title>

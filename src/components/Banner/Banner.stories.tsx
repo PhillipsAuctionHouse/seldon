@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react-vite';
 
-import { SeldonImage } from '../SeldonImage';
+import { SeldonImage, AspectRatio } from '../SeldonImage';
 import Banner, { type BannerRootProps } from './Banner';
 import { BannerMediaSize, BannerVariants } from './types';
 
@@ -23,7 +23,12 @@ export default meta;
 export const Playground = (props: BannerRootProps) => (
   <Banner.Root {...props}>
     <Banner.Media>
-      <SeldonImage aspectRatio="16/9" src={sampleImage} alt="Modern & Contemporary Art auction" objectFit="cover" />
+      <SeldonImage
+        aspectRatio={AspectRatio.Landscape}
+        src={sampleImage}
+        alt="Modern & Contemporary Art auction"
+        objectFit="cover"
+      />
     </Banner.Media>
     <Banner.Content>
       <Banner.Eyebrow>Modern & Contemporary Art</Banner.Eyebrow>
@@ -51,7 +56,7 @@ Playground.argTypes = {
 export const Inline = (props: BannerRootProps) => (
   <Banner.Root {...props} variant={BannerVariants.inline}>
     <Banner.Media size={BannerMediaSize.third}>
-      <SeldonImage aspectRatio="16/9" src={sampleImage} alt="Auction banner" objectFit="cover" />
+      <SeldonImage aspectRatio={AspectRatio.Landscape} src={sampleImage} alt="Auction banner" objectFit="cover" />
     </Banner.Media>
     <Banner.Content>
       <Banner.Eyebrow>Department</Banner.Eyebrow>
@@ -70,7 +75,12 @@ Inline.args = { id: 'inline' };
 export const ImageHalf = (props: BannerRootProps) => (
   <Banner.Root {...props}>
     <Banner.Media size={BannerMediaSize.half}>
-      <SeldonImage aspectRatio="16/9" src={sampleImage} alt="Auction banner half width" objectFit="cover" />
+      <SeldonImage
+        aspectRatio={AspectRatio.Landscape}
+        src={sampleImage}
+        alt="Auction banner half width"
+        objectFit="cover"
+      />
     </Banner.Media>
     <Banner.Content>
       <Banner.Eyebrow>Label</Banner.Eyebrow>
@@ -86,7 +96,12 @@ ImageHalf.args = { id: 'image-half' };
 export const ImageThird = (props: BannerRootProps) => (
   <Banner.Root {...props}>
     <Banner.Media size={BannerMediaSize.third}>
-      <SeldonImage aspectRatio="16/9" src={sampleImage} alt="Auction banner third width" objectFit="cover" />
+      <SeldonImage
+        aspectRatio={AspectRatio.Landscape}
+        src={sampleImage}
+        alt="Auction banner third width"
+        objectFit="cover"
+      />
     </Banner.Media>
     <Banner.Content>
       <Banner.Eyebrow>Label</Banner.Eyebrow>
@@ -107,7 +122,12 @@ export const ImageOnRight = (props: BannerRootProps) => (
       <Banner.Cta>Action</Banner.Cta>
     </Banner.Content>
     <Banner.Media size={BannerMediaSize.half}>
-      <SeldonImage aspectRatio="16/9" src={sampleImage} alt="Auction banner image right" objectFit="cover" />
+      <SeldonImage
+        aspectRatio={AspectRatio.Landscape}
+        src={sampleImage}
+        alt="Auction banner image right"
+        objectFit="cover"
+      />
     </Banner.Media>
   </Banner.Root>
 );

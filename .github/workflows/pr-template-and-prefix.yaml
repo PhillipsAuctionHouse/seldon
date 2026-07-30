@@ -1,0 +1,87 @@
+name: 'Validate PR Title Prefix and Body Template'
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+    branches:
+      - next
+      - 'hotfix/**'
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  check-title-and-body:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout base branch (for PR template)
+        uses: actions/checkout@v6
+
+      - name: Enforce base-branch title prefix and PR template body
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_BASE: ${{ github.event.pull_request.base.ref }}
+        run: |
+          set -euo pipefail
+
+          echo "Base branch: $PR_BASE"
+          echo "Title: $PR_TITLE"
+
+          fail=0
+
+          fix_re='^fix(\([^)]+\))?!?: '
+          # Project keys may contain digits after the first letter (e.g. L3), so
+          # [A-Z]+ alone would reject 'L3-13397' while matching 'PDD-539'.
+          jira_re='[A-Z][A-Z0-9]*-[0-9]+'
+
+          # Title prefix rule — base branch decides the semantic-release type
+          if [[ "$PR_BASE" == "next" ]]; then
+            if [[ "$PR_TITLE" =~ $fix_re ]]; then
+              echo "::error title=PR title prefix::PRs targeting 'next' must not use 'fix(scope): ' — bug fixes on 'next' should ship as 'feat', 'chore', 'refactor', etc. so semantic-release cuts a minor bump. Use 'fix(scope): ' only on hotfix branches."
+              fail=1
+            fi
+          elif [[ "$PR_BASE" == hotfix/* ]]; then
+            if [[ ! "$PR_TITLE" =~ $fix_re ]]; then
+              echo "::error title=PR title prefix::PRs targeting a hotfix branch ('$PR_BASE') must start with 'fix(scope): '. semantic-release requires a patch bump on hotfix branches."
+              fail=1
+            fi
+          fi
+
+          # Jira ticket rule — title must contain a ticket ID like PDD-123 or L3-4567
+          if [[ ! "$PR_TITLE" =~ $jira_re ]]; then
+            echo "::error title=PR title Jira ticket::PR title must include a Jira ticket ID (regex '[A-Z][A-Z0-9]*-[0-9]+'), e.g. 'feat(editorial): PDD-539 add ...' or 'feat(scope): L3-13397 add ...'."
+            fail=1
+          fi
+
+          # PR body template rule — every bold section header in the template must appear in the PR body
+          template_path=".github/PULL_REQUEST_TEMPLATE.MD"
+          if [[ ! -f "$template_path" ]]; then
+            echo "::error title=PR template missing::Could not find $template_path in the base branch."
+            exit 1
+          fi
+
+          mapfile -t required_sections < <(grep -E '^\*\*[^*]+\*\*[[:space:]]*$' "$template_path" | sed 's/[[:space:]]*$//')
+          if [[ ${#required_sections[@]} -eq 0 ]]; then
+            echo "::error title=PR template unreadable::Extracted zero section headers from $template_path. The template may have been restructured — update the grep pattern in this workflow before merging."
+            exit 1
+          fi
+          for section in "${required_sections[@]}"; do
+            if [[ "$PR_BODY" != *"$section"* ]]; then
+              echo "::error title=PR body template::PR body is missing required section '$section' from .github/PULL_REQUEST_TEMPLATE.MD. Rebuild the body from the template."
+              fail=1
+            fi
+          done
+
+          if [[ "$fail" -ne 0 ]]; then
+            echo ""
+            echo "See .github/PULL_REQUEST_TEMPLATE.MD and AGENTS.md 'Opening a Pull Request' for the required format."
+            exit 1
+          fi
+
+          echo "PR title prefix, Jira ticket, and body template all check out."

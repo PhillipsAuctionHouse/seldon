@@ -1,3 +1,24 @@
+# [1.277.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.276.0...v1.277.0) (2026-07-27)
+
+
+### Features
+
+* **deps:** L3-0000 bundle remaining low-risk dependabot updates ([#909](https://github.com/PhillipsAuctionHouse/seldon/issues/909)) ([1551ea9](https://github.com/PhillipsAuctionHouse/seldon/commit/1551ea9d0fd1b005cf5fe9394364f418055cceb6))
+
+# [1.276.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.275.0...v1.276.0) (2026-07-27)
+
+
+### Features
+
+* **FiltersInline:** PDD-289 apply filter design feedback ([#892](https://github.com/PhillipsAuctionHouse/seldon/issues/892)) ([eb7e231](https://github.com/PhillipsAuctionHouse/seldon/commit/eb7e231c40a7943bbdce0644101cc195b8ae0e1f))
+
+# [1.275.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.274.0...v1.275.0) (2026-07-23)
+
+
+### Features
+
+* **SeldonImage:** PDD-459 add 3/4 portrait aspect ratio ([#894](https://github.com/PhillipsAuctionHouse/seldon/issues/894)) ([9480ae9](https://github.com/PhillipsAuctionHouse/seldon/commit/9480ae911fc6bd772865d657df5d418c700e699c))
+
 # [1.274.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.273.0...v1.274.0) (2026-07-20)
 
 

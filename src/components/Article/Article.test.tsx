@@ -19,7 +19,7 @@ describe('Article', () => {
       />,
     );
 
-    expect(screen.getByAltText('bull')).toHaveAttribute('src', 'test-image.jpg');
+    expect(screen.getByAltText('Test Header')).toHaveAttribute('src', 'test-image.jpg');
     expect(screen.getByText('Test Label')).toBeInTheDocument();
     expect(screen.getByText('Test Header')).toBeInTheDocument();
     expect(screen.getByText('Test Description')).toBeInTheDocument();
@@ -29,7 +29,7 @@ describe('Article', () => {
   it('renders correctly without optional props', () => {
     render(<Article header="Test Header" />);
 
-    expect(screen.queryByAltText('bull')).toBeNull();
+    expect(screen.queryByAltText('Test Header')).toBeNull();
     expect(screen.queryByText('Test Label')).toBeNull();
     expect(screen.getByText('Test Header')).toBeInTheDocument();
     expect(screen.queryByText('Test Description')).toBeNull();

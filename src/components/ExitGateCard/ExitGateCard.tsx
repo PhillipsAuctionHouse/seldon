@@ -4,7 +4,7 @@ import { getCommonProps } from '../../utils';
 import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
 import { Link } from '../Link';
-import { SeldonImage } from '../SeldonImage';
+import { SeldonImage, AspectRatio } from '../SeldonImage';
 import { Text, TextVariants } from '../Text';
 
 export interface ExitGateCardProps extends ComponentProps<'div'> {
@@ -86,7 +86,7 @@ const ExitGateCard = forwardRef<HTMLDivElement, ExitGateCardProps>(
         {imageSrc ? (
           <SeldonImage
             objectFit="cover"
-            aspectRatio="16/9"
+            aspectRatio={AspectRatio.Landscape}
             src={imageSrc}
             alt={altText}
             srcSet={imageSrcSet}

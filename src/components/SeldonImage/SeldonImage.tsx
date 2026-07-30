@@ -4,8 +4,7 @@ import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { Icon } from '../Icon';
 import { isImageValid } from './utils';
-
-type AspectRatio = '16/9' | '1/1' | 'none';
+import { AspectRatio } from './types';
 
 export interface SeldonImageProps extends ComponentProps<'div'> {
   /**
@@ -78,7 +77,7 @@ const SeldonImage = memo(
     (
       {
         className,
-        aspectRatio = 'none',
+        aspectRatio = AspectRatio.None,
         objectFit = 'none',
         hasBlurBackground = false,
         imageClassName,
@@ -146,7 +145,7 @@ const SeldonImage = memo(
           data-chromatic="ignore" // to handle the issue where the image is not rendered in the storybook
           ref={ref}
           className={classnames(baseClassName, className, {
-            [`${baseClassName}--aspect-ratio-${aspectRatio.replace('/', '-')}`]: aspectRatio !== 'none',
+            [`${baseClassName}--aspect-ratio-${aspectRatio.replace('/', '-')}`]: aspectRatio !== AspectRatio.None,
             [`${baseClassName}--error-image`]: loadingState === 'error' || imageBlocked,
           })}
           role="img"

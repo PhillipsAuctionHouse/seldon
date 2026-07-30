@@ -1,6 +1,8 @@
 @use '~scss/allPartials' as *;
 
 .#{$px}-seldon-image {
+  // Propagate an ancestor `max-height` down to the wrapper so the img can inherit it too (percentages resolve to `none` when parent height is auto; `inherit` doesn't).
+  max-height: inherit;
   overflow: hidden;
   position: relative;
 
@@ -14,9 +16,28 @@
     }
   }
 
+  // Portrait/square can overflow vertically; auto dims + max caps let the img respect parent max-height, not just width.
+  &--aspect-ratio-3-4 {
+    img {
+      aspect-ratio: 3 / 4;
+      height: auto;
+      max-height: inherit;
+      max-width: 100%;
+      width: auto;
+    }
+
+    &.#{$px}-seldon-image--error-image {
+      aspect-ratio: 3 / 4;
+    }
+  }
+
   &--aspect-ratio-1-1 {
     img {
       aspect-ratio: 1 / 1;
+      height: auto;
+      max-height: inherit;
+      max-width: 100%;
+      width: auto;
     }
 
     &.#{$px}-seldon-image--error-image {
