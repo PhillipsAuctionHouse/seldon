@@ -29,9 +29,21 @@ product API clients here.
 3. Create `Component.stories.tsx` with Overview + variations (match tone of existing stories).
 4. Write tests hitting rendering, variant/branch logic, keyboard/focus if interactive.
 5. Add SCSS partial `_component.scss` using the `seldon-` prefixed base class.
-6. Export from folder `index.ts` and root `src/index.ts`.
-7. Run: `npm run lint && npm test && npm run build` before committing.
-8. Validate accessibility by checking the component in Storybook under the Accessibility tab and fix any issues.
+6. **If a Figma main component exists for it**, add a co-located `Component.figma.tsx` mapping Figma variants → seldon props (see [Figma Code Connect](#figma-code-connect) below). Skip only when no Figma component is published yet.
+7. Export from folder `index.ts` and root `src/index.ts`.
+8. Run: `npm run lint && npm test && npm run build` before committing.
+9. Validate accessibility by checking the component in Storybook under the Accessibility tab and fix any issues.
+
+## Figma Code Connect
+
+Every seldon component that has a corresponding **published** Figma main component in the Phillips design library MUST have a `Component.figma.tsx` template file co-located with the component source. This is what lets Figma Dev Mode (and AI-driven prototype builders) return the real seldon import + JSX for a selected Figma frame instead of generic HTML.
+
+- **Where:** `src/components/<Name>/<Name>.figma.tsx` (or `src/patterns/<Name>/<Name>.figma.tsx`).
+- **How:** use the `figma:figma-code-connect` skill, or the CLI style already in `Breadcrumb.figma.tsx` / `Search.figma.tsx` as reference. Prefer `figma.enum(...)` for VARIANT Figma props, `figma.string(...)` for TEXT, `figma.boolean(...)` for BOOLEAN.
+- **Discover the node URL** by right-clicking the main component in Figma → "Copy link to selection". Confirm the URL contains `?node-id=...` before writing the template.
+- **Only publish once**, per PR, using a `FIGMA_ACCESS_TOKEN` — CI or a maintainer runs `npx figma connect publish`. `--dry-run` locally is safe and validates the file without touching Figma servers.
+- **When Figma doesn't have a matching main component**, skip the `.figma.tsx` step and leave a note in the PR (e.g. "no Figma component yet"). Don't invent one just to satisfy the workflow.
+- **When Figma property names are garbage** (e.g. `Property 1`), the mapping is still possible but produces ugly Dev-Mode snippets — flag it in the PR so designers can rename the variant properties.
 
 ## Styling and DOM conventions
 
