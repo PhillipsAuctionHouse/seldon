@@ -20,7 +20,8 @@ export type { SlideToActivateConfig, SlideToActivateProps } from './types';
  * ## Overview
  *
  * One-shot slide-to-activate control. Thumb latches at the end while
- * `onActivation` is pending, then the parent typically marks it complete.
+ * `onActivation` is pending, then the parent typically marks it complete
+ * via `isComplete` (implies non-interactive).
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-slidetoactivate--overview)
  * [Figma](https://www.figma.com/design/ROSowkNXfQv1nhos5vuyWG/Saleroom?node-id=8259-82408&m=dev)
@@ -62,6 +63,8 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'SlideToActivate');
     const reduceMotion = useReducedMotion();
     const thumbDescriptionId = useId();
+    const isEffectivelyDisabled = isDisabled || isComplete;
+
     const {
       status,
       announcement,
@@ -78,7 +81,7 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
       snapDurationMs,
     } = useSlideToActivate({
       direction,
-      isDisabled,
+      isDisabled: isEffectivelyDisabled,
       reduceMotion,
       pendingAnnouncement,
       successAnnouncement,
@@ -92,11 +95,10 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
 
     const isPending = status === 'pending';
     const isHeld = status === 'dragging';
-    const isInteractive = !isDisabled && !isPending;
-    const isCompleteDisabled = isDisabled && isComplete;
+    const isInteractive = !isEffectivelyDisabled && !isPending;
     const isBlockedDisabled = isDisabled && !isComplete;
     const isRtl = direction === SlideToActivateDirections.rtl;
-    const isThumbHidden = isCompleteDisabled || (isBlockedDisabled && !showThumbWhenDisabled);
+    const isThumbHidden = isComplete || (isBlockedDisabled && !showThumbWhenDisabled);
     const hasKeyboardHint = keyboardHint.trim().length > 0;
 
     return (
@@ -107,9 +109,9 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
         className={classnames(baseClassName, className, {
           [`${baseClassName}--${size}`]: size !== SlideToActivateSizes.default,
           [`${baseClassName}--radius-${borderRadius}`]: true,
-          [`${baseClassName}--disabled`]: isDisabled,
+          [`${baseClassName}--disabled`]: isEffectivelyDisabled,
           [`${baseClassName}--disabled-blocked`]: isBlockedDisabled,
-          [`${baseClassName}--disabled-complete`]: isCompleteDisabled,
+          [`${baseClassName}--disabled-complete`]: isComplete,
           [`${baseClassName}--disabled-hide-thumb`]: isThumbHidden,
           [`${baseClassName}--pending`]: isPending,
           [`${baseClassName}--rtl`]: isRtl,
@@ -134,9 +136,7 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
             {labelText}
           </Text>
 
-          {/* Stays mounted across idle/pending/settled/error so assistive tech gets pending,
-              success, and error announcements alike — a region that unmounts on state change
-              only ever announces the first transition. */}
+          {/* Persistent aria-live region — unmounting on state change drops later announcements. */}
           <VisuallyHidden asChild>
             <span role="status" aria-live="polite" aria-atomic="true">
               {announcement}
@@ -166,7 +166,7 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
             descriptionId={hasKeyboardHint ? thumbDescriptionId : undefined}
             isHeld={isHeld}
             isPending={isPending}
-            isDisabled={isDisabled}
+            isDisabled={isEffectivelyDisabled}
             isThumbHidden={isThumbHidden}
             isInteractive={isInteractive}
             status={status}

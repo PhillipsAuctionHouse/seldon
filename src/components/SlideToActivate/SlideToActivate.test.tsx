@@ -217,10 +217,12 @@ describe('SlideToActivate', () => {
     expect(root).toHaveClass(`${px}-slide-to-activate--disabled-blocked`);
   });
 
-  it('uses complete disabled styles and always hides the thumb', () => {
-    render(<SlideToActivate labelText="Bid placed" isDisabled isComplete />);
+  it('uses complete styles from isComplete alone and always hides the thumb', () => {
+    render(<SlideToActivate labelText="Bid placed" isComplete />);
     const root = screen.getByTestId('slide-to-activate');
+    expect(root).toHaveClass(`${px}-slide-to-activate--disabled`);
     expect(root).toHaveClass(`${px}-slide-to-activate--disabled-complete`);
+    expect(root).not.toHaveClass(`${px}-slide-to-activate--disabled-blocked`);
     expect(root).toHaveClass(`${px}-slide-to-activate--disabled-hide-thumb`);
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
@@ -390,7 +392,6 @@ describe('SlideToActivate', () => {
     await waitFor(() => {
       expect(onError).toHaveBeenCalled();
     });
-    // Thumb stays latched — status is idle but re-activation is blocked by progress=1 guard.
     expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'idle');
     const thumb = screen.getByRole('button', { name: 'Confirm' });
     expect(thumb).not.toHaveClass(/snap/);
@@ -421,7 +422,7 @@ describe('SlideToActivate', () => {
 
     fireEvent.keyDown(thumb, { key: 'Enter' });
     onProgress.mockClear();
-    fireEvent.keyDown(thumb, { key: 'Enter', repeat: true }); // OS key-repeat, should be a no-op
+    fireEvent.keyDown(thumb, { key: 'Enter', repeat: true });
 
     expect(onProgress).not.toHaveBeenCalled();
   });
@@ -433,7 +434,7 @@ describe('SlideToActivate', () => {
     thumb.focus();
 
     fireEvent.keyDown(thumb, { key: 'Enter' });
-    fireEvent.keyUp(thumb, { key: ' ' }); // releasing a key that was never pressed down
+    fireEvent.keyUp(thumb, { key: ' ' });
 
     expect(onActivation).not.toHaveBeenCalled();
     expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'idle');
@@ -482,8 +483,7 @@ describe('SlideToActivate', () => {
   });
 
   describe('pointer drag', () => {
-    // maxTravel = trackRect.width - thumbRect.width - inset*2 = 200 - 44 - 2*8 = 140,
-    // matching the fixture in slideToActivateUtils.test.ts.
+    // maxTravel 140 — matches slideToActivateUtils.test.ts fixture (200 track − 44 thumb − 16 inset).
     const TRACK_RECT = {
       width: 200,
       height: 44,
@@ -533,10 +533,7 @@ describe('SlideToActivate', () => {
       vi.restoreAllMocks();
     });
 
-    // fireEvent (not userEvent.pointer) — jsdom has no native PointerEvent, and the
-    // project's PointerEvent polyfill (config/vitest/setupTest.ts) only fixes property
-    // forwarding for the raw fireEvent.pointerX helpers, not userEvent's higher-level API.
-    // Moves/ups target the thumb (React handlers + capture path) and document (fallback path).
+    // fireEvent.pointer* — jsdom lacks native PointerEvent; userEvent.pointer skips our polyfill.
     const drag = (thumb: HTMLElement, fromX: number, toX: number) => {
       fireEvent.pointerDown(thumb, { pointerId: 1, clientX: fromX, button: 0 });
       fireEvent.pointerMove(thumb, { pointerId: 1, clientX: toX });
@@ -555,11 +552,9 @@ describe('SlideToActivate', () => {
       render(<SlideToActivate labelText="Confirm" onProgress={onProgress} />);
       const thumb = screen.getByRole('button', { name: 'Confirm' });
 
-      drag(thumb, 20, 24); // 4px, under the default 8px deadZone
+      drag(thumb, 20, 24);
       release(thumb);
 
-      // Never clears the dead zone, so progress never moves off 0 — release's snap-to-idle
-      // still re-emits 0 unconditionally, so this is the one (no-op) call, not zero calls.
       expect(onProgress).toHaveBeenCalledTimes(1);
       expect(onProgress).toHaveBeenCalledWith(0);
       expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'idle');
@@ -570,7 +565,7 @@ describe('SlideToActivate', () => {
       render(<SlideToActivate labelText="Confirm" onProgress={onProgress} />);
       const thumb = screen.getByRole('button', { name: 'Confirm' });
 
-      drag(thumb, 20, 90); // 70px of 140px travel = 0.5
+      drag(thumb, 20, 90);
       release(thumb);
 
       expect(onProgress).toHaveBeenCalledWith(0.5);
@@ -585,7 +580,7 @@ describe('SlideToActivate', () => {
       render(<SlideToActivate labelText="Confirm" onActivation={onActivation} />);
       const thumb = screen.getByRole('button', { name: 'Confirm' });
 
-      drag(thumb, 20, 160); // full 140px travel
+      drag(thumb, 20, 160);
       release(thumb);
 
       await waitFor(() => {
@@ -594,8 +589,7 @@ describe('SlideToActivate', () => {
     });
 
     it('flips the drag direction under rtl', () => {
-      // rtl inset is measured from the track's trailing (right) edge, so the thumb needs to
-      // start there too — same fixture as the rtl case in slideToActivateUtils.test.ts.
+      // Thumb starts at trailing edge — same fixture as slideToActivateUtils.test.ts rtl case.
       vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(function (this: Element) {
         if (this.classList.contains(`${px}-slide-to-activate__track`)) {
           return TRACK_RECT as DOMRect;
@@ -636,7 +630,7 @@ describe('SlideToActivate', () => {
       );
       const thumb = screen.getByRole('button', { name: 'Confirm' });
 
-      drag(thumb, 100, 30); // moving toward track-start increases progress under rtl
+      drag(thumb, 100, 30);
       release(thumb);
 
       expect(onProgress).toHaveBeenCalledWith(0.5);
@@ -658,7 +652,7 @@ describe('SlideToActivate', () => {
       const onActivation = vi.fn(() => Promise.resolve());
       render(<SlideToActivate labelText="Confirm" onProgress={onProgress} onActivation={onActivation} />);
 
-      release(); // no prior pointerdown
+      release();
 
       expect(onProgress).not.toHaveBeenCalled();
       expect(onActivation).not.toHaveBeenCalled();
@@ -670,14 +664,14 @@ describe('SlideToActivate', () => {
       const thumb = screen.getByRole('button', { name: 'Confirm' });
 
       fireEvent.pointerDown(thumb, { pointerId: 1, clientX: 20, button: 0 });
-      fireEvent.pointerMove(document, { pointerId: 2, clientX: 90 }); // different pointer, ignored
-      fireEvent.pointerUp(document, { pointerId: 2 }); // different pointer, ignored
+      fireEvent.pointerMove(document, { pointerId: 2, clientX: 90 });
+      fireEvent.pointerUp(document, { pointerId: 2 });
 
       expect(onProgress).not.toHaveBeenCalled();
       expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'dragging');
 
       fireEvent.pointerUp(thumb, { pointerId: 1 });
-      fireEvent.pointerUp(document, { pointerId: 1 }); // clean up the still-active drag
+      fireEvent.pointerUp(document, { pointerId: 1 });
     });
 
     it('remeasures travel mid-drag if it was not yet available', () => {
@@ -719,9 +713,9 @@ describe('SlideToActivate', () => {
       render(<SlideToActivate labelText="Confirm" onProgress={onProgress} />);
       const thumb = screen.getByRole('button', { name: 'Confirm' });
 
-      fireEvent.pointerDown(thumb, { pointerId: 1, clientX: 20, button: 0 }); // measures 0 travel
-      layoutReady = true; // layout settles after the gesture already started
-      fireEvent.pointerMove(thumb, { pointerId: 1, clientX: 90 }); // remeasures, now 70/140 = 0.5
+      fireEvent.pointerDown(thumb, { pointerId: 1, clientX: 20, button: 0 });
+      layoutReady = true;
+      fireEvent.pointerMove(thumb, { pointerId: 1, clientX: 90 });
       fireEvent.pointerMove(document, { pointerId: 1, clientX: 90 });
       release(thumb);
 
@@ -799,7 +793,7 @@ describe('SlideToActivate', () => {
 
     fireEvent.keyDown(thumb, { key: 'Enter' });
     fireEvent.keyDown(thumb, { key: 'Escape' });
-    fireEvent.keyUp(thumb, { key: 'Enter' }); // key no longer matches activeKeyRef — ignored
+    fireEvent.keyUp(thumb, { key: 'Enter' });
 
     expect(onActivation).not.toHaveBeenCalled();
     expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'idle');

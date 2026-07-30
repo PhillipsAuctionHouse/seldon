@@ -81,7 +81,7 @@ export const playgroundArgTypes = {
   },
   isDisabled: {
     control: 'boolean',
-    description: 'Blocks pointer and keyboard activation.',
+    description: 'Blocks activation with the blocked (grey) visual. Prefer `isComplete` after success.',
     table: {
       type: { summary: 'boolean' },
       defaultValue: { summary: 'false' },
@@ -90,7 +90,7 @@ export const playgroundArgTypes = {
   isComplete: {
     control: 'boolean',
     description:
-      'Applies the "completed" visual (dark track, white label, hidden thumb). Use after a successful activation.',
+      'Settled success: complete visual + non-interactive (implies disabled). Use after a successful activation.',
     table: {
       type: { summary: 'boolean' },
       defaultValue: { summary: 'false' },

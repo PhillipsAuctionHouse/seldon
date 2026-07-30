@@ -18,10 +18,6 @@ $branded-petal: color.mix($pure-white, $highlight-red, 82%);
   &__reset {
     align-self: flex-start;
   }
-
-  &__hint {
-    color: $soft-black;
-  }
 }
 
 .slide-to-activate-story-branded {
@@ -127,15 +123,12 @@ $branded-petal: color.mix($pure-white, $highlight-red, 82%);
     flex-direction: column;
     gap: $spacing-xsm;
     max-width: 100%;
-
-    // Cap to the canvas so wide examples don't overflow and steal the drag as a scroll.
     width: min(var(--slide-demo-width, #{$slide-story-max-width}), 100%);
 
     .slide-to-activate-story {
       max-width: none;
     }
 
-    // Scale label from the 320px baseline (`--slide-demo-label-scale`).
     .#{$px}-slide-to-activate__label {
       font-size: calc(#{$font-size-label-medium} * var(--slide-demo-label-scale, 1));
     }

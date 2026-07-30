@@ -42,8 +42,7 @@ export const useSlideToActivate = ({
 }: UseSlideToActivateOptions) => {
   const [state, reactDispatch] = useReducer(slideToActivateReducer, initialSlideToActivateState);
   const stateRef = useRef(state);
-  // Updated synchronously (not via a useEffect) so pointer/keyboard handlers that close over
-  // stateRef always see the value from the most recent dispatch rather than the last commit.
+  // Sync update so handlers reading stateRef see the latest dispatch before commit.
   const dispatch = useCallback((action: SlideToActivateAction) => {
     stateRef.current = slideToActivateReducer(stateRef.current, action);
     reactDispatch(action);
@@ -142,7 +141,6 @@ export const useSlideToActivate = ({
         dispatch({ type: 'activationFailed', announcement: errorAnnouncement });
         snapToIdle();
       } else {
-        // Keep progress=1 (thumb latched); consumer owns the reset via isDisabled or remount.
         dispatch({ type: 'activationFailedHeld', announcement: errorAnnouncement });
       }
     }

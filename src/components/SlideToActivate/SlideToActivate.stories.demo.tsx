@@ -17,26 +17,32 @@ export const SlideToActivateInteractiveDemo = ({
   pendingLabel?: string;
   activatedLabel?: string;
 }) => {
-  const [labelText, setLabelText] = useState(props.labelText ?? initialLabel);
+  const idleLabel = props.labelText ?? initialLabel;
+  const [labelText, setLabelText] = useState(idleLabel);
   const [isActivated, setIsActivated] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [instanceKey, setInstanceKey] = useState(0);
 
   useEffect(() => {
-    setLabelText(props.labelText ?? initialLabel);
-  }, [props.labelText, initialLabel]);
+    if (!isActivated) {
+      setLabelText(idleLabel);
+    }
+  }, [idleLabel, isActivated]);
+
   const reset = () => {
-    setLabelText(initialLabel);
+    setLabelText(idleLabel);
     setIsActivated(false);
     setProgress(0);
+    setInstanceKey((key) => key + 1);
   };
 
   return (
     <div className="slide-to-activate-story">
       <SlideToActivate
+        key={instanceKey}
         {...props}
         labelText={labelText}
-        // OR demo latch with Storybook controls so isDisabled / isComplete toggles work.
-        isDisabled={Boolean(props.isDisabled) || isActivated}
+        isDisabled={Boolean(props.isDisabled)}
         isComplete={Boolean(props.isComplete) || isActivated}
         onProgress={(nextProgress) => {
           setProgress(nextProgress);
@@ -49,7 +55,6 @@ export const SlideToActivateInteractiveDemo = ({
             setTimeout(resolve, 600);
           });
           setLabelText(activatedLabel);
-          // Defer one frame so pending→complete paint can ease (thumb fade / label).
           await new Promise<void>((resolve) => {
             requestAnimationFrame(() => resolve());
           });

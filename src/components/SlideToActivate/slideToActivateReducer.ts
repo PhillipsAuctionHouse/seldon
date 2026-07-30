@@ -4,7 +4,6 @@ export interface SlideToActivateState {
   status: SlideToActivateStatus;
   progress: number;
   maxTravel: number;
-  /** Text for the persistent aria-live region — see SlideToActivate.tsx. */
   announcement: string;
 }
 
@@ -27,11 +26,7 @@ export type SlideToActivateAction =
   | { type: 'snapCompleted' }
   | { type: 'reset' };
 
-// Every branch bails out to the same `state` reference when nothing would actually change.
-// useReducer only skips a re-render on reference equality (unlike useState's per-field
-// Object.is check), so an unconditional `{ ...state, ... }` spread would re-render on every
-// dispatch even when the value is identical — e.g. a ResizeObserver firing with an unchanged
-// measurement.
+// Return the same state reference when unchanged — useReducer skips re-render only on reference equality.
 export function slideToActivateReducer(
   state: SlideToActivateState,
   action: SlideToActivateAction,
@@ -50,7 +45,6 @@ export function slideToActivateReducer(
     case 'activationFailed':
       return { ...state, announcement: action.announcement };
     case 'activationFailedHeld':
-      // Clear pending without resetting progress — thumb stays latched at the end.
       return { ...state, status: 'idle', announcement: action.announcement };
     case 'snapStarted': {
       const nextStatus = action.immediate ? 'idle' : 'snapping';

@@ -122,8 +122,7 @@ export const useSlideDragHandlers = ({
       if (isDisabled || isGestureBusy(stateRef.current.status) || stateRef.current.progress >= 1) {
         return;
       }
-      // Avoid text selection / scroll stealing the gesture (esp. Storybook iframe + touch).
-      // preventDefault also blocks the browser's default focus — restore it so Space/Enter work.
+      // preventDefault blocks default focus; restore it for keyboard activation.
       event.preventDefault();
       measureTravel();
       const thumb = event.currentTarget;
@@ -138,8 +137,7 @@ export const useSlideDragHandlers = ({
 
       detachDocumentListeners();
 
-      // Prefer setPointerCapture + React handlers on the thumb. Document listeners are only a
-      // fallback when capture is unavailable (jsdom, odd embeds) so moves outside the thumb still track.
+      // Document listeners when pointer capture is unavailable (jsdom, odd embeds).
       if (!captureSucceeded) {
         const onPointerMove = (moveEvent: PointerEvent) => {
           if (moveEvent.cancelable) {

@@ -53,7 +53,7 @@ export interface SlideToActivateProps extends Omit<HTMLAttributes<HTMLDivElement
    *
    * After this resolves, the component enters `idle` with `progress=1` — the thumb stays
    * latched at the end and re-activation is blocked by the `progress >= 1` guard. Pass
-   * `isDisabled isComplete` to present the settled visual state.
+   * `isComplete` to present the settled visual state (implies non-interactive).
    */
   onActivation?: () => void | Promise<void>;
   /** Called on `onActivation` rejection when provided; otherwise the error is `console.error`ed. */
@@ -86,15 +86,18 @@ export interface SlideToActivateProps extends Omit<HTMLAttributes<HTMLDivElement
   /**
    * When `false`, the component does not snap back to idle after `onActivation` rejects —
    * the thumb stays latched and status returns to `idle`. Consumer is responsible for the
-   * reset (typically `isDisabled isComplete`). Default `true`.
+   * reset (typically `isComplete`). Default `true`.
    */
   resetOnError?: boolean;
-  /** Blocks pointer and keyboard activation. */
+  /**
+   * Blocks pointer and keyboard activation with the "blocked" visual
+   * (grey track/label). Ignored for interaction when `isComplete` is also set —
+   * complete appearance wins.
+   */
   isDisabled?: boolean;
   /**
-   * Applies the "completed" disabled visual (dark track, white label, hidden thumb).
-   * Use after a successful activation to signal the settled state.
-   * Only meaningful when `isDisabled` is `true`.
+   * Settled success state: dark track, white label, hidden thumb, and non-interactive.
+   * Implies disabled — no need to also pass `isDisabled`.
    */
   isComplete?: boolean;
   /**

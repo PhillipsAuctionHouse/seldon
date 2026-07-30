@@ -50,13 +50,8 @@ export const Playground = ({
       thumbClassName,
     }}
   >
-    <Text className="slide-to-activate-story__hint">
-      Note: Inputs do not work in some stories unless there is content between the interactive elements and the iframe
-      edge.
-      <br />
-      <br />
-      That is what this text is for.
-    </Text>
+    {/* Spacer so the control isn't flush against the Storybook iframe edge. */}
+    <div aria-hidden style={{ height: 100, width: 100 }} />
   </SlideToActivateInteractiveDemo>
 );
 
@@ -109,7 +104,6 @@ export const Widths = (props: SlideToActivateProps) => (
         style={
           {
             '--slide-demo-width': `${width}px`,
-            // 320px = default label size; scale proportionally on either side.
             '--slide-demo-label-scale': width / 320,
           } as CSSProperties
         }
@@ -120,13 +114,8 @@ export const Widths = (props: SlideToActivateProps) => (
         <SlideToActivateInteractiveDemo {...props} labelText="Swipe to confirm" />
       </div>
     ))}
-    <Text className="slide-to-activate-story__hint">
-      Note: Inputs do not work in some stories unless there is content between the interactive elements and the iframe
-      edge.
-      <br />
-      <br />
-      That is what this text is for.
-    </Text>
+    {/* Spacer so the control isn't flush against the Storybook iframe edge. */}
+    <div aria-hidden style={{ height: 100, width: 100 }} />
   </div>
 );
 
@@ -141,7 +130,7 @@ export const DisabledStates = (props: SlideToActivateProps) => (
       <SlideToActivate {...props} labelText="Unavailable" isDisabled showThumbWhenDisabled={false} />
     </div>
     <div className="slide-to-activate-story">
-      <SlideToActivate {...props} labelText="Bid placed" isDisabled isComplete />
+      <SlideToActivate {...props} labelText="Bid placed" isComplete />
     </div>
   </div>
 );
