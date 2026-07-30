@@ -55,16 +55,14 @@ describe('Subscribe', () => {
     expect(screen.getByText(/Success/)).toBeInTheDocument();
   });
 
-  it('it will render a custom element passed via the `element` prop', () => {
-    // Mimics react-router's `Form`: extra props Subscribe does not know about,
-    // and an optional `id` — this call site would fail to type-check when
-    // `element` was typed as `React.ElementType<SubscribeProps>`.
-    const CustomForm = ({
-      id,
-      children,
-      ...rest
-    }: React.FormHTMLAttributes<HTMLFormElement> & { method?: 'get' | 'post' }) => (
-      <form id={id} {...rest} data-custom-form="true">
+  it('renders a custom element passed via the `element` prop', () => {
+    // A form-like component: extra domain-agnostic props Subscribe does not
+    // know about, plus an optional `id`. This call site would fail to type-
+    // check when `element` was typed as `React.ElementType<SubscribeProps>`
+    // because Subscribe's domain props (subscriptionState, blurb, …) were
+    // required. `React.ElementType<React.ComponentProps<'form'>>` accepts it.
+    const CustomForm = ({ children, ...rest }: React.ComponentProps<'form'>) => (
+      <form {...rest} data-custom-form="true">
         {children}
       </form>
     );
