@@ -33,6 +33,7 @@ export default tseslint.config(
       'chromatic.config.cjs',
       'commitlint.config.js',
       '.agents/skills/*',
+      '.claude/worktrees/**',
     ],
   },
   js.configs.recommended,
