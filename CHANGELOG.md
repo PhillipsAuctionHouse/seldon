@@ -1,3 +1,10 @@
+# [1.278.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.277.0...v1.278.0) (2026-07-30)
+
+
+### Features
+
+* **component:** PDD-683 add slide to activate component ([#895](https://github.com/PhillipsAuctionHouse/seldon/issues/895)) ([bb7ab7f](https://github.com/PhillipsAuctionHouse/seldon/commit/bb7ab7f05f1110f61d68d3cc51e4416efbad0192))
+
 # [1.277.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.276.0...v1.277.0) (2026-07-27)
 
 
