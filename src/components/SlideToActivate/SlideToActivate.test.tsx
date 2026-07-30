@@ -282,12 +282,79 @@ describe('SlideToActivate', () => {
     });
 
     unmount();
-    await expect(
-      act(async () => {
-        resolveActivation?.();
-        await Promise.resolve();
-      }),
-    ).resolves.toBeUndefined();
+    resolveActivation?.();
+    await act(async () => {
+      await Promise.resolve();
+    });
+  });
+
+  it('snaps back with a transition when reduced motion is off', async () => {
+    useReducedMotion.mockReturnValue(false);
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    const onProgress = vi.fn();
+    const onActivation = vi.fn(() => Promise.reject(new Error('fail')));
+    const onError = vi.fn();
+
+    render(
+      <SlideToActivate labelText="Confirm" onActivation={onActivation} onError={onError} onProgress={onProgress} />,
+    );
+    const thumb = screen.getByRole('button', { name: 'Confirm' });
+    thumb.focus();
+    fireEvent.keyDown(thumb, { key: 'Enter' });
+    fireEvent.keyUp(thumb, { key: 'Enter' });
+
+    await waitFor(() => {
+      expect(onError).toHaveBeenCalled();
+    });
+    expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'snapping');
+
+    await act(() => {
+      vi.advanceTimersByTime(200);
+    });
+    expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'idle');
+    vi.useRealTimers();
+  });
+
+  it('ignores keydown while activation is pending', async () => {
+    const user = userEvent.setup();
+    let resolveActivation: (() => void) | undefined;
+    const onActivation = vi.fn(
+      () =>
+        new Promise<void>((resolve) => {
+          resolveActivation = resolve;
+        }),
+    );
+    const onProgress = vi.fn();
+
+    render(<SlideToActivate labelText="Confirm" onActivation={onActivation} onProgress={onProgress} />);
+    const thumb = screen.getByRole('button', { name: 'Confirm' });
+    thumb.focus();
+    await user.keyboard('{Enter}');
+    await waitFor(() => {
+      expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'pending');
+    });
+
+    onProgress.mockClear();
+    fireEvent.keyDown(thumb, { key: 'Enter' });
+    expect(onProgress).not.toHaveBeenCalled();
+
+    resolveActivation?.();
+    await waitFor(() => {
+      expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'idle');
+    });
+  });
+
+  it('cancels a held key on blur before keyup', () => {
+    const onActivation = vi.fn(() => Promise.resolve());
+    render(<SlideToActivate labelText="Confirm" onActivation={onActivation} />);
+    const thumb = screen.getByRole('button', { name: 'Confirm' });
+    thumb.focus();
+
+    fireEvent.keyDown(thumb, { key: 'Enter' });
+    fireEvent.blur(thumb);
+    fireEvent.keyUp(thumb, { key: 'Enter' });
+
+    expect(onActivation).not.toHaveBeenCalled();
   });
 
   it('calls onStatusChange on each status transition, skipping the initial idle', async () => {
@@ -659,6 +726,68 @@ describe('SlideToActivate', () => {
       release(thumb);
 
       expect(onProgress).toHaveBeenCalledWith(0.5);
+    });
+    it('uses thumb handlers when pointer capture succeeds', async () => {
+      const onActivation = vi.fn(() => Promise.resolve());
+      render(<SlideToActivate labelText="Confirm" onActivation={onActivation} />);
+      const thumb = screen.getByRole('button', { name: 'Confirm' });
+
+      Object.defineProperty(thumb, 'setPointerCapture', {
+        configurable: true,
+        value: vi.fn(),
+      });
+      Object.defineProperty(thumb, 'hasPointerCapture', {
+        configurable: true,
+        value: vi.fn(() => true),
+      });
+      Object.defineProperty(thumb, 'releasePointerCapture', {
+        configurable: true,
+        value: vi.fn(),
+      });
+
+      fireEvent.pointerDown(thumb, { pointerId: 1, clientX: 20, button: 0 });
+      fireEvent.pointerMove(thumb, { pointerId: 1, clientX: 160, cancelable: true });
+      fireEvent.pointerUp(thumb, { pointerId: 1 });
+
+      await waitFor(() => {
+        expect(onActivation).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    it('ignores a move for a different pointer id on the thumb', () => {
+      const onProgress = vi.fn();
+      render(<SlideToActivate labelText="Confirm" onProgress={onProgress} />);
+      const thumb = screen.getByRole('button', { name: 'Confirm' });
+
+      fireEvent.pointerDown(thumb, { pointerId: 1, clientX: 20, button: 0 });
+      fireEvent.pointerMove(thumb, { pointerId: 2, clientX: 90 });
+      expect(onProgress).not.toHaveBeenCalled();
+      release(thumb);
+    });
+
+    it('does not advance progress when travel cannot be measured mid-drag', () => {
+      vi.spyOn(Element.prototype, 'getBoundingClientRect').mockReturnValue({
+        width: 0,
+        height: 0,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        x: 0,
+        y: 0,
+        toJSON: () => undefined,
+      } as DOMRect);
+
+      const onProgress = vi.fn();
+      const onActivation = vi.fn(() => Promise.resolve());
+      render(<SlideToActivate labelText="Confirm" onProgress={onProgress} onActivation={onActivation} />);
+      const thumb = screen.getByRole('button', { name: 'Confirm' });
+
+      drag(thumb, 20, 90);
+      release(thumb);
+
+      expect(onActivation).not.toHaveBeenCalled();
+      expect(onProgress.mock.calls.every(([progress]) => progress === 0)).toBe(true);
     });
   });
 

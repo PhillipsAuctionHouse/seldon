@@ -15,6 +15,7 @@ export default mergeConfig(viteConfig, {
       exclude: [
         '**/*.test.{ts,tsx}',
         '**/*.stories.{ts,tsx}',
+        '**/*.stories.*.{ts,tsx}',
         '**/design/**/*.{ts,tsx}',
         '.template/**/*.{ts,tsx}',
         '**/index.ts',
