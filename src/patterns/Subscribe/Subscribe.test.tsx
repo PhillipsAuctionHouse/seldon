@@ -55,6 +55,24 @@ describe('Subscribe', () => {
     expect(screen.getByText(/Success/)).toBeInTheDocument();
   });
 
+  it('it will render a custom element passed via the `element` prop', () => {
+    // Mimics react-router's `Form`: extra props Subscribe does not know about,
+    // and an optional `id` — this call site would fail to type-check when
+    // `element` was typed as `React.ElementType<SubscribeProps>`.
+    const CustomForm = ({
+      id,
+      children,
+      ...rest
+    }: React.FormHTMLAttributes<HTMLFormElement> & { method?: 'get' | 'post' }) => (
+      <form id={id} {...rest} data-custom-form="true">
+        {children}
+      </form>
+    );
+
+    const { container } = render(<Subscribe id="test-element" element={CustomForm} />);
+    expect(container.querySelector('form[data-custom-form="true"]')).toBeInTheDocument();
+  });
+
   it('it will call the callback function on submit', async () => {
     const user = userEvent.setup();
     const mockCallback = vi.fn((e) => {

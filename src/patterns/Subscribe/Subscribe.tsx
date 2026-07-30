@@ -23,7 +23,7 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
   /**
    * Optional element to render in place of a form e.g. Remix Form, etc
    */
-  element?: React.ElementType<SubscribeProps>;
+  element?: React.ElementType;
   /**
    * A unique `id` for the `<Subscribe>`
    */
