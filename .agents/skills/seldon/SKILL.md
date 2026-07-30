@@ -41,7 +41,7 @@ Every seldon component that has a corresponding **published** Figma main compone
 - **Where:** `src/components/<Name>/<Name>.figma.tsx` (or `src/patterns/<Name>/<Name>.figma.tsx`).
 - **How:** use the `figma:figma-code-connect` skill, or the CLI style already in `Breadcrumb.figma.tsx` / `Search.figma.tsx` as reference. Prefer `figma.enum(...)` for VARIANT Figma props, `figma.string(...)` for TEXT, `figma.boolean(...)` for BOOLEAN.
 - **Discover the node URL** by right-clicking the main component in Figma → "Copy link to selection". Confirm the URL contains `?node-id=...` before writing the template.
-- **Only publish once**, per PR, using a `FIGMA_ACCESS_TOKEN` — CI or a maintainer runs `npx figma connect publish`. `--dry-run` locally is safe and validates the file without touching Figma servers.
+- **Publishing is automatic on merge to `main`** — the `.github/workflows/figma-code-connect.yml` workflow runs `npx figma connect publish` using the `FIGMA_ACCESS_TOKEN` repo secret (Personal Access Token with Code-Connect Write + File-content Read scopes). Do not manually publish from a local machine — that will fight the CI-owned source of truth. Locally, verify with `npx figma connect publish --dry-run` (no token needed for parse validation).
 - **When Figma doesn't have a matching main component**, skip the `.figma.tsx` step and leave a note in the PR (e.g. "no Figma component yet"). Don't invent one just to satisfy the workflow.
 - **When Figma property names are garbage** (e.g. `Property 1`), the mapping is still possible but produces ugly Dev-Mode snippets — flag it in the PR so designers can rename the variant properties.
 
