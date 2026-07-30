@@ -1,6 +1,9 @@
 import type { Meta } from '@storybook/react-vite';
 import type { CSSProperties } from 'react';
+import Button from '../Button/Button';
+import { ButtonSizes, ButtonVariants } from '../Button/types';
 import { Text, TextVariants } from '../Text';
+import { useToast } from '../Toast/useToast';
 import SlideToActivate from './SlideToActivate';
 import { actionArgTypes, playgroundArgTypes } from './SlideToActivate.stories.argTypes';
 import { SlideToActivateInteractiveDemo } from './SlideToActivate.stories.demo';
@@ -49,10 +52,7 @@ export const Playground = ({
       trackClassName,
       thumbClassName,
     }}
-  >
-    {/* Spacer so the control isn't flush against the Storybook iframe edge. */}
-    <div aria-hidden style={{ height: 100, width: 100 }} />
-  </SlideToActivateInteractiveDemo>
+  ></SlideToActivateInteractiveDemo>
 );
 
 Playground.args = {
@@ -95,8 +95,28 @@ export const PillThumb = (props: SlideToActivateProps) => (
 
 PillThumb.argTypes = actionArgTypes;
 
+const WidthsToastTrigger = () => {
+  const toast = useToast();
+
+  return (
+    <div className="slide-to-activate-story-widths__toast">
+      <Button
+        size={ButtonSizes.small}
+        variant={ButtonVariants.secondary}
+        onClick={() => toast('Toast viewport should not block the slides below')}
+      >
+        Show toast
+      </Button>
+      <Text className="slide-to-activate-story__hint" variant={TextVariants.bodySmall}>
+        Fire a toast, then drag a slide — viewport must not steal pointer events.
+      </Text>
+    </div>
+  );
+};
+
 export const Widths = (props: SlideToActivateProps) => (
   <div className="slide-to-activate-story-widths">
+    <WidthsToastTrigger />
     {WIDTH_EXAMPLES.map((width) => (
       <div
         key={width}
@@ -114,8 +134,6 @@ export const Widths = (props: SlideToActivateProps) => (
         <SlideToActivateInteractiveDemo {...props} labelText="Swipe to confirm" />
       </div>
     ))}
-    {/* Spacer so the control isn't flush against the Storybook iframe edge. */}
-    <div aria-hidden style={{ height: 100, width: 100 }} />
   </div>
 );
 
