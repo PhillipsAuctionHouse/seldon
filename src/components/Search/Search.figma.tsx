@@ -29,5 +29,5 @@ figma.connect(Search, FIGMA_URL, {
       Suggested: suggestedResults,
     }),
   },
-  example: ({ searchResults }) => <Search searchResults={searchResults} onSearch={(query) => console.log(query)} />,
+  example: ({ searchResults }) => <Search searchResults={searchResults} />,
 });
