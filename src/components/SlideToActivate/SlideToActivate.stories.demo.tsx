@@ -35,8 +35,9 @@ export const SlideToActivateInteractiveDemo = ({
       <SlideToActivate
         {...props}
         labelText={labelText}
-        isDisabled={isActivated}
-        isComplete={isActivated}
+        // OR demo latch with Storybook controls so isDisabled / isComplete toggles work.
+        isDisabled={Boolean(props.isDisabled) || isActivated}
+        isComplete={Boolean(props.isComplete) || isActivated}
         onProgress={(nextProgress) => {
           setProgress(nextProgress);
           props.onProgress?.(nextProgress);

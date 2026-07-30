@@ -11,7 +11,7 @@ interface SlideToActivateThumbProps {
   thumbIcon?: ReactNode;
   thumbTranslatePx: number;
   labelText: string;
-  descriptionId: string;
+  descriptionId?: string;
   isHeld: boolean;
   isPending: boolean;
   isDisabled: boolean;
@@ -20,6 +20,7 @@ interface SlideToActivateThumbProps {
   status: SlideToActivateStatus;
   snapDurationMs: number;
   onPointerDown?: (event: PointerEvent<HTMLButtonElement>) => void;
+  onPointerMove?: (event: PointerEvent<HTMLButtonElement>) => void;
   onPointerUp?: () => void;
   onPointerCancel?: () => void;
   onKeyDown?: (event: KeyboardEvent<HTMLButtonElement>) => void;
@@ -51,6 +52,7 @@ export const SlideToActivateThumb = ({
   status,
   snapDurationMs,
   onPointerDown,
+  onPointerMove,
   onPointerUp,
   onPointerCancel,
   onKeyDown,
@@ -82,13 +84,14 @@ export const SlideToActivateThumb = ({
         } as CSSProperties
       }
       aria-label={labelText}
-      aria-describedby={isInteractive ? descriptionId : undefined}
+      aria-describedby={isInteractive && descriptionId ? descriptionId : undefined}
       aria-busy={isPending ? true : undefined}
       aria-disabled={isDisabled || isPending ? true : undefined}
       aria-hidden={isThumbHidden ? true : undefined}
       disabled={isDisabled}
       tabIndex={isThumbHidden ? -1 : undefined}
       onPointerDown={isInteractive ? onPointerDown : undefined}
+      onPointerMove={isInteractive ? onPointerMove : undefined}
       onPointerUp={isInteractive ? onPointerUp : undefined}
       onPointerCancel={isInteractive ? onPointerCancel : undefined}
       onKeyDown={isInteractive ? onKeyDown : undefined}

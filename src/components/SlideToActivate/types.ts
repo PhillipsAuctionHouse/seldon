@@ -73,6 +73,12 @@ export interface SlideToActivateProps extends Omit<HTMLAttributes<HTMLDivElement
    */
   errorAnnouncement?: string;
   /**
+   * Visually hidden keyboard instructions exposed via `aria-describedby` on the thumb.
+   * Default: `'Press Space or Enter to activate. Press Escape to cancel.'`.
+   * Pass an empty string to omit the description.
+   */
+  keyboardHint?: string;
+  /**
    * Called on every status transition after mount. Useful for syncing external state to
    * the component's gesture lifecycle (e.g. dimming sibling elements while `dragging`).
    */

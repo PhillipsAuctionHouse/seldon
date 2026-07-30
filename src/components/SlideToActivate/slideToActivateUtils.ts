@@ -4,6 +4,8 @@ export type SlideToActivateStatus = 'idle' | 'dragging' | 'pending' | 'snapping'
 
 export const SNAP_MS = 200;
 
+export const DEFAULT_KEYBOARD_HINT = 'Press Space or Enter to activate. Press Escape to cancel.';
+
 export const clampProgress = (value: number) => Math.min(1, Math.max(0, value));
 
 /** True while a new gesture should not start. */

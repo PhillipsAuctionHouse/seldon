@@ -254,6 +254,42 @@ describe('SlideToActivate', () => {
     expect(description).toHaveTextContent(/Escape/i);
   });
 
+  it('allows overriding or omitting the keyboard hint', () => {
+    const { rerender } = render(<SlideToActivate labelText="Confirm" keyboardHint="Hold Enter, then release." />);
+    expect(document.getElementById(screen.getByRole('button').getAttribute('aria-describedby')!)).toHaveTextContent(
+      'Hold Enter, then release.',
+    );
+
+    rerender(<SlideToActivate labelText="Confirm" keyboardHint="" />);
+    expect(screen.getByRole('button', { name: 'Confirm' })).not.toHaveAttribute('aria-describedby');
+  });
+
+  it('does not dispatch after unmount while onActivation is pending', async () => {
+    const user = userEvent.setup();
+    let resolveActivation: (() => void) | undefined;
+    const onActivation = vi.fn(
+      () =>
+        new Promise<void>((resolve) => {
+          resolveActivation = resolve;
+        }),
+    );
+
+    const { unmount } = render(<SlideToActivate labelText="Confirm" onActivation={onActivation} />);
+    screen.getByRole('button', { name: 'Confirm' }).focus();
+    await user.keyboard('{Enter}');
+    await waitFor(() => {
+      expect(onActivation).toHaveBeenCalledTimes(1);
+    });
+
+    unmount();
+    await expect(
+      act(async () => {
+        resolveActivation?.();
+        await Promise.resolve();
+      }),
+    ).resolves.toBeUndefined();
+  });
+
   it('calls onStatusChange on each status transition, skipping the initial idle', async () => {
     const user = userEvent.setup();
     const onStatusChange = vi.fn();
@@ -433,12 +469,17 @@ describe('SlideToActivate', () => {
     // fireEvent (not userEvent.pointer) — jsdom has no native PointerEvent, and the
     // project's PointerEvent polyfill (config/vitest/setupTest.ts) only fixes property
     // forwarding for the raw fireEvent.pointerX helpers, not userEvent's higher-level API.
+    // Moves/ups target the thumb (React handlers + capture path) and document (fallback path).
     const drag = (thumb: HTMLElement, fromX: number, toX: number) => {
       fireEvent.pointerDown(thumb, { pointerId: 1, clientX: fromX, button: 0 });
+      fireEvent.pointerMove(thumb, { pointerId: 1, clientX: toX });
       fireEvent.pointerMove(document, { pointerId: 1, clientX: toX });
     };
 
-    const release = () => {
+    const release = (thumb?: HTMLElement) => {
+      if (thumb) {
+        fireEvent.pointerUp(thumb, { pointerId: 1 });
+      }
       fireEvent.pointerUp(document, { pointerId: 1 });
     };
 
@@ -448,7 +489,7 @@ describe('SlideToActivate', () => {
       const thumb = screen.getByRole('button', { name: 'Confirm' });
 
       drag(thumb, 20, 24); // 4px, under the default 8px deadZone
-      release();
+      release(thumb);
 
       // Never clears the dead zone, so progress never moves off 0 — release's snap-to-idle
       // still re-emits 0 unconditionally, so this is the one (no-op) call, not zero calls.
@@ -463,7 +504,7 @@ describe('SlideToActivate', () => {
       const thumb = screen.getByRole('button', { name: 'Confirm' });
 
       drag(thumb, 20, 90); // 70px of 140px travel = 0.5
-      release();
+      release(thumb);
 
       expect(onProgress).toHaveBeenCalledWith(0.5);
       await waitFor(() => {
@@ -478,7 +519,7 @@ describe('SlideToActivate', () => {
       const thumb = screen.getByRole('button', { name: 'Confirm' });
 
       drag(thumb, 20, 160); // full 140px travel
-      release();
+      release(thumb);
 
       await waitFor(() => {
         expect(onActivation).toHaveBeenCalledTimes(1);
@@ -529,7 +570,7 @@ describe('SlideToActivate', () => {
       const thumb = screen.getByRole('button', { name: 'Confirm' });
 
       drag(thumb, 100, 30); // moving toward track-start increases progress under rtl
-      release();
+      release(thumb);
 
       expect(onProgress).toHaveBeenCalledWith(0.5);
     });
@@ -540,7 +581,7 @@ describe('SlideToActivate', () => {
       const thumb = screen.getByRole('button', { name: 'Confirm' });
 
       drag(thumb, 20, 90);
-      release();
+      release(thumb);
 
       expect(onProgress).not.toHaveBeenCalled();
     });
@@ -568,6 +609,7 @@ describe('SlideToActivate', () => {
       expect(onProgress).not.toHaveBeenCalled();
       expect(screen.getByTestId('slide-to-activate')).toHaveAttribute('data-status', 'dragging');
 
+      fireEvent.pointerUp(thumb, { pointerId: 1 });
       fireEvent.pointerUp(document, { pointerId: 1 }); // clean up the still-active drag
     });
 
@@ -612,8 +654,9 @@ describe('SlideToActivate', () => {
 
       fireEvent.pointerDown(thumb, { pointerId: 1, clientX: 20, button: 0 }); // measures 0 travel
       layoutReady = true; // layout settles after the gesture already started
-      fireEvent.pointerMove(document, { pointerId: 1, clientX: 90 }); // remeasures, now 70/140 = 0.5
-      release();
+      fireEvent.pointerMove(thumb, { pointerId: 1, clientX: 90 }); // remeasures, now 70/140 = 0.5
+      fireEvent.pointerMove(document, { pointerId: 1, clientX: 90 });
+      release(thumb);
 
       expect(onProgress).toHaveBeenCalledWith(0.5);
     });

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, type MutableRefObject, type PointerEvent as ReactPointerEvent } from 'react';
 import type { SlideToActivateAction, SlideToActivateState } from '../slideToActivateReducer';
+import { SlideToActivateDirections } from '../types';
 import { clampProgress, isGestureBusy } from '../slideToActivateUtils';
 
 const REQUIRED_PROGRESS = 0.95;
@@ -7,7 +8,7 @@ const DEAD_ZONE = 8;
 const SENSITIVITY = 1;
 
 interface UseSlideDragHandlersOptions {
-  direction: 'ltr' | 'rtl';
+  direction: SlideToActivateDirections | `${SlideToActivateDirections}`;
   isDisabled: boolean;
   stateRef: MutableRefObject<SlideToActivateState>;
   measureTravel: () => void;
@@ -16,6 +17,16 @@ interface UseSlideDragHandlersOptions {
   runActivation: () => Promise<void>;
   snapToIdle: () => void;
 }
+
+const trySetPointerCapture = (thumb: HTMLButtonElement, pointerId: number) => {
+  try {
+    thumb.setPointerCapture(pointerId);
+    return typeof thumb.hasPointerCapture === 'function' ? thumb.hasPointerCapture(pointerId) : false;
+  } catch {
+    // Capture can fail in jsdom / some embedded contexts.
+    return false;
+  }
+};
 
 export const useSlideDragHandlers = ({
   direction,
@@ -42,6 +53,33 @@ export const useSlideDragHandlers = ({
 
   useEffect(() => () => detachDocumentListeners(), [detachDocumentListeners]);
 
+  const applyPointerMove = useCallback(
+    (clientX: number, pointerId: number) => {
+      if (pointerId !== activePointerIdRef.current || stateRef.current.status !== 'dragging') {
+        return;
+      }
+      let travel = stateRef.current.maxTravel;
+      if (travel <= 0) {
+        measureTravel();
+        travel = stateRef.current.maxTravel;
+        if (travel <= 0) {
+          return;
+        }
+      }
+      const rawDelta = clientX - dragStartXRef.current;
+      const signedDelta = direction === SlideToActivateDirections.rtl ? -rawDelta : rawDelta;
+      if (!hasClearedDeadZoneRef.current) {
+        if (Math.abs(signedDelta) < DEAD_ZONE) {
+          return;
+        }
+        hasClearedDeadZoneRef.current = true;
+      }
+      const nextProgress = clampProgress(dragOriginProgressRef.current + (signedDelta * SENSITIVITY) / travel);
+      emitProgress(nextProgress);
+    },
+    [direction, emitProgress, measureTravel, stateRef],
+  );
+
   const finishDrag = useCallback(() => {
     detachDocumentListeners();
     const thumb = thumbElementRef.current;
@@ -66,6 +104,19 @@ export const useSlideDragHandlers = ({
     snapToIdle();
   }, [detachDocumentListeners, runActivation, snapToIdle, stateRef]);
 
+  const handlePointerMove = useCallback(
+    (event: ReactPointerEvent<HTMLButtonElement>) => {
+      if (event.pointerId !== activePointerIdRef.current) {
+        return;
+      }
+      if (event.cancelable) {
+        event.preventDefault();
+      }
+      applyPointerMove(event.clientX, event.pointerId);
+    },
+    [applyPointerMove],
+  );
+
   const handlePointerDown = useCallback(
     (event: ReactPointerEvent<HTMLButtonElement>) => {
       if (isDisabled || isGestureBusy(stateRef.current.status) || stateRef.current.progress >= 1) {
@@ -79,11 +130,7 @@ export const useSlideDragHandlers = ({
       thumb.focus();
       thumbElementRef.current = thumb;
       activePointerIdRef.current = event.pointerId;
-      try {
-        thumb.setPointerCapture(event.pointerId);
-      } catch {
-        // Capture can fail in some embedded contexts; document listeners still drive the drag.
-      }
+      const captureSucceeded = trySetPointerCapture(thumb, event.pointerId);
       dragStartXRef.current = event.clientX;
       dragOriginProgressRef.current = stateRef.current.progress;
       hasClearedDeadZoneRef.current = false;
@@ -91,55 +138,39 @@ export const useSlideDragHandlers = ({
 
       detachDocumentListeners();
 
-      const onPointerMove = (moveEvent: PointerEvent) => {
-        if (moveEvent.pointerId !== activePointerIdRef.current || stateRef.current.status !== 'dragging') {
-          return;
-        }
-        // Keep the gesture from promoting to a scroll (wide tracks / overflow parents).
-        if (moveEvent.cancelable) {
-          moveEvent.preventDefault();
-        }
-        let travel = stateRef.current.maxTravel;
-        if (travel <= 0) {
-          measureTravel();
-          travel = stateRef.current.maxTravel;
-          if (travel <= 0) {
+      // Prefer setPointerCapture + React handlers on the thumb. Document listeners are only a
+      // fallback when capture is unavailable (jsdom, odd embeds) so moves outside the thumb still track.
+      if (!captureSucceeded) {
+        const onPointerMove = (moveEvent: PointerEvent) => {
+          if (moveEvent.cancelable) {
+            moveEvent.preventDefault();
+          }
+          applyPointerMove(moveEvent.clientX, moveEvent.pointerId);
+        };
+
+        const onPointerUp = (upEvent: PointerEvent) => {
+          if (upEvent.pointerId !== activePointerIdRef.current) {
             return;
           }
-        }
-        const rawDelta = moveEvent.clientX - dragStartXRef.current;
-        const signedDelta = direction === 'rtl' ? -rawDelta : rawDelta;
-        if (!hasClearedDeadZoneRef.current) {
-          if (Math.abs(signedDelta) < DEAD_ZONE) {
-            return;
-          }
-          hasClearedDeadZoneRef.current = true;
-        }
-        const nextProgress = clampProgress(dragOriginProgressRef.current + (signedDelta * SENSITIVITY) / travel);
-        emitProgress(nextProgress);
-      };
+          finishDrag();
+        };
 
-      const onPointerUp = (upEvent: PointerEvent) => {
-        if (upEvent.pointerId !== activePointerIdRef.current) {
-          return;
-        }
-        finishDrag();
-      };
-
-      document.addEventListener('pointermove', onPointerMove, { passive: false });
-      document.addEventListener('pointerup', onPointerUp);
-      document.addEventListener('pointercancel', onPointerUp);
-      clearDocumentListenersRef.current = () => {
-        document.removeEventListener('pointermove', onPointerMove);
-        document.removeEventListener('pointerup', onPointerUp);
-        document.removeEventListener('pointercancel', onPointerUp);
-      };
+        document.addEventListener('pointermove', onPointerMove, { passive: false });
+        document.addEventListener('pointerup', onPointerUp);
+        document.addEventListener('pointercancel', onPointerUp);
+        clearDocumentListenersRef.current = () => {
+          document.removeEventListener('pointermove', onPointerMove);
+          document.removeEventListener('pointerup', onPointerUp);
+          document.removeEventListener('pointercancel', onPointerUp);
+        };
+      }
     },
-    [detachDocumentListeners, direction, dispatch, emitProgress, finishDrag, isDisabled, measureTravel, stateRef],
+    [applyPointerMove, detachDocumentListeners, dispatch, finishDrag, isDisabled, measureTravel, stateRef],
   );
 
   return {
     handlePointerDown,
+    handlePointerMove,
     handlePointerUp: finishDrag,
     handlePointerCancel: finishDrag,
   };

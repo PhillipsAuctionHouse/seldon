@@ -71,6 +71,7 @@ Playground.args = {
   showThumbWhenDisabled: true,
   successAnnouncement: 'Activated.',
   errorAnnouncement: 'Action failed. Please try again.',
+  keyboardHint: 'Press Space or Enter to activate. Press Escape to cancel.',
 };
 
 Playground.parameters = {

@@ -2,13 +2,13 @@ import { useCallback, useEffect, useRef, type MutableRefObject, type KeyboardEve
 import type { SlideToActivateState } from '../slideToActivateReducer';
 import { isGestureBusy } from '../slideToActivateUtils';
 
-interface UseSlideKeyboardChargeOptions {
+interface UseSlideKeyboardActivateOptions {
   isDisabled: boolean;
   stateRef: MutableRefObject<SlideToActivateState>;
   runActivation: () => Promise<void>;
 }
 
-export const useSlideKeyboardCharge = ({ isDisabled, stateRef, runActivation }: UseSlideKeyboardChargeOptions) => {
+export const useSlideKeyboardActivate = ({ isDisabled, stateRef, runActivation }: UseSlideKeyboardActivateOptions) => {
   const activeKeyRef = useRef<string | null>(null);
 
   const cancelKeyboardGesture = useCallback(() => {

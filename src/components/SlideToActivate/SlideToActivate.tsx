@@ -6,7 +6,7 @@ import { Loader } from '../Loader';
 import { Text, TextVariants } from '../Text';
 import { SlideToActivateThumb } from './SlideToActivateThumb';
 import { useSlideToActivate } from './hooks/useSlideToActivate';
-import { focusThumbFromTrack } from './slideToActivateUtils';
+import { DEFAULT_KEYBOARD_HINT, focusThumbFromTrack } from './slideToActivateUtils';
 import {
   SlideToActivateBorderRadii,
   SlideToActivateDirections,
@@ -23,6 +23,7 @@ export type { SlideToActivateConfig, SlideToActivateProps } from './types';
  * `onActivation` is pending, then the parent typically marks it complete.
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-slidetoactivate--overview)
+ * [Figma](https://www.figma.com/design/ROSowkNXfQv1nhos5vuyWG/Saleroom?node-id=8259-82408&m=dev)
  */
 const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
   (
@@ -35,6 +36,7 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
       pendingAnnouncement = labelText,
       successAnnouncement = 'Activated.',
       errorAnnouncement = 'Action failed. Please try again.',
+      keyboardHint = DEFAULT_KEYBOARD_HINT,
       resetOnError = true,
       isDisabled = false,
       isComplete = false,
@@ -67,6 +69,7 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
       thumbRef,
       thumbTranslatePx,
       handlePointerDown,
+      handlePointerMove,
       handlePointerUp,
       handlePointerCancel,
       handleKeyDown,
@@ -94,6 +97,7 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
     const isBlockedDisabled = isDisabled && !isComplete;
     const isRtl = direction === SlideToActivateDirections.rtl;
     const isThumbHidden = isCompleteDisabled || (isBlockedDisabled && !showThumbWhenDisabled);
+    const hasKeyboardHint = keyboardHint.trim().length > 0;
 
     return (
       <div
@@ -139,9 +143,7 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
             </span>
           </VisuallyHidden>
 
-          <VisuallyHidden id={thumbDescriptionId}>
-            Press Space or Enter to activate. Press Escape to cancel.
-          </VisuallyHidden>
+          {hasKeyboardHint ? <VisuallyHidden id={thumbDescriptionId}>{keyboardHint}</VisuallyHidden> : null}
 
           {isPending ? (
             pendingIndicator !== undefined ? (
@@ -161,7 +163,7 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
             thumbIcon={thumbIcon}
             thumbTranslatePx={thumbTranslatePx}
             labelText={labelText}
-            descriptionId={thumbDescriptionId}
+            descriptionId={hasKeyboardHint ? thumbDescriptionId : undefined}
             isHeld={isHeld}
             isPending={isPending}
             isDisabled={isDisabled}
@@ -170,6 +172,7 @@ const SlideToActivate = forwardRef<HTMLDivElement, SlideToActivateProps>(
             status={status}
             snapDurationMs={snapDurationMs}
             onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
             onPointerCancel={handlePointerCancel}
             onKeyDown={handleKeyDown}

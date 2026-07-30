@@ -128,6 +128,14 @@ export const playgroundArgTypes = {
       defaultValue: { summary: 'Action failed. Please try again.' },
     },
   },
+  keyboardHint: {
+    control: 'text',
+    description: 'Visually hidden keyboard instructions (`aria-describedby`). Empty string omits the description.',
+    table: {
+      type: { summary: 'string' },
+      defaultValue: { summary: 'Press Space or Enter to activate. Press Escape to cancel.' },
+    },
+  },
   trackClassName: {
     control: 'text',
     description: 'Extra class on the track element (theming / layout overrides).',
