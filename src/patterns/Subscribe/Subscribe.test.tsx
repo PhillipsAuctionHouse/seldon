@@ -55,6 +55,22 @@ describe('Subscribe', () => {
     expect(screen.getByText(/Success/)).toBeInTheDocument();
   });
 
+  it('renders a custom element passed via the `element` prop', () => {
+    // A form-like component: extra domain-agnostic props Subscribe does not
+    // know about, plus an optional `id`. This call site would fail to type-
+    // check when `element` was typed as `React.ElementType<SubscribeProps>`
+    // because Subscribe's domain props (subscriptionState, blurb, …) were
+    // required. `React.ElementType<React.ComponentProps<'form'>>` accepts it.
+    const CustomForm = ({ children, ...rest }: React.ComponentProps<'form'>) => (
+      <form {...rest} data-custom-form="true">
+        {children}
+      </form>
+    );
+
+    const { container } = render(<Subscribe id="test-element" element={CustomForm} />);
+    expect(container.querySelector('form[data-custom-form="true"]')).toBeInTheDocument();
+  });
+
   it('it will call the callback function on submit', async () => {
     const user = userEvent.setup();
     const mockCallback = vi.fn((e) => {

@@ -1,0 +1,69 @@
+name: Validate PR body against template
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  check-body:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout base branch (for PR template)
+        uses: actions/checkout@v6
+
+      - name: Enforce PR body template
+        env:
+          # Untrusted input — read into env and expanded only via shell-quoted
+          # $VAR below (never inlined into the run script as ${{ ... }}).
+          PR_BODY: ${{ github.event.pull_request.body }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          set -euo pipefail
+
+          echo "Author: $PR_AUTHOR"
+
+          # Skip automated PRs whose auto-generated bodies don't follow the
+          # human template.
+          if [[ "$PR_AUTHOR" == "dependabot[bot]" ]]; then
+            echo "Skipping PR body template check for automated author '$PR_AUTHOR'."
+            exit 0
+          fi
+
+          template_path=".github/PULL_REQUEST_TEMPLATE.MD"
+          if [[ ! -f "$template_path" ]]; then
+            echo "::error title=PR template missing::Could not find $template_path in the base branch."
+            exit 1
+          fi
+
+          # Every bold section header in the template must appear in the PR body.
+          mapfile -t required_sections < <(grep -E '^\*\*[^*]+\*\*[[:space:]]*$' "$template_path" | sed 's/[[:space:]]*$//')
+          if [[ ${#required_sections[@]} -eq 0 ]]; then
+            echo "::error title=PR template unreadable::Extracted zero section headers from $template_path. The template may have been restructured — update the grep pattern in this workflow before merging."
+            exit 1
+          fi
+
+          fail=0
+          for section in "${required_sections[@]}"; do
+            if [[ "$PR_BODY" != *"$section"* ]]; then
+              echo "::error title=PR body template::PR body is missing required section '$section' from .github/PULL_REQUEST_TEMPLATE.MD. Rebuild the body from the template."
+              fail=1
+            fi
+          done
+
+          if [[ "$fail" -ne 0 ]]; then
+            echo ""
+            echo "See .github/PULL_REQUEST_TEMPLATE.MD for the required format."
+            exit 1
+          fi
+
+          echo "PR body template check passed."
