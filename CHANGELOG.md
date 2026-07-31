@@ -1,3 +1,10 @@
+## [1.278.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.278.0...v1.278.1) (2026-07-31)
+
+
+### Bug Fixes
+
+* **Subscribe:** PDD-712 widen element prop type to accept form-like components ([#912](https://github.com/PhillipsAuctionHouse/seldon/issues/912)) ([a9f5813](https://github.com/PhillipsAuctionHouse/seldon/commit/a9f58138f7f334ac37c53c8635b19e3d85a7da22))
+
 # [1.278.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.277.0...v1.278.0) (2026-07-30)
 
 
