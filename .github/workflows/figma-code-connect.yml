@@ -1,0 +1,55 @@
+name: Publish Figma Code Connect
+
+# Publishes Code Connect mappings to Figma whenever the config or any
+# `*.figma.tsx` template changes on `main`. Requires the repo secret
+# `FIGMA_ACCESS_TOKEN` — a Figma Personal Access Token with:
+#   - Code Connect: Write
+#   - File content: Read
+# The secret is exposed only via the `env:` block below and referenced
+# in the run script as "$FIGMA_ACCESS_TOKEN" — never inlined into a
+# command line as ${{ ... }}.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'figma.config.json'
+      - 'src/**/*.figma.tsx'
+      - '.github/workflows/figma-code-connect.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: figma-code-connect
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Publish Code Connect to Figma
+        env:
+          # Read from repo secret. The Figma CLI picks up FIGMA_ACCESS_TOKEN
+          # automatically — no need to pass --token on the command line.
+          FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${FIGMA_ACCESS_TOKEN:-}" ]]; then
+            echo "::error title=Missing secret::FIGMA_ACCESS_TOKEN is not set. Add it under Settings → Secrets and variables → Actions in this repo."
+            exit 1
+          fi
+          npx figma connect publish

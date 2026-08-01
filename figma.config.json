@@ -1,0 +1,19 @@
+{
+  "codeConnect": {
+    "parser": "react",
+    "include": ["src/**/*.figma.tsx", "src/components/**/*.tsx", "src/patterns/**/*.tsx"],
+    "exclude": [
+      "**/node_modules/**",
+      "dist/**",
+      ".template/**",
+      ".claude/worktrees/**",
+      "**/*.test.tsx",
+      "**/*.stories.tsx"
+    ],
+    "importPaths": {
+      "src/components/*": "@phillips/seldon",
+      "src/patterns/*": "@phillips/seldon"
+    },
+    "paths": {}
+  }
+}

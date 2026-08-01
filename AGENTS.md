@@ -38,6 +38,14 @@ When creating a pull request, always populate the body using `.github/PULL_REQUE
 - **New or materially changed visual components** should ship with co-located
   **`*.stories.tsx`** and **`*.test.tsx`** where the team expects regression
   coverage (see `docs/agents/QUALITY.md`).
+- **Figma Code Connect:** every component with a published Figma main
+  component must ship a co-located **`*.figma.tsx`** mapping Figma variants →
+  seldon props. See the "Figma Code Connect" section in
+  `.claude/skills/seldon/SKILL.md` (or `.agents/skills/seldon/SKILL.md` — the
+  two paths are the same file) and `figma.config.json`. Reference templates:
+  `src/components/Breadcrumb/Breadcrumb.figma.tsx`,
+  `src/components/Search/Search.figma.tsx`. Skip only when no Figma component
+  is published yet; note that skip in the PR.
 - Do not edit **`dist/`** — it is build output.
 - Config files (`package.json`, `vite.config.ts`, `vitest.config.ts`, ESLint,
   Stylelint, etc.) are shared surfaces — change only when necessary.
