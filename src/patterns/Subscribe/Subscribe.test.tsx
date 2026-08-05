@@ -55,6 +55,13 @@ describe('Subscribe', () => {
     expect(screen.getByText(/Success/)).toBeInTheDocument();
   });
 
+  it('forwards inputProps (e.g. autoComplete) to the underlying <input>', () => {
+    render(<Subscribe id="test-input-props" inputProps={{ autoComplete: 'email', name: 'user-email' }} />);
+    const input = screen.getByPlaceholderText(/example@email.com/) as HTMLInputElement;
+    expect(input).toHaveAttribute('autocomplete', 'email');
+    expect(input).toHaveAttribute('name', 'user-email');
+  });
+
   it('renders a custom element passed via the `element` prop', () => {
     // A form-like component: extra domain-agnostic props Subscribe does not
     // know about, plus an optional `id`. This call site would fail to type-
