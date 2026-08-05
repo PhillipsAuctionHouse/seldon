@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 
@@ -76,6 +77,30 @@ describe('Subscribe', () => {
 
     const { container } = render(<Subscribe id="test-element" element={CustomForm} />);
     expect(container.querySelector('form[data-custom-form="true"]')).toBeInTheDocument();
+  });
+
+  it('accepts a forwardRef form-like component (e.g. react-router Form)', () => {
+    // Mimics the shape of react-router's `Form`:
+    // ForwardRefExoticComponent<FormProps & RefAttributes<HTMLFormElement>>.
+    // With `element?: ElementType<ComponentProps<'form'>>` this call site
+    // failed to type-check because FormProps is stricter than plain form
+    // props. Widening to bare `React.ElementType` accepts it.
+    interface RouterFormProps extends React.HTMLAttributes<HTMLFormElement> {
+      method?: 'get' | 'post' | 'put' | 'delete' | 'patch';
+      action?: string;
+      replace?: boolean;
+    }
+    const RouterFormLike = React.forwardRef<HTMLFormElement, RouterFormProps>(
+      ({ children, method = 'post', replace: _replace, ...rest }, ref) => (
+        <form {...rest} method={method} ref={ref} data-router-form="true">
+          {children}
+        </form>
+      ),
+    );
+    RouterFormLike.displayName = 'RouterFormLike';
+
+    const { container } = render(<Subscribe id="test-router-form" element={RouterFormLike} />);
+    expect(container.querySelector('form[data-router-form="true"]')).toBeInTheDocument();
   });
 
   it('it will call the callback function on submit', async () => {
