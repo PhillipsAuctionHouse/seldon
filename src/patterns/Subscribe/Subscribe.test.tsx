@@ -80,18 +80,13 @@ describe('Subscribe', () => {
   });
 
   it('accepts a forwardRef form-like component (e.g. react-router Form)', () => {
-    // Mimics the shape of react-router's `Form`:
-    // ForwardRefExoticComponent<FormProps & RefAttributes<HTMLFormElement>>.
-    // With `element?: ElementType<ComponentProps<'form'>>` this call site
-    // failed to type-check because FormProps is stricter than plain form
-    // props. Widening to bare `React.ElementType` accepts it.
+    // react-router's `Form` narrows `method` to an enum, which failed to
+    // assign to `ElementType<ComponentProps<'form'>>` under the prior typing.
     interface RouterFormProps extends React.HTMLAttributes<HTMLFormElement> {
-      method?: 'get' | 'post' | 'put' | 'delete' | 'patch';
-      action?: string;
-      replace?: boolean;
+      method?: 'get' | 'post';
     }
     const RouterFormLike = React.forwardRef<HTMLFormElement, RouterFormProps>(
-      ({ children, method = 'post', replace: _replace, ...rest }, ref) => (
+      ({ children, method = 'post', ...rest }, ref) => (
         <form {...rest} method={method} ref={ref} data-router-form="true">
           {children}
         </form>

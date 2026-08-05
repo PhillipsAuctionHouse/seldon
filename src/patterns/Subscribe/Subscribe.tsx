@@ -21,18 +21,7 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
    */
   buttonText?: string;
   /**
-   * Optional element to render in place of a form, e.g. Remix / React Router `Form`.
-   *
-   * Typed as bare `React.ElementType` so it accepts:
-   *   - intrinsic strings (`'form'`, `'div'`, …)
-   *   - plain function components taking `ComponentProps<'form'>`
-   *   - `forwardRef` components with stricter prop shapes such as
-   *     `ForwardRefExoticComponent<FormProps & RefAttributes<HTMLFormElement>>`
-   *     (react-router's `Form`, Remix's `Form`, TanStack Router's `Form`).
-   *
-   * The caller is responsible for passing a component that can accept the
-   * props Subscribe spreads onto it (`id`, `className`, `noValidate`, `ref`,
-   * plus any `HTMLAttributes<HTMLFormElement>` forwarded via `...props`).
+   * Optional element to render in place of a form, e.g. Remix or react-router `Form`.
    */
   element?: React.ElementType;
   /**
@@ -48,8 +37,7 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
    */
   inputPlaceholder?: string;
   /**
-   * Extra props to spread onto the underlying `<Input>` (e.g. `autoComplete`, `name`, `enterKeyHint`).
-   * Values here win over Subscribe's internal defaults where they overlap.
+   * Subscribe input extra props to spread (e.g. `autoComplete`)
    */
   inputProps?: Partial<InputProps>;
   /**
