@@ -1,11 +1,10 @@
-import { type CSSProperties } from 'react';
+import { type CSSProperties, useEffect } from 'react';
 import { Meta } from '@storybook/react-vite';
 import Toast from './Toast';
 import Button from '../Button/Button';
 import { useToast } from './useToast';
 import { ButtonVariants } from '../Button/types';
 import { Text } from '../Text';
-import { ToastProvider } from './ToastContextProvider';
 
 const meta = {
   title: 'Components/Toast',
@@ -73,9 +72,14 @@ const ToastDemo = () => {
 const OffsetDemo = () => {
   const { show, setOffset } = useToast();
 
+  // Global Storybook wrapper already provides ToastProvider; set initial inset via setOffset.
+  useEffect(() => {
+    setOffset({ x: 8, y: 8 });
+  }, [setOffset]);
+
   return (
     <div style={toastDemoStyle}>
-      <Button onClick={() => show('Toast with provider offset')}>Show toast</Button>
+      <Button onClick={() => show('Toast with viewport offset')}>Show toast</Button>
       <Button
         onClick={() => {
           setOffset({ x: 24, y: 24 });
@@ -90,33 +94,31 @@ const OffsetDemo = () => {
 
 export const Playground = () => (
   <div style={storyFrameStyle}>
-    <ToastProvider>
-      <Toast
-        title={<Text>Basic Toast</Text>}
-        open={true}
-        defaultOpen={true}
-        onOpenChange={() => void 0}
-        closeButtonLabel="Close"
-      />
-      <Toast
-        title={<Text>Toast with Action</Text>}
-        open={true}
-        defaultOpen={true}
-        onOpenChange={() => void 0}
-        actionAltText="Click for more"
-        actionElement={
-          <Button
-            onClick={() => {
-              alert('View Details clicked!');
-            }}
-            variant={ButtonVariants.link}
-          >
-            View Details
-          </Button>
-        }
-        closeButtonLabel="Close"
-      />
-    </ToastProvider>
+    <Toast
+      title={<Text>Basic Toast</Text>}
+      open={true}
+      defaultOpen={true}
+      onOpenChange={() => void 0}
+      closeButtonLabel="Close"
+    />
+    <Toast
+      title={<Text>Toast with Action</Text>}
+      open={true}
+      defaultOpen={true}
+      onOpenChange={() => void 0}
+      actionAltText="Click for more"
+      actionElement={
+        <Button
+          onClick={() => {
+            alert('View Details clicked!');
+          }}
+          variant={ButtonVariants.link}
+        >
+          View Details
+        </Button>
+      }
+      closeButtonLabel="Close"
+    />
   </div>
 );
 
@@ -131,9 +133,7 @@ Playground.parameters = {
 
 export const Interactive = () => (
   <div style={storyFrameStyle}>
-    <ToastProvider>
-      <ToastDemo />
-    </ToastProvider>
+    <ToastDemo />
   </div>
 );
 
@@ -143,9 +143,7 @@ Interactive.parameters = {
 
 export const WithOffset = () => (
   <div style={storyFrameStyle}>
-    <ToastProvider offset={{ x: 8, y: 8 }}>
-      <OffsetDemo />
-    </ToastProvider>
+    <OffsetDemo />
   </div>
 );
 
@@ -153,7 +151,7 @@ WithOffset.parameters = {
   docs: {
     description: {
       story:
-        '`ToastProvider offset` sets the initial inset. Use `const { show, setOffset } = useToast()` (or `toast.setOffset`) to update it for page state.',
+        'Pass `offset` to your app `ToastProvider` for a mount-time inset, or call `setOffset` / `useToast().setOffset` when page state changes. This story uses the Storybook root provider and demos runtime updates.',
     },
   },
   ...sharedA11yParameters,
