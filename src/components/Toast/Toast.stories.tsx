@@ -1,9 +1,11 @@
+import { type CSSProperties } from 'react';
 import { Meta } from '@storybook/react-vite';
 import Toast from './Toast';
 import Button from '../Button/Button';
 import { useToast } from './useToast';
 import { ButtonVariants } from '../Button/types';
 import { Text } from '../Text';
+import { ToastProvider } from './ToastContextProvider';
 
 const meta = {
   title: 'Components/Toast',
@@ -12,13 +14,83 @@ const meta = {
 
 export default meta;
 
-export const Playground = () => {
+/** Containing block so `position: fixed` toast viewports stay inside the story frame (incl. Docs). */
+const storyFrameStyle: CSSProperties = {
+  position: 'relative',
+  height: 280,
+  overflow: 'hidden',
+  transform: 'translateZ(0)',
+};
+
+const toastDemoStyle: CSSProperties = {
+  padding: 20,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  gap: 10,
+  height: '100%',
+  boxSizing: 'border-box',
+};
+
+const sharedA11yParameters = {
+  a11y: {
+    config: {
+      rules: [
+        { id: 'aria-allowed-role', enabled: false },
+        { id: 'aria-hidden-focus', enabled: false },
+        { id: 'list', enabled: false },
+      ],
+    },
+  },
+};
+
+const ToastDemo = () => {
+  const toast = useToast();
+
   return (
-    <div
-      style={{
-        height: '20vh',
-      }}
-    >
+    <div style={toastDemoStyle}>
+      <Button onClick={() => toast('Oops! Something went wrong')}>Click for basic toast</Button>
+      <Button
+        onClick={() =>
+          toast({
+            title: 'Yay! Your action was successful',
+            duration: Infinity,
+            actionElement: (
+              <Button variant={ButtonVariants.tertiary} onClick={() => alert('Action clicked!')}>
+                Click for more
+              </Button>
+            ),
+            actionAltText: 'Click for more',
+          })
+        }
+      >
+        Click for toast with action
+      </Button>
+    </div>
+  );
+};
+
+const OffsetDemo = () => {
+  const { show, setOffset } = useToast();
+
+  return (
+    <div style={toastDemoStyle}>
+      <Button onClick={() => show('Toast with provider offset')}>Show toast</Button>
+      <Button
+        onClick={() => {
+          setOffset({ x: 24, y: 24 });
+          show({ title: 'Offset updated at runtime', duration: Infinity });
+        }}
+      >
+        Update offset + toast
+      </Button>
+    </div>
+  );
+};
+
+export const Playground = () => (
+  <div style={storyFrameStyle}>
+    <ToastProvider>
       <Toast
         title={<Text>Basic Toast</Text>}
         open={true}
@@ -44,59 +116,45 @@ export const Playground = () => {
         }
         closeButtonLabel="Close"
       />
-    </div>
-  );
-};
+    </ToastProvider>
+  </div>
+);
 
 Playground.parameters = {
   docs: {
     description: {
-      story: 'This is a static example of the Toast component. For a complete example, check the Interactive section.',
+      story: 'Static Toast examples. Use Interactive to trigger toasts via `useToast`.',
     },
   },
-  a11y: {
-    config: {
-      rules: [
-        { id: 'aria-allowed-role', enabled: false },
-        { id: 'aria-hidden-focus', enabled: false },
-        { id: 'list', enabled: false },
-      ],
+  ...sharedA11yParameters,
+};
+
+export const Interactive = () => (
+  <div style={storyFrameStyle}>
+    <ToastProvider>
+      <ToastDemo />
+    </ToastProvider>
+  </div>
+);
+
+Interactive.parameters = {
+  ...sharedA11yParameters,
+};
+
+export const WithOffset = () => (
+  <div style={storyFrameStyle}>
+    <ToastProvider offset={{ x: 8, y: 8 }}>
+      <OffsetDemo />
+    </ToastProvider>
+  </div>
+);
+
+WithOffset.parameters = {
+  docs: {
+    description: {
+      story:
+        '`ToastProvider offset` sets the initial inset. Use `const { show, setOffset } = useToast()` (or `toast.setOffset`) to update it for page state.',
     },
   },
+  ...sharedA11yParameters,
 };
-
-const ToastDemo = () => {
-  const toast = useToast();
-
-  return (
-    <div
-      style={{
-        padding: '20px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: '10px',
-      }}
-    >
-      <Button onClick={() => toast('Oops! Something went wrong')}>Click for basic toast</Button>
-      <Button
-        onClick={() =>
-          toast({
-            title: 'Yay! Your action was successful',
-            duration: Infinity,
-            actionElement: (
-              <Button variant={ButtonVariants.tertiary} onClick={() => alert('Action clicked!')}>
-                Click for more
-              </Button>
-            ),
-            actionAltText: 'Click for more',
-          })
-        }
-      >
-        Click for toast with action
-      </Button>
-    </div>
-  );
-};
-
-export const Interactive = () => <ToastDemo />;
