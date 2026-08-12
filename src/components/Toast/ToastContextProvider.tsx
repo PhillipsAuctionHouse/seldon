@@ -1,5 +1,5 @@
 import * as ToastPrimitive from '@radix-ui/react-toast';
-import { type PropsWithChildren, createContext, useCallback, useState } from 'react';
+import { type PropsWithChildren, createContext, useCallback, useMemo, useState } from 'react';
 import Toast, { type PrimitiveToastProps } from './Toast';
 import { v4 as uuidv4 } from 'uuid';
 import { px } from '../../utils';
@@ -56,12 +56,15 @@ export const ToastProvider = ({ children, offset = DEFAULT_TOAST_OFFSET }: Toast
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
   }, []);
 
-  const value = {
-    toasts,
-    addToast,
-    removeToast,
-    setOffset: setViewportOffset,
-  };
+  const value = useMemo(
+    () => ({
+      toasts,
+      addToast,
+      removeToast,
+      setOffset: setViewportOffset,
+    }),
+    [toasts, addToast, removeToast],
+  );
 
   return (
     <ToastContext.Provider value={value}>
