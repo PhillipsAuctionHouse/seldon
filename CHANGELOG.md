@@ -1,3 +1,10 @@
+# [1.279.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.278.1...v1.279.0) (2026-08-12)
+
+
+### Features
+
+* **Toast:** L3-13929 add configurable toast viewport offset ([#917](https://github.com/PhillipsAuctionHouse/seldon/issues/917)) ([dfc9963](https://github.com/PhillipsAuctionHouse/seldon/commit/dfc99634c02d5282d00f329991985b137ace4c75))
+
 ## [1.278.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.278.0...v1.278.1) (2026-07-31)
 
 
