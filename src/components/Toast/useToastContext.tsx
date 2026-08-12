@@ -1,9 +1,11 @@
 import { useContext } from 'react';
-import { ToastContext, ToastContextType } from './ToastContextProvider';
+import { ToastContext, type ToastContextType } from './ToastContextProvider';
+
 export const fallbackContext: ToastContextType = {
   toasts: [],
   addToast: () => void 0,
   removeToast: () => void 0,
+  setOffset: () => void 0,
 };
 
 /**

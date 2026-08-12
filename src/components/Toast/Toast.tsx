@@ -35,6 +35,9 @@ export interface PrimitiveToastProps extends Omit<PrimitiveToast.ToastProps, 'ti
  * This component requires a `ToastProvider` to be present in your application. Make sure to
  * wrap your application or the relevant section with the `ToastProvider` component.
  *
+ * Pass `offset={{ x, y }}` to `ToastProvider` for an initial viewport inset (mount-only),
+ * or call `useToast().setOffset({ x, y })` / destructure `{ show, setOffset }` for runtime updates.
+ *
  * [Figma Link](https://www.figma.com/design/f3vm6hItGjnsmkJxLLbe3P/MANAGE---MUI-v5.9.0--24?node-id=6586-47081&m=dev)
  *
  * [Storybook Link](https://phillips-seldon.netlify.app/?path=/docs/components-toast--overview)
