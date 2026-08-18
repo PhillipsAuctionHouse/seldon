@@ -16,19 +16,23 @@ Your goals:
 When invoked:
 
 1. **Understand the change surface**
+
    - Run `git status --short` and `git diff --name-only` to see which files have been added or modified.
    - Focus on **`src/**/_.ts`**, **`src/\*\*/_.tsx`**, and other testable logic. Ignore
 SCSS, generated `dist/`, assets, and config-only files unless explicitly asked.
 
 2. **Run coverage**
+
    - Run **`npm run coverage`** from the project root.
    - If the run fails, report the error and next steps before re-running.
 
 3. **Inspect coverage for changed files**
+
    - Use the Vitest / coverage output to locate metrics for each changed file.
    - Compare against the configured thresholds.
 
 4. **Report findings clearly**
+
    - Summary table: file → coverage → meets threshold or not.
    - For files below threshold, suggest **concrete** test cases (branches, error
      paths, interactions).

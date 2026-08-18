@@ -8,6 +8,10 @@ import { HeaderContext } from '../../../site-furniture/Header/Header';
 
 export interface NavigationItemProps extends ComponentProps<'li'> {
   /**
+   * Widened from the `li` handler because it is also attached to the rendered link element
+   */
+  onClick?: MouseEventHandler<HTMLElement>;
+  /**
    * Optional badge for navigation item. Used currently for location of auctions
    */
   badge?: ReactNode;
@@ -76,10 +80,18 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
     const itemClassName = classNames(`${px}-nav__item`, `${px}-nav__item--${navGroup}`, className);
 
     // Close the hamburger menu when the item navigates (no-op on desktop, where the menu is never open).
-    // Gated on href so action-only items (e.g. the LanguageSelector's language rows) don't collapse the menu.
-    const handleClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
-      (onClick as MouseEventHandler<HTMLAnchorElement> | undefined)?.(event);
-      if (href) {
+    // Only for a plain left click on a link that still navigates: action-only items (e.g. the LanguageSelector's
+    // language rows) have no href, and modified clicks open a new tab while the menu stays on the current page.
+    const handleClick: MouseEventHandler<HTMLElement> = (event) => {
+      onClick?.(event);
+
+      const navigates =
+        href &&
+        !event.defaultPrevented &&
+        event.button === 0 &&
+        !(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey);
+
+      if (navigates) {
         closeMenu?.();
       }
     };
