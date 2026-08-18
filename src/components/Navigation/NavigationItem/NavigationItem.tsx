@@ -2,8 +2,9 @@ import { px } from '../../../utils';
 import classNames from 'classnames';
 import Link, { LinkProps } from '../../Link/Link';
 import { LinkVariants } from '../../Link/types';
-import { ComponentProps, ElementType, forwardRef, MouseEventHandler, ReactNode } from 'react';
+import { ComponentProps, ElementType, forwardRef, MouseEventHandler, ReactNode, useContext } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
+import { HeaderContext } from '../../../site-furniture/Header/Header';
 
 export interface NavigationItemProps extends ComponentProps<'li'> {
   /**
@@ -71,7 +72,17 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
     },
     ref,
   ) => {
+    const { closeMenu } = useContext(HeaderContext);
     const itemClassName = classNames(`${px}-nav__item`, `${px}-nav__item--${navGroup}`, className);
+
+    // Close the hamburger menu when the item navigates (no-op on desktop, where the menu is never open).
+    // Gated on href so action-only items (e.g. the LanguageSelector's language rows) don't collapse the menu.
+    const handleClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
+      (onClick as MouseEventHandler<HTMLAnchorElement> | undefined)?.(event);
+      if (href) {
+        closeMenu?.();
+      }
+    };
 
     // Shared link content (label, badge, optional aria-current); wrapper varies by radix mode
     const linkContent = (
@@ -81,7 +92,7 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
         })}
         href={href}
         variant={navType ? navType : LinkVariants.linkStylised}
-        onClick={onClick as MouseEventHandler<HTMLAnchorElement> | undefined}
+        onClick={handleClick}
       >
         <span className={`${px}-nav__item--label`}>{label}</span>
         {badge ? <span className={`${px}-nav__item--badge `}>{` • ${badge}`}</span> : null}

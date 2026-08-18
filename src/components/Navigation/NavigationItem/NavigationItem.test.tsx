@@ -43,4 +43,34 @@ describe('NavigationItem', () => {
 
     expect(onClick).toHaveBeenCalled();
   });
+
+  it('closes the mobile menu when a link is clicked', async () => {
+    const closeMenu = vi.fn();
+
+    render(
+      <HeaderContext.Provider value={{ ...defaultHeaderContext, closeMenu }}>
+        <NavigationItem href="/" label="Home" />
+      </HeaderContext.Provider>,
+    );
+
+    await userEvent.click(screen.getByText('Home'));
+
+    expect(closeMenu).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not close the menu for action-only items with no href (e.g. language rows)', async () => {
+    const closeMenu = vi.fn();
+    const onClick = vi.fn();
+
+    render(
+      <HeaderContext.Provider value={{ ...defaultHeaderContext, closeMenu }}>
+        <NavigationItem label="中文" onClick={onClick} />
+      </HeaderContext.Provider>,
+    );
+
+    await userEvent.click(screen.getByText('中文'));
+
+    expect(onClick).toHaveBeenCalled();
+    expect(closeMenu).not.toHaveBeenCalled();
+  });
 });
