@@ -23,13 +23,17 @@ yarn add @phillips/seldon
 The project contains a `scss` folder. Here you will find the main export of our sass styles for our components. There's also a scss export that contains our mixins, tokens, and other utilities.
 
 ```scss
-@use '@phillips/seldon/dist/scss/componentStyles'; // our component tyles
-@use '@phillips/seldon/dist/scss/allPartials'; // our scss utilities
+@use '@phillips/seldon/dist/scss/foundation'; // tokens, type, padding utilities (once)
+@use '@phillips/seldon/dist/scss/componentStyles'; // all component CSS (includes foundation)
+@use '@phillips/seldon/dist/scss/allPartials'; // mixins and variables only — no CSS
 ```
+
+`allPartials` does not emit CSS. Padding-utility classes (`.seldon-padding-*`) and `:root` tokens come from `foundation`, which `componentStyles` already includes. Do not `@use` Seldon's `allPartials` from every component stylesheet if you are code-splitting CSS — you will not get a copy of the utilities, and that is intentional.
 
 If you wish to only import specific component styles you can find them in their respective directories inside the `scss` folder.
 
 ```scss
+@use '@phillips/seldon/dist/scss/foundation';
 @use '@phillips/seldon/dist/scss/components/Button/button';
 ```
 

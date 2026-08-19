@@ -40,6 +40,9 @@ stories and tests there.
   `@use '~scss/allPartials' as *;`
 
   (or the relative path to the same partials stack used elsewhere in `src/`.)
+  That import is mixins and variables only. CSS that must emit once (padding
+  utilities, `:root` tokens, `@font-face`) lives in `~scss/foundation`, which
+  `componentStyles.scss` already includes.
 
 - BEM: **`.#{$px}-block__element--modifier`** using the **`$px`** namespace from
   shared vars (`src/scss/_vars.scss`).
