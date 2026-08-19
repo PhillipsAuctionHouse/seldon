@@ -1,6 +1,7 @@
 import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import { Text } from '../../components/Text';
+import './_saleCardActions.scss';
 
 export interface SaleCardActionsProps extends ComponentProps<'div'> {
   /**

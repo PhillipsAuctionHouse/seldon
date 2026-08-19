@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { px, useNormalizedInputProps } from '../../utils';
 import { Text, TextVariants } from '../Text';
 import { getInputClassNames } from './utils';
+import './_input.scss';
 
 export interface InputProps extends Omit<React.ComponentProps<'input'>, 'size'> {
   /**

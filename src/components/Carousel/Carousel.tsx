@@ -5,6 +5,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import ClassNames from 'embla-carousel-class-names';
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
+import './_carousel.scss';
 
 export type CarouselApi = UseEmblaCarouselType[1];
 

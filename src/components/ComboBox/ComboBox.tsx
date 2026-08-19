@@ -10,6 +10,7 @@ import { ButtonVariants } from '../Button/types';
 import { ComboBoxOption } from './types';
 import { usePrevious } from '../../utils/usePrevious';
 import { Text, TextVariants } from '../Text';
+import './_combobox.scss';
 
 export interface ComboBoxProps {
   /**

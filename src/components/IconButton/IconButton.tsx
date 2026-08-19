@@ -3,6 +3,7 @@ import Button, { ButtonProps } from '../Button/Button';
 import { getCommonProps } from '../../utils';
 import { ButtonVariants } from '../Button/types';
 import { forwardRef } from 'react';
+import './_iconButton.scss';
 
 export interface IconButtonProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'children'> {
   /**

@@ -7,6 +7,7 @@ import { Country, ModalBaseProps } from './types';
 import React, { forwardRef } from 'react';
 import { useNormalizedInputProps } from '../../utils';
 import { getInputClassNames } from '../../components/Input/utils';
+import './_countryPickerTrigger.scss';
 
 // Props specific to the trigger, also used by the parent modal
 export type CountryPickerTriggerProps = {

@@ -5,6 +5,7 @@ import classnames from 'classnames';
 
 import { noOp, px, useNormalizedInputProps } from '../../utils';
 import Input, { InputProps } from '../Input/Input';
+import './_datePicker.scss';
 
 export interface DatePickerProps extends Omit<InputProps, 'defaultValue' | 'onChange'>, Record<string, unknown> {
   /**

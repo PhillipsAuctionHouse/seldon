@@ -2,6 +2,7 @@ import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import React from 'react';
+import './_pageContentWrapper.scss';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface PageContentWrapperProps extends ComponentProps<'div'> {

@@ -18,6 +18,7 @@ import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import { Breakpoints, findChildrenExcludingTypes, findChildrenOfType, px } from '../../utils';
 import { useMobileMenu } from './hooks';
 import { defaultHeaderContext } from './utils';
+import './_header.scss';
 
 export interface HeaderProps extends ComponentProps<'header'> {
   /**

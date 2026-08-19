@@ -12,6 +12,7 @@ import { SearchButton } from './SearchButton';
 import { CSSTransition } from 'react-transition-group';
 import { RemoveScroll } from 'react-remove-scroll';
 import { LinkVariants } from '../Link';
+import './_search.scss';
 
 export interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

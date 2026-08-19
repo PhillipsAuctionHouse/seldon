@@ -5,6 +5,7 @@ import { DetailListAlignment } from './types';
 import { DetailComponent } from '../../components/Detail';
 import { getDetailKey } from './utils';
 import { DetailVariants } from '../../components/Detail/types';
+import './_detailList.scss';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface DetailListProps extends ComponentProps<'div'> {

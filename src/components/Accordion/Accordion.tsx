@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import * as Accordion from '@radix-ui/react-accordion';
 import { getAccordionVariantProps } from './utils';
+import './_accordion.scss';
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

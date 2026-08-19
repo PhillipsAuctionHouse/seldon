@@ -4,6 +4,7 @@ import { getCommonProps, noOp } from '../../utils';
 import { Divider } from '../Divider';
 import Modal, { ModalProps } from '../Modal/Modal';
 import { Text, TextVariants } from '../Text';
+import './_composedModal.scss';
 
 export interface ComposedModalProps extends Omit<ModalProps, 'onClose' | 'role' | 'style'> {
   /**

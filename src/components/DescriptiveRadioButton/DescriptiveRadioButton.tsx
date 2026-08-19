@@ -3,6 +3,7 @@ import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import Text from '../Text/Text';
 import { TextVariants } from '../Text';
+import './_descriptiveRadioButton.scss';
 
 export interface DescriptiveRadioButtonProps extends Omit<ComponentProps<'input'>, 'type'> {
   /**

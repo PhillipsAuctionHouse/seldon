@@ -4,6 +4,7 @@ import Link, { LinkProps } from '../Link/Link';
 import { LinkVariants } from '../Link/types';
 import { Text } from '../Text';
 import { forwardRef } from 'react';
+import './_linkBlock.scss';
 
 export interface LinkBlockProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Props for the Link component */

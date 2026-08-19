@@ -8,6 +8,7 @@ import { Text, TextVariants } from '../../components/Text';
 import { PageContentWrapper as PageMargin } from '../../components/PageContentWrapper';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import Banner, { BannerMediaSize, BannerVariants } from '../../components/Banner/Banner';
+import './_saleHeaderBanner.scss';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface SaleHeaderBannerProps extends ComponentProps<'div'> {

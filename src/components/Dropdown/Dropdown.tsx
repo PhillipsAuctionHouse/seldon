@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import * as DropdownSelect from '@radix-ui/react-select';
 import { DropdownItem } from './types';
 import { Icon } from '../Icon';
+import './_dropdown.scss';
 
 export interface DropdownProps
   extends Omit<DropdownSelect.SelectProps, 'defaultValue' | 'dir'>,

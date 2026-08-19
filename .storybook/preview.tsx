@@ -1,6 +1,6 @@
 import React from 'react';
 import { Preview } from '@storybook/react-vite';
-import '../src/componentStyles.scss';
+import '../src/scss/_foundation.scss';
 import '../src/story-styles.scss';
 import CustomStoryWrapper from './CustomStoryWrapper';
 

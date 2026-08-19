@@ -5,6 +5,7 @@ import * as PrimitiveToast from '@radix-ui/react-toast';
 import { Icon } from '../Icon';
 import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
+import './_toast.scss';
 
 export interface PrimitiveToastProps extends Omit<PrimitiveToast.ToastProps, 'title'> {
   /**

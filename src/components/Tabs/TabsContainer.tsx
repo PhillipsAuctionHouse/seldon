@@ -4,6 +4,7 @@ import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import { Text, TextVariants } from '../Text';
 import TabTrigger from './TabTrigger';
+import './_tabs.scss';
 
 // Define the type for each tab, which includes its label, value, and content
 export interface Tab {

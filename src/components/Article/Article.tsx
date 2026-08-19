@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { SeldonImage, AspectRatio } from '../SeldonImage';
 import { Text, TextVariants } from '../Text';
 import { Link, LinkProps, LinkVariants } from '../Link';
+import './_article.scss';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface ArticleProps extends ComponentProps<'div'> {

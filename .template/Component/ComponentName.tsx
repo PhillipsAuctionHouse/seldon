@@ -1,6 +1,7 @@
 import { ComponentProps, forwardRef } from 'react';
-import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
+import { getCommonProps } from '../../utils';
+import './_componentName.scss';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface ComponentNameProps extends ComponentProps<'div'> {}

@@ -7,6 +7,7 @@ import { SelectVariants } from './types';
 import { Icon } from '../Icon';
 import { Text, TextVariants } from '../Text';
 import { getInputClassNames } from '../Input/utils';
+import './_select.scss';
 
 export interface SelectProps extends Merge<InputProps, React.ComponentProps<'select'>> {
   /**

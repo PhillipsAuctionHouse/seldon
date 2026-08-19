@@ -3,6 +3,7 @@ import { getCommonProps, px } from '../../utils';
 import { TextAlignments, TextVariants } from './types';
 import { determineDefaultTextElement, determineTextClassName } from './utils';
 import classNames from 'classnames';
+import './_text.scss';
 
 export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   /**

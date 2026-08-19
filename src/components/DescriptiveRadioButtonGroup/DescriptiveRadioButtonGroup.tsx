@@ -2,6 +2,7 @@ import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import DescriptiveRadioButton, { DescriptiveRadioButtonProps } from '../DescriptiveRadioButton/DescriptiveRadioButton';
+import './_descriptiveRadioButtonGroup.scss';
 
 export interface DescriptiveRadioButtonGroupProps extends ComponentProps<'fieldset'> {
   /**

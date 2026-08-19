@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react';
+import '../../scss/_foundation.scss';
 import { SSRMediaQuery, ssrMediaQueryStyle } from './utils';
 
 /**

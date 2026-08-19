@@ -3,6 +3,7 @@ import { getCommonProps } from '../../utils';
 import { TransformWrapper, TransformComponent, ReactZoomPanPinchRef } from 'react-zoom-pan-pinch';
 
 import classNames from 'classnames';
+import './_pinchZoom.scss';
 
 export interface PinchZoomProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

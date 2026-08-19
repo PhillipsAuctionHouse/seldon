@@ -33,12 +33,14 @@ uses that pattern (most visual components here do).
 ## When invoked
 
 1. **Change-focused**
+
    - From `git diff --name-only`, list new/changed `src/components/**/*.tsx`
      excluding `*.test.tsx` and `*.stories.tsx`.
    - For each component file, verify **`Basename.stories.tsx`** exists alongside
      it.
 
 2. **Full audit**
+
    - Enumerate component `*.tsx` files under `src/components` (exclude
      `*.test.tsx`, `*.stories.tsx`).
    - Check for matching `*.stories.tsx`.

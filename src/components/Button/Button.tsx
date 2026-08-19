@@ -3,6 +3,7 @@ import { getCommonProps, px } from '../../utils';
 import { ButtonVariants, ButtonSizes } from './types';
 import { forwardRef, useState } from 'react';
 import { Link, LinkVariants } from '../Link';
+import './_button.scss';
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement> {
   /**

@@ -5,6 +5,7 @@ import { px, useNormalizedInputProps } from '../../utils';
 import { Icon } from '../Icon';
 import Text from '../Text/Text';
 import { TextVariants } from '../Text/types';
+import './_textArea.scss';
 
 export interface TextAreaProps extends ComponentProps<'textarea'> {
   /**

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { px } from '../../../utils';
 import Link from '../../Link/Link';
 import { LinkVariants } from '../../Link';
+import './_searchResults.scss';
 
 export interface SearchResult {
   id: string;

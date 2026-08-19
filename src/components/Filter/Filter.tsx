@@ -16,6 +16,7 @@ import Button from '../Button/Button';
 import { ButtonVariants } from '../Button/types';
 import { Icon } from '../Icon';
 import { Text, TextVariants } from '../Text';
+import './_filter.scss';
 
 export interface FilterProps extends ComponentProps<'div'> {
   /** Logical name of this filter */

@@ -9,6 +9,7 @@ import AccordionItem from '../../Accordion/AccordionItem';
 import { Text, TextVariants } from '../../Text';
 import NavigationSubmenu, { NavigationSubmenuProps } from '../NavigationSubmenu/NavigationSubmenu';
 import NavigationDesktopSubmenu from './NavigationDesktopSubmenu';
+import './_navigationItemWithSubmenu.scss';
 
 export interface NavigationItemWithSubmenuProps extends ComponentProps<'li'> {
   /**

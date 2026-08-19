@@ -20,7 +20,9 @@ yarn add @phillips/seldon
 
 ### Styling
 
-The project contains a `scss` folder. Here you will find the main export of our sass styles for our components. There's also a scss export that contains our mixins, tokens, and other utilities.
+Each component imports its own SCSS from TSX, so CSS follows the JavaScript graph. Wrap the app in `SeldonProvider` so fonts, `:root` tokens, and padding utilities load once.
+
+Sass entry points are still published for consumers who compile Seldon SCSS themselves:
 
 ```scss
 @use '@phillips/seldon/dist/scss/foundation'; // tokens, type, padding utilities (once)
@@ -28,9 +30,9 @@ The project contains a `scss` folder. Here you will find the main export of our 
 @use '@phillips/seldon/dist/scss/allPartials'; // mixins and variables only — no CSS
 ```
 
-`allPartials` does not emit CSS. Padding-utility classes (`.seldon-padding-*`) and `:root` tokens come from `foundation`, which `componentStyles` already includes. Do not `@use` Seldon's `allPartials` from every component stylesheet if you are code-splitting CSS — you will not get a copy of the utilities, and that is intentional.
+`allPartials` does not emit CSS. Do not `@use` it from every component stylesheet if you are code-splitting CSS — you will not get a copy of the utilities, and that is intentional.
 
-If you wish to only import specific component styles you can find them in their respective directories inside the `scss` folder.
+If you wish to only import specific component styles from Sass:
 
 ```scss
 @use '@phillips/seldon/dist/scss/foundation';

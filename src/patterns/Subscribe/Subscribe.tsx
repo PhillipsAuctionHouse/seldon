@@ -6,6 +6,7 @@ import Button, { ButtonProps } from '../../components/Button/Button';
 import { SubscriptionState } from './types';
 import { ButtonVariants } from '../../components/Button/types';
 import { Text, TextVariants } from '../../components/Text';
+import './_subscribe.scss';
 
 export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
   /**

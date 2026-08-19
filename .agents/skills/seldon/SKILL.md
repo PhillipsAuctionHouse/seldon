@@ -41,8 +41,10 @@ product API clients here.
 - **SCSS:** `@use '~scss/allPartials' as *;` (or the documented relative path to
   partials). That is mixins/tokens only. Prefix BEM blocks with **`.#{$px}-...`**
   where `$px` is defined in shared vars (`src/scss/_vars.scss` — currently
-  `seldon`). Global CSS (padding utilities, `:root`, fonts) is
-  `src/scss/_foundation.scss`, pulled in by `componentStyles.scss`.
+  `seldon`). Each component TSX imports its own `_*.scss`. Global CSS (padding
+  utilities, `:root`, fonts) is `src/scss/_foundation.scss`, loaded by
+  `SeldonProvider` (and by `componentStyles.scss` if a consumer still uses the
+  Sass barrel).
 - Prefer existing primitives (`Text`, `Button`, `Grid`, etc.) before adding
   parallel patterns.
 - Do not use the mixin for `@include text(variant)` in the SCSS files, instead use the <Text variant="..."> component.

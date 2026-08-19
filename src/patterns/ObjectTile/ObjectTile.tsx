@@ -6,6 +6,7 @@ import { DetailList } from '../../components/DetailList/index';
 import { Detail } from '../../components/Detail/index';
 import { SeldonImage, AspectRatio } from '../../components/SeldonImage';
 import { DetailVariants } from '../../components/Detail/types';
+import './_objectTile.scss';
 
 export interface ObjectTileProps extends ComponentProps<'a'> {
   /**
