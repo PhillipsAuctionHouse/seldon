@@ -1,3 +1,10 @@
+## [1.279.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.279.0...v1.279.1) (2026-08-19)
+
+
+### Bug Fixes
+
+* **Navigation:** L3-13164 close mobile hamburger menu on nav link click ([#919](https://github.com/PhillipsAuctionHouse/seldon/issues/919)) ([33b230b](https://github.com/PhillipsAuctionHouse/seldon/commit/33b230b241b5a4a22b31bc72ca081e4c32e379ad))
+
 # [1.279.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.278.1...v1.279.0) (2026-08-12)
 
 
