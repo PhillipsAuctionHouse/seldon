@@ -1,3 +1,10 @@
+## [1.279.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.279.1...v1.279.2) (2026-08-21)
+
+
+### Bug Fixes
+
+* **Subscribe:** PDD-712 add inputProps slot and widen element for forwardRef forms ([#915](https://github.com/PhillipsAuctionHouse/seldon/issues/915)) ([873f2ea](https://github.com/PhillipsAuctionHouse/seldon/commit/873f2ead97d7ad56623a69767b40f79dfd028741))
+
 ## [1.279.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.279.0...v1.279.1) (2026-08-19)
 
 
