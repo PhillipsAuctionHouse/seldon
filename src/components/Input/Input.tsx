@@ -1,9 +1,12 @@
+// Component styles first. `_toggle.scss` is needed because <Input type="toggle"> renders the
+// toggle markup whose pill/knob styling lives in the Toggle component's stylesheet.
+import './_input.scss';
+import '../Toggle/_toggle.scss';
 import * as React from 'react';
 import classnames from 'classnames';
 import { px, useNormalizedInputProps } from '../../utils';
 import { Text, TextVariants } from '../Text';
 import { getInputClassNames } from './utils';
-import './_input.scss';
 
 export interface InputProps extends Omit<React.ComponentProps<'input'>, 'size'> {
   /**

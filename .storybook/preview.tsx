@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 import { Preview } from '@storybook/react-vite';
+import '../src/scss/_foundation.scss';
 import '../src/story-styles.scss';
-// foundation CSS (tokens, fonts, padding utilities) loads via CustomStoryWrapper → SeldonProvider
 import CustomStoryWrapper from './CustomStoryWrapper';
 
 const preview: Preview = {

@@ -1,3 +1,6 @@
+// Card classes live in _viewingsList.scss; import it here so the card is styled when rendered
+// standalone (the ViewingsList parent imports it too — Vite dedupes).
+import './_viewingsList.scss';
 import * as React from 'react';
 import classnames from 'classnames';
 

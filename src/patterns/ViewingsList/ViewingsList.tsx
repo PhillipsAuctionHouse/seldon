@@ -1,3 +1,4 @@
+import './_viewingsList.scss';
 import * as React from 'react';
 import classnames from 'classnames';
 
@@ -70,7 +71,6 @@ export interface ViewingsListProps extends React.HTMLAttributes<HTMLDivElement> 
 const getRandomNum = () => Math.floor(Math.random() * 100) + Date.now();
 
 import { forwardRef } from 'react';
-import './_viewingsList.scss';
 
 const ViewingsList = forwardRef<HTMLDivElement, ViewingsListProps>((props, ref) => {
   const {

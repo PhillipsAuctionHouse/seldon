@@ -1,3 +1,7 @@
+// Component styles first. `_input.scss` provides the base `.seldon-input` wrapper styling that
+// Select's markup reuses; load it before `_select.scss` so the select modifiers win the cascade.
+import '../Input/_input.scss';
+import './_select.scss';
 import * as React from 'react';
 import classnames from 'classnames';
 import { px, useNormalizedInputProps } from '../../utils';
@@ -7,7 +11,6 @@ import { SelectVariants } from './types';
 import { Icon } from '../Icon';
 import { Text, TextVariants } from '../Text';
 import { getInputClassNames } from '../Input/utils';
-import './_select.scss';
 
 export interface SelectProps extends Merge<InputProps, React.ComponentProps<'select'>> {
   /**

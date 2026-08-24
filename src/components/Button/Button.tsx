@@ -1,9 +1,11 @@
+// Component styles first so this component's CSS loads before any child/sibling component's
+// (e.g. Link below) — keeps cascade order deterministic regardless of the module graph.
+import './_button.scss';
 import classnames from 'classnames';
 import { getCommonProps, px } from '../../utils';
 import { ButtonVariants, ButtonSizes } from './types';
 import { forwardRef, useState } from 'react';
 import { Link, LinkVariants } from '../Link';
-import './_button.scss';
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement> {
   /**
