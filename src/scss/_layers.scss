@@ -2,4 +2,6 @@
 // layer order from the first `@layer` statement in the document; later
 // restatements of names that already exist are ignored. Whichever Seldon
 // file the consumer evaluates first therefore has to list the full order.
-@layer seldon.foundation, seldon.components, seldon.patterns, seldon.site;
+// `vendor` is reserved for third-party CSS (e.g. flatpickr) so Seldon can
+// override it. Unlayered consumer CSS still beats every named layer.
+@layer vendor, seldon.foundation, seldon.components, seldon.patterns, seldon.site;

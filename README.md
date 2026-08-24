@@ -32,7 +32,7 @@ There are two ways to get Seldon's CSS. **Pick one** — combining them double-l
   </SeldonProvider>;
   ```
 
-  Foundation, component, pattern, and site-furniture CSS is wrapped in `@layer seldon.foundation`, `seldon.components`, `seldon.patterns`, and `seldon.site` (later layers win). Every emitting sheet restates that full order so whichever Seldon file the bundler evaluates first still establishes it — JS import order does not decide equal-specificity ties. Unlayered CSS in your app still beats all Seldon layers, which is what you want for overrides.
+  Foundation, component, pattern, and site-furniture CSS is wrapped in `@layer seldon.foundation`, `seldon.components`, `seldon.patterns`, and `seldon.site` (later layers win). Third-party CSS (flatpickr) lives in a lower `vendor` layer so Seldon can override it. Every emitting sheet restates that full order so whichever Seldon file the bundler evaluates first still establishes it — JS import order does not decide equal-specificity ties. Unlayered CSS in your app still beats all Seldon layers, which is what you want for overrides.
 
 - **Compiling Seldon SCSS yourself:** use the published Sass entry points below instead. Do this only if you are _not_ relying on the JavaScript imports to deliver CSS — otherwise every component's CSS ships twice (once from JS, once from Sass), and `foundation` loads twice.
 

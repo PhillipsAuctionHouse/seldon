@@ -1,7 +1,10 @@
 /* stylelint-disable selector-class-pattern */
 @use '~scss/allPartials' as *;
 @use '~scss/layers';
-@import 'flatpickr/dist/flatpickr.css';
+
+@layer vendor {
+  @import 'flatpickr/dist/flatpickr.css';
+}
 
 @layer seldon.components {
   .#{$px}-date-picker {

@@ -44,10 +44,12 @@ stories and tests there.
   from the component TSX. CSS that must emit once (padding utilities, `:root`
   tokens, `@font-face`) lives in `~scss/foundation`, loaded by `SeldonProvider`.
   Emitting sheets also `@use '~scss/layers'` and wrap rules in
-  `@layer seldon.foundation | .components | .patterns | .site` so cascade
-  order does not depend on JS import order. Do not put two BEM blocks on one
-  node at equal specificity (Button-as-Link is the documented case: Link owns
-  type; Button does not set `font-variation-settings` on `.seldon-link`).
+  `@layer vendor | seldon.foundation | .components | .patterns | .site` so
+  cascade order does not depend on JS import order. Third-party CSS goes in
+  `vendor` (below Seldon) so component overrides still win. Do not put two BEM
+  blocks on one node at equal specificity (Button-as-Link is the documented
+  case: Link owns type; Button does not set `font-variation-settings` on
+  `.seldon-link`).
 
 - BEM: **`.#{$px}-block__element--modifier`** using the **`$px`** namespace from
   shared vars (`src/scss/_vars.scss`).

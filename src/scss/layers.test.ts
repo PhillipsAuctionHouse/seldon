@@ -6,7 +6,7 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
 const srcRoot = path.resolve(dirname, '..');
 const layersUrl = pathToFileURL(`${dirname}/`);
 
-const LAYER_ORDER = '@layer seldon.foundation, seldon.components, seldon.patterns, seldon.site';
+const LAYER_ORDER = '@layer vendor, seldon.foundation, seldon.components, seldon.patterns, seldon.site';
 
 const compile = (relativePath: string): string =>
   sass.compile(path.join(srcRoot, relativePath), {
@@ -52,5 +52,14 @@ describe('cascade layers', () => {
     const inputCss = compile('components/Input/_input.scss');
     expect(selectCss).toContain('.seldon-select-input.seldon-input');
     expect(inputCss).not.toContain('.seldon-select-input.seldon-input');
+  });
+
+  it('puts flatpickr base CSS in vendor so DatePicker overrides in seldon.components can win', () => {
+    const css = compile('components/DatePicker/_datePicker.scss');
+    expect(css).toContain(LAYER_ORDER);
+    expect(css).toMatch(/@layer vendor\s*\{\s*@import 'flatpickr\/dist\/flatpickr\.css'/);
+    expect(css.indexOf('@import')).toBeGreaterThan(css.indexOf('@layer vendor,'));
+    expect(css).toContain('@layer seldon.components');
+    expect(css).toContain('.flatpickr-calendar .flatpickr-day');
   });
 });

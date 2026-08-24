@@ -45,8 +45,8 @@ product API clients here.
   utilities, `:root`, fonts) is `src/scss/_foundation.scss`, loaded by
   `SeldonProvider` (and by `componentStyles.scss` if a consumer still uses the
   Sass barrel). Emitting SCSS is wrapped in `@layer seldon.*` (see
-  `src/scss/_layers.scss`) so equal-specificity ties are not JS-import-order
-  dependent.
+  `src/scss/_layers.scss`; third-party CSS in `vendor`) so equal-specificity
+  ties are not JS-import-order dependent.
 - Prefer existing primitives (`Text`, `Button`, `Grid`, etc.) before adding
   parallel patterns.
 - Do not use the mixin for `@include text(variant)` in the SCSS files, instead use the <Text variant="..."> component.
