@@ -44,7 +44,9 @@ product API clients here.
   `seldon`). Each component TSX imports its own `_*.scss`. Global CSS (padding
   utilities, `:root`, fonts) is `src/scss/_foundation.scss`, loaded by
   `SeldonProvider` (and by `componentStyles.scss` if a consumer still uses the
-  Sass barrel).
+  Sass barrel). Emitting SCSS is wrapped in `@layer seldon.*` (see
+  `src/scss/_layers.scss`) so equal-specificity ties are not JS-import-order
+  dependent.
 - Prefer existing primitives (`Text`, `Button`, `Grid`, etc.) before adding
   parallel patterns.
 - Do not use the mixin for `@include text(variant)` in the SCSS files, instead use the <Text variant="..."> component.

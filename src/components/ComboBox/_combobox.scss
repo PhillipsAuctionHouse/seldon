@@ -1,186 +1,189 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-combo-box {
-  position: relative;
-  width: 100%;
-
-  &__wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  &__input-wrapper {
-    margin-bottom: 0.25rem;
+@layer seldon.components {
+  .#{$px}-combo-box {
     position: relative;
+    width: 100%;
 
-    &:hover,
-    &:focus-within {
-      .#{$px}-combo-box__close-button {
-        opacity: 1;
+    &__wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    &__input-wrapper {
+      margin-bottom: 0.25rem;
+      position: relative;
+
+      &:hover,
+      &:focus-within {
+        .#{$px}-combo-box__close-button {
+          opacity: 1;
+        }
       }
     }
-  }
 
-  &__input {
-    @include text($bodyMedium);
+    &__input {
+      @include text($bodyMedium);
 
-    accent-color: $black-100;
-    border: 1px solid $black-100;
-    border-radius: $radius-xs;
-    font-variation-settings: 'wght' 600;
-    outline: none;
-    padding: $padding-xsm;
-    width: 100%;
+      accent-color: $black-100;
+      border: 1px solid $black-100;
+      border-radius: $radius-xs;
+      font-variation-settings: 'wght' 600;
+      outline: none;
+      padding: $padding-xsm;
+      width: 100%;
 
-    &::placeholder {
-      font-variation-settings: 'wght' 400;
-    }
-
-    &:hover {
-      border: 1px solid $primary-black;
-    }
-
-    &:focus-visible,
-    &:focus {
-      @include focus-ring($border-radius: $radius-xs);
-    }
-
-    &--invalid {
-      border-color: $error-red;
-      box-shadow: inset 0 0 3px 3px $error-pink;
-
-      &:focus {
-        @include focus-ring($border-radius: $radius-xs, $outline-color: $error-red);
+      &::placeholder {
+        font-variation-settings: 'wght' 400;
       }
 
       &:hover {
+        border: 1px solid $primary-black;
+      }
+
+      &:focus-visible,
+      &:focus {
+        @include focus-ring($border-radius: $radius-xs);
+      }
+
+      &--invalid {
         border-color: $error-red;
+        box-shadow: inset 0 0 3px 3px $error-pink;
+
+        &:focus {
+          @include focus-ring($border-radius: $radius-xs, $outline-color: $error-red);
+        }
+
+        &:hover {
+          border-color: $error-red;
+        }
       }
     }
-  }
 
-  &__label {
-    color: $pure-black;
-    display: inline-block;
-    font-variation-settings: 'wght' 600;
-    margin-bottom: 0.5rem;
-    width: fit-content;
-    word-break: break-word;
-
-    &--hidden {
-      @include hidden;
-    }
-
-    &--invalid {
-      color: $error-red;
-    }
-  }
-
-  &__close-button {
-    color: $pure-black;
-    opacity: 0;
-    position: absolute;
-    right: 2.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    transition:
-      opacity 0.2s ease,
-      background-color 0.2s ease;
-  }
-
-  &__dropdown-button {
-    color: $pure-black;
-    position: absolute;
-    right: 0.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-
-    &--open svg {
-      transform: rotate(180deg);
-    }
-  }
-
-  &__content {
-    animation: fade-in 150ms ease-out;
-    background-color: $white-100;
-    border: 1px solid $grey-50;
-    border-radius: $radius-xs;
-    box-shadow: 0 5px 15px rgba($pure-black, 0.1);
-    margin-top: 4px;
-    max-height: 300px;
-    overflow-y: auto;
-    position: absolute;
-    transform: translateY(1px);
-    width: 100%;
-    z-index: 100;
-  }
-
-  &__group {
-    padding: $padding-xsm 0;
-  }
-
-  &__list {
-    max-height: 200px;
-    overflow: hidden;
-    overflow-y: auto;
-    position: relative;
-    transition: height 100ms ease;
-    width: 100%;
-  }
-
-  &__item {
-    background-color: $white-100;
-    padding: $padding-micro $padding-xsm;
-    transition: background-color 0.1s ease;
-
-    @include text($bodyMedium);
-
-    &:hover,
-    &[data-selected='true'] {
-      background-color: $light-gray;
-      cursor: pointer;
-    }
-
-    &--selected {
-      background-color: $light-gray;
+    &__label {
+      color: $pure-black;
+      display: inline-block;
       font-variation-settings: 'wght' 600;
+      margin-bottom: 0.5rem;
+      width: fit-content;
+      word-break: break-word;
+
+      &--hidden {
+        @include hidden;
+      }
+
+      &--invalid {
+        color: $error-red;
+      }
     }
-  }
 
-  &__validation {
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-height: $spacing-md;
-    overflow: hidden;
-  }
-
-  &__empty-validation {
-    line-height: $spacing-sm;
-  }
-
-  &__item__invalid-text {
-    @include text($bodySmall);
-
-    align-items: center;
-    display: flex;
-    margin-top: $spacing-xsm;
-  }
-
-  &__no-options {
-    padding-left: $padding-xsm;
-  }
-
-  @keyframes fade-in {
-    from {
+    &__close-button {
+      color: $pure-black;
       opacity: 0;
-      transform: translateY(-8px);
+      position: absolute;
+      right: 2.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      transition:
+        opacity 0.2s ease,
+        background-color 0.2s ease;
     }
 
-    to {
-      opacity: 1;
-      transform: translateY(0);
+    &__dropdown-button {
+      color: $pure-black;
+      position: absolute;
+      right: 0.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+
+      &--open svg {
+        transform: rotate(180deg);
+      }
+    }
+
+    &__content {
+      animation: fade-in 150ms ease-out;
+      background-color: $white-100;
+      border: 1px solid $grey-50;
+      border-radius: $radius-xs;
+      box-shadow: 0 5px 15px rgba($pure-black, 0.1);
+      margin-top: 4px;
+      max-height: 300px;
+      overflow-y: auto;
+      position: absolute;
+      transform: translateY(1px);
+      width: 100%;
+      z-index: 100;
+    }
+
+    &__group {
+      padding: $padding-xsm 0;
+    }
+
+    &__list {
+      max-height: 200px;
+      overflow: hidden;
+      overflow-y: auto;
+      position: relative;
+      transition: height 100ms ease;
+      width: 100%;
+    }
+
+    &__item {
+      background-color: $white-100;
+      padding: $padding-micro $padding-xsm;
+      transition: background-color 0.1s ease;
+
+      @include text($bodyMedium);
+
+      &:hover,
+      &[data-selected='true'] {
+        background-color: $light-gray;
+        cursor: pointer;
+      }
+
+      &--selected {
+        background-color: $light-gray;
+        font-variation-settings: 'wght' 600;
+      }
+    }
+
+    &__validation {
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-height: $spacing-md;
+      overflow: hidden;
+    }
+
+    &__empty-validation {
+      line-height: $spacing-sm;
+    }
+
+    &__item__invalid-text {
+      @include text($bodySmall);
+
+      align-items: center;
+      display: flex;
+      margin-top: $spacing-xsm;
+    }
+
+    &__no-options {
+      padding-left: $padding-xsm;
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   }
 }

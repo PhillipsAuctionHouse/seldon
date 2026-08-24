@@ -1,81 +1,84 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-countdown {
-  align-items: stretch;
-  border-bottom: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-bottom: 0;
-  padding-bottom: $spacing-sm;
-  width: 100%;
-
-  &--closing-lot {
-    .#{$px}-duration,
-    .#{$px}-duration .#{$px}-text {
-      color: $warning-default;
-      font-variation-settings: 'wght' 600;
-    }
-  }
-
-  &--show-bottom-border {
-    border-bottom: 1px solid $light-gray;
-    margin-bottom: 1.5rem;
-  }
-
-  &__countdown-container {
-    align-items: flex-start;
+@layer seldon.components {
+  .#{$px}-countdown {
+    align-items: stretch;
+    border-bottom: none;
     display: flex;
-    flex-flow: row wrap;
-    gap: $spacing-micro $spacing-sm;
-    justify-content: flex-start;
-    text-transform: inherit;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 0;
+    padding-bottom: $spacing-sm;
     width: 100%;
-
-    > .#{$px}-text {
-      flex-shrink: 0;
-      font-variation-settings: 'wght' 600;
-    }
-  }
-
-  &--center-align {
-    .#{$px}-countdown__countdown-container {
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .#{$px}-countdown__duration-group {
-      justify-content: center;
-    }
-  }
-
-  &__duration-group {
-    align-items: center;
-    display: flex;
-    flex-flow: row wrap;
-    gap: 0 $spacing-sm;
-    justify-content: flex-start;
-
-    .#{$px}-duration .#{$px}-text {
-      font-variation-settings: 'wght' 600;
-    }
-  }
-
-  &--compact {
-    .#{$px}-countdown__countdown-container {
-      column-gap: $spacing-xsm;
-    }
-
-    .#{$px}-countdown__duration-group {
-      column-gap: $spacing-xsm;
-    }
 
     &--closing-lot {
       .#{$px}-duration,
       .#{$px}-duration .#{$px}-text {
         color: $warning-default;
         font-variation-settings: 'wght' 600;
+      }
+    }
+
+    &--show-bottom-border {
+      border-bottom: 1px solid $light-gray;
+      margin-bottom: 1.5rem;
+    }
+
+    &__countdown-container {
+      align-items: flex-start;
+      display: flex;
+      flex-flow: row wrap;
+      gap: $spacing-micro $spacing-sm;
+      justify-content: flex-start;
+      text-transform: inherit;
+      width: 100%;
+
+      > .#{$px}-text {
+        flex-shrink: 0;
+        font-variation-settings: 'wght' 600;
+      }
+    }
+
+    &--center-align {
+      .#{$px}-countdown__countdown-container {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .#{$px}-countdown__duration-group {
+        justify-content: center;
+      }
+    }
+
+    &__duration-group {
+      align-items: center;
+      display: flex;
+      flex-flow: row wrap;
+      gap: 0 $spacing-sm;
+      justify-content: flex-start;
+
+      .#{$px}-duration .#{$px}-text {
+        font-variation-settings: 'wght' 600;
+      }
+    }
+
+    &--compact {
+      .#{$px}-countdown__countdown-container {
+        column-gap: $spacing-xsm;
+      }
+
+      .#{$px}-countdown__duration-group {
+        column-gap: $spacing-xsm;
+      }
+
+      &--closing-lot {
+        .#{$px}-duration,
+        .#{$px}-duration .#{$px}-text {
+          color: $warning-default;
+          font-variation-settings: 'wght' 600;
+        }
       }
     }
   }

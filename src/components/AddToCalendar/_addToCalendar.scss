@@ -1,76 +1,79 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-add-to-calendar {
-  svg {
-    height: 30px;
-    width: 30px;
-  }
-  .#{$px}-icon-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-
-    &:hover {
+@layer seldon.components {
+  .#{$px}-add-to-calendar {
+    svg {
+      height: 30px;
+      width: 30px;
+    }
+    .#{$px}-icon-button {
       background: transparent;
-    }
-
-    svg path {
-      transition: fill 0.25s ease-in-out;
-    }
-
-    svg:hover path {
-      fill: $button-hover;
-    }
-
-    &:focus-visible {
-      @include focus-ring($border-radius: $radius-xs);
-    }
-  }
-
-  &-atcb-list {
-    background: $white-100;
-    border: 1px solid $grey-50;
-  }
-
-  &-atcb-item {
-    padding: $spacing-xsm $spacing-sm;
-
-    &:hover,
-    &:focus-visible {
-      background-color: $light-gray;
-      cursor: pointer;
-      outline: none;
-    }
-  }
-
-  &-atcb-item-link {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-variation-settings: 'wght' 400;
-    outline: none;
-    padding: 0;
-    text-decoration: none;
-
-    p {
-      margin-bottom: 0;
-    }
-
-    &:hover {
       border: none;
-      outline: none;
-      text-decoration: none;
+      cursor: pointer;
+
+      &:hover {
+        background: transparent;
+      }
+
+      svg path {
+        transition: fill 0.25s ease-in-out;
+      }
+
+      svg:hover path {
+        fill: $button-hover;
+      }
+
+      &:focus-visible {
+        @include focus-ring($border-radius: $radius-xs);
+      }
     }
 
-    span {
-      font-variation-settings: 'wght' 400;
-      text-decoration: none;
+    &-atcb-list {
+      background: $white-100;
+      border: 1px solid $grey-50;
+    }
+
+    &-atcb-item {
+      padding: $spacing-xsm $spacing-sm;
 
       &:hover,
       &:focus-visible {
-        color: $black-100;
+        background-color: $light-gray;
+        cursor: pointer;
+        outline: none;
+      }
+    }
+
+    &-atcb-item-link {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-variation-settings: 'wght' 400;
+      outline: none;
+      padding: 0;
+      text-decoration: none;
+
+      p {
+        margin-bottom: 0;
+      }
+
+      &:hover {
+        border: none;
         outline: none;
         text-decoration: none;
+      }
+
+      span {
+        font-variation-settings: 'wght' 400;
+        text-decoration: none;
+
+        &:hover,
+        &:focus-visible {
+          color: $black-100;
+          outline: none;
+          text-decoration: none;
+        }
       }
     }
   }

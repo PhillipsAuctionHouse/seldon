@@ -1,7 +1,3 @@
-// Deliberate exception to the usual "stylesheet import goes last" rule: Button's CSS must load
-// BEFORE Link's so Link's linkMedium (wght 400) beats Button's 600 when a Button renders as a
-// link, matching the order the componentStyles barrel used to give. Do not copy this to other
-// components — a component that overrides one it imports needs its stylesheet imported last.
 import './_button.scss';
 import classnames from 'classnames';
 import { getCommonProps, px } from '../../utils';

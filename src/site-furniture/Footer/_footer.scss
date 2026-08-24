@@ -1,139 +1,142 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-footer {
-  align-items: center;
-  background-color: $off-white;
-  display: flex;
-  flex-direction: column;
-  margin: $spacing-lg 0 0;
-  max-width: 100%;
-
-  ul {
+@layer seldon.site {
+  .#{$px}-footer {
+    align-items: center;
+    background-color: $off-white;
     display: flex;
     flex-direction: column;
-    gap: $spacing-micro;
-  }
+    margin: $spacing-lg 0 0;
+    max-width: 100%;
 
-  &__links {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    max-width: 30rem;
-    padding: $spacing-lg $spacing-md $spacing-md $spacing-md;
-    width: 100%;
-
-    @include media($size-md) {
-      flex-flow: row wrap;
-      max-width: $desktop-max-width;
-      padding: $spacing-lg $spacing-md $spacing-lg $spacing-md;
-
-      .#{$px}-social {
-        flex-basis: 100%; // force this to wrap
-      }
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-micro;
     }
 
-    @include media($size-lg) {
-      .#{$px}-social {
-        flex-basis: 0;
-      }
-    }
+    &__links {
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      max-width: 30rem;
+      padding: $spacing-lg $spacing-md $spacing-md $spacing-md;
+      width: 100%;
 
-    div {
       @include media($size-md) {
-        flex: 1;
+        flex-flow: row wrap;
+        max-width: $desktop-max-width;
+        padding: $spacing-lg $spacing-md $spacing-lg $spacing-md;
+
+        .#{$px}-social {
+          flex-basis: 100%; // force this to wrap
+        }
       }
-    }
 
-    h3.#{$px}-text {
-      @include media($size-sm) {
-        margin-bottom: $spacing-xsm;
+      @include media($size-lg) {
+        .#{$px}-social {
+          flex-basis: 0;
+        }
       }
-    }
 
-    div:not(.#{$px}-social) {
-      ul {
-        li {
-          @include media($size-xl) {
-            padding-bottom: $spacing-micro;
-          }
+      div {
+        @include media($size-md) {
+          flex: 1;
+        }
+      }
 
-          a {
-            &:hover {
-              text-decoration: underline;
+      h3.#{$px}-text {
+        @include media($size-sm) {
+          margin-bottom: $spacing-xsm;
+        }
+      }
+
+      div:not(.#{$px}-social) {
+        ul {
+          li {
+            @include media($size-xl) {
+              padding-bottom: $spacing-micro;
+            }
+
+            a {
+              &:hover {
+                text-decoration: underline;
+              }
             }
           }
         }
       }
     }
-  }
 
-  &-desktop {
-    display: none;
+    &-desktop {
+      display: none;
+
+      @include media($size-md) {
+        display: block;
+      }
+    }
 
     @include media($size-md) {
-      display: block;
-    }
-  }
-
-  @include media($size-md) {
-    &-mobile {
-      display: none;
-    }
-  }
-
-  .#{$px}-accordion {
-    border-bottom: 1px solid $grey-50;
-    border-top: unset;
-    margin-bottom: $spacing-md;
-    width: 100%;
-
-    &-item {
-      &--expanded {
-        margin-top: 0;
-        padding: 0;
+      &-mobile {
+        display: none;
       }
+    }
 
-      &-label {
-        opacity: 1;
-        padding: $spacing-md 0 $spacing-sm;
+    .#{$px}-accordion {
+      border-bottom: 1px solid $grey-50;
+      border-top: unset;
+      margin-bottom: $spacing-md;
+      width: 100%;
 
-        @include media($size-md) {
-          cursor: unset;
+      &-item {
+        &--expanded {
+          margin-top: 0;
+          padding: 0;
         }
 
-        &__text {
-          @include text($linkStylised);
+        &-label {
+          opacity: 1;
+          padding: $spacing-md 0 $spacing-sm;
 
-          // Sentence case: cancel the uppercase baked into linkStylised
-          text-transform: none;
+          @include media($size-md) {
+            cursor: unset;
+          }
+
+          &__text {
+            @include text($linkStylised);
+
+            // Sentence case: cancel the uppercase baked into linkStylised
+            text-transform: none;
+          }
+        }
+
+        &__border-bottom {
+          border-bottom: 1px solid $grey-50;
         }
       }
-
-      &__border-bottom {
-        border-bottom: 1px solid $grey-50;
-      }
     }
-  }
 
-  &__logo {
-    margin-bottom: $spacing-sm;
-    margin-top: $spacing-md;
-
-    &:focus-visible {
-      @include focus-ring($border-radius: $radius-xs);
-    }
-  }
-
-  &__copyright {
-    align-items: center;
-    background-color: $white-100;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-
-    h3 {
+    &__logo {
       margin-bottom: $spacing-sm;
       margin-top: $spacing-md;
+
+      &:focus-visible {
+        @include focus-ring($border-radius: $radius-xs);
+      }
+    }
+
+    &__copyright {
+      align-items: center;
+      background-color: $white-100;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      h3 {
+        margin-bottom: $spacing-sm;
+        margin-top: $spacing-md;
+      }
     }
   }
 }

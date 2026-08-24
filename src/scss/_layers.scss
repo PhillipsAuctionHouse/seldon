@@ -1,0 +1,5 @@
+// Repeated at the top of every CSS-emitting sheet on purpose. CSS records
+// layer order from the first `@layer` statement in the document; later
+// restatements of names that already exist are ignored. Whichever Seldon
+// file the consumer evaluates first therefore has to list the full order.
+@layer seldon.foundation, seldon.components, seldon.patterns, seldon.site;

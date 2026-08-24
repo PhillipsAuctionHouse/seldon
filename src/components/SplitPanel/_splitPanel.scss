@@ -1,33 +1,36 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-split-panel {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-md;
+@layer seldon.components {
+  .#{$px}-split-panel {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
 
-  > * {
-    flex: 1 1 0px;
-  }
-
-  @include media($size-md) {
-    align-items: stretch;
-    flex-direction: row;
-
-    & > :first-child,
-    & > :last-child {
-      width: 50%;
+    > * {
+      flex: 1 1 0px;
     }
 
-    & > :not(:last-child) {
-      border-right: 1px solid $medium-gray;
-      padding-right: $spacing-md;
-    }
+    @include media($size-md) {
+      align-items: stretch;
+      flex-direction: row;
 
-    &--borderless {
+      & > :first-child,
+      & > :last-child {
+        width: 50%;
+      }
+
       & > :not(:last-child) {
-        border-right: none;
-        padding-right: 0;
+        border-right: 1px solid $medium-gray;
+        padding-right: $spacing-md;
+      }
+
+      &--borderless {
+        & > :not(:last-child) {
+          border-right: none;
+          padding-right: 0;
+        }
       }
     }
   }

@@ -1,11 +1,14 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-icon {
-  align-items: center; /* for alignment of svg */
-  display: flex; /* for alignment of svg */
-  justify-content: center; /* for alignment of svg */
-  svg {
-    max-height: 100%;
-    max-width: 100%;
+@layer seldon.components {
+  .#{$px}-icon {
+    align-items: center; /* for alignment of svg */
+    display: flex; /* for alignment of svg */
+    justify-content: center; /* for alignment of svg */
+    svg {
+      max-height: 100%;
+      max-width: 100%;
+    }
   }
 }

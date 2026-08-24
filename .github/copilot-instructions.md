@@ -46,7 +46,7 @@ Keep responses focused, reference concrete files, and follow existing patterns o
 
 ## 6. SCSS + Tokens
 
-- Import shared mixins and variables via `_allPartials.scss`. Import the component `_*.scss` from TSX. `SeldonProvider` loads `_foundation.scss` once for padding utilities, `:root` tokens, and fonts.
+- Import shared mixins and variables via `_allPartials.scss`. Import the component `_*.scss` from TSX. `SeldonProvider` loads `_foundation.scss` once for padding utilities, `:root` tokens, and fonts. Wrap emitting rules in `@layer seldon.foundation|components|patterns|site` (`@use '~scss/layers'`) so cascade does not depend on JS import order.
 - Avoid duplicating spacing/typography rules already available in `_vars.scss` / `_typography.scss` / `_sharedClasses.scss`.
 - Should always use tokens for spacing, typography, colors (e.g. `padding: $spacing-16`).
 

@@ -1,17 +1,20 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-divider {
-  margin: $spacing-sm 0;
+@layer seldon.components {
+  .#{$px}-divider {
+    margin: $spacing-sm 0;
 
-  &-line {
-    background-color: $bg-border;
-    border: none;
-    border-top: 1px solid $bg-border;
-    color: $bg-border;
-    display: block;
-    height: 1px;
-    margin: 1em 0;
-    padding: 0;
-    width: 100%;
+    &-line {
+      background-color: $bg-border;
+      border: none;
+      border-top: 1px solid $bg-border;
+      color: $bg-border;
+      display: block;
+      height: 1px;
+      margin: 1em 0;
+      padding: 0;
+      width: 100%;
+    }
   }
 }

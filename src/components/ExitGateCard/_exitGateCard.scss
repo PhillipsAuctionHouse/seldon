@@ -1,80 +1,83 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-exit-gate-card {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  padding-left: $spacing-md;
-
-  @media (max-width: $breakpoint-md) {
-    flex-direction: column;
-
-    &__desktop_image {
-      max-width: unset;
-      overflow: visible;
-    }
-  }
-
-  @media (min-width: $breakpoint-md) {
-    flex-direction: row;
-    padding-left: $spacing-lg;
-
-    &__desktop_image {
-      flex: 0 50%;
-    }
-  }
-
-  &__content {
-    align-items: flex-start;
-    color: $pure-black;
+@layer seldon.components {
+  .#{$px}-exit-gate-card {
     display: flex;
-    flex-direction: column;
-    gap: $spacing-sm;
-    margin: auto 0;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding-left: $spacing-md;
 
-    &-label {
-      @media (max-width: $breakpoint-md) {
-        font-variation-settings: 'wght' 500;
-      }
-    }
-
-    &-title {
-      margin: 0;
-      text-transform: none;
-    }
-
-    &-description {
-      @media (max-width: $breakpoint-md) {
-        font-size: $body-size1;
-        text-align: center;
-      }
-    }
-
-    &-link {
-      padding: $padding-xsm $padding-xxl;
-    }
-
-    // Match button focus state when the link (wrapper) is focused
-    > a:focus-visible {
-      @include focus-ring($border-radius: $radius-3xl);
-    }
-  }
-}
-
-.#{$px}-exit-gate-card {
-  display: flex;
-  flex-direction: row-reverse;
-
-  @media (max-width: $breakpoint-md) {
-    flex-direction: column;
-    padding: 0;
-  }
-
-  &__content {
     @media (max-width: $breakpoint-md) {
-      align-items: center;
-      margin-top: $spacing-md;
-      padding: 0 $spacing-md;
+      flex-direction: column;
+
+      &__desktop_image {
+        max-width: unset;
+        overflow: visible;
+      }
+    }
+
+    @media (min-width: $breakpoint-md) {
+      flex-direction: row;
+      padding-left: $spacing-lg;
+
+      &__desktop_image {
+        flex: 0 50%;
+      }
+    }
+
+    &__content {
+      align-items: flex-start;
+      color: $pure-black;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+      margin: auto 0;
+
+      &-label {
+        @media (max-width: $breakpoint-md) {
+          font-variation-settings: 'wght' 500;
+        }
+      }
+
+      &-title {
+        margin: 0;
+        text-transform: none;
+      }
+
+      &-description {
+        @media (max-width: $breakpoint-md) {
+          font-size: $body-size1;
+          text-align: center;
+        }
+      }
+
+      &-link {
+        padding: $padding-xsm $padding-xxl;
+      }
+
+      // Match button focus state when the link (wrapper) is focused
+      > a:focus-visible {
+        @include focus-ring($border-radius: $radius-3xl);
+      }
+    }
+  }
+
+  .#{$px}-exit-gate-card {
+    display: flex;
+    flex-direction: row-reverse;
+
+    @media (max-width: $breakpoint-md) {
+      flex-direction: column;
+      padding: 0;
+    }
+
+    &__content {
+      @media (max-width: $breakpoint-md) {
+        align-items: center;
+        margin-top: $spacing-md;
+        padding: 0 $spacing-md;
+      }
     }
   }
 }

@@ -1,111 +1,114 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-seldon-image {
-  // Propagate an ancestor `max-height` down to the wrapper so the img can inherit it too (percentages resolve to `none` when parent height is auto; `inherit` doesn't).
-  max-height: inherit;
-  overflow: hidden;
-  position: relative;
+@layer seldon.components {
+  .#{$px}-seldon-image {
+    // Propagate an ancestor `max-height` down to the wrapper so the img can inherit it too (percentages resolve to `none` when parent height is auto; `inherit` doesn't).
+    max-height: inherit;
+    overflow: hidden;
+    position: relative;
 
-  &--aspect-ratio-16-9 {
-    img {
-      aspect-ratio: 16 / 9;
+    &--aspect-ratio-16-9 {
+      img {
+        aspect-ratio: 16 / 9;
+      }
+
+      &.#{$px}-seldon-image--error-image {
+        aspect-ratio: 16 / 9;
+      }
     }
 
-    &.#{$px}-seldon-image--error-image {
-      aspect-ratio: 16 / 9;
-    }
-  }
+    // Portrait/square can overflow vertically; auto dims + max caps let the img respect parent max-height, not just width.
+    &--aspect-ratio-3-4 {
+      img {
+        aspect-ratio: 3 / 4;
+        height: auto;
+        max-height: inherit;
+        max-width: 100%;
+        width: auto;
+      }
 
-  // Portrait/square can overflow vertically; auto dims + max caps let the img respect parent max-height, not just width.
-  &--aspect-ratio-3-4 {
-    img {
-      aspect-ratio: 3 / 4;
+      &.#{$px}-seldon-image--error-image {
+        aspect-ratio: 3 / 4;
+      }
+    }
+
+    &--aspect-ratio-1-1 {
+      img {
+        aspect-ratio: 1 / 1;
+        height: auto;
+        max-height: inherit;
+        max-width: 100%;
+        width: auto;
+      }
+
+      &.#{$px}-seldon-image--error-image {
+        aspect-ratio: 1 / 1;
+      }
+    }
+
+    &--error {
+      width: 100%;
+
+      &-image {
+        background-color: $bg-soft;
+      }
+
+      .phillips-logo {
+        fill: $medium-gray;
+      }
+
+      svg {
+        fill: $medium-gray;
+        left: 50%;
+        max-width: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    &-img {
       height: auto;
-      max-height: inherit;
-      max-width: 100%;
-      width: auto;
-    }
-
-    &.#{$px}-seldon-image--error-image {
-      aspect-ratio: 3 / 4;
-    }
-  }
-
-  &--aspect-ratio-1-1 {
-    img {
-      aspect-ratio: 1 / 1;
-      height: auto;
-      max-height: inherit;
-      max-width: 100%;
-      width: auto;
-    }
-
-    &.#{$px}-seldon-image--error-image {
-      aspect-ratio: 1 / 1;
-    }
-  }
-
-  &--error {
-    width: 100%;
-
-    &-image {
-      background-color: $bg-soft;
-    }
-
-    .phillips-logo {
-      fill: $medium-gray;
-    }
-
-    svg {
-      fill: $medium-gray;
-      left: 50%;
-      max-width: 50%;
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
-
-  &-img {
-    height: auto;
-    object-fit: contain;
-    width: 100%;
-
-    &--object-fit-contain {
       object-fit: contain;
+      width: 100%;
+
+      &--object-fit-contain {
+        object-fit: contain;
+      }
+
+      &--object-fit-cover {
+        object-fit: cover;
+      }
+
+      &--object-fit-fill {
+        object-fit: fill;
+      }
+
+      &--object-fit-scale-down {
+        object-fit: scale-down;
+      }
+
+      &--hidden {
+        visibility: hidden;
+      }
     }
 
-    &--object-fit-cover {
-      object-fit: cover;
-    }
+    &-blur {
+      background-position: center;
+      background-size: cover;
+      filter: blur(10px);
+      height: 100%;
+      left: 0;
+      opacity: 0.5;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: -1;
 
-    &--object-fit-fill {
-      object-fit: fill;
-    }
-
-    &--object-fit-scale-down {
-      object-fit: scale-down;
-    }
-
-    &--hidden {
-      visibility: hidden;
-    }
-  }
-
-  &-blur {
-    background-position: center;
-    background-size: cover;
-    filter: blur(10px);
-    height: 100%;
-    left: 0;
-    opacity: 0.5;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: -1;
-
-    &--hidden {
-      visibility: hidden;
+      &--hidden {
+        visibility: hidden;
+      }
     }
   }
 }

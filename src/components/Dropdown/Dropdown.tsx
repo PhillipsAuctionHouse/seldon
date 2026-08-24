@@ -7,7 +7,8 @@ import { Icon } from '../Icon';
 import './_dropdown.scss';
 
 export interface DropdownProps
-  extends Omit<DropdownSelect.SelectProps, 'defaultValue' | 'dir'>, ComponentPropsWithoutRef<'div'> {
+  extends Omit<DropdownSelect.SelectProps, 'defaultValue' | 'dir'>,
+    ComponentPropsWithoutRef<'div'> {
   /**
    * All options to be listed in the dropdown
    */
