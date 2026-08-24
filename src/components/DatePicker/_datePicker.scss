@@ -1,9 +1,12 @@
 /* stylelint-disable selector-class-pattern */
+@use 'sass:meta';
 @use '~scss/allPartials' as *;
 @use '~scss/layers';
 
+// Inline, don't @import: a nested CSS @import inside @layer is left
+// unresolved by Vite and Chromatic fails to preload DatePicker-*.css.
 @layer vendor {
-  @import 'flatpickr/dist/flatpickr.css';
+  @include meta.load-css('flatpickr/dist/flatpickr.css');
 }
 
 @layer seldon.components {

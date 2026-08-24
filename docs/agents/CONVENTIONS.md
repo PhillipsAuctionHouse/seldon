@@ -46,10 +46,11 @@ stories and tests there.
   Emitting sheets also `@use '~scss/layers'` and wrap rules in
   `@layer vendor | seldon.foundation | .components | .patterns | .site` so
   cascade order does not depend on JS import order. Third-party CSS goes in
-  `vendor` (below Seldon) so component overrides still win. Do not put two BEM
-  blocks on one node at equal specificity (Button-as-Link is the documented
-  case: Link owns type; Button does not set `font-variation-settings` on
-  `.seldon-link`).
+  `vendor` (below Seldon), inlined with `meta.load-css` — do not leave a nested
+  CSS `@import` inside `@layer` (Vite/Chromatic cannot preload it). Do not put
+  two BEM blocks on one node at equal specificity (Button-as-Link is the
+  documented case: Link owns type; Button does not set
+  `font-variation-settings` on `.seldon-link`).
 
 - BEM: **`.#{$px}-block__element--modifier`** using the **`$px`** namespace from
   shared vars (`src/scss/_vars.scss`).

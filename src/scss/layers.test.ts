@@ -10,6 +10,7 @@ const LAYER_ORDER = '@layer vendor, seldon.foundation, seldon.components, seldon
 
 const compile = (relativePath: string): string =>
   sass.compile(path.join(srcRoot, relativePath), {
+    loadPaths: [path.resolve(srcRoot, '../node_modules')],
     importers: [
       {
         findFileUrl(url) {
@@ -54,11 +55,11 @@ describe('cascade layers', () => {
     expect(inputCss).not.toContain('.seldon-select-input.seldon-input');
   });
 
-  it('puts flatpickr base CSS in vendor so DatePicker overrides in seldon.components can win', () => {
+  it('inlines flatpickr into vendor so DatePicker overrides in seldon.components can win', () => {
     const css = compile('components/DatePicker/_datePicker.scss');
     expect(css).toContain(LAYER_ORDER);
-    expect(css).toMatch(/@layer vendor\s*\{\s*@import 'flatpickr\/dist\/flatpickr\.css'/);
-    expect(css.indexOf('@import')).toBeGreaterThan(css.indexOf('@layer vendor,'));
+    expect(css).not.toMatch(/@import/);
+    expect(css).toMatch(/@layer vendor\s*\{[\s\S]*\.flatpickr-calendar/);
     expect(css).toContain('@layer seldon.components');
     expect(css).toContain('.flatpickr-calendar .flatpickr-day');
   });
