@@ -1,6 +1,9 @@
 import { ComponentProps, forwardRef } from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
+// Keep this import last, below any component imports. CSS is emitted in module-graph order, so
+// importing your stylesheet after the components you build on lets your rules win equal-specificity
+// ties against theirs. Hoisting it above them flips that and they override you instead.
 import './_componentName.scss';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
