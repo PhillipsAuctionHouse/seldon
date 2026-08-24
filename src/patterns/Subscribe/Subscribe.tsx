@@ -147,8 +147,10 @@ const Subscribe = React.forwardRef<HTMLFormElement, SubscribeProps>(
           warn={warn}
           warnText={text}
           required
-          id={`${id}-input`}
           {...inputProps}
+          // After the spread so it always wins: Input derives the label's htmlFor from this id, so
+          // letting inputProps override it would silently break the label/input association.
+          id={`${id}-input`}
         />
         <Button
           className={`${baseClassName}__button ${className}`}

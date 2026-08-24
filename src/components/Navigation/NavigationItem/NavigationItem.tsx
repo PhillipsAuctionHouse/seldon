@@ -96,6 +96,15 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
       }
     };
 
+    // Clicks that land on the li itself (e.g. its padding) never reach the link's handleClick, so
+    // forward those to onClick. Clicks on the link are skipped here because handleClick has already
+    // called onClick — without this guard the bubbling click would invoke it a second time.
+    const handleItemClick: MouseEventHandler<HTMLElement> = (event) => {
+      if (event.target === event.currentTarget) {
+        onClick?.(event);
+      }
+    };
+
     // Shared link content (label, badge, optional aria-current); wrapper varies by radix mode
     const linkContent = (
       <Component
@@ -132,7 +141,7 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
 
     // Default: plain list item with link (mobile or non-Radix)
     return (
-      <li {...props} onClick={onClick} data-testid={`nav-item-${label}`} className={itemClassName} ref={ref}>
+      <li {...props} onClick={handleItemClick} data-testid={`nav-item-${label}`} className={itemClassName} ref={ref}>
         {linkContent}
       </li>
     );

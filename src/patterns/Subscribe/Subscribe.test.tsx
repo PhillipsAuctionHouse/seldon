@@ -63,6 +63,16 @@ describe('Subscribe', () => {
     expect(input).toHaveAttribute('name', 'user-email');
   });
 
+  // The label's htmlFor is derived from the same id, so honouring an id from inputProps would
+  // silently detach the label from the input and break the field's accessible name.
+  it('does not let inputProps override the id the label is associated with', () => {
+    render(<Subscribe id="test-id-override" inputProps={{ id: 'someone-elses-id' }} />);
+
+    const input = screen.getByPlaceholderText(/example@email.com/) as HTMLInputElement;
+    expect(input).toHaveAttribute('id', 'test-id-override-input');
+    expect(input).not.toHaveAttribute('id', 'someone-elses-id');
+  });
+
   it('renders a custom element passed via the `element` prop', () => {
     // A form-like component: extra domain-agnostic props Subscribe does not
     // know about, plus an optional `id`. This call site would fail to type-

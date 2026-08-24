@@ -53,10 +53,11 @@ describe('NavigationItemWithSubmenu', () => {
     // Use mobile branch: open accordion then click link (desktop submenu content may not be in DOM until open)
     const accordionTrigger = screen.getByTestId('accordion-item-test-trigger-trigger');
     await userEvent.click(accordionTrigger);
-    const navigationItem = await screen.findByTestId('nav-item-Home');
-    await userEvent.click(navigationItem);
+    // Click the link itself, not the wrapping li: onClick lives on the link so it fires exactly
+    // once per click rather than a second time as the event bubbles.
+    await userEvent.click(await screen.findByText('Home'));
 
-    expect(onClick).toHaveBeenCalled();
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 
   it('renders submenu trigger with correct initial aria-expanded', () => {

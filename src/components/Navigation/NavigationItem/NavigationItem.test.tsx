@@ -30,7 +30,9 @@ describe('NavigationItem', () => {
     expect(navigationItem).toHaveClass('custom-class');
   });
 
-  it('calls onClick when clicked', async () => {
+  // Exactly once, not just "called": the link runs handleClick (which calls onClick) and the event
+  // then bubbles to the li, so binding onClick to both would fire a side-effecting handler twice.
+  it('calls onClick exactly once per click', async () => {
     const onClick = vi.fn();
 
     render(
@@ -39,10 +41,9 @@ describe('NavigationItem', () => {
       </HeaderContext.Provider>,
     );
 
-    const navigationItem = screen.getByTestId('nav-item-Home');
-    await userEvent.click(navigationItem);
+    await userEvent.click(screen.getByText('Home'));
 
-    expect(onClick).toHaveBeenCalled();
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 
   it('closes the mobile menu when a link is clicked', async () => {
