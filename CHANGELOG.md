@@ -1,3 +1,17 @@
+## [1.279.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.279.1...v1.279.2) (2026-08-21)
+
+
+### Bug Fixes
+
+* **Subscribe:** PDD-712 add inputProps slot and widen element for forwardRef forms ([#915](https://github.com/PhillipsAuctionHouse/seldon/issues/915)) ([873f2ea](https://github.com/PhillipsAuctionHouse/seldon/commit/873f2ead97d7ad56623a69767b40f79dfd028741))
+
+## [1.279.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.279.0...v1.279.1) (2026-08-19)
+
+
+### Bug Fixes
+
+* **Navigation:** L3-13164 close mobile hamburger menu on nav link click ([#919](https://github.com/PhillipsAuctionHouse/seldon/issues/919)) ([33b230b](https://github.com/PhillipsAuctionHouse/seldon/commit/33b230b241b5a4a22b31bc72ca081e4c32e379ad))
+
 # [1.279.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.278.1...v1.279.0) (2026-08-12)
 
 

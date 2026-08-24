@@ -2,11 +2,16 @@ import { px } from '../../../utils';
 import classNames from 'classnames';
 import Link, { LinkProps } from '../../Link/Link';
 import { LinkVariants } from '../../Link/types';
-import { ComponentProps, ElementType, forwardRef, MouseEventHandler, ReactNode } from 'react';
+import { ComponentProps, ElementType, forwardRef, MouseEventHandler, ReactNode, useContext } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
+import { HeaderContext } from '../../../site-furniture/Header/Header';
 import './_navigationItem.scss';
 
 export interface NavigationItemProps extends ComponentProps<'li'> {
+  /**
+   * Widened from the `li` handler because it is also attached to the rendered link element
+   */
+  onClick?: MouseEventHandler<HTMLElement>;
   /**
    * Optional badge for navigation item. Used currently for location of auctions
    */
@@ -72,7 +77,25 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
     },
     ref,
   ) => {
+    const { closeMenu } = useContext(HeaderContext);
     const itemClassName = classNames(`${px}-nav__item`, `${px}-nav__item--${navGroup}`, className);
+
+    // Close the hamburger menu when the item navigates (no-op on desktop, where the menu is never open).
+    // Only for a plain left click on a link that still navigates: action-only items (e.g. the LanguageSelector's
+    // language rows) have no href, and modified clicks open a new tab while the menu stays on the current page.
+    const handleClick: MouseEventHandler<HTMLElement> = (event) => {
+      onClick?.(event);
+
+      const navigates =
+        href &&
+        !event.defaultPrevented &&
+        event.button === 0 &&
+        !(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey);
+
+      if (navigates) {
+        closeMenu?.();
+      }
+    };
 
     // Shared link content (label, badge, optional aria-current); wrapper varies by radix mode
     const linkContent = (
@@ -82,7 +105,7 @@ const NavigationItem = forwardRef<HTMLLIElement, NavigationItemProps>(
         })}
         href={href}
         variant={navType ? navType : LinkVariants.linkStylised}
-        onClick={onClick as MouseEventHandler<HTMLAnchorElement> | undefined}
+        onClick={handleClick}
       >
         <span className={`${px}-nav__item--label`}>{label}</span>
         {badge ? <span className={`${px}-nav__item--badge `}>{` • ${badge}`}</span> : null}
