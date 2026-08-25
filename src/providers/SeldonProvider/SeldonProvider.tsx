@@ -10,8 +10,9 @@ import { SSRMediaQuery, ssrMediaQueryStyle } from './utils';
 export const SeldonProvider = ({ children }: PropsWithChildren) => (
   <SSRMediaQuery.MediaContextProvider>
     <style>
-      {/* This style tag is required for SSRMediaQuery to work, kinda weird to put it here in the body but it's allowed and makes the component much easier to consume */}
-      {ssrMediaQueryStyle}
+      {/* Fresnel hide/show CSS. Foundation layer so pattern/component rules
+          (e.g. FiltersInline sort margin) can override `.fresnel-container`. */}
+      {`@layer seldon.foundation {${ssrMediaQueryStyle}}`}
     </style>
     {children}
   </SSRMediaQuery.MediaContextProvider>

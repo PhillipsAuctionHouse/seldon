@@ -12,12 +12,19 @@
       border: none;
       cursor: pointer;
 
-      // This trigger is a calendar control in a text row, not a square IconButton.
-      // Keep Button's inline-flex + 44px; IconButton's flex + $spacing-md would shrink it.
+      // Calendar control in a text row: keep Button's 44px box and this
+      // 30px glyph. IconButton's $spacing-md / 1rem svg would shrink both.
       &.#{$px}-button {
         display: inline-flex;
         height: 44px;
         padding: 0 $padding-sm;
+        width: auto;
+
+        svg {
+          height: 30px;
+          max-width: none;
+          width: 30px;
+        }
       }
 
       &:hover {

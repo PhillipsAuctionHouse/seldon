@@ -43,6 +43,10 @@
       -webkit-line-clamp: 1;
       line-clamp: 1;
       overflow: hidden;
+
+      &.#{$px}-text {
+        font-variation-settings: 'wght' 600;
+      }
     }
 
     &__actions {

@@ -109,6 +109,11 @@
     }
 
     &--link {
+      // Same type as the ungated Button, minus wght 600. `--link` without
+      // href is a <button>, not `.seldon-link`, so it would otherwise inherit
+      // the browser button size.
+      @include text($labelMedium);
+
       background-color: transparent;
       border: 0;
       color: $pure-black;

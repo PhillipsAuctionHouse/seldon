@@ -79,4 +79,32 @@ describe('cascade layers', () => {
     expect(css).toContain('@layer seldon.components');
     expect(css).toContain('.flatpickr-calendar .flatpickr-day');
   });
+
+  it('lets Button --link own labelMedium type (not inherited button size)', () => {
+    const css = compile('components/Button/_button.scss');
+    expect(css).toMatch(/\.seldon-button--link\s*\{[^}]*font-size:/);
+    expect(css).toMatch(/\.seldon-button--link\s*\{[^}]*font-variation-settings:\s*['"]wght['"] 400/);
+  });
+
+  it('keeps AddToCalendar glyph at 30px when composed with IconButton', () => {
+    const css = compile('components/AddToCalendar/_addToCalendar.scss');
+    expect(css).toMatch(/\.seldon-icon-button\.seldon-button svg\s*\{[^}]*width:\s*30px/);
+  });
+
+  it('keeps ViewingDetails session labels at wght 600', () => {
+    const css = compile('patterns/ViewingDetails/_viewingDetails.scss');
+    expect(css).toMatch(/viewing-details__label\s*\{[^}]*font-variation-settings:\s*['"]wght['"] 600/);
+  });
+
+  it('keeps FavoritesCollectionTile title at wght 600', () => {
+    const css = compile('patterns/FavoritesCollectionTile/_favoritesCollectionTile.scss');
+    expect(css).toMatch(
+      /favorites-collection-tile__title\.seldon-text\s*\{[^}]*font-variation-settings:\s*['"]wght['"] 600/,
+    );
+  });
+
+  it('right-aligns FiltersInline sort at md+', () => {
+    const css = compile('patterns/FiltersInline/_filtersInline.scss');
+    expect(css).toMatch(/filters-inline__sort\s*\{[^}]*margin-left:\s*auto/);
+  });
 });

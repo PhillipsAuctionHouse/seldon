@@ -14,13 +14,13 @@
 // 📑 Pages
 @use 'pages/page';
 
-strong,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+strong:not(.#{$px}-text),
+h1:not(.#{$px}-text),
+h2:not(.#{$px}-text),
+h3:not(.#{$px}-text),
+h4:not(.#{$px}-text),
+h5:not(.#{$px}-text),
+h6:not(.#{$px}-text) {
   font-variation-settings: 'wght' 700;
   /* stylelint-disable-next-line declaration-property-value-disallowed-list */
   font-weight: unset;
@@ -107,7 +107,8 @@ details {
   font-size: 12px;
 }
 
-.#{$px}-object-tile__lot-number-like svg {
+// Favorite control in this row. Lot-badge wordmarks use `__lot-badge svg`.
+.#{$px}-object-tile__lot-number-like > :not(.#{$px}-object-tile__lot-number):not(.#{$px}-object-tile__lot-badge) svg {
   cursor: pointer;
   height: 1rem;
   width: 1rem;

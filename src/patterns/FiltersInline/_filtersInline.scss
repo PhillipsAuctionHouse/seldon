@@ -12,9 +12,7 @@
     // and tab order match; this just pushes it to the right edge.
     @include media($breakpoint-md) {
       > .#{$px}-filters-inline__sort {
-        flex: 0 0 auto;
         margin-left: auto;
-        width: fit-content;
       }
     }
 

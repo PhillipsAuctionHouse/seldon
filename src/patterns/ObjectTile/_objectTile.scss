@@ -13,13 +13,10 @@
       max-width: 100%;
     }
 
-    &__badge.#{$px}-text {
+    &__badge {
       color: $warning-default;
-      display: block;
-      font-size: $font-size-badge-small;
-      font-variation-settings: 'wght' 400;
+      display: block; // Ensures the badge can be sized correctly
       min-height: 1rem;
-      overflow: visible;
       text-transform: uppercase;
     }
 
