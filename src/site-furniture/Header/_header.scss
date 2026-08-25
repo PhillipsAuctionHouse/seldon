@@ -1,227 +1,230 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-header {
-  align-items: center;
-  background-color: $white-100;
-  border-bottom: 1px solid $light-gray;
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: var(--banner-height);
-  width: 100%;
-  z-index: 10;
-
-  // Skip link: visually hidden until focused so keyboard users can skip to main content
-  &__skip-link {
-    left: -9999px;
-    position: absolute;
-    z-index: 100;
-
-    &:focus {
-      @include focus-ring($border-radius: $radius-xs);
-
-      background-color: $white-100;
-      box-shadow: 0 0 0 4px $white-100; // fills outline-offset gap so content behind doesn’t show through
-      left: $spacing-sm;
-      padding: $spacing-micro $spacing-sm;
-      top: $spacing-sm;
-    }
-  }
-
-  &__toggle-btn {
+@layer seldon.site {
+  .#{$px}-header {
     align-items: center;
-    background: none;
-    border: none;
-    cursor: pointer;
+    background-color: $white-100;
+    border-bottom: 1px solid $light-gray;
     display: flex;
-    height: $mobile-minimum-clickable-area;
-    justify-content: flex-start;
-    padding: 0;
-    width: $mobile-minimum-clickable-area;
-
-    @include isHeaderDesktop {
-      display: none;
-    }
-
-    /* This is a pseudo icon shown within the button, so we can do fancy transitions */
-    span {
-      background-color: $pure-black;
-      color: transparent;
-      display: block;
-      height: 2px;
-      position: relative;
-      transition: background-color 0.25s ease 0.25s;
-      width: 1rem;
-
-      &::before,
-      &::after {
-        background-color: $pure-black;
-        content: '';
-        display: block;
-        height: 2px;
-        left: 0;
-        position: absolute;
-        top: 0;
-        transition: transform 0.25s ease;
-        width: 1rem;
-      }
-
-      &::before {
-        transform: translateY(-6px);
-      }
-
-      &::after {
-        transform: translateY(6px);
-      }
-    }
-
-    &.#{$px}-header__toggle-btn--open span {
-      background: transparent;
-      transition: background-color 0.25s ease;
-
-      &::before {
-        transform: rotate(45deg);
-      }
-
-      &::after {
-        transform: rotate(-45deg);
-      }
-    }
-  }
-
-  &__logo {
-    align-self: center;
-    display: inline-block; // so focus ring has a clear box to wrap
-    margin: 0;
-    outline: none;
-    vertical-align: middle; // keep aligned with top-row flex items
-
-    &:focus,
-    &:focus-visible {
-      @include focus-ring($border-radius: $radius-xs);
-    }
-
-    img,
-    svg {
-      display: block; // avoid baseline gap so logo doesn’t slide up
-      height: 20.58px; // 20.58px is the height of the logo's container to make logo 16px
-      width: 100%;
-    }
-
-    @include isHeaderDesktop {
-      padding-top: 0;
-
-      img,
-      svg {
-        height: 25.73px; // 25.73px is the height of the logo's container to make logo 20px
-        width: 100%;
-      }
-    }
-  }
-
-  &__top-row {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    padding: $spacing-micro $spacing-md;
-    width: 100%;
-
-    @include isHeaderDesktop {
-      padding: $padding-sm $spacing-md;
-    }
-  }
-
-  &__nav {
-    background-color: $pure-white;
-    height: calc(100dvh - $header-height - var(--banner-height, 0px));
-    overflow-y: auto;
-    position: relative;
+    flex-direction: column;
+    position: fixed;
+    top: var(--banner-height);
     width: 100%;
     z-index: 10;
 
-    &--closed {
-      display: none;
-    }
-    .#{$px}-nav__list-container {
-      display: flex;
-      padding: 0;
+    // Skip link: visually hidden until focused so keyboard users can skip to main content
+    &__skip-link {
+      left: -9999px;
+      position: absolute;
+      z-index: 100;
 
-      @include isHeaderMobile {
-        flex-direction: column;
-        height: calc(100dvh - var(--header-height) - var(--banner-height, 0px) - 1px);
-        justify-content: flex-start;
+      &:focus {
+        @include focus-ring($border-radius: $radius-xs);
+
+        background-color: $white-100;
+        box-shadow: 0 0 0 4px $white-100; // fills outline-offset gap so content behind doesn’t show through
+        left: $spacing-sm;
+        padding: $spacing-micro $spacing-sm;
+        top: $spacing-sm;
+      }
+    }
+
+    &__toggle-btn {
+      align-items: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      height: $mobile-minimum-clickable-area;
+      justify-content: flex-start;
+      padding: 0;
+      width: $mobile-minimum-clickable-area;
+
+      @include isHeaderDesktop {
+        display: none;
+      }
+
+      /* This is a pseudo icon shown within the button, so we can do fancy transitions */
+      span {
+        background-color: $pure-black;
+        color: transparent;
+        display: block;
+        height: 2px;
+        position: relative;
+        transition: background-color 0.25s ease 0.25s;
+        width: 1rem;
+
+        &::before,
+        &::after {
+          background-color: $pure-black;
+          content: '';
+          display: block;
+          height: 2px;
+          left: 0;
+          position: absolute;
+          top: 0;
+          transition: transform 0.25s ease;
+          width: 1rem;
+        }
+
+        &::before {
+          transform: translateY(-6px);
+        }
+
+        &::after {
+          transform: translateY(6px);
+        }
+      }
+
+      &.#{$px}-header__toggle-btn--open span {
+        background: transparent;
+        transition: background-color 0.25s ease;
+
+        &::before {
+          transform: rotate(45deg);
+        }
+
+        &::after {
+          transform: rotate(-45deg);
+        }
+      }
+    }
+
+    &__logo {
+      align-self: center;
+      display: inline-block; // so focus ring has a clear box to wrap
+      margin: 0;
+      outline: none;
+      vertical-align: middle; // keep aligned with top-row flex items
+
+      &:focus,
+      &:focus-visible {
+        @include focus-ring($border-radius: $radius-xs);
+      }
+
+      img,
+      svg {
+        display: block; // avoid baseline gap so logo doesn’t slide up
+        height: 20.58px; // 20.58px is the height of the logo's container to make logo 16px
+        width: 100%;
       }
 
       @include isHeaderDesktop {
-        padding-right: $search-size;
+        padding-top: 0;
+
+        img,
+        svg {
+          height: 25.73px; // 25.73px is the height of the logo's container to make logo 20px
+          width: 100%;
+        }
+      }
+    }
+
+    &__top-row {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      padding: $spacing-micro $spacing-md;
+      width: 100%;
+
+      @include isHeaderDesktop {
+        padding: $padding-sm $spacing-md;
+      }
+    }
+
+    &__nav {
+      background-color: $pure-white;
+      height: calc(100dvh - $header-height - var(--banner-height, 0px));
+      overflow-y: auto;
+      position: relative;
+      width: 100%;
+      z-index: 10;
+
+      &--closed {
+        display: none;
+      }
+      .#{$px}-nav__list-container {
+        display: flex;
+        padding: 0;
+
+        @include isHeaderMobile {
+          flex-direction: column;
+          height: calc(100dvh - var(--header-height) - var(--banner-height, 0px) - 1px);
+          justify-content: flex-start;
+        }
+
+        @include isHeaderDesktop {
+          padding-right: $search-size;
+        }
+
+        @media (min-width: $breakpoint-md) and (max-width: calc($breakpoint-md + 40px)) {
+          padding: 0 2rem 0 0;
+        }
       }
 
-      @media (min-width: $breakpoint-md) and (max-width: calc($breakpoint-md + 40px)) {
-        padding: 0 2rem 0 0;
+      @include isHeaderMobile {
+        left: 0;
+        position: absolute;
+        top: var(--header-height);
+        transition: left 0.25s ease-in-out;
+
+        &--closed {
+          display: unset;
+          left: -100%;
+        }
       }
+
+      @include isHeaderDesktop {
+        display: flex;
+        height: unset;
+        justify-content: center;
+        overflow: visible; // this is needed for the search results
+        position: relative;
+        top: 0;
+        width: 100%;
+      }
+
+      .#{$px}-nav__item {
+        .#{$px}-link--linkStylised {
+          align-content: center;
+          height: 100%;
+        }
+      }
+    }
+
+    &__overlay {
+      display: none;
+
+      &--active {
+        background: $black-75;
+        display: block;
+        height: 100vh;
+        left: 0;
+        position: absolute;
+        top: calc($header-height - 10px);
+        width: 100%;
+
+        @include isHeaderMobile {
+          display: none;
+        }
+      }
+    }
+
+    .#{$px}-accordion-item-label__icon {
+      // slightly larger in header mobile than default
+      height: 1rem;
+      width: 1.5rem;
     }
 
     @include isHeaderMobile {
-      left: 0;
-      position: absolute;
-      top: var(--header-height);
-      transition: left 0.25s ease-in-out;
-
-      &--closed {
-        display: unset;
-        left: -100%;
+      .#{$px}-nav__list .#{$px}-nav__item:last-child .#{$px}-link--linkStylised {
+        border-bottom: none;
       }
-    }
 
-    @include isHeaderDesktop {
-      display: flex;
-      height: unset;
-      justify-content: center;
-      overflow: visible; // this is needed for the search results
-      position: relative;
-      top: 0;
-      width: 100%;
-    }
-
-    .#{$px}-nav__item {
-      .#{$px}-link--linkStylised {
-        align-content: center;
-        height: 100%;
+      .#{$px}-language-selector {
+        padding: 0 $spacing-md;
       }
-    }
-  }
-
-  &__overlay {
-    display: none;
-
-    &--active {
-      background: $black-75;
-      display: block;
-      height: 100vh;
-      left: 0;
-      position: absolute;
-      top: calc($header-height - 10px);
-      width: 100%;
-
-      @include isHeaderMobile {
-        display: none;
-      }
-    }
-  }
-
-  .#{$px}-accordion-item-label__icon {
-    // slightly larger in header mobile than default
-    height: 1rem;
-    width: 1.5rem;
-  }
-
-  @include isHeaderMobile {
-    .#{$px}-nav__list .#{$px}-nav__item:last-child .#{$px}-link--linkStylised {
-      border-bottom: none;
-    }
-
-    .#{$px}-language-selector {
-      padding: 0 $spacing-md;
     }
   }
 }

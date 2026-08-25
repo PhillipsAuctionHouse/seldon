@@ -15,7 +15,12 @@ module.exports = {
   rules: {
     'local-rules/no-deprecated-text-tokens': true,
     'at-rule-no-unknown': null,
-    'scss/at-rule-no-unknown': true,
+    'scss/at-rule-no-unknown': [
+      true,
+      {
+        ignoreAtRules: ['layer'],
+      },
+    ],
     'order/properties-alphabetical-order': true,
     // No longer using @import in SCSS files.
     'scss/at-import-partial-extension': null,

@@ -1,204 +1,207 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-$dropdown-height: 240px;
-$dropdown-width: 320px;
+@layer seldon.patterns {
+  $dropdown-height: 240px;
+  $dropdown-width: 320px;
 
-.#{$px}-filter-dropdown-menu {
-  background: $white-100;
-  border-radius: $radius-xs;
-  box-shadow: 0 4px 6px $medium-gray;
-  display: flex;
-  flex-direction: column;
-  padding: $spacing-sm 0;
-  width: $dropdown-width;
-
-  &__filters {
+  .#{$px}-filter-dropdown-menu {
+    background: $white-100;
+    border-radius: $radius-xs;
+    box-shadow: 0 4px 6px $medium-gray;
     display: flex;
     flex-direction: column;
-    gap: $spacing-sm;
-    max-height: $dropdown-height;
-    overflow-y: auto;
-    padding: 0 $spacing-sm;
-    padding-bottom: $spacing-sm;
+    padding: $spacing-sm 0;
+    width: $dropdown-width;
 
-    &--mobile {
-      padding: $spacing-md;
-    }
-  }
-
-  &__buttons-wrap {
-    border-top: 1px solid $bg-border;
-    display: flex;
-    gap: $spacing-sm;
-    justify-content: space-between;
-    padding: $spacing-sm $spacing-sm 0 $spacing-sm;
-
-    > .#{$px}-button {
-      display: inline-flex;
-      flex: 1 1 0;
-      justify-content: center;
-      margin: 0;
-      max-width: none;
-      min-width: 0;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    &--drawer {
-      box-shadow: 0 -4px 8px -4px $medium-gray;
+    &__filters {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       gap: $spacing-sm;
-      min-height: fit-content;
-      padding: $spacing-md $spacing-sm;
-      width: 100%;
+      max-height: $dropdown-height;
+      overflow-y: auto;
+      padding: 0 $spacing-sm;
+      padding-bottom: $spacing-sm;
+
+      &--mobile {
+        padding: $spacing-md;
+      }
     }
-  }
 
-  &__mobile-wrap {
-    box-shadow: 0 -4px 8px -4px $medium-gray;
-    padding-bottom: calc(#{$spacing-sm} + env(safe-area-inset-bottom));
-  }
+    &__buttons-wrap {
+      border-top: 1px solid $bg-border;
+      display: flex;
+      gap: $spacing-sm;
+      justify-content: space-between;
+      padding: $spacing-sm $spacing-sm 0 $spacing-sm;
 
-  // Sort dropdown has no footer buttons; this spacer preserves the safe-area
-  // inset so the last option stays clear of the iOS home indicator.
-  &__mobile-safe-area {
-    padding-bottom: calc(#{$spacing-sm} + env(safe-area-inset-bottom));
-  }
+      > .#{$px}-button {
+        display: inline-flex;
+        flex: 1 1 0;
+        justify-content: center;
+        margin: 0;
+        max-width: none;
+        min-width: 0;
+        text-align: center;
+        white-space: nowrap;
+      }
 
-  &__header {
-    margin-bottom: $spacing-sm;
-    margin-top: 0;
+      &--drawer {
+        box-shadow: 0 -4px 8px -4px $medium-gray;
+        display: flex;
+        flex-direction: row;
+        gap: $spacing-sm;
+        min-height: fit-content;
+        padding: $spacing-md $spacing-sm;
+        width: 100%;
+      }
+    }
+
+    &__mobile-wrap {
+      box-shadow: 0 -4px 8px -4px $medium-gray;
+      padding-bottom: calc(#{$spacing-sm} + env(safe-area-inset-bottom));
+    }
+
+    // Sort dropdown has no footer buttons; this spacer preserves the safe-area
+    // inset so the last option stays clear of the iOS home indicator.
+    &__mobile-safe-area {
+      padding-bottom: calc(#{$spacing-sm} + env(safe-area-inset-bottom));
+    }
+
+    &__header {
+      margin-bottom: $spacing-sm;
+      margin-top: 0;
+
+      &--mobile {
+        padding: $spacing-md $spacing-md 0 $spacing-md;
+      }
+    }
+
+    &__button-text {
+      color: $white-100;
+    }
 
     &--mobile {
-      padding: $spacing-md $spacing-md 0 $spacing-md;
-    }
-  }
-
-  &__button-text {
-    color: $white-100;
-  }
-
-  &--mobile {
-    border-radius: $radius-xs $radius-xs 0 0;
-    box-shadow: none;
-    height: 100%;
-    padding: 0;
-    width: 100vw;
-  }
-
-  .#{$px}-input {
-    &__wrapper {
-      align-items: center;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      max-height: 2rem;
+      border-radius: $radius-xs $radius-xs 0 0;
+      box-shadow: none;
+      height: 100%;
+      padding: 0;
+      width: 100vw;
     }
 
-    &__label {
+    .#{$px}-input {
+      &__wrapper {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        max-height: 2rem;
+      }
+
+      &__label {
+        align-self: center;
+        margin: 0;
+      }
+    }
+    .#{$px}-input__input[type='radio'] {
       align-self: center;
-      margin: 0;
+      margin-left: auto;
     }
-  }
-  .#{$px}-input__input[type='radio'] {
-    align-self: center;
-    margin-left: auto;
-  }
-  .#{$px}-input__input[type='checkbox']:disabled {
-    border-color: $keyline-gray;
-  }
-  .#{$px}-input__input[type='checkbox'] {
-    align-self: center;
-    appearance: none;
-    background: $bg-default;
-    border: 1px solid $bg-inverted;
-    border-radius: $radius-xs;
-    display: grid;
-    height: 16px;
-    margin-bottom: 0;
-    margin-left: auto;
-    padding: 0;
-    place-content: center;
-    width: 16px;
-
-    &::after {
-      background: $text-inverted;
-      content: '';
-      height: 11px;
-      mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 6 9 17l-5-5' fill='none' stroke='black' stroke-linecap='square' stroke-width='2'/%3E%3C/svg%3E");
-      mask-position: center;
-      mask-repeat: no-repeat;
-      mask-size: 16px 11px;
-      opacity: 0;
+    .#{$px}-input__input[type='checkbox']:disabled {
+      border-color: $keyline-gray;
+    }
+    .#{$px}-input__input[type='checkbox'] {
+      align-self: center;
+      appearance: none;
+      background: $bg-default;
+      border: 1px solid $bg-inverted;
+      border-radius: $radius-xs;
+      display: grid;
+      height: 16px;
+      margin-bottom: 0;
+      margin-left: auto;
+      padding: 0;
+      place-content: center;
       width: 16px;
-    }
-
-    &:checked {
-      background: $bg-inverted;
 
       &::after {
-        opacity: 1;
+        background: $text-inverted;
+        content: '';
+        height: 11px;
+        mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 6 9 17l-5-5' fill='none' stroke='black' stroke-linecap='square' stroke-width='2'/%3E%3C/svg%3E");
+        mask-position: center;
+        mask-repeat: no-repeat;
+        mask-size: 16px 11px;
+        opacity: 0;
+        width: 16px;
+      }
+
+      &:checked {
+        background: $bg-inverted;
+
+        &::after {
+          opacity: 1;
+        }
       }
     }
   }
-}
 
-.#{$px}-filter-dropdown-menu .#{$px}-filter-input__input__wrapper {
-  max-height: 2rem;
-}
-
-// Filter option labels use the labels/label-small-bold type token.
-.#{$px}-filter-dropdown-menu,
-.#{$px}-filter-drawer-menu {
-  .#{$px}-input__label.#{$px}-text {
-    @include label-styles($font-size: $font-size-label-small, $font-weight: 600);
-  }
-}
-
-.#{$px}-filter-drawer-mobile {
-  height: min(70dvh, 640px);
-  padding: 0;
-
-  .#{$px}-drawer__content {
-    flex: 1 1 auto;
-    height: auto;
-    min-height: 0;
-    overflow: hidden;
+  .#{$px}-filter-dropdown-menu .#{$px}-filter-input__input__wrapper {
+    max-height: 2rem;
   }
 
-  .#{$px}-filter-dropdown-menu--mobile {
-    min-height: 0;
-    overflow: hidden;
-  }
-
-  .#{$px}-filter-dropdown-menu__filters--mobile {
-    flex: 1 1 auto;
-    max-height: none;
-    min-height: 0;
-    overflow-y: auto;
-  }
-
-  .#{$px}-filter-dropdown-menu__mobile-wrap {
-    flex: 0 0 auto;
-    margin-top: 0;
-  }
-
-  .#{$px}-filter-dropdown-menu__mobile-safe-area {
-    flex: 0 0 auto;
-  }
-}
-
-.#{$px}-filter-drawer {
+  // Filter option labels use the labels/label-small-bold type token.
+  .#{$px}-filter-dropdown-menu,
   .#{$px}-filter-drawer-menu {
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow-y: auto;
+    .#{$px}-input__label.#{$px}-text {
+      @include label-styles($font-size: $font-size-label-small, $font-weight: 600);
+    }
   }
 
-  .#{$px}-filter-dropdown-menu__buttons-wrap--drawer {
-    flex: 0 0 auto;
-    margin-top: auto;
-    overflow: visible;
+  .#{$px}-filter-drawer-mobile {
+    height: min(70dvh, 640px);
+    padding: 0;
+
+    .#{$px}-drawer__content {
+      flex: 1 1 auto;
+      height: auto;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .#{$px}-filter-dropdown-menu--mobile {
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .#{$px}-filter-dropdown-menu__filters--mobile {
+      flex: 1 1 auto;
+      max-height: none;
+      min-height: 0;
+      overflow-y: auto;
+    }
+
+    .#{$px}-filter-dropdown-menu__mobile-wrap {
+      flex: 0 0 auto;
+      margin-top: 0;
+    }
+
+    .#{$px}-filter-dropdown-menu__mobile-safe-area {
+      flex: 0 0 auto;
+    }
+  }
+
+  .#{$px}-filter-drawer {
+    .#{$px}-filter-drawer-menu {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+    }
+
+    .#{$px}-filter-dropdown-menu__buttons-wrap--drawer {
+      flex: 0 0 auto;
+      margin-top: auto;
+      overflow: visible;
+    }
   }
 }

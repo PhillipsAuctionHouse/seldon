@@ -1,26 +1,29 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-link-list {
-  @include media($size-sm, $type: max) {
-    max-width: 30rem;
-  }
-
-  .#{$px}-link {
-    .seldon-text--link {
-      text-decoration: none;
-    }
-  }
-
-  &--item {
-    // mobile first
-    grid-column: span 2;
-
-    @include media($size-md) {
-      grid-column: span 3;
+@layer seldon.components {
+  .#{$px}-link-list {
+    @include media($size-sm, $type: max) {
+      max-width: 30rem;
     }
 
-    @include media($size-lg) {
-      grid-column: span 4;
+    .#{$px}-link {
+      .seldon-text--link {
+        text-decoration: none;
+      }
+    }
+
+    &--item {
+      // mobile first
+      grid-column: span 2;
+
+      @include media($size-md) {
+        grid-column: span 3;
+      }
+
+      @include media($size-lg) {
+        grid-column: span 4;
+      }
     }
   }
 }

@@ -1,12 +1,15 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-sale-card-actions {
-  &__ctas {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-sm;
-    justify-content: center;
-    min-width: 200px;
+@layer seldon.patterns {
+  .#{$px}-sale-card-actions {
+    &__ctas {
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+      justify-content: center;
+      min-width: 200px;
+    }
   }
 }
