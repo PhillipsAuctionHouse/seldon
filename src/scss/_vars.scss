@@ -142,7 +142,7 @@ $light-gray: $grey-50;
 $off-white: $grey-25;
 
 // --- Legacy Notification color palette ---
-$error-red: $highlight-red;
+$error-red: #cc2a00; // darkened from $highlight-red, which fails WCAG AA as text
 $error-pink: $highlight-red;
 $warn-yellow: $highlight-yellow;
 $post-sale-pink: $highlight-purple;
@@ -245,11 +245,12 @@ $linkSmall: 'linkSmall';
 $badgeSmall: 'badgeSmall';
 $badgeMedium: 'badgeMedium';
 $stringSmall: 'stringSmall';
-$text-tokens: $button, $link, $email, $label, $badge, $blockquote, $heading1, $heading2, $heading3, $heading4, $heading5,
-  $title1, $title2, $title3, $title4, $body1, $body2, $body3, $string1, $string2, $string3, $snwFlyoutLink,
-  $snwHeaderLink, $snwHeadingHero1, $snwHeadingHero2, $displayMedium, $displaySmall, $headingLarge, $headingMedium,
-  $headingSmall, $headingExtraSmall, $bodyLarge, $bodyMedium, $bodySmall, $labelLarge, $labelMedium, $labelSmall,
-  $linkStylised, $linkLarge, $linkMedium, $linkSmall, $badgeSmall, $badgeMedium, $stringSmall;
+$text-tokens:
+  $button, $link, $email, $label, $badge, $blockquote, $heading1, $heading2, $heading3, $heading4, $heading5, $title1,
+  $title2, $title3, $title4, $body1, $body2, $body3, $string1, $string2, $string3, $snwFlyoutLink, $snwHeaderLink,
+  $snwHeadingHero1, $snwHeadingHero2, $displayMedium, $displaySmall, $headingLarge, $headingMedium, $headingSmall,
+  $headingExtraSmall, $bodyLarge, $bodyMedium, $bodySmall, $labelLarge, $labelMedium, $labelSmall, $linkStylised,
+  $linkLarge, $linkMedium, $linkSmall, $badgeSmall, $badgeMedium, $stringSmall;
 
 ////////////////////////
 /// Breakpoint TOKENS to be used for min-width comparisons, make sure they match BREAKPOINTS in constants.ts

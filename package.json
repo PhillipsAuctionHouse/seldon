@@ -37,7 +37,7 @@
     "coverage": "vitest run --project=unit --coverage",
     "test-storybook": "vitest run --project=storybook",
     "build": "npm run clean && tsc && vite build",
-    "chromatic": "STORYBOOK=1 chromatic",
+    "chromatic": "STORYBOOK=1 chromatic --build-script-name build:storybook",
     "build:storybook": "storybook build",
     "preview": "npx http-server storybook-static",
     "test:e2e": "playwright test e2e",

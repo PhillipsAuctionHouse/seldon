@@ -34,21 +34,18 @@ matching established neighbors.
 ## When invoked
 
 1. **Change-focused (preferred after a PR or local edits)**
-
    - Run `git diff --name-only` / `git diff main --name-only` and restrict to
      `src/components/**/*.tsx`.
    - For each added or materially changed component file, verify
      **`Basename.test.tsx`** exists in the same folder.
 
 2. **Full audit (when asked)**
-
    - Walk `src/components/**/` for `*.tsx` files (exclude `*.test.tsx`,
      `*.stories.tsx`).
    - For each, check for `SameName.test.tsx`.
    - Report missing pairs in a table.
 
 3. **Report**
-
    - **Summary:** files checked, missing tests count.
    - **Details:** path → status (OK / missing) → suggested cases (render smoke,
      main props, one edge case).

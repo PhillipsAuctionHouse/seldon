@@ -29,24 +29,20 @@ behavior has appropriate coverage per **`.agents/skills/seldon/SKILL.md`**.
 ## When invoked
 
 1. **Inventory e2e specs**
-
    - List `e2e/**/*.spec.ts` (and similar).
    - Extract **Storybook URLs** (`page.goto`, string literals with `path=/story/`).
 
 2. **Inventory stories (when doing a full audit)**
-
    - From the user’s change list or from `git diff`, list touched
      **`*.stories.tsx`** files and their story IDs / titles that represent user-visible
      behavior worth guarding.
 
 3. **Cross-check**
-
    - For each important story or flow, determine whether **at least one** spec
      loads that URL (or a stable parent story) and asserts key UI inside the
      iframe (`frameLocator('main iframe')` or project conventions).
 
 4. **Report**
-
    - **Summary:** specs found, stories considered, coverage vs gaps.
    - **Gaps table:** story / file → missing spec → suggested `e2e/*.spec.ts` name
      and minimal steps (reuse patterns from existing specs).

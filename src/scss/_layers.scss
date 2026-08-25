@@ -5,3 +5,8 @@
 // `vendor` is reserved for third-party CSS (e.g. flatpickr) so Seldon can
 // override it. Unlayered consumer CSS still beats every named layer.
 @layer vendor, seldon.foundation, seldon.components, seldon.patterns, seldon.site;
+
+// These tiers order CSS across tiers only. Two sheets in the same tier that style
+// the same element at the same specificity still tie, and a tie inside one layer
+// falls back to source order -- i.e. to JS import order. Keep each component's own
+// stylesheet import last so it wins those ties; see Button.tsx for the live case.

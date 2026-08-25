@@ -76,6 +76,19 @@
       }
     }
 
+    // Button owns type on the bordered variants rendered as <a>. The `:not(.#{$px}-link)` gate
+    // above deliberately skips `.#{$px}-link`, so these need their own (0,2,0) rule to beat Link's
+    // linkMedium wght 400. `--link` is the borderless standalone-link variant and keeps Link's 400.
+    &--primary.#{$px}-link,
+    &--secondary.#{$px}-link,
+    &--destructive.#{$px}-link {
+      font-variation-settings: 'wght' 600;
+
+      .#{$px}-text {
+        font-variation-settings: 'wght' 600;
+      }
+    }
+
     // Button owns paint on destructive-as-link (not Link)
     &--destructive.#{$px}-link {
       color: $warning-default;
