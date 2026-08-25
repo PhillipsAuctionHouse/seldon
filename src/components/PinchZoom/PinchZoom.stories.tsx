@@ -189,13 +189,8 @@ export const CarouselWithZoomModal = () => {
           </Carousel>
         </Modal>
       )}
-      <Carousel
-        loop
-        columnGap={SpacingTokens.md}
-        startIndex={currentSlide}
-        onSlideChange={setCurrentSlide}
-        style={{ maxWidth: '50%' }}
-      >
+      {/* startIndex is for a fresh mount (the modal). Live-binding it here re-inits Embla on every snap. */}
+      <Carousel loop columnGap={SpacingTokens.md} onSlideChange={setCurrentSlide} style={{ maxWidth: '50%' }}>
         <CarouselContent style={{ alignItems: 'center' }}>
           {images.map((image, index) => (
             <CarouselItem
