@@ -14,13 +14,12 @@
 // 📑 Pages
 @use 'pages/page';
 
-strong:not(.#{$px}-text),
-h1:not(.#{$px}-text),
-h2:not(.#{$px}-text),
-h3:not(.#{$px}-text),
-h4:not(.#{$px}-text),
-h5:not(.#{$px}-text),
-h6:not(.#{$px}-text) {
+// Distinct headings use the wght axis, not font-weight. Limit to the canvas
+// and docs body copy — Storybook chrome (Nunito Sans `.sbdocs-title`, error
+// headings) has no wght axis, so `font-weight: unset` would leave titles
+// regular. Exclude `.seldon-text` so unlayered headings cannot beat Text.
+#storybook-root :is(strong, h1, h2, h3, h4, h5, h6):not(.#{$px}-text),
+.sbdocs-content :is(strong, h1, h2, h3, h4, h5, h6):not(.#{$px}-text):not([class*='sbdocs']) {
   font-variation-settings: 'wght' 700;
   /* stylelint-disable-next-line declaration-property-value-disallowed-list */
   font-weight: unset;

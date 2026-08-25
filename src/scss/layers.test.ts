@@ -10,7 +10,7 @@ const LAYER_ORDER = '@layer vendor, seldon.foundation, seldon.components, seldon
 
 const compile = (relativePath: string): string =>
   sass.compile(path.join(srcRoot, relativePath), {
-    loadPaths: [path.resolve(srcRoot, '../node_modules')],
+    loadPaths: [srcRoot, path.resolve(srcRoot, '../node_modules')],
     importers: [
       {
         findFileUrl(url) {
@@ -108,5 +108,12 @@ describe('cascade layers', () => {
   it('right-aligns FiltersInline sort at md+', () => {
     const css = compile('patterns/FiltersInline/_filtersInline.scss');
     expect(css).toMatch(/filters-inline__sort\s*\{[^}]*margin-left:\s*auto/);
+  });
+
+  it('does not unset font-weight on Storybook docs titles', () => {
+    const css = compile('story-styles.scss');
+    expect(css).toContain('#storybook-root');
+    expect(css).toContain(':not([class*=sbdocs])');
+    expect(css).not.toMatch(/(?:^|})\s*strong:not\(\.seldon-text\),\s*h1:not\(\.seldon-text\)/);
   });
 });
