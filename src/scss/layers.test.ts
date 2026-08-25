@@ -42,10 +42,12 @@ describe('cascade layers', () => {
     expect(css).toContain('--desktop-max-width');
   });
 
-  it('does not set button font tokens on a composed .seldon-link node', () => {
+  it('does not set button font tokens on IconButton-as-link', () => {
     const css = compile('components/Button/_button.scss');
     expect(css).toContain('.seldon-button:not(.seldon-link):not(.seldon-button--link)');
-    expect(css).not.toMatch(/\.seldon-button--primary\.seldon-link\s*\{[^}]*font-variation-settings/);
+    expect(css).toMatch(
+      /\.seldon-button--primary\.seldon-link:not\(\.seldon-icon-button\)[\s\S]{0,500}font-variation-settings:\s*"wght"\s*600/,
+    );
   });
 
   it('lets Button own color on destructive-as-link', () => {

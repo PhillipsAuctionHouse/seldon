@@ -79,9 +79,11 @@
     // Button owns type on the bordered variants rendered as <a>. The `:not(.#{$px}-link)` gate
     // above deliberately skips `.#{$px}-link`, so these need their own (0,2,0) rule to beat Link's
     // linkMedium wght 400. `--link` is the borderless standalone-link variant and keeps Link's 400.
-    &--primary.#{$px}-link,
-    &--secondary.#{$px}-link,
-    &--destructive.#{$px}-link {
+    // Skip IconButton: it wraps Button on the same node, so this rule would set wght 600 on an
+    // icon-only <a> (Pagination chevrons). That only changes the font strut — a 1px Chromatic shift.
+    &--primary.#{$px}-link:not(.#{$px}-icon-button),
+    &--secondary.#{$px}-link:not(.#{$px}-icon-button),
+    &--destructive.#{$px}-link:not(.#{$px}-icon-button) {
       font-variation-settings: 'wght' 600;
 
       .#{$px}-text {
