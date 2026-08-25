@@ -12,6 +12,8 @@
       border: none;
       cursor: pointer;
 
+      // This trigger is a calendar control in a text row, not a square IconButton.
+      // Keep Button's inline-flex + 44px; IconButton's flex + $spacing-md would shrink it.
       &.#{$px}-button {
         display: inline-flex;
         height: 44px;

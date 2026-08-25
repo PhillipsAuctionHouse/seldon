@@ -58,7 +58,6 @@
 
     &--ghost {
       border: 1px solid transparent;
-      border-color: transparent;
 
       svg {
         color: $keyline-gray;
@@ -183,7 +182,6 @@
 
     &--ghost.#{$px}-button {
       border: 1px solid transparent;
-      border-color: transparent;
 
       svg {
         color: $keyline-gray;
