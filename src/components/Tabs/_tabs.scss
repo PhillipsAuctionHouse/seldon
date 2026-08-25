@@ -1,86 +1,89 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-tabs-container {
-  width: 100%;
+@layer seldon.components {
+  .#{$px}-tabs-container {
+    width: 100%;
 
-  &__tabs-list {
-    display: flex;
-    gap: 1rem;
-    overflow: visible;
-    position: relative;
-  }
+    &__tabs-list {
+      display: flex;
+      gap: 1rem;
+      overflow: visible;
+      position: relative;
+    }
 
-  &__tabs-trigger {
-    background: none;
-    border: none;
-    border-bottom: 2px solid transparent;
-    padding-bottom: $spacing-sm;
-    padding-inline: 0;
-    position: relative;
-    transition:
-      background 0.2s ease,
-      font-weight 0.2s ease-out,
-      border-bottom 0.2s ease-out;
+    &__tabs-trigger {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding-bottom: $spacing-sm;
+      padding-inline: 0;
+      position: relative;
+      transition:
+        background 0.2s ease,
+        font-weight 0.2s ease-out,
+        border-bottom 0.2s ease-out;
 
-    &:focus-visible {
-      outline: none;
+      &:focus-visible {
+        outline: none;
 
-      &::after {
-        border: 2px solid $focus-default;
-        border-radius: $radius-xs;
-        content: '';
-        inset: -4px -4px -6px;
-        pointer-events: none;
-        position: absolute;
-        z-index: 1;
+        &::after {
+          border: 2px solid $focus-default;
+          border-radius: $radius-xs;
+          content: '';
+          inset: -4px -4px -6px;
+          pointer-events: none;
+          position: absolute;
+          z-index: 1;
+        }
+      }
+
+      .#{$px}-text {
+        color: $button-hover;
+        cursor: pointer;
+        font-variation-settings: 'wght' 600;
+
+        &:hover {
+          color: $pure-black;
+        }
       }
     }
 
-    .#{$px}-text {
-      color: $button-hover;
-      cursor: pointer;
-      font-variation-settings: 'wght' 600;
+    &__tabs-trigger[data-state='active'] {
+      border-bottom: 2px solid $pure-black;
+      color: $pure-black;
 
-      &:hover {
+      &:focus-visible {
+        outline: none;
+
+        &::after {
+          border: 2px solid $focus-default;
+          border-radius: $radius-xs;
+          content: '';
+          inset: -6px -6px -8px;
+          pointer-events: none;
+          position: absolute;
+          z-index: 1;
+        }
+      }
+      .#{$px}-text {
         color: $pure-black;
       }
     }
-  }
 
-  &__tabs-trigger[data-state='active'] {
-    border-bottom: 2px solid $pure-black;
-    color: $pure-black;
-
-    &:focus-visible {
-      outline: none;
-
-      &::after {
-        border: 2px solid $focus-default;
-        border-radius: $radius-xs;
-        content: '';
-        inset: -6px -6px -8px;
-        pointer-events: none;
-        position: absolute;
-        z-index: 1;
-      }
+    /* Underline effect for active tab */
+    &__full-bleed-underline {
+      background: $light-gray;
+      bottom: 0;
+      height: 1px;
+      left: 0;
+      position: absolute;
+      right: 0;
+      transition: transform 0.2s ease; /* Underline animation */
     }
-    .#{$px}-text {
-      color: $pure-black;
+
+    &__tabs-content {
+      padding: 20px 0;
     }
-  }
-
-  /* Underline effect for active tab */
-  &__full-bleed-underline {
-    background: $light-gray;
-    bottom: 0;
-    height: 1px;
-    left: 0;
-    position: absolute;
-    right: 0;
-    transition: transform 0.2s ease; /* Underline animation */
-  }
-
-  &__tabs-content {
-    padding: 20px 0;
   }
 }

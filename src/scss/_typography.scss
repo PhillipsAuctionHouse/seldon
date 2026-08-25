@@ -1,69 +1,72 @@
 @use './vars' as *;
+@use './layers';
 
-html,
-body {
-  font-family:
-    Montserrat,
-    -apple-system,
-    BlinkMacSystemFont,
-    'avenir next',
-    avenir,
-    'segoe ui',
-    'helvetica neue',
-    helvetica,
-    Cantarell,
-    Ubuntu,
-    roboto,
-    noto,
-    arial,
-    sans-serif;
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  margin: 0;
-  -webkit-overflow-scrolling: touch;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0%);
-}
+@layer seldon.foundation {
+  html,
+  body {
+    font-family:
+      Montserrat,
+      -apple-system,
+      BlinkMacSystemFont,
+      'avenir next',
+      avenir,
+      'segoe ui',
+      'helvetica neue',
+      helvetica,
+      Cantarell,
+      Ubuntu,
+      roboto,
+      noto,
+      arial,
+      sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0%);
+  }
 
-/** Fonts **/
-@font-face {
-  font-display: swap;
-  font-family: DistinctDisplay;
-  src:
-    url('../fonts/Distinct-Display.woff2') format('woff2'),
-    url('../fonts/Distinct-Display.woff') format('woff');
-}
+  /** Fonts **/
+  @font-face {
+    font-display: swap;
+    font-family: DistinctDisplay;
+    src:
+      url('../fonts/Distinct-Display.woff2') format('woff2'),
+      url('../fonts/Distinct-Display.woff') format('woff');
+  }
 
-@font-face {
-  font-display: swap;
-  font-family: DistinctDisplay;
-  font-style: italic;
-  src:
-    url('../fonts/Distinct-DisplayItalic.woff2') format('woff2'),
-    url('../fonts/Distinct-DisplayItalic.woff') format('woff');
-}
+  @font-face {
+    font-display: swap;
+    font-family: DistinctDisplay;
+    font-style: italic;
+    src:
+      url('../fonts/Distinct-DisplayItalic.woff2') format('woff2'),
+      url('../fonts/Distinct-DisplayItalic.woff') format('woff');
+  }
 
-@font-face {
-  font-display: swap;
-  font-family: Montserrat;
-  src:
-    url('../fonts/Montserrat.woff2') format('woff2'),
-    url('../fonts/Montserrat.woff') format('woff');
-}
+  @font-face {
+    font-display: swap;
+    font-family: Montserrat;
+    src:
+      url('../fonts/Montserrat.woff2') format('woff2'),
+      url('../fonts/Montserrat.woff') format('woff');
+  }
 
-@font-face {
-  font-display: swap;
-  font-family: Distinct;
-  src:
-    url('../fonts/Distinct-Text.woff2') format('woff2'),
-    url('../fonts/Distinct-Text.woff') format('woff');
-}
+  @font-face {
+    font-display: swap;
+    font-family: Distinct;
+    src:
+      url('../fonts/Distinct-Text.woff2') format('woff2'),
+      url('../fonts/Distinct-Text.woff') format('woff');
+  }
 
-@font-face {
-  font-display: swap;
-  font-family: Distinct;
-  font-style: italic;
-  src:
-    url('../fonts/Distinct-Italic.woff2') format('woff2'),
-    url('../fonts/Distinct-Italic.woff') format('woff');
+  @font-face {
+    font-display: swap;
+    font-family: Distinct;
+    font-style: italic;
+    src:
+      url('../fonts/Distinct-Italic.woff2') format('woff2'),
+      url('../fonts/Distinct-Italic.woff') format('woff');
+  }
 }

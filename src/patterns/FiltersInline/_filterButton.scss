@@ -1,50 +1,53 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-filter-button {
-  border: 2px solid $bg-border;
-  border-radius: $radius-3xl;
-  gap: 4px;
-  height: inherit;
-  padding: $spacing-xsm $spacing-sm;
+@layer seldon.patterns {
+  .#{$px}-filter-button {
+    border: 2px solid $bg-border;
+    border-radius: $radius-3xl;
+    gap: 4px;
+    height: inherit;
+    padding: $spacing-xsm $spacing-sm;
 
-  &:hover {
-    border: 2px solid $black-100;
-    box-shadow: none;
-  }
-
-  &:focus-visible {
-    @include focus-ring($border-radius: $radius-3xl);
-  }
-
-  &--selected {
-    border: 2px solid $black-100;
+    &:hover {
+      border: 2px solid $black-100;
+      box-shadow: none;
+    }
 
     &:focus-visible {
       @include focus-ring($border-radius: $radius-3xl);
     }
-  }
 
-  &__label {
-    font-variation-settings: 'wght' 600;
-  }
+    &--selected {
+      border: 2px solid $black-100;
 
-  &--count.#{$px}-filter-button--count.#{$px}-text {
-    background: $black-100;
-    border: 2px solid $white-100;
-    border-radius: $radius-3xl;
-    color: $white-100;
-    display: inline-block;
-    font-variation-settings: 'wght' 600;
-    height: 1.5rem;
-    line-height: 1.2rem;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    top: -15px;
-    width: 1.5rem;
+      &:focus-visible {
+        @include focus-ring($border-radius: $radius-3xl);
+      }
+    }
 
-    @include media($breakpoint-md) {
-      line-height: 1.3rem;
+    &__label {
+      font-variation-settings: 'wght' 600;
+    }
+
+    &--count.#{$px}-filter-button--count.#{$px}-text {
+      background: $black-100;
+      border: 2px solid $white-100;
+      border-radius: $radius-3xl;
+      color: $white-100;
+      display: inline-block;
+      font-variation-settings: 'wght' 600;
+      height: 1.5rem;
+      line-height: 1.2rem;
+      position: absolute;
+      right: 0;
+      text-align: center;
+      top: -15px;
+      width: 1.5rem;
+
+      @include media($breakpoint-md) {
+        line-height: 1.3rem;
+      }
     }
   }
 }

@@ -1,121 +1,212 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-icon-button {
-  align-items: center;
-  display: flex;
-  height: $spacing-md;
-  justify-content: center;
-  padding: 0;
-  width: $spacing-md;
-
-  & svg {
-    height: $button-label-line-height;
-    pointer-events: none;
-    width: $button-label-line-height;
-
-    @include hoverOrActive {
-      color: $white-100;
-    }
-  }
-
-  &:focus-visible {
-    @include focus-ring($border-radius: $radius-3xl);
-
-    svg {
-      fill: $pure-white;
-    }
-  }
-
-  &--primary,
-  &--ghost {
-    background: $pure-white;
-    color: $pure-black;
+@layer seldon.components {
+  .#{$px}-icon-button {
+    align-items: center;
+    display: flex;
+    height: $spacing-md;
+    justify-content: center;
+    padding: 0;
+    width: $spacing-md;
 
     & svg {
-      color: $pure-black;
-      height: calc($button-label-line-height * 1.5); // design-cheats-for-button-large
-      margin-inline-end: unset;
-      width: calc($button-label-line-height * 1.5); // design-cheats-for-button-large
+      height: $button-label-line-height;
+      pointer-events: none;
+      width: $button-label-line-height;
 
-      path {
-        fill: $pure-black;
+      @include hoverOrActive {
+        color: $white-100;
       }
     }
 
-    @include hoverOrActive {
+    &:focus-visible {
+      @include focus-ring($border-radius: $radius-3xl);
+
       svg {
-        color: $pure-white;
-
-        path {
-          color: $pure-white;
-          fill: $pure-white;
-        }
+        fill: $pure-white;
       }
     }
-  }
 
-  &--ghost {
-    border: 1px solid transparent;
-    border-color: transparent;
+    &--primary,
+    &--ghost {
+      background: $pure-white;
+      color: $pure-black;
 
-    svg {
-      color: $keyline-gray;
-
-      path {
-        color: $keyline-gray;
-      }
-    }
-  }
-
-  &--secondary {
-    height: $spacing-lg;
-    width: $spacing-lg;
-  }
-
-  &--secondary,
-  &--tertiary.#{$px}-icon-button {
-    &:focus-visible {
-      @include focus-ring($border-radius: $radius-3xl);
-    }
-
-    & > svg {
-      fill: $pure-black;
-      margin-inline-end: unset;
-      position: absolute;
-
-      path {
-        fill: $pure-black;
-      }
-    }
-  }
-
-  &--tertiary {
-    &:focus-visible {
-      @include focus-ring($border-radius: $radius-3xl);
-    }
-
-    @include hoverOrActive {
       & svg {
-        color: $cta-hover;
-        fill: $cta-hover;
+        color: $pure-black;
+        height: calc($button-label-line-height * 1.5); // design-cheats-for-button-large
         margin-inline-end: unset;
+        width: calc($button-label-line-height * 1.5); // design-cheats-for-button-large
 
         path {
-          fill: $cta-hover;
+          fill: $pure-black;
+        }
+      }
+
+      @include hoverOrActive {
+        svg {
+          color: $pure-white;
+
+          path {
+            color: $pure-white;
+            fill: $pure-white;
+          }
         }
       }
     }
-  }
 
-  &:disabled {
-    background-color: $white-100;
-    border: 1px solid $light-gray;
+    &--ghost {
+      border: 1px solid transparent;
 
-    svg {
-      fill: $light-gray;
+      svg {
+        color: $keyline-gray;
 
-      path {
+        path {
+          color: $keyline-gray;
+        }
+      }
+    }
+
+    &--secondary {
+      height: $spacing-lg;
+      width: $spacing-lg;
+    }
+
+    &--secondary,
+    &--tertiary.#{$px}-icon-button {
+      &:focus-visible {
+        @include focus-ring($border-radius: $radius-3xl);
+      }
+
+      & > svg {
+        fill: $pure-black;
+        margin-inline-end: unset;
+        position: absolute;
+
+        path {
+          fill: $pure-black;
+        }
+      }
+    }
+
+    &--tertiary {
+      &:focus-visible {
+        @include focus-ring($border-radius: $radius-3xl);
+      }
+
+      @include hoverOrActive {
+        & svg {
+          color: $cta-hover;
+          fill: $cta-hover;
+          margin-inline-end: unset;
+
+          path {
+            fill: $cta-hover;
+          }
+        }
+      }
+    }
+
+    &:disabled {
+      background-color: $white-100;
+      border: 1px solid $light-gray;
+
+      svg {
         fill: $light-gray;
+
+        path {
+          fill: $light-gray;
+        }
+      }
+    }
+
+    // Dual-BEM tie-break: IconButton wraps Button, so both roots share a node.
+    // Compound selectors beat `.seldon-button` regardless of sheet order.
+    // Prefer not wrapping Button — delete this block when IconButton owns its node.
+    &.#{$px}-button {
+      display: flex;
+      height: $spacing-md;
+      padding: 0;
+      width: $spacing-md;
+
+      svg {
+        height: $button-label-line-height;
+        width: $button-label-line-height;
+      }
+
+      &:focus-visible {
+        @include focus-ring($border-radius: $radius-3xl);
+      }
+
+      &:disabled {
+        background-color: $white-100;
+        border: 1px solid $light-gray;
+
+        svg {
+          fill: $light-gray;
+
+          path {
+            fill: $light-gray;
+          }
+        }
+      }
+    }
+
+    &--primary.#{$px}-button,
+    &--ghost.#{$px}-button {
+      background: $pure-white;
+      color: $pure-black;
+
+      svg {
+        color: $pure-black;
+        height: calc($button-label-line-height * 1.5); // design-cheats-for-button-large
+        width: calc($button-label-line-height * 1.5); // design-cheats-for-button-large
+
+        path {
+          fill: $pure-black;
+        }
+      }
+
+      @include hoverOrActive {
+        svg {
+          color: $pure-white;
+
+          path {
+            color: $pure-white;
+            fill: $pure-white;
+          }
+        }
+      }
+    }
+
+    &--ghost.#{$px}-button {
+      border: 1px solid transparent;
+
+      svg {
+        color: $keyline-gray;
+
+        path {
+          color: $keyline-gray;
+        }
+      }
+    }
+
+    &--secondary.#{$px}-button {
+      height: $spacing-lg;
+      width: $spacing-lg;
+    }
+
+    &--tertiary.#{$px}-button {
+      @include hoverOrActive {
+        svg {
+          color: $cta-hover;
+          fill: $cta-hover;
+
+          path {
+            fill: $cta-hover;
+          }
+        }
       }
     }
   }

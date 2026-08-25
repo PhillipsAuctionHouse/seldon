@@ -1,69 +1,81 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-select-input {
-  margin-bottom: $spacing-sm;
-  position: relative;
-
-  &__standalone {
-    margin-bottom: 0;
-  }
-
-  .#{$px}-select-container {
+@layer seldon.components {
+  .#{$px}-select-input {
+    margin-bottom: $spacing-sm;
     position: relative;
 
-    &--show__icon {
-      select {
-        appearance: none;
-        color: $black-100;
-        padding-right: 3rem;
+    &.#{$px}-input {
+      width: fit-content;
+    }
 
-        @media (min-width: $breakpoint-md) {
-          padding-right: 3.25rem;
+    .#{$px}-input__input {
+      background: transparent;
+      width: fit-content;
+    }
+
+    &__standalone {
+      margin-bottom: 0;
+    }
+
+    .#{$px}-select-container {
+      position: relative;
+
+      &--show__icon {
+        select {
+          appearance: none;
+          color: $black-100;
+          padding-right: 3rem;
+
+          @media (min-width: $breakpoint-md) {
+            padding-right: 3.25rem;
+          }
         }
       }
     }
-  }
 
-  svg {
-    height: 1rem;
-    pointer-events: none;
-    position: absolute;
-    right: 0.35rem;
-    top: 45%;
-    transform: translateY(-45%);
-    width: 1rem;
+    svg {
+      height: 1rem;
+      pointer-events: none;
+      position: absolute;
+      right: 0.35rem;
+      top: 45%;
+      transform: translateY(-45%);
+      width: 1rem;
 
-    @media (min-width: $breakpoint-md) {
-      height: 1.25rem;
-      right: 0.5rem;
-      width: 1.25rem;
+      @media (min-width: $breakpoint-md) {
+        height: 1.25rem;
+        right: 0.5rem;
+        width: 1.25rem;
+      }
+
+      path {
+        fill: $pure-black;
+      }
     }
 
-    path {
-      fill: $pure-black;
-    }
-  }
+    select.#{$px}-input {
+      &__select {
+        &--tertiary {
+          border: 1.5px solid $black-100;
+          border-radius: $radius-3xl;
+          color: inherit;
+          padding: $spacing-xsm $spacing-md $spacing-xsm $spacing-sm;
 
-  select.#{$px}-input {
-    &__select {
-      &--tertiary {
-        border: 1.5px solid $black-100;
-        border-radius: $radius-3xl;
-        color: inherit;
-        padding: $spacing-xsm $spacing-md $spacing-xsm $spacing-sm;
+          &:hover {
+            cursor: pointer;
+          }
 
-        &:hover {
-          cursor: pointer;
-        }
+          &:focus-visible {
+            @include focus-ring($border-radius: $radius-3xl);
 
-        &:focus-visible {
-          @include focus-ring($border-radius: $radius-3xl);
+            background-color: $pure-white;
+          }
 
-          background-color: $pure-white;
-        }
-
-        svg {
-          top: 0.625rem;
+          svg {
+            top: 0.625rem;
+          }
         }
       }
     }

@@ -1,5 +1,4 @@
-// Component styles first. `_input.scss` provides the base `.seldon-input` wrapper styling that
-// Select's markup reuses; load it before `_select.scss` so the select modifiers win the cascade.
+// Select reuses Input class names; load Input CSS even though we don't mount <Input>.
 import '../Input/_input.scss';
 import './_select.scss';
 import * as React from 'react';

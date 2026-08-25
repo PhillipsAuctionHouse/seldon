@@ -1,6 +1,5 @@
-// Component styles first. `_toggle.scss` is needed because <Input type="toggle"> renders the
-// toggle markup whose pill/knob styling lives in the Toggle component's stylesheet.
 import './_input.scss';
+// Toggle has no TSX module; type="toggle" reuses this sheet for the pill/knob.
 import '../Toggle/_toggle.scss';
 import * as React from 'react';
 import classnames from 'classnames';

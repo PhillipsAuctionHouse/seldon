@@ -7,7 +7,7 @@ src/
   components/     React components (co-located *.stories.tsx, *.test.tsx, _*.scss)
   patterns/       Composed UI patterns built from components
   design/         Internal design / token surfaces for Storybook
-  scss/           Global partials (_vars.scss, _utils.scss, allPartials, foundation, …)
+  scss/           Global partials (_vars.scss, _utils.scss, allPartials, foundation, layers, …)
   utils/          Shared helpers (e.g. px, testUtils)
   assets/         Raw SVG / pictograms and SVGR-generated TSX
 e2e/              Playwright tests (Storybook iframe, not a deployed app)

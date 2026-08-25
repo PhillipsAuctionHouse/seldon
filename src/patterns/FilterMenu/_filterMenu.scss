@@ -1,16 +1,19 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-filter-menu {
-  align-self: stretch;
-  overflow-y: scroll;
-  padding-bottom: $spacing-sm;
+@layer seldon.patterns {
+  .#{$px}-filter-menu {
+    align-self: stretch;
+    overflow-y: scroll;
+    padding-bottom: $spacing-sm;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  .#{$px}-filter:not([hidden]) + .#{$px}-filter {
-    border-top: 1px solid $light-gray;
-    margin-top: $spacing-sm;
-    padding-top: $spacing-md;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .#{$px}-filter:not([hidden]) + .#{$px}-filter {
+      border-top: 1px solid $light-gray;
+      margin-top: $spacing-sm;
+      padding-top: $spacing-md;
+    }
   }
 }
