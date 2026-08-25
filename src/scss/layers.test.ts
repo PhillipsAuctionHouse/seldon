@@ -48,6 +48,17 @@ describe('cascade layers', () => {
     expect(css).not.toMatch(/\.seldon-button--primary\.seldon-link\s*\{[^}]*font-variation-settings/);
   });
 
+  it('lets Button own color on destructive-as-link', () => {
+    const css = compile('components/Button/_button.scss');
+    expect(css).toMatch(/\.seldon-button--destructive\.seldon-link\s*\{[^}]*color:/);
+  });
+
+  it('lets IconButton own box and paint when composed with Button', () => {
+    const css = compile('components/IconButton/_iconButton.scss');
+    expect(css).toContain('.seldon-icon-button.seldon-button');
+    expect(css).toContain('.seldon-icon-button--primary.seldon-button');
+  });
+
   it('keeps select-specific input rules in Select, not Input', () => {
     const selectCss = compile('components/Select/_select.scss');
     const inputCss = compile('components/Input/_input.scss');

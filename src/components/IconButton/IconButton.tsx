@@ -32,6 +32,8 @@ export interface IconButtonProps extends Omit<React.HTMLAttributes<HTMLButtonEle
   prefetch?: ButtonProps['prefetch'];
 }
 
+// wraps Button, so `.seldon-icon-button` and `.seldon-button` land on one
+// node and collide at the same level. maybe better not to wrap
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ children, variant = ButtonVariants.primary, isDisabled = false, className, ...props }, ref) => {
     const { className: baseClass, ...commonProps } = getCommonProps(props, 'IconButton');

@@ -46,7 +46,9 @@ product API clients here.
   `SeldonProvider` (and by `componentStyles.scss` if a consumer still uses the
   Sass barrel). Emitting SCSS is wrapped in `@layer seldon.*` (see
   `src/scss/_layers.scss`; third-party CSS in `vendor`) so equal-specificity
-  ties are not JS-import-order dependent.
+  ties are not JS-import-order dependent. Same-layer dual-BEM still needs an
+  owner (compound selector or `:not()`). Do not wrap `Button` for new icon
+  controls — IconButton’s compounds are leftover from that wrap.
 - Prefer existing primitives (`Text`, `Button`, `Grid`, etc.) before adding
   parallel patterns.
 - Do not use the mixin for `@include text(variant)` in the SCSS files, instead use the <Text variant="..."> component.

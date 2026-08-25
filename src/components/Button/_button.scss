@@ -76,6 +76,11 @@
       }
     }
 
+    // Button owns paint on destructive-as-link (not Link)
+    &--destructive.#{$px}-link {
+      color: $warning-default;
+    }
+
     &:not(.#{$px}-button--link) {
       &.#{$px}-button--primary {
         color: $white-100;
