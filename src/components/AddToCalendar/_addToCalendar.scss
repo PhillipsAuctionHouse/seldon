@@ -4,27 +4,25 @@
 @layer seldon.components {
   .#{$px}-add-to-calendar {
     svg {
-      height: 30px;
-      width: 30px;
+      height: $spacing-md;
+      width: $spacing-md;
     }
     .#{$px}-icon-button {
       background: transparent;
       border: none;
       cursor: pointer;
 
-      // Calendar glyph is 30px in a text row. Don't inherit Button's 44px
-      // text-control padding/height or IconButton's $spacing-md square.
+      // Calendar trigger is IconButton’s $spacing-md square. Fill it — the
+      // composed Button box is 44px and IconButton’s default svg is 1rem.
       &.#{$px}-button {
-        display: inline-flex;
-        gap: 0;
-        height: auto;
+        height: $spacing-md;
         padding: 0;
-        width: auto;
+        width: $spacing-md;
 
         svg {
-          height: 30px;
+          height: $spacing-md;
           max-width: none;
-          width: 30px;
+          width: $spacing-md;
         }
       }
 

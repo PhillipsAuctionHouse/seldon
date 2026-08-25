@@ -86,10 +86,11 @@ describe('cascade layers', () => {
     expect(css).toMatch(/\.seldon-button--link\s*\{[^}]*font-variation-settings:\s*['"]wght['"] 400/);
   });
 
-  it('keeps AddToCalendar glyph at 30px when composed with IconButton', () => {
+  it('keeps AddToCalendar trigger at $spacing-md (28px) when composed with IconButton', () => {
     const css = compile('components/AddToCalendar/_addToCalendar.scss');
-    expect(css).toMatch(/\.seldon-icon-button\.seldon-button\s*\{[^}]*padding:\s*0/);
-    expect(css).toMatch(/\.seldon-icon-button\.seldon-button svg\s*\{[^}]*width:\s*30px/);
+    expect(css).toMatch(/\.seldon-icon-button\.seldon-button\s*\{[^}]*height:\s*var\(--spacing-md\)/);
+    expect(css).toMatch(/\.seldon-icon-button\.seldon-button\s*\{[^}]*width:\s*var\(--spacing-md\)/);
+    expect(css).toMatch(/\.seldon-icon-button\.seldon-button svg\s*\{[^}]*width:\s*var\(--spacing-md\)/);
   });
 
   it('keeps ViewingDetails session labels at wght 600', () => {
