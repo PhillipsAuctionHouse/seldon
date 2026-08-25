@@ -57,10 +57,10 @@
       }
     }
 
-    // Link owns type when Button renders as <Link>. Don't set font tokens on
-    // the composed node — equal-specificity ties against `.seldon-link--*`
-    // would otherwise depend on JS import order.
-    &:not(.#{$px}-link) {
+    // Link owns type on Button-as-<a> (`.seldon-link`). `--link` owns type on
+    // the text-button variant. Gating only `.seldon-link` left `--link` at
+    // (0,2,0) so wght 600 beat `--link`'s 400.
+    &:not(.#{$px}-link):not(.#{$px}-button--link) {
       // we need this because we can't be sure that the Text component is being used as a child of the Button component
       @include text($labelMedium);
 

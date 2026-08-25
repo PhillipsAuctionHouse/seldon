@@ -44,13 +44,18 @@ describe('cascade layers', () => {
 
   it('does not set button font tokens on a composed .seldon-link node', () => {
     const css = compile('components/Button/_button.scss');
-    expect(css).toContain('.seldon-button:not(.seldon-link)');
+    expect(css).toContain('.seldon-button:not(.seldon-link):not(.seldon-button--link)');
     expect(css).not.toMatch(/\.seldon-button--primary\.seldon-link\s*\{[^}]*font-variation-settings/);
   });
 
   it('lets Button own color on destructive-as-link', () => {
     const css = compile('components/Button/_button.scss');
     expect(css).toMatch(/\.seldon-button--destructive\.seldon-link\s*\{[^}]*color:/);
+  });
+
+  it('keeps Footer from stacking Social icon lists', () => {
+    const css = compile('site-furniture/Footer/_footer.scss');
+    expect(css).toMatch(/\.seldon-social\s+ul\s*\{[^}]*flex-direction:\s*row/);
   });
 
   it('lets IconButton own box and paint when composed with Button', () => {

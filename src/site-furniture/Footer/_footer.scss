@@ -16,6 +16,12 @@
       gap: $spacing-micro;
     }
 
+    // Site layer beats patterns regardless of spec. Keep Social's icon row.
+    .#{$px}-social ul {
+      flex-direction: row;
+      gap: 0 2rem;
+    }
+
     &__links {
       display: flex;
       flex-direction: column;
