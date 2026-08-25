@@ -5,6 +5,9 @@ import { px, useNormalizedInputProps } from '../../utils';
 import { Icon } from '../Icon';
 import Text from '../Text/Text';
 import { TextVariants } from '../Text/types';
+// `_input.scss` provides `.seldon-input__validation`, which useNormalizedInputProps emits for the
+// invalid/warn message; load it before `_textArea.scss` so TextArea's own rules win the cascade.
+import '../Input/_input.scss';
 import './_textArea.scss';
 
 export interface TextAreaProps extends ComponentProps<'textarea'> {

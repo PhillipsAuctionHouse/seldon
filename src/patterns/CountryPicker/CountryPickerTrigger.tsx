@@ -7,6 +7,9 @@ import { Country, ModalBaseProps } from './types';
 import React, { forwardRef } from 'react';
 import { useNormalizedInputProps } from '../../utils';
 import { getInputClassNames } from '../../components/Input/utils';
+// `_input.scss` provides `.seldon-input__label`/`__input`/`__validation`, which this trigger reuses via
+// getInputClassNames and useNormalizedInputProps; load it first so the trigger's rules win the cascade.
+import '../../components/Input/_input.scss';
 import './_countryPickerTrigger.scss';
 
 // Props specific to the trigger, also used by the parent modal
