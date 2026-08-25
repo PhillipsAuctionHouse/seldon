@@ -12,8 +12,6 @@
       border: none;
       cursor: pointer;
 
-      // IconButton compounds lock $spacing-md over Button 44px. This story's
-      // pre-layer look was Button last — restore that box without un-layering.
       &.#{$px}-button {
         display: inline-flex;
         height: 44px;
