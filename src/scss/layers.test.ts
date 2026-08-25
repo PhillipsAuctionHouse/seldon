@@ -88,6 +88,7 @@ describe('cascade layers', () => {
 
   it('keeps AddToCalendar glyph at 30px when composed with IconButton', () => {
     const css = compile('components/AddToCalendar/_addToCalendar.scss');
+    expect(css).toMatch(/\.seldon-icon-button\.seldon-button\s*\{[^}]*padding:\s*0/);
     expect(css).toMatch(/\.seldon-icon-button\.seldon-button svg\s*\{[^}]*width:\s*30px/);
   });
 

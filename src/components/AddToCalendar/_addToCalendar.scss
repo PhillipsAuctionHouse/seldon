@@ -12,12 +12,13 @@
       border: none;
       cursor: pointer;
 
-      // Calendar control in a text row: keep Button's 44px box and this
-      // 30px glyph. IconButton's $spacing-md / 1rem svg would shrink both.
+      // Calendar glyph is 30px in a text row. Don't inherit Button's 44px
+      // text-control padding/height or IconButton's $spacing-md square.
       &.#{$px}-button {
         display: inline-flex;
-        height: 44px;
-        padding: 0 $padding-sm;
+        gap: 0;
+        height: auto;
+        padding: 0;
         width: auto;
 
         svg {
