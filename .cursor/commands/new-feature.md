@@ -8,11 +8,13 @@ implementation structure.
 ## Steps
 
 1. **Define requirements**
+
    - Clarify feature scope and goals
    - Identify user stories and acceptance criteria
    - Plan technical approach
 
 2. **Create feature branch**
+
    - Branch from main/develop
    - Set up local development environment
    - Configure any new dependencies
