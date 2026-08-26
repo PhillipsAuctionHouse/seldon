@@ -10,8 +10,10 @@ export interface CarouselDotProps extends ComponentProps<'button'> {
   onClick: () => void;
   /** Reference to the scrollable container */
   scrollableContainerRef: React.RefObject<HTMLDivElement>;
+  /** Index of this dot among its siblings, forwarded to onInViewChange */
+  index: number;
   /** Callback function when the dot comes into view within the scrollable container */
-  onInViewChange: (inView: boolean) => void;
+  onInViewChange: (index: number, inView: boolean) => void;
   /** Variant of the dot */
   variant?: 'sm' | 'md';
 }
@@ -20,6 +22,7 @@ export const CarouselDot = ({
   isSelected,
   onClick,
   scrollableContainerRef,
+  index,
   onInViewChange,
   variant = 'md',
   ...props
@@ -29,7 +32,7 @@ export const CarouselDot = ({
     threshold: 0,
     root: scrollableContainerRef.current,
     onChange(inView) {
-      onInViewChange(inView);
+      onInViewChange(index, inView);
     },
   });
 

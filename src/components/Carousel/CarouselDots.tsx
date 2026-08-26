@@ -68,7 +68,10 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
     );
 
     const onInit = useCallback((emblaApi: EmblaCarouselType) => {
-      setScrollSnaps(emblaApi.scrollSnapList());
+      setScrollSnaps((prev) => {
+        const next = emblaApi.scrollSnapList();
+        return prev.length === next.length && prev.every((value, i) => value === next[i]) ? prev : next;
+      });
     }, []);
 
     const onSelect = useCallback(
@@ -86,6 +89,13 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
       [onSlideChange],
     );
 
+    const onInViewChange = useCallback((index: number, inView: boolean) => {
+      setInViewDots((prev) => {
+        if (inView) return prev.includes(index) ? prev : [...prev, index];
+        return prev.includes(index) ? prev.filter((dot) => dot !== index) : prev;
+      });
+    }, []);
+
     useEffect(() => {
       if (!api) {
         return;
@@ -99,7 +109,7 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
       };
     }, [api, onInit, onSelect, onSettle]);
 
-    const sortedInViewDots = useMemo(() => inViewDots.sort((a, b) => a - b), [inViewDots]);
+    const sortedInViewDots = useMemo(() => [...inViewDots].sort((a, b) => a - b), [inViewDots]);
 
     return (
       <div
@@ -139,18 +149,13 @@ const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
               return (
                 <CarouselDot
                   key={`${id}-dot-${index}`}
+                  index={index}
                   onClick={() => onDotButtonClick(index)}
                   isSelected={isSelected}
                   aria-label={`Go to slide ${index + 1}`}
                   aria-current={isSelected ? 'true' : undefined}
                   scrollableContainerRef={scrollableContainerRef}
-                  onInViewChange={(inView) => {
-                    if (inView) {
-                      setInViewDots((prev) => [...prev, index]);
-                    } else {
-                      setInViewDots((prev) => prev.filter((dot) => dot !== index));
-                    }
-                  }}
+                  onInViewChange={onInViewChange}
                   variant={isShrinked ? 'sm' : 'md'}
                 />
               );
