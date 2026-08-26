@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { useEffect } from 'react';
 import { Mock, vi } from 'vitest';
 import CarouselDots from './CarouselDots';
 import { useCarousel } from './utils';
@@ -8,8 +9,17 @@ vi.mock('./utils', () => ({
   useCarousel: vi.fn(),
 }));
 
+// Mirrors how a naive `useInView` mock re-fires `onChange` whenever its
+// identity changes between renders — the same shape of mock that let this
+// loop hide in Remix's tests. A stable, idempotent `onInViewChange` must
+// settle under this; a fresh inline callback recreated every render will not.
 vi.mock('react-intersection-observer', () => ({
-  useInView: () => ({ ref: vi.fn() }),
+  useInView: ({ onChange }: { onChange?: (inView: boolean) => void }) => {
+    useEffect(() => {
+      onChange?.(true);
+    }, [onChange]);
+    return { ref: vi.fn() };
+  },
 }));
 
 describe('CarouselDots', () => {
@@ -77,5 +87,14 @@ describe('CarouselDots', () => {
 
     expect(mockScrollTo).toHaveBeenCalledWith(2);
     expect(mockOnSlideChange).toHaveBeenCalledWith(2);
+  });
+
+  it('does not enter an infinite update loop when a dot repeatedly reports the same inView state', () => {
+    // Regression for a "Maximum update depth exceeded" loop: previously
+    // setInViewDots/setScrollSnaps always allocated new arrays, so a dot
+    // re-firing onChange(true) (e.g. on every re-render, as observed in
+    // jsdom) never let React bail out of re-rendering.
+    expect(() => render(<CarouselDots {...baseProps} />)).not.toThrow();
+    expect(screen.getAllByRole('button')).toHaveLength(3);
   });
 });
