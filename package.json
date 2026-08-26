@@ -37,7 +37,7 @@
     "coverage": "vitest run --project=unit --coverage",
     "test-storybook": "vitest run --project=storybook",
     "build": "npm run clean && tsc && vite build",
-    "chromatic": "STORYBOOK=1 chromatic",
+    "chromatic": "STORYBOOK=1 chromatic --build-script-name build:storybook",
     "build:storybook": "storybook build",
     "preview": "npx http-server storybook-static",
     "test:e2e": "playwright test e2e",
@@ -50,7 +50,8 @@
     "lint:js": "eslint . --report-unused-disable-directives --max-warnings 0",
     "lint:styles": "stylelint \"src/**/*.scss\" --fix",
     "lint:md": "markdownlint \"src/**/*.{md,mdx}\" --fix",
-    "prepare": "husky install",
+    "prepare": "node ./scripts/prepare.mjs",
+    "prepack": "npm run build",
     "icons:format": "npx @svgr/cli --config-file svgr.config.cjs --out-dir src/assets/formatted --ignore-existing -- src/assets/*.svg",
     "pictograms:format": "npx @svgr/cli --config-file svgr.config.cjs --out-dir src/assets/pictograms/formatted --ignore-existing -- src/assets/pictograms/*.svg"
   },

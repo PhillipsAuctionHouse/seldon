@@ -6,6 +6,7 @@ import { Text, type TextProps, TextVariants } from '../Text';
 import { BannerMediaSize, BannerVariants } from './types';
 
 export { BannerMediaSize, BannerVariants } from './types';
+import './_banner.scss';
 
 const base = `${px}-banner`;
 

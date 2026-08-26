@@ -1,16 +1,19 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-text-symbol {
-  display: inline-flex;
-  font-variation-settings: 'wght' 600;
-  gap: $spacing-micro;
+@layer seldon.components {
+  .#{$px}-text-symbol {
+    display: inline-flex;
+    font-variation-settings: 'wght' 600;
+    gap: $spacing-micro;
 
-  &--estimation {
-    margin-left: 0.25rem;
-  }
+    &--estimation {
+      margin-left: 0.25rem;
+    }
 
-  &--lotNumber {
-    margin-left: $spacing-xsm;
-    vertical-align: super;
+    &--lotNumber {
+      margin-left: $spacing-xsm;
+      vertical-align: super;
+    }
   }
 }

@@ -7,6 +7,7 @@ import { getSafeCountryCallingCode } from '../CountryPicker/utils';
 import { countries } from '../CountryPicker/constants';
 import { CountryCode } from './types';
 import { useNormalizedInputProps } from '../../utils';
+import './_phoneNumberInput.scss';
 
 export interface PhoneNumberInputProps extends Omit<ComponentProps<'div'>, 'onChange'> {
   /**

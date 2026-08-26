@@ -13,6 +13,7 @@ import { zhCN, enUS } from 'date-fns/locale';
 import { CountdownVariants } from './types';
 import { Duration } from './Duration'; // Import the Duration component
 import { Text, TextVariants } from '../Text';
+import './_countdown.scss';
 
 // You'll need to change the ComponentProps<"htmlelementname"> to match the top-level element of your component
 export interface CountdownProps extends ComponentProps<'div'> {

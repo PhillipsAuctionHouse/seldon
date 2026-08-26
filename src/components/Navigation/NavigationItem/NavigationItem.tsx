@@ -5,6 +5,7 @@ import { LinkVariants } from '../../Link/types';
 import { ComponentProps, ElementType, forwardRef, MouseEventHandler, ReactNode, useContext } from 'react';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { HeaderContext } from '../../../site-furniture/Header/Header';
+import './_navigationItem.scss';
 
 export interface NavigationItemProps extends ComponentProps<'li'> {
   /**

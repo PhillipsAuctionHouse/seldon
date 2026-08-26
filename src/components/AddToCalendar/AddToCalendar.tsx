@@ -14,6 +14,7 @@ import {
 } from './calendarLinks';
 import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
+import './_addToCalendar.scss';
 
 export interface AddToCalendarProps extends ComponentProps<'div'> {
   event: CalendarEvent;

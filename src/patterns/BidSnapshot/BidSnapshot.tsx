@@ -10,6 +10,7 @@ import { BidStatusEnum } from './types';
 import BidMessage from './BidMessage';
 import { differenceInMinutes, isAfter } from 'date-fns';
 import { TextVariants } from '../../components/Text';
+import './_bidSnapshot.scss';
 
 export interface BidSnapshotProps extends ComponentProps<'div'>, Pick<DetailListProps, 'hasSeparators'> {
   /**

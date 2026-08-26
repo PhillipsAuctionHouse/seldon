@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
 import { Text, TextVariants } from '../Text';
 import { getProgressBarMetrics } from './utils';
+import './_progressBar.scss';
 
 function defaultAriaValueText(safeCurrent: number, safeTotal: number): string {
   return `${safeCurrent} of ${safeTotal}`;

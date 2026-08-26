@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import BreadcrumbItem, { BreadcrumbItemProps } from './BreadcrumbItem';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import { Icon } from '../Icon';
+import './_breadcrumb.scss';
 
 export interface BreadcrumbProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

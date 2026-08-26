@@ -1,6 +1,7 @@
 import { Icon } from '../Icon';
 import { SearchProps } from './Search';
 import { ComponentProps } from 'react';
+import './_searchButton.scss';
 
 export const SearchButton = ({
   state,

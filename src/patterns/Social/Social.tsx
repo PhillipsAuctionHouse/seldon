@@ -4,6 +4,7 @@ import Button from '../../components/Button/Button';
 import { MouseEventHandler, forwardRef } from 'react';
 import { ButtonVariants } from '../../components/Button/types';
 import { Text, TextVariants } from '../../components/Text';
+import './_social.scss';
 
 export interface SocialProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

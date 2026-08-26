@@ -2,75 +2,79 @@
 /* stylelint-disable declaration-empty-line-before */
 @use './vars' as *;
 @use './utils' as *;
+@use './layers';
 
 // I think this is pretty tailwindy to generate these common classes
-@each $direction in 'vertical', 'horizontal' {
-  @each $padding in $padding-tokens {
-    @each $side in 'start', 'end', 'both' {
-      @include padding($padding, $direction, $side);
+
+@layer seldon.foundation {
+  @each $direction in 'vertical', 'horizontal' {
+    @each $padding in $padding-tokens {
+      @each $side in 'start', 'end', 'both' {
+        @include padding($padding, $direction, $side);
+      }
     }
   }
-}
 
-.#{$px}-skeleton,
-.#{$px}-skeleton::before,
-.#{$px}-skeleton::after {
-  animation: skeleton-pulse 1s infinite alternate-reverse !important;
-  background-image: none !important;
-  background-clip: initial !important;
-  border-radius: $radius-xs !important;
-  /* stylelint-disable-next-line declaration-property-value-allowed-list */
-  border-color: #0000 !important;
-  box-shadow: none !important;
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-box-decoration-break: clone !important;
-  box-decoration-break: clone !important;
-  /* stylelint-disable-next-line declaration-property-value-allowed-list */
-  color: #0000 !important;
-  outline: none !important;
-  pointer-events: none !important;
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-user-select: none !important;
-  user-select: none !important;
-  cursor: default !important;
-}
-
-input[type='checkbox'].#{$px}-skeleton,
-input[type='radio'].#{$px}-skeleton {
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-appearance: none;
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -moz-appearance: none;
-  appearance: none;
-  padding: 0 !important;
-  width: 13px !important;
-  height: 13px !important;
-}
-
-button.#{$px}-skeleton {
-  border-radius: $radius-xs !important;
-
-  svg path {
-    fill: transparent !important;
-  }
-}
-
-.#{$px}-toggle-input {
+  .#{$px}-skeleton,
   .#{$px}-skeleton::before,
   .#{$px}-skeleton::after {
+    animation: skeleton-pulse 1s infinite alternate-reverse !important;
+    background-image: none !important;
+    background-clip: initial !important;
     border-radius: $radius-xs !important;
+    /* stylelint-disable-next-line declaration-property-value-allowed-list */
+    border-color: #0000 !important;
+    box-shadow: none !important;
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-box-decoration-break: clone !important;
+    box-decoration-break: clone !important;
+    /* stylelint-disable-next-line declaration-property-value-allowed-list */
+    color: #0000 !important;
+    outline: none !important;
+    pointer-events: none !important;
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    cursor: default !important;
   }
-  .#{$px}-skeleton::after {
-    display: none !important;
-  }
-}
 
-@keyframes skeleton-pulse {
-  0% {
-    background-color: $grey-50;
+  input[type='checkbox'].#{$px}-skeleton,
+  input[type='radio'].#{$px}-skeleton {
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-appearance: none;
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -moz-appearance: none;
+    appearance: none;
+    padding: 0 !important;
+    width: 13px !important;
+    height: 13px !important;
   }
 
-  100% {
-    background-color: $black-25;
+  button.#{$px}-skeleton {
+    border-radius: $radius-xs !important;
+
+    svg path {
+      fill: transparent !important;
+    }
+  }
+
+  .#{$px}-toggle-input {
+    .#{$px}-skeleton::before,
+    .#{$px}-skeleton::after {
+      border-radius: $radius-xs !important;
+    }
+    .#{$px}-skeleton::after {
+      display: none !important;
+    }
+  }
+
+  @keyframes skeleton-pulse {
+    0% {
+      background-color: $grey-50;
+    }
+
+    100% {
+      background-color: $black-25;
+    }
   }
 }

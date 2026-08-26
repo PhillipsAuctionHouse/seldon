@@ -40,6 +40,22 @@ stories and tests there.
   `@use '~scss/allPartials' as *;`
 
   (or the relative path to the same partials stack used elsewhere in `src/`.)
+  That import is mixins and variables only. Import the co-located `_*.scss`
+  from the component TSX. CSS that must emit once (padding utilities, `:root`
+  tokens, `@font-face`) lives in `~scss/foundation`, loaded by `SeldonProvider`.
+  Emitting sheets also `@use '~scss/layers'` and wrap rules in
+  `@layer vendor | seldon.foundation | .components | .patterns | .site` so
+  cascade order does not depend on JS import order. Third-party CSS goes in
+  `vendor` (below Seldon), inlined with `meta.load-css` — do not leave a nested
+  CSS `@import` inside `@layer` (Vite/Chromatic cannot preload it). Layers do
+  not break same-layer ties: do not put two BEM blocks on one node at equal
+  specificity. The composer raises spec (compound selector) or the primitive
+  uses `:not()`. Button-as-Link: Link owns type (`:not(.seldon-link)` on
+  Button font tokens); Button owns destructive `color`
+  (`.seldon-button--destructive.seldon-link`). IconButton still wraps Button
+  and owns colliding box/paint via `.seldon-icon-button.seldon-button` —
+  prefer not wrapping Button; drop those compounds when IconButton has its
+  own node.
 
 - BEM: **`.#{$px}-block__element--modifier`** using the **`$px`** namespace from
   shared vars (`src/scss/_vars.scss`).

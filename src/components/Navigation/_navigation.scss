@@ -1,162 +1,165 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-nav {
-  border-top: 1px solid $light-gray;
-  display: flex;
-  height: fit-content;
-  justify-content: center;
-
-  &__list-container {
+@layer seldon.components {
+  .#{$px}-nav {
+    border-top: 1px solid $light-gray;
     display: flex;
-    flex-direction: column;
+    height: fit-content;
     justify-content: center;
-    padding: 0 $spacing-sm;
-    position: relative;
-    width: 100%;
 
-    > .#{$px}-nav__list {
-      padding-top: 0;
+    &__list-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 $spacing-sm;
+      position: relative;
+      width: 100%;
+
+      > .#{$px}-nav__list {
+        padding-top: 0;
+
+        @include isHeaderDesktop {
+          border-top: unset;
+        }
+
+        @include isHeaderMobile {
+          padding: 0 $spacing-md;
+        }
+
+        .#{$px}-nav__item + .#{$px}-accordion {
+          border-top: 0;
+        }
+      }
 
       @include isHeaderDesktop {
-        border-top: unset;
-      }
+        flex-direction: row;
+        overflow: visible; // allow nav list to slide up/down when search opens/closes
+        padding-right: $search-size;
 
-      @include isHeaderMobile {
-        padding: 0 $spacing-md;
-      }
+        // When search is open, slide nav list up and fade out (transform so slide is visible; list keeps position relative)
+        &--search-expanded .#{$px}-nav__list {
+          opacity: 0;
+          pointer-events: none;
+          transform: translateY(-100%);
+          transition:
+            transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 0.2s cubic-bezier(0.65, 0, 0.35, 1);
 
-      .#{$px}-nav__item + .#{$px}-accordion {
-        border-top: 0;
+          @media (prefers-reduced-motion: reduce) {
+            transition: none;
+          }
+        }
       }
     }
 
     @include isHeaderDesktop {
-      flex-direction: row;
-      overflow: visible; // allow nav list to slide up/down when search opens/closes
-      padding-right: $search-size;
+      border: unset;
+      width: fit-content;
 
-      // When search is open, slide nav list up and fade out (transform so slide is visible; list keeps position relative)
-      &--search-expanded .#{$px}-nav__list {
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(-100%);
-        transition:
-          transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-          opacity 0.2s cubic-bezier(0.65, 0, 0.35, 1);
+      // Remove mobile button on larger screens
+      .#{$px}-nav__close-btn {
+        display: none;
+      }
+    }
+
+    &__close-btn:hover,
+    &__close-btn:focus {
+      background-color: $grey-50;
+    }
+
+    // Mobile: list has horizontal padding (original behaviour). Use descendant selector so it
+    // still applies when list is wrapped by SSRMediaQuery. Links and accordion labels get vertical padding.
+    @include isHeaderMobile {
+      &__list-container .#{$px}-nav__list {
+        padding: 0 $spacing-md;
+      }
+
+      &__list-container .#{$px}-nav__list .#{$px}-link--linkStylised {
+        padding: $snowflake-menu-padding 0;
+      }
+
+      // linkMedium and linkLarge: same compact padding as linkLarge had (no snowflake padding)
+      &__list-container .#{$px}-nav__list .#{$px}-link--linkMedium,
+      &__list-container .#{$px}-nav__list .#{$px}-link--linkLarge {
+        padding: 0;
+      }
+
+      &__list-container .#{$px}-nav__list .#{$px}-accordion-item-label {
+        padding: $snowflake-menu-padding 0;
+      }
+    }
+
+    // Radix Navigation Menu (desktop only) – viewport hosts submenu content
+    @include isHeaderDesktop {
+      &__radix-root {
+        display: flex;
+        flex-direction: column;
+        overflow: visible; // allow nav list to slide up/down when search opens/closes
+        position: relative;
+
+        // Keep fit-content so search button stays next to nav list (position: absolute relative to list-container)
+        width: fit-content;
+      }
+
+      &__radix-viewport {
+        height: 0;
+        left: 0;
+        overflow: hidden;
+        pointer-events: none; // allow clicks to reach search when viewport is closed or when search is open
+        position: fixed;
+        right: 0;
+        top: calc(var(--banner-height, 0px) + var(--header-height));
+        transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
         @media (prefers-reduced-motion: reduce) {
           transition: none;
         }
+
+        &[data-state='open'] {
+          animation: nav-viewport-enter 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+          height: var(--radix-navigation-menu-viewport-height, auto);
+          pointer-events: auto; // submenu content must receive clicks when open
+
+          @media (prefers-reduced-motion: reduce) {
+            animation: none;
+          }
+        }
+
+        &[data-state='closed'] {
+          animation: nav-viewport-exit 0.2s cubic-bezier(0.65, 0, 0.35, 1);
+
+          @media (prefers-reduced-motion: reduce) {
+            animation: none;
+          }
+        }
       }
     }
   }
 
   @include isHeaderDesktop {
-    border: unset;
-    width: fit-content;
-
-    // Remove mobile button on larger screens
-    .#{$px}-nav__close-btn {
-      display: none;
-    }
-  }
-
-  &__close-btn:hover,
-  &__close-btn:focus {
-    background-color: $grey-50;
-  }
-
-  // Mobile: list has horizontal padding (original behaviour). Use descendant selector so it
-  // still applies when list is wrapped by SSRMediaQuery. Links and accordion labels get vertical padding.
-  @include isHeaderMobile {
-    &__list-container .#{$px}-nav__list {
-      padding: 0 $spacing-md;
-    }
-
-    &__list-container .#{$px}-nav__list .#{$px}-link--linkStylised {
-      padding: $snowflake-menu-padding 0;
-    }
-
-    // linkMedium and linkLarge: same compact padding as linkLarge had (no snowflake padding)
-    &__list-container .#{$px}-nav__list .#{$px}-link--linkMedium,
-    &__list-container .#{$px}-nav__list .#{$px}-link--linkLarge {
-      padding: 0;
-    }
-
-    &__list-container .#{$px}-nav__list .#{$px}-accordion-item-label {
-      padding: $snowflake-menu-padding 0;
-    }
-  }
-
-  // Radix Navigation Menu (desktop only) – viewport hosts submenu content
-  @include isHeaderDesktop {
-    &__radix-root {
-      display: flex;
-      flex-direction: column;
-      overflow: visible; // allow nav list to slide up/down when search opens/closes
-      position: relative;
-
-      // Keep fit-content so search button stays next to nav list (position: absolute relative to list-container)
-      width: fit-content;
-    }
-
-    &__radix-viewport {
-      height: 0;
-      left: 0;
-      overflow: hidden;
-      pointer-events: none; // allow clicks to reach search when viewport is closed or when search is open
-      position: fixed;
-      right: 0;
-      top: calc(var(--banner-height, 0px) + var(--header-height));
-      transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-      @media (prefers-reduced-motion: reduce) {
-        transition: none;
+    @keyframes nav-viewport-enter {
+      from {
+        opacity: 0;
+        transform: translateY(-16px);
       }
 
-      &[data-state='open'] {
-        animation: nav-viewport-enter 0.3s cubic-bezier(0.33, 1, 0.68, 1);
-        height: var(--radix-navigation-menu-viewport-height, auto);
-        pointer-events: auto; // submenu content must receive clicks when open
-
-        @media (prefers-reduced-motion: reduce) {
-          animation: none;
-        }
-      }
-
-      &[data-state='closed'] {
-        animation: nav-viewport-exit 0.2s cubic-bezier(0.65, 0, 0.35, 1);
-
-        @media (prefers-reduced-motion: reduce) {
-          animation: none;
-        }
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
-  }
-}
 
-@include isHeaderDesktop {
-  @keyframes nav-viewport-enter {
-    from {
-      opacity: 0;
-      transform: translateY(-16px);
-    }
+    @keyframes nav-viewport-exit {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes nav-viewport-exit {
-    from {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    to {
-      opacity: 0;
-      transform: translateY(-16px);
+      to {
+        opacity: 0;
+        transform: translateY(-16px);
+      }
     }
   }
 }

@@ -4,6 +4,7 @@ import { getCommonProps, px } from '../../utils';
 import { getScssVar } from '../../utils/scssUtils';
 import * as iconComponents from '../../assets/formatted';
 import * as pictogramComponents from '../../assets/pictograms/formatted';
+import './_icon.scss';
 
 export type IconName = keyof typeof iconComponents;
 export type PictogramName = keyof typeof pictogramComponents;

@@ -7,6 +7,7 @@ import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import { Breakpoints, getCommonProps } from '../../utils';
 import { SaleCardActions } from './SaleCardActions';
 import { SaleCardImageDisplay, SaleCardVariants } from './types';
+import './_saleCard.scss';
 
 /**
  * Props for the SaleCard component.

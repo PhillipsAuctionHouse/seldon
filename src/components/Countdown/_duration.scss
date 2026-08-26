@@ -1,6 +1,9 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-duration {
-  display: flex;
-  gap: $spacing-micro;
+@layer seldon.components {
+  .#{$px}-duration {
+    display: flex;
+    gap: $spacing-micro;
+  }
 }

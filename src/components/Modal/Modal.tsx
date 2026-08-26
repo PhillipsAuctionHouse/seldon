@@ -6,6 +6,7 @@ import { ButtonVariants } from '../Button/types';
 import * as Dialog from '@radix-ui/react-dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { forwardRef } from 'react';
+import './_modal.scss';
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement>, Dialog.DialogProps {
   /**

@@ -10,6 +10,10 @@ import { ButtonVariants } from '../Button/types';
 import { ComboBoxOption } from './types';
 import { usePrevious } from '../../utils/usePrevious';
 import { Text, TextVariants } from '../Text';
+// `.seldon-input__validation`, which useNormalizedInputProps emits for the invalid/warn message,
+// is defined in Input's stylesheet rather than ComboBox's.
+import '../Input/_input.scss';
+import './_combobox.scss';
 
 export interface ComboBoxProps {
   /**

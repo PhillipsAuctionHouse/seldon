@@ -1,52 +1,55 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-detail-list {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-sm;
-  margin: 0;
+@layer seldon.components {
+  .#{$px}-detail-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    margin: 0;
 
-  &.#{$px}-has-separators {
-    gap: 0;
-  }
-
-  &-wrapper {
-    .#{$px}-detail {
-      padding: 0;
+    &.#{$px}-has-separators {
+      gap: 0;
     }
-  }
 
-  .#{$px}-columns {
-    .#{px}-detail {
-      justify-content: start;
-    }
-  }
-
-  .#{$px}-justified {
-    .#{$px}-detail {
-      justify-content: space-between;
-
-      &__label {
-        text-align: left;
-      }
-
-      &__value {
-        text-align: right;
+    &-wrapper {
+      .#{$px}-detail {
+        padding: 0;
       }
     }
-  }
 
-  .#{$px}-has-separators {
-    border-top: 1px solid $light-gray;
-  }
+    .#{$px}-columns {
+      .#{px}-detail {
+        justify-content: start;
+      }
+    }
 
-  .#{$px}-detail {
-    padding: $spacing-sm 0;
-  }
+    .#{$px}-justified {
+      .#{$px}-detail {
+        justify-content: space-between;
 
-  &--sm {
-    .#{$px}-detail.#{$px}-detail {
-      padding: $spacing-xsm 0;
+        &__label {
+          text-align: left;
+        }
+
+        &__value {
+          text-align: right;
+        }
+      }
+    }
+
+    .#{$px}-has-separators {
+      border-top: 1px solid $light-gray;
+    }
+
+    .#{$px}-detail {
+      padding: $spacing-sm 0;
+    }
+
+    &--sm {
+      .#{$px}-detail.#{$px}-detail {
+        padding: $spacing-xsm 0;
+      }
     }
   }
 }

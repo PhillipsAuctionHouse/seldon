@@ -1,6 +1,7 @@
 import React, { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
+import './_video.scss';
 
 export interface VideoProps extends ComponentProps<'div'> {
   /**

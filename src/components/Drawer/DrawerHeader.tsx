@@ -6,6 +6,7 @@ import { ButtonVariants } from '../Button/types';
 import { Icon } from '../Icon';
 import { DrawerProps } from './Drawer';
 import { Text, TextVariants } from '../Text';
+import './_drawerHeader.scss';
 
 type CommonProps = ComponentProps<'div'> & {
   baseClassName: string;

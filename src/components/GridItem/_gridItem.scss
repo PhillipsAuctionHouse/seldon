@@ -1,49 +1,52 @@
 @use 'sass:math';
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-@mixin gridItemColumnSpan($span: 1, $total-cols: 12) {
-  grid-column: span $span;
+@layer seldon.components {
+  @mixin gridItemColumnSpan($span: 1, $total-cols: 12) {
+    grid-column: span $span;
 
-  &-align-right {
-    grid-column-end: $total-cols + 1;
-    justify-self: end;
-  }
+    &-align-right {
+      grid-column-end: $total-cols + 1;
+      justify-self: end;
+    }
 
-  &-align-center {
-    grid-column: math.ceil(math.div($total-cols + 1 - $span, 2)) / span #{$span};
-  }
-}
-
-.#{$px}-grid-item {
-  justify-self: center;
-  width: 100%;
-
-  @for $i from 1 through 2 {
-    &--span-xs-#{$i} {
-      @include gridItemColumnSpan($i, 2);
+    &-align-center {
+      grid-column: math.ceil(math.div($total-cols + 1 - $span, 2)) / span #{$span};
     }
   }
 
-  @include media($size-sm) {
+  .#{$px}-grid-item {
+    justify-self: center;
+    width: 100%;
+
     @for $i from 1 through 2 {
-      &--span-sm-#{$i} {
+      &--span-xs-#{$i} {
         @include gridItemColumnSpan($i, 2);
       }
     }
-  }
 
-  @include media($size-md) {
-    @for $i from 1 through 6 {
-      &--span-md-#{$i} {
-        @include gridItemColumnSpan($i, 6);
+    @include media($size-sm) {
+      @for $i from 1 through 2 {
+        &--span-sm-#{$i} {
+          @include gridItemColumnSpan($i, 2);
+        }
       }
     }
-  }
 
-  @include media($size-lg) {
-    @for $i from 1 through 12 {
-      &--span-lg-#{$i} {
-        @include gridItemColumnSpan($i, 12);
+    @include media($size-md) {
+      @for $i from 1 through 6 {
+        &--span-md-#{$i} {
+          @include gridItemColumnSpan($i, 6);
+        }
+      }
+    }
+
+    @include media($size-lg) {
+      @for $i from 1 through 12 {
+        &--span-lg-#{$i} {
+          @include gridItemColumnSpan($i, 12);
+        }
       }
     }
   }

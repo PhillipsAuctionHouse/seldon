@@ -15,6 +15,7 @@ import {
 } from './types';
 
 export type { SlideToActivateConfig, SlideToActivateProps } from './types';
+import './_slideToActivate.scss';
 
 /**
  * ## Overview

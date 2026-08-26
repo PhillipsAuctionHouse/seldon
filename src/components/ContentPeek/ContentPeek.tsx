@@ -7,6 +7,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../Collapsi
 import { HeightUnits } from './utils';
 import { DEFAULT_REM_SIZE } from '../../utils/constants';
 import { Icon } from '../Icon';
+import './_contentPeek.scss';
 
 export interface ContentPeekProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

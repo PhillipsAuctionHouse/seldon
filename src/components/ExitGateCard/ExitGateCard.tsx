@@ -6,6 +6,7 @@ import { ButtonVariants } from '../Button/types';
 import { Link } from '../Link';
 import { SeldonImage, AspectRatio } from '../SeldonImage';
 import { Text, TextVariants } from '../Text';
+import './_exitGateCard.scss';
 
 export interface ExitGateCardProps extends ComponentProps<'div'> {
   /**

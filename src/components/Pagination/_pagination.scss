@@ -1,88 +1,91 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-pagination {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  gap: $spacing-xsm;
+@layer seldon.components {
+  .#{$px}-pagination {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: $spacing-xsm;
 
-  &__button {
-    .#{$px}-icon-chevron-right {
-      color: $cta-blue;
+    &__button {
+      .#{$px}-icon-chevron-right {
+        color: $cta-blue;
 
-      svg {
-        height: 1rem;
-        width: 1rem;
+        svg {
+          height: 1rem;
+          width: 1rem;
+        }
+
+        @include media($breakpoint-md) {
+          svg {
+            height: 1.5rem;
+            width: 1.5rem;
+          }
+        }
       }
 
-      @include media($breakpoint-md) {
-        svg {
-          height: 1.5rem;
-          width: 1.5rem;
+      &:disabled {
+        border: unset;
+      }
+
+      &--is-disabled {
+        opacity: 0.15;
+        pointer-events: none;
+
+        .#{$px}-icon path {
+          fill: $pure-black;
+        }
+      }
+
+      &:hover:not(:disabled) {
+        background-color: inherit;
+
+        .#{$px}-icon path {
+          fill: $pure-black;
         }
       }
     }
-
-    &:disabled {
-      border: unset;
-    }
-
-    &--is-disabled {
-      opacity: 0.15;
-      pointer-events: none;
-
-      .#{$px}-icon path {
-        fill: $pure-black;
-      }
-    }
-
-    &:hover:not(:disabled) {
-      background-color: inherit;
-
-      .#{$px}-icon path {
-        fill: $pure-black;
-      }
-    }
   }
-}
 
-.#{$px}--inline-pagination__wrapper {
-  select {
-    @include pText($body-size2);
+  .#{$px}--inline-pagination__wrapper {
+    select {
+      @include pText($body-size2);
 
-    appearance: none;
-    border: none;
-    border-bottom: 1px solid $black-100;
-    border-radius: 0;
-    font-variation-settings: 'wght' 600;
-    margin-bottom: 0;
-    outline: none;
-    padding: 0 $spacing-micro $spacing-micro;
-    text-align: center;
-    text-align-last: center;
-
-    &:disabled {
-      border-color: transparent;
-      margin: auto;
-      max-height: 3.5rem;
-      max-width: 5rem;
-    }
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    &:focus-visible {
+      appearance: none;
+      border: none;
+      border-bottom: 1px solid $black-100;
       border-radius: 0;
+      font-variation-settings: 'wght' 600;
+      margin-bottom: 0;
+      outline: none;
+      padding: 0 $spacing-micro $spacing-micro;
+      text-align: center;
+      text-align-last: center;
+
+      &:disabled {
+        border-color: transparent;
+        margin: auto;
+        max-height: 3.5rem;
+        max-width: 5rem;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:focus-visible {
+        border-radius: 0;
+      }
+    }
+
+    select::-ms-expand {
+      border: none;
+      display: none;
     }
   }
 
-  select::-ms-expand {
-    border: none;
-    display: none;
+  .#{$px}-left-arrow {
+    transform: scaleX(-1);
   }
-}
-
-.#{$px}-left-arrow {
-  transform: scaleX(-1);
 }

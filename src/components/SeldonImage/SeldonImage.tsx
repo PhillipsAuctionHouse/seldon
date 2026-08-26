@@ -5,6 +5,7 @@ import { getCommonProps } from '../../utils';
 import { Icon } from '../Icon';
 import { isImageValid } from './utils';
 import { AspectRatio } from './types';
+import './_seldonImage.scss';
 
 export interface SeldonImageProps extends ComponentProps<'div'> {
   /**

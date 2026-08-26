@@ -1,3 +1,6 @@
+// Select reuses Input class names; load Input CSS even though we don't mount <Input>.
+import '../Input/_input.scss';
+import './_select.scss';
 import * as React from 'react';
 import classnames from 'classnames';
 import { px, useNormalizedInputProps } from '../../utils';

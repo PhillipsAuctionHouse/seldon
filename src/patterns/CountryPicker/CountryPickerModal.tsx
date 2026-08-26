@@ -11,6 +11,7 @@ import { getSafeCountryCallingCode } from './utils';
 import { ButtonVariants } from '../../components/Button/types';
 import Icon from '../../components/Icon/Icon';
 import { CountryPickerCountryList } from './CountryPickerCountryList';
+import './_countryPickerModal.scss';
 
 export type CountryPickerModalProps = {
   /**

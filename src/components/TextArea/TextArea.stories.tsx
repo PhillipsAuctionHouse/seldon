@@ -72,3 +72,14 @@ Playground.argTypes = {
     },
   },
 };
+
+export const Invalid = () => (
+  <TextArea
+    labelText="Description (Optional)"
+    rows={4}
+    name="description"
+    maxLength={500}
+    invalid
+    invalidText="Please enter a description."
+  />
+);

@@ -7,6 +7,7 @@ import DrawerHeader from './DrawerHeader';
 import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 import { Icon } from '../Icon';
+import './_drawer.scss';
 
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
