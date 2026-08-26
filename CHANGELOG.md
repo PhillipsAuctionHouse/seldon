@@ -1,3 +1,15 @@
+# [1.280.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.279.2...v1.280.0) (2026-08-26)
+
+
+### Bug Fixes
+
+* **carousel:** L3-14387 fix CarouselDots infinite re-render loop ([#925](https://github.com/PhillipsAuctionHouse/seldon/issues/925)) ([93cd3ed](https://github.com/PhillipsAuctionHouse/seldon/commit/93cd3edda218aa6cac8e77b8e806f309cc824c24))
+
+
+### Features
+
+* **styles:** L3-14240 emit CSS from component JS and foundation ([#920](https://github.com/PhillipsAuctionHouse/seldon/issues/920)) ([12242bb](https://github.com/PhillipsAuctionHouse/seldon/commit/12242bb7ed764d6ba3f5f9b1a85bced90f40d7d2))
+
 ## [1.279.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.279.1...v1.279.2) (2026-08-21)
 
 
