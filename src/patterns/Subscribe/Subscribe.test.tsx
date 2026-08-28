@@ -63,8 +63,7 @@ describe('Subscribe', () => {
     expect(input).toHaveAttribute('name', 'user-email');
   });
 
-  // The label's htmlFor is derived from the same id, so honouring an id from inputProps would
-  // silently detach the label from the input and break the field's accessible name.
+  // Subscribe forces the input id to be derived from the component `id`; `inputProps.id` is ignored so the DOM id remains stable.
   it('does not let inputProps override the id the label is associated with', () => {
     render(<Subscribe id="test-id-override" inputProps={{ id: 'someone-elses-id' }} />);
 
