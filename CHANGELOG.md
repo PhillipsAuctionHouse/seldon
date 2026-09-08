@@ -1,3 +1,10 @@
+## [1.280.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.280.0...v1.280.1) (2026-09-08)
+
+
+### Bug Fixes
+
+* **Navigation,Subscribe:** L3-14334 stop double onClick and id override (L3-14335) ([#921](https://github.com/PhillipsAuctionHouse/seldon/issues/921)) ([c312a84](https://github.com/PhillipsAuctionHouse/seldon/commit/c312a84ce11f465d186a330019ec29a242d98930))
+
 # [1.280.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.279.2...v1.280.0) (2026-08-26)
 
 
