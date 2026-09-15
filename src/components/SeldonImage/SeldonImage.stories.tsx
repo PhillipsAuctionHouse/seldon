@@ -77,6 +77,7 @@ AspectRatioPortraitHeightConstrained.args = {
   alt: 'Portrait 3/4 image inside a max-height: 40vh container',
   aspectRatio: AspectRatio.Portrait,
   objectFit: 'cover',
+  constrainToParentHeight: true,
 };
 
 AspectRatioPortraitHeightConstrained.decorators = [heightLimitedDecorator];
@@ -90,6 +91,7 @@ AspectRatioSquareHeightConstrained.args = {
   alt: 'Square 1/1 image inside a max-height: 40vh container',
   aspectRatio: AspectRatio.Square,
   objectFit: 'cover',
+  constrainToParentHeight: true,
 };
 
 AspectRatioSquareHeightConstrained.decorators = [heightLimitedDecorator];

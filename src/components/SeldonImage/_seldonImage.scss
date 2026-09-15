@@ -18,14 +18,9 @@
       }
     }
 
-    // Portrait/square can overflow vertically; auto dims + max caps let the img respect parent max-height, not just width.
     &--aspect-ratio-3-4 {
       img {
         aspect-ratio: 3 / 4;
-        height: auto;
-        max-height: inherit;
-        max-width: 100%;
-        width: auto;
       }
 
       &.#{$px}-seldon-image--error-image {
@@ -36,14 +31,22 @@
     &--aspect-ratio-1-1 {
       img {
         aspect-ratio: 1 / 1;
-        height: auto;
-        max-height: inherit;
-        max-width: 100%;
-        width: auto;
       }
 
       &.#{$px}-seldon-image--error-image {
         aspect-ratio: 1 / 1;
+      }
+    }
+
+    // Opt-in for a container with a real ancestor max-height (e.g. a capped-height
+    // editorial tile). Auto dims + max caps let the img shrink to fit whichever of
+    // the parent's width or height binds first, instead of always filling width.
+    &--constrain-to-height {
+      img {
+        height: auto;
+        max-height: inherit;
+        max-width: 100%;
+        width: auto;
       }
     }
 
