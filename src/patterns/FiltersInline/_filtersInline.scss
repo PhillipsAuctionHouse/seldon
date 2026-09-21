@@ -18,15 +18,17 @@
 
     // Mobile: filter buttons scroll horizontally and overflow off-screen instead of wrapping.
     @include media($breakpoint-md, 'max') {
-      flex-wrap: nowrap;
+      // Matches the count badge's `top: -15px` in _filterButton.scss.
+      // overflow-x: auto below forces overflow-y to compute as auto too, which
+      // would clip that badge as it overlays the Filter button's corner.
+      // Reserve its space with padding and cancel it with an equal negative
+      // margin so the row's own position is unchanged.
+      $badge-offset: 15px;
 
-      // overflow-x: auto forces overflow-y to compute as auto too, which would
-      // clip the count badge (_filterButton.scss, `top: -15px`) that overlays
-      // the Filter button's corner. Reserve that space with padding and cancel
-      // it with an equal negative margin so the row's own position is unchanged.
-      margin-top: -15px;
+      flex-wrap: nowrap;
+      margin-top: -$badge-offset;
       overflow-x: auto;
-      padding-top: 15px;
+      padding-top: $badge-offset;
       scrollbar-width: none;
 
       &::-webkit-scrollbar {

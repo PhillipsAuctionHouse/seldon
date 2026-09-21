@@ -42,6 +42,9 @@
       position: absolute;
       right: 0;
       text-align: center;
+
+      // Mirrored by $badge-offset in _filtersInline.scss's mobile scroll row,
+      // which reserves this same 15px so the badge isn't clipped.
       top: -15px;
       width: 1.5rem;
 
