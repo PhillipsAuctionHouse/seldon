@@ -1,3 +1,10 @@
+## [1.280.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.280.1...v1.280.2) (2026-09-21)
+
+
+### Bug Fixes
+
+* **SeldonImage:** L3-14570 fill width by default for square/portrait aspect ratios ([#935](https://github.com/PhillipsAuctionHouse/seldon/issues/935)) ([ae47bb8](https://github.com/PhillipsAuctionHouse/seldon/commit/ae47bb851619c59ce395bc4e180313bac3cefdd5))
+
 ## [1.280.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.280.0...v1.280.1) (2026-09-08)
 
 
