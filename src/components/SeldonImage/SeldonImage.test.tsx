@@ -35,6 +35,18 @@ describe('SeldonImage', () => {
     expect(container.firstChild).not.toHaveClass(`${px}-seldon-image--aspect-ratio-none`);
   });
 
+  it('does not apply the constrain-to-height class by default', () => {
+    const { container } = render(<SeldonImage src="test-image.jpg" alt="" aspectRatio={AspectRatio.Square} />);
+    expect(container.firstChild).not.toHaveClass(`${px}-seldon-image--constrain-to-height`);
+  });
+
+  it('applies the constrain-to-height class when constrainToParentHeight is true', () => {
+    const { container } = render(
+      <SeldonImage src="test-image.jpg" alt="" aspectRatio={AspectRatio.Square} constrainToParentHeight />,
+    );
+    expect(container.firstChild).toHaveClass(`${px}-seldon-image--constrain-to-height`);
+  });
+
   it('applies object fit class correctly', () => {
     render(<SeldonImage src="test-image.jpg" alt="" objectFit="cover" />);
     const image = screen.getByTestId(`seldon-image-img`);
