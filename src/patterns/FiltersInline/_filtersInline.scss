@@ -19,7 +19,14 @@
     // Mobile: filter buttons scroll horizontally and overflow off-screen instead of wrapping.
     @include media($breakpoint-md, 'max') {
       flex-wrap: nowrap;
+
+      // overflow-x: auto forces overflow-y to compute as auto too, which would
+      // clip the count badge (_filterButton.scss, `top: -15px`) that overlays
+      // the Filter button's corner. Reserve that space with padding and cancel
+      // it with an equal negative margin so the row's own position is unchanged.
+      margin-top: -15px;
       overflow-x: auto;
+      padding-top: 15px;
       scrollbar-width: none;
 
       &::-webkit-scrollbar {

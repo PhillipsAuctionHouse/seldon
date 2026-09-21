@@ -258,3 +258,37 @@ Playground.args = {
 };
 
 Playground.argTypes = {};
+
+const filtersWithAppliedAuctionType: FilterType[] = filters.map((filter) =>
+  filter.id === FILTER_KEYS.sale
+    ? {
+        ...filter,
+        filterDimensions: new Set(
+          Array.from(filter.filterDimensions).map((dimension, index) =>
+            index === 0 ? { ...dimension, active: true } : dimension,
+          ),
+        ),
+      }
+    : filter,
+);
+
+/**
+ * Regression coverage for the Filter button's count badge (`_filterButton.scss`,
+ * overlays the button's top-right corner) staying visible inside the mobile
+ * horizontal-scroll row (`_filtersInline.scss`). Renders with a filter already
+ * applied so the badge is visible without interaction, letting Chromatic's
+ * mobile viewport (500px, below `$breakpoint-md`) catch clipping regressions.
+ */
+export const WithAppliedFilter = () => (
+  <FiltersInline
+    id="filters-inline-badge-story"
+    filters={filtersWithAppliedAuctionType}
+    filtersListState={Array(filters.length + 1).fill(false)}
+    setFiltersLabelListState={() => {}}
+    onSelectFilter={() => {}}
+    onApplyFilter={() => {}}
+    onClickClear={() => {}}
+    resultsCount={SalesMockData.length}
+    mainFilterLabel={FilterButtonType.Filter}
+  />
+);
