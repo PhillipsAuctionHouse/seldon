@@ -1,5 +1,6 @@
 @use '~scss/allPartials' as *;
 @use '~scss/layers';
+@use './vars' as *;
 
 @layer seldon.patterns {
   .#{$px}-filter-button {
@@ -43,9 +44,10 @@
       right: 0;
       text-align: center;
 
-      // Mirrored by $badge-offset in _filtersInline.scss's mobile scroll row,
-      // which reserves this same 15px so the badge isn't clipped.
-      top: -15px;
+      // $badge-offset (./_vars.scss) is also used by _filtersInline.scss's
+      // mobile scroll row, which reserves this same space so the badge
+      // isn't clipped.
+      top: -$badge-offset;
       width: 1.5rem;
 
       @include media($breakpoint-md) {

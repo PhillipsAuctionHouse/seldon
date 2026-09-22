@@ -1,0 +1,6 @@
+// Shared between _filterButton.scss and _filtersInline.scss: the count
+// badge escapes its button's box via `top: -$badge-offset`, and the mobile
+// scroll row reserves that same space via padding-top/margin-top so
+// overflow-x: auto (which forces overflow-y to compute as auto too) doesn't
+// clip it. Kept in one place so the two can't drift out of sync.
+$badge-offset: 15px;
