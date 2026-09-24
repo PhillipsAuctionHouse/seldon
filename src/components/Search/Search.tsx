@@ -1,12 +1,12 @@
 import { useEffect, forwardRef, useContext, useRef, useState } from 'react';
 import { encodeURLSearchParams, getCommonProps, px } from '../../utils';
+import { useOnClickOutsideRef } from '../../utils/useOnClickOutsideRef';
 import classnames from 'classnames';
 import Input from '../Input/Input';
 
 import Link from '../Link/Link';
 import SearchResults, { type SearchResultsProps } from './SearchResults/SearchResults';
 import { Text, TextVariants } from '../Text';
-import { useOnClickOutside } from 'usehooks-ts';
 import { HeaderContext } from '../../site-furniture/Header/Header';
 import { SearchButton } from './SearchButton';
 import { CSSTransition } from 'react-transition-group';
@@ -93,7 +93,7 @@ const Search = forwardRef<HTMLDivElement, React.PropsWithChildren<SearchProps>>(
         }
       : undefined;
 
-    useOnClickOutside(searchContainerRef as React.RefObject<HTMLDivElement>, (event) => {
+    useOnClickOutsideRef(searchContainerRef, (event) => {
       onCancel?.();
       showSearch(false);
       event.stopPropagation();

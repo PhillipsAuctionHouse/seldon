@@ -22,8 +22,9 @@ import './_seldonImage.scss';
  * Both spellings reach the DOM as `fetchpriority`. Remove once every consumer
  * is on React 19 (peer range is ^18 || ^19).
  */
+const IS_REACT_19 = Number(reactVersion.split('.')[0]) >= 19;
 const fetchPriorityProps = (fetchPriority: SeldonImageProps['fetchPriority']) =>
-  Number(reactVersion.split('.')[0]) >= 19 ? { fetchPriority } : { fetchpriority: fetchPriority };
+  IS_REACT_19 ? { fetchPriority } : { fetchpriority: fetchPriority };
 
 export interface SeldonImageProps extends ComponentProps<'div'> {
   /**

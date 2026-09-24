@@ -152,7 +152,7 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
   ) => {
     const baseClassName = `${px}-date-picker`;
     const inputProps = useNormalizedInputProps({ disabled, id, invalid, invalidText, readOnly, type, warn, warnText });
-    const fp = React.useRef<flatpickr.Instance>(null!);
+    const fp = React.useRef<flatpickr.Instance | null>(null);
     const inputRef = React.useRef<HTMLInputElement | null>(null);
     const manualValue = React.useRef<Date[] | undefined>(undefined);
     React.useEffect(() => {
@@ -195,15 +195,17 @@ const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
       ) {
         return;
       }
+      const instance = fp.current;
       if (
+        instance &&
         'current' in manualValue &&
         manualValue?.current?.length &&
         manualValue?.current?.length > 0 &&
-        manualValue?.current?.join().toString() !== fp?.current?.selectedDates.join().toString()
+        manualValue?.current?.join().toString() !== instance.selectedDates.join().toString()
       ) {
-        const element = fp.current?.element as HTMLInputElement;
+        const element = instance.element as HTMLInputElement;
         manualValue.current = [];
-        onChange(fp.current?.selectedDates, element?.value, fp.current);
+        onChange(instance.selectedDates, element?.value, instance);
       }
     };
 
