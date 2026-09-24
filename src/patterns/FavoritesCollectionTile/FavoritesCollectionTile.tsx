@@ -190,7 +190,7 @@ const ListImageVariant = ({
   imageSrc,
 }: {
   baseClassName: string;
-  imageRef: React.RefObject<HTMLDivElement>;
+  imageRef: React.RefObject<HTMLDivElement | null>;
   listAriaLabel: string;
   name: string;
   imageSrc: string;

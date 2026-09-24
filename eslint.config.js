@@ -24,6 +24,7 @@ export default tseslint.config(
       'vite.config.ts',
       '.template',
       '.storybook',
+      '.claude/worktrees/**',
       'coverage',
       'eslint-local-rules.cjs',
       'eslint.config.js',

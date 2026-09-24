@@ -15,6 +15,8 @@ export const wrapChildren = (children: ReactNode[], currentIndex: number, baseCl
   children.map((c, i) => wrapChild(c, i, currentIndex, baseClassName));
 
 export const getLabelsFromChildren = (children: ReactNode[]): string[] =>
-  children.map((child) => (React.isValidElement(child) && child.props?.['aria-label']) || '');
+  children.map(
+    (child) => (React.isValidElement<{ 'aria-label'?: string }>(child) && child.props?.['aria-label']) || '',
+  );
 
 export const isControlled = (currentStepIndex: number | undefined) => currentStepIndex !== undefined;

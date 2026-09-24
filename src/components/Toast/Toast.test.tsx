@@ -38,7 +38,7 @@ vi.mock('@radix-ui/react-toast', async () => {
       ...props
       // eslint-disable-next-line react/boolean-prop-naming
     }: ToastMockProps & { 'announce-alt'?: string; asChild?: boolean; altText?: string }) => {
-      if (asChild && React.isValidElement(children)) {
+      if (asChild && React.isValidElement<{ className?: string }>(children)) {
         return React.cloneElement(children, {
           className: `${className || ''} ${children.props.className || ''}`.trim(),
           'data-radix-toast-announce-exclude': '',
@@ -61,7 +61,7 @@ vi.mock('@radix-ui/react-toast', async () => {
     },
     Close: ({ children, className, asChild, 'aria-label': ariaLabel, ...props }: ToastCloseProps) => {
       if (asChild) {
-        return React.cloneElement(children as React.ReactElement, {
+        return React.cloneElement(children as React.ReactElement<Record<string, unknown>>, {
           'aria-label': ariaLabel,
           ...props,
         });

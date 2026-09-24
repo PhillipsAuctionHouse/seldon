@@ -28,7 +28,7 @@ type CountryPickerCountryListProps = CommonProps & {
   /**
    * Ref to the list container for keyboard navigation.
    */
-  listRef: React.RefObject<HTMLDivElement>;
+  listRef: React.RefObject<HTMLDivElement | null>;
   /**
    * Name attribute for radio inputs.
    */

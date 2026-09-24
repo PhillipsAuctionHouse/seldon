@@ -1,4 +1,13 @@
-import { ComponentProps, forwardRef, useRef, useState, useEffect, useCallback, memo } from 'react';
+import {
+  ComponentProps,
+  forwardRef,
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+  memo,
+  version as reactVersion,
+} from 'react';
 import classnames from 'classnames';
 
 import { getCommonProps } from '../../utils';
@@ -6,6 +15,16 @@ import { Icon } from '../Icon';
 import { isImageValid } from './utils';
 import { AspectRatio } from './types';
 import './_seldonImage.scss';
+
+/**
+ * React 19 knows `fetchPriority` (and forwards it to the image preload it emits);
+ * React 18 only knows the lowercase attribute and warns on the camelCase prop.
+ * Both spellings reach the DOM as `fetchpriority`. Remove once every consumer
+ * is on React 19 (peer range is ^18 || ^19).
+ */
+const IS_REACT_19 = Number(reactVersion.split('.')[0]) >= 19;
+const fetchPriorityProps = (fetchPriority: SeldonImageProps['fetchPriority']) =>
+  IS_REACT_19 ? { fetchPriority } : { fetchpriority: fetchPriority };
 
 export interface SeldonImageProps extends ComponentProps<'div'> {
   /**
@@ -107,6 +126,9 @@ const SeldonImage = memo(
       const imgRef = useRef<HTMLImageElement>(null);
 
       const [loadingState, setLoadingState] = useState<'loading' | 'loaded' | 'error'>(() => {
+        if (!src) {
+          return 'error';
+        }
         if (isServer) {
           return 'loading';
         }
@@ -132,6 +154,9 @@ const SeldonImage = memo(
       });
 
       const loadImage = useCallback(async () => {
+        if (!src) {
+          return;
+        }
         const isValid = await isImageValid({
           img: imgRef.current,
           src,
@@ -188,16 +213,14 @@ const SeldonImage = memo(
             })}
             id={src}
             style={imageStyle}
-            src={src}
+            src={src || undefined}
             srcSet={srcSet}
             sizes={sizes}
             alt={alt}
             data-testid={`${commonProps['data-testid']}-img`}
             ref={imgRef}
             loading={loading}
-            // @ts-expect-error - React throws error when this is passed as fetchPriority, so we need to disable the rule
-            // let it be known that this is a valid attribute [https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/fetchPriority]
-            fetchpriority={fetchPriority} // eslint-disable-line react/no-unknown-property
+            {...fetchPriorityProps(fetchPriority)}
             onLoad={() => {
               setLoadingState('loaded');
             }}

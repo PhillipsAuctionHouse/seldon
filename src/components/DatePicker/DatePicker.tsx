@@ -7,7 +7,7 @@ import { noOp, px, useNormalizedInputProps } from '../../utils';
 import Input, { InputProps } from '../Input/Input';
 import './_datePicker.scss';
 
-export interface DatePickerProps extends Omit<InputProps, 'defaultValue' | 'onChange'>, Record<string, unknown> {
+export interface DatePickerProps extends Omit<InputProps, 'defaultValue' | 'onChange'> {
   /**
    * Optionally allow manual entry to the date input
    */
@@ -59,9 +59,9 @@ export interface DatePickerProps extends Omit<InputProps, 'defaultValue' | 'onCh
   labelText: string;
 
   /**
-   * Locatiion you want the calendar to render for
+   * Location you want the calendar to render for
    */
-  locale: string;
+  locale?: string;
 
   /**
    * Optional `onChange` handler that is called whenever flatpickr is updated
@@ -122,7 +122,7 @@ l10n.en.weekdays.shorthand.forEach((_day, index) => {
   }
 });
 
-const DatePicker = React.forwardRef(
+const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
   (
     {
       allowInput = false,
@@ -152,9 +152,9 @@ const DatePicker = React.forwardRef(
   ) => {
     const baseClassName = `${px}-date-picker`;
     const inputProps = useNormalizedInputProps({ disabled, id, invalid, invalidText, readOnly, type, warn, warnText });
-    const fp = React.useRef() as React.MutableRefObject<flatpickr.Instance>;
-    const inputRef = React.useRef() as React.Ref<HTMLInputElement> | undefined;
-    const manualValue = React.useRef<Date[]>();
+    const fp = React.useRef<flatpickr.Instance | null>(null);
+    const inputRef = React.useRef<HTMLInputElement | null>(null);
+    const manualValue = React.useRef<Date[] | undefined>(undefined);
     React.useEffect(() => {
       // Config for flatpickr
       const config: flatpickr.Options.Options = {
@@ -195,15 +195,17 @@ const DatePicker = React.forwardRef(
       ) {
         return;
       }
+      const instance = fp.current;
       if (
+        instance &&
         'current' in manualValue &&
         manualValue?.current?.length &&
         manualValue?.current?.length > 0 &&
-        manualValue?.current?.join().toString() !== fp?.current?.selectedDates.join().toString()
+        manualValue?.current?.join().toString() !== instance.selectedDates.join().toString()
       ) {
-        const element = fp.current?.element as HTMLInputElement;
+        const element = instance.element as HTMLInputElement;
         manualValue.current = [];
-        onChange(fp.current?.selectedDates, element?.value, fp.current);
+        onChange(instance.selectedDates, element?.value, instance);
       }
     };
 

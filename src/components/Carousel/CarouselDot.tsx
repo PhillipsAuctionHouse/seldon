@@ -9,7 +9,7 @@ export interface CarouselDotProps extends ComponentProps<'button'> {
   /** Callback function when the dot is clicked */
   onClick: () => void;
   /** Reference to the scrollable container */
-  scrollableContainerRef: React.RefObject<HTMLDivElement>;
+  scrollableContainerRef: React.RefObject<HTMLDivElement | null>;
   /** Index of this dot among its siblings, forwarded to onInViewChange */
   index: number;
   /** Callback function when the dot comes into view within the scrollable container */

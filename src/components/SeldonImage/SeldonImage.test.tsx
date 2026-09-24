@@ -15,6 +15,15 @@ describe('SeldonImage', () => {
     expect(image).toHaveAttribute('src', 'test-image.jpg');
   });
 
+  it('renders fetchPriority as the fetchpriority attribute without React warnings', () => {
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+    render(<SeldonImage src="test-image.jpg" alt="" fetchPriority="high" />);
+
+    expect(screen.getByTestId('seldon-image-img')).toHaveAttribute('fetchpriority', 'high');
+    expect(consoleError).not.toHaveBeenCalled();
+    consoleError.mockRestore();
+  });
+
   it('applies aspect ratio class correctly', () => {
     const { container } = render(<SeldonImage src="test-image.jpg" alt="" aspectRatio={AspectRatio.Landscape} />);
     expect(container.firstChild).toHaveClass(`${px}-seldon-image--aspect-ratio-16-9`);

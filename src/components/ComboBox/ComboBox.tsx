@@ -2,13 +2,13 @@ import * as Popover from '@radix-ui/react-popover';
 import classnames from 'classnames';
 import { Command, CommandGroup, CommandInput, CommandItem, CommandList } from 'cmdk';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { useOnClickOutside } from 'usehooks-ts';
 import * as iconComponents from '../../assets/formatted';
 import { getCommonProps, useNormalizedInputProps } from '../../utils';
 import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 import { ComboBoxOption } from './types';
 import { usePrevious } from '../../utils/usePrevious';
+import { useOnClickOutsideRef } from '../../utils/useOnClickOutsideRef';
 import { Text, TextVariants } from '../Text';
 // `.seldon-input__validation`, which useNormalizedInputProps emits for the invalid/warn message,
 // is defined in Input's stylesheet rather than ComboBox's.
@@ -85,7 +85,7 @@ export interface ComboBoxProps {
   /**
    * popoverContainer ref for the ComboBox
    */
-  popoverContainerRef?: React.RefObject<HTMLElement>;
+  popoverContainerRef?: React.RefObject<HTMLElement | null>;
   /**
    * No options message translation
    * @default "No Options."
@@ -362,7 +362,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
   }, [inputValue, options, handleOptionSelect, memoizedGetOptionLabel]);
 
   // Handle clicks outside the component
-  useOnClickOutside(containerRef, (event) => {
+  useOnClickOutsideRef(containerRef, (event) => {
     // Don't handle clicks on dropdown items or the input itself
     if (
       (event.target as HTMLElement).closest(`.${baseClassName}__item`) ||

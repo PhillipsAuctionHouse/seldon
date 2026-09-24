@@ -5,6 +5,8 @@ import Button from './Button';
 import { runCommonTests } from '../../utils/testUtils';
 import { ButtonVariants, ButtonSizes } from './types';
 
+const getPrefetchLink = () => document.head.querySelector<HTMLLinkElement>('[data-testid="prefetch-link"]');
+
 describe('Button', () => {
   runCommonTests(Button, 'Button');
   it('is selectable by the test id', () => {
@@ -85,8 +87,8 @@ describe('Button', () => {
       anchorElement.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
     });
     await waitFor(() => {
-      expect(screen.getByTestId('prefetch-link')).toHaveAttribute('rel', 'prefetch');
-      expect(screen.getByTestId('prefetch-link')).toHaveAttribute('href', 'https://example.com');
+      expect(getPrefetchLink()).toHaveAttribute('rel', 'prefetch');
+      expect(getPrefetchLink()).toHaveAttribute('href', 'https://example.com');
     });
   });
 
@@ -101,7 +103,7 @@ describe('Button', () => {
       anchorElement.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
     });
     await waitFor(() => {
-      expect(screen.queryByTestId('prefetch-link')).not.toBeInTheDocument();
+      expect(getPrefetchLink()).not.toBeInTheDocument();
     });
   });
 
@@ -113,13 +115,13 @@ describe('Button', () => {
     );
     const anchorElement = screen.getByText('Link');
     await waitFor(() => {
-      expect(screen.queryByTestId('prefetch-link')).not.toBeInTheDocument();
+      expect(getPrefetchLink()).not.toBeInTheDocument();
     });
     act(() => {
       anchorElement.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
     });
     await waitFor(() => {
-      expect(screen.getByTestId('prefetch-link')).toBeInTheDocument();
+      expect(getPrefetchLink()).toBeInTheDocument();
     });
   });
 

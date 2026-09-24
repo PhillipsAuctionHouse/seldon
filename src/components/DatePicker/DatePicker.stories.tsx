@@ -111,7 +111,7 @@ const argTypes = {
 };
 
 const PickerWithRef = (props: DatePickerProps) => {
-  const inputRef = React.useRef() as React.Ref<HTMLInputElement> | undefined;
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
 
   const handleOnChange = (dates: Date[], dateStr: string, Instance: Instance) => {
     if (props && typeof props.onChange === 'function') {
