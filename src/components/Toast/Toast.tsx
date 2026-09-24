@@ -57,7 +57,7 @@ const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Toast');
 
     return (
-      <PrimitiveToast.Root {...commonProps} className={classnames(baseClassName, className)} ref={ref}>
+      <PrimitiveToast.Root {...commonProps} id={props.id} className={classnames(baseClassName, className)} ref={ref}>
         <div className={`${baseClassName}__content`}>
           <PrimitiveToast.Title>{title}</PrimitiveToast.Title>
           {actionElement && actionAltText && (
@@ -66,13 +66,13 @@ const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(
             </PrimitiveToast.Action>
           )}
         </div>
-        {hasCloseButton && (
+        {hasCloseButton ? (
           <PrimitiveToast.Close className={`${baseClassName}__close`} aria-label={closeButtonLabel} asChild>
             <IconButton variant={ButtonVariants.tertiary}>
               <Icon icon="CloseX" title={closeButtonLabel} color="$white-100" aria-hidden />
             </IconButton>
           </PrimitiveToast.Close>
-        )}
+        ) : null}
       </PrimitiveToast.Root>
     );
   },

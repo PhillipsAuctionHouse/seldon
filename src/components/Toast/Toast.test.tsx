@@ -4,6 +4,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { ToastProvider } from './ToastContextProvider';
 import Toast, { PrimitiveToastProps } from './Toast';
 import { ReactNode } from 'react';
+import { runCommonTests } from '../../utils/testUtils';
 
 interface ToastMockProps {
   children?: ReactNode;
@@ -20,14 +21,18 @@ interface ToastCloseProps extends ToastMockProps {
 // Mock Radix UI Toast components
 vi.mock('@radix-ui/react-toast', async () => {
   const actual = await vi.importActual('@radix-ui/react-toast');
-  return {
-    ...actual,
-
-    Root: ({ children, className, ...props }: React.ComponentPropsWithoutRef<'div'>) => (
-      <div className={className} data-testid="toast" {...props}>
+  const Root = React.forwardRef<HTMLDivElement, React.ComponentPropsWithoutRef<'div'>>(
+    ({ children, className, ...props }, ref) => (
+      <div className={className} data-testid="toast" {...props} ref={ref}>
         {children}
       </div>
     ),
+  );
+  Root.displayName = 'Root';
+  return {
+    ...actual,
+
+    Root,
     Title: ({ children }: ToastMockProps) => <div data-testid="toast-title">{children}</div>,
     Action: ({
       children,
@@ -86,6 +91,8 @@ const ToastWrapper = (props: Partial<PrimitiveToastProps>) => (
 );
 
 describe('Toast', () => {
+  runCommonTests(Toast, 'Toast', { title: 'Test Toast' });
+
   it('renders with title', async () => {
     render(<ToastWrapper title="Test Toast" />);
     expect(await screen.findByTestId('toast-title')).toHaveTextContent('Test Toast');
