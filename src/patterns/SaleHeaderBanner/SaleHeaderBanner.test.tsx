@@ -86,7 +86,8 @@ describe('SaleHeaderBanner', () => {
     // The countdown component is rendered twice, once for mobile and once for desktop
     // Only one is shown at a time based on the screen size
     expect(screen.getAllByText('Lots Begin to close in').length).toBeGreaterThan(0);
-    expect(screen.getAllByText('dayTranslated').length).toBeGreaterThan(0);
+    // Unit label is pluralized by remaining duration (`day` vs `days`).
+    expect(screen.getAllByText(/days?Translated/).length).toBeGreaterThan(0);
   });
 
   it('renders the "Browse Upcoming Sale" link when auction is closed', () => {

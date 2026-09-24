@@ -4,6 +4,7 @@ import { ComponentProps, ElementType, forwardRef } from 'react';
 import { Link, LinkProps, LinkVariants } from '../../components/Link';
 import { Text, TextVariants } from '../../components/Text';
 import { getCommonProps } from '../../utils';
+import './_viewingDetails.scss';
 
 export interface ViewingSessionProps {
   /**

@@ -1,95 +1,98 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-$top-transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+@layer seldon.components {
+  $top-transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-.#{$px}-nav__list {
-  align-items: flex-start;
-  flex-direction: column;
-  justify-content: left;
-  opacity: 1;
+  .#{$px}-nav__list {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: left;
+    opacity: 1;
 
-  // Remove default outline only for mouse focus; keep it for keyboard (:focus-visible)
-  &:focus:not(:focus-visible) {
-    outline: none;
-  }
-
-  &--offscreen {
-    opacity: 0;
-    pointer-events: none;
-    top: -100%;
-  }
-
-  @include isHeaderDesktop {
-    align-items: flex-end;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    top: 0;
-    transform: translateY(0);
-    transition:
-      $top-transition,
-      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-      opacity 0.5s cubic-bezier(0.65, 0, 0.35, 1);
-    z-index: 5;
-
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
+    // Remove default outline only for mouse focus; keep it for keyboard (:focus-visible)
+    &:focus:not(:focus-visible) {
+      outline: none;
     }
 
-    // Offscreen state (transform/opacity) driven by .nav__list-container--search-expanded in _navigation.scss
     &--offscreen {
+      opacity: 0;
+      pointer-events: none;
+      top: -100%;
+    }
+
+    @include isHeaderDesktop {
+      align-items: flex-end;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      top: 0;
+      transform: translateY(0);
       transition:
         $top-transition,
         transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-        opacity 0.2s cubic-bezier(0.65, 0, 0.35, 1);
+        opacity 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+      z-index: 5;
 
       @media (prefers-reduced-motion: reduce) {
         transition: none;
       }
-    }
 
-    &__section {
-      display: grid;
-      gap: $spacing-sm;
-      width: 50%;
+      // Offscreen state (transform/opacity) driven by .nav__list-container--search-expanded in _navigation.scss
+      &--offscreen {
+        transition:
+          $top-transition,
+          transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.2s cubic-bezier(0.65, 0, 0.35, 1);
 
-      &:only-child {
-        width: 100%;
-      }
-    }
-
-    .#{$px}-accordion {
-      display: none;
-    }
-  }
-
-  @include isHeaderMobile {
-    &__section {
-      width: 100%;
-    }
-    .#{$px}-accordion {
-      border-bottom: 0;
-      border-top: 0;
-      margin-bottom: 0;
-
-      &-item {
-        &-label {
-          opacity: 1;
+        @media (prefers-reduced-motion: reduce) {
+          transition: none;
         }
       }
-    }
-    .#{$px}-link--linkStylised {
-      border-bottom: 1px solid $light-gray;
-      flex-wrap: wrap;
-      padding: $snowflake-menu-padding 0;
+
+      &__section {
+        display: grid;
+        gap: $spacing-sm;
+        width: 50%;
+
+        &:only-child {
+          width: 100%;
+        }
+      }
+
+      .#{$px}-accordion {
+        display: none;
+      }
     }
 
-    .#{$px}-accordion-item-label {
-      padding: $snowflake-menu-padding 0;
+    @include isHeaderMobile {
+      &__section {
+        width: 100%;
+      }
+      .#{$px}-accordion {
+        border-bottom: 0;
+        border-top: 0;
+        margin-bottom: 0;
+
+        &-item {
+          &-label {
+            opacity: 1;
+          }
+        }
+      }
+      .#{$px}-link--linkStylised {
+        border-bottom: 1px solid $light-gray;
+        flex-wrap: wrap;
+        padding: $snowflake-menu-padding 0;
+      }
+
+      .#{$px}-accordion-item-label {
+        padding: $snowflake-menu-padding 0;
+      }
     }
   }
 }

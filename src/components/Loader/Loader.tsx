@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import { forwardRef } from 'react';
 import { px } from '../../utils';
+import './_loader.scss';
 
 export interface LoaderProps {
   /** Prop for centering Loader component */

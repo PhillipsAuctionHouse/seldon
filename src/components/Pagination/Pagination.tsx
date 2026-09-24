@@ -10,6 +10,7 @@ import { determineOptionValue, findOptionFromSelectString } from './utils';
 import { usePendingState } from '../../utils/hooks';
 import { ButtonProps } from '../Button/Button';
 import { Icon } from '../Icon';
+import './_pagination.scss';
 
 export type PaginationOptionValue = string | number;
 

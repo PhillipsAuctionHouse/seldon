@@ -3,6 +3,7 @@ import { getCommonProps } from '../../utils';
 import { ComponentProps, ElementType, forwardRef } from 'react';
 import { getLinkVariantClassName, isLinkExternal } from './utils';
 import { LinkVariants } from './types';
+import './_link.scss';
 
 export interface LinkProps extends ComponentProps<'a'> {
   /**

@@ -7,6 +7,7 @@ import { SeldonImage, AspectRatio } from '../SeldonImage';
 import { Video } from '../Video';
 import { Text, TextVariants } from '../Text';
 import { CardVariants } from './types';
+import './_card.scss';
 
 export interface CardRootProps extends ComponentProps<'div'> {
   /**

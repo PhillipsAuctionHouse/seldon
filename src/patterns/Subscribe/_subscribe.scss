@@ -1,20 +1,23 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-subscribe {
-  max-width: 600px;
-  width: 100%;
-
-  &__title {
-    margin-bottom: $spacing-xsm;
-  }
-
-  &__input__wrapper {
-    margin-top: $spacing-md;
-  }
-
-  &__button {
-    margin: 0.25rem 0 $spacing-sm;
-    max-width: 240px;
+@layer seldon.patterns {
+  .#{$px}-subscribe {
+    max-width: 600px;
     width: 100%;
+
+    &__title {
+      margin-bottom: $spacing-xsm;
+    }
+
+    &__input__wrapper {
+      margin-top: $spacing-md;
+    }
+
+    &__button {
+      margin: 0.25rem 0 $spacing-sm;
+      max-width: 240px;
+      width: 100%;
+    }
   }
 }

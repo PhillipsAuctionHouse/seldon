@@ -9,6 +9,7 @@ import { ButtonVariants } from '../../components/Button/types';
 import { Icon, IconName } from '../../components/Icon';
 import IconButton from '../../components/IconButton/IconButton';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
+import './_accountPageHeader.scss';
 
 export interface AccountPageHeaderProps extends ComponentProps<'div'> {
   /** The main title displayed at the top of the account page */

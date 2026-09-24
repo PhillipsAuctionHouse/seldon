@@ -1,65 +1,68 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-breadcrumb {
-  @include text($labelMedium);
+@layer seldon.components {
+  .#{$px}-breadcrumb {
+    @include text($labelMedium);
 
-  color: $pure-black;
+    color: $pure-black;
 
-  &__back-button:hover svg path {
-    fill: $pure-black;
-  }
+    &__back-button:hover svg path {
+      fill: $pure-black;
+    }
 
-  &__item {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    flex-shrink: 0;
+    &__item {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      flex-shrink: 0;
 
-    a {
-      margin: $margin-sm;
-      outline: none;
-      text-decoration: none;
-      text-wrap: nowrap;
-
-      &:hover {
-        color: $button-hover;
+      a {
+        margin: $margin-sm;
+        outline: none;
         text-decoration: none;
+        text-wrap: nowrap;
+
+        &:hover {
+          color: $button-hover;
+          text-decoration: none;
+        }
+
+        &:focus-visible {
+          @include focus-ring($border-radius: $radius-xs);
+        }
       }
 
-      &:focus-visible {
-        @include focus-ring($border-radius: $radius-xs);
+      span {
+        margin: $margin-sm;
       }
     }
 
-    span {
-      margin: $margin-sm;
+    ol {
+      display: flex;
+      flex-direction: row;
+      padding: 0;
     }
-  }
 
-  ol {
-    display: flex;
-    flex-direction: row;
-    padding: 0;
-  }
-
-  &--truncate {
-    flex-shrink: 1;
-    overflow: hidden;
-
-    a {
+    &--truncate {
       flex-shrink: 1;
       overflow: hidden;
-      text-overflow: ellipsis;
+
+      a {
+        flex-shrink: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .#{$px}-icon-chevron-right {
+        flex-shrink: 0;
+      }
     }
 
-    .#{$px}-icon-chevron-right {
-      flex-shrink: 0;
+    &--current {
+      color: $primary-black;
+      font-variation-settings: 'wght' 700;
+      white-space: nowrap;
     }
-  }
-
-  &--current {
-    color: $primary-black;
-    font-variation-settings: 'wght' 700;
-    white-space: nowrap;
   }
 }

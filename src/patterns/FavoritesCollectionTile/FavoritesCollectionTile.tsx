@@ -6,6 +6,7 @@ import Link, { LinkProps } from '../../components/Link/Link';
 import { SeldonImage, AspectRatio } from '../../components/SeldonImage';
 import { Text, TextVariants } from '../../components/Text';
 import { getCommonProps } from '../../utils';
+import './_favoritesCollectionTile.scss';
 
 export interface FavoritesCollectionTileProps extends ComponentProps<'div'> {
   /**

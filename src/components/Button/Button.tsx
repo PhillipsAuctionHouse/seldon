@@ -1,3 +1,9 @@
+// Deliberate exception to the usual "stylesheet import goes last" rule: `_button.scss` must load
+// BEFORE Link's, matching the order the componentStyles barrel gives. `--link` sets labelMedium and
+// `.seldon-link--linkLarge/Small` set their own size, both at (0,1,0) in the `seldon.components`
+// layer -- so the layer cannot break the tie and source order decides. Import this last and Button
+// wins, collapsing large (16px) and small (12px) links to 14px. Do not copy this to other components.
+import './_button.scss';
 import classnames from 'classnames';
 import { getCommonProps, px } from '../../utils';
 import { ButtonVariants, ButtonSizes } from './types';

@@ -2,6 +2,7 @@ import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { Text } from '../Text';
+import './_favoritingTileButton.scss';
 
 export interface FavoritingTileButtonProps extends ComponentProps<'button'> {
   /**

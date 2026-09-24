@@ -13,6 +13,7 @@ import { getCommonProps } from '../../utils';
 import Footer, { ProgressWizardFooterProps } from './components/ProgressWizardFooter';
 import { ProgressIndicator } from '../../components/ProgressIndicator';
 import { wrapChildren, getLabelsFromChildren, isControlled } from './utils';
+import './_progressWizard.scss';
 
 /**
  * Props for the main ProgressWizard component.

@@ -1,4 +1,7 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-componentName {
+@layer seldon.components {
+  .#{$px}-componentName {
+  }
 }

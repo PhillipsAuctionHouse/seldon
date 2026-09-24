@@ -7,6 +7,7 @@ import { LanguageSelector, LanguageSelectorProps } from '../../patterns/Language
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import { RemoveScroll } from 'react-remove-scroll';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
+import './_navigation.scss';
 
 export interface NavigationProps extends ComponentProps<'nav'> {
   /**

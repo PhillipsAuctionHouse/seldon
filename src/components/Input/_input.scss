@@ -1,276 +1,271 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-$md: #{$px}-input--md;
-$lg: #{$px}-input--lg;
+@layer seldon.components {
+  $md: #{$px}-input--md;
+  $lg: #{$px}-input--lg;
 
-// Shared Input styles
-.#{$px}-input {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  // Shared Input styles
+  .#{$px}-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 
-  &--hidden,
-  &__label--hidden {
-    @include hidden;
-  }
+    &--hidden,
+    &__label--hidden {
+      @include hidden;
+    }
 
-  &__label.#{$px}-text {
-    font-variation-settings: 'wght' 600;
-    margin-bottom: $spacing-xsm;
-    width: fit-content;
-    word-break: break-word;
-  }
-
-  &__wrapper {
-    accent-color: $black-100;
-    align-items: center;
-    border: 1px solid $black-100;
-    border-radius: $radius-xs;
-    display: inline-flex;
-    font-variation-settings: 'wght' 600;
-    justify-content: space-between;
-    margin-bottom: 0.25rem;
-    padding: $padding-xsm;
-    position: relative;
-
-    &::placeholder {
-      color: $cta-inactive;
+    &__label.#{$px}-text {
       font-variation-settings: 'wght' 600;
+      margin-bottom: $spacing-xsm;
+      width: fit-content;
+      word-break: break-word;
     }
 
-    &:focus-visible,
-    &:focus-within {
-      @include focus-ring($border-radius: $radius-xs);
+    &__wrapper {
+      accent-color: $black-100;
+      align-items: center;
+      border: 1px solid $black-100;
+      border-radius: $radius-xs;
+      display: inline-flex;
+      font-variation-settings: 'wght' 600;
+      justify-content: space-between;
+      margin-bottom: 0.25rem;
+      padding: $padding-xsm;
+      position: relative;
+
+      &::placeholder {
+        color: $cta-inactive;
+        font-variation-settings: 'wght' 600;
+      }
+
+      &:focus-visible,
+      &:focus-within {
+        @include focus-ring($border-radius: $radius-xs);
+      }
+
+      .#{$px}-input__wrapper__input,
+      .#{$px}-input__input {
+        @include text($bodyMedium);
+
+        border: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+
+        &:focus-visible {
+          outline: none;
+        }
+      }
+
+      &__adornment {
+        align-items: center;
+        display: flex;
+        margin-right: 0.25rem;
+        user-select: none;
+        white-space: nowrap;
+      }
     }
 
-    .#{$px}-input__wrapper__input,
-    .#{$px}-input__input {
+    &__input {
       @include text($bodyMedium);
 
-      border: none;
-      margin: 0;
-      padding: 0;
-      width: 100%;
+      accent-color: $black-100;
+      border: 1px solid $black-100;
+      border-radius: $radius-xs;
+      font-variation-settings: 'wght' 600;
+      margin-bottom: 0.25rem;
+      padding: $padding-xsm;
+
+      &::placeholder {
+        font-variation-settings: 'wght' 400;
+      }
 
       &:focus-visible {
+        @include focus-ring($border-radius: $radius-xs);
+      }
+
+      &:hover {
+        accent-color: $cta-hover;
+        border-color: $cta-hover;
+      }
+    }
+
+    &__validation {
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-height: $spacing-md;
+      overflow: hidden;
+    }
+
+    &__empty-validation {
+      line-height: $spacing-sm;
+    }
+
+    // Inline
+    &--inline {
+      align-items: center;
+      flex-flow: row wrap;
+      gap: 1rem;
+
+      .#{$px}-input__input,
+      .#{$px}-input__wrapper {
+        align-self: center;
+        width: unset;
+      }
+    }
+
+    // Disabled
+    &--disabled {
+      color: $keyline-gray;
+      cursor: default;
+
+      .#{$px}-input__label,
+      .#{$px}-input__input,
+      .#{$px}-input__wrapper {
+        color: inherit;
+      }
+      .#{$px}-input__label:hover,
+      .#{$px}-input__input:hover {
+        cursor: default;
+      }
+    }
+
+    // Read only
+    &--readonly {
+      pointer-events: none;
+
+      .#{$px}-input__label,
+      .#{$px}-input__input,
+      .#{$px}-input__wrapper {
+        cursor: default;
+      }
+
+      .#{$px}-input__input {
+        background-color: rgba($pure-black, 0.05);
+      }
+    }
+
+    // Invalid
+    &--invalid {
+      color: $error-red;
+
+      label {
+        color: $error-red;
+      }
+
+      .#{$px}-input__input,
+      .#{$px}-input__input::placeholder,
+      .#{$px}-input__validation {
+        color: $pure-black;
+      }
+
+      .#{$px}-input__input,
+      .#{$px}-input__wrapper {
+        border: 1px solid $error-red;
+        box-shadow: inset 0 0 3px 3px $error-pink;
+
+        &:focus-within {
+          @include focus-ring($border-radius: $radius-xs, $outline-color: $error-red);
+        }
+      }
+
+      .#{$px}-input__wrapper .#{$px}-input__input {
+        border: none;
+        box-shadow: none;
         outline: none;
       }
     }
 
-    &__adornment {
-      align-items: center;
-      display: flex;
-      margin-right: 0.25rem;
-      user-select: none;
-      white-space: nowrap;
-    }
-  }
-
-  &__input {
-    @include text($bodyMedium);
-
-    accent-color: $black-100;
-    border: 1px solid $black-100;
-    border-radius: $radius-xs;
-    font-variation-settings: 'wght' 600;
-    margin-bottom: 0.25rem;
-    padding: $padding-xsm;
-
-    &::placeholder {
-      font-variation-settings: 'wght' 400;
-    }
-
-    &:focus-visible {
-      @include focus-ring($border-radius: $radius-xs);
-    }
-
-    &:hover {
-      accent-color: $cta-hover;
-      border-color: $cta-hover;
-    }
-  }
-
-  &__validation {
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-height: $spacing-md;
-    overflow: hidden;
-  }
-
-  &__empty-validation {
-    line-height: $spacing-sm;
-  }
-
-  // Inline
-  &--inline {
-    align-items: center;
-    flex-flow: row wrap;
-    gap: 1rem;
-
-    .#{$px}-input__input,
-    .#{$px}-input__wrapper {
-      align-self: center;
-      width: unset;
-    }
-  }
-
-  // Disabled
-  &--disabled {
-    color: $keyline-gray;
-    cursor: default;
-
-    .#{$px}-input__label,
-    .#{$px}-input__input,
-    .#{$px}-input__wrapper {
-      color: inherit;
-    }
-    .#{$px}-input__label:hover,
-    .#{$px}-input__input:hover {
-      cursor: default;
-    }
-  }
-
-  // Read only
-  &--readonly {
-    pointer-events: none;
-
-    .#{$px}-input__label,
-    .#{$px}-input__input,
-    .#{$px}-input__wrapper {
-      cursor: default;
-    }
-
-    .#{$px}-input__input {
-      background-color: rgba($pure-black, 0.05);
-    }
-  }
-
-  // Invalid
-  &--invalid {
-    color: $error-red;
-
-    label {
-      color: $error-red;
-    }
-
-    .#{$px}-input__input,
-    .#{$px}-input__input::placeholder,
-    .#{$px}-input__validation {
-      color: $pure-black;
-    }
-
-    .#{$px}-input__input,
-    .#{$px}-input__wrapper {
-      border: 1px solid $error-red;
-      box-shadow: inset 0 0 3px 3px $error-pink;
-
-      &:focus-within {
-        @include focus-ring($border-radius: $radius-xs, $outline-color: $error-red);
+    // warn
+    &--warn {
+      .#{$px}-input__label {
+        position: relative;
       }
     }
 
-    .#{$px}-input__wrapper .#{$px}-input__input {
-      border: none;
-      box-shadow: none;
-      outline: none;
-    }
-  }
-
-  // warn
-  &--warn {
-    .#{$px}-input__label {
-      position: relative;
-    }
-  }
-
-  .#{$px}-input__validation {
-    animation: reveal 0.45s linear forwards;
-  }
-}
-
-.#{$px}-input__label:has(+ input[type='radio']),
-.#{$px}-input__label:has(+ input[type='checkbox']) {
-  cursor: pointer;
-}
-
-.#{$px}-radio-input,
-.#{$px}-checkbox-input {
-  .#{$px}-input__label {
-    @include text($bodyMedium);
-
-    font-variation-settings: 'wght' 600;
-    margin-bottom: 0;
-  }
-
-  .#{$px}-input__input {
-    align-self: flex-start;
-    cursor: pointer;
-    height: 16px;
-    width: 16px;
-  }
-
-  &.#{$px}-input--inline {
-    .#{$px}-input__input {
-      align-self: center;
-    }
-  }
-}
-
-.#{$px}-radio-input .#{$px}-input__input {
-  &:focus-visible {
-    outline: none;
-    position: relative;
-
-    &::before {
-      border: 2px solid $focus-default;
-      border-radius: $radius-3xl;
-      content: '';
-      inset: -6px;
-      pointer-events: none;
-      position: absolute;
-    }
-  }
-}
-
-.#{$px}-input--inline.#{$px}-radio-input,
-.#{$px}-input--inline.#{$px}-checkbox-input,
-.#{$px}-input--inline.#{$px}-toggle-input {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-  position: relative;
-  transition: padding 0.25s;
-
-  &.#{$px}-input--invalid,
-  &.#{$px}-input--warn {
-    padding-top: 1.5rem;
-
     .#{$px}-input__validation {
-      left: 0;
-      position: absolute;
-      top: 0;
+      animation: reveal 0.45s linear forwards;
     }
   }
 
-  &.#{$px}-input--warn {
-    padding-top: 2.75rem;
-  }
-}
-
-.#{$px}-select-input.#{$px}-input {
-  width: fit-content;
-}
-.#{$px}-select-input .#{$px}-input__input {
-  background: transparent;
-  width: fit-content;
-}
-
-@keyframes reveal {
-  0% {
-    opacity: 0;
+  .#{$px}-input__label:has(+ input[type='radio']),
+  .#{$px}-input__label:has(+ input[type='checkbox']) {
+    cursor: pointer;
   }
 
-  100% {
-    opacity: 1;
+  .#{$px}-radio-input,
+  .#{$px}-checkbox-input {
+    .#{$px}-input__label {
+      @include text($bodyMedium);
+
+      font-variation-settings: 'wght' 600;
+      margin-bottom: 0;
+    }
+
+    .#{$px}-input__input {
+      align-self: flex-start;
+      cursor: pointer;
+      height: 16px;
+      width: 16px;
+    }
+
+    &.#{$px}-input--inline {
+      .#{$px}-input__input {
+        align-self: center;
+      }
+    }
+  }
+
+  .#{$px}-radio-input .#{$px}-input__input {
+    &:focus-visible {
+      outline: none;
+      position: relative;
+
+      &::before {
+        border: 2px solid $focus-default;
+        border-radius: $radius-3xl;
+        content: '';
+        inset: -6px;
+        pointer-events: none;
+        position: absolute;
+      }
+    }
+  }
+
+  .#{$px}-input--inline.#{$px}-radio-input,
+  .#{$px}-input--inline.#{$px}-checkbox-input,
+  .#{$px}-input--inline.#{$px}-toggle-input {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    position: relative;
+    transition: padding 0.25s;
+
+    &.#{$px}-input--invalid,
+    &.#{$px}-input--warn {
+      padding-top: 1.5rem;
+
+      .#{$px}-input__validation {
+        left: 0;
+        position: absolute;
+        top: 0;
+      }
+    }
+
+    &.#{$px}-input--warn {
+      padding-top: 2.75rem;
+    }
+  }
+
+  @keyframes reveal {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
   }
 }

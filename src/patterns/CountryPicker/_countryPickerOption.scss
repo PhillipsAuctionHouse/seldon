@@ -1,87 +1,90 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-country-picker {
-  &__option {
-    align-items: center;
-    background: $white-100;
-    border: 1px solid transparent;
-    border-radius: $radius-xs;
-    cursor: pointer;
-    display: flex;
-    flex-direction: row-reverse;
-    font-variation-settings: 'wght' 600;
-    justify-content: space-between;
-    margin-bottom: $spacing-micro;
-    margin-right: 1px; // account for scroll bar
-    outline: none;
-    padding: 12px $spacing-sm;
-    transition:
-      border-color 0.2s,
-      background 0.2s;
+@layer seldon.patterns {
+  .#{$px}-country-picker {
+    &__option {
+      align-items: center;
+      background: $white-100;
+      border: 1px solid transparent;
+      border-radius: $radius-xs;
+      cursor: pointer;
+      display: flex;
+      flex-direction: row-reverse;
+      font-variation-settings: 'wght' 600;
+      justify-content: space-between;
+      margin-bottom: $spacing-micro;
+      margin-right: 1px; // account for scroll bar
+      outline: none;
+      padding: 12px $spacing-sm;
+      transition:
+        border-color 0.2s,
+        background 0.2s;
 
-    &--selected {
-      border: 1px solid $pure-black;
+      &--selected {
+        border: 1px solid $pure-black;
 
-      .#{$px}-country-picker__radio {
-        accent-color: $pure-black;
+        .#{$px}-country-picker__radio {
+          accent-color: $pure-black;
+        }
+      }
+
+      &--is-phone:focus-within {
+        box-shadow: inset 0 0 0 2px $focus-default;
+        outline: none;
+      }
+
+      &-content {
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+        .#{$px}-text {
+          font-variation-settings: 'wght' 600;
+        }
+      }
+
+      &-flag {
+        align-items: center;
+        display: flex;
+        height: 1rem;
+        justify-content: center;
+        margin-right: $spacing-sm;
+        overflow: hidden;
+        width: 1.5rem;
+
+        @media (min-width: $breakpoint-md) {
+          height: 1.25rem;
+          width: 1.75rem;
+        }
+
+        &-img {
+          display: block;
+          height: 100%;
+          width: auto;
+        }
       }
     }
+    .#{$px}-country-picker__radio {
+      height: 1.25rem;
+      width: 1.25rem;
+    }
 
-    &--is-phone:focus-within {
+    &__radio--visually-hidden {
+      border: 0;
+      height: 1px;
+      margin: -1px;
+      opacity: 0;
+      padding: 0;
+      white-space: nowrap;
+      width: 1px;
+    }
+  }
+
+  // When both selected and focused, show both the border and focus ring
+  .#{$px}-country-picker__option--is-phone.#{$px}-country-picker__option--selected {
+    &:focus-within {
       box-shadow: inset 0 0 0 2px $focus-default;
       outline: none;
     }
-
-    &-content {
-      display: flex;
-      flex: 1;
-      justify-content: space-between;
-      .#{$px}-text {
-        font-variation-settings: 'wght' 600;
-      }
-    }
-
-    &-flag {
-      align-items: center;
-      display: flex;
-      height: 1rem;
-      justify-content: center;
-      margin-right: $spacing-sm;
-      overflow: hidden;
-      width: 1.5rem;
-
-      @media (min-width: $breakpoint-md) {
-        height: 1.25rem;
-        width: 1.75rem;
-      }
-
-      &-img {
-        display: block;
-        height: 100%;
-        width: auto;
-      }
-    }
-  }
-  .#{$px}-country-picker__radio {
-    height: 1.25rem;
-    width: 1.25rem;
-  }
-
-  &__radio--visually-hidden {
-    border: 0;
-    height: 1px;
-    margin: -1px;
-    opacity: 0;
-    padding: 0;
-    white-space: nowrap;
-    width: 1px;
-  }
-}
-
-// When both selected and focused, show both the border and focus ring
-.#{$px}-country-picker__option--is-phone.#{$px}-country-picker__option--selected {
-  &:focus-within {
-    box-shadow: inset 0 0 0 2px $focus-default;
-    outline: none;
   }
 }

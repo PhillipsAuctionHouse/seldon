@@ -1,89 +1,98 @@
 /* stylelint-disable selector-class-pattern */
+@use 'sass:meta';
 @use '~scss/allPartials' as *;
-@import 'flatpickr/dist/flatpickr.css';
+@use '~scss/layers';
 
-.#{$px}-date-picker {
-  font-size: $font-size-body-medium;
+// Inline, don't @import: a nested CSS @import inside @layer is left
+// unresolved by Vite and Chromatic fails to preload DatePicker-*.css.
+@layer vendor {
+  @include meta.load-css('flatpickr/dist/flatpickr.css');
 }
 
-.flatpickr-calendar {
-  .flatpickr-day,
-  .flatpickr-day.selected,
-  .flatpickr-day:hover,
-  .flatpickr-day:focus,
-  .flatpickr-day.startRange,
-  .flatpickr-day.endRange {
-    border-radius: $radius-xs;
+@layer seldon.components {
+  .#{$px}-date-picker {
+    font-size: $font-size-body-medium;
   }
 
-  .flatpickr-day.selected,
-  .flatpickr-day:hover,
-  .flatpickr-day:focus,
-  .flatpickr-day.startRange,
-  .flatpickr-day.endRange {
-    background: $pure-black;
-    border-color: $pure-black;
-    color: $pure-white;
-  }
+  .flatpickr-calendar {
+    .flatpickr-day,
+    .flatpickr-day.selected,
+    .flatpickr-day:hover,
+    .flatpickr-day:focus,
+    .flatpickr-day.startRange,
+    .flatpickr-day.endRange {
+      border-radius: $radius-xs;
+    }
 
-  .flatpickr-day:focus {
-    @include focus-ring($border-radius: $radius-xs);
-  }
+    .flatpickr-day.selected,
+    .flatpickr-day:hover,
+    .flatpickr-day:focus,
+    .flatpickr-day.startRange,
+    .flatpickr-day.endRange {
+      background: $pure-black;
+      border-color: $pure-black;
+      color: $pure-white;
+    }
 
-  .flatpickr-day.today {
-    border-color: transparent;
-    font-variation-settings: 'wght' 700;
-    position: relative;
+    .flatpickr-day:focus {
+      @include focus-ring($border-radius: $radius-xs);
+    }
 
-    &::after {
+    .flatpickr-day.today {
+      border-color: transparent;
+      font-variation-settings: 'wght' 700;
+      position: relative;
+
+      &::after {
+        background-color: $pure-black;
+        bottom: 2px;
+        content: '';
+        height: 0.25rem;
+        left: 50%;
+        position: absolute;
+        transform: translateX(-50%);
+        width: 0.25rem;
+      }
+    }
+
+    .flatpickr-months .flatpickr-prev-month:hover,
+    .flatpickr-months .flatpickr-next-month:hover {
       background-color: $pure-black;
-      bottom: 2px;
-      content: '';
-      height: 0.25rem;
-      left: 50%;
-      position: absolute;
-      transform: translateX(-50%);
-      width: 0.25rem;
+
+      svg {
+        fill: $pure-white;
+      }
     }
-  }
 
-  .flatpickr-months .flatpickr-prev-month:hover,
-  .flatpickr-months .flatpickr-next-month:hover {
-    background-color: $pure-black;
-
-    svg {
-      fill: $pure-white;
+    .flatpickr-current-month,
+    .flatpickr-monthDropdown-months,
+    .flatpickr-current-month input.cur-year {
+      text-transform: uppercase;
     }
-  }
 
-  .flatpickr-current-month,
-  .flatpickr-monthDropdown-months,
-  .flatpickr-current-month input.cur-year {
-    text-transform: uppercase;
-  }
+    .flatpickr-weekday {
+      font-variation-settings: 'wght' 700;
+    }
 
-  .flatpickr-weekday {
-    font-variation-settings: 'wght' 700;
-  }
-
-  .flatpickr-current-month.flatpickr-current-month {
-    @include text($labelLarge);
-
-    padding: 0.65rem 0 0;
-
-    .cur-year {
+    .flatpickr-current-month.flatpickr-current-month {
       @include text($labelLarge);
+
+      padding: 0.65rem 0 0;
+
+      .cur-year {
+        @include text($labelLarge);
+      }
     }
-  }
 
-  .flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n + 1)),
-  .flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n + 1)),
-  .flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n + 1)) {
-    box-shadow: -10px 0 0 $grey-50;
-  }
+    .flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n + 1)),
+    .flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n + 1)),
+    .flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n + 1)) {
+      box-shadow: -10px 0 0 $grey-50;
+    }
 
-  &.arrowTop::before,
-  &.arrowTop::after {
-    content: unset;
+    &.arrowTop::before,
+    &.arrowTop::after {
+      content: unset;
+    }
   }
 }

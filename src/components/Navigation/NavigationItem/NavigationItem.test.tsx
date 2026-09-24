@@ -3,6 +3,7 @@ import NavigationItem from './NavigationItem';
 import { HeaderContext } from '../../../site-furniture/Header/Header';
 import userEvent from '@testing-library/user-event';
 import { defaultHeaderContext } from '../../../site-furniture/Header/utils';
+import { MouseEvent } from 'react';
 
 describe('NavigationItem', () => {
   it('renders the navigation item correctly', () => {
@@ -29,7 +30,9 @@ describe('NavigationItem', () => {
     expect(navigationItem).toHaveClass('custom-class');
   });
 
-  it('calls onClick when clicked', async () => {
+  // Exactly once, not just "called": the link runs handleClick (which calls onClick) and the event
+  // then bubbles to the li, so binding onClick to both would fire a side-effecting handler twice.
+  it('calls onClick exactly once per click', async () => {
     const onClick = vi.fn();
 
     render(
@@ -38,9 +41,72 @@ describe('NavigationItem', () => {
       </HeaderContext.Provider>,
     );
 
-    const navigationItem = screen.getByTestId('nav-item-Home');
-    await userEvent.click(navigationItem);
+    await userEvent.click(screen.getByText('Home'));
+
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('closes the mobile menu when a link is clicked', async () => {
+    const closeMenu = vi.fn();
+
+    render(
+      <HeaderContext.Provider value={{ ...defaultHeaderContext, closeMenu }}>
+        <NavigationItem href="/" label="Home" />
+      </HeaderContext.Provider>,
+    );
+
+    await userEvent.click(screen.getByText('Home'));
+
+    expect(closeMenu).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not close the menu for action-only items with no href (e.g. language rows)', async () => {
+    const closeMenu = vi.fn();
+    const onClick = vi.fn();
+
+    render(
+      <HeaderContext.Provider value={{ ...defaultHeaderContext, closeMenu }}>
+        <NavigationItem label="中文" onClick={onClick} />
+      </HeaderContext.Provider>,
+    );
+
+    await userEvent.click(screen.getByText('中文'));
 
     expect(onClick).toHaveBeenCalled();
+    expect(closeMenu).not.toHaveBeenCalled();
+  });
+
+  it('leaves the menu open on a modified click, which navigates in a new tab', async () => {
+    const closeMenu = vi.fn();
+
+    render(
+      <HeaderContext.Provider value={{ ...defaultHeaderContext, closeMenu }}>
+        <NavigationItem href="/" label="Home" />
+      </HeaderContext.Provider>,
+    );
+
+    // setup() keeps the modifier held across the click; the direct userEvent.* API resets state per call
+    const user = userEvent.setup();
+    await user.keyboard('{Meta>}');
+    await user.click(screen.getByText('Home'));
+    await user.keyboard('{/Meta}');
+
+    expect(closeMenu).not.toHaveBeenCalled();
+  });
+
+  it('leaves the menu open when onClick prevents the navigation', async () => {
+    const closeMenu = vi.fn();
+    const onClick = vi.fn((event: MouseEvent<HTMLElement>) => event.preventDefault());
+
+    render(
+      <HeaderContext.Provider value={{ ...defaultHeaderContext, closeMenu }}>
+        <NavigationItem href="/" label="Home" onClick={onClick} />
+      </HeaderContext.Provider>,
+    );
+
+    await userEvent.click(screen.getByText('Home'));
+
+    expect(onClick).toHaveBeenCalled();
+    expect(closeMenu).not.toHaveBeenCalled();
   });
 });

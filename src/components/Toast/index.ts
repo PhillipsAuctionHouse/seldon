@@ -1,3 +1,3 @@
 export { default as Toast } from './Toast';
-export { ToastProvider } from './ToastContextProvider';
-export { useToast } from './useToast';
+export { ToastProvider, type ToastOffset, type ToastProviderProps } from './ToastContextProvider';
+export { useToast, type ToastFn } from './useToast';

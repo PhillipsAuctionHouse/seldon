@@ -19,7 +19,7 @@ Keep responses focused, reference concrete files, and follow existing patterns o
 - Props docs: Use JSDoc above interface + inline comments per prop (see `Carousel.tsx`, `Button.tsx`). Keep descriptions action-oriented.
 - Tokens: Use enums like `SpacingTokens`, `PaddingTokens` from `src/utils/index.tsx` instead of raw strings.
 - Accessibility: Provide ARIA roles/labels consistent with existing examples (e.g. Carousel uses `role="region"` + `aria-roledescription`). Keyboard interactions mirror current patterns (Arrow key navigation in `Carousel`).
-- Styling: BEM-ish prefix `seldon-` automatically from `getCommonProps`; add modifier classes via template literals (`${baseClassName}--{state}`). Avoid hard-coded color/spacing; rely on SCSS variables/mixins in forwarded partials (`_allPartials.scss`).
+- Styling: BEM-ish prefix `seldon-` automatically from `getCommonProps`; add modifier classes via template literals (`${baseClassName}--{state}`). Avoid hard-coded color/spacing; rely on SCSS variables/mixins in forwarded partials (`_allPartials.scss` is mixins/tokens only). Import the component `_*.scss` from TSX. `_foundation.scss` emits shared CSS via `SeldonProvider`.
 
 ## 3. Testing Patterns
 
@@ -46,7 +46,7 @@ Keep responses focused, reference concrete files, and follow existing patterns o
 
 ## 6. SCSS + Tokens
 
-- Import shared partials via `_allPartials.scss`.
+- Import shared mixins and variables via `_allPartials.scss`. Import the component `_*.scss` from TSX. `SeldonProvider` loads `_foundation.scss` once for padding utilities, `:root` tokens, and fonts. Wrap emitting rules in `@layer vendor|seldon.foundation|components|patterns|site` (`@use '~scss/layers'`) so cascade does not depend on JS import order. Third-party CSS belongs in `vendor`.
 - Avoid duplicating spacing/typography rules already available in `_vars.scss` / `_typography.scss` / `_sharedClasses.scss`.
 - Should always use tokens for spacing, typography, colors (e.g. `padding: $spacing-16`).
 

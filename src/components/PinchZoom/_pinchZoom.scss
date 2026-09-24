@@ -1,39 +1,42 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-pinch-zoom {
-  cursor: pointer;
-  display: flex;
-  max-height: 100%;
-
-  &.#{$px}-pinch-zoom {
-    height: unset;
-    margin: 0 auto;
-    overflow: unset;
-    width: unset;
-  }
-
-  &-content {
+@layer seldon.components {
+  .#{$px}-pinch-zoom {
+    cursor: pointer;
     display: flex;
-    flex: 1;
     max-height: 100%;
 
-    &.#{$px}-pinch-zoom-content {
-      flex-wrap: unset;
+    &.#{$px}-pinch-zoom {
       height: unset;
+      margin: 0 auto;
+      overflow: unset;
       width: unset;
     }
-  }
 
-  &-zoomed {
-    cursor: grab;
+    &-content {
+      display: flex;
+      flex: 1;
+      max-height: 100%;
 
-    &:active {
-      cursor: grabbing;
+      &.#{$px}-pinch-zoom-content {
+        flex-wrap: unset;
+        height: unset;
+        width: unset;
+      }
     }
-  }
 
-  &-child {
-    flex: 1;
-    object-fit: contain;
+    &-zoomed {
+      cursor: grab;
+
+      &:active {
+        cursor: grabbing;
+      }
+    }
+
+    &-child {
+      flex: 1;
+      object-fit: contain;
+    }
   }
 }

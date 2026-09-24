@@ -4,6 +4,7 @@ import { ComponentPropsWithoutRef, ComponentType } from 'react';
 import { defaultYear, px } from '../../utils';
 import { Text, TextVariants } from '../../components/Text';
 import { Icon } from '../../components/Icon';
+import './_footer.scss';
 
 export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
   /**

@@ -1,214 +1,217 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-carousel {
-  position: relative;
+@layer seldon.components {
+  .#{$px}-carousel {
+    position: relative;
 
-  &-arrows-prev-btn,
-  &-arrows-next-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    flex-flow: column wrap;
-    height: 100%;
-    justify-content: center;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    width: 33.3%;
-
-    &--always-visible {
-      height: unset;
-      opacity: 1;
-      top: 50%;
-      transform: translateY(-50%);
-      width: unset;
-
-      .#{$px}-carousel-arrows-next-btn__icon,
-      .#{$px}-carousel-arrows-prev-btn__icon {
-        box-shadow: 0 0 1px $grey-100;
-      }
-    }
-
-    &--disabled {
-      display: none;
-    }
-
-    &:hover,
-    &:focus-visible {
-      opacity: 1;
-    }
-
-    &:focus-visible {
-      outline: none;
-
-      .#{$px}-carousel-arrows-next-btn__icon,
-      .#{$px}-carousel-arrows-prev-btn__icon {
-        @include focus-ring($border-radius: $radius-3xl);
-      }
-    }
-
-    &__icon {
-      background-color: $pure-white;
-      border-radius: $radius-3xl;
-      display: flex;
-      flex-wrap: wrap;
-      height: 3.25rem;
-      place-content: center center;
-      width: 3.25rem;
-    }
-
-    @media (max-width: $breakpoint-md) {
-      display: none;
-    }
-  }
-
-  &-dots + &-arrows &-arrows-prev-btn,
-  &-dots + &-arrows &-arrows-next-btn {
-    height: calc(100% - 1.5rem);
-  }
-
-  &-arrows-prev-btn {
-    align-content: flex-start;
-    flex-wrap: wrap;
-    left: 0;
-    padding-left: $spacing-sm;
-  }
-
-  &-arrows-next-btn {
-    align-content: flex-end;
-    flex-wrap: wrap;
-    padding-right: $spacing-sm;
-    right: 0;
-  }
-
-  &-content {
-    overflow: hidden;
-  }
-
-  &-content-inner {
-    display: flex;
-
-    &:hover {
-      .vjs-big-play-button {
-        display: block;
-      }
-    }
-
-    @each $spacing-size in $spacing-sizes {
-      &--gap-#{$spacing-size} {
-        margin-left: calc(-1 * var(--spacing-#{$spacing-size}));
-      }
-    }
-  }
-
-  &-item {
-    flex: 0 0 100%;
-    min-width: 0;
-
-    &--cursor-pointer {
-      @include cursorPointer;
-    }
-
-    @each $spacing-size in $spacing-sizes {
-      &--gap-#{$spacing-size} {
-        padding-left: var(--spacing-#{$spacing-size});
-      }
-    }
-  }
-
-  &-dots {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-
-    button {
-      background: none;
+    &-arrows-prev-btn,
+    &-arrows-next-btn {
+      background: transparent;
       border: none;
       cursor: pointer;
-    }
-
-    &-on-content {
-      bottom: 16px;
-      left: 50%;
-      overflow: hidden;
-      position: absolute;
-      transform: translateX(-50%);
-    }
-
-    &-container {
       display: flex;
+      flex-flow: column wrap;
+      height: 100%;
       justify-content: center;
-      width: 100%;
-    }
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      width: 33.3%;
 
-    &-container-inner {
-      align-items: center;
-      display: flex;
-      gap: 12px;
-      max-width: var(--max-width);
-      overflow: auto;
-      -webkit-overflow-scrolling: touch;
-      -ms-overflow-style: none; /* Internet Explorer 10+ */
-      padding: 1px 2px;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none; /* Firefox */
-      &::-webkit-scrollbar {
-        display: none; /* Safari and Chrome */
+      &--always-visible {
+        height: unset;
+        opacity: 1;
+        top: 50%;
+        transform: translateY(-50%);
+        width: unset;
+
+        .#{$px}-carousel-arrows-next-btn__icon,
+        .#{$px}-carousel-arrows-prev-btn__icon {
+          box-shadow: 0 0 1px $grey-100;
+        }
+      }
+
+      &--disabled {
+        display: none;
+      }
+
+      &:hover,
+      &:focus-visible {
+        opacity: 1;
+      }
+
+      &:focus-visible {
+        outline: none;
+
+        .#{$px}-carousel-arrows-next-btn__icon,
+        .#{$px}-carousel-arrows-prev-btn__icon {
+          @include focus-ring($border-radius: $radius-3xl);
+        }
+      }
+
+      &__icon {
+        background-color: $pure-white;
+        border-radius: $radius-3xl;
+        display: flex;
+        flex-wrap: wrap;
+        height: 3.25rem;
+        place-content: center center;
+        width: 3.25rem;
+      }
+
+      @media (max-width: $breakpoint-md) {
+        display: none;
       }
     }
-  }
 
-  &-dot__container {
-    align-items: center;
-    display: flex;
-    height: 10px;
-    justify-content: center;
-    min-width: 10px;
-    padding: 1px;
-    scroll-snap-align: center;
-    width: 10px;
+    &-dots + &-arrows &-arrows-prev-btn,
+    &-dots + &-arrows &-arrows-next-btn {
+      height: calc(100% - 1.5rem);
+    }
 
-    &:focus-visible {
-      @include focus-ring($border-radius: $radius-3xl, $outline-offset: 0, $outline-width: 0.5px);
+    &-arrows-prev-btn {
+      align-content: flex-start;
+      flex-wrap: wrap;
+      left: 0;
+      padding-left: $spacing-sm;
+    }
 
-      &-dot {
-        &:hover {
-          background-color: transparent;
-          outline: 1px solid $black-100;
+    &-arrows-next-btn {
+      align-content: flex-end;
+      flex-wrap: wrap;
+      padding-right: $spacing-sm;
+      right: 0;
+    }
+
+    &-content {
+      overflow: hidden;
+    }
+
+    &-content-inner {
+      display: flex;
+
+      &:hover {
+        .vjs-big-play-button {
+          display: block;
+        }
+      }
+
+      @each $spacing-size in $spacing-sizes {
+        &--gap-#{$spacing-size} {
+          margin-left: calc(-1 * var(--spacing-#{$spacing-size}));
         }
       }
     }
-  }
 
-  &-dot {
-    background-color: $grey-50;
-    border-radius: $radius-3xl;
-    outline-color: $grey-50;
+    &-item {
+      flex: 0 0 100%;
+      min-width: 0;
 
-    &--md {
-      height: 100%;
-      width: 100%;
+      &--cursor-pointer {
+        @include cursorPointer;
+      }
+
+      @each $spacing-size in $spacing-sizes {
+        &--gap-#{$spacing-size} {
+          padding-left: var(--spacing-#{$spacing-size});
+        }
+      }
     }
 
-    &--sm {
-      height: 50%;
-      width: 50%;
+    &-dots {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      &-on-content {
+        bottom: 16px;
+        left: 50%;
+        overflow: hidden;
+        position: absolute;
+        transform: translateX(-50%);
+      }
+
+      &-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+
+      &-container-inner {
+        align-items: center;
+        display: flex;
+        gap: 12px;
+        max-width: var(--max-width);
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+        padding: 1px 2px;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none; /* Firefox */
+        &::-webkit-scrollbar {
+          display: none; /* Safari and Chrome */
+        }
+      }
     }
 
-    &:hover {
-      background-color: transparent;
-      outline: 1px solid $black-100;
+    &-dot__container {
+      align-items: center;
+      display: flex;
+      height: 10px;
+      justify-content: center;
+      min-width: 10px;
+      padding: 1px;
+      scroll-snap-align: center;
+      width: 10px;
+
+      &:focus-visible {
+        @include focus-ring($border-radius: $radius-3xl, $outline-offset: 0, $outline-width: 0.5px);
+
+        &-dot {
+          &:hover {
+            background-color: transparent;
+            outline: 1px solid $black-100;
+          }
+        }
+      }
     }
 
-    &--selected {
-      background-color: $black-100;
-      outline-color: $black-100;
+    &-dot {
+      background-color: $grey-50;
+      border-radius: $radius-3xl;
+      outline-color: $grey-50;
+
+      &--md {
+        height: 100%;
+        width: 100%;
+      }
+
+      &--sm {
+        height: 50%;
+        width: 50%;
+      }
 
       &:hover {
+        background-color: transparent;
+        outline: 1px solid $black-100;
+      }
+
+      &--selected {
         background-color: $black-100;
-        outline: none;
+        outline-color: $black-100;
+
+        &:hover {
+          background-color: $black-100;
+          outline: none;
+        }
       }
     }
   }

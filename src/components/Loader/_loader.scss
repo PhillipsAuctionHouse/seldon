@@ -1,26 +1,29 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-loader {
-  animation: rotation 1s linear infinite;
-  border: 2px solid $black-100;
-  border-bottom-color: transparent;
-  border-radius: $radius-3xl;
-  box-sizing: border-box;
-  display: flex;
-  height: var(--button-label-line-height);
-  width: var(--button-label-line-height);
+@layer seldon.components {
+  .#{$px}-loader {
+    animation: rotation 1s linear infinite;
+    border: 2px solid $black-100;
+    border-bottom-color: transparent;
+    border-radius: $radius-3xl;
+    box-sizing: border-box;
+    display: flex;
+    height: var(--button-label-line-height);
+    width: var(--button-label-line-height);
 
-  &--centered {
-    margin: auto;
-  }
-
-  @keyframes rotation {
-    0% {
-      transform: rotate(0deg);
+    &--centered {
+      margin: auto;
     }
 
-    100% {
-      transform: rotate(360deg);
+    @keyframes rotation {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
   }
 }

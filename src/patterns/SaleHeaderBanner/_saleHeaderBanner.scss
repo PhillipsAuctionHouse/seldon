@@ -1,98 +1,101 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-sale-header-banner {
-  border-bottom: 1px solid $light-gray;
-  margin-bottom: $spacing-md;
+@layer seldon.patterns {
+  .#{$px}-sale-header-banner {
+    border-bottom: 1px solid $light-gray;
+    margin-bottom: $spacing-md;
 
-  @include media($breakpoint-md, $type: 'max') {
-    .#{$px}-banner__inner {
-      gap: 0;
+    @include media($breakpoint-md, $type: 'max') {
+      .#{$px}-banner__inner {
+        gap: 0;
+      }
+
+      &__stack {
+        padding: $spacing-md 0;
+      }
+    }
+
+    &__header-label {
+      margin-bottom: $spacing-xsm;
+    }
+
+    &__title {
+      &.#{$px}-text {
+        text-transform: uppercase;
+      }
+    }
+
+    .#{$px}-countdown {
+      padding-top: var(--spacing-sm);
     }
 
     &__stack {
-      padding: $spacing-md 0;
-    }
-  }
-
-  &__header-label {
-    margin-bottom: $spacing-xsm;
-  }
-
-  &__title {
-    &.#{$px}-text {
-      text-transform: uppercase;
-    }
-  }
-
-  .#{$px}-countdown {
-    padding-top: var(--spacing-sm);
-  }
-
-  &__stack {
-    align-items: start;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
-
-    &__countdown {
-      display: flex;
-      width: 100%;
-    }
-
-    .#{$px}-text--badge {
-      margin-bottom: $spacing-xsm;
-    }
-  }
-
-  &__location {
-    font-variation-settings: 'wght' 600;
-    margin: $spacing-xsm 0 $spacing-md 0;
-  }
-
-  &__badge {
-    border: 1px solid $badge-blue;
-    color: $badge-blue;
-    margin: $spacing-xsm 0;
-    padding: $spacing-micro $spacing-xsm;
-  }
-
-  &__occurrence-details {
-    align-items: center;
-    display: flex;
-    margin-bottom: $spacing-xsm;
-
-    &-text {
-      align-items: flex-start;
+      align-items: start;
       display: flex;
       flex-direction: column;
-      gap: $spacing-micro;
+      height: 100%;
+      justify-content: center;
 
-      &::after {
-        content: '';
-        display: block;
+      &__countdown {
+        display: flex;
+        width: 100%;
       }
 
-      &:first-child {
-        padding-right: $spacing-sm;
-      }
-
-      &:not(:first-child) {
-        border-left: 1px solid $keyline-gray;
-        padding-left: $spacing-sm;
+      .#{$px}-text--badge {
+        margin-bottom: $spacing-xsm;
       }
     }
-  }
 
-  &__browse-auctions-text {
-    gap: $spacing-micro;
-  }
+    &__location {
+      font-variation-settings: 'wght' 600;
+      margin: $spacing-xsm 0 $spacing-md 0;
+    }
 
-  &__date {
-    font-variation-settings: 'wght' 600;
-  }
+    &__badge {
+      border: 1px solid $badge-blue;
+      color: $badge-blue;
+      margin: $spacing-xsm 0;
+      padding: $spacing-micro $spacing-xsm;
+    }
 
-  &__cta {
-    margin: $spacing-sm 0;
+    &__occurrence-details {
+      align-items: center;
+      display: flex;
+      margin-bottom: $spacing-xsm;
+
+      &-text {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-micro;
+
+        &::after {
+          content: '';
+          display: block;
+        }
+
+        &:first-child {
+          padding-right: $spacing-sm;
+        }
+
+        &:not(:first-child) {
+          border-left: 1px solid $keyline-gray;
+          padding-left: $spacing-sm;
+        }
+      }
+    }
+
+    &__browse-auctions-text {
+      gap: $spacing-micro;
+    }
+
+    &__date {
+      font-variation-settings: 'wght' 600;
+    }
+
+    &__cta {
+      margin: $spacing-sm 0;
+    }
   }
 }

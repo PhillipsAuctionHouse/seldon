@@ -1,6 +1,7 @@
 import { Duration as DurationValue, DurationUnit, formatDuration, Locale } from 'date-fns';
 import { px } from '../../utils';
 import { Text, TextVariants } from '../Text';
+import './_duration.scss';
 
 export interface DurationProps {
   duration: DurationValue;

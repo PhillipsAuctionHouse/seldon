@@ -1,7 +1,10 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-row {
-  * .#{$px}-text:last-child {
-    margin-bottom: 0;
+@layer seldon.components {
+  .#{$px}-row {
+    * .#{$px}-text:last-child {
+      margin-bottom: 0;
+    }
   }
 }

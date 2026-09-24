@@ -1,11 +1,12 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import { getCommonProps } from '../../utils';
-import Input from '../../components/Input/Input';
+import Input, { InputProps } from '../../components/Input/Input';
 import Button, { ButtonProps } from '../../components/Button/Button';
 import { SubscriptionState } from './types';
 import { ButtonVariants } from '../../components/Button/types';
 import { Text, TextVariants } from '../../components/Text';
+import './_subscribe.scss';
 
 export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
   /**
@@ -21,9 +22,9 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
    */
   buttonText?: string;
   /**
-   * Optional element to render in place of a form e.g. Remix Form, etc
+   * Optional element to render in place of a form, e.g. Remix or react-router `Form`.
    */
-  element?: React.ElementType<SubscribeProps>;
+  element?: React.ElementType;
   /**
    * A unique `id` for the `<Subscribe>`
    */
@@ -36,6 +37,10 @@ export interface SubscribeProps extends React.HTMLAttributes<HTMLFormElement> {
    * Subscribe input label
    */
   inputPlaceholder?: string;
+  /**
+   * Subscribe input extra props to spread (e.g. `autoComplete`)
+   */
+  inputProps?: Partial<InputProps>;
   /**
    * Subscribe title text
    */
@@ -87,6 +92,7 @@ const Subscribe = React.forwardRef<HTMLFormElement, SubscribeProps>(
       element: Element = 'form',
       inputLabelText = 'Enter Your Email Address To Sign Up*',
       inputPlaceholder = 'example@email.com',
+      inputProps,
       title = 'Never Miss A Moment',
       loadingText = 'Loading...',
       invalidText = '',
@@ -142,6 +148,9 @@ const Subscribe = React.forwardRef<HTMLFormElement, SubscribeProps>(
           warn={warn}
           warnText={text}
           required
+          {...inputProps}
+          // After the spread so it always wins: Input derives the label's htmlFor from this id, so
+          // letting inputProps override it would silently break the label/input association.
           id={`${id}-input`}
         />
         <Button

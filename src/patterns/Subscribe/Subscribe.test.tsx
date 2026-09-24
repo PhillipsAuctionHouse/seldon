@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 
@@ -53,6 +54,57 @@ describe('Subscribe', () => {
       />,
     );
     expect(screen.getByText(/Success/)).toBeInTheDocument();
+  });
+
+  it('forwards inputProps (e.g. autoComplete) to the underlying <input>', () => {
+    render(<Subscribe id="test-input-props" inputProps={{ autoComplete: 'email', name: 'user-email' }} />);
+    const input = screen.getByPlaceholderText(/example@email.com/) as HTMLInputElement;
+    expect(input).toHaveAttribute('autocomplete', 'email');
+    expect(input).toHaveAttribute('name', 'user-email');
+  });
+
+  // Subscribe forces the input id to be derived from the component `id`; `inputProps.id` is ignored so the DOM id remains stable.
+  it('does not let inputProps override the id the label is associated with', () => {
+    render(<Subscribe id="test-id-override" inputProps={{ id: 'someone-elses-id' }} />);
+
+    const input = screen.getByPlaceholderText(/example@email.com/) as HTMLInputElement;
+    expect(input).toHaveAttribute('id', 'test-id-override-input');
+    expect(input).not.toHaveAttribute('id', 'someone-elses-id');
+  });
+
+  it('renders a custom element passed via the `element` prop', () => {
+    // A form-like component: extra domain-agnostic props Subscribe does not
+    // know about, plus an optional `id`. This call site would fail to type-
+    // check when `element` was typed as `React.ElementType<SubscribeProps>`
+    // because Subscribe's domain props (subscriptionState, blurb, …) were
+    // required. `React.ElementType<React.ComponentProps<'form'>>` accepts it.
+    const CustomForm = ({ children, ...rest }: React.ComponentProps<'form'>) => (
+      <form {...rest} data-custom-form="true">
+        {children}
+      </form>
+    );
+
+    const { container } = render(<Subscribe id="test-element" element={CustomForm} />);
+    expect(container.querySelector('form[data-custom-form="true"]')).toBeInTheDocument();
+  });
+
+  it('accepts a forwardRef form-like component (e.g. react-router Form)', () => {
+    // react-router's `Form` narrows `method` to an enum, which failed to
+    // assign to `ElementType<ComponentProps<'form'>>` under the prior typing.
+    interface RouterFormProps extends React.HTMLAttributes<HTMLFormElement> {
+      method?: 'get' | 'post';
+    }
+    const RouterFormLike = React.forwardRef<HTMLFormElement, RouterFormProps>(
+      ({ children, method = 'post', ...rest }, ref) => (
+        <form {...rest} method={method} ref={ref} data-router-form="true">
+          {children}
+        </form>
+      ),
+    );
+    RouterFormLike.displayName = 'RouterFormLike';
+
+    const { container } = render(<Subscribe id="test-router-form" element={RouterFormLike} />);
+    expect(container.querySelector('form[data-router-form="true"]')).toBeInTheDocument();
   });
 
   it('it will call the callback function on submit', async () => {

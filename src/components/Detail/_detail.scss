@@ -1,52 +1,55 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-detail {
-  align-items: center;
-  align-items: flex-start;
-  align-self: stretch;
-  color: $pure-black;
-  display: flex;
-  gap: $spacing-md;
+@layer seldon.components {
+  .#{$px}-detail {
+    align-items: center;
+    align-items: flex-start;
+    align-self: stretch;
+    color: $pure-black;
+    display: flex;
+    gap: $spacing-md;
 
-  &__label-section {
-    flex: 0 0 160px;
-    max-width: 100%;
+    &__label-section {
+      flex: 0 0 160px;
+      max-width: 100%;
 
-    &--label.#{$px}-text {
-      font-variation-settings: 'wght' 600;
-    }
+      &--label.#{$px}-text {
+        font-variation-settings: 'wght' 600;
+      }
 
-    @media (max-width: $breakpoint-md) {
-      flex: 0 0 128px;
-    }
-
-    @media (max-width: $breakpoint-sm) {
-      flex: 0 0 96px;
-    }
-
-    &--has-sub-label {
-      flex: 0 0 240px;
+      @media (max-width: $breakpoint-md) {
+        flex: 0 0 128px;
+      }
 
       @media (max-width: $breakpoint-sm) {
-        flex: 0 0 120px;
+        flex: 0 0 96px;
+      }
+
+      &--has-sub-label {
+        flex: 0 0 240px;
+
+        @media (max-width: $breakpoint-sm) {
+          flex: 0 0 120px;
+        }
+      }
+
+      &--no-wrap {
+        flex: none;
+      }
+
+      span {
+        font-variation-settings: 'wght' 400;
       }
     }
 
-    &--no-wrap {
-      flex: none;
+    &__sub-label {
+      text-wrap: nowrap;
     }
 
-    span {
+    &__value {
+      flex: 0 1 auto;
       font-variation-settings: 'wght' 400;
     }
-  }
-
-  &__sub-label {
-    text-wrap: nowrap;
-  }
-
-  &__value {
-    flex: 0 1 auto;
-    font-variation-settings: 'wght' 400;
   }
 }

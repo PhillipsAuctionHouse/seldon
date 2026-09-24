@@ -5,6 +5,7 @@ import { getCommonProps } from '../../utils';
 import { Icon } from '../Icon';
 import { isImageValid } from './utils';
 import { AspectRatio } from './types';
+import './_seldonImage.scss';
 
 export interface SeldonImageProps extends ComponentProps<'div'> {
   /**
@@ -19,6 +20,13 @@ export interface SeldonImageProps extends ComponentProps<'div'> {
    * Whether the image has a blur background covering the background of the image container
    */
   hasBlurBackground?: boolean;
+  /**
+   * Whether the image should shrink to fit an ancestor's `max-height` instead of
+   * always filling the container's width. Only meaningful with a `1/1` or `3/4`
+   * `aspectRatio` inside a container that actually caps height (e.g. a capped-height
+   * card tile). Leave this `false` for the common case of a fluid-width grid tile.
+   */
+  constrainToParentHeight?: boolean;
   /**
    * The image to display.
    */
@@ -80,6 +88,7 @@ const SeldonImage = memo(
         aspectRatio = AspectRatio.None,
         objectFit = 'none',
         hasBlurBackground = false,
+        constrainToParentHeight = false,
         imageClassName,
         imageStyle,
         src,
@@ -152,6 +161,7 @@ const SeldonImage = memo(
           ref={ref}
           className={classnames(baseClassName, className, {
             [`${baseClassName}--aspect-ratio-${aspectRatio.replace('/', '-')}`]: aspectRatio !== AspectRatio.None,
+            [`${baseClassName}--constrain-to-height`]: constrainToParentHeight,
             [`${baseClassName}--error-image`]: loadingState === 'error' || imageBlocked,
           })}
           role="img"

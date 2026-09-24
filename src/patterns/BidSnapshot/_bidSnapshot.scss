@@ -1,56 +1,59 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-bid-snapshot {
-  position: relative;
+@layer seldon.patterns {
+  .#{$px}-bid-snapshot {
+    position: relative;
 
-  &__text .#{$px}-has-separators .#{$px}-detail.#{$px}-detail {
-    flex-wrap: wrap;
-    gap: 0 $spacing-sm;
-  }
+    &__text .#{$px}-has-separators .#{$px}-detail.#{$px}-detail {
+      flex-wrap: wrap;
+      gap: 0 $spacing-sm;
+    }
 
-  &__current-bid,
-  &__sold {
-    .#{$px}-detail__value .#{$px}-text.#{$px}-text {
-      font-variation-settings: 'wght' 600;
+    &__current-bid,
+    &__sold {
+      .#{$px}-detail__value .#{$px}-text.#{$px}-text {
+        font-variation-settings: 'wght' 600;
+      }
+    }
+
+    &:has(.#{$px}-bid-message) &__text .#{$px}-detail {
+      padding-bottom: 0;
+    }
+
+    .#{$px}-countdown {
+      align-items: flex-start;
+      padding: 0;
+      position: absolute;
+      top: calc(100% + $spacing-xsm);
+    }
+
+    &--live:has(.#{$px}-countdown) {
+      border-bottom: 1px solid $light-gray;
+      margin-bottom: $spacing-md;
+    }
+
+    // styles that will apply to bid message inside bid snapshot only
+    .#{$px}-bid-message {
+      &.#{$px}-bid-message {
+        margin-bottom: $spacing-sm;
+      }
     }
   }
 
-  &:has(.#{$px}-bid-message) &__text .#{$px}-detail {
-    padding-bottom: 0;
-  }
-
-  .#{$px}-countdown {
-    align-items: flex-start;
-    padding: 0;
-    position: absolute;
-    top: calc(100% + $spacing-xsm);
-  }
-
-  &--live:has(.#{$px}-countdown) {
-    border-bottom: 1px solid $light-gray;
-    margin-bottom: $spacing-md;
-  }
-
-  // styles that will apply to bid message inside bid snapshot only
   .#{$px}-bid-message {
-    &.#{$px}-bid-message {
-      margin-bottom: $spacing-sm;
+    align-items: center;
+    display: flex;
+    gap: $spacing-micro;
+
+    // Override the default text style being too specific
+    &-text {
+      font-variation-settings: 'wght' 600;
+      margin-bottom: 0;
     }
-  }
-}
 
-.#{$px}-bid-message {
-  align-items: center;
-  display: flex;
-  gap: $spacing-micro;
-
-  // Override the default text style being too specific
-  &-text {
-    font-variation-settings: 'wght' 600;
-    margin-bottom: 0;
-  }
-
-  &__icon {
-    font-size: 0.5em;
+    &__icon {
+      font-size: 0.5em;
+    }
   }
 }

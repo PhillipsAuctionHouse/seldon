@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { AuthState } from './types';
 import { Text, TextVariants } from '../../components/Text';
 import { Icon } from '../../components/Icon';
+import './_userManagement.scss';
 
 export interface UserManagementProps extends ComponentProps<'div'> {
   /**

@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { getCommonProps, SpacingTokens } from '../../utils';
 import { determineGridClassName } from './utils';
 import { forwardRef } from 'react';
+import './_grid.scss';
 
 export interface GridProps<GridElementType = HTMLElement> extends React.HTMLAttributes<GridElementType> {
   /**

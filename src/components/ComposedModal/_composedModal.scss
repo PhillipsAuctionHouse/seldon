@@ -1,72 +1,75 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-$breakpoint-mobile-small: 450px;
+@layer seldon.components {
+  $breakpoint-mobile-small: 450px;
 
-.#{$px}-composed-modal {
-  border-radius: $radius-md;
-  max-width: 95vw;
-  min-width: 100%;
-  padding: $spacing-lg 0 $spacing-sm 0;
+  .#{$px}-composed-modal {
+    border-radius: $radius-md;
+    max-width: 95vw;
+    min-width: 100%;
+    padding: $spacing-lg 0 $spacing-sm 0;
 
-  &:not(:has(.#{$px}-composed-modal__btns-group)) {
-    padding-bottom: $spacing-lg;
+    &:not(:has(.#{$px}-composed-modal__btns-group)) {
+      padding-bottom: $spacing-lg;
+    }
+
+    @media (min-width: $breakpoint-sm) {
+      min-width: $mobile-modal-min-width;
+    }
+
+    @media (min-width: $breakpoint-md) {
+      min-width: $desktop-modal-width;
+      width: $desktop-modal-width;
+    }
+
+    &__body {
+      margin: 0 $spacing-lg $spacing-md;
+      max-height: var('--max-modal-body-height');
+      overflow-y: auto;
+    }
+
+    .#{$px}-divider {
+      margin: 0;
+
+      hr {
+        margin: 0;
+      }
+    }
+
+    &__btns-group {
+      display: flex;
+      gap: $spacing-sm;
+      justify-content: center;
+      margin: 0 $spacing-lg;
+      padding: $spacing-sm 0 0;
+
+      @media (max-width: $breakpoint-mobile-small) {
+        align-items: center;
+        flex-direction: column;
+      }
+    }
+
+    &__btns-group > * {
+      flex: 1 1 50%;
+
+      @media (max-width: $breakpoint-mobile-small) {
+        flex: 1 1 auto;
+      }
+    }
+
+    &__btns {
+      padding: 0 $spacing-md $spacing-sm;
+    }
+
+    &__disclaimer {
+      margin-top: $spacing-sm;
+      padding: 0 $spacing-md;
+    }
   }
 
-  @media (min-width: $breakpoint-sm) {
-    min-width: $mobile-modal-min-width;
-  }
-
-  @media (min-width: $breakpoint-md) {
-    min-width: $desktop-modal-width;
-    width: $desktop-modal-width;
-  }
-
-  &__body {
-    margin: 0 $spacing-lg $spacing-md;
-    max-height: var('--max-modal-body-height');
+  .#{$px}-composed-modal__body {
+    max-height: var(--max-modal-body-height);
     overflow-y: auto;
   }
-
-  .#{$px}-divider {
-    margin: 0;
-
-    hr {
-      margin: 0;
-    }
-  }
-
-  &__btns-group {
-    display: flex;
-    gap: $spacing-sm;
-    justify-content: center;
-    margin: 0 $spacing-lg;
-    padding: $spacing-sm 0 0;
-
-    @media (max-width: $breakpoint-mobile-small) {
-      align-items: center;
-      flex-direction: column;
-    }
-  }
-
-  &__btns-group > * {
-    flex: 1 1 50%;
-
-    @media (max-width: $breakpoint-mobile-small) {
-      flex: 1 1 auto;
-    }
-  }
-
-  &__btns {
-    padding: 0 $spacing-md $spacing-sm;
-  }
-
-  &__disclaimer {
-    margin-top: $spacing-sm;
-    padding: 0 $spacing-md;
-  }
-}
-
-.#{$px}-composed-modal__body {
-  max-height: var(--max-modal-body-height);
-  overflow-y: auto;
 }

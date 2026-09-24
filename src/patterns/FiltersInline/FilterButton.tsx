@@ -7,6 +7,7 @@ import { Text, TextVariants } from '../../components/Text';
 import { px } from '../../utils';
 import { FilterButtonIconType } from './types';
 import { getIcon } from './utils';
+import './_filterButton.scss';
 
 /**
  * Props for the FilterButton component.

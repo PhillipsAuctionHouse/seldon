@@ -1,4 +1,5 @@
-@forward '~scss/sharedClasses';
+// Mixins and variables only. CSS-emitting sheets (sharedClasses, typography,
+// :root tokens) live in foundation.scss so consumers can load them once.
 @forward '~scss/type';
 @forward '~scss/utils';
 @forward '~scss/vars';

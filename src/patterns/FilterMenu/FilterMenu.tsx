@@ -2,6 +2,7 @@ import React, { forwardRef, useState, Children, cloneElement, ReactNode } from '
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import Filter, { FilterProps } from '../../components/Filter/Filter';
+import './_filterMenu.scss';
 
 export interface FilterMenuProps<ElementType = HTMLFormElement> extends React.HTMLAttributes<ElementType> {
   /**

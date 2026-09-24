@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import Grid, { GridProps } from '../Grid/Grid';
+import './_linkList.scss';
 
 export interface LinkListProps extends GridProps<HTMLUListElement> {
   /** These children should be an array of LinkBlock components */

@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import { ComponentProps, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
+import './_notificationBanner.scss';
 
 export type NotificationBannerProps = ComponentProps<'div'> & {
   /**

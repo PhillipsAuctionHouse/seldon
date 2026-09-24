@@ -3,6 +3,7 @@ import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { determineColumnSpanClassName, validateColumnSpans } from './gridItemUtils';
 import { GridItemAlign } from './types';
+import './_gridItem.scss';
 
 export interface GridItemProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

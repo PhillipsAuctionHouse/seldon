@@ -1,196 +1,198 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-favorites-collection-tile {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-
-  &__content {
+@layer seldon.patterns {
+  .#{$px}-favorites-collection-tile {
     display: flex;
     flex-direction: column;
-    height: 100%;
-  }
+    text-align: left;
 
-  &__header {
-    align-items: flex-end;
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: $spacing-sm;
-  }
+    &__content {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
 
-  &__info {
-    flex: 1;
-    min-height: calc($spacing-sm + $spacing-xsm + $font-size-label-medium + $font-size-body-medium);
-    overflow: hidden;
-  }
+    &__header {
+      align-items: flex-end;
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: $spacing-sm;
+    }
 
-  &__count {
-    color: $dark-gray;
-    display: block;
-    margin-bottom: $spacing-xsm;
-  }
+    &__info {
+      flex: 1;
+      min-height: calc($spacing-sm + $spacing-xsm + $font-size-label-medium + $font-size-body-medium);
+      overflow: hidden;
+    }
 
-  h3.#{$px}-text {
-    margin-bottom: 0;
-  }
+    &__count {
+      color: $dark-gray;
+      display: block;
+      margin-bottom: $spacing-xsm;
+    }
 
-  &__title {
-    -webkit-box-orient: vertical;
-    display: block;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
-    overflow: hidden;
-
-    &.#{$px}-text {
-      font-variation-settings: 'wght' 600;
+    h3.#{$px}-text {
       margin-bottom: 0;
     }
-  }
 
-  &__actions {
-    align-items: center;
-    align-self: normal;
-    background-position: center;
-    border-radius: $radius-3xl;
-    display: flex;
-    height: 2.5rem;
-    justify-content: center;
-    position: relative;
-    top: $spacing-micro;
-    transition: background 0.8s;
-    width: 2.5rem;
-
-    &:hover {
-      background: $light-gray radial-gradient(circle, transparent 1%, $light-gray 1%) center/15000%;
-      background-color: $light-gray;
-      cursor: pointer;
-    }
-
-    &:active {
-      background-color: $medium-gray;
-      background-size: 100%;
-      transition: background 0s;
-    }
-  }
-
-  &__popover-content {
-    outline: none;
-  }
-
-  &__dropdown {
-    box-shadow: 0 4px 6px $medium-gray;
-
-    &--item {
-      all: unset;
-      background-color: $white-100;
-      cursor: pointer;
+    &__title {
+      -webkit-box-orient: vertical;
       display: block;
-      padding: 0.75rem 1rem;
-      width: 90px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
+      overflow: hidden;
 
-      &:hover,
-      &:focus-visible {
-        background-color: $light-gray;
+      &.#{$px}-text {
+        font-variation-settings: 'wght' 600;
       }
     }
-  }
 
-  &__media-link {
-    &:hover {
-      color: inherit;
-      text-decoration: none;
+    &__actions {
+      align-items: center;
+      align-self: normal;
+      background-position: center;
+      border-radius: $radius-3xl;
+      display: flex;
+      height: 2.5rem;
+      justify-content: center;
+      position: relative;
+      top: $spacing-micro;
+      transition: background 0.8s;
+      width: 2.5rem;
+
+      &:hover {
+        background: $light-gray radial-gradient(circle, transparent 1%, $light-gray 1%) center/15000%;
+        background-color: $light-gray;
+        cursor: pointer;
+      }
+
+      &:active {
+        background-color: $medium-gray;
+        background-size: 100%;
+        transition: background 0s;
+      }
     }
-    &.#{$px}-link {
+
+    &__popover-content {
+      outline: none;
+    }
+
+    &__dropdown {
+      box-shadow: 0 4px 6px $medium-gray;
+
+      &--item {
+        all: unset;
+        background-color: $white-100;
+        cursor: pointer;
+        display: block;
+        padding: 0.75rem 1rem;
+        width: 90px;
+
+        &:hover,
+        &:focus-visible {
+          background-color: $light-gray;
+        }
+      }
+    }
+
+    &__media-link {
+      &:hover {
+        color: inherit;
+        text-decoration: none;
+      }
+      &.#{$px}-link {
+        text-transform: none;
+      }
+
+      &:focus-visible {
+        @include focus-ring;
+      }
+    }
+
+    &__media-container {
+      background-color: $soft-gray;
+      position: relative;
+      width: 100%;
+    }
+
+    &__media {
+      background-position: center;
+      width: 100%;
+    }
+
+    &__empty {
+      aspect-ratio: 1 / 1;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      cursor: pointer;
+      display: block;
+      position: relative;
+
+      &:focus-visible {
+        @include focus-ring;
+      }
+
+      &--bg {
+        background-color: $soft-gray;
+      }
+
+      &--create-list {
+        background-color: $white-100;
+        border: 1px solid $black-25;
+        border-radius: 0;
+      }
+
+      &__content {
+        bottom: 20px;
+        left: 20px;
+        position: absolute;
+        width: calc(100% - 40px);
+      }
+    }
+
+    &__icon {
+      justify-content: flex-start;
+      margin-bottom: $spacing-xsm;
+      pointer-events: none;
+
+      &-rotate {
+        transform: rotate(90deg);
+      }
+
+      &-circle {
+        border: 2px solid $dark-gray;
+        border-radius: $radius-3xl;
+        height: 1.5rem;
+        justify-content: flex-start;
+        width: 1.5rem;
+      }
+    }
+
+    &__icon-button {
+      pointer-events: none;
+    }
+
+    // will update font size with variable rem sizing after design takes a pass at it some point in the future
+    &__text {
       text-transform: none;
     }
 
-    &:focus-visible {
-      @include focus-ring;
-    }
-  }
-
-  &__media-container {
-    background-color: $soft-gray;
-    position: relative;
-    width: 100%;
-  }
-
-  &__media {
-    background-position: center;
-    width: 100%;
-  }
-
-  &__empty {
-    aspect-ratio: 1 / 1;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    cursor: pointer;
-    display: block;
-    position: relative;
-
-    &:focus-visible {
-      @include focus-ring;
+    [data-radix-popper-content-wrapper] > * {
+      all: unset;
     }
 
-    &--bg {
-      background-color: $soft-gray;
-    }
+    &__create-variant {
+      all: unset;
+      background: none;
+      height: 100%;
+      width: 100%;
 
-    &--create-list {
-      background-color: $white-100;
-      border: 1px solid $black-25;
-      border-radius: 0;
-    }
-
-    &__content {
-      bottom: 20px;
-      left: 20px;
-      position: absolute;
-      width: calc(100% - 40px);
-    }
-  }
-
-  &__icon {
-    justify-content: flex-start;
-    margin-bottom: $spacing-xsm;
-    pointer-events: none;
-
-    &-rotate {
-      transform: rotate(90deg);
-    }
-
-    &-circle {
-      border: 2px solid $dark-gray;
-      border-radius: $radius-3xl;
-      height: 1.5rem;
-      justify-content: flex-start;
-      width: 1.5rem;
-    }
-  }
-
-  &__icon-button {
-    pointer-events: none;
-  }
-
-  // will update font size with variable rem sizing after design takes a pass at it some point in the future
-  &__text {
-    text-transform: none;
-  }
-
-  [data-radix-popper-content-wrapper] > * {
-    all: unset;
-  }
-
-  &__create-variant {
-    all: unset;
-    background: none;
-    height: 100%;
-    width: 100%;
-
-    &:focus-visible {
-      @include focus-ring;
+      &:focus-visible {
+        @include focus-ring;
+      }
     }
   }
 }

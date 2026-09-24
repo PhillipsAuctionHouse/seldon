@@ -18,5 +18,18 @@ describe('SeldonProvider', () => {
         expect(element.className).toContain('fresnel');
       });
     });
+
+    it('puts Fresnel CSS in the foundation cascade layer', () => {
+      render(
+        <SeldonProvider>
+          <span>child</span>
+        </SeldonProvider>,
+      );
+
+      const fresnelStyles = [...document.querySelectorAll('style')].map((styleEl) => styleEl.textContent ?? '');
+      expect(fresnelStyles.some((css) => css.includes('@layer seldon.foundation') && css.includes('fresnel'))).toBe(
+        true,
+      );
+    });
   });
 }); // end of describe block

@@ -1,50 +1,53 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-text {
-  margin: 0;
+@layer seldon.components {
+  .#{$px}-text {
+    margin: 0;
 
-  @each $variant in $text-tokens {
-    &--#{$variant} {
-      @include text($variant);
+    @each $variant in $text-tokens {
+      &--#{$variant} {
+        @include text($variant);
+      }
+    }
+
+    &--left {
+      text-align: left;
+    }
+
+    &--center {
+      text-align: center;
+    }
+
+    &--right {
+      text-align: right;
     }
   }
 
-  &--left {
-    text-align: left;
+  .#{$px}-text--blockquote,
+  .#{$px}-text--heading1,
+  .#{$px}-text--snwHeadingHero1,
+  .#{$px}-text--snwHeadingHero2 {
+    margin-bottom: $spacing-lg;
   }
 
-  &--center {
-    text-align: center;
+  .#{$px}-text--heading2 {
+    margin-bottom: $spacing-lg;
   }
 
-  &--right {
-    text-align: right;
+  .#{$px}-text--heading3,
+  .#{$px}-text--heading3Italic {
+    margin-bottom: $spacing-md;
   }
-}
 
-.#{$px}-text--blockquote,
-.#{$px}-text--heading1,
-.#{$px}-text--snwHeadingHero1,
-.#{$px}-text--snwHeadingHero2 {
-  margin-bottom: $spacing-lg;
-}
+  .#{$px}-text--heading4,
+  .#{$px}-text--heading4Italic,
+  .#{$px}-text--heading5,
+  .#{$px}-text--heading6 {
+    margin-bottom: $spacing-sm;
+  }
 
-.#{$px}-text--heading2 {
-  margin-bottom: $spacing-lg;
-}
-
-.#{$px}-text--heading3,
-.#{$px}-text--heading3Italic {
-  margin-bottom: $spacing-md;
-}
-
-.#{$px}-text--heading4,
-.#{$px}-text--heading4Italic,
-.#{$px}-text--heading5,
-.#{$px}-text--heading6 {
-  margin-bottom: $spacing-sm;
-}
-
-p.#{$px}-text {
-  margin-bottom: $spacing-md;
+  p.#{$px}-text {
+    margin-bottom: $spacing-md;
+  }
 }

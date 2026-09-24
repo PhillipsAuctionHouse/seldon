@@ -3,6 +3,7 @@ import { describe, it, expect } from 'vitest';
 import { ToastProvider } from './ToastContextProvider';
 import { useToastContext } from './useToastContext';
 import userEvent from '@testing-library/user-event';
+import { px } from '../../utils';
 
 const TestComponent = () => {
   const { addToast } = useToastContext();
@@ -19,13 +20,25 @@ describe('ToastContextProvider', () => {
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
+  it('applies offset to the toast viewport from the bottom-left corner', () => {
+    render(
+      <ToastProvider offset={{ x: 12, y: 24 }}>
+        <TestComponent />
+      </ToastProvider>,
+    );
+
+    const viewport = document.querySelector(`.${px}-toast-viewport`);
+    expect(viewport).toHaveStyle({ bottom: '24px', left: '12px' });
+  });
+
   it('uses fallback context methods when outside provider', async () => {
     const TestFallbackMethods = () => {
-      const { toasts, addToast, removeToast } = useToastContext();
+      const { toasts, addToast, removeToast, setOffset } = useToastContext();
       return (
         <div>
           <button onClick={() => addToast({ title: 'Test' })}>Add Toast</button>
           <button onClick={() => removeToast('123')}>Remove Toast</button>
+          <button onClick={() => setOffset({ x: 8, y: 8 })}>Set Offset</button>
           <div data-testid="toast-count">{toasts.length}</div>
         </div>
       );
@@ -41,6 +54,8 @@ describe('ToastContextProvider', () => {
 
     await userEvent.click(screen.getByText('Remove Toast'));
     expect(screen.getByTestId('toast-count')).toHaveTextContent('0');
+
+    await userEvent.click(screen.getByText('Set Offset'));
 
     expect(consoleSpy).toHaveBeenCalledWith('useToastContext must be used within a ToastProvider');
     consoleSpy.mockRestore();

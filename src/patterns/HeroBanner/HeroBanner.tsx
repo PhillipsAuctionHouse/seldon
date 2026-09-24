@@ -2,6 +2,7 @@ import { HTMLAttributes, forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { Text, TextVariants } from '../../components/Text';
+import './_heroBanner.scss';
 
 export interface HeroBannerProps extends HTMLAttributes<HTMLDivElement> {
   /**

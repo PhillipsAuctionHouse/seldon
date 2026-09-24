@@ -7,7 +7,27 @@ export let consoleError: ReturnType<typeof vi.spyOn>;
 
 const originalWindow = window;
 
+// jsdom has no PointerEvent constructor. Without it, both React's pointer-event handling
+// and testing-library's fireEvent silently drop pointer-specific properties (pointerId,
+// clientX, ...), even though the event still dispatches under the right type name.
+class PointerEventPolyfill extends MouseEvent {
+  pointerId: number;
+  pointerType: string;
+  isPrimary: boolean;
+
+  constructor(type: string, params: PointerEventInit = {}) {
+    super(type, params);
+    this.pointerId = params.pointerId ?? 0;
+    this.pointerType = params.pointerType ?? 'mouse';
+    this.isPrimary = params.isPrimary ?? true;
+  }
+}
+
 beforeEach(() => {
+  Object.defineProperty(window, 'PointerEvent', {
+    writable: true,
+    value: PointerEventPolyfill,
+  });
   consoleError = vi.spyOn(console, 'error');
   consoleError.mockImplementation((...args: Parameters<typeof console.error>) => {
     originalConsoleError(...args);

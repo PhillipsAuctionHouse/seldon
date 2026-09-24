@@ -5,6 +5,7 @@ import NavigationItem from '../NavigationItem/NavigationItem';
 import { NavigationItemProps } from '../NavigationItem/NavigationItem';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import NavigationItemWithSubmenu from '../NavigationItemWithSubmenu/NavigationItemWithSubmenu';
+import './_navigationList.scss';
 
 export interface NavigationListProps extends React.ComponentProps<'ul'> {
   /**

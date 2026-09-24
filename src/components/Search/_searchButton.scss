@@ -1,63 +1,66 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-search__button {
-  align-items: center;
-  background: $pure-white;
-  border: none;
-  border-bottom: 1px solid transparent;
-  cursor: pointer;
-  display: flex;
-  height: $search-size;
-  justify-content: center;
-  padding: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: $search-size;
+@layer seldon.components {
+  .#{$px}-search__button {
+    align-items: center;
+    background: $pure-white;
+    border: none;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+    display: flex;
+    height: $search-size;
+    justify-content: center;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: $search-size;
 
-  @include isHeaderMobile {
-    height: calc($spacing-md + $search-size);
-    justify-content: flex-end;
-    top: calc($spacing-md * -1);
-  }
+    @include isHeaderMobile {
+      height: calc($spacing-md + $search-size);
+      justify-content: flex-end;
+      top: calc($spacing-md * -1);
+    }
 
-  @include media($size-xl) {
-    padding: 0 0 0.125rem;
-  }
+    @include media($size-xl) {
+      padding: 0 0 0.125rem;
+    }
 
-  svg {
-    height: 1.5rem;
-    width: 1.5rem;
-  }
+    svg {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
 
-  &:focus-visible {
-    @include focus-ring($border-radius: $radius-xs);
-  }
+    &:focus-visible {
+      @include focus-ring($border-radius: $radius-xs);
+    }
 
-  &:hover,
-  &:active {
-    &::after {
-      border-bottom: 1px solid $black-100;
-      bottom: 0;
-      content: '';
-      display: flex;
-      margin-bottom: -2px;
-      position: absolute;
-      right: 0;
-      width: 102%;
+    &:hover,
+    &:active {
+      &::after {
+        border-bottom: 1px solid $black-100;
+        bottom: 0;
+        content: '';
+        display: flex;
+        margin-bottom: -2px;
+        position: absolute;
+        right: 0;
+        width: 102%;
 
-      @include isHeaderMobile {
-        margin-bottom: -1px;
-        width: 52%;
+        @include isHeaderMobile {
+          margin-bottom: -1px;
+          width: 52%;
+        }
       }
     }
-  }
 
-  &__icon {
-    pointer-events: none;
+    &__icon {
+      pointer-events: none;
 
-    path {
-      fill: $pure-black;
+      path {
+        fill: $pure-black;
+      }
     }
   }
 }

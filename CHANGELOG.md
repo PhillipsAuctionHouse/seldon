@@ -1,3 +1,64 @@
+## [1.280.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.280.1...v1.280.2) (2026-09-21)
+
+
+### Bug Fixes
+
+* **SeldonImage:** L3-14570 fill width by default for square/portrait aspect ratios ([#935](https://github.com/PhillipsAuctionHouse/seldon/issues/935)) ([ae47bb8](https://github.com/PhillipsAuctionHouse/seldon/commit/ae47bb851619c59ce395bc4e180313bac3cefdd5))
+
+## [1.280.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.280.0...v1.280.1) (2026-09-08)
+
+
+### Bug Fixes
+
+* **Navigation,Subscribe:** L3-14334 stop double onClick and id override (L3-14335) ([#921](https://github.com/PhillipsAuctionHouse/seldon/issues/921)) ([c312a84](https://github.com/PhillipsAuctionHouse/seldon/commit/c312a84ce11f465d186a330019ec29a242d98930))
+
+# [1.280.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.279.2...v1.280.0) (2026-08-26)
+
+
+### Bug Fixes
+
+* **carousel:** L3-14387 fix CarouselDots infinite re-render loop ([#925](https://github.com/PhillipsAuctionHouse/seldon/issues/925)) ([93cd3ed](https://github.com/PhillipsAuctionHouse/seldon/commit/93cd3edda218aa6cac8e77b8e806f309cc824c24))
+
+
+### Features
+
+* **styles:** L3-14240 emit CSS from component JS and foundation ([#920](https://github.com/PhillipsAuctionHouse/seldon/issues/920)) ([12242bb](https://github.com/PhillipsAuctionHouse/seldon/commit/12242bb7ed764d6ba3f5f9b1a85bced90f40d7d2))
+
+## [1.279.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.279.1...v1.279.2) (2026-08-21)
+
+
+### Bug Fixes
+
+* **Subscribe:** PDD-712 add inputProps slot and widen element for forwardRef forms ([#915](https://github.com/PhillipsAuctionHouse/seldon/issues/915)) ([873f2ea](https://github.com/PhillipsAuctionHouse/seldon/commit/873f2ead97d7ad56623a69767b40f79dfd028741))
+
+## [1.279.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.279.0...v1.279.1) (2026-08-19)
+
+
+### Bug Fixes
+
+* **Navigation:** L3-13164 close mobile hamburger menu on nav link click ([#919](https://github.com/PhillipsAuctionHouse/seldon/issues/919)) ([33b230b](https://github.com/PhillipsAuctionHouse/seldon/commit/33b230b241b5a4a22b31bc72ca081e4c32e379ad))
+
+# [1.279.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.278.1...v1.279.0) (2026-08-12)
+
+
+### Features
+
+* **Toast:** L3-13929 add configurable toast viewport offset ([#917](https://github.com/PhillipsAuctionHouse/seldon/issues/917)) ([dfc9963](https://github.com/PhillipsAuctionHouse/seldon/commit/dfc99634c02d5282d00f329991985b137ace4c75))
+
+## [1.278.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.278.0...v1.278.1) (2026-07-31)
+
+
+### Bug Fixes
+
+* **Subscribe:** PDD-712 widen element prop type to accept form-like components ([#912](https://github.com/PhillipsAuctionHouse/seldon/issues/912)) ([a9f5813](https://github.com/PhillipsAuctionHouse/seldon/commit/a9f58138f7f334ac37c53c8635b19e3d85a7da22))
+
+# [1.278.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.277.0...v1.278.0) (2026-07-30)
+
+
+### Features
+
+* **component:** PDD-683 add slide to activate component ([#895](https://github.com/PhillipsAuctionHouse/seldon/issues/895)) ([bb7ab7f](https://github.com/PhillipsAuctionHouse/seldon/commit/bb7ab7f05f1110f61d68d3cc51e4416efbad0192))
+
 # [1.277.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.276.0...v1.277.0) (2026-07-27)
 
 

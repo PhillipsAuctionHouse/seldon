@@ -1,6 +1,7 @@
 import classnames from 'classnames';
 import { forwardRef } from 'react';
 import { getCommonProps } from '../../utils';
+import './_splitPanel.scss';
 
 export interface SplitPanelProps extends React.HTMLAttributes<HTMLElement> {
   /**

@@ -10,6 +10,7 @@ import { Text, TextVariants } from '../../components/Text';
 import NavigationList from '../../components/Navigation/NavigationList/NavigationList';
 import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import { getLanguageLabel } from './utils';
+import './_languageSelector.scss';
 
 interface DropdownSelectorProps extends ComponentProps<'div'> {
   value: string;

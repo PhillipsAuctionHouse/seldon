@@ -1,85 +1,89 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
 // Focus ring when the entire card acts as a link (wrapped in <a>)
-a:focus-visible > .#{$px}-sale-card {
-  @include focus-ring($border-radius: $radius-xs);
-}
 
-// Remove default browser outline from the link so only the card focus ring shows
-a:has(> .#{$px}-sale-card) {
-  &:focus {
-    outline: none;
+@layer seldon.patterns {
+  a:focus-visible > .#{$px}-sale-card {
+    @include focus-ring($border-radius: $radius-xs);
   }
-}
 
-.#{$px}-sale-card {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-md;
-
-  &--image-left {
-    @include media($breakpoint-snw-mobile) {
-      flex-direction: row;
+  // Remove default browser outline from the link so only the card focus ring shows
+  a:has(> .#{$px}-sale-card) {
+    &:focus {
+      outline: none;
     }
   }
 
-  &--image-right {
-    @include media($breakpoint-snw-mobile) {
-      flex-direction: row-reverse;
-    }
-  }
-
-  &__ctas {
-    flex: 0 0 0%;
-
-    @include media($breakpoint-snw-mobile) {
-      flex-basis: 250px;
-    }
-  }
-
-  &__modal-link .#{$px}-button {
-    @include text($linkSmall);
-  }
-
-  &__cta-button {
-    padding: $spacing-sm $spacing-lg;
-    white-space: nowrap;
-    width: 100%;
-  }
-
-  &__pdf-link {
+  .#{$px}-sale-card {
     align-items: center;
-    align-self: stretch;
     display: flex;
-    gap: $spacing-micro;
-    justify-content: center;
+    flex-direction: column;
+    gap: $spacing-md;
 
-    a {
-      text-decoration: none;
-    }
-  }
-
-  &--relatedSaleTile {
-    align-items: flex-start;
-    gap: $spacing-sm;
-
-    @include media($size-snw-mobile, 'max') {
-      &.#{$px}-sale-card--image-left {
+    &--image-left {
+      @include media($breakpoint-snw-mobile) {
         flex-direction: row;
       }
+    }
 
-      &.#{$px}-sale-card--image-right {
+    &--image-right {
+      @include media($breakpoint-snw-mobile) {
         flex-direction: row-reverse;
       }
     }
 
-    > .#{$px}-card__image {
-      max-width: $spacing-xxxl;
-      min-width: 94px;
+    &__ctas {
+      flex: 0 0 0%;
 
-      @include media($size-xl) {
-        max-width: calc($spacing-xxxl * 1.25);
+      @include media($breakpoint-snw-mobile) {
+        flex-basis: 250px;
+      }
+    }
+
+    &__modal-link .#{$px}-button {
+      @include text($linkSmall);
+    }
+
+    &__cta-button {
+      padding: $spacing-sm $spacing-lg;
+      white-space: nowrap;
+      width: 100%;
+    }
+
+    &__pdf-link {
+      align-items: center;
+      align-self: stretch;
+      display: flex;
+      gap: $spacing-micro;
+      justify-content: center;
+
+      a {
+        text-decoration: none;
+      }
+    }
+
+    &--relatedSaleTile {
+      align-items: flex-start;
+      gap: $spacing-sm;
+
+      @include media($size-snw-mobile, 'max') {
+        &.#{$px}-sale-card--image-left {
+          flex-direction: row;
+        }
+
+        &.#{$px}-sale-card--image-right {
+          flex-direction: row-reverse;
+        }
+      }
+
+      > .#{$px}-card__image {
+        max-width: $spacing-xxxl;
+        min-width: 94px;
+
+        @include media($size-xl) {
+          max-width: calc($spacing-xxxl * 1.25);
+        }
       }
     }
   }

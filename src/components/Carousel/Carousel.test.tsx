@@ -1,5 +1,6 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { useEffect } from 'react';
+import { vi } from 'vitest';
 import Carousel, { type CarouselApi } from './Carousel';
 import CarouselContent from './CarouselContent';
 import CarouselItem from './CarouselItem';
@@ -131,6 +132,38 @@ describe('Carousel', () => {
     });
   });
 
+  it('notifies onSlideChange with the selected snap, not the first in-view index', async () => {
+    const onSlideChange = vi.fn();
+    let api: CarouselApi | undefined;
+    render(
+      <Carousel loop onSlideChange={onSlideChange}>
+        <CarouselContent>
+          <CarouselItem>Slide 1</CarouselItem>
+          <CarouselItem>Slide 2</CarouselItem>
+          <CarouselItem>Slide 3</CarouselItem>
+        </CarouselContent>
+        <CarouselApiProbe onApi={(captured) => (api = captured)} />
+      </Carousel>,
+    );
+
+    await waitFor(() => expect(api).toBeDefined());
+    await waitFor(() => expect(onSlideChange).toHaveBeenCalledWith(0));
+
+    onSlideChange.mockClear();
+    vi.spyOn(api!, 'slidesInView').mockReturnValue([1]);
+    act(() => {
+      api!.reInit();
+    });
+
+    await waitFor(() => expect(onSlideChange).toHaveBeenCalledWith(0));
+    expect(onSlideChange).not.toHaveBeenCalledWith(1);
+
+    act(() => {
+      api!.scrollTo(1);
+    });
+    await waitFor(() => expect(onSlideChange).toHaveBeenCalledWith(1));
+  });
+
   describe('autoAdvanceDelay', () => {
     // The global test setup mocks matchMedia with matches: true for every query,
     // which trips the prefers-reduced-motion guard. Default to no matching queries.
@@ -184,7 +217,9 @@ describe('Carousel', () => {
       expect(autoplay).toBeDefined();
 
       const resetSpy = vi.spyOn(autoplay!, 'reset');
-      api!.scrollTo(1);
+      act(() => {
+        api!.scrollTo(1);
+      });
 
       await waitFor(() => expect(resetSpy).toHaveBeenCalled());
     });

@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { getSafeCountryCallingCode } from './utils';
 import { Country, ModalBaseProps } from './types';
 import { TextVariants } from '../../components/Text';
+import './_countryPickerOption.scss';
 
 /**
  * Props for a single country option in the picker.

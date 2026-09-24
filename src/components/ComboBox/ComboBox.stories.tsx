@@ -67,6 +67,24 @@ Playground.argTypes = {
   noOptionsMessage: { control: 'text' },
 };
 
+export const Invalid = () => {
+  const [value, setValue] = React.useState<string>('');
+
+  return (
+    <div style={{ height: '300px', width: '400px' }}>
+      <ComboBox
+        options={birthdays}
+        id="birthdays-combo-box-invalid"
+        labelText="Birth Year"
+        value={value}
+        onChange={setValue}
+        invalid
+        invalidText="Please enter a valid birth year."
+      />
+    </div>
+  );
+};
+
 export const ComboBoxInDrawer = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [drawerValue, setDrawerValue] = React.useState('');

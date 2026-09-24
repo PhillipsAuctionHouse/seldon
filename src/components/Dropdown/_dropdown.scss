@@ -1,99 +1,102 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-dropdown {
-  @include text($bodySmall);
+@layer seldon.components {
+  .#{$px}-dropdown {
+    @include text($bodySmall);
 
-  &__trigger {
-    align-items: center;
-    background-color: $white-100;
-    border: none;
-    color: $black-100;
-    display: inline-flex;
-    gap: 10px;
-    justify-content: center;
-    padding: $spacing-xsm;
+    &__trigger {
+      align-items: center;
+      background-color: $white-100;
+      border: none;
+      color: $black-100;
+      display: inline-flex;
+      gap: 10px;
+      justify-content: center;
+      padding: $spacing-xsm;
 
-    &:disabled {
-      color: $medium-gray;
-      cursor: default;
-      pointer-events: none;
+      &:disabled {
+        color: $medium-gray;
+        cursor: default;
+        pointer-events: none;
+
+        svg {
+          stroke: $light-gray;
+        }
+      }
 
       svg {
-        stroke: $light-gray;
+        height: 16px;
+        width: 16px;
+      }
+
+      &-icon-expanded {
+        transform: rotateX(180deg);
+      }
+
+      &:hover:not(:disabled) {
+        cursor: pointer;
+      }
+
+      &:focus-within:not(:disabled) {
+        @include focus-ring($border-radius: $radius-xs);
       }
     }
 
-    svg {
-      height: 16px;
-      width: 16px;
+    &__content {
+      background-color: $white-100;
+      border: 1px solid $light-gray;
+
+      // following will add additional arrows if list is near edge of viewport
+      max-height: var(--radix-select-content-available-height);
+      overflow: hidden;
+      position: relative;
+      z-index: 10;
     }
 
-    &-icon-expanded {
+    &__scroll-button,
+    &__scroll-button__up {
+      align-items: center;
+      cursor: default;
+      display: flex;
+      justify-content: center;
+
+      svg {
+        height: 16px;
+        width: 16px;
+      }
+    }
+
+    &__scroll-button__up {
       transform: rotateX(180deg);
     }
 
-    &:hover:not(:disabled) {
-      cursor: pointer;
+    &__viewport {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xsm;
+      padding: $spacing-sm 0;
     }
 
-    &:focus-within:not(:disabled) {
-      @include focus-ring($border-radius: $radius-xs);
-    }
-  }
+    &__item {
+      @include text($bodySmall);
 
-  &__content {
-    background-color: $white-100;
-    border: 1px solid $light-gray;
+      align-items: center;
+      display: flex;
+      padding: 0 $padding-sm;
+      position: relative;
+      user-select: none;
 
-    // following will add additional arrows if list is near edge of viewport
-    max-height: var(--radix-select-content-available-height);
-    overflow: hidden;
-    position: relative;
-    z-index: 10;
-  }
+      &[data-disabled] {
+        color: $medium-gray;
+        pointer-events: none;
+      }
 
-  &__scroll-button,
-  &__scroll-button__up {
-    align-items: center;
-    cursor: default;
-    display: flex;
-    justify-content: center;
-
-    svg {
-      height: 16px;
-      width: 16px;
-    }
-  }
-
-  &__scroll-button__up {
-    transform: rotateX(180deg);
-  }
-
-  &__viewport {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-xsm;
-    padding: $spacing-sm 0;
-  }
-
-  &__item {
-    @include text($bodySmall);
-
-    align-items: center;
-    display: flex;
-    padding: 0 $padding-sm;
-    position: relative;
-    user-select: none;
-
-    &[data-disabled] {
-      color: $medium-gray;
-      pointer-events: none;
-    }
-
-    &[data-highlighted] {
-      background-color: $light-gray;
-      cursor: pointer;
-      outline: none;
+      &[data-highlighted] {
+        background-color: $light-gray;
+        cursor: pointer;
+        outline: none;
+      }
     }
   }
 }

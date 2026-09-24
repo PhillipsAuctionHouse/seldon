@@ -1,3 +1,6 @@
+import './_input.scss';
+// Toggle has no TSX module; type="toggle" reuses this sheet for the pill/knob.
+import '../Toggle/_toggle.scss';
 import * as React from 'react';
 import classnames from 'classnames';
 import { px, useNormalizedInputProps } from '../../utils';

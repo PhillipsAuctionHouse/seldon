@@ -30,7 +30,7 @@ coverage
 # Playwright files
 test-results/**
 
-# Local Claude Code worktrees
+# Local Claude Code worktrees (see .claude/worktrees)
 .claude/worktrees/
 
 

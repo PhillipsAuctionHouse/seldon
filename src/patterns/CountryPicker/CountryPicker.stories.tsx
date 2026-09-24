@@ -125,3 +125,20 @@ export const PreSelectedCountry = () => (
   />
 );
 PreSelectedCountry.storyName = 'Trigger with pre-selected country';
+
+export const TriggerWithError = () => (
+  <CountryPicker
+    value="US"
+    triggerLabelText="Country"
+    triggerDisplayValue="+1"
+    hasTriggerError={true}
+    triggerErrorMsg="Please select a country."
+    modalTitle="Select Country"
+    searchInputLabel="Search country"
+    searchInputPlaceholder="Search country"
+    selectButtonLabel="Select"
+    isPhone={true}
+    onChange={(code) => console.log('Selected country code:', code)}
+  />
+);
+TriggerWithError.storyName = 'Trigger with error';

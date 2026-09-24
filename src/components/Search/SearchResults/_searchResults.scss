@@ -1,55 +1,58 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-search__results {
-  align-items: flex-start;
-  background: $white-100;
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
-  max-height: calc(90vh - #{$header-height});
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  overflow-y: scroll;
-  padding: $spacing-sm;
-  position: absolute;
-  scrollbar-width: none; /* Firefox */
-  top: $search-size;
-  width: 100%;
-
-  &::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
-  }
-
-  @include isHeaderMobile {
-    padding: $spacing-sm 0;
-  }
-
-  &-container {
+@layer seldon.components {
+  .#{$px}-search__results {
+    align-items: flex-start;
     background: $white-100;
     display: flex;
     flex-direction: column;
-    font-family: Montserrat, sans-serif;
-    gap: $spacing-sm;
+    gap: 0.625rem;
+    max-height: calc(90vh - #{$header-height});
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    overflow-y: scroll;
+    padding: $spacing-sm;
+    position: absolute;
+    scrollbar-width: none; /* Firefox */
+    top: $search-size;
     width: 100%;
 
-    strong {
-      font-variation-settings: 'wght' 700;
-      /* stylelint-disable-next-line declaration-property-value-disallowed-list */
-      font-weight: unset;
+    &::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
     }
-  }
-}
 
-.#{$px}-search {
-  &__result {
-    display: flex;
-    &:not(.#{$px}-search__result--view-all) {
-      .#{$px}-link:not(:hover):not(:focus-visible) {
-        text-decoration: none;
+    @include isHeaderMobile {
+      padding: $spacing-sm 0;
+    }
+
+    &-container {
+      background: $white-100;
+      display: flex;
+      flex-direction: column;
+      font-family: Montserrat, sans-serif;
+      gap: $spacing-sm;
+      width: 100%;
+
+      strong {
+        font-variation-settings: 'wght' 700;
+        /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+        font-weight: unset;
       }
     }
+  }
 
-    &__label {
-      text-transform: initial;
+  .#{$px}-search {
+    &__result {
+      display: flex;
+      &:not(.#{$px}-search__result--view-all) {
+        .#{$px}-link:not(:hover):not(:focus-visible) {
+          text-decoration: none;
+        }
+      }
+
+      &__label {
+        text-transform: initial;
+      }
     }
   }
 }

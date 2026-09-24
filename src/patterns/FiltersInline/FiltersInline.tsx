@@ -4,6 +4,7 @@ import { getCommonProps } from '../../utils';
 import { MainFilterDropdown } from './MainFilterDropdown';
 import { SubFilterDropdown } from './SubFilterDropdown';
 import { BaseFilterProps, DropdownMenuTranslation, FilterButtonType } from './types';
+import './_filtersInline.scss';
 
 /**
  * Props for the FiltersInline component (main component).

@@ -3,6 +3,7 @@ import { getCommonProps } from '../../utils';
 import classnames from 'classnames';
 import { Text, TextVariants } from '../Text';
 import { DetailVariants } from './types';
+import './_detail.scss';
 
 export interface DetailProps extends ComponentProps<'div'> {
   /*

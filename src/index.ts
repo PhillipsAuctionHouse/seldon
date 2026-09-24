@@ -101,6 +101,7 @@ export * from './components/Detail';
 export * from './components/DetailList';
 export * from './components/ExitGateCard';
 export * from './components/Loader';
+export * from './components/SlideToActivate';
 export { default as PageContentWrapper } from './components/PageContentWrapper/PageContentWrapper';
 export * from './components/PinchZoom';
 export * from './components/SeldonImage';

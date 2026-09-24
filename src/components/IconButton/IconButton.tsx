@@ -3,6 +3,9 @@ import Button, { ButtonProps } from '../Button/Button';
 import { getCommonProps } from '../../utils';
 import { ButtonVariants } from '../Button/types';
 import { forwardRef } from 'react';
+// Keep this import last, below the Button import: IconButton overrides `.seldon-button` rules on
+// Button's own root element. Hoisting it above regressed IconButton in Chromatic 714.
+import './_iconButton.scss';
 
 export interface IconButtonProps extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'children'> {
   /**
@@ -31,6 +34,8 @@ export interface IconButtonProps extends Omit<React.HTMLAttributes<HTMLButtonEle
   prefetch?: ButtonProps['prefetch'];
 }
 
+// wraps Button, so `.seldon-icon-button` and `.seldon-button` land on one
+// node and collide at the same level. maybe better not to wrap
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ children, variant = ButtonVariants.primary, isDisabled = false, className, ...props }, ref) => {
     const { className: baseClass, ...commonProps } = getCommonProps(props, 'IconButton');

@@ -5,6 +5,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import ClassNames from 'embla-carousel-class-names';
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
+import './_carousel.scss';
 
 export type CarouselApi = UseEmblaCarouselType[1];
 
@@ -197,17 +198,16 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       [api],
     );
 
-    const onSlidesInView = useCallback(
-      (api: CarouselApi) => {
-        if (!api) return;
+    const onSelect = useCallback(
+      (emblaApi: CarouselApi) => {
+        if (!emblaApi) return;
 
-        setCanScrollPrev(api?.canScrollPrev());
-        setCanScrollNext(api?.canScrollNext());
-
-        const slideIndex = api.slidesInView()?.[0];
-        if (slideIndex !== undefined) {
-          onSlideChange?.(slideIndex);
-        }
+        setCanScrollPrev(emblaApi.canScrollPrev());
+        setCanScrollNext(emblaApi.canScrollNext());
+        // Selected snap, not slidesInView()[0]: columnGap padding often leaves the
+        // active slide under inViewThreshold (0.99), so the first in-view index
+        // can be a neighbor. Feeding that into startIndex re-inits on the wrong slide.
+        onSlideChange?.(emblaApi.selectedScrollSnap());
       },
       [onSlideChange],
     );
@@ -216,11 +216,14 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
       if (!api) {
         return;
       }
-      api.on('slidesInView', onSlidesInView);
+      onSelect(api);
+      api.on('select', onSelect);
+      api.on('reInit', onSelect);
       return () => {
-        api.off('slidesInView', onSlidesInView);
+        api.off('select', onSelect);
+        api.off('reInit', onSelect);
       };
-    }, [api, onSlidesInView]);
+    }, [api, onSelect]);
 
     useEffect(() => {
       if (!api || !shouldAutoAdvance) return;

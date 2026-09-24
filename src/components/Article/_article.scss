@@ -1,29 +1,32 @@
 @use '~scss/allPartials' as *;
+@use '~scss/layers';
 
-.#{$px}-article {
-  border-bottom: 1px solid $pure-black;
-  border-top: 1px solid $pure-black;
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-md;
-  padding: $spacing-md;
-
-  @media (min-width: $breakpoint-md) {
-    flex-direction: row;
-  }
-
-  &__content {
+@layer seldon.components {
+  .#{$px}-article {
+    border-bottom: 1px solid $pure-black;
+    border-top: 1px solid $pure-black;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: $spacing-md;
+    padding: $spacing-md;
 
-    &-label,
-    &-description {
-      color: $soft-black;
+    @media (min-width: $breakpoint-md) {
+      flex-direction: row;
     }
 
-    &-label {
-      margin-bottom: $spacing-xsm;
+    &__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      &-label,
+      &-description {
+        color: $soft-black;
+      }
+
+      &-label {
+        margin-bottom: $spacing-xsm;
+      }
     }
   }
 }

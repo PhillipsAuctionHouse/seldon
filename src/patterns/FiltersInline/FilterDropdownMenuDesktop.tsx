@@ -6,6 +6,7 @@ import FilterInput from '../../components/Filter/FilterInput';
 import { px } from '../../utils';
 import { FilterDimension, FilterDropdownMenuProps } from './types';
 import { getFilterDimensions, handleInputChange as handleInputChangeUtil, hasActiveDimensions } from './utils';
+import './_filterDropdownMenu.scss';
 
 export const FilterDropdownMenuDesktop = React.forwardRef<HTMLDivElement, FilterDropdownMenuProps>(
   (
