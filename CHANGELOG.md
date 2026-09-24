@@ -1,3 +1,10 @@
+# [1.281.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.280.2...v1.281.0) (2026-09-24)
+
+
+### Features
+
+* **FiltersInline:** L3-13677 keep filter count badge visible on mobile scroll row ([#936](https://github.com/PhillipsAuctionHouse/seldon/issues/936)) ([997e9b4](https://github.com/PhillipsAuctionHouse/seldon/commit/997e9b4c039ffc27732fe0e75a6fd43fc8d412d3))
+
 ## [1.280.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.280.1...v1.280.2) (2026-09-21)
 
 
