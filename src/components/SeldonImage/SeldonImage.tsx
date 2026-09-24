@@ -1,4 +1,13 @@
-import { ComponentProps, forwardRef, useRef, useState, useEffect, useCallback, memo } from 'react';
+import {
+  ComponentProps,
+  forwardRef,
+  useRef,
+  useState,
+  useEffect,
+  useCallback,
+  memo,
+  version as reactVersion,
+} from 'react';
 import classnames from 'classnames';
 
 import { getCommonProps } from '../../utils';
@@ -6,6 +15,15 @@ import { Icon } from '../Icon';
 import { isImageValid } from './utils';
 import { AspectRatio } from './types';
 import './_seldonImage.scss';
+
+/**
+ * React 19 knows `fetchPriority` (and forwards it to the image preload it emits);
+ * React 18 only knows the lowercase attribute and warns on the camelCase prop.
+ * Both spellings reach the DOM as `fetchpriority`. Remove once every consumer
+ * is on React 19 (peer range is ^18 || ^19).
+ */
+const fetchPriorityProps = (fetchPriority: SeldonImageProps['fetchPriority']) =>
+  Number(reactVersion.split('.')[0]) >= 19 ? { fetchPriority } : { fetchpriority: fetchPriority };
 
 export interface SeldonImageProps extends ComponentProps<'div'> {
   /**
@@ -201,7 +219,7 @@ const SeldonImage = memo(
             data-testid={`${commonProps['data-testid']}-img`}
             ref={imgRef}
             loading={loading}
-            fetchPriority={fetchPriority}
+            {...fetchPriorityProps(fetchPriority)}
             onLoad={() => {
               setLoadingState('loaded');
             }}
