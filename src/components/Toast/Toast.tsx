@@ -24,12 +24,19 @@ export interface PrimitiveToastProps extends Omit<PrimitiveToast.ToastProps, 'ti
    * Title for the close button for accessibility.
    */
   closeButtonLabel?: string;
+  /**
+   * Renders the close button. Set to `false` for a toast that only closes on its own; no space is
+   * left where the button would have been.
+   * @default true
+   */
+  hasCloseButton?: boolean;
 }
 /**
  * ## Overview
  *
  * Toast is a non-disruptive message component that appears temporarily to provide
- * brief notifications to the user. It contains a title, a close button, and an optional action button or link.
+ * brief notifications to the user. It contains a title, a close button (unless `hasCloseButton` is false), and an
+ * optional action button or link.
  *
  * Use the `useToast` hook to trigger toast notifications programmatically from any component.
  *
@@ -46,7 +53,7 @@ export interface PrimitiveToastProps extends Omit<PrimitiveToast.ToastProps, 'ti
  * [Radix UI Toast Documentation](https://www.radix-ui.com/docs/primitives/components/toast)
  */
 const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(
-  ({ className, title, actionElement, actionAltText, closeButtonLabel, ...props }, ref) => {
+  ({ className, title, actionElement, actionAltText, closeButtonLabel, hasCloseButton = true, ...props }, ref) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Toast');
 
     return (
@@ -59,11 +66,13 @@ const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(
             </PrimitiveToast.Action>
           )}
         </div>
-        <PrimitiveToast.Close className={`${baseClassName}__close`} aria-label={closeButtonLabel} asChild>
-          <IconButton variant={ButtonVariants.tertiary}>
-            <Icon icon="CloseX" title={closeButtonLabel} color="$white-100" aria-hidden />
-          </IconButton>
-        </PrimitiveToast.Close>
+        {hasCloseButton && (
+          <PrimitiveToast.Close className={`${baseClassName}__close`} aria-label={closeButtonLabel} asChild>
+            <IconButton variant={ButtonVariants.tertiary}>
+              <Icon icon="CloseX" title={closeButtonLabel} color="$white-100" aria-hidden />
+            </IconButton>
+          </PrimitiveToast.Close>
+        )}
       </PrimitiveToast.Root>
     );
   },

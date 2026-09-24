@@ -156,3 +156,25 @@ WithOffset.parameters = {
   },
   ...sharedA11yParameters,
 };
+
+export const WithoutCloseButton = () => (
+  <div style={storyFrameStyle}>
+    <Toast
+      title={<Text>Toast without a close button</Text>}
+      open={true}
+      defaultOpen={true}
+      onOpenChange={() => void 0}
+      hasCloseButton={false}
+    />
+  </div>
+);
+
+WithoutCloseButton.parameters = {
+  docs: {
+    description: {
+      story:
+        'For a toast that closes on its own. `hasCloseButton={false}` leaves no empty column or gap behind, so the padding is even on both sides.',
+    },
+  },
+  ...sharedA11yParameters,
+};

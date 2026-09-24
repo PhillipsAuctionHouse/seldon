@@ -136,6 +136,12 @@ describe('Toast', () => {
     expect(await screen.findByRole('button', { name: 'Custom Close Label' })).toBeInTheDocument();
   });
 
+  it('omits the close button when hasCloseButton is false', async () => {
+    render(<ToastWrapper title="Test Toast" closeButtonLabel="Close" hasCloseButton={false} />);
+    expect(await screen.findByTestId('toast-title')).toHaveTextContent('Test Toast');
+    expect(screen.queryByRole('button', { name: 'Close' })).not.toBeInTheDocument();
+  });
+
   it('passes additional props to the root component', async () => {
     render(<ToastWrapper title="Test Toast" data-custom="value" />);
     expect(await screen.findByTestId('toast')).toHaveAttribute('data-custom', 'value');
