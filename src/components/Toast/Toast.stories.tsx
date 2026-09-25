@@ -92,6 +92,18 @@ const OffsetDemo = () => {
   );
 };
 
+const WithoutCloseButtonDemo = () => {
+  const toast = useToast();
+
+  return (
+    <div style={toastDemoStyle}>
+      <Button onClick={() => toast({ title: 'Toast without a close button', hasCloseButton: false })}>
+        Click for toast without close button
+      </Button>
+    </div>
+  );
+};
+
 export const Playground = () => (
   <div style={storyFrameStyle}>
     <Toast
@@ -118,6 +130,13 @@ export const Playground = () => (
         </Button>
       }
       closeButtonLabel="Close"
+    />
+    <Toast
+      title={<Text>Toast without a close button</Text>}
+      open={true}
+      defaultOpen={true}
+      onOpenChange={() => void 0}
+      hasCloseButton={false}
     />
   </div>
 );
@@ -159,13 +178,7 @@ WithOffset.parameters = {
 
 export const WithoutCloseButton = () => (
   <div style={storyFrameStyle}>
-    <Toast
-      title={<Text>Toast without a close button</Text>}
-      open={true}
-      defaultOpen={true}
-      onOpenChange={() => void 0}
-      hasCloseButton={false}
-    />
+    <WithoutCloseButtonDemo />
   </div>
 );
 
