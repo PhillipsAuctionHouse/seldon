@@ -9,8 +9,11 @@
     color: $white-100;
     column-gap: $spacing-sm;
     display: grid;
-    grid-template-areas: 'title action';
-    grid-template-columns: auto max-content;
+
+    // The close button's column is implicit: an explicit one stays, gap and all, with no button in it.
+    grid-auto-columns: max-content;
+    grid-auto-flow: column;
+    grid-template-columns: auto;
     padding: $spacing-xsm $spacing-sm;
 
     // Viewport is pointer-events: none so empty space doesn't block the page; re-enable on
@@ -49,7 +52,7 @@
     }
 
     &[data-swipe='end'] {
-      animation: swipeOut 100ms ease-out;
+      animation: swipe-out 100ms ease-out;
     }
   }
 
