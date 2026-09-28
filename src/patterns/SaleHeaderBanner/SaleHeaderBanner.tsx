@@ -23,9 +23,10 @@ export interface SaleHeaderBannerProps extends ComponentProps<'div'> {
   /** Text to be displayed as a badge. */
   badgeText?: string;
   /**
-   * The URL of the banner image
+   * The URL of the banner image. When omitted the image area shows the
+   * SeldonImage fallback instead of rendering an `<img src="">`.
    */
-  imageSrcUrl: string;
+  imageSrcUrl?: string;
   /**
    * The srcset of the banner image [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset]
    */
@@ -189,7 +190,7 @@ const SaleHeaderBanner = forwardRef<HTMLDivElement, SaleHeaderBannerProps>(
           <Banner.Media size={BannerMediaSize.half} className={`${baseClassName}__image`}>
             <SeldonImage
               aspectRatio={AspectRatio.Landscape}
-              src={imageSrcUrl}
+              src={imageSrcUrl ?? ''}
               alt={String(auctionTitle)}
               objectFit="cover"
               srcSet={imageSrcSet}

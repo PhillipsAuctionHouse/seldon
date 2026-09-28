@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import SaleHeaderBanner, { SaleHeaderBannerProps } from './SaleHeaderBanner';
 import { AuctionStatus } from '../../types/commonTypes';
 import SaleHeaderBrowseAuctions from './SaleHeaderBrowseAuctions';
@@ -42,6 +42,15 @@ describe('SaleHeaderBanner', () => {
     render(<SaleHeaderBanner {...defaultProps} />);
     const img = screen.getByAltText('Sample Auction');
     expect(img).toHaveAttribute('src', 'https://example.com/image.jpg');
+  });
+
+  it('renders no src attribute and no React warning when imageSrcUrl is omitted', () => {
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+    render(<SaleHeaderBanner {...defaultProps} imageSrcUrl={undefined} />);
+
+    expect(screen.getByAltText('Sample Auction')).not.toHaveAttribute('src');
+    expect(consoleError).not.toHaveBeenCalled();
+    consoleError.mockRestore();
   });
 
   it('renders the countdown timer when auction is open for bidding and there is an auctionEndTime', () => {
