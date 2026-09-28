@@ -1,3 +1,10 @@
+# [1.282.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.281.0...v1.282.0) (2026-09-28)
+
+
+### Features
+
+* **Saleroom:** L3-14964 Bid toast text wraps at narrow widths and sits off-center ([#937](https://github.com/PhillipsAuctionHouse/seldon/issues/937)) ([3c94262](https://github.com/PhillipsAuctionHouse/seldon/commit/3c94262e67c63e57f03f48606a073360043e51d3))
+
 # [1.281.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.280.2...v1.281.0) (2026-09-24)
 
 
