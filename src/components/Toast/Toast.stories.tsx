@@ -92,6 +92,18 @@ const OffsetDemo = () => {
   );
 };
 
+const WithoutCloseButtonDemo = () => {
+  const toast = useToast();
+
+  return (
+    <div style={toastDemoStyle}>
+      <Button onClick={() => toast({ title: 'Toast without a close button', hasCloseButton: false })}>
+        Click for toast without close button
+      </Button>
+    </div>
+  );
+};
+
 export const Playground = () => (
   <div style={storyFrameStyle}>
     <Toast
@@ -118,6 +130,13 @@ export const Playground = () => (
         </Button>
       }
       closeButtonLabel="Close"
+    />
+    <Toast
+      title={<Text>Toast without a close button</Text>}
+      open={true}
+      defaultOpen={true}
+      onOpenChange={() => void 0}
+      hasCloseButton={false}
     />
   </div>
 );
@@ -152,6 +171,22 @@ WithOffset.parameters = {
     description: {
       story:
         'Pass `offset` to your app `ToastProvider` for a mount-time inset, or call `setOffset` / `useToast().setOffset` when page state changes. This story uses the Storybook root provider and demos runtime updates.',
+    },
+  },
+  ...sharedA11yParameters,
+};
+
+export const WithoutCloseButton = () => (
+  <div style={storyFrameStyle}>
+    <WithoutCloseButtonDemo />
+  </div>
+);
+
+WithoutCloseButton.parameters = {
+  docs: {
+    description: {
+      story:
+        'For a toast that closes on its own. `hasCloseButton={false}` leaves no empty column or gap behind, so the padding is even on both sides.',
     },
   },
   ...sharedA11yParameters,
