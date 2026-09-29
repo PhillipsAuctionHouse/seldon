@@ -147,6 +147,12 @@ export interface FilterDropdownProps extends BaseFilterProps {
   dropdownMenuTranslation?: DropdownMenuTranslation;
   /** Whether to hide the desktop sort button */
   hideDesktopSortButton?: boolean;
+  /**
+   * Overrides the count badge on the main filter button. By default the badge
+   * counts the active dimensions in `filters`; pass this when `filters` holds
+   * pending (unapplied) selections and the badge should reflect applied ones.
+   */
+  mainFilterCount?: number;
 }
 
 /**
