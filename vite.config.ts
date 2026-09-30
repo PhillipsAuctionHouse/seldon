@@ -20,11 +20,16 @@ const scssFilesToTransform = ['src/**/*.scss', '!src/scss/**/*.scss', '!src/desi
  * dist. Bundling them emits a second copy of packages the consumer already installs,
  * and `preserveModules` mirrors npm's physical install tree, so a package installed
  * more than once is emitted more than once. Relative paths, absolute paths, the
- * `~scss` alias and plugin virtual modules (`\0`) are ours and stay bundled, as is
- * the entry itself, which Rollup passes with no importer.
+ * `~scss` alias and plugin virtual modules are ours and stay bundled, as is the
+ * entry itself, which Rollup passes with no importer.
+ *
+ * Virtual modules arrive under two conventions: resolved ones are prefixed with
+ * `\0`, while plugins name unresolved ones `virtual:`. Both have to stay bundled,
+ * since neither resolves from node_modules in a consumer.
  */
 function isExternal(id: string, importer: string | undefined) {
   if (!importer) return false;
+  if (id.startsWith('virtual:')) return false;
   return !/^[.~/\0]/.test(id) && !path.isAbsolute(id);
 }
 
