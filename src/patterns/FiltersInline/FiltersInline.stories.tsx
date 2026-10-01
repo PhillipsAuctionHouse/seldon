@@ -292,3 +292,24 @@ export const WithAppliedFilter = () => (
     mainFilterLabel={FilterButtonType.Filter}
   />
 );
+
+/**
+ * `mainFilterCount` overrides the main Filter button's badge. Use it when
+ * `filters` holds pending (unapplied) selections and the badge should show the
+ * applied count instead — here nothing is active in `filters`, but the badge
+ * reports 2 applied filters. Also covered by Chromatic's mobile viewport.
+ */
+export const WithMainFilterCount = () => (
+  <FiltersInline
+    id="filters-inline-main-count-story"
+    filters={filters}
+    filtersListState={Array(filters.length + 1).fill(false)}
+    setFiltersLabelListState={() => {}}
+    onSelectFilter={() => {}}
+    onApplyFilter={() => {}}
+    onClickClear={() => {}}
+    resultsCount={SalesMockData.length}
+    mainFilterLabel={FilterButtonType.Filter}
+    mainFilterCount={2}
+  />
+);
