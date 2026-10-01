@@ -4,12 +4,9 @@ import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import react from '@vitejs/plugin-react';
 import copy from 'rollup-plugin-copy';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { transformScssAlias } from './src/build/buildUtils';
-
-import * as packageJson from './package.json';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 // const isDev = process.env.NODE_ENV;
@@ -17,6 +14,24 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
 const plugins = [svgr(), react(), tsconfigPaths(), dts({ entryRoot: 'src' })];
 
 const scssFilesToTransform = ['src/**/*.scss', '!src/scss/**/*.scss', '!src/design/**', '!src/*.scss'];
+
+/**
+ * Every bare specifier stays external, so nothing from node_modules is copied into
+ * dist. Bundling them emits a second copy of packages the consumer already installs,
+ * and `preserveModules` mirrors npm's physical install tree, so a package installed
+ * more than once is emitted more than once. Relative paths, absolute paths, the
+ * `~scss` alias and plugin virtual modules are ours and stay bundled, as is the
+ * entry itself, which Rollup passes with no importer.
+ *
+ * Virtual modules arrive under two conventions: resolved ones are prefixed with
+ * `\0`, while plugins name unresolved ones `virtual:`. Both have to stay bundled,
+ * since neither resolves from node_modules in a consumer.
+ */
+function isExternal(id: string, importer: string | undefined) {
+  if (!importer) return false;
+  if (id.startsWith('virtual:')) return false;
+  return !/^[.~/\0]/.test(id) && !path.isAbsolute(id);
+}
 
 /** Vite lib mode strips CSS side-effect imports to `/* empty css *\/`. Put them back. */
 function preserveCssImports() {
@@ -79,9 +94,7 @@ export default defineConfig({
           entryFileNames: '[name].cjs',
         },
       ],
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library
-      external: [...Object.keys(packageJson.peerDependencies)],
+      external: isExternal,
       plugins: [
         preserveCssImports(),
         copy({
@@ -112,7 +125,6 @@ export default defineConfig({
             },
           ],
         }),
-        peerDepsExternal(),
       ],
     },
   },
