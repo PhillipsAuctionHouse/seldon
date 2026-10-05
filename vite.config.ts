@@ -11,7 +11,12 @@ import { transformScssAlias } from './src/build/buildUtils';
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 // const isDev = process.env.NODE_ENV;
 
-const plugins = [svgr(), react(), tsconfigPaths(), dts({ entryRoot: 'src' })];
+const plugins = [
+  svgr(),
+  react(),
+  tsconfigPaths(),
+  dts({ entryRoot: 'src', exclude: ['src/**/*.stories.*', 'src/**/*.test.*'] }),
+];
 
 const scssFilesToTransform = ['src/**/*.scss', '!src/scss/**/*.scss', '!src/design/**', '!src/*.scss'];
 
