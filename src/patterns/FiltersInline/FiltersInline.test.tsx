@@ -45,6 +45,52 @@ describe('FiltersInline', () => {
     expect(screen.getAllByTestId('multi-filters-Departments-button-filter-button').length).toBeGreaterThan(0);
   });
 
+  it('counts active dimensions on the main filter badge by default', () => {
+    const activeFilters = filters.map((filter, index) =>
+      index === 0
+        ? {
+            ...filter,
+            filterDimensions: new Set([
+              { label: 'Foo', active: true },
+              { label: 'Bar', active: true },
+            ]),
+          }
+        : filter,
+    );
+    render(<FiltersInline id="default-count" mainFilterLabel={FilterButtonType.Filter} filters={activeFilters} />);
+    expect(screen.getByTestId('default-count-Filters-button-filter-count')).toHaveTextContent('2');
+  });
+
+  it('uses mainFilterCount for the main filter badge when provided', () => {
+    render(
+      <FiltersInline
+        id="override-count"
+        mainFilterLabel={FilterButtonType.Filter}
+        filters={filters}
+        mainFilterCount={4}
+      />,
+    );
+    expect(screen.getByTestId('override-count-Filters-button-filter-count')).toHaveTextContent('4');
+    expect(screen.getByTestId('override-count-Filters-button-filter-button')).toHaveClass(
+      'seldon-filter-button--selected',
+    );
+  });
+
+  it('hides the main filter badge when mainFilterCount is 0', () => {
+    const activeFilters = filters.map((filter, index) =>
+      index === 0 ? { ...filter, filterDimensions: new Set([{ label: 'Foo', active: true }]) } : filter,
+    );
+    render(
+      <FiltersInline
+        id="zero-count"
+        mainFilterLabel={FilterButtonType.Filter}
+        filters={activeFilters}
+        mainFilterCount={0}
+      />,
+    );
+    expect(screen.queryByTestId('zero-count-Filters-button-filter-count')).not.toBeInTheDocument();
+  });
+
   it('renders nothing for SubFilterDropdown if filters is empty', () => {
     render(<FiltersInline id="empty-filters-test" mainFilterLabel={FilterButtonType.Filter} filters={[]} />);
     expect(screen.getByTestId('empty-filters-test-Filters-button-filter-button')).toBeInTheDocument();

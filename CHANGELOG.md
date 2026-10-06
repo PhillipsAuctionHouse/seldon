@@ -1,3 +1,10 @@
+# [1.283.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.282.0...v1.283.0) (2026-10-01)
+
+
+### Features
+
+* **FiltersInline:** L3-13677 add mainFilterCount prop to override main filter badge ([#939](https://github.com/PhillipsAuctionHouse/seldon/issues/939)) ([e8078d4](https://github.com/PhillipsAuctionHouse/seldon/commit/e8078d42f327f7c0f5c4c918ffee360ea912229f))
+
 # [1.282.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.281.0...v1.282.0) (2026-09-28)
 
 

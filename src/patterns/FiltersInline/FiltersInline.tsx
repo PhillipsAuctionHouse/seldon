@@ -24,6 +24,12 @@ export interface FiltersInlineProps extends BaseFilterProps {
   dropdownMenuTranslation?: DropdownMenuTranslation;
   /** Whether to hide the desktop sort button */
   hideDesktopSortButton?: boolean;
+  /**
+   * Overrides the count badge on the main filter button. By default the badge
+   * counts the active dimensions in `filters`; pass this when `filters` holds
+   * pending (unapplied) selections and the badge should reflect applied ones.
+   */
+  mainFilterCount?: number;
 }
 
 /**
@@ -49,6 +55,7 @@ const FiltersInline = React.forwardRef<HTMLDivElement, FiltersInlineProps>(
       mainFilterLabel,
       dropdownMenuTranslation,
       hideDesktopSortButton = true,
+      mainFilterCount,
       ...props
     },
     ref,
@@ -69,6 +76,7 @@ const FiltersInline = React.forwardRef<HTMLDivElement, FiltersInlineProps>(
           onClickClear={onClickClear}
           resultsCount={resultsCount}
           dropdownMenuTranslation={dropdownMenuTranslation}
+          mainFilterCount={mainFilterCount}
         />
         {/* Render the Sort pill last in the DOM so keyboard/reading order
             matches the visual order. Sort is kept first in the source array

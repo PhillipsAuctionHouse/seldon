@@ -26,6 +26,7 @@ export const MainFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDrop
       dropdownMenuTranslation,
       ariaLabels = {},
       id,
+      mainFilterCount,
     },
     ref,
   ) => {
@@ -40,7 +41,7 @@ export const MainFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDrop
           isSelected={isButtonSelected}
           count={filterCount}
           label={filterButtonLabel}
-          totalCount={totalCount}
+          totalCount={mainFilterCount ?? totalCount}
           id={id}
           ariaLabel={ariaLabels.button || `${filterButtonLabel} button`}
           onClick={getFilterButtonClickHandler(filtersListState, handleClick, 0)}
