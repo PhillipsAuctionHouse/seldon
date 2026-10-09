@@ -74,6 +74,7 @@ const UserManagement = forwardRef<HTMLDivElement, UserManagementProps>(
               </AccountDetailsComponent>
             ) : (
               <button
+                type="button"
                 aria-label={typeof loginLabel === 'string' ? loginLabel : 'Login'}
                 className={`${baseClassName}__login`}
                 onClick={onLogin}

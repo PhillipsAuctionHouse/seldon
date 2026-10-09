@@ -218,4 +218,14 @@ describe('AddToCalendar component', () => {
     expect(customLinks.length).toBe(3);
     expect(customLinks[0]).toHaveTextContent('Google Calendar');
   });
+
+  test('renders file download items as non-submitting buttons', async () => {
+    const user = userEvent.setup();
+    render(<AddToCalendar event={event} label="Add to calendar" />);
+    await user.click(screen.getByRole('button', { name: 'Add to calendar' }));
+
+    for (const label of ['iCalendar', 'Outlook']) {
+      expect((await screen.findByText(label)).closest('button')).toHaveAttribute('type', 'button');
+    }
+  });
 });

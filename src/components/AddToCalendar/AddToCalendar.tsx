@@ -71,7 +71,7 @@ const AddToCalendar = forwardRef<HTMLDivElement, AddToCalendarProps>(
                       {item.label}
                     </Component>
                   ) : (
-                    <button className={`${baseClassName}-atcb-item-link`}>
+                    <button type="button" className={`${baseClassName}-atcb-item-link`}>
                       <Text>{item.label}</Text>
                     </button>
                   )}

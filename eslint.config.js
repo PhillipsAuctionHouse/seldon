@@ -68,6 +68,7 @@ export default tseslint.config(
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
+      'react/button-has-type': 'error',
       'local-rules/no-deprecated-text-variants': 'error',
       'local-rules/no-deprecated-link-variants': 'error',
       'local-rules/no-equals-word-string': 'warn',
