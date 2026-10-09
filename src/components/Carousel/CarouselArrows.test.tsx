@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import CarouselArrows from './CarouselArrows';
 import { useCarousel } from './utils';
 import { vi, Mock } from 'vitest';
@@ -124,7 +125,7 @@ describe('CarouselArrows', () => {
     expect(mockScrollTo).toHaveBeenCalledWith(5);
   });
 
-  it.each(['prev-arrow', 'next-arrow'])('does not submit an enclosing form when %s is clicked', (testId) => {
+  it.each(['prev-arrow', 'next-arrow'])('does not submit an enclosing form when %s is clicked', async (testId) => {
     (useCarousel as Mock).mockReturnValue({
       api: {
         slidesInView: () => [0],
@@ -141,7 +142,8 @@ describe('CarouselArrows', () => {
         <CarouselArrows />
       </form>,
     );
-    fireEvent.click(screen.getByTestId(testId));
+    const user = userEvent.setup();
+    await user.click(screen.getByTestId(testId));
     expect(screen.getByTestId(testId)).toHaveAttribute('type', 'button');
     expect(onSubmit).not.toHaveBeenCalled();
   });
