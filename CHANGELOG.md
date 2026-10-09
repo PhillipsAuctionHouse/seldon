@@ -1,3 +1,10 @@
+## [1.283.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.283.0...v1.283.1) (2026-10-09)
+
+
+### Bug Fixes
+
+* **buttons:** L3-15809 type untyped buttons so they do not submit forms ([#943](https://github.com/PhillipsAuctionHouse/seldon/issues/943)) ([74f8f1c](https://github.com/PhillipsAuctionHouse/seldon/commit/74f8f1ce505b2d18a8b7fd6e72c801eb2ac7dbd9))
+
 # [1.283.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.282.0...v1.283.0) (2026-10-01)
 
 
