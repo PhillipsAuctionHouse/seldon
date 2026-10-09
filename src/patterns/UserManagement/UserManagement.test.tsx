@@ -92,4 +92,17 @@ describe('UserManagement', () => {
     const loginLinkElement = screen.queryByText('Login');
     expect(loginLinkElement).not.toBeInTheDocument();
   });
+
+  it('does not submit an enclosing form when login is clicked', async () => {
+    const onSubmit = vitest.fn((event: React.FormEvent) => event.preventDefault());
+    const onLoginMock = vitest.fn();
+    render(
+      <form onSubmit={onSubmit}>
+        <UserManagement onLogin={onLoginMock} />
+      </form>,
+    );
+    await userEvent.click(screen.getByRole('button', { name: /Login/ }));
+    expect(onLoginMock).toHaveBeenCalled();
+    expect(onSubmit).not.toHaveBeenCalled();
+  });
 });

@@ -28,7 +28,9 @@ export const Playground = (props: CountdownProps) => {
   return (
     <div>
       <Countdown {...props} endDateTime={endDateTime} />
-      <button onClick={resetToThreeMinutesFromNow}>Reset to 3 minutes from now</button>
+      <button type="button" onClick={resetToThreeMinutesFromNow}>
+        Reset to 3 minutes from now
+      </button>
     </div>
   );
 };

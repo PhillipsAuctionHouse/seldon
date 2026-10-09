@@ -53,6 +53,7 @@ const FavoritingTileButton = forwardRef<HTMLButtonElement, FavoritingTileButtonP
 
     return (
       <button
+        type="button"
         {...commonProps}
         className={classnames(baseClassName, className, {
           [`${baseClassName}--lot-in-list`]: isLotInList,

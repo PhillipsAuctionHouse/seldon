@@ -7,7 +7,11 @@ import { px } from '../../utils';
 
 const TestComponent = () => {
   const { addToast } = useToastContext();
-  return <button onClick={() => addToast({ title: 'Test Toast' })}>Add Toast</button>;
+  return (
+    <button type="button" onClick={() => addToast({ title: 'Test Toast' })}>
+      Add Toast
+    </button>
+  );
 };
 
 describe('ToastContextProvider', () => {
@@ -36,9 +40,15 @@ describe('ToastContextProvider', () => {
       const { toasts, addToast, removeToast, setOffset } = useToastContext();
       return (
         <div>
-          <button onClick={() => addToast({ title: 'Test' })}>Add Toast</button>
-          <button onClick={() => removeToast('123')}>Remove Toast</button>
-          <button onClick={() => setOffset({ x: 8, y: 8 })}>Set Offset</button>
+          <button type="button" onClick={() => addToast({ title: 'Test' })}>
+            Add Toast
+          </button>
+          <button type="button" onClick={() => removeToast('123')}>
+            Remove Toast
+          </button>
+          <button type="button" onClick={() => setOffset({ x: 8, y: 8 })}>
+            Set Offset
+          </button>
           <div data-testid="toast-count">{toasts.length}</div>
         </div>
       );
@@ -84,8 +94,12 @@ describe('ToastContextProvider', () => {
       const { toasts, addToast, removeToast } = useToastContext();
       return (
         <>
-          <button onClick={() => addToast({ title: 'Test Toast' })}>Add Toast</button>
-          <button onClick={() => toasts.length > 0 && removeToast(toasts[0].id)}>Remove Toast</button>
+          <button type="button" onClick={() => addToast({ title: 'Test Toast' })}>
+            Add Toast
+          </button>
+          <button type="button" onClick={() => toasts.length > 0 && removeToast(toasts[0].id)}>
+            Remove Toast
+          </button>
           <div data-testid="toast-count">{toasts.length}</div>
         </>
       );
@@ -109,8 +123,12 @@ describe('ToastContextProvider', () => {
       const { toasts, addToast } = useToastContext();
       return (
         <>
-          <button onClick={() => addToast({ title: 'Toast 1' })}>Add Toast 1</button>
-          <button onClick={() => addToast({ title: 'Toast 2' })}>Add Toast 2</button>
+          <button type="button" onClick={() => addToast({ title: 'Toast 1' })}>
+            Add Toast 1
+          </button>
+          <button type="button" onClick={() => addToast({ title: 'Toast 2' })}>
+            Add Toast 2
+          </button>
           <div data-testid="toast-count">{toasts.length}</div>
         </>
       );
@@ -134,7 +152,9 @@ describe('ToastContextProvider', () => {
       const { toasts, addToast } = useToastContext();
       return (
         <>
-          <button onClick={() => addToast({ title: 'To be closed', closeButtonLabel: closeLabel })}>Add Toast</button>
+          <button type="button" onClick={() => addToast({ title: 'To be closed', closeButtonLabel: closeLabel })}>
+            Add Toast
+          </button>
           <div data-testid="toast-count">{toasts.length}</div>
         </>
       );

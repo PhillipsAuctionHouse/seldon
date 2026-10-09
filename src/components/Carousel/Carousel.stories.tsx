@@ -243,7 +243,9 @@ export const CarouselWithMultipleItems = (props: CarouselProps) => {
       </Carousel>
 
       <div style={{ marginTop: '16px' }}>
-        <button onClick={() => setArray((prev) => prev.slice(1))}>Remove first item</button>
+        <button type="button" onClick={() => setArray((prev) => prev.slice(1))}>
+          Remove first item
+        </button>
       </div>
     </div>
   );

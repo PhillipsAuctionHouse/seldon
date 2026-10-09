@@ -46,4 +46,22 @@ describe('FavoritingTileButton', () => {
     const { container } = render(<FavoritingTileButton isLotInList={true} listTitle="My List" numberOfObjects="5" />);
     expect(container.firstChild).toHaveClass('seldon-favoriting-tile-button--lot-in-list');
   });
+
+  it('does not submit an enclosing form when clicked', async () => {
+    const onSubmit = vi.fn((event: React.FormEvent) => event.preventDefault());
+    const { getByRole } = render(
+      <form onSubmit={onSubmit}>
+        <FavoritingTileButton isLotInList={false} listTitle="My List" numberOfObjects="5" />
+      </form>,
+    );
+    await userEvent.click(getByRole('button', { pressed: false }));
+    expect(onSubmit).not.toHaveBeenCalled();
+  });
+
+  it('lets consumers override the button type', () => {
+    const { getByRole } = render(
+      <FavoritingTileButton type="submit" isLotInList={false} listTitle="My List" numberOfObjects="5" />,
+    );
+    expect(getByRole('button', { pressed: false })).toHaveAttribute('type', 'submit');
+  });
 });

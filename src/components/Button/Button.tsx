@@ -155,6 +155,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
         <button
           {...commonProps}
           ref={ref as React.ForwardedRef<HTMLButtonElement>}
+          // eslint-disable-next-line react/button-has-type -- typed to button | submit | reset, defaults to button
           type={type}
           aria-busy={isSkeletonLoading}
           className={classnames(

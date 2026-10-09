@@ -10,12 +10,15 @@ const TestComponent = () => {
 
   return (
     <div>
-      <button onClick={() => toast({ title: 'Basic Toast' })}>Show Basic Toast</button>
+      <button type="button" onClick={() => toast({ title: 'Basic Toast' })}>
+        Show Basic Toast
+      </button>
       <button
+        type="button"
         onClick={() =>
           toast({
             title: 'Action Toast',
-            actionElement: <button>Action</button>,
+            actionElement: <button type="button">Action</button>,
             actionAltText: 'Action',
           })
         }
@@ -53,7 +56,11 @@ describe('useToast', () => {
   it('accepts string shorthand', async () => {
     const TestStringToast = () => {
       const toast = useToast();
-      return <button onClick={() => toast('Quick message')}>Show Toast</button>;
+      return (
+        <button type="button" onClick={() => toast('Quick message')}>
+          Show Toast
+        </button>
+      );
     };
 
     render(
@@ -71,6 +78,7 @@ describe('useToast', () => {
       const toast = useToast();
       return (
         <button
+          type="button"
           onClick={() => {
             toast.setOffset({ x: 16, y: 32 });
             toast('Offset message');
@@ -99,6 +107,7 @@ describe('useToast', () => {
       const { show, setOffset } = useToast();
       return (
         <button
+          type="button"
           onClick={() => {
             setOffset({ x: 10, y: 20 });
             show('Destructured message');
