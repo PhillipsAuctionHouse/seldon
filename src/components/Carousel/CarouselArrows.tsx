@@ -50,6 +50,7 @@ const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(
         {...commonProps}
       >
         <button
+          type="button"
           data-testid="prev-arrow"
           aria-label="Previous slide"
           className={classNames(`${baseClassName}-prev-btn`, {
@@ -63,6 +64,7 @@ const CarouselArrows = forwardRef<HTMLDivElement, CarouselArrowsProps>(
           </div>
         </button>
         <button
+          type="button"
           data-testid="next-arrow"
           aria-label="Next slide"
           className={classNames(`${baseClassName}-next-btn`, {

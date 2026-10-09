@@ -124,6 +124,28 @@ describe('CarouselArrows', () => {
     expect(mockScrollTo).toHaveBeenCalledWith(5);
   });
 
+  it.each(['prev-arrow', 'next-arrow'])('does not submit an enclosing form when %s is clicked', (testId) => {
+    (useCarousel as Mock).mockReturnValue({
+      api: {
+        slidesInView: () => [0],
+        scrollPrev: mockScrollPrev,
+        scrollNext: mockScrollNext,
+        canScrollPrev: mockCanScrollPrev,
+        canScrollNext: mockCanScrollNext,
+        on: mockOn,
+      },
+    });
+    const onSubmit = vi.fn((event: React.FormEvent) => event.preventDefault());
+    render(
+      <form onSubmit={onSubmit}>
+        <CarouselArrows />
+      </form>,
+    );
+    fireEvent.click(screen.getByTestId(testId));
+    expect(screen.getByTestId(testId)).toHaveAttribute('type', 'button');
+    expect(onSubmit).not.toHaveBeenCalled();
+  });
+
   it('adds disabled class to prev button when canScrollPrev returns false', () => {
     mockCanScrollPrev.mockReturnValue(false);
     mockCanScrollNext.mockReturnValue(true);
