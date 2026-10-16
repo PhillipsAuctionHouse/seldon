@@ -1,6 +1,12 @@
 import vars from '~scss/_vars.scss?raw';
 
-export const getScssVarsMap = () => {
+// Parsing _vars.scss walks every line of a 13KB file to build a 274 entry map.
+// getScssVar runs in the Icon render body, so both results are computed on first
+// use and reused afterwards rather than rebuilt on each call.
+let scssVarsMapCache: Record<string, string> | undefined;
+let scssColorsCache: string[] | undefined;
+
+const parseScssVarsMap = (): Record<string, string> => {
   const parsedVars = vars.split('\n').map((_var) => {
     const [name, value] = _var.split(': ');
     return { name, value: value?.replace(';', '') };
@@ -15,6 +21,11 @@ export const getScssVarsMap = () => {
   return scssVarsMap;
 };
 
+export const getScssVarsMap = (): Record<string, string> => {
+  scssVarsMapCache ??= parseScssVarsMap();
+  return scssVarsMapCache;
+};
+
 // This function parses the _vars.scss file into individual lines and returns the value of the variable passed in
 // If the variable is not found, it returns the default value passed in
 export const getScssVar = (scssVar: string, defaultValue: string): string => {
@@ -24,9 +35,9 @@ export const getScssVar = (scssVar: string, defaultValue: string): string => {
 
 // Finds all color variables set in _vars.scss and returns the name of each
 export const getScssColors = (): string[] => {
-  const parsedVars = vars.replace(/\r/g, '').split('\n');
-
-  const colors: string[] = parsedVars
+  scssColorsCache ??= vars
+    .replace(/\r/g, '')
+    .split('\n')
     .map((_var) => {
       const [name, value] = _var.split(': ');
       if (!!name && !!value && value.startsWith('#') && (value.length === 5 || value.length === 8)) {
@@ -36,5 +47,5 @@ export const getScssColors = (): string[] => {
     })
     .filter((color): color is string => color !== null);
 
-  return colors;
+  return scssColorsCache;
 };
