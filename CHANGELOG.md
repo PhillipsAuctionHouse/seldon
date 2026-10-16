@@ -1,3 +1,10 @@
+## [1.283.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.283.1...v1.283.2) (2026-10-16)
+
+
+### Bug Fixes
+
+* **build:** L3-15283 remove bundled dependencies from dist and memoize SCSS var parsing ([#941](https://github.com/PhillipsAuctionHouse/seldon/issues/941)) ([4384e95](https://github.com/PhillipsAuctionHouse/seldon/commit/4384e95f2d77421be3ed44a753858de7552a6ff3))
+
 ## [1.283.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.283.0...v1.283.1) (2026-10-09)
 
 
