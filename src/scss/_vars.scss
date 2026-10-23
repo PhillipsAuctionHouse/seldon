@@ -142,7 +142,8 @@ $light-gray: $grey-50;
 $off-white: $grey-25;
 
 // --- Legacy Notification color palette ---
-$error-red: $highlight-red;
+// $highlight-red is 3.54:1 on white; error text needs WCAG AA 4.5:1
+$error-red: $warning-default;
 $error-pink: $highlight-red;
 $warn-yellow: $highlight-yellow;
 $post-sale-pink: $highlight-purple;
