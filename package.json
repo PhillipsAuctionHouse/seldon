@@ -146,7 +146,7 @@
     "rollup-plugin-copy": "^3.5.0",
     "sass": "^1.83.4",
     "semantic-release": "^25.0.0",
-    "storybook": "^10.2.8",
+    "storybook": "^10.6.2",
     "storybook-addon-pseudo-states": "^10.2.8",
     "stylelint": "^16.8.1",
     "stylelint-config-standard": "^36.0.1",
