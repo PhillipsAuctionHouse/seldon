@@ -8,7 +8,24 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { forwardRef } from 'react';
 import './_modal.scss';
 
-export interface ModalProps extends React.HTMLAttributes<HTMLDivElement>, Dialog.DialogProps {
+// Password managers draw their inline buttons and menus in elements appended to the page body, so Radix
+// treats clicks on them as outside the dialog. 1Password uses `com-1password-*` custom elements; LastPass
+// uses `data-lastpass-*` roots; Bitwarden uses randomly named elements, matched by their max z-index style
+// (the same heuristic input-otp and bits-ui use).
+const PASSWORD_MANAGER_SELECTOR = '[data-lastpass-icon-root], [data-lastpass-root], [style$="2147483647 !important;"]';
+
+const isPasswordManagerElement = (target: EventTarget | null) => {
+  for (let el = target instanceof Element ? target : null; el; el = el.parentElement) {
+    if (el.tagName.toLowerCase().startsWith('com-1password-') || el.matches(PASSWORD_MANAGER_SELECTOR)) return true;
+  }
+  return false;
+};
+
+export interface ModalProps
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
+    Dialog.DialogProps,
+    Pick<Dialog.DialogContentProps, 'onInteractOutside' | 'onPointerDownOutside' | 'onEscapeKeyDown'> {
   /**
    * Boolean to determine if the modal is open
    */
@@ -61,6 +78,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       closeIcon = <Icon icon="CloseX" height={32} width={32} color="currentColor" />,
       closeIconPosition = 'right',
       title,
+      onInteractOutside,
       ...props
     },
     ref,
@@ -91,6 +109,11 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
             style={style}
             {...commonProps}
             {...props}
+            onInteractOutside={(event) => {
+              onInteractOutside?.(event);
+              // Keep the modal open when the user clicks a password manager's inline button or menu
+              if (isPasswordManagerElement(event.target)) event.preventDefault();
+            }}
           >
             <VisuallyHidden asChild>
               <Dialog.Title>{title ?? 'Modal'}</Dialog.Title>

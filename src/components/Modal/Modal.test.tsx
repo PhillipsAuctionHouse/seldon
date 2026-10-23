@@ -131,4 +131,86 @@ describe('Modal', () => {
     expect(closeButton).toBeInTheDocument();
     expect(closeButton.parentElement).not.toHaveClass(`${px}-modal__close--left`);
   });
+
+  describe('password manager overlays', () => {
+    // Password managers append their inline UI to the body, outside the dialog. Clicking it (e.g. 1Password's
+    // "Unlock" button) must not close the modal, or users lose what they typed.
+    const appendToBody = (html: string) => {
+      const host = document.createElement('div');
+      host.innerHTML = html;
+      document.body.appendChild(host);
+      return host;
+    };
+    let host: HTMLElement | undefined;
+    afterEach(() => host?.remove());
+
+    it.each([
+      ['1Password', '<com-1password-menu><button>Unlock</button></com-1password-menu>'],
+      ['1Password button', '<com-1password-button><span>Unlock</span></com-1password-button>'],
+      ['LastPass icon', '<div data-lastpass-icon-root><button>Unlock</button></div>'],
+      ['LastPass menu', '<div data-lastpass-root><button>Unlock</button></div>'],
+      [
+        'Bitwarden',
+        '<bw-x1y2 style="position: fixed; z-index: 2147483647 !important;"><button>Unlock</button></bw-x1y2>',
+      ],
+    ])('does not close when clicking inside %s', async (_name, html) => {
+      const onInteractOutside = vi.fn();
+      render(
+        <Modal isOpen onClose={onCloseMock} onInteractOutside={onInteractOutside}>
+          <div>Modal Content</div>
+        </Modal>,
+      );
+      host = appendToBody(html);
+      // Radix registers its outside listener on the next tick
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      // Radix sets pointer-events: none on the body while a modal is open; real password managers override it
+      await userEvent.setup({ pointerEventsCheck: 0 }).click(screen.getByText('Unlock'));
+
+      expect(onInteractOutside).toHaveBeenCalledTimes(1);
+      expect(onCloseMock).not.toHaveBeenCalled();
+      expect(screen.getByRole('dialog')).toBeInTheDocument();
+    });
+
+    it('still closes on overlay click and calls the outside handlers', async () => {
+      const onInteractOutside = vi.fn();
+      const onPointerDownOutside = vi.fn();
+      render(
+        <Modal
+          isOpen
+          onClose={onCloseMock}
+          onInteractOutside={onInteractOutside}
+          onPointerDownOutside={onPointerDownOutside}
+        >
+          <div>Modal Content</div>
+        </Modal>,
+      );
+      await userEvent.click(screen.getByTestId('modal-overlay'));
+
+      expect(onPointerDownOutside).toHaveBeenCalledTimes(1);
+      expect(onInteractOutside).toHaveBeenCalledTimes(1);
+      expect(onCloseMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('lets consumers keep the modal open by preventing default', async () => {
+      render(
+        <Modal isOpen onClose={onCloseMock} onInteractOutside={(event) => event.preventDefault()}>
+          <div>Modal Content</div>
+        </Modal>,
+      );
+      await userEvent.click(screen.getByTestId('modal-overlay'));
+      expect(onCloseMock).not.toHaveBeenCalled();
+    });
+
+    it('calls onEscapeKeyDown', async () => {
+      const onEscapeKeyDown = vi.fn();
+      render(
+        <Modal isOpen onClose={onCloseMock} onEscapeKeyDown={onEscapeKeyDown}>
+          <div>Modal Content</div>
+        </Modal>,
+      );
+      await userEvent.keyboard('{Escape}');
+      expect(onEscapeKeyDown).toHaveBeenCalledTimes(1);
+      expect(onCloseMock).toHaveBeenCalledTimes(1);
+    });
+  });
 });

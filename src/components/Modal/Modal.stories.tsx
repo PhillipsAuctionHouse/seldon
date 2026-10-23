@@ -8,6 +8,7 @@ import { TextVariants } from '../Text';
 import Text from '../Text/Text';
 import Modal from './Modal';
 import { Icon } from '../Icon';
+import Input from '../Input/Input';
 
 const meta = {
   title: 'Components/Modal',
@@ -110,6 +111,29 @@ export const CustomCloseIcon = () => {
         closeIconPosition="left"
       >
         <img src="https://www.dev.phillips.com/Content/homepage/wechat_qr_mobile.png" alt="placeholder" />
+      </Modal>
+    </>
+  );
+};
+
+// Try a password manager's inline button on the fields: clicking it should not close the modal.
+export const WithPasswordManagerForm = () => {
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <>
+      <Button className={`modal-story__button`} onClick={() => setIsOpen(true)}>
+        Open Modal
+      </Button>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Sign in">
+        <form className={`modal-story__modal`} onSubmit={(e) => e.preventDefault()}>
+          <Text variant={TextVariants.heading2} className={`modal-story__modal-heading`}>
+            Sign in
+          </Text>
+          <Input id="modal-story-email" type="email" labelText="Email" autoComplete="username" />
+          <Input id="modal-story-password" type="password" labelText="Password" autoComplete="current-password" />
+          <Button type="submit">Sign in</Button>
+        </form>
       </Modal>
     </>
   );
