@@ -21,11 +21,20 @@ const isPasswordManagerElement = (target: EventTarget | null) => {
   return false;
 };
 
-export interface ModalProps
-  extends
-    React.HTMLAttributes<HTMLDivElement>,
-    Dialog.DialogProps,
-    Pick<Dialog.DialogContentProps, 'onInteractOutside' | 'onPointerDownOutside' | 'onEscapeKeyDown'> {
+export interface ModalProps extends React.HTMLAttributes<HTMLDivElement>, Dialog.DialogProps {
+  /**
+   * Called when a pointer or focus interaction happens outside the modal content. Call `event.preventDefault()`
+   * to keep the modal open. Clicks inside password-manager UI are already ignored.
+   */
+  onInteractOutside?: Dialog.DialogContentProps['onInteractOutside'];
+  /**
+   * Called when a pointer-down happens outside the modal content. Call `event.preventDefault()` to keep the modal open.
+   */
+  onPointerDownOutside?: Dialog.DialogContentProps['onPointerDownOutside'];
+  /**
+   * Called when Escape is pressed while the modal is open. Call `event.preventDefault()` to keep the modal open.
+   */
+  onEscapeKeyDown?: Dialog.DialogContentProps['onEscapeKeyDown'];
   /**
    * Boolean to determine if the modal is open
    */
