@@ -104,7 +104,7 @@
     "@storybook/addon-a11y": "^10.2.8",
     "@storybook/addon-docs": "^10.2.8",
     "@storybook/addon-links": "^10.2.8",
-    "@storybook/addon-vitest": "^10.2.8",
+    "@storybook/addon-vitest": "^10.6.2",
     "@storybook/react": "^10.2.8",
     "@storybook/react-vite": "^10.2.8",
     "@svgr/cli": "^8.1.0",
