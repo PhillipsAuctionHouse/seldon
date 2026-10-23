@@ -43,6 +43,23 @@ export const ButtonDisabled = (props: ButtonProps) => (
   </Button>
 );
 
+// A disabled link stays a text link (muted colour), not a filled grey pill.
+export const LinkDisabled = (props: ButtonProps) => (
+  <Button {...props} variant={ButtonVariants.link} isDisabled>
+    Set as default
+  </Button>
+);
+
+// e.g. a link showing a Loader while it saves: the row layout must not shift.
+export const LinkDisabledWithLoader = (props: ButtonProps) => (
+  <Button {...props} variant={ButtonVariants.link} isDisabled>
+    <Loader />
+  </Button>
+);
+
+// The spinning Loader never settles on one frame, so its snapshot would diff on every build.
+LinkDisabledWithLoader.parameters = { chromatic: { disableSnapshot: true } };
+
 export const ButtonWithIcon = (props: ButtonProps) => (
   <Button {...props}>
     {!props.isIconLast ? <Icon icon="Add" /> : null}

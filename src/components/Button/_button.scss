@@ -321,8 +321,17 @@
       }
     }
 
+    // A disabled link stays a text link. Resets the pill (background-color, border) from the shared
+    // `&:disabled` block above; colour and cursor still come from it, so keep the two in sync.
+    // Only the <button> path matches: with `href`, Button renders an <a>, which has no :disabled.
     &--link:disabled {
+      background-color: transparent;
       border: 0;
+
+      // beats `&--link:hover .#{$px}-text { cursor: pointer }`
+      .#{$px}-text {
+        cursor: default;
+      }
     }
 
     * {
