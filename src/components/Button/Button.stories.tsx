@@ -57,6 +57,9 @@ export const LinkDisabledWithLoader = (props: ButtonProps) => (
   </Button>
 );
 
+// The spinning Loader never settles on one frame, so its snapshot would diff on every build.
+LinkDisabledWithLoader.parameters = { chromatic: { disableSnapshot: true } };
+
 export const ButtonWithIcon = (props: ButtonProps) => (
   <Button {...props}>
     {!props.isIconLast ? <Icon icon="Add" /> : null}
