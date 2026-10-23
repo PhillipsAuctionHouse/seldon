@@ -5,10 +5,23 @@ import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 import * as Dialog from '@radix-ui/react-dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import { forwardRef } from 'react';
+import { forwardRef, useRef } from 'react';
 import './_modal.scss';
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement>, Dialog.DialogProps {
+  /**
+   * Called when a pointer or focus interaction happens outside the modal content. Call `event.preventDefault()`
+   * to keep the modal open. Only clicks on the overlay close the modal.
+   */
+  onInteractOutside?: Dialog.DialogContentProps['onInteractOutside'];
+  /**
+   * Called when a pointer-down happens outside the modal content. Call `event.preventDefault()` to keep the modal open.
+   */
+  onPointerDownOutside?: Dialog.DialogContentProps['onPointerDownOutside'];
+  /**
+   * Called when Escape is pressed while the modal is open. Call `event.preventDefault()` to keep the modal open.
+   */
+  onEscapeKeyDown?: Dialog.DialogContentProps['onEscapeKeyDown'];
   /**
    * Boolean to determine if the modal is open
    */
@@ -61,11 +74,13 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       closeIcon = <Icon icon="CloseX" height={32} width={32} color="currentColor" />,
       closeIconPosition = 'right',
       title,
+      onInteractOutside,
       ...props
     },
     ref,
   ) => {
     const { className: baseClassName, 'data-testid': testId, ...commonProps } = getCommonProps(props, 'Modal');
+    const overlayRef = useRef<HTMLDivElement>(null);
 
     return (
       <Dialog.Root
@@ -80,6 +95,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       >
         <Dialog.Portal>
           <Dialog.Overlay
+            ref={overlayRef}
             className={classnames(`${baseClassName}__overlay`, overlayClassName)}
             data-testid={`modal-overlay`}
           />
@@ -91,6 +107,12 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
             style={style}
             {...commonProps}
             {...props}
+            onInteractOutside={(event) => {
+              onInteractOutside?.(event);
+              // Only the overlay dismisses. Password managers, cookie banners and other injected UI sit above it in
+              // the body, so Radix would otherwise treat clicks on them (e.g. 1Password's "Unlock") as outside.
+              if (event.target !== overlayRef.current) event.preventDefault();
+            }}
           >
             <VisuallyHidden asChild>
               <Dialog.Title>{title ?? 'Modal'}</Dialog.Title>
