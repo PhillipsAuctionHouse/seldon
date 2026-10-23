@@ -132,35 +132,19 @@ describe('Modal', () => {
     expect(closeButton.parentElement).not.toHaveClass(`${px}-modal__close--left`);
   });
 
-  describe('password manager overlays', () => {
-    // Password managers append their inline UI to the body, outside the dialog. Clicking it (e.g. 1Password's
-    // "Unlock" button) must not close the modal, or users lose what they typed.
-    const appendToBody = (html: string) => {
-      const host = document.createElement('div');
-      host.innerHTML = html;
-      document.body.appendChild(host);
-      return host;
-    };
-    let host: HTMLElement | undefined;
-    afterEach(() => host?.remove());
-
-    it.each([
-      ['1Password', '<com-1password-menu><button>Unlock</button></com-1password-menu>'],
-      ['1Password button', '<com-1password-button><span>Unlock</span></com-1password-button>'],
-      ['LastPass icon', '<div data-lastpass-icon-root><button>Unlock</button></div>'],
-      ['LastPass menu', '<div data-lastpass-root><button>Unlock</button></div>'],
-      [
-        'Bitwarden',
-        '<bw-x1y2 style="position: fixed; z-index: 2147483647 !important;"><button>Unlock</button></bw-x1y2>',
-      ],
-    ])('does not close when clicking inside %s', async (_name, html) => {
+  describe('outside interactions', () => {
+    // Password managers (1Password's "Unlock" button, LastPass, Bitwarden) and cookie banners append their UI to
+    // the body, outside the dialog. Clicking it must not close the modal, or users lose what they typed.
+    it('does not close when clicking UI appended to the body', async () => {
       const onInteractOutside = vi.fn();
       render(
         <Modal isOpen onClose={onCloseMock} onInteractOutside={onInteractOutside}>
           <div>Modal Content</div>
         </Modal>,
       );
-      host = appendToBody(html);
+      const injected = document.createElement('com-1password-menu');
+      injected.innerHTML = '<button>Unlock</button>';
+      document.body.appendChild(injected);
       // Radix registers its outside listener on the next tick
       await new Promise((resolve) => setTimeout(resolve, 0));
       // Radix sets pointer-events: none on the body while a modal is open; real password managers override it
@@ -169,6 +153,7 @@ describe('Modal', () => {
       expect(onInteractOutside).toHaveBeenCalledTimes(1);
       expect(onCloseMock).not.toHaveBeenCalled();
       expect(screen.getByRole('dialog')).toBeInTheDocument();
+      injected.remove();
     });
 
     it('still closes on overlay click and calls the outside handlers', async () => {

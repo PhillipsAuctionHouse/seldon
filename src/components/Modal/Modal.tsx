@@ -5,26 +5,13 @@ import IconButton from '../IconButton/IconButton';
 import { ButtonVariants } from '../Button/types';
 import * as Dialog from '@radix-ui/react-dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import { forwardRef } from 'react';
+import { forwardRef, useRef } from 'react';
 import './_modal.scss';
-
-// Password managers draw their inline buttons and menus in elements appended to the page body, so Radix
-// treats clicks on them as outside the dialog. 1Password uses `com-1password-*` custom elements; LastPass
-// uses `data-lastpass-*` roots; Bitwarden uses randomly named elements, matched by their max z-index style
-// (the same heuristic input-otp and bits-ui use).
-const PASSWORD_MANAGER_SELECTOR = '[data-lastpass-icon-root], [data-lastpass-root], [style$="2147483647 !important;"]';
-
-const isPasswordManagerElement = (target: EventTarget | null) => {
-  for (let el = target instanceof Element ? target : null; el; el = el.parentElement) {
-    if (el.tagName.toLowerCase().startsWith('com-1password-') || el.matches(PASSWORD_MANAGER_SELECTOR)) return true;
-  }
-  return false;
-};
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement>, Dialog.DialogProps {
   /**
    * Called when a pointer or focus interaction happens outside the modal content. Call `event.preventDefault()`
-   * to keep the modal open. Clicks inside password-manager UI are already ignored.
+   * to keep the modal open. Only clicks on the overlay close the modal.
    */
   onInteractOutside?: Dialog.DialogContentProps['onInteractOutside'];
   /**
@@ -93,6 +80,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
     ref,
   ) => {
     const { className: baseClassName, 'data-testid': testId, ...commonProps } = getCommonProps(props, 'Modal');
+    const overlayRef = useRef<HTMLDivElement>(null);
 
     return (
       <Dialog.Root
@@ -107,6 +95,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
       >
         <Dialog.Portal>
           <Dialog.Overlay
+            ref={overlayRef}
             className={classnames(`${baseClassName}__overlay`, overlayClassName)}
             data-testid={`modal-overlay`}
           />
@@ -120,8 +109,9 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
             {...props}
             onInteractOutside={(event) => {
               onInteractOutside?.(event);
-              // Keep the modal open when the user clicks a password manager's inline button or menu
-              if (isPasswordManagerElement(event.target)) event.preventDefault();
+              // Only the overlay dismisses. Password managers, cookie banners and other injected UI sit above it in
+              // the body, so Radix would otherwise treat clicks on them (e.g. 1Password's "Unlock") as outside.
+              if (event.target !== overlayRef.current) event.preventDefault();
             }}
           >
             <VisuallyHidden asChild>
