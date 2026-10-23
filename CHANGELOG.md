@@ -1,3 +1,10 @@
+## [1.283.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.283.2...v1.283.3) (2026-10-23)
+
+
+### Bug Fixes
+
+* **buttons:** L3-16243 fix UX of disabled link variant to remove gray button background ([#952](https://github.com/PhillipsAuctionHouse/seldon/issues/952)) ([53d9e16](https://github.com/PhillipsAuctionHouse/seldon/commit/53d9e1664ffe283415e6bd876928130b4a91b24a))
+
 ## [1.283.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.283.1...v1.283.2) (2026-10-16)
 
 
