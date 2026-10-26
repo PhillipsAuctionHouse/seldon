@@ -50,7 +50,6 @@
 
       &--invalid {
         border-color: $error-red;
-        box-shadow: inset 0 0 3px 3px $error-pink;
 
         &:focus {
           @include focus-ring($border-radius: $radius-xs, $outline-color: $error-red);
