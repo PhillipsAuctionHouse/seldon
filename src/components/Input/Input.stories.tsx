@@ -358,3 +358,15 @@ Playground.args = {
 };
 
 Playground.argTypes = argTypes;
+
+export const Invalid = () => (
+  <div style={{ width: 300, margin: '1rem' }}>
+    <Input
+      id="Input-invalid"
+      labelText="Email"
+      defaultValue="not-an-email"
+      invalid
+      invalidText="Please enter a valid email."
+    />
+  </div>
+);

@@ -105,3 +105,17 @@ CheckboxInput.args = {
 };
 
 CheckboxInput.argTypes = argTypes;
+
+// Checked, because the invalid toggle only paints $error-red in the checked state
+export const InvalidChecked = () => (
+  <div style={{ width: 300, margin: '1rem' }}>
+    <Input
+      id="Toggle-invalid"
+      type="toggle"
+      labelText="Accept terms"
+      defaultChecked
+      invalid
+      invalidText="You must accept the terms."
+    />
+  </div>
+);

@@ -86,7 +86,6 @@
 
       .#{$px}-text-area__input {
         border: 1px solid $error-red;
-        box-shadow: inset 0 0 3px 3px $error-pink;
 
         &:focus-within {
           @include focus-ring($border-radius: $radius-xs, $outline-color: $error-red);

@@ -24,3 +24,8 @@ jobs:
         run: npm ci
 
       - run: npm run coverage
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - run: npm run test-storybook
