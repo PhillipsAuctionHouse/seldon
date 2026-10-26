@@ -1,3 +1,10 @@
+## [1.283.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.283.3...v1.283.4) (2026-10-26)
+
+
+### Bug Fixes
+
+* **a11y:** L3-0000 make $error-red meet WCAG AA contrast and run Storybook a11y tests in CI ([#953](https://github.com/PhillipsAuctionHouse/seldon/issues/953)) ([b2fbd89](https://github.com/PhillipsAuctionHouse/seldon/commit/b2fbd899ea52d8c3384ff2acca05c6cbd44c489b))
+
 ## [1.283.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.283.2...v1.283.3) (2026-10-23)
 
 
