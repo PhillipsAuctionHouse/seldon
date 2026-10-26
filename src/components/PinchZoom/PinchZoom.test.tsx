@@ -1,10 +1,11 @@
 import { forwardRef, type MutableRefObject, type ReactNode, type Ref } from 'react';
 import PinchZoom from './PinchZoom';
-import { act, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { runCommonTests } from '../../utils/testUtils';
 import type { ReactZoomPanPinchRef } from 'react-zoom-pan-pinch';
 
 let capturedOnTransformed: ((ref: ReactZoomPanPinchRef) => void) | null = null;
+let capturedPanning: { allowRightClickPan?: boolean } | undefined;
 const mockResetTransform = vi.fn();
 
 const mockZoomRef: ReactZoomPanPinchRef = {
@@ -24,13 +25,16 @@ vi.mock('react-zoom-pan-pinch', () => {
       {
         children,
         onTransformed,
+        panning,
       }: {
         children: ReactNode;
         onTransformed?: (ref: ReactZoomPanPinchRef) => void;
+        panning?: { allowRightClickPan?: boolean };
       },
       ref: Ref<ReactZoomPanPinchRef> | null,
     ) => {
       capturedOnTransformed = onTransformed ?? null;
+      capturedPanning = panning;
       if (ref && typeof ref === 'object' && 'current' in ref) {
         (ref as MutableRefObject<ReactZoomPanPinchRef | null>).current = mockZoomRef;
       }
@@ -180,5 +184,26 @@ describe('PinchZoom', () => {
       </PinchZoom>,
     );
     expect(screen.getByText('plain text child')).toBeInTheDocument();
+  });
+
+  it('blocks native image drag so it cannot take over panning, and still calls onDragStart', () => {
+    const onDragStart = vi.fn();
+    render(
+      <PinchZoom onDragStart={onDragStart}>
+        <img data-testid="test-image" src="test.jpg" alt="Test" />
+      </PinchZoom>,
+    );
+    const notCancelled = fireEvent.dragStart(screen.getByTestId('test-image'));
+    expect(notCancelled).toBe(false);
+    expect(onDragStart).toHaveBeenCalled();
+  });
+
+  it('does not pan on right-click, so the image context menu stays usable', () => {
+    render(
+      <PinchZoom>
+        <div>Content</div>
+      </PinchZoom>,
+    );
+    expect(capturedPanning?.allowRightClickPan).toBe(false);
   });
 });
