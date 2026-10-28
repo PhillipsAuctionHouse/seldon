@@ -68,29 +68,6 @@ Playground.argTypes = {
   errorText: { control: 'text', description: 'Detailed error text for the input' },
 };
 
-/**
- * Type a number first, then pick a country. The form state below should update straight away
- * with the typed number and the new country, without typing again.
- */
-export const PickCountryAfterTyping = () => {
-  const [phone, setPhone] = useState('');
-  const [countryCode, setCountryCode] = useState<CountryCode>('' as CountryCode);
-
-  return (
-    <>
-      <PhoneNumberInput
-        value={phone}
-        countryCode={countryCode}
-        handleValueChange={(val, code) => {
-          setPhone(val);
-          setCountryCode(code);
-        }}
-      />
-      <pre data-testid="phone-form-state">{JSON.stringify({ phone, countryCode }, null, 2)}</pre>
-    </>
-  );
-};
-
 export const InDrawerWithValidation = () => {
   const [firstName, setFirstName] = useState('Phil');
   const [lastName, setLastName] = useState('Lips');
