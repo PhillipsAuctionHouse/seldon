@@ -99,7 +99,11 @@ const AccountPageHeader = forwardRef<HTMLDivElement, AccountPageHeaderProps>(
     );
 
     return (
-      <div {...commonProps} className={classnames(baseClassName, className)} ref={ref}>
+      <div
+        {...commonProps}
+        className={classnames(baseClassName, { [`${baseClassName}--no-divider`]: !showDivider }, className)}
+        ref={ref}
+      >
         <div className={`${baseClassName}__container`}>
           {overline && <Text className={`${baseClassName}__overline`}>{overline}</Text>}
           <div className={`${baseClassName}__title-wrapper`}>
