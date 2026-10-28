@@ -83,12 +83,23 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'PhoneNumberInput');
     const [selected, setSelected] = React.useState(countryCode || undefined);
 
+    // Keep the picker in sync when the parent changes `countryCode` after mount
+    React.useEffect(() => {
+      setSelected(countryCode || undefined);
+    }, [countryCode]);
+
     // Find the country object by code for display
     const selectedCountry = countries.find((c) => c.code === selected);
 
     // Handle phone number input change
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       handleValueChange?.(e.target.value, (selected as CountryCode) || '');
+    };
+
+    // Report country changes too, so consumers that hold the country in their own state stay in sync
+    const handleCountryChange = (code: CountryCode) => {
+      setSelected(code);
+      handleValueChange?.(value, code);
     };
 
     const inputProps = useNormalizedInputProps({
@@ -120,7 +131,7 @@ const PhoneNumberInput = forwardRef<HTMLDivElement, PhoneNumberInputProps>(
               selectButtonLabel="Select"
               isPhone={true}
               value={selectedCountry?.code}
-              onChange={setSelected}
+              onChange={handleCountryChange}
             />
           </div>
           <div className={`${baseClassName}__input`}>
