@@ -1,3 +1,10 @@
+# [1.284.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.283.5...v1.284.0) (2026-10-30)
+
+
+### Features
+
+* **pinch-zoom:** L3-16043 let right-click and long-press save the zoom image ([#961](https://github.com/PhillipsAuctionHouse/seldon/issues/961)) ([fd2f026](https://github.com/PhillipsAuctionHouse/seldon/commit/fd2f0262c84b44d9e237b213c8ad42b6dc709de2))
+
 ## [1.283.5](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.283.4...v1.283.5) (2026-10-30)
 
 
