@@ -1,3 +1,10 @@
+## [1.283.5](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.283.4...v1.283.5) (2026-10-30)
+
+
+### Bug Fixes
+
+* **modal:** L3-16185 close only on overlay clicks so password-manager UI doesn't dismiss the modal ([#954](https://github.com/PhillipsAuctionHouse/seldon/issues/954)) ([62f02ef](https://github.com/PhillipsAuctionHouse/seldon/commit/62f02ef8f9fe9044f1b60db4ed2286132323ef5b))
+
 ## [1.283.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.283.3...v1.283.4) (2026-10-26)
 
 
