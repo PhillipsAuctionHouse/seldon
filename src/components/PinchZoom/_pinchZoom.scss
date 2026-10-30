@@ -40,3 +40,14 @@
     }
   }
 }
+
+// Undo react-zoom-pan-pinch's runtime CSS so right-click and long-press reach the
+// image (otherwise "Save as" saves the HTML page). That CSS is unlayered, which
+// beats any @layer, so this sits outside `seldon.components` with doubled selectors.
+.#{$px}-pinch-zoom.#{$px}-pinch-zoom {
+  -webkit-touch-callout: default;
+
+  .#{$px}-pinch-zoom-content img {
+    pointer-events: auto;
+  }
+}

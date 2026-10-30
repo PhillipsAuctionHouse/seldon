@@ -97,13 +97,24 @@ const PinchZoom = forwardRef<HTMLElement, PinchZoomProps>(
         }}
         panning={{
           disabled: !isZoomed,
+          // Right-click opens the image menu ("Save image as"); panning on it would drag the image away.
+          allowRightClickPan: false,
         }}
         ref={zoomRef}
       >
         <TransformComponent
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
-          wrapperProps={{ ...commonProps, ...props }}
+          wrapperProps={{
+            ...commonProps,
+            ...props,
+            // Images are hit-testable now (see _pinchZoom.scss), so stop the browser's own
+            // image drag from taking over the pan gesture.
+            onDragStart: (event: React.DragEvent<HTMLDivElement>) => {
+              event.preventDefault();
+              props.onDragStart?.(event);
+            },
+          }}
           wrapperClass={classNames(baseClassName, className, {
             [`${baseClassName}-zoomed`]: isZoomed,
           })}
