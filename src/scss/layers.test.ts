@@ -63,7 +63,7 @@ describe('cascade layers', () => {
   it('keeps the Modal close button absolute even when Button CSS loads after Modal CSS', () => {
     const css = compile('components/Modal/_modal.scss');
     expect(css).toMatch(/\.seldon-modal \.seldon-modal__close\s*\{[^}]*position:\s*absolute/);
-    expect(css).toMatch(/\.seldon-modal \.seldon-modal__close--left\s*\{[^}]*left:/);
+    expect(css).toMatch(/\.seldon-modal \.seldon-modal__close--left\s*\{[^}]*right:\s*auto/);
   });
 
   it('lets IconButton own box and paint when composed with Button', () => {
