@@ -321,6 +321,8 @@ export const WithMainFilterCount = () => (
  */
 export const SwitchDesktopDropdowns: StoryObj = {
   globals: { viewport: { value: 'desktop' } },
+  // Desktop-only: below `md` the filters open a drawer, not these popovers.
+  parameters: { chromatic: { viewports: [1280] } },
   render: () => {
     const [filtersListState, setFiltersListState] = useState(Array(filters.length + 1).fill(false));
     return (
