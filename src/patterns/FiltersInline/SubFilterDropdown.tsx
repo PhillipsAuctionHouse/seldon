@@ -27,6 +27,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
       ariaLabels = {},
       hideDesktopSortButton,
       id,
+      onOpenChange,
     },
     ref,
   ) => {
@@ -81,11 +82,7 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
           </Drawer>
         </SSRMediaQuery.Media>
         <SSRMediaQuery.Media greaterThanOrEqual={Breakpoints.md} className={mediaClassName}>
-          <Popover.Root
-            key={`${id}-${filterButtonLabel}-button`}
-            open={isButtonSelected}
-            onOpenChange={getFilterButtonClickHandler(filtersListState, handleClick, filterId)}
-          >
+          <Popover.Root key={`${id}-${filterButtonLabel}-button`} open={isButtonSelected} onOpenChange={onOpenChange}>
             <Popover.Trigger asChild>
               <FilterButton
                 ref={ref}
@@ -96,7 +93,6 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
                 totalCount={totalCount}
                 id={id}
                 ariaLabel={ariaLabels.ariaLabel || `${filterButtonLabel} button`}
-                onClick={getFilterButtonClickHandler(filtersListState, handleClick, filterId)}
                 isMobile={false}
                 type={buttonType as unknown as FilterButtonIconType}
               />

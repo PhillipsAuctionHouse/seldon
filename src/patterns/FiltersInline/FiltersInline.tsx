@@ -61,6 +61,8 @@ const FiltersInline = React.forwardRef<HTMLDivElement, FiltersInlineProps>(
     ref,
   ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps({ id, ...props }, 'FiltersInline');
+    const latestFiltersListState = React.useRef(filtersListState);
+    latestFiltersListState.current = filtersListState;
 
     return (
       <div ref={ref} className={classnames(baseClassName, className)} {...commonProps} id={id}>
@@ -96,6 +98,13 @@ const FiltersInline = React.forwardRef<HTMLDivElement, FiltersInlineProps>(
               buttonType={filter.buttonType as unknown as FilterButtonType}
               handleClick={setFiltersLabelListState}
               filtersListState={filtersListState}
+              onOpenChange={(open) => {
+                const next = latestFiltersListState.current?.map((selected, idx) =>
+                  idx === filterId ? open : selected,
+                );
+                latestFiltersListState.current = next;
+                if (next) setFiltersLabelListState?.(next);
+              }}
               filterId={filterId}
               filters={filters}
               onSelectFilter={onSelectFilter}
