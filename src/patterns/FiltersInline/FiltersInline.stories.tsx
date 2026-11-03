@@ -316,7 +316,7 @@ export const WithMainFilterCount = () => (
 );
 
 /** One click on another filter button switches the open desktop dropdown. */
-export const SwitchDesktopDropdowns: StoryObj = {
+export const SwitchDesktopDropdowns: StoryObj<typeof FiltersInline> = {
   globals: { viewport: { value: 'desktop' } },
   parameters: { chromatic: { viewports: [1280] } },
   render: () => {
