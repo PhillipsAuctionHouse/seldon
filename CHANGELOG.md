@@ -1,3 +1,10 @@
+# [1.285.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.284.0...v1.285.0) (2026-11-03)
+
+
+### Features
+
+* **modal:** L3-15293 keep the close button in the corner when Button CSS loads after Modal CSS ([#965](https://github.com/PhillipsAuctionHouse/seldon/issues/965)) ([c992b72](https://github.com/PhillipsAuctionHouse/seldon/commit/c992b72f206a2aad1552053b27daac82ee6ff6bb))
+
 # [1.284.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.283.5...v1.284.0) (2026-10-30)
 
 
