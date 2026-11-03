@@ -18,7 +18,7 @@ export type FilterButton = {
   /** The text label displayed on the button */
   label: string;
   /** Click handler for the button */
-  onClick: () => void;
+  onClick?: () => void;
   /** Whether the button is currently selected/active */
   isSelected: boolean;
   /** Icon type to display (defaults to ChevronDown) */

@@ -137,6 +137,8 @@ export interface FilterDropdownProps extends BaseFilterProps {
   handleClick?: (state: boolean[]) => void;
   /** List of states for the filter buttons */
   filtersListState?: boolean[];
+  /** Called when the desktop dropdown asks to open or close */
+  onOpenChange?: (open: boolean) => void;
   /** Index of the filter button in the filtersListState */
   index?: number;
   /** Optional aria-labels for accessibility on various filter button elements. */
