@@ -315,13 +315,9 @@ export const WithMainFilterCount = () => (
   />
 );
 
-/**
- * Regression coverage: with one desktop dropdown open, a single click on another
- * filter button switches to it. Runs in Chromium via `npm run test-storybook`.
- */
+/** One click on another filter button switches the open desktop dropdown. */
 export const SwitchDesktopDropdowns: StoryObj = {
   globals: { viewport: { value: 'desktop' } },
-  // Desktop-only: below `md` the filters open a drawer, not these popovers.
   parameters: { chromatic: { viewports: [1280] } },
   render: () => {
     const [filtersListState, setFiltersListState] = useState(Array(filters.length + 1).fill(false));
@@ -345,7 +341,6 @@ export const SwitchDesktopDropdowns: StoryObj = {
 
     await userEvent.click(screen.getByRole('button', { name: 'Location button' }));
     await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Departments dropdown' })).toBeNull());
-    // The bug closed Location a moment after it opened, so give that late close time to land.
     await new Promise((resolve) => setTimeout(resolve, 300));
     await expect(screen.getByRole('dialog', { name: 'Location dropdown' })).toBeVisible();
 
