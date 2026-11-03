@@ -14,11 +14,6 @@
     transform: translate(-50%, -50%);
     z-index: 30;
 
-    &__close--left {
-      left: 0.4rem;
-      right: auto;
-    }
-
     &__overlay {
       background-color: $black-75;
       inset: 0;
@@ -26,11 +21,18 @@
       z-index: 15;
     }
 
-    &__close {
+    // Nested to outrank .seldon-button's position: relative in the same layer,
+    // which otherwise wins whenever Button's CSS loads after Modal's.
+    .#{$px}-modal__close {
       position: absolute;
       right: $spacing-sm;
       top: $spacing-sm;
       z-index: 100;
+    }
+
+    .#{$px}-modal__close--left {
+      left: 0.4rem;
+      right: auto;
     }
   }
 }
