@@ -1,4 +1,8 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { useState } from 'react';
+import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
+import { Breakpoints } from '../../utils/constants';
 import { runCommonTests } from '../../utils/testUtils';
 import { FilterButton } from './FilterButton';
 import { FilterDropdownMenuDesktop } from './FilterDropdownMenuDesktop';
@@ -440,6 +444,98 @@ describe('SubFilterDropdown', () => {
     fireEvent.click(screen.getByTestId('drawer-overlay'));
 
     expect(handleClick).toHaveBeenCalledWith([false, false]);
+  });
+
+  it('opens the next desktop dropdown in one click while another is open', async () => {
+    const user = userEvent.setup();
+    const dimensions = (label: string) => new Set([{ label, active: false }]);
+    const groups = [
+      {
+        label: 'Departments',
+        id: 'departments',
+        type: 'checkbox' as const,
+        buttonType: FilterButtonType.Departments,
+        filterDimensions: dimensions('Jewels'),
+      },
+      {
+        label: 'Locations',
+        id: 'locations',
+        type: 'checkbox' as const,
+        buttonType: FilterButtonType.Location,
+        filterDimensions: dimensions('New York'),
+      },
+    ];
+    const Harness = () => {
+      const [state, setState] = useState([false, false, false]);
+      return (
+        <>
+          {groups.map((group, index) => (
+            <SubFilterDropdown
+              key={group.id}
+              id={group.id}
+              filterButtonLabel={group.label}
+              filterId={index + 1}
+              buttonType={group.buttonType}
+              handleClick={setState}
+              filtersListState={state}
+              filters={groups}
+            />
+          ))}
+        </>
+      );
+    };
+    render(
+      <SSRMediaQuery.MediaContextProvider onlyMatch={[Breakpoints.lg]}>
+        <Harness />
+      </SSRMediaQuery.MediaContextProvider>,
+    );
+    const trigger = (name: string) => screen.getByRole('button', { name: `${name} button` });
+
+    await user.click(trigger('Departments'));
+    expect(await screen.findByRole('dialog', { name: 'Departments dropdown' })).toBeInTheDocument();
+
+    await user.click(trigger('Locations'));
+    await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Departments dropdown' })).not.toBeInTheDocument());
+    expect(screen.getByRole('dialog', { name: 'Locations dropdown' })).toBeInTheDocument();
+  });
+
+  it('returns focus to the trigger when the desktop dropdown is closed with Escape', async () => {
+    const user = userEvent.setup();
+    const Harness = () => {
+      const [state, setState] = useState([false, false]);
+      return (
+        <SubFilterDropdown
+          id="departments"
+          filterButtonLabel="Departments"
+          filterId={1}
+          buttonType={FilterButtonType.Departments}
+          handleClick={setState}
+          filtersListState={state}
+          filters={[
+            {
+              label: 'Departments',
+              id: 'departments',
+              type: 'checkbox',
+              buttonType: FilterButtonType.Departments,
+              filterDimensions: new Set([{ label: 'Jewels', active: false }]),
+            },
+          ]}
+        />
+      );
+    };
+    render(
+      <SSRMediaQuery.MediaContextProvider onlyMatch={[Breakpoints.lg]}>
+        <Harness />
+      </SSRMediaQuery.MediaContextProvider>,
+    );
+    const trigger = screen.getByRole('button', { name: 'Departments button' });
+
+    await user.click(trigger);
+    await screen.findByRole('dialog', { name: 'Departments dropdown' });
+    await user.keyboard('{Escape}');
+
+    await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Departments dropdown' })).not.toBeInTheDocument());
+    expect(trigger).toHaveFocus();
   });
 });
 

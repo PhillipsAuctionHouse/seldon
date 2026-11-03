@@ -1,5 +1,6 @@
-import { Meta } from '@storybook/react-vite';
+import { Meta, StoryObj } from '@storybook/react-vite';
 import { useRef, useState } from 'react';
+import { expect, screen, userEvent, waitFor } from 'storybook/test';
 import { SaleCard } from '../SaleCard';
 import FiltersInline from './FiltersInline';
 import { FilterButtonType, FilterDropdownMenuProps, FilterType } from './types';
@@ -313,3 +314,41 @@ export const WithMainFilterCount = () => (
     mainFilterCount={2}
   />
 );
+
+/**
+ * Regression coverage: with one desktop dropdown open, a single click on another
+ * filter button switches to it. Runs in Chromium via `npm run test-storybook`.
+ */
+export const SwitchDesktopDropdowns: StoryObj = {
+  globals: { viewport: { value: 'desktop' } },
+  render: () => {
+    const [filtersListState, setFiltersListState] = useState(Array(filters.length + 1).fill(false));
+    return (
+      <FiltersInline
+        id="filters-inline-switch-story"
+        filters={filters}
+        filtersListState={filtersListState}
+        setFiltersLabelListState={setFiltersListState}
+        onSelectFilter={() => {}}
+        onApplyFilter={() => {}}
+        onClickClear={() => {}}
+        resultsCount={SalesMockData.length}
+        mainFilterLabel={FilterButtonType.Filter}
+      />
+    );
+  },
+  play: async () => {
+    await userEvent.click(screen.getByRole('button', { name: 'Departments button' }));
+    await expect(await screen.findByRole('dialog', { name: 'Departments dropdown' })).toBeVisible();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Location button' }));
+    await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Departments dropdown' })).toBeNull());
+    // The bug closed Location a moment after it opened, so give that late close time to land.
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    await expect(screen.getByRole('dialog', { name: 'Location dropdown' })).toBeVisible();
+
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Location dropdown' })).toBeNull());
+    await expect(screen.getByRole('button', { name: 'Location button' })).toHaveFocus();
+  },
+};

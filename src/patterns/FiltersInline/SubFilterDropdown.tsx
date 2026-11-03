@@ -109,6 +109,18 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
                 align="start"
                 alignOffset={5}
                 aria-label={ariaLabels.ariaLabel || `${filterButtonLabel} dropdown`}
+                // Switching to another filter is handled by the button click (it closes this
+                // dropdown), so Radix must not also dismiss it: its deferred close can land after
+                // the switch and overwrite the new state.
+                onInteractOutside={(event) => {
+                  const target = event.detail.originalEvent.target;
+                  if (target instanceof Element && target.closest(`.${px}-filter-button`)) event.preventDefault();
+                }}
+                // Closed because another dropdown is opening: refocusing this trigger would
+                // count as a focus outside the new dropdown and Radix would close it too.
+                onCloseAutoFocus={(event) => {
+                  if (filtersListState?.some(Boolean)) event.preventDefault();
+                }}
               >
                 <FilterDropdownMenuDesktop
                   buttonType={buttonType}
