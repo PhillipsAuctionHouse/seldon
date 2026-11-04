@@ -109,6 +109,11 @@ export const SubFilterDropdown = React.forwardRef<HTMLButtonElement, FilterDropd
                 align="start"
                 alignOffset={5}
                 aria-label={ariaLabels.ariaLabel || `${filterButtonLabel} dropdown`}
+                // A filter button sets which dropdown is open from its own click, so a press on one isn't an
+                // outside interaction. Dismissing here too would close the dropdown it just opened.
+                onInteractOutside={(event) => {
+                  if ((event.target as Element | null)?.closest?.(`.${px}-filter-button`)) event.preventDefault();
+                }}
               >
                 <FilterDropdownMenuDesktop
                   buttonType={buttonType}
