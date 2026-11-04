@@ -1,4 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { useState } from 'react';
+import { SSRMediaQuery } from '../../providers/SeldonProvider/utils';
 import { runCommonTests } from '../../utils/testUtils';
 import { FilterButton } from './FilterButton';
 import { FilterDropdownMenuDesktop } from './FilterDropdownMenuDesktop';
@@ -89,6 +92,36 @@ describe('FiltersInline', () => {
       />,
     );
     expect(screen.queryByTestId('zero-count-Filters-button-filter-count')).not.toBeInTheDocument();
+  });
+
+  // Clicking another filter's button while one dropdown is open has to open
+  // that dropdown, not just close the first one
+  it('switches straight from one open dropdown to another', async () => {
+    const ControlledFilters = () => {
+      const [filtersListState, setFiltersListState] = useState(Array(filters.length + 1).fill(false));
+      return (
+        <FiltersInline
+          id="switch-filters"
+          mainFilterLabel={FilterButtonType.Filter}
+          filters={filters}
+          filtersListState={filtersListState}
+          setFiltersLabelListState={setFiltersListState}
+        />
+      );
+    };
+    // Desktop only: jsdom would otherwise also open the mobile drawer
+    render(
+      <SSRMediaQuery.MediaContextProvider onlyMatch={['md']}>
+        <ControlledFilters />
+      </SSRMediaQuery.MediaContextProvider>,
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: 'Sale button' }));
+    expect(screen.getByRole('dialog', { name: 'Sale dropdown' })).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Departments button' }));
+    expect(screen.queryByRole('dialog', { name: 'Sale dropdown' })).not.toBeInTheDocument();
+    expect(screen.getByRole('dialog', { name: 'Departments dropdown' })).toBeInTheDocument();
   });
 
   it('renders nothing for SubFilterDropdown if filters is empty', () => {

@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/react-vite';
 import { useRef, useState } from 'react';
+import { expect, screen, userEvent, waitFor } from 'storybook/test';
 import { SaleCard } from '../SaleCard';
 import FiltersInline from './FiltersInline';
 import { FilterButtonType, FilterDropdownMenuProps, FilterType } from './types';
@@ -258,6 +259,37 @@ Playground.args = {
 };
 
 Playground.argTypes = {};
+
+/**
+ * Regression coverage for L3-16033: with one dropdown open, clicking another
+ * filter's button has to open that dropdown, not just close the first one.
+ * Runs in a real browser (`npm run test-storybook`, desktop width), where
+ * Radix treats the second click as an outside interaction on the open popover.
+ * Focus has to follow into the new dropdown, so keyboard and screen reader
+ * users aren't left on the button of the one that closed. Escape then returns
+ * focus to the button that opened it.
+ */
+export const SwitchBetweenDropdowns = (props: FilterDropdownMenuProps) => <Playground {...props} />;
+
+SwitchBetweenDropdowns.args = Playground.args;
+
+// Desktop only: below $breakpoint-md the buttons open mobile drawers, not dropdowns
+SwitchBetweenDropdowns.parameters = { chromatic: { viewports: [1200] } };
+
+SwitchBetweenDropdowns.play = async () => {
+  await userEvent.click(screen.getByRole('button', { name: 'Departments button' }));
+  await expect(await screen.findByRole('dialog', { name: 'Departments dropdown' })).toBeVisible();
+
+  await userEvent.click(screen.getByRole('button', { name: 'Location button' }));
+  await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Departments dropdown' })).not.toBeInTheDocument());
+  const locationDropdown = await screen.findByRole('dialog', { name: 'Location dropdown' });
+  await expect(locationDropdown).toBeVisible();
+  await waitFor(() => expect(locationDropdown).toContainElement(document.activeElement as HTMLElement));
+
+  await userEvent.keyboard('{Escape}');
+  await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Location dropdown' })).not.toBeInTheDocument());
+  await expect(screen.getByRole('button', { name: 'Location button' })).toHaveFocus();
+};
 
 const filtersWithAppliedAuctionType: FilterType[] = filters.map((filter) =>
   filter.id === FILTER_KEYS.sale
