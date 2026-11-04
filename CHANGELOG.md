@@ -1,3 +1,10 @@
+## [1.285.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.285.0...v1.285.1) (2026-11-04)
+
+
+### Bug Fixes
+
+* **PhoneNumberInput:** L3-16329 report country changes and sync countryCode prop ([#962](https://github.com/PhillipsAuctionHouse/seldon/issues/962)) ([cc9b3bd](https://github.com/PhillipsAuctionHouse/seldon/commit/cc9b3bd9fa02ffab2071c4e335bd9211f0bcf337))
+
 # [1.285.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.284.0...v1.285.0) (2026-11-03)
 
 
