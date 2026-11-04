@@ -273,6 +273,9 @@ export const SwitchBetweenDropdowns = (props: FilterDropdownMenuProps) => <Playg
 
 SwitchBetweenDropdowns.args = Playground.args;
 
+// Desktop only: below $breakpoint-md the buttons open mobile drawers, not dropdowns
+SwitchBetweenDropdowns.parameters = { chromatic: { viewports: [1200] } };
+
 SwitchBetweenDropdowns.play = async () => {
   await userEvent.click(screen.getByRole('button', { name: 'Departments button' }));
   await expect(await screen.findByRole('dialog', { name: 'Departments dropdown' })).toBeVisible();
