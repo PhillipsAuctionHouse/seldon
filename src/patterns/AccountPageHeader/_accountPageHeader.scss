@@ -3,6 +3,11 @@
 
 @layer seldon.patterns {
   .#{$px}-account-page-header {
+    // Without the divider's margin, keep 16px between the header and what follows it (tabs, content)
+    &--no-divider {
+      padding-bottom: calc(2 * #{$spacing-xsm});
+    }
+
     &__container {
       display: flex;
       flex-direction: column;

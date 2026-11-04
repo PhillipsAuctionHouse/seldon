@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { px } from '../../utils';
 import AccountPageHeader from './AccountPageHeader';
 
 describe('AccountPageHeader', () => {
@@ -107,6 +108,8 @@ describe('AccountPageHeader', () => {
 
   it('does not render divider when showDivider is false', () => {
     const { container } = render(<AccountPageHeader title="Account Settings" showDivider={false} />);
-    expect(container.querySelector('.px-account-page-header__divider')).not.toBeInTheDocument();
+    expect(container.querySelector(`.${px}-account-page-header__divider`)).not.toBeInTheDocument();
+    // The divider's margin is what spaces the header from the page below it, so without it the header keeps its own
+    expect(container.firstChild).toHaveClass(`${px}-account-page-header--no-divider`);
   });
 });
