@@ -1,3 +1,10 @@
+## [1.285.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.285.2...v1.285.3) (2026-11-04)
+
+
+### Bug Fixes
+
+* **FiltersInline:** L3-16033 open the next filter dropdown when switching from an open one ([#968](https://github.com/PhillipsAuctionHouse/seldon/issues/968)) ([f78fd7e](https://github.com/PhillipsAuctionHouse/seldon/commit/f78fd7e8fba94bdaa0f31b933217fa01d9d98868))
+
 ## [1.285.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.285.1...v1.285.2) (2026-11-04)
 
 
