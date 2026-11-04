@@ -1,3 +1,10 @@
+## [1.285.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.285.1...v1.285.2) (2026-11-04)
+
+
+### Bug Fixes
+
+* **AccountPageHeader:** L3-16340 keep 16px below the header when showDivider is false ([#963](https://github.com/PhillipsAuctionHouse/seldon/issues/963)) ([e6093d7](https://github.com/PhillipsAuctionHouse/seldon/commit/e6093d7712f7651c8994c8b8831098498481057a))
+
 ## [1.285.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.285.0...v1.285.1) (2026-11-04)
 
 
