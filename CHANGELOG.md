@@ -1,3 +1,10 @@
+## [1.285.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.285.3...v1.285.4) (2026-11-05)
+
+
+### Bug Fixes
+
+* **AccountPageHeader:** L3-16340 put the divider 16px below the header text ([#970](https://github.com/PhillipsAuctionHouse/seldon/issues/970)) ([6c07aff](https://github.com/PhillipsAuctionHouse/seldon/commit/6c07aff89102c28e03f1984487e130c622d15a52))
+
 ## [1.285.3](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.285.2...v1.285.3) (2026-11-04)
 
 
