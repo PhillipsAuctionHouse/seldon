@@ -43,8 +43,10 @@
       justify-content: center;
     }
 
+    // 16px between the header text and the divider, the same as the space
+    // left under the header when the divider is hidden
     &__divider.seldon-divider {
-      margin: $spacing-md 0;
+      margin: calc(2 * #{$spacing-xsm}) 0 $spacing-md;
     }
   }
 }
