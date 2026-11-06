@@ -1,4 +1,5 @@
 import type { Meta } from '@storybook/react-vite';
+import { expect, userEvent, within } from 'storybook/test';
 import Input, { InputProps } from './Input';
 import { useState } from 'react';
 import Button from '../Button/Button';
@@ -370,3 +371,46 @@ export const Invalid = () => (
     />
   </div>
 );
+
+/**
+ * Regression coverage for L3-16182: the focus outline is drawn over the field's own
+ * border, so a scrolling parent with no padding (modal and drawer bodies) can't clip it.
+ * Runs in a real browser (`npm run test-storybook`).
+ */
+export const InScrollingContainer = () => (
+  <div style={{ width: 300, height: 240, margin: '1rem', overflowY: 'auto', border: '1px dashed' }}>
+    <Input id="Input-scroll-text" labelText="Name" defaultValue="Text input" />
+    <Input id="Input-scroll-adornment" labelText="Price" inputAdornment="$" defaultValue="100" />
+    <Input
+      id="Input-scroll-invalid"
+      labelText="Email"
+      defaultValue="not-an-email"
+      invalid
+      invalidText="Please enter a valid email."
+    />
+  </div>
+);
+
+const expectFocusDrawnOverBorder = async (element: HTMLElement) => {
+  const { outlineStyle, outlineWidth, outlineOffset, outlineColor, borderTopColor } = getComputedStyle(element);
+  await expect(outlineStyle).toBe('solid');
+  await expect(parseFloat(outlineOffset) + parseFloat(outlineWidth)).toBeLessThanOrEqual(0);
+  await expect(outlineColor).toBe(borderTopColor);
+};
+
+InScrollingContainer.play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+  const canvas = within(canvasElement);
+
+  await userEvent.tab();
+  const textInput = canvas.getByLabelText('Name');
+  await expect(textInput).toHaveFocus();
+  await expectFocusDrawnOverBorder(textInput);
+
+  await userEvent.tab();
+  await expect(canvas.getByLabelText('Price')).toHaveFocus();
+  await expectFocusDrawnOverBorder(canvas.getByTestId('wrapper-Input-scroll-adornment'));
+
+  const invalidInput = canvas.getByLabelText('Email');
+  await userEvent.click(invalidInput);
+  await expectFocusDrawnOverBorder(invalidInput);
+};
