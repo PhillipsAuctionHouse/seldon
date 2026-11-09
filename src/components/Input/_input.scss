@@ -42,7 +42,7 @@
 
       &:focus-visible,
       &:focus-within {
-        @include focus-ring($border-radius: $radius-xs);
+        @include focus-ring($border-radius: $radius-xs, $outline-offset: -2px, $outline-color: $black-100);
       }
 
       .#{$px}-input__wrapper__input,
@@ -84,6 +84,12 @@
 
       &:focus-visible {
         @include focus-ring($border-radius: $radius-xs);
+      }
+
+      // Text fields match :focus-visible on mouse click too, so the outline sits over the
+      // border: it reads as a thicker border and overflow containers can't clip it.
+      &:not([type='checkbox'], [type='radio']):focus-visible {
+        @include focus-ring($border-radius: $radius-xs, $outline-offset: -2px, $outline-color: $black-100);
       }
 
       &:hover {
@@ -165,10 +171,15 @@
       .#{$px}-input__input,
       .#{$px}-input__wrapper {
         border: 1px solid $error-red;
+      }
 
-        &:focus-within {
-          @include focus-ring($border-radius: $radius-xs, $outline-color: $error-red);
-        }
+      .#{$px}-input__input:focus-visible {
+        @include focus-ring($border-radius: $radius-xs, $outline-color: $error-red);
+      }
+
+      .#{$px}-input__input:not([type='checkbox'], [type='radio']):focus-visible,
+      .#{$px}-input__wrapper:focus-within {
+        @include focus-ring($border-radius: $radius-xs, $outline-offset: -2px, $outline-color: $error-red);
       }
 
       .#{$px}-input__wrapper .#{$px}-input__input {
