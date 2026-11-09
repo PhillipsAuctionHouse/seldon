@@ -67,6 +67,38 @@ Playground.argTypes = {
   noOptionsMessage: { control: 'text' },
 };
 
+const titles: ComboBoxOption[] = ['Mr', 'Mrs', 'Ms', 'Dr'].map((title) => ({ value: title, label: title }));
+
+/**
+ * Two ComboBoxes in one form: an outside click must close the open one on the first click,
+ * even when the other (closed) ComboBox already has a value. Covered by e2e/combobox.spec.ts with real
+ * pointer events (L3-16596); user-event's synthetic clicks cannot reproduce the bug.
+ */
+export const MultipleComboBoxes = () => {
+  // Form state as one object, like a real form: every onChange re-renders the form.
+  const [form, setForm] = React.useState({ title: 'Dr', birthYear: '' });
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '400px', height: '400px' }}>
+      <p data-testid="outside-target">Click here to close the dropdown</p>
+      <ComboBox
+        id="title-combo-box"
+        labelText="Title"
+        options={titles}
+        value={form.title}
+        onChange={(title) => setForm((prev) => ({ ...prev, title }))}
+      />
+      <ComboBox
+        id="birth-year-combo-box"
+        labelText="Birth Year"
+        options={birthdays}
+        value={form.birthYear}
+        onChange={(birthYear) => setForm((prev) => ({ ...prev, birthYear }))}
+      />
+    </div>
+  );
+};
+
 export const Invalid = () => {
   const [value, setValue] = React.useState<string>('');
 
