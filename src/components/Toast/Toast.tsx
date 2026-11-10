@@ -31,7 +31,8 @@ export interface PrimitiveToastProps extends Omit<PrimitiveToast.ToastProps, 'ti
    */
   hasCloseButton?: boolean;
   /**
-   * `error` gives the toast a red background, for an action that failed.
+   * `error` gives the toast a red background, for an action that failed. An error toast stays up
+   * until it's dismissed (unless `duration` is passed), so there's time to use its action.
    * @default 'default'
    */
   variant?: 'default' | 'error';
@@ -67,6 +68,7 @@ const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(
       closeButtonLabel,
       hasCloseButton = true,
       variant = 'default',
+      duration = variant === 'error' ? Infinity : undefined,
       ...props
     },
     ref,
@@ -76,6 +78,7 @@ const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(
     return (
       <PrimitiveToast.Root
         {...commonProps}
+        duration={duration}
         id={props.id}
         className={classnames(baseClassName, { [`${baseClassName}--error`]: variant === 'error' }, className)}
         ref={ref}
