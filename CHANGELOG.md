@@ -1,3 +1,10 @@
+## [1.286.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.286.0...v1.286.1) (2026-11-10)
+
+
+### Bug Fixes
+
+* **ComboBox:** L3-16596 close on the first outside click when a form has several ComboBoxes ([#972](https://github.com/PhillipsAuctionHouse/seldon/issues/972)) ([7e8b340](https://github.com/PhillipsAuctionHouse/seldon/commit/7e8b340888c45e05981a5c8d9cbcf0310aecad07))
+
 # [1.286.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.285.4...v1.286.0) (2026-11-09)
 
 
