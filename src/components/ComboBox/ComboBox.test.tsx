@@ -308,6 +308,23 @@ describe('ComboBox', () => {
       expect(input).toHaveValue('Date');
     });
 
+    it('shows the real value again when the parent ignores onChange', async () => {
+      const onChange = vi.fn();
+      // Controlled with a value the parent never updates, e.g. a read-only or validated field
+      render(<ComboBox {...defaultProps} value="apple" onChange={onChange} countOfCharsBeforeDropdown={10} />);
+      const input = screen.getByTestId('fruit-selector-input');
+
+      await userEvent.clear(input);
+      await userEvent.type(input, 'Date');
+      await userEvent.click(document.body);
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(input).toHaveValue('Apple');
+
+      await userEvent.click(document.body);
+
+      expect(onChange).toHaveBeenCalledTimes(1);
+    });
+
     it('does not undo a value the parent changed when the user clicks outside', async () => {
       const onChange = vi.fn();
       render(<ControlledComboBox onChange={onChange} />);

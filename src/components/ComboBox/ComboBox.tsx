@@ -342,8 +342,9 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
    * Triggered when changing inputText but leaving the field without selecting a new value should reset to the previous selected option
    */
   const resetInputDisplayValueIfNoMatch = (matchedOption?: ComboBoxOption | null) => {
-    // A match was just selected; resetting to the previous option here would undo it
-    if (matchedOption) {
+    // Uncontrolled: a match was just selected, so resetting to the previous option would undo it.
+    // Controlled: still reset; the sync effect shows the new option only once the parent accepts it.
+    if (matchedOption && !isValueControlled) {
       return;
     }
     if (selectedOption) {
