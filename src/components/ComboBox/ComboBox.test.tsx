@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { useState } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import ComboBox from './ComboBox';
+import ComboBox, { ComboBoxProps } from './ComboBox';
 import { ComboBoxOption } from './types';
 
 describe('ComboBox', () => {
@@ -248,7 +248,10 @@ describe('ComboBox', () => {
 
   describe('controlled value is not reverted by a later commit', () => {
     // Holds value in parent state, like a real form.
-    const ControlledComboBox = ({ onChange, ...props }: { onChange: (v: string) => void; [k: string]: unknown }) => {
+    const ControlledComboBox = ({
+      onChange,
+      ...props
+    }: { onChange: (v: string) => void } & Partial<Omit<ComboBoxProps, 'onChange' | 'value'>>) => {
       const [value, setValue] = useState('apple');
       return (
         <>
