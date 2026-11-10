@@ -5,6 +5,7 @@ import { Drawer } from '../Drawer';
 import ComboBox, { ComboBoxProps } from './ComboBox';
 import { ComboBoxOption } from './types';
 import { getYear } from 'date-fns';
+import { px } from '../../utils';
 
 const meta = {
   title: 'Components/ComboBox',
@@ -80,7 +81,7 @@ export const MultipleComboBoxes = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '400px', height: '400px' }}>
-      <p data-testid="outside-target">Click here to close the dropdown</p>
+      <p data-testid={`${px}-outside-target`}>Click here to close the dropdown</p>
       <ComboBox
         id="title-combo-box"
         labelText="Title"
