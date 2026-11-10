@@ -26,6 +26,10 @@
       gap: $spacing-sm;
     }
 
+    &--error {
+      background-color: $highlight-red;
+    }
+
     &__action {
       color: $text-inverted;
 

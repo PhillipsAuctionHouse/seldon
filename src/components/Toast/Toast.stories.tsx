@@ -191,3 +191,39 @@ WithoutCloseButton.parameters = {
   },
   ...sharedA11yParameters,
 };
+
+const ErrorDemo = () => {
+  const toast = useToast();
+
+  return (
+    <div style={toastDemoStyle}>
+      <Button
+        onClick={() =>
+          toast({
+            title: "We couldn't save the changes to your address.",
+            variant: 'error',
+            actionElement: <a href="#">Refresh</a>,
+            actionAltText: 'Refresh the page',
+          })
+        }
+      >
+        Click for error toast
+      </Button>
+    </div>
+  );
+};
+
+export const Error = () => (
+  <div style={storyFrameStyle}>
+    <ErrorDemo />
+  </div>
+);
+
+Error.parameters = {
+  docs: {
+    description: {
+      story: '`variant="error"` is for an action that failed.',
+    },
+  },
+  ...sharedA11yParameters,
+};

@@ -98,6 +98,13 @@ describe('Toast', () => {
     expect(await screen.findByTestId('toast-title')).toHaveTextContent('Test Toast');
   });
 
+  it('marks a failure with the error modifier so it reads as red, not as a confirmation', () => {
+    const { rerender } = render(<Toast title="Not saved" variant="error" />);
+    expect(screen.getByTestId('toast')).toHaveClass('seldon-toast--error');
+    rerender(<Toast title="Saved" />);
+    expect(screen.getByTestId('toast')).not.toHaveClass('seldon-toast--error');
+  });
+
   it('renders with custom className', async () => {
     render(<ToastWrapper title="Test Toast" className="custom-class" />);
     expect(await screen.findByTestId('toast')).toHaveClass('custom-class');
