@@ -1,7 +1,7 @@
 import * as Popover from '@radix-ui/react-popover';
 import classnames from 'classnames';
 import { Command, CommandGroup, CommandInput, CommandItem, CommandList } from 'cmdk';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import * as iconComponents from '../../assets/formatted';
 import { getCommonProps, useNormalizedInputProps } from '../../utils';
 import IconButton from '../IconButton/IconButton';
@@ -185,6 +185,15 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     return selectedOption ? selectedOption.displayValue || memoizedGetOptionLabel(selectedOption) : '';
   }, [selectedOption, memoizedGetOptionLabel]);
 
+  // Keep the input text in step when the parent changes a controlled value, so a later commit
+  // (outside click, Tab, Escape) doesn't re-select the old text and undo the parent's change.
+  useEffect(() => {
+    if (isValueControlled && selectedOption) {
+      setInputValue(selectedOptionDisplayValue);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- sync only when the value or its display text changes
+  }, [externalValue, selectedOptionDisplayValue]);
+
   // Filtering with support for filterTerms and getOptionLabel
   const filteredOptions = useMemo(() => {
     if (!inputValue) {
@@ -333,9 +342,13 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
    * Triggered when changing inputText but leaving the field without selecting a new value should reset to the previous selected option
    */
   const resetInputDisplayValueIfNoMatch = (matchedOption?: ComboBoxOption | null) => {
+    // A match was just selected; resetting to the previous option here would undo it
+    if (matchedOption) {
+      return;
+    }
     if (selectedOption) {
       const displayText = selectedOptionDisplayValue;
-      if (displayText !== inputDisplayValue && !matchedOption) {
+      if (displayText !== inputDisplayValue) {
         setInputValue(displayText);
       }
     } else {
@@ -358,7 +371,9 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     if (matchedOption.length === 1) {
       // If exact match found, select it
       handleOptionSelect(matchedOption[0]);
+      return matchedOption[0];
     }
+    return null;
   }, [inputValue, options, handleOptionSelect, memoizedGetOptionLabel]);
 
   // Handle clicks outside the component
@@ -377,8 +392,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
     ) {
       return;
     } else {
-      selectOptionIfExactMatch();
-      resetInputDisplayValueIfNoMatch();
+      resetInputDisplayValueIfNoMatch(selectOptionIfExactMatch());
       // Close dropdown
       handleOpen(false);
     }
@@ -458,8 +472,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                   onKeyDown={(e) => {
                     if (e.key === 'Tab') {
                       handleOpen(false);
-                      selectOptionIfExactMatch();
-                      resetInputDisplayValueIfNoMatch();
+                      resetInputDisplayValueIfNoMatch(selectOptionIfExactMatch());
                     } else if (e.key === 'Enter' && !isOpen) {
                       // Only handle Enter when dropdown is closed
                       // Always allow submitting the current input value
@@ -473,8 +486,7 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
                     } else if (e.key === 'Escape') {
                       handleOpen(false);
                       e.preventDefault();
-                      selectOptionIfExactMatch();
-                      resetInputDisplayValueIfNoMatch();
+                      resetInputDisplayValueIfNoMatch(selectOptionIfExactMatch());
                     } else if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && !isOpen) {
                       if (filteredOptions.length > 0) {
                         handleOpen(true);
