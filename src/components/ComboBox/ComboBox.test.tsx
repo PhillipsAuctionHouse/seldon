@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { useState } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import ComboBox, { ComboBoxProps } from './ComboBox';
+import ComboBox, { type ComboBoxProps } from './ComboBox';
 import { ComboBoxOption } from './types';
 
 describe('ComboBox', () => {
