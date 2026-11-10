@@ -202,7 +202,11 @@ const ErrorDemo = () => {
           toast({
             title: "We couldn't save the changes to your address.",
             variant: 'error',
-            actionElement: <a href="#">Refresh</a>,
+            actionElement: (
+              <Button variant={ButtonVariants.link} onClick={() => window.location.reload()}>
+                Refresh
+              </Button>
+            ),
             actionAltText: 'Refresh the page',
           })
         }
