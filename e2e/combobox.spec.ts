@@ -12,6 +12,6 @@ test('closes the open ComboBox on the first outside click when another ComboBox 
   const content = doc.locator('#birth-year-combo-box-content');
   await expect(content).toBeVisible();
 
-  await doc.getByTestId('outside-target').click();
+  await doc.getByTestId('seldon-outside-target').click();
   await expect(content).toHaveCount(0);
 });
