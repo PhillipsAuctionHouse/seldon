@@ -233,6 +233,18 @@ describe('ComboBox', () => {
     expect(input).toHaveValue('Apple');
   });
 
+  // L3-16596: a closed ComboBox used to re-select its value on every outside mousedown, calling onChange.
+  // In a form that re-render dropped other ComboBoxes' outside-click listeners, so they stayed open.
+  it('does not call onChange on an outside mousedown when closed and unedited', async () => {
+    const onChange = vi.fn();
+    render(<ComboBox {...defaultProps} value="apple" onChange={onChange} />);
+
+    await userEvent.pointer({ keys: '[MouseLeft]', target: document.body });
+
+    expect(onChange).not.toHaveBeenCalled();
+    expect(screen.getByTestId('fruit-selector-input')).toHaveValue('Apple');
+  });
+
   it('shows invalid state when specified', () => {
     render(<ComboBox {...defaultProps} invalid={true} invalidText="Please select a valid fruit" />);
 

@@ -363,6 +363,11 @@ const ComboBox = React.forwardRef<HTMLDivElement, ComboBoxProps>(function ComboB
 
   // Handle clicks outside the component
   useOnClickOutsideRef(containerRef, (event) => {
+    // A closed, unedited ComboBox has nothing to commit or reset, so skip it. Otherwise every
+    // closed ComboBox would re-select its current option (and call onChange) on any click on the page.
+    if (!isOpen && inputValue === selectedOptionDisplayValue) {
+      return;
+    }
     // Don't handle clicks on dropdown items or the input itself
     if (
       (event.target as HTMLElement).closest(`.${baseClassName}__item`) ||
