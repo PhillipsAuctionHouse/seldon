@@ -1,3 +1,10 @@
+# [1.286.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.285.4...v1.286.0) (2026-11-09)
+
+
+### Features
+
+* **Input:** L3-16182 focus ring shows on mouse click, and its 4px offset is clipped inside scrolling containers ([#969](https://github.com/PhillipsAuctionHouse/seldon/issues/969)) ([4c8aaa4](https://github.com/PhillipsAuctionHouse/seldon/commit/4c8aaa485303ce42830a9681d03f297723b77db8))
+
 ## [1.285.4](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.285.3...v1.285.4) (2026-11-05)
 
 
