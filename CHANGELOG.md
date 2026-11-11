@@ -1,3 +1,10 @@
+# [1.287.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.286.2...v1.287.0) (2026-11-11)
+
+
+### Features
+
+* **Toast:** L3-16034 add an error variant with a red background ([#974](https://github.com/PhillipsAuctionHouse/seldon/issues/974)) ([ee0207e](https://github.com/PhillipsAuctionHouse/seldon/commit/ee0207e015f8b30e6b2c1e1ed3307a3355adf534))
+
 ## [1.286.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.286.1...v1.286.2) (2026-11-11)
 
 
