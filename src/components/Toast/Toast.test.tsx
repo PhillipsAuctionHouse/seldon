@@ -98,6 +98,23 @@ describe('Toast', () => {
     expect(await screen.findByTestId('toast-title')).toHaveTextContent('Test Toast');
   });
 
+  it('marks a failure with the error modifier so it reads as red, not as a confirmation', () => {
+    const { rerender } = render(<Toast title="Not saved" variant="error" />);
+    expect(screen.getByTestId('toast')).toHaveClass('seldon-toast--error');
+    rerender(<Toast title="Saved" />);
+    expect(screen.getByTestId('toast')).not.toHaveClass('seldon-toast--error');
+  });
+
+  // A failure toast's action (e.g. Refresh) must still be there when the user gets to it
+  it('keeps an error toast up until it is dismissed, unless a duration is given', () => {
+    const { rerender } = render(<Toast title="Not saved" variant="error" />);
+    expect(screen.getByTestId('toast')).toHaveAttribute('duration', 'Infinity');
+    rerender(<Toast title="Not saved" variant="error" duration={3000} />);
+    expect(screen.getByTestId('toast')).toHaveAttribute('duration', '3000');
+    rerender(<Toast title="Saved" />);
+    expect(screen.getByTestId('toast')).not.toHaveAttribute('duration');
+  });
+
   it('renders with custom className', async () => {
     render(<ToastWrapper title="Test Toast" className="custom-class" />);
     expect(await screen.findByTestId('toast')).toHaveClass('custom-class');

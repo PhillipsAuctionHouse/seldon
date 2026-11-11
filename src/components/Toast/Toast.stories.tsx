@@ -191,3 +191,31 @@ WithoutCloseButton.parameters = {
   },
   ...sharedA11yParameters,
 };
+
+export const Error = () => (
+  <div style={storyFrameStyle}>
+    <Toast
+      title={<Text>We couldn&apos;t save the changes to your address.</Text>}
+      variant="error"
+      open={true}
+      defaultOpen={true}
+      onOpenChange={() => void 0}
+      actionAltText="Refresh the page"
+      actionElement={
+        <Button variant={ButtonVariants.link} onClick={() => window.location.reload()}>
+          Refresh
+        </Button>
+      }
+      closeButtonLabel="Close"
+    />
+  </div>
+);
+
+Error.parameters = {
+  docs: {
+    description: {
+      story: '`variant="error"` is for an action that failed.',
+    },
+  },
+  ...sharedA11yParameters,
+};

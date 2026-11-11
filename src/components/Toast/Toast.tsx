@@ -30,6 +30,12 @@ export interface PrimitiveToastProps extends Omit<PrimitiveToast.ToastProps, 'ti
    * @default true
    */
   hasCloseButton?: boolean;
+  /**
+   * `error` gives the toast a red background, for an action that failed. An error toast stays up
+   * until it's dismissed (unless `duration` is passed), so there's time to use its action.
+   * @default 'default'
+   */
+  variant?: 'default' | 'error';
 }
 /**
  * ## Overview
@@ -53,11 +59,30 @@ export interface PrimitiveToastProps extends Omit<PrimitiveToast.ToastProps, 'ti
  * [Radix UI Toast Documentation](https://www.radix-ui.com/docs/primitives/components/toast)
  */
 const Toast = forwardRef<HTMLLIElement, PrimitiveToastProps>(
-  ({ className, title, actionElement, actionAltText, closeButtonLabel, hasCloseButton = true, ...props }, ref) => {
+  (
+    {
+      className,
+      title,
+      actionElement,
+      actionAltText,
+      closeButtonLabel,
+      hasCloseButton = true,
+      variant = 'default',
+      duration = variant === 'error' ? Infinity : undefined,
+      ...props
+    },
+    ref,
+  ) => {
     const { className: baseClassName, ...commonProps } = getCommonProps(props, 'Toast');
 
     return (
-      <PrimitiveToast.Root {...commonProps} id={props.id} className={classnames(baseClassName, className)} ref={ref}>
+      <PrimitiveToast.Root
+        {...commonProps}
+        duration={duration}
+        id={props.id}
+        className={classnames(baseClassName, { [`${baseClassName}--error`]: variant === 'error' }, className)}
+        ref={ref}
+      >
         <div className={`${baseClassName}__content`}>
           <PrimitiveToast.Title>{title}</PrimitiveToast.Title>
           {actionElement && actionAltText && (
