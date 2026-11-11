@@ -1,3 +1,17 @@
+## [1.286.2](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.286.1...v1.286.2) (2026-11-11)
+
+
+### Bug Fixes
+
+* **ComboBox:** L3-16607 stop outside clicks, Tab and Escape reverting a controlled value ([#973](https://github.com/PhillipsAuctionHouse/seldon/issues/973)) ([1b03d82](https://github.com/PhillipsAuctionHouse/seldon/commit/1b03d8216e9b3334c05186dfcc990bceb4fad2c0))
+
+## [1.286.1](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.286.0...v1.286.1) (2026-11-10)
+
+
+### Bug Fixes
+
+* **ComboBox:** L3-16596 close on the first outside click when a form has several ComboBoxes ([#972](https://github.com/PhillipsAuctionHouse/seldon/issues/972)) ([7e8b340](https://github.com/PhillipsAuctionHouse/seldon/commit/7e8b340888c45e05981a5c8d9cbcf0310aecad07))
+
 # [1.286.0](https://github.com/PhillipsAuctionHouse/seldon/compare/v1.285.4...v1.286.0) (2026-11-09)
 
 

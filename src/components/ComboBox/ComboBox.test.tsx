@@ -1,7 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { useState } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import ComboBox from './ComboBox';
+import ComboBox, { type ComboBoxProps } from './ComboBox';
 import { ComboBoxOption } from './types';
 
 describe('ComboBox', () => {
@@ -231,6 +232,112 @@ describe('ComboBox', () => {
 
     // Check that the input value has reset
     expect(input).toHaveValue('Apple');
+  });
+
+  // L3-16596: a closed ComboBox used to re-select its value on every outside mousedown, calling onChange.
+  // In a form that re-render dropped other ComboBoxes' outside-click listeners, so they stayed open.
+  it('does not call onChange on an outside mousedown when closed and unedited', async () => {
+    const onChange = vi.fn();
+    render(<ComboBox {...defaultProps} value="apple" onChange={onChange} />);
+
+    await userEvent.pointer({ keys: '[MouseLeft]', target: document.body });
+
+    expect(onChange).not.toHaveBeenCalled();
+    expect(screen.getByTestId('fruit-selector-input')).toHaveValue('Apple');
+  });
+
+  describe('controlled value is not reverted by a later commit', () => {
+    // Holds value in parent state, like a real form.
+    const ControlledComboBox = ({
+      onChange,
+      ...props
+    }: { onChange: (v: string) => void } & Partial<Omit<ComboBoxProps, 'onChange' | 'value'>>) => {
+      const [value, setValue] = useState('apple');
+      return (
+        <>
+          <button type="button" onClick={() => setValue('banana')}>
+            Pick banana outside
+          </button>
+          <ComboBox
+            {...defaultProps}
+            {...props}
+            value={value}
+            onChange={(v) => {
+              setValue(v);
+              onChange(v);
+            }}
+          />
+        </>
+      );
+    };
+
+    it.each([
+      ['an outside click', () => userEvent.click(document.body)],
+      ['Escape', () => userEvent.keyboard('{Escape}')],
+      ['Tab', () => userEvent.keyboard('{Tab}')],
+    ])('keeps a typed exact match committed by %s on the next outside click', async (_, commit) => {
+      const onChange = vi.fn();
+      // countOfCharsBeforeDropdown keeps the dropdown closed while typing, so the commit path does the selecting
+      render(<ControlledComboBox onChange={onChange} countOfCharsBeforeDropdown={10} />);
+      const input = screen.getByTestId('fruit-selector-input');
+
+      await userEvent.clear(input);
+      await userEvent.type(input, 'Date');
+      await commit();
+      expect(onChange).toHaveBeenLastCalledWith('date');
+      expect(input).toHaveValue('Date');
+
+      await userEvent.click(document.body);
+
+      expect(onChange).toHaveBeenLastCalledWith('date');
+      expect(input).toHaveValue('Date');
+    });
+
+    it('uncontrolled: keeps a typed exact match instead of resetting to the previous option', async () => {
+      const onChange = vi.fn();
+      render(<ComboBox {...defaultProps} onChange={onChange} countOfCharsBeforeDropdown={10} />);
+      const input = screen.getByTestId('fruit-selector-input');
+
+      await userEvent.type(input, 'Apple');
+      await userEvent.click(document.body);
+      await userEvent.clear(input);
+      await userEvent.type(input, 'Date');
+      await userEvent.click(document.body);
+
+      expect(onChange).toHaveBeenLastCalledWith('date', expect.objectContaining({ value: 'date' }));
+      expect(input).toHaveValue('Date');
+    });
+
+    it('shows the real value again when the parent ignores onChange', async () => {
+      const onChange = vi.fn();
+      // Controlled with a value the parent never updates, e.g. a read-only or validated field
+      render(<ComboBox {...defaultProps} value="apple" onChange={onChange} countOfCharsBeforeDropdown={10} />);
+      const input = screen.getByTestId('fruit-selector-input');
+
+      await userEvent.clear(input);
+      await userEvent.type(input, 'Date');
+      await userEvent.click(document.body);
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(input).toHaveValue('Apple');
+
+      await userEvent.click(document.body);
+
+      expect(onChange).toHaveBeenCalledTimes(1);
+    });
+
+    it('does not undo a value the parent changed when the user clicks outside', async () => {
+      const onChange = vi.fn();
+      render(<ControlledComboBox onChange={onChange} />);
+      const input = screen.getByTestId('fruit-selector-input');
+
+      await userEvent.click(screen.getByRole('button', { name: 'Pick banana outside' }));
+      expect(input).toHaveValue('Banana');
+
+      await userEvent.click(document.body);
+
+      expect(onChange).not.toHaveBeenCalled();
+      expect(input).toHaveValue('Banana');
+    });
   });
 
   it('shows invalid state when specified', () => {
