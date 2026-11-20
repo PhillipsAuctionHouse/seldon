@@ -12,13 +12,16 @@
     position: fixed;
     top: 50%;
     transform: translate(-50%, -50%);
-    z-index: 30;
+    z-index: $modal-z-index;
 
+    // Same layer as the modal, so stacking falls to DOM order: a modal opened
+    // from another modal (e.g. CountryPicker's) portals in after it, and its
+    // overlay then covers and dims the parent instead of sitting beneath it.
     &__overlay {
       background-color: $black-75;
       inset: 0;
       position: fixed;
-      z-index: 15;
+      z-index: $modal-z-index;
     }
 
     // Nested to outrank .seldon-button's position: relative in the same layer,
