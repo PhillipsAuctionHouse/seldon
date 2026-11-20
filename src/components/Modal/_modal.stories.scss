@@ -13,4 +13,11 @@
       margin-bottom: 0;
     }
   }
+
+  // Taller and narrower than CountryPicker's modal, like the address form, so
+  // the parent's edges show around the picker unless the picker's overlay dims them
+  &__modal--tall {
+    min-height: 90vh;
+    width: 480px;
+  }
 }
